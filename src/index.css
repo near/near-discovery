@@ -1,13 +1,50 @@
-:root {
-  --slate-dark-1: #151718;
-  --slate-dark-5: #2B2F31;
-  --slate-dark-6: #313538;
-  --slate-dark-8: #4C5155;
-  --slate-dark-9: #697177;
-  --slate-dark-11: #9BA1A6;
-  --slate-dark-12: #ECEDEE;
-  --blue-light-9: #0091FF;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600&display=swap');
 
-  --font-weight-medium: 500;
-  --font-weight-bold: 600;
+html {
+    box-sizing: border-box;
+  }
+  *, *:before, *:after {
+    box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+h1, h2 {
+    line-height: 1.5;
+}
+
+p {
+    line-height: 1.6;
+}
+
+input, button {
+    font-family: 'Manrope';
+}
+
+button {
+    cursor: pointer;
+}
+
+a {
+    color: black;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+  transition: background-color 5000s;
+  -webkit-text-fill-color: black !important;
 }
