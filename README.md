@@ -1,84 +1,23 @@
-# Browser
+# NEAR Discovery Landing page
 
-A framework for reusable components to render and modify SocialDB by Near Social.
+This project contains the NEAR Discovery landing page.
 
-## Setup & Development
+## Available Scripts
 
-Initialize repo:
-```
-yarn
-```
+In the project directory, you can run:
 
-Start development version:
-```
-yarn start
-```
+### `npm start`
 
-## Widget example
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-Profile view 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-```jsx
-let accountId = props.accountId || "eugenethedream";
-let profile = socialGetr(`${accountId}/profile`);
+### `npm test`
 
-(
-  <div>
-    <img src={profile.image.url}/>
-    <span>{profile.name}</span> <span>(@{accountId})</span>
-  </div>
-);
-```
+Launches the test runner in the interactive watch mode.
 
+### `npm run build`
 
-Profile editor 
-
-```jsx
-let accountId = context.accountId;
-
-if (!accountId) {
-  return "Please sign in with NEAR wallet";
-}
-
-const profile = socialGetr(`${accountId}/profile`);
-
-if (profile === null) {
-  return "Loading";
-}
-
-initState({
-  name: profile.name,
-  url: profile.image.url,
-});
-
-const data = {
-  profile: {
-    name: state.name,
-    image: {
-      url: state.url,
-    },
-  },
-};
-
-return (
-  <div>
-    <div>account = {accountId}</div>
-    <div>
-      Name:
-      <input type="text" value={state.name} />
-    </div>
-    <div>
-      Image URL:
-      <input type="text" value={state.url} />
-    </div>
-    <div>Preview</div>
-    <div>
-      <img src={state.url} alt="profile image" /> {state.name}
-    </div>
-    <div>
-      <CommitButton data={data}>Save profile</CommitButton>
-    </div>
-  </div>
-);
-
-```
+Builds the app for production to the `build` folder.
