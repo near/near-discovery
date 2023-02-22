@@ -3,6 +3,9 @@ import { Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 
+const tosCheckPath = "michaelpeter.near/widget/TosCheckDraft"; // TODO move to environment variable
+const tosName = "michaelpeter.near/widget/TosContentDraft";
+
 export default function ViewPage(props) {
   const { widgetSrc } = useParams();
   const query = useQuery();
@@ -47,7 +50,15 @@ export default function ViewPage(props) {
             paddingTop: "var(--body-top-padding)",
           }}
         >
-          <Widget key={src} src={src} props={widgetProps} />{" "}
+          <Widget
+            key={tosCheckPath}
+            src={tosCheckPath}
+            props={{
+              targetProps: widgetProps,
+              targetComponent: src,
+              tosName,
+            }}
+          />{" "}
         </div>
       </div>
     </div>
