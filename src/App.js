@@ -116,6 +116,10 @@ function App(props) {
     logOut,
     requestSignIn,
     widgets: Widgets,
+    tos: {
+      checkComponentPath: "michaelpeter.near/widget/TosCheckDraft",
+      contentComponentPath: "michaelpeter.near/widget/TosContentDraft",
+    },
   };
 
   return (
