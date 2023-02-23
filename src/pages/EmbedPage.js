@@ -33,6 +33,7 @@ export default function EmbedPage(props) {
         key={props.tos.checkComponentPath}
         src={props.tos.checkComponentPath}
         props={{
+          logOut: props.logOut,
           tosName: props.tos.contentComponentPath,
           targetComponent: src,
           targetProps: widgetProps,

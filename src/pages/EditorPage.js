@@ -437,6 +437,7 @@ export default function EditorPage(props) {
             <Widget
               src={props.tos.checkComponentPath}
               props={{
+                logOut: props.logOut,
                 tosName: props.tos.contentComponentPath,
                 targetComponent: props.widgets.editorComponentSearch,
                 targetProps: useMemo(

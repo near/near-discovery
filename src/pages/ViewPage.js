@@ -51,6 +51,7 @@ export default function ViewPage(props) {
             key={props.tos.checkComponentPath}
             src={props.tos.checkComponentPath}
             props={{
+              logOut: props.logOut,
               targetProps: widgetProps,
               targetComponent: src,
               tosName: props.tos.contentComponentPath,
