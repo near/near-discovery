@@ -5791,9 +5791,9 @@ near-seed-phrase@^0.2.0:
     near-hd-key "^1.2.1"
     tweetnacl "^1.0.2"
 
-"near-social-vm@git+https://github.com/NearSocial/VM.git#master":
+"near-social-vm@git+https://github.com/jon-lewis/VM.git#master":
   version "0.1.0"
-  resolved "git+https://github.com/NearSocial/VM.git#f4d2cc8d0a27aee743d20dedb5f2a2f940530b18"
+  resolved "git+https://github.com/jon-lewis/VM.git#c2c3bbaf075bb7bdc2a4ade4be5f872c2d82181a"
   dependencies:
     "@braintree/sanitize-url" "6.0.0"
     "@near-wallet-selector/core" "^7.4.0"

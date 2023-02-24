@@ -1,10 +1,12 @@
+// TODO - we could add alpha.near.org to this list...
+// However, a demo would then have a bunch of test data
 const TestnetDomains = {
   "test.near.social": true,
   "127.0.0.1": true,
 };
 
-export const NetworkId =
-  window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const NetworkId = "testnet";
+// window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
   default: "eugenethedream/widget/Welcome",

@@ -60,12 +60,17 @@ function App(props) {
   }, [near]);
 
   const requestSignIn = useCallback(
-    (e) => {
+    async (e) => {
       e && e.preventDefault();
-      walletModal.show();
+      //walletModal.show();
+      const selector = await near.selector;
+      const wallet = await selector.wallet("fast-auth");
+      // const wallet = await selector.wallet("my-near-wallet");
+      // console.log("wallet", wallet);
+      await wallet.signIn({ contractId: near.config.contractName });
       return false;
     },
-    [walletModal]
+    [walletModal, near]
   );
 
   const logOut = useCallback(async () => {
