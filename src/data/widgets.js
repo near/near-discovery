@@ -5,8 +5,7 @@ const TestnetDomains = {
   "127.0.0.1": true,
 };
 
-export const NetworkId =
-  window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const NetworkId = "testnet";
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
   default: "eugenethedream/widget/Welcome",
