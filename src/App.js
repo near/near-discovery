@@ -35,6 +35,9 @@ function App(props) {
     initNear &&
       initNear({
         networkId: NetworkId,
+        fastAuthWalletUrl:
+          process.env.NEXT_PUBLIC_FAST_AUTH_WALLET_URL ||
+          "https://alphatest.near.org",
       });
   }, [initNear]);
 
