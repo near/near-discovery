@@ -813,6 +813,7 @@ export default function EditorPage(props) {
             widgetPath={widgetPath}
             widgetName={widgetName}
             code={code}
+            metadata={metadata}
           />
           <div className="">
             <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
