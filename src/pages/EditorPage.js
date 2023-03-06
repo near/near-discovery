@@ -1296,8 +1296,8 @@ export default function EditorPage(props) {
                           key={`metadata-${jpath}`}
                           src={props.widgets.widgetMetadata}
                           props={useMemo(
-                            () => ({ metadata, accountId, widgetName }),
-                            [metadata, accountId, widgetName]
+                            () => ({ metadata, accountId }),
+                            [metadata, accountId]
                           )}
                         />
                       </div>
