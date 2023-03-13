@@ -21,6 +21,7 @@ import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
+import { setupKeypom } from "keypom-js";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -83,6 +84,12 @@ function App(props) {
               gas: "300000000000000",
               bundle: false,
             }),
+            setupKeypom({ 
+              desiredUrl: "http://localhost:3000/#/", 
+              networkId: NetworkId, 
+              delimiter: "/", 
+              contractId: "v1.social08.testnet"
+            })
           ],
         }),
       });
@@ -102,6 +109,7 @@ function App(props) {
     if (!near) {
       return;
     }
+    console.log('near: ', near)
     near.selector.then((selector) => {
       setWalletModal(
         setupModal(selector, { contractId: near.config.contractName })
@@ -123,6 +131,7 @@ function App(props) {
       return;
     }
     const wallet = await (await near.selector).wallet();
+    console.log("i'm signing out?", wallet);
     wallet.signOut();
     near.accountId = null;
     setSignedIn(false);
