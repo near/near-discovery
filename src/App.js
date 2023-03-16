@@ -85,7 +85,7 @@ function App(props) {
               bundle: false,
             }),
             setupKeypom({ 
-              desiredUrl: "http://localhost:3000/#/", 
+              desiredUrl: "http://localhost:3000/#/#", 
               networkId: NetworkId, 
               delimiter: "/", 
               contractId: "v1.social08.testnet"
