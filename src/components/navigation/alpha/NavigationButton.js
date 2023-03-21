@@ -52,7 +52,7 @@ export function NavigationButton(props) {
                 return true;
               }
               return (
-                location.pathname === "/calebjacob.near/widget/ActivityPage"
+                location.pathname === "/minorityprogrammers.near/widget/GenaDropMultiListing"
               );
             }
           }}
