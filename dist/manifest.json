@@ -1,0 +1,16 @@
+{
+  "main.js": "./main.2afad96d8ba2e9a939da.bundle.js",
+  "runtime.js": "./runtime.fd80bc8b72bcabf47564.bundle.js",
+  "assets/logo.png": "./assets/logo.png",
+  "assets/favicon.png": "./assets/favicon.png",
+  "favicon.png": "./favicon.png",
+  "assets/logo192.png": "./assets/logo192.png",
+  "assets/index.html": "./assets/index.html",
+  "index.html": "./index.html",
+  "assets/favicon.ico": "./assets/favicon.ico",
+  "assets/manifest.json": "./assets/manifest.json",
+  "assets/robots.txt": "./assets/robots.txt",
+  "assets/_redirects": "./assets/_redirects",
+  "assets/CNAME": "./assets/CNAME",
+  "assets/.nojekyll": "./assets/.nojekyll"
+}
