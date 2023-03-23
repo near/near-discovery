@@ -210,42 +210,39 @@ export function MenuLeft(props) {
             }}
           />
         )}
-        <div className="links-title">Discover</div>
+        <div className="links-title">GenaDrop</div>
         <ul className="top-links">
           <li>
-            <NavigationButton route="/calebjacob.near/widget/ComponentsPage">
+            <NavigationButton route="/minorityprogrammers.near/widget/genadropMinter">
+            <Editor />
+            Create
+            </NavigationButton>
+          </li>
+          <li>
+            <NavigationButton route="/minorityprogrammers.near/widget/GenaDropMultiListing">
               <Components />
-              Components
+              List
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/calebjacob.near/widget/PeoplePage">
+            <NavigationButton route="/onboarder.near/widget/NFT-Transfer">
               <Community />
-              Community
-            </NavigationButton>
-          </li>
-        </ul>
-        <div className="links-title">Develop</div>
-        <ul className="top-links">
-          <li>
-            <NavigationButton route="/edit">
-              <Editor />
-              Editor
+              NFT Sender
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton href={links.discoveryDocs}>
+            <NavigationButton href={links.genadropExplore}>
               <Notebook />
-              Documentation
+              Explore
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton href={links.discoveryTutorial}>
-              <Education />
-              Tutorials
+            <NavigationButton href={links.genadropDocs}>
+              <Notebook />
+              Docs
             </NavigationButton>
           </li>
-        </ul>
+          </ul>
         <ul className="bottom-links">
           {props.signedIn && (
             <li>
