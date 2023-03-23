@@ -41,7 +41,7 @@ const StyledNavigation = styled.div`
     align-items: center;
 
     .navigation-section {
-      margin-left: 50px;
+      margin-left: 300px;
       display: flex;
 
       > div {
@@ -114,7 +114,7 @@ export function DesktopNavigation(props) {
         <Link to="/" className="logo-link">
           <Logo />
         </Link>
-        <div className="form-wrapper">
+        {/* <div className="form-wrapper">
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -131,8 +131,8 @@ export function DesktopNavigation(props) {
             />
           </form>
           {searchInputFocus && <Return />}
-        </div>
-        <div className="navigation-section">
+        </div> */}
+        <div className="navigation-section text-align">
         <NavigationButton route="/minorityprogrammers.near/widget/genadropMinter">
             Create
           </NavigationButton>
