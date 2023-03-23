@@ -135,16 +135,28 @@ export function DesktopNavigation(props) {
         <div className="navigation-section">
           <NavigationButton
             onMouseEnter={() => setMenuDropdown(false)}
-            route="/"
+            route="/mint"
           >
-            Home
+            Mint
           </NavigationButton>
-          <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
-            Discover
-          </NavDropdownButton>
-          <NavDropdownButton onMouseEnter={() => setMenuDropdown("develop")}>
+          <NavigationButton
+            onMouseEnter={() => setMenuDropdown(false)}
+            route="/list"
+          >
+            List
+          </NavigationButton>
+          <NavigationButton
+            onMouseEnter={() => setMenuDropdown(false)}
+            route="/explore"
+          >
+            Explore
+          </NavigationButton>
+          {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
+            Mint
+          </NavDropdownButton> */}
+          {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("develop")}>
             Develop
-          </NavDropdownButton>
+          </NavDropdownButton> */}
         </div>
         <div className="user-section">
           {!props.signedIn && (

@@ -85,11 +85,11 @@ export function NavDropdownMenu(props) {
         </div>
         {props.menuDropdown === "discover" ? (
           <div className="section">
-            <div className="section-title">Discover</div>
-            <NavDropdownMenuLinkList
+            <div className="section-title">Mint</div>
+            {/* <NavDropdownMenuLinkList
               category="discover"
               onClick={props.onClickLink}
-            />
+            /> */}
           </div>
         ) : (
           <div className="section">
