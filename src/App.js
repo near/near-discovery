@@ -5,7 +5,10 @@ import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
 import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
+
+import MyEditorPage from "./_/pages/editorPage/EditorPage";
 import EditorPage from "./pages/EditorPage";
+
 import ViewPage from "./pages/ViewPage";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
@@ -157,6 +160,10 @@ function App(props) {
         <Switch>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
+          </Route>
+          <Route path={"/editor/:widgetSrc*"}>
+            {/* <NavigationWrapper {...passProps} /> */}
+            <MyEditorPage {...passProps} />
           </Route>
           <Route path={"/edit/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
