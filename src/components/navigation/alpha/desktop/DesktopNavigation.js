@@ -133,22 +133,15 @@ export function DesktopNavigation(props) {
           {searchInputFocus && <Return />}
         </div>
         <div className="navigation-section">
-          <NavigationButton
-            onMouseEnter={() => setMenuDropdown(false)}
-            route="/mint"
-          >
-            Mint
+        <NavigationButton route="/minorityprogrammers.near/widget/genadropMinter">
+            Create
           </NavigationButton>
-          <NavigationButton
-            onMouseEnter={() => setMenuDropdown(false)}
-            route="/list"
-          >
+          <NavigationButton route="/minorityprogrammers.near/widget/GenaDropMultiListing">
             List
           </NavigationButton>
-          <NavigationButton
-            onMouseEnter={() => setMenuDropdown(false)}
-            route="/explore"
-          >
+
+
+          <NavigationButton route="/minorityprogrammers.near/widget/genadropExplore">
             Explore
           </NavigationButton>
           {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>

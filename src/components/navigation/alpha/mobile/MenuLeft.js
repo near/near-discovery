@@ -225,23 +225,29 @@ export function MenuLeft(props) {
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/onboarder.near/widget/NFT-Transfer">
-              <Community />
-              NFT Sender
-            </NavigationButton>
-          </li>
-          <li>
-            <NavigationButton href={links.genadropExplore}>
+            <NavigationButton route="/minorityprogrammers.near/widget/genadropExplore">
               <Notebook />
               Explore
             </NavigationButton>
           </li>
           <li>
+            <NavigationButton route="/onboarder.near/widget/NFT-Transfer">
+              <Community />
+              NFT Sender
+            </NavigationButton>
+          </li>
+          {/* <li>
+            <NavigationButton href={links.genadropExplore}>
+              <Notebook />
+              Explore
+            </NavigationButton>
+          </li> */}
+          {/* <li>
             <NavigationButton href={links.genadropDocs}>
               <Notebook />
               Docs
             </NavigationButton>
-          </li>
+          </li> */}
           </ul>
         <ul className="bottom-links">
           {props.signedIn && (
