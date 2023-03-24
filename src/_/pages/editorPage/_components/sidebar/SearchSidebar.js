@@ -44,6 +44,7 @@ export default function SearchSidebar({ loadFile }) {
         inputProps={{ "aria-label": "search google maps" }}
       /> */}
 
+      {/* only show if props.widgets.editorComponentSearch is avable*/}
       <Widget
         src="adminalpha.near/widget/TosCheck"
         props={{

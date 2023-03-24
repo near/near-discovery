@@ -26,7 +26,7 @@ import { SaveDraftModal } from "../../../components/SaveDraft";
 import styled from "styled-components";
 // import VsCodeBanner from "../../components/Editor/VsCodeBanner";
 
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 
@@ -36,6 +36,8 @@ import EmptyEditorDialog from "../../dialogs/EmptyEditorDialog";
 import { EditorContext } from "../../context/EditorContext";
 import Sidebar from "./_components/sidebar/Sidebar";
 import { ThemeContext } from "../../context/ThemeContext";
+import Tabsbar from "./_components/Tabsbar";
+import CustomButton from "../../components/custom/CustomButton";
 
 const TopMenu = styled.div`
   border-radius: 0.375rem;
@@ -117,6 +119,7 @@ export default function EditorPage(props) {
   const {
     selectedActivity,
     showWebsiteView,
+
     files,
     setFiles,
     filesDetails,
@@ -397,6 +400,8 @@ export default function EditorPage(props) {
     }
   }, [files, lastPath, cache]);
 
+  // console.log("path : ", path);
+
   const openFile = useCallback(
     (path, code) => {
       setCodeChangesPresent();
@@ -642,6 +647,7 @@ export default function EditorPage(props) {
 
   const publishDraftAsMainButton = (
     <CommitButton
+      id="publishDraftAsMainButton"
       className={`btn btn-primary`}
       disabled={!widgetName}
       near={near}
@@ -673,9 +679,14 @@ export default function EditorPage(props) {
       Save Version
     </button>
   );
+  const handleSaveDraftButton = (e) => {
+    e.preventDefault();
+    setShowSaveDraftModal(true);
+  };
 
   const publishButton = (
     <CommitButton
+      id="publishButton"
       className={`btn btn-primary`}
       disabled={!widgetName}
       near={near}
@@ -763,6 +774,10 @@ export default function EditorPage(props) {
       Fork
     </button>
   );
+  const handleForkButton = () => {
+    const forkName = widgetName + "-fork";
+    openFile(toPath(Filetype.Widget, forkName), code);
+  };
 
   const showEditor = !(files?.length === 1 && files[0]?.unnamed === true);
   // const showEditor = false;
@@ -813,6 +828,13 @@ export default function EditorPage(props) {
           </Allotment.Pane>
 
           <Allotment.Pane minSize={300}>
+            <Tabsbar
+              curPath={path}
+              openFile={openFile}
+              removeFromFiles={removeFromFiles}
+              createFile={createFile}
+            />
+
             <div className="container-fluid mt-1">
               {/* Dialog boxs - start */}
               <RenameModal
@@ -861,7 +883,10 @@ export default function EditorPage(props) {
                     <Nav
                       variant="pills mb-2 mt-2"
                       activeKey={jpath}
-                      onSelect={(key) => openFile(JSON.parse(key))}
+                      onSelect={(key) => {
+                        console.log(key);
+                        openFile(JSON.parse(key));
+                      }}
                     >
                       {files?.map((p, idx) => {
                         // console.log("Files : ", p);
@@ -935,66 +960,18 @@ export default function EditorPage(props) {
                       onSelect={(key) => openFile(JSON.parse(key))}
                     >
                       <Nav.Item className="">
-                        {saveDraftButton}
-                        {forkButton}
+                        {/* {saveDraftButton} */}
+                        {/* {forkButton} */}
 
-                        {filesDetails.get(widgetName)?.isDraft
+                        {/* {filesDetails.get(widgetName)?.isDraft
                           ? publishDraftAsMainButton
-                          : publishButton}
+                          : publishButton} */}
                       </Nav.Item>
                     </Nav>
                   </div>
                 </div>
-
-                {props.widgets.editorComponentSearch && (
-                  <div>
-                    {/* 
-                      We use the component search widget as a VM entry point to add a TOS check wrapper. It does not need to be this component, just some <Widget /> on the page 
-                    */}
-
-                    {console.log("props.tos : ", props.tos)}
-
-                    <Widget
-                      src={props.tos.checkComponentPath}
-                      props={{
-                        logOut: props.logOut,
-                        tosName: props.tos.contentComponentPath,
-                        targetComponent: props.widgets.editorComponentSearch,
-                        targetProps: useMemo(
-                          () => ({
-                            extraButtons: ({
-                              widgetName,
-                              widgetPath,
-                              onHide,
-                            }) => (
-                              <OverlayTrigger
-                                placement="auto"
-                                overlay={
-                                  <Tooltip>
-                                    Open "{widgetName}" component in the editor
-                                  </Tooltip>
-                                }
-                              >
-                                <button
-                                  className="btn btn-outline-primary"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    loadFile(widgetPath);
-                                    onHide && onHide();
-                                  }}
-                                >
-                                  Open
-                                </button>
-                              </OverlayTrigger>
-                            ),
-                          }),
-                          [loadFile]
-                        ),
-                      }}
-                    />
-                  </div>
-                )}
               </div>
+
               <div className="d-flex align-content-start">
                 <div className="flex-grow-1">
                   <div className="row">
@@ -1375,6 +1352,13 @@ export default function EditorPage(props) {
               parsedWidgetProps={parsedWidgetProps}
               renderCode={renderCode}
               handlePreviewButton={handlePreviewButton}
+              handleSaveDraftButton={handleSaveDraftButton}
+              handleForkButton={handleForkButton}
+              publishWidgetButton={
+                filesDetails.get(widgetName)?.isDraft
+                  ? publishDraftAsMainButton
+                  : publishButton
+              }
             />
           </Allotment.Pane>
         </Allotment>

@@ -44,7 +44,8 @@ export const ThemeContextProvider = (props) => {
     backgroundColor: "#1a1a1a",
 
     borderRadius: 5,
-    borderColor: "#101010",
+    // borderColor: "#101010",
+    borderColor: "#414141",
 
     name: "dark",
   };

@@ -1,14 +1,21 @@
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { Divider, IconButton, Tooltip, Typography } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
+import ForkRightRoundedIcon from "@mui/icons-material/ForkRightRounded";
 
 import { ThemeContext } from "../../../../context/ThemeContext";
 
-export default function WidgetViewHeader({ onRunButtonClick }) {
+export default function WidgetViewHeader({
+  onRunButtonClick,
+  onSaveButtonClick,
+  onForkButtonClick,
+
+  publishWidgetButton,
+}) {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -43,8 +50,31 @@ export default function WidgetViewHeader({ onRunButtonClick }) {
         </Tooltip>
 
         <Tooltip title="Save Widget" placement="bottom">
-          <IconButton sx={{ color: theme.textColor2 }}>
+          <IconButton
+            sx={{ color: "#198754" || theme.textColor2 }}
+            onClick={onSaveButtonClick}
+          >
             <SaveRoundedIcon
+              sx={{ fill: "#198754" || theme.textColor2, fontSize: "1rem" }}
+            />
+          </IconButton>
+        </Tooltip>
+
+        <div
+          style={{
+            width: 1.5,
+            height: 25,
+            marginInline: 8,
+            backgroundColor: theme.borderColor,
+          }}
+        />
+
+        <Tooltip title="Fork" placement="bottom">
+          <IconButton
+            sx={{ color: theme.textColor2 }}
+            onClick={onForkButtonClick}
+          >
+            <ForkRightRoundedIcon
               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
             />
           </IconButton>
@@ -71,6 +101,15 @@ export default function WidgetViewHeader({ onRunButtonClick }) {
           label="showWebsite"
           onClick={() => setShowWebsiteView((e) => !e)}
         /> */}
+        <div
+          style={{
+            width: 1.5,
+            height: 25,
+            marginInline: 8,
+            backgroundColor: theme.borderColor,
+          }}
+        />
+        {publishWidgetButton}
       </Box>
     </Box>
   );

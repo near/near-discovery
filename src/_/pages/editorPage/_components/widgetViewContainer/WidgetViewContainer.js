@@ -11,6 +11,10 @@ export default function WidgetViewContainer({
   parsedWidgetProps,
   renderCode,
   handlePreviewButton,
+  handleSaveDraftButton,
+  handleForkButton,
+
+  publishWidgetButton,
 }) {
   const { theme } = useContext(ThemeContext);
   // const { outputCode } = useContext(EditorContext);
@@ -26,17 +30,34 @@ export default function WidgetViewContainer({
         // color: "#FFF",
       }}
     >
-      <WidgetViewHeader onRunButtonClick={handlePreviewButton} />
+      <WidgetViewHeader
+        onRunButtonClick={handlePreviewButton}
+        onSaveButtonClick={handleSaveDraftButton}
+        onForkButtonClick={handleForkButton}
+        publishWidgetButton={publishWidgetButton}
+      />
       {renderCode ? (
         <Box
           sx={{
             flex: 1,
+            p: 1,
+            pt: 0,
             height: "100%",
 
-            bgcolor: "#FFF",
+            backgroundColor: theme.ui,
           }}
         >
-          <Widget code={renderCode} props={parsedWidgetProps} />
+          <Box
+            sx={{
+              flex: 1,
+
+              height: "100%",
+
+              bgcolor: "#FFF",
+            }}
+          >
+            <Widget code={renderCode} props={parsedWidgetProps} />
+          </Box>
         </Box>
       ) : (
         <div
