@@ -51,7 +51,6 @@ export default function SearchSidebar({ loadFile }) {
           logOut: () => {},
           tosName: "adminalpha.near/widget/TosContent",
           targetComponent: "mob.near/widget/Editor.ComponentSearch",
-          // targetComponent: props.widgets.editorComponentSearch,
           targetProps: useMemo(
             () => ({
               extraButtons: ({ widgetName, widgetPath, onHide }) => (

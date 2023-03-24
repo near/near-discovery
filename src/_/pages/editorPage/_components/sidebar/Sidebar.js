@@ -34,10 +34,10 @@ export default function Sidebar({ loadFile }) {
             )) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
             (selectedActivity === "profile" && <ProfileSidebar />) ||
-            (selectedActivity === "extensions" && <ExtensionsSidebar />) ||
-            (selectedActivity === "sourceControl" && (
-              <SourceControlSidebar />
-            )) ||
+            // (selectedActivity === "extensions" && <ExtensionsSidebar />) ||
+            // (selectedActivity === "sourceControl" && (
+            //   <SourceControlSidebar />
+            // )) ||
             selectedActivity}
         </div>
       </Fade>

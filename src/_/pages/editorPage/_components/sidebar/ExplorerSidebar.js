@@ -35,7 +35,7 @@ export default function ExplorerSidebar() {
         }}
       >
         <Typography variant="h6" sx={{ color: theme.textColor }}>
-          Explorer
+          Widgets
         </Typography>
 
         <Fade in={showEditButtons}>

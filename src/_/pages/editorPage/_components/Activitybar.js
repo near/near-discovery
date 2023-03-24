@@ -50,7 +50,7 @@ export default function Activitybar() {
           label="search"
         />
 
-        <ActivityButton
+        {/* <ActivityButton
           icon={
             <CommitRoundedIcon
               sx={{ fill: theme.textColor4, rotate: "-45deg" }}
@@ -62,15 +62,15 @@ export default function Activitybar() {
         <ActivityButton
           icon={<DashboardRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="extensions"
-        />
+        /> */}
       </div>
 
       <div>
-        <ActivityButton
+        {/* <ActivityButton
           icon={<VerticalSplitRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="showWebsite"
           onClick={() => setShowWebsiteView((e) => !e)}
-        />
+        /> */}
         <ActivityButton
           icon={
             <img

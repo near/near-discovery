@@ -27,7 +27,6 @@ export default function WidgetViewContainer({
       }}
     >
       <WidgetViewHeader onRunButtonClick={handlePreviewButton} />
-      {/* adsdas */}
       {renderCode ? (
         <Box
           sx={{
@@ -37,11 +36,7 @@ export default function WidgetViewContainer({
             bgcolor: "#FFF",
           }}
         >
-          <Widget
-            // key={`preview-${jpath}`}
-            code={renderCode}
-            props={parsedWidgetProps}
-          />
+          <Widget code={renderCode} props={parsedWidgetProps} />
         </Box>
       ) : (
         <div
@@ -54,10 +49,7 @@ export default function WidgetViewContainer({
             justifyContent: "center",
           }}
           onClick={handlePreviewButton}
-        >
-          <CustomButton>Render Code</CustomButton>
-          {/* {renderPreviewButton} */}
-        </div>
+        ></div>
       )}
     </Box>
   );
