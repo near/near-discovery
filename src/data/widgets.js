@@ -19,7 +19,7 @@ const TestnetWidgets = {
 
 const MainnetWidgets = {
   image: "mob.near/widget/Image",
-  default: "minorityprogrammers.near/widget/GenaDropMultiListing",
+  default: "minorityprogrammers.near/widget/genadropMinter",
   viewSource: "mob.near/widget/WidgetSource",
   widgetMetadataEditor: "mob.near/widget/WidgetMetadataEditor",
   widgetMetadata: "mob.near/widget/WidgetMetadata",
