@@ -1,14 +1,36 @@
 import { Box, InputBase, Typography } from "@mui/material";
 import React, { useContext, useMemo, useState } from "react";
-
-import { Widget } from "near-social-vm";
-
+import { Widget, useNear, useCache, useAccountId } from "near-social-vm";
 import { ThemeContext } from "../../../../context/ThemeContext";
-import { OverlayTrigger, Tooltip } from "react-bootstrap";
+import { OverlayTrigger } from "react-bootstrap";
+import { Tooltip } from "react-bootstrap";
 
 export default function SearchSidebar({ loadFile }) {
+  const near = useNear();
+  const cache = useCache();
+  const accountId = useAccountId();
+
   const { theme } = useContext(ThemeContext);
   const [search, setSearch] = useState("");
+
+  const getData = () => {
+    let widget = `*/widget/*`;
+
+    const code = cache.socialGet(
+      near,
+      widget,
+      false,
+      undefined,
+      undefined,
+      getData
+    );
+    console.log("GETTING A CALL IN GET DATA, ", code);
+    // setMyWidgets(code);
+  };
+
+  // const setter = (e) => {
+  //   console.log("SETTING ", e);
+  // };
 
   return (
     <Box sx={{ height: "100%" }}>
@@ -47,7 +69,10 @@ export default function SearchSidebar({ loadFile }) {
       />
 
       {/* only show if props.widgets.editorComponentSearch is avable*/}
-      <Widget
+
+      {/* <Widget src="adminalpha.near/widget/adminalpha.near.ProfileSearch" /> */}
+
+      {/* <Widget
         src="adminalpha.near/widget/TosCheck"
         props={{
           // logOut: props.logOut,
@@ -81,7 +106,7 @@ export default function SearchSidebar({ loadFile }) {
             [loadFile]
           ),
         }}
-      />
+      /> */}
     </Box>
   );
 }

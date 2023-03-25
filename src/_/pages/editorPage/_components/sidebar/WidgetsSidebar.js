@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   ButtonBase,
   Chip,
   Fade,
@@ -8,7 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import NoteAddRoundedIcon from "@mui/icons-material/NoteAddRounded";
-import React, { useContext, useState } from "react";
+import CreateNewFolderRoundedIcon from "@mui/icons-material/CreateNewFolderRounded";
+import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useNear, useCache, useAccountId } from "near-social-vm";
 
 import { styled } from "@mui/material/styles";
 import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
@@ -23,7 +26,9 @@ import { EditorContext } from "../../../../context/EditorContext";
 import FileIcon from "../../../../components/FileIcon";
 import RenameDialog from "../../../../dialogs/RenameDialog";
 
-export default function ExplorerSidebar({
+export default function WidgetsSidebar({
+  loadFile,
+
   curPath,
 
   openFile,
@@ -31,14 +36,46 @@ export default function ExplorerSidebar({
   createFile,
   handleCreateButton,
   setShowRenameModal,
+  setShowOpenModal,
 }) {
+  const near = useNear();
+  const cache = useCache();
+  const accountId = useAccountId();
+
   const { theme } = useContext(ThemeContext);
   const { files, filesDetails } = useContext(EditorContext);
+
+  const [myWidgets, setMyWidgets] = useState();
+
+  // useEffect(() => {
+  //   const timeout = setTimeout(() => {
+  //     getData();
+  //   }, 5000);
+
+  //   return () => clearTimeout(timeout);
+  // }, []);
+
+  const getData = () => {
+    let widget = `${accountId}/widget/*`;
+
+    const code = cache.socialGet(
+      near,
+      widget,
+      false,
+      undefined,
+      undefined,
+      getData
+    );
+    setMyWidgets(code);
+  };
 
   return (
     <div
       style={{
         height: "100%",
+        height: "100vh",
+        overflowY: "auto",
+        overflowX: "hidden",
       }}
     >
       <div
@@ -55,13 +92,23 @@ export default function ExplorerSidebar({
           Widgets
         </Typography>
 
-        <Tooltip title="Add new file">
-          <IconButton onClick={() => handleCreateButton()}>
-            <NoteAddRoundedIcon
-              sx={{ fontSize: "1rem", fill: theme.textColor3 }}
-            />
-          </IconButton>
-        </Tooltip>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Tooltip title="Add new file">
+            <IconButton onClick={() => handleCreateButton()}>
+              <NoteAddRoundedIcon
+                sx={{ fontSize: "1rem", fill: theme.textColor3 }}
+              />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="Open Component">
+            <IconButton onClick={() => setShowOpenModal((e) => !e)}>
+              <CreateNewFolderRoundedIcon
+                sx={{ fontSize: "1rem", fill: theme.textColor3 }}
+              />
+            </IconButton>
+          </Tooltip>
+        </Box>
       </div>
 
       <Accordion defaultExpanded>
@@ -82,7 +129,7 @@ export default function ExplorerSidebar({
               filesDetails.get(widgetName) || {};
 
             return (
-              <Item
+              <OpenEditorItem
                 key={index}
                 item={file}
                 codeChangesPresent={codeChangesPresent}
@@ -113,33 +160,43 @@ export default function ExplorerSidebar({
         </AccordionDetails>
       </Accordion>
 
-      <Accordion defaultExpanded>
-        <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
-          <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
-            My Widgets
-          </Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-          <Typography
-            style={{
-              textAlign: "center",
-              width: "100%",
-              fontSize: 13,
-              fontWeight: 500,
-
-              paddingBlock: 20,
-            }}
-            variant="h6"
-          >
-            Please show My widgets here
-          </Typography>
-        </AccordionDetails>
-      </Accordion>
+      {accountId && (
+        <Accordion defaultExpanded>
+          <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+            <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
+              My Widgets
+            </Typography>
+          </AccordionSummary>
+          <AccordionDetails>
+            {myWidgets ? (
+              Object.keys(myWidgets).map((fileName, index) => (
+                <MyWidgetsItem
+                  key={index}
+                  label={fileName}
+                  onClick={() => loadFile(fileName)}
+                />
+              ))
+            ) : (
+              <ButtonBase
+                sx={{
+                  fontSize: 14,
+                  textTransform: "none",
+                  width: "100%",
+                  py: 4,
+                }}
+                onClick={() => getData()}
+              >
+                Click here to see all widgets
+              </ButtonBase>
+            )}
+          </AccordionDetails>
+        </Accordion>
+      )}
     </div>
   );
 }
 
-const Item = ({
+const OpenEditorItem = ({
   item,
   codeChangesPresent,
   isDraft,
@@ -289,6 +346,68 @@ const Item = ({
         onRename={(newName) => renameFile(newName)}
         onHide={() => setShowEditButton(false)}
       />
+    </Box>
+  );
+};
+
+const MyWidgetsItem = ({ label, onClick }) => {
+  const { theme } = useContext(ThemeContext);
+
+  return (
+    <Box
+      sx={{
+        position: "relative",
+        display: "flex",
+        alignItems: "center",
+        width: "100%",
+        backgroundColor: theme.ui,
+        "&:hover": {
+          backgroundColor: theme.ui2,
+          cursor: "pointer",
+        },
+      }}
+    >
+      <ButtonBase
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          px: 2,
+          py: 0.5,
+          width: "100%",
+
+          zIndex: 5,
+        }}
+        onClick={() => onClick()}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+          }}
+        >
+          <FileIcon type="widget" />
+
+          <Tooltip title={label}>
+            <Typography
+              variant="p"
+              sx={{
+                ml: 0,
+                fontWeight: 400,
+                color: theme.textColor2,
+                paddingBlock: "2.5px",
+                textTransform: "none",
+                fontSize: ".9rem",
+                textAlign: "left",
+              }}
+              className="max1Lines"
+            >
+              {label}
+            </Typography>
+          </Tooltip>
+        </Box>
+      </ButtonBase>
     </Box>
   );
 };

@@ -21,6 +21,7 @@ export default function Sidebar({
   createFile,
   handleCreateButton,
   setShowRenameModal,
+  setShowOpenModal,
 }) {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity } = useContext(EditorContext);
@@ -41,6 +42,7 @@ export default function Sidebar({
         <div>
           {(selectedActivity === "widgets" && (
             <WidgetsSidebar
+              loadFile={loadFile}
               renameFile={renameFile}
               curPath={curPath}
               openFile={openFile}
@@ -48,6 +50,7 @@ export default function Sidebar({
               createFile={createFile}
               handleCreateButton={handleCreateButton}
               setShowRenameModal={setShowRenameModal}
+              setShowOpenModal={setShowOpenModal}
             />
           )) ||
             (selectedActivity === "search" && (

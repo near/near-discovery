@@ -51,21 +51,6 @@ export default function ProfileSidebar() {
             alignItems: "center",
           }}
         >
-          {/* <img
-            style={{
-              maxWidth: 250,
-              width: "100%",
-              minWidth: "150",
-
-              aspectRatio: 1 / 1,
-              objectFit: "cover",
-              borderRadius: "50%",
-
-              outline: "2px solid #33323a",
-            }}
-            src="https://images.unsplash.com/photo-1677442992214-d5305c0bec2b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80"
-            alt="profile-art"
-          /> */}
           <div
             style={{
               maxWidth: 250,
@@ -92,18 +77,6 @@ export default function ProfileSidebar() {
               @{account.accountId || "Not_logged_in"}
             </Typography>
           </div>
-
-          {/* <Typography
-            variant="p2"
-            style={{
-              color: theme.textColor2,
-              textAlign: "center",
-              maxWidth: 300,
-            }}
-          >
-            Culpa excepteur duis in veniam ut velit ullamco anim ea. Ut magna
-            exercitation minim labore do tempor.
-          </Typography> */}
         </Box>
 
         <Box
@@ -133,37 +106,6 @@ export default function ProfileSidebar() {
         </Box>
 
         <CustomButton>Edit Profile</CustomButton>
-
-        {/* 
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: 1,
-              width: "100%",
-            }}
-          >
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <Groups3Icon
-                sx={{ fontSize: "1.25rem", color: theme.textColor2 }}
-              />
-
-              <Typography variant="p2" sx={{ color: theme.textColor2 }}>
-                1 follower · 1 following
-              </Typography>
-            </Box>
-
-            <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-              <LocationOnRoundedIcon
-                sx={{ fontSize: "1.25rem", color: theme.textColor2 }}
-              />
-
-              <Typography variant="p2" sx={{ color: theme.textColor2 }}>
-                San Francisco, California
-              </Typography>
-            </Box>
-          </Box> 
-        */}
       </Box>
     </div>
   );
