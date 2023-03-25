@@ -1,5 +1,5 @@
 import { Box, InputBase, Typography } from "@mui/material";
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useMemo, useState } from "react";
 
 import { Widget } from "near-social-vm";
 
@@ -8,9 +8,10 @@ import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
 export default function SearchSidebar({ loadFile }) {
   const { theme } = useContext(ThemeContext);
+  const [search, setSearch] = useState("");
 
   return (
-    <Box sx={{ margin: 1 }}>
+    <Box sx={{ height: "100%" }}>
       <div
         style={{
           height: 50,
@@ -29,9 +30,9 @@ export default function SearchSidebar({ loadFile }) {
         </Typography>
       </div>
 
-      {/* <InputBase
+      <InputBase
         sx={{
-          mb: 1,
+          m: 1,
           width: "calc(100% - 16px)",
           paddingBlock: 0.5,
           paddingInline: 1,
@@ -40,9 +41,10 @@ export default function SearchSidebar({ loadFile }) {
           color: theme.textColor,
           backgroundColor: theme.ui2,
         }}
-        placeholder="Search"
-        inputProps={{ "aria-label": "search google maps" }}
-      /> */}
+        placeholder="Search..."
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
 
       {/* only show if props.widgets.editorComponentSearch is avable*/}
       <Widget

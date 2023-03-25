@@ -13,9 +13,11 @@ import DiamondRoundedIcon from "@mui/icons-material/DiamondRounded";
 import VerticalSplitRoundedIcon from "@mui/icons-material/VerticalSplitRounded";
 import { ButtonBase, Tooltip } from "@mui/material";
 import { useHistory } from "react-router-dom";
+import { Widget, useNear, useAccount } from "near-social-vm";
 
-export default function Activitybar() {
+export default function Activitybar(props) {
   const history = useHistory();
+  const account = useAccount();
 
   const { theme } = useContext(ThemeContext);
   const { setShowWebsiteView } = useContext(EditorContext);
@@ -42,7 +44,7 @@ export default function Activitybar() {
 
         <ActivityButton
           icon={<ContentCopyRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="explorer"
+          label="widgets"
         />
 
         <ActivityButton
@@ -73,14 +75,43 @@ export default function Activitybar() {
         /> */}
         <ActivityButton
           icon={
-            <img
-              height={30}
-              src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-              alt="profile-art"
-            />
+            props.signedIn ? (
+              <div
+                style={{
+                  height: 35,
+                  width: 35,
+                  borderRadius: 20,
+                  overflow: "hidden",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Widget
+                  src={props.widgets.profileImage}
+                  props={{
+                    accountId: account.accountId,
+                    className: "d-inline-block",
+                  }}
+                />
+              </div>
+            ) : (
+              <img
+                height={30}
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt="profile-art"
+              />
+            )
           }
           label="profile"
         />
+
+        {/* <img
+          height={30}
+          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+          alt="profile-art"
+        /> */}
+
         <ActivityButton
           icon={<SettingsRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="settings"

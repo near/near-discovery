@@ -13,6 +13,7 @@ export default function CustomButton(props) {
         {...p}
         component={LoadingButton}
         sx={{
+          borderRadius: 0.5,
           paddingBlock: 1,
           paddingInline: 2,
           backgroundColor: theme.buttonColor,

@@ -6,8 +6,10 @@ import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import ForkRightRoundedIcon from "@mui/icons-material/ForkRightRounded";
+import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 
 import { ThemeContext } from "../../../../context/ThemeContext";
+import { EditorContext } from "../../../../context/EditorContext";
 
 export default function WidgetViewHeader({
   onRunButtonClick,
@@ -16,6 +18,9 @@ export default function WidgetViewHeader({
 
   publishWidgetButton,
 }) {
+  const { showLiveCodePreview, setShowLiveCodePreview } =
+    useContext(EditorContext);
+
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -30,9 +35,37 @@ export default function WidgetViewHeader({
         width: "100%",
       }}
     >
-      <Typography variant="h6" sx={{ color: theme.textColor2, width: "100%" }}>
-        Widget View
-      </Typography>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Typography
+          variant="h6"
+          sx={{ color: theme.textColor2, width: "100%" }}
+        >
+          Widget View
+        </Typography>
+
+        <Tooltip
+          title={`Live Preview: ${showLiveCodePreview ? "On" : "Off"}`}
+          placement="bottom"
+        >
+          <IconButton
+            sx={{ color: theme.buttonTextColor }}
+            onClick={() => setShowLiveCodePreview((e) => !e)}
+          >
+            <img
+              style={{
+                height: 20,
+                filter: showLiveCodePreview ? "invert(0)" : "invert(1)",
+              }}
+              src={
+                showLiveCodePreview
+                  ? "https://cdn-icons-png.flaticon.com/512/3049/3049365.png"
+                  : "https://cdn-icons-png.flaticon.com/512/8064/8064583.png"
+              }
+              alt="live icon"
+            />
+          </IconButton>
+        </Tooltip>
+      </Box>
 
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Tooltip title="Preview Widget" placement="bottom">
@@ -49,12 +82,12 @@ export default function WidgetViewHeader({
           </IconButton>
         </Tooltip>
 
-        <Tooltip title="Save Widget" placement="bottom">
+        <Tooltip title="Share Widget" placement="bottom">
           <IconButton
             sx={{ color: "#198754" || theme.textColor2 }}
             onClick={onSaveButtonClick}
           >
-            <SaveRoundedIcon
+            <ShareRoundedIcon
               sx={{ fill: "#198754" || theme.textColor2, fontSize: "1rem" }}
             />
           </IconButton>

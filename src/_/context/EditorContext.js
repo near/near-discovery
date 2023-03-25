@@ -10,8 +10,9 @@ const emptyFile = {
 
 export const EditorContextProvider = (props) => {
   const [showWebsiteView, setShowWebsiteView] = useState(true);
+  const [showLiveCodePreview, setShowLiveCodePreview] = useState(true);
 
-  const [selectedActivity, setSelectedActivity] = useState("explorer");
+  const [selectedActivity, setSelectedActivity] = useState("widgets");
 
   const [files, setFiles] = useState(undefined);
   const [filesDetails, setFilesDetails] = useState(new Map());
@@ -25,6 +26,9 @@ export const EditorContextProvider = (props) => {
       value={{
         showWebsiteView,
         setShowWebsiteView,
+        //
+        showLiveCodePreview,
+        setShowLiveCodePreview,
         //
         // paths,
         //

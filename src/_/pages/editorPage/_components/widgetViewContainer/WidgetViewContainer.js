@@ -50,9 +50,7 @@ export default function WidgetViewContainer({
           <Box
             sx={{
               flex: 1,
-
               height: "100%",
-
               bgcolor: "#FFF",
             }}
           >

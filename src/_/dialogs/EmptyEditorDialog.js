@@ -1,4 +1,15 @@
-import React from "react";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
+import React, { useContext } from "react";
+import { Button } from "../../components/common/buttons/Button";
+import CustomButton from "../components/custom/CustomButton";
+import { ThemeContext } from "../context/ThemeContext";
 
 export default function EmptyEditorDialog({
   showEditor,
@@ -6,48 +17,99 @@ export default function EmptyEditorDialog({
   setShowOpenModal,
   createNewFile,
   Filetype,
+
+  // onHide,
+  // name,
+  // onRename,
+  // show,
 }) {
+  const { theme } = useContext(ThemeContext);
+
   return (
-    <div
-      className={`text-center d-flex justify-content-center min-vh-100 ${
-        showEditor ? `visually-hidden` : ``
-      }`}
+    <Dialog
+      open={!showEditor}
+      // onClose={() => onHide()}
+      // aria-labelledby="alert-dialog-title"
+      // aria-describedby="alert-dialog-description"
+      // fullWidth={true}
+      maxWidth="xs"
+      PaperProps={{ style: { backgroundColor: theme.ui, borderRadius: 4 } }}
     >
-      <div
-        className="container-fluid mt-5"
-        style={{
-          width: "460px",
+      {/* <DialogTitle sx={{ padding: "16px 16px 24px 16px" }}>
+        <Typography
+          variant="h6"
+          sx={{ fontWeight: 500, color: theme.textColor2 }}
+        >
+          Welcome to the Component Sandbox!
+        </Typography>
+      </DialogTitle> */}
+
+      <DialogContent
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          gap: 2,
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <h4 style={{ lineHeight: "50px" }}>
-          Welcome to the Component Sandbox!
-        </h4>
-        <p className="text-secondary">
-          Use this sandbox to create, inspect, modify, and compose components to
-          create new experiences on NEAR.
-        </p>
-        <div className="d-flex justify-content-center mt-5">
-          <button
-            className="btn btn-outline-success mb-3"
-            style={{ width: "250px" }}
-            onClick={() => (setShowAddModal(false), setShowOpenModal(true))}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            mb: 3,
+          }}
+        >
+          <Typography
+            variant="h4"
+            textAlign="center"
+            sx={{ color: theme.textColor2 }}
           >
-            Open Component
-          </button>
-        </div>
-        <div className="w-100 text-center text-secondary mb-3">or</div>
-        <div className="d-flex justify-content-center">
-          <button
-            className="btn btn-success mb-4"
-            style={{ width: "250px" }}
-            onClick={() => (
-              setShowAddModal(false), createNewFile(Filetype.Widget)
-            )}
+            Welcome to the Component Sandbox!
+          </Typography>
+
+          <Typography
+            variant="p"
+            textAlign="center"
+            sx={{ color: theme.textColor2 }}
           >
-            Create New Component
-          </button>
-        </div>
-      </div>
-    </div>
+            Use this sandbox to create, inspect, modify, and compose components
+            to create new experiences on NEAR.
+          </Typography>
+        </Box>
+
+        <CustomButton
+          style={{
+            width: "100%",
+            border: `1px ${theme.buttonColor} solid`,
+            color: theme.buttonColor,
+            backgroundColor: "transparent",
+          }}
+          onClick={() => {
+            setShowAddModal(false);
+            setShowOpenModal(true);
+          }}
+        >
+          Open Component
+        </CustomButton>
+
+        <Typography sx={{ textAlign: "center", color: theme.textColor }}>
+          or
+        </Typography>
+
+        <CustomButton
+          style={{ width: "100%" }}
+          onClick={() => {
+            setShowAddModal(false);
+            createNewFile(Filetype.Widget);
+          }}
+        >
+          Create New Component
+        </CustomButton>
+      </DialogContent>
+    </Dialog>
   );
 }

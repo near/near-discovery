@@ -7,28 +7,37 @@ import {
   InputBase,
   Typography,
 } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
+import CustomButton from "../components/custom/CustomButton";
 import { ThemeContext } from "../context/ThemeContext";
 
-export default function RenameDialogs({ open, setOpen, item }) {
+export default function RenameDialog({
+  // open,
+  // setOpen,
+  // item,
+
+  onHide,
+  name,
+  onRename,
+  show,
+}) {
   const { theme } = useContext(ThemeContext);
+  const [newName, setNewName] = useState(name);
 
   return (
     <Dialog
-      open={open}
-      onClose={(e) => setOpen(!e)}
-      aria-labelledby="alert-dialog-title"
-      aria-describedby="alert-dialog-description"
+      open={show}
+      onClose={() => onHide()}
       fullWidth={true}
       maxWidth="xs"
-      PaperProps={{ style: { backgroundColor: theme.ui } }}
+      PaperProps={{ style: { backgroundColor: theme.ui, borderRadius: 4 } }}
     >
       <DialogTitle sx={{ padding: "16px 16px 24px 16px" }}>
         <Typography
           variant="h6"
           sx={{ fontWeight: 500, color: theme.textColor2 }}
         >
-          Rename "{item?.name}"
+          Rename "{name}"
         </Typography>
       </DialogTitle>
 
@@ -39,12 +48,16 @@ export default function RenameDialogs({ open, setOpen, item }) {
             paddingBlock: 1,
             paddingInline: 2,
             flex: 1,
-            borderRadius: 1,
+            borderRadius: 0.5,
             color: theme.textColor,
             backgroundColor: theme.ui2,
           }}
-          placeholder={`Rename "${item?.name}"`}
-          inputProps={{ "aria-label": "search google maps" }}
+          placeholder={`Rename "${name}"`}
+          inputProps={{ "aria-label": `Rename "${name}"` }}
+          value={newName}
+          onChange={(e) =>
+            setNewName(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-]/g, ""))
+          }
         />
       </DialogContent>
 
@@ -56,23 +69,32 @@ export default function RenameDialogs({ open, setOpen, item }) {
             color: theme.textColor3,
             backgroundColor: theme.textColor3 + 11,
             padding: "5px 20px",
+            borderRadius: 0.5,
           }}
-          onClick={(e) => setOpen(!e)}
+          onClick={() => onHide()}
         >
           Cancel
         </Button>
-        <Button
+        <CustomButton
+          disabled={!newName || newName === name}
           sx={{
-            color: theme.textColor,
-            backgroundColor: theme.buttonColor,
-            padding: "5px 20px",
             textTransform: "none",
             fontWeight: 500,
+
+            color: "#FFF",
+            backgroundColor:
+              theme.buttonColor + (!newName || newName === name ? 66 : ""),
+
+            padding: "5px 30px",
+            borderRadius: 0.5,
           }}
-          onClick={(e) => setOpen(!e)}
+          onClick={() => {
+            onRename(newName);
+            onHide();
+          }}
         >
           Rename
-        </Button>
+        </CustomButton>
       </DialogActions>
     </Dialog>
   );

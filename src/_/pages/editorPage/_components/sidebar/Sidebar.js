@@ -1,7 +1,7 @@
 import { Fade } from "@mui/material";
 import React, { useContext } from "react";
 
-import ExplorerSidebar from "./ExplorerSidebar";
+import WidgetsSidebar from "./WidgetsSidebar";
 import ProfileSidebar from "./ProfileSidebar";
 import SearchSidebar from "./SearchSidebar";
 import SettingsSidebar from "./SettingsSidebar";
@@ -10,7 +10,18 @@ import SourceControlSidebar from "./SourceControlSidebar";
 import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
 
-export default function Sidebar({ loadFile }) {
+export default function Sidebar({
+  loadFile,
+
+  // For WidgetSidebar
+  renameFile,
+  curPath,
+  openFile,
+  removeFromFiles,
+  createFile,
+  handleCreateButton,
+  setShowRenameModal,
+}) {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity } = useContext(EditorContext);
 
@@ -28,7 +39,17 @@ export default function Sidebar({ loadFile }) {
     >
       <Fade timeout={500} in={selectedActivity?.length > 0 ? true : false}>
         <div>
-          {(selectedActivity === "explorer" && <ExplorerSidebar />) ||
+          {(selectedActivity === "widgets" && (
+            <WidgetsSidebar
+              renameFile={renameFile}
+              curPath={curPath}
+              openFile={openFile}
+              removeFromFiles={removeFromFiles}
+              createFile={createFile}
+              handleCreateButton={handleCreateButton}
+              setShowRenameModal={setShowRenameModal}
+            />
+          )) ||
             (selectedActivity === "search" && (
               <SearchSidebar loadFile={loadFile} />
             )) ||

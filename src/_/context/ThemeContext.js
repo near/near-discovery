@@ -32,12 +32,12 @@ export const ThemeContextProvider = (props) => {
     textColor: "#e2e8f0",
     textColor2: "#94a3b8",
     textColor3: "#7e8185",
-    textColor4: "#fff",
+    textColor4: "#ffffff",
 
     buttonColor: "#0078d7",
     buttonColor2: "#ff004e",
 
-    buttonTextColor: "#fff",
+    buttonTextColor: "#ffffff",
 
     ui: "#1e1e1e",
     ui2: "#262626",

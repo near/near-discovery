@@ -20,7 +20,9 @@ import FileIcon from "../../../components/FileIcon";
 const StyledTabs = styled((props) => (
   <Tabs
     {...props}
-    TabIndicatorProps={{ children: <span className="MuiTabs-indicatorSpan" /> }}
+    TabIndicatorProps={{
+      children: <span className="MuiTabs-indicatorSpan" />,
+    }}
   />
 ))({
   width: "100%",
@@ -37,13 +39,12 @@ const StyledTabs = styled((props) => (
   "& .MuiTabs-indicatorSpan": {
     // maxWidth: 40,
     width: "100%",
-    backgroundColor: "#0078d7",
   },
 });
 
 const StyledTab = styled((props) => (
   <Tab component="div" disableRipple {...props} />
-))(({ theme }) => ({
+))(() => ({
   minHeight: 48,
   height: 50,
   display: "flex",
@@ -73,7 +74,7 @@ export default function Tabsbar({
   removeFromFiles,
   createFile,
 
-  publishWidgetButton,
+  handleCreateButton,
 }) {
   const { theme } = useContext(ThemeContext);
   // const {
@@ -106,7 +107,7 @@ export default function Tabsbar({
     >
       <>
         <StyledTabs
-          value={curPath}
+          value={{ type: curPath?.type, name: curPath?.name }}
           variant="scrollable"
           aria-label="visible arrows tabs example"
         >
@@ -184,12 +185,7 @@ export default function Tabsbar({
                         onClick={() => {
                           removeFromFiles(file);
                           // if (jp === jpath) {
-                          console.log(
-                            "jp === jpath",
-                            jp,
-                            curPath,
-                            jp === curPath
-                          );
+
                           if (jp === curPath) {
                             if (files.length > 1) {
                               console.log("HI FORM FILS ASE ARO>...");
@@ -229,6 +225,7 @@ export default function Tabsbar({
                   backgroundColor: "#fff1",
                 },
               }}
+              onClick={() => handleCreateButton()}
             >
               <AddRoundedIcon fontSize="small" />
             </IconButton>

@@ -3,10 +3,15 @@ import FileIcon from "./FileIcon";
 import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 import React, { useContext, useState } from "react";
 
-import RenameDialogs from "../dialogs/RenameDialogs";
+import RenameDialog from "../dialogs/RenameDialog";
 import { ThemeContext } from "../context/ThemeContext";
 
-export default function LabelWithFileIcon({ item, labelStyle, style }) {
+export default function LabelWithFileIcon({
+  item,
+  labelStyle,
+  style,
+  renameFile,
+}) {
   const { theme } = useContext(ThemeContext);
 
   const [showEditButton, setShowEditButton] = useState(false);
@@ -59,10 +64,16 @@ export default function LabelWithFileIcon({ item, labelStyle, style }) {
         </Fade>
       </div>
 
-      <RenameDialogs
-        open={showEditButton}
-        setOpen={setShowEditButton}
-        item={item}
+      <RenameDialog
+        // open={showEditButton}
+        // setOpen={setShowEditButton}
+        // item={item}
+
+        key={`rename-modal-${item.name}`}
+        show={showEditButton}
+        name={item.name}
+        onRename={(newName) => renameFile(newName)}
+        onHide={() => setShowEditButton(false)}
       />
     </>
   );

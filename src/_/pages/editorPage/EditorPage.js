@@ -17,16 +17,11 @@ import {
   CommitButton,
   useAccountId,
 } from "near-social-vm";
-import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
-import RenameModal from "../../../components/Editor/RenameModal";
-import OpenModal from "../../../components/Editor/OpenModal";
 import AddModal from "../../../components/Editor/AddModal";
 import CreateModal from "../../../components/Editor/CreateModal";
 import { SaveDraftModal } from "../../../components/SaveDraft";
-import styled from "styled-components";
-// import VsCodeBanner from "../../components/Editor/VsCodeBanner";
 
-import { Box, Button } from "@mui/material";
+import { Box, Button, IconButton } from "@mui/material";
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 
@@ -36,51 +31,11 @@ import EmptyEditorDialog from "../../dialogs/EmptyEditorDialog";
 import { EditorContext } from "../../context/EditorContext";
 import Sidebar from "./_components/sidebar/Sidebar";
 import { ThemeContext } from "../../context/ThemeContext";
-import Tabsbar from "./_components/Tabsbar";
-import CustomButton from "../../components/custom/CustomButton";
-
-const TopMenu = styled.div`
-  border-radius: 0.375rem;
-  display: flex;
-  color: #11181c;
-  height: 40px;
-
-  &&& > a.active {
-    border: 1px solid #ced4da;
-  }
-  &&& > a {
-    background: #fff;
-    color: #11181c;
-    padding-left: 6px;
-    padding-right: 6px;
-  }
-
-  .draft {
-    height: 24px;
-    width: 50px;
-    line-height: 24px;
-    text-align: center;
-    font-weight: bold;
-    color: #ad5700;
-    font-size: 12px;
-    border-radius: 50px;
-    background-color: #ffecbc;
-    margin-right: 6px;
-  }
-
-  .dot {
-    background: #f45858;
-    width: 10px;
-    height: 10px;
-    border-radius: 100%;
-    margin: 7px 8px 0;
-  }
-
-  .close {
-    width: 28px;
-    height: 28px;
-  }
-`;
+import RenameDialog from "../../dialogs/RenameDialog";
+import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
+import { useDebouncedCallback } from "use-debounce";
+import OpenWidgetDialog from "../../dialogs/OpenWidgetDialog";
+import VerticalSplitRoundedIcon from "@mui/icons-material/VerticalSplitRounded";
 
 const StorageDomain = {
   page: "editor",
@@ -119,16 +74,26 @@ export default function EditorPage(props) {
   const {
     selectedActivity,
     showWebsiteView,
+    setShowWebsiteView,
 
     files,
     setFiles,
     filesDetails,
     setFilesDetails,
+
+    showLiveCodePreview,
   } = useContext(EditorContext);
 
-  //
-  //
-  //
+  const debouncedFunction = useDebouncedCallback(
+    () => {
+      // Your function here
+      if (code) handlePreviewButton();
+    },
+    // Delay in ms
+    500
+  );
+
+  // END OF _ CODES
 
   const { widgetSrc } = useParams();
   const history = useHistory();
@@ -194,6 +159,7 @@ export default function EditorPage(props) {
           time: Date.now(),
         }
       );
+      // console.log(code);
       setCode(code);
     },
     [cache, setCode]
@@ -649,6 +615,14 @@ export default function EditorPage(props) {
     <CommitButton
       id="publishDraftAsMainButton"
       className={`btn btn-primary`}
+      style={{
+        backgroundColor: theme.buttonColor,
+        paddingInline: 16,
+        borderRadius: 4,
+
+        fontWeight: 500,
+      }}
+      //
       disabled={!widgetName}
       near={near}
       data={{
@@ -688,6 +662,14 @@ export default function EditorPage(props) {
     <CommitButton
       id="publishButton"
       className={`btn btn-primary`}
+      style={{
+        backgroundColor: theme.buttonColor,
+        paddingInline: 16,
+        borderRadius: 4,
+
+        fontWeight: 500,
+      }}
+      //
       disabled={!widgetName}
       near={near}
       data={{
@@ -787,15 +769,17 @@ export default function EditorPage(props) {
       <EmptyEditorDialog
         showEditor={showEditor}
         setShowAddModal={setShowAddModal}
+        setShowOpenModal={setShowOpenModal}
         createNewFile={createNewFile}
         Filetype={Filetype}
       />
 
       <Box
         // className={`container ${showEditor ? "" : "visually-hidden"}`}
-        className={`${showEditor ? "" : "visually-hidden"}`}
+        // className={`${showEditor ? "" : "visually-hidden"}`}
+        //
         sx={{
-          backgroundColor: theme.backgroundColor,
+          backgroundColor: theme.ui,
 
           minHeight: "max(100vh, 700px)",
           height: "100%",
@@ -812,7 +796,7 @@ export default function EditorPage(props) {
           height: "100vh",
         }}
       >
-        <EditorPageActivitybar />
+        <EditorPageActivitybar {...props} />
         {/* <VsCodeBanner /> */}
 
         <Allotment maxSize="100%">
@@ -824,27 +808,49 @@ export default function EditorPage(props) {
             minSize={100}
             maxSize={450}
           >
-            <Sidebar loadFile={loadFile} />
-          </Allotment.Pane>
-
-          <Allotment.Pane minSize={300}>
-            <Tabsbar
+            <Sidebar
+              loadFile={loadFile}
+              // For WidgetSidebar
+              renameFile={renameFile}
               curPath={path}
               openFile={openFile}
               removeFromFiles={removeFromFiles}
               createFile={createFile}
+              handleCreateButton={() => {
+                // setShowAddModal(false),
+                setShowRenameModal(true);
+                createNewFile(Filetype.Widget);
+              }}
+              setShowRenameModal={setShowRenameModal}
             />
+          </Allotment.Pane>
 
-            <div className="container-fluid mt-1">
+          <Allotment.Pane minSize={300}>
+            {/* <Tabsbar
+              curPath={path}
+              openFile={openFile}
+              removeFromFiles={removeFromFiles}
+              createFile={createFile}
+              handleCreateButton={() => {
+                // setShowAddModal(false),
+                setShowRenameModal(true);
+                createNewFile(Filetype.Widget);
+              }}
+            /> */}
+
+            <div
+            // style={{ paddingTop: 10 }}
+            // className="container-fluid mt-1"
+            >
               {/* Dialog boxs - start */}
-              <RenameModal
+              <RenameDialog
                 key={`rename-modal-${jpath}`}
                 show={showRenameModal}
                 name={path?.name}
                 onRename={(newName) => renameFile(newName, code)}
                 onHide={() => setShowRenameModal(false)}
               />
-              <OpenModal
+              <OpenWidgetDialog
                 show={showOpenModal}
                 onOpen={(newName) => loadFile(newName)}
                 onHide={() => setShowOpenModal(false)}
@@ -877,465 +883,269 @@ export default function EditorPage(props) {
               />
               {/* Dialog boxs - end */}
 
-              <div className="">
-                <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
-                  <div className="d-flex" style={{ flexWrap: "wrap" }}>
-                    <Nav
-                      variant="pills mb-2 mt-2"
-                      activeKey={jpath}
-                      onSelect={(key) => {
-                        console.log(key);
-                        openFile(JSON.parse(key));
-                      }}
-                    >
-                      {files?.map((p, idx) => {
-                        // console.log("Files : ", p);
-                        if (p.unnamed) {
-                          return;
-                        }
+              {/* Tabs */}
+              <Box
+                sx={{
+                  height: 50,
+                  backgroundColor: "#1a1a1a" || theme.backgroundColor,
+                  borderBottom: `1px solid ${theme.borderColor}`,
 
-                        const jp = JSON.stringify(p);
-                        const widgetName = p?.name?.split("/")[0];
-                        const { codeChangesPresent, isDraft } =
-                          filesDetails.get(widgetName) || {};
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    alignItems: "flex-end",
+                    height: "100%",
+                  }}
+                >
+                  <Button
+                    sx={{
+                      backgroundColor:
+                        tab === Tab.Editor ? theme.ui2 : theme.ui,
+                      height: "100%",
+                      fontWeight: 600,
+                      textTransform: "none",
 
-                        return (
-                          <Nav.Item key={jp}>
-                            <TopMenu>
-                              <Nav.Link
-                                className="text-decoration-none d-flex "
-                                eventKey={jp}
-                              >
-                                <div className="d-flex">
-                                  {/* X1 */}
-                                  {isDraft && (
-                                    <div className="draft">Draft</div>
-                                  )}
-                                  <div>{widgetName}</div>
-                                  {codeChangesPresent && (
-                                    <div className="dot"></div>
-                                  )}
-                                </div>
-                                <button
-                                  className={`close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary`}
-                                  style={{
-                                    marginTop: "-3px",
-                                    marginBottom: "0px",
-                                  }}
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    removeFromFiles(p);
-                                    if (jp === jpath) {
-                                      if (files.length > 1) {
-                                        openFile(
-                                          files[idx - 1] || files[idx + 1]
-                                        );
-                                      } else {
-                                        createFile(Filetype.Widget);
-                                      }
-                                    }
-                                  }}
-                                >
-                                  <i className="bi bi-x"></i>
-                                </button>
-                              </Nav.Link>
-                            </TopMenu>
-                          </Nav.Item>
-                        );
-                      })}
-                      <Nav.Item className="me-1">
-                        {openCreateButton}
-                        {renameButton}
-                      </Nav.Item>
-                    </Nav>
-                  </div>
-                  <div
-                    className="d-flex ms-auto"
-                    style={{ minWidth: "280px", flexWrap: "wrap" }}
+                      px: 3,
+                      borderRadius: 0,
+
+                      color:
+                        tab === Tab.Editor
+                          ? theme.buttonColor
+                          : theme.textColor3,
+                      borderBottom:
+                        tab === Tab.Editor
+                          ? `2px ${theme.buttonColor} solid`
+                          : "none",
+                    }}
+                    aria-current="page"
+                    onClick={() => setTab(Tab.Editor)}
                   >
-                    <Nav
-                      variant="pills mb-2 mt-2 ms-auto"
-                      activeKey={jpath}
-                      onSelect={(key) => openFile(JSON.parse(key))}
-                    >
-                      <Nav.Item className="">
-                        {/* {saveDraftButton} */}
-                        {/* {forkButton} */}
+                    Component
+                  </Button>
+                  <Button
+                    sx={{
+                      backgroundColor: tab === Tab.Props ? theme.ui2 : theme.ui,
+                      height: "100%",
+                      fontWeight: 600,
+                      textTransform: "none",
 
-                        {/* {filesDetails.get(widgetName)?.isDraft
-                          ? publishDraftAsMainButton
-                          : publishButton} */}
-                      </Nav.Item>
-                    </Nav>
+                      px: 3,
+                      borderRadius: 0,
+
+                      color:
+                        tab === Tab.Props
+                          ? theme.buttonColor
+                          : theme.textColor3,
+                      borderBottom:
+                        tab === Tab.Props
+                          ? `2px ${theme.buttonColor} solid`
+                          : "none",
+                    }}
+                    aria-current="page"
+                    onClick={() => setTab(Tab.Props)}
+                  >
+                    Props
+                  </Button>
+                  {props.widgets.widgetMetadataEditor && (
+                    <Button
+                      sx={{
+                        backgroundColor:
+                          tab === Tab.Metadata ? theme.ui2 : theme.ui,
+                        height: "100%",
+                        fontWeight: 600,
+                        textTransform: "none",
+
+                        px: 3,
+                        borderRadius: 0,
+
+                        color:
+                          tab === Tab.Metadata
+                            ? theme.buttonColor
+                            : theme.textColor3,
+                        borderBottom:
+                          tab === Tab.Metadata
+                            ? `2px ${theme.buttonColor} solid`
+                            : "none",
+                      }}
+                      aria-current="page"
+                      onClick={() => setTab(Tab.Metadata)}
+                    >
+                      Metadata
+                    </Button>
+                  )}
+                </Box>
+
+                <IconButton
+                  sx={{
+                    color: showWebsiteView
+                      ? theme.textColor2
+                      : theme.buttonColor,
+                    mr: 0.5,
+                  }}
+                  onClick={() => setShowWebsiteView((e) => !e)}
+                >
+                  <VerticalSplitRoundedIcon
+                    sx={{
+                      fill: showWebsiteView
+                        ? theme.textColor2
+                        : theme.buttonColor,
+                    }}
+                  />
+                </IconButton>
+              </Box>
+              {/* {layout === Layout.Tabs && (
+                <div className="ms-auto d-flex">
+                  {path && accountId && openInNewTabButton}
+                  <div
+                    className="btn-group"
+                    role="group"
+                    aria-label="Layout selection"
+                    style={{
+                      height: "38px",
+                    }}
+                  >
+                    <input
+                      type="radio"
+                      className="btn-check"
+                      name="layout-radio"
+                      id="layout-tabs"
+                      autoComplete="off"
+                      checked={layout === Layout.Tabs}
+                      onChange={onLayoutChange}
+                      value={Layout.Tabs}
+                      title={"Set layout to Tabs mode"}
+                    />
+                    <label
+                      className="btn btn-outline-secondary"
+                      htmlFor="layout-tabs"
+                    >
+                      <i className="bi bi-square" />
+                    </label>
+                    <input
+                      type="radio"
+                      className="btn-check"
+                      name="layout-radio"
+                      id="layout-split"
+                      autoComplete="off"
+                      checked={layout === Layout.Split}
+                      value={Layout.Split}
+                      title={"Set layout to Split mode"}
+                      onChange={onLayoutChange}
+                    />
+                    <label
+                      className="btn btn-outline-secondary"
+                      htmlFor="layout-split"
+                    >
+                      <i className="bi bi-layout-split" />
+                    </label>
                   </div>
+                </div>
+              )} */}
+
+              <div className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}>
+                <div
+                  style={{
+                    height: "calc(100vh - 90px)",
+                    borderTopLeftRadius: "0px",
+                  }}
+                >
+                  <Editor
+                    // This is for props
+                    theme="light"
+                    value={code}
+                    path={widgetPath}
+                    defaultLanguage="javascript"
+                    onChange={(code) => {
+                      updateCode(path, code);
+
+                      if (showLiveCodePreview) debouncedFunction();
+                    }}
+                    wrapperProps={{
+                      onBlur: () => reformat(path, code),
+                    }}
+                  />
+                </div>
+                <div className="mb-3 d-flex gap-2 flex-wrap"></div>
+              </div>
+
+              <div className={`${tab === Tab.Props ? "" : "visually-hidden"}`}>
+                <div
+                  //  className="form-control"
+
+                  style={{
+                    height: "calc(100vh - 90px)",
+                    borderTopLeftRadius: "0px",
+                  }}
+                >
+                  <Editor
+                    // This is for Component
+                    theme="vs-dark"
+                    value={widgetProps}
+                    defaultLanguage="json"
+                    onChange={(props) => setWidgetProps(props)}
+                    wrapperProps={{
+                      onBlur: () => reformatProps(widgetProps),
+                    }}
+                  />
+                </div>
+                <div className=" mb-3">^^ Props for debugging (in JSON)</div>
+                {propsError && (
+                  <pre className="alert alert-danger">{propsError}</pre>
+                )}
+              </div>
+
+              <div
+                className={`${
+                  tab === Tab.Metadata && props.widgets.widgetMetadataEditor
+                    ? ""
+                    : "visually-hidden"
+                }`}
+              >
+                <div
+                  className="mb-3"
+                  style={{
+                    paddingTop: "20px",
+                    padding: "20px",
+                    border: "1px solid rgb(206, 212, 218)",
+                    appearance: "none",
+                    borderRadius: "0.375rem",
+                    height: "70vh",
+                  }}
+                >
+                  <Widget
+                    src={props.widgets.widgetMetadataEditor}
+                    key={`metadata-editor-${jpath}`}
+                    props={useMemo(
+                      () => ({
+                        widgetPath,
+                        onChange: setMetadata,
+                      }),
+                      [widgetPath]
+                    )}
+                  />
                 </div>
               </div>
 
-              <div className="d-flex align-content-start">
-                <div className="flex-grow-1">
-                  <div className="row">
-                    <div
-                    // className={layoutClass}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                        }}
-                      >
-                        <div>
-                          <ul
-                            className={`nav nav-tabs`}
-                            style={{
-                              borderBottom: "0px",
-                              marginTop: "9px",
-                            }}
-                          >
-                            <li className="nav-item">
-                              <button
-                                className={`nav-link ${
-                                  tab === Tab.Editor
-                                    ? "active"
-                                    : "text-secondary"
-                                }`}
-                                aria-current="page"
-                                onClick={() => setTab(Tab.Editor)}
-                              >
-                                Component
-                              </button>
-                            </li>
-                            <li className="nav-item">
-                              <button
-                                className={`nav-link ${
-                                  tab === Tab.Props
-                                    ? "active"
-                                    : "text-secondary"
-                                }`}
-                                aria-current="page"
-                                onClick={() => setTab(Tab.Props)}
-                              >
-                                Props
-                              </button>
-                            </li>
-                            {props.widgets.widgetMetadataEditor && (
-                              <li className="nav-item">
-                                <button
-                                  className={`nav-link ${
-                                    tab === Tab.Metadata
-                                      ? "active"
-                                      : "text-secondary"
-                                  }`}
-                                  aria-current="page"
-                                  onClick={() => setTab(Tab.Metadata)}
-                                >
-                                  Metadata
-                                </button>
-                              </li>
-                            )}
-                            {layout === Layout.Tabs && (
-                              <li className="nav-item">
-                                <button
-                                  className={`nav-link ${
-                                    tab === Tab.Widget
-                                      ? "active"
-                                      : "text-secondary"
-                                  }`}
-                                  aria-current="page"
-                                  onClick={() => {
-                                    setRenderCode(code);
-                                    setTab(Tab.Widget);
-                                  }}
-                                >
-                                  Component Preview
-                                </button>
-                              </li>
-                            )}
-                          </ul>
-                        </div>
-                        {layout === Layout.Tabs && (
-                          <div className="ms-auto d-flex">
-                            {path && accountId && openInNewTabButton}
-                            <div
-                              className="btn-group"
-                              role="group"
-                              aria-label="Layout selection"
-                              style={{
-                                height: "38px",
-                              }}
-                            >
-                              <input
-                                type="radio"
-                                className="btn-check"
-                                name="layout-radio"
-                                id="layout-tabs"
-                                autoComplete="off"
-                                checked={layout === Layout.Tabs}
-                                onChange={onLayoutChange}
-                                value={Layout.Tabs}
-                                title={"Set layout to Tabs mode"}
-                              />
-                              <label
-                                className="btn btn-outline-secondary"
-                                htmlFor="layout-tabs"
-                              >
-                                <i className="bi bi-square" />
-                              </label>
-                              <input
-                                type="radio"
-                                className="btn-check"
-                                name="layout-radio"
-                                id="layout-split"
-                                autoComplete="off"
-                                checked={layout === Layout.Split}
-                                value={Layout.Split}
-                                title={"Set layout to Split mode"}
-                                onChange={onLayoutChange}
-                              />
-                              <label
-                                className="btn btn-outline-secondary"
-                                htmlFor="layout-split"
-                              >
-                                <i className="bi bi-layout-split" />
-                              </label>
-                            </div>
-                          </div>
-                        )}
-                      </div>
-
-                      <div
-                        className={`${
-                          tab === Tab.Editor ? "" : "visually-hidden"
-                        }`}
-                      >
-                        <div
-                          className="form-control mb-3"
-                          style={{ height: "70vh", borderTopLeftRadius: "0px" }}
-                        >
-                          <Editor
-                            // This is for props
-                            theme="light"
-                            value={code}
-                            path={widgetPath}
-                            defaultLanguage="javascript"
-                            onChange={(code) => updateCode(path, code)}
-                            wrapperProps={{
-                              onBlur: () => reformat(path, code),
-                            }}
-                          />
-                        </div>
-                        <div className="mb-3 d-flex gap-2 flex-wrap"></div>
-                      </div>
-
-                      <div
-                        className={`${
-                          tab === Tab.Props ? "" : "visually-hidden"
-                        }`}
-                      >
-                        <div
-                          className="form-control"
-                          style={{ height: "70vh" }}
-                        >
-                          <Editor
-                            // This is for Component
-                            theme="vs-dark"
-                            value={widgetProps}
-                            defaultLanguage="json"
-                            onChange={(props) => setWidgetProps(props)}
-                            wrapperProps={{
-                              onBlur: () => reformatProps(widgetProps),
-                            }}
-                          />
-                        </div>
-                        <div className=" mb-3">
-                          ^^ Props for debugging (in JSON)
-                        </div>
-                        {propsError && (
-                          <pre className="alert alert-danger">{propsError}</pre>
-                        )}
-                      </div>
-
-                      <div
-                        className={`${
-                          tab === Tab.Metadata &&
-                          props.widgets.widgetMetadataEditor
-                            ? ""
-                            : "visually-hidden"
-                        }`}
-                      >
-                        <div
-                          className="mb-3"
-                          style={{
-                            paddingTop: "20px",
-                            padding: "20px",
-                            border: "1px solid rgb(206, 212, 218)",
-                            appearance: "none",
-                            borderRadius: "0.375rem",
-                            height: "70vh",
-                          }}
-                        >
-                          <Widget
-                            src={props.widgets.widgetMetadataEditor}
-                            key={`metadata-editor-${jpath}`}
-                            props={useMemo(
-                              () => ({
-                                widgetPath,
-                                onChange: setMetadata,
-                              }),
-                              [widgetPath]
-                            )}
-                          />
-                        </div>
-                      </div>
-                    </div>
-                    {/* <div
-                      className={`${
-                        tab === Tab.Widget ||
-                        (layout === Layout.Split && tab !== Tab.Metadata)
-                          ? layoutClass
-                          : "visually-hidden"
-                      }`}
-                    >
-                      <div style={{}}>
-                        {tab === Tab.Widget || (
-                          <div
-                            style={{
-                              height: "38px",
-                              display: "flex",
-                              marginBottom: "12px",
-                              justifyContent: "end",
-                            }}
-                          >
-                            {tab === Tab.Widget || (
-                              <>
-                                {renderCode && (
-                                  <div className="d-flex justify-content-end me-2">
-                                    {renderPreviewButton}
-                                  </div>
-                                )}
-                                {path && accountId && openInNewTabButton}
-                                <div
-                                  className="btn-group"
-                                  role="group"
-                                  aria-label="Layout selection"
-                                >
-                                  <input
-                                    type="radio"
-                                    className="btn-check"
-                                    name="layout-radio"
-                                    id="layout-tabs"
-                                    autoComplete="off"
-                                    checked={layout === Layout.Tabs}
-                                    onChange={onLayoutChange}
-                                    value={Layout.Tabs}
-                                    title={"Set layout to Tabs mode"}
-                                  />
-                                  <label
-                                    className="btn btn-outline-secondary"
-                                    htmlFor="layout-tabs"
-                                  >
-                                    <i className="bi bi-square" />
-                                  </label>
-
-                                  <input
-                                    type="radio"
-                                    className="btn-check"
-                                    name="layout-radio"
-                                    id="layout-split"
-                                    autoComplete="off"
-                                    checked={layout === Layout.Split}
-                                    value={Layout.Split}
-                                    title={"Set layout to Split mode"}
-                                    onChange={onLayoutChange}
-                                  />
-                                  <label
-                                    className="btn btn-outline-secondary"
-                                    htmlFor="layout-split"
-                                  >
-                                    <i className="bi bi-layout-split" />
-                                  </label>
-                                </div>
-                              </>
-                            )}
-                          </div>
-                        )}
-                        <div
-                          className="container"
-                          style={
-                            tab === Tab.Widget
-                              ? {
-                                  border: "1px solid #ced4da",
-                                  appearance: "none",
-                                  borderRadius: "0.375rem",
-                                  height: "70vh",
-                                  maxWidth: "100%",
-                                  padding: "20px",
-                                }
-                              : {
-                                  padding: "20px",
-                                  border: "1px solid #ced4da",
-                                  appearance: "none",
-                                  borderRadius: "0.375rem",
-                                  height: "70vh",
-                                }
-                          }
-                        >
-                          <div className="h-100 row">
-                            <div className="d-inline-block position-relative overflow-auto h-100">
-                              {renderCode ? (
-                                <div
-                                  style={{
-                                    padding: 0,
-                                    margin: 0,
-                                  }}
-                                >
-                                  <Widget
-                                    key={`preview-${jpath}`}
-                                    code={renderCode}
-                                    // code={`return <div>Hello Badhon {props.number}</div>`}
-                                    props={parsedWidgetProps}
-                                    // props={{ number: 1000 }}
-                                  />
-                                </div>
-                              ) : (
-                                <div
-                                  style={{
-                                    padding: 0,
-                                    margin: 0,
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center",
-                                  }}
-                                >
-                                  {renderPreviewButton}
-                                </div>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div> */}
-
-                    <div
-                      className={`${
-                        tab === Tab.Metadata ? layoutClass : "visually-hidden"
-                      }`}
-                    >
-                      <div className="container" style={{ marginTop: "50px" }}>
-                        <div className="row">
-                          <div className="d-inline-block position-relative overflow-hidden">
-                            <Widget
-                              key={`metadata-${jpath}`}
-                              src={props.widgets.widgetMetadata}
-                              props={useMemo(
-                                () => ({ metadata, accountId, widgetName }),
-                                [metadata, accountId, widgetName]
-                              )}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+              <div
+                className={`${
+                  tab === Tab.Metadata ? layoutClass : "visually-hidden"
+                }`}
+              >
+                <div style={{ padding: 10 }}>
+                  <Widget
+                    key={`metadata-${jpath}`}
+                    src={props.widgets.widgetMetadata}
+                    props={useMemo(
+                      () => ({ metadata, accountId, widgetName }),
+                      [metadata, accountId, widgetName]
+                    )}
+                  />
                 </div>
               </div>
             </div>
@@ -1351,13 +1161,31 @@ export default function EditorPage(props) {
             <WidgetViewContainer
               parsedWidgetProps={parsedWidgetProps}
               renderCode={renderCode}
+              //
               handlePreviewButton={handlePreviewButton}
               handleSaveDraftButton={handleSaveDraftButton}
               handleForkButton={handleForkButton}
               publishWidgetButton={
-                filesDetails.get(widgetName)?.isDraft
-                  ? publishDraftAsMainButton
-                  : publishButton
+                props.signedIn ? (
+                  filesDetails.get(widgetName)?.isDraft ? (
+                    publishDraftAsMainButton
+                  ) : (
+                    publishButton
+                  )
+                ) : (
+                  <buttton
+                    className="btn btn-primary"
+                    style={{
+                      backgroundColor: theme.buttonColor,
+                      paddingInline: 16,
+                      borderRadius: 4,
+                      fontWeight: 500,
+                    }}
+                    onClick={() => props.requestSignIn()}
+                  >
+                    Publish
+                  </buttton>
+                )
               }
             />
           </Allotment.Pane>

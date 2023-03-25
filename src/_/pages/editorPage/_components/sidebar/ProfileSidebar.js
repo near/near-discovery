@@ -4,11 +4,13 @@ import React, { useContext } from "react";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+import { Widget, useAccount } from "near-social-vm";
 
 import CustomButton from "../../../../components/custom/CustomButton";
 import { ThemeContext } from "../../../../context/ThemeContext";
 
 export default function ProfileSidebar() {
+  const account = useAccount();
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -49,7 +51,7 @@ export default function ProfileSidebar() {
             alignItems: "center",
           }}
         >
-          <img
+          {/* <img
             style={{
               maxWidth: 250,
               width: "100%",
@@ -63,20 +65,35 @@ export default function ProfileSidebar() {
             }}
             src="https://images.unsplash.com/photo-1677442992214-d5305c0bec2b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=715&q=80"
             alt="profile-art"
-          />
+          /> */}
+          <div
+            style={{
+              maxWidth: 250,
+              width: 250,
+              minWidth: "150",
 
+              aspectRatio: 1 / 1,
+              objectFit: "cover",
+              borderRadius: "50%",
+
+              outline: "2px solid #33323a",
+              overflow: "hidden",
+            }}
+          >
+            <Widget src="eugenethedream/widget/ProfileImage" />
+          </div>
           <div
             style={{ paddingTop: 16, paddingBottom: 8, textAlign: "center" }}
           >
             <Typography variant="h3" style={{ color: theme.textColor }}>
-              Dann Petty
+              <Widget src="eugenethedream/widget/ProfileName" />
             </Typography>
             <Typography variant="p1" style={{ color: theme.textColor3 }}>
-              @DannyPetty
+              @{account.accountId || "Not_logged_in"}
             </Typography>
           </div>
 
-          <Typography
+          {/* <Typography
             variant="p2"
             style={{
               color: theme.textColor2,
@@ -86,7 +103,7 @@ export default function ProfileSidebar() {
           >
             Culpa excepteur duis in veniam ut velit ullamco anim ea. Ut magna
             exercitation minim labore do tempor.
-          </Typography>
+          </Typography> */}
         </Box>
 
         <Box
