@@ -14,6 +14,7 @@ import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
+import CreateAccount from "./pages/CreateAccount";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -155,6 +156,10 @@ function App(props) {
     <StyledApp className="App">
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
+          <Route path={"/signup"}>
+            <NavigationWrapper {...passProps} />
+            <CreateAccount {...passProps} />
+          </Route>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route>

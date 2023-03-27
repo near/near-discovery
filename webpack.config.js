@@ -8,6 +8,7 @@ const CopyWebpackPlugin = require("copy-webpack-plugin");
 const { merge } = require("webpack-merge");
 const loadPreset = require("./config/presets/loadPreset");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
+const { experiments } = require("webpack");
 const loadConfig = (mode) => require(`./config/webpack.${mode}.js`)(mode);
 
 module.exports = function (env) {
@@ -20,6 +21,9 @@ module.exports = function (env) {
         path: paths.distPath,
         filename: "[name].bundle.js",
         publicPath: "/",
+      },
+      experiments: {
+        topLevelAwait: true
       },
       module: {
         rules: [
@@ -82,6 +86,6 @@ module.exports = function (env) {
       ],
     },
     loadConfig(mode),
-    loadPreset(env)
+    loadPreset(env),
   );
 };

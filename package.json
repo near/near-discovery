@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
+    "@near-js/biometric-ed25519": "^0.0.2",
     "@near-wallet-selector/modal-ui": "^7.4.0",
     "big.js": "^6.1.1",
     "bn.js": "^5.1.1",
@@ -13,12 +14,13 @@
     "collections": "^5.1.12",
     "error-polyfill": "^0.1.2",
     "local-storage": "^2.0.0",
-    "near-api-js": "^0.45.1",
+    "near-api-js": "^1.1.0",
     "near-social-vm": "NearSocial/VM#0.3.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.43.8",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.3.6"
   },
