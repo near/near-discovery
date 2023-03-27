@@ -105,7 +105,7 @@ export default function ProfileSidebar() {
           </IconButton>
         </Box>
 
-        <CustomButton>Edit Profile 2</CustomButton>
+        <CustomButton>Edit Profile</CustomButton>
       </Box>
     </div>
   );
