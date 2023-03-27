@@ -139,16 +139,6 @@ const CreateAccount = () => {
           {/* <IconFingerPrint /> */}
           Continue with Fingerprint
         </StyledButton>
-        <StyledButton fullWidth onClick={handleGetKey} type="button">
-          {/* <IconFingerPrint /> */}
-          Get keys
-        </StyledButton>
-        <p>
-          {`Created Key: ${createdKey}`} <br /><br />
-          {`Retrieved Keys: ${retrievedKeys.join(' ')}`} <br /><br />
-          {`Correct Key: ${correctKey}`} <br /><br />
-          {correctKey === createdKey ? 'Key matched' : 'Key Unmatched'}
-        </p>
         <Footer>
           By creating an account, you agree to the NEAR <a href="">terms of service</a> and <a href="">privacy policy</a>
         </Footer>
