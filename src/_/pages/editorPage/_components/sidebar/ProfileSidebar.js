@@ -61,7 +61,7 @@ export default function ProfileSidebar() {
               objectFit: "cover",
               borderRadius: "50%",
 
-              outline: "2px solid #33323a",
+              outline: `2px solid ${theme.textColor3}`,
               overflow: "hidden",
             }}
           >
@@ -105,7 +105,7 @@ export default function ProfileSidebar() {
           </IconButton>
         </Box>
 
-        <CustomButton>Edit Profile</CustomButton>
+        <CustomButton>Edit Profile 2</CustomButton>
       </Box>
     </div>
   );

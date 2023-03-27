@@ -17,7 +17,7 @@ export default function CustomButton(props) {
           paddingBlock: 1,
           paddingInline: 2,
           backgroundColor: theme.buttonColor,
-          color: theme.textColor,
+          color: theme.buttonTextColor,
           textTransform: "none",
 
           transition: "all .2s ease-in-out",

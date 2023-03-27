@@ -112,12 +112,16 @@ export default function WidgetsSidebar({
       </div>
 
       <Accordion defaultExpanded>
-        <AccordionSummary aria-controls="panel1d-content" id="panel1d-header">
+        <AccordionSummary
+          aria-controls="panel1d-content"
+          id="panel1d-header"
+          sx={{ backgroundColor: theme.backgroundColor }}
+        >
           <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
             Open Editors
           </Typography>
         </AccordionSummary>
-        <AccordionDetails>
+        <AccordionDetails sx={{ backgroundColor: theme.ui }}>
           {files?.map((file, index) => {
             if (file.unnamed) {
               return;
@@ -162,12 +166,16 @@ export default function WidgetsSidebar({
 
       {accountId && (
         <Accordion defaultExpanded>
-          <AccordionSummary aria-controls="panel2d-content" id="panel2d-header">
+          <AccordionSummary
+            aria-controls="panel2d-content"
+            id="panel2d-header"
+            sx={{ backgroundColor: theme.backgroundColor }}
+          >
             <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
               My Widgets
             </Typography>
           </AccordionSummary>
-          <AccordionDetails>
+          <AccordionDetails sx={{ backgroundColor: theme.ui }}>
             {myWidgets ? (
               Object.keys(myWidgets).map((fileName, index) => (
                 <MyWidgetsItem
@@ -282,7 +290,7 @@ const OpenEditorItem = ({
               sx={{
                 opacity: 0.75,
                 backgroundColor: "#ffdf0033",
-                color: "#ffdf00",
+                color: theme.name === "dark" ? "#ffdf00" : theme.textColor,
                 fontSize: 12,
                 mr: 1,
                 fontSize: 10,

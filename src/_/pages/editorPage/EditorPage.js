@@ -70,7 +70,7 @@ const Layout = {
 };
 
 export default function EditorPage(props) {
-  const { theme } = useContext(ThemeContext);
+  const { theme, editorFontSize } = useContext(ThemeContext);
   const {
     selectedActivity,
     showWebsiteView,
@@ -889,7 +889,7 @@ export default function EditorPage(props) {
               <Box
                 sx={{
                   height: 50,
-                  backgroundColor: "#1a1a1a" || theme.backgroundColor,
+                  backgroundColor: theme.backgroundColor,
                   borderBottom: `1px solid ${theme.borderColor}`,
 
                   display: "flex",
@@ -986,7 +986,7 @@ export default function EditorPage(props) {
                 <IconButton
                   sx={{
                     color: showWebsiteView
-                      ? theme.textColor2
+                      ? theme.textColor3
                       : theme.buttonColor,
                     mr: 0.5,
                   }}
@@ -995,7 +995,7 @@ export default function EditorPage(props) {
                   <VerticalSplitRoundedIcon
                     sx={{
                       fill: showWebsiteView
-                        ? theme.textColor2
+                        ? theme.textColor3
                         : theme.buttonColor,
                     }}
                   />
@@ -1011,7 +1011,14 @@ export default function EditorPage(props) {
                 >
                   <Editor
                     // This is for props
-                    theme="light"
+                    theme={theme.name === "dark" ? "vs-dark" : "light"}
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+
+                      fontSize: editorFontSize || "16px",
+                    }}
                     value={code}
                     path={widgetPath}
                     defaultLanguage="javascript"
@@ -1039,7 +1046,14 @@ export default function EditorPage(props) {
                 >
                   <Editor
                     // This is for Component
-                    theme="vs-dark"
+                    theme={theme.name === "dark" ? "vs-dark" : "light"}
+                    options={{
+                      minimap: {
+                        enabled: false,
+                      },
+
+                      fontSize: editorFontSize || "16px",
+                    }}
                     value={widgetProps}
                     defaultLanguage="json"
                     onChange={(props) => setWidgetProps(props)}

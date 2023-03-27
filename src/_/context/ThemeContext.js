@@ -4,7 +4,7 @@ import React, { useState, createContext, useEffect } from "react";
 export const ThemeContext = createContext();
 
 export const ThemeContextProvider = (props) => {
-  const [enableDarkMode, setEnableDarkMode] = useState(true);
+  const [enableDarkMode, SetEnableDarkMode] = useState(true);
   const [editorFontSize, SetEditorFontSize] = useState("14px");
 
   const light = {
@@ -58,12 +58,18 @@ export const ThemeContextProvider = (props) => {
 
   useEffect(() => {
     setEditorFontSize(localStorage.getItem("editorFontSize"));
+    SetEnableDarkMode(localStorage.getItem("enableDarkMode"));
   }, []);
 
   const setEditorFontSize = (value) => {
     SetEditorFontSize(value);
 
     localStorage.setItem("editorFontSize", value);
+  };
+  const setEnableDarkMode = (value) => {
+    SetEnableDarkMode(value);
+
+    localStorage.setItem("enableDarkMode", value);
   };
 
   return (
