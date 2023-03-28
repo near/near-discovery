@@ -28,6 +28,7 @@ export default function WidgetViewHeader({
       sx={{
         paddingInline: 1,
         height: 50,
+        minHeight: 50,
         backgroundColor: theme.backgroundColor,
         display: "flex",
         justifyContent: "space-between",

@@ -37,7 +37,7 @@ import { useDebouncedCallback } from "use-debounce";
 import OpenWidgetDialog from "../../dialogs/OpenWidgetDialog";
 import VerticalSplitRoundedIcon from "@mui/icons-material/VerticalSplitRounded";
 import Tabsbar from "./_components/Tabsbar";
-import Footer from "./Footer";
+import Footer from "./_components/Footer";
 
 const StorageDomain = {
   page: "editor",

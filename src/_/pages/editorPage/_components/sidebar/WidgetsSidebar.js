@@ -47,12 +47,16 @@ export default function WidgetsSidebar({
 
   const [myWidgets, setMyWidgets] = useState();
 
-  // useEffect(() => {
-  //   const timeout = setTimeout(() => {
-  //     getData();
-  //   }, 5000);
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      getData();
+    }, 5000);
 
-  //   return () => clearTimeout(timeout);
+    return () => clearTimeout(timeout);
+  }, []);
+
+  // useEffect(() => {
+  //   getData();
   // }, []);
 
   const getData = () => {
@@ -67,6 +71,8 @@ export default function WidgetsSidebar({
       getData
     );
     setMyWidgets(code);
+
+    console.log("===============", code);
   };
 
   return (
