@@ -36,6 +36,8 @@ import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import { useDebouncedCallback } from "use-debounce";
 import OpenWidgetDialog from "../../dialogs/OpenWidgetDialog";
 import VerticalSplitRoundedIcon from "@mui/icons-material/VerticalSplitRounded";
+import Tabsbar from "./_components/Tabsbar";
+import Footer from "./Footer";
 
 const StorageDomain = {
   page: "editor",
@@ -74,7 +76,6 @@ export default function EditorPage(props) {
   const {
     selectedActivity,
     showWebsiteView,
-    setShowWebsiteView,
 
     files,
     setFiles,
@@ -92,8 +93,6 @@ export default function EditorPage(props) {
     // Delay in ms
     500
   );
-
-  console.log("Editor Page props", props);
   // END OF _ CODES
 
   const { widgetSrc } = useParams();
@@ -767,6 +766,7 @@ export default function EditorPage(props) {
 
   return (
     <>
+      {/* Dialog boxs - start */}
       <EmptyEditorDialog
         showEditor={showEditor}
         setShowAddModal={setShowAddModal}
@@ -775,6 +775,46 @@ export default function EditorPage(props) {
         Filetype={Filetype}
       />
 
+      <RenameDialog
+        key={`rename-modal-${jpath}`}
+        show={showRenameModal}
+        name={path?.name}
+        onRename={(newName) => renameFile(newName, code)}
+        onHide={() => setShowRenameModal(false)}
+      />
+      <OpenWidgetDialog
+        show={showOpenModal}
+        onOpen={(newName) => loadFile(newName)}
+        onHide={() => setShowOpenModal(false)}
+      />
+      <AddModal
+        show={showAddModal}
+        onOpen={() => (setShowAddModal(false), setShowOpenModal(true))}
+        onNew={() => (
+          setShowAddModal(false),
+          setShowRenameModal(true),
+          createNewFile(Filetype.Widget)
+        )}
+        onHide={() => setShowAddModal(false)}
+      />
+      <CreateModal
+        show={showCreateModal}
+        onOpen={(newName) => loadFile(newName)}
+        onNew={() => {
+          createNewFile(Filetype.Widget);
+        }}
+        onHide={() => setShowCreateModal(false)}
+      />
+      <SaveDraftModal
+        show={showSaveDraftModal}
+        onHide={() => setShowSaveDraftModal(false)}
+        near={near}
+        widgetPath={widgetPath}
+        widgetName={widgetName}
+        code={code}
+      />
+      {/* Dialog boxs - end */}
+
       <Box
         // className={`container ${showEditor ? "" : "visually-hidden"}`}
         // className={`${showEditor ? "" : "visually-hidden"}`}
@@ -782,7 +822,7 @@ export default function EditorPage(props) {
         sx={{
           backgroundColor: theme.ui,
 
-          minHeight: "max(100vh, 700px)",
+          // minHeight: "max(100vh, 700px)",
           height: "100%",
           width: "100%",
           display: "flex",
@@ -795,6 +835,8 @@ export default function EditorPage(props) {
           alignItems: "flex-start",
 
           height: "100vh",
+          maxHeight: "calc(100vh - 25px)",
+          minHeight: 700,
         }}
       >
         <EditorPageActivitybar {...props} />
@@ -824,189 +866,40 @@ export default function EditorPage(props) {
               }}
               setShowRenameModal={setShowRenameModal}
               setShowOpenModal={setShowOpenModal}
+              // For ProfileSidebar
+              logOut={() => props.logOut()}
+              requestSignIn={() => props.requestSignIn()}
             />
           </Allotment.Pane>
 
           <Allotment.Pane minSize={300}>
-            {/* <Tabsbar
-              curPath={path}
-              openFile={openFile}
-              removeFromFiles={removeFromFiles}
-              createFile={createFile}
-              handleCreateButton={() => {
-                // setShowAddModal(false),
-                setShowRenameModal(true);
-                createNewFile(Filetype.Widget);
-              }}
-            /> */}
-
-            <div
-            // style={{ paddingTop: 10 }}
-            // className="container-fluid mt-1"
-            >
-              {/* Dialog boxs - start */}
-              <RenameDialog
-                key={`rename-modal-${jpath}`}
-                show={showRenameModal}
-                name={path?.name}
-                onRename={(newName) => renameFile(newName, code)}
-                onHide={() => setShowRenameModal(false)}
-              />
-              <OpenWidgetDialog
-                show={showOpenModal}
-                onOpen={(newName) => loadFile(newName)}
-                onHide={() => setShowOpenModal(false)}
-              />
-              <AddModal
-                show={showAddModal}
-                onOpen={() => (setShowAddModal(false), setShowOpenModal(true))}
-                onNew={() => (
-                  setShowAddModal(false),
-                  setShowRenameModal(true),
-                  createNewFile(Filetype.Widget)
-                )}
-                onHide={() => setShowAddModal(false)}
-              />
-              <CreateModal
-                show={showCreateModal}
-                onOpen={(newName) => loadFile(newName)}
-                onNew={() => {
+            {/* 
+              <Tabsbar
+                curPath={path}
+                openFile={openFile}
+                removeFromFiles={removeFromFiles}
+                createFile={createFile}
+                handleCreateButton={() => {
+                  // setShowAddModal(false),
+                  setShowRenameModal(true);
                   createNewFile(Filetype.Widget);
                 }}
-                onHide={() => setShowCreateModal(false)}
+              /> 
+            */}
+
+            <div>
+              <Tabsbar
+                widgets={props.widgets}
+                Tab={Tab}
+                tab={tab}
+                setTab={setTab}
               />
-              <SaveDraftModal
-                show={showSaveDraftModal}
-                onHide={() => setShowSaveDraftModal(false)}
-                near={near}
-                widgetPath={widgetPath}
-                widgetName={widgetName}
-                code={code}
-              />
-              {/* Dialog boxs - end */}
-
-              {/* Tabs */}
-              <Box
-                sx={{
-                  height: 50,
-                  backgroundColor: theme.backgroundColor,
-                  borderBottom: `1px solid ${theme.borderColor}`,
-
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "flex-start",
-                    alignItems: "flex-end",
-                    height: "100%",
-                  }}
-                >
-                  <Button
-                    sx={{
-                      backgroundColor:
-                        tab === Tab.Editor ? theme.ui2 : theme.ui,
-                      height: "100%",
-                      fontWeight: 600,
-                      textTransform: "none",
-
-                      px: 3,
-                      borderRadius: 0,
-
-                      color:
-                        tab === Tab.Editor
-                          ? theme.buttonColor
-                          : theme.textColor3,
-                      borderBottom:
-                        tab === Tab.Editor
-                          ? `2px ${theme.buttonColor} solid`
-                          : "none",
-                    }}
-                    aria-current="page"
-                    onClick={() => setTab(Tab.Editor)}
-                  >
-                    Component
-                  </Button>
-                  <Button
-                    sx={{
-                      backgroundColor: tab === Tab.Props ? theme.ui2 : theme.ui,
-                      height: "100%",
-                      fontWeight: 600,
-                      textTransform: "none",
-
-                      px: 3,
-                      borderRadius: 0,
-
-                      color:
-                        tab === Tab.Props
-                          ? theme.buttonColor
-                          : theme.textColor3,
-                      borderBottom:
-                        tab === Tab.Props
-                          ? `2px ${theme.buttonColor} solid`
-                          : "none",
-                    }}
-                    aria-current="page"
-                    onClick={() => setTab(Tab.Props)}
-                  >
-                    Props
-                  </Button>
-                  {props.widgets.widgetMetadataEditor && (
-                    <Button
-                      sx={{
-                        backgroundColor:
-                          tab === Tab.Metadata ? theme.ui2 : theme.ui,
-                        height: "100%",
-                        fontWeight: 600,
-                        textTransform: "none",
-
-                        px: 3,
-                        borderRadius: 0,
-
-                        color:
-                          tab === Tab.Metadata
-                            ? theme.buttonColor
-                            : theme.textColor3,
-                        borderBottom:
-                          tab === Tab.Metadata
-                            ? `2px ${theme.buttonColor} solid`
-                            : "none",
-                      }}
-                      aria-current="page"
-                      onClick={() => setTab(Tab.Metadata)}
-                    >
-                      Metadata
-                    </Button>
-                  )}
-                </Box>
-
-                <IconButton
-                  sx={{
-                    color: showWebsiteView
-                      ? theme.textColor3
-                      : theme.buttonColor,
-                    mr: 0.5,
-                  }}
-                  onClick={() => setShowWebsiteView((e) => !e)}
-                >
-                  <VerticalSplitRoundedIcon
-                    sx={{
-                      fill: showWebsiteView
-                        ? theme.textColor3
-                        : theme.buttonColor,
-                    }}
-                  />
-                </IconButton>
-              </Box>
 
               <div className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}>
                 <div
                   style={{
-                    height: "calc(100vh - 90px)",
-                    borderTopLeftRadius: "0px",
+                    minHeight: 700,
+                    height: "calc(100vh - 75px)",
                   }}
                 >
                   <Editor
@@ -1032,16 +925,13 @@ export default function EditorPage(props) {
                     }}
                   />
                 </div>
-                <div className="mb-3 d-flex gap-2 flex-wrap"></div>
               </div>
 
               <div className={`${tab === Tab.Props ? "" : "visually-hidden"}`}>
                 <div
-                  //  className="form-control"
-
                   style={{
-                    height: "calc(100vh - 90px)",
-                    borderTopLeftRadius: "0px",
+                    minHeight: 700,
+                    height: "calc(100vh - 75px)",
                   }}
                 >
                   <Editor
@@ -1062,7 +952,7 @@ export default function EditorPage(props) {
                     }}
                   />
                 </div>
-                <div className=" mb-3">^^ Props for debugging (in JSON)</div>
+                {/* <div className=" mb-3">^^ Props for debugging (in JSON)</div> */}
                 {propsError && (
                   <pre className="alert alert-danger">{propsError}</pre>
                 )}
@@ -1076,14 +966,10 @@ export default function EditorPage(props) {
                 }`}
               >
                 <div
-                  className="mb-3"
                   style={{
-                    paddingTop: "20px",
-                    padding: "20px",
-                    border: "1px solid rgb(206, 212, 218)",
-                    appearance: "none",
-                    borderRadius: "0.375rem",
-                    height: "70vh",
+                    paddingInline: 16,
+                    minHeight: 700,
+                    height: "calc(100vh - 75px)",
                   }}
                 >
                   <Widget
@@ -1159,6 +1045,8 @@ export default function EditorPage(props) {
           </Allotment.Pane>
         </Allotment>
       </Box>
+
+      <Footer />
     </>
   );
 }

@@ -1,8 +1,6 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import CommitRoundedIcon from "@mui/icons-material/CommitRounded";
-import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
 import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 
 import camelToNormal from "../../../libs/camelToNormal";
@@ -10,21 +8,19 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import { EditorContext } from "../../../context/EditorContext";
 
 import DiamondRoundedIcon from "@mui/icons-material/DiamondRounded";
-import VerticalSplitRoundedIcon from "@mui/icons-material/VerticalSplitRounded";
 import { ButtonBase, Tooltip } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import { Widget, useNear, useAccount } from "near-social-vm";
+import { Widget, useAccount } from "near-social-vm";
 
 export default function Activitybar(props) {
   const history = useHistory();
   const account = useAccount();
-
   const { theme } = useContext(ThemeContext);
-  const { setShowWebsiteView } = useContext(EditorContext);
+
   return (
     <div
       style={{
-        minHeight: "max(100vh, 700px)",
+        minHeight: "max(calc(100vh - 25px), 700px)",
         height: "100%",
 
         width: 50,
@@ -104,6 +100,7 @@ export default function Activitybar(props) {
             )
           }
           label="profile"
+          sx={{ opacity: 1 }}
         />
 
         {/* <img
@@ -121,7 +118,7 @@ export default function Activitybar(props) {
   );
 }
 
-const ActivityButton = ({ icon, label, onClick }) => {
+const ActivityButton = ({ icon, label, onClick, sx }) => {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity, setSelectedActivity } = useContext(EditorContext);
 
@@ -146,6 +143,7 @@ const ActivityButton = ({ icon, label, onClick }) => {
                 : "rgba(0,0,0,.05)!important"
               : "transparent",
           opacity: selectedActivity === label ? 1 : 0.5,
+          ...sx,
         }}
         onClick={() =>
           onClick

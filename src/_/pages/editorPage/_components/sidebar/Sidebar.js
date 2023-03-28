@@ -22,6 +22,10 @@ export default function Sidebar({
   handleCreateButton,
   setShowRenameModal,
   setShowOpenModal,
+
+  // For ProfileSidebar
+  logOut,
+  requestSignIn,
 }) {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity } = useContext(EditorContext);
@@ -57,7 +61,9 @@ export default function Sidebar({
               <SearchSidebar loadFile={loadFile} />
             )) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
-            (selectedActivity === "profile" && <ProfileSidebar />) ||
+            (selectedActivity === "profile" && (
+              <ProfileSidebar logOut={logOut} requestSignIn={requestSignIn} />
+            )) ||
             // (selectedActivity === "extensions" && <ExtensionsSidebar />) ||
             // (selectedActivity === "sourceControl" && (
             //   <SourceControlSidebar />

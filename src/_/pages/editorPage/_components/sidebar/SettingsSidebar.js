@@ -68,6 +68,7 @@ const ChangeEditorFontSizeButton = () => {
         >
           <MenuItem value="10px">10px</MenuItem>
           <MenuItem value="12px">12px</MenuItem>
+          <MenuItem value="14px">14px</MenuItem>
           <MenuItem value="16px">16px</MenuItem>
           <MenuItem value="20px">20px</MenuItem>
           <MenuItem value="24px">24px</MenuItem>
