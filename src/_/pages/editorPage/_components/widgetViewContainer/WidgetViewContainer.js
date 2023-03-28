@@ -26,7 +26,8 @@ export default function WidgetViewContainer({
         flexDirection: "column",
         backgroundColor: theme.ui,
         flex: 1,
-        height: "100%",
+        height: "calc(100vh - 75px)",
+        minHeight: 700,
         // color: "#FFF",
       }}
     >

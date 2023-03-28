@@ -18,109 +18,109 @@ export default function ProfileSidebar({ logOut, requestSignIn }) {
 
   return (
     <div style={{ minWidth: 250 }}>
-      {account.accountId ? (
-        <>
+      <div
+        style={{
+          height: 50,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          paddingInline: 10,
+          borderBottom: `1px solid ${theme.borderColor}`,
+        }}
+      >
+        <Typography
+          variant="h6"
+          sx={{ fontWeight: 500, color: theme.textColor }}
+        >
+          Profile
+        </Typography>
+      </div>
+
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          padding: 2,
+          gap: 2,
+
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
           <div
             style={{
-              height: 50,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              paddingInline: 10,
-              borderBottom: `1px solid ${theme.borderColor}`,
+              maxWidth: 250,
+              width: 250,
+              minWidth: "150",
+
+              aspectRatio: 1 / 1,
+              objectFit: "cover",
+              borderRadius: "50%",
+
+              outline: `2px solid ${theme.textColor3}`,
+              overflow: "hidden",
             }}
           >
-            <Typography
-              variant="h6"
-              sx={{ fontWeight: 500, color: theme.textColor }}
-            >
-              Profile
+            <Widget src="eugenethedream/widget/ProfileImage" />
+          </div>
+          <div
+            style={{
+              paddingTop: 16,
+              paddingBottom: 8,
+              textAlign: "center",
+            }}
+          >
+            <Typography variant="h3" style={{ color: theme.textColor }}>
+              <Widget src="eugenethedream/widget/ProfileName" />
+            </Typography>
+            <Typography variant="p1" style={{ color: theme.textColor3 }}>
+              @{account.accountId || "Not_logged_in"}
             </Typography>
           </div>
+        </Box>
 
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              padding: 2,
-              gap: 2,
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            flexWrap: "wrap",
+          }}
+        >
+          <IconButton sx={{ color: theme.buttonColor }}>
+            <TwitterIcon
+              sx={{ fill: theme.buttonColor, fontSize: "1.25rem" }}
+            />
+          </IconButton>
 
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <div
-                style={{
-                  maxWidth: 250,
-                  width: 250,
-                  minWidth: "150",
+          <IconButton sx={{ color: theme.buttonColor }}>
+            <FacebookRoundedIcon
+              sx={{ fill: theme.buttonColor, fontSize: "1.25rem" }}
+            />
+          </IconButton>
 
-                  aspectRatio: 1 / 1,
-                  objectFit: "cover",
-                  borderRadius: "50%",
+          <IconButton sx={{ color: theme.buttonColor }}>
+            <LanguageRoundedIcon
+              sx={{ fill: theme.buttonColor, fontSize: "1.25rem" }}
+            />
+          </IconButton>
+        </Box>
 
-                  outline: `2px solid ${theme.textColor3}`,
-                  overflow: "hidden",
-                }}
-              >
-                <Widget src="eugenethedream/widget/ProfileImage" />
-              </div>
-              <div
-                style={{
-                  paddingTop: 16,
-                  paddingBottom: 8,
-                  textAlign: "center",
-                }}
-              >
-                <Typography variant="h3" style={{ color: theme.textColor }}>
-                  <Widget src="eugenethedream/widget/ProfileName" />
-                </Typography>
-                <Typography variant="p1" style={{ color: theme.textColor3 }}>
-                  @{account.accountId || "Not_logged_in"}
-                </Typography>
-              </div>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                gap: 1,
-                flexWrap: "wrap",
-              }}
-            >
-              <IconButton sx={{ color: theme.buttonColor }}>
-                <TwitterIcon
-                  sx={{ fill: theme.buttonColor, fontSize: "1.25rem" }}
-                />
-              </IconButton>
-
-              <IconButton sx={{ color: theme.buttonColor }}>
-                <FacebookRoundedIcon
-                  sx={{ fill: theme.buttonColor, fontSize: "1.25rem" }}
-                />
-              </IconButton>
-
-              <IconButton sx={{ color: theme.buttonColor }}>
-                <LanguageRoundedIcon
-                  sx={{ fill: theme.buttonColor, fontSize: "1.25rem" }}
-                />
-              </IconButton>
-            </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                gap: 2,
-                flexWrap: "wrap",
-              }}
-            >
+        <Box
+          sx={{
+            display: "flex",
+            gap: 2,
+            flexWrap: "wrap",
+          }}
+        >
+          {account.accountId ? (
+            <>
               <CustomButton sx={{ height: 40 }}>Edit Profile</CustomButton>
 
               <CustomButton
@@ -141,32 +141,35 @@ export default function ProfileSidebar({ logOut, requestSignIn }) {
               >
                 Sign Out
               </CustomButton>
-            </Box>
-          </Box>
-        </>
-      ) : (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "calc(100vh - 50px)",
-          }}
-        >
-          <button
-            className="btn btn-primary"
-            style={{
-              backgroundColor: theme.buttonColor,
-              paddingInline: 16,
-              borderRadius: 4,
-              fontWeight: 500,
-            }}
-            onClick={() => requestSignIn()}
-          >
-            Login
-          </button>
+            </>
+          ) : (
+            <CustomButton
+              className="btn btn-primary"
+              style={{
+                height: 40,
+                backgroundColor: theme.buttonColor,
+                paddingInline: 24,
+              }}
+              onClick={() => requestSignIn()}
+            >
+              Login
+            </CustomButton>
+          )}
         </Box>
-      )}
+      </Box>
     </div>
   );
 }
+
+// ) : (
+//   <Box
+//     sx={{
+//       display: "flex",
+//       justifyContent: "center",
+//       alignItems: "center",
+//       height: "calc(100vh - 50px)",
+//     }}
+//   >
+
+//   </Box>
+// )}
