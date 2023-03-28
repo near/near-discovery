@@ -12,7 +12,7 @@ export default function OpenModal(props) {
   return (
     <Modal centered scrollable show={show} onHide={onHide}>
       <Modal.Header closeButton>
-        <Modal.Title>Create New Component</Modal.Title>
+        <Modal.Title>Create Component</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <label htmlFor="widget-src-input" className="form-label text-secondary">

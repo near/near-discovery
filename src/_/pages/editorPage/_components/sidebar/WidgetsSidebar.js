@@ -118,7 +118,7 @@ export default function WidgetsSidebar({
           sx={{ backgroundColor: theme.backgroundColor }}
         >
           <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
-            Open Editors
+            Open Widgets
           </Typography>
         </AccordionSummary>
         <AccordionDetails sx={{ backgroundColor: theme.ui }}>

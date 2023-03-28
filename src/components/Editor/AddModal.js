@@ -35,7 +35,7 @@ export default function OpenModal({ onHide, onOpen, onNew, show }) {
               onHide();
             }}
           >
-            Create New Component
+            Create Component
           </button>
         </div>
       </Modal.Body>

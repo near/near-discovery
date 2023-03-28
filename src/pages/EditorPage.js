@@ -742,12 +742,10 @@ export default function EditorPage(props) {
             width: "460px",
           }}
         >
-          <h4 style={{ lineHeight: "50px" }}>
-            Welcome to the Component Sandbox!
-          </h4>
+          <h4 style={{ lineHeight: "50px" }}>Welcome to the NearPad!</h4>
           <p className="text-secondary">
-            Use this sandbox to create, inspect, modify, and compose components
-            to create new experiences on NEAR.
+            Build, Test and Deploy decentralized frontend components for NEAR
+            BOS Gateways - NEAR.social, BOS.gg, Alpha.near.org and more.
           </p>
           <div className="d-flex justify-content-center mt-5">
             <button
@@ -767,7 +765,7 @@ export default function EditorPage(props) {
                 setShowAddModal(false), createNewFile(Filetype.Widget)
               )}
             >
-              Create New Component
+              Create Component
             </button>
           </div>
         </div>

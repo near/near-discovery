@@ -68,7 +68,7 @@ export default function EmptyEditorDialog({
             textAlign="center"
             sx={{ color: theme.textColor2 }}
           >
-            Welcome to the Component Sandbox!
+            Welcome to the NearPad!
           </Typography>
 
           <Typography
@@ -76,8 +76,8 @@ export default function EmptyEditorDialog({
             textAlign="center"
             sx={{ color: theme.textColor2 }}
           >
-            Use this sandbox to create, inspect, modify, and compose components
-            to create new experiences on NEAR.
+            Build, Test and Deploy decentralized frontend components for NEAR
+            BOS Gateways - NEAR.social, BOS.gg, Alpha.near.org and more.
           </Typography>
         </Box>
 
@@ -107,7 +107,7 @@ export default function EmptyEditorDialog({
             createNewFile(Filetype.Widget);
           }}
         >
-          Create New Component
+          Create Component
         </CustomButton>
       </DialogContent>
     </Dialog>

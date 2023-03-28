@@ -4,7 +4,10 @@ import React, { useContext } from "react";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import FacebookRoundedIcon from "@mui/icons-material/FacebookRounded";
 import LanguageRoundedIcon from "@mui/icons-material/LanguageRounded";
+import Button from "@mui/material/Button";
+
 import { Widget, useAccount } from "near-social-vm";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import CustomButton from "../../../../components/custom/CustomButton";
 import { ThemeContext } from "../../../../context/ThemeContext";
@@ -105,7 +108,18 @@ export default function ProfileSidebar() {
           </IconButton>
         </Box>
 
-        <CustomButton>Edit Profile</CustomButton>
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            flexWrap: "wrap",
+          }}
+        >
+          <CustomButton>Edit Profile</CustomButton>
+          <Button variant="outlined" startIcon={<LogoutIcon />}>
+            Sign Out
+          </Button>
+        </Box>
       </Box>
     </div>
   );
