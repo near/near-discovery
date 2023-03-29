@@ -756,6 +756,8 @@ export default function EditorPage(props) {
 
   const showEditor = !(files?.length === 1 && files[0]?.unnamed === true);
 
+  const isModule = path?.type === "module";
+
   return (
     <>
       <div
@@ -863,11 +865,10 @@ export default function EditorPage(props) {
                       <Nav.Item key={jp}>
                         <TopMenu>
                           <Nav.Link
-                            className="text-decoration-none d-flex "
+                            className="text-decoration-none d-flex"
                             eventKey={jp}
                           >
                             <div className="d-flex">
-                              {/* X1 */}
                               {isDraft && <div className="draft">Draft</div>}
                               <div>{widgetName}</div>
                               {codeChangesPresent && (
