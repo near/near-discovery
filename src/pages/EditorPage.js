@@ -14,6 +14,7 @@ import {
 import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
 import RenameModal from "../components/Editor/RenameModal";
 import OpenModal from "../components/Editor/OpenModal";
+import OpenModuleModal from "../components/Editor/OpenModuleModal";
 import AddModal from "../components/Editor/AddModal";
 import CreateModal from "../components/Editor/CreateModal";
 import { SaveDraftModal } from "../components/SaveDraft";
@@ -82,6 +83,8 @@ const EditorLayoutKey = LsKey + "editorLayout:";
 const WidgetPropsKey = LsKey + "widgetProps:";
 
 const DefaultEditorCode = "return <div>Hello World</div>;";
+const DefaultEditorModuleCode =
+  "function square(number) {\n  return number * number;\n}\n";
 
 const Tab = {
   Editor: "Editor",
@@ -503,7 +506,10 @@ export default function EditorPage(props) {
     (type) => {
       const path = generateNewName(type);
       path.unnamed = undefined;
-      openFile(path, DefaultEditorCode);
+      openFile(
+        path,
+        type === Filetype.Module ? DefaultEditorModuleCode : DefaultEditorCode
+      );
     },
     [generateNewName, openFile]
   );
