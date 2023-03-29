@@ -1,4 +1,6 @@
-# NEAR Discovery (BOS)
+# NEAR Discovery (BOS) - 💧 GenaDrop
+
+This repo is the Blockchain Operating System version of GenaDrop only on NEAR
 
 ## Setup & Development
 
