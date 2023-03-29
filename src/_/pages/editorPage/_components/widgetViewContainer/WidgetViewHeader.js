@@ -1,4 +1,13 @@
-import { Divider, IconButton, Tooltip, Typography } from "@mui/material";
+import {
+  Divider,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
@@ -10,6 +19,12 @@ import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 
 import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
+import {
+  Cloud,
+  ContentCopy,
+  ContentCut,
+  ContentPaste,
+} from "@mui/icons-material";
 
 export default function WidgetViewHeader({
   onRunButtonClick,
@@ -82,7 +97,6 @@ export default function WidgetViewHeader({
             <PlayArrowRoundedIcon sx={{ fill: theme.buttonColor }} />
           </IconButton>
         </Tooltip>
-
         <Tooltip title="Share Widget" placement="bottom">
           <IconButton
             sx={{ color: "#198754" || theme.textColor2 }}
@@ -93,7 +107,6 @@ export default function WidgetViewHeader({
             />
           </IconButton>
         </Tooltip>
-
         <div
           style={{
             width: 1.5,
@@ -102,7 +115,6 @@ export default function WidgetViewHeader({
             backgroundColor: theme.borderColor,
           }}
         />
-
         <Tooltip title="Fork" placement="bottom">
           <IconButton
             sx={{ color: theme.textColor2 }}
@@ -113,23 +125,21 @@ export default function WidgetViewHeader({
             />
           </IconButton>
         </Tooltip>
-
-        <Tooltip title="Publish Widget" placement="bottom">
+        {/* <Tooltip title="Publish Widget" placement="bottom">
           <IconButton sx={{ color: theme.textColor2 }}>
             <PublicRoundedIcon
               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
             />
           </IconButton>
-        </Tooltip>
-
-        <Tooltip title="Open in a new tab" placement="bottom">
+        </Tooltip> */}
+        {/* <Tooltip title="Open in a new tab" placement="bottom">
           <IconButton sx={{ color: theme.textColor2 }}>
             <OpenInNewRoundedIcon
               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
             />
           </IconButton>
-        </Tooltip>
-
+        </Tooltip> */}
+        <OpenInNewTabMenu />>
         {/* <ActivityButton
           icon={<VerticalSplitRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="showWebsite"
@@ -148,3 +158,86 @@ export default function WidgetViewHeader({
     </Box>
   );
 }
+
+const OpenInNewTabMenu = () => {
+  const { theme } = useContext(ThemeContext);
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Tooltip title="Open in a new tab" placement="bottom">
+        <IconButton
+          aria-label="more"
+          id="long-button"
+          aria-controls={open ? "long-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
+          aria-haspopup="true"
+          onClick={handleClick}
+        >
+          <OpenInNewRoundedIcon
+            sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+          />
+        </IconButton>
+      </Tooltip>
+
+      <Menu
+        id="long-menu"
+        MenuListProps={{
+          "aria-labelledby": "long-button",
+        }}
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        PaperProps={{
+          style: {
+            // maxHeight: 3 * 4.5,
+            width: "20ch",
+
+            backgroundColor: theme.ui,
+          },
+        }}
+      >
+        <MenuItem>
+          <ListItemText sx={{ color: theme.textColor }}>Bos.gg</ListItemText>
+
+          <ListItemIcon>
+            <OpenInNewRoundedIcon
+              sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+            />
+          </ListItemIcon>
+        </MenuItem>
+
+        <MenuItem>
+          <ListItemText sx={{ color: theme.textColor }}>
+            Near.Social
+          </ListItemText>
+          <ListItemIcon>
+            <OpenInNewRoundedIcon
+              sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+            />
+          </ListItemIcon>
+        </MenuItem>
+
+        <MenuItem>
+          <ListItemText sx={{ color: theme.textColor }}>
+            Alpha.Near
+          </ListItemText>
+
+          <ListItemIcon>
+            <OpenInNewRoundedIcon
+              sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+            />
+          </ListItemIcon>
+        </MenuItem>
+      </Menu>
+    </>
+  );
+};

@@ -50,15 +50,13 @@ export const ThemeContextProvider = (props) => {
     name: "dark",
   };
 
-  const toggleDarkMode = () => {
-    setEnableDarkMode(!enableDarkMode);
-  };
-
-  const theme = enableDarkMode ? dark : light;
+  // const theme = enableDarkMode ? dark : light;
 
   useEffect(() => {
-    setEditorFontSize(localStorage.getItem("editorFontSize"));
-    SetEnableDarkMode(localStorage.getItem("enableDarkMode"));
+    setEditorFontSize(localStorage.getItem("editorFontSize") || "14px");
+    const enableDarkMode = localStorage.getItem("enableDarkMode");
+    console.log("enableDarkMode : ", typeof enableDarkMode, enableDarkMode);
+    setEnableDarkMode(enableDarkMode === "true" ? true : false);
   }, []);
 
   const setEditorFontSize = (value) => {
@@ -75,12 +73,11 @@ export const ThemeContextProvider = (props) => {
   return (
     <ThemeContext.Provider
       value={{
-        enableDarkMode,
         light,
         dark,
-        toggleDarkMode,
+        enableDarkMode,
         setEnableDarkMode,
-        theme,
+        theme: enableDarkMode ? dark : light,
         editorFontSize,
         setEditorFontSize,
       }}

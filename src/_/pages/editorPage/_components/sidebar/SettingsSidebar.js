@@ -2,6 +2,7 @@ import { MenuItem, Select, Switch, Typography } from "@mui/material";
 
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
+import { EditorContext } from "../../../../context/EditorContext";
 import { ThemeContext } from "../../../../context/ThemeContext";
 
 export default function SettingsSidebar() {
@@ -30,10 +31,50 @@ export default function SettingsSidebar() {
       <div>
         <EnableDarkModeButton />
         <ChangeEditorFontSizeButton />
+        <ChangeEnvButton />
       </div>
     </div>
   );
 }
+
+const ChangeEnvButton = () => {
+  const { theme } = useContext(ThemeContext);
+  const { NetworkId, setNetworkId } = useContext(EditorContext);
+
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingInline: 1,
+        borderBottom: `1px solid ${theme.borderColor}`,
+        height: 50,
+      }}
+    >
+      <Typography
+        variant="p1"
+        sx={{ fontWeight: 500, color: theme.textColor2 }}
+      >
+        Environment
+      </Typography>
+
+      <div className="SelectContainer">
+        <Select
+          size="small"
+          value={NetworkId}
+          onChange={(e) => setNetworkId(e.target.value)}
+          displayEmpty
+          inputProps={{ classes: { icon: "white-icon" } }}
+          sx={{ outline: "none", border: "none", color: theme.textColor }}
+        >
+          <MenuItem value="testnet">Testnet</MenuItem>
+          <MenuItem value="mainnet">Mainnet</MenuItem>
+        </Select>
+      </div>
+    </Box>
+  );
+};
 
 const ChangeEditorFontSizeButton = () => {
   const { theme, editorFontSize, setEditorFontSize } = useContext(ThemeContext);

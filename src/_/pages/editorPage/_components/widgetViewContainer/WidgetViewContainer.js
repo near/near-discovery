@@ -5,7 +5,7 @@ import { ThemeContext } from "../../../../context/ThemeContext";
 import WidgetViewHeader from "./WidgetViewHeader";
 
 import { Widget } from "near-social-vm";
-import CustomButton from "../../../../components/custom/CustomButton";
+// import CustomButton from "../../../../components/custom/CustomButton";
 
 export default function WidgetViewContainer({
   parsedWidgetProps,
@@ -26,7 +26,7 @@ export default function WidgetViewContainer({
         flexDirection: "column",
         backgroundColor: theme.ui,
         flex: 1,
-        height: "calc(100vh - 75px)",
+        height: "calc(100vh - 25px)",
         minHeight: 700,
         // color: "#FFF",
       }}

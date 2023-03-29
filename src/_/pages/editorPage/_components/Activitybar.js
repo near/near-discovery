@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+// import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 
 import camelToNormal from "../../../libs/camelToNormal";
 import { ThemeContext } from "../../../context/ThemeContext";
@@ -69,6 +71,23 @@ export default function Activitybar(props) {
           label="showWebsite"
           onClick={() => setShowWebsiteView((e) => !e)}
         /> */}
+
+        <ActivityButton
+          icon={<HelpOutlineRoundedIcon sx={{ fill: theme.textColor4 }} />}
+          label="Documentation"
+          onClick={() => {}}
+          // to=""
+        />
+
+        <ActivityButton
+          icon={
+            <SettingsOutlinedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.4rem" }}
+            />
+          }
+          label="settings"
+        />
+
         <ActivityButton
           icon={
             props.signedIn ? (
@@ -108,11 +127,6 @@ export default function Activitybar(props) {
           src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
           alt="profile-art"
         /> */}
-
-        <ActivityButton
-          icon={<SettingsRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="settings"
-        />
       </div>
     </div>
   );

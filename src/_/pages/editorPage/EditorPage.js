@@ -690,9 +690,9 @@ export default function EditorPage(props) {
       className="btn btn-outline-primary"
       onClick={() => {
         setRenderCode(code);
-        if (layout === Layout.Tabs) {
-          setTab(Tab.Widget);
-        }
+        // if (layout === Layout.Tabs) {
+        //   setTab(Tab.Widget);
+        // }
       }}
     >
       Render Preview
@@ -700,9 +700,9 @@ export default function EditorPage(props) {
   );
   const handlePreviewButton = () => {
     setRenderCode(code);
-    if (layout === Layout.Tabs) {
-      setTab(Tab.Widget);
-    }
+    // if (layout === Layout.Tabs) {
+    //   setTab(Tab.Widget);
+    // }
   };
 
   const openCreateButton = (

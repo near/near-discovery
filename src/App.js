@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
@@ -15,8 +15,9 @@ import EmbedPage from "./pages/EmbedPage";
 import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
-import { NetworkId, Widgets } from "./data/widgets";
+// import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
+import { EditorContext } from "./_/context/EditorContext";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -49,6 +50,8 @@ const StyledApp = styled.div`
 export const refreshAllowanceObj = {};
 
 function App(props) {
+  const { NetworkId, Widgets } = useContext(EditorContext);
+
   const [connected, setConnected] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [signedAccountId, setSignedAccountId] = useState(null);
@@ -66,9 +69,11 @@ function App(props) {
   useEffect(() => {
     initNear &&
       initNear({
-        networkId: NetworkId,
+        networkId: localStorage.getItem("environment"),
       });
-  }, [initNear]);
+
+    console.log("NetworkId ======= APP ====> ", NetworkId);
+  }, [initNear, NetworkId]);
 
   useEffect(() => {
     if (
@@ -89,7 +94,7 @@ function App(props) {
         setupModal(selector, { contractId: near.config.contractName })
       );
     });
-  }, [near]);
+  }, [near, NetworkId]);
 
   const requestSignIn = useCallback(
     (e) => {
