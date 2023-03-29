@@ -31,5 +31,57 @@
     <div id="root"></div>
     <!-- NEAR Discovery Zendesk Support Widget -->
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"> </script>
+    <!-- https://developer.zendesk.com/api-reference/widget/core/ and https://developer.zendesk.com/api-reference/widget/settings/ -->
+    <script type="text/javascript">
+      zE('webWidget:on', 'open', function() {
+        console.log('The widget has been opened!');
+      });
+      window.zESettings = {
+        webWidget: {
+          color: { theme: '#2b2f31' },
+          contactOptions: {
+            enabled: true,
+            contactButton: { '*': 'Get in touch' }
+          },
+          contactForm: {
+            attachments: false,
+            title: { '*' : "Custom Title" },
+          },
+          launcher: {
+            chatLabel: {
+              '*': 'Chat now'
+            },
+            mobile: {
+              labelVisible: false,
+              // non functional
+              label: { '*': '?' },
+              offset: { horizontal: '100px', vertical: '150px' }
+            }
+          }
+        }
+      }
+      zE(function() {
+        //zE.hide();  
+        zE.identify({
+          name: 'John Citizen',
+          email: 'john@example.com', // hacky option to grab from div.profile-username
+          organization: 'VIP'
+        });
+      });
+          
+    </script>
+
+
+
+
+
+
+Based on feedback from Alex - intent is to see if we can: 
+* Move it up and to the right on mobile 
+* Shrink label to (?)
+* Reduce opacity
+* Grey - reach out to corwin for palette (using 2b2f31 for now based on inspector)
+* Hide dynamically? Add an exit button - get rid of it for rest of session - zE.hide(); will do this
+* Hide on certain pages? (Scope to only homepage, for example)
   </body>
 </html>
