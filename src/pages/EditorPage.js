@@ -575,20 +575,20 @@ export default function EditorPage(props) {
   );
 
   const widgetName = path?.name?.split("/")[0];
-  const widgetPathName = path?.name;
-  // const isDraft = path?.name?.split("/")[2] === "draft";
 
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
   const jpath = JSON.stringify(path);
 
-  const createOpenDraftButton = (
+  const saveDraftButton = (
     <button
-      className="btn btn-primary"
+      className="btn btn-outline-primary me-2"
+      disabled={!widgetName}
       onClick={(e) => {
-        openDraft(widgetName);
+        e.preventDefault();
+        setShowSaveDraftModal(true);
       }}
     >
-      Open a Draft Version
+      Save Version
     </button>
   );
 
@@ -1270,17 +1270,19 @@ export default function EditorPage(props) {
                               />
                             </div>
                           ) : (
-                            <div
-                              style={{
-                                padding: 0,
-                                margin: 0,
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center",
-                              }}
-                            >
-                              {renderPreviewButton}
-                            </div>
+                            !isModule && (
+                              <div
+                                style={{
+                                  padding: 0,
+                                  margin: 0,
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                }}
+                              >
+                                {renderPreviewButton}
+                              </div>
+                            )
                           )}
                         </div>
                       </div>
