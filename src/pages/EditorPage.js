@@ -958,58 +958,94 @@ export default function EditorPage(props) {
                           marginTop: "9px",
                         }}
                       >
-                        <li className="nav-item">
-                          <button
-                            className={`nav-link ${
-                              tab === Tab.Editor ? "active" : "text-secondary"
-                            }`}
-                            aria-current="page"
-                            onClick={() => setTab(Tab.Editor)}
-                          >
-                            Component
-                          </button>
-                        </li>
-                        <li className="nav-item">
-                          <button
-                            className={`nav-link ${
-                              tab === Tab.Props ? "active" : "text-secondary"
-                            }`}
-                            aria-current="page"
-                            onClick={() => setTab(Tab.Props)}
-                          >
-                            Props
-                          </button>
-                        </li>
-                        {props.widgets.widgetMetadataEditor && (
+                        {isModule && (
                           <li className="nav-item">
                             <button
                               className={`nav-link ${
-                                tab === Tab.Metadata
-                                  ? "active"
-                                  : "text-secondary"
+                                tab === Tab.Editor ? "active" : "text-secondary"
                               }`}
                               aria-current="page"
-                              onClick={() => setTab(Tab.Metadata)}
+                              onClick={() => setTab(Tab.Editor)}
                             >
-                              Metadata
+                              Module
                             </button>
                           </li>
                         )}
-                        {layout === Layout.Tabs && (
-                          <li className="nav-item">
-                            <button
-                              className={`nav-link ${
-                                tab === Tab.Widget ? "active" : "text-secondary"
-                              }`}
-                              aria-current="page"
-                              onClick={() => {
-                                setRenderCode(code);
-                                setTab(Tab.Widget);
-                              }}
-                            >
-                              Component Preview
-                            </button>
-                          </li>
+                        {isModule || (
+                          <>
+                            <li className="nav-item">
+                              <button
+                                className={`nav-link ${
+                                  tab === Tab.Editor
+                                    ? "active"
+                                    : "text-secondary"
+                                }`}
+                                aria-current="page"
+                                onClick={() => setTab(Tab.Editor)}
+                              >
+                                Component
+                              </button>
+                            </li>
+                            <li className="nav-item">
+                              <button
+                                className={`nav-link ${
+                                  tab === Tab.Props
+                                    ? "active"
+                                    : "text-secondary"
+                                }`}
+                                aria-current="page"
+                                onClick={() => setTab(Tab.Props)}
+                              >
+                                Props
+                              </button>
+                            </li>
+                            {/* <li className="nav-item">
+                          <button
+                            className={`nav-link ${
+                              tab === Tab.ModulesUsed
+                                ? "active"
+                                : "text-secondary"
+                            }`}
+                            aria-current="page"
+                            onClick={() => setTab(Tab.ModulesUsed)}
+                          >
+                            {Tab.ModulesUsed}
+                          </button>
+                        </li> */}
+                            {props.widgets.widgetMetadataEditor && (
+                              <li className="nav-item">
+                                <button
+                                  className={`nav-link ${
+                                    tab === Tab.Metadata
+                                      ? "active"
+                                      : "text-secondary"
+                                  }`}
+                                  aria-current="page"
+                                  onClick={() => setTab(Tab.Metadata)}
+                                >
+                                  Metadata
+                                </button>
+                              </li>
+                            )}
+                            {layout === Layout.Tabs && (
+                              <li className="nav-item">
+                                <button
+                                  className={`nav-link ${
+                                    tab === Tab.Widget
+                                      ? "active"
+                                      : "text-secondary"
+                                  }`}
+                                  aria-current="page"
+                                  onClick={() => {
+                                    setRenderCode(code);
+                                    setTab(Tab.Widget);
+                                  }}
+                                >
+                                  Component Preview
+                                </button>
+                              </li>
+                            )}
+                          </>
                         )}
                       </ul>
                     </div>
