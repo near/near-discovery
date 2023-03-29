@@ -637,7 +637,7 @@ export default function EditorPage(props) {
       disabled={!widgetName}
       near={near}
       data={{
-        widget: {
+        [path?.type]: {
           [widgetName]: {
             "": code,
             metadata,
