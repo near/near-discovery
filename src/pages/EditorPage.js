@@ -854,6 +854,7 @@ export default function EditorPage(props) {
             near={near}
             widgetPath={widgetPath}
             widgetName={widgetName}
+            type={path?.type}
             code={code}
           />
           <div className="">
