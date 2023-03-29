@@ -113,6 +113,7 @@ export default function EditorPage(props) {
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [showOpenModal, setShowOpenModal] = useState(false);
+  const [showOpenModuleModal, setShowOpenModuleModal] = useState(false);
   const [showCreateModal, setShowCreateModal] = useState(false);
 
   const [renderCode, setRenderCode] = useState(code);
@@ -189,7 +190,7 @@ export default function EditorPage(props) {
   );
 
   useEffect(() => {
-    const widgetSrc = `${accountId}/widget/${widgetName}/**`;
+    const widgetSrc = `${accountId}/${path?.type}/${widgetName}/**`;
     const fetchCodeAndDraftOnChain = () => {
       const widgetCode = cache.socialGet(
         near,
@@ -222,7 +223,7 @@ export default function EditorPage(props) {
   const checkDrafts = () => {
     if (!widgetName || !near) return;
     files.forEach((f) => {
-      const widgetSrc = `${accountId}/widget/${f.name}/**`;
+      const widgetSrc = `${accountId}/${f.type}/${f.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
         const widgetCode = cache.socialGet(
           near,
@@ -251,8 +252,7 @@ export default function EditorPage(props) {
 
   const checkHasCodeChange = () => {
     files.forEach((f) => {
-      if (!f) return;
-      const widgetSrc = `${accountId}/widget/${f.name}/**`;
+      const widgetSrc = `${accountId}/${f.type}/${f.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
         const widgetCode = cache.socialGet(
           near,
@@ -296,7 +296,7 @@ export default function EditorPage(props) {
   };
 
   const checkHasCodeChangeSingleFile = (code) => {
-    const widgetSrc = `${accountId}/widget/${widgetName}/**`;
+    const widgetSrc = `${accountId}/${path?.type}/${widgetName}/**`;
     const fetchCodeAndDraftOnChain = () => {
       const widgetCode = cache.socialGet(
         near,
@@ -426,32 +426,8 @@ export default function EditorPage(props) {
     return { type, name };
   }, []);
 
-  const openDraft = useCallback(
-    (widgetName) => {
-      if (!widgetName || !near) {
-        return;
-      }
-      const widgetSrc = `${accountId}/widget/${widgetName}/branch/draft`;
-
-      const c = () => {
-        const draftCode = cache.socialGet(
-          near,
-          widgetSrc,
-          false,
-          undefined,
-          undefined,
-          c
-        );
-        openFile(toPath(Filetype.Widget, widgetSrc), draftCode || code);
-      };
-
-      c();
-    },
-    [accountId, openFile, toPath, near, cache]
-  );
-
   const loadFile = useCallback(
-    (nameOrPath) => {
+    (nameOrPath, type = Filetype.Widget) => {
       if (!near) {
         return;
       }
@@ -459,7 +435,7 @@ export default function EditorPage(props) {
       let widgetSrc =
         nameOrPath.indexOf("/") >= 0
           ? nameOrPath
-          : `${accountId}/widget/${nameOrPath}`;
+          : `${accountId}/${type.toLocaleLowerCase()}/${nameOrPath}`;
 
       const widget = `${widgetSrc}/**`;
 
@@ -478,7 +454,7 @@ export default function EditorPage(props) {
         const currentCode = draftCode || mainCode;
 
         if (currentCode) {
-          openFile(toPath(Filetype.Widget, widgetSrc), currentCode);
+          openFile(toPath(type, widgetSrc), currentCode);
         }
       };
 
