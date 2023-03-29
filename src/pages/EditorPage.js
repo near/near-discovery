@@ -655,26 +655,13 @@ export default function EditorPage(props) {
     </CommitButton>
   );
 
-  const saveDraftButton = (
-    <button
-      className="btn btn-outline-primary me-2"
-      disabled={!widgetName}
-      onClick={(e) => {
-        e.preventDefault();
-        setShowSaveDraftModal(true);
-      }}
-    >
-      Save Version
-    </button>
-  );
-
   const publishButton = (
     <CommitButton
       className={`btn btn-primary`}
       disabled={!widgetName}
       near={near}
       data={{
-        widget: {
+        [path?.type]: {
           [widgetName]: {
             "": code,
             metadata,
