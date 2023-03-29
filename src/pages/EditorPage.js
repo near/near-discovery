@@ -830,6 +830,14 @@ export default function EditorPage(props) {
               setShowRenameModal(true),
               createNewFile(Filetype.Widget)
             )}
+            onOpenModule={() => (
+              setShowAddModal(false), setShowOpenModuleModal(true)
+            )}
+            onNewModule={() => (
+              setShowAddModal(false),
+              setShowRenameModal(true),
+              createNewFile(Filetype.Module)
+            )}
             onHide={() => setShowAddModal(false)}
           />
           <CreateModal
