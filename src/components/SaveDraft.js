@@ -10,6 +10,7 @@ export const SaveDraftModal = (props) => {
   const show = props.show;
   const onHide = props.onHide;
   const near = props.near;
+  const type = props.type;
 
   const onCancel = (e) => {
     e.preventDefault();
@@ -54,7 +55,7 @@ export const SaveDraftModal = (props) => {
                 keys: [widgetPath],
               },
             },
-            widget: {
+            [type]: {
               [props.widgetName]: {
                 branch: {
                   draft: {
