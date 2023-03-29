@@ -817,6 +817,11 @@ export default function EditorPage(props) {
             onOpen={(newName) => loadFile(newName)}
             onHide={() => setShowOpenModal(false)}
           />
+          <OpenModuleModal
+            show={showOpenModuleModal}
+            onOpen={(newName) => loadFile(newName, Filetype.Module)}
+            onHide={() => setShowOpenModuleModal(false)}
+          />
           <AddModal
             show={showAddModal}
             onOpen={() => (setShowAddModal(false), setShowOpenModal(true))}
