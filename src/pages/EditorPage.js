@@ -1159,7 +1159,9 @@ export default function EditorPage(props) {
                                 {renderPreviewButton}
                               </div>
                             )}
-                            {path && accountId && openInNewTabButton}
+                            {path?.type === "widget" &&
+                              accountId &&
+                              openInNewTabButton}
                             <div
                               className="btn-group"
                               role="group"
