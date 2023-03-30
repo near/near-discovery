@@ -54,6 +54,7 @@ export default function WidgetViewContainer({
               height: "100%",
               bgcolor: "#FFF",
               overflowX: "auto",
+              paddingBottom: "50px",
             }}
           >
             <Widget code={renderCode} props={parsedWidgetProps} />

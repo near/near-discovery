@@ -852,6 +852,7 @@ export default function EditorPage(props) {
             maxSize={450}
           >
             <Sidebar
+              appProps={props}
               loadFile={loadFile}
               // For WidgetSidebar
               renameFile={renameFile}

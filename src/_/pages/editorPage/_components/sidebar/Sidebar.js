@@ -11,6 +11,8 @@ import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
 
 export default function Sidebar({
+  appProps,
+
   loadFile,
 
   // For WidgetSidebar
@@ -62,7 +64,11 @@ export default function Sidebar({
             )) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
             (selectedActivity === "profile" && (
-              <ProfileSidebar logOut={logOut} requestSignIn={requestSignIn} />
+              <ProfileSidebar
+                logOut={logOut}
+                requestSignIn={requestSignIn}
+                appProps={appProps}
+              />
             )) ||
             // (selectedActivity === "extensions" && <ExtensionsSidebar />) ||
             // (selectedActivity === "sourceControl" && (

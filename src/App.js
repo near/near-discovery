@@ -59,6 +59,8 @@ function App(props) {
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
 
+  console.log(Widgets);
+
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();

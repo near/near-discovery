@@ -1,5 +1,4 @@
 import {
-  Divider,
   IconButton,
   ListItemIcon,
   ListItemText,
@@ -11,20 +10,15 @@ import {
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
 import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
-import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
-import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
+// import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
+// import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import ForkRightRoundedIcon from "@mui/icons-material/ForkRightRounded";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
+import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 
 import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
-import {
-  Cloud,
-  ContentCopy,
-  ContentCut,
-  ContentPaste,
-} from "@mui/icons-material";
 
 export default function WidgetViewHeader({
   onRunButtonClick,
@@ -139,7 +133,7 @@ export default function WidgetViewHeader({
             />
           </IconButton>
         </Tooltip> */}
-        <OpenInNewTabMenu />>
+        <OpenInNewTabMenu />
         {/* <ActivityButton
           icon={<VerticalSplitRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="showWebsite"
@@ -182,7 +176,7 @@ const OpenInNewTabMenu = () => {
           aria-haspopup="true"
           onClick={handleClick}
         >
-          <OpenInNewRoundedIcon
+          <PublicRoundedIcon
             sx={{ fill: theme.textColor2, fontSize: "1rem" }}
           />
         </IconButton>
@@ -208,7 +202,7 @@ const OpenInNewTabMenu = () => {
         <MenuItem>
           <ListItemText sx={{ color: theme.textColor }}>Bos.gg</ListItemText>
 
-          <ListItemIcon>
+          <ListItemIcon style={{ minWidth: 16 }}>
             <OpenInNewRoundedIcon
               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
             />
@@ -219,7 +213,8 @@ const OpenInNewTabMenu = () => {
           <ListItemText sx={{ color: theme.textColor }}>
             Near.Social
           </ListItemText>
-          <ListItemIcon>
+
+          <ListItemIcon style={{ minWidth: 16 }}>
             <OpenInNewRoundedIcon
               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
             />
@@ -231,7 +226,7 @@ const OpenInNewTabMenu = () => {
             Alpha.Near
           </ListItemText>
 
-          <ListItemIcon>
+          <ListItemIcon style={{ minWidth: 16 }}>
             <OpenInNewRoundedIcon
               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
             />

@@ -12,12 +12,14 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import CustomButton from "../../../../components/custom/CustomButton";
 import { ThemeContext } from "../../../../context/ThemeContext";
 
-export default function ProfileSidebar({ logOut, requestSignIn }) {
+export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
   const account = useAccount();
   const { theme } = useContext(ThemeContext);
 
   return (
-    <div style={{ minWidth: 250 }}>
+    <div
+      style={{ minWidth: 250, overflowX: "auto", height: "calc(100vh - 75px)" }}
+    >
       <div
         style={{
           height: 50,
@@ -35,6 +37,14 @@ export default function ProfileSidebar({ logOut, requestSignIn }) {
           Profile
         </Typography>
       </div>
+      {/* <Widget
+        src="zahidulislam.near/widget/Profile.LeftSection"
+        props={{ accountId: account.accountId }}
+      /> */}
+      <Widget
+        code="<h1>asdghkasdghjik</h1>"
+        // props={{ accountId: account.accountId }}
+      />
 
       <Box
         sx={{
@@ -68,7 +78,10 @@ export default function ProfileSidebar({ logOut, requestSignIn }) {
               overflow: "hidden",
             }}
           >
-            <Widget src="eugenethedream/widget/ProfileImage" />
+            <Widget
+              src={appProps?.widgets?.profileImage}
+              // src="eugenethedream/widget/ProfileImage"
+            />
           </div>
           <div
             style={{
@@ -78,7 +91,10 @@ export default function ProfileSidebar({ logOut, requestSignIn }) {
             }}
           >
             <Typography variant="h3" style={{ color: theme.textColor }}>
-              <Widget src="eugenethedream/widget/ProfileName" />
+              <Widget
+                src={appProps?.widgets?.profileName}
+                // "eugenethedream/widget/ProfileName"
+              />
             </Typography>
             <Typography variant="p1" style={{ color: theme.textColor3 }}>
               @{account.accountId || "Not_logged_in"}
