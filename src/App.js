@@ -127,6 +127,7 @@ function App(props) {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
+    localStorage.setItem("accountNameString", false);
   }, [near]);
 
   const refreshAllowance = useCallback(async () => {
@@ -144,6 +145,7 @@ function App(props) {
     }
     setSignedIn(!!accountId);
     setSignedAccountId(accountId);
+    localStorage.setItem("accountNameString", !!accountId);
     setConnected(true);
   }, [near, accountId]);
 
@@ -173,7 +175,7 @@ function App(props) {
   };
 
   return (
-    <StyledApp className="App">
+    <StyledApp className='App'>
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path={"/embed/:widgetSrc*"}>

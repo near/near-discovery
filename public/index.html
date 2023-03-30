@@ -15,6 +15,14 @@
     <meta property="og:image" content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg">
     <meta property="og:type" content="website">
     <meta property="og:title" content="NEAR" />
+    <style>
+      #Embed {
+        background-color: blue;
+        height: 20000px;
+        width: 200px;
+      }
+
+    </style>
     <meta property="og:description" content="Let&#39;s build decentralized experiences" />
     <link rel="apple-touch-icon" href="logo192.png" />
     <!--
@@ -35,8 +43,7 @@
     <script type="text/javascript">
 
       
-    
-
+      
       zE('webWidget:on', 'open', function() {
         console.log('The widget has been opened!');
       });
@@ -71,7 +78,6 @@
         }
       }
       zE(function() {
-        console.log('webpage is the',window.location.href === "http://localhost:3000/#/")
         zE.identify({
           name: 'John Citizen',
           email: 'john@example.com', // hacky option to grab from div.profile-username
@@ -79,16 +85,38 @@
         });
       });
   
-  window.onhashchange=function() {
-        console.log('hash changed')
-      if (window.location.href === "https://alpha.near.org/#/" || window.location.href === "http://localhost:3000/#/") {
-     zE.show()  
-        } else {
-            // your custom function here
-            console.log("This page is not https://alpha.near.org/#/, so running custom function...");
-            zE.hide(); 
-          }
-    };
+      function handleZendeskWidget() {
+    if (localStorage.getItem("accountNameString")) {
+      console.log("user detected");
+      if (
+        window.location.href === "https://alpha.near.org/#/" ||
+        window.location.href === "http://localhost:3000/#/" ||
+        window.location.search.includes("account_id=")
+      ) {
+        console.log("showing button");
+        zE.show();
+      } else {
+        console.log(" hiding the widget...");
+        zE("webWidget", "hide");
+      }
+    } else {
+      console.log("user not logged in");
+      zE("webWidget", "hide");
+    }
+  }
+handleZendeskWidget()
+window.addEventListener("hashchange",handleZendeskWidget);
+window.addEventListener("load", handleZendeskWidget);
+window.addEventListener('storage', function(event) {
+  console.log('storage change detected')
+  if (event.key === 'accountNameString' && event.newValue !== null) {
+    
+    console.log(event.key)
+    handleZendeskWidget()
+  }
+});
+
+
 
 
           
@@ -99,12 +127,6 @@
 
 
 
-Based on feedback from Alex - intent is to see if we can: 
-* Move it up and to the right on mobile 
-* Shrink label to (?)
-* Reduce opacity
-* Grey - reach out to corwin for palette (using 2b2f31 for now based on inspector)
-* Hide dynamically? Add an exit button - get rid of it for rest of session - zE.hide(); will do this
-* Hide on certain pages? (Scope to only homepage, for example)
+
   </body>
 </html>
