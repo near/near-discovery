@@ -23,6 +23,7 @@ const TestnetWidgets = {
   notificationsPage: "one.testnet/widget/NotificationsPage",
   tosCheck: "one.testnet/widget/TosCheck",
   tosContent: "one.testnet/widget/TosContent",
+  wrapper: "one.testnet/widget/DS.Theme",
 };
 
 const MainnetWidgets = {
@@ -37,13 +38,14 @@ const MainnetWidgets = {
   profileInlineBlock: "mob.near/widget/Profile.InlineBlock",
   componentsPage: "adminalpha.near/widget/ComponentsPage",
   peoplePage: "adminalpha.near/widget/PeoplePage",
-  globalSearchPage: "adminalpha.near/widget/GlobalSearchPage",
+  globalSearchPage: "chaotictempest.near/widget/Search",
   notificationButton: "adminalpha.near/widget/NotificationButton",
   profilePage: "adminalpha.near/widget/ProfilePage",
   componentSummary: "adminalpha.near/widget/ComponentSummary",
   notificationsPage: "adminalpha.near/widget/NotificationsPage",
   tosCheck: "adminalpha.near/widget/TosCheck",
   tosContent: "adminalpha.near/widget/TosContent",
+  wrapper: "adminalpha.near/widget/DS.Theme",
 };
 
 export const Widgets =
