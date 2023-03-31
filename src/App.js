@@ -7,45 +7,16 @@ import "App.scss";
 import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 import MyEditorPage from "./_/pages/editorPage/EditorPage";
+import SearchPage from "./_/pages/searchPage/SearchPage";
 import EditorPage from "./pages/EditorPage";
+// import ViewPage from "./pages/ViewPage";
+// import EmbedPage from "./pages/EmbedPage";
 
-import ViewPage from "./pages/ViewPage";
 import { setupModal } from "@near-wallet-selector/modal-ui";
-import EmbedPage from "./pages/EmbedPage";
 import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
-// import { NetworkId, Widgets } from "./data/widgets";
-import styled from "styled-components";
 import { EditorContext } from "./_/context/EditorContext";
-
-const StyledApp = styled.div`
-  @media (max-width: 991px) {
-    padding-bottom: 40px;
-  }
-  .logo-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    :after {
-      content: "alpha";
-      background-color: #59e692;
-      color: #101d46;
-      text-transform: uppercase;
-      font-size: 10px;
-      font-weight: 600;
-      margin-left: 3px;
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-      padding: 3px 6px;
-    }
-
-    :hover {
-      text-decoration: none;
-    }
-  }
-`;
 
 export const refreshAllowanceObj = {};
 
@@ -58,8 +29,6 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
-
-  console.log(Widgets);
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -162,16 +131,21 @@ function App(props) {
   };
 
   return (
-    <StyledApp className="App">
+    <div className="App">
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           {/* <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route> */}
-          <Route path={"/edit/:widgetSrc*"}>
+          <Route path={"/search*"}>
+            <SearchPage {...passProps} />
+          </Route>
+
+          {/* <Route path={"/edit/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
             <EditorPage {...passProps} />
-          </Route>
+          </Route> */}
+
           <Route path={"/:widgetSrc*"}>
             <MyEditorPage {...passProps} />
           </Route>
@@ -181,7 +155,7 @@ function App(props) {
           </Route> */}
         </Switch>
       </Router>
-    </StyledApp>
+    </div>
   );
 }
 

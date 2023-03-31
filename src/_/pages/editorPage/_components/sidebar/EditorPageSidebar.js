@@ -10,7 +10,7 @@ import SourceControlSidebar from "./SourceControlSidebar";
 import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
 
-export default function Sidebar({
+export default function EditorPageSidebar({
   appProps,
 
   loadFile,

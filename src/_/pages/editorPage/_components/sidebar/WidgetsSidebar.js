@@ -72,7 +72,7 @@ export default function WidgetsSidebar({
     );
     setMyWidgets(code);
 
-    console.log("===============", code);
+    console.log("=============== Get MyWidgets Data: ", code);
   };
 
   return (
@@ -127,17 +127,24 @@ export default function WidgetsSidebar({
             Open Widgets
           </Typography>
         </AccordionSummary>
+        {console.log("AccordionDetails : files :", files)}
         <AccordionDetails sx={{ backgroundColor: theme.ui }}>
           {files?.map((file, index) => {
-            if (file.unnamed) {
+            if (!file) {
+              console.log("File is undefined " + file);
+              return;
+            }
+
+            if (file?.unnamed) {
               return;
             }
 
             const jp = file;
-            const widgetName = file?.name?.split("/")[0];
+            const widgetName = file?.name?.split("/")[0] || "";
             const { codeChangesPresent, isDraft } =
               filesDetails.get(widgetName) || {};
 
+            console.log({ file });
             return (
               <OpenEditorItem
                 key={index}
@@ -183,7 +190,7 @@ export default function WidgetsSidebar({
           </AccordionSummary>
           <AccordionDetails sx={{ backgroundColor: theme.ui }}>
             {myWidgets ? (
-              Object.keys(myWidgets).map((fileName, index) => (
+              Object.keys(myWidgets)?.map((fileName, index) => (
                 <MyWidgetsItem
                   key={index}
                   label={fileName}
@@ -272,7 +279,7 @@ const OpenEditorItem = ({
 
           <FileIcon type={item?.type} />
 
-          <Tooltip title={item.name}>
+          <Tooltip title={item?.name}>
             <Typography
               variant="p"
               sx={{
@@ -286,7 +293,7 @@ const OpenEditorItem = ({
               }}
               className="max1Lines"
             >
-              {item.name}
+              {item?.name}
             </Typography>
           </Tooltip>
 
@@ -296,7 +303,7 @@ const OpenEditorItem = ({
               sx={{
                 opacity: 0.75,
                 backgroundColor: "#ffdf0033",
-                color: theme.name === "dark" ? "#ffdf00" : theme.textColor,
+                color: theme?.name === "dark" ? "#ffdf00" : theme.textColor,
                 fontSize: 12,
                 mr: 1,
                 fontSize: 10,
@@ -356,7 +363,7 @@ const OpenEditorItem = ({
       <RenameDialog
         key={`rename-modal-${item.name}`}
         show={showEditButton}
-        name={item.name}
+        name={item?.name}
         onRename={(newName) => renameFile(newName)}
         onHide={() => setShowEditButton(false)}
       />

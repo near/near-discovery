@@ -39,6 +39,9 @@ export const EditorContextProvider = (props) => {
     profilePage: "eugenethedream/widget/Profile",
     profileName: "eugenethedream/widget/ProfileName",
     notificationButton: "eugenethedream/widget/NotificationButton",
+
+    // My
+    profileSidebar: "saidulbadhon.testnet/widget/ProfileSidebar",
   };
 
   const MainnetWidgets = {
@@ -53,6 +56,9 @@ export const EditorContextProvider = (props) => {
     profileName: "patrick.near/widget/ProfileName",
     editorComponentSearch: "mob.near/widget/Editor.ComponentSearch",
     profileInlineBlock: "mob.near/widget/Profile.InlineBlock",
+
+    // My
+    profileSidebar: "saidulbadhon.near/widget/ProfileSidebar",
   };
 
   // const [Widgets , setWidgets]  = useState(NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets)

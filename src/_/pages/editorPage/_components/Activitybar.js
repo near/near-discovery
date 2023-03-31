@@ -43,11 +43,13 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={<ContentCopyRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="widgets"
+          // onClick={() => history.push("/edit")}
         />
 
         <ActivityButton
           icon={<SearchRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="search"
+          // onClick={() => history.push("/search")}
         />
 
         {/* <ActivityButton
@@ -159,11 +161,10 @@ const ActivityButton = ({ icon, label, onClick, sx }) => {
           opacity: selectedActivity === label ? 1 : 0.5,
           ...sx,
         }}
-        onClick={() =>
-          onClick
-            ? onClick()
-            : setSelectedActivity((e) => (e === label ? "" : label))
-        }
+        onClick={() => {
+          setSelectedActivity((e) => (e === label ? "" : label));
+          onClick && onClick();
+        }}
       >
         {icon}
       </ButtonBase>

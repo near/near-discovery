@@ -29,7 +29,7 @@ import EditorPageActivitybar from "./_components/Activitybar";
 import WidgetViewContainer from "./_components/widgetViewContainer/WidgetViewContainer";
 import EmptyEditorDialog from "../../dialogs/EmptyEditorDialog";
 import { EditorContext } from "../../context/EditorContext";
-import Sidebar from "./_components/sidebar/Sidebar";
+import EditorPageSidebar from "./_components/sidebar/EditorPageSidebar";
 import { ThemeContext } from "../../context/ThemeContext";
 import RenameDialog from "../../dialogs/RenameDialog";
 import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
@@ -94,7 +94,7 @@ export default function EditorPage(props) {
     500
   );
   // END OF _ CODES
-
+  console.log(props);
   const { widgetSrc } = useParams();
   const history = useHistory();
   const setWidgetSrc = props.setWidgetSrc;
@@ -816,27 +816,17 @@ export default function EditorPage(props) {
       {/* Dialog boxs - end */}
 
       <Box
-        // className={`container ${showEditor ? "" : "visually-hidden"}`}
-        // className={`${showEditor ? "" : "visually-hidden"}`}
-        //
         sx={{
           backgroundColor: theme.ui,
-
-          // minHeight: "max(100vh, 700px)",
-          height: "100%",
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "center",
-
-          flexDirection: "row",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-
           height: "100vh",
           maxHeight: "calc(100vh - 25px)",
           minHeight: 700,
+          width: "100%",
+
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "flex-start",
+          alignItems: "flex-start",
         }}
       >
         <EditorPageActivitybar {...props} />
@@ -851,7 +841,7 @@ export default function EditorPage(props) {
             minSize={100}
             maxSize={450}
           >
-            <Sidebar
+            <EditorPageSidebar
               appProps={props}
               loadFile={loadFile}
               // For WidgetSidebar
@@ -919,8 +909,11 @@ export default function EditorPage(props) {
                     onChange={(code) => {
                       updateCode(path, code);
 
+                      console.log(JSON.stringify(code));
+
                       if (showLiveCodePreview) debouncedFunction();
                     }}
+                    // onChange={(code) => updateCode(path, code)}
                     wrapperProps={{
                       onBlur: () => reformat(path, code),
                     }}
