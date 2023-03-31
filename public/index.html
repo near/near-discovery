@@ -41,92 +41,75 @@
     <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"> </script>
     <!-- https://developer.zendesk.com/api-reference/widget/core/ and https://developer.zendesk.com/api-reference/widget/settings/ -->
     <script type="text/javascript">
-
-      
-      
+    <script type="text/javascript">
       zE('webWidget:on', 'open', function() {
         console.log('The widget has been opened!');
       });
       window.zESettings = {
         webWidget: {
-          color: { theme: '#2b2f31'
-        },
-          offset:
-            { horizontal: '20px', vertical:'70px',
-          mobile:{
-            horizontal: '5px', vertical:'70px', from:'right'
-          } }
-    
-          ,
+          color: { theme: '#2b2f31' },
+          offset: { 
+            horizontal: '20px', vertical:'70px',
+            mobile: { horizontal: '5px', vertical:'70px', from:'right' } 
+          },
           contactOptions: {
             enabled: true,
             contactButton: { '*': 'Get in touch' }
           },
           contactForm: {
-            attachments: false,
-            title: { '*' : "Alpha Help Center" },
+            attachments: true,
+            title: { '*' : "Feedback and Support" },
+            fields: [
+              { id: 'email', prefill: { '*': 'EMAIL HERE' } },
+              { id: 13149356989591, prefill: { '*': 'ACCOUNT ID HERE' } }
+            ]
           },
           launcher: {
-            label: {
-          'en-US': 'Contact Us',
-         
-        },
-            mobile: {
-              labelVisible: false,
-            }
+            label: { '*': 'Contact Us' },
+            mobile: { labelVisible: false }
           }
         }
       }
-      zE(function() {
-        zE.identify({
-          name: 'John Citizen',
-          email: 'john@example.com', // hacky option to grab from div.profile-username
-          organization: 'VIP'
-        });
-      });
+      // zE(function() {
+      //   zE.identify({
+      //     email: 'drew@near.org' // hacky option to grab from div.profile-username
+      //     // 13149356989591 is field ID for "Account ID" custom field 
+      //     // name: 'John Citizen',
+      //     // organization: 'VIP'
+      //   });
+      // });
   
       function handleZendeskWidget() {
-    if (localStorage.getItem("accountNameString")) {
-      console.log("user detected");
-      if (
-        window.location.href === "https://alpha.near.org/#/" ||
-        window.location.href === "http://localhost:3000/#/" ||
-        window.location.search.includes("account_id=")
-      ) {
-        console.log("showing button");
-        zE.show();
-      } else {
-        console.log(" hiding the widget...");
-        zE("webWidget", "hide");
+        if (localStorage.getItem("accountNameString")) {
+          console.log("user detected");
+          if (
+            window.location.href === "https://alpha.near.org/#/" ||
+            window.location.href === "http://localhost:3000/#/" ||
+            window.location.search.includes("account_id=")
+          ) {
+            console.log("showing button");
+            zE.show();
+          } else {
+            console.log(" hiding the widget...");
+            zE("webWidget", "hide");
+          }
+        } else {
+          console.log("user not logged in");
+          zE("webWidget", "hide");
+        }
       }
-    } else {
-      console.log("user not logged in");
-      zE("webWidget", "hide");
-    }
-  }
-handleZendeskWidget()
-window.addEventListener("hashchange",handleZendeskWidget);
-window.addEventListener("load", handleZendeskWidget);
-window.addEventListener('storage', function(event) {
-  console.log('storage change detected')
-  if (event.key === 'accountNameString' && event.newValue !== null) {
-    
-    console.log(event.key)
-    handleZendeskWidget()
-  }
-});
-
-
-
-
+      handleZendeskWidget()
+      window.addEventListener("hashchange",handleZendeskWidget);
+      window.addEventListener("load", handleZendeskWidget);
+      window.addEventListener('storage', function(event) {
+        console.log('storage change detected')
+        if (event.key === 'accountNameString' && event.newValue !== null) {
           
+          console.log(event.key)
+          handleZendeskWidget()
+        }
+      });
     </script>
-
-
-
-
-
-
-
   </body>
 </html>
+      
