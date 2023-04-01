@@ -137,6 +137,10 @@ function App(props) {
           {/* <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route> */}
+          {/* <Route path={"/"}>
+            <HomePage {...passProps} />
+          </Route> */}
+
           <Route path={"/search*"}>
             <SearchPage {...passProps} />
           </Route>
@@ -146,7 +150,7 @@ function App(props) {
             <EditorPage {...passProps} />
           </Route> */}
 
-          <Route path={"/:widgetSrc*"}>
+          <Route path={"/edit/:widgetSrc*"}>
             <MyEditorPage {...passProps} />
           </Route>
           {/*  <Route path={"/:widgetSrc*"}>
@@ -158,5 +162,21 @@ function App(props) {
     </div>
   );
 }
+
+const HomePage = () => {
+  return (
+    <div>
+      <h1>Hello</h1>
+
+      <h1>
+        <Link to="/edit">Edit</Link>
+      </h1>
+
+      <h1>
+        <Link to="/search">Search</Link>
+      </h1>
+    </div>
+  );
+};
 
 export default App;

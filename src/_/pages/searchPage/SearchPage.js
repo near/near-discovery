@@ -27,8 +27,8 @@ export default function SearchPage(props) {
         alignItems: "flex-start",
       }}
     >
-      <Link to="/edit">XD</Link>
-      {/* <EditorPageActivitybar {...props} />
+      {/* <Link to="/edit">XD</Link> */}
+      <EditorPageActivitybar {...props} />
 
       <Allotment maxSize="100%">
         <Allotment.Pane
@@ -64,7 +64,7 @@ export default function SearchPage(props) {
         <Allotment.Pane minSize={300}>
           <div>asdsda</div>
         </Allotment.Pane>
-      </Allotment> */}
+      </Allotment>
     </Box>
   );
 }

@@ -43,13 +43,13 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={<ContentCopyRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="widgets"
-          // onClick={() => history.push("/edit")}
+          onClick={() => history.push("/edit")}
         />
 
         <ActivityButton
           icon={<SearchRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="search"
-          // onClick={() => history.push("/search")}
+          onClick={() => history.push("/search")}
         />
 
         {/* <ActivityButton
