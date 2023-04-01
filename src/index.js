@@ -9,10 +9,11 @@ import EditorContextProvider from "./_/context/EditorContext";
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-    <ThemeProvider theme={theme}>
+  <ThemeProvider theme={theme}>
     <ThemeContextProvider>
       <EditorContextProvider>
         <App />
       </EditorContextProvider>
     </ThemeContextProvider>
-  </ThemeProvider>);
+  </ThemeProvider>
+);

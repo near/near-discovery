@@ -13,7 +13,7 @@ export const ThemeContextProvider = (props) => {
     textColor3: "#475569",
     textColor4: "#000",
 
-    buttonColor: "#0078d7",
+    buttonColor: "#0d6efd",
     buttonColor2: "#ff004e",
 
     buttonTextColor: "#fff",
@@ -34,7 +34,7 @@ export const ThemeContextProvider = (props) => {
     textColor3: "#7e8185",
     textColor4: "#ffffff",
 
-    buttonColor: "#0078d7",
+    buttonColor: "#0d6efd",
     buttonColor2: "#ff004e",
 
     buttonTextColor: "#ffffff",
@@ -50,12 +50,9 @@ export const ThemeContextProvider = (props) => {
     name: "dark",
   };
 
-  // const theme = enableDarkMode ? dark : light;
-
   useEffect(() => {
     setEditorFontSize(localStorage.getItem("editorFontSize") || "14px");
     const enableDarkMode = localStorage.getItem("enableDarkMode");
-    console.log("enableDarkMode : ", typeof enableDarkMode, enableDarkMode);
     setEnableDarkMode(enableDarkMode === "true" ? true : false);
   }, []);
 
@@ -93,7 +90,7 @@ export default ThemeContextProvider;
 export const theme = createTheme({
   palette: {
     primary: {
-      main: "#0078d7",
+      main: "#0d6efd",
     },
     secondary: {
       main: "#ff004e",

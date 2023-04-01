@@ -11,13 +11,14 @@ import { EditorContext } from "../../../context/EditorContext";
 
 import DiamondRoundedIcon from "@mui/icons-material/DiamondRounded";
 import { ButtonBase, Tooltip } from "@mui/material";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { Widget, useAccount } from "near-social-vm";
 
 export default function Activitybar(props) {
   const history = useHistory();
   const account = useAccount();
   const { theme } = useContext(ThemeContext);
+  const { setSelectedActivity } = useContext(EditorContext);
 
   return (
     <div
@@ -39,17 +40,22 @@ export default function Activitybar(props) {
           label="home"
           onClick={() => history.push("/")}
         />
-
         <ActivityButton
           icon={<ContentCopyRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="widgets"
-          onClick={() => history.push("/edit")}
+          onClick={() => {
+            history.push("/editor");
+            setSelectedActivity((e) => (e === "widgets" ? "" : "widgets"));
+          }}
         />
 
         <ActivityButton
           icon={<SearchRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="search"
-          onClick={() => history.push("/search")}
+          onClick={() => {
+            history.push("/search");
+            setSelectedActivity("");
+          }}
         />
 
         {/* <ActivityButton
@@ -137,6 +143,7 @@ export default function Activitybar(props) {
 const ActivityButton = ({ icon, label, onClick, sx }) => {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity, setSelectedActivity } = useContext(EditorContext);
+  const { pathname } = useLocation();
 
   return (
     <Tooltip title={camelToNormal(label)} placement="right">
@@ -153,17 +160,19 @@ const ActivityButton = ({ icon, label, onClick, sx }) => {
                 : "rgba(0,0,0,.05)",
           },
           backgroundColor:
-            selectedActivity === label
+            pathname.includes(label) || selectedActivity === label
               ? theme.name === "dark"
                 ? "rgba(256,256,256,.05)!important"
                 : "rgba(0,0,0,.05)!important"
               : "transparent",
-          opacity: selectedActivity === label ? 1 : 0.5,
+          opacity:
+            pathname.includes(label) || selectedActivity === label ? 1 : 0.5,
           ...sx,
         }}
         onClick={() => {
-          setSelectedActivity((e) => (e === label ? "" : label));
-          onClick && onClick();
+          onClick
+            ? onClick()
+            : setSelectedActivity((e) => (e === label ? "" : label));
         }}
       >
         {icon}

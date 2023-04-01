@@ -59,9 +59,6 @@ export default function EditorPageSidebar({
               setShowOpenModal={setShowOpenModal}
             />
           )) ||
-            (selectedActivity === "search" && (
-              <SearchSidebar loadFile={loadFile} />
-            )) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
             (selectedActivity === "profile" && (
               <ProfileSidebar
@@ -69,12 +66,7 @@ export default function EditorPageSidebar({
                 requestSignIn={requestSignIn}
                 appProps={appProps}
               />
-            )) ||
-            // (selectedActivity === "extensions" && <ExtensionsSidebar />) ||
-            // (selectedActivity === "sourceControl" && (
-            //   <SourceControlSidebar />
-            // )) ||
-            selectedActivity}
+            ))}
         </div>
       </Fade>
     </div>

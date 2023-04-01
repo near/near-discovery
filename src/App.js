@@ -8,7 +8,7 @@ import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
 
 import MyEditorPage from "./_/pages/editorPage/EditorPage";
 import SearchPage from "./_/pages/searchPage/SearchPage";
-import EditorPage from "./pages/EditorPage";
+// import EditorPage from "./pages/EditorPage";
 // import ViewPage from "./pages/ViewPage";
 // import EmbedPage from "./pages/EmbedPage";
 
@@ -17,6 +17,10 @@ import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { EditorContext } from "./_/context/EditorContext";
+import HomePage from "./_/pages/homePage/HomePage";
+import Footer from "./_/pages/editorPage/_components/Footer";
+import EmbedPage from "./_/pages/EmbedPage";
+import ComponentDetailsPage from "./_/pages/ComponentDetailsPage";
 
 export const refreshAllowanceObj = {};
 
@@ -42,8 +46,6 @@ function App(props) {
       initNear({
         networkId: localStorage.getItem("environment"),
       });
-
-    console.log("NetworkId ======= APP ====> ", NetworkId);
   }, [initNear, NetworkId]);
 
   useEffect(() => {
@@ -137,22 +139,33 @@ function App(props) {
           {/* <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route> */}
-          {/* <Route path={"/"}>
-            <HomePage {...passProps} />
+          <Route path={"/editor/:widgetSrc*"}>
+            <MyEditorPage {...passProps} />
+            <Footer />
+          </Route>
+          {/* <HomePage {...passProps} />
           </Route> */}
 
-          <Route path={"/search*"}>
+          <Route path={"/search"}>
             <SearchPage {...passProps} />
+            <Footer />
           </Route>
+
+          <Route path={"/components/:widgetSrc*/details"}>
+            <ComponentDetailsPage {...passProps} />
+          </Route>
+          <Route path={"/components/:widgetSrc*"}>
+            {/* <NavigationWrapper {...passProps} /> */}
+            <EmbedPage {...passProps} />
+          </Route>
+
+          <Route path="/" component={HomePage} />
 
           {/* <Route path={"/edit/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
             <EditorPage {...passProps} />
           </Route> */}
 
-          <Route path={"/edit/:widgetSrc*"}>
-            <MyEditorPage {...passProps} />
-          </Route>
           {/*  <Route path={"/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
             <ViewPage {...passProps} />
@@ -162,21 +175,5 @@ function App(props) {
     </div>
   );
 }
-
-const HomePage = () => {
-  return (
-    <div>
-      <h1>Hello</h1>
-
-      <h1>
-        <Link to="/edit">Edit</Link>
-      </h1>
-
-      <h1>
-        <Link to="/search">Search</Link>
-      </h1>
-    </div>
-  );
-};
 
 export default App;

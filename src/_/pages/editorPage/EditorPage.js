@@ -21,7 +21,7 @@ import AddModal from "../../../components/Editor/AddModal";
 import CreateModal from "../../../components/Editor/CreateModal";
 import { SaveDraftModal } from "../../../components/SaveDraft";
 
-import { Box, Button, IconButton } from "@mui/material";
+import { Box } from "@mui/material";
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 
@@ -32,12 +32,9 @@ import { EditorContext } from "../../context/EditorContext";
 import EditorPageSidebar from "./_components/sidebar/EditorPageSidebar";
 import { ThemeContext } from "../../context/ThemeContext";
 import RenameDialog from "../../dialogs/RenameDialog";
-import SaveRoundedIcon from "@mui/icons-material/SaveRounded";
 import { useDebouncedCallback } from "use-debounce";
 import OpenWidgetDialog from "../../dialogs/OpenWidgetDialog";
-import VerticalSplitRoundedIcon from "@mui/icons-material/VerticalSplitRounded";
 import Tabsbar from "./_components/Tabsbar";
-import Footer from "./_components/Footer";
 
 const StorageDomain = {
   page: "editor",
@@ -94,7 +91,6 @@ export default function EditorPage(props) {
     500
   );
   // END OF _ CODES
-  console.log(props);
   const { widgetSrc } = useParams();
   const history = useHistory();
   const setWidgetSrc = props.setWidgetSrc;
@@ -198,7 +194,9 @@ export default function EditorPage(props) {
 
   const checkDrafts = () => {
     files.forEach((f) => {
-      const widgetSrc = `${accountId}/widget/${f.name}/**`;
+      if (!f?.name) return;
+
+      const widgetSrc = `${accountId}/widget/${f?.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
         const widgetCode = cache.socialGet(
           near,
@@ -227,6 +225,8 @@ export default function EditorPage(props) {
 
   const checkHasCodeChange = () => {
     files.forEach((f) => {
+      if (!f?.name) return;
+
       const widgetSrc = `${accountId}/widget/${f.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
         const widgetCode = cache.socialGet(
@@ -330,6 +330,7 @@ export default function EditorPage(props) {
 
   const removeFromFiles = useCallback(
     (path) => {
+      console.log("removeFromFiles : ", path);
       path = JSON.stringify(path);
       setFiles((files) =>
         files.filter((file) => JSON.stringify(file) !== path)
@@ -341,6 +342,7 @@ export default function EditorPage(props) {
 
   const addToFiles = useCallback(
     (path) => {
+      // console.log("addToFiles : ", path);
       const jpath = JSON.stringify(path);
       setFiles((files) => {
         const newFiles = [...files];
@@ -385,6 +387,7 @@ export default function EditorPage(props) {
             type: StorageType.Code,
           })
           .then(({ code }) => {
+            // console.log(code);
             updateCode(path, code);
           })
           .finally(() => {
@@ -909,8 +912,6 @@ export default function EditorPage(props) {
                     onChange={(code) => {
                       updateCode(path, code);
 
-                      console.log(JSON.stringify(code));
-
                       if (showLiveCodePreview) debouncedFunction();
                     }}
                     // onChange={(code) => updateCode(path, code)}
@@ -1039,8 +1040,6 @@ export default function EditorPage(props) {
           </Allotment.Pane>
         </Allotment>
       </Box>
-
-      <Footer />
     </>
   );
 }

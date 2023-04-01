@@ -71,8 +71,6 @@ export default function WidgetsSidebar({
       getData
     );
     setMyWidgets(code);
-
-    console.log("=============== Get MyWidgets Data: ", code);
   };
 
   return (
@@ -127,7 +125,7 @@ export default function WidgetsSidebar({
             Open Widgets
           </Typography>
         </AccordionSummary>
-        {console.log("AccordionDetails : files :", files)}
+        {/* {console.log("AccordionDetails : files :", files)} */}
         <AccordionDetails sx={{ backgroundColor: theme.ui }}>
           {files?.map((file, index) => {
             if (!file) {
@@ -144,7 +142,7 @@ export default function WidgetsSidebar({
             const { codeChangesPresent, isDraft } =
               filesDetails.get(widgetName) || {};
 
-            console.log({ file });
+            // console.log({ file });
             return (
               <OpenEditorItem
                 key={index}
@@ -337,7 +335,11 @@ const OpenEditorItem = ({
             <DriveFileRenameOutlineRoundedIcon
               sx={{
                 fontSize: "1rem",
-                fill: theme.textColor3 || "rgba(255,255,255,.75)",
+                // fill: theme.textColor3 || "rgba(255,255,255,.75)",
+                fill:
+                  theme.name !== "dark"
+                    ? "rgba(0,0,0,.75)"
+                    : "rgba(255,255,255,.75)",
               }}
             />
           </IconButton>
@@ -348,10 +350,10 @@ const OpenEditorItem = ({
           sx={{
             padding: "3px",
             margin: 0,
-            color: isSelected ? theme.textColor3 : "rgba(255,255,255,.15)",
+            color: isSelected ? theme.textColor3 : theme.textColor3 + 33,
 
             "&:hover": {
-              color: "rgba(255,255,255,.25)",
+              color: theme.textColor3 + 99,
             },
           }}
           onClick={() => removeButtonOnClick()}

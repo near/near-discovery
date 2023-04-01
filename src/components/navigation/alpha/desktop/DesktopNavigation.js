@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Logo } from "../icons/Logo";
 import { Return } from "../icons/Return";
 import { NavigationButton } from "../NavigationButton";
 import { SignInButton } from "../SignInButton";
@@ -11,6 +10,7 @@ import { NavDropdownButton } from "./NavDropdownButton";
 import { NotificationWidget } from "../NotificationWidget";
 import image from "../icons/search.svg";
 import { useHistory } from "react-router-dom";
+import DiamondRoundedIcon from "@mui/icons-material/DiamondRounded";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -112,7 +112,7 @@ export function DesktopNavigation(props) {
     <StyledNavigation onMouseLeave={() => setMenuDropdown(false)}>
       <div className="container">
         <Link to="/" className="logo-link">
-          <Logo />
+          <DiamondRoundedIcon sx={{ fill: "#FFF" }} />
         </Link>
         <div className="form-wrapper">
           <form

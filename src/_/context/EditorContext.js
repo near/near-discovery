@@ -6,10 +6,24 @@ export const EditorContextProvider = (props) => {
   const [showWebsiteView, setShowWebsiteView] = useState(true);
   const [showLiveCodePreview, setShowLiveCodePreview] = useState(true);
 
-  const [selectedActivity, setSelectedActivity] = useState("widgets");
+  const [selectedActivity, setSelectedActivity] = useState("");
 
-  const [files, setFiles] = useState(undefined);
+  const [files, setFiles] = useState([]);
   const [filesDetails, setFilesDetails] = useState(new Map());
+
+  // const setFiles = (e) => {
+  //   console.log("EditorContextProvider : SetFiles : ", e);
+  //   SetFiles(e);
+  // };
+
+  // useEffect(() => {
+  //   try {
+  //     throw new Error("I should be caught");
+  //   } catch (e) {
+  //     window.console.log(e);
+  //     window.console.log(files);
+  //   }
+  // }, [files]);
 
   //
   const [NetworkId, SetNetworkId] = useState("testnet");
