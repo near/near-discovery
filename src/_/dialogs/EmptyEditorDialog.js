@@ -76,8 +76,8 @@ export default function EmptyEditorDialog({
             textAlign="center"
             sx={{ color: theme.textColor2 }}
           >
-            Build, Test and Deploy decentralized frontend components for NEAR
-            BOS Gateways - NEAR.social, BOS.gg, Alpha.near.org and more.
+            Build, Test and Deploy decentralized frontend components for{" "}
+            <b>NEAR.social, BOS.gg, alpha.near.org</b> and other gateways.
           </Typography>
         </Box>
 

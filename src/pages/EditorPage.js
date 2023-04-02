@@ -744,8 +744,8 @@ export default function EditorPage(props) {
         >
           <h4 style={{ lineHeight: "50px" }}>Welcome to the NearPad!</h4>
           <p className="text-secondary">
-            Build, Test and Deploy decentralized frontend components for NEAR
-            BOS Gateways - NEAR.social, BOS.gg, Alpha.near.org and more.
+            Build, Test and Deploy decentralized frontend components for{" "}
+            <b>NEAR.social, BOS.gg, alpha.near.org</b> and other gateways.
           </p>
           <div className="d-flex justify-content-center mt-5">
             <button

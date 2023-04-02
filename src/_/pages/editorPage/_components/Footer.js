@@ -28,9 +28,28 @@ export default function Footer() {
         <Typography variant="p1">{NetworkId}</Typography>
       </Box>
 
-      <Typography variant="p1">Footer</Typography>
+      {/* <Typography variant="p1">
+        <span
+          style={{
+            backgroundColor: "red",
+          }}
+        >
+          Ad
+        </span>{" "}
+        Building Decentralized Frontends - South Bay{" "}
+        <a
+          href="https://www.meetup.com/near-sf/events/292365937/"
+          style={{
+            textDecoration: "none",
+            backgroundColor: "#f1f1f1",
+          }}
+          target="_blank"
+        >
+          RSVP
+        </a>
+      </Typography>
 
-      <Typography variant="p1">Footer</Typography>
+      <Typography variant="p1">Footer</Typography> */}
     </Box>
   );
 }
