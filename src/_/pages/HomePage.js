@@ -75,7 +75,7 @@ export default function HomePage() {
           // maxWidth: "1240px",
           maxWidth: "90vw",
           flex: 1,
-          gap: 4,
+          gap: 2,
 
           // display: "flex",
           // flexDirection: "row",
