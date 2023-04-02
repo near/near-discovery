@@ -38,7 +38,10 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={<DiamondRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="home"
-          onClick={() => history.push("/")}
+          onClick={() => {
+            history.push("/discover");
+            setSelectedActivity("");
+          }}
         />
         <ActivityButton
           icon={<ContentCopyRoundedIcon sx={{ fill: theme.textColor4 }} />}

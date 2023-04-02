@@ -78,6 +78,7 @@ export default function EditorPage(props) {
     setFiles,
     filesDetails,
     setFilesDetails,
+    calculateGasFee,
 
     showLiveCodePreview,
   } = useContext(EditorContext);
@@ -91,6 +92,7 @@ export default function EditorPage(props) {
     500
   );
   // END OF _ CODES
+
   const { widgetSrc } = useParams();
   const history = useHistory();
   const setWidgetSrc = props.setWidgetSrc;
@@ -330,7 +332,6 @@ export default function EditorPage(props) {
 
   const removeFromFiles = useCallback(
     (path) => {
-      console.log("removeFromFiles : ", path);
       path = JSON.stringify(path);
       setFiles((files) =>
         files.filter((file) => JSON.stringify(file) !== path)
@@ -342,7 +343,8 @@ export default function EditorPage(props) {
 
   const addToFiles = useCallback(
     (path) => {
-      // console.log("addToFiles : ", path);
+      if (!path) return;
+
       const jpath = JSON.stringify(path);
       setFiles((files) => {
         const newFiles = [...files];
@@ -367,8 +369,6 @@ export default function EditorPage(props) {
       );
     }
   }, [files, lastPath, cache]);
-
-  // console.log("path : ", path);
 
   const openFile = useCallback(
     (path, code) => {
@@ -522,6 +522,8 @@ export default function EditorPage(props) {
   );
 
   useEffect(() => {
+    // Reding Files and Last open files from cache
+
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
       .then((value) => {
@@ -703,6 +705,7 @@ export default function EditorPage(props) {
   );
   const handlePreviewButton = () => {
     setRenderCode(code);
+    calculateGasFee(code);
     // if (layout === Layout.Tabs) {
     //   setTab(Tab.Widget);
     // }
@@ -1010,6 +1013,7 @@ export default function EditorPage(props) {
             <WidgetViewContainer
               parsedWidgetProps={parsedWidgetProps}
               renderCode={renderCode}
+              loading={loading}
               //
               handlePreviewButton={handlePreviewButton}
               handleSaveDraftButton={handleSaveDraftButton}

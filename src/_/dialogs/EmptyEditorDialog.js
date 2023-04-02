@@ -82,6 +82,20 @@ export default function EmptyEditorDialog({
         </Box>
 
         <CustomButton
+          style={{ width: "100%" }}
+          onClick={() => {
+            setShowAddModal(false);
+            createNewFile(Filetype.Widget);
+          }}
+        >
+          Create Component
+        </CustomButton>
+
+        <Typography sx={{ textAlign: "center", color: theme.textColor }}>
+          or
+        </Typography>
+
+        <CustomButton
           style={{
             width: "100%",
             border: `1px ${theme.buttonColor} solid`,
@@ -94,20 +108,6 @@ export default function EmptyEditorDialog({
           }}
         >
           Open Component
-        </CustomButton>
-
-        <Typography sx={{ textAlign: "center", color: theme.textColor }}>
-          or
-        </Typography>
-
-        <CustomButton
-          style={{ width: "100%" }}
-          onClick={() => {
-            setShowAddModal(false);
-            createNewFile(Filetype.Widget);
-          }}
-        >
-          Create Component
         </CustomButton>
       </DialogContent>
     </Dialog>

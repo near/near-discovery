@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
-import SearchPageContainer from "./_components/SearchPageContainer";
+import { ThemeContext } from "../context/ThemeContext";
+import PagesContainer from "../components/PagesContainer";
 import { Widget } from "near-social-vm";
 import { Box } from "@mui/material";
-import { EditorContext } from "../../context/EditorContext";
+import { EditorContext } from "../context/EditorContext";
 
 export default function SearchPage(props) {
   const { theme } = useContext(ThemeContext);
@@ -11,7 +11,7 @@ export default function SearchPage(props) {
   // testnet
 
   return (
-    <SearchPageContainer {...props}>
+    <PagesContainer {...props}>
       <Box
         sx={{
           wdith: "100%",
@@ -35,6 +35,6 @@ export default function SearchPage(props) {
           />
         </Box>
       </Box>
-    </SearchPageContainer>
+    </PagesContainer>
   );
 }

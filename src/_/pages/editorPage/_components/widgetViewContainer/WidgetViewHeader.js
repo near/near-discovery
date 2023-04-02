@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   IconButton,
   ListItemIcon,
   ListItemText,
@@ -21,6 +22,8 @@ import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
 
 export default function WidgetViewHeader({
+  loading,
+
   onRunButtonClick,
   onSaveButtonClick,
   onForkButtonClick,
@@ -78,6 +81,8 @@ export default function WidgetViewHeader({
       </Box>
 
       <Box sx={{ display: "flex", alignItems: "center" }}>
+        {loading && <CircularProgress thickness={6} size={18} />}
+
         <Tooltip title="Preview Widget" placement="bottom">
           <IconButton
             sx={{

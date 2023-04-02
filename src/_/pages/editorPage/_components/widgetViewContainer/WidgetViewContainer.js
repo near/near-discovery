@@ -8,6 +8,8 @@ import { Widget } from "near-social-vm";
 // import CustomButton from "../../../../components/custom/CustomButton";
 
 export default function WidgetViewContainer({
+  loading,
+
   parsedWidgetProps,
   renderCode,
   handlePreviewButton,
@@ -32,6 +34,7 @@ export default function WidgetViewContainer({
       }}
     >
       <WidgetViewHeader
+        loading={loading}
         onRunButtonClick={handlePreviewButton}
         onSaveButtonClick={handleSaveDraftButton}
         onForkButtonClick={handleForkButton}

@@ -277,23 +277,23 @@ const OpenEditorItem = ({
 
           <FileIcon type={item?.type} />
 
-          <Tooltip title={item?.name}>
-            <Typography
-              variant="p"
-              sx={{
-                ml: 0,
-                fontWeight: 400,
-                color: theme.textColor2,
-                paddingBlock: "2.5px",
-                textTransform: "none",
-                fontSize: ".9rem",
-                textAlign: "left",
-              }}
-              className="max1Lines"
-            >
-              {item?.name}
-            </Typography>
-          </Tooltip>
+          {/* <Tooltip title={item?.name}> */}
+          <Typography
+            variant="p"
+            sx={{
+              ml: 0,
+              fontWeight: 400,
+              color: theme.textColor2,
+              paddingBlock: "2.5px",
+              textTransform: "none",
+              fontSize: ".9rem",
+              textAlign: "left",
+            }}
+            className="max1Lines"
+          >
+            {item?.name}
+          </Typography>
+          {/* </Tooltip> */}
 
           {isDraft && (
             <Chip
@@ -412,23 +412,23 @@ const MyWidgetsItem = ({ label, onClick }) => {
         >
           <FileIcon type="widget" />
 
-          <Tooltip title={label}>
-            <Typography
-              variant="p"
-              sx={{
-                ml: 0,
-                fontWeight: 400,
-                color: theme.textColor2,
-                paddingBlock: "2.5px",
-                textTransform: "none",
-                fontSize: ".9rem",
-                textAlign: "left",
-              }}
-              className="max1Lines"
-            >
-              {label}
-            </Typography>
-          </Tooltip>
+          {/* <Tooltip title={label}> */}
+          <Typography
+            variant="p"
+            sx={{
+              ml: 0,
+              fontWeight: 400,
+              color: theme.textColor2,
+              paddingBlock: "2.5px",
+              textTransform: "none",
+              fontSize: ".9rem",
+              textAlign: "left",
+            }}
+            className="max1Lines"
+          >
+            {label}
+          </Typography>
+          {/* </Tooltip> */}
         </Box>
       </ButtonBase>
     </Box>

@@ -3,10 +3,13 @@ import React, { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 import WifiTetheringRoundedIcon from "@mui/icons-material/WifiTetheringRounded";
 import { EditorContext } from "../../../context/EditorContext";
+import { useLocation } from "react-router-dom";
 
 export default function Footer() {
+  const { pathname } = useLocation();
+
   const { theme } = useContext(ThemeContext);
-  const { NetworkId } = useContext(EditorContext);
+  const { NetworkId, curFileGasFee } = useContext(EditorContext);
 
   return (
     <Box
@@ -28,28 +31,13 @@ export default function Footer() {
         <Typography variant="p1">{NetworkId}</Typography>
       </Box>
 
-      {/* <Typography variant="p1">
-        <span
-          style={{
-            backgroundColor: "red",
-          }}
-        >
-          Ad
-        </span>{" "}
-        Building Decentralized Frontends - South Bay{" "}
-        <a
-          href="https://www.meetup.com/near-sf/events/292365937/"
-          style={{
-            textDecoration: "none",
-            backgroundColor: "#f1f1f1",
-          }}
-          target="_blank"
-        >
-          RSVP
-        </a>
-      </Typography>
-
-      <Typography variant="p1">Footer</Typography> */}
+      {pathname === "/editor" && curFileGasFee.near && (
+        <Typography variant="p1">
+          {`Gas Fee: ${curFileGasFee.near.toFixed(
+            4
+          )}NEAR (${curFileGasFee.size.toFixed(4)}kb)`}
+        </Typography>
+      )}
     </Box>
   );
 }

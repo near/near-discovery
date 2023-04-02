@@ -1,12 +1,12 @@
 import { Box } from "@mui/material";
 import { Allotment } from "allotment";
 import React, { useContext } from "react";
-import { EditorContext } from "../../../context/EditorContext";
-import { ThemeContext } from "../../../context/ThemeContext";
-import Activitybar from "../../editorPage/_components/Activitybar";
-import EditorPageSidebar from "../../editorPage/_components/sidebar/EditorPageSidebar";
+import { EditorContext } from "../context/EditorContext";
+import { ThemeContext } from "../context/ThemeContext";
+import Activitybar from "../pages/editorPage/_components/Activitybar";
+import EditorPageSidebar from "../pages/editorPage/_components/sidebar/EditorPageSidebar";
 
-export default function SearchPageContainer(props) {
+export default function PagesContainer(props) {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity } = useContext(EditorContext);
 

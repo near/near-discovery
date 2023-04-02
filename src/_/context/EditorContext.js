@@ -11,6 +11,15 @@ export const EditorContextProvider = (props) => {
   const [files, setFiles] = useState([]);
   const [filesDetails, setFilesDetails] = useState(new Map());
 
+  const [curFileGasFee, setCurFileGasFee] = useState(0);
+  const calculateGasFee = (code) => {
+    const size = new Blob([code]).size;
+
+    const inKb = size / 1024;
+    const inNEAR = inKb / 100;
+
+    setCurFileGasFee({ near: inNEAR, size: inKb });
+  };
   // const setFiles = (e) => {
   //   console.log("EditorContextProvider : SetFiles : ", e);
   //   SetFiles(e);
@@ -92,6 +101,8 @@ export const EditorContextProvider = (props) => {
         setFiles,
         filesDetails,
         setFilesDetails,
+        curFileGasFee,
+        calculateGasFee,
         //
         selectedActivity,
         setSelectedActivity,
