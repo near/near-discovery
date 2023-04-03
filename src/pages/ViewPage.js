@@ -55,10 +55,10 @@ export default function ViewPage(props) {
               view: src,
             }
       );
-      analytics("view", {
-        props: {
-          widget: src,
-        },
+      const {href} = window.location;
+      const params = href.indexOf('?') > -1 ? href.split('?').slice(1)[0].split('&') : undefined;
+      analytics.pageView(src, {
+          url_params: params,
       });
     }, 1);
   }, [src, query, setWidgetSrc, viewSourceWidget]);

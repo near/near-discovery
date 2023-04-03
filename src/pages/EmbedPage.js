@@ -23,10 +23,9 @@ export default function EmbedPage(props) {
   }, [query]);
 
   useEffect(() => {
-    analytics("embed", {
-      props: {
-        widget: src,
-      },
+    analytics.pageView(window.location.href, {
+      parentComponent: src,
+      params: location.search
     });
   }, [src]);
 
