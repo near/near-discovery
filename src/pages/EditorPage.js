@@ -144,6 +144,11 @@ export default function EditorPage(props) {
   );
 
   useEffect(() => {
+
+    analytics.pageView(window.location.href, {
+      view: widgetSrc
+    }, [widgetSrc])
+
     setWidgetSrc({
       edit: null,
       view: widgetSrc,
@@ -559,11 +564,6 @@ export default function EditorPage(props) {
       } else {
         loadFile(widgetSrc);
       }
-      analytics("edit", {
-        props: {
-          widget: widgetSrc,
-        },
-      });
       history.replace(`/edit/`);
     } else if (path === undefined) {
       if (files.length === 0) {
