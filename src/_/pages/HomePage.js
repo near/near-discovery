@@ -2,14 +2,24 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import ParticleBackground from "react-particle-backgrounds";
 import { ThemeContext } from "../context/ThemeContext";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, alpha } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
+import Chip from "@mui/material/Chip";
 
-import imageSrc from "../images/home.PNG";
-import searchSrc from "../images/search.PNG";
+import imageSrc from "../images/home.png";
+import searchSrc from "../images/search.png";
 
 export default function HomePage() {
   const { theme } = useContext(ThemeContext);
+
+  const handleClick = (gateway) => {
+    const gateways = {
+      alpha: "https://alpha.near.org/#/",
+      social: "https://near.social/#/",
+      bos: "https://bos.gg/#/",
+    };
+    window.open(gateways[gateway], "_blank", "noreferrer");
+  };
 
   const settings = {
     particle: {
@@ -46,21 +56,6 @@ export default function HomePage() {
         overflow: "hidden",
       }}
     >
-      {/* <Box
-        sx={{
-          paddingBlock: 3,
-          paddingInline: 4,
-          width: "100%",
-          position: "absolute",
-          top: 0,
-        }}
-      >
-        <Header
-          iconStyle={{
-            fontSize: "3rem",
-          }}
-        />
-      </Box> */}
       <ParticleBackground
         settings={settings}
         style={{
@@ -72,13 +67,9 @@ export default function HomePage() {
       <Box
         sx={{
           width: "100%",
-          // maxWidth: "1240px",
           maxWidth: "90vw",
           flex: 1,
           gap: 2,
-
-          // display: "flex",
-          // flexDirection: "row",
           display: "grid",
           gridTemplateColumns: "1fr 1fr",
           justifyContent: "center",
@@ -90,7 +81,7 @@ export default function HomePage() {
             variant="h1"
             sx={{ fontSize: "7rem", color: theme.textColor }}
           >
-            NearPad
+            NEARpad
           </Typography>
           <Typography
             variant="h2"
@@ -100,44 +91,97 @@ export default function HomePage() {
               color: theme.textColor,
             }}
           >
-            <span style={{ color: theme.buttonColor2, fontWeight: 600 }}>
-              Supercharge
-            </span>{" "}
-            your workflow with instant
-            <br />
-            cloud development environments.
+            <span style={{ color: theme.textColor, fontWeight: 600 }}>
+              BOS DevTools
+            </span>
           </Typography>
 
-          <Link to="/editor" style={{ textDecoration: "none" }}>
-            <Button
-              sx={{
-                mt: 10,
-                px: 4,
-                py: 2,
-                borderRadius: 8,
-                fontSize: "1.25rem",
-                fontWeight: 600,
-                backgroundColor: theme.textColor + "0D",
+          <Typography
+            style={{
+              marginTop: 30,
+            }}
+          >
+            <span
+              style={{
                 color: theme.textColor,
-                "&:hover": {
-                  backgroundColor: theme.textColor + "1A !important",
-                  color: theme.buttonColor,
-                },
+                fontWeight: 200,
+                fontSize: 26,
               }}
-              to="/editor"
             >
-              Code Now
-              <ArrowForwardRoundedIcon
-                sx={{ marginLeft: 3, fontSize: "2rem" }}
+              Create decentralized frontend widgets without limits.
+            </span>
+          </Typography>
+          <Typography
+            style={{
+              marginTop: 10,
+            }}
+          >
+            <span style={{ color: theme.textColor }}>
+              We &#x2665;&nbsp;
+              <Chip
+                label="Discovery"
+                color="info"
+                onClick={(e) => handleClick("alpha")}
               />
-            </Button>
-          </Link>
+              &nbsp;
+              <Chip
+                label="NEAR.social"
+                color="primary"
+                onClick={(e) => handleClick("social")}
+              />
+              &nbsp;
+              <Chip
+                label="BOS.gg"
+                color="warning"
+                onClick={(e) => handleClick("bos")}
+              />
+            </span>
+          </Typography>
+          <Typography
+            style={{
+              marginTop: 100,
+            }}
+          >
+            <span style={{ color: theme.textColor }}>
+              We're still working out the kinks. Want to help us get ready for
+              the prime time? Join the telegram channel and ask for the private
+              beta access.
+            </span>
+          </Typography>
+          {/* <Link
+            target="_blank"
+            to="https://t.me/+7k9u4Pa23sUyM2Qx"
+            style={{ textDecoration: "none" }}
+          > */}
+          <Button
+            sx={{
+              mt: 1,
+              px: 4,
+              py: 2,
+              borderRadius: 1,
+              fontSize: "1.25rem",
+              fontWeight: 600,
+              backgroundColor: theme.textColor + "0D",
+              color: theme.textColor,
+              "&:hover": {
+                backgroundColor: theme.textColor + "1A !important",
+                color: theme.buttonColor,
+              },
+            }}
+            //to="/discover"
+            onClick={(e) => window.open("https://t.me/+7k9u4Pa23sUyM2Qx")}
+          >
+            Join the beta
+            <ArrowForwardRoundedIcon sx={{ marginLeft: 3, fontSize: "2rem" }} />
+          </Button>
+          {/* </Link> */}
         </Box>
 
-        <Box sx={{ flex: 1, position: "relative" }}>
+        <Box sx={{ flex: 1, position: "relative", marginRight: 1 }}>
           <img
             style={{
               width: "100%",
+              height: "100%",
               objectFit: "cover",
               zIndex: 99999999999999,
               border: `1px ${theme.borderColor} solid`,
@@ -148,7 +192,7 @@ export default function HomePage() {
 
               boxShadow: "0 0 10px 10px rgba(0, 0, 0, 0.1)",
 
-              top: 100,
+              top: 200,
               left: 100,
             }}
             src={imageSrc}
@@ -162,6 +206,7 @@ export default function HomePage() {
               border: `1px ${theme.borderColor} solid`,
               borderRadius: 4,
               overflow: "hidden",
+              marginTop: 5,
             }}
             src={searchSrc}
             alt="search"

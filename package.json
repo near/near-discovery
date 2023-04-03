@@ -27,6 +27,7 @@
     "react-dom": "^18.2.0",
     "react-particle-backgrounds": "^1.0.4",
     "react-router-dom": "5.2.0",
+    "react-swipeable-views": "^0.14.0",
     "styled-components": "^5.3.6",
     "use-debounce": "^9.0.3"
   },
@@ -34,8 +35,10 @@
     "serve": "webpack serve",
     "webpack": "webpack",
     "dev": "npm run serve -- --env mode=development",
-    "prod": "npm run webpack -- --env mode=production",
+    "prod": "npm run webpack -- --env mode=production && npm run aws-deploy && npm run cloudfront",
     "prod:analyze": "npm run prod -- --env presets=analyze",
+    "aws-deploy": "aws s3 sync ./dist s3://nearpad.dev --profile cryptosynk",
+    "cloudfront": "aws cloudfront create-invalidation --profile cryptosynk --distribution-id E3C3CSJGB00L70 --paths '/*'",
     "build": "npm run prod",
     "start": "npm run dev"
   },

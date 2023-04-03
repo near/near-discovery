@@ -1,10 +1,15 @@
-import { Box, Typography } from "@mui/material";
-import React from "react";
+import { Box, Typography, Button } from "@mui/material";
+import React, { useContext } from "react";
 import PagesContainer from "../components/PagesContainer";
 // import ReactPlayer from "react-player";
+import { ThemeContext } from "../context/ThemeContext";
+import { Link } from "react-router-dom";
+import ControlPointRoundedIcon from "@mui/icons-material/ControlPointRounded";
+import WidgetsRoundedIcon from "@mui/icons-material/WidgetsRounded";
 
 export default function DiscoverPage(props) {
   const embedUrl = `https://www.youtube.com/embed/W-krqeIwtpo`;
+  const { theme } = useContext(ThemeContext);
 
   return (
     <PagesContainer {...props}>
@@ -29,18 +34,58 @@ export default function DiscoverPage(props) {
 
             py: 4,
             gap: 4,
+            color: theme.textColor,
           }}
         >
           <Typography variant="h1" textAlign="center">
-            Near Pad
+            Welcome to NEARpad
           </Typography>
 
           <Typography variant="h2" fontWeight={500} textAlign="center">
-            Irure amet reprehenderit dolore non ut consequat est veniam fugiat
-            nostrud fugiat id anim laborum.
+            Create decentralized frontend widgets without limits. Let's get
+            started!
           </Typography>
 
-          <iframe
+          <div style={{ margin: 5 }}>
+            <Link to="/editor" style={{ textDecoration: "none" }}>
+              <Button
+                variant="contained"
+                style={{
+                  margin: 5,
+                  textTransform: "none",
+                  color: theme.textColor3,
+                  backgroundColor: theme.textColor3 + 11,
+                  padding: "5px 20px",
+                  borderRadius: 0.5,
+                }}
+                size="large"
+                startIcon={<ControlPointRoundedIcon />}
+                to="/editor"
+              >
+                Create a widget
+              </Button>
+            </Link>
+            <Link to="/search" style={{ textDecoration: "none" }}>
+              <Button
+                variant="outlined"
+                style={{
+                  margin: 5,
+                  textTransform: "none",
+                  color: theme.textColor3,
+                  backgroundColor: theme.textColor3 + 11,
+                  padding: "5px 20px",
+                  borderRadius: 0.5,
+                }}
+                size="large"
+                startIcon={<WidgetsRoundedIcon />}
+                to="/search"
+              >
+                Search community widgets
+              </Button>
+            </Link>
+          </div>
+
+          {/* <iframe
             width="560"
             height="315"
             src="https://www.youtube.com/embed/W-krqeIwtpo"
@@ -48,7 +93,7 @@ export default function DiscoverPage(props) {
             frameborder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowfullscreen
-          ></iframe>
+          ></iframe> */}
         </Box>
       </Box>
     </PagesContainer>
