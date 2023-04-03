@@ -86,7 +86,7 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={<HelpOutlineRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="Documentation"
-          onClick={() => {}}
+          onClick={() => window.open("https://docs.near.org/discovery")}
           // to=""
         />
 

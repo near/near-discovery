@@ -68,7 +68,7 @@ export default function EmptyEditorDialog({
             textAlign="center"
             sx={{ color: theme.textColor2 }}
           >
-            Welcome to the NearPad!
+            NEARpad | BOS DevTools
           </Typography>
 
           <Typography
@@ -76,8 +76,7 @@ export default function EmptyEditorDialog({
             textAlign="center"
             sx={{ color: theme.textColor2 }}
           >
-            Build, Test and Deploy decentralized frontend components for{" "}
-            <b>NEAR.social, BOS.gg, alpha.near.org</b> and other gateways.
+            Create decentralized frontend widgets without limits.
           </Typography>
         </Box>
 
@@ -88,7 +87,7 @@ export default function EmptyEditorDialog({
             createNewFile(Filetype.Widget);
           }}
         >
-          Create Component
+          Create Widget
         </CustomButton>
 
         <Typography sx={{ textAlign: "center", color: theme.textColor }}>
@@ -107,7 +106,7 @@ export default function EmptyEditorDialog({
             setShowOpenModal(true);
           }}
         >
-          Open Component
+          Open Widget
         </CustomButton>
       </DialogContent>
     </Dialog>

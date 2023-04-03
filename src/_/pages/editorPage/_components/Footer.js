@@ -33,9 +33,9 @@ export default function Footer() {
 
       {pathname === "/editor" && curFileGasFee.near && (
         <Typography variant="p1">
-          {`Gas Fee: ${curFileGasFee.near.toFixed(
+          {`Storage Cost: ${curFileGasFee.near.toFixed(
             4
-          )}NEAR (${curFileGasFee.size.toFixed(4)}kb)`}
+          )}Ⓝ (${curFileGasFee.size.toFixed(4)}kb)`}
         </Typography>
       )}
     </Box>

@@ -53,7 +53,7 @@ export default function WidgetViewHeader({
           variant="h6"
           sx={{ color: theme.textColor2, width: "100%" }}
         >
-          Widget View
+          Preview
         </Typography>
 
         <Tooltip
@@ -96,7 +96,7 @@ export default function WidgetViewHeader({
             <PlayArrowRoundedIcon sx={{ fill: theme.buttonColor }} />
           </IconButton>
         </Tooltip>
-        <Tooltip title="Share Widget" placement="bottom">
+        {/* <Tooltip title="Share Widget" placement="bottom">
           <IconButton
             sx={{ color: "#198754" || theme.textColor2 }}
             onClick={onSaveButtonClick}
@@ -105,7 +105,7 @@ export default function WidgetViewHeader({
               sx={{ fill: "#198754" || theme.textColor2, fontSize: "1rem" }}
             />
           </IconButton>
-        </Tooltip>
+        </Tooltip> */}
         <div
           style={{
             width: 1.5,
@@ -114,14 +114,12 @@ export default function WidgetViewHeader({
             backgroundColor: theme.borderColor,
           }}
         />
-        <Tooltip title="Fork" placement="bottom">
+        <Tooltip title="Fork Widget" placement="bottom">
           <IconButton
             sx={{ color: theme.textColor2 }}
             onClick={onForkButtonClick}
           >
-            <ForkRightRoundedIcon
-              sx={{ fill: theme.textColor2, fontSize: "1rem" }}
-            />
+            <ForkRightRoundedIcon sx={{ fill: theme.textColor2 }} />
           </IconButton>
         </Tooltip>
         {/* <Tooltip title="Publish Widget" placement="bottom">
@@ -138,7 +136,7 @@ export default function WidgetViewHeader({
             />
           </IconButton>
         </Tooltip> */}
-        <OpenInNewTabMenu />
+        {/* <OpenInNewTabMenu /> */}
         {/* <ActivityButton
           icon={<VerticalSplitRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="showWebsite"
