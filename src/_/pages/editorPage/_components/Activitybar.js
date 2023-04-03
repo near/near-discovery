@@ -4,6 +4,7 @@ import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 // import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
+import WifiTetheringRoundedIcon from "@mui/icons-material/WifiTetheringRounded";
 
 import camelToNormal from "../../../libs/camelToNormal";
 import { ThemeContext } from "../../../context/ThemeContext";
@@ -37,7 +38,7 @@ export default function Activitybar(props) {
       <div>
         <ActivityButton
           icon={<DiamondRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="home"
+          label="discover"
           onClick={() => {
             history.push("/discover");
             setSelectedActivity("");
@@ -61,33 +62,17 @@ export default function Activitybar(props) {
           }}
         />
 
-        {/* <ActivityButton
-          icon={
-            <CommitRoundedIcon
-              sx={{ fill: theme.textColor4, rotate: "-45deg" }}
-            />
-          }
-          label="sourceControl"
-        />
-
         <ActivityButton
-          icon={<DashboardRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="extensions"
-        /> */}
+          icon={<WifiTetheringRoundedIcon sx={{ fill: theme.textColor4 }} />}
+          label="environments"
+        />
       </div>
 
       <div>
-        {/* <ActivityButton
-          icon={<VerticalSplitRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="showWebsite"
-          onClick={() => setShowWebsiteView((e) => !e)}
-        /> */}
-
         <ActivityButton
           icon={<HelpOutlineRoundedIcon sx={{ fill: theme.textColor4 }} />}
           label="Documentation"
           onClick={() => window.open("https://docs.near.org/discovery")}
-          // to=""
         />
 
         <ActivityButton

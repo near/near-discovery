@@ -3,12 +3,10 @@ import React, { useContext } from "react";
 
 import WidgetsSidebar from "./WidgetsSidebar";
 import ProfileSidebar from "./ProfileSidebar";
-import SearchSidebar from "./SearchSidebar";
 import SettingsSidebar from "./SettingsSidebar";
-import ExtensionsSidebar from "./ExtensionsSidebar";
-import SourceControlSidebar from "./SourceControlSidebar";
 import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
+import EnvironmentlSidebar from "./EnvironmentlSidebar";
 
 export default function EditorPageSidebar({
   appProps,
@@ -60,6 +58,7 @@ export default function EditorPageSidebar({
             />
           )) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
+            (selectedActivity === "environments" && <EnvironmentlSidebar />) ||
             (selectedActivity === "profile" && (
               <ProfileSidebar
                 logOut={logOut}

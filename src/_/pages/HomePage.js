@@ -85,58 +85,47 @@ export default function HomePage() {
           </Typography>
           <Typography
             variant="h2"
-            fontWeight={500}
+            fontWeight={600}
             textAlign="left"
             sx={{
               color: theme.textColor,
             }}
           >
-            <span style={{ color: theme.textColor, fontWeight: 600 }}>
-              BOS DevTools
-            </span>
+            BOS DevTools
           </Typography>
 
           <Typography
-            style={{
-              marginTop: 30,
+            fontWeight={200}
+            sx={{
+              marginTop: 3.75,
+              color: theme.textColor,
+              fontWeight: 200,
+              fontSize: 26,
             }}
           >
-            <span
-              style={{
-                color: theme.textColor,
-                fontWeight: 200,
-                fontSize: 26,
-              }}
-            >
-              Create decentralized frontend widgets without limits.
-            </span>
+            Create decentralized frontend widgets without limits.
           </Typography>
-          <Typography
-            style={{
-              marginTop: 10,
-            }}
-          >
-            <span style={{ color: theme.textColor }}>
-              We &#x2665;&nbsp;
-              <Chip
-                label="Discovery"
-                color="info"
-                onClick={(e) => handleClick("alpha")}
-              />
-              &nbsp;
-              <Chip
-                label="NEAR.social"
-                color="primary"
-                onClick={(e) => handleClick("social")}
-              />
-              &nbsp;
-              <Chip
-                label="BOS.gg"
-                color="warning"
-                onClick={(e) => handleClick("bos")}
-              />
-            </span>
-          </Typography>
+
+          <Box sx={{ mt: 2, display: "flex", alignItems: "center", gap: 2 }}>
+            <Typography style={{ color: theme.textColor }}>
+              We &#x2665;
+            </Typography>
+            <Chip
+              label="Discovery"
+              color="info"
+              onClick={(e) => handleClick("alpha")}
+            />
+            <Chip
+              label="NEAR.social"
+              color="primary"
+              onClick={(e) => handleClick("social")}
+            />
+            <Chip
+              label="BOS.gg"
+              color="warning"
+              onClick={(e) => handleClick("bos")}
+            />
+          </Box>
           <Typography
             style={{
               marginTop: 100,
@@ -155,9 +144,9 @@ export default function HomePage() {
           > */}
           <Button
             sx={{
-              mt: 1,
-              px: 4,
-              py: 2,
+              mt: 4,
+              px: 3,
+              py: 1.5,
               borderRadius: 1,
               fontSize: "1.25rem",
               fontWeight: 600,
@@ -177,7 +166,13 @@ export default function HomePage() {
           {/* </Link> */}
         </Box>
 
-        <Box sx={{ flex: 1, position: "relative", marginRight: 1 }}>
+        <Box
+          sx={{
+            flex: 1,
+            position: "relative",
+            marginRight: 1,
+          }}
+        >
           <img
             style={{
               width: "100%",
@@ -206,7 +201,6 @@ export default function HomePage() {
               border: `1px ${theme.borderColor} solid`,
               borderRadius: 4,
               overflow: "hidden",
-              marginTop: 5,
             }}
             src={searchSrc}
             alt="search"
