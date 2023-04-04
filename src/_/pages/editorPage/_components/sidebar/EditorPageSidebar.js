@@ -58,7 +58,9 @@ export default function EditorPageSidebar({
             />
           )) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
-            (selectedActivity === "environments" && <EnvironmentlSidebar />) ||
+            (selectedActivity === "change network" && (
+              <EnvironmentlSidebar />
+            )) ||
             (selectedActivity === "profile" && (
               <ProfileSidebar
                 logOut={logOut}

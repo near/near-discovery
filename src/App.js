@@ -5,6 +5,7 @@ import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import ReactGA from "react-ga4";
 
 import MyEditorPage from "./_/pages/editorPage/EditorPage";
 import SearchPage from "./_/pages/SearchPage";
@@ -21,6 +22,7 @@ import ComponentDetailsPage from "./_/pages/ComponentDetailsPage";
 import DiscoverPage from "./_/pages/DiscoverPage";
 
 export const refreshAllowanceObj = {};
+ReactGA.initialize("G-YJ2FL738R6");
 
 export default function App(props) {
   const { NetworkId, Widgets } = useContext(EditorContext);
@@ -38,6 +40,10 @@ export default function App(props) {
   const accountId = account.accountId;
 
   const location = window.location;
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   useEffect(() => {
     initNear &&

@@ -5,9 +5,6 @@ import App from "./App";
 import { ThemeProvider } from "@mui/material";
 import ThemeContextProvider, { theme } from "./_/context/ThemeContext";
 import EditorContextProvider from "./_/context/EditorContext";
-import ReactGA from "react-ga4";
-
-ReactGA.initialize("G-N4CPCS8BE2");
 
 const container = document.getElementById("root");
 const root = createRoot(container);

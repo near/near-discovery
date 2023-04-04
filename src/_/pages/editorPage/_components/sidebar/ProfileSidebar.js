@@ -125,7 +125,7 @@ export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
               }}
               onClick={() => requestSignIn()}
             >
-              Login
+              Sign In
             </CustomButton>
           </Box>
         )}

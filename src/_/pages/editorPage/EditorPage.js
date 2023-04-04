@@ -10,6 +10,7 @@ import prettier from "prettier";
 import parserBabel from "prettier/parser-babel";
 import { useHistory, useParams } from "react-router-dom";
 import Editor from "@monaco-editor/react";
+import ReactGA from "react-ga4";
 import {
   Widget,
   useCache,
@@ -136,6 +137,10 @@ export default function EditorPage(props) {
     },
     [setLayoutState]
   );
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   useEffect(() => {
     setWidgetSrc({
@@ -663,41 +668,50 @@ export default function EditorPage(props) {
     setShowSaveDraftModal(true);
   };
 
-  const publishButton = (
-    <CommitButton
-      id="publishButton"
-      className={`btn btn-primary`}
-      style={{
-        backgroundColor: theme.buttonColor,
-        paddingInline: 16,
-        borderRadius: 4,
+  const publishButton = () => {
+    ReactGA.event({
+      category: "Click",
+      action: "Publish",
+      label: "widgetName",
+      value: widgetName,
+    });
+    return (
+      <CommitButton
+        id="publishButton"
+        className={`btn btn-primary`}
+        style={{
+          backgroundColor: theme.buttonColor,
+          paddingInline: 16,
+          borderRadius: 4,
 
-        fontWeight: 500,
-      }}
-      //
-      disabled={!widgetName}
-      near={near}
-      data={{
-        widget: {
-          [widgetName]: {
-            "": code,
-            metadata,
+          fontWeight: 500,
+        }}
+        //
+        disabled={!widgetName}
+        near={near}
+        data={{
+          widget: {
+            [widgetName]: {
+              "": code,
+              metadata,
+            },
           },
-        },
-      }}
-    >
-      Publish
-    </CommitButton>
-  );
+        }}
+      >
+        Publish
+      </CommitButton>
+    );
+  };
 
   const renderPreviewButton = (
     <button
       className="btn btn-outline-primary"
       onClick={() => {
         setRenderCode(code);
-        // if (layout === Layout.Tabs) {
-        //   setTab(Tab.Widget);
-        // }
+        ReactGA.event({
+          category: "Click",
+          action: "Preview",
+        });
       }}
     >
       Render Preview
@@ -757,6 +771,10 @@ export default function EditorPage(props) {
       onClick={() => {
         const forkName = widgetName + "-fork";
         openFile(toPath(Filetype.Widget, forkName), code);
+        ReactGA.event({
+          category: "Click",
+          action: "Fork",
+        });
       }}
     >
       Fork
@@ -913,11 +931,9 @@ export default function EditorPage(props) {
                     path={widgetPath}
                     defaultLanguage="javascript"
                     onChange={(code) => {
-                      updateCode(path, code);
-
                       if (showLiveCodePreview) debouncedFunction();
+                      updateCode(path, code);
                     }}
-                    // onChange={(code) => updateCode(path, code)}
                     wrapperProps={{
                       onBlur: () => reformat(path, code),
                     }}
@@ -1034,9 +1050,15 @@ export default function EditorPage(props) {
                       borderRadius: 4,
                       fontWeight: 500,
                     }}
-                    onClick={() => props.requestSignIn()}
+                    onClick={() => {
+                      props.requestSignIn();
+                      ReactGA.event({
+                        category: "SignIn",
+                        action: "signin",
+                      });
+                    }}
                   >
-                    Connect
+                    Sign In
                   </button>
                 )
               }

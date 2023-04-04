@@ -52,7 +52,7 @@ const ChangeEnvButton = () => {
         variant="p1"
         sx={{ fontWeight: 500, color: theme.textColor2 }}
       >
-        Environment
+        Networks
       </Typography>
 
       <div className="SelectContainer">

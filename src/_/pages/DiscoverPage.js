@@ -1,15 +1,19 @@
 import { Box, Typography, Button } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import PagesContainer from "../components/PagesContainer";
 // import ReactPlayer from "react-player";
 import { ThemeContext } from "../context/ThemeContext";
 import { Link } from "react-router-dom";
+import ReactGA from "react-ga4";
 import ControlPointRoundedIcon from "@mui/icons-material/ControlPointRounded";
 import WidgetsRoundedIcon from "@mui/icons-material/WidgetsRounded";
 
 export default function DiscoverPage(props) {
-  const embedUrl = `https://www.youtube.com/embed/W-krqeIwtpo`;
   const { theme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
+  }, []);
 
   return (
     <PagesContainer {...props}>
@@ -84,16 +88,6 @@ export default function DiscoverPage(props) {
               </Button>
             </Link>
           </div>
-
-          {/* <iframe
-            width="560"
-            height="315"
-            src="https://www.youtube.com/embed/W-krqeIwtpo"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe> */}
         </Box>
       </Box>
     </PagesContainer>

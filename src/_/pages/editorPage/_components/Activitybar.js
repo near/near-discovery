@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-import ContentCopyRoundedIcon from "@mui/icons-material/ContentCopyRounded";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
-// import SettingsRoundedIcon from "@mui/icons-material/SettingsRounded";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
-import WifiTetheringRoundedIcon from "@mui/icons-material/WifiTetheringRounded";
+import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
+import WifiRoundedIcon from "@mui/icons-material/WifiRounded";
 
 import camelToNormal from "../../../libs/camelToNormal";
 import { ThemeContext } from "../../../context/ThemeContext";
@@ -37,7 +36,11 @@ export default function Activitybar(props) {
     >
       <div>
         <ActivityButton
-          icon={<DiamondRoundedIcon sx={{ fill: theme.textColor4 }} />}
+          icon={
+            <DiamondRoundedIcon
+              sx={{ fill: theme.textColor4, fontSize: "2rem" }}
+            />
+          }
           label="discover"
           onClick={() => {
             history.push("/discover");
@@ -45,8 +48,12 @@ export default function Activitybar(props) {
           }}
         />
         <ActivityButton
-          icon={<ContentCopyRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="widgets"
+          icon={
+            <LibraryAddRoundedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
+            />
+          }
+          label="create widgets"
           onClick={() => {
             history.push("/editor");
             setSelectedActivity((e) => (e === "widgets" ? "" : "widgets"));
@@ -54,8 +61,12 @@ export default function Activitybar(props) {
         />
 
         <ActivityButton
-          icon={<SearchRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="search"
+          icon={
+            <SearchRoundedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
+            />
+          }
+          label="search widgets"
           onClick={() => {
             history.push("/search");
             setSelectedActivity("");
@@ -63,22 +74,30 @@ export default function Activitybar(props) {
         />
 
         <ActivityButton
-          icon={<WifiTetheringRoundedIcon sx={{ fill: theme.textColor4 }} />}
-          label="environments"
+          icon={
+            <WifiRoundedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
+            />
+          }
+          label="change network"
         />
       </div>
 
       <div>
         <ActivityButton
-          icon={<HelpOutlineRoundedIcon sx={{ fill: theme.textColor4 }} />}
+          icon={
+            <HelpOutlineRoundedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
+            />
+          }
           label="Documentation"
-          onClick={() => window.open("https://docs.near.org/discovery")}
+          //onClick={() => window.open("https://docs.near.org/discovery")}
         />
 
         <ActivityButton
           icon={
             <SettingsOutlinedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.4rem" }}
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
             />
           }
           label="settings"
@@ -117,12 +136,6 @@ export default function Activitybar(props) {
           label="profile"
           sx={{ opacity: 1 }}
         />
-
-        {/* <img
-          height={30}
-          src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-          alt="profile-art"
-        /> */}
       </div>
     </div>
   );

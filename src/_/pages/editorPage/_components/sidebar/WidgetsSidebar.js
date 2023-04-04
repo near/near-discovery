@@ -100,18 +100,18 @@ export default function WidgetsSidebar({
           <Tooltip title="Add new file">
             <IconButton onClick={() => handleCreateButton()}>
               <NoteAddRoundedIcon
-                sx={{ fontSize: "1rem", fill: theme.textColor3 }}
+                sx={{ fontSize: "1.5rem", fill: theme.textColor3 }}
               />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="Open Component">
+          {/* <Tooltip title="Open Component">
             <IconButton onClick={() => setShowOpenModal((e) => !e)}>
               <CreateNewFolderRoundedIcon
                 sx={{ fontSize: "1rem", fill: theme.textColor3 }}
               />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Box>
       </div>
 
