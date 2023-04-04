@@ -20,19 +20,9 @@ export const EditorContextProvider = (props) => {
 
     setCurFileGasFee({ near: inNEAR, size: inKb });
   };
-  // const setFiles = (e) => {
-  //   console.log("EditorContextProvider : SetFiles : ", e);
-  //   SetFiles(e);
-  // };
 
-  // useEffect(() => {
-  //   try {
-  //     throw new Error("I should be caught");
-  //   } catch (e) {
-  //     window.console.log(e);
-  //     window.console.log(files);
-  //   }
-  // }, [files]);
+  // For Search Page
+  const [openComponentDetail, setOpenComponentDetail] = useState("");
 
   //
   const [NetworkId, SetNetworkId] = useState("testnet");
@@ -111,6 +101,10 @@ export const EditorContextProvider = (props) => {
         setNetworkId,
         Widgets: NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets,
         // Widgets: TestnetWidgets,
+
+        // For Search Page
+        openComponentDetail,
+        setOpenComponentDetail,
       }}
     >
       {props.children}

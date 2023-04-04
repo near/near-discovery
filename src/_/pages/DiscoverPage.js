@@ -41,26 +41,37 @@ export default function DiscoverPage(props) {
             color: theme.textColor,
           }}
         >
-          <Typography variant="h1" textAlign="center">
+          <Typography
+            variant="h1"
+            textAlign="center"
+            sx={{ color: theme.textColor }}
+          >
             Welcome to NEARpad
           </Typography>
 
-          <Typography variant="h2" fontWeight={500} textAlign="center">
+          <Typography
+            variant="h3"
+            fontWeight={500}
+            textAlign="center"
+            sx={{ color: theme.textColor2 }}
+          >
             Create decentralized frontend widgets without limits. Let's get
             started!
           </Typography>
 
-          <div style={{ margin: 5 }}>
+          <Box sx={{ mt: 2, display: "flex", gap: 2 }}>
             <Link to="/editor" style={{ textDecoration: "none" }}>
               <Button
                 variant="contained"
-                style={{
-                  margin: 5,
+                sx={{
                   textTransform: "none",
-                  color: theme.textColor3,
-                  backgroundColor: theme.textColor3 + 11,
-                  padding: "5px 20px",
                   borderRadius: 0.5,
+                  boxShadow: "none",
+                  "&:hover": {
+                    boxShadow: "none",
+                    backgroundColor: theme.buttonColor + "cc",
+                    color: theme.buttonTextColor,
+                  },
                 }}
                 size="large"
                 startIcon={<ControlPointRoundedIcon />}
@@ -72,13 +83,14 @@ export default function DiscoverPage(props) {
             <Link to="/search" style={{ textDecoration: "none" }}>
               <Button
                 variant="outlined"
-                style={{
-                  margin: 5,
+                sx={{
                   textTransform: "none",
-                  color: theme.textColor3,
-                  backgroundColor: theme.textColor3 + 11,
-                  padding: "5px 20px",
                   borderRadius: 0.5,
+                  "&:hover": {
+                    boxShadow: "none",
+                    backgroundColor: theme.buttonColor + "11",
+                    color: theme.buttonColor,
+                  },
                 }}
                 size="large"
                 startIcon={<WidgetsRoundedIcon />}
@@ -87,7 +99,7 @@ export default function DiscoverPage(props) {
                 Search community widgets
               </Button>
             </Link>
-          </div>
+          </Box>
         </Box>
       </Box>
     </PagesContainer>

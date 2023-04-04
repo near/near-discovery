@@ -26,16 +26,17 @@ import { Box } from "@mui/material";
 import { Allotment } from "allotment";
 import "allotment/dist/style.css";
 
-import EditorPageActivitybar from "./_components/Activitybar";
+import Activitybar from "../../components/Activitybar";
 import WidgetViewContainer from "./_components/widgetViewContainer/WidgetViewContainer";
 import EmptyEditorDialog from "../../dialogs/EmptyEditorDialog";
 import { EditorContext } from "../../context/EditorContext";
-import EditorPageSidebar from "./_components/sidebar/EditorPageSidebar";
+
 import { ThemeContext } from "../../context/ThemeContext";
 import RenameDialog from "../../dialogs/RenameDialog";
 import { useDebouncedCallback } from "use-debounce";
 import OpenWidgetDialog from "../../dialogs/OpenWidgetDialog";
 import Tabsbar from "./_components/Tabsbar";
+import Sidebar from "../../components/sidebar/Sidebar";
 
 const StorageDomain = {
   page: "editor",
@@ -668,13 +669,14 @@ export default function EditorPage(props) {
     setShowSaveDraftModal(true);
   };
 
-  const publishButton = () => {
+  const PublishButton = () => {
     ReactGA.event({
       category: "Click",
       action: "Publish",
       label: "widgetName",
       value: widgetName,
     });
+
     return (
       <CommitButton
         id="publishButton"
@@ -853,7 +855,7 @@ export default function EditorPage(props) {
           alignItems: "flex-start",
         }}
       >
-        <EditorPageActivitybar {...props} />
+        <Activitybar {...props} />
         {/* <VsCodeBanner /> */}
 
         <Allotment maxSize="100%">
@@ -865,7 +867,7 @@ export default function EditorPage(props) {
             minSize={100}
             maxSize={450}
           >
-            <EditorPageSidebar
+            <Sidebar
               appProps={props}
               loadFile={loadFile}
               // For WidgetSidebar
@@ -1039,7 +1041,7 @@ export default function EditorPage(props) {
                   filesDetails.get(widgetName)?.isDraft ? (
                     publishDraftAsMainButton
                   ) : (
-                    publishButton
+                    <PublishButton />
                   )
                 ) : (
                   <button

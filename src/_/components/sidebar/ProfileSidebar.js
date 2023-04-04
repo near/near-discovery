@@ -5,8 +5,8 @@ import React, { useContext } from "react";
 import { Widget, useAccount } from "near-social-vm";
 import LogoutIcon from "@mui/icons-material/Logout";
 
-import CustomButton from "../../../../components/custom/CustomButton";
-import { ThemeContext } from "../../../../context/ThemeContext";
+import CustomButton from "../custom/CustomButton";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
   const account = useAccount();

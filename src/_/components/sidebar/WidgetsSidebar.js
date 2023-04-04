@@ -21,10 +21,11 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 
-import { ThemeContext } from "../../../../context/ThemeContext";
-import { EditorContext } from "../../../../context/EditorContext";
-import FileIcon from "../../../../components/FileIcon";
-import RenameDialog from "../../../../dialogs/RenameDialog";
+import { ThemeContext } from "../../context/ThemeContext";
+import { EditorContext } from "../../context/EditorContext";
+import FileIcon from "../FileIcon";
+import RenameDialog from "../../dialogs/RenameDialog";
+import ConfirmDialog from "../../dialogs/ConfirmDialog";
 
 export default function WidgetsSidebar({
   loadFile,
@@ -80,6 +81,7 @@ export default function WidgetsSidebar({
         height: "100vh",
         overflowY: "auto",
         overflowX: "hidden",
+        paddingBottom: 25,
       }}
     >
       <div
@@ -100,7 +102,7 @@ export default function WidgetsSidebar({
           <Tooltip title="Add new file">
             <IconButton onClick={() => handleCreateButton()}>
               <NoteAddRoundedIcon
-                sx={{ fontSize: "1.5rem", fill: theme.textColor3 }}
+                sx={{ fontSize: "1.25rem", fill: theme.textColor3 }}
               />
             </IconButton>
           </Tooltip>
@@ -229,147 +231,165 @@ const OpenEditorItem = ({
   const { theme } = useContext(ThemeContext);
 
   const [showEditButton, setShowEditButton] = useState(false);
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   return (
-    <Box
-      sx={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        backgroundColor: isSelected ? theme.ui2 : theme.ui,
-        "&:hover": {
-          backgroundColor: theme.ui2,
-          cursor: "pointer",
-        },
-      }}
-    >
-      <ButtonBase
+    <>
+      <Box
         sx={{
+          position: "relative",
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
-          px: 2,
-          py: 0.5,
           width: "100%",
-
-          zIndex: 5,
+          backgroundColor: isSelected ? theme.ui2 : theme.ui,
+          "&:hover": {
+            backgroundColor: theme.ui2,
+            cursor: "pointer",
+          },
         }}
-        onClick={() => onClick()}
       >
-        <Box
+        <ButtonBase
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: 1,
+            justifyContent: "space-between",
+            pl: 2,
+            pr: 0.5,
+            py: 0.5,
+            width: "100%",
+
+            zIndex: 5,
+          }}
+          onClick={() => onClick()}
+        >
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: 1,
+            }}
+          >
+            {codeChangesPresent && (
+              <Box
+                style={{
+                  minWidth: 8,
+                  height: 8,
+                  borderRadius: 4,
+                  backgroundColor: "rgba(255,0,0,.75)",
+                }}
+              />
+            )}
+
+            <FileIcon type={item?.type} />
+
+            {/* <Tooltip title={item?.name}> */}
+            <Typography
+              variant="p"
+              sx={{
+                ml: 0,
+                fontWeight: 400,
+                color: theme.textColor2,
+                paddingBlock: "2.5px",
+                textTransform: "none",
+                fontSize: ".9rem",
+                textAlign: "left",
+                wordBreak: "break-all",
+              }}
+              className="max1Lines"
+            >
+              {item?.name}
+            </Typography>
+            {/* </Tooltip> */}
+
+            {isDraft && (
+              <Chip
+                label="Draft"
+                sx={{
+                  opacity: 0.75,
+                  backgroundColor: "#ffdf0033",
+                  color: theme?.name === "dark" ? "#ffdf00" : theme.textColor,
+                  fontSize: 12,
+                  mr: 1,
+                  fontSize: 10,
+                  height: 18,
+
+                  pointerEvents: "none",
+                }}
+                size="small"
+              />
+            )}
+          </Box>
+        </ButtonBase>
+
+        <Box
+          sx={{
+            display: "flex",
+            gap: 0.5,
+            zIndex: 10,
+            height: "100%",
+            mr: 1,
+
+            alignItems: "center",
           }}
         >
-          {codeChangesPresent && (
-            <Box
-              style={{
-                minWidth: 8,
-                height: 8,
-                borderRadius: 4,
-                backgroundColor: "rgba(255,0,0,.75)",
-              }}
-            />
-          )}
-
-          <FileIcon type={item?.type} />
-
-          {/* <Tooltip title={item?.name}> */}
-          <Typography
-            variant="p"
-            sx={{
-              ml: 0,
-              fontWeight: 400,
-              color: theme.textColor2,
-              paddingBlock: "2.5px",
-              textTransform: "none",
-              fontSize: ".9rem",
-              textAlign: "left",
-            }}
-            className="max1Lines"
-          >
-            {item?.name}
-          </Typography>
-          {/* </Tooltip> */}
-
-          {isDraft && (
-            <Chip
-              label="Draft"
-              sx={{
-                opacity: 0.75,
-                backgroundColor: "#ffdf0033",
-                color: theme?.name === "dark" ? "#ffdf00" : theme.textColor,
-                fontSize: 12,
-                mr: 1,
-                fontSize: 10,
-                height: 18,
-
-                pointerEvents: "none",
-              }}
+          <Fade in={isSelected} mountOnEnter unmountOnExit>
+            <IconButton
               size="small"
-            />
-          )}
-        </Box>
-      </ButtonBase>
+              sx={{ padding: "3px", margin: 0 }}
+              onClick={() => renameButtonOnClick()}
+            >
+              <DriveFileRenameOutlineRoundedIcon
+                sx={{
+                  fontSize: "1rem",
+                  fill:
+                    theme.name !== "dark"
+                      ? "rgba(0,0,0,.75)"
+                      : "rgba(255,255,255,.75)",
+                }}
+              />
+            </IconButton>
+          </Fade>
 
-      <Box
-        sx={{
-          display: "flex",
-          gap: 0.5,
-          zIndex: 10,
-          height: "100%",
-          mr: 1,
-
-          alignItems: "center",
-        }}
-      >
-        <Fade in={isSelected}>
           <IconButton
             size="small"
-            sx={{ padding: "3px", margin: 0 }}
-            onClick={() => renameButtonOnClick()}
+            sx={{
+              padding: "3px",
+              margin: 0,
+              color: isSelected ? theme.textColor3 : theme.textColor3 + 33,
+
+              "&:hover": {
+                color: theme.textColor3 + 99,
+              },
+            }}
+            onClick={() => {
+              if (isDraft || codeChangesPresent) {
+                setShowConfirmDialog(true);
+              } else {
+                removeButtonOnClick();
+              }
+            }}
           >
-            <DriveFileRenameOutlineRoundedIcon
-              sx={{
-                fontSize: "1rem",
-                // fill: theme.textColor3 || "rgba(255,255,255,.75)",
-                fill:
-                  theme.name !== "dark"
-                    ? "rgba(0,0,0,.75)"
-                    : "rgba(255,255,255,.75)",
-              }}
-            />
+            <CancelRoundedIcon sx={{ fontSize: "1rem" }} />
           </IconButton>
-        </Fade>
+        </Box>
 
-        <IconButton
-          size="small"
-          sx={{
-            padding: "3px",
-            margin: 0,
-            color: isSelected ? theme.textColor3 : theme.textColor3 + 33,
-
-            "&:hover": {
-              color: theme.textColor3 + 99,
-            },
-          }}
-          onClick={() => removeButtonOnClick()}
-        >
-          <CancelRoundedIcon sx={{ fontSize: "1rem" }} />
-        </IconButton>
+        <RenameDialog
+          key={`rename-modal-${item.name}`}
+          show={showEditButton}
+          name={item?.name}
+          onRename={(newName) => renameFile(newName)}
+          onHide={() => setShowEditButton(false)}
+        />
       </Box>
 
-      <RenameDialog
-        key={`rename-modal-${item.name}`}
-        show={showEditButton}
-        name={item?.name}
-        onRename={(newName) => renameFile(newName)}
-        onHide={() => setShowEditButton(false)}
+      <ConfirmDialog
+        open={showConfirmDialog}
+        setOpen={setShowConfirmDialog}
+        onClick={() => removeButtonOnClick()}
+        label={`Delete widget`}
+        description={`Are you sure you want to delete "${item?.name}"?`}
       />
-    </Box>
+    </>
   );
 };
 
@@ -423,6 +443,7 @@ const MyWidgetsItem = ({ label, onClick }) => {
               textTransform: "none",
               fontSize: ".9rem",
               textAlign: "left",
+              wordBreak: "break-all",
             }}
             className="max1Lines"
           >

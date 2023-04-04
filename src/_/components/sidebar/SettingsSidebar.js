@@ -2,7 +2,7 @@ import { MenuItem, Select, Switch, Typography } from "@mui/material";
 
 import { Box } from "@mui/system";
 import React, { useContext } from "react";
-import { ThemeContext } from "../../../../context/ThemeContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export default function SettingsSidebar() {
   const { theme } = useContext(ThemeContext);

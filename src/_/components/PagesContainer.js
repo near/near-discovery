@@ -3,8 +3,8 @@ import { Allotment } from "allotment";
 import React, { useContext } from "react";
 import { EditorContext } from "../context/EditorContext";
 import { ThemeContext } from "../context/ThemeContext";
-import Activitybar from "../pages/editorPage/_components/Activitybar";
-import EditorPageSidebar from "../pages/editorPage/_components/sidebar/EditorPageSidebar";
+import Activitybar from "./Activitybar";
+import Sidebar from "./sidebar/Sidebar";
 
 export default function PagesContainer(props) {
   const { theme } = useContext(ThemeContext);
@@ -36,7 +36,7 @@ export default function PagesContainer(props) {
           minSize={100}
           maxSize={450}
         >
-          <EditorPageSidebar
+          <Sidebar
             appProps={props}
             logOut={() => props.logOut()}
             requestSignIn={() => props.requestSignIn()}

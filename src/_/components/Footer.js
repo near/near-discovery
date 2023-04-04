@@ -1,8 +1,8 @@
 import { Box, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import { ThemeContext } from "../../../context/ThemeContext";
+import { ThemeContext } from "../context/ThemeContext";
 import WifiTetheringRoundedIcon from "@mui/icons-material/WifiTetheringRounded";
-import { EditorContext } from "../../../context/EditorContext";
+import { EditorContext } from "../context/EditorContext";
 import { useLocation } from "react-router-dom";
 
 export default function Footer() {

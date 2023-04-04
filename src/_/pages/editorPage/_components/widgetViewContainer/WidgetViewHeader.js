@@ -156,86 +156,86 @@ export default function WidgetViewHeader({
   );
 }
 
-const OpenInNewTabMenu = () => {
-  const { theme } = useContext(ThemeContext);
+// const OpenInNewTabMenu = () => {
+//   const { theme } = useContext(ThemeContext);
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+//   const [anchorEl, setAnchorEl] = React.useState(null);
+//   const open = Boolean(anchorEl);
+//   const handleClick = (event) => {
+//     setAnchorEl(event.currentTarget);
+//   };
+//   const handleClose = () => {
+//     setAnchorEl(null);
+//   };
 
-  return (
-    <>
-      <Tooltip title="Open in a new tab" placement="bottom">
-        <IconButton
-          aria-label="more"
-          id="long-button"
-          aria-controls={open ? "long-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-haspopup="true"
-          onClick={handleClick}
-        >
-          <PublicRoundedIcon
-            sx={{ fill: theme.textColor2, fontSize: "1rem" }}
-          />
-        </IconButton>
-      </Tooltip>
+//   return (
+//     <>
+//       <Tooltip title="Open in a new tab" placement="bottom">
+//         <IconButton
+//           aria-label="more"
+//           id="long-button"
+//           aria-controls={open ? "long-menu" : undefined}
+//           aria-expanded={open ? "true" : undefined}
+//           aria-haspopup="true"
+//           onClick={handleClick}
+//         >
+//           <PublicRoundedIcon
+//             sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+//           />
+//         </IconButton>
+//       </Tooltip>
 
-      <Menu
-        id="long-menu"
-        MenuListProps={{
-          "aria-labelledby": "long-button",
-        }}
-        anchorEl={anchorEl}
-        open={open}
-        onClose={handleClose}
-        PaperProps={{
-          style: {
-            // maxHeight: 3 * 4.5,
-            width: "20ch",
+//       <Menu
+//         id="long-menu"
+//         MenuListProps={{
+//           "aria-labelledby": "long-button",
+//         }}
+//         anchorEl={anchorEl}
+//         open={open}
+//         onClose={handleClose}
+//         PaperProps={{
+//           style: {
+//             // maxHeight: 3 * 4.5,
+//             width: "20ch",
 
-            backgroundColor: theme.ui,
-          },
-        }}
-      >
-        <MenuItem>
-          <ListItemText sx={{ color: theme.textColor }}>Bos.gg</ListItemText>
+//             backgroundColor: theme.ui,
+//           },
+//         }}
+//       >
+//         <MenuItem>
+//           <ListItemText sx={{ color: theme.textColor }}>Bos.gg</ListItemText>
 
-          <ListItemIcon style={{ minWidth: 16 }}>
-            <OpenInNewRoundedIcon
-              sx={{ fill: theme.textColor2, fontSize: "1rem" }}
-            />
-          </ListItemIcon>
-        </MenuItem>
+//           <ListItemIcon style={{ minWidth: 16 }}>
+//             <OpenInNewRoundedIcon
+//               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+//             />
+//           </ListItemIcon>
+//         </MenuItem>
 
-        <MenuItem>
-          <ListItemText sx={{ color: theme.textColor }}>
-            Near.Social
-          </ListItemText>
+//         <MenuItem>
+//           <ListItemText sx={{ color: theme.textColor }}>
+//             Near.Social
+//           </ListItemText>
 
-          <ListItemIcon style={{ minWidth: 16 }}>
-            <OpenInNewRoundedIcon
-              sx={{ fill: theme.textColor2, fontSize: "1rem" }}
-            />
-          </ListItemIcon>
-        </MenuItem>
+//           <ListItemIcon style={{ minWidth: 16 }}>
+//             <OpenInNewRoundedIcon
+//               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+//             />
+//           </ListItemIcon>
+//         </MenuItem>
 
-        <MenuItem>
-          <ListItemText sx={{ color: theme.textColor }}>
-            Alpha.Near
-          </ListItemText>
+//         <MenuItem>
+//           <ListItemText sx={{ color: theme.textColor }}>
+//             Alpha.Near
+//           </ListItemText>
 
-          <ListItemIcon style={{ minWidth: 16 }}>
-            <OpenInNewRoundedIcon
-              sx={{ fill: theme.textColor2, fontSize: "1rem" }}
-            />
-          </ListItemIcon>
-        </MenuItem>
-      </Menu>
-    </>
-  );
-};
+//           <ListItemIcon style={{ minWidth: 16 }}>
+//             <OpenInNewRoundedIcon
+//               sx={{ fill: theme.textColor2, fontSize: "1rem" }}
+//             />
+//           </ListItemIcon>
+//         </MenuItem>
+//       </Menu>
+//     </>
+//   );
+// };

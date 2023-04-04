@@ -11,15 +11,15 @@ import MyEditorPage from "./_/pages/editorPage/EditorPage";
 import SearchPage from "./_/pages/SearchPage";
 import HomePage from "./_/pages/HomePage";
 import EmbedPage from "./_/pages/EmbedPage";
+import DiscoverPage from "./_/pages/DiscoverPage";
 
 // import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { EditorContext } from "./_/context/EditorContext";
-import Footer from "./_/pages/editorPage/_components/Footer";
-import ComponentDetailsPage from "./_/pages/ComponentDetailsPage";
-import DiscoverPage from "./_/pages/DiscoverPage";
+import Footer from "./_/components/Footer";
+import EnvironmentsPage from "./_/pages/EnvironmentsPage";
 
 export const refreshAllowanceObj = {};
 ReactGA.initialize("G-YJ2FL738R6");
@@ -140,8 +140,18 @@ export default function App(props) {
     <div className="App">
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route path={"/editor/:widgetSrc*"}>
-            <MyEditorPage {...passProps} />
+          <Route path={"/components/:widgetSrc*"}>
+            {/* <NavigationWrapper {...passProps} /> */}
+            <EmbedPage {...passProps} />
+          </Route>
+
+          <Route path={"/profile"}>
+            <SearchPage {...passProps} />
+            <Footer />
+          </Route>
+
+          <Route path={"/environments"}>
+            <EnvironmentsPage {...passProps} />
             <Footer />
           </Route>
 
@@ -150,12 +160,9 @@ export default function App(props) {
             <Footer />
           </Route>
 
-          <Route path={"/components/:widgetSrc*/details"}>
-            <ComponentDetailsPage {...passProps} />
-          </Route>
-          <Route path={"/components/:widgetSrc*"}>
-            {/* <NavigationWrapper {...passProps} /> */}
-            <EmbedPage {...passProps} />
+          <Route path={"/editor/:widgetSrc*"}>
+            <MyEditorPage {...passProps} />
+            <Footer />
           </Route>
 
           <Route path="/discover">

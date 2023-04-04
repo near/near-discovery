@@ -4,11 +4,12 @@ import React, { useContext } from "react";
 import WidgetsSidebar from "./WidgetsSidebar";
 import ProfileSidebar from "./ProfileSidebar";
 import SettingsSidebar from "./SettingsSidebar";
-import { ThemeContext } from "../../../../context/ThemeContext";
-import { EditorContext } from "../../../../context/EditorContext";
+import { ThemeContext } from "../../context/ThemeContext";
+import { EditorContext } from "../../context/EditorContext";
 import EnvironmentlSidebar from "./EnvironmentlSidebar";
+import SearchSidebar from "./SearchSidebar";
 
-export default function EditorPageSidebar({
+export default function Sidebar({
   appProps,
 
   loadFile,
@@ -57,10 +58,9 @@ export default function EditorPageSidebar({
               setShowOpenModal={setShowOpenModal}
             />
           )) ||
+            (selectedActivity === "search" && <SearchSidebar />) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
-            (selectedActivity === "change network" && (
-              <EnvironmentlSidebar />
-            )) ||
+            (selectedActivity === "changeNetwork" && <EnvironmentlSidebar />) ||
             (selectedActivity === "profile" && (
               <ProfileSidebar
                 logOut={logOut}

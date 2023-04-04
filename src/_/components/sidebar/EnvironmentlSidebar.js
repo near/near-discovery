@@ -1,7 +1,7 @@
 import { Box, MenuItem, Select, Typography } from "@mui/material";
 import React, { useContext } from "react";
-import { ThemeContext } from "../../../../context/ThemeContext";
-import { EditorContext } from "../../../../context/EditorContext";
+import { ThemeContext } from "../../context/ThemeContext";
+import { EditorContext } from "../../context/EditorContext";
 
 export default function EnvironmentlSidebar() {
   const { theme } = useContext(ThemeContext);
