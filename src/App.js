@@ -4,7 +4,7 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
-import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EditorPage from "./pages/EditorPage";
 import ViewPage from "./pages/ViewPage";
 import { setupWalletSelector } from "@near-wallet-selector/core";
@@ -89,16 +89,6 @@ function App(props) {
   }, [initNear]);
 
   useEffect(() => {
-    if (
-      !location.search.includes("?account_id") &&
-      !location.search.includes("&account_id") &&
-      (location.search || location.href.includes("/?#"))
-    ) {
-      window.history.replaceState({}, "/", "/" + location.hash);
-    }
-  }, [location]);
-
-  useEffect(() => {
     if (!near) {
       return;
     }
@@ -174,7 +164,11 @@ function App(props) {
 
   return (
     <StyledApp className="App">
-      <Router basename={process.env.PUBLIC_URL}>
+      <Helmet>
+        <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+      </Helmet>
+
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
@@ -188,7 +182,7 @@ function App(props) {
             <ViewPage {...passProps} />
           </Route>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </StyledApp>
   );
 }
