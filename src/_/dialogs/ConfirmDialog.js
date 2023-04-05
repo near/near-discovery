@@ -74,7 +74,7 @@ export default function ConfirmDialog({
             setOpen(false);
           }}
         >
-          Delete
+          Remove
         </CustomButton>
       </DialogActions>
     </Dialog>

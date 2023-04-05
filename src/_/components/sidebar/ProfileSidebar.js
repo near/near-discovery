@@ -41,7 +41,7 @@ export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
 
       {account.accountId && (
         <Widget
-          src={appProps.widgets.profileSidebar}
+          src={appProps.widgets.profilePageSidebar}
           props={{ accountId: account.accountId, theme: theme }}
         />
       )}

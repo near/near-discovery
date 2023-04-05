@@ -362,7 +362,7 @@ const OpenEditorItem = ({
               },
             }}
             onClick={() => {
-              if (isDraft || codeChangesPresent) {
+              if (isDraft === true || codeChangesPresent === true) {
                 setShowConfirmDialog(true);
               } else {
                 removeButtonOnClick();
@@ -386,8 +386,8 @@ const OpenEditorItem = ({
         open={showConfirmDialog}
         setOpen={setShowConfirmDialog}
         onClick={() => removeButtonOnClick()}
-        label={`Delete widget`}
-        description={`Are you sure you want to delete "${item?.name}"?`}
+        label={`Remove widget`}
+        description={`Are you sure you want to remove "${item?.name}"?`}
       />
     </>
   );

@@ -1,17 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Widget } from "near-social-vm";
 import { Box, Typography } from "@mui/material";
-import { EditorContext } from "../../context/EditorContext";
-import { useContext } from "react";
-import { ThemeContext } from "../../context/ThemeContext";
 import { useHistory, useLocation } from "react-router-dom";
+
+import { useSnackbar } from "notistack";
+
+import { EditorContext } from "../../context/EditorContext";
+import { ThemeContext } from "../../context/ThemeContext";
 
 export default function SearchSidebar() {
   const { pathname } = useLocation();
   const history = useHistory();
+  const { enqueueSnackbar } = useSnackbar();
 
   const { theme } = useContext(ThemeContext);
   const { NetworkId, setOpenComponentDetail } = useContext(EditorContext);
+
+  const onCopyButtonClick = async (textToCopy) => {
+    try {
+      await navigator.clipboard.writeText(`<Widget src="${textToCopy}" />`);
+
+      enqueueSnackbar("Widget copied to clipboard!", { variant: "success" });
+    } catch (error) {
+      enqueueSnackbar("Failed to copy text: ", { variant: "error" });
+    }
+  };
 
   return (
     <Box
@@ -49,6 +62,7 @@ export default function SearchSidebar() {
               history.push("/search");
             }
           },
+          onCopyButtonClick,
         }}
       />
     </Box>

@@ -12,6 +12,8 @@ import SearchPage from "./_/pages/SearchPage";
 import HomePage from "./_/pages/HomePage";
 import EmbedPage from "./_/pages/EmbedPage";
 import DiscoverPage from "./_/pages/DiscoverPage";
+import EnvironmentsPage from "./_/pages/EnvironmentsPage";
+import ProfilePage from "./_/pages/ProfilePage";
 
 // import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { setupModal } from "@near-wallet-selector/modal-ui";
@@ -19,7 +21,6 @@ import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { EditorContext } from "./_/context/EditorContext";
 import Footer from "./_/components/Footer";
-import EnvironmentsPage from "./_/pages/EnvironmentsPage";
 
 export const refreshAllowanceObj = {};
 ReactGA.initialize("G-YJ2FL738R6");
@@ -146,7 +147,7 @@ export default function App(props) {
           </Route>
 
           <Route path={"/profile"}>
-            <SearchPage {...passProps} />
+            <ProfilePage {...passProps} />
             <Footer />
           </Route>
 
