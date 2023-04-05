@@ -5,9 +5,9 @@ import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
 import WifiRoundedIcon from "@mui/icons-material/WifiRounded";
 
-import camelToNormal from "../libs/camelToNormal";
-import { ThemeContext } from "../context/ThemeContext";
-import { EditorContext } from "../context/EditorContext";
+import camelToNormal from "../../../libs/camelToNormal";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { EditorContext } from "../../../context/EditorContext";
 
 import DiamondRoundedIcon from "@mui/icons-material/DiamondRounded";
 import { ButtonBase, Tooltip } from "@mui/material";
@@ -38,11 +38,10 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={
             <DiamondRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
+              sx={{ fill: theme.textColor4, fontSize: "2rem" }}
             />
           }
           label="discover"
-          to="/discover"
           onClick={() => {
             history.push("/discover");
             setSelectedActivity("");
@@ -51,11 +50,10 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={
             <LibraryAddRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
             />
           }
           label="create widgets"
-          to="/editor"
           onClick={() => {
             history.push("/editor");
             setSelectedActivity((e) => (e === "widgets" ? "" : "widgets"));
@@ -65,31 +63,23 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={
             <SearchRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
             />
           }
           label="search widgets"
-          to="/search"
           onClick={() => {
             history.push("/search");
-            setSelectedActivity((e) => (e === "search" ? "" : "search"));
+            setSelectedActivity("");
           }}
         />
 
         <ActivityButton
           icon={
             <WifiRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
             />
           }
-          label="changeNetwork"
-          to="/environments"
-          onClick={() => {
-            history.push("/environments");
-            setSelectedActivity((e) =>
-              e === "changeNetwork" ? "" : "changeNetwork"
-            );
-          }}
+          label="change network"
         />
       </div>
 
@@ -97,7 +87,7 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={
             <HelpOutlineRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
             />
           }
           label="Documentation"
@@ -107,7 +97,7 @@ export default function Activitybar(props) {
         <ActivityButton
           icon={
             <SettingsOutlinedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
             />
           }
           label="settings"
@@ -143,20 +133,15 @@ export default function Activitybar(props) {
               />
             )
           }
-          sx={{ opacity: 1 }}
           label="profile"
-          to="/profile"
-          onClick={() => {
-            history.push("/profile");
-            setSelectedActivity((e) => (e === "profile" ? "" : "profile"));
-          }}
+          sx={{ opacity: 1 }}
         />
       </div>
     </div>
   );
 }
 
-const ActivityButton = ({ icon, label, to, onClick, sx }) => {
+const ActivityButton = ({ icon, label, onClick, sx }) => {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity, setSelectedActivity } = useContext(EditorContext);
   const { pathname } = useLocation();
@@ -176,13 +161,13 @@ const ActivityButton = ({ icon, label, to, onClick, sx }) => {
                 : "rgba(0,0,0,.05)",
           },
           backgroundColor:
-            pathname.includes(to) || selectedActivity === label
+            pathname.includes(label) || selectedActivity === label
               ? theme.name === "dark"
                 ? "rgba(256,256,256,.05)!important"
                 : "rgba(0,0,0,.05)!important"
               : "transparent",
           opacity:
-            pathname.includes(to) || selectedActivity === label ? 1 : 0.5,
+            pathname.includes(label) || selectedActivity === label ? 1 : 0.5,
           ...sx,
         }}
         onClick={() => {

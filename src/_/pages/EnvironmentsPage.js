@@ -36,14 +36,7 @@ export default function EnvironmentsPage(props) {
         >
           <Box sx={{ display: "flex", alignItems: "center", gap: 1, p: 2 }}>
             <Typography
-              variant="h5"
-              fontWeight={500}
-              sx={{ color: theme.textColor3 }}
-            >
-              Network name:
-            </Typography>
-            <Typography
-              variant="h5"
+              variant="h4"
               fontWeight={500}
               sx={{ color: theme.textColor }}
             >
@@ -62,7 +55,7 @@ export default function EnvironmentsPage(props) {
                     borderColor: theme.borderColor,
                   }}
                 >
-                  Widget Names
+                  Widget
                 </TableCell>
                 <TableCell
                   align="left"
