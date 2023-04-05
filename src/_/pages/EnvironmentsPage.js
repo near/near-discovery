@@ -27,7 +27,7 @@ export default function EnvironmentsPage(props) {
         <TableContainer
           component={Paper}
           sx={{
-            backgroundColor: theme.ui2,
+            backgroundColor: theme.backgroundColor,
             borderRadius: "4px",
             mt: 2,
             boxShadow: "none",

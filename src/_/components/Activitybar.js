@@ -101,7 +101,8 @@ export default function Activitybar(props) {
             />
           }
           label="Documentation"
-          //onClick={() => window.open("https://docs.near.org/discovery")}
+          // onClick={() => window.open("https://docs.near.org/discovery")}
+          onClick={() => {}}
         />
 
         <ActivityButton
