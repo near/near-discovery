@@ -182,7 +182,7 @@ export default function TopSection() {
               style={{
                 width: "100%",
                 minWidth: 300,
-                maxWidth: 750,
+                maxWidth: 900,
                 height: "100%",
                 objectFit: "cover",
                 zIndex: 99999999999999,
@@ -204,7 +204,7 @@ export default function TopSection() {
               style={{
                 width: "100%",
                 minWidth: 300,
-                maxWidth: 750,
+                maxWidth: 900,
                 objectFit: "cover",
                 zIndex: 99999999999999,
                 border: `1px ${theme.borderColor} solid`,
