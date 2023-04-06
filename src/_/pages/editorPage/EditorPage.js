@@ -71,7 +71,7 @@ const Layout = {
 };
 
 export default function EditorPage(props) {
-  const { theme, editorFontSize } = useContext(ThemeContext);
+  const { theme, editorFontSize, bp } = useContext(ThemeContext);
   const {
     selectedActivity,
     showWebsiteView,
@@ -858,14 +858,15 @@ export default function EditorPage(props) {
         <Activitybar {...props} />
         {/* <VsCodeBanner /> */}
 
-        <Allotment maxSize="100%">
-          <Allotment.Pane
-            key="activityBar"
-            snap
-            visible={selectedActivity?.length > 0 ? true : false}
-            preferredSize={300}
-            minSize={100}
-            maxSize={450}
+        {bp && selectedActivity && (
+          <Box
+            sx={{
+              position: "absolute",
+              backgroundColor: "red",
+              zIndex: 9999,
+              width: "calc(100% - 50px)",
+              left: 50,
+            }}
           >
             <Sidebar
               appProps={props}
@@ -887,7 +888,45 @@ export default function EditorPage(props) {
               logOut={() => props.logOut()}
               requestSignIn={() => props.requestSignIn()}
             />
-          </Allotment.Pane>
+          </Box>
+        )}
+
+        <Allotment
+          maxSize="100%"
+          vertical={bp}
+          // vertical={true}
+        >
+          {!bp && (
+            <Allotment.Pane
+              key="activityBar"
+              snap
+              visible={selectedActivity?.length > 0 ? true : false}
+              preferredSize={300}
+              minSize={100}
+              maxSize={450}
+            >
+              <Sidebar
+                appProps={props}
+                loadFile={loadFile}
+                // For WidgetSidebar
+                renameFile={renameFile}
+                curPath={path}
+                openFile={openFile}
+                removeFromFiles={removeFromFiles}
+                createFile={createFile}
+                handleCreateButton={() => {
+                  // setShowAddModal(false),
+                  setShowRenameModal(true);
+                  createNewFile(Filetype.Widget);
+                }}
+                setShowRenameModal={setShowRenameModal}
+                setShowOpenModal={setShowOpenModal}
+                // For ProfileSidebar
+                logOut={() => props.logOut()}
+                requestSignIn={() => props.requestSignIn()}
+              />
+            </Allotment.Pane>
+          )}
 
           <Allotment.Pane minSize={300}>
             {/* 

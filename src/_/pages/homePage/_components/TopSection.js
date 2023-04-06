@@ -1,16 +1,17 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
 import ParticleBackground from "react-particle-backgrounds";
-import { ThemeContext } from "../context/ThemeContext";
-import { Box, Typography, Button, alpha } from "@mui/material";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { Box, Typography, Button, alpha, useMediaQuery } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import Chip from "@mui/material/Chip";
 
-import imageSrc from "../images/home.png";
-import searchSrc from "../images/search.png";
+import imageSrc from "../../../images/home.png";
+import searchSrc from "../../../images/search.png";
 
-export default function HomePage() {
-  const { theme } = useContext(ThemeContext);
+export default function TopSection() {
+  const min720 = useMediaQuery("(min-width:820px)");
+
+  const { theme, bp } = useContext(ThemeContext);
 
   const handleClick = (gateway) => {
     const gateways = {
@@ -71,7 +72,7 @@ export default function HomePage() {
           flex: 1,
           gap: 2,
           display: "grid",
-          gridTemplateColumns: "1fr 1fr",
+          gridTemplateColumns: bp ? "1fr" : "1fr 1fr",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -79,12 +80,12 @@ export default function HomePage() {
         <Box>
           <Typography
             variant="h1"
-            sx={{ fontSize: "7rem", color: theme.textColor }}
+            sx={{ fontSize: bp ? "4rem" : "7rem", color: theme.textColor }}
           >
             NEARpad
           </Typography>
           <Typography
-            variant="h2"
+            variant={bp ? "h3" : "h2"}
             fontWeight={600}
             textAlign="left"
             sx={{
@@ -95,12 +96,13 @@ export default function HomePage() {
           </Typography>
 
           <Typography
-            fontWeight={200}
+            fontWeight={bp ? 300 : 200}
+            variant={bp ? "h4" : "h3"}
             sx={{
               marginTop: 3.75,
               color: theme.textColor,
-              fontWeight: 200,
-              fontSize: 26,
+              // fontWeight: 200,
+              // fontSize: 26,
             }}
           >
             Create decentralized frontend widgets without limits.
@@ -138,17 +140,17 @@ export default function HomePage() {
             </span>
           </Typography>
           {/* <Link
-            target="_blank"
-            to="https://t.me/+7k9u4Pa23sUyM2Qx"
-            style={{ textDecoration: "none" }}
-          > */}
+        target="_blank"
+        to="https://t.me/+7k9u4Pa23sUyM2Qx"
+        style={{ textDecoration: "none" }}
+      > */}
           <Button
             sx={{
               mt: 4,
               px: 3,
               py: 1.5,
               borderRadius: 1,
-              fontSize: "1.25rem",
+              fontSize: bp ? "1rem" : "1.25rem",
               fontWeight: 600,
               backgroundColor: theme.textColor + "0D",
               color: theme.textColor,
@@ -161,51 +163,59 @@ export default function HomePage() {
             onClick={(e) => window.open("https://t.me/+7k9u4Pa23sUyM2Qx")}
           >
             Join the beta
-            <ArrowForwardRoundedIcon sx={{ marginLeft: 3, fontSize: "2rem" }} />
+            <ArrowForwardRoundedIcon
+              sx={{ marginLeft: 3, fontSize: bp ? "1rem" : "2rem" }}
+            />
           </Button>
           {/* </Link> */}
         </Box>
 
-        <Box
-          sx={{
-            flex: 1,
-            position: "relative",
-            marginRight: 1,
-          }}
-        >
-          <img
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              zIndex: 99999999999999,
-              border: `1px ${theme.borderColor} solid`,
-              borderRadius: 4,
-              overflow: "hidden",
-
-              position: "absolute",
-
-              boxShadow: "0 0 10px 10px rgba(0, 0, 0, 0.1)",
-
-              top: 200,
-              left: 100,
+        {min720 && (
+          <Box
+            sx={{
+              flex: 1,
+              position: "relative",
+              marginRight: 1,
             }}
-            src={imageSrc}
-            alt="home"
-          />
-          <img
-            style={{
-              width: "100%",
-              objectFit: "cover",
-              zIndex: 99999999999999,
-              border: `1px ${theme.borderColor} solid`,
-              borderRadius: 4,
-              overflow: "hidden",
-            }}
-            src={searchSrc}
-            alt="search"
-          />
-        </Box>
+          >
+            <img
+              style={{
+                width: "100%",
+                minWidth: 300,
+                maxWidth: 750,
+                height: "100%",
+                objectFit: "cover",
+                zIndex: 99999999999999,
+                border: `1px ${theme.borderColor} solid`,
+                borderRadius: 4,
+                overflow: "hidden",
+
+                position: "absolute",
+
+                boxShadow: "0 0 10px 10px rgba(0, 0, 0, 0.1)",
+
+                top: 200,
+                left: 100,
+              }}
+              src={imageSrc}
+              alt="home"
+            />
+            <img
+              style={{
+                width: "100%",
+                minWidth: 300,
+                maxWidth: 750,
+                objectFit: "cover",
+                zIndex: 99999999999999,
+                border: `1px ${theme.borderColor} solid`,
+                borderRadius: 4,
+                overflow: "hidden",
+              }}
+              src={searchSrc}
+              alt="search"
+            />
+          </Box>
+        )}
       </Box>
     </Box>
   );

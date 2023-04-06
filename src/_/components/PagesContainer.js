@@ -7,7 +7,7 @@ import Activitybar from "./Activitybar";
 import Sidebar from "./sidebar/Sidebar";
 
 export default function PagesContainer(props) {
-  const { theme } = useContext(ThemeContext);
+  const { theme, bp } = useContext(ThemeContext);
   const { selectedActivity } = useContext(EditorContext);
 
   return (
@@ -26,22 +26,41 @@ export default function PagesContainer(props) {
       }}
     >
       <Activitybar {...props} />
-
-      <Allotment maxSize="100%">
-        <Allotment.Pane
-          key="activityBar"
-          snap
-          visible={selectedActivity?.length > 0 ? true : false}
-          preferredSize={300}
-          minSize={100}
-          maxSize={450}
+      {bp && selectedActivity && (
+        <Box
+          sx={{
+            position: "absolute",
+            backgroundColor: "red",
+            zIndex: 100,
+            width: "calc(100% - 50px)",
+            left: 50,
+          }}
         >
           <Sidebar
             appProps={props}
             logOut={() => props.logOut()}
             requestSignIn={() => props.requestSignIn()}
           />
-        </Allotment.Pane>
+        </Box>
+      )}
+
+      <Allotment maxSize="100%">
+        {!bp && (
+          <Allotment.Pane
+            key="activityBar"
+            snap
+            visible={selectedActivity?.length > 0 ? true : false}
+            preferredSize={300}
+            minSize={100}
+            maxSize={450}
+          >
+            <Sidebar
+              appProps={props}
+              logOut={() => props.logOut()}
+              requestSignIn={() => props.requestSignIn()}
+            />
+          </Allotment.Pane>
+        )}
 
         <Allotment.Pane minSize={300}>{props.children}</Allotment.Pane>
       </Allotment>

@@ -39,9 +39,7 @@ export default function SearchPage(props) {
           {pattern.test(openComponentDetail) ? (
             <Widget
               src="adminalpha.near/widget/ComponentDetailsPage"
-              props={{
-                src: openComponentDetail,
-              }}
+              props={{ src: openComponentDetail }}
             />
           ) : (
             <Box

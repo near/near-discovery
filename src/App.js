@@ -9,7 +9,7 @@ import ReactGA from "react-ga4";
 
 import MyEditorPage from "./_/pages/editorPage/EditorPage";
 import SearchPage from "./_/pages/SearchPage";
-import HomePage from "./_/pages/HomePage";
+import HomePage from "./_/pages/homePage/HomePage";
 import EmbedPage from "./_/pages/EmbedPage";
 import DiscoverPage from "./_/pages/DiscoverPage";
 import EnvironmentsPage from "./_/pages/EnvironmentsPage";
@@ -21,11 +21,14 @@ import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { EditorContext } from "./_/context/EditorContext";
 import Footer from "./_/components/Footer";
+import { Box, GlobalStyles } from "@mui/material";
+import { ThemeContext } from "./_/context/ThemeContext";
 
 export const refreshAllowanceObj = {};
 ReactGA.initialize("G-YJ2FL738R6");
 
-export default function App(props) {
+export default function App() {
+  const { theme } = useContext(ThemeContext);
   const { NetworkId, Widgets } = useContext(EditorContext);
 
   const [connected, setConnected] = useState(false);
@@ -138,7 +141,24 @@ export default function App(props) {
   };
 
   return (
-    <div className="App">
+    <Box className="App">
+      <GlobalStyles
+        styles={{
+          "*::-webkit-scrollbar": {
+            width: 7,
+          },
+          "*::-webkit-scrollbar-track": {
+            boxShadow: "none",
+            backgroundColor: theme.borderColor + "99",
+            borderEadius: 4,
+          },
+          "*::-webkit-scrollbar-thumb": {
+            backgroundColor: theme.borderColor,
+            borderRadius: 1,
+          },
+        }}
+      />
+
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path={"/components/:widgetSrc*"}>
@@ -174,6 +194,6 @@ export default function App(props) {
           <Route path="/" component={HomePage} />
         </Switch>
       </Router>
-    </div>
+    </Box>
   );
 }

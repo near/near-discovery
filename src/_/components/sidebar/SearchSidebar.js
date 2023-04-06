@@ -13,8 +13,13 @@ export default function SearchSidebar() {
   const history = useHistory();
   const { enqueueSnackbar } = useSnackbar();
 
-  const { theme } = useContext(ThemeContext);
-  const { NetworkId, setOpenComponentDetail } = useContext(EditorContext);
+  const { theme, bp } = useContext(ThemeContext);
+  const {
+    NetworkId,
+    openComponentDetail,
+    setOpenComponentDetail,
+    setSelectedActivity,
+  } = useContext(EditorContext);
 
   const onCopyButtonClick = async (textToCopy) => {
     try {
@@ -56,7 +61,11 @@ export default function SearchSidebar() {
         }/widget/SearchPage`}
         props={{
           theme,
+          selectedItem: openComponentDetail,
           onDetailsUrlClick: (e) => {
+            if (bp) {
+              setSelectedActivity(false);
+            }
             setOpenComponentDetail((x) => (x === e ? "" : e));
             if (pathname !== "/search") {
               history.push("/search");

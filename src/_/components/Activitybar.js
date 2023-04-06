@@ -4,6 +4,7 @@ import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
 import WifiRoundedIcon from "@mui/icons-material/WifiRounded";
+import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 
 import camelToNormal from "../libs/camelToNormal";
 import { ThemeContext } from "../context/ThemeContext";
@@ -96,12 +97,20 @@ export default function Activitybar(props) {
       <div>
         <ActivityButton
           icon={
+            <NotificationsNoneRoundedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+            />
+          }
+          label="notifications"
+        />
+
+        <ActivityButton
+          icon={
             <HelpOutlineRoundedIcon
               sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
             />
           }
           label="Documentation"
-          // onClick={() => window.open("https://docs.near.org/discovery")}
           onClick={() => {}}
         />
 

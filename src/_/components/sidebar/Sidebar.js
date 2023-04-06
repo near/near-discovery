@@ -8,6 +8,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { EditorContext } from "../../context/EditorContext";
 import EnvironmentlSidebar from "./EnvironmentlSidebar";
 import SearchSidebar from "./SearchSidebar";
+import NotificationsSidebar from "./NotificationsSidebar";
 
 export default function Sidebar({
   appProps,
@@ -61,6 +62,9 @@ export default function Sidebar({
             (selectedActivity === "search" && <SearchSidebar />) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
             (selectedActivity === "changeNetwork" && <EnvironmentlSidebar />) ||
+            (selectedActivity === "notifications" && (
+              <NotificationsSidebar />
+            )) ||
             (selectedActivity === "profile" && (
               <ProfileSidebar
                 logOut={logOut}

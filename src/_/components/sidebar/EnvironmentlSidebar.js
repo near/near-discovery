@@ -1,4 +1,11 @@
-import { Box, MenuItem, Select, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  ButtonBase,
+  MenuItem,
+  Select,
+  Typography,
+} from "@mui/material";
 import React, { useContext } from "react";
 import { ThemeContext } from "../../context/ThemeContext";
 import { EditorContext } from "../../context/EditorContext";
@@ -37,37 +44,98 @@ const ChangeEnvButton = () => {
   const { theme } = useContext(ThemeContext);
   const { NetworkId, setNetworkId } = useContext(EditorContext);
 
+  const styles = {
+    buttonStyle: {
+      flex: 1,
+      width: "100%",
+      py: 1.5,
+      borderRadius: 0.5,
+      transition: `all .2s ease-in-out`,
+    },
+  };
   return (
     <Box
       sx={{
         display: "flex",
-        alignItems: "center",
+        flexDirection: "column",
+        alignItems: "flex-start",
         justifyContent: "space-between",
         paddingInline: 1,
         borderBottom: `1px solid ${theme.borderColor}`,
-        height: 50,
+        // height: 50,
       }}
     >
       <Typography
         variant="p1"
-        sx={{ fontWeight: 500, color: theme.textColor2 }}
+        sx={{ fontWeight: 500, color: theme.textColor2, pt: 1.75, pb: 1 }}
       >
-        Networks
+        Networks:
       </Typography>
 
-      <div className="SelectContainer">
-        <Select
-          size="small"
-          value={NetworkId}
-          onChange={(e) => setNetworkId(e.target.value)}
-          displayEmpty
-          inputProps={{ classes: { icon: "white-icon" } }}
-          sx={{ outline: "none", border: "none", color: theme.textColor }}
+      <Box
+        sx={{
+          display: "grid",
+          width: "100%",
+          gridTemplateColumns: "1fr 1fr",
+          gap: 1,
+          pb: 1,
+        }}
+      >
+        <ButtonBase
+          sx={{
+            ...styles.buttonStyle,
+            backgroundColor:
+              NetworkId === "testnet"
+                ? theme.buttonColor + "!important"
+                : theme.textColor + 11,
+
+            "&:hover": {
+              backgroundColor: theme.textColor + 33,
+            },
+          }}
+          onClick={() => setNetworkId("testnet")}
         >
-          <MenuItem value="testnet">Testnet</MenuItem>
-          <MenuItem value="mainnet">Mainnet</MenuItem>
-        </Select>
-      </div>
+          <Typography
+            variant="h6"
+            fontWeight={500}
+            sx={{
+              color:
+                NetworkId === "testnet"
+                  ? theme.buttonTextColor
+                  : theme.textColor3,
+            }}
+          >
+            Testnet
+          </Typography>
+        </ButtonBase>
+        <ButtonBase
+          sx={{
+            ...styles.buttonStyle,
+            backgroundColor:
+              NetworkId === "mainnet"
+                ? theme.buttonColor + "!important"
+                : theme.textColor + 11,
+
+            "&:hover": {
+              backgroundColor: theme.textColor + 22,
+            },
+          }}
+          onClick={() => setNetworkId("mainnet")}
+        >
+          <Typography
+            variant="h6"
+            fontWeight={500}
+            sx={{
+              color:
+                NetworkId === "mainnet"
+                  ? theme.buttonTextColor
+                  : theme.textColor3,
+            }}
+          >
+            Mainnet
+          </Typography>
+        </ButtonBase>
+      </Box>
     </Box>
   );
 };

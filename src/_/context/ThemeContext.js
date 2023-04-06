@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material";
 import React, { useState, createContext, useEffect } from "react";
+import { useMediaQuery } from "@mui/material";
 
 export const ThemeContext = createContext();
 
@@ -50,6 +51,13 @@ export const ThemeContextProvider = (props) => {
     name: "dark",
   };
 
+  // const breakpoints = {
+  //   sm: useMediaQuery("(max-width:560px)"),
+  //   md: useMediaQuery("(max-width:650px)"),
+  //   xl: useMediaQuery("(max-width:1250px)"),
+  // };
+  const breakpoints = useMediaQuery("(max-width:650px)");
+
   useEffect(() => {
     setEditorFontSize(localStorage.getItem("editorFontSize") || "14px");
     const enableDarkMode = localStorage.getItem("enableDarkMode");
@@ -77,6 +85,10 @@ export const ThemeContextProvider = (props) => {
         theme: enableDarkMode ? dark : light,
         editorFontSize,
         setEditorFontSize,
+
+        //
+        breakpoints,
+        bp: breakpoints,
       }}
     >
       {props.children}
