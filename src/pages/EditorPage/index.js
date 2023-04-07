@@ -783,6 +783,7 @@ export default function EditorPage(props) {
           widgets={props.widgets}
           setMetadata={setMetadata}
           metadata={metadata}
+          parsedWidgetProps={parsedWidgetProps}
         />
       </div>
     </>

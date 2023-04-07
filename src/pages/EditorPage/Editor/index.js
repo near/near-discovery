@@ -21,6 +21,7 @@ import styled from "styled-components";
 import Editor from "@monaco-editor/react";
 import Navigation from "./Navigation";
 import Search from "./Search";
+import Tabs from "./Tabs";
 
 export default function EditorComponent({
   loadFile,
@@ -66,6 +67,7 @@ export default function EditorComponent({
   widgets,
   setMetadata,
   metadata,
+  parsedWidgetProps,
 }) {
   console.log("Tab", Tab);
   return (
@@ -97,90 +99,19 @@ export default function EditorComponent({
         <div className="flex-grow-1">
           <div className="row">
             <div className={layoutClass}>
-              <div
-                style={{
-                  display: "flex",
-                }}
-              >
+              <div style={{ display: "flex" }}>
                 <div>
-                  <ul
-                    className={`nav nav-tabs`}
-                    style={{
-                      borderBottom: "0px",
-                      marginTop: "9px",
-                    }}
-                  >
-                    {isModule && (
-                      <li className="nav-item">
-                        <button
-                          className={`nav-link ${
-                            tab === Tab.Editor ? "active" : "text-secondary"
-                          }`}
-                          aria-current="page"
-                          onClick={() => setTab(Tab.Editor)}
-                        >
-                          Module
-                        </button>
-                      </li>
-                    )}
-                    {isModule || (
-                      <>
-                        <li className="nav-item">
-                          <button
-                            className={`nav-link ${
-                              tab === Tab.Editor ? "active" : "text-secondary"
-                            }`}
-                            aria-current="page"
-                            onClick={() => setTab(Tab.Editor)}
-                          >
-                            Component
-                          </button>
-                        </li>
-                        <li className="nav-item">
-                          <button
-                            className={`nav-link ${
-                              tab === Tab.Props ? "active" : "text-secondary"
-                            }`}
-                            aria-current="page"
-                            onClick={() => setTab(Tab.Props)}
-                          >
-                            Props
-                          </button>
-                        </li>
-                        {/* {props.widgets.widgetMetadataEditor && (
-                          <li className="nav-item">
-                            <button
-                              className={`nav-link ${
-                                tab === Tab.Metadata
-                                  ? "active"
-                                  : "text-secondary"
-                              }`}
-                              aria-current="page"
-                              onClick={() => setTab(Tab.Metadata)}
-                            >
-                              Metadata
-                            </button>
-                          </li>
-                        )} */}
-                        {layout === Layout.Tabs && (
-                          <li className="nav-item">
-                            <button
-                              className={`nav-link ${
-                                tab === Tab.Widget ? "active" : "text-secondary"
-                              }`}
-                              aria-current="page"
-                              onClick={() => {
-                                setRenderCode(code);
-                                setTab(Tab.Widget);
-                              }}
-                            >
-                              Component Preview
-                            </button>
-                          </li>
-                        )}
-                      </>
-                    )}
-                  </ul>
+                  <Tabs
+                    isModule={isModule}
+                    tab={tab}
+                    Tab={Tab}
+                    setTab={setTab}
+                    widgets={widgets}
+                    layout={layout}
+                    setRenderCode={setRenderCode}
+                    Layout={Layout}
+                    code={code}
+                  />
                 </div>
                 {layout === Layout.Tabs && (
                   <div className="ms-auto d-flex">
