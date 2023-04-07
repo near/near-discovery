@@ -64,15 +64,7 @@ const TopMenu = styled.div`
 `;
 
 export default function EditorComponent({
-  renameFile,
-  setShowRenameModal,
   loadFile,
-  setShowOpenModal,
-  setShowOpenModuleModal,
-  setShowAddModal,
-  createNewFile,
-  setShowCreateModal,
-  setShowSaveDraftModal,
   openFile,
   removeFromFiles,
   createFile,
@@ -85,14 +77,7 @@ export default function EditorComponent({
   //
   //
   jpath,
-  showRenameModal,
   path,
-  showOpenModal,
-  showOpenModuleModal,
-  showAddModal,
-  showCreateModal,
-  showSaveDraftModal,
-  near,
   widgetPath,
   widgetName,
   code,
