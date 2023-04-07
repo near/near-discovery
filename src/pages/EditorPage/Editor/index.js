@@ -121,6 +121,10 @@ export default function EditorComponent({
                   accountId={accountId}
                   openInNewTabButton={openInNewTabButton}
                   onLayoutChange={onLayoutChange}
+                  Tab={Tab}
+                  renderCode={renderCode}
+                  renderPreviewButton={renderPreviewButton}
+                  tab={tab}
                 />
               </div>
 
@@ -198,70 +202,6 @@ export default function EditorComponent({
               }`}
             >
               <div style={{}}>
-                {tab === Tab.Widget || (
-                  <div
-                    style={{
-                      height: "38px",
-                      display: "flex",
-                      marginBottom: "12px",
-                      justifyContent: "end",
-                    }}
-                  >
-                    {tab === Tab.Widget || (
-                      <>
-                        {renderCode && (
-                          <div className="d-flex justify-content-end me-2">
-                            {renderPreviewButton}
-                          </div>
-                        )}
-                        {path?.type === "widget" &&
-                          accountId &&
-                          openInNewTabButton}
-                        <div
-                          className="btn-group"
-                          role="group"
-                          aria-label="Layout selection"
-                        >
-                          <input
-                            type="radio"
-                            className="btn-check"
-                            name="layout-radio"
-                            id="layout-tabs"
-                            autoComplete="off"
-                            checked={layout === Layout.Tabs}
-                            onChange={onLayoutChange}
-                            value={Layout.Tabs}
-                            title={"Set layout to Tabs mode"}
-                          />
-                          <label
-                            className="btn btn-outline-secondary"
-                            htmlFor="layout-tabs"
-                          >
-                            <i className="bi bi-square" />
-                          </label>
-
-                          <input
-                            type="radio"
-                            className="btn-check"
-                            name="layout-radio"
-                            id="layout-split"
-                            autoComplete="off"
-                            checked={layout === Layout.Split}
-                            value={Layout.Split}
-                            title={"Set layout to Split mode"}
-                            onChange={onLayoutChange}
-                          />
-                          <label
-                            className="btn btn-outline-secondary"
-                            htmlFor="layout-split"
-                          >
-                            <i className="bi bi-layout-split" />
-                          </label>
-                        </div>
-                      </>
-                    )}
-                  </div>
-                )}
                 <div
                   className="container"
                   style={
