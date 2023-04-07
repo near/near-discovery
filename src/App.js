@@ -21,6 +21,7 @@ import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
+import { Helmet } from "react-helmet";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
