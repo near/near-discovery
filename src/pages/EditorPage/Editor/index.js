@@ -19,7 +19,7 @@ import CreateModal from "../../../components/Editor/CreateModal";
 import { SaveDraftModal } from "../../../components/SaveDraft";
 import styled from "styled-components";
 import Editor from "@monaco-editor/react";
-import Navigation from "./Navigation";
+import Navigation from "../Navigation";
 import Search from "./Search";
 import Tabs from "./Tabs";
 import NavigationSub from "./NavigationSub";
@@ -75,7 +75,6 @@ export default function EditorComponent({
   metadata,
   parsedWidgetProps,
 }) {
-  console.log("Tab", Tab);
   return (
     <div className="container-fluid mt-1">
       <div className="">

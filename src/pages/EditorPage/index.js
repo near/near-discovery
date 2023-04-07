@@ -10,18 +10,19 @@ import {
   CommitButton,
   useAccountId,
 } from "near-social-vm";
-import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
-import RenameModal from "../../components/Editor/RenameModal";
-import OpenModal from "../../components/Editor/OpenModal";
-import OpenModuleModal from "../../components/Editor/OpenModuleModal";
-import AddModal from "../../components/Editor/AddModal";
-import CreateModal from "../../components/Editor/CreateModal";
-import { SaveDraftModal } from "../../components/SaveDraft";
-import styled from "styled-components";
+
 import VsCodeBanner from "../../components/Editor/VsCodeBanner";
 import Welcome from "./Welcome";
-import EditorComponent from "./Editor";
 import Modals from "./Modals";
+import Navigation from "./Navigation";
+import Search from "./Search";
+import Tabs from "./Tabs";
+import NavigationSub from "./NavigationSub";
+import TabEditor from "./TabEditor";
+import TabProps from "./TabProps";
+import TabMetadata from "./TabMetadata";
+import Preview from "./Preview";
+import PreviewMetadata from "./PreviewMetadata";
 
 const StorageDomain = {
   page: "editor",
@@ -724,7 +725,115 @@ export default function EditorPage(props) {
       <div className={showEditor ? `` : `visually-hidden`}>
         <VsCodeBanner />
 
-        <EditorComponent
+        <div className="container-fluid mt-1">
+          <div className="">
+            <Navigation
+              jpath={jpath}
+              openFile={openFile}
+              files={files}
+              filesDetails={filesDetails}
+              removeFromFiles={removeFromFiles}
+              createFile={createFile}
+              openCreateButton={openCreateButton}
+              renameButton={renameButton}
+              saveDraftButton={saveDraftButton}
+              forkButton={forkButton}
+              publishDraftAsMainButton={publishDraftAsMainButton}
+              publishButton={publishButton}
+              widgetName={widgetName}
+            />
+            <Search
+              widgets={props.widgets}
+              tos={props.tos}
+              logOut={props.logOut}
+              loadFile={loadFile}
+            />
+          </div>
+          <div className="d-flex align-content-start">
+            <div className="flex-grow-1">
+              <div className="row">
+                <div className={layoutClass}>
+                  <div style={{ display: "flex" }}>
+                    <div>
+                      <Tabs
+                        isModule={isModule}
+                        tab={tab}
+                        Tab={Tab}
+                        setTab={setTab}
+                        widgets={props.widgets}
+                        layout={layout}
+                        setRenderCode={setRenderCode}
+                        Layout={Layout}
+                        code={code}
+                      />
+                    </div>
+                    <NavigationSub
+                      layout={layout}
+                      Layout={Layout}
+                      path={path}
+                      accountId={accountId}
+                      openInNewTabButton={openInNewTabButton}
+                      onLayoutChange={onLayoutChange}
+                      Tab={Tab}
+                      renderCode={renderCode}
+                      renderPreviewButton={renderPreviewButton}
+                      tab={tab}
+                    />
+                  </div>
+
+                  <TabEditor
+                    tab={tab}
+                    Tab={Tab}
+                    code={code}
+                    widgetPath={widgetPath}
+                    updateCode={updateCode}
+                    reformat={reformat}
+                  />
+                  <TabProps
+                    tab={tab}
+                    Tab={Tab}
+                    widgetProps={widgetProps}
+                    setWidgetProps={setWidgetProps}
+                    reformatProps={reformatProps}
+                    propsError={propsError}
+                  />
+                  <TabMetadata
+                    tab={tab}
+                    Tab={Tab}
+                    widgets={props.widgets}
+                    jpath={jpath}
+                    widgetPath={widgetPath}
+                    setMetadata={setMetadata}
+                  />
+                </div>
+                <Preview
+                  tab={tab}
+                  Tab={Tab}
+                  layout={layout}
+                  Layout={Layout}
+                  layoutClass={layoutClass}
+                  renderCode={renderCode}
+                  jpath={jpath}
+                  parsedWidgetProps={parsedWidgetProps}
+                  isModule={isModule}
+                  renderPreviewButton={renderPreviewButton}
+                />
+                <PreviewMetadata
+                  tab={tab}
+                  Tab={Tab}
+                  layoutClass={layoutClass}
+                  jpath={jpath}
+                  widgets={props.widgets}
+                  metadata={metadata}
+                  accountId={accountId}
+                  widgetName={widgetName}
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* <EditorComponent
           renameFile={renameFile}
           setShowRenameModal={setShowRenameModal}
           loadFile={loadFile}
@@ -784,7 +893,7 @@ export default function EditorPage(props) {
           setMetadata={setMetadata}
           metadata={metadata}
           parsedWidgetProps={parsedWidgetProps}
-        />
+        /> */}
       </div>
     </>
   );
