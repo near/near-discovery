@@ -20,6 +20,7 @@ import { SaveDraftModal } from "../../../components/SaveDraft";
 import styled from "styled-components";
 import Editor from "@monaco-editor/react";
 import Navigation from "./Navigation";
+import Search from "./Search";
 
 export default function EditorComponent({
   loadFile,
@@ -85,47 +86,12 @@ export default function EditorComponent({
           publishButton={publishButton}
           widgetName={widgetName}
         />
-
-        {widgets.editorComponentSearch && (
-          <div>
-            {/* We use the component search widget as a VM entry point to add a TOS check wrapper.
-                It does not need to be this component, just some <Widget /> on the page */}
-            <Widget
-              src={tos.checkComponentPath}
-              props={{
-                logOut: logOut,
-                tosName: tos.contentComponentPath,
-                targetComponent: widgets.editorComponentSearch,
-                targetProps: useMemo(
-                  () => ({
-                    extraButtons: ({ widgetName, widgetPath, onHide }) => (
-                      <OverlayTrigger
-                        placement="auto"
-                        overlay={
-                          <Tooltip>
-                            Open "{widgetName}" component in the editor
-                          </Tooltip>
-                        }
-                      >
-                        <button
-                          className="btn btn-outline-primary"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            loadFile(widgetPath);
-                            onHide && onHide();
-                          }}
-                        >
-                          Open
-                        </button>
-                      </OverlayTrigger>
-                    ),
-                  }),
-                  [loadFile]
-                ),
-              }}
-            />
-          </div>
-        )}
+        <Search
+          widgets={widgets}
+          tos={tos}
+          logOut={logOut}
+          loadFile={loadFile}
+        />
       </div>
       <div className="d-flex align-content-start">
         <div className="flex-grow-1">
