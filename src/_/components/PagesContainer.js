@@ -23,6 +23,7 @@ export default function PagesContainer(props) {
         flexDirection: "row",
         justifyContent: "flex-start",
         alignItems: "flex-start",
+        ...props.sx,
       }}
     >
       <Activitybar {...props} />

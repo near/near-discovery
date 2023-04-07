@@ -12,7 +12,6 @@ import SearchPage from "./_/pages/SearchPage";
 import HomePage from "./_/pages/homePage/HomePage";
 import EmbedPage from "./_/pages/EmbedPage";
 import DiscoverPage from "./_/pages/DiscoverPage";
-import EnvironmentsPage from "./_/pages/EnvironmentsPage";
 import ProfilePage from "./_/pages/ProfilePage";
 
 // import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
@@ -23,6 +22,7 @@ import { EditorContext } from "./_/context/EditorContext";
 import Footer from "./_/components/Footer";
 import { Box, GlobalStyles } from "@mui/material";
 import { ThemeContext } from "./_/context/ThemeContext";
+import ViewPage from "./pages/ViewPage";
 
 export const refreshAllowanceObj = {};
 ReactGA.initialize("G-YJ2FL738R6");
@@ -149,7 +149,7 @@ export default function App() {
           },
           "*::-webkit-scrollbar-track": {
             boxShadow: "none",
-            backgroundColor: theme.borderColor + "99",
+            backgroundColor: theme.borderColor + "11",
             borderEadius: 4,
           },
           "*::-webkit-scrollbar-thumb": {
@@ -171,11 +171,6 @@ export default function App() {
             <Footer />
           </Route>
 
-          <Route path={"/environments"}>
-            <EnvironmentsPage {...passProps} />
-            <Footer />
-          </Route>
-
           <Route path={"/search"}>
             <SearchPage {...passProps} />
             <Footer />
@@ -191,7 +186,12 @@ export default function App() {
             <Footer />
           </Route>
 
-          <Route path="/" component={HomePage} />
+          <Route path="/:widgetSrc*">
+            {/* <ViewPage {...passProps} /> */}
+            <HomePage {...passProps} />
+          </Route>
+
+          {/* <Route path="/" component={HomePage} /> */}
         </Switch>
       </Router>
     </Box>

@@ -27,7 +27,11 @@ export default function NotificationsSidebar() {
       </Box>
 
       <Box sx={{ p: 1 }}>
-        <Widget src="mob.near/widget/NotificationFeed" />
+        {/* <Widget src="mob.near/widget/NotificationFeed" /> */}
+        <Widget
+          src="saidulbadhon.near/widget/NotificationsSidebar"
+          props={{ theme }}
+        />
       </Box>
     </Box>
   );

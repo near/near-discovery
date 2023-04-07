@@ -55,6 +55,8 @@ export const EditorContextProvider = (props) => {
 
     // My
     profilePageSidebar: "saidulbadhon.testnet/widget/ProfileSidebar",
+    activitybarNotificationButton:
+      "saidulbadhon.testnet/widget/Activitybar.NotificationButton",
   };
 
   const MainnetWidgets = {
@@ -73,6 +75,8 @@ export const EditorContextProvider = (props) => {
     // My
     profilePageSidebar: "saidulbadhon.near/widget/ProfilePage.Sidebar",
     profilePageMain: "saidulbadhon.near/widget/ProfilePage.Main",
+    activitybarNotificationButton:
+      "saidulbadhon.near/widget/Activitybar.NotificationButton",
   };
 
   // const [Widgets , setWidgets]  = useState(NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets)

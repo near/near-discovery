@@ -3,6 +3,8 @@ import { Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 
+import { NavigationWrapper } from "../components/navigation/alpha/NavigationWrapper";
+
 export default function ViewPage(props) {
   const { widgetSrc } = useParams();
   const query = useQuery();
@@ -38,25 +40,28 @@ export default function ViewPage(props) {
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 
   return (
-    <div className="container-xl">
-      <div className="row">
-        <div
-          className="d-inline-block position-relative overflow-hidden"
-          style={{
-            "--body-top-padding": "24px",
-            paddingTop: "var(--body-top-padding)",
-          }}
-        >
-          <Widget
-            key={props.tos.checkComponentPath}
-            src={props.tos.checkComponentPath}
-            props={{
-              logOut: props.logOut,
-              targetProps: widgetProps,
-              targetComponent: src,
-              tosName: props.tos.contentComponentPath,
+    <div>
+      <NavigationWrapper {...props} />
+      <div className="container-xl">
+        <div className="row">
+          <div
+            className="d-inline-block position-relative overflow-hidden"
+            style={{
+              "--body-top-padding": "24px",
+              paddingTop: "var(--body-top-padding)",
             }}
-          />{" "}
+          >
+            <Widget
+              key={props.tos.checkComponentPath}
+              src={props.tos.checkComponentPath}
+              props={{
+                logOut: props.logOut,
+                targetProps: widgetProps,
+                targetComponent: src,
+                tosName: props.tos.contentComponentPath,
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

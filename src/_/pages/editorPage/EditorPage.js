@@ -549,12 +549,12 @@ export default function EditorPage(props) {
       } else {
         loadFile(widgetSrc);
       }
-      analytics("edit", {
-        props: {
-          widget: widgetSrc,
-        },
-      });
-      history.replace(`/edit/`);
+      // analytics("edit", {
+      //   props: {
+      //     widget: widgetSrc,
+      //   },
+      // });
+      history.replace(`/editor/`);
     } else if (path === undefined) {
       if (files.length === 0) {
         createFile(Filetype.Widget);
@@ -846,7 +846,7 @@ export default function EditorPage(props) {
           backgroundColor: theme.ui,
           height: "100vh",
           maxHeight: "calc(100vh - 25px)",
-          minHeight: 700,
+          minHeight: 550,
           width: "100%",
 
           display: "flex",
@@ -954,7 +954,7 @@ export default function EditorPage(props) {
               <div className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}>
                 <div
                   style={{
-                    minHeight: 700,
+                    minHeight: 550,
                     height: "calc(100vh - 75px)",
                   }}
                 >
@@ -985,7 +985,7 @@ export default function EditorPage(props) {
               <div className={`${tab === Tab.Props ? "" : "visually-hidden"}`}>
                 <div
                   style={{
-                    minHeight: 700,
+                    minHeight: 550,
                     height: "calc(100vh - 75px)",
                   }}
                 >
@@ -1023,7 +1023,7 @@ export default function EditorPage(props) {
                 <div
                   style={{
                     paddingInline: 16,
-                    minHeight: 700,
+                    minHeight: 550,
                     height: "calc(100vh - 75px)",
                   }}
                 >

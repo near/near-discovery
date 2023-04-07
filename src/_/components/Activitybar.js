@@ -17,9 +17,9 @@ import { Widget, useAccount } from "near-social-vm";
 
 export default function Activitybar(props) {
   const history = useHistory();
-  const account = useAccount();
+  const { accountId } = useAccount();
   const { theme } = useContext(ThemeContext);
-  const { setSelectedActivity } = useContext(EditorContext);
+  const { setSelectedActivity, Widgets } = useContext(EditorContext);
 
   return (
     <div
@@ -86,7 +86,7 @@ export default function Activitybar(props) {
           label="changeNetwork"
           to="/environments"
           onClick={() => {
-            history.push("/environments");
+            // history.push("/environments");
             setSelectedActivity((e) =>
               e === "changeNetwork" ? "" : "changeNetwork"
             );
@@ -95,14 +95,17 @@ export default function Activitybar(props) {
       </div>
 
       <div>
-        <ActivityButton
-          icon={
-            <NotificationsNoneRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
-            />
-          }
-          label="notifications"
-        />
+        {accountId && (
+          <ActivityButton
+            icon={
+              <Widget
+                src={Widgets.activitybarNotificationButton}
+                props={{ theme }}
+              />
+            }
+            label="notifications"
+          />
+        )}
 
         <ActivityButton
           icon={
@@ -140,7 +143,7 @@ export default function Activitybar(props) {
                 <Widget
                   src={props.widgets.profileImage}
                   props={{
-                    accountId: account.accountId,
+                    accountId: accountId,
                     className: "d-inline-block",
                   }}
                 />

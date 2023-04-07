@@ -107,13 +107,13 @@ export default function WidgetsSidebar({
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="Open Component">
+          {/* <Tooltip title="Open Component">
             <IconButton onClick={() => setShowOpenModal((e) => !e)}>
               <CreateNewFolderRoundedIcon
                 sx={{ fontSize: "1.25rem", fill: theme.textColor3 }}
               />
             </IconButton>
-          </Tooltip>
+          </Tooltip> */}
         </Box>
       </div>
 
