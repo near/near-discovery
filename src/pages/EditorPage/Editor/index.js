@@ -70,39 +70,21 @@ export default function EditorComponent({
   return (
     <div className="container-fluid mt-1">
       <div className="">
-        <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
-          <div className="d-flex" style={{ flexWrap: "wrap" }}>
-            <Navigation
-              jpath={jpath}
-              openFile={openFile}
-              files={files}
-              filesDetails={filesDetails}
-              removeFromFiles={removeFromFiles}
-              createFile={createFile}
-              openCreateButton={openCreateButton}
-              renameButton={renameButton}
-            />
-          </div>
-          <div
-            className="d-flex ms-auto"
-            style={{ minWidth: "280px", flexWrap: "wrap" }}
-          >
-            <Nav
-              variant="pills mb-2 mt-2 ms-auto"
-              activeKey={jpath}
-              onSelect={(key) => openFile(JSON.parse(key))}
-            >
-              <Nav.Item className="">
-                {saveDraftButton}
-                {forkButton}
-
-                {filesDetails?.get(widgetName)?.isDraft
-                  ? publishDraftAsMainButton
-                  : publishButton}
-              </Nav.Item>
-            </Nav>
-          </div>
-        </div>
+        <Navigation
+          jpath={jpath}
+          openFile={openFile}
+          files={files}
+          filesDetails={filesDetails}
+          removeFromFiles={removeFromFiles}
+          createFile={createFile}
+          openCreateButton={openCreateButton}
+          renameButton={renameButton}
+          saveDraftButton={saveDraftButton}
+          forkButton={forkButton}
+          publishDraftAsMainButton={publishDraftAsMainButton}
+          publishButton={publishButton}
+          widgetName={widgetName}
+        />
 
         {widgets.editorComponentSearch && (
           <div>
