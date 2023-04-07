@@ -12,14 +12,14 @@ import {
   useAccountId,
 } from "near-social-vm";
 import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
-import RenameModal from "../components/Editor/RenameModal";
-import OpenModal from "../components/Editor/OpenModal";
-import OpenModuleModal from "../components/Editor/OpenModuleModal";
-import AddModal from "../components/Editor/AddModal";
-import CreateModal from "../components/Editor/CreateModal";
-import { SaveDraftModal } from "../components/SaveDraft";
+import RenameModal from "../../components/Editor/RenameModal";
+import OpenModal from "../../components/Editor/OpenModal";
+import OpenModuleModal from "../../components/Editor/OpenModuleModal";
+import AddModal from "../../components/Editor/AddModal";
+import CreateModal from "../../components/Editor/CreateModal";
+import { SaveDraftModal } from "../../components/SaveDraft";
 import styled from "styled-components";
-import VsCodeBanner from "../components/Editor/VsCodeBanner";
+import VsCodeBanner from "../../components/Editor/VsCodeBanner";
 
 const TopMenu = styled.div`
   border-radius: 0.375rem;
