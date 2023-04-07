@@ -20,6 +20,7 @@ import CreateModal from "../../components/Editor/CreateModal";
 import { SaveDraftModal } from "../../components/SaveDraft";
 import styled from "styled-components";
 import VsCodeBanner from "../../components/Editor/VsCodeBanner";
+import Welcome from "./Welcome";
 
 const TopMenu = styled.div`
   border-radius: 0.375rem;
@@ -734,41 +735,11 @@ export default function EditorPage(props) {
           showEditor ? `visually-hidden` : ``
         }`}
       >
-        <div
-          className="container-fluid mt-5"
-          style={{
-            width: "460px",
-          }}
-        >
-          <h4 style={{ lineHeight: "50px" }}>
-            Welcome to the Component Sandbox!
-          </h4>
-          <p className="text-secondary">
-            Use this sandbox to create, inspect, modify, and compose components
-            to create new experiences on NEAR.
-          </p>
-          <div className="d-flex justify-content-center mt-5">
-            <button
-              className="btn btn-outline-success mb-3"
-              style={{ width: "250px" }}
-              onClick={() => (setShowAddModal(false), setShowOpenModal(true))}
-            >
-              Open Component
-            </button>
-          </div>
-          <div className="w-100 text-center text-secondary mb-3">or</div>
-          <div className="d-flex justify-content-center">
-            <button
-              className="btn btn-success mb-4"
-              style={{ width: "250px" }}
-              onClick={() => (
-                setShowAddModal(false), createNewFile(Filetype.Widget)
-              )}
-            >
-              Create New Component
-            </button>
-          </div>
-        </div>
+        <Welcome
+          setShowAddModal={setShowAddModal}
+          setShowOpenModal={setShowOpenModal}
+          createNewFile={createNewFile}
+        />
       </div>
       <div className={showEditor ? `` : `visually-hidden`}>
         <VsCodeBanner />
