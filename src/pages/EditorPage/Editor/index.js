@@ -126,58 +126,6 @@ export default function EditorComponent({
   console.log("Tab", Tab);
   return (
     <div className="container-fluid mt-1">
-      <RenameModal
-        key={`rename-modal-${jpath}`}
-        show={showRenameModal}
-        name={path?.name}
-        onRename={(newName) => renameFile(newName, code)}
-        onHide={() => setShowRenameModal(false)}
-      />
-      <OpenModal
-        show={showOpenModal}
-        onOpen={(newName) => loadFile(newName)}
-        onHide={() => setShowOpenModal(false)}
-      />
-      <OpenModuleModal
-        show={showOpenModuleModal}
-        onOpen={(newName) => loadFile(newName, Filetype.Module)}
-        onHide={() => setShowOpenModuleModal(false)}
-      />
-      <AddModal
-        show={showAddModal}
-        onOpen={() => (setShowAddModal(false), setShowOpenModal(true))}
-        onNew={() => (
-          setShowAddModal(false),
-          setShowRenameModal(true),
-          createNewFile(Filetype.Widget)
-        )}
-        onOpenModule={() => (
-          setShowAddModal(false), setShowOpenModuleModal(true)
-        )}
-        onNewModule={() => (
-          setShowAddModal(false),
-          setShowRenameModal(true),
-          createNewFile(Filetype.Module)
-        )}
-        onHide={() => setShowAddModal(false)}
-      />
-      <CreateModal
-        show={showCreateModal}
-        onOpen={(newName) => loadFile(newName)}
-        onNew={() => {
-          createNewFile(Filetype.Widget);
-        }}
-        onHide={() => setShowCreateModal(false)}
-      />
-      <SaveDraftModal
-        show={showSaveDraftModal}
-        onHide={() => setShowSaveDraftModal(false)}
-        near={near}
-        widgetPath={widgetPath}
-        widgetName={widgetName}
-        type={path?.type}
-        code={code}
-      />
       <div className="">
         <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
           <div className="d-flex" style={{ flexWrap: "wrap" }}>

@@ -21,6 +21,7 @@ import styled from "styled-components";
 import VsCodeBanner from "../../components/Editor/VsCodeBanner";
 import Welcome from "./Welcome";
 import EditorComponent from "./Editor";
+import Modals from "./Modals";
 
 const StorageDomain = {
   page: "editor",
@@ -687,6 +688,28 @@ export default function EditorPage(props) {
 
   return (
     <>
+      <Modals
+        jpath={jpath}
+        showRenameModal={showRenameModal}
+        path={path}
+        renameFile={renameFile}
+        setShowRenameModal={setShowRenameModal}
+        showOpenModal={showOpenModal}
+        loadFile={loadFile}
+        setShowOpenModal={setShowOpenModal}
+        showOpenModuleModal={showOpenModuleModal}
+        setShowOpenModuleModal={setShowOpenModuleModal}
+        setShowAddModal={setShowAddModal}
+        createNewFile={createNewFile}
+        setShowCreateModal={setShowCreateModal}
+        showSaveDraftModal={showSaveDraftModal}
+        near={near}
+        widgetPath={widgetPath}
+        widgetName={widgetName}
+        code={code}
+        showAddModal={showAddModal}
+        showCreateModal={showCreateModal}
+      />
       <div
         className={`text-center d-flex justify-content-center min-vh-100 ${
           showEditor ? `visually-hidden` : ``
