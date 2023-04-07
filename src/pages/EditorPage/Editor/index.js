@@ -23,6 +23,11 @@ import Navigation from "./Navigation";
 import Search from "./Search";
 import Tabs from "./Tabs";
 import NavigationSub from "./NavigationSub";
+import TabEditor from "./TabEditor";
+import TabProps from "./TabProps";
+import TabMetadata from "./TabMetadata";
+import Preview from "./Preview";
+import PreviewMetadata from "./PreviewMetadata";
 
 export default function EditorComponent({
   loadFile,
@@ -128,156 +133,53 @@ export default function EditorComponent({
                 />
               </div>
 
-              <div className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}>
-                <div
-                  className="form-control mb-3"
-                  style={{ height: "70vh", borderTopLeftRadius: "0px" }}
-                >
-                  <Editor
-                    value={code}
-                    path={widgetPath}
-                    defaultLanguage="javascript"
-                    onChange={(code) => updateCode(path, code)}
-                    wrapperProps={{
-                      onBlur: () => reformat(path, code),
-                    }}
-                  />
-                </div>
-                <div className="mb-3 d-flex gap-2 flex-wrap"></div>
-              </div>
-              <div className={`${tab === Tab.Props ? "" : "visually-hidden"}`}>
-                <div className="form-control" style={{ height: "70vh" }}>
-                  <Editor
-                    value={widgetProps}
-                    defaultLanguage="json"
-                    onChange={(props) => setWidgetProps(props)}
-                    wrapperProps={{
-                      onBlur: () => reformatProps(widgetProps),
-                    }}
-                  />
-                </div>
-                <div className=" mb-3">^^ Props for debugging (in JSON)</div>
-                {propsError && (
-                  <pre className="alert alert-danger">{propsError}</pre>
-                )}
-              </div>
-              <div
-                className={`${
-                  tab === Tab.Metadata && widgets.widgetMetadataEditor
-                    ? ""
-                    : "visually-hidden"
-                }`}
-              >
-                <div
-                  className="mb-3"
-                  style={{
-                    paddingTop: "20px",
-                    padding: "20px",
-                    border: "1px solid rgb(206, 212, 218)",
-                    appearance: "none",
-                    borderRadius: "0.375rem",
-                    height: "70vh",
-                  }}
-                >
-                  <Widget
-                    src={widgets.widgetMetadataEditor}
-                    key={`metadata-editor-${jpath}`}
-                    props={useMemo(
-                      () => ({
-                        widgetPath,
-                        onChange: setMetadata,
-                      }),
-                      [widgetPath]
-                    )}
-                  />
-                </div>
-              </div>
+              <TabEditor
+                tab={tab}
+                Tab={Tab}
+                code={code}
+                widgetPath={widgetPath}
+                updateCode={updateCode}
+                reformat={reformat}
+              />
+              <TabProps
+                tab={tab}
+                Tab={Tab}
+                widgetProps={widgetProps}
+                setWidgetProps={setWidgetProps}
+                reformatProps={reformatProps}
+                propsError={propsError}
+              />
+              <TabMetadata
+                tab={tab}
+                Tab={Tab}
+                widgets={widgets}
+                jpath={jpath}
+                widgetPath={widgetPath}
+                setMetadata={setMetadata}
+              />
             </div>
-            <div
-              className={`${
-                tab === Tab.Widget ||
-                (layout === Layout.Split && tab !== Tab.Metadata)
-                  ? layoutClass
-                  : "visually-hidden"
-              }`}
-            >
-              <div style={{}}>
-                <div
-                  className="container"
-                  style={
-                    tab === Tab.Widget
-                      ? {
-                          border: "1px solid #ced4da",
-                          appearance: "none",
-                          borderRadius: "0.375rem",
-                          height: "70vh",
-                          maxWidth: "100%",
-                          padding: "20px",
-                        }
-                      : {
-                          padding: "20px",
-                          border: "1px solid #ced4da",
-                          appearance: "none",
-                          borderRadius: "0.375rem",
-                          height: "70vh",
-                        }
-                  }
-                >
-                  <div className="h-100 row">
-                    <div className="d-inline-block position-relative overflow-auto h-100">
-                      {renderCode ? (
-                        <div
-                          style={{
-                            padding: 0,
-                            margin: 0,
-                          }}
-                        >
-                          <Widget
-                            key={`preview-${jpath}`}
-                            code={renderCode}
-                            props={parsedWidgetProps}
-                          />
-                        </div>
-                      ) : (
-                        !isModule && (
-                          <div
-                            style={{
-                              padding: 0,
-                              margin: 0,
-                              display: "flex",
-                              alignItems: "center",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {renderPreviewButton}
-                          </div>
-                        )
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              className={`${
-                tab === Tab.Metadata ? layoutClass : "visually-hidden"
-              }`}
-            >
-              <div className="container" style={{ marginTop: "50px" }}>
-                <div className="row">
-                  <div className="d-inline-block position-relative overflow-hidden">
-                    <Widget
-                      key={`metadata-${jpath}`}
-                      src={widgets.widgetMetadata}
-                      props={useMemo(
-                        () => ({ metadata, accountId, widgetName }),
-                        [metadata, accountId, widgetName]
-                      )}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Preview
+              tab={tab}
+              Tab={Tab}
+              layout={layout}
+              Layout={Layout}
+              layoutClass={layoutClass}
+              renderCode={renderCode}
+              jpath={jpath}
+              parsedWidgetProps={parsedWidgetProps}
+              isModule={isModule}
+              renderPreviewButton={renderPreviewButton}
+            />
+            <PreviewMetadata
+              tab={tab}
+              Tab={Tab}
+              layoutClass={layoutClass}
+              jpath={jpath}
+              widgets={widgets}
+              metadata={metadata}
+              accountId={accountId}
+              widgetName={widgetName}
+            />
           </div>
         </div>
       </div>
