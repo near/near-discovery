@@ -17,6 +17,7 @@ import OpenInNewRoundedIcon from "@mui/icons-material/OpenInNewRounded";
 import ForkRightRoundedIcon from "@mui/icons-material/ForkRightRounded";
 import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
+import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
 
 import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
@@ -30,8 +31,13 @@ export default function WidgetViewHeader({
 
   publishWidgetButton,
 }) {
-  const { showLiveCodePreview, setShowLiveCodePreview } =
-    useContext(EditorContext);
+  const {
+    setAllowTheming,
+    allowTheming,
+
+    showLiveCodePreview,
+    setShowLiveCodePreview,
+  } = useContext(EditorContext);
 
   const { theme } = useContext(ThemeContext);
 
@@ -78,6 +84,20 @@ export default function WidgetViewHeader({
             />
           </IconButton>
         </Tooltip>
+
+        <Tooltip
+          title={allowTheming ? "Turn off Theming" : "Allow Theming"}
+          placement="bottom"
+        >
+          <IconButton onClick={() => setAllowTheming((e) => !e)}>
+            <Brightness4RoundedIcon
+              sx={{
+                fill: allowTheming ? theme.buttonColor : theme.textColor2,
+                fontSize: "1.25rem",
+              }}
+            />
+          </IconButton>
+        </Tooltip>
       </Box>
 
       <Box sx={{ display: "flex", alignItems: "center" }}>
@@ -93,7 +113,9 @@ export default function WidgetViewHeader({
             }}
             onClick={onRunButtonClick}
           >
-            <PlayArrowRoundedIcon sx={{ fill: theme.buttonColor }} />
+            <PlayArrowRoundedIcon
+              sx={{ fontSize: "1.75rem", fill: theme.buttonColor }}
+            />
           </IconButton>
         </Tooltip>
         {/* <Tooltip title="Share Widget" placement="bottom">
@@ -119,7 +141,16 @@ export default function WidgetViewHeader({
             sx={{ color: theme.textColor2 }}
             onClick={onForkButtonClick}
           >
-            <ForkRightRoundedIcon sx={{ fill: theme.textColor2 }} />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              fill={theme.textColor2}
+              width=".8em"
+              height=".8em"
+            >
+              <path d="M80 128a48 48 0 100-96 48 48 0 100 96zm80-48c0 38.7-27.5 71-64 78.4V192c0 26.5 21.5 48 48 48h160c26.5 0 48-21.5 48-48v-33.6c-36.5-7.4-64-39.7-64-78.4 0-44.2 35.8-80 80-80s80 35.8 80 80c0 38.7-27.5 71-64 78.4V192c0 44.2-35.8 80-80 80h-64v81.6c36.5 7.4 64 39.7 64 78.4 0 44.2-35.8 80-80 80s-80-35.8-80-80c0-38.7 27.5-71 64-78.4V272h-64c-44.2 0-80-35.8-80-80v-33.6C27.5 151 0 118.7 0 80 0 35.8 35.8 0 80 0s80 35.8 80 80zm64 304a48 48 0 100 96 48 48 0 100-96zM416 80a48 48 0 10-96 0 48 48 0 1096 0z"></path>
+            </svg>
+            {/* <ForkRightRoundedIcon sx={{ fill: theme.textColor2 }} /> */}
           </IconButton>
         </Tooltip>
         {/* <Tooltip title="Publish Widget" placement="bottom">

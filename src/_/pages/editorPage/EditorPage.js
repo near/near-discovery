@@ -73,6 +73,8 @@ const Layout = {
 export default function EditorPage(props) {
   const { theme, editorFontSize, bp } = useContext(ThemeContext);
   const {
+    allowTheming,
+
     selectedActivity,
     showWebsiteView,
 
@@ -683,6 +685,7 @@ export default function EditorPage(props) {
         className={`btn btn-primary`}
         style={{
           backgroundColor: theme.buttonColor,
+
           paddingInline: 16,
           borderRadius: 4,
 
@@ -846,7 +849,7 @@ export default function EditorPage(props) {
           backgroundColor: theme.ui,
           height: "100vh",
           maxHeight: "calc(100vh - 25px)",
-          minHeight: 550,
+          minHeight: 750,
           width: "100%",
 
           display: "flex",
@@ -954,7 +957,7 @@ export default function EditorPage(props) {
               <div className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}>
                 <div
                   style={{
-                    minHeight: 550,
+                    minHeight: 750,
                     height: "calc(100vh - 75px)",
                   }}
                 >
@@ -965,7 +968,7 @@ export default function EditorPage(props) {
                       minimap: {
                         enabled: false,
                       },
-
+                      wordWrap: "on",
                       fontSize: editorFontSize || "16px",
                     }}
                     value={code}
@@ -985,7 +988,7 @@ export default function EditorPage(props) {
               <div className={`${tab === Tab.Props ? "" : "visually-hidden"}`}>
                 <div
                   style={{
-                    minHeight: 550,
+                    minHeight: 750,
                     height: "calc(100vh - 75px)",
                   }}
                 >
@@ -997,6 +1000,7 @@ export default function EditorPage(props) {
                         enabled: false,
                       },
 
+                      wordWrap: "on",
                       fontSize: editorFontSize || "16px",
                     }}
                     value={widgetProps}
@@ -1023,7 +1027,7 @@ export default function EditorPage(props) {
                 <div
                   style={{
                     paddingInline: 16,
-                    minHeight: 550,
+                    minHeight: 750,
                     height: "calc(100vh - 75px)",
                   }}
                 >

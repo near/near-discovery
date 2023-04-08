@@ -63,9 +63,9 @@ const LeftSection = () => {
         gap: 2,
       }}
     >
-      <Typography variant="h1" sx={{ mb: 3, color: theme.textColor }}>
+      {/* <Typography variant="h1" sx={{ mb: 3, color: theme.textColor }}>
         Welcome to NEARpad
-      </Typography>
+      </Typography> */}
 
       <Widget src="saidulbadhon.near/widget/DiscoverPage.FeaturedApps" />
 
@@ -111,6 +111,15 @@ const RightSection = () => {
         flexDirection: "column",
       }}
     >
+      {/* <Box
+        sx={{
+          backgroundColor: theme.backgroundColor,
+          p: 2,
+          borderRadius: 1,
+        }}
+      >
+        Test
+      </Box> */}
       <Box
         sx={{
           backgroundColor: theme.backgroundColor,
@@ -119,17 +128,6 @@ const RightSection = () => {
         }}
       >
         <Widget src="adminalpha.near/widget/ExploreWidgets" />
-        {/* <Widget src="mob.near/widget/Applications" /> */}
-      </Box>
-
-      <Box
-        sx={{
-          backgroundColor: theme.backgroundColor,
-          p: 2,
-          borderRadius: 1,
-        }}
-      >
-        <Widget src="mob.near/widget/People" />
       </Box>
     </Box>
   );

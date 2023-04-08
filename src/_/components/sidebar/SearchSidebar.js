@@ -51,7 +51,7 @@ export default function SearchSidebar() {
         }}
       >
         <Typography variant="h6" sx={{ color: theme.textColor }}>
-          BOS Widgets
+          Widgets
         </Typography>
       </Box>
 

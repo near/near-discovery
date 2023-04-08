@@ -37,11 +37,12 @@ export default function Sidebar({
       style={{
         backgroundColor: theme.backgroundColor,
         width: "100%",
-        zIndex: 200,
+        // zIndex: 200,
 
-        minHeight: "max(100vh, 700px)",
-        height: "100%",
-        overflow: "hidden",
+        minHeight: "max(calc(100vh - 25px), 700px)",
+        // height: "100%",
+        maxHeight: "calc(100vh - 25px)",
+        overflowY: "hidden",
       }}
     >
       <Fade timeout={500} in={selectedActivity?.length > 0 ? true : false}>

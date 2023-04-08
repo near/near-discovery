@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import React, { useContext } from "react";
 import { ThemeContext } from "../../../../context/ThemeContext";
-// import { EditorContext } from "../../../../context/EditorContext";
 import WidgetViewHeader from "./WidgetViewHeader";
 
 import { Widget } from "near-social-vm";
+import { EditorContext } from "../../../../context/EditorContext";
 // import CustomButton from "../../../../components/custom/CustomButton";
 
 export default function WidgetViewContainer({
@@ -19,7 +19,7 @@ export default function WidgetViewContainer({
   publishWidgetButton,
 }) {
   const { theme } = useContext(ThemeContext);
-  // const { outputCode } = useContext(EditorContext);
+  const { allowTheming } = useContext(EditorContext);
 
   return (
     <Box
@@ -55,12 +55,15 @@ export default function WidgetViewContainer({
             sx={{
               flex: 1,
               height: "100%",
-              bgcolor: "#FFF",
+              bgcolor: allowTheming ? theme.ui : "#FFF",
               overflowX: "auto",
               paddingBottom: "50px",
             }}
           >
-            <Widget code={renderCode} props={parsedWidgetProps} />
+            <Widget
+              code={renderCode}
+              props={{ ...parsedWidgetProps, theme: allowTheming ? theme : {} }}
+            />
           </Box>
         </Box>
       ) : (

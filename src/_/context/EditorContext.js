@@ -3,6 +3,8 @@ import React, { useState, createContext, useEffect } from "react";
 export const EditorContext = createContext();
 
 export const EditorContextProvider = (props) => {
+  const [allowTheming, setAllowTheming] = useState(true);
+
   const [showWebsiteView, setShowWebsiteView] = useState(true);
   const [showLiveCodePreview, setShowLiveCodePreview] = useState(true);
 
@@ -55,6 +57,7 @@ export const EditorContextProvider = (props) => {
 
     // My
     profilePageSidebar: "saidulbadhon.testnet/widget/ProfileSidebar",
+    profilePageMain: "saidulbadhon.testnet/widget/ProfilePage.Main",
     activitybarNotificationButton:
       "saidulbadhon.testnet/widget/Activitybar.NotificationButton",
   };
@@ -86,6 +89,9 @@ export const EditorContextProvider = (props) => {
   return (
     <EditorContext.Provider
       value={{
+        allowTheming,
+        setAllowTheming,
+
         showWebsiteView,
         setShowWebsiteView,
         //

@@ -32,7 +32,7 @@ export default function Footer() {
         justifyContent: "space-between",
         alignItems: "center",
 
-        zIndex: 999999999999,
+        zIndex: 999,
       }}
     >
       {/* <Box sx={{ }}></Box> */}

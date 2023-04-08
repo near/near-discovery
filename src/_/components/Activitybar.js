@@ -6,6 +6,9 @@ import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
 import WifiRoundedIcon from "@mui/icons-material/WifiRounded";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+
 import camelToNormal from "../libs/camelToNormal";
 import { ThemeContext } from "../context/ThemeContext";
 import { EditorContext } from "../context/EditorContext";
@@ -18,7 +21,7 @@ import { Widget, useAccount } from "near-social-vm";
 export default function Activitybar(props) {
   const history = useHistory();
   const { accountId } = useAccount();
-  const { theme } = useContext(ThemeContext);
+  const { theme, enableDarkMode, setEnableDarkMode } = useContext(ThemeContext);
   const { setSelectedActivity, Widgets } = useContext(EditorContext);
 
   return (
@@ -49,11 +52,23 @@ export default function Activitybar(props) {
             setSelectedActivity("");
           }}
         />
+        {/* // <LibraryAddRoundedIcon
+            //   sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+            // /> */}
         <ActivityButton
           icon={
-            <LibraryAddRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
-            />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill={theme.textColor4}
+              width="1.4em"
+              height="1.4em"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M8.5 0h9L22 4.5v12.068L20.705 18H16v4.568L14.568 24H2.5L1 22.568V7.5L2.5 6H7V1.5L8.5 0zM16 1.5V6h4.5v10.5h-12v-15H16zm3.879 3L17.5 2.121V4.5h2.379zM7 7.5v9.068L8.5 18h6v4.5h-12v-15H7z"
+              ></path>
+            </svg>
           }
           label="create widgets"
           to="/editor"
@@ -124,6 +139,24 @@ export default function Activitybar(props) {
             />
           }
           label="settings"
+        />
+
+        <ActivityButton
+          icon={
+            enableDarkMode ? (
+              <LightModeIcon
+                sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              />
+            ) : (
+              <DarkModeIcon
+                sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              />
+            )
+          }
+          label={enableDarkMode ? "Enable Light Mode" : "Enable Dark Mode"}
+          onClick={() => {
+            setEnableDarkMode((e) => !e);
+          }}
         />
 
         <ActivityButton

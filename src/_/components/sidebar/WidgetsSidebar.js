@@ -46,7 +46,7 @@ export default function WidgetsSidebar({
   const { theme } = useContext(ThemeContext);
   const { files, filesDetails } = useContext(EditorContext);
 
-  const [myWidgets, setMyWidgets] = useState();
+  const [myWidgets, setMyWidgets] = useState([]);
 
   // useEffect(() => {
   //   const timeout = setTimeout(() => {
@@ -78,7 +78,7 @@ export default function WidgetsSidebar({
     <div
       style={{
         height: "100%",
-        height: "100vh",
+        // height: "100vh",
         overflowY: "auto",
         overflowX: "hidden",
         paddingBottom: 25,
@@ -178,7 +178,14 @@ export default function WidgetsSidebar({
       </Accordion>
 
       {accountId && (
-        <Accordion defaultExpanded>
+        <Accordion
+          // defaultExpanded
+          onClick={() => {
+            if (myWidgets.length <= 0) {
+              getData();
+            }
+          }}
+        >
           <AccordionSummary
             aria-controls="panel2d-content"
             id="panel2d-header"
