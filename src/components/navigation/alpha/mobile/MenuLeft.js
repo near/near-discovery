@@ -213,7 +213,7 @@ export function MenuLeft(props) {
         <div className="links-title">GenaDrop</div>
         <ul className="top-links">
           <li>
-            <NavigationButton route="/minorityprogrammers.near/widget/genadropMinter">
+            <NavigationButton route="/jgodwill.near/widget/genadropMinter">
             <Editor />
             Create
             </NavigationButton>
