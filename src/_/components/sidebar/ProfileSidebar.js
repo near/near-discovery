@@ -7,9 +7,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 
 import CustomButton from "../custom/CustomButton";
 import { ThemeContext } from "../../context/ThemeContext";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
   const account = useAccount();
+  const { logout } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -72,7 +74,10 @@ export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
             }}
             variant="outlined"
             startIcon={<LogoutIcon />}
-            onClick={() => logOut()}
+            onClick={() => {
+              logout();
+              logOut();
+            }}
           >
             Sign Out
           </CustomButton>
@@ -123,7 +128,9 @@ export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
                 marginTop: 16,
                 width: "100%",
               }}
-              onClick={() => requestSignIn()}
+              onClick={() => {
+                requestSignIn();
+              }}
             >
               Sign In
             </CustomButton>

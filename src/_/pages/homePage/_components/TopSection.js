@@ -7,6 +7,7 @@ import Chip from "@mui/material/Chip";
 
 import imageSrc from "../../../images/home.png";
 import searchSrc from "../../../images/search.png";
+import ReactPlayer from "react-player";
 
 export default function TopSection() {
   const min720 = useMediaQuery("(min-width:820px)");
@@ -170,7 +171,17 @@ export default function TopSection() {
           {/* </Link> */}
         </Box>
 
-        {min720 && (
+        <Box>
+          <ReactPlayer
+            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            controls={false}
+            loop
+            playing
+            volume={0}
+          />
+        </Box>
+
+        {/* {min720 && (
           <Box
             sx={{
               flex: 1,
@@ -215,7 +226,7 @@ export default function TopSection() {
               alt="search"
             />
           </Box>
-        )}
+        )} */}
       </Box>
     </Box>
   );

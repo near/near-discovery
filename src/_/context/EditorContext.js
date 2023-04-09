@@ -3,8 +3,6 @@ import React, { useState, createContext, useEffect } from "react";
 export const EditorContext = createContext();
 
 export const EditorContextProvider = (props) => {
-  const [allowTheming, setAllowTheming] = useState(true);
-
   const [showWebsiteView, setShowWebsiteView] = useState(true);
   const [showLiveCodePreview, setShowLiveCodePreview] = useState(true);
 
@@ -89,9 +87,6 @@ export const EditorContextProvider = (props) => {
   return (
     <EditorContext.Provider
       value={{
-        allowTheming,
-        setAllowTheming,
-
         showWebsiteView,
         setShowWebsiteView,
         //

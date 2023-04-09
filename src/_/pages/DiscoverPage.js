@@ -160,23 +160,25 @@ const TestnetDiscover = () => {
           color: theme.textColor,
         }}
       >
-        <Typography
-          variant="h1"
-          textAlign="center"
-          sx={{ color: theme.textColor }}
-        >
-          Welcome to NEARpad
-        </Typography>
+        {/* 
+          <Typography
+            variant="h1"
+            textAlign="center"
+            sx={{ color: theme.textColor }}
+          >
+            Welcome to NEARpad
+          </Typography>
 
-        <Typography
-          variant="h4"
-          fontWeight={500}
-          textAlign="center"
-          sx={{ color: theme.textColor3, lineHeight: "2rem" }}
-        >
-          Create decentralized frontend widgets without limits. <br />
-          Let's get started!
-        </Typography>
+          <Typography
+            variant="h4"
+            fontWeight={500}
+            textAlign="center"
+            sx={{ color: theme.textColor3, lineHeight: "2rem" }}
+          >
+            Create decentralized frontend widgets without limits. <br />
+            Let's get started!
+          </Typography>
+        */}
 
         <Box
           sx={{

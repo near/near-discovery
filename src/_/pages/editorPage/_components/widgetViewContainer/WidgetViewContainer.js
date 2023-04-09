@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { ThemeContext } from "../../../../context/ThemeContext";
 import WidgetViewHeader from "./WidgetViewHeader";
 
 import { Widget } from "near-social-vm";
-import { EditorContext } from "../../../../context/EditorContext";
+// import { EditorContext } from "../../../../context/EditorContext";
 // import CustomButton from "../../../../components/custom/CustomButton";
 
 export default function WidgetViewContainer({
@@ -18,8 +18,10 @@ export default function WidgetViewContainer({
 
   publishWidgetButton,
 }) {
-  const { theme } = useContext(ThemeContext);
-  const { allowTheming } = useContext(EditorContext);
+  const { theme, light, dark } = useContext(ThemeContext);
+  // const { allowTheming } = useContext(EditorContext);
+
+  const [allowTheming, setAllowTheming] = useState(true);
 
   return (
     <Box
@@ -35,11 +37,16 @@ export default function WidgetViewContainer({
     >
       <WidgetViewHeader
         loading={loading}
+        //
+        allowTheming={allowTheming}
+        setAllowTheming={setAllowTheming}
+        //
         onRunButtonClick={handlePreviewButton}
         onSaveButtonClick={handleSaveDraftButton}
         onForkButtonClick={handleForkButton}
         publishWidgetButton={publishWidgetButton}
       />
+
       {renderCode ? (
         <Box
           sx={{
@@ -55,14 +62,18 @@ export default function WidgetViewContainer({
             sx={{
               flex: 1,
               height: "100%",
-              bgcolor: allowTheming ? theme.ui : "#FFF",
+              // bgcolor: allowTheming ? theme.ui : "#FFF",
+              bgcolor: allowTheming ? light.ui : dark.ui,
               overflowX: "auto",
               paddingBottom: "50px",
             }}
           >
             <Widget
               code={renderCode}
-              props={{ ...parsedWidgetProps, theme: allowTheming ? theme : {} }}
+              props={{
+                ...parsedWidgetProps,
+                theme: allowTheming ? light : dark,
+              }}
             />
           </Box>
         </Box>
@@ -75,6 +86,7 @@ export default function WidgetViewContainer({
             flex: 1,
             alignItems: "center",
             justifyContent: "center",
+            backgroundColor: allowTheming ? light.ui : dark.ui,
           }}
           onClick={handlePreviewButton}
         ></div>

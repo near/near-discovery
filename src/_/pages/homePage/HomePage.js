@@ -6,6 +6,7 @@ import HomeFooter from "./_components/HomeFooter";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useParams } from "react-router-dom";
 import ViewPage from "../../../pages/ViewPage";
+import HomeHeader from "./_components/HomeHeader";
 
 export default function HomePage(props) {
   const { widgetSrc } = useParams();
@@ -15,6 +16,8 @@ export default function HomePage(props) {
     <ViewPage {...props} />
   ) : (
     <>
+      <HomeHeader />
+
       <TopSection />
       {/* <FeatureSection
         title="BOS DevTools"

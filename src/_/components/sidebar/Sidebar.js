@@ -9,6 +9,7 @@ import { EditorContext } from "../../context/EditorContext";
 import EnvironmentlSidebar from "./EnvironmentlSidebar";
 import SearchSidebar from "./SearchSidebar";
 import NotificationsSidebar from "./NotificationsSidebar";
+import LearnSidebar from "./LearnSidebar";
 
 export default function Sidebar({
   appProps,
@@ -63,6 +64,7 @@ export default function Sidebar({
             (selectedActivity === "search" && <SearchSidebar />) ||
             (selectedActivity === "settings" && <SettingsSidebar />) ||
             (selectedActivity === "changeNetwork" && <EnvironmentlSidebar />) ||
+            (selectedActivity === "learn" && <LearnSidebar />) ||
             (selectedActivity === "notifications" && (
               <NotificationsSidebar />
             )) ||
