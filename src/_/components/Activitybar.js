@@ -109,7 +109,7 @@ export default function Activitybar(props) {
           }}
         />
 
-        <ActivityButton
+        {/* <ActivityButton
           icon={
             <svg
               width="24"
@@ -144,7 +144,7 @@ export default function Activitybar(props) {
             history.push("/learn");
             setSelectedActivity((e) => (e === "learn" ? "" : "learn"));
           }}
-        />
+        /> */}
       </div>
 
       <div>
