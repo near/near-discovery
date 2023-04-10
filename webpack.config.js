@@ -9,9 +9,12 @@ const { merge } = require("webpack-merge");
 const loadPreset = require("./config/presets/loadPreset");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const loadConfig = (mode) => require(`./config/webpack.${mode}.js`)(mode);
+const Dotenv = require("dotenv-webpack");
 
 module.exports = function (env) {
   const { mode = "production" } = env || {};
+
+  console.log(`Webpack mode=====: ${JSON.stringify(env, null, 2)}`);
   return merge(
     {
       mode,
@@ -50,6 +53,10 @@ module.exports = function (env) {
         },
       },
       plugins: [
+        new Dotenv({
+          // systemvars: true,
+          path: `./.env.${mode}`,
+        }),
         new webpack.EnvironmentPlugin({
           // Configure environment variables here.
           ENVIRONMENT: "browser",

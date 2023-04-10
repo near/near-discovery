@@ -46,7 +46,7 @@ export default function LoginDialog() {
       <DialogContent sx={{ padding: "16px", width: "100%", mt: 2 }}>
         <LoginGithub
           className="loginGithub"
-          clientId="d8dcc012aeb56c3c6d7f"
+          clientId={process.env.GITHUB_CLIENT_ID}
           onSuccess={onSuccess}
           onFailure={onFailure}
         >

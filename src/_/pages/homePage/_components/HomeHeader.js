@@ -43,7 +43,7 @@ export default function HomeHeader() {
           <div>
             <LoginGithub
               className="loginGithub"
-              clientId="d8dcc012aeb56c3c6d7f"
+              clientId={process.env.GITHUB_CLIENT_ID}
               onSuccess={onSuccess}
               onFailure={onFailure}
             >

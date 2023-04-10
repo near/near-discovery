@@ -78,23 +78,6 @@ const LeftSection = () => {
       >
         <Widget src="create.near/widget/Posts.Compose" />
       </Box>
-
-      <Box
-        sx={{
-          width: "100%",
-          backgroundColor: theme.backgroundColor,
-          py: 0,
-          px: 2,
-          borderRadius: 1,
-          height: "100%",
-          overflowY: "auto",
-        }}
-      >
-        {/* {accountId && <Widget src="mob.near/widget/MainPage.Content" />} */}
-        <Widget src="create.near/widget/Posts.Feed" />
-
-        <Widget src="adminalpha.near/widget/PeoplePage" />
-      </Box>
     </Box>
   );
 };
