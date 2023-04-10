@@ -6,6 +6,7 @@ import { useHistory, useParams } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import {
   Widget,
+  recordPageView,
   useCache,
   useNear,
   CommitButton,
@@ -145,7 +146,7 @@ export default function EditorPage(props) {
 
   useEffect(() => {
 
-    analytics.pageView(window.location.href, {
+    recordPageView(window.location.href, {
       view: widgetSrc
     }, [widgetSrc])
 

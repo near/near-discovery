@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Widget } from "near-social-vm";
+import { recordPageView, Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
@@ -57,7 +57,7 @@ export default function ViewPage(props) {
       );
       const {href} = window.location;
       const params = href.indexOf('?') > -1 ? href.split('?').slice(1)[0].split('&') : undefined;
-      analytics.pageView(src, {
+      recordPageView(src, {
           url_params: params,
       });
     }, 1);
