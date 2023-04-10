@@ -5,27 +5,14 @@
     <link rel="icon" href="favicon.ico" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Let&#39;s build decentralized experiences"
-    />
+    <meta name="description" content="Let&#39;s build decentralized experiences" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@NearSocial_" />
-    <meta
-      name="twitter:image"
-      content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg"
-    />
-    <meta
-      property="og:image"
-      content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg"
-    />
+    <meta name="twitter:image" content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg" />
+    <meta property="og:image" content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="NEAR" />
-
-    <meta
-      property="og:description"
-      content="Let&#39;s build decentralized experiences"
-    />
+    <meta property="og:description" content="Let&#39;s build decentralized experiences" />
     <link rel="apple-touch-icon" href="logo192.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
@@ -33,89 +20,65 @@
     -->
     <link rel="manifest" href="manifest.json" />
     <title>NEAR</title>
-    <script
-      defer
-      data-domain="near.social"
-      src="https://plausible.io/js/script.hash.js"
-    ></script>
-    <script>
-      window.plausible =
-        window.plausible ||
-        function () {
-          (window.plausible.q = window.plausible.q || []).push(arguments);
-        };
-      window.analytics = function () {
-        window.plausible(...arguments);
-      };
-    </script>
+    <script defer data-domain="near.social" src="https://plausible.io/js/script.hash.js"></script>
+    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }; window.analytics = function() { window.plausible(...arguments) }</script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!-- NEAR Discovery Zendesk Support Widget -->
-    <script
-      id="ze-snippet"
-      src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
-    ></script>
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"> </script>
     <!-- https://developer.zendesk.com/api-reference/widget/core/ and https://developer.zendesk.com/api-reference/widget/settings/ -->
     <script type="text/javascript">
-      zE("webWidget:on", "open", function () {
-        console.log("The widget has been opened!");
-      });
       window.zESettings = {
         webWidget: {
           color: { theme: "#2b2f31" },
           offset: {
             horizontal: "20px",
-            vertical: "70px",
+            vertical: "20px",
             mobile: { horizontal: "5px", vertical: "70px", from: "right" },
-          },
-          contactOptions: {
-            enabled: true,
-            contactButton: { "*": "Get in touch" },
-          },
+          },        
           contactForm: {
             attachments: true,
             title: { "*": "Feedback and Support" },
             fields: [
-              { id: "email", prefill: { "*": "EMAIL HERE" } },
-              {
-                id: 13149356989591,
-                prefill: { "*": localStorage.getItem("accountNameString") },
-              },
+//              { id: "email", prefill: { "*": "EMAIL HERE" } },
+              { id: 13149356989591, prefill: { "*": localStorage.getItem("accountNameString") } }
             ],
           },
           launcher: {
-            label: { "*": "Contact Us" },
+            label: { "*": " " }, 
             mobile: { labelVisible: false },
           },
         },
       };
-      // zE(function() {
-      //   zE.identify({
-      //     email: 'drew@near.org' // hacky option to grab from div.profile-username
-      //     // 13149356989591 is field ID for "Account ID" custom field
-      //     // name: 'John Citizen',
-      //     // organization: 'VIP'
-      //   });
-      // });
+      
+// TODO: Add these styles to the iframe
+//     <style>
+//       .vsc-initialized div#Embed div button {
+//         opacity: .8;
+//       }
+//       .vsc-initialized div#Embed div button .Icon {
+//         padding-right: 0;
+//       }
+//     </style>
 
       function handleZendeskWidget() {
         if (localStorage.getItem("accountNameBool")) {
-          console.log("user detected");
-          if (
+          // console.log("user detected");
+          if ( // TODO find a cleaner way to distinguish homepage or local... :/
             window.location.href === "https://alpha.near.org/#/" ||
             window.location.href === "http://localhost:3000/#/" ||
             window.location.search.includes("account_id=")
           ) {
-            console.log("showing button");
+            // console.log("showing button");
             zE.show();
           } else {
-            console.log(" hiding the widget...");
+            // console.log(" hiding the widget...");
             zE("webWidget", "hide");
           }
         } else {
-          console.log("user not logged in");
+          // console.log("user not logged in");
           zE("webWidget", "hide");
         }
       }
@@ -123,9 +86,9 @@
       window.addEventListener("hashchange", handleZendeskWidget);
       window.addEventListener("load", handleZendeskWidget);
       window.addEventListener("storage", function (event) {
-        console.log("storage change detected");
+        // console.log("storage change detected");
         if (event.key === "accountNameString" && event.newValue !== null) {
-          console.log(event.key);
+          // console.log(event.key);
           handleZendeskWidget();
         }
       });
