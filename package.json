@@ -5,7 +5,7 @@
   "private": true,
   "dependencies": {
     "@monaco-editor/react": "^4.4.6",
-    "@near-js/biometric-ed25519": "file:../near-api-js/packages/biometric-ed25519",
+    "@near-js/biometric-ed25519": "^0.0.6",
     "@near-wallet-selector/core": "^7.9.0",
     "@near-wallet-selector/here-wallet": "^7.9.0",
     "@near-wallet-selector/meteor-wallet": "^7.9.0",
