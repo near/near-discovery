@@ -1103,7 +1103,7 @@ export default function EditorPage(props) {
                       });
                     }}
                   >
-                    Sign In
+                    Publish
                   </button>
                 )
               }

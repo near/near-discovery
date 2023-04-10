@@ -12,6 +12,7 @@ export default function HomeHeader() {
   const onSuccess = (response) => {
     saveAuth(response);
     console.log(response);
+    window.location.hash = "#/editor";
   };
   const onFailure = (response) => console.error(response);
 

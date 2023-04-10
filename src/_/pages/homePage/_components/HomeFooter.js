@@ -3,6 +3,8 @@ import React from "react";
 import { useContext } from "react";
 // import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
+import LinkedInIcon from "@mui/icons-material/LinkedIn";
+import TelegramIcon from "@mui/icons-material/Telegram";
 
 import { ThemeContext } from "../../../context/ThemeContext";
 
@@ -51,7 +53,7 @@ export default function HomeFooter() {
           fontWeight={500}
           style={{ color: theme.textColor3 }}
         >
-          All Right resirved by NEARpad.dev | {" " + new Date().getFullYear()}
+          @nearpad.dev | {" " + new Date().getFullYear()}
         </Typography>
 
         <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -79,6 +81,14 @@ export default function HomeFooter() {
           >
             <LinkedInIcon fill={theme.textColor3} />
           </IconButton> */}
+          <IconButton
+            sx={socialLinkStyle}
+            component="a"
+            href="https://t.me/+7k9u4Pa23sUyM2Qx"
+            target="_blank"
+          >
+            <TelegramIcon fill={theme.textColor3} />
+          </IconButton>
           <IconButton
             sx={socialLinkStyle}
             component="a"

@@ -4,6 +4,7 @@ import { ThemeContext } from "../../../context/ThemeContext";
 import { Box, Typography, Button, alpha, useMediaQuery } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import Chip from "@mui/material/Chip";
+import SupervisedUserCircleRoundedIcon from "@mui/icons-material/SupervisedUserCircleRounded";
 
 import imageSrc from "../../../images/home.png";
 import searchSrc from "../../../images/search.png";
@@ -83,7 +84,7 @@ export default function TopSection() {
             variant="h1"
             sx={{ fontSize: bp ? "4rem" : "7rem", color: theme.textColor }}
           >
-            NEARpad
+            nearPad
           </Typography>
           <Typography
             variant={bp ? "h3" : "h2"}
@@ -93,17 +94,15 @@ export default function TopSection() {
               color: theme.textColor,
             }}
           >
-            BOS DevTools
+            BOS devTools
           </Typography>
 
           <Typography
             fontWeight={bp ? 300 : 200}
             variant={bp ? "h4" : "h3"}
             sx={{
-              marginTop: 3.75,
+              marginTop: 4,
               color: theme.textColor,
-              // fontWeight: 200,
-              // fontSize: 26,
             }}
           >
             Create decentralized frontend widgets without limits.
@@ -113,6 +112,10 @@ export default function TopSection() {
             <Typography style={{ color: theme.textColor }}>
               We &#x2665;
             </Typography>
+            <Chip
+              label="Developers"
+              avatar={<SupervisedUserCircleRoundedIcon />}
+            />
             <Chip
               label="Discovery"
               color="info"
@@ -129,7 +132,7 @@ export default function TopSection() {
               onClick={(e) => handleClick("bos")}
             />
           </Box>
-          <Typography
+          {/* <Typography
             style={{
               marginTop: 100,
             }}
@@ -139,7 +142,7 @@ export default function TopSection() {
               the prime time? Join the telegram channel and ask for the private
               beta access.
             </span>
-          </Typography>
+          </Typography> */}
           {/* <Link
         target="_blank"
         to="https://t.me/+7k9u4Pa23sUyM2Qx"
@@ -161,9 +164,9 @@ export default function TopSection() {
               },
             }}
             //to="/discover"
-            onClick={(e) => window.open("https://t.me/+7k9u4Pa23sUyM2Qx")}
+            onClick={(e) => (window.location.hash = "#/editor")}
           >
-            Join the beta
+            Try for free
             <ArrowForwardRoundedIcon
               sx={{ marginLeft: 3, fontSize: bp ? "1rem" : "2rem" }}
             />
@@ -173,7 +176,7 @@ export default function TopSection() {
 
         <Box>
           <ReactPlayer
-            url="https://www.youtube.com/watch?v=ysz5S6PUM-U"
+            url="https://youtu.be/CQwye_RdOt8"
             controls={false}
             loop
             playing
