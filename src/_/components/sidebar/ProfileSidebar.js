@@ -75,11 +75,10 @@ export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
             variant="outlined"
             startIcon={<LogoutIcon />}
             onClick={() => {
-              logout();
               logOut();
             }}
           >
-            Sign Out
+            Disconnect
           </CustomButton>
         ) : (
           <Box
@@ -132,8 +131,33 @@ export default function ProfileSidebar({ appProps, logOut, requestSignIn }) {
                 requestSignIn();
               }}
             >
-              Sign In
+              Connect
             </CustomButton>
+
+            {/* <CustomButton
+              sx={{
+                mt: 2,
+                flex: 1,
+                height: 40,
+                bgcolor: "transparent",
+                border: `1px ${theme.buttonColor} solid`,
+                color: theme.buttonColor,
+
+                width: "100%",
+
+                "&:hover": {
+                  color: theme.buttonColor,
+                  bgcolor: theme.buttonColor + 33,
+                },
+              }}
+              variant="outlined"
+              startIcon={<LogoutIcon />}
+              onClick={() => {
+                logout();
+              }}
+            >
+              Sign Out
+            </CustomButton> */}
           </Box>
         )}
       </Box>

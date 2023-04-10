@@ -17,10 +17,10 @@ export const ThemeContextProvider = (props) => {
     buttonColor: "#0d6efd",
     buttonColor2: "#ff004e",
 
-    buttonTextColor: "#fff",
+    buttonTextColor: "#ffffff",
 
-    ui: "#fff",
-    ui2: "rgba(0,0,0,.05)",
+    ui: "#ffffff",
+    ui2: "#f2f2f2",
     backgroundColor: "#f6f8fa",
 
     borderRadius: 5,

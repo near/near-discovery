@@ -76,6 +76,7 @@ export default function EditorPage(props) {
     allowTheming,
 
     selectedActivity,
+    setSelectedActivity,
     showWebsiteView,
 
     files,
@@ -142,6 +143,7 @@ export default function EditorPage(props) {
   );
 
   useEffect(() => {
+    if (!selectedActivity) setSelectedActivity("widgets");
     ReactGA.send({ hitType: "pageview", page: window.location.pathname });
   }, []);
 
@@ -538,6 +540,7 @@ export default function EditorPage(props) {
         const { files, lastPath } = value || {};
         setFiles(files || []);
         setLastPath(lastPath);
+        // console.log("files : ", files, "  lastPath : ", lastPath);
       });
   }, [cache]);
 
@@ -1103,7 +1106,7 @@ export default function EditorPage(props) {
                       });
                     }}
                   >
-                    Publish
+                    Connect
                   </button>
                 )
               }

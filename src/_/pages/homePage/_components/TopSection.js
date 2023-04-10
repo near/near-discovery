@@ -56,7 +56,7 @@ export default function TopSection() {
         justifyContent: "center",
         position: "relative",
         backgroundColor: theme.backgroundColor,
-        overflow: "hidden",
+        // overflow: "hidden",
       }}
     >
       <ParticleBackground
@@ -174,15 +174,21 @@ export default function TopSection() {
           {/* </Link> */}
         </Box>
 
-        <Box>
+        {/* <Box> */}
+        <Box className="player-wrapper">
           <ReactPlayer
+            className="react-player"
             url="https://youtu.be/CQwye_RdOt8"
+            // config={{ youtube: { playerVars: { controls: 1 } } }}
             controls={false}
+            width="100%"
+            height="100%"
             loop
             playing
             volume={0}
           />
         </Box>
+        {/* </Box> */}
 
         {/* {min720 && (
           <Box

@@ -6,6 +6,7 @@ import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
 import WifiRoundedIcon from "@mui/icons-material/WifiRounded";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
+import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -15,15 +16,17 @@ import { ThemeContext } from "../context/ThemeContext";
 import { EditorContext } from "../context/EditorContext";
 
 import DiamondRoundedIcon from "@mui/icons-material/DiamondRounded";
-import { Box, ButtonBase, Tooltip } from "@mui/material";
+import { Box, ButtonBase, Divider, Tooltip } from "@mui/material";
 import { useHistory, useLocation } from "react-router-dom";
 import { Widget, useAccount } from "near-social-vm";
+import { AuthContext } from "../context/AuthContext";
 
 export default function Activitybar(props) {
   const history = useHistory();
   const { accountId } = useAccount();
   const { theme, enableDarkMode, setEnableDarkMode } = useContext(ThemeContext);
   const { setSelectedActivity, Widgets } = useContext(EditorContext);
+  const { uesr, logout } = useContext(AuthContext);
 
   console.error = () => {};
 
@@ -249,6 +252,24 @@ export default function Activitybar(props) {
             setSelectedActivity((e) => (e === "profile" ? "" : "profile"));
           }}
         />
+
+        {uesr && (
+          <>
+            <Divider sx={{ my: 1 }} />
+
+            <ActivityButton
+              icon={
+                <LogoutRoundedIcon
+                  sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+                />
+              }
+              label="logout"
+              onClick={() => {
+                logout();
+              }}
+            />
+          </>
+        )}
       </div>
     </div>
   );

@@ -39,38 +39,34 @@
   padding: 0;
 }
 
-/* width 
-::-webkit-scrollbar {
-  width: 7px;
-}*/
-
-/* Track 
-::-webkit-scrollbar-track {
-  box-shadow: none;
-  border-left: 1px #393939 solid;
-
-  border-radius: 4px;
-}*/
-
-/* Handle 
-::-webkit-scrollbar-thumb {
-  background: #4f4f4f;
-  border-radius: 1px;
-}*/
-
-/* Handle on hover 
-::-webkit-scrollbar-thumb:hover {
-  background: #5e5e5e;
-}*/
-
 .profile-image.d-inline-block {
   height: 24px !important;
   width: 24px !important;
 }
-/* .rounded.w-100.h-100.align-bottom {
-  height: 24px !important;
-  width: 24px !important;
-} */
+
+.player-wrapper {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  /* height: auto; */
+  border-radius: 4px;
+
+  display: flex;
+  justify-content: center;
+
+  align-items: center;
+
+  overflow: hidden;
+}
+.react-player {
+  width: 100%;
+  position: relative;
+
+  object-fit: cover;
+}
+
+.react-player > div {
+  position: absolute;
+}
 
 .containerCSS {
   width: 100%;

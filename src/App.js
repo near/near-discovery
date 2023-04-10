@@ -13,6 +13,8 @@ import HomePage from "./_/pages/homePage/HomePage";
 import EmbedPage from "./_/pages/EmbedPage";
 import DiscoverPage from "./_/pages/DiscoverPage";
 import ProfilePage from "./_/pages/ProfilePage";
+import LearnPage from "./_/pages/learnPage/LearnPage";
+import ChatPage from "./_/pages/ChatPage";
 
 // import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { setupModal } from "@near-wallet-selector/modal-ui";
@@ -23,9 +25,8 @@ import Footer from "./_/components/Footer";
 import { Box, GlobalStyles } from "@mui/material";
 import { ThemeContext } from "./_/context/ThemeContext";
 import PagesContainer from "./_/components/PagesContainer";
-import LearnPage from "./_/pages/LearnPage";
-import ChatPage from "./_/pages/ChatPage";
 import LoginDialog from "./_/dialogs/LoginDialog";
+import LearnContextProvider from "./_/context/LearnContext";
 
 export const refreshAllowanceObj = {};
 ReactGA.initialize("G-YJ2FL738R6");
@@ -185,7 +186,9 @@ export default function App() {
           </Route>
 
           <Route path={"/learn"}>
-            <LearnPage {...passProps} />
+            <LearnContextProvider>
+              <LearnPage {...passProps} />
+            </LearnContextProvider>
             <Footer />
           </Route>
 

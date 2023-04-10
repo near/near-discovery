@@ -39,7 +39,7 @@ export default function LoginDialog() {
           variant="h4"
           sx={{ fontWeight: 600, color: theme.textColor2, textAlign: "center" }}
         >
-          Please login NEARpad
+          Please login nearPad
         </Typography>
       </DialogTitle>
 
