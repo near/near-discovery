@@ -55,11 +55,7 @@ export default function ViewPage(props) {
               view: src,
             }
       );
-      const {href} = window.location;
-      const params = href.indexOf('?') > -1 ? href.split('?').slice(1)[0].split('&') : undefined;
-      recordPageView(src, {
-          url_params: params,
-      });
+      recordPageView(src);
     }, 1);
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 

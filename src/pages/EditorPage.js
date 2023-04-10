@@ -146,10 +146,7 @@ export default function EditorPage(props) {
 
   useEffect(() => {
 
-    recordPageView(window.location.href, {
-      view: widgetSrc
-    }, [widgetSrc])
-
+    recordPageView(window.location.href);
     setWidgetSrc({
       edit: null,
       view: widgetSrc,

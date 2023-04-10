@@ -23,10 +23,7 @@ export default function EmbedPage(props) {
   }, [query]);
 
   useEffect(() => {
-    recordPageView(window.location.href, {
-      parentComponent: src,
-      params: location.search
-    });
+    recordPageView(window.location.href);
   }, [src]);
 
   return (
