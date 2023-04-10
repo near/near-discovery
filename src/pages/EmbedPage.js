@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Widget } from "near-social-vm";
+import { recordPageView, Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
@@ -23,7 +23,7 @@ export default function EmbedPage(props) {
   }, [query]);
 
   useEffect(() => {
-    analytics.pageView(window.location.href, {
+    recordPageView(window.location.href, {
       parentComponent: src,
       params: location.search
     });

@@ -16,7 +16,7 @@ import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
-import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
+import { reset, useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import DesktopNavigation from "./components/navigation/org/wrapper/desktop/DesktopNavigation";
@@ -24,7 +24,6 @@ import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import NearOrgPage from "./pages/NearOrgPage";
-import analytics from './utils/analytics';
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -70,7 +69,6 @@ function App(props) {
   const accountId = account.accountId;
 
   const location = window.location;
-  analytics.init();
 
   useEffect(() => {
     initNear &&
@@ -132,7 +130,7 @@ function App(props) {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
-    analytics.reset();
+    reset();
   }, [near]);
 
   const refreshAllowance = useCallback(async () => {
