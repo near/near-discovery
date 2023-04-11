@@ -459,7 +459,7 @@ export default function EditorPage(props) {
   );
 
   const renameFile = useCallback(
-    (newName, code) => {
+    (newName) => {
       const newPath = toPath(path.type, newName);
       const jNewPath = JSON.stringify(newPath);
       const jPath = JSON.stringify(path);
@@ -687,29 +687,37 @@ export default function EditorPage(props) {
 
   const isModule = path?.type === "module";
 
+  const hideAllModals = () => {
+    setShowRenameModal(false);
+    setShowOpenModal(false);
+    setShowOpenModuleModal(false);
+    setShowAddModal(false);
+    setShowCreateModal(false);
+    setShowSaveDraftModal(false);
+  };
+
   return (
     <>
       <Modals
-        jpath={jpath}
+        hideAllModals={hideAllModals}
         showRenameModal={showRenameModal}
-        path={path}
-        renameFile={renameFile}
         setShowRenameModal={setShowRenameModal}
         showOpenModal={showOpenModal}
-        loadFile={loadFile}
         setShowOpenModal={setShowOpenModal}
         showOpenModuleModal={showOpenModuleModal}
         setShowOpenModuleModal={setShowOpenModuleModal}
-        setShowAddModal={setShowAddModal}
-        createNewFile={createNewFile}
-        setShowCreateModal={setShowCreateModal}
         showSaveDraftModal={showSaveDraftModal}
+        showAddModal={showAddModal}
+        showCreateModal={showCreateModal}
+        jpath={jpath}
+        path={path}
+        renameFile={renameFile}
+        loadFile={loadFile}
+        createNewFile={createNewFile}
         near={near}
         widgetPath={widgetPath}
         widgetName={widgetName}
         code={code}
-        showAddModal={showAddModal}
-        showCreateModal={showCreateModal}
       />
       <div
         className={`text-center d-flex justify-content-center min-vh-100 ${

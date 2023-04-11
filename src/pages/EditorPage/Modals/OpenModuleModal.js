@@ -1,13 +1,20 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { Filetype } from "../utils/const";
 
-export default function OpenModuleModal(props) {
-  const onHide = props.onHide;
-  const onOpen = props.onOpen;
-  const onNew = props.onNew;
-  const show = props.show;
-
+export default function OpenModuleModal({ onHide, onConfirm, show }) {
   const [widgetSrc, setWidgetSrc] = useState("");
+
+  const handleSetNewName = (e) => {
+    setWidgetSrc(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-\/]/g, ""));
+  };
+
+  const handleConfirm = (e) => {
+    e.preventDefault();
+    onConfirm(widgetSrc, Filetype.Module);
+    setWidgetSrc("");
+    onHide();
+  };
 
   return (
     <Modal centered scrollable show={show} onHide={onHide}>
@@ -23,21 +30,14 @@ export default function OpenModuleModal(props) {
           id="widget-src-input"
           type="text"
           value={widgetSrc}
-          onChange={(e) =>
-            setWidgetSrc(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-\/]/g, ""))
-          }
+          onChange={handleSetNewName}
         />
       </Modal.Body>
       <Modal.Footer>
         <button
           className="btn btn-primary"
           disabled={!widgetSrc}
-          onClick={(e) => {
-            e.preventDefault();
-            onOpen(widgetSrc);
-            setWidgetSrc("");
-            onHide();
-          }}
+          onClick={handleConfirm}
         >
           Open
         </button>

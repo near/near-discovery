@@ -1,45 +1,31 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import ls from "local-storage";
-import prettier from "prettier";
-import parserBabel from "prettier/parser-babel";
-import { useHistory, useParams } from "react-router-dom";
-import {
-  Widget,
-  useCache,
-  useNear,
-  CommitButton,
-  useAccountId,
-} from "near-social-vm";
-import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
+import React from "react";
 import RenameModal from "./RenameModal";
 import OpenModal from "./OpenModal";
 import OpenModuleModal from "./OpenModuleModal";
 import AddModal from "./AddModal";
 import CreateModal from "./CreateModal";
 import { SaveDraftModal } from "../../../components/SaveDraft";
-import styled from "styled-components";
 
 export default function Modals({
-  jpath,
+  hideAllModals,
   showRenameModal,
-  path,
-  renameFile,
   setShowRenameModal,
   showOpenModal,
-  loadFile,
   setShowOpenModal,
   showOpenModuleModal,
   setShowOpenModuleModal,
-  setShowAddModal,
-  createNewFile,
-  setShowCreateModal,
   showSaveDraftModal,
+  showAddModal,
+  showCreateModal,
+  jpath,
+  path,
+  renameFile,
+  loadFile,
+  createNewFile,
   near,
   widgetPath,
   widgetName,
   code,
-  showAddModal,
-  showCreateModal,
 }) {
   return (
     <>
@@ -47,48 +33,36 @@ export default function Modals({
         key={`rename-modal-${jpath}`}
         show={showRenameModal}
         name={path?.name}
-        onRename={(newName) => renameFile(newName, code)}
-        onHide={() => setShowRenameModal(false)}
+        onRename={renameFile}
+        onHide={hideAllModals}
       />
       <OpenModal
         show={showOpenModal}
-        onOpen={(newName) => loadFile(newName)}
-        onHide={() => setShowOpenModal(false)}
+        onConfirm={loadFile}
+        onHide={hideAllModals}
       />
       <OpenModuleModal
         show={showOpenModuleModal}
-        onOpen={(newName) => loadFile(newName, Filetype.Module)}
-        onHide={() => setShowOpenModuleModal(false)}
+        onConfirm={loadFile}
+        onHide={hideAllModals}
       />
       <AddModal
         show={showAddModal}
-        onOpen={() => (setShowAddModal(false), setShowOpenModal(true))}
-        onNew={() => (
-          setShowAddModal(false),
-          setShowRenameModal(true),
-          createNewFile(Filetype.Widget)
-        )}
-        onOpenModule={() => (
-          setShowAddModal(false), setShowOpenModuleModal(true)
-        )}
-        onNewModule={() => (
-          setShowAddModal(false),
-          setShowRenameModal(true),
-          createNewFile(Filetype.Module)
-        )}
-        onHide={() => setShowAddModal(false)}
+        onOpenComponent={setShowOpenModal}
+        onNewComponent={setShowRenameModal}
+        onOpenModule={setShowOpenModuleModal}
+        onNewModule={setShowRenameModal}
+        onHide={hideAllModals}
+        createNewFile={createNewFile}
       />
       <CreateModal
         show={showCreateModal}
-        onOpen={(newName) => loadFile(newName)}
-        onNew={() => {
-          createNewFile(Filetype.Widget);
-        }}
-        onHide={() => setShowCreateModal(false)}
+        onConfirm={createNewFile}
+        onHide={hideAllModals}
       />
       <SaveDraftModal
         show={showSaveDraftModal}
-        onHide={() => setShowSaveDraftModal(false)}
+        onHide={hideAllModals}
         near={near}
         widgetPath={widgetPath}
         widgetName={widgetName}

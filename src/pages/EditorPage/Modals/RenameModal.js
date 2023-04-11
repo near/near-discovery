@@ -1,13 +1,18 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 
-export default function RenameModal(props) {
-  const onHide = props.onHide;
-  const name = props.name;
-  const onRename = props.onRename;
-  const show = props.show;
-
+export default function RenameModal({ key, show, name, onRename, onHide }) {
   const [newName, setNewName] = useState(name);
+
+  const handleSetNewName = (e) => {
+    setNewName(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-]/g, ""));
+  };
+
+  const handleConfirm = (e) => {
+    e.preventDefault();
+    onRename(newName);
+    onHide();
+  };
 
   return (
     <Modal centered scrollable show={show} onHide={onHide}>
@@ -23,20 +28,14 @@ export default function RenameModal(props) {
           id="rename-input"
           type="text"
           value={newName}
-          onChange={(e) =>
-            setNewName(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-]/g, ""))
-          }
+          onChange={handleSetNewName}
         />
       </Modal.Body>
       <Modal.Footer>
         <button
           className="btn btn-success"
           disabled={!newName || newName === name}
-          onClick={(e) => {
-            e.preventDefault();
-            onRename(newName);
-            onHide();
-          }}
+          onClick={handleConfirm}
         >
           Confirm
         </button>

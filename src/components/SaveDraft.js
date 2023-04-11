@@ -2,16 +2,43 @@ import React, { useState } from "react";
 import { CommitButton } from "near-social-vm";
 import Modal from "react-bootstrap/Modal";
 
-export const SaveDraftModal = (props) => {
+export const SaveDraftModal = ({
+  code,
+  show,
+  onHide,
+  near,
+  widgetPath,
+  widgetName,
+  type,
+  metadata,
+}) => {
   const [commitMessage, setCommitMessage] = useState("");
 
-  const code = props.code;
-  const widgetPath = props.widgetPath + "/branch/draft";
-  const show = props.show;
-  const onHide = props.onHide;
-  const near = props.near;
-  const metadata = props.metadata;
-  const type = props.type;
+  const widgetPathFull = widgetPath + "/branch/draft";
+
+  const commitButtonData = {
+    post: {
+      commit: {
+        text: commitMessage,
+        type: "md",
+        keys: [widgetPathFull],
+      },
+    },
+    [type]: {
+      [widgetName]: {
+        branch: {
+          draft: {
+            "": code,
+            metadata,
+          },
+        },
+      },
+    },
+  };
+
+  const handleMessage = (e) => {
+    setCommitMessage(e.target.value);
+  };
 
   const onCancel = (e) => {
     e.preventDefault();
@@ -39,7 +66,7 @@ export const SaveDraftModal = (props) => {
             id="widget-src-input"
             type="text"
             value={commitMessage}
-            onChange={(e) => setCommitMessage(e.target.value)}
+            onChange={handleMessage}
           />
         </div>
       </Modal.Body>
@@ -47,26 +74,8 @@ export const SaveDraftModal = (props) => {
         <CommitButton
           className="btn btn-primary"
           near={near}
-          onCommit={() => onHide()}
-          data={{
-            post: {
-              commit: {
-                text: commitMessage,
-                type: "md",
-                keys: [widgetPath],
-              },
-            },
-            [type]: {
-              [props.widgetName]: {
-                branch: {
-                  draft: {
-                    "": code,
-                    metadata,
-                  },
-                },
-              },
-            },
-          }}
+          onCommit={onHide}
+          data={commitButtonData}
         >
           Save
         </CommitButton>
