@@ -18,7 +18,6 @@ export default function ViewPage(props) {
 
   useEffect(() => {
     if (!props.signedIn || !!widgetSrc) {
-      console.log("Hiding Widget");
       zE("webWidget", "hide");
       return;
     }
