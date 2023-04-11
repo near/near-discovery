@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Filetype } from "../utils/const";
 
-export default function OpenModal({
+export default function AddModal({
   onHide,
   onOpenComponent,
   onNewComponent,

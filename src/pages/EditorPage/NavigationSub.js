@@ -1,20 +1,38 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Tab } from "./utils/const";
+import { EditorLayoutKey, Layout, Tab } from "./utils/const";
 import OpenInNewTabButton from "./buttons/OpenInNewTabButton";
 import RenderPreviewButton from "./buttons/RenderPreviewButton";
 
 export default function NavigationSub({
   layout,
-  Layout,
   path,
   accountId,
-  onLayoutChange,
   renderCode,
   tab,
   widgetPath,
   setRenderCode,
   setTab,
+  setLayoutState,
 }) {
+  const onLayoutChange = useCallback(
+    (e) => {
+      const layout = e.target.value;
+      if (layout === Layout.Split && tab === Tab.Widget) {
+        setTab(Tab.Editor);
+      }
+      setLayout(layout);
+    },
+    [setLayout, tab, setTab]
+  );
+
+  const setLayout = useCallback(
+    (layout) => {
+      ls.set(EditorLayoutKey, layout);
+      setLayoutState(layout);
+    },
+    [setLayoutState]
+  );
+
   return (
     <>
       {layout === Layout.Tabs && (
