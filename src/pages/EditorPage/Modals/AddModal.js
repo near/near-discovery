@@ -1,15 +1,25 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { Filetype } from "../utils/const";
 
 export default function OpenModal({
   onHide,
-  onOpen,
-  onNew,
+  onOpenComponent,
+  onNewComponent,
   show,
   onNewModule,
   onOpenModule,
+  createNewFile,
 }) {
-  const [widgetSrc, setWidgetSrc] = useState("");
+  const handleOpen = (open) => {
+    onHide();
+    open(true);
+  };
+
+  const handleNew = (type, open) => {
+    createNewFile(type);
+    handleOpen(open);
+  };
 
   return (
     <Modal centered scrollable show={show} onHide={onHide}>
@@ -23,21 +33,13 @@ export default function OpenModal({
         <div class="btn-group w-100" role="group" aria-label="Basic example">
           <button
             className="btn btn-outline-success w-50 mr-5"
-            onClick={(e) => {
-              e.preventDefault();
-              onOpen(widgetSrc);
-              onHide();
-            }}
+            onClick={() => handleOpen(onOpenComponent)}
           >
             Open Component
           </button>
           <button
             className="btn btn-success w-50"
-            onClick={(e) => {
-              e.preventDefault();
-              onNew(widgetSrc);
-              onHide();
-            }}
+            onClick={() => handleNew(Filetype.Widget, onNewComponent)}
           >
             Create New Component
           </button>
@@ -46,21 +48,13 @@ export default function OpenModal({
         <div class="btn-group w-100" role="group" aria-label="Basic example">
           <button
             className="btn btn-outline-primary w-50 mr-5"
-            onClick={(e) => {
-              e.preventDefault();
-              onOpenModule(widgetSrc);
-              onHide();
-            }}
+            onClick={() => handleOpen(onOpenModule)}
           >
             Open Module
           </button>
           <button
             className="btn btn-primary w-50"
-            onClick={(e) => {
-              e.preventDefault();
-              onNewModule(widgetSrc);
-              onHide();
-            }}
+            onClick={() => handleNew(Filetype.Module, onNewModule)}
           >
             Create New Module
           </button>
