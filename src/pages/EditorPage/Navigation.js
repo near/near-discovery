@@ -1,6 +1,12 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
 import styled from "styled-components";
+import ForkButton from "./buttons/ForkButton";
+import RenameButton from "./buttons/RenameButton";
+import OpenCreateButton from "./buttons/OpenCreateButton";
+import PublishButton from "./buttons/PublishButton";
+import PublishDraftAsMainButton from "./buttons/PublishDraftAsMainButton";
+import SaveDraftButton from "./buttons/SaveDraftButton";
 
 const TopMenu = styled.div`
   border-radius: 0.375rem;
@@ -52,13 +58,15 @@ export default function Navigation({
   filesDetails,
   removeFromFiles,
   createFile,
-  openCreateButton,
-  renameButton,
-  saveDraftButton,
-  forkButton,
-  publishDraftAsMainButton,
-  publishButton,
   widgetName,
+  code,
+  toPath,
+  setShowRenameModal,
+  setShowAddModal,
+  near,
+  path,
+  metadata,
+  setShowSaveDraftModal,
 }) {
   return (
     <>
@@ -118,8 +126,8 @@ export default function Navigation({
               );
             })}
             <Nav.Item className="me-1">
-              {openCreateButton}
-              {renameButton}
+              <OpenCreateButton setShowAddModal={setShowAddModal} />
+              <RenameButton setShowRenameModal={setShowRenameModal} />
             </Nav.Item>
           </Nav>
         </div>
@@ -133,12 +141,34 @@ export default function Navigation({
             onSelect={(key) => openFile(JSON.parse(key))}
           >
             <Nav.Item className="">
-              {saveDraftButton}
-              {forkButton}
+              <SaveDraftButton
+                widgetName={widgetName}
+                setShowSaveDraftModal={setShowSaveDraftModal}
+              />
+              <ForkButton
+                widgetName={widgetName}
+                code={code}
+                openFile={openFile}
+                toPath={toPath}
+              />
 
-              {filesDetails?.get(widgetName)?.isDraft
-                ? publishDraftAsMainButton
-                : publishButton}
+              {filesDetails?.get(widgetName)?.isDraft ? (
+                <PublishDraftAsMainButton
+                  widgetName={widgetName}
+                  near={near}
+                  path={path}
+                  code={code}
+                  metadata={metadata}
+                />
+              ) : (
+                <PublishButton
+                  widgetName={widgetName}
+                  near={near}
+                  path={path}
+                  code={code}
+                  metadata={metadata}
+                />
+              )}
             </Nav.Item>
           </Nav>
         </div>
