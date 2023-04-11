@@ -11,11 +11,11 @@ import {
   useAccountId,
 } from "near-social-vm";
 import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
-import RenameModal from "../../../components/Editor/RenameModal";
-import OpenModal from "../../../components/Editor/OpenModal";
-import OpenModuleModal from "../../../components/Editor/OpenModuleModal";
-import AddModal from "../../../components/Editor/AddModal";
-import CreateModal from "../../../components/Editor/CreateModal";
+import RenameModal from "./RenameModal";
+import OpenModal from "./OpenModal";
+import OpenModuleModal from "./OpenModuleModal";
+import AddModal from "./AddModal";
+import CreateModal from "./CreateModal";
 import { SaveDraftModal } from "../../../components/SaveDraft";
 import styled from "styled-components";
 
