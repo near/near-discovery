@@ -56,17 +56,36 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   const [draftOnChain, setDraftOnChain] = useState(null);
   const [filesDetails, setFilesDetails] = useState(new Map());
 
+  const [tab, setTab] = useState(Tab.Editor);
+  const [layout, setLayoutState] = useState(
+    ls.get(EditorLayoutKey) || Layout.Tabs
+  );
+
   const { widgetSrc } = useParams();
   const history = useHistory();
 
   const near = useNear();
   const cache = useCache();
   const accountId = useAccountId();
+  const widgetName = path?.name?.split("/")[0];
 
-  const [tab, setTab] = useState(Tab.Editor);
-  const [layout, setLayoutState] = useState(
-    ls.get(EditorLayoutKey) || Layout.Tabs
-  );
+  const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
+  const jpath = JSON.stringify(path);
+
+  const showEditor = !(files?.length === 1 && files[0]?.unnamed === true);
+
+  const isModule = path?.type === "module";
+
+  const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
+
+  const hideAllModals = () => {
+    setShowRenameModal(false);
+    setShowOpenModal(false);
+    setShowOpenModuleModal(false);
+    setShowAddModal(false);
+    setShowCreateModal(false);
+    setShowSaveDraftModal(false);
+  };
 
   const setLayout = useCallback(
     (layout) => {
@@ -514,8 +533,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     [setWidgetProps]
   );
 
-  const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
-
   const onLayoutChange = useCallback(
     (e) => {
       const layout = e.target.value;
@@ -526,11 +543,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     },
     [setLayout, tab, setTab]
   );
-
-  const widgetName = path?.name?.split("/")[0];
-
-  const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
-  const jpath = JSON.stringify(path);
 
   const saveDraftButton = (
     <button
@@ -654,19 +666,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
       Fork
     </button>
   );
-
-  const showEditor = !(files?.length === 1 && files[0]?.unnamed === true);
-
-  const isModule = path?.type === "module";
-
-  const hideAllModals = () => {
-    setShowRenameModal(false);
-    setShowOpenModal(false);
-    setShowOpenModuleModal(false);
-    setShowAddModal(false);
-    setShowCreateModal(false);
-    setShowSaveDraftModal(false);
-  };
 
   return (
     <>
