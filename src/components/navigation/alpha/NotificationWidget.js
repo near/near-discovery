@@ -37,7 +37,7 @@ const StyledNotificationWidget = styled.div`
 export function NotificationWidget({ notificationButtonSrc, onMouseEnter }) {
   return (
     <StyledNotificationWidget
-      className="nav-notification-widget"
+      className='nav-notification-widget'
       onMouseOver={onMouseEnter}
     >
       <Widget src={notificationButtonSrc} />

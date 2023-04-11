@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Logo } from "../icons/Logo";
@@ -9,8 +9,12 @@ import { UserDropdown } from "./UserDropdown";
 import { NavDropdownMenu } from "./nav_dropdown/NavDropdownMenu";
 import { NavDropdownButton } from "./NavDropdownButton";
 import { NotificationWidget } from "../NotificationWidget";
+import SearchDropDown from "./SearchDropDown";
+import { Widget } from "near-social-vm";
+
 import image from "../icons/search.svg";
 import { useHistory } from "react-router-dom";
+import { Widgets } from "../../../../data/widgets";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -104,38 +108,58 @@ const StyledNavigation = styled.div`
   }
 `;
 
+const SearchContainer = styled.div`
+  position: relative;
+`;
+
+const SearchDropDownContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 14px;
+`;
+
+const updateSearchValue = (searchString) => {
+  changeSearchValue(searchString);
+};
+
 export function DesktopNavigation(props) {
   const [menuDropdown, setMenuDropdown] = useState(false);
   const [searchInputFocus, setSearchInputFocus] = useState(false);
+  const [term, changeSearchValue] = useState("");
+  const searchRef = useRef(null);
+
   const history = useHistory();
   return (
     <StyledNavigation onMouseLeave={() => setMenuDropdown(false)}>
-      <div className="container">
-        <Link to="/" className="logo-link">
+      <div className='container'>
+        <Link to='/' className='logo-link'>
           <Logo />
         </Link>
-        <div className="form-wrapper">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              history.push(
-                `/${props.widgets?.globalSearchPage}?term=${e.target[0].value}`
-              );
-            }}
-          >
-            <input
-              placeholder="Search"
-              style={{ backgroundImage: `url(${image})` }}
-              onFocus={() => setSearchInputFocus(true)}
-              onBlur={() => setSearchInputFocus(false)}
-            />
-          </form>
-          {searchInputFocus && <Return />}
+        <div className='form-wrapper'>
+          <Widget
+            src='chaotictempest.near/widget/SearchPalette'
+            props={{ term: props.term }}
+          />{" "}
+          {/* <input
+            placeholder='Search'
+            style={{ backgroundImage: `url(${image})` }}
+            onFocus={() => setSearchInputFocus(true)}
+            onBlur={() => setSearchInputFocus(false)}
+            ref={searchRef}
+            onChange={(e) => changeSearchValue(e.target.value)}
+          /> */}
+          {searchInputFocus && (
+            <SearchDropDownContainer>
+              <SearchDropDown term={term} />
+            </SearchDropDownContainer>
+          )}
         </div>
-        <div className="navigation-section">
+        <div className='navigation-section'>
           <NavigationButton
             onMouseEnter={() => setMenuDropdown(false)}
-            route="/"
+            route='/'
           >
             Home
           </NavigationButton>
@@ -146,7 +170,7 @@ export function DesktopNavigation(props) {
             Develop
           </NavDropdownButton>
         </div>
-        <div className="user-section">
+        <div className='user-section'>
           {!props.signedIn && (
             <SignInButton onSignIn={() => props.requestSignIn()} />
           )}
