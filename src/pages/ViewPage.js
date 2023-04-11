@@ -23,7 +23,7 @@ export default function ViewPage(props) {
       return
     }
     zE.show();
-  }, [props.signedIn]);
+  }, [props.signedIn, widgetSrc]);
 
   useEffect(() => {
     setTimeout(() => {
