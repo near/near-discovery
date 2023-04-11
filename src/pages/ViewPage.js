@@ -21,7 +21,7 @@ export default function ViewPage(props) {
       zE("webWidget", "hide");
       return;
     }
-    zE.show();
+      zE("webWidget", 'show');
   }, [props.signedIn, widgetSrc]);
 
   useEffect(() => {
