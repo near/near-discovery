@@ -1,15 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  Widget,
-  useCache,
-  useNear,
-  CommitButton,
-  useAccountId,
-} from "near-social-vm";
+import { Widget } from "near-social-vm";
+import { Tab } from "./utils/const";
 
 export default function Preview({
   tab,
-  Tab,
   layout,
   Layout,
   layoutClass,

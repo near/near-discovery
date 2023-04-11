@@ -1,9 +1,10 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 
+import { Tab } from "./utils/const";
+
 export default function Tabs({
   isModule,
   tab,
-  Tab,
   setTab,
   widgets,
   layout,

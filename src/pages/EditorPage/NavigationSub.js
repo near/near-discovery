@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { Tab } from "./utils/const";
 
 export default function NavigationSub({
   layout,
@@ -7,7 +8,6 @@ export default function NavigationSub({
   accountId,
   openInNewTabButton,
   onLayoutChange,
-  Tab,
   renderCode,
   renderPreviewButton,
   tab,
