@@ -66,6 +66,7 @@ export default function VerticalCodePreview({ initialCode }) {
           sx={{
             flex: 1,
             p: 1,
+            height: "100%",
             bgcolor: theme.ui,
             color: theme.textColor,
           }}

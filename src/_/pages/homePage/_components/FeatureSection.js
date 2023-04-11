@@ -4,13 +4,15 @@ import { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 
 export default function FeatureSection({
-  content,
+  leftSideContent,
+  rightSideContent,
   title,
   description,
 
   image,
   rtl,
   sx,
+  sxSx,
 }) {
   const { theme, bp } = useContext(ThemeContext);
 
@@ -30,6 +32,7 @@ export default function FeatureSection({
       <Box
         sx={{
           maxWidth: 1250,
+          width: "100%",
           px: 2,
           py: bp ? 5 : 10,
           display: "grid",
@@ -37,22 +40,31 @@ export default function FeatureSection({
           gap: bp ? 2 : 4,
           justifyContent: "space-between",
           alignItems: "center",
+          ...sxSx,
         }}
       >
         {!rtl || bp ? (
           <>
             <LeftSide
-              content={content}
+              leftSideContent={leftSideContent}
               title={title}
               description={description}
             />
-            <RightSide image={image} title={title} />
+            <RightSide
+              rightSideContent={rightSideContent}
+              image={image}
+              title={title}
+            />
           </>
         ) : (
           <>
-            <RightSide image={image} title={title} />
+            <RightSide
+              rightSideContent={rightSideContent}
+              image={image}
+              title={title}
+            />
             <LeftSide
-              content={content}
+              leftSideContent={leftSideContent}
               title={title}
               description={description}
             />
@@ -63,13 +75,13 @@ export default function FeatureSection({
   );
 }
 
-const LeftSide = ({ content, title, description }) => {
+const LeftSide = ({ leftSideContent, title, description }) => {
   const { theme } = useContext(ThemeContext);
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column", gap: 1 }}>
-      {content ? (
-        content
+      {leftSideContent ? (
+        leftSideContent
       ) : (
         <>
           <Typography sx={{ color: theme.textColor }} variant="h2">
@@ -86,10 +98,18 @@ const LeftSide = ({ content, title, description }) => {
   );
 };
 
-const RightSide = ({ image, title }) => {
+const RightSide = ({ rightSideContent, image, title }) => {
   return (
     <Box sx={{ width: "100%" }}>
-      <img style={{ width: "100%", borderRadius: 8 }} src={image} alt={title} />
+      {rightSideContent ? (
+        rightSideContent
+      ) : (
+        <img
+          style={{ width: "100%", borderRadius: 4 }}
+          src={image}
+          alt={title}
+        />
+      )}
     </Box>
   );
 };
