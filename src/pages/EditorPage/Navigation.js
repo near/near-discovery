@@ -56,7 +56,6 @@ export default function Navigation({
   openFile,
   files,
   filesDetails,
-  removeFromFiles,
   createFile,
   widgetName,
   code,
@@ -67,7 +66,20 @@ export default function Navigation({
   path,
   metadata,
   setShowSaveDraftModal,
+  setFiles,
+  setLastPath,
 }) {
+  const removeFromFiles = useCallback(
+    (path) => {
+      path = JSON.stringify(path);
+      setFiles((files) =>
+        files.filter((file) => JSON.stringify(file) !== path)
+      );
+      setLastPath(path);
+    },
+    [setFiles, setLastPath]
+  );
+
   return (
     <>
       <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>

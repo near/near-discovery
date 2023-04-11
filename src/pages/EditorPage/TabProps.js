@@ -6,9 +6,20 @@ export default function TabProps({
   tab,
   widgetProps,
   setWidgetProps,
-  reformatProps,
   propsError,
 }) {
+  const reformatProps = useCallback(
+    (props) => {
+      try {
+        const formattedProps = JSON.stringify(JSON.parse(props), null, 2);
+        setWidgetProps(formattedProps);
+      } catch (e) {
+        console.log(e);
+      }
+    },
+    [setWidgetProps]
+  );
+
   return (
     <div className={`${tab === Tab.Props ? "" : "visually-hidden"}`}>
       <div className="form-control" style={{ height: "70vh" }}>
