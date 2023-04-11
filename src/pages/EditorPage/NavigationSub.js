@@ -1,22 +1,27 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Tab } from "./utils/const";
+import OpenInNewTabButton from "./buttons/OpenInNewTabButton";
+import RenderPreviewButton from "./buttons/RenderPreviewButton";
 
 export default function NavigationSub({
   layout,
   Layout,
   path,
   accountId,
-  openInNewTabButton,
   onLayoutChange,
   renderCode,
-  renderPreviewButton,
   tab,
+  widgetPath,
+  setRenderCode,
+  setTab,
 }) {
   return (
     <>
       {layout === Layout.Tabs && (
         <div className="ms-auto d-flex">
-          {path?.type === "widget" && accountId && openInNewTabButton}
+          {path?.type === "widget" && accountId && (
+            <OpenInNewTabButton widgetPath={widgetPath} />
+          )}
 
           {path && (
             <div
@@ -79,10 +84,16 @@ export default function NavigationSub({
               {/* render code button as a separate component */}
               {renderCode && (
                 <div className="d-flex justify-content-end me-2">
-                  {renderPreviewButton}
+                  <RenderPreviewButton
+                    setRenderCode={setRenderCode}
+                    layout={layout}
+                    setTab={setTab}
+                  />
                 </div>
               )}
-              {path?.type === "widget" && accountId && openInNewTabButton}
+              {path?.type === "widget" && accountId && (
+                <OpenInNewTabButton widgetPath={widgetPath} />
+              )}
               <div
                 className="btn-group"
                 role="group"

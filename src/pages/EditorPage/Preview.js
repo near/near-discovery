@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Widget } from "near-social-vm";
 import { Tab } from "./utils/const";
+import RenderPreviewButton from "./buttons/RenderPreviewButton";
 
 export default function Preview({
   tab,
@@ -11,7 +12,8 @@ export default function Preview({
   jpath,
   parsedWidgetProps,
   isModule,
-  renderPreviewButton,
+  setRenderCode,
+  setTab,
 }) {
   return (
     <div
@@ -69,7 +71,11 @@ export default function Preview({
                       justifyContent: "center",
                     }}
                   >
-                    {renderPreviewButton}
+                    <RenderPreviewButton
+                      setRenderCode={setRenderCode}
+                      layout={layout}
+                      setTab={setTab}
+                    />
                   </div>
                 )
               )}

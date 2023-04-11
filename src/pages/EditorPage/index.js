@@ -544,129 +544,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     [setLayout, tab, setTab]
   );
 
-  const saveDraftButton = (
-    <button
-      className="btn btn-outline-primary me-2"
-      disabled={!widgetName}
-      onClick={(e) => {
-        e.preventDefault();
-        setShowSaveDraftModal(true);
-      }}
-    >
-      Save Version
-    </button>
-  );
-
-  const publishDraftAsMainButton = (
-    <CommitButton
-      className={`btn btn-primary`}
-      disabled={!widgetName}
-      near={near}
-      data={{
-        [path?.type]: {
-          [widgetName]: {
-            "": code,
-            metadata,
-            branch: {
-              draft: {
-                "": null,
-                metadata: null,
-              },
-            },
-          },
-        },
-      }}
-    >
-      Publish
-    </CommitButton>
-  );
-
-  const publishButton = (
-    <CommitButton
-      className={`btn btn-primary`}
-      disabled={!widgetName}
-      near={near}
-      data={{
-        [path?.type]: {
-          [widgetName]: {
-            "": code,
-            metadata,
-          },
-        },
-      }}
-    >
-      Publish
-    </CommitButton>
-  );
-
-  const renderPreviewButton = (
-    <button
-      className="btn btn-outline-primary"
-      onClick={() => {
-        setRenderCode(code);
-        if (layout === Layout.Tabs) {
-          setTab(Tab.Widget);
-        }
-      }}
-    >
-      Render Preview
-    </button>
-  );
-
-  const openCreateButton = (
-    <button
-      className="btn btn-success ms-2"
-      onClick={() => setShowAddModal(true)}
-      style={{
-        fontSize: "20px",
-        height: "40px",
-        lineHeight: "38px",
-        paddingTop: "0",
-        marginTop: "0",
-      }}
-    >
-      <i className="bi bi-plus"></i>
-    </button>
-  );
-
-  const renameButton = (
-    <button
-      className="btn btn-outline-success ms-2"
-      style={{ height: "40px" }}
-      onClick={() => {
-        setShowRenameModal(true);
-      }}
-    >
-      <i className="bi bi-pen"></i>
-    </button>
-  );
-
-  const openInNewTabButton = (
-    <a
-      className="btn me-2 btn-outline-secondary"
-      style={{ height: "38px" }}
-      href={`#/${widgetPath}${
-        filesDetails.get(widgetName)?.isDraft ? "/branch/draft" : ""
-      }`}
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Open Component
-    </a>
-  );
-
-  const forkButton = (
-    <button
-      className="btn btn-outline-primary me-2"
-      onClick={() => {
-        const forkName = widgetName + "-fork";
-        openFile(toPath(Filetype.Widget, forkName), code);
-      }}
-    >
-      Fork
-    </button>
-  );
-
   return (
     <>
       <Modals
@@ -707,13 +584,15 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
             filesDetails={filesDetails}
             removeFromFiles={removeFromFiles}
             createFile={createFile}
-            openCreateButton={openCreateButton}
-            renameButton={renameButton}
-            saveDraftButton={saveDraftButton}
-            forkButton={forkButton}
-            publishDraftAsMainButton={publishDraftAsMainButton}
-            publishButton={publishButton}
             widgetName={widgetName}
+            code={code}
+            toPath={toPath}
+            setShowRenameModal={setShowRenameModal}
+            setShowAddModal={setShowAddModal}
+            near={near}
+            path={path}
+            metadata={metadata}
+            setShowSaveDraftModal={setShowSaveDraftModal}
           />
           <Search
             widgets={widgets}
@@ -741,11 +620,12 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
                       Layout={Layout}
                       path={path}
                       accountId={accountId}
-                      openInNewTabButton={openInNewTabButton}
                       onLayoutChange={onLayoutChange}
                       renderCode={renderCode}
-                      renderPreviewButton={renderPreviewButton}
                       tab={tab}
+                      widgetPath={widgetPath}
+                      setRenderCode={setRenderCode}
+                      setTab={setTab}
                     />
                   </div>
 
@@ -780,7 +660,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
                   jpath={jpath}
                   parsedWidgetProps={parsedWidgetProps}
                   isModule={isModule}
-                  renderPreviewButton={renderPreviewButton}
                 />
                 <PreviewMetadata
                   tab={tab}
