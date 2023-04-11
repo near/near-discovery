@@ -8,6 +8,7 @@ import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import ReactGA from "react-ga4";
 
 import MyEditorPage from "./_/pages/editorPage/EditorPage";
+import MyBetaEditorPage from "./_/pages/editorPage/EditorPage.beta";
 import SearchPage from "./_/pages/SearchPage";
 import HomePage from "./_/pages/homePage/HomePage";
 import EmbedPage from "./_/pages/EmbedPage";
@@ -209,6 +210,11 @@ export default function App() {
 
           <Route path={"/editor/:widgetSrc*"}>
             <MyEditorPage {...passProps} />
+            <Footer />
+          </Route>
+
+          <Route path={"/editorBeta/:widgetSrc*"}>
+            <MyBetaEditorPage {...passProps} />
             <Footer />
           </Route>
 

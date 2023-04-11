@@ -116,6 +116,29 @@ export default function Activitybar(props) {
             <ActivityButton
               icon={
                 <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill={theme.textColor4}
+                  width="1.4em"
+                  height="1.4em"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M8.5 0h9L22 4.5v12.068L20.705 18H16v4.568L14.568 24H2.5L1 22.568V7.5L2.5 6H7V1.5L8.5 0zM16 1.5V6h4.5v10.5h-12v-15H16zm3.879 3L17.5 2.121V4.5h2.379zM7 7.5v9.068L8.5 18h6v4.5h-12v-15H7z"
+                  ></path>
+                </svg>
+              }
+              label="create widgets Beta *"
+              to="/editorBeta"
+              onClick={() => {
+                history.push("/editorBeta");
+                setSelectedActivity((e) => (e === "widgets" ? "" : "widgets"));
+              }}
+            />
+
+            <ActivityButton
+              icon={
+                <svg
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"

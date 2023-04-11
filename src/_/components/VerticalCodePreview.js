@@ -3,13 +3,26 @@ import LearnPageHeader from "../pages/learnPage/_components/LearnPageHeader";
 import { Allotment } from "allotment";
 import { Box } from "@mui/system";
 
+import prettier from "prettier";
+import parserBabel from "prettier/parser-babel";
+
 import Editor from "@monaco-editor/react";
 import { Widget } from "near-social-vm";
 import { ThemeContext } from "../context/ThemeContext";
 import { useContext, useCallback } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
-export default function VerticalCodePreview({ setCode, code }) {
+export default function VerticalCodePreview({ initialCode }) {
   const { theme, editorFontSize } = useContext(ThemeContext);
+
+  const [code, setCode] = useState("");
+
+  console.log(initialCode);
+
+  useEffect(() => {
+    if (initialCode?.length > 0) format(initialCode);
+  }, [initialCode]);
 
   const format = useCallback(
     (code) => {
@@ -18,8 +31,6 @@ export default function VerticalCodePreview({ setCode, code }) {
           parser: "babel",
           plugins: [parserBabel],
         });
-
-        console.log(formattedCode);
 
         setCode(formattedCode);
       } catch (e) {
@@ -30,8 +41,8 @@ export default function VerticalCodePreview({ setCode, code }) {
   );
 
   return (
-    <Allotment sx={{ height: "100vh" }} vertical={true}>
-      <Allotment.Pane>
+    <Allotment defaultSizes={[100, 100]} vertical={true}>
+      <Allotment.Pane priority={2}>
         <LearnPageHeader title="Code" />
 
         <Editor
@@ -49,7 +60,7 @@ export default function VerticalCodePreview({ setCode, code }) {
         />
       </Allotment.Pane>
 
-      <Allotment.Pane style={{ flex: 1, height: "100vh" }}>
+      <Allotment.Pane priority={1} style={{ flex: 1, height: "100vh" }}>
         <LearnPageHeader title="Prevew" />
         <Box
           sx={{

@@ -12,18 +12,8 @@ const data = [
       {
         _id: "5456123",
         name: "Section 1",
-        discription: `# My Awesome Heading
-  
-          This is some **bold** and *italic* text.
-          
-          Here's a list:
-          - Item 1
-          - Item 2
-          - Item 3
-          
-          > Here's a blockquote.
-          
-          And here's a link to [Google](https://www.google.com/).`,
+        discription: `# My 2222 Awesome Heading 2 \n This is some **bold** and *italic* text. \n Here's a list: \n - Item 1 \n - Item 5 \n - Item 8 \n > Here's a blockquote. \n And here's a link to [Google](https://www.facebook.com/).`,
+
         code: "return (<div>\n \n \n<h1>Learn</h1></div>)",
       },
       {
@@ -263,6 +253,14 @@ export const LearnContextProvider = (props) => {
   const [selectedSection, setSelectedSection] = useState();
 
   useEffect(() => {
+    loadSelectedProject();
+  }, []);
+  const loadSelectedProject = async () => {
+    let data = await localStorage.getItem("selectedProject");
+    setSelectedItem(JSON.parse(data));
+  };
+
+  useEffect(() => {
     if (selectedItem?.projectId) {
       setSelectedProject(
         projects?.find((p) => p?._id === selectedItem.projectId)
@@ -276,6 +274,19 @@ export const LearnContextProvider = (props) => {
       );
     }
   }, [selectedItem, selectedProject]);
+
+  const goBack = () => {
+    let state = {
+      projectId: "",
+      sectionId: "",
+    };
+
+    setSelectedProject({});
+    setSelectedSection({});
+
+    setSelectedItem(state);
+    localStorage.setItem("selectedProject", JSON.stringify(state));
+  };
 
   return (
     <LearnContext.Provider
@@ -291,6 +302,8 @@ export const LearnContextProvider = (props) => {
         setSelectedProject,
         selectedSection,
         setSelectedSection,
+        //
+        goBack,
       }}
     >
       {props.children}

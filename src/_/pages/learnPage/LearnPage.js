@@ -1,96 +1,60 @@
-import PagesContainer from "../../components/PagesContainer";
-import React, { useCallback, useContext, useEffect } from "react";
-import { Box, Typography } from "@mui/material";
-import { ThemeContext } from "../../context/ThemeContext";
-import { EditorContext } from "../../context/EditorContext";
+import React from "react";
 import { Allotment } from "allotment";
-import Editor from "@monaco-editor/react";
-import { useState } from "react";
-import { Widget } from "near-social-vm";
-import { styled } from "@mui/material/styles";
-
-import MuiAccordion from "@mui/material/Accordion";
-import MuiAccordionSummary from "@mui/material/AccordionSummary";
-import MuiAccordionDetails from "@mui/material/AccordionDetails";
-import ArrowForwardIosSharpIcon from "@mui/icons-material/ArrowForwardIosSharp";
-
-import prettier from "prettier";
-import parserBabel from "prettier/parser-babel";
-import LearnPageHeader from "./_components/LearnPageHeader";
+import { Box, Typography } from "@mui/material";
+import Activitybar from "../../components/Activitybar";
+import LearnSidebar from "../../components/sidebar/LearnSidebar";
+import { EditorContext } from "../../context/EditorContext";
+import { useEffect, useContext } from "react";
 import { LearnContext } from "../../context/LearnContext";
+import { ThemeContext } from "../../context/ThemeContext";
+import { Widget } from "near-social-vm";
 import VerticalCodePreview from "../../components/VerticalCodePreview";
 
 export default function LearnPage(props) {
-  const { theme, editorFontSize } = useContext(ThemeContext);
-  const { selectedItem, selectedSection } = useContext(LearnContext);
-
   const { selectedActivity, setSelectedActivity } = useContext(EditorContext);
+  const { selectedItem, selectedSection } = useContext(LearnContext);
 
   useEffect(() => {
     if (!selectedActivity) setSelectedActivity("learn");
-
-    format(
-      selectedSection?.code || "return (<div>\n \n \n<h1>Learn</h1></div>)"
-    );
   }, [selectedSection]);
 
-  const [code, setCode] = useState("");
-
-  const format = useCallback(
-    (code) => {
-      try {
-        const formattedCode = prettier.format(code, {
-          parser: "babel",
-          plugins: [parserBabel],
-        });
-
-        console.log(formattedCode);
-
-        setCode(formattedCode);
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    [code]
-  );
-
   return (
-    <PagesContainer {...props}>
-      <Box
-        sx={{
-          wdith: "100%",
-          display: "flex",
-          justifyContent: "center",
-          //   height: "calc(100vh - 25px)",
-          height: "100%",
-          overflowY: "auto",
-          //   backgroundColor: "red" || theme.ui,
-        }}
-      >
-        <Allotment maxSize="100%" sx={{ height: "100vh" }}>
+    <Box
+      sx={{
+        height: "100%",
+        width: "100%",
+        display: "flex",
+      }}
+    >
+      <Activitybar {...props} />
+
+      <Box sx={{ flex: 1 }}>
+        <Allotment
+          maxSize="100%"
+          sx={{ height: "100vh" }}
+          defaultSizes={[100, 200, 200]}
+        >
+          <Allotment.Pane minSize={200} visible={selectedActivity === "learn"}>
+            <LearnSidebar />
+          </Allotment.Pane>
+
           <Allotment.Pane
-            key="projectbar"
-            // snap
-            visible={selectedItem?.projectId?.length > 0 ? true : false}
-            // visible={showProjectbar}
-            // preferredSize={300}
-            minSize={650}
-            // minSize={100}
-            maxSize={450}
+            minSize={200}
+            visible={selectedItem?.sectionId?.length > 0 ? true : false}
           >
             <Projectbar />
           </Allotment.Pane>
 
           {selectedItem?.sectionId ? (
-            <VerticalCodePreview code={code} setCode={setCode} />
+            <VerticalCodePreview initialCode={selectedSection?.code} />
           ) : (
-            <Allotment.Pane>
+            <Allotment.Pane minSize={200}>
               <EmptyPage />
             </Allotment.Pane>
           )}
         </Allotment>
       </Box>
-    </PagesContainer>
+    </Box>
   );
 }
 
@@ -100,7 +64,7 @@ const Projectbar = () => {
     useContext(LearnContext);
 
   return (
-    <Box sx={{ height: "100%", overflowY: "auto" }}>
+    <Box sx={{ height: "100%", overflowY: "auto", backgroundColor: theme.ui }}>
       <Box
         sx={{
           height: 50,
@@ -109,123 +73,27 @@ const Projectbar = () => {
           justifyContent: "space-between",
           paddingInline: 1,
           borderBottom: `1px solid ${theme.borderColor}`,
+          backgroundColor: theme.backgroundColor,
         }}
       >
         <Typography
           variant="h6"
           sx={{ fontWeight: 500, color: theme.textColor }}
         >
-          {selectedProject?.name}
+          {selectedSection?.name}
         </Typography>
       </Box>
       <Box>
         <Box sx={{ p: 1 }}>
           <Widget
             src="saidulbadhon.near/widget/LearnPage.Markdown"
-            props={{ text: selectedProject?.discription, theme: theme }}
+            props={{ text: selectedSection?.discription, theme: theme }}
           />
-        </Box>
-
-        <Box>
-          {selectedProject?.sections?.map((section, index) => (
-            <Accordion
-              sx={{
-                borderTop:
-                  index === 0 ? `1px ${theme.borderColor} solid` : "none",
-                borderBottom: `1px ${theme.borderColor} solid`,
-                backgroundColor: theme.ui2 + 66,
-              }}
-              expanded={selectedItem?.sectionId === section?._id}
-              onClick={() => {
-                setSelectedItem((e) => ({
-                  projectId: e?.projectId,
-                  sectionId: e?.sectionId === section?._id ? "" : section?._id,
-                }));
-              }}
-            >
-              <AccordionSummary
-                aria-controls="panel2d-content"
-                id="panel2d-header"
-                sx={{
-                  backgroundColor: theme.ui,
-
-                  backgroundColor:
-                    selectedItem?.sectionId === section?._id
-                      ? theme.ui2
-                      : theme.ui,
-                  "&:hover": {
-                    backgroundColor: theme.ui2,
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                <Typography
-                  variant="h6"
-                  sx={{ fontWeight: 600, color: theme.textColor }}
-                >
-                  {section?.name}
-                </Typography>
-              </AccordionSummary>
-              <AccordionDetails sx={{ backgroundColor: "transparent" }}>
-                <Box sx={{ px: 1, color: theme.textColor }}>
-                  <Widget
-                    src="saidulbadhon.near/widget/LearnPage.Markdown"
-                    props={{ text: selectedSection?.discription, theme: theme }}
-                  />
-                </Box>
-              </AccordionDetails>
-            </Accordion>
-          ))}
         </Box>
       </Box>
     </Box>
   );
 };
-
-//
-//
-//
-
-const Accordion = styled((props) => (
-  <MuiAccordion disableGutters elevation={0} square {...props} />
-))(({ theme }) => ({
-  // border: `1px solid ${theme.palette.divider}`,
-  // backgroundColor: "transparent",
-  color: "#7e8185",
-  // "&:not(:last-child)": {
-  //   borderBottom: 0,
-  // },
-  "&:before": {
-    display: "none",
-  },
-}));
-
-const AccordionSummary = styled((props) => (
-  <MuiAccordionSummary
-    expandIcon={
-      <ArrowForwardIosSharpIcon sx={{ fontSize: "0.8rem", fill: "#7e8185" }} />
-    }
-    {...props}
-  />
-))(({ theme }) => ({
-  backgroundColor: "#1a1a1a",
-  // backgroundColor:
-  //   theme.palette.mode === "dark" ? "#1e1e1e" : "rgba(0, 0, 0, .03)",
-  flexDirection: "row-reverse",
-  "& .MuiAccordionSummary-expandIconWrapper.Mui-expanded": {
-    transform: "rotate(90deg)",
-  },
-  "& .MuiAccordionSummary-content": {
-    marginLeft: theme.spacing(1),
-  },
-}));
-
-const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
-  // backgroundColor: "#262626",
-  backgroundColor: "#1e1e1e",
-  padding: 0,
-  borderTop: "1px solid rgba(0, 0, 0, .125)",
-}));
 
 const EmptyPage = () => {
   const { theme } = useContext(ThemeContext);

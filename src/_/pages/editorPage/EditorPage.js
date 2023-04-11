@@ -533,13 +533,14 @@ export default function EditorPage(props) {
 
   useEffect(() => {
     // Reding Files and Last open files from cache
-
+    setLoading(true);
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
       .then((value) => {
         const { files, lastPath } = value || {};
         setFiles(files || []);
         setLastPath(lastPath);
+        setLoading(false);
         // console.log("files : ", files, "  lastPath : ", lastPath);
       });
   }, [cache]);
@@ -553,6 +554,7 @@ export default function EditorPage(props) {
         createFile(Filetype.Widget);
       } else {
         loadFile(widgetSrc);
+        console.log("XXXXXXXXXXXXXXXXXXXX LOADING FILE : ", widgetSrc);
       }
       // analytics("edit", {
       //   props: {
@@ -561,12 +563,16 @@ export default function EditorPage(props) {
       // });
       history.replace(`/editor/`);
     } else if (path === undefined) {
-      if (files.length === 0) {
-        createFile(Filetype.Widget);
-      } else {
-        openFile(lastPath, undefined);
+      if (!loading) {
+        if (files.length === 0) {
+          createFile(Filetype.Widget);
+        } else {
+          openFile(lastPath, undefined);
+        }
       }
     }
+
+    console.log({ lastPath }, { files }, { path }, { widgetSrc });
   }, [near, createFile, lastPath, files, path, widgetSrc, openFile, loadFile]);
 
   const reformat = useCallback(
