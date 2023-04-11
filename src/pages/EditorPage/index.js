@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import ls from "local-storage";
 import { useHistory, useParams } from "react-router-dom";
-import { useCache, useNear, CommitButton, useAccountId } from "near-social-vm";
+import { useCache, useNear, useAccountId } from "near-social-vm";
 
 import VsCodeBanner from "./VsCodeBanner";
 import Welcome from "./Welcome";
@@ -27,6 +27,7 @@ import {
   Tab,
   Layout,
 } from "./utils/const";
+import { generateNewName, toPath } from "./utils/editor";
 
 export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   const [loading, setLoading] = useState(false);
@@ -199,7 +200,18 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     (path, code) => {
       setCodeChangesPresent();
       setPath(path);
-      addToFiles(path);
+
+      // add to files
+      const jpath = JSON.stringify(path);
+      setFiles((files) => {
+        const newFiles = [...files];
+        if (!files.find((file) => JSON.stringify(file) === jpath)) {
+          newFiles.push(path);
+        }
+        return newFiles;
+      });
+      setLastPath(path);
+
       setMetadata(undefined);
       setRenderCode(null);
       if (code !== undefined) {
@@ -219,16 +231,8 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
           });
       }
     },
-    [updateCode, addToFiles]
+    [updateCode]
   );
-
-  const toPath = useCallback((type, nameOrPath) => {
-    const name =
-      nameOrPath.indexOf("/") >= 0
-        ? nameOrPath.split("/").slice(2).join("/")
-        : nameOrPath;
-    return { type, name };
-  }, []);
 
   const loadFile = useCallback(
     (nameOrPath, type = Filetype.Widget) => {
@@ -267,23 +271,9 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     [accountId, openFile, toPath, near, cache]
   );
 
-  const generateNewName = useCallback(
-    (type) => {
-      for (let i = 0; ; i++) {
-        const name = `Untitled-${i}`;
-        const path = toPath(type, name);
-        path.unnamed = true;
-        if (!files?.find((file) => file.name === name)) {
-          return path;
-        }
-      }
-    },
-    [toPath, files]
-  );
-
   const createNewFile = useCallback(
     (type) => {
-      const path = generateNewName(type);
+      const path = generateNewName(type, files);
       path.unnamed = undefined;
       openFile(
         path,
@@ -296,7 +286,7 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   // helper
   const createFile = useCallback(
     (type) => {
-      const path = generateNewName(type);
+      const path = generateNewName(type, files);
       openFile(path, DefaultEditorCode);
     },
     [generateNewName, openFile]
@@ -453,22 +443,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     };
     fetchCodeAndDraftOnChain();
   };
-
-  // helper
-  const addToFiles = useCallback(
-    (path) => {
-      const jpath = JSON.stringify(path);
-      setFiles((files) => {
-        const newFiles = [...files];
-        if (!files.find((file) => JSON.stringify(file) === jpath)) {
-          newFiles.push(path);
-        }
-        return newFiles;
-      });
-      setLastPath(path);
-    },
-    [setFiles, setLastPath]
-  );
 
   return (
     <>
