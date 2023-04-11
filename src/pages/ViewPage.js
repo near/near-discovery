@@ -17,10 +17,10 @@ export default function ViewPage(props) {
   }, [query]);
 
   useEffect(() => {
-    if (!props.signedIn || !!widgetSrc){
-      console.log('Hiding Widget')
+    if (!props.signedIn || !!widgetSrc) {
+      console.log("Hiding Widget");
       zE("webWidget", "hide");
-      return
+      return;
     }
     zE.show();
   }, [props.signedIn, widgetSrc]);

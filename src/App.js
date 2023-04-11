@@ -177,7 +177,7 @@ function App(props) {
   };
 
   return (
-    <StyledApp className='App'>
+    <StyledApp className="App">
       <Router basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path={"/embed/:widgetSrc*"}>
