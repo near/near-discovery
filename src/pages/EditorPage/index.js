@@ -30,11 +30,7 @@ import {
   Layout,
 } from "./utils/const";
 
-export default function EditorPage(props) {
-  const { widgetSrc } = useParams();
-  const history = useHistory();
-  const setWidgetSrc = props.setWidgetSrc;
-
+export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   const [loading, setLoading] = useState(false);
   const [code, setCode] = useState(undefined);
   const [path, setPath] = useState(undefined);
@@ -59,6 +55,10 @@ export default function EditorPage(props) {
   const [codeOnChain, setCodeOnChain] = useState(null);
   const [draftOnChain, setDraftOnChain] = useState(null);
   const [filesDetails, setFilesDetails] = useState(new Map());
+
+  const { widgetSrc } = useParams();
+  const history = useHistory();
+
   const near = useNear();
   const cache = useCache();
   const accountId = useAccountId();
@@ -717,9 +717,9 @@ export default function EditorPage(props) {
             widgetName={widgetName}
           />
           <Search
-            widgets={props.widgets}
-            tos={props.tos}
-            logOut={props.logOut}
+            widgets={widgets}
+            tos={tos}
+            logOut={logOut}
             loadFile={loadFile}
           />
           <div className="d-flex align-content-start">
@@ -731,7 +731,7 @@ export default function EditorPage(props) {
                       isModule={isModule}
                       tab={tab}
                       setTab={setTab}
-                      widgets={props.widgets}
+                      widgets={widgets}
                       layout={layout}
                       setRenderCode={setRenderCode}
                       Layout={Layout}
@@ -766,7 +766,7 @@ export default function EditorPage(props) {
                   />
                   <TabMetadata
                     tab={tab}
-                    widgets={props.widgets}
+                    widgets={widgets}
                     jpath={jpath}
                     widgetPath={widgetPath}
                     setMetadata={setMetadata}
@@ -787,7 +787,7 @@ export default function EditorPage(props) {
                   tab={tab}
                   layoutClass={layoutClass}
                   jpath={jpath}
-                  widgets={props.widgets}
+                  widgets={widgets}
                   metadata={metadata}
                   accountId={accountId}
                   widgetName={widgetName}
