@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
+import configZendesk from "./zendesk";
 
 export default function ViewPage(props) {
   const { widgetSrc } = useParams();
@@ -21,7 +22,8 @@ export default function ViewPage(props) {
       zE("webWidget", "hide");
       return;
     }
-      zE("webWidget", 'show');
+    configZendesk();
+    zE("webWidget", "show");
   }, [props.signedIn, widgetSrc]);
 
   useEffect(() => {
