@@ -36,7 +36,7 @@
           offset: {
             horizontal: "20px",
             vertical: "20px",
-            mobile: { horizontal: "5px", vertical: "70px", from: "right" },
+            mobile: { horizontal: "5px", vertical: "100px", from: "right" },
           },        
           contactForm: {
             attachments: true,
@@ -62,36 +62,6 @@
 //         padding-right: 0;
 //       }
 //     </style>
-
-      function handleZendeskWidget() {
-        if (localStorage.getItem("accountNameBool")) {
-          // console.log("user detected");
-          if ( // TODO find a cleaner way to distinguish homepage or local... :/
-            window.location.href === "https://alpha.near.org/#/" ||
-            window.location.href === "http://localhost:3000/#/" ||
-            window.location.search.includes("account_id=")
-          ) {
-            // console.log("showing button");
-            zE.show();
-          } else {
-            // console.log(" hiding the widget...");
-            zE("webWidget", "hide");
-          }
-        } else {
-          // console.log("user not logged in");
-          zE("webWidget", "hide");
-        }
-      }
-      handleZendeskWidget();
-      window.addEventListener("hashchange", handleZendeskWidget);
-      window.addEventListener("load", handleZendeskWidget);
-      window.addEventListener("storage", function (event) {
-        // console.log("storage change detected");
-        if (event.key === "accountNameString" && event.newValue !== null) {
-          // console.log(event.key);
-          handleZendeskWidget();
-        }
-      });
     </script>
   </body>
 </html>

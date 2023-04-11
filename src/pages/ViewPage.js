@@ -17,6 +17,15 @@ export default function ViewPage(props) {
   }, [query]);
 
   useEffect(() => {
+    if (!props.signedIn || !!widgetSrc){
+      console.log('Hiding Widget')
+      zE("webWidget", "hide");
+      return
+    }
+    zE.show();
+  }, [props.signedIn]);
+
+  useEffect(() => {
     setTimeout(() => {
       setWidgetSrc(
         src === viewSourceWidget && query.get("src")
