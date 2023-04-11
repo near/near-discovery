@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Editor from "@monaco-editor/react";
+import { Tab } from "./utils/const";
 
 export default function TabEditor({
   tab,
-  Tab,
   code,
   widgetPath,
   updateCode,

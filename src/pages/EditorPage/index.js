@@ -3,13 +3,7 @@ import ls from "local-storage";
 import prettier from "prettier";
 import parserBabel from "prettier/parser-babel";
 import { useHistory, useParams } from "react-router-dom";
-import {
-  Widget,
-  useCache,
-  useNear,
-  CommitButton,
-  useAccountId,
-} from "near-social-vm";
+import { useCache, useNear, CommitButton, useAccountId } from "near-social-vm";
 
 import VsCodeBanner from "./VsCodeBanner";
 import Welcome from "./Welcome";
@@ -24,39 +18,17 @@ import TabMetadata from "./TabMetadata";
 import Preview from "./Preview";
 import PreviewMetadata from "./PreviewMetadata";
 
-const StorageDomain = {
-  page: "editor",
-};
-
-const StorageType = {
-  Code: "code",
-  Files: "files",
-};
-
-const Filetype = {
-  Widget: "widget",
-  Module: "module",
-};
-
-const LsKey = "social.near:v01:";
-const EditorLayoutKey = LsKey + "editorLayout:";
-const WidgetPropsKey = LsKey + "widgetProps:";
-
-const DefaultEditorCode = "return <div>Hello World</div>;";
-const DefaultEditorModuleCode =
-  "function square(number) {\n  return number * number;\n}\n";
-
-const Tab = {
-  Editor: "Editor",
-  Props: "Props",
-  Metadata: "Metadata",
-  Widget: "Widget",
-};
-
-const Layout = {
-  Tabs: "Tabs",
-  Split: "Split",
-};
+import {
+  EditorLayoutKey,
+  WidgetPropsKey,
+  DefaultEditorCode,
+  DefaultEditorModuleCode,
+  Filetype,
+  StorageDomain,
+  StorageType,
+  Tab,
+  Layout,
+} from "./utils/const";
 
 export default function EditorPage(props) {
   const { widgetSrc } = useParams();
@@ -719,62 +691,52 @@ export default function EditorPage(props) {
         widgetName={widgetName}
         code={code}
       />
-      <div
-        className={`text-center d-flex justify-content-center min-vh-100 ${
-          showEditor ? `visually-hidden` : ``
-        }`}
-      >
-        <Welcome
-          setShowAddModal={setShowAddModal}
-          setShowOpenModal={setShowOpenModal}
-          createNewFile={createNewFile}
-        />
-      </div>
+      <Welcome
+        setShowOpenModal={setShowOpenModal}
+        createNewFile={createNewFile}
+        hideAllModals={hideAllModals}
+        showEditor={showEditor}
+      />
       <div className={showEditor ? `` : `visually-hidden`}>
         <VsCodeBanner />
 
         <div className="container-fluid mt-1">
-          <div className="">
-            <Navigation
-              jpath={jpath}
-              openFile={openFile}
-              files={files}
-              filesDetails={filesDetails}
-              removeFromFiles={removeFromFiles}
-              createFile={createFile}
-              openCreateButton={openCreateButton}
-              renameButton={renameButton}
-              saveDraftButton={saveDraftButton}
-              forkButton={forkButton}
-              publishDraftAsMainButton={publishDraftAsMainButton}
-              publishButton={publishButton}
-              widgetName={widgetName}
-            />
-            <Search
-              widgets={props.widgets}
-              tos={props.tos}
-              logOut={props.logOut}
-              loadFile={loadFile}
-            />
-          </div>
+          <Navigation
+            jpath={jpath}
+            openFile={openFile}
+            files={files}
+            filesDetails={filesDetails}
+            removeFromFiles={removeFromFiles}
+            createFile={createFile}
+            openCreateButton={openCreateButton}
+            renameButton={renameButton}
+            saveDraftButton={saveDraftButton}
+            forkButton={forkButton}
+            publishDraftAsMainButton={publishDraftAsMainButton}
+            publishButton={publishButton}
+            widgetName={widgetName}
+          />
+          <Search
+            widgets={props.widgets}
+            tos={props.tos}
+            logOut={props.logOut}
+            loadFile={loadFile}
+          />
           <div className="d-flex align-content-start">
             <div className="flex-grow-1">
               <div className="row">
                 <div className={layoutClass}>
                   <div style={{ display: "flex" }}>
-                    <div>
-                      <Tabs
-                        isModule={isModule}
-                        tab={tab}
-                        Tab={Tab}
-                        setTab={setTab}
-                        widgets={props.widgets}
-                        layout={layout}
-                        setRenderCode={setRenderCode}
-                        Layout={Layout}
-                        code={code}
-                      />
-                    </div>
+                    <Tabs
+                      isModule={isModule}
+                      tab={tab}
+                      setTab={setTab}
+                      widgets={props.widgets}
+                      layout={layout}
+                      setRenderCode={setRenderCode}
+                      Layout={Layout}
+                      code={code}
+                    />
                     <NavigationSub
                       layout={layout}
                       Layout={Layout}
@@ -782,7 +744,6 @@ export default function EditorPage(props) {
                       accountId={accountId}
                       openInNewTabButton={openInNewTabButton}
                       onLayoutChange={onLayoutChange}
-                      Tab={Tab}
                       renderCode={renderCode}
                       renderPreviewButton={renderPreviewButton}
                       tab={tab}
@@ -791,7 +752,6 @@ export default function EditorPage(props) {
 
                   <TabEditor
                     tab={tab}
-                    Tab={Tab}
                     code={code}
                     widgetPath={widgetPath}
                     updateCode={updateCode}
@@ -799,7 +759,6 @@ export default function EditorPage(props) {
                   />
                   <TabProps
                     tab={tab}
-                    Tab={Tab}
                     widgetProps={widgetProps}
                     setWidgetProps={setWidgetProps}
                     reformatProps={reformatProps}
@@ -807,7 +766,6 @@ export default function EditorPage(props) {
                   />
                   <TabMetadata
                     tab={tab}
-                    Tab={Tab}
                     widgets={props.widgets}
                     jpath={jpath}
                     widgetPath={widgetPath}
@@ -816,7 +774,6 @@ export default function EditorPage(props) {
                 </div>
                 <Preview
                   tab={tab}
-                  Tab={Tab}
                   layout={layout}
                   Layout={Layout}
                   layoutClass={layoutClass}
@@ -828,7 +785,6 @@ export default function EditorPage(props) {
                 />
                 <PreviewMetadata
                   tab={tab}
-                  Tab={Tab}
                   layoutClass={layoutClass}
                   jpath={jpath}
                   widgets={props.widgets}
