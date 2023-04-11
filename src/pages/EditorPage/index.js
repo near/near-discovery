@@ -11,7 +11,7 @@ import {
   useAccountId,
 } from "near-social-vm";
 
-import VsCodeBanner from "../../components/Editor/VsCodeBanner";
+import VsCodeBanner from "./VsCodeBanner";
 import Welcome from "./Welcome";
 import Modals from "./Modals";
 import Navigation from "./Navigation";
@@ -832,68 +832,6 @@ export default function EditorPage(props) {
             </div>
           </div>
         </div>
-
-        {/* <EditorComponent
-          renameFile={renameFile}
-          setShowRenameModal={setShowRenameModal}
-          loadFile={loadFile}
-          setShowOpenModal={setShowOpenModal}
-          setShowOpenModuleModal={setShowOpenModuleModal}
-          setShowAddModal={setShowAddModal}
-          createNewFile={createNewFile}
-          setShowCreateModal={setShowCreateModal}
-          setShowSaveDraftModal={setShowSaveDraftModal}
-          openFile={openFile}
-          removeFromFiles={removeFromFiles}
-          createFile={createFile}
-          setTab={setTab}
-          setRenderCode={setRenderCode}
-          updateCode={updateCode}
-          reformat={reformat}
-          setWidgetProps={setWidgetProps}
-          reformatProps={reformatProps}
-          //
-          //
-          jpath={jpath}
-          showRenameModal={showRenameModal}
-          path={path}
-          showOpenModal={showOpenModal}
-          showOpenModuleModal={showOpenModuleModal}
-          showAddModal={showAddModal}
-          showCreateModal={showCreateModal}
-          showSaveDraftModal={showSaveDraftModal}
-          near={near}
-          widgetPath={widgetPath}
-          widgetName={widgetName}
-          code={code}
-          files={files}
-          filesDetails={filesDetails}
-          openCreateButton={openCreateButton}
-          renameButton={renameButton}
-          saveDraftButton={saveDraftButton}
-          forkButton={forkButton}
-          publishDraftAsMainButton={publishDraftAsMainButton}
-          publishButton={publishButton}
-          layoutClass={layoutClass}
-          isModule={isModule}
-          Tab={Tab}
-          layout={layout}
-          accountId={accountId}
-          openInNewTabButton={openInNewTabButton}
-          onLayoutChange={onLayoutChange}
-          widgetProps={widgetProps}
-          propsError={propsError}
-          renderPreviewButton={renderPreviewButton}
-          tab={tab}
-          Layout={Layout}
-          renderCode={renderCode}
-          logOut={props.logOut}
-          tos={props.tos}
-          widgets={props.widgets}
-          setMetadata={setMetadata}
-          metadata={metadata}
-          parsedWidgetProps={parsedWidgetProps}
-        /> */}
       </div>
     </>
   );
