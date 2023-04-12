@@ -1,26 +1,25 @@
 export default function configZendesk() {
   window.zESettings = {
     webWidget: {
-      color: { theme: "#2b2f31" },
+      color: { theme: '#2b2f31' },
       offset: {
-        horizontal: "20px",
-        vertical: "20px",
-        mobile: { horizontal: "5px", vertical: "100px", from: "right" },
+        horizontal: '10px',
+        vertical: '10px',
+        mobile: { horizontal: '2px', vertical: '40px', from: 'right' },
       },
       contactForm: {
         attachments: true,
-        title: { "*": "Feedback and Support" },
+        title: { '*': 'Feedback and Support' },
         fields: [
-          //              { id: "email", prefill: { "*": "EMAIL HERE" } },
+          //              { id: 'email', prefill: { '*': 'EMAIL HERE' } },
           {
             id: 13149356989591,
-            prefill: { "*": localStorage.getItem("accountNameString") },
+            prefill: { '*': localStorage.getItem('accountNameString') },
           },
         ],
       },
       launcher: {
-        label: { "*": " " },
-        mobile: { labelVisible: false },
+        label: { '*': ' ' }
       },
     },
   };
