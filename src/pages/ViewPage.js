@@ -76,12 +76,12 @@ export default function ViewPage(props) {
           {(!localOverrideUrl || redirectMap) && (
             <div>
               <Widget
+                config={{ redirectMap: redirectMap }}
                 key={props.widgets.wrapper}
                 src={props.widgets.wrapper}
                 props={{
                   children: (
                     <Widget
-                      config={{ redirectMap: redirectMap }}
                       key={props.tos.checkComponentPath}
                       src={props.tos.checkComponentPath}
                       props={{
