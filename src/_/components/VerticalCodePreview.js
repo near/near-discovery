@@ -12,9 +12,11 @@ import { ThemeContext } from "../context/ThemeContext";
 import { useContext, useCallback } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
+import { useSnackbar } from "notistack";
 
 export default function VerticalCodePreview({ initialCode, horizontal }) {
   const { theme, editorFontSize } = useContext(ThemeContext);
+  const { enqueueSnackbar } = useSnackbar();
 
   const [code, setCode] = useState("");
 
@@ -38,10 +40,21 @@ export default function VerticalCodePreview({ initialCode, horizontal }) {
     [code]
   );
 
+  const onCopyButtonClick = async () => {
+    try {
+      // await navigator.clipboard.writeText(`<Widget src="${textToCopy}" />`);
+      await navigator.clipboard.writeText(code);
+
+      enqueueSnackbar("Code copied to clipboard!", { variant: "success" });
+    } catch (error) {
+      enqueueSnackbar("Failed to copy text: ", { variant: "error" });
+    }
+  };
+
   return (
     <Allotment defaultSizes={[100, 100]} vertical={horizontal ? false : true}>
       <Allotment.Pane priority={2}>
-        <LearnPageHeader title="Code" />
+        <LearnPageHeader title="Code" onCopyButtonClick={onCopyButtonClick} />
 
         <Editor
           theme={theme.name === "dark" ? "vs-dark" : "light"}

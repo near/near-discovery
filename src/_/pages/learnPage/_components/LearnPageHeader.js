@@ -1,9 +1,10 @@
 import React from "react";
 import { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, IconButton } from "@mui/material";
+import ContentPasteRoundedIcon from "@mui/icons-material/ContentPasteRounded";
 
-export default function LearnPageHeader({ title }) {
+export default function LearnPageHeader({ title, onCopyButtonClick }) {
   const { theme } = useContext(ThemeContext);
 
   return (
@@ -13,7 +14,7 @@ export default function LearnPageHeader({ title }) {
 
         backgroundColor: theme.backgroundColor,
         display: "flex",
-        justifyContent: "flex-start",
+        justifyContent: "space-between",
         alignItems: "center",
         pl: 2,
       }}
@@ -27,6 +28,15 @@ export default function LearnPageHeader({ title }) {
       >
         {title}
       </Typography>
+
+      {title === "Code" && (
+        <IconButton sx={{ mr: 1 }} onClick={() => onCopyButtonClick()}>
+          <ContentPasteRoundedIcon
+            fontSize="small"
+            sx={{ fill: theme.textColor2 }}
+          />
+        </IconButton>
+      )}
     </Box>
   );
 }

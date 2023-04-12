@@ -13,7 +13,13 @@ export default function LearnSidebar() {
     useContext(LearnContext);
 
   return (
-    <Box sx={{ backgroundColor: theme.backgroundColor, height: "100%" }}>
+    <Box
+      sx={{
+        backgroundColor: theme.backgroundColor,
+        height: "100%",
+        overflowY: "auto",
+      }}
+    >
       <Box
         sx={{
           height: 50,
@@ -48,7 +54,8 @@ export default function LearnSidebar() {
         <Box>
           <Box sx={{ px: 1, color: theme.textColor }}>
             <div
-              style={{ color: theme.textColor }}
+              className="dangerousStyle"
+              // style={{ color: theme.textColor }}
               dangerouslySetInnerHTML={{ __html: selectedProject?.discription }}
             />
             {/* <Widget

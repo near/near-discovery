@@ -89,3 +89,25 @@
   align-items: flex-start;
   justify-content: flex-start;
 }
+
+/*  */
+/*  */
+/* .dangerousStyle {
+  padding: 20px;
+} */
+
+/* PLEASE GO TO app.js er GlobalStyles > styls >  {line number: 151} */
+
+/* .dangerousStyle h1 {
+  color: #1e293b;
+}
+
+.dangerousStyle h2 {
+  color: #1e293b;
+}
+.dangerousStyle pre {
+  background-color: #f2f2f2;
+  color: #475569;
+  padding: 8px;
+  border-radius: 4px;
+} */

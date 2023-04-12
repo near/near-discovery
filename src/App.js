@@ -162,6 +162,19 @@ export default function App() {
             backgroundColor: theme.borderColor,
             borderRadius: 1,
           },
+
+          ".dangerousStyle h1": {
+            color: theme.textColor,
+          },
+          ".dangerousStyle h2": {
+            color: theme.textColor,
+          },
+          ".dangerousStyle pre": {
+            backgroundColor: theme.ui2,
+            color: theme.textColor2,
+            padding: 8,
+            borderRadius: 4,
+          },
         }}
       />
 

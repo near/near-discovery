@@ -1,12 +1,5 @@
-export const data1 = `<h1 id="my-awesome-heading-2">My Awesome Heading 2</h1>
-<p>This is some <strong>bold</strong> and <em>italic</em> text.</p>
-<p>Here&#39;s a list:</p>
-<ul>
-<li>Item 1</li>
-<li>Item 5</li>
-<li>Item 8</li>
-</ul>
-<blockquote>
-<p>Here&#39;s a blockquote.</p>
-</blockquote>
-<p>And here&#39;s a link to <a href="https://www.facebook.com/">Google</a>.</p>`;
+export const data1 = `<h1 class="code-line" data-line-start=0 data-line-end=1 ><a id="Hello_World_0"></a>Hello World</h1>
+<pre><code class="has-line-data" data-line-start="4" data-line-end="7">return &quot;Hello
+
+</code></pre>
+`;
