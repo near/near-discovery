@@ -13,7 +13,7 @@ import { useContext, useCallback } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 
-export default function VerticalCodePreview({ initialCode }) {
+export default function VerticalCodePreview({ initialCode, horizontal }) {
   const { theme, editorFontSize } = useContext(ThemeContext);
 
   const [code, setCode] = useState("");
@@ -41,7 +41,7 @@ export default function VerticalCodePreview({ initialCode }) {
   );
 
   return (
-    <Allotment defaultSizes={[100, 100]} vertical={true}>
+    <Allotment defaultSizes={[100, 100]} vertical={horizontal ? false : true}>
       <Allotment.Pane priority={2}>
         <LearnPageHeader title="Code" />
 

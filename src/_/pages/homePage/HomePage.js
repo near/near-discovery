@@ -21,6 +21,21 @@ export default function HomePage(props) {
       <HomeHeader />
 
       <TopSection />
+      <Box
+        sx={{
+          width: "100%",
+          height: 400,
+          border: `1px ${theme.borderColor} solid`,
+          borderRadius: 0.5,
+          overflow: "hidden",
+          m: 10,
+        }}
+      >
+        <VerticalCodePreview
+          initialCode="return(<div><h1>Hello World</h1></div>)"
+          horizontal
+        />
+      </Box>
       <FeatureSection
         title="BOS DevTools"
         description="We're still working out the kinks. Want to help us get ready for
@@ -36,7 +51,10 @@ export default function HomePage(props) {
               overflow: "hidden",
             }}
           >
-            <VerticalCodePreview initialCode="return(<div><h1>Hello World</h1></div>)" />
+            <VerticalCodePreview
+              initialCode="return(<div><h1>Hello World</h1></div>)"
+              horizontal
+            />
           </Box>
         }
         sxSx={{ gridTemplateColumns: bp ? "1fr" : "1fr 1fr" }}
