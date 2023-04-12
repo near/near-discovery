@@ -37,7 +37,19 @@
     "prod": "npm run webpack -- --env mode=production",
     "prod:analyze": "npm run prod -- --env presets=analyze",
     "build": "npm run prod",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "postbuild": "react-snap"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "viewport": {
+      "width": 7000,
+      "height": 1400
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -81,6 +93,7 @@
     "path-browserify": "^1.0.1",
     "postcss-loader": "^7.0.1",
     "process": "^0.11.10",
+    "react-snap": "^1.23.0",
     "sass-loader": "^13.1.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
