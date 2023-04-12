@@ -113,6 +113,7 @@ export default function TopSection() {
               We &#x2665;
             </Typography>
             <Chip
+              sx={{ color: theme.textColor3 }}
               label="Developers"
               avatar={<SupervisedUserCircleRoundedIcon />}
             />

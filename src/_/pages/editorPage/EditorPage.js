@@ -572,7 +572,7 @@ export default function EditorPage(props) {
       }
     }
 
-    console.log({ lastPath }, { files }, { path }, { widgetSrc });
+    // console.log({ lastPath }, { files }, { path }, { widgetSrc });
   }, [near, createFile, lastPath, files, path, widgetSrc, openFile, loadFile]);
 
   const reformat = useCallback(

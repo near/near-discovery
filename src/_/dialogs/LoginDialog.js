@@ -7,7 +7,6 @@ import {
   DialogTitle,
   Typography,
 } from "@mui/material";
-import LoginGithub from "react-login-github";
 
 import { AuthContext } from "../context/AuthContext";
 import { useContext } from "react";
@@ -17,14 +16,8 @@ import { useLocation } from "react-router-dom";
 export default function LoginDialog() {
   const { pathname } = useLocation();
 
-  const { showDialog, setShowDialog, saveAuth } = useContext(AuthContext);
+  const { showDialog } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
-
-  const onSuccess = (response) => {
-    saveAuth(response);
-    console.log(response);
-  };
-  const onFailure = (response) => console.error(response);
 
   return (
     <Dialog
@@ -44,11 +37,9 @@ export default function LoginDialog() {
       </DialogTitle>
 
       <DialogContent sx={{ padding: "16px", width: "100%", mt: 2 }}>
-        <LoginGithub
-          className="loginGithub"
-          clientId={process.env.GITHUB_CLIENT_ID}
-          onSuccess={onSuccess}
-          onFailure={onFailure}
+        <a
+          style={{ textDecoration: "none" }}
+          href={`https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=${process.env.GITHUB_REDIRECT_URL}`}
         >
           <Button
             sx={{
@@ -84,7 +75,7 @@ export default function LoginDialog() {
               Continue with GitHub
             </Typography>
           </Button>
-        </LoginGithub>
+        </a>
       </DialogContent>
     </Dialog>
   );

@@ -18,8 +18,6 @@ export default function VerticalCodePreview({ initialCode, horizontal }) {
 
   const [code, setCode] = useState("");
 
-  console.log(initialCode);
-
   useEffect(() => {
     if (initialCode?.length > 0) format(initialCode);
   }, [initialCode]);
@@ -71,7 +69,7 @@ export default function VerticalCodePreview({ initialCode, horizontal }) {
             color: theme.textColor,
           }}
         >
-          <Widget code={code} />
+          <Widget code={code} props={{ theme }} />
         </Box>
       </Allotment.Pane>
     </Allotment>

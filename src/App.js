@@ -16,6 +16,7 @@ import DiscoverPage from "./_/pages/DiscoverPage";
 import ProfilePage from "./_/pages/ProfilePage";
 import LearnPage from "./_/pages/learnPage/LearnPage";
 import ChatPage from "./_/pages/ChatPage";
+import AuthPage from "./_/pages/AuthPage";
 
 // import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { setupModal } from "@near-wallet-selector/modal-ui";
@@ -169,6 +170,10 @@ export default function App() {
           <Route path={"/components/:widgetSrc*"}>
             {/* <NavigationWrapper {...passProps} /> */}
             <EmbedPage {...passProps} />
+          </Route>
+
+          <Route path={"/auth"}>
+            <AuthPage {...passProps} />{" "}
           </Route>
 
           <Route path={"/profile"}>

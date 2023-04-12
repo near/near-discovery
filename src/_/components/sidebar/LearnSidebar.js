@@ -4,7 +4,7 @@ import { ThemeContext } from "../../context/ThemeContext";
 import { Box, ButtonBase, Fade, IconButton, Typography } from "@mui/material";
 import { LearnContext } from "../../context/LearnContext";
 import ArrowBackRoundedIcon from "@mui/icons-material/ArrowBackRounded";
-import { Widget } from "near-social-vm";
+// import { Widget } from "near-social-vm";
 import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
 
 export default function LearnSidebar() {
@@ -32,7 +32,7 @@ export default function LearnSidebar() {
               goBack();
             }}
           >
-            <ArrowBackRoundedIcon />
+            <ArrowBackRoundedIcon sx={{ color: theme.textColor }} />
           </IconButton>
         </Fade>
 
@@ -47,10 +47,14 @@ export default function LearnSidebar() {
       {selectedProject?.name ? (
         <Box>
           <Box sx={{ px: 1, color: theme.textColor }}>
-            <Widget
+            <div
+              style={{ color: theme.textColor }}
+              dangerouslySetInnerHTML={{ __html: selectedProject?.discription }}
+            />
+            {/* <Widget
               src="saidulbadhon.near/widget/LearnPage.Markdown"
               props={{ text: selectedProject?.discription, theme: theme }}
-            />
+            /> */}
           </Box>
 
           {selectedProject?.sections?.map((section, index) => (

@@ -1,4 +1,7 @@
 import React, { useState, createContext, useEffect } from "react";
+// import md from "./test.md";
+// import file from "./test.md";
+import { data1 } from "../content/Project1";
 
 export const LearnContext = createContext();
 
@@ -6,8 +9,7 @@ const data = [
   {
     _id: "1563435165",
     name: "Project 1",
-    discription:
-      "Sunt ex aliqua nisi tempor ullamco consequat minim incididunt adipisicing exercitation duis. Commodo eiusmod est qui est culpa. Commodo qui excepteur magna exercitation in laborum in duis. Mollit labore anim irure nisi officia enim ad.",
+    discription: data1,
     sections: [
       {
         _id: "5456123",
@@ -19,18 +21,7 @@ const data = [
       {
         _id: "85563",
         name: "Section 2",
-        discription: `# My Awesome Heading 2
-  
-          This is some **bold** and *italic* text.
-          
-          Here's a list:
-          - Item 1
-          - Item 5
-          - Item 8
-          
-          > Here's a blockquote.
-          
-          And here's a link to [Google](https://www.facebook.com/).`,
+        discription: data1,
         code: "return (<div>\n \n \n<h1>Facebook</h1></div>)",
       },
     ],
@@ -240,6 +231,15 @@ const data = [
 ];
 
 export const LearnContextProvider = (props) => {
+  // console.log("md : ", md);
+
+  // useEffect(() => {
+  //   fetch(file)
+  //     .then((res) => res.text())
+  //     .then((text) => console.log("res ======", text))
+  //     .catch((err) => console.log(err));
+  // }, []);
+
   const [projects, setProjects] = useState(data);
 
   const [showProjectbar, setShowProjectbar] = useState(false);

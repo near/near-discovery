@@ -2,19 +2,12 @@ import { Box, Button } from "@mui/material";
 import React from "react";
 import { ThemeContext, theme } from "../../../context/ThemeContext";
 import { useContext } from "react";
-import LoginGithub from "react-login-github";
 import { AuthContext } from "../../../context/AuthContext";
+import { useHistory } from "react-router-dom";
 
 export default function HomeHeader() {
   const { theme } = useContext(ThemeContext);
-  const { uesr, saveAuth } = useContext(AuthContext);
-
-  const onSuccess = (response) => {
-    saveAuth(response);
-    console.log(response);
-    window.location.hash = "#/editor";
-  };
-  const onFailure = (response) => console.error(response);
+  const { uesr } = useContext(AuthContext);
 
   return (
     <Box
@@ -34,18 +27,17 @@ export default function HomeHeader() {
       <Box
         sx={{
           width: "100%",
-          maxWidth: 1250,
+          maxWidth: "90vw",
+          // maxWidth: 1250,
           display: "flex",
           justifyContent: "flex-end",
         }}
       >
-        {!uesr && (
-          <div>
-            <LoginGithub
-              className="loginGithub"
-              clientId={process.env.GITHUB_CLIENT_ID}
-              onSuccess={onSuccess}
-              onFailure={onFailure}
+        <div>
+          {!uesr && (
+            <a
+              style={{ textDecoration: "none" }}
+              href={`https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.GITHUB_CLIENT_ID}&redirect_uri=${process.env.GITHUB_REDIRECT_URL}`}
             >
               <Button
                 sx={{
@@ -62,9 +54,9 @@ export default function HomeHeader() {
               >
                 Login
               </Button>
-            </LoginGithub>
-          </div>
-        )}
+            </a>
+          )}
+        </div>
       </Box>
     </Box>
   );

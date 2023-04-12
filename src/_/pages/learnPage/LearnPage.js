@@ -7,7 +7,7 @@ import { EditorContext } from "../../context/EditorContext";
 import { useEffect, useContext } from "react";
 import { LearnContext } from "../../context/LearnContext";
 import { ThemeContext } from "../../context/ThemeContext";
-import { Widget } from "near-social-vm";
+// import { Widget } from "near-social-vm";
 import VerticalCodePreview from "../../components/VerticalCodePreview";
 
 export default function LearnPage(props) {
@@ -85,10 +85,15 @@ const Projectbar = () => {
       </Box>
       <Box>
         <Box sx={{ p: 1 }}>
-          <Widget
+          <div
+            style={{ color: theme.textColor }}
+            dangerouslySetInnerHTML={{ __html: selectedSection?.discription }}
+          />
+
+          {/* <Widget
             src="saidulbadhon.near/widget/LearnPage.Markdown"
             props={{ text: selectedSection?.discription, theme: theme }}
-          />
+          /> */}
         </Box>
       </Box>
     </Box>
@@ -105,6 +110,7 @@ const EmptyPage = () => {
         justifyContent: "center",
         height: "calc(100vh - 25px)",
         overflowY: "auto",
+        backgroundColor: theme.ui,
       }}
     >
       <Box

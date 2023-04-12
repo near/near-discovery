@@ -2,9 +2,7 @@ import React, { useContext } from "react";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
-import LibraryAddRoundedIcon from "@mui/icons-material/LibraryAddRounded";
 import WifiRoundedIcon from "@mui/icons-material/WifiRounded";
-import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 
@@ -233,7 +231,7 @@ export default function Activitybar(props) {
           }
           label={enableDarkMode ? "Enable Light Mode" : "Enable Dark Mode"}
           onClick={() => {
-            setEnableDarkMode((e) => !e);
+            setEnableDarkMode(!enableDarkMode);
           }}
         />
 
@@ -288,6 +286,7 @@ export default function Activitybar(props) {
               }
               label="logout"
               onClick={() => {
+                history.push("/");
                 logout();
               }}
             />

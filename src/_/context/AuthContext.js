@@ -1,12 +1,13 @@
-import React, { useState, createContext } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState, createContext } from "react";
+import { useHistory } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthContextProvider = (props) => {
+  const history = useHistory();
   const [showDialog, setShowDialog] = useState(false);
 
-  const [uesr, setUser] = useState();
+  const [uesr, setUser] = useState({ code: 54561532123 });
 
   const saveAuth = async (value) => {
     setUser(value);
@@ -32,6 +33,7 @@ export const AuthContextProvider = (props) => {
     await localStorage.removeItem("githubToken");
     setShowDialog(true);
     setUser();
+    history.push("/editor");
   };
 
   return (
