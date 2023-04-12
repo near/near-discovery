@@ -5,15 +5,38 @@ import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 
 export default function ViewPage(props) {
+  // will always be empty in prod
+  const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
+
   const { widgetSrc } = useParams();
   const query = useQuery();
   const [widgetProps, setWidgetProps] = useState({});
+  const [redirectMap, setRedirectMap] = useState();
 
   const src = widgetSrc || props.widgets.default;
   const setWidgetSrc = props.setWidgetSrc;
   const viewSourceWidget = props.widgets.viewSource;
 
   useHashUrlBackwardsCompatibility();
+
+  // fetch local component versions if a local loader
+  // is provided. must be provided as {components: { <path>: { code : <code>}}}
+  async function fetchRedirectMap() {
+    if (!localOverrideUrl) return;
+
+    const res = await fetch(localOverrideUrl, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+    const data = await res.json();
+    setRedirectMap(data.components);
+  }
+
+  useEffect(() => {
+    localOverrideUrl && fetchRedirectMap();
+  }, []);
 
   useEffect(() => {
     setWidgetProps(Object.fromEntries([...query.entries()]));
@@ -50,24 +73,29 @@ export default function ViewPage(props) {
             paddingTop: "var(--body-top-padding)",
           }}
         >
-          <Widget
-            key={props.widgets.wrapper}
-            src={props.widgets.wrapper}
-            props={{
-              children: (
-                <Widget
-                  key={props.tos.checkComponentPath}
-                  src={props.tos.checkComponentPath}
-                  props={{
-                    logOut: props.logOut,
-                    targetProps: widgetProps,
-                    targetComponent: src,
-                    tosName: props.tos.contentComponentPath,
-                  }}
-                />
-              ),
-            }}
-          />
+          {(!localOverrideUrl || redirectMap) && (
+            <div>
+              <Widget
+                key={props.widgets.wrapper}
+                src={props.widgets.wrapper}
+                props={{
+                  children: (
+                    <Widget
+                      config={{ redirectMap: redirectMap }}
+                      key={props.tos.checkComponentPath}
+                      src={props.tos.checkComponentPath}
+                      props={{
+                        logOut: props.logOut,
+                        targetProps: widgetProps,
+                        targetComponent: src,
+                        tosName: props.tos.contentComponentPath,
+                      }}
+                    />
+                  ),
+                }}
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
