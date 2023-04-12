@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
-import configZendesk from "../../zendesk";
 
 export default function ViewPage(props) {
   const { widgetSrc } = useParams();
