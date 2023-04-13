@@ -19,6 +19,7 @@ import EmbedPage from "./pages/EmbedPage";
 import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
+import DesktopNavigation from "./components/navigation/org/wrapper/desktop/DesktopNavigation";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
@@ -179,7 +180,8 @@ function App(props) {
             <EditorPage {...passProps} />
           </Route>
           <Route path={"/:widgetSrc*"}>
-            <NavigationWrapper {...passProps} />
+            {/* <NavigationWrapper {...passProps} /> */}
+            <DesktopNavigation />
             <ViewPage {...passProps} />
           </Route>
         </Switch>
