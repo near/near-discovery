@@ -23,6 +23,7 @@ import DesktopNavigation from "./components/navigation/org/wrapper/desktop/Deskt
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import NearOrgPage from "./pages/NearOrgPage";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -172,6 +173,15 @@ function App(props) {
 
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
+          {/* Near ORG Pages: */}
+          <Route path={"/"} exact={true}>
+            <NearOrgPage {...passProps} src={Widgets.nearOrg.homePage} />
+          </Route>
+          <Route path={"/use"} exact={true}>
+            <NearOrgPage {...passProps} src={Widgets.nearOrg.usePage} />
+          </Route>
+
+          {/* Discovery Pages: */}
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route>
