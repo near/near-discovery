@@ -28,6 +28,7 @@ import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import styleZendesk from "./zendesk";
 import { Helmet } from "react-helmet";
+import NearOrgPage from "./pages/NearOrgPage";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -190,6 +191,16 @@ function App(props) {
 
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
+          <Route path={"/use"}>
+            <NearOrgPage
+              {...passProps}
+              widgetSrc="adminalpha.near/widget/NearOrg.UsePage"
+            />
+          </Route>
+          <Route path={"/edit/:widgetSrc*"}>
+            <NavigationWrapper {...passProps} />
+            <EditorPage {...passProps} />
+          </Route>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route>

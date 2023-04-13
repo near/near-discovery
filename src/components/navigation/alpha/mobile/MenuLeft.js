@@ -228,7 +228,7 @@ export function MenuLeft(props) {
         <div className="links-title">Develop</div>
         <ul className="top-links">
           <li>
-            <NavigationButton route="/edit">
+            <NavigationButton route="/#/edit">
               <Editor />
               Editor
             </NavigationButton>
