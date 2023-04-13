@@ -39,7 +39,6 @@ export default function NearOrgPage(props) {
       <DesktopNavigation />
 
       <div>
-        <p>{props.src}</p>
         {(!localOverrideUrl || redirectMap) && (
           <Widget
             config={{ redirectMap: redirectMap }}
