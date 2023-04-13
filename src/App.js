@@ -21,6 +21,7 @@ import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
+import styleZendesk from "./zendesk";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -86,6 +87,7 @@ function App(props) {
           ],
         }),
       });
+      styleZendesk();
   }, [initNear]);
 
   useEffect(() => {
@@ -96,13 +98,6 @@ function App(props) {
     ) {
       window.history.replaceState({}, "/", "/" + location.hash);
     }
-    const zWidgetFrame = document.getElementById("launcher");
-    const zWidgetEmbed = zWidgetFrame.contentDocument.getElementById("Embed");
-    const zwButton = zWidgetEmbed.getElementsByTagName("button")[0];
-    zWidgetEmbed.getElementsByClassName("Icon")[0].style.paddingRight = "0px";
-    zWidgetEmbed.style.opacity = 0.8;
-    zwButton.style.paddingRight = "1rem";
-    zwButton.style.paddingLeft = "1rem";
   }, [location]);
 
   useEffect(() => {
