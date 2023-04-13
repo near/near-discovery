@@ -79,7 +79,7 @@ export function NavDropdownMenuLinkList(props) {
       title: "Editor",
       description:
         "Build new components and applications with little to no setup.",
-      link: "/edit",
+      link: "/#/edit",
       icon: Code,
       category: "tools",
     },

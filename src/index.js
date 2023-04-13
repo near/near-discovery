@@ -6,7 +6,10 @@ import App from "./App";
 
 const container = document.getElementById("root");
 if (container.hasChildNodes()) {
-    hydrate(<App />, container);
+  hydrate(<App />, container);
 } else {
-    render(<App />, container);
+  render(<App />, container);
 }
+
+// const root = createRoot(container);
+// root.render(<App />);

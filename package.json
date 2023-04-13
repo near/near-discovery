@@ -42,6 +42,10 @@
   },
   "reactSnap": {
     "source": "dist",
+    "include": [
+      "/",
+      "/use"
+    ],
     "viewport": {
       "width": 7000,
       "height": 1400
