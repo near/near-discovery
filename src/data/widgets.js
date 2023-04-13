@@ -24,6 +24,7 @@ const TestnetWidgets = {
   tosCheck: "one.testnet/widget/TosCheck",
   tosContent: "one.testnet/widget/TosContent",
   wrapper: "one.testnet/widget/DIG.Theme",
+  wrapper: "one.testnet/widget/DIG.Theme",
 };
 
 const MainnetWidgets = {
