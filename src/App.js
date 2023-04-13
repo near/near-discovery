@@ -137,6 +137,7 @@ function App(props) {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
+    localStorage.removeItem("accountId");
   }, [near]);
 
   const refreshAllowance = useCallback(async () => {
@@ -154,6 +155,7 @@ function App(props) {
     }
     setSignedIn(!!accountId);
     setSignedAccountId(accountId);
+    localStorage.setItem("accountId", accountId);
     setConnected(true);
   }, [near, accountId]);
 
