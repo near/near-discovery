@@ -77,10 +77,9 @@ export default function WidgetsSidebar({
   return (
     <div
       style={{
-        height: "100%",
-        // height: "100vh",
+        // height: "100%",
+        height: "max(calc(100vh - 25px), 700px)",
         overflowY: "auto",
-        overflowX: "hidden",
         paddingBottom: 25,
       }}
     >
