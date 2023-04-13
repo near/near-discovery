@@ -55,8 +55,7 @@ export default function Navigation({
   jpath,
   openFile,
   files,
-  filesDetails,
-  createFile,
+  createNewFile,
   widgetName,
   code,
   toPath,
@@ -68,18 +67,9 @@ export default function Navigation({
   setShowSaveDraftModal,
   setFiles,
   setLastPath,
+  filesOpened,
+  removeFromFiles,
 }) {
-  const removeFromFiles = useCallback(
-    (path) => {
-      path = JSON.stringify(path);
-      setFiles((files) =>
-        files.filter((file) => JSON.stringify(file) !== path)
-      );
-      setLastPath(path);
-    },
-    [setFiles, setLastPath]
-  );
-
   return (
     <>
       <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
@@ -93,11 +83,14 @@ export default function Navigation({
               if (p.unnamed) {
                 return;
               }
-
               const jp = JSON.stringify(p);
               const widgetName = p?.name?.split("/")[0];
-              const { codeChangesPresent, isDraft } =
-                filesDetails?.get(widgetName) || {};
+
+              let fileOpened = {};
+              fileOpened =
+                filesOpened.find((file) => {
+                  return file.name === widgetName;
+                }) || {};
 
               return (
                 <Nav.Item key={jp}>
@@ -107,9 +100,14 @@ export default function Navigation({
                       eventKey={jp}
                     >
                       <div className="d-flex">
-                        {isDraft && <div className="draft">Draft</div>}
+                        {fileOpened?.isDraft && (
+                          <div className="draft">Draft</div>
+                        )}
                         <div>{widgetName}</div>
-                        {codeChangesPresent && <div className="dot"></div>}
+                        {(!fileOpened?.savedOnChain ||
+                          fileOpened?.changesMade) && (
+                          <div className="dot"></div>
+                        )}
                       </div>
                       <button
                         className={`close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary`}
@@ -121,13 +119,6 @@ export default function Navigation({
                           e.preventDefault();
                           e.stopPropagation();
                           removeFromFiles(p);
-                          if (jp === jpath) {
-                            if (files.length > 1) {
-                              openFile(files[idx - 1] || files[idx + 1]);
-                            } else {
-                              createFile(Filetype.Widget);
-                            }
-                          }
                         }}
                       >
                         <i className="bi bi-x"></i>
@@ -164,7 +155,7 @@ export default function Navigation({
                 toPath={toPath}
               />
 
-              {filesDetails?.get(widgetName)?.isDraft ? (
+              {/* {fileOpened?.isDraft ? (
                 <PublishDraftAsMainButton
                   widgetName={widgetName}
                   near={near}
@@ -180,7 +171,7 @@ export default function Navigation({
                   code={code}
                   metadata={metadata}
                 />
-              )}
+              )} */}
             </Nav.Item>
           </Nav>
         </div>

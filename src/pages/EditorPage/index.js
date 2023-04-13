@@ -1,7 +1,9 @@
 import React, { useCallback, useEffect, useState } from "react";
 import ls from "local-storage";
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useCache, useNear, useAccountId } from "near-social-vm";
+import prettier from "prettier";
+import parserBabel from "prettier/parser-babel";
 
 import VsCodeBanner from "./VsCodeBanner";
 import Welcome from "./Welcome";
@@ -19,18 +21,21 @@ import PreviewMetadata from "./PreviewMetadata";
 import {
   EditorLayoutKey,
   WidgetPropsKey,
-  DefaultEditorCode,
-  DefaultEditorModuleCode,
   Filetype,
   StorageDomain,
   StorageType,
   Tab,
   Layout,
 } from "./utils/const";
-import { generateNewName, toPath } from "./utils/editor";
+import {
+  checkChangesMade,
+  generateNewName,
+  getDefaultCode,
+  getSrcByNameOrPath,
+  toPath,
+} from "./utils/editor";
 
 export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
-  const [loading, setLoading] = useState(false);
   const [code, setCode] = useState(undefined);
   const [path, setPath] = useState(undefined);
   const [files, setFiles] = useState(undefined);
@@ -50,10 +55,8 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   const [parsedWidgetProps, setParsedWidgetProps] = useState({});
   const [propsError, setPropsError] = useState(null);
   const [metadata, setMetadata] = useState(undefined);
-  const [codeChangesPresent, setCodeChangesPresent] = useState(false);
-  const [codeOnChain, setCodeOnChain] = useState(null);
-  const [draftOnChain, setDraftOnChain] = useState(null);
-  const [filesDetails, setFilesDetails] = useState(new Map());
+
+  const [filesOpened, setFilesOpened] = useState([]);
 
   const [tab, setTab] = useState(Tab.Editor);
   const [layout, setLayoutState] = useState(
@@ -61,7 +64,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   );
 
   const { widgetSrc } = useParams();
-  const history = useHistory();
 
   const near = useNear();
   const cache = useCache();
@@ -71,7 +73,7 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
   const jpath = JSON.stringify(path);
 
-  const showEditor = !(files?.length === 1 && files[0]?.unnamed === true);
+  const showEditor = !!files?.length;
 
   const isModule = path?.type === "module";
 
@@ -92,50 +94,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
       view: widgetSrc,
     });
   }, [widgetSrc, setWidgetSrc]);
-
-  useEffect(() => {
-    const widgetSrc = `${accountId}/${path?.type}/${widgetName}/**`;
-    const fetchCodeAndDraftOnChain = () => {
-      const widgetCode = cache.socialGet(
-        near,
-        widgetSrc,
-        false,
-        undefined,
-        undefined,
-        fetchCodeAndDraftOnChain
-      );
-
-      setCodeOnChain(widgetCode?.[""]);
-      setDraftOnChain(widgetCode?.branch?.draft?.[""]);
-    };
-    fetchCodeAndDraftOnChain();
-  }, [code]);
-
-  useEffect(() => {
-    let hasCodeChanged;
-    if (draftOnChain) {
-      hasCodeChanged = draftOnChain != code;
-    } else if (codeOnChain) {
-      hasCodeChanged = codeOnChain != code;
-    } else {
-      // no code on chain
-      hasCodeChanged = true;
-    }
-    setCodeChangesPresent(hasCodeChanged);
-  }, [code, codeOnChain, draftOnChain]);
-
-  useEffect(() => {
-    if (!files) {
-      return;
-    }
-
-    checkDrafts();
-    checkHasCodeChange();
-  }, [files]);
-
-  useEffect(() => {
-    checkHasCodeChangeSingleFile(code);
-  }, [code]);
 
   useEffect(() => {
     ls.set(WidgetPropsKey, widgetProps);
@@ -164,135 +122,95 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   useEffect(() => {
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
-      .then((value) => {
-        const { files, lastPath } = value || {};
+      .then((value = {}) => {
+        const { files, lastPath } = value;
         setFiles(files || []);
         setLastPath(lastPath);
+        console.log("files-files-files-files", files);
+        near && checkFiles(files);
       });
-  }, [cache]);
+  }, [cache, near]);
 
   useEffect(() => {
     if (!near || !files) {
       return;
     }
-    if (widgetSrc) {
-      if (widgetSrc === "new") {
-        createFile(Filetype.Widget);
-      } else {
-        loadFile(widgetSrc);
-      }
-      analytics("edit", {
-        props: {
-          widget: widgetSrc,
-        },
-      });
-      history.replace(`/edit/`);
-    } else if (path === undefined) {
-      if (files.length === 0) {
-        createFile(Filetype.Widget);
-      } else {
-        openFile(lastPath, undefined);
-      }
+    if (path === undefined) {
+      openFile(lastPath, undefined);
     }
-  }, [near, createFile, lastPath, files, path, widgetSrc, openFile, loadFile]);
+  }, [near, lastPath, files, path]);
 
-  const openFile = useCallback(
-    (path, code) => {
-      setCodeChangesPresent();
-      setPath(path);
-
-      // add to files
-      const jpath = JSON.stringify(path);
-      setFiles((files) => {
-        const newFiles = [...files];
-        if (!files.find((file) => JSON.stringify(file) === jpath)) {
-          newFiles.push(path);
-        }
-        return newFiles;
+  const checkFiles = (files = []) => {
+    files.map((file) => {
+      console.log("checkFiles");
+      setFilesOpened((filesOpened) => {
+        filesOpened.push({
+          ...file,
+          codeMain: "",
+          codeDraft: "",
+          codeLocalStorage: "",
+          isDraft: false,
+          changesMade: false,
+          savedOnChain: false,
+        });
+        return filesOpened;
       });
-      setLastPath(path);
 
-      setMetadata(undefined);
-      setRenderCode(null);
-      if (code !== undefined) {
-        updateCode(path, code);
-      } else {
-        setLoading(true);
-        cache
-          .asyncLocalStorageGet(StorageDomain, {
-            path,
-            type: StorageType.Code,
-          })
-          .then(({ code }) => {
-            updateCode(path, code);
-          })
-          .finally(() => {
-            setLoading(false);
-          });
-      }
-    },
-    [updateCode]
-  );
-
-  const loadFile = useCallback(
-    (nameOrPath, type = Filetype.Widget) => {
-      if (!near) {
-        return;
-      }
-
-      let widgetSrc =
-        nameOrPath.indexOf("/") >= 0
-          ? nameOrPath
-          : `${accountId}/${type.toLocaleLowerCase()}/${nameOrPath}`;
-
-      const widget = `${widgetSrc}/**`;
-
-      const c = () => {
-        const code = cache.socialGet(
+      const widgetSrc = `${accountId}/${file.type}/${file.name}/**`;
+      const fetchCode = () => {
+        const widgetCode = cache.socialGet(
           near,
-          widget,
+          widgetSrc,
           false,
           undefined,
           undefined,
-          c
+          fetchCode
         );
 
-        const mainCode = code?.[""];
-        const draftCode = code?.branch?.draft?.[""];
-        const currentCode = draftCode || mainCode;
+        const codeMain = widgetCode?.[""];
+        const codeDraft = widgetCode?.branch?.draft?.[""];
+        const isDraft = (!codeDraft && !codeMain) || !!codeDraft;
 
-        if (currentCode) {
-          openFile(toPath(type, widgetSrc), currentCode);
+        if (codeMain) {
+          cache
+            .asyncLocalStorageGet(StorageDomain, {
+              path: file,
+              type: StorageType.Code,
+            })
+            .then(({ code }) => {
+              let changesMade;
+              if (codeDraft) {
+                changesMade = codeDraft != code;
+              } else if (codeMain) {
+                changesMade = codeMain != code;
+              } else {
+                // no code on chain
+                changesMade = true;
+              }
+
+              setFilesOpened((filesOpened) =>
+                filesOpened.map((fileOpened) => {
+                  if (fileOpened.name !== file.name) {
+                    return fileOpened;
+                  }
+                  return {
+                    ...fileOpened,
+                    codeMain,
+                    codeDraft,
+                    codeLocalStorage: code,
+                    isDraft,
+                    changesMade,
+                    savedOnChain: true,
+                  };
+                })
+              );
+            });
         }
       };
+      fetchCode();
+    });
+  };
 
-      c();
-    },
-    [accountId, openFile, toPath, near, cache]
-  );
-
-  const createNewFile = useCallback(
-    (type) => {
-      const path = generateNewName(type, files);
-      path.unnamed = undefined;
-      openFile(
-        path,
-        type === Filetype.Module ? DefaultEditorModuleCode : DefaultEditorCode
-      );
-    },
-    [generateNewName, openFile]
-  );
-
-  // helper
-  const createFile = useCallback(
-    (type) => {
-      const path = generateNewName(type, files);
-      openFile(path, DefaultEditorCode);
-    },
-    [generateNewName, openFile]
-  );
-
-  // helper
   const renameFile = useCallback(
     (newName) => {
       const newPath = toPath(path.type, newName);
@@ -315,7 +233,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     [path, toPath, updateCode]
   );
 
-  // helper
   const updateCode = useCallback(
     (path, code) => {
       cache.localStorageSet(
@@ -330,119 +247,152 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
         }
       );
       setCode(code);
+
+      setFilesOpened((filesOpened) =>
+        filesOpened.map((file) => {
+          if (
+            JSON.stringify({ type: file.type, name: file.name }) ===
+            JSON.stringify(path)
+          ) {
+            const { codeDraft, codeMain } = file;
+            const changesMade = checkChangesMade(codeMain, codeDraft, code);
+
+            return {
+              ...file,
+              codeLocalStorage: code,
+              changesMade,
+            };
+          }
+          return file;
+        })
+      );
     },
     [cache, setCode]
   );
 
-  // helper
-  const checkDrafts = () => {
-    files.forEach((f) => {
-      const widgetSrc = `${accountId}/${f.type}/${f.name}/**`;
-      const fetchCodeAndDraftOnChain = () => {
-        const widgetCode = cache.socialGet(
-          near,
-          widgetSrc,
-          false,
-          undefined,
-          undefined,
-          fetchCodeAndDraftOnChain
-        );
-
-        const mainCode = widgetCode?.[""];
-        const draft = widgetCode?.branch?.draft?.[""];
-        const isDraft = (!draft && !mainCode) || draft;
-        const path = f;
-
-        setFilesDetails(
-          filesDetails.set(f.name, {
-            codeChangesPresent: filesDetails.get(f.name)?.codeChangesPresent,
-            isDraft,
-          })
-        );
-      };
-      fetchCodeAndDraftOnChain();
-    });
-  };
-
-  // helper
-  const checkHasCodeChange = () => {
-    files.forEach((f) => {
-      const widgetSrc = `${accountId}/${f.type}/${f.name}/**`;
-      const fetchCodeAndDraftOnChain = () => {
-        const widgetCode = cache.socialGet(
-          near,
-          widgetSrc,
-          false,
-          undefined,
-          undefined,
-          fetchCodeAndDraftOnChain
-        );
-
-        const mainCode = widgetCode?.[""];
-
-        const draft = widgetCode?.branch?.draft?.[""];
-        const path = f;
-
-        cache
-          .asyncLocalStorageGet(StorageDomain, {
-            path,
-            type: StorageType.Code,
-          })
-          .then(({ code }) => {
-            let hasCodeChanged;
-            if (draft) {
-              hasCodeChanged = draft != code;
-            } else if (mainCode) {
-              hasCodeChanged = mainCode != code;
-            } else {
-              // no code on chain
-              hasCodeChanged = true;
-            }
-            setFilesDetails(
-              filesDetails.set(f.name, {
-                codeChangesPresent: hasCodeChanged,
-                isDraft: filesDetails.get(f.name)?.isDraft,
-              })
-            );
-          });
-      };
-      fetchCodeAndDraftOnChain();
-    });
-  };
-
-  // helper
-  const checkHasCodeChangeSingleFile = (code) => {
-    const widgetSrc = `${accountId}/${path?.type}/${widgetName}/**`;
-    const fetchCodeAndDraftOnChain = () => {
-      const widgetCode = cache.socialGet(
-        near,
-        widgetSrc,
-        false,
-        undefined,
-        undefined,
-        fetchCodeAndDraftOnChain
-      );
-
-      const mainCode = widgetCode?.[""];
-      const draft = widgetCode?.branch?.draft?.[""];
-      let hasCodeChanged;
-      if (draft) {
-        hasCodeChanged = draft != code;
-      } else if (mainCode) {
-        hasCodeChanged = mainCode != code;
-      } else {
-        // no code on chain
-        hasCodeChanged = true;
+  const reformat = useCallback(
+    (path, code) => {
+      try {
+        const formattedCode = prettier.format(code, {
+          parser: "babel",
+          plugins: [parserBabel],
+        });
+        updateCode(path, formattedCode);
+      } catch (e) {
+        console.log(e);
       }
-      setFilesDetails(
-        filesDetails.set(widgetName, {
-          codeChangesPresent: hasCodeChanged,
-          isDraft: filesDetails.get(widgetName)?.isDraft,
-        })
+    },
+    [updateCode]
+  );
+
+  const removeFromFiles = useCallback(
+    (path) => {
+      path = JSON.stringify(path);
+      setFiles((files) =>
+        files.filter((file) => JSON.stringify(file) !== path)
       );
-    };
-    fetchCodeAndDraftOnChain();
-  };
+      setFilesOpened((filesOpened) =>
+        filesOpened.filter(
+          (file) =>
+            JSON.stringify({ type: file.type, name: file.name }) !== path
+        )
+      );
+      setLastPath(path);
+    },
+    [setFiles, setLastPath]
+  );
+
+  const createNewFile = useCallback(
+    (type) => {
+      const path = generateNewName(type, files);
+      openFile(path, getDefaultCode(type));
+    },
+    [generateNewName, openFile]
+  );
+
+  const loadAndOpenFile = useCallback(
+    (nameOrPath, type = Filetype.Widget) => {
+      console.log("loadAndOpenFile");
+      if (!near) {
+        return;
+      }
+      const widgetSrc = getSrcByNameOrPath(nameOrPath, accountId, type);
+      const widget = `${widgetSrc}/**`;
+
+      const cacheGet = () => {
+        const code = cache.socialGet(
+          near,
+          widget,
+          false,
+          undefined,
+          undefined,
+          cacheGet
+        );
+
+        if (code) {
+          const currentCode = code?.branch?.draft?.[""] || code?.[""];
+          openFile(toPath(type, widgetSrc), currentCode, code);
+        }
+      };
+      cacheGet();
+    },
+    [accountId, openFile, toPath, near, cache]
+  );
+
+  const openFile = useCallback(
+    (path, code, widgetObject) => {
+      console.log("openFile");
+      setPath(path);
+      setLastPath(path);
+      setMetadata(undefined);
+      setRenderCode(null);
+
+      setFiles((files) => {
+        const newFiles = [...files];
+        const addToFiles = !files.find(
+          (file) => JSON.stringify(file) === JSON.stringify(path)
+        );
+        if (addToFiles) {
+          newFiles.push(path);
+        }
+        return newFiles;
+      });
+
+      const codeMain = widgetObject?.[""];
+      const codeDraft = widgetObject?.branch?.draft?.[""] || "";
+      const isDraft = (!codeDraft && !codeMain) || !!codeDraft;
+      const changesMade = checkChangesMade(codeMain, codeDraft, code);
+
+      setFilesOpened((filesOpened) => {
+        filesOpened.push({
+          type: path.type,
+          name: path.name,
+          codeMain,
+          codeDraft,
+          codeLocalStorage: code,
+          isDraft,
+          changesMade,
+          savedOnChain: !!codeMain,
+        });
+        return filesOpened;
+      });
+
+      if (code !== undefined) {
+        updateCode(path, code);
+        return;
+      }
+
+      cache
+        .asyncLocalStorageGet(StorageDomain, {
+          path,
+          type: StorageType.Code,
+        })
+        .then(({ code }) => {
+          updateCode(path, code);
+        });
+    },
+    [updateCode]
+  );
 
   return (
     <>
@@ -460,7 +410,7 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
         jpath={jpath}
         path={path}
         renameFile={renameFile}
-        loadFile={loadFile}
+        loadAndOpenFile={loadAndOpenFile}
         createNewFile={createNewFile}
         near={near}
         widgetPath={widgetPath}
@@ -481,8 +431,7 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
             jpath={jpath}
             openFile={openFile}
             files={files}
-            filesDetails={filesDetails}
-            createFile={createFile}
+            createNewFile={createNewFile}
             widgetName={widgetName}
             code={code}
             toPath={toPath}
@@ -494,12 +443,14 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
             setShowSaveDraftModal={setShowSaveDraftModal}
             setFiles={setFiles}
             setLastPath={setLastPath}
+            filesOpened={filesOpened}
+            removeFromFiles={removeFromFiles}
           />
           <Search
             widgets={widgets}
             tos={tos}
             logOut={logOut}
-            loadFile={loadFile}
+            loadAndOpenFile={loadAndOpenFile}
           />
           <div className="d-flex align-content-start">
             <div className="flex-grow-1">
@@ -533,6 +484,8 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
                     code={code}
                     widgetPath={widgetPath}
                     updateCode={updateCode}
+                    path={path}
+                    reformat={reformat}
                   />
                   <TabProps
                     tab={tab}
