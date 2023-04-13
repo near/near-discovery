@@ -106,7 +106,7 @@ export function DevActionsDropdown(props) {
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu2222">
           {props.widgetSrc?.edit && (
             <li>
-              <Link to={`/#/edit/${props.widgetSrc?.edit}`}>
+              <Link to={`/edit/${props.widgetSrc?.edit}`}>
                 <Fork />
                 {props.widgetSrc.edit.startsWith(`${account.accountId}/widget/`)
                   ? "Edit widget"
