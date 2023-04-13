@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { recordPageView, Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
+import styleZendesk from "../zendesk";
 
 export default function ViewPage(props) {
   // will always be empty in prod
@@ -64,9 +65,23 @@ export default function ViewPage(props) {
               view: src,
             }
       );
-      recordPageView(src);
+      //recordPageView(src);
     }, 1);
   }, [src, query, setWidgetSrc, viewSourceWidget]);
+
+  //once the zendesk widget comes online, style it
+  const queueZendeskCheck = useCallback(() => {
+    const zwFrame = document.getElementById("launcher");
+    const zwEmbed = zwFrame?.contentDocument.getElementById("Embed");
+    const zwButton = zwEmbed?.getElementsByTagName("button")[0];
+    if (zwButton) {
+      styleZendesk();
+      return;
+    }
+    setTimeout(queueZendeskCheck, 20);
+  });
+
+  useEffect(queueZendeskCheck, []);
 
   return (
     <div className="container-xl">
@@ -87,6 +102,7 @@ export default function ViewPage(props) {
                 props={{
                   children: (
                     <Widget
+                      config={{ redirectMap: redirectMap }}
                       key={props.tos.checkComponentPath}
                       src={props.tos.checkComponentPath}
                       props={{
