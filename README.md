@@ -36,6 +36,8 @@ yarn start
 2. Create a `.env` file and set the component server URL as `LOCAL_COMPONENT_LOADER`
 3. Run server in dev mode with `yarn start`
 
+Note: there is no hot reload, you must refresh the page to see component changes
+
 ## Local VM Development
 
 If you need to make changes to the VM and test locally, you can easily link your local copy of the VM:
