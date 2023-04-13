@@ -45,7 +45,8 @@
     "source": "dist",
     "include": [
       "/",
-      "/use"
+      "/use",
+      "/ecosystem"
     ],
     "viewport": {
       "width": 7000,
