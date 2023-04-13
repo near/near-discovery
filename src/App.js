@@ -1,4 +1,9 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
@@ -22,6 +27,7 @@ import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapp
 import DesktopNavigation from "./components/navigation/org/wrapper/desktop/DesktopNavigation";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
+import styleZendesk from "./zendesk";
 import { Helmet } from "react-helmet";
 import NearOrgPage from "./pages/NearOrgPage";
 
@@ -62,6 +68,7 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const [hasStyledZendesk, setHasStyledZendesk] = useState(false);
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -90,6 +97,18 @@ function App(props) {
         }),
       });
   }, [initNear]);
+
+  useLayoutEffect(() => {
+    // ZenDesk styling is done with useLayoutEffect to avoid errors during site refresh by user
+    const zwFrame = document.getElementById("launcher");
+    if (!zwFrame || hasStyledZendesk) return;
+    try {
+      styleZendesk();
+      setHasStyledZendesk(true);
+    } catch (error) {
+      console.log("Error styling Zendesk", error);
+    }
+  });
 
   useEffect(() => {
     if (
