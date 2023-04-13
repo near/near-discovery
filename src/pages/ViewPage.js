@@ -43,6 +43,15 @@ export default function ViewPage(props) {
   }, [query]);
 
   useEffect(() => {
+    // Displays the Zendesk widget only if user is signed in and on the home page
+    if (!props.signedIn || !!widgetSrc) {
+      zE("webWidget", "hide");
+      return;
+    }
+    zE("webWidget", "show");
+  }, [props.signedIn, widgetSrc]);
+
+  useEffect(() => {
     setTimeout(() => {
       setWidgetSrc(
         src === viewSourceWidget && query.get("src")
