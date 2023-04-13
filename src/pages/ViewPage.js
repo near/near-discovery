@@ -49,6 +49,7 @@ export default function ViewPage(props) {
       zE("webWidget", "hide");
       return;
     }
+    localStorage.setItem("accountId", props.signedAccountId);
     zE("webWidget", "show");
   }, [props.signedIn, widgetSrc]);
 
