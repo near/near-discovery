@@ -15,7 +15,7 @@ import EmbedPage from "./_/pages/EmbedPage";
 import DiscoverPage from "./_/pages/DiscoverPage";
 import ProfilePage from "./_/pages/ProfilePage";
 import LearnPage from "./_/pages/learnPage/LearnPage";
-import ChatPage from "./_/pages/ChatPage";
+import ChatPage from "./_/pages/chatPage/ChatPage";
 import AuthPage from "./_/pages/AuthPage";
 
 // import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";

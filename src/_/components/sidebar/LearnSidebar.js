@@ -44,7 +44,7 @@ export default function LearnSidebar() {
 
         <Typography
           variant="h6"
-          sx={{ fontWeight: 500, color: theme.textColor }}
+          sx={{ fontWeight: 500, color: theme.textColor, textAlign: "left" }}
         >
           {selectedProject?.name || "Learn"}
         </Typography>
@@ -107,7 +107,11 @@ export default function LearnSidebar() {
             >
               <Typography
                 variant="h6"
-                sx={{ fontWeight: 500, color: theme.textColor }}
+                sx={{
+                  fontWeight: 500,
+                  color: theme.textColor,
+                  textAlign: "left",
+                }}
               >
                 {section?.name}
               </Typography>
@@ -157,7 +161,11 @@ export default function LearnSidebar() {
             >
               <Typography
                 variant="h6"
-                sx={{ fontWeight: 600, color: theme.textColor }}
+                sx={{
+                  fontWeight: 600,
+                  color: theme.textColor,
+                  textAlign: "left",
+                }}
               >
                 {project?.name}
               </Typography>

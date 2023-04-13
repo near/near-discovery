@@ -27,6 +27,14 @@ module.exports = function (env) {
       module: {
         rules: [
           {
+            test: /\.mdx$/,
+            use: ["babel-loader", "@mdx-js/loader"],
+          },
+          {
+            test: /\.md$/,
+            use: ["html-loader", "markdown-loader"],
+          },
+          {
             test: /\.m?js/,
             resolve: {
               fullySpecified: false,

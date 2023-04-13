@@ -1,28 +1,23 @@
 import React, { useContext } from "react";
 import ParticleBackground from "react-particle-backgrounds";
 import { ThemeContext } from "../../../context/ThemeContext";
-import { Box, Typography, Button, alpha, useMediaQuery } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
-import Chip from "@mui/material/Chip";
-import SupervisedUserCircleRoundedIcon from "@mui/icons-material/SupervisedUserCircleRounded";
-
-import imageSrc from "../../../images/home.png";
-import searchSrc from "../../../images/search.png";
 import ReactPlayer from "react-player";
 
-export default function TopSection() {
-  const min720 = useMediaQuery("(min-width:820px)");
+export default function HomeTopSection() {
+  // const min720 = useMediaQuery("(min-width:820px)");
 
   const { theme, bp } = useContext(ThemeContext);
 
-  const handleClick = (gateway) => {
-    const gateways = {
-      alpha: "https://alpha.near.org/#/",
-      social: "https://near.social/#/",
-      bos: "https://bos.gg/#/",
-    };
-    window.open(gateways[gateway], "_blank", "noreferrer");
-  };
+  // const handleClick = (gateway) => {
+  //   const gateways = {
+  //     alpha: "https://alpha.near.org/#/",
+  //     social: "https://near.social/#/",
+  //     bos: "https://bos.gg/#/",
+  //   };
+  //   window.open(gateways[gateway], "_blank", "noreferrer");
+  // };
 
   const settings = {
     particle: {
@@ -71,6 +66,7 @@ export default function TopSection() {
         sx={{
           width: "100%",
           maxWidth: "90vw",
+          // maxWidth: 1250,
           flex: 1,
           gap: 2,
           display: "grid",
@@ -82,33 +78,50 @@ export default function TopSection() {
         <Box>
           <Typography
             variant="h1"
-            sx={{ fontSize: bp ? "4rem" : "7rem", color: theme.textColor }}
-          >
-            nearPad
-          </Typography>
-          <Typography
-            variant={bp ? "h3" : "h2"}
-            fontWeight={600}
-            textAlign="left"
-            sx={{
+            style={{
+              fontSize: bp ? 32 : 64,
+              // fontSize: "clamp(24px, 10vw, 64px)",
               color: theme.textColor,
             }}
           >
-            BOS devTools
+            {/* Web3 Dev Toolkit */}
+            Build a web3 app faster with reusable components
+            {/* nearpad */}
+          </Typography>
+          <Typography
+            variant="h4"
+            fontWeight={600}
+            textAlign="left"
+            sx={{
+              mt: 2,
+              color: theme.textColor,
+            }}
+          >
+            Everything you need to connect your apps or <br />
+            games to decentralized networks.
           </Typography>
 
-          <Typography
+          {/* <Typography
             fontWeight={bp ? 300 : 200}
-            variant={bp ? "h4" : "h3"}
+            // variant={bp ? "h4" : "h3"}
+            variant="h5"
             sx={{
               marginTop: 4,
               color: theme.textColor,
             }}
           >
             Create decentralized frontend widgets without limits.
-          </Typography>
+          </Typography> */}
 
-          <Box sx={{ mt: 2, display: "flex", alignItems: "center", gap: 2 }}>
+          {/* <Box
+            sx={{
+              mt: 2,
+              display: "flex",
+              flexWrap: "nowrap",
+              alignItems: "center",
+              gap: 2,
+            }}
+          >
             <Typography style={{ color: theme.textColor }}>
               We &#x2665;
             </Typography>
@@ -132,7 +145,8 @@ export default function TopSection() {
               color="warning"
               onClick={(e) => handleClick("bos")}
             />
-          </Box>
+          </Box> */}
+
           {/* <Typography
             style={{
               marginTop: 100,

@@ -3,7 +3,7 @@ import React from "react";
 import { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 
-export default function FeatureSection({
+export default function HomeFeatureSection({
   leftSideContent,
   rightSideContent,
   title,

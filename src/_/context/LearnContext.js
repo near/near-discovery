@@ -8,12 +8,12 @@ export const LearnContext = createContext();
 const data = [
   {
     _id: "1563435165",
-    name: "Project 1",
+    name: "My 2222 Awesome Heading 2 \n This is some **bold** and *italic",
     discription: data1,
     sections: [
       {
         _id: "5456123",
-        name: "Section 1",
+        name: "My 2222 Awesome Heading 2 \n This is some **bold** and *italic",
         discription: `# My 2222 Awesome Heading 2 \n This is some **bold** and *italic* text. \n Here's a list: \n - Item 1 \n - Item 5 \n - Item 8 \n > Here's a blockquote. \n And here's a link to [Google](https://www.facebook.com/).`,
 
         code: "return (<div>\n \n \n<h1>Learn</h1></div>)",

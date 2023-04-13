@@ -1,9 +1,12 @@
 import React from "react";
-import PagesContainer from "../components/PagesContainer";
+import PagesContainer from "../../components/PagesContainer";
 
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
+
+import Post from "./post.mdx";
+import { MDXProvider } from "@mdx-js/react";
 
 const ChatBox = styled(Box)({
   display: "flex",
@@ -34,6 +37,16 @@ export default function ChatPage({ props }) {
       setInputValue("");
     }
   };
+
+  console.log(Post);
+
+  const components = {
+    per: (props) => (
+      <per style={{ backgroundColor: "green", color: "red" }} {...props} />
+    ),
+    h1: (props) => <h1 style={{ color: "red" }} {...props} />,
+    em: (props) => <i {...props} />,
+  };
   return (
     <PagesContainer {...props}>
       <Box
@@ -41,10 +54,22 @@ export default function ChatPage({ props }) {
           height: "100%",
           width: "100%",
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
+          p: 2,
+          overflowY: "auto",
+          position: "relative",
         }}
       >
-        <ChatBox>
+        <Box sx={{ pt: 2, position: "absolute", top: 0 }}>
+          <MDXProvider components={components}>
+            <Post />
+          </MDXProvider>
+
+          {/* <div dangerouslySetInnerHTML={{ __html: Post }} /> */}
+        </Box>
+
+        {/* <ChatBox>
           <MessageList>
             {messages.map((message, index) => (
               <div key={index}>
@@ -58,7 +83,7 @@ export default function ChatPage({ props }) {
             onChange={(event) => setInputValue(event.target.value)}
             onKeyPress={handleInputKeyPress}
           />
-        </ChatBox>
+        </ChatBox> */}
       </Box>
     </PagesContainer>
   );

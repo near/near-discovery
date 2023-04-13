@@ -37,8 +37,9 @@ export default function HomeFooter() {
       <Box
         sx={{
           width: "100%",
-          maxWidth: 1250,
-          px: 2,
+          // maxWidth: 1250,
+          maxWidth: "90vw",
+
           py: 3,
 
           display: "flex",
@@ -56,7 +57,7 @@ export default function HomeFooter() {
           @nearpad.dev | {" " + new Date().getFullYear()}
         </Typography>
 
-        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1, mx: 2 }}>
           {/* <IconButton
             sx={socialLinkStyle}
             component="a"
