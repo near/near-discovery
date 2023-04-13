@@ -14,70 +14,27 @@ Start development version:
 yarn start
 ```
 
-## Component example
+## Local Component Development
 
-Profile view
+1. Run an instance of a component server like [mpeterdev/bos-loader](https://github.com/mpeterdev/bos-loader) which serves component code in the following format
 
-```jsx
-let accountId = props.accountId || "eugenethedream";
-let profile = socialGetr(`${accountId}/profile`);
+   ```json
+   {
+     "components": {
+       "<component path 1>": {
+         "code": "<component 1 code>"
+       },
+       "<component path 2>": {
+         "code": "<component 2 code>"
+       }
+     }
+   }
+   ```
 
-<div>
-  <img src={profile.image.url} />
-  <span>{profile.name}</span> <span>(@{accountId})</span>
-</div>;
-```
+   this will be used as a `redirectMap` in `ViewPage`
 
-Profile editor
-
-```jsx
-let accountId = context.accountId;
-
-if (!accountId) {
-  return "Please sign in with NEAR wallet";
-}
-
-const profile = socialGetr(`${accountId}/profile`);
-
-if (profile === null) {
-  return "Loading";
-}
-
-initState({
-  name: profile.name,
-  url: profile.image.url,
-});
-
-const data = {
-  profile: {
-    name: state.name,
-    image: {
-      url: state.url,
-    },
-  },
-};
-
-return (
-  <div>
-    <div>account = {accountId}</div>
-    <div>
-      Name:
-      <input type="text" value={state.name} />
-    </div>
-    <div>
-      Image URL:
-      <input type="text" value={state.url} />
-    </div>
-    <div>Preview</div>
-    <div>
-      <img src={state.url} alt="profile image" /> {state.name}
-    </div>
-    <div>
-      <CommitButton data={data}>Save profile</CommitButton>
-    </div>
-  </div>
-);
-```
+2. Create a `.env` file and set the component server URL as `LOCAL_COMPONENT_LOADER`
+3. Run server in dev mode with `yarn start`
 
 ## Local VM Development
 

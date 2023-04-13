@@ -1,5 +1,6 @@
 const path = require("path");
 const { HotModuleReplacementPlugin } = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = () => ({
   devtool: false,
@@ -45,5 +46,5 @@ module.exports = () => ({
     compress: true,
     allowedHosts: "all",
   },
-  plugins: [new HotModuleReplacementPlugin()],
+  plugins: [new HotModuleReplacementPlugin(), new Dotenv()],
 });
