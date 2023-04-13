@@ -97,7 +97,7 @@
     "path-browserify": "^1.0.1",
     "postcss-loader": "^7.0.1",
     "process": "^0.11.10",
-    "react-snap": "^1.23.0",
+    "react-snap": "near/react-snap#0.1",
     "sass-loader": "^13.1.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
