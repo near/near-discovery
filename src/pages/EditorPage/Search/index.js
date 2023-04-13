@@ -8,7 +8,7 @@ import {
 } from "near-social-vm";
 import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
 
-export default function Search({ widgets, tos, logOut, loadFile }) {
+export default function Search({ widgets, tos, logOut, loadAndOpenFile }) {
   return (
     <>
       {widgets.editorComponentSearch && (
@@ -36,7 +36,7 @@ export default function Search({ widgets, tos, logOut, loadFile }) {
                         className="btn btn-outline-primary"
                         onClick={(e) => {
                           e.preventDefault();
-                          loadFile(widgetPath);
+                          loadAndOpenFile(widgetPath);
                           onHide && onHide();
                         }}
                       >
@@ -45,7 +45,7 @@ export default function Search({ widgets, tos, logOut, loadFile }) {
                     </OverlayTrigger>
                   ),
                 }),
-                [loadFile]
+                [loadAndOpenFile]
               ),
             }}
           />

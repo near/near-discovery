@@ -20,7 +20,7 @@ export default function Modals({
   jpath,
   path,
   renameFile,
-  loadFile,
+  loadAndOpenFile,
   createNewFile,
   near,
   widgetPath,
@@ -38,12 +38,12 @@ export default function Modals({
       />
       <OpenModal
         show={showOpenModal}
-        onConfirm={loadFile}
+        onConfirm={loadAndOpenFile}
         onHide={hideAllModals}
       />
       <OpenModuleModal
         show={showOpenModuleModal}
-        onConfirm={loadFile}
+        onConfirm={loadAndOpenFile}
         onHide={hideAllModals}
       />
       <AddModal
