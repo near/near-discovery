@@ -3,6 +3,7 @@ import { Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
+import localStorage from "local-storage";
 
 export default function ViewPage(props) {
   // will always be empty in prod
@@ -48,6 +49,7 @@ export default function ViewPage(props) {
       zE("webWidget", "hide");
       return;
     }
+    localStorage.set("accountId", props.signedAccountId)
     zE("webWidget", "show");
   }, [props.signedIn, widgetSrc]);
 
