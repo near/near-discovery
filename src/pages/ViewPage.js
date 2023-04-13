@@ -106,6 +106,7 @@ export default function ViewPage(props) {
                 props={{
                   children: (
                     <Widget
+                      config={{ redirectMap: redirectMap }}
                       key={props.tos.checkComponentPath}
                       src={props.tos.checkComponentPath}
                       props={{
