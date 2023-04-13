@@ -24,6 +24,7 @@ import EmbedPage from "./pages/EmbedPage";
 import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
+import DesktopNavigation from "./components/navigation/org/wrapper/desktop/DesktopNavigation";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import styleZendesk from "./zendesk";
@@ -191,11 +192,17 @@ function App(props) {
 
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route path={"/use"}>
-            <NearOrgPage
-              {...passProps}
-              widgetSrc="adminalpha.near/widget/NearOrg.UsePage"
-            />
+          {/* Near ORG Pages: */}
+          <Route path={"/"} exact={true}>
+            <NearOrgPage {...passProps} src={Widgets.nearOrg.homePage} />
+          </Route>
+          <Route path={"/use"} exact={true}>
+            <NearOrgPage {...passProps} src={Widgets.nearOrg.usePage} />
+          </Route>
+
+          {/* Discovery Pages: */}
+          <Route path={"/embed/:widgetSrc*"}>
+            <EmbedPage {...passProps} />
           </Route>
           <Route path={"/edit/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
@@ -205,7 +212,8 @@ function App(props) {
             <EmbedPage {...passProps} />
           </Route>
           <Route path={"/:widgetSrc*"}>
-            <NavigationWrapper {...passProps} />
+            {/* <NavigationWrapper {...passProps} /> */}
+            <DesktopNavigation />
             <ViewPage {...passProps} />
           </Route>
         </Switch>
