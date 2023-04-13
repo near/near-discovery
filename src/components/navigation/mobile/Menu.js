@@ -202,7 +202,7 @@ export function Menu(props) {
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/#/edit">
+            <NavigationButton route="/edit">
               <Code />
               Create
             </NavigationButton>
