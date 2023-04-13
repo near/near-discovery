@@ -55,5 +55,33 @@
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- NEAR Discovery Zendesk Support Widget -->
+    <script id="ze-snippet" src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"></script>
+    <script type="text/javascript">
+    // Zendesk settings can not be configured outside of index.html :/
+    window.zESettings = {
+        webWidget: {
+          color: { theme: "#2b2f31" },
+          offset: {
+            horizontal: "10px",
+            vertical: "10px",
+            mobile: { horizontal: "2px", vertical: "65px", from: "right" },
+          },
+          contactForm: {
+            attachments: true,
+            title: { "*": "Feedback and Support" },
+            fields: [
+              {
+                id: 13149356989591,
+                prefill: { "*": localStorage.getItem("accountNameString") },
+              },
+            ],
+          },
+          launcher: {
+            label: { "*": " " },
+          },
+        },
+      };
+    </script>
   </body>
 </html>
