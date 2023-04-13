@@ -87,7 +87,7 @@ function App(props) {
           ],
         }),
       });
-      styleZendesk();
+        styleZendesk();
   }, [initNear]);
 
   useEffect(() => {
