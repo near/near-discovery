@@ -16,7 +16,7 @@ yarn start
 
 ## Local Component Development
 
-1. Run an instance of a component server like [mpeterdev/bos-loader](https://github.com/mpeterdev/bos-loader) which serves component code in the following format
+1. Run an instance of a component server like [near/bos-loader](https://github.com/near/bos-loader) which serves component code in the following format
 
    ```json
    {
