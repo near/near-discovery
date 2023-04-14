@@ -46,6 +46,7 @@ export default function Activitybar(props) {
     >
       <div>
         <ActivityButton
+          disabled
           icon={
             <DiamondRoundedIcon
               sx={{ fill: theme.textColor4, fontSize: "1.8rem" }}
@@ -173,37 +174,6 @@ export default function Activitybar(props) {
             setSelectedActivity((e) => (e === "learn" ? "" : "learn"));
           }}
         />
-      </div>
-
-      <div>
-        {accountId && (
-          <ActivityButton
-            icon={
-              <Widget
-                src={Widgets.activitybarNotificationButton}
-                props={{ theme }}
-              />
-            }
-            label="notifications"
-            onClick={() => {
-              history.push("/notifications");
-              setSelectedActivity((e) =>
-                e === "notifications" ? "" : "notifications"
-              );
-            }}
-            sx={{ opacity: 1 }}
-          />
-        )}
-
-        {/* <ActivityButton
-          icon={
-            <HelpOutlineRoundedIcon
-              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
-            />
-          }
-          label="Documentation"
-          onClick={() => {}}
-        /> */}
 
         <ActivityButton
           icon={
@@ -235,6 +205,37 @@ export default function Activitybar(props) {
             setEnableDarkMode(!enableDarkMode);
           }}
         />
+      </div>
+
+      <div>
+        {accountId && (
+          <ActivityButton
+            icon={
+              <Widget
+                src={Widgets.activitybarNotificationButton}
+                props={{ theme }}
+              />
+            }
+            label="notifications"
+            onClick={() => {
+              history.push("/notifications");
+              setSelectedActivity((e) =>
+                e === "notifications" ? "" : "notifications"
+              );
+            }}
+            sx={{ opacity: 1 }}
+          />
+        )}
+
+        {/* <ActivityButton
+          icon={
+            <HelpOutlineRoundedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+            />
+          }
+          label="Documentation"
+          onClick={() => {}}
+        /> */}
 
         <ActivityButton
           icon={
@@ -275,37 +276,37 @@ export default function Activitybar(props) {
           }}
         />
 
+        {/* <>
+            <Divider sx={{ my: 1 }} /> */}
         {uesr && (
-          <>
-            <Divider sx={{ my: 1 }} />
-
-            <ActivityButton
-              icon={
-                <LogoutRoundedIcon
-                  sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
-                />
-              }
-              label="logout"
-              onClick={() => {
-                history.push("/");
-                logout();
-              }}
-            />
-          </>
+          <ActivityButton
+            icon={
+              <LogoutRoundedIcon
+                sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+              />
+            }
+            label="logout"
+            onClick={() => {
+              history.push("/");
+              logout();
+            }}
+          />
         )}
+        {/* </> */}
       </div>
     </div>
   );
 }
 
-const ActivityButton = ({ icon, label, to, onClick, sx }) => {
+const ActivityButton = ({ icon, label, to, onClick, sx, disabled }) => {
   const { theme } = useContext(ThemeContext);
   const { selectedActivity, setSelectedActivity } = useContext(EditorContext);
   const { pathname } = useLocation();
 
   return (
-    <Tooltip title={camelToNormal(label)} placement="right">
+    <Tooltip title={camelToNormal(label)} placement="right" disabled={disabled}>
       <ButtonBase
+        disabled={disabled}
         className="buttonBase"
         sx={{
           width: 50,

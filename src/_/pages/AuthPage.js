@@ -27,7 +27,7 @@ export default function AuthPage() {
       console.log("Login Success, your code is: ", result);
 
       saveAuth({ code: result });
-      history.push("/discover");
+      history.push("/editoreditor");
       //   history.push("/editor");
 
       //   const requestData = {

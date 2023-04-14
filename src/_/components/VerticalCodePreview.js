@@ -77,9 +77,11 @@ export default function VerticalCodePreview({ initialCode, horizontal }) {
           sx={{
             flex: 1,
             p: 1,
-            height: "100%",
+            paddingBottom: 7,
             bgcolor: theme.ui,
             color: theme.textColor,
+            height: "100%",
+            overflowY: "auto",
           }}
         >
           <Widget code={code} props={{ theme }} />
