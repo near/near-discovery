@@ -27,6 +27,8 @@ import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapp
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import FlagsPage from "./pages/FlagsPage";
+import { useFlags } from "./utils/flags";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -65,6 +67,7 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const [flags, setFlags] = useFlags();
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -166,6 +169,8 @@ function App(props) {
       checkComponentPath: Widgets.tosCheck,
       contentComponentPath: Widgets.tosContent,
     },
+    flags,
+    setFlags,
   };
 
   return (
@@ -176,6 +181,10 @@ function App(props) {
 
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
+          <Route path={"/flags"}>
+            <NavigationWrapper {...passProps} />
+            <FlagsPage {...passProps} />
+          </Route>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route>

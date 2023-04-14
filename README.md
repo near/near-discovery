@@ -16,7 +16,7 @@ yarn start
 
 ## Local Component Development
 
-1. Run an instance of a component server like [mpeterdev/bos-loader](https://github.com/mpeterdev/bos-loader) which serves component code in the following format
+1. Run an instance of a component server like [near/bos-loader](https://github.com/near/bos-loader) which serves component code in the following format
 
    ```json
    {
@@ -35,6 +35,8 @@ yarn start
 
 2. Create a `.env` file and set the component server URL as `LOCAL_COMPONENT_LOADER`
 3. Run server in dev mode with `yarn start`
+
+Note: there is no hot reload, you must refresh the page to see component changes
 
 ## Local VM Development
 
