@@ -8183,8 +8183,9 @@ react-singleton-hook@^3.1.1:
   resolved "https://registry.yarnpkg.com/react-singleton-hook/-/react-singleton-hook-3.4.0.tgz#23e1fb8ea55c6e4f7fffdc8674bb03e99a948490"
   integrity sha512-eQEpyacGAaRejmWUizUdNNQFn5AO0iaKRSl1jxgC0FQadVY/I1WFuPrYiutglPzO9s8yEbIh95UXVJQel4d7HQ==
 
-"react-snap@file:../react-snap":
+react-snap@near/react-snap#0.1:
   version "1.23.0"
+  resolved "https://codeload.github.com/near/react-snap/tar.gz/597e350acd20de5f07dc123662c0e4a1cd621d4c"
   dependencies:
     clean-css "4.2.1"
     express "4.17.1"
