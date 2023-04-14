@@ -43,6 +43,7 @@
   },
   "reactSnap": {
     "source": "dist",
+    "exclude": ["/edit"],
     "include": [
       "/",
       "/use",
