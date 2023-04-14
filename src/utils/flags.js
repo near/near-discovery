@@ -1,5 +1,12 @@
 import { useState, useCallback } from "react";
 
+/**
+ * Use Application flags
+ *
+ * `const [flags, setFlags] = useFlags();`
+ *
+ * Warning: setFlags causes page reload
+ */
 export function useFlags() {
   const [rawFlags, setRawFlags] = useState(
     localStorage.getItem("flags")
