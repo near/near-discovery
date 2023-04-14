@@ -7,7 +7,7 @@
 }
 
 @font-face {
-  font-family: "Mona Sans";
+  font-family: "FK Grotesk";
   src: url("./fonts/FKGrotesk.woff2") format("woff2 supports variations"),
     url("./fonts/FKGrotesk.woff2") format("woff2-variations");
   font-weight: 200 900;
