@@ -23,7 +23,7 @@ export default function HomePage(props) {
     <>
       <HomeHeader />
       <HomeTopSection />
-      {/* <HomeOurPartnersSection /> */}
+      <HomeOurPartnersSection />
       <HomeEditorContainer />
       {/* <HomeFeatureSection
         rtl
@@ -53,9 +53,9 @@ export default function HomePage(props) {
           </Box>
         }
         sxSx={{ gridTemplateColumns: bp ? "1fr" : "1fr 1fr" }}
-      />
+      />*/}
+      <HomeTestimonialSection />
 
-      <HomeTestimonialSection /> */}
       <HomeFooter />
     </>
   );

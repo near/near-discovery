@@ -23,7 +23,7 @@ export default function HomeOurPartnersSection() {
         gap: 5,
         py: bp ? 5 : 10,
 
-        backgroundColor: theme.backgroundColor,
+        backgroundColor: theme.ui,
       }}
     >
       <Typography variant="h6" sx={{ color: theme.textColor3 }} align="center">

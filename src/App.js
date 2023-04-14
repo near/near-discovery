@@ -4,7 +4,12 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
+import {
+  HashRouter as Router,
+  Route,
+  Switch,
+  Redirect,
+} from "react-router-dom";
 import ReactGA from "react-ga4";
 
 import MyEditorPage from "./_/pages/editorPage/EditorPage";
@@ -29,11 +34,13 @@ import { ThemeContext } from "./_/context/ThemeContext";
 import PagesContainer from "./_/components/PagesContainer";
 import LoginDialog from "./_/dialogs/LoginDialog";
 import LearnContextProvider from "./_/context/LearnContext";
+import { AuthContext } from "./_/context/AuthContext";
 
 export const refreshAllowanceObj = {};
 ReactGA.initialize("G-YJ2FL738R6");
 
 export default function App() {
+  const { uesr } = useContext(AuthContext);
   const { theme } = useContext(ThemeContext);
   const { NetworkId, Widgets } = useContext(EditorContext);
 
@@ -241,9 +248,14 @@ export default function App() {
             <Footer />
           </Route>
 
+          {/* <>
+                <MyEditorPage {...passProps} />
+                <Footer />
+              </> */}
           <Route path="/:widgetSrc*">
             {/* <ViewPage {...passProps} /> */}
-            <HomePage {...passProps} />
+
+            {uesr ? <Redirect to="/editor" /> : <HomePage {...passProps} />}
           </Route>
 
           {/* <Route path="/" component={HomePage} /> */}

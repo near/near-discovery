@@ -47,7 +47,7 @@ export default function HomeEditorContainer() {
           width: "100%",
           maxWidth: 1250,
 
-          height: 400,
+          height: 700,
           px: 2,
         }}
       >
@@ -64,7 +64,7 @@ export default function HomeEditorContainer() {
           <VerticalCodePreview
             //initialCode="return(<div style={{backgroundColor: props.theme.ui }}><h1 style={{color: props.theme.textColor}}>Hello World</h1></div>)"
             // horizontal={bp ? false : true}
-            horizontal
+            horizontal={bp ? false : true}
             initialCode={`
             // User account in near testnet
 const accountId = "storyboard.testnet";

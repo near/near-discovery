@@ -7,7 +7,7 @@ export const AuthContextProvider = (props) => {
   const history = useHistory();
   const [showDialog, setShowDialog] = useState(false);
 
-  const [uesr, setUser] = useState({ code: 54561532123 });
+  const [uesr, setUser] = useState();
 
   const saveAuth = async (value) => {
     setUser(value);
