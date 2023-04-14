@@ -180,6 +180,30 @@ function App(props) {
           <Route path={"/use"} exact={true}>
             <NearOrgPage {...passProps} src={Widgets.nearOrg.usePage} />
           </Route>
+          <Route path={"/ecosystem"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemOverviewPage}
+            />
+          </Route>
+          <Route path={"/ecosystem/community"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemCommunityPage}
+            />
+          </Route>
+          <Route path={"/ecosystem/get-funding"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemGetFundingPage}
+            />
+          </Route>
+          <Route path={"/ecosystem/work-and-earn"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
+            />
+          </Route>
 
           {/* Discovery Pages: */}
           <Route path={"/embed/:widgetSrc*"}>
