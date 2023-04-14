@@ -85,7 +85,7 @@ export default function HomeTopSection() {
             }}
           >
             {/* Web3 Dev Toolkit */}
-            Build a web3 app faster with reusable components
+            Build web3 apps without limits
             {/* nearpad */}
           </Typography>
           <Typography
@@ -97,8 +97,8 @@ export default function HomeTopSection() {
               color: theme.textColor,
             }}
           >
-            Everything you need to connect your apps or <br />
-            games to decentralized networks.
+            nearpad help developers build, deploy, share and monetize reusable
+            web3 contracts and ui components
           </Typography>
 
           {/* <Typography
@@ -193,7 +193,7 @@ export default function HomeTopSection() {
         <Box className="player-wrapper">
           <ReactPlayer
             className="react-player"
-            url="https://youtu.be/CQwye_RdOt8"
+            url="https://youtu.be/et_QcL1xffU"
             // config={{ youtube: { playerVars: { controls: 1 } } }}
             controls={false}
             width="100%"

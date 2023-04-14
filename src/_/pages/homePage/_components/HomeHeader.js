@@ -59,7 +59,7 @@ export default function HomeHeader() {
             justifyContent: "center",
           }}
         >
-          <Link to="editor" style={{ textDecoration: "none" }}>
+          {/* <Link to="editor" style={{ textDecoration: "none" }}>
             <HeaderButton>Editor</HeaderButton>
           </Link>
 
@@ -69,7 +69,7 @@ export default function HomeHeader() {
 
           <Link to="#" style={{ textDecoration: "none" }}>
             <HeaderButton>Documentation</HeaderButton>
-          </Link>
+          </Link> */}
 
           {!uesr && (
             <>

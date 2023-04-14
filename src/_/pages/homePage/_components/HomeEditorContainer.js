@@ -38,7 +38,7 @@ export default function HomeEditorContainer() {
         >
           Get started by editing the code below,
           <br />
-          then see your changes on your own device.
+          then see your changes on the preview.
         </Typography>
       </Box>
 
@@ -62,9 +62,46 @@ export default function HomeEditorContainer() {
           }}
         >
           <VerticalCodePreview
-            initialCode="return(<div style={{backgroundColor: props.theme.ui }}><h1 style={{color: props.theme.textColor}}>Hello World</h1></div>)"
+            //initialCode="return(<div style={{backgroundColor: props.theme.ui }}><h1 style={{color: props.theme.textColor}}>Hello World</h1></div>)"
             // horizontal={bp ? false : true}
             horizontal
+            initialCode={`
+            // User account in near testnet
+const accountId = "storyboard.testnet";
+// Get data from near social contract
+const profile = Social.getr(\`\${accountId}/profile\`);
+
+const { name, description, image } = profile;
+// get image from ipfs
+const url = image.ipfs_cid && \`https://ipfs.near.social/ipfs/\${image.ipfs_cid}\`;
+
+return (
+  <div
+    style={{
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignItems: "center",
+    }}
+  >
+    <div style={{ width: "8em", height: "8em" }}>
+      <img
+        style={{
+          maxHeight: 100,
+        }}
+        src={url}
+        alt="profile image"
+      />
+    </div>
+
+    <h1 style={{ color: props.theme.textColor }}>{profile.name}</h1>
+    {profile.description.split("\\n").map((x) => (
+      <div>{x}</div>
+    ))}
+  </div>
+);
+
+            `}
           />
         </Box>
       </Box>
@@ -96,7 +133,7 @@ export default function HomeEditorContainer() {
               borderRadius: 5,
             }}
           >
-            See it on your device
+            See it on the preview
           </Typography>
 
           <svg

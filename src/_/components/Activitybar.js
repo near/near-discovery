@@ -5,6 +5,8 @@ import HelpOutlineRoundedIcon from "@mui/icons-material/HelpOutlineRounded";
 import WifiRoundedIcon from "@mui/icons-material/WifiRounded";
 import MenuBookOutlinedIcon from "@mui/icons-material/MenuBookOutlined";
 import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
+import WidgetsRoundedIcon from "@mui/icons-material/WidgetsRounded";
+import CellTowerRoundedIcon from "@mui/icons-material/CellTowerRounded";
 
 import LightModeIcon from "@mui/icons-material/LightMode";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
@@ -82,7 +84,7 @@ export default function Activitybar(props) {
 
         <ActivityButton
           icon={
-            <SearchRoundedIcon
+            <WidgetsRoundedIcon
               sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
             />
           }
@@ -96,7 +98,7 @@ export default function Activitybar(props) {
 
         <ActivityButton
           icon={
-            <WifiRoundedIcon
+            <CellTowerRoundedIcon
               sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
             />
           }
@@ -109,7 +111,7 @@ export default function Activitybar(props) {
             );
           }}
         />
-        {process.env.FEATURE_TOGGLE && (
+        {/* {process.env.FEATURE_TOGGLE && (
           <>
             <ActivityButton
               icon={
@@ -156,22 +158,21 @@ export default function Activitybar(props) {
                 setSelectedActivity((e) => (e === "chat" ? "" : "chat"));
               }}
             />
-
-            <ActivityButton
-              icon={
-                <MenuBookOutlinedIcon
-                  sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
-                />
-              }
-              label="learn"
-              to="/learn"
-              onClick={() => {
-                history.push("/learn");
-                setSelectedActivity((e) => (e === "learn" ? "" : "learn"));
-              }}
-            />
           </>
-        )}
+        )} */}
+        <ActivityButton
+          icon={
+            <MenuBookOutlinedIcon
+              sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
+            />
+          }
+          label="learn"
+          to="/learn"
+          onClick={() => {
+            history.push("/learn");
+            setSelectedActivity((e) => (e === "learn" ? "" : "learn"));
+          }}
+        />
       </div>
 
       <div>
@@ -194,7 +195,7 @@ export default function Activitybar(props) {
           />
         )}
 
-        <ActivityButton
+        {/* <ActivityButton
           icon={
             <HelpOutlineRoundedIcon
               sx={{ fill: theme.textColor4, fontSize: "1.5rem" }}
@@ -202,7 +203,7 @@ export default function Activitybar(props) {
           }
           label="Documentation"
           onClick={() => {}}
-        />
+        /> */}
 
         <ActivityButton
           icon={
@@ -259,7 +260,7 @@ export default function Activitybar(props) {
               </div>
             ) : (
               <img
-                height={30}
+                height={20}
                 src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
                 alt="profile-art"
               />
