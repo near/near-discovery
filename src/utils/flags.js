@@ -12,6 +12,8 @@ export function useFlags() {
       const updated = { ...f, ...newFlags };
       localStorage.setItem("flags", JSON.stringify(updated));
 
+      alert("Saved flags");
+
       // reload for changes to take effect
       location.reload();
 
