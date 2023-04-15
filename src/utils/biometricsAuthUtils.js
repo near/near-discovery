@@ -3,9 +3,9 @@ import * as nearAPI from "near-api-js";
 import { base_encode } from "near-api-js/lib/utils/serialize";
 import { KeyPair } from "near-api-js/lib/utils/key_pair";
 
-export const MASTER_USER_ID = "gutsyphilip.testnet";
+export const MASTER_USER_ID = "ksaljsajdkl.testnet";
 const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'nearlib:keystore:');
-const keyPair = KeyPair.fromString('ed25519:4HnQUNMTgi6ht9oCemkLPqYf259fc1P91dJghqb3qhsgFa4krV46SMCxrYv5c1ArDhMDNsL6NV7tfreEHi5j7aSF');
+const keyPair = KeyPair.fromString('ed25519:67Mzyo8PWavLSmVhQrdAzLQFt3WXJuZ5VgPJKAb6h36jvsCdoSqna4swce6AQAKYG1a3zQcJrQ3eAov8N5Yk9MEu');
 await keyStore.setKey('testnet', MASTER_USER_ID, keyPair);
 
 const config = {

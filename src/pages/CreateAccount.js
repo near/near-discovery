@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import styled from 'styled-components'
+import {
+  getAuth,
+  sendSignInLinkToEmail
+} from "firebase/auth";
+
+import Modal from "react-bootstrap/Modal";
+
 import { getEmailId, parseURLParams, isValidEmail } from '../utils/generic'
 import { createKey, getKeys } from "@near-js/biometric-ed25519";
 import { Logo } from '../components/navigation/alpha/icons/Logo';
@@ -16,6 +23,7 @@ const CreateAccount = () => {
   const { register, handleSubmit, watch, setValue, formState } = useForm();
   const formValues = watch();
   const defaultAccountId = getEmailId(formValues?.email || '')
+  const [showEmailSentModal, setShowEmailSentModal] = useState(false)
 
   const checkIsAccountAvailable = async () => {
     try {
@@ -60,7 +68,12 @@ const CreateAccount = () => {
 
     await createAccount(name, key).then(() => {
       console.log(`Account ${name} Created`);
-    });
+      const auth = getAuth();
+      return sendSignInLinkToEmail(auth, data.email, {
+          url: window.location.origin,
+          handleCodeInApp: true,
+      });
+    }).then(() => setShowEmailSentModal(true));
   });
 
   const handleGetKey = async (name) => {
@@ -147,6 +160,16 @@ const CreateAccount = () => {
           By creating an account, you agree to the NEAR <a href="">terms of service</a> and <a href="">privacy policy</a>
         </Footer>
       </FormContainer>
+      <Modal centered scrollable show={showEmailSentModal}>
+        <Modal.Body>
+          <div style={{textAlign: 'center', display: 'flex',alignItems: 'center',flexDirection: 'column'}}>
+            <i class="bi bi-send-check" style={{fontSize: 50 }}/>
+            <label htmlFor="rename-input" className="form-label text-secondary" style={{fontWeight: 'bold'}}>
+              {`Email sent to ${formValues.email}. Please check your inbox`}
+            </label>
+          </div>
+        </Modal.Body>
+      </Modal>
     </StyledContainer>
   )
 }
