@@ -1,17 +1,16 @@
 import React, { useContext } from "react";
 
-import HomeFeatureSection from "./_components/HomeFeatureSection";
 import HomeTopSection from "./_components/HomeTopSection";
 import HomeFooter from "./_components/HomeFooter";
 import { ThemeContext } from "../../context/ThemeContext";
 import { useParams } from "react-router-dom";
 import ViewPage from "../../../pages/ViewPage";
 import HomeHeader from "./_components/HomeHeader";
-import VerticalCodePreview from "../../components/VerticalCodePreview";
-import { Box } from "@mui/material";
 import HomeEditorContainer from "./_components/HomeEditorContainer";
 import HomeOurPartnersSection from "./_components/HomeOurPartnersSection";
 import HomeTestimonialSection from "./_components/HomeTestimonialSection";
+import { Widget } from "near-social-vm";
+import { Box } from "@mui/material";
 
 export default function HomePage(props) {
   const { widgetSrc } = useParams();
@@ -56,6 +55,20 @@ export default function HomePage(props) {
       />*/}
       <HomeTestimonialSection />
 
+      <Box className="containerCSS" sx={{ py: 10 }}>
+        <Box className="contentCSS">
+          <Widget src="near/widget/PeoplePage" />
+        </Box>
+      </Box>
+
+      <Box
+        className="containerCSS"
+        sx={{ py: 10, backgroundColor: theme.backgroundColor }}
+      >
+        <Box className="contentCSS">
+          <Widget src="near/widget/ComponentsPage" />
+        </Box>
+      </Box>
       <HomeFooter />
     </>
   );

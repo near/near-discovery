@@ -13,6 +13,8 @@ import { Masonry } from "@mui/lab";
 
 const testimonies = [
   {
+    avatar:
+      "https://media.licdn.com/dms/image/D5603AQFAD7VUMRWjhA/profile-displayphoto-shrink_800_800/0/1676761041893?e=1686787200&v=beta&t=RRyezTibAVSZEKgK4ZLy1fAd-5_HcOgS_PaxT-D64iU",
     fullName: "Saidul Badhon",
     username: "@saidulbadhon.near",
     quote: `Hey, chooms! After patch 1.62 for 
@@ -30,6 +32,8 @@ const testimonies = [
     quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
   },
   {
+    avatar:
+      "https://media.licdn.com/dms/image/D5603AQFAD7VUMRWjhA/profile-displayphoto-shrink_800_800/0/1676761041893?e=1686787200&v=beta&t=RRyezTibAVSZEKgK4ZLy1fAd-5_HcOgS_PaxT-D64iU",
     fullName: "Saidul Badhon",
     username: "@saidulbadhon.near",
     quote: `Hey, chooms! After patch 1.62 for 
@@ -62,6 +66,8 @@ const testimonies = [
     quote: `OK, one thing, if I may. Is this happening also to other people using the Overdrive only for the PM? Some shots look good, others have this weird "granular" quality to them ... IDK.`,
   },
   {
+    avatar:
+      "https://media.licdn.com/dms/image/D5603AQFAD7VUMRWjhA/profile-displayphoto-shrink_800_800/0/1676761041893?e=1686787200&v=beta&t=RRyezTibAVSZEKgK4ZLy1fAd-5_HcOgS_PaxT-D64iU",
     fullName: "Saidul Badhon",
     username: "@saidulbadhon.near",
     quote: `Hey, chooms! After patch 1.62 for 
