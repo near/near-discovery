@@ -72,7 +72,7 @@ export default function VerticalCodePreview({ initialCode, horizontal }) {
       </Allotment.Pane>
 
       <Allotment.Pane priority={1} style={{ flex: 1, height: "100vh" }}>
-        <LearnPageHeader title="Prevew" />
+        <LearnPageHeader title="Preview" />
         <Box
           sx={{
             flex: 1,
