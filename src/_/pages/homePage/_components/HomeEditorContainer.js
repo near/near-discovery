@@ -2,9 +2,11 @@ import React, { useContext } from "react";
 import { ThemeContext } from "../../../context/ThemeContext";
 import { Box, Typography } from "@mui/material";
 import VerticalCodePreview from "../../../components/VerticalCodePreview";
+import { EditorContext } from "../../../context/EditorContext";
 
 export default function HomeEditorContainer() {
   const { theme, bp } = useContext(ThemeContext);
+  const { NetworkId } = useContext(EditorContext);
 
   return (
     <Box
@@ -67,7 +69,11 @@ export default function HomeEditorContainer() {
             horizontal={bp ? false : true}
             initialCode={`
             // User account in near testnet
-const accountId = "storyboard.testnet";
+const accountId = "${
+              NetworkId === "testnet"
+                ? "storyboard.testnet"
+                : "zahidulislam.near"
+            }";
 // Get data from near social contract
 const profile = Social.getr(\`\${accountId}/profile\`);
 
