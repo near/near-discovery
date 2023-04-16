@@ -448,15 +448,17 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
               <div className="row">
                 <div className={layoutClass}>
                   <div style={{ display: "flex" }}>
-                    <Tabs
-                      isModule={isModule}
-                      tab={tab}
-                      setTab={setTab}
-                      widgets={widgets}
-                      layout={layout}
-                      setRenderCode={setRenderCode}
-                      code={code}
-                    />
+                    <div style={{ display: "flex" }}>
+                      <Tabs
+                        isModule={isModule}
+                        tab={tab}
+                        setTab={setTab}
+                        widgets={widgets}
+                        layout={layout}
+                        setRenderCode={setRenderCode}
+                        code={code}
+                      />
+                    </div>
                     <NavigationSub
                       layout={layout}
                       path={path}
@@ -469,7 +471,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
                       setLayoutState={setLayoutState}
                     />
                   </div>
-
                   <TabEditor
                     tab={tab}
                     code={code}
@@ -492,24 +493,39 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
                     setMetadata={setMetadata}
                   />
                 </div>
-                <Preview
-                  tab={tab}
-                  layout={layout}
-                  layoutClass={layoutClass}
-                  renderCode={renderCode}
-                  jpath={jpath}
-                  parsedWidgetProps={parsedWidgetProps}
-                  isModule={isModule}
-                />
-                <PreviewMetadata
-                  tab={tab}
-                  layoutClass={layoutClass}
-                  jpath={jpath}
-                  widgets={widgets}
-                  metadata={metadata}
-                  accountId={accountId}
-                  widgetName={widgetName}
-                />
+                <div className={layoutClass}>
+                  <div className="row">
+                    <NavigationSub
+                      layout={layout}
+                      path={path}
+                      accountId={accountId}
+                      renderCode={renderCode}
+                      tab={tab}
+                      widgetPath={widgetPath}
+                      setRenderCode={setRenderCode}
+                      setTab={setTab}
+                      setLayoutState={setLayoutState}
+                    />
+                    <Preview
+                      tab={tab}
+                      layout={layout}
+                      layoutClass={layoutClass}
+                      renderCode={renderCode}
+                      jpath={jpath}
+                      parsedWidgetProps={parsedWidgetProps}
+                      isModule={isModule}
+                    />
+                    <PreviewMetadata
+                      tab={tab}
+                      layoutClass={layoutClass}
+                      jpath={jpath}
+                      widgets={widgets}
+                      metadata={metadata}
+                      accountId={accountId}
+                      widgetName={widgetName}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
