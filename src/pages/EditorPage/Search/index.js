@@ -1,14 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-import {
-  Widget,
-  useCache,
-  useNear,
-  CommitButton,
-  useAccountId,
-} from "near-social-vm";
-import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
+import React, { useMemo } from "react";
+import { Widget } from "near-social-vm";
+import { OverlayTrigger, Tooltip } from "react-bootstrap";
 
-export default function Search({ widgets, tos, logOut, loadAndOpenFile }) {
+const Search = ({ widgets, tos, logOut, loadAndOpenFile }) => {
   return (
     <>
       {widgets.editorComponentSearch && (
@@ -53,4 +47,6 @@ export default function Search({ widgets, tos, logOut, loadAndOpenFile }) {
       )}
     </>
   );
-}
+};
+
+export default Search;

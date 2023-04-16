@@ -1,15 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React from "react";
 import Editor from "@monaco-editor/react";
 import { Tab } from "../utils/const";
 
-export default function TabEditor({
-  tab,
-  code,
-  widgetPath,
-  updateCode,
-  path,
-  reformat,
-}) {
+const TabEditor = ({ tab, code, widgetPath, updateCode, path, reformat }) => {
   return (
     <div className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}>
       <div
@@ -29,4 +22,6 @@ export default function TabEditor({
       <div className="mb-3 d-flex gap-2 flex-wrap"></div>
     </div>
   );
-}
+};
+
+export default TabEditor;

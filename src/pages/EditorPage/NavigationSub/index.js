@@ -4,7 +4,7 @@ import { EditorLayoutKey, Layout, Tab } from "../utils/const";
 import OpenInNewTabButton from "../Buttons/OpenInNewTabButton";
 import RenderPreviewButton from "../Buttons/RenderPreviewButton";
 
-export default function NavigationSub({
+const NavigationSub = ({
   layout,
   path,
   accountId,
@@ -14,9 +14,8 @@ export default function NavigationSub({
   setRenderCode,
   setTab,
   setLayoutState,
-}) {
+}) => {
   const onLayoutChange = (e) => {
-    console.log("X1");
     const layout = e.target.value;
     if (layout === Layout.Split && tab === Tab.Widget) {
       setTab(Tab.Editor);
@@ -86,4 +85,6 @@ export default function NavigationSub({
       </div>
     </>
   );
-}
+};
+
+export default NavigationSub;

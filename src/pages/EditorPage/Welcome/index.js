@@ -2,7 +2,7 @@ import React from "react";
 import AddModalContent from "../Modals/AddModalContent";
 import { ModalTypes } from "../utils/const";
 
-export default function Welcome({ setShowModal, createFile, showEditor }) {
+const Welcome = ({ setShowModal, createFile, showEditor }) => {
   const handleNew = (type) => {
     createFile(type);
     setShowModal(ModalTypes.RenameModal);
@@ -31,4 +31,6 @@ export default function Welcome({ setShowModal, createFile, showEditor }) {
       </div>
     </div>
   );
-}
+};
+
+export default Welcome;
