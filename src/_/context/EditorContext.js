@@ -33,7 +33,7 @@ export const EditorContextProvider = (props) => {
 
     localStorage.setItem("environment", value);
 
-    location.reload();
+    // location.reload();
   };
 
   useEffect(() => {

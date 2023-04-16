@@ -18,6 +18,7 @@ import PlayArrowRoundedIcon from "@mui/icons-material/PlayArrowRounded";
 // import ShareRoundedIcon from "@mui/icons-material/ShareRounded";
 // import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 import Brightness4RoundedIcon from "@mui/icons-material/Brightness4Rounded";
+import VisibilityRoundedIcon from "@mui/icons-material/VisibilityRounded";
 
 import { ThemeContext } from "../../../../context/ThemeContext";
 import { EditorContext } from "../../../../context/EditorContext";
@@ -68,7 +69,14 @@ export default function WidgetViewHeader({
             sx={{ color: theme.buttonTextColor }}
             onClick={() => setShowLiveCodePreview((e) => !e)}
           >
-            <img
+            <VisibilityRoundedIcon
+              sx={{
+                fill: showLiveCodePreview
+                  ? theme.buttonColor
+                  : theme.textColor2,
+              }}
+            />
+            {/* <img
               style={{
                 height: 20,
                 filter: showLiveCodePreview ? "invert(0)" : "invert(1)",
@@ -79,7 +87,7 @@ export default function WidgetViewHeader({
                   : "https://cdn-icons-png.flaticon.com/512/8064/8064583.png"
               }
               alt="live icon"
-            />
+            /> */}
           </IconButton>
         </Tooltip>
 

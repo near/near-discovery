@@ -96,6 +96,9 @@ export default function EditorPage(props) {
     // Delay in ms
     500
   );
+
+  console.log(files);
+
   // END OF _ CODES
 
   const { widgetSrc } = useParams();

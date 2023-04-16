@@ -115,7 +115,7 @@ export function DesktopNavigation(props) {
           <DiamondRoundedIcon sx={{ fill: "#FFF" }} />
         </Link>
         <div className="form-wrapper">
-          <form
+          {/* <form
             onSubmit={(e) => {
               e.preventDefault();
               history.push(
@@ -130,15 +130,15 @@ export function DesktopNavigation(props) {
               onBlur={() => setSearchInputFocus(false)}
             />
           </form>
-          {searchInputFocus && <Return />}
+          {searchInputFocus && <Return />} */}
         </div>
         <div className="navigation-section">
-          <NavigationButton
+          {/* <NavigationButton
             onMouseEnter={() => setMenuDropdown(false)}
             route="/"
           >
             Home
-          </NavigationButton>
+          </NavigationButton> */}
           {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
             Discover
           </NavDropdownButton>

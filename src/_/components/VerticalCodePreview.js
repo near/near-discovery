@@ -14,9 +14,15 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 
-export default function VerticalCodePreview({ initialCode, horizontal }) {
+export default function VerticalCodePreview({
+  initialCode,
+  horizontal,
+  preview = true,
+}) {
   const { theme, editorFontSize } = useContext(ThemeContext);
   const { enqueueSnackbar } = useSnackbar();
+
+  console.log("initialCode : ", initialCode);
 
   const [code, setCode] = useState("");
 
@@ -71,7 +77,11 @@ export default function VerticalCodePreview({ initialCode, horizontal }) {
         />
       </Allotment.Pane>
 
-      <Allotment.Pane priority={1} style={{ flex: 1, height: "100vh" }}>
+      <Allotment.Pane
+        priority={1}
+        visible={preview}
+        style={{ flex: 1, height: "100vh" }}
+      >
         <LearnPageHeader title="Preview" />
         <Box
           sx={{

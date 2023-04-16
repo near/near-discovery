@@ -11,10 +11,17 @@ import HomeOurPartnersSection from "./_components/HomeOurPartnersSection";
 import HomeTestimonialSection from "./_components/HomeTestimonialSection";
 import { Widget } from "near-social-vm";
 import { Box } from "@mui/material";
+import { EditorContext } from "../../context/EditorContext";
+import { useEffect } from "react";
 
 export default function HomePage(props) {
   const { widgetSrc } = useParams();
   const { theme, bp } = useContext(ThemeContext);
+  const { setNetworkId } = useContext(EditorContext);
+
+  useEffect(() => {
+    setNetworkId("mainnet");
+  }, []);
 
   return widgetSrc ? (
     <ViewPage {...props} />
