@@ -19,15 +19,15 @@ const VsCodeLink = styled("a")`
 `;
 
 export default function VsCodeBanner({ accountId }) {
-  let ideLink = "vscode:extension/near-protocol.near-discovery-ide";
-  if (accountId) {
-    ideLink += `?account_id=${accountId}`;
-  }
+  let ideLink = `vscode:extension/near-protocol.near-discovery-ide${
+    accountId ? `?account_id=${accountId}` : ``
+  }`;
+
   return (
     <Wrapper className="d-flex align-center justify-content-center">
       <img src={VsCodeIcon} />
       <Text>
-        Prefer to work locally?&nbsp;
+        Prefer to work locally?
         <VsCodeLink href={ideLink} target="_blank" rel="noopener noreferrer">
           Download our VSCode Extension.
         </VsCodeLink>
