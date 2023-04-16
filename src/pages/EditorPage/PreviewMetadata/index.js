@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useMemo } from "react";
 import { Widget } from "near-social-vm";
-import { Tab } from "./utils/const";
+import { Tab } from "../utils/const";
 
 export default function PreviewMetadata({
   tab,
-  layoutClass,
   jpath,
   widgets,
   metadata,
@@ -12,9 +11,7 @@ export default function PreviewMetadata({
   widgetName,
 }) {
   return (
-    <div
-      className={`${tab === Tab.Metadata ? layoutClass : "visually-hidden"}`}
-    >
+    <div className={`${tab === Tab.Metadata ? "" : "visually-hidden"}`}>
       <div className="container" style={{ marginTop: "50px" }}>
         <div className="row">
           <div className="d-inline-block position-relative overflow-hidden">
