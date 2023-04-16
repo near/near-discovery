@@ -37,12 +37,9 @@ export const SaveDraftModal = ({
     },
   };
 
-  const handleMessage = (e) => {
-    setCommitMessage(e.target.value);
-  };
+  const handleMessage = (e) => setCommitMessage(e.target.value);
 
-  const onCancel = (e) => {
-    e.preventDefault();
+  const onCancel = () => {
     setCommitMessage("");
     onHide();
   };

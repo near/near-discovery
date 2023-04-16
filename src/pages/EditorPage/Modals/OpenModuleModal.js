@@ -9,8 +9,7 @@ export default function OpenModuleModal({ onHide, onConfirm, showModal }) {
     setNameOrPath(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-\/]/g, ""));
   };
 
-  const handleConfirm = (e) => {
-    e.preventDefault();
+  const handleConfirm = () => {
     onConfirm(nameOrPath, Filetype.Module);
     setNameOrPath("");
     onHide();
