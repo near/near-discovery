@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Widget } from "near-social-vm";
-import { Tab } from "./utils/const";
+import { Tab } from "../utils/const";
 
 export default function TabMetadata({
   tab,

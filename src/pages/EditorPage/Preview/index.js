@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Widget } from "near-social-vm";
-import { Tab, Layout } from "./utils/const";
-import RenderPreviewButton from "./buttons/RenderPreviewButton";
+import { Tab, Layout } from "../utils/const";
+import RenderPreviewButton from "../buttons/RenderPreviewButton";
 
 export default function Preview({
   tab,
@@ -18,7 +18,7 @@ export default function Preview({
     <div
       className={`${
         tab === Tab.Widget || (layout === Layout.Split && tab !== Tab.Metadata)
-          ? layoutClass
+          ? ""
           : "visually-hidden"
       }`}
     >
