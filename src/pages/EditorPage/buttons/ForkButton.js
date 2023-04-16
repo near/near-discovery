@@ -1,15 +1,9 @@
 import React from "react";
 import { Filetype } from "../utils/const";
 
-export default function ForkButton({ widgetName, code, openFile, toPath }) {
+export default function ForkButton({ widgetName, code, forkFile, toPath }) {
   return (
-    <button
-      className="btn btn-outline-primary me-2"
-      onClick={() => {
-        const forkName = widgetName + "-fork";
-        openFile(toPath(Filetype.Widget, forkName), code);
-      }}
-    >
+    <button className="btn btn-outline-primary me-2" onClick={() => forkFile()}>
       Fork
     </button>
   );

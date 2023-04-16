@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { Filetype } from "../utils/const";
+import { Filetype, ModalTypes } from "../utils/const";
 
-export default function OpenModal({ onHide, onConfirm, show }) {
+export default function OpenModal({ onHide, onConfirm, showModal }) {
   const [widgetSrc, setWidgetSrc] = useState("");
 
   const handleSetNewName = (e) => {
@@ -17,7 +17,12 @@ export default function OpenModal({ onHide, onConfirm, show }) {
   };
 
   return (
-    <Modal centered scrollable show={show} onHide={onHide}>
+    <Modal
+      centered
+      scrollable
+      show={showModal === ModalTypes.CreateModal}
+      onHide={onHide}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Create New Component</Modal.Title>
       </Modal.Header>

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { ModalTypes } from "../utils/const";
 
-export default function RenameModal({ key, show, name, onRename, onHide }) {
+export default function RenameModal({ showModal, name, onRename, onHide }) {
   const [newName, setNewName] = useState(name);
 
   const handleSetNewName = (e) => {
@@ -15,7 +16,12 @@ export default function RenameModal({ key, show, name, onRename, onHide }) {
   };
 
   return (
-    <Modal centered scrollable show={show} onHide={onHide}>
+    <Modal
+      centered
+      scrollable
+      show={showModal === ModalTypes.RenameModal}
+      onHide={onHide}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Rename Component</Modal.Title>
       </Modal.Header>

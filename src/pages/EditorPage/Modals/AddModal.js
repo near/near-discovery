@@ -1,28 +1,29 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
-import { Filetype } from "../utils/const";
+import { Filetype, ModalTypes } from "../utils/const";
 
 export default function AddModal({
   onHide,
-  onOpenComponent,
-  onNewComponent,
-  show,
-  onNewModule,
-  onOpenModule,
-  createNewFile,
+  showModal,
+  setShowModal,
+  createFile,
 }) {
   const handleOpen = (open) => {
-    onHide();
-    open(true);
+    setShowModal(open);
   };
 
-  const handleNew = (type, open) => {
-    createNewFile(type);
-    handleOpen(open);
+  const handleNew = (type) => {
+    createFile(type);
+    setShowModal(ModalTypes.RenameModal);
   };
 
   return (
-    <Modal centered scrollable show={show} onHide={onHide}>
+    <Modal
+      centered
+      scrollable
+      show={showModal === ModalTypes.AddModal}
+      onHide={onHide}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Add a Component or Module</Modal.Title>
       </Modal.Header>
@@ -33,13 +34,13 @@ export default function AddModal({
         <div class="btn-group w-100" role="group" aria-label="Basic example">
           <button
             className="btn btn-outline-success w-50 mr-5"
-            onClick={() => handleOpen(onOpenComponent)}
+            onClick={() => handleOpen(ModalTypes.OpenModal)}
           >
             Open Component
           </button>
           <button
             className="btn btn-success w-50"
-            onClick={() => handleNew(Filetype.Widget, onNewComponent)}
+            onClick={() => handleNew(Filetype.Widget)}
           >
             Create New Component
           </button>
@@ -48,13 +49,13 @@ export default function AddModal({
         <div class="btn-group w-100" role="group" aria-label="Basic example">
           <button
             className="btn btn-outline-primary w-50 mr-5"
-            onClick={() => handleOpen(onOpenModule)}
+            onClick={() => handleOpen(ModalTypes.OpenModuleModal)}
           >
             Open Module
           </button>
           <button
             className="btn btn-primary w-50"
-            onClick={() => handleNew(Filetype.Module, onNewModule)}
+            onClick={() => handleNew(Filetype.Module)}
           >
             Create New Module
           </button>

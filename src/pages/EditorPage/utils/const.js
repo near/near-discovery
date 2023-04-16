@@ -31,3 +31,12 @@ export const Layout = {
   Tabs: "Tabs",
   Split: "Split",
 };
+
+export const ModalTypes = {
+  RenameModal: "RenameModal",
+  OpenModal: "OpenModal",
+  OpenModuleModal: "OpenModuleModal",
+  AddModal: "AddModal",
+  CreateModal: "CreateModal",
+  SaveDraftModal: "SaveDraftModal",
+};

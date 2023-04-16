@@ -53,22 +53,19 @@ const TopMenu = styled.div`
 
 export default function Navigation({
   jpath,
-  openFile,
+  forkFile,
   files,
-  createNewFile,
   widgetName,
   code,
   toPath,
-  setShowRenameModal,
-  setShowAddModal,
   near,
   path,
   metadata,
-  setShowSaveDraftModal,
-  setFiles,
-  setLastPath,
   filesOpened,
-  removeFromFiles,
+  closeFile,
+  setShowModal,
+  isDraft,
+  changeFile,
 }) {
   return (
     <>
@@ -77,9 +74,9 @@ export default function Navigation({
           <Nav
             variant="pills mb-2 mt-2"
             activeKey={jpath}
-            onSelect={(key) => openFile(JSON.parse(key))}
+            onSelect={(key) => changeFile(JSON.parse(key))}
           >
-            {files?.map((p, idx) => {
+            {files?.map((p) => {
               if (p.unnamed) {
                 return;
               }
@@ -118,7 +115,7 @@ export default function Navigation({
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();
-                          removeFromFiles(p);
+                          closeFile(p);
                         }}
                       >
                         <i className="bi bi-x"></i>
@@ -129,8 +126,8 @@ export default function Navigation({
               );
             })}
             <Nav.Item className="me-1">
-              <OpenCreateButton setShowAddModal={setShowAddModal} />
-              <RenameButton setShowRenameModal={setShowRenameModal} />
+              <OpenCreateButton setShowModal={setShowModal} />
+              <RenameButton setShowModal={setShowModal} />
             </Nav.Item>
           </Nav>
         </div>
@@ -138,24 +135,20 @@ export default function Navigation({
           className="d-flex ms-auto"
           style={{ minWidth: "280px", flexWrap: "wrap" }}
         >
-          <Nav
-            variant="pills mb-2 mt-2 ms-auto"
-            activeKey={jpath}
-            onSelect={(key) => openFile(JSON.parse(key))}
-          >
+          <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
             <Nav.Item className="">
               <SaveDraftButton
                 widgetName={widgetName}
-                setShowSaveDraftModal={setShowSaveDraftModal}
+                setShowModal={setShowModal}
               />
               <ForkButton
                 widgetName={widgetName}
                 code={code}
-                openFile={openFile}
+                forkFile={forkFile}
                 toPath={toPath}
               />
 
-              {/* {fileOpened?.isDraft ? (
+              {isDraft ? (
                 <PublishDraftAsMainButton
                   widgetName={widgetName}
                   near={near}
@@ -171,7 +164,7 @@ export default function Navigation({
                   code={code}
                   metadata={metadata}
                 />
-              )} */}
+              )}
             </Nav.Item>
           </Nav>
         </div>
