@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Modal from "react-bootstrap/Modal";
 import { Filetype, ModalTypes } from "../utils/const";
 
@@ -8,10 +8,6 @@ export default function AddModal({
   setShowModal,
   createFile,
 }) {
-  const handleOpen = (open) => {
-    setShowModal(open);
-  };
-
   const handleNew = (type) => {
     createFile(type);
     setShowModal(ModalTypes.RenameModal);
@@ -34,7 +30,7 @@ export default function AddModal({
         <div class="btn-group w-100" role="group" aria-label="Basic example">
           <button
             className="btn btn-outline-success w-50 mr-5"
-            onClick={() => handleOpen(ModalTypes.OpenModal)}
+            onClick={() => setShowModal(ModalTypes.OpenModal)}
           >
             Open Component
           </button>
@@ -49,7 +45,7 @@ export default function AddModal({
         <div class="btn-group w-100" role="group" aria-label="Basic example">
           <button
             className="btn btn-outline-primary w-50 mr-5"
-            onClick={() => handleOpen(ModalTypes.OpenModuleModal)}
+            onClick={() => setShowModal(ModalTypes.OpenModuleModal)}
           >
             Open Module
           </button>
