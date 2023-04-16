@@ -1,22 +1,28 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { Filetype, ModalTypes } from "../utils/const";
 
-export default function OpenModal({ onHide, onConfirm, show }) {
-  const [widgetSrc, setWidgetSrc] = useState("");
+export default function OpenModal({ onHide, onConfirm, showModal }) {
+  const [nameOrPath, setNameOrPath] = useState("");
 
   const handleInput = (e) => {
-    setWidgetSrc(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-\/]/g, ""));
+    setNameOrPath(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-\/]/g, ""));
   };
 
   const handleConfirm = (e) => {
     e.preventDefault();
-    onConfirm(widgetSrc);
-    setWidgetSrc("");
+    onConfirm(nameOrPath, Filetype.Widget);
+    setNameOrPath("");
     onHide();
   };
 
   return (
-    <Modal centered scrollable show={show} onHide={onHide}>
+    <Modal
+      centered
+      scrollable
+      show={showModal === ModalTypes.OpenModal}
+      onHide={onHide}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Open a Component</Modal.Title>
       </Modal.Header>
@@ -28,14 +34,14 @@ export default function OpenModal({ onHide, onConfirm, show }) {
           className="form-control"
           id="widget-src-input"
           type="text"
-          value={widgetSrc}
+          value={nameOrPath}
           onChange={handleInput}
         />
       </Modal.Body>
       <Modal.Footer>
         <button
           className="btn btn-success"
-          disabled={!widgetSrc}
+          disabled={!nameOrPath}
           onClick={handleConfirm}
         >
           Open

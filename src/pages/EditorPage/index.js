@@ -17,7 +17,6 @@ import TabProps from "./TabProps";
 import TabMetadata from "./TabMetadata";
 import Preview from "./Preview";
 import PreviewMetadata from "./PreviewMetadata";
-
 import {
   EditorLayoutKey,
   WidgetPropsKey,
@@ -32,22 +31,21 @@ import {
   generateNewName,
   getDefaultCode,
   getSrcByNameOrPath,
+  getWidgetDetails,
   toPath,
 } from "./utils/editor";
 
 export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
+  const near = useNear();
+  const cache = useCache();
+  const accountId = useAccountId();
+  const { widgetSrc } = useParams();
+
+  // component state
   const [code, setCode] = useState(undefined);
   const [path, setPath] = useState(undefined);
   const [files, setFiles] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
-  const [showRenameModal, setShowRenameModal] = useState(false);
-  const [showSaveDraftModal, setShowSaveDraftModal] = useState(false);
-
-  const [showAddModal, setShowAddModal] = useState(false);
-  const [showOpenModal, setShowOpenModal] = useState(false);
-  const [showOpenModuleModal, setShowOpenModuleModal] = useState(false);
-  const [showCreateModal, setShowCreateModal] = useState(false);
-
   const [renderCode, setRenderCode] = useState(code);
   const [widgetProps, setWidgetProps] = useState(
     ls.get(WidgetPropsKey) || "{}"
@@ -55,38 +53,25 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   const [parsedWidgetProps, setParsedWidgetProps] = useState({});
   const [propsError, setPropsError] = useState(null);
   const [metadata, setMetadata] = useState(undefined);
-
-  const [filesOpened, setFilesOpened] = useState([]);
-
+  const [showModal, setShowModal] = useState(null);
+  const [filesOpened, setFilesOpened] = useState();
   const [tab, setTab] = useState(Tab.Editor);
   const [layout, setLayoutState] = useState(
     ls.get(EditorLayoutKey) || Layout.Tabs
   );
 
-  const { widgetSrc } = useParams();
-
-  const near = useNear();
-  const cache = useCache();
-  const accountId = useAccountId();
   const widgetName = path?.name?.split("/")[0];
-
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
   const jpath = JSON.stringify(path);
-
+  const fileDetails = filesOpened?.find((file) => {
+    if (jpath === JSON.stringify({ type: file.type, name: file.name })) {
+      return true;
+    }
+  });
+  const isDraft = fileDetails?.isDraft;
   const showEditor = !!files?.length;
-
   const isModule = path?.type === "module";
-
   const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
-
-  const hideAllModals = () => {
-    setShowRenameModal(false);
-    setShowOpenModal(false);
-    setShowOpenModuleModal(false);
-    setShowAddModal(false);
-    setShowCreateModal(false);
-    setShowSaveDraftModal(false);
-  };
 
   useEffect(() => {
     setWidgetSrc({
@@ -108,54 +93,48 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
   }, [widgetProps]);
 
   useEffect(() => {
-    if (files && lastPath) {
-      cache.localStorageSet(
-        StorageDomain,
-        {
-          type: StorageType.Files,
-        },
-        { files, lastPath }
-      );
-    }
-  }, [files, lastPath, cache]);
-
-  useEffect(() => {
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
       .then((value = {}) => {
         const { files, lastPath } = value;
         setFiles(files || []);
         setLastPath(lastPath);
-        console.log("files-files-files-files", files);
         near && checkFiles(files);
       });
   }, [cache, near]);
 
   useEffect(() => {
-    if (!near || !files) {
+    if (!near || !files?.length) {
       return;
     }
     if (path === undefined) {
-      openFile(lastPath, undefined);
+      selectFile(lastPath);
     }
-  }, [near, lastPath, files, path]);
+  }, [near, lastPath]);
+
+  const updateLocalStorage = (newFiles, path) => {
+    cache.localStorageSet(
+      StorageDomain,
+      {
+        type: StorageType.Files,
+      },
+      { files: newFiles, lastPath: path }
+    );
+  };
 
   const checkFiles = (files = []) => {
     files.map((file) => {
-      console.log("checkFiles");
-      setFilesOpened((filesOpened) => {
-        filesOpened.push({
-          ...file,
-          codeMain: "",
-          codeDraft: "",
-          codeLocalStorage: "",
-          isDraft: false,
-          changesMade: false,
-          savedOnChain: false,
-        });
-        return filesOpened;
+      const newFilesOpened = [];
+      newFilesOpened.push({
+        ...file,
+        codeMain: "",
+        codeDraft: "",
+        codeLocalStorage: "",
+        isDraft: false,
+        changesMade: false,
+        savedOnChain: false,
       });
-
+      setFilesOpened(newFilesOpened);
       const widgetSrc = `${accountId}/${file.type}/${file.name}/**`;
       const fetchCode = () => {
         const widgetCode = cache.socialGet(
@@ -167,9 +146,7 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
           fetchCode
         );
 
-        const codeMain = widgetCode?.[""];
-        const codeDraft = widgetCode?.branch?.draft?.[""];
-        const isDraft = (!codeDraft && !codeMain) || !!codeDraft;
+        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetCode);
 
         if (codeMain) {
           cache
@@ -178,15 +155,7 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
               type: StorageType.Code,
             })
             .then(({ code }) => {
-              let changesMade;
-              if (codeDraft) {
-                changesMade = codeDraft != code;
-              } else if (codeMain) {
-                changesMade = codeMain != code;
-              } else {
-                // no code on chain
-                changesMade = true;
-              }
+              const changesMade = checkChangesMade(codeMain, codeDraft, code);
 
               setFilesOpened((filesOpened) =>
                 filesOpened.map((fileOpened) => {
@@ -270,157 +239,182 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
     [cache, setCode]
   );
 
-  const reformat = useCallback(
-    (path, code) => {
-      try {
-        const formattedCode = prettier.format(code, {
-          parser: "babel",
-          plugins: [parserBabel],
-        });
-        updateCode(path, formattedCode);
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    [updateCode]
-  );
-
-  const removeFromFiles = useCallback(
-    (path) => {
-      path = JSON.stringify(path);
-      setFiles((files) =>
-        files.filter((file) => JSON.stringify(file) !== path)
-      );
-      setFilesOpened((filesOpened) =>
-        filesOpened.filter(
-          (file) =>
-            JSON.stringify({ type: file.type, name: file.name }) !== path
-        )
-      );
-      setLastPath(path);
-    },
-    [setFiles, setLastPath]
-  );
-
-  const createNewFile = useCallback(
-    (type) => {
-      const path = generateNewName(type, files);
-      openFile(path, getDefaultCode(type));
-    },
-    [generateNewName, openFile]
-  );
-
-  const loadAndOpenFile = useCallback(
-    (nameOrPath, type = Filetype.Widget) => {
-      console.log("loadAndOpenFile");
-      if (!near) {
-        return;
-      }
-      const widgetSrc = getSrcByNameOrPath(nameOrPath, accountId, type);
-      const widget = `${widgetSrc}/**`;
-
-      const cacheGet = () => {
-        const code = cache.socialGet(
-          near,
-          widget,
-          false,
-          undefined,
-          undefined,
-          cacheGet
-        );
-
-        if (code) {
-          const currentCode = code?.branch?.draft?.[""] || code?.[""];
-          openFile(toPath(type, widgetSrc), currentCode, code);
-        }
-      };
-      cacheGet();
-    },
-    [accountId, openFile, toPath, near, cache]
-  );
-
-  const openFile = useCallback(
-    (path, code, widgetObject) => {
-      console.log("openFile");
-      setPath(path);
-      setLastPath(path);
-      setMetadata(undefined);
-      setRenderCode(null);
-
-      setFiles((files) => {
-        const newFiles = [...files];
-        const addToFiles = !files.find(
-          (file) => JSON.stringify(file) === JSON.stringify(path)
-        );
-        if (addToFiles) {
-          newFiles.push(path);
-        }
-        return newFiles;
+  const reformat = (path, code) => {
+    try {
+      const formattedCode = prettier.format(code, {
+        parser: "babel",
+        plugins: [parserBabel],
       });
+      updateCode(path, formattedCode);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
-      const codeMain = widgetObject?.[""];
-      const codeDraft = widgetObject?.branch?.draft?.[""] || "";
-      const isDraft = (!codeDraft && !codeMain) || !!codeDraft;
-      const changesMade = checkChangesMade(codeMain, codeDraft, code);
+  const closeFile = (path) => {
+    const jpath = JSON.stringify(path);
 
-      setFilesOpened((filesOpened) => {
-        filesOpened.push({
-          type: path.type,
-          name: path.name,
-          codeMain,
-          codeDraft,
-          codeLocalStorage: code,
-          isDraft,
-          changesMade,
-          savedOnChain: !!codeMain,
-        });
-        return filesOpened;
-      });
+    const newFiles = files.filter((file) => JSON.stringify(file) !== jpath);
+    const newFilesOpened = filesOpened.filter(
+      (file) => JSON.stringify({ type: file.type, name: file.name }) !== jpath
+    );
 
-      if (code !== undefined) {
+    setFiles(newFiles);
+    setFilesOpened(newFilesOpened);
+    // sprawdzamy czy zamyka otwarty plik czy nie otwarty plik
+    if (jpath === JSON.stringify(lastPath)) {
+      setLastPath(newFiles[0]);
+      setPath();
+    }
+    updateLocalStorage(newFiles, newFiles[0]);
+  };
+
+  const selectFile = (path) => {
+    setPath(path);
+    setLastPath(path);
+    setMetadata(undefined);
+    setRenderCode(null);
+    cache
+      .asyncLocalStorageGet(StorageDomain, {
+        path,
+        type: StorageType.Code,
+      })
+      .then(({ code }) => {
         updateCode(path, code);
-        return;
-      }
+      });
+  };
 
-      cache
-        .asyncLocalStorageGet(StorageDomain, {
+  const updateFiles = (newFiles, newFilesOpened, lastPath) => {
+    cache.localStorageSet(
+      StorageDomain,
+      {
+        type: StorageType.Files,
+      },
+      { files: newFiles, lastPath }
+    );
+    setFiles(newFiles);
+    setFilesOpened(newFilesOpened);
+  };
+
+  const changeFile = (path) => {
+    selectFile(path);
+    updateFiles(files, filesOpened, path);
+  };
+
+  const forkFile = () => {
+    const forkName = widgetName + "-fork";
+    const path = toPath(Filetype.Widget, forkName);
+
+    const { newFiles, newFilesOpened } = addFile(
+      path,
+      files,
+      filesOpened,
+      code
+    );
+    updateCode(path, code);
+    updateFiles(newFiles, newFilesOpened, path);
+    selectFile(path);
+  };
+
+  const createFile = (type) => {
+    const path = generateNewName(type, files);
+    const code = getDefaultCode(type);
+    const { newFiles, newFilesOpened } = addFile(
+      path,
+      files,
+      filesOpened,
+      code
+    );
+    updateCode(path, code);
+    updateFiles(newFiles, newFilesOpened, path);
+    selectFile(path);
+  };
+
+  const loadAndOpenFile = (nameOrPath, type) => {
+    const widgetSrc = getSrcByNameOrPath(nameOrPath, accountId, type);
+    const widget = `${widgetSrc}/**`;
+    const cacheGet = () => {
+      const widgetObject = cache.socialGet(
+        near,
+        widget,
+        false,
+        undefined,
+        undefined,
+        cacheGet
+      );
+
+      if (widgetObject) {
+        const codeMain = widgetObject?.[""];
+        const codeDraft = widgetObject?.branch?.draft?.[""];
+        const code = codeDraft || codeMain;
+        const path = toPath(type, widgetSrc);
+        const { newFiles, newFilesOpened } = addFile(
           path,
-          type: StorageType.Code,
-        })
-        .then(({ code }) => {
-          updateCode(path, code);
-        });
-    },
-    [updateCode]
-  );
+          files,
+          filesOpened,
+          codeMain,
+          codeDraft
+        );
+        updateCode(path, code);
+        updateFiles(newFiles, newFilesOpened, path);
+        selectFile(path);
+      }
+    };
+    cacheGet();
+  };
+
+  const addFile = (path, files, filesOpened, codeMain, codeDraft) => {
+    const newFiles = files ? [...files] : [];
+    const addToFiles = !files?.find(
+      (file) => JSON.stringify(file) === JSON.stringify(path)
+    );
+    if (addToFiles) {
+      newFiles.push(path);
+    }
+
+    const newFilesOpened = filesOpened ? [...filesOpened] : [];
+    const addToFilesOpened = !filesOpened?.find(
+      (file) =>
+        JSON.stringify({
+          type: file.type,
+          name: file.name,
+        }) === JSON.stringify(path)
+    );
+    if (addToFilesOpened) {
+      newFilesOpened.push({
+        type: path.type,
+        name: path.name,
+        codeMain,
+        codeDraft,
+        codeLocalStorage: code,
+        isDraft,
+      });
+    }
+
+    return {
+      newFiles,
+      newFilesOpened,
+    };
+  };
 
   return (
     <>
       <Modals
-        hideAllModals={hideAllModals}
-        showRenameModal={showRenameModal}
-        setShowRenameModal={setShowRenameModal}
-        showOpenModal={showOpenModal}
-        setShowOpenModal={setShowOpenModal}
-        showOpenModuleModal={showOpenModuleModal}
-        setShowOpenModuleModal={setShowOpenModuleModal}
-        showSaveDraftModal={showSaveDraftModal}
-        showAddModal={showAddModal}
-        showCreateModal={showCreateModal}
+        setShowModal={setShowModal}
         jpath={jpath}
         path={path}
         renameFile={renameFile}
-        loadAndOpenFile={loadAndOpenFile}
-        createNewFile={createNewFile}
         near={near}
         widgetPath={widgetPath}
         widgetName={widgetName}
         code={code}
+        showModal={showModal}
+        createFile={createFile}
+        loadAndOpenFile={loadAndOpenFile}
       />
       <Welcome
-        setShowOpenModal={setShowOpenModal}
-        createNewFile={createNewFile}
-        hideAllModals={hideAllModals}
+        setShowModal={setShowModal}
+        createFile={createFile}
         showEditor={showEditor}
       />
       <div className={showEditor ? `` : `visually-hidden`}>
@@ -428,23 +422,20 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
 
         <div className="container-fluid mt-1">
           <Navigation
+            setShowModal={setShowModal}
             jpath={jpath}
-            openFile={openFile}
+            forkFile={forkFile}
             files={files}
-            createNewFile={createNewFile}
             widgetName={widgetName}
             code={code}
             toPath={toPath}
-            setShowRenameModal={setShowRenameModal}
-            setShowAddModal={setShowAddModal}
             near={near}
             path={path}
             metadata={metadata}
-            setShowSaveDraftModal={setShowSaveDraftModal}
-            setFiles={setFiles}
-            setLastPath={setLastPath}
             filesOpened={filesOpened}
-            removeFromFiles={removeFromFiles}
+            closeFile={closeFile}
+            isDraft={isDraft}
+            changeFile={changeFile}
           />
           <Search
             widgets={widgets}

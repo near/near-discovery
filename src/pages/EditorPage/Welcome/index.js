@@ -1,11 +1,7 @@
 import React from "react";
+import { ModalTypes } from "../utils/const";
 
-export default function Welcome({
-  setShowOpenModal,
-  createNewFile,
-  hideAllModals,
-  showEditor,
-}) {
+export default function Welcome({ setShowModal, createFile, showEditor }) {
   return (
     <div
       className={`text-center d-flex justify-content-center min-vh-100 ${
@@ -29,7 +25,7 @@ export default function Welcome({
           <button
             className="btn btn-outline-success mb-3"
             style={{ width: "250px" }}
-            onClick={() => (hideAllModals(), setShowOpenModal(true))}
+            onClick={() => setShowModal(ModalTypes.OpenModal)}
           >
             Open Component
           </button>
@@ -39,7 +35,7 @@ export default function Welcome({
           <button
             className="btn btn-success mb-4"
             style={{ width: "250px" }}
-            onClick={() => (hideAllModals(), createNewFile(Filetype.Widget))}
+            onClick={() => (setShowModal(), createFile(Filetype.Widget))}
           >
             Create New Component
           </button>

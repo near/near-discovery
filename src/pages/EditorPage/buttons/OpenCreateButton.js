@@ -1,10 +1,11 @@
 import React from "react";
+import { ModalTypes } from "../utils/const";
 
-export default function OpenCreateButton({ setShowAddModal }) {
+export default function OpenCreateButton({ setShowModal }) {
   return (
     <button
       className="btn btn-success ms-2"
-      onClick={() => setShowAddModal(true)}
+      onClick={() => setShowModal(ModalTypes.AddModal)}
       style={{
         fontSize: "20px",
         height: "40px",

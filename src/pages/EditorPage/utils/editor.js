@@ -1,13 +1,4 @@
-import prettier from "prettier";
-import parserBabel from "prettier/parser-babel";
-
-import {
-  DefaultEditorCode,
-  DefaultEditorModuleCode,
-  Filetype,
-  StorageDomain,
-  StorageType,
-} from "./const";
+import { DefaultEditorCode, DefaultEditorModuleCode, Filetype } from "./const";
 
 export const toPath = (type, nameOrPath) => {
   const name =
@@ -48,4 +39,16 @@ export const checkChangesMade = (codeMain, codeDraft, code) => {
     changesMade = true;
   }
   return changesMade;
+};
+
+export const getWidgetDetails = (widgetObject) => {
+  const codeMain = widgetObject?.[""];
+  const codeDraft = widgetObject?.branch?.draft?.[""] || "";
+  const isDraft = (!codeDraft && !codeMain) || !!codeDraft;
+
+  return {
+    codeMain,
+    codeDraft,
+    isDraft,
+  };
 };

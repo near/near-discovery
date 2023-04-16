@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { CommitButton } from "near-social-vm";
 import Modal from "react-bootstrap/Modal";
+import { ModalTypes } from "../pages/EditorPage/utils/const";
 
 export const SaveDraftModal = ({
   code,
-  show,
+  showModal,
   onHide,
   near,
   widgetPath,
@@ -47,7 +48,12 @@ export const SaveDraftModal = ({
   };
 
   return (
-    <Modal centered scrollable show={show} onHide={onHide}>
+    <Modal
+      centered
+      scrollable
+      show={showModal === ModalTypes.SaveDraftModal}
+      onHide={onHide}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Save to Version History</Modal.Title>
       </Modal.Header>

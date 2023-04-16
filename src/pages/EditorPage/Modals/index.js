@@ -3,66 +3,49 @@ import RenameModal from "./RenameModal";
 import OpenModal from "./OpenModal";
 import OpenModuleModal from "./OpenModuleModal";
 import AddModal from "./AddModal";
-import CreateModal from "./CreateModal";
 import { SaveDraftModal } from "../../../components/SaveDraft";
 
 export default function Modals({
-  hideAllModals,
-  showRenameModal,
-  setShowRenameModal,
-  showOpenModal,
-  setShowOpenModal,
-  showOpenModuleModal,
-  setShowOpenModuleModal,
-  showSaveDraftModal,
-  showAddModal,
-  showCreateModal,
+  setShowModal,
   jpath,
   path,
   renameFile,
-  loadAndOpenFile,
-  createNewFile,
   near,
   widgetPath,
   widgetName,
   code,
+  showModal,
+  createFile,
+  loadAndOpenFile,
 }) {
   return (
     <>
       <RenameModal
         key={`rename-modal-${jpath}`}
-        show={showRenameModal}
+        showModal={showModal}
         name={path?.name}
         onRename={renameFile}
-        onHide={hideAllModals}
+        onHide={setShowModal}
       />
       <OpenModal
-        show={showOpenModal}
+        showModal={showModal}
         onConfirm={loadAndOpenFile}
-        onHide={hideAllModals}
+        onHide={setShowModal}
       />
       <OpenModuleModal
-        show={showOpenModuleModal}
+        showModal={showModal}
         onConfirm={loadAndOpenFile}
-        onHide={hideAllModals}
+        onHide={setShowModal}
       />
       <AddModal
-        show={showAddModal}
-        onOpenComponent={setShowOpenModal}
-        onNewComponent={setShowRenameModal}
-        onOpenModule={setShowOpenModuleModal}
-        onNewModule={setShowRenameModal}
-        onHide={hideAllModals}
-        createNewFile={createNewFile}
-      />
-      <CreateModal
-        show={showCreateModal}
-        onConfirm={createNewFile}
-        onHide={hideAllModals}
+        onHide={setShowModal}
+        showModal={showModal}
+        setShowModal={setShowModal}
+        createFile={createFile}
       />
       <SaveDraftModal
-        show={showSaveDraftModal}
-        onHide={hideAllModals}
+        showModal={showModal}
+        onHide={setShowModal}
         near={near}
         widgetPath={widgetPath}
         widgetName={widgetName}
