@@ -1,13 +1,8 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback } from "react";
 import Editor from "@monaco-editor/react";
 import { Tab } from "../utils/const";
 
-export default function TabProps({
-  tab,
-  widgetProps,
-  setWidgetProps,
-  propsError,
-}) {
+const TabProps = ({ tab, widgetProps, setWidgetProps, propsError }) => {
   const reformatProps = useCallback(
     (props) => {
       try {
@@ -36,4 +31,6 @@ export default function TabProps({
       {propsError && <pre className="alert alert-danger">{propsError}</pre>}
     </div>
   );
-}
+};
+
+export default TabProps;
