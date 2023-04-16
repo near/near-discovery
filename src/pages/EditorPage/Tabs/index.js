@@ -1,6 +1,6 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React from "react";
 
-import { Tab, Layout } from "./utils/const";
+import { Tab, Layout } from "../utils/const";
 
 export default function Tabs({
   isModule,

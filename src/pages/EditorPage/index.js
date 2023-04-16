@@ -218,7 +218,7 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
       setCode(code);
 
       setFilesOpened((filesOpened) =>
-        filesOpened.map((file) => {
+        filesOpened?.map((file) => {
           if (
             JSON.stringify({ type: file.type, name: file.name }) ===
             JSON.stringify(path)
