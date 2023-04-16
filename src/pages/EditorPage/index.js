@@ -5,7 +5,7 @@ import { useCache, useNear, useAccountId } from "near-social-vm";
 import prettier from "prettier";
 import parserBabel from "prettier/parser-babel";
 
-import VsCodeBanner from "./VsCodeBanner";
+import VsCodeBanner from "./Banners/VsCodeBanner";
 import Welcome from "./Welcome";
 import Modals from "./Modals";
 import Navigation from "./Navigation";
@@ -35,7 +35,7 @@ import {
   toPath,
 } from "./utils/editor";
 
-export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
+const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const near = useNear();
   const cache = useCache();
   const accountId = useAccountId();
@@ -448,17 +448,15 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
               <div className="row">
                 <div className={layoutClass}>
                   <div style={{ display: "flex" }}>
-                    <div style={{ display: "flex" }}>
-                      <Tabs
-                        isModule={isModule}
-                        tab={tab}
-                        setTab={setTab}
-                        widgets={widgets}
-                        layout={layout}
-                        setRenderCode={setRenderCode}
-                        code={code}
-                      />
-                    </div>
+                    <Tabs
+                      isModule={isModule}
+                      tab={tab}
+                      setTab={setTab}
+                      widgets={widgets}
+                      layout={layout}
+                      setRenderCode={setRenderCode}
+                      code={code}
+                    />
                     <NavigationSub
                       layout={layout}
                       path={path}
@@ -509,11 +507,12 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
                     <Preview
                       tab={tab}
                       layout={layout}
-                      layoutClass={layoutClass}
                       renderCode={renderCode}
                       jpath={jpath}
                       parsedWidgetProps={parsedWidgetProps}
                       isModule={isModule}
+                      setRenderCode={setRenderCode}
+                      setTab={setTab}
                     />
                     <PreviewMetadata
                       tab={tab}
@@ -533,4 +532,6 @@ export default function EditorPage({ setWidgetSrc, widgets, logOut, tos }) {
       </div>
     </>
   );
-}
+};
+
+export default EditorPage;

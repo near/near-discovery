@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import VsCodeIcon from "../../images/vs_code_icon.svg";
+import VsCodeIcon from "../../../images/vs_code_icon.svg";
 
 const Wrapper = styled("div")`
   background-color: var(--slate-dark-3);
@@ -18,7 +18,7 @@ const VsCodeLink = styled("a")`
   font-weight: 600;
 `;
 
-export default function VsCodeBanner({ accountId }) {
+export default ({ accountId }) => {
   let ideLink = `vscode:extension/near-protocol.near-discovery-ide${
     accountId ? `?account_id=${accountId}` : ``
   }`;
@@ -34,4 +34,4 @@ export default function VsCodeBanner({ accountId }) {
       </Text>
     </Wrapper>
   );
-}
+};
