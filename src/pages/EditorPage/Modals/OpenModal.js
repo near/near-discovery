@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Filetype, ModalTypes } from "../utils/const";
 
-export default function OpenModal({ onHide, onConfirm, showModal }) {
+export default ({ onHide, onConfirm, showModal }) => {
   const [nameOrPath, setNameOrPath] = useState("");
 
   const handleInput = (e) => {
     setNameOrPath(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-\/]/g, ""));
   };
 
-  const handleConfirm = (e) => {
-    e.preventDefault();
+  const handleConfirm = () => {
     onConfirm(nameOrPath, Filetype.Widget);
     setNameOrPath("");
     onHide();
@@ -52,4 +51,4 @@ export default function OpenModal({ onHide, onConfirm, showModal }) {
       </Modal.Footer>
     </Modal>
   );
-}
+};

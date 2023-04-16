@@ -2,15 +2,14 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { ModalTypes } from "../utils/const";
 
-export default function RenameModal({ showModal, name, onRename, onHide }) {
+export default ({ showModal, name, onRename, onHide }) => {
   const [newName, setNewName] = useState(name);
 
   const handleSetNewName = (e) => {
     setNewName(e.target.value.replaceAll(/[^a-zA-Z0-9_.\-]/g, ""));
   };
 
-  const handleConfirm = (e) => {
-    e.preventDefault();
+  const handleConfirm = () => {
     onRename(newName);
     onHide();
   };
@@ -51,4 +50,4 @@ export default function RenameModal({ showModal, name, onRename, onHide }) {
       </Modal.Footer>
     </Modal>
   );
-}
+};

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { Filetype, ModalTypes } from "../utils/const";
 
-export default function OpenModuleModal({ onHide, onConfirm, showModal }) {
+export default ({ onHide, onConfirm, showModal }) => {
   const [nameOrPath, setNameOrPath] = useState("");
 
   const handleSetNewName = (e) => {
@@ -51,4 +51,4 @@ export default function OpenModuleModal({ onHide, onConfirm, showModal }) {
       </Modal.Footer>
     </Modal>
   );
-}
+};

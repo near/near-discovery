@@ -1,14 +1,9 @@
 import React from "react";
 import Modal from "react-bootstrap/Modal";
-import { Filetype, ModalTypes } from "../utils/const";
+import { ModalTypes } from "../utils/const";
 import AddModalContent from "./AddModalContent";
 
-export default function AddModal({
-  onHide,
-  showModal,
-  setShowModal,
-  createFile,
-}) {
+export default ({ onHide, showModal, setShowModal, createFile }) => {
   const handleNew = (type) => {
     createFile(type);
     setShowModal(ModalTypes.RenameModal);
@@ -32,4 +27,4 @@ export default function AddModal({
       </Modal.Body>
     </Modal>
   );
-}
+};
