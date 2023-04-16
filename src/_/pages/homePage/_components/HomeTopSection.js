@@ -6,18 +6,7 @@ import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import ReactPlayer from "react-player";
 
 export default function HomeTopSection() {
-  // const min720 = useMediaQuery("(min-width:820px)");
-
   const { theme, bp } = useContext(ThemeContext);
-
-  // const handleClick = (gateway) => {
-  //   const gateways = {
-  //     alpha: "https://alpha.near.org/#/",
-  //     social: "https://near.social/#/",
-  //     bos: "https://bos.gg/#/",
-  //   };
-  //   window.open(gateways[gateway], "_blank", "noreferrer");
-  // };
 
   const settings = {
     particle: {
@@ -85,7 +74,7 @@ export default function HomeTopSection() {
             }}
           >
             {/* Web3 Dev Toolkit */}
-            Build web3 apps without limits
+            Build DApps without limits
             {/* nearpad */}
           </Typography>
           <Typography
@@ -97,8 +86,8 @@ export default function HomeTopSection() {
               color: theme.textColor,
             }}
           >
-            nearpad help developers build, deploy, share and monetize reusable
-            web3 contracts and ui components
+            nearpad help developers create, publish and monetize smart contract
+            and user interface components
           </Typography>
 
           {/* <Typography

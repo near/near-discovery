@@ -96,7 +96,7 @@ const Projectbar = () => {
         <Box sx={{ p: 1 }}>
           <div
             className="dangerousStyle"
-            // style={{ color: theme.textColor }}
+            style={{ color: theme.textColor }}
             dangerouslySetInnerHTML={{ __html: selectedSection?.discription }}
           />
 

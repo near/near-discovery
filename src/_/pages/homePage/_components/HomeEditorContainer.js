@@ -17,7 +17,7 @@ export default function HomeEditorContainer() {
         alignItems: "center",
         py: bp ? 5 : 10,
         gap: 3,
-        backgroundColor: theme.backgroundColor,
+        // backgroundColor: theme.backgroundColor,
       }}
     >
       <Box

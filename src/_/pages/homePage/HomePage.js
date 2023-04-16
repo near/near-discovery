@@ -29,8 +29,22 @@ export default function HomePage(props) {
     <>
       <HomeHeader />
       <HomeTopSection />
-      <HomeOurPartnersSection />
+      {/* <HomeOurPartnersSection /> */}
       <HomeEditorContainer />
+      <Box
+        className="containerCSS"
+        sx={{ py: 10, backgroundColor: theme.backgroundColor }}
+      >
+        <Box className="contentCSS">
+          <Widget src="near/widget/PeoplePage" />
+        </Box>
+      </Box>
+
+      <Box className="containerCSS" sx={{ py: 10 }}>
+        <Box className="contentCSS">
+          <Widget src="near/widget/ComponentsPage" />
+        </Box>
+      </Box>
       {/* <HomeFeatureSection
         rtl
         title="BOS DevTools"
@@ -62,20 +76,6 @@ export default function HomePage(props) {
       />*/}
       <HomeTestimonialSection />
 
-      <Box className="containerCSS" sx={{ py: 10 }}>
-        <Box className="contentCSS">
-          <Widget src="near/widget/PeoplePage" />
-        </Box>
-      </Box>
-
-      <Box
-        className="containerCSS"
-        sx={{ py: 10, backgroundColor: theme.backgroundColor }}
-      >
-        <Box className="contentCSS">
-          <Widget src="near/widget/ComponentsPage" />
-        </Box>
-      </Box>
       <HomeFooter />
     </>
   );
