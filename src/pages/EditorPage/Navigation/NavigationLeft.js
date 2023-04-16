@@ -1,17 +1,17 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import OpenCreateButton from "../buttons/OpenCreateButton";
-import RenameButton from "../buttons/RenameButton";
+import OpenCreateButton from "../Buttons/OpenCreateButton";
+import RenameButton from "../Buttons/RenameButton";
 import FileTab from "./FileTab";
 
-export default function NavigationLeft({
+export default ({
   files,
   jpath,
   changeFile,
   filesOpened,
   setShowModal,
   closeFile,
-}) {
+}) => {
   return (
     <Nav
       variant="pills mb-2 mt-2"
@@ -27,4 +27,4 @@ export default function NavigationLeft({
       </Nav.Item>
     </Nav>
   );
-}
+};

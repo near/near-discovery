@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
+import { Nav } from "react-bootstrap";
 
 const TopMenu = styled.div`
   border-radius: 0.375rem;
@@ -45,20 +45,16 @@ const TopMenu = styled.div`
   }
 `;
 
-export default function FileTab({ file, closeFile, filesOpened }) {
-  const jp = JSON.stringify(file);
+export default ({ file, closeFile, filesOpened }) => {
+  const jpath = JSON.stringify(file);
   const widgetName = file?.name?.split("/")[0];
-
-  let fileOpened = {};
-  fileOpened =
-    filesOpened.find((file) => {
-      return file.name === widgetName;
-    }) || {};
+  const fileOpened =
+    filesOpened?.find((file) => file.name === widgetName) || {};
 
   return (
-    <Nav.Item key={jp}>
+    <Nav.Item key={jpath}>
       <TopMenu>
-        <Nav.Link className="text-decoration-none d-flex" eventKey={jp}>
+        <Nav.Link className="text-decoration-none d-flex" eventKey={jpath}>
           <div className="d-flex">
             {fileOpened?.isDraft && <div className="draft">Draft</div>}
             <div>{widgetName}</div>
@@ -72,11 +68,7 @@ export default function FileTab({ file, closeFile, filesOpened }) {
               marginTop: "-3px",
               marginBottom: "0px",
             }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              closeFile(file);
-            }}
+            onClick={() => closeFile(file)}
           >
             <i className="bi bi-x"></i>
           </button>
@@ -84,4 +76,4 @@ export default function FileTab({ file, closeFile, filesOpened }) {
       </TopMenu>
     </Nav.Item>
   );
-}
+};

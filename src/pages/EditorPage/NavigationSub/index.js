@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ls from "local-storage";
 import { EditorLayoutKey, Layout, Tab } from "../utils/const";
-import OpenInNewTabButton from "../buttons/OpenInNewTabButton";
-import RenderPreviewButton from "../buttons/RenderPreviewButton";
+import OpenInNewTabButton from "../Buttons/OpenInNewTabButton";
+import RenderPreviewButton from "../Buttons/RenderPreviewButton";
 
 export default function NavigationSub({
   layout,
