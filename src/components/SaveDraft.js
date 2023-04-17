@@ -4,7 +4,7 @@ import Modal from "react-bootstrap/Modal";
 import { ModalTypes } from "../pages/EditorPage/utils/const";
 
 export const SaveDraftModal = ({
-  code,
+  codeVisible,
   showModal,
   onHide,
   near,
@@ -29,7 +29,7 @@ export const SaveDraftModal = ({
       [widgetName]: {
         branch: {
           draft: {
-            "": code,
+            "": codeVisible,
             metadata,
           },
         },

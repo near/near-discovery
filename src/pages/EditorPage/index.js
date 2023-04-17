@@ -41,12 +41,11 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const accountId = useAccountId();
   const { widgetSrc } = useParams();
 
-  // component state
-  const [code, setCode] = useState(undefined);
+  const [filesObject, setFilesObject] = useState({});
+  const [codeVisible, setCodeVisible] = useState(undefined);
   const [path, setPath] = useState(undefined);
-  const [files, setFiles] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
-  const [renderCode, setRenderCode] = useState(code);
+  const [renderCode, setRenderCode] = useState(codeVisible);
   const [widgetProps, setWidgetProps] = useState(
     ls.get(WidgetPropsKey) || "{}"
   );
@@ -54,7 +53,6 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const [propsError, setPropsError] = useState(null);
   const [metadata, setMetadata] = useState(undefined);
   const [showModal, setShowModal] = useState(null);
-  const [filesOpened, setFilesOpened] = useState();
   const [tab, setTab] = useState(Tab.Editor);
   const [layout, setLayoutState] = useState(
     ls.get(EditorLayoutKey) || Layout.Tabs
@@ -63,13 +61,8 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const widgetName = path?.name?.split("/")[0];
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
   const jpath = JSON.stringify(path);
-  const fileDetails = filesOpened?.find((file) => {
-    if (jpath === JSON.stringify({ type: file.type, name: file.name })) {
-      return true;
-    }
-  });
-  const isDraft = fileDetails?.isDraft;
-  const showEditor = !!files?.length;
+  const { isDraft } = filesObject[jpath] || {};
+  const showEditor = Object.keys(filesObject)?.length;
   const isModule = path?.type === "module";
   const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
 
@@ -95,24 +88,18 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   useEffect(() => {
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
-      .then((value = {}) => {
-        const { files, lastPath } = value;
-        setFiles(files || []);
+      .then(({ files, lastPath }) => {
         setLastPath(lastPath);
-        near && checkFiles(files);
+        near && createFilesObject(files);
+        selectFile(lastPath);
       });
   }, [cache, near]);
 
-  useEffect(() => {
-    if (!near || !files?.length) {
-      return;
-    }
-    if (path === undefined) {
-      selectFile(lastPath);
-    }
-  }, [near, lastPath]);
-
-  const updateLocalStorage = (newFiles, path) => {
+  const updateLocalStorage = (newFilesObject, path) => {
+    const newFiles = Object.values(newFilesObject).map((file) => ({
+      type: file.type,
+      name: file.name,
+    }));
     cache.localStorageSet(
       StorageDomain,
       {
@@ -122,20 +109,28 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     );
   };
 
-  const checkFiles = (files = []) => {
-    files.map((file) => {
-      const newFilesOpened = [];
-      newFilesOpened.push({
-        ...file,
-        codeMain: "",
-        codeDraft: "",
-        codeLocalStorage: "",
-        isDraft: false,
-        changesMade: false,
-        savedOnChain: false,
-      });
-      setFilesOpened(newFilesOpened);
-      const widgetSrc = `${accountId}/${file.type}/${file.name}/**`;
+  const createFilesObject = (files = []) => {
+    const filesObject = files.reduce((x, file) => {
+      return {
+        ...x,
+        [JSON.stringify({ type: file.type, name: file.name })]: {
+          ...file,
+          codeMain: "",
+          codeDraft: "",
+          codeLocalStorage: "",
+          isDraft: false,
+          changesMade: false,
+          savedOnChain: false,
+        },
+      };
+    }, {});
+    setFilesObject(filesObject);
+
+    Object.values(filesObject).map((fileObject) => {
+      const path = { type: fileObject.type, name: fileObject.name };
+      const jpath = JSON.stringify(path);
+      const widgetSrc = `${accountId}/${fileObject.type}/${fileObject.name}/**`;
+
       const fetchCode = () => {
         const widgetCode = cache.socialGet(
           near,
@@ -146,33 +141,27 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           fetchCode
         );
 
-        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetCode);
+        if (widgetCode) {
+          const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetCode);
 
-        if (codeMain) {
           cache
             .asyncLocalStorageGet(StorageDomain, {
-              path: file,
+              path: path,
               type: StorageType.Code,
             })
             .then(({ code }) => {
               const changesMade = checkChangesMade(codeMain, codeDraft, code);
 
-              setFilesOpened((filesOpened) =>
-                filesOpened.map((fileOpened) => {
-                  if (fileOpened.name !== file.name) {
-                    return fileOpened;
-                  }
-                  return {
-                    ...fileOpened,
-                    codeMain,
-                    codeDraft,
-                    codeLocalStorage: code,
-                    isDraft,
-                    changesMade,
-                    savedOnChain: true,
-                  };
-                })
-              );
+              filesObject[jpath] = {
+                ...filesObject[jpath],
+                codeMain,
+                codeDraft,
+                codeLocalStorage: code,
+                isDraft,
+                changesMade,
+                savedOnChain: true,
+              };
+              setFilesObject(filesObject);
             });
         }
       };
@@ -180,27 +169,25 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     });
   };
 
-  const renameFile = useCallback(
-    (newName) => {
-      const newPath = toPath(path.type, newName);
-      const jNewPath = JSON.stringify(newPath);
-      const jPath = JSON.stringify(path);
-      setFiles((files) => {
-        const newFiles = files.filter(
-          (file) => JSON.stringify(file) !== jNewPath
-        );
-        const i = newFiles.findIndex((file) => JSON.stringify(file) === jPath);
-        if (i >= 0) {
-          newFiles[i] = newPath;
-        }
-        return newFiles;
-      });
-      setLastPath(newPath);
-      setPath(newPath);
-      updateCode(newPath, code);
-    },
-    [path, toPath, updateCode]
-  );
+  const renameFile = (newName) => {
+    const newPath = toPath(path.type, newName);
+    const jNewPath = JSON.stringify(newPath);
+    let newFilesObject = { ...filesObject };
+
+    const fileObject = { ...newFilesObject[jpath] };
+    delete newFilesObject[jpath];
+
+    newFilesObject = {
+      ...newFilesObject,
+      [jNewPath]: {
+        ...fileObject,
+        name: newName,
+      },
+    };
+    updateFiles(newFilesObject, newPath);
+    selectFile(newPath);
+    updateCode(newPath, codeVisible);
+  };
 
   const updateCode = useCallback(
     (path, code) => {
@@ -215,28 +202,9 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           time: Date.now(),
         }
       );
-      setCode(code);
-
-      setFilesOpened((filesOpened) =>
-        filesOpened?.map((file) => {
-          if (
-            JSON.stringify({ type: file.type, name: file.name }) ===
-            JSON.stringify(path)
-          ) {
-            const { codeDraft, codeMain } = file;
-            const changesMade = checkChangesMade(codeMain, codeDraft, code);
-
-            return {
-              ...file,
-              codeLocalStorage: code,
-              changesMade,
-            };
-          }
-          return file;
-        })
-      );
+      setCodeVisible(code);
     },
-    [cache, setCode]
+    [cache, setCodeVisible]
   );
 
   const reformat = (path, code) => {
@@ -253,20 +221,14 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
 
   const closeFile = (path) => {
     const jpath = JSON.stringify(path);
-
-    const newFiles = files.filter((file) => JSON.stringify(file) !== jpath);
-    const newFilesOpened = filesOpened.filter(
-      (file) => JSON.stringify({ type: file.type, name: file.name }) !== jpath
-    );
-
-    setFiles(newFiles);
-    setFilesOpened(newFilesOpened);
-    // sprawdzamy czy zamyka otwarty plik czy nie otwarty plik
+    const newFilesObject = { ...filesObject };
+    delete newFilesObject[jpath];
+    setFilesObject(newFilesObject);
+    const newPath = JSON.parse(Object.keys(newFilesObject)[0]);
     if (jpath === JSON.stringify(lastPath)) {
-      setLastPath(newFiles[0]);
-      setPath();
+      selectFile(newPath);
     }
-    updateLocalStorage(newFiles, newFiles[0]);
+    updateLocalStorage(newFilesObject, newPath || jpath);
   };
 
   const selectFile = (path) => {
@@ -280,11 +242,21 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
         type: StorageType.Code,
       })
       .then(({ code }) => {
+        const jpath = JSON.stringify(path);
         updateCode(path, code);
+        setFilesObject((file) => {
+          file[jpath] && (file[jpath].codeLocalStorage = code);
+          return file;
+        });
       });
   };
 
-  const updateFiles = (newFiles, newFilesOpened, lastPath) => {
+  // uaktualnia obiekty files i filesOpened, zarowno w state jak i local storage
+  const updateFiles = (newFilesObject, lastPath) => {
+    const newFiles = Object.values(newFilesObject).map((file) => ({
+      type: file.type,
+      name: file.name,
+    }));
     cache.localStorageSet(
       StorageDomain,
       {
@@ -292,41 +264,33 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
       },
       { files: newFiles, lastPath }
     );
-    setFiles(newFiles);
-    setFilesOpened(newFilesOpened);
+    setFilesObject(newFilesObject);
   };
 
   const changeFile = (path) => {
-    selectFile(path);
-    updateFiles(files, filesOpened, path);
+    if (filesObject[JSON.stringify(path)]) {
+      selectFile(path);
+      updateFiles(filesObject, path);
+    }
   };
 
   const forkFile = () => {
     const forkName = widgetName + "-fork";
     const path = toPath(Filetype.Widget, forkName);
 
-    const { newFiles, newFilesOpened } = addFile(
-      path,
-      files,
-      filesOpened,
-      code
-    );
-    updateCode(path, code);
-    updateFiles(newFiles, newFilesOpened, path);
+    const newFilesObject = addFile(filesObject, path, codeVisible, "", false);
+    updateCode(path, codeVisible);
+    updateFiles(newFilesObject, path);
     selectFile(path);
   };
 
   const createFile = (type) => {
     const path = generateNewName(type, files);
     const code = getDefaultCode(type);
-    const { newFiles, newFilesOpened } = addFile(
-      path,
-      files,
-      filesOpened,
-      code
-    );
+
+    const newFilesObject = addFile(filesObject, path, code, "", false);
     updateCode(path, code);
-    updateFiles(newFiles, newFilesOpened, path);
+    updateFiles(newFilesObject, path);
     selectFile(path);
   };
 
@@ -344,57 +308,40 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
       );
 
       if (widgetObject) {
-        const codeMain = widgetObject?.[""];
-        const codeDraft = widgetObject?.branch?.draft?.[""];
+        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
         const code = codeDraft || codeMain;
         const path = toPath(type, widgetSrc);
-        const { newFiles, newFilesOpened } = addFile(
+
+        const newFilesObject = addFile(
+          filesObject,
           path,
-          files,
-          filesOpened,
           codeMain,
-          codeDraft
+          codeDraft,
+          isDraft
         );
         updateCode(path, code);
-        updateFiles(newFiles, newFilesOpened, path);
+        updateFiles(newFilesObject, path);
         selectFile(path);
       }
     };
     cacheGet();
   };
 
-  const addFile = (path, files, filesOpened, codeMain, codeDraft) => {
-    const newFiles = files ? [...files] : [];
-    const addToFiles = !files?.find(
-      (file) => JSON.stringify(file) === JSON.stringify(path)
-    );
-    if (addToFiles) {
-      newFiles.push(path);
-    }
-
-    const newFilesOpened = filesOpened ? [...filesOpened] : [];
-    const addToFilesOpened = !filesOpened?.find(
-      (file) =>
-        JSON.stringify({
-          type: file.type,
-          name: file.name,
-        }) === JSON.stringify(path)
-    );
-    if (addToFilesOpened) {
-      newFilesOpened.push({
-        type: path.type,
-        name: path.name,
-        codeMain,
-        codeDraft,
-        codeLocalStorage: code,
-        isDraft,
-      });
-    }
-
-    return {
-      newFiles,
-      newFilesOpened,
+  const addFile = (filesObject, path, codeMain, codeDraft, isDraft) => {
+    const newFilesObject = {
+      ...filesObject,
+      [JSON.stringify(path)]: {
+        ...path,
+        codeMain: codeMain,
+        codeDraft: codeDraft,
+        codeLocalStorage: codeDraft || codeMain,
+        isDraft: isDraft,
+        changesMade: false,
+        savedOnChain: false,
+      },
     };
+
+    return newFilesObject;
   };
 
   return (
@@ -407,7 +354,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
         near={near}
         widgetPath={widgetPath}
         widgetName={widgetName}
-        code={code}
+        codeVisible={codeVisible}
         showModal={showModal}
         createFile={createFile}
         loadAndOpenFile={loadAndOpenFile}
@@ -425,14 +372,13 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
             setShowModal={setShowModal}
             jpath={jpath}
             forkFile={forkFile}
-            files={files}
+            filesObject={filesObject}
             widgetName={widgetName}
-            code={code}
+            codeVisible={codeVisible}
             toPath={toPath}
             near={near}
             path={path}
             metadata={metadata}
-            filesOpened={filesOpened}
             closeFile={closeFile}
             isDraft={isDraft}
             changeFile={changeFile}
@@ -455,7 +401,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
                       widgets={widgets}
                       layout={layout}
                       setRenderCode={setRenderCode}
-                      code={code}
+                      codeVisible={codeVisible}
                     />
                     <NavigationSub
                       layout={layout}
@@ -471,7 +417,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
                   </div>
                   <TabEditor
                     tab={tab}
-                    code={code}
+                    codeVisible={codeVisible}
                     widgetPath={widgetPath}
                     updateCode={updateCode}
                     path={path}

@@ -5,14 +5,13 @@ import NavigationRight from "./NavigationRight";
 const Navigation = ({
   jpath,
   forkFile,
-  files,
+  filesObject,
   widgetName,
-  code,
+  codeVisible,
   toPath,
   near,
   path,
   metadata,
-  filesOpened,
   closeFile,
   setShowModal,
   isDraft,
@@ -22,10 +21,9 @@ const Navigation = ({
     <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
       <div className="d-flex" style={{ flexWrap: "wrap" }}>
         <NavigationLeft
-          files={files}
+          filesObject={filesObject}
           jpath={jpath}
           changeFile={changeFile}
-          filesOpened={filesOpened}
           setShowModal={setShowModal}
           closeFile={closeFile}
         />
@@ -38,7 +36,7 @@ const Navigation = ({
           jpath={jpath}
           widgetName={widgetName}
           setShowModal={setShowModal}
-          code={code}
+          codeVisible={codeVisible}
           forkFile={forkFile}
           toPath={toPath}
           near={near}

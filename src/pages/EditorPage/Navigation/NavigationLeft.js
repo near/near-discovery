@@ -5,10 +5,9 @@ import RenameButton from "../Buttons/RenameButton";
 import FileTab from "./FileTab";
 
 export default ({
-  files,
+  filesObject,
   jpath,
   changeFile,
-  filesOpened,
   setShowModal,
   closeFile,
 }) => {
@@ -18,8 +17,8 @@ export default ({
       activeKey={jpath}
       onSelect={(key) => changeFile(JSON.parse(key))}
     >
-      {files?.map((file) => (
-        <FileTab file={file} closeFile={closeFile} filesOpened={filesOpened} />
+      {Object.values(filesObject)?.map((file) => (
+        <FileTab file={file} closeFile={closeFile} />
       ))}
       <Nav.Item className="me-1">
         <OpenCreateButton setShowModal={setShowModal} />

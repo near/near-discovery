@@ -45,20 +45,18 @@ const TopMenu = styled.div`
   }
 `;
 
-export default ({ file, closeFile, filesOpened }) => {
-  const jpath = JSON.stringify(file);
+export default ({ file, closeFile }) => {
+  const jpath = JSON.stringify({ type: file.type, name: file.name });
   const widgetName = file?.name?.split("/")[0];
-  const fileOpened =
-    filesOpened?.find((file) => file.name === widgetName) || {};
 
   return (
     <Nav.Item key={jpath}>
       <TopMenu>
         <Nav.Link className="text-decoration-none d-flex" eventKey={jpath}>
           <div className="d-flex">
-            {fileOpened?.isDraft && <div className="draft">Draft</div>}
+            {file?.isDraft && <div className="draft">Draft</div>}
             <div>{widgetName}</div>
-            {(!fileOpened?.savedOnChain || fileOpened?.changesMade) && (
+            {(!file?.savedOnChain || file?.changesMade) && (
               <div className="dot"></div>
             )}
           </div>
@@ -68,7 +66,11 @@ export default ({ file, closeFile, filesOpened }) => {
               marginTop: "-3px",
               marginBottom: "0px",
             }}
-            onClick={() => closeFile(file)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              closeFile({ type: file.type, name: file.name });
+            }}
           >
             <i className="bi bi-x"></i>
           </button>

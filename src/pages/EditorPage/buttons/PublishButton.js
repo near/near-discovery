@@ -1,7 +1,7 @@
 import React from "react";
 import { CommitButton } from "near-social-vm";
 
-export default ({ widgetName, near, path, code, metadata }) => (
+export default ({ widgetName, near, path, codeVisible, metadata }) => (
   <CommitButton
     className={`btn btn-primary`}
     disabled={!widgetName}
@@ -9,7 +9,7 @@ export default ({ widgetName, near, path, code, metadata }) => (
     data={{
       [path?.type]: {
         [widgetName]: {
-          "": code,
+          "": codeVisible,
           metadata,
         },
       },
