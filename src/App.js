@@ -192,7 +192,7 @@ function App(props) {
 
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-          {/* Near ORG Pages: */}
+          {/* Near ORG BOS Component Pages: */}
           <Route path={"/"} exact={true}>
             <NearOrgPage {...passProps} src={Widgets.nearOrg.homePage} />
           </Route>
@@ -221,6 +221,26 @@ function App(props) {
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
+            />
+          </Route>
+
+          {/* Near ORG Iframe Pages: */}
+          <Route path={"/events"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/events"
+            />
+          </Route>
+          <Route path={"/learn"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/learn"
+            />
+          </Route>
+          <Route path={"/about"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/about"
             />
           </Route>
 
