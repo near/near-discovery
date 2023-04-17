@@ -47,7 +47,7 @@ const VerifyEmail = ({ handleCreateAccount }) => {
                             }
                         };
 
-                        await fetch('http://34.139.85.130:3000/new_account', options)
+                        await fetch('https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/new_account', options)
                             .then(response => {
                                 if (!response.ok) {
                                     throw new Error('Network response was not ok');
