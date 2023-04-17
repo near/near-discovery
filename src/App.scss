@@ -1,26 +1,17 @@
 @import "bootstrap";
 
-body {
-  // This hack avoids the content flash due to "react-snap"
-
-  &::before {
-    content: "";
-    display: block;
-    position: fixed;
-    inset: 0;
-    background: #fff;
-  }
-
-  &.hydrated {
-    &::before {
-      display: none;
-    }
-  }
-}
-
 body,
 html {
   -webkit-font-smoothing: antialiased;
+}
+
+#page-flash-prevent {
+  // This hack avoids the content flash due to "react-snap"
+  display: block;
+  position: fixed;
+  inset: 0;
+  background: #fff;
+  z-index: 100;
 }
 
 .pointer {
