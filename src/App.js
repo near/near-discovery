@@ -190,6 +190,8 @@ function App(props) {
         <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
       </Helmet>
 
+      <div id="page-flash-prevent" />
+
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           {/* Near ORG BOS Component Pages: */}

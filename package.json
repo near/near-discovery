@@ -53,10 +53,7 @@
     "include": [
       "/",
       "/use",
-      "/ecosystem",
-      "/events",
-      "/about",
-      "/learn"
+      "/ecosystem"
     ],
     "viewport": {
       "width": 7000,
