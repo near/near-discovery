@@ -2,32 +2,12 @@ import * as nearAPI from "near-api-js";
 // import { connect, keyStores, WalletConnection, Near } from "near-api-js";
 import { base_encode } from "near-api-js/lib/utils/serialize";
 import { KeyPair } from "near-api-js/lib/utils/key_pair";
+import { NetworkId } from "../data/widgets";
 
 export const MASTER_USER_ID = "gutsyphilip.testnet";
-const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'nearlib:keystore:');
-const keyPair = KeyPair.fromString('ed25519:4HnQUNMTgi6ht9oCemkLPqYf259fc1P91dJghqb3qhsgFa4krV46SMCxrYv5c1ArDhMDNsL6NV7tfreEHi5j7aSF');
-await keyStore.setKey('testnet', MASTER_USER_ID, keyPair);
-
-const config = {
-    networkId: "testnet",
-    keyStore: keyStore,
-    nodeUrl: "https://rpc.testnet.near.org",
-    masterAccount: MASTER_USER_ID
-};
-
-
-const nearConnection = await nearAPI.connect(config);
-const wallet = new nearAPI.WalletConnection(nearConnection);
-const account = await nearConnection.account(MASTER_USER_ID);
-const near = new nearAPI.Near(config);
-
-export const createAccount = async (username, publicKeyObjectED) => {
-    console.log('username', username);
-    console.log('publicKeyObjectED', publicKeyObjectED);
-    console.log('publicKey', publicKeyObjectED.getPublicKey());
-    // return await near.createAccount(username, publicKeyObjectED);
-    return await account.createAccount(username, publicKeyObjectED.getPublicKey().toString(), "1000000000000000000000000");
-};
+// const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'nearlib:keystore:');
+// const keyPair = KeyPair.fromString('ed25519:4HnQUNMTgi6ht9oCemkLPqYf259fc1P91dJghqb3qhsgFa4krV46SMCxrYv5c1ArDhMDNsL6NV7tfreEHi5j7aSF');
+// await keyStore.setKey('testnet', MASTER_USER_ID, keyPair);
 
 export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair) => {
     console.log('userName', userName);
@@ -49,3 +29,24 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
         return secondKeyPair;
     }
 };
+
+export const handleCompleteSignIn = async (accountId, publicKey) => {
+    if (accountId) {
+        const authData = {
+            accountId,
+            allKeys: [publicKey],
+        };
+        const contract = {
+            contractId: "v1.social08.testnet",
+            methodNames: []
+        }
+        window.localStorage.setItem("near_app_wallet_auth_key", JSON.stringify(authData));
+        window.localStorage.setItem("near-social-vm:v01::accountId:", `"${accountId}"`);
+        window.localStorage.setItem("near-wallet-selector:contract", JSON.stringify(contract));
+        if (publicKey) {
+            const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'near-api-js:keystore:');
+            const keyPair = KeyPair.fromString(publicKey);
+            await keyStore.setKey(NetworkId, accountId, keyPair);
+        }
+    }
+}
