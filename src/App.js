@@ -1,7 +1,6 @@
 import React, {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useState,
 } from "react";
 import "error-polyfill";
@@ -73,7 +72,6 @@ function App(props) {
   const account = useAccount();
   const accountId = account.accountId;
 
-  const location = window.location;
 
   useEffect(() => {
     initNear &&
@@ -95,16 +93,6 @@ function App(props) {
         }),
       });
   }, [initNear]);
-
-  useEffect(() => {
-    if (
-      !location.search.includes("?account_id") &&
-      !location.search.includes("&account_id") &&
-      (location.search || location.href.includes("/?#"))
-    ) {
-      window.history.replaceState({}, "/", "/" + location.hash);
-    }
-  }, [location]);
 
   useEffect(() => {
     if (!near) {
