@@ -1,16 +1,16 @@
-import React from 'react'
-import { useForm } from 'react-hook-form'
-import styled from 'styled-components'
-import { getEmailId, parseURLParams, isValidEmail } from '../utils/generic'
-import { createKey, getKeys } from "@near-js/biometric-ed25519";
-import { Logo } from '../components/navigation/alpha/icons/Logo';
+import { getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
 
-import { createAccount, getCorrectAccessKey, MASTER_USER_ID } from '../utils/biometricsAuthUtils';
+import { MASTER_USER_ID } from '../utils/biometricsAuthUtils';
+import React from 'react';
+import { createKey } from '@near-js/biometric-ed25519';
+import { firebaseAuth } from '../utils/firebase';
+import { sendSignInLinkToEmail } from 'firebase/auth';
+import styled from 'styled-components';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 const CreateAccount = () => {
-  const [createdKey, setCreatedKey] = React.useState(null);
-  const [retrievedKeys, setretrievedKeys] = React.useState([]);
-  const [correctKey, setCorrectKey] = React.useState([]);
+  const history = useHistory();
   const [urlParams, setUrlParams] = React.useState(null);
   const [isAccountAvailable, setIsAccountAvailable] = React.useState(null);
   const { register, handleSubmit, watch, setValue, formState } = useForm();
@@ -20,7 +20,6 @@ const CreateAccount = () => {
   const checkIsAccountAvailable = async () => {
     try {
       if (!formValues?.accountId) return
-      // Using fetch, Make POST request to RPC endpoint[https://rpc.testnet.near.org] to check if given user name exist.
 
       const response = await fetch('https://rpc.testnet.near.org', {
         method: 'POST',
@@ -47,29 +46,34 @@ const CreateAccount = () => {
         return setIsAccountAvailable(false)
       }
     } catch (error) {
-      // setIsAccountAvailable(false)
+      c
+      console.log(error)
+      setIsAccountAvailable(false)
     }
   }
 
+
   const onSubmit = handleSubmit(async (data) => {
-    console.log(data);
-    const name = `${data.accountId}.${MASTER_USER_ID}`;
-    const key = await createKey(name);
-    const publicKey = key.getPublicKey().toString();
-    setCreatedKey(publicKey);
+    if (!data?.accountId || !data.email) return
 
-    await createAccount(name, key).then(() => {
-      console.log(`Account ${name} Created`);
-    });
+    try {
+      const name = `${data.accountId}.${MASTER_USER_ID}`;
+      const key = await createKey(name);
+      const publicKey = key.getPublicKey().toString();
+
+      if (!!key) {
+        sendSignInLinkToEmail(firebaseAuth, data.email, {
+          url: `${window.location.origin}/verify-email?publicKey=${publicKey}&accountId=${name}`,
+          handleCodeInApp: true,
+        }).then((res) => {
+          window.localStorage.setItem('emailForSignIn', data.email);
+          history.push('/email-sent')
+        })
+      }
+    } catch (error) {
+      alert(error.message)
+    }
   });
-
-  const handleGetKey = async (name) => {
-    const keys = await getKeys(name);
-    const publicKeys = keys.map((key) => key.getPublicKey().toString());
-    setretrievedKeys(publicKeys);
-    const correctPublicKey = await getCorrectAccessKey(name, keys[0], keys[1]);
-    setCorrectKey(correctPublicKey?.getPublicKey().toString());
-  };
 
 
   React.useEffect(() => {
@@ -140,9 +144,6 @@ const CreateAccount = () => {
           {/* <IconFingerPrint /> */}
           Continue with Fingerprint
         </StyledButton>
-        {/* <StyledButton fullWidth onClick={handleGetKey} type="button">
-          Sign in
-        </StyledButton> */}
         <Footer>
           By creating an account, you agree to the NEAR <a href="">terms of service</a> and <a href="">privacy policy</a>
         </Footer>

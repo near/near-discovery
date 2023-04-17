@@ -16,13 +16,14 @@ import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
-import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
+import { loadAccount, useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import CreateAccount from "./pages/CreateAccount";
+import VerifyEmail from "./pages/VerifyEmail";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -61,13 +62,23 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const MASTER_USER_ID = "gutsyphilip.testnet";
 
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
   const accountId = account.accountId;
 
-  const location = window.location;
+  const handleCreateAccount = useCallback(async (accountId, publicKey) => {
+    if (!near || !account) {
+      return;
+    }
+    await account.createAccount(accountId, publicKey, "1000000000000000000000000");
+    await loadAccount(near, accountId).then((account) => {
+      console.log("successfully created account: ", account)
+    })
+  }, [near]);
+
 
   useEffect(() => {
     initNear &&
@@ -87,8 +98,10 @@ function App(props) {
             }),
           ],
         }),
+        // masterAccount: MASTER_USER_ID,
       });
   }, [initNear]);
+
 
   useEffect(() => {
     if (!near) {
@@ -148,6 +161,7 @@ function App(props) {
   }, [account]);
 
   const passProps = {
+    handleCreateAccount,
     refreshAllowance: () => refreshAllowance(),
     setWidgetSrc,
     signedAccountId,
@@ -175,6 +189,10 @@ function App(props) {
           <Route path={"/signup"}>
             <NavigationWrapper {...passProps} />
             <CreateAccount {...passProps} />
+          </Route>
+          <Route path={"/verify-email"}>
+            <NavigationWrapper {...passProps} />
+            <VerifyEmail {...passProps} />
           </Route>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />

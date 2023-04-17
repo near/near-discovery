@@ -1,10 +1,10 @@
 const TestnetDomains = {
   "test.near.org": true,
   "127.0.0.1": true,
+  "localhost": true,
 };
 
-export const NetworkId =
-  window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const NetworkId = window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
   default: "one.testnet/widget/ActivityPage",
