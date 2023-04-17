@@ -9,7 +9,7 @@ export default ({
   jpath,
   widgetName,
   setShowModal,
-  code,
+  codeVisible,
   forkFile,
   toPath,
   near,
@@ -20,19 +20,14 @@ export default ({
   <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
     <Nav.Item className="">
       <SaveDraftButton widgetName={widgetName} setShowModal={setShowModal} />
-      <ForkButton
-        widgetName={widgetName}
-        code={code}
-        forkFile={forkFile}
-        toPath={toPath}
-      />
+      <ForkButton forkFile={forkFile} />
 
       {isDraft ? (
         <PublishDraftAsMainButton
           widgetName={widgetName}
           near={near}
           path={path}
-          code={code}
+          codeVisible={codeVisible}
           metadata={metadata}
         />
       ) : (
@@ -40,7 +35,7 @@ export default ({
           widgetName={widgetName}
           near={near}
           path={path}
-          code={code}
+          codeVisible={codeVisible}
           metadata={metadata}
         />
       )}

@@ -13,7 +13,7 @@ export default ({
   near,
   widgetPath,
   widgetName,
-  code,
+  codeVisible,
   showModal,
   createFile,
   loadAndOpenFile,
@@ -49,7 +49,7 @@ export default ({
       widgetPath={widgetPath}
       widgetName={widgetName}
       type={path?.type}
-      code={code}
+      codeVisible={codeVisible}
     />
   </>
 );

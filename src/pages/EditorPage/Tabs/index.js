@@ -8,7 +8,7 @@ const Tabs = ({
   widgets,
   layout,
   setRenderCode,
-  code,
+  codeVisible,
 }) => (
   <div style={{ display: "flex" }}>
     <ul
@@ -77,7 +77,7 @@ const Tabs = ({
                 }`}
                 aria-current="page"
                 onClick={() => {
-                  setRenderCode(code);
+                  setRenderCode(codeVisible);
                   setTab(Tab.Widget);
                 }}
               >
