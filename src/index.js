@@ -11,5 +11,7 @@ if (container.hasChildNodes()) {
   render(<App />, container);
 }
 
+document.body.classList.add("hydrated");
+
 // const root = createRoot(container);
 // root.render(<App />);
