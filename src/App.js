@@ -1,6 +1,7 @@
 import React, {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useState,
 } from "react";
 import "error-polyfill";
@@ -26,6 +27,7 @@ import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapp
 import DesktopNavigation from "./components/navigation/org/wrapper/desktop/DesktopNavigation";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
+import styleZendesk from "./zendesk";
 import { Helmet } from "react-helmet";
 import NearOrgPage from "./pages/NearOrgPage";
 
@@ -66,6 +68,7 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const [hasStyledZendesk, setHasStyledZendesk] = useState(false);
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -93,6 +96,18 @@ function App(props) {
         }),
       });
   }, [initNear]);
+
+  useLayoutEffect(() => {
+    // ZenDesk styling is done with useLayoutEffect to avoid errors during site refresh by user
+    const zwFrame = document.getElementById("launcher");
+    if (!zwFrame || hasStyledZendesk) return;
+    try {
+      styleZendesk();
+      setHasStyledZendesk(true);
+    } catch (error) {
+      console.log("Error styling Zendesk", error);
+    }
+  });
 
   useEffect(() => {
     if (!near) {
@@ -184,6 +199,30 @@ function App(props) {
           <Route path={"/use"} exact={true}>
             <NearOrgPage {...passProps} src={Widgets.nearOrg.usePage} />
           </Route>
+          <Route path={"/ecosystem"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemOverviewPage}
+            />
+          </Route>
+          <Route path={"/ecosystem/community"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemCommunityPage}
+            />
+          </Route>
+          <Route path={"/ecosystem/get-funding"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemGetFundingPage}
+            />
+          </Route>
+          <Route path={"/ecosystem/work-and-earn"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
+            />
+          </Route>
 
           {/* Discovery Pages: */}
           <Route path={"/embed/:widgetSrc*"}>
@@ -192,6 +231,9 @@ function App(props) {
           <Route path={"/edit/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
             <EditorPage {...passProps} />
+          </Route>
+          <Route path={"/embed/:widgetSrc*"}>
+            <EmbedPage {...passProps} />
           </Route>
           <Route path={"/:widgetSrc*"}>
             {/* <NavigationWrapper {...passProps} /> */}
