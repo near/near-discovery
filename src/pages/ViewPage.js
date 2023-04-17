@@ -65,7 +65,7 @@ export default function ViewPage(props) {
               view: src,
             }
       );
-      //recordPageView(src);
+      recordPageView(src);
     }, 1);
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 
