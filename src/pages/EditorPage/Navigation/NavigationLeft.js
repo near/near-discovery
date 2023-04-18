@@ -18,7 +18,7 @@ export default ({
       onSelect={(key) => changeFile(JSON.parse(key))}
     >
       {Object.values(filesObject)?.map((file) => (
-        <FileTab file={file} closeFile={closeFile} />
+        <FileTab file={file} closeFile={closeFile} jpath={jpath} />
       ))}
       <Nav.Item className="me-1">
         <OpenCreateButton setShowModal={setShowModal} />

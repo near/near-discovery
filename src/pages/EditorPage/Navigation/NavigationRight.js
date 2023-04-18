@@ -11,7 +11,6 @@ export default ({
   setShowModal,
   codeVisible,
   forkFile,
-  toPath,
   near,
   path,
   metadata,

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React from "react";
 import NavigationLeft from "./NavigationLeft";
 import NavigationRight from "./NavigationRight";
 
@@ -8,7 +8,6 @@ const Navigation = ({
   filesObject,
   widgetName,
   codeVisible,
-  toPath,
   near,
   path,
   metadata,
@@ -38,7 +37,6 @@ const Navigation = ({
           setShowModal={setShowModal}
           codeVisible={codeVisible}
           forkFile={forkFile}
-          toPath={toPath}
           near={near}
           path={path}
           metadata={metadata}

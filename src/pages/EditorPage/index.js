@@ -393,7 +393,6 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
             filesObject={filesObject}
             widgetName={widgetName}
             codeVisible={codeVisible}
-            toPath={toPath}
             near={near}
             path={path}
             metadata={metadata}
