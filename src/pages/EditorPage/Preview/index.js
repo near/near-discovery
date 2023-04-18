@@ -12,6 +12,7 @@ const Preview = ({
   isModule,
   setRenderCode,
   setTab,
+  codeVisible,
 }) => (
   <div
     className={`${
@@ -72,6 +73,7 @@ const Preview = ({
                     setRenderCode={setRenderCode}
                     layout={layout}
                     setTab={setTab}
+                    codeVisible={codeVisible}
                   />
                 </div>
               )

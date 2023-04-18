@@ -6,7 +6,11 @@ const Search = ({ widgets, tos, logOut, loadAndOpenFile }) => {
   return (
     <>
       {widgets.editorComponentSearch && (
-        <div>
+        <div
+          style={{
+            marginTop: "10px",
+          }}
+        >
           {/* We use the component search widget as a VM entry point to add a TOS check wrapper.
                 It does not need to be this component, just some <Widget /> on the page */}
           <Widget

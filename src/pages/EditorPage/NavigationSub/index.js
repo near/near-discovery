@@ -8,12 +8,12 @@ const NavigationSub = ({
   layout,
   path,
   accountId,
-  renderCode,
   tab,
   widgetPath,
   setRenderCode,
   setTab,
   setLayoutState,
+  codeVisible,
 }) => {
   const onLayoutChange = (e) => {
     const layout = e.target.value;
@@ -39,12 +39,13 @@ const NavigationSub = ({
           justifyContent: "end",
         }}
       >
-        {renderCode && (
+        {(Tab.Widget === tab || layout === Layout.Split) && (
           <div className="d-flex justify-content-end me-2">
             <RenderPreviewButton
               setRenderCode={setRenderCode}
               layout={layout}
               setTab={setTab}
+              codeVisible={codeVisible}
             />
           </div>
         )}

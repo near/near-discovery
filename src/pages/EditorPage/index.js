@@ -35,6 +35,7 @@ import {
   toPath,
   updateLocalStorage,
 } from "./utils/editor";
+import MainLoader from "./Welcome/MainLoader";
 
 const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const near = useNear();
@@ -42,6 +43,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const accountId = useAccountId();
   const { widgetSrc } = useParams();
 
+  const [mainLoader, setMainLoader] = useState(true);
   const [filesObject, setFilesObject] = useState({});
   const [codeVisible, setCodeVisible] = useState(undefined);
   const [path, setPath] = useState(undefined);
@@ -113,6 +115,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
         setLastPath(lastPath);
         near && createFilesObject(files);
         selectFile(lastPath);
+        setMainLoader(false);
       });
   }, [cache, near]);
 
@@ -202,11 +205,9 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     updateCode(path, code);
 
     const jpath = JSON.stringify(path);
-
-    setFilesObject((files) => {
-      files[jpath] && (files[jpath].codeLocalStorage = code);
-      return files;
-    });
+    setFilesObject(
+      (files) => files[jpath] && (files[jpath].codeLocalStorage = code) && files
+    );
   };
 
   const updateCode = (path, code) => {
@@ -221,7 +222,6 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
         time: Date.now(),
       }
     );
-    const jpath = JSON.stringify(path);
     setCodeVisible(code);
   };
 
@@ -242,6 +242,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     const newFilesObject = { ...filesObject };
     delete newFilesObject[jpath];
     setFilesObject(newFilesObject);
+
     const lastFile = !Object.keys(newFilesObject).length;
 
     let newPath;
@@ -250,10 +251,12 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
       updateLocalStorage(newFilesObject, newPath, cache);
       return;
     }
+
     if (jpath !== JSON.stringify(lastPath)) {
       updateLocalStorage(newFilesObject, lastPath, cache);
       return;
     }
+
     if (jpath === JSON.stringify(lastPath)) {
       const newFile = Object.values(newFilesObject)[0];
       newPath = { type: newFile.type, name: newFile.name };
@@ -314,11 +317,11 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
 
   const loadAndOpenFile = (nameOrPath, type) => {
     const widgetSrc = getSrcByNameOrPath(nameOrPath, accountId, type);
-    const widget = `${widgetSrc}/**`;
+    const widgetSrcFull = `${widgetSrc}/**`;
     const cacheGet = () => {
       const widgetObject = cache.socialGet(
         near,
-        widget,
+        widgetSrcFull,
         false,
         undefined,
         undefined,
@@ -327,11 +330,11 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
 
       if (widgetObject) {
         const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
-        const code = codeDraft || codeMain;
+        const codeCurrent = codeDraft || codeMain;
         const path = toPath(type, widgetSrc);
 
         addFile(filesObject, path, codeMain, codeDraft, isDraft);
-        updateCode(path, code);
+        updateCode(path, codeCurrent);
         selectFile(path);
       }
     };
@@ -363,7 +366,8 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   };
 
   return (
-    <>
+    <div style={{ position: "relative" }}>
+      <MainLoader mainLoader={mainLoader} />
       <Modals
         setShowModal={setShowModal}
         jpath={jpath}
@@ -385,7 +389,13 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
       <div className={showEditor ? `` : `visually-hidden`}>
         <VsCodeBanner />
 
-        <div className="container-fluid mt-1">
+        <div className="container-fluid mt-1" style={{ position: "relative" }}>
+          <Search
+            widgets={widgets}
+            tos={tos}
+            logOut={logOut}
+            loadAndOpenFile={loadAndOpenFile}
+          />
           <Navigation
             setShowModal={setShowModal}
             jpath={jpath}
@@ -400,38 +410,35 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
             isDraft={isDraft}
             changeFile={changeFile}
           />
-          <Search
-            widgets={widgets}
-            tos={tos}
-            logOut={logOut}
-            loadAndOpenFile={loadAndOpenFile}
-          />
+
           <div className="d-flex align-content-start">
             <div className="flex-grow-1">
               <div className="row">
+                <div style={{ display: "flex" }}>
+                  <Tabs
+                    isModule={isModule}
+                    tab={tab}
+                    setTab={setTab}
+                    widgets={widgets}
+                    layout={layout}
+                    setRenderCode={setRenderCode}
+                    codeVisible={codeVisible}
+                  />
+                  <NavigationSub
+                    layout={layout}
+                    path={path}
+                    accountId={accountId}
+                    tab={tab}
+                    widgetPath={widgetPath}
+                    setRenderCode={setRenderCode}
+                    setTab={setTab}
+                    setLayoutState={setLayoutState}
+                    codeVisible={codeVisible}
+                  />
+                </div>
+              </div>
+              <div className="row">
                 <div className={layoutClass}>
-                  <div style={{ display: "flex" }}>
-                    <Tabs
-                      isModule={isModule}
-                      tab={tab}
-                      setTab={setTab}
-                      widgets={widgets}
-                      layout={layout}
-                      setRenderCode={setRenderCode}
-                      codeVisible={codeVisible}
-                    />
-                    <NavigationSub
-                      layout={layout}
-                      path={path}
-                      accountId={accountId}
-                      renderCode={renderCode}
-                      tab={tab}
-                      widgetPath={widgetPath}
-                      setRenderCode={setRenderCode}
-                      setTab={setTab}
-                      setLayoutState={setLayoutState}
-                    />
-                  </div>
                   <TabEditor
                     tab={tab}
                     codeVisible={codeVisible}
@@ -456,17 +463,6 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
                 </div>
                 <div className={layoutClass}>
                   <div className="row">
-                    <NavigationSub
-                      layout={layout}
-                      path={path}
-                      accountId={accountId}
-                      renderCode={renderCode}
-                      tab={tab}
-                      widgetPath={widgetPath}
-                      setRenderCode={setRenderCode}
-                      setTab={setTab}
-                      setLayoutState={setLayoutState}
-                    />
                     <Preview
                       tab={tab}
                       layout={layout}
@@ -476,6 +472,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
                       isModule={isModule}
                       setRenderCode={setRenderCode}
                       setTab={setTab}
+                      codeVisible={codeVisible}
                     />
                     <PreviewMetadata
                       tab={tab}
@@ -493,7 +490,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

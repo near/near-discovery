@@ -7,8 +7,19 @@ const TopMenu = styled.div`
   display: flex;
   color: #11181c;
   height: 40px;
+  margin: 0 8px 0 0;
 
-  margin: 0 4px;
+  &&& > a {
+    border: 1px solid #e5e5e5;
+    background: #fff;
+    color: #11181c;
+    padding-left: 6px;
+    padding-right: 6px;
+
+    .close {
+      opacity: 0;
+    }
+  }
 
   &&& > a:hover {
     border: 1px solid #6c757d;
@@ -22,17 +33,6 @@ const TopMenu = styled.div`
 
     .close {
       opacity: 1;
-    }
-  }
-  &&& > a {
-    border: 1px solid #e5e5e5;
-    background: #fff;
-    color: #11181c;
-    padding-left: 6px;
-    padding-right: 6px;
-
-    .close {
-      opacity: 0;
     }
   }
 
