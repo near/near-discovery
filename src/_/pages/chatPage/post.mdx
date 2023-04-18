@@ -4,27 +4,6 @@ import VerticalCodePreview from "../../components/VerticalCodePreview.js";
 
 # Dillinger
 
-```
-<Box
-  sx={{
-    height: 50,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingInline: 1,
-    borderBottom: `1px solid ${theme.borderColor}`,
-    backgroundColor: theme.backgroundColor,
-  }}
->
-  <Typography
-    variant="h6"
-    sx={{ fontWeight: 500, color: theme.textColor }}
-  >
-    {selectedSection?.name}
-  </Typography>
-</Box>
-```
-
 # Dillinger
 
 # Dillinger
@@ -45,11 +24,7 @@ import VerticalCodePreview from "../../components/VerticalCodePreview.js";
     overflow: "hidden",
   }}
 >
-  <VerticalCodePreview
-    horizontal
-    preview={false}
-    initialCode="  return ( <LearnContext.Provider value={{ projects, setProjects, showProjectbar, setShowProjectbar, selectedItem, setSelectedItem, // selectedProject, setSelectedProject, selectedSection, setSelectedSection, // goBack, }} > {props.children} </LearnContext.Provider>;"
-  />
+  <VerticalCodePreview initialCode="return(<div style={{backgroundColor: props.theme.ui }}><h1 style={{color: props.theme.textColor}}>Hello World</h1></div>)" />
 </div>
 
 # Dillinger

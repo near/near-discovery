@@ -9,12 +9,9 @@ const { merge } = require("webpack-merge");
 const loadPreset = require("./config/presets/loadPreset");
 const { WebpackManifestPlugin } = require("webpack-manifest-plugin");
 const loadConfig = (mode) => require(`./config/webpack.${mode}.js`)(mode);
-const Dotenv = require("dotenv-webpack");
 
 module.exports = function (env) {
   const { mode = "production" } = env || {};
-
-  console.log(`Webpack mode=====: ${JSON.stringify(env, null, 2)}`);
   return merge(
     {
       mode,
@@ -23,6 +20,11 @@ module.exports = function (env) {
         path: paths.distPath,
         filename: "[name].bundle.js",
         publicPath: "/",
+      },
+      devServer: {
+        historyApiFallback: {
+          disableDotRule: true,
+        },
       },
       module: {
         rules: [
@@ -59,12 +61,13 @@ module.exports = function (env) {
           crypto: require.resolve("crypto-browserify"),
           stream: require.resolve("stream-browserify"),
         },
+        // Fix for using `yarn link "near-social-vm"`
+        alias: {
+          react: path.resolve(__dirname, "./node_modules/react"),
+          "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+        },
       },
       plugins: [
-        new Dotenv({
-          // systemvars: true,
-          path: `./.env.${mode}`,
-        }),
         new webpack.EnvironmentPlugin({
           // Configure environment variables here.
           ENVIRONMENT: "browser",
@@ -87,6 +90,7 @@ module.exports = function (env) {
           template: `${paths.publicPath}/index.html`,
           favicon: `${paths.publicPath}/favicon.png`,
           robots: `${paths.publicPath}/robots.txt`,
+          publicPath: "/",
         }),
         new webpack.ProgressPlugin(),
         new webpack.ProvidePlugin({

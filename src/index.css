@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "Mona Sans";
+  src: url("./fonts/Mona-Sans.woff2") format("woff2 supports variations"),
+    url("./fonts/Mona-Sans.woff2") format("woff2-variations");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
 :root {
   --slate-dark-1: #151718;
   --slate-dark-3: #202425;
@@ -98,7 +106,7 @@
 
 /* PLEASE GO TO app.js er GlobalStyles > styls >  {line number: 151} */
 
-/* .dangerousStyle h1 {
+.dangerousStyle h1 {
   color: #1e293b;
 }
 
@@ -110,4 +118,4 @@
   color: #475569;
   padding: 8px;
   border-radius: 4px;
-} */
+}

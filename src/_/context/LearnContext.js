@@ -1,6 +1,4 @@
 import React, { useState, createContext, useEffect } from "react";
-import Post from "../pages/chatPage/post.mdx";
-import { MDXProvider } from "@mdx-js/react";
 
 export const LearnContext = createContext();
 
@@ -344,7 +342,7 @@ return (
       {
         _id: "6",
         name: "Step 6: Reading data from external API",
-        discription: <Post />,
+        discription: ``,
         code: `//TODO:`,
       },
     ],

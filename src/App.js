@@ -1,16 +1,33 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  // useLayoutEffect,
+  useState,
+} from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
-import {
-  HashRouter as Router,
-  Route,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+// import EditorPage from "./pages/EditorPage";
+// import ViewPage from "./pages/ViewPage";
+import { setupWalletSelector } from "@near-wallet-selector/core";
+import { setupNearWallet } from "@near-wallet-selector/near-wallet";
+import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
+import { setupSender } from "@near-wallet-selector/sender";
+import { setupHereWallet } from "@near-wallet-selector/here-wallet";
+import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
+import { setupNeth } from "@near-wallet-selector/neth";
+import { setupModal } from "@near-wallet-selector/modal-ui";
+// import EmbedPage from "./pages/EmbedPage";
+import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
+import Big from "big.js";
+import { useFlags } from "./utils/flags";
+
 import ReactGA from "react-ga4";
+import { Box } from "@mui/material";
 
 import MyEditorPage from "./_/pages/editorPage/EditorPage";
 import MyBetaEditorPage from "./_/pages/editorPage/EditorPage.beta";
@@ -23,18 +40,14 @@ import LearnPage from "./_/pages/learnPage/LearnPage";
 import ChatPage from "./_/pages/chatPage/ChatPage";
 import AuthPage from "./_/pages/AuthPage";
 
-// import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
-import { setupModal } from "@near-wallet-selector/modal-ui";
-import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
-import Big from "big.js";
 import { EditorContext } from "./_/context/EditorContext";
-import Footer from "./_/components/Footer";
-import { Box, GlobalStyles } from "@mui/material";
 import { ThemeContext } from "./_/context/ThemeContext";
-import PagesContainer from "./_/components/PagesContainer";
-import LoginDialog from "./_/dialogs/LoginDialog";
-import LearnContextProvider from "./_/context/LearnContext";
 import { AuthContext } from "./_/context/AuthContext";
+import LearnContextProvider from "./_/context/LearnContext";
+
+import LoginDialog from "./_/dialogs/LoginDialog";
+import PagesContainer from "./_/components/PagesContainer";
+import Footer from "./_/components/Footer";
 
 export const refreshAllowanceObj = {};
 ReactGA.initialize("G-YJ2FL738R6");
@@ -50,6 +63,7 @@ export default function App() {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const [flags, setFlags] = useFlags();
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -59,25 +73,27 @@ export default function App() {
   const location = window.location;
 
   useEffect(() => {
-    ReactGA.send({ hitType: "pageview", page: window.location.pathname });
-  }, []);
-
-  useEffect(() => {
-    initNear &&
+    console.log("NetworkId : USEEEEFF1 : ", NetworkId);
+    NetworkId &&
+      initNear &&
       initNear({
-        networkId: localStorage.getItem("environment"),
+        networkId: NetworkId,
+        selector: setupWalletSelector({
+          network: NetworkId,
+          modules: [
+            setupNearWallet(),
+            setupMyNearWallet(),
+            setupSender(),
+            setupHereWallet(),
+            setupMeteorWallet(),
+            setupNeth({
+              gas: "300000000000000",
+              bundle: false,
+            }),
+          ],
+        }),
       });
   }, [initNear, NetworkId]);
-
-  useEffect(() => {
-    if (
-      !location.search.includes("?account_id") &&
-      !location.search.includes("&account_id") &&
-      (location.search || location.href.includes("/?#"))
-    ) {
-      window.history.replaceState({}, "/", "/" + location.hash);
-    }
-  }, [location]);
 
   useEffect(() => {
     if (!near) {
@@ -88,7 +104,7 @@ export default function App() {
         setupModal(selector, { contractId: near.config.contractName })
       );
     });
-  }, [near, NetworkId]);
+  }, [near]);
 
   const requestSignIn = useCallback(
     (e) => {
@@ -148,44 +164,20 @@ export default function App() {
     requestSignIn,
     widgets: Widgets,
     tos: {
-      checkComponentPath: "adminalpha.near/widget/TosCheck",
-      contentComponentPath: "adminalpha.near/widget/TosContent",
+      checkComponentPath: Widgets.tosCheck,
+      contentComponentPath: Widgets.tosContent,
     },
+    flags,
+    setFlags,
   };
 
   return (
     <Box className="App">
-      <GlobalStyles
-        styles={{
-          "*::-webkit-scrollbar": {
-            width: 7,
-          },
-          "*::-webkit-scrollbar-track": {
-            boxShadow: "none",
-            backgroundColor: theme.borderColor + "11",
-            borderEadius: 4,
-          },
-          "*::-webkit-scrollbar-thumb": {
-            backgroundColor: theme.borderColor,
-            borderRadius: 1,
-          },
+      {/* <Helmet>
+        <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+      </Helmet> */}
 
-          ".dangerousStyle h1": {
-            color: theme.textColor,
-          },
-          ".dangerousStyle h2": {
-            color: theme.textColor,
-          },
-          ".dangerousStyle pre": {
-            backgroundColor: theme.ui2,
-            color: theme.textColor2,
-            padding: 8,
-            borderRadius: 4,
-          },
-        }}
-      />
-
-      <Router basename={process.env.PUBLIC_URL}>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route path={"/components/:widgetSrc*"}>
             {/* <NavigationWrapper {...passProps} /> */}
@@ -255,13 +247,12 @@ export default function App() {
           <Route path="/:widgetSrc*">
             {/* <ViewPage {...passProps} /> */}
 
-            {uesr ? <Redirect to="/editor" /> : <HomePage {...passProps} />}
+            <HomePage {...passProps} />
+            {/* {uesr ? <Redirect to="/editor" /> : <HomePage {...passProps} />} */}
           </Route>
-
-          {/* <Route path="/" component={HomePage} /> */}
         </Switch>
         <LoginDialog />
-      </Router>
+      </BrowserRouter>
     </Box>
   );
 }

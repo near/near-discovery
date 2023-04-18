@@ -31,10 +31,9 @@ export const AuthContextProvider = (props) => {
   };
   const logout = async () => {
     await localStorage.removeItem("githubToken");
-    setUser(null);
-    // history.push("/");
-    window.location.replace("#/");
-    // setShowDialog(true);
+    setShowDialog(true);
+    setUser();
+    history.push("/editor");
   };
 
   return (

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { Logo } from "../icons/Logo";
 import { Return } from "../icons/Return";
 import { NavigationButton } from "../NavigationButton";
 import { SignInButton } from "../SignInButton";
@@ -11,6 +12,7 @@ import { NotificationWidget } from "../NotificationWidget";
 import image from "../icons/search.svg";
 import { useHistory } from "react-router-dom";
 import DiamondRoundedIcon from "@mui/icons-material/DiamondRounded";
+import { ThemeContext } from "../../../../_/context/ThemeContext";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -105,6 +107,7 @@ const StyledNavigation = styled.div`
 `;
 
 export function DesktopNavigation(props) {
+  const { theme } = useContext(ThemeContext);
   const [menuDropdown, setMenuDropdown] = useState(false);
   const [searchInputFocus, setSearchInputFocus] = useState(false);
   const history = useHistory();
@@ -112,14 +115,14 @@ export function DesktopNavigation(props) {
     <StyledNavigation onMouseLeave={() => setMenuDropdown(false)}>
       <div className="container">
         <Link to="/" className="logo-link">
-          <DiamondRoundedIcon sx={{ fill: "#FFF" }} />
+          <DiamondRoundedIcon sx={{ fill: theme.buttonTextColor }} />
         </Link>
         <div className="form-wrapper">
           {/* <form
             onSubmit={(e) => {
               e.preventDefault();
               history.push(
-                `/calebjacob.near/widget/GlobalSearchPage?term=${e.target[0].value}`
+                `/${props.widgets?.globalSearchPage}?term=${e.target[0].value}`
               );
             }}
           >
@@ -138,8 +141,8 @@ export function DesktopNavigation(props) {
             route="/"
           >
             Home
-          </NavigationButton> */}
-          {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
+          </NavigationButton>
+          <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
             Discover
           </NavDropdownButton>
           <NavDropdownButton onMouseEnter={() => setMenuDropdown("develop")}>
@@ -153,7 +156,7 @@ export function DesktopNavigation(props) {
           {props.signedIn && (
             <>
               <NotificationWidget
-                notificationButtonSrc="calebjacob.near/widget/NotificationButton"
+                notificationButtonSrc={props.widgets.notificationButton}
                 onMouseEnter={() => setMenuDropdown(false)}
               />
               <UserDropdown

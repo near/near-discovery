@@ -13,34 +13,81 @@ import { Masonry } from "@mui/lab";
 
 const testimonies = [
   {
-    fullName: "Cameron.near",
-    username: "@Cameron_Dennis_",
-    quote: `So proud of @zahidsharp for launching @NEARpad and getting accepted to @_buildspace season 3! Keep your eye on NEARpad to ship the best platform to host frontends onchain and getting one step closer to real decentralization in web3 🚀🚀🚀`,
-  },
-  {
+    avatar:
+      "https://media.licdn.com/dms/image/D5603AQFAD7VUMRWjhA/profile-displayphoto-shrink_800_800/0/1676761041893?e=1686787200&v=beta&t=RRyezTibAVSZEKgK4ZLy1fAd-5_HcOgS_PaxT-D64iU",
     fullName: "Saidul Badhon",
     username: "@saidulbadhon.near",
-    quote: `Just discovered @NEARpad and it's a game-changer for #dApp developers! Creating, publishing, and monetizing smart contracts and UI components has never been easier. Say goodbye to development headaches and hello to seamless integration. #blockchain #near #bos #dapps`,
+    quote: `Hey, chooms! After patch 1.62 for 
+        @CyberpunkGame
+        , the folder location for the Photo Mode pictures has changed. Now you can find them in "%userprofile%\Documents\CD Projekt Red\Cyberpunk 2077\screenshots" – we are looking into bringing them back to their original folder location.`,
   },
   {
-    fullName: "b00!",
-    username: "@alexpenadev",
-    quote: `Looking for an intuitive, all-in-one #blockchain development tool? Check out @NearPad. It's easy to create, publish, and monetize smart contracts and UI components with this platform. Join the #dApp revolution today! #crypto #near #web3`,
-  },
-  {
-    fullName: "Cygnus Dynamics",
-    username: "@cygnus-dynamics",
-    quote: `As a startup founder, I need tools that help me move fast and build with confidence. @NearPad is a game-changer for my team. It streamlines our #dApp development process and enables us to monetize our creations easily. Highly recommend! #startup #crypto`,
-  },
-  {
-    fullName: "Miguel Rodriguez",
+    fullName: "deCode",
     username: "@deCode666",
-    quote: `Working with #blockchain technology can be challenging, but @NearPad makes it a breeze. As a web developer, I appreciate how easy it is to create, publish, and monetize smart contracts and UI components with this platform. Try it out and see for yourself! #webdev #dApp`,
+    quote: `OK, one thing, if I may. Is this happening also to other people using the Overdrive only for the PM? Some shots look good, others have this weird "granular" quality to them ... IDK.`,
   },
   {
-    fullName: "Samantha Lee",
-    username: "@samantha.lee",
-    quote: `Developing on the blockchain just got easier with #NearPad from @nearprotocol. As a developer, I love the ability to create and publish smart contracts and UI components seamlessly. With NEARPad, I'm able to monetize my creations easily, too. Give it a try! #blockchain #dApp`,
+    fullName: "Gloss",
+    username: "@glossolalia3301",
+    quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
+  },
+  {
+    avatar:
+      "https://media.licdn.com/dms/image/D5603AQFAD7VUMRWjhA/profile-displayphoto-shrink_800_800/0/1676761041893?e=1686787200&v=beta&t=RRyezTibAVSZEKgK4ZLy1fAd-5_HcOgS_PaxT-D64iU",
+    fullName: "Saidul Badhon",
+    username: "@saidulbadhon.near",
+    quote: `Hey, chooms! After patch 1.62 for 
+      @CyberpunkGame
+      , the folder location for the Photo Mode pictures has changed. Now you can find them in "%userprofile%\Documents\CD Projekt Red\Cyberpunk 2077\screenshots" – we are looking into bringing them back to their original folder location.`,
+  },
+  {
+    fullName: "Gloss",
+    username: "@glossolalia3301",
+    quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
+  },
+  {
+    fullName: "deCode",
+    username: "@deCode666",
+    quote: `OK, one thing, if I may. Is this happening also to other people using the Overdrive only for the PM? Some shots look good, others have this weird "granular" quality to them ... IDK.`,
+  },
+  {
+    fullName: "Gloss",
+    username: "@glossolalia3301",
+    quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
+  },
+  {
+    fullName: "Gloss",
+    username: "@glossolalia3301",
+    quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
+  },
+  {
+    fullName: "deCode",
+    username: "@deCode666",
+    quote: `OK, one thing, if I may. Is this happening also to other people using the Overdrive only for the PM? Some shots look good, others have this weird "granular" quality to them ... IDK.`,
+  },
+  {
+    avatar:
+      "https://media.licdn.com/dms/image/D5603AQFAD7VUMRWjhA/profile-displayphoto-shrink_800_800/0/1676761041893?e=1686787200&v=beta&t=RRyezTibAVSZEKgK4ZLy1fAd-5_HcOgS_PaxT-D64iU",
+    fullName: "Saidul Badhon",
+    username: "@saidulbadhon.near",
+    quote: `Hey, chooms! After patch 1.62 for 
+          @CyberpunkGame
+          , the folder location for the Photo Mode pictures has changed. Now you can find them in "%userprofile%\Documents\CD Projekt Red\Cyberpunk 2077\screenshots" – we are looking into bringing them back to their original folder location.`,
+  },
+  {
+    fullName: "Gloss",
+    username: "@glossolalia3301",
+    quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
+  },
+  {
+    fullName: "Gloss",
+    username: "@glossolalia3301",
+    quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
+  },
+  {
+    fullName: "Gloss",
+    username: "@glossolalia3301",
+    quote: `Virtual photographer. Fluent in Polish and English, learning Ukrainian. | ⚢ she/they`,
   },
 ];
 
@@ -70,19 +117,28 @@ export default function HomeTestimonialSection() {
       </Typography> */}
 
       <Box style={{ width: "100%", maxWidth: 1250 }}>
-        {bp ? (
-          <Box sx={{ display: "flex", gap: 2, flexDirection: "column", px: 2 }}>
-            {testimonies?.map((item, index) => (
-              <TestimonialItem key={index} {...item} />
-            ))}
-          </Box>
-        ) : (
+        {/* {bp ? ( */}
+        {/* <Box sx={{ display: "flex", gap: 2, flexDirection: "column", px: 2 }}> */}
+        <Box
+          sx={{
+            width: "100%",
+            display: "grid",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+            gap: 2,
+            px: 2,
+          }}
+        >
+          {testimonies?.map((item, index) => (
+            <TestimonialItem key={index} {...item} />
+          ))}
+        </Box>
+        {/* ) : (
           <Masonry columns={3} spacing={2} sx={{ px: 2 }}>
             {testimonies?.map((item, index) => (
               <TestimonialItem key={index} {...item} />
             ))}
           </Masonry>
-        )}
+        )} */}
       </Box>
     </Box>
   );

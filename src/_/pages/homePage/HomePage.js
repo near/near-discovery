@@ -11,17 +11,10 @@ import HomeOurPartnersSection from "./_components/HomeOurPartnersSection";
 import HomeTestimonialSection from "./_components/HomeTestimonialSection";
 import { Widget } from "near-social-vm";
 import { Box } from "@mui/material";
-import { EditorContext } from "../../context/EditorContext";
-import { useEffect } from "react";
 
 export default function HomePage(props) {
   const { widgetSrc } = useParams();
   const { theme, bp } = useContext(ThemeContext);
-  const { setNetworkId } = useContext(EditorContext);
-
-  useEffect(() => {
-    setNetworkId("mainnet");
-  }, []);
 
   return widgetSrc ? (
     <ViewPage {...props} />
@@ -29,22 +22,8 @@ export default function HomePage(props) {
     <>
       <HomeHeader />
       <HomeTopSection />
-      {/* <HomeOurPartnersSection /> */}
+      <HomeOurPartnersSection />
       <HomeEditorContainer />
-      <Box
-        className="containerCSS"
-        sx={{ py: 10, backgroundColor: theme.backgroundColor }}
-      >
-        <Box className="contentCSS">
-          <Widget src="near/widget/PeoplePage" />
-        </Box>
-      </Box>
-
-      <Box className="containerCSS" sx={{ py: 10 }}>
-        <Box className="contentCSS">
-          <Widget src="near/widget/ComponentsPage" />
-        </Box>
-      </Box>
       {/* <HomeFeatureSection
         rtl
         title="BOS DevTools"
@@ -76,6 +55,20 @@ export default function HomePage(props) {
       />*/}
       <HomeTestimonialSection />
 
+      <Box className="containerCSS" sx={{ py: 10 }}>
+        <Box className="contentCSS">
+          <Widget src="near/widget/PeoplePage" />
+        </Box>
+      </Box>
+
+      <Box
+        className="containerCSS"
+        sx={{ py: 10, backgroundColor: theme.backgroundColor }}
+      >
+        <Box className="contentCSS">
+          <Widget src="near/widget/ComponentsPage" />
+        </Box>
+      </Box>
       <HomeFooter />
     </>
   );

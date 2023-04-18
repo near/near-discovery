@@ -8,7 +8,9 @@ import { useContext } from "react";
 export default function EmbedPage(props) {
   const { theme } = useContext(ThemeContext);
   const { widgetSrc } = useParams();
-  const account = useAccount();
+  const { accountId } = useAccount();
+
+  console.log(widgetSrc);
 
   return (
     <div>
@@ -16,11 +18,11 @@ export default function EmbedPage(props) {
 
       <Widget
         src={widgetSrc}
-        props={{
-          theme,
-          accountId: account.accountId,
-          logOut: props.logOut,
-        }}
+        // props={{
+        //   theme,
+        //   accountId: accountId,
+        //   logOut: props.logOut,
+        // }}
       />
     </div>
   );

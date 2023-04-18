@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PagesContainer from "../components/PagesContainer";
 import { Widget } from "near-social-vm";
 import { Box } from "@mui/material";
@@ -10,8 +10,12 @@ const pattern = /.*\..*\/.*\/.*/;
 
 export default function ProfilePage(props) {
   const { theme } = useContext(ThemeContext);
-  const { Widgets } = useContext(EditorContext);
+  const { Widgets, setSelectedActivity } = useContext(EditorContext);
   // const { widgetSrc } = useParams();
+
+  useEffect(() => {
+    setSelectedActivity("profile");
+  }, []);
 
   return (
     <PagesContainer {...props}>

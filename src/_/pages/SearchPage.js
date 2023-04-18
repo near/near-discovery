@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PagesContainer from "../components/PagesContainer";
 import { Widget } from "near-social-vm";
 import { Box } from "@mui/material";
@@ -10,8 +10,13 @@ const pattern = /.*\..*\/.*\/.*/;
 
 export default function SearchPage(props) {
   const { theme } = useContext(ThemeContext);
-  const { openComponentDetail } = useContext(EditorContext);
+  const { openComponentDetail, setSelectedActivity } =
+    useContext(EditorContext);
   // const { widgetSrc } = useParams();
+
+  useEffect(() => {
+    setSelectedActivity("search");
+  }, []);
 
   return (
     <PagesContainer {...props}>

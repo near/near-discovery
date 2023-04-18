@@ -9,7 +9,6 @@ import { LearnContext } from "../../context/LearnContext";
 import { ThemeContext } from "../../context/ThemeContext";
 // import { Widget } from "near-social-vm";
 import VerticalCodePreview from "../../components/VerticalCodePreview";
-import { MDXProvider } from "@mdx-js/react";
 
 export default function LearnPage(props) {
   const { selectedActivity, setSelectedActivity } = useContext(EditorContext);
@@ -64,14 +63,6 @@ const Projectbar = () => {
   const { selectedProject, selectedItem, setSelectedItem, selectedSection } =
     useContext(LearnContext);
 
-  const components = {
-    per: (props) => (
-      <per style={{ backgroundColor: "green", color: "red" }} {...props} />
-    ),
-    h1: (props) => <h1 style={{ color: "red" }} {...props} />,
-    em: (props) => <i {...props} />,
-  };
-
   return (
     <Box sx={{ height: "100%", overflowY: "auto", backgroundColor: theme.ui }}>
       <Box
@@ -99,8 +90,6 @@ const Projectbar = () => {
             style={{ color: theme.textColor }}
             dangerouslySetInnerHTML={{ __html: selectedSection?.discription }}
           />
-
-          {/* <MDXProvider components={components}>{selectedSection?.discription}</MDXProvider> */}
 
           {/* <Widget
             src="saidulbadhon.near/widget/LearnPage.Markdown"

@@ -82,7 +82,7 @@ const EnvironmentMenu = () => {
           sx={{ fill: theme.buttonTextColor, fontSize: "1rem" }}
         />
         <Typography variant="p1" sx={{ color: "#FFF", textTransform: "none" }}>
-          {camelToNormal(NetworkId)}
+          {camelToNormal(NetworkId || "")}
         </Typography>
       </ButtonBase>
       <Menu
