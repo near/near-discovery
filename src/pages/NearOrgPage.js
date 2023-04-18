@@ -39,11 +39,17 @@ export default function NearOrgPage(props) {
       <div>
         {(!localOverrideUrl || redirectMap) && (
           <Widget
-            config={{ redirectMap: redirectMap }}
+            config={{ redirectMap }}
             key={props.widgets.wrapper}
             src={props.widgets.wrapper}
             props={{
-              children: <Widget key={props.src} src={props.src} />,
+              children: (
+                <Widget
+                  config={{ redirectMap }}
+                  key={props.src}
+                  src={props.src}
+                />
+              ),
             }}
           />
         )}

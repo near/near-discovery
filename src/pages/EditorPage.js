@@ -21,6 +21,7 @@ import { SaveDraftModal } from "../components/SaveDraft";
 import styled from "styled-components";
 import VsCodeBanner from "../components/Editor/VsCodeBanner";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
+import { get, isEmpty } from "lodash";
 
 const TopMenu = styled.div`
   border-radius: 0.375rem;
@@ -226,6 +227,8 @@ export default function EditorPage(props) {
   }, [code, codeOnChain, draftOnChain]);
 
   const checkDrafts = () => {
+    if (!widgetName || !near) 
+      return
     files.forEach((f) => {
       const widgetSrc = `${accountId}/widget/${f.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
@@ -256,6 +259,7 @@ export default function EditorPage(props) {
 
   const checkHasCodeChange = () => {
     files.forEach((f) => {
+      if(!f) return
       const widgetSrc = `${accountId}/widget/${f.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
         const widgetCode = cache.socialGet(
@@ -432,7 +436,7 @@ export default function EditorPage(props) {
 
   const openDraft = useCallback(
     (widgetName) => {
-      if (!near) {
+      if (!widgetName || !near) {
         return;
       }
       const widgetSrc = `${accountId}/widget/${widgetName}/branch/draft`;
@@ -555,7 +559,7 @@ export default function EditorPage(props) {
       });
   }, [cache]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (!near || !files) {
       return;
     }
@@ -573,7 +577,7 @@ export default function EditorPage(props) {
         openFile(lastPath, undefined);
       }
     }
-  }, [near, createFile, lastPath, files, path, widgetSrc, openFile, loadFile]);
+  }, [near, createFile, lastPath, files, path, widgetSrc, openFile, loadFile]);  */
 
   const reformat = useCallback(
     (path, code) => {
@@ -861,8 +865,8 @@ export default function EditorPage(props) {
                         activeKey={jpath}
                         onSelect={(key) => openFile(JSON.parse(key))}
                       >
-                        {files?.map((p, idx) => {
-                          if (p.unnamed) {
+                        {!isEmpty(files) && files.map((p, idx) => {
+                          if (p && p.unnamed) {
                             return;
                           }
 
