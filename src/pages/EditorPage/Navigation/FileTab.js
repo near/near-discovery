@@ -8,14 +8,32 @@ const TopMenu = styled.div`
   color: #11181c;
   height: 40px;
 
+  margin: 0 4px;
+
+  &&& > a:hover {
+    border: 1px solid #6c757d;
+
+    .close {
+      opacity: 1;
+    }
+  }
   &&& > a.active {
-    border: 1px solid #ced4da;
+    border: 1px solid #6c757d;
+
+    .close {
+      opacity: 1;
+    }
   }
   &&& > a {
+    border: 1px solid #e5e5e5;
     background: #fff;
     color: #11181c;
     padding-left: 6px;
     padding-right: 6px;
+
+    .close {
+      opacity: 0;
+    }
   }
 
   .draft {
@@ -28,15 +46,19 @@ const TopMenu = styled.div`
     font-size: 12px;
     border-radius: 50px;
     background-color: #ffecbc;
-    margin-right: 6px;
+    margin-left: 8px;
   }
 
   .dot {
-    background: #f45858;
+    background: #fff;
     width: 10px;
     height: 10px;
     border-radius: 100%;
-    margin: 7px 8px 0;
+    margin: 7px 8px 0 4px;
+  }
+
+  .dot-red {
+    background: #f45858;
   }
 
   .close {
@@ -49,16 +71,16 @@ export default ({ file, closeFile }) => {
   const jpath = JSON.stringify({ type: file.type, name: file.name });
   const widgetName = file?.name?.split("/")[0];
 
+  const dotRed = !file.savedOnChain || file.changesMade;
+
   return (
     <Nav.Item key={jpath}>
       <TopMenu>
         <Nav.Link className="text-decoration-none d-flex" eventKey={jpath}>
           <div className="d-flex">
-            {file.isDraft && <div className="draft">Draft</div>}
+            <div className={`dot ${dotRed ? `dot-red` : ``}`}></div>
             <div>{widgetName}</div>
-            {(!file.savedOnChain || file.changesMade) && (
-              <div className="dot"></div>
-            )}
+            {file.isDraft && <div className="draft">Draft</div>}
           </div>
           <button
             className={`close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary`}
