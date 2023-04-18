@@ -43,7 +43,7 @@ export default function SearchPage(props) {
         >
           {pattern.test(openComponentDetail) ? (
             <Widget
-              src="saidulbadhon.near/widget/SearchPage.ComponentDetails"
+              src="saidulbadhon.near/widget/SearchPage.ComponentDetails-fork"
               props={{ src: openComponentDetail }}
             />
           ) : (

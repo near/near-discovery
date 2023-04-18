@@ -106,7 +106,7 @@ export default function LearnSidebar() {
               }}
             >
               <Typography
-                variant="h6"
+                variant="p"
                 sx={{
                   fontWeight: 500,
                   color: theme.textColor,
@@ -160,7 +160,7 @@ export default function LearnSidebar() {
               }}
             >
               <Typography
-                variant="h6"
+                variant="p"
                 sx={{
                   fontWeight: 600,
                   color: theme.textColor,
@@ -170,7 +170,7 @@ export default function LearnSidebar() {
                 {project?.name}
               </Typography>
               <Typography
-                variant="p"
+                variant="p1"
                 sx={{
                   fontWeight: 400,
                   color: theme.textColor3,

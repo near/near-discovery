@@ -58,7 +58,7 @@ export default function SearchSidebar() {
       <Widget
         src={`saidulbadhon.${
           NetworkId === "testnet" ? "testnet" : "near"
-        }/widget/SearchPage`}
+        }/widget/SearchPage-fork`}
         props={{
           theme,
           selectedItem: openComponentDetail,
