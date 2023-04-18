@@ -33,6 +33,7 @@ import {
   getSrcByNameOrPath,
   getWidgetDetails,
   toPath,
+  updateLocalStorage,
 } from "./utils/editor";
 
 const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
@@ -67,6 +68,26 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
 
   useEffect(() => {
+    const newFilesObject = { ...filesObject };
+
+    Object.keys(filesObject).map((key) => {
+      const file = filesObject[key];
+      const { codeMain, codeDraft, codeLocalStorage } = file;
+
+      const changesMade = checkChangesMade(
+        codeMain,
+        codeDraft,
+        codeLocalStorage
+      );
+      newFilesObject[key].changesMade = changesMade;
+
+      const isDraft = !!codeDraft;
+      newFilesObject[key].isDraft = isDraft;
+    });
+    setFilesObject(newFilesObject);
+  }, [codeVisible]);
+
+  useEffect(() => {
     setWidgetSrc({
       edit: null,
       view: widgetSrc,
@@ -95,23 +116,9 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
       });
   }, [cache, near]);
 
-  const updateLocalStorage = (newFilesObject, path) => {
-    const newFiles = Object.values(newFilesObject).map((file) => ({
-      type: file.type,
-      name: file.name,
-    }));
-    cache.localStorageSet(
-      StorageDomain,
-      {
-        type: StorageType.Files,
-      },
-      { files: newFiles, lastPath: path }
-    );
-  };
-
   const createFilesObject = (files = []) => {
-    const filesObject = files.reduce((x, file) => {
-      return {
+    const filesObject = files.reduce(
+      (x, file) => ({
         ...x,
         [JSON.stringify({ type: file.type, name: file.name })]: {
           ...file,
@@ -122,8 +129,9 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           changesMade: false,
           savedOnChain: false,
         },
-      };
-    }, {});
+      }),
+      {}
+    );
     setFilesObject(filesObject);
 
     Object.values(filesObject).map((fileObject) => {
@@ -132,7 +140,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
       const widgetSrc = `${accountId}/${fileObject.type}/${fileObject.name}/**`;
 
       const fetchCode = () => {
-        const widgetCode = cache.socialGet(
+        const widgetObject = cache.socialGet(
           near,
           widgetSrc,
           false,
@@ -141,8 +149,9 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           fetchCode
         );
 
-        if (widgetCode) {
-          const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetCode);
+        if (widgetObject) {
+          const { codeMain, codeDraft, isDraft } =
+            getWidgetDetails(widgetObject);
 
           cache
             .asyncLocalStorageGet(StorageDomain, {
@@ -189,23 +198,32 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     updateCode(newPath, codeVisible);
   };
 
-  const updateCode = useCallback(
-    (path, code) => {
-      cache.localStorageSet(
-        StorageDomain,
-        {
-          path,
-          type: StorageType.Code,
-        },
-        {
-          code,
-          time: Date.now(),
-        }
-      );
-      setCodeVisible(code);
-    },
-    [cache, setCodeVisible]
-  );
+  const changeCode = (path, code) => {
+    updateCode(path, code);
+
+    const jpath = JSON.stringify(path);
+
+    setFilesObject((files) => {
+      files[jpath] && (files[jpath].codeLocalStorage = code);
+      return files;
+    });
+  };
+
+  const updateCode = (path, code) => {
+    cache.localStorageSet(
+      StorageDomain,
+      {
+        path,
+        type: StorageType.Code,
+      },
+      {
+        code,
+        time: Date.now(),
+      }
+    );
+    const jpath = JSON.stringify(path);
+    setCodeVisible(code);
+  };
 
   const reformat = (path, code) => {
     try {
@@ -224,11 +242,24 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     const newFilesObject = { ...filesObject };
     delete newFilesObject[jpath];
     setFilesObject(newFilesObject);
-    const newPath = JSON.parse(Object.keys(newFilesObject)[0]);
-    if (jpath === JSON.stringify(lastPath)) {
-      selectFile(newPath);
+    const lastFile = !Object.keys(newFilesObject).length;
+
+    let newPath;
+    if (lastFile) {
+      newPath = undefined;
+      updateLocalStorage(newFilesObject, newPath, cache);
+      return;
     }
-    updateLocalStorage(newFilesObject, newPath || jpath);
+    if (jpath !== JSON.stringify(lastPath)) {
+      updateLocalStorage(newFilesObject, lastPath, cache);
+      return;
+    }
+    if (jpath === JSON.stringify(lastPath)) {
+      const newFile = Object.values(newFilesObject)[0];
+      newPath = { type: newFile.type, name: newFile.name };
+      selectFile(newPath);
+      updateLocalStorage(newFilesObject, newPath, cache);
+    }
   };
 
   const selectFile = (path) => {
@@ -244,26 +275,11 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
       .then(({ code }) => {
         const jpath = JSON.stringify(path);
         updateCode(path, code);
-        setFilesObject((file) => {
-          file[jpath] && (file[jpath].codeLocalStorage = code);
-          return file;
-        });
       });
   };
 
-  // uaktualnia obiekty files i filesOpened, zarowno w state jak i local storage
   const updateFiles = (newFilesObject, lastPath) => {
-    const newFiles = Object.values(newFilesObject).map((file) => ({
-      type: file.type,
-      name: file.name,
-    }));
-    cache.localStorageSet(
-      StorageDomain,
-      {
-        type: StorageType.Files,
-      },
-      { files: newFiles, lastPath }
-    );
+    updateLocalStorage(newFilesObject, lastPath, cache);
     setFilesObject(newFilesObject);
   };
 
@@ -278,19 +294,21 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     const forkName = widgetName + "-fork";
     const path = toPath(Filetype.Widget, forkName);
 
-    const newFilesObject = addFile(filesObject, path, codeVisible, "", false);
+    addFile(filesObject, path, codeVisible, "", false, false);
     updateCode(path, codeVisible);
-    updateFiles(newFilesObject, path);
     selectFile(path);
   };
 
   const createFile = (type) => {
+    const files = Object.values(filesObject).map((file) => ({
+      type: file.type,
+      name: file.name,
+    }));
     const path = generateNewName(type, files);
     const code = getDefaultCode(type);
 
-    const newFilesObject = addFile(filesObject, path, code, "", false);
+    addFile(filesObject, path, code, "", false, false);
     updateCode(path, code);
-    updateFiles(newFilesObject, path);
     selectFile(path);
   };
 
@@ -312,22 +330,22 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
         const code = codeDraft || codeMain;
         const path = toPath(type, widgetSrc);
 
-        const newFilesObject = addFile(
-          filesObject,
-          path,
-          codeMain,
-          codeDraft,
-          isDraft
-        );
+        addFile(filesObject, path, codeMain, codeDraft, isDraft);
         updateCode(path, code);
-        updateFiles(newFilesObject, path);
         selectFile(path);
       }
     };
     cacheGet();
   };
 
-  const addFile = (filesObject, path, codeMain, codeDraft, isDraft) => {
+  const addFile = (
+    filesObject,
+    path,
+    codeMain,
+    codeDraft,
+    isDraft,
+    savedOnChain = true
+  ) => {
     const newFilesObject = {
       ...filesObject,
       [JSON.stringify(path)]: {
@@ -337,11 +355,11 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
         codeLocalStorage: codeDraft || codeMain,
         isDraft: isDraft,
         changesMade: false,
-        savedOnChain: false,
+        savedOnChain: savedOnChain,
       },
     };
 
-    return newFilesObject;
+    updateFiles(newFilesObject, path);
   };
 
   return (
@@ -419,7 +437,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
                     tab={tab}
                     codeVisible={codeVisible}
                     widgetPath={widgetPath}
-                    updateCode={updateCode}
+                    changeCode={changeCode}
                     path={path}
                     reformat={reformat}
                   />

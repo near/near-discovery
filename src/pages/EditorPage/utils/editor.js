@@ -1,4 +1,10 @@
-import { DefaultEditorCode, DefaultEditorModuleCode, Filetype } from "./const";
+import {
+  DefaultEditorCode,
+  DefaultEditorModuleCode,
+  Filetype,
+  StorageDomain,
+  StorageType,
+} from "./const";
 
 export const toPath = (type, nameOrPath) => {
   const name =
@@ -51,4 +57,18 @@ export const getWidgetDetails = (widgetObject) => {
     codeDraft,
     isDraft,
   };
+};
+
+export const updateLocalStorage = (newFilesObject, path, cache) => {
+  const newFiles = Object.values(newFilesObject).map((file) => ({
+    type: file.type,
+    name: file.name,
+  }));
+  cache.localStorageSet(
+    StorageDomain,
+    {
+      type: StorageType.Files,
+    },
+    { files: newFiles, lastPath: path }
+  );
 };
