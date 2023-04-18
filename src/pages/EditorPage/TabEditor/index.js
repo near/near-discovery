@@ -6,7 +6,7 @@ const TabEditor = ({
   tab,
   codeVisible,
   widgetPath,
-  updateCode,
+  changeCode,
   path,
   reformat,
 }) => {
@@ -20,7 +20,7 @@ const TabEditor = ({
           value={codeVisible}
           path={widgetPath}
           defaultLanguage="javascript"
-          onChange={(code) => updateCode(path, code)}
+          onChange={(code) => changeCode(path, code)}
           wrapperProps={{
             onBlur: () => reformat(path, codeVisible),
           }}

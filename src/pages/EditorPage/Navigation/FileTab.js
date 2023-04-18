@@ -54,9 +54,9 @@ export default ({ file, closeFile }) => {
       <TopMenu>
         <Nav.Link className="text-decoration-none d-flex" eventKey={jpath}>
           <div className="d-flex">
-            {file?.isDraft && <div className="draft">Draft</div>}
+            {file.isDraft && <div className="draft">Draft</div>}
             <div>{widgetName}</div>
-            {(!file?.savedOnChain || file?.changesMade) && (
+            {(!file.savedOnChain || file.changesMade) && (
               <div className="dot"></div>
             )}
           </div>
