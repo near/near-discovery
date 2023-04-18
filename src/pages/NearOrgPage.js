@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Widget, recordPageView, recordEvent, useNear } from "near-social-vm";
-import DesktopNavigation from "../components/navigation/org/wrapper/desktop/DesktopNavigation";
+import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
+import IframeResizer from "iframe-resizer-react";
+
 
 export default function NearOrgPage(props) {
   // will always be empty in prod
@@ -34,24 +36,34 @@ export default function NearOrgPage(props) {
 
   return (
     <>
-      <DesktopNavigation />
+      <NavigationWrapper {...props} />
 
       <div>
-        {(!localOverrideUrl || redirectMap) && (
-          <Widget
-            config={{ redirectMap }}
-            key={props.widgets.wrapper}
-            src={props.widgets.wrapper}
-            props={{
-              children: (
-                <Widget
-                  config={{ redirectMap }}
-                  key={props.src}
-                  src={props.src}
-                />
-              ),
-            }}
+        {props.iframeSrc ? (
+          <IframeResizer
+            src={props.iframeSrc}
+            style={{ width: "1px", minWidth: "100%" }}
+            checkOrigin={false}
           />
+        ) : (
+          <>
+            {(!localOverrideUrl || redirectMap) && (
+              <Widget
+                config={{ redirectMap }}
+                key={props.widgets.wrapper}
+                src={props.widgets.wrapper}
+                props={{
+                  children: (
+                    <Widget
+                      config={{ redirectMap }}
+                      key={props.src}
+                      src={props.src}
+                    />
+                  ),
+                }}
+              />
+            )}
+          </>
         )}
       </div>
     </>

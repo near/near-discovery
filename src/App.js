@@ -23,39 +23,17 @@ import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
 import { reset, useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
-import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
-import DesktopNavigation from "./components/navigation/org/wrapper/desktop/DesktopNavigation";
+import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
-import styleZendesk from "./zendesk";
 import { Helmet } from "react-helmet";
 import NearOrgPage from "./pages/NearOrgPage";
+import FlagsPage from "./pages/FlagsPage";
+import { useFlags } from "./utils/flags";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
     padding-bottom: 40px;
-  }
-  .logo-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    :after {
-      content: "alpha";
-      background-color: #59e692;
-      color: #101d46;
-      text-transform: uppercase;
-      font-size: 10px;
-      font-weight: 600;
-      margin-left: 3px;
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-      padding: 3px 6px;
-    }
-
-    :hover {
-      text-decoration: none;
-    }
   }
 `;
 
@@ -68,7 +46,7 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
-  const [hasStyledZendesk, setHasStyledZendesk] = useState(false);
+  const [flags, setFlags] = useFlags();
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -97,18 +75,6 @@ function App(props) {
         }),
       });
   }, [initNear]);
-
-  useLayoutEffect(() => {
-    // ZenDesk styling is done with useLayoutEffect to avoid errors during site refresh by user
-    const zwFrame = document.getElementById("launcher");
-    if (!zwFrame || hasStyledZendesk) return;
-    try {
-      styleZendesk();
-      setHasStyledZendesk(true);
-    } catch (error) {
-      console.log("Error styling Zendesk", error);
-    }
-  });
 
   useEffect(() => {
     if (!near) {
@@ -183,6 +149,8 @@ function App(props) {
       checkComponentPath: Widgets.tosCheck,
       contentComponentPath: Widgets.tosContent,
     },
+    flags,
+    setFlags,
   };
 
   return (
@@ -191,9 +159,11 @@ function App(props) {
         <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
       </Helmet>
 
+      <div id="page-flash-prevent" />
+
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-          {/* Near ORG Pages: */}
+          {/* Near ORG BOS Component Pages: */}
           <Route path={"/"} exact={true}>
             <NearOrgPage {...passProps} src={Widgets.nearOrg.homePage} />
           </Route>
@@ -225,7 +195,31 @@ function App(props) {
             />
           </Route>
 
+          {/* Near ORG Iframe Pages: */}
+          <Route path={"/events"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/events"
+            />
+          </Route>
+          <Route path={"/learn"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/learn"
+            />
+          </Route>
+          <Route path={"/about"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/about"
+            />
+          </Route>
+
           {/* Discovery Pages: */}
+          <Route path={"/flags"} exact={true}>
+            <NavigationWrapper {...passProps} />
+            <FlagsPage {...passProps} />
+          </Route>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route>
@@ -237,8 +231,7 @@ function App(props) {
             <EmbedPage {...passProps} />
           </Route>
           <Route path={"/:widgetSrc*"}>
-            {/* <NavigationWrapper {...passProps} /> */}
-            <DesktopNavigation />
+            <NavigationWrapper {...passProps} />
             <ViewPage {...passProps} />
           </Route>
         </Switch>

@@ -6,6 +6,8 @@ import { Link, useHistory } from "react-router-dom";
 import image from "../../icons/search.svg";
 import { Return } from "../../icons/Return";
 import { recordEvent } from "near-social-vm";
+import { NotificationWidget } from "../../NotificationWidget";
+import UserDropdownMenu from "./UserDropdownMenu";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -66,11 +68,13 @@ const StyledNavigation = styled.div`
     }
   }
 
-  .guest-buttons {
+  .right-side-actions {
     display: flex;
     align-items: center;
     margin-left: auto;
-    button {
+
+    .sign-in,
+    .create-account {
       border-radius: 50px;
       display: flex;
       align-items: center;
@@ -80,6 +84,7 @@ const StyledNavigation = styled.div`
       font-size: 14px;
       font-weight: 600;
     }
+
     .sign-in {
       color: #1b1b18;
       font-weight: 500;
@@ -107,7 +112,7 @@ const StyledNavigation = styled.div`
   }
 `;
 
-const DesktopNavigation = () => {
+const DesktopNavigation = (props) => {
   const [searchInputFocus, setSearchInputFocus] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const history = useHistory();
@@ -155,10 +160,31 @@ const DesktopNavigation = () => {
           </form>
           {searchInputFocus && <Return />}
         </div>
-        <MainNavigationMenu />
-        <div className="guest-buttons">
-          <button className="sign-in">Sign In</button>
-          <button className="create-account">Create Account</button>
+        <MainNavigationMenu {...props} />
+        <div className="right-side-actions">
+          {!props.signedIn && (
+            <>
+              <button className="sign-in" onClick={props.requestSignIn}>
+                Sign In
+              </button>
+              <button
+                className="create-account"
+                onClick={() => {
+                  window.location = "https://wallet.near.org/create";
+                }}
+              >
+                Create Account
+              </button>
+            </>
+          )}
+          {props.signedIn && (
+            <>
+              <NotificationWidget
+                notificationButtonSrc={props.widgets.notificationButton}
+              />
+              <UserDropdownMenu {...props} />
+            </>
+          )}
         </div>
       </div>
     </StyledNavigation>
