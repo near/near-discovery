@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Widget } from "near-social-vm";
-import DesktopNavigation from "../components/navigation/org/wrapper/desktop/DesktopNavigation";
+import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
 
 export default function NearOrgPage(props) {
@@ -37,7 +37,7 @@ export default function NearOrgPage(props) {
 
   return (
     <>
-      <DesktopNavigation {...props} />
+      <NavigationWrapper {...props} />
 
       <div>
         {props.iframeSrc ? (
