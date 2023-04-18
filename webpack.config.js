@@ -21,6 +21,11 @@ module.exports = function (env) {
         filename: "[name].bundle.js",
         publicPath: "/",
       },
+      devServer: {
+        historyApiFallback: {
+          disableDotRule: true,
+        },
+      },
       module: {
         rules: [
           {
@@ -48,6 +53,11 @@ module.exports = function (env) {
           crypto: require.resolve("crypto-browserify"),
           stream: require.resolve("stream-browserify"),
         },
+        // Fix for using `yarn link "near-social-vm"`
+        alias: {
+          react: path.resolve(__dirname, "./node_modules/react"),
+          "react-dom": path.resolve(__dirname, "./node_modules/react-dom"),
+        },
       },
       plugins: [
         new webpack.EnvironmentPlugin({
@@ -72,6 +82,7 @@ module.exports = function (env) {
           template: `${paths.publicPath}/index.html`,
           favicon: `${paths.publicPath}/favicon.png`,
           robots: `${paths.publicPath}/robots.txt`,
+          publicPath: "/",
         }),
         new webpack.ProgressPlugin(),
         new webpack.ProvidePlugin({

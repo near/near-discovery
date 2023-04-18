@@ -1,10 +1,15 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useState,
+} from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
-import { HashRouter as Router, Link, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import EditorPage from "./pages/EditorPage";
 import ViewPage from "./pages/ViewPage";
 import { setupWalletSelector } from "@near-wallet-selector/core";
@@ -22,6 +27,9 @@ import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapp
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import { setupKeypom } from "keypom-js";
+import { Helmet } from "react-helmet";
+import FlagsPage from "./pages/FlagsPage";
+import { useFlags } from "./utils/flags";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -60,6 +68,7 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const [flags, setFlags] = useFlags();
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -94,16 +103,6 @@ function App(props) {
         }),
       });
   }, [initNear]);
-
-  useEffect(() => {
-    if (
-      !location.search.includes("?account_id") &&
-      !location.search.includes("&account_id") &&
-      (location.search || location.href.includes("/?#"))
-    ) {
-      window.history.replaceState({}, "/", "/" + location.hash);
-    }
-  }, [location]);
 
   useEffect(() => {
     if (!near) {
@@ -179,12 +178,22 @@ function App(props) {
       checkComponentPath: Widgets.tosCheck,
       contentComponentPath: Widgets.tosContent,
     },
+    flags,
+    setFlags,
   };
 
   return (
     <StyledApp className="App">
-      <Router basename={process.env.PUBLIC_URL}>
+      <Helmet>
+        <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+      </Helmet>
+
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
+          <Route path={"/flags"}>
+            <NavigationWrapper {...passProps} />
+            <FlagsPage {...passProps} />
+          </Route>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route>
@@ -197,7 +206,7 @@ function App(props) {
             <ViewPage {...passProps} />
           </Route>
         </Switch>
-      </Router>
+      </BrowserRouter>
     </StyledApp>
   );
 }
