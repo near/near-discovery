@@ -246,7 +246,7 @@ function App(props) {
             <EmbedPage {...passProps} />
           </Route>
           <Route path={"/edit/:widgetSrc*"}>
-            <NavigationWrapper {...passProps} />
+            <DesktopNavigation {...passProps} />
             <EditorPage {...passProps} />
           </Route>
           <Route path={"/embed/:widgetSrc*"}>
@@ -254,7 +254,7 @@ function App(props) {
           </Route>
           <Route path={"/:widgetSrc*"}>
             {/* <NavigationWrapper {...passProps} /> */}
-            <DesktopNavigation />
+            <DesktopNavigation {...passProps} />
             <ViewPage {...passProps} />
           </Route>
         </Switch>

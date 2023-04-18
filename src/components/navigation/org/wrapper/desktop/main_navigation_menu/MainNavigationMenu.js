@@ -2,17 +2,72 @@ import React from "react";
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
 import "./styles.css";
+import { Widget } from "near-social-vm";
+import styled from "styled-components";
 
-const MainNavigationMenu = () => {
+const StyledCurrentComponent = styled.div`
+  border: 1px solid #eeeeec;
+  background-color: #f9f9f8;
+  border-radius: 4px;
+  min-height: 100%;
+
+  .title {
+    color: #868682;
+    font-size: 12px;
+    text-align: center;
+    background-color: #f3f3f2;
+    padding: 5px;
+    margin-bottom: 20px;
+  }
+  h1 {
+    color: #1b1b18;
+  }
+  p {
+    color: #706f6c;
+  }
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  > div {
+    padding: 15px;
+    div:nth-child(1) {
+      flex-direction: column;
+      text-align: center;
+    }
+    div:nth-child(2) {
+      a {
+        :nth-child(1) {
+          flex: 100%;
+          background-color: #161615;
+          color: white !important;
+        }
+        :nth-child(2) {
+          flex: auto;
+        }
+        :nth-child(3) {
+          flex: auto;
+        }
+      }
+      > button {
+        display: none;
+      }
+    }
+  }
+`;
+
+const MainNavigationMenu = (props) => {
   return (
     <NavigationMenu.Root className="NavigationMenuRoot">
       <NavigationMenu.List className="NavigationMenuList">
-        {/* <NavigationMenu.Item>
-          <NavigationMenu.Link className="NavigationMenuLink" href="/">
-            Home
-          </NavigationMenu.Link>
-        </NavigationMenu.Item> */}
-
+        {props.signedIn && (
+          <NavigationMenu.Item>
+            <NavigationMenu.Link className="NavigationMenuLink" href="/">
+              Home
+            </NavigationMenu.Link>
+          </NavigationMenu.Item>
+        )}
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
             Discover
@@ -23,14 +78,22 @@ const MainNavigationMenu = () => {
                 title="Introduction"
                 href="/docs/primitives/overview/introduction"
               >
+                <i class="ph-duotone ph-shapes"></i>
                 Build high-quality, accessible design systems and web apps.
               </ListItem>
               <ListItem
                 title="Getting started"
                 href="/docs/primitives/overview/getting-started"
               >
-                A quick tutorial to get you up and running with Radix
-                Primitives.
+                <i class="ph-duotone ph-circles-four"></i>A quick tutorial to
+                get you up and running with Radix Primitives.
+              </ListItem>
+              <ListItem
+                title="Gateways"
+                href="/docs/primitives/overview/getting-started"
+              >
+                <i class="ph-duotone ph-spiral"></i>A quick tutorial to get you
+                up and running with Radix Primitives.
               </ListItem>
             </ul>
           </NavigationMenu.Content>
@@ -40,38 +103,32 @@ const MainNavigationMenu = () => {
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
             Develop
           </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="NavigationMenuContent">
+          <NavigationMenu.Content className="NavigationMenuContent develop">
+            <div style={{ padding: "10px" }}>
+              <StyledCurrentComponent>
+                <div className="title">Current Component</div>
+                <Widget
+                  src={props.widgets?.componentSummary}
+                  props={{
+                    src: props.widgetSrc?.view,
+                    size: "medium",
+                    showTags: true,
+                  }}
+                />
+              </StyledCurrentComponent>
+            </div>
             <ul className="List one">
-              <li style={{ gridRow: "span 3" }}>
-                <NavigationMenu.Link asChild>
-                  <a className="Callout" href="/">
-                    <svg
-                      aria-hidden
-                      width="38"
-                      height="38"
-                      viewBox="0 0 25 25"
-                      fill="white"
-                    >
-                      <path d="M12 25C7.58173 25 4 21.4183 4 17C4 12.5817 7.58173 9 12 9V25Z"></path>
-                      <path d="M12 0H4V8H12V0Z"></path>
-                      <path d="M17 8C19.2091 8 21 6.20914 21 4C21 1.79086 19.2091 0 17 0C14.7909 0 13 1.79086 13 4C13 6.20914 14.7909 8 17 8Z"></path>
-                    </svg>
-                    <div className="CalloutHeading">Radix Primitives</div>
-                    <p className="CalloutText">
-                      Unstyled, accessible components for React.
-                    </p>
-                  </a>
-                </NavigationMenu.Link>
-              </li>
-
-              <ListItem href="https://stitches.dev/" title="Stitches">
+              <ListItem href="https://stitches.dev/" title="Sandbox">
+                <i class="ph-duotone ph-code-block"></i>
                 CSS-in-JS with best-in-class developer experience.
               </ListItem>
-              <ListItem href="/colors" title="Colors">
+              <ListItem href="/colors" title="Documentation">
+                <i class="ph-duotone ph-book-open-text"></i>
                 Beautiful, thought-out palettes with auto dark mode.
               </ListItem>
-              <ListItem href="https://icons.radix-ui.com/" title="Icons">
-                A crisp set of 15x15 icons, balanced and consistent.
+              <ListItem href="https://icons.radix-ui.com/" title="Tutorials">
+                <i class="ph-duotone ph-video"></i>A crisp set of 15x15 icons,
+                balanced and consistent.
               </ListItem>
             </ul>
           </NavigationMenu.Content>
@@ -84,31 +141,68 @@ const MainNavigationMenu = () => {
           <NavigationMenu.Content className="NavigationMenuContent">
             <ul className="List two">
               <ListItem
-                title="Introduction"
+                title="People"
                 href="/docs/primitives/overview/introduction"
               >
+                <i class="ph-duotone ph-user-list"></i>
                 Build high-quality, accessible design systems and web apps.
               </ListItem>
-            </ul>
-          </NavigationMenu.Content>
-        </NavigationMenu.Item>
-
-        <NavigationMenu.Item>
-          <NavigationMenu.Trigger className="NavigationMenuTrigger">
-            Solutions
-          </NavigationMenu.Trigger>
-          <NavigationMenu.Content className="NavigationMenuContent">
-            <ul className="List two">
               <ListItem
-                title="Introduction"
+                title="Groups"
                 href="/docs/primitives/overview/introduction"
               >
+                <i class="ph-duotone ph-users-three"></i>
+                Build high-quality, accessible design systems and web apps.
+              </ListItem>
+              <ListItem
+                title="Ecosystem"
+                href="/docs/primitives/overview/introduction"
+              >
+                <i class="ph-duotone ph-globe-hemisphere-west"></i>
+                Build high-quality, accessible design systems and web apps.
+              </ListItem>
+              <ListItem
+                title="Events"
+                href="/docs/primitives/overview/introduction"
+              >
+                <i class="ph-duotone ph-calendar-blank"></i>
                 Build high-quality, accessible design systems and web apps.
               </ListItem>
             </ul>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-
+        {!props.signedIn && (
+          <NavigationMenu.Item>
+            <NavigationMenu.Trigger className="NavigationMenuTrigger">
+              Solutions
+            </NavigationMenu.Trigger>
+            <NavigationMenu.Content className="NavigationMenuContent">
+              <ul className="List two">
+                <ListItem
+                  title="Developers"
+                  href="/docs/primitives/overview/introduction"
+                >
+                  <i class="ph-duotone ph-code"></i>
+                  Build high-quality, accessible design systems and web apps.
+                </ListItem>
+                <ListItem
+                  title="Founders"
+                  href="/docs/primitives/overview/introduction"
+                >
+                  <i class="ph-duotone ph-potted-plant"></i>
+                  Build high-quality, accessible design systems and web apps.
+                </ListItem>
+                <ListItem
+                  title="Early Adopters"
+                  href="/docs/primitives/overview/introduction"
+                >
+                  <i class="ph-duotone ph-leaf"></i>
+                  Build high-quality, accessible design systems and web apps.
+                </ListItem>
+              </ul>
+            </NavigationMenu.Content>
+          </NavigationMenu.Item>
+        )}
         <NavigationMenu.Item>
           <NavigationMenu.Trigger className="NavigationMenuTrigger">
             More
@@ -116,9 +210,24 @@ const MainNavigationMenu = () => {
           <NavigationMenu.Content className="NavigationMenuContent">
             <ul className="List two">
               <ListItem
-                title="Introduction"
+                title="About"
                 href="/docs/primitives/overview/introduction"
               >
+                <i class="ph-duotone ph-info"></i>
+                Build high-quality, accessible design systems and web apps.
+              </ListItem>
+              <ListItem
+                title="News"
+                href="/docs/primitives/overview/introduction"
+              >
+                <i class="ph-duotone ph-newspaper"></i>
+                Build high-quality, accessible design systems and web apps.
+              </ListItem>
+              <ListItem
+                title="Learn"
+                href="/docs/primitives/overview/introduction"
+              >
+                <i class="ph-duotone ph-books"></i>
                 Build high-quality, accessible design systems and web apps.
               </ListItem>
             </ul>
