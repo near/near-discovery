@@ -5,6 +5,7 @@ import NearLogotype from "../../icons/near-logotype.svg";
 import { Link, useHistory } from "react-router-dom";
 import image from "../../icons/search.svg";
 import { Return } from "../../icons/Return";
+import { recordEvent } from "near-social-vm";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -145,7 +146,10 @@ const DesktopNavigation = () => {
             <input
               placeholder="Search NEAR"
               style={{ backgroundImage: `url(${image})` }}
-              onFocus={() => setSearchInputFocus(true)}
+              onFocus={() => {
+                setSearchInputFocus(true);
+                recordEvent('click-navigation-search');
+              }}
               onBlur={() => setSearchInputFocus(false)}
             />
           </form>
