@@ -1,18 +1,20 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
-import { Close } from "../../../icons/Close";
-import { Components } from "../icons/Components";
-import { Notebook } from "../icons/Notebook";
-import { Education } from "../icons/Education";
-import { Editor } from "../icons/Editor";
-import { LogOut } from "../../../icons/LogOut";
-import { Withdraw } from "../icons/Withdraw";
-import { Community } from "../icons/Community";
 import { Widget, useNear } from "near-social-vm";
-import { NavigationButton } from "../NavigationButton";
-import { SignInButton } from "../SignInButton";
+
+import { Close } from "../../../icons/Close";
+import { Community } from "../icons/Community";
+import { Components } from "../icons/Components";
+import { Editor } from "../icons/Editor";
+import { Education } from "../icons/Education";
 import { Link } from "react-router-dom";
+import { LogOut } from "../../../icons/LogOut";
+import { NavigationButton } from "../NavigationButton";
+import { Notebook } from "../icons/Notebook";
+import { SignInButton } from "../SignInButton";
+import { Withdraw } from "../icons/Withdraw";
 import { links } from "../../../../data/links";
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -171,6 +173,7 @@ const StyledMenu = styled.div`
 `;
 
 export function MenuLeft(props) {
+  const history = useHistory();
   const near = useNear();
   const withdrawStorage = useCallback(async () => {
     await near.contract.storage_withdraw({}, undefined, "1");
@@ -203,12 +206,15 @@ export function MenuLeft(props) {
             <div className="profile-username">{props.signedAccountId}</div>
           </Link>
         ) : (
-          <SignInButton
-            onSignIn={() => {
-              props.onCloseMenu();
-              props.requestSignIn();
-            }}
-          />
+          <div style={{ display: 'flex', gap: '16px' }}>
+            <SignInButton
+              onSignIn={() => {
+                props.onCloseMenu();
+                props.requestSignIn();
+              }}
+            >Sign In</SignInButton>
+            <SignInButton onSignIn={() => history.push('signup')}>Sign up</SignInButton>
+          </div>
         )}
         <div className="links-title">Discover</div>
         <ul className="top-links">
@@ -262,6 +268,6 @@ export function MenuLeft(props) {
         </ul>
       </div>
       <div className="right-side" onClick={props.onCloseMenu} />
-    </StyledMenu>
+    </StyledMenu >
   );
 }

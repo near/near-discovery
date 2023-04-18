@@ -1,81 +1,98 @@
-import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
-
 import React from 'react';
 import { firebaseAuth } from '../utils/firebase';
-import { handleCompleteSignIn } from '../utils/biometricsAuthUtils';
+import { parseURLParams } from '../utils/generic';
+import { sendSignInLinkToEmail } from 'firebase/auth';
+import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-const VerifyEmail = ({ handleCreateAccount }) => {
+const VerifyEmail = () => {
     const history = useHistory();
-    React.useEffect(() => {
-        const locationUrl = window.location.href;
-        if (isSignInWithEmailLink(firebaseAuth, locationUrl)) {
-
-            const url = new URL(locationUrl);
-            const searchParams = new URLSearchParams(url.search);
-            const accountId = searchParams.get("accountId");
-            const publicKey = searchParams.get("publicKey");
+    const [urlParams, setUrlParams] = React.useState(null);
 
 
+    const handleResendEmail = async (data) => {
+        if (!urlParams?.accountId || !urlParams.email || !urlParams.publicKey) return
 
-            let email = window.localStorage.getItem('emailForSignIn');
-            if (!email) {
-                email = window.prompt('Please provide your email for confirmation');
-            }
-
-            signInWithEmailLink(firebaseAuth, email, window.location.href)
-                .then(async (result) => {
-                    window.localStorage.removeItem('emailForSignIn');
-                    const user = result.user;
-                    if (!!user.emailVerified) {
-                        const oauthToken = user.accessToken;
-
-                        // TODO: Call MPC Service with accountId, publicKey,  and oauthToken to create account
-
-                        const data = {
-                            account_id: accountId,
-                            public_key: publicKey,
-                            id_token: oauthToken
-                        };
-
-                        const options = {
-                            method: 'POST',
-                            mode: "cors",
-                            body: JSON.stringify(data),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
-                        };
-
-                        await fetch('https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/new_account', options)
-                            .then(response => {
-                                if (!response.ok) {
-                                    throw new Error('Network response was not ok');
-                                }
-                                return response.json();
-                            })
-                            .then(data => {
-                                console.log('Response:', data);
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                            });
-
-
-                        // await handleCreateAccount(accountId, publicKey);
-                        await handleCompleteSignIn(accountId, publicKey);
-                    }
+        try {
+            if (!!urlParams.publicKey) {
+                await sendSignInLinkToEmail(firebaseAuth, urlParams.email, {
+                    url: `${window.location.origin}/auth-callback?publicKey=${urlParams.publicKey}&accountId=${urlParams.accountId}`,
+                    handleCodeInApp: true,
                 })
-                .catch((error) => {
-                    console.log(error)
-                    history.push('/signup')
-                });
+                alert('Email sent')
+            }
+        } catch (error) {
+            console.log(error)
+            alert(error.message)
         }
-    }, [])
+    };
+
+    React.useEffect(() => {
+        const params = parseURLParams(window.location.search)
+        setUrlParams(params)
+    }, [window.location.search])
 
     return (
-        <div>loading...</div>
+        <StyledContainer>
+            <FormContainer onSubmit={handleResendEmail}>
+                <header>
+                    <a href="/signup" style={{ textDecoration: 'underline', color: 'black' }}><small>Go back</small></a>
+                    <h1 style={{ marginTop: '12px' }}>Verify your email</h1>
+                    <p style={{ fontWeight: 600, marginTop: '12px' }}>{urlParams?.email}</p>
+                </header>
+
+                <p>Check your inbox to activate your account.</p>
+
+                <StyledButton fullWidth onClick={handleResendEmail} type="button">
+                    Resend Email
+                </StyledButton>
+            </FormContainer>
+        </StyledContainer>
     )
 }
 
 export default VerifyEmail
+
+
+const StyledContainer = styled.div`
+  width: 100%;
+  height: calc(100vh - 66px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #F2F1EA;
+  padding: 0 16px;
+`
+
+const FormContainer = styled.form`
+  max-width: 450px;
+  width: 100%;
+  margin: 16px auto;
+  background-color: #FFFFFF;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+`
+const StyledButton = styled.button`
+  width: 100%;
+  padding: 8px;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  margin-top: 4px;
+  min-height: 40px;
+  cursor: pointer;
+  background-color: #6BE89E;
+  color: #000000;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  &:focus {
+    outline: none;
+  }
+`

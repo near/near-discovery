@@ -1,10 +1,7 @@
+import { MASTER_USER_ID, handleCreateAccount } from '../utils/auth';
 import { getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
 
-import { MASTER_USER_ID } from '../utils/biometricsAuthUtils';
 import React from 'react';
-import { createKey } from '@near-js/biometric-ed25519';
-import { firebaseAuth } from '../utils/firebase';
-import { sendSignInLinkToEmail } from 'firebase/auth';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
@@ -55,21 +52,10 @@ const CreateAccount = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.accountId || !data.email) return
-
     try {
-      const name = `${data.accountId}.${MASTER_USER_ID}`;
-      const key = await createKey(name);
-      const publicKey = key.getPublicKey().toString();
-
-      if (!!key) {
-        sendSignInLinkToEmail(firebaseAuth, data.email, {
-          url: `${window.location.origin}/verify-email?publicKey=${publicKey}&accountId=${name}`,
-          handleCodeInApp: true,
-        }).then((res) => {
-          window.localStorage.setItem('emailForSignIn', data.email);
-          history.push('/email-sent')
-        })
-      }
+      const fullAccountId = `${data.accountId}.${MASTER_USER_ID}`
+      const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email)
+      history.push(`/verify-email?publicKey=${publicKey}&accountId=${accountId}&email=${email}`)
     } catch (error) {
       console.log(error)
       alert(error.message)
@@ -163,10 +149,12 @@ const StyledContainer = styled.div`
   align-items: center;
   justify-content: center;
   background-color: #F2F1EA;
+  padding: 0 16px;
 `
 
 const FormContainer = styled.form`
   max-width: 450px;
+  width: 100%;
   margin: 16px auto;
   background-color: #FFFFFF;
   padding: 16px;

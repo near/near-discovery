@@ -1,21 +1,17 @@
 import * as nearAPI from "near-api-js";
-// import { connect, keyStores, WalletConnection, Near } from "near-api-js";
-import { base_encode } from "near-api-js/lib/utils/serialize";
+
 import { KeyPair } from "near-api-js/lib/utils/key_pair";
 import { NetworkId } from "../data/widgets";
+import { base_encode } from "near-api-js/lib/utils/serialize";
+import { createKey } from '@near-js/biometric-ed25519';
+import { firebaseAuth } from "./firebase";
+import { sendSignInLinkToEmail } from 'firebase/auth';
 
 export const MASTER_USER_ID = "gutsyphilip.testnet";
-// const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'nearlib:keystore:');
-// const keyPair = KeyPair.fromString('ed25519:4HnQUNMTgi6ht9oCemkLPqYf259fc1P91dJghqb3qhsgFa4krV46SMCxrYv5c1ArDhMDNsL6NV7tfreEHi5j7aSF');
-// await keyStore.setKey('testnet', MASTER_USER_ID, keyPair);
 
 export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair) => {
-    console.log('userName', userName);
-    // console.log('base64.toString(userHandle)', base64.toString(userName));
     const account = await nearConnection.account(userName);
-    console.log('account', account);
     const accessKeys = await account.getAccessKeys();
-    console.log('accessKeys', accessKeys);
 
     const firstPublicKeyB58 = "ed25519:" + base_encode((firstKeyPair.getPublicKey().data))
     const secondPublicKeyB58 = "ed25519:" + base_encode((secondKeyPair.getPublicKey().data))
@@ -29,6 +25,21 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
         return secondKeyPair;
     }
 };
+
+export const handleCreateAccount = async (accountId, email) => {
+    const key = await createKey(accountId);
+    const publicKey = key.getPublicKey().toString();
+
+    if (!!publicKey) {
+        await sendSignInLinkToEmail(firebaseAuth, email, {
+            url: `${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}`,
+            handleCodeInApp: true,
+        })
+        window.localStorage.setItem('emailForSignIn', email);
+        return { email, publicKey, accountId }
+    }
+};
+
 
 export const handleCompleteSignIn = async (accountId, publicKey) => {
     if (accountId) {
