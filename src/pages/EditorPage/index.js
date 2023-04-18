@@ -127,7 +127,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           codeLocalStorage: "",
           isDraft: false,
           changesMade: false,
-          savedOnChain: false,
+          savedOnChain: true,
         },
       }),
       {}

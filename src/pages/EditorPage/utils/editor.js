@@ -39,10 +39,10 @@ export const checkChangesMade = (codeMain, codeDraft, code) => {
   if (codeDraft) {
     changesMade = codeDraft != code;
   } else if (codeMain) {
-    changesMade = codeMain != code;
+    changesMade = codeMain !== code;
   } else {
     // no code on chain
-    changesMade = true;
+    changesMade = false;
   }
   return changesMade;
 };
