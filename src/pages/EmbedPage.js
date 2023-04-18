@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { recordPageView, Widget } from "near-social-vm";
+import { recordPageView, Widget, useNear } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
@@ -8,7 +8,7 @@ export default function EmbedPage(props) {
   const { widgetSrc } = useParams();
   const query = useQuery();
   const [widgetProps, setWidgetProps] = useState({});
-
+  const near = useNear();
   const src = widgetSrc || props.widgets.default;
 
   useHashUrlBackwardsCompatibility();
@@ -23,8 +23,9 @@ export default function EmbedPage(props) {
   }, [query]);
 
   useEffect(() => {
-    recordPageView(window.location.href);
-  }, [src]);
+    if(near)
+      recordPageView(window.location.href);
+  }, [near]);
 
   return (
     <div className="d-inline-block position-relative overflow-hidden">
