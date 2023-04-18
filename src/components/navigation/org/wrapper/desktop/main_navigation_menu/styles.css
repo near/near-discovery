@@ -32,13 +32,11 @@ p {
 }
 .NavigationMenuTrigger:focus,
 .NavigationMenuLink:focus {
-  background-color: #f3f3f2;
-  color: inherit;
+  color: #6D62D4;
 }
 .NavigationMenuTrigger:hover,
 .NavigationMenuLink:hover {
-  background-color: #f3f3f2;
-  color: inherit;
+  color: #6D62D4;
 }
 
 .NavigationMenuTrigger {
@@ -64,6 +62,21 @@ p {
   animation-duration: 250ms;
   animation-timing-function: ease;
 }
+
+.develop {
+  display: flex;
+}
+
+.develop div {
+  flex: 1;
+}
+
+.develop .one {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
 .NavigationMenuContent[data-motion='from-start'] {
   animation-name: enterFromLeft;
 }
@@ -149,26 +162,37 @@ p {
   text-decoration: none;
   user-select: none;
   padding: 12px;
+  padding-left: 50px;
   border-radius: 6px;
   font-size: 15px;
   line-height: 1;
+  position: relative;
 }
-.ListItemLink:focus {
+.ListItemLink i {
+  position: absolute;
+  top: 50%;
+  left: 12px;
+  transform: translateY(-50%);
+  font-size: 22px;
+  color: #706F6C;
+}
 
-}
 .ListItemLink:hover {
-
+  text-decoration: none;
+  background-color: #F3F3F2;
 }
 
 .ListItemHeading {
   font-weight: 500;
   line-height: 1.2;
   margin-bottom: 5px;
+  color: #1B1B18;
 }
 
 .ListItemText {
   line-height: 1.4;
   font-weight: initial;
+  color: #868682;
 }
 
 .Callout {
@@ -182,9 +206,6 @@ p {
   text-decoration: none;
   outline: none;
   user-select: none;
-}
-.Callout:focus {
-
 }
 
 .CalloutHeading {

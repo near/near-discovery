@@ -11,5 +11,12 @@ if (container.hasChildNodes()) {
   render(<App />, container);
 }
 
+if (navigator.userAgent !== "ReactSnap") {
+  const pageFlashPrevent = document.getElementById("page-flash-prevent");
+  if (pageFlashPrevent) {
+    pageFlashPrevent.remove();
+  }
+}
+
 // const root = createRoot(container);
 // root.render(<App />);
