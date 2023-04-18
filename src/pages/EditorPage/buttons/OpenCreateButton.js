@@ -3,7 +3,7 @@ import { ModalTypes } from "../utils/const";
 
 export default ({ setShowModal }) => (
   <button
-    className="btn btn-success ms-2"
+    className="btn btn-success"
     onClick={() => setShowModal(ModalTypes.AddModal)}
     style={{
       fontSize: "20px",

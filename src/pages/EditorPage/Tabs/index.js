@@ -1,5 +1,12 @@
 import React from "react";
+import styled from "styled-components";
 import { Tab, Layout } from "../utils/const";
+
+const TabButton = styled.button`
+  &.active {
+    isolation: isolate;
+  }
+`;
 
 const Tabs = ({
   isModule,
@@ -20,7 +27,7 @@ const Tabs = ({
     >
       {isModule && (
         <li className="nav-item">
-          <button
+          <TabButton
             className={`nav-link ${
               tab === Tab.Editor ? "active" : "text-secondary"
             }`}
@@ -28,13 +35,13 @@ const Tabs = ({
             onClick={() => setTab(Tab.Editor)}
           >
             Module
-          </button>
+          </TabButton>
         </li>
       )}
       {isModule || (
         <>
           <li className="nav-item">
-            <button
+            <TabButton
               className={`nav-link ${
                 tab === Tab.Editor ? "active" : "text-secondary"
               }`}
@@ -42,10 +49,10 @@ const Tabs = ({
               onClick={() => setTab(Tab.Editor)}
             >
               Component
-            </button>
+            </TabButton>
           </li>
           <li className="nav-item">
-            <button
+            <TabButton
               className={`nav-link ${
                 tab === Tab.Props ? "active" : "text-secondary"
               }`}
@@ -53,11 +60,11 @@ const Tabs = ({
               onClick={() => setTab(Tab.Props)}
             >
               Props
-            </button>
+            </TabButton>
           </li>
           {widgets.widgetMetadataEditor && (
             <li className="nav-item">
-              <button
+              <TabButton
                 className={`nav-link ${
                   tab === Tab.Metadata ? "active" : "text-secondary"
                 }`}
@@ -65,13 +72,13 @@ const Tabs = ({
                 onClick={() => setTab(Tab.Metadata)}
               >
                 Metadata
-              </button>
+              </TabButton>
             </li>
           )}
           {/* remove, and add show preview button on the right column */}
           {layout === Layout.Tabs && (
             <li className="nav-item">
-              <button
+              <TabButton
                 className={`nav-link ${
                   tab === Tab.Widget ? "active" : "text-secondary"
                 }`}
@@ -82,7 +89,7 @@ const Tabs = ({
                 }}
               >
                 Component Preview
-              </button>
+              </TabButton>
             </li>
           )}
         </>
