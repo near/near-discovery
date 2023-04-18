@@ -77,6 +77,7 @@ function App(props) {
     initNear &&
       initNear({
         networkId: NetworkId,
+        segmentId: "diA7hiO28gGeb9fxn615Xs91uX3GyYhL",
         selector: setupWalletSelector({
           network: NetworkId,
           modules: [
