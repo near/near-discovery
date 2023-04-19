@@ -10,20 +10,25 @@ export default ({
   changeFile,
   setShowModal,
   closeFile,
-}) => {
-  return (
-    <Nav
-      variant="pills mb-2 mt-2"
-      activeKey={jpath}
-      onSelect={(key) => changeFile(JSON.parse(key))}
-    >
-      {Object.values(filesObject)?.map((file) => (
-        <FileTab file={file} closeFile={closeFile} jpath={jpath} />
-      ))}
-      <Nav.Item className="me-1">
-        <OpenCreateButton setShowModal={setShowModal} />
-        <RenameButton setShowModal={setShowModal} />
-      </Nav.Item>
-    </Nav>
-  );
-};
+}) => (
+  <Nav
+    variant="pills mb-2 mt-2"
+    activeKey={jpath}
+    onSelect={(key) => {
+      return changeFile(JSON.parse(key));
+    }}
+  >
+    {Object.keys(filesObject)?.map((key) => (
+      <FileTab
+        key={key}
+        file={filesObject[key]}
+        closeFile={closeFile}
+        jpath={jpath}
+      />
+    ))}
+    <Nav.Item className="me-1">
+      <OpenCreateButton setShowModal={setShowModal} />
+      <RenameButton setShowModal={setShowModal} />
+    </Nav.Item>
+  </Nav>
+);

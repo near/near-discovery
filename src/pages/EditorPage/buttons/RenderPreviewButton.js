@@ -3,7 +3,7 @@ import { Layout, Tab } from "../utils/const";
 
 export default ({ setRenderCode, layout, setTab, codeVisible }) => (
   <button
-    className="btn btn-outline-primary"
+    className="btn btn-outline-success"
     onClick={() => {
       setRenderCode(codeVisible);
       if (layout === Layout.Tabs) {

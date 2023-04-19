@@ -27,7 +27,7 @@ export default ({ accountId }) => {
     <Wrapper className="d-flex align-center justify-content-center">
       <img src={VsCodeIcon} />
       <Text>
-        Prefer to work locally?
+        Prefer to work locally?&nbsp;
         <VsCodeLink href={ideLink} target="_blank" rel="noopener noreferrer">
           Download our VSCode Extension.
         </VsCodeLink>

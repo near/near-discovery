@@ -1,3 +1,5 @@
+export const DISABLE_MODULES = true;
+
 const LsKey = "social.near:v01:";
 export const EditorLayoutKey = LsKey + "editorLayout:";
 export const WidgetPropsKey = LsKey + "widgetProps:";
