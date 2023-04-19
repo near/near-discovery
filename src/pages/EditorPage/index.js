@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import ls from "local-storage";
 import { useParams } from "react-router-dom";
 import { useCache, useNear, useAccountId } from "near-social-vm";
@@ -111,10 +111,10 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   useEffect(() => {
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
-      .then(({ files, lastPath }) => {
-        setLastPath(lastPath);
-        near && createFilesObject(files);
-        selectFile(lastPath);
+      .then((res = {}) => {
+        setLastPath(res.lastPath);
+        near && createFilesObject(res.files || []);
+        selectFile(res.lastPath);
         setMainLoader(false);
       });
   }, [cache, near]);
@@ -282,7 +282,6 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
         type: StorageType.Code,
       })
       .then(({ code }) => {
-        const jpath = JSON.stringify(path);
         updateCode(path, code);
       });
   };

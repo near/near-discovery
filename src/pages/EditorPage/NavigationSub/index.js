@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React from "react";
 import ls from "local-storage";
 import { EditorLayoutKey, Layout, Tab } from "../utils/const";
 import OpenInNewTabButton from "../Buttons/OpenInNewTabButton";
