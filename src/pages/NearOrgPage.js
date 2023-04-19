@@ -38,12 +38,14 @@ export default function NearOrgPage(props) {
 
   return (
     <>
-    <Helmet>
-      <title>{props.meta.title}</title>
-      <meta name="description" content={props.meta.description} />
-      <meta property="og:title" content={props.meta.title} />
-      <meta property="og:description" content={props.meta.description} />
-    </Helmet>
+      {props.meta && (
+        <Helmet>
+          <title>{props.meta.title}</title>
+          <meta name="description" content={props.meta.description} />
+          <meta property="og:title" content={props.meta.title} />
+          <meta property="og:description" content={props.meta.description} />
+        </Helmet>
+      )}
       <NavigationWrapper {...props} />
 
       <div>
