@@ -57,7 +57,7 @@ export default function WidgetsSidebar({
   const { theme } = useContext(ThemeContext);
   const { files, filesDetails } = useContext(EditorContext);
 
-  const [projectFiles, setProjectFiles] = useState([]);
+  // const [projectFiles, setProjectFiles] = useState([]);
 
   // useEffect(() => {
   //   const timeout = setTimeout(() => {
@@ -71,183 +71,183 @@ export default function WidgetsSidebar({
   //   getData();
   // }, []);
 
-  const getRandomIndex = () => {
-    return Math.floor(Math.random() * 10000) + 1; // generates a random number between 1 and 10000
-  };
+  // const getRandomIndex = () => {
+  //   return Math.floor(Math.random() * 10000) + 1; // generates a random number between 1 and 10000
+  // };
 
-  useEffect(() => {
-    computeFiles();
-  }, [files]);
+  // useEffect(() => {
+  //   computeFiles();
+  // }, [files]);
 
-  const computeFiles = () => {
-    const array = [
-      {
-        index: 1894,
-        prefix: "SearchPage",
-        items: [
-          {
-            type: "widget",
-            name: "SearchPage.ComponentDetails",
-            givenName: "ComponentDetails",
-            index: 5473,
-          },
-          {
-            type: "folder",
-            name: "SearchPage.ComponentDetails.ComponentSummary",
-            givenName: "ComponentDetails",
-            index: 6581,
-            items: [
-              {
-                type: "widget",
-                name: "SearchPage.ComponentDetails.ComponentSummary-fork",
-                givenName: "ComponentSummary-fork",
-                index: 3502,
-              },
-              {
-                type: "widget",
-                name: "SearchPage.ComponentDetails.ComponentSummary",
-                givenName: "ComponentSummary",
-                index: 6581,
-              },
-            ],
-          },
-        ],
-      },
-    ];
+  // const computeFiles = () => {
+  //   const array = [
+  //     {
+  //       index: 1894,
+  //       prefix: "SearchPage",
+  //       items: [
+  //         {
+  //           type: "widget",
+  //           name: "SearchPage.ComponentDetails",
+  //           givenName: "ComponentDetails",
+  //           index: 5473,
+  //         },
+  //         {
+  //           type: "folder",
+  //           name: "SearchPage.ComponentDetails.ComponentSummary",
+  //           givenName: "ComponentDetails",
+  //           index: 6581,
+  //           items: [
+  //             {
+  //               type: "widget",
+  //               name: "SearchPage.ComponentDetails.ComponentSummary-fork",
+  //               givenName: "ComponentSummary-fork",
+  //               index: 3502,
+  //             },
+  //             {
+  //               type: "widget",
+  //               name: "SearchPage.ComponentDetails.ComponentSummary",
+  //               givenName: "ComponentSummary",
+  //               index: 6581,
+  //             },
+  //           ],
+  //         },
+  //       ],
+  //     },
+  //   ];
 
-    //   const array = [
+  //   //   const array = [
 
-    //     {
-    //       id:123312,
+  //   //     {
+  //   //       id:123312,
 
-    //       prefix: "SearchPage",
+  //   //       prefix: "SearchPage",
 
-    //       items : [
-    //         {
-    //           "type": "widget",
-    //           "name": "SearchPage.SocialLinks",
-    //           "displayName": "SocialLinks"
+  //   //       items : [
+  //   //         {
+  //   //           "type": "widget",
+  //   //           "name": "SearchPage.SocialLinks",
+  //   //           "displayName": "SocialLinks"
 
-    //         }
-    //       ]
+  //   //         }
+  //   //       ]
 
-    //     }
+  //   //     }
 
-    //     {
-    //       "type": "widget",
-    //       "name": "SearchPage.ComponentDetails.ComponentSummary"
-    //     },
+  //   //     {
+  //   //       "type": "widget",
+  //   //       "name": "SearchPage.ComponentDetails.ComponentSummary"
+  //   //     },
 
-    //     {
-    //     "type": "widget",
-    //       "name": "helloWorld"
-    //   },
-    //   {
-    //       "type": "widget",
-    //       "name": "ProfileSidebar.SocialLinks"
-    //   },
-    //   {
-    //       "type": "widget",
-    //       "name": "ProfilePage.Main"
-    //   },
-    //   {
-    //       "type": "widget",
-    //       "name": "ProfileSidebar",
-    //       "givenName": "index",
-    //       "index": 9122
-    //   },
-    //   {
-    //       "type": "widget",
-    //       "name": "SearchPage.ComponentDetails.ComponentSummary"
-    //   },
-    //   {
-    //       "type": "widget",
-    //       "name": "ProfileSidebar.Editor",
-    //       "givenName": "Editor",
-    //       "index": 6486
-    //   },
-    //   {
-    //       "type": "widget",
-    //       "name": "ProfilePage.Sidebar",
-    //       "givenName": "Sidebar",
-    //       "index": 267
-    //   },
-    //   {
-    //       "type": "widget",
-    //       "name": "NotificationsSidebar.Notification"
-    //   },
-    // ]
+  //   //     {
+  //   //     "type": "widget",
+  //   //       "name": "helloWorld"
+  //   //   },
+  //   //   {
+  //   //       "type": "widget",
+  //   //       "name": "ProfileSidebar.SocialLinks"
+  //   //   },
+  //   //   {
+  //   //       "type": "widget",
+  //   //       "name": "ProfilePage.Main"
+  //   //   },
+  //   //   {
+  //   //       "type": "widget",
+  //   //       "name": "ProfileSidebar",
+  //   //       "givenName": "index",
+  //   //       "index": 9122
+  //   //   },
+  //   //   {
+  //   //       "type": "widget",
+  //   //       "name": "SearchPage.ComponentDetails.ComponentSummary"
+  //   //   },
+  //   //   {
+  //   //       "type": "widget",
+  //   //       "name": "ProfileSidebar.Editor",
+  //   //       "givenName": "Editor",
+  //   //       "index": 6486
+  //   //   },
+  //   //   {
+  //   //       "type": "widget",
+  //   //       "name": "ProfilePage.Sidebar",
+  //   //       "givenName": "Sidebar",
+  //   //       "index": 267
+  //   //   },
+  //   //   {
+  //   //       "type": "widget",
+  //   //       "name": "NotificationsSidebar.Notification"
+  //   //   },
+  //   // ]
 
-    setProjectFiles(
-      files.reduce((acc, obj) => {
-        const prefix = obj?.name?.split(".")[0];
-        const existingGroup = acc.find((group) => group.prefix === prefix);
-        if (existingGroup) {
-          if (prefix === obj?.name) {
-            obj["givenName"] = "index";
-          } else {
-            obj["givenName"] = obj?.name?.substring(prefix?.length + 1); // remove prefix from given name
-          }
-          obj.index = getRandomIndex();
-          existingGroup.items.push(obj);
-        } else {
-          const newGroup = {
-            index: getRandomIndex(),
-            prefix: prefix,
-            items: [
-              {
-                ...obj,
-                givenName: obj?.name,
-                index: getRandomIndex(),
-              },
-            ],
-          };
-          acc.push(newGroup);
-        }
-        return acc;
-      }, [])
-    );
-    // setProjectFiles(
-    //   files.reduce((acc, obj) => {
-    //     const prefix = obj.name.split(".")[0];
-    //     const existingGroup = acc.find((group) => group.prefix === prefix);
-    //     if (existingGroup) {
-    //       obj.index = getRandomIndex();
-    //       existingGroup.items.push(obj);
-    //     } else {
-    //       const newGroup = {
-    //         index: getRandomIndex(),
-    //         prefix: prefix,
-    //         items: [
-    //           {
-    //             ...obj,
-    //             index: getRandomIndex(),
-    //           },
-    //         ],
-    //       };
-    //       acc.push(newGroup);
-    //     }
-    //     return acc;
-    //   }, [])
-    // );
-    // setProjectFiles(
-    //   files.reduce((acc, obj) => {
-    //     const prefix = obj.name.split(".")[0];
-    //     const existingGroup = acc.find((group) => group.prefix === prefix);
-    //     if (existingGroup) {
-    //       existingGroup.items.push(obj);
-    //     } else {
-    //       acc.push({
-    //         prefix: prefix,
-    //         items: [obj],
-    //       });
-    //     }
-    //     return acc;
-    //   }, [])
-    // );
-  };
+  //   setProjectFiles(
+  //     files.reduce((acc, obj) => {
+  //       const prefix = obj?.name?.split(".")[0];
+  //       const existingGroup = acc.find((group) => group.prefix === prefix);
+  //       if (existingGroup) {
+  //         if (prefix === obj?.name) {
+  //           obj["givenName"] = "index";
+  //         } else {
+  //           obj["givenName"] = obj?.name?.substring(prefix?.length + 1); // remove prefix from given name
+  //         }
+  //         obj.index = getRandomIndex();
+  //         existingGroup.items.push(obj);
+  //       } else {
+  //         const newGroup = {
+  //           index: getRandomIndex(),
+  //           prefix: prefix,
+  //           items: [
+  //             {
+  //               ...obj,
+  //               givenName: obj?.name,
+  //               index: getRandomIndex(),
+  //             },
+  //           ],
+  //         };
+  //         acc.push(newGroup);
+  //       }
+  //       return acc;
+  //     }, [])
+  //   );
+  //   // setProjectFiles(
+  //   //   files.reduce((acc, obj) => {
+  //   //     const prefix = obj.name.split(".")[0];
+  //   //     const existingGroup = acc.find((group) => group.prefix === prefix);
+  //   //     if (existingGroup) {
+  //   //       obj.index = getRandomIndex();
+  //   //       existingGroup.items.push(obj);
+  //   //     } else {
+  //   //       const newGroup = {
+  //   //         index: getRandomIndex(),
+  //   //         prefix: prefix,
+  //   //         items: [
+  //   //           {
+  //   //             ...obj,
+  //   //             index: getRandomIndex(),
+  //   //           },
+  //   //         ],
+  //   //       };
+  //   //       acc.push(newGroup);
+  //   //     }
+  //   //     return acc;
+  //   //   }, [])
+  //   // );
+  //   // setProjectFiles(
+  //   //   files.reduce((acc, obj) => {
+  //   //     const prefix = obj.name.split(".")[0];
+  //   //     const existingGroup = acc.find((group) => group.prefix === prefix);
+  //   //     if (existingGroup) {
+  //   //       existingGroup.items.push(obj);
+  //   //     } else {
+  //   //       acc.push({
+  //   //         prefix: prefix,
+  //   //         items: [obj],
+  //   //       });
+  //   //     }
+  //   //     return acc;
+  //   //   }, [])
+  //   // );
+  // };
+  // // console.log(projectFiles);
   // console.log(projectFiles);
-  console.log(projectFiles);
 
   return (
     <div
@@ -409,100 +409,100 @@ export default function WidgetsSidebar({
   );
 }
 
-const CustomTreeView = ({
-  files,
-  curPath,
-  //
-  openFile,
-  removeFromFiles,
-  createFile,
-  handleCreateButton,
-  setShowRenameModal,
-}) => {
-  const { filesDetails } = useContext(EditorContext);
+// const CustomTreeView = ({
+//   files,
+//   curPath,
+//   //
+//   openFile,
+//   removeFromFiles,
+//   createFile,
+//   handleCreateButton,
+//   setShowRenameModal,
+// }) => {
+//   const { filesDetails } = useContext(EditorContext);
 
-  // const [showEditButton, setShowEditButton] = useState(false);
-  // const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+//   // const [showEditButton, setShowEditButton] = useState(false);
+//   // const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
-  return (
-    <div>
-      {files?.items?.map((file, index) => {
-        if (!file) {
-          console.log("File is undefined " + file);
-          return;
-        }
+//   return (
+//     <div>
+//       {files?.items?.map((file, index) => {
+//         if (!file) {
+//           console.log("File is undefined " + file);
+//           return;
+//         }
 
-        if (file?.unnamed) {
-          return;
-        }
+//         if (file?.unnamed) {
+//           return;
+//         }
 
-        const jp = file;
-        const widgetName = file?.name?.split("/")[0] || "";
-        const { codeChangesPresent, isDraft } =
-          filesDetails.get(widgetName) || {};
+//         const jp = file;
+//         const widgetName = file?.name?.split("/")[0] || "";
+//         const { codeChangesPresent, isDraft } =
+//           filesDetails.get(widgetName) || {};
 
-        console.log(file);
-        return (
-          <OpenEditorItem
-            key={index}
-            item={file}
-            codeChangesPresent={codeChangesPresent}
-            isDraft={isDraft}
-            isSelected={curPath === file}
-            // handleClicks
-            onClick={() => openFile(file)}
-            renameButtonOnClick={() => {
-              setShowRenameModal((e) => !e);
-            }}
-            removeButtonOnClick={() => {
-              removeFromFiles(file);
-              // if (jp === jpath) {
+//         console.log(file);
+//         return (
+//           <OpenEditorItem
+//             key={index}
+//             item={file}
+//             codeChangesPresent={codeChangesPresent}
+//             isDraft={isDraft}
+//             isSelected={curPath === file}
+//             // handleClicks
+//             onClick={() => openFile(file)}
+//             renameButtonOnClick={() => {
+//               setShowRenameModal((e) => !e);
+//             }}
+//             removeButtonOnClick={() => {
+//               removeFromFiles(file);
+//               // if (jp === jpath) {
 
-              if (jp === curPath) {
-                if (files.length > 1) {
-                  console.log("HI FORM FILS ASE ARO>...");
-                  openFile(files[index - 1] || files[index + 1]);
-                } else {
-                  console.log("HI FORM FILE NAI R>...");
-                  createFile(Filetype.Widget);
-                }
-              }
-            }}
-          />
-        );
-      })}
+//               if (jp === curPath) {
+//                 if (files.length > 1) {
+//                   console.log("HI FORM FILS ASE ARO>...");
+//                   openFile(files[index - 1] || files[index + 1]);
+//                 } else {
+//                   console.log("HI FORM FILE NAI R>...");
+//                   createFile(Filetype.Widget);
+//                 }
+//               }
+//             }}
+//           />
+//         );
+//       })}
 
-      {/* <TreeItem
-          key={index}
-          nodeId={item.index.toString()}
-          icon={
-            <>
-              {codeChangesPresent && (
-                <Box
-                  style={{
-                    minWidth: 8,
-                    height: 8,
-                    borderRadius: 4,
-                    backgroundColor: "rgba(255,0,0,.75)",
-                  }}
-                />
-              )}
-            </>
-          }
-          label={<LabelWithFileIcon item={item} />}
-          onClick={() => {
-            // console.log(file, index);
+//       {/* <TreeItem
+//           key={index}
+//           nodeId={item.index.toString()}
+//           icon={
+//             <>
+//               {codeChangesPresent && (
+//                 <Box
+//                   style={{
+//                     minWidth: 8,
+//                     height: 8,
+//                     borderRadius: 4,
+//                     backgroundColor: "rgba(255,0,0,.75)",
+//                   }}
+//                 />
+//               )}
+//             </>
+//           }
+//           label={<LabelWithFileIcon item={item} />}
+//           onClick={() => {
+//             // console.log(file, index);
 
-            if (!file?.items[index]?.items) {
-              addSelectedFile(file?.items[index]);
-            }
-          }}
-        >
-          {item.items && <CustomTreeView path={item} />}
-        </TreeItem> */}
-    </div>
-  );
-};
+//             if (!file?.items[index]?.items) {
+//               addSelectedFile(file?.items[index]);
+//             }
+//           }}
+//         >
+//           {item.items && <CustomTreeView path={item} />}
+//         </TreeItem> */}
+//     </div>
+//   );
+// };
 
 const OpenEditorItem = ({
   item,
