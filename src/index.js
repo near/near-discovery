@@ -8,6 +8,16 @@ const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(<App />);
 
+let pageFlashCheckInterval;
+
 if (navigator.userAgent !== "ReactSnap") {
-  document.body.classList.add("not-react-snap");
+  pageFlashCheckInterval = setInterval(removePageFlashPrevent, 25);
+}
+
+function removePageFlashPrevent() {
+  const pageFlashPrevent = document.getElementById("page-flash-prevent");
+  if (pageFlashPrevent) {
+    pageFlashPrevent.remove();
+    clearInterval(pageFlashCheckInterval);
+  }
 }
