@@ -47,6 +47,7 @@
   "reactSnap": {
     "source": "dist",
     "exclude": [
+      "/sandbox",
       "/edit",
       "/near"
     ],

@@ -221,8 +221,7 @@ export default function EditorPage(props) {
   }, [code, codeOnChain, draftOnChain]);
 
   const checkDrafts = () => {
-    if (!widgetName || !near) 
-      return
+    if (!widgetName || !near) return;
     files.forEach((f) => {
       const widgetSrc = `${accountId}/widget/${f.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
@@ -253,7 +252,7 @@ export default function EditorPage(props) {
 
   const checkHasCodeChange = () => {
     files.forEach((f) => {
-      if(!f) return
+      if (!f) return;
       const widgetSrc = `${accountId}/widget/${f.name}/**`;
       const fetchCodeAndDraftOnChain = () => {
         const widgetCode = cache.socialGet(
@@ -553,7 +552,7 @@ export default function EditorPage(props) {
       });
   }, [cache]);
 
-  /* useEffect(() => {
+  useEffect(() => {
     if (!near || !files) {
       return;
     }
@@ -568,7 +567,7 @@ export default function EditorPage(props) {
           widget: widgetSrc,
         },
       });
-      history.replace(`/edit/`);
+      history.replace(`/edit`);
     } else if (path === undefined) {
       if (files.length === 0) {
         createFile(Filetype.Widget);
@@ -576,7 +575,7 @@ export default function EditorPage(props) {
         openFile(lastPath, undefined);
       }
     }
-  }, [near, createFile, lastPath, files, path, widgetSrc, openFile, loadFile]);  */
+  }, [near, createFile, lastPath, files, path, widgetSrc, openFile, loadFile]);
 
   const reformat = useCallback(
     (path, code) => {
@@ -864,61 +863,62 @@ export default function EditorPage(props) {
                         activeKey={jpath}
                         onSelect={(key) => openFile(JSON.parse(key))}
                       >
-                        {!isEmpty(files) && files.map((p, idx) => {
-                          if (p && p.unnamed) {
-                            return;
-                          }
+                        {!isEmpty(files) &&
+                          files.map((p, idx) => {
+                            if (p && p.unnamed) {
+                              return;
+                            }
 
-                          const jp = JSON.stringify(p);
-                          const widgetName = p?.name?.split("/")[0];
-                          const { codeChangesPresent, isDraft } =
-                            filesDetails.get(widgetName) || {};
+                            const jp = JSON.stringify(p);
+                            const widgetName = p?.name?.split("/")[0];
+                            const { codeChangesPresent, isDraft } =
+                              filesDetails.get(widgetName) || {};
 
-                          return (
-                            <Nav.Item key={jp}>
-                              <TopMenu>
-                                <Nav.Link
-                                  className="text-decoration-none d-flex "
-                                  eventKey={jp}
-                                >
-                                  <div className="d-flex">
-                                    {/* X1 */}
-                                    {isDraft && (
-                                      <div className="draft">Draft</div>
-                                    )}
-                                    <div>{widgetName}</div>
-                                    {codeChangesPresent && (
-                                      <div className="dot"></div>
-                                    )}
-                                  </div>
-                                  <button
-                                    className={`close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary`}
-                                    style={{
-                                      marginTop: "-3px",
-                                      marginBottom: "0px",
-                                    }}
-                                    onClick={(e) => {
-                                      e.preventDefault();
-                                      e.stopPropagation();
-                                      removeFromFiles(p);
-                                      if (jp === jpath) {
-                                        if (files.length > 1) {
-                                          openFile(
-                                            files[idx - 1] || files[idx + 1]
-                                          );
-                                        } else {
-                                          createFile(Filetype.Widget);
-                                        }
-                                      }
-                                    }}
+                            return (
+                              <Nav.Item key={jp}>
+                                <TopMenu>
+                                  <Nav.Link
+                                    className="text-decoration-none d-flex "
+                                    eventKey={jp}
                                   >
-                                    <i className="bi bi-x"></i>
-                                  </button>
-                                </Nav.Link>
-                              </TopMenu>
-                            </Nav.Item>
-                          );
-                        })}
+                                    <div className="d-flex">
+                                      {/* X1 */}
+                                      {isDraft && (
+                                        <div className="draft">Draft</div>
+                                      )}
+                                      <div>{widgetName}</div>
+                                      {codeChangesPresent && (
+                                        <div className="dot"></div>
+                                      )}
+                                    </div>
+                                    <button
+                                      className={`close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary`}
+                                      style={{
+                                        marginTop: "-3px",
+                                        marginBottom: "0px",
+                                      }}
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        e.stopPropagation();
+                                        removeFromFiles(p);
+                                        if (jp === jpath) {
+                                          if (files.length > 1) {
+                                            openFile(
+                                              files[idx - 1] || files[idx + 1]
+                                            );
+                                          } else {
+                                            createFile(Filetype.Widget);
+                                          }
+                                        }
+                                      }}
+                                    >
+                                      <i className="bi bi-x"></i>
+                                    </button>
+                                  </Nav.Link>
+                                </TopMenu>
+                              </Nav.Item>
+                            );
+                          })}
                         <Nav.Item className="me-1">
                           {openCreateButton}
                           {renameButton}
