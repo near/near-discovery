@@ -57,6 +57,14 @@ export default function WidgetsSidebar({
   const { theme } = useContext(ThemeContext);
   const { files, filesDetails } = useContext(EditorContext);
 
+  useEffect(() => {
+    files?.map((file) => {
+      if (typeof file === "string") {
+        removeFromFiles(file);
+      }
+    });
+  }, [files]);
+
   // const [projectFiles, setProjectFiles] = useState([]);
 
   // useEffect(() => {
@@ -357,10 +365,15 @@ export default function WidgetsSidebar({
         {/* {console.log("AccordionDetails : files :", files)} */}
         <AccordionDetails sx={{ backgroundColor: theme.ui }}>
           {files?.map((file, index) => {
+            // let file = typeof f === "string" ? JSON.parse(f) : f;
+            // console.log("filex : ", file, " - ");
+
             if (!file) {
               console.log("File is undefined " + file);
               return;
             }
+
+            if (typeof file === "string") return;
 
             if (file?.unnamed) {
               return;
