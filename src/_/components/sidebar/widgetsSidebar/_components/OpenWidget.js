@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useAccountId, useNear, useCache } from "near-social-vm";
 import { ThemeContext } from "../../../../context/ThemeContext";
 import {
@@ -20,6 +20,7 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import FileIcon from "../../../FileIcon";
+import { EditorContext } from "../../../../context/EditorContext";
 
 export default function OpenWidget({ loadFile }) {
   const near = useNear();
@@ -95,6 +96,15 @@ export default function OpenWidget({ loadFile }) {
 
 const MyWidgetsItem = ({ label, onClick }) => {
   const { theme } = useContext(ThemeContext);
+  const { files } = useContext(EditorContext);
+
+  const [isSelected, setIsSelected] = useState(false);
+
+  useEffect(() => {
+    const xs = files.find((file) => file.name === label);
+
+    setIsSelected(xs ? true : false);
+  }, [files]);
 
   return (
     <Box
@@ -103,7 +113,9 @@ const MyWidgetsItem = ({ label, onClick }) => {
         display: "flex",
         alignItems: "center",
         width: "100%",
-        backgroundColor: theme.ui,
+        backgroundColor: isSelected ? theme.ui2 : theme.ui,
+
+        // backgroundColor: theme.ui,
         "&:hover": {
           backgroundColor: theme.ui2,
           cursor: "pointer",
@@ -121,6 +133,7 @@ const MyWidgetsItem = ({ label, onClick }) => {
 
           zIndex: 5,
         }}
+        disabled={isSelected}
         onClick={() => onClick()}
       >
         <Box
