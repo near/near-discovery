@@ -39,7 +39,7 @@ export default function NearOrgPage(props) {
     <>
       <NavigationWrapper {...props} />
 
-      <div>
+      {/* <div>
         {props.iframeSrc ? (
           <IframeResizer
             src={props.iframeSrc}
@@ -66,7 +66,7 @@ export default function NearOrgPage(props) {
             )}
           </>
         )}
-      </div>
+      </div> */}
     </>
   );
 }
