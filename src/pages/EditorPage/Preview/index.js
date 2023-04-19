@@ -1,7 +1,7 @@
 import React from "react";
 import { Widget } from "near-social-vm";
 import { Tab, Layout } from "../utils/const";
-import RenderPreviewButton from "../Buttons/RenderPreviewButton";
+import RenderPreviewButton from "../buttons/RenderPreviewButton";
 
 const Preview = ({
   tab,

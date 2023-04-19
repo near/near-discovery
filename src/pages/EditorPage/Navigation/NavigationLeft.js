@@ -1,7 +1,7 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import OpenCreateButton from "../Buttons/OpenCreateButton";
-import RenameButton from "../Buttons/RenameButton";
+import OpenCreateButton from "../buttons/OpenCreateButton";
+import RenameButton from "../buttons/RenameButton";
 import FileTab from "./FileTab";
 
 export default ({
