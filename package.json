@@ -49,7 +49,10 @@
     "exclude": [
       "/sandbox",
       "/edit",
-      "/near"
+      "/near",
+      "/events",
+      "/about",
+      "/news"
     ],
     "include": [
       "/",
