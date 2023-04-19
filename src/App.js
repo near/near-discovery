@@ -164,7 +164,14 @@ function App(props) {
         <Switch>
           {/* Near ORG BOS Component Pages: */}
           <Route path={"/"} exact={true}>
-            <NearOrgPage {...passProps} src={Widgets.nearOrg.homePage} />
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.homePage}
+              meta={{
+                title: "NEAR Protocol | Create without limits",
+                description: "NEAR is a high-performance blockchain built without limits. Designed to be super-fast, incredibly secure, and infinitely scalable, NEAR allows anyone to build at scale and deploy at pace."
+              }}
+            />
           </Route>
           <Route path={"/use"} exact={true}>
             <NearOrgPage {...passProps} src={Widgets.nearOrg.usePage} />
