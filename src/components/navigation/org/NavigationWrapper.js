@@ -3,19 +3,18 @@ import DesktopNavigation from "./wrapper/desktop/DesktopNavigation";
 import MobileNavigation from "./mobile/MobileNavigation";
 
 const NavigationWrapper = (props) => {
-  const [matches, setMatches] = useState(
-    window.matchMedia("(min-width: 992px)").matches
-  );
+  const [matches, setMatches] = useState(false);
 
-  useEffect(() => {
-    window
-      .matchMedia("(min-width: 992px)")
-      .addEventListener("change", (e) => setMatches(e.matches));
-  }, []);
+  // useEffect(() => {
+  //   window
+  //     .matchMedia("(min-width: 992px)")
+  //     .addEventListener("change", (e) => setMatches(e.matches));
+  // }, []);
+
   return (
     <>
-      {matches && <DesktopNavigation {...props} />}
-      {!matches && <MobileNavigation {...props} />}
+      {/* {matches && <DesktopNavigation {...props} />} */}
+      <MobileNavigation {...props} />
     </>
   );
 };
