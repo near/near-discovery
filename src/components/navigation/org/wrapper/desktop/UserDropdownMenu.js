@@ -75,10 +75,10 @@ const UserDropdownMenu = (props) => {
             </div>
             <div className="profile-username">{account.accountId}</div>
           </div>
-          <i class="ph ph-caret-down"></i>
+          <i className="ph ph-caret-down"></i>
         </DropdownMenu.Trigger>
 
-        <DropdownMenu.Portal>
+        <DropdownMenu.Portal className="hello-there">
           <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5}>
             <DropdownMenu.Item
               className="DropdownMenuItem"
@@ -88,21 +88,21 @@ const UserDropdownMenu = (props) => {
                 )
               }
             >
-              <i class="ph-duotone ph-user"></i>
+              <i className="ph-duotone ph-user"></i>
               Profile
             </DropdownMenu.Item>
             <DropdownMenu.Item
               className="DropdownMenuItem"
               onClick={() => withdrawStorage()}
             >
-              <i class="ph-duotone ph-bank"></i>
+              <i className="ph-duotone ph-bank"></i>
               Withdraw {props.availableStorage.div(1000).toFixed(2)}kb
             </DropdownMenu.Item>
             <DropdownMenu.Item
               className="DropdownMenuItem"
               onClick={() => props.logOut()}
             >
-              <i class="ph-duotone ph-sign-out"></i>
+              <i className="ph-duotone ph-sign-out"></i>
               Sign out
             </DropdownMenu.Item>
           </DropdownMenu.Content>
