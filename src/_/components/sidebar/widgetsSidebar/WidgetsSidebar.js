@@ -293,17 +293,16 @@ export default function WidgetsSidebar({
 
       {/* EDITING THIS */}
 
-      <Accordion defaultExpanded>
+      {/* <Accordion defaultExpanded>
         <AccordionSummary
           aria-controls="panel1d-content"
           id="panel1d-header"
           sx={{ backgroundColor: theme.backgroundColor }}
         >
           <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
-            Open Widgets
+            Open Widgts
           </Typography>
         </AccordionSummary>
-        {/* {console.log("AccordionDetails : files :", files)} */}
         <AccordionDetails sx={{ backgroundColor: theme.ui }}>
           <TreeView
             aria-label="multi-select"
@@ -343,7 +342,7 @@ export default function WidgetsSidebar({
             ))}
           </TreeView>
         </AccordionDetails>
-      </Accordion>
+      </Accordion> */}
 
       <Accordion defaultExpanded>
         <AccordionSummary
