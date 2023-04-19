@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Widget } from "near-social-vm";
 import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
+import { Helmet } from "react-helmet";
 
 export default function NearOrgPage(props) {
   // will always be empty in prod
@@ -37,6 +38,12 @@ export default function NearOrgPage(props) {
 
   return (
     <>
+    <Helmet>
+      <title>{props.meta.title}</title>
+      <meta name="description" content={props.meta.description} />
+      <meta property="og:title" content={props.meta.title} />
+      <meta property="og:description" content={props.meta.description} />
+    </Helmet>
       <NavigationWrapper {...props} />
 
       <div>
