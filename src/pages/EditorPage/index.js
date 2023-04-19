@@ -133,7 +133,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           codeLocalStorage: "",
           isDraft: false,
           changesMade: false,
-          savedOnChain: true,
+          savedOnChain: undefined,
           new: true,
         },
       }),
@@ -355,7 +355,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
     codeMain,
     codeDraft,
     isDraft,
-    savedOnChain = true
+    savedOnChain
   ) => {
     const newFilesObject = {
       ...filesObject,

@@ -42,7 +42,7 @@ export const checkChangesMade = (codeMain, codeDraft, code) => {
     changesMade = codeMain !== code;
   } else {
     // no code on chain
-    changesMade = false;
+    changesMade = true;
   }
   return changesMade;
 };
