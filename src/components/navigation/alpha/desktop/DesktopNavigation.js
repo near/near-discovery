@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Logo } from "../icons/Logo";
@@ -127,8 +127,14 @@ const updateSearchValue = (searchString) => {
 export function DesktopNavigation(props) {
   const [menuDropdown, setMenuDropdown] = useState(false);
   const [searchInputFocus, setSearchInputFocus] = useState(false);
+  const [divFocus, setDivFocus] = useState(false);
   const [term, changeSearchValue] = useState("");
   const searchRef = useRef(null);
+
+  useEffect(() => {
+    console.log("divFocus is now", divFocus);
+    console.log(" The conditional statement is ", searchInputFocus || divFocus);
+  }, [divFocus]);
 
   const history = useHistory();
   return (
@@ -138,21 +144,35 @@ export function DesktopNavigation(props) {
           <Logo />
         </Link>
         <div className='form-wrapper'>
-          <Widget
-            src='chaotictempest.near/widget/SearchPalette'
+          {/* <Widget
+            src='dorgon108.near/widget/SearchPopupFunctions'
             props={{ term: props.term }}
-          />{" "}
-          {/* <input
+          />{" "} */}
+          <input
             placeholder='Search'
             style={{ backgroundImage: `url(${image})` }}
-            onFocus={() => setSearchInputFocus(true)}
-            onBlur={() => setSearchInputFocus(false)}
+            onFocus={() => {
+              setSearchInputFocus(true);
+              setDivFocus(true);
+            }}
+            onBlur={() => {
+              console.log("closing");
+              setTimeout(() => {
+                console.log("closing tool");
+                setSearchInputFocus(true);
+                setDivFocus(false);
+              }, 1000);
+            }}
             ref={searchRef}
             onChange={(e) => changeSearchValue(e.target.value)}
-          /> */}
-          {searchInputFocus && (
-            <SearchDropDownContainer>
-              <SearchDropDown term={term} />
+          />
+          {(searchInputFocus || divFocus) && (
+            <SearchDropDownContainer key={1}>
+              <SearchDropDown
+                term={term}
+                focusChange={setDivFocus}
+                searchFocusChange={searchInputFocus}
+              />
             </SearchDropDownContainer>
           )}
         </div>

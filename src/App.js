@@ -174,9 +174,9 @@ function App(props) {
   };
 
   return (
-    <StyledApp className="App">
+    <StyledApp className='App'>
       <Helmet>
-        <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
+        <script src='https://unpkg.com/@phosphor-icons/web@2.0.3'></script>
       </Helmet>
 
       <Router basename={process.env.PUBLIC_URL}>

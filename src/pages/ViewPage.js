@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
+import styled from "styled-components";
 
 export default function ViewPage(props) {
   const { widgetSrc } = useParams();
@@ -38,10 +39,10 @@ export default function ViewPage(props) {
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 
   return (
-    <div className="container-xl">
-      <div className="row">
+    <div className='container-xl'>
+      <div className='row'>
         <div
-          className="d-inline-block position-relative overflow-hidden"
+          className='d-inline-block position-relative overflow-hidden'
           style={{
             "--body-top-padding": "24px",
             paddingTop: "var(--body-top-padding)",
