@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Widget } from "near-social-vm";
 import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
+import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 
 export default function NearOrgPage(props) {
   // will always be empty in prod
   const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
   const [redirectMap, setRedirectMap] = useState();
+
+  useHashUrlBackwardsCompatibility();
 
   // fetch local component versions if a local loader
   // is provided. must be provided as {components: { <path>: { code : <code>}}}
@@ -32,6 +35,10 @@ export default function NearOrgPage(props) {
       props: {
         widget: props.src,
       },
+    });
+    props.setWidgetSrc({
+      edit: props.src,
+      view: props.src,
     });
   }, [props.src]);
 
