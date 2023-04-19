@@ -7,7 +7,7 @@ export default ({ setShowModal }) => (
     onClick={() => setShowModal(ModalTypes.AddModal)}
     style={{
       fontSize: "20px",
-      height: "40px",
+      height: "32px",
       lineHeight: "38px",
       paddingTop: "0",
       marginTop: "0",
