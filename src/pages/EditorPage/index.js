@@ -36,6 +36,7 @@ import {
   updateLocalStorage,
 } from "./utils/editor";
 import MainLoader from "./Welcome/MainLoader";
+import { useHashUrlBackwardsCompatibility } from "../../hooks/useHashUrlBackwardsCompatibility";
 
 const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const near = useNear();
@@ -68,6 +69,8 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   const showEditor = Object.keys(filesObject)?.length;
   const isModule = path?.type === "module";
   const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
+
+  useHashUrlBackwardsCompatibility();
 
   useEffect(() => {
     const newFilesObject = { ...filesObject };
