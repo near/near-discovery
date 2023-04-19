@@ -169,7 +169,8 @@ function App(props) {
               src={Widgets.nearOrg.homePage}
               meta={{
                 title: "NEAR Protocol | Create without limits",
-                description: "NEAR is a high-performance blockchain built without limits. Designed to be super-fast, incredibly secure, and infinitely scalable, NEAR allows anyone to build at scale and deploy at pace."
+                description:
+                  "NEAR is a high-performance blockchain built without limits. Designed to be super-fast, incredibly secure, and infinitely scalable, NEAR allows anyone to build at scale and deploy at pace.",
               }}
             />
           </Route>
@@ -229,7 +230,7 @@ function App(props) {
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
           </Route>
-          <Route path={"/edit/:widgetSrc*"}>
+          <Route path={["/edit/:widgetSrc*", "/sandbox/:widgetSrc*"]}>
             <NavigationWrapper {...passProps} />
             <EditorPage {...passProps} />
           </Route>
