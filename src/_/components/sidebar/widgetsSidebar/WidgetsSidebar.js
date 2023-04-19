@@ -21,11 +21,22 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import DriveFileRenameOutlineRoundedIcon from "@mui/icons-material/DriveFileRenameOutlineRounded";
 import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 
-import { ThemeContext } from "../../context/ThemeContext";
-import { EditorContext } from "../../context/EditorContext";
-import FileIcon from "../FileIcon";
-import RenameDialog from "../../dialogs/RenameDialog";
-import ConfirmDialog from "../../dialogs/ConfirmDialog";
+import { ThemeContext } from "../../../context/ThemeContext";
+import { EditorContext } from "../../../context/EditorContext";
+import FileIcon from "../../FileIcon";
+import RenameDialog from "../../../dialogs/RenameDialog";
+import ConfirmDialog from "../../../dialogs/ConfirmDialog";
+
+import { TreeItem, TreeView } from "@mui/lab";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import LabelWithFileIcon from "../../LabelWithFileIcon";
+import OpenWidget from "./_components/OpenWidget";
+
+const Filetype = {
+  Widget: "widget",
+  Module: "module",
+};
 
 export default function WidgetsSidebar({
   loadFile,
@@ -46,7 +57,7 @@ export default function WidgetsSidebar({
   const { theme } = useContext(ThemeContext);
   const { files, filesDetails } = useContext(EditorContext);
 
-  const [myWidgets, setMyWidgets] = useState([]);
+  const [projectFiles, setProjectFiles] = useState([]);
 
   // useEffect(() => {
   //   const timeout = setTimeout(() => {
@@ -60,19 +71,183 @@ export default function WidgetsSidebar({
   //   getData();
   // }, []);
 
-  const getData = () => {
-    let widget = `${accountId}/widget/*`;
-
-    const code = cache.socialGet(
-      near,
-      widget,
-      false,
-      undefined,
-      undefined,
-      getData
-    );
-    setMyWidgets(code);
+  const getRandomIndex = () => {
+    return Math.floor(Math.random() * 10000) + 1; // generates a random number between 1 and 10000
   };
+
+  useEffect(() => {
+    computeFiles();
+  }, [files]);
+
+  const computeFiles = () => {
+    const array = [
+      {
+        index: 1894,
+        prefix: "SearchPage",
+        items: [
+          {
+            type: "widget",
+            name: "SearchPage.ComponentDetails",
+            givenName: "ComponentDetails",
+            index: 5473,
+          },
+          {
+            type: "folder",
+            name: "SearchPage.ComponentDetails.ComponentSummary",
+            givenName: "ComponentDetails",
+            index: 6581,
+            items: [
+              {
+                type: "widget",
+                name: "SearchPage.ComponentDetails.ComponentSummary-fork",
+                givenName: "ComponentSummary-fork",
+                index: 3502,
+              },
+              {
+                type: "widget",
+                name: "SearchPage.ComponentDetails.ComponentSummary",
+                givenName: "ComponentSummary",
+                index: 6581,
+              },
+            ],
+          },
+        ],
+      },
+    ];
+
+    //   const array = [
+
+    //     {
+    //       id:123312,
+
+    //       prefix: "SearchPage",
+
+    //       items : [
+    //         {
+    //           "type": "widget",
+    //           "name": "SearchPage.SocialLinks",
+    //           "displayName": "SocialLinks"
+
+    //         }
+    //       ]
+
+    //     }
+
+    //     {
+    //       "type": "widget",
+    //       "name": "SearchPage.ComponentDetails.ComponentSummary"
+    //     },
+
+    //     {
+    //     "type": "widget",
+    //       "name": "helloWorld"
+    //   },
+    //   {
+    //       "type": "widget",
+    //       "name": "ProfileSidebar.SocialLinks"
+    //   },
+    //   {
+    //       "type": "widget",
+    //       "name": "ProfilePage.Main"
+    //   },
+    //   {
+    //       "type": "widget",
+    //       "name": "ProfileSidebar",
+    //       "givenName": "index",
+    //       "index": 9122
+    //   },
+    //   {
+    //       "type": "widget",
+    //       "name": "SearchPage.ComponentDetails.ComponentSummary"
+    //   },
+    //   {
+    //       "type": "widget",
+    //       "name": "ProfileSidebar.Editor",
+    //       "givenName": "Editor",
+    //       "index": 6486
+    //   },
+    //   {
+    //       "type": "widget",
+    //       "name": "ProfilePage.Sidebar",
+    //       "givenName": "Sidebar",
+    //       "index": 267
+    //   },
+    //   {
+    //       "type": "widget",
+    //       "name": "NotificationsSidebar.Notification"
+    //   },
+    // ]
+
+    setProjectFiles(
+      files.reduce((acc, obj) => {
+        const prefix = obj?.name?.split(".")[0];
+        const existingGroup = acc.find((group) => group.prefix === prefix);
+        if (existingGroup) {
+          if (prefix === obj?.name) {
+            obj["givenName"] = "index";
+          } else {
+            obj["givenName"] = obj?.name?.substring(prefix?.length + 1); // remove prefix from given name
+          }
+          obj.index = getRandomIndex();
+          existingGroup.items.push(obj);
+        } else {
+          const newGroup = {
+            index: getRandomIndex(),
+            prefix: prefix,
+            items: [
+              {
+                ...obj,
+                givenName: obj?.name,
+                index: getRandomIndex(),
+              },
+            ],
+          };
+          acc.push(newGroup);
+        }
+        return acc;
+      }, [])
+    );
+    // setProjectFiles(
+    //   files.reduce((acc, obj) => {
+    //     const prefix = obj.name.split(".")[0];
+    //     const existingGroup = acc.find((group) => group.prefix === prefix);
+    //     if (existingGroup) {
+    //       obj.index = getRandomIndex();
+    //       existingGroup.items.push(obj);
+    //     } else {
+    //       const newGroup = {
+    //         index: getRandomIndex(),
+    //         prefix: prefix,
+    //         items: [
+    //           {
+    //             ...obj,
+    //             index: getRandomIndex(),
+    //           },
+    //         ],
+    //       };
+    //       acc.push(newGroup);
+    //     }
+    //     return acc;
+    //   }, [])
+    // );
+    // setProjectFiles(
+    //   files.reduce((acc, obj) => {
+    //     const prefix = obj.name.split(".")[0];
+    //     const existingGroup = acc.find((group) => group.prefix === prefix);
+    //     if (existingGroup) {
+    //       existingGroup.items.push(obj);
+    //     } else {
+    //       acc.push({
+    //         prefix: prefix,
+    //         items: [obj],
+    //       });
+    //     }
+    //     return acc;
+    //   }, [])
+    // );
+  };
+  // console.log(projectFiles);
+  console.log(projectFiles);
 
   return (
     <div
@@ -115,6 +290,60 @@ export default function WidgetsSidebar({
           </Tooltip> */}
         </Box>
       </div>
+
+      {/* EDITING THIS */}
+
+      <Accordion defaultExpanded>
+        <AccordionSummary
+          aria-controls="panel1d-content"
+          id="panel1d-header"
+          sx={{ backgroundColor: theme.backgroundColor }}
+        >
+          <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
+            Open Widgets
+          </Typography>
+        </AccordionSummary>
+        {/* {console.log("AccordionDetails : files :", files)} */}
+        <AccordionDetails sx={{ backgroundColor: theme.ui }}>
+          <TreeView
+            aria-label="multi-select"
+            defaultCollapseIcon={<ExpandMoreIcon />}
+            defaultExpandIcon={<ChevronRightIcon />}
+            multiSelect
+          >
+            {projectFiles?.map((item, index) => (
+              <TreeItem
+                key={index}
+                nodeId={item.index.toString()}
+                label={
+                  <LabelWithFileIcon
+                    item={{ ...item, name: item?.prefix, type: "folder" }}
+                  />
+                }
+                onClick={() => {
+                  if (!item.items) {
+                    addSelectedFile(item);
+                  }
+                }}
+              >
+                {item?.items && (
+                  <CustomTreeView
+                    key={index}
+                    files={item}
+                    curPath={curPath}
+                    //
+                    openFile={openFile}
+                    removeFromFiles={removeFromFiles}
+                    createFile={createFile}
+                    handleCreateButton={handleCreateButton}
+                    setShowRenameModal={setShowRenameModal}
+                  />
+                )}
+              </TreeItem>
+            ))}
+          </TreeView>
+        </AccordionDetails>
+      </Accordion>
 
       <Accordion defaultExpanded>
         <AccordionSummary
@@ -176,52 +405,105 @@ export default function WidgetsSidebar({
         </AccordionDetails>
       </Accordion>
 
-      {accountId && (
-        <Accordion
-          // defaultExpanded
-          onClick={() => {
-            if (myWidgets.length <= 0) {
-              getData();
-            }
-          }}
-        >
-          <AccordionSummary
-            aria-controls="panel2d-content"
-            id="panel2d-header"
-            sx={{ backgroundColor: theme.backgroundColor }}
-          >
-            <Typography sx={{ fontWeight: 600, fontSize: 13 }}>
-              My Widgets
-            </Typography>
-          </AccordionSummary>
-          <AccordionDetails sx={{ backgroundColor: theme.ui }}>
-            {myWidgets ? (
-              Object.keys(myWidgets)?.map((fileName, index) => (
-                <MyWidgetsItem
-                  key={index}
-                  label={fileName}
-                  onClick={() => loadFile(fileName)}
-                />
-              ))
-            ) : (
-              <ButtonBase
-                sx={{
-                  fontSize: 14,
-                  textTransform: "none",
-                  width: "100%",
-                  py: 4,
-                }}
-                onClick={() => getData()}
-              >
-                Click here to see all widgets
-              </ButtonBase>
-            )}
-          </AccordionDetails>
-        </Accordion>
-      )}
+      <OpenWidget loadFile={loadFile} />
     </div>
   );
 }
+
+const CustomTreeView = ({
+  files,
+  curPath,
+  //
+  openFile,
+  removeFromFiles,
+  createFile,
+  handleCreateButton,
+  setShowRenameModal,
+}) => {
+  const { filesDetails } = useContext(EditorContext);
+
+  // const [showEditButton, setShowEditButton] = useState(false);
+  // const [showConfirmDialog, setShowConfirmDialog] = useState(false);
+
+  return (
+    <div>
+      {files?.items?.map((file, index) => {
+        if (!file) {
+          console.log("File is undefined " + file);
+          return;
+        }
+
+        if (file?.unnamed) {
+          return;
+        }
+
+        const jp = file;
+        const widgetName = file?.name?.split("/")[0] || "";
+        const { codeChangesPresent, isDraft } =
+          filesDetails.get(widgetName) || {};
+
+        console.log(file);
+        return (
+          <OpenEditorItem
+            key={index}
+            item={file}
+            codeChangesPresent={codeChangesPresent}
+            isDraft={isDraft}
+            isSelected={curPath === file}
+            // handleClicks
+            onClick={() => openFile(file)}
+            renameButtonOnClick={() => {
+              setShowRenameModal((e) => !e);
+            }}
+            removeButtonOnClick={() => {
+              removeFromFiles(file);
+              // if (jp === jpath) {
+
+              if (jp === curPath) {
+                if (files.length > 1) {
+                  console.log("HI FORM FILS ASE ARO>...");
+                  openFile(files[index - 1] || files[index + 1]);
+                } else {
+                  console.log("HI FORM FILE NAI R>...");
+                  createFile(Filetype.Widget);
+                }
+              }
+            }}
+          />
+        );
+      })}
+
+      {/* <TreeItem
+          key={index}
+          nodeId={item.index.toString()}
+          icon={
+            <>
+              {codeChangesPresent && (
+                <Box
+                  style={{
+                    minWidth: 8,
+                    height: 8,
+                    borderRadius: 4,
+                    backgroundColor: "rgba(255,0,0,.75)",
+                  }}
+                />
+              )}
+            </>
+          }
+          label={<LabelWithFileIcon item={item} />}
+          onClick={() => {
+            // console.log(file, index);
+
+            if (!file?.items[index]?.items) {
+              addSelectedFile(file?.items[index]);
+            }
+          }}
+        >
+          {item.items && <CustomTreeView path={item} />}
+        </TreeItem> */}
+    </div>
+  );
+};
 
 const OpenEditorItem = ({
   item,
@@ -396,69 +678,6 @@ const OpenEditorItem = ({
         description={`Are you sure you want to remove "${item?.name}"?`}
       />
     </>
-  );
-};
-
-const MyWidgetsItem = ({ label, onClick }) => {
-  const { theme } = useContext(ThemeContext);
-
-  return (
-    <Box
-      sx={{
-        position: "relative",
-        display: "flex",
-        alignItems: "center",
-        width: "100%",
-        backgroundColor: theme.ui,
-        "&:hover": {
-          backgroundColor: theme.ui2,
-          cursor: "pointer",
-        },
-      }}
-    >
-      <ButtonBase
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          px: 2,
-          py: 0.5,
-          width: "100%",
-
-          zIndex: 5,
-        }}
-        onClick={() => onClick()}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 1,
-          }}
-        >
-          <FileIcon type="widget" />
-
-          {/* <Tooltip title={label}> */}
-          <Typography
-            variant="p"
-            sx={{
-              ml: 0,
-              fontWeight: 400,
-              color: theme.textColor2,
-              paddingBlock: "2.5px",
-              textTransform: "none",
-              fontSize: ".9rem",
-              textAlign: "left",
-              wordBreak: "break-all",
-            }}
-            className="max1Lines"
-          >
-            {label}
-          </Typography>
-          {/* </Tooltip> */}
-        </Box>
-      </ButtonBase>
-    </Box>
   );
 };
 

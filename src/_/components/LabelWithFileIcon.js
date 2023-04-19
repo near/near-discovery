@@ -35,33 +35,39 @@ export default function LabelWithFileIcon({
           <Typography
             variant="body2"
             sx={{
+              ml: 0,
               fontWeight: 400,
               color: theme.textColor2,
               paddingBlock: "2.5px",
               textTransform: "none",
               fontSize: ".9rem",
+              textAlign: "left",
+              wordBreak: "break-all",
               ...labelStyle,
             }}
             className="max1Lines"
           >
-            {`${item.name}.${item.type}`}
+            {/* {`${item.name}.${item.type}`} */}
+            {item.name}
           </Typography>
         </div>
 
-        <Fade in={showEditButtonIcon}>
-          <IconButton
-            size="small"
-            sx={{ padding: "3px", margin: 0 }}
-            onClick={() => setShowEditButton((e) => !e)}
-          >
-            <DriveFileRenameOutlineRoundedIcon
-              sx={{
-                fontSize: "1rem",
-                fill: theme.textColor3 || "rgba(255,255,255,.75)",
-              }}
-            />
-          </IconButton>
-        </Fade>
+        {item?.type !== "folder" && (
+          <Fade in={showEditButtonIcon}>
+            <IconButton
+              size="small"
+              sx={{ padding: "3px", margin: 0 }}
+              onClick={() => setShowEditButton((e) => !e)}
+            >
+              <DriveFileRenameOutlineRoundedIcon
+                sx={{
+                  fontSize: "1rem",
+                  fill: theme.textColor3 || "rgba(255,255,255,.75)",
+                }}
+              />
+            </IconButton>
+          </Fade>
+        )}
       </div>
 
       <RenameDialog

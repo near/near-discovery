@@ -1,7 +1,7 @@
 import { Fade } from "@mui/material";
 import React, { useContext } from "react";
 
-import WidgetsSidebar from "./WidgetsSidebar";
+import WidgetsSidebar from "./widgetsSidebar/WidgetsSidebar";
 import ProfileSidebar from "./ProfileSidebar";
 import SettingsSidebar from "./SettingsSidebar";
 import { ThemeContext } from "../../context/ThemeContext";
