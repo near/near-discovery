@@ -7,6 +7,7 @@ import ReactPlayer from "react-player";
 
 export default function HomeTopSection() {
   // const min720 = useMediaQuery("(min-width:820px)");
+  const history = useHistory();
 
   const { theme, bp } = useContext(ThemeContext);
 
@@ -179,7 +180,9 @@ export default function HomeTopSection() {
               },
             }}
             //to="/discover"
-            onClick={(e) => (window.location.hash = "#/editor")}
+            onClick={(e) => {
+              history.push("/editor");
+            }}
           >
             Try for free
             <ArrowForwardRoundedIcon
