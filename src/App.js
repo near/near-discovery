@@ -221,6 +221,12 @@ function App(props) {
               iframeSrc="https://pages.near.org/about"
             />
           </Route>
+          <Route path={"/news"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/about/press-center/"
+            />
+          </Route>
 
           {/* Discovery Pages: */}
           <Route path={"/flags"} exact={true}>

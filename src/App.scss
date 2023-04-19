@@ -12,10 +12,6 @@ html {
   inset: 0;
   background: #fff;
   z-index: 10000000;
-
-  .not-react-snap & {
-    display: none;
-  }
 }
 
 .pointer {
