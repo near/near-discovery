@@ -131,6 +131,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           isDraft: false,
           changesMade: false,
           savedOnChain: true,
+          new: true,
         },
       }),
       {}
@@ -162,7 +163,11 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
               type: StorageType.Code,
             })
             .then(({ code }) => {
-              const changesMade = checkChangesMade(codeMain, codeDraft, code);
+              let changesMade = checkChangesMade(codeMain, codeDraft, code);
+
+              if (!filesObject[jpath].new) {
+                changesMade = false;
+              }
 
               filesObject[jpath] = {
                 ...filesObject[jpath],
@@ -170,8 +175,9 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
                 codeDraft,
                 codeLocalStorage: code,
                 isDraft,
-                changesMade,
+                changesMade: changesMade,
                 savedOnChain: true,
+                new: false,
               };
               setFilesObject(filesObject);
             });

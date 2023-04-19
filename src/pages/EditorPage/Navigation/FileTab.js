@@ -74,7 +74,7 @@ export default ({ file, closeFile }) => {
   const dotRed = !file.savedOnChain || file.changesMade;
 
   return (
-    <Nav.Item key={jpath}>
+    <Nav.Item>
       <TopMenu>
         <Nav.Link className="text-decoration-none d-flex" eventKey={jpath}>
           <div className="d-flex">
