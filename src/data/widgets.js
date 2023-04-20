@@ -2,11 +2,9 @@ const TestnetDomains = {
   "test.near.org": true,
   "127.0.0.1": true,
   "localhost": true,
-  "near-discovery-asq5uacgk-near-developer-console.vercel.app": true,
 };
 
-// export const NetworkId = window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
-export const NetworkId = "testnet";
+export const NetworkId = window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
 
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
@@ -52,5 +50,4 @@ const MainnetWidgets = {
   wrapper: "near/widget/DIG.Theme",
 };
 
-export const Widgets =
-  NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets;
+export const Widgets = NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets;
