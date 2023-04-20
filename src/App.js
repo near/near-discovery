@@ -1,7 +1,6 @@
 import React, {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useState,
 } from "react";
 import "error-polyfill";
@@ -73,7 +72,6 @@ function App(props) {
   const near = useNear();
   const account = useAccount();
   const accountId = account.accountId;
-
   const location = window.location;
 
   useEffect(() => {
@@ -126,6 +124,7 @@ function App(props) {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
+    localStorage.removeItem("accountId");
   }, [near]);
 
   const refreshAllowance = useCallback(async () => {
