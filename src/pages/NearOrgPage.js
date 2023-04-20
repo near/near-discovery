@@ -49,12 +49,8 @@ export default function NearOrgPage(props) {
         <Helmet>
           <title>{props.meta.title}</title>
           <meta property="og:title" content={props.meta.title} />
-          {props.meta.description && (
-            <>
-              <meta name="description" content={props.meta.description} />
-              <meta property="og:description" content={props.meta.description} />
-            </>
-          )}
+          <meta name="description" content={props.meta.description} />
+          <meta property="og:description" content={props.meta.description} />
         </Helmet>
       )}
       <NavigationWrapper {...props} />
