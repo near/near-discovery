@@ -1,4 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
@@ -18,36 +22,17 @@ import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
 import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
-import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
+import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
+import NearOrgPage from "./pages/NearOrgPage";
+import FlagsPage from "./pages/FlagsPage";
+import { useFlags } from "./utils/flags";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
     padding-bottom: 40px;
-  }
-  .logo-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    :after {
-      content: "alpha";
-      background-color: #59e692;
-      color: #101d46;
-      text-transform: uppercase;
-      font-size: 10px;
-      font-weight: 600;
-      margin-left: 3px;
-      border-top-right-radius: 4px;
-      border-bottom-right-radius: 4px;
-      padding: 3px 6px;
-    }
-
-    :hover {
-      text-decoration: none;
-    }
   }
 `;
 
@@ -60,12 +45,12 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const [flags, setFlags] = useFlags();
 
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
   const accountId = account.accountId;
-
   const location = window.location;
 
   useEffect(() => {
@@ -118,6 +103,7 @@ function App(props) {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
+    localStorage.removeItem("accountId");
   }, [near]);
 
   const refreshAllowance = useCallback(async () => {
@@ -161,6 +147,13 @@ function App(props) {
       checkComponentPath: Widgets.tosCheck,
       contentComponentPath: Widgets.tosContent,
     },
+    flags,
+    setFlags,
+  };
+
+  const metaProps = {
+    title: "NEAR",
+    description: "Let's build decentralized experiences.",
   };
 
   return (
@@ -169,18 +162,124 @@ function App(props) {
         <script src="https://unpkg.com/@phosphor-icons/web@2.0.3"></script>
       </Helmet>
 
+      <div id="page-flash-prevent" />
+
       <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
-          <Route path={"/embed/:widgetSrc*"}>
-            <EmbedPage {...passProps} />
+          {/* Near ORG BOS Component Pages: */}
+          <Route path={"/"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.homePage}
+              meta={{
+                title:
+                  "The OS for the open web. Near Protocol is the Blockchain Operating Sytem",
+                description:
+                  "Effortlessly create and distribute innovative decentralized apps, while helping build a more open web, with the NEAR Blockchain Operating System (BOS). The BOS makes it easy to use the tools you already know and love to build apps that engage users and create a more open web.",
+              }}
+            />
           </Route>
-          <Route path={"/edit/:widgetSrc*"}>
+          <Route path={"/use"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.usePage}
+              meta={{
+                title: "Your first steps to becoming a Web3 citizen",
+                description:
+                  "How Web3 on NEAR empowers you. Regain ownership. Interact freely. Participate in fair economies.",
+              }}
+            />
+          </Route>
+          <Route path={"/horizon"} exact={true}>
+            <NearOrgPage {...passProps} src={Widgets.horizon.homePage} />
+          </Route>
+          <Route path={"/ecosystem"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemOverviewPage}
+              meta={{
+                title: "Near Protocol Ecosystem",
+                description:
+                  "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO.",
+              }}
+            />
+          </Route>
+          <Route path={"/ecosystem/community"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemCommunityPage}
+              meta={{
+                title: "Near Protocol Community",
+                description:
+                  "The NEAR community is a globally distributed home to innovators, developers and contributors supporting the protocol's platform, ecosystem.",
+              }}
+            />
+          </Route>
+          <Route path={"/ecosystem/get-funding"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemGetFundingPage}
+              meta={{
+                title:
+                  "Near Protocol Get Funding. Build the future.The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
+                description:
+                  "We've helped hundreds of projects and teams realize their ideas, and bring them to market via Ecosystem grants for projects and start-ups building in web 3.0. Accelerators and Incubators for projects and start-ups looking to join an incubator or accelerator. Community led DAOs are Decentralized communities that support the growth of the ecosystem. Regional Hubs - If a project is based in the following regions they should apply via their respective Regional Hub.",
+              }}
+            />
+          </Route>
+          <Route path={"/ecosystem/work-and-earn"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
+              meta={{
+                title: "Near Protocol Work and Earn",
+                description:
+                  "Want to help improve the NEAR ecosystem? Join our bounties program. Collaborate with others in the community to solve problems and earn rewards. View Bounties.",
+              }}
+            />
+          </Route>
+
+          {/* Near ORG Iframe Pages: */}
+          <Route path={"/events"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/events"
+            />
+          </Route>
+          <Route path={"/learn"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/learn"
+            />
+          </Route>
+          <Route path={"/about"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/about"
+            />
+          </Route>
+          <Route path={"/news"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/about/press-center/"
+            />
+          </Route>
+
+          {/* Discovery Pages: */}
+          <Route path={"/flags"} exact={true}>
             <NavigationWrapper {...passProps} />
-            <EditorPage {...passProps} />
+            <FlagsPage {...passProps} meta={metaProps} />
+          </Route>
+          <Route path={"/embed/:widgetSrc*"}>
+            <EmbedPage {...passProps} meta={metaProps} />
+          </Route>
+          <Route path={["/edit/:widgetSrc*", "/sandbox/:widgetSrc*"]}>
+            <NavigationWrapper {...passProps} />
+            <EditorPage {...passProps} meta={metaProps} />
           </Route>
           <Route path={"/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
-            <ViewPage {...passProps} />
+            <ViewPage {...passProps} meta={metaProps} />
           </Route>
         </Switch>
       </BrowserRouter>

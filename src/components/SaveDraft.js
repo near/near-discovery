@@ -1,25 +1,56 @@
 import React, { useState } from "react";
 import { CommitButton } from "near-social-vm";
 import Modal from "react-bootstrap/Modal";
+import { ModalTypes } from "../pages/EditorPage/utils/const";
 
-export const SaveDraftModal = (props) => {
+export const SaveDraftModal = ({
+  codeVisible,
+  showModal,
+  onHide,
+  near,
+  widgetPath,
+  widgetName,
+  type,
+  metadata,
+}) => {
   const [commitMessage, setCommitMessage] = useState("");
 
-  const code = props.code;
-  const widgetPath = props.widgetPath + "/branch/draft";
-  const show = props.show;
-  const onHide = props.onHide;
-  const near = props.near;
-  const metadata = props.metadata
+  const widgetPathFull = widgetPath + "/branch/draft";
 
-  const onCancel = (e) => {
-    e.preventDefault();
+  const commitButtonData = {
+    post: {
+      commit: {
+        text: commitMessage,
+        type: "md",
+        keys: [widgetPathFull],
+      },
+    },
+    [type]: {
+      [widgetName]: {
+        branch: {
+          draft: {
+            "": codeVisible,
+            metadata,
+          },
+        },
+      },
+    },
+  };
+
+  const handleMessage = (e) => setCommitMessage(e.target.value);
+
+  const onCancel = () => {
     setCommitMessage("");
     onHide();
   };
 
   return (
-    <Modal centered scrollable show={show} onHide={onHide}>
+    <Modal
+      centered
+      scrollable
+      show={showModal === ModalTypes.SaveDraftModal}
+      onHide={onHide}
+    >
       <Modal.Header closeButton>
         <Modal.Title>Save to Version History</Modal.Title>
       </Modal.Header>
@@ -38,7 +69,7 @@ export const SaveDraftModal = (props) => {
             id="widget-src-input"
             type="text"
             value={commitMessage}
-            onChange={(e) => setCommitMessage(e.target.value)}
+            onChange={handleMessage}
           />
         </div>
       </Modal.Body>
@@ -46,26 +77,8 @@ export const SaveDraftModal = (props) => {
         <CommitButton
           className="btn btn-primary"
           near={near}
-          onCommit={() => onHide()}
-          data={{
-            post: {
-              commit: {
-                text: commitMessage,
-                type: "md",
-                keys: [widgetPath],
-              },
-            },
-            widget: {
-              [props.widgetName]: {
-                branch: {
-                  draft: {
-                    "": code,
-                    metadata,
-                  },
-                },
-              },
-            },
-          }}
+          onCommit={onHide}
+          data={commitButtonData}
         >
           Save
         </CommitButton>
