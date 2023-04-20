@@ -204,6 +204,7 @@ function App(props) {
               src={Widgets.nearOrg.ecosystemCommunityPage}
               meta={{
                 title: "Near Protocol Community",
+                description: "The NEAR community is a globally distributed home to innovators, developers and contributors supporting the protocol's platform, ecosystem."
               }}
             />
           </Route>
@@ -223,6 +224,7 @@ function App(props) {
               src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
               meta={{
                 title: "Near Protocol Work and Earn",
+                description: "Want to help improve the NEAR ecosystem? Join our bounties program. Collaborate with others in the community to solve problems and earn rewards. View Bounties."
               }}
             />
           </Route>
