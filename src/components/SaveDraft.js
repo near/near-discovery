@@ -14,7 +14,6 @@ export const SaveDraftModal = ({
   metadata,
 }) => {
   const [commitMessage, setCommitMessage] = useState("");
-
   const widgetPathFull = widgetPath + "/branch/draft";
 
   const commitButtonData = {

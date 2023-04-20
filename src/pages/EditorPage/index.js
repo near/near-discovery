@@ -38,6 +38,7 @@ import {
 import MainLoader from "./Welcome/MainLoader";
 import { useHashUrlBackwardsCompatibility } from "../../hooks/useHashUrlBackwardsCompatibility";
 import { Helmet } from "react-helmet";
+import { recordPageView, debounceRecordClick } from "../../utils/analytics";
 
 const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
   const near = useNear();
@@ -101,6 +102,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
   }, [widgetSrc, setWidgetSrc]);
 
   useEffect(() => {
+    recordPageView();
     ls.set(WidgetPropsKey, widgetProps);
     try {
       const parsedWidgetProps = JSON.parse(widgetProps);
@@ -383,7 +385,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
         <meta property="og:description" content={meta.description} />
       </Helmet>
 
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative" }} onPointerUp={debounceRecordClick}>
         <MainLoader mainLoader={mainLoader} />
         <Modals
           setShowModal={setShowModal}

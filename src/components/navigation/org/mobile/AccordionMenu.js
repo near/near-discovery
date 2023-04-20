@@ -39,7 +39,7 @@ const AccordionMenu = (props) => (
       <AccordionTrigger>Develop</AccordionTrigger>
       <AccordionContent>
         <ul>
-          <ListItem href="https://stitches.dev/" title="Sandbox">
+          <ListItem href="/sandbox" title="Sandbox">
             <i className="ph-duotone ph-code-block"></i>
             CSS-in-JS with best-in-class developer experience.
           </ListItem>

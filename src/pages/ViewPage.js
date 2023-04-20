@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import styleZendesk from "../zendesk";
+import { debounceRecordClick, recordPageView } from "../utils/analytics";
 import util from "util";
 import { Helmet } from "react-helmet";
 
@@ -67,6 +68,7 @@ export default function ViewPage(props) {
 
   useEffect(() => {
     setTimeout(() => {
+      recordPageView(src);
       setWidgetSrc(
         src === viewSourceWidget && query.get("src")
           ? {
@@ -78,11 +80,6 @@ export default function ViewPage(props) {
               view: src,
             }
       );
-      analytics("view", {
-        props: {
-          widget: src,
-        },
-      });
     }, 1);
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 
@@ -113,6 +110,7 @@ export default function ViewPage(props) {
           display: "flex",
           flexDirection: "column",
         }}
+        onPointerUp={debounceRecordClick}
       >
         {localOverrideUrl && (
           <div

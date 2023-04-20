@@ -11,6 +11,7 @@ import { NavDropdownButton } from "./NavDropdownButton";
 import { NotificationWidget } from "../NotificationWidget";
 import image from "../icons/search.svg";
 import { useHistory } from "react-router-dom";
+import { recordEvent } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -126,7 +127,10 @@ export function DesktopNavigation(props) {
             <input
               placeholder="Search"
               style={{ backgroundImage: `url(${image})` }}
-              onFocus={() => setSearchInputFocus(true)}
+              onFocus={() => {
+                setSearchInputFocus(true);
+                recordEvent("click-navigation-search");
+              }}
               onBlur={() => setSearchInputFocus(false)}
             />
           </form>
