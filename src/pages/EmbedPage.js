@@ -29,14 +29,17 @@ export default function EmbedPage(props) {
   }, [near]);
 
   return (
-  <>
+    <>
       <Helmet>
         <title>{props.meta.title}</title>
         <meta name="description" content={props.meta.description} />
         <meta property="og:title" content={props.meta.title} />
         <meta property="og:description" content={props.meta.description} />
       </Helmet>
-      <div className="d-inline-block position-relative overflow-hidden" onPointerUp={debounceRecordClick}>
+      <div
+        className="d-inline-block position-relative overflow-hidden"
+        onPointerUp={debounceRecordClick}
+      >
         <Widget
           key={props.widgets.wrapper}
           src={props.widgets.wrapper}
