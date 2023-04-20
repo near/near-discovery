@@ -37,8 +37,9 @@ import {
 } from "./utils/editor";
 import MainLoader from "./Welcome/MainLoader";
 import { useHashUrlBackwardsCompatibility } from "../../hooks/useHashUrlBackwardsCompatibility";
+import { Helmet } from "react-helmet";
 
-const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
+const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
   const near = useNear();
   const cache = useCache();
   const accountId = useAccountId();
@@ -374,123 +375,135 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
   };
 
   return (
-    <div style={{ position: "relative" }}>
-      <MainLoader mainLoader={mainLoader} />
-      <Modals
-        setShowModal={setShowModal}
-        jpath={jpath}
-        path={path}
-        renameFile={renameFile}
-        near={near}
-        widgetPath={widgetPath}
-        widgetName={widgetName}
-        codeVisible={codeVisible}
-        showModal={showModal}
-        createFile={createFile}
-        loadAndOpenFile={loadAndOpenFile}
-      />
-      <Welcome
-        setShowModal={setShowModal}
-        createFile={createFile}
-        showEditor={showEditor}
-      />
-      <div className={showEditor ? `` : `visually-hidden`}>
-        <VsCodeBanner />
+    <>
+      <Helmet>
+        <title>{meta.title}</title>
+        <meta name="description" content={meta.description} />
+        <meta property="og:title" content={meta.title} />
+        <meta property="og:description" content={meta.description} />
+      </Helmet>
 
-        <div className="container-fluid mt-1" style={{ position: "relative" }}>
-          <Search
-            widgets={widgets}
-            tos={tos}
-            logOut={logOut}
-            loadAndOpenFile={loadAndOpenFile}
-          />
-          <Navigation
-            setShowModal={setShowModal}
-            jpath={jpath}
-            forkFile={forkFile}
-            filesObject={filesObject}
-            widgetName={widgetName}
-            codeVisible={codeVisible}
-            near={near}
-            path={path}
-            metadata={metadata}
-            closeFile={closeFile}
-            isDraft={isDraft}
-            changeFile={changeFile}
-          />
+      <div style={{ position: "relative" }}>
+        <MainLoader mainLoader={mainLoader} />
+        <Modals
+          setShowModal={setShowModal}
+          jpath={jpath}
+          path={path}
+          renameFile={renameFile}
+          near={near}
+          widgetPath={widgetPath}
+          widgetName={widgetName}
+          codeVisible={codeVisible}
+          showModal={showModal}
+          createFile={createFile}
+          loadAndOpenFile={loadAndOpenFile}
+        />
+        <Welcome
+          setShowModal={setShowModal}
+          createFile={createFile}
+          showEditor={showEditor}
+        />
+        <div className={showEditor ? `` : `visually-hidden`}>
+          <VsCodeBanner />
 
-          <div className="d-flex align-content-start">
-            <div className="flex-grow-1">
-              <div className="row">
-                <div style={{ display: "flex" }}>
-                  <Tabs
-                    isModule={isModule}
-                    tab={tab}
-                    setTab={setTab}
-                    widgets={widgets}
-                    layout={layout}
-                    setRenderCode={setRenderCode}
-                    codeVisible={codeVisible}
-                  />
-                  <NavigationSub
-                    layout={layout}
-                    path={path}
-                    accountId={accountId}
-                    tab={tab}
-                    widgetPath={widgetPath}
-                    setRenderCode={setRenderCode}
-                    setTab={setTab}
-                    setLayoutState={setLayoutState}
-                    codeVisible={codeVisible}
-                  />
-                </div>
-              </div>
-              <div className="row">
-                <div className={layoutClass}>
-                  <TabEditor
-                    tab={tab}
-                    codeVisible={codeVisible}
-                    widgetPath={widgetPath}
-                    changeCode={changeCode}
-                    path={path}
-                    reformat={reformat}
-                  />
-                  <TabProps
-                    tab={tab}
-                    widgetProps={widgetProps}
-                    setWidgetProps={setWidgetProps}
-                    propsError={propsError}
-                  />
-                  <TabMetadata
-                    tab={tab}
-                    widgets={widgets}
-                    jpath={jpath}
-                    widgetPath={widgetPath}
-                    setMetadata={setMetadata}
-                  />
-                </div>
-                <div className={layoutClass}>
-                  <div className="row">
-                    <Preview
-                      tab={tab}
-                      layout={layout}
-                      renderCode={renderCode}
-                      jpath={jpath}
-                      parsedWidgetProps={parsedWidgetProps}
+          <div
+            className="container-fluid mt-1"
+            style={{ position: "relative" }}
+          >
+            <Search
+              widgets={widgets}
+              tos={tos}
+              logOut={logOut}
+              loadAndOpenFile={loadAndOpenFile}
+            />
+            <Navigation
+              setShowModal={setShowModal}
+              jpath={jpath}
+              forkFile={forkFile}
+              filesObject={filesObject}
+              widgetName={widgetName}
+              codeVisible={codeVisible}
+              near={near}
+              path={path}
+              metadata={metadata}
+              closeFile={closeFile}
+              isDraft={isDraft}
+              changeFile={changeFile}
+            />
+
+            <div className="d-flex align-content-start">
+              <div className="flex-grow-1">
+                <div className="row">
+                  <div style={{ display: "flex" }}>
+                    <Tabs
                       isModule={isModule}
-                      setRenderCode={setRenderCode}
+                      tab={tab}
                       setTab={setTab}
+                      widgets={widgets}
+                      layout={layout}
+                      setRenderCode={setRenderCode}
                       codeVisible={codeVisible}
                     />
-                    <PreviewMetadata
-                      tab={tab}
-                      layoutClass={layoutClass}
-                      jpath={jpath}
-                      widgets={widgets}
-                      metadata={metadata}
+                    <NavigationSub
+                      layout={layout}
+                      path={path}
                       accountId={accountId}
-                      widgetName={widgetName}
+                      tab={tab}
+                      widgetPath={widgetPath}
+                      setRenderCode={setRenderCode}
+                      setTab={setTab}
+                      setLayoutState={setLayoutState}
+                      codeVisible={codeVisible}
                     />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className={layoutClass}>
+                    <TabEditor
+                      tab={tab}
+                      codeVisible={codeVisible}
+                      widgetPath={widgetPath}
+                      changeCode={changeCode}
+                      path={path}
+                      reformat={reformat}
+                    />
+                    <TabProps
+                      tab={tab}
+                      widgetProps={widgetProps}
+                      setWidgetProps={setWidgetProps}
+                      propsError={propsError}
+                    />
+                    <TabMetadata
+                      tab={tab}
+                      widgets={widgets}
+                      jpath={jpath}
+                      widgetPath={widgetPath}
+                      setMetadata={setMetadata}
+                    />
+                  </div>
+                  <div className={layoutClass}>
+                    <div className="row">
+                      <Preview
+                        tab={tab}
+                        layout={layout}
+                        renderCode={renderCode}
+                        jpath={jpath}
+                        parsedWidgetProps={parsedWidgetProps}
+                        isModule={isModule}
+                        setRenderCode={setRenderCode}
+                        setTab={setTab}
+                        codeVisible={codeVisible}
+                      />
+                      <PreviewMetadata
+                        tab={tab}
+                        layoutClass={layoutClass}
+                        jpath={jpath}
+                        widgets={widgets}
+                        metadata={metadata}
+                        accountId={accountId}
+                        widgetName={widgetName}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -498,7 +511,7 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos }) => {
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
