@@ -62,7 +62,7 @@ export default function NearOrgPage(props) {
       )}
       <NavigationWrapper {...props} />
 
-      <div>
+      <div className={!props.fullBleed && "container-xl"}>
         {props.iframeSrc ? (
           <IframeResizer
             src={props.iframeSrc}
