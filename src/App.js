@@ -153,6 +153,11 @@ function App(props) {
     setFlags,
   };
 
+  const metaProps = {
+    title: "NEAR",
+    description: "Let's build decentralized experiences.",
+  };
+
   return (
     <StyledApp className="App">
       <Helmet>
@@ -165,33 +170,63 @@ function App(props) {
         <Switch>
           {/* Near ORG BOS Component Pages: */}
           <Route path={"/"} exact={true}>
-            <NearOrgPage {...passProps} src={Widgets.nearOrg.homePage} />
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.homePage}
+              meta={{
+                title: "The OS for the open web. Near Protocol is the Blockchain Operating Sytem",
+                description: "Effortlessly create and distribute innovative decentralized apps, while helping build a more open web, with the NEAR Blockchain Operating System (BOS). The BOS makes it easy to use the tools you already know and love to build apps that engage users and create a more open web."
+              }}
+            />
           </Route>
           <Route path={"/use"} exact={true}>
-            <NearOrgPage {...passProps} src={Widgets.nearOrg.usePage} />
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.usePage}
+              meta={{
+                title: "Your first steps to becoming a Web3 citizen",
+                description: "How Web3 on NEAR empowers you. Regain ownership. Interact freely. Participate in fair economies."
+              }}
+            />
           </Route>
           <Route path={"/ecosystem"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemOverviewPage}
+              meta={{
+                title: "Near Protocol Ecosystem",
+                description: "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO."
+              }}
             />
           </Route>
           <Route path={"/ecosystem/community"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemCommunityPage}
+              meta={{
+                title: "Near Protocol Community",
+                description: "The NEAR community is a globally distributed home to innovators, developers and contributors supporting the protocol's platform, ecosystem."
+              }}
             />
           </Route>
           <Route path={"/ecosystem/get-funding"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemGetFundingPage}
+              meta={{
+                title: "Near Protocol Get Funding. Build the future.The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
+                description: "We've helped hundreds of projects and teams realize their ideas, and bring them to market via Ecosystem grants for projects and start-ups building in web 3.0. Accelerators and Incubators for projects and start-ups looking to join an incubator or accelerator. Community led DAOs are Decentralized communities that support the growth of the ecosystem. Regional Hubs - If a project is based in the following regions they should apply via their respective Regional Hub."
+              }}
             />
           </Route>
           <Route path={"/ecosystem/work-and-earn"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
+              meta={{
+                title: "Near Protocol Work and Earn",
+                description: "Want to help improve the NEAR ecosystem? Join our bounties program. Collaborate with others in the community to solve problems and earn rewards. View Bounties."
+              }}
             />
           </Route>
 
@@ -214,25 +249,28 @@ function App(props) {
               iframeSrc="https://pages.near.org/about"
             />
           </Route>
+          <Route path={"/news"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/about/press-center/"
+            />
+          </Route>
 
           {/* Discovery Pages: */}
           <Route path={"/flags"} exact={true}>
             <NavigationWrapper {...passProps} />
-            <FlagsPage {...passProps} />
+            <FlagsPage {...passProps} meta={metaProps} />
           </Route>
           <Route path={"/embed/:widgetSrc*"}>
-            <EmbedPage {...passProps} />
+            <EmbedPage {...passProps} meta={metaProps} />
           </Route>
-          <Route path={"/edit/:widgetSrc*"}>
+          <Route path={["/edit/:widgetSrc*", "/sandbox/:widgetSrc*"]}>
             <NavigationWrapper {...passProps} />
-            <EditorPage {...passProps} />
-          </Route>
-          <Route path={"/embed/:widgetSrc*"}>
-            <EmbedPage {...passProps} />
+            <EditorPage {...passProps} meta={metaProps} />
           </Route>
           <Route path={"/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
-            <ViewPage {...passProps} />
+            <ViewPage {...passProps} meta={metaProps} />
           </Route>
         </Switch>
       </BrowserRouter>

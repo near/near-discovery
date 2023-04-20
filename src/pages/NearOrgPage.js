@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Widget, recordPageView, recordEvent, useNear } from "near-social-vm";
 import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
+import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
+import { Helmet } from "react-helmet";
 
 
 export default function NearOrgPage(props) {
@@ -9,6 +11,8 @@ export default function NearOrgPage(props) {
   const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
   const [redirectMap, setRedirectMap] = useState();
   const near = useNear();
+
+  useHashUrlBackwardsCompatibility();
 
   // fetch local component versions if a local loader
   // is provided. must be provided as {components: { <path>: { code : <code>}}}
@@ -34,8 +38,23 @@ export default function NearOrgPage(props) {
       recordPageView(props.src);
   }, [near]);
 
+  useEffect(() => {
+    props.setWidgetSrc({
+      edit: props.src,
+      view: props.src,
+    });
+  }, [props.src]);
+
   return (
     <>
+      {props.meta && (
+        <Helmet>
+          <title>{props.meta.title}</title>
+          <meta property="og:title" content={props.meta.title} />
+          <meta name="description" content={props.meta.description} />
+          <meta property="og:description" content={props.meta.description} />
+        </Helmet>
+      )}
       <NavigationWrapper {...props} />
 
       <div>

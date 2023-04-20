@@ -1,22 +1,23 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { hydrate, render } from "react-dom";
 import "./index.css";
 import App from "./App";
 
 const container = document.getElementById("root");
-if (container.hasChildNodes()) {
-  hydrate(<App />, container);
-} else {
-  render(<App />, container);
-}
+
+const root = createRoot(container);
+root.render(<App />);
+
+let pageFlashCheckInterval;
 
 if (navigator.userAgent !== "ReactSnap") {
+  pageFlashCheckInterval = setInterval(removePageFlashPrevent, 25);
+}
+
+function removePageFlashPrevent() {
   const pageFlashPrevent = document.getElementById("page-flash-prevent");
   if (pageFlashPrevent) {
     pageFlashPrevent.remove();
+    clearInterval(pageFlashCheckInterval);
   }
 }
-
-// const root = createRoot(container);
-// root.render(<App />);
