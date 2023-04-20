@@ -25,12 +25,23 @@ const TestnetWidgets = {
   tosCheck: "one.testnet/widget/TosCheck",
   tosContent: "one.testnet/widget/TosContent",
   wrapper: "one.testnet/widget/DIG.Theme",
-  wrapper: "one.testnet/widget/DIG.Theme",
+  nearOrg: {
+    ecosystemCommunityPage: "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
+    ecosystemGetFundingPage: "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
+    ecosystemOverviewPage: "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
+    ecosystemWorkAndEarnPage: "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
+    homePage: "discom.testnet/widget/NearOrg.HomePage",
+    usePage: "discom.testnet/widget/NearOrg.UsePage",
+  },
+  horizon: {
+    homePage: "nearhorizon.near/widget/HomePage",
+    appPage: "nearhorizon.near/widget/Index",
+  },
 };
 
 const MainnetWidgets = {
   image: "mob.near/widget/Image",
-  default: "near/widget/ActivityPage",
+  default: "near/widget/NearOrg.HomePage",
   viewSource: "mob.near/widget/WidgetSource",
   widgetMetadataEditor: "mob.near/widget/WidgetMetadataEditor",
   widgetMetadata: "mob.near/widget/WidgetMetadata",
@@ -48,6 +59,18 @@ const MainnetWidgets = {
   tosCheck: "near/widget/TosCheck",
   tosContent: "adminalpha.near/widget/TosContent",
   wrapper: "near/widget/DIG.Theme",
+  nearOrg: {
+    ecosystemCommunityPage: "near/widget/NearOrg.Ecosystem.CommunityPage",
+    ecosystemGetFundingPage: "near/widget/NearOrg.Ecosystem.GetFundingPage",
+    ecosystemOverviewPage: "near/widget/NearOrg.Ecosystem.OverviewPage",
+    ecosystemWorkAndEarnPage: "near/widget/NearOrg.Ecosystem.WorkAndEarnPage",
+    homePage: "near/widget/NearOrg.HomePage",
+    usePage: "near/widget/NearOrg.UsePage",
+  },
+  horizon: {
+    homePage: "nearhorizon.near/widget/HomePage",
+    appPage: "nearhorizon.near/widget/Index",
+  },
 };
 
 export const Widgets = NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets;
