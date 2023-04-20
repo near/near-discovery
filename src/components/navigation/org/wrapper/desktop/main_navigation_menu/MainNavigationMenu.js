@@ -124,10 +124,10 @@ const MainNavigationMenu = (props) => {
                 </ListItem>
                 <ListItem
                   title="Founders"
-                  href="/docs/primitives/overview/introduction"
+                  href="/horizon"
                 >
                   <i className="ph-duotone ph-potted-plant"></i>
-                  Build high-quality, accessible design systems and web apps.
+                  Accelerate your Web3 Startup.
                 </ListItem>
                 <ListItem
                   title="Early Adopters"
