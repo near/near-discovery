@@ -7,7 +7,6 @@ import { Helmet } from "react-helmet";
 import { recordPageView, debounceRecordClick } from "../utils/analytics";
 import { useQuery } from "../hooks/useQuery";
 
-
 export default function NearOrgPage(props) {
   // will always be empty in prod
   const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
