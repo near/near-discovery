@@ -4,11 +4,14 @@ import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import { Helmet } from "react-helmet";
+import { useQuery } from "../hooks/useQuery";
 
 export default function NearOrgPage(props) {
   // will always be empty in prod
   const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
   const [redirectMap, setRedirectMap] = useState();
+  const [widgetProps, setWidgetProps] = useState({});
+  const query = useQuery();
 
   useHashUrlBackwardsCompatibility();
 
@@ -43,6 +46,10 @@ export default function NearOrgPage(props) {
     });
   }, [props.src]);
 
+  useEffect(() => {
+    setWidgetProps(Object.fromEntries([...query.entries()]));
+  }, [query]);
+
   return (
     <>
       {props.meta && (
@@ -75,6 +82,10 @@ export default function NearOrgPage(props) {
                       config={{ redirectMap }}
                       key={props.src}
                       src={props.src}
+                      props={{
+                        ...props.defaultWidgetProps,
+                        ...widgetProps,
+                      }}
                     />
                   ),
                 }}
