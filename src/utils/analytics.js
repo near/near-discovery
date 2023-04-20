@@ -40,7 +40,11 @@ export function init() {
 
   getAnonymousId();
   try {
-    segment = new Analytics("diA7hiO28gGeb9fxn615Xs91uX3GyYhL", {});
+    segment = new Analytics(
+      process.env.PUBLIC_SEGMENT_WRITE_KEY ||
+        "diA7hiO28gGeb9fxn615Xs91uX3GyYhL",
+      {}
+    );
   } catch (e) {
     console.error(e);
   }
