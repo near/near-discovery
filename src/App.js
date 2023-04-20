@@ -18,6 +18,7 @@ import { Helmet } from "react-helmet";
 import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
 import VerifyEmail from "./pages/VerifyEmail";
 import ViewPage from "./pages/ViewPage";
+import { setupFastAuth } from "./lib/selector/setup";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupModal } from "@near-wallet-selector/modal-ui";
@@ -70,6 +71,8 @@ function App(props) {
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
+  console.log("account", account);
+
   const accountId = account.accountId;
 
   const handleCreateAccount = useCallback(async (accountId, publicKey) => {
@@ -99,9 +102,17 @@ function App(props) {
               gas: "300000000000000",
               bundle: false,
             }),
+            setupFastAuth({
+              networkId: NetworkId,
+              signInContractId: "v1.social08.testnet",
+            })
           ],
+        }).then((selector) => {
+          selector.store.observable.subscribe((...args) => {
+            console.log("walletStateArgs", args)
+          })
+          return selector;
         }),
-        // masterAccount: MASTER_USER_ID,
       });
   }, [initNear]);
 

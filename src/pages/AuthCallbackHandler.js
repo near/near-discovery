@@ -1,12 +1,15 @@
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
 import React from 'react';
+import encodeJwt from 'jwt-encode';
 import { firebaseAuth } from '../utils/firebase';
-import { handleCompleteSignIn } from '../utils/auth';
+import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
 
 const AuthCallbackHandler = ({ handleCreateAccount }) => {
     const history = useHistory();
+    const [statusMessage, setStatusMessage] = React.useState('Loading...');
+
     React.useEffect(() => {
         const locationUrl = window.location.href;
         if (isSignInWithEmailLink(firebaseAuth, locationUrl)) {
@@ -19,51 +22,63 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
 
 
             let email = window.localStorage.getItem('emailForSignIn');
-            if (!email) {
-                email = window.prompt('Please provide your email for confirmation');
-            }
+            // if (!email) {
+            //     email = window.prompt('Please provide your email for confirmation');
+            // }
 
             signInWithEmailLink(firebaseAuth, email, window.location.href)
                 .then(async (result) => {
-                    window.localStorage.removeItem('emailForSignIn');
+                    // window.localStorage.removeItem('emailForSignIn');
                     const user = result.user;
                     if (!!user.emailVerified) {
                         const oauthToken = user.accessToken;
 
                         // TODO: Call MPC Service with accountId, publicKey,  and oauthToken to create account
-
                         const data = {
-                            account_id: accountId,
+                            near_account_id: accountId,
                             public_key: publicKey,
-                            id_token: oauthToken
+                            oidc_token: oauthToken
                         };
+
+                        const headers = new Headers();
+                        headers.append("Content-Type", "application/json");
+                        headers.append("Access-Control-Allow-Origin", "*");
 
                         const options = {
                             method: 'POST',
                             mode: "cors",
                             body: JSON.stringify(data),
-                            headers: {
-                                'Content-Type': 'application/json'
-                            }
+                            headers
                         };
 
                         await fetch('https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/new_account', options)
                             .then(response => {
+                                console.log("response", response)
                                 if (!response.ok) {
                                     throw new Error('Network response was not ok');
                                 }
-                                return response.json();
+                                const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
+                                // TODO: Check if account ID matches the one from email
+
+                                if (!accountCreationData.privateKey || !accountCreationData.accountId) throw ('Could not find account creation data');
+
+                                window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify({
+                                    ...accountCreationData,
+                                    isCreated: true
+                                }));
+
+                                window.location.reload();
                             })
                             .then(data => {
                                 console.log('Response:', data);
                             })
                             .catch(error => {
-                                console.error('Error:', error);
+                                console.log('Error:', error);
                             });
 
 
                         // await handleCreateAccount(accountId, publicKey);
-                        await handleCompleteSignIn(accountId, publicKey);
+                        // await handleCompleteSignIn(accountId, publicKey);
                     }
                 })
                 .catch((error) => {
@@ -74,7 +89,7 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
     }, [])
 
     return (
-        <div>loading...</div>
+        <div>{statusMessage}</div>
     )
 }
 
