@@ -27,7 +27,7 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         async getAccounts() {
-            logger.log("Keypom:account");
+            logger.log("FastAuth:account");
             return fastAuthWallet.getAccounts();
         },
 
@@ -36,7 +36,7 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         getAccountId() {
-            logger.log("Keypom:getAccountId");
+            logger.log("FastAuth:getAccountId");
             return fastAuthWallet.getAccountId();
         },
 
@@ -46,7 +46,7 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         async getAvailableBalance() {
-            logger.log("Keypom:isSignedIn");
+            logger.log("FastAuth:isSignedIn");
             return await fastAuthWallet.getAvailableBalance();
         },
 
@@ -56,12 +56,12 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
 
         async signIn() {
             console.log("signIn is called")
-            logger.log("Keypom:signIn");
+            logger.log("FastAuth:signIn");
             return await fastAuthWallet.signIn();
         },
 
         async signOut() {
-            logger.log("Keypom:signOut");
+            logger.log("FastAuth:signOut");
             return await fastAuthWallet.signOut();
         },
 
@@ -70,7 +70,7 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         async signAndSendTransactions(params) {
-            logger.log("Keypom:signAndSendTransactions", params);
+            logger.log("FastAuth:signAndSendTransactions", params);
             return await fastAuthWallet.signAndSendTransactions(params);
         },
     };
@@ -97,8 +97,10 @@ export function setupFastAuth({
 
         console.log("fastAuthWallet", fastAuthWallet)
 
+        const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
+
         // CHECK URL / LOCAL STORAGE TO SEE IF A TRIAL ACCOUNT SHOULD BE SIGNED IN
-        const shouldSignIn = !!window.localStorage.getItem('fast-auth:account-creation-pending');
+        const shouldSignIn = !!accountCreationData.isCreated;
         console.log('shouldSignIn: ', shouldSignIn)
 
         return {

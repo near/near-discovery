@@ -31,7 +31,7 @@ export class FastAuthWallet {
         this.signInContractId = signInContractId;
         this.activeAccountId = window.localStorage.getItem('fast-auth:activeAccountId');
 
-        this.keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'fast-auth:keystore:');
+        this.keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
         this.near = new nearAPI.Near({
             ...networks[networkId],
             deps: { keyStore: this.keyStore },
@@ -60,9 +60,16 @@ export class FastAuthWallet {
             const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
             if (!accountCreationData.privateKey || !accountCreationData.accountId || !accountCreationData.isCreated) return;
 
+            console.log('Signing user in ', accountCreationData)
+
             const keyPair = nearAPI.KeyPair.fromString(accountCreationData.privateKey);
+            console.log(keyPair)
             await this.keyStore.setKey(NetworkId, accountCreationData.accountId, keyPair);
+            const accountObj = new nearAPI.Account(this.near.connection, accountCreationData.accountId);
+            console.log(accountObj)
             this._setActiveAccountId(accountCreationData.accountId);
+            return [accountObj];
+
 
         } catch (e) {
             console.log('e: ', e)
