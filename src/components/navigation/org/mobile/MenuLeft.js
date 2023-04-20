@@ -1,9 +1,9 @@
-import React, { useCallback } from "react";
+import React from "react";
 import styled from "styled-components";
 import { Close } from "../../../icons/Close";
 import image from "../icons/search.svg";
 import NearLogotype from "../icons/near-logotype.svg";
-import { Widget, useNear } from "near-social-vm";
+import { useNear } from "near-social-vm";
 import AccordionMenu from "./AccordionMenu";
 import { NotificationWidget } from "../NotificationWidget";
 import UserDropdownMenu from "../wrapper/desktop/UserDropdownMenu";
@@ -151,9 +151,6 @@ const StyledMenu = styled.div`
 export function MenuLeft(props) {
   const near = useNear();
   const history = useHistory();
-  const withdrawStorage = useCallback(async () => {
-    await near.contract.storage_withdraw({}, undefined, "1");
-  }, [near]);
 
   return (
     <StyledMenu className={props.showMenu ? "show" : ""}>
@@ -161,7 +158,11 @@ export function MenuLeft(props) {
         <button className="close-button" onClick={props.onCloseMenu}>
           <Close />
         </button>
-        <img className="near-logotype" src={NearLogotype} />
+        <img
+          className="near-logotype"
+          src={NearLogotype}
+          onClick={() => history.push("/")}
+        />
         <button
           className="search-btn"
           style={{ backgroundImage: `url(${image})` }}

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LogoBlack from "../icons/logo-black.svg";
 import { Widget } from "near-social-vm";
+import { useHistory } from "react-router-dom";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -79,6 +80,7 @@ const StyledNavigation = styled.div`
 
 export function TopNavigation(props) {
   const [scrolled, setScrolled] = useState(false);
+  const history = useHistory();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -122,7 +124,7 @@ export function TopNavigation(props) {
       </Link>
       <button
         className="mobile-nav-develop-btn"
-        onClick={() => console.log("go to components")}
+        onClick={() => history.push("/applications")}
       >
         <i className="ph-bold ph-shapes"></i>
       </button>
