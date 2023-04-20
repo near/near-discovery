@@ -39,6 +39,29 @@ const StyledApp = styled.div`
 
 export const refreshAllowanceObj = {};
 
+const iframeRoutes = [
+  {
+    route: "/events",
+    url: "https://pages.near.org/events",
+  },
+  {
+    route: "/learn",
+    url: "https://pages.near.org/learn",
+  },
+  {
+    route: "/about",
+    url: "https://pages.near.org/about",
+  },
+  {
+    route: "/news",
+    url: "https://pages.near.org/about/press-center",
+  },
+  {
+    route: "/developers",
+    url: "https://pages.near.org/developers",
+  },
+];
+
 function App(props) {
   const [connected, setConnected] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
@@ -152,6 +175,7 @@ function App(props) {
     },
     flags,
     setFlags,
+    iframeRoutes,
   };
 
   const metaProps = {
@@ -304,36 +328,11 @@ function App(props) {
           </Route>
 
           {/* Near ORG Iframe Pages: */}
-          <Route path={"/events"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              iframeSrc="https://pages.near.org/events"
-            />
-          </Route>
-          <Route path={"/learn"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              iframeSrc="https://pages.near.org/learn"
-            />
-          </Route>
-          <Route path={"/about"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              iframeSrc="https://pages.near.org/about"
-            />
-          </Route>
-          <Route path={"/news"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              iframeSrc="https://pages.near.org/about/press-center/"
-            />
-          </Route>
-          <Route path={"/developers"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              iframeSrc="https://pages.near.org/developers"
-            />
-          </Route>
+          {iframeRoutes.map((route) => (
+            <Route key={route.route} path={route.route} exact={true}>
+              <NearOrgPage {...passProps} iframeSrc={route.url} />
+            </Route>
+          ))}
 
           {/* Discovery Pages: */}
           <Route path={"/flags"} exact={true}>
