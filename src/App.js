@@ -29,6 +29,11 @@ import { Helmet } from "react-helmet";
 import NearOrgPage from "./pages/NearOrgPage";
 import FlagsPage from "./pages/FlagsPage";
 import { useFlags } from "./utils/flags";
+import {
+  init as initializeSegment,
+  recordWalletConnect,
+  reset,
+} from "./utils/analytics";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -51,12 +56,13 @@ function App(props) {
   const near = useNear();
   const account = useAccount();
   const accountId = account.accountId;
-  const location = window.location;
+  initializeSegment();
 
   useEffect(() => {
     initNear &&
       initNear({
         networkId: NetworkId,
+        walletConnectCallback: recordWalletConnect,
         selector: setupWalletSelector({
           network: NetworkId,
           modules: [
@@ -103,6 +109,7 @@ function App(props) {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
+    reset();
     localStorage.removeItem("accountId");
   }, [near]);
 

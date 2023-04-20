@@ -14,6 +14,7 @@
     "@near-wallet-selector/neth": "^7.9.0",
     "@near-wallet-selector/sender": "^7.9.0",
     "@radix-ui/react-navigation-menu": "^1.1.2",
+    "analytics-node": "^6.2.0",
     "big.js": "^6.1.1",
     "bn.js": "^5.1.1",
     "bootstrap": "^5.2.1",
