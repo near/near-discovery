@@ -1,18 +1,13 @@
-/* reset */
-button,
-h3 {
-  all: unset;
-}
-
 .AccordionItem {
+  all: unset;
   overflow: hidden;
   margin-top: 1px;
-  border-bottom: 1px solid #EEEEEC;
+  border-bottom: 1px solid #eeeeec;
 }
 
 .AccordionItem:first-child {
   margin-top: 0;
-  border-top: 1px solid #EEEEEC;
+  border-top: 1px solid #eeeeec;
 }
 
 .AccordionItem:last-child {
@@ -29,6 +24,7 @@ h3 {
 }
 
 .AccordionTrigger {
+  all: unset;
   font-family: inherit;
   background-color: transparent;
   height: 50px;
@@ -39,7 +35,7 @@ h3 {
   font-size: 16px;
   font-weight: 600;
   line-height: 1;
-  color: #1B1B18;
+  color: #1b1b18;
 }
 
 .AccordionTrigger:hover {
@@ -49,19 +45,19 @@ h3 {
 .AccordionContent {
   overflow: hidden;
   font-size: 15px;
-  color: #1B1B18;
+  color: #1b1b18;
   background-color: white;
 }
 
 .AccordionContent ul {
-    padding: 0;
-    list-style: none;
+  padding: 0;
+  list-style: none;
 }
 
-.AccordionContent[data-state='open'] {
+.AccordionContent[data-state="open"] {
   animation: slideDown 300ms cubic-bezier(0.87, 0, 0.13, 1);
 }
-.AccordionContent[data-state='closed'] {
+.AccordionContent[data-state="closed"] {
   animation: slideUp 300ms cubic-bezier(0.87, 0, 0.13, 1);
 }
 
@@ -69,7 +65,7 @@ h3 {
   color: #868682;
   transition: transform 300ms cubic-bezier(0.87, 0, 0.13, 1);
 }
-.AccordionTrigger[data-state='open'] > .AccordionChevron {
+.AccordionTrigger[data-state="open"] > .AccordionChevron {
   transform: rotate(180deg);
 }
 
