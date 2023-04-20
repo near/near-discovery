@@ -147,15 +147,12 @@ export default function EditorPage(props) {
   );
 
   useEffect(() => {
+    recordPageView();
     setWidgetSrc({
       edit: null,
       view: widgetSrc,
     });
   }, [widgetSrc, setWidgetSrc]);
-
-  useEffect(() => {
-    if (near) recordPageView();
-  }, [near]);
 
   useEffect(() => {
     const widgetSrc = `${accountId}/widget/${widgetName}/**`;
