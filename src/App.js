@@ -188,6 +188,9 @@ function App(props) {
               }}
             />
           </Route>
+          <Route path={"/horizon"} exact={true}>
+            <NearOrgPage {...passProps} src={Widgets.horizon.homePage} />
+          </Route>
           <Route path={"/ecosystem"} exact={true}>
             <NearOrgPage
               {...passProps}
