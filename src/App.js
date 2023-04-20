@@ -1,7 +1,6 @@
 import React, {
   useCallback,
   useEffect,
-  useLayoutEffect,
   useState,
 } from "react";
 import "error-polyfill";
@@ -111,6 +110,7 @@ function App(props) {
     setSignedIn(false);
     setSignedAccountId(null);
     reset();
+    localStorage.removeItem("accountId");
   }, [near]);
 
   const refreshAllowance = useCallback(async () => {
