@@ -1,18 +1,10 @@
-import * as nearAPI from "near-api-js";
-
-import { KeyPair } from "near-api-js/lib/utils/key_pair";
-import { NetworkId } from "../data/widgets";
-import { base_encode } from "near-api-js/lib/utils/serialize";
+import { NetworkId } from '../data/widgets';
+import { base_encode } from 'near-api-js/lib/utils/serialize';
 import { createKey } from '@near-js/biometric-ed25519';
-import { firebaseAuth } from "./firebase";
+import { firebaseAuth } from './firebase';
 import { sendSignInLinkToEmail } from 'firebase/auth';
 
-export const MASTER_USER_ID = "testnet";
-
-const tempAccountKeyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'fast-auth-temp:keystore:');
-const permAccountkeyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'fast-auth:keystore:');
-
-
+export const ACCOUNT_ID_SUFFIX = NetworkId === 'mainnet' ? 'near' : 'testnet';
 
 export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair) => {
     const account = await nearConnection.account(userName);
@@ -52,32 +44,3 @@ export const handleCreateAccount = async (accountId, email) => {
     }
 };
 
-
-export const handleCompleteSignIn = async (accountId) => {
-    if (accountId) {
-        const privateKey = await tempAccountKeyStore.getKey(NetworkId, accountId);
-        if (privateKey) {
-            const keyPair = KeyPair.fromString(privateKey);
-            await permAccountkeyStore.setKey(NetworkId, accountId, keyPair);
-        }
-    }
-}
-
-// export const viewAccessKeyData = async ({ accountId, publicKey, secretKey }) => {
-//     const { near } = getEnv()
-
-//     const provider = near!.connection.provider;
-
-//     if (secretKey) {
-//         publicKey = getPubFromSecret(secretKey)
-//     }
-
-//     let res = await provider.query({
-//         request_type: "view_access_key",
-//         finality: "final",
-//         account_id: accountId,
-//         public_key: publicKey,
-//     });
-
-//     return res;
-// }

@@ -1,16 +1,8 @@
 import { FastAuthWallet } from "./wallet";
 
 const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
-    console.log("config props: ", {
-        logger,
-        ...rest
-    })
-
-    console.log("FastAuth instance is received: ", fastAuthWallet)
-    // return the wallet interface for wallet-selector
     return {
         networkId() {
-            console.log("networkId: ", fastAuthWallet.networkId)
             return fastAuthWallet.networkId;
         },
         getContractId() {
@@ -18,12 +10,11 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         async getAccount() {
-            console.log("getAccount is called")
-            // return fastAuthWallet.getAccount();
+            logger.log("getAccount is called")
+            return fastAuthWallet.getAccount();
         },
 
         showModal() {
-            // fastAuthWallet.showModal(modalType);
         },
 
         async getAccounts() {
@@ -41,7 +32,7 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         async isSignedIn() {
-            console.log("isSignedIn is called")
+            logger.log("isSignedIn is called")
             return await fastAuthWallet.isSignedIn();
         },
 
@@ -55,7 +46,6 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         async signIn() {
-            console.log("signIn is called")
             logger.log("FastAuth:signIn");
             return await fastAuthWallet.signIn();
         },
@@ -82,26 +72,18 @@ export function setupFastAuth({
     signInContractId,
 }) {
     return async () => {
-        console.log('inner function is called')
         if (!signInContractId || !networkId) {
             console.warn(`fastAuthWallet: signInContractId, networkId, are required to use the fastAuthWallet.`)
             return null;
         }
-
-        console.log("prefastAuthWallet", fastAuthWallet)
 
         const fastAuthWallet = new FastAuthWallet({
             signInContractId,
             networkId,
         });
 
-        console.log("fastAuthWallet", fastAuthWallet)
-
         const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
-
-        // CHECK URL / LOCAL STORAGE TO SEE IF A TRIAL ACCOUNT SHOULD BE SIGNED IN
         const shouldSignIn = !!accountCreationData.isCreated;
-        console.log('shouldSignIn: ', shouldSignIn)
 
         return {
             id: "fast-auth",
@@ -121,12 +103,6 @@ export function setupFastAuth({
                     fastAuthWallet
                 });
             }
-
-            //         async(config) => {
-            //     console.log("init is called", config)
-            //     return fastAuth({ ...config, fastAuthWallet })
-            //     // console.log("init is finished", config)
-            // },
         };
     };
 }
