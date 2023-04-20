@@ -6,7 +6,6 @@ import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCo
 import { Helmet } from "react-helmet";
 import { recordPageView, debounceRecordClick } from "../utils/analytics";
 
-
 export default function NearOrgPage(props) {
   // will always be empty in prod
   const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
@@ -46,7 +45,7 @@ export default function NearOrgPage(props) {
   }, [props.src]);
 
   return (
-  <>
+    <>
       {props.meta && (
         <Helmet>
           <title>{props.meta.title}</title>

@@ -762,9 +762,7 @@ export default function EditorPage(props) {
   const showEditor = !(files?.length === 1 && files[0]?.unnamed === true);
 
   return (
-    <div 
-    onPointerUp={debounceRecordClick}
-    >
+    <div onPointerUp={debounceRecordClick}>
       <Helmet>
         <title>{props.meta.title}</title>
         <meta name="description" content={props.meta.description} />
@@ -806,7 +804,9 @@ export default function EditorPage(props) {
                       Open Component
                     </button>
                   </div>
-                  <div className="w-100 text-center text-secondary mb-3">or</div>
+                  <div className="w-100 text-center text-secondary mb-3">
+                    or
+                  </div>
                   <div className="d-flex justify-content-center">
                     <button
                       className="btn btn-success mb-4"
@@ -866,7 +866,10 @@ export default function EditorPage(props) {
                     metadata={metadata}
                   />
                   <div className="">
-                    <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
+                    <div
+                      className="w-100 d-flex "
+                      style={{ flexWrap: "nowrap" }}
+                    >
                       <div className="d-flex" style={{ flexWrap: "wrap" }}>
                         <Nav
                           variant="pills mb-2 mt-2"
@@ -965,7 +968,8 @@ export default function EditorPage(props) {
                           props={{
                             logOut: props.logOut,
                             tosName: props.tos.contentComponentPath,
-                            targetComponent: props.widgets.editorComponentSearch,
+                            targetComponent:
+                              props.widgets.editorComponentSearch,
                             targetProps: useMemo(
                               () => ({
                                 extraButtons: ({
@@ -1345,7 +1349,9 @@ export default function EditorPage(props) {
                         </div>
                         <div
                           className={`${
-                            tab === Tab.Metadata ? layoutClass : "visually-hidden"
+                            tab === Tab.Metadata
+                              ? layoutClass
+                              : "visually-hidden"
                           }`}
                         >
                           <div
