@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { recordPageView, Widget, useNear } from "near-social-vm";
+import { Widget, useNear } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import styleZendesk from "../zendesk";
+import { debounceRecordClick, recordPageView } from "../utils/analytics";
 import util from "util";
 import { Helmet } from "react-helmet";
 
@@ -82,8 +83,7 @@ export default function ViewPage(props) {
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 
   useEffect(() => {
-    if(near)
-      recordPageView(src);
+    if (near) recordPageView(src);
   }, [near, src]);
 
   //once the zendesk widget comes online, style it
@@ -113,6 +113,7 @@ export default function ViewPage(props) {
           display: "flex",
           flexDirection: "column",
         }}
+        onPointerUp={debounceRecordClick}
       >
         {localOverrideUrl && (
           <div

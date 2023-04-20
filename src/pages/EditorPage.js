@@ -6,7 +6,6 @@ import { useHistory, useParams } from "react-router-dom";
 import Editor from "@monaco-editor/react";
 import {
   Widget,
-  recordPageView,
   useCache,
   useNear,
   CommitButton,
@@ -21,8 +20,9 @@ import { SaveDraftModal } from "../components/SaveDraft";
 import styled from "styled-components";
 import VsCodeBanner from "../components/Editor/VsCodeBanner";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
-import { get, isEmpty } from "lodash";
 import { Helmet } from "react-helmet";
+import { recordPageView, debounceRecordClick } from "../utils/analytics";
+import { isEmpty } from "lodash";
 
 const TopMenu = styled.div`
   border-radius: 0.375rem;
@@ -154,8 +154,7 @@ export default function EditorPage(props) {
   }, [widgetSrc, setWidgetSrc]);
 
   useEffect(() => {
-      if(near)
-        recordPageView(window.location.href);
+    if (near) recordPageView();
   }, [near]);
 
   useEffect(() => {
@@ -763,7 +762,9 @@ export default function EditorPage(props) {
   const showEditor = !(files?.length === 1 && files[0]?.unnamed === true);
 
   return (
-    <>
+    <div 
+    onPointerUp={debounceRecordClick}
+    >
       <Helmet>
         <title>{props.meta.title}</title>
         <meta name="description" content={props.meta.description} />
@@ -1374,6 +1375,6 @@ export default function EditorPage(props) {
           ),
         }}
       />
-    </>
+    </div>
   );
 }

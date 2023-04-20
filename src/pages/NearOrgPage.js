@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Widget, recordPageView, recordEvent, useNear } from "near-social-vm";
+import { Widget, useNear } from "near-social-vm";
 import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import { Helmet } from "react-helmet";
+import { recordPageView, debounceRecordClick } from "../utils/analytics";
 
 
 export default function NearOrgPage(props) {
@@ -34,8 +35,7 @@ export default function NearOrgPage(props) {
   }, []);
 
   useEffect(() => {
-    if(near)
-      recordPageView(props.src);
+    if (near) recordPageView(props.src);
   }, [near]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export default function NearOrgPage(props) {
   }, [props.src]);
 
   return (
-    <>
+  <>
       {props.meta && (
         <Helmet>
           <title>{props.meta.title}</title>
@@ -57,7 +57,7 @@ export default function NearOrgPage(props) {
       )}
       <NavigationWrapper {...props} />
 
-      <div>
+      <div onPointerUp={debounceRecordClick}>
         {props.iframeSrc ? (
           <IframeResizer
             src={props.iframeSrc}
