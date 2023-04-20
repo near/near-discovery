@@ -1,33 +1,35 @@
-import "error-polyfill";
-import "bootstrap-icons/font/bootstrap-icons.css";
-import "@near-wallet-selector/modal-ui/styles.css";
-import "bootstrap/dist/js/bootstrap.bundle";
-import "App.scss";
+import '@near-wallet-selector/modal-ui/styles.css';
+import 'App.scss';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'bootstrap/dist/js/bootstrap.bundle';
+import 'error-polyfill';
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { NetworkId, Widgets } from "./data/widgets";
-import React, { useCallback, useEffect, useState } from "react";
-import { loadAccount, useAccount, useInitNear, useNear, utils } from "near-social-vm";
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { NetworkId, Widgets } from './data/widgets';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useAccount, useInitNear, useNear, utils } from 'near-social-vm';
 
-import AuthCallbackHandler from "./pages/AuthCallbackHandler";
-import Big from "big.js";
-import CreateAccount from "./pages/CreateAccount";
-import EditorPage from "./pages/EditorPage";
-import EmbedPage from "./pages/EmbedPage";
-import { Helmet } from "react-helmet";
-import { NavigationWrapper } from "./components/navigation/alpha/NavigationWrapper";
-import VerifyEmail from "./pages/VerifyEmail";
-import ViewPage from "./pages/ViewPage";
-import { setupFastAuth } from "./lib/selector/setup";
-import { setupHereWallet } from "@near-wallet-selector/here-wallet";
-import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
-import { setupModal } from "@near-wallet-selector/modal-ui";
-import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
-import { setupNearWallet } from "@near-wallet-selector/near-wallet";
-import { setupNeth } from "@near-wallet-selector/neth";
-import { setupSender } from "@near-wallet-selector/sender";
-import { setupWalletSelector } from "@near-wallet-selector/core";
-import styled from "styled-components";
+import AuthCallbackHandler from './pages/AuthCallbackHandler';
+import Big from 'big.js';
+import CreateAccount from './pages/CreateAccount';
+import EditorPage from './pages/EditorPage';
+import EmbedPage from './pages/EmbedPage';
+import FlagsPage from './pages/FlagsPage';
+import { Helmet } from 'react-helmet';
+import { NavigationWrapper } from './components/navigation/alpha/NavigationWrapper';
+import VerifyEmail from './pages/VerifyEmail';
+import ViewPage from './pages/ViewPage';
+import { setupFastAuth } from './lib/selector/setup';
+import { setupHereWallet } from '@near-wallet-selector/here-wallet';
+import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
+import { setupModal } from '@near-wallet-selector/modal-ui';
+import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
+import { setupNearWallet } from '@near-wallet-selector/near-wallet';
+import { setupNeth } from '@near-wallet-selector/neth';
+import { setupSender } from '@near-wallet-selector/sender';
+import { setupWalletSelector } from '@near-wallet-selector/core';
+import styled from 'styled-components';
+import { useFlags } from './utils/flags';
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -66,6 +68,7 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
+  const [flags, setFlags] = useFlags();
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -171,6 +174,8 @@ function App(props) {
       checkComponentPath: Widgets.tosCheck,
       contentComponentPath: Widgets.tosContent,
     },
+    flags,
+    setFlags,
   };
 
   return (
@@ -192,6 +197,10 @@ function App(props) {
           <Route path={"/auth-callback"}>
             <NavigationWrapper {...passProps} />
             <AuthCallbackHandler {...passProps} />
+          </Route>
+          <Route path={"/flags"}>
+            <NavigationWrapper {...passProps} />
+            <FlagsPage {...passProps} />
           </Route>
           <Route path={"/embed/:widgetSrc*"}>
             <EmbedPage {...passProps} />
