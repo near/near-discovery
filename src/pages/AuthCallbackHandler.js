@@ -31,18 +31,16 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
                     // window.localStorage.removeItem('emailForSignIn');
                     const user = result.user;
                     if (!!user.emailVerified) {
-                        const oauthToken = user.accessToken;
 
                         // TODO: Call MPC Service with accountId, publicKey,  and oauthToken to create account
                         const data = {
                             near_account_id: accountId,
                             public_key: publicKey,
-                            oidc_token: oauthToken
+                            oidc_token: user.accessToken
                         };
 
                         const headers = new Headers();
                         headers.append("Content-Type", "application/json");
-                        headers.append("Access-Control-Allow-Origin", "*");
 
                         const options = {
                             method: 'POST',
@@ -68,17 +66,9 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
                                 }));
 
                                 window.location.reload();
-                            })
-                            .then(data => {
-                                console.log('Response:', data);
-                            })
-                            .catch(error => {
+                            }).catch(error => {
                                 console.log('Error:', error);
                             });
-
-
-                        // await handleCreateAccount(accountId, publicKey);
-                        // await handleCompleteSignIn(accountId, publicKey);
                     }
                 })
                 .catch((error) => {
