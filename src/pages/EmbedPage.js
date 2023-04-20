@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { recordPageView, Widget, useNear } from "near-social-vm";
+import { Widget, useNear } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import { Helmet } from "react-helmet";
+import { recordPageView, debounceRecordClick } from "../utils/analytics";
 
 export default function EmbedPage(props) {
   const { widgetSrc } = useParams();
@@ -24,19 +25,18 @@ export default function EmbedPage(props) {
   }, [query]);
 
   useEffect(() => {
-    if(near)
-      recordPageView(window.location.href);
+    if (near) recordPageView();
   }, [near]);
 
   return (
-    <>
+  <>
       <Helmet>
         <title>{props.meta.title}</title>
         <meta name="description" content={props.meta.description} />
         <meta property="og:title" content={props.meta.title} />
         <meta property="og:description" content={props.meta.description} />
       </Helmet>
-      <div className="d-inline-block position-relative overflow-hidden">
+      <div className="d-inline-block position-relative overflow-hidden" onPointerUp={debounceRecordClick}>
         <Widget
           key={props.widgets.wrapper}
           src={props.widgets.wrapper}

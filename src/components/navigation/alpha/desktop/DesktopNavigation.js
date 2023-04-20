@@ -129,7 +129,7 @@ export function DesktopNavigation(props) {
               style={{ backgroundImage: `url(${image})` }}
               onFocus={() => {
                 setSearchInputFocus(true);
-                recordEvent('click-navigation-search');
+                recordEvent("click-navigation-search");
               }}
               onBlur={() => setSearchInputFocus(false)}
             />

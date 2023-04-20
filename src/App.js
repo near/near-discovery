@@ -21,7 +21,7 @@ import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
-import { reset, useAccount, useInitNear, useNear, utils } from "near-social-vm";
+import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
 import Big from "big.js";
 import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
@@ -30,6 +30,11 @@ import { Helmet } from "react-helmet";
 import NearOrgPage from "./pages/NearOrgPage";
 import FlagsPage from "./pages/FlagsPage";
 import { useFlags } from "./utils/flags";
+import {
+  init as initializeSegment,
+  recordWalletConnect,
+  reset,
+} from "./utils/analytics";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -52,13 +57,13 @@ function App(props) {
   const near = useNear();
   const account = useAccount();
   const accountId = account.accountId;
-
+  initializeSegment();
 
   useEffect(() => {
     initNear &&
       initNear({
         networkId: NetworkId,
-        segmentId: "diA7hiO28gGeb9fxn615Xs91uX3GyYhL",
+        walletConnectCallback: recordWalletConnect,
         selector: setupWalletSelector({
           network: NetworkId,
           modules: [
