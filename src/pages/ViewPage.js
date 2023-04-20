@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { Widget, useNear } from "near-social-vm";
+import { Widget } from "near-social-vm";
 import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
@@ -18,7 +18,6 @@ export default function ViewPage(props) {
   const query = useQuery();
   const [widgetProps, setWidgetProps] = useState({});
   const [redirectMap, setRedirectMap] = useState();
-  const near = useNear();
 
   const src = widgetSrc || props.widgets.default;
   const setWidgetSrc = props.setWidgetSrc;
@@ -68,6 +67,7 @@ export default function ViewPage(props) {
 
   useEffect(() => {
     setTimeout(() => {
+      recordPageView(src);
       setWidgetSrc(
         src === viewSourceWidget && query.get("src")
           ? {
@@ -81,10 +81,6 @@ export default function ViewPage(props) {
       );
     }, 1);
   }, [src, query, setWidgetSrc, viewSourceWidget]);
-
-  useEffect(() => {
-    if (near) recordPageView(src);
-  }, [near, src]);
 
   //once the zendesk widget comes online, style it
   const queueZendeskCheck = useCallback(() => {

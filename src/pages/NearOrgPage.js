@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Widget, useNear } from "near-social-vm";
+import { Widget } from "near-social-vm";
 import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
@@ -10,7 +10,6 @@ export default function NearOrgPage(props) {
   // will always be empty in prod
   const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
   const [redirectMap, setRedirectMap] = useState();
-  const near = useNear();
 
   useHashUrlBackwardsCompatibility();
 
@@ -34,10 +33,7 @@ export default function NearOrgPage(props) {
   }, []);
 
   useEffect(() => {
-    if (near) recordPageView(props.src);
-  }, [near]);
-
-  useEffect(() => {
+    recordPageView(props.src);
     props.setWidgetSrc({
       edit: props.src,
       view: props.src,
