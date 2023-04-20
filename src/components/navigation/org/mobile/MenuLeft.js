@@ -1,12 +1,13 @@
 import React, { useCallback } from "react";
-import styled from "styled-components";
-import { Close } from "../../../icons/Close";
-import image from "../icons/search.svg";
-import NearLogotype from "../icons/near-logotype.svg";
 import { Widget, useNear } from "near-social-vm";
+
 import AccordionMenu from "./AccordionMenu";
+import { Close } from "../../../icons/Close";
+import NearLogotype from "../icons/near-logotype.svg";
 import { NotificationWidget } from "../NotificationWidget";
 import UserDropdownMenu from "../wrapper/desktop/UserDropdownMenu";
+import image from "../icons/search.svg";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 const StyledMenu = styled.div`
@@ -185,7 +186,7 @@ export function MenuLeft(props) {
             <button
               className="create-account"
               onClick={() => {
-                window.location = "https://wallet.near.org/create";
+                history.push('/signup')
               }}
             >
               Create Account
