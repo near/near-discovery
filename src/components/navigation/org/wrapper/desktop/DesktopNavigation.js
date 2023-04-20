@@ -23,6 +23,13 @@ const StyledNavigation = styled.div`
     border-bottom: 1px solid #e3e3e0;
   }
 
+  a {
+    :hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
   .container {
     display: flex;
     align-items: center;

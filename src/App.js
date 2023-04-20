@@ -1,8 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
@@ -198,7 +194,68 @@ function App(props) {
             />
           </Route>
           <Route path={"/horizon"} exact={true}>
-            <NearOrgPage {...passProps} src={Widgets.horizon.homePage} />
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.horizon.homePage}
+              meta={{
+                title: "Horizon",
+                description: "Discover NEAR Horizon",
+              }}
+            />
+          </Route>
+          <Route path={"/people"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.peoplePage}
+              meta={{
+                title: "Connect with the NEAR community.",
+                description: "Become part of the NEAR community.",
+              }}
+            />
+          </Route>
+          <Route path={"/gateways"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.bosDirectory}
+              meta={{
+                title: "BOS Viewer Directory",
+                description: "NEAR BOS Directory",
+              }}
+            />
+          </Route>
+          <Route path={"/components"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.componentsPage}
+              meta={{
+                title: "Components built on the BOS",
+                description: "BOS Components",
+              }}
+            />
+          </Route>
+          <Route path={"/applications"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.componentsPage}
+              defaultWidgetProps={{
+                tab: "apps",
+              }}
+              meta={{
+                title: "Applications built on the BOS",
+                description: "BOS Applications",
+              }}
+            />
+          </Route>
+          <Route path={"/horizon"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.horizon.appPage}
+              meta={{
+                title: "Accelerate your Web3 Startup.",
+                description:
+                  "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO.",
+              }}
+            />
           </Route>
           <Route path={"/ecosystem"} exact={true}>
             <NearOrgPage
@@ -269,6 +326,12 @@ function App(props) {
             <NearOrgPage
               {...passProps}
               iframeSrc="https://pages.near.org/about/press-center/"
+            />
+          </Route>
+          <Route path={"/developers"} exact={true}>
+            <NearOrgPage
+              {...passProps}
+              iframeSrc="https://pages.near.org/developers"
             />
           </Route>
 
