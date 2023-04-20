@@ -47,8 +47,13 @@
   "reactSnap": {
     "source": "dist",
     "exclude": [
+      "/sandbox",
       "/edit",
-      "/near"
+      "/near",
+      "/events",
+      "/about",
+      "/news",
+      "/learn"
     ],
     "include": [
       "/",

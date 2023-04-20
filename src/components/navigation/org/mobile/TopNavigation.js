@@ -113,7 +113,7 @@ export function TopNavigation(props) {
           />
         ) : (
           <div className="menu-icon">
-            <i class="ph-bold ph-list"></i>
+            <i className="ph-bold ph-list"></i>
           </div>
         )}
       </button>
@@ -124,7 +124,7 @@ export function TopNavigation(props) {
         className="mobile-nav-develop-btn"
         onClick={() => console.log("go to components")}
       >
-        <i class="ph-bold ph-shapes"></i>
+        <i className="ph-bold ph-shapes"></i>
       </button>
     </StyledNavigation>
   );
