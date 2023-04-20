@@ -1,5 +1,4 @@
 import Analytics from "analytics-node";
-import { isStyledComponent } from "styled-components";
 import { nanoid } from "nanoid";
 import { debounce, get, split, truncate } from "lodash";
 import { createHash } from "crypto";
@@ -7,7 +6,7 @@ import { createHash } from "crypto";
 let segment;
 let anonymousUserId;
 let hashId;
-let userIdCreatedAt;
+let anonymousUserIdCreatedAt;
 
 export function setAccountIdHash(accountId) {
   const hash = createHash("sha512");
@@ -22,15 +21,15 @@ function getAnonymousId() {
   }
 
   const storageId = localStorage.getItem("anonymousUserId");
-  userIdCreatedAt = localStorage.getItem("anonymousUserIdCreatedAt");
+  anonymousUserIdCreatedAt = localStorage.getItem("anonymousUserIdCreatedAt");
 
   if (storageId) {
     anonymousUserId = storageId;
   } else {
     anonymousUserId = nanoid();
-    userIdCreatedAt = new Date().toUTCString();
+    anonymousUserIdCreatedAt = new Date().toUTCString();
     localStorage.setItem("anonymousUserId", anonymousUserId);
-    localStorage.setItem("anonymousUserIdCreatedAt", userIdCreatedAt);
+    localStorage.setItem("anonymousUserIdCreatedAt", anonymousUserIdCreatedAt);
   }
 
   return anonymousUserId;
@@ -115,7 +114,7 @@ function recordEventWithProps(eventLabel, properties) {
       properties: {
         ...properties,
         hashId: localStorage.getItem("hashId"),
-        userId_created_at: userIdCreatedAt,
+        anonymousUserIdCreatedAt,
       },
     });
   } catch (e) {
@@ -131,7 +130,7 @@ export function recordEvent(eventLabel) {
       properties: {
         hashId: localStorage.getItem("hashId"),
         url: window.location.href,
-        userId_created_at: userIdCreatedAt,
+        anonymousUserIdCreatedAt,
       },
     });
   } catch (e) {
