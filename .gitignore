@@ -24,9 +24,13 @@ yarn-error.log*
 
 #IDE
 .idea
+.vscode
 
 target
 neardev
 
 # OS X
 .DS_Store
+
+
+.env
