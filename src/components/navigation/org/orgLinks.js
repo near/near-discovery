@@ -37,7 +37,7 @@ export const navLinkData = {
     link: "/people",
   },
   ecosystem: {
-    title: "Ecocystem",
+    title: "Ecosystem",
     description: "This describers the components",
     link: "/ecosystem",
   },

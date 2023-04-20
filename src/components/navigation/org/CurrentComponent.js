@@ -55,6 +55,13 @@ const StyledCurrentComponent = styled.div`
 `;
 
 const CurrentComponent = (props) => {
+  if (
+    props.iframeRoutes
+      .map((item) => item.route)
+      .includes(window.location.pathname)
+  ) {
+    return;
+  }
   return (
     <StyledCurrentComponent className="current-component">
       <div className="title">Current Component</div>
