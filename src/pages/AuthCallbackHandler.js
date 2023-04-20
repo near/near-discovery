@@ -1,17 +1,16 @@
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
 import React from 'react';
-import encodeJwt from 'jwt-encode';
 import { firebaseAuth } from '../utils/firebase';
-import jwtDecode from 'jwt-decode';
 import { useHistory } from 'react-router-dom';
 
-const AuthCallbackHandler = ({ handleCreateAccount }) => {
+const AuthCallbackHandler = () => {
     const history = useHistory();
     const [statusMessage, setStatusMessage] = React.useState('Loading...');
 
     React.useEffect(() => {
         const locationUrl = window.location.href;
+
         if (isSignInWithEmailLink(firebaseAuth, locationUrl)) {
 
             const url = new URL(locationUrl);
@@ -19,18 +18,19 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
             const accountId = searchParams.get("accountId");
             const publicKey = searchParams.get("publicKey");
 
-
-
             let email = window.localStorage.getItem('emailForSignIn');
-            // if (!email) {
-            //     email = window.prompt('Please provide your email for confirmation');
-            // }
+            if (!email) {
+                history.push('/signup')
+            }
 
+            setStatusMessage('Verifying email...');
             signInWithEmailLink(firebaseAuth, email, window.location.href)
                 .then(async (result) => {
-                    // window.localStorage.removeItem('emailForSignIn');
+                    window.localStorage.removeItem('emailForSignIn');
+
                     const user = result.user;
                     if (!!user.emailVerified) {
+                        setStatusMessage('Creating account...');
 
                         // TODO: Call MPC Service with accountId, publicKey,  and oauthToken to create account
                         const data = {
@@ -54,15 +54,18 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
                                 if (!response.ok) {
                                     throw new Error('Network response was not ok');
                                 }
+                                setStatusMessage('Account created successfully!');
                                 const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
-                                // TODO: Check if account ID matches the one from email
 
+                                // TODO: Check if account ID matches the one from email
                                 if (!accountCreationData.privateKey || !accountCreationData.accountId) throw ('Could not find account creation data');
 
                                 window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify({
                                     ...accountCreationData,
                                     isCreated: true
                                 }));
+
+                                setStatusMessage('Redirecting to app...');
 
                                 window.location.href = '/';
                             }).catch(error => {

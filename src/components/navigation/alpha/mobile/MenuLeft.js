@@ -213,7 +213,7 @@ export function MenuLeft(props) {
                 props.requestSignIn();
               }}
             >Sign In</SignInButton>
-            <SignInButton onSignIn={() => history.push('signup')}>Sign up</SignInButton>
+            <SignInButton onSignIn={() => history.push('/signup')}>Sign up</SignInButton>
           </div>
         )}
         <div className="links-title">Discover</div>
