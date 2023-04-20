@@ -57,9 +57,7 @@ const MainNavigationMenu = (props) => {
             Develop
           </NavigationMenu.Trigger>
           <NavigationMenu.Content className="NavigationMenuContent develop">
-            <div style={{ padding: "10px" }}>
-              <CurrentComponent {...props} />
-            </div>
+            <CurrentComponent {...props} />
             <ul className="List one">
               <ListItem
                 route={navLinkData.sandbox.link}
