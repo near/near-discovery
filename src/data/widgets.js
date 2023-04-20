@@ -5,7 +5,8 @@ const TestnetDomains = {
   "near-discovery-asq5uacgk-near-developer-console.vercel.app": true,
 };
 
-export const NetworkId = window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+// export const NetworkId = window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const NetworkId = "testnet";
 
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",

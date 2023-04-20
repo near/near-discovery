@@ -1,7 +1,6 @@
 import * as nearAPI from 'near-api-js';
 
 import BN from 'bn.js';
-import { NetworkId } from '../../data/widgets';
 
 const networks = {
     mainnet: {
@@ -25,8 +24,7 @@ const networks = {
 }
 
 export class FastAuthWallet {
-    constructor({ signInContractId, networkId }) {
-        console.log('Fastauth constructor called.', signInContractId, networkId);
+    constructor({ signInContractId, networkId, ...rest }) {
         this.networkId = networkId
         this.signInContractId = signInContractId;
         this.activeAccountId = window.localStorage.getItem('fast-auth:activeAccountId');
@@ -36,7 +34,6 @@ export class FastAuthWallet {
             ...networks[networkId],
             deps: { keyStore: this.keyStore },
         });
-        console.log("finished constructor");
     }
 
     getContractId() {
@@ -52,21 +49,15 @@ export class FastAuthWallet {
     }
 
     async signIn() {
-        console.log("signIn called");
-        // If the user is already signed in, return the account
-
-        // // Check if the account ID and secret key are valid and sign in accordingly
+        if (this.activeAccountId) return
         try {
             const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
             if (!accountCreationData.privateKey || !accountCreationData.accountId || !accountCreationData.isCreated) return;
 
-            console.log('Signing user in ', accountCreationData)
-
             const keyPair = nearAPI.KeyPair.fromString(accountCreationData.privateKey);
-            console.log(keyPair)
-            await this.keyStore.setKey(NetworkId, accountCreationData.accountId, keyPair);
+            await this.keyStore.setKey(this.networkId, accountCreationData.accountId, keyPair);
+
             const accountObj = new nearAPI.Account(this.near.connection, accountCreationData.accountId);
-            console.log(accountObj)
             this._setActiveAccountId(accountCreationData.accountId);
             return [accountObj];
 
@@ -76,26 +67,14 @@ export class FastAuthWallet {
         }
     }
 
-    // The URL is invalid or the trial info is incorrect. We should check local storage:
-    // const curEnvData = getLocalStorageKeypomEnv();
-    //     console.log('trial info invalid. Cur env data: ', curEnvData)
-
-    // // If there is any
-    // if(curEnvData != null) {
-    // const { accountId, secretKey } = JSON.parse(curEnvData);
-    // return this.internalSignIn(accountId, secretKey);
-
-    // Invalid local storage info so return nothing
-    // return []
-
     async signOut() {
-        // if (this.trialAccountId == undefined || this.trialAccountId == null) {
-        //     throw new Error("Wallet is already signed out");
-        // }
+        if (this.activeAccountId == undefined || this.activeAccountId == null) {
+            throw new Error("Wallet is already signed out");
+        }
 
-        // this.trialAccountId = this.trialAccountId = this.trialSecretKey = undefined;
-        // await this.keyStore.removeKey(this.networkId, this.trialAccountId!);
-        // localStorage.removeItem(`${KEYPOM_LOCAL_STORAGE_KEY}:envData`);
+        this.activeAccountId = undefined;
+        await this.keyStore.removeKey(this.networkId, this.activeAccountId);
+        localStorage.removeItem(`fast-auth:account-creation-data`);
     }
 
     async signAndSendTransaction(params) {
@@ -111,16 +90,20 @@ export class FastAuthWallet {
     }
 
     async verifyOwner() {
-        // throw Error("FastAuth:verifyOwner is deprecated");
+        throw Error("FastAuth:verifyOwner is deprecated");
     }
 
     async getAvailableBalance(id) {
-        // TODO: get access key allowance
         return new BN(0);
     }
 
     async getAccounts() {
-        return await this.keyStore.getAccounts(NetworkId);
+        if (this.activeAccountId != undefined && this.activeAccountId != null) {
+            const accountObj = new nearAPI.Account(this.near.connection, this.activeAccountId);
+            return [accountObj];
+        }
+
+        return []
     }
 
     async switchAccount(id) {

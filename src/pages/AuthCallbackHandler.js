@@ -51,7 +51,6 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
 
                         await fetch('https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/new_account', options)
                             .then(response => {
-                                console.log("response", response)
                                 if (!response.ok) {
                                     throw new Error('Network response was not ok');
                                 }
@@ -65,7 +64,7 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
                                     isCreated: true
                                 }));
 
-                                window.location.reload();
+                                window.location.href = '/';
                             }).catch(error => {
                                 console.log('Error:', error);
                             });
@@ -73,7 +72,7 @@ const AuthCallbackHandler = ({ handleCreateAccount }) => {
                 })
                 .catch((error) => {
                     console.log(error)
-                    // history.push('/signup')
+                    alert('Error: ' + error.message);
                 });
         }
     }, [])

@@ -66,24 +66,11 @@ function App(props) {
   const [availableStorage, setAvailableStorage] = useState(null);
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
-  const MASTER_USER_ID = "gutsyphilip.testnet";
 
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
-  console.log("account", account);
-
   const accountId = account.accountId;
-
-  const handleCreateAccount = useCallback(async (accountId, publicKey) => {
-    if (!near || !account) {
-      return;
-    }
-    await account.createAccount(accountId, publicKey, "1000000000000000000000000");
-    await loadAccount(near, accountId).then((account) => {
-      console.log("successfully created account: ", account)
-    })
-  }, [near]);
 
 
   useEffect(() => {
@@ -107,12 +94,7 @@ function App(props) {
               signInContractId: "v1.social08.testnet",
             })
           ],
-        }).then((selector) => {
-          selector.store.observable.subscribe((...args) => {
-            console.log("walletStateArgs", args)
-          })
-          return selector;
-        }),
+        })
       });
   }, [initNear]);
 
@@ -175,7 +157,6 @@ function App(props) {
   }, [account]);
 
   const passProps = {
-    handleCreateAccount,
     refreshAllowance: () => refreshAllowance(),
     setWidgetSrc,
     signedAccountId,

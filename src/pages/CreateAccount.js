@@ -1,4 +1,4 @@
-import { MASTER_USER_ID, handleCreateAccount } from '../utils/auth';
+import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from '../utils/auth';
 import { getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
 
 import React from 'react';
@@ -30,7 +30,7 @@ const CreateAccount = () => {
           "params": {
             "request_type": "view_account",
             "finality": "final",
-            "account_id": `${formValues?.accountId}.${MASTER_USER_ID}`
+            "account_id": `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX}`
           }
         })
       });
@@ -53,7 +53,7 @@ const CreateAccount = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.accountId || !data.email) return
     try {
-      const fullAccountId = `${data.accountId}.${MASTER_USER_ID}`
+      const fullAccountId = `${data.accountId}.${ACCOUNT_ID_SUFFIX}`
       const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email)
       history.push(`/verify-email?publicKey=${publicKey}&accountId=${accountId}&email=${email}`)
     } catch (error) {
@@ -120,16 +120,16 @@ const CreateAccount = () => {
             label='Account ID'
             placeholder='user_name.near'
             statusState={isAccountAvailable === null ? 'default' : !!isAccountAvailable ? 'success' : 'error'}
-            statusMessage={isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${MASTER_USER_ID} is available!` : `${formValues?.accountId}.${MASTER_USER_ID} is taken, try something else.`}
+            statusMessage={isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
           />
           <p className="subText">
-            {isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${MASTER_USER_ID} is available!` : `${formValues?.accountId}.${MASTER_USER_ID} is taken, try something else.`}
+            {isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
           </p>
 
         </InputContainer>
         <StyledButton fullWidth onClick={onSubmit} type="button">
           {/* <IconFingerPrint /> */}
-          Continue with Fingerprint
+          Continue
         </StyledButton>
         <Footer>
           By creating an account, you agree to the NEAR <a href="">terms of service</a> and <a href="">privacy policy</a>
