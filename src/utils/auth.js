@@ -7,7 +7,12 @@ import { createKey } from '@near-js/biometric-ed25519';
 import { firebaseAuth } from "./firebase";
 import { sendSignInLinkToEmail } from 'firebase/auth';
 
-export const MASTER_USER_ID = "gutsyphilip.testnet";
+export const MASTER_USER_ID = "testnet";
+
+const tempAccountKeyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'fast-auth-temp:keystore:');
+const permAccountkeyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'fast-auth:keystore:');
+
+
 
 export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair) => {
     const account = await nearConnection.account(userName);
@@ -27,10 +32,17 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
 };
 
 export const handleCreateAccount = async (accountId, email) => {
-    const key = await createKey(accountId);
-    const publicKey = key.getPublicKey().toString();
+    const keyPair = await createKey(accountId);
+    const publicKey = keyPair.getPublicKey().toString();
+    const privateKey = keyPair.toString();
 
     if (!!publicKey) {
+        const accountDataStash = {
+            accountId,
+            privateKey,
+            isCreated: false,
+        }
+        window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify(accountDataStash));
         await sendSignInLinkToEmail(firebaseAuth, email, {
             url: `${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}`,
             handleCodeInApp: true,
@@ -41,23 +53,31 @@ export const handleCreateAccount = async (accountId, email) => {
 };
 
 
-export const handleCompleteSignIn = async (accountId, publicKey) => {
+export const handleCompleteSignIn = async (accountId) => {
     if (accountId) {
-        const authData = {
-            accountId,
-            allKeys: [publicKey],
-        };
-        const contract = {
-            contractId: "v1.social08.testnet",
-            methodNames: []
-        }
-        window.localStorage.setItem("near_app_wallet_auth_key", JSON.stringify(authData));
-        window.localStorage.setItem("near-social-vm:v01::accountId:", `"${accountId}"`);
-        window.localStorage.setItem("near-wallet-selector:contract", JSON.stringify(contract));
-        if (publicKey) {
-            const keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore(window.localStorage, 'near-api-js:keystore:');
-            const keyPair = KeyPair.fromString(publicKey);
-            await keyStore.setKey(NetworkId, accountId, keyPair);
+        const privateKey = await tempAccountKeyStore.getKey(NetworkId, accountId);
+        if (privateKey) {
+            const keyPair = KeyPair.fromString(privateKey);
+            await permAccountkeyStore.setKey(NetworkId, accountId, keyPair);
         }
     }
 }
+
+// export const viewAccessKeyData = async ({ accountId, publicKey, secretKey }) => {
+//     const { near } = getEnv()
+
+//     const provider = near!.connection.provider;
+
+//     if (secretKey) {
+//         publicKey = getPubFromSecret(secretKey)
+//     }
+
+//     let res = await provider.query({
+//         request_type: "view_access_key",
+//         finality: "final",
+//         account_id: accountId,
+//         public_key: publicKey,
+//     });
+
+//     return res;
+// }
