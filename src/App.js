@@ -172,7 +172,6 @@ function App(props) {
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.homePage}
-              fullBleed
               meta={{
                 title:
                   "The OS for the open web. Near Protocol is the Blockchain Operating Sytem",
