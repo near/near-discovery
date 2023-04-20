@@ -204,7 +204,6 @@ function App(props) {
               src={Widgets.nearOrg.ecosystemCommunityPage}
               meta={{
                 title: "Near Protocol Community",
-                description: "Projects building on NEAR are at the center."
               }}
             />
           </Route>
@@ -213,8 +212,8 @@ function App(props) {
               {...passProps}
               src={Widgets.nearOrg.ecosystemGetFundingPage}
               meta={{
-                title: "Near Protocol Get Funding",
-                description: "Projects building on NEAR are at the center."
+                title: "Near Protocol Get Funding. Build the future.The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
+                description: "We've helped hundreds of projects and teams realize their ideas, and bring them to market via Ecosystem grants for projects and start-ups building in web 3.0. Accelerators and Incubators for projects and start-ups looking to join an incubator or accelerator. Community led DAOs are Decentralized communities that support the growth of the ecosystem. Regional Hubs - If a project is based in the following regions they should apply via their respective Regional Hub."
               }}
             />
           </Route>
@@ -224,7 +223,6 @@ function App(props) {
               src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
               meta={{
                 title: "Near Protocol Work and Earn",
-                description: "Projects building on NEAR are at the center."
               }}
             />
           </Route>
