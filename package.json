@@ -13,15 +13,20 @@
     "@near-wallet-selector/near-wallet": "^7.9.0",
     "@near-wallet-selector/neth": "^7.9.0",
     "@near-wallet-selector/sender": "^7.9.0",
+    "@radix-ui/react-navigation-menu": "^1.1.2",
+    "analytics-node": "^6.2.0",
     "big.js": "^6.1.1",
     "bn.js": "^5.1.1",
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.9.0",
+    "classnames": "^2.3.2",
     "collections": "^5.1.12",
     "error-polyfill": "^0.1.2",
+    "iframe-resizer-react": "^1.1.0",
     "local-storage": "^2.0.0",
+    "lodash": "^4.17.21",
     "near-api-js": "^0.45.1",
-    "near-social-vm": "NearSocial/VM#1.1.0",
+    "near-social-vm": "NearSocial/VM#1.2.0",
     "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -37,7 +42,33 @@
     "prod": "npm run webpack -- --env mode=production",
     "prod:analyze": "npm run prod -- --env presets=analyze",
     "build": "npm run prod",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "postbuild": "react-snap"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "exclude": [
+      "/sandbox",
+      "/edit",
+      "/near",
+      "/events",
+      "/about",
+      "/news",
+      "/learn"
+    ],
+    "include": [
+      "/",
+      "/use",
+      "/ecosystem"
+    ],
+    "viewport": {
+      "width": 7000,
+      "height": 1400
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -72,6 +103,7 @@
     "crypto-browserify": "^3.12.0",
     "css-loader": "^6.2.0",
     "css-minimizer-webpack-plugin": "^3.0.2",
+    "dotenv-webpack": "^8.0.1",
     "html-webpack-plugin": "^5.3.2",
     "https-browserify": "^1.0.0",
     "mini-css-extract-plugin": "^2.2.2",
@@ -80,6 +112,7 @@
     "path-browserify": "^1.0.1",
     "postcss-loader": "^7.0.1",
     "process": "^0.11.10",
+    "react-snap": "near/react-snap#0.1",
     "sass-loader": "^13.1.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",

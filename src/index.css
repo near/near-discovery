@@ -6,6 +6,14 @@
   font-stretch: 75% 125%;
 }
 
+@font-face {
+  font-family: "FK Grotesk";
+  src: url("./fonts/FKGrotesk.woff2") format("woff2 supports variations"),
+    url("./fonts/FKGrotesk.woff2") format("woff2-variations");
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
 :root {
   --slate-dark-1: #151718;
   --slate-dark-3: #202425;

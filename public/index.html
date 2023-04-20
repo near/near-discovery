@@ -2,33 +2,79 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="favicon.ico" />
+    <link rel="icon" href="/assets/favicon.ico" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="Let&#39;s build decentralized experiences"
-    />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@NearSocial_">
-    <meta name="twitter:image" content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg">
-    <meta property="og:image" content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="NEAR" />
-    <meta property="og:description" content="Let&#39;s build decentralized experiences" />
-    <meta name="google-site-verification" content="google-site-verification=y6pEeJeV_HUP6_-q9jNj3JtY8OuLKgHHlirpHHdJmTk" />
-    <link rel="apple-touch-icon" href="logo192.png" />
+    <meta name="twitter:site" content="@NearSocial_" />
+    <meta
+      name="twitter:image"
+      content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg"
+    />
+    <meta
+      property="og:image"
+      content="https://storage.googleapis.com/alpha-near-images/alpha-social-cover.jpg"
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      name="google-site-verification"
+      content="google-site-verification=y6pEeJeV_HUP6_-q9jNj3JtY8OuLKgHHlirpHHdJmTk"
+    />
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" />
     <!--
       manifest.json provides metadata used when your web app is installed on a
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
-    <link rel="manifest" href="manifest.json" />
-    <title>NEAR</title>
-    <script defer data-domain="near.social" src="https://plausible.io/js/script.hash.js"></script>
-    <script>window.plausible = window.plausible || function() { (window.plausible.q = window.plausible.q || []).push(arguments) }; window.analytics = function() { window.plausible(...arguments) }</script>
+    <link rel="manifest" href="/manifest.json" />
+    <script
+      defer
+      data-domain="near.social"
+      src="https://plausible.io/js/script.hash.js"
+    ></script>
+    <script>
+      window.plausible =
+        window.plausible ||
+        function () {
+          (window.plausible.q = window.plausible.q || []).push(arguments);
+        };
+      window.analytics = function () {
+        window.plausible(...arguments);
+      };
+    </script>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <!-- NEAR Discovery Zendesk Support Widget -->
+    <script
+      id="ze-snippet"
+      src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
+    ></script>
+    <script type="text/javascript">
+      // Zendesk settings can not be configured outside of index.html :/
+      window.zESettings = {
+        webWidget: {
+          color: { theme: "#2b2f31" },
+          offset: {
+            horizontal: "10px",
+            vertical: "10px",
+            mobile: { horizontal: "2px", vertical: "65px", from: "right" },
+          },
+          contactForm: {
+            attachments: true,
+            title: { "*": "Feedback and Support" },
+            fields: [
+              {
+                id: 13149356989591,
+                prefill: { "*": localStorage.getItem("accountId")},
+              },
+            ],
+          },
+          launcher: {
+            label: { "*": " " },
+          },
+        },
+      };
+    </script>
   </body>
 </html>

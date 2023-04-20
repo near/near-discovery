@@ -14,7 +14,10 @@ import { Widget } from "near-social-vm";
 
 import image from "../icons/search.svg";
 import { useHistory } from "react-router-dom";
+
 import { Widgets } from "../../../../data/widgets";
+
+import { recordEvent } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -175,6 +178,19 @@ export function DesktopNavigation(props) {
               />
             </SearchDropDownContainer>
           )}
+
+          >
+            <input
+              placeholder="Search"
+              style={{ backgroundImage: `url(${image})` }}
+              onFocus={() => {
+                setSearchInputFocus(true);
+                recordEvent("click-navigation-search");
+              }}
+              onBlur={() => setSearchInputFocus(false)}
+            />
+          </form>
+          {searchInputFocus && <Return />}
         </div>
         <div className='navigation-section'>
           <NavigationButton
