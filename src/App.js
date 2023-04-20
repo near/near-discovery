@@ -152,6 +152,11 @@ function App(props) {
     setFlags,
   };
 
+  const metaProps = {
+    title: "NEAR",
+    description: "Let's build decentralized experiences.",
+  };
+
   return (
     <StyledApp className="App">
       <Helmet>
@@ -168,37 +173,59 @@ function App(props) {
               {...passProps}
               src={Widgets.nearOrg.homePage}
               meta={{
-                title: "NEAR Protocol | Create without limits",
-                description:
-                  "NEAR is a high-performance blockchain built without limits. Designed to be super-fast, incredibly secure, and infinitely scalable, NEAR allows anyone to build at scale and deploy at pace.",
+                title: "The OS for the open web. Near Protocol is the Blockchain Operating Sytem",
+                description: "Effortlessly create and distribute innovative decentralized apps, while helping build a more open web, with the NEAR Blockchain Operating System (BOS). The BOS makes it easy to use the tools you already know and love to build apps that engage users and create a more open web."
               }}
             />
           </Route>
           <Route path={"/use"} exact={true}>
-            <NearOrgPage {...passProps} src={Widgets.nearOrg.usePage} />
+            <NearOrgPage
+              {...passProps}
+              src={Widgets.nearOrg.usePage}
+              meta={{
+                title: "Your first steps to becoming a Web3 citizen",
+                description: "How Web3 on NEAR empowers you. Regain ownership. Interact freely. Participate in fair economies."
+              }}
+            />
           </Route>
           <Route path={"/ecosystem"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemOverviewPage}
+              meta={{
+                title: "Near Protocol Ecosystem",
+                description: "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO."
+              }}
             />
           </Route>
           <Route path={"/ecosystem/community"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemCommunityPage}
+              meta={{
+                title: "Near Protocol Community",
+                description: "Projects building on NEAR are at the center."
+              }}
             />
           </Route>
           <Route path={"/ecosystem/get-funding"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemGetFundingPage}
+              meta={{
+                title: "Near Protocol Get Funding",
+                description: "Projects building on NEAR are at the center."
+              }}
             />
           </Route>
           <Route path={"/ecosystem/work-and-earn"} exact={true}>
             <NearOrgPage
               {...passProps}
               src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
+              meta={{
+                title: "Near Protocol Work and Earn",
+                description: "Projects building on NEAR are at the center."
+              }}
             />
           </Route>
 
@@ -231,21 +258,18 @@ function App(props) {
           {/* Discovery Pages: */}
           <Route path={"/flags"} exact={true}>
             <NavigationWrapper {...passProps} />
-            <FlagsPage {...passProps} />
+            <FlagsPage {...passProps} meta={metaProps} />
           </Route>
           <Route path={"/embed/:widgetSrc*"}>
-            <EmbedPage {...passProps} />
+            <EmbedPage {...passProps} meta={metaProps} />
           </Route>
           <Route path={["/edit/:widgetSrc*", "/sandbox/:widgetSrc*"]}>
             <NavigationWrapper {...passProps} />
-            <EditorPage {...passProps} />
-          </Route>
-          <Route path={"/embed/:widgetSrc*"}>
-            <EmbedPage {...passProps} />
+            <EditorPage {...passProps} meta={metaProps} />
           </Route>
           <Route path={"/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
-            <ViewPage {...passProps} />
+            <ViewPage {...passProps} meta={metaProps} />
           </Route>
         </Switch>
       </BrowserRouter>
