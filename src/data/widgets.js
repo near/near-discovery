@@ -55,6 +55,10 @@ const MainnetWidgets = {
     homePage: "near/widget/NearOrg.HomePage",
     usePage: "near/widget/NearOrg.UsePage",
   },
+  horizon: {
+    homePage: "nearhorizon.near/widget/HomePage",
+    appPage: "nearhorizon.near/widget/Index",
+  },
 };
 
 export const Widgets =
