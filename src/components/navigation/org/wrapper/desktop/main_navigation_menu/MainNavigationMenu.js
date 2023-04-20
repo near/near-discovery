@@ -93,7 +93,7 @@ const MainNavigationMenu = (props) => {
               </ListItem>
               <ListItem
                 title="Ecosystem"
-                href="/docs/primitives/overview/introduction"
+                href="/ecosystem"
               >
                 <i className="ph-duotone ph-globe-hemisphere-west"></i>
                 Build high-quality, accessible design systems and web apps.
