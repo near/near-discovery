@@ -1,15 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { CommitButton } from "near-social-vm";
 
-export default ({
-  widgetName,
-  near,
-  path,
-  codeVisible,
-  metadata,
-  refs,
-  disable,
-}) => {
+export default ({ widgetName, near, path, codeVisible, metadata, disable }) => {
   return (
     <div>
       <CommitButton

@@ -27,10 +27,7 @@ export const onboardingDisable = {
   forkButton: true,
   renderPreviewButton: true,
   openInNewTabButton: true,
-
   changeViewButton: true,
-  // propsTab: true,
-  // metadataTab: true,
 };
 
 export const ONBOARDING_STORAGE = "onboarding-v0";
