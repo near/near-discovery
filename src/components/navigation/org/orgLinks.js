@@ -3,77 +3,82 @@ import { Widgets } from "../../../data/widgets";
 export const navLinkData = {
   components: {
     title: "Components",
-    description: "This describers the components",
+    description: "Explore decentralized, community built components",
     link: "/components",
   },
   applications: {
     title: "Applications",
-    description: "This describers the components",
+    description:
+      "Engage with applications built on the Blockchain Operating System (BOS)",
     link: "/applications",
   },
   gateways: {
     title: "Gateways",
-    description: "This describers the components",
+    description:
+      "Discover the different entry points to the Blockchain Operating System (BOS)",
     link: "/gateways",
   },
   sandbox: {
     title: "Sandbox",
-    description: "This describers the components",
+    description: "Build, test, and ship decentralized components",
     link: "/sandbox",
   },
   documentation: {
     title: "Documentation",
-    description: "This describers the components",
+    description: "Access guides, tutorials, API, and tooling documentation",
     link: "https://docs.near.org/discovery",
   },
   tutorials: {
-    title: "Tutorials",
-    description: "This describers the components",
+    title: "Quickstart",
+    description: "Start building your first components on the BOS",
     link: "https://docs.near.org/discovery/tutorial/quickstart",
   },
   people: {
     title: "People",
-    description: "This describers the components",
+    description: "Meet and collaborate with other people in the NEAR ecosystem",
     link: "/people",
   },
   ecosystem: {
     title: "Ecosystem",
-    description: "This describers the components",
+    description: "Explore all of the projects that are building on NEAR",
     link: "/ecosystem",
   },
   events: {
     title: "Events",
-    description: "This describers the components",
+    description:
+      "Join us for one of our upcoming in-person, virtual, or hybrid events",
     link: "/events",
   },
   developers: {
     title: "Developers",
-    description: "This describers the components",
+    description: "Find everything you need to start developing on NEAR",
     link: "/developers",
   },
   founders: {
     title: "Founders",
-    description: "This describers the components",
+    description:
+      "Accelerate the growth of your project and reach new audiences",
     link: "/horizon",
   },
   earlyAdopters: {
     title: "Early Adopters",
-    description: "This describers the components",
+    description: "Experience how easy it is to get started in Web3",
     link: "/use",
   },
   about: {
     title: "About",
-    description: "This describers the components",
+    description:
+      "Learn more about NEAR’s journey and vision for the decentralized web",
     link: "/about",
   },
   news: {
     title: "News",
-    description: "This describers the components",
+    description: "Stay up to date on all things NEAR",
     link: "/news",
   },
   learn: {
     title: "Learn",
-    description: "This describers the components",
+    description: "Get a short introduction to Web3, the blockchain, and NEAR",
     link: "/learn",
   },
 };
