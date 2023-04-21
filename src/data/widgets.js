@@ -1,11 +1,11 @@
 const TestnetDomains = {
   "test.near.org": true,
   "127.0.0.1": true,
-  "localhost": true
+  "localhost": true,
 };
 
-export const NetworkId =
-  window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const NetworkId = window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
   default: "one.testnet/widget/ActivityPage",
@@ -25,7 +25,18 @@ const TestnetWidgets = {
   tosCheck: "one.testnet/widget/TosCheck",
   tosContent: "one.testnet/widget/TosContent",
   wrapper: "one.testnet/widget/DIG.Theme",
-  wrapper: "one.testnet/widget/DIG.Theme",
+  nearOrg: {
+    ecosystemCommunityPage: "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
+    ecosystemGetFundingPage: "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
+    ecosystemOverviewPage: "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
+    ecosystemWorkAndEarnPage: "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
+    homePage: "discom.testnet/widget/NearOrg.HomePage",
+    usePage: "discom.testnet/widget/NearOrg.UsePage",
+  },
+  horizon: {
+    homePage: "nearhorizon.near/widget/HomePage",
+    appPage: "nearhorizon.near/widget/Index",
+  },
 };
 
 const MainnetWidgets = {
@@ -63,5 +74,4 @@ const MainnetWidgets = {
   },
 };
 
-export const Widgets =
-  NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets;
+export const Widgets = NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets;

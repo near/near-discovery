@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from "react";
-import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
-import styled from "styled-components";
-import NearLogotype from "../../icons/near-logotype.svg";
 import { Link, useHistory } from "react-router-dom";
-import image from "../../icons/search.svg";
-import { Return } from "../../icons/Return";
-import { recordEvent } from "../../../../../utils/analytics";
+import React, { useEffect, useState } from "react";
+
+import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
+import NearLogotype from "../../icons/near-logotype.svg";
 import { NotificationWidget } from "../../NotificationWidget";
+import { Return } from "../../icons/Return";
 import UserDropdownMenu from "./UserDropdownMenu";
+import image from "../../icons/search.svg";
+import styled from "styled-components";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -178,7 +178,7 @@ const DesktopNavigation = (props) => {
               <button
                 className="create-account"
                 onClick={() => {
-                  window.location = "https://wallet.near.org/create";
+                  history.push("/signup")
                 }}
               >
                 Create Account

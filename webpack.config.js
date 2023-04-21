@@ -15,6 +15,9 @@ module.exports = function (env) {
   return merge(
     {
       mode,
+      experiments: {
+        topLevelAwait: true
+      },
       entry: `${paths.srcPath}/index.js`,
       output: {
         path: paths.distPath,
@@ -52,6 +55,8 @@ module.exports = function (env) {
         fallback: {
           crypto: require.resolve("crypto-browserify"),
           stream: require.resolve("stream-browserify"),
+          "stream-http": require.resolve("stream-http"),
+          "https-browserify": require.resolve("https-browserify"),
         },
         // Fix for using `yarn link "near-social-vm"`
         alias: {

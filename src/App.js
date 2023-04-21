@@ -1,30 +1,39 @@
-import React, { useCallback, useEffect, useState } from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
+
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { NetworkId, Widgets } from "./data/widgets";
+import React, {
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
+
+import AuthCallbackHandler from "./pages/AuthCallbackHandler";
+import Big from "big.js";
+import CreateAccount from "./pages/CreateAccount";
 import EditorPage from "./pages/EditorPage";
+import EmbedPage from "./pages/EmbedPage";
+import FlagsPage from "./pages/FlagsPage";
+import { Helmet } from "react-helmet";
+import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
+import NearOrgPage from "./pages/NearOrgPage";
+import VerifyEmail from "./pages/VerifyEmail";
 import ViewPage from "./pages/ViewPage";
-import { setupWalletSelector } from "@near-wallet-selector/core";
-import { setupNearWallet } from "@near-wallet-selector/near-wallet";
-import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
-import { setupSender } from "@near-wallet-selector/sender";
+import { setupFastAuth } from './lib/selector/setup';
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
-import { setupNeth } from "@near-wallet-selector/neth";
 import { setupModal } from "@near-wallet-selector/modal-ui";
-import EmbedPage from "./pages/EmbedPage";
-import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
-import Big from "big.js";
-import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
-import { NetworkId, Widgets } from "./data/widgets";
+import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
+import { setupNearWallet } from "@near-wallet-selector/near-wallet";
+import { setupNeth } from "@near-wallet-selector/neth";
+import { setupSender } from "@near-wallet-selector/sender";
+import { setupWalletSelector } from "@near-wallet-selector/core";
 import styled from "styled-components";
-import { setupKeypom } from "keypom-js";
-import { Helmet } from "react-helmet";
-import NearOrgPage from "./pages/NearOrgPage";
-import FlagsPage from "./pages/FlagsPage";
 import { useFlags } from "./utils/flags";
 import { KEYPOM_OPTIONS } from "./utils/keypom-options";
 import {
@@ -102,6 +111,10 @@ function App(props) {
               trialSplitDelim: "/",
               signInContractId: NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
               modalOptions: KEYPOM_OPTIONS(NetworkId)
+            }),
+            setupFastAuth({
+              networkId: NetworkId,
+              signInContractId: "v1.social08.testnet",
             })
           ],
         }),
@@ -336,12 +349,19 @@ function App(props) {
             />
           </Route>
 
-          {/* Near ORG Iframe Pages: */}
-          {iframeRoutes.map((route) => (
-            <Route key={route.route} path={route.route} exact={true}>
-              <NearOrgPage {...passProps} iframeSrc={route.url} />
-            </Route>
-          ))}
+          {/*  */}
+          <Route path={"/signup"}>
+            <NavigationWrapper {...passProps} />
+            <CreateAccount {...passProps} />
+          </Route>
+          <Route path={"/verify-email"}>
+            <NavigationWrapper {...passProps} />
+            <VerifyEmail {...passProps} />
+          </Route>
+          <Route path={"/auth-callback"}>
+            <NavigationWrapper {...passProps} />
+            <AuthCallbackHandler {...passProps} />
+          </Route>
 
           {/* Discovery Pages: */}
           <Route path={"/flags"} exact={true}>
