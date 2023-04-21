@@ -282,6 +282,7 @@ const EditorPage = ({
     };
     updateFiles(newFilesObject, newPath);
     selectFile(newPath);
+    setRenderCode(null);
     updateCode(newPath, codeVisible);
   };
 
@@ -345,6 +346,7 @@ const EditorPage = ({
       const newFile = Object.values(newFilesObject)[0];
       newPath = { type: newFile.type, name: newFile.name };
       selectFile(newPath);
+      setRenderCode(null);
       updateLocalStorage(newFilesObject, newPath, cache);
     }
   };
@@ -379,7 +381,6 @@ const EditorPage = ({
     setPath(path);
     setLastPath(path);
     setMetadata(undefined);
-    setRenderCode(null);
     cache
       .asyncLocalStorageGet(StorageDomain, {
         path,
@@ -403,6 +404,7 @@ const EditorPage = ({
 
   const changeFile = (path) => {
     if (filesObject[JSON.stringify(path)]) {
+      setRenderCode(null);
       selectFile(path);
       updateFiles(filesObject, path);
     }
@@ -414,6 +416,7 @@ const EditorPage = ({
 
     addFile(filesObject, path, codeVisible, "", false, false);
     updateCode(path, codeVisible);
+    setRenderCode(null);
     selectFile(path);
 
     if (onboarding) {
@@ -439,6 +442,7 @@ const EditorPage = ({
     addFile(filesObject, path, code, "", false, false);
     updateCode(path, code);
     selectFile(path);
+    setRenderCode(null);
   };
 
   const loadAndOpenFile = (nameOrPath, type) => {
@@ -467,6 +471,7 @@ const EditorPage = ({
         addFile(filesObject, path, codeMain, codeDraft, isDraft);
         updateCode(path, codeCurrent);
         selectFile(path);
+        setRenderCode(null);
       }
     };
     cacheGet();
