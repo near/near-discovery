@@ -11,6 +11,7 @@ import { NavDropdownButton } from "./NavDropdownButton";
 import { NotificationWidget } from "../NotificationWidget";
 import image from "../icons/search.svg";
 import { useHistory } from "react-router-dom";
+
 import SearchDropDown from "./SearchDropdown";
 const SearchDropDownContainer = styled.div`
   position: absolute;
@@ -19,6 +20,9 @@ const SearchDropDownContainer = styled.div`
   transform: translateX(-50%);
   margin-top: 14px;
 `;
+
+import { recordEvent } from "../../../../../utils/analytics";
+
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -137,7 +141,10 @@ export function DesktopNavigation(props) {
             <input
               placeholder='Search'
               style={{ backgroundImage: `url(${image})` }}
-              onFocus={() => setSearchInputFocus(true)}
+              onFocus={() => {
+                setSearchInputFocus(true);
+                recordEvent("click-navigation-search");
+              }}
               onBlur={() => setSearchInputFocus(false)}
               ref={searchRef}
               onChange={(e) => changeSearchValue(e.target.value)}
