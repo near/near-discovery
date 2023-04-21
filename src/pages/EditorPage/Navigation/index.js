@@ -16,8 +16,6 @@ const Navigation = ({
   setShowModal,
   isDraft,
   changeFile,
-  // boxRef,
-  // step1Ref,
   refs,
   onboarding,
   currentStep,
@@ -51,8 +49,6 @@ const Navigation = ({
           path={path}
           metadata={metadata}
           isDraft={isDraft}
-          // boxRef={boxRef}
-          // step1Ref={step1Ref}
           refs={refs}
           onboarding={onboarding}
           currentStep={currentStep}

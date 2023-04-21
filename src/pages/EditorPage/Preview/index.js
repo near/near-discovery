@@ -1,7 +1,6 @@
 import React from "react";
 import { Widget } from "near-social-vm";
 import { Tab, Layout } from "../utils/const";
-import RenderPreviewButton from "../buttons/RenderPreviewButton";
 
 const Preview = ({
   tab,
@@ -10,10 +9,6 @@ const Preview = ({
   jpath,
   parsedWidgetProps,
   isModule,
-  setRenderCode,
-  setTab,
-  codeVisible,
-  refs,
 }) => (
   <div
     className={`${

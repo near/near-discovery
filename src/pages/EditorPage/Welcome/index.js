@@ -1,7 +1,6 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
-import AddModalContent from "../Modals/AddModalContent";
 import { Filetype, ModalTypes } from "../utils/const";
 
 import Point1 from "../OnBoarding/icons/point-1.svg";

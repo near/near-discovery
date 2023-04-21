@@ -10,10 +10,8 @@ const NavigationSub = ({
   accountId,
   tab,
   widgetPath,
-  setRenderCode,
   setTab,
   setLayoutState,
-  codeVisible,
   refs,
   handleRender,
   disable,
@@ -45,10 +43,6 @@ const NavigationSub = ({
         {(Tab.Widget === tab || layout === Layout.Split) && (
           <div className="d-flex justify-content-end me-2">
             <RenderPreviewButton
-              setRenderCode={setRenderCode}
-              layout={layout}
-              setTab={setTab}
-              codeVisible={codeVisible}
               refs={refs}
               handleRender={handleRender}
               disable={disable}

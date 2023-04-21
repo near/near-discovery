@@ -16,8 +16,6 @@ export default ({
   path,
   metadata,
   isDraft,
-  // boxRef,
-  // step1Ref,
   refs,
   onboarding,
   currentStep,
@@ -61,7 +59,6 @@ export default ({
           path={path}
           codeVisible={codeVisible}
           metadata={metadata}
-          refs={refs}
           disable={disable}
         />
       )}
