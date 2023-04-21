@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { Logo } from "../icons/Logo";
@@ -11,6 +11,14 @@ import { NavDropdownButton } from "./NavDropdownButton";
 import { NotificationWidget } from "../NotificationWidget";
 import image from "../icons/search.svg";
 import { useHistory } from "react-router-dom";
+import SearchDropDown from "./SearchDropdown";
+const SearchDropDownContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 14px;
+`;
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -107,14 +115,17 @@ const StyledNavigation = styled.div`
 export function DesktopNavigation(props) {
   const [menuDropdown, setMenuDropdown] = useState(false);
   const [searchInputFocus, setSearchInputFocus] = useState(false);
+  const [divFocus, setDivFocus] = useState(false);
+  const [term, changeSearchValue] = useState("");
+  const searchRef = useRef(null);
   const history = useHistory();
   return (
     <StyledNavigation onMouseLeave={() => setMenuDropdown(false)}>
-      <div className="container">
-        <Link to="/" className="logo-link">
+      <div className='container'>
+        <Link to='/' className='logo-link'>
           <Logo />
         </Link>
-        <div className="form-wrapper">
+        <div className='form-wrapper'>
           <form
             onSubmit={(e) => {
               e.preventDefault();
@@ -124,18 +135,28 @@ export function DesktopNavigation(props) {
             }}
           >
             <input
-              placeholder="Search"
+              placeholder='Search'
               style={{ backgroundImage: `url(${image})` }}
               onFocus={() => setSearchInputFocus(true)}
               onBlur={() => setSearchInputFocus(false)}
+              ref={searchRef}
+              onChange={(e) => changeSearchValue(e.target.value)}
             />
           </form>
-          {searchInputFocus && <Return />}
+          {(searchInputFocus || divFocus) && (
+            <SearchDropDownContainer key={1}>
+              <SearchDropDown
+                term={term}
+                focusChange={setDivFocus}
+                searchFocusChange={searchInputFocus}
+              />
+            </SearchDropDownContainer>
+          )}
         </div>
-        <div className="navigation-section">
+        <div className='navigation-section'>
           <NavigationButton
             onMouseEnter={() => setMenuDropdown(false)}
-            route="/"
+            route='/'
           >
             Home
           </NavigationButton>
@@ -146,7 +167,7 @@ export function DesktopNavigation(props) {
             Develop
           </NavDropdownButton>
         </div>
-        <div className="user-section">
+        <div className='user-section'>
           {!props.signedIn && (
             <SignInButton onSignIn={() => props.requestSignIn()} />
           )}
