@@ -97,7 +97,7 @@ function App(props) {
               bundle: false,
             }),
             setupKeypom({ 
-              trialBaseUrl: "http://localhost:3000/#", 
+              trialBaseUrl: NetworkId == "testnet" ? "http://localhost:3000/#" : "http://localhost:3000/#", 
               networkId: NetworkId,
               trialSplitDelim: "/",
               signInContractId: NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
@@ -112,7 +112,6 @@ function App(props) {
     if (!near) {
       return;
     }
-    console.log('near: ', near)
     near.selector.then((selector) => {
       setWalletModal(
         setupModal(selector, { contractId: near.config.contractName })
@@ -134,7 +133,6 @@ function App(props) {
       return;
     }
     const wallet = await (await near.selector).wallet();
-    console.log("i'm signing out?", wallet);
     wallet.signOut();
     near.accountId = null;
     setSignedIn(false);
