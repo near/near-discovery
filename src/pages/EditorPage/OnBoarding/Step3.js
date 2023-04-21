@@ -53,10 +53,7 @@ const CodeEx = styled.div`
   }
 `;
 
-const codeExample = `<Widget
-  src="near/widget/Onboarding.ComponentCard"
-  props={{ accountId }}
-/>`;
+const codeExample = `<Widget src="near/widget/Onboarding.ComponentCard" props={{ accountId }} />`;
 
 const codeVisible = `<Widget
   src="near/widget
