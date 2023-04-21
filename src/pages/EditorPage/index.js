@@ -543,6 +543,7 @@ const EditorPage = ({
                 setShowModal={setShowModal}
                 createFile={createFile}
                 showEditor={showEditor}
+                setCurrentStep={setCurrentStep}
               />
             )}
             <div className={showEditor ? `` : ``}>

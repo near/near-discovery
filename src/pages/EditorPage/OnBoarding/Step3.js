@@ -63,13 +63,13 @@ const codeVisible = `<Widget
 
 export default () => (
   <Wrapper>
-    <div className="title">Edit your first Component</div>
+    <div className="title">Edit your first Component </div>
     <div className="desc">
       The following code snippet gets the total number of contributions you have
       made to the NEAR blockchain.
       <br />
       <br />
-      Copy the snippet and replace the placeholder code on line 8 to display
+      Copy the snippet and replace the placeholder code on line 4 to display
       your total contributions.
     </div>
     <CodeEx>

@@ -58,13 +58,13 @@ const codeExample = "Onboarding.ComponentCollection";
 
 export default () => (
   <Wrapper>
-    <div className="title">Discovering Components</div>
+    <div className="title">Search for Community Components </div>
     <div className="desc">
       You can search the platform at any point for community components to
       inspire new experiences, or to use in your own projects.
       <br />
       <br />
-      Type or paste
+      In the search bar, type or paste in:
       <CodeEx>{codeExample}</CodeEx>
       <div className="buttons">
         <button
