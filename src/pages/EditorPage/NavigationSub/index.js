@@ -14,6 +14,8 @@ const NavigationSub = ({
   setTab,
   setLayoutState,
   codeVisible,
+  refs,
+  handleRender,
 }) => {
   const onLayoutChange = (e) => {
     const layout = e.target.value;
@@ -46,6 +48,8 @@ const NavigationSub = ({
               layout={layout}
               setTab={setTab}
               codeVisible={codeVisible}
+              refs={refs}
+              handleRender={handleRender}
             />
           </div>
         )}
