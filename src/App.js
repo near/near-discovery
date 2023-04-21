@@ -200,9 +200,9 @@ function App(props) {
               src={Widgets.nearOrg.homePage}
               meta={{
                 title:
-                  "The OS for the open web. Near Protocol is the Blockchain Operating Sytem",
+                  "NEAR | The OS for an Open Web",
                 description:
-                  "Effortlessly create and distribute innovative decentralized apps, while helping build a more open web, with the NEAR Blockchain Operating System (BOS). The BOS makes it easy to use the tools you already know and love to build apps that engage users and create a more open web.",
+                  "NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today.",
               }}
             />
           </Route>
@@ -211,9 +211,9 @@ function App(props) {
               {...passProps}
               src={Widgets.nearOrg.usePage}
               meta={{
-                title: "Your first steps to becoming a Web3 citizen",
+                title: "NEAR | Get Started",
                 description:
-                  "How Web3 on NEAR empowers you. Regain ownership. Interact freely. Participate in fair economies.",
+                  "Set up your NEAR account and start exploring apps built on the Blockchain Operating System and NEAR Protocol.",
               }}
             />
           </Route>
@@ -297,9 +297,9 @@ function App(props) {
               {...passProps}
               src={Widgets.nearOrg.ecosystemCommunityPage}
               meta={{
-                title: "Near Protocol Community",
+                title: "NEAR | Join the Community",
                 description:
-                  "The NEAR community is a globally distributed home to innovators, developers and contributors supporting the protocol's platform, ecosystem.",
+                  "The NEAR community is a globally distributed home to builders, founders, and contributors. Get started supporting the Blockchain Operating System and protocol’s ecosystem of applications and experiences.",
               }}
             />
           </Route>
@@ -309,9 +309,9 @@ function App(props) {
               src={Widgets.nearOrg.ecosystemGetFundingPage}
               meta={{
                 title:
-                  "Near Protocol Get Funding. Build the future.The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
+                  "NEAR | Get Funding",
                 description:
-                  "We've helped hundreds of projects and teams realize their ideas, and bring them to market via Ecosystem grants for projects and start-ups building in web 3.0. Accelerators and Incubators for projects and start-ups looking to join an incubator or accelerator. Community led DAOs are Decentralized communities that support the growth of the ecosystem. Regional Hubs - If a project is based in the following regions they should apply via their respective Regional Hub.",
+                  "Get funded while building on the Blockchain Operating System for an Open Web. The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
               }}
             />
           </Route>
@@ -320,9 +320,9 @@ function App(props) {
               {...passProps}
               src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
               meta={{
-                title: "Near Protocol Work and Earn",
+                title: "NEAR | Work and Earn",
                 description:
-                  "Want to help improve the NEAR ecosystem? Join our bounties program. Collaborate with others in the community to solve problems and earn rewards. View Bounties.",
+                  "Work and Earn across the NEAR ecosystem. Find a job, get a grant for your project, and earn bounties.",
               }}
             />
           </Route>
