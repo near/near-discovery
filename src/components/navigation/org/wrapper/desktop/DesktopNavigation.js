@@ -90,6 +90,7 @@ const StyledNavigation = styled.div`
       padding: 0 20px;
       font-size: 14px;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .sign-in {
