@@ -84,24 +84,7 @@ const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
           width: "500px",
         }}
       >
-        <Title>Welcome to the Component Sandbox!</Title>
-        <p className="text-secondary">
-          Use this sandbox to create, inspect, modify, and compose components to
-          create new experiences on NEAR.
-        </p>
-        <ButtonGetStarted
-          className="outlined"
-          onClick={() => setShowModal(ModalTypes.OpenModal)}
-        >
-          Open Component
-        </ButtonGetStarted>
-        <ButtonGetStarted onClick={() => handleNew(Filetype.Widget)}>
-          Create New Component
-        </ButtonGetStarted>
-
-        <Title className="second">
-          Follow out getting started guided tutorial
-        </Title>
+        <Title>Follow our getting started guided tutorial</Title>
         <div className="d-flex">
           <Tag>
             <img src={Point1} /> Beginner Friendly
@@ -116,6 +99,21 @@ const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
         </Desc>
         <ButtonGetStarted onClick={handleSandbox}>
           Get Started <img src={Arrow} />
+        </ButtonGetStarted>
+
+        <Title className="second">Welcome to the Component Sandbox!</Title>
+        <p className="text-secondary">
+          Use this sandbox to create, inspect, modify, and compose components to
+          create new experiences on NEAR.
+        </p>
+        <ButtonGetStarted
+          className="outlined"
+          onClick={() => setShowModal(ModalTypes.OpenModal)}
+        >
+          Open Component
+        </ButtonGetStarted>
+        <ButtonGetStarted onClick={() => handleNew(Filetype.Widget)}>
+          Create New Component
         </ButtonGetStarted>
       </div>
     </div>
