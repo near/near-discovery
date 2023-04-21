@@ -10,6 +10,7 @@ export default ({
   changeFile,
   setShowModal,
   closeFile,
+  disable,
 }) => (
   <Nav
     variant="pills mb-2 mt-2"
@@ -24,11 +25,12 @@ export default ({
         file={filesObject[key]}
         closeFile={closeFile}
         jpath={jpath}
+        disable={disable}
       />
     ))}
     <Nav.Item className="me-1">
-      <OpenCreateButton setShowModal={setShowModal} />
-      <RenameButton setShowModal={setShowModal} />
+      <OpenCreateButton setShowModal={setShowModal} disable={disable} />
+      <RenameButton setShowModal={setShowModal} disable={disable} />
     </Nav.Item>
   </Nav>
 );

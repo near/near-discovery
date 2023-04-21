@@ -54,7 +54,7 @@ const CodeEx = styled.div`
   }
 `;
 
-const codeExample = "Contribution";
+const codeExample = "Contribution Graph";
 
 export default () => (
   <Wrapper>
@@ -65,7 +65,7 @@ export default () => (
       <br />
       <br />
       Type or paste
-      <CodeEx>{codeExample} Graph</CodeEx>
+      <CodeEx>{codeExample}</CodeEx>
       <div className="buttons">
         <button
           onClick={() => {

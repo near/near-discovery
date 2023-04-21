@@ -22,14 +22,19 @@ export default ({
   onboarding,
   currentStep,
   requestSignIn,
+  disable,
 }) => (
   <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
     <Nav.Item className="d-flex">
       <div>
-        <SaveDraftButton widgetName={widgetName} setShowModal={setShowModal} />
+        <SaveDraftButton
+          widgetName={widgetName}
+          setShowModal={setShowModal}
+          disable={disable}
+        />
       </div>
       <div>
-        <ForkButton forkFile={forkFile} refs={refs} />
+        <ForkButton forkFile={forkFile} refs={refs} disable={disable} />
       </div>
 
       {isDraft ? (
@@ -40,12 +45,14 @@ export default ({
           codeVisible={codeVisible}
           metadata={metadata}
           ref={refs}
+          disable={disable}
         />
       ) : onboarding ? (
         <OnboardingPublishButton
           currentStep={currentStep}
           refs={refs}
           requestSignIn={requestSignIn}
+          disable={disable}
         />
       ) : (
         <PublishButton
@@ -55,6 +62,7 @@ export default ({
           codeVisible={codeVisible}
           metadata={metadata}
           refs={refs}
+          disable={disable}
         />
       )}
     </Nav.Item>

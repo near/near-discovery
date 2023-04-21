@@ -10,6 +10,24 @@ import Step8 from "../OnBoarding/Step8";
 import Step9 from "../OnBoarding/Step9";
 import Step10 from "../OnBoarding/Step10";
 
+export const onboardingDisable = {
+  search: true,
+  fileTab: true,
+  openCreateButton: true,
+  renameButton: true,
+  publishDraftAsMainButton: true,
+  onboardingPublishButton: true,
+  publishButton: true,
+  saveDraftButton: true,
+  forkButton: true,
+  renderPreviewButton: true,
+  openInNewTabButton: true,
+
+  changeViewButton: true,
+  // propsTab: true,
+  // metadataTab: true,
+};
+
 export const ONBOARDING_STORAGE = "onboarding-v0";
 
 export const onboardingSteps = {

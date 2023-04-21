@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { onboardingSteps, ONBOARDING_STORAGE } from "../utils/onboarding";
+import {
+  onboardingDisable,
+  onboardingSteps,
+  ONBOARDING_STORAGE,
+} from "../utils/onboarding";
 import OnboardingWelcome from "./OnboardingWelcome";
 import { Link } from "react-router-dom";
 
@@ -83,6 +87,7 @@ export default ({
   cache,
   near,
   closeFile,
+  setDisable,
 }) => {
   const [tooltipPosition, setTooltipPosition] = useState({});
   const [adjustPosition, setAdjustPosition] = useState({ x: 0, y: 0 });
@@ -110,8 +115,36 @@ export default ({
     window.addEventListener("resize", getPosition);
   }, []);
 
+  const enableStep = (name) => {
+    setDisable((state) => ({
+      ...state,
+      [name]: false,
+    }));
+  };
+
+  const disableAll = () => {
+    setDisable(onboardingDisable);
+  };
+
   useEffect(() => {
     setLayoutState(Layout.Split);
+
+    // disable
+    if (onboarding && currentStep === 1) {
+      enableStep("forkButton");
+    } else if (onboarding && currentStep === 4) {
+      enableStep("renderPreviewButton");
+    } else if (onboarding && currentStep === 6) {
+      enableStep("search");
+    } else if (onboarding && currentStep === 7) {
+      enableStep("search");
+    } else if (onboarding && currentStep === 9) {
+      enableStep("renderPreviewButton");
+    } else if (onboarding && currentStep === 10) {
+      enableStep("publishButton");
+    } else {
+      disableAll();
+    }
 
     if (onboarding && currentStep === 1) {
       reloadFile();
