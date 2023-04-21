@@ -7,19 +7,19 @@ const TypeAheadDropdown = (props) => {
 
   return (
     <div
-      onFocus={() => props.focusChange(true)}
-      onBlur={() => props.focusChange(false)}
-      onClick={async () => {
-        await setTimeout(100);
+      tabIndex={-1}
+      onFocus={() => {
+        props.focusChange(true);
+      }}
+      onBlur={() => {
         props.focusChange(false);
-        props.searchFocusChange(false);
       }}
     >
       {(!shouldWaitForMap || redirectMap) && (
         <Widget
           config={{ redirectMap }}
           src={props.widgetSrc}
-          props={{ term: props.term, focusChange: props.searchFocusChange }}
+          props={{ term: props.term }}
         />
       )}
     </div>
