@@ -193,15 +193,17 @@ const ListItem = React.forwardRef(
   ({ className, children, title, ...props }, forwardedRef) => {
     if (props.route) {
       return (
-        <NavigationMenu.Link asChild>
-          <NavLink
-            to={props.route}
-            className={classNames("ListItemLink", className)}
-          >
-            <div className="ListItemHeading">{title}</div>
-            <p className="ListItemText">{children}</p>
-          </NavLink>
-        </NavigationMenu.Link>
+        <li>
+          <NavigationMenu.Link asChild>
+            <NavLink
+              to={props.route}
+              className={classNames("ListItemLink", className)}
+            >
+              <div className="ListItemHeading">{title}</div>
+              <p className="ListItemText">{children}</p>
+            </NavLink>
+          </NavigationMenu.Link>
+        </li>
       );
     } else {
       return (
