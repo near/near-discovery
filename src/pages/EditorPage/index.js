@@ -47,6 +47,7 @@ import {
   ONBOARDING_STORAGE,
 } from "./utils/onboarding";
 import { Helmet } from "react-helmet";
+import { recordPageView, debounceRecordClick } from "../../utils/analytics";
 
 const EditorPage = ({
   setWidgetSrc,
@@ -118,6 +119,7 @@ const EditorPage = ({
   }, [widgetSrc, setWidgetSrc]);
 
   useEffect(() => {
+    recordPageView();
     ls.set(WidgetPropsKey, widgetProps);
     try {
       const parsedWidgetProps = JSON.parse(widgetProps);
@@ -467,7 +469,7 @@ const EditorPage = ({
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
       </Helmet>
-      <div style={{ position: "relative" }}>
+      <div style={{ position: "relative" }} onPointerUp={debounceRecordClick}>
         <OnBoarding
           onboarding={onboarding}
           refs={refs}
