@@ -29,7 +29,7 @@ const StyledMenu = styled.div`
   }
 
   .left-side {
-    flex: 80;
+    flex: 90;
     background-color: white;
     position: relative;
     display: flex;
@@ -108,6 +108,7 @@ const StyledMenu = styled.div`
     .create-account {
       background-color: #161615;
       color: white;
+      border: 0;
     }
   }
 
