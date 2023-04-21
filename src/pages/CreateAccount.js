@@ -4,15 +4,17 @@ import { getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
 import React from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const CreateAccount = () => {
   const history = useHistory();
+  const location = useLocation()
   const [urlParams, setUrlParams] = React.useState(null);
   const [isAccountAvailable, setIsAccountAvailable] = React.useState(null);
   const { register, handleSubmit, watch, setValue, formState } = useForm();
   const formValues = watch();
   const defaultAccountId = getEmailId(formValues?.email || '')
+  const isRecovery = parseURLParams(location.search)?.recovery === 'true'
 
   const checkIsAccountAvailable = async () => {
     try {
@@ -53,9 +55,9 @@ const CreateAccount = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.accountId || !data.email) return
     try {
-      const fullAccountId = `${data.accountId}.${ACCOUNT_ID_SUFFIX}`
+      const fullAccountId = isRecovery ? data.accountId : `${data.accountId}.${ACCOUNT_ID_SUFFIX}`
       const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email)
-      history.push(`/verify-email?publicKey=${publicKey}&accountId=${accountId}&email=${email}`)
+      history.push(isRecovery ? `/verify-email?publicKey=${publicKey}&accountId=${accountId}&email=${email}&isRecovery=true` : `/verify-email?publicKey=${publicKey}&accountId=${accountId}&email=${email}`)
     } catch (error) {
       console.log(error)
       alert(error.message)
@@ -64,20 +66,20 @@ const CreateAccount = () => {
 
 
   React.useEffect(() => {
-    if (!formValues?.accountId) return
+    if (!formValues?.accountId || isRecovery) return
     checkIsAccountAvailable()
-  }, [formValues?.accountId])
+  }, [formValues?.accountId, isRecovery])
 
   React.useEffect(() => {
-    const params = parseURLParams(window.location.search)
+    const params = parseURLParams(location.search)
     setUrlParams(params)
-  }, [window.location.search])
+  }, [location.search])
 
   return (
     <StyledContainer>
       <FormContainer onSubmit={onSubmit}>
         <header>
-          <h1>Create account</h1>
+          <h1>{isRecovery ? 'Recover account' : 'Create account'}</h1>
           <p className='desc'>Use this account to sign in everywhere on NEAR, no password required.</p>
         </header>
 
@@ -122,17 +124,30 @@ const CreateAccount = () => {
             statusState={isAccountAvailable === null ? 'default' : !!isAccountAvailable ? 'success' : 'error'}
             statusMessage={isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
           />
-          <p className="subText">
-            {isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
-          </p>
+          {!isRecovery ? 
+            <p className="subText">
+              {isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
+            </p> 
+          : null }
 
         </InputContainer>
         <StyledButton fullWidth onClick={onSubmit} type="button">
           {/* <IconFingerPrint /> */}
           Continue
         </StyledButton>
+        <StyledButton
+            fullWidth
+            onClick={(e) => {
+                e.preventDefault();
+                history.push(isRecovery ? `/signup` : `/signup?recovery=true`);
+            }}
+            style={{ backgroundColor: "transparent" }}
+        >
+          {/* <IconFingerPrint /> */}
+          {isRecovery ? 'Create a new account' : 'Recover existing account'}
+        </StyledButton>
         <Footer>
-          By creating an account, you agree to the NEAR <a href="">terms of service</a> and <a href="">privacy policy</a>
+          {`By ${isRecovery ? 'recovering' : 'creating'} an account, you agree to the NEAR`} <a href="">terms of service</a> and <a href="">privacy policy</a>
         </Footer>
       </FormContainer>
     </StyledContainer>
