@@ -1,9 +1,3 @@
-/* reset */
-button,
-p {
-  all: unset;
-}
-
 .NavigationMenuRoot {
   display: flex;
   align-items: center;
@@ -21,6 +15,7 @@ p {
 
 .NavigationMenuTrigger,
 .NavigationMenuLink {
+  all: unset;
   padding: 8px 14px;
   outline: none;
   user-select: none;
@@ -32,11 +27,11 @@ p {
 }
 .NavigationMenuTrigger:focus,
 .NavigationMenuLink:focus {
-  color: #6D62D4;
+  color: #6d62d4;
 }
 .NavigationMenuTrigger:hover,
 .NavigationMenuLink:hover {
-  color: #6D62D4;
+  color: #6d62d4;
 }
 
 .NavigationMenuTrigger {
@@ -81,16 +76,16 @@ p {
   flex: 1;
 }
 
-.NavigationMenuContent[data-motion='from-start'] {
+.NavigationMenuContent[data-motion="from-start"] {
   animation-name: enterFromLeft;
 }
-.NavigationMenuContent[data-motion='from-end'] {
+.NavigationMenuContent[data-motion="from-end"] {
   animation-name: enterFromRight;
 }
-.NavigationMenuContent[data-motion='to-start'] {
+.NavigationMenuContent[data-motion="to-start"] {
   animation-name: exitToLeft;
 }
-.NavigationMenuContent[data-motion='to-end'] {
+.NavigationMenuContent[data-motion="to-end"] {
   animation-name: exitToRight;
 }
 @media only screen and (min-width: 600px) {
@@ -109,10 +104,10 @@ p {
   z-index: 1;
   transition: width, transform 250ms ease;
 }
-.NavigationMenuIndicator[data-state='visible'] {
+.NavigationMenuIndicator[data-state="visible"] {
   animation: fadeIn 200ms ease;
 }
-.NavigationMenuIndicator[data-state='hidden'] {
+.NavigationMenuIndicator[data-state="hidden"] {
   animation: fadeOut 200ms ease;
 }
 
@@ -125,14 +120,14 @@ p {
   border-radius: 6px;
   overflow: hidden;
   box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06),
-  0px 4px 8px rgba(0, 0, 0, 0.06);
+    0px 4px 8px rgba(0, 0, 0, 0.06);
   height: var(--radix-navigation-menu-viewport-height);
   transition: width, height, 300ms ease;
 }
-.NavigationMenuViewport[data-state='open'] {
+.NavigationMenuViewport[data-state="open"] {
   animation: scaleIn 200ms ease;
 }
-.NavigationMenuViewport[data-state='closed'] {
+.NavigationMenuViewport[data-state="closed"] {
   animation: scaleOut 200ms ease;
 }
 @media only screen and (min-width: 600px) {
@@ -178,19 +173,19 @@ p {
   left: 12px;
   transform: translateY(-50%);
   font-size: 22px;
-  color: #706F6C;
+  color: #706f6c;
 }
 
 .ListItemLink:hover {
   text-decoration: none;
-  background-color: #F3F3F2;
+  background-color: #f3f3f2;
 }
 
 .ListItemHeading {
   font-weight: 500;
   line-height: 1.2;
   margin-bottom: 5px;
-  color: #1B1B18;
+  color: #1b1b18;
 }
 
 .ListItemText {

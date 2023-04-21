@@ -61,6 +61,7 @@ const StyledMenu = styled.div`
   }
 
   .search-btn {
+    all: unset;
     background-repeat: no-repeat;
     background-position: 12px 12px;
     padding-left: 44px;
