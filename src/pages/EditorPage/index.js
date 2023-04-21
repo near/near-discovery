@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ls from "local-storage";
 import { useParams } from "react-router-dom";
 import { useCache, useNear, useAccountId } from "near-social-vm";
@@ -37,16 +37,30 @@ import {
 } from "./utils/editor";
 import MainLoader from "./Welcome/MainLoader";
 import { useHashUrlBackwardsCompatibility } from "../../hooks/useHashUrlBackwardsCompatibility";
-import { Helmet } from "react-helmet";
-import { recordPageView, debounceRecordClick } from "../../utils/analytics";
+import OnBoarding from "./OnBoarding";
+import ForkButton from "./buttons/ForkButton";
+import RenderPreviewButton from "./buttons/RenderPreviewButton";
+import {
+  generateRefs,
+  getStepLocalStorage,
+  onboardingSteps,
+  ONBOARDING_STORAGE,
+} from "./utils/onboarding";
 
-const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
+const EditorPage = ({
+  setWidgetSrc,
+  widgets,
+  logOut,
+  tos,
+  onboarding,
+  requestSignIn,
+}) => {
   const near = useNear();
   const cache = useCache();
   const accountId = useAccountId();
   const { widgetSrc } = useParams();
 
-  const [mainLoader, setMainLoader] = useState(true);
+  const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
   const [codeVisible, setCodeVisible] = useState(undefined);
   const [path, setPath] = useState(undefined);
@@ -102,7 +116,6 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
   }, [widgetSrc, setWidgetSrc]);
 
   useEffect(() => {
-    recordPageView();
     ls.set(WidgetPropsKey, widgetProps);
     try {
       const parsedWidgetProps = JSON.parse(widgetProps);
@@ -119,11 +132,26 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
       .then((res = {}) => {
         setLastPath(res.lastPath);
+        if (onboarding && currentStep === 1) {
+          const onboardingPath = { type: "widget", name: "ComponentStarter" };
+          near && createFilesObject([onboardingPath]);
+          selectFile(onboardingPath);
+          setMainLoader(false);
+          return;
+        }
         near && createFilesObject(res.files || []);
         selectFile(res.lastPath);
         setMainLoader(false);
       });
   }, [cache, near]);
+
+  const reloadFile = () => {
+    const onboardingPath = { type: "widget", name: "ComponentStarter" };
+    near && createFilesObject([onboardingPath]);
+    selectFile(onboardingPath);
+    setMainLoader(false);
+    loadAndOpenFile("golas.near/widget/ComponentStarter", Filetype.Widget);
+  };
 
   const createFilesObject = (files = []) => {
     const filesObject = files.reduce(
@@ -277,6 +305,32 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
     }
   };
 
+  const handleRender = () => {
+    setRenderCode(codeVisible);
+    if (layout === Layout.Tabs) {
+      setTab(Tab.Widget);
+    }
+
+    if (onboarding) {
+      if (currentStep === 4) {
+        const nextStep = 5;
+        setCurrentStep(nextStep);
+        localStorage.setItem(
+          ONBOARDING_STORAGE,
+          JSON.stringify({ step: nextStep })
+        );
+      }
+      if (currentStep === 9) {
+        const nextStep = 10;
+        setCurrentStep(nextStep);
+        localStorage.setItem(
+          ONBOARDING_STORAGE,
+          JSON.stringify({ step: nextStep })
+        );
+      }
+    }
+  };
+
   const selectFile = (path) => {
     setPath(path);
     setLastPath(path);
@@ -297,6 +351,12 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
     setFilesObject(newFilesObject);
   };
 
+  const closeAllFiles = () => {
+    Object.values(filesObject).map((file) => {
+      closeFile({ type: file.type, name: file.name });
+    });
+  };
+
   const changeFile = (path) => {
     if (filesObject[JSON.stringify(path)]) {
       selectFile(path);
@@ -311,6 +371,17 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
     addFile(filesObject, path, codeVisible, "", false, false);
     updateCode(path, codeVisible);
     selectFile(path);
+
+    if (onboarding) {
+      if (currentStep === 1) {
+        const nextStep = currentStep + 1;
+        setCurrentStep(nextStep);
+        localStorage.setItem(
+          ONBOARDING_STORAGE,
+          JSON.stringify({ step: nextStep })
+        );
+      }
+    }
   };
 
   const createFile = (type) => {
@@ -327,7 +398,12 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
   };
 
   const loadAndOpenFile = (nameOrPath, type) => {
-    const widgetSrc = getSrcByNameOrPath(nameOrPath, accountId, type);
+    const onboardingId = onboarding && "golas.near";
+    const widgetSrc = getSrcByNameOrPath(
+      nameOrPath,
+      onboardingId || accountId,
+      type
+    );
     const widgetSrcFull = `${widgetSrc}/**`;
     const cacheGet = () => {
       const widgetObject = cache.socialGet(
@@ -376,144 +452,172 @@ const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, meta }) => {
     updateFiles(newFilesObject, path);
   };
 
+  const refs = generateRefs();
+  const refEditor = useRef();
+  const refSearch = useRef();
+  const [currentStep, setCurrentStep] = useState(getStepLocalStorage().step);
+
   return (
-    <>
-      <Helmet>
-        <title>{meta.title}</title>
-        <meta name="description" content={meta.description} />
-        <meta property="og:title" content={meta.title} />
-        <meta property="og:description" content={meta.description} />
-      </Helmet>
+    <div style={{ position: "relative" }}>
+      <OnBoarding
+        onboarding={onboarding}
+        refs={refs}
+        setCurrentStep={setCurrentStep}
+        currentStep={currentStep}
+        closeAllFiles={closeAllFiles}
+        filesObject={filesObject}
+        reloadFile={reloadFile}
+        refEditor={refEditor}
+        refSearch={refSearch}
+        setLayoutState={setLayoutState}
+        cache={cache}
+        near={near}
+        closeFile={closeFile}
+      />
+      {(onboarding && !currentStep) || (
+        <>
+          <MainLoader mainLoader={mainLoader} />
+          <Modals
+            setShowModal={setShowModal}
+            jpath={jpath}
+            path={path}
+            renameFile={renameFile}
+            near={near}
+            widgetPath={widgetPath}
+            widgetName={widgetName}
+            codeVisible={codeVisible}
+            showModal={showModal}
+            createFile={createFile}
+            loadAndOpenFile={loadAndOpenFile}
+          />
+          <Welcome
+            setShowModal={setShowModal}
+            createFile={createFile}
+            showEditor={showEditor}
+          />
+          <div className={showEditor ? `` : ``}>
+            <VsCodeBanner />
 
-      <div style={{ position: "relative" }} onPointerUp={debounceRecordClick}>
-        <MainLoader mainLoader={mainLoader} />
-        <Modals
-          setShowModal={setShowModal}
-          jpath={jpath}
-          path={path}
-          renameFile={renameFile}
-          near={near}
-          widgetPath={widgetPath}
-          widgetName={widgetName}
-          codeVisible={codeVisible}
-          showModal={showModal}
-          createFile={createFile}
-          loadAndOpenFile={loadAndOpenFile}
-        />
-        <Welcome
-          setShowModal={setShowModal}
-          createFile={createFile}
-          showEditor={showEditor}
-        />
-        <div className={showEditor ? `` : `visually-hidden`}>
-          <VsCodeBanner />
+            <div
+              className="container-fluid mt-1"
+              style={{ position: "relative" }}
+            >
+              <Search
+                widgets={widgets}
+                tos={tos}
+                logOut={logOut}
+                loadAndOpenFile={loadAndOpenFile}
+                refs={refs}
+                refSearch={refSearch}
+              />
+              <Navigation
+                setShowModal={setShowModal}
+                jpath={jpath}
+                forkFile={forkFile}
+                filesObject={filesObject}
+                widgetName={widgetName}
+                codeVisible={codeVisible}
+                near={near}
+                path={path}
+                metadata={metadata}
+                closeFile={closeFile}
+                isDraft={isDraft}
+                changeFile={changeFile}
+                // boxRef={boxRef}
+                // step1Ref={step1Ref}
+                refs={refs}
+                onboarding={onboarding}
+                currentStep={currentStep}
+                requestSignIn={requestSignIn}
+              />
 
-          <div
-            className="container-fluid mt-1"
-            style={{ position: "relative" }}
-          >
-            <Search
-              widgets={widgets}
-              tos={tos}
-              logOut={logOut}
-              loadAndOpenFile={loadAndOpenFile}
-            />
-            <Navigation
-              setShowModal={setShowModal}
-              jpath={jpath}
-              forkFile={forkFile}
-              filesObject={filesObject}
-              widgetName={widgetName}
-              codeVisible={codeVisible}
-              near={near}
-              path={path}
-              metadata={metadata}
-              closeFile={closeFile}
-              isDraft={isDraft}
-              changeFile={changeFile}
-            />
-
-            <div className="d-flex align-content-start">
-              <div className="flex-grow-1">
-                <div className="row">
-                  <div style={{ display: "flex" }}>
-                    <Tabs
-                      isModule={isModule}
-                      tab={tab}
-                      setTab={setTab}
-                      widgets={widgets}
-                      layout={layout}
-                      setRenderCode={setRenderCode}
-                      codeVisible={codeVisible}
-                    />
-                    <NavigationSub
-                      layout={layout}
-                      path={path}
-                      accountId={accountId}
-                      tab={tab}
-                      widgetPath={widgetPath}
-                      setRenderCode={setRenderCode}
-                      setTab={setTab}
-                      setLayoutState={setLayoutState}
-                      codeVisible={codeVisible}
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className={layoutClass}>
-                    <TabEditor
-                      tab={tab}
-                      codeVisible={codeVisible}
-                      widgetPath={widgetPath}
-                      changeCode={changeCode}
-                      path={path}
-                      reformat={reformat}
-                    />
-                    <TabProps
-                      tab={tab}
-                      widgetProps={widgetProps}
-                      setWidgetProps={setWidgetProps}
-                      propsError={propsError}
-                    />
-                    <TabMetadata
-                      tab={tab}
-                      widgets={widgets}
-                      jpath={jpath}
-                      widgetPath={widgetPath}
-                      setMetadata={setMetadata}
-                    />
-                  </div>
-                  <div className={layoutClass}>
-                    <div className="row">
-                      <Preview
-                        tab={tab}
-                        layout={layout}
-                        renderCode={renderCode}
-                        jpath={jpath}
-                        parsedWidgetProps={parsedWidgetProps}
+              <div className="d-flex align-content-start">
+                <div className="flex-grow-1">
+                  <div className="row">
+                    <div style={{ display: "flex" }}>
+                      <Tabs
                         isModule={isModule}
-                        setRenderCode={setRenderCode}
+                        tab={tab}
                         setTab={setTab}
+                        widgets={widgets}
+                        layout={layout}
+                        setRenderCode={setRenderCode}
                         codeVisible={codeVisible}
                       />
-                      <PreviewMetadata
-                        tab={tab}
-                        layoutClass={layoutClass}
-                        jpath={jpath}
-                        widgets={widgets}
-                        metadata={metadata}
+                      <NavigationSub
+                        layout={layout}
+                        path={path}
                         accountId={accountId}
-                        widgetName={widgetName}
+                        tab={tab}
+                        widgetPath={widgetPath}
+                        setRenderCode={setRenderCode}
+                        setTab={setTab}
+                        setLayoutState={setLayoutState}
+                        codeVisible={codeVisible}
+                        refs={refs}
+                        handleRender={handleRender}
                       />
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className={layoutClass}>
+                      <TabEditor
+                        tab={tab}
+                        codeVisible={codeVisible}
+                        widgetPath={widgetPath}
+                        changeCode={changeCode}
+                        path={path}
+                        reformat={reformat}
+                        refs={refs}
+                        refEditor={refEditor}
+                      />
+                      <TabProps
+                        tab={tab}
+                        widgetProps={widgetProps}
+                        setWidgetProps={setWidgetProps}
+                        propsError={propsError}
+                      />
+                      <TabMetadata
+                        tab={tab}
+                        widgets={widgets}
+                        jpath={jpath}
+                        widgetPath={widgetPath}
+                        setMetadata={setMetadata}
+                      />
+                    </div>
+                    <div className={layoutClass}>
+                      <div className="row">
+                        <Preview
+                          tab={tab}
+                          layout={layout}
+                          renderCode={renderCode}
+                          jpath={jpath}
+                          parsedWidgetProps={parsedWidgetProps}
+                          isModule={isModule}
+                          setRenderCode={setRenderCode}
+                          setTab={setTab}
+                          codeVisible={codeVisible}
+                          refs={refs}
+                        />
+                        <PreviewMetadata
+                          tab={tab}
+                          layoutClass={layoutClass}
+                          jpath={jpath}
+                          widgets={widgets}
+                          metadata={metadata}
+                          accountId={accountId}
+                          widgetName={widgetName}
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-    </>
+        </>
+      )}
+    </div>
   );
 };
 

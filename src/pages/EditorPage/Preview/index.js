@@ -13,6 +13,7 @@ const Preview = ({
   setRenderCode,
   setTab,
   codeVisible,
+  refs,
 }) => (
   <div
     className={`${
@@ -69,12 +70,13 @@ const Preview = ({
                     justifyContent: "center",
                   }}
                 >
-                  <RenderPreviewButton
+                  {/* <RenderPreviewButton
                     setRenderCode={setRenderCode}
                     layout={layout}
                     setTab={setTab}
                     codeVisible={codeVisible}
-                  />
+                    refs={refs}
+                  /> */}
                 </div>
               )
             )}
