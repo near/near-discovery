@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
 import styled from "styled-components";
 import NearLogotype from "../../icons/near-logotype.svg";
@@ -8,6 +8,7 @@ import { Return } from "../../icons/Return";
 import { recordEvent } from "../../../../../utils/analytics";
 import { NotificationWidget } from "../../NotificationWidget";
 import UserDropdownMenu from "./UserDropdownMenu";
+import TypeAheadDropdown from "./TypeAheadDropdown";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -42,6 +43,7 @@ const StyledNavigation = styled.div`
 
   .form-wrapper {
     position: relative;
+    z-index: 10;
 
     input {
       background-repeat: no-repeat;
@@ -120,10 +122,21 @@ const StyledNavigation = styled.div`
   }
 `;
 
+const TypeAheadDropdownContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 31px;
+  margin-top: 10px;
+`;
+
 const DesktopNavigation = (props) => {
   const [searchInputFocus, setSearchInputFocus] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const history = useHistory();
+  const [divFocus, setDivFocus] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchRef = useRef(null);
+  const showTypeAheadDropdown = (searchInputFocus && searchTerm) || divFocus;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -152,20 +165,34 @@ const DesktopNavigation = (props) => {
             onSubmit={(e) => {
               e.preventDefault();
               history.push(
-                `/${props.widgets?.globalSearchPage}?term=${e.target[0].value}`
+                `/${props.widgets?.search.indexPage}?term=${e.target[0].value}`
               );
             }}
           >
             <input
-              placeholder="Search NEAR"
+              placeholder="Search"
               style={{ backgroundImage: `url(${image})` }}
               onFocus={() => {
                 setSearchInputFocus(true);
                 recordEvent("click-navigation-search");
               }}
-              onBlur={() => setSearchInputFocus(false)}
+              // onBlur={() => setSearchInputFocus(false)}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              ref={searchRef}
             />
           </form>
+
+          {showTypeAheadDropdown && (
+            <TypeAheadDropdownContainer>
+              <TypeAheadDropdown
+                term={searchTerm}
+                focusChange={setDivFocus}
+                searchFocusChange={searchInputFocus}
+                widgetSrc={props.widgets.search.typeAheadDropdown}
+              />
+            </TypeAheadDropdownContainer>
+          )}
+
           {searchInputFocus && <Return />}
         </div>
         <MainNavigationMenu {...props} />
