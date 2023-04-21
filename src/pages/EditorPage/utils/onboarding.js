@@ -49,7 +49,7 @@ export const onboardingSteps = {
   },
   step3: {
     component: <Step3 />,
-    button: "Confirm paste",
+    button: "Confirm Paste",
     tooltipAdjust: {
       x: 40,
       y: 100,
@@ -67,13 +67,13 @@ export const onboardingSteps = {
     component: <Step5 />,
     button: "Discover Components",
     tooltipAdjust: {
-      x: 0,
+      x: 12,
       y: 100,
     },
   },
   step6: {
     component: <Step6 />,
-    button: "Continue",
+    button: "Confirm Searched",
     tooltipAdjust: {
       x: 0,
       y: 100,
@@ -81,7 +81,7 @@ export const onboardingSteps = {
   },
   step7: {
     component: <Step7 />,
-    button: "Confirm code copy",
+    button: "Confirm Code Copy",
     tooltipAdjust: {
       x: 0,
       y: 100,
@@ -89,7 +89,7 @@ export const onboardingSteps = {
   },
   step8: {
     component: <Step8 />,
-    button: "Confirm code past",
+    button: "Confirm Code Paste",
     tooltipAdjust: {
       x: 40,
       y: 100,

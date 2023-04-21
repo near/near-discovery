@@ -171,6 +171,8 @@ export default ({
       (currentStep === 2 || currentStep === 3 || currentStep === 8)
     ) {
       setAdjustPosition({ x: refEditor.current.offsetWidth - 70, y: -16 });
+    } else if (onboarding && currentStep === 6) {
+      setAdjustPosition({ x: refSearch.current.offsetWidth - 400, y: 0 });
     } else if (onboarding && currentStep === 7) {
       setAdjustPosition({ x: refSearch.current.offsetWidth - 400, y: 48 });
     } else {

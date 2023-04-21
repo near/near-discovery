@@ -111,7 +111,7 @@ export default ({ handleNext }) => {
           }}
         >
           <SubTitle>Getting Started</SubTitle>
-          <Title>Build With Open Web Components</Title>
+          <Title>Build with Open Web Components</Title>
           <div className="d-flex">
             <Tag>
               <img src={Point1} /> Beginner Friendly
@@ -122,19 +122,17 @@ export default ({ handleNext }) => {
           </div>
           <Desc>
             We’ll guide you through a basic development workflow to fork,
-            modify, and compose with open web components to build your very own
-            on-chain contributions graph:
+            modify, and compose with open web components.
           </Desc>
-          <div>img</div>
           <Point>
             <div className="img">
               <img src={Onboarding1} />
             </div>
             <div>
-              <div className="title">Develop with NEAR Sandbox</div>
+              <div className="title">Develop with the NEAR Sandbox </div>
               <div className="desc">
                 Inspect components, compose applications, and preview your
-                changes in real-time.
+                changes in real time.
               </div>
             </div>
           </Point>
@@ -155,10 +153,12 @@ export default ({ handleNext }) => {
               <img src={Onboarding3} />
             </div>
             <div>
-              <div className="title">Publish Your First Component On-chain</div>
+              <div className="title">
+                Publish Your First Components On-Chain{" "}
+              </div>
               <div className="desc">
                 Build a contribution graph, deploy it on chain, and connect with
-                thousands of other builders on the platform.
+                thousands of other builders on BOS!
               </div>
             </div>
           </Point>
@@ -166,9 +166,13 @@ export default ({ handleNext }) => {
             <ButtonGetStarted onClick={handleNext}>
               Get Started <img src={Arrow} />
             </ButtonGetStarted>
-            <Link to="/sandbox">
-              <ButtonSkip>Skip & Create an Account</ButtonSkip>
-            </Link>
+            <ButtonSkip
+              onClick={() => {
+                window.location = "https://wallet.near.org/create";
+              }}
+            >
+              Skip and Create an Account
+            </ButtonSkip>
           </div>
         </div>
       </div>
