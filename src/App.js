@@ -30,6 +30,7 @@ import { setupKeypom } from "keypom-js";
 import { Helmet } from "react-helmet";
 import FlagsPage from "./pages/FlagsPage";
 import { useFlags } from "./utils/flags";
+import { KEYPOM_OPTIONS } from "./utils/keypom-options";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -94,10 +95,11 @@ function App(props) {
               bundle: false,
             }),
             setupKeypom({ 
-              desiredUrl: "http://localhost:3000/#/#", 
-              networkId: NetworkId, 
-              delimiter: "/", 
-              contractId: "v1.social08.testnet"
+              trialBaseUrl: "http://localhost:3000/#", 
+              networkId: NetworkId,
+              trialSplitDelim: "/",
+              signInContractId: NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
+              modalOptions: KEYPOM_OPTIONS(NetworkId)
             })
           ],
         }),
