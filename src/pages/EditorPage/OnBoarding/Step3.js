@@ -54,13 +54,13 @@ const CodeEx = styled.div`
 `;
 
 const codeExample = `<Widget
-  src="adminalpha.near/component/Contributions"
+  src="near/widget/Onboarding.ComponentCard"
   props={{ accountId }}
 />`;
 
 const codeVisible = `<Widget
-  src="adminalpha.near/component
-    /Contributions"
+  src="near/widget
+    /Onboarding.ComponentCard"
   props={{ accountId }}
 />`;
 

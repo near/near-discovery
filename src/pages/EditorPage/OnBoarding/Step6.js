@@ -54,7 +54,7 @@ const CodeEx = styled.div`
   }
 `;
 
-const codeExample = "Contribution Graph";
+const codeExample = "Onboarding.ComponentCollection";
 
 export default () => (
   <Wrapper>
