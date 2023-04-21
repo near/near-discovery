@@ -43,11 +43,29 @@ import RenderPreviewButton from "./buttons/RenderPreviewButton";
 import {
   generateRefs,
   getStepLocalStorage,
+  onboardingDisable,
   onboardingSteps,
   ONBOARDING_STORAGE,
 } from "./utils/onboarding";
 import { Helmet } from "react-helmet";
 import { recordPageView, debounceRecordClick } from "../../utils/analytics";
+import styled from "styled-components";
+
+const Wrapper = styled.div`
+  .onboardingDisable {
+    &::before {
+      border: 10px;
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      z-index: 10;
+      background: white;
+      opacity: 0.5;
+    }
+  }
+`;
 
 const EditorPage = ({
   setWidgetSrc,
@@ -460,9 +478,14 @@ const EditorPage = ({
   const refEditor = useRef();
   const refSearch = useRef();
   const [currentStep, setCurrentStep] = useState(getStepLocalStorage().step);
+  const [disable, setDisable] = useState({});
+
+  useEffect(() => {
+    setDisable(onboarding ? onboardingDisable : {});
+  }, [onboarding]);
 
   return (
-    <>
+    <Wrapper>
       <Helmet>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
@@ -470,21 +493,24 @@ const EditorPage = ({
         <meta property="og:description" content={meta.description} />
       </Helmet>
       <div style={{ position: "relative" }} onPointerUp={debounceRecordClick}>
-        <OnBoarding
-          onboarding={onboarding}
-          refs={refs}
-          setCurrentStep={setCurrentStep}
-          currentStep={currentStep}
-          closeAllFiles={closeAllFiles}
-          filesObject={filesObject}
-          reloadFile={reloadFile}
-          refEditor={refEditor}
-          refSearch={refSearch}
-          setLayoutState={setLayoutState}
-          cache={cache}
-          near={near}
-          closeFile={closeFile}
-        />
+        {onboarding && (
+          <OnBoarding
+            onboarding={onboarding}
+            refs={refs}
+            setCurrentStep={setCurrentStep}
+            currentStep={currentStep}
+            closeAllFiles={closeAllFiles}
+            filesObject={filesObject}
+            reloadFile={reloadFile}
+            refEditor={refEditor}
+            refSearch={refSearch}
+            setLayoutState={setLayoutState}
+            cache={cache}
+            near={near}
+            closeFile={closeFile}
+            setDisable={setDisable}
+          />
+        )}
         {(onboarding && !currentStep) || (
           <>
             <MainLoader mainLoader={mainLoader} />
@@ -520,6 +546,7 @@ const EditorPage = ({
                   loadAndOpenFile={loadAndOpenFile}
                   refs={refs}
                   refSearch={refSearch}
+                  disable={disable}
                 />
                 <Navigation
                   setShowModal={setShowModal}
@@ -540,6 +567,7 @@ const EditorPage = ({
                   onboarding={onboarding}
                   currentStep={currentStep}
                   requestSignIn={requestSignIn}
+                  disable={disable}
                 />
 
                 <div className="d-flex align-content-start">
@@ -554,6 +582,7 @@ const EditorPage = ({
                           layout={layout}
                           setRenderCode={setRenderCode}
                           codeVisible={codeVisible}
+                          disable={disable}
                         />
                         <NavigationSub
                           layout={layout}
@@ -567,6 +596,7 @@ const EditorPage = ({
                           codeVisible={codeVisible}
                           refs={refs}
                           handleRender={handleRender}
+                          disable={disable}
                         />
                       </div>
                     </div>
@@ -629,7 +659,7 @@ const EditorPage = ({
           </>
         )}
       </div>
-    </>
+    </Wrapper>
   );
 };
 

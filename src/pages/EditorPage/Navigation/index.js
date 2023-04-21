@@ -22,6 +22,7 @@ const Navigation = ({
   onboarding,
   currentStep,
   requestSignIn,
+  disable,
 }) => (
   <>
     <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
@@ -32,6 +33,7 @@ const Navigation = ({
           changeFile={changeFile}
           setShowModal={setShowModal}
           closeFile={closeFile}
+          disable={disable}
         />
       </div>
       <div
@@ -54,6 +56,7 @@ const Navigation = ({
           onboarding={onboarding}
           currentStep={currentStep}
           requestSignIn={requestSignIn}
+          disable={disable}
         />
       </div>
     </div>

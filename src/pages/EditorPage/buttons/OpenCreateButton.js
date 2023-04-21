@@ -1,8 +1,9 @@
 import React from "react";
 import { ModalTypes } from "../utils/const";
 
-export default ({ setShowModal }) => (
+export default ({ setShowModal, disable }) => (
   <button
+    disabled={disable.openCreateButton}
     className="btn btn-success"
     onClick={() => setShowModal(ModalTypes.AddModal)}
     style={{
