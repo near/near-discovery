@@ -5,52 +5,22 @@ import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import styleZendesk from "../zendesk";
 import { debounceRecordClick, recordPageView } from "../utils/analytics";
-import util from "util";
 import { Helmet } from "react-helmet";
+import useRedirectMap from "../hooks/useRedirectMap";
 
 export default function ViewPage(props) {
-  // will always be empty in prod
-  const localOverrideUrl =
-    props.flags?.bosLoaderUrl || process.env.LOCAL_COMPONENT_LOADER;
-  const [loaderError, setloaderError] = useState();
+  const [shouldWaitForMap, redirectMap, loaderError, loaderUrl] =
+    useRedirectMap();
 
   const { widgetSrc } = useParams();
   const query = useQuery();
   const [widgetProps, setWidgetProps] = useState({});
-  const [redirectMap, setRedirectMap] = useState();
 
   const src = widgetSrc || props.widgets.default;
   const setWidgetSrc = props.setWidgetSrc;
   const viewSourceWidget = props.widgets.viewSource;
 
   useHashUrlBackwardsCompatibility();
-
-  // fetch local component versions if a local loader
-  // is provided. must be provided as {components: { <path>: { code : <code>}}}
-  async function fetchRedirectMap() {
-    if (!localOverrideUrl) return;
-
-    try {
-      const res = await fetch(localOverrideUrl, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-        },
-      });
-      if (!res.ok) {
-        throw new Error("Network response was not OK");
-      }
-      const data = await res.json();
-      setRedirectMap(data.components);
-    } catch (e) {
-      console.error(e);
-      setloaderError(true);
-    }
-  }
-
-  useEffect(() => {
-    localOverrideUrl && fetchRedirectMap();
-  }, []);
 
   useEffect(() => {
     setWidgetProps(Object.fromEntries([...query.entries()]));
@@ -112,7 +82,7 @@ export default function ViewPage(props) {
         }}
         onPointerUp={debounceRecordClick}
       >
-        {localOverrideUrl && (
+        {loaderUrl && (
           <div
             style={{
               backgroundColor: "#FFF2CD",
@@ -125,7 +95,7 @@ export default function ViewPage(props) {
               columnGap: "8px",
             }}
           >
-            <span>Loading components from: {localOverrideUrl}</span>
+            <span>Loading components from: {loaderUrl}</span>
             {props.flags?.bosLoaderUrl && (
               <button
                 className="btn btn-outline"
@@ -151,7 +121,7 @@ export default function ViewPage(props) {
                 paddingTop: "var(--body-top-padding)",
               }}
             >
-              {(!localOverrideUrl || redirectMap) && (
+              {(!shouldWaitForMap || redirectMap) && (
                 <div>
                   <Widget
                     config={{ redirectMap: redirectMap }}
