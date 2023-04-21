@@ -15,6 +15,7 @@ export default function NearOrgPage(props) {
   const query = useQuery();
 
   useHashUrlBackwardsCompatibility();
+  zE("webWidget", "hide");
 
   // fetch local component versions if a local loader
   // is provided. must be provided as {components: { <path>: { code : <code>}}}
