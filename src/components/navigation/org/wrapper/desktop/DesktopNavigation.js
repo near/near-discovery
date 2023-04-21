@@ -130,13 +130,24 @@ const TypeAheadDropdownContainer = styled.div`
 `;
 
 const DesktopNavigation = (props) => {
-  const [searchInputFocus, setSearchInputFocus] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const history = useHistory();
-  const [divFocus, setDivFocus] = useState(false);
   const [searchTerm, setSearchTerm] = useState("");
   const searchRef = useRef(null);
-  const showTypeAheadDropdown = (searchInputFocus && searchTerm) || divFocus;
+  const [searchIsFocused, _setSearchIsFocused] = useState(false);
+  const showTypeAheadDropdown = searchIsFocused && !!searchTerm;
+  let searchFocusTimeout = useRef();
+
+  const setSearchIsFocused = (isFocused) => {
+    if (isFocused) {
+      _setSearchIsFocused(true);
+      clearTimeout(searchFocusTimeout.current);
+    } else {
+      searchFocusTimeout.current = setTimeout(() => {
+        _setSearchIsFocused(false);
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -173,10 +184,12 @@ const DesktopNavigation = (props) => {
               placeholder="Search"
               style={{ backgroundImage: `url(${image})` }}
               onFocus={() => {
-                setSearchInputFocus(true);
+                setSearchIsFocused(true);
                 recordEvent("click-navigation-search");
               }}
-              onBlur={() => setSearchInputFocus(false)}
+              onBlur={() => {
+                setSearchIsFocused(false);
+              }}
               onChange={(e) => setSearchTerm(e.target.value)}
               ref={searchRef}
             />
@@ -186,14 +199,13 @@ const DesktopNavigation = (props) => {
             <TypeAheadDropdownContainer>
               <TypeAheadDropdown
                 term={searchTerm}
-                focusChange={setDivFocus}
-                searchFocusChange={searchInputFocus}
+                focusChange={setSearchIsFocused}
                 widgetSrc={props.widgets.search.typeAheadDropdown}
               />
             </TypeAheadDropdownContainer>
           )}
 
-          {searchInputFocus && <Return />}
+          {searchIsFocused && <Return />}
         </div>
         <MainNavigationMenu {...props} />
         <div className="right-side-actions">
