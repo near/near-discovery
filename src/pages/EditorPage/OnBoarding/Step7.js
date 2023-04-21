@@ -2,7 +2,7 @@ import React from "react";
 
 export default () => (
   <div>
-    <div className="title">Embedding Components </div>
+    <div className="title">Embedding Components</div>
     <div className="desc">
       Components you find can be embedded by copying their embed code, and
       pasting it in your component file.

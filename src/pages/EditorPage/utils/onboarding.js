@@ -10,6 +10,11 @@ import Step8 from "../OnBoarding/Step8";
 import Step9 from "../OnBoarding/Step9";
 import Step10 from "../OnBoarding/Step10";
 
+export const onboardingComponents = {
+  starter: { type: "widget", name: "Onboarding.Starter" },
+  starterFork: { type: "widget", name: "Onboarding.Starter-fork" },
+};
+
 export const onboardingDisable = {
   search: true,
   fileTab: true,

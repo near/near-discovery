@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 import Onboarding1 from "./icons/onboarding-1.svg";
@@ -7,7 +7,6 @@ import Onboarding3 from "./icons/onboarding-3.svg";
 import Point1 from "./icons/point-1.svg";
 import Point2 from "./icons/point-2.svg";
 import Arrow from "./icons/arrow.svg";
-import { Link } from "react-router-dom";
 
 const Wrapper = styled.div`
   z-index: 1000;
