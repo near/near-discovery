@@ -1,9 +1,9 @@
 import React from "react";
 import { Widget } from "near-social-vm";
-import styled from "styled-components";
+import useRedirectMap from "../../../../../hooks/useRedirectMap";
 
 const TypeAheadDropdown = (props) => {
-  const ContentContainer = styled.div``;
+  const [shouldWaitForMap, redirectMap] = useRedirectMap();
 
   return (
     <div
@@ -15,12 +15,13 @@ const TypeAheadDropdown = (props) => {
         props.searchFocusChange(false);
       }}
     >
-      <ContentContainer>
+      {(!shouldWaitForMap || redirectMap) && (
         <Widget
+          config={{ redirectMap }}
           src={props.widgetSrc}
           props={{ term: props.term, focusChange: props.searchFocusChange }}
         />
-      </ContentContainer>
+      )}
     </div>
   );
 };
