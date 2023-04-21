@@ -1,15 +1,16 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+
 import { Link } from "react-router-dom";
 import { Logo } from "../icons/Logo";
-import { Return } from "../icons/Return";
+import { NavDropdownButton } from "./NavDropdownButton";
+import { NavDropdownMenu } from "./nav_dropdown/NavDropdownMenu";
 import { NavigationButton } from "../NavigationButton";
+import { NotificationWidget } from "../NotificationWidget";
+import { Return } from "../icons/Return";
 import { SignInButton } from "../SignInButton";
 import { UserDropdown } from "./UserDropdown";
-import { NavDropdownMenu } from "./nav_dropdown/NavDropdownMenu";
-import { NavDropdownButton } from "./NavDropdownButton";
-import { NotificationWidget } from "../NotificationWidget";
 import image from "../icons/search.svg";
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 const StyledNavigation = styled.div`
@@ -147,8 +148,12 @@ export function DesktopNavigation(props) {
           </NavDropdownButton>
         </div>
         <div className="user-section">
+
           {!props.signedIn && (
-            <SignInButton onSignIn={() => props.requestSignIn()} />
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <SignInButton onSignIn={() => history.push('/signup')} > Sign Up</SignInButton>
+              <SignInButton onSignIn={() => props.requestSignIn()}> Sign In</SignInButton>
+            </div>
           )}
           {props.signedIn && (
             <>
