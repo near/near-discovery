@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import ls from "local-storage";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useCache, useNear, useAccountId } from "near-social-vm";
 import prettier from "prettier";
 import parserBabel from "prettier/parser-babel";
@@ -80,6 +80,7 @@ const EditorPage = ({
   const cache = useCache();
   const accountId = useAccountId();
   const { widgetSrc } = useParams();
+  const history = useHistory();
 
   const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
@@ -98,6 +99,7 @@ const EditorPage = ({
   const [layout, setLayoutState] = useState(
     ls.get(EditorLayoutKey) || Layout.Tabs
   );
+  const [defaultWidget, setDefaultWidget] = useState(null);
 
   const widgetName = path?.name?.split("/")[0];
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
@@ -130,11 +132,13 @@ const EditorPage = ({
   }, [codeVisible]);
 
   useEffect(() => {
-    setWidgetSrc({
-      edit: null,
-      view: widgetSrc,
-    });
-  }, [widgetSrc, setWidgetSrc]);
+    if (!defaultWidget || onboarding) {
+      return;
+    }
+
+    loadAndOpenFile(defaultWidget);
+    history.push("/sandbox");
+  }, [defaultWidget]);
 
   useEffect(() => {
     recordPageView();
@@ -174,6 +178,14 @@ const EditorPage = ({
         near && createFilesObject(res.files || []);
         selectFile(res.lastPath);
         setMainLoader(false);
+
+        if (widgetSrc) {
+          setWidgetSrc({
+            edit: null,
+            view: widgetSrc,
+          });
+          setDefaultWidget(widgetSrc);
+        }
       });
   }, [cache, near]);
 
