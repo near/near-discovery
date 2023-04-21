@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import {
+  onboardingComponents,
   onboardingDisable,
   onboardingSteps,
   ONBOARDING_STORAGE,
 } from "../utils/onboarding";
 import OnboardingWelcome from "./OnboardingWelcome";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import ArrowSmall from "./icons/arrow-small.svg";
 import { Layout } from "../utils/const";
@@ -78,8 +79,6 @@ export default ({
   refs,
   setCurrentStep,
   currentStep,
-  closeAllFiles,
-  filesObject,
   reloadFile,
   refEditor,
   refSearch,
@@ -95,8 +94,8 @@ export default ({
   const history = useHistory();
 
   const getPosition = () => {
-    setTooltipPosition(() => {
-      return Object.keys(onboardingSteps).reduce(
+    setTooltipPosition(() =>
+      Object.keys(onboardingSteps).reduce(
         (x, key) => ({
           ...x,
           [key]: {
@@ -105,8 +104,8 @@ export default ({
           },
         }),
         {}
-      );
-    });
+      )
+    );
   };
 
   useEffect(() => {
@@ -117,76 +116,67 @@ export default ({
     window.addEventListener("resize", getPosition);
   }, []);
 
-  const enableStep = (name) => {
+  const enableStep = (name) =>
     setDisable((state) => ({
       ...state,
       [name]: false,
     }));
-  };
 
-  const disableAll = () => {
-    setDisable(onboardingDisable);
-  };
+  const disableAll = () => setDisable(onboardingDisable);
 
   useEffect(() => {
+    if (!onboarding) {
+      return;
+    }
+
     setLayoutState(Layout.Split);
 
-    if (onboarding && currentStep === 1) {
-      selectFile({ type: "widget", name: "Onboarding.Starter" });
+    // select proper component
+    if (currentStep === 1) {
+      selectFile(onboardingComponents.starter);
     }
-    if (onboarding && currentStep > 1) {
-      selectFile({ type: "widget", name: "Onboarding.Starter-fork" });
+    if (currentStep > 1) {
+      selectFile(onboardingComponents.starterFork);
     }
-    // else if (onboarding && currentStep === 1) {
-    //   selectFile(onboardingPath);
-    // }
 
     // disable
-    if (onboarding && currentStep === 1) {
+    if (currentStep === 1) {
       enableStep("forkButton");
-    } else if (onboarding && currentStep === 4) {
+    } else if (currentStep === 4) {
       enableStep("renderPreviewButton");
-    } else if (onboarding && currentStep === 6) {
+    } else if (currentStep === 6) {
       enableStep("search");
-    } else if (onboarding && currentStep === 7) {
+    } else if (currentStep === 7) {
       enableStep("search");
-    } else if (onboarding && currentStep === 9) {
+    } else if (currentStep === 9) {
       enableStep("renderPreviewButton");
-    } else if (onboarding && currentStep === 10) {
+    } else if (currentStep === 10) {
       enableStep("onboardingPublishButton");
     } else {
       disableAll();
     }
 
-    if (onboarding && currentStep === 1) {
+    // additional actions for step
+    if (currentStep === 1) {
       reloadFile();
-      closeFile({ type: "widget", name: "Onboarding.Starter-fork" });
-    } else if (onboarding && currentStep === 2) {
-      // closeFile({ type: "widget", name: "ComponentStarter" });
+      closeFile(onboardingComponents.starterFork);
     }
 
     // AdjustPosition
-    if (
-      onboarding &&
-      (currentStep === 2 || currentStep === 3 || currentStep === 8)
-    ) {
+    if (currentStep === 2 || currentStep === 3 || currentStep === 8) {
       setAdjustPosition({ x: refEditor.current.offsetWidth - 70, y: -16 });
-    } else if (onboarding && currentStep === 6) {
+    } else if (currentStep === 6) {
       setAdjustPosition({ x: refSearch.current.offsetWidth - 400, y: 0 });
-    } else if (onboarding && currentStep === 7) {
+    } else if (currentStep === 7) {
       setAdjustPosition({ x: refSearch.current.offsetWidth - 400, y: 48 });
     } else {
       setAdjustPosition({ x: 0, y: 0 });
     }
   }, [currentStep, cache, near]);
 
-  const handleNext = () => {
-    updateStep(currentStep + 1);
-  };
+  const handleNext = () => updateStep(currentStep + 1);
 
-  const handlePrev = () => {
-    updateStep(currentStep - 1);
-  };
+  const handlePrev = () => updateStep(currentStep - 1);
 
   const updateStep = (step) => {
     setCurrentStep(step);
@@ -204,22 +194,26 @@ export default ({
         <>
           {!currentStep && <OnboardingWelcome handleNext={handleNext} />}
           {Object.keys(onboardingSteps).map((key) => {
+            if (!tooltipPosition[key]) {
+              return <></>;
+            }
+
+            const top =
+              tooltipPosition[key].y +
+              onboardingSteps[key].tooltipAdjust.y +
+              adjustPosition.y;
+
+            const left =
+              tooltipPosition[key].x +
+              onboardingSteps[key].tooltipAdjust.x +
+              adjustPosition.x;
+
+            const step = onboardingSteps[key];
+
             return (
-              tooltipPosition[key] &&
               key === `step${currentStep}` && (
-                <Tooltip
-                  style={{
-                    top:
-                      tooltipPosition[key].y +
-                      onboardingSteps[key].tooltipAdjust.y +
-                      adjustPosition.y,
-                    left:
-                      tooltipPosition[key].x +
-                      onboardingSteps[key].tooltipAdjust.x +
-                      adjustPosition.x,
-                  }}
-                >
-                  <div>{onboardingSteps[key].component}</div>
+                <Tooltip style={{ top, left }}>
+                  <div>{step.component}</div>
                   <div className="buttons">
                     <div className="left">
                       <button onClick={handlePrev}>
@@ -228,17 +222,15 @@ export default ({
                       </button>
                     </div>
                     <div className="right">
-                      {onboardingSteps[key].button && (
+                      {step.button && (
                         <button onClick={handleNext}>
-                          {onboardingSteps[key].button}
-                          <img src={ArrowSmall} />
+                          {step.button} <img src={ArrowSmall} />
                         </button>
                       )}
 
                       {currentStep === 10 && (
                         <button onClick={finishOnboarding}>
-                          Finish onboarding
-                          <img src={ArrowSmall} />
+                          Finish onboarding <img src={ArrowSmall} />
                         </button>
                       )}
                     </div>

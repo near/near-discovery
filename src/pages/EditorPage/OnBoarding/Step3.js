@@ -63,7 +63,7 @@ const codeVisible = `<Widget
 
 export default () => (
   <Wrapper>
-    <div className="title">Edit your first Component </div>
+    <div className="title">Edit your first Component</div>
     <div className="desc">
       The following code snippet gets the total number of contributions you have
       made to the NEAR blockchain.
@@ -76,13 +76,8 @@ export default () => (
       <pre>{codeVisible}</pre>
     </CodeEx>
     <div className="buttons">
-      <button
-        onClick={() => {
-          copy(codeExample);
-        }}
-      >
-        <img src={CopyIcon} />
-        Copy to Clipboard
+      <button onClick={() => copy(codeExample)}>
+        <img src={CopyIcon} /> Copy to Clipboard
       </button>
     </div>
   </Wrapper>

@@ -38,13 +38,11 @@ import {
 import MainLoader from "./Welcome/MainLoader";
 import { useHashUrlBackwardsCompatibility } from "../../hooks/useHashUrlBackwardsCompatibility";
 import OnBoarding from "./OnBoarding";
-import ForkButton from "./buttons/ForkButton";
-import RenderPreviewButton from "./buttons/RenderPreviewButton";
 import {
   generateRefs,
   getStepLocalStorage,
+  onboardingComponents,
   onboardingDisable,
-  onboardingSteps,
   ONBOARDING_STORAGE,
 } from "./utils/onboarding";
 import { Helmet } from "react-helmet";
@@ -159,21 +157,22 @@ const EditorPage = ({
       .then((res = {}) => {
         let onboardingPath;
         if (onboarding && currentStep === 1) {
-          onboardingPath = { type: "widget", name: "Onboarding.Starter" };
+          onboardingPath = onboardingComponents.starter;
           setLastPath(onboardingPath);
         }
         if (onboarding && currentStep > 1) {
-          onboardingPath = { type: "widget", name: "Onboarding.Starter-fork" };
+          onboardingPath = onboardingComponents.starterFork;
           setLastPath(onboardingPath);
         }
 
         if (onboarding && currentStep === 1) {
-          const onboardingPath = { type: "widget", name: "Onboarding.Starter" };
+          const onboardingPath = onboardingComponents.starter;
           near && createFilesObject([onboardingPath]);
           selectFile(onboardingPath);
           setMainLoader(false);
           return;
         }
+
         setLastPath(res.lastPath);
         near && createFilesObject(res.files || []);
         selectFile(res.lastPath);
@@ -190,7 +189,7 @@ const EditorPage = ({
   }, [cache, near]);
 
   const reloadFile = () => {
-    const onboardingPath = { type: "widget", name: "Onboarding.Starter" };
+    const onboardingPath = onboardingComponents.starter;
     near && createFilesObject([onboardingPath]);
     selectFile(onboardingPath);
     setMainLoader(false);
@@ -526,8 +525,6 @@ const EditorPage = ({
             refs={refs}
             setCurrentStep={setCurrentStep}
             currentStep={currentStep}
-            closeAllFiles={closeAllFiles}
-            filesObject={filesObject}
             reloadFile={reloadFile}
             refEditor={refEditor}
             refSearch={refSearch}

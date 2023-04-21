@@ -40,7 +40,6 @@ const CodeEx = styled.div`
   margin: 20px 0;
   background: #353431;
   border-radius: 6px;
-
   color: #a1a09a;
   font-family: Menlo, Monaco, " Courier New ", monospace;
   font-style: normal;
@@ -67,13 +66,8 @@ export default () => (
       In the search bar, type or paste in:
       <CodeEx>{codeExample}</CodeEx>
       <div className="buttons">
-        <button
-          onClick={() => {
-            copy(codeExample);
-          }}
-        >
-          <img src={CopyIcon} />
-          Copy to Clipboard
+        <button onClick={() => copy(codeExample)}>
+          <img src={CopyIcon} /> Copy to Clipboard
         </button>
       </div>
       to search for this component.
