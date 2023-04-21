@@ -149,7 +149,7 @@
     grid-template-columns: 0.75fr 1fr;
   }
   .List.two {
-    width: 600px;
+    width: 400px;
     grid-auto-flow: column;
     grid-template-rows: repeat(3, 1fr);
   }
@@ -160,8 +160,8 @@
   outline: none;
   text-decoration: none;
   user-select: none;
-  padding: 12px;
-  padding-left: 50px;
+  padding: 16px 8px 4px 8px;
+  padding-left: 55px;
   border-radius: 6px;
   font-size: 15px;
   line-height: 1;
@@ -170,7 +170,7 @@
 .ListItemLink i {
   position: absolute;
   top: 50%;
-  left: 12px;
+  left: 16px;
   transform: translateY(-50%);
   font-size: 22px;
   color: #706f6c;
