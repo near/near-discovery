@@ -48,6 +48,7 @@ const MainnetWidgets = {
   tosContent: "adminalpha.near/widget/TosContent",
   wrapper: "near/widget/DIG.Theme",
   bosDirectory: "onboarder.near/widget/BOSDirectory",
+  activityPage: "near/widget/ActivityPage",
   nearOrg: {
     ecosystemCommunityPage: "near/widget/NearOrg.Ecosystem.CommunityPage",
     ecosystemGetFundingPage: "near/widget/NearOrg.Ecosystem.GetFundingPage",
