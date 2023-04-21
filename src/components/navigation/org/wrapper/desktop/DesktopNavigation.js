@@ -19,6 +19,10 @@ const StyledNavigation = styled.div`
   padding-top: 16px;
   padding-bottom: 16px;
 
+  button {
+    border: 0;
+  }
+
   &.border-bottom {
     border-bottom: 1px solid #e3e3e0;
   }
