@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import LogoBlack from "../icons/logo-black.svg";
+import NearLogotype from "../icons/near-logotype.svg";
 import { Widget } from "near-social-vm";
 import { useHistory } from "react-router-dom";
+import classNames from "classnames";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -26,6 +28,12 @@ const StyledNavigation = styled.div`
     img {
       width: 28px;
       height: 28px;
+    }
+
+    &.large {
+      img {
+        width: 110px;
+      }
     }
   }
 
@@ -100,11 +108,15 @@ export function TopNavigation(props) {
 
   return (
     <StyledNavigation className={`${scrolled ? "border-bottom" : ""}`}>
-      <button
-        onClick={() => props.onClickShowMenu("left")}
-        className="mobile-nav-profile-btn"
-      >
-        {props.signedIn ? (
+      {props.signedIn && (
+        <button
+          onClick={() =>
+            history.push(
+              `/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`
+            )
+          }
+          className="mobile-nav-profile-btn"
+        >
           <Widget
             src={props.widgets.profileImage}
             props={{
@@ -113,20 +125,21 @@ export function TopNavigation(props) {
               style: { width: "40px", height: "40px" },
             }}
           />
-        ) : (
-          <div className="menu-icon">
-            <i className="ph-bold ph-list"></i>
-          </div>
-        )}
-      </button>
-      <Link to="/" className="logo-link">
-        <img src={LogoBlack} />
+        </button>
+      )}
+      <Link
+        to="/"
+        className={classNames(["logo-link", { large: !props.signedIn }])}
+      >
+        <img src={props.signedIn ? LogoBlack : NearLogotype} />
       </Link>
       <button
-        className="mobile-nav-develop-btn"
-        onClick={() => history.push("/applications")}
+        onClick={() => props.onClickShowMenu("left")}
+        className="mobile-nav-profile-btn"
       >
-        <i className="ph-bold ph-shapes"></i>
+        <div className="menu-icon">
+          <i className="ph-bold ph-list"></i>
+        </div>
       </button>
     </StyledNavigation>
   );
