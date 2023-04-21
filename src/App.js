@@ -41,6 +41,7 @@ import {
   recordWalletConnect,
   reset,
 } from "./utils/analytics";
+import { setupKeypom } from "keypom-js";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
