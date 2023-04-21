@@ -64,21 +64,21 @@ const MainNavigationMenu = (props) => {
                 title={navLinkData.sandbox.title}
               >
                 <i className="ph-duotone ph-code-block"></i>
-                CSS-in-JS with best-in-class developer experience.
+                {navLinkData.sandbox.description}
               </ListItem>
               <ListItem
                 href={navLinkData.documentation.link}
                 title={navLinkData.documentation.title}
               >
                 <i className="ph-duotone ph-book-open-text"></i>
-                Beautiful, thought-out palettes with auto dark mode.
+                {navLinkData.documentation.description}
               </ListItem>
               <ListItem
                 href={navLinkData.tutorials.link}
                 title={navLinkData.tutorials.title}
               >
-                <i className="ph-duotone ph-video"></i>A crisp set of 15x15
-                icons, balanced and consistent.
+                <i className="ph-duotone ph-video"></i>
+                {navLinkData.tutorials.description}
               </ListItem>
             </ul>
           </NavigationMenu.Content>
@@ -95,21 +95,21 @@ const MainNavigationMenu = (props) => {
                 route={navLinkData.people.link}
               >
                 <i className="ph-duotone ph-user-list"></i>
-                Build high-quality, accessible design systems and web apps.
+                {navLinkData.people.description}
               </ListItem>
               <ListItem
                 title={navLinkData.ecosystem.title}
                 route={navLinkData.ecosystem.link}
               >
                 <i className="ph-duotone ph-globe-hemisphere-west"></i>
-                Build high-quality, accessible design systems and web apps.
+                {navLinkData.ecosystem.description}
               </ListItem>
               <ListItem
                 title={navLinkData.events.title}
                 route={navLinkData.events.link}
               >
                 <i className="ph-duotone ph-calendar-blank"></i>
-                Build high-quality, accessible design systems and web apps.
+                {navLinkData.events.description}
               </ListItem>
             </ul>
           </NavigationMenu.Content>
@@ -126,21 +126,21 @@ const MainNavigationMenu = (props) => {
                   route={navLinkData.developers.link}
                 >
                   <i className="ph-duotone ph-code"></i>
-                  Build high-quality, accessible design systems and web apps.
+                  {navLinkData.developers.description}
                 </ListItem>
                 <ListItem
                   title={navLinkData.founders.title}
                   route={navLinkData.founders.link}
                 >
                   <i className="ph-duotone ph-potted-plant"></i>
-                  Accelerate your Web3 Startup.
+                  {navLinkData.founders.description}
                 </ListItem>
                 <ListItem
                   title={navLinkData.earlyAdopters.title}
                   route={navLinkData.earlyAdopters.link}
                 >
                   <i className="ph-duotone ph-leaf"></i>
-                  Build high-quality, accessible design systems and web apps.
+                  {navLinkData.earlyAdopters.description}
                 </ListItem>
               </ul>
             </NavigationMenu.Content>
@@ -157,21 +157,21 @@ const MainNavigationMenu = (props) => {
                 route={navLinkData.about.link}
               >
                 <i className="ph-duotone ph-info"></i>
-                Build high-quality, accessible design systems and web apps.
+                {navLinkData.about.description}
               </ListItem>
               <ListItem
                 title={navLinkData.news.title}
                 route={navLinkData.news.link}
               >
                 <i className="ph-duotone ph-newspaper"></i>
-                Build high-quality, accessible design systems and web apps.
+                {navLinkData.news.description}
               </ListItem>
               <ListItem
                 title={navLinkData.learn.title}
                 route={navLinkData.learn.link}
               >
                 <i className="ph-duotone ph-books"></i>
-                Build high-quality, accessible design systems and web apps.
+                {navLinkData.learn.description}
               </ListItem>
             </ul>
           </NavigationMenu.Content>
