@@ -34,6 +34,7 @@ const Navigation = ({
           setShowModal={setShowModal}
           closeFile={closeFile}
           disable={disable}
+          onboarding={onboarding}
         />
       </div>
       <div

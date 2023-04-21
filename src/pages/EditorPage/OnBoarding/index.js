@@ -6,7 +6,7 @@ import {
   ONBOARDING_STORAGE,
 } from "../utils/onboarding";
 import OnboardingWelcome from "./OnboardingWelcome";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import ArrowSmall from "./icons/arrow-small.svg";
 import { Layout } from "../utils/const";
@@ -88,9 +88,11 @@ export default ({
   near,
   closeFile,
   setDisable,
+  selectFile,
 }) => {
   const [tooltipPosition, setTooltipPosition] = useState({});
   const [adjustPosition, setAdjustPosition] = useState({ x: 0, y: 0 });
+  const history = useHistory();
 
   const getPosition = () => {
     setTooltipPosition(() => {
@@ -129,6 +131,16 @@ export default ({
   useEffect(() => {
     setLayoutState(Layout.Split);
 
+    if (onboarding && currentStep === 1) {
+      selectFile({ type: "widget", name: "Onboarding.Starter" });
+    }
+    if (onboarding && currentStep > 1) {
+      selectFile({ type: "widget", name: "Onboarding.Starter-fork" });
+    }
+    // else if (onboarding && currentStep === 1) {
+    //   selectFile(onboardingPath);
+    // }
+
     // disable
     if (onboarding && currentStep === 1) {
       enableStep("forkButton");
@@ -141,7 +153,7 @@ export default ({
     } else if (onboarding && currentStep === 9) {
       enableStep("renderPreviewButton");
     } else if (onboarding && currentStep === 10) {
-      enableStep("publishButton");
+      enableStep("onboardingPublishButton");
     } else {
       disableAll();
     }
@@ -177,6 +189,11 @@ export default ({
   const updateStep = (step) => {
     setCurrentStep(step);
     localStorage.setItem(ONBOARDING_STORAGE, JSON.stringify({ step }));
+  };
+
+  const finishOnboarding = () => {
+    setCurrentStep(0);
+    history.push("/sandbox");
   };
 
   return (
@@ -217,12 +234,10 @@ export default ({
                       )}
 
                       {currentStep === 10 && (
-                        <Link to="/sandbox">
-                          <button>
-                            Finish onboarding
-                            <img src={ArrowSmall} />
-                          </button>
-                        </Link>
+                        <button onClick={finishOnboarding}>
+                          Finish onboarding
+                          <img src={ArrowSmall} />
+                        </button>
                       )}
                     </div>
                   </div>

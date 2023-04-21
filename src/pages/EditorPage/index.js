@@ -153,7 +153,16 @@ const EditorPage = ({
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
       .then((res = {}) => {
-        setLastPath(res.lastPath);
+        let onboardingPath;
+        if (onboarding && currentStep === 1) {
+          onboardingPath = { type: "widget", name: "Onboarding.Starter" };
+          setLastPath(onboardingPath);
+        }
+        if (onboarding && currentStep > 1) {
+          onboardingPath = { type: "widget", name: "Onboarding.Starter-fork" };
+          setLastPath(onboardingPath);
+        }
+
         if (onboarding && currentStep === 1) {
           const onboardingPath = { type: "widget", name: "Onboarding.Starter" };
           near && createFilesObject([onboardingPath]);
@@ -161,6 +170,7 @@ const EditorPage = ({
           setMainLoader(false);
           return;
         }
+        setLastPath(res.lastPath);
         near && createFilesObject(res.files || []);
         selectFile(res.lastPath);
         setMainLoader(false);
@@ -172,10 +182,7 @@ const EditorPage = ({
     near && createFilesObject([onboardingPath]);
     selectFile(onboardingPath);
     setMainLoader(false);
-    loadAndOpenFile(
-      "charleslavon.near/widget/Onboarding.Starter",
-      Filetype.Widget
-    );
+    loadAndOpenFile("near/widget/Onboarding.Starter", Filetype.Widget);
   };
 
   const createFilesObject = (files = []) => {
@@ -512,6 +519,7 @@ const EditorPage = ({
             near={near}
             closeFile={closeFile}
             setDisable={setDisable}
+            selectFile={selectFile}
           />
         )}
         {(onboarding && !currentStep) || (
@@ -530,11 +538,13 @@ const EditorPage = ({
               createFile={createFile}
               loadAndOpenFile={loadAndOpenFile}
             />
-            <Welcome
-              setShowModal={setShowModal}
-              createFile={createFile}
-              showEditor={showEditor}
-            />
+            {onboarding || (
+              <Welcome
+                setShowModal={setShowModal}
+                createFile={createFile}
+                showEditor={showEditor}
+              />
+            )}
             <div className={showEditor ? `` : ``}>
               <VsCodeBanner />
 
