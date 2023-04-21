@@ -148,7 +148,7 @@ export default ({
 
     if (onboarding && currentStep === 1) {
       reloadFile();
-      closeFile({ type: "widget", name: "ComponentStarter-fork" });
+      closeFile({ type: "widget", name: "Onboarding.Starter-fork" });
     } else if (onboarding && currentStep === 2) {
       // closeFile({ type: "widget", name: "ComponentStarter" });
     }

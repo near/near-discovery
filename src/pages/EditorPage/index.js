@@ -155,7 +155,7 @@ const EditorPage = ({
       .then((res = {}) => {
         setLastPath(res.lastPath);
         if (onboarding && currentStep === 1) {
-          const onboardingPath = { type: "widget", name: "ComponentStarter" };
+          const onboardingPath = { type: "widget", name: "Onboarding.Starter" };
           near && createFilesObject([onboardingPath]);
           selectFile(onboardingPath);
           setMainLoader(false);
@@ -168,11 +168,14 @@ const EditorPage = ({
   }, [cache, near]);
 
   const reloadFile = () => {
-    const onboardingPath = { type: "widget", name: "ComponentStarter" };
+    const onboardingPath = { type: "widget", name: "Onboarding.Starter" };
     near && createFilesObject([onboardingPath]);
     selectFile(onboardingPath);
     setMainLoader(false);
-    loadAndOpenFile("golas.near/widget/ComponentStarter", Filetype.Widget);
+    loadAndOpenFile(
+      "charleslavon.near/widget/Onboarding.Starter",
+      Filetype.Widget
+    );
   };
 
   const createFilesObject = (files = []) => {
