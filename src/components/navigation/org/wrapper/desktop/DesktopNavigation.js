@@ -176,7 +176,7 @@ const DesktopNavigation = (props) => {
                 setSearchInputFocus(true);
                 recordEvent("click-navigation-search");
               }}
-              // onBlur={() => setSearchInputFocus(false)}
+              onBlur={() => setSearchInputFocus(false)}
               onChange={(e) => setSearchTerm(e.target.value)}
               ref={searchRef}
             />
