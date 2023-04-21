@@ -29,7 +29,7 @@ const TestnetWidgets = {
 
 const MainnetWidgets = {
   image: "mob.near/widget/Image",
-  default: "near/widget/NearOrg.HomePage",
+  default: "near/widget/ActivityPage",
   viewSource: "mob.near/widget/WidgetSource",
   widgetMetadataEditor: "mob.near/widget/WidgetMetadataEditor",
   widgetMetadata: "mob.near/widget/WidgetMetadata",
@@ -48,7 +48,6 @@ const MainnetWidgets = {
   tosContent: "adminalpha.near/widget/TosContent",
   wrapper: "near/widget/DIG.Theme",
   bosDirectory: "onboarder.near/widget/BOSDirectory",
-  activityPage: "near/widget/ActivityPage",
   nearOrg: {
     ecosystemCommunityPage: "near/widget/NearOrg.Ecosystem.CommunityPage",
     ecosystemGetFundingPage: "near/widget/NearOrg.Ecosystem.GetFundingPage",
