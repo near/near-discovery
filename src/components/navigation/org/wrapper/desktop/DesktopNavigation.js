@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
 import styled from "styled-components";
 import NearLogotype from "../../icons/near-logotype.svg";
+import LogoBlack from "../../icons/logo-black.svg";
 import { Link, useHistory } from "react-router-dom";
 import image from "../../icons/search.svg";
 import { Return } from "../../icons/Return";
@@ -31,6 +32,14 @@ const StyledNavigation = styled.div`
     :hover {
       text-decoration: none;
       cursor: pointer;
+    }
+  }
+
+  img {
+    width: 110px;
+    &.logo-only {
+      width: 27px;
+      height: 27px;
     }
   }
 
@@ -149,7 +158,10 @@ const DesktopNavigation = (props) => {
     <StyledNavigation className={`${scrolled ? "border-bottom" : ""}`}>
       <div className="container">
         <Link to="/">
-          <img src={NearLogotype} />
+          <img
+            className={props.signedIn ? "logo-only" : ""}
+            src={props.signedIn ? LogoBlack : NearLogotype}
+          />
         </Link>
         <div className="form-wrapper">
           <form
