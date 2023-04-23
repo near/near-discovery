@@ -63,7 +63,7 @@ const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
 
   const handleNew = (type) => {
     createFile(type);
-    setShowModal(ModalTypes.RenameModal);
+    setShowModal();
   };
 
   const handleSandbox = () => {
@@ -71,12 +71,12 @@ const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
     history.push("/onboarding");
   };
 
+  if (showEditor) {
+    return null;
+  }
+
   return (
-    <div
-      className={`d-flex justify-content-center min-vh-100 ${
-        showEditor ? `visually-hidden` : ``
-      }`}
-    >
+    <div className={`d-flex justify-content-center min-vh-100`}>
       <div
         className="container-fluid mt-5"
         style={{
