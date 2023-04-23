@@ -445,7 +445,7 @@ const EditorPage = ({
   };
 
   const loadAndOpenFile = (nameOrPath, type) => {
-    const onboardingId = onboarding && "golas.near";
+    const onboardingId = onboarding && "near";
     const widgetSrc = getSrcByNameOrPath(
       nameOrPath,
       onboardingId || accountId,
@@ -467,7 +467,7 @@ const EditorPage = ({
         const codeCurrent = codeDraft || codeMain;
         const path = toPath(type, widgetSrc);
 
-        addFile(filesObject, path, codeMain, codeDraft, isDraft);
+        addFile(filesObject, path, codeMain, codeDraft, isDraft, true);
         updateCode(path, codeCurrent);
         selectFile(path);
         setRenderCode(null);
@@ -509,6 +509,8 @@ const EditorPage = ({
   useEffect(() => {
     setDisable(onboarding ? onboardingDisable : {});
   }, [onboarding]);
+
+  console.log("filesObject", filesObject);
 
   return (
     <Wrapper>
