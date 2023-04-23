@@ -5,6 +5,7 @@ import "./AccordionMenu.css";
 import CurrentComponent from "../CurrentComponent";
 import { navLinkData } from "../orgLinks";
 import { NavLink } from "react-router-dom";
+import { recordTouchStart } from "../../../../utils/analytics";
 
 const AccordionMenu = (props) => (
   <Accordion.Root className="AccordionRoot" type="single" collapsible>
@@ -160,11 +161,15 @@ const AccordionMenu = (props) => (
 
 const AccordionTrigger = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Header className="AccordionHeader">
+    <Accordion.Header
+      className="AccordionHeader"
+      onTouchStart={(e) => recordTouchStart(e, "navmenu-touchstart")}
+    >
       <Accordion.Trigger
         className={classNames("AccordionTrigger", className)}
         {...props}
         ref={forwardedRef}
+        onTouchStart={recordTouchStart}
       >
         {children}
         <i className="ph ph-caret-down AccordionChevron" aria-hidden></i>
@@ -189,7 +194,7 @@ const ListItem = React.forwardRef(
   ({ className, children, title, ...props }, forwardedRef) => {
     if (props.route) {
       return (
-        <li>
+        <li onTouchStart={(e) => recordTouchStart(e)}>
           <NavLink
             className={classNames("ListItemLink", className)}
             ref={forwardedRef}
@@ -202,7 +207,7 @@ const ListItem = React.forwardRef(
       );
     } else {
       return (
-        <li>
+        <li onTouchStart={(e) => recordTouchStart(e)}>
           <a
             className={classNames("ListItemLink", className)}
             {...props}
