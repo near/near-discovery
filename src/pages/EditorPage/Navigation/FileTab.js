@@ -94,7 +94,7 @@ export default ({ file, closeFile, disable }) => {
                   closeFile({ type: file.type, name: file.name });
                 }}
               >
-                <i className="bi bi-x"></i>
+                <i className="bi bi-x" />
               </button>
             </Nav.Link>
           </TopMenu>

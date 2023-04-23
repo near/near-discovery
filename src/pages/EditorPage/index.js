@@ -230,16 +230,16 @@ const EditorPage = ({
           fetchCode
         );
 
-        if (widgetObject) {
-          const { codeMain, codeDraft, isDraft } =
-            getWidgetDetails(widgetObject);
-
+        if (widgetObject && filesObject[jpath].new) {
           cache
             .asyncLocalStorageGet(StorageDomain, {
               path: path,
               type: StorageType.Code,
             })
             .then(({ code }) => {
+              const { codeMain, codeDraft, isDraft } =
+                getWidgetDetails(widgetObject);
+
               let changesMade = checkChangesMade(codeMain, codeDraft, code);
 
               if (!filesObject[jpath].new) {
@@ -500,6 +500,11 @@ const EditorPage = ({
     updateFiles(newFilesObject, path);
   };
 
+  const handleCommit = () => {
+    loadAndOpenFile(lastPath.name, Filetype.Widget);
+  };
+
+  // onboarding
   const refs = generateRefs();
   const refEditor = useRef();
   const refSearch = useRef();
@@ -509,8 +514,6 @@ const EditorPage = ({
   useEffect(() => {
     setDisable(onboarding ? onboardingDisable : {});
   }, [onboarding]);
-
-  console.log("filesObject", filesObject);
 
   return (
     <Wrapper>
@@ -553,6 +556,7 @@ const EditorPage = ({
               showModal={showModal}
               createFile={createFile}
               loadAndOpenFile={loadAndOpenFile}
+              handleCommit={handleCommit}
             />
             {onboarding || (
               <Welcome
@@ -596,6 +600,7 @@ const EditorPage = ({
                   currentStep={currentStep}
                   requestSignIn={requestSignIn}
                   disable={disable}
+                  handleCommit={handleCommit}
                 />
 
                 <div className="d-flex align-content-start">
