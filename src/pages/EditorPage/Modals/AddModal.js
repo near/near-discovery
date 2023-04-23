@@ -5,7 +5,7 @@ import { DISABLE_MODULES, Filetype, ModalTypes } from "../utils/const";
 export default ({ onHide, showModal, setShowModal, createFile }) => {
   const handleNew = (type) => {
     createFile(type);
-    setShowModal(ModalTypes.RenameModal);
+    setShowModal();
   };
 
   return (
