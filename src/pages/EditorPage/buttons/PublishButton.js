@@ -9,9 +9,10 @@ export default ({
   metadata,
   disable,
   handleCommit,
+  refs,
 }) => {
   return (
-    <div>
+    <div ref={refs.step10}>
       <CommitButton
         className={`btn btn-primary`}
         disabled={!widgetName || disable.publishButton}
