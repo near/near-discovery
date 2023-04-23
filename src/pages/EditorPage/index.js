@@ -601,6 +601,7 @@ const EditorPage = ({
                   requestSignIn={requestSignIn}
                   disable={disable}
                   handleCommit={handleCommit}
+                  accountId={accountId}
                 />
 
                 <div className="d-flex align-content-start">

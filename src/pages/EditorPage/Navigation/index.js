@@ -22,6 +22,7 @@ const Navigation = ({
   requestSignIn,
   disable,
   handleCommit,
+  accountId,
 }) => (
   <>
     <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
@@ -56,6 +57,7 @@ const Navigation = ({
           requestSignIn={requestSignIn}
           disable={disable}
           handleCommit={handleCommit}
+          accountId={accountId}
         />
       </div>
     </div>

@@ -22,6 +22,7 @@ export default ({
   requestSignIn,
   disable,
   handleCommit,
+  accountId,
 }) => (
   <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
     <Nav.Item className="d-flex">
@@ -47,7 +48,7 @@ export default ({
           disable={disable}
           handleCommit={handleCommit}
         />
-      ) : onboarding ? (
+      ) : onboarding && !accountId ? (
         <OnboardingPublishButton
           currentStep={currentStep}
           refs={refs}
@@ -63,6 +64,7 @@ export default ({
           metadata={metadata}
           disable={disable}
           handleCommit={handleCommit}
+          refs={refs}
         />
       )}
     </Nav.Item>

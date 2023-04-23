@@ -152,6 +152,7 @@ export default ({
       enableStep("renderPreviewButton");
     } else if (currentStep === 10) {
       enableStep("onboardingPublishButton");
+      enableStep("publishButton");
     } else {
       disableAll();
     }
@@ -166,7 +167,7 @@ export default ({
     if (currentStep === 2 || currentStep === 3 || currentStep === 8) {
       setAdjustPosition({ x: refEditor.current.offsetWidth - 70, y: -16 });
     } else if (currentStep === 6) {
-      setAdjustPosition({ x: refSearch.current.offsetWidth - 400, y: 0 });
+      setAdjustPosition({ x: refSearch.current.offsetWidth - 600, y: 0 });
     } else if (currentStep === 7) {
       setAdjustPosition({ x: refSearch.current.offsetWidth - 400, y: 48 });
     } else {
