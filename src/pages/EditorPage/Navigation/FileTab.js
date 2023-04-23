@@ -62,8 +62,10 @@ const TopMenu = styled.div`
   }
 
   .close {
-    width: 28px;
+    width: 21px;
     height: 28px;
+    margin-top: -3px;
+    margin-left: 4px;
   }
 `;
 
@@ -85,11 +87,7 @@ export default ({ file, closeFile, disable }) => {
                 {file.isDraft && <div className="draft">Draft</div>}
               </div>
               <button
-                className={`close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary`}
-                style={{
-                  marginTop: "-3px",
-                  marginBottom: "0px",
-                }}
+                className="close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary"
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
