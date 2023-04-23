@@ -39,7 +39,7 @@ export default ({ showModal, name, onRename, onHide }) => {
       <Modal.Footer>
         <button
           className="btn btn-success"
-          disabled={!newName || newName === name}
+          disabled={!newName}
           onClick={handleConfirm}
         >
           Confirm
