@@ -51,13 +51,14 @@ const Tooltip = styled.div`
     }
 
     button {
-      height: 32px;
+      height: 36px;
       line-height: 32px;
       padding: 0 12px;
       background: #ffffff;
       border-radius: 50px;
       font-size: 12px;
       color: #1b1b18;
+      border: 0px;
 
       :hover {
         opacity: 0.9;
