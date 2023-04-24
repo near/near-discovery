@@ -1,5 +1,25 @@
 import { FastAuthWallet } from "./wallet";
 
+function invokeEscKey() {
+    window.dispatchEvent(
+        new KeyboardEvent("keydown", {
+          altKey: false,
+          code: "Escape",
+          ctrlKey: false,
+          isComposing: false,
+          key: "Escape",
+          location: 0,
+          metaKey: false,
+          repeat: false,
+          shiftKey: false,
+          which: 27,
+          charCode: 0,
+          keyCode: 27,
+        })
+      );
+}
+
+
 const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
     return {
         networkId() {
@@ -12,9 +32,6 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         async getAccount() {
             logger.log("getAccount is called")
             return fastAuthWallet.getAccount();
-        },
-
-        showModal() {
         },
 
         async getAccounts() {
@@ -46,6 +63,7 @@ const fastAuth = async ({ logger, fastAuthWallet, ...rest }) => {
         },
 
         async signIn() {
+            invokeEscKey()
             logger.log("FastAuth:signIn");
             return await fastAuthWallet.signIn();
         },
@@ -70,6 +88,7 @@ export function setupFastAuth({
     deprecated = false,
     networkId,
     signInContractId,
+    hideModal
 }) {
     return async () => {
         if (!signInContractId || !networkId) {

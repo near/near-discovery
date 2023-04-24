@@ -11,7 +11,8 @@ const VerifyEmail = () => {
 
 
     const handleResendEmail = async (data) => {
-        if (!urlParams?.accountId || !urlParams.email || !urlParams.publicKey) return
+        const accountRequiredButNotThere = !urlParams?.accountId && urlParams.isRecovery !== 'true'
+        if (accountRequiredButNotThere || !urlParams.email || !urlParams.publicKey) return
 
         try {
             if (!!urlParams.publicKey) {
@@ -36,7 +37,7 @@ const VerifyEmail = () => {
         <StyledContainer>
             <FormContainer onSubmit={handleResendEmail}>
                 <header>
-                    <a href="/signup" style={{ textDecoration: 'underline', color: 'black' }}><small>Go back</small></a>
+                    <a href={urlParams?.isRecovery === 'true' ?  '/signin' : "/signup"} style={{ textDecoration: 'underline', color: 'black' }}><small>Go back</small></a>
                     <h1 style={{ marginTop: '12px' }}>Verify your email</h1>
                     <p style={{ fontWeight: 600, marginTop: '12px' }}>{urlParams?.email}</p>
                 </header>
