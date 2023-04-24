@@ -49,7 +49,7 @@
     "prod:analyze": "npm run prod -- --env presets=analyze",
     "build": "npm run prod",
     "start": "npm run dev",
-    "postbuild": "cp -r public/ecosystem dist/ && cp -r public/use dist/ && cp public/index.html dist/ && cp public/main.eee55e13aea8e7aa2a52.bundle.js dist/ && cp public/runtime.51e64170e925dc4c65e8.bundle.js dist/"
+    "postbuild": "cp -r public/ecosystem dist/ && cp -r public/use dist/ && cp public/index.html dist/ && cp public/*.bundle.js dist/"
   },
   "reactSnap": {
     "source": "dist",
