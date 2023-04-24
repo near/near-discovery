@@ -3,7 +3,7 @@ import RenameModal from "./RenameModal";
 import OpenModal from "./OpenModal";
 import OpenModuleModal from "./OpenModuleModal";
 import AddModal from "./AddModal";
-import { SaveDraftModal } from "../../../components/SaveDraft";
+import { SaveDraftModal } from "./SaveDraft";
 
 export default ({
   setShowModal,
@@ -17,6 +17,7 @@ export default ({
   showModal,
   createFile,
   loadAndOpenFile,
+  handleCommit,
 }) => (
   <>
     <RenameModal
@@ -50,6 +51,7 @@ export default ({
       widgetName={widgetName}
       type={path?.type}
       codeVisible={codeVisible}
+      handleCommit={handleCommit}
     />
   </>
 );

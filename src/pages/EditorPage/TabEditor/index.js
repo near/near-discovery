@@ -9,24 +9,35 @@ const TabEditor = ({
   changeCode,
   path,
   reformat,
+  refs,
+  refEditor,
 }) => {
   return (
-    <div className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}>
-      <div
-        className="form-control mb-3"
-        style={{ height: "70vh", borderTopLeftRadius: "0px" }}
-      >
-        <Editor
-          value={codeVisible}
-          path={widgetPath}
-          defaultLanguage="javascript"
-          onChange={(code) => changeCode(path, code)}
-          wrapperProps={{
-            onBlur: () => reformat(path, codeVisible),
-          }}
-        />
+    <div
+      className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}
+      ref={refEditor}
+    >
+      <div ref={refs.step3}>
+        <div ref={refs.step2}>
+          <div ref={refs.step8}>
+            <div
+              className="form-control mb-3"
+              style={{ height: "70vh", borderTopLeftRadius: "0px" }}
+            >
+              <Editor
+                value={codeVisible}
+                path={widgetPath}
+                defaultLanguage="javascript"
+                onChange={(code) => changeCode(path, code)}
+                wrapperProps={{
+                  onBlur: () => reformat(path, codeVisible),
+                }}
+              />
+            </div>
+            <div className="mb-3 d-flex gap-2 flex-wrap"></div>
+          </div>
+        </div>
       </div>
-      <div className="mb-3 d-flex gap-2 flex-wrap"></div>
     </div>
   );
 };
