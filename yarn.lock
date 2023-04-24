@@ -1479,6 +1479,13 @@
   dependencies:
     rxjs "^7.8.0"
 
+"@near-wallet-selector/core@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/core/-/core-8.0.0.tgz#e7da2a1e8e33a0d4e1b1ba8c29843156e54eda73"
+  integrity sha512-3YuFFYzC3eXiKl1sAa2xj1UMCKUJo+fSlpXdhNsBHakP7KVDghnbd+V5b5YfwRu7B3puUz5l5cAvmVSniEesCw==
+  dependencies:
+    rxjs "^7.8.0"
+
 "@near-wallet-selector/here-wallet@^7.9.0":
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@near-wallet-selector/here-wallet/-/here-wallet-7.9.0.tgz#da97ed9c62b0f26b8dc63adf78757040e3fb8234"
@@ -1551,6 +1558,23 @@
   dependencies:
     "@near-wallet-selector/core" "7.9.0"
     bn.js "^5.2.0"
+
+"@near-wallet-selector/wallet-utils@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/wallet-utils/-/wallet-utils-8.0.0.tgz#3cdf68066001862759ebc850adcfa0fedc5ed302"
+  integrity sha512-OqLwX6KlcODhA7CXSneczyZva299RyXzeqweY+y5rWO7qYVN6YidBaQ23Qw6Ax2Pgm3kmyTnOs8R1yZw9gEe/g==
+  dependencies:
+    "@near-wallet-selector/core" "8.0.0"
+    bn.js "^5.2.0"
+
+"@near-wallet-selector/welldone-wallet@8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/welldone-wallet/-/welldone-wallet-8.0.0.tgz#c0c415347340565a67a47c5ef869f2d21388965d"
+  integrity sha512-3Gb3/s5HH182mMTA8uvPFkk1HGPP+O4C1NndjXruKWFuNijgagG+B9xtPlUbIqk3T4r9GAFPYCToBNo/qBBc9A==
+  dependencies:
+    "@near-wallet-selector/core" "8.0.0"
+    "@near-wallet-selector/wallet-utils" "8.0.0"
+    is-mobile "^3.1.1"
 
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
