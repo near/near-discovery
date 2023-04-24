@@ -84,6 +84,7 @@ const ButtonGetStarted = styled.button`
 `;
 
 const ButtonSkip = styled.button`
+  all: unset;
   margin-top: 20px;
   width: 100%;
   height: 48px;

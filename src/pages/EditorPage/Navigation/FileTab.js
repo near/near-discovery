@@ -7,7 +7,7 @@ const TopMenu = styled.div`
   display: flex;
   color: #11181c;
   height: 40px;
-  margin: 0 8px 0 0;
+  margin: 0 8px 8px 0;
 
   &&& > a {
     border: 1px solid #e5e5e5;
@@ -62,7 +62,7 @@ const TopMenu = styled.div`
   }
 
   .close {
-    width: 21px;
+    width: 28px;
     height: 28px;
     margin-top: -3px;
     margin-left: 4px;
