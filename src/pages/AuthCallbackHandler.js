@@ -35,7 +35,7 @@ const AuthCallbackHandler = () => {
 
                         // TODO: Call MPC Service with accountId, publicKey,  and oauthToken to create account
                         const data = {
-                            near_account_id: accountId,
+                            ...(accountId && accountId.includes('.') ? {near_account_id: accountId} : {}),
                             public_key: publicKey,
                             oidc_token: user.accessToken
                         };
@@ -51,18 +51,20 @@ const AuthCallbackHandler = () => {
                         };
 
                         await fetch(`https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/${isRecovery ? 'add_key' : 'new_account'}`, options)
-                            .then(response => {
+                            .then(async (response) => {
                                 if (!response.ok) {
                                     throw new Error('Network response was not ok');
                                 }
                                 setStatusMessage(isRecovery ? 'Account recovered successfully!' : 'Account created successfully!');
                                 const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
-
+                                const res = await response.json()
+                                const accId = accountCreationData.accountId || res.near_account_id
                                 // TODO: Check if account ID matches the one from email
-                                if (!accountCreationData.privateKey || !accountCreationData.accountId) throw ('Could not find account creation data');
+                                if (!accountCreationData.privateKey || !accId) throw ('Could not find account creation data');
 
                                 window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify({
                                     ...accountCreationData,
+                                    accountId: accId,
                                     isCreated: true
                                 }));
 
