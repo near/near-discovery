@@ -351,6 +351,10 @@ function App(props) {
             <NavigationWrapper {...passProps} />
             <EditorPage {...passProps} meta={metaProps} />
           </Route>
+          <Route path={"/onboarding/:widgetSrc*"}>
+            <NavigationWrapper {...passProps} />
+            <EditorPage {...passProps} meta={metaProps} onboarding={true} />
+          </Route>
           <Route path={"/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />
             <ViewPage {...passProps} meta={metaProps} />

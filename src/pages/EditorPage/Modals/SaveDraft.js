@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { CommitButton } from "near-social-vm";
 import Modal from "react-bootstrap/Modal";
-import { ModalTypes } from "../pages/EditorPage/utils/const";
+import { ModalTypes } from "../utils/const";
 
 export const SaveDraftModal = ({
   codeVisible,
@@ -12,6 +12,7 @@ export const SaveDraftModal = ({
   widgetName,
   type,
   metadata,
+  handleCommit,
 }) => {
   const [commitMessage, setCommitMessage] = useState("");
   const widgetPathFull = widgetPath + "/branch/draft";
@@ -78,6 +79,7 @@ export const SaveDraftModal = ({
           near={near}
           onCommit={onHide}
           data={commitButtonData}
+          handleCommit={handleCommit}
         >
           Save
         </CommitButton>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
 import ForkButton from "../buttons/ForkButton";
+import OnboardingPublishButton from "../buttons/OnboardingPublishButton";
 import PublishButton from "../buttons/PublishButton";
 import PublishDraftAsMainButton from "../buttons/PublishDraftAsMainButton";
 import SaveDraftButton from "../buttons/SaveDraftButton";
@@ -15,11 +16,26 @@ export default ({
   path,
   metadata,
   isDraft,
+  refs,
+  onboarding,
+  currentStep,
+  requestSignIn,
+  disable,
+  handleCommit,
+  accountId,
 }) => (
   <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
-    <Nav.Item className="">
-      <SaveDraftButton widgetName={widgetName} setShowModal={setShowModal} />
-      <ForkButton forkFile={forkFile} />
+    <Nav.Item className="d-flex">
+      <div>
+        <SaveDraftButton
+          widgetName={widgetName}
+          setShowModal={setShowModal}
+          disable={disable}
+        />
+      </div>
+      <div>
+        <ForkButton forkFile={forkFile} refs={refs} disable={disable} />
+      </div>
 
       {isDraft ? (
         <PublishDraftAsMainButton
@@ -28,6 +44,16 @@ export default ({
           path={path}
           codeVisible={codeVisible}
           metadata={metadata}
+          ref={refs}
+          disable={disable}
+          handleCommit={handleCommit}
+        />
+      ) : onboarding && !accountId ? (
+        <OnboardingPublishButton
+          currentStep={currentStep}
+          refs={refs}
+          requestSignIn={requestSignIn}
+          disable={disable}
         />
       ) : (
         <PublishButton
@@ -36,6 +62,9 @@ export default ({
           path={path}
           codeVisible={codeVisible}
           metadata={metadata}
+          disable={disable}
+          handleCommit={handleCommit}
+          refs={refs}
         />
       )}
     </Nav.Item>
