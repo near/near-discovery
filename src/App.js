@@ -30,6 +30,8 @@ import {
   recordWalletConnect,
   reset,
 } from "./utils/analytics";
+import { setupKeypom } from "keypom-js";
+import { KEYPOM_OPTIONS } from "./utils/keypom-options";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -93,6 +95,13 @@ function App(props) {
             setupNeth({
               gas: "300000000000000",
               bundle: false,
+            }),
+            setupKeypom({ 
+              trialBaseUrl: NetworkId == "testnet" ? "test.near.org#trial-url#" : "near.org#trial-url#", 
+              networkId: NetworkId, 
+              trialSplitDelim: "/",
+              signInContractId: NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
+              modalOptions: KEYPOM_OPTIONS(NetworkId)
             }),
           ],
         }),
