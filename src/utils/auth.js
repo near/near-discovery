@@ -5,6 +5,7 @@ import { firebaseAuth } from './firebase';
 import { sendSignInLinkToEmail } from 'firebase/auth';
 
 export const ACCOUNT_ID_SUFFIX = NetworkId === 'mainnet' ? 'near' : 'testnet';
+export const HELPER_URL = NetworkId === 'mainnet' ? 'https://api.kitwallet.app' : 'https://testnet-api.kitwallet.app';
 
 export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair) => {
     const account = await nearConnection.account(userName);
@@ -23,8 +24,8 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
     }
 };
 
-export const handleCreateAccount = async (accountId, email) => {
-    const keyPair = await createKey(accountId);
+export const handleCreateAccount = async (accountId, email, isRecovery) => {
+    const keyPair = await createKey(email);
     const publicKey = keyPair.getPublicKey().toString();
     const privateKey = keyPair.toString();
 
@@ -36,7 +37,7 @@ export const handleCreateAccount = async (accountId, email) => {
         }
         window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify(accountDataStash));
         await sendSignInLinkToEmail(firebaseAuth, email, {
-            url: `${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}`,
+            url: `${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}` + (isRecovery ? '&isRecovery=true' : ''),
             handleCodeInApp: true,
         })
         window.localStorage.setItem('emailForSignIn', email);
