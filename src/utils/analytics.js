@@ -90,6 +90,8 @@ const debounceRecord = (eventType, delay) =>
   }, delay);
 
 export const debounceRecordClick = debounceRecord("click", 200);
+export const debounceRecordMouseEnter = debounceRecord("mouseover", 1);
+export const recordTouchStart = (e, eventType = "touchstart") => debounceRecord(eventType, 1)(e);
 
 export function recordWalletConnect(accountId) {
   if (!localStorage.getItem("hashId")) {
