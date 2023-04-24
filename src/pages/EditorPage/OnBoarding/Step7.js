@@ -8,11 +8,8 @@ export default () => (
       pasting it in your component file.
       <br />
       <br />
-      Copy the embed code for “Contribution Graph”, and replace the placeholder
-      code on line 6.
-      <br />
-      <br />
-      Then, refresh your preview to view your changes.
+      Copy the embed code for “near/widget/ComponentCollection”, and replace the
+      placeholder code on line 6.
     </div>
   </div>
 );
