@@ -213,6 +213,8 @@ const ListItem = React.forwardRef(
               className={classNames("ListItemLink", className)}
               {...props}
               ref={forwardedRef}
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <div className="ListItemHeading">{title}</div>
               <p className="ListItemText">{children}</p>
