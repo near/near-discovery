@@ -8,19 +8,18 @@ export const navLinkData = {
   },
   applications: {
     title: "Applications",
-    description:
-      "Engage with applications built on the Blockchain Operating System (BOS)",
+    description: "Engage with applications built on the near.org gateway",
     link: "/applications",
   },
   gateways: {
     title: "Gateways",
     description:
-      "Discover the different entry points to the Blockchain Operating System (BOS)",
+      "Discover different entry points to the Blockchain Operating System (BOS)",
     link: "/gateways",
   },
   sandbox: {
     title: "Sandbox",
-    description: "Build, test, and ship decentralized components",
+    description: "Build, test, and ship decentralized components and apps",
     link: "/sandbox",
   },
   documentation: {
@@ -30,7 +29,7 @@ export const navLinkData = {
   },
   tutorials: {
     title: "Quickstart",
-    description: "Start building your first components on the BOS",
+    description: "Start building your first decentralized components",
     link: "https://docs.near.org/discovery/tutorial/quickstart",
   },
   people: {

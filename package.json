@@ -53,6 +53,31 @@
     "build": "npm run prod",
     "start": "npm run dev"
   },
+  "reactSnap": {
+    "source": "dist",
+    "exclude": [
+      "/sandbox",
+      "/edit",
+      "/near",
+      "/events",
+      "/about",
+      "/news",
+      "/learn"
+    ],
+    "include": [
+      "/",
+      "/use",
+      "/ecosystem"
+    ],
+    "viewport": {
+      "width": 7000,
+      "height": 1400
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

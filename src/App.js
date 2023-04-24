@@ -218,16 +218,22 @@ function App(props) {
         <Switch>
           {/* Near ORG BOS Component Pages: */}
           <Route path={"/"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.nearOrg.homePage}
-              meta={{
-                title:
-                  "NEAR | The OS for an Open Web",
-                description:
-                  "NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today.",
-              }}
-            />
+            {signedIn ? (
+              <>
+                <NavigationWrapper {...passProps} />
+                <ViewPage {...passProps} meta={metaProps} />
+              </>
+            ) : (
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.nearOrg.homePage}
+                meta={{
+                  title: "NEAR | The OS for an Open Web",
+                  description:
+                    "NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today.",
+                }}
+              />
+            )}
           </Route>
           <Route path={"/use"} exact={true}>
             <NearOrgPage
@@ -331,8 +337,7 @@ function App(props) {
               {...passProps}
               src={Widgets.nearOrg.ecosystemGetFundingPage}
               meta={{
-                title:
-                  "NEAR | Get Funding",
+                title: "NEAR | Get Funding",
                 description:
                   "Get funded while building on the Blockchain Operating System for an Open Web. The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
               }}
@@ -375,6 +380,10 @@ function App(props) {
           <Route path={["/edit/:widgetSrc*", "/sandbox/:widgetSrc*"]}>
             <NavigationWrapper {...passProps} />
             <EditorPage {...passProps} meta={metaProps} />
+          </Route>
+          <Route path={"/onboarding/:widgetSrc*"}>
+            <NavigationWrapper {...passProps} />
+            <EditorPage {...passProps} meta={metaProps} onboarding={true} />
           </Route>
           <Route path={"/:widgetSrc*"}>
             <NavigationWrapper {...passProps} />

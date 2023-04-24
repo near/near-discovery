@@ -3,11 +3,15 @@ import React, { useEffect, useState } from "react";
 
 import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
 import NearLogotype from "../../icons/near-logotype.svg";
+import LogoBlack from "../../icons/logo-black.svg";
+import { Link, useHistory } from "react-router-dom";
+import image from "../../icons/search.svg";
+import { Return } from "../../icons/Return";
+import { recordEvent } from "../../../../../utils/analytics";
 import { NotificationWidget } from "../../NotificationWidget";
 import { Return } from "../../icons/Return";
 import UserDropdownMenu from "./UserDropdownMenu";
-import image from "../../icons/search.svg";
-import styled from "styled-components";
+import { debounceRecordClick } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -19,6 +23,10 @@ const StyledNavigation = styled.div`
   padding-top: 16px;
   padding-bottom: 16px;
 
+  button {
+    border: 0;
+  }
+
   &.border-bottom {
     border-bottom: 1px solid #e3e3e0;
   }
@@ -27,6 +35,14 @@ const StyledNavigation = styled.div`
     :hover {
       text-decoration: none;
       cursor: pointer;
+    }
+  }
+
+  img {
+    width: 110px;
+    &.logo-only {
+      width: 27px;
+      height: 27px;
     }
   }
 
@@ -145,7 +161,10 @@ const DesktopNavigation = (props) => {
     <StyledNavigation className={`${scrolled ? "border-bottom" : ""}`}>
       <div className="container">
         <Link to="/">
-          <img src={NearLogotype} />
+          <img
+            className={props.signedIn ? "logo-only" : ""}
+            src={props.signedIn ? LogoBlack : NearLogotype}
+          />
         </Link>
         <div className="form-wrapper">
           <form
@@ -172,13 +191,20 @@ const DesktopNavigation = (props) => {
         <div className="right-side-actions">
           {!props.signedIn && (
             <>
-              <button className="sign-in" onClick={props.requestSignIn}>
+              <button
+                className="sign-in"
+                onClick={(e) => {
+                  debounceRecordClick(e);
+                  props.requestSignIn();
+                }}
+              >
                 Sign In
               </button>
               <button
                 className="create-account"
-                onClick={() => {
-                  history.push("/signup")
+                onClick={(e) => {
+                  debounceRecordClick(e);
+                  window.location = "https://wallet.near.org/create";
                 }}
               >
                 Create Account
