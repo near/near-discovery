@@ -48,7 +48,8 @@
     "prod": "npm run webpack -- --env mode=production",
     "prod:analyze": "npm run prod -- --env presets=analyze",
     "build": "npm run prod",
-    "start": "npm run dev"
+    "start": "npm run dev",
+    "postbuild": "cp -r public/ecosystem dist/ && cp -r public/use dist/ && cp public/index.html dist/ && cp public/main.1f6dffe2b7e89962876e.bundle.js dist/"
   },
   "reactSnap": {
     "source": "dist",
