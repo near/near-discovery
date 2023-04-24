@@ -9,6 +9,7 @@ const Preview = ({
   jpath,
   parsedWidgetProps,
   isModule,
+  widgets,
 }) => (
   <div
     className={`${
@@ -49,9 +50,17 @@ const Preview = ({
                 }}
               >
                 <Widget
-                  key={`preview-${jpath}`}
-                  code={renderCode}
-                  props={parsedWidgetProps}
+                  key={widgets.wrapper}
+                  src={widgets.wrapper}
+                  props={{
+                    children: (
+                      <Widget
+                        key={`preview-${jpath}`}
+                        code={renderCode}
+                        props={parsedWidgetProps}
+                      />
+                    ),
+                  }}
                 />
               </div>
             ) : (
