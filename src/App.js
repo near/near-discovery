@@ -16,10 +16,17 @@ import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
-import { useAccount, useInitNear, useNear, utils } from "near-social-vm";
+import {
+  useAccount,
+  useInitNear,
+  useNear,
+  utils,
+  EthersProviderContext,
+} from "near-social-vm";
 import Big from "big.js";
 import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
 import { NetworkId, Widgets } from "./data/widgets";
+import { useEthersProviderContext } from "./data/web3";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import NearOrgPage from "./pages/NearOrgPage";
@@ -72,6 +79,7 @@ function App(props) {
   const [walletModal, setWalletModal] = useState(null);
   const [widgetSrc, setWidgetSrc] = useState(null);
   const [flags, setFlags] = useFlags();
+  const ethersProviderContext = useEthersProviderContext();
 
   const { initNear } = useInitNear();
   const near = useNear();
@@ -200,176 +208,176 @@ function App(props) {
 
       <div id="page-flash-prevent" />
 
-      <BrowserRouter basename={process.env.PUBLIC_URL}>
-        <Switch>
-          {/* Near ORG BOS Component Pages: */}
-          <Route path={"/"} exact={true}>
-            {signedIn ? (
-              <>
-                <NavigationWrapper {...passProps} />
-                <ViewPage {...passProps} meta={metaProps} />
-              </>
-            ) : (
+      <EthersProviderContext.Provider value={ethersProviderContext}>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
+          <Switch>
+            {/* Near ORG BOS Component Pages: */}
+            <Route path={"/"} exact={true}>
+              {signedIn ? (
+                <>
+                  <NavigationWrapper {...passProps} />
+                  <ViewPage {...passProps} meta={metaProps} />
+                </>
+              ) : (
+                <NearOrgPage
+                  {...passProps}
+                  src={Widgets.nearOrg.homePage}
+                  meta={{
+                    title: "NEAR | The OS for an Open Web",
+                    description:
+                      "NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today.",
+                  }}
+                />
+              )}
+            </Route>
+            <Route path={"/use"} exact={true}>
               <NearOrgPage
                 {...passProps}
-                src={Widgets.nearOrg.homePage}
+                src={Widgets.nearOrg.usePage}
                 meta={{
-                  title: "NEAR | The OS for an Open Web",
+                  title: "NEAR | Get Started",
                   description:
-                    "NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today.",
+                    "Set up your NEAR account and start exploring apps built on the Blockchain Operating System and NEAR Protocol.",
                 }}
               />
-            )}
-          </Route>
-          <Route path={"/use"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.nearOrg.usePage}
-              meta={{
-                title: "NEAR | Get Started",
-                description:
-                  "Set up your NEAR account and start exploring apps built on the Blockchain Operating System and NEAR Protocol.",
-              }}
-            />
-          </Route>
-          <Route path={"/horizon"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.horizon.homePage}
-              meta={{
-                title: "Horizon",
-                description: "Discover NEAR Horizon",
-              }}
-            />
-          </Route>
-          <Route path={"/people"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.peoplePage}
-              meta={{
-                title: "Connect with the NEAR community.",
-                description: "Become part of the NEAR community.",
-              }}
-            />
-          </Route>
-          <Route path={"/gateways"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.bosDirectory}
-              meta={{
-                title: "BOS Viewer Directory",
-                description: "NEAR BOS Directory",
-              }}
-            />
-          </Route>
-          <Route path={"/components"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.componentsPage}
-              meta={{
-                title: "Components built on the BOS",
-                description: "BOS Components",
-              }}
-            />
-          </Route>
-          <Route path={"/applications"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.componentsPage}
-              defaultWidgetProps={{
-                tab: "apps",
-              }}
-              meta={{
-                title: "Applications built on the BOS",
-                description: "BOS Applications",
-              }}
-            />
-          </Route>
-          <Route path={"/horizon"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.horizon.appPage}
-              meta={{
-                title: "Accelerate your Web3 Startup.",
-                description:
-                  "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO.",
-              }}
-            />
-          </Route>
-          <Route path={"/ecosystem"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.nearOrg.ecosystemOverviewPage}
-              meta={{
-                title: "Near Protocol Ecosystem",
-                description:
-                  "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO.",
-              }}
-            />
-          </Route>
-          <Route path={"/ecosystem/community"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.nearOrg.ecosystemCommunityPage}
-              meta={{
-                title: "NEAR | Join the Community",
-                description:
-                  "The NEAR community is a globally distributed home to builders, founders, and contributors. Get started supporting the Blockchain Operating System and protocol’s ecosystem of applications and experiences.",
-              }}
-            />
-          </Route>
-          <Route path={"/ecosystem/get-funding"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.nearOrg.ecosystemGetFundingPage}
-              meta={{
-                title: "NEAR | Get Funding",
-                description:
-                  "Get funded while building on the Blockchain Operating System for an Open Web. The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
-              }}
-            />
-          </Route>
-          <Route path={"/ecosystem/work-and-earn"} exact={true}>
-            <NearOrgPage
-              {...passProps}
-              src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
-              meta={{
-                title: "NEAR | Work and Earn",
-                description:
-                  "Work and Earn across the NEAR ecosystem. Find a job, get a grant for your project, and earn bounties.",
-              }}
-            />
-          </Route>
-
-          {/* Near ORG Iframe Pages: */}
-          {iframeRoutes.map((route) => (
-            <Route key={route.route} path={route.route} exact={true}>
-              <NearOrgPage {...passProps} iframeSrc={route.url} />
             </Route>
-          ))}
-
-          {/* Discovery Pages: */}
-          <Route path={"/flags"} exact={true}>
-            <NavigationWrapper {...passProps} />
-            <FlagsPage {...passProps} meta={metaProps} />
-          </Route>
-          <Route path={"/embed/:widgetSrc*"}>
-            <EmbedPage {...passProps} meta={metaProps} />
-          </Route>
-          <Route path={["/edit/:widgetSrc*", "/sandbox/:widgetSrc*"]}>
-            <NavigationWrapper {...passProps} />
-            <EditorPage {...passProps} meta={metaProps} />
-          </Route>
-          <Route path={"/onboarding/:widgetSrc*"}>
-            <NavigationWrapper {...passProps} />
-            <EditorPage {...passProps} meta={metaProps} onboarding={true} />
-          </Route>
-          <Route path={"/:widgetSrc*"}>
-            <NavigationWrapper {...passProps} />
-            <ViewPage {...passProps} meta={metaProps} />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+            <Route path={"/horizon"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.horizon.homePage}
+                meta={{
+                  title: "Horizon",
+                  description: "Discover NEAR Horizon",
+                }}
+              />
+            </Route>
+            <Route path={"/people"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.peoplePage}
+                meta={{
+                  title: "Connect with the NEAR community.",
+                  description: "Become part of the NEAR community.",
+                }}
+              />
+            </Route>
+            <Route path={"/gateways"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.bosDirectory}
+                meta={{
+                  title: "BOS Viewer Directory",
+                  description: "NEAR BOS Directory",
+                }}
+              />
+            </Route>
+            <Route path={"/components"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.componentsPage}
+                meta={{
+                  title: "Components built on the BOS",
+                  description: "BOS Components",
+                }}
+              />
+            </Route>
+            <Route path={"/applications"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.componentsPage}
+                defaultWidgetProps={{
+                  tab: "apps",
+                }}
+                meta={{
+                  title: "Applications built on the BOS",
+                  description: "BOS Applications",
+                }}
+              />
+            </Route>
+            <Route path={"/horizon"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.horizon.appPage}
+                meta={{
+                  title: "Accelerate your Web3 Startup.",
+                  description:
+                    "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO.",
+                }}
+              />
+            </Route>
+            <Route path={"/ecosystem"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.nearOrg.ecosystemOverviewPage}
+                meta={{
+                  title: "Near Protocol Ecosystem",
+                  description:
+                    "Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO.",
+                }}
+              />
+            </Route>
+            <Route path={"/ecosystem/community"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.nearOrg.ecosystemCommunityPage}
+                meta={{
+                  title: "NEAR | Join the Community",
+                  description:
+                    "The NEAR community is a globally distributed home to builders, founders, and contributors. Get started supporting the Blockchain Operating System and protocol’s ecosystem of applications and experiences.",
+                }}
+              />
+            </Route>
+            <Route path={"/ecosystem/get-funding"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.nearOrg.ecosystemGetFundingPage}
+                meta={{
+                  title: "NEAR | Get Funding",
+                  description:
+                    "Get funded while building on the Blockchain Operating System for an Open Web. The NEAR ecosystem offers multiple funding options to support initiatives aimed at decentralizing, growing, and innovating on NEAR.",
+                }}
+              />
+            </Route>
+            <Route path={"/ecosystem/work-and-earn"} exact={true}>
+              <NearOrgPage
+                {...passProps}
+                src={Widgets.nearOrg.ecosystemWorkAndEarnPage}
+                meta={{
+                  title: "NEAR | Work and Earn",
+                  description:
+                    "Work and Earn across the NEAR ecosystem. Find a job, get a grant for your project, and earn bounties.",
+                }}
+              />
+            </Route>
+            {/* Near ORG Iframe Pages: */}
+            {iframeRoutes.map((route) => (
+              <Route key={route.route} path={route.route} exact={true}>
+                <NearOrgPage {...passProps} iframeSrc={route.url} />
+              </Route>
+            ))}
+            {/* Discovery Pages: */}
+            <Route path={"/flags"} exact={true}>
+              <NavigationWrapper {...passProps} />
+              <FlagsPage {...passProps} meta={metaProps} />
+            </Route>
+            <Route path={"/embed/:widgetSrc*"}>
+              <EmbedPage {...passProps} meta={metaProps} />
+            </Route>
+            <Route path={["/edit/:widgetSrc*", "/sandbox/:widgetSrc*"]}>
+              <NavigationWrapper {...passProps} />
+              <EditorPage {...passProps} meta={metaProps} />
+            </Route>
+            <Route path={"/onboarding/:widgetSrc*"}>
+              <NavigationWrapper {...passProps} />
+              <EditorPage {...passProps} meta={metaProps} onboarding={true} />
+            </Route>
+            <Route path={"/:widgetSrc*"}>
+              <NavigationWrapper {...passProps} />
+              <ViewPage {...passProps} meta={metaProps} />
+            </Route>
+          </Switch>
+        </BrowserRouter>
+      </EthersProviderContext.Provider>
     </StyledApp>
   );
 }
