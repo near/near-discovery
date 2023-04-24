@@ -667,6 +667,7 @@ const EditorPage = ({
                             jpath={jpath}
                             parsedWidgetProps={parsedWidgetProps}
                             isModule={isModule}
+                            widgets={widgets}
                           />
                           <PreviewMetadata
                             tab={tab}
