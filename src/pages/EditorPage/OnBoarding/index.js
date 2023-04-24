@@ -93,6 +93,7 @@ export default ({
   const [tooltipPosition, setTooltipPosition] = useState({});
   const [adjustPosition, setAdjustPosition] = useState({ x: 0, y: 0 });
   const history = useHistory();
+  zE("webWidget", "hide");
 
   const getPosition = () => {
     setTooltipPosition(() =>
