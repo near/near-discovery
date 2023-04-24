@@ -43,7 +43,32 @@
     "prod:analyze": "npm run prod -- --env presets=analyze",
     "build": "npm run prod",
     "start": "npm run dev",
-    "postbuild": "cp -r public/ecosystem dist/ && cp -r public/use dist/ && cp public/index.html dist/"
+    "postbuild": "react-snap"
+  },
+  "reactSnap": {
+    "source": "dist",
+    "exclude": [
+      "/sandbox",
+      "/edit",
+      "/near",
+      "/events",
+      "/about",
+      "/news",
+      "/learn"
+    ],
+    "include": [
+      "/",
+      "/use",
+      "/ecosystem"
+    ],
+    "viewport": {
+      "width": 7000,
+      "height": 1400
+    },
+    "puppeteerArgs": [
+      "--no-sandbox",
+      "--disable-setuid-sandbox"
+    ]
   },
   "eslintConfig": {
     "extends": [
@@ -87,6 +112,7 @@
     "path-browserify": "^1.0.1",
     "postcss-loader": "^7.0.1",
     "process": "^0.11.10",
+    "react-snap": "near/react-snap#0.1",
     "sass-loader": "^13.1.0",
     "stream-browserify": "^3.0.0",
     "stream-http": "^3.2.0",
