@@ -2,6 +2,8 @@ import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
 import React from 'react';
 import { firebaseAuth } from '../utils/firebase';
+import styled from 'styled-components';
+import { toast } from 'sonner'
 import { useHistory } from 'react-router-dom';
 
 const AuthCallbackHandler = () => {
@@ -53,6 +55,7 @@ const AuthCallbackHandler = () => {
                         await fetch(`https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/${isRecovery ? 'add_key' : 'new_account'}`, options)
                             .then(async (response) => {
                                 if (!response.ok) {
+                                    console.log(response)
                                     throw new Error('Network response was not ok');
                                 }
                                 setStatusMessage(isRecovery ? 'Account recovered successfully!' : 'Account created successfully!');
@@ -78,14 +81,24 @@ const AuthCallbackHandler = () => {
                 })
                 .catch((error) => {
                     console.log(error)
-                    alert('Error: ' + error.message);
+                    toast.error(error.message)
                 });
         }
     }, [])
 
     return (
-        <div>{statusMessage}</div>
+        <StyledStatusMessage>{statusMessage}</StyledStatusMessage>
     )
 }
 
+
 export default AuthCallbackHandler
+
+const StyledStatusMessage = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    width: 100%;
+`
