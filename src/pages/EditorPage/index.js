@@ -46,10 +46,71 @@ import {
   ONBOARDING_STORAGE,
 } from "./utils/onboarding";
 import { Helmet } from "react-helmet";
-import { recordPageView, debounceRecordClick } from "../../utils/analytics";
+import { recordPageView, recordClick } from "../../utils/analytics";
 import styled from "styled-components";
+import BannerOboarding from "./Banners/BannerOboarding";
 
 const Wrapper = styled.div`
+  .mobile {
+    position: absolute;
+    z-index: 95;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: none;
+    top: 40px;
+
+    h4 {
+      color: #1b1b18;
+      font-weight: 700;
+    }
+  }
+
+  @media only screen and (max-width: 1200px) {
+    .mobile {
+      ${"" /* display: block; */}
+    }
+    .desktop {
+      ${"" /* display: none; */}
+    }
+  }
+
+  .glow {
+    -webkit-animation: glowing 1000ms infinite;
+    -moz-animation: glowing 1000ms infinite;
+    -o-animation: glowing 1000ms infinite;
+    animation: glowing 1000ms infinite;
+
+    @-webkit-keyframes glowing {
+      0% {
+        border-color: #63e3a4;
+        -webkit-box-shadow: 0 0 3px #63e3a4;
+      }
+      50% {
+        border-color: #63e3a4;
+        -webkit-box-shadow: 0 0 14px #63e3a4;
+      }
+      100% {
+        border-color: #63e3a4;
+        -webkit-box-shadow: 0 0 3px #63e3a4;
+      }
+    }
+    @keyframes glowing {
+      0% {
+        border-color: #63e3a4;
+        box-shadow: 0 0 3px #63e3a4;
+      }
+      50% {
+        border-color: #63e3a4;
+        box-shadow: 0 0 14px #63e3a4;
+      }
+      100% {
+        border-color: #63e3a4;
+        box-shadow: 0 0 3px #63e3a4;
+      }
+    }
+  }
+
   .onboardingDisable {
     &::before {
       border: 10px;
@@ -515,6 +576,11 @@ const EditorPage = ({
     setDisable(onboarding ? onboardingDisable : {});
   }, [onboarding]);
 
+  const handleExitOnboarding = () => {
+    setCurrentStep(0);
+    history.push("/sandbox");
+  };
+
   return (
     <Wrapper>
       <Helmet>
@@ -523,7 +589,24 @@ const EditorPage = ({
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
       </Helmet>
-      <div style={{ position: "relative" }} onPointerUp={debounceRecordClick}>
+      <div style={{ position: "relative" }} onPointerUp={recordClick}>
+        {onboarding && (
+          <div className="mobile">
+            <div className={`d-flex min-vh-100 `}>
+              <div
+                className="container-fluid mt-5"
+                style={{
+                  width: "500px",
+                }}
+              >
+                <h4>Oops...We're gonna need a bigger screen.</h4>
+                <br />
+                Please visit the onboarding flow from a larger screen.
+              </div>
+            </div>
+          </div>
+        )}
+
         {onboarding && (
           <OnBoarding
             onboarding={onboarding}
@@ -567,7 +650,10 @@ const EditorPage = ({
               />
             )}
             <div className={showEditor ? `` : ``}>
-              <VsCodeBanner />
+              {onboarding || <VsCodeBanner />}
+              {onboarding && (
+                <BannerOboarding handleExitOnboarding={handleExitOnboarding} />
+              )}
 
               <div
                 className="container-fluid mt-1"

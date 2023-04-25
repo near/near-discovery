@@ -8,7 +8,7 @@ import AccordionMenu from "./AccordionMenu";
 import { NotificationWidget } from "../NotificationWidget";
 import UserDropdownMenu from "../wrapper/desktop/UserDropdownMenu";
 import { useHistory } from "react-router-dom";
-import { debounceRecordClick } from "../../../../utils/analytics";
+import { recordClick } from "../../../../utils/analytics";
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -180,7 +180,7 @@ export function MenuLeft(props) {
             <button
               className="sign-in"
               onClick={(e) => {
-                debounceRecordClick(e);
+                recordClick(e);
                 props.onCloseMenu();
                 props.requestSignIn();
               }}
@@ -190,7 +190,7 @@ export function MenuLeft(props) {
             <button
               className="create-account"
               onClick={(e) => {
-                debounceRecordClick(e);
+                recordClick(e);
                 window.location = "https://wallet.near.org/create";
               }}
             >
