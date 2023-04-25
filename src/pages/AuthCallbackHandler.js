@@ -2,6 +2,7 @@ import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
 import React from 'react';
 import { firebaseAuth } from '../utils/firebase';
+import { toast } from 'sonner'
 import { useHistory } from 'react-router-dom';
 
 const AuthCallbackHandler = () => {
@@ -75,7 +76,7 @@ const AuthCallbackHandler = () => {
                 })
                 .catch((error) => {
                     console.log(error)
-                    alert('Error: ' + error.message);
+                    toast.error(error.message)
                 });
         }
     }, [])
