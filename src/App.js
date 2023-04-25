@@ -105,7 +105,7 @@ function App(props) {
               bundle: false,
             }),
             setupKeypom({ 
-              trialBaseUrl: NetworkId == "testnet" ? "test.near.org/#trial-url#" : "near.org/#trial-url#", 
+              trialBaseUrl: NetworkId == "testnet" ? "https://test.near.org/#trial-url/" : "https://near.org/#trial-url/", 
               networkId: NetworkId, 
               trialSplitDelim: "/",
               signInContractId: NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
