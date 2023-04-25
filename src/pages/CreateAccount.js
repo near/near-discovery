@@ -3,6 +3,7 @@ import { getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
 
 import React from 'react';
 import styled from 'styled-components';
+import { toast } from 'sonner'
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
@@ -12,11 +13,10 @@ const CreateAccount = () => {
   const [isAccountAvailable, setIsAccountAvailable] = React.useState(null);
   const { register, handleSubmit, watch, setValue, formState } = useForm();
   const formValues = watch();
-  const defaultAccountId = getEmailId(formValues?.email || '')
 
   const checkIsAccountAvailable = async () => {
     try {
-      if (!formValues?.accountId) return
+      if (!formValues?.username) return
 
       const response = await fetch('https://rpc.testnet.near.org', {
         method: 'POST',
@@ -30,7 +30,7 @@ const CreateAccount = () => {
           "params": {
             "request_type": "view_account",
             "finality": "final",
-            "account_id": `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX}`
+            "account_id": `${formValues?.username}.${ACCOUNT_ID_SUFFIX}`
           }
         })
       });
@@ -43,7 +43,6 @@ const CreateAccount = () => {
         return setIsAccountAvailable(false)
       }
     } catch (error) {
-      c
       console.log(error)
       setIsAccountAvailable(false)
     }
@@ -51,22 +50,21 @@ const CreateAccount = () => {
 
 
   const onSubmit = handleSubmit(async (data) => {
-    if (!data?.accountId || !data.email) return
+    if (!data?.username || !data.email) return
     try {
-      const fullAccountId = `${data.accountId}.${ACCOUNT_ID_SUFFIX}`
+      const fullAccountId = `${data.username}.${ACCOUNT_ID_SUFFIX}`
       const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email)
       history.push(`/verify-email?publicKey=${publicKey}&accountId=${accountId}&email=${email}`)
     } catch (error) {
-      console.log(error)
-      alert(error.message)
+      toast.error(error.message)
     }
   });
 
 
   React.useEffect(() => {
-    if (!formValues?.accountId) return
+    if (!formValues?.username) return
     checkIsAccountAvailable()
-  }, [formValues?.accountId])
+  }, [formValues?.username])
 
   React.useEffect(() => {
     const params = parseURLParams(window.location.search)
@@ -91,8 +89,8 @@ const CreateAccount = () => {
             onChange={(e) => {
               setValue('email', e.target.value)
               if (!isValidEmail(e.target.value)) return
-              if (!formValues?.accountId || formValues.accountId === defaultAccountId) {
-                setValue('accountId', getEmailId(e.target.value))
+              if (!formValues?.username || formValues.username === username) {
+                setValue('username', getEmailId(e.target.value))
               }
             }}
             label='Email'
@@ -104,14 +102,14 @@ const CreateAccount = () => {
 
 
         <InputContainer>
-          <label htmlFor="accountId">Account ID</label>
+          <label htmlFor="username">Account ID</label>
           <input
-            // rightAddOn=".testnet"
-            {...register('accountId', {
+            autoComplete='webauthn username'
+            {...register('username', {
               required: 'Please enter a valid account ID',
             })}
             onChange={(e) => {
-              setValue('accountId', e.target.value)
+              setValue('username', e.target.value)
 
               if (e.target.value == "") {
                 setIsAccountAvailable(null)
@@ -120,15 +118,14 @@ const CreateAccount = () => {
             label='Account ID'
             placeholder='user_name.near'
             statusState={isAccountAvailable === null ? 'default' : !!isAccountAvailable ? 'success' : 'error'}
-            statusMessage={isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
+            statusMessage={isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
           />
           <p className="subText">
-            {isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
+            {isAccountAvailable === null ? 'Use a suggested ID or customize your own.' : !!isAccountAvailable ? `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!` : `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
           </p>
 
         </InputContainer>
         <StyledButton fullWidth onClick={onSubmit} type="button">
-          {/* <IconFingerPrint /> */}
           Continue
         </StyledButton>
         <Footer>
@@ -196,7 +193,6 @@ const InputContainer = styled.div`
 `
 
 const StyledButton = styled.button`
-  // width: 100%;
   padding: 8px;
   border: none;
   border-radius: 50px;

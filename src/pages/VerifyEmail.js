@@ -76,7 +76,6 @@ const FormContainer = styled.form`
   gap: 16px;
 `
 const StyledButton = styled.button`
-  width: 100%;
   padding: 8px;
   border: none;
   border-radius: 50px;
