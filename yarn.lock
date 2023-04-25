@@ -9326,6 +9326,11 @@ socks@^2.6.2:
     ip "^2.0.0"
     smart-buffer "^4.2.0"
 
+sonner@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/sonner/-/sonner-0.3.2.tgz#1feae3ce0bfa03cd77cda95224073cb9d13445c1"
+  integrity sha512-pGT5AI2rPegCesw/Im9xkDgurxAsuJBSH7Z9/+Oeszq5AKorC5YdlieMhwDr+jex+qQCIFA2nAjXsTX/u6aS9A==
+
 source-list-map@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"

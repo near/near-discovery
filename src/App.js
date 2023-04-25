@@ -22,6 +22,8 @@ import FlagsPage from "./pages/FlagsPage";
 import { Helmet } from "react-helmet";
 import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
 import NearOrgPage from "./pages/NearOrgPage";
+import SignIn from "./pages/SignIn";
+import { Toaster } from 'sonner'
 import VerifyEmail from "./pages/VerifyEmail";
 import ViewPage from "./pages/ViewPage";
 import { setupFastAuth } from './lib/selector/setup';
@@ -35,7 +37,6 @@ import { setupSender } from "@near-wallet-selector/sender";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import styled from "styled-components";
 import { useFlags } from "./utils/flags";
-import SignIn from "./pages/SignIn";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -316,6 +317,7 @@ function App(props) {
             <ViewPage {...passProps} meta={metaProps} />
           </Route>
         </Switch>
+        <Toaster position="bottom-center" />
       </BrowserRouter>
     </StyledApp>
   );
