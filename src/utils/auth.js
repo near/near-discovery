@@ -36,7 +36,7 @@ export const handleCreateAccount = async (accountId, email) => {
         }
         window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify(accountDataStash));
         await sendSignInLinkToEmail(firebaseAuth, email, {
-            url: `${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}`,
+            url: encodeURI(`${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}`),
             handleCodeInApp: true,
         })
         window.localStorage.setItem('emailForSignIn', email);

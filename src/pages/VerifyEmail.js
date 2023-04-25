@@ -28,7 +28,7 @@ const VerifyEmail = () => {
     };
 
     React.useEffect(() => {
-        const params = parseURLParams(window.location.search)
+        const params = parseURLParams(decodeURI(window.location.search))
         setUrlParams(params)
     }, [window.location.search])
 
