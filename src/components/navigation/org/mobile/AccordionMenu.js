@@ -18,21 +18,21 @@ const AccordionMenu = (props) => (
             route={navLinkData.components.link}
           >
             <i className="ph-duotone ph-shapes"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.components.description}
           </ListItem>
           <ListItem
             title={navLinkData.applications.title}
             route={navLinkData.applications.link}
           >
-            <i className="ph-duotone ph-circles-four"></i>A quick tutorial to
-            get you up and running with Radix Primitives.
+            <i className="ph-duotone ph-circles-four"></i>
+            {navLinkData.applications.description}
           </ListItem>
           <ListItem
             title={navLinkData.gateways.title}
             route={navLinkData.gateways.link}
           >
-            <i className="ph-duotone ph-spiral"></i>A quick tutorial to get you
-            up and running with Radix Primitives.
+            <i className="ph-duotone ph-spiral"></i>
+            {navLinkData.gateways.description}
           </ListItem>
         </ul>
       </AccordionContent>
@@ -47,21 +47,21 @@ const AccordionMenu = (props) => (
             title={navLinkData.sandbox.title}
           >
             <i className="ph-duotone ph-code-block"></i>
-            CSS-in-JS with best-in-class developer experience.
+            {navLinkData.sandbox.description}
           </ListItem>
           <ListItem
             href={navLinkData.documentation.link}
             title={navLinkData.documentation.title}
           >
             <i className="ph-duotone ph-book-open-text"></i>
-            Beautiful, thought-out palettes with auto dark mode.
+            {navLinkData.documentation.description}
           </ListItem>
           <ListItem
             href={navLinkData.tutorials.link}
             title={navLinkData.tutorials.title}
           >
-            <i className="ph-duotone ph-video"></i>A crisp set of 15x15 icons,
-            balanced and consistent.
+            <i className="ph-duotone ph-video"></i>
+            {navLinkData.tutorials.description}
           </ListItem>
         </ul>
         <CurrentComponent {...props} />
@@ -77,21 +77,21 @@ const AccordionMenu = (props) => (
             route={navLinkData.people.link}
           >
             <i className="ph-duotone ph-user-list"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.people.description}
           </ListItem>
           <ListItem
             title={navLinkData.ecosystem.title}
             route={navLinkData.ecosystem.link}
           >
             <i className="ph-duotone ph-users-three"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.ecosystem.description}
           </ListItem>
           <ListItem
             title={navLinkData.events.title}
             route={navLinkData.events.link}
           >
             <i className="ph-duotone ph-globe-hemisphere-west"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.events.description}
           </ListItem>
         </ul>
       </Accordion.Content>
@@ -107,21 +107,21 @@ const AccordionMenu = (props) => (
               route={navLinkData.developers.link}
             >
               <i className="ph-duotone ph-code"></i>
-              Build high-quality, accessible design systems and web apps.
+              {navLinkData.developers.description}
             </ListItem>
             <ListItem
               title={navLinkData.founders.title}
               route={navLinkData.founders.link}
             >
               <i className="ph-duotone ph-potted-plant"></i>
-              Build high-quality, accessible design systems and web apps.
+              {navLinkData.founders.description}
             </ListItem>
             <ListItem
               title={navLinkData.earlyAdopters.title}
               route={navLinkData.earlyAdopters.link}
             >
               <i className="ph-duotone ph-leaf"></i>
-              Build high-quality, accessible design systems and web apps.
+              {navLinkData.earlyAdopters.description}
             </ListItem>
           </ul>
         </Accordion.Content>
@@ -137,21 +137,21 @@ const AccordionMenu = (props) => (
             route={navLinkData.about.link}
           >
             <i className="ph-duotone ph-info"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.about.description}
           </ListItem>
           <ListItem
             title={navLinkData.news.title}
             route={navLinkData.news.link}
           >
             <i className="ph-duotone ph-newspaper"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.news.description}
           </ListItem>
           <ListItem
             title={navLinkData.learn.title}
             route={navLinkData.learn.link}
           >
             <i className="ph-duotone ph-books"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.learn.description}
           </ListItem>
         </ul>
       </Accordion.Content>
