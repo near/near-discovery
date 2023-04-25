@@ -68,10 +68,10 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: 1200px) {
     .mobile {
-      display: block;
+      ${"" /* display: block; */}
     }
     .desktop {
-      display: none;
+      ${"" /* display: none; */}
     }
   }
 
