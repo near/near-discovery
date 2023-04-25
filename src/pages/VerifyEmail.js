@@ -3,6 +3,7 @@ import { firebaseAuth } from '../utils/firebase';
 import { parseURLParams } from '../utils/generic';
 import { sendSignInLinkToEmail } from 'firebase/auth';
 import styled from 'styled-components';
+import { toast } from 'sonner'
 import { useHistory } from 'react-router-dom';
 
 const VerifyEmail = () => {
@@ -20,11 +21,11 @@ const VerifyEmail = () => {
                     url: `${window.location.origin}/auth-callback?publicKey=${urlParams.publicKey}&accountId=${urlParams.accountId}`,
                     handleCodeInApp: true,
                 })
-                alert('Email sent')
             }
+            toast.success('Email resent successfully!')
         } catch (error) {
             console.log(error)
-            alert(error.message)
+            toast.error(error.message)
         }
     };
 
@@ -37,7 +38,7 @@ const VerifyEmail = () => {
         <StyledContainer>
             <FormContainer onSubmit={handleResendEmail}>
                 <header>
-                    <a href={urlParams?.isRecovery === 'true' ?  '/signin' : "/signup"} style={{ textDecoration: 'underline', color: 'black' }}><small>Go back</small></a>
+                    <a href={urlParams?.isRecovery === 'true' ? '/signin' : "/signup"} style={{ textDecoration: 'underline', color: 'black' }}><small>Go back</small></a>
                     <h1 style={{ marginTop: '12px' }}>Verify your email</h1>
                     <p style={{ fontWeight: 600, marginTop: '12px' }}>{urlParams?.email}</p>
                 </header>

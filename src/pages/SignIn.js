@@ -1,12 +1,13 @@
-import { handleCreateAccount } from '../utils/auth';
-import { getEmailId, isValidEmail } from '../utils/generic';
-
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components';
-import { useForm } from 'react-hook-form';
+import { getEmailId, isValidEmail } from '../utils/generic';
 import { useHistory, useLocation } from 'react-router-dom';
 
-const SignIn = ({requestSignInWithWallet}) => {
+import { handleCreateAccount } from '../utils/auth';
+import styled from 'styled-components';
+import { toast } from 'sonner'
+import { useForm } from 'react-hook-form';
+
+const SignIn = ({ requestSignInWithWallet }) => {
   const history = useHistory();
   const { register, handleSubmit, watch, setValue, formState } = useForm();
   const formValues = watch();
@@ -20,7 +21,7 @@ const SignIn = ({requestSignInWithWallet}) => {
       history.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`)
     } catch (error) {
       console.log(error)
-      alert(error.message)
+      toast.error(error.message)
     }
   });
 
