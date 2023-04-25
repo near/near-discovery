@@ -238,8 +238,8 @@ function App(props) {
             setupKeypom({
               trialBaseUrl:
                 NetworkId == "testnet"
-                  ? "test.near.org/#trial-url#"
-                  : "near.org/#trial-url#",
+                  ? "https://test.near.org/#trial-url/"
+                  : "https://near.org/#trial-url/",
               networkId: NetworkId,
               trialSplitDelim: "/",
               signInContractId:
