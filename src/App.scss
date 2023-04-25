@@ -12,6 +12,10 @@ html {
   inset: 0;
   background: #fff;
   z-index: 10000000;
+
+  .hide-page-flash-prevent & {
+    display: none;
+  }
 }
 
 .pointer {
