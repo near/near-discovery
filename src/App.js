@@ -310,6 +310,15 @@ function App(props) {
     );
   }, [account]);
 
+  useEffect(() => {
+    if (navigator.userAgent !== "ReactSnap") {
+      const pageFlashPrevent = document.getElementById("page-flash-prevent");
+      if (pageFlashPrevent) {
+        pageFlashPrevent.remove();
+      }
+    }
+  }, []);
+
   const passProps = {
     refreshAllowance: () => refreshAllowance(),
     setWidgetSrc,
