@@ -35,6 +35,7 @@ import { setupSender } from "@near-wallet-selector/sender";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import styled from "styled-components";
 import { useFlags } from "./utils/flags";
+import SignIn from "./pages/SignIn";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {
@@ -95,7 +96,7 @@ function App(props) {
     });
   }, [near]);
 
-  const requestSignIn = useCallback(
+  const requestSignInWithWallet = useCallback(
     (e) => {
       e && e.preventDefault();
       walletModal.show();
@@ -103,6 +104,10 @@ function App(props) {
     },
     [walletModal]
   );
+
+  const requestSignIn = () => {
+    window.location.href = '/signin'
+  }
 
   const logOut = useCallback(async () => {
     if (!near) {
@@ -152,6 +157,7 @@ function App(props) {
     widgetSrc,
     logOut,
     requestSignIn,
+    requestSignInWithWallet,
     widgets: Widgets,
     tos: {
       checkComponentPath: Widgets.tosCheck,
@@ -279,6 +285,10 @@ function App(props) {
           <Route path={"/signup"}>
             <NavigationWrapper {...passProps} />
             <CreateAccount {...passProps} />
+          </Route>
+          <Route path={"/signin"}>
+            <NavigationWrapper {...passProps} />
+            <SignIn {...passProps} />
           </Route>
           <Route path={"/verify-email"}>
             <NavigationWrapper {...passProps} />

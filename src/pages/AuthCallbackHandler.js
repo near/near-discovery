@@ -19,6 +19,7 @@ const AuthCallbackHandler = () => {
             const searchParams = new URLSearchParams(url.search);
             const accountId = searchParams.get("accountId");
             const publicKey = searchParams.get("publicKey");
+            const isRecovery = searchParams.get("isRecovery") === 'true';
 
             let email = window.localStorage.getItem('emailForSignIn');
             if (!email) {
@@ -32,11 +33,11 @@ const AuthCallbackHandler = () => {
 
                     const user = result.user;
                     if (!!user.emailVerified) {
-                        setStatusMessage('Creating account...');
+                        setStatusMessage(isRecovery ? 'Recovering account...' : 'Creating account...');
 
                         // TODO: Call MPC Service with accountId, publicKey,  and oauthToken to create account
                         const data = {
-                            near_account_id: accountId,
+                            ...(accountId && accountId.includes('.') ? {near_account_id: accountId} : {}),
                             public_key: publicKey,
                             oidc_token: user.accessToken
                         };
@@ -51,20 +52,22 @@ const AuthCallbackHandler = () => {
                             headers
                         };
 
-                        await fetch('https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/new_account', options)
-                            .then(response => {
+                        await fetch(`https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/${isRecovery ? 'add_key' : 'new_account'}`, options)
+                            .then(async (response) => {
                                 if (!response.ok) {
                                     console.log(response)
                                     throw new Error('Network response was not ok');
                                 }
-                                setStatusMessage('Account created successfully!');
+                                setStatusMessage(isRecovery ? 'Account recovered successfully!' : 'Account created successfully!');
                                 const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
-
+                                const res = await response.json()
+                                const accId = accountCreationData.accountId || res.near_account_id
                                 // TODO: Check if account ID matches the one from email
-                                if (!accountCreationData.privateKey || !accountCreationData.accountId) throw ('Could not find account creation data');
+                                if (!accountCreationData.privateKey || !accId) throw ('Could not find account creation data');
 
                                 window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify({
                                     ...accountCreationData,
+                                    accountId: accId,
                                     isCreated: true
                                 }));
 
