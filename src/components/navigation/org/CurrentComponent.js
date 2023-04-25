@@ -55,7 +55,7 @@ const StyledCurrentComponent = styled.div`
 `;
 
 const CurrentComponent = (props) => {
-  if (!props.widgets || !props.widgetSrc?.view) return;
+  if (!props.widgets?.componentSummary || !props.widgetSrc?.view) return;
 
   return (
     <StyledCurrentComponent className="current-component">
