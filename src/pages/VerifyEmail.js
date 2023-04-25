@@ -29,7 +29,7 @@ const VerifyEmail = () => {
     };
 
     React.useEffect(() => {
-        const params = parseURLParams(window.location.search)
+        const params = parseURLParams(decodeURI(window.location.search))
         setUrlParams(params)
     }, [window.location.search])
 
@@ -77,7 +77,6 @@ const FormContainer = styled.form`
   gap: 16px;
 `
 const StyledButton = styled.button`
-  width: 100%;
   padding: 8px;
   border: none;
   border-radius: 50px;

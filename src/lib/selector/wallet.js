@@ -27,7 +27,7 @@ export class FastAuthWallet {
     constructor({ signInContractId, networkId, ...rest }) {
         this.networkId = networkId
         this.signInContractId = signInContractId;
-        this.activeAccountId = window.localStorage.getItem('fast-auth:activeAccountId');
+        this.activeAccountId = window.localStorage.getItem('fast-auth:activeAccountId') || '';
 
         this.keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
         this.near = new nearAPI.Near({
@@ -75,6 +75,7 @@ export class FastAuthWallet {
         this.activeAccountId = undefined;
         await this.keyStore.removeKey(this.networkId, this.activeAccountId);
         localStorage.removeItem(`fast-auth:account-creation-data`);
+        localStorage.removeItem('fast-auth:activeAccountId');
     }
 
     async signAndSendTransaction(params) {
