@@ -50,275 +50,158 @@ export const refreshAllowanceObj = {};
 
 const iframeRoutes = [
   {
+    route: "/about/:subpath*",
+    url: "https://pages.near.org/about",
+  },
+  {
+    route: "/activate",
+    url: "https://pages.near.org/activate",
+  },
+  {
+    route: "/blog/:subpath*",
+    url: "https://pages.near.org/blog",
+  },
+  {
+    route: "/brand",
+    url: "https://pages.near.org/brand",
+  },
+  {
+    route: "/bridge",
+    url: "https://pages.near.org/bridge",
+  },
+  {
+    route: "/case-studies",
+    url: "https://pages.near.org/case-studies",
+  },
+  {
+    route: "/community-calendly",
+    url: "https://pages.near.org/community-calendly",
+  },
+  {
+    route: "/defi",
+    url: "https://pages.near.org/defi",
+  },
+  {
+    route: "/developers/:subpath*",
+    url: "https://pages.near.org/developers",
+  },
+  {
+    route: "/ecosystem/:subpath*",
+    url: "https://pages.near.org/ecosystem",
+  },
+  {
+    route: "/educate-old",
+    url: "https://pages.near.org/educate-old",
+  },
+  {
+    route: "/education",
+    url: "https://pages.near.org/education",
+  },
+  {
     route: "/events",
     url: "https://pages.near.org/events",
   },
   {
-    route: "/learn",
+    route: "/examples",
+    url: "https://pages.near.org/examples",
+  },
+  {
+    route: "/learn/:subpath*",
     url: "https://pages.near.org/learn",
   },
   {
-    route: "/about",
-    url: "https://pages.near.org/about",
+    route: "/lisbon",
+    url: "https://pages.near.org/lisbon",
+  },
+  {
+    route: "/meetings",
+    url: "https://pages.near.org/meetings",
+  },
+  {
+    route: "/metabuild",
+    url: "https://pages.near.org/metabuild",
+  },
+  {
+    route: "/miami",
+    url: "https://pages.near.org/miami",
+  },
+  {
+    route: "/nbx22-showcase",
+    url: "https://pages.near.org/nbx22-showcase",
+  },
+  {
+    route: "/near-developer-program-terms-conditions",
+    url: "https://pages.near.org/near-developer-program-terms-conditions",
+  },
+  {
+    route: "/nearconpitchfest",
+    url: "https://pages.near.org/nearconpitchfest",
   },
   {
     route: "/news",
     url: "https://pages.near.org/about/press-center",
   },
   {
-    route: "/developers",
-    url: "https://pages.near.org/developers",
-  },
-  {
-    route: "/blog",
-    url: "https://pages.near.org/blog",
-  },
-  {
-    route: "/sailgpsf",
-    url: "https://pages.near.org/sailgpsf"
-  },
-  {
-    route: "/blog/open-call-for-near-accelerator-service-partners",
-    url: "https://pages.near.org/blog/open-call-for-near-accelerator-service-partners"
-  },
-  {
-    route: "/brand",
-    url: "https://pages.near.org/brand"
-  },
-  {
-    route: "/community-calendly",
-    url: "https://pages.near.org/community-calendly"
-  },
-  {
-    route: "/examples",
-    url: "https://pages.near.org/examples"
-  },
-  {
-    route: "/near-developer-program-terms-conditions",
-    url: "https://pages.near.org/near-developer-program-terms-conditions"
-  },
-  {
-    route: "/owc",
-    url: "https://pages.near.org/owc"
-  },
-  {
-    route: "/bridge",
-    url: "https://pages.near.org/bridge"
-  },
-  {
-    route: "/miami",
-    url: "https://pages.near.org/miami"
-  },
-  {
-    route: "/metabuild",
-    url: "https://pages.near.org/metabuild"
-  },
-  {
-    route: "/sf",
-    url: "https://pages.near.org/sf"
+    route: "/newsletter-thank-you",
+    url: "https://pages.near.org/newsletter-thank-you",
   },
   {
     route: "/nyc",
-    url: "https://pages.near.org/nyc"
+    url: "https://pages.near.org/nyc",
   },
   {
-    route: "/stakewars",
-    url: "https://pages.near.org/stakewars"
+    route: "/owc",
+    url: "https://pages.near.org/owc",
   },
   {
-    route: "/learn/learn-more-old/defi-2",
-    url: "https://pages.near.org/learn/learn-more-old/defi-2"
-  },
-  {
-    route: "/learn/learn-more-old/nfts",
-    url: "https://pages.near.org/learn/learn-more-old/nfts"
-  },
-  {
-    route: "/learn/learn-more-old/social-dao",
-    url: "https://pages.near.org/learn/learn-more-old/social-dao"
-  },
-  {
-    route: "/defi",
-    url: "https://pages.near.org/defi"
-  },
-  {
-    route: "/learn/learn-more-old/creator-economy",
-    url: "https://pages.near.org/learn/learn-more-old/creator-economy/"
-  },
-  {
-    route: "/developers/integration",
-    url: "https://pages.near.org/developers/integration"
-  },
-  {
-    route: "/about/foundation",
-    url: "https://pages.near.org/about/foundation"
-  },
-  {
-    route: "/activate",
-    url: "https://pages.near.org/activate"
-  },
-  {
-    route: "/ecosystem/work-and-earn/bounties",
-    url: "https://pages.near.org/ecosystem/work-and-earn/bounties"
-  },
-  {
-    route: "/about/careers",
-    url: "https://pages.near.org/about/careers"
-  },
-  {
-    route: "/case-studies",
-    url: "https://pages.near.org/case-studies"
-  },
-  {
-    route: "/ecosystem/community/wechat",
-    url: "https://pages.near.org/ecosystem/community/wechat"
-  },
-  {
-    route: "/educate-old",
-    url: "https://pages.near.org/educate-old"
-  },
-  {
-    route: "/education",
-    url: "https://pages.near.org/education"
-  },
-  {
-    route: "/use-cases",
-    url: "https://pages.near.org/use-cases"
-  },
-  {
-    route: "/about/contact-us",
-    url: "https://pages.near.org/about/contact-us"
-  },
-  {
-    route: "/developers/tools",
-    url: "https://pages.near.org/developers/tools"
-  },
-  {
-    route: "/developers/get-help",
-    url: "https://pages.near.org/developers/get-help"
-  },
-  {
-    route: "/developers/build-on-near",
-    url: "https://pages.near.org/developers/build-on-near"
-  },
-  {
-    route: "/ecosystem/work-and-earn",
-    url: "https://pages.near.org/ecosystem/work-and-earn"
-  },
-  {
-    route: "/newsletter-thank-you",
-    url: "https://pages.near.org/newsletter-thank-you"
-  },
-  {
-    route: "/privacy",
-    url: "https://pages.near.org/privacy/"
-  },
-  {
-    route: "/lisbon",
-    url: "https://pages.near.org/lisbon"
-  },
-  {
-    route: "/about/network",
-    url: "https://pages.near.org/about/network"
-  },
-  {
-    route: "/nearconpitchfest",
-    url: "https://pages.near.org/nearconpitchfest"
-  },
-  {
-    route: "/meetings",
-    url: "https://pages.near.org/meetings"
-  },
-  {
-    route: "/about/network/decentralize",
-    url: "https://pages.near.org/about/network/decentralize"
-  },
-  {
-    route: "/about/press-center",
-    url: "https://pages.near.org/about/press-center"
-  },
-  {
-    route: "/developers/governance",
-    url: "https://pages.near.org/"
-  },
-  {
-    route: "/nbx22-showcase",
-    url: "https://pages.near.org/nbx22-showcase"
-  },
-  {
-    route: "/learn/tools",
-    url: "https://pages.near.org/learn/tools"
-  },
-  {
-    route: "/use/set-up-account",
-    url: "https://pages.near.org/use/set-up-account"
-  },
-  {
-    route: "/ecosystem/community",
-    url: "https://pages.near.org/ecosystem/community"
-  },
-  {
-    route: "/spill",
-    url: "https://pages.near.org/spill"
-  },
-  {
-    route: "/ecosystem/get-funding",
-    url: "https://pages.near.org/ecosystem/get-funding"
-  },
-  {
-    route: "/learn/learn-more",
-    url: "https://pages.near.org/learn/learn-more"
-  },
-  {
-    route: "/v3-use",
-    url: "https://pages.near.org/v3-use"
-  },
-  {
-    route: "/v3-developers",
-    url: "https://pages.near.org/v3-developers"
-  },
-  {
-    route: "/developers",
-    url: "https://pages.near.org/developers"
-  },
-  {
-    route: "/ecosystem",
-    url: "https://pages.near.org/ecosystem"
-  },
-  {
-    route: "/about/brand",
-    url: "https://pages.near.org/about/brand"
-  },
-  {
-    route: "/use",
-    url: "https://pages.near.org/use"
-  },
-  {
-    route: "/about/network/validators",
-    url: "https://pages.near.org/about/network/validators"
-  },
-  {
-    route: "/work-with-us",
-    url: "https://pages.near.org/work-with-us"
-  },
-  {
-    route: "/developers/get-help/office-hours",
-    url: "https://pages.near.org/developers/get-help/office-hours"
+    route: "/papers/:subpath*",
+    url: "https://pages.near.org/papers",
   },
   {
     route: "/pitch",
-    url: "https://pages.near.org/pitch"
+    url: "https://pages.near.org/pitch",
   },
   {
-    route: "/learn",
-    url: "https://pages.near.org/learn"
+    route: "/privacy",
+    url: "https://pages.near.org/privacy/",
   },
   {
-    route: "/about",
-    url: "https://pages.near.org/about"
+    route: "/sailgpsf",
+    url: "https://pages.near.org/sailgpsf",
+  },
+  {
+    route: "/sf",
+    url: "https://pages.near.org/sf",
+  },
+  {
+    route: "/spill",
+    url: "https://pages.near.org/spill",
+  },
+  {
+    route: "/stakewars",
+    url: "https://pages.near.org/stakewars",
+  },
+  {
+    route: "/use-cases",
+    url: "https://pages.near.org/use-cases",
+  },
+  {
+    route: "/use/:subpath*",
+    url: "https://pages.near.org/use",
+  },
+  {
+    route: "/v3-developers",
+    url: "https://pages.near.org/v3-developers",
+  },
+  {
+    route: "/v3-use",
+    url: "https://pages.near.org/v3-use",
+  },
+  {
+    route: "/work-with-us",
+    url: "https://pages.near.org/work-with-us",
   },
 ];
-
 function App(props) {
   const [connected, setConnected] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
@@ -352,12 +235,16 @@ function App(props) {
               gas: "300000000000000",
               bundle: false,
             }),
-            setupKeypom({ 
-              trialBaseUrl: NetworkId == "testnet" ? "test.near.org/#trial-url#" : "near.org/#trial-url#", 
-              networkId: NetworkId, 
+            setupKeypom({
+              trialBaseUrl:
+                NetworkId == "testnet"
+                  ? "test.near.org/#trial-url#"
+                  : "near.org/#trial-url#",
+              networkId: NetworkId,
               trialSplitDelim: "/",
-              signInContractId: NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
-              modalOptions: KEYPOM_OPTIONS(NetworkId)
+              signInContractId:
+                NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
+              modalOptions: KEYPOM_OPTIONS(NetworkId),
             }),
           ],
         }),
