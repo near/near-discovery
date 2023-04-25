@@ -58,7 +58,7 @@ const iframeRoutes = [
     url: "https://pages.near.org/learn",
   },
   {
-    route: "/about",
+    route: "/about/:subpath*",
     url: "https://pages.near.org/about",
   },
   {
@@ -68,6 +68,10 @@ const iframeRoutes = [
   {
     route: "/developers",
     url: "https://pages.near.org/developers",
+  },
+  {
+    route: "/blog/:subpath*",
+    url: "https://pages.near.org/blog",
   },
 ];
 
@@ -104,12 +108,16 @@ function App(props) {
               gas: "300000000000000",
               bundle: false,
             }),
-            setupKeypom({ 
-              trialBaseUrl: NetworkId == "testnet" ? "test.near.org/#trial-url#" : "near.org/#trial-url#", 
-              networkId: NetworkId, 
+            setupKeypom({
+              trialBaseUrl:
+                NetworkId == "testnet"
+                  ? "test.near.org/#trial-url#"
+                  : "near.org/#trial-url#",
+              networkId: NetworkId,
               trialSplitDelim: "/",
-              signInContractId: NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
-              modalOptions: KEYPOM_OPTIONS(NetworkId)
+              signInContractId:
+                NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
+              modalOptions: KEYPOM_OPTIONS(NetworkId),
             }),
           ],
         }),
@@ -351,7 +359,7 @@ function App(props) {
             </Route>
             {/* Near ORG Iframe Pages: */}
             {iframeRoutes.map((route) => (
-              <Route key={route.route} path={route.route} exact={true}>
+              <Route key={route.route} path={route.route}>
                 <NearOrgPage {...passProps} iframeSrc={route.url} />
               </Route>
             ))}

@@ -6,8 +6,10 @@ import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCo
 import { Helmet } from "react-helmet";
 import { recordPageView, debounceRecordClick } from "../utils/analytics";
 import { useQuery } from "../hooks/useQuery";
+import { useParams } from "react-router-dom";
 
 export default function NearOrgPage(props) {
+  const { subpath } = useParams();
   // will always be empty in prod
   const localOverrideUrl = process.env.LOCAL_COMPONENT_LOADER;
   const [redirectMap, setRedirectMap] = useState();
@@ -63,7 +65,7 @@ export default function NearOrgPage(props) {
       <div onPointerUp={debounceRecordClick}>
         {props.iframeSrc ? (
           <IframeResizer
-            src={props.iframeSrc}
+            src={props.iframeSrc + (subpath ? "/" + subpath : "")}
             style={{ width: "1px", minWidth: "100%" }}
             checkOrigin={false}
           />
