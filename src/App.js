@@ -619,10 +619,10 @@ function App(props) {
               <NavigationWrapper {...passProps} />
               <EditorPage {...passProps} meta={metaProps} onboarding={true} />
             </Route>
-            {/* <Route path={"/:widgetSrc*"}>
+            <Route path={"/:widgetSrc*"}>
               <NavigationWrapper {...passProps} />
               <ViewPage {...passProps} meta={metaProps} />
-            </Route> */}
+            </Route>
           </Switch>
         </BrowserRouter>
       </EthersProviderContext.Provider>
