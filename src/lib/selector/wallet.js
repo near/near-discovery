@@ -75,6 +75,7 @@ export class FastAuthWallet {
         this.activeAccountId = undefined;
         await this.keyStore.removeKey(this.networkId, this.activeAccountId);
         localStorage.removeItem(`fast-auth:account-creation-data`);
+        localStorage.getItem('fast-auth:activeAccountId');
     }
 
     async signAndSendTransaction(params) {

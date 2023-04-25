@@ -54,7 +54,7 @@ const CreateAccount = () => {
     try {
       const fullAccountId = `${data.username}.${ACCOUNT_ID_SUFFIX}`
       const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email)
-      history.push(`/verify-email?publicKey=${encodeURIComponent(publicKey)}&accountId=${encodeURI(accountId)}&email=${encodeURIComponent(email)}`)
+      history.push(`/verify-email?publicKey=${encodeURIComponent(publicKey)}&accountId=${encodeURIComponent(accountId)}&email=${encodeURIComponent(email)}`)
     } catch (error) {
       toast.error(error.message)
     }
