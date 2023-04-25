@@ -83,7 +83,7 @@ export const onboardingSteps = {
   },
   step7: {
     component: <Step7 />,
-    button: "Confirm Code Copy",
+    button: "Confirm Embed",
     tooltipAdjust: {
       x: 0,
       y: 100,

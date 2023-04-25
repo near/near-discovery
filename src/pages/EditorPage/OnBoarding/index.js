@@ -37,6 +37,20 @@ const Tooltip = styled.div`
     margin-top: 12px;
   }
 
+  .closeIcon {
+    position: absolute;
+    font-size: 26px;
+    top: 0px;
+    right: 6px;
+    color: #999;
+    cursor: pointer;
+    border-radius: 100%;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
   .buttons {
     display: flex;
     margin-top: 24px;
@@ -47,6 +61,8 @@ const Tooltip = styled.div`
     .left {
       button {
         padding-right: 16px;
+        background: transparent;
+        color: #999;
       }
     }
 
@@ -139,6 +155,13 @@ export default ({
     }
     if (currentStep > 1) {
       selectFile(onboardingComponents.starterFork);
+    }
+
+    // glow
+    if (currentStep === 1 && refs.step1.current) {
+      refs.step1.current.className = "glow";
+    } else if (refs.step1.current) {
+      refs.step1.current.className = "";
     }
 
     // disable
@@ -237,6 +260,13 @@ export default ({
                         </button>
                       )}
                     </div>
+                  </div>
+                  <div
+                    className="closeIcon"
+                    title="Exit Onboarding flow"
+                    onClick={finishOnboarding}
+                  >
+                    <i className="bi bi-x" />
                   </div>
                 </Tooltip>
               )
