@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import { Helmet } from "react-helmet";
-import { recordPageView, debounceRecordClick } from "../utils/analytics";
+import { recordPageView, recordClick } from "../utils/analytics";
 
 export default function EmbedPage(props) {
   const { widgetSrc } = useParams();
@@ -34,7 +34,7 @@ export default function EmbedPage(props) {
       </Helmet>
       <div
         className="d-inline-block position-relative overflow-hidden"
-        onPointerUp={debounceRecordClick}
+        onPointerUp={recordClick}
       >
         <Widget
           key={props.widgets.wrapper}

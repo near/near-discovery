@@ -5,7 +5,7 @@ import "./styles.css";
 import CurrentComponent from "../../../CurrentComponent";
 import { navLinkData } from "../../../orgLinks";
 import { NavLink, useHistory } from "react-router-dom";
-import { debounceRecordMouseEnter } from "../../../../../../utils/analytics";
+import { recordMouseEnter } from "../../../../../../utils/analytics";
 
 const MainNavigationMenu = (props) => {
   const history = useHistory();
@@ -25,7 +25,7 @@ const MainNavigationMenu = (props) => {
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
             className="NavigationMenuTrigger"
-            onMouseEnter={debounceRecordMouseEnter}
+            onMouseEnter={recordMouseEnter}
           >
             Discover
           </NavigationMenu.Trigger>
@@ -59,7 +59,7 @@ const MainNavigationMenu = (props) => {
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
             className="NavigationMenuTrigger"
-            onMouseEnter={debounceRecordMouseEnter}
+            onMouseEnter={recordMouseEnter}
           >
             Develop
           </NavigationMenu.Trigger>
@@ -94,7 +94,7 @@ const MainNavigationMenu = (props) => {
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
             className="NavigationMenuTrigger"
-            onMouseEnter={debounceRecordMouseEnter}
+            onMouseEnter={recordMouseEnter}
           >
             Connect
           </NavigationMenu.Trigger>
@@ -128,7 +128,7 @@ const MainNavigationMenu = (props) => {
           <NavigationMenu.Item>
             <NavigationMenu.Trigger
               className="NavigationMenuTrigger"
-              onMouseEnter={debounceRecordMouseEnter}
+              onMouseEnter={recordMouseEnter}
             >
               Solutions
             </NavigationMenu.Trigger>
@@ -162,7 +162,7 @@ const MainNavigationMenu = (props) => {
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
             className="NavigationMenuTrigger"
-            onMouseEnter={debounceRecordMouseEnter}
+            onMouseEnter={recordMouseEnter}
           >
             More
           </NavigationMenu.Trigger>
@@ -209,7 +209,7 @@ const ListItem = React.forwardRef(
   ({ className, children, title, ...props }, forwardedRef) => {
     if (props.route) {
       return (
-        <li onMouseEnter={debounceRecordMouseEnter}>
+        <li onMouseEnter={recordMouseEnter}>
           <NavigationMenu.Link asChild>
             <NavLink
               to={props.route}
@@ -223,7 +223,7 @@ const ListItem = React.forwardRef(
       );
     } else {
       return (
-        <li onMouseEnter={debounceRecordMouseEnter}>
+        <li onMouseEnter={recordMouseEnter}>
           <NavigationMenu.Link asChild>
             <a
               className={classNames("ListItemLink", className)}

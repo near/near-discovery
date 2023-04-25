@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useQuery } from "../hooks/useQuery";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import styleZendesk from "../zendesk";
-import { debounceRecordClick, recordPageView } from "../utils/analytics";
+import { recordClick, recordPageView } from "../utils/analytics";
 import { Helmet } from "react-helmet";
 import useRedirectMap from "../hooks/useRedirectMap";
 
@@ -80,7 +80,7 @@ export default function ViewPage(props) {
           display: "flex",
           flexDirection: "column",
         }}
-        onPointerUp={debounceRecordClick}
+        onPointerUp={recordClick}
       >
         {loaderUrl && (
           <div

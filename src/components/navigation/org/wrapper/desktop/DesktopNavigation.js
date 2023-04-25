@@ -9,7 +9,7 @@ import { Return } from "../../icons/Return";
 import { recordEvent } from "../../../../../utils/analytics";
 import { NotificationWidget } from "../../NotificationWidget";
 import UserDropdownMenu from "./UserDropdownMenu";
-import { debounceRecordClick } from "../../../../../utils/analytics";
+import { recordClick } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -192,7 +192,7 @@ const DesktopNavigation = (props) => {
               <button
                 className="sign-in"
                 onClick={(e) => {
-                  debounceRecordClick(e);
+                  recordClick(e);
                   props.requestSignIn();
                 }}
               >
@@ -201,7 +201,7 @@ const DesktopNavigation = (props) => {
               <button
                 className="create-account"
                 onClick={(e) => {
-                  debounceRecordClick(e);
+                  recordClick(e);
                   window.location = "https://wallet.near.org/create";
                 }}
               >
