@@ -59,6 +59,11 @@ const Wrapper = styled.div`
     background: #fff;
     display: none;
     top: 40px;
+
+    h4 {
+      color: #1b1b18;
+      font-weight: 700;
+    }
   }
 
   @media only screen and (max-width: 1200px) {
@@ -71,6 +76,39 @@ const Wrapper = styled.div`
   }
 
   .glow {
+    -webkit-animation: glowing 1000ms infinite;
+    -moz-animation: glowing 1000ms infinite;
+    -o-animation: glowing 1000ms infinite;
+    animation: glowing 1000ms infinite;
+
+    @-webkit-keyframes glowing {
+      0% {
+        border-color: #63e3a4;
+        -webkit-box-shadow: 0 0 3px #63e3a4;
+      }
+      50% {
+        border-color: #63e3a4;
+        -webkit-box-shadow: 0 0 14px #63e3a4;
+      }
+      100% {
+        border-color: #63e3a4;
+        -webkit-box-shadow: 0 0 3px #63e3a4;
+      }
+    }
+    @keyframes glowing {
+      0% {
+        border-color: #63e3a4;
+        box-shadow: 0 0 3px #63e3a4;
+      }
+      50% {
+        border-color: #63e3a4;
+        box-shadow: 0 0 14px #63e3a4;
+      }
+      100% {
+        border-color: #63e3a4;
+        box-shadow: 0 0 3px #63e3a4;
+      }
+    }
   }
 
   .onboardingDisable {
@@ -561,7 +599,9 @@ const EditorPage = ({
                   width: "500px",
                 }}
               >
-                Only for big screens
+                <h4>Oops...We're gonna need a bigger screen.</h4>
+                <br />
+                Please visit the onboarding flow from a larger screen.
               </div>
             </div>
           </div>
