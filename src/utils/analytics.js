@@ -1,7 +1,8 @@
 import Analytics from "analytics-node";
 import { nanoid } from "nanoid";
-import { debounce, get, split, truncate } from "lodash";
+import { get, split, truncate } from "lodash";
 import { createHash } from "crypto";
+import { NetworkId } from "../data/widgets";
 
 let segment;
 let anonymousUserId;
@@ -39,12 +40,12 @@ export function init() {
   if (segment) return; // already initialized
 
   getAnonymousId();
+  const segmentKey =
+    NetworkId === "testnet"
+      ? "diA7hiO28gGeb9fxn615Xs91uX3GyYhL"
+      : "gVheHtpTIWpmstSvXjGkSY80nGEXgHX4";
   try {
-    segment = new Analytics(
-      process.env.PUBLIC_SEGMENT_WRITE_KEY ||
-        "diA7hiO28gGeb9fxn615Xs91uX3GyYhL",
-      {}
-    );
+    segment = new Analytics(segmentKey, {});
   } catch (e) {
     console.error(e);
   }
@@ -76,22 +77,20 @@ export function recordPageView(pageName) {
   }
 }
 
-const debounceRecord = (eventType, delay) =>
-  debounce((e) => {
-    const key = get(
-      e.target,
-      "placeholder",
-      get(e.target, "innerText", get(e.target, "href"))
-    );
-    recordEventWithProps(eventType, {
-      element: truncate(key, { length: 255 }),
-      url: filterURL(e.target.baseURI),
-    });
-  }, delay);
-
-export const debounceRecordClick = debounceRecord("click", 200);
-export const debounceRecordMouseEnter = debounceRecord("mouseover", 1);
-export const recordTouchStart = (e, eventType = "touchstart") => debounceRecord(eventType, 1)(e);
+const record = (eventType, e) => {
+  const key = get(
+    e.target,
+    "placeholder",
+    get(e.target, "innerText", get(e.target, "href"))
+  );
+  recordEventWithProps(eventType, {
+    element: truncate(key, { length: 255 }),
+    url: filterURL(e.target.baseURI),
+  });
+};
+export const recordClick = (e) => record("click", e);
+export const recordMouseEnter = (e) => record("mouseover", e);
+export const recordTouchStart = (e) => record("touchstart", e);
 
 export function recordWalletConnect(accountId) {
   if (!localStorage.getItem("hashId")) {
