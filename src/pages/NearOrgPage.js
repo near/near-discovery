@@ -6,6 +6,7 @@ import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCo
 import { Helmet } from "react-helmet";
 import { recordPageView, debounceRecordClick } from "../utils/analytics";
 import { useQuery } from "../hooks/useQuery";
+import { useParams } from "react-router-dom";
 
 export default function NearOrgPage(props) {
   // will always be empty in prod
@@ -13,8 +14,10 @@ export default function NearOrgPage(props) {
   const [redirectMap, setRedirectMap] = useState();
   const [widgetProps, setWidgetProps] = useState({});
   const query = useQuery();
+  const { subpath } = useParams();
 
   useHashUrlBackwardsCompatibility();
+  zE("webWidget", "hide");
 
   // fetch local component versions if a local loader
   // is provided. must be provided as {components: { <path>: { code : <code>}}}
@@ -62,7 +65,7 @@ export default function NearOrgPage(props) {
       <div onPointerUp={debounceRecordClick}>
         {props.iframeSrc ? (
           <IframeResizer
-            src={props.iframeSrc}
+            src={props.iframeSrc + (subpath ? "/" + subpath : "")}
             style={{ width: "1px", minWidth: "100%" }}
             checkOrigin={false}
           />

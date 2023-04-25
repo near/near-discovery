@@ -1,4 +1,5 @@
 import React from "react";
+import ForkButton from "../buttons/ForkButton";
 import NavigationLeft from "./NavigationLeft";
 import NavigationRight from "./NavigationRight";
 
@@ -15,6 +16,13 @@ const Navigation = ({
   setShowModal,
   isDraft,
   changeFile,
+  refs,
+  onboarding,
+  currentStep,
+  requestSignIn,
+  disable,
+  handleCommit,
+  accountId,
 }) => (
   <>
     <div className="w-100 d-flex " style={{ flexWrap: "nowrap" }}>
@@ -25,6 +33,8 @@ const Navigation = ({
           changeFile={changeFile}
           setShowModal={setShowModal}
           closeFile={closeFile}
+          disable={disable}
+          onboarding={onboarding}
         />
       </div>
       <div
@@ -41,6 +51,13 @@ const Navigation = ({
           path={path}
           metadata={metadata}
           isDraft={isDraft}
+          refs={refs}
+          onboarding={onboarding}
+          currentStep={currentStep}
+          requestSignIn={requestSignIn}
+          disable={disable}
+          handleCommit={handleCommit}
+          accountId={accountId}
         />
       </div>
     </div>
