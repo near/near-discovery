@@ -14,6 +14,7 @@ import { setupSender } from "@near-wallet-selector/sender";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
+import { setupWelldoneWallet } from "@near-wallet-selector/welldone-wallet";
 import { setupModal } from "@near-wallet-selector/modal-ui";
 import EmbedPage from "./pages/EmbedPage";
 import {
@@ -104,6 +105,7 @@ function App(props) {
               gas: "300000000000000",
               bundle: false,
             }),
+            setupWelldoneWallet(),
             setupKeypom({ 
               trialBaseUrl: NetworkId == "testnet" ? "test.near.org#trial-url#" : "near.org#trial-url#", 
               networkId: NetworkId, 
