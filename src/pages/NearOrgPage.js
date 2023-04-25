@@ -4,7 +4,7 @@ import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import { Helmet } from "react-helmet";
-import { recordPageView, debounceRecordClick } from "../utils/analytics";
+import { recordPageView, recordClick } from "../utils/analytics";
 import { useQuery } from "../hooks/useQuery";
 import { useParams } from "react-router-dom";
 
@@ -62,7 +62,7 @@ export default function NearOrgPage(props) {
       )}
       <NavigationWrapper {...props} />
 
-      <div onPointerUp={debounceRecordClick}>
+      <div onPointerUp={recordClick}>
         {props.iframeSrc ? (
           <IframeResizer
             src={props.iframeSrc + (subpath ? "/" + subpath : "")}

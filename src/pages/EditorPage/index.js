@@ -46,7 +46,7 @@ import {
   ONBOARDING_STORAGE,
 } from "./utils/onboarding";
 import { Helmet } from "react-helmet";
-import { recordPageView, debounceRecordClick } from "../../utils/analytics";
+import { recordPageView, recordClick } from "../../utils/analytics";
 import styled from "styled-components";
 import BannerOboarding from "./Banners/BannerOboarding";
 
@@ -589,7 +589,7 @@ const EditorPage = ({
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
       </Helmet>
-      <div style={{ position: "relative" }} onPointerUp={debounceRecordClick}>
+      <div style={{ position: "relative" }} onPointerUp={recordClick}>
         {onboarding && (
           <div className="mobile">
             <div className={`d-flex min-vh-100 `}>
