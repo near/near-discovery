@@ -55,20 +55,15 @@ const StyledCurrentComponent = styled.div`
 `;
 
 const CurrentComponent = (props) => {
-  if (
-    props.iframeRoutes
-      .map((item) => item.route)
-      .includes(window.location.pathname)
-  ) {
-    return;
-  }
+  if (!props.widgets || !props.widgetSrc?.view) return;
+
   return (
     <StyledCurrentComponent className="current-component">
       <div className="title">Current Component</div>
       <Widget
-        src={props.widgets?.componentSummary}
+        src={props.widgets.componentSummary}
         props={{
-          src: props.widgetSrc?.view,
+          src: props.widgetSrc.view,
           size: "medium",
           showTags: true,
         }}
