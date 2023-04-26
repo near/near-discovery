@@ -25,12 +25,12 @@ export const navLinkData = {
   documentation: {
     title: "Documentation",
     description: "Access guides, tutorials, API, and tooling documentation",
-    link: "https://docs.near.org/discovery",
+    link: "https://docs.near.org/bos",
   },
   tutorials: {
     title: "Quickstart",
     description: "Start building your first decentralized components",
-    link: "https://docs.near.org/discovery/tutorial/quickstart",
+    link: "/onboarding",
   },
   people: {
     title: "People",
