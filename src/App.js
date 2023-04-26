@@ -419,6 +419,9 @@ function App(props) {
               <NearOrgPage
                 {...passProps}
                 src={Widgets.componentsPage}
+                defaultWidgetProps={{
+                  tab: "all",
+                }}
                 meta={{
                   title: "Components built on the BOS",
                   description: "BOS Components",
