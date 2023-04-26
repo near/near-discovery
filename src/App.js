@@ -394,6 +394,15 @@ function App(props) {
                 return null;
               }}
             />
+            <Route
+              path="/pitch"
+              component={() => {
+                window.location.replace(
+                  "https://nearpitchfestconsensus.splashthat.com/"
+                );
+                return null;
+              }}
+            />
             <Route path={"/horizon"} exact={true}>
               <NearOrgPage
                 {...passProps}
