@@ -54,6 +54,8 @@ const StyledMenu = styled.div`
 
     svg {
       margin: 0;
+      min-width: 24px;
+      min-height: 24px;
 
       path {
         stroke: #1b1b18;
