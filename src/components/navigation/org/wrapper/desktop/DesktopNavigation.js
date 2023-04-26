@@ -9,7 +9,7 @@ import { Return } from "../../icons/Return";
 import { recordEvent } from "../../../../../utils/analytics";
 import { NotificationWidget } from "../../NotificationWidget";
 import UserDropdownMenu from "./UserDropdownMenu";
-import { recordClick } from "../../../../../utils/analytics";
+import { recordClick, flushEvents } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -155,6 +155,21 @@ const DesktopNavigation = (props) => {
     };
   }, []);
 
+  async function clearAnalytics(e) {
+    recordClick(e);
+    await flushEvents();
+  }
+
+  function handleSignIn(event) {
+    clearAnalytics(event);
+    props.requestSignIn();
+  }
+
+  function handleCreateAccount(event) {
+    clearAnalytics(event);
+    window.location = "https://wallet.near.org/create";
+  }
+
   return (
     <StyledNavigation className={`${scrolled ? "border-bottom" : ""}`}>
       <div className="container">
@@ -189,22 +204,10 @@ const DesktopNavigation = (props) => {
         <div className="right-side-actions">
           {!props.signedIn && (
             <>
-              <button
-                className="sign-in"
-                onClick={(e) => {
-                  recordClick(e);
-                  props.requestSignIn();
-                }}
-              >
+              <button className="sign-in" onClick={handleSignIn}>
                 Sign In
               </button>
-              <button
-                className="create-account"
-                onClick={(e) => {
-                  recordClick(e);
-                  window.location = "https://wallet.near.org/create";
-                }}
-              >
+              <button className="create-account" onClick={handleCreateAccount}>
                 Create Account
               </button>
             </>
