@@ -82,7 +82,6 @@ const Wrapper = styled.div`
     animation: glowing 1000ms infinite;
 
     border-radius: 6px;
-    height: 38px;
 
     @-webkit-keyframes glowing {
       0% {
