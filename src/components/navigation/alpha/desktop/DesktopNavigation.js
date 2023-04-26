@@ -120,7 +120,7 @@ export function DesktopNavigation(props) {
             onSubmit={(e) => {
               e.preventDefault();
               history.push(
-                `/${props.widgets?.globalSearchPage}?term=${e.target[0].value}`
+                `/${props.widgets?.search.indexPage}?term=${e.target[0].value}`
               );
             }}
           >
