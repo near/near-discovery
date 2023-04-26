@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
 import styled from "styled-components";
 import NearLogotype from "../../icons/near-logotype.svg";
@@ -9,6 +9,7 @@ import { Return } from "../../icons/Return";
 import { recordEvent } from "../../../../../utils/analytics";
 import { NotificationWidget } from "../../NotificationWidget";
 import UserDropdownMenu from "./UserDropdownMenu";
+import TypeAheadDropdown from "./TypeAheadDropdown";
 import { recordClick, flushEvents } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
@@ -56,6 +57,7 @@ const StyledNavigation = styled.div`
 
   .form-wrapper {
     position: relative;
+    z-index: 10;
 
     input {
       background-repeat: no-repeat;
@@ -134,10 +136,32 @@ const StyledNavigation = styled.div`
   }
 `;
 
+const TypeAheadDropdownContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 31px;
+  margin-top: 10px;
+`;
+
 const DesktopNavigation = (props) => {
-  const [searchInputFocus, setSearchInputFocus] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const history = useHistory();
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchRef = useRef(null);
+  const [searchIsFocused, _setSearchIsFocused] = useState(false);
+  const showTypeAheadDropdown = searchIsFocused && !!searchTerm;
+  let searchFocusTimeout = useRef();
+
+  const setSearchIsFocused = (isFocused) => {
+    if (isFocused) {
+      _setSearchIsFocused(true);
+      clearTimeout(searchFocusTimeout.current);
+    } else {
+      searchFocusTimeout.current = setTimeout(() => {
+        _setSearchIsFocused(false);
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -184,21 +208,36 @@ const DesktopNavigation = (props) => {
             onSubmit={(e) => {
               e.preventDefault();
               history.push(
-                `/${props.widgets?.globalSearchPage}?term=${e.target[0].value}`
+                `/${props.widgets?.search.indexPage}?term=${e.target[0].value}`
               );
             }}
           >
             <input
-              placeholder="Search NEAR"
+              placeholder="Search"
               style={{ backgroundImage: `url(${image})` }}
               onFocus={() => {
-                setSearchInputFocus(true);
+                setSearchIsFocused(true);
                 recordEvent("click-navigation-search");
               }}
-              onBlur={() => setSearchInputFocus(false)}
+              onBlur={() => {
+                setSearchIsFocused(false);
+              }}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              ref={searchRef}
             />
           </form>
-          {searchInputFocus && <Return />}
+
+          {showTypeAheadDropdown && (
+            <TypeAheadDropdownContainer>
+              <TypeAheadDropdown
+                term={searchTerm}
+                focusChange={setSearchIsFocused}
+                widgetSrc={props.widgets.search.typeAheadDropdown}
+              />
+            </TypeAheadDropdownContainer>
+          )}
+
+          {searchIsFocused && <Return />}
         </div>
         <MainNavigationMenu {...props} />
         <div className="right-side-actions">

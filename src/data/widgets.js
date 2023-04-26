@@ -16,7 +16,6 @@ const TestnetWidgets = {
   profileName: "eugenethedream/widget/ProfileName",
   componentsPage: "one.testnet/widget/ComponentsPage",
   peoplePage: "one.testnet/widget/PeoplePage",
-  globalSearchPage: "one.testnet/widget/GlobalSearchPage",
   notificationButton: "one.testnet/widget/NotificationButton",
   profilePage: "one.testnet/widget/ProfilePage",
   componentSummary: "one.testnet/widget/ComponentSummary",
@@ -24,6 +23,10 @@ const TestnetWidgets = {
   tosCheck: "one.testnet/widget/TosCheck",
   tosContent: "one.testnet/widget/TosContent",
   wrapper: "one.testnet/widget/DIG.Theme",
+  search: {
+    indexPage: "one.testnet/widget/Search.IndexPage",
+    typeAheadDropdown: "one.testnet/widget/Search.TypeAheadDropdown",
+  },
 };
 
 const MainnetWidgets = {
@@ -38,7 +41,6 @@ const MainnetWidgets = {
   profileInlineBlock: "mob.near/widget/Profile.InlineBlock",
   componentsPage: "near/widget/ComponentsPage",
   peoplePage: "near/widget/PeoplePage",
-  globalSearchPage: "chaotictempest.near/widget/Search",
   notificationButton: "near/widget/NotificationButton",
   profilePage: "near/widget/ProfilePage",
   componentSummary: "near/widget/ComponentSummary",
@@ -58,6 +60,10 @@ const MainnetWidgets = {
   horizon: {
     homePage: "nearhorizon.near/widget/HomePage",
     appPage: "nearhorizon.near/widget/Index",
+  },
+  search: {
+    indexPage: "near/widget/Search.IndexPage",
+    typeAheadDropdown: "near/widget/Search.TypeAheadDropdown",
   },
 };
 

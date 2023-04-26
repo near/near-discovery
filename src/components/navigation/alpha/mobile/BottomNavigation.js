@@ -73,7 +73,7 @@ export function BottomNavigation(props) {
       <NavigationButton route="/" homeRoute {...props}>
         <HouseLine />
       </NavigationButton>
-      <NavigationButton route={`/${props.widgets.globalSearchPage}`}>
+      <NavigationButton route={`/${props.widgets.search.indexPage}`}>
         <MagnifyingGlass />
       </NavigationButton>
       {props.signedIn ? (

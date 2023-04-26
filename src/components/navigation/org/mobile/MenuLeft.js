@@ -187,7 +187,7 @@ export function MenuLeft(props) {
         <button
           className="search-btn"
           style={{ backgroundImage: `url(${image})` }}
-          onClick={() => history.push(`/${props.widgets?.globalSearchPage}`)}
+          onClick={() => history.push(`/${props.widgets?.search.indexPage}`)}
         >
           Search NEAR
         </button>
