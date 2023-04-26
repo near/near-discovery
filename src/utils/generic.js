@@ -1,10 +1,14 @@
 export const getEmailId = (email) => {
-  return email.split("@")[0];
+  return email
+    .split("@")[0]
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9_\-]/g, "-");
 };
 
+export const emailPattern = /\S+@\S+\.\S+/;
+
 export const isValidEmail = (email) => {
-  const re = /\S+@\S+\.\S+/;
-  return re.test(email);
+  return emailPattern.test(email);
 };
 
 export const parseURLParams = (url) => {
