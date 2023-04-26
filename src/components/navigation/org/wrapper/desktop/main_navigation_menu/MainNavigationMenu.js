@@ -81,7 +81,7 @@ const MainNavigationMenu = (props) => {
                 {navLinkData.documentation.description}
               </ListItem>
               <ListItem
-                href={navLinkData.tutorials.link}
+                route={navLinkData.tutorials.link}
                 title={navLinkData.tutorials.title}
               >
                 <i className="ph-duotone ph-video"></i>
