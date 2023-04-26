@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { getEmailId, isValidEmail } from '../utils/generic';
-import { useHistory, useLocation } from 'react-router-dom';
+import React from 'react';
+import { isValidEmail } from '../utils/generic';
+import { useHistory } from 'react-router-dom';
 
 import { handleCreateAccount } from '../utils/auth';
 import styled from 'styled-components';
@@ -9,13 +9,11 @@ import { useForm } from 'react-hook-form';
 
 const SignIn = ({ requestSignInWithWallet }) => {
   const history = useHistory();
-  const { register, handleSubmit, watch, setValue, formState } = useForm();
-  const formValues = watch();
-  const defaultAccountId = getEmailId(formValues?.email || '')
+  const { register, handleSubmit, setValue } = useForm();
 
 
   const onSubmit = handleSubmit(async (data) => {
-    if (!data?.accountId || !data.email) return
+    if (!data.email) return
     try {
       const { publicKey, email } = await handleCreateAccount(null, data.email, true)
       history.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`)
@@ -43,9 +41,6 @@ const SignIn = ({ requestSignInWithWallet }) => {
             onChange={(e) => {
               setValue('email', e.target.value)
               if (!isValidEmail(e.target.value)) return
-              if (!formValues?.accountId || formValues.accountId === defaultAccountId) {
-                setValue('accountId', getEmailId(e.target.value))
-              }
             }}
             label='Email'
             placeholder='user_name@email.com'

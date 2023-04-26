@@ -97,10 +97,10 @@ const CreateAccount = () => {
               required: "Please enter a valid email address",
             })}
             onChange={(e) => {
-              setValue("email", e.target.value);
-              if (!isValidEmail(e.target.value)) return;
-              if (!formValues?.username || formValues.username === username) {
-                setValue("username", getEmailId(e.target.value));
+              setValue('email', e.target.value)
+              if (!isValidEmail(e.target.value)) return
+              if (!formValues?.username) {
+                setValue('username', getEmailId(e.target.value))
               }
             }}
             label="Email"
