@@ -111,6 +111,10 @@ export function reset() {
   }
 }
 
+export function flushEvents() {
+  return segment.flush();
+}
+
 function recordEventWithProps(eventLabel, properties) {
   try {
     segment.track({
