@@ -317,7 +317,7 @@ function App(props) {
             <ViewPage {...passProps} meta={metaProps} />
           </Route>
         </Switch>
-        <Toaster position="bottom-center" />
+        <Toaster position="bottom-center" richColors />
       </BrowserRouter>
     </StyledApp>
   );
