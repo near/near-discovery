@@ -81,32 +81,35 @@ const Wrapper = styled.div`
     -o-animation: glowing 1000ms infinite;
     animation: glowing 1000ms infinite;
 
+    border-radius: 6px;
+    height: 38px;
+
     @-webkit-keyframes glowing {
       0% {
-        border-color: #63e3a4;
-        -webkit-box-shadow: 0 0 3px #63e3a4;
+        border-color: #0d6efd;
+        -webkit-box-shadow: 0 0 3px #0d6efd;
       }
       50% {
-        border-color: #63e3a4;
-        -webkit-box-shadow: 0 0 14px #63e3a4;
+        border-color: #0d6efd;
+        -webkit-box-shadow: 0 0 15px #0d6efd;
       }
       100% {
-        border-color: #63e3a4;
-        -webkit-box-shadow: 0 0 3px #63e3a4;
+        border-color: #0d6efd;
+        -webkit-box-shadow: 0 0 3px #0d6efd;
       }
     }
     @keyframes glowing {
       0% {
-        border-color: #63e3a4;
-        box-shadow: 0 0 3px #63e3a4;
+        border-color: #0d6efd;
+        box-shadow: 0 0 3px #0d6efd;
       }
       50% {
-        border-color: #63e3a4;
-        box-shadow: 0 0 14px #63e3a4;
+        border-color: #0d6efd;
+        box-shadow: 0 0 15px #0d6efd;
       }
       100% {
-        border-color: #63e3a4;
-        box-shadow: 0 0 3px #63e3a4;
+        border-color: #0d6efd;
+        box-shadow: 0 0 3px #0d6efd;
       }
     }
   }
