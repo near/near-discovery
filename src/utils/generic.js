@@ -6,6 +6,13 @@ export const getEmailId = (email) => {
 };
 
 export const emailPattern = /\S+@\S+\.\S+/;
+export const accountAddressPattern =
+  /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/;
+
+/**
+ * regex for the body of an account not including TLA and not allowing subaccount
+ */
+export const accountAddressPatternNoSubaccount = /^([a-z\d]+[-_])*[a-z\d]+$/;
 
 export const isValidEmail = (email) => {
   return emailPattern.test(email);
