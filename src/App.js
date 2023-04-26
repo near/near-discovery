@@ -158,10 +158,6 @@ const iframeRoutes = [
     url: "https://pages.near.org/papers",
   },
   {
-    route: "/pitch",
-    url: "https://pages.near.org/pitch",
-  },
-  {
     route: "/privacy",
     url: "https://pages.near.org/privacy/",
   },
@@ -390,6 +386,15 @@ function App(props) {
               component={() => {
                 window.location.replace(
                   "https://nearconsensus2023.splashthat.com/"
+                );
+                return null;
+              }}
+            />
+            <Route
+              path="/pitch"
+              component={() => {
+                window.location.replace(
+                  "https://nearpitchfestconsensus.splashthat.com/"
                 );
                 return null;
               }}
