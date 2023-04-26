@@ -37,6 +37,20 @@ const Tooltip = styled.div`
     margin-top: 12px;
   }
 
+  .closeIcon {
+    position: absolute;
+    font-size: 26px;
+    top: 0px;
+    right: 6px;
+    color: #999;
+    cursor: pointer;
+    border-radius: 100%;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
   .buttons {
     display: flex;
     margin-top: 24px;
@@ -47,6 +61,8 @@ const Tooltip = styled.div`
     .left {
       button {
         padding-right: 16px;
+        background: transparent;
+        color: #999;
       }
     }
 
@@ -125,6 +141,23 @@ export default ({
     }));
 
   const disableAll = () => setDisable(onboardingDisable);
+
+  // glowing
+  useEffect(() => {
+    Object.keys(onboardingSteps).map((key) => {
+      if (refs[key].current) {
+        refs[key].current.className = "";
+      }
+    });
+
+    if ([2, 3, 8].includes(currentStep)) {
+      return;
+    }
+
+    if (refs[`step${currentStep}`]?.current) {
+      refs[`step${currentStep}`].current.className = "glow";
+    }
+  }, [currentStep]);
 
   useEffect(() => {
     if (!onboarding) {
@@ -237,6 +270,13 @@ export default ({
                         </button>
                       )}
                     </div>
+                  </div>
+                  <div
+                    className="closeIcon"
+                    title="Exit Onboarding flow"
+                    onClick={finishOnboarding}
+                  >
+                    <i className="bi bi-x" />
                   </div>
                 </Tooltip>
               )

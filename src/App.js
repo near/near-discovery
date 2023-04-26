@@ -238,8 +238,8 @@ function App(props) {
             setupKeypom({
               trialBaseUrl:
                 NetworkId == "testnet"
-                  ? "test.near.org/#trial-url#"
-                  : "near.org/#trial-url#",
+                  ? "https://test.near.org/#trial-url/"
+                  : "https://near.org/#trial-url/",
               networkId: NetworkId,
               trialSplitDelim: "/",
               signInContractId:
@@ -310,6 +310,15 @@ function App(props) {
     );
   }, [account]);
 
+  useEffect(() => {
+    if (navigator.userAgent !== "ReactSnap") {
+      const pageFlashPrevent = document.getElementById("page-flash-prevent");
+      if (pageFlashPrevent) {
+        pageFlashPrevent.remove();
+      }
+    }
+  }, []);
+
   const passProps = {
     refreshAllowance: () => refreshAllowance(),
     setWidgetSrc,
@@ -376,6 +385,15 @@ function App(props) {
                 }}
               />
             </Route>
+            <Route
+              path="/consensus"
+              component={() => {
+                window.location.replace(
+                  "https://nearconsensus2023.splashthat.com/"
+                );
+                return null;
+              }}
+            />
             <Route path={"/horizon"} exact={true}>
               <NearOrgPage
                 {...passProps}
@@ -410,6 +428,9 @@ function App(props) {
               <NearOrgPage
                 {...passProps}
                 src={Widgets.componentsPage}
+                defaultWidgetProps={{
+                  tab: "all",
+                }}
                 meta={{
                   title: "Components built on the BOS",
                   description: "BOS Components",

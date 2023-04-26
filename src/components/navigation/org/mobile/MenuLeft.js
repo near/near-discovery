@@ -8,7 +8,7 @@ import AccordionMenu from "./AccordionMenu";
 import { NotificationWidget } from "../NotificationWidget";
 import UserDropdownMenu from "../wrapper/desktop/UserDropdownMenu";
 import { useHistory } from "react-router-dom";
-import { debounceRecordClick } from "../../../../utils/analytics";
+import { recordClick, flushEvents } from "../../../../utils/analytics";
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -54,6 +54,8 @@ const StyledMenu = styled.div`
 
     svg {
       margin: 0;
+      min-width: 24px;
+      min-height: 24px;
 
       path {
         stroke: #1b1b18;
@@ -155,6 +157,22 @@ export function MenuLeft(props) {
   const near = useNear();
   const history = useHistory();
 
+  async function clearAnalytics(e) {
+    recordClick(e);
+    await flushEvents();
+  }
+
+  function handleSignIn(event) {
+    clearAnalytics(event);
+    props.onCloseMenu();
+    props.requestSignIn();
+  }
+
+  function handleCreateAccount(event) {
+    clearAnalytics(event);
+    window.location = "https://wallet.near.org/create";
+  }
+
   return (
     <StyledMenu className={props.showMenu ? "show" : ""}>
       <div className="left-side">
@@ -177,23 +195,10 @@ export function MenuLeft(props) {
 
         {!props.signedIn && (
           <div className="bottom-btns">
-            <button
-              className="sign-in"
-              onClick={(e) => {
-                debounceRecordClick(e);
-                props.onCloseMenu();
-                props.requestSignIn();
-              }}
-            >
+            <button className="sign-in" onClick={handleSignIn}>
               Sign in
             </button>
-            <button
-              className="create-account"
-              onClick={(e) => {
-                debounceRecordClick(e);
-                window.location = "https://wallet.near.org/create";
-              }}
-            >
+            <button className="create-account" onClick={handleCreateAccount}>
               Create Account
             </button>
           </div>

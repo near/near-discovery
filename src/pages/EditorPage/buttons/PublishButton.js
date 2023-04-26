@@ -12,7 +12,7 @@ export default ({
   refs,
 }) => {
   return (
-    <div ref={refs.step10}>
+    <div ref={refs.step10} style={{ height: "38px" }}>
       <CommitButton
         className={`btn btn-primary`}
         disabled={!widgetName || disable.publishButton}
