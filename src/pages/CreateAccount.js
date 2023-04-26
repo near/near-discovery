@@ -7,11 +7,21 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 
+const ErrorText = styled.p`
+  color: hsla(8, 100%, 33%, 1);
+`;
+
 const CreateAccount = () => {
   const history = useHistory();
   const [urlParams, setUrlParams] = React.useState(null);
   const [isAccountAvailable, setIsAccountAvailable] = React.useState(null);
-  const { register, handleSubmit, watch, setValue, formState } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors, touchedFields },
+  } = useForm();
   const formValues = watch();
 
   const checkIsAccountAvailable = async () => {
@@ -95,12 +105,16 @@ const CreateAccount = () => {
           <input
             {...register("email", {
               required: "Please enter a valid email address",
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: "Please enter a valid email address",
+              },
             })}
             onChange={(e) => {
-              setValue('email', e.target.value)
-              if (!isValidEmail(e.target.value)) return
-              if (!formValues?.username) {
-                setValue('username', getEmailId(e.target.value))
+              setValue("email", e.target.value);
+              if (!isValidEmail(e.target.value)) return;
+              if (!formValues?.username || !touchedFields?.username) {
+                setValue("username", getEmailId(e.target.value));
               }
             }}
             label="Email"
@@ -108,6 +122,9 @@ const CreateAccount = () => {
             type="email"
             required
           />
+          {errors.email && (
+            <ErrorText role="alert">{errors.email?.message}</ErrorText>
+          )}
         </InputContainer>
 
         <InputContainer>
@@ -116,6 +133,10 @@ const CreateAccount = () => {
             autoComplete="webauthn username"
             {...register("username", {
               required: "Please enter a valid account ID",
+              pattern: {
+                value: /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/,
+                message: "Accounts must be lowercase and may contain - or _",
+              },
             })}
             onChange={(e) => {
               setValue("username", e.target.value);
@@ -148,6 +169,9 @@ const CreateAccount = () => {
               ? `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!`
               : `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
           </p>
+          {errors.username && (
+            <ErrorText role="alert">{errors.username?.message}</ErrorText>
+          )}
         </InputContainer>
         <StyledButton fullWidth onClick={onSubmit} type="button">
           Continue
