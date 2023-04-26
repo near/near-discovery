@@ -22,9 +22,6 @@ const AuthCallbackHandler = () => {
             const isRecovery = searchParams.get("isRecovery") === 'true';
 
             let email = window.localStorage.getItem('emailForSignIn');
-            if (!email) {
-                history.push('/signup')
-            }
 
             setStatusMessage('Verifying email...');
             signInWithEmailLink(firebaseAuth, email, window.location.href)
@@ -74,15 +71,24 @@ const AuthCallbackHandler = () => {
                                 setStatusMessage('Redirecting to app...');
 
                                 window.location.href = '/';
-                            }).catch(error => {
-                                console.log('Error:', error);
                             });
                     }
                 })
                 .catch((error) => {
                     console.log(error)
-                    toast.error(error.message)
+                    const message = ({
+                        'auth/expired-action-code': 'Link expired, please try again.',
+                        'auth/invalid-action-code': 'Link expired, please try again.',
+                        'auth/invalid-email': 'Invalid email address.',
+                        'auth/user-disabled': 'User disabled',
+                        'auth/missing-email': 'No email found, please try again.'
+                    })[error.code] || error.message
+                    history.push('/signup')
+                    console.log(message, 'meassage', typeof message)
+                    toast.error(message)
                 });
+        } else {
+            history.push('/signup')
         }
     }, [])
 
