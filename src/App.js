@@ -385,6 +385,15 @@ function App(props) {
                 }}
               />
             </Route>
+            <Route
+              path="/consensus"
+              component={() => {
+                window.location.replace(
+                  "https://nearconsensus2023.splashthat.com/"
+                );
+                return null;
+              }}
+            />
             <Route path={"/horizon"} exact={true}>
               <NearOrgPage
                 {...passProps}
