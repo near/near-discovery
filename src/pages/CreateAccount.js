@@ -1,5 +1,11 @@
 import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from "../utils/auth";
-import { getEmailId, isValidEmail, parseURLParams } from "../utils/generic";
+import {
+  accountAddressPatternNoSubaccount,
+  emailPattern,
+  getEmailId,
+  isValidEmail,
+  parseURLParams,
+} from "../utils/generic";
 
 import React from "react";
 import styled from "styled-components";
@@ -15,6 +21,7 @@ const CreateAccount = () => {
   const history = useHistory();
   const [urlParams, setUrlParams] = React.useState(null);
   const [isAccountAvailable, setIsAccountAvailable] = React.useState(null);
+  const [isAccountValid, setIsAccountValid] = React.useState(null);
   const {
     register,
     handleSubmit,
@@ -80,6 +87,13 @@ const CreateAccount = () => {
 
   React.useEffect(() => {
     if (!formValues?.username) return;
+
+    const isValid = accountAddressPatternNoSubaccount.test(
+      formValues?.username
+    );
+    setIsAccountValid(isValid);
+    if (!isValid) return;
+
     checkIsAccountAvailable();
   }, [formValues?.username]);
 
@@ -87,6 +101,20 @@ const CreateAccount = () => {
     const params = parseURLParams(window.location.search);
     setUrlParams(params);
   }, [window.location.search]);
+
+  let accountStatusMessage = "";
+  if (!formValues?.username) {
+    accountStatusMessage = "Use a suggested ID or customize your own.";
+  } else if (!isAccountValid) {
+    accountStatusMessage =
+      "Accounts must be lowercase and may contain - or _, but they may not begin or end with a special character or have two consecutive special characters.";
+  } else {
+    if (!!isAccountAvailable) {
+      accountStatusMessage = `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!`;
+    } else {
+      accountStatusMessage = `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`;
+    }
+  }
 
   return (
     <StyledContainer>
@@ -106,7 +134,7 @@ const CreateAccount = () => {
             {...register("email", {
               required: "Please enter a valid email address",
               pattern: {
-                value: /\S+@\S+\.\S+/,
+                value: emailPattern,
                 message: "Please enter a valid email address",
               },
             })}
@@ -134,8 +162,8 @@ const CreateAccount = () => {
             {...register("username", {
               required: "Please enter a valid account ID",
               pattern: {
-                value: /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_])*[a-z\d]+$/,
-                message: "Accounts must be lowercase and may contain - or _",
+                value: accountAddressPatternNoSubaccount,
+                message: "Please enter a valid account ID",
               },
             })}
             onChange={(e) => {
@@ -154,21 +182,9 @@ const CreateAccount = () => {
                 ? "success"
                 : "error"
             }
-            statusMessage={
-              isAccountAvailable === null
-                ? "Use a suggested ID or customize your own."
-                : !!isAccountAvailable
-                ? `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!`
-                : `${formValues?.accountId}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`
-            }
+            statusMessage={accountStatusMessage}
           />
-          <p className="subText">
-            {isAccountAvailable === null
-              ? "Use a suggested ID or customize your own."
-              : !!isAccountAvailable
-              ? `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!`
-              : `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`}
-          </p>
+          <p className="subText">{accountStatusMessage}</p>
           {errors.username && (
             <ErrorText role="alert">{errors.username?.message}</ErrorText>
           )}
