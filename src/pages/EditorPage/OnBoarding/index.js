@@ -142,6 +142,23 @@ export default ({
 
   const disableAll = () => setDisable(onboardingDisable);
 
+  // glowing
+  useEffect(() => {
+    Object.keys(onboardingSteps).map((key) => {
+      if (refs[key].current) {
+        refs[key].current.className = "";
+      }
+    });
+
+    if ([2, 3, 8].includes(currentStep)) {
+      return;
+    }
+
+    if (refs[`step${currentStep}`]?.current) {
+      refs[`step${currentStep}`].current.className = "glow";
+    }
+  }, [currentStep]);
+
   useEffect(() => {
     if (!onboarding) {
       return;
@@ -155,13 +172,6 @@ export default ({
     }
     if (currentStep > 1) {
       selectFile(onboardingComponents.starterFork);
-    }
-
-    // glow
-    if (currentStep === 1 && refs.step1.current) {
-      refs.step1.current.className = "glow";
-    } else if (refs.step1.current) {
-      refs.step1.current.className = "";
     }
 
     // disable
