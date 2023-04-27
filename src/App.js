@@ -229,6 +229,10 @@ function App(props) {
         walletConnectCallback: recordWalletConnect,
         selector: setupWalletSelector({
           network: NetworkId,
+          relayerUrl:
+            NetworkId === "testnet"
+              ? "https://34.70.226.83:3030/relay"
+              : "https://near-relayer-mainnet.api.pagoda.co/relay",
           modules: [
             setupNearWallet(),
             setupMyNearWallet(),
@@ -580,3 +584,4 @@ function App(props) {
 }
 
 export default App;
+
