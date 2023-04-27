@@ -6,6 +6,7 @@ import { handleCreateAccount } from '../utils/auth';
 import styled from 'styled-components';
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form';
+import { createKey, getKeys } from '@near-js/biometric-ed25519'
 
 const SignIn = ({ requestSignInWithWallet }) => {
   const history = useHistory();
@@ -13,14 +14,16 @@ const SignIn = ({ requestSignInWithWallet }) => {
 
 
   const onSubmit = handleSubmit(async (data) => {
-    if (!data.email) return
-    try {
-      const { publicKey, email } = await handleCreateAccount(null, data.email, true)
-      history.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`)
-    } catch (error) {
-      console.log(error)
-      toast.error(error.message)
-    }
+    console.log(await createKey('test@test.com'))
+    console.log(await getKeys('test@test.com'))
+    // if (!data.email) return
+    // try {
+    //   const { publicKey, email } = await handleCreateAccount(null, data.email, true)
+    //   history.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`)
+    // } catch (error) {
+    //   console.log(error)
+    //   toast.error(error.message)
+    // }
   });
 
   return (
