@@ -241,11 +241,12 @@ function App(props) {
             }),
             setupFastAuth({
               networkId: NetworkId,
-              signInContractId: "v1.social08.testnet",
+              signInContractId:
+                NetworkId === "testnet" ? "v1.social08.testnet" : "social.near",
             }),
             setupKeypom({
               trialBaseUrl:
-                NetworkId == "testnet"
+                NetworkId === "testnet"
                   ? "https://test.near.org/#trial-url/"
                   : "https://near.org/#trial-url/",
               networkId: NetworkId,
