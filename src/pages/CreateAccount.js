@@ -1,4 +1,5 @@
 import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from '../utils/auth';
+import { NetworkId, networks } from '../data/widgets';
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
 
 import React from 'react';
@@ -29,7 +30,7 @@ const CreateAccount = () => {
     try {
       if (!formValues?.username) return;
 
-      const response = await fetch("https://rpc.testnet.near.org", {
+      const response = await fetch(networks[NetworkId].nodeUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
