@@ -1,18 +1,11 @@
-import { ACCOUNT_ID_SUFFIX, getCorrectAccessKey, handleCreateAccount } from "../utils/auth";
-import {
-  accountAddressPatternNoSubaccount,
-  emailPattern,
-  getEmailId,
-  isValidEmail,
-  parseURLParams,
-} from "../utils/generic";
+import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from '../utils/auth';
+import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
 
-import React from "react";
-import { getKeys } from "@near-js/biometric-ed25519";
-import styled from "styled-components";
-import { toast } from "sonner";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import { toast } from 'sonner';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
@@ -86,14 +79,6 @@ const CreateAccount = () => {
     }
   });
 
-  const onGetKey = async (name) => {
-    const keys = await getKeys(name);
-    const publicKeys = keys.map((key) => key.getPublicKey().toString());
-    console.log("publicKeys", publicKeys);
-    const correctPublicKey = await getCorrectAccessKey(name, keys[0], keys[1]);
-    console.log("correctPublicKey", correctPublicKey);
-  };
-
 
   React.useEffect(() => {
     if (!formValues?.username) return;
@@ -136,7 +121,6 @@ const CreateAccount = () => {
             required.
           </p>
         </header>
-        <button onClick={() => onGetKey("philip1.testnet")}>Login</button>
 
         <InputContainer>
           <label htmlFor="email">Email</label>
