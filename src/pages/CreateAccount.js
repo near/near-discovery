@@ -1,11 +1,17 @@
-import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from '../utils/auth';
-import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
+import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from "../utils/auth";
+import {
+  accountAddressPatternNoSubaccount,
+  emailPattern,
+  getEmailId,
+  isValidEmail,
+  parseURLParams,
+} from "../utils/generic";
 
-import React from 'react';
-import styled from 'styled-components';
-import { toast } from 'sonner';
-import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
@@ -22,10 +28,13 @@ const CreateAccount = () => {
     watch,
     setValue,
     formState: { errors, touchedFields },
+    clearErrors,
   } = useForm();
   const formValues = watch();
 
   const checkIsAccountAvailable = async () => {
+    // set to null to show loading
+    setIsAccountAvailable(null);
     try {
       if (!formValues?.username) return;
 
@@ -79,9 +88,13 @@ const CreateAccount = () => {
     }
   });
 
-
   React.useEffect(() => {
-    if (!formValues?.username) return;
+    clearErrors("username");
+    if (!formValues?.username?.length) {
+      setIsAccountValid(null);
+      setIsAccountAvailable(null);
+      return;
+    }
 
     const isValid = accountAddressPatternNoSubaccount.test(
       formValues?.username
@@ -97,17 +110,25 @@ const CreateAccount = () => {
     setUrlParams(params);
   }, [window.location.search]);
 
+  // status message, doesn't need to be overoptimized with memoization
   let accountStatusMessage = "";
-  if (!formValues?.username) {
+  let accountStatusState; // "error" or "success"
+  if (!formValues?.username?.length) {
     accountStatusMessage = "Use a suggested ID or customize your own.";
   } else if (!isAccountValid) {
     accountStatusMessage =
       "Accounts must be lowercase and may contain - or _, but they may not begin or end with a special character or have two consecutive special characters.";
+    accountStatusState = "error";
   } else {
-    if (!!isAccountAvailable) {
+    // valid account is entered, handle availability
+    if (isAccountAvailable === null) {
+      accountStatusMessage = "Checking availability...";
+    } else if (isAccountAvailable) {
       accountStatusMessage = `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!`;
+      accountStatusState = "success";
     } else {
       accountStatusMessage = `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`;
+      accountStatusState = "error";
     }
   }
 
@@ -134,6 +155,7 @@ const CreateAccount = () => {
               },
             })}
             onChange={(e) => {
+              clearErrors("email");
               setValue("email", e.target.value);
               if (!isValidEmail(e.target.value)) return;
               if (!formValues?.username || !touchedFields?.username) {
@@ -160,26 +182,20 @@ const CreateAccount = () => {
                 value: accountAddressPatternNoSubaccount,
                 message: "Please enter a valid account ID",
               },
+              validate: (v) => {
+                if (!isAccountAvailable) {
+                  return "Please enter a valid account ID";
+                }
+              },
             })}
-            onChange={(e) => {
-              setValue("username", e.target.value);
-
-              if (e.target.value == "") {
-                setIsAccountAvailable(null);
-              }
-            }}
             label="Account ID"
             placeholder="user_name.near"
-            statusState={
-              isAccountAvailable === null
-                ? "default"
-                : !!isAccountAvailable
-                  ? "success"
-                  : "error"
-            }
-            statusMessage={accountStatusMessage}
           />
-          <p className="subText">{accountStatusMessage}</p>
+          <p className={`subText`}>
+            <span className={accountStatusState || ""}>
+              {accountStatusMessage}
+            </span>
+          </p>
           {errors.username && (
             <ErrorText role="alert">{errors.username?.message}</ErrorText>
           )}
@@ -246,7 +262,16 @@ const InputContainer = styled.div`
   }
 
   .subText {
-    font-size: 12px;
+    font-size: 0.75rem;
+    padding: 8px 0;
+
+    .error {
+      color: hsla(8, 100%, 33%, 1);
+    }
+
+    .success {
+      color: hsla(155, 66%, 32%, 1);
+    }
   }
 `;
 
