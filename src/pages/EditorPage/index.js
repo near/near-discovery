@@ -49,32 +49,9 @@ import { Helmet } from "react-helmet";
 import { recordPageView, recordClick } from "../../utils/analytics";
 import styled from "styled-components";
 import BannerOboarding from "./Banners/BannerOboarding";
+import MobileBlocker from "./Mobile/MobileBlocker";
 
 const Wrapper = styled.div`
-  .mobile {
-    position: absolute;
-    z-index: 95;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    display: none;
-    top: 40px;
-
-    h4 {
-      color: #1b1b18;
-      font-weight: 700;
-    }
-  }
-
-  @media only screen and (max-width: 1200px) {
-    .mobile {
-      ${"" /* display: block; */}
-    }
-    .desktop {
-      ${"" /* display: none; */}
-    }
-  }
-
   .glow {
     -webkit-animation: glowing 1000ms infinite;
     -moz-animation: glowing 1000ms infinite;
@@ -592,22 +569,7 @@ const EditorPage = ({
         <meta property="og:description" content={meta.description} />
       </Helmet>
       <div style={{ position: "relative" }} onPointerUp={recordClick}>
-        {onboarding && (
-          <div className="mobile">
-            <div className={`d-flex min-vh-100 `}>
-              <div
-                className="container-fluid mt-5"
-                style={{
-                  width: "500px",
-                }}
-              >
-                <h4>Oops...We're gonna need a bigger screen.</h4>
-                <br />
-                Please visit the onboarding flow from a larger screen.
-              </div>
-            </div>
-          </div>
-        )}
+        <MobileBlocker onboarding={onboarding} />
 
         {onboarding && (
           <OnBoarding
