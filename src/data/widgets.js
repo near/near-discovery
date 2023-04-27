@@ -9,47 +9,24 @@ export const NetworkId =
 
 export const networks = {
   mainnet: {
-    networkId: 'mainnet',
-    viewAccountId: 'near',
-    nodeUrl: 'https://rpc.mainnet.near.org',
-    walletUrl: 'https://wallet.near.org',
-    helperUrl: 'https://helper.mainnet.near.org'
+    networkId: "mainnet",
+    viewAccountId: "near",
+    nodeUrl: "https://rpc.mainnet.near.org",
+    walletUrl: "https://wallet.near.org",
+    helperUrl: "https://helper.mainnet.near.org",
   },
   testnet: {
-    networkId: 'testnet',
-    viewAccountId: 'testnet',
-    nodeUrl: 'https://rpc.testnet.near.org',
-    walletUrl: 'https://wallet.testnet.near.org',
-    helperUrl: 'https://helper.testnet.near.org'
+    networkId: "testnet",
+    viewAccountId: "testnet",
+    nodeUrl: "https://rpc.testnet.near.org",
+    walletUrl: "https://wallet.testnet.near.org",
+    helperUrl: "https://helper.testnet.near.org",
   },
   localnet: {
-    networkId: 'localnet',
-    viewAccountId: 'test.near',
-  }
-}
-
-
-export const networks = {
-  mainnet: {
-    networkId: 'mainnet',
-    viewAccountId: 'near',
-    nodeUrl: 'https://rpc.mainnet.near.org',
-    walletUrl: 'https://wallet.near.org',
-    helperUrl: 'https://helper.mainnet.near.org'
+    networkId: "localnet",
+    viewAccountId: "test.near",
   },
-  testnet: {
-    networkId: 'testnet',
-    viewAccountId: 'testnet',
-    nodeUrl: 'https://rpc.testnet.near.org',
-    walletUrl: 'https://wallet.testnet.near.org',
-    helperUrl: 'https://helper.testnet.near.org'
-  },
-  localnet: {
-    networkId: 'localnet',
-    viewAccountId: 'test.near',
-  }
-}
-
+};
 
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
@@ -63,17 +40,20 @@ const TestnetWidgets = {
   componentsPage: "one.testnet/widget/ComponentsPage",
   peoplePage: "one.testnet/widget/PeoplePage",
   notificationButton: "one.testnet/widget/NotificationButton",
-  profilePage: "one.testnet/widget/ProfilePage",
   componentSummary: "one.testnet/widget/ComponentSummary",
   notificationsPage: "one.testnet/widget/NotificationsPage",
   tosCheck: "one.testnet/widget/TosCheck",
   tosContent: "one.testnet/widget/TosContent",
   wrapper: "one.testnet/widget/DIG.Theme",
   nearOrg: {
-    ecosystemCommunityPage: "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
-    ecosystemGetFundingPage: "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
-    ecosystemOverviewPage: "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
-    ecosystemWorkAndEarnPage: "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
+    ecosystemCommunityPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
+    ecosystemGetFundingPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
+    ecosystemOverviewPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
+    ecosystemWorkAndEarnPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
     homePage: "discom.testnet/widget/NearOrg.HomePage",
     usePage: "discom.testnet/widget/NearOrg.UsePage",
   },
