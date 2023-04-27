@@ -1,10 +1,11 @@
 const TestnetDomains = {
   "test.near.org": true,
   "127.0.0.1": true,
-  "localhost": true,
+  localhost: true,
 };
 
-export const NetworkId = window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const NetworkId =
+  window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
 
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
@@ -17,7 +18,6 @@ const TestnetWidgets = {
   profileName: "eugenethedream/widget/ProfileName",
   componentsPage: "one.testnet/widget/ComponentsPage",
   peoplePage: "one.testnet/widget/PeoplePage",
-  globalSearchPage: "one.testnet/widget/GlobalSearchPage",
   notificationButton: "one.testnet/widget/NotificationButton",
   profilePage: "one.testnet/widget/ProfilePage",
   componentSummary: "one.testnet/widget/ComponentSummary",
@@ -26,10 +26,14 @@ const TestnetWidgets = {
   tosContent: "one.testnet/widget/TosContent",
   wrapper: "one.testnet/widget/DIG.Theme",
   nearOrg: {
-    ecosystemCommunityPage: "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
-    ecosystemGetFundingPage: "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
-    ecosystemOverviewPage: "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
-    ecosystemWorkAndEarnPage: "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
+    ecosystemCommunityPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
+    ecosystemGetFundingPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
+    ecosystemOverviewPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
+    ecosystemWorkAndEarnPage:
+      "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
     homePage: "discom.testnet/widget/NearOrg.HomePage",
     usePage: "discom.testnet/widget/NearOrg.UsePage",
   },
@@ -37,13 +41,17 @@ const TestnetWidgets = {
     homePage: "nearhorizon.near/widget/HomePage",
     appPage: "nearhorizon.near/widget/Index",
   },
+  search: {
+    indexPage: "one.testnet/widget/Search.IndexPage",
+    typeAheadDropdown: "one.testnet/widget/Search.TypeAheadDropdown",
+  },
 };
 
 const MainnetWidgets = {
   image: "mob.near/widget/Image",
-  default: "near/widget/NearOrg.HomePage",
+  default: "near/widget/ActivityPage",
   viewSource: "mob.near/widget/WidgetSource",
-  widgetMetadataEditor: "mob.near/widget/WidgetMetadataEditor",
+  widgetMetadataEditor: "near/widget/WidgetMetadataEditor",
   widgetMetadata: "mob.near/widget/WidgetMetadata",
   profileImage: "mob.near/widget/ProfileImage",
   profileName: "patrick.near/widget/ProfileName",
@@ -51,7 +59,6 @@ const MainnetWidgets = {
   profileInlineBlock: "mob.near/widget/Profile.InlineBlock",
   componentsPage: "near/widget/ComponentsPage",
   peoplePage: "near/widget/PeoplePage",
-  globalSearchPage: "chaotictempest.near/widget/Search",
   notificationButton: "near/widget/NotificationButton",
   profilePage: "near/widget/ProfilePage",
   componentSummary: "near/widget/ComponentSummary",
@@ -59,6 +66,7 @@ const MainnetWidgets = {
   tosCheck: "near/widget/TosCheck",
   tosContent: "adminalpha.near/widget/TosContent",
   wrapper: "near/widget/DIG.Theme",
+  bosDirectory: "onboarder.near/widget/BOSDirectory",
   nearOrg: {
     ecosystemCommunityPage: "near/widget/NearOrg.Ecosystem.CommunityPage",
     ecosystemGetFundingPage: "near/widget/NearOrg.Ecosystem.GetFundingPage",
@@ -71,6 +79,11 @@ const MainnetWidgets = {
     homePage: "nearhorizon.near/widget/HomePage",
     appPage: "nearhorizon.near/widget/Index",
   },
+  search: {
+    indexPage: "near/widget/Search.IndexPage",
+    typeAheadDropdown: "near/widget/Search.TypeAheadDropdown",
+  },
 };
 
-export const Widgets = NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets;
+export const Widgets =
+  NetworkId === "testnet" ? TestnetWidgets : MainnetWidgets;

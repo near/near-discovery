@@ -3,6 +3,9 @@ import * as Accordion from "@radix-ui/react-accordion";
 import classNames from "classnames";
 import "./AccordionMenu.css";
 import CurrentComponent from "../CurrentComponent";
+import { navLinkData } from "../orgLinks";
+import { NavLink } from "react-router-dom";
+import { recordTouchStart } from "../../../../utils/analytics";
 
 const AccordionMenu = (props) => (
   <Accordion.Root className="AccordionRoot" type="single" collapsible>
@@ -11,25 +14,25 @@ const AccordionMenu = (props) => (
       <AccordionContent>
         <ul>
           <ListItem
-            title="Introduction"
-            href="/docs/primitives/overview/introduction"
+            title={navLinkData.components.title}
+            route={navLinkData.components.link}
           >
             <i className="ph-duotone ph-shapes"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.components.description}
           </ListItem>
           <ListItem
-            title="Getting started"
-            href="/docs/primitives/overview/getting-started"
+            title={navLinkData.applications.title}
+            route={navLinkData.applications.link}
           >
-            <i className="ph-duotone ph-circles-four"></i>A quick tutorial to
-            get you up and running with Radix Primitives.
+            <i className="ph-duotone ph-circles-four"></i>
+            {navLinkData.applications.description}
           </ListItem>
           <ListItem
-            title="Gateways"
-            href="/docs/primitives/overview/getting-started"
+            title={navLinkData.gateways.title}
+            route={navLinkData.gateways.link}
           >
-            <i className="ph-duotone ph-spiral"></i>A quick tutorial to get you
-            up and running with Radix Primitives.
+            <i className="ph-duotone ph-spiral"></i>
+            {navLinkData.gateways.description}
           </ListItem>
         </ul>
       </AccordionContent>
@@ -39,17 +42,26 @@ const AccordionMenu = (props) => (
       <AccordionTrigger>Develop</AccordionTrigger>
       <AccordionContent>
         <ul>
-          <ListItem href="https://stitches.dev/" title="Sandbox">
+          <ListItem
+            route={navLinkData.sandbox.link}
+            title={navLinkData.sandbox.title}
+          >
             <i className="ph-duotone ph-code-block"></i>
-            CSS-in-JS with best-in-class developer experience.
+            {navLinkData.sandbox.description}
           </ListItem>
-          <ListItem href="/colors" title="Documentation">
+          <ListItem
+            href={navLinkData.documentation.link}
+            title={navLinkData.documentation.title}
+          >
             <i className="ph-duotone ph-book-open-text"></i>
-            Beautiful, thought-out palettes with auto dark mode.
+            {navLinkData.documentation.description}
           </ListItem>
-          <ListItem href="https://icons.radix-ui.com/" title="Tutorials">
-            <i className="ph-duotone ph-video"></i>A crisp set of 15x15 icons,
-            balanced and consistent.
+          <ListItem
+            href={navLinkData.tutorials.link}
+            title={navLinkData.tutorials.title}
+          >
+            <i className="ph-duotone ph-video"></i>
+            {navLinkData.tutorials.description}
           </ListItem>
         </ul>
         <CurrentComponent {...props} />
@@ -61,81 +73,85 @@ const AccordionMenu = (props) => (
       <Accordion.Content className="AccordionContent">
         <ul>
           <ListItem
-            title="People"
-            href="/docs/primitives/overview/introduction"
+            title={navLinkData.people.title}
+            route={navLinkData.people.link}
           >
             <i className="ph-duotone ph-user-list"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.people.description}
           </ListItem>
           <ListItem
-            title="Groups"
-            href="/docs/primitives/overview/introduction"
+            title={navLinkData.ecosystem.title}
+            route={navLinkData.ecosystem.link}
           >
             <i className="ph-duotone ph-users-three"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.ecosystem.description}
           </ListItem>
           <ListItem
-            title="Ecosystem"
-            href="/ecosystem"
+            title={navLinkData.events.title}
+            route={navLinkData.events.link}
           >
             <i className="ph-duotone ph-globe-hemisphere-west"></i>
-            Build high-quality, accessible design systems and web apps.
-          </ListItem>
-          <ListItem
-            title="Events"
-            href="/docs/primitives/overview/introduction"
-          >
-            <i className="ph-duotone ph-calendar-blank"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.events.description}
           </ListItem>
         </ul>
       </Accordion.Content>
     </Accordion.Item>
 
-    <Accordion.Item className="AccordionItem" value="item-4">
-      <AccordionTrigger>Solutions</AccordionTrigger>
-      <Accordion.Content className="AccordionContent">
-        <ul className="List two">
-          <ListItem
-            title="Developers"
-            href="/docs/primitives/overview/introduction"
-          >
-            <i className="ph-duotone ph-code"></i>
-            Build high-quality, accessible design systems and web apps.
-          </ListItem>
-          <ListItem
-            title="Founders"
-            href="/docs/primitives/overview/introduction"
-          >
-            <i className="ph-duotone ph-potted-plant"></i>
-            Build high-quality, accessible design systems and web apps.
-          </ListItem>
-          <ListItem
-            title="Early Adopters"
-            href="/docs/primitives/overview/introduction"
-          >
-            <i className="ph-duotone ph-leaf"></i>
-            Build high-quality, accessible design systems and web apps.
-          </ListItem>
-        </ul>
-      </Accordion.Content>
-    </Accordion.Item>
+    {!props.signedIn && (
+      <Accordion.Item className="AccordionItem" value="item-4">
+        <AccordionTrigger>Solutions</AccordionTrigger>
+        <Accordion.Content className="AccordionContent">
+          <ul className="List two">
+            <ListItem
+              title={navLinkData.developers.title}
+              route={navLinkData.developers.link}
+            >
+              <i className="ph-duotone ph-code"></i>
+              {navLinkData.developers.description}
+            </ListItem>
+            <ListItem
+              title={navLinkData.founders.title}
+              route={navLinkData.founders.link}
+            >
+              <i className="ph-duotone ph-potted-plant"></i>
+              {navLinkData.founders.description}
+            </ListItem>
+            <ListItem
+              title={navLinkData.earlyAdopters.title}
+              route={navLinkData.earlyAdopters.link}
+            >
+              <i className="ph-duotone ph-leaf"></i>
+              {navLinkData.earlyAdopters.description}
+            </ListItem>
+          </ul>
+        </Accordion.Content>
+      </Accordion.Item>
+    )}
 
     <Accordion.Item className="AccordionItem" value="item-5">
       <AccordionTrigger>More</AccordionTrigger>
       <Accordion.Content className="AccordionContent">
         <ul>
-          <ListItem title="About" href="/docs/primitives/overview/introduction">
+          <ListItem
+            title={navLinkData.about.title}
+            route={navLinkData.about.link}
+          >
             <i className="ph-duotone ph-info"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.about.description}
           </ListItem>
-          <ListItem title="News" href="/docs/primitives/overview/introduction">
+          <ListItem
+            title={navLinkData.news.title}
+            route={navLinkData.news.link}
+          >
             <i className="ph-duotone ph-newspaper"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.news.description}
           </ListItem>
-          <ListItem title="Learn" href="/docs/primitives/overview/introduction">
+          <ListItem
+            title={navLinkData.learn.title}
+            route={navLinkData.learn.link}
+          >
             <i className="ph-duotone ph-books"></i>
-            Build high-quality, accessible design systems and web apps.
+            {navLinkData.learn.description}
           </ListItem>
         </ul>
       </Accordion.Content>
@@ -145,11 +161,15 @@ const AccordionMenu = (props) => (
 
 const AccordionTrigger = React.forwardRef(
   ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Header className="AccordionHeader">
+    <Accordion.Header
+      className="AccordionHeader"
+      onTouchStart={(e) => recordTouchStart(e, "navmenu-touchstart")}
+    >
       <Accordion.Trigger
         className={classNames("AccordionTrigger", className)}
         {...props}
         ref={forwardedRef}
+        onTouchStart={recordTouchStart}
       >
         {children}
         <i className="ph ph-caret-down AccordionChevron" aria-hidden></i>
@@ -171,18 +191,37 @@ const AccordionContent = React.forwardRef(
 );
 
 const ListItem = React.forwardRef(
-  ({ className, children, title, ...props }, forwardedRef) => (
-    <li>
-      <a
-        className={classNames("ListItemLink", className)}
-        {...props}
-        ref={forwardedRef}
-      >
-        <div className="ListItemHeading">{title}</div>
-        <p className="ListItemText">{children}</p>
-      </a>
-    </li>
-  )
+  ({ className, children, title, ...props }, forwardedRef) => {
+    if (props.route) {
+      return (
+        <li onTouchStart={(e) => recordTouchStart(e)}>
+          <NavLink
+            className={classNames("ListItemLink", className)}
+            ref={forwardedRef}
+            to={props.route}
+          >
+            <div className="ListItemHeading">{title}</div>
+            <p className="ListItemText">{children}</p>
+          </NavLink>
+        </li>
+      );
+    } else {
+      return (
+        <li onTouchStart={(e) => recordTouchStart(e)}>
+          <a
+            className={classNames("ListItemLink", className)}
+            {...props}
+            ref={forwardedRef}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="ListItemHeading">{title}</div>
+            <p className="ListItemText">{children}</p>
+          </a>
+        </li>
+      );
+    }
+  }
 );
 
 export default AccordionMenu;

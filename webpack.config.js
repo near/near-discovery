@@ -16,7 +16,7 @@ module.exports = function (env) {
     {
       mode,
       experiments: {
-        topLevelAwait: true
+        topLevelAwait: true,
       },
       entry: `${paths.srcPath}/index.js`,
       output: {

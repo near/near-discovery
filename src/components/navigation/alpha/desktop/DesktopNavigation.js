@@ -12,6 +12,7 @@ import { UserDropdown } from "./UserDropdown";
 import image from "../icons/search.svg";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { recordEvent } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -120,14 +121,17 @@ export function DesktopNavigation(props) {
             onSubmit={(e) => {
               e.preventDefault();
               history.push(
-                `/${props.widgets?.globalSearchPage}?term=${e.target[0].value}`
+                `/${props.widgets?.search.indexPage}?term=${e.target[0].value}`
               );
             }}
           >
             <input
               placeholder="Search"
               style={{ backgroundImage: `url(${image})` }}
-              onFocus={() => setSearchInputFocus(true)}
+              onFocus={() => {
+                setSearchInputFocus(true);
+                recordEvent("click-navigation-search");
+              }}
               onBlur={() => setSearchInputFocus(false)}
             />
           </form>

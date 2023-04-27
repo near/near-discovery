@@ -1,16 +1,17 @@
 import React from "react";
-import { Layout, Tab } from "../utils/const";
 
-export default ({ setRenderCode, layout, setTab, codeVisible }) => (
-  <button
-    className="btn btn-outline-success"
-    onClick={() => {
-      setRenderCode(codeVisible);
-      if (layout === Layout.Tabs) {
-        setTab(Tab.Widget);
-      }
-    }}
-  >
-    Render Preview
-  </button>
-);
+export default ({ refs, handleRender, disable }) => {
+  return (
+    <div ref={refs.step9}>
+      <div ref={refs.step4}>
+        <button
+          disabled={disable.renderPreviewButton}
+          className="btn btn-outline-success"
+          onClick={handleRender}
+        >
+          Render Preview
+        </button>
+      </div>
+    </div>
+  );
+};

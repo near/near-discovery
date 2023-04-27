@@ -10,10 +10,11 @@ const NavigationSub = ({
   accountId,
   tab,
   widgetPath,
-  setRenderCode,
   setTab,
   setLayoutState,
-  codeVisible,
+  refs,
+  handleRender,
+  disable,
 }) => {
   const onLayoutChange = (e) => {
     const layout = e.target.value;
@@ -42,18 +43,19 @@ const NavigationSub = ({
         {(Tab.Widget === tab || layout === Layout.Split) && (
           <div className="d-flex justify-content-end me-2">
             <RenderPreviewButton
-              setRenderCode={setRenderCode}
-              layout={layout}
-              setTab={setTab}
-              codeVisible={codeVisible}
+              refs={refs}
+              handleRender={handleRender}
+              disable={disable}
             />
           </div>
         )}
         {path?.type === "widget" && accountId && (
-          <OpenInNewTabButton widgetPath={widgetPath} />
+          <OpenInNewTabButton widgetPath={widgetPath} disable={disable} />
         )}
+
         <div className="btn-group" role="group" aria-label="Layout selection">
           <input
+            disabled={disable.changeViewButton}
             type="radio"
             className="btn-check"
             name="layout-radio"
@@ -69,6 +71,7 @@ const NavigationSub = ({
           </label>
 
           <input
+            disabled={disable.changeViewButton}
             type="radio"
             className="btn-check"
             name="layout-radio"

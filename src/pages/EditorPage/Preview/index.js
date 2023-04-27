@@ -1,7 +1,6 @@
 import React from "react";
 import { Widget } from "near-social-vm";
 import { Tab, Layout } from "../utils/const";
-import RenderPreviewButton from "../buttons/RenderPreviewButton";
 
 const Preview = ({
   tab,
@@ -10,9 +9,7 @@ const Preview = ({
   jpath,
   parsedWidgetProps,
   isModule,
-  setRenderCode,
-  setTab,
-  codeVisible,
+  widgets,
 }) => (
   <div
     className={`${
@@ -53,9 +50,17 @@ const Preview = ({
                 }}
               >
                 <Widget
-                  key={`preview-${jpath}`}
-                  code={renderCode}
-                  props={parsedWidgetProps}
+                  key={widgets.wrapper}
+                  src={widgets.wrapper}
+                  props={{
+                    children: (
+                      <Widget
+                        key={`preview-${jpath}`}
+                        code={renderCode}
+                        props={parsedWidgetProps}
+                      />
+                    ),
+                  }}
                 />
               </div>
             ) : (
@@ -69,12 +74,13 @@ const Preview = ({
                     justifyContent: "center",
                   }}
                 >
-                  <RenderPreviewButton
+                  {/* <RenderPreviewButton
                     setRenderCode={setRenderCode}
                     layout={layout}
                     setTab={setTab}
                     codeVisible={codeVisible}
-                  />
+                    refs={refs}
+                  /> */}
                 </div>
               )
             )}

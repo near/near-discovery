@@ -1,14 +1,14 @@
-import React, { useCallback } from "react";
-import { Widget, useNear } from "near-social-vm";
-
-import AccordionMenu from "./AccordionMenu";
+import React from "react";
+import styled from "styled-components";
 import { Close } from "../../../icons/Close";
+import image from "../icons/search.svg";
 import NearLogotype from "../icons/near-logotype.svg";
+import { useNear } from "near-social-vm";
+import AccordionMenu from "./AccordionMenu";
 import { NotificationWidget } from "../NotificationWidget";
 import UserDropdownMenu from "../wrapper/desktop/UserDropdownMenu";
-import image from "../icons/search.svg";
-import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { recordClick, flushEvents } from "../../../../utils/analytics";
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -30,7 +30,7 @@ const StyledMenu = styled.div`
   }
 
   .left-side {
-    flex: 80;
+    flex: 90;
     background-color: white;
     position: relative;
     display: flex;
@@ -54,6 +54,8 @@ const StyledMenu = styled.div`
 
     svg {
       margin: 0;
+      min-width: 24px;
+      min-height: 24px;
 
       path {
         stroke: #1b1b18;
@@ -62,6 +64,7 @@ const StyledMenu = styled.div`
   }
 
   .search-btn {
+    all: unset;
     background-repeat: no-repeat;
     background-position: 12px 12px;
     padding-left: 44px;
@@ -108,6 +111,7 @@ const StyledMenu = styled.div`
     .create-account {
       background-color: #161615;
       color: white;
+      border: 0;
     }
   }
 
@@ -152,9 +156,17 @@ const StyledMenu = styled.div`
 export function MenuLeft(props) {
   const near = useNear();
   const history = useHistory();
-  const withdrawStorage = useCallback(async () => {
-    await near.contract.storage_withdraw({}, undefined, "1");
-  }, [near]);
+
+  async function clearAnalytics(e) {
+    recordClick(e);
+    await flushEvents();
+  }
+
+  function handleSignIn(event) {
+    clearAnalytics(event);
+    props.onCloseMenu();
+    props.requestSignIn();
+  }
 
   return (
     <StyledMenu className={props.showMenu ? "show" : ""}>
@@ -162,11 +174,15 @@ export function MenuLeft(props) {
         <button className="close-button" onClick={props.onCloseMenu}>
           <Close />
         </button>
-        <img className="near-logotype" src={NearLogotype} />
+        <img
+          className="near-logotype"
+          src={NearLogotype}
+          onClick={() => history.push("/")}
+        />
         <button
           className="search-btn"
           style={{ backgroundImage: `url(${image})` }}
-          onClick={() => history.push(`/${props.widgets?.globalSearchPage}`)}
+          onClick={() => history.push(`/${props.widgets?.search.indexPage}`)}
         >
           Search NEAR
         </button>
@@ -174,19 +190,14 @@ export function MenuLeft(props) {
 
         {!props.signedIn && (
           <div className="bottom-btns">
-            <button
-              className="sign-in"
-              onClick={() => {
-                props.onCloseMenu();
-                props.requestSignIn();
-              }}
-            >
+            <button className="sign-in" onClick={handleSignIn}>
               Sign in
             </button>
             <button
               className="create-account"
-              onClick={() => {
-                history.push('/signup')
+              onClick={(event) => {
+                clearAnalytics(event);
+                history.push("/signup");
               }}
             >
               Create Account

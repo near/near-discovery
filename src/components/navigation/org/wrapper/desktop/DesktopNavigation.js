@@ -1,13 +1,16 @@
-import { Link, useHistory } from "react-router-dom";
-import React, { useEffect, useState } from "react";
-
+import React, { useState, useEffect, useRef } from "react";
 import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
-import NearLogotype from "../../icons/near-logotype.svg";
-import { NotificationWidget } from "../../NotificationWidget";
-import { Return } from "../../icons/Return";
-import UserDropdownMenu from "./UserDropdownMenu";
-import image from "../../icons/search.svg";
 import styled from "styled-components";
+import NearLogotype from "../../icons/near-logotype.svg";
+import LogoBlack from "../../icons/logo-black.svg";
+import { Link, useHistory } from "react-router-dom";
+import image from "../../icons/search.svg";
+import { Return } from "../../icons/Return";
+import { recordEvent } from "../../../../../utils/analytics";
+import { NotificationWidget } from "../../NotificationWidget";
+import UserDropdownMenu from "./UserDropdownMenu";
+import TypeAheadDropdown from "./TypeAheadDropdown";
+import { recordClick, flushEvents } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -19,8 +22,27 @@ const StyledNavigation = styled.div`
   padding-top: 16px;
   padding-bottom: 16px;
 
+  button {
+    border: 0;
+  }
+
   &.border-bottom {
     border-bottom: 1px solid #e3e3e0;
+  }
+
+  a {
+    :hover {
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+
+  img {
+    width: 110px;
+    &.logo-only {
+      width: 27px;
+      height: 27px;
+    }
   }
 
   .container {
@@ -35,6 +57,7 @@ const StyledNavigation = styled.div`
 
   .form-wrapper {
     position: relative;
+    z-index: 10;
 
     input {
       background-repeat: no-repeat;
@@ -83,6 +106,7 @@ const StyledNavigation = styled.div`
       padding: 0 20px;
       font-size: 14px;
       font-weight: 600;
+      white-space: nowrap;
     }
 
     .sign-in {
@@ -112,10 +136,32 @@ const StyledNavigation = styled.div`
   }
 `;
 
+const TypeAheadDropdownContainer = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 31px;
+  margin-top: 10px;
+`;
+
 const DesktopNavigation = (props) => {
-  const [searchInputFocus, setSearchInputFocus] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const history = useHistory();
+  const [searchTerm, setSearchTerm] = useState("");
+  const searchRef = useRef(null);
+  const [searchIsFocused, _setSearchIsFocused] = useState(false);
+  const showTypeAheadDropdown = searchIsFocused && !!searchTerm;
+  let searchFocusTimeout = useRef();
+
+  const setSearchIsFocused = (isFocused) => {
+    if (isFocused) {
+      _setSearchIsFocused(true);
+      clearTimeout(searchFocusTimeout.current);
+    } else {
+      searchFocusTimeout.current = setTimeout(() => {
+        _setSearchIsFocused(false);
+      }, 100);
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -133,41 +179,73 @@ const DesktopNavigation = (props) => {
     };
   }, []);
 
+  async function clearAnalytics(e) {
+    recordClick(e);
+    await flushEvents();
+  }
+
+  function handleSignIn(event) {
+    clearAnalytics(event);
+    props.requestSignIn();
+  }
+
   return (
     <StyledNavigation className={`${scrolled ? "border-bottom" : ""}`}>
       <div className="container">
         <Link to="/">
-          <img src={NearLogotype} />
+          <img
+            className={props.signedIn ? "logo-only" : ""}
+            src={props.signedIn ? LogoBlack : NearLogotype}
+          />
         </Link>
         <div className="form-wrapper">
           <form
             onSubmit={(e) => {
               e.preventDefault();
               history.push(
-                `/${props.widgets?.globalSearchPage}?term=${e.target[0].value}`
+                `/${props.widgets?.search.indexPage}?term=${e.target[0].value}`
               );
             }}
           >
             <input
-              placeholder="Search NEAR"
+              placeholder="Search"
               style={{ backgroundImage: `url(${image})` }}
-              onFocus={() => setSearchInputFocus(true)}
-              onBlur={() => setSearchInputFocus(false)}
+              onFocus={() => {
+                setSearchIsFocused(true);
+                recordEvent("click-navigation-search");
+              }}
+              onBlur={() => {
+                setSearchIsFocused(false);
+              }}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              ref={searchRef}
             />
           </form>
-          {searchInputFocus && <Return />}
+
+          {showTypeAheadDropdown && (
+            <TypeAheadDropdownContainer>
+              <TypeAheadDropdown
+                term={searchTerm}
+                focusChange={setSearchIsFocused}
+                widgetSrc={props.widgets.search.typeAheadDropdown}
+              />
+            </TypeAheadDropdownContainer>
+          )}
+
+          {searchIsFocused && <Return />}
         </div>
         <MainNavigationMenu {...props} />
         <div className="right-side-actions">
           {!props.signedIn && (
             <>
-              <button className="sign-in" onClick={props.requestSignIn}>
+              <button className="sign-in" onClick={handleSignIn}>
                 Sign In
               </button>
               <button
                 className="create-account"
-                onClick={() => {
-                  history.push("/signup")
+                onClick={(event) => {
+                  clearAnalytics(event);
+                  history.push("/signup");
                 }}
               >
                 Create Account

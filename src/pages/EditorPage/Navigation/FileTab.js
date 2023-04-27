@@ -7,7 +7,7 @@ const TopMenu = styled.div`
   display: flex;
   color: #11181c;
   height: 40px;
-  margin: 0 8px 0 0;
+  margin: 0 8px 8px 0;
 
   &&& > a {
     border: 1px solid #e5e5e5;
@@ -64,40 +64,42 @@ const TopMenu = styled.div`
   .close {
     width: 28px;
     height: 28px;
+    margin-top: -3px;
+    margin-left: 4px;
   }
 `;
 
-export default ({ file, closeFile }) => {
+export default ({ file, closeFile, disable }) => {
   const jpath = JSON.stringify({ type: file.type, name: file.name });
   const widgetName = file?.name?.split("/")[0];
 
   const dotRed = !file.savedOnChain || file.changesMade;
 
   return (
-    <Nav.Item>
-      <TopMenu>
-        <Nav.Link className="text-decoration-none d-flex" eventKey={jpath}>
-          <div className="d-flex">
-            <div className={`dot ${dotRed ? `dot-red` : ``}`}></div>
-            <div>{widgetName}</div>
-            {file.isDraft && <div className="draft">Draft</div>}
-          </div>
-          <button
-            className={`close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary`}
-            style={{
-              marginTop: "-3px",
-              marginBottom: "0px",
-            }}
-            onClick={(e) => {
-              e.preventDefault();
-              e.stopPropagation();
-              closeFile({ type: file.type, name: file.name });
-            }}
-          >
-            <i className="bi bi-x"></i>
-          </button>
-        </Nav.Link>
-      </TopMenu>
-    </Nav.Item>
+    <div style={{ position: "relative" }}>
+      <div className={disable.fileTab ? "onboardingDisable" : ""}>
+        <Nav.Item>
+          <TopMenu>
+            <Nav.Link className="text-decoration-none d-flex" eventKey={jpath}>
+              <div className="d-flex">
+                <div className={`dot ${dotRed ? `dot-red` : ``}`}></div>
+                <div>{widgetName}</div>
+                {file.isDraft && <div className="draft">Draft</div>}
+              </div>
+              <button
+                className="close btn btn-lg border-0 py-0 px-1 ms-1 rounded-circle btn-outline-secondary"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  closeFile({ type: file.type, name: file.name });
+                }}
+              >
+                <i className="bi bi-x" />
+              </button>
+            </Nav.Link>
+          </TopMenu>
+        </Nav.Item>
+      </div>
+    </div>
   );
 };
