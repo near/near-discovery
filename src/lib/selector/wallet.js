@@ -51,15 +51,18 @@ export class FastAuthWallet {
     async signIn() {
         if (this.activeAccountId) return
         try {
-            const accountCreationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
-            if (!accountCreationData.privateKey || !accountCreationData.accountId || !accountCreationData.isCreated) return;
+            // TODO: Update to use getKeys. No more key private key in local storage
+            // const accountCr
+            // eationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
+            // if (!accountCreationData.privateKey || !accountCreationData.accountId || !accountCreationData.isCreated) return;
 
-            const keyPair = nearAPI.KeyPair.fromString(accountCreationData.privateKey);
-            await this.keyStore.setKey(this.networkId, accountCreationData.accountId, keyPair);
+            // const keyPair = nearAPI.KeyPair.fromString(accountCreationData.privateKey);
+            // await this.keyStore.setKey(this.networkId, accountCreationData.accountId, keyPair);
 
-            const accountObj = new nearAPI.Account(this.near.connection, accountCreationData.accountId);
-            this._setActiveAccountId(accountCreationData.accountId);
-            return [accountObj];
+            // const accountObj = new nearAPI.Account(this.near.connection, accountCreationData.accountId);
+            // this._setActiveAccountId(accountCreationData.accountId);
+            // return [accountObj];
+            return []
 
 
         } catch (e) {
