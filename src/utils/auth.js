@@ -28,12 +28,10 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
 export const handleCreateAccount = async (accountId, email, isRecovery) => {
     const keyPair = await createKey(email);
     const publicKey = keyPair.getPublicKey().toString();
-    const privateKey = keyPair.toString();
 
     if (!!publicKey) {
         const accountDataStash = {
             accountId,
-            privateKey,
             isCreated: false,
         }
         window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify(accountDataStash));
