@@ -6,56 +6,82 @@ const {
 
 import BN from "bn.js";
 
-import { networks } from '../../data/widgets';
+import { networks } from "../../data/widgets";
 
 export class FastAuthWallet {
-    constructor({ signInContractId, networkId, ...rest }) {
-        this.networkId = networkId
-        this.signInContractId = signInContractId;
-        this.activeAccountId = window.localStorage.getItem('fast-auth:activeAccountId') || '';
+  constructor({ signInContractId, networkId, ...rest }) {
+    this.networkId = networkId;
+    this.signInContractId = signInContractId;
+    this.activeAccountId =
+      window.localStorage.getItem("fast-auth:activeAccountId") || "";
 
-        this.keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
-        this.near = new nearAPI.Near({
-            ...networks[networkId],
-            deps: { keyStore: this.keyStore },
-        });
-    }
+    this.keyStore = new nearAPI.keyStores.BrowserLocalStorageKeyStore();
+    this.near = new nearAPI.Near({
+      ...networks[networkId],
+      deps: { keyStore: this.keyStore },
+    });
+  }
 
-    getContractId() {
-        return this.signInContractId;
-    }
+  getContractId() {
+    return this.signInContractId;
+  }
 
-    getAccountId() {
-        return this.activeAccountId;
-    }
+  getAccountId() {
+    return this.activeAccountId;
+  }
 
-    async isSignedIn() {
-        return !!this.activeAccountId;
-    }
+  async isSignedIn() {
+    return !!this.activeAccountId;
+  }
 
   async signIn() {
-      if (this.activeAccountId) return
-      try {
-          // TODO: Update to use getKeys. No more key private key in local storage
-          // const accountCr
-          // eationData = JSON.parse(window.localStorage.getItem('fast-auth:account-creation-data') || JSON.stringify({}));
-          // if (!accountCreationData.privateKey || !accountCreationData.accountId || !accountCreationData.isCreated) return;
+    console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in!");
+    if (this.activeAccountId) return;
+    console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 2!");
 
-          // const keyPair = nearAPI.KeyPair.fromString(accountCreationData.privateKey);
-          // await this.keyStore.setKey(this.networkId, accountCreationData.accountId, keyPair);
+    const accountCreationData = JSON.parse(
+      window.localStorage.getItem("fast-auth:account-creation-data") ||
+        JSON.stringify({})
+    );
 
-          // const accountObj = new nearAPI.Account(this.near.connection, accountCreationData.accountId);
-          // this._setActiveAccountId(accountCreationData.accountId);
-          // return [accountObj];
-          return []
-
-
-      } catch (e) {
-          console.log('e: ', e)
+    try {
+      if (
+        !accountCreationData.limitedAccessKey ||
+        !accountCreationData.isCreated
+      ) {
+        return;
       }
+
+      console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 3!");
+
+      const keyPair = nearAPI.KeyPair.fromString(
+        accountCreationData.limitedAccessKey
+      );
+      await this.keyStore.setKey(
+        this.networkId,
+        accountCreationData.accountId,
+        keyPair
+      );
+
+      console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 4!");
+
+      const accountObj = new nearAPI.Account(
+        this.near.connection,
+        accountCreationData.accountId
+      );
+
+      console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 4!");
+
+      this._setActiveAccountId(accountCreationData.accountId);
+      return [accountObj];
+    } catch (e) {
+      console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in ERROR", e);
     }
+  }
 
   async signOut() {
+    console.log(">>>>>>>>>>>>>>>>>>>>>", "signing OUT");
+
     if (this.activeAccountId == undefined || this.activeAccountId == null) {
       throw new Error("Wallet is already signed out");
     }
