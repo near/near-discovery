@@ -12,6 +12,7 @@ import styled from "styled-components";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import { NetworkId } from "../data/widgets";
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
@@ -38,7 +39,7 @@ const CreateAccount = () => {
     try {
       if (!formValues?.username) return;
 
-      const response = await fetch("https://rpc.testnet.near.org", {
+      const response = await fetch(`https://rpc.${NetworkId}.near.org`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
