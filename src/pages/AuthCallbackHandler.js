@@ -37,6 +37,7 @@ const AuthCallbackHandler = () => {
                         const data = {
                             ...(accountId && accountId.includes('.') ? {near_account_id: accountId} : {}),
                             public_key: publicKey,
+                            // limited_access_key:'',???
                             oidc_token: user.accessToken
                         };
 
@@ -61,7 +62,7 @@ const AuthCallbackHandler = () => {
                                 const res = await response.json()
                                 const accId = accountCreationData.accountId || res.near_account_id
                                 // TODO: Check if account ID matches the one from email
-                                if (!accountCreationData.privateKey || !accId) throw ('Could not find account creation data');
+                                if (!accountCreationData.publicKey || !accId) throw ('Could not find account creation data');
 
                                 window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify({
                                     ...accountCreationData,
