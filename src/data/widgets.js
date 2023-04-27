@@ -70,14 +70,10 @@ const TestnetWidgets = {
   tosContent: "one.testnet/widget/TosContent",
   wrapper: "one.testnet/widget/DIG.Theme",
   nearOrg: {
-    ecosystemCommunityPage:
-      "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
-    ecosystemGetFundingPage:
-      "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
-    ecosystemOverviewPage:
-      "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
-    ecosystemWorkAndEarnPage:
-      "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
+    ecosystemCommunityPage: "discom.testnet/widget/NearOrg.Ecosystem.CommunityPage",
+    ecosystemGetFundingPage: "discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage",
+    ecosystemOverviewPage: "discom.testnet/widget/NearOrg.Ecosystem.OverviewPage",
+    ecosystemWorkAndEarnPage: "discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage",
     homePage: "discom.testnet/widget/NearOrg.HomePage",
     usePage: "discom.testnet/widget/NearOrg.UsePage",
   },
