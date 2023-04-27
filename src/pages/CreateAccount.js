@@ -1,13 +1,18 @@
-import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from '../utils/auth';
-import { NetworkId, networks } from '../data/widgets';
-import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail, parseURLParams } from '../utils/generic';
+import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from "../utils/auth";
+import { NetworkId, networks } from "../data/widgets";
+import {
+  accountAddressPatternNoSubaccount,
+  emailPattern,
+  getEmailId,
+  isValidEmail,
+  parseURLParams,
+} from "../utils/generic";
 
 import React from "react";
 import styled from "styled-components";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
-import { NetworkId } from "../data/widgets";
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
