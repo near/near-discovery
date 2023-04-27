@@ -4,7 +4,9 @@ import NavigationWrapper from "../components/navigation/org/NavigationWrapper";
 import IframeResizer from "iframe-resizer-react";
 import { useHashUrlBackwardsCompatibility } from "../hooks/useHashUrlBackwardsCompatibility";
 import { Helmet } from "react-helmet";
+import { recordPageView, recordClick } from "../utils/analytics";
 import { useQuery } from "../hooks/useQuery";
+import { useParams } from "react-router-dom";
 
 export default function NearOrgPage(props) {
   // will always be empty in prod
@@ -12,8 +14,10 @@ export default function NearOrgPage(props) {
   const [redirectMap, setRedirectMap] = useState();
   const [widgetProps, setWidgetProps] = useState({});
   const query = useQuery();
+  const { subpath } = useParams();
 
   useHashUrlBackwardsCompatibility();
+  zE("webWidget", "hide");
 
   // fetch local component versions if a local loader
   // is provided. must be provided as {components: { <path>: { code : <code>}}}
@@ -35,11 +39,7 @@ export default function NearOrgPage(props) {
   }, []);
 
   useEffect(() => {
-    analytics("view", {
-      props: {
-        widget: props.src,
-      },
-    });
+    recordPageView(props.src);
     props.setWidgetSrc({
       edit: props.src,
       view: props.src,
@@ -62,10 +62,10 @@ export default function NearOrgPage(props) {
       )}
       <NavigationWrapper {...props} />
 
-      <div>
+      <div onPointerUp={recordClick}>
         {props.iframeSrc ? (
           <IframeResizer
-            src={props.iframeSrc}
+            src={props.iframeSrc + (subpath ? "/" + subpath : "")}
             style={{ width: "1px", minWidth: "100%" }}
             checkOrigin={false}
           />

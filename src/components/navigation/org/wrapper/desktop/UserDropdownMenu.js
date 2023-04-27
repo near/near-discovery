@@ -7,6 +7,7 @@ import { useHistory } from "react-router-dom";
 
 const StyledDropdown = styled.div`
   > button {
+    all: unset;
     display: flex;
     align-items: center;
     border-radius: 50px;
