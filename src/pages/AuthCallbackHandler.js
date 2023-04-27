@@ -1,5 +1,6 @@
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 
+import { MPC_RECOVERY_URL } from '../utils/auth';
 import React from 'react';
 import { firebaseAuth } from '../utils/firebase';
 import styled from 'styled-components';
@@ -49,7 +50,7 @@ const AuthCallbackHandler = () => {
                             headers
                         };
 
-                        await fetch(`https://mpc-recovery-7tk2cmmtcq-ue.a.run.app/${isRecovery ? 'add_key' : 'new_account'}`, options)
+                        await fetch(`${MPC_RECOVERY_URL}/${isRecovery ? 'add_key' : 'new_account'}`, options)
                             .then(async (response) => {
                                 if (!response.ok) {
                                     console.log(response)
