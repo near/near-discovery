@@ -6,6 +6,8 @@ const TestnetDomains = {
 
 export const NetworkId =
   window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const signInContractId =
+  NetworkId === "testnet" ? "v1.social08.testnet" : "social.near";
 
 export const networks = {
   mainnet: {
