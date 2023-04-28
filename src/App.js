@@ -245,7 +245,7 @@ function App(props) {
               relayerUrl:
                 NetworkId === "testnet"
                   ? "http://34.70.226.83:3030/relay"
-                  : "http://near-relayer-mainnet.api.pagoda.co/relay",
+                  : "https://near-relayer-mainnet.api.pagoda.co/relay",
             }),
             setupKeypom({
               trialBaseUrl:
