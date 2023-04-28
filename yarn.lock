@@ -2519,10 +2519,10 @@
     depd "^2.0.0"
     near-abi "0.1.1"
 
-"@near-js/biometric-ed25519@^0.0.6":
-  version "0.0.6"
-  resolved "https://registry.yarnpkg.com/@near-js/biometric-ed25519/-/biometric-ed25519-0.0.6.tgz#c576cc97a6b6c597cc7b66be65a94d540b1aa28a"
-  integrity sha512-3Mgo+Y7x2z/3VLax3fLWJQCRpXI8nfKe3DSoJZIsQUn7T1kJDcQgtpKGFPouCHOq6lr/yT/+nDDC+tXxdBNaxw==
+"@near-js/biometric-ed25519@^0.0.9":
+  version "0.0.9"
+  resolved "https://registry.yarnpkg.com/@near-js/biometric-ed25519/-/biometric-ed25519-0.0.9.tgz#8e71a8a9c828aa0ea99d255747f2083a6b6032c2"
+  integrity sha512-6LffKcgj2a7Igs2Ca03GLKsl+2e8upMQ/WPf6NFYFeTvH3UxqcO/0iwqv+EGfbh5NFiBIBh7E3Xj2i1KVX2KEA==
   dependencies:
     "@aws-crypto/sha256-js" "^4.0.0"
     "@hexagon/base64" "^1.1.26"

@@ -6,7 +6,7 @@ import { findValidKeyPair, handleCreateAccount } from '../utils/auth';
 import styled from 'styled-components';
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form';
-import { getKeys } from '../biometric-ed25519/src'
+import { getKeys } from '@near-js/biometric-ed25519'
 
 const SignIn = ({ requestSignInWithWallet }) => {
   const history = useHistory();

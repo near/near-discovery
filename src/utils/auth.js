@@ -1,6 +1,6 @@
 import { NetworkId } from '../data/widgets';
 import { base_encode } from 'near-api-js/lib/utils/serialize';
-import { createKey } from '../biometric-ed25519/src';
+import { createKey } from '@near-js/biometric-ed25519';
 import { firebaseAuth } from './firebase';
 import { sendSignInLinkToEmail } from 'firebase/auth';
 
