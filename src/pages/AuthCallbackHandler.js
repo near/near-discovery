@@ -49,7 +49,7 @@ const AuthCallbackHandler = () => {
                   {
                     public_key: limitedAccessKey.getPublicKey().toString(),
                     receiver_id: signInContractId,
-                    allowance: "2500000000000",
+                    allowance: "250000000000000",
                     method_names: "",
                   },
                 ],
