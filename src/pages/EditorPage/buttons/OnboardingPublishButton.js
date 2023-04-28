@@ -1,16 +1,20 @@
 import React from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-export default ({ currentStep, refs, requestSignIn, disable }) => (
-  <div ref={refs.step10} style={{ height: "38px" }}>
-    <button
-      className="btn btn-primary"
-      disabled={currentStep !== 10 || disable.onboardingPublishButton}
-      onClick={() => {
-        console.log("Redirect?");
-        requestSignIn();
-      }}
-    >
-      Publish
-    </button>
-  </div>
-);
+export default ({ currentStep, refs, requestSignIn, disable }) => {
+  const history = useHistory();
+
+  return (
+    <div ref={refs.step10} style={{ height: "38px" }}>
+      <button
+        className="btn btn-primary"
+        disabled={currentStep !== 10 || disable.onboardingPublishButton}
+        onClick={() => {
+          history.push("/signup");
+        }}
+      >
+        Publish
+      </button>
+    </div>
+  );
+};
