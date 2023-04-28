@@ -9,7 +9,7 @@ import BN from "bn.js";
 import { networks } from "../../data/widgets";
 
 export class FastAuthWallet {
-  constructor({ signInContractId, networkId, ...rest }) {
+  constructor({ signInContractId, networkId, relayerUrl, ...rest }) {
     this.networkId = networkId;
     this.signInContractId = signInContractId;
     this.activeAccountId =
@@ -20,6 +20,7 @@ export class FastAuthWallet {
       ...networks[networkId],
       deps: { keyStore: this.keyStore },
     });
+    this.relayerUrl = relayerUrl;
   }
 
   getContractId() {
