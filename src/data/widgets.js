@@ -6,6 +6,29 @@ const TestnetDomains = {
 
 export const NetworkId =
   window.location.hostname in TestnetDomains ? "testnet" : "mainnet";
+export const signInContractId =
+  NetworkId === "testnet" ? "v1.social08.testnet" : "social.near";
+
+export const networks = {
+  mainnet: {
+    networkId: "mainnet",
+    viewAccountId: "near",
+    nodeUrl: "https://rpc.mainnet.near.org",
+    walletUrl: "https://wallet.near.org",
+    helperUrl: "https://helper.mainnet.near.org",
+  },
+  testnet: {
+    networkId: "testnet",
+    viewAccountId: "testnet",
+    nodeUrl: "https://rpc.testnet.near.org",
+    walletUrl: "https://wallet.testnet.near.org",
+    helperUrl: "https://helper.testnet.near.org",
+  },
+  localnet: {
+    networkId: "localnet",
+    viewAccountId: "test.near",
+  },
+};
 
 const TestnetWidgets = {
   image: "eugenethedream/widget/Image",
@@ -19,7 +42,6 @@ const TestnetWidgets = {
   componentsPage: "one.testnet/widget/ComponentsPage",
   peoplePage: "one.testnet/widget/PeoplePage",
   notificationButton: "one.testnet/widget/NotificationButton",
-  profilePage: "one.testnet/widget/ProfilePage",
   componentSummary: "one.testnet/widget/ComponentSummary",
   notificationsPage: "one.testnet/widget/NotificationsPage",
   tosCheck: "one.testnet/widget/TosCheck",
