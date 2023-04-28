@@ -36,9 +36,7 @@ export class FastAuthWallet {
   }
 
   async signIn() {
-    console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in!");
     if (this.activeAccountId) return;
-    console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 2!");
 
     const accountCreationData = JSON.parse(
       window.localStorage.getItem("fast-auth:account-creation-data") ||
@@ -53,8 +51,6 @@ export class FastAuthWallet {
         return;
       }
 
-      console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 3!");
-
       const keyPair = nearAPI.KeyPair.fromString(
         accountCreationData.limitedAccessKey
       );
@@ -64,14 +60,10 @@ export class FastAuthWallet {
         keyPair
       );
 
-      console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 4!");
-
       const accountObj = new nearAPI.Account(
         this.near.connection,
         accountCreationData.accountId
       );
-
-      console.log(">>>>>>>>>>>>>>>>>>>>>", "signing in 4!");
 
       this._setActiveAccountId(accountCreationData.accountId);
       return [accountObj];
@@ -81,8 +73,6 @@ export class FastAuthWallet {
   }
 
   async signOut() {
-    console.log(">>>>>>>>>>>>>>>>>>>>>", "signing OUT");
-
     if (this.activeAccountId == undefined || this.activeAccountId == null) {
       throw new Error("Wallet is already signed out");
     }
