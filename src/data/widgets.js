@@ -1,7 +1,7 @@
 const TestnetDomains = {
   "test.near.org": true,
   "127.0.0.1": true,
-  localhost: true,
+  // localhost: true,
 };
 
 export const NetworkId =

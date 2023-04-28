@@ -20,6 +20,7 @@ export class FastAuthWallet {
       ...networks[networkId],
       deps: { keyStore: this.keyStore },
     });
+    this.provider = this.near.connection.provider;
     this.relayerUrl = relayerUrl;
   }
 
@@ -91,7 +92,16 @@ export class FastAuthWallet {
     }
   }
 
-  async signAndSendTransaction({ receiverId, actions, signerId }) {
+  async getAccountBalance() {
+    const { amount } = await this.provider.query({
+      request_type: "view_account",
+      finality: "final",
+      account_id: this.activeAccountId,
+    });
+    return new BN(amount);
+  }
+  async sendTransactionViaRelayer(transaction) {
+    const { receiverId, actions, signerId } = transaction;
     this.assertValidSigner(signerId);
 
     const account = (await this.getAccounts())[0];
@@ -102,12 +112,24 @@ export class FastAuthWallet {
       receiverId,
     });
 
-    await fetch(this.relayerUrl, {
+    return await fetch(this.relayerUrl, {
       method: "POST",
       mode: "cors",
       body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
       headers: new Headers({ "Content-Type": "application/json" }),
     });
+  }
+  async signAndSendTransaction(transaction) {
+    const { signerId } = transaction;
+    this.assertValidSigner(signerId);
+
+    const balanceBN = await this.getAccountBalance();
+    if (balanceBN.isZero()) {
+      return await this.sendTransactionViaRelayer();
+    }
+
+    const account = (await this.getAccounts())[0];
+    return account.signAndSendTransaction(transaction);
   }
 
   async signAndSendTransactions(transactions) {
