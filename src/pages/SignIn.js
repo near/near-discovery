@@ -20,7 +20,7 @@ const SignIn = ({ requestSignInWithWallet }) => {
       if(accountId) {
         window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify({
           accountId,
-          privateKey: keyPair.toString(),
+          limitedAccessKey: keyPair.toString(),
           isCreated: true
         }));
         history.push('/')
