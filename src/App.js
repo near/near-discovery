@@ -1,21 +1,35 @@
-import React, { useCallback, useEffect, useState } from "react";
 import "error-polyfill";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
+
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { NetworkId, signInContractId, Widgets } from "./data/widgets";
+import React, { useCallback, useEffect, useState } from "react";
+
+import AuthCallbackHandler from "./pages/AuthCallbackHandler";
+import Big from "big.js";
+import CreateAccount from "./pages/CreateAccount";
 import EditorPage from "./pages/EditorPage";
+import EmbedPage from "./pages/EmbedPage";
+import FlagsPage from "./pages/FlagsPage";
+import { Helmet } from "react-helmet";
+import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
+import NearOrgPage from "./pages/NearOrgPage";
+import SignIn from "./pages/SignIn";
+import { Toaster } from "sonner";
+import VerifyEmail from "./pages/VerifyEmail";
 import ViewPage from "./pages/ViewPage";
-import { setupWalletSelector } from "@near-wallet-selector/core";
-import { setupNearWallet } from "@near-wallet-selector/near-wallet";
-import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
-import { setupSender } from "@near-wallet-selector/sender";
+import { setupFastAuth } from "./lib/selector/setup";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
-import { setupNeth } from "@near-wallet-selector/neth";
 import { setupModal } from "@near-wallet-selector/modal-ui";
-import EmbedPage from "./pages/EmbedPage";
+import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
+import { setupNearWallet } from "@near-wallet-selector/near-wallet";
+import { setupNeth } from "@near-wallet-selector/neth";
+import { setupSender } from "@near-wallet-selector/sender";
+import { setupWalletSelector } from "@near-wallet-selector/core";
 import {
   useAccount,
   useInitNear,
@@ -23,14 +37,8 @@ import {
   utils,
   EthersProviderContext,
 } from "near-social-vm";
-import Big from "big.js";
-import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
-import { NetworkId, Widgets } from "./data/widgets";
 import { useEthersProviderContext } from "./data/web3";
 import styled from "styled-components";
-import { Helmet } from "react-helmet";
-import NearOrgPage from "./pages/NearOrgPage";
-import FlagsPage from "./pages/FlagsPage";
 import { useFlags } from "./utils/flags";
 import {
   init as initializeSegment,
@@ -231,6 +239,14 @@ function App(props) {
               gas: "300000000000000",
               bundle: false,
             }),
+            setupFastAuth({
+              networkId: NetworkId,
+              signInContractId,
+              relayerUrl:
+                NetworkId === "testnet"
+                  ? "http://34.70.226.83:3030/relay"
+                  : "https://near-relayer-mainnet.api.pagoda.co/relay",
+            }),
             setupKeypom({
               trialBaseUrl:
                 NetworkId == "testnet"
@@ -238,8 +254,7 @@ function App(props) {
                   : "https://near.org/#trial-url/",
               networkId: NetworkId,
               trialSplitDelim: "/",
-              signInContractId:
-                NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
+              signInContractId,
               modalOptions: KEYPOM_OPTIONS(NetworkId),
             }),
           ],
@@ -258,7 +273,7 @@ function App(props) {
     });
   }, [near]);
 
-  const requestSignIn = useCallback(
+  const requestSignInWithWallet = useCallback(
     (e) => {
       e && e.preventDefault();
       walletModal.show();
@@ -266,6 +281,10 @@ function App(props) {
     },
     [walletModal]
   );
+
+  const requestSignIn = () => {
+    window.location.href = "/signin";
+  };
 
   const logOut = useCallback(async () => {
     if (!near) {
@@ -325,6 +344,7 @@ function App(props) {
     widgetSrc,
     logOut,
     requestSignIn,
+    requestSignInWithWallet,
     widgets: Widgets,
     tos: {
       checkComponentPath: Widgets.tosCheck,
@@ -516,6 +536,25 @@ function App(props) {
                 <NearOrgPage {...passProps} iframeSrc={route.url} />
               </Route>
             ))}
+
+            {/*  */}
+            <Route path={"/signup"}>
+              <NavigationWrapper {...passProps} />
+              <CreateAccount {...passProps} />
+            </Route>
+            <Route path={"/signin"}>
+              <NavigationWrapper {...passProps} />
+              <SignIn {...passProps} />
+            </Route>
+            <Route path={"/verify-email"}>
+              <NavigationWrapper {...passProps} />
+              <VerifyEmail {...passProps} />
+            </Route>
+            <Route path={"/auth-callback"}>
+              <NavigationWrapper {...passProps} />
+              <AuthCallbackHandler {...passProps} />
+            </Route>
+
             {/* Discovery Pages: */}
             <Route path={"/flags"} exact={true}>
               <NavigationWrapper {...passProps} />

@@ -168,11 +168,6 @@ export function MenuLeft(props) {
     props.requestSignIn();
   }
 
-  function handleCreateAccount(event) {
-    clearAnalytics(event);
-    window.location = "https://wallet.near.org/create";
-  }
-
   return (
     <StyledMenu className={props.showMenu ? "show" : ""}>
       <div className="left-side">
@@ -198,7 +193,13 @@ export function MenuLeft(props) {
             <button className="sign-in" onClick={handleSignIn}>
               Sign in
             </button>
-            <button className="create-account" onClick={handleCreateAccount}>
+            <button
+              className="create-account"
+              onClick={(event) => {
+                clearAnalytics(event);
+                history.push("/signup");
+              }}
+            >
               Create Account
             </button>
           </div>
