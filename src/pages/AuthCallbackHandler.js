@@ -7,7 +7,7 @@ import styled from "styled-components";
 import { toast } from "sonner";
 import { useHistory } from "react-router-dom";
 import * as nearAPI from "near-api-js";
-import { NetworkId } from "../data/widgets";
+import { signInContractId } from "../data/widgets";
 
 const AuthCallbackHandler = () => {
   const history = useHistory();
@@ -48,10 +48,7 @@ const AuthCallbackHandler = () => {
                 limited_access_keys: [
                   {
                     public_key: limitedAccessKey.getPublicKey().toString(),
-                    receiver_id:
-                      NetworkId == "testnet"
-                        ? "v1.social08.testnet"
-                        : "social.near",
+                    receiver_id: signInContractId,
                     allowance: "2500000000000",
                     method_names: "",
                   },
