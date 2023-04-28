@@ -189,11 +189,6 @@ const DesktopNavigation = (props) => {
     props.requestSignIn();
   }
 
-  function handleCreateAccount(event) {
-    clearAnalytics(event);
-    window.location = "https://wallet.near.org/create";
-  }
-
   return (
     <StyledNavigation className={`${scrolled ? "border-bottom" : ""}`}>
       <div className="container">
@@ -246,7 +241,13 @@ const DesktopNavigation = (props) => {
               <button className="sign-in" onClick={handleSignIn}>
                 Sign In
               </button>
-              <button className="create-account" onClick={handleCreateAccount}>
+              <button
+                className="create-account"
+                onClick={(event) => {
+                  clearAnalytics(event);
+                  history.push("/signup");
+                }}
+              >
                 Create Account
               </button>
             </>
