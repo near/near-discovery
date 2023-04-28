@@ -1,6 +1,6 @@
 import { NetworkId } from '../data/widgets';
 import { base_encode } from 'near-api-js/lib/utils/serialize';
-import { createKey } from '@near-js/biometric-ed25519';
+import { createKey } from '../biometric-ed25519/src';
 import { firebaseAuth } from './firebase';
 import { sendSignInLinkToEmail } from 'firebase/auth';
 
@@ -24,6 +24,17 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
         return secondKeyPair;
     }
 };
+
+export const findValidKeyPair = async (keypairs) => {
+    console.log(keypairs.map(keypair => `${HELPER_URL}/publicKey/${keypair.getPublicKey().toString()}/accounts`))
+    const [firstList, secondList] = await Promise.all(keypairs.map((keypair) => fetch(`${HELPER_URL}/publicKey/${keypair.getPublicKey().toString()}/accounts`).then((res) => res.json())));
+    if(firstList[0]) {
+        return [firstList[0], keypairs[0]]
+    } else if(secondList[0]) {
+        return [secondList[0], keypairs[1]]
+    }
+    return []
+}
 
 export const handleCreateAccount = async (accountId, email, isRecovery) => {
     const keyPair = await createKey(email);

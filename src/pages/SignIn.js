@@ -2,11 +2,11 @@ import React from 'react';
 import { isValidEmail } from '../utils/generic';
 import { useHistory } from 'react-router-dom';
 
-import { handleCreateAccount } from '../utils/auth';
+import { findValidKeyPair, handleCreateAccount } from '../utils/auth';
 import styled from 'styled-components';
 import { toast } from 'sonner'
 import { useForm } from 'react-hook-form';
-import { createKey, getKeys } from '@near-js/biometric-ed25519'
+import { getKeys } from '../biometric-ed25519/src'
 
 const SignIn = ({ requestSignInWithWallet }) => {
   const history = useHistory();
@@ -14,16 +14,25 @@ const SignIn = ({ requestSignInWithWallet }) => {
 
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log(await createKey('test@test.com'))
-    console.log(await getKeys('test@test.com'))
-    // if (!data.email) return
-    // try {
-    //   const { publicKey, email } = await handleCreateAccount(null, data.email, true)
-    //   history.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`)
-    // } catch (error) {
-    //   console.log(error)
-    //   toast.error(error.message)
-    // }
+    if (!data.email) return
+    try {
+      const [accountId, keyPair] = await getKeys('random-string').then(findValidKeyPair);
+      if(accountId) {
+        window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify({
+          accountId,
+          privateKey: keyPair.toString(),
+          isCreated: true
+        }));
+        history.push('/')
+        window.location.reload();
+      } else {
+        const { publicKey, email } = await handleCreateAccount(null, data.email, true)
+        history.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`)
+      }
+    } catch (error) {
+      console.log(error)
+      toast.error(error.message)
+    }
   });
 
   return (
