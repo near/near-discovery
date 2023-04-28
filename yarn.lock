@@ -2483,24 +2483,6 @@
     "@motionone/dom" "^10.15.5"
     tslib "^2.3.1"
 
-"@near-js/accounts@0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@near-js/accounts/-/accounts-0.1.2.tgz#680efaa4b4addcfe9d79771406d2d8e0dea41443"
-  integrity sha512-cZ1+zn9elRm0xHlSR+NbNnRfbk/BiGjFZEdu8y5qp4yfCR+0Y/PsYcJSrXg5pn/eCZsDdmrATVL041Si+V+M7Q==
-  dependencies:
-    "@near-js/crypto" "0.0.4"
-    "@near-js/providers" "0.0.5"
-    "@near-js/signers" "0.0.4"
-    "@near-js/transactions" "0.1.1"
-    "@near-js/types" "0.0.4"
-    "@near-js/utils" "0.0.4"
-    ajv "^8.11.2"
-    ajv-formats "^2.1.1"
-    bn.js "5.2.1"
-    borsh "^0.7.0"
-    depd "^2.0.0"
-    near-abi "0.1.1"
-
 "@near-js/accounts@0.1.3":
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@near-js/accounts/-/accounts-0.1.3.tgz#273f5ea7c05b0251011abb05485c6557b27e8e48"
@@ -2567,20 +2549,6 @@
     "@near-js/crypto" "0.0.4"
     "@near-js/types" "0.0.4"
 
-"@near-js/providers@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@near-js/providers/-/providers-0.0.5.tgz#3d214b299aa8fce25c7583bd652269453a56cfd2"
-  integrity sha512-uK0Vamv9NwYu9jxK2p8KpycxzWf/UKMmPzP1wCTprwr0j+Ta0Wl9SuD1DSQWyksg7Cr57hI0Y5D1bdaMK/XJjg==
-  dependencies:
-    "@near-js/transactions" "0.1.1"
-    "@near-js/types" "0.0.4"
-    "@near-js/utils" "0.0.4"
-    bn.js "5.2.1"
-    borsh "^0.7.0"
-    http-errors "^1.7.2"
-  optionalDependencies:
-    node-fetch "^2.6.1"
-
 "@near-js/providers@0.0.6":
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/@near-js/providers/-/providers-0.0.6.tgz#47b9632be2ad5c5a5295840eea8fb508d90735ba"
@@ -2602,19 +2570,6 @@
   dependencies:
     "@near-js/crypto" "0.0.4"
     "@near-js/keystores" "0.0.4"
-    js-sha256 "^0.9.0"
-
-"@near-js/transactions@0.1.1":
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/@near-js/transactions/-/transactions-0.1.1.tgz#3d4c9d8e3cf2543642d660c0c0b126f0a97d5d43"
-  integrity sha512-Fk83oLLFK7nz4thawpdv9bGyMVQ2i48iUtZEVYhuuuqevl17tSXMlhle9Me1ZbNyguJG/cWPdNybe1UMKpyGxA==
-  dependencies:
-    "@near-js/crypto" "0.0.4"
-    "@near-js/signers" "0.0.4"
-    "@near-js/types" "0.0.4"
-    "@near-js/utils" "0.0.4"
-    bn.js "5.2.1"
-    borsh "^0.7.0"
     js-sha256 "^0.9.0"
 
 "@near-js/transactions@0.2.0":
@@ -2646,21 +2601,6 @@
     bn.js "5.2.1"
     depd "^2.0.0"
     mustache "^4.0.0"
-
-"@near-js/wallet-account@0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@near-js/wallet-account/-/wallet-account-0.0.5.tgz#ee50671a9e0b581dd8006e8c9274d794d36a26a0"
-  integrity sha512-iVYXERRoIgQuOHIuyxnAqG+t0V9jkHxplU+KLOUwLr5ClL9zH9v25OnXf5r4b4inPLhRg5G+tMhX6n7ScnJaQA==
-  dependencies:
-    "@near-js/accounts" "0.1.2"
-    "@near-js/crypto" "0.0.4"
-    "@near-js/keystores" "0.0.4"
-    "@near-js/signers" "0.0.4"
-    "@near-js/transactions" "0.1.1"
-    "@near-js/types" "0.0.4"
-    "@near-js/utils" "0.0.4"
-    bn.js "5.2.1"
-    borsh "^0.7.0"
 
 "@near-js/wallet-account@0.0.6":
   version "0.0.6"
@@ -9616,33 +9556,6 @@ near-api-js@^0.45.1:
     text-encoding-utf-8 "^1.0.2"
     tweetnacl "^1.0.1"
 
-near-api-js@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/near-api-js/-/near-api-js-2.1.2.tgz#b5aa165e0f2893d7f8ee0f752bcb20f180c745d5"
-  integrity sha512-Okb+q/q/LOegub70C9umtIyyc5lEpz98cATl/EbTEE0bm5natrXrJUclgsC7cs6ithr8KwyvcTa8kAh2w5mGZg==
-  dependencies:
-    "@near-js/accounts" "0.1.2"
-    "@near-js/crypto" "0.0.4"
-    "@near-js/keystores" "0.0.4"
-    "@near-js/keystores-browser" "0.0.4"
-    "@near-js/keystores-node" "0.0.4"
-    "@near-js/providers" "0.0.5"
-    "@near-js/signers" "0.0.4"
-    "@near-js/transactions" "0.1.1"
-    "@near-js/types" "0.0.4"
-    "@near-js/utils" "0.0.4"
-    "@near-js/wallet-account" "0.0.5"
-    ajv "^8.11.2"
-    ajv-formats "^2.1.1"
-    bn.js "5.2.1"
-    borsh "^0.7.0"
-    depd "^2.0.0"
-    error-polyfill "^0.1.3"
-    http-errors "^1.7.2"
-    near-abi "0.1.1"
-    node-fetch "^2.6.1"
-    tweetnacl "^1.0.1"
-
 near-hd-key@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/near-hd-key/-/near-hd-key-1.2.1.tgz#f508ff15436cf8a439b543220f3cc72188a46756"
@@ -9662,9 +9575,9 @@ near-seed-phrase@^0.2.0:
     near-hd-key "^1.2.1"
     tweetnacl "^1.0.2"
 
-near-social-vm@NearSocial/VM#1.3.2:
+near-social-vm@near/nearsocial_vm#use-action-creators:
   version "1.3.2"
-  resolved "https://codeload.github.com/NearSocial/VM/tar.gz/a3f27883314a0b67669541312de917cbad873930"
+  resolved "https://codeload.github.com/near/nearsocial_vm/tar.gz/698b4e35eb351f9d94049cae834c79125a9cdf40"
   dependencies:
     "@braintree/sanitize-url" "6.0.0"
     "@radix-ui/react-accordion" "^1.1.1"
@@ -9710,7 +9623,6 @@ near-social-vm@NearSocial/VM#1.3.2:
     lodash "^4.17.21"
     mdast-util-find-and-replace "^2.0.0"
     nanoid "^4.0.1"
-    near-api-js "^2.1.2"
     prettier "^2.7.1"
     react-bootstrap "^2.5.0"
     react-bootstrap-typeahead "^6.0.0"
