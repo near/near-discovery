@@ -8,6 +8,8 @@ import Point1 from "./icons/point-1.svg";
 import Point2 from "./icons/point-2.svg";
 import Arrow from "./icons/arrow.svg";
 
+import { useHistory } from "react-router-dom";
+
 const Wrapper = styled.div`
   z-index: 1000;
 `;
@@ -101,6 +103,8 @@ const ButtonSkip = styled.button`
 `;
 
 export default ({ handleNext }) => {
+  // TODO move to somewhere cleaner
+  const history = useHistory();
   return (
     <Wrapper>
       <div className={`d-flex min-vh-100 `}>
@@ -168,7 +172,7 @@ export default ({ handleNext }) => {
             </ButtonGetStarted>
             <ButtonSkip
               onClick={() => {
-                window.location = "https://wallet.near.org/create";
+                history.push("/signup");
               }}
             >
               Skip and Create an Account
