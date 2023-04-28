@@ -25,6 +25,12 @@ const AuthCallbackHandler = () => {
 
       let email = window.localStorage.getItem("emailForSignIn");
 
+      if (!email) {
+        // User opened the link on a different device. To prevent session fixation
+        // attacks, ask the user to provide the associated email again. For example:
+        email = window.prompt("Please provide your email for confirmation");
+      }
+
       setStatusMessage("Verifying email...");
       signInWithEmailLink(firebaseAuth, email, window.location.href)
         .then(async (result) => {
