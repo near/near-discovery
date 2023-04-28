@@ -5,7 +5,7 @@ import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
 
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { NetworkId, Widgets } from "./data/widgets";
+import { NetworkId, signInContractId, Widgets } from "./data/widgets";
 import React, { useCallback, useEffect, useState } from "react";
 
 import AuthCallbackHandler from "./pages/AuthCallbackHandler";
@@ -241,7 +241,11 @@ function App(props) {
             }),
             setupFastAuth({
               networkId: NetworkId,
-              signInContractId: "v1.social08.testnet",
+              signInContractId,
+              relayerUrl:
+                NetworkId === "testnet"
+                  ? "http://34.70.226.83:3030/relay"
+                  : "http://near-relayer-mainnet.api.pagoda.co/relay",
             }),
             setupKeypom({
               trialBaseUrl:
@@ -250,8 +254,7 @@ function App(props) {
                   : "https://near.org/#trial-url/",
               networkId: NetworkId,
               trialSplitDelim: "/",
-              signInContractId:
-                NetworkId == "testnet" ? "v1.social08.testnet" : "social.near",
+              signInContractId,
               modalOptions: KEYPOM_OPTIONS(NetworkId),
             }),
           ],
