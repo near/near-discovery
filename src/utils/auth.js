@@ -26,7 +26,6 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
 };
 
 export const findValidKeyPair = async (keypairs) => {
-    console.log(keypairs.map(keypair => `${HELPER_URL}/publicKey/${keypair.getPublicKey().toString()}/accounts`))
     const [firstList, secondList] = await Promise.all(keypairs.map((keypair) => fetch(`${HELPER_URL}/publicKey/${keypair.getPublicKey().toString()}/accounts`).then((res) => res.json())));
     if(firstList[0]) {
         return [firstList[0], keypairs[0]]
