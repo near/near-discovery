@@ -39,7 +39,6 @@ import {
 } from "near-social-vm";
 import { useEthersProviderContext } from "./data/web3";
 import styled from "styled-components";
-import { useFlags } from "./utils/flags";
 import {
   init as initializeSegment,
   recordWalletConnect,
@@ -47,6 +46,7 @@ import {
 } from "./utils/analytics";
 import { setupKeypom } from "keypom-js";
 import { KEYPOM_OPTIONS } from "./utils/keypom-options";
+import { useFlags } from "../../src/hooks/useFlags";
 
 const StyledApp = styled.div`
   @media (max-width: 991px) {

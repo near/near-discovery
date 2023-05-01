@@ -10,7 +10,6 @@ import { NetworkId, signInContractId, Widgets } from "@/data/widgets";
 import React, { useCallback, useEffect, useState } from "react";
 
 import Big from "big.js";
-import { useFlags } from "@/utils/flags";
 import { Toaster } from "sonner";
 import { setupFastAuth } from "@/lib/selector/setup";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
@@ -40,7 +39,6 @@ import {
 import { setupKeypom } from "keypom-js";
 import { KEYPOM_OPTIONS } from "@/utils/keypom-options";
 import { useRouter } from "next/router";
-import { iframeRoutes } from "@/data/iframe-routes";
 import { useAuthStore } from "@/stores/auth";
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -51,7 +49,6 @@ export default function App({ Component, pageProps }: AppProps) {
     null
   );
   const [widgetSrc, setWidgetSrc] = useState(null);
-  const [flags, setFlags] = useFlags();
   const ethersProviderContext = useEthersProviderContext();
   const router = useRouter();
   const { initNear } = useInitNear();
@@ -183,30 +180,16 @@ export default function App({ Component, pageProps }: AppProps) {
       requestSignInWithWallet,
       signedIn,
     });
-  });
-
-  const passProps = {
-    // accountId: signedAccountId,
-    // availableStorage,
-    // logOut,
-    // refreshAllowance,
-    // requestSignIn,
-    // requestSignInWithWallet,
-    // signedIn,
-
-    // hooks:
-    widgets: Widgets,
-    tos: {
-      checkComponentPath: Widgets.tosCheck,
-      contentComponentPath: Widgets.tosContent,
-    },
-    flags,
-    setFlags,
-    iframeRoutes,
-
-    widgetSrc,
-    setWidgetSrc,
-  };
+  }, [
+    availableStorage,
+    logOut,
+    refreshAllowance,
+    requestSignIn,
+    requestSignInWithWallet,
+    signedIn,
+    signedAccountId,
+    updateAuthStore,
+  ]);
 
   return (
     <EthersProviderContext.Provider value={ethersProviderContext}>

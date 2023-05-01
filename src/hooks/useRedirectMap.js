@@ -1,5 +1,5 @@
-import { useFlags } from "../utils/flags";
 import { useState, useCallback, useEffect } from "react";
+import { useFlags } from "./useFlags";
 
 /**
  * @returns [shouldWaitForMap, redirectMap, loaderError, loaderUrl]
