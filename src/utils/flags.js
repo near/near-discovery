@@ -27,7 +27,7 @@ export function useFlags() {
       // may not be reachable
       return updated;
     });
-  });
+  }, []);
 
   return [rawFlags, setFlags];
 }

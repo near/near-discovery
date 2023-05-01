@@ -56,5 +56,8 @@
     "styled-components": "^5.3.6",
     "typescript": "5.0.4",
     "zustand": "^4.3.7"
+  },
+  "devDependencies": {
+    "@types/big.js": "^6.1.6"
   }
 }
