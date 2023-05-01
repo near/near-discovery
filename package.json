@@ -54,6 +54,7 @@
     "react-hook-form": "^7.43.9",
     "sonner": "^0.3.2",
     "styled-components": "^5.3.6",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "zustand": "^4.3.7"
   }
 }
