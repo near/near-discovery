@@ -204,10 +204,12 @@ const CreateAccount = () => {
         <StyledButton fullWidth onClick={onSubmit} type="button">
           Continue
         </StyledButton>
+        {/* TODO remove if terms of service and privacy policy are not needed
         <Footer>
           By creating an account, you agree to the NEAR{" "}
           <a href="">terms of service</a> and <a href="">privacy policy</a>
         </Footer>
+        */}
       </FormContainer>
     </StyledContainer>
   );
@@ -297,14 +299,15 @@ const StyledButton = styled.button`
   }
 `;
 
-const Footer = styled.div`
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 13px;
-  justify-self: flex-end;
-  align-self: flex-end;
+// TODO: remove if Terms of Service and Privacy Policy are not needed
+// const Footer = styled.div`
+//   padding: 12px 16px;
+//   text-align: center;
+//   font-size: 13px;
+//   justify-self: flex-end;
+//   align-self: flex-end;
 
-  "a": {
-    color: "#37819F";
-  }
-`;
+//   "a": {
+//     color: "#37819F";
+//   }
+// `;
