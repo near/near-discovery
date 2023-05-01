@@ -576,6 +576,7 @@ function App(props) {
               <ViewPage {...passProps} meta={metaProps} />
             </Route>
           </Switch>
+          <Toaster position="bottom-center" richColors />
         </BrowserRouter>
       </EthersProviderContext.Provider>
     </StyledApp>
