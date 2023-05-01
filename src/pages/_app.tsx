@@ -1,55 +1,65 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
-
 import "bootstrap-icons/font/bootstrap-icons.css";
 import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
 
+import type { AppProps } from "next/app";
+
 import { NetworkId, signInContractId, Widgets } from "@/data/widgets";
 import React, { useCallback, useEffect, useState } from "react";
 
-import AuthCallbackHandler from "./pages/AuthCallbackHandler";
 import Big from "big.js";
-import CreateAccount from "./pages/CreateAccount";
-import EditorPage from "./pages/EditorPage";
-import EmbedPage from "./pages/EmbedPage";
-import FlagsPage from "./pages/FlagsPage";
-import { Helmet } from "react-helmet";
-import NavigationWrapper from "./components/navigation/org/NavigationWrapper";
-import NearOrgPage from "./pages/NearOrgPage";
-import SignIn from "./pages/SignIn";
+import { useFlags } from "@/utils/flags";
 import { Toaster } from "sonner";
-import VerifyEmail from "./pages/VerifyEmail";
-import ViewPage from "./pages/ViewPage";
-import { setupFastAuth } from "./lib/selector/setup";
+import { setupFastAuth } from "@/lib/selector/setup";
 import { setupHereWallet } from "@near-wallet-selector/here-wallet";
 import { setupMeteorWallet } from "@near-wallet-selector/meteor-wallet";
-import { setupModal } from "@near-wallet-selector/modal-ui";
+import {
+  setupModal,
+  WalletSelectorModal,
+} from "@near-wallet-selector/modal-ui";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupNearWallet } from "@near-wallet-selector/near-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
 import { setupSender } from "@near-wallet-selector/sender";
 import { setupWalletSelector } from "@near-wallet-selector/core";
-import { EthersProviderContext } from "near-social-vm";
+import {
+  useAccount,
+  useInitNear,
+  useNear,
+  utils,
+  EthersProviderContext,
+} from "near-social-vm";
 import { useEthersProviderContext } from "@/data/web3";
-
-const refreshAllowanceObj = {};
+import {
+  init as initializeSegment,
+  recordWalletConnect,
+  reset as resetSegment,
+} from "@/utils/analytics";
+import { setupKeypom } from "keypom-js";
+import { KEYPOM_OPTIONS } from "@/utils/keypom-options";
+import { useRouter } from "next/router";
+import { iframeRoutes } from "@/data/iframe-routes";
+import { useAuthStore } from "@/stores/auth";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [connected, setConnected] = useState(false);
   const [signedIn, setSignedIn] = useState(false);
   const [signedAccountId, setSignedAccountId] = useState(null);
-  const [availableStorage, setAvailableStorage] = useState(null);
-  const [walletModal, setWalletModal] = useState(null);
+  const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
+  const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(
+    null
+  );
   const [widgetSrc, setWidgetSrc] = useState(null);
   const [flags, setFlags] = useFlags();
   const ethersProviderContext = useEthersProviderContext();
-
+  const router = useRouter();
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
   const accountId = account.accountId;
+  const updateAuthStore = useAuthStore((state) => state.update);
+
   initializeSegment();
 
   useEffect(() => {
@@ -76,7 +86,8 @@ export default function App({ Component, pageProps }: AppProps) {
                 NetworkId === "testnet"
                   ? "http://34.70.226.83:3030/relay"
                   : "https://near-relayer-mainnet.api.pagoda.co/relay",
-            }),
+              hideModal: undefined, // TODO: Remove?
+            }) as any, // TODO: Refactor setupFastAuth() to TS
             setupKeypom({
               trialBaseUrl:
                 NetworkId == "testnet"
@@ -86,7 +97,7 @@ export default function App({ Component, pageProps }: AppProps) {
               trialSplitDelim: "/",
               signInContractId,
               modalOptions: KEYPOM_OPTIONS(NetworkId),
-            }),
+            }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
       });
@@ -96,7 +107,7 @@ export default function App({ Component, pageProps }: AppProps) {
     if (!near) {
       return;
     }
-    near.selector.then((selector) => {
+    near.selector.then((selector: any) => {
       setWalletModal(
         setupModal(selector, { contractId: near.config.contractName })
       );
@@ -104,17 +115,17 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [near]);
 
   const requestSignInWithWallet = useCallback(
-    (e) => {
-      e && e.preventDefault();
-      walletModal.show();
+    (event: any) => {
+      event?.preventDefault();
+      walletModal?.show();
       return false;
     },
     [walletModal]
   );
 
-  const requestSignIn = () => {
-    window.location.href = "/signin";
-  };
+  const requestSignIn = useCallback(() => {
+    router.push("/signin");
+  }, [router]);
 
   const logOut = useCallback(async () => {
     if (!near) {
@@ -125,7 +136,7 @@ export default function App({ Component, pageProps }: AppProps) {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
-    reset();
+    resetSegment();
     localStorage.removeItem("accountId");
   }, [near]);
 
@@ -136,7 +147,6 @@ export default function App({ Component, pageProps }: AppProps) {
     await logOut();
     requestSignIn();
   }, [logOut, requestSignIn]);
-  refreshAllowanceObj.refreshAllowance = refreshAllowance;
 
   useEffect(() => {
     if (!near) {
@@ -144,7 +154,6 @@ export default function App({ Component, pageProps }: AppProps) {
     }
     setSignedIn(!!accountId);
     setSignedAccountId(accountId);
-    setConnected(true);
   }, [near, accountId]);
 
   useEffect(() => {
@@ -164,17 +173,28 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, []);
 
+  useEffect(() => {
+    updateAuthStore({
+      accountId: signedAccountId,
+      availableStorage,
+      logOut,
+      refreshAllowance,
+      requestSignIn,
+      requestSignInWithWallet,
+      signedIn,
+    });
+  });
+
   const passProps = {
-    refreshAllowance: () => refreshAllowance(),
-    setWidgetSrc,
-    signedAccountId,
-    signedIn,
-    connected,
-    availableStorage,
-    widgetSrc,
-    logOut,
-    requestSignIn,
-    requestSignInWithWallet,
+    // accountId: signedAccountId,
+    // availableStorage,
+    // logOut,
+    // refreshAllowance,
+    // requestSignIn,
+    // requestSignInWithWallet,
+    // signedIn,
+
+    // hooks:
     widgets: Widgets,
     tos: {
       checkComponentPath: Widgets.tosCheck,
@@ -183,13 +203,16 @@ export default function App({ Component, pageProps }: AppProps) {
     flags,
     setFlags,
     iframeRoutes,
-  };
 
-  const ethersProviderContext = useEthersProviderContext();
+    widgetSrc,
+    setWidgetSrc,
+  };
 
   return (
     <EthersProviderContext.Provider value={ethersProviderContext}>
       <Component {...pageProps} />
+
+      <Toaster position="bottom-center" richColors />
     </EthersProviderContext.Provider>
   );
 }
