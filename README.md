@@ -1,38 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# NEAR Discovery (BOS)
 
-## Getting Started
+## Setup & Development
 
-First, run the development server:
+Initialize repo:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+```
+pnpm i
+```
+
+Start development version:
+
+```
 pnpm dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local Component Development
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. Run an instance of a component server like [near/bos-loader](https://github.com/near/bos-loader) which serves component code in the following format
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+   ```json
+   {
+     "components": {
+       "<component path 1>": {
+         "code": "<component 1 code>"
+       },
+       "<component path 2>": {
+         "code": "<component 2 code>"
+       }
+     }
+   }
+   ```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+   this will be used as a `redirectMap` in `ViewPage`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+2. Open the `/flags` route of your viewer and set the BOS Loader URL e.g. `http://127.0.0.1:3030`
 
-## Learn More
+Note: there is no hot reload, you must refresh the page to see component changes
 
-To learn more about Next.js, take a look at the following resources:
+## Local VM Development
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> This section needs testing since switch to pnpm
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+If you need to make changes to the VM and test locally, you can easily link your local copy of the VM:
 
-## Deploy on Vercel
+1. Clone the viewer repo as a sibling of `near-discovery`:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+git clone git@github.com:NearSocial/VM.git
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Folder Structure:
+
+```
+/near-discovery
+/VM
+```
+
+2. Run `pnpm link ../VM`
+
+3. Any time you make changes to the `VM`, run `pnpm build` inside the `VM` project in order for the viewer project to pick up the changes
