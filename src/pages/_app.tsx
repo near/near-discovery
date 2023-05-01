@@ -18,6 +18,7 @@ import { EthersProviderContext, useAccount, useInitNear, useNear, utils } from '
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import React, { useCallback, useEffect, useState } from 'react';
 import { Toaster } from 'sonner';
 
@@ -148,7 +149,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     updateAuthStore({
-      accountId: signedAccountId,
+      accountId: signedAccountId || '',
       availableStorage,
       logOut,
       refreshAllowance,
@@ -181,7 +182,41 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:description" content={metaProps.description} />
 
         <script src="https://unpkg.com/@phosphor-icons/web@2.0.3" async></script>
+        <link href="https://neardiscovery.zendesk.com" rel="preconnect" />
+        <script
+          src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
+          id="ze-snippet"
+          async
+        ></script>
       </Head>
+
+      <Script id="zendesk-config">
+        {`
+          window.zESettings = {
+            webWidget: {
+              color: { theme: '#2b2f31' },
+              offset: {
+                horizontal: '10px',
+                vertical: '10px',
+                mobile: { horizontal: '2px', vertical: '65px', from: 'right' },
+              },
+              contactForm: {
+                attachments: true,
+                title: { '*': 'Feedback and Support' },
+                fields: [
+                  {
+                    id: 13149356989591,
+                    prefill: { '*': localStorage.getItem('accountId') },
+                  },
+                ],
+              },
+              launcher: {
+                label: { '*': ' ' },
+              },
+            },
+          };
+        `}
+      </Script>
 
       <EthersProviderContext.Provider value={ethersProviderContext}>
         <Component {...pageProps} />

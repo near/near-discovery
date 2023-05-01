@@ -1,8 +1,8 @@
-import Big from "big.js";
-import { create } from "zustand";
+import type Big from 'big.js';
+import { create } from 'zustand';
 
 type AuthState = {
-  accountId: null | string;
+  accountId: string;
   availableStorage: Big | null;
   logOut: () => Promise<void>;
   refreshAllowance: () => Promise<void>;
@@ -16,12 +16,12 @@ type AuthStore = AuthState & {
 };
 
 export const useAuthStore = create<AuthStore>((set) => ({
-  accountId: null,
+  accountId: '',
   availableStorage: null,
-  logOut: async () => {},
-  refreshAllowance: async () => {},
-  requestSignIn: () => {},
-  requestSignInWithWallet: () => {},
+  logOut: async () => undefined,
+  refreshAllowance: async () => undefined,
+  requestSignIn: () => undefined,
+  requestSignInWithWallet: () => undefined,
   signedIn: false,
   update: (state) => set((previousState) => ({ ...previousState, ...state })),
 }));
