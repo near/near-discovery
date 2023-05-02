@@ -12,7 +12,7 @@ type AuthState = {
 };
 
 type AuthStore = AuthState & {
-  update: (state: AuthState) => void;
+  set: (state: AuthState) => void;
 };
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -23,5 +23,5 @@ export const useAuthStore = create<AuthStore>((set) => ({
   requestSignIn: () => undefined,
   requestSignInWithWallet: () => undefined,
   signedIn: false,
-  update: (state) => set((previousState) => ({ ...previousState, ...state })),
+  set: (state) => set((previousState) => ({ ...previousState, ...state })),
 }));

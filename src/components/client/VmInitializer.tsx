@@ -1,4 +1,3 @@
-// import 'bootstrap/dist/js/bootstrap.bundle';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
@@ -11,19 +10,14 @@ import { setupSender } from '@near-wallet-selector/sender';
 import Big from 'big.js';
 import { setupKeypom } from 'keypom-js';
 import { EthersProviderContext, useAccount, useInitNear, useNear, utils, Widget } from 'near-social-vm';
-import type { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
-import Script from 'next/script';
 import React, { useCallback, useEffect, useState } from 'react';
-import { Toaster } from 'sonner';
 
 import { useEthersProviderContext } from '@/data/web3';
 import { NetworkId, signInContractId } from '@/data/widgets';
 import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
-import { useEthersProviderStore } from '@/stores/ethers-provider';
+import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetSegment } from '@/utils/analytics';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
@@ -38,8 +32,8 @@ export default function VmInitializer() {
   const near = useNear();
   const account = useAccount();
   const accountId = account.accountId;
-  const updateAuthStore = useAuthStore((state) => state.update);
-  const setEthersProvider = useEthersProviderStore((store) => store.setEthersProvider);
+  const setAuthStore = useAuthStore((state) => state.set);
+  const setVmStore = useVmStore((store) => store.set);
 
   useEffect(() => {
     initNear &&
@@ -145,7 +139,7 @@ export default function VmInitializer() {
   }, []);
 
   useEffect(() => {
-    updateAuthStore({
+    setAuthStore({
       accountId: signedAccountId || '',
       availableStorage,
       logOut,
@@ -162,16 +156,16 @@ export default function VmInitializer() {
     requestSignInWithWallet,
     signedIn,
     signedAccountId,
-    updateAuthStore,
+    setAuthStore,
   ]);
 
   useEffect(() => {
-    setEthersProvider({
-      Provider: EthersProviderContext.Provider,
-      context: ethersProviderContext,
+    setVmStore({
+      ethersContext: ethersProviderContext,
+      EthersProvider: EthersProviderContext.Provider,
       Widget,
     });
-  }, [ethersProviderContext, setEthersProvider]);
+  }, [ethersProviderContext, setVmStore]);
 
   return <></>;
 }
