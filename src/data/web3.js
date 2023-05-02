@@ -77,7 +77,7 @@ export const onboard = init({
   ],
   appMetadata: {
     name: 'NEAR',
-    icon,
+    icon: icon.content,
     description: 'NEAR - BOS',
   },
   theme: 'dark',
