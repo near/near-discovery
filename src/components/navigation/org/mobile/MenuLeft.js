@@ -1,5 +1,5 @@
+import { useRouter } from 'next/router';
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { flushEvents, recordClick } from '../../../../utils/analytics';
@@ -154,7 +154,7 @@ const StyledMenu = styled.div`
 `;
 
 export function MenuLeft(props) {
-  const history = useHistory();
+  const router = useRouter();
 
   async function clearAnalytics(e) {
     recordClick(e);
@@ -173,11 +173,11 @@ export function MenuLeft(props) {
         <button className="close-button" onClick={props.onCloseMenu}>
           <Close />
         </button>
-        <img className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => history.push('/')} />
+        <img className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => router.push('/')} />
         <button
           className="search-btn"
           style={{ backgroundImage: `url(${image})` }}
-          onClick={() => history.push(`/${props.widgets?.search.indexPage}`)}
+          onClick={() => router.push(`/${props.widgets?.search.indexPage}`)}
         >
           Search NEAR
         </button>
@@ -192,7 +192,7 @@ export function MenuLeft(props) {
               className="create-account"
               onClick={(event) => {
                 clearAnalytics(event);
-                history.push('/signup');
+                router.push('/signup');
               }}
             >
               Create Account

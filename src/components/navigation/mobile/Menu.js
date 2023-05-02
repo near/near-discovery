@@ -1,17 +1,16 @@
-import { Widget } from "near-social-vm";
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { Widget } from 'near-social-vm';
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import { Book } from "../../icons/Book";
-import { Close } from "../../icons/Close";
-import { Code } from "../../icons/Code";
-import { Fork } from "../../icons/Fork";
-import { Home } from "../../icons/Home";
-import { LogOut } from "../../icons/LogOut";
-import { UserCircle } from "../../icons/UserCircle";
-import { NavigationButton } from "../NavigationButton";
-import { SignInButton } from "../SignInButton";
+import { Book } from '../../icons/Book';
+import { Close } from '../../icons/Close';
+import { Code } from '../../icons/Code';
+import { Fork } from '../../icons/Fork';
+import { Home } from '../../icons/Home';
+import { LogOut } from '../../icons/LogOut';
+import { UserCircle } from '../../icons/UserCircle';
+import { NavigationButton } from '../NavigationButton';
+import { SignInButton } from '../SignInButton';
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -156,19 +155,16 @@ const StyledMenu = styled.div`
 
 export function Menu(props) {
   return (
-    <StyledMenu className={props.showMenu ? "show" : ""}>
+    <StyledMenu className={props.showMenu ? 'show' : ''}>
       <div className="left-side">
         {props.signedIn ? (
-          <Link
-            to={`/${props.widgets.profilePage}?accountId=${props.signedAccountId}`}
-            className="profile-link"
-          >
+          <Link href={`/${props.widgets.profilePage}?accountId=${props.signedAccountId}`} className="profile-link">
             <Widget
               src={props.widgets.profileImage}
               props={{
                 accountId: props.signedAccountId,
-                className: "d-inline-block",
-                style: { width: "56px", height: "56px" },
+                className: 'd-inline-block',
+                style: { width: '56px', height: '56px' },
               }}
             />
             {props.widgets.profileName && (
@@ -218,21 +214,15 @@ export function Menu(props) {
         <ul className="bottom-links">
           {props.widgetSrc?.edit && (
             <li>
-              <Link to={`/edit/${props.widgetSrc?.edit}`}>
+              <Link href={`/edit/${props.widgetSrc?.edit}`}>
                 <Fork />
-                {props.widgetSrc.edit.startsWith(
-                  `${props.signedAccountId}/widget/`
-                )
-                  ? "Edit widget"
-                  : "Fork widget"}
+                {props.widgetSrc.edit.startsWith(`${props.signedAccountId}/widget/`) ? 'Edit widget' : 'Fork widget'}
               </Link>
             </li>
           )}
           {props.widgetSrc?.view && (
             <li>
-              <Link
-                to={`/${props.widgets.viewSource}?src=${props.widgetSrc?.view}`}
-              >
+              <Link href={`/${props.widgets.viewSource}?src=${props.widgetSrc?.view}`}>
                 <Code />
                 View source
               </Link>

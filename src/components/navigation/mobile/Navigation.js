@@ -1,11 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import { NearSocialLogo } from "../../icons/NearSocialLogo";
-import { NotificationWidget } from "../NotificationWidget";
-import { SignInButton } from "../SignInButton";
-import { MobileMenuButton } from "./MobileMenuButton";
+import { NearSocialLogo } from '../../icons/NearSocialLogo';
+import { NotificationWidget } from '../NotificationWidget';
+import { SignInButton } from '../SignInButton';
+import { MobileMenuButton } from './MobileMenuButton';
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -45,17 +44,12 @@ const StyledNavigation = styled.div`
 export function Navigation(props) {
   return (
     <StyledNavigation>
-      <MobileMenuButton
-        onClick={props.onClickShowMenu}
-        currentPage={props.currentPage}
-      />
-      <Link to="/" className="logo-link">
+      <MobileMenuButton onClick={props.onClickShowMenu} currentPage={props.currentPage} />
+      <Link href="/" className="logo-link">
         <NearSocialLogo />
       </Link>
       {props.signedIn ? (
-        <NotificationWidget
-          notificationButtonSrc={props.widgets.notificationButton}
-        />
+        <NotificationWidget notificationButtonSrc={props.widgets.notificationButton} />
       ) : (
         <SignInButton onSignIn={() => props.requestSignIn()} />
       )}

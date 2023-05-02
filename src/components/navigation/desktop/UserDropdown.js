@@ -1,14 +1,14 @@
-import { useAccount,useNear, Widget } from "near-social-vm";
-import React, { useCallback } from "react";
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
+import { useAccount, useNear, Widget } from 'near-social-vm';
+import Link from 'next/link';
+import React, { useCallback } from 'react';
+import styled from 'styled-components';
 
-import { LogOut } from "../../icons/LogOut";
-import { Pretend } from "../../icons/Pretend";
-import { StopPretending } from "../../icons/StopPretending";
-import { User } from "../../icons/User";
-import { Withdraw } from "../../icons/Withdraw";
-import PretendModal from "../PretendModal";
+import { LogOut } from '../../icons/LogOut';
+import { Pretend } from '../../icons/Pretend';
+import { StopPretending } from '../../icons/StopPretending';
+import { User } from '../../icons/User';
+import { Withdraw } from '../../icons/Withdraw';
+import PretendModal from '../PretendModal';
 
 const StyledDropdown = styled.div`
   button,
@@ -98,7 +98,7 @@ export function UserDropdown(props) {
   const account = useAccount();
 
   const withdrawStorage = useCallback(async () => {
-    await near.contract.storage_withdraw({}, undefined, "1");
+    await near.contract.storage_withdraw({}, undefined, '1');
   }, [near]);
 
   const [showPretendModal, setShowPretendModal] = React.useState(false);
@@ -117,8 +117,8 @@ export function UserDropdown(props) {
             src={props.widgets.profileImage}
             props={{
               accountId: account.accountId,
-              className: "d-inline-block",
-              style: { width: "40px", height: "40px" },
+              className: 'd-inline-block',
+              style: { width: '40px', height: '40px' },
             }}
           />
           <div className="profile-info">
@@ -130,27 +130,15 @@ export function UserDropdown(props) {
             <div className="profile-username">{account.accountId}</div>
           </div>
         </button>
-        <ul
-          className="dropdown-menu"
-          aria-labelledby="dropdownMenu2222"
-          style={{ minWidth: "fit-content" }}
-        >
+        <ul className="dropdown-menu" aria-labelledby="dropdownMenu2222" style={{ minWidth: 'fit-content' }}>
           <li>
-            <NavLink
-              className="dropdown-item"
-              type="button"
-              to={`/${props.widgets.profilePage}?accountId=${account.accountId}`}
-            >
+            <Link className="dropdown-item" href={`/${props.widgets.profilePage}?accountId=${account.accountId}`}>
               <User />
               My Profile
-            </NavLink>
+            </Link>
           </li>
           <li>
-            <button
-              className="dropdown-item"
-              type="button"
-              onClick={() => withdrawStorage()}
-            >
+            <button className="dropdown-item" type="button" onClick={() => withdrawStorage()}>
               <Withdraw />
               Withdraw {props.availableStorage.div(1000).toFixed(2)}kb
             </button>
@@ -169,33 +157,21 @@ export function UserDropdown(props) {
             </li>
           ) : (
             <li>
-              <button
-                className="dropdown-item"
-                type="button"
-                onClick={() => setShowPretendModal(true)}
-              >
+              <button className="dropdown-item" type="button" onClick={() => setShowPretendModal(true)}>
                 <Pretend />
                 Pretend to be another account
               </button>
             </li>
           )}
           <li>
-            <button
-              className="dropdown-item"
-              type="button"
-              onClick={() => props.logOut()}
-            >
+            <button className="dropdown-item" type="button" onClick={() => props.logOut()}>
               <LogOut />
               Sign Out
             </button>
           </li>
         </ul>
       </StyledDropdown>
-      <PretendModal
-        show={showPretendModal}
-        onHide={() => setShowPretendModal(false)}
-        widgets={props.widgets}
-      />
+      <PretendModal show={showPretendModal} onHide={() => setShowPretendModal(false)} widgets={props.widgets} />
     </>
   );
 }

@@ -1,18 +1,19 @@
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from 'react';
 
-import MobileNavigation from "./mobile/MobileNavigation";
-import DesktopNavigation from "./wrapper/desktop/DesktopNavigation";
+import MobileNavigation from './mobile/MobileNavigation';
+import DesktopNavigation from './wrapper/desktop/DesktopNavigation';
 
-const NavigationWrapper = (props) => {
-  const [matches, setMatches] = useState(
-    window.matchMedia("(min-width: 992px)").matches
-  );
+export const NavigationWrapper = (props) => {
+  const [matches, setMatches] = useState(true);
 
   useEffect(() => {
-    window
-      .matchMedia("(min-width: 992px)")
-      .addEventListener("change", (e) => setMatches(e.matches));
+    setMatches(window.matchMedia('(min-width: 992px)').matches);
   }, []);
+
+  useEffect(() => {
+    window.matchMedia('(min-width: 992px)').addEventListener('change', (e) => setMatches(e.matches));
+  }, []);
+
   return (
     <>
       {matches && <DesktopNavigation {...props} />}
@@ -20,5 +21,3 @@ const NavigationWrapper = (props) => {
     </>
   );
 };
-
-export default NavigationWrapper;

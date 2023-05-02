@@ -1,10 +1,9 @@
-import { useAccount } from "near-social-vm";
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import { useAccount } from 'near-social-vm';
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import { Code } from "../../icons/Code";
-import { Fork } from "../../icons/Fork";
+import { Code } from '../../icons/Code';
+import { Fork } from '../../icons/Fork';
 
 const StyledDropdown = styled.div`
   .dropdown-toggle {
@@ -107,19 +106,15 @@ export function DevActionsDropdown(props) {
         <ul className="dropdown-menu" aria-labelledby="dropdownMenu2222">
           {props.widgetSrc?.edit && (
             <li>
-              <Link to={`/edit/${props.widgetSrc?.edit}`}>
+              <Link href={`/edit/${props.widgetSrc?.edit}`}>
                 <Fork />
-                {props.widgetSrc.edit.startsWith(`${account.accountId}/widget/`)
-                  ? "Edit widget"
-                  : "Fork widget"}
+                {props.widgetSrc.edit.startsWith(`${account.accountId}/widget/`) ? 'Edit widget' : 'Fork widget'}
               </Link>
             </li>
           )}
           {props.widgetSrc?.view && (
             <li>
-              <Link
-                to={`/${props.widgets.viewSource}?src=${props.widgetSrc?.view}`}
-              >
+              <Link href={`/${props.widgets.viewSource}?src=${props.widgetSrc?.view}`}>
                 <Code />
                 View source
               </Link>
