@@ -1,6 +1,7 @@
-import { Widget } from "near-social-vm";
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 
 const StyledNotificationWidget = styled.div`
   margin: 0 15px;
@@ -38,11 +39,8 @@ const StyledNotificationWidget = styled.div`
 
 export function NotificationWidget({ notificationButtonSrc, onMouseEnter }) {
   return (
-    <StyledNotificationWidget
-      className="nav-notification-widget"
-      onMouseOver={onMouseEnter}
-    >
-      <Widget src={notificationButtonSrc} />
+    <StyledNotificationWidget className="nav-notification-widget" onMouseOver={onMouseEnter}>
+      <VmWidgetWrapper src={notificationButtonSrc} />
     </StyledNotificationWidget>
   );
 }

@@ -2,6 +2,7 @@ import type Big from 'big.js';
 import { create } from 'zustand';
 
 type AuthState = {
+  account: any;
   accountId: string;
   availableStorage: Big | null;
   logOut: () => Promise<void>;
@@ -16,6 +17,7 @@ type AuthStore = AuthState & {
 };
 
 export const useAuthStore = create<AuthStore>((set) => ({
+  account: null,
   accountId: '',
   availableStorage: null,
   logOut: async () => undefined,

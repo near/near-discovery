@@ -1,6 +1,7 @@
-import { Widget } from "near-social-vm";
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 
 const StyledCurrentComponent = styled.div`
   border: 1px solid #eeeeec;
@@ -60,11 +61,11 @@ const CurrentComponent = (props) => {
   return (
     <StyledCurrentComponent className="current-component">
       <div className="title">Current Component</div>
-      <Widget
+      <VmWidgetWrapper
         src={props.widgets.componentSummary}
         props={{
           src: props.widgetSrc.view,
-          size: "medium",
+          size: 'medium',
           showTags: true,
         }}
       />

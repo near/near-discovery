@@ -1,9 +1,9 @@
 import classNames from 'classnames';
-import { Widget } from 'near-social-vm';
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
+import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -114,7 +114,7 @@ export function TopNavigation(props) {
           onClick={() => history.push(`/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`)}
           className="mobile-nav-profile-btn"
         >
-          <Widget
+          <VmWidgetWrapper
             src={props.widgets.profileImage}
             props={{
               accountId: props.signedAccountId,
@@ -124,7 +124,7 @@ export function TopNavigation(props) {
           />
         </button>
       )}
-      <Link to="/" className={classNames(['logo-link', { large: !props.signedIn }])}>
+      <Link href="/" className={classNames(['logo-link', { large: !props.signedIn }])}>
         <img src={props.signedIn ? LogoBlack : NearLogotype} alt="NEAR logo" />
       </Link>
       <button onClick={() => props.onClickShowMenu('left')} className="mobile-nav-profile-btn">

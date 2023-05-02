@@ -1,14 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import styled from "styled-components";
+import Link from 'next/link';
+import styled from 'styled-components';
 
-import { ArrowUpRight } from "../../icons/ArrowUpRight";
-import { Logotype } from "../Logotype";
-import { NavigationButton } from "../NavigationButton";
-import { NotificationWidget } from "../NotificationWidget";
-import { SignInButton } from "../SignInButton";
-import { DevActionsDropdown } from "./DevActionsDropdown";
-import { UserDropdown } from "./UserDropdown";
+import { ArrowUpRight } from '../../icons/ArrowUpRight';
+import { Logotype } from '../Logotype';
+import { NavigationButton } from '../NavigationButton';
+import { NotificationWidget } from '../NotificationWidget';
+import { SignInButton } from '../SignInButton';
+import { DevActionsDropdown } from './DevActionsDropdown';
+import { UserDropdown } from './UserDropdown';
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -61,7 +60,7 @@ export function DesktopNavigation(props) {
   return (
     <StyledNavigation>
       <div className="container">
-        <Link to="/" className="logo-link">
+        <Link href="/" className="logo-link">
           <Logotype />
         </Link>
         <div className="navigation-section">
@@ -73,15 +72,11 @@ export function DesktopNavigation(props) {
           </NavigationButton>
         </div>
         <div className="user-section">
-          {!props.signedIn && (
-            <SignInButton onSignIn={() => props.requestSignIn()} />
-          )}
+          {!props.signedIn && <SignInButton onSignIn={() => props.requestSignIn()} />}
           {props.signedIn && (
             <>
               <DevActionsDropdown {...props} />
-              <NotificationWidget
-                notificationButtonSrc={props.widgets.notificationButton}
-              />
+              <NotificationWidget notificationButtonSrc={props.widgets.notificationButton} />
               <UserDropdown {...props} />
             </>
           )}

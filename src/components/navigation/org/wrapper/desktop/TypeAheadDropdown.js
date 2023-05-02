@@ -1,7 +1,8 @@
-import { Widget } from "near-social-vm";
-import React from "react";
+import React from 'react';
 
-import useRedirectMap from "../../../../../hooks/useRedirectMap";
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+
+import useRedirectMap from '../../../../../hooks/useRedirectMap';
 
 const TypeAheadDropdown = (props) => {
   const [shouldWaitForMap, redirectMap] = useRedirectMap();
@@ -17,11 +18,7 @@ const TypeAheadDropdown = (props) => {
       }}
     >
       {(!shouldWaitForMap || redirectMap) && (
-        <Widget
-          config={{ redirectMap }}
-          src={props.widgetSrc}
-          props={{ term: props.term }}
-        />
+        <VmWidgetWrapper config={{ redirectMap }} src={props.widgetSrc} props={{ term: props.term }} />
       )}
     </div>
   );

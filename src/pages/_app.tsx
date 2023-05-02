@@ -73,7 +73,9 @@ export default function App({ Component, pageProps }: AppProps) {
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
+
       <Component {...pageProps} />
+
       <Toaster position="bottom-center" richColors />
     </>
   );

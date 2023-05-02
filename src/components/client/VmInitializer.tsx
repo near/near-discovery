@@ -140,6 +140,7 @@ export default function VmInitializer() {
 
   useEffect(() => {
     setAuthStore({
+      account,
       accountId: signedAccountId || '',
       availableStorage,
       logOut,
@@ -149,6 +150,7 @@ export default function VmInitializer() {
       signedIn,
     });
   }, [
+    account,
     availableStorage,
     logOut,
     refreshAllowance,
@@ -164,8 +166,9 @@ export default function VmInitializer() {
       ethersContext: ethersProviderContext,
       EthersProvider: EthersProviderContext.Provider,
       Widget,
+      near,
     });
-  }, [ethersProviderContext, setVmStore]);
+  }, [ethersProviderContext, setVmStore, near]);
 
   return <></>;
 }

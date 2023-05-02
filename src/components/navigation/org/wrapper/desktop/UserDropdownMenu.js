@@ -1,10 +1,11 @@
-import "./UserDropdownMenu.css";
+import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import { useRouter } from 'next/router';
+import { useCallback } from 'react';
+import styled from 'styled-components';
 
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { useAccount,useNear, Widget } from "near-social-vm";
-import React, { useCallback } from "react";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { useAuthStore } from '@/stores/auth';
+import { useVmStore } from '@/stores/vm';
 
 const StyledDropdown = styled.div`
   > button {
@@ -49,33 +50,128 @@ const StyledDropdown = styled.div`
       color: #a1a09a;
     }
   }
+
+  .DropdownMenuContent {
+    min-width: 220px;
+    background-color: #161615;
+    border-radius: 6px;
+    margin-top: 11px;
+    padding: 5px;
+    box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
+    animation-duration: 600ms;
+    animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform, opacity;
+    z-index: 10000000;
+  }
+  .DropdownMenuContent[data-side='top'] {
+    animation-name: slideDownAndFade;
+  }
+  .DropdownMenuContent[data-side='right'] {
+    animation-name: slideLeftAndFade;
+  }
+  .DropdownMenuContent[data-side='bottom'] {
+    animation-name: slideUpAndFade;
+  }
+  .DropdownMenuContent[data-side='left'] {
+    animation-name: slideRightAndFade;
+  }
+
+  .DropdownMenuItem {
+    all: unset;
+    font-size: 13px;
+    line-height: 1;
+    color: #9ba1a6;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+    padding-left: 25px;
+    user-select: none;
+    outline: none;
+  }
+
+  .DropdownMenuItem:hover {
+    color: white;
+    cursor: pointer;
+  }
+
+  .DropdownMenuItem i {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+
+  @keyframes slideUpAndFade {
+    from {
+      opacity: 0;
+      transform: translateY(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideRightAndFade {
+    from {
+      opacity: 0;
+      transform: translateX(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideDownAndFade {
+    from {
+      opacity: 0;
+      transform: translateY(-2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideLeftAndFade {
+    from {
+      opacity: 0;
+      transform: translateX(2px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 `;
 
 const UserDropdownMenu = (props) => {
-  const near = useNear();
-  const account = useAccount();
-  const history = useHistory();
+  const accountId = useAuthStore((store) => store.accountId);
+  const near = useVmStore((store) => store.near);
+  const router = useRouter();
 
   const withdrawStorage = useCallback(async () => {
-    await near.contract.storage_withdraw({}, undefined, "1");
+    if (!near) return;
+    await near.contract.storage_withdraw({}, undefined, '1');
   }, [near]);
 
   return (
     <StyledDropdown>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-          <Widget
+          <VmWidgetWrapper
             src={props.widgets.profileImage}
             props={{
-              accountId: account.accountId,
-              className: "d-inline-block",
+              accountId,
+              className: 'd-inline-block',
             }}
           />
           <div className="profile-info">
             <div className="profile-name">
-              <Widget src={props.widgets.profileName} />
+              <VmWidgetWrapper src={props.widgets.profileName} />
             </div>
-            <div className="profile-username">{account.accountId}</div>
+            <div className="profile-username">{accountId}</div>
           </div>
           <i className="ph ph-caret-down"></i>
         </DropdownMenu.Trigger>
@@ -84,26 +180,16 @@ const UserDropdownMenu = (props) => {
           <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5}>
             <DropdownMenu.Item
               className="DropdownMenuItem"
-              onClick={() =>
-                history.push(
-                  `/${props.widgets?.profilePage}?accountId=${account.accountId}`
-                )
-              }
+              onClick={() => router.push(`/${props.widgets?.profilePage}?accountId=${accountId}`)}
             >
               <i className="ph-duotone ph-user"></i>
               Profile
             </DropdownMenu.Item>
-            <DropdownMenu.Item
-              className="DropdownMenuItem"
-              onClick={() => withdrawStorage()}
-            >
+            <DropdownMenu.Item className="DropdownMenuItem" onClick={() => withdrawStorage()}>
               <i className="ph-duotone ph-bank"></i>
               Withdraw {props.availableStorage.div(1000).toFixed(2)}kb
             </DropdownMenu.Item>
-            <DropdownMenu.Item
-              className="DropdownMenuItem"
-              onClick={() => props.logOut()}
-            >
+            <DropdownMenu.Item className="DropdownMenuItem" onClick={() => props.logOut()}>
               <i className="ph-duotone ph-sign-out"></i>
               Sign out
             </DropdownMenu.Item>
