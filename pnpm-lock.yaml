@@ -138,9 +138,15 @@ dependencies:
     version: 4.3.7(react@18.2.0)
 
 devDependencies:
+  '@types/analytics-node':
+    specifier: ^3.1.11
+    version: 3.1.11
   '@types/big.js':
     specifier: ^6.1.6
     version: 6.1.6
+  '@types/lodash':
+    specifier: ^4.14.194
+    version: 4.14.194
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.59.2
     version: 5.59.2(@typescript-eslint/parser@5.59.2)(eslint@8.39.0)(typescript@5.0.4)
@@ -3348,6 +3354,10 @@ packages:
     resolution: {integrity: sha512-yOlFc+7UtL/89t2ZhjPvvB/DeAr3r+Dq58IgzsFkOAvVC6NMJXmCGjbptdXdR9qsX7pKcTL+s87FtYREi2dEEQ==}
     dev: false
 
+  /@types/analytics-node@3.1.11:
+    resolution: {integrity: sha512-CNQVFhaEwL5dEzzV+OtJxt5psRQKJ+XHd0eokdPOM432tpDd4vgB6FzYRCDhDo8uxH0JPXlF6BVA9sbJPpUuug==}
+    dev: true
+
   /@types/big.js@6.1.6:
     resolution: {integrity: sha512-0r9J+Zz9rYm2hOTwiMAVkm3XFQ4u5uTK37xrQMhc9bysn/sf/okzovWMYYIBMFTn/yrEZ11pusgLEaoarTlQbA==}
     dev: true
@@ -3370,6 +3380,10 @@ packages:
   /@types/json5@0.0.29:
     resolution: {integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==}
     dev: false
+
+  /@types/lodash@4.14.194:
+    resolution: {integrity: sha512-r22s9tAS7imvBt2lyHC9B8AGwWnXaYb1tY09oyLkXDs4vArpYJzw09nj8MLx5VfciBPGIb+ZwG0ssYnEPJxn/g==}
+    dev: true
 
   /@types/long@4.0.2:
     resolution: {integrity: sha512-MqTGEo5bj5t157U6fA/BiDynNkn0YknVdh48CMPkTSpFTVmvao5UQmm7uEF6xBEo7qIMAlY/JSleYaE6VOdpaA==}

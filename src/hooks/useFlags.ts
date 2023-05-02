@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 /**
  * Use Application flags
@@ -15,7 +15,7 @@ type Flags = {
 export function useFlags() {
   const [rawFlags, setRawFlags] = useState<Flags>();
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const flags = localStorage.getItem('flags') ? JSON.parse(localStorage.getItem('flags') || '') : {};
     setRawFlags(flags);
   }, []);

@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect, useLayoutEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 import { useFlags } from '@/hooks/useFlags';
@@ -20,7 +20,7 @@ export default function ViewComponentPage() {
   const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const widgets = useWidgets();
-  const [flags, setFlags] = useFlags();
+  const [, setFlags] = useFlags();
 
   useHashUrlBackwardsCompatibility();
 
@@ -49,7 +49,7 @@ export default function ViewComponentPage() {
     }, 1);
   }, [widgetSrc]);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);
 
     function zendeskCheck() {
@@ -99,11 +99,10 @@ export default function ViewComponentPage() {
             }}
           >
             <span>Loading components from: {loaderUrl}</span>
-            {flags.bosLoaderUrl && (
-              <button className="btn btn-outline" onClick={() => setFlags({ bosLoaderUrl: undefined })}>
-                <i className="bi bi-x" />
-              </button>
-            )}
+
+            <button className="btn btn-outline" onClick={() => setFlags({ bosLoaderUrl: undefined })}>
+              <i className="bi bi-x" />
+            </button>
           </div>
         )}
         {loaderError && (
