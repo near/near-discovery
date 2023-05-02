@@ -1,10 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import { Link } from "react-router-dom";
-import LogoBlack from "../icons/logo-black.svg";
-import CodeSmall from "../icons/code-small.svg";
-import { AvatarPlaceholder } from "../icons/AvatarPlaceholder";
 import { Widget } from "near-social-vm";
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import { AvatarPlaceholder } from "../icons/AvatarPlaceholder";
+import CodeSmall from "../icons/code-small.svg";
+import LogoBlack from "../icons/logo-black.svg";
 
 const StyledNavigation = styled.div`
   position: sticky;

@@ -1,12 +1,13 @@
+import { Widget } from "near-social-vm";
 import React from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
-import { NavigationButton } from "../NavigationButton";
+
+import { Bell } from "../icons/Bell";
 import { HouseLine } from "../icons/HouseLine";
 import { MagnifyingGlass } from "../icons/MagnifyingGlass";
 import { UserLarge } from "../icons/UserLarge";
-import { Widget } from "near-social-vm";
-import { useLocation } from "react-router-dom";
-import { Bell } from "../icons/Bell";
+import { NavigationButton } from "../NavigationButton";
 
 const StyledNavigation = styled.div`
   position: fixed;

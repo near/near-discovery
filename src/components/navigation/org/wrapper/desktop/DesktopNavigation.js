@@ -1,16 +1,17 @@
-import React, { useState, useEffect, useRef } from "react";
-import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
-import styled from "styled-components";
-import NearLogotype from "../../icons/near-logotype.svg";
-import LogoBlack from "../../icons/logo-black.svg";
+import React, { useEffect, useRef,useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-import image from "../../icons/search.svg";
-import { Return } from "../../icons/Return";
+import styled from "styled-components";
+
 import { recordEvent } from "../../../../../utils/analytics";
+import { flushEvents,recordClick } from "../../../../../utils/analytics";
+import LogoBlack from "../../icons/logo-black.svg";
+import NearLogotype from "../../icons/near-logotype.svg";
+import { Return } from "../../icons/Return";
+import image from "../../icons/search.svg";
 import { NotificationWidget } from "../../NotificationWidget";
-import UserDropdownMenu from "./UserDropdownMenu";
+import MainNavigationMenu from "./main_navigation_menu/MainNavigationMenu";
 import TypeAheadDropdown from "./TypeAheadDropdown";
-import { recordClick, flushEvents } from "../../../../../utils/analytics";
+import UserDropdownMenu from "./UserDropdownMenu";
 
 const StyledNavigation = styled.div`
   z-index: 1000;

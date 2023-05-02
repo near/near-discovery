@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+import classNames from "classnames";
+import { Widget } from "near-social-vm";
+import React, { useEffect,useState } from "react";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+
 import LogoBlack from "../icons/logo-black.svg";
 import NearLogotype from "../icons/near-logotype.svg";
-import { Widget } from "near-social-vm";
-import { useHistory } from "react-router-dom";
-import classNames from "classnames";
 
 const StyledNavigation = styled.div`
   position: sticky;

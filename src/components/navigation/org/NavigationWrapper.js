@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
-import DesktopNavigation from "./wrapper/desktop/DesktopNavigation";
+import React, { useEffect,useState } from "react";
+
 import MobileNavigation from "./mobile/MobileNavigation";
+import DesktopNavigation from "./wrapper/desktop/DesktopNavigation";
 
 const NavigationWrapper = (props) => {
   const [matches, setMatches] = useState(

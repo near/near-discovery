@@ -1,13 +1,14 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import { ArrowUpRight } from "../../icons/ArrowUpRight";
 import { Logotype } from "../Logotype";
 import { NavigationButton } from "../NavigationButton";
-import { ArrowUpRight } from "../../icons/ArrowUpRight";
-import { SignInButton } from "../SignInButton";
-import { UserDropdown } from "./UserDropdown";
-import { DevActionsDropdown } from "./DevActionsDropdown";
 import { NotificationWidget } from "../NotificationWidget";
+import { SignInButton } from "../SignInButton";
+import { DevActionsDropdown } from "./DevActionsDropdown";
+import { UserDropdown } from "./UserDropdown";
 
 const StyledNavigation = styled.div`
   position: sticky;

@@ -1,6 +1,7 @@
+import { Widget } from "near-social-vm";
 import React from "react";
 import styled from "styled-components";
-import { Widget } from "near-social-vm";
+
 import { NavDropdownMenuLinkList } from "./NavDropdownMenuLinkList";
 
 const StyledNavDropdownMenu = styled.div`

@@ -1,5 +1,6 @@
-import React from "react";
 import { Widget } from "near-social-vm";
+import React from "react";
+
 import useRedirectMap from "../../../../../hooks/useRedirectMap";
 
 const TypeAheadDropdown = (props) => {

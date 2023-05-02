@@ -1,16 +1,17 @@
-import React from "react";
-import styled from "styled-components";
-import { Close } from "../../icons/Close";
-import { Home } from "../../icons/Home";
-import { Book } from "../../icons/Book";
-import { Code } from "../../icons/Code";
-import { LogOut } from "../../icons/LogOut";
-import { Fork } from "../../icons/Fork";
-import { UserCircle } from "../../icons/UserCircle";
 import { Widget } from "near-social-vm";
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import { Book } from "../../icons/Book";
+import { Close } from "../../icons/Close";
+import { Code } from "../../icons/Code";
+import { Fork } from "../../icons/Fork";
+import { Home } from "../../icons/Home";
+import { LogOut } from "../../icons/LogOut";
+import { UserCircle } from "../../icons/UserCircle";
 import { NavigationButton } from "../NavigationButton";
 import { SignInButton } from "../SignInButton";
-import { Link } from "react-router-dom";
 
 const StyledMenu = styled.div`
   position: fixed;

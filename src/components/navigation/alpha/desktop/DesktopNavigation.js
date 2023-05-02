@@ -1,18 +1,18 @@
 import React, { useState } from "react";
-
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+
+import { recordEvent } from "../../../../../utils/analytics";
 import { Logo } from "../icons/Logo";
-import { NavDropdownButton } from "./NavDropdownButton";
-import { NavDropdownMenu } from "./nav_dropdown/NavDropdownMenu";
+import { Return } from "../icons/Return";
+import image from "../icons/search.svg";
 import { NavigationButton } from "../NavigationButton";
 import { NotificationWidget } from "../NotificationWidget";
-import { Return } from "../icons/Return";
 import { SignInButton } from "../SignInButton";
+import { NavDropdownMenu } from "./nav_dropdown/NavDropdownMenu";
+import { NavDropdownButton } from "./NavDropdownButton";
 import { UserDropdown } from "./UserDropdown";
-import image from "../icons/search.svg";
-import styled from "styled-components";
-import { useHistory } from "react-router-dom";
-import { recordEvent } from "../../../../../utils/analytics";
 
 const StyledNavigation = styled.div`
   position: sticky;

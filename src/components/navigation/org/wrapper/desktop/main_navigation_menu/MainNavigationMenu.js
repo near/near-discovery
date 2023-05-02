@@ -1,11 +1,13 @@
-import React from "react";
+import "./styles.css";
+
 import * as NavigationMenu from "@radix-ui/react-navigation-menu";
 import classNames from "classnames";
-import "./styles.css";
+import React from "react";
+import { NavLink, useHistory } from "react-router-dom";
+
+import { recordMouseEnter } from "../../../../../../utils/analytics";
 import CurrentComponent from "../../../CurrentComponent";
 import { navLinkData } from "../../../orgLinks";
-import { NavLink, useHistory } from "react-router-dom";
-import { recordMouseEnter } from "../../../../../../utils/analytics";
 
 const MainNavigationMenu = (props) => {
   const history = useHistory();
