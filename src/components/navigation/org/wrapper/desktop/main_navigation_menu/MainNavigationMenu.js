@@ -124,41 +124,39 @@ const MainNavigationMenu = (props) => {
             </ul>
           </NavigationMenu.Content>
         </NavigationMenu.Item>
-        {!props.signedIn && (
-          <NavigationMenu.Item>
-            <NavigationMenu.Trigger
-              className="NavigationMenuTrigger"
-              onMouseEnter={recordMouseEnter}
-            >
-              Solutions
-            </NavigationMenu.Trigger>
-            <NavigationMenu.Content className="NavigationMenuContent">
-              <ul className="List two">
-                <ListItem
-                  title={navLinkData.developers.title}
-                  route={navLinkData.developers.link}
-                >
-                  <i className="ph-duotone ph-code"></i>
-                  {navLinkData.developers.description}
-                </ListItem>
-                <ListItem
-                  title={navLinkData.founders.title}
-                  route={navLinkData.founders.link}
-                >
-                  <i className="ph-duotone ph-potted-plant"></i>
-                  {navLinkData.founders.description}
-                </ListItem>
-                <ListItem
-                  title={navLinkData.earlyAdopters.title}
-                  route={navLinkData.earlyAdopters.link}
-                >
-                  <i className="ph-duotone ph-leaf"></i>
-                  {navLinkData.earlyAdopters.description}
-                </ListItem>
-              </ul>
-            </NavigationMenu.Content>
-          </NavigationMenu.Item>
-        )}
+        <NavigationMenu.Item>
+          <NavigationMenu.Trigger
+            className="NavigationMenuTrigger"
+            onMouseEnter={recordMouseEnter}
+          >
+            Solutions
+          </NavigationMenu.Trigger>
+          <NavigationMenu.Content className="NavigationMenuContent">
+            <ul className="List two">
+              <ListItem
+                title={navLinkData.developers.title}
+                route={navLinkData.developers.link}
+              >
+                <i className="ph-duotone ph-code"></i>
+                {navLinkData.developers.description}
+              </ListItem>
+              <ListItem
+                title={navLinkData.founders.title}
+                route={navLinkData.founders.link}
+              >
+                <i className="ph-duotone ph-potted-plant"></i>
+                {navLinkData.founders.description}
+              </ListItem>
+              <ListItem
+                title={navLinkData.earlyAdopters.title}
+                route={navLinkData.earlyAdopters.link}
+              >
+                <i className="ph-duotone ph-leaf"></i>
+                {navLinkData.earlyAdopters.description}
+              </ListItem>
+            </ul>
+          </NavigationMenu.Content>
+        </NavigationMenu.Item>
         <NavigationMenu.Item>
           <NavigationMenu.Trigger
             className="NavigationMenuTrigger"
