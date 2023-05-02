@@ -6,7 +6,7 @@ import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Script from 'next/script';
-import React, { useCallback, useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 
 import { init as initializeSegment } from '@/utils/analytics';
@@ -32,15 +32,15 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property="og:title" content={metaProps.title} />
         <meta name="description" content={metaProps.description} />
         <meta property="og:description" content={metaProps.description} />
-
-        <script src="https://unpkg.com/@phosphor-icons/web@2.0.3" async></script>
-        <link href="https://neardiscovery.zendesk.com" rel="preconnect" />
-        <script
-          src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
-          id="ze-snippet"
-          async
-        ></script>
       </Head>
+
+      <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
+
+      <Script
+        src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
+        id="ze-snippet"
+        async
+      />
 
       <Script id="zendesk-config">
         {`
@@ -70,7 +70,7 @@ export default function App({ Component, pageProps }: AppProps) {
         `}
       </Script>
 
-      <Script id="bootstrap" src="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
+      <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
       <Component {...pageProps} />

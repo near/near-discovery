@@ -1,15 +1,15 @@
-import { useEthersProviderStore } from '@/stores/ethers-provider';
+import { useVmStore } from '@/stores/vm';
 
 export function VmWidgetWrapper(props: any) {
-  const { Provider, context, Widget } = useEthersProviderStore();
+  const { EthersProvider, ethersContext, Widget } = useVmStore();
 
-  if (!Provider) {
+  if (!EthersProvider) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Provider value={context}>
+    <EthersProvider value={ethersContext}>
       <Widget {...props} />
-    </Provider>
+    </EthersProvider>
   );
 }
