@@ -1,7 +1,8 @@
 import Analytics from "analytics-node";
-import { nanoid } from "nanoid";
-import { get, split, truncate } from "lodash";
 import { createHash } from "crypto";
+import { get, split, truncate } from "lodash";
+import { nanoid } from "nanoid";
+
 import { NetworkId } from "../data/widgets";
 
 let segment;

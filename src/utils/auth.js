@@ -1,8 +1,9 @@
-import { NetworkId } from '../data/widgets';
-import { base_encode } from 'near-api-js/lib/utils/serialize';
 import { createKey } from '@near-js/biometric-ed25519';
-import { firebaseAuth } from './firebase';
 import { sendSignInLinkToEmail } from 'firebase/auth';
+import { base_encode } from 'near-api-js/lib/utils/serialize';
+
+import { NetworkId } from '../data/widgets';
+import { firebaseAuth } from './firebase';
 
 export const ACCOUNT_ID_SUFFIX = NetworkId === 'mainnet' ? 'near' : 'testnet';
 export const HELPER_URL = NetworkId === 'mainnet' ? 'https://api.kitwallet.app' : 'https://testnet-api.kitwallet.app';

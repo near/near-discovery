@@ -1,6 +1,7 @@
-import { NetworkId } from "../data/widgets";
-import { getAuth } from "firebase/auth";
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+
+import { NetworkId } from "../data/widgets";
 
 // TODO: Add SDKs for Firebase products that you want to use
 
