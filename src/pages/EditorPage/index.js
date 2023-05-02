@@ -25,14 +25,22 @@ import {
   StorageType,
   Tab,
   Layout,
+  fileObjectDefault,
+  getForkName,
 } from "./utils/const";
 import {
   checkChangesMade,
+  createFilesObject,
+  fileToJpath,
+  fileToPath,
+  fileToSrc,
   generateNewName,
   getDefaultCode,
   getSrcByNameOrPath,
   getWidgetDetails,
+  nameToPath,
   toPath,
+  updateCodeLocalStorage,
   updateLocalStorage,
 } from "./utils/editor";
 import MainLoader from "./Welcome/MainLoader";
@@ -192,31 +200,51 @@ const EditorPage = ({
   }, [widgetProps]);
 
   useEffect(() => {
+    if (!cache || !near) {
+      return;
+    }
+    firstLoad();
+  }, [cache, near]);
+
+  const selectFile = (file) => {
+    setPath(fileToPath(file));
+    setLastPath(fileToPath(file));
+    setMetadata(undefined);
+  };
+
+  const firstLoad = () => {
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
-      .then((res = {}) => {
-        let onboardingPath;
-        if (onboarding && currentStep === 1) {
-          onboardingPath = onboardingComponents.starter;
-          setLastPath(onboardingPath);
-        }
-        if (onboarding && currentStep > 1) {
-          onboardingPath = onboardingComponents.starterFork;
-          setLastPath(onboardingPath);
-        }
-
+      .then(({ files, lastPath, lastSrc } = {}) => {
         if (onboarding && currentStep === 1) {
           const onboardingPath = onboardingComponents.starter;
-          near && createFilesObject([onboardingPath]);
-          selectFile(onboardingPath);
-          setMainLoader(false);
+          const filesObject = createFilesObject([onboardingComponents.starter]);
+          setFilesObject(filesObject);
+          selectFile(filesObject[fileToJpath(onboardingPath)]);
+          getAllFileLocalStorage(filesObject);
+          getAllFileSocialDB(filesObject);
+          return;
+        }
+        if (onboarding && currentStep > 1) {
+          const onboardingPath = onboardingComponents.starterFork;
+          const filesObject = createFilesObject([
+            onboardingComponents.starter,
+            onboardingComponents.starterFork,
+          ]);
+          setFilesObject(filesObject);
+          selectFile(filesObject[fileToJpath(onboardingPath)]);
+          getAllFileLocalStorage(filesObject);
+          getAllFileSocialDB(filesObject);
           return;
         }
 
-        setLastPath(res.lastPath);
-        near && createFilesObject(res.files || []);
-        selectFile(res.lastPath);
-        setMainLoader(false);
+        const lastJpath = fileToJpath(lastPath);
+        const filesObject = createFilesObject(files);
+
+        selectFile(filesObject[lastJpath]);
+        setFilesObject(filesObject);
+        getAllFileLocalStorage(filesObject);
+        getAllFileSocialDB(filesObject);
 
         if (widgetSrc) {
           setWidgetSrc({
@@ -226,127 +254,135 @@ const EditorPage = ({
           setDefaultWidget(widgetSrc);
         }
       });
-  }, [cache, near]);
-
-  const reloadFile = () => {
-    const onboardingPath = onboardingComponents.starter;
-    near && createFilesObject([onboardingPath]);
-    selectFile(onboardingPath);
-    setMainLoader(false);
-    loadAndOpenFile("near/widget/Onboarding.Starter", Filetype.Widget);
   };
 
-  const createFilesObject = (files = []) => {
-    const filesObject = files.reduce(
-      (x, file) => ({
-        ...x,
-        [JSON.stringify({ type: file.type, name: file.name })]: {
-          ...file,
-          codeMain: "",
-          codeDraft: "",
-          codeLocalStorage: "",
-          isDraft: false,
-          changesMade: false,
-          savedOnChain: undefined,
-          new: true,
-        },
-      }),
-      {}
-    );
-    setFilesObject(filesObject);
-
-    Object.values(filesObject).map((fileObject) => {
-      const path = { type: fileObject.type, name: fileObject.name };
-      const jpath = JSON.stringify(path);
-      const widgetSrc = `${accountId}/${fileObject.type}/${fileObject.name}/**`;
-
-      const fetchCode = () => {
-        const widgetObject = cache.socialGet(
-          near,
-          widgetSrc,
-          false,
-          undefined,
-          undefined,
-          fetchCode
-        );
-
-        if (widgetObject && filesObject[jpath].new) {
-          cache
-            .asyncLocalStorageGet(StorageDomain, {
-              path: path,
-              type: StorageType.Code,
-            })
-            .then(({ code }) => {
-              const { codeMain, codeDraft, isDraft } =
-                getWidgetDetails(widgetObject);
-
-              let changesMade = checkChangesMade(codeMain, codeDraft, code);
-
-              if (!filesObject[jpath].new) {
-                changesMade = false;
-              }
-
-              filesObject[jpath] = {
-                ...filesObject[jpath],
-                codeMain,
-                codeDraft,
-                codeLocalStorage: code,
-                isDraft,
-                changesMade: changesMade,
-                savedOnChain: true,
-                new: false,
-              };
-              setFilesObject(filesObject);
-            });
-        }
-      };
-      fetchCode();
+  const getAllFileLocalStorage = (filesObject) => {
+    Object.values(filesObject).map((file) => {
+      getFileLocalStorage(file);
     });
   };
 
-  const renameFile = (newName) => {
-    const newPath = toPath(path.type, newName);
-    const jNewPath = JSON.stringify(newPath);
-    let newFilesObject = { ...filesObject };
+  const getFileLocalStorage = (file) => {
+    const path = fileToPath(file);
+    const jpath = fileToJpath(file);
 
-    const fileObject = { ...newFilesObject[jpath] };
-    delete newFilesObject[jpath];
+    cache
+      .asyncLocalStorageGet(StorageDomain, {
+        path,
+        type: StorageType.Code,
+      })
+      .then(({ code }) => {
+        setFilesObject((state) => ({
+          ...state,
+          [jpath]: {
+            ...state[jpath],
+            codeLocalStorage: code,
+            codeVisible: code,
+          },
+        }));
+      });
+  };
 
-    newFilesObject = {
-      ...newFilesObject,
-      [jNewPath]: {
-        ...fileObject,
-        name: newName,
-      },
+  const getAllFileSocialDB = (filesObject) => {
+    Object.values(filesObject).map((file) => {
+      getFileSocialDB(file);
+    });
+  };
+
+  const getFileSocialDB = (file, setLocalStorage = false) => {
+    if (!file.src) {
+      return;
+    }
+
+    const jpath = fileToJpath(file);
+    const widgetSrc = `${file.src}/**`;
+
+    const fetchCode = () => {
+      const widgetObject = cache.socialGet(
+        near,
+        widgetSrc,
+        false,
+        undefined,
+        undefined,
+        fetchCode
+      );
+
+      if (widgetObject && file.new) {
+        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
+
+        setFilesObject((state) => ({
+          ...state,
+          [jpath]: {
+            ...state[jpath],
+            codeMain,
+            codeDraft,
+            isDraft,
+            changesMade: checkChangesMade(
+              codeMain,
+              codeDraft,
+              state[jpath]?.codeLocalStorage || ""
+            ),
+            savedOnChain: true,
+            new: false,
+          },
+        }));
+
+        if (setLocalStorage) {
+          const newPath = fileToPath(file);
+          const code = codeDraft || codeMain;
+          updateCodeLocalStorage(newPath, codeDraft || codeMain, cache);
+          setFilesObject((state) => ({
+            ...state,
+            [jpath]: {
+              ...state[jpath],
+              codeLocalStorage: code,
+              codeVisible: code,
+              changesMade: false,
+            },
+          }));
+        }
+      }
     };
-    updateFiles(newFilesObject, newPath);
-    selectFile(newPath);
+    fetchCode();
+  };
+
+  const renameFile = (newName) => {
+    const pathNew = nameToPath(path.type, newName);
+    const jpathNew = fileToJpath(pathNew);
+
+    setFilesObject((state) => {
+      const newState = {
+        ...state,
+        [jpathNew]: {
+          ...state[jpath],
+          name: newName,
+        },
+      };
+      delete newState[jpath];
+      updateLocalStorage(newState, pathNew, cache);
+      return newState;
+    });
+    selectFile(pathNew);
     setRenderCode(null);
-    updateCode(newPath, codeVisible);
   };
 
   const changeCode = (path, code) => {
-    updateCode(path, code);
-
+    updateCodeLocalStorage(path, code, cache);
     const jpath = JSON.stringify(path);
-    setFilesObject(
-      (files) => files[jpath] && (files[jpath].codeLocalStorage = code) && files
-    );
-  };
 
-  const updateCode = (path, code) => {
-    cache.localStorageSet(
-      StorageDomain,
-      {
-        path,
-        type: StorageType.Code,
+    setFilesObject((state) => ({
+      ...state,
+      [jpath]: {
+        ...state[jpath],
+        codeLocalStorage: code,
+        codeVisible: code,
+        changesMade: checkChangesMade(
+          state[jpath].codeMain,
+          state[jpath].codeDraft,
+          code
+        ),
       },
-      {
-        code,
-        time: Date.now(),
-      }
-    );
-    setCodeVisible(code);
+    }));
   };
 
   const reformat = (path, code) => {
@@ -355,7 +391,7 @@ const EditorPage = ({
         parser: "babel",
         plugins: [parserBabel],
       });
-      updateCode(path, formattedCode);
+      changeCode(path, formattedCode);
     } catch (e) {
       console.log(e);
     }
@@ -369,10 +405,8 @@ const EditorPage = ({
 
     const lastFile = !Object.keys(newFilesObject).length;
 
-    let newPath;
     if (lastFile) {
-      newPath = undefined;
-      updateLocalStorage(newFilesObject, newPath, cache);
+      updateLocalStorage(newFilesObject, undefined, cache);
       return;
     }
 
@@ -383,10 +417,18 @@ const EditorPage = ({
 
     if (jpath === JSON.stringify(lastPath)) {
       const newFile = Object.values(newFilesObject)[0];
-      newPath = { type: newFile.type, name: newFile.name };
+      const newPath = fileToPath(newFile);
       selectFile(newPath);
       setRenderCode(null);
       updateLocalStorage(newFilesObject, newPath, cache);
+    }
+  };
+
+  const changeFile = (path) => {
+    if (filesObject[JSON.stringify(path)]) {
+      setRenderCode(null);
+      selectFile(path);
+      updateLocalStorage(filesObject, path, cache);
     }
   };
 
@@ -416,47 +458,24 @@ const EditorPage = ({
     }
   };
 
-  const selectFile = (path) => {
-    setPath(path);
-    setLastPath(path);
-    setMetadata(undefined);
-    cache
-      .asyncLocalStorageGet(StorageDomain, {
-        path,
-        type: StorageType.Code,
-      })
-      .then(({ code }) => {
-        updateCode(path, code);
-      });
-  };
-
-  const updateFiles = (newFilesObject, lastPath) => {
-    updateLocalStorage(newFilesObject, lastPath, cache);
-    setFilesObject(newFilesObject);
-  };
-
-  const closeAllFiles = () => {
-    Object.values(filesObject).map((file) => {
-      closeFile({ type: file.type, name: file.name });
-    });
-  };
-
-  const changeFile = (path) => {
-    if (filesObject[JSON.stringify(path)]) {
-      setRenderCode(null);
-      selectFile(path);
-      updateFiles(filesObject, path);
-    }
-  };
-
   const forkFile = () => {
-    const forkName = widgetName + "-fork";
-    const path = toPath(Filetype.Widget, forkName);
-
-    addFile(filesObject, path, codeVisible, "", false, false);
-    updateCode(path, codeVisible);
+    const forkName = getForkName(widgetName);
+    const forkPath = nameToPath(Filetype.Widget, forkName);
+    const forkedFile = filesObject[JSON.stringify(path)];
+    const newFile = {
+      ...forkedFile,
+      ...forkPath,
+      codeDraft: "",
+      isDraft: false,
+      changesMade: true,
+      savedOnChain: false,
+      new: false,
+      loading: false,
+    };
+    addFile(newFile);
+    updateCodeLocalStorage(forkPath, newFile.codeLocalStorage, cache);
     setRenderCode(null);
-    selectFile(path);
+    selectFile(forkPath);
 
     if (onboarding) {
       if (currentStep === 1) {
@@ -470,74 +489,72 @@ const EditorPage = ({
     }
   };
 
+  const addFile = (file) => {
+    const newFilesObject = {
+      ...filesObject,
+      [fileToJpath(file)]: file,
+    };
+    setFilesObject(newFilesObject);
+    updateLocalStorage(newFilesObject, fileToPath(file), cache);
+  };
+
   const createFile = (type) => {
+    const newCode = getDefaultCode(type);
     const files = Object.values(filesObject).map((file) => ({
       type: file.type,
       name: file.name,
     }));
-    const path = generateNewName(type, files);
-    const code = getDefaultCode(type);
 
-    addFile(filesObject, path, code, "", false, false);
-    updateCode(path, code);
-    selectFile(path);
+    const newFile = {
+      ...fileObjectDefault,
+      type,
+      name: generateNewName(type, files).name,
+      codeMain: "",
+      codeDraft: "",
+      codeLocalStorage: newCode,
+      isDraft: false,
+      changesMade: true,
+      savedOnChain: false,
+      new: false,
+    };
+
+    const newPath = fileToPath(newFile);
+
+    addFile(newFile);
+    updateCodeLocalStorage(newPath, newCode, cache);
     setRenderCode(null);
+    selectFile(newPath);
   };
 
   const loadAndOpenFile = (nameOrPath, type) => {
     const onboardingId = onboarding && "near";
-    const widgetSrc = getSrcByNameOrPath(
-      nameOrPath,
-      onboardingId || accountId,
-      type
-    );
-    const widgetSrcFull = `${widgetSrc}/**`;
-    const cacheGet = () => {
-      const widgetObject = cache.socialGet(
-        near,
-        widgetSrcFull,
-        false,
-        undefined,
-        undefined,
-        cacheGet
-      );
+    const src = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
+    const path = toPath(type, nameOrPath);
 
-      if (widgetObject) {
-        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
-        const codeCurrent = codeDraft || codeMain;
-        const path = toPath(type, widgetSrc);
-
-        addFile(filesObject, path, codeMain, codeDraft, isDraft, true);
-        updateCode(path, codeCurrent);
-        selectFile(path);
-        setRenderCode(null);
-      }
+    const newFile = {
+      ...fileObjectDefault,
+      ...path,
+      src,
+      codeMain: "",
+      codeDraft: "",
+      codeLocalStorage: "",
+      isDraft: false,
+      changesMade: false,
+      savedOnChain: false,
+      new: true,
     };
-    cacheGet();
+    addFile(newFile);
+    // updateCodeLocalStorage(path, "", cache);
+    setRenderCode(null);
+    selectFile(path);
+    getFileSocialDB(newFile, true);
   };
 
-  const addFile = (
-    filesObject,
-    path,
-    codeMain,
-    codeDraft,
-    isDraft,
-    savedOnChain
-  ) => {
-    const newFilesObject = {
-      ...filesObject,
-      [JSON.stringify(path)]: {
-        ...path,
-        codeMain: codeMain,
-        codeDraft: codeDraft,
-        codeLocalStorage: codeDraft || codeMain,
-        isDraft: isDraft,
-        changesMade: false,
-        savedOnChain: savedOnChain,
-      },
-    };
-
-    updateFiles(newFilesObject, path);
+  const reloadFile = () => {
+    const onboardingPath = onboardingComponents.starter;
+    selectFile(onboardingPath);
+    setMainLoader(false);
+    loadAndOpenFile("near/widget/Onboarding.Starter", Filetype.Widget);
   };
 
   const handleCommit = () => {
@@ -693,6 +710,7 @@ const EditorPage = ({
                           reformat={reformat}
                           refs={refs}
                           refEditor={refEditor}
+                          filesObject={filesObject}
                         />
                         <TabProps
                           tab={tab}

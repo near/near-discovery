@@ -62,8 +62,9 @@ export const getWidgetDetails = (widgetObject) => {
 
 export const updateLocalStorage = (newFilesObject, path, cache) => {
   const newFiles = Object.values(newFilesObject).map((file) => ({
-    type: file.type,
+    type: file.type || Filetype.Widget,
     name: file.name,
+    src: file.src,
   }));
   cache.localStorageSet(
     StorageDomain,
@@ -73,3 +74,38 @@ export const updateLocalStorage = (newFilesObject, path, cache) => {
     { files: newFiles, lastPath: path }
   );
 };
+
+export const updateCodeLocalStorage = (path, code, cache) => {
+  cache.localStorageSet(
+    StorageDomain,
+    {
+      path,
+      type: StorageType.Code,
+    },
+    {
+      code,
+      time: Date.now(),
+    }
+  );
+};
+
+export const nameToPath = (type, name) => ({ type, name });
+
+export const fileToPath = (file = {}) => ({ type: file.type, name: file.name });
+
+export const fileToJpath = (file = {}) => JSON.stringify(fileToPath(file));
+
+export const fileToSrc = (file = {}, accountId) =>
+  `${accountId}/${file.type}/${file.name}/**`;
+
+export const createFilesObject = (files = []) =>
+  files.reduce(
+    (x, file) => ({
+      ...x,
+      [fileToJpath(file)]: {
+        ...file,
+        ...fileObjectDefault,
+      },
+    }),
+    {}
+  );

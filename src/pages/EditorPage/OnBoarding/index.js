@@ -194,8 +194,10 @@ export default ({
 
     // additional actions for step
     if (currentStep === 1) {
-      reloadFile();
-      closeFile(onboardingComponents.starterFork);
+      closeFile({
+        type: onboardingComponents.starterFork.type,
+        name: onboardingComponents.starterFork.name,
+      });
     }
 
     // AdjustPosition

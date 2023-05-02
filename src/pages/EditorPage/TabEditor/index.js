@@ -4,14 +4,18 @@ import { Tab } from "../utils/const";
 
 const TabEditor = ({
   tab,
-  codeVisible,
+  // codeVisible,
   widgetPath,
   changeCode,
   path,
   reformat,
   refs,
   refEditor,
+  filesObject,
 }) => {
+  const jpath = JSON.stringify(path);
+  const codeVisible = filesObject[jpath]?.codeVisible;
+
   return (
     <div
       className={`${tab === Tab.Editor ? "" : "visually-hidden"}`}
