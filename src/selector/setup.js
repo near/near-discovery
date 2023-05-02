@@ -83,7 +83,7 @@ const fastAuth = async ({ logger, fastAuthWallet }) => {
   };
 };
 
-export function setupFastAuth({ deprecated = false, networkId, signInContractId, hideModal, relayerUrl }) {
+export function setupFastAuth({ deprecated = false, networkId, signInContractId, relayerUrl }) {
   return async () => {
     if (!signInContractId || !networkId) {
       console.warn(`fastAuthWallet: signInContractId, networkId, are required to use the fastAuthWallet.`);

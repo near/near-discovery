@@ -1,5 +1,7 @@
 import classNames from 'classnames';
+import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -89,7 +91,7 @@ const StyledNavigation = styled.div`
 
 export function TopNavigation(props) {
   const [scrolled, setScrolled] = useState(false);
-  const history = useHistory();
+  const router = useRouter();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -111,7 +113,7 @@ export function TopNavigation(props) {
     <StyledNavigation className={`${scrolled ? 'border-bottom' : ''}`}>
       {props.signedIn && (
         <button
-          onClick={() => history.push(`/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`)}
+          onClick={() => router.push(`/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`)}
           className="mobile-nav-profile-btn"
         >
           <VmWidgetWrapper
@@ -125,7 +127,7 @@ export function TopNavigation(props) {
         </button>
       )}
       <Link href="/" className={classNames(['logo-link', { large: !props.signedIn }])}>
-        <img src={props.signedIn ? LogoBlack : NearLogotype} alt="NEAR logo" />
+        <Image src={props.signedIn ? LogoBlack : NearLogotype} alt="NEAR logo" />
       </Link>
       <button onClick={() => props.onClickShowMenu('left')} className="mobile-nav-profile-btn">
         <div className="menu-icon">

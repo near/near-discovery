@@ -31,5 +31,5 @@ export function useHashUrlBackwardsCompatibility() {
         router.replace(url);
       }
     }
-  }, []);
+  }, [router]);
 }

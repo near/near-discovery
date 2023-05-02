@@ -1,12 +1,14 @@
-import { Widget } from "near-social-vm";
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
+
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 
 const StyledNotificationWidget = styled.div`
   margin: 0 15px;
-  background-color: var(--slate-dark-5);
-  height: 40px;
-  width: 40px;
+  border: 0.5px solid #e3e3e0;
+  background-color: #f3f3f2;
+  height: 46px;
+  width: 46px;
   border-radius: 50%;
 
   > div,
@@ -16,7 +18,8 @@ const StyledNotificationWidget = styled.div`
   }
 
   a {
-    color: var(--slate-dark-11) !important;
+    color: #1b1b18 !important;
+    background-color: #f3f3f2 !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -34,10 +37,10 @@ const StyledNotificationWidget = styled.div`
   }
 `;
 
-export function NotificationWidget({ notificationButtonSrc }) {
+export function NotificationWidget({ notificationButtonSrc, onMouseEnter }) {
   return (
-    <StyledNotificationWidget className="nav-notification-widget">
-      <Widget src={notificationButtonSrc} />
+    <StyledNotificationWidget className="nav-notification-widget" onMouseOver={onMouseEnter}>
+      <VmWidgetWrapper src={notificationButtonSrc} />
     </StyledNotificationWidget>
   );
 }

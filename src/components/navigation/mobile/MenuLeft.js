@@ -1,13 +1,15 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-import { flushEvents, recordClick } from '../../../../utils/analytics';
-import { Close } from '../../../icons/Close';
+import { Close } from '@/components/icons/Close';
+import { flushEvents, recordClick } from '@/utils/analytics';
+
+import UserDropdownMenu from '../desktop/UserDropdownMenu';
 import NearLogotype from '../icons/near-logotype.svg';
-import image from '../icons/search.svg';
+import SearchIcon from '../icons/search.svg';
 import { NotificationWidget } from '../NotificationWidget';
-import UserDropdownMenu from '../wrapper/desktop/UserDropdownMenu';
 import AccordionMenu from './AccordionMenu';
 
 const StyledMenu = styled.div`
@@ -148,8 +150,8 @@ const StyledMenu = styled.div`
 
   .right-side {
     flex: 20;
-    opacity: 0.8;
-    background-color: var(--slate-dark-1);
+    opacity: 0.6;
+    background-color: #000;
   }
 `;
 
@@ -173,10 +175,10 @@ export function MenuLeft(props) {
         <button className="close-button" onClick={props.onCloseMenu}>
           <Close />
         </button>
-        <img className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => router.push('/')} />
+        <Image className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => router.push('/')} />
         <button
           className="search-btn"
-          style={{ backgroundImage: `url(${image})` }}
+          style={{ backgroundImage: `url(${SearchIcon.src})` }}
           onClick={() => router.push(`/${props.widgets?.search.indexPage}`)}
         >
           Search NEAR

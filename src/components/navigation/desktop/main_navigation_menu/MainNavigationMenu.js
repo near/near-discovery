@@ -6,10 +6,10 @@ import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { useAuthStore } from '@/stores/auth';
+import { recordMouseEnter } from '@/utils/analytics';
 
-import { recordMouseEnter } from '../../../../../../utils/analytics';
-import CurrentComponent from '../../../CurrentComponent';
-import { navLinkData } from '../../../orgLinks';
+import CurrentComponent from '../../CurrentComponent';
+import { navLinkData } from '../../orgLinks';
 
 const Wrapper = styled.div`
   .NavigationMenuRoot {
