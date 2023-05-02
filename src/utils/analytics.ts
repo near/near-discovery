@@ -61,13 +61,13 @@ export function init() {
 }
 
 function isStringAllowed(str: string) {
-  const denyList = ['account_id', 'public_key', 'all_keys'];
+  const denyList = ['account_id', 'public_key', 'all_keys', 'publicKey', 'apiKey', 'accountId', 'email'];
   return !str || !denyList.some((param) => str.indexOf(param) !== -1);
 }
 
 function filterURL(url: string) {
-  const params = split(url, '?')[1];
-  return isStringAllowed(params) ? url : '';
+  const [urlTrim, params] = split(url, '?');
+  return isStringAllowed(params) ? url : urlTrim;
 }
 
 export function recordPageView(pageName: string) {
