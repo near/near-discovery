@@ -1,8 +1,8 @@
-import { Widget } from 'near-social-vm';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
@@ -15,7 +15,7 @@ export default function EmbedComponentPage() {
   const authStore = useAuthStore();
 
   const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
-  const widgetSrc = `${router.query.accountId}/widget/${router.query.widgetName}`;
+  const widgetSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
 
   useHashUrlBackwardsCompatibility();
@@ -46,12 +46,12 @@ export default function EmbedComponentPage() {
       */}
       </Head>
       <div className="d-inline-block position-relative overflow-hidden" onPointerUp={recordClick}>
-        <Widget
+        <VmWidgetWrapper
           key={widgets.wrapper}
           src={widgets.wrapper}
           props={{
             children: (
-              <Widget
+              <VmWidgetWrapper
                 key={widgets.tosCheck}
                 src={widgets.tosCheck}
                 props={{
