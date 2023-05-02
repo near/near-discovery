@@ -1,16 +1,19 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 export function useHashUrlBackwardsCompatibility() {
   const router = useRouter();
 
-  function onHashChange(event) {
-    const url = event.newURL.split('#').pop() ?? '/';
+  const onHashChange = useCallback(
+    (event) => {
+      const url = event.newURL.split('#').pop() ?? '/';
 
-    if (url[0] === '/') {
-      router.replace(url);
-    }
-  }
+      if (url[0] === '/') {
+        router.replace(url);
+      }
+    },
+    [router],
+  );
 
   useEffect(() => {
     window.addEventListener('hashchange', onHashChange);
@@ -18,7 +21,7 @@ export function useHashUrlBackwardsCompatibility() {
     return () => {
       window.removeEventListener('hashchange', onHashChange);
     };
-  }, []);
+  }, [onHashChange]);
 
   useEffect(() => {
     if (window.location.hash) {

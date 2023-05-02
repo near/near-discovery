@@ -1,15 +1,14 @@
-import { useNear } from "near-social-vm";
-import React from "react";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { flushEvents,recordClick } from "../../../../utils/analytics";
-import { Close } from "../../../icons/Close";
-import NearLogotype from "../icons/near-logotype.svg";
-import image from "../icons/search.svg";
-import { NotificationWidget } from "../NotificationWidget";
-import UserDropdownMenu from "../wrapper/desktop/UserDropdownMenu";
-import AccordionMenu from "./AccordionMenu";
+import { flushEvents, recordClick } from '../../../../utils/analytics';
+import { Close } from '../../../icons/Close';
+import NearLogotype from '../icons/near-logotype.svg';
+import image from '../icons/search.svg';
+import { NotificationWidget } from '../NotificationWidget';
+import UserDropdownMenu from '../wrapper/desktop/UserDropdownMenu';
+import AccordionMenu from './AccordionMenu';
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -155,7 +154,6 @@ const StyledMenu = styled.div`
 `;
 
 export function MenuLeft(props) {
-  const near = useNear();
   const history = useHistory();
 
   async function clearAnalytics(e) {
@@ -170,16 +168,12 @@ export function MenuLeft(props) {
   }
 
   return (
-    <StyledMenu className={props.showMenu ? "show" : ""}>
+    <StyledMenu className={props.showMenu ? 'show' : ''}>
       <div className="left-side">
         <button className="close-button" onClick={props.onCloseMenu}>
           <Close />
         </button>
-        <img
-          className="near-logotype"
-          src={NearLogotype}
-          onClick={() => history.push("/")}
-        />
+        <img className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => history.push('/')} />
         <button
           className="search-btn"
           style={{ backgroundImage: `url(${image})` }}
@@ -198,7 +192,7 @@ export function MenuLeft(props) {
               className="create-account"
               onClick={(event) => {
                 clearAnalytics(event);
-                history.push("/signup");
+                history.push('/signup');
               }}
             >
               Create Account
@@ -207,9 +201,7 @@ export function MenuLeft(props) {
         )}
         {props.signedIn && (
           <div className="logged-in-btns">
-            <NotificationWidget
-              notificationButtonSrc={props.widgets.notificationButton}
-            />
+            <NotificationWidget notificationButtonSrc={props.widgets.notificationButton} />
             <UserDropdownMenu {...props} />
           </div>
         )}
