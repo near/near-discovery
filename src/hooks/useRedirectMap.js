@@ -1,6 +1,6 @@
-import { useCallback, useEffect,useState } from "react";
+import { useCallback, useEffect, useState } from 'react';
 
-import { useFlags } from "./useFlags";
+import { useFlags } from './useFlags';
 
 /**
  * @returns [shouldWaitForMap, redirectMap, loaderError, loaderUrl]
@@ -21,13 +21,13 @@ export default function useRedirectMap() {
 
     try {
       const res = await fetch(loaderUrl, {
-        method: "GET",
+        method: 'GET',
         headers: {
-          Accept: "application/json",
+          Accept: 'application/json',
         },
       });
       if (!res.ok) {
-        throw new Error("Network response was not OK");
+        throw new Error('Network response was not OK');
       }
       const data = await res.json();
       setRedirectMap(data.components);
@@ -35,11 +35,11 @@ export default function useRedirectMap() {
       console.error(e);
       setloaderError(true);
     }
-  }, []);
+  }, [loaderUrl]);
 
   useEffect(() => {
     loaderUrl && fetchRedirectMap();
-  }, [loaderUrl]);
+  }, [fetchRedirectMap, loaderUrl]);
 
   const shouldWaitForMap = !!loaderUrl;
 

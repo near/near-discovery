@@ -1,9 +1,9 @@
-import React, { useEffect,useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import useScrollBlock from "../.././../../hooks/useScrollBlock";
-import { MenuLeft } from "./MenuLeft";
-import { TopNavigation } from "./TopNavigation";
+import useScrollBlock from '../.././../../hooks/useScrollBlock';
+import { MenuLeft } from './MenuLeft';
+import { TopNavigation } from './TopNavigation';
 
 const MobileNavigation = (props) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -13,7 +13,7 @@ const MobileNavigation = (props) => {
   useEffect(() => {
     setShowMenu(false);
     allowScroll();
-  }, [location.pathname]);
+  }, [allowScroll, location.pathname]);
 
   const HandleCloseMenu = () => {
     setShowMenu(false);
@@ -29,11 +29,7 @@ const MobileNavigation = (props) => {
           blockScroll();
         }}
       />
-      <MenuLeft
-        {...props}
-        showMenu={showMenu === "left"}
-        onCloseMenu={() => HandleCloseMenu()}
-      />
+      <MenuLeft {...props} showMenu={showMenu === 'left'} onCloseMenu={() => HandleCloseMenu()} />
     </>
   );
 };

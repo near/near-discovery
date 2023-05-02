@@ -1,12 +1,12 @@
-import classNames from "classnames";
-import { Widget } from "near-social-vm";
-import React, { useEffect,useState } from "react";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import styled from "styled-components";
+import classNames from 'classnames';
+import { Widget } from 'near-social-vm';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
-import LogoBlack from "../icons/logo-black.svg";
-import NearLogotype from "../icons/near-logotype.svg";
+import LogoBlack from '../icons/logo-black.svg';
+import NearLogotype from '../icons/near-logotype.svg';
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -100,44 +100,34 @@ export function TopNavigation(props) {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
   return (
-    <StyledNavigation className={`${scrolled ? "border-bottom" : ""}`}>
+    <StyledNavigation className={`${scrolled ? 'border-bottom' : ''}`}>
       {props.signedIn && (
         <button
-          onClick={() =>
-            history.push(
-              `/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`
-            )
-          }
+          onClick={() => history.push(`/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`)}
           className="mobile-nav-profile-btn"
         >
           <Widget
             src={props.widgets.profileImage}
             props={{
               accountId: props.signedAccountId,
-              className: "d-inline-block",
-              style: { width: "40px", height: "40px" },
+              className: 'd-inline-block',
+              style: { width: '40px', height: '40px' },
             }}
           />
         </button>
       )}
-      <Link
-        to="/"
-        className={classNames(["logo-link", { large: !props.signedIn }])}
-      >
-        <img src={props.signedIn ? LogoBlack : NearLogotype} />
+      <Link to="/" className={classNames(['logo-link', { large: !props.signedIn }])}>
+        <img src={props.signedIn ? LogoBlack : NearLogotype} alt="NEAR logo" />
       </Link>
-      <button
-        onClick={() => props.onClickShowMenu("left")}
-        className="mobile-nav-profile-btn"
-      >
+      <button onClick={() => props.onClickShowMenu('left')} className="mobile-nav-profile-btn">
         <div className="menu-icon">
           <i className="ph-bold ph-list"></i>
         </div>
