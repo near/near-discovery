@@ -2,15 +2,16 @@ import Analytics from 'analytics-node';
 import { createHash } from 'crypto';
 import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
+import type { UIEvent } from 'react';
 
 import { NetworkId } from '../data/widgets';
 
-let segment;
-let anonymousUserId;
-let hashId;
-let anonymousUserIdCreatedAt;
+let segment: Analytics | null = null;
+let anonymousUserId = '';
+let hashId = '';
+let anonymousUserIdCreatedAt = '';
 
-export function setAccountIdHash(accountId) {
+export function setAccountIdHash(accountId: string) {
   const hash = createHash('sha512');
   hash.update(accountId);
   hashId = hash.digest('hex');
@@ -23,7 +24,7 @@ function getAnonymousId() {
   }
 
   const storageId = localStorage.getItem('anonymousUserId');
-  anonymousUserIdCreatedAt = localStorage.getItem('anonymousUserIdCreatedAt');
+  anonymousUserIdCreatedAt = localStorage.getItem('anonymousUserIdCreatedAt') || '';
 
   if (storageId) {
     anonymousUserId = storageId;
@@ -41,25 +42,35 @@ export function init() {
   if (segment) return; // already initialized
 
   getAnonymousId();
+
   const segmentKey = NetworkId === 'testnet' ? 'diA7hiO28gGeb9fxn615Xs91uX3GyYhL' : 'gVheHtpTIWpmstSvXjGkSY80nGEXgHX4';
+
+  const options =
+    typeof window === 'undefined'
+      ? {}
+      : {
+          host: `${window.location.protocol}//${window.location.host}`,
+          path: '/api/segment',
+        };
+
   try {
-    segment = new Analytics(segmentKey, {});
+    segment = new Analytics(segmentKey, options);
   } catch (e) {
     console.error(e);
   }
 }
 
-function isStringAllowed(str) {
+function isStringAllowed(str: string) {
   const denyList = ['account_id', 'public_key', 'all_keys'];
   return !str || !denyList.some((param) => str.indexOf(param) !== -1);
 }
 
-function filterURL(url) {
+function filterURL(url: string) {
   const params = split(url, '?')[1];
   return isStringAllowed(params) ? url : '';
 }
 
-export function recordPageView(pageName) {
+export function recordPageView(pageName: string) {
   if (!segment) return;
   try {
     segment.page({
@@ -76,18 +87,18 @@ export function recordPageView(pageName) {
   }
 }
 
-const record = (eventType, e) => {
+const record = (eventType: string, e: UIEvent) => {
   const key = get(e.target, 'placeholder', get(e.target, 'innerText', get(e.target, 'href')));
   recordEventWithProps(eventType, {
     element: truncate(key, { length: 255 }),
-    url: filterURL(e.target.baseURI),
+    url: e.target ? filterURL((e.target as HTMLElement).baseURI) : '',
   });
 };
-export const recordClick = (e) => record('click', e);
-export const recordMouseEnter = (e) => record('mouseover', e);
-export const recordTouchStart = (e) => record('touchstart', e);
+export const recordClick = (e: UIEvent) => record('click', e);
+export const recordMouseEnter = (e: UIEvent) => record('mouseover', e);
+export const recordTouchStart = (e: UIEvent) => record('touchstart', e);
 
-export function recordWalletConnect(accountId) {
+export function recordWalletConnect(accountId: string) {
   if (!localStorage.getItem('hashId')) {
     setAccountIdHash(accountId);
     recordEvent('wallet-connected');
@@ -95,6 +106,7 @@ export function recordWalletConnect(accountId) {
 }
 
 export function reset() {
+  if (!segment) return;
   try {
     recordEvent('wallet-logout');
     localStorage.removeItem('hashId');
@@ -107,10 +119,11 @@ export function reset() {
 }
 
 export function flushEvents() {
+  if (!segment) return;
   return segment.flush();
 }
 
-function recordEventWithProps(eventLabel, properties) {
+function recordEventWithProps(eventLabel: string, properties: Record<string, unknown>) {
   if (!segment) return;
   try {
     segment.track({
@@ -127,7 +140,7 @@ function recordEventWithProps(eventLabel, properties) {
   }
 }
 
-export function recordEvent(eventLabel) {
+export function recordEvent(eventLabel: string) {
   if (!segment) return;
   try {
     segment.track({
