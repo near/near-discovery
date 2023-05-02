@@ -1,13 +1,14 @@
+import { useAccount,useNear, Widget } from "near-social-vm";
 import React, { useCallback } from "react";
-import { Widget, useNear, useAccount } from "near-social-vm";
-import styled from "styled-components";
-import { User } from "../../icons/User";
-import { LogOut } from "../../icons/LogOut";
-import { Withdraw } from "../../icons/Withdraw";
 import { NavLink } from "react-router-dom";
-import PretendModal from "../PretendModal";
+import styled from "styled-components";
+
+import { LogOut } from "../../icons/LogOut";
 import { Pretend } from "../../icons/Pretend";
 import { StopPretending } from "../../icons/StopPretending";
+import { User } from "../../icons/User";
+import { Withdraw } from "../../icons/Withdraw";
+import PretendModal from "../PretendModal";
 
 const StyledDropdown = styled.div`
   button,

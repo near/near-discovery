@@ -1,9 +1,10 @@
-import React, { useCallback } from "react";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import "./UserDropdownMenu.css";
-import { Widget, useNear, useAccount } from "near-social-vm";
-import styled from "styled-components";
+
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { useAccount,useNear, Widget } from "near-social-vm";
+import React, { useCallback } from "react";
 import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
 const StyledDropdown = styled.div`
   > button {

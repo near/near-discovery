@@ -1,14 +1,15 @@
-import React from "react";
-import styled from "styled-components";
-import { Close } from "../../../icons/Close";
-import image from "../icons/search.svg";
-import NearLogotype from "../icons/near-logotype.svg";
 import { useNear } from "near-social-vm";
-import AccordionMenu from "./AccordionMenu";
+import React from "react";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
+
+import { flushEvents,recordClick } from "../../../../utils/analytics";
+import { Close } from "../../../icons/Close";
+import NearLogotype from "../icons/near-logotype.svg";
+import image from "../icons/search.svg";
 import { NotificationWidget } from "../NotificationWidget";
 import UserDropdownMenu from "../wrapper/desktop/UserDropdownMenu";
-import { useHistory } from "react-router-dom";
-import { recordClick, flushEvents } from "../../../../utils/analytics";
+import AccordionMenu from "./AccordionMenu";
 
 const StyledMenu = styled.div`
   position: fixed;

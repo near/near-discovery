@@ -1,10 +1,11 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { MobileMenuButton } from "./MobileMenuButton";
+import styled from "styled-components";
+
 import { NearSocialLogo } from "../../icons/NearSocialLogo";
 import { NotificationWidget } from "../NotificationWidget";
 import { SignInButton } from "../SignInButton";
+import { MobileMenuButton } from "./MobileMenuButton";
 
 const StyledNavigation = styled.div`
   position: sticky;

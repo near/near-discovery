@@ -1,6 +1,6 @@
+import { Widget } from "near-social-vm";
 import React from "react";
 import styled from "styled-components";
-import { Widget } from "near-social-vm";
 
 const StyledCurrentComponent = styled.div`
   border: 1px solid #eeeeec;

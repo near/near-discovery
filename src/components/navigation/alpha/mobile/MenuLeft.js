@@ -1,20 +1,20 @@
+import { useNear,Widget } from "near-social-vm";
 import React, { useCallback } from "react";
-import { Widget, useNear } from "near-social-vm";
+import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import styled from "styled-components";
 
+import { links } from "../../../../data/links";
 import { Close } from "../../../icons/Close";
+import { LogOut } from "../../../icons/LogOut";
 import { Community } from "../icons/Community";
 import { Components } from "../icons/Components";
 import { Editor } from "../icons/Editor";
 import { Education } from "../icons/Education";
-import { Link } from "react-router-dom";
-import { LogOut } from "../../../icons/LogOut";
-import { NavigationButton } from "../NavigationButton";
 import { Notebook } from "../icons/Notebook";
-import { SignInButton } from "../SignInButton";
 import { Withdraw } from "../icons/Withdraw";
-import { links } from "../../../../data/links";
-import styled from "styled-components";
-import { useHistory } from "react-router-dom";
+import { NavigationButton } from "../NavigationButton";
+import { SignInButton } from "../SignInButton";
 
 const StyledMenu = styled.div`
   position: fixed;

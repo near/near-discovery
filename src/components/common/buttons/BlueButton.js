@@ -1,6 +1,7 @@
 import React from "react";
-import { Button } from "./Button";
 import styled from "styled-components";
+
+import { Button } from "./Button";
 
 const StyledButton = styled(Button)`
   background-color: var(--blue-light-9);

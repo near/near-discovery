@@ -1,14 +1,15 @@
+import { useAccount } from "near-social-vm";
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+import { links } from "../../../../../data/links";
 import Apps from "../../icons/apps.svg";
-import UserCircle from "../../icons/user-circle.svg";
-import Users from "../../icons/users.svg";
 import Code from "../../icons/code.svg";
 import Education from "../../icons/education.svg";
 import Notebook from "../../icons/notebook.svg";
-import { useAccount } from "near-social-vm";
-import { links } from "../../../../../data/links";
+import UserCircle from "../../icons/user-circle.svg";
+import Users from "../../icons/users.svg";
 
 const StyledDropdownLinkList = styled.ul`
   list-style: none;

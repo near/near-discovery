@@ -1,11 +1,13 @@
-import React from "react";
+import "./AccordionMenu.css";
+
 import * as Accordion from "@radix-ui/react-accordion";
 import classNames from "classnames";
-import "./AccordionMenu.css";
+import React from "react";
+import { NavLink } from "react-router-dom";
+
+import { recordTouchStart } from "../../../../utils/analytics";
 import CurrentComponent from "../CurrentComponent";
 import { navLinkData } from "../orgLinks";
-import { NavLink } from "react-router-dom";
-import { recordTouchStart } from "../../../../utils/analytics";
 
 const AccordionMenu = (props) => (
   <Accordion.Root className="AccordionRoot" type="single" collapsible>

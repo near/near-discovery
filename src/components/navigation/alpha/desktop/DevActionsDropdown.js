@@ -1,9 +1,10 @@
 import React from "react";
-import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { Fork } from "../../../icons/Fork";
-import { Code } from "../../../icons/Code";
+import styled from "styled-components";
+
 import { useAccount } from "../../../../data/account";
+import { Code } from "../../../icons/Code";
+import { Fork } from "../../../icons/Fork";
 
 const StyledDropdown = styled.div`
   .dropdown-toggle {
