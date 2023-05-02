@@ -2,7 +2,7 @@ import injectedModule from '@web3-onboard/injected-wallets';
 import ledgerModule from '@web3-onboard/ledger';
 import { init, useConnectWallet } from '@web3-onboard/react';
 import walletConnectModule from '@web3-onboard/walletconnect';
-import { ethers } from 'ethers';
+// import { ethers } from 'ethers';
 import ls from 'local-storage';
 import { useEffect, useState } from 'react';
 import { singletonHook } from 'react-singleton-hook';
