@@ -1,8 +1,8 @@
-import { Widget } from 'near-social-vm';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useLayoutEffect, useState } from 'react';
 
+import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 import { useFlags } from '@/hooks/useFlags';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import useRedirectMap from '@/hooks/useRedirectMap';
@@ -16,7 +16,7 @@ export default function ViewComponentPage() {
   const [shouldWaitForMap, redirectMap, loaderError, loaderUrl] = useRedirectMap();
   const router = useRouter();
   const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
-  const widgetSrc = `${router.query.accountId}/widget/${router.query.widgetName}`;
+  const widgetSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const widgets = useWidgets();
@@ -122,13 +122,13 @@ export default function ViewComponentPage() {
             >
               {(!shouldWaitForMap || redirectMap) && (
                 <div>
-                  <Widget
+                  <VmWidgetWrapper
                     config={{ redirectMap: redirectMap }}
                     key={widgets.wrapper}
                     src={widgets.wrapper}
                     props={{
                       children: (
-                        <Widget
+                        <VmWidgetWrapper
                           config={{ redirectMap: redirectMap }}
                           key={widgets.tosCheck}
                           src={widgets.tosCheck}
