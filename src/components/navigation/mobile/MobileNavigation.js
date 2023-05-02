@@ -1,53 +1,36 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState } from 'react';
 
-import useScrollBlock from '.././../../hooks/useScrollBlock';
-import { Menu } from './Menu';
-import { Navigation } from './Navigation';
+import { useScrollBlock } from '@/hooks/useScrollBlock';
 
-export function MobileNavigation(props) {
+import { MenuLeft } from './MenuLeft';
+import { TopNavigation } from './TopNavigation';
+
+const MobileNavigation = (props) => {
   const [showMenu, setShowMenu] = useState(false);
-  const [currentPage, setCurrentPage] = useState('');
-  const location = useLocation();
   const [blockScroll, allowScroll] = useScrollBlock();
 
-  useEffect(() => {
-    setShowMenu(false);
-    getCurrentPage();
-    allowScroll();
-  }, [allowScroll, getCurrentPage, location.pathname]);
+  // useEffect(() => {
+  //   setShowMenu(false);
+  //   allowScroll();
+  // }, [allowScroll, location.pathname]);
 
-  const getCurrentPage = useCallback(() => {
-    switch (location.pathname) {
-      case '/':
-        return setCurrentPage('Home');
-      case `/${props.widgets.profilePage}`:
-        return setCurrentPage('Profile');
-      case '/edit':
-        return setCurrentPage('Create');
-      default:
-        return setCurrentPage('');
-    }
-  }, [location.pathname, props.widgets.profilePage]);
+  const HandleCloseMenu = () => {
+    setShowMenu(false);
+    allowScroll();
+  };
 
   return (
     <>
-      <Navigation
+      <TopNavigation
         {...props}
-        currentPage={currentPage}
-        onClickShowMenu={() => {
-          setShowMenu(true);
+        onClickShowMenu={(option) => {
+          setShowMenu(option);
           blockScroll();
         }}
       />
-      <Menu
-        {...props}
-        showMenu={showMenu}
-        onCloseMenu={() => {
-          setShowMenu(false);
-          allowScroll();
-        }}
-      />
+      <MenuLeft {...props} showMenu={showMenu === 'left'} onCloseMenu={() => HandleCloseMenu()} />
     </>
   );
-}
+};
+
+export default MobileNavigation;

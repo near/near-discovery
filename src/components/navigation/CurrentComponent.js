@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { useWidgets } from '@/hooks/useWidgets';
+import { useCurrentWidgetStore } from '@/stores/current-widget';
 
 const StyledCurrentComponent = styled.div`
   border: 1px solid #eeeeec;
@@ -55,16 +57,19 @@ const StyledCurrentComponent = styled.div`
   }
 `;
 
-const CurrentComponent = (props) => {
-  if (!props.widgets?.componentSummary || !props.widgetSrc?.view) return;
+const CurrentComponent = () => {
+  const widgetSrc = useCurrentWidgetStore((store) => store.widgetSrc);
+  const widgets = useWidgets();
+
+  if (!widgetSrc) return null;
 
   return (
     <StyledCurrentComponent className="current-component">
       <div className="title">Current Component</div>
       <VmWidgetWrapper
-        src={props.widgets.componentSummary}
+        src={widgets.componentSummary}
         props={{
-          src: props.widgetSrc.view,
+          src: widgetSrc,
           size: 'medium',
           showTags: true,
         }}

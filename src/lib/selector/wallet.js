@@ -9,7 +9,7 @@ import BN from 'bn.js';
 import { networks } from '../../data/widgets';
 
 export class FastAuthWallet {
-  constructor({ signInContractId, networkId, relayerUrl, ...rest }) {
+  constructor({ signInContractId, networkId, relayerUrl }) {
     this.networkId = networkId;
     this.signInContractId = signInContractId;
     this.activeAccountId = window.localStorage.getItem('fast-auth:activeAccountId') || '';
@@ -95,8 +95,6 @@ export class FastAuthWallet {
   }
 
   async signAndSendTransactions(transactions) {
-    const account = (await this.getAccounts())[0];
-
     for (let { signerId } of transactions) {
       this.assertValidSigner(signerId);
     }
@@ -114,7 +112,7 @@ export class FastAuthWallet {
     throw Error('FastAuth:verifyOwner is deprecated');
   }
 
-  async getAvailableBalance(id) {
+  async getAvailableBalance() {
     return new BN(0);
   }
 

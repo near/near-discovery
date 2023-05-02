@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
+import DesktopNavigation from './desktop/DesktopNavigation';
 import MobileNavigation from './mobile/MobileNavigation';
-import DesktopNavigation from './wrapper/desktop/DesktopNavigation';
 
-export const NavigationWrapper = (props) => {
+export const Navigation = (props) => {
   const [matches, setMatches] = useState(true);
 
   useEffect(() => {
-    setMatches(window.matchMedia('(min-width: 992px)').matches);
+    setMatches(window.matchMedia('(min-width: 1060px)').matches);
   }, []);
 
   useEffect(() => {
-    window.matchMedia('(min-width: 992px)').addEventListener('change', (e) => setMatches(e.matches));
+    window.matchMedia('(min-width: 1060px)').addEventListener('change', (e) => setMatches(e.matches));
   }, []);
 
   return (

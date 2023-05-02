@@ -1,8 +1,7 @@
 import React from 'react';
 
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
-
-import useRedirectMap from '../../../../../hooks/useRedirectMap';
+import useRedirectMap from '@/hooks/useRedirectMap';
 
 const TypeAheadDropdown = (props) => {
   const [shouldWaitForMap, redirectMap] = useRedirectMap();

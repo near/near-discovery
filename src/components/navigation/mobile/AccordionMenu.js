@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-import { recordTouchStart } from '../../../../utils/analytics';
+import { recordTouchStart } from '@/utils/analytics';
+
 import CurrentComponent from '../CurrentComponent';
 import { navLinkData } from '../orgLinks';
 
@@ -80,6 +81,45 @@ const Wrapper = styled.div`
     transform: rotate(180deg);
   }
 
+  .ListItemLink {
+    display: block;
+    outline: none;
+    text-decoration: none;
+    user-select: none;
+    padding: 16px 8px 4px 8px;
+    padding-left: 55px;
+    border-radius: 6px;
+    font-size: 15px;
+    line-height: 1;
+    position: relative;
+  }
+  .ListItemLink i {
+    position: absolute;
+    top: 50%;
+    left: 16px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: #706f6c;
+  }
+
+  .ListItemLink:hover {
+    text-decoration: none;
+    background-color: #f3f3f2;
+  }
+
+  .ListItemHeading {
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 5px;
+    color: #1b1b18;
+  }
+
+  .ListItemText {
+    line-height: 1.4;
+    font-weight: initial;
+    color: #868682;
+  }
+
   @keyframes slideDown {
     from {
       height: 0;
@@ -139,7 +179,7 @@ const AccordionMenu = (props) => (
               {navLinkData.tutorials.description}
             </ListItem>
           </ul>
-          <CurrentComponent {...props} />
+          <CurrentComponent />
         </AccordionContent>
       </Accordion.Item>
 
@@ -234,7 +274,7 @@ const ListItem = forwardRef(({ className, children, title, ...props }, forwarded
   if (props.route) {
     return (
       <li onTouchStart={(e) => recordTouchStart(e)}>
-        <Link className={classNames('ListItemLink', className)} ref={forwardedRef} to={props.route}>
+        <Link className={classNames('ListItemLink', className)} ref={forwardedRef} href={props.route}>
           <div className="ListItemHeading">{title}</div>
           <p className="ListItemText">{children}</p>
         </Link>

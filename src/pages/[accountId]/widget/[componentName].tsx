@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
-import { NavigationWrapper } from '@/components/navigation/org/NavigationWrapper';
+import { Navigation } from '@/components/navigation/Navigation';
 import { useFlags } from '@/hooks/useFlags';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import useRedirectMap from '@/hooks/useRedirectMap';
@@ -79,7 +79,7 @@ export default function ViewComponentPage() {
         <meta property="og:description" content={props.meta.description} /> */}
       </Head>
 
-      <NavigationWrapper />
+      <Navigation />
 
       <div
         style={{
