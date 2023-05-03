@@ -44,9 +44,10 @@ const finiteRoutes: Record<string, string> = {
 };
 
 import IframeResizer from 'iframe-resizer-react';
-import type { GetStaticPaths, GetStaticProps } from 'next';
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
-import { Navigation } from '@/components/navigation/Navigation';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import type { NextPageWithLayout } from '@/utils/types';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -59,8 +60,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
+type StaticProps = {
+  notFound?: boolean;
+  url?: string;
+};
+
 // compute the iframe url from the path segments
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
   if (!context.params?.arbitrary || !Array.isArray(context.params.arbitrary) || context.params.arbitrary.length === 0) {
     return {
       notFound: true,
@@ -90,11 +96,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
   };
 };
 
-export default function IframePage({ url }: { url: string }) {
-  return (
-    <>
-      <Navigation />
-      <IframeResizer src={url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />
-    </>
-  );
-}
+const IframePage: NextPageWithLayout = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+  return <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />;
+};
+
+IframePage.getLayout = useDefaultLayout;
+
+export default IframePage;
