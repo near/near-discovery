@@ -2,7 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { useFlags } from '@/hooks/useFlags';
-import { useComponentRedirectMapStore } from '@/stores/component-redirect-map';
+import { useBosLoaderStore } from '@/stores/bos-loader';
 
 const Banner = styled.div`
   background: #fff2cd;
@@ -28,7 +28,7 @@ const Button = styled.button`
 `;
 
 export function BosLoaderBanner() {
-  const redirectMapStore = useComponentRedirectMapStore();
+  const redirectMapStore = useBosLoaderStore();
   const [flags, setFlags] = useFlags();
   const [hideBanner, setHideBanner] = useState(false);
 

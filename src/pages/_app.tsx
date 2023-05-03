@@ -10,7 +10,7 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 
-import { useComponentRedirectMapInitializer } from '@/hooks/useComponentRedirectMapInitializer';
+import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -30,7 +30,7 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
-  useComponentRedirectMapInitializer();
+  useBosLoaderInitializer();
 
   useEffect(() => {
     initializeSegment();

@@ -1,13 +1,13 @@
 import { useCallback, useEffect } from 'react';
 
-import { useComponentRedirectMapStore } from '@/stores/component-redirect-map';
+import { useBosLoaderStore } from '@/stores/bos-loader';
 
 import { useFlags } from './useFlags';
 
-export function useComponentRedirectMapInitializer() {
+export function useBosLoaderInitializer() {
   const [flags] = useFlags();
   const loaderUrl = flags?.bosLoaderUrl || process.env.NEXT_PUBLIC_LOCAL_COMPONENT_LOADER;
-  const setStore = useComponentRedirectMapStore((store) => store.set);
+  const setStore = useBosLoaderStore((store) => store.set);
 
   /**
    * Fetch local component versions if a local loader
