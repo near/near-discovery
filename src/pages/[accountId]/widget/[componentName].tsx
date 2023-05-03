@@ -1,20 +1,17 @@
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { BosLoaderBanner } from '@/components/client/BosLoaderBanner';
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
-import { Navigation } from '@/components/navigation/Navigation';
-import { useFlags } from '@/hooks/useFlags';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
+import { useDefaultLayout } from '@/hooks/useLayout';
 import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
-import { useComponentRedirectMapStore } from '@/stores/component-redirect-map';
 import { useCurrentWidgetStore } from '@/stores/current-widget';
 import { recordClick, recordPageView } from '@/utils/analytics';
+import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
-export default function ViewComponentPage() {
+const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
   const widgetSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
@@ -69,48 +66,30 @@ export default function ViewComponentPage() {
   }, []);
 
   return (
-    <>
-      <Head>
-        {/* TODO */}
-        {/* <title>{props.meta.title}</title>
-        <meta name="description" content={props.meta.description} />
-        <meta property="og:title" content={props.meta.title} />
-        <meta property="og:description" content={props.meta.description} /> */}
-      </Head>
-
-      <Navigation />
-
-      <BosLoaderBanner />
-
-      <div className="container-xl" onPointerUp={recordClick}>
-        <div className="row">
-          <div
-            className="d-inline-block position-relative overflow-hidden"
-            style={{
-              paddingTop: 'var(--body-top-padding)',
+    <div className="container-xl" onPointerUp={recordClick}>
+      <div className="row">
+        <div
+          className="d-inline-block position-relative overflow-hidden"
+          style={{
+            paddingTop: 'var(--body-top-padding)',
+          }}
+        >
+          <VmWidgetWrapper
+            key={widgets.tosCheck}
+            src={widgets.tosCheck}
+            props={{
+              logOut: authStore.logOut,
+              targetProps: widgetProps,
+              targetComponent: widgetSrc,
+              tosName: widgets.tosContent,
             }}
-          >
-            <VmWidgetWrapper
-              key={widgets.wrapper}
-              src={widgets.wrapper}
-              props={{
-                children: (
-                  <VmWidgetWrapper
-                    key={widgets.tosCheck}
-                    src={widgets.tosCheck}
-                    props={{
-                      logOut: authStore.logOut,
-                      targetProps: widgetProps,
-                      targetComponent: widgetSrc,
-                      tosName: widgets.tosContent,
-                    }}
-                  />
-                ),
-              }}
-            />
-          </div>
+          />
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+ViewComponentPage.getLayout = useDefaultLayout;
+
+export default ViewComponentPage;

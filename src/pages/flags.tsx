@@ -2,8 +2,10 @@ import type { MouseEvent } from 'react';
 import React, { useCallback, useState } from 'react';
 
 import { useFlags } from '@/hooks/useFlags';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import type { NextPageWithLayout } from '@/utils/types';
 
-export default function FlagsPage() {
+const FlagsPage: NextPageWithLayout = () => {
   const [flags, setFlags] = useFlags();
   const [bosLoaderUrl, setBosLoaderUrl] = useState(flags?.bosLoaderUrl || '');
 
@@ -55,4 +57,8 @@ export default function FlagsPage() {
       </form>
     </>
   );
-}
+};
+
+FlagsPage.getLayout = useDefaultLayout;
+
+export default FlagsPage;
