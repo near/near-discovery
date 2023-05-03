@@ -21,6 +21,9 @@ const Banner = styled.div`
 
 const Button = styled.button`
   all: unset;
+  display: block;
+  height: 16px;
+  line-height: 16px;
   color: #664d04;
 `;
 
