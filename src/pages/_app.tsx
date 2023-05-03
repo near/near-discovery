@@ -1,3 +1,4 @@
+import '@/styles/theme.css';
 import '@/styles/globals.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@near-wallet-selector/modal-ui/styles.css';
@@ -11,6 +12,7 @@ import { Toaster } from 'sonner';
 
 import { useComponentRedirectMapInitializer } from '@/hooks/useComponentRedirectMapInitializer';
 import { init as initializeSegment } from '@/utils/analytics';
+import type { NextPageWithLayout } from '@/utils/types';
 
 const VmInitializer = dynamic(() => import('../components/client/VmInitializer'), {
   ssr: false,
@@ -21,7 +23,13 @@ const meta = {
   description: "Let's build decentralized experiences.",
 };
 
-export default function App({ Component, pageProps }: AppProps) {
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   useComponentRedirectMapInitializer();
 
   useEffect(() => {
@@ -77,7 +85,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
       <VmInitializer />
 
-      <Component {...pageProps} />
+      {getLayout(<Component {...pageProps} />)}
 
       <Toaster position="bottom-center" richColors />
     </>

@@ -59,7 +59,6 @@ export default function VmInitializer() {
                 NetworkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-              hideModal: undefined, // TODO: Remove?
             }) as any, // TODO: Refactor setupFastAuth() to TS
             setupKeypom({
               trialBaseUrl:
