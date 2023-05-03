@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Close } from '@/components/icons/Close';
 import { flushEvents, recordClick } from '@/utils/analytics';
 
 import UserDropdownMenu from '../desktop/UserDropdownMenu';
+import CloseIcon from '../icons/close.svg';
 import NearLogotype from '../icons/near-logotype.svg';
 import SearchIcon from '../icons/search.svg';
 import { NotificationWidget } from '../NotificationWidget';
@@ -71,12 +71,12 @@ const StyledMenu = styled.div`
     background-position: 12px 12px;
     padding-left: 44px;
     margin: 45px 0;
-    border: 1px solid #E3E3E0;
+    border: 1px solid #e3e3e0;
     border-radius: 50px;
     min-height: 48px;
     height: 48px;
     color: #868682;
-    width: 100%:
+    width: 100%;
     display: flex;
     align-items: center;
 
@@ -90,7 +90,7 @@ const StyledMenu = styled.div`
   .current-component {
     margin-bottom: 25px;
   }
-  
+
   .bottom-btns {
     margin-top: auto;
 
@@ -105,9 +105,9 @@ const StyledMenu = styled.div`
       justify-content: center;
     }
     .sign-in {
-      background-color: #F3F3F2;
-      color: #1B1B18;
-      border: 0.5px solid #E3E3E0;
+      background-color: #f3f3f2;
+      color: #1b1b18;
+      border: 0.5px solid #e3e3e0;
       margin: 20px 0;
     }
     .create-account {
@@ -173,7 +173,7 @@ export function MenuLeft(props) {
     <StyledMenu className={props.showMenu ? 'show' : ''}>
       <div className="left-side">
         <button className="close-button" onClick={props.onCloseMenu}>
-          <Close />
+          <Image src={CloseIcon} alt="Close" />
         </button>
         <Image className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => router.push('/')} />
         <button

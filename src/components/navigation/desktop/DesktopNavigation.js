@@ -11,7 +11,7 @@ import { flushEvents, recordClick } from '@/utils/analytics';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
-import { Return } from '../icons/Return';
+import ReturnIconImage from '../icons/return.svg';
 import SearchIconImage from '../icons/search.svg';
 import { NotificationWidget } from '../NotificationWidget';
 import MainNavigationMenu from './main_navigation_menu/MainNavigationMenu';
@@ -87,7 +87,7 @@ const StyledNavigation = styled.div`
       }
     }
 
-    svg {
+    img {
       position: absolute;
       right: 16px;
       top: 10px;
@@ -241,7 +241,7 @@ const DesktopNavigation = (props) => {
             </TypeAheadDropdownContainer>
           )}
 
-          {searchIsFocused && <Return />}
+          {searchIsFocused && <Image src={ReturnIconImage} alt="Return" />}
         </div>
         <MainNavigationMenu {...props} />
         <div className="right-side-actions">
