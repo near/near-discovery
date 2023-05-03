@@ -20,6 +20,8 @@ body,
 html {
   --body-top-padding: 24px;
   -webkit-font-smoothing: antialiased;
+  color: var(--sand12);
+  font: var(--text-base);
 }
 
 a {
