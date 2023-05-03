@@ -1,11 +1,8 @@
 import React from 'react';
 
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
-import useRedirectMap from '@/hooks/useRedirectMap';
 
 const TypeAheadDropdown = (props) => {
-  const [shouldWaitForMap, redirectMap] = useRedirectMap();
-
   return (
     <div
       tabIndex={-1}
@@ -16,9 +13,7 @@ const TypeAheadDropdown = (props) => {
         props.focusChange(false);
       }}
     >
-      {(!shouldWaitForMap || redirectMap) && (
-        <VmWidgetWrapper config={{ redirectMap }} src={props.widgetSrc} props={{ term: props.term }} />
-      )}
+      <VmWidgetWrapper src={props.widgetSrc} props={{ term: props.term }} />
     </div>
   );
 };

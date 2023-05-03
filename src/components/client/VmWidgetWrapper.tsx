@@ -1,15 +1,27 @@
+import { useComponentRedirectMapStore } from '@/stores/component-redirect-map';
 import { useVmStore } from '@/stores/vm';
 
-export function VmWidgetWrapper(props: any) {
-  const { EthersProvider, ethersContext, Widget } = useVmStore();
+type Props = {
+  src: string;
+  props?: Record<string, unknown>;
+};
 
-  if (!EthersProvider) {
+export function VmWidgetWrapper(props: Props) {
+  const { EthersProvider, ethersContext, Widget } = useVmStore();
+  const redirectMapStore = useComponentRedirectMapStore();
+
+  if (!EthersProvider || !redirectMapStore.hasResolved) {
     return <div>Loading...</div>;
   }
 
   return (
     <EthersProvider value={ethersContext}>
-      <Widget {...props} />
+      <Widget
+        config={{
+          redirectMap: redirectMapStore.redirectMap,
+        }}
+        {...props}
+      />
     </EthersProvider>
   );
 }

@@ -9,17 +9,20 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 
+import { useComponentRedirectMapInitializer } from '@/hooks/useComponentRedirectMapInitializer';
 import { init as initializeSegment } from '@/utils/analytics';
 
 const VmInitializer = dynamic(() => import('../components/client/VmInitializer'), {
   ssr: false,
 });
 
+const meta = {
+  title: 'NEAR',
+  description: "Let's build decentralized experiences.",
+};
+
 export default function App({ Component, pageProps }: AppProps) {
-  const metaProps = {
-    title: 'NEAR',
-    description: "Let's build decentralized experiences.",
-  };
+  useComponentRedirectMapInitializer();
 
   useEffect(() => {
     initializeSegment();
@@ -28,10 +31,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>{metaProps.title}</title>
-        <meta property="og:title" content={metaProps.title} />
-        <meta name="description" content={metaProps.description} />
-        <meta property="og:description" content={metaProps.description} />
+        <title>{meta.title}</title>
+        <meta property="og:title" content={meta.title} />
+        <meta name="description" content={meta.description} />
+        <meta property="og:description" content={meta.description} />
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
