@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
+import { BosLoaderBanner } from '@/components/client/BosLoaderBanner';
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { useWidgets } from '@/hooks/useWidgets';
@@ -13,7 +14,6 @@ export default function EmbedComponentPage() {
   const router = useRouter();
   const widgets = useWidgets();
   const authStore = useAuthStore();
-
   const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
   const widgetSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
@@ -45,7 +45,16 @@ export default function EmbedComponentPage() {
         <meta property="og:description" content={props.meta.description} />
       */}
       </Head>
-      <div className="d-inline-block position-relative overflow-hidden" onPointerUp={recordClick}>
+
+      <BosLoaderBanner />
+
+      <div
+        className="d-inline-block position-relative overflow-hidden"
+        onPointerUp={recordClick}
+        style={{
+          paddingTop: 'var(--body-top-padding)',
+        }}
+      >
         <VmWidgetWrapper
           key={widgets.wrapper}
           src={widgets.wrapper}

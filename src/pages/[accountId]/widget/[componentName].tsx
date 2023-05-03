@@ -2,26 +2,25 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { BosLoaderBanner } from '@/components/client/BosLoaderBanner';
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
 import { Navigation } from '@/components/navigation/Navigation';
 import { useFlags } from '@/hooks/useFlags';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
-import useRedirectMap from '@/hooks/useRedirectMap';
 import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
+import { useComponentRedirectMapStore } from '@/stores/component-redirect-map';
 import { useCurrentWidgetStore } from '@/stores/current-widget';
 import { recordClick, recordPageView } from '@/utils/analytics';
 import { styleZendesk } from '@/utils/zendesk';
 
 export default function ViewComponentPage() {
-  const [shouldWaitForMap, redirectMap, loaderError, loaderUrl] = useRedirectMap();
   const router = useRouter();
   const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
   const widgetSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const widgets = useWidgets();
-  const [, setFlags] = useFlags();
 
   useHashUrlBackwardsCompatibility();
 
@@ -81,72 +80,34 @@ export default function ViewComponentPage() {
 
       <Navigation />
 
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-        onPointerUp={recordClick}
-      >
-        {loaderUrl && (
+      <BosLoaderBanner />
+
+      <div className="container-xl" onPointerUp={recordClick}>
+        <div className="row">
           <div
+            className="d-inline-block position-relative overflow-hidden"
             style={{
-              backgroundColor: '#FFF2CD',
-              color: '#664D04',
-              display: 'flex',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '2rem',
-              columnGap: '8px',
+              paddingTop: 'var(--body-top-padding)',
             }}
           >
-            <span>Loading components from: {loaderUrl}</span>
-
-            <button className="btn btn-outline" onClick={() => setFlags({ bosLoaderUrl: undefined })}>
-              <i className="bi bi-x" />
-            </button>
-          </div>
-        )}
-        {loaderError && (
-          <div style={{ padding: '16px' }}>
-            BOS Loader fetch error, see console logs. CORS errors may be misleading and mean your endpoint cannot be
-            reached
-          </div>
-        )}
-        <div className="container-xl">
-          <div className="row">
-            <div
-              className="d-inline-block position-relative overflow-hidden"
-              style={{
-                paddingTop: 'var(--body-top-padding)',
-              }}
-            >
-              {(!shouldWaitForMap || redirectMap) && (
-                <div>
+            <VmWidgetWrapper
+              key={widgets.wrapper}
+              src={widgets.wrapper}
+              props={{
+                children: (
                   <VmWidgetWrapper
-                    config={{ redirectMap: redirectMap }}
-                    key={widgets.wrapper}
-                    src={widgets.wrapper}
+                    key={widgets.tosCheck}
+                    src={widgets.tosCheck}
                     props={{
-                      children: (
-                        <VmWidgetWrapper
-                          config={{ redirectMap: redirectMap }}
-                          key={widgets.tosCheck}
-                          src={widgets.tosCheck}
-                          props={{
-                            logOut: authStore.logOut,
-                            targetProps: widgetProps,
-                            targetComponent: widgetSrc,
-                            tosName: widgets.tosContent,
-                          }}
-                        />
-                      ),
+                      logOut: authStore.logOut,
+                      targetProps: widgetProps,
+                      targetComponent: widgetSrc,
+                      tosName: widgets.tosContent,
                     }}
                   />
-                </div>
-              )}
-            </div>
+                ),
+              }}
+            />
           </div>
         </div>
       </div>
