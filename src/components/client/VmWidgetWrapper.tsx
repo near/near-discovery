@@ -1,6 +1,8 @@
 import { useComponentRedirectMapStore } from '@/stores/component-redirect-map';
 import { useVmStore } from '@/stores/vm';
 
+import { Spinner } from '../lib/Spinner';
+
 type Props = {
   src: string;
   props?: Record<string, unknown>;
@@ -11,7 +13,7 @@ export function VmWidgetWrapper(props: Props) {
   const redirectMapStore = useComponentRedirectMapStore();
 
   if (!EthersProvider || !redirectMapStore.hasResolved) {
-    return <div>Loading...</div>;
+    return <Spinner />;
   }
 
   return (
