@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { useFlags } from '@/hooks/useFlags';
@@ -25,9 +26,18 @@ const Button = styled.button`
 
 export function BosLoaderBanner() {
   const redirectMapStore = useComponentRedirectMapStore();
-  const [, setFlags] = useFlags();
+  const [flags, setFlags] = useFlags();
+  const [hideBanner, setHideBanner] = useState(false);
 
-  if (!redirectMapStore.loaderUrl) return null;
+  function closeBanner() {
+    setHideBanner(true);
+
+    if (flags?.bosLoaderUrl) {
+      setFlags({ bosLoaderUrl: undefined });
+    }
+  }
+
+  if (!redirectMapStore.loaderUrl || hideBanner) return null;
 
   return (
     <Banner>
@@ -41,7 +51,7 @@ export function BosLoaderBanner() {
         )}
       </div>
 
-      <Button onClick={() => setFlags({ bosLoaderUrl: undefined })}>
+      <Button onClick={closeBanner}>
         <i className="ph-fill ph-x-circle" />
       </Button>
     </Banner>
