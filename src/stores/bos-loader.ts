@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
-type ComponentRedirectMapState = {
+type BosLoaderState = {
   failedToLoad: boolean;
   hasResolved: boolean;
   loaderUrl: string;
   redirectMap: Record<string, unknown>;
 };
 
-type ComponentRedirectMapStore = ComponentRedirectMapState & {
-  set: (state: Partial<ComponentRedirectMapState>) => void;
+type BosLoaderStore = BosLoaderState & {
+  set: (state: Partial<BosLoaderState>) => void;
 };
 
-export const useComponentRedirectMapStore = create<ComponentRedirectMapStore>((set) => ({
+export const useBosLoaderStore = create<BosLoaderStore>((set) => ({
   failedToLoad: false,
   hasResolved: false,
   loaderUrl: '',
