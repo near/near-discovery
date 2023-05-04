@@ -8,7 +8,7 @@ type Props = {
   props?: Record<string, unknown>;
 };
 
-export function VmWidgetWrapper(props: Props) {
+export function VmComponent(props: Props) {
   const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
 

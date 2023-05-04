@@ -1,4 +1,4 @@
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 
 import { MetaTags } from '../MetaTags';
 
@@ -15,7 +15,7 @@ export function ComponentWrapperPage(props: Props) {
   return (
     <>
       {props.meta && <MetaTags {...props.meta} />}
-      <VmWidgetWrapper src={props.src} props={props.componentProps} />
+      <VmComponent src={props.src} props={props.componentProps} />
     </>
   );
 }

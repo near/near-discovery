@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 
 export function NearOrgEcosystemWorkAndEarnPage() {
   const nearOrgLinks = {
@@ -142,7 +142,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                   an ambassador.
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://careers.near.org/jobs',
@@ -154,7 +154,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                       target: '_blank',
                     }}
                   />
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://www.near.university/#earn',
@@ -179,7 +179,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                   Want to build on NEAR? Our foundation has grants to help you get started.
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: nearOrgLinks.getFundingPage,
@@ -203,7 +203,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                   community to solve problems and earn rewards.
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://gitcoin.co/near/active',
@@ -222,7 +222,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
         </Section>
       </Wrapper>
 
-      <VmWidgetWrapper src="near/widget/NearOrg.Footer" />
+      <VmComponent src="near/widget/NearOrg.Footer" />
     </>
   );
 }

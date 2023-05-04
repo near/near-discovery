@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -116,7 +116,7 @@ export function TopNavigation(props) {
           onClick={() => router.push(`/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`)}
           className="mobile-nav-profile-btn"
         >
-          <VmWidgetWrapper
+          <VmComponent
             src={props.widgets.profileImage}
             props={{
               accountId: props.signedAccountId,

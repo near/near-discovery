@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 
 export function NearOrgEcosystemGetFundingPage() {
   const Wrapper = styled.div`
@@ -335,7 +335,7 @@ export function NearOrgEcosystemGetFundingPage() {
             <Text size="text-xl" color="sand12">
               We’ve helped hundreds of projects and teams realize their ideas, and bring them to market.
             </Text>
-            <VmWidgetWrapper
+            <VmComponent
               src="mob.near/widget/Image"
               props={{
                 image: returnIpfsImage(ipfsImages.arrows),
@@ -372,7 +372,7 @@ export function NearOrgEcosystemGetFundingPage() {
                 {card.cards.map((item) => (
                   <div class="col" key={item.ipfsImage}>
                     <Card background="transparent" border="none" direction="row">
-                      <VmWidgetWrapper
+                      <VmComponent
                         src="mob.near/widget/Image"
                         props={{
                           image: returnIpfsImage(item.ipfsImage),
@@ -395,7 +395,7 @@ export function NearOrgEcosystemGetFundingPage() {
                         )}
                         {item.href ? (
                           <div>
-                            <VmWidgetWrapper
+                            <VmComponent
                               src="near/widget/DIG.Button"
                               props={{
                                 href: item.href,
@@ -431,7 +431,7 @@ export function NearOrgEcosystemGetFundingPage() {
             There are several options to get financial support for your idea – whether it is a grant from an ecosystem
             fund, joining an accelerator, or getting venture support through our Ecosystem partners.
           </Text>
-          <VmWidgetWrapper
+          <VmComponent
             src="mob.near/widget/Image"
             props={{
               image: returnIpfsImage(ipfsImages.longImage),
@@ -443,7 +443,7 @@ export function NearOrgEcosystemGetFundingPage() {
             }}
           />
           <div>
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: `#ecosystem_grants`,
@@ -456,7 +456,7 @@ export function NearOrgEcosystemGetFundingPage() {
         </Section>
       </Wrapper>
 
-      <VmWidgetWrapper src="near/widget/NearOrg.Footer" />
+      <VmComponent src="near/widget/NearOrg.Footer" />
     </>
   );
 }

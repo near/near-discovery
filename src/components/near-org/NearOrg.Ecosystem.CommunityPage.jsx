@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 
 export function NearOrgEcosystemCommunityPage() {
   const Wrapper = styled.div`
@@ -293,7 +293,7 @@ export function NearOrgEcosystemCommunityPage() {
                     {item.content}
                   </Text>
                   {item.internal ? (
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: item.href,
@@ -307,7 +307,7 @@ export function NearOrgEcosystemCommunityPage() {
                       }}
                     />
                   ) : (
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: item.href,
@@ -341,7 +341,7 @@ export function NearOrgEcosystemCommunityPage() {
             {featuredGuildsCards.map((item) => (
               <div class="col" key={item.title}>
                 <Card style={{ height: '100%' }}>
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="mob.near/widget/Image"
                     props={{
                       image: returnIpfsImage(item.ipfsImage),
@@ -369,7 +369,7 @@ export function NearOrgEcosystemCommunityPage() {
                   Watch
                 </Text>
                 <div>
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://www.youtube.com/channel/UCuKdIYVN8iE3fv8alyk1aMw',
@@ -393,7 +393,7 @@ export function NearOrgEcosystemCommunityPage() {
                   Read
                 </Text>
                 <Flex gap="24px" direction="column" alignItems="start">
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://near.org/blog',
@@ -404,7 +404,7 @@ export function NearOrgEcosystemCommunityPage() {
                       size: 'small',
                     }}
                   />
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://medium.com/nearprotocol',
@@ -431,7 +431,7 @@ export function NearOrgEcosystemCommunityPage() {
                   {connectChannelsLinks.map((item) => (
                     <div key={item.key} class="col">
                       {item.internal ? (
-                        <VmWidgetWrapper
+                        <VmComponent
                           src="near/widget/DIG.Button"
                           props={{
                             href: item.href,
@@ -445,7 +445,7 @@ export function NearOrgEcosystemCommunityPage() {
                           }}
                         />
                       ) : (
-                        <VmWidgetWrapper
+                        <VmComponent
                           src="near/widget/DIG.Button"
                           props={{
                             href: item.href,
@@ -465,7 +465,7 @@ export function NearOrgEcosystemCommunityPage() {
           </div>
         </Section>
       </Wrapper>
-      <VmWidgetWrapper src="near/widget/NearOrg.Footer" />
+      <VmComponent src="near/widget/NearOrg.Footer" />
     </>
   );
 }

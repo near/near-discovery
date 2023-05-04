@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 
 export function NearOrgEcosystemOverviewPage() {
   const nearOrgLinks = {
@@ -446,7 +446,7 @@ export function NearOrgEcosystemOverviewPage() {
         </Section>
         <Section center>
           <Flex gap="var(--large-gap)" wrap="wrap" justifyContent="center">
-            <VmWidgetWrapper
+            <VmComponent
               src="mob.near/widget/Image"
               props={{
                 image: returnIpfsImage(ipfsImages.headerImage),
@@ -486,7 +486,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Flex>
             </div>
             <div class="col order-md-1 order-0">
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.projectDAOs),
@@ -500,7 +500,7 @@ export function NearOrgEcosystemOverviewPage() {
             <Text size="text-3xl" color="sand12">
               Projects: Building the future on NEAR
             </Text>
-            <VmWidgetWrapper
+            <VmComponent
               src="mob.near/widget/Image"
               props={{
                 image: returnIpfsImage(ipfsImages.homepageApps),
@@ -510,7 +510,7 @@ export function NearOrgEcosystemOverviewPage() {
             <Text size="text-3xl" color="sand12">
               Explore hundreds of dApps already built on NEAR
             </Text>
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: 'https://awesomenear.com/',
@@ -541,7 +541,7 @@ export function NearOrgEcosystemOverviewPage() {
             </Text>
             <Flex gap="24px" mobileStack="24px">
               <Card center>
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(ipfsImages.nearWeek),
@@ -557,7 +557,7 @@ export function NearOrgEcosystemOverviewPage() {
                     items to the NEARWEEK DAO.
                   </Text>
                 </Flex>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://nearweek.com/',
@@ -573,7 +573,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Card>
 
               <Card center>
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(ipfsImages.humanGuild),
@@ -589,7 +589,7 @@ export function NearOrgEcosystemOverviewPage() {
                     advisory role along with other services.
                   </Text>
                 </Flex>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://humanguild.io/',
@@ -605,7 +605,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Card>
 
               <Card center>
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(ipfsImages.tenkDao),
@@ -621,7 +621,7 @@ export function NearOrgEcosystemOverviewPage() {
                     compensated with a percentage of sales and royalties.
                   </Text>
                 </Flex>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://tenk.dev/',
@@ -638,7 +638,7 @@ export function NearOrgEcosystemOverviewPage() {
             </Flex>
             <Flex gap="32px" mobileStack="32px">
               <Card center direction="row" className="flex-md-nowrap flex-wrap">
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(ipfsImages.unchainLogo),
@@ -659,7 +659,7 @@ export function NearOrgEcosystemOverviewPage() {
                     Unchain has collected over $7 million USD and counting across a range of cryptocurrencies including,
                     BSC, ETH, Harmony, NEAR, and Polygon.
                   </Text>
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://unchain.fund/',
@@ -676,7 +676,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Card>
             </Flex>
             <Flex gap="32px">
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://astrodao.com/',
@@ -700,7 +700,7 @@ export function NearOrgEcosystemOverviewPage() {
                 the ecosystem forward.
               </Text>
               <div>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: nearOrgLinks.getFundingPage,
@@ -724,7 +724,7 @@ export function NearOrgEcosystemOverviewPage() {
                 decisions, and interact with other DAOs. Create your own DAO today!
               </Text>
               <div>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://app.astrodao.com/all/daos',
@@ -781,7 +781,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Flex>
             </div>
             <div class="col order-md-1 order-0">
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.ecosystemCommunity),
@@ -791,7 +791,7 @@ export function NearOrgEcosystemOverviewPage() {
             </div>
           </div>
           <Flex className="justify-content-md-start justify-content-center">
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: nearOrgLinks.communityPage,
@@ -811,7 +811,7 @@ export function NearOrgEcosystemOverviewPage() {
           <Card gap="0" padding="0" direction="row" background="var(--violet3)" style={{ overflow: 'hidden' }}>
             <div class="row">
               <div class="col-12 col-sm-6">
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(ipfsImages.ecosystemBanner),
@@ -834,7 +834,7 @@ export function NearOrgEcosystemOverviewPage() {
                     something great and expand the NEAR ecosystem.
                   </Text>
                   <div>
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: 'https://gov.near.org/',
@@ -855,7 +855,7 @@ export function NearOrgEcosystemOverviewPage() {
           <Card gap="0" padding="0" direction="row" background="var(--red3)" style={{ overflow: 'hidden' }}>
             <div class="row">
               <div class="col-12 col-sm-6">
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(ipfsImages.ecosystemBlog),
@@ -877,7 +877,7 @@ export function NearOrgEcosystemOverviewPage() {
                     Read articles from all across the ecosystem, easily accessible through Medium.
                   </Text>
                   <div>
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: 'https://medium.com/nearprotocol',
@@ -913,7 +913,7 @@ export function NearOrgEcosystemOverviewPage() {
             </SocialLink>
           </Flex>
           <Flex justifyContent="center">
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: nearOrgLinks.communityPage,
@@ -962,7 +962,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Flex>
             </div>
             <div class="col order-md-1 order-0">
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.ecosystemVenue),
@@ -972,7 +972,7 @@ export function NearOrgEcosystemOverviewPage() {
             </div>
           </div>
           <Flex className="justify-content-md-start justify-content-center">
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: nearOrgLinks.getFundingPage,
@@ -993,7 +993,7 @@ export function NearOrgEcosystemOverviewPage() {
             There are several options to get financial support for your idea
           </Text>
           <Flex gap="var(--large-gap)" justifyContent="center" className="d-none d-md-flex">
-            <VmWidgetWrapper
+            <VmComponent
               src="mob.near/widget/Image"
               props={{
                 image: returnIpfsImage(ipfsImages.fundingArrows),
@@ -1033,7 +1033,7 @@ export function NearOrgEcosystemOverviewPage() {
           <Flex gap="24px" mobileStack="24px">
             {fundingRows.firstRow.map((item) => (
               <Card key={item.ipfsImage} direction="row" padding="32px 0" background="transparent" border="none">
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(item.ipfsImage),
@@ -1047,7 +1047,7 @@ export function NearOrgEcosystemOverviewPage() {
                   <Text color="sand12" align="left">
                     {item.content}
                   </Text>
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: item.href,
@@ -1067,7 +1067,7 @@ export function NearOrgEcosystemOverviewPage() {
           <Flex gap="24px" mobileStack="24px">
             {fundingRows.secondRow.map((item) => (
               <Card key={item.ipfsImage} direction="row" padding="32px 0" background="transparent" border="none">
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(item.ipfsImage),
@@ -1081,7 +1081,7 @@ export function NearOrgEcosystemOverviewPage() {
                   <Text color="sand12" align="left">
                     {item.content}
                   </Text>
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: item.href,
@@ -1099,7 +1099,7 @@ export function NearOrgEcosystemOverviewPage() {
             ))}
           </Flex>
           <Flex justifyContent="center">
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: nearOrgLinks.getFundingPage,
@@ -1121,7 +1121,7 @@ export function NearOrgEcosystemOverviewPage() {
           </Text>
           <Flex gap="32px" mobileStack="32px">
             <Card center direction="row" background="var(--black)" className="flex-md-nowrap flex-wrap">
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.ecosystemOwcLogo),
@@ -1141,7 +1141,7 @@ export function NearOrgEcosystemOverviewPage() {
                   decentralized web. By bringing together capital and seasoned advisors, OWC helps founders de-risk,
                   accelerate, and advance Web 3.0.
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://www.openwebcollective.com/',
@@ -1169,7 +1169,7 @@ export function NearOrgEcosystemOverviewPage() {
               {ventureCards.map((item) => (
                 <div class="col" key={item.ipfsImage}>
                   <Card gap="12px" direction="row" style={{ height: '100%' }}>
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="mob.near/widget/Image"
                       props={{
                         image: returnIpfsImage(item.ipfsImage),
@@ -1183,7 +1183,7 @@ export function NearOrgEcosystemOverviewPage() {
                       <Text align="left" color="sand12" size="text-m">
                         {item.content}
                       </Text>
-                      <VmWidgetWrapper
+                      <VmComponent
                         src="near/widget/DIG.Button"
                         props={{
                           href: item.href,
@@ -1217,7 +1217,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Flex>
             </div>
             <div class="col order-md-1 order-0">
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.ecosystemTechnicalBase),
@@ -1247,14 +1247,14 @@ export function NearOrgEcosystemOverviewPage() {
               <Section>
                 <Flex gap="48px" mobileStack="32px" justifyContent="center">
                   <Flex gap="24px" alignItems="center">
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="mob.near/widget/Image"
                       props={{
                         image: returnIpfsImage(ipfsImages.jsIcon),
                         className: 'img-fluid',
                       }}
                     />
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: 'https://docs.near.org/develop/quickstart-guide',
@@ -1269,14 +1269,14 @@ export function NearOrgEcosystemOverviewPage() {
                     />
                   </Flex>
                   <Flex gap="24px" alignItems="center">
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="mob.near/widget/Image"
                       props={{
                         image: returnIpfsImage(ipfsImages.rustIcon),
                         className: 'img-fluid',
                       }}
                     />
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: 'https://www.near-sdk.io',
@@ -1292,7 +1292,7 @@ export function NearOrgEcosystemOverviewPage() {
                   </Flex>
                 </Flex>
                 <div>
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="near/widget/DIG.Button"
                     props={{
                       href: 'https://docs.near.org',
@@ -1318,7 +1318,7 @@ export function NearOrgEcosystemOverviewPage() {
               <Text size="text-m" color="sand12">
                 We have all you need – powerful CLI, easy-to-use SDKs, and more
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://near.org/developers/tools',
@@ -1338,7 +1338,7 @@ export function NearOrgEcosystemOverviewPage() {
               <Text size="text-m" color="sand12">
                 Docs that answer almost any question. Loads of tutorials and examples
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://near.org/developers/documentation',
@@ -1363,7 +1363,7 @@ export function NearOrgEcosystemOverviewPage() {
 
           <Flex gap="24px" mobileStack="24px">
             <Card center>
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.logoAurora),
@@ -1377,7 +1377,7 @@ export function NearOrgEcosystemOverviewPage() {
                 Easily migrate your Solidity contracts to the Aurora EVM. Use the Rainbow Bridge to transfer assets
                 between Ethereum, NEAR and Aurora EVM. EVM.
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://aurora.dev',
@@ -1392,7 +1392,7 @@ export function NearOrgEcosystemOverviewPage() {
               />
             </Card>
             <Card center>
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.logoOctopus),
@@ -1405,7 +1405,7 @@ export function NearOrgEcosystemOverviewPage() {
               <Text size="text-m" color="sand12">
                 Build app-specific chains with substrate on the Octopus network.
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://oct.network',
@@ -1438,7 +1438,7 @@ export function NearOrgEcosystemOverviewPage() {
           <Flex gap="24px" mobileStack="24px" style={{ width: '100%' }}>
             {rpcCards.map((item) => (
               <Card center key={item.ipfsImage}>
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(item.ipfsImage),
@@ -1451,7 +1451,7 @@ export function NearOrgEcosystemOverviewPage() {
                 <Text size="text-l" color="sand12">
                   {item.content}
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: item.href,
@@ -1478,7 +1478,7 @@ export function NearOrgEcosystemOverviewPage() {
             {storageCards.map((item) => (
               <div class="col" key={item.ipfsImage}>
                 <Card center>
-                  <VmWidgetWrapper
+                  <VmComponent
                     src="mob.near/widget/Image"
                     props={{
                       image: returnIpfsImage(item.ipfsImage),
@@ -1492,7 +1492,7 @@ export function NearOrgEcosystemOverviewPage() {
                     {item.content ?? <span class="invisible">&nbsp;</span>}
                   </Text>
                   {item.internal ? (
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: item.href,
@@ -1506,7 +1506,7 @@ export function NearOrgEcosystemOverviewPage() {
                       }}
                     />
                   ) : (
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: item.href,
@@ -1531,7 +1531,7 @@ export function NearOrgEcosystemOverviewPage() {
           <Flex gap="24px" mobileStack="24px" style={{ width: '100%' }}>
             {oracleCards.map((item) => (
               <Card center key={item.ipfsImage}>
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(item.ipfsImage),
@@ -1544,7 +1544,7 @@ export function NearOrgEcosystemOverviewPage() {
                 <Text size="text-l" color="sand12">
                   {item.content ?? <span class="invisible">&nbsp;</span>}
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: item.href,
@@ -1572,7 +1572,7 @@ export function NearOrgEcosystemOverviewPage() {
           <Flex gap="24px" mobileStack="24px" style={{ width: '100%' }}>
             {assetsCards.map((item) => (
               <Card center key={item.ipfsImage}>
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(item.ipfsImage),
@@ -1585,7 +1585,7 @@ export function NearOrgEcosystemOverviewPage() {
                 <Text size="text-l" color="sand12">
                   {item.content ?? <span class="invisible">&nbsp;</span>}
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: item.href,
@@ -1619,7 +1619,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Flex>
             </div>
             <div class="col order-md-1 order-0">
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.sectionAnkerRegionalHubs),
@@ -1638,7 +1638,7 @@ export function NearOrgEcosystemOverviewPage() {
               {nearHubsCards.map((item) => (
                 <div class="col" key={item.ipfsImage}>
                   <Card center>
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="mob.near/widget/Image"
                       props={{
                         image: returnIpfsImage(item.ipfsImage),
@@ -1651,7 +1651,7 @@ export function NearOrgEcosystemOverviewPage() {
                     <Text size="text-m" color="sand12">
                       {item.content}
                     </Text>
-                    <VmWidgetWrapper
+                    <VmComponent
                       src="near/widget/DIG.Button"
                       props={{
                         href: item.href,
@@ -1695,7 +1695,7 @@ export function NearOrgEcosystemOverviewPage() {
               </Flex>
             </div>
             <div class="col order-md-1 order-0">
-              <VmWidgetWrapper
+              <VmComponent
                 src="mob.near/widget/Image"
                 props={{
                   image: returnIpfsImage(ipfsImages.ecosystemCareer),
@@ -1717,7 +1717,7 @@ export function NearOrgEcosystemOverviewPage() {
               <Text size="text-l" color="sand12" fontWeight="600">
                 Find a web3-job
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://careers.near.org/jobs',
@@ -1733,7 +1733,7 @@ export function NearOrgEcosystemOverviewPage() {
               <Text size="text-l" color="sand12" fontWeight="600">
                 Get a grant for your project
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://near.org/ecosystem/get-funding',
@@ -1749,7 +1749,7 @@ export function NearOrgEcosystemOverviewPage() {
               <Text size="text-l" color="sand12" fontWeight="600">
                 Complete a bounty
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://gitcoin.co/near/active',
@@ -1762,7 +1762,7 @@ export function NearOrgEcosystemOverviewPage() {
             </Card>
           </Flex>
           <Flex gap="24px">
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: nearOrgLinks.workAndEarnPage,
@@ -1808,7 +1808,7 @@ export function NearOrgEcosystemOverviewPage() {
             </Card>
           </Flex>
           <Flex gap="24px">
-            <VmWidgetWrapper
+            <VmComponent
               src="near/widget/DIG.Button"
               props={{
                 href: 'https://near.org/developers/get-help/',
@@ -1820,12 +1820,12 @@ export function NearOrgEcosystemOverviewPage() {
             />
           </Flex>
           <Section style={{ width: '100%' }}>
-            <VmWidgetWrapper src="near/widget/NearOrg.LearningLinks" />
+            <VmComponent src="near/widget/NearOrg.LearningLinks" />
           </Section>
         </Section>
       </Wrapper>
 
-      <VmWidgetWrapper src="near/widget/NearOrg.Footer" />
+      <VmComponent src="near/widget/NearOrg.Footer" />
     </>
   );
 }

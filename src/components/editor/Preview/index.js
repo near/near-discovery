@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 
 import { Layout, Tab } from '../utils/const';
 
@@ -39,11 +39,11 @@ const Preview = ({ tab, layout, renderCode, jpath, parsedWidgetProps, isModule, 
                   margin: 0,
                 }}
               >
-                <VmWidgetWrapper
+                <VmComponent
                   key={widgets.wrapper}
                   src={widgets.wrapper}
                   props={{
-                    children: <VmWidgetWrapper key={`preview-${jpath}`} code={renderCode} props={parsedWidgetProps} />,
+                    children: <VmComponent key={`preview-${jpath}`} code={renderCode} props={parsedWidgetProps} />,
                   }}
                 />
               </div>

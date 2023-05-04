@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 
@@ -160,7 +160,7 @@ const UserDropdownMenu = (props) => {
     <StyledDropdown>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
-          <VmWidgetWrapper
+          <VmComponent
             src={props.widgets.profileImage}
             props={{
               accountId,
@@ -169,7 +169,7 @@ const UserDropdownMenu = (props) => {
           />
           <div className="profile-info">
             <div className="profile-name">
-              <VmWidgetWrapper src={props.widgets.profileName} />
+              <VmComponent src={props.widgets.profileName} />
             </div>
             <div className="profile-username">{accountId}</div>
           </div>

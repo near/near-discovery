@@ -203,7 +203,7 @@ export function MenuLeft(props) {
         )}
         {props.signedIn && (
           <div className="logged-in-btns">
-            <NotificationWidget notificationButtonSrc={props.widgets.notificationButton} />
+            <NotificationWidget />
             <UserDropdownMenu {...props} />
           </div>
         )}

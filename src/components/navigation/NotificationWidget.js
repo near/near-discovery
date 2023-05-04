@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
+import { useWidgets } from '@/hooks/useWidgets';
 
 const StyledNotificationWidget = styled.div`
   margin: 0 15px;
@@ -37,10 +38,12 @@ const StyledNotificationWidget = styled.div`
   }
 `;
 
-export function NotificationWidget({ notificationButtonSrc, onMouseEnter }) {
+export function NotificationWidget({ onMouseEnter }) {
+  const widgets = useWidgets();
+
   return (
     <StyledNotificationWidget className="nav-notification-widget" onMouseOver={onMouseEnter}>
-      <VmWidgetWrapper src={notificationButtonSrc} />
+      <VmComponent src={widgets.notificationButton} />
     </StyledNotificationWidget>
   );
 }
