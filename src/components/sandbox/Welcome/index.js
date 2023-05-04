@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
@@ -86,17 +87,17 @@ const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
         <Title>Follow our getting started guided tutorial</Title>
         <div className="d-flex">
           <Tag>
-            <img src={Point1} /> Beginner Friendly
+            <Image src={Point1} /> Beginner Friendly
           </Tag>
           <Tag>
-            <img src={Point2} /> 5 min
+            <Image src={Point2} /> 5 min
           </Tag>
         </div>
         <Desc>
           We’ll guide you through a basic development workflow to fork, modify, and compose with open web components.
         </Desc>
         <ButtonGetStarted onClick={handleSandbox}>
-          Get Started <img src={Arrow} />
+          Get Started <Image src={Arrow} />
         </ButtonGetStarted>
 
         <Title className="second">Welcome to the Component Sandbox!</Title>

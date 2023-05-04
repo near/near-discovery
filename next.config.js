@@ -14,6 +14,11 @@ const nextConfig = {
         destination: 'https://nearpitchfestconsensus.splashthat.com/',
         permanent: false,
       },
+      {
+        source: '/edit/:path*',
+        destination: '/sandbox/:path*',
+        permanent: true,
+      },
     ];
   },
   rewrites: async () => [

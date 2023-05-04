@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
@@ -117,10 +118,10 @@ export default function OnboardingWelcome({ handleNext }) {
           <Title>Build with Open Web Components</Title>
           <div className="d-flex">
             <Tag>
-              <img src={Point1} /> Beginner Friendly
+              <Image src={Point1} /> Beginner Friendly
             </Tag>
             <Tag>
-              <img src={Point2} /> 5 min
+              <Image src={Point2} /> 5 min
             </Tag>
           </div>
           <Desc>
@@ -128,7 +129,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Desc>
           <Point>
             <div className="img">
-              <img src={Onboarding1} />
+              <Image src={Onboarding1} />
             </div>
             <div>
               <div className="title">Develop with the NEAR Sandbox </div>
@@ -139,7 +140,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Point>
           <Point>
             <div className="img">
-              <img src={Onboarding2} />
+              <Image src={Onboarding2} />
             </div>
             <div>
               <div className="title">Compose with Components</div>
@@ -148,7 +149,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Point>
           <Point>
             <div className="img">
-              <img src={Onboarding3} />
+              <Image src={Onboarding3} />
             </div>
             <div>
               <div className="title">Publish Your First Components On-Chain </div>
@@ -159,7 +160,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Point>
           <div>
             <ButtonGetStarted onClick={handleNext}>
-              Get Started <img src={Arrow} />
+              Get Started <Image src={Arrow} />
             </ButtonGetStarted>
             <ButtonSkip
               onClick={() => {

@@ -1,4 +1,5 @@
 import copy from 'copy-to-clipboard';
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -8,6 +9,7 @@ const Wrapper = styled.div`
   .buttons {
     width: 100%;
     margin-top: 0px;
+    margin-bottom: 10px;
 
     button {
       text-align: center;
@@ -40,7 +42,6 @@ const CodeEx = styled.div`
   margin: 20px 0;
   background: #353431;
   border-radius: 6px;
-
   color: #a1a09a;
   font-family: Menlo, Monaco, ' Courier New ', monospace;
   font-style: normal;
@@ -54,31 +55,25 @@ const CodeEx = styled.div`
   }
 `;
 
-const codeExample = `<Widget src="near/widget/Onboarding.ComponentCard" props={{ accountId }} />`;
+const codeExample = 'Onboarding.ComponentCollection';
 
-const codeVisible = `<Widget
-  src="near/widget
-    /Onboarding.ComponentCard"
-  props={{ accountId }}
-/>`;
-
-export default function Step3() {
+export default function Step6() {
   return (
     <Wrapper>
-      <div className="title">Edit your first Component</div>
+      <div className="title">Search for Community Components </div>
       <div className="desc">
-        The following code snippet gets the total number of contributions you have made to the NEAR blockchain.
+        You can search the platform at any point for community components to inspire new experiences, or to use in your
+        own projects.
         <br />
         <br />
-        Copy the snippet and replace the placeholder code on line 4 to display your total contributions.
-      </div>
-      <CodeEx>
-        <pre>{codeVisible}</pre>
-      </CodeEx>
-      <div className="buttons">
-        <button onClick={() => copy(codeExample)}>
-          <img src={CopyIcon} /> Copy to Clipboard
-        </button>
+        In the search bar, type or paste in:
+        <CodeEx>{codeExample}</CodeEx>
+        <div className="buttons">
+          <button onClick={() => copy(codeExample)}>
+            <Image src={CopyIcon} /> Copy to Clipboard
+          </button>
+        </div>
+        to search for this component.
       </div>
     </Wrapper>
   );

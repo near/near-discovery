@@ -6,7 +6,8 @@ export function useHashUrlBackwardsCompatibility() {
 
   const onHashChange = useCallback(
     (event: HashChangeEvent) => {
-      const url = event.newURL.split('#').pop() ?? '/';
+      let url = event.newURL.split('#').pop() ?? '/';
+      url = url.replace(/^\/edit/, '/sandbox');
 
       if (url[0] === '/') {
         router.replace(url);
