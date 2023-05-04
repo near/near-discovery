@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
-import { useCurrentWidgetStore } from '@/stores/current-widget';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
 import { recordClick, recordPageView } from '@/utils/analytics';
 
@@ -128,8 +128,8 @@ const EditorPage = ({ onboarding }) => {
   const accountId = useAuthStore((store) => store.accountId);
   const logOut = useAuthStore((store) => store.logOut);
   const requestSignIn = useAuthStore((store) => store.requestSignIn);
-  const widgetSrc = useCurrentWidgetStore((store) => store.widgetSrc);
-  const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
+  const widgetSrc = useCurrentComponentStore((store) => store.src);
+  const setWidgetSrc = useCurrentComponentStore((store) => store.setSrc);
   const router = useRouter();
   const widgets = useWidgets();
   const tos = {

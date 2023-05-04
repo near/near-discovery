@@ -1,47 +1,47 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
-import { useCurrentWidgetStore } from '@/stores/current-widget';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import { recordClick, recordPageView } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
-  const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
-  const widgetSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
-  const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+  const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
+  const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const widgets = useWidgets();
 
   useEffect(() => {
-    setWidgetSrc(widgetSrc);
-  }, [setWidgetSrc, widgetSrc]);
+    setComponentSrc(componentSrc);
+  }, [setComponentSrc, componentSrc]);
 
   useEffect(() => {
-    setWidgetProps(router.query);
+    setComponentProps(router.query);
   }, [router.query]);
 
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
     if (!window.zE) return;
-    if (!authStore.signedIn || !!widgetSrc) {
+    if (!authStore.signedIn || !!componentSrc) {
       window.zE('webWidget', 'hide');
       return;
     }
     localStorage.setItem('accountId', authStore.accountId);
     window.zE('webWidget', 'show');
-  }, [authStore.accountId, authStore.signedIn, widgetSrc]);
+  }, [authStore.accountId, authStore.signedIn, componentSrc]);
 
   useEffect(() => {
     setTimeout(() => {
-      recordPageView(widgetSrc);
+      recordPageView(componentSrc);
     }, 1);
-  }, [widgetSrc]);
+  }, [componentSrc]);
 
   useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);
@@ -71,13 +71,13 @@ const ViewComponentPage: NextPageWithLayout = () => {
             paddingTop: 'var(--body-top-padding)',
           }}
         >
-          <VmWidgetWrapper
+          <VmComponent
             key={widgets.tosCheck}
             src={widgets.tosCheck}
             props={{
               logOut: authStore.logOut,
-              targetProps: widgetProps,
-              targetComponent: widgetSrc,
+              targetProps: componentProps,
+              targetComponent: componentSrc,
               tosName: widgets.tosContent,
             }}
           />

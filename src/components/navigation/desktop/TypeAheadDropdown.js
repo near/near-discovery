@@ -1,8 +1,11 @@
 import React from 'react';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
+import { useWidgets } from '@/hooks/useWidgets';
 
 const TypeAheadDropdown = (props) => {
+  const widgets = useWidgets();
+
   return (
     <div
       tabIndex={-1}
@@ -13,7 +16,7 @@ const TypeAheadDropdown = (props) => {
         props.focusChange(false);
       }}
     >
-      <VmWidgetWrapper src={props.widgetSrc} props={{ term: props.term }} />
+      <VmComponent src={widgets.search.typeAheadDropdown} props={{ term: props.term }} />
     </div>
   );
 };

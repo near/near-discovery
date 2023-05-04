@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
+import { VmComponent } from '@/components/client/VmComponent';
 import { useAuthStore } from '@/stores/auth';
 
 export function NearOrgHomePage() {
@@ -430,7 +430,7 @@ export function NearOrgHomePage() {
             a more open web, with the NEAR Blockchain Operating System (BOS).
           </Text>
 
-          <VmWidgetWrapper
+          <VmComponent
             src="near/widget/DIG.Button"
             props={{
               href: '/onboarding',
@@ -449,7 +449,7 @@ export function NearOrgHomePage() {
           {web3Teams.map((team) => {
             return (
               <a href={team.url} target="_blank" title={team.name} key={team.name}>
-                <VmWidgetWrapper
+                <VmComponent
                   src="mob.near/widget/Image"
                   props={{
                     image: returnIpfsImage(team.ipfsImage),
@@ -527,7 +527,7 @@ export function NearOrgHomePage() {
                   The BOS is built on JavaScript, so you can get started creating new apps right away, without needing
                   to learn a new language
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://docs.near.org/discovery',
@@ -555,7 +555,7 @@ export function NearOrgHomePage() {
                   Explore, experiment with, and combine community built components to quickly create your own app, or
                   build and publish your own from the ground up
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: '/onboarding',
@@ -570,8 +570,8 @@ export function NearOrgHomePage() {
             <IconAndContent>
               <svg viewBox="0 0 48 49" fill="none">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M15.3029 8.70865C15.2965 13.5157 19.1627 17.4044 23.9505 17.414C28.8154 17.4237 32.7266 13.5671 32.7266 8.7504C32.7298 3.95618 28.7672 -0.0127825 23.9923 6.20461e-05C19.2366 0.0129066 15.3062 3.95297 15.3029 8.70865ZM13.3666 38.5145V38.5177L13.3634 38.5145H13.3666ZM13.3731 38.5145H13.3666V31.4564C13.3666 31.3977 13.3674 31.3389 13.3681 31.2803C13.37 31.124 13.3719 30.9683 13.3602 30.8142C13.3345 30.4321 13.2928 30.005 12.8111 29.9697C12.3166 29.9376 12.2331 30.355 12.1817 30.7404C11.912 32.7794 11.6455 34.8185 11.3789 36.8576C11.2749 37.6618 11.1722 38.4661 11.0695 39.2703L11.0695 39.2707L11.0695 39.2707C10.8205 41.2213 10.5715 43.1713 10.3032 45.1198C10.1812 46.0061 9.97568 46.0928 9.12152 45.8455C6.52371 45.0909 4.0383 44.0441 1.57536 42.933C0.512474 42.4546 -0.00130704 41.7321 0.0179598 40.5054L0.0316548 39.6692C0.0832192 36.5501 0.134814 33.4292 0.00511523 30.3165C-0.120119 27.3526 2.0763 25.0631 5.281 25.0438C7.68935 25.0277 10.0945 25.0245 12.5028 25.0502C13.1065 25.0566 13.4437 24.9314 13.6685 24.2763C14.4038 22.1377 16.1475 20.9079 18.5141 20.879C22.3128 20.834 26.1116 20.834 29.9072 20.879C32.277 20.9079 33.9821 22.1602 34.7785 24.3598C34.9679 24.88 35.2409 25.0502 35.7771 25.047C38.1309 25.0245 40.4846 25.0149 42.8384 25.047C45.1023 25.0791 46.7913 26.0489 47.6936 28.2003C47.8831 28.6467 47.9987 29.1059 47.9987 29.5972C47.9923 33.3414 47.9891 37.0855 47.9987 40.8329C47.9987 41.7481 47.5716 42.3454 46.7849 42.7339C44.3862 43.9253 41.904 44.9014 39.3511 45.7074C38.3525 46.0221 38.2144 45.9418 38.0795 44.8758C37.7268 42.093 37.3776 39.3102 37.0284 36.5274C36.7958 34.6733 36.5631 32.8192 36.3294 30.9651L36.3247 30.9255C36.3072 30.7805 36.2893 30.6317 36.2363 30.4963C36.1271 30.2137 35.9698 29.9376 35.6134 29.9761C35.2601 30.0146 35.1413 30.294 35.1188 30.6087C35.0996 30.8752 35.0996 31.1417 35.0996 31.4115V45.2129C35.0996 46.8341 35.0964 46.8347 33.5076 47.1305L33.4587 47.1396C29.7948 47.8268 26.102 48.1607 22.3771 48.0227C19.5994 47.9199 16.8443 47.5892 14.1084 47.0882C13.4983 46.9758 13.3634 46.613 13.3666 46.0574C13.3783 44.2288 13.3764 42.4002 13.3745 40.5716C13.3738 39.8859 13.3731 39.2002 13.3731 38.5145ZM9.1825 11.3738C12.3551 11.3771 14.8823 13.901 14.8919 17.0768C14.9015 20.2013 12.3262 22.7894 9.18571 22.8119C6.03559 22.8344 3.42172 20.2109 3.43778 17.0351C3.45062 13.8817 6.00347 11.3674 9.18571 11.3706L9.1825 11.3738ZM44.2866 17.1153C44.2994 13.962 41.7337 11.3738 38.59 11.3738C35.4239 11.3706 32.8164 13.9524 32.8357 17.0736C32.855 20.2012 35.456 22.7926 38.59 22.8054C41.6406 22.8183 44.2738 20.1884 44.2866 17.1153Z"
                   fill="#00EC97"
                 />
@@ -584,7 +584,7 @@ export function NearOrgHomePage() {
                   Accessibility is key to a more open web, so we made it possible for you to onboard to the BOS, and for
                   your users to onboard to your app, without any crypto
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/fast-auth',
@@ -613,7 +613,7 @@ export function NearOrgHomePage() {
                   Every component, even this page, is live on NEAR&apos;s public blockchain platform - the source code
                   is available to anyone to inspect, fork, modify, and reuse
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/open-source',
@@ -746,8 +746,8 @@ export function NearOrgHomePage() {
               />
               <svg viewBox="0 0 48 49" fill="none">
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M15.3029 8.70865C15.2965 13.5157 19.1627 17.4044 23.9505 17.414C28.8154 17.4237 32.7266 13.5671 32.7266 8.7504C32.7298 3.95618 28.7672 -0.0127825 23.9923 6.20461e-05C19.2366 0.0129066 15.3062 3.95297 15.3029 8.70865ZM13.3666 38.5145V38.5177L13.3634 38.5145H13.3666ZM13.3731 38.5145H13.3666V31.4564C13.3666 31.3977 13.3674 31.3389 13.3681 31.2803C13.37 31.124 13.3719 30.9683 13.3602 30.8142C13.3345 30.4321 13.2928 30.005 12.8111 29.9697C12.3166 29.9376 12.2331 30.355 12.1817 30.7404C11.912 32.7794 11.6455 34.8185 11.3789 36.8576C11.2749 37.6618 11.1722 38.4661 11.0695 39.2703L11.0695 39.2707L11.0695 39.2707C10.8205 41.2213 10.5715 43.1713 10.3032 45.1198C10.1812 46.0061 9.97568 46.0928 9.12152 45.8455C6.52371 45.0909 4.0383 44.0441 1.57536 42.933C0.512474 42.4546 -0.00130704 41.7321 0.0179598 40.5054L0.0316548 39.6692C0.0832192 36.5501 0.134814 33.4292 0.00511523 30.3165C-0.120119 27.3526 2.0763 25.0631 5.281 25.0438C7.68935 25.0277 10.0945 25.0245 12.5028 25.0502C13.1065 25.0566 13.4437 24.9314 13.6685 24.2763C14.4038 22.1377 16.1475 20.9079 18.5141 20.879C22.3128 20.834 26.1116 20.834 29.9072 20.879C32.277 20.9079 33.9821 22.1602 34.7785 24.3598C34.9679 24.88 35.2409 25.0502 35.7771 25.047C38.1309 25.0245 40.4846 25.0149 42.8384 25.047C45.1023 25.0791 46.7913 26.0489 47.6936 28.2003C47.8831 28.6467 47.9987 29.1059 47.9987 29.5972C47.9923 33.3414 47.9891 37.0855 47.9987 40.8329C47.9987 41.7481 47.5716 42.3454 46.7849 42.7339C44.3862 43.9253 41.904 44.9014 39.3511 45.7074C38.3525 46.0221 38.2144 45.9418 38.0795 44.8758C37.7268 42.093 37.3776 39.3102 37.0284 36.5274C36.7958 34.6733 36.5631 32.8192 36.3294 30.9651L36.3247 30.9255C36.3072 30.7805 36.2893 30.6317 36.2363 30.4963C36.1271 30.2137 35.9698 29.9376 35.6134 29.9761C35.2601 30.0146 35.1413 30.294 35.1188 30.6087C35.0996 30.8752 35.0996 31.1417 35.0996 31.4115V45.2129C35.0996 46.8341 35.0964 46.8347 33.5076 47.1305L33.4587 47.1396C29.7948 47.8268 26.102 48.1607 22.3771 48.0227C19.5994 47.9199 16.8443 47.5892 14.1084 47.0882C13.4983 46.9758 13.3634 46.613 13.3666 46.0574C13.3783 44.2288 13.3764 42.4002 13.3745 40.5716C13.3738 39.8859 13.3731 39.2002 13.3731 38.5145ZM9.1825 11.3738C12.3551 11.3771 14.8823 13.901 14.8919 17.0768C14.9015 20.2013 12.3262 22.7894 9.18571 22.8119C6.03559 22.8344 3.42172 20.2109 3.43778 17.0351C3.45062 13.8817 6.00347 11.3674 9.18571 11.3706L9.1825 11.3738ZM44.2866 17.1153C44.2994 13.962 41.7337 11.3738 38.59 11.3738C35.4239 11.3706 32.8164 13.9524 32.8357 17.0736C32.855 20.2012 35.456 22.7926 38.59 22.8054C41.6406 22.8183 44.2738 20.1884 44.2866 17.1153Z"
                   fill="#000"
                 />
@@ -758,7 +758,7 @@ export function NearOrgHomePage() {
                   The BOS moves everything on chain, eliminating the need for providers and intermediaries, and allowing
                   you to connect directly with your users
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: '/onboarding',
@@ -806,7 +806,7 @@ export function NearOrgHomePage() {
                   You can build on Ethereum and more, while taking advantage of NEAR protocol&apos;s speed, low cost,
                   and scalability, and never getting stuck <span style={{ whiteSpace: 'nowrap' }}>in a silo</span>
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/multi-chain',
@@ -855,7 +855,7 @@ export function NearOrgHomePage() {
                   Make your app available as an embedded blockchain experience on any browser, app, or connected device
                   capable of running a few lines of Javascript
                 </Text>
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/gateways',
@@ -940,8 +940,8 @@ export function NearOrgHomePage() {
             >
               <svg viewBox="0 0 48 49" fill="none" style={{ width: '72px' }}>
                 <path
-                  fill-rule="evenodd"
-                  clip-rule="evenodd"
+                  fillRule="evenodd"
+                  clipRule="evenodd"
                   d="M15.3029 8.70865C15.2965 13.5157 19.1627 17.4044 23.9505 17.414C28.8154 17.4237 32.7266 13.5671 32.7266 8.7504C32.7298 3.95618 28.7672 -0.0127825 23.9923 6.20461e-05C19.2366 0.0129066 15.3062 3.95297 15.3029 8.70865ZM13.3666 38.5145V38.5177L13.3634 38.5145H13.3666ZM13.3731 38.5145H13.3666V31.4564C13.3666 31.3977 13.3674 31.3389 13.3681 31.2803C13.37 31.124 13.3719 30.9683 13.3602 30.8142C13.3345 30.4321 13.2928 30.005 12.8111 29.9697C12.3166 29.9376 12.2331 30.355 12.1817 30.7404C11.912 32.7794 11.6455 34.8185 11.3789 36.8576C11.2749 37.6618 11.1722 38.4661 11.0695 39.2703L11.0695 39.2707L11.0695 39.2707C10.8205 41.2213 10.5715 43.1713 10.3032 45.1198C10.1812 46.0061 9.97568 46.0928 9.12152 45.8455C6.52371 45.0909 4.0383 44.0441 1.57536 42.933C0.512474 42.4546 -0.00130704 41.7321 0.0179598 40.5054L0.0316548 39.6692C0.0832192 36.5501 0.134814 33.4292 0.00511523 30.3165C-0.120119 27.3526 2.0763 25.0631 5.281 25.0438C7.68935 25.0277 10.0945 25.0245 12.5028 25.0502C13.1065 25.0566 13.4437 24.9314 13.6685 24.2763C14.4038 22.1377 16.1475 20.9079 18.5141 20.879C22.3128 20.834 26.1116 20.834 29.9072 20.879C32.277 20.9079 33.9821 22.1602 34.7785 24.3598C34.9679 24.88 35.2409 25.0502 35.7771 25.047C38.1309 25.0245 40.4846 25.0149 42.8384 25.047C45.1023 25.0791 46.7913 26.0489 47.6936 28.2003C47.8831 28.6467 47.9987 29.1059 47.9987 29.5972C47.9923 33.3414 47.9891 37.0855 47.9987 40.8329C47.9987 41.7481 47.5716 42.3454 46.7849 42.7339C44.3862 43.9253 41.904 44.9014 39.3511 45.7074C38.3525 46.0221 38.2144 45.9418 38.0795 44.8758C37.7268 42.093 37.3776 39.3102 37.0284 36.5274C36.7958 34.6733 36.5631 32.8192 36.3294 30.9651L36.3247 30.9255C36.3072 30.7805 36.2893 30.6317 36.2363 30.4963C36.1271 30.2137 35.9698 29.9376 35.6134 29.9761C35.2601 30.0146 35.1413 30.294 35.1188 30.6087C35.0996 30.8752 35.0996 31.1417 35.0996 31.4115V45.2129C35.0996 46.8341 35.0964 46.8347 33.5076 47.1305L33.4587 47.1396C29.7948 47.8268 26.102 48.1607 22.3771 48.0227C19.5994 47.9199 16.8443 47.5892 14.1084 47.0882C13.4983 46.9758 13.3634 46.613 13.3666 46.0574C13.3783 44.2288 13.3764 42.4002 13.3745 40.5716C13.3738 39.8859 13.3731 39.2002 13.3731 38.5145ZM9.1825 11.3738C12.3551 11.3771 14.8823 13.901 14.8919 17.0768C14.9015 20.2013 12.3262 22.7894 9.18571 22.8119C6.03559 22.8344 3.42172 20.2109 3.43778 17.0351C3.45062 13.8817 6.00347 11.3674 9.18571 11.3706L9.1825 11.3738ZM44.2866 17.1153C44.2994 13.962 41.7337 11.3738 38.59 11.3738C35.4239 11.3706 32.8164 13.9524 32.8357 17.0736C32.855 20.2012 35.456 22.7926 38.59 22.8054C41.6406 22.8183 44.2738 20.1884 44.2866 17.1153Z"
                   fill="#000"
                 />
@@ -953,7 +953,7 @@ export function NearOrgHomePage() {
                 Join a vibrant community of builders who understand that a more free and open web is better for
                 developers, users, and the world as a whole.
               </Text>
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: '/sandbox',
@@ -967,7 +967,7 @@ export function NearOrgHomePage() {
 
             <Flex direction="column" gap="68px">
               <Flex direction="column" gap="16px">
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: '/people',
@@ -981,7 +981,7 @@ export function NearOrgHomePage() {
               </Flex>
 
               <Flex direction="column" gap="16px">
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: '/events',
@@ -995,7 +995,7 @@ export function NearOrgHomePage() {
               </Flex>
 
               <Flex direction="column" gap="16px">
-                <VmWidgetWrapper
+                <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
                     href: '/news',
@@ -1057,7 +1057,7 @@ export function NearOrgHomePage() {
             </Text>
 
             {!signedIn ? (
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: 'https://wallet.near.org/create',
@@ -1067,7 +1067,7 @@ export function NearOrgHomePage() {
                 }}
               />
             ) : (
-              <VmWidgetWrapper
+              <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
                   href: '/sandbox',
@@ -1081,7 +1081,7 @@ export function NearOrgHomePage() {
         </SectionContent>
       </Section>
 
-      <VmWidgetWrapper src="near/widget/NearOrg.Footer" />
+      <VmComponent src="near/widget/NearOrg.Footer" />
     </Wrapper>
   );
 }

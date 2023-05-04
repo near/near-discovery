@@ -233,11 +233,7 @@ const DesktopNavigation = (props) => {
 
           {showTypeAheadDropdown && (
             <TypeAheadDropdownContainer>
-              <TypeAheadDropdown
-                term={searchTerm}
-                focusChange={setSearchIsFocused}
-                widgetSrc={widgets.search.typeAheadDropdown}
-              />
+              <TypeAheadDropdown term={searchTerm} focusChange={setSearchIsFocused} />
             </TypeAheadDropdownContainer>
           )}
 
@@ -263,7 +259,7 @@ const DesktopNavigation = (props) => {
           )}
           {signedIn && (
             <>
-              <NotificationWidget notificationButtonSrc={widgets.notificationButton} />
+              <NotificationWidget />
               <UserDropdownMenu {...props} />
             </>
           )}
