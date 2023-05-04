@@ -33,7 +33,6 @@ import {
   createFilesObject,
   fileToJpath,
   fileToPath,
-  fileToSrc,
   generateNewName,
   getDefaultCode,
   getSrcByNameOrPath,
@@ -58,60 +57,7 @@ import { recordPageView, recordClick } from "../../utils/analytics";
 import styled from "styled-components";
 import BannerOboarding from "./Banners/BannerOboarding";
 import MobileBlocker from "./Mobile/MobileBlocker";
-
-const Wrapper = styled.div`
-  .glow {
-    -webkit-animation: glowing 1000ms infinite;
-    -moz-animation: glowing 1000ms infinite;
-    -o-animation: glowing 1000ms infinite;
-    animation: glowing 1000ms infinite;
-
-    border-radius: 6px;
-
-    @-webkit-keyframes glowing {
-      0% {
-        border-color: #0d6efd;
-        -webkit-box-shadow: 0 0 3px #0d6efd;
-      }
-      50% {
-        border-color: #0d6efd;
-        -webkit-box-shadow: 0 0 15px #0d6efd;
-      }
-      100% {
-        border-color: #0d6efd;
-        -webkit-box-shadow: 0 0 3px #0d6efd;
-      }
-    }
-    @keyframes glowing {
-      0% {
-        border-color: #0d6efd;
-        box-shadow: 0 0 3px #0d6efd;
-      }
-      50% {
-        border-color: #0d6efd;
-        box-shadow: 0 0 15px #0d6efd;
-      }
-      100% {
-        border-color: #0d6efd;
-        box-shadow: 0 0 3px #0d6efd;
-      }
-    }
-  }
-
-  .onboardingDisable {
-    &::before {
-      border: 10px;
-      content: "";
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: 10;
-      background: white;
-      opacity: 0.5;
-    }
-  }
-`;
+import MainWrapper from "./css/MainWrapper";
 
 const EditorPage = ({
   setWidgetSrc,
@@ -216,33 +162,25 @@ const EditorPage = ({
     cache
       .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
       .then(({ files, lastPath, lastSrc } = {}) => {
+        let path;
+        let filesObject;
+
         if (onboarding && currentStep === 1) {
-          const onboardingPath = onboardingComponents.starter;
-          const filesObject = createFilesObject([onboardingComponents.starter]);
-          setFilesObject(filesObject);
-          selectFile(filesObject[fileToJpath(onboardingPath)]);
-          getAllFileLocalStorage(filesObject);
-          getAllFileSocialDB(filesObject);
-          return;
-        }
-        if (onboarding && currentStep > 1) {
-          const onboardingPath = onboardingComponents.starterFork;
-          const filesObject = createFilesObject([
+          path = onboardingComponents.starter;
+          filesObject = createFilesObject([onboardingComponents.starter]);
+        } else if (onboarding && currentStep > 1) {
+          path = onboardingComponents.starterFork;
+          filesObject = createFilesObject([
             onboardingComponents.starter,
             onboardingComponents.starterFork,
           ]);
-          setFilesObject(filesObject);
-          selectFile(filesObject[fileToJpath(onboardingPath)]);
-          getAllFileLocalStorage(filesObject);
-          getAllFileSocialDB(filesObject);
-          return;
+        } else {
+          path = lastPath;
+          filesObject = createFilesObject(files);
         }
 
-        const lastJpath = fileToJpath(lastPath);
-        const filesObject = createFilesObject(files);
-
-        selectFile(filesObject[lastJpath]);
         setFilesObject(filesObject);
+        selectFile(filesObject[fileToJpath(path)]);
         getAllFileLocalStorage(filesObject);
         getAllFileSocialDB(filesObject);
 
@@ -544,7 +482,6 @@ const EditorPage = ({
       new: true,
     };
     addFile(newFile);
-    // updateCodeLocalStorage(path, "", cache);
     setRenderCode(null);
     selectFile(path);
     getFileSocialDB(newFile, true);
@@ -578,14 +515,14 @@ const EditorPage = ({
   };
 
   return (
-    <Wrapper>
+    <MainWrapper>
       <Helmet>
         <title>{meta.title}</title>
         <meta name="description" content={meta.description} />
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
       </Helmet>
-      <div style={{ position: "relative" }} onPointerUp={recordClick}>
+      <div onPointerUp={recordClick}>
         <MobileBlocker onboarding={onboarding} />
 
         {onboarding && (
@@ -756,7 +693,7 @@ const EditorPage = ({
           </>
         )}
       </div>
-    </Wrapper>
+    </MainWrapper>
   );
 };
 

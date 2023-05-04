@@ -4,6 +4,7 @@ import {
   Filetype,
   StorageDomain,
   StorageType,
+  fileObjectDefault,
 } from "./const";
 
 export const toPath = (type, nameOrPath) => {
