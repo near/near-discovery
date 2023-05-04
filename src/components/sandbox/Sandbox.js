@@ -11,6 +11,7 @@ import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
 import { recordClick, recordPageView } from '@/utils/analytics';
 
+import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
 import VsCodeBanner from './Banners/VsCodeBanner';
 import Modals from './Modals';
@@ -122,7 +123,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const EditorPage = ({ onboarding }) => {
+export const Sandbox = ({ onboarding }) => {
   const near = useVmStore((store) => store.near);
   const cache = useVmStore((store) => store.cache);
   const accountId = useAuthStore((store) => store.accountId);
@@ -137,13 +138,14 @@ const EditorPage = ({ onboarding }) => {
     contentComponentPath: widgets.tosContent,
   };
 
+  const [shouldRender, setShouldRender] = useState(false);
   const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
   const [codeVisible, setCodeVisible] = useState(undefined);
   const [path, setPath] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
   const [renderCode, setRenderCode] = useState(codeVisible);
-  const [widgetProps, setWidgetProps] = useState({});
+  const [widgetProps, setWidgetProps] = useState('{}');
   const [parsedWidgetProps, setParsedWidgetProps] = useState({});
   const [propsError, setPropsError] = useState(null);
   const [metadata, setMetadata] = useState(undefined);
@@ -187,7 +189,7 @@ const EditorPage = ({ onboarding }) => {
     }
 
     loadAndOpenFile(defaultWidget);
-    router.push('/sandbox');
+    router.replace('/sandbox');
   }, [defaultWidget]);
 
   useEffect(() => {
@@ -204,7 +206,9 @@ const EditorPage = ({ onboarding }) => {
   }, [widgetProps]);
 
   useEffect(() => {
-    cache?.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then((res = {}) => {
+    if (!cache || !near) return;
+
+    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then((res = {}) => {
       let onboardingPath;
       if (onboarding && currentStep === 1) {
         onboardingPath = onboardingComponents.starter;
@@ -232,6 +236,8 @@ const EditorPage = ({ onboarding }) => {
         setComponentSrc(null);
         setDefaultWidget(componentSrc);
       }
+
+      setShouldRender(true);
     });
   }, [cache, near]);
 
@@ -408,6 +414,8 @@ const EditorPage = ({ onboarding }) => {
   };
 
   const selectFile = (path) => {
+    if (!path) return;
+
     setPath(path);
     setLastPath(path);
     setMetadata(undefined);
@@ -531,8 +539,10 @@ const EditorPage = ({ onboarding }) => {
 
   const handleExitOnboarding = () => {
     setCurrentStep(0);
-    router.push('/sandbox');
+    router.replace('/sandbox');
   };
+
+  if (!shouldRender) return <Spinner />;
 
   return (
     <Wrapper>
@@ -719,5 +729,3 @@ const EditorPage = ({ onboarding }) => {
     </Wrapper>
   );
 };
-
-export default EditorPage;

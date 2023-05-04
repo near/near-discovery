@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -242,20 +243,20 @@ export default function Onboarding({
                   <div className="buttons">
                     <div className="left">
                       <button onClick={handlePrev}>
-                        <img src={ArrowSmall} className="revert" />
+                        <Image src={ArrowSmall} className="revert" />
                         Back
                       </button>
                     </div>
                     <div className="right">
                       {step.button && (
                         <button onClick={handleNext}>
-                          {step.button} <img src={ArrowSmall} />
+                          {step.button} <Image src={ArrowSmall} />
                         </button>
                       )}
 
                       {currentStep === 10 && (
                         <button onClick={finishOnboarding}>
-                          Finish onboarding <img src={ArrowSmall} />
+                          Finish onboarding <Image src={ArrowSmall} />
                         </button>
                       )}
                     </div>
