@@ -1,14 +1,14 @@
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useWidgets } from '@/hooks/useWidgets';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const PeoplePage: NextPageWithLayout = () => {
-  const widgets = useWidgets();
+  const components = useBosComponents();
 
   return (
     <ComponentWrapperPage
-      src={widgets.peoplePage}
+      src={components.peoplePage}
       meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
     />
   );

@@ -1,10 +1,10 @@
 import React from 'react';
 
 import { VmComponent } from '@/components/client/VmComponent';
-import { useWidgets } from '@/hooks/useWidgets';
+import { useBosComponents } from '@/hooks/useBosComponents';
 
 const TypeAheadDropdown = (props) => {
-  const widgets = useWidgets();
+  const components = useBosComponents();
 
   return (
     <div
@@ -16,7 +16,7 @@ const TypeAheadDropdown = (props) => {
         props.focusChange(false);
       }}
     >
-      <VmComponent src={widgets.search.typeAheadDropdown} props={{ term: props.term }} />
+      <VmComponent src={components.search.typeAheadDropdown} props={{ term: props.term }} />
     </div>
   );
 };

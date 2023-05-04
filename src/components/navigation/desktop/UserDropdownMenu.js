@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/client/VmComponent';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 
@@ -150,6 +151,7 @@ const UserDropdownMenu = (props) => {
   const accountId = useAuthStore((store) => store.accountId);
   const near = useVmStore((store) => store.near);
   const router = useRouter();
+  const components = useBosComponents();
 
   const withdrawStorage = useCallback(async () => {
     if (!near) return;
@@ -161,7 +163,7 @@ const UserDropdownMenu = (props) => {
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <VmComponent
-            src={props.widgets.profileImage}
+            src={components.profileImage}
             props={{
               accountId,
               className: 'd-inline-block',
@@ -169,7 +171,7 @@ const UserDropdownMenu = (props) => {
           />
           <div className="profile-info">
             <div className="profile-name">
-              <VmComponent src={props.widgets.profileName} />
+              <VmComponent src={components.profileName} />
             </div>
             <div className="profile-username">{accountId}</div>
           </div>
@@ -180,7 +182,7 @@ const UserDropdownMenu = (props) => {
           <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5}>
             <DropdownMenu.Item
               className="DropdownMenuItem"
-              onClick={() => router.push(`/${props.widgets?.profilePage}?accountId=${accountId}`)}
+              onClick={() => router.push(`/${components.profilePage}?accountId=${accountId}`)}
             >
               <i className="ph-duotone ph-user"></i>
               Profile

@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { VmComponent } from '@/components/client/VmComponent';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { recordClick, recordPageView } from '@/utils/analytics';
@@ -16,7 +16,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
-  const widgets = useWidgets();
+  const components = useBosComponents();
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -72,13 +72,13 @@ const ViewComponentPage: NextPageWithLayout = () => {
           }}
         >
           <VmComponent
-            key={widgets.tosCheck}
-            src={widgets.tosCheck}
+            key={components.tosCheck}
+            src={components.tosCheck}
             props={{
               logOut: authStore.logOut,
               targetProps: componentProps,
               targetComponent: componentSrc,
-              tosName: widgets.tosContent,
+              tosName: components.tosContent,
             }}
           />
         </div>

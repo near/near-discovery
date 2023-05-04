@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/client/VmComponent';
-import { useWidgets } from '@/hooks/useWidgets';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useCurrentComponentStore } from '@/stores/current-component';
 
 const StyledCurrentComponent = styled.div`
@@ -59,7 +59,7 @@ const StyledCurrentComponent = styled.div`
 
 const CurrentComponent = () => {
   const src = useCurrentComponentStore((store) => store.src);
-  const widgets = useWidgets();
+  const components = useBosComponents();
 
   if (!src) return null;
 
@@ -67,7 +67,7 @@ const CurrentComponent = () => {
     <StyledCurrentComponent className="current-component">
       <div className="title">Current Component</div>
       <VmComponent
-        src={widgets.componentSummary}
+        src={components.componentSummary}
         props={{
           src,
           size: 'medium',

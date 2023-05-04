@@ -1,17 +1,17 @@
 import { MetaTags } from '@/components/MetaTags';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const HomePage: NextPageWithLayout = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
-  const widgets = useWidgets();
+  const components = useBosComponents();
 
   if (signedIn) {
-    return <ComponentWrapperPage src={widgets.default} />;
+    return <ComponentWrapperPage src={components.default} />;
   }
 
   return (
