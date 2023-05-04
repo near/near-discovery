@@ -23,7 +23,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
-import { NetworkId, signInContractId } from '@/data/widgets';
+import { useEnvironment } from '@/hooks/useEnvironment';
 import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
@@ -44,14 +44,17 @@ export default function VmInitializer() {
   const accountId = account.accountId;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
+  const { networkId, signInContractId } = useEnvironment();
+
+  if (networkId === 'localnet') throw new Error('VmInitializer: localnet is not supported yet.');
 
   useEffect(() => {
     initNear &&
       initNear({
-        networkId: NetworkId,
+        networkId,
         walletConnectCallback: recordWalletConnect,
         selector: setupWalletSelector({
-          network: NetworkId,
+          network: networkId,
           modules: [
             setupNearWallet(),
             setupMyNearWallet(),
@@ -63,25 +66,25 @@ export default function VmInitializer() {
               bundle: false,
             }),
             setupFastAuth({
-              networkId: NetworkId,
+              networkId,
               signInContractId,
               relayerUrl:
-                NetworkId === 'testnet'
+                networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }) as any, // TODO: Refactor setupFastAuth() to TS
             setupKeypom({
               trialBaseUrl:
-                NetworkId == 'testnet' ? 'https://test.near.org/#trial-url/' : 'https://near.org/#trial-url/',
-              networkId: NetworkId,
+                networkId == 'testnet' ? 'https://test.near.org/#trial-url/' : 'https://near.org/#trial-url/',
+              networkId,
               trialSplitDelim: '/',
               signInContractId,
-              modalOptions: KEYPOM_OPTIONS(NetworkId),
+              modalOptions: KEYPOM_OPTIONS(networkId),
             }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
       });
-  }, [initNear]);
+  }, [initNear, networkId, signInContractId]);
 
   useEffect(() => {
     if (!near) {
