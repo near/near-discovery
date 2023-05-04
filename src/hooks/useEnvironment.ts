@@ -28,6 +28,7 @@ export function useEnvironment() {
 
   return {
     network,
+    networks,
     networkId,
     signInContractId,
   };
