@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 
 type VmState = {
+  cache: any;
   ethersContext: any;
   EthersProvider: any;
   Widget: any;
@@ -12,6 +13,7 @@ type VmStore = VmState & {
 };
 
 export const useVmStore = create<VmStore>((set) => ({
+  cache: null,
   ethersContext: null,
   EthersProvider: null,
   Widget: null,

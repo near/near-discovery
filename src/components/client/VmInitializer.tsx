@@ -9,7 +9,7 @@ import { setupNeth } from '@near-wallet-selector/neth';
 import { setupSender } from '@near-wallet-selector/sender';
 import Big from 'big.js';
 import { setupKeypom } from 'keypom-js';
-import { EthersProviderContext, useAccount, useInitNear, useNear, utils, Widget } from 'near-social-vm';
+import { EthersProviderContext, useAccount, useCache, useInitNear, useNear, utils, Widget } from 'near-social-vm';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -31,6 +31,7 @@ export default function VmInitializer() {
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
+  const cache = useCache();
   const accountId = account.accountId;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
@@ -162,12 +163,13 @@ export default function VmInitializer() {
 
   useEffect(() => {
     setVmStore({
+      cache,
       ethersContext: ethersProviderContext,
       EthersProvider: EthersProviderContext.Provider,
       Widget,
       near,
     });
-  }, [ethersProviderContext, setVmStore, near]);
+  }, [cache, ethersProviderContext, setVmStore, near]);
 
   return <></>;
 }

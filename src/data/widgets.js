@@ -45,6 +45,7 @@ const TestnetWidgets = {
   tosCheck: 'one.testnet/widget/TosCheck',
   tosContent: 'one.testnet/widget/TosContent',
   wrapper: 'one.testnet/widget/DIG.Theme',
+  bosDirectory: 'one.testnet/widget/BOSDirectory',
   nearOrg: {
     ecosystemCommunityPage: 'discom.testnet/widget/NearOrg.Ecosystem.CommunityPage',
     ecosystemGetFundingPage: 'discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage',

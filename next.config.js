@@ -2,6 +2,20 @@
 const nextConfig = {
   compiler: { styledComponents: true },
   reactStrictMode: true,
+  redirects: async () => {
+    return [
+      {
+        source: '/consensus',
+        destination: 'https://nearconsensus2023.splashthat.com/',
+        permanent: false,
+      },
+      {
+        source: '/pitch',
+        destination: 'https://nearpitchfestconsensus.splashthat.com/',
+        permanent: false,
+      },
+    ];
+  },
   rewrites: async () => [
     {
       source: '/api/segment',

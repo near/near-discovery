@@ -2,8 +2,10 @@ import styled from 'styled-components';
 
 const Wrapper = styled.span`
   display: inline-flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
+  padding: 12px;
   animation: spin 1200ms infinite linear;
 
   i {
