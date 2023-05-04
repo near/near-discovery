@@ -4,7 +4,7 @@ import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
-import { NetworkId } from '../data/widgets';
+import { NetworkId } from '../data/bos-components';
 
 let segment: Analytics | null = null;
 let anonymousUserId = '';

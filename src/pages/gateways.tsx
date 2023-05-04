@@ -1,14 +1,14 @@
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useWidgets } from '@/hooks/useWidgets';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const GatewaysPage: NextPageWithLayout = () => {
-  const widgets = useWidgets();
+  const components = useBosComponents();
 
   return (
     <ComponentWrapperPage
-      src={widgets.bosDirectory}
+      src={components.bosDirectory}
       meta={{ title: 'BOS Viewer Directory', description: 'NEAR BOS Directory' }}
     />
   );

@@ -1,14 +1,14 @@
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useWidgets } from '@/hooks/useWidgets';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const HorizonPage: NextPageWithLayout = () => {
-  const widgets = useWidgets();
+  const components = useBosComponents();
 
   return (
     <ComponentWrapperPage
-      src={widgets.horizon.homePage}
+      src={components.horizon.homePage}
       meta={{ title: 'Horizon', description: 'Discover NEAR Horizon' }}
     />
   );

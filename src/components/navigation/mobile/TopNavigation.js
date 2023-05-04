@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/client/VmComponent';
+import { useBosComponents } from '@/hooks/useBosComponents';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -40,7 +41,7 @@ const StyledNavigation = styled.div`
     }
   }
 
-  .nav-notification-widget {
+  .nav-notification-button {
     margin: 0;
   }
 
@@ -92,6 +93,7 @@ const StyledNavigation = styled.div`
 export function TopNavigation(props) {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
+  const components = useBosComponents();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -113,11 +115,11 @@ export function TopNavigation(props) {
     <StyledNavigation className={`${scrolled ? 'border-bottom' : ''}`}>
       {props.signedIn && (
         <button
-          onClick={() => router.push(`/${props.widgets?.profilePage}?accountId=${props.signedAccountId}`)}
+          onClick={() => router.push(`/${components.profilePage}?accountId=${props.signedAccountId}`)}
           className="mobile-nav-profile-btn"
         >
           <VmComponent
-            src={props.widgets.profileImage}
+            src={components.profileImage}
             props={{
               accountId: props.signedAccountId,
               className: 'd-inline-block',

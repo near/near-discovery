@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/client/VmComponent';
-import { useWidgets } from '@/hooks/useWidgets';
+import { useBosComponents } from '@/hooks/useBosComponents';
 
-const StyledNotificationWidget = styled.div`
+const StyledNotificationButton = styled.div`
   margin: 0 15px;
   border: 0.5px solid #e3e3e0;
   background-color: #f3f3f2;
@@ -38,12 +38,12 @@ const StyledNotificationWidget = styled.div`
   }
 `;
 
-export function NotificationWidget({ onMouseEnter }) {
-  const widgets = useWidgets();
+export function NotificationButton({ onMouseEnter }) {
+  const components = useBosComponents();
 
   return (
-    <StyledNotificationWidget className="nav-notification-widget" onMouseOver={onMouseEnter}>
-      <VmComponent src={widgets.notificationButton} />
-    </StyledNotificationWidget>
+    <StyledNotificationButton className="nav-notification-button" onMouseOver={onMouseEnter}>
+      <VmComponent src={components.notificationButton} />
+    </StyledNotificationButton>
   );
 }

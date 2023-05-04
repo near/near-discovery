@@ -9,7 +9,7 @@ import UserDropdownMenu from '../desktop/UserDropdownMenu';
 import CloseIcon from '../icons/close.svg';
 import NearLogotype from '../icons/near-logotype.svg';
 import SearchIcon from '../icons/search.svg';
-import { NotificationWidget } from '../NotificationWidget';
+import { NotificationButton } from '../NotificationButton';
 import AccordionMenu from './AccordionMenu';
 
 const StyledMenu = styled.div`
@@ -121,7 +121,7 @@ const StyledMenu = styled.div`
     margin-top: auto;
     display: flex;
 
-    .nav-notification-widget {
+    .nav-notification-button {
       margin: 0;
       min-width: 46px;
       min-height: 46px;
@@ -179,7 +179,7 @@ export function MenuLeft(props) {
         <button
           className="search-btn"
           style={{ backgroundImage: `url(${SearchIcon.src})` }}
-          onClick={() => router.push(`/${props.widgets?.search.indexPage}`)}
+          onClick={() => router.push(`/${components.search.indexPage}`)}
         >
           Search NEAR
         </button>
@@ -203,7 +203,7 @@ export function MenuLeft(props) {
         )}
         {props.signedIn && (
           <div className="logged-in-btns">
-            <NotificationWidget />
+            <NotificationButton />
             <UserDropdownMenu {...props} />
           </div>
         )}

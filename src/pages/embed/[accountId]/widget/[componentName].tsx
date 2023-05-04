@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { VmComponent } from '@/components/client/VmComponent';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSimpleLayout } from '@/hooks/useLayout';
-import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { recordClick, recordPageView } from '@/utils/analytics';
@@ -11,18 +11,18 @@ import type { NextPageWithLayout } from '@/utils/types';
 
 const EmbedComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
-  const widgets = useWidgets();
+  const components = useBosComponents();
   const authStore = useAuthStore();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
-  const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
+  const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
 
   useEffect(() => {
     setComponentSrc(componentSrc);
   }, [setComponentSrc, componentSrc]);
 
   useEffect(() => {
-    setWidgetProps(router.query);
+    setComponentProps(router.query);
   }, [router.query]);
 
   useEffect(() => {
@@ -35,13 +35,13 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   return (
     <div className="d-inline-block position-relative overflow-hidden" onPointerUp={recordClick}>
       <VmComponent
-        key={widgets.tosCheck}
-        src={widgets.tosCheck}
+        key={components.tosCheck}
+        src={components.tosCheck}
         props={{
           logOut: authStore.logOut,
-          tosName: widgets.tosContent,
+          tosName: components.tosContent,
           targetComponent: componentSrc,
-          targetProps: widgetProps,
+          targetProps: componentProps,
         }}
       />
     </div>

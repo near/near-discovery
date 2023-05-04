@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { useWidgets } from '@/hooks/useWidgets';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 import { flushEvents, recordClick } from '@/utils/analytics';
@@ -13,7 +13,7 @@ import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
 import ReturnIconImage from '../icons/return.svg';
 import SearchIconImage from '../icons/search.svg';
-import { NotificationWidget } from '../NotificationWidget';
+import { NotificationButton } from '../NotificationButton';
 import MainNavigationMenu from './main_navigation_menu/MainNavigationMenu';
 import TypeAheadDropdown from './TypeAheadDropdown';
 import UserDropdownMenu from './UserDropdownMenu';
@@ -155,7 +155,7 @@ const DesktopNavigation = (props) => {
   const searchRef = useRef(null);
   const [searchIsFocused, _setSearchIsFocused] = useState(false);
   const showTypeAheadDropdown = searchIsFocused && !!searchTerm;
-  const widgets = useWidgets();
+  const components = useBosComponents();
   let searchFocusTimeout = useRef();
   const signedIn = useAuthStore((store) => store.signedIn);
   const requestSignIn = useAuthStore((store) => store.requestSignIn);
@@ -213,7 +213,7 @@ const DesktopNavigation = (props) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              router.push(`/${widgets.search.indexPage}?term=${e.target[0].value}`);
+              router.push(`/${components.search.indexPage}?term=${e.target[0].value}`);
             }}
           >
             <input
@@ -259,7 +259,7 @@ const DesktopNavigation = (props) => {
           )}
           {signedIn && (
             <>
-              <NotificationWidget />
+              <NotificationButton />
               <UserDropdownMenu {...props} />
             </>
           )}

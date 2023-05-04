@@ -5,7 +5,7 @@ import parserBabel from 'prettier/parser-babel';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { useWidgets } from '@/hooks/useWidgets';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
@@ -132,7 +132,7 @@ export const Sandbox = ({ onboarding }) => {
   const componentSrc = useCurrentComponentStore((store) => store.src);
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const router = useRouter();
-  const widgets = useWidgets();
+  const widgets = useBosComponents();
   const tos = {
     checkComponentPath: widgets.tosCheck,
     contentComponentPath: widgets.tosContent,
