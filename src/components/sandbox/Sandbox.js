@@ -138,7 +138,6 @@ export const Sandbox = ({ onboarding }) => {
     contentComponentPath: widgets.tosContent,
   };
 
-  const [shouldRender, setShouldRender] = useState(false);
   const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
   const [codeVisible, setCodeVisible] = useState(undefined);
@@ -161,6 +160,7 @@ export const Sandbox = ({ onboarding }) => {
   const showEditor = Object.keys(filesObject)?.length;
   const isModule = path?.type === 'module';
   const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
+  const shouldRender = !!near && !!cache;
 
   useEffect(() => {
     setWidgetProps(ls.get(WidgetPropsKey) || '{}');
@@ -236,8 +236,6 @@ export const Sandbox = ({ onboarding }) => {
         setComponentSrc(null);
         setDefaultWidget(componentSrc);
       }
-
-      setShouldRender(true);
     });
   }, [cache, near]);
 
@@ -424,8 +422,8 @@ export const Sandbox = ({ onboarding }) => {
         path,
         type: StorageType.Code,
       })
-      .then(({ code }) => {
-        updateCode(path, code);
+      .then((result) => {
+        updateCode(path, result?.code);
       });
   };
 
