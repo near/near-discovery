@@ -1,5 +1,6 @@
-import { Widget } from 'near-social-vm';
 import React, { useMemo } from 'react';
+
+import { VmComponent } from '@/components/client/VmComponent';
 
 import { Tab } from '../utils/const';
 
@@ -16,7 +17,7 @@ const TabMetadata = ({ tab, widgets, jpath, widgetPath, setMetadata }) => (
         height: '70vh',
       }}
     >
-      <Widget
+      <VmComponent
         src={widgets.widgetMetadataEditor}
         key={`metadata-editor-${jpath}`}
         props={useMemo(

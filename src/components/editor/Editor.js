@@ -128,8 +128,8 @@ const EditorPage = ({ onboarding }) => {
   const accountId = useAuthStore((store) => store.accountId);
   const logOut = useAuthStore((store) => store.logOut);
   const requestSignIn = useAuthStore((store) => store.requestSignIn);
-  const widgetSrc = useCurrentComponentStore((store) => store.src);
-  const setWidgetSrc = useCurrentComponentStore((store) => store.setSrc);
+  const componentSrc = useCurrentComponentStore((store) => store.src);
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const router = useRouter();
   const widgets = useWidgets();
   const tos = {
@@ -143,13 +143,13 @@ const EditorPage = ({ onboarding }) => {
   const [path, setPath] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
   const [renderCode, setRenderCode] = useState(codeVisible);
-  const [widgetProps, setWidgetProps] = useState(ls.get(WidgetPropsKey) || '{}');
+  const [widgetProps, setWidgetProps] = useState({});
   const [parsedWidgetProps, setParsedWidgetProps] = useState({});
   const [propsError, setPropsError] = useState(null);
   const [metadata, setMetadata] = useState(undefined);
   const [showModal, setShowModal] = useState(null);
   const [tab, setTab] = useState(Tab.Editor);
-  const [layout, setLayoutState] = useState(ls.get(EditorLayoutKey) || Layout.Tabs);
+  const [layout, setLayoutState] = useState(Layout.Tabs);
   const [defaultWidget, setDefaultWidget] = useState(null);
 
   const widgetName = path?.name?.split('/')[0];
@@ -159,6 +159,11 @@ const EditorPage = ({ onboarding }) => {
   const showEditor = Object.keys(filesObject)?.length;
   const isModule = path?.type === 'module';
   const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
+
+  useEffect(() => {
+    setWidgetProps(ls.get(WidgetPropsKey) || '{}');
+    setLayoutState(ls.get(EditorLayoutKey) || Layout.Tabs);
+  }, []);
 
   useEffect(() => {
     const newFilesObject = { ...filesObject };
@@ -199,7 +204,7 @@ const EditorPage = ({ onboarding }) => {
   }, [widgetProps]);
 
   useEffect(() => {
-    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then((res = {}) => {
+    cache?.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then((res = {}) => {
       let onboardingPath;
       if (onboarding && currentStep === 1) {
         onboardingPath = onboardingComponents.starter;
@@ -223,12 +228,9 @@ const EditorPage = ({ onboarding }) => {
       selectFile(res.lastPath);
       setMainLoader(false);
 
-      if (widgetSrc) {
-        setWidgetSrc({
-          edit: null,
-          view: widgetSrc,
-        });
-        setDefaultWidget(widgetSrc);
+      if (componentSrc) {
+        setComponentSrc(null);
+        setDefaultWidget(componentSrc);
       }
     });
   }, [cache, near]);
@@ -266,7 +268,7 @@ const EditorPage = ({ onboarding }) => {
       const widgetSrc = `${accountId}/${fileObject.type}/${fileObject.name}/**`;
 
       const fetchCode = () => {
-        const widgetObject = cache.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
+        const widgetObject = cache?.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
 
         if (widgetObject && filesObject[jpath].new) {
           cache
@@ -330,7 +332,7 @@ const EditorPage = ({ onboarding }) => {
   };
 
   const updateCode = (path, code) => {
-    cache.localStorageSet(
+    cache?.localStorageSet(
       StorageDomain,
       {
         path,
@@ -475,7 +477,7 @@ const EditorPage = ({ onboarding }) => {
     const widgetSrc = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
     const widgetSrcFull = `${widgetSrc}/**`;
     const cacheGet = () => {
-      const widgetObject = cache.socialGet(near, widgetSrcFull, false, undefined, undefined, cacheGet);
+      const widgetObject = cache?.socialGet(near, widgetSrcFull, false, undefined, undefined, cacheGet);
 
       if (widgetObject) {
         const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
@@ -516,8 +518,12 @@ const EditorPage = ({ onboarding }) => {
   const refs = generateRefs();
   const refEditor = useRef();
   const refSearch = useRef();
-  const [currentStep, setCurrentStep] = useState(getStepLocalStorage().step);
+  const [currentStep, setCurrentStep] = useState(0);
   const [disable, setDisable] = useState({});
+
+  useEffect(() => {
+    setCurrentStep(getStepLocalStorage().step);
+  }, []);
 
   useEffect(() => {
     setDisable(onboarding ? onboardingDisable : {});
