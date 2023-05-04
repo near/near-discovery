@@ -5,7 +5,7 @@ export function useHashUrlBackwardsCompatibility() {
   const router = useRouter();
 
   const onHashChange = useCallback(
-    (event) => {
+    (event: HashChangeEvent) => {
       const url = event.newURL.split('#').pop() ?? '/';
 
       if (url[0] === '/') {

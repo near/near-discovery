@@ -1,31 +1,23 @@
-import React, { useEffect, useRef, useState } from "react";
-import ls from "local-storage";
-import { useHistory, useParams } from "react-router-dom";
-import { useCache, useNear, useAccountId } from "near-social-vm";
-import prettier from "prettier";
-import parserBabel from "prettier/parser-babel";
+import React, { useEffect, useRef, useState } from 'react';
+import ls from 'local-storage';
+import { useHistory, useParams } from 'react-router-dom';
+import { useCache, useNear, useAccountId } from 'near-social-vm';
+import prettier from 'prettier';
+import parserBabel from 'prettier/parser-babel';
 
-import VsCodeBanner from "./Banners/VsCodeBanner";
-import Welcome from "./Welcome";
-import Modals from "./Modals";
-import Navigation from "./Navigation";
-import Search from "./Search";
-import Tabs from "./Tabs";
-import NavigationSub from "./NavigationSub";
-import TabEditor from "./TabEditor";
-import TabProps from "./TabProps";
-import TabMetadata from "./TabMetadata";
-import Preview from "./Preview";
-import PreviewMetadata from "./PreviewMetadata";
-import {
-  EditorLayoutKey,
-  WidgetPropsKey,
-  Filetype,
-  StorageDomain,
-  StorageType,
-  Tab,
-  Layout,
-} from "./utils/const";
+import VsCodeBanner from './Banners/VsCodeBanner';
+import Welcome from './Welcome';
+import Modals from './Modals';
+import Navigation from './Navigation';
+import Search from './Search';
+import Tabs from './Tabs';
+import NavigationSub from './NavigationSub';
+import TabEditor from './TabEditor';
+import TabProps from './TabProps';
+import TabMetadata from './TabMetadata';
+import Preview from './Preview';
+import PreviewMetadata from './PreviewMetadata';
+import { EditorLayoutKey, WidgetPropsKey, Filetype, StorageDomain, StorageType, Tab, Layout } from './utils/const';
 import {
   checkChangesMade,
   generateNewName,
@@ -34,21 +26,21 @@ import {
   getWidgetDetails,
   toPath,
   updateLocalStorage,
-} from "./utils/editor";
-import MainLoader from "./Welcome/MainLoader";
-import { useHashUrlBackwardsCompatibility } from "../../hooks/useHashUrlBackwardsCompatibility";
-import OnBoarding from "./OnBoarding";
+} from './utils/editor';
+import MainLoader from './Welcome/MainLoader';
+import { useHashUrlBackwardsCompatibility } from '../../hooks/useHashUrlBackwardsCompatibility';
+import OnBoarding from './OnBoarding';
 import {
   generateRefs,
   getStepLocalStorage,
   onboardingComponents,
   onboardingDisable,
   ONBOARDING_STORAGE,
-} from "./utils/onboarding";
-import { Helmet } from "react-helmet";
-import { recordPageView, recordClick } from "../../utils/analytics";
-import styled from "styled-components";
-import BannerOboarding from "./Banners/BannerOboarding";
+} from './utils/onboarding';
+import { Helmet } from 'react-helmet';
+import { recordPageView, recordClick } from '../../utils/analytics';
+import styled from 'styled-components';
+import BannerOboarding from './Banners/BannerOboarding';
 
 const Wrapper = styled.div`
   .mobile {
@@ -68,10 +60,10 @@ const Wrapper = styled.div`
 
   @media only screen and (max-width: 1200px) {
     .mobile {
-      ${"" /* display: block; */}
+      ${'' /* display: block; */}
     }
     .desktop {
-      ${"" /* display: none; */}
+      ${'' /* display: none; */}
     }
   }
 
@@ -116,7 +108,7 @@ const Wrapper = styled.div`
   .onboardingDisable {
     &::before {
       border: 10px;
-      content: "";
+      content: '';
       display: block;
       width: 100%;
       height: 100%;
@@ -128,15 +120,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const EditorPage = ({
-  setWidgetSrc,
-  widgets,
-  logOut,
-  tos,
-  onboarding,
-  requestSignIn,
-  meta,
-}) => {
+const EditorPage = ({ setWidgetSrc, widgets, logOut, tos, onboarding, requestSignIn, meta }) => {
   const near = useNear();
   const cache = useCache();
   const accountId = useAccountId();
@@ -149,26 +133,22 @@ const EditorPage = ({
   const [path, setPath] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
   const [renderCode, setRenderCode] = useState(codeVisible);
-  const [widgetProps, setWidgetProps] = useState(
-    ls.get(WidgetPropsKey) || "{}"
-  );
+  const [widgetProps, setWidgetProps] = useState(ls.get(WidgetPropsKey) || '{}');
   const [parsedWidgetProps, setParsedWidgetProps] = useState({});
   const [propsError, setPropsError] = useState(null);
   const [metadata, setMetadata] = useState(undefined);
   const [showModal, setShowModal] = useState(null);
   const [tab, setTab] = useState(Tab.Editor);
-  const [layout, setLayoutState] = useState(
-    ls.get(EditorLayoutKey) || Layout.Tabs
-  );
+  const [layout, setLayoutState] = useState(ls.get(EditorLayoutKey) || Layout.Tabs);
   const [defaultWidget, setDefaultWidget] = useState(null);
 
-  const widgetName = path?.name?.split("/")[0];
+  const widgetName = path?.name?.split('/')[0];
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
   const jpath = JSON.stringify(path);
   const { isDraft } = filesObject[jpath] || {};
   const showEditor = Object.keys(filesObject)?.length;
-  const isModule = path?.type === "module";
-  const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
+  const isModule = path?.type === 'module';
+  const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
 
   useHashUrlBackwardsCompatibility();
 
@@ -179,11 +159,7 @@ const EditorPage = ({
       const file = filesObject[key];
       const { codeMain, codeDraft, codeLocalStorage } = file;
 
-      const changesMade = checkChangesMade(
-        codeMain,
-        codeDraft,
-        codeLocalStorage
-      );
+      const changesMade = checkChangesMade(codeMain, codeDraft, codeLocalStorage);
       newFilesObject[key].changesMade = changesMade;
 
       const isDraft = !!codeDraft;
@@ -198,7 +174,7 @@ const EditorPage = ({
     }
 
     loadAndOpenFile(defaultWidget);
-    history.push("/sandbox");
+    history.push('/sandbox');
   }, [defaultWidget]);
 
   useEffect(() => {
@@ -215,40 +191,38 @@ const EditorPage = ({
   }, [widgetProps]);
 
   useEffect(() => {
-    cache
-      .asyncLocalStorageGet(StorageDomain, { type: StorageType.Files })
-      .then((res = {}) => {
-        let onboardingPath;
-        if (onboarding && currentStep === 1) {
-          onboardingPath = onboardingComponents.starter;
-          setLastPath(onboardingPath);
-        }
-        if (onboarding && currentStep > 1) {
-          onboardingPath = onboardingComponents.starterFork;
-          setLastPath(onboardingPath);
-        }
+    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then((res = {}) => {
+      let onboardingPath;
+      if (onboarding && currentStep === 1) {
+        onboardingPath = onboardingComponents.starter;
+        setLastPath(onboardingPath);
+      }
+      if (onboarding && currentStep > 1) {
+        onboardingPath = onboardingComponents.starterFork;
+        setLastPath(onboardingPath);
+      }
 
-        if (onboarding && currentStep === 1) {
-          const onboardingPath = onboardingComponents.starter;
-          near && createFilesObject([onboardingPath]);
-          selectFile(onboardingPath);
-          setMainLoader(false);
-          return;
-        }
-
-        setLastPath(res.lastPath);
-        near && createFilesObject(res.files || []);
-        selectFile(res.lastPath);
+      if (onboarding && currentStep === 1) {
+        const onboardingPath = onboardingComponents.starter;
+        near && createFilesObject([onboardingPath]);
+        selectFile(onboardingPath);
         setMainLoader(false);
+        return;
+      }
 
-        if (widgetSrc) {
-          setWidgetSrc({
-            edit: null,
-            view: widgetSrc,
-          });
-          setDefaultWidget(widgetSrc);
-        }
-      });
+      setLastPath(res.lastPath);
+      near && createFilesObject(res.files || []);
+      selectFile(res.lastPath);
+      setMainLoader(false);
+
+      if (widgetSrc) {
+        setWidgetSrc({
+          edit: null,
+          view: widgetSrc,
+        });
+        setDefaultWidget(widgetSrc);
+      }
+    });
   }, [cache, near]);
 
   const reloadFile = () => {
@@ -256,7 +230,7 @@ const EditorPage = ({
     near && createFilesObject([onboardingPath]);
     selectFile(onboardingPath);
     setMainLoader(false);
-    loadAndOpenFile("near/widget/Onboarding.Starter", Filetype.Widget);
+    loadAndOpenFile('near/widget/Onboarding.Starter', Filetype.Widget);
   };
 
   const createFilesObject = (files = []) => {
@@ -265,16 +239,16 @@ const EditorPage = ({
         ...x,
         [JSON.stringify({ type: file.type, name: file.name })]: {
           ...file,
-          codeMain: "",
-          codeDraft: "",
-          codeLocalStorage: "",
+          codeMain: '',
+          codeDraft: '',
+          codeLocalStorage: '',
           isDraft: false,
           changesMade: false,
           savedOnChain: undefined,
           new: true,
         },
       }),
-      {}
+      {},
     );
     setFilesObject(filesObject);
 
@@ -284,14 +258,7 @@ const EditorPage = ({
       const widgetSrc = `${accountId}/${fileObject.type}/${fileObject.name}/**`;
 
       const fetchCode = () => {
-        const widgetObject = cache.socialGet(
-          near,
-          widgetSrc,
-          false,
-          undefined,
-          undefined,
-          fetchCode
-        );
+        const widgetObject = cache.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
 
         if (widgetObject && filesObject[jpath].new) {
           cache
@@ -300,8 +267,7 @@ const EditorPage = ({
               type: StorageType.Code,
             })
             .then(({ code }) => {
-              const { codeMain, codeDraft, isDraft } =
-                getWidgetDetails(widgetObject);
+              const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
 
               let changesMade = checkChangesMade(codeMain, codeDraft, code);
 
@@ -352,9 +318,7 @@ const EditorPage = ({
     updateCode(path, code);
 
     const jpath = JSON.stringify(path);
-    setFilesObject(
-      (files) => files[jpath] && (files[jpath].codeLocalStorage = code) && files
-    );
+    setFilesObject((files) => files[jpath] && (files[jpath].codeLocalStorage = code) && files);
   };
 
   const updateCode = (path, code) => {
@@ -367,7 +331,7 @@ const EditorPage = ({
       {
         code,
         time: Date.now(),
-      }
+      },
     );
     setCodeVisible(code);
   };
@@ -375,7 +339,7 @@ const EditorPage = ({
   const reformat = (path, code) => {
     try {
       const formattedCode = prettier.format(code, {
-        parser: "babel",
+        parser: 'babel',
         plugins: [parserBabel],
       });
       updateCode(path, formattedCode);
@@ -423,18 +387,12 @@ const EditorPage = ({
       if (currentStep === 4) {
         const nextStep = 5;
         setCurrentStep(nextStep);
-        localStorage.setItem(
-          ONBOARDING_STORAGE,
-          JSON.stringify({ step: nextStep })
-        );
+        localStorage.setItem(ONBOARDING_STORAGE, JSON.stringify({ step: nextStep }));
       }
       if (currentStep === 9) {
         const nextStep = 10;
         setCurrentStep(nextStep);
-        localStorage.setItem(
-          ONBOARDING_STORAGE,
-          JSON.stringify({ step: nextStep })
-        );
+        localStorage.setItem(ONBOARDING_STORAGE, JSON.stringify({ step: nextStep }));
       }
     }
   };
@@ -473,10 +431,10 @@ const EditorPage = ({
   };
 
   const forkFile = () => {
-    const forkName = widgetName + "-fork";
+    const forkName = widgetName + '-fork';
     const path = toPath(Filetype.Widget, forkName);
 
-    addFile(filesObject, path, codeVisible, "", false, false);
+    addFile(filesObject, path, codeVisible, '', false, false);
     updateCode(path, codeVisible);
     setRenderCode(null);
     selectFile(path);
@@ -485,10 +443,7 @@ const EditorPage = ({
       if (currentStep === 1) {
         const nextStep = currentStep + 1;
         setCurrentStep(nextStep);
-        localStorage.setItem(
-          ONBOARDING_STORAGE,
-          JSON.stringify({ step: nextStep })
-        );
+        localStorage.setItem(ONBOARDING_STORAGE, JSON.stringify({ step: nextStep }));
       }
     }
   };
@@ -501,29 +456,18 @@ const EditorPage = ({
     const path = generateNewName(type, files);
     const code = getDefaultCode(type);
 
-    addFile(filesObject, path, code, "", false, false);
+    addFile(filesObject, path, code, '', false, false);
     updateCode(path, code);
     selectFile(path);
     setRenderCode(null);
   };
 
   const loadAndOpenFile = (nameOrPath, type) => {
-    const onboardingId = onboarding && "near";
-    const widgetSrc = getSrcByNameOrPath(
-      nameOrPath,
-      onboardingId || accountId,
-      type
-    );
+    const onboardingId = onboarding && 'near';
+    const widgetSrc = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
     const widgetSrcFull = `${widgetSrc}/**`;
     const cacheGet = () => {
-      const widgetObject = cache.socialGet(
-        near,
-        widgetSrcFull,
-        false,
-        undefined,
-        undefined,
-        cacheGet
-      );
+      const widgetObject = cache.socialGet(near, widgetSrcFull, false, undefined, undefined, cacheGet);
 
       if (widgetObject) {
         const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
@@ -539,14 +483,7 @@ const EditorPage = ({
     cacheGet();
   };
 
-  const addFile = (
-    filesObject,
-    path,
-    codeMain,
-    codeDraft,
-    isDraft,
-    savedOnChain
-  ) => {
+  const addFile = (filesObject, path, codeMain, codeDraft, isDraft, savedOnChain) => {
     const newFilesObject = {
       ...filesObject,
       [JSON.stringify(path)]: {
@@ -580,7 +517,7 @@ const EditorPage = ({
 
   const handleExitOnboarding = () => {
     setCurrentStep(0);
-    history.push("/sandbox");
+    history.push('/sandbox');
   };
 
   return (
@@ -591,14 +528,14 @@ const EditorPage = ({
         <meta property="og:title" content={meta.title} />
         <meta property="og:description" content={meta.description} />
       </Helmet>
-      <div style={{ position: "relative" }} onPointerUp={recordClick}>
+      <div style={{ position: 'relative' }} onPointerUp={recordClick}>
         {onboarding && (
           <div className="mobile">
             <div className={`d-flex min-vh-100 `}>
               <div
                 className="container-fluid mt-5"
                 style={{
-                  width: "500px",
+                  width: '500px',
                 }}
               >
                 <h4>Oops...We're gonna need a bigger screen.</h4>
@@ -653,14 +590,9 @@ const EditorPage = ({
             )}
             <div className={showEditor ? `` : ``}>
               {onboarding || <VsCodeBanner />}
-              {onboarding && (
-                <BannerOboarding handleExitOnboarding={handleExitOnboarding} />
-              )}
+              {onboarding && <BannerOboarding handleExitOnboarding={handleExitOnboarding} />}
 
-              <div
-                className="container-fluid mt-1"
-                style={{ position: "relative" }}
-              >
+              <div className="container-fluid mt-1" style={{ position: 'relative' }}>
                 <Search
                   widgets={widgets}
                   tos={tos}
@@ -695,7 +627,7 @@ const EditorPage = ({
                 <div className="d-flex align-content-start">
                   <div className="flex-grow-1">
                     <div className="row">
-                      <div style={{ display: "flex" }}>
+                      <div style={{ display: 'flex' }}>
                         <Tabs
                           isModule={isModule}
                           tab={tab}

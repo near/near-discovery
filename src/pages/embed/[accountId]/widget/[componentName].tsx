@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
 import { VmWidgetWrapper } from '@/components/client/VmWidgetWrapper';
-import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useWidgets } from '@/hooks/useWidgets';
 import { useAuthStore } from '@/stores/auth';
@@ -17,8 +16,6 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   const setWidgetSrc = useCurrentWidgetStore((store) => store.setWidgetSrc);
   const widgetSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [widgetProps, setWidgetProps] = useState<Record<string, unknown>>({});
-
-  useHashUrlBackwardsCompatibility();
 
   useEffect(() => {
     setWidgetSrc(widgetSrc);

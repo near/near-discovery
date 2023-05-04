@@ -1,10 +1,10 @@
 import React from "react";
 import { Nav } from "react-bootstrap";
-import ForkButton from "../buttons/ForkButton";
-import OnboardingPublishButton from "../buttons/OnboardingPublishButton";
-import PublishButton from "../buttons/PublishButton";
-import PublishDraftAsMainButton from "../buttons/PublishDraftAsMainButton";
-import SaveDraftButton from "../buttons/SaveDraftButton";
+import ForkButton from "../Buttons/ForkButton";
+import OnboardingPublishButton from "../Buttons/OnboardingPublishButton";
+import PublishButton from "../Buttons/PublishButton";
+import PublishDraftAsMainButton from "../Buttons/PublishDraftAsMainButton";
+import SaveDraftButton from "../Buttons/SaveDraftButton";
 
 export default ({
   jpath,
