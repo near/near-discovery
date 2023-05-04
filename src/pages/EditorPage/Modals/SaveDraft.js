@@ -4,7 +4,6 @@ import Modal from "react-bootstrap/Modal";
 import { ModalTypes } from "../utils/const";
 
 export const SaveDraftModal = ({
-  codeVisible,
   showModal,
   onHide,
   near,
@@ -13,9 +12,12 @@ export const SaveDraftModal = ({
   type,
   metadata,
   handleCommit,
+  path,
+  filesObject,
 }) => {
   const [commitMessage, setCommitMessage] = useState("");
   const widgetPathFull = widgetPath + "/branch/draft";
+  const codeVisible = filesObject[JSON.stringify(path)]?.codeVisible;
 
   const commitButtonData = {
     post: {

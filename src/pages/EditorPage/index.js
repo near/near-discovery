@@ -76,10 +76,9 @@ const EditorPage = ({
 
   const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
-  const [codeVisible, setCodeVisible] = useState(undefined);
   const [path, setPath] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
-  const [renderCode, setRenderCode] = useState(codeVisible);
+  const [renderCode, setRenderCode] = useState();
   const [widgetProps, setWidgetProps] = useState(
     ls.get(WidgetPropsKey) || "{}"
   );
@@ -102,26 +101,6 @@ const EditorPage = ({
   const layoutClass = layout === Layout.Split ? "col-lg-6" : "";
 
   useHashUrlBackwardsCompatibility();
-
-  useEffect(() => {
-    const newFilesObject = { ...filesObject };
-
-    Object.keys(filesObject).map((key) => {
-      const file = filesObject[key];
-      const { codeMain, codeDraft, codeLocalStorage } = file;
-
-      const changesMade = checkChangesMade(
-        codeMain,
-        codeDraft,
-        codeLocalStorage
-      );
-      newFilesObject[key].changesMade = changesMade;
-
-      const isDraft = !!codeDraft;
-      newFilesObject[key].isDraft = isDraft;
-    });
-    setFilesObject(newFilesObject);
-  }, [codeVisible]);
 
   useEffect(() => {
     if (!defaultWidget || onboarding) {
@@ -371,7 +350,8 @@ const EditorPage = ({
   };
 
   const handleRender = () => {
-    setRenderCode(codeVisible);
+    setRenderCode(filesObject[JSON.stringify(path)]?.codeVisible);
+
     if (layout === Layout.Tabs) {
       setTab(Tab.Widget);
     }
@@ -553,11 +533,11 @@ const EditorPage = ({
               near={near}
               widgetPath={widgetPath}
               widgetName={widgetName}
-              codeVisible={codeVisible}
               showModal={showModal}
               createFile={createFile}
               loadAndOpenFile={loadAndOpenFile}
               handleCommit={handleCommit}
+              filesObject={filesObject}
             />
             {onboarding || (
               <Welcome
@@ -592,7 +572,6 @@ const EditorPage = ({
                   forkFile={forkFile}
                   filesObject={filesObject}
                   widgetName={widgetName}
-                  codeVisible={codeVisible}
                   near={near}
                   path={path}
                   metadata={metadata}
@@ -619,8 +598,9 @@ const EditorPage = ({
                           widgets={widgets}
                           layout={layout}
                           setRenderCode={setRenderCode}
-                          codeVisible={codeVisible}
                           disable={disable}
+                          filesObject={filesObject}
+                          path={path}
                         />
                         <NavigationSub
                           layout={layout}
@@ -640,7 +620,6 @@ const EditorPage = ({
                       <div className={layoutClass}>
                         <TabEditor
                           tab={tab}
-                          codeVisible={codeVisible}
                           widgetPath={widgetPath}
                           changeCode={changeCode}
                           path={path}

@@ -13,11 +13,11 @@ export default ({
   near,
   widgetPath,
   widgetName,
-  codeVisible,
   showModal,
   createFile,
   loadAndOpenFile,
   handleCommit,
+  filesObject,
 }) => (
   <>
     <RenameModal
@@ -50,8 +50,9 @@ export default ({
       widgetPath={widgetPath}
       widgetName={widgetName}
       type={path?.type}
-      codeVisible={codeVisible}
       handleCommit={handleCommit}
+      path={path}
+      filesObject={filesObject}
     />
   </>
 );

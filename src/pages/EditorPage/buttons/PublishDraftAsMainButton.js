@@ -5,7 +5,7 @@ export default ({
   widgetName,
   near,
   path,
-  codeVisible,
+  code,
   metadata,
   disable,
   handleCommit,
@@ -18,7 +18,7 @@ export default ({
     data={{
       [path?.type]: {
         [widgetName]: {
-          "": codeVisible,
+          "": code,
           metadata,
           branch: {
             draft: null,

@@ -8,7 +8,6 @@ const Navigation = ({
   forkFile,
   filesObject,
   widgetName,
-  codeVisible,
   near,
   path,
   metadata,
@@ -45,7 +44,6 @@ const Navigation = ({
           jpath={jpath}
           widgetName={widgetName}
           setShowModal={setShowModal}
-          codeVisible={codeVisible}
           forkFile={forkFile}
           near={near}
           path={path}
@@ -58,6 +56,7 @@ const Navigation = ({
           disable={disable}
           handleCommit={handleCommit}
           accountId={accountId}
+          filesObject={filesObject}
         />
       </div>
     </div>

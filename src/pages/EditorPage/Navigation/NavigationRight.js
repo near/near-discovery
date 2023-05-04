@@ -10,7 +10,6 @@ export default ({
   jpath,
   widgetName,
   setShowModal,
-  codeVisible,
   forkFile,
   near,
   path,
@@ -23,50 +22,55 @@ export default ({
   disable,
   handleCommit,
   accountId,
-}) => (
-  <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
-    <Nav.Item className="d-flex">
-      <div>
-        <SaveDraftButton
-          widgetName={widgetName}
-          setShowModal={setShowModal}
-          disable={disable}
-        />
-      </div>
-      <div>
-        <ForkButton forkFile={forkFile} refs={refs} disable={disable} />
-      </div>
+  filesObject,
+}) => {
+  const code = filesObject[JSON.stringify(path)]?.codeVisible;
 
-      {isDraft ? (
-        <PublishDraftAsMainButton
-          widgetName={widgetName}
-          near={near}
-          path={path}
-          codeVisible={codeVisible}
-          metadata={metadata}
-          ref={refs}
-          disable={disable}
-          handleCommit={handleCommit}
-        />
-      ) : onboarding && !accountId ? (
-        <OnboardingPublishButton
-          currentStep={currentStep}
-          refs={refs}
-          requestSignIn={requestSignIn}
-          disable={disable}
-        />
-      ) : (
-        <PublishButton
-          widgetName={widgetName}
-          near={near}
-          path={path}
-          codeVisible={codeVisible}
-          metadata={metadata}
-          disable={disable}
-          handleCommit={handleCommit}
-          refs={refs}
-        />
-      )}
-    </Nav.Item>
-  </Nav>
-);
+  return (
+    <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
+      <Nav.Item className="d-flex">
+        <div>
+          <SaveDraftButton
+            widgetName={widgetName}
+            setShowModal={setShowModal}
+            disable={disable}
+          />
+        </div>
+        <div>
+          <ForkButton forkFile={forkFile} refs={refs} disable={disable} />
+        </div>
+
+        {isDraft ? (
+          <PublishDraftAsMainButton
+            widgetName={widgetName}
+            near={near}
+            path={path}
+            code={code}
+            metadata={metadata}
+            ref={refs}
+            disable={disable}
+            handleCommit={handleCommit}
+          />
+        ) : onboarding && !accountId ? (
+          <OnboardingPublishButton
+            currentStep={currentStep}
+            refs={refs}
+            requestSignIn={requestSignIn}
+            disable={disable}
+          />
+        ) : (
+          <PublishButton
+            widgetName={widgetName}
+            near={near}
+            path={path}
+            code={code}
+            metadata={metadata}
+            disable={disable}
+            handleCommit={handleCommit}
+            refs={refs}
+          />
+        )}
+      </Nav.Item>
+    </Nav>
+  );
+};
