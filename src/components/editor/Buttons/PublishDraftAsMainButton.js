@@ -1,20 +1,10 @@
-import { CommitButton } from 'near-social-vm';
-import React from 'react';
+import { VmCommitButton } from '@/components/client/VmCommitButton';
 
-export default function PublishDraftAsMainButton({
-  widgetName,
-  near,
-  path,
-  codeVisible,
-  metadata,
-  disable,
-  handleCommit,
-}) {
+export default function PublishDraftAsMainButton({ widgetName, path, codeVisible, metadata, disable, handleCommit }) {
   return (
-    <CommitButton
+    <VmCommitButton
       className={`btn btn-primary`}
       disabled={!widgetName || disable.publishDraftAsMainButton}
-      near={near}
       onCommit={handleCommit}
       data={{
         [path?.type]: {
@@ -29,6 +19,6 @@ export default function PublishDraftAsMainButton({
       }}
     >
       Publish
-    </CommitButton>
+    </VmCommitButton>
   );
 }

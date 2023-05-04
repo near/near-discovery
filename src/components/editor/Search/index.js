@@ -1,6 +1,7 @@
-import { Widget } from 'near-social-vm';
 import React, { useMemo } from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+
+import { VmComponent } from '@/components/client/VmComponent';
 
 const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disable }) => {
   return (
@@ -19,7 +20,7 @@ const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disabl
                   >
                     {/* We use the component search widget as a VM entry point to add a TOS check wrapper.
                 It does not need to be this component, just some <Widget /> on the page */}
-                    <Widget
+                    <VmComponent
                       src={tos.checkComponentPath}
                       props={{
                         logOut: logOut,

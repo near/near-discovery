@@ -1,7 +1,8 @@
+import Image from 'next/image';
 import React from 'react';
 import styled from 'styled-components';
 
-import VsCodeIcon from '../../../images/vs_code_icon.svg';
+import VsCodeIcon from '@/assets/images/vs_code_icon.svg';
 
 const Wrapper = styled('div')`
   background-color: var(--slate-dark-3);
@@ -24,7 +25,7 @@ export default function VsCodeBanner({ accountId }) {
 
   return (
     <Wrapper className="d-flex align-center justify-content-center">
-      <img src={VsCodeIcon} />
+      <Image src={VsCodeIcon} alt="VS Code" />
       <Text>
         Prefer to work locally?&nbsp;
         <VsCodeLink href={ideLink} target="_blank" rel="noopener noreferrer">

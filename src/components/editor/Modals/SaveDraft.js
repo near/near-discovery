@@ -1,6 +1,7 @@
-import { CommitButton } from 'near-social-vm';
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+
+import { VmCommitButton } from '@/components/client/VmCommitButton';
 
 import { ModalTypes } from '../utils/const';
 
@@ -8,7 +9,6 @@ export const SaveDraftModal = ({
   codeVisible,
   showModal,
   onHide,
-  near,
   widgetPath,
   widgetName,
   type,
@@ -69,15 +69,14 @@ export const SaveDraftModal = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <CommitButton
+        <VmCommitButton
           className="btn btn-primary"
-          near={near}
           onCommit={onHide}
           data={commitButtonData}
           handleCommit={handleCommit}
         >
           Save
-        </CommitButton>
+        </VmCommitButton>
         <button className="btn btn-secondary" onClick={onCancel}>
           Cancel
         </button>

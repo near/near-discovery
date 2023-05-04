@@ -9,7 +9,16 @@ import { setupNeth } from '@near-wallet-selector/neth';
 import { setupSender } from '@near-wallet-selector/sender';
 import Big from 'big.js';
 import { setupKeypom } from 'keypom-js';
-import { EthersProviderContext, useAccount, useCache, useInitNear, useNear, utils, Widget } from 'near-social-vm';
+import {
+  CommitButton,
+  EthersProviderContext,
+  useAccount,
+  useCache,
+  useInitNear,
+  useNear,
+  utils,
+  Widget,
+} from 'near-social-vm';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -164,6 +173,7 @@ export default function VmInitializer() {
   useEffect(() => {
     setVmStore({
       cache,
+      CommitButton,
       ethersContext: ethersProviderContext,
       EthersProvider: EthersProviderContext.Provider,
       Widget,
