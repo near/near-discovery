@@ -2704,6 +2704,15 @@
     "@near-wallet-selector/core" "8.0.3"
     bn.js "^5.2.0"
 
+"@near-wallet-selector/welldone-wallet@8.0.3":
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/welldone-wallet/-/welldone-wallet-8.0.3.tgz#c397b18e85afd53de28ffdfa326bc6cec602e158"
+  integrity sha512-lb3nUMhu7lozY4HSYFg4tjHOv0BSflyPxviuHdxKp1R/HcoSuE52oKCJt+MUUimSzNItF9qaWBL37OgOdLcKdA==
+  dependencies:
+    "@near-wallet-selector/core" "8.0.3"
+    "@near-wallet-selector/wallet-utils" "8.0.3"
+    is-mobile "^3.1.1"
+
 "@nicolo-ribaudo/chokidar-2@2.1.8-no-fsevents.3":
   version "2.1.8-no-fsevents.3"
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz#323d72dd25103d0c4fbdce89dadf574a787b1f9b"

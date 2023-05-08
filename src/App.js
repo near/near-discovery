@@ -29,6 +29,7 @@ import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupNearWallet } from "@near-wallet-selector/near-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
 import { setupSender } from "@near-wallet-selector/sender";
+import { setupWelldoneWallet } from "@near-wallet-selector/welldone-wallet";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import {
   useAccount,
@@ -235,6 +236,7 @@ function App(props) {
             setupSender(),
             setupHereWallet(),
             setupMeteorWallet(),
+            setupWelldoneWallet(),
             setupNeth({
               gas: "300000000000000",
               bundle: false,
