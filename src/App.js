@@ -419,6 +419,13 @@ function App(props) {
                 return null;
               }}
             />
+            <Route
+              path="/developer-governance"
+              component={() => {
+                window.location.replace("https://neardevgov.org/");
+                return null;
+              }}
+            />
             <Route path={"/horizon"} exact={true}>
               <NearOrgPage
                 {...passProps}
