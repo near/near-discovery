@@ -4,7 +4,7 @@ import "@near-wallet-selector/modal-ui/styles.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "App.scss";
 
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { NetworkId, signInContractId, Widgets } from "./data/widgets";
 import React, { useCallback, useEffect, useState } from "react";
 
@@ -542,10 +542,19 @@ function App(props) {
               <NavigationWrapper {...passProps} />
               <CreateAccount {...passProps} />
             </Route>
-            <Route path={"/signin"}>
-              <NavigationWrapper {...passProps} />
-              <SignIn {...passProps} />
-            </Route>
+            <Route
+              path={"/signin"}
+              render={() =>
+                signedIn ? (
+                  <Redirect to="/" />
+                ) : (
+                  <>
+                    <NavigationWrapper {...passProps} />
+                    <SignIn {...passProps} />
+                  </>
+                )
+              }
+            />
             <Route path={"/verify-email"}>
               <NavigationWrapper {...passProps} />
               <VerifyEmail {...passProps} />
