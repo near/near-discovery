@@ -16,8 +16,12 @@ const networks: Record<NetworkId, Network> = {
     helperUrl: 'https://helper.testnet.near.org',
   },
   localnet: {
+    // these are defined by https://github.com/kurtosis-tech/near-package
     networkId: 'localnet',
     viewAccountId: 'test.near',
+    nodeUrl: 'http://127.0.0.1:8332',
+    walletUrl: 'http://127.0.0.1:8334',
+    helperUrl: 'http://127.0.0.1:8330',
   },
 };
 
