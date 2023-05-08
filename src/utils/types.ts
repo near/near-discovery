@@ -10,7 +10,7 @@ export type NetworkId = 'localnet' | 'testnet' | 'mainnet';
 export type Network = {
   networkId: NetworkId;
   viewAccountId: string;
-  nodeUrl?: string;
-  walletUrl?: string;
-  helperUrl?: string;
+  nodeUrl: string;
+  walletUrl: string;
+  helperUrl: string;
 };
