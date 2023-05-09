@@ -26,7 +26,17 @@ import TabEditor from './TabEditor';
 import TabMetadata from './TabMetadata';
 import TabProps from './TabProps';
 import Tabs from './Tabs';
-import { EditorLayoutKey, Filetype, Layout, StorageDomain, StorageType, Tab, WidgetPropsKey } from './utils/const';
+import {
+  EditorLayoutKey,
+  fileObjectDefault,
+  Filetype,
+  getForkName,
+  Layout,
+  StorageDomain,
+  StorageType,
+  Tab,
+  WidgetPropsKey,
+} from './utils/const';
 import {
   checkChangesMade,
   createFilesObject,
@@ -36,6 +46,7 @@ import {
   getDefaultCode,
   getSrcByNameOrPath,
   getWidgetDetails,
+  nameToPath,
   toPath,
   updateCodeLocalStorage,
   updateLocalStorage,
@@ -78,6 +89,8 @@ export const Sandbox = ({ onboarding }) => {
   const [tab, setTab] = useState(Tab.Editor);
   const [layout, setLayoutState] = useState(ls.get(EditorLayoutKey) || Layout.Tabs);
   const [defaultWidget, setDefaultWidget] = useState(null);
+  const [currentStep, setCurrentStep] = useState(0);
+  const [disable, setDisable] = useState({});
 
   const widgetName = path?.name?.split('/')[0];
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
@@ -87,78 +100,6 @@ export const Sandbox = ({ onboarding }) => {
   const isModule = path?.type === 'module';
   const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
   const shouldRender = !!near && !!cache;
-
-  useEffect(() => {
-    if (!defaultWidget || onboarding) {
-      return;
-    }
-
-    loadAndOpenFile(defaultWidget);
-    router.replace('/sandbox');
-  }, [defaultWidget, loadAndOpenFile, onboarding, router]);
-
-  useEffect(() => {
-    recordPageView();
-    ls.set(WidgetPropsKey, widgetProps);
-    try {
-      const parsedWidgetProps = JSON.parse(widgetProps);
-      setParsedWidgetProps(parsedWidgetProps);
-      setPropsError(null);
-    } catch (e) {
-      setParsedWidgetProps({});
-      setPropsError(e.message);
-    }
-  }, [widgetProps]);
-
-  useEffect(() => {
-    if (!cache || !near) {
-      return;
-    }
-    firstLoad();
-  }, [cache, firstLoad, near]);
-
-  const selectFile = (file) => {
-    setPath(fileToPath(file));
-    setLastPath(fileToPath(file));
-    setMetadata(undefined);
-  };
-
-  const firstLoad = useCallback(() => {
-    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then(({ files, lastPath } = {}) => {
-      let path;
-      let filesObject;
-
-      if (onboarding && currentStep === 1) {
-        path = onboardingComponents.starter;
-        filesObject = createFilesObject([onboardingComponents.starter]);
-      } else if (onboarding && currentStep > 1) {
-        path = onboardingComponents.starterFork;
-        filesObject = createFilesObject([onboardingComponents.starter, onboardingComponents.starterFork]);
-      } else {
-        path = lastPath;
-        filesObject = createFilesObject(files);
-      }
-
-      setFilesObject(filesObject);
-      selectFile(filesObject[fileToJpath(path)]);
-      getAllFileLocalStorage(filesObject);
-      getAllFileSocialDB(filesObject);
-
-      if (componentSrc) {
-        setComponentSrc(null);
-        setDefaultWidget(componentSrc);
-      }
-    });
-  }, [cache, componentSrc, currentStep, getAllFileLocalStorage, getAllFileSocialDB, onboarding, setComponentSrc]);
-
-  const getAllFileLocalStorage = useCallback(
-    (filesObject) => {
-      Object.values(filesObject).map((file) => {
-        getFileLocalStorage(file);
-      });
-    },
-    [getFileLocalStorage],
-  );
 
   const getFileLocalStorage = useCallback(
     (file) => {
@@ -170,7 +111,7 @@ export const Sandbox = ({ onboarding }) => {
           path,
           type: StorageType.Code,
         })
-        .then(({ code }) => {
+        .then(({ code } = {}) => {
           setFilesObject((state) => ({
             ...state,
             [jpath]: {
@@ -182,15 +123,6 @@ export const Sandbox = ({ onboarding }) => {
         });
     },
     [cache],
-  );
-
-  const getAllFileSocialDB = useCallback(
-    (filesObject) => {
-      Object.values(filesObject).map((file) => {
-        getFileSocialDB(file);
-      });
-    },
-    [getFileSocialDB],
   );
 
   const getFileSocialDB = useCallback(
@@ -241,6 +173,96 @@ export const Sandbox = ({ onboarding }) => {
     },
     [cache, near],
   );
+
+  const addFile = useCallback(
+    (file) => {
+      const newFilesObject = {
+        ...filesObject,
+        [fileToJpath(file)]: file,
+      };
+      setFilesObject(newFilesObject);
+      updateLocalStorage(newFilesObject, fileToPath(file), cache);
+    },
+    [cache, filesObject],
+  );
+
+  const loadAndOpenFile = useCallback(
+    (nameOrPath, type) => {
+      const onboardingId = onboarding && 'near';
+      const src = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
+      const path = toPath(type, nameOrPath);
+
+      const newFile = {
+        ...fileObjectDefault,
+        ...path,
+        src,
+        codeMain: '',
+        codeDraft: '',
+        codeLocalStorage: '',
+        isDraft: false,
+        changesMade: false,
+        savedOnChain: false,
+        new: true,
+      };
+      addFile(newFile);
+      setRenderCode(null);
+      selectFile(path);
+      getFileSocialDB(newFile, true);
+    },
+    [accountId, addFile, getFileSocialDB, onboarding],
+  );
+
+  const selectFile = (file) => {
+    setPath(fileToPath(file));
+    setLastPath(fileToPath(file));
+    setMetadata(undefined);
+  };
+
+  const getAllFileLocalStorage = useCallback(
+    (filesObject) => {
+      Object.values(filesObject).map((file) => {
+        getFileLocalStorage(file);
+      });
+    },
+    [getFileLocalStorage],
+  );
+
+  const getAllFileSocialDB = useCallback(
+    (filesObject) => {
+      Object.values(filesObject).map((file) => {
+        getFileSocialDB(file);
+      });
+    },
+    [getFileSocialDB],
+  );
+
+  const firstLoad = useCallback(() => {
+    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then(({ files, lastPath } = {}) => {
+      let path;
+      let filesObject;
+
+      if (onboarding && currentStep === 1) {
+        path = onboardingComponents.starter;
+        filesObject = createFilesObject([onboardingComponents.starter]);
+      } else if (onboarding && currentStep > 1) {
+        path = onboardingComponents.starterFork;
+        filesObject = createFilesObject([onboardingComponents.starter, onboardingComponents.starterFork]);
+      } else {
+        path = lastPath;
+        filesObject = createFilesObject(files);
+      }
+
+      setFilesObject(filesObject);
+      selectFile(filesObject[fileToJpath(path)]);
+      getAllFileLocalStorage(filesObject);
+      getAllFileSocialDB(filesObject);
+
+      if (componentSrc) {
+        setComponentSrc(null);
+        setDefaultWidget(componentSrc);
+      }
+    });
+  }, [cache, componentSrc, currentStep, getAllFileLocalStorage, getAllFileSocialDB, onboarding, setComponentSrc]);
 
   const renameFile = (newName) => {
     const pathNew = nameToPath(path.type, newName);
@@ -373,18 +395,6 @@ export const Sandbox = ({ onboarding }) => {
     }
   };
 
-  const addFile = useCallback(
-    (file) => {
-      const newFilesObject = {
-        ...filesObject,
-        [fileToJpath(file)]: file,
-      };
-      setFilesObject(newFilesObject);
-      updateLocalStorage(newFilesObject, fileToPath(file), cache);
-    },
-    [cache, filesObject],
-  );
-
   const createFile = (type) => {
     const newCode = getDefaultCode(type);
     const files = Object.values(filesObject).map((file) => ({
@@ -413,32 +423,6 @@ export const Sandbox = ({ onboarding }) => {
     selectFile(newPath);
   };
 
-  const loadAndOpenFile = useCallback(
-    (nameOrPath, type) => {
-      const onboardingId = onboarding && 'near';
-      const src = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
-      const path = toPath(type, nameOrPath);
-
-      const newFile = {
-        ...fileObjectDefault,
-        ...path,
-        src,
-        codeMain: '',
-        codeDraft: '',
-        codeLocalStorage: '',
-        isDraft: false,
-        changesMade: false,
-        savedOnChain: false,
-        new: true,
-      };
-      addFile(newFile);
-      setRenderCode(null);
-      selectFile(path);
-      getFileSocialDB(newFile, true);
-    },
-    [accountId, addFile, getFileSocialDB, onboarding],
-  );
-
   const reloadFile = () => {
     const onboardingPath = onboardingComponents.starter;
     selectFile(onboardingPath);
@@ -454,8 +438,6 @@ export const Sandbox = ({ onboarding }) => {
   const refs = generateRefs();
   const refEditor = useRef();
   const refSearch = useRef();
-  const [currentStep, setCurrentStep] = useState(0);
-  const [disable, setDisable] = useState({});
 
   useEffect(() => {
     setCurrentStep(getStepLocalStorage().step);
@@ -469,6 +451,35 @@ export const Sandbox = ({ onboarding }) => {
     setCurrentStep(0);
     router.replace('/sandbox');
   };
+
+  useEffect(() => {
+    if (!defaultWidget || onboarding) {
+      return;
+    }
+
+    loadAndOpenFile(defaultWidget);
+    router.replace('/sandbox');
+  }, [defaultWidget, loadAndOpenFile, onboarding, router]);
+
+  useEffect(() => {
+    recordPageView();
+    ls.set(WidgetPropsKey, widgetProps);
+    try {
+      const parsedWidgetProps = JSON.parse(widgetProps);
+      setParsedWidgetProps(parsedWidgetProps);
+      setPropsError(null);
+    } catch (e) {
+      setParsedWidgetProps({});
+      setPropsError(e.message);
+    }
+  }, [widgetProps]);
+
+  useEffect(() => {
+    if (!cache || !near) {
+      return;
+    }
+    firstLoad();
+  }, [cache, firstLoad, near]);
 
   if (!shouldRender) return <Spinner />;
 
