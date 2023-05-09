@@ -3,10 +3,13 @@ import { useRouter } from 'next/router';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { useDefaultLayout } from '@/hooks/useLayout';
+import type { NextPageWithLayout } from '@/utils/types';
+
 import { firebaseAuth } from '../utils/firebase';
 
 // TODO refactor: thoroughly test since param handling changed
-export default function VerifyEmailPage() {
+const VerifyEmailPage: NextPageWithLayout = () => {
   const { query } = useRouter();
 
   const handleResendEmail = async () => {
@@ -59,7 +62,11 @@ export default function VerifyEmailPage() {
       </FormContainer>
     </StyledContainer>
   );
-}
+};
+
+VerifyEmailPage.getLayout = useDefaultLayout;
+
+export default VerifyEmailPage;
 
 const StyledContainer = styled.div`
   width: 100%;
