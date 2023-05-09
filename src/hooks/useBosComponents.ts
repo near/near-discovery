@@ -1,9 +1,7 @@
 import { componentsByNetworkId } from '@/data/bos-components';
-
-import { useEnvironment } from './useEnvironment';
+import { networkId } from '@/utils/config';
 
 export function useBosComponents() {
-  const { networkId } = useEnvironment();
   const components = componentsByNetworkId[networkId];
 
   if (!components) {

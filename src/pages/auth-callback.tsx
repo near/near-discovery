@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
-import { useEnvironment } from '@/hooks/useEnvironment';
+import { signInContractId } from '@/utils/config';
 
 import { MPC_RECOVERY_URL } from '../utils/auth';
 import { firebaseAuth } from '../utils/firebase';
@@ -13,7 +13,6 @@ import { firebaseAuth } from '../utils/firebase';
 const AuthCallbackHandler = () => {
   const router = useRouter();
   const [statusMessage, setStatusMessage] = useState('Loading...');
-  const { signInContractId } = useEnvironment();
 
   useEffect(() => {
     const locationUrl = window.location.href;
@@ -122,7 +121,7 @@ const AuthCallbackHandler = () => {
     } else {
       router.push('/signup');
     }
-  }, [router, signInContractId]);
+  }, [router]);
 
   return <StyledStatusMessage>{statusMessage}</StyledStatusMessage>;
 };

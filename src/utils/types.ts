@@ -5,8 +5,10 @@ export type NextPageWithLayout<T = any> = NextPage<T> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-export type NetworkId = ProductionNetwork['networkId'] | DevelopmentNetwork['networkId'];
-export type Network = ProductionNetwork | DevelopmentNetwork;
+export type NetworkId = ProductionNetwork['networkId'];
+export type Network = ProductionNetwork;
+// export type NetworkId = ProductionNetwork['networkId'] | DevelopmentNetwork['networkId'];
+// export type Network = ProductionNetwork | DevelopmentNetwork;
 
 type ProductionNetwork = {
   networkId: 'testnet' | 'mainnet';
@@ -21,10 +23,10 @@ type ProductionNetwork = {
   };
 };
 
-type DevelopmentNetwork = {
-  networkId: 'localnet';
-  viewAccountId: string;
-  nodeUrl: string;
-  walletUrl: string;
-  helperUrl: string;
-};
+// type DevelopmentNetwork = {
+//   networkId: 'localnet';
+//   viewAccountId: string;
+//   nodeUrl: string;
+//   walletUrl: string;
+//   helperUrl: string;
+// };

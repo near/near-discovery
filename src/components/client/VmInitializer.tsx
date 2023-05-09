@@ -23,11 +23,11 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetSegment } from '@/utils/analytics';
+import { networkId, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 export default function VmInitializer() {
@@ -44,9 +44,6 @@ export default function VmInitializer() {
   const accountId = account.accountId;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
-  const { networkId, signInContractId } = useEnvironment();
-
-  if (networkId === 'localnet') throw new Error('VmInitializer: localnet is not supported yet.');
 
   useEffect(() => {
     initNear &&
@@ -84,7 +81,7 @@ export default function VmInitializer() {
           ],
         }),
       });
-  }, [initNear, networkId, signInContractId]);
+  }, [initNear]);
 
   useEffect(() => {
     if (!near) {

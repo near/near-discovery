@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
-import { useEnvironment } from '@/hooks/useEnvironment';
+import { network } from '@/utils/config';
 
 import { handleCreateAccount } from '../utils/auth';
 import {
@@ -35,50 +35,42 @@ export default function SignUpPage() {
     clearErrors,
   } = useForm();
   const formValues = watch();
-  const { network } = useEnvironment();
 
-  if (network?.networkId === 'localnet') {
-    return <></>;
-  }
+  const checkIsAccountAvailable = useCallback(async (desiredUsername: string) => {
+    // set to null to show loading
+    setIsAccountAvailable(null);
+    try {
+      if (!desiredUsername) return;
 
-  const checkIsAccountAvailable = useCallback(
-    async (desiredUsername: string) => {
-      // set to null to show loading
-      setIsAccountAvailable(null);
-      try {
-        if (!desiredUsername) return;
-
-        const response = await fetch(network.nodeUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+      const response = await fetch(network.nodeUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          jsonrpc: '2.0',
+          id: 'dontcare',
+          method: 'query',
+          params: {
+            request_type: 'view_account',
+            finality: 'final',
+            account_id: `${desiredUsername}.${network.fastAuth.accountIdSuffix}`,
           },
-          body: JSON.stringify({
-            jsonrpc: '2.0',
-            id: 'dontcare',
-            method: 'query',
-            params: {
-              request_type: 'view_account',
-              finality: 'final',
-              account_id: `${desiredUsername}.${network.fastAuth.accountIdSuffix}`,
-            },
-          }),
-        });
-        const data = await response.json();
-        if (data?.error?.cause?.name == 'UNKNOWN_ACCOUNT') {
-          return setIsAccountAvailable(true);
-        }
-
-        if (data?.result?.code_hash) {
-          return setIsAccountAvailable(false);
-        }
-      } catch (error) {
-        console.log(error);
-        setIsAccountAvailable(false);
+        }),
+      });
+      const data = await response.json();
+      if (data?.error?.cause?.name == 'UNKNOWN_ACCOUNT') {
+        return setIsAccountAvailable(true);
       }
-    },
-    [network.nodeUrl],
-  );
+
+      if (data?.result?.code_hash) {
+        return setIsAccountAvailable(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setIsAccountAvailable(false);
+    }
+  }, []);
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.username || !data.email) return;
