@@ -2,14 +2,15 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import type { ReactNode } from 'react';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { useAuthStore } from '@/stores/auth';
 import { recordMouseEnter } from '@/utils/analytics';
 
-import CurrentComponent from '../../CurrentComponent';
-import { navLinkData } from '../../orgLinks';
+import { CurrentComponent } from '../CurrentComponent';
+import { navLinkData } from '../org-links';
 
 const Wrapper = styled.div`
   .NavigationMenuRoot {
@@ -329,7 +330,43 @@ const Wrapper = styled.div`
   }
 `;
 
-const MainNavigationMenu = (props) => {
+const ListItem = forwardRef<
+  HTMLAnchorElement,
+  { className?: string; children: ReactNode; title: string; route?: string; href?: string }
+>(({ className, children, title, ...props }, forwardedRef) => {
+  if (props.route) {
+    return (
+      <li onMouseEnter={recordMouseEnter}>
+        <NavigationMenu.Link asChild>
+          <Link href={props.route} className={classNames('ListItemLink', className)}>
+            <div className="ListItemHeading">{title}</div>
+            <p className="ListItemText">{children}</p>
+          </Link>
+        </NavigationMenu.Link>
+      </li>
+    );
+  } else {
+    return (
+      <li onMouseEnter={recordMouseEnter}>
+        <NavigationMenu.Link asChild>
+          <a
+            className={classNames('ListItemLink', className)}
+            {...props}
+            ref={forwardedRef}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div className="ListItemHeading">{title}</div>
+            <p className="ListItemText">{children}</p>
+          </a>
+        </NavigationMenu.Link>
+      </li>
+    );
+  }
+});
+ListItem.displayName = 'ListItem';
+
+export const MainNavigationMenu = () => {
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
 
@@ -371,7 +408,7 @@ const MainNavigationMenu = (props) => {
               Develop
             </NavigationMenu.Trigger>
             <NavigationMenu.Content className="NavigationMenuContent develop">
-              <CurrentComponent {...props} />
+              <CurrentComponent />
               <ul className="List one">
                 <ListItem route={navLinkData.sandbox.link} title={navLinkData.sandbox.title}>
                   <i className="ph-duotone ph-code-block"></i>
@@ -467,38 +504,3 @@ const MainNavigationMenu = (props) => {
     </Wrapper>
   );
 };
-
-const ListItem = forwardRef(({ className, children, title, ...props }, forwardedRef) => {
-  if (props.route) {
-    return (
-      <li onMouseEnter={recordMouseEnter}>
-        <NavigationMenu.Link asChild>
-          <Link href={props.route} className={classNames('ListItemLink', className)}>
-            <div className="ListItemHeading">{title}</div>
-            <p className="ListItemText">{children}</p>
-          </Link>
-        </NavigationMenu.Link>
-      </li>
-    );
-  } else {
-    return (
-      <li onMouseEnter={recordMouseEnter}>
-        <NavigationMenu.Link asChild>
-          <a
-            className={classNames('ListItemLink', className)}
-            {...props}
-            ref={forwardedRef}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div className="ListItemHeading">{title}</div>
-            <p className="ListItemText">{children}</p>
-          </a>
-        </NavigationMenu.Link>
-      </li>
-    );
-  }
-});
-ListItem.displayName = 'ListItem';
-
-export default MainNavigationMenu;

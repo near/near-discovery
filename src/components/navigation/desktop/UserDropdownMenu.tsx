@@ -147,8 +147,10 @@ const StyledDropdown = styled.div`
   }
 `;
 
-const UserDropdownMenu = (props) => {
+export const UserDropdownMenu = () => {
   const accountId = useAuthStore((store) => store.accountId);
+  const availableStorage = useAuthStore((store) => store.availableStorage);
+  const logOut = useAuthStore((store) => store.logOut);
   const near = useVmStore((store) => store.near);
   const router = useRouter();
   const components = useBosComponents();
@@ -189,9 +191,9 @@ const UserDropdownMenu = (props) => {
             </DropdownMenu.Item>
             <DropdownMenu.Item className="DropdownMenuItem" onClick={() => withdrawStorage()}>
               <i className="ph-duotone ph-bank"></i>
-              Withdraw {props.availableStorage.div(1000).toFixed(2)}kb
+              {availableStorage && `Withdraw ${availableStorage.div(1000).toFixed(2)}kb}`}
             </DropdownMenu.Item>
-            <DropdownMenu.Item className="DropdownMenuItem" onClick={() => props.logOut()}>
+            <DropdownMenu.Item className="DropdownMenuItem" onClick={() => logOut()}>
               <i className="ph-duotone ph-sign-out"></i>
               Sign out
             </DropdownMenu.Item>
@@ -201,5 +203,3 @@ const UserDropdownMenu = (props) => {
     </StyledDropdown>
   );
 };
-
-export default UserDropdownMenu;

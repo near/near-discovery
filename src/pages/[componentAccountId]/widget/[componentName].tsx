@@ -13,7 +13,7 @@ import { styleZendesk } from '@/utils/zendesk';
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
-  const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
+  const componentSrc = `${router.query.componentAccountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const components = useBosComponents();

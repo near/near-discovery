@@ -38,11 +38,11 @@ const StyledNotificationButton = styled.div`
   }
 `;
 
-export function NotificationButton({ onMouseEnter }) {
+export function NotificationButton() {
   const components = useBosComponents();
 
   return (
-    <StyledNotificationButton className="nav-notification-button" onMouseOver={onMouseEnter}>
+    <StyledNotificationButton className="nav-notification-button">
       <VmComponent src={components.notificationButton} />
     </StyledNotificationButton>
   );
