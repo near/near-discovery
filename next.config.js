@@ -15,6 +15,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/developer-governance',
+        destination: 'https://neardevgov.org/',
+        permanent: false,
+      },
+      {
         source: '/edit/:path*',
         destination: '/sandbox/:path*',
         permanent: true,
