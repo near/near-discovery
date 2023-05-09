@@ -1,3 +1,4 @@
+import type { User } from 'firebase/auth';
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 import * as nearAPI from 'near-api-js';
 import { useRouter } from 'next/router';
@@ -5,9 +6,8 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
-import { signInContractId } from '@/utils/config';
+import { network, signInContractId } from '@/utils/config';
 
-import { MPC_RECOVERY_URL } from '../utils/auth';
 import { firebaseAuth } from '../utils/firebase';
 
 const AuthCallbackHandler = () => {
@@ -40,7 +40,10 @@ const AuthCallbackHandler = () => {
 
           const limitedAccessKey = nearAPI.KeyPair.fromRandom('ED25519');
 
-          const user = result.user;
+          // TODO refactor: remove weird typing here, it is a temporary hack to get around
+          // a TypeScript error where the defined type does not match the actual
+          // type returned by the function
+          const user: User & { accessToken?: string } = result.user;
           if (!!user.emailVerified) {
             setStatusMessage(isRecovery ? 'Recovering account...' : 'Creating account...');
 
@@ -71,7 +74,7 @@ const AuthCallbackHandler = () => {
               headers,
             };
 
-            await fetch(`${MPC_RECOVERY_URL}/${isRecovery ? 'add_key' : 'new_account'}`, options).then(
+            await fetch(`${network.fastAuth.mpcRecoveryUrl}/${isRecovery ? 'add_key' : 'new_account'}`, options).then(
               async (response) => {
                 if (!response.ok) {
                   console.log(response);
