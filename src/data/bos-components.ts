@@ -39,8 +39,7 @@ type NetworkComponents = {
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
-  localnet: undefined,
-
+  // localnet: undefined,
   testnet: {
     bosDirectory: 'one.testnet/widget/BOSDirectory',
     componentSummary: 'one.testnet/widget/ComponentSummary',
