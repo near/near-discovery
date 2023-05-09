@@ -6,7 +6,7 @@ const {
 
 import BN from 'bn.js';
 
-import { networks } from '../../data/bos-components';
+import { networks } from '@/utils/config';
 
 export class FastAuthWallet {
   constructor({ signInContractId, networkId, relayerUrl }) {
