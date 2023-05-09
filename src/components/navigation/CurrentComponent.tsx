@@ -57,7 +57,7 @@ const StyledCurrentComponent = styled.div`
   }
 `;
 
-const CurrentComponent = () => {
+export const CurrentComponent = () => {
   const src = useCurrentComponentStore((store) => store.src);
   const components = useBosComponents();
 
@@ -77,5 +77,3 @@ const CurrentComponent = () => {
     </StyledCurrentComponent>
   );
 };
-
-export default CurrentComponent;

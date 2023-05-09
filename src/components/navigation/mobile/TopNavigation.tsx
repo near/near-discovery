@@ -7,9 +7,14 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/client/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useAuthStore } from '@/stores/auth';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
+
+type Props = {
+  onClickShowMenu: () => void;
+};
 
 const StyledNavigation = styled.div`
   position: sticky;
@@ -90,10 +95,12 @@ const StyledNavigation = styled.div`
   }
 `;
 
-export function TopNavigation(props) {
+export function TopNavigation(props: Props) {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const components = useBosComponents();
+  const signedIn = useAuthStore((store) => store.signedIn);
+  const accountId = useAuthStore((store) => store.accountId);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -113,25 +120,25 @@ export function TopNavigation(props) {
 
   return (
     <StyledNavigation className={`${scrolled ? 'border-bottom' : ''}`}>
-      {props.signedIn && (
+      {signedIn && (
         <button
-          onClick={() => router.push(`/${components.profilePage}?accountId=${props.signedAccountId}`)}
+          onClick={() => router.push(`/${components.profilePage}?accountId=${accountId}`)}
           className="mobile-nav-profile-btn"
         >
           <VmComponent
             src={components.profileImage}
             props={{
-              accountId: props.signedAccountId,
+              accountId: accountId,
               className: 'd-inline-block',
               style: { width: '40px', height: '40px' },
             }}
           />
         </button>
       )}
-      <Link href="/" className={classNames(['logo-link', { large: !props.signedIn }])}>
-        <Image src={props.signedIn ? LogoBlack : NearLogotype} alt="NEAR logo" />
+      <Link href="/" className={classNames(['logo-link', { large: !signedIn }])}>
+        <Image src={signedIn ? LogoBlack : NearLogotype} alt="NEAR logo" />
       </Link>
-      <button onClick={() => props.onClickShowMenu('left')} className="mobile-nav-profile-btn">
+      <button onClick={() => props.onClickShowMenu()} className="mobile-nav-profile-btn">
         <div className="menu-icon">
           <i className="ph-bold ph-list"></i>
         </div>
