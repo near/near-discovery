@@ -7,14 +7,7 @@ import styled from 'styled-components';
 import { network } from '@/utils/config';
 
 import { handleCreateAccount } from '../utils/auth';
-import {
-  accountAddressPatternNoSubaccount,
-  emailPattern,
-  getEmailId,
-  isValidEmail,
-  // TODO refactor: unused?
-  // parseURLParams,
-} from '../utils/generic';
+import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/generic';
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
@@ -22,8 +15,6 @@ const ErrorText = styled.p`
 
 export default function SignUpPage() {
   const router = useRouter();
-  // TODO refactor: unused?
-  // const [urlParams, setUrlParams] = useState(null);
   const [isAccountAvailable, setIsAccountAvailable] = useState<boolean | null>(null);
   const [isAccountValid, setIsAccountValid] = useState<boolean | null>(null);
   const {
@@ -75,7 +66,7 @@ export default function SignUpPage() {
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.username || !data.email) return;
     try {
-      const fullAccountId = `${data.username}.${ACCOUNT_ID_SUFFIX}`;
+      const fullAccountId = `${data.username}.${network.fastAuth.accountIdSuffix}`;
       const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email);
       router.push(
         `/verify-email?publicKey=${encodeURIComponent(publicKey)}&accountId=${encodeURIComponent(
@@ -122,10 +113,10 @@ export default function SignUpPage() {
     if (isAccountAvailable === null) {
       accountStatusMessage = 'Checking availability...';
     } else if (isAccountAvailable) {
-      accountStatusMessage = `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is available!`;
+      accountStatusMessage = `${formValues?.username}.${network.fastAuth.accountIdSuffix} is available!`;
       accountStatusState = 'success';
     } else {
-      accountStatusMessage = `${formValues?.username}.${ACCOUNT_ID_SUFFIX} is taken, try something else.`;
+      accountStatusMessage = `${formValues?.username}.${network.fastAuth.accountIdSuffix} is taken, try something else.`;
       accountStatusState = 'error';
     }
   }
