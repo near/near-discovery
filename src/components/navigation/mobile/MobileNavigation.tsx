@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import { useScrollBlock } from '@/hooks/useScrollBlock';
 
@@ -9,20 +9,20 @@ export const MobileNavigation = () => {
   const [showLeftMenu, setShowLeftMenu] = useState(false);
   const [blockScroll, allowScroll] = useScrollBlock();
 
-  const HandleCloseMenu = () => {
+  const closeMenu = useCallback(() => {
     setShowLeftMenu(false);
     allowScroll();
-  };
+  }, [allowScroll]);
+
+  const openLeftMenu = useCallback(() => {
+    setShowLeftMenu(true);
+    blockScroll();
+  }, [blockScroll]);
 
   return (
     <>
-      <TopNavigation
-        onClickShowMenu={() => {
-          setShowLeftMenu(true);
-          blockScroll();
-        }}
-      />
-      <MenuLeft showMenu={showLeftMenu} onCloseMenu={() => HandleCloseMenu()} />
+      <TopNavigation onClickShowMenu={openLeftMenu} />
+      <MenuLeft showMenu={showLeftMenu} onCloseMenu={closeMenu} />
     </>
   );
 };
