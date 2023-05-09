@@ -7,6 +7,11 @@ const networks: Record<NetworkId, Network> = {
     nodeUrl: 'https://rpc.mainnet.near.org',
     walletUrl: 'https://wallet.near.org',
     helperUrl: 'https://helper.mainnet.near.org',
+    fastAuth: {
+      mpcRecoveryUrl: 'https://mpc-recovery-prod-7tk2cmmtcq-ue.a.run.app',
+      authHelperUrl: 'https://api.kitwallet.app',
+      accountIdSuffix: 'near',
+    },
   },
   testnet: {
     networkId: 'testnet',
@@ -14,6 +19,11 @@ const networks: Record<NetworkId, Network> = {
     nodeUrl: 'https://rpc.testnet.near.org',
     walletUrl: 'https://wallet.testnet.near.org',
     helperUrl: 'https://helper.testnet.near.org',
+    fastAuth: {
+      mpcRecoveryUrl: 'https://mpc-recovery-7tk2cmmtcq-ue.a.run.app',
+      authHelperUrl: 'https://testnet-api.kitwallet.app',
+      accountIdSuffix: 'testnet',
+    },
   },
   localnet: {
     // these are defined by https://github.com/kurtosis-tech/near-package
