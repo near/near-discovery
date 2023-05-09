@@ -13,7 +13,6 @@ import { useEffect } from 'react';
 import { Toaster } from 'sonner';
 
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
-import { useEnvironment } from '@/hooks/useEnvironment';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -32,14 +31,13 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const { networkId } = useEnvironment();
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
   const getLayout = Component.getLayout ?? ((page) => page);
 
   useEffect(() => {
-    initializeSegment(networkId);
-  }, [networkId]);
+    initializeSegment();
+  }, []);
 
   return (
     <>

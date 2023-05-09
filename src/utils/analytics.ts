@@ -4,6 +4,7 @@ import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
+import { networkId } from './config';
 import type { NetworkId } from './types';
 
 let segment: Analytics | null = null;
@@ -38,7 +39,7 @@ function getAnonymousId() {
   return anonymousUserId;
 }
 
-export function init(networkId: NetworkId) {
+export function init() {
   if (segment) return; // already initialized
 
   getAnonymousId();
