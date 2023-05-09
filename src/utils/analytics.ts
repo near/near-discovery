@@ -4,7 +4,7 @@ import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
-import { NetworkId } from '../data/bos-components';
+import type { NetworkId } from './types';
 
 let segment: Analytics | null = null;
 let anonymousUserId = '';
@@ -38,12 +38,12 @@ function getAnonymousId() {
   return anonymousUserId;
 }
 
-export function init() {
+export function init(networkId: NetworkId) {
   if (segment) return; // already initialized
 
   getAnonymousId();
 
-  const segmentKey = NetworkId === 'testnet' ? 'diA7hiO28gGeb9fxn615Xs91uX3GyYhL' : 'gVheHtpTIWpmstSvXjGkSY80nGEXgHX4';
+  const segmentKey = networkId === 'testnet' ? 'diA7hiO28gGeb9fxn615Xs91uX3GyYhL' : 'gVheHtpTIWpmstSvXjGkSY80nGEXgHX4';
 
   const options =
     typeof window === 'undefined'
