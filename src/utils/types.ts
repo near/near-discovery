@@ -20,6 +20,15 @@ type ProductionNetwork = {
     mpcRecoveryUrl: string;
     authHelperUrl: string; // TODO refactor: review by fastauth team
     accountIdSuffix: string;
+    firebase: {
+      apiKey: string;
+      authDomain: string;
+      projectId: string;
+      storageBucket: string;
+      messagingSenderId: string;
+      appId: string;
+      measurementId: string;
+    };
   };
 };
 

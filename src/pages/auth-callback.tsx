@@ -6,11 +6,13 @@ import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { useDefaultLayout } from '@/hooks/useLayout';
 import { network, signInContractId } from '@/utils/config';
+import type { NextPageWithLayout } from '@/utils/types';
 
 import { firebaseAuth } from '../utils/firebase';
 
-const AuthCallbackHandler = () => {
+const AuthCallbackPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [statusMessage, setStatusMessage] = useState('Loading...');
 
@@ -129,7 +131,9 @@ const AuthCallbackHandler = () => {
   return <StyledStatusMessage>{statusMessage}</StyledStatusMessage>;
 };
 
-export default AuthCallbackHandler;
+AuthCallbackPage.getLayout = useDefaultLayout;
+
+export default AuthCallbackPage;
 
 const StyledStatusMessage = styled.div`
   display: flex;

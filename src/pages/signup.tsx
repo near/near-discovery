@@ -4,7 +4,9 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { useDefaultLayout } from '@/hooks/useLayout';
 import { network } from '@/utils/config';
+import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/generic';
@@ -13,7 +15,7 @@ const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
 `;
 
-export default function SignUpPage() {
+const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [isAccountAvailable, setIsAccountAvailable] = useState<boolean | null>(null);
   const [isAccountValid, setIsAccountValid] = useState<boolean | null>(null);
@@ -188,7 +190,11 @@ export default function SignUpPage() {
       </FormContainer>
     </StyledContainer>
   );
-}
+};
+
+SignUpPage.getLayout = useDefaultLayout;
+
+export default SignUpPage;
 
 const StyledContainer = styled.div`
   width: 100%;

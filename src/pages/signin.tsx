@@ -4,12 +4,14 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
+import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
 import { isValidEmail } from '../utils/generic';
 
-export default function SignInPage() {
+const SignInPage: NextPageWithLayout = () => {
   const { register, handleSubmit, setValue } = useForm();
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
@@ -65,7 +67,10 @@ export default function SignInPage() {
       </FormContainer>
     </StyledContainer>
   );
-}
+};
+SignInPage.getLayout = useDefaultLayout;
+
+export default SignInPage;
 
 const StyledContainer = styled.div`
   width: 100%;
