@@ -118,10 +118,10 @@ export default function OnboardingWelcome({ handleNext }) {
           <Title>Build with Open Web Components</Title>
           <div className="d-flex">
             <Tag>
-              <Image src={Point1} /> Beginner Friendly
+              <Image src={Point1} alt="" /> Beginner Friendly
             </Tag>
             <Tag>
-              <Image src={Point2} /> 5 min
+              <Image src={Point2} alt="" /> 5 min
             </Tag>
           </div>
           <Desc>
@@ -129,7 +129,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Desc>
           <Point>
             <div className="img">
-              <Image src={Onboarding1} />
+              <Image src={Onboarding1} alt="" />
             </div>
             <div>
               <div className="title">Develop with the NEAR Sandbox </div>
@@ -140,7 +140,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Point>
           <Point>
             <div className="img">
-              <Image src={Onboarding2} />
+              <Image src={Onboarding2} alt="" />
             </div>
             <div>
               <div className="title">Compose with Components</div>
@@ -149,7 +149,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Point>
           <Point>
             <div className="img">
-              <Image src={Onboarding3} />
+              <Image src={Onboarding3} alt="" />
             </div>
             <div>
               <div className="title">Publish Your First Components On-Chain </div>
@@ -160,7 +160,7 @@ export default function OnboardingWelcome({ handleNext }) {
           </Point>
           <div>
             <ButtonGetStarted onClick={handleNext}>
-              Get Started <Image src={Arrow} />
+              Get Started <Image src={Arrow} alt="" />
             </ButtonGetStarted>
             <ButtonSkip
               onClick={() => {

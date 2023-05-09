@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Layout } from '../utils/const';
@@ -92,7 +92,6 @@ const OnBoarding = ({
   refs,
   setCurrentStep,
   currentStep,
-  reloadFile,
   refEditor,
   refSearch,
   setLayoutState,
@@ -107,7 +106,7 @@ const OnBoarding = ({
   const router = useRouter();
   zE('webWidget', 'hide');
 
-  const getPosition = () => {
+  const getPosition = useCallback(() => {
     setTooltipPosition(() =>
       Object.keys(onboardingSteps).reduce(
         (x, key) => ({
@@ -120,23 +119,26 @@ const OnBoarding = ({
         {},
       ),
     );
-  };
+  }, [refs]);
 
   useEffect(() => {
     getPosition();
-  }, [currentStep]);
+  }, [currentStep, getPosition]);
 
   useEffect(() => {
     window.addEventListener('resize', getPosition);
-  }, []);
+  }, [getPosition]);
 
-  const enableStep = (name) =>
-    setDisable((state) => ({
-      ...state,
-      [name]: false,
-    }));
+  const enableStep = useCallback(
+    (name) =>
+      setDisable((state) => ({
+        ...state,
+        [name]: false,
+      })),
+    [setDisable],
+  );
 
-  const disableAll = () => setDisable(onboardingDisable);
+  const disableAll = useCallback(() => setDisable(onboardingDisable), [setDisable]);
 
   // glowing
   useEffect(() => {
@@ -153,7 +155,7 @@ const OnBoarding = ({
     if (refs[`step${currentStep}`]?.current) {
       refs[`step${currentStep}`].current.className = 'glow';
     }
-  }, [currentStep]);
+  }, [currentStep, refs]);
 
   useEffect(() => {
     if (!onboarding) {
@@ -206,7 +208,19 @@ const OnBoarding = ({
     } else {
       setAdjustPosition({ x: 0, y: 0 });
     }
-  }, [currentStep, cache, near]);
+  }, [
+    currentStep,
+    cache,
+    near,
+    onboarding,
+    setLayoutState,
+    selectFile,
+    enableStep,
+    disableAll,
+    closeFile,
+    refEditor,
+    refSearch,
+  ]);
 
   const handleNext = () => updateStep(currentStep + 1);
 
@@ -245,20 +259,20 @@ const OnBoarding = ({
                   <div className="buttons">
                     <div className="left">
                       <button onClick={handlePrev}>
-                        <Image src={ArrowSmall} className="revert" />
+                        <Image src={ArrowSmall} className="revert" alt="" />
                         Back
                       </button>
                     </div>
                     <div className="right">
                       {step.button && (
                         <button onClick={handleNext}>
-                          {step.button} <Image src={ArrowSmall} />
+                          {step.button} <Image src={ArrowSmall} alt="" />
                         </button>
                       )}
 
                       {currentStep === 10 && (
                         <button onClick={finishOnboarding}>
-                          Finish onboarding <Image src={ArrowSmall} />
+                          Finish onboarding <Image src={ArrowSmall} alt="" />
                         </button>
                       )}
                     </div>

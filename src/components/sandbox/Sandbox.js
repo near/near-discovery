@@ -2,8 +2,7 @@ import ls from 'local-storage';
 import { useRouter } from 'next/router';
 import prettier from 'prettier';
 import parserBabel from 'prettier/parser-babel';
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
@@ -38,6 +37,7 @@ import {
   getSrcByNameOrPath,
   getWidgetDetails,
   toPath,
+  updateCodeLocalStorage,
   updateLocalStorage,
 } from './utils/editor';
 import {
@@ -49,84 +49,6 @@ import {
 } from './utils/onboarding';
 import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
-
-// const Wrapper = styled.div`
-//   .mobile {
-//     position: absolute;
-//     z-index: 95;
-//     width: 100%;
-//     height: 100%;
-//     background: #fff;
-//     display: none;
-//     top: 40px;
-
-//     h4 {
-//       color: #1b1b18;
-//       font-weight: 700;
-//     }
-//   }
-
-//   @media only screen and (max-width: 1200px) {
-//     .mobile {
-//       ${'' /* display: block; */}
-//     }
-//     .desktop {
-//       ${'' /* display: none; */}
-//     }
-//   }
-
-//   .glow {
-//     -webkit-animation: glowing 1000ms infinite;
-//     -moz-animation: glowing 1000ms infinite;
-//     -o-animation: glowing 1000ms infinite;
-//     animation: glowing 1000ms infinite;
-
-//     border-radius: 6px;
-
-//     @-webkit-keyframes glowing {
-//       0% {
-//         border-color: #0d6efd;
-//         -webkit-box-shadow: 0 0 3px #0d6efd;
-//       }
-//       50% {
-//         border-color: #0d6efd;
-//         -webkit-box-shadow: 0 0 15px #0d6efd;
-//       }
-//       100% {
-//         border-color: #0d6efd;
-//         -webkit-box-shadow: 0 0 3px #0d6efd;
-//       }
-//     }
-//     @keyframes glowing {
-//       0% {
-//         border-color: #0d6efd;
-//         box-shadow: 0 0 3px #0d6efd;
-//       }
-//       50% {
-//         border-color: #0d6efd;
-//         box-shadow: 0 0 15px #0d6efd;
-//       }
-//       100% {
-//         border-color: #0d6efd;
-//         box-shadow: 0 0 3px #0d6efd;
-//       }
-//     }
-//   }
-
-//   .onboardingDisable {
-//     &::before {
-//       border: 10px;
-//       content: '';
-//       display: block;
-//       width: 100%;
-//       height: 100%;
-//       position: absolute;
-//       z-index: 10;
-//       background: white;
-//       opacity: 0.5;
-//     }
-//   }
-// `;
 
 export const Sandbox = ({ onboarding }) => {
   const near = useVmStore((store) => store.near);
@@ -173,7 +95,7 @@ export const Sandbox = ({ onboarding }) => {
 
     loadAndOpenFile(defaultWidget);
     router.replace('/sandbox');
-  }, [defaultWidget]);
+  }, [defaultWidget, loadAndOpenFile, onboarding, router]);
 
   useEffect(() => {
     recordPageView();
@@ -193,7 +115,7 @@ export const Sandbox = ({ onboarding }) => {
       return;
     }
     firstLoad();
-  }, [cache, near]);
+  }, [cache, firstLoad, near]);
 
   const selectFile = (file) => {
     setPath(fileToPath(file));
@@ -201,8 +123,8 @@ export const Sandbox = ({ onboarding }) => {
     setMetadata(undefined);
   };
 
-  const firstLoad = () => {
-    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then(({ files, lastPath, lastSrc } = {}) => {
+  const firstLoad = useCallback(() => {
+    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then(({ files, lastPath } = {}) => {
       let path;
       let filesObject;
 
@@ -226,95 +148,99 @@ export const Sandbox = ({ onboarding }) => {
         setComponentSrc(null);
         setDefaultWidget(componentSrc);
       }
-
-      // if (widgetSrc) {
-      //   setWidgetSrc({
-      //     edit: null,
-      //     view: widgetSrc,
-      //   });
-      //   setDefaultWidget(widgetSrc);
-      // }
     });
-  };
+  }, [cache, componentSrc, currentStep, getAllFileLocalStorage, getAllFileSocialDB, onboarding, setComponentSrc]);
 
-  const getAllFileLocalStorage = (filesObject) => {
-    Object.values(filesObject).map((file) => {
-      getFileLocalStorage(file);
-    });
-  };
-
-  const getFileLocalStorage = (file) => {
-    const path = fileToPath(file);
-    const jpath = fileToJpath(file);
-
-    cache
-      .asyncLocalStorageGet(StorageDomain, {
-        path,
-        type: StorageType.Code,
-      })
-      .then(({ code }) => {
-        setFilesObject((state) => ({
-          ...state,
-          [jpath]: {
-            ...state[jpath],
-            codeLocalStorage: code,
-            codeVisible: code,
-          },
-        }));
+  const getAllFileLocalStorage = useCallback(
+    (filesObject) => {
+      Object.values(filesObject).map((file) => {
+        getFileLocalStorage(file);
       });
-  };
+    },
+    [getFileLocalStorage],
+  );
 
-  const getAllFileSocialDB = (filesObject) => {
-    Object.values(filesObject).map((file) => {
-      getFileSocialDB(file);
-    });
-  };
+  const getFileLocalStorage = useCallback(
+    (file) => {
+      const path = fileToPath(file);
+      const jpath = fileToJpath(file);
 
-  const getFileSocialDB = (file, setLocalStorage = false) => {
-    if (!file.src) {
-      return;
-    }
-
-    const jpath = fileToJpath(file);
-    const widgetSrc = `${file.src}/**`;
-
-    const fetchCode = () => {
-      const widgetObject = cache.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
-
-      if (widgetObject && file.new) {
-        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
-
-        setFilesObject((state) => ({
-          ...state,
-          [jpath]: {
-            ...state[jpath],
-            codeMain,
-            codeDraft,
-            isDraft,
-            changesMade: checkChangesMade(codeMain, codeDraft, state[jpath]?.codeLocalStorage || ''),
-            savedOnChain: true,
-            new: false,
-          },
-        }));
-
-        if (setLocalStorage) {
-          const newPath = fileToPath(file);
-          const code = codeDraft || codeMain;
-          updateCodeLocalStorage(newPath, codeDraft || codeMain, cache);
+      cache
+        .asyncLocalStorageGet(StorageDomain, {
+          path,
+          type: StorageType.Code,
+        })
+        .then(({ code }) => {
           setFilesObject((state) => ({
             ...state,
             [jpath]: {
               ...state[jpath],
               codeLocalStorage: code,
               codeVisible: code,
-              changesMade: false,
             },
           }));
-        }
+        });
+    },
+    [cache],
+  );
+
+  const getAllFileSocialDB = useCallback(
+    (filesObject) => {
+      Object.values(filesObject).map((file) => {
+        getFileSocialDB(file);
+      });
+    },
+    [getFileSocialDB],
+  );
+
+  const getFileSocialDB = useCallback(
+    (file, setLocalStorage = false) => {
+      if (!file.src) {
+        return;
       }
-    };
-    fetchCode();
-  };
+
+      const jpath = fileToJpath(file);
+      const widgetSrc = `${file.src}/**`;
+
+      const fetchCode = () => {
+        const widgetObject = cache.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
+
+        if (widgetObject && file.new) {
+          const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
+
+          setFilesObject((state) => ({
+            ...state,
+            [jpath]: {
+              ...state[jpath],
+              codeMain,
+              codeDraft,
+              isDraft,
+              changesMade: checkChangesMade(codeMain, codeDraft, state[jpath]?.codeLocalStorage || ''),
+              savedOnChain: true,
+              new: false,
+            },
+          }));
+
+          if (setLocalStorage) {
+            const newPath = fileToPath(file);
+            const code = codeDraft || codeMain;
+            updateCodeLocalStorage(newPath, codeDraft || codeMain, cache);
+            setFilesObject((state) => ({
+              ...state,
+              [jpath]: {
+                ...state[jpath],
+                codeLocalStorage: code,
+                codeVisible: code,
+                changesMade: false,
+              },
+            }));
+          }
+        }
+      };
+      fetchCode();
+    },
+    [cache, near],
+  );
 
   const renameFile = (newName) => {
     const pathNew = nameToPath(path.type, newName);
@@ -447,14 +373,17 @@ export const Sandbox = ({ onboarding }) => {
     }
   };
 
-  const addFile = (file) => {
-    const newFilesObject = {
-      ...filesObject,
-      [fileToJpath(file)]: file,
-    };
-    setFilesObject(newFilesObject);
-    updateLocalStorage(newFilesObject, fileToPath(file), cache);
-  };
+  const addFile = useCallback(
+    (file) => {
+      const newFilesObject = {
+        ...filesObject,
+        [fileToJpath(file)]: file,
+      };
+      setFilesObject(newFilesObject);
+      updateLocalStorage(newFilesObject, fileToPath(file), cache);
+    },
+    [cache, filesObject],
+  );
 
   const createFile = (type) => {
     const newCode = getDefaultCode(type);
@@ -484,28 +413,31 @@ export const Sandbox = ({ onboarding }) => {
     selectFile(newPath);
   };
 
-  const loadAndOpenFile = (nameOrPath, type) => {
-    const onboardingId = onboarding && 'near';
-    const src = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
-    const path = toPath(type, nameOrPath);
+  const loadAndOpenFile = useCallback(
+    (nameOrPath, type) => {
+      const onboardingId = onboarding && 'near';
+      const src = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
+      const path = toPath(type, nameOrPath);
 
-    const newFile = {
-      ...fileObjectDefault,
-      ...path,
-      src,
-      codeMain: '',
-      codeDraft: '',
-      codeLocalStorage: '',
-      isDraft: false,
-      changesMade: false,
-      savedOnChain: false,
-      new: true,
-    };
-    addFile(newFile);
-    setRenderCode(null);
-    selectFile(path);
-    getFileSocialDB(newFile, true);
-  };
+      const newFile = {
+        ...fileObjectDefault,
+        ...path,
+        src,
+        codeMain: '',
+        codeDraft: '',
+        codeLocalStorage: '',
+        isDraft: false,
+        changesMade: false,
+        savedOnChain: false,
+        new: true,
+      };
+      addFile(newFile);
+      setRenderCode(null);
+      selectFile(path);
+      getFileSocialDB(newFile, true);
+    },
+    [accountId, addFile, getFileSocialDB, onboarding],
+  );
 
   const reloadFile = () => {
     const onboardingPath = onboardingComponents.starter;

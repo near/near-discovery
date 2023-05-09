@@ -87,17 +87,17 @@ const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
         <Title>Follow our getting started guided tutorial</Title>
         <div className="d-flex">
           <Tag>
-            <Image src={Point1} /> Beginner Friendly
+            <Image src={Point1} alt="" /> Beginner Friendly
           </Tag>
           <Tag>
-            <Image src={Point2} /> 5 min
+            <Image src={Point2} alt="" /> 5 min
           </Tag>
         </div>
         <Desc>
           We’ll guide you through a basic development workflow to fork, modify, and compose with open web components.
         </Desc>
         <ButtonGetStarted onClick={handleSandbox}>
-          Get Started <Image src={Arrow} />
+          Get Started <Image src={Arrow} alt="" />
         </ButtonGetStarted>
 
         <Title className="second">Welcome to the Component Sandbox!</Title>
