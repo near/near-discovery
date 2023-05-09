@@ -5,7 +5,6 @@ import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
 import { networkId } from './config';
-import type { NetworkId } from './types';
 
 let segment: Analytics | null = null;
 let anonymousUserId = '';
