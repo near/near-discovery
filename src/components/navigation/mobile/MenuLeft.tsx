@@ -1,6 +1,8 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import type { UIEvent } from 'react';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -84,7 +86,6 @@ const StyledMenu = styled.div`
     min-height: 48px;
     height: 48px;
     color: #868682;
-    width: 100%;
     display: flex;
     align-items: center;
 
@@ -168,6 +169,7 @@ export function MenuLeft(props: Props) {
   const signedIn = useAuthStore((store) => store.signedIn);
   const requestSignIn = useAuthStore((store) => store.requestSignIn);
   const components = useBosComponents();
+  const previousPath = useRef('');
 
   async function clearAnalytics(event: UIEvent) {
     recordClick(event);
@@ -180,6 +182,18 @@ export function MenuLeft(props: Props) {
     requestSignIn();
   }
 
+  function search() {
+    props.onCloseMenu();
+    router.push(`/${components.search.indexPage}`);
+  }
+
+  useEffect(() => {
+    if (previousPath.current && previousPath.current !== router.asPath) {
+      props.onCloseMenu();
+    }
+    previousPath.current = router.asPath;
+  }, [router.asPath, props]);
+
   return (
     <StyledMenu className={props.showMenu ? 'show' : ''}>
       <div className="left-side">
@@ -187,11 +201,7 @@ export function MenuLeft(props: Props) {
           <Image src={CloseIcon} alt="Close" />
         </button>
         <Image className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => router.push('/')} />
-        <button
-          className="search-btn"
-          style={{ backgroundImage: `url(${SearchIcon.src})` }}
-          onClick={() => router.push(`/${components.search.indexPage}`)}
-        >
+        <button className="search-btn" style={{ backgroundImage: `url(${SearchIcon.src})` }} onClick={search}>
           Search NEAR
         </button>
         <AccordionMenu />
@@ -215,7 +225,7 @@ export function MenuLeft(props: Props) {
         {signedIn && (
           <div className="logged-in-btns">
             <NotificationButton />
-            <UserDropdownMenu {...props} />
+            <UserDropdownMenu />
           </div>
         )}
       </div>
