@@ -433,7 +433,7 @@ export function NearOrgHomePage() {
           <VmComponent
             src="near/widget/DIG.Button"
             props={{
-              href: '/onboarding',
+              href: '#/onboarding',
               label: 'Try It Now',
               variant: 'affirmative',
               size: 'large',
@@ -558,7 +558,7 @@ export function NearOrgHomePage() {
                 <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
-                    href: '/onboarding',
+                    href: '#/onboarding',
                     label: 'Try it now',
                     iconRight: 'ph-bold ph-arrow-right',
                     variant: 'secondary',
@@ -761,7 +761,7 @@ export function NearOrgHomePage() {
                 <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
-                    href: '/onboarding',
+                    href: '#/onboarding',
                     label: 'Try it out',
                     iconRight: 'ph-bold ph-arrow-right',
                     variant: 'primary',
@@ -953,16 +953,27 @@ export function NearOrgHomePage() {
                 Join a vibrant community of builders who understand that a more free and open web is better for
                 developers, users, and the world as a whole.
               </Text>
-              <VmComponent
-                src="near/widget/DIG.Button"
-                props={{
-                  href: '/sandbox',
-                  label: 'Get Started',
-                  iconRight: 'ph-bold ph-arrow-right',
-                  variant: 'secondary',
-                  size: 'large',
-                }}
-              />
+              {!signedIn ? (
+                <VmComponent
+                  src="near/widget/DIG.Button"
+                  props={{
+                    href: '#/signup',
+                    label: 'Create Account',
+                    variant: 'primary',
+                    size: 'large',
+                  }}
+                />
+              ) : (
+                <VmComponent
+                  src="near/widget/DIG.Button"
+                  props={{
+                    href: '#/sandbox',
+                    label: 'Try It Now',
+                    variant: 'primary',
+                    size: 'large',
+                  }}
+                />
+              )}
             </Flex>
 
             <Flex direction="column" gap="68px">
@@ -970,7 +981,7 @@ export function NearOrgHomePage() {
                 <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
-                    href: '/people',
+                    href: '#/people',
                     label: 'Community',
                     iconRight: 'ph-bold ph-arrow-right',
                     variant: 'primary',
@@ -984,7 +995,7 @@ export function NearOrgHomePage() {
                 <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
-                    href: '/events',
+                    href: '#/events',
                     label: 'Events',
                     iconRight: 'ph-bold ph-arrow-right',
                     variant: 'primary',
@@ -998,7 +1009,7 @@ export function NearOrgHomePage() {
                 <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
-                    href: '/news',
+                    href: '#/news',
                     label: 'News',
                     iconRight: 'ph-bold ph-arrow-right',
                     variant: 'primary',
@@ -1060,7 +1071,7 @@ export function NearOrgHomePage() {
               <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
-                  href: 'https://wallet.near.org/create',
+                  href: '#/signup',
                   label: 'Create Account',
                   variant: 'primary',
                   size: 'large',
@@ -1070,7 +1081,7 @@ export function NearOrgHomePage() {
               <VmComponent
                 src="near/widget/DIG.Button"
                 props={{
-                  href: '/sandbox',
+                  href: '#/sandbox',
                   label: 'Try It Now',
                   variant: 'primary',
                   size: 'large',
