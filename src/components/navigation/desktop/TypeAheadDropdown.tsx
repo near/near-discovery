@@ -3,7 +3,12 @@ import React from 'react';
 import { VmComponent } from '@/components/client/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 
-const TypeAheadDropdown = (props) => {
+type Props = {
+  focusChange: (value: boolean) => void;
+  term: string;
+};
+
+export const TypeAheadDropdown = (props: Props) => {
   const components = useBosComponents();
 
   return (
@@ -20,5 +25,3 @@ const TypeAheadDropdown = (props) => {
     </div>
   );
 };
-
-export default TypeAheadDropdown;

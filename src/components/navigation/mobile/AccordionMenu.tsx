@@ -1,13 +1,15 @@
 import * as Accordion from '@radix-ui/react-accordion';
 import classNames from 'classnames';
 import Link from 'next/link';
+import type { ComponentProps } from 'react';
+import type { ReactNode } from 'react';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
 import { recordTouchStart } from '@/utils/analytics';
 
-import CurrentComponent from '../CurrentComponent';
-import { navLinkData } from '../orgLinks';
+import { CurrentComponent } from '../CurrentComponent';
+import { navLinkData } from '../org-links';
 
 const Wrapper = styled.div`
   .AccordionItem {
@@ -139,7 +141,71 @@ const Wrapper = styled.div`
   }
 `;
 
-const AccordionMenu = () => (
+const AccordionTrigger = forwardRef<HTMLButtonElement, ComponentProps<typeof Accordion.Trigger>>(
+  ({ children, className, ...props }, forwardedRef) => (
+    <Accordion.Header className="AccordionHeader" onTouchStart={recordTouchStart}>
+      <Accordion.Trigger
+        className={classNames('AccordionTrigger', className)}
+        {...props}
+        ref={forwardedRef}
+        onTouchStart={recordTouchStart}
+      >
+        {children}
+        <i className="ph ph-caret-down AccordionChevron" aria-hidden></i>
+      </Accordion.Trigger>
+    </Accordion.Header>
+  ),
+);
+AccordionTrigger.displayName = 'AccordionTrigger';
+
+const AccordionContent = forwardRef<HTMLDivElement, ComponentProps<typeof Accordion.Content>>(
+  ({ children, className, ...props }, forwardedRef) => (
+    <Accordion.Content className={classNames('AccordionContent', className)} {...props} ref={forwardedRef}>
+      <div className="AccordionContentText">{children}</div>
+    </Accordion.Content>
+  ),
+);
+AccordionContent.displayName = 'AccordionContent';
+
+const ListItem = forwardRef<
+  HTMLAnchorElement,
+  {
+    className?: string;
+    children: ReactNode;
+    title: string;
+    route?: string;
+    href?: string;
+  }
+>(({ className, children, title, ...props }, forwardedRef) => {
+  if (props.route) {
+    return (
+      <li onTouchStart={(e) => recordTouchStart(e)}>
+        <Link className={classNames('ListItemLink', className)} ref={forwardedRef} href={props.route}>
+          <div className="ListItemHeading">{title}</div>
+          <p className="ListItemText">{children}</p>
+        </Link>
+      </li>
+    );
+  } else {
+    return (
+      <li onTouchStart={(e) => recordTouchStart(e)}>
+        <a
+          className={classNames('ListItemLink', className)}
+          {...props}
+          ref={forwardedRef}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div className="ListItemHeading">{title}</div>
+          <p className="ListItemText">{children}</p>
+        </a>
+      </li>
+    );
+  }
+});
+ListItem.displayName = 'ListItem';
+
+export const AccordionMenu = () => (
   <Wrapper>
     <Accordion.Root className="AccordionRoot" type="single" collapsible>
       <Accordion.Item className="AccordionItem" value="item-1">
@@ -245,56 +311,3 @@ const AccordionMenu = () => (
     </Accordion.Root>
   </Wrapper>
 );
-
-const AccordionTrigger = forwardRef(({ children, className, ...props }, forwardedRef) => (
-  <Accordion.Header className="AccordionHeader" onTouchStart={(e) => recordTouchStart(e, 'navmenu-touchstart')}>
-    <Accordion.Trigger
-      className={classNames('AccordionTrigger', className)}
-      {...props}
-      ref={forwardedRef}
-      onTouchStart={recordTouchStart}
-    >
-      {children}
-      <i className="ph ph-caret-down AccordionChevron" aria-hidden></i>
-    </Accordion.Trigger>
-  </Accordion.Header>
-));
-AccordionTrigger.displayName = 'AccordionTrigger';
-
-const AccordionContent = forwardRef(({ children, className, ...props }, forwardedRef) => (
-  <Accordion.Content className={classNames('AccordionContent', className)} {...props} ref={forwardedRef}>
-    <div className="AccordionContentText">{children}</div>
-  </Accordion.Content>
-));
-AccordionContent.displayName = 'AccordionContent';
-
-const ListItem = forwardRef(({ className, children, title, ...props }, forwardedRef) => {
-  if (props.route) {
-    return (
-      <li onTouchStart={(e) => recordTouchStart(e)}>
-        <Link className={classNames('ListItemLink', className)} ref={forwardedRef} href={props.route}>
-          <div className="ListItemHeading">{title}</div>
-          <p className="ListItemText">{children}</p>
-        </Link>
-      </li>
-    );
-  } else {
-    return (
-      <li onTouchStart={(e) => recordTouchStart(e)}>
-        <a
-          className={classNames('ListItemLink', className)}
-          {...props}
-          ref={forwardedRef}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <div className="ListItemHeading">{title}</div>
-          <p className="ListItemText">{children}</p>
-        </a>
-      </li>
-    );
-  }
-});
-ListItem.displayName = 'ListItem';
-
-export default AccordionMenu;

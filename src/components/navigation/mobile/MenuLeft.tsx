@@ -1,16 +1,24 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import type { UIEvent } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 
+import { useBosComponents } from '@/hooks/useBosComponents';
+import { useAuthStore } from '@/stores/auth';
 import { flushEvents, recordClick } from '@/utils/analytics';
 
-import UserDropdownMenu from '../desktop/UserDropdownMenu';
+import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import CloseIcon from '../icons/close.svg';
 import NearLogotype from '../icons/near-logotype.svg';
 import SearchIcon from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
-import AccordionMenu from './AccordionMenu';
+import { AccordionMenu } from './AccordionMenu';
+
+type Props = {
+  onCloseMenu: () => void;
+  showMenu: boolean;
+};
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -155,18 +163,21 @@ const StyledMenu = styled.div`
   }
 `;
 
-export function MenuLeft(props) {
+export function MenuLeft(props: Props) {
   const router = useRouter();
+  const signedIn = useAuthStore((store) => store.signedIn);
+  const requestSignIn = useAuthStore((store) => store.requestSignIn);
+  const components = useBosComponents();
 
-  async function clearAnalytics(e) {
-    recordClick(e);
+  async function clearAnalytics(event: UIEvent) {
+    recordClick(event);
     await flushEvents();
   }
 
-  function handleSignIn(event) {
+  function handleSignIn(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    props.requestSignIn();
+    requestSignIn();
   }
 
   return (
@@ -183,9 +194,9 @@ export function MenuLeft(props) {
         >
           Search NEAR
         </button>
-        <AccordionMenu {...props} />
+        <AccordionMenu />
 
-        {!props.signedIn && (
+        {!signedIn && (
           <div className="bottom-btns">
             <button className="sign-in" onClick={handleSignIn}>
               Sign in
@@ -201,7 +212,7 @@ export function MenuLeft(props) {
             </button>
           </div>
         )}
-        {props.signedIn && (
+        {signedIn && (
           <div className="logged-in-btns">
             <NotificationButton />
             <UserDropdownMenu {...props} />
