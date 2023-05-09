@@ -87,7 +87,7 @@ const Tooltip = styled.div`
   }
 `;
 
-export default function Onboarding({
+const OnBoarding = ({
   onboarding,
   refs,
   setCurrentStep,
@@ -101,7 +101,7 @@ export default function Onboarding({
   closeFile,
   setDisable,
   selectFile,
-}) {
+}) => {
   const [tooltipPosition, setTooltipPosition] = useState({});
   const [adjustPosition, setAdjustPosition] = useState({ x: 0, y: 0 });
   const router = useRouter();
@@ -190,8 +190,10 @@ export default function Onboarding({
 
     // additional actions for step
     if (currentStep === 1) {
-      reloadFile();
-      closeFile(onboardingComponents.starterFork);
+      closeFile({
+        type: onboardingComponents.starterFork.type,
+        name: onboardingComponents.starterFork.name,
+      });
     }
 
     // AdjustPosition
@@ -272,4 +274,6 @@ export default function Onboarding({
       )}
     </Wrapper>
   );
-}
+};
+
+export default OnBoarding;

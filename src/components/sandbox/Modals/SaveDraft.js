@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
 import { VmCommitButton } from '@/components/client/VmCommitButton';
@@ -6,7 +6,6 @@ import { VmCommitButton } from '@/components/client/VmCommitButton';
 import { ModalTypes } from '../utils/const';
 
 export const SaveDraftModal = ({
-  codeVisible,
   showModal,
   onHide,
   widgetPath,
@@ -14,9 +13,12 @@ export const SaveDraftModal = ({
   type,
   metadata,
   handleCommit,
+  path,
+  filesObject,
 }) => {
   const [commitMessage, setCommitMessage] = useState('');
   const widgetPathFull = widgetPath + '/branch/draft';
+  const codeVisible = filesObject[JSON.stringify(path)]?.codeVisible;
 
   const commitButtonData = {
     post: {

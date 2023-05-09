@@ -7,6 +7,8 @@ export const WidgetPropsKey = LsKey + 'widgetProps:';
 export const DefaultEditorCode = 'return <div>Hello World</div>;';
 export const DefaultEditorModuleCode = 'function square(number) {\n  return number * number;\n}\n';
 
+export const getForkName = (name) => `${name}-fork`;
+
 export const Filetype = {
   Widget: 'widget',
   Module: 'module',
@@ -40,4 +42,15 @@ export const ModalTypes = {
   AddModal: 'AddModal',
   CreateModal: 'CreateModal',
   SaveDraftModal: 'SaveDraftModal',
+};
+
+export const fileObjectDefault = {
+  codeMain: '',
+  codeDraft: '',
+  codeLocalStorage: '',
+  isDraft: false,
+  changesMade: false,
+  savedOnChain: undefined,
+  new: true,
+  loading: false,
 };

@@ -14,6 +14,8 @@ import { recordClick, recordPageView } from '@/utils/analytics';
 import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
 import VsCodeBanner from './Banners/VsCodeBanner';
+import MainWrapper from './css/MainWrapper';
+import MobileBlocker from './Mobile/MobileBlocker';
 import Modals from './Modals';
 import Navigation from './Navigation';
 import NavigationSub from './NavigationSub';
@@ -28,6 +30,9 @@ import Tabs from './Tabs';
 import { EditorLayoutKey, Filetype, Layout, StorageDomain, StorageType, Tab, WidgetPropsKey } from './utils/const';
 import {
   checkChangesMade,
+  createFilesObject,
+  fileToJpath,
+  fileToPath,
   generateNewName,
   getDefaultCode,
   getSrcByNameOrPath,
@@ -45,83 +50,83 @@ import {
 import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
 
-const Wrapper = styled.div`
-  .mobile {
-    position: absolute;
-    z-index: 95;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    display: none;
-    top: 40px;
+// const Wrapper = styled.div`
+//   .mobile {
+//     position: absolute;
+//     z-index: 95;
+//     width: 100%;
+//     height: 100%;
+//     background: #fff;
+//     display: none;
+//     top: 40px;
 
-    h4 {
-      color: #1b1b18;
-      font-weight: 700;
-    }
-  }
+//     h4 {
+//       color: #1b1b18;
+//       font-weight: 700;
+//     }
+//   }
 
-  @media only screen and (max-width: 1200px) {
-    .mobile {
-      ${'' /* display: block; */}
-    }
-    .desktop {
-      ${'' /* display: none; */}
-    }
-  }
+//   @media only screen and (max-width: 1200px) {
+//     .mobile {
+//       ${'' /* display: block; */}
+//     }
+//     .desktop {
+//       ${'' /* display: none; */}
+//     }
+//   }
 
-  .glow {
-    -webkit-animation: glowing 1000ms infinite;
-    -moz-animation: glowing 1000ms infinite;
-    -o-animation: glowing 1000ms infinite;
-    animation: glowing 1000ms infinite;
+//   .glow {
+//     -webkit-animation: glowing 1000ms infinite;
+//     -moz-animation: glowing 1000ms infinite;
+//     -o-animation: glowing 1000ms infinite;
+//     animation: glowing 1000ms infinite;
 
-    border-radius: 6px;
+//     border-radius: 6px;
 
-    @-webkit-keyframes glowing {
-      0% {
-        border-color: #0d6efd;
-        -webkit-box-shadow: 0 0 3px #0d6efd;
-      }
-      50% {
-        border-color: #0d6efd;
-        -webkit-box-shadow: 0 0 15px #0d6efd;
-      }
-      100% {
-        border-color: #0d6efd;
-        -webkit-box-shadow: 0 0 3px #0d6efd;
-      }
-    }
-    @keyframes glowing {
-      0% {
-        border-color: #0d6efd;
-        box-shadow: 0 0 3px #0d6efd;
-      }
-      50% {
-        border-color: #0d6efd;
-        box-shadow: 0 0 15px #0d6efd;
-      }
-      100% {
-        border-color: #0d6efd;
-        box-shadow: 0 0 3px #0d6efd;
-      }
-    }
-  }
+//     @-webkit-keyframes glowing {
+//       0% {
+//         border-color: #0d6efd;
+//         -webkit-box-shadow: 0 0 3px #0d6efd;
+//       }
+//       50% {
+//         border-color: #0d6efd;
+//         -webkit-box-shadow: 0 0 15px #0d6efd;
+//       }
+//       100% {
+//         border-color: #0d6efd;
+//         -webkit-box-shadow: 0 0 3px #0d6efd;
+//       }
+//     }
+//     @keyframes glowing {
+//       0% {
+//         border-color: #0d6efd;
+//         box-shadow: 0 0 3px #0d6efd;
+//       }
+//       50% {
+//         border-color: #0d6efd;
+//         box-shadow: 0 0 15px #0d6efd;
+//       }
+//       100% {
+//         border-color: #0d6efd;
+//         box-shadow: 0 0 3px #0d6efd;
+//       }
+//     }
+//   }
 
-  .onboardingDisable {
-    &::before {
-      border: 10px;
-      content: '';
-      display: block;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      z-index: 10;
-      background: white;
-      opacity: 0.5;
-    }
-  }
-`;
+//   .onboardingDisable {
+//     &::before {
+//       border: 10px;
+//       content: '';
+//       display: block;
+//       width: 100%;
+//       height: 100%;
+//       position: absolute;
+//       z-index: 10;
+//       background: white;
+//       opacity: 0.5;
+//     }
+//   }
+// `;
 
 export const Sandbox = ({ onboarding }) => {
   const near = useVmStore((store) => store.near);
@@ -140,17 +145,16 @@ export const Sandbox = ({ onboarding }) => {
 
   const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
-  const [codeVisible, setCodeVisible] = useState(undefined);
   const [path, setPath] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
-  const [renderCode, setRenderCode] = useState(codeVisible);
-  const [widgetProps, setWidgetProps] = useState('{}');
+  const [renderCode, setRenderCode] = useState();
+  const [widgetProps, setWidgetProps] = useState(ls.get(WidgetPropsKey) || '{}');
   const [parsedWidgetProps, setParsedWidgetProps] = useState({});
   const [propsError, setPropsError] = useState(null);
   const [metadata, setMetadata] = useState(undefined);
   const [showModal, setShowModal] = useState(null);
   const [tab, setTab] = useState(Tab.Editor);
-  const [layout, setLayoutState] = useState(Layout.Tabs);
+  const [layout, setLayoutState] = useState(ls.get(EditorLayoutKey) || Layout.Tabs);
   const [defaultWidget, setDefaultWidget] = useState(null);
 
   const widgetName = path?.name?.split('/')[0];
@@ -161,27 +165,6 @@ export const Sandbox = ({ onboarding }) => {
   const isModule = path?.type === 'module';
   const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
   const shouldRender = !!near && !!cache;
-
-  useEffect(() => {
-    setWidgetProps(ls.get(WidgetPropsKey) || '{}');
-    setLayoutState(ls.get(EditorLayoutKey) || Layout.Tabs);
-  }, []);
-
-  useEffect(() => {
-    const newFilesObject = { ...filesObject };
-
-    Object.keys(filesObject).map((key) => {
-      const file = filesObject[key];
-      const { codeMain, codeDraft, codeLocalStorage } = file;
-
-      const changesMade = checkChangesMade(codeMain, codeDraft, codeLocalStorage);
-      newFilesObject[key].changesMade = changesMade;
-
-      const isDraft = !!codeDraft;
-      newFilesObject[key].isDraft = isDraft;
-    });
-    setFilesObject(newFilesObject);
-  }, [codeVisible]);
 
   useEffect(() => {
     if (!defaultWidget || onboarding) {
@@ -206,148 +189,166 @@ export const Sandbox = ({ onboarding }) => {
   }, [widgetProps]);
 
   useEffect(() => {
-    if (!cache || !near) return;
+    if (!cache || !near) {
+      return;
+    }
+    firstLoad();
+  }, [cache, near]);
 
-    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then((res = {}) => {
-      let onboardingPath;
+  const selectFile = (file) => {
+    setPath(fileToPath(file));
+    setLastPath(fileToPath(file));
+    setMetadata(undefined);
+  };
+
+  const firstLoad = () => {
+    cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then(({ files, lastPath, lastSrc } = {}) => {
+      let path;
+      let filesObject;
+
       if (onboarding && currentStep === 1) {
-        onboardingPath = onboardingComponents.starter;
-        setLastPath(onboardingPath);
-      }
-      if (onboarding && currentStep > 1) {
-        onboardingPath = onboardingComponents.starterFork;
-        setLastPath(onboardingPath);
-      }
-
-      if (onboarding && currentStep === 1) {
-        const onboardingPath = onboardingComponents.starter;
-        near && createFilesObject([onboardingPath]);
-        selectFile(onboardingPath);
-        setMainLoader(false);
-        return;
+        path = onboardingComponents.starter;
+        filesObject = createFilesObject([onboardingComponents.starter]);
+      } else if (onboarding && currentStep > 1) {
+        path = onboardingComponents.starterFork;
+        filesObject = createFilesObject([onboardingComponents.starter, onboardingComponents.starterFork]);
+      } else {
+        path = lastPath;
+        filesObject = createFilesObject(files);
       }
 
-      setLastPath(res.lastPath);
-      near && createFilesObject(res.files || []);
-      selectFile(res.lastPath);
-      setMainLoader(false);
+      setFilesObject(filesObject);
+      selectFile(filesObject[fileToJpath(path)]);
+      getAllFileLocalStorage(filesObject);
+      getAllFileSocialDB(filesObject);
 
       if (componentSrc) {
         setComponentSrc(null);
         setDefaultWidget(componentSrc);
       }
-    });
-  }, [cache, near]);
 
-  const reloadFile = () => {
-    const onboardingPath = onboardingComponents.starter;
-    near && createFilesObject([onboardingPath]);
-    selectFile(onboardingPath);
-    setMainLoader(false);
-    loadAndOpenFile('near/widget/Onboarding.Starter', Filetype.Widget);
+      // if (widgetSrc) {
+      //   setWidgetSrc({
+      //     edit: null,
+      //     view: widgetSrc,
+      //   });
+      //   setDefaultWidget(widgetSrc);
+      // }
+    });
   };
 
-  const createFilesObject = (files = []) => {
-    const filesObject = files.reduce(
-      (x, file) => ({
-        ...x,
-        [JSON.stringify({ type: file.type, name: file.name })]: {
-          ...file,
-          codeMain: '',
-          codeDraft: '',
-          codeLocalStorage: '',
-          isDraft: false,
-          changesMade: false,
-          savedOnChain: undefined,
-          new: true,
-        },
-      }),
-      {},
-    );
-    setFilesObject(filesObject);
-
-    Object.values(filesObject).map((fileObject) => {
-      const path = { type: fileObject.type, name: fileObject.name };
-      const jpath = JSON.stringify(path);
-      const widgetSrc = `${accountId}/${fileObject.type}/${fileObject.name}/**`;
-
-      const fetchCode = () => {
-        const widgetObject = cache?.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
-
-        if (widgetObject && filesObject[jpath].new) {
-          cache
-            .asyncLocalStorageGet(StorageDomain, {
-              path: path,
-              type: StorageType.Code,
-            })
-            .then(({ code }) => {
-              const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
-
-              let changesMade = checkChangesMade(codeMain, codeDraft, code);
-
-              if (!filesObject[jpath].new) {
-                changesMade = false;
-              }
-
-              filesObject[jpath] = {
-                ...filesObject[jpath],
-                codeMain,
-                codeDraft,
-                codeLocalStorage: code,
-                isDraft,
-                changesMade: changesMade,
-                savedOnChain: true,
-                new: false,
-              };
-              setFilesObject(filesObject);
-            });
-        }
-      };
-      fetchCode();
+  const getAllFileLocalStorage = (filesObject) => {
+    Object.values(filesObject).map((file) => {
+      getFileLocalStorage(file);
     });
+  };
+
+  const getFileLocalStorage = (file) => {
+    const path = fileToPath(file);
+    const jpath = fileToJpath(file);
+
+    cache
+      .asyncLocalStorageGet(StorageDomain, {
+        path,
+        type: StorageType.Code,
+      })
+      .then(({ code }) => {
+        setFilesObject((state) => ({
+          ...state,
+          [jpath]: {
+            ...state[jpath],
+            codeLocalStorage: code,
+            codeVisible: code,
+          },
+        }));
+      });
+  };
+
+  const getAllFileSocialDB = (filesObject) => {
+    Object.values(filesObject).map((file) => {
+      getFileSocialDB(file);
+    });
+  };
+
+  const getFileSocialDB = (file, setLocalStorage = false) => {
+    if (!file.src) {
+      return;
+    }
+
+    const jpath = fileToJpath(file);
+    const widgetSrc = `${file.src}/**`;
+
+    const fetchCode = () => {
+      const widgetObject = cache.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
+
+      if (widgetObject && file.new) {
+        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
+
+        setFilesObject((state) => ({
+          ...state,
+          [jpath]: {
+            ...state[jpath],
+            codeMain,
+            codeDraft,
+            isDraft,
+            changesMade: checkChangesMade(codeMain, codeDraft, state[jpath]?.codeLocalStorage || ''),
+            savedOnChain: true,
+            new: false,
+          },
+        }));
+
+        if (setLocalStorage) {
+          const newPath = fileToPath(file);
+          const code = codeDraft || codeMain;
+          updateCodeLocalStorage(newPath, codeDraft || codeMain, cache);
+          setFilesObject((state) => ({
+            ...state,
+            [jpath]: {
+              ...state[jpath],
+              codeLocalStorage: code,
+              codeVisible: code,
+              changesMade: false,
+            },
+          }));
+        }
+      }
+    };
+    fetchCode();
   };
 
   const renameFile = (newName) => {
-    const newPath = toPath(path.type, newName);
-    const jNewPath = JSON.stringify(newPath);
-    let newFilesObject = { ...filesObject };
+    const pathNew = nameToPath(path.type, newName);
+    const jpathNew = fileToJpath(pathNew);
 
-    const fileObject = { ...newFilesObject[jpath] };
-    delete newFilesObject[jpath];
-
-    newFilesObject = {
-      ...newFilesObject,
-      [jNewPath]: {
-        ...fileObject,
-        name: newName,
-      },
-    };
-    updateFiles(newFilesObject, newPath);
-    selectFile(newPath);
+    setFilesObject((state) => {
+      const newState = {
+        ...state,
+        [jpathNew]: {
+          ...state[jpath],
+          name: newName,
+        },
+      };
+      delete newState[jpath];
+      updateLocalStorage(newState, pathNew, cache);
+      return newState;
+    });
+    selectFile(pathNew);
     setRenderCode(null);
-    updateCode(newPath, codeVisible);
   };
 
   const changeCode = (path, code) => {
-    updateCode(path, code);
-
+    updateCodeLocalStorage(path, code, cache);
     const jpath = JSON.stringify(path);
-    setFilesObject((files) => files[jpath] && (files[jpath].codeLocalStorage = code) && files);
-  };
 
-  const updateCode = (path, code) => {
-    cache?.localStorageSet(
-      StorageDomain,
-      {
-        path,
-        type: StorageType.Code,
+    setFilesObject((state) => ({
+      ...state,
+      [jpath]: {
+        ...state[jpath],
+        codeLocalStorage: code,
+        codeVisible: code,
+        changesMade: checkChangesMade(state[jpath].codeMain, state[jpath].codeDraft, code),
       },
-      {
-        code,
-        time: Date.now(),
-      },
-    );
-    setCodeVisible(code);
+    }));
   };
 
   const reformat = (path, code) => {
@@ -356,7 +357,7 @@ export const Sandbox = ({ onboarding }) => {
         parser: 'babel',
         plugins: [parserBabel],
       });
-      updateCode(path, formattedCode);
+      changeCode(path, formattedCode);
     } catch (e) {
       console.log(e);
     }
@@ -370,10 +371,8 @@ export const Sandbox = ({ onboarding }) => {
 
     const lastFile = !Object.keys(newFilesObject).length;
 
-    let newPath;
     if (lastFile) {
-      newPath = undefined;
-      updateLocalStorage(newFilesObject, newPath, cache);
+      updateLocalStorage(newFilesObject, undefined, cache);
       return;
     }
 
@@ -384,15 +383,24 @@ export const Sandbox = ({ onboarding }) => {
 
     if (jpath === JSON.stringify(lastPath)) {
       const newFile = Object.values(newFilesObject)[0];
-      newPath = { type: newFile.type, name: newFile.name };
+      const newPath = fileToPath(newFile);
       selectFile(newPath);
       setRenderCode(null);
       updateLocalStorage(newFilesObject, newPath, cache);
     }
   };
 
+  const changeFile = (path) => {
+    if (filesObject[JSON.stringify(path)]) {
+      setRenderCode(null);
+      selectFile(path);
+      updateLocalStorage(filesObject, path, cache);
+    }
+  };
+
   const handleRender = () => {
-    setRenderCode(codeVisible);
+    setRenderCode(filesObject[JSON.stringify(path)]?.codeVisible);
+
     if (layout === Layout.Tabs) {
       setTab(Tab.Widget);
     }
@@ -411,49 +419,24 @@ export const Sandbox = ({ onboarding }) => {
     }
   };
 
-  const selectFile = (path) => {
-    if (!path) return;
-
-    setPath(path);
-    setLastPath(path);
-    setMetadata(undefined);
-    cache
-      .asyncLocalStorageGet(StorageDomain, {
-        path,
-        type: StorageType.Code,
-      })
-      .then((result) => {
-        updateCode(path, result?.code);
-      });
-  };
-
-  const updateFiles = (newFilesObject, lastPath) => {
-    updateLocalStorage(newFilesObject, lastPath, cache);
-    setFilesObject(newFilesObject);
-  };
-
-  const closeAllFiles = () => {
-    Object.values(filesObject).map((file) => {
-      closeFile({ type: file.type, name: file.name });
-    });
-  };
-
-  const changeFile = (path) => {
-    if (filesObject[JSON.stringify(path)]) {
-      setRenderCode(null);
-      selectFile(path);
-      updateFiles(filesObject, path);
-    }
-  };
-
   const forkFile = () => {
-    const forkName = widgetName + '-fork';
-    const path = toPath(Filetype.Widget, forkName);
-
-    addFile(filesObject, path, codeVisible, '', false, false);
-    updateCode(path, codeVisible);
+    const forkName = getForkName(widgetName);
+    const forkPath = nameToPath(Filetype.Widget, forkName);
+    const forkedFile = filesObject[JSON.stringify(path)];
+    const newFile = {
+      ...forkedFile,
+      ...forkPath,
+      codeDraft: '',
+      isDraft: false,
+      changesMade: true,
+      savedOnChain: false,
+      new: false,
+      loading: false,
+    };
+    addFile(newFile);
+    updateCodeLocalStorage(forkPath, newFile.codeLocalStorage, cache);
     setRenderCode(null);
-    selectFile(path);
+    selectFile(forkPath);
 
     if (onboarding) {
       if (currentStep === 1) {
@@ -464,56 +447,71 @@ export const Sandbox = ({ onboarding }) => {
     }
   };
 
+  const addFile = (file) => {
+    const newFilesObject = {
+      ...filesObject,
+      [fileToJpath(file)]: file,
+    };
+    setFilesObject(newFilesObject);
+    updateLocalStorage(newFilesObject, fileToPath(file), cache);
+  };
+
   const createFile = (type) => {
+    const newCode = getDefaultCode(type);
     const files = Object.values(filesObject).map((file) => ({
       type: file.type,
       name: file.name,
     }));
-    const path = generateNewName(type, files);
-    const code = getDefaultCode(type);
 
-    addFile(filesObject, path, code, '', false, false);
-    updateCode(path, code);
-    selectFile(path);
+    const newFile = {
+      ...fileObjectDefault,
+      type,
+      name: generateNewName(type, files).name,
+      codeMain: '',
+      codeDraft: '',
+      codeLocalStorage: newCode,
+      isDraft: false,
+      changesMade: true,
+      savedOnChain: false,
+      new: false,
+    };
+
+    const newPath = fileToPath(newFile);
+
+    addFile(newFile);
+    updateCodeLocalStorage(newPath, newCode, cache);
     setRenderCode(null);
+    selectFile(newPath);
   };
 
   const loadAndOpenFile = (nameOrPath, type) => {
     const onboardingId = onboarding && 'near';
-    const widgetSrc = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
-    const widgetSrcFull = `${widgetSrc}/**`;
-    const cacheGet = () => {
-      const widgetObject = cache?.socialGet(near, widgetSrcFull, false, undefined, undefined, cacheGet);
+    const src = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
+    const path = toPath(type, nameOrPath);
 
-      if (widgetObject) {
-        const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
-        const codeCurrent = codeDraft || codeMain;
-        const path = toPath(type, widgetSrc);
-
-        addFile(filesObject, path, codeMain, codeDraft, isDraft, true);
-        updateCode(path, codeCurrent);
-        selectFile(path);
-        setRenderCode(null);
-      }
+    const newFile = {
+      ...fileObjectDefault,
+      ...path,
+      src,
+      codeMain: '',
+      codeDraft: '',
+      codeLocalStorage: '',
+      isDraft: false,
+      changesMade: false,
+      savedOnChain: false,
+      new: true,
     };
-    cacheGet();
+    addFile(newFile);
+    setRenderCode(null);
+    selectFile(path);
+    getFileSocialDB(newFile, true);
   };
 
-  const addFile = (filesObject, path, codeMain, codeDraft, isDraft, savedOnChain) => {
-    const newFilesObject = {
-      ...filesObject,
-      [JSON.stringify(path)]: {
-        ...path,
-        codeMain: codeMain,
-        codeDraft: codeDraft,
-        codeLocalStorage: codeDraft || codeMain,
-        isDraft: isDraft,
-        changesMade: false,
-        savedOnChain: savedOnChain,
-      },
-    };
-
-    updateFiles(newFilesObject, path);
+  const reloadFile = () => {
+    const onboardingPath = onboardingComponents.starter;
+    selectFile(onboardingPath);
+    setMainLoader(false);
+    loadAndOpenFile('near/widget/Onboarding.Starter', Filetype.Widget);
   };
 
   const handleCommit = () => {
@@ -543,24 +541,9 @@ export const Sandbox = ({ onboarding }) => {
   if (!shouldRender) return <Spinner />;
 
   return (
-    <Wrapper>
-      <div style={{ position: 'relative' }} onPointerUp={recordClick}>
-        {onboarding && (
-          <div className="mobile">
-            <div className={`d-flex min-vh-100 `}>
-              <div
-                className="container-fluid mt-5"
-                style={{
-                  width: '500px',
-                }}
-              >
-                <h4>{`Oops...We're gonna need a bigger screen.`}</h4>
-                <br />
-                Please visit the onboarding flow from a larger screen.
-              </div>
-            </div>
-          </div>
-        )}
+    <MainWrapper>
+      <div onPointerUp={recordClick}>
+        <MobileBlocker onboarding={onboarding} />
 
         {onboarding && (
           <OnBoarding
@@ -590,11 +573,11 @@ export const Sandbox = ({ onboarding }) => {
               near={near}
               widgetPath={widgetPath}
               widgetName={widgetName}
-              codeVisible={codeVisible}
               showModal={showModal}
               createFile={createFile}
               loadAndOpenFile={loadAndOpenFile}
               handleCommit={handleCommit}
+              filesObject={filesObject}
             />
             {onboarding || (
               <Welcome
@@ -624,7 +607,6 @@ export const Sandbox = ({ onboarding }) => {
                   forkFile={forkFile}
                   filesObject={filesObject}
                   widgetName={widgetName}
-                  codeVisible={codeVisible}
                   near={near}
                   path={path}
                   metadata={metadata}
@@ -651,8 +633,9 @@ export const Sandbox = ({ onboarding }) => {
                           widgets={widgets}
                           layout={layout}
                           setRenderCode={setRenderCode}
-                          codeVisible={codeVisible}
                           disable={disable}
+                          filesObject={filesObject}
+                          path={path}
                         />
                         <NavigationSub
                           layout={layout}
@@ -672,13 +655,13 @@ export const Sandbox = ({ onboarding }) => {
                       <div className={layoutClass}>
                         <TabEditor
                           tab={tab}
-                          codeVisible={codeVisible}
                           widgetPath={widgetPath}
                           changeCode={changeCode}
                           path={path}
                           reformat={reformat}
                           refs={refs}
                           refEditor={refEditor}
+                          filesObject={filesObject}
                         />
                         <TabProps
                           tab={tab}
@@ -724,6 +707,6 @@ export const Sandbox = ({ onboarding }) => {
           </>
         )}
       </div>
-    </Wrapper>
+    </MainWrapper>
   );
 };
