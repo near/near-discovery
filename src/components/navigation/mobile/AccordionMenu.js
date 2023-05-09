@@ -139,7 +139,7 @@ const Wrapper = styled.div`
   }
 `;
 
-const AccordionMenu = (props) => (
+const AccordionMenu = () => (
   <Wrapper>
     <Accordion.Root className="AccordionRoot" type="single" collapsible>
       <Accordion.Item className="AccordionItem" value="item-1">
@@ -203,27 +203,25 @@ const AccordionMenu = (props) => (
         </Accordion.Content>
       </Accordion.Item>
 
-      {!props.signedIn && (
-        <Accordion.Item className="AccordionItem" value="item-4">
-          <AccordionTrigger>Solutions</AccordionTrigger>
-          <Accordion.Content className="AccordionContent">
-            <ul className="List two">
-              <ListItem title={navLinkData.developers.title} route={navLinkData.developers.link}>
-                <i className="ph-duotone ph-code"></i>
-                {navLinkData.developers.description}
-              </ListItem>
-              <ListItem title={navLinkData.founders.title} route={navLinkData.founders.link}>
-                <i className="ph-duotone ph-potted-plant"></i>
-                {navLinkData.founders.description}
-              </ListItem>
-              <ListItem title={navLinkData.earlyAdopters.title} route={navLinkData.earlyAdopters.link}>
-                <i className="ph-duotone ph-leaf"></i>
-                {navLinkData.earlyAdopters.description}
-              </ListItem>
-            </ul>
-          </Accordion.Content>
-        </Accordion.Item>
-      )}
+      <Accordion.Item className="AccordionItem" value="item-4">
+        <AccordionTrigger>Solutions</AccordionTrigger>
+        <Accordion.Content className="AccordionContent">
+          <ul className="List two">
+            <ListItem title={navLinkData.developers.title} route={navLinkData.developers.link}>
+              <i className="ph-duotone ph-code"></i>
+              {navLinkData.developers.description}
+            </ListItem>
+            <ListItem title={navLinkData.founders.title} route={navLinkData.founders.link}>
+              <i className="ph-duotone ph-potted-plant"></i>
+              {navLinkData.founders.description}
+            </ListItem>
+            <ListItem title={navLinkData.earlyAdopters.title} route={navLinkData.earlyAdopters.link}>
+              <i className="ph-duotone ph-leaf"></i>
+              {navLinkData.earlyAdopters.description}
+            </ListItem>
+          </ul>
+        </Accordion.Content>
+      </Accordion.Item>
 
       <Accordion.Item className="AccordionItem" value="item-5">
         <AccordionTrigger>More</AccordionTrigger>
