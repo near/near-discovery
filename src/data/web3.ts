@@ -1,9 +1,8 @@
+import type { EIP1193Provider } from '@web3-onboard/core';
 import injectedModule from '@web3-onboard/injected-wallets';
 import ledgerModule from '@web3-onboard/ledger';
 import { init, useConnectWallet } from '@web3-onboard/react';
 import walletConnectModule from '@web3-onboard/walletconnect';
-// import { ethers } from 'ethers';
-import ls from 'local-storage';
 import { useEffect, useState } from 'react';
 import { singletonHook } from 'react-singleton-hook';
 
@@ -87,7 +86,12 @@ export const onboard = init({
   },
 });
 
-const defaultEthersProviderContext = { useConnectWallet };
+type EthersProviderContext = {
+  provider?: EIP1193Provider;
+  useConnectWallet: typeof useConnectWallet;
+};
+
+const defaultEthersProviderContext: EthersProviderContext = { useConnectWallet };
 
 export const useEthersProviderContext = singletonHook(defaultEthersProviderContext, () => {
   const [{ wallet }] = useConnectWallet();
@@ -95,16 +99,18 @@ export const useEthersProviderContext = singletonHook(defaultEthersProviderConte
 
   useEffect(() => {
     (async () => {
+      if (typeof localStorage === 'undefined') return;
+
       const walletsSub = onboard.state.select('wallets');
 
       // TODO: do we need to unsubscribe?
       // const { unsubscribe } = walletsSub.subscribe((wallets) => {
       walletsSub.subscribe((wallets) => {
         const connectedWallets = wallets.map(({ label }) => label);
-        ls.set(web3onboardKey, connectedWallets);
+        localStorage.setItem(web3onboardKey, JSON.stringify(connectedWallets));
       });
 
-      const previouslyConnectedWallets = ls.get(web3onboardKey) || [];
+      const previouslyConnectedWallets = JSON.parse(localStorage.getItem(web3onboardKey) || '[]');
 
       if (previouslyConnectedWallets) {
         // You can also auto connect "silently" and disable all onboard modals to avoid them flashing on page load
@@ -119,8 +125,10 @@ export const useEthersProviderContext = singletonHook(defaultEthersProviderConte
   }, []);
 
   useEffect(() => {
+    if (!wallet) return;
+
     setEthersProvider({
-      provider: wallet?.provider,
+      provider: wallet.provider,
       useConnectWallet,
     });
   }, [wallet]);
