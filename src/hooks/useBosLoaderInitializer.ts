@@ -6,7 +6,7 @@ import { useFlags } from './useFlags';
 
 export function useBosLoaderInitializer() {
   const [flags] = useFlags();
-  const loaderUrl = flags?.bosLoaderUrl || process.env.NEXT_PUBLIC_LOCAL_COMPONENT_LOADER;
+  const loaderUrl = flags?.bosLoaderUrl;
   const setStore = useBosLoaderStore((store) => store.set);
 
   /**

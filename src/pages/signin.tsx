@@ -62,10 +62,6 @@ export default function SignInPage() {
           {/* <IconFingerPrint /> */}
           Continue with wallet
         </StyledButton>
-        <Footer>
-          {`By signing in to an account, you agree to the NEAR`} <a href="">terms of service</a> and{' '}
-          <a href="">privacy policy</a>
-        </Footer>
       </FormContainer>
     </StyledContainer>
   );
@@ -142,17 +138,5 @@ const StyledButton = styled.button`
 
   &:focus {
     outline: none;
-  }
-`;
-
-const Footer = styled.div`
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 13px;
-  justify-self: flex-end;
-  align-self: flex-end;
-
-  'a': {
-    color: '#37819F';
   }
 `;

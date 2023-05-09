@@ -5,10 +5,24 @@ export type NextPageWithLayout<T = any> = NextPage<T> & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
-export type NetworkId = 'localnet' | 'testnet' | 'mainnet';
+export type NetworkId = ProductionNetwork['networkId'] | DevelopmentNetwork['networkId'];
+export type Network = ProductionNetwork | DevelopmentNetwork;
 
-export type Network = {
-  networkId: NetworkId;
+type ProductionNetwork = {
+  networkId: 'testnet' | 'mainnet';
+  viewAccountId: string;
+  nodeUrl: string;
+  walletUrl: string;
+  helperUrl: string;
+  fastAuth: {
+    mpcRecoveryUrl: string;
+    authHelperUrl: string; // TODO refactor: review by fastauth team
+    accountIdSuffix: string;
+  };
+};
+
+type DevelopmentNetwork = {
+  networkId: 'localnet';
   viewAccountId: string;
   nodeUrl: string;
   walletUrl: string;
