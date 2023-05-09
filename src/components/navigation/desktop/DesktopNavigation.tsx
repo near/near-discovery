@@ -14,9 +14,9 @@ import NearLogotype from '../icons/near-logotype.svg';
 import ReturnIconImage from '../icons/return.svg';
 import SearchIconImage from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
-import MainNavigationMenu from './main_navigation_menu/MainNavigationMenu';
-import TypeAheadDropdown from './TypeAheadDropdown';
-import UserDropdownMenu from './UserDropdownMenu';
+import { MainNavigationMenu } from './MainNavigationMenu';
+import { TypeAheadDropdown } from './TypeAheadDropdown';
+import { UserDropdownMenu } from './UserDropdownMenu';
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -148,7 +148,7 @@ const TypeAheadDropdownContainer = styled.div`
   margin-top: 10px;
 `;
 
-const DesktopNavigation = (props) => {
+export const DesktopNavigation = () => {
   const [scrolled, setScrolled] = useState(false);
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState('');
@@ -156,11 +156,11 @@ const DesktopNavigation = (props) => {
   const [searchIsFocused, _setSearchIsFocused] = useState(false);
   const showTypeAheadDropdown = searchIsFocused && !!searchTerm;
   const components = useBosComponents();
-  let searchFocusTimeout = useRef();
+  const searchFocusTimeout = useRef<NodeJS.Timeout>();
   const signedIn = useAuthStore((store) => store.signedIn);
   const requestSignIn = useAuthStore((store) => store.requestSignIn);
 
-  const setSearchIsFocused = (isFocused) => {
+  const setSearchIsFocused = (isFocused: boolean) => {
     if (isFocused) {
       _setSearchIsFocused(true);
       clearTimeout(searchFocusTimeout.current);
@@ -187,12 +187,12 @@ const DesktopNavigation = (props) => {
     };
   }, []);
 
-  async function clearAnalytics(e) {
-    recordClick(e);
+  async function clearAnalytics(event: any) {
+    recordClick(event);
     await flushEvents();
   }
 
-  function handleSignIn(event) {
+  function handleSignIn(event: any) {
     clearAnalytics(event);
     requestSignIn();
   }
@@ -213,7 +213,8 @@ const DesktopNavigation = (props) => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              router.push(`/${components.search.indexPage}?term=${e.target[0].value}`);
+              router.push(`/${components.search.indexPage}?term=${searchTerm}`);
+              setSearchIsFocused(false);
             }}
           >
             <input
@@ -239,7 +240,7 @@ const DesktopNavigation = (props) => {
 
           {searchIsFocused && <Image src={ReturnIconImage} alt="Return" />}
         </div>
-        <MainNavigationMenu {...props} />
+        <MainNavigationMenu />
         <div className="right-side-actions">
           {!signedIn && (
             <>
@@ -260,7 +261,7 @@ const DesktopNavigation = (props) => {
           {signedIn && (
             <>
               <NotificationButton />
-              <UserDropdownMenu {...props} />
+              <UserDropdownMenu />
             </>
           )}
         </div>
@@ -268,5 +269,3 @@ const DesktopNavigation = (props) => {
     </StyledNavigation>
   );
 };
-
-export default DesktopNavigation;

@@ -1,9 +1,11 @@
+import { useCallback } from 'react';
+
 /**
  * Usage:
  * const [blockScroll, allowScroll] = useScrollBlock();
  */
 export function useScrollBlock() {
-  const blockScroll = () => {
+  const blockScroll = useCallback(() => {
     if (typeof document === 'undefined') return;
 
     const { body, documentElement } = document;
@@ -24,9 +26,9 @@ export function useScrollBlock() {
     body.style.position = 'relative'; /* [1] */
     body.style.overflow = 'hidden'; /* [2] */
     body.style.paddingRight = `${bodyPaddingRight + scrollBarWidth}px`;
-  };
+  }, []);
 
-  const allowScroll = () => {
+  const allowScroll = useCallback(() => {
     if (typeof document === 'undefined') return;
 
     const { body, documentElement } = document;
@@ -36,7 +38,7 @@ export function useScrollBlock() {
     body.style.position = '';
     body.style.overflow = '';
     body.style.paddingRight = '';
-  };
+  }, []);
 
   return [blockScroll, allowScroll];
 }

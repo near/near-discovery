@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import DesktopNavigation from './desktop/DesktopNavigation';
-import MobileNavigation from './mobile/MobileNavigation';
+import { DesktopNavigation } from './desktop/DesktopNavigation';
+import { MobileNavigation } from './mobile/MobileNavigation';
 
-export const Navigation = (props) => {
+export const Navigation = () => {
   const [matches, setMatches] = useState(true);
 
   useEffect(() => {
@@ -16,8 +16,8 @@ export const Navigation = (props) => {
 
   return (
     <>
-      {matches && <DesktopNavigation {...props} />}
-      {!matches && <MobileNavigation {...props} />}
+      {matches && <DesktopNavigation />}
+      {!matches && <MobileNavigation />}
     </>
   );
 };

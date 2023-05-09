@@ -1,16 +1,26 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import type { UIEvent } from 'react';
+import { useRef } from 'react';
+import { useEffect } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 
+import { useBosComponents } from '@/hooks/useBosComponents';
+import { useAuthStore } from '@/stores/auth';
 import { flushEvents, recordClick } from '@/utils/analytics';
 
-import UserDropdownMenu from '../desktop/UserDropdownMenu';
+import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import CloseIcon from '../icons/close.svg';
 import NearLogotype from '../icons/near-logotype.svg';
 import SearchIcon from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
-import AccordionMenu from './AccordionMenu';
+import { AccordionMenu } from './AccordionMenu';
+
+type Props = {
+  onCloseMenu: () => void;
+  showMenu: boolean;
+};
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -76,7 +86,6 @@ const StyledMenu = styled.div`
     min-height: 48px;
     height: 48px;
     color: #868682;
-    width: 100%;
     display: flex;
     align-items: center;
 
@@ -155,19 +164,35 @@ const StyledMenu = styled.div`
   }
 `;
 
-export function MenuLeft(props) {
+export function MenuLeft(props: Props) {
   const router = useRouter();
+  const signedIn = useAuthStore((store) => store.signedIn);
+  const requestSignIn = useAuthStore((store) => store.requestSignIn);
+  const components = useBosComponents();
+  const previousPath = useRef('');
 
-  async function clearAnalytics(e) {
-    recordClick(e);
+  async function clearAnalytics(event: UIEvent) {
+    recordClick(event);
     await flushEvents();
   }
 
-  function handleSignIn(event) {
+  function handleSignIn(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    props.requestSignIn();
+    requestSignIn();
   }
+
+  function search() {
+    props.onCloseMenu();
+    router.push(`/${components.search.indexPage}`);
+  }
+
+  useEffect(() => {
+    if (previousPath.current && previousPath.current !== router.asPath) {
+      props.onCloseMenu();
+    }
+    previousPath.current = router.asPath;
+  }, [router.asPath, props]);
 
   return (
     <StyledMenu className={props.showMenu ? 'show' : ''}>
@@ -176,16 +201,12 @@ export function MenuLeft(props) {
           <Image src={CloseIcon} alt="Close" />
         </button>
         <Image className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => router.push('/')} />
-        <button
-          className="search-btn"
-          style={{ backgroundImage: `url(${SearchIcon.src})` }}
-          onClick={() => router.push(`/${components.search.indexPage}`)}
-        >
+        <button className="search-btn" style={{ backgroundImage: `url(${SearchIcon.src})` }} onClick={search}>
           Search NEAR
         </button>
-        <AccordionMenu {...props} />
+        <AccordionMenu />
 
-        {!props.signedIn && (
+        {!signedIn && (
           <div className="bottom-btns">
             <button className="sign-in" onClick={handleSignIn}>
               Sign in
@@ -201,10 +222,10 @@ export function MenuLeft(props) {
             </button>
           </div>
         )}
-        {props.signedIn && (
+        {signedIn && (
           <div className="logged-in-btns">
             <NotificationButton />
-            <UserDropdownMenu {...props} />
+            <UserDropdownMenu />
           </div>
         )}
       </div>
