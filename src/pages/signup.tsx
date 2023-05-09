@@ -95,12 +95,6 @@ const SignUpPage: NextPageWithLayout = () => {
     checkIsAccountAvailable(formValues?.username);
   }, [checkIsAccountAvailable, clearErrors, formValues?.username]);
 
-  // TODO refactor: unused?
-  // useEffect(() => {
-  //   const params = parseURLParams(window.location.search);
-  //   setUrlParams(params);
-  // }, [window.location.search]);
-
   // status message, doesn't need to be overoptimized with memoization
   let accountStatusMessage = '';
   let accountStatusState; // "error" or "success"
