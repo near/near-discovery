@@ -1,4 +1,4 @@
-export const getEmailId = (email) => {
+export const getEmailId = (email: string) => {
   return email
     .split('@')[0]
     .toLowerCase()
@@ -13,6 +13,6 @@ export const accountAddressPattern = /^(([a-z\d]+[-_])*[a-z\d]+\.)*([a-z\d]+[-_]
  */
 export const accountAddressPatternNoSubaccount = /^([a-z\d]+[-_])*[a-z\d]+$/;
 
-export const isValidEmail = (email) => {
+export const isValidEmail = (email: string) => {
   return emailPattern.test(email);
 };

@@ -9,7 +9,7 @@ import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
-import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/generic';
+import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);

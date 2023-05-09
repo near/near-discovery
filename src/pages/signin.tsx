@@ -9,7 +9,7 @@ import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
-import { isValidEmail } from '../utils/generic';
+import { isValidEmail } from '../utils/form-validation';
 
 const SignInPage: NextPageWithLayout = () => {
   const { register, handleSubmit, setValue } = useForm();
