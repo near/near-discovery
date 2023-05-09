@@ -28,6 +28,7 @@ import { setupModal } from "@near-wallet-selector/modal-ui";
 import { setupMyNearWallet } from "@near-wallet-selector/my-near-wallet";
 import { setupNearWallet } from "@near-wallet-selector/near-wallet";
 import { setupNeth } from "@near-wallet-selector/neth";
+import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from "@near-wallet-selector/sender";
 import { setupWalletSelector } from "@near-wallet-selector/core";
 import {
@@ -235,6 +236,7 @@ function App(props) {
             setupSender(),
             setupHereWallet(),
             setupMeteorWallet(),
+            setupNightly(),
             setupNeth({
               gas: "300000000000000",
               bundle: false,

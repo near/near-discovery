@@ -2688,6 +2688,15 @@
     is-mobile "^3.1.1"
     near-seed-phrase "^0.2.0"
 
+"@near-wallet-selector/nightly@^8.0.3":
+  version "8.0.3"
+  resolved "https://registry.yarnpkg.com/@near-wallet-selector/nightly/-/nightly-8.0.3.tgz#cdfb1887a0a50722b2c315031dc69c8084917683"
+  integrity sha512-CBqZYCqoAivyRhiULVjBSDgH7v5WnwbKlvDe1qxO24yd07MYKaKKDU7Llt2oj80YfLWxhhvhxCfHnAaB4IazPg==
+  dependencies:
+    "@near-wallet-selector/core" "8.0.3"
+    "@near-wallet-selector/wallet-utils" "8.0.3"
+    is-mobile "^3.1.1"
+
 "@near-wallet-selector/sender@8.0.3":
   version "8.0.3"
   resolved "https://registry.yarnpkg.com/@near-wallet-selector/sender/-/sender-8.0.3.tgz#7af9d26f87e715dac396804fff41f459fe96cf11"
