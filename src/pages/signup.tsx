@@ -166,7 +166,7 @@ export default function SignUpPage() {
                 value: accountAddressPatternNoSubaccount,
                 message: 'Please enter a valid account ID',
               },
-              validate: (v) => {
+              validate: () => {
                 if (!isAccountAvailable) {
                   return 'Please enter a valid account ID';
                 }
