@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { useEnvironment } from '@/hooks/useEnvironment';
 
-import { ACCOUNT_ID_SUFFIX, handleCreateAccount } from '../utils/auth';
+import { handleCreateAccount } from '../utils/auth';
 import {
   accountAddressPatternNoSubaccount,
   emailPattern,
@@ -20,7 +20,7 @@ const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
 `;
 
-const CreateAccount = () => {
+export default function SignUpPage() {
   const router = useRouter();
   // TODO refactor: unused?
   // const [urlParams, setUrlParams] = useState(null);
@@ -36,6 +36,10 @@ const CreateAccount = () => {
   } = useForm();
   const formValues = watch();
   const { network } = useEnvironment();
+
+  if (network?.networkId === 'localnet') {
+    return <></>;
+  }
 
   const checkIsAccountAvailable = useCallback(
     async (desiredUsername: string) => {
@@ -56,7 +60,7 @@ const CreateAccount = () => {
             params: {
               request_type: 'view_account',
               finality: 'final',
-              account_id: `${desiredUsername}.${ACCOUNT_ID_SUFFIX}`,
+              account_id: `${desiredUsername}.${network.fastAuth.accountIdSuffix}`,
             },
           }),
         });
@@ -198,16 +202,10 @@ const CreateAccount = () => {
         <StyledButton onClick={onSubmit} type="button">
           Continue
         </StyledButton>
-        <Footer>
-          By creating an account, you agree to the NEAR <a href="">terms of service</a> and{' '}
-          <a href="">privacy policy</a>
-        </Footer>
       </FormContainer>
     </StyledContainer>
   );
-};
-
-export default CreateAccount;
+}
 
 const StyledContainer = styled.div`
   width: 100%;
@@ -288,17 +286,5 @@ const StyledButton = styled.button`
 
   &:focus {
     outline: none;
-  }
-`;
-
-const Footer = styled.div`
-  padding: 12px 16px;
-  text-align: center;
-  font-size: 13px;
-  justify-self: flex-end;
-  align-self: flex-end;
-
-  'a': {
-    color: '#37819F';
   }
 `;
