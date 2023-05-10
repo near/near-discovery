@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import styled from 'styled-components';
@@ -15,6 +15,14 @@ const SignInPage: NextPageWithLayout = () => {
   const { register, handleSubmit, setValue } = useForm();
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
+  const signedIn = useAuthStore((store) => store.signedIn);
+
+  // redirect to home upon signing in
+  useEffect(() => {
+    if (signedIn) {
+      router.push('/');
+    }
+  }, [router, signedIn]);
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
