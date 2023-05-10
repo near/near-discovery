@@ -10,7 +10,7 @@ const Banner = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 2rem;
+  min-height: 2rem;
   column-gap: 8px;
 
   p {
