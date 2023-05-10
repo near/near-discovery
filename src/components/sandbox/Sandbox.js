@@ -409,6 +409,7 @@ export const Sandbox = ({ onboarding }) => {
       codeMain: '',
       codeDraft: '',
       codeLocalStorage: newCode,
+      codeVisible: newCode,
       isDraft: false,
       changesMade: true,
       savedOnChain: false,
