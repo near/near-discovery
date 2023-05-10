@@ -12,8 +12,16 @@ import Step9 from '../OnBoarding/Step9';
 import Step10 from '../OnBoarding/Step10';
 
 export const onboardingComponents = {
-  starter: { type: 'widget', name: 'Onboarding.Starter' },
-  starterFork: { type: 'widget', name: 'Onboarding.Starter-fork' },
+  starter: {
+    type: 'widget',
+    name: 'Onboarding.Starter',
+    src: 'near/widget/Onboarding.Starter',
+  },
+  starterFork: {
+    type: 'widget',
+    name: 'Onboarding.Starter-fork',
+    src: 'near/widget/Onboarding.Starter-fork',
+  },
 };
 
 export const onboardingDisable = {

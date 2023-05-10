@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
 
-export default function OnboardPublishButton({ currentStep, refs, requestSignIn, disable }) {
+export default function OnboardPublishButton({ currentStep, refs, disable }) {
   const router = useRouter();
 
   return (
