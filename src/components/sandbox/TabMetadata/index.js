@@ -15,6 +15,7 @@ const TabMetadata = ({ tab, widgets, jpath, widgetPath, setMetadata }) => (
         appearance: 'none',
         borderRadius: '0.375rem',
         height: '70vh',
+        overflow: 'auto',
       }}
     >
       <VmComponent
