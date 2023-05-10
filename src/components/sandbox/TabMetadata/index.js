@@ -25,7 +25,7 @@ const TabMetadata = ({ tab, widgets, jpath, widgetPath, setMetadata }) => (
             widgetPath,
             onChange: setMetadata,
           }),
-          [widgetPath],
+          [setMetadata, widgetPath],
         )}
       />
     </div>

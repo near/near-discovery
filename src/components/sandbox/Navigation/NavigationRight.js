@@ -7,11 +7,10 @@ import PublishButton from '../Buttons/PublishButton';
 import PublishDraftAsMainButton from '../Buttons/PublishDraftAsMainButton';
 import SaveDraftButton from '../Buttons/SaveDraftButton';
 
-export default function NavigationRight({
+const NavigationRight = ({
   jpath,
   widgetName,
   setShowModal,
-  codeVisible,
   forkFile,
   near,
   path,
@@ -24,7 +23,10 @@ export default function NavigationRight({
   disable,
   handleCommit,
   accountId,
-}) {
+  filesObject,
+}) => {
+  const code = filesObject[JSON.stringify(path)]?.codeVisible;
+
   return (
     <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
       <Nav.Item className="d-flex">
@@ -40,7 +42,7 @@ export default function NavigationRight({
             widgetName={widgetName}
             near={near}
             path={path}
-            codeVisible={codeVisible}
+            code={code}
             metadata={metadata}
             ref={refs}
             disable={disable}
@@ -58,7 +60,7 @@ export default function NavigationRight({
             widgetName={widgetName}
             near={near}
             path={path}
-            codeVisible={codeVisible}
+            code={code}
             metadata={metadata}
             disable={disable}
             handleCommit={handleCommit}
@@ -68,4 +70,6 @@ export default function NavigationRight({
       </Nav.Item>
     </Nav>
   );
-}
+};
+
+export default NavigationRight;

@@ -1,6 +1,6 @@
 import { VmCommitButton } from '@/components/client/VmCommitButton';
 
-export default function PublishDraftAsMainButton({ widgetName, path, codeVisible, metadata, disable, handleCommit }) {
+export default function PublishDraftAsMainButton({ widgetName, path, code, metadata, disable, handleCommit }) {
   return (
     <VmCommitButton
       className={`btn btn-primary`}
@@ -9,7 +9,7 @@ export default function PublishDraftAsMainButton({ widgetName, path, codeVisible
       data={{
         [path?.type]: {
           [widgetName]: {
-            '': codeVisible,
+            '': code,
             metadata,
             branch: {
               draft: null,

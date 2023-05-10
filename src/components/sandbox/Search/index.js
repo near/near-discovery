@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { VmComponent } from '@/components/client/VmComponent';
@@ -26,28 +26,25 @@ const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disabl
                         logOut: logOut,
                         tosName: tos.contentComponentPath,
                         targetComponent: widgets.editorComponentSearch,
-                        targetProps: useMemo(
-                          () => ({
-                            extraButtons: ({ widgetName, widgetPath, onHide }) => (
-                              <OverlayTrigger
-                                placement="auto"
-                                overlay={<Tooltip>{`Open "{widgetName}" component in the editor`}</Tooltip>}
+                        targetProps: () => ({
+                          extraButtons: ({ widgetName, widgetPath, onHide }) => (
+                            <OverlayTrigger
+                              placement="auto"
+                              overlay={<Tooltip>{`Open "${widgetName}" component in the editor`}</Tooltip>}
+                            >
+                              <button
+                                className="btn btn-outline-primary"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  loadAndOpenFile(widgetPath);
+                                  onHide && onHide();
+                                }}
                               >
-                                <button
-                                  className="btn btn-outline-primary"
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    loadAndOpenFile(widgetPath);
-                                    onHide && onHide();
-                                  }}
-                                >
-                                  Open
-                                </button>
-                              </OverlayTrigger>
-                            ),
-                          }),
-                          [loadAndOpenFile],
-                        ),
+                                Open
+                              </button>
+                            </OverlayTrigger>
+                          ),
+                        }),
                       }}
                     />
                   </div>
