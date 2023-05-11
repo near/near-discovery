@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 
-import { BosLoaderBanner } from '../client/BosLoaderBanner';
+import { BosLoaderBanner } from '../BosLoaderBanner';
 import { Navigation } from '../navigation/Navigation';
 
 interface Props {
