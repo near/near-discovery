@@ -4,9 +4,16 @@ const extendableRoutes: Record<string, string> = {
   about: 'https://pages.near.org/about',
   blog: 'https://pages.near.org/blog',
   developers: 'https://pages.near.org/developers',
-  ecosystem: 'https://pages.near.org/ecosystem',
   learn: 'https://pages.near.org/learn',
   papers: 'https://pages.near.org/papers',
+};
+
+// routes which are extendable but may have some paths
+// already defined as dedicated pages so we do not attempt
+// to generate them at build time and instead generate
+// on demand at runtime
+const extendableFallbacks: Record<string, string> = {
+  ecosystem: 'https://pages.near.org/ecosystem',
   use: 'https://pages.near.org/use',
 };
 
@@ -81,11 +88,14 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
     };
   }
 
-  if (extendableRoutes[context.params.arbitrary[0]]) {
+  // logic is the same here for pre-generated extendable routes and fallbacks
+  const extendableRouteConfig =
+    extendableRoutes[context.params.arbitrary[0]] || extendableFallbacks[context.params.arbitrary[0]];
+  if (extendableRouteConfig) {
     return {
       props: {
         url:
-          extendableRoutes[context.params.arbitrary[0]] +
+          extendableRouteConfig +
           (context.params.arbitrary.length > 1 ? '/' + context.params.arbitrary.slice(1).join('/') : ''),
       },
     };
