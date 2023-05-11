@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-import { VmCommitButton } from '@/components/client/VmCommitButton';
+import { VmCommitButton } from '@/components/vm/VmCommitButton';
 
 import { ModalTypes } from '../utils/const';
 

@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { VmComponent } from '@/components/client/VmComponent';
+import { VmComponent } from '@/components/vm/VmComponent';
 
 import { Tab } from '../utils/const';
 

@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 
-import { VmComponent } from '@/components/client/VmComponent';
+import { VmComponent } from '@/components/vm/VmComponent';
 
 export function NearOrgUsePage() {
   const Wrapper = styled.div`

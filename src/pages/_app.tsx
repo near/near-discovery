@@ -17,7 +17,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
-const VmInitializer = dynamic(() => import('../components/client/VmInitializer'), {
+const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
 });
 

@@ -1,4 +1,4 @@
-import { VmComponent } from '@/components/client/VmComponent';
+import { VmComponent } from '@/components/vm/VmComponent';
 
 import { MetaTags } from '../MetaTags';
 

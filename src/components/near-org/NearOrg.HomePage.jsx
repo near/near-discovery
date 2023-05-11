@@ -2,7 +2,7 @@
 
 import styled from 'styled-components';
 
-import { VmComponent } from '@/components/client/VmComponent';
+import { VmComponent } from '@/components/vm/VmComponent';
 import { useAuthStore } from '@/stores/auth';
 
 export function NearOrgHomePage() {
