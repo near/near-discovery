@@ -1,7 +1,7 @@
 import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-import { VmComponent } from '@/components/client/VmComponent';
+import { VmComponent } from '@/components/vm/VmComponent';
 
 const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disable }) => {
   return (

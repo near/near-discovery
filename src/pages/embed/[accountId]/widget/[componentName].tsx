@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { VmComponent } from '@/components/client/VmComponent';
+import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';

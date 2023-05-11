@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { VmComponent } from '@/components/client/VmComponent';
+import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 
 type Props = {

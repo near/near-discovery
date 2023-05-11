@@ -1,4 +1,4 @@
-import { VmCommitButton } from '@/components/client/VmCommitButton';
+import { VmCommitButton } from '@/components/vm/VmCommitButton';
 
 export default function PublishButton({ widgetName, path, codeVisible, metadata, disable, handleCommit, refs }) {
   return (
