@@ -12,6 +12,8 @@ import type { NextPageWithLayout } from '@/utils/types';
 import { handleCreateAccount } from '../utils/auth';
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
 
+const EMAIL_PRODVIDERS = ['gmail', 'yahoo', 'outlook']
+
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [isAccountAvailable, setIsAccountAvailable] = useState<boolean | null>(null);
@@ -148,8 +150,18 @@ const SignUpPage: NextPageWithLayout = () => {
             type="email"
             required
           />
+          <EmailProvidersList>
+            {EMAIL_PRODVIDERS.map((provider) => <div
+              className='item'
+              key={provider}
+              onClick={() => setValue('email', `${formValues?.email?.split('@')[0]}@${provider}.com`)}
+            >
+              {`@${provider}`}
+            </div>)}
+          </EmailProvidersList>
           {/* shouldn't need to do a type check here but message is not resolving as a string for some reason */}
           {typeof errors.email?.message === 'string' && <ErrorText role="alert">{errors.email?.message}</ErrorText>}
+
         </InputContainer>
 
         <InputContainer>
@@ -183,7 +195,7 @@ const SignUpPage: NextPageWithLayout = () => {
           Continue
         </StyledButton>
       </FormContainer>
-    </StyledContainer>
+    </StyledContainer >
   );
 };
 
@@ -257,6 +269,19 @@ const InputContainer = styled.div`
     }
   }
 `;
+
+const EmailProvidersList = styled.div`
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+
+  .item {
+    border: 1px solid #e5e5e5;
+    border-radius: 50px;
+    padding: 5px 8px;
+    cursor: pointer;
+  }
+`
 
 
 const ErrorText = styled.p`
