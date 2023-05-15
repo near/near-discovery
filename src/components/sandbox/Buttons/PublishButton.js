@@ -1,6 +1,6 @@
 import { VmCommitButton } from '@/components/vm/VmCommitButton';
 
-export default function PublishButton({ widgetName, path, codeVisible, metadata, disable, handleCommit, refs }) {
+export default function PublishButton({ widgetName, path, code, metadata, disable, handleCommit, refs }) {
   return (
     <div ref={refs.step10} style={{ height: '38px' }}>
       <VmCommitButton
@@ -10,7 +10,7 @@ export default function PublishButton({ widgetName, path, codeVisible, metadata,
         data={{
           [path?.type]: {
             [widgetName]: {
-              '': codeVisible,
+              '': code,
               metadata,
             },
           },
