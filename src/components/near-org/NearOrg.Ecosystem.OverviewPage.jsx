@@ -458,8 +458,8 @@ export function NearOrgEcosystemOverviewPage() {
           </Flex>
         </Section>
         <Section background="linear-gradient(to right, hsla(0, 0%, 100%, 0), var(--sand3), hsla(0, 0%, 100%, 0))">
-          <div class="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
-            <div class="col order-md-0 order-1">
+          <div className="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
+            <div className="col order-md-0 order-1">
               <Flex gap="16px" direction="column">
                 <Text size="text-3xl" color="sand12">
                   Hundreds of Projects and DAOs
@@ -487,7 +487,7 @@ export function NearOrgEcosystemOverviewPage() {
                 </Flex>
               </Flex>
             </div>
-            <div class="col order-md-1 order-0">
+            <div className="col order-md-1 order-0">
               <VmComponent
                 src="mob.near/widget/Image"
                 props={{
@@ -744,8 +744,8 @@ export function NearOrgEcosystemOverviewPage() {
         </Section>
 
         <Section gap="32px" id="anker_community">
-          <div class="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
-            <div class="col order-md-0 order-1">
+          <div className="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
+            <div className="col order-md-0 order-1">
               <Flex gap="16px" direction="column">
                 <Text size="text-3xl" color="sand12">
                   A vibrant, welcoming community
@@ -782,7 +782,7 @@ export function NearOrgEcosystemOverviewPage() {
                 </Flex>
               </Flex>
             </div>
-            <div class="col order-md-1 order-0">
+            <div className="col order-md-1 order-0">
               <VmComponent
                 src="mob.near/widget/Image"
                 props={{
@@ -811,8 +811,8 @@ export function NearOrgEcosystemOverviewPage() {
             Join the NEAR community
           </Text>
           <Card gap="0" padding="0" direction="row" background="var(--violet3)" style={{ overflow: 'hidden' }}>
-            <div class="row">
-              <div class="col-12 col-sm-6">
+            <div className="row">
+              <div className="col-12 col-sm-6">
                 <VmComponent
                   src="mob.near/widget/Image"
                   props={{
@@ -826,7 +826,7 @@ export function NearOrgEcosystemOverviewPage() {
                   }}
                 />
               </div>
-              <div class="col-12 col-sm-6 p-4">
+              <div className="col-12 col-sm-6 p-4">
                 <Flex gap="24px" direction="column">
                   <Text size="text-2xl" color="sand12">
                     Join the NEAR Governance Forum
@@ -855,8 +855,8 @@ export function NearOrgEcosystemOverviewPage() {
           </Card>
 
           <Card gap="0" padding="0" direction="row" background="var(--red3)" style={{ overflow: 'hidden' }}>
-            <div class="row">
-              <div class="col-12 col-sm-6">
+            <div className="row">
+              <div className="col-12 col-sm-6">
                 <VmComponent
                   src="mob.near/widget/Image"
                   props={{
@@ -870,7 +870,7 @@ export function NearOrgEcosystemOverviewPage() {
                   }}
                 />
               </div>
-              <div class="col-12 col-sm-6 p-4">
+              <div className="col-12 col-sm-6 p-4">
                 <Flex gap="24px" direction="column">
                   <Text size="text-2xl" color="sand12">
                     Explore the NEAR Community Blog
@@ -933,8 +933,8 @@ export function NearOrgEcosystemOverviewPage() {
           background="linear-gradient(to right, hsla(0, 0%, 100%, 0), var(--sand3), hsla(0, 0%, 100%, 0))"
           gap="32px"
         >
-          <div class="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
-            <div class="col order-md-0 order-1">
+          <div className="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
+            <div className="col order-md-0 order-1">
               <Flex gap="16px" direction="column">
                 <Text size="text-3xl" color="sand12">
                   Strong venture support
@@ -963,7 +963,7 @@ export function NearOrgEcosystemOverviewPage() {
                 </Flex>
               </Flex>
             </div>
-            <div class="col order-md-1 order-0">
+            <div className="col order-md-1 order-0">
               <VmComponent
                 src="mob.near/widget/Image"
                 props={{
@@ -1004,26 +1004,26 @@ export function NearOrgEcosystemOverviewPage() {
               }}
             />
           </Flex>
-          <div class="row justify-content-center text-center">
-            <div class="col-md-3 col-12 align-items-center">
+          <div className="row justify-content-center text-center">
+            <div className="col-md-3 col-12 align-items-center">
               <SocialIcon className="ph ph-circles-three-plus" color="var(--red7)" />
               <Text size="text-m" color="sand12">
                 Ecosystem Grants
               </Text>
             </div>
-            <div class="col-md-3 col-12">
+            <div className="col-md-3 col-12">
               <SocialIcon className="ph ph-trend-up" color="var(--red7)" />
               <Text size="text-m" color="sand12">
                 Accelerators & Incubators
               </Text>
             </div>
-            <div class="col-md-3 col-12">
+            <div className="col-md-3 col-12">
               <SocialIcon className="ph ph-users-four" color="var(--red7)" />
               <Text size="text-m" color="sand12">
                 Community-led DAOs
               </Text>
             </div>
-            <div class="col-md-3 col-12">
+            <div className="col-md-3 col-12">
               <SocialIcon className="ph ph-planet" color="var(--red7)" />
               <Text size="text-m" color="sand12">
                 Regional hubs
@@ -1167,9 +1167,9 @@ export function NearOrgEcosystemOverviewPage() {
             <Text size="text-xl" color="sand12" align="center">
               Many VCs are investing in projects building on NEAR. Recent examples include:
             </Text>
-            <div class="row row-cols-lg-2 row-cols-1 g-4">
+            <div className="row row-cols-lg-2 row-cols-1 g-4">
               {ventureCards.map((item) => (
-                <div class="col" key={item.ipfsImage}>
+                <div className="col" key={item.ipfsImage}>
                   <Card gap="12px" direction="row" style={{ height: '100%' }}>
                     <VmComponent
                       src="mob.near/widget/Image"
@@ -1207,8 +1207,8 @@ export function NearOrgEcosystemOverviewPage() {
         </Section>
 
         <Section id="anker_tech_base">
-          <div class="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
-            <div class="col order-md-0 order-1">
+          <div className="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
+            <div className="col order-md-0 order-1">
               <Flex gap="16px" direction="column">
                 <Text size="text-3xl" color="sand12">
                   NEAR’s strong technical base
@@ -1218,7 +1218,7 @@ export function NearOrgEcosystemOverviewPage() {
                 </Text>
               </Flex>
             </div>
-            <div class="col order-md-1 order-0">
+            <div className="col order-md-1 order-0">
               <VmComponent
                 src="mob.near/widget/Image"
                 props={{
@@ -1476,9 +1476,9 @@ export function NearOrgEcosystemOverviewPage() {
             Storage
           </Text>
 
-          <div class="row row-cols-md-3 row-cols-1 g-4">
+          <div className="row row-cols-md-3 row-cols-1 g-4">
             {storageCards.map((item) => (
-              <div class="col" key={item.ipfsImage}>
+              <div className="col" key={item.ipfsImage}>
                 <Card center>
                   <VmComponent
                     src="mob.near/widget/Image"
@@ -1491,7 +1491,7 @@ export function NearOrgEcosystemOverviewPage() {
                     {item.title}
                   </Text>
                   <Text size="text-l" color="sand12">
-                    {item.content ?? <span class="invisible">&nbsp;</span>}
+                    {item.content ?? <span className="invisible">&nbsp;</span>}
                   </Text>
                   {item.internal ? (
                     <VmComponent
@@ -1544,7 +1544,7 @@ export function NearOrgEcosystemOverviewPage() {
                   {item.title}
                 </Text>
                 <Text size="text-l" color="sand12">
-                  {item.content ?? <span class="invisible">&nbsp;</span>}
+                  {item.content ?? <span className="invisible">&nbsp;</span>}
                 </Text>
                 <VmComponent
                   src="near/widget/DIG.Button"
@@ -1585,7 +1585,7 @@ export function NearOrgEcosystemOverviewPage() {
                   {item.title}
                 </Text>
                 <Text size="text-l" color="sand12">
-                  {item.content ?? <span class="invisible">&nbsp;</span>}
+                  {item.content ?? <span className="invisible">&nbsp;</span>}
                 </Text>
                 <VmComponent
                   src="near/widget/DIG.Button"
@@ -1609,8 +1609,8 @@ export function NearOrgEcosystemOverviewPage() {
           id="anker_regional_hubs"
           background="linear-gradient(to right, hsla(0, 0%, 100%, 0), var(--sand3), hsla(0, 0%, 100%, 0))"
         >
-          <div class="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
-            <div class="col order-md-0 order-1">
+          <div className="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
+            <div className="col order-md-0 order-1">
               <Flex gap="16px" direction="column">
                 <Text size="text-3xl" color="sand12">
                   Local presence: Regional Hubs
@@ -1620,7 +1620,7 @@ export function NearOrgEcosystemOverviewPage() {
                 </Text>
               </Flex>
             </div>
-            <div class="col order-md-1 order-0">
+            <div className="col order-md-1 order-0">
               <VmComponent
                 src="mob.near/widget/Image"
                 props={{
@@ -1636,9 +1636,9 @@ export function NearOrgEcosystemOverviewPage() {
               NEAR hubs around the world
             </Text>
 
-            <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+            <div className="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
               {nearHubsCards.map((item) => (
-                <div class="col" key={item.ipfsImage}>
+                <div className="col" key={item.ipfsImage}>
                   <Card center>
                     <VmComponent
                       src="mob.near/widget/Image"
@@ -1674,8 +1674,8 @@ export function NearOrgEcosystemOverviewPage() {
         </Section>
 
         <Section id="anker_web3_career">
-          <div class="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
-            <div class="col order-md-0 order-1">
+          <div className="row row-cols-md-2 row-cols-1 g-4 text-md-start text-center">
+            <div className="col order-md-0 order-1">
               <Flex gap="16px" direction="column">
                 <Text size="text-3xl" color="sand12">
                   Start your web3 сareer with NEAR
@@ -1696,7 +1696,7 @@ export function NearOrgEcosystemOverviewPage() {
                 </Flex>
               </Flex>
             </div>
-            <div class="col order-md-1 order-0">
+            <div className="col order-md-1 order-0">
               <VmComponent
                 src="mob.near/widget/Image"
                 props={{

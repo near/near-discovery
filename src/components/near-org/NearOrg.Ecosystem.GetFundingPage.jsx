@@ -345,9 +345,9 @@ export function NearOrgEcosystemGetFundingPage() {
                 style: { maxWidth: '1000px' },
               }}
             />
-            <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4">
+            <div className="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4">
               {fundingCards.map((item) => (
-                <div class="col" key={item.key}>
+                <div className="col" key={item.key}>
                   <Card center>
                     <SocialIcon className={item.iconClassName} color={`var(--${item.iconColor})`} />
                     <Text size="text-m" color="sand12">
@@ -370,9 +370,9 @@ export function NearOrgEcosystemGetFundingPage() {
               <Text size="text-l" color="sand12">
                 {card.content}
               </Text>
-              <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 justify-content-center">
+              <div className="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4 justify-content-center">
                 {card.cards.map((item) => (
-                  <div class="col" key={item.ipfsImage}>
+                  <div className="col" key={item.ipfsImage}>
                     <Card background="transparent" border="none" direction="row">
                       <VmComponent
                         src="mob.near/widget/Image"

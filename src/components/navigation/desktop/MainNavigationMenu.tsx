@@ -1,7 +1,6 @@
 import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import classNames from 'classnames';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
@@ -367,7 +366,6 @@ const ListItem = forwardRef<
 ListItem.displayName = 'ListItem';
 
 export const MainNavigationMenu = () => {
-  const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
 
   return (
@@ -376,8 +374,10 @@ export const MainNavigationMenu = () => {
         <NavigationMenu.List className="NavigationMenuList">
           {signedIn && (
             <NavigationMenu.Item>
-              <NavigationMenu.Link className="NavigationMenuLink" onClick={() => router.push('/')}>
-                Home
+              <NavigationMenu.Link asChild>
+                <Link className="NavigationMenuLink" href="/">
+                  Home
+                </Link>
               </NavigationMenu.Link>
             </NavigationMenu.Item>
           )}
