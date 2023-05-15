@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -10,10 +11,6 @@ import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
-
-const ErrorText = styled.p`
-  color: hsla(8, 100%, 33%, 1);
-`;
 
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -76,6 +73,9 @@ const SignUpPage: NextPageWithLayout = () => {
         )}&email=${encodeURIComponent(email)}`,
       );
     } catch (error: any) {
+      const isCancelOrTimeoutError = error?.message.includes('operation either timed out or was not allowed')
+      if (isCancelOrTimeoutError) return
+
       toast.error(error.message);
     }
   });
@@ -122,7 +122,7 @@ const SignUpPage: NextPageWithLayout = () => {
       <FormContainer onSubmit={onSubmit}>
         <header>
           <h1>Create account</h1>
-          <p className="desc">Use this account to sign in everywhere on NEAR, no password required.</p>
+          <p className="desc">Have an account? <Link href="/signin">Sign in</Link></p>
         </header>
 
         <InputContainer>
@@ -169,6 +169,7 @@ const SignUpPage: NextPageWithLayout = () => {
               },
             })}
             placeholder="user_name.near"
+            data-accountIdSuffix={network.fastAuth.accountIdSuffix}
           />
           <p className={`subText`}>
             <span className={accountStatusState || ''}>{accountStatusMessage}</span>
@@ -210,6 +211,12 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
+
+  header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -249,6 +256,11 @@ const InputContainer = styled.div`
       color: hsla(155, 66%, 32%, 1);
     }
   }
+`;
+
+
+const ErrorText = styled.p`
+  color: hsla(8, 100%, 33%, 1);
 `;
 
 const StyledButton = styled.button`
