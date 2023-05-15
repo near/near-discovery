@@ -15,7 +15,13 @@ export function ComponentWrapperPage(props: Props) {
   return (
     <>
       {props.meta && <MetaTags {...props.meta} />}
-      <VmComponent src={props.src} props={props.componentProps} />
+      <div
+        style={{
+          paddingTop: 'var(--body-top-padding)',
+        }}
+      >
+        <VmComponent src={props.src} props={props.componentProps} />
+      </div>
     </>
   );
 }
