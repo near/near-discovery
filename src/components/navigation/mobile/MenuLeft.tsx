@@ -179,7 +179,10 @@ export function MenuLeft(props: Props) {
   function handleSignIn(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    requestSignIn();
+    const redirect = router.asPath !== '/'
+      ? router.asPath
+      : null;
+    requestSignIn(redirect);
   }
 
   function search() {
@@ -215,7 +218,11 @@ export function MenuLeft(props: Props) {
               className="create-account"
               onClick={(event) => {
                 clearAnalytics(event);
-                router.push('/signup');
+                router.push(
+                  `/signup${router.asPath !== '/'
+                    ? `?redirect=${router.asPath}`
+                    : ''}
+                `);
               }}
             >
               Create Account

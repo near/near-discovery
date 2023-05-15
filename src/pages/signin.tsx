@@ -26,9 +26,11 @@ const SignInPage: NextPageWithLayout = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
+    const searchParams = new URLSearchParams(location.search);
+    const redirect = searchParams.get("redirect");
     try {
-      const { publicKey, email } = await handleCreateAccount(null, data.email, true);
-      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`);
+      const { publicKey, email } = await handleCreateAccount(null, data.email, true, redirect);
+      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true${redirect ? `&redirect=${redirect}` : ""}`);
     } catch (error: any) {
       console.log(error);
 

@@ -194,7 +194,10 @@ export const DesktopNavigation = () => {
 
   function handleSignIn(event: any) {
     clearAnalytics(event);
-    requestSignIn();
+    const redirect = router.asPath !== '/'
+      ? router.asPath
+      : null;
+    requestSignIn(redirect);
   }
 
   return (
@@ -251,7 +254,11 @@ export const DesktopNavigation = () => {
                 className="create-account"
                 onClick={(event) => {
                   clearAnalytics(event);
-                  router.push('/signup');
+                  router.push(
+                    `/signup${router.asPath !== '/'
+                      ? `?redirect=${router.asPath}`
+                      : ''}`
+                  );
                 }}
               >
                 Create Account
