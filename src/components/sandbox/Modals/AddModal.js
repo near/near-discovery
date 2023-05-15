@@ -16,7 +16,7 @@ export default function AddModal({ onHide, showModal, setShowModal, createFile }
       </Modal.Header>
       <Modal.Body>
         <div className="text-secondary mb-3">Open existing components or modules, or create your own.</div>
-        <div class="text-center w-100">
+        <div className="text-center w-100">
           <button
             className="btn btn-outline-success px-0 w-100 mb-2"
             onClick={() => setShowModal(ModalTypes.OpenModal)}
@@ -31,7 +31,7 @@ export default function AddModal({ onHide, showModal, setShowModal, createFile }
         {!DISABLE_MODULES && (
           <>
             <div className="w-100 text-center text-secondary mb-2">or</div>
-            <div class="btn-group w-100" role="group" aria-label="Basic example">
+            <div className="btn-group w-100" role="group" aria-label="Basic example">
               <button
                 className="btn btn-outline-primary w-50 mr-5"
                 onClick={() => setShowModal(ModalTypes.OpenModuleModal)}

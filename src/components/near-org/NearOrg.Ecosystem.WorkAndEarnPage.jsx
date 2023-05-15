@@ -131,8 +131,8 @@ export function NearOrgEcosystemWorkAndEarnPage() {
             Explore opportunities
           </Text>
 
-          <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
-            <div class="col">
+          <div className="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+            <div className="col">
               <Card background="transparent" border="none">
                 <SocialIcon className="ph ph-list-magnifying-glass" color="var(--cyan7)" />
                 <Text size="text-xl" color="sand12" fontWeight="600">
@@ -171,7 +171,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Flex>
               </Card>
             </div>
-            <div class="col">
+            <div className="col">
               <Card background="transparent" border="none">
                 <SocialIcon className="ph ph-globe-stand" color="var(--green7)" />
                 <Text size="text-xl" color="sand12" fontWeight="600">
@@ -194,7 +194,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Flex>
               </Card>
             </div>
-            <div class="col">
+            <div className="col">
               <Card background="transparent" border="none">
                 <SocialIcon className="ph ph-chart-polar" color="var(--violet7)" />
                 <Text size="text-xl" color="sand12" fontWeight="600">

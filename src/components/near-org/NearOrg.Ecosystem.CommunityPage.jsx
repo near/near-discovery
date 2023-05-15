@@ -258,9 +258,9 @@ export function NearOrgEcosystemCommunityPage() {
             Why get involved?
           </Text>
 
-          <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4">
+          <div className="row row-cols-lg-4 row-cols-md-2 row-cols-1 g-4">
             {involvedCards.map((item) => (
-              <div class="col" key={item.title}>
+              <div className="col" key={item.title}>
                 <Card center>
                   <SocialIcon className={item.iconClassName} color={`var(--${item.iconColor})`} />
                   <Text size="text-xl" color="sand12" fontWeight="600">
@@ -283,9 +283,9 @@ export function NearOrgEcosystemCommunityPage() {
             The NEAR Community provides a number of ways for you to start learning, earning, and growing.
           </Text>
 
-          <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+          <div className="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
             {getStartedCards.map((item) => (
-              <div class="col" key={item.title}>
+              <div className="col" key={item.title}>
                 <Card center style={{ height: '100%' }}>
                   <SocialIcon className={item.iconClassName} color={`var(--${item.iconColor})`} />
                   <Text size="text-xl" color="sand12" fontWeight="600">
@@ -339,9 +339,9 @@ export function NearOrgEcosystemCommunityPage() {
             Featured Guilds
           </Text>
 
-          <div class="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
+          <div className="row row-cols-lg-3 row-cols-md-2 row-cols-1 g-4">
             {featuredGuildsCards.map((item) => (
-              <div class="col" key={item.title}>
+              <div className="col" key={item.title}>
                 <Card style={{ height: '100%' }}>
                   <VmComponent
                     src="mob.near/widget/Image"
@@ -363,8 +363,8 @@ export function NearOrgEcosystemCommunityPage() {
         </Section>
 
         <Section background="linear-gradient(to right, hsla(0, 0%, 100%, 0), var(--sand3), hsla(0, 0%, 100%, 0))">
-          <div class="row row-cols-md-3 row-cols-1 g-4">
-            <div class="col">
+          <div className="row row-cols-md-3 row-cols-1 g-4">
+            <div className="col">
               <Card background="transparent" border="none" padding="32px 0" style={{ height: '100%' }}>
                 <SocialIcon className="ph ph-video" color="var(--red7)" />
                 <Text size="text-xl" color="sand12" fontWeight="600">
@@ -388,7 +388,7 @@ export function NearOrgEcosystemCommunityPage() {
               </Card>
             </div>
 
-            <div class="col">
+            <div className="col">
               <Card background="transparent" border="none" padding="32px 0" style={{ height: '100%' }}>
                 <SocialIcon className="ph ph-lightbulb" color="var(--violet7)" />
                 <Text size="text-xl" color="sand12" fontWeight="600">
@@ -423,15 +423,15 @@ export function NearOrgEcosystemCommunityPage() {
               </Card>
             </div>
 
-            <div class="col">
+            <div className="col">
               <Card background="transparent" border="none" padding="32px 0" style={{ height: '100%' }}>
                 <SocialIcon className="ph ph-chats" color="var(--cyan7)" />
                 <Text size="text-xl" color="sand12" fontWeight="600">
                   Connect
                 </Text>
-                <div class="row row-cols-md-2 row-cols-1 g-4">
+                <div className="row row-cols-md-2 row-cols-1 g-4">
                   {connectChannelsLinks.map((item) => (
-                    <div key={item.key} class="col">
+                    <div key={item.key} className="col">
                       {item.internal ? (
                         <VmComponent
                           src="near/widget/DIG.Button"
