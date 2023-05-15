@@ -7,7 +7,7 @@ type AuthState = {
   availableStorage: Big | null;
   logOut: () => Promise<void>;
   refreshAllowance: () => Promise<void>;
-  requestSignIn: () => void;
+  requestSignIn: (redirect?: string | null) => void;
   requestSignInWithWallet: (event: any) => void;
   signedIn: boolean;
 };

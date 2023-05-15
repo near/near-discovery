@@ -25,7 +25,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
       const accountId = searchParams.get('accountId');
       const publicKey = searchParams.get('publicKey');
       const isRecovery = searchParams.get('isRecovery') === 'true';
-
+      const redirect = searchParams.get("redirect");
       let email = window.localStorage.getItem('emailForSignIn');
 
       while (!email) {
@@ -104,8 +104,11 @@ const AuthCallbackPage: NextPageWithLayout = () => {
                 );
 
                 setStatusMessage('Redirecting to app...');
-
-                window.location.href = '/';
+                if (redirect) {
+                  window.location.href = redirect;
+                } else {
+                  window.location.href = "/";
+                }
               },
             );
           }

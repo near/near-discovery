@@ -101,8 +101,8 @@ export default function VmInitializer() {
     [walletModal],
   );
 
-  const requestSignIn = useCallback(() => {
-    router.push('/signin');
+  const requestSignIn = useCallback((redirect?: string | null) => {
+    router.push(`signin${redirect ? `?redirect=${redirect}` : ''}`);
   }, [router]);
 
   const logOut = useCallback(async () => {
