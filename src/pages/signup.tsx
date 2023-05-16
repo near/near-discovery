@@ -5,6 +5,7 @@ import { toast } from 'sonner';
 import styled from 'styled-components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useAuthStore } from '@/stores/auth';
 import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -28,6 +29,14 @@ const SignUpPage: NextPageWithLayout = () => {
     clearErrors,
   } = useForm();
   const formValues = watch();
+  const signedIn = useAuthStore((store) => store.signedIn);
+
+  // redirect to home upon signing in
+  useEffect(() => {
+    if (signedIn) {
+      router.push('/');
+    }
+  }, [router, signedIn]);
 
   const checkIsAccountAvailable = useCallback(async (desiredUsername: string) => {
     // set to null to show loading
