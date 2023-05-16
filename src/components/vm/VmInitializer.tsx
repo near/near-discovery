@@ -7,6 +7,7 @@ import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
 import { setupSender } from '@near-wallet-selector/sender';
+import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
 import { setupKeypom } from 'keypom-js';
 import {
@@ -62,6 +63,7 @@ export default function VmInitializer() {
               gas: '300000000000000',
               bundle: false,
             }),
+            setupWelldoneWallet(),
             setupFastAuth({
               networkId,
               signInContractId,
