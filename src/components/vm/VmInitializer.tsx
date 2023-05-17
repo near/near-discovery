@@ -6,6 +6,7 @@ import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
+import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import Big from 'big.js';
 import { setupKeypom } from 'keypom-js';
@@ -62,6 +63,7 @@ export default function VmInitializer() {
               gas: '300000000000000',
               bundle: false,
             }),
+              setupNightly(),
             setupFastAuth({
               networkId,
               signInContractId,
