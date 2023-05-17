@@ -8,7 +8,6 @@ import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
-import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 import { Toaster } from 'sonner';
@@ -33,9 +32,6 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  const router = useRouter();
-  console.log(router);
-
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
   const getLayout = Component.getLayout ?? ((page) => page);
