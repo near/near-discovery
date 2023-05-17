@@ -16,6 +16,7 @@ import NearLogotype from '../icons/near-logotype.svg';
 import SearchIcon from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
 import { AccordionMenu } from './AccordionMenu';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 type Props = {
   onCloseMenu: () => void;
@@ -179,10 +180,8 @@ export function MenuLeft(props: Props) {
   function handleSignIn(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    const redirect = router.asPath !== '/'
-      ? router.asPath
-      : null;
-    requestSignIn(redirect);
+    const queryParam = getRedirectQueryParams(router);
+    requestSignIn(queryParam);
   }
 
   function search() {
@@ -218,11 +217,7 @@ export function MenuLeft(props: Props) {
               className="create-account"
               onClick={(event) => {
                 clearAnalytics(event);
-                router.push(
-                  `/signup${router.asPath !== '/'
-                    ? `?redirect=${router.asPath}`
-                    : ''}
-                `);
+                router.push(`/signup${getRedirectQueryParams(router)}`);
               }}
             >
               Create Account
