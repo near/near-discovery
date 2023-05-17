@@ -1,9 +1,18 @@
+import { useEffect } from 'react';
+
 import { MetaTags } from '@/components/MetaTags';
 import { NearOrgEcosystemOverviewPage } from '@/components/near-org/NearOrg.Ecosystem.OverviewPage';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EcosystemOverviewPage: NextPageWithLayout = () => {
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+
+  useEffect(() => {
+    setComponentSrc(null);
+  }, []);
+
   return (
     <>
       <MetaTags

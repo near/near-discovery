@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -16,6 +17,11 @@ const SignInPage: NextPageWithLayout = () => {
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+
+  useEffect(() => {
+    setComponentSrc(null);
+  }, []);
 
   // redirect to home upon signing in
   useEffect(() => {
@@ -27,10 +33,12 @@ const SignInPage: NextPageWithLayout = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
     const searchParams = new URLSearchParams(location.search);
-    const redirect = searchParams.get("redirect");
+    const redirect = searchParams.get('redirect');
     try {
       const { publicKey, email } = await handleCreateAccount(null, data.email, true, redirect);
-      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true${redirect ? `&redirect=${redirect}` : ""}`);
+      router.push(
+        `/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true${redirect ? `&redirect=${redirect}` : ''}`,
+      );
     } catch (error: any) {
       console.log(error);
 
