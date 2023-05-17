@@ -180,25 +180,25 @@ export const UserDropdownMenu = () => {
           <i className="ph ph-caret-down"></i>
         </DropdownMenu.Trigger>
 
-        <DropdownMenu.Portal className="hello-there">
-          <DropdownMenu.Content className="DropdownMenuContent" sideOffset={5}>
-            <DropdownMenu.Item
-              className="DropdownMenuItem"
-              onClick={() => router.push(`/${components.profilePage}?accountId=${accountId}`)}
-            >
-              <i className="ph-duotone ph-user"></i>
-              Profile
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="DropdownMenuItem" onClick={() => withdrawStorage()}>
-              <i className="ph-duotone ph-bank"></i>
-              {availableStorage && `Withdraw ${availableStorage.div(1000).toFixed(2)}kb}`}
-            </DropdownMenu.Item>
-            <DropdownMenu.Item className="DropdownMenuItem" onClick={() => logOut()}>
-              <i className="ph-duotone ph-sign-out"></i>
-              Sign out
-            </DropdownMenu.Item>
-          </DropdownMenu.Content>
-        </DropdownMenu.Portal>
+        <DropdownMenu.Content className="DropdownMenuContent" sideOffset={-5}>
+          <DropdownMenu.Item
+            className="DropdownMenuItem"
+            onClick={() => router.push(`/${components.profilePage}?accountId=${accountId}`)}
+          >
+            <i className="ph-duotone ph-user"></i>
+            Profile
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="DropdownMenuItem" onClick={() => withdrawStorage()}>
+            <i className="ph-duotone ph-bank"></i>
+            {availableStorage && `Withdraw ${availableStorage.div(1000).toFixed(2)}kb}`}
+          </DropdownMenu.Item>
+          <DropdownMenu.Item className="DropdownMenuItem" onClick={() => logOut()}>
+            <i className="ph-duotone ph-sign-out"></i>
+            Sign out
+          </DropdownMenu.Item>
+
+          <DropdownMenu.Arrow style={{ fill: '#161615' }} />
+        </DropdownMenu.Content>
       </DropdownMenu.Root>
     </StyledDropdown>
   );
