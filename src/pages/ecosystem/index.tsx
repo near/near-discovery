@@ -11,7 +11,7 @@ const EcosystemOverviewPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     setComponentSrc(null);
-  }, []);
+  }, [setComponentSrc]);
 
   return (
     <>

@@ -11,7 +11,7 @@ const UsePage: NextPageWithLayout = () => {
 
   useEffect(() => {
     setComponentSrc(null);
-  }, []);
+  }, [setComponentSrc]);
 
   return (
     <>

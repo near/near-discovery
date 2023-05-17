@@ -113,7 +113,7 @@ const IframePage: NextPageWithLayout = (props: InferGetStaticPropsType<typeof ge
 
   useEffect(() => {
     setComponentSrc(null);
-  }, []);
+  }, [setComponentSrc]);
 
   return <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />;
 };

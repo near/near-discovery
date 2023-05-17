@@ -21,7 +21,7 @@ const SignInPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     setComponentSrc(null);
-  }, []);
+  }, [setComponentSrc]);
 
   // redirect to home upon signing in
   useEffect(() => {

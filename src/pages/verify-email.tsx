@@ -17,7 +17,7 @@ const VerifyEmailPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     setComponentSrc(null);
-  }, []);
+  }, [setComponentSrc]);
 
   const handleResendEmail = async () => {
     const accountRequiredButNotThere = !query?.accountId && query.isRecovery !== 'true';

@@ -14,7 +14,7 @@ const FlagsPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     setComponentSrc(null);
-  }, []);
+  }, [setComponentSrc]);
 
   const handleSave = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {
