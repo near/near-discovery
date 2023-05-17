@@ -1,13 +1,20 @@
 import type { MouseEvent } from 'react';
+import { useEffect } from 'react';
 import React, { useCallback, useState } from 'react';
 
 import { useFlags } from '@/hooks/useFlags';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const FlagsPage: NextPageWithLayout = () => {
   const [flags, setFlags] = useFlags();
   const [bosLoaderUrl, setBosLoaderUrl] = useState(flags?.bosLoaderUrl || '');
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+
+  useEffect(() => {
+    setComponentSrc(null);
+  }, []);
 
   const handleSave = useCallback(
     (e: MouseEvent<HTMLButtonElement>) => {

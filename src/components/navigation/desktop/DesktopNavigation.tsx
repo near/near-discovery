@@ -100,6 +100,8 @@ const StyledNavigation = styled.div`
     display: flex;
     align-items: center;
     margin-left: auto;
+    position: relative;
+    z-index: 10;
 
     .sign-in,
     .create-account {
@@ -194,9 +196,7 @@ export const DesktopNavigation = () => {
 
   function handleSignIn(event: any) {
     clearAnalytics(event);
-    const redirect = router.asPath !== '/'
-      ? router.asPath
-      : null;
+    const redirect = router.asPath !== '/' ? router.asPath : null;
     requestSignIn(redirect);
   }
 
@@ -254,11 +254,7 @@ export const DesktopNavigation = () => {
                 className="create-account"
                 onClick={(event) => {
                   clearAnalytics(event);
-                  router.push(
-                    `/signup${router.asPath !== '/'
-                      ? `?redirect=${router.asPath}`
-                      : ''}`
-                  );
+                  router.push(`/signup${router.asPath !== '/' ? `?redirect=${router.asPath}` : ''}`);
                 }}
               >
                 Create Account
