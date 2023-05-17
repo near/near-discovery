@@ -11,7 +11,7 @@ const EcosystemGetFundingPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     setComponentSrc(null);
-  }, []);
+  }, [setComponentSrc]);
 
   return (
     <>

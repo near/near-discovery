@@ -102,8 +102,8 @@ export default function VmInitializer() {
   );
 
   const requestSignIn = useCallback(
-    (redirect?: string | null) => {
-      router.push(`/signin${redirect ? `?redirect=${redirect}` : ''}`);
+    (queryParam?: string) => {
+      router.push(`/signin${queryParam}`);
     },
     [router],
   );

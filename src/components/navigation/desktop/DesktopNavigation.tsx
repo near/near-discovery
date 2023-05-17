@@ -8,6 +8,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 import { flushEvents, recordClick } from '@/utils/analytics';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -196,8 +197,8 @@ export const DesktopNavigation = () => {
 
   function handleSignIn(event: any) {
     clearAnalytics(event);
-    const redirect = router.asPath !== '/' ? router.asPath : null;
-    requestSignIn(redirect);
+    const queryParam = getRedirectQueryParams(router);
+    requestSignIn(queryParam);
   }
 
   return (
@@ -254,7 +255,7 @@ export const DesktopNavigation = () => {
                 className="create-account"
                 onClick={(event) => {
                   clearAnalytics(event);
-                  router.push(`/signup${router.asPath !== '/' ? `?redirect=${router.asPath}` : ''}`);
+                  router.push(`/signup${getRedirectQueryParams(router)}`);
                 }}
               >
                 Create Account

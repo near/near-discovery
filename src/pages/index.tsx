@@ -18,7 +18,7 @@ const HomePage: NextPageWithLayout = () => {
     if (!signedIn) {
       setComponentSrc(null);
     }
-  }, []);
+  }, [signedIn, setComponentSrc]);
 
   if (signedIn) {
     return <ComponentWrapperPage src={components.default} />;
