@@ -17,6 +17,7 @@ import { NotificationButton } from '../NotificationButton';
 import { MainNavigationMenu } from './MainNavigationMenu';
 import { TypeAheadDropdown } from './TypeAheadDropdown';
 import { UserDropdownMenu } from './UserDropdownMenu';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -194,10 +195,8 @@ export const DesktopNavigation = () => {
 
   function handleSignIn(event: any) {
     clearAnalytics(event);
-    const redirect = router.asPath !== '/'
-      ? router.asPath
-      : null;
-    requestSignIn(redirect);
+    const queryParam = getRedirectQueryParams(router);
+    requestSignIn(queryParam);
   }
 
   return (
@@ -254,11 +253,7 @@ export const DesktopNavigation = () => {
                 className="create-account"
                 onClick={(event) => {
                   clearAnalytics(event);
-                  router.push(
-                    `/signup${router.asPath !== '/'
-                      ? `?redirect=${router.asPath}`
-                      : ''}`
-                  );
+                  router.push(`/signup${getRedirectQueryParams(router)}`);
                 }}
               >
                 Create Account
