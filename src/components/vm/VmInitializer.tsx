@@ -1,3 +1,4 @@
+import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
@@ -8,7 +9,6 @@ import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
 import { setupSender } from '@near-wallet-selector/sender';
 import Big from 'big.js';
-import { setupKeypom } from 'keypom-js';
 import {
   CommitButton,
   EthersProviderContext,
@@ -70,11 +70,17 @@ export default function VmInitializer() {
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }) as any, // TODO: Refactor setupFastAuth() to TS
-            setupKeypom({
-              trialBaseUrl:
-                networkId == 'testnet' ? 'https://test.near.org/#trial-url/' : 'https://near.org/#trial-url/',
+            setupKeypom({ 
+              trialAccountSpecs: {
+                baseUrl: networkId == 'testnet' ? 'https://test.near.org/#trial-url/' : 'https://near.org/#trial-url/',
+                delimiter: "/"
+              },
+              instantSignInSpecs: {
+                baseUrl: networkId == 'testnet' ? 'https://test.near.org/#instant-url/' : 'https://near.org/#instant-url/',
+                delimiter: "/",
+                moduleDelimiter: "/"
+              },
               networkId,
-              trialSplitDelim: '/',
               signInContractId,
               modalOptions: KEYPOM_OPTIONS(networkId),
             }) as any, // TODO: Refactor setupKeypom() to TS
