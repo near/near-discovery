@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { flushEvents, recordClick } from '@/utils/analytics';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import CloseIcon from '../icons/close.svg';
@@ -16,7 +17,6 @@ import NearLogotype from '../icons/near-logotype.svg';
 import SearchIcon from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
 import { AccordionMenu } from './AccordionMenu';
-import { getRedirectQueryParams } from '@/utils/navigation';
 
 type Props = {
   onCloseMenu: () => void;
