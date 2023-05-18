@@ -52,10 +52,9 @@ const finiteRoutes: Record<string, string> = {
 
 import IframeResizer from 'iframe-resizer-react';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
-import { useEffect } from 'react';
 
+import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -109,11 +108,7 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 };
 
 const IframePage: NextPageWithLayout = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
-
-  useEffect(() => {
-    setComponentSrc(null);
-  }, [setComponentSrc]);
+  useClearCurrentComponent();
 
   return <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />;
 };

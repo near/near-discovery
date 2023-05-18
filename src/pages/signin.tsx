@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
-import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -17,11 +17,8 @@ const SignInPage: NextPageWithLayout = () => {
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
-  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
 
-  useEffect(() => {
-    setComponentSrc(null);
-  }, [setComponentSrc]);
+  useClearCurrentComponent();
 
   // redirect to home upon signing in
   useEffect(() => {
