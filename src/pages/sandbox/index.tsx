@@ -16,6 +16,8 @@ const SandboxPage: NextPageWithLayout = () => {
       const componentName = router.query.componentSrc.pop();
       const componentSrc = `${accountId}/widget/${componentName}`;
       setComponentSrc(componentSrc);
+    } else {
+      setComponentSrc(null);
     }
   }, [setComponentSrc, router]);
 

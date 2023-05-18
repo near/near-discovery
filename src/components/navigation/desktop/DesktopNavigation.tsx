@@ -8,6 +8,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 import { flushEvents, recordClick } from '@/utils/analytics';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -17,7 +18,6 @@ import { NotificationButton } from '../NotificationButton';
 import { MainNavigationMenu } from './MainNavigationMenu';
 import { TypeAheadDropdown } from './TypeAheadDropdown';
 import { UserDropdownMenu } from './UserDropdownMenu';
-import { getRedirectQueryParams } from '@/utils/navigation';
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -101,6 +101,8 @@ const StyledNavigation = styled.div`
     display: flex;
     align-items: center;
     margin-left: auto;
+    position: relative;
+    z-index: 10;
 
     .sign-in,
     .create-account {

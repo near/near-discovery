@@ -1,9 +1,11 @@
 import { sendSignInLinkToEmail } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { firebaseAuth } from '../utils/firebase';
@@ -11,6 +13,11 @@ import { firebaseAuth } from '../utils/firebase';
 // TODO refactor: thoroughly test since param handling changed
 const VerifyEmailPage: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+
+  useEffect(() => {
+    setComponentSrc(null);
+  }, [setComponentSrc]);
 
   const handleResendEmail = async () => {
     const accountRequiredButNotThere = !query?.accountId && query.isRecovery !== 'true';
@@ -25,7 +32,9 @@ const VerifyEmailPage: NextPageWithLayout = () => {
 
     try {
       await sendSignInLinkToEmail(firebaseAuth, query.email, {
-        url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}${query?.redirect ? `&redirect=${query.redirect}` : ""}`,
+        url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}${
+          query?.redirect ? `&redirect=${query.redirect}` : ''
+        }`,
         handleCodeInApp: true,
       });
       toast.success('Email resent successfully!');
@@ -40,7 +49,7 @@ const VerifyEmailPage: NextPageWithLayout = () => {
     }
   };
 
-  const redirect = query?.redirect ? `?redirect=${query.redirect}` : "";
+  const redirect = query?.redirect ? `?redirect=${query.redirect}` : '';
   return (
     <StyledContainer>
       <FormContainer onSubmit={handleResendEmail}>
