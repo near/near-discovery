@@ -16,7 +16,7 @@ import { openToast } from '@/components/lib/Toast';
 <Button
   onClick={() =>
     openToast({
-      type: 'error',
+      type: 'ERROR',
       title: 'Toast Title',
       description: 'This is a great toast description.',
     })
@@ -32,19 +32,15 @@ You can pass other options too:
 <Button
   onClick={() =>
     openToast({
-      type: 'success', // success | info | error
+      type: 'SUCCESS', // SUCCESS | INFO | ERROR
       title: 'Toast Title',
       description: 'This is a great toast description.',
-      icon: 'ph ph-pizza', // https://phosphoricons.com/
+      icon: 'ph-bold ph-pizza', // https://phosphoricons.com/
       duration: 20000, // milliseconds (pass Infinity to disable auto close)
-      action: () => {
-        alert(1);
-      },
-      actionText: 'Do Action',
     })
   }
 >
-  With an Action + Icon
+  Open a Toast
 </Button>
 ```
 
@@ -79,13 +75,6 @@ import * as Toast from '@/components/lib/Toast';
   <Toast.Root open={isOpen} onOpenChange={setIsOpen}>
     <Toast.Title>My Title</Toast.Title>
     <Toast.Description>My Description</Toast.Description>
-
-    <Toast.Action altText="Do Action" asChild>
-      <Button onClick={doAction}>
-        Do Action
-      </Button>
-    </Toast.Action>
-
     <Toast.CloseButton />
   </Toast.Root>
 
