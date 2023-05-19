@@ -1,9 +1,9 @@
 import { sendSignInLinkToEmail } from 'firebase/auth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -37,15 +37,24 @@ const VerifyEmailPage: NextPageWithLayout = () => {
         }`,
         handleCodeInApp: true,
       });
-      toast.success('Email resent successfully!');
+      openToast({
+        type: 'SUCCESS',
+        title: 'Email resent successfully!',
+      });
     } catch (error: any) {
       console.log(error);
 
       if (typeof error?.message === 'string') {
-        toast.error(error.message);
+        openToast({
+          type: 'ERROR',
+          title: error.message,
+        });
         return;
       }
-      toast.error('Something went wrong');
+      openToast({
+        type: 'ERROR',
+        title: 'Something went wrong',
+      });
     }
   };
 
