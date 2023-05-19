@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
@@ -92,7 +92,10 @@ const SignUpPage: NextPageWithLayout = () => {
         )}&email=${encodeURIComponent(email)}${redirect ? `&redirect=${redirect}` : ''}`,
       );
     } catch (error: any) {
-      toast.error(error.message);
+      openToast({
+        type: 'ERROR',
+        title: error.message,
+      });
     }
   });
 
