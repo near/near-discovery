@@ -10,8 +10,8 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useEffect } from 'react';
-import { Toaster } from 'sonner';
 
+import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { init as initializeSegment } from '@/utils/analytics';
@@ -94,7 +94,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       {getLayout(<Component {...pageProps} />)}
 
-      <Toaster position="bottom-center" richColors />
+      <Toaster />
     </>
   );
 }
