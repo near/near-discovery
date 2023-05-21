@@ -136,12 +136,12 @@ export function DesktopNavigation(props) {
         <NavigationButton route="/jgodwill.near/widget/genadropMinter">
             Create
           </NavigationButton>
-          <NavigationButton route="/minorityprogrammers.near/widget/GenaDropMultiListing">
+          <NavigationButton route="/jgodwill.near/widget/NftListingInput">
             List
           </NavigationButton>
 
 
-          <NavigationButton route="/minorityprogrammers.near/widget/genadropExplore">
+          <NavigationButton route="/jgodwill.near/widget/genadropExplore">
             Explore
           </NavigationButton>
           {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>

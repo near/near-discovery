@@ -219,13 +219,13 @@ export function MenuLeft(props) {
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/minorityprogrammers.near/widget/GenaDropMultiListing">
+            <NavigationButton route="/jgodwill.near/widget/NftListingInput">
               <Components />
               List
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/minorityprogrammers.near/widget/genadropExplore">
+            <NavigationButton route="/jgodwill.near/widget/genadropExplore">
               <Notebook />
               Explore
             </NavigationButton>
