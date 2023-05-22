@@ -1,9 +1,12 @@
 import { MetaTags } from '@/components/MetaTags';
 import { NearOrgUsePage } from '@/components/near-org/NearOrg.UsePage';
+import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const UsePage: NextPageWithLayout = () => {
+  useClearCurrentComponent();
+
   return (
     <>
       <MetaTags

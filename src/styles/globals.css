@@ -33,3 +33,9 @@ a:hover {
 .btn {
   text-decoration: none;
 }
+
+#near-wallet-selector-modal .open{
+  z-index: 1001;
+}
+
+#w3m-modal { z-index: 1002 }
