@@ -86,6 +86,10 @@ const iframeRoutes = [
     url: "https://pages.near.org/community-calendly",
   },
   {
+    route: "/collision",
+    url: "https://pages.near.org/collision",
+  },
+  {
     route: "/defi",
     url: "https://pages.near.org/defi",
   },
