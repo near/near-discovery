@@ -23,6 +23,7 @@ const finiteRoutes: Record<string, string> = {
   bridge: 'https://pages.near.org/bridge',
   'case-studies': 'https://pages.near.org/case-studies',
   'community-calendly': 'https://pages.near.org/community-calendly',
+  collision: 'https://pages.near.org/collision',
   defi: 'https://pages.near.org/defi',
   'educate-old': 'https://pages.near.org/educate-old',
   education: 'https://pages.near.org/education',
