@@ -68,7 +68,7 @@ function App(props) {
     if (!near) {
       return;
     }
-    near.selector.then((selector) => {
+    near.selector?.then((selector) => {
       setWalletModal(
         setupModal(selector, { contractId: near.config.contractName })
       );
