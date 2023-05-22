@@ -1,10 +1,12 @@
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useAuthStore } from '@/stores/auth';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -17,6 +19,7 @@ const ErrorText = styled.p`
 
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const [isAccountAvailable, setIsAccountAvailable] = useState<boolean | null>(null);
   const [isAccountValid, setIsAccountValid] = useState<boolean | null>(null);
   const {
@@ -28,6 +31,18 @@ const SignUpPage: NextPageWithLayout = () => {
     clearErrors,
   } = useForm();
   const formValues = watch();
+  const signedIn = useAuthStore((store) => store.signedIn);
+
+  // redirect to home upon signing in
+  useEffect(() => {
+    if (signedIn) {
+      router.push('/');
+    }
+  }, [router, signedIn]);
+
+  useEffect(() => {
+    setComponentSrc(null);
+  }, [setComponentSrc]);
 
   const checkIsAccountAvailable = useCallback(async (desiredUsername: string) => {
     // set to null to show loading
@@ -74,10 +89,13 @@ const SignUpPage: NextPageWithLayout = () => {
       router.push(
         `/verify-email?publicKey=${encodeURIComponent(publicKey)}&accountId=${encodeURIComponent(
           accountId,
-        )}&email=${encodeURIComponent(email)}${redirect ? `&redirect=${redirect}` : ""}`,
+        )}&email=${encodeURIComponent(email)}${redirect ? `&redirect=${redirect}` : ''}`,
       );
     } catch (error: any) {
-      toast.error(error.message);
+      openToast({
+        type: 'ERROR',
+        title: error.message,
+      });
     }
   });
 
