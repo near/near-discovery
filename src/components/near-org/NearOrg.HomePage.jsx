@@ -107,7 +107,7 @@ export function NearOrgHomePage() {
           <VmComponent
             src="near/widget/DIG.Button"
             props={{
-              href: '#/onboarding',
+              href: '#/onboarding/start',
               label: 'Try It Now',
               variant: 'affirmative',
               size: 'large',
@@ -232,7 +232,7 @@ export function NearOrgHomePage() {
                 <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
-                    href: '#/onboarding',
+                    href: '#/onboarding/start',
                     label: 'Try it now',
                     iconRight: 'ph-bold ph-arrow-right',
                     variant: 'secondary',
