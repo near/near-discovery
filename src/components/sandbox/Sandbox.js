@@ -454,6 +454,14 @@ export const Sandbox = ({ onboarding }) => {
   };
 
   useEffect(() => {
+    const pathArr = router.asPath.split('/');
+    if (pathArr[1] === 'onboarding' && pathArr[2] === 'start') {
+      setCurrentStep(0);
+      router.replace('/onboarding');
+    }
+  }, [router]);
+
+  useEffect(() => {
     if (!defaultWidget || onboarding) {
       return;
     }
