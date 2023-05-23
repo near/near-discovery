@@ -3,9 +3,13 @@ import { Button } from "./Button";
 import styled from "styled-components";
 
 const StyledButton = styled(Button)`
-  background-color: var(--slate-dark-6);
-  border-color: var(--slate-dark-8);
+  background-color: var(--blue-light-9);
+  border-color: var(--blue-light-9);
   color: white;
+  &:hover{
+    background-color: #fff;
+    color: var(--blue-light-9);
+  }
 `;
 
 export function GrayBorderButton(props) {
