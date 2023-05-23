@@ -38,7 +38,7 @@ export default function ViewPage(props) {
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 
   return (
-    <div className="container-xl">
+    <div>
       <div className="row">
         <div
           className="d-inline-block position-relative overflow-hidden"
