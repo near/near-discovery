@@ -10,9 +10,13 @@ import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
 import { isValidEmail } from '../utils/form-validation';
+import EmailProvidersList from '@/components/auth/EmailProvidersList';
+import Link from 'next/link';
 
 const SignInPage: NextPageWithLayout = () => {
-  const { register, handleSubmit, setValue } = useForm();
+  const { register, handleSubmit, setValue, watch } = useForm();
+  const formValues = watch();
+
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
@@ -44,8 +48,8 @@ const SignInPage: NextPageWithLayout = () => {
     <StyledContainer>
       <FormContainer onSubmit={onSubmit}>
         <header>
-          <h1>{'Sign In'}</h1>
-          <p className="desc">Use this account to sign in everywhere on NEAR, no password required.</p>
+          <h2>{'Sign In'}</h2>
+          <p className="desc">or <Link href="/signup">create an account</Link></p>
         </header>
 
         <InputContainer>
@@ -63,13 +67,17 @@ const SignInPage: NextPageWithLayout = () => {
             type="email"
             required
           />
+          <EmailProvidersList
+            handleSelect={(provider) => setValue('email', `${formValues?.email?.split('@')[0]}@${provider}.com`)}
+            value={formValues?.email}
+          />
         </InputContainer>
-        <StyledButton onClick={onSubmit} type="button">
-          {/* <IconFingerPrint /> */}
-          Continue
+
+        <StyledButton disabled={!formValues?.email} onClick={onSubmit} style={{ marginTop: 40 }} type="button" variant='primary'>
+          Continue with email
         </StyledButton>
-        <StyledButton onClick={requestSignInWithWallet} type="button">
-          {/* <IconFingerPrint /> */}
+        <StyledDivider>or</StyledDivider>
+        <StyledButton onClick={requestSignInWithWallet} type="button" variant="secondary">
           Continue with wallet
         </StyledButton>
       </FormContainer>
@@ -86,7 +94,7 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f2f1ea;
+  background-color: #F9F9F8;
   padding: 0 16px;
 `;
 
@@ -95,11 +103,19 @@ const FormContainer = styled.form`
   width: 100%;
   margin: 16px auto;
   background-color: #ffffff;
-  padding: 16px;
+  padding: 24px;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 4px 8px rgba(0, 0, 0, 0.06);
+
+
+  header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const InputContainer = styled.div`
@@ -133,23 +149,49 @@ const InputContainer = styled.div`
 `;
 
 const StyledButton = styled.button`
-  // width: 100%;
   padding: 8px;
   border: none;
   border-radius: 50px;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 4px;
-  min-height: 40px;
+  min-height: 48px;
   cursor: pointer;
   background-color: #6be89e;
-  color: #000000;
   font-weight: 500;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
+  width: 100%;
+  background-color: ${({ variant }: { variant: string }) => variant === "primary" ? '#6be89e' : '#161615'};
+  color: ${({ variant }: { variant: string }) => variant === "primary" ? '#000000' : '#ffffff'};
 
   &:focus {
     outline: none;
   }
 `;
+
+const StyledDivider = styled.div`
+  width: 100%;
+  height: 1px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 20px 0;
+
+  &::before {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+    display: block;
+  }
+
+  &::after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: #e5e5e5;
+    display: block;
+  }
+`

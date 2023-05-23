@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import EmailProvidersList from '@/components/auth/EmailProvidersList';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -12,7 +13,6 @@ import type { NextPageWithLayout } from '@/utils/types';
 import { handleCreateAccount } from '../utils/auth';
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
 
-const EMAIL_PRODVIDERS = ['gmail', 'yahoo', 'outlook']
 
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -123,13 +123,12 @@ const SignUpPage: NextPageWithLayout = () => {
     <StyledContainer>
       <FormContainer onSubmit={onSubmit}>
         <header>
-          <h1>Create account</h1>
+          <h2>Create account</h2>
           <p className="desc">Have an account? <Link href="/signin">Sign in</Link></p>
         </header>
 
         <InputContainer>
           <label htmlFor="email">Email</label>
-
           <input
             {...register('email', {
               required: 'Please enter a valid email address',
@@ -150,15 +149,10 @@ const SignUpPage: NextPageWithLayout = () => {
             type="email"
             required
           />
-          <EmailProvidersList>
-            {EMAIL_PRODVIDERS.map((provider) => <div
-              className='item'
-              key={provider}
-              onClick={() => setValue('email', `${formValues?.email?.split('@')[0]}@${provider}.com`)}
-            >
-              {`@${provider}`}
-            </div>)}
-          </EmailProvidersList>
+          <EmailProvidersList
+            handleSelect={(provider) => setValue('email', `${formValues?.email?.split('@')[0]}@${provider}.com`)}
+            value={formValues?.email}
+          />
           {/* shouldn't need to do a type check here but message is not resolving as a string for some reason */}
           {typeof errors.email?.message === 'string' && <ErrorText role="alert">{errors.email?.message}</ErrorText>}
 
@@ -166,23 +160,27 @@ const SignUpPage: NextPageWithLayout = () => {
 
         <InputContainer>
           <label htmlFor="username">Account ID</label>
-          <input
-            autoComplete="webauthn username"
-            {...register('username', {
-              required: 'Please enter a valid account ID',
-              pattern: {
-                value: accountAddressPatternNoSubaccount,
-                message: 'Please enter a valid account ID',
-              },
-              validate: () => {
-                if (!isAccountAvailable) {
-                  return 'Please enter a valid account ID';
-                }
-              },
-            })}
-            placeholder="user_name.near"
-            data-accountIdSuffix={network.fastAuth.accountIdSuffix}
-          />
+          <AccountIdInputContainer data-account-id-suffix={network.fastAuth.accountIdSuffix}>
+            <AccountIdInput
+              autoComplete="webauthn username"
+              {...register('username', {
+                required: 'Please enter a valid account ID',
+                pattern: {
+                  value: accountAddressPatternNoSubaccount,
+                  message: 'Please enter a valid account ID',
+                },
+                validate: () => {
+                  if (!isAccountAvailable) {
+                    return 'Please enter a valid account ID';
+                  }
+                },
+              })}
+              placeholder="user_name"
+            />
+            <div className="suffix">
+              {`.${network.fastAuth.accountIdSuffix}`}
+            </div>
+          </AccountIdInputContainer>
           <p className={`subText`}>
             <span className={accountStatusState || ''}>{accountStatusMessage}</span>
           </p>
@@ -209,7 +207,7 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f2f1ea;
+  background-color: #F9F9F8;
   padding: 0 16px;
 `;
 
@@ -218,11 +216,13 @@ const FormContainer = styled.form`
   width: 100%;
   margin: 16px auto;
   background-color: #ffffff;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 24px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 4px 8px rgba(0, 0, 0, 0.06);
+
 
   header{
     display: flex;
@@ -270,17 +270,35 @@ const InputContainer = styled.div`
   }
 `;
 
-const EmailProvidersList = styled.div`
-  display: flex;
-  gap: 8px;
-  margin-top: 8px;
 
-  .item {
-    border: 1px solid #e5e5e5;
-    border-radius: 50px;
-    padding: 5px 8px;
-    cursor: pointer;
+const AccountIdInputContainer = styled.div`
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-top: 4px;
+
+  input {
+    border-radius: 10px 0 0 10px;
+    border-right: 0 !important;
+    margin-top: 0 !important;
   }
+
+  .suffix {
+    font-size: 16px;
+    height: 100%;
+    border: 1px solid #e5e5e5;
+    border-radius: 0 10px 10px 0;
+    padding: 12px;
+    background-color: #F9F9F8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+`
+
+const AccountIdInput = styled.input`
+  position: relative;
+  width: 100%;
 `
 
 
@@ -294,7 +312,7 @@ const StyledButton = styled.button`
   border-radius: 50px;
   font-size: 14px;
   margin-top: 4px;
-  min-height: 40px;
+  min-height: 48px;
   cursor: pointer;
   background-color: #6be89e;
   color: #000000;

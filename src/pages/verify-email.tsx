@@ -7,6 +7,8 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { firebaseAuth } from '../utils/firebase';
+import IconEmailLogin from '@/assets/svgs/IconEmailLogin';
+import IconEmailSignup from '@/assets/svgs/IconEmailSignup';
 
 // TODO refactor: thoroughly test since param handling changed
 const VerifyEmailPage: NextPageWithLayout = () => {
@@ -44,21 +46,18 @@ const VerifyEmailPage: NextPageWithLayout = () => {
     <StyledContainer>
       <FormContainer onSubmit={handleResendEmail}>
         <header>
-          <a
-            href={query?.isRecovery === 'true' ? '/signin' : '/signup'}
-            style={{ textDecoration: 'underline', color: 'black' }}
-          >
-            <small>Go back</small>
-          </a>
-          <h1 style={{ marginTop: '12px' }}>Verify your email</h1>
-          <p style={{ fontWeight: 600, marginTop: '12px' }}>{query?.email}</p>
+          {query.isRecovery ? <IconEmailLogin /> : <IconEmailSignup />}
+          <h2 style={{ marginTop: '12px' }}>{query.isRecovery ? 'Check Your Email' : 'Verify your email'}</h2>
+          <h5 className='email' style={{ fontWeight: 600, marginTop: '12px' }}>{query?.email}</h5>
         </header>
-
-        <p>Check your inbox to activate your account.</p>
-
+        {!!query.isRecovery && <p>We sent you instructions to finish signing in.</p>}
+        {!query.isRecovery && <p>Check your inbox to activate your account.</p>}
         <StyledButton onClick={handleResendEmail} type="button">
-          Resend Email
+          Resend
         </StyledButton>
+        <div>
+          Scan to Sign In
+        </div>
       </FormContainer>
     </StyledContainer>
   );
@@ -74,7 +73,7 @@ const StyledContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f2f1ea;
+  background-color: #F9F9F8;
   padding: 0 16px;
 `;
 
@@ -83,22 +82,40 @@ const FormContainer = styled.form`
   width: 100%;
   margin: 16px auto;
   background-color: #ffffff;
-  padding: 16px;
-  border-radius: 12px;
+  padding: 24px;
+  border-radius: 8px;
   display: flex;
   flex-direction: column;
   gap: 16px;
+  box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.06), 0px 4px 8px rgba(0, 0, 0, 0.06);
+
+  * {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  header{
+    .email{
+      color: #604CC8;
+    }
+  }
+
+  p{
+    color: #706F6C;
+  }
 `;
+
 const StyledButton = styled.button`
   padding: 8px;
   border: none;
   border-radius: 50px;
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 4px;
-  min-height: 40px;
+  min-height: 48px;
   cursor: pointer;
-  background-color: #6be89e;
-  color: #000000;
+  background-color: #161615;
+  color: #FFFFFF;
   font-weight: 500;
   display: flex;
   align-items: center;
