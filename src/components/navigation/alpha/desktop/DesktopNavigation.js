@@ -18,7 +18,8 @@ const StyledNavigation = styled.div`
   left: 0;
   right: 0;
   width: 100%;
-  background-color: var(--slate-dark-1);
+  background-color: #fff;
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
   z-index: 1000;
   padding: 12px 0;
 
