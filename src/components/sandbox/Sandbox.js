@@ -61,14 +61,13 @@ import {
 import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
 
-export const Sandbox = ({ onboarding }) => {
+export const Sandbox = ({ onboarding = false }) => {
   const near = useVmStore((store) => store.near);
   const cache = useVmStore((store) => store.cache);
   const accountId = useAuthStore((store) => store.accountId);
   const logOut = useAuthStore((store) => store.logOut);
   const requestSignIn = useAuthStore((store) => store.requestSignIn);
-  const componentSrc = useCurrentComponentStore((store) => store.src);
-  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+
   const router = useRouter();
   const widgets = useBosComponents();
   const tos = {
@@ -100,6 +99,8 @@ export const Sandbox = ({ onboarding }) => {
   const isModule = path?.type === 'module';
   const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
   const shouldRender = !!near && !!cache;
+
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
 
   const getFileLocalStorage = useCallback(
     (file) => {
@@ -212,6 +213,16 @@ export const Sandbox = ({ onboarding }) => {
     [accountId, addFile, getFileSocialDB, onboarding],
   );
 
+  useEffect(() => {
+    if (!defaultWidget || onboarding) {
+      return;
+    }
+
+    loadAndOpenFile(defaultWidget, defaultWidget.split('/')[1]);
+    setDefaultWidget(null);
+    router.replace('/sandbox');
+  }, [defaultWidget, loadAndOpenFile, onboarding, router]);
+
   const selectFile = (file) => {
     setPath(fileToPath(file));
     setLastPath(fileToPath(file));
@@ -237,6 +248,8 @@ export const Sandbox = ({ onboarding }) => {
   );
 
   const firstLoad = useCallback(() => {
+    setComponentSrc(null);
+
     cache.asyncLocalStorageGet(StorageDomain, { type: StorageType.Files }).then(({ files, lastPath } = {}) => {
       let path;
       let filesObject;
@@ -257,12 +270,19 @@ export const Sandbox = ({ onboarding }) => {
       getAllFileLocalStorage(filesObject);
       getAllFileSocialDB(filesObject);
 
-      if (componentSrc) {
-        setComponentSrc(null);
-        setDefaultWidget(componentSrc);
+      if (onboarding) {
+        return;
       }
+
+      const { componentSrc } = router.query;
+
+      if (!Array.isArray(router.query.componentSrc)) {
+        return;
+      }
+
+      setDefaultWidget(componentSrc.join('/'));
     });
-  }, [cache, componentSrc, currentStep, getAllFileLocalStorage, getAllFileSocialDB, onboarding, setComponentSrc]);
+  }, [cache, currentStep, getAllFileLocalStorage, getAllFileSocialDB, onboarding, router.query, setComponentSrc]);
 
   const renameFile = (newName) => {
     const pathNew = nameToPath(path.type, newName);
@@ -460,15 +480,6 @@ export const Sandbox = ({ onboarding }) => {
       router.replace('/onboarding');
     }
   }, [router, onboarding]);
-
-  useEffect(() => {
-    if (!defaultWidget || onboarding) {
-      return;
-    }
-
-    loadAndOpenFile(defaultWidget);
-    router.replace('/sandbox');
-  }, [defaultWidget, loadAndOpenFile, onboarding, router]);
 
   useEffect(() => {
     recordPageView();
