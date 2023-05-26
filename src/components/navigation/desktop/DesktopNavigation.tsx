@@ -119,7 +119,6 @@ const StyledNavigation = styled.div`
 
     .sign-in {
       color: #1b1b18;
-      font-weight: 500;
       margin-right: 10px;
       border: 1px solid transparent;
       :hover {

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -200,6 +201,15 @@ const SignUpPage: NextPageWithLayout = () => {
         <StyledButton onClick={onSubmit} type="button">
           Continue
         </StyledButton>
+
+        <hr style={{ borderColor: 'hsl(55, 1.7%, 51.9%)' }} />
+
+        <p>
+          Already have an account?{' '}
+          <Link href="/signin" style={{ color: 'hsla(246, 57%, 61%, 1)', fontWeight: 500 }}>
+            Sign In
+          </Link>
+        </p>
       </FormContainer>
     </StyledContainer>
   );
