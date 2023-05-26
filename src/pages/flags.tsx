@@ -3,7 +3,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { Text } from '@/components/lib/Text/Text';
+import { Text } from '@/components/lib/Text';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useFlags } from '@/hooks/useFlags';
