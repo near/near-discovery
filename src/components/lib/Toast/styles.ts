@@ -61,13 +61,13 @@ export const Root = styled(ToastPrimitive.Root)`
     animation: ${swipeOutAnimation} 100ms ease-out forwards;
   }
 
-  &[data-type='error'] {
+  &[data-type='ERROR'] {
     background: hsla(8, 100%, 33%, 1);
   }
-  &[data-type='success'] {
+  &[data-type='SUCCESS'] {
     background: hsla(155, 66%, 32%, 1);
   }
-  &[data-type='info'] {
+  &[data-type='INFO'] {
     background: hsl(50, 6%, 10%);
   }
 `;
