@@ -1,7 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { openToast } from '@/components/lib/Toast';
-
 /**
  * Use Application flags
  *
@@ -27,10 +25,7 @@ export function useFlags() {
       const updated = { ...f, ...newFlags };
       localStorage.setItem('flags', JSON.stringify(updated));
 
-      openToast({
-        type: 'SUCCESS',
-        title: 'Flags have been saved.',
-      });
+      alert('Flags have been saved.');
 
       // reload for changes to take effect
       location.reload();
