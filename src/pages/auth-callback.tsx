@@ -3,9 +3,9 @@ import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 import * as nearAPI from 'near-api-js';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { network, signInContractId } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -25,7 +25,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
       const accountId = searchParams.get('accountId');
       const publicKey = searchParams.get('publicKey');
       const isRecovery = searchParams.get('isRecovery') === 'true';
-      const redirect = searchParams.get("redirect");
+      const redirect = searchParams.get('redirect');
       let email = window.localStorage.getItem('emailForSignIn');
 
       while (!email) {
@@ -107,7 +107,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
                 if (redirect) {
                   window.location.href = redirect;
                 } else {
-                  window.location.href = "/";
+                  window.location.href = '/';
                 }
               },
             );
@@ -124,7 +124,10 @@ const AuthCallbackPage: NextPageWithLayout = () => {
           };
           const message = errorMessages[error.code] || error.message;
           router.push('/signup');
-          toast.error(message);
+          openToast({
+            type: 'ERROR',
+            title: message,
+          });
         });
     } else {
       router.push('/signup');

@@ -163,10 +163,6 @@ export function NearOrgEcosystemOverviewPage() {
       name: 'Web3 career',
       href: 'anker_web3_career',
     },
-    {
-      name: 'Web3 career',
-      href: 'anker_web3_career',
-    },
   ];
 
   function returnIpfsImage(cfid) {

@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { flushEvents, recordClick } from '@/utils/analytics';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import CloseIcon from '../icons/close.svg';
@@ -179,10 +180,8 @@ export function MenuLeft(props: Props) {
   function handleSignIn(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    const redirect = router.asPath !== '/'
-      ? router.asPath
-      : null;
-    requestSignIn(redirect);
+    const queryParam = getRedirectQueryParams(router);
+    requestSignIn(queryParam);
   }
 
   function search() {
@@ -218,11 +217,7 @@ export function MenuLeft(props: Props) {
               className="create-account"
               onClick={(event) => {
                 clearAnalytics(event);
-                router.push(
-                  `/signup${router.asPath !== '/'
-                    ? `?redirect=${router.asPath}`
-                    : ''}
-                `);
+                router.push(`/signup${getRedirectQueryParams(router)}`);
               }}
             >
               Create Account
