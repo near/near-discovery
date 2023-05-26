@@ -46,7 +46,7 @@ const FlagsPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     form.setValue('bosLoaderUrl', flags?.bosLoaderUrl || '');
-  }, [flags]);
+  }, [form, flags]);
 
   const submitHandler: SubmitHandler<FormData> = (data) => {
     setFlags(data);
