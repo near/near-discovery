@@ -1,5 +1,6 @@
-import { openToast } from '@/components/lib/Toast';
 import { useCallback, useEffect, useState } from 'react';
+
+import { openToast } from '@/components/lib/Toast';
 
 /**
  * Use Application flags
