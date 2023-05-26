@@ -3,6 +3,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { Text } from '@/components/lib/Text';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
@@ -72,16 +73,7 @@ const FlagsPage: NextPageWithLayout = () => {
           />
         </InputGrid>
 
-        <VmComponent
-          src="near/widget/DIG.Button"
-          props={{
-            label: 'Save Flags',
-            variant: 'affirmative',
-            size: 'large',
-            type: 'submit',
-            style: { marginLeft: 'auto' },
-          }}
-        />
+        <Button label="Save Flags" variant="affirmative" size="large" type="submit" style={{ marginLeft: 'auto' }} />
       </Form>
     </Container>
   );
