@@ -10,8 +10,8 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useEffect } from 'react';
-import { Toaster } from 'sonner';
 
+import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { init as initializeSegment } from '@/utils/analytics';
@@ -24,6 +24,7 @@ const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
 const meta = {
   title: 'NEAR',
   description: "Let's build decentralized experiences.",
+  image: `${process.env.NEXT_PUBLIC_HOSTNAME}/bos-meta.png`,
 };
 
 type AppPropsWithLayout = AppProps & {
@@ -42,10 +43,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <title>{meta.title}</title>
-        <meta property="og:title" content={meta.title} />
-        <meta name="description" content={meta.description} />
-        <meta property="og:description" content={meta.description} />
+        <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
+        <meta content={meta.image} name="twitter:image" />
+        <meta content={meta.image} property="og:image" />
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
@@ -90,7 +90,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       {getLayout(<Component {...pageProps} />)}
 
-      <Toaster position="bottom-center" richColors />
+      <Toaster />
     </>
   );
 }
