@@ -104,15 +104,26 @@ export function NearOrgHomePage() {
             a more open web, with the NEAR Blockchain Operating System (BOS).
           </Text>
 
-          <VmComponent
-            src="near/widget/DIG.Button"
-            props={{
-              href: '#/onboarding/start',
-              label: 'Try It Now',
-              variant: 'affirmative',
-              size: 'large',
-            }}
-          />
+          <TryItNow>
+            <VmComponent
+              src="near/widget/DIG.Button"
+              props={{
+                href: '#/onboarding/start',
+                label: 'Try It Now',
+                variant: 'affirmative',
+                size: 'large',
+              }}
+            />
+            <VmComponent
+              src="near/widget/DIG.Button"
+              props={{
+                href: '#/signup',
+                label: 'Create Account',
+                variant: 'affirmative',
+                size: 'large',
+              }}
+            />
+          </TryItNow>
         </Flex>
 
         <Text size="14px" weight="600" style={{ textTransform: 'uppercase', letterSpacing: '0.17em' }}>
@@ -1096,5 +1107,23 @@ const Line = styled.div`
 const LineSpacer = styled.div`
   @media (max-width: 1160px) {
     display: none;
+  }
+`;
+
+const TryItNow = styled.span`
+  & > :nth-child(1) {
+    display: inline-flex;
+  }
+  & > :nth-child(2) {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    & > :nth-child(1) {
+      display: none;
+    }
+    & > :nth-child(2) {
+      display: inline-flex;
+    }
   }
 `;
