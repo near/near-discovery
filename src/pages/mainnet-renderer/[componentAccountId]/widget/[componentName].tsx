@@ -12,8 +12,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [ componentCode, setComponentCode ] = useState('return <div>loading mainnet renderer..</div>')
 
   useEffect(() => {
-    const getComponent = async (componentPath) => {
-      console.log(componentPath, 'componentpath')
+    const getComponent = async (componentPath: string | null) => {
       if(!componentPath) return;
       const keyPair = nearAPI.KeyPair.fromRandom('ed25519');
       const keyStore = new nearAPI.keyStores.InMemoryKeyStore();
@@ -33,7 +32,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
       const near = await nearAPI.connect(nearConfig);
       const account = await near.account('dontcare');
 
-      console.log(`${componentPath}/**`, '<<< keys')
       const component = await account.viewFunction({
         contractId: 'v1.social08.testnet',
         methodName: 'get',
@@ -42,7 +40,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
         },
       });
 
-      console.log(component, '<<<< component')
       return componentPath
         .split('/')
         .reduce((acc, curr) => acc[curr] || acc, component);
