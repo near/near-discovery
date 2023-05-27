@@ -6,7 +6,7 @@ import { useVmStore } from '@/stores/vm';
 import { Spinner } from '../lib/Spinner';
 
 type Props = {
-  src: string;
+  src?: string;
   props?: Record<string, unknown>;
   mainnetWidget?: boolean;
   code?: string;
