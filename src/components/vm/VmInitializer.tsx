@@ -15,6 +15,7 @@ import Big from 'big.js';
 import {
   CommitButton,
   EthersProviderContext,
+  MainnetWidget,
   useAccount,
   useCache,
   useInitNear,
@@ -195,6 +196,7 @@ export default function VmInitializer() {
       ethersContext: ethersProviderContext,
       EthersProvider: EthersProviderContext.Provider,
       Widget,
+      MainnetWidget,
       near,
     });
   }, [cache, ethersProviderContext, setVmStore, near]);

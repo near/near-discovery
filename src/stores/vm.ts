@@ -6,6 +6,7 @@ type VmState = {
   ethersContext: any;
   EthersProvider: any;
   Widget: any;
+  MainnetWidget: any;
   near: any;
 };
 
@@ -19,6 +20,7 @@ export const useVmStore = create<VmStore>((set) => ({
   ethersContext: null,
   EthersProvider: null,
   Widget: null,
+  MainnetWidget: null,
   near: null,
   set: (params) => set(() => ({ ...params })),
 }));
