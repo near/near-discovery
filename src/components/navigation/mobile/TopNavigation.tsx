@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
@@ -175,17 +176,11 @@ export function TopNavigation(props: Props) {
 
       {!signedIn && (
         <>
-          <button className="create-account" onClick={handleCreateAccount}>
-            Create Account
-          </button>
+          <Button label="Create Account" variant="secondary" size="small" onClick={handleCreateAccount} />
         </>
       )}
 
-      <button onClick={() => props.onClickShowMenu()} className="mobile-nav-profile-btn">
-        <div className="menu-icon">
-          <i className="ph-bold ph-list"></i>
-        </div>
-      </button>
+      <Button label="Menu" icon="ph-bold ph-list" variant="primary" size="small" onClick={props.onClickShowMenu} />
     </StyledNavigation>
   );
 }
