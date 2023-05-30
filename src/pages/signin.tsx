@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { openToast } from '@/components/lib/Toast';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -77,14 +78,9 @@ const SignInPage: NextPageWithLayout = () => {
             required
           />
         </InputContainer>
-        <StyledButton onClick={onSubmit} type="button">
-          {/* <IconFingerPrint /> */}
-          Continue
-        </StyledButton>
-        <StyledButton onClick={requestSignInWithWallet} type="button">
-          {/* <IconFingerPrint /> */}
-          Continue with wallet
-        </StyledButton>
+
+        <Button label="Continue" variant="affirmative" onClick={onSubmit} />
+        <Button label="Continue with wallet" variant="primary" onClick={requestSignInWithWallet} />
       </FormContainer>
     </StyledContainer>
   );
@@ -142,27 +138,5 @@ const InputContainer = styled.div`
 
   .subText {
     font-size: 12px;
-  }
-`;
-
-const StyledButton = styled.button`
-  // width: 100%;
-  padding: 8px;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  margin-top: 4px;
-  min-height: 40px;
-  cursor: pointer;
-  background-color: #6be89e;
-  color: #000000;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  &:focus {
-    outline: none;
   }
 `;

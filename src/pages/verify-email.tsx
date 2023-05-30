@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useCurrentComponentStore } from '@/stores/current-component';
@@ -75,9 +76,7 @@ const VerifyEmailPage: NextPageWithLayout = () => {
 
         <p>Check your inbox to activate your account.</p>
 
-        <StyledButton onClick={handleResendEmail} type="button">
-          Resend Email
-        </StyledButton>
+        <Button label="Resend Email" variant="secondary" onClick={handleResendEmail} />
       </FormContainer>
     </StyledContainer>
   );
@@ -107,24 +106,4 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-const StyledButton = styled.button`
-  padding: 8px;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  margin-top: 4px;
-  min-height: 40px;
-  cursor: pointer;
-  background-color: #6be89e;
-  color: #000000;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  &:focus {
-    outline: none;
-  }
 `;
