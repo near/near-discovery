@@ -13,7 +13,6 @@ type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'> & {
   iconRight?: string;
   label: string;
   loading?: boolean;
-  onClick?: () => void;
   size?: 'small' | 'default' | 'large';
   type?: 'button' | 'submit';
   variant?: Variant;
