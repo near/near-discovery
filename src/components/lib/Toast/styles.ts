@@ -62,13 +62,13 @@ export const Root = styled(ToastPrimitive.Root)`
   }
 
   &[data-type='ERROR'] {
-    background: hsla(8, 100%, 33%, 1);
+    background: var(--red11);
   }
   &[data-type='SUCCESS'] {
-    background: hsla(155, 66%, 32%, 1);
+    background: var(--green11);
   }
   &[data-type='INFO'] {
-    background: hsl(50, 6%, 10%);
+    background: var(--sand12);
   }
 `;
 
