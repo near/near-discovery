@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
@@ -198,9 +199,8 @@ const SignUpPage: NextPageWithLayout = () => {
             <ErrorText role="alert">{errors.username?.message}</ErrorText>
           )}
         </InputContainer>
-        <StyledButton onClick={onSubmit} type="button">
-          Continue
-        </StyledButton>
+
+        <Button label="Continue" variant="affirmative" onClick={onSubmit} />
 
         <hr style={{ borderColor: 'hsl(55, 1.7%, 51.9%)' }} />
 
@@ -277,26 +277,5 @@ const InputContainer = styled.div`
     .success {
       color: hsla(155, 66%, 32%, 1);
     }
-  }
-`;
-
-const StyledButton = styled.button`
-  padding: 8px;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  margin-top: 4px;
-  min-height: 40px;
-  cursor: pointer;
-  background-color: #6be89e;
-  color: #000000;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  &:focus {
-    outline: none;
   }
 `;
