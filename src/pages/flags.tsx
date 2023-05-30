@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
 import { Text } from '@/components/lib/Text';
-import { VmComponent } from '@/components/vm/VmComponent';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useFlags } from '@/hooks/useFlags';
 import { useDefaultLayout } from '@/hooks/useLayout';
