@@ -14,6 +14,7 @@ import { useEffect } from 'react';
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
+import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -34,6 +35,7 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
+  usePageAnalytics();
   const getLayout = Component.getLayout ?? ((page) => page);
 
   useEffect(() => {

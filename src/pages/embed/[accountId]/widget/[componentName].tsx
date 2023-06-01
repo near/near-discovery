@@ -6,7 +6,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { recordClick, recordPageView } from '@/utils/analytics';
+import { recordClick } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EmbedComponentPage: NextPageWithLayout = () => {
@@ -24,13 +24,6 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   useEffect(() => {
     setComponentProps(router.query);
   }, [router.query]);
-
-  useEffect(() => {
-    // ! why?
-    setTimeout(() => {
-      recordPageView(componentSrc);
-    }, 1);
-  }, [componentSrc]);
 
   return (
     <div className="d-inline-block position-relative overflow-hidden" onPointerUp={recordClick}>

@@ -6,7 +6,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { recordClick, recordPageView } from '@/utils/analytics';
+import { recordClick } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -36,12 +36,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
     localStorage.setItem('accountId', authStore.accountId);
     window.zE('webWidget', 'show');
   }, [authStore.accountId, authStore.signedIn, componentSrc]);
-
-  useEffect(() => {
-    setTimeout(() => {
-      recordPageView(componentSrc);
-    }, 1);
-  }, [componentSrc]);
 
   useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);
