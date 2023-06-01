@@ -694,7 +694,7 @@ export function NearOrgHomePage() {
                 <VmComponent
                   src="near/widget/DIG.Button"
                   props={{
-                    href: '#/news',
+                    href: '/blog',
                     label: 'News',
                     iconRight: 'ph-bold ph-arrow-right',
                     variant: 'primary',
