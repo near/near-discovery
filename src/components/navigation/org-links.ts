@@ -67,7 +67,7 @@ export const navLinkData = {
   news: {
     title: 'News',
     description: 'Stay up to date on all things NEAR',
-    link: '/news',
+    link: '/blog',
   },
   learn: {
     title: 'Learn',
