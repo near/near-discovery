@@ -8,7 +8,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
-import { recordClick, recordPageView } from '@/utils/analytics';
+import { recordClick } from '@/utils/analytics';
 
 import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
@@ -482,7 +482,6 @@ export const Sandbox = ({ onboarding = false }) => {
   }, [router, onboarding]);
 
   useEffect(() => {
-    recordPageView();
     ls.set(WidgetPropsKey, widgetProps);
     try {
       const parsedWidgetProps = JSON.parse(widgetProps);
