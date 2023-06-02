@@ -177,7 +177,7 @@ export const DesktopNavigation = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              router.push(`/${components.search.indexPage}?term=${searchTerm}`);
+              router.push(`/${components.search.indexPage}?term=${encodeURIComponent(searchTerm)}`);
               setSearchIsFocused(false);
             }}
           >
