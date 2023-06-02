@@ -74,7 +74,7 @@ export function recordPageView(pageName: string) {
   if (!segment) return;
   try {
     segment.page({
-      name: pageName || split(window.location.href, '?')[0],
+      name: pageName,
       anonymousId: getAnonymousId(),
       properties: {
         hashId: localStorage.getItem('hashId'),
