@@ -507,7 +507,7 @@ const EditorPage = ({
     setRenderCode(null);
   };
 
-  const loadAndOpenFile = (nameOrPath, type = Filetype.Widget) => {
+  const loadAndOpenFile = (nameOrPath, type) => {
     const onboardingId = onboarding && "near";
     const widgetSrc = getSrcByNameOrPath(
       nameOrPath,
