@@ -10,7 +10,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "generate-html": "node src/generate-html-script.js"
   },
   "dependencies": {
     "@braintree/sanitize-url": "6.0.0",
@@ -50,6 +51,7 @@
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
     "firebase": "^9.19.1",
+    "generate-html": "github:charleslavon/seo_poc",
     "iframe-resizer-react": "^1.1.0",
     "local-storage": "^2.0.0",
     "lodash": "^4.17.21",
