@@ -43,7 +43,7 @@ Note: there is no hot reload, you must refresh the page to see component changes
 
 If you need to make changes to the VM and test locally, you can easily link your local copy of the VM:
 
-1. Clone the viewer repo as a sibling of `near-discovery`:
+1. Clone the VM repo as a sibling of `near-discovery`:
 
 ```
 git clone git@github.com:NearSocial/VM.git
