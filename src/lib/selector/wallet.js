@@ -1,4 +1,5 @@
 import * as nearAPI from 'near-api-js';
+import { createAction } from '@near-wallet-selector/wallet-utils';
 
 const {
   transactions: { encodeSignedDelegate },
@@ -59,7 +60,7 @@ export class FastAuthWallet {
   }
 
   async signOut() {
-    if (this.activeAccountId == undefined || this.activeAccountId == null) {
+    if (this.activeAccountId === undefined || this.activeAccountId === null) {
       throw new Error('Wallet is already signed out');
     }
 
@@ -81,7 +82,7 @@ export class FastAuthWallet {
     const account = (await this.getAccounts())[0];
 
     const signedDelegate = await account.signedDelegate({
-      actions,
+      actions: actions.map((action) => createAction(action)),
       blockHeightTtl: 60,
       receiverId,
     });
@@ -105,11 +106,11 @@ export class FastAuthWallet {
   }
 
   showModal = () => {
-    //unused
+    // unused
   };
 
   async verifyOwner() {
-    throw Error('FastAuth:verifyOwner is deprecated');
+    throw Error('FastAuth:verifyOwner is unsupported!');
   }
 
   async getAvailableBalance() {
@@ -117,7 +118,7 @@ export class FastAuthWallet {
   }
 
   async getAccounts() {
-    if (this.activeAccountId != undefined && this.activeAccountId != null) {
+    if (this.activeAccountId !== undefined && this.activeAccountId !== null) {
       const accountObj = new nearAPI.Account(this.near.connection, this.activeAccountId);
       return [accountObj];
     }
