@@ -434,7 +434,7 @@ function App(props) {
               path="/stackoverflow"
               component={() => {
                 window.location.replace(
-                  "https:/near.org/near/widget/NearOrg.HomePage?utm_source=stack&utm_medium=podcast&utm_campaign=stackoverflow_evergreen_bos_awareness/"
+                  "near/widget/NearOrg.HomePage?utm_source=stack&utm_medium=podcast&utm_campaign=stackoverflow_evergreen_bos_awareness/"
                 );
                 return null;
               }}
