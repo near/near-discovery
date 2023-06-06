@@ -3,7 +3,7 @@ lockfileVersion: '6.0'
 dependencies:
   '@monaco-editor/react':
     specifier: ^4.4.6
-    version: 4.4.6(monaco-editor@0.38.0)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.4.6(react-dom@18.2.0)(react@18.2.0)
   '@near-js/biometric-ed25519':
     specifier: 0.1.0
     version: 0.1.0
@@ -12,7 +12,7 @@ dependencies:
     version: 8.1.1(near-api-js@2.1.3)
   '@near-wallet-selector/here-wallet':
     specifier: 8.1.1
-    version: 8.1.1(borsh@0.7.0)(near-api-js@2.1.3)
+    version: 8.1.1(near-api-js@2.1.3)
   '@near-wallet-selector/meteor-wallet':
     specifier: 8.1.1
     version: 8.1.1(near-api-js@2.1.3)
@@ -32,6 +32,9 @@ dependencies:
     specifier: 8.1.1
     version: 8.1.1(near-api-js@2.1.3)
   '@near-wallet-selector/sender':
+    specifier: 8.1.1
+    version: 8.1.1(near-api-js@2.1.3)
+  '@near-wallet-selector/wallet-utils':
     specifier: 8.1.1
     version: 8.1.1(near-api-js@2.1.3)
   '@near-wallet-selector/welldone-wallet':
@@ -84,7 +87,7 @@ dependencies:
     version: 5.1.1
   bootstrap:
     specifier: ^5.2.1
-    version: 5.2.1(@popperjs/core@2.11.7)
+    version: 5.2.1
   bootstrap-icons:
     specifier: ^1.9.0
     version: 1.9.0
@@ -102,7 +105,7 @@ dependencies:
     version: 9.19.1
   iframe-resizer-react:
     specifier: ^1.1.0
-    version: 1.1.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+    version: 1.1.0(react-dom@18.2.0)(react@18.2.0)
   keypom-js:
     specifier: ^1.4.9
     version: 1.4.9
@@ -117,7 +120,7 @@ dependencies:
     version: 2.1.3
   near-social-vm:
     specifier: github:NearSocial/VM#2.2.2
-    version: github.com/NearSocial/VM/806731481eeead025e0ae44c2fd730a9cb1d9a57(@popperjs/core@2.11.7)(@types/react@18.2.0)(near-api-js@2.1.3)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    version: github.com/NearSocial/VM/806731481eeead025e0ae44c2fd730a9cb1d9a57(@types/react@18.2.0)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0)
   next:
     specifier: 13.3.4
     version: 13.3.4(react-dom@18.2.0)(react@18.2.0)
@@ -144,7 +147,7 @@ dependencies:
     version: 3.1.1(react-dom@18.2.0)(react@18.2.0)
   styled-components:
     specifier: ^5.3.6
-    version: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    version: 5.3.6(react-dom@18.2.0)(react@18.2.0)
   typescript:
     specifier: 5.0.4
     version: 5.0.4
@@ -167,7 +170,7 @@ devDependencies:
     version: 5.1.26
   '@typescript-eslint/eslint-plugin':
     specifier: ^5.59.2
-    version: 5.59.2(@typescript-eslint/parser@5.59.6)(eslint@8.39.0)(typescript@5.0.4)
+    version: 5.59.2(eslint@8.39.0)(typescript@5.0.4)
   eslint-config-prettier:
     specifier: ^8.8.0
     version: 8.8.0(eslint@8.39.0)
@@ -429,7 +432,7 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       espree: 9.5.2
       globals: 13.20.0
       ignore: 5.2.4
@@ -1648,7 +1651,7 @@ packages:
       '@hapi/hoek': 9.3.0
     dev: false
 
-  /@here-wallet/core@1.4.3(bn.js@5.2.1)(borsh@0.7.0)(near-api-js@2.1.3):
+  /@here-wallet/core@1.4.3(bn.js@5.2.1)(near-api-js@2.1.3):
     resolution: {integrity: sha512-HtiAd1gMKxFzbnSualrzAw9CuoGWdY9z8aCY5fkpst+z7Fa5yVvBIg+f/6BWn2PFdxIWEnKk8V051FHEX/iYxA==}
     peerDependencies:
       bn.js: 5.2.1
@@ -1656,7 +1659,6 @@ packages:
       near-api-js: ^2.1.1
     dependencies:
       bn.js: 5.2.1
-      borsh: 0.7.0
       near-api-js: 2.1.3
       sha1: 1.1.1
       uuid4: 2.0.3
@@ -1671,7 +1673,7 @@ packages:
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 1.2.1
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -1787,24 +1789,22 @@ packages:
       query-string: 7.1.3
     dev: false
 
-  /@monaco-editor/loader@1.3.3(monaco-editor@0.38.0):
+  /@monaco-editor/loader@1.3.3:
     resolution: {integrity: sha512-6KKF4CTzcJiS8BJwtxtfyYt9shBiEv32ateQ9T4UVogwn4HM/uPo9iJd2Dmbkpz8CM6Y0PDUpjnZzCwC+eYo2Q==}
     peerDependencies:
       monaco-editor: '>= 0.21.0 < 1'
     dependencies:
-      monaco-editor: 0.38.0
       state-local: 1.0.7
     dev: false
 
-  /@monaco-editor/react@4.4.6(monaco-editor@0.38.0)(react-dom@18.2.0)(react@18.2.0):
+  /@monaco-editor/react@4.4.6(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Gr3uz3LYf33wlFE3eRnta4RxP5FSNxiIV9ENn2D2/rN8KgGAD8ecvcITRtsbbyuOuNkwbuHYxfeaz2Vr+CtyFA==}
     peerDependencies:
       monaco-editor: '>= 0.25.0 < 1'
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@monaco-editor/loader': 1.3.3(monaco-editor@0.38.0)
-      monaco-editor: 0.38.0
+      '@monaco-editor/loader': 1.3.3
       prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -1881,7 +1881,7 @@ packages:
       '@near-js/types': 0.0.4
       '@near-js/utils': 0.0.4
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       bn.js: 5.2.1
       borsh: 0.7.0
       depd: 2.0.0
@@ -2018,12 +2018,12 @@ packages:
       rxjs: 7.8.1
     dev: false
 
-  /@near-wallet-selector/here-wallet@8.1.1(borsh@0.7.0)(near-api-js@2.1.3):
+  /@near-wallet-selector/here-wallet@8.1.1(near-api-js@2.1.3):
     resolution: {integrity: sha512-Eql3O5A72YgSPHqJff2l3RfCR7/EYOmtKJ8N/FslNv4sJQF2mq/akMcyY7/EthJIvGl1CMf6+1NpIU36jmIowQ==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@here-wallet/core': 1.4.3(bn.js@5.2.1)(borsh@0.7.0)(near-api-js@2.1.3)
+      '@here-wallet/core': 1.4.3(bn.js@5.2.1)(near-api-js@2.1.3)
       '@near-wallet-selector/core': 8.1.1(near-api-js@2.1.3)
       bn.js: 5.2.1
       near-api-js: 2.1.3
@@ -3508,7 +3508,7 @@ packages:
     resolution: {integrity: sha512-t/Tvs5qR47OLOr+4E9ckN8AmP2Tf16gWq+/qA4iUGS/OOyHVO8wv2vjJuX8SNOUTJyWb+2t7wJm6cXILFnOROA==}
     dev: false
 
-  /@typescript-eslint/eslint-plugin@5.59.2(@typescript-eslint/parser@5.59.6)(eslint@8.39.0)(typescript@5.0.4):
+  /@typescript-eslint/eslint-plugin@5.59.2(eslint@8.39.0)(typescript@5.0.4):
     resolution: {integrity: sha512-yVrXupeHjRxLDcPKL10sGQ/QlVrA8J5IYOEWVqk0lJaSZP7X5DfnP7Ns3cc74/blmbipQ1htFNVGsHX6wsYm0A==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
@@ -3520,11 +3520,10 @@ packages:
         optional: true
     dependencies:
       '@eslint-community/regexpp': 4.5.1
-      '@typescript-eslint/parser': 5.59.6(eslint@8.39.0)(typescript@5.0.4)
       '@typescript-eslint/scope-manager': 5.59.2
       '@typescript-eslint/type-utils': 5.59.2(eslint@8.39.0)(typescript@5.0.4)
       '@typescript-eslint/utils': 5.59.2(eslint@8.39.0)(typescript@5.0.4)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       eslint: 8.39.0
       grapheme-splitter: 1.0.4
       ignore: 5.2.4
@@ -3549,11 +3548,12 @@ packages:
       '@typescript-eslint/scope-manager': 5.59.6
       '@typescript-eslint/types': 5.59.6
       '@typescript-eslint/typescript-estree': 5.59.6(typescript@5.0.4)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       eslint: 8.39.0
       typescript: 5.0.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /@typescript-eslint/scope-manager@5.59.2:
     resolution: {integrity: sha512-dB1v7ROySwQWKqQ8rEWcdbTsFjh2G0vn8KUyvTXdPoyzSL6lLGkiXEV5CvpJsEe9xIdKV+8Zqb7wif2issoOFA==}
@@ -3569,6 +3569,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.59.6
       '@typescript-eslint/visitor-keys': 5.59.6
+    dev: false
 
   /@typescript-eslint/type-utils@5.59.2(eslint@8.39.0)(typescript@5.0.4):
     resolution: {integrity: sha512-b1LS2phBOsEy/T381bxkkywfQXkV1dWda/z0PhnIy3bC5+rQWQDS7fk9CSpcXBccPY27Z6vBEuaPBCKCgYezyQ==}
@@ -3582,7 +3583,7 @@ packages:
     dependencies:
       '@typescript-eslint/typescript-estree': 5.59.2(typescript@5.0.4)
       '@typescript-eslint/utils': 5.59.2(eslint@8.39.0)(typescript@5.0.4)
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       eslint: 8.39.0
       tsutils: 3.21.0(typescript@5.0.4)
       typescript: 5.0.4
@@ -3598,6 +3599,7 @@ packages:
   /@typescript-eslint/types@5.59.6:
     resolution: {integrity: sha512-tH5lBXZI7T2MOUgOWFdVNUILsI02shyQvfzG9EJkoONWugCG77NDDa1EeDGw7oJ5IvsTAAGVV8I3Tk2PNu9QfA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: false
 
   /@typescript-eslint/typescript-estree@5.59.2(typescript@5.0.4):
     resolution: {integrity: sha512-+j4SmbwVmZsQ9jEyBMgpuBD0rKwi9RxRpjX71Brr73RsYnEr3Lt5QZ624Bxphp8HUkSKfqGnPJp1kA5nl0Sh7Q==}
@@ -3610,7 +3612,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.59.2
       '@typescript-eslint/visitor-keys': 5.59.2
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.1
@@ -3631,7 +3633,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.59.6
       '@typescript-eslint/visitor-keys': 5.59.6
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.5.1
@@ -3639,6 +3641,7 @@ packages:
       typescript: 5.0.4
     transitivePeerDependencies:
       - supports-color
+    dev: false
 
   /@typescript-eslint/utils@5.59.2(eslint@8.39.0)(typescript@5.0.4):
     resolution: {integrity: sha512-kSuF6/77TZzyGPhGO4uVp+f0SBoYxCDf+lW3GKhtKru/L8k/Hd7NFQxyWUeY7Z/KGB2C6Fe3yf2vVi4V9TsCSQ==}
@@ -3674,6 +3677,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 5.59.6
       eslint-visitor-keys: 3.4.1
+    dev: false
 
   /@unstoppabledomains/resolution@8.5.0:
     resolution: {integrity: sha512-csqExbiK8F5mRKoHlDZjGuIEuvi63O8PSyhUcGhnTi76Il5fCREAGNVdTiRxagPPYoxCO+Xmf6kThwtmiws1Ow==}
@@ -4289,10 +4293,8 @@ packages:
       indent-string: 5.0.0
     dev: false
 
-  /ajv-formats@2.1.1(ajv@8.12.0):
+  /ajv-formats@2.1.1:
     resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependencies:
-      ajv: ^8.0.0
     peerDependenciesMeta:
       ajv:
         optional: true
@@ -4529,7 +4531,7 @@ packages:
       common-path-prefix: 3.0.0
       concordance: 5.0.4
       currently-unhandled: 0.4.1
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       del: 6.1.1
       emittery: 0.11.0
       figures: 4.0.1
@@ -4609,7 +4611,7 @@ packages:
       babel-plugin-syntax-jsx: 6.18.0
       lodash: 4.17.21
       picomatch: 2.3.1
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.6(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /babel-plugin-syntax-jsx@6.18.0:
@@ -4708,12 +4710,10 @@ packages:
     resolution: {integrity: sha512-4S077UbfqHtNOIKc43SDR+EL43zfo7ou8jI5+JRQqGZuq5UOK6iX6FtFNOQ/WjeWJ09CZ0/kSceh+WWPzfMfVQ==}
     dev: false
 
-  /bootstrap@5.2.1(@popperjs/core@2.11.7):
+  /bootstrap@5.2.1:
     resolution: {integrity: sha512-UQi3v2NpVPEi1n35dmRRzBJFlgvWHYwyem6yHhuT6afYF+sziEt46McRbT//kVXZ7b1YUYEVGdXEH74Nx3xzGA==}
     peerDependencies:
       '@popperjs/core': ^2.11.6
-    dependencies:
-      '@popperjs/core': 2.11.7
     dev: false
 
   /borsh@0.7.0:
@@ -5252,6 +5252,17 @@ packages:
       ms: 2.1.3
     dev: false
 
+  /debug@4.3.4:
+    resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
+    engines: {node: '>=6.0'}
+    peerDependencies:
+      supports-color: '*'
+    peerDependenciesMeta:
+      supports-color:
+        optional: true
+    dependencies:
+      ms: 2.1.2
+
   /debug@4.3.4(supports-color@5.5.0):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
@@ -5263,6 +5274,7 @@ packages:
     dependencies:
       ms: 2.1.2
       supports-color: 5.5.0
+    dev: false
 
   /debug@4.3.4(supports-color@8.1.1):
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -5728,7 +5740,7 @@ packages:
       eslint: '*'
       eslint-plugin-import: '*'
     dependencies:
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       enhanced-resolve: 5.14.0
       eslint: 8.39.0
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@5.59.6)(eslint-import-resolver-node@0.3.7)(eslint-import-resolver-typescript@3.5.5)(eslint@8.39.0)
@@ -5908,7 +5920,7 @@ packages:
       ajv: 6.12.6
       chalk: 4.1.2
       cross-spawn: 7.0.3
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       doctrine: 3.0.0
       escape-string-regexp: 4.0.0
       eslint-scope: 7.2.0
@@ -6531,6 +6543,7 @@ packages:
   /has-flag@3.0.0:
     resolution: {integrity: sha512-sKJf1+ceQBr4SMkvQnBDNDtf4TXpVhVGateu0t918bl30FnbE2m4vNLX+VWe/dpjlb+HugGYzW7uQXH98HPEYw==}
     engines: {node: '>=4'}
+    dev: false
 
   /has-flag@4.0.0:
     resolution: {integrity: sha512-EykJT/Q1KjTWctppgIAgfSO0tKVuZUjhgMr17kqTumMl6Afv3EISleU7qZUzoXDFTAHTDC4NOoG/ZxU3EvlMPQ==}
@@ -6663,7 +6676,7 @@ packages:
     resolution: {integrity: sha512-dcyqhDvX1C46lXZcVqCpK+FtMRQVdIMN6/Df5js2zouUsqG7I6sFxitIC+7KYK29KdXOLHdu9zL4sFnoVQnqaA==}
     dev: false
 
-  /iframe-resizer-react@1.1.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0):
+  /iframe-resizer-react@1.1.0(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-FrytSq91AIJaDgE+6uK/Vdd6IR8CrwLoZ6eGmL2qQMPTzF0xlSV2jaSzRRUh5V2fttD7vzl21jvBl97bV40eBw==}
     engines: {node: '>=8', npm: '>=5'}
     peerDependencies:
@@ -6672,7 +6685,6 @@ packages:
       react-dom: '>=16.8.0'
     dependencies:
       iframe-resizer: 4.3.6
-      prop-types: 15.8.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       warning: 4.0.3
@@ -7768,7 +7780,7 @@ packages:
     resolution: {integrity: sha512-6Mj0yHLdUZjHnOPgr5xfWIMqMWS12zDN6iws9SLuSz76W8jTtAv24MN4/CL7gJrl5vtxGInkkqDv/JIoRsQOvA==}
     dependencies:
       '@types/debug': 4.1.7
-      debug: 4.3.4(supports-color@5.5.0)
+      debug: 4.3.4
       decode-named-character-reference: 1.0.2
       micromark-core-commonmark: 1.0.6
       micromark-factory-space: 1.0.0
@@ -7867,10 +7879,6 @@ packages:
       yargs: 16.2.0
       yargs-parser: 20.2.4
       yargs-unparser: 2.0.0
-    dev: false
-
-  /monaco-editor@0.38.0:
-    resolution: {integrity: sha512-11Fkh6yzEmwx7O0YoLxeae0qEGFwmyPRlVxpg7oF9czOOCB/iCjdJrG5I67da5WiXK3YJCxoz9TJFE8Tfq/v9A==}
     dev: false
 
   /motion@10.15.5:
@@ -7975,7 +7983,7 @@ packages:
       '@near-js/utils': 0.0.4
       '@near-js/wallet-account': 0.0.6
       ajv: 8.12.0
-      ajv-formats: 2.1.1(ajv@8.12.0)
+      ajv-formats: 2.1.1
       bn.js: 5.2.1
       borsh: 0.7.0
       depd: 2.0.0
@@ -8763,10 +8771,6 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
-  /react-is@18.2.0:
-    resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-    dev: false
-
   /react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
     dev: false
@@ -9429,7 +9433,7 @@ packages:
       inline-style-parser: 0.1.1
     dev: false
 
-  /styled-components@5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+  /styled-components@5.3.6(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-hGTZquGAaTqhGWldX7hhfzjnIYBZ0IXQXkCYdvF1Sq3DsUaLx6+NTHC5Jj1ooM2F68sBiVz3lvhfwQs/S3l6qg==}
     engines: {node: '>=10'}
     requiresBuild: true
@@ -9448,7 +9452,6 @@ packages:
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      react-is: 18.2.0
       shallowequal: 1.1.0
       supports-color: 5.5.0
     dev: false
@@ -9485,6 +9488,7 @@ packages:
     engines: {node: '>=4'}
     dependencies:
       has-flag: 3.0.0
+    dev: false
 
   /supports-color@7.2.0:
     resolution: {integrity: sha512-qpCAvRl9stuOHveKsn7HncJRvv501qIacKzQlO/+Lwxc9+0q2wLyv4Dfvt80/DPn2pqOBsJdDiogXGR9+OvwRw==}
@@ -10290,7 +10294,7 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/NearSocial/VM/806731481eeead025e0ae44c2fd730a9cb1d9a57(@popperjs/core@2.11.7)(@types/react@18.2.0)(near-api-js@2.1.3)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+  github.com/NearSocial/VM/806731481eeead025e0ae44c2fd730a9cb1d9a57(@types/react@18.2.0)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/806731481eeead025e0ae44c2fd730a9cb1d9a57}
     id: github.com/NearSocial/VM/806731481eeead025e0ae44c2fd730a9cb1d9a57
     name: near-social-vm
@@ -10332,14 +10336,14 @@ packages:
       acorn-jsx: 5.3.2(acorn@8.8.2)
       big.js: 6.1.1
       bn.js: 5.2.1
-      bootstrap: 5.2.1(@popperjs/core@2.11.7)
+      bootstrap: 5.2.1
       bootstrap-icons: 1.9.0
       collections: 5.1.13
       deep-equal: 2.2.1
       elliptic: 6.5.4
       ethers: 5.7.2
       idb: 7.1.1
-      iframe-resizer-react: 1.1.0(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      iframe-resizer-react: 1.1.0(react-dom@18.2.0)(react@18.2.0)
       local-storage: 2.0.0
       lodash: 4.17.21
       mdast-util-find-and-replace: 2.2.2
@@ -10358,7 +10362,7 @@ packages:
       react-syntax-highlighter: 15.5.0(react@18.2.0)
       react-uuid: 1.0.3
       remark-gfm: 3.0.1
-      styled-components: 5.3.6(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+      styled-components: 5.3.6(react-dom@18.2.0)(react@18.2.0)
       tweetnacl: 1.0.3
     transitivePeerDependencies:
       - '@popperjs/core'
