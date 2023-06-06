@@ -24,6 +24,12 @@ const nextConfig = {
         destination: '/sandbox/:path*',
         permanent: true,
       },
+      {
+        source: '/stackoverflow',
+        destination:
+          '/near/widget/NearOrg.HomePage?utm_source=stack&utm_medium=podcast&utm_campaign=stackoverflow_evergreen_bos_awareness',
+        permanent: false,
+      },
     ];
   },
   rewrites: async () => [
