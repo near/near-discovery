@@ -13,30 +13,21 @@ type Props = {
 };
 
 export function VmComponent(props: Props) {
-  const { EthersProvider, ethersContext, Widget, MainnetWidget } = useVmStore();
+  const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
 
   if (!EthersProvider || !redirectMapStore.hasResolved) {
     return <Spinner />;
   }
-
   return (
     <EthersProvider value={ethersContext}>
-      {props.mainnetWidget ? (
-        <MainnetWidget
-          config={{
-            redirectMap: redirectMapStore.redirectMap,
-          }}
-          {...props}
-        />
-      ) : (
         <Widget
           config={{
             redirectMap: redirectMapStore.redirectMap,
+            chainId: props.mainnetWidget ? 'mainnet' : null
           }}
           {...props}
         />
-      )}
     </EthersProvider>
   );
 }
