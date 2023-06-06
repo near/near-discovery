@@ -213,29 +213,29 @@ export function MenuLeft(props) {
         <div className="links-title">GenaDrop</div>
         <ul className="top-links">
           <li>
-            <NavigationButton route="/jgodwill.near/widget/genadropMinter">
+            <NavigationButton route="/jgodwill.near/widget/GenaDrop.Minter">
             <Editor />
             Create
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/jgodwill.near/widget/NftListingInput">
+            <NavigationButton route="/jgodwill.near/widget/GenaDrop.MultiListing">
               <Components />
               List
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/jgodwill.near/widget/genadropExplore">
+            <NavigationButton route="/jgodwill.near/widget/GenaDrop.Explore">
               <Notebook />
               Explore
             </NavigationButton>
           </li>
-          <li>
+          {/* <li>
             <NavigationButton route="/onboarder.near/widget/NFT-Transfer">
               <Community />
               NFT Sender
             </NavigationButton>
-          </li>
+          </li> */}
           {/* <li>
             <NavigationButton href={links.genadropExplore}>
               <Notebook />
