@@ -2,11 +2,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useAuthStore } from '@/stores/auth';
+import { requestSignIn, selectIsSignedIn } from '@/redux/slices/account';
+import type { AppDispatch } from '@/redux/store';
 import { recordEvent } from '@/utils/analytics';
 import { flushEvents, recordClick } from '@/utils/analytics';
 import { getRedirectQueryParams } from '@/utils/navigation';
@@ -120,8 +122,8 @@ export const DesktopNavigation = () => {
   const showTypeAheadDropdown = searchIsFocused && !!searchTerm;
   const components = useBosComponents();
   const searchFocusTimeout = useRef<NodeJS.Timeout>();
-  const signedIn = useAuthStore((store) => store.signedIn);
-  const requestSignIn = useAuthStore((store) => store.requestSignIn);
+  const signedIn = useSelector(selectIsSignedIn);
+  const dispatch = useDispatch<AppDispatch>();
 
   const setSearchIsFocused = (isFocused: boolean) => {
     if (isFocused) {
@@ -158,7 +160,7 @@ export const DesktopNavigation = () => {
   function handleSignIn(event: any) {
     clearAnalytics(event);
     const queryParam = getRedirectQueryParams(router);
-    requestSignIn(queryParam);
+    dispatch(requestSignIn({ queryParam }));
   }
 
   return (
@@ -220,7 +222,7 @@ export const DesktopNavigation = () => {
               />
             </>
           )}
-          {signedIn && (
+          {!!signedIn && (
             <>
               <NotificationButton />
               <UserDropdownMenu />

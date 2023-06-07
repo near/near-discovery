@@ -4,6 +4,7 @@ import { create } from 'zustand';
 type AuthState = {
   account: any;
   accountId: string;
+  // TODO: store string instead of Big
   availableStorage: Big | null;
   logOut: () => Promise<void>;
   refreshAllowance: () => Promise<void>;

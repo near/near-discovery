@@ -1,11 +1,14 @@
 import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
+import Big from 'big.js';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useAuthStore } from '@/stores/auth';
+import { logOut, selectAccountId, selectAvailableStorage } from '@/redux/slices/account';
+import type { AppDispatch } from '@/redux/store';
 import { useVmStore } from '@/stores/vm';
 
 const StyledDropdown = styled.div`
@@ -148,12 +151,16 @@ const StyledDropdown = styled.div`
 `;
 
 export const UserDropdownMenu = () => {
-  const accountId = useAuthStore((store) => store.accountId);
-  const availableStorage = useAuthStore((store) => store.availableStorage);
-  const logOut = useAuthStore((store) => store.logOut);
+  const accountId = useSelector(selectAccountId);
+  const availableStorage = Big(useSelector(selectAvailableStorage));
+  const dispatch = useDispatch<AppDispatch>();
   const near = useVmStore((store) => store.near);
   const router = useRouter();
   const components = useBosComponents();
+
+  const handleLogOut = () => {
+    dispatch(logOut({ near }));
+  };
 
   const withdrawStorage = useCallback(async () => {
     if (!near) return;
@@ -192,7 +199,7 @@ export const UserDropdownMenu = () => {
             <i className="ph-duotone ph-bank"></i>
             {availableStorage && `Withdraw ${availableStorage.div(1000).toFixed(2)}kb}`}
           </DropdownMenu.Item>
-          <DropdownMenu.Item className="DropdownMenuItem" onClick={() => logOut()}>
+          <DropdownMenu.Item className="DropdownMenuItem" onClick={handleLogOut}>
             <i className="ph-duotone ph-sign-out"></i>
             Sign out
           </DropdownMenu.Item>

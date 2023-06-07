@@ -1,13 +1,16 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
 import { openToast } from '@/components/lib/Toast';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useAuthStore } from '@/stores/auth';
+import { requestSignInWithWallet, selectIsSignedIn } from '@/redux/slices/account';
+import type { AppDispatch } from '@/redux/store';
+import { useVmStore } from '@/stores/vm';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -16,12 +19,18 @@ import { isValidEmail } from '../utils/form-validation';
 const SignInPage: NextPageWithLayout = () => {
   const { register, handleSubmit, setValue } = useForm();
   const router = useRouter();
-  const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const signedIn = useSelector(selectIsSignedIn);
+  const near = useVmStore((store) => store.near);
+  const dispatch = useDispatch<AppDispatch>();
 
   useClearCurrentComponent();
 
-  // redirect to home upon signing in
+  const handleRequestSignInWithWallet = (event) => {
+    event?.preventDefault();
+    dispatch(requestSignInWithWallet({ near }));
+  };
+
+  // TODO: handle it and other routes with private route type implementation
   useEffect(() => {
     if (signedIn) {
       router.push('/');
@@ -80,7 +89,7 @@ const SignInPage: NextPageWithLayout = () => {
         </InputContainer>
 
         <Button label="Continue" variant="affirmative" onClick={onSubmit} />
-        <Button label="Continue with wallet" variant="primary" onClick={requestSignInWithWallet} />
+        <Button label="Continue with wallet" variant="primary" onClick={handleRequestSignInWithWallet} />
       </FormContainer>
     </StyledContainer>
   );

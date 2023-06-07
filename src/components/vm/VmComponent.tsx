@@ -12,6 +12,7 @@ export function VmComponent(props: Props) {
   const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
 
+  // TODO: check if it can be improved
   if (!EthersProvider || !redirectMapStore.hasResolved) {
     return <Spinner />;
   }

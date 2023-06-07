@@ -6,21 +6,16 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
 import type { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { Provider } from 'react-redux';
 
+import Initializer from '@/components/Initializer';
 import { Toaster } from '@/components/lib/Toast';
-import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
-import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
-const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
-  ssr: false,
-});
+import { store } from '../redux/store';
 
 const meta = {
   title: 'NEAR',
@@ -33,14 +28,8 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
-  useBosLoaderInitializer();
-  useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   const getLayout = Component.getLayout ?? ((page) => page);
-
-  useEffect(() => {
-    initializeSegment();
-  }, []);
 
   return (
     <>
@@ -85,14 +74,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           };
         `}
       </Script>
-
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
-      <VmInitializer />
-
-      {getLayout(<Component {...pageProps} />)}
-
-      <Toaster />
+      <Provider store={store}>
+        <Initializer>{getLayout(<Component {...pageProps} />)}</Initializer>
+        <Toaster />
+      </Provider>
     </>
   );
 }
