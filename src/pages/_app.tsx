@@ -17,6 +17,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
+import { styleZendesk } from '@/utils/zendesk';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -40,6 +41,25 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   useEffect(() => {
     initializeSegment();
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(zendeskCheck, 20);
+
+    function zendeskCheck() {
+      //once the zendesk widget comes online, style it
+      const zwFrame = document.getElementById('launcher') as HTMLIFrameElement | null;
+      const zwEmbed = zwFrame?.contentDocument?.getElementById('Embed');
+      const zwButton = zwEmbed?.getElementsByTagName('button')[0];
+      if (zwButton) {
+        styleZendesk();
+        clearInterval(interval);
+      }
+    }
+
+    () => {
+      clearInterval(interval);
+    };
   }, []);
 
   return (
