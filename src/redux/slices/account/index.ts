@@ -1,14 +1,24 @@
 import { setupModal } from '@near-wallet-selector/modal-ui';
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import Big from 'big.js';
 import { set } from 'lodash';
 import Router from 'next/router';
-import { createSelector } from 'reselect';
 
 import { reset as resetSegment } from '@/utils/analytics';
 
 import handleAsyncThunkStatus from '../../reducerStatus/handleAsyncThunkStatus';
 import initialStatusState from '../../reducerStatus/initialState/initialStatusState';
+
+interface handleSignIn {
+  accountId: string;
+  loading: string;
+  pretendAccountId: string;
+  signedAccountId: string;
+  state: string;
+  storageBalance: {
+    available: any;
+  };
+}
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 const SLICE_NAME = 'account';
@@ -32,19 +42,19 @@ const initialState = {
   showContent: false,
 };
 
-export const checkLoggedIn = createAsyncThunk(`${SLICE_NAME}/checkLoggedIn`, (props, { dispatch }) => {
-  const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID) || props?.accountId || '';
+export const checkLoggedIn = createAsyncThunk(`${SLICE_NAME}/checkLoggedIn`, (_, { dispatch }) => {
+  const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
 
-  dispatch(setAccountId({ accountId: optimisticAccountId }));
+  !!optimisticAccountId && dispatch(setAccountId({ accountId: optimisticAccountId }));
   dispatch(setShowContent({ showContent: true }));
 });
 
 export const handleSignIn = createAsyncThunk(
   `${SLICE_NAME}/handleSignIn`,
-  ({ account, storageCostPerByte }, { dispatch }) => {
+  ({ account, storageCostPerByte }: { account: handleSignIn; storageCostPerByte: any }, { dispatch }) => {
     dispatch(
       setAccount({
-        ccountId: account?.ccountId,
+        accountId: account?.accountId,
         loading: account?.loading,
         pretendAccountId: account?.pretendAccountId,
         signedAccountId: account?.signedAccountId,
@@ -67,7 +77,7 @@ export const handleSignIn = createAsyncThunk(
   },
 );
 
-export const logOut = createAsyncThunk(`${SLICE_NAME}/logOut`, async ({ near }, { dispatch }) => {
+export const logOut = createAsyncThunk(`${SLICE_NAME}/logOut`, async ({ near }: { near: any }, { dispatch }) => {
   if (!near) {
     return;
   }
@@ -82,21 +92,27 @@ export const logOut = createAsyncThunk(`${SLICE_NAME}/logOut`, async ({ near }, 
   localStorage.removeItem('accountId');
 });
 
-export const requestSignInWithWallet = createAsyncThunk(`${SLICE_NAME}/requestSignInWithWallet`, async ({ near }) => {
-  const selector = await near.selector;
-  const wallet = setupModal(selector, { contractId: near.config.contractName });
-  wallet.show();
-});
+export const requestSignInWithWallet = createAsyncThunk(
+  `${SLICE_NAME}/requestSignInWithWallet`,
+  async ({ near }: { near: any }) => {
+    const selector = await near.selector;
+    const wallet = setupModal(selector, { contractId: near.config.contractName });
+    wallet.show();
+  },
+);
 
-export const requestSignIn = createAsyncThunk(`${SLICE_NAME}/requestSignIn`, async ({ queryParam }) => {
-  // TODO: here handle redirecting back to the page that the user was on before redirect to Sign in page
-  Router.push(`/signin${queryParam}`);
-});
+export const requestSignIn = createAsyncThunk(
+  `${SLICE_NAME}/requestSignIn`,
+  async ({ queryParam }: { queryParam: any }) => {
+    // TODO: here handle redirecting back to the page that the user was on before redirect to Sign in page
+    Router.push(`/signin${queryParam}`);
+  },
+);
 
 export const refreshAllowance = createAsyncThunk(`${SLICE_NAME}/refreshAllowance`, async (_, { dispatch }) => {
   alert("You're out of access key allowance. Need sign in again to refresh it");
-  await dispatch(logOut());
-  dispatch(requestSignIn());
+  // await dispatch(logOut());
+  // dispatch(requestSignIn());
 });
 
 const accountSlice = createSlice({
@@ -137,7 +153,7 @@ export const { setShowContent, setInitialState, setAccountId, setAccount, setAva
 export default accountSlice;
 
 // selectors
-const selectAccountSlice = (state) => state[SLICE_NAME] || {};
+const selectAccountSlice = (state: any) => state[SLICE_NAME] || {};
 
 export const selectAccountId = createSelector([selectAccountSlice], (account) => account.accountId);
 

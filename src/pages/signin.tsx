@@ -25,7 +25,7 @@ const SignInPage: NextPageWithLayout = () => {
 
   useClearCurrentComponent();
 
-  const handleRequestSignInWithWallet = (event) => {
+  const handleRequestSignInWithWallet = (event: any) => {
     event?.preventDefault();
     dispatch(requestSignInWithWallet({ near }));
   };

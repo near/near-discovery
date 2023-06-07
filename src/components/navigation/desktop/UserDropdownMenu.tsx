@@ -151,7 +151,7 @@ const StyledDropdown = styled.div`
 `;
 
 export const UserDropdownMenu = () => {
-  const accountId = useSelector(selectAccountId);
+  const accountId: any = useSelector(selectAccountId);
   const availableStorage = Big(useSelector(selectAvailableStorage));
   const dispatch = useDispatch<AppDispatch>();
   const near = useVmStore((store) => store.near);
