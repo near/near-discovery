@@ -22,12 +22,6 @@ const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
 });
 
-const meta = {
-  title: 'NEAR',
-  description: "Let's build decentralized experiences.",
-  image: `${process.env.NEXT_PUBLIC_HOSTNAME}/bos-meta.png`,
-};
-
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
@@ -46,7 +40,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Head>
         <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
-        <meta content={meta.image} property="og:image" />
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
