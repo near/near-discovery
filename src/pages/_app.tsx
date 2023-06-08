@@ -46,7 +46,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Head>
         <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
-        <meta content={meta.image} name="twitter:image" />
         <meta content={meta.image} property="og:image" />
       </Head>
 
