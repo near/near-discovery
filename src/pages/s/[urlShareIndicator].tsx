@@ -122,8 +122,6 @@ export const getServerSideProps: GetServerSideProps<{
     meta = await returnMetaPreviewForPost(accountId, blockHeight);
   }
 
-  console.log(meta);
-
   return {
     props: {
       meta,
