@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { openToast } from '@/components/lib/Toast';
+import { MetaTags } from '@/components/MetaTags';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -145,17 +146,7 @@ const ShareUrlPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<
   }, [meta, router]);
 
   if (meta) {
-    return (
-      <Head>
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@NEARProtocol" />
-        <meta property="og:title" content={`${meta.title} | NEAR`} />
-        <meta property="og:description" content={meta.description} />
-        <meta property="og:type" content="website" />
-
-        {meta.imageUrl && <meta property="og:image" content={meta.imageUrl} />}
-      </Head>
-    );
+    return <MetaTags title={meta.title} description={meta.description} image={meta.imageUrl} />;
   }
 
   return null;
