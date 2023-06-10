@@ -134,15 +134,16 @@ export function DesktopNavigation(props) {
           {searchInputFocus && <Return />}
         </div> */}
         <div className="navigation-section text-align">
-        <NavigationButton route="/jgodwill.near/widget/genadropMinter">
+        <NavigationButton route="/jgodwill.near/widget/GenaDrop.Minter">
             Create
           </NavigationButton>
-          <NavigationButton route="/jgodwill.near/widget/GenaDropMultiListing">
+          <NavigationButton route="/jgodwill.near/widget/
+          ">
             List
           </NavigationButton>
 
 
-          <NavigationButton route="/jgodwill.near/widget/genadropExplore">
+          <NavigationButton route="/jgodwill.near/widget/GenaDrop.Explore">
             Explore
           </NavigationButton>
           {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
