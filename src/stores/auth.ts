@@ -7,8 +7,9 @@ type AuthState = {
   availableStorage: Big | null;
   logOut: () => Promise<void>;
   refreshAllowance: () => Promise<void>;
-  requestSignIn: (redirect?: string) => void;
-  requestSignInWithWallet: (event: any) => void;
+  requestCreateAccount: () => void;
+  requestSignIn: () => void;
+  requestSignInWithWallet: () => void;
   signedIn: boolean;
 };
 
@@ -22,6 +23,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
   availableStorage: null,
   logOut: async () => undefined,
   refreshAllowance: async () => undefined,
+  requestCreateAccount: () => undefined,
   requestSignIn: () => undefined,
   requestSignInWithWallet: () => undefined,
   signedIn: false,

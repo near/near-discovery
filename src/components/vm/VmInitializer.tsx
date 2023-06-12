@@ -25,6 +25,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
@@ -46,6 +47,7 @@ export default function VmInitializer() {
   const accountId = account.accountId;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
+  const signInRedirect = useSignInRedirect();
 
   useEffect(() => {
     initNear &&
@@ -96,21 +98,21 @@ export default function VmInitializer() {
     });
   }, [near]);
 
-  const requestSignInWithWallet = useCallback(
-    (event: any) => {
-      event?.preventDefault();
-      walletModal?.show();
-      return false;
-    },
-    [walletModal],
-  );
+  const requestSignInWithWallet = useCallback(() => {
+    signInRedirect.saveCurrentUrl();
+    walletModal?.show();
+    return false;
+  }, [signInRedirect, walletModal]);
 
-  const requestSignIn = useCallback(
-    (queryParam?: string) => {
-      router.push(`/signin${queryParam}`);
-    },
-    [router],
-  );
+  const requestSignIn = useCallback(() => {
+    signInRedirect.saveCurrentUrl();
+    router.push('/signin');
+  }, [router, signInRedirect]);
+
+  const requestCreateAccount = useCallback(() => {
+    signInRedirect.saveCurrentUrl();
+    router.push('/signup');
+  }, [router, signInRedirect]);
 
   const logOut = useCallback(async () => {
     if (!near) {
@@ -161,6 +163,7 @@ export default function VmInitializer() {
       availableStorage,
       logOut,
       refreshAllowance,
+      requestCreateAccount,
       requestSignIn,
       requestSignInWithWallet,
       signedIn,
@@ -170,6 +173,7 @@ export default function VmInitializer() {
     availableStorage,
     logOut,
     refreshAllowance,
+    requestCreateAccount,
     requestSignIn,
     requestSignInWithWallet,
     signedIn,

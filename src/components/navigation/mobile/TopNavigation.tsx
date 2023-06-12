@@ -10,7 +10,6 @@ import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordClick } from '@/utils/analytics';
-import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -130,10 +129,11 @@ export function TopNavigation(props: Props) {
   const components = useBosComponents();
   const signedIn = useAuthStore((store) => store.signedIn);
   const accountId = useAuthStore((store) => store.accountId);
+  const requestCreateAccount = useAuthStore((store) => store.requestCreateAccount);
 
   function handleCreateAccount(event: any) {
     recordClick(event);
-    router.push(`/signup${getRedirectQueryParams(router)}`);
+    requestCreateAccount();
   }
 
   useEffect(() => {

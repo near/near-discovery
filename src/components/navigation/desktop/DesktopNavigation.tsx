@@ -9,7 +9,6 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 import { flushEvents, recordClick } from '@/utils/analytics';
-import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -121,6 +120,7 @@ export const DesktopNavigation = () => {
   const components = useBosComponents();
   const searchFocusTimeout = useRef<NodeJS.Timeout>();
   const signedIn = useAuthStore((store) => store.signedIn);
+  const requestCreateAccount = useAuthStore((store) => store.requestCreateAccount);
   const requestSignIn = useAuthStore((store) => store.requestSignIn);
 
   const setSearchIsFocused = (isFocused: boolean) => {
@@ -157,8 +157,12 @@ export const DesktopNavigation = () => {
 
   function handleSignIn(event: any) {
     clearAnalytics(event);
-    const queryParam = getRedirectQueryParams(router);
-    requestSignIn(queryParam);
+    requestSignIn();
+  }
+
+  function handleCreateAccount(event: any) {
+    clearAnalytics(event);
+    requestCreateAccount();
   }
 
   return (
@@ -209,15 +213,7 @@ export const DesktopNavigation = () => {
           {!signedIn && (
             <>
               <Button label="Sign In" variant="secondary" onClick={handleSignIn} />
-
-              <Button
-                label="Create Account"
-                variant="primary"
-                onClick={(event) => {
-                  clearAnalytics(event);
-                  router.push(`/signup${getRedirectQueryParams(router)}`);
-                }}
-              />
+              <Button label="Create Account" variant="primary" onClick={handleCreateAccount} />
             </>
           )}
           {signedIn && (
