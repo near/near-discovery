@@ -8,7 +8,6 @@ import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { recordClick } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
-import { styleZendesk } from '@/utils/zendesk';
 
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -36,25 +35,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
     localStorage.setItem('accountId', authStore.accountId);
     window.zE('webWidget', 'show');
   }, [authStore.accountId, authStore.signedIn, componentSrc]);
-
-  useEffect(() => {
-    const interval = setInterval(zendeskCheck, 20);
-
-    function zendeskCheck() {
-      //once the zendesk widget comes online, style it
-      const zwFrame = document.getElementById('launcher') as HTMLIFrameElement | null;
-      const zwEmbed = zwFrame?.contentDocument?.getElementById('Embed');
-      const zwButton = zwEmbed?.getElementsByTagName('button')[0];
-      if (zwButton) {
-        styleZendesk();
-        clearInterval(interval);
-      }
-    }
-
-    () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   return (
     <div className="container-xl" onPointerUp={recordClick}>
