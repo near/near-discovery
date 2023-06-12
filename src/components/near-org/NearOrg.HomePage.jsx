@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useAuthStore } from '@/stores/auth';
+import { recordClick } from '@/utils/analytics';
 
 export function NearOrgHomePage() {
   const signedIn = useAuthStore((store) => store.signedIn);
@@ -82,7 +83,7 @@ export function NearOrgHomePage() {
   };
 
   return (
-    <Wrapper>
+    <Wrapper onPointerUp={recordClick}>
       <Container center>
         <Flex gap="32px" direction="column" alignItems="center">
           <H1>
