@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
+import { recordClick } from '@/utils/analytics';
 
 export function NearOrgUsePage() {
   const Wrapper = styled.div`
@@ -159,7 +160,7 @@ export function NearOrgUsePage() {
 
   return (
     <>
-      <Wrapper className="container-xl">
+      <Wrapper className="container-xl" onPointerUp={recordClick}>
         <Section center>
           <H1>Your first steps to becoming a Web3 citizen</H1>
         </Section>
