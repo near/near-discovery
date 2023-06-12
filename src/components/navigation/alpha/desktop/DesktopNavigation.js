@@ -137,8 +137,7 @@ export function DesktopNavigation(props) {
         <NavigationButton route="/jgodwill.near/widget/GenaDrop.Minter">
             Create
           </NavigationButton>
-          <NavigationButton route="/jgodwill.near/widget/
-          ">
+          <NavigationButton route="/jgodwill.near/widget/GenaDrop.MultiListing">
             List
           </NavigationButton>
 
