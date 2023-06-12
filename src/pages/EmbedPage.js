@@ -19,26 +19,9 @@ export default function EmbedPage(props) {
     );
   }, [query]);
 
-  useEffect(() => {
-    analytics("embed", {
-      props: {
-        widget: src,
-      },
-    });
-  }, [src]);
-
   return (
     <div className="d-inline-block position-relative overflow-hidden">
-      <Widget
-        key={props.tos.checkComponentPath}
-        src={props.tos.checkComponentPath}
-        props={{
-          logOut: props.logOut,
-          tosName: props.tos.contentComponentPath,
-          targetComponent: src,
-          targetProps: widgetProps,
-        }}
-      />{" "}
+      <Widget key={src} src={src} props={widgetProps} />{" "}
     </div>
   );
 }
