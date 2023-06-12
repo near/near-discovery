@@ -29,11 +29,6 @@ export default function ViewPage(props) {
               view: src,
             }
       );
-      analytics("view", {
-        props: {
-          widget: src,
-        },
-      });
     }, 1);
   }, [src, query, setWidgetSrc, viewSourceWidget]);
 
@@ -47,16 +42,7 @@ export default function ViewPage(props) {
           //   paddingTop: "var(--body-top-padding)",
           // }}
         >
-          <Widget
-            key={props.tos.checkComponentPath}
-            src={props.tos.checkComponentPath}
-            props={{
-              logOut: props.logOut,
-              targetProps: widgetProps,
-              targetComponent: src,
-              tosName: props.tos.contentComponentPath,
-            }}
-          />{" "}
+          <Widget key={src} src={src} props={widgetProps} />{" "}
         </div>
       </div>
     </div>
