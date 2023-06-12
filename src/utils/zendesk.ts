@@ -1,5 +1,5 @@
 /*
-  NOTE: Styling of Zendesk widget is done via DOM traversal as the widget configuration 
+  NOTE: Styling of Zendesk widget is done via DOM traversal as the widget configuration
   does not allow for custom styling.
 */
 
