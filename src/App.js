@@ -439,6 +439,15 @@ function App(props) {
                 return null;
               }}
             />
+            <Route
+              path="/ethcc"
+              component={() => {
+                window.location.replace(
+                  "https://www.eventbrite.com/e/near-ethcc-tickets-655229297467"
+                );
+                return null;
+              }}
+            />
             <Route path={"/horizon"} exact={true}>
               <NearOrgPage
                 {...passProps}
