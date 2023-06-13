@@ -24,7 +24,7 @@ export function VmComponent(props: Props) {
         <Widget
           config={{
             redirectMap: redirectMapStore.redirectMap,
-            chainId: props.mainnetWidget ? 'mainnet' : null
+            networkId: props.mainnetWidget ? 'mainnet' : null
           }}
           {...props}
         />
