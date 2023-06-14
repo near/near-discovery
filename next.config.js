@@ -5,6 +5,12 @@ const nextConfig = {
   redirects: async () => {
     return [
       {
+        source: '/stackoverflow',
+        destination:
+          '/near/widget/NearOrg.HomePage?utm_source=stack&utm_medium=podcast&utm_campaign=stackoverflow_evergreen_bos_awareness',
+        permanent: false,
+      },
+      {
         source: '/consensus',
         destination: 'https://nearconsensus2023.splashthat.com/',
         permanent: false,
@@ -28,12 +34,6 @@ const nextConfig = {
         source: '/edit/:path*',
         destination: '/sandbox/:path*',
         permanent: true,
-      },
-      {
-        source: '/stackoverflow',
-        destination:
-          '/near/widget/NearOrg.HomePage?utm_source=stack&utm_medium=podcast&utm_campaign=stackoverflow_evergreen_bos_awareness',
-        permanent: false,
       },
     ];
   },
