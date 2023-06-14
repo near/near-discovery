@@ -10,6 +10,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/ethcc',
+        destination: 'https://www.eventbrite.com/e/near-ethcc-tickets-655229297467',
+        permanent: false,
+      },
+      {
         source: '/pitch',
         destination: 'https://nearpitchfestconsensus.splashthat.com/',
         permanent: false,
