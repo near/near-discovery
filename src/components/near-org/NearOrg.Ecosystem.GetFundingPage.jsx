@@ -3,6 +3,7 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
+import { recordClick } from '@/utils/analytics';
 
 export function NearOrgEcosystemGetFundingPage() {
   const Wrapper = styled.div`
@@ -318,7 +319,7 @@ export function NearOrgEcosystemGetFundingPage() {
 
   return (
     <>
-      <Wrapper className="container-xl">
+      <Wrapper className="container-xl" onPointerUp={recordClick}>
         <Section center>
           <Flex gap="16px" direction="column" alignItems="center">
             <H1>Get Funded. Build the Future.</H1>
