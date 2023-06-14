@@ -15,6 +15,7 @@
     "@near-wallet-selector/neth": "8.0.3",
     "@near-wallet-selector/sender": "8.0.3",
     "@radix-ui/react-navigation-menu": "^1.1.2",
+    "@rudderstack/rudder-sdk-node": "^2.0.2",
     "@web3-onboard/core": "^2.16.2",
     "@web3-onboard/injected-wallets": "^2.8.4",
     "@web3-onboard/ledger": "^2.4.4",

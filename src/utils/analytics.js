@@ -1,4 +1,4 @@
-import Analytics from "analytics-node";
+import RudderAnalytics from "@rudderstack/rudder-sdk-node";
 import { nanoid } from "nanoid";
 import { get, split, truncate } from "lodash";
 import { createHash } from "crypto";
@@ -42,10 +42,12 @@ export function init() {
   getAnonymousId();
   const segmentKey =
     NetworkId === "testnet"
-      ? "diA7hiO28gGeb9fxn615Xs91uX3GyYhL"
-      : "gVheHtpTIWpmstSvXjGkSY80nGEXgHX4";
+      ? "2R7K9phhzpFzk2zFIq2EFBtJ8BM"
+      : "2R7K9phhzpFzk2zFIq2EFBtJ8BM";
   try {
-    segment = new Analytics(segmentKey, {});
+    segment = new RudderAnalytics(segmentKey, {
+      dataPlaneUrl: "https://nearpavelsqp.dataplane.rudderstack.com",
+    });
   } catch (e) {
     console.error(e);
   }
