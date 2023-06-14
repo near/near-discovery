@@ -1,4 +1,4 @@
-import Analytics from 'analytics-node';
+import RudderAnalytics from 'rudder-sdk-js';
 import { createHash } from 'crypto';
 import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
@@ -6,7 +6,7 @@ import type { UIEvent } from 'react';
 
 import { networkId } from './config';
 
-let segment: Analytics | null = null;
+let segment: RudderAnalytics | null = null;
 let anonymousUserId = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
@@ -39,22 +39,28 @@ function getAnonymousId() {
 }
 
 export function init() {
-  if (segment) return; // already initialized
+  if (window['rudderanalytics']) return; // already initialized
 
   getAnonymousId();
 
-  const segmentKey = networkId === 'testnet' ? 'diA7hiO28gGeb9fxn615Xs91uX3GyYhL' : 'gVheHtpTIWpmstSvXjGkSY80nGEXgHX4';
+  const segmentKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
+  const rudderStackOptions = {
+    dataPlaneUrl: "https://nearpavelsqp.dataplane.rudderstack.com",
+  }
 
   const options =
     typeof window === 'undefined'
-      ? {}
+      ? rudderStackOptions
       : {
+          ...rudderStackOptions,
           host: `${window.location.protocol}//${window.location.host}`,
           path: '/api/segment',
         };
 
   try {
-    segment = new Analytics(segmentKey, options);
+    window['rudderanalytics'] = RudderAnalytics;
+    window['rudderanalytics'].load(segmentKey, "https://nearpavelsqp.dataplane.rudderstack.com");
+    segment = window['rudderanalytics'];
   } catch (e) {
     console.error(e);
   }
@@ -124,7 +130,7 @@ export function flushEvents() {
   return segment.flush();
 }
 
-function recordEventWithProps(eventLabel: string, properties: Record<string, unknown>) {
+function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
   if (!segment) return;
   try {
     segment.track({
