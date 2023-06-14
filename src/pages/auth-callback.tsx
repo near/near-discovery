@@ -17,6 +17,10 @@ const AuthCallbackPage: NextPageWithLayout = () => {
   const [statusMessage, setStatusMessage] = useState('Loading...');
 
   useEffect(() => {
+    if (!router) {
+      return;
+    }
+
     const locationUrl = window.location.href;
 
     if (isSignInWithEmailLink(firebaseAuth, locationUrl)) {
@@ -26,16 +30,22 @@ const AuthCallbackPage: NextPageWithLayout = () => {
       const publicKey = searchParams.get('publicKey');
       const isRecovery = searchParams.get('isRecovery') === 'true';
       const redirect = searchParams.get('redirect');
+
+      // TODO: consider passing email in the callback url
       let email = window.localStorage.getItem('emailForSignIn');
 
       while (!email) {
         // TODO refactor: review
         // User opened the link on a different device. To prevent session fixation
         // attacks, ask the user to provide the associated email again. For example:
+
+        // TODO: replace window.prompt with regular form with one input
         email = window.prompt('Please provide your email for confirmation');
       }
 
       setStatusMessage('Verifying email...');
+
+      // TODO: refactor this function, introduce early return pattern and cleanup async/await
       signInWithEmailLink(firebaseAuth, email, window.location.href)
         .then(async (result) => {
           window.localStorage.removeItem('emailForSignIn');
