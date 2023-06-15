@@ -142,7 +142,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
     } else {
       router.push('/signup');
     }
-  }, [router]);
+  }, []);
 
   return <StyledStatusMessage>{statusMessage}</StyledStatusMessage>;
 };
