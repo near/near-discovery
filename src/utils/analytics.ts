@@ -93,15 +93,18 @@ function filterURL(url: string) {
 export function recordPageView(pageName: string) {
   if (!segment) return;
   try {
-    segment.page({
-      name: pageName,
-      anonymousId: getAnonymousId(),
-      properties: {
+    segment.page(
+      'category',
+      pageName,
+      {
         hashId: localStorage.getItem('hashId'),
         url: filterURL(window.location.href),
         ref: filterURL(document.referrer),
       },
-    });
+      {
+      anonymousId: getAnonymousId()
+      }
+    );
   } catch (e) {
     console.error(e);
   }
@@ -133,7 +136,7 @@ export function reset() {
     localStorage.removeItem('hashId');
     localStorage.removeItem('anonymousUserId');
     localStorage.removeItem('anonymousUserIdCreatedAt');
-    segment.flush();
+    segment.reset();
   } catch (e) {
     console.error(e);
   }
@@ -141,21 +144,23 @@ export function reset() {
 
 export function flushEvents() {
   if (!segment) return;
-  return segment.flush();
+  return segment.reset();
 }
 
 function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
   if (!segment) return;
   try {
-    segment.track({
-      anonymousId: getAnonymousId(),
-      event: eventLabel,
-      properties: {
+    segment.track(
+      eventLabel,
+      {
         ...properties,
         hashId: localStorage.getItem('hashId'),
         anonymousUserIdCreatedAt,
       },
-    });
+      {
+        anonymousId: getAnonymousId(),
+      }
+    );
   } catch (e) {
     console.error(e);
   }
@@ -164,18 +169,20 @@ function recordEventWithProps(eventLabel: string, properties: Record<string, str
 export function recordEvent(eventLabel: string) {
   if (!segment) return;
   try {
-    segment.track({
-      anonymousId: getAnonymousId(),
-      event: eventLabel,
-      properties: {
+    segment.track(
+      eventLabel,
+      {
         hashId: localStorage.getItem('hashId'),
         url: window.location.href,
         anonymousUserIdCreatedAt,
       },
-    });
-  } catch (e) {
-    console.error(e);
-  }
+      {
+      anonymousId: getAnonymousId()
+      }
+    );
+} catch (e) {
+  console.error(e);
+}
 }
 
 function getXPath(element: HTMLElement | null): string {

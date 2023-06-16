@@ -6,12 +6,13 @@ export default Analytics;
  */
 export interface apiObject {
   [index: string]:
-    | string
-    | number
-    | boolean
-    | undefined
-    | apiObject
-    | (string | number | boolean | apiObject)[];
+  | string
+  | number
+  | boolean
+  | undefined
+  | apiObject
+  | null
+  | (string | number | boolean | apiObject)[];
 }
 
 /**
@@ -195,16 +196,10 @@ declare class Analytics {
    * @return {Analytics}
    */
   track(
-    message: {
-      event: string;
-      userId?: string;
-      anonymousId?: string;
-      context?: apiObject;
-      properties?: apiObject;
-      integrations?: integrationOptions;
-      timestamp?: Date;
-    },
-    callback?: apiCallback,
+    event: string,
+    properties?: apiObject,
+    context?: apiObject,
+    callback?: apiCallback
   ): Analytics;
 
   /**
@@ -222,15 +217,10 @@ declare class Analytics {
    * @return {Analytics}
    */
   page(
-    message: {
-      name: string;
-      userId?: string;
-      anonymousId?: string;
-      context?: apiObject;
-      properties?: apiObject;
-      integrations?: integrationOptions;
-      timestamp?: Date;
-    },
+    category: string,
+    eventName?: string,
+    context?: apiObject,
+    properties?: apiObject,
     callback?: apiCallback,
   ): Analytics;
 
@@ -295,4 +285,7 @@ declare class Analytics {
    * @return {Analytics}
    */
   flush(callback?: Function): Analytics;
+
+  reset(callback?: Function): Analytics;
+
 }
