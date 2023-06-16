@@ -38,7 +38,7 @@ function getAnonymousId() {
   return anonymousUserId;
 }
 
-export function init() {
+export async function init() {
   if (window['rudderanalytics']) return; // already initialized
 
   getAnonymousId();
@@ -58,7 +58,7 @@ export function init() {
         };
 
   try {
-    window['rudderanalytics'] = RudderAnalytics;
+    window['rudderanalytics'] = await import("rudder-sdk-js");
     window['rudderanalytics'].load(segmentKey, "https://nearpavelsqp.dataplane.rudderstack.com");
     segment = window['rudderanalytics'];
   } catch (e) {
