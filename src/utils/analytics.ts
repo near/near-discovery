@@ -1,4 +1,5 @@
 import RudderAnalytics from 'rudder-sdk-js';
+import type Analytics from '../../types/rudderstack-analytics';
 import { createHash } from 'crypto';
 import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
@@ -6,10 +7,16 @@ import type { UIEvent } from 'react';
 
 import { networkId } from './config';
 
-let segment: RudderAnalytics | null = null;
+let segment: Analytics | null = null;
 let anonymousUserId = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
+
+declare global {
+    interface Window {
+        rudderanalytics: any;
+    }
+}
 
 export function setAccountIdHash(accountId: string) {
   const hash = createHash('sha512');
@@ -39,7 +46,7 @@ function getAnonymousId() {
 }
 
 export async function init() {
-  if (window['rudderanalytics']) return; // already initialized
+  if (window?.rudderanalytics) return; // already initialized
 
   getAnonymousId();
 
@@ -58,9 +65,9 @@ export async function init() {
         };
 
   try {
-    window['rudderanalytics'] = await import("rudder-sdk-js");
-    window['rudderanalytics'].load(segmentKey, "https://nearpavelsqp.dataplane.rudderstack.com");
-    segment = window['rudderanalytics'];
+    window.rudderanalytics = await import("rudder-sdk-js");
+    window.rudderanalytics.load(segmentKey, "https://nearpavelsqp.dataplane.rudderstack.com");
+    segment = window.rudderanalytics;
   } catch (e) {
     console.error(e);
   }
