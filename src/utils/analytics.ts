@@ -8,9 +8,7 @@ import type { UIEvent } from 'react';
 import { networkId } from './config';
 
 let segment: Analytics | null = null;
-let anonymousUserId = '';
 let hashId = '';
-let anonymousUserIdCreatedAt = '';
 
 declare global {
     interface Window {
@@ -25,30 +23,9 @@ export function setAccountIdHash(accountId: string) {
   localStorage.setItem('hashId', hashId);
 }
 
-function getAnonymousId() {
-  if (anonymousUserId) {
-    return anonymousUserId;
-  }
-
-  const storageId = localStorage.getItem('anonymousUserId');
-  anonymousUserIdCreatedAt = localStorage.getItem('anonymousUserIdCreatedAt') || '';
-
-  if (storageId) {
-    anonymousUserId = storageId;
-  } else {
-    anonymousUserId = nanoid();
-    anonymousUserIdCreatedAt = new Date().toUTCString();
-    localStorage.setItem('anonymousUserId', anonymousUserId);
-    localStorage.setItem('anonymousUserIdCreatedAt', anonymousUserIdCreatedAt);
-  }
-
-  return anonymousUserId;
-}
-
 export async function init() {
   if (window?.rudderanalytics) return; // already initialized
 
-  getAnonymousId();
 
   const segmentKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
   const rudderStackOptions = {
@@ -100,9 +77,6 @@ export function recordPageView(pageName: string) {
         hashId: localStorage.getItem('hashId'),
         url: filterURL(window.location.href),
         ref: filterURL(document.referrer),
-      },
-      {
-      anonymousId: getAnonymousId()
       }
     );
   } catch (e) {
@@ -134,8 +108,6 @@ export function reset() {
   try {
     recordEvent('wallet-logout');
     localStorage.removeItem('hashId');
-    localStorage.removeItem('anonymousUserId');
-    localStorage.removeItem('anonymousUserIdCreatedAt');
     segment.reset();
   } catch (e) {
     console.error(e);
@@ -155,10 +127,6 @@ function recordEventWithProps(eventLabel: string, properties: Record<string, str
       {
         ...properties,
         hashId: localStorage.getItem('hashId'),
-        anonymousUserIdCreatedAt,
-      },
-      {
-        anonymousId: getAnonymousId(),
       }
     );
   } catch (e) {
@@ -174,10 +142,6 @@ export function recordEvent(eventLabel: string) {
       {
         hashId: localStorage.getItem('hashId'),
         url: window.location.href,
-        anonymousUserIdCreatedAt,
-      },
-      {
-      anonymousId: getAnonymousId()
       }
     );
 } catch (e) {
