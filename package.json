@@ -54,7 +54,7 @@
     "local-storage": "^2.0.0",
     "lodash": "^4.17.21",
     "near-api-js": "2.1.3",
-    "near-social-vm": "github:esaminu/VM#main",
+    "near-social-vm": "github:NearSocial/VM#dev",
     "next": "13.3.4",
     "prettier": "^2.7.1",
     "react": "18.2.0",
