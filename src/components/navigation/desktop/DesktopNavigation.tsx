@@ -8,7 +8,7 @@ import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
-import { flushEvents, recordClick } from '@/utils/analytics';
+import { reset as resetAnaltyics, recordClick } from '@/utils/analytics';
 import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';
@@ -152,7 +152,7 @@ export const DesktopNavigation = () => {
 
   async function clearAnalytics(event: any) {
     recordClick(event);
-    await flushEvents();
+    await resetAnaltyics();
   }
 
   function handleSignIn(event: any) {

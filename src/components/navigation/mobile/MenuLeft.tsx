@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
-import { flushEvents, recordClick } from '@/utils/analytics';
+import { reset as resetAnalytics, recordClick } from '@/utils/analytics';
 import { getRedirectQueryParams } from '@/utils/navigation';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
@@ -138,7 +138,7 @@ export function MenuLeft(props: Props) {
 
   async function clearAnalytics(event: UIEvent) {
     recordClick(event);
-    await flushEvents();
+    await resetAnalytics();
   }
 
   function handleSignIn(event: UIEvent) {

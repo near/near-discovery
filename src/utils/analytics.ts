@@ -103,7 +103,7 @@ export function recordWalletConnect(accountId: string) {
   }
 }
 
-export function reset() {
+export function logout() {
   if (!segment) return;
   try {
     recordEvent('wallet-logout');
@@ -114,7 +114,7 @@ export function reset() {
   }
 }
 
-export function flushEvents() {
+export function reset() {
   if (!segment) return;
   return segment.reset();
 }
