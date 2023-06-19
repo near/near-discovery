@@ -11,9 +11,9 @@ let segment: Analytics | null = null;
 let hashId = '';
 
 declare global {
-    interface Window {
-        rudderanalytics: any;
-    }
+  interface Window {
+    rudderanalytics: Analytics | undefined;
+  }
 }
 
 export function setAccountIdHash(accountId: string) {
