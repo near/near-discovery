@@ -1,3 +1,4 @@
+import { sanitizeUrl } from '@braintree/sanitize-url';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
@@ -21,6 +22,7 @@ import {
   utils,
   Widget,
 } from 'near-social-vm';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -46,6 +48,8 @@ export default function VmInitializer() {
   const accountId = account.accountId;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
+
+  console.log('near-near-near', near);
 
   useEffect(() => {
     initNear &&
@@ -84,6 +88,18 @@ export default function VmInitializer() {
             }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
+        customElements: {
+          Link: (props: any) => {
+            if (!props.to && props.href) {
+              props.to = props.href;
+              delete props.href;
+            }
+            if (props.to) {
+              props.to = sanitizeUrl(props.to);
+            }
+            return <Link {...props} />;
+          },
+        },
       });
   }, [initNear]);
 
