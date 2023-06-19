@@ -11,6 +11,12 @@ let anonymousUserId = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
 
+declare global {
+  interface Window {
+    rudderanalytics: Analytics | undefined;
+  }
+}
+
 export function setAccountIdHash(accountId: string) {
   const hash = createHash('sha512');
   hash.update(accountId);
