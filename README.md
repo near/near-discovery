@@ -5,13 +5,13 @@
 Initialize repo:
 
 ```
-yarn
+pnpm i
 ```
 
 Start development version:
 
 ```
-yarn start
+pnpm dev
 ```
 
 ## Local Component Development
@@ -33,16 +33,17 @@ yarn start
 
    this will be used as a `redirectMap` in `ViewPage`
 
-2. Create a `.env` file and set the component server URL as `LOCAL_COMPONENT_LOADER`
-3. Run server in dev mode with `yarn start`
+2. Open the `/flags` route of your viewer and set the BOS Loader URL e.g. `http://127.0.0.1:3030`
 
 Note: there is no hot reload, you must refresh the page to see component changes
 
 ## Local VM Development
 
+> This section needs testing since switch to pnpm
+
 If you need to make changes to the VM and test locally, you can easily link your local copy of the VM:
 
-1. Clone the viewer repo as a sibling of `near-discovery-alpha`:
+1. Clone the VM repo as a sibling of `near-discovery`:
 
 ```
 git clone git@github.com:NearSocial/VM.git
@@ -51,25 +52,10 @@ git clone git@github.com:NearSocial/VM.git
 Folder Structure:
 
 ```
-/near-discovery-alpha
+/near-discovery
 /VM
 ```
 
-2. Initialize the `VM` repo and run the link command:
+2. Run `pnpm link ../VM`
 
-```
-cd VM
-yarn
-yarn link
-yarn build
-```
-
-3. Run the link command inside `near-discovery-alpha` and start the app:
-
-```
-cd ../near-discovery-alpha
-yarn link "near-social-vm"
-yarn start
-```
-
-4. Any time you make changes to the `VM`, run `yarn build` inside the `VM` project in order for the viewer project to pick up the changes.
+3. Any time you make changes to the `VM`, run `pnpm build` inside the `VM` project in order for the viewer project to pick up the changes
