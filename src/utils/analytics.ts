@@ -49,12 +49,11 @@ export async function init() {
           enabled: true,
           source: "segment"
         }
-      });
+      }});
     segment = window.rudderanalytics;
   } catch (e) {
     console.error(e);
   }
-      }
 }
 
 function isStringAllowed(str: string) {
