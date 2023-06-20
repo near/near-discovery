@@ -8,7 +8,9 @@ import type { UIEvent } from 'react';
 import { networkId } from './config';
 
 let rudderAnalytics: Analytics | null = null;
+let anonymousUserId = '';
 let hashId = '';
+let anonymousUserIdCreatedAt = '';
 
 declare global {
   interface Window {
@@ -23,9 +25,31 @@ export function setAccountIdHash(accountId: string) {
   localStorage.setItem('hashId', hashId);
 }
 
-export async function init() {
-  if (window?.rudderanalytics) return; // already initialized
+function getAnonymousId() {
+  if (anonymousUserId) {
+    return anonymousUserId;
+  }
 
+  const storageId = localStorage.getItem('anonymousUserId');
+  anonymousUserIdCreatedAt = localStorage.getItem('anonymousUserIdCreatedAt') || '';
+
+  if (storageId) {
+    anonymousUserId = storageId;
+  } else {
+    anonymousUserId = nanoid();
+    anonymousUserIdCreatedAt = new Date().toUTCString();
+    localStorage.setItem('anonymousUserId', anonymousUserId);
+    localStorage.setItem('anonymousUserIdCreatedAt', anonymousUserIdCreatedAt);
+  }
+
+  return anonymousUserId;
+}
+
+export async function init() {
+  if (window?.rudderanalytics) return;
+
+  getAnonymousId();
+  
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
   const rudderStackDataPlaneUrl = 'https://nearpavelsqp.dataplane.rudderstack.com';
 
@@ -36,14 +60,9 @@ export async function init() {
 
   try {
     window.rudderanalytics = await import("rudder-sdk-js");
-    window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl, {
-      anonymousIdOptions: {
-        autoCapture: {
-          enabled: true,
-          source: "segment"
-        }
-      }});
+    window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl);
     rudderAnalytics = window.rudderanalytics;
+    if(rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
   } catch (e) {
     console.error(e);
   }
@@ -119,6 +138,7 @@ function recordEventWithProps(eventLabel: string, properties: Record<string, str
       {
         ...properties,
         hashId: localStorage.getItem('hashId'),
+        anonymousUserIdCreatedAt
       }
     );
   } catch (e) {
@@ -134,6 +154,7 @@ export function recordEvent(eventLabel: string) {
       {
         hashId: localStorage.getItem('hashId'),
         url: window.location.href,
+        anonymousUserIdCreatedAt,
       }
     );
 } catch (e) {
