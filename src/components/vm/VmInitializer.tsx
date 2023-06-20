@@ -49,8 +49,6 @@ export default function VmInitializer() {
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
 
-  console.log('near-near-near', near);
-
   useEffect(() => {
     initNear &&
       initNear({
