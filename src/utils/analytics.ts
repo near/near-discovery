@@ -7,7 +7,7 @@ import type { UIEvent } from 'react';
 
 import { networkId } from './config';
 
-let segment: Analytics | null = null;
+let rudderAnalytics: Analytics | null = null;
 let hashId = '';
 
 declare global {
@@ -27,10 +27,10 @@ export async function init() {
   if (window?.rudderanalytics) return; // already initialized
 
 
-  const segmentKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
   const rudderStackOptions = {
     dataPlaneUrl: "https://nearpavelsqp.dataplane.rudderstack.com",
   }
+  const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
 
   const options =
     typeof window === 'undefined'
@@ -43,14 +43,14 @@ export async function init() {
 
   try {
     window.rudderanalytics = await import("rudder-sdk-js");
-    window.rudderanalytics.load(segmentKey, "https://nearpavelsqp.dataplane.rudderstack.com", {
+    window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl, {
       anonymousIdOptions: {
         autoCapture: {
           enabled: true,
           source: "segment"
         }
       }});
-    segment = window.rudderanalytics;
+    rudderAnalytics = window.rudderanalytics;
   } catch (e) {
     console.error(e);
   }
@@ -67,9 +67,9 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
-  if (!segment) return;
+  if (!rudderAnalytics) return;
   try {
-    segment.page(
+    rudderAnalytics.page(
       'category',
       pageName,
       {
@@ -103,25 +103,25 @@ export function recordWalletConnect(accountId: string) {
 }
 
 export function logout() {
-  if (!segment) return;
+  if (!rudderAnalytics) return;
   try {
     recordEvent('wallet-logout');
     localStorage.removeItem('hashId');
-    segment.reset();
+    rudderAnalytics.reset();
   } catch (e) {
     console.error(e);
   }
 }
 
 export function reset() {
-  if (!segment) return;
-  return segment.reset();
+  if (!rudderAnalytics) return;
+  return rudderAnalytics.reset();
 }
 
 function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
-  if (!segment) return;
+  if (!rudderAnalytics) return;
   try {
-    segment.track(
+    rudderAnalytics.track(
       eventLabel,
       {
         ...properties,
@@ -134,9 +134,9 @@ function recordEventWithProps(eventLabel: string, properties: Record<string, str
 }
 
 export function recordEvent(eventLabel: string) {
-  if (!segment) return;
+  if (!rudderAnalytics) return;
   try {
-    segment.track(
+    rudderAnalytics.track(
       eventLabel,
       {
         hashId: localStorage.getItem('hashId'),
