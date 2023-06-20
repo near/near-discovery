@@ -26,20 +26,13 @@ export function setAccountIdHash(accountId: string) {
 export async function init() {
   if (window?.rudderanalytics) return; // already initialized
 
-
-  const rudderStackOptions = {
-    dataPlaneUrl: "https://nearpavelsqp.dataplane.rudderstack.com",
-  }
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
+  const rudderStackDataPlaneUrl = 'https://nearpavelsqp.dataplane.rudderstack.com';
 
-  const options =
-    typeof window === 'undefined'
-      ? rudderStackOptions
-      : {
-          ...rudderStackOptions,
-          host: `${window.location.protocol}//${window.location.host}`,
-          path: '/api/segment',
-        };
+  let analyticsUrl = rudderStackDataPlaneUrl;
+  if (typeof window !== 'undefined') {
+    analyticsUrl = `${window.location.protocol}//${window.location.host}/api/analytics`;
+  }
 
   try {
     window.rudderanalytics = await import("rudder-sdk-js");
