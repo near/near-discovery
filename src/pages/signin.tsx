@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -9,6 +8,7 @@ import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
+import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -28,6 +28,8 @@ const SignInPage: NextPageWithLayout = () => {
       redirect();
     }
   }, [redirect, signedIn]);
+
+  useClearCurrentComponent();
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
@@ -85,7 +87,7 @@ const SignInPage: NextPageWithLayout = () => {
 };
 SignInPage.getLayout = useDefaultLayout;
 
-export default SignInPage;
+export default signedOutRoute(SignInPage);
 
 const StyledContainer = styled.div`
   width: 100%;

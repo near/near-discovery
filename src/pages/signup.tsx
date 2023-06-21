@@ -11,6 +11,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { network } from '@/utils/config';
+import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -43,11 +44,12 @@ const SignUpPage: NextPageWithLayout = () => {
         openToast({
           title: '',
           type: 'INFO',
-          description: 'Passkey support is required for account creation. Try using an updated version of Chrome or Safari to create an account.',
+          description:
+            'Passkey support is required for account creation. Try using an updated version of Chrome or Safari to create an account.',
           duration: 5000,
-        })
+        });
       }
-    }
+    };
     checkPassKey();
   }, []);
 
@@ -232,7 +234,7 @@ const SignUpPage: NextPageWithLayout = () => {
 
 SignUpPage.getLayout = useDefaultLayout;
 
-export default SignUpPage;
+export default signedOutRoute(SignUpPage);
 
 const StyledContainer = styled.div`
   width: 100%;
