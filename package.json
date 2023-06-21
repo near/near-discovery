@@ -38,7 +38,6 @@
     "@web3-onboard/ledger": "^2.4.4",
     "@web3-onboard/react": "^2.7.2",
     "@web3-onboard/walletconnect": "^2.3.5",
-    "analytics-node": "^6.2.0",
     "big.js": "^6.1.1",
     "bn.js": "^5.1.1",
     "bootstrap": "^5.2.1",
