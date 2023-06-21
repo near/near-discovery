@@ -8,7 +8,7 @@ import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
-import { reset as resetAnalytics, recordClick } from '@/utils/analytics';
+import { recordClick, reset as resetAnalytics } from '@/utils/analytics';
 import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';

@@ -1,10 +1,9 @@
-import RudderAnalytics from 'rudder-sdk-js';
-import type Analytics from '../../types/rudderstack-analytics';
 import { createHash } from 'crypto';
 import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
+import type Analytics from '../../types/rudderstack-analytics';
 import { networkId } from './config';
 
 let rudderAnalytics: Analytics | null = null;
@@ -49,7 +48,7 @@ export async function init() {
   if (window?.rudderanalytics) return;
 
   getAnonymousId();
-  
+
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
   const rudderStackDataPlaneUrl = 'https://nearpavelsqp.dataplane.rudderstack.com';
 
@@ -59,10 +58,10 @@ export async function init() {
   }
 
   try {
-    window.rudderanalytics = await import("rudder-sdk-js");
+    window.rudderanalytics = await import('rudder-sdk-js');
     window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl);
     rudderAnalytics = window.rudderanalytics;
-    if(rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
+    if (rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
   } catch (e) {
     console.error(e);
   }
@@ -81,15 +80,11 @@ function filterURL(url: string) {
 export function recordPageView(pageName: string) {
   if (!rudderAnalytics) return;
   try {
-    rudderAnalytics.page(
-      'category',
-      pageName,
-      {
-        hashId: localStorage.getItem('hashId'),
-        url: filterURL(window.location.href),
-        ref: filterURL(document.referrer),
-      }
-    );
+    rudderAnalytics.page('category', pageName, {
+      hashId: localStorage.getItem('hashId'),
+      url: filterURL(window.location.href),
+      ref: filterURL(document.referrer),
+    });
   } catch (e) {
     console.error(e);
   }
@@ -133,14 +128,11 @@ export function reset() {
 function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
   if (!rudderAnalytics) return;
   try {
-    rudderAnalytics.track(
-      eventLabel,
-      {
-        ...properties,
-        hashId: localStorage.getItem('hashId'),
-        anonymousUserIdCreatedAt
-      }
-    );
+    rudderAnalytics.track(eventLabel, {
+      ...properties,
+      hashId: localStorage.getItem('hashId'),
+      anonymousUserIdCreatedAt,
+    });
   } catch (e) {
     console.error(e);
   }
@@ -149,17 +141,14 @@ function recordEventWithProps(eventLabel: string, properties: Record<string, str
 export function recordEvent(eventLabel: string) {
   if (!rudderAnalytics) return;
   try {
-    rudderAnalytics.track(
-      eventLabel,
-      {
-        hashId: localStorage.getItem('hashId'),
-        url: window.location.href,
-        anonymousUserIdCreatedAt,
-      }
-    );
-} catch (e) {
-  console.error(e);
-}
+    rudderAnalytics.track(eventLabel, {
+      hashId: localStorage.getItem('hashId'),
+      url: window.location.href,
+      anonymousUserIdCreatedAt,
+    });
+  } catch (e) {
+    console.error(e);
+  }
 }
 
 function getXPath(element: HTMLElement | null): string {

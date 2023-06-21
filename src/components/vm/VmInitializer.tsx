@@ -28,7 +28,7 @@ import { useEthersProviderContext } from '@/data/web3';
 import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
-import { recordWalletConnect, logout as logoutAnalyticsEvent } from '@/utils/analytics';
+import { logout as logoutAnalyticsEvent, recordWalletConnect } from '@/utils/analytics';
 import { networkId, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
