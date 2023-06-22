@@ -44,7 +44,7 @@ const nextConfig = {
     },
     {
       source: '/api/analytics/:path*',
-      destination: 'https://neardiscovery.dataplane.rudderstack.com/:path*',
+      destination: 'https://nearpavelsqp.dataplane.rudderstack.com/:path*',
     },
   ],
 };

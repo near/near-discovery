@@ -51,7 +51,7 @@ export async function init() {
   getAnonymousId();
 
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
-  const rudderStackDataPlaneUrl = 'https://neardiscovery.dataplane.rudderstack.com';
+  const rudderStackDataPlaneUrl = 'https://nearpavelsqp.dataplane.rudderstack.com';
 
   let analyticsUrl = rudderStackDataPlaneUrl;
   if (typeof window !== 'undefined') {
