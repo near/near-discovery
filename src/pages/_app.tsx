@@ -8,6 +8,7 @@ import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
@@ -15,6 +16,7 @@ import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
+import { useAuthStore } from '@/stores/auth';
 import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
@@ -32,19 +34,33 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   const getLayout = Component.getLayout ?? ((page) => page);
+  const router = useRouter();
+  const authStore = useAuthStore();
+  const componentSrc = router.query;
 
   useEffect(() => {
     initializeSegment();
   }, []);
 
   useEffect(() => {
+    // Displays the Zendesk widget only if user is signed in and on the home page
+    if (!window.zE) return;
+    if (!authStore.signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
+      window.zE('webWidget', 'hide');
+      return;
+    }
+    localStorage.setItem('accountId', authStore.accountId);
+    window.zE('webWidget', 'show');
+  }, [authStore.accountId, authStore.signedIn, componentSrc]);
+
+  useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);
 
     function zendeskCheck() {
-      //once the zendesk widget comes online, style it
+      // once the zendesk widget comes online, style it
       const zwFrame = document.getElementById('launcher') as HTMLIFrameElement | null;
       const zwEmbed = zwFrame?.contentDocument?.getElementById('Embed');
-      const zwButton = zwEmbed?.getElementsByTagName('button')[0];
+      const zwButton = zwEmbed?.querySelector('[data-testid="launcher"]');
       if (zwButton) {
         styleZendesk();
         clearInterval(interval);
@@ -90,9 +106,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                     prefill: { '*': localStorage.getItem('accountId') },
                   },
                 ],
-              },
-              launcher: {
-                label: { '*': ' ' },
               },
             },
           };
