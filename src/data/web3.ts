@@ -12,8 +12,7 @@ const web3onboardKey = 'web3-onboard:connectedWallets';
 
 const wcV2InitOptions: any = {
   version: 2,
-  // TODO: add proper `projectId`
-  projectId: '',
+  projectId: '72b7b3359ab477e339a070f615806aa6',
   requiredChains: [1, 56],
 };
 
