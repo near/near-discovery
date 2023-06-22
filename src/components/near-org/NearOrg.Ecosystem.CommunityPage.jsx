@@ -297,7 +297,7 @@ export function NearOrgEcosystemCommunityPage() {
                   </Text>
                   {item.internal ? (
                     <VmComponent
-                      src="near/widget/DIG.Button"
+                      src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                       props={{
                         href: item.href,
                         iconRight: 'ph-bold ph-arrow-up-right',
@@ -311,7 +311,7 @@ export function NearOrgEcosystemCommunityPage() {
                     />
                   ) : (
                     <VmComponent
-                      src="near/widget/DIG.Button"
+                      src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                       props={{
                         href: item.href,
                         iconRight: 'ph-bold ph-arrow-right',
@@ -345,7 +345,7 @@ export function NearOrgEcosystemCommunityPage() {
               <div className="col" key={item.title}>
                 <Card style={{ height: '100%' }}>
                   <VmComponent
-                    src="mob.near/widget/Image"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'eugenethedream/widget/Image' : 'mob.near/widget/Image'}
                     props={{
                       image: returnIpfsImage(item.ipfsImage),
                       style: { width: '52px', height: '52px' },
@@ -373,7 +373,7 @@ export function NearOrgEcosystemCommunityPage() {
                 </Text>
                 <div>
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                     props={{
                       href: 'https://www.youtube.com/channel/UCuKdIYVN8iE3fv8alyk1aMw',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -397,7 +397,7 @@ export function NearOrgEcosystemCommunityPage() {
                 </Text>
                 <Flex gap="24px" direction="column" alignItems="start">
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                     props={{
                       href: 'https://near.org/blog',
                       iconRight: 'ph-bold ph-arrow-right',
@@ -408,7 +408,7 @@ export function NearOrgEcosystemCommunityPage() {
                     }}
                   />
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                     props={{
                       href: 'https://medium.com/nearprotocol',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -435,7 +435,7 @@ export function NearOrgEcosystemCommunityPage() {
                     <div key={item.key} className="col">
                       {item.internal ? (
                         <VmComponent
-                          src="near/widget/DIG.Button"
+                          src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                           props={{
                             href: item.href,
                             iconRight: 'ph-bold ph-arrow-up-right',
@@ -449,7 +449,7 @@ export function NearOrgEcosystemCommunityPage() {
                         />
                       ) : (
                         <VmComponent
-                          src="near/widget/DIG.Button"
+                          src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                           props={{
                             href: item.href,
                             iconRight: 'ph-bold ph-arrow-right',
@@ -468,7 +468,7 @@ export function NearOrgEcosystemCommunityPage() {
           </div>
         </Section>
       </Wrapper>
-      <VmComponent src="near/widget/NearOrg.Footer" />
+      <VmComponent src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/NearOrg.Footer' : 'near/widget/NearOrg.Footer'} />
     </>
   );
 }

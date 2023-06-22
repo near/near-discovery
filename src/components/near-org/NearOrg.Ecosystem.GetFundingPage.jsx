@@ -339,7 +339,7 @@ export function NearOrgEcosystemGetFundingPage() {
               We’ve helped hundreds of projects and teams realize their ideas, and bring them to market.
             </Text>
             <VmComponent
-              src="mob.near/widget/Image"
+              src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'eugenethedream/widget/Image' : 'mob.near/widget/Image'}
               props={{
                 image: returnIpfsImage(ipfsImages.arrows),
                 className: 'img-fluid d-none d-lg-block mx-auto',
@@ -376,7 +376,7 @@ export function NearOrgEcosystemGetFundingPage() {
                   <div className="col" key={item.ipfsImage}>
                     <Card background="transparent" border="none" direction="row">
                       <VmComponent
-                        src="mob.near/widget/Image"
+                        src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'eugenethedream/widget/Image' : 'mob.near/widget/Image'}
                         props={{
                           image: returnIpfsImage(item.ipfsImage),
                           className: 'img-fluid',
@@ -399,7 +399,7 @@ export function NearOrgEcosystemGetFundingPage() {
                         {item.href ? (
                           <div>
                             <VmComponent
-                              src="near/widget/DIG.Button"
+                              src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                               props={{
                                 href: item.href,
                                 iconRight: 'ph-bold ph-arrow-up-right',
@@ -435,7 +435,7 @@ export function NearOrgEcosystemGetFundingPage() {
             fund, joining an accelerator, or getting venture support through our Ecosystem partners.
           </Text>
           <VmComponent
-            src="mob.near/widget/Image"
+            src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'eugenethedream/widget/Image' : 'mob.near/widget/Image'}
             props={{
               image: returnIpfsImage(ipfsImages.longImage),
               className: 'img-fluid',
@@ -447,7 +447,7 @@ export function NearOrgEcosystemGetFundingPage() {
           />
           <div>
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
               props={{
                 href: `#ecosystem_grants`,
                 label: 'Explore programs',
@@ -459,7 +459,7 @@ export function NearOrgEcosystemGetFundingPage() {
         </Section>
       </Wrapper>
 
-      <VmComponent src="near/widget/NearOrg.Footer" />
+      <VmComponent src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/NearOrg.Footer' : 'near/widget/NearOrg.Footer'} />
     </>
   );
 }

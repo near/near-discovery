@@ -107,7 +107,7 @@ export function NearOrgHomePage() {
 
           <TryItNow>
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
               props={{
                 href: '#/onboarding/start',
                 label: 'Try It Now',
@@ -116,7 +116,7 @@ export function NearOrgHomePage() {
               }}
             />
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
               props={{
                 href: '#/signup',
                 label: 'Create Account',
@@ -136,7 +136,7 @@ export function NearOrgHomePage() {
             return (
               <a href={team.url} target="_blank" title={team.name} key={team.name}>
                 <VmComponent
-                  src="mob.near/widget/Image"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'eugenethedream/widget/Image' : 'mob.near/widget/Image'}
                   props={{
                     image: returnIpfsImage(team.ipfsImage),
                     alt: team.name,
@@ -214,7 +214,7 @@ export function NearOrgHomePage() {
                   to learn a new language
                 </Text>
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: 'https://docs.near.org/discovery',
                     target: '_blank',
@@ -242,7 +242,7 @@ export function NearOrgHomePage() {
                   build and publish your own from the ground up
                 </Text>
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: '#/onboarding/start',
                     label: 'Try it now',
@@ -271,7 +271,7 @@ export function NearOrgHomePage() {
                   your users to onboard to your app, without any crypto
                 </Text>
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/fast-auth',
                     target: '_blank',
@@ -300,7 +300,7 @@ export function NearOrgHomePage() {
                   is available to anyone to inspect, fork, modify, and reuse
                 </Text>
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/open-source',
                     target: '_blank',
@@ -445,7 +445,7 @@ export function NearOrgHomePage() {
                   you to connect directly with your users
                 </Text>
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: '#/onboarding',
                     label: 'Try it out',
@@ -493,7 +493,7 @@ export function NearOrgHomePage() {
                   and scalability, and never getting stuck <span style={{ whiteSpace: 'nowrap' }}>in a silo</span>
                 </Text>
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/multi-chain',
                     target: '_blank',
@@ -542,7 +542,7 @@ export function NearOrgHomePage() {
                   capable of running a few lines of Javascript
                 </Text>
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: 'https://wiki.near.org/overview/BOS/gateways',
                     target: '_blank',
@@ -641,7 +641,7 @@ export function NearOrgHomePage() {
               </Text>
               {!signedIn ? (
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: '#/signup',
                     label: 'Create Account',
@@ -651,7 +651,7 @@ export function NearOrgHomePage() {
                 />
               ) : (
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: '#/sandbox',
                     label: 'Try It Now',
@@ -665,7 +665,7 @@ export function NearOrgHomePage() {
             <Flex direction="column" gap="68px">
               <Flex direction="column" gap="16px">
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: '#/people',
                     label: 'Community',
@@ -679,7 +679,7 @@ export function NearOrgHomePage() {
 
               <Flex direction="column" gap="16px">
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: '#/events',
                     label: 'Events',
@@ -693,7 +693,7 @@ export function NearOrgHomePage() {
 
               <Flex direction="column" gap="16px">
                 <VmComponent
-                  src="near/widget/DIG.Button"
+                  src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                   props={{
                     href: '/blog',
                     label: 'News',
@@ -755,7 +755,7 @@ export function NearOrgHomePage() {
 
             {!signedIn ? (
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                 props={{
                   href: '#/signup',
                   label: 'Create Account',
@@ -765,7 +765,7 @@ export function NearOrgHomePage() {
               />
             ) : (
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                 props={{
                   href: '#/sandbox',
                   label: 'Try It Now',
@@ -778,7 +778,7 @@ export function NearOrgHomePage() {
         </SectionContent>
       </Section>
 
-      <VmComponent src="near/widget/NearOrg.Footer" />
+      <VmComponent src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/NearOrg.Footer' : 'near/widget/NearOrg.Footer'} />
     </Wrapper>
   );
 }

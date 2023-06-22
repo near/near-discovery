@@ -146,7 +146,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                     props={{
                       href: 'https://careers.near.org/jobs',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -158,7 +158,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                     }}
                   />
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                     props={{
                       href: 'https://www.near.university/#earn',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -183,7 +183,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                     props={{
                       href: nearOrgLinks.getFundingPage,
                       iconRight: 'ph-bold ph-arrow-right',
@@ -207,7 +207,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/DIG.Button' : 'near/widget/DIG.Button'}
                     props={{
                       href: 'https://gitcoin.co/near/active',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -225,7 +225,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
         </Section>
       </Wrapper>
 
-      <VmComponent src="near/widget/NearOrg.Footer" />
+      <VmComponent src={process.env.NEXT_PUBLIC_NETWORK_ID == 'testnet' ? 'discom.testnet/widget/NearOrg.Footer' : 'near/widget/NearOrg.Footer'} />
     </>
   );
 }
