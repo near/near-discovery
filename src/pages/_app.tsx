@@ -45,7 +45,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
     if (!window.zE) return;
-    if (!authStore.signedIn || (componentSrc?.componentAccountId && componentSrc?.componentName)) {
+    if (!authStore.signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
       window.zE('webWidget', 'hide');
       return;
     }

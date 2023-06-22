@@ -39,3 +39,28 @@ a:hover {
 }
 
 #w3m-modal { z-index: 1002 }
+
+#launcher {
+  color-scheme: light;
+  width: 48px;
+  height: 50px;
+  padding: 0px;
+  margin: 10px 20px;
+  position: fixed;
+  bottom: 10px;
+  overflow: visible;
+  opacity: 1;
+  border: 0px;
+  z-index: 999998;
+  transition-duration: 250ms;
+  transition-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1);
+  transition-property: opacity, top, bottom;
+  right: 10px;
+}
+
+@media (max-width: 650px) {
+  #launcher {
+    right: 2px;
+    bottom: 10px;
+  }
+}
