@@ -57,10 +57,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     const interval = setInterval(zendeskCheck, 20);
 
     function zendeskCheck() {
-      //once the zendesk widget comes online, style it
+      // once the zendesk widget comes online, style it
       const zwFrame = document.getElementById('launcher') as HTMLIFrameElement | null;
       const zwEmbed = zwFrame?.contentDocument?.getElementById('Embed');
-      const zwButton = zwEmbed?.getElementsByTagName('button')[0];
+      const zwButton = zwEmbed?.querySelector('[data-testid="launcher"]');
       if (zwButton) {
         styleZendesk();
         clearInterval(interval);
@@ -106,9 +106,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                     prefill: { '*': localStorage.getItem('accountId') },
                   },
                 ],
-              },
-              launcher: {
-                label: { '*': ' ' },
               },
             },
           };
