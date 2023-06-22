@@ -25,17 +25,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
-  useEffect(() => {
-    // Displays the Zendesk widget only if user is signed in and on the home page
-    if (!window.zE) return;
-    if (!authStore.signedIn || !!componentSrc) {
-      window.zE('webWidget', 'hide');
-      return;
-    }
-    localStorage.setItem('accountId', authStore.accountId);
-    window.zE('webWidget', 'show');
-  }, [authStore.accountId, authStore.signedIn, componentSrc]);
-
   return (
     <div className="container-xl" onPointerUp={recordClick}>
       <div className="row">
