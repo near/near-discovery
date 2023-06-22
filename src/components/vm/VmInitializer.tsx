@@ -28,9 +28,13 @@ import { useEthersProviderContext } from '@/data/web3';
 import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
-import { logout as logoutAnalyticsEvent, recordWalletConnect } from '@/utils/analytics';
+import { recordWalletConnect, reset as resetSegment } from '@/utils/analytics';
 import { networkId, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
+import {
+  logout as logoutAnalyticsEvent,
+  recordWalletConnect as recordWalletConnectRudder,
+} from '@/utils/rudder-analytics';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
@@ -51,7 +55,10 @@ export default function VmInitializer() {
     initNear &&
       initNear({
         networkId,
-        walletConnectCallback: recordWalletConnect,
+        walletConnectCallback: (accountId: string) => {
+          recordWalletConnect(accountId);
+          recordWalletConnectRudder(accountId);
+        },
         selector: setupWalletSelector({
           network: networkId,
           modules: [
@@ -121,6 +128,7 @@ export default function VmInitializer() {
     near.accountId = null;
     setSignedIn(false);
     setSignedAccountId(null);
+    resetSegment();
     logoutAnalyticsEvent();
     localStorage.removeItem('accountId');
   }, [near]);

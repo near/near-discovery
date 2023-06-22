@@ -1,15 +1,22 @@
-import Analytics from 'analytics-node';
+
 import { createHash } from 'crypto';
 import { get, split, truncate } from 'lodash';
 import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
+import type Analytics from '../../types/rudderstack-analytics';
 import { networkId } from './config';
 
-let segment: Analytics | null = null;
+let rudderAnalytics: Analytics | null = null;
 let anonymousUserId = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
+
+declare global {
+  interface Window {
+    rudderanalytics: Analytics | undefined;
+  }
+}
 
 export function setAccountIdHash(accountId: string) {
   const hash = createHash('sha512');
@@ -38,23 +45,24 @@ function getAnonymousId() {
   return anonymousUserId;
 }
 
-export function init() {
-  if (segment) return; // already initialized
+export async function init() {
+  if (window?.rudderanalytics) return;
 
   getAnonymousId();
 
-  const segmentKey = networkId === 'testnet' ? 'diA7hiO28gGeb9fxn615Xs91uX3GyYhL' : 'gVheHtpTIWpmstSvXjGkSY80nGEXgHX4';
+  const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
+  const rudderStackDataPlaneUrl = 'https://neardiscovery.dataplane.rudderstack.com';
 
-  const options =
-    typeof window === 'undefined'
-      ? {}
-      : {
-          host: `${window.location.protocol}//${window.location.host}`,
-          path: '/api/segment',
-        };
+  let analyticsUrl = rudderStackDataPlaneUrl;
+  if (typeof window !== 'undefined') {
+    analyticsUrl = `${window.location.protocol}//${window.location.host}/api/analytics`;
+  }
 
   try {
-    segment = new Analytics(segmentKey, options);
+    window.rudderanalytics = await import('rudder-sdk-js');
+    window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl);
+    rudderAnalytics = window.rudderanalytics;
+    if (rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
   } catch (e) {
     console.error(e);
   }
@@ -71,16 +79,12 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
-  if (!segment) return;
+  if (!rudderAnalytics) return;
   try {
-    segment.page({
-      name: pageName,
-      anonymousId: getAnonymousId(),
-      properties: {
-        hashId: localStorage.getItem('hashId'),
-        url: filterURL(window.location.href),
-        ref: filterURL(document.referrer),
-      },
+    rudderAnalytics.page('category', pageName, {
+      hashId: localStorage.getItem('hashId'),
+      url: filterURL(window.location.href),
+      ref: filterURL(document.referrer),
     });
   } catch (e) {
     console.error(e);
@@ -106,35 +110,29 @@ export function recordWalletConnect(accountId: string) {
   }
 }
 
-export function reset() {
-  if (!segment) return;
+export function logout() {
+  if (!rudderAnalytics) return;
   try {
     recordEvent('wallet-logout');
     localStorage.removeItem('hashId');
-    localStorage.removeItem('anonymousUserId');
-    localStorage.removeItem('anonymousUserIdCreatedAt');
-    segment.flush();
+    rudderAnalytics.reset();
   } catch (e) {
     console.error(e);
   }
 }
 
-export function flushEvents() {
-  if (!segment) return;
-  return segment.flush();
+export function reset() {
+  if (!rudderAnalytics) return;
+  return rudderAnalytics.reset();
 }
 
-function recordEventWithProps(eventLabel: string, properties: Record<string, unknown>) {
-  if (!segment) return;
+function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
+  if (!rudderAnalytics) return;
   try {
-    segment.track({
-      anonymousId: getAnonymousId(),
-      event: eventLabel,
-      properties: {
-        ...properties,
-        hashId: localStorage.getItem('hashId'),
-        anonymousUserIdCreatedAt,
-      },
+    rudderAnalytics.track(eventLabel, {
+      ...properties,
+      hashId: localStorage.getItem('hashId'),
+      anonymousUserIdCreatedAt,
     });
   } catch (e) {
     console.error(e);
@@ -142,16 +140,12 @@ function recordEventWithProps(eventLabel: string, properties: Record<string, unk
 }
 
 export function recordEvent(eventLabel: string) {
-  if (!segment) return;
+  if (!rudderAnalytics) return;
   try {
-    segment.track({
-      anonymousId: getAnonymousId(),
-      event: eventLabel,
-      properties: {
-        hashId: localStorage.getItem('hashId'),
-        url: window.location.href,
-        anonymousUserIdCreatedAt,
-      },
+    rudderAnalytics.track(eventLabel, {
+      hashId: localStorage.getItem('hashId'),
+      url: window.location.href,
+      anonymousUserIdCreatedAt,
     });
   } catch (e) {
     console.error(e);

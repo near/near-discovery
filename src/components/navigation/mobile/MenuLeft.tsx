@@ -9,8 +9,9 @@ import styled from 'styled-components';
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
-import { recordClick, reset as resetAnalytics } from '@/utils/analytics';
+import { flushEvents, recordClick } from '@/utils/analytics';
 import { getRedirectQueryParams } from '@/utils/navigation';
+import { recordClick as recordClickRudder, reset as resetAnalytics } from '@/utils/rudder-analytics';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -138,6 +139,8 @@ export function MenuLeft(props: Props) {
 
   async function clearAnalytics(event: UIEvent) {
     recordClick(event);
+    await flushEvents();
+    recordClickRudder(event);
     await resetAnalytics();
   }
 

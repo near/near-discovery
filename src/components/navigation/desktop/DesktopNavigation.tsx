@@ -8,8 +8,9 @@ import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
-import { recordClick, reset as resetAnalytics } from '@/utils/analytics';
+import { flushEvents, recordClick } from '@/utils/analytics';
 import { getRedirectQueryParams } from '@/utils/navigation';
+import { recordClick as recordClickRudder, reset as resetAnalytics } from '@/utils/rudder-analytics';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -152,7 +153,9 @@ export const DesktopNavigation = () => {
 
   async function clearAnalytics(event: any) {
     recordClick(event);
-    await resetAnalytics();
+    await flushEvents();
+    recordClickRudder(event);
+    resetAnalytics();
   }
 
   function handleSignIn(event: any) {

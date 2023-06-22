@@ -15,7 +15,8 @@ import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { init as initializeRudderAnalytics } from '@/utils/analytics';
+import { init as initializeSegment } from '@/utils/analytics';
+import { init as initializeRudderAnalytics } from '@/utils/rudder-analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -34,6 +35,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   useEffect(() => {
+    initializeSegment();
     initializeRudderAnalytics();
   }, []);
 
