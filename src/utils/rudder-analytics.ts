@@ -158,7 +158,7 @@ function getXPath(element: HTMLElement | null): string {
   if (element === document.body) return element.tagName;
 
   let ix = 0;
-  const siblings = element.parentNode?.children || new HTMLCollection();
+  const siblings = element.parentNode?.children || [];
 
   for (let i = 0; i < siblings.length; i++) {
     const sibling = siblings[i];
