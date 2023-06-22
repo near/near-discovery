@@ -40,7 +40,7 @@ const nextConfig = {
   rewrites: async () => [
     {
       source: '/api/analytics/:path*',
-      destination: 'https://nearpavelsqp.dataplane.rudderstack.com/:path*',
+      destination: 'https://neardiscovery.dataplane.rudderstack.com/:path*',
     },
   ],
 };
