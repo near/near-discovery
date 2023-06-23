@@ -95,7 +95,7 @@ export class FastAuthWallet {
     });
   }
 
-  async signAndSendTransactions(transactions) {
+  async signAndSendTransactions({ transactions }) {
     for (let { signerId } of transactions) {
       this.assertValidSigner(signerId);
     }
