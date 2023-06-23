@@ -4,8 +4,11 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { recordClick } from '@/utils/analytics';
+import { useBosComponents } from '@/hooks/useBosComponents';
 
 export function NearOrgEcosystemGetFundingPage() {
+  const components = useBosComponents();
+
   const Wrapper = styled.div`
     --section-gap: 162px;
     --large-gap: 82px;
@@ -339,7 +342,7 @@ export function NearOrgEcosystemGetFundingPage() {
               We’ve helped hundreds of projects and teams realize their ideas, and bring them to market.
             </Text>
             <VmComponent
-              src="mob.near/widget/Image"
+              src={components.image}
               props={{
                 image: returnIpfsImage(ipfsImages.arrows),
                 className: 'img-fluid d-none d-lg-block mx-auto',
@@ -376,7 +379,7 @@ export function NearOrgEcosystemGetFundingPage() {
                   <div className="col" key={item.ipfsImage}>
                     <Card background="transparent" border="none" direction="row">
                       <VmComponent
-                        src="mob.near/widget/Image"
+                        src={components.image}
                         props={{
                           image: returnIpfsImage(item.ipfsImage),
                           className: 'img-fluid',
@@ -399,7 +402,7 @@ export function NearOrgEcosystemGetFundingPage() {
                         {item.href ? (
                           <div>
                             <VmComponent
-                              src="near/widget/DIG.Button"
+                              src={components.digButton}
                               props={{
                                 href: item.href,
                                 iconRight: 'ph-bold ph-arrow-up-right',
@@ -435,7 +438,7 @@ export function NearOrgEcosystemGetFundingPage() {
             fund, joining an accelerator, or getting venture support through our Ecosystem partners.
           </Text>
           <VmComponent
-            src="mob.near/widget/Image"
+            src={components.image}
             props={{
               image: returnIpfsImage(ipfsImages.longImage),
               className: 'img-fluid',
@@ -447,7 +450,7 @@ export function NearOrgEcosystemGetFundingPage() {
           />
           <div>
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={components.digButton}
               props={{
                 href: `#ecosystem_grants`,
                 label: 'Explore programs',
@@ -459,7 +462,7 @@ export function NearOrgEcosystemGetFundingPage() {
         </Section>
       </Wrapper>
 
-      <VmComponent src="near/widget/NearOrg.Footer" />
+      <VmComponent src={components.nearOrg.footer} />
     </>
   );
 }
