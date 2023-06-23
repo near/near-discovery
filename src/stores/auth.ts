@@ -1,5 +1,6 @@
 import type Big from 'big.js';
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware'
 
 type AuthState = {
   account: any;
@@ -16,14 +17,21 @@ type AuthStore = AuthState & {
   set: (state: AuthState) => void;
 };
 
-export const useAuthStore = create<AuthStore>((set) => ({
-  account: null,
-  accountId: '',
-  availableStorage: null,
-  logOut: async () => undefined,
-  refreshAllowance: async () => undefined,
-  requestSignIn: () => undefined,
-  requestSignInWithWallet: () => undefined,
-  signedIn: false,
-  set: (state) => set((previousState) => ({ ...previousState, ...state })),
-}));
+export const useAuthStore = create<AuthStore>()(
+  devtools(
+    (set) => ({
+      account: null,
+      accountId: '',
+      availableStorage: null,
+      logOut: async () => undefined,
+      refreshAllowance: async () => undefined,
+      requestSignIn: () => undefined,
+      requestSignInWithWallet: () => undefined,
+      signedIn: false,
+      set: (state) => set((previousState) => ({ ...previousState, ...state })),
+    }),
+    {
+      name: 'auth',
+    }
+  )
+);
