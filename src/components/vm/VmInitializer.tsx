@@ -78,11 +78,11 @@ export default function VmInitializer() {
             }) as any, // TODO: Refactor setupFastAuth() to TS
             setupKeypom({ 
               trialAccountSpecs: {
-                url: networkId == 'testnet' ? 'http://localhost:3000/#trial-url/ACCOUNT_ID/SECRET_KEY' : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
+                url: networkId == 'testnet' ? 'https://test.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY' : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
                 modalOptions: KEYPOM_OPTIONS(networkId)
               },
               instantSignInSpecs: {
-                url: networkId == 'testnet' ? 'http://localhost:3000/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID' : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
+                url: networkId == 'testnet' ? 'https://test.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID' : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
               },
               networkId,
               signInContractId
