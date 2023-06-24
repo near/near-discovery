@@ -1,9 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
+import { openToast } from '@/components/lib/Toast';
+import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -17,6 +19,8 @@ const SignInPage: NextPageWithLayout = () => {
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
 
+  useClearCurrentComponent();
+
   // redirect to home upon signing in
   useEffect(() => {
     if (signedIn) {
@@ -27,17 +31,25 @@ const SignInPage: NextPageWithLayout = () => {
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
     const searchParams = new URLSearchParams(location.search);
-    const redirect = searchParams.get("redirect");
+    const redirect = searchParams.get('redirect');
     try {
       const { publicKey, email } = await handleCreateAccount(null, data.email, true, redirect);
-      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true${redirect ? `&redirect=${redirect}` : ""}`);
+      router.push(
+        `/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true${redirect ? `&redirect=${redirect}` : ''}`,
+      );
     } catch (error: any) {
       console.log(error);
 
       if (typeof error?.message === 'string') {
-        toast.error(error.message);
+        openToast({
+          type: 'ERROR',
+          title: error.message,
+        });
       } else {
-        toast.error('Something went wrong');
+        openToast({
+          type: 'ERROR',
+          title: 'Something went wrong',
+        });
       }
     }
   });
@@ -66,14 +78,9 @@ const SignInPage: NextPageWithLayout = () => {
             required
           />
         </InputContainer>
-        <StyledButton onClick={onSubmit} type="button">
-          {/* <IconFingerPrint /> */}
-          Continue
-        </StyledButton>
-        <StyledButton onClick={requestSignInWithWallet} type="button">
-          {/* <IconFingerPrint /> */}
-          Continue with wallet
-        </StyledButton>
+
+        <Button label="Continue" variant="affirmative" onClick={onSubmit} />
+        <Button label="Continue with wallet" variant="primary" onClick={requestSignInWithWallet} />
       </FormContainer>
     </StyledContainer>
   );
@@ -131,27 +138,5 @@ const InputContainer = styled.div`
 
   .subText {
     font-size: 12px;
-  }
-`;
-
-const StyledButton = styled.button`
-  // width: 100%;
-  padding: 8px;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  margin-top: 4px;
-  min-height: 40px;
-  cursor: pointer;
-  background-color: #6be89e;
-  color: #000000;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  &:focus {
-    outline: none;
   }
 `;

@@ -6,17 +6,17 @@ import { useEffect } from 'react';
 import React from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { flushEvents, recordClick } from '@/utils/analytics';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
-import CloseIcon from '../icons/close.svg';
 import NearLogotype from '../icons/near-logotype.svg';
 import SearchIcon from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
 import { AccordionMenu } from './AccordionMenu';
-import { getRedirectQueryParams } from '@/utils/navigation';
 
 type Props = {
   onCloseMenu: () => void;
@@ -53,27 +53,9 @@ const StyledMenu = styled.div`
   }
 
   .close-button {
-    background-color: #f3f3f2;
-    border: 0.5px solid #e3e3e0;
     position: absolute;
     right: 25px;
-    top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-
-    svg {
-      margin: 0;
-      min-width: 24px;
-      min-height: 24px;
-
-      path {
-        stroke: #1b1b18;
-      }
-    }
+    top: 23px;
   }
 
   .search-btn {
@@ -103,28 +85,10 @@ const StyledMenu = styled.div`
 
   .bottom-btns {
     margin-top: auto;
-
-    button {
-      width: 100%;
-      height: 48px;
-      border-radius: 50px;
-      font-size: 16px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .sign-in {
-      background-color: #f3f3f2;
-      color: #1b1b18;
-      border: 0.5px solid #e3e3e0;
-      margin: 20px 0;
-    }
-    .create-account {
-      background-color: #161615;
-      color: white;
-      border: 0;
-    }
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 16px;
   }
 
   .logged-in-btns {
@@ -199,9 +163,15 @@ export function MenuLeft(props: Props) {
   return (
     <StyledMenu className={props.showMenu ? 'show' : ''}>
       <div className="left-side">
-        <button className="close-button" onClick={props.onCloseMenu}>
-          <Image src={CloseIcon} alt="Close" />
-        </button>
+        <Button
+          label="Close Menu"
+          icon="ph-bold ph-x"
+          size="small"
+          variant="secondary"
+          className="close-button"
+          onClick={props.onCloseMenu}
+        />
+
         <Image className="near-logotype" src={NearLogotype} alt="NEAR logotype" onClick={() => router.push('/')} />
         <button className="search-btn" style={{ backgroundImage: `url(${SearchIcon.src})` }} onClick={search}>
           Search NEAR
@@ -210,18 +180,17 @@ export function MenuLeft(props: Props) {
 
         {!signedIn && (
           <div className="bottom-btns">
-            <button className="sign-in" onClick={handleSignIn}>
-              Sign in
-            </button>
-            <button
-              className="create-account"
+            <Button label="Sign in" variant="secondary" size="large" onClick={handleSignIn} />
+
+            <Button
+              label="Create Account"
+              variant="primary"
+              size="large"
               onClick={(event) => {
                 clearAnalytics(event);
                 router.push(`/signup${getRedirectQueryParams(router)}`);
               }}
-            >
-              Create Account
-            </button>
+            />
           </div>
         )}
         {signedIn && (

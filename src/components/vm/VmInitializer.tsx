@@ -1,4 +1,5 @@
 import { setupKeypom } from '@keypom/selector';
+import { sanitizeUrl } from '@braintree/sanitize-url';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
@@ -7,7 +8,9 @@ import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
+import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
+import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
 import {
   CommitButton,
@@ -19,6 +22,7 @@ import {
   utils,
   Widget,
 } from 'near-social-vm';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
@@ -62,6 +66,8 @@ export default function VmInitializer() {
               gas: '300000000000000',
               bundle: false,
             }),
+            setupNightly(),
+            setupWelldoneWallet(),
             setupFastAuth({
               networkId,
               signInContractId,
@@ -86,6 +92,18 @@ export default function VmInitializer() {
             }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
+        customElements: {
+          Link: (props: any) => {
+            if (!props.to && props.href) {
+              props.to = props.href;
+              delete props.href;
+            }
+            if (props.to) {
+              props.to = sanitizeUrl(props.to);
+            }
+            return <Link {...props} />;
+          },
+        },
       });
   }, [initNear]);
 
@@ -107,9 +125,12 @@ export default function VmInitializer() {
     [walletModal],
   );
 
-  const requestSignIn = useCallback((queryParam?: string) => {
-    router.push(`signin${queryParam}`);
-  }, [router]);
+  const requestSignIn = useCallback(
+    (queryParam?: string) => {
+      router.push(`/signin${queryParam}`);
+    },
+    [router],
+  );
 
   const logOut = useCallback(async () => {
     if (!near) {

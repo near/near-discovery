@@ -1,9 +1,12 @@
 import { MetaTags } from '@/components/MetaTags';
 import { NearOrgEcosystemOverviewPage } from '@/components/near-org/NearOrg.Ecosystem.OverviewPage';
+import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EcosystemOverviewPage: NextPageWithLayout = () => {
+  useClearCurrentComponent();
+
   return (
     <>
       <MetaTags

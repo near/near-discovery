@@ -23,6 +23,7 @@ const finiteRoutes: Record<string, string> = {
   bridge: 'https://pages.near.org/bridge',
   'case-studies': 'https://pages.near.org/case-studies',
   'community-calendly': 'https://pages.near.org/community-calendly',
+  collision: 'https://pages.near.org/collision',
   defi: 'https://pages.near.org/defi',
   'educate-old': 'https://pages.near.org/educate-old',
   education: 'https://pages.near.org/education',
@@ -53,6 +54,7 @@ const finiteRoutes: Record<string, string> = {
 import IframeResizer from 'iframe-resizer-react';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
+import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -107,6 +109,8 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 };
 
 const IframePage: NextPageWithLayout = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
+  useClearCurrentComponent();
+
   return <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />;
 };
 

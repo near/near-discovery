@@ -4,10 +4,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 import { flushEvents, recordClick } from '@/utils/analytics';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -17,7 +19,6 @@ import { NotificationButton } from '../NotificationButton';
 import { MainNavigationMenu } from './MainNavigationMenu';
 import { TypeAheadDropdown } from './TypeAheadDropdown';
 import { UserDropdownMenu } from './UserDropdownMenu';
-import { getRedirectQueryParams } from '@/utils/navigation';
 
 const StyledNavigation = styled.div`
   z-index: 1000;
@@ -28,10 +29,6 @@ const StyledNavigation = styled.div`
   background-color: white;
   padding-top: 16px;
   padding-bottom: 16px;
-
-  button {
-    border: 0;
-  }
 
   &.border-bottom {
     border-bottom: 1px solid #e3e3e0;
@@ -101,44 +98,9 @@ const StyledNavigation = styled.div`
     display: flex;
     align-items: center;
     margin-left: auto;
-
-    .sign-in,
-    .create-account {
-      border-radius: 50px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 40px;
-      padding: 0 20px;
-      font-size: 14px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .sign-in {
-      color: #1b1b18;
-      font-weight: 500;
-      margin-right: 10px;
-      border: 1px solid transparent;
-      :hover {
-        background-color: #f3f3f2;
-      }
-      :focus {
-        background-color: white;
-        border: 1px solid #604cc8;
-        box-shadow: 0px 0px 0px 4px #cbc7f4;
-      }
-    }
-    .create-account {
-      background-color: #161615;
-      color: white;
-      :hover {
-        background-color: #2e2e2b;
-      }
-      :focus {
-        box-shadow: 0px 0px 0px 4px #cbc7f4;
-      }
-    }
+    position: relative;
+    z-index: 10;
+    gap: 10px;
   }
 `;
 
@@ -215,7 +177,7 @@ export const DesktopNavigation = () => {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              router.push(`/${components.search.indexPage}?term=${searchTerm}`);
+              router.push(`/${components.search.indexPage}?term=${encodeURIComponent(searchTerm)}`);
               setSearchIsFocused(false);
             }}
           >
@@ -246,18 +208,16 @@ export const DesktopNavigation = () => {
         <div className="right-side-actions">
           {!signedIn && (
             <>
-              <button className="sign-in" onClick={handleSignIn}>
-                Sign In
-              </button>
-              <button
-                className="create-account"
+              <Button label="Sign In" variant="secondary" onClick={handleSignIn} />
+
+              <Button
+                label="Create Account"
+                variant="primary"
                 onClick={(event) => {
                   clearAnalytics(event);
                   router.push(`/signup${getRedirectQueryParams(router)}`);
                 }}
-              >
-                Create Account
-              </button>
+              />
             </>
           )}
           {signedIn && (
