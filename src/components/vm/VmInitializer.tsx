@@ -1,5 +1,5 @@
-import { setupKeypom } from '@keypom/selector';
 import { sanitizeUrl } from '@braintree/sanitize-url';
+import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
@@ -78,17 +78,14 @@ export default function VmInitializer() {
             }) as any, // TODO: Refactor setupFastAuth() to TS
             setupKeypom({ 
               trialAccountSpecs: {
-                baseUrl: networkId == 'testnet' ? 'https://test.near.org/#trial-url/' : 'https://near.org/#trial-url/',
-                delimiter: "/"
+                url: networkId == 'testnet' ? 'http://localhost:3000/#trial-url/ACCOUNT_ID/SECRET_KEY' : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
+                modalOptions: KEYPOM_OPTIONS(networkId)
               },
               instantSignInSpecs: {
-                baseUrl: networkId == 'testnet' ? 'https://test.near.org/#instant-url/' : 'https://near.org/#instant-url/',
-                delimiter: "/",
-                moduleDelimiter: "/"
+                url: networkId == 'testnet' ? 'http://localhost:3000/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID' : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
               },
               networkId,
-              signInContractId,
-              modalOptions: KEYPOM_OPTIONS(networkId),
+              signInContractId
             }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
