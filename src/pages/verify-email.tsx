@@ -1,9 +1,12 @@
 import { sendSignInLinkToEmail } from 'firebase/auth';
 import { useRouter } from 'next/router';
-import { toast } from 'sonner';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
+import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { firebaseAuth } from '../utils/firebase';
@@ -11,6 +14,11 @@ import { firebaseAuth } from '../utils/firebase';
 // TODO refactor: thoroughly test since param handling changed
 const VerifyEmailPage: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+
+  useEffect(() => {
+    setComponentSrc(null);
+  }, [setComponentSrc]);
 
   const handleResendEmail = async () => {
     const accountRequiredButNotThere = !query?.accountId && query.isRecovery !== 'true';
@@ -25,22 +33,33 @@ const VerifyEmailPage: NextPageWithLayout = () => {
 
     try {
       await sendSignInLinkToEmail(firebaseAuth, query.email, {
-        url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}${query?.redirect ? `&redirect=${query.redirect}` : ""}`,
+        url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}${
+          query?.redirect ? `&redirect=${query.redirect}` : ''
+        }`,
         handleCodeInApp: true,
       });
-      toast.success('Email resent successfully!');
+      openToast({
+        type: 'SUCCESS',
+        title: 'Email resent successfully!',
+      });
     } catch (error: any) {
       console.log(error);
 
       if (typeof error?.message === 'string') {
-        toast.error(error.message);
+        openToast({
+          type: 'ERROR',
+          title: error.message,
+        });
         return;
       }
-      toast.error('Something went wrong');
+      openToast({
+        type: 'ERROR',
+        title: 'Something went wrong',
+      });
     }
   };
 
-  const redirect = query?.redirect ? `?redirect=${query.redirect}` : "";
+  const redirect = query?.redirect ? `?redirect=${query.redirect}` : '';
   return (
     <StyledContainer>
       <FormContainer onSubmit={handleResendEmail}>
@@ -57,9 +76,7 @@ const VerifyEmailPage: NextPageWithLayout = () => {
 
         <p>Check your inbox to activate your account.</p>
 
-        <StyledButton onClick={handleResendEmail} type="button">
-          Resend Email
-        </StyledButton>
+        <Button label="Resend Email" variant="secondary" onClick={handleResendEmail} />
       </FormContainer>
     </StyledContainer>
   );
@@ -89,24 +106,4 @@ const FormContainer = styled.form`
   display: flex;
   flex-direction: column;
   gap: 16px;
-`;
-const StyledButton = styled.button`
-  padding: 8px;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  margin-top: 4px;
-  min-height: 40px;
-  cursor: pointer;
-  background-color: #6be89e;
-  color: #000000;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  &:focus {
-    outline: none;
-  }
 `;

@@ -8,24 +8,22 @@ import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
-import { Toaster } from 'sonner';
 
+import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
+import { usePageAnalytics } from '@/hooks/usePageAnalytics';
+import { useAuthStore } from '@/stores/auth';
 import { init as initializeSegment } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
+import { styleZendesk } from '@/utils/zendesk';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
 });
-
-const meta = {
-  title: 'NEAR',
-  description: "Let's build decentralized experiences.",
-  image: `${process.env.NEXT_PUBLIC_HOSTNAME}/bos-meta.png`,
-};
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -34,22 +32,51 @@ type AppPropsWithLayout = AppProps & {
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
+  usePageAnalytics();
   const getLayout = Component.getLayout ?? ((page) => page);
+  const router = useRouter();
+  const authStore = useAuthStore();
+  const componentSrc = router.query;
 
   useEffect(() => {
     initializeSegment();
   }, []);
 
+  useEffect(() => {
+    // Displays the Zendesk widget only if user is signed in and on the home page
+    if (!window.zE) return;
+    if (!authStore.signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
+      window.zE('webWidget', 'hide');
+      return;
+    }
+    localStorage.setItem('accountId', authStore.accountId);
+    window.zE('webWidget', 'show');
+  }, [authStore.accountId, authStore.signedIn, componentSrc]);
+
+  useEffect(() => {
+    const interval = setInterval(zendeskCheck, 20);
+
+    function zendeskCheck() {
+      // once the zendesk widget comes online, style it
+      const zwFrame = document.getElementById('launcher') as HTMLIFrameElement | null;
+      const zwEmbed = zwFrame?.contentDocument?.getElementById('Embed');
+      const zwButton = zwEmbed?.querySelector('[data-testid="launcher"]');
+      if (zwButton) {
+        styleZendesk();
+        clearInterval(interval);
+      }
+    }
+
+    () => {
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <>
       <Head>
-        <title>{meta.title}</title>
-        <meta property="og:title" content={meta.title} />
-        <meta name="description" content={meta.description} />
-        <meta property="og:description" content={meta.description} />
-
-        <meta content={meta.image} name="twitter:image" />
-        <meta content={meta.image} property="og:image" />
+        <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
+        <link rel="icon" href="favicon.ico" />
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
@@ -80,9 +107,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
                   },
                 ],
               },
-              launcher: {
-                label: { '*': ' ' },
-              },
             },
           };
         `}
@@ -94,7 +118,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       {getLayout(<Component {...pageProps} />)}
 
-      <Toaster position="bottom-center" richColors />
+      <Toaster />
     </>
   );
 }

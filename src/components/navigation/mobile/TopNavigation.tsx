@@ -5,9 +5,12 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
+import { recordClick } from '@/utils/analytics';
+import { getRedirectQueryParams } from '@/utils/navigation';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -27,13 +30,15 @@ const StyledNavigation = styled.div`
   padding: 16px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 16px;
 
   &.border-bottom {
     border-bottom: 1px solid #e3e3e0;
   }
 
   .logo-link {
+    margin-right: auto;
+
     img {
       width: 28px;
       height: 28px;
@@ -41,7 +46,7 @@ const StyledNavigation = styled.div`
 
     &.large {
       img {
-        width: 110px;
+        width: 90px;
       }
     }
   }
@@ -93,6 +98,30 @@ const StyledNavigation = styled.div`
   i {
     font-size: 20px;
   }
+
+  .create-account {
+    border-radius: 50px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 40px;
+    padding: 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: #1b1b18;
+    font-weight: 600;
+    border: 1px solid transparent;
+    :hover {
+      background-color: #f3f3f2;
+    }
+    :focus {
+      background-color: white;
+      border: 1px solid #604cc8;
+      box-shadow: 0px 0px 0px 4px #cbc7f4;
+    }
+  }
 `;
 
 export function TopNavigation(props: Props) {
@@ -101,6 +130,11 @@ export function TopNavigation(props: Props) {
   const components = useBosComponents();
   const signedIn = useAuthStore((store) => store.signedIn);
   const accountId = useAuthStore((store) => store.accountId);
+
+  function handleCreateAccount(event: any) {
+    recordClick(event);
+    router.push(`/signup${getRedirectQueryParams(router)}`);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -135,14 +169,18 @@ export function TopNavigation(props: Props) {
           />
         </button>
       )}
+
       <Link href="/" className={classNames(['logo-link', { large: !signedIn }])}>
         <Image src={signedIn ? LogoBlack : NearLogotype} alt="NEAR logo" />
       </Link>
-      <button onClick={() => props.onClickShowMenu()} className="mobile-nav-profile-btn">
-        <div className="menu-icon">
-          <i className="ph-bold ph-list"></i>
-        </div>
-      </button>
+
+      {!signedIn && (
+        <>
+          <Button label="Create Account" variant="secondary" size="small" onClick={handleCreateAccount} />
+        </>
+      )}
+
+      <Button label="Menu" icon="ph-bold ph-list" variant="primary" size="small" onClick={props.onClickShowMenu} />
     </StyledNavigation>
   );
 }

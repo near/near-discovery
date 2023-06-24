@@ -1,11 +1,14 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'sonner';
 import styled from 'styled-components';
 
+import { Button } from '@/components/lib/Button';
+import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -18,6 +21,7 @@ const ErrorText = styled.p`
 
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();
+  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const [isAccountAvailable, setIsAccountAvailable] = useState<boolean | null>(null);
   const [isAccountValid, setIsAccountValid] = useState<boolean | null>(null);
   const {
@@ -37,6 +41,10 @@ const SignUpPage: NextPageWithLayout = () => {
       router.push('/');
     }
   }, [router, signedIn]);
+
+  useEffect(() => {
+    setComponentSrc(null);
+  }, [setComponentSrc]);
 
   const checkIsAccountAvailable = useCallback(async (desiredUsername: string) => {
     // set to null to show loading
@@ -83,10 +91,13 @@ const SignUpPage: NextPageWithLayout = () => {
       router.push(
         `/verify-email?publicKey=${encodeURIComponent(publicKey)}&accountId=${encodeURIComponent(
           accountId,
-        )}&email=${encodeURIComponent(email)}${redirect ? `&redirect=${redirect}` : ""}`,
+        )}&email=${encodeURIComponent(email)}${redirect ? `&redirect=${redirect}` : ''}`,
       );
     } catch (error: any) {
-      toast.error(error.message);
+      openToast({
+        type: 'ERROR',
+        title: error.message,
+      });
     }
   });
 
@@ -188,9 +199,17 @@ const SignUpPage: NextPageWithLayout = () => {
             <ErrorText role="alert">{errors.username?.message}</ErrorText>
           )}
         </InputContainer>
-        <StyledButton onClick={onSubmit} type="button">
-          Continue
-        </StyledButton>
+
+        <Button label="Continue" variant="affirmative" onClick={onSubmit} />
+
+        <hr style={{ borderColor: 'hsl(55, 1.7%, 51.9%)' }} />
+
+        <p>
+          Already have an account?{' '}
+          <Link href="/signin" style={{ color: 'hsla(246, 57%, 61%, 1)', fontWeight: 500 }}>
+            Sign In
+          </Link>
+        </p>
       </FormContainer>
     </StyledContainer>
   );
@@ -258,26 +277,5 @@ const InputContainer = styled.div`
     .success {
       color: hsla(155, 66%, 32%, 1);
     }
-  }
-`;
-
-const StyledButton = styled.button`
-  padding: 8px;
-  border: none;
-  border-radius: 50px;
-  font-size: 14px;
-  margin-top: 4px;
-  min-height: 40px;
-  cursor: pointer;
-  background-color: #6be89e;
-  color: #000000;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-
-  &:focus {
-    outline: none;
   }
 `;
