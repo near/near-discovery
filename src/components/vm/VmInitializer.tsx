@@ -23,7 +23,6 @@ import {
   Widget,
 } from 'near-social-vm';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
@@ -41,7 +40,6 @@ export default function VmInitializer() {
   const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
   const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(null);
   const ethersProviderContext = useEthersProviderContext();
-  const router = useRouter();
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
@@ -49,7 +47,7 @@ export default function VmInitializer() {
   const accountId = account.accountId;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
-  const signInRedirect = useSignInRedirect();
+  const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
 
   useEffect(() => {
     initNear &&
@@ -78,16 +76,22 @@ export default function VmInitializer() {
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }) as any, // TODO: Refactor setupFastAuth() to TS
-            setupKeypom({ 
+            setupKeypom({
               trialAccountSpecs: {
-                url: networkId == 'testnet' ? 'https://test.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY' : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
-                modalOptions: KEYPOM_OPTIONS(networkId)
+                url:
+                  networkId == 'testnet'
+                    ? 'https://test.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY'
+                    : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
+                modalOptions: KEYPOM_OPTIONS(networkId),
               },
               instantSignInSpecs: {
-                url: networkId == 'testnet' ? 'https://test.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID' : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
+                url:
+                  networkId == 'testnet'
+                    ? 'https://test.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID'
+                    : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
               },
               networkId,
-              signInContractId
+              signInContractId,
             }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
@@ -116,10 +120,10 @@ export default function VmInitializer() {
   }, [near]);
 
   const requestSignInWithWallet = useCallback(() => {
-    signInRedirect.saveCurrentUrl();
+    saveCurrentUrl();
     walletModal?.show();
     return false;
-  }, [signInRedirect, walletModal]);
+  }, [saveCurrentUrl, walletModal]);
 
   const logOut = useCallback(async () => {
     if (!near) {
@@ -137,8 +141,8 @@ export default function VmInitializer() {
   const refreshAllowance = useCallback(async () => {
     alert("You're out of access key allowance. Need sign in again to refresh it");
     await logOut();
-    signInRedirect.requestAuthentication();
-  }, [logOut, signInRedirect]);
+    requestAuthentication();
+  }, [logOut, requestAuthentication]);
 
   useEffect(() => {
     if (!near) {
