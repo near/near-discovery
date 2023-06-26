@@ -1,72 +1,18 @@
-import Analytics from 'analytics-node';
-import { createHash } from 'crypto';
 import { get, split, truncate } from 'lodash';
-import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
-import { networkId } from './config';
+import * as RudderAnalytics from './rudder-analytics';
+import * as Segment from './segment-analytics';
 
-let segment: Analytics | null = null;
-let anonymousUserId = '';
-let hashId = '';
-let anonymousUserIdCreatedAt = '';
-
-declare global {
-  interface Window {
-    rudderanalytics: Analytics | undefined;
-  }
-}
-
-export function setAccountIdHash(accountId: string) {
-  const hash = createHash('sha512');
-  hash.update(accountId);
-  hashId = hash.digest('hex');
-  localStorage.setItem('hashId', hashId);
-}
-
-function getAnonymousId() {
-  if (anonymousUserId) {
-    return anonymousUserId;
-  }
-
-  const storageId = localStorage.getItem('anonymousUserId');
-  anonymousUserIdCreatedAt = localStorage.getItem('anonymousUserIdCreatedAt') || '';
-
-  if (storageId) {
-    anonymousUserId = storageId;
-  } else {
-    anonymousUserId = nanoid();
-    anonymousUserIdCreatedAt = new Date().toUTCString();
-    localStorage.setItem('anonymousUserId', anonymousUserId);
-    localStorage.setItem('anonymousUserIdCreatedAt', anonymousUserIdCreatedAt);
-  }
-
-  return anonymousUserId;
-}
 
 export async function init() {
-  if (window['rudderanalytics']) return; // already initialized
+  await Segment.init();
+  await RudderAnalytics.init();
+}
 
-  getAnonymousId();
-
-  const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
-  const rudderStackDataPlaneUrl = 'https://neardiscovery.dataplane.rudderstack.com';
-
-  const options =
-    typeof window === 'undefined'
-      ? {}
-      : {
-          host: `${window.location.protocol}//${window.location.host}`,
-          path: '/api/segment',
-        };
-
-  try {
-    window['rudderanalytics'] = await import("rudder-sdk-js");
-    window['rudderanalytics'].load(segmentKey, "https://nearpavelsqp.dataplane.rudderstack.com");
-    segment = window['rudderanalytics'];
-  } catch (e) {
-    console.error(e);
-  }
+export function recordPageView(pageName: string) {
+  Segment.recordPageView(pageName);
+  RudderAnalytics.recordPageView(pageName);
 }
 
 function isStringAllowed(str: string) {
@@ -78,93 +24,43 @@ function filterURL(url: string) {
   const [urlTrim, params] = split(url, '?');
   return isStringAllowed(params) ? url : urlTrim;
 }
-
-export function recordPageView(pageName: string) {
-  if (!segment) return;
-  try {
-    segment.page({
-      name: pageName,
-      anonymousId: getAnonymousId(),
-      properties: {
-        hashId: localStorage.getItem('hashId'),
-        url: filterURL(window.location.href),
-        ref: filterURL(document.referrer),
-      },
-    });
-  } catch (e) {
-    console.error(e);
-  }
-}
-
+             
 const record = (eventType: string, e: UIEvent) => {
   const key = get(e.target, 'placeholder', get(e.target, 'innerText', get(e.target, 'href')));
-  recordEventWithProps(eventType, {
+  Segment.recordEventWithProps(eventType, {
+    element: truncate(key, { length: 255 }),
+    url: e.target ? filterURL((e.target as HTMLElement).baseURI) : '',
+    xPath: getXPath(e.target as HTMLElement),
+  });
+
+  RudderAnalytics.recordEventWithProps(eventType, {
     element: truncate(key, { length: 255 }),
     url: e.target ? filterURL((e.target as HTMLElement).baseURI) : '',
     xPath: getXPath(e.target as HTMLElement),
   });
 };
+
 export const recordClick = (e: UIEvent) => record('click', e);
 export const recordMouseEnter = (e: UIEvent) => record('mouseover', e);
 export const recordTouchStart = (e: UIEvent) => record('touchstart', e);
 
 export function recordWalletConnect(accountId: string) {
-  if (!localStorage.getItem('hashId')) {
-    setAccountIdHash(accountId);
-    recordEvent('wallet-connected');
-  }
+  Segment.recordWalletConnect(accountId);
+  RudderAnalytics.recordWalletConnect(accountId);
 }
 
 export function reset() {
-  if (!segment) return;
-  try {
-    recordEvent('wallet-logout');
-    localStorage.removeItem('hashId');
-    localStorage.removeItem('anonymousUserId');
-    localStorage.removeItem('anonymousUserIdCreatedAt');
-    segment.flush();
-  } catch (e) {
-    console.error(e);
-  }
-}
+  Segment.reset();
+  RudderAnalytics.reset();
+} 
 
 export function flushEvents() {
-  if (!segment) return;
-  return segment.flush();
-}
-
-function recordEventWithProps(eventLabel: string, properties: Record<string, unknown>) {
-  if (!segment) return;
-  try {
-    segment.track({
-      anonymousId: getAnonymousId(),
-      event: eventLabel,
-      properties: {
-        ...properties,
-        hashId: localStorage.getItem('hashId'),
-        anonymousUserIdCreatedAt,
-      },
-    });
-  } catch (e) {
-    console.error(e);
-  }
+  Segment.flushEvents();
 }
 
 export function recordEvent(eventLabel: string) {
-  if (!segment) return;
-  try {
-    segment.track({
-      anonymousId: getAnonymousId(),
-      event: eventLabel,
-      properties: {
-        hashId: localStorage.getItem('hashId'),
-        url: window.location.href,
-        anonymousUserIdCreatedAt,
-      },
-    });
-  } catch (e) {
-    console.error(e);
-  }
+  Segment.recordEvent(eventLabel);
+  RudderAnalytics.recordEvent(eventLabel);
 }
 
 function getXPath(element: HTMLElement | null): string {
