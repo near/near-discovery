@@ -42,6 +42,10 @@ const nextConfig = {
       source: '/api/segment',
       destination: 'https://api.segment.io/v1/batch',
     },
+    {
+      source: '/api/analytics/:path*',
+      destination: 'https://near.dataplane.rudderstack.com/:path*',
+    },
   ],
 };
 
