@@ -90,16 +90,7 @@ export default function VmInitializer() {
           ],
         }),
         customElements: {
-          Link: (props: any) => {
-            if (!props.to && props.href) {
-              props.to = props.href;
-              delete props.href;
-            }
-            if (props.to) {
-              props.to = sanitizeUrl(props.to);
-            }
-            return <Link {...props} />;
-          },
+          Link: ({ href, to, ...rest }: any) => <Link href={sanitizeUrl(href ?? to)} {...rest} />,
         },
       });
   }, [initNear]);
