@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@braintree/sanitize-url':
     specifier: 6.0.0
@@ -152,6 +148,9 @@ dependencies:
   react-singleton-hook:
     specifier: ^3.1.1
     version: 3.4.0(react-dom@18.2.0)(react@18.2.0)
+  rudder-sdk-js:
+    specifier: ^2.36.0
+    version: 2.36.0
   styled-components:
     specifier: ^5.3.6
     version: 5.3.10(react-dom@18.2.0)(react-is@17.0.2)(react@18.2.0)
@@ -8281,6 +8280,10 @@ packages:
       inherits: 2.0.4
     dev: false
 
+  /rudder-sdk-js@2.36.0:
+    resolution: {integrity: sha512-YeP0rpy4Nqr5tJ8N0a212ge7RIzbKr4FxSSfJ6c2EFXvY8z8rl8qw5L0ENmXiPTWXUDKqDzSx9VVxAFNy/VR1Q==}
+    dev: false
+
   /run-applescript@5.0.0:
     resolution: {integrity: sha512-XcT5rBksx1QdIhlFOCtgZkB99ZEouFZ1E2Kc2LHqNW13U3/74YGdkQRmThTwxy4QIyookibDKYZOPqX//6BlAg==}
     engines: {node: '>=12'}
@@ -9397,3 +9400,7 @@ packages:
       - supports-color
       - utf-8-validate
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
