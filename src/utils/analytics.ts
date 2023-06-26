@@ -4,7 +4,6 @@ import type { UIEvent } from 'react';
 import * as RudderAnalytics from './rudder-analytics';
 import * as Segment from './segment-analytics';
 
-
 export async function init() {
   await Segment.init();
   await RudderAnalytics.init();
@@ -24,7 +23,7 @@ function filterURL(url: string) {
   const [urlTrim, params] = split(url, '?');
   return isStringAllowed(params) ? url : urlTrim;
 }
-             
+
 const record = (eventType: string, e: UIEvent) => {
   const key = get(e.target, 'placeholder', get(e.target, 'innerText', get(e.target, 'href')));
   Segment.recordEventWithProps(eventType, {
@@ -52,7 +51,7 @@ export function recordWalletConnect(accountId: string) {
 export function reset() {
   Segment.reset();
   RudderAnalytics.reset();
-} 
+}
 
 export function flushEvents() {
   Segment.flushEvents();
