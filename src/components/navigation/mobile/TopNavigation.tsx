@@ -8,6 +8,7 @@ import styled from 'styled-components';
 import { Button } from '@/components/lib/Button';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { recordClick } from '@/utils/analytics';
 
@@ -129,11 +130,11 @@ export function TopNavigation(props: Props) {
   const components = useBosComponents();
   const signedIn = useAuthStore((store) => store.signedIn);
   const accountId = useAuthStore((store) => store.accountId);
-  const requestCreateAccount = useAuthStore((store) => store.requestCreateAccount);
+  const { requestAuthentication } = useSignInRedirect();
 
   function handleCreateAccount(event: any) {
     recordClick(event);
-    requestCreateAccount();
+    requestAuthentication(true);
   }
 
   useEffect(() => {

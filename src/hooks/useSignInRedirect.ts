@@ -26,8 +26,17 @@ export function useSignInRedirect() {
     localStorage.setItem('signInRedirectUrl', router.asPath);
   }, [router]);
 
+  const requestAuthentication = useCallback(
+    (createAccount = false) => {
+      saveCurrentUrl();
+      router.push(createAccount ? '/signup' : '/signin');
+    },
+    [router, saveCurrentUrl],
+  );
+
   return {
-    saveCurrentUrl,
     redirect,
+    requestAuthentication,
+    saveCurrentUrl,
   };
 }

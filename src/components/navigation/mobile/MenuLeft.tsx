@@ -8,6 +8,7 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { flushEvents, recordClick } from '@/utils/analytics';
 
@@ -131,10 +132,9 @@ const StyledMenu = styled.div`
 export function MenuLeft(props: Props) {
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
-  const requestCreateAccount = useAuthStore((store) => store.requestCreateAccount);
-  const requestSignIn = useAuthStore((store) => store.requestSignIn);
   const components = useBosComponents();
   const previousPath = useRef('');
+  const { requestAuthentication } = useSignInRedirect();
 
   async function clearAnalytics(event: UIEvent) {
     recordClick(event);
@@ -144,13 +144,13 @@ export function MenuLeft(props: Props) {
   function handleSignIn(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    requestSignIn();
+    requestAuthentication();
   }
 
   function handleCreateAccount(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    requestCreateAccount();
+    requestAuthentication(true);
   }
 
   function search() {

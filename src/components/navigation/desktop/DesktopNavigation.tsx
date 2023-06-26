@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 import { flushEvents, recordClick } from '@/utils/analytics';
@@ -120,8 +121,7 @@ export const DesktopNavigation = () => {
   const components = useBosComponents();
   const searchFocusTimeout = useRef<NodeJS.Timeout>();
   const signedIn = useAuthStore((store) => store.signedIn);
-  const requestCreateAccount = useAuthStore((store) => store.requestCreateAccount);
-  const requestSignIn = useAuthStore((store) => store.requestSignIn);
+  const { requestAuthentication } = useSignInRedirect();
 
   const setSearchIsFocused = (isFocused: boolean) => {
     if (isFocused) {
@@ -157,12 +157,12 @@ export const DesktopNavigation = () => {
 
   function handleSignIn(event: any) {
     clearAnalytics(event);
-    requestSignIn();
+    requestAuthentication();
   }
 
   function handleCreateAccount(event: any) {
     clearAnalytics(event);
-    requestCreateAccount();
+    requestAuthentication(true);
   }
 
   return (
