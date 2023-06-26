@@ -92,6 +92,7 @@ const record = (eventType: string, e: UIEvent) => {
   recordEventWithProps(eventType, {
     element: truncate(key, { length: 255 }),
     url: e.target ? filterURL((e.target as HTMLElement).baseURI) : '',
+    xPath: getXPath(e.target as HTMLElement),
   });
 };
 export const recordClick = (e: UIEvent) => record('click', e);
@@ -155,4 +156,21 @@ export function recordEvent(eventLabel: string) {
   } catch (e) {
     console.error(e);
   }
+}
+
+function getXPath(element: HTMLElement | null): string {
+  if (!element) return '';
+  if (element.id !== '') return 'id("' + element.id + '")';
+  if (element === document.body) return element.tagName;
+
+  let ix = 0;
+  const siblings = element.parentNode?.children || new HTMLCollection();
+
+  for (let i = 0; i < siblings.length; i++) {
+    const sibling = siblings[i];
+    if (sibling === element) return getXPath(element.parentElement) + '/' + element.tagName + '[' + (ix + 1) + ']';
+    if (sibling.nodeType === 1 && sibling.tagName === element.tagName) ix++;
+  }
+
+  return '';
 }

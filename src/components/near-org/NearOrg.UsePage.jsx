@@ -3,8 +3,12 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
+import { recordClick } from '@/utils/analytics';
+import { useBosComponents } from '@/hooks/useBosComponents';
 
 export function NearOrgUsePage() {
+  const components = useBosComponents();
+
   const Wrapper = styled.div`
     --section-gap: 162px;
     --large-gap: 82px;
@@ -159,7 +163,7 @@ export function NearOrgUsePage() {
 
   return (
     <>
-      <Wrapper className="container-xl">
+      <Wrapper className="container-xl" onPointerUp={recordClick}>
         <Section center>
           <H1>Your first steps to becoming a Web3 citizen</H1>
         </Section>
@@ -175,7 +179,7 @@ export function NearOrgUsePage() {
                 <Text>The account is your web3 identity and keeps all your assets</Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: '#set-up-account',
                   iconRight: 'ph-bold ph-arrow-down',
@@ -196,7 +200,7 @@ export function NearOrgUsePage() {
                 <Text>dApps are decentralized applications that use the blockchain</Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: '#explore-dapps',
                   iconRight: 'ph-bold ph-arrow-down',
@@ -220,7 +224,7 @@ export function NearOrgUsePage() {
                 <Text>Become a web3 citizen and help build a better world</Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: '#why-it-matters',
                   iconRight: 'ph-bold ph-arrow-down',
@@ -269,7 +273,7 @@ export function NearOrgUsePage() {
           </Flex>
 
           <VmComponent
-            src="near/widget/DIG.Button"
+            src={components.digButton}
             props={{
               href: 'https://pages.near.org/use/set-up-account/',
               target: '_blank',
@@ -333,7 +337,7 @@ export function NearOrgUsePage() {
 
           <Flex gap="16px" wrap="wrap" justifyContent="center">
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={components.digButton}
               props={{
                 href: 'https://pages.near.org/use-cases/defi',
                 target: '_blank',
@@ -344,7 +348,7 @@ export function NearOrgUsePage() {
               }}
             />
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={components.digButton}
               props={{
                 href: 'https://awesomenear.com/categories/defi',
                 target: '_blank',
@@ -416,7 +420,7 @@ export function NearOrgUsePage() {
 
           <Flex gap="16px" wrap="wrap" justifyContent="center">
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={components.digButton}
               props={{
                 href: 'https://pages.near.org/use-cases/nft',
                 target: '_blank',
@@ -427,7 +431,7 @@ export function NearOrgUsePage() {
               }}
             />
             <VmComponent
-              src="near/widget/DIG.Button"
+              src={components.digButton}
               props={{
                 href: 'https://awesomenear.com/categories/nft',
                 target: '_blank',
@@ -496,7 +500,7 @@ export function NearOrgUsePage() {
           </Flex>
 
           <VmComponent
-            src="near/widget/DIG.Button"
+            src={components.digButton}
             props={{
               href: 'https://awesomenear.com/categories/social',
               target: '_blank',
@@ -536,7 +540,7 @@ export function NearOrgUsePage() {
                 collapse demands global action in every sector of society.
               </Text>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: 'https://pages.near.org/blog/why-web3-is-needed-more-than-ever/',
                   target: '_blank',
@@ -582,7 +586,7 @@ export function NearOrgUsePage() {
               </Text>
               <Text>Your assets, your data, your identity</Text>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: '#regain-ownership',
                   iconRight: 'ph-bold ph-arrow-down',
@@ -600,7 +604,7 @@ export function NearOrgUsePage() {
               </Text>
               <Text>Free flow of values and information</Text>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: '#interact-freely',
                   iconRight: 'ph-bold ph-arrow-down',
@@ -618,7 +622,7 @@ export function NearOrgUsePage() {
               </Text>
               <Text>Value is distributed through transparent and fair rules</Text>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: '#fair-economies',
                   iconRight: 'ph-bold ph-arrow-down',
@@ -694,7 +698,7 @@ export function NearOrgUsePage() {
                 </Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: 'https://pages.near.org/learn/tools/',
                   target: '_blank',
@@ -720,7 +724,7 @@ export function NearOrgUsePage() {
                 </Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: 'https://fewfar.com/',
                   target: '_blank',
@@ -821,7 +825,7 @@ export function NearOrgUsePage() {
                 </Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: 'https://youminter.com/',
                   target: '_blank',
@@ -847,7 +851,7 @@ export function NearOrgUsePage() {
                 </Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: 'https://www.niche.club/',
                   target: '_blank',
@@ -964,7 +968,7 @@ export function NearOrgUsePage() {
                 </Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: 'https://nearweek.com/',
                   target: '_blank',
@@ -990,7 +994,7 @@ export function NearOrgUsePage() {
                 </Text>
               </Flex>
               <VmComponent
-                src="near/widget/DIG.Button"
+                src={components.digButton}
                 props={{
                   href: 'https://sweateconomy.com/',
                   target: '_blank',
@@ -1031,11 +1035,11 @@ export function NearOrgUsePage() {
         </Section>
 
         <Section>
-          <VmComponent src="near/widget/NearOrg.LearningLinks" />
+          <VmComponent src={components.nearOrg.learningLinks} />
         </Section>
       </Wrapper>
 
-      <VmComponent src="near/widget/NearOrg.Footer" />
+      <VmComponent src={components.nearOrg.footer}  />
     </>
   );
 }

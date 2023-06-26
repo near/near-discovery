@@ -1,3 +1,4 @@
+import { isPassKeyAvailable } from '@near-js/biometric-ed25519';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
@@ -34,6 +35,21 @@ const SignUpPage: NextPageWithLayout = () => {
   } = useForm();
   const formValues = watch();
   const signedIn = useAuthStore((store) => store.signedIn);
+
+  useEffect(() => {
+    const checkPassKey = async (): Promise<void> => {
+      const isPasskeyReady = await isPassKeyAvailable();
+      if (!isPasskeyReady) {
+        openToast({
+          title: '',
+          type: 'INFO',
+          description: 'Passkey support is required for account creation. Try using an updated version of Chrome or Safari to create an account.',
+          duration: 5000,
+        })
+      }
+    }
+    checkPassKey();
+  }, []);
 
   // redirect to home upon signing in
   useEffect(() => {
