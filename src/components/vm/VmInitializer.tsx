@@ -104,16 +104,6 @@ export default function VmInitializer() {
     return false;
   }, [signInRedirect, walletModal]);
 
-  const requestSignIn = useCallback(() => {
-    signInRedirect.saveCurrentUrl();
-    router.push('/signin');
-  }, [router, signInRedirect]);
-
-  const requestCreateAccount = useCallback(() => {
-    signInRedirect.saveCurrentUrl();
-    router.push('/signup');
-  }, [router, signInRedirect]);
-
   const logOut = useCallback(async () => {
     if (!near) {
       return;
@@ -130,8 +120,8 @@ export default function VmInitializer() {
   const refreshAllowance = useCallback(async () => {
     alert("You're out of access key allowance. Need sign in again to refresh it");
     await logOut();
-    requestSignIn();
-  }, [logOut, requestSignIn]);
+    signInRedirect.requestAuthentication();
+  }, [logOut, signInRedirect]);
 
   useEffect(() => {
     if (!near) {
@@ -163,8 +153,6 @@ export default function VmInitializer() {
       availableStorage,
       logOut,
       refreshAllowance,
-      requestCreateAccount,
-      requestSignIn,
       requestSignInWithWallet,
       signedIn,
     });
@@ -173,8 +161,6 @@ export default function VmInitializer() {
     availableStorage,
     logOut,
     refreshAllowance,
-    requestCreateAccount,
-    requestSignIn,
     requestSignInWithWallet,
     signedIn,
     signedAccountId,
