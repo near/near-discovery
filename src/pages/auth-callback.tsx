@@ -16,7 +16,7 @@ import { firebaseAuth } from '../utils/firebase';
 const AuthCallbackPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [statusMessage, setStatusMessage] = useState('Loading...');
-  const signInRedirect = useSignInRedirect();
+  const { redirect } = useSignInRedirect();
 
   useEffect(() => {
     if (!router) {
@@ -114,7 +114,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
 
                 setStatusMessage('Redirecting to app...');
 
-                signInRedirect.redirect(true);
+                redirect(true);
               },
             );
           }
@@ -138,7 +138,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
     } else {
       router.push('/signup');
     }
-  }, [router, signInRedirect]);
+  }, [router, redirect]);
 
   return <StyledStatusMessage>{statusMessage}</StyledStatusMessage>;
 };

@@ -19,15 +19,15 @@ const SignInPage: NextPageWithLayout = () => {
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
-  const signInRedirect = useSignInRedirect();
+  const { redirect } = useSignInRedirect();
 
   useClearCurrentComponent();
 
   useEffect(() => {
     if (signedIn) {
-      signInRedirect.redirect();
+      redirect();
     }
-  }, [signInRedirect, signedIn]);
+  }, [redirect, signedIn]);
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
