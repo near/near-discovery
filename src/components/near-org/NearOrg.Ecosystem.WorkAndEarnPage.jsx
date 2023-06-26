@@ -3,8 +3,12 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
+import { recordClick } from '@/utils/analytics';
+import { useBosComponents } from '@/hooks/useBosComponents';
 
 export function NearOrgEcosystemWorkAndEarnPage() {
+  const components = useBosComponents();
+
   const nearOrgLinks = {
     getFundingPage: '/near/widget/NearOrg.Ecosystem.GetFundingPage',
   };
@@ -116,7 +120,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
 
   return (
     <>
-      <Wrapper className="container-xl">
+      <Wrapper className="container-xl" onPointerUp={recordClick}>
         <Section>
           <Flex gap="16px" direction="column" alignItems="start">
             <H1>Work & Earn</H1>
@@ -145,7 +149,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={components.digButton}
                     props={{
                       href: 'https://careers.near.org/jobs',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -157,7 +161,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                     }}
                   />
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={components.digButton}
                     props={{
                       href: 'https://www.near.university/#earn',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -182,7 +186,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={components.digButton}
                     props={{
                       href: nearOrgLinks.getFundingPage,
                       iconRight: 'ph-bold ph-arrow-right',
@@ -206,7 +210,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
                 </Text>
                 <Flex gap="24px" alignItems="start" direction="column">
                   <VmComponent
-                    src="near/widget/DIG.Button"
+                    src={components.digButton}
                     props={{
                       href: 'https://gitcoin.co/near/active',
                       iconRight: 'ph-bold ph-arrow-up-right',
@@ -224,7 +228,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
         </Section>
       </Wrapper>
 
-      <VmComponent src="near/widget/NearOrg.Footer" />
+      <VmComponent src={components.nearOrg.footer} />
     </>
   );
 }
