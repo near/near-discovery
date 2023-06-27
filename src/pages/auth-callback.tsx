@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { network, signInContractId } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -15,6 +16,7 @@ import { firebaseAuth } from '../utils/firebase';
 const AuthCallbackPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [statusMessage, setStatusMessage] = useState('Loading...');
+  const { redirect } = useSignInRedirect();
 
   useEffect(() => {
     if (!router) {
@@ -29,9 +31,6 @@ const AuthCallbackPage: NextPageWithLayout = () => {
       const accountId = searchParams.get('accountId');
       const publicKey = searchParams.get('publicKey');
       const isRecovery = searchParams.get('isRecovery') === 'true';
-      const redirect = searchParams.get('redirect');
-
-      // TODO: consider passing email in the callback url
       let email = window.localStorage.getItem('emailForSignIn');
 
       while (!email) {
@@ -114,11 +113,8 @@ const AuthCallbackPage: NextPageWithLayout = () => {
                 );
 
                 setStatusMessage('Redirecting to app...');
-                if (redirect) {
-                  window.location.href = redirect;
-                } else {
-                  window.location.href = '/';
-                }
+
+                redirect(true);
               },
             );
           }
@@ -142,7 +138,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
     } else {
       router.push('/signup');
     }
-  }, []);
+  }, [router, redirect]);
 
   return <StyledStatusMessage>{statusMessage}</StyledStatusMessage>;
 };
