@@ -100,14 +100,13 @@ const SignUpPage: NextPageWithLayout = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.username || !data.email) return;
-    const redirect = router.query?.redirect;
     try {
       const fullAccountId = `${data.username}.${network.fastAuth.accountIdSuffix}`;
-      const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email, false, redirect);
+      const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email, false);
       router.push(
         `/verify-email?publicKey=${encodeURIComponent(publicKey)}&accountId=${encodeURIComponent(
           accountId,
-        )}&email=${encodeURIComponent(email)}${redirect ? `&redirect=${redirect}` : ''}`,
+        )}&email=${encodeURIComponent(email)}`,
       );
     } catch (error: any) {
       openToast({

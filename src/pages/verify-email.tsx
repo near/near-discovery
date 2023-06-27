@@ -33,9 +33,7 @@ const VerifyEmailPage: NextPageWithLayout = () => {
 
     try {
       await sendSignInLinkToEmail(firebaseAuth, query.email, {
-        url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}${
-          query?.redirect ? `&redirect=${query.redirect}` : ''
-        }`,
+        url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}`,
         handleCodeInApp: true,
       });
       openToast({
@@ -59,13 +57,12 @@ const VerifyEmailPage: NextPageWithLayout = () => {
     }
   };
 
-  const redirect = query?.redirect ? `?redirect=${query.redirect}` : '';
   return (
     <StyledContainer>
       <FormContainer onSubmit={handleResendEmail}>
         <header>
           <a
-            href={query?.isRecovery === 'true' ? `/signin${redirect}` : `/signup${redirect}`}
+            href={query?.isRecovery === 'true' ? '/signin' : '/signup'}
             style={{ textDecoration: 'underline', color: 'black' }}
           >
             <small>Go back</small>
