@@ -8,7 +8,7 @@ export const networks: Record<NetworkId, Network> = {
     walletUrl: 'https://wallet.near.org',
     helperUrl: 'https://helper.mainnet.near.org',
     fastAuth: {
-      mpcRecoveryUrl: 'https://mpc-recovery-prod-7tk2cmmtcq-ue.a.run.app',
+      mpcRecoveryUrl: 'https://mpc-recovery-leader-mainnet-cg7nolnlpa-ue.a.run.app',
       authHelperUrl: 'https://api.kitwallet.app',
       accountIdSuffix: 'near',
       firebase: {
