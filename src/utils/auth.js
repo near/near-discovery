@@ -21,7 +21,7 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
   }
 };
 
-export const handleCreateAccount = async (accountId, email, isRecovery, redirect) => {
+export const handleCreateAccount = async (accountId, email, isRecovery) => {
   const keyPair = await createKey(email);
   const publicKey = keyPair.getPublicKey().toString();
 
@@ -37,8 +37,7 @@ export const handleCreateAccount = async (accountId, email, isRecovery, redirect
   await sendSignInLinkToEmail(firebaseAuth, email, {
     url: encodeURI(
       `${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}` +
-        (isRecovery ? '&isRecovery=true' : '') +
-        (redirect ? `&redirect=${redirect}` : ''),
+        (isRecovery ? '&isRecovery=true' : ''),
     ),
     handleCodeInApp: true,
   });

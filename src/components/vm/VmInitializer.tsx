@@ -1,4 +1,5 @@
 import { sanitizeUrl } from '@braintree/sanitize-url';
+import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
@@ -11,7 +12,6 @@ import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
-import { setupKeypom } from 'keypom-js';
 import {
   CommitButton,
   EthersProviderContext,
@@ -23,10 +23,10 @@ import {
   Widget,
 } from 'near-social-vm';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
@@ -40,7 +40,6 @@ export default function VmInitializer() {
   const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
   const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(null);
   const ethersProviderContext = useEthersProviderContext();
-  const router = useRouter();
   const { initNear } = useInitNear();
   const near = useNear();
   const account = useAccount();
@@ -48,6 +47,7 @@ export default function VmInitializer() {
   const accountId = account.accountId;
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
+  const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
 
   useEffect(() => {
     initNear &&
@@ -77,26 +77,26 @@ export default function VmInitializer() {
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }) as any, // TODO: Refactor setupFastAuth() to TS
             setupKeypom({
-              trialBaseUrl:
-                networkId == 'testnet' ? 'https://test.near.org/#trial-url/' : 'https://near.org/#trial-url/',
+              trialAccountSpecs: {
+                url:
+                  networkId == 'testnet'
+                    ? 'https://test.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY'
+                    : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
+                modalOptions: KEYPOM_OPTIONS(networkId),
+              },
+              instantSignInSpecs: {
+                url:
+                  networkId == 'testnet'
+                    ? 'https://test.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID'
+                    : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
+              },
               networkId,
-              trialSplitDelim: '/',
               signInContractId,
-              modalOptions: KEYPOM_OPTIONS(networkId),
             }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
         customElements: {
-          Link: (props: any) => {
-            if (!props.to && props.href) {
-              props.to = props.href;
-              delete props.href;
-            }
-            if (props.to) {
-              props.to = sanitizeUrl(props.to);
-            }
-            return <Link {...props} />;
-          },
+          Link: ({ href, to, ...rest }: any) => <Link href={sanitizeUrl(href ?? to)} {...rest} />,
         },
       });
   }, [initNear]);
@@ -110,21 +110,11 @@ export default function VmInitializer() {
     });
   }, [near]);
 
-  const requestSignInWithWallet = useCallback(
-    (event: any) => {
-      event?.preventDefault();
-      walletModal?.show();
-      return false;
-    },
-    [walletModal],
-  );
-
-  const requestSignIn = useCallback(
-    (queryParam?: string) => {
-      router.push(`/signin${queryParam}`);
-    },
-    [router],
-  );
+  const requestSignInWithWallet = useCallback(() => {
+    saveCurrentUrl();
+    walletModal?.show();
+    return false;
+  }, [saveCurrentUrl, walletModal]);
 
   const logOut = useCallback(async () => {
     if (!near) {
@@ -142,8 +132,8 @@ export default function VmInitializer() {
   const refreshAllowance = useCallback(async () => {
     alert("You're out of access key allowance. Need sign in again to refresh it");
     await logOut();
-    requestSignIn();
-  }, [logOut, requestSignIn]);
+    requestAuthentication();
+  }, [logOut, requestAuthentication]);
 
   useEffect(() => {
     if (!near) {
@@ -175,7 +165,6 @@ export default function VmInitializer() {
       availableStorage,
       logOut,
       refreshAllowance,
-      requestSignIn,
       requestSignInWithWallet,
       signedIn,
     });
@@ -184,7 +173,6 @@ export default function VmInitializer() {
     availableStorage,
     logOut,
     refreshAllowance,
-    requestSignIn,
     requestSignInWithWallet,
     signedIn,
     signedAccountId,
