@@ -1,9 +1,11 @@
-import { useAuthStore } from '@/stores/auth';
-import type { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
 
-const signedOutRoute = (Component: NextComponentType) => {
-  const SignedOut = (props: any) => {
+import { useAuthStore } from '@/stores/auth';
+
+import type { NextPageWithLayout } from '../types';
+
+const signedOutRoute = (Component: NextPageWithLayout) => {
+  const SignedOut = (props: NextPageWithLayout) => {
     const signedIn = useAuthStore((store) => store.signedIn);
     const router = useRouter();
 
