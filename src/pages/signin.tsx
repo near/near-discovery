@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
@@ -20,8 +21,6 @@ const SignInPage: NextPageWithLayout = () => {
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
   const { redirect } = useSignInRedirect();
-
-  useClearCurrentComponent();
 
   useEffect(() => {
     if (signedIn) {
