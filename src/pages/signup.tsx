@@ -11,7 +11,6 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { network } from '@/utils/config';
-import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -234,7 +233,7 @@ const SignUpPage: NextPageWithLayout = () => {
 
 SignUpPage.getLayout = useDefaultLayout;
 
-export default signedOutRoute(SignUpPage);
+export default SignUpPage;
 
 const StyledContainer = styled.div`
   width: 100%;
