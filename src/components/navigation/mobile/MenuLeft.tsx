@@ -8,9 +8,9 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { flushEvents, recordClick } from '@/utils/analytics';
-import { getRedirectQueryParams } from '@/utils/navigation';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -132,9 +132,9 @@ const StyledMenu = styled.div`
 export function MenuLeft(props: Props) {
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
-  const requestSignIn = useAuthStore((store) => store.requestSignIn);
   const components = useBosComponents();
   const previousPath = useRef('');
+  const { requestAuthentication } = useSignInRedirect();
 
   async function clearAnalytics(event: UIEvent) {
     recordClick(event);
@@ -144,8 +144,13 @@ export function MenuLeft(props: Props) {
   function handleSignIn(event: UIEvent) {
     clearAnalytics(event);
     props.onCloseMenu();
-    const queryParam = getRedirectQueryParams(router);
-    requestSignIn(queryParam);
+    requestAuthentication();
+  }
+
+  function handleCreateAccount(event: UIEvent) {
+    clearAnalytics(event);
+    props.onCloseMenu();
+    requestAuthentication(true);
   }
 
   function search() {
@@ -181,16 +186,7 @@ export function MenuLeft(props: Props) {
         {!signedIn && (
           <div className="bottom-btns">
             <Button label="Sign in" variant="secondary" size="large" onClick={handleSignIn} />
-
-            <Button
-              label="Create Account"
-              variant="primary"
-              size="large"
-              onClick={(event) => {
-                clearAnalytics(event);
-                router.push(`/signup${getRedirectQueryParams(router)}`);
-              }}
-            />
+            <Button label="Create Account" variant="primary" size="large" onClick={handleCreateAccount} />
           </div>
         )}
         {signedIn && (

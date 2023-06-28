@@ -17,7 +17,7 @@ import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
-import { init as initializeSegment } from '@/utils/analytics';
+import { init as initializeAnalytics } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
 
   useEffect(() => {
-    initializeSegment();
+    initializeAnalytics();
   }, []);
 
   useEffect(() => {

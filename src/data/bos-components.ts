@@ -5,6 +5,7 @@ type NetworkComponents = {
   componentSummary: string;
   componentsPage: string;
   default: string;
+  digButton: string;
   editorComponentSearch: string;
   horizon: {
     homePage: string;
@@ -16,7 +17,9 @@ type NetworkComponents = {
     ecosystemGetFundingPage: string;
     ecosystemOverviewPage: string;
     ecosystemWorkAndEarnPage: string;
+    footer: string;
     homePage: string;
+    learningLinks: string;
     usePage: string;
   };
   notificationButton: string;
@@ -42,9 +45,10 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
   // localnet: undefined,
   testnet: {
     bosDirectory: 'one.testnet/widget/BOSDirectory',
-    componentSummary: 'one.testnet/widget/ComponentSummary',
-    componentsPage: 'one.testnet/widget/ComponentsPage',
-    default: 'one.testnet/widget/ActivityPage',
+    componentSummary: 'discom.testnet/widget/ComponentSummary',
+    componentsPage: 'discom.testnet/widget/ComponentsPage',
+    default: 'discom.testnet/widget/ActivityPage',
+    digButton: 'discom.testnet/widget/DIG.Button',
     editorComponentSearch: 'one.testnet/widget/Editor.ComponentSearch',
     horizon: {
       homePage: 'nearhorizon.near/widget/HomePage',
@@ -56,26 +60,28 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       ecosystemGetFundingPage: 'discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'discom.testnet/widget/NearOrg.Ecosystem.OverviewPage',
       ecosystemWorkAndEarnPage: 'discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage',
+      footer: 'discom.testnet/widget/NearOrg.Footer',
       homePage: 'discom.testnet/widget/NearOrg.HomePage',
+      learningLinks: 'discom.testnet/widget/NearOrg.LearningLinks',
       usePage: 'discom.testnet/widget/NearOrg.UsePage',
     },
-    notificationButton: 'one.testnet/widget/NotificationButton',
-    notificationsPage: 'one.testnet/widget/NotificationsPage',
-    peoplePage: 'one.testnet/widget/PeoplePage',
+    notificationButton: 'discom.testnet/widget/NotificationButton',
+    notificationsPage: 'discom.testnet/widget/NotificationsPage',
+    peoplePage: 'discom.testnet/widget/PeoplePage',
     profileImage: 'eugenethedream/widget/ProfileImage',
     profileInlineBlock: 'eugenethedream/widget/Profile.InlineBlock',
     profileName: 'eugenethedream/widget/ProfileName',
-    profilePage: 'eugenethedream/widget/Profile',
+    profilePage: 'discom.testnet/widget/Profile',
     search: {
-      indexPage: 'one.testnet/widget/Search.IndexPage',
-      typeAheadDropdown: 'one.testnet/widget/Search.TypeAheadDropdown',
+      indexPage: 'discom.testnet/widget/Search.IndexPage',
+      typeAheadDropdown: 'discom.testnet/widget/Search.TypeAheadDropdown',
     },
-    tosCheck: 'one.testnet/widget/TosCheck',
-    tosContent: 'one.testnet/widget/TosContent',
+    tosCheck: 'discom.testnet/widget/TosCheck',
+    tosContent: 'discom.testnet/widget/TosContent',
     viewSource: 'eugenethedream/widget/WidgetSource',
     widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
-    widgetMetadataEditor: 'eugenethedream/widget/WidgetMetadataEditor',
-    wrapper: 'one.testnet/widget/DIG.Theme',
+    widgetMetadataEditor: 'discom.testnet/widget/WidgetMetadataEditor',
+    wrapper: 'discom.testnet/widget/DIG.Theme',
   },
 
   mainnet: {
@@ -83,6 +89,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     componentSummary: 'near/widget/ComponentSummary',
     componentsPage: 'near/widget/ComponentsPage',
     default: 'near/widget/ActivityPage',
+    digButton: 'near/widget/DIG.Button',
     editorComponentSearch: 'mob.near/widget/Editor.ComponentSearch',
     horizon: {
       homePage: 'nearhorizon.near/widget/HomePage',
@@ -94,8 +101,10 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       ecosystemGetFundingPage: 'near/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'near/widget/NearOrg.Ecosystem.OverviewPage',
       ecosystemWorkAndEarnPage: 'near/widget/NearOrg.Ecosystem.WorkAndEarnPage',
+      footer: 'near/widget/NearOrg.Footer',
       homePage: 'near/widget/NearOrg.HomePage',
-      usePage: 'near/widget/NearOrg.UsePage',
+      learningLinks: 'near/widget/NearOrg.LearningLinks',
+      usePage: 'near/widget/NearOrg.UsePage'
     },
     notificationButton: 'near/widget/NotificationButton',
     notificationsPage: 'near/widget/NotificationsPage',

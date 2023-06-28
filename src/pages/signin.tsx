@@ -7,6 +7,7 @@ import { Button } from '@/components/lib/Button';
 import { openToast } from '@/components/lib/Toast';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -18,25 +19,22 @@ const SignInPage: NextPageWithLayout = () => {
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
+  const { redirect } = useSignInRedirect();
 
   useClearCurrentComponent();
 
-  // redirect to home upon signing in
   useEffect(() => {
     if (signedIn) {
-      router.push('/');
+      redirect();
     }
-  }, [router, signedIn]);
+  }, [redirect, signedIn]);
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
-    const searchParams = new URLSearchParams(location.search);
-    const redirect = searchParams.get('redirect');
+
     try {
-      const { publicKey, email } = await handleCreateAccount(null, data.email, true, redirect);
-      router.push(
-        `/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true${redirect ? `&redirect=${redirect}` : ''}`,
-      );
+      const { publicKey, email } = await handleCreateAccount(null, data.email, true);
+      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`);
     } catch (error: any) {
       console.log(error);
 
@@ -79,8 +77,8 @@ const SignInPage: NextPageWithLayout = () => {
           />
         </InputContainer>
 
-        <Button label="Continue" variant="affirmative" onClick={onSubmit} />
-        <Button label="Continue with wallet" variant="primary" onClick={requestSignInWithWallet} />
+        <Button type="submit" label="Continue" variant="affirmative" onClick={onSubmit} />
+        <Button type="button" label="Continue with wallet" variant="primary" onClick={requestSignInWithWallet} />
       </FormContainer>
     </StyledContainer>
   );
