@@ -148,6 +148,7 @@ export const Sandbox = ({ onboarding = false }) => {
               codeMain,
               codeDraft,
               isDraft,
+              codeVisible: codeMain,
               changesMade: checkChangesMade(codeMain, codeDraft, state[jpath]?.codeLocalStorage || ''),
               savedOnChain: true,
               new: false,
