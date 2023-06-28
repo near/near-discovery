@@ -10,14 +10,13 @@ import icon from '@/assets/images/near_social_icon.svg';
 
 const web3onboardKey = 'web3-onboard:connectedWallets';
 
-const wcV1InitOptions = {
-  qrcodeModalOptions: {
-    mobileLinks: ['metamask', 'argent', 'trust'],
-  },
-  connectFirstChainId: true,
+const wcV2InitOptions: any = {
+  version: 2,
+  projectId: '72b7b3359ab477e339a070f615806aa6',
+  requiredChains: [1, 56],
 };
 
-const walletConnect = walletConnectModule(wcV1InitOptions);
+const walletConnect = walletConnectModule(wcV2InitOptions);
 const ledger = ledgerModule();
 const injected = injectedModule();
 
