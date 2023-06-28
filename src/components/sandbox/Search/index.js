@@ -2,6 +2,7 @@ import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { VmComponent } from '@/components/vm/VmComponent';
+import { Filetype } from '../utils/const';
 
 const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disable }) => {
   return (
@@ -36,7 +37,7 @@ const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disabl
                                 className="btn btn-outline-primary"
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  loadAndOpenFile(widgetPath);
+                                  loadAndOpenFile(widgetPath, Filetype.Widget);
                                   onHide && onHide();
                                 }}
                               >
