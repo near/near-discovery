@@ -71,7 +71,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     profileImage: 'eugenethedream/widget/ProfileImage',
     profileInlineBlock: 'eugenethedream/widget/Profile.InlineBlock',
     profileName: 'eugenethedream/widget/ProfileName',
-    profilePage: 'discom.testnet/widget/Profile',
+    profilePage: 'discom.testnet/widget/ProfilePage',
     search: {
       indexPage: 'discom.testnet/widget/Search.IndexPage',
       typeAheadDropdown: 'discom.testnet/widget/Search.TypeAheadDropdown',
@@ -104,7 +104,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       footer: 'near/widget/NearOrg.Footer',
       homePage: 'near/widget/NearOrg.HomePage',
       learningLinks: 'near/widget/NearOrg.LearningLinks',
-      usePage: 'near/widget/NearOrg.UsePage'
+      usePage: 'near/widget/NearOrg.UsePage',
     },
     notificationButton: 'near/widget/NotificationButton',
     notificationsPage: 'near/widget/NotificationsPage',
