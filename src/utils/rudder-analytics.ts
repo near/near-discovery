@@ -49,7 +49,7 @@ export async function init() {
 
   getAnonymousId();
 
-  const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2R7K9phhzpFzk2zFIq2EFBtJ8BM';
+  const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2RIih8mrVPUTQ9uWe6TFfwXzcMe';
   const rudderStackDataPlaneUrl = 'https://near.dataplane.rudderstack.com';
 
   let analyticsUrl = rudderStackDataPlaneUrl;
