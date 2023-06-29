@@ -49,7 +49,7 @@ const StyledNavigation = styled.div`
     }
   }
 
-  .container {
+  .container-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -150,24 +150,24 @@ export const DesktopNavigation = () => {
     };
   }, []);
 
-  async function clearAnalytics(event: any) {
+  async function clearAnalytics(event: React.UIEvent) {
     recordClick(event);
     await flushEvents();
   }
 
-  function handleSignIn(event: any) {
+  function handleSignIn(event: React.UIEvent) {
     clearAnalytics(event);
     requestAuthentication();
   }
 
-  function handleCreateAccount(event: any) {
+  function handleCreateAccount(event: React.UIEvent) {
     clearAnalytics(event);
     requestAuthentication(true);
   }
 
   return (
     <StyledNavigation className={`${scrolled ? 'border-bottom' : ''}`}>
-      <div className="container">
+      <div className="container-xl container-fluid container-wrapper">
         <Link href="/">
           <Image
             priority
