@@ -2,7 +2,7 @@ import type { User } from 'firebase/auth';
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 import * as nearAPI from 'near-api-js';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { openToast } from '@/components/lib/Toast';
@@ -12,17 +12,18 @@ import { network, signInContractId } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { firebaseAuth } from '../utils/firebase';
+import type { MutableRefObject } from 'react';
 
 const AuthCallbackPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [statusMessage, setStatusMessage] = useState('Loading...');
   const { redirect } = useSignInRedirect();
+  const pendingSignInRef: MutableRefObject<null | Promise<void>> = useRef(null);
 
   useEffect(() => {
-    if (!router) {
+    if (pendingSignInRef.current) {
       return;
     }
-
     const locationUrl = window.location.href;
 
     if (isSignInWithEmailLink(firebaseAuth, locationUrl)) {
@@ -45,7 +46,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
       setStatusMessage('Verifying email...');
 
       // TODO: refactor this function, introduce early return pattern and cleanup async/await
-      signInWithEmailLink(firebaseAuth, email, window.location.href)
+      pendingSignInRef.current = signInWithEmailLink(firebaseAuth, email, window.location.href)
         .then(async (result) => {
           window.localStorage.removeItem('emailForSignIn');
 
@@ -138,7 +139,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
     } else {
       router.push('/signup');
     }
-  }, [router, redirect]);
+  }, []); // DEC-1294 leaving dependencies empty to ensure the effect runs only once
 
   return <StyledStatusMessage>{statusMessage}</StyledStatusMessage>;
 };
