@@ -4,7 +4,6 @@ import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { Filetype } from '../utils/const';
 
-import { Filetype } from '../utils/const';
 
 const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disable }) => {
   return (
