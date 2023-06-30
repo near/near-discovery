@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { MetaTags } from '@/components/MetaTags';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
@@ -9,10 +9,18 @@ import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
+const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
+
 const HomePage: NextPageWithLayout = () => {
+  const [signedInOptimistic, setSignedInOptimistic] = useState(false);
   const signedIn = useAuthStore((store) => store.signedIn);
   const components = useBosComponents();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+
+  useEffect(() => {
+    const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
+    setSignedInOptimistic(!!optimisticAccountId);
+  }, []);
 
   useEffect(() => {
     if (!signedIn) {
@@ -20,7 +28,7 @@ const HomePage: NextPageWithLayout = () => {
     }
   }, [signedIn, setComponentSrc]);
 
-  if (signedIn) {
+  if (signedIn || signedInOptimistic) {
     return <ComponentWrapperPage src={components.default} />;
   }
 
