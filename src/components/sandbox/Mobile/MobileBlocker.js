@@ -15,7 +15,7 @@ const Wrapper = styled.div`
     font-weight: 700;
   }
 
-  @media only screen and (max-width: 1200px) {
+  @media only screen and (max-width: 1024px) {
     .mobile {
       ${'' /* display: block; */}
     }
