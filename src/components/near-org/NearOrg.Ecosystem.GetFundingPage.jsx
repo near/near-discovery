@@ -3,11 +3,13 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
-import { recordClick } from '@/utils/analytics';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useDevice } from '@/hooks/useDevice';
+import { recordClick, recordTouchStart } from '@/utils/analytics';
 
 export function NearOrgEcosystemGetFundingPage() {
   const components = useBosComponents();
+  const device = useDevice();
 
   const Wrapper = styled.div`
     --section-gap: 162px;
@@ -320,9 +322,11 @@ export function NearOrgEcosystemGetFundingPage() {
     },
   ];
 
+  const handleAnalyticsTrack = (e) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
+
   return (
     <>
-      <Wrapper className="container-xl" onPointerUp={recordClick}>
+      <Wrapper className="container-xl" onPointerUp={handleAnalyticsTrack}>
         <Section center>
           <Flex gap="16px" direction="column" alignItems="center">
             <H1>Get Funded. Build the Future.</H1>

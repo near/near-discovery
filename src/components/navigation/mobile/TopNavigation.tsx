@@ -10,7 +10,7 @@ import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
-import { recordClick } from '@/utils/analytics';
+import { recordTouchStart } from '@/utils/analytics';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -132,8 +132,8 @@ export function TopNavigation(props: Props) {
   const accountId = useAuthStore((store) => store.accountId);
   const { requestAuthentication } = useSignInRedirect();
 
-  function handleCreateAccount(event: any) {
-    recordClick(event);
+  function handleCreateAccount(event: React.UIEvent) {
+    recordTouchStart(event);
     requestAuthentication(true);
   }
 

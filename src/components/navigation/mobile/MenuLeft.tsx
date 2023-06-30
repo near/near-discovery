@@ -10,7 +10,7 @@ import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
-import { flushEvents, recordClick } from '@/utils/analytics';
+import { flushEvents, recordTouchStart } from '@/utils/analytics';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -137,7 +137,7 @@ export function MenuLeft(props: Props) {
   const { requestAuthentication } = useSignInRedirect();
 
   async function clearAnalytics(event: UIEvent) {
-    recordClick(event);
+    recordTouchStart(event);
     await flushEvents();
   }
 

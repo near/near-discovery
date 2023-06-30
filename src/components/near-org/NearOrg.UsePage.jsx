@@ -3,11 +3,13 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
-import { recordClick } from '@/utils/analytics';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useDevice } from '@/hooks/useDevice';
+import { recordClick, recordTouchStart } from '@/utils/analytics';
 
 export function NearOrgUsePage() {
   const components = useBosComponents();
+  const device = useDevice();
 
   const Wrapper = styled.div`
     --section-gap: 162px;
@@ -161,9 +163,11 @@ export function NearOrgUsePage() {
     }
   `;
 
+  const handleAnalyticsTrack = (e) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
+
   return (
     <>
-      <Wrapper className="container-xl" onPointerUp={recordClick}>
+      <Wrapper className="container-xl" onPointerUp={handleAnalyticsTrack}>
         <Section center>
           <H1>Your first steps to becoming a Web3 citizen</H1>
         </Section>

@@ -5,10 +5,11 @@ import parserBabel from 'prettier/parser-babel';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useDevice } from '@/hooks/useDevice';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
-import { recordClick } from '@/utils/analytics';
+import { recordClick, recordTouchStart } from '@/utils/analytics';
 
 import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
@@ -70,6 +71,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
   const router = useRouter();
   const widgets = useBosComponents();
+  const device = useDevice();
   const tos = {
     checkComponentPath: widgets.tosCheck,
     contentComponentPath: widgets.tosContent,
@@ -456,6 +458,8 @@ export const Sandbox = ({ onboarding = false }) => {
     loadAndOpenFile(lastPath.name, Filetype.Widget);
   };
 
+  const handleAnalyticsTrack = (e) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
+
   // onboarding
   const refs = generateRefs();
   const refEditor = useRef();
@@ -505,7 +509,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
   return (
     <MainWrapper>
-      <div onPointerUp={recordClick}>
+      <div onPointerUp={handleAnalyticsTrack}>
         <MobileBlocker onboarding={onboarding} />
 
         {onboarding && (

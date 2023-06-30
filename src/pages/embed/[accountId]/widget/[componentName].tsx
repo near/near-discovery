@@ -3,10 +3,11 @@ import React, { useEffect, useState } from 'react';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useDevice } from '@/hooks/useDevice';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { recordClick } from '@/utils/analytics';
+import { recordClick, recordTouchStart } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EmbedComponentPage: NextPageWithLayout = () => {
@@ -16,6 +17,7 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
+  const device = useDevice();
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -25,8 +27,10 @@ const EmbedComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
+  const handleAnalyticsTrack = (e: React.MouseEvent) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
+
   return (
-    <div className="d-inline-block position-relative overflow-hidden" onPointerUp={recordClick}>
+    <div className="d-inline-block position-relative overflow-hidden" onPointerUp={handleAnalyticsTrack}>
       <VmComponent
         key={components.tosCheck}
         src={components.tosCheck}

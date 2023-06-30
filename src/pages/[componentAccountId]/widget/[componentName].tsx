@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useDevice } from '@/hooks/useDevice';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { recordClick } from '@/utils/analytics';
+import { recordClick, recordTouchStart } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const ViewComponentPage: NextPageWithLayout = () => {
@@ -16,6 +17,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const components = useBosComponents();
+  const device = useDevice();
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -25,8 +27,10 @@ const ViewComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
+  const handleAnalyticsTrack = (e: React.MouseEvent) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
+
   return (
-    <div className="container-xl" onPointerUp={recordClick}>
+    <div className="container-xl" onPointerUp={handleAnalyticsTrack}>
       <div className="row">
         <div
           className="d-inline-block position-relative overflow-hidden"
