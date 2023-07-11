@@ -4,15 +4,11 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useDevice } from '@/hooks/useDevice';
 import { useAuthStore } from '@/stores/auth';
-import { recordClick, recordTouchStart } from '@/utils/analytics';
-
 
 export function NearOrgHomePage() {
   const signedIn = useAuthStore((store) => store.signedIn);
   const components = useBosComponents();
-  const device = useDevice();
 
   const ipfsImages = {
     logos: {
@@ -87,11 +83,8 @@ export function NearOrgHomePage() {
     );
   };
 
-  const handleAnalyticsTrack = (e) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
-
-  console.log('device', device);
   return (
-    <Wrapper onPointerUp={handleAnalyticsTrack}>
+    <Wrapper>
       <Container center>
         <Flex gap="32px" direction="column" alignItems="center">
           <H1>

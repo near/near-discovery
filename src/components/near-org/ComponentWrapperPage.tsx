@@ -1,9 +1,8 @@
 import { useEffect } from 'react';
 
 import { VmComponent } from '@/components/vm/VmComponent';
-import { useDevice } from '@/hooks/useDevice';
+import { useClickTracking } from '@/hooks/useClickTracking';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { recordClick, recordTouchStart } from '@/utils/analytics';
 
 import { MetaTags } from '../MetaTags';
 
@@ -18,13 +17,11 @@ type Props = {
 
 export function ComponentWrapperPage(props: Props) {
   const setCurrentComponentSrc = useCurrentComponentStore((store) => store.setSrc);
-  const device = useDevice();
+  useClickTracking();
 
   useEffect(() => {
     setCurrentComponentSrc(props.src);
   }, [setCurrentComponentSrc, props]);
-
-  const handleAnalyticsTrack = (e: React.MouseEvent) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
 
   return (
     <>
@@ -33,7 +30,6 @@ export function ComponentWrapperPage(props: Props) {
         style={{
           paddingTop: 'var(--body-top-padding)',
         }}
-        onPointerUp={handleAnalyticsTrack}
       >
         <VmComponent src={props.src} props={props.componentProps} />
       </div>

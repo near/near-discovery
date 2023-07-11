@@ -4,12 +4,9 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useDevice } from '@/hooks/useDevice';
-import { recordClick, recordTouchStart } from '@/utils/analytics';
 
 export function NearOrgEcosystemOverviewPage() {
   const components = useBosComponents();
-  const device = useDevice();
 
   const nearOrgLinks = {
     getFundingPage: '/near/widget/NearOrg.Ecosystem.GetFundingPage',
@@ -429,11 +426,9 @@ export function NearOrgEcosystemOverviewPage() {
     },
   ];
 
-  const handleAnalyticsTrack = (e) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
-
   return (
     <>
-      <Wrapper className="container-xl" onPointerUp={handleAnalyticsTrack}>
+      <Wrapper className="container-xl">
         <Section center style={{ position: 'relative' }}>
           <Flex gap="16px" direction="column" alignItems="center">
             <H1>Building the Open Web together</H1>

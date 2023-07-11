@@ -5,11 +5,10 @@ import parserBabel from 'prettier/parser-babel';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useDevice } from '@/hooks/useDevice';
+import { useClickTracking } from '@/hooks/useClickTracking';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
-import { recordClick, recordTouchStart } from '@/utils/analytics';
 
 import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
@@ -63,6 +62,7 @@ import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
 
 export const Sandbox = ({ onboarding = false }) => {
+  useClickTracking();
   const near = useVmStore((store) => store.near);
   const cache = useVmStore((store) => store.cache);
   const accountId = useAuthStore((store) => store.accountId);
@@ -71,7 +71,6 @@ export const Sandbox = ({ onboarding = false }) => {
 
   const router = useRouter();
   const widgets = useBosComponents();
-  const device = useDevice();
   const tos = {
     checkComponentPath: widgets.tosCheck,
     contentComponentPath: widgets.tosContent,
@@ -458,8 +457,6 @@ export const Sandbox = ({ onboarding = false }) => {
     loadAndOpenFile(lastPath.name, Filetype.Widget);
   };
 
-  const handleAnalyticsTrack = (e) => device === 'desktop' ? recordClick(e) : recordTouchStart(e);
-
   // onboarding
   const refs = generateRefs();
   const refEditor = useRef();
@@ -509,7 +506,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
   return (
     <MainWrapper>
-      <div onPointerUp={handleAnalyticsTrack}>
+      <div>
         <MobileBlocker onboarding={onboarding} />
 
         {onboarding && (
