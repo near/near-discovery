@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { recordClick } from '@/utils/analytics';
 
 import { MetaTags } from '../MetaTags';
 
@@ -29,7 +28,6 @@ export function ComponentWrapperPage(props: Props) {
         style={{
           paddingTop: 'var(--body-top-padding)',
         }}
-        onPointerUp={recordClick}
       >
         <VmComponent src={props.src} props={props.componentProps} />
       </div>
