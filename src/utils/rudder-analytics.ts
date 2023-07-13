@@ -10,11 +10,11 @@ let rudderAnalytics: Analytics | null = null;
 let anonymousUserId = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
+let pendingEvents: any = [];
 
 declare global {
   interface Window {
     rudderanalytics: Analytics | undefined;
-    analyticsInitialized: boolean;
   }
 }
 
@@ -63,7 +63,10 @@ export async function init() {
     window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl);
     rudderAnalytics = window.rudderanalytics;
     if (rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
-    window.analyticsInitialized = true;
+    for (const event of pendingEvents) {
+      event();
+    }
+    pendingEvents = []; 
   } catch (e) {
     console.error(e);
   }
@@ -80,7 +83,12 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics) {
+    pendingEvents.push(() => {
+      recordPageView(pageName)
+    })
+    return;
+  }
   try {
     rudderAnalytics.page('category', pageName, {
       hashId: localStorage.getItem('hashId'),
