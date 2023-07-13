@@ -6,8 +6,6 @@ import type { ReactNode } from 'react';
 import { forwardRef } from 'react';
 import styled from 'styled-components';
 
-import { recordTouchStart } from '@/utils/analytics';
-
 import { CurrentComponent } from '../CurrentComponent';
 import { navLinkData } from '../org-links';
 
@@ -143,12 +141,11 @@ const Wrapper = styled.div`
 
 const AccordionTrigger = forwardRef<HTMLButtonElement, ComponentProps<typeof Accordion.Trigger>>(
   ({ children, className, ...props }, forwardedRef) => (
-    <Accordion.Header className="AccordionHeader" onTouchStart={recordTouchStart}>
+    <Accordion.Header className="AccordionHeader">
       <Accordion.Trigger
         className={classNames('AccordionTrigger', className)}
         {...props}
         ref={forwardedRef}
-        onTouchStart={recordTouchStart}
       >
         {children}
         <i className="ph ph-caret-down AccordionChevron" aria-hidden></i>
@@ -179,7 +176,7 @@ const ListItem = forwardRef<
 >(({ className, children, title, ...props }, forwardedRef) => {
   if (props.route) {
     return (
-      <li onTouchStart={(e) => recordTouchStart(e)}>
+      <li>
         <Link className={classNames('ListItemLink', className)} ref={forwardedRef} href={props.route}>
           <div className="ListItemHeading">{title}</div>
           <p className="ListItemText">{children}</p>
@@ -188,7 +185,7 @@ const ListItem = forwardRef<
     );
   } else {
     return (
-      <li onTouchStart={(e) => recordTouchStart(e)}>
+      <li>
         <a
           className={classNames('ListItemLink', className)}
           {...props}
