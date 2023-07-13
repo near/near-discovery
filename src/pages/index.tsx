@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { MetaTags } from '@/components/MetaTags';
@@ -12,10 +13,13 @@ import type { NextPageWithLayout } from '@/utils/types';
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 
 const HomePage: NextPageWithLayout = () => {
+  const router = useRouter();
   const [signedInOptimistic, setSignedInOptimistic] = useState(false);
   const signedIn = useAuthStore((store) => store.signedIn);
   const components = useBosComponents();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+  const authStore = useAuthStore();
+  const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -28,8 +32,25 @@ const HomePage: NextPageWithLayout = () => {
     }
   }, [signedIn, setComponentSrc]);
 
+  // if we are loading the ActivityPage, process the query params into componentProps
+  useEffect(() => {
+    if (signedIn || signedInOptimistic) {
+      setComponentProps(router.query);
+    }
+  }, [router.query, signedIn, signedInOptimistic]);
+
   if (signedIn || signedInOptimistic) {
-    return <ComponentWrapperPage src={components.default} />;
+    return (
+      <ComponentWrapperPage
+        src={components.tosCheck}
+        componentProps={{
+          logOut: authStore.logOut,
+          targetProps: componentProps,
+          targetComponent: components.default,
+          tosName: components.tosContent,
+        }}
+      />
+    );
   }
 
   return (
