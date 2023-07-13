@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
-import { recordClick } from '@/utils/analytics';
 import { useBosComponents } from '@/hooks/useBosComponents';
 
 export function NearOrgEcosystemOverviewPage() {
@@ -429,7 +428,7 @@ export function NearOrgEcosystemOverviewPage() {
 
   return (
     <>
-      <Wrapper className="container-xl" onPointerUp={recordClick}>
+      <Wrapper className="container-xl">
         <Section center style={{ position: 'relative' }}>
           <Flex gap="16px" direction="column" alignItems="center">
             <H1>Building the Open Web together</H1>

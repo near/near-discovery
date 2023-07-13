@@ -3,7 +3,6 @@
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
-import { recordClick } from '@/utils/analytics';
 import { useBosComponents } from '@/hooks/useBosComponents';
 
 export function NearOrgEcosystemWorkAndEarnPage() {
@@ -120,7 +119,7 @@ export function NearOrgEcosystemWorkAndEarnPage() {
 
   return (
     <>
-      <Wrapper className="container-xl" onPointerUp={recordClick}>
+      <Wrapper className="container-xl">
         <Section>
           <Flex gap="16px" direction="column" alignItems="start">
             <H1>Work & Earn</H1>
