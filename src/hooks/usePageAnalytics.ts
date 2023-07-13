@@ -8,6 +8,16 @@ export function usePageAnalytics() {
   const { asPath } = router;
   useEffect(() => {
     const justPath = asPath.split('?')[0];
-    recordPageView(justPath);
+    // wait for analytics library to initilize on initial page load before sending event
+    if (window.analyticsInitialized) {
+      recordPageView(justPath);
+    } else {
+      const checkInterval = setInterval(() => {
+        if (window.analyticsInitialized) {
+          recordPageView(justPath);
+          clearInterval(checkInterval);
+        }
+      }, 100);
+    }
   }, [asPath]);
 }

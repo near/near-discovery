@@ -14,6 +14,7 @@ let anonymousUserIdCreatedAt = '';
 declare global {
   interface Window {
     rudderanalytics: Analytics | undefined;
+    analyticsInitialized: boolean;
   }
 }
 
@@ -62,6 +63,7 @@ export async function init() {
     window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl);
     rudderAnalytics = window.rudderanalytics;
     if (rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
+    window.analyticsInitialized = true;
   } catch (e) {
     console.error(e);
   }
