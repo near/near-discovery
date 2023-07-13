@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import type { UIEvent } from 'react';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import React from 'react';
@@ -10,7 +9,7 @@ import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
-import { flushEvents, recordTouchStart } from '@/utils/analytics';
+import { flushEvents } from '@/utils/analytics';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -136,19 +135,14 @@ export function MenuLeft(props: Props) {
   const previousPath = useRef('');
   const { requestAuthentication } = useSignInRedirect();
 
-  async function clearAnalytics(event: UIEvent) {
-    recordTouchStart(event);
-    await flushEvents();
-  }
-
-  function handleSignIn(event: UIEvent) {
-    clearAnalytics(event);
+  function handleSignIn() {
+    flushEvents();
     props.onCloseMenu();
     requestAuthentication();
   }
 
-  function handleCreateAccount(event: UIEvent) {
-    clearAnalytics(event);
+  function handleCreateAccount() {
+    flushEvents();
     props.onCloseMenu();
     requestAuthentication(true);
   }

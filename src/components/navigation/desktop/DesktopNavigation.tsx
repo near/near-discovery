@@ -9,7 +9,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
-import { flushEvents, recordClick } from '@/utils/analytics';
+import { flushEvents } from '@/utils/analytics';
 
 import LogoBlack from '../icons/logo-black.svg';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -150,18 +150,13 @@ export const DesktopNavigation = () => {
     };
   }, []);
 
-  async function clearAnalytics(event: React.UIEvent) {
-    recordClick(event);
-    await flushEvents();
-  }
-
-  function handleSignIn(event: React.UIEvent) {
-    clearAnalytics(event);
+  function handleSignIn() {
+    flushEvents();
     requestAuthentication();
   }
 
-  function handleCreateAccount(event: React.UIEvent) {
-    clearAnalytics(event);
+  function handleCreateAccount() {
+    flushEvents();
     requestAuthentication(true);
   }
 

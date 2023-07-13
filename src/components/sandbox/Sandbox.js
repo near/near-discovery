@@ -5,7 +5,6 @@ import parserBabel from 'prettier/parser-babel';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useClickTracking } from '@/hooks/useClickTracking';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
@@ -62,7 +61,6 @@ import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
 
 export const Sandbox = ({ onboarding = false }) => {
-  useClickTracking();
   const near = useVmStore((store) => store.near);
   const cache = useVmStore((store) => store.cache);
   const accountId = useAuthStore((store) => store.accountId);

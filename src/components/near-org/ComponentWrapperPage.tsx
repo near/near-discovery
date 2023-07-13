@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 
 import { VmComponent } from '@/components/vm/VmComponent';
-import { useClickTracking } from '@/hooks/useClickTracking';
 import { useCurrentComponentStore } from '@/stores/current-component';
 
 import { MetaTags } from '../MetaTags';
@@ -17,7 +16,6 @@ type Props = {
 
 export function ComponentWrapperPage(props: Props) {
   const setCurrentComponentSrc = useCurrentComponentStore((store) => store.setSrc);
-  useClickTracking();
 
   useEffect(() => {
     setCurrentComponentSrc(props.src);
