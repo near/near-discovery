@@ -24,7 +24,7 @@ function filterURL(url: string) {
   return isStringAllowed(params) ? url : urlTrim;
 }
 
-const record = (eventType: string, e: UIEvent) => {
+const record = (eventType: string, e: UIEvent | PointerEvent) => {
   const key = get(e.target, 'placeholder', get(e.target, 'innerText', get(e.target, 'href')));
   Segment.recordEventWithProps(eventType, {
     element: truncate(key, { length: 255 }),
@@ -39,9 +39,9 @@ const record = (eventType: string, e: UIEvent) => {
   });
 };
 
-export const recordClick = (e: UIEvent) => record('click', e);
+export const recordClick = (e: UIEvent | PointerEvent) => record('click', e);
 export const recordMouseEnter = (e: UIEvent) => record('mouseover', e);
-export const recordTouchStart = (e: UIEvent) => record('touchstart', e);
+export const recordTouchStart = (e: UIEvent | PointerEvent) => record('touchstart', e);
 
 export function recordWalletConnect(accountId: string) {
   Segment.recordWalletConnect(accountId);

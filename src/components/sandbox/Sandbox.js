@@ -8,7 +8,6 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
-import { recordClick } from '@/utils/analytics';
 
 import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
@@ -505,7 +504,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
   return (
     <MainWrapper>
-      <div onPointerUp={recordClick}>
+      <div>
         <MobileBlocker onboarding={onboarding} />
 
         {onboarding && (
