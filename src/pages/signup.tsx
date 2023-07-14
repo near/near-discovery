@@ -43,11 +43,12 @@ const SignUpPage: NextPageWithLayout = () => {
         openToast({
           title: '',
           type: 'INFO',
-          description: 'Passkey support is required for account creation. Try using an updated version of Chrome or Safari to create an account.',
+          description:
+            'Passkey support is required for account creation. Try using an updated version of Chrome or Safari to create an account.',
           duration: 5000,
-        })
+        });
       }
-    }
+    };
     checkPassKey();
   }, []);
 
@@ -215,7 +216,7 @@ const SignUpPage: NextPageWithLayout = () => {
           )}
         </InputContainer>
 
-        <Button label="Continue" variant="affirmative" onClick={onSubmit} />
+        <Button label="Continue" variant="affirmative" type="submit" />
 
         <hr style={{ borderColor: 'hsl(55, 1.7%, 51.9%)' }} />
 
