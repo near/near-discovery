@@ -10,7 +10,6 @@ let rudderAnalytics: Analytics | null = null;
 let anonymousUserId = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
-let pendingEvents: any = [];
 
 declare global {
   interface Window {
@@ -63,10 +62,6 @@ export async function init() {
     window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl);
     rudderAnalytics = window.rudderanalytics;
     if (rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
-    for (const event of pendingEvents) {
-      event();
-    }
-    pendingEvents = []; 
   } catch (e) {
     console.error(e);
   }
@@ -83,12 +78,7 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
-  if (!rudderAnalytics) {
-    pendingEvents.push(() => {
-      recordPageView(pageName)
-    })
-    return;
-  }
+  if (!rudderAnalytics) return;
   try {
     rudderAnalytics.page('category', pageName, {
       hashId: localStorage.getItem('hashId'),
