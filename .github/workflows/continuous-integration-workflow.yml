@@ -12,22 +12,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'pnpm'
       - name: Run code formatting check
-        run: npm run prettier
+        run: pnpm run prettier
 
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+      - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v3
         with:
           node-version: 20
           cache: 'pnpm'
       - name: Run lint check
-        run: npm run build
+        run: pnpm run build
 
