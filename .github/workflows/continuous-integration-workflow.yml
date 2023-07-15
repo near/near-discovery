@@ -20,7 +20,7 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm ci
+        run: pnpm install
       - name: Run code formatting check
         run: pnpm run prettier
 
@@ -37,7 +37,7 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm ci
+        run: pnpm install
       - name: Run lint check
         run: pnpm run build
 
