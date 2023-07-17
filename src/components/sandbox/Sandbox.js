@@ -117,7 +117,7 @@ export const Sandbox = ({ onboarding = false }) => {
             [jpath]: {
               ...state[jpath],
               codeLocalStorage: code,
-              codeVisible: code,
+              codeVisible: code || state[jpath].codeVisible,
             },
           }));
         });
