@@ -1,10 +1,10 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import styled from 'styled-components';
 
 import icon from '@/assets/images/nearcon_banner_2023.svg';
-import { VmComponent } from '@/components/vm/VmComponent';
+import { Button } from '@/components/lib/Button';
 import { useBanner } from '@/hooks/useBanner';
-import { useBosComponents } from '@/hooks/useBosComponents';
 
 type FlexProps = {
   gap?: string;
@@ -23,6 +23,39 @@ type TextProps = {
 
 const Wrapper = styled.div`
   background: #00ec97;
+
+  .banner-button {
+    font-size: 14px;
+
+    &.desktop-button {
+      @media (max-width: 380px) {
+        display: inline !important;
+      }
+    }
+
+    &.mobile-button {
+      @media (max-width: 380px) {
+        display: none !important;
+      }
+    }
+  }
+  .close-button {
+    all: unset;
+    width: 14px;
+    height: 14px;
+    line-height: 14px;
+    color: #664d04;
+    background: transparent;
+    outline: none;
+    border: none;
+    transition: color 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      border: none;
+      background: transparent;
+    }
+  }
 `;
 
 const Flex = styled.div<FlexProps>`
@@ -47,35 +80,7 @@ const Text = styled.p<TextProps>`
   margin: 0;
 `;
 
-const VerySmallLabel = styled.div`
-  @media (max-width: 380px) {
-    display: inline !important;
-  }
-`;
-
-const SmallLabel = styled.div`
-  @media (max-width: 380px) {
-    display: none !important;
-  }
-`;
-
-const Button = styled.button`
-  all: unset;
-  display: block;
-  height: 16px;
-  line-height: 16px;
-  color: #664d04;
-`;
-
-const ButtonLabel = () => (
-  <>
-    <VerySmallLabel className='d-none d-sm-inline'>View</VerySmallLabel>
-    <SmallLabel className='d-inline d-sm-none'>Early Bird Tickets</SmallLabel>
-  </>
-);
-
 export const NearconBanner = () => {
-  const components = useBosComponents();
   const [ isBannerVisible, setBanners ] = useBanner();
 
   const closeBanner = () => {
@@ -89,23 +94,25 @@ export const NearconBanner = () => {
       <Flex gap="24px" alignItems="center" justifyContent="center">
         <Image src={icon} alt='nearcon-banner' />
         <Text size="16px" weight="500" className='d-none d-sm-inline'>Early Bird Tickets are live!</Text>
-        <VmComponent
-          src={components.digButton}
-          props={{
-            href: 'http://nearcon.org',
-            label: <ButtonLabel/>,
-            iconRight: 'ph-bold ph-arrow-right',
-            variant: 'primary',
-            fill: 'outline',
-            size: 'small',
-            as: 'a',
-            target: '_blank',
-            style: { fontSize: "14px" },
-          }}
-        />
-        <Button type="button" onClick={closeBanner}>
-        <i className="ph-fill ph-x-circle" />
-        </Button>
+        <Link href='http://nearcon.org' target='_blank' className='d-none d-sm-inline banner-button desktop-button'>
+          <Button
+            label='View'
+            iconRight='ph-bold ph-arrow-right'
+            variant='primary'
+            fill='outline'
+            size='small'
+          />
+        </Link>
+        <Link href='http://nearcon.org' target='_blank' className='d-inline d-sm-none banner-button mobile-button'>
+          <Button
+            label='Early Bird Tickets'
+            iconRight='ph-bold ph-arrow-right'
+            variant='primary'
+            fill='outline'
+            size='small'
+          />
+        </Link>
+        <Button type="button" onClick={closeBanner} label='Close' icon='ph-fill ph-x-circle' size='small' className='close-button' />
       </Flex>
     </Wrapper>
   );
