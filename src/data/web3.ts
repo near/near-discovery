@@ -17,7 +17,7 @@ const wcV2InitOptions: any = {
 };
 
 const walletConnect = walletConnectModule(wcV2InitOptions);
-const ledger = ledgerModule();
+const ledger = ledgerModule(wcV2InitOptions);
 const injected = injectedModule();
 
 // initialize Onboard
