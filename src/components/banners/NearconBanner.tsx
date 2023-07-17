@@ -103,6 +103,7 @@ export const NearconBanner = () => {
             size='small'
           />
         </Link>
+
         <Link href='http://nearcon.org' target='_blank' className='d-inline d-sm-none banner-button mobile-button'>
           <Button
             label='Early Bird Tickets'
