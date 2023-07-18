@@ -1,24 +1,7 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import { Button } from '@/components/lib/Button';
-import { useBosComponents } from '@/hooks/useBosComponents';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
-import { recordEvent } from '@/utils/analytics';
-import { flushEvents } from '@/utils/analytics';
-
-import LogoBlack from '../icons/logo-black.svg';
-import NearLogotype from '../icons/near-logotype.svg';
-import ReturnIconImage from '../icons/return.svg';
-import SearchIconImage from '../icons/search.svg';
-import { NotificationButton } from '../NotificationButton';
-import { MainNavigationMenu } from './MainNavigationMenu';
-import { TypeAheadDropdown } from './TypeAheadDropdown';
-import { UserDropdownMenu } from './UserDropdownMenu';
 
 const Container = styled.div`
   width:260px;
@@ -56,6 +39,30 @@ const Container = styled.div`
     
   }
 `;
+export const DesktopNavigationLeft = () => {
+  const router = useRouter();
+  function isActive(name:string) {
+    return router.asPath.includes(name);
+  }
+  return (
+    <Container>
+       <div className="logo">{shanshanLogo}</div>
+       <div className="menu">
+         <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div>Home</Link>
+         <div>
+         <div className='item' style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Templates</div>
+          <div className="">
+            <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR Column</Link>
+            <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">ZkEvm Column</Link>
+          </div>
+        </div>
+        <Link className={`item ${isActive('warmup') ? 'active': ''}`}  href="/warmup"><div className="icon">{zkevmIcon}</div>ZkEvm Warm up</Link>
+       </div>
+    </Container>
+  );
+};
+
+
 const homeIcon = <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M17.6488 7.28424L10.3259 0.646165C9.95621 0.235971 9.42099 0 8.85402 0C8.29613 0 7.76091 0.233766 7.40712 0.621906L0.356321 7.28204C0.00480133 7.63269 -0.0972526 8.13992 0.0977841 8.59201C0.292821 9.04411 0.744127 9.32639 1.24759 9.32639H1.8826V16.0968C1.8826 17.1465 2.74665 18 3.82616 18H6.85376C7.24611 18 7.59536 17.6913 7.59536 17.3097V12.8042C7.59536 12.6123 7.72463 12.4425 7.92193 12.4425H10.0583C10.2556 12.4425 10.4052 12.6146 10.4052 12.8042V17.3075C10.4052 17.6913 10.7341 17.9978 11.1264 17.9978H14.154C15.2335 17.9978 16.118 17.1465 16.118 16.0946V9.32419H16.7507C17.2519 9.32419 17.7032 9.0419 17.8983 8.59201C18.0979 8.14433 17.9981 7.63489 17.6488 7.28424Z" fill="currentColor"/>
 </svg>
@@ -78,25 +85,3 @@ const zkevmIcon = <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xm
 const shanshanLogo = <svg width="59" height="23" viewBox="0 0 59 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.390781 22.04V2.24H5.81078V4.44H2.89078V19.84H5.81078V22.04H0.390781ZM15.3275 0.559999H17.8675V16.22H15.3275V0.559999ZM8.5275 4.88H10.9875V18.58H8.5275V4.88ZM22.4075 4.84H24.8875V18.5H22.4075V4.84ZM9.7275 14.76H23.5075V17.24H9.7275V14.76ZM28.7475 20.22L27.3075 19.52C27.6008 19.0133 27.8342 18.4667 28.0075 17.88C28.1808 17.3067 28.2675 16.76 28.2675 16.24V14.46H30.7275V16.24C30.7275 17.1733 30.5675 17.9467 30.2475 18.56C29.9275 19.1867 29.4275 19.74 28.7475 20.22ZM40.9525 0.559999H43.4925V16.22H40.9525V0.559999ZM34.1525 4.88H36.6125V18.58H34.1525V4.88ZM48.0325 4.84H50.5125V18.5H48.0325V4.84ZM35.3525 14.76H49.1325V17.24H35.3525V14.76ZM53.1725 22.04V19.84H56.0925V4.44H53.1725V2.24H58.5925V22.04H53.1725Z" fill="#EBF479"/>
 </svg>;
-export const DesktopNavigationLeft = () => {
-  const [active_menu, set_active_menu] = useState('');
-  useEffect(() => {
-    console.log('0000');
-  }, [location.pathname])
-  return (
-    <Container>
-       <div className="logo">{shanshanLogo}</div>
-       <div className="menu">
-         <Link className="item" href="/people2"><div className="icon">{homeIcon}</div>Home</Link>
-         <div>
-         <div className='item' style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Templates</div>
-          <div className="">
-            <Link className="item child-item"  href="/people2">NEAR Column</Link>
-            <Link className="item child-item"  href="/people2">ZkEvm Column</Link>
-          </div>
-        </div>
-        <Link className="item active"  href="/people2"><div className="icon">{zkevmIcon}</div>ZkEvm Warm up</Link>
-       </div>
-    </Container>
-  );
-};

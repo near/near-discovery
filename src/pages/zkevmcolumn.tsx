@@ -3,7 +3,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
-const PeoplePage: NextPageWithLayout = () => {
+const ZkevmColumn: NextPageWithLayout = () => {
   const components = useBosComponents();
 
   return (
@@ -14,6 +14,6 @@ const PeoplePage: NextPageWithLayout = () => {
   );
 };
 
-PeoplePage.getLayout = useDefaultLayout;
+ZkevmColumn.getLayout = useDefaultLayout;
 
-export default PeoplePage;
+export default ZkevmColumn;

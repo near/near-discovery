@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import { MetaTags } from '@/components/MetaTags';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
-import { ShanShanHomePage } from '@/components/shanshan/HomePage'
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout, useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
@@ -64,7 +63,7 @@ const HomePage: NextPageWithLayout = () => {
   //   </>
   // );
 
-  return <ShanShanHomePage></ShanShanHomePage>
+  return <div style={{color:'#fff'}}> This is home page </div>
 };
 
 HomePage.getLayout = useDefaultLayout;

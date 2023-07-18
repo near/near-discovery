@@ -69,9 +69,9 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
           },
         },
         solid: {
-          background: 'var(--sand12)',
+          background: 'linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%)',
           border: 'var(--sand12)',
-          color: 'var(--sand1)',
+          color: '#02051E',
           iconColor: 'var(--sand9)',
           hover: {
             background: 'var(--sand11)',

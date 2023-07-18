@@ -39,6 +39,7 @@ type NetworkComponents = {
   widgetMetadata: string;
   widgetMetadataEditor: string;
   wrapper: string;
+  nearcolumn: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -82,6 +83,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
     widgetMetadataEditor: 'discom.testnet/widget/WidgetMetadataEditor',
     wrapper: 'discom.testnet/widget/DIG.Theme',
+    nearcolumn: 'ref-admin.near/widget/ref-template-page'
   },
 
   mainnet: {
@@ -123,5 +125,6 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'mob.near/widget/WidgetMetadata',
     widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
     wrapper: 'near/widget/DIG.Theme',
+    nearcolumn: 'ref-admin.near/widget/ref-template-page'
   },
 };
