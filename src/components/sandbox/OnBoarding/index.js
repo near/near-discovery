@@ -190,14 +190,6 @@ const OnBoarding = ({
       disableAll();
     }
 
-    // additional actions for step
-    if (currentStep === 1) {
-      closeFile({
-        type: onboardingComponents.starterFork.type,
-        name: onboardingComponents.starterFork.name,
-      });
-    }
-
     // AdjustPosition
     if (currentStep === 2 || currentStep === 3 || currentStep === 8) {
       setAdjustPosition({ x: refEditor.current.offsetWidth - 70, y: -16 });
@@ -232,7 +224,7 @@ const OnBoarding = ({
   };
 
   const finishOnboarding = () => {
-    setCurrentStep(0);
+    updateStep(0);
     router.push('/sandbox');
   };
 
