@@ -59,7 +59,7 @@ const Desc = styled.div`
   margin-top: 10px;
 `;
 
-const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
+const Welcome = ({ setShowModal, createFile, showEditor }) => {
   const router = useRouter();
 
   const handleNew = (type) => {
@@ -68,8 +68,7 @@ const Welcome = ({ setShowModal, createFile, showEditor, setCurrentStep }) => {
   };
 
   const handleSandbox = () => {
-    setCurrentStep(0);
-    router.push('/onboarding');
+    router.push('/onboarding/start');
   };
 
   if (showEditor) {
