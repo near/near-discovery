@@ -126,7 +126,7 @@ export const Sandbox = ({ onboarding = false }) => {
   );
 
   const getFileSocialDB = useCallback(
-    (file, setLocalStorage = false) => {
+    (file) => {
       if (!file.src) {
         return;
       }
@@ -139,35 +139,28 @@ export const Sandbox = ({ onboarding = false }) => {
 
         if (widgetObject && file.new) {
           const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
+          const newPath = fileToPath(file);
+          const code = codeDraft || codeMain;
+          updateCodeLocalStorage(newPath, codeDraft || codeMain, cache);
+
+          const singleFileObject = {
+            codeMain,
+            codeDraft,
+            isDraft,
+            savedOnChain: true,
+            new: false,
+            codeLocalStorage: code,
+            codeVisible: code,
+          };
 
           setFilesObject((state) => ({
             ...state,
             [jpath]: {
               ...state[jpath],
-              codeMain,
-              codeDraft,
-              isDraft,
-              codeVisible: codeMain,
-              changesMade: checkChangesMade(codeMain, codeDraft, state[jpath]?.codeLocalStorage || ''),
-              savedOnChain: true,
-              new: false,
+              ...singleFileObject,
+              changesMade: checkChangesMade(codeMain, codeDraft, code),
             },
           }));
-
-          if (setLocalStorage) {
-            const newPath = fileToPath(file);
-            const code = codeDraft || codeMain;
-            updateCodeLocalStorage(newPath, codeDraft || codeMain, cache);
-            setFilesObject((state) => ({
-              ...state,
-              [jpath]: {
-                ...state[jpath],
-                codeLocalStorage: code,
-                codeVisible: code,
-                changesMade: false,
-              },
-            }));
-          }
         }
       };
       fetchCode();
@@ -208,7 +201,7 @@ export const Sandbox = ({ onboarding = false }) => {
       addFile(newFile);
       setRenderCode(null);
       selectFile(path);
-      getFileSocialDB(newFile, true);
+      getFileSocialDB(newFile);
     },
     [accountId, addFile, getFileSocialDB, onboarding],
   );
