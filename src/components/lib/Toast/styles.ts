@@ -70,6 +70,10 @@ export const Root = styled(ToastPrimitive.Root)`
   &[data-type='INFO'] {
     background: var(--sand12);
   }
+  &[data-type='WARNING'] {
+    background: var(--amber4);
+    color: var(--amber12)
+  }
 `;
 
 export const Content = styled.div`
@@ -114,5 +118,9 @@ export const CloseButton = styled(ToastPrimitive.Close)`
 
   i {
     font-size: 0.8rem;
+  }
+
+  &[data-type='WARNING'] {
+    color: var(--amber12)
   }
 `;
