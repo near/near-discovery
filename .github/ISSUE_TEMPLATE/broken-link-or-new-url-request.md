@@ -7,6 +7,6 @@ assignees: ''
 
 ---
 
-## Replace the highlighted text in whichever of the these phrases is more appropriate 
+## Replace the highlighted/quoted text in whichever of the these phrases is more appropriate 
 1. Please add a `temporary, permanent` redirection of requests from `from this URL` to `to this URL` 
 1. The page at `URL address` contains a broken link which points to `broken link`. This link should be `removed or replaced with URL address`.
