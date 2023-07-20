@@ -9,7 +9,7 @@ const privateRoute = (Component: NextComponentType) => {
 
     if (!signedIn && router) {
       // `signin` or `signup`?
-      router.push('/signin');
+      router.push('/signup');
     }
     return <Component {...props} />;
   };
