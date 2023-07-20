@@ -30,14 +30,13 @@ const StyledNavigation = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  justify-content: space-between;
 
   &.border-bottom {
     border-bottom: 1px solid #e3e3e0;
   }
 
   .logo-link {
-    margin-right: auto;
-
     img {
       width: 28px;
       height: 28px;
