@@ -5,8 +5,8 @@ dependencies:
     specifier: 6.0.0
     version: 6.0.0
   '@keypom/selector':
-    specifier: ^1.2.0
-    version: 1.2.0(@near-js/accounts@0.1.3)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.0)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.1.1)(@types/react@18.2.0)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0)
+    specifier: 1.2.2
+    version: 1.2.2(@near-js/accounts@0.1.3)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.0)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.1.1)(@types/react@18.2.0)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0)
   '@monaco-editor/react':
     specifier: ^4.4.6
     version: 4.5.1(monaco-editor@0.40.0)(react-dom@18.2.0)(react@18.2.0)
@@ -1808,8 +1808,8 @@ packages:
       - near-api-js
     dev: false
 
-  /@keypom/selector@1.2.0(@near-js/accounts@0.1.3)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.0)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.1.1)(@types/react@18.2.0)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-4T0ALdQloPhD0fTrglc+Zot7NURi2cIe9q3qppxHOWK/xr78T9mtk/z8WlMOXI7AZcwCb6AMRLQ+75eTd3gmvg==}
+  /@keypom/selector@1.2.2(@near-js/accounts@0.1.3)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.0)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.1.1)(@types/react@18.2.0)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-vG3FIVzkq6ebNPFeD4sGRwYLiBrUe1TdxAiE/MnqYPknQkNc0SiKhOFGmUcHaag3kazYYIaECLZE7SvEFQ58ag==}
     requiresBuild: true
     peerDependencies:
       '@near-js/accounts': ^0.1.3
