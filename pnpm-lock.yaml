@@ -151,9 +151,15 @@ dependencies:
   react-singleton-hook:
     specifier: ^3.1.1
     version: 3.4.0(react-dom@18.2.0)(react@18.2.0)
+  remark:
+    specifier: ^14.0.3
+    version: 14.0.3
   rudder-sdk-js:
     specifier: ^2.36.0
     version: 2.36.0
+  strip-markdown:
+    specifier: ^5.0.1
+    version: 5.0.1
   styled-components:
     specifier: ^5.3.6
     version: 5.3.10(react-dom@18.2.0)(react-is@17.0.2)(react@18.2.0)
@@ -8510,6 +8516,25 @@ packages:
       unified: 10.1.2
     dev: false
 
+  /remark-stringify@10.0.3:
+    resolution: {integrity: sha512-koyOzCMYoUHudypbj4XpnAKFbkddRMYZHwghnxd7ue5210WzGw6kOBwauJTRUMq16jsovXx8dYNvSSWP89kZ3A==}
+    dependencies:
+      '@types/mdast': 3.0.11
+      mdast-util-to-markdown: 1.5.0
+      unified: 10.1.2
+    dev: false
+
+  /remark@14.0.3:
+    resolution: {integrity: sha512-bfmJW1dmR2LvaMJuAnE88pZP9DktIFYXazkTfOIKZzi3Knk9lT0roItIA24ydOucI3bV/g/tXBA6hzqq3FV9Ew==}
+    dependencies:
+      '@types/mdast': 3.0.11
+      remark-parse: 10.0.1
+      remark-stringify: 10.0.3
+      unified: 10.1.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /remove-trailing-slash@0.1.1:
     resolution: {integrity: sha512-o4S4Qh6L2jpnCy83ysZDau+VORNvnFw07CKSAymkd6ICNVEPisMyzlc00KlvvicsxKck94SEwhDnMNdICzO+tA==}
     dev: false
@@ -8877,6 +8902,14 @@ packages:
   /strip-json-comments@3.1.1:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
+
+  /strip-markdown@5.0.1:
+    resolution: {integrity: sha512-IvoKZrXtWAnlEjRfDlT3yRtGRvpX3RSg+nwAHONmshpSCoxgjZV2xX9ZYvEmwupmYobJtws9oDdTwLUu/5PoMQ==}
+    dependencies:
+      '@types/mdast': 3.0.11
+      '@types/unist': 2.0.6
+      unified: 10.1.2
+    dev: false
 
   /sturdy-websocket@0.1.12:
     resolution: {integrity: sha512-PA7h8LdjaMoIlC5HAwLVzae4raGWgyroscV4oUpEiTtEFINcNa47/CKYT3e98o+FfsJgrclI2pYpaJrz0aaoew==}
