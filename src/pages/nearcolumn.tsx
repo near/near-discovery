@@ -24,7 +24,7 @@ const NearColumn: NextPageWithLayout = () => {
       <div className='title'>NEAR Column</div>
       <p className='subTitle'>Using NEAR conveniently and efficiently</p>
       <ComponentWrapperPage
-        src={components.nearcolumn}
+        src={components.nearcolumn || ''}
         meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
       />
     </Container>

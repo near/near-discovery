@@ -40,6 +40,7 @@ type NetworkComponents = {
   widgetMetadataEditor: string;
   wrapper: string;
   nearcolumn: string;
+  zkevmcolumn:string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -83,7 +84,8 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
     widgetMetadataEditor: 'discom.testnet/widget/WidgetMetadataEditor',
     wrapper: 'discom.testnet/widget/DIG.Theme',
-    nearcolumn: 'ref-admin.near/widget/ref-template-page'
+    nearcolumn: 'ref-admin.near/widget/ref-template-page',
+    zkevmcolumn: 'ref-admin.near/widget/ZKEVM.Template',
   },
 
   mainnet: {
@@ -125,6 +127,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'mob.near/widget/WidgetMetadata',
     widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
     wrapper: 'near/widget/DIG.Theme',
-    nearcolumn: 'ref-admin.near/widget/ref-template-page'
+    nearcolumn: 'ref-admin.near/widget/ref-template-page',
+    zkevmcolumn: 'ref-admin.near/widget/ZKEVM.Template',
   },
 };
