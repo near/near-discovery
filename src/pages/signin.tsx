@@ -9,6 +9,7 @@ import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
+import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -21,13 +22,13 @@ const SignInPage: NextPageWithLayout = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const { redirect } = useSignInRedirect();
 
-  useClearCurrentComponent();
-
   useEffect(() => {
     if (signedIn) {
       redirect();
     }
   }, [redirect, signedIn]);
+
+  useClearCurrentComponent();
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
@@ -85,7 +86,7 @@ const SignInPage: NextPageWithLayout = () => {
 };
 SignInPage.getLayout = useDefaultLayout;
 
-export default SignInPage;
+export default signedOutRoute(SignInPage);
 
 const StyledContainer = styled.div`
   width: 100%;
