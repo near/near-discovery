@@ -41,6 +41,7 @@ type NetworkComponents = {
   wrapper: string;
   nearcolumn: string;
   warmUp: string;
+  zkevmcolumn: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -86,6 +87,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     wrapper: 'discom.testnet/widget/DIG.Theme',
     nearcolumn: 'ref-admin.near/widget/ref-template-page',
     warmUp: 'ref-admin.near/widget/ZKEVMWarmUp.warm-up',
+    zkevmcolumn: 'ref-admin.near/widget/ZKEVM.Template',
   },
 
   mainnet: {
@@ -129,5 +131,6 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     wrapper: 'near/widget/DIG.Theme',
     nearcolumn: 'ref-admin.near/widget/ref-template-page',
     warmUp: 'ref-admin.near/widget/ZKEVMWarmUp.warm-up',
+    zkevmcolumn: 'ref-admin.near/widget/ZKEVM.Template',
   },
 };

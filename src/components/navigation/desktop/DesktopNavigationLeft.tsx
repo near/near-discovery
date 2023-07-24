@@ -8,6 +8,7 @@ const Container = styled.div`
   min-height:100vh;
   background: rgba(24, 26, 39, 1);
   padding:10px;
+  flex-shrink:0;
   .logo{
     padding-left:32px;
     padding:24px 0 18px 32px;
