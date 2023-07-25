@@ -63,7 +63,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
             const data = {
               ...(accountId && accountId.includes('.') ? { near_account_id: accountId } : {}),
               create_account_options: {
-                full_access_keys: [publicKey],
+                ...(publicKey ? {full_access_keys: [publicKey]} : {}),
                 limited_access_keys: [
                   {
                     public_key: limitedAccessKey.getPublicKey().toString(),

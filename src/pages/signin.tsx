@@ -1,3 +1,4 @@
+import { getKeys, isPassKeyAvailable } from '@near-js/biometric-ed25519';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -35,7 +36,7 @@ const SignInPage: NextPageWithLayout = () => {
 
     try {
       const { publicKey, email } = await handleCreateAccount(null, data.email, true);
-      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`);
+      router.push(`/verify-email?email=${email}&isRecovery=true` + (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''));
     } catch (error: any) {
       console.log(error);
 
