@@ -1,0 +1,9 @@
+{
+	
+	"short_name": "Near BOS",
+	"name": "The OS for an open web",
+	"scope": "/",
+	"start_url": "/near/widget/NearOrg.HomePage",
+	"display_override": ["window-control-overlay", "minimal-ui"],
+	"display": "standalone"
+}
