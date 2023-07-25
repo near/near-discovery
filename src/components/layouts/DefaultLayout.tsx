@@ -1,11 +1,11 @@
 import type { ReactNode } from 'react';
+import styled from 'styled-components';
 
 import { NearconBanner } from '../banners/NearconBanner';
 import { BosLoaderBanner } from '../BosLoaderBanner';
 import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
 import { LoginBox } from '../navigation/desktop/LoginBox';
 import { Navigation } from '../navigation/Navigation';
-import styled from 'styled-components';
 
 
 interface Props {
