@@ -28,7 +28,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
     <div className="container-xl">
       <div className="row">
         <div
-          className="d-inline-block position-relative overflow-hidden"
+          className="d-inline-block position-relative"
           style={{
             paddingTop: 'var(--body-top-padding)',
           }}
