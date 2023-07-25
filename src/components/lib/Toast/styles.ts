@@ -72,7 +72,7 @@ export const Root = styled(ToastPrimitive.Root)`
   }
   &[data-type='WARNING'] {
     background: var(--amber4);
-    color: var(--amber12)
+    color: var(--amber12);
   }
 `;
 
@@ -121,6 +121,6 @@ export const CloseButton = styled(ToastPrimitive.Close)`
   }
 
   &[data-type='WARNING'] {
-    color: var(--amber12)
+    color: var(--amber12);
   }
 `;

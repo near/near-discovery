@@ -36,7 +36,10 @@ const SignInPage: NextPageWithLayout = () => {
 
     try {
       const { publicKey, email } = await handleCreateAccount(null, data.email, true);
-      router.push(`/verify-email?email=${email}&isRecovery=true` + (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''));
+      router.push(
+        `/verify-email?email=${email}&isRecovery=true` +
+          (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''),
+      );
     } catch (error: any) {
       console.log(error);
 

@@ -42,19 +42,19 @@ const HomePage: NextPageWithLayout = () => {
   }, [router.query, signedIn, signedInOptimistic]);
 
   useEffect(() => {
-    if(signedIn) {
+    if (signedIn) {
       isPassKeyAvailable().then((passKeyAvailable: boolean) => {
-        if(!passKeyAvailable) {
+        if (!passKeyAvailable) {
           openToast({
             title: 'Limited Functionality',
             type: 'WARNING',
             description: 'To access all account features, try using a browser that supports passkeys',
             duration: 5000,
-          })
+          });
         }
-      })
+      });
     }
-  },[signedIn])
+  }, [signedIn]);
 
   if (signedIn || signedInOptimistic) {
     return (
