@@ -88,9 +88,8 @@ const SignUpPage: NextPageWithLayout = () => {
       const fullAccountId = `${data.username}.${network.fastAuth.accountIdSuffix}`;
       const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email, false);
       router.push(
-        `/verify-email?accountId=${encodeURIComponent(
-          accountId,
-        )}&email=${encodeURIComponent(email)}` + (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''),
+        `/verify-email?accountId=${encodeURIComponent(accountId)}&email=${encodeURIComponent(email)}` +
+          (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''),
       );
     } catch (error: any) {
       openToast({
