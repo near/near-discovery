@@ -34,11 +34,13 @@ a:hover {
   text-decoration: none;
 }
 
-#near-wallet-selector-modal .open{
+#near-wallet-selector-modal .open {
   z-index: 1001;
 }
 
-#w3m-modal { z-index: 1002 }
+#w3m-modal {
+  z-index: 1002;
+}
 
 #launcher {
   color-scheme: light;
