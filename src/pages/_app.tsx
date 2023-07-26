@@ -94,6 +94,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           href={`${process.env.NEXT_PUBLIC_HOSTNAME}/near/widget/NearOrg.HomePage`}
           key="canonical"
         />
+        <link rel="manifest" href="manifest.json" />
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
