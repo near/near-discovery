@@ -14,6 +14,7 @@ const Container = styled.div`
     padding:24px 0 18px 32px;
   }
   .item{
+    position:relative;
     display:flex;
     align-items:center;
     height:60px;
@@ -37,7 +38,11 @@ const Container = styled.div`
   .item.active{
     background: rgba(55, 58, 83, 1);
     color:#EBF479;
-    
+    .bag{
+      position:absolute;
+      right:-10px;
+      top:-12px;
+    }
   }
 `;
 export const DesktopNavigationLeft = () => {
@@ -45,19 +50,46 @@ export const DesktopNavigationLeft = () => {
   function isActive(name:string) {
     return router.asPath.includes(name);
   }
+  const visible_bag = <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5.23218" y="9.56238" width="7" height="3" rx="1.5" transform="rotate(-30 5.23218 9.56238)" fill="url(#paint0_linear_1_257)"/>
+  <rect x="0.905762" y="6.06897" width="7" height="3" rx="1.5" transform="rotate(-45 0.905762 6.06897)" fill="url(#paint1_linear_1_257)"/>
+  <rect width="7" height="3" rx="1.5" transform="matrix(-0.965926 0.258819 0.258819 0.965926 13.4338 12.6924)" fill="url(#paint2_linear_1_257)"/>
+  <defs>
+  <linearGradient id="paint0_linear_1_257" x1="8.73218" y1="9.56238" x2="8.73218" y2="12.5624" gradientUnits="userSpaceOnUse">
+  <stop stop-color="#EEF3BF"/>
+  <stop offset="1" stop-color="#E9F456"/>
+  </linearGradient>
+  <linearGradient id="paint1_linear_1_257" x1="4.40576" y1="6.06897" x2="4.40576" y2="9.06897" gradientUnits="userSpaceOnUse">
+  <stop stop-color="#EEF3BF"/>
+  <stop offset="1" stop-color="#E9F456"/>
+  </linearGradient>
+  <linearGradient id="paint2_linear_1_257" x1="3.5" y1="0" x2="3.5" y2="3" gradientUnits="userSpaceOnUse">
+  <stop stop-color="#EEF3BF"/>
+  <stop offset="1" stop-color="#E9F456"/>
+  </linearGradient>
+  </defs>
+  </svg>
+  
   return (
     <Container>
        <div className="logo">{shanshanLogo}</div>
        <div className="menu">
-         <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div>Home</Link>
+         <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div>Home<span className='bag'>{router.asPath == '/' ? visible_bag: null}</span></Link>
          <div>
-         <div className='item' style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Templates</div>
+         <div className='item' style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Chains</div>
           <div className="">
-            <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR Column</Link>
-            <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">ZkEvm Column</Link>
+            <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR<span className='bag'>{isActive('nearcolumn') ? visible_bag: null}</span></Link>
+            <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">Polygon zkEVM<span className='bag'>{isActive('zkevmcolumn') ? visible_bag: null}</span></Link>
           </div>
         </div>
-        <Link className={`item ${isActive('warmup') ? 'active': ''}`}  href="/warmup"><div className="icon">{zkevmIcon}</div>ZkEvm Warm up</Link>
+        <Link className={`item ${isActive('warmup') ? 'active': ''}`}  href="/warmup">
+          <div className="icon">{zkevmIcon}</div>
+          ZkEvm Warm up
+          {
+            isActive('warmup') ? <span className='bag'>{visible_bag}</span>:null
+          }
+          
+        </Link>
        </div>
     </Container>
   );

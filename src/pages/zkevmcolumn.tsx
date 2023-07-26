@@ -22,8 +22,8 @@ const ZkevmColumn: NextPageWithLayout = () => {
   `
   return (
     <Container>
-      <div className='title'>ZkEvm Column</div>
-      <p className='subTitle'>Using ZkEvm conveniently and efficiently</p>
+      <div className='title'>Polygon zkEVM</div>
+      <p className='subTitle'>Using Polygon zkEVM conveniently and efficiently</p>
       <ComponentWrapperPage
         src={components.zkevmcolumn}
         meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
