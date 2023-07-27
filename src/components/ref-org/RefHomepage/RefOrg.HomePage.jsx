@@ -70,6 +70,7 @@ export function RefOrgHomePage() {
             btnText={'Discover'}
             tag={'Bridge'}
             tagBackground={'linear-gradient(45deg, #5DF2FF, #824BFF) border-box'}
+            imageBgGradient={'180deg, #5BF5FF 0%, #8247FF 100%'}
             isRevert
           />
         </RefContainer>
@@ -84,6 +85,7 @@ export function RefOrgHomePage() {
             btnText={'Discover'}
             tag={'Portfolio'}
             tagBackground={'linear-gradient(45deg, #CFFF96, #16FFE1) border-box'}
+            imageBgGradient={'180deg, #D0FF95 0%, #11FFE2 100%'}
           />
         </RefContainer>
       </Section>

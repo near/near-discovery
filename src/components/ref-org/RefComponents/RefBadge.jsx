@@ -11,7 +11,7 @@ const RefBadge = ({ children, className, padding, background }) => {
 
 const Badge = styled.div`
   border-radius: 30px;
-  background: ${(p) => p.background ?? 'linear-gradient(45deg, #A55BFE, #FD2B94) border-box'};
+  background: ${(p) => p.background ?? 'linear-gradient(45deg, #A55BFE, #FD2B94)'};
   padding: 1px;
   display: inline-block;
 `;

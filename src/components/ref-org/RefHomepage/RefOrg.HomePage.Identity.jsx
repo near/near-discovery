@@ -15,7 +15,7 @@ const RefOrgHomePageIdentity = () => {
         />
 
         <Column>
-          <StyledBadge>Analytics</StyledBadge>
+          <StyledBadge background={'linear-gradient(45deg, #FAFFD0, #DEC338)'}>Analytics</StyledBadge>
           <Title>Keep track of DeFi ecosystem</Title>
           <Desc>Tracking and analyzing blockchain data for more insights.</Desc>
         </Column>
@@ -27,7 +27,7 @@ const RefOrgHomePageIdentity = () => {
               borderLeftWidth: 0,
             }}
           />
-          <StyledBadge>Identity</StyledBadge>
+          <StyledBadge background={'linear-gradient(45deg, #FAFFD0, #DEC338)'}>Identity</StyledBadge>
           <Title>Contribute with Web3 enthusiasts</Title>
           <Desc>Make your DeFi actions simple, fast and traceable.</Desc>
         </Column>
