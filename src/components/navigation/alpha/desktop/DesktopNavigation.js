@@ -134,16 +134,20 @@ export function DesktopNavigation(props) {
           {searchInputFocus && <Return />}
         </div> */}
         <div className="navigation-section text-align">
-        <NavigationButton route="/jgodwill.near/widget/GenaDrop.Minter">
+        <NavigationButton route="/jgodwill.near/widget/GenaDropmultichainminter">
             Create
           </NavigationButton>
           <NavigationButton route="/jgodwill.near/widget/GenaDrop.MultiListing">
-            List
+            List Near Nfts
           </NavigationButton>
 
 
           <NavigationButton route="/jgodwill.near/widget/GenaDrop.Explore">
-            Explore
+            Explore Near Nfts
+          </NavigationButton>
+
+          <NavigationButton route="/0xprometheus.near/widget/Eth-Explore">
+            Explore EVM Nfts
           </NavigationButton>
           {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
             Mint
