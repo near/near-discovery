@@ -7,25 +7,25 @@ import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLe
 import { LoginBox } from '../navigation/desktop/LoginBox';
 import { Navigation } from '../navigation/Navigation';
 
-
 interface Props {
   children: ReactNode;
 }
 
 const Layout = styled.div`
-  background: #1E202F;
-  display:flex;
-  .content{
-    padding:16px 60px;
-    flex-grow:1;
+  background: #1e202f;
+  display: flex;
+  .content {
+    padding: 16px 60px;
+    flex-grow: 1;
+    width: calc(100vw - 300px);
   }
-`
+`;
 export function DefaultLayout({ children }: Props) {
   return (
     <Layout>
-      <DesktopNavigationLeft/>
-      <div className='content'>
-        <LoginBox/>
+      <DesktopNavigationLeft />
+      <div className="content">
+        <LoginBox />
         {children}
       </div>
     </Layout>
