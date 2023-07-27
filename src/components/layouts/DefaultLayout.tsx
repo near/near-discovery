@@ -12,7 +12,7 @@ const Layout = styled.div`
   background: #1e202f;
   display: flex;
   .content {
-    padding: 16px 60px;
+    padding: 16px 0px;
     flex-grow: 1;
     position: relative;
 
