@@ -21,7 +21,7 @@ const NearColumn: NextPageWithLayout = () => {
   `
   return (
     <Container>
-      <div className='title'>NEAR Column</div>
+      <div className='title'>NEAR</div>
       <p className='subTitle'>Using NEAR conveniently and efficiently</p>
       <ComponentWrapperPage
         src={components.nearcolumn || ''}

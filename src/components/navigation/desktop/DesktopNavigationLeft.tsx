@@ -2,8 +2,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
 const Container = styled.div`
+  position:relative;
+  z-index:50;
   width:260px;
   min-height:100vh;
   background: rgba(24, 26, 39, 1);
@@ -11,10 +12,10 @@ const Container = styled.div`
   flex-shrink:0;
   z-index: 10;
   .logo{
-    padding-left:32px;
     padding:24px 0 18px 32px;
   }
   .item{
+    position:relative;
     display:flex;
     align-items:center;
     height:60px;
@@ -38,29 +39,156 @@ const Container = styled.div`
   .item.active{
     background: rgba(55, 58, 83, 1);
     color:#EBF479;
-    
+    .bag{
+      position:absolute;
+      right:-10px;
+      top:-12px;
+    }
+  }
+  .small .menu {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .small .logo{
+    padding:24px 0 18px 30px;
+  }
+  .small .item{
+    padding-left:0;
+  }
+  .small .item.active{
+    background: transparent;
+  }
+  .small .item .icon{
+    width:auto;
+  }
+  .small .hasChildBox {
+    display:flex;
+    justify-content:center;
+    position:relative;
+    width:100%;
+  }
+  .small .active .bag{
+    right: -16px;
+    top: 5px;
+  }
+  .small .childBox{
+    position:absolute;
+    left:80px;
+    top:0;
+    width:180px;
+    background-color:#373A53;
+    border-radius:16px;
+    padding:10px 10px 4px 10px;
+    box-shadow: 0px 0px 16px 0px rgba(0, 0, 0, 0.25);
+    .child-item{
+      white-space: nowrap;
+      height:50px;
+      padding:0 16px;
+      margin:0 0 6px 0;
+    }
+    .active, .child-item:hover{
+      background-color:rgba(24, 26, 39, 0.3);
+    }
+  }
+  .putButton{
+    position:absolute;
+    right:0;
+    top:31px;
+    cursor:pointer;
   }
 `;
 export const DesktopNavigationLeft = () => {
+  const [putMenu, setPutMenu] = useState(false);
+  const [showChildBox, setShowChildBox] = useState(false);
   const router = useRouter();
   function isActive(name:string) {
-    return router.asPath.includes(name);
+    let paths:string[] = [];
+    if (name == 'nearcolumn') {
+      paths = ['ref-home', 'xBox', 'nearcolumn'];
+      
+    } else if (name == 'zkevmcolumn') {
+      paths = ['ZKEVMSwap.zkevm-swap', 'ZKEVMSwap.zkevm-bridge', 'ZKEVM.GAMMA', 'ZKEVM.AAVE', 'zkevmcolumn'];
+
+    } else if (name == 'warmup') {
+      paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
+    }
+    const r = router.asPath.split('/').pop() || '';
+    return paths.includes(r);
   }
+  const visible_bag = <svg width="17" height="19" viewBox="0 0 17 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect x="5.23218" y="9.56238" width="7" height="3" rx="1.5" transform="rotate(-30 5.23218 9.56238)" fill="url(#paint0_linear_1_257)"/>
+  <rect x="0.905762" y="6.06897" width="7" height="3" rx="1.5" transform="rotate(-45 0.905762 6.06897)" fill="url(#paint1_linear_1_257)"/>
+  <rect width="7" height="3" rx="1.5" transform="matrix(-0.965926 0.258819 0.258819 0.965926 13.4338 12.6924)" fill="url(#paint2_linear_1_257)"/>
+  <defs>
+  <linearGradient id="paint0_linear_1_257" x1="8.73218" y1="9.56238" x2="8.73218" y2="12.5624" gradientUnits="userSpaceOnUse">
+  <stop stop-color="#EEF3BF"/>
+  <stop offset="1" stop-color="#E9F456"/>
+  </linearGradient>
+  <linearGradient id="paint1_linear_1_257" x1="4.40576" y1="6.06897" x2="4.40576" y2="9.06897" gradientUnits="userSpaceOnUse">
+  <stop stop-color="#EEF3BF"/>
+  <stop offset="1" stop-color="#E9F456"/>
+  </linearGradient>
+  <linearGradient id="paint2_linear_1_257" x1="3.5" y1="0" x2="3.5" y2="3" gradientUnits="userSpaceOnUse">
+  <stop stop-color="#EEF3BF"/>
+  <stop offset="1" stop-color="#E9F456"/>
+  </linearGradient>
+  </defs>
+  </svg>
+  
   return (
-    <Container>
-       <div className="logo">{shanshanLogo}</div>
-       <div className="menu">
-         <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div>Home</Link>
-         <div>
-         <div className='item' style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Templates</div>
-          <div className="">
-            <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR Column</Link>
-            <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">ZkEvm Column</Link>
+      <Container style={{width: putMenu? '80px': '260px', padding: putMenu? '10px 0': '10px'}}>
+          <div className='putButton' style={{transform: putMenu ? 'rotateY(180deg)': '', right:putMenu ? '-21px': '0px'}} onClick={() => {
+            setPutMenu(!putMenu)
+          }}>{putIcon}</div>
+          {
+            putMenu ? <div className="small">
+            <div className="logo">{shanshanPutLogo}</div>
+            <div className="menu">
+              <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div><span className='bag'>{router.asPath == '/' ? visible_bag: null}</span></Link>
+              <div className='hasChildBox' onMouseEnter={() => {
+                setShowChildBox(true)
+              }} onMouseLeave={() => {
+                setShowChildBox(false)
+              }}>
+                <div className='item'><div className="icon">{templatesIcon}</div></div>
+                <div className="childBox" style={{display: showChildBox ? 'block': 'none'}}>
+                  <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR</Link>
+                  <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">Polygon zkEVM</Link>
+                </div>
+              </div>
+              <Link className={`item ${isActive('warmup') ? 'active': ''}`}  href="/warmup">
+                <div className="icon">{zkevmIcon}</div>
+                {
+                  isActive('warmup') ? <span className='bag'>{visible_bag}</span>:null
+                }
+              </Link>
+            </div>
+          </div>:<div>
+            <div className="logo">{shanshanLogo}</div>
+            <div className="menu">
+              <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div>Home<span className='bag'>{router.asPath == '/' ? visible_bag: null}</span></Link>
+              <div>
+              <div className='item' style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Chains</div>
+                <div className="">
+                  <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR<span className='bag'>{isActive('nearcolumn') ? visible_bag: null}</span></Link>
+                  <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">Polygon zkEVM<span className='bag'>{isActive('zkevmcolumn') ? visible_bag: null}</span></Link>
+                </div>
+              </div>
+              <Link className={`item ${isActive('warmup') ? 'active': ''}`}  href="/warmup">
+                <div className="icon">{zkevmIcon}</div>
+                ZkEvm Warm up
+                {
+                  isActive('warmup') ? <span className='bag'>{visible_bag}</span>:null
+                }
+                
+              </Link>
+            </div>
           </div>
-        </div>
-        <Link className={`item ${isActive('warmup') ? 'active': ''}`}  href="/warmup"><div className="icon">{zkevmIcon}</div>ZkEvm Warm up</Link>
-       </div>
-    </Container>
+          }
+          
+          
+      </Container>
   );
 };
 
@@ -87,3 +215,15 @@ const zkevmIcon = <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xm
 const shanshanLogo = <svg width="59" height="23" viewBox="0 0 59 23" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M0.390781 22.04V2.24H5.81078V4.44H2.89078V19.84H5.81078V22.04H0.390781ZM15.3275 0.559999H17.8675V16.22H15.3275V0.559999ZM8.5275 4.88H10.9875V18.58H8.5275V4.88ZM22.4075 4.84H24.8875V18.5H22.4075V4.84ZM9.7275 14.76H23.5075V17.24H9.7275V14.76ZM28.7475 20.22L27.3075 19.52C27.6008 19.0133 27.8342 18.4667 28.0075 17.88C28.1808 17.3067 28.2675 16.76 28.2675 16.24V14.46H30.7275V16.24C30.7275 17.1733 30.5675 17.9467 30.2475 18.56C29.9275 19.1867 29.4275 19.74 28.7475 20.22ZM40.9525 0.559999H43.4925V16.22H40.9525V0.559999ZM34.1525 4.88H36.6125V18.58H34.1525V4.88ZM48.0325 4.84H50.5125V18.5H48.0325V4.84ZM35.3525 14.76H49.1325V17.24H35.3525V14.76ZM53.1725 22.04V19.84H56.0925V4.44H53.1725V2.24H58.5925V22.04H53.1725Z" fill="#EBF479"/>
 </svg>;
+
+const shanshanPutLogo = <svg width="23" height="21" viewBox="0 0 23 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.593906 20.04V0.239999H6.01391V2.44H3.09391V17.84H6.01391V20.04H0.593906ZM16.9694 20.04V17.84H19.8894V2.44H16.9694V0.239999H22.3894V20.04H16.9694Z" fill="#EBF479"/>
+</svg>
+
+
+const putIcon = <svg width="21" height="26" viewBox="0 0 21 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21 0H8C3.58172 0 0 3.58172 0 8V18C0 22.4183 3.58172 26 8 26H21V0Z" fill="#373A53"/>
+<path d="M12 8L8 13L12 18" stroke="#E9F456" stroke-width="2" stroke-linecap="round"/>
+</svg>
+
+

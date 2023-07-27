@@ -1,11 +1,8 @@
 import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
-import { NearconBanner } from '../banners/NearconBanner';
-import { BosLoaderBanner } from '../BosLoaderBanner';
 import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
 import { LoginBox } from '../navigation/desktop/LoginBox';
-import { Navigation } from '../navigation/Navigation';
 
 interface Props {
   children: ReactNode;
@@ -17,6 +14,8 @@ const Layout = styled.div`
   .content {
     padding: 16px 60px;
     flex-grow: 1;
+    position: relative;
+
     width: calc(100vw - 300px);
   }
 `;
