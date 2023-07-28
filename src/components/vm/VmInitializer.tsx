@@ -34,6 +34,8 @@ import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics'
 import { networkId, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
+import { setupFastAuthWallet } from '../../lib/selector/fast-auth-wallet';
+
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
   const [signedAccountId, setSignedAccountId] = useState(null);
@@ -68,14 +70,15 @@ export default function VmInitializer() {
             }),
             setupNightly(),
             setupWelldoneWallet(),
-            setupFastAuth({
-              networkId,
-              signInContractId,
-              relayerUrl:
-                networkId === 'testnet'
-                  ? 'http://34.70.226.83:3030/relay'
-                  : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-            }) as any, // TODO: Refactor setupFastAuth() to TS
+            // setupFastAuth({
+            //   networkId,
+            //   signInContractId,
+            //   relayerUrl:
+            //     networkId === 'testnet'
+            //       ? 'http://34.70.226.83:3030/relay'
+            //       : 'https://near-relayer-mainnet.api.pagoda.co/relay',
+            // }) as any, // TODO: Refactor setupFastAuth() to TS
+            setupFastAuthWallet(),
             setupKeypom({
               trialAccountSpecs: {
                 url:
