@@ -10,11 +10,12 @@ import { NotificationButton } from '../NotificationButton';
 import { UserDropdownMenu } from './UserDropdownMenu';
 
 const LoginArea = styled.div`
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:12px;
-`
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 0 60px;
+`;
 export const LoginBox = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const { requestAuthentication } = useSignInRedirect();

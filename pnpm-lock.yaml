@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@braintree/sanitize-url':
     specifier: 6.0.0
@@ -154,6 +158,9 @@ dependencies:
   styled-components:
     specifier: ^5.3.6
     version: 5.3.10(react-dom@18.2.0)(react-is@17.0.2)(react@18.2.0)
+  swiper:
+    specifier: ^10.0.4
+    version: 10.0.4
   typescript:
     specifier: 5.0.4
     version: 5.0.4
@@ -7390,6 +7397,7 @@ packages:
   /node-gyp-build-optional-packages@5.0.3:
     resolution: {integrity: sha512-k75jcVzk5wnnc/FMxsf4udAoTEUv2jY3ycfdSd3yWu6Cnd1oee6/CfZJApyscA4FJOmdoixWwiwOyf16RzD5JA==}
     hasBin: true
+    requiresBuild: true
     dev: false
     optional: true
 
@@ -8643,6 +8651,11 @@ packages:
   /svelte@3.59.1:
     resolution: {integrity: sha512-pKj8fEBmqf6mq3/NfrB9SLtcJcUvjYSWyePlfCqN9gujLB25RitWK8PvFzlwim6hD/We35KbPlRteuA6rnPGcQ==}
     engines: {node: '>= 8'}
+    dev: false
+
+  /swiper@10.0.4:
+    resolution: {integrity: sha512-DlNR3KiaVkPep6RraZ2tNr7lvyuzELuR+4NZr4wO42t0UworIO3DxDlz8b5Q3uUioh7cJad99EdRJLkPF+r8Ag==}
+    engines: {node: '>= 4.7.0'}
     dev: false
 
   /synckit@0.8.5:
