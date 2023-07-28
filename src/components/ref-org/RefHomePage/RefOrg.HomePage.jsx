@@ -1,4 +1,3 @@
-import styles from './RefOrg.HomePage.module.css';
 import refAsset from '../RefComponents/RefAsset';
 import styled from 'styled-components';
 import RefImage from '../RefComponents/RefImage';
@@ -14,7 +13,7 @@ import RefOrgHomePagePopularDapps from './RefOrg.HomePage.PopularDapps';
 
 const RefOrgHomePage = () => {
   return (
-    <div className={styles['ref-org-homepage']}>
+    <Wrapper>
       <Section padding={'40px 0 0px'}>
         <RefContainer>
           <Text size={'60px'} lineHeight={'normal'} weight={700}>
@@ -122,9 +121,15 @@ const RefOrgHomePage = () => {
           <RefOrgHomePageFooter />
         </RefContainer>
       </Section>
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  color: #fff;
+  font-family: 'Gantari', sans-serif;
+  margin: 0 -60px;
+`;
 
 const Section = styled.div`
   position: relative;
