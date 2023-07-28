@@ -128,7 +128,7 @@ const RefOrgHomePage = () => {
 const Wrapper = styled.div`
   color: #fff;
   font-family: 'Gantari', sans-serif;
-  margin: 0 -60px;
+  margin: 0 -36px;
 `;
 
 const Section = styled.div`

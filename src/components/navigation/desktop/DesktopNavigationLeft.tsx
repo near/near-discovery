@@ -45,6 +45,9 @@ const Container = styled.div`
       top:-12px;
     }
   }
+  .parentItem.active{
+    background:transparent;
+  }
   .small .menu {
     display:flex;
     flex-direction:column;
@@ -151,7 +154,7 @@ export const DesktopNavigationLeft = () => {
               }} onMouseLeave={() => {
                 setShowChildBox(false)
               }}>
-                <div className='item'><div className="icon">{templatesIcon}</div></div>
+                <div className={`item ${isActive('nearcolumn') || isActive('zkevmcolumn') ? 'active': ''}`}><div className="icon">{templatesIcon}</div></div>
                 <div className="childBox" style={{display: showChildBox ? 'block': 'none'}}>
                   <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR</Link>
                   <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">Polygon zkEVM</Link>
@@ -169,7 +172,7 @@ export const DesktopNavigationLeft = () => {
             <div className="menu">
               <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div>Home<span className='bag'>{router.asPath == '/' ? visible_bag: null}</span></Link>
               <div>
-              <div className='item' style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Chains</div>
+              <div className={`item parentItem ${isActive('nearcolumn') || isActive('zkevmcolumn') ? 'active': ''}`} style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Chains</div>
                 <div className="">
                   <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR<span className='bag'>{isActive('nearcolumn') ? visible_bag: null}</span></Link>
                   <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">Polygon zkEVM<span className='bag'>{isActive('zkevmcolumn') ? visible_bag: null}</span></Link>
