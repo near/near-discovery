@@ -12,7 +12,7 @@ import RefOrgHomePagePowered from '@/components/ref-org/RefHomepage/RefOrg.HomeP
 import RefOrgHomePageFooter from './RefOrg.HomePage.Footer';
 import RefOrgHomePagePopularDapps from './RefOrg.HomePage.PopularDapps';
 
-export function RefOrgHomePage() {
+const RefOrgHomePage = () => {
   return (
     <div className={styles['ref-org-homepage']}>
       <Section padding={'40px 0 0px'}>
@@ -124,7 +124,7 @@ export function RefOrgHomePage() {
       </Section>
     </div>
   );
-}
+};
 
 const Section = styled.div`
   position: relative;
@@ -145,3 +145,5 @@ const Text = styled.div`
     font-size: 50px;
   }
 `;
+
+export default RefOrgHomePage;
