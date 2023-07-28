@@ -1,13 +1,11 @@
-import refAsset from '../RefComponents/RefAsset';
 import styled from 'styled-components';
 import RefBadge from '../RefComponents/RefBadge';
-import { HorizontalLine, TopLine } from '@/components/ref-org/RefComponents/RefLine';
 
 const RefOrgHomePageDapps = () => {
   return (
     <div>
-        <Title>The most popular Dapps</Title>
-        <Desc>Make your DeFi actions simple, fast and traceable</Desc>
+      <Title>The most popular Dapps</Title>
+      <Desc>Make your DeFi actions simple, fast and traceable</Desc>
     </div>
   );
 };

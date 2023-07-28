@@ -7,8 +7,8 @@ import RefOrgHomePageCards from './RefOrg.HomePage.Cards';
 import RefGradientBackground from '../RefComponents/RefGradientBackground';
 import RefOrgHomePageFeature from './RefOrg.HomePage.Feature';
 import { MEDIUM_SCREEN } from '../RefStyleVar';
-import RefOrgHomePageIdentity from '@/components/ref-org/RefHomepage/RefOrg.HomePage.Identity';
-import RefOrgHomePagePowered from '@/components/ref-org/RefHomepage/RefOrg.HomePage.Powered';
+import RefOrgHomePageIdentity from './RefOrg.HomePage.Identity';
+import RefOrgHomePagePowered from './RefOrg.HomePage.Powered';
 import RefOrgHomePageFooter from './RefOrg.HomePage.Footer';
 import RefOrgHomePagePopularDapps from './RefOrg.HomePage.PopularDapps';
 

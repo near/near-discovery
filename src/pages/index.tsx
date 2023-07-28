@@ -9,7 +9,7 @@ import { useDefaultLayout, useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
-import RefOrgHomePage from '../components/ref-org/RefHomePage/RefOrg.HomePage';
+import RefOrgHomePage from '@/components/ref-org/RefHomePage/RefOrg.HomePage';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 

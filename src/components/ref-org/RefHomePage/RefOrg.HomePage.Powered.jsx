@@ -1,6 +1,5 @@
 import refAsset from '../RefComponents/RefAsset';
 import styled from 'styled-components';
-import RefBadge from '../RefComponents/RefBadge';
 import RefImage from '@/components/ref-org/RefComponents/RefImage';
 import RefButton from '../RefComponents/RefButton';
 
