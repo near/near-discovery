@@ -5,7 +5,9 @@ import RefButton, { refButtonColor } from '../RefComponents/RefButton';
 import RefBadge from '@/components/ref-org/RefComponents/RefBadge';
 import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
 import { BottomLine, HorizontalLine, TopLine } from '@/components/ref-org/RefComponents/RefLine';
+import { StyledT2, StyledT3, StyledT4 } from '@/components/ref-org/RefStyled';
 
+const MOBILE_SIZE = MEDIUM_SCREEN;
 const RefOrgHomePageFeature = ({
   title,
   desc,
@@ -18,17 +20,30 @@ const RefOrgHomePageFeature = ({
   tagBackground,
   withTopLine = true,
   withBottomLine = true,
+  bottomLineHeight,
 }) => {
   let node = (
-    <>
-      <ContentBody {...{ title, desc, btnText, onClick, tag, tagBackground, withTopLine, withBottomLine }} />
+    <StyledColumn>
+      <ContentBody
+        {...{
+          title,
+          desc,
+          btnText,
+          onClick,
+          tag,
+          tagBackground,
+          withTopLine,
+          withBottomLine,
+          bottomLineHeight,
+        }}
+      />
       <ContentImage {...{ image, imageBgGradient }} />
-    </>
+    </StyledColumn>
   );
 
   if (isRevert) {
     node = (
-      <>
+      <StyledColumn isRevert={isRevert}>
         <ContentImage {...{ image, imageBgGradient, isRevert }} />
         <ContentBody
           {...{
@@ -41,9 +56,10 @@ const RefOrgHomePageFeature = ({
             isRevert,
             withTopLine,
             withBottomLine,
+            bottomLineHeight,
           }}
         />
-      </>
+      </StyledColumn>
     );
   }
 
@@ -70,7 +86,18 @@ const RefOrgHomePageFeature = ({
   );
 };
 
-const ContentBody = ({ title, desc, btnText, onClick, tag, tagBackground, isRevert, withTopLine, withBottomLine }) => {
+const ContentBody = ({
+  title,
+  desc,
+  btnText,
+  onClick,
+  tag,
+  tagBackground,
+  isRevert,
+  withTopLine,
+  withBottomLine,
+  bottomLineHeight,
+}) => {
   const handleClick = () => {
     if (typeof onClick === 'function') onClick();
   };
@@ -84,7 +111,7 @@ const ContentBody = ({ title, desc, btnText, onClick, tag, tagBackground, isReve
     };
     if (isRevert) {
       style = {
-        left: -121,
+        left: -118,
         borderTopRightRadius: 'var(--radius)',
         borderLeftWidth: 0,
       };
@@ -94,18 +121,18 @@ const ContentBody = ({ title, desc, btnText, onClick, tag, tagBackground, isReve
 
   if (withBottomLine) {
     let style = {
-      left: 71,
+      left: 0,
       borderBottomLeftRadius: 'var(--radius)',
       borderRightWidth: 0,
     };
     if (isRevert) {
       style = {
-        left: -71,
+        left: -140,
         borderBottomRightRadius: 'var(--radius)',
         borderLeftWidth: 0,
       };
     }
-    bottomLineNode = <BottomLine style={style} />;
+    bottomLineNode = <BottomLine style={style} height={bottomLineHeight} />;
   }
 
   return (
@@ -174,24 +201,37 @@ const Container = styled.div`
   }
 `;
 
+const StyledColumn = styled.div`
+  display: flex;
+
+  @media (max-width: ${MOBILE_SIZE}) {
+    flex-direction: ${(p) => (p.isRevert ? 'column' : 'column-reverse')};
+  }
+`;
+
 const Content = styled.div`
   text-align: left;
   position: relative;
   max-width: 375px;
+
+  @media (max-width: ${MOBILE_SIZE}) {
+    margin: auto;
+    text-align: center;
+    max-width: none;
+  }
 `;
 
-const Title = styled.div`
-  font-size: 42px;
-  font-weight: 700;
-  line-height: 1.2;
+const Title = styled(StyledT2)`
   margin-bottom: 13px;
 `;
 
-const Desc = styled.div`
-  font-size: 20px;
-  font-weight: 400;
+const Desc = styled(StyledT4)`
   margin-bottom: 36px;
   max-width: 367px;
+
+  @media (max-width: ${MOBILE_SIZE}) {
+    max-width: none;
+  }
 `;
 
 const StyledButton = styled(RefButton)`
@@ -205,6 +245,10 @@ const StyledImageContainer = styled(RefGradientBackground)`
   border-radius: 22px;
   margin-left: ${(p) => !p.isRevert && '40px'};
   margin-right: ${(p) => p.isRevert && '40px'};
+
+  @media (max-width: ${MOBILE_SIZE}) {
+    margin: 0 auto 40px;
+  }
 `;
 
 const StyledImage = styled(Image)`

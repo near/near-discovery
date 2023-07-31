@@ -2,6 +2,7 @@ import refAsset from '../RefComponents/RefAsset';
 import styled from 'styled-components';
 import RefImage from '../RefComponents/RefImage';
 import RefButton from '../RefComponents/RefButton';
+import { StyledT2, StyledT4 } from '@/components/ref-org/RefStyled';
 
 const RefOrgHomePagePopularDapps = () => {
   return (
@@ -58,22 +59,12 @@ const TitleWrapper = styled.div`
   z-index: 3;
 `;
 
-const Title = styled.div`
-  color: #fff;
-  font-size: 42px;
-  font-style: normal;
-  font-weight: 700;
+const Title = styled(StyledT2)`
   text-transform: capitalize;
-  line-height: 1.2;
   margin-bottom: 13px;
 `;
 
-const Desc = styled.div`
-  color: #fff;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-`;
+const Desc = styled(StyledT4)``;
 
 const AbsoluteWrapper = styled.div`
   position: absolute;

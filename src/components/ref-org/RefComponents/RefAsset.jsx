@@ -2,11 +2,13 @@ const refAsset = {
   img: {
     iconShop: '/ref-org/icon-shop.png',
     iconGoogle: '/ref-org/icon-google.png',
+    iconFire: '/ref-org/icon-fire.png',
     allinone: '/ref-org/allinone.png',
     zkevmbridge: '/ref-org/zkevmbridge.png',
     aave: '/ref-org/aave.png',
     dex: '/ref-org/dex.png',
     gamma: '/ref-org/gamma.png',
+    nearstaking: '/ref-org/nearstaking.png',
     sweat: '/ref-org/sweat.png',
     populardapps: '/ref-org/populardapps.png',
   },
