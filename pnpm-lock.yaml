@@ -11,8 +11,8 @@ dependencies:
     specifier: ^4.4.6
     version: 4.5.1(monaco-editor@0.40.0)(react-dom@18.2.0)(react@18.2.0)
   '@near-js/biometric-ed25519':
-    specifier: 0.2.0
-    version: 0.2.0
+    specifier: 0.3.0
+    version: 0.3.0
   '@near-wallet-selector/core':
     specifier: 8.1.1
     version: 8.1.1(near-api-js@2.1.3)
@@ -151,9 +151,15 @@ dependencies:
   react-singleton-hook:
     specifier: ^3.1.1
     version: 3.4.0(react-dom@18.2.0)(react@18.2.0)
+  remark:
+    specifier: ^14.0.3
+    version: 14.0.3
   rudder-sdk-js:
     specifier: ^2.36.0
     version: 2.36.0
+  strip-markdown:
+    specifier: ^5.0.1
+    version: 5.0.1
   styled-components:
     specifier: ^5.3.6
     version: 5.3.10(react-dom@18.2.0)(react-is@17.0.2)(react@18.2.0)
@@ -1976,8 +1982,8 @@ packages:
       - encoding
     dev: false
 
-  /@near-js/biometric-ed25519@0.2.0:
-    resolution: {integrity: sha512-Q+GfyjQ3ANHLukWDyRxLF0Jj+uxPFR7p150LZvaso/qpC9Vjj6x84lT48P7OhDgbJQYrw8UUaaS2a2ohHcTu/w==}
+  /@near-js/biometric-ed25519@0.3.0:
+    resolution: {integrity: sha512-9I/xjDJIA79VMGujMNaMZnvohrvnvHPa3Rz0GvMF/Qfu4dbC62mivGCBDhkEkDT1xAVJn/7ZbBX/CGZNODMIPg==}
     dependencies:
       '@aws-crypto/sha256-js': 4.0.0
       '@hexagon/base64': 1.1.26
@@ -1987,7 +1993,7 @@ packages:
       borsh: 0.7.0
       buffer: 6.0.3
       elliptic: 6.5.4
-      fido2-lib: 3.3.4
+      fido2-lib: 3.4.1
     dev: false
 
   /@near-js/crypto@0.0.4:
@@ -4873,8 +4879,8 @@ packages:
     dev: false
     optional: true
 
-  /cbor-x@1.4.1:
-    resolution: {integrity: sha512-qp6nM61RaamDJWsDGHzMIQ4+XBtg7/QIoBi5Lra4IDU65eP8lHcgkkJ9t2yIU8EvRThBfFCh6+S1Qkrmq93J3Q==}
+  /cbor-x@1.5.3:
+    resolution: {integrity: sha512-adrN0S67C7jY2hgqeGcw+Uj6iEGLQa5D/p6/9YNl5AaVIYJaJz/bARfWsP8UikBZWbhS27LN0DJK4531vo9ODw==}
     optionalDependencies:
       cbor-extract: 2.1.1
     dev: false
@@ -6005,17 +6011,17 @@ packages:
       websocket-driver: 0.7.4
     dev: false
 
-  /fido2-lib@3.3.4:
-    resolution: {integrity: sha512-r/darKZY1MQhGNi+H16CCj/02jMADAp0ni6dxR2mElYliIfdNImflKIzmNZ3sp4ZqcYGnjxrqOypyKdgjtknEA==}
+  /fido2-lib@3.4.1:
+    resolution: {integrity: sha512-efNrRbckp48AW7Q43o6gcp8/wnoBM7hwKikQntdiR2/NqVMPaCXFQs8kJ9wQqfv5V3PxZdg4kD9DpxdqYl6jxQ==}
     engines: {node: '>=10'}
     dependencies:
       '@hexagon/base64': 1.1.26
       '@peculiar/webcrypto': 1.4.3
       asn1js: 3.0.5
-      cbor-x: 1.4.1
+      cbor-x: 1.5.3
       jose: 4.14.4
-      pkijs: 3.0.14
-      tldts: 5.7.112
+      pkijs: 3.0.15
+      tldts: 6.0.12
     dev: false
 
   /file-entry-cache@6.0.1:
@@ -7954,8 +7960,8 @@ packages:
       thread-stream: 0.15.2
     dev: false
 
-  /pkijs@3.0.14:
-    resolution: {integrity: sha512-Fi9++44BaOY0VcOEJql27D/HzHIeMU9R48XclfL98Cp8Wh/gGfPbuS1RUwReHQHRIUfzW32eoNO1izxoBMZi6w==}
+  /pkijs@3.0.15:
+    resolution: {integrity: sha512-n7nAl9JpqdeQsjy+rPmswkmZ3oO/Fu5uN9me45PPQVdWjd0X7HKfL8+HYwfxihqoDSSPUIajkOcqFxEUxMqhwQ==}
     engines: {node: '>=12.0.0'}
     dependencies:
       asn1js: 3.0.5
@@ -8510,6 +8516,25 @@ packages:
       unified: 10.1.2
     dev: false
 
+  /remark-stringify@10.0.3:
+    resolution: {integrity: sha512-koyOzCMYoUHudypbj4XpnAKFbkddRMYZHwghnxd7ue5210WzGw6kOBwauJTRUMq16jsovXx8dYNvSSWP89kZ3A==}
+    dependencies:
+      '@types/mdast': 3.0.11
+      mdast-util-to-markdown: 1.5.0
+      unified: 10.1.2
+    dev: false
+
+  /remark@14.0.3:
+    resolution: {integrity: sha512-bfmJW1dmR2LvaMJuAnE88pZP9DktIFYXazkTfOIKZzi3Knk9lT0roItIA24ydOucI3bV/g/tXBA6hzqq3FV9Ew==}
+    dependencies:
+      '@types/mdast': 3.0.11
+      remark-parse: 10.0.1
+      remark-stringify: 10.0.3
+      unified: 10.1.2
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /remove-trailing-slash@0.1.1:
     resolution: {integrity: sha512-o4S4Qh6L2jpnCy83ysZDau+VORNvnFw07CKSAymkd6ICNVEPisMyzlc00KlvvicsxKck94SEwhDnMNdICzO+tA==}
     dev: false
@@ -8878,6 +8903,14 @@ packages:
     resolution: {integrity: sha512-6fPc+R4ihwqP6N/aIv2f1gMH8lOVtWQHoqC4yK6oSDVVocumAsfCqjkXnqiYMhmMwS/mEHLp7Vehlt3ql6lEig==}
     engines: {node: '>=8'}
 
+  /strip-markdown@5.0.1:
+    resolution: {integrity: sha512-IvoKZrXtWAnlEjRfDlT3yRtGRvpX3RSg+nwAHONmshpSCoxgjZV2xX9ZYvEmwupmYobJtws9oDdTwLUu/5PoMQ==}
+    dependencies:
+      '@types/mdast': 3.0.11
+      '@types/unist': 2.0.6
+      unified: 10.1.2
+    dev: false
+
   /sturdy-websocket@0.1.12:
     resolution: {integrity: sha512-PA7h8LdjaMoIlC5HAwLVzae4raGWgyroscV4oUpEiTtEFINcNa47/CKYT3e98o+FfsJgrclI2pYpaJrz0aaoew==}
     dependencies:
@@ -9013,15 +9046,15 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /tldts-core@5.7.112:
-    resolution: {integrity: sha512-mutrEUgG2sp0e/MIAnv9TbSLR0IPbvmAImpzqul5O/HJ2XM1/I1sajchQ/fbj0fPdA31IiuWde8EUhfwyldY1Q==}
+  /tldts-core@6.0.12:
+    resolution: {integrity: sha512-TYHGh0SJ+MUE0tg5LeDyNMmilUU8VD7fi+o74RGl3xwnakzCjpTFVTn8DHWiDJQmfG768ldqRPSQrvTP6CPjpg==}
     dev: false
 
-  /tldts@5.7.112:
-    resolution: {integrity: sha512-6VSJ/C0uBtc2PQlLsp4IT8MIk2UUh6qVeXB1HZtK+0HiXlAPzNcfF3p2WM9RqCO/2X1PIa4danlBLPoC2/Tc7A==}
+  /tldts@6.0.12:
+    resolution: {integrity: sha512-a3xVdMF9FgBqOR6bo51jA90cE0PyKiGIN/L0F8bOJOgMHJ+CujbNDnT3YSYlr/Kod4DJA5ihfJD5tiByx6njgg==}
     hasBin: true
     dependencies:
-      tldts-core: 5.7.112
+      tldts-core: 6.0.12
     dev: false
 
   /to-fast-properties@2.0.0:

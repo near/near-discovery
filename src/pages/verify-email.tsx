@@ -22,18 +22,13 @@ const VerifyEmailPage: NextPageWithLayout = () => {
 
   const handleResendEmail = async () => {
     const accountRequiredButNotThere = !query?.accountId && query.isRecovery !== 'true';
-    if (
-      accountRequiredButNotThere ||
-      typeof query.email !== 'string' ||
-      !query.email.length ||
-      typeof query.publicKey !== 'string' ||
-      !query.publicKey.length
-    )
-      return;
+    if (accountRequiredButNotThere || typeof query.email !== 'string' || !query.email.length) return;
 
     try {
       await sendSignInLinkToEmail(firebaseAuth, query.email, {
-        url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}`,
+        url:
+          `${window.location.origin}/auth-callback?accountId=${query.accountId}` +
+          (query.publicKey ? `&publicKey=${encodeURIComponent(query.publicKey as string)}` : ''),
         handleCodeInApp: true,
       });
       openToast({

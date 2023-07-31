@@ -7,6 +7,7 @@ export function Toaster() {
 
   const iconsByType: Record<ToastType, string> = {
     INFO: 'ph ph-info',
+    WARNING: 'ph ph-warning',
     ERROR: 'ph ph-warning-circle',
     SUCCESS: 'ph ph-check-circle',
   };
@@ -36,7 +37,7 @@ export function Toaster() {
               {toast.description && <T.Description>{toast.description}</T.Description>}
             </T.Content>
 
-            <T.CloseButton />
+            <T.CloseButton data-type={type} />
           </T.Root>
         );
       })}

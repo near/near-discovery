@@ -534,7 +534,7 @@ export const Sandbox = ({ onboarding = false }) => {
               handleCommit={handleCommit}
               filesObject={filesObject}
             />
-            {onboarding || (
+            {onboarding && (
               <Welcome
                 setShowModal={setShowModal}
                 createFile={createFile}
@@ -543,7 +543,7 @@ export const Sandbox = ({ onboarding = false }) => {
               />
             )}
             <div className={showEditor ? `` : ``}>
-              {onboarding || <VsCodeBanner />}
+              {onboarding && <VsCodeBanner />}
               {onboarding && <BannerOboarding handleExitOnboarding={handleExitOnboarding} />}
 
               <div className="container-fluid mt-1" style={{ position: 'relative' }}>
