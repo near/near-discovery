@@ -1,6 +1,8 @@
+import { isPassKeyAvailable } from '@near-js/biometric-ed25519';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { openToast } from '@/components/lib/Toast';
 import { MetaTags } from '@/components/MetaTags';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
@@ -38,6 +40,21 @@ const HomePage: NextPageWithLayout = () => {
       setComponentProps(router.query);
     }
   }, [router.query, signedIn, signedInOptimistic]);
+
+  useEffect(() => {
+    if (signedIn) {
+      isPassKeyAvailable().then((passKeyAvailable: boolean) => {
+        if (!passKeyAvailable) {
+          openToast({
+            title: 'Limited Functionality',
+            type: 'WARNING',
+            description: 'To access all account features, try using a browser that supports passkeys',
+            duration: 5000,
+          });
+        }
+      });
+    }
+  }, [signedIn]);
 
   if (signedIn || signedInOptimistic) {
     return (

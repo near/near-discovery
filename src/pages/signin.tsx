@@ -1,3 +1,4 @@
+import { getKeys, isPassKeyAvailable } from '@near-js/biometric-ed25519';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
@@ -9,6 +10,7 @@ import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
+import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { handleCreateAccount } from '../utils/auth';
@@ -21,20 +23,23 @@ const SignInPage: NextPageWithLayout = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const { redirect } = useSignInRedirect();
 
-  useClearCurrentComponent();
-
   useEffect(() => {
     if (signedIn) {
       redirect();
     }
   }, [redirect, signedIn]);
 
+  useClearCurrentComponent();
+
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email) return;
 
     try {
       const { publicKey, email } = await handleCreateAccount(null, data.email, true);
-      router.push(`/verify-email?publicKey=${publicKey}&email=${email}&isRecovery=true`);
+      router.push(
+        `/verify-email?email=${email}&isRecovery=true` +
+          (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''),
+      );
     } catch (error: any) {
       console.log(error);
 
@@ -85,7 +90,7 @@ const SignInPage: NextPageWithLayout = () => {
 };
 SignInPage.getLayout = useDefaultLayout;
 
-export default SignInPage;
+export default signedOutRoute(SignInPage);
 
 const StyledContainer = styled.div`
   width: 100%;

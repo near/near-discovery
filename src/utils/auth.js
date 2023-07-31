@@ -1,4 +1,4 @@
-import { createKey } from '@near-js/biometric-ed25519';
+import { createKey, isPassKeyAvailable } from '@near-js/biometric-ed25519';
 import { sendSignInLinkToEmail } from 'firebase/auth';
 import { base_encode } from 'near-api-js/lib/utils/serialize';
 
@@ -22,10 +22,11 @@ export const getCorrectAccessKey = async (userName, firstKeyPair, secondKeyPair)
 };
 
 export const handleCreateAccount = async (accountId, email, isRecovery) => {
-  const keyPair = await createKey(email);
-  const publicKey = keyPair.getPublicKey().toString();
+  const passKeyAvailable = await isPassKeyAvailable();
+  const keyPair = passKeyAvailable && (await createKey(email));
+  const publicKey = keyPair && keyPair.getPublicKey().toString();
 
-  if (!publicKey) {
+  if (passKeyAvailable && !publicKey) {
     throw new Error('No public key found');
   }
 
@@ -36,8 +37,9 @@ export const handleCreateAccount = async (accountId, email, isRecovery) => {
   window.localStorage.setItem('fast-auth:account-creation-data', JSON.stringify(accountDataStash));
   await sendSignInLinkToEmail(firebaseAuth, email, {
     url: encodeURI(
-      `${window.location.origin}/auth-callback?publicKey=${publicKey}&accountId=${accountId}` +
-        (isRecovery ? '&isRecovery=true' : ''),
+      `${window.location.origin}/auth-callback?accountId=${accountId}` +
+        (isRecovery ? '&isRecovery=true' : '') +
+        (publicKey ? `&publicKey=${publicKey}` : ''),
     ),
     handleCodeInApp: true,
   });
