@@ -14,7 +14,6 @@ const LoginArea = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
-  padding: 0 60px;
 `;
 export const LoginBox = () => {
   const signedIn = useAuthStore((store) => store.signedIn);

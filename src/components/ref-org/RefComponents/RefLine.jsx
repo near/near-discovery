@@ -1,16 +1,27 @@
 import { LARGE_SCREEN } from '../RefStyleVar';
 import styled from 'styled-components';
+import RefGradientBall from '@/components/ref-org/RefComponents/RefGradientBall';
 
 export const HorizontalLine = ({ style }) => {
   return <StyledHorizontalLine style={style} />;
 };
 
 export const TopLine = ({ style }) => {
-  return <StyledTopLine style={style} />;
+  return (
+    <div style={{ position: 'relative' }}>
+      <StyledGradientBall />
+      <StyledTopLine style={style} />
+    </div>
+  );
 };
 
-export const BottomLine = ({ style }) => {
-  return <StyledBottomLine style={style} />;
+export const BottomLine = ({ style, height }) => {
+  return (
+    <BottomLineWrapper height={height}>
+      <StyledBottomGradientBall />
+      <StyledBottomLine style={style} height={height} />
+    </BottomLineWrapper>
+  );
 };
 
 const HIDE_LINE_SCREEN = LARGE_SCREEN;
@@ -22,6 +33,34 @@ const StyledHorizontalLine = styled.div`
   z-index: 10;
   pointer-events: none;
   position: absolute;
+
+  @media (max-width: ${HIDE_LINE_SCREEN}) {
+    display: none !important;
+  }
+`;
+
+const StyledGradientBall = styled(RefGradientBall)`
+  position: absolute;
+  top: -29px;
+  left: ${(p) => p.left || '46px'};
+
+  @media (max-width: ${HIDE_LINE_SCREEN}) {
+    display: none !important;
+  }
+`;
+
+const BottomLineWrapper = styled.div`
+  position: absolute;
+  bottom: -78px;
+  left: 71px;
+  height: ${(p) => (p.height ? `${p.height}px` : '110px')};
+  width: 140px;
+`;
+
+const StyledBottomGradientBall = styled(RefGradientBall)`
+  position: absolute;
+  top: -12px;
+  left: -6px;
 
   @media (max-width: ${HIDE_LINE_SCREEN}) {
     display: none !important;
@@ -53,8 +92,9 @@ const StyledBottomLine = styled.div`
   --color: #494d69;
   --radius: 15px;
   left: 0px;
-  bottom: -78px;
-  height: 110px;
+  // bottom: -78px;
+  bottom: 0px;
+  height: ${(p) => (p.height ? `${p.height}px` : '110px')};
   width: 140px;
   border-left-width: 0px;
   border: var(--size) solid var(--color);
