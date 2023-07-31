@@ -2,6 +2,8 @@ import refAsset from '../RefComponents/RefAsset';
 import styled from 'styled-components';
 import RefImage from '@/components/ref-org/RefComponents/RefImage';
 import RefButton from '../RefComponents/RefButton';
+import { StyledT2 } from '@/components/ref-org/RefStyled';
+import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
 
 const RefOrgHomePagePowered = () => {
   return (
@@ -9,7 +11,7 @@ const RefOrgHomePagePowered = () => {
       <div style={{ marginBottom: 40 }}>
         <Title>
           Composable DeFi <span style={{ color: '#814DFF' }}>Experience</span>
-          <RefImage src={refAsset.img.sweat} width={23} height={28} style={{ marginTop: -20, marginLeft: -11 }} />
+          <StyledIcon src={refAsset.img.sweat} width={23} height={28} />
         </Title>
         <Title>Powered by BOS</Title>
       </div>
@@ -35,6 +37,11 @@ const WrapperButton = styled.div`
   position: relative;
   margin: 0 20px;
   z-index: 10;
+  display: flex;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    margin: 0 10px;
+  }
 `;
 
 const StyledButton = styled(RefButton)`
@@ -46,6 +53,11 @@ const StyledButton = styled(RefButton)`
   font-size: 18px;
   font-weight: 700;
   padding: 15px 35px;
+  line-height: 1;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    padding: 10px 20px 11px;
+  }
 `;
 
 const StyledBgButton = styled(RefButton)`
@@ -61,14 +73,21 @@ const StyledBgButton = styled(RefButton)`
   z-index: -1;
 `;
 
-const Title = styled.div`
+const Title = styled(StyledT2)`
   color: #0f1126;
-  font-size: 42px;
   font-style: normal;
   font-weight: 700;
-  line-height: 1.2;
   text-transform: capitalize;
   margin-bottom: 10px;
+`;
+
+const StyledIcon = styled(RefImage)`
+  margin-top: -20px;
+  margin-left: -5px;
+
+  @media (max-width: ${LARGE_SCREEN}) {
+    display: none;
+  }
 `;
 
 export default RefOrgHomePagePowered;

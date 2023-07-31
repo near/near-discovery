@@ -1,5 +1,5 @@
 export const LARGE_SCREEN = '1440px';
-export const MEDIUM_SCREEN = '900px';
+export const MEDIUM_SCREEN = '992px';
 export const SMALL_SCREEN = '768px';
 
 export const refStyleVar = {

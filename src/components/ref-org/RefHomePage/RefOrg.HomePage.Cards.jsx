@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import RefCard from '../RefComponents/RefCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import RefImage from '@/components/ref-org/RefComponents/RefImage';
+import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
 
 const RefOrgHomePageCards = () => {
   return (
@@ -113,7 +114,8 @@ const Wrapper = styled.div`
   margin-top: 100px;
   margin-bottom: 20px;
 
-  @media (max-width: 900px) {
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    margin-top: 20px;
   }
 `;
 

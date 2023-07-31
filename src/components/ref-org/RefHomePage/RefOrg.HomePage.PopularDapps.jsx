@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import RefImage from '../RefComponents/RefImage';
 import RefButton from '../RefComponents/RefButton';
 import { StyledT2, StyledT4 } from '@/components/ref-org/RefStyled';
+import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
 
 const RefOrgHomePagePopularDapps = () => {
   return (
@@ -23,7 +24,7 @@ const RefOrgHomePagePopularDapps = () => {
           More <ArrowRight />
         </StyledMoreButton>
 
-        <RefImage src={refAsset.img.populardapps} width={871} height={430} />
+        <StyledBg src={refAsset.img.populardapps} width={871} height={430} />
       </AbsoluteWrapper>
 
       <div
@@ -72,6 +73,13 @@ const AbsoluteWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
+const StyledBg = styled(RefImage)`
+  // @media (max-width: ${MEDIUM_SCREEN}) {
+  //   width: 300px;
+  //   height: auto;
+  // }
+`;
+
 const StyledMoreButton = styled.div`
   border-radius: 26px;
   border: 1px solid #fff;
@@ -96,6 +104,10 @@ const NearButton = styled(RefButton)`
   position: relative;
   top: 261px;
   left: 172px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    font-size: 18px;
+  }
 `;
 const PolygonButton = styled(RefButton)`
   border-radius: 20px;
@@ -109,6 +121,10 @@ const PolygonButton = styled(RefButton)`
   position: relative;
   top: 321px;
   left: -186px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    font-size: 18px;
+  }
 `;
 
 export default RefOrgHomePagePopularDapps;
