@@ -88,23 +88,23 @@ const RefOrgHomePageCards = () => {
 
 const CardContent = ({ tags }) => {
   return (
-    <div className={'d-flex ml-1 mt-3 mb-2 align-items-center justify-content-between'}>
-      <div className={'d-flex'}>
+    <StyledCardContent>
+      <StyledBadges>
         {tags?.map((d) => (
           <Badge key={d}>{d}</Badge>
         ))}
-      </div>
-      <div>
+      </StyledBadges>
+      <StyledFires>
         <_FireIcon length={3} />
-      </div>
-    </div>
+      </StyledFires>
+    </StyledCardContent>
   );
 };
 
 const _FireIcon = ({ length = 1 }) => {
   const node = [];
   for (let i = 0; i < length; i++) {
-    node.push(<StyledFireIcon src={refAsset.img.iconFire} width={14} height={18} />);
+    node.push(<StyledFireIcon src={refAsset.img.iconFire} width={14} height={18} key={i} />);
   }
 
   return node;
@@ -122,10 +122,39 @@ const Wrapper = styled.div`
 const StyledSwiperSlide = styled(SwiperSlide)`
   width: fit-content;
   margin-left: 60px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    margin-left: 20px;
+  }
 `;
 
 const StyledRefCard = styled(RefCard)`
   //margin-right: 20px;
+`;
+
+const StyledCardContent = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 15px 0 0;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    display: block;
+  }
+`;
+
+const StyledBadges = styled.div`
+  display: flex;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    margin-bottom: 10px;
+  }
+`;
+
+const StyledFires = styled.div`
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    display: none;
+  }
 `;
 
 const StyledFireIcon = styled(RefImage)`
@@ -141,6 +170,10 @@ const Badge = styled.div`
   line-height: 1;
   padding: 4px 11px;
   margin-right: 5px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    font-size: 12px;
+  }
 `;
 
 export default RefOrgHomePageCards;

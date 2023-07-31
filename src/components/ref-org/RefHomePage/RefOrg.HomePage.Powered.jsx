@@ -15,11 +15,11 @@ const RefOrgHomePagePowered = () => {
         </Title>
         <Title>Powered by BOS</Title>
       </div>
-      <div className={'d-flex justify-content-center'}>
+      <StyledButtonGroup>
         <_Button bgStyle={{ left: 5 }}>Discovery</_Button>
         <_Button>Access Point</_Button>
         <_Button bgStyle={{ left: -5 }}>Decentralized Frontend</_Button>
-      </div>
+      </StyledButtonGroup>
     </div>
   );
 };
@@ -33,6 +33,15 @@ const _Button = ({ children, bgStyle }) => {
   );
 };
 
+const StyledButtonGroup = styled.div`
+  display: flex;
+  justify-content: center;
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    flex-direction: column;
+    align-items: center;
+  }
+`;
+
 const WrapperButton = styled.div`
   position: relative;
   margin: 0 20px;
@@ -40,7 +49,9 @@ const WrapperButton = styled.div`
   display: flex;
 
   @media (max-width: ${MEDIUM_SCREEN}) {
-    margin: 0 10px;
+    margin: 0 10px 20px;
+    flex-direction: column;
+    min-width: 280px;
   }
 `;
 
@@ -56,7 +67,7 @@ const StyledButton = styled(RefButton)`
   line-height: 1;
 
   @media (max-width: ${MEDIUM_SCREEN}) {
-    padding: 10px 20px 11px;
+    // padding: 10px 20px 11px;
   }
 `;
 

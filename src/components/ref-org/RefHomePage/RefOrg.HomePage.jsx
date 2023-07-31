@@ -144,7 +144,7 @@ const Section = styled.div`
   text-align: center;
 
   @media (max-width: ${MOBILE_SIZE}) {
-    padding: 40px 0;
+    padding: 60px 0 !important;
   }
 `;
 
