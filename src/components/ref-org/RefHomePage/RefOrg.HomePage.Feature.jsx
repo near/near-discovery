@@ -37,14 +37,14 @@ const RefOrgHomePageFeature = ({
           bottomLineHeight,
         }}
       />
-      <ContentImage {...{ image, imageBgGradient }} />
+      <ContentImage {...{ image, imageBgGradient, tag, tagBackground }} />
     </StyledColumn>
   );
 
   if (isRevert) {
     node = (
       <StyledColumn isRevert={isRevert}>
-        <ContentImage {...{ image, imageBgGradient, isRevert }} />
+        <ContentImage {...{ image, imageBgGradient, isRevert, tag, tagBackground }} />
         <ContentBody
           {...{
             title,
@@ -157,7 +157,7 @@ const ContentBody = ({
   );
 };
 
-const ContentImage = ({ image, imageBgGradient, isRevert }) => {
+const ContentImage = ({ image, imageBgGradient, isRevert, tag, tagBackground }) => {
   return (
     <div
       style={{
@@ -165,6 +165,11 @@ const ContentImage = ({ image, imageBgGradient, isRevert }) => {
         alignItems: 'center',
       }}
     >
+      {tag && (
+        <MobileTag background={tagBackground} padding={'12px 20px 14px'}>
+          {tag}
+        </MobileTag>
+      )}
       <StyledImageContainer gradients={imageBgGradient} isRevert={isRevert}>
         {image && <StyledImage src={image} width={690} height={400} />}
       </StyledImageContainer>
@@ -248,6 +253,7 @@ const StyledImageContainer = styled(RefGradientBackground)`
 
   @media (max-width: ${MOBILE_SIZE}) {
     margin: 0 auto 40px;
+    padding: 15px;
   }
 `;
 
@@ -262,6 +268,21 @@ const StyledImage = styled(Image)`
 const Tag = styled(RefBadge)`
   margin-right: 10px;
   margin-bottom: 20px;
+
+  @media (max-width: ${MOBILE_SIZE}) {
+    display: none;
+  }
+`;
+
+const MobileTag = styled(RefBadge)`
+  position: absolute;
+  top: -20px;
+  left: 50%;
+  transform: translate(-50%);
+
+  @media (min-width: ${MOBILE_SIZE}) {
+    display: none;
+  }
 `;
 
 export default RefOrgHomePageFeature;

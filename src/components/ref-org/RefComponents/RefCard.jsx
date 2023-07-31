@@ -1,15 +1,17 @@
 import RefImage from './RefImage';
 import styled from 'styled-components';
+import { StyledT4, StyledT5 } from '@/components/ref-org/RefStyled';
+import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
 
 const RefCard = ({ bg, title, subTitle, icon, avatar, children, rightText, className }) => {
   return (
     <Container className={className}>
-      <RefImage src={bg} width={500} height={192} />
+      <BannerImage src={bg} width={500} height={192} />
       <Content>
         <Header>
           {icon && (
             <Icon>
-              <RefImage src={icon} width={72} height={72} />
+              <IconImage src={icon} width={72} height={72} />
             </Icon>
           )}
           <HeaderContent>
@@ -48,12 +50,30 @@ const Header = styled.div`
   display: flex;
 `;
 
+const BannerImage = styled(RefImage)`
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    width: 350px;
+    height: auto;
+  }
+`;
+
 const Icon = styled.div`
   border-radius: 20px;
   background: #373a53;
   margin-top: -30px;
   padding: 8px;
   margin-right: 10px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    border-radius: 10px;
+  }
+`;
+
+const IconImage = styled(RefImage)`
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    width: 50px !important;
+    height: 50px !important;
+  }
 `;
 
 const Avatar = styled.div`
@@ -68,15 +88,13 @@ const StyledImage = styled(RefImage)`
   display: block;
 `;
 
-const Title = styled.div`
-  font-size: 20px;
+const Title = styled(StyledT4)`
   font-weight: 700;
   color: #fff;
 `;
 
-const SubTitle = styled.div`
+const SubTitle = styled(StyledT5)`
   display: flex;
-  font-size: 16px;
   font-weight: 400;
   color: #fff;
   align-items: center;
