@@ -205,6 +205,7 @@ const Container = styled.div`
 
 const StyledColumn = styled.div`
   display: flex;
+  flex-grow: 1;
 
   @media (max-width: ${MOBILE_SIZE}) {
     flex-direction: ${(p) => (p.isRevert ? 'column' : 'column-reverse')};
@@ -255,6 +256,7 @@ const StyledImageContainer = styled(NearGradientBackground)`
   max-width: 750px;
   padding: 20px;
   border-radius: 22px;
+  flex-grow: 1;
   // margin-left: ${(p) => !p.isRevert && '40px'};
   // margin-right: ${(p) => p.isRevert && '40px'};
 
