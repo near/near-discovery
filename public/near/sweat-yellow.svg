@@ -1,0 +1,21 @@
+<svg width="43" height="53" viewBox="0 0 43 53" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 24720">
+<rect id="Rectangle 4741" x="14.5505" y="27.2471" width="22.1418" height="9.48935" rx="4.74467" transform="rotate(-30 14.5505 27.2471)" fill="url(#paint0_linear_740_145)"/>
+<rect id="Rectangle 4741_2" x="0.865967" y="16.1973" width="22.1418" height="9.48935" rx="4.74467" transform="rotate(-45 0.865967 16.1973)" fill="url(#paint1_linear_740_145)"/>
+<rect id="Rectangle 4741_3" width="22.1418" height="9.48935" rx="4.74467" transform="matrix(-0.965926 0.258819 0.258819 0.965926 40.4934 37.1484)" fill="url(#paint2_linear_740_145)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_740_145" x1="25.6214" y1="27.2471" x2="25.6214" y2="36.7364" gradientUnits="userSpaceOnUse">
+<stop stop-color="#EEF3BF"/>
+<stop offset="1" stop-color="#E9F456"/>
+</linearGradient>
+<linearGradient id="paint1_linear_740_145" x1="11.9369" y1="16.1973" x2="11.9369" y2="25.6866" gradientUnits="userSpaceOnUse">
+<stop stop-color="#EEF3BF"/>
+<stop offset="1" stop-color="#E9F456"/>
+</linearGradient>
+<linearGradient id="paint2_linear_740_145" x1="11.0709" y1="0" x2="11.0709" y2="9.48935" gradientUnits="userSpaceOnUse">
+<stop stop-color="#EEF3BF"/>
+<stop offset="1" stop-color="#E9F456"/>
+</linearGradient>
+</defs>
+</svg>

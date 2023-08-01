@@ -40,10 +40,11 @@ const NearHomePage = () => {
           <StyledT1>
             <span style={{ marginRight: 10 }}>is</span>
             <NearGradientBackground
-              style={{ borderRadius: 16, display: 'inline-block', padding: '1px 20px', color: '#000', fontWeight: 700 }}
+              style={{ borderRadius: 16, display: 'inline-block', position: 'relative', marginTop: 10 }}
               gradients={'180deg, #EEF3BF 0%, #E9F456 100%'}
             >
-              All-in-one
+              <AllInOneText>All-in-one</AllInOneText>
+              <StyledSweetIcon src={nearAsset.svg.sweat} width={42} height={51} />
             </NearGradientBackground>
           </StyledT1>
         </NearContainer>
@@ -152,6 +153,22 @@ const Section = styled.div`
 `;
 
 const StyledIconImage = styled(NearImage)`
+  @media (max-width: ${LARGE_SCREEN}) {
+    display: none;
+  }
+`;
+
+const AllInOneText = styled.div`
+  padding: 10px 20px 11px;
+  color: #000;
+  font-weight: 700;
+`;
+
+const StyledSweetIcon = styled(NearImage)`
+  position: absolute;
+  top: -30px;
+  right: -40px;
+
   @media (max-width: ${LARGE_SCREEN}) {
     display: none;
   }

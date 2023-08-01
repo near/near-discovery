@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const NearHomePageFooter = () => {
   return (
     <div className={'d-flex flex-column flex-md-row justify-content-md-between align-items-center'}>
-      <div className={'d-flex gap-3 mb-3 mb-md-0'}>
+      <div className={'d-flex gap-md-5 gap-4 mb-3 mb-md-0'}>
         <Nav>BOS</Nav>
         <Nav>near</Nav>
         <Nav>Docs</Nav>
@@ -29,7 +29,7 @@ const Nav = styled.div`
 const Icon = styled.div`
   border-radius: 12px;
   border: 1px solid #494d69;
-  padding: 10px 13px;
+  padding: 12px 13px;
   cursor: pointer;
   path {
     fill: #979abe;

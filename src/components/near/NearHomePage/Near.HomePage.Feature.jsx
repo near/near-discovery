@@ -293,12 +293,12 @@ const MobileTag = styled(NearBadge)`
 `;
 
 const StyledHorizontalLine = styled(HorizontalLine)`
-  left: 148px;
+  left: 211px;
   top: -154px;
-  width: 441px;
+  width: 361px;
 
-  @media (min-width: 1500px) {
-    width: 480px;
+  @media (min-width: 1370px) {
+    width: 427px;
   }
 `;
 

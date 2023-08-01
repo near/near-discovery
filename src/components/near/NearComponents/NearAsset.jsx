@@ -65,6 +65,7 @@ const nearAsset = {
         </defs>
       </svg>
     ),
+    sweat: '/near/sweat-yellow.svg',
   },
   avatar: {
     a: '/near/avatar/1.png',

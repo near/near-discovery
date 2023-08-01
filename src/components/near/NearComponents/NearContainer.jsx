@@ -8,20 +8,10 @@ const NearContainer = ({ children }) => {
 const Container = styled.div`
   display: flex;
   max-width: 1150px;
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
   margin: 0 auto;
   flex-direction: column;
-
-  @media (max-width: ${LARGE_SCREEN}) {
-    padding-left: 40px;
-    padding-right: 40px;
-  }
-
-  @media (max-width: ${MEDIUM_SCREEN}) {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
 `;
 
 export default NearContainer;
