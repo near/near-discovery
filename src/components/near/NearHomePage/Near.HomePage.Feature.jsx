@@ -75,6 +75,7 @@ const NearHomePageFeature = ({
         style={{
           display: 'flex',
           position: 'relative',
+          flexGrow: 1,
         }}
       >
         {withTopLine && <StyledHorizontalLine />}
@@ -159,7 +160,7 @@ const ContentBody = ({
 
 const ContentImage = ({ image, imageBgGradient, isRevert, tag, tagBackground }) => {
   return (
-    <StyledContentImage>
+    <StyledContentImage isRevert={isRevert}>
       {tag && (
         <MobileTag background={tagBackground} padding={'12px 20px 14px'}>
           {tag}
@@ -195,6 +196,7 @@ const Container = styled.div`
   min-height: 440px;
   justify-content: center;
   position: relative;
+  flex-grow: 1;
 
   @media (max-width: ${LARGE_SCREEN}) {
     min-height: 0;
@@ -244,8 +246,8 @@ const StyledButton = styled(NearButton2)`
 const StyledContentImage = styled.div`
   display: flex;
   align-items: center;
-  padding-left: ${(p) => p.isRevert && '40px'};
-  padding-right: ${(p) => !p.isRevert && '40px'};
+  padding-left: ${(p) => !p.isRevert && '40px'};
+  padding-right: ${(p) => p.isRevert && '40px'};
   flex-grow: 1;
 `;
 
