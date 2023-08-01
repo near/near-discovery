@@ -105,12 +105,8 @@ export const useEthersProviderContext = singletonHook(defaultEthersProviderConte
       // TODO: do we need to unsubscribe?
       // const { unsubscribe } = walletsSub.subscribe((wallets) => {
       walletsSub.subscribe((wallets) => {
-        const previouslyConnectedWallets = JSON.parse(localStorage.getItem(web3onboardKey) || '[]');
         const connectedWallets = wallets.map(({ label }) => label);
         localStorage.setItem(web3onboardKey, JSON.stringify(connectedWallets));
-        if (previouslyConnectedWallets.length > 0 && wallets.length === 0) {
-          window.location.reload();
-        }
       });
       const previouslyConnectedWallets = JSON.parse(localStorage.getItem(web3onboardKey) || '[]');
 
