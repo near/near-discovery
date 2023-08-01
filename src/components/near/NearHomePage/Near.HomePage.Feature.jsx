@@ -23,8 +23,6 @@ const NearHomePageFeature = ({
   bottomLineHeight,
   ballGradients,
 }) => {
-  console.log('1', ballGradients[0]);
-
   let node = (
     <StyledColumn>
       <ContentBody
@@ -248,6 +246,10 @@ const StyledContentImage = styled.div`
   padding-left: ${(p) => !p.isRevert && '40px'};
   padding-right: ${(p) => p.isRevert && '40px'};
   flex-grow: 1;
+
+  @media (max-width: ${MOBILE_SIZE}) {
+    padding: 0;
+  }
 `;
 
 const StyledImageContainer = styled(NearGradientBackground)`

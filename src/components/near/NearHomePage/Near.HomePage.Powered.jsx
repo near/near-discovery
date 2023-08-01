@@ -96,7 +96,7 @@ const StyledIcon = styled(NearImage)`
   margin-top: -20px;
   margin-left: -5px;
 
-  @media (max-width: 800px) {
+  @media (max-width: ${SMALL_SCREEN}) {
     display: none;
   }
 `;

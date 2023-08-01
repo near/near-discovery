@@ -53,7 +53,7 @@ const StyledHorizontalLine = styled(HorizontalLine)`
   width: 435px;
 
   @media (max-width: 1402px) {
-    width: 338px;
+    width: 381px;
   }
 `;
 

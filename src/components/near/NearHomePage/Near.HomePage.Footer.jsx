@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const NearHomePageFooter = () => {
   return (
-    <div className={'d-flex flex-column flex-md-row justify-content-md-between align-items-center'}>
-      <div className={'d-flex gap-md-5 gap-4 mb-3 mb-md-0'}>
+    <div className={'d-flex flex-column-reverse flex-md-row justify-content-md-between align-items-center'}>
+      <div className={'d-flex gap-md-5 gap-5 mt-4 mb-mt-0'}>
         <Nav>BOS</Nav>
         <Nav>near</Nav>
         <Nav>Docs</Nav>

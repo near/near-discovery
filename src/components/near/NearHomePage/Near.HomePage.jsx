@@ -5,7 +5,7 @@ import NearContainer from '../NearComponents/NearContainer';
 import NearHomePageCards from './Near.HomePage.Cards';
 import NearGradientBackground from '../NearComponents/NearGradientBackground';
 import NearHomePageFeature from './Near.HomePage.Feature';
-import { LARGE_SCREEN, MEDIUM_SCREEN } from '../NearStyleVar';
+import { LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN } from '../NearStyleVar';
 import NearHomePageIdentity from './Near.HomePage.Identity';
 import NearHomePagePowered from './Near.HomePage.Powered';
 import NearHomePageFooter from './Near.HomePage.Footer';
@@ -169,7 +169,9 @@ const StyledSweetIcon = styled(NearImage)`
   top: -30px;
   right: -40px;
 
-  @media (max-width: ${LARGE_SCREEN}) {
+  @media (max-width: ${SMALL_SCREEN}) {
+    width: 27px;
+    right: -26px;
     display: none;
   }
 `;
