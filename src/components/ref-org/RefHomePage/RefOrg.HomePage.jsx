@@ -119,7 +119,7 @@ const RefOrgHomePage = () => {
 
       <Section
         style={{
-          padding: '93px 0 39px',
+          padding: '73px 0 39px',
         }}
       >
         <RefContainer>
