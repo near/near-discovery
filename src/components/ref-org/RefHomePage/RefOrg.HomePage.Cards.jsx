@@ -12,10 +12,10 @@ const RefOrgHomePageCards = () => {
         <StyledSwiperSlide>
           <StyledRefCard
             title={'zkEVM-bridge'}
-            subTitle={'@reffer.near'}
+            subTitle={'@alpha.near'}
             bg={refAsset.img.zkevmbridge}
             icon={refAsset.logo.zkevm}
-            avatar={refAsset.logo.near}
+            avatar={refAsset.avatar.a}
             rightText={'436\nCollected'}
           >
             <CardContent tags={['Bridge', 'Polygon zkEVM', 'Ethereum']} />
@@ -24,10 +24,10 @@ const RefOrgHomePageCards = () => {
         <StyledSwiperSlide>
           <StyledRefCard
             title={'Polygon zkEVM Dex'}
-            subTitle={'@reffer.near'}
+            subTitle={'@polygonzkevm.near'}
             bg={refAsset.img.dex}
             icon={refAsset.logo.polygon}
-            avatar={refAsset.logo.near}
+            avatar={refAsset.avatar.b}
             rightText={'130\nCollected'}
           >
             <CardContent tags={['Dexes', 'Polygon zkEVM']} />
@@ -36,10 +36,10 @@ const RefOrgHomePageCards = () => {
         <StyledSwiperSlide>
           <StyledRefCard
             title={'Gamma'}
-            subTitle={'@reffer.near'}
+            subTitle={'@gamma.near'}
             bg={refAsset.img.gamma}
             icon={refAsset.logo.gamma}
-            avatar={refAsset.logo.near}
+            avatar={refAsset.avatar.c}
             rightText={'130\nCollected'}
           >
             <CardContent tags={['Liquidity manager']} />
@@ -48,10 +48,10 @@ const RefOrgHomePageCards = () => {
         <StyledSwiperSlide>
           <StyledRefCard
             title={'AAVE v3'}
-            subTitle={'@reffer.near'}
+            subTitle={'@aave-v3.near'}
             bg={refAsset.img.aave}
             icon={refAsset.logo.aave}
-            avatar={refAsset.logo.near}
+            avatar={refAsset.avatar.d}
             rightText={'236\nCollected'}
           >
             <CardContent tags={['Lending']} />
@@ -60,10 +60,10 @@ const RefOrgHomePageCards = () => {
         <StyledSwiperSlide>
           <StyledRefCard
             title={'NEAR All-in-one'}
-            subTitle={'@reffer.near'}
+            subTitle={'@aabbcc.near'}
             bg={refAsset.img.allinone}
             icon={refAsset.logo.near}
-            avatar={refAsset.logo.near}
+            avatar={refAsset.avatar.e}
             rightText={'436\nCollected'}
           >
             <CardContent tags={['Dexes', 'Lending', 'Liquid Staking', 'NEAR']} />
@@ -72,10 +72,10 @@ const RefOrgHomePageCards = () => {
         <StyledSwiperSlide>
           <StyledRefCard
             title={'NEAR Staking'}
-            subTitle={'@reffer.near'}
+            subTitle={'@aabbcc.near'}
             bg={refAsset.img.nearstaking}
             icon={refAsset.logo.nearstaking}
-            avatar={refAsset.logo.near}
+            avatar={refAsset.avatar.e}
             rightText={'236\nCollected'}
           >
             <CardContent tags={['Liquid Staking', 'NEAR']} />

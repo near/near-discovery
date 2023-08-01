@@ -66,6 +66,13 @@ const refAsset = {
       </svg>
     ),
   },
+  avatar: {
+    a: '/ref-org/avatar/1.png',
+    b: '/ref-org/avatar/2.png',
+    c: '/ref-org/avatar/3.png',
+    d: '/ref-org/avatar/4.png',
+    e: '/ref-org/avatar/5.png',
+  },
 };
 
 export default refAsset;
