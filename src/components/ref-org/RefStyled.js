@@ -55,3 +55,16 @@ export const StyledT4 = styled.div`
     font-size: 16px;
   }
 `;
+
+export const StyledT5 = styled.div`
+  font-size: 16px;
+  font-weight: 400;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    font-size: 15px;
+  }
+
+  @media (max-width: ${SMALL_SCREEN}) {
+    font-size: 14px;
+  }
+`;

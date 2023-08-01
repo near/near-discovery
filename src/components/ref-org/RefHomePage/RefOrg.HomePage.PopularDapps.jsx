@@ -1,5 +1,5 @@
 import refAsset from '../RefComponents/RefAsset';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import RefImage from '../RefComponents/RefImage';
 import RefButton from '../RefComponents/RefButton';
 import { StyledT2, StyledT4 } from '@/components/ref-org/RefStyled';
@@ -14,28 +14,18 @@ const RefOrgHomePagePopularDapps = () => {
       </TitleWrapper>
 
       <AbsoluteWrapper>
-        <StyledMoreButton
-          style={{
-            position: 'absolute',
-            left: 670,
-            top: 117,
-          }}
-        >
+        <StyledMoreButton>
           More <ArrowRight />
         </StyledMoreButton>
 
-        <StyledBg src={refAsset.img.populardapps} width={871} height={430} />
+        <PCBg src={refAsset.img.populardapps} width={871} height={430} />
+        <MobileBg src={refAsset.img.mpopulardapps} width={428} height={436} />
       </AbsoluteWrapper>
 
-      <div
-        style={{
-          position: 'relative',
-          zIndex: 2,
-        }}
-      >
-        <NearButton>Near</NearButton>
+      <NearButtonWrapper>
         <PolygonButton>Polygon zkEVM</PolygonButton>
-      </div>
+        <NearButton>Near</NearButton>
+      </NearButtonWrapper>
     </Wrapper>
   );
 };
@@ -49,9 +39,14 @@ const ArrowRight = () => (
   </svg>
 );
 
+const BREAK_POINT = '803px';
 const Wrapper = styled.div`
   position: relative;
   height: 430px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    height: 436px;
+  }
 `;
 
 const TitleWrapper = styled.div`
@@ -73,11 +68,19 @@ const AbsoluteWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const StyledBg = styled(RefImage)`
-  // @media (max-width: ${MEDIUM_SCREEN}) {
-  //   width: 300px;
-  //   height: auto;
-  // }
+const MobileBg = styled(RefImage)`
+  @media (min-width: ${MEDIUM_SCREEN}) {
+    display: none;
+  }
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    display: block;
+  }
+`;
+
+const PCBg = styled(RefImage)`
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    display: none;
+  }
 `;
 
 const StyledMoreButton = styled.div`
@@ -90,40 +93,71 @@ const StyledMoreButton = styled.div`
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  position: absolute;
+  left: 670px;
+  top: 117px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    left: 267px;
+    top: 184px;
+    width: 72px;
+    height: 72px;
+  }
 `;
 
-const NearButton = styled(RefButton)`
+const NearButtonWrapper = styled.div`
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+`;
+
+const NearButtonShared = css`
   border-radius: 20px;
-  background: #1cd7b5;
-  box-shadow: 10px -8px 10px 0px rgba(0, 0, 0, 0.25);
-  transform: rotate(-6deg);
   color: #fff;
   font-size: 24px;
   height: 59px;
   width: 247px;
   position: relative;
+  line-height: 1;
+`;
+
+const NearButton = styled(RefButton)`
+  ${NearButtonShared}
+  background: #1cd7b5;
   top: 261px;
-  left: 172px;
+  left: -65px;
+  box-shadow: 10px -8px 10px 0px rgba(0, 0, 0, 0.25);
+  transform: rotate(-6deg);
 
   @media (max-width: ${MEDIUM_SCREEN}) {
     font-size: 18px;
+    top: 298px;
+  }
+
+  @media (max-width: ${BREAK_POINT}) {
+    left: -27px;
+    font-size: 16px;
   }
 `;
 const PolygonButton = styled(RefButton)`
-  border-radius: 20px;
+  ${NearButtonShared}
   background: #6f63f5;
   box-shadow: 10px -6px 10px 0px rgba(0, 0, 0, 0.25);
   transform: rotate(6deg);
-  color: #fff;
-  font-size: 24px;
-  height: 59px;
-  width: 240px;
-  position: relative;
   top: 321px;
-  left: -186px;
+  left: 61px;
+  z-index: 3;
 
   @media (max-width: ${MEDIUM_SCREEN}) {
     font-size: 18px;
+    top: 353px;
+  }
+
+  @media (max-width: ${BREAK_POINT}) {
+    left: 27px;
+    top: 353px;
+    font-size: 16px;
   }
 `;
 

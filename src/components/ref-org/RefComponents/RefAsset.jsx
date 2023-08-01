@@ -11,6 +11,7 @@ const refAsset = {
     nearstaking: '/ref-org/nearstaking.png',
     sweat: '/ref-org/sweat.png',
     populardapps: '/ref-org/populardapps.png',
+    mpopulardapps: '/ref-org/m-populardapps.png',
   },
   logo: {
     near: '/ref-org/logo/near.png',
@@ -64,6 +65,13 @@ const refAsset = {
         </defs>
       </svg>
     ),
+  },
+  avatar: {
+    a: '/ref-org/avatar/1.png',
+    b: '/ref-org/avatar/2.png',
+    c: '/ref-org/avatar/3.png',
+    d: '/ref-org/avatar/4.png',
+    e: '/ref-org/avatar/5.png',
   },
 };
 

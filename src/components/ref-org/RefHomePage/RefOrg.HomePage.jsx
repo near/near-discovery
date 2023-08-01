@@ -119,7 +119,7 @@ const RefOrgHomePage = () => {
 
       <Section
         style={{
-          padding: '93px 0 39px',
+          padding: '73px 0 39px',
         }}
       >
         <RefContainer>
@@ -144,7 +144,7 @@ const Section = styled.div`
   text-align: center;
 
   @media (max-width: ${MOBILE_SIZE}) {
-    padding: 40px 0;
+    padding: 60px 0 !important;
   }
 `;
 
