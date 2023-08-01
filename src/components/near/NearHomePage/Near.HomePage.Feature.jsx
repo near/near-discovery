@@ -77,15 +77,7 @@ const NearHomePageFeature = ({
           position: 'relative',
         }}
       >
-        {withTopLine && (
-          <HorizontalLine
-            style={{
-              left: 148,
-              top: -154,
-              width: 578,
-            }}
-          />
-        )}
+        {withTopLine && <StyledHorizontalLine />}
         {node}
       </div>
     </Container>
@@ -167,12 +159,7 @@ const ContentBody = ({
 
 const ContentImage = ({ image, imageBgGradient, isRevert, tag, tagBackground }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-      }}
-    >
+    <StyledContentImage>
       {tag && (
         <MobileTag background={tagBackground} padding={'12px 20px 14px'}>
           {tag}
@@ -181,7 +168,7 @@ const ContentImage = ({ image, imageBgGradient, isRevert, tag, tagBackground }) 
       <StyledImageContainer gradients={imageBgGradient} isRevert={isRevert}>
         {image && <StyledImage src={image} width={690} height={400} />}
       </StyledImageContainer>
-    </div>
+    </StyledContentImage>
   );
 };
 
@@ -225,12 +212,14 @@ const StyledColumn = styled.div`
 const Content = styled.div`
   text-align: left;
   position: relative;
-  max-width: 375px;
+  // max-width: 375px;
+  width: 441px;
 
   @media (max-width: ${MOBILE_SIZE}) {
     margin: auto;
     text-align: center;
     max-width: none;
+    width: 100%;
   }
 `;
 
@@ -252,12 +241,20 @@ const StyledButton = styled(NearButton2)`
   font-size: 18px;
 `;
 
+const StyledContentImage = styled.div`
+  display: flex;
+  align-items: center;
+  padding-left: ${(p) => p.isRevert && '40px'};
+  padding-right: ${(p) => !p.isRevert && '40px'};
+  flex-grow: 1;
+`;
+
 const StyledImageContainer = styled(NearGradientBackground)`
   max-width: 750px;
   padding: 20px;
   border-radius: 22px;
-  margin-left: ${(p) => !p.isRevert && '40px'};
-  margin-right: ${(p) => p.isRevert && '40px'};
+  // margin-left: ${(p) => !p.isRevert && '40px'};
+  // margin-right: ${(p) => p.isRevert && '40px'};
 
   @media (max-width: ${MOBILE_SIZE}) {
     margin: 0 auto 40px;
@@ -290,6 +287,16 @@ const MobileTag = styled(NearBadge)`
 
   @media (min-width: ${MOBILE_SIZE}) {
     display: none;
+  }
+`;
+
+const StyledHorizontalLine = styled(HorizontalLine)`
+  left: 148px;
+  top: -154px;
+  width: 441px;
+
+  @media (min-width: 1500px) {
+    width: 480px;
   }
 `;
 
