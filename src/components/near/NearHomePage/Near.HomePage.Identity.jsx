@@ -17,7 +17,7 @@ const NearHomePageIdentity = () => {
               left: 71,
             }}
           />
-          <StyledGradientBall gradients={['#fff', '#fff']} />
+          <StyledGradientBall gradients={['#FAFFD0', '#DEC338']} />
         </div>
 
         <StyledHorizontalLine />
@@ -35,7 +35,7 @@ const NearHomePageIdentity = () => {
                 borderTopRightRadius: 'var(--radius)',
                 borderLeftWidth: 0,
               }}
-              ballGradients={['#CFFF96', '#16FFE1']}
+              ballGradients={['#FAFFD0', '#DEC338']}
             />
             <StyledBadge background={'linear-gradient(45deg, #FAFFD0, #DEC338)'}>Identity</StyledBadge>
             <Title>Contribute with Web3 enthusiasts</Title>

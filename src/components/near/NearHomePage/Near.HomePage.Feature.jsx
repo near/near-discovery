@@ -21,9 +21,10 @@ const NearHomePageFeature = ({
   withTopLine = true,
   withBottomLine = true,
   bottomLineHeight,
-  topLineBallGradients,
-  bottomLineBallGradients,
+  ballGradients,
 }) => {
+  console.log('1', ballGradients[0]);
+
   let node = (
     <StyledColumn>
       <ContentBody
@@ -37,8 +38,7 @@ const NearHomePageFeature = ({
           withTopLine,
           withBottomLine,
           bottomLineHeight,
-          topLineBallGradients,
-          bottomLineBallGradients,
+          ballGradients,
         }}
       />
       <ContentImage {...{ image, imageBgGradient, tag, tagBackground }} />
@@ -61,8 +61,7 @@ const NearHomePageFeature = ({
             withTopLine,
             withBottomLine,
             bottomLineHeight,
-            topLineBallGradients,
-            bottomLineBallGradients,
+            ballGradients,
           }}
         />
       </StyledColumn>
@@ -96,8 +95,7 @@ const ContentBody = ({
   withTopLine,
   withBottomLine,
   bottomLineHeight,
-  topLineBallGradients,
-  bottomLineBallGradients,
+  ballGradients,
 }) => {
   const handleClick = () => {
     if (typeof onClick === 'function') onClick();
@@ -117,7 +115,7 @@ const ContentBody = ({
         borderLeftWidth: 0,
       };
     }
-    topLineNode = <TopLine style={style} ballGradients={topLineBallGradients} />;
+    topLineNode = <TopLine style={style} ballGradients={ballGradients} />;
   }
 
   if (withBottomLine) {
@@ -133,7 +131,7 @@ const ContentBody = ({
         borderLeftWidth: 0,
       };
     }
-    bottomLineNode = <BottomLine style={style} height={bottomLineHeight} ballGradients={bottomLineBallGradients} />;
+    bottomLineNode = <BottomLine style={style} height={bottomLineHeight} ballGradients={ballGradients} />;
   }
 
   return (

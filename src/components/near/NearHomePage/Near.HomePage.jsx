@@ -59,6 +59,7 @@ const NearHomePage = () => {
             tag={'Dapps'}
             withTopLine={false}
             bottomLineHeight={100}
+            ballGradients={['#A55BFE', '#FD2B94']}
           />
         </NearContainer>
       </Section>
@@ -74,7 +75,7 @@ const NearHomePage = () => {
             tagBackground={'linear-gradient(45deg, #5DF2FF, #824BFF) border-box'}
             imageBgGradient={'180deg, #5BF5FF 0%, #8247FF 100%'}
             bottomLineHeight={150}
-            bottomLineBallGradients={['#5DF2FF', '#824BFF']}
+            ballGradients={['#5DF2FF', '#824BFF']}
             isRevert
           />
         </NearContainer>
@@ -90,6 +91,7 @@ const NearHomePage = () => {
             tag={'Portfolio'}
             tagBackground={'linear-gradient(45deg, #CFFF96, #16FFE1) border-box'}
             imageBgGradient={'180deg, #D0FF95 0%, #11FFE2 100%'}
+            ballGradients={['#D0FF95', '#11FFE2']}
             bottomLineHeight={100}
           />
         </NearContainer>
