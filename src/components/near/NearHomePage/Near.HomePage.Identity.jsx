@@ -17,16 +17,10 @@ const NearHomePageIdentity = () => {
               left: 71,
             }}
           />
-          <StyledGradientBall />
+          <StyledGradientBall gradients={['#fff', '#fff']} />
         </div>
 
-        <HorizontalLine
-          style={{
-            left: 148,
-            top: -154,
-            width: 435,
-          }}
-        />
+        <StyledHorizontalLine />
 
         <Info>
           <Column>
@@ -41,6 +35,7 @@ const NearHomePageIdentity = () => {
                 borderTopRightRadius: 'var(--radius)',
                 borderLeftWidth: 0,
               }}
+              ballGradients={['#CFFF96', '#16FFE1']}
             />
             <StyledBadge background={'linear-gradient(45deg, #FAFFD0, #DEC338)'}>Identity</StyledBadge>
             <Title>Contribute with Web3 enthusiasts</Title>
@@ -51,6 +46,16 @@ const NearHomePageIdentity = () => {
     </div>
   );
 };
+
+const StyledHorizontalLine = styled(HorizontalLine)`
+  left: 148px;
+  top: -154px;
+  width: 435px;
+
+  @media (max-width: 1402px) {
+    width: 338px;
+  }
+`;
 
 const Info = styled.div`
   display: flex;

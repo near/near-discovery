@@ -19,12 +19,12 @@ const StyledButton = styled.button`
   }
 `;
 
-export const refButtonColor = {
+export const nearButtonColor = {
   yellow: 'yellow',
 };
 
 const bgColor = {
-  [refButtonColor.yellow]: {
+  [nearButtonColor.yellow]: {
     default: 'linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%)',
     hover: 'linear-gradient(180deg,#edf4af 0%,#e3ef37 100%)',
   },

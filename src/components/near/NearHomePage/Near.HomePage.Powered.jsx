@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import NearImage from '@/components/near/NearComponents/NearImage';
 import NearButton2 from '../NearComponents/NearButton2';
 import { StyledT2 } from '@/components/near/NearStyled';
-import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+import { LARGE_SCREEN, MEDIUM_SCREEN, SMALL_SCREEN } from '@/components/near/NearStyleVar';
 
 const NearHomePagePowered = () => {
   return (
@@ -96,7 +96,7 @@ const StyledIcon = styled(NearImage)`
   margin-top: -20px;
   margin-left: -5px;
 
-  @media (max-width: ${LARGE_SCREEN}) {
+  @media (max-width: 800px) {
     display: none;
   }
 `;

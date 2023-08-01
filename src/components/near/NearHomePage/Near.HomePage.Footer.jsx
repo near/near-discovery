@@ -19,7 +19,12 @@ const NearHomePageFooter = () => {
   );
 };
 
-const Nav = styled.div``;
+const Nav = styled.div`
+  color: #979abe;
+  &:hover {
+    color: #fff;
+  }
+`;
 
 const Icon = styled.div`
   border-radius: 12px;

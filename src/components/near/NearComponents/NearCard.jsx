@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { StyledT4, StyledT5 } from '@/components/near/NearStyled';
 import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
-const NearCard = ({ bg, title, subTitle, icon, avatar, children, rightText, className }) => {
+const NearCard = ({ bg, title, subTitle, icon, avatar, children, rightText, className, onClick }) => {
   return (
-    <Container className={className}>
-      <BannerImage src={bg} width={500} height={192} />
+    <Container className={className} onClick={onClick}>
+      <BannerImage src={bg} width={500} height={192} className={'cardimg'} />
       <Content>
         <Header>
           {icon && (

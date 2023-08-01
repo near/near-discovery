@@ -74,6 +74,7 @@ const NearHomePage = () => {
             tagBackground={'linear-gradient(45deg, #5DF2FF, #824BFF) border-box'}
             imageBgGradient={'180deg, #5BF5FF 0%, #8247FF 100%'}
             bottomLineHeight={150}
+            bottomLineBallGradients={['#5DF2FF', '#824BFF']}
             isRevert
           />
         </NearContainer>

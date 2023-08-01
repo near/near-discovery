@@ -2,28 +2,28 @@ import { LARGE_SCREEN } from '../NearStyleVar';
 import styled from 'styled-components';
 import NearGradientBall from '@/components/near/NearComponents/NearGradientBall';
 
-export const HorizontalLine = ({ style }) => {
-  return <StyledHorizontalLine style={style} />;
+export const HorizontalLine = ({ style, className }) => {
+  return <StyledHorizontalLine style={style} className={className} />;
 };
 
-export const VerticalLine = ({ style }) => {
-  return <StyledVerticalLine style={style} />;
+export const VerticalLine = ({ style, className }) => {
+  return <StyledVerticalLine style={style} className={className} />;
 };
 
-export const TopLine = ({ style }) => {
+export const TopLine = ({ style, ballGradients, className }) => {
   return (
-    <div style={{ position: 'relative' }}>
-      <StyledGradientBall />
+    <div style={{ position: 'relative' }} className={className}>
+      <StyledGradientBall gradients={ballGradients} />
       <StyledTopLine style={style} />
     </div>
   );
 };
 
-export const BottomLine = ({ style, height }) => {
+export const BottomLine = ({ style, height, ballGradients, className }) => {
   return (
     <BottomLineWrapper height={height}>
-      <StyledBottomGradientBall />
-      <StyledBottomLine style={style} height={height} />
+      <StyledBottomGradientBall gradients={ballGradients} />
+      <StyledBottomLine style={style} height={height} className={className} />
     </BottomLineWrapper>
   );
 };

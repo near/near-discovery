@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import NearGradientBackground from '../NearComponents/NearGradientBackground';
 import Image from 'next/image';
-import NearButton2, { refButtonColor } from '../NearComponents/NearButton2';
+import NearButton2, { nearButtonColor } from '../NearComponents/NearButton2';
 import NearBadge from '@/components/near/NearComponents/NearBadge';
 import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 import { BottomLine, HorizontalLine, TopLine } from '@/components/near/NearComponents/NearLine';
@@ -21,6 +21,8 @@ const NearHomePageFeature = ({
   withTopLine = true,
   withBottomLine = true,
   bottomLineHeight,
+  topLineBallGradients,
+  bottomLineBallGradients,
 }) => {
   let node = (
     <StyledColumn>
@@ -35,6 +37,8 @@ const NearHomePageFeature = ({
           withTopLine,
           withBottomLine,
           bottomLineHeight,
+          topLineBallGradients,
+          bottomLineBallGradients,
         }}
       />
       <ContentImage {...{ image, imageBgGradient, tag, tagBackground }} />
@@ -57,6 +61,8 @@ const NearHomePageFeature = ({
             withTopLine,
             withBottomLine,
             bottomLineHeight,
+            topLineBallGradients,
+            bottomLineBallGradients,
           }}
         />
       </StyledColumn>
@@ -97,6 +103,8 @@ const ContentBody = ({
   withTopLine,
   withBottomLine,
   bottomLineHeight,
+  topLineBallGradients,
+  bottomLineBallGradients,
 }) => {
   const handleClick = () => {
     if (typeof onClick === 'function') onClick();
@@ -116,7 +124,7 @@ const ContentBody = ({
         borderLeftWidth: 0,
       };
     }
-    topLineNode = <TopLine style={style} />;
+    topLineNode = <TopLine style={style} ballGradients={topLineBallGradients} />;
   }
 
   if (withBottomLine) {
@@ -132,7 +140,7 @@ const ContentBody = ({
         borderLeftWidth: 0,
       };
     }
-    bottomLineNode = <BottomLine style={style} height={bottomLineHeight} />;
+    bottomLineNode = <BottomLine style={style} height={bottomLineHeight} ballGradients={bottomLineBallGradients} />;
   }
 
   return (
@@ -146,7 +154,7 @@ const ContentBody = ({
       <Title>{title}</Title>
       <Desc>{desc}</Desc>
       {btnText && (
-        <StyledButton onClick={handleClick} color={refButtonColor.yellow}>
+        <StyledButton onClick={handleClick} color={nearButtonColor.yellow}>
           {btnText}
           <IconArrow />
         </StyledButton>

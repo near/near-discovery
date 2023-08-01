@@ -1,14 +1,30 @@
 import nearAsset from '../NearComponents/NearAsset';
 import styled from 'styled-components';
 import NearCard from '../NearComponents/NearCard';
+import { Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import NearImage from '@/components/near/NearComponents/NearImage';
 import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+import { useRouter } from 'next/router';
 
 const NearHomePageCards = () => {
+  const router = useRouter();
+  const handleClick = (url) => {
+    router.push(url);
+  };
+
   return (
     <Wrapper>
-      <Swiper spaceBetween={0} slidesPerView={'auto'}>
+      <Swiper
+        spaceBetween={0}
+        loop={true}
+        autoplay={{
+          delay: 2000,
+          pauseOnMouseEnter: true,
+        }}
+        slidesPerView={'auto'}
+        modules={[Autoplay]}
+      >
         <StyledSwiperSlide>
           <StyledRefCard
             title={'zkEVM-bridge'}
@@ -17,6 +33,7 @@ const NearHomePageCards = () => {
             icon={nearAsset.logo.zkevm}
             avatar={nearAsset.avatar.a}
             rightText={'436\nCollected'}
+            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVMSwap.zkevm-bridge')}
           >
             <CardContent tags={['Bridge', 'Polygon zkEVM', 'Ethereum']} />
           </StyledRefCard>
@@ -29,6 +46,7 @@ const NearHomePageCards = () => {
             icon={nearAsset.logo.polygon}
             avatar={nearAsset.avatar.b}
             rightText={'130\nCollected'}
+            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVMSwap.zkevm-swap')}
           >
             <CardContent tags={['Dexes', 'Polygon zkEVM']} />
           </StyledRefCard>
@@ -41,6 +59,7 @@ const NearHomePageCards = () => {
             icon={nearAsset.logo.gamma}
             avatar={nearAsset.avatar.c}
             rightText={'130\nCollected'}
+            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVM.GAMMA')}
           >
             <CardContent tags={['Liquidity manager']} />
           </StyledRefCard>
@@ -53,6 +72,7 @@ const NearHomePageCards = () => {
             icon={nearAsset.logo.aave}
             avatar={nearAsset.avatar.d}
             rightText={'236\nCollected'}
+            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVM.AAVE')}
           >
             <CardContent tags={['Lending']} />
           </StyledRefCard>
@@ -65,6 +85,7 @@ const NearHomePageCards = () => {
             icon={nearAsset.logo.near}
             avatar={nearAsset.avatar.e}
             rightText={'436\nCollected'}
+            onClick={() => handleClick('/juaner.near/widget/ref-home')}
           >
             <CardContent tags={['Dexes', 'Lending', 'Liquid Staking', 'NEAR']} />
           </StyledRefCard>
@@ -77,6 +98,7 @@ const NearHomePageCards = () => {
             icon={nearAsset.logo.nearstaking}
             avatar={nearAsset.avatar.e}
             rightText={'236\nCollected'}
+            onClick={() => handleClick('/ref-admin.near/widget/xBox')}
           >
             <CardContent tags={['Liquid Staking', 'NEAR']} />
           </StyledRefCard>
@@ -121,7 +143,14 @@ const Wrapper = styled.div`
 
 const StyledSwiperSlide = styled(SwiperSlide)`
   width: fit-content;
-  margin-left: 60px;
+  margin-left: 30px;
+  cursor: pointer;
+  padding: 10px;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.02);
+  }
 
   @media (max-width: ${MEDIUM_SCREEN}) {
     margin-left: 20px;
