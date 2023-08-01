@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { refStyleVar } from '../RefStyleVar';
+import { nearStyleVar } from '../NearStyleVar';
 
-const RefBadge = ({ children, className, padding, background }) => {
+const NearBadge = ({ children, className, padding, background }) => {
   return (
     <Badge className={className} background={background}>
       <BadgeInner padding={padding}>{children}</BadgeInner>
@@ -17,7 +17,7 @@ const Badge = styled.div`
 `;
 
 const BadgeInner = styled.div`
-  background: ${refStyleVar.bgColor};
+  background: ${nearStyleVar.bgColor};
   border-radius: 50px;
   font-size: 20px;
   font-weight: 700;
@@ -25,4 +25,4 @@ const BadgeInner = styled.div`
   padding: ${(p) => p.padding ?? '10px 20px 12px'};
 `;
 
-export default RefBadge;
+export default NearBadge;

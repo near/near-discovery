@@ -1,14 +1,14 @@
 import styled from 'styled-components';
-import RefGradientBackground from '../RefComponents/RefGradientBackground';
+import NearGradientBackground from '../NearComponents/NearGradientBackground';
 import Image from 'next/image';
-import RefButton, { refButtonColor } from '../RefComponents/RefButton';
-import RefBadge from '@/components/ref-org/RefComponents/RefBadge';
-import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
-import { BottomLine, HorizontalLine, TopLine } from '@/components/ref-org/RefComponents/RefLine';
-import { StyledT2, StyledT3, StyledT4 } from '@/components/ref-org/RefStyled';
+import NearButton2, { refButtonColor } from '../NearComponents/NearButton2';
+import NearBadge from '@/components/near/NearComponents/NearBadge';
+import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+import { BottomLine, HorizontalLine, TopLine } from '@/components/near/NearComponents/NearLine';
+import { StyledT2, StyledT3, StyledT4 } from '@/components/near/NearStyled';
 
 const MOBILE_SIZE = MEDIUM_SCREEN;
-const RefOrgHomePageFeature = ({
+const NearHomePageFeature = ({
   title,
   desc,
   btnText,
@@ -239,12 +239,12 @@ const Desc = styled(StyledT4)`
   }
 `;
 
-const StyledButton = styled(RefButton)`
+const StyledButton = styled(NearButton2)`
   padding: 17px 34px !important;
   font-size: 18px;
 `;
 
-const StyledImageContainer = styled(RefGradientBackground)`
+const StyledImageContainer = styled(NearGradientBackground)`
   max-width: 750px;
   padding: 20px;
   border-radius: 22px;
@@ -265,7 +265,7 @@ const StyledImage = styled(Image)`
   border-radius: 12px;
 `;
 
-const Tag = styled(RefBadge)`
+const Tag = styled(NearBadge)`
   margin-right: 10px;
   margin-bottom: 20px;
 
@@ -274,7 +274,7 @@ const Tag = styled(RefBadge)`
   }
 `;
 
-const MobileTag = styled(RefBadge)`
+const MobileTag = styled(NearBadge)`
   position: absolute;
   top: -20px;
   left: 50%;
@@ -285,4 +285,4 @@ const MobileTag = styled(RefBadge)`
   }
 `;
 
-export default RefOrgHomePageFeature;
+export default NearHomePageFeature;

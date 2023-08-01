@@ -1,9 +1,9 @@
-import RefImage from './RefImage';
+import NearImage from './NearImage';
 import styled from 'styled-components';
-import { StyledT4, StyledT5 } from '@/components/ref-org/RefStyled';
-import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
+import { StyledT4, StyledT5 } from '@/components/near/NearStyled';
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
-const RefCard = ({ bg, title, subTitle, icon, avatar, children, rightText, className }) => {
+const NearCard = ({ bg, title, subTitle, icon, avatar, children, rightText, className }) => {
   return (
     <Container className={className}>
       <BannerImage src={bg} width={500} height={192} />
@@ -50,7 +50,7 @@ const Header = styled.div`
   display: flex;
 `;
 
-const BannerImage = styled(RefImage)`
+const BannerImage = styled(NearImage)`
   @media (max-width: ${MEDIUM_SCREEN}) {
     width: 350px;
     height: auto;
@@ -69,7 +69,7 @@ const Icon = styled.div`
   }
 `;
 
-const IconImage = styled(RefImage)`
+const IconImage = styled(NearImage)`
   @media (max-width: ${MEDIUM_SCREEN}) {
     width: 50px !important;
     height: 50px !important;
@@ -84,7 +84,7 @@ const Avatar = styled.div`
   height: 20px;
 `;
 
-const StyledImage = styled(RefImage)`
+const StyledImage = styled(NearImage)`
   display: block;
 `;
 
@@ -116,4 +116,4 @@ const HeaderRight = styled.div`
   line-height: 16px;
 `;
 
-export default RefCard;
+export default NearCard;

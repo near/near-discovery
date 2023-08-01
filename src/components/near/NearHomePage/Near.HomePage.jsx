@@ -1,74 +1,74 @@
-import refAsset from '../RefComponents/RefAsset';
+import nearAsset from '../NearComponents/NearAsset';
 import styled from 'styled-components';
-import RefImage from '../RefComponents/RefImage';
-import RefContainer from '../RefComponents/RefContainer';
-import RefOrgHomePageCards from './RefOrg.HomePage.Cards';
-import RefGradientBackground from '../RefComponents/RefGradientBackground';
-import RefOrgHomePageFeature from './RefOrg.HomePage.Feature';
-import { LARGE_SCREEN, MEDIUM_SCREEN } from '../RefStyleVar';
-import RefOrgHomePageIdentity from './RefOrg.HomePage.Identity';
-import RefOrgHomePagePowered from './RefOrg.HomePage.Powered';
-import RefOrgHomePageFooter from './RefOrg.HomePage.Footer';
-import RefOrgHomePagePopularDapps from './RefOrg.HomePage.PopularDapps';
-import { StyledT1, StyledT2, StyledT3 } from '@/components/ref-org/RefStyled';
+import NearImage from '../NearComponents/NearImage';
+import NearContainer from '../NearComponents/NearContainer';
+import NearHomePageCards from './Near.HomePage.Cards';
+import NearGradientBackground from '../NearComponents/NearGradientBackground';
+import NearHomePageFeature from './Near.HomePage.Feature';
+import { LARGE_SCREEN, MEDIUM_SCREEN } from '../NearStyleVar';
+import NearHomePageIdentity from './Near.HomePage.Identity';
+import NearHomePagePowered from './Near.HomePage.Powered';
+import NearHomePageFooter from './Near.HomePage.Footer';
+import NearHomePagePopularDapps from './Near.HomePage.PopularDapps';
+import { StyledT1, StyledT2, StyledT3 } from '@/components/near/NearStyled';
 
 const MOBILE_SIZE = MEDIUM_SCREEN;
-const RefOrgHomePage = () => {
+const NearHomePage = () => {
   return (
     <Wrapper>
       <Section padding={'40px 0 0px'}>
-        <RefContainer>
+        <NearContainer>
           <StyledT1>
             Decentralized One-stop shop
-            <StyledIconImage src={refAsset.img.iconShop} alt={'near'} width={106} height={103} />
+            <StyledIconImage src={nearAsset.img.iconShop} alt={'near'} width={106} height={103} />
           </StyledT1>
           <StyledT1>
-            The Easiest way to <StyledIconImage src={refAsset.img.iconGoogle} alt={'near'} width={106} height={103} />
+            The Easiest way to <StyledIconImage src={nearAsset.img.iconGoogle} alt={'near'} width={106} height={103} />
             Dive into Web3.0
           </StyledT1>
           <StyledT3 style={{ margin: '25px 0 0' }}>
             Join a growing family of <b>12,345</b> community members
           </StyledT3>
-        </RefContainer>
+        </NearContainer>
       </Section>
 
-      <RefOrgHomePageCards />
+      <NearHomePageCards />
 
       <Section>
-        <RefContainer>
+        <NearContainer>
           <StyledT1 style={{ marginBottom: 10 }}>All you need,</StyledT1>
           <StyledT1>
             <span style={{ marginRight: 10 }}>is</span>
-            <RefGradientBackground
+            <NearGradientBackground
               style={{ borderRadius: 16, display: 'inline-block', padding: '1px 20px', color: '#000', fontWeight: 700 }}
               gradients={'180deg, #EEF3BF 0%, #E9F456 100%'}
             >
               All-in-one
-            </RefGradientBackground>
+            </NearGradientBackground>
           </StyledT1>
-        </RefContainer>
+        </NearContainer>
       </Section>
 
       <Section>
-        <RefContainer>
-          <RefOrgHomePageFeature
+        <NearContainer>
+          <NearHomePageFeature
             title={'Customized and simplified DeFi experience'}
             desc={'Make your DeFi actions simple, fast and traceable.'}
-            image={refAsset.animated.dapps}
+            image={nearAsset.animated.dapps}
             btnText={'Discover'}
             tag={'Dapps'}
             withTopLine={false}
             bottomLineHeight={100}
           />
-        </RefContainer>
+        </NearContainer>
       </Section>
 
       <Section>
-        <RefContainer>
-          <RefOrgHomePageFeature
+        <NearContainer>
+          <NearHomePageFeature
             title={'Bridge with options'}
             desc={'It places security first while maintaining full functionality.'}
-            image={refAsset.animated.bridge}
+            image={nearAsset.animated.bridge}
             btnText={'Discover'}
             tag={'Bridge'}
             tagBackground={'linear-gradient(45deg, #5DF2FF, #824BFF) border-box'}
@@ -76,34 +76,34 @@ const RefOrgHomePage = () => {
             bottomLineHeight={150}
             isRevert
           />
-        </RefContainer>
+        </NearContainer>
       </Section>
 
       <Section>
-        <RefContainer>
-          <RefOrgHomePageFeature
+        <NearContainer>
+          <NearHomePageFeature
             title={'Effectively View and manage your assets in one UI'}
             desc={'All your digital assets, swap, buy, sell in control.'}
-            image={refAsset.animated.portfolio}
+            image={nearAsset.animated.portfolio}
             btnText={'Discover'}
             tag={'Portfolio'}
             tagBackground={'linear-gradient(45deg, #CFFF96, #16FFE1) border-box'}
             imageBgGradient={'180deg, #D0FF95 0%, #11FFE2 100%'}
             bottomLineHeight={100}
           />
-        </RefContainer>
+        </NearContainer>
       </Section>
 
       <Section>
-        <RefContainer>
-          <RefOrgHomePageIdentity />
-        </RefContainer>
+        <NearContainer>
+          <NearHomePageIdentity />
+        </NearContainer>
       </Section>
 
       <Section padding={'154px 0'}>
-        <RefContainer>
-          <RefOrgHomePagePopularDapps />
-        </RefContainer>
+        <NearContainer>
+          <NearHomePagePopularDapps />
+        </NearContainer>
       </Section>
 
       <Section
@@ -112,9 +112,9 @@ const RefOrgHomePage = () => {
           padding: '46px 0',
         }}
       >
-        <RefContainer>
-          <RefOrgHomePagePowered />
-        </RefContainer>
+        <NearContainer>
+          <NearHomePagePowered />
+        </NearContainer>
       </Section>
 
       <Section
@@ -122,9 +122,9 @@ const RefOrgHomePage = () => {
           padding: '73px 0 39px',
         }}
       >
-        <RefContainer>
-          <RefOrgHomePageFooter />
-        </RefContainer>
+        <NearContainer>
+          <NearHomePageFooter />
+        </NearContainer>
       </Section>
     </Wrapper>
   );
@@ -148,10 +148,10 @@ const Section = styled.div`
   }
 `;
 
-const StyledIconImage = styled(RefImage)`
+const StyledIconImage = styled(NearImage)`
   @media (max-width: ${LARGE_SCREEN}) {
     display: none;
   }
 `;
 
-export default RefOrgHomePage;
+export default NearHomePage;

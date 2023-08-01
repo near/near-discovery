@@ -1,11 +1,11 @@
-import refAsset from '../RefComponents/RefAsset';
+import nearAsset from '../NearComponents/NearAsset';
 import styled from 'styled-components';
-import RefCard from '../RefComponents/RefCard';
+import NearCard from '../NearComponents/NearCard';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import RefImage from '@/components/ref-org/RefComponents/RefImage';
-import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
+import NearImage from '@/components/near/NearComponents/NearImage';
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
-const RefOrgHomePageCards = () => {
+const NearHomePageCards = () => {
   return (
     <Wrapper>
       <Swiper spaceBetween={0} slidesPerView={'auto'}>
@@ -13,9 +13,9 @@ const RefOrgHomePageCards = () => {
           <StyledRefCard
             title={'zkEVM-bridge'}
             subTitle={'@alpha.near'}
-            bg={refAsset.img.zkevmbridge}
-            icon={refAsset.logo.zkevm}
-            avatar={refAsset.avatar.a}
+            bg={nearAsset.img.zkevmbridge}
+            icon={nearAsset.logo.zkevm}
+            avatar={nearAsset.avatar.a}
             rightText={'436\nCollected'}
           >
             <CardContent tags={['Bridge', 'Polygon zkEVM', 'Ethereum']} />
@@ -25,9 +25,9 @@ const RefOrgHomePageCards = () => {
           <StyledRefCard
             title={'Polygon zkEVM Dex'}
             subTitle={'@polygonzkevm.near'}
-            bg={refAsset.img.dex}
-            icon={refAsset.logo.polygon}
-            avatar={refAsset.avatar.b}
+            bg={nearAsset.img.dex}
+            icon={nearAsset.logo.polygon}
+            avatar={nearAsset.avatar.b}
             rightText={'130\nCollected'}
           >
             <CardContent tags={['Dexes', 'Polygon zkEVM']} />
@@ -37,9 +37,9 @@ const RefOrgHomePageCards = () => {
           <StyledRefCard
             title={'Gamma'}
             subTitle={'@gamma.near'}
-            bg={refAsset.img.gamma}
-            icon={refAsset.logo.gamma}
-            avatar={refAsset.avatar.c}
+            bg={nearAsset.img.gamma}
+            icon={nearAsset.logo.gamma}
+            avatar={nearAsset.avatar.c}
             rightText={'130\nCollected'}
           >
             <CardContent tags={['Liquidity manager']} />
@@ -49,9 +49,9 @@ const RefOrgHomePageCards = () => {
           <StyledRefCard
             title={'AAVE v3'}
             subTitle={'@aave-v3.near'}
-            bg={refAsset.img.aave}
-            icon={refAsset.logo.aave}
-            avatar={refAsset.avatar.d}
+            bg={nearAsset.img.aave}
+            icon={nearAsset.logo.aave}
+            avatar={nearAsset.avatar.d}
             rightText={'236\nCollected'}
           >
             <CardContent tags={['Lending']} />
@@ -61,9 +61,9 @@ const RefOrgHomePageCards = () => {
           <StyledRefCard
             title={'NEAR All-in-one'}
             subTitle={'@aabbcc.near'}
-            bg={refAsset.img.allinone}
-            icon={refAsset.logo.near}
-            avatar={refAsset.avatar.e}
+            bg={nearAsset.img.allinone}
+            icon={nearAsset.logo.near}
+            avatar={nearAsset.avatar.e}
             rightText={'436\nCollected'}
           >
             <CardContent tags={['Dexes', 'Lending', 'Liquid Staking', 'NEAR']} />
@@ -73,9 +73,9 @@ const RefOrgHomePageCards = () => {
           <StyledRefCard
             title={'NEAR Staking'}
             subTitle={'@aabbcc.near'}
-            bg={refAsset.img.nearstaking}
-            icon={refAsset.logo.nearstaking}
-            avatar={refAsset.avatar.e}
+            bg={nearAsset.img.nearstaking}
+            icon={nearAsset.logo.nearstaking}
+            avatar={nearAsset.avatar.e}
             rightText={'236\nCollected'}
           >
             <CardContent tags={['Liquid Staking', 'NEAR']} />
@@ -104,7 +104,7 @@ const CardContent = ({ tags }) => {
 const _FireIcon = ({ length = 1 }) => {
   const node = [];
   for (let i = 0; i < length; i++) {
-    node.push(<StyledFireIcon src={refAsset.img.iconFire} width={14} height={18} key={i} />);
+    node.push(<StyledFireIcon src={nearAsset.img.iconFire} width={14} height={18} key={i} />);
   }
 
   return node;
@@ -128,7 +128,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   }
 `;
 
-const StyledRefCard = styled(RefCard)`
+const StyledRefCard = styled(NearCard)`
   //margin-right: 20px;
 `;
 
@@ -157,7 +157,7 @@ const StyledFires = styled.div`
   }
 `;
 
-const StyledFireIcon = styled(RefImage)`
+const StyledFireIcon = styled(NearImage)`
   margin-right: 5px;
 `;
 
@@ -176,4 +176,4 @@ const Badge = styled.div`
   }
 `;
 
-export default RefOrgHomePageCards;
+export default NearHomePageCards;

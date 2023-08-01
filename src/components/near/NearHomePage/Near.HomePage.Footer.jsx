@@ -1,7 +1,7 @@
-import refAsset from '../RefComponents/RefAsset';
+import nearAsset from '../NearComponents/NearAsset';
 import styled from 'styled-components';
 
-const RefOrgHomePageFooter = () => {
+const NearHomePageFooter = () => {
   return (
     <div className={'d-flex flex-column flex-md-row justify-content-md-between align-items-center'}>
       <div className={'d-flex gap-3 mb-3 mb-md-0'}>
@@ -10,10 +10,10 @@ const RefOrgHomePageFooter = () => {
         <Nav>Docs</Nav>
       </div>
       <div className={'d-flex gap-3'}>
-        <Icon>{refAsset.svg.twitter}</Icon>
-        <Icon>{refAsset.svg.telegram}</Icon>
-        <Icon>{refAsset.svg.discord}</Icon>
-        <Icon>{refAsset.svg.medium}</Icon>
+        <Icon>{nearAsset.svg.twitter}</Icon>
+        <Icon>{nearAsset.svg.telegram}</Icon>
+        <Icon>{nearAsset.svg.discord}</Icon>
+        <Icon>{nearAsset.svg.medium}</Icon>
       </div>
     </div>
   );
@@ -39,4 +39,4 @@ const Icon = styled.div`
   }
 `;
 
-export default RefOrgHomePageFooter;
+export default NearHomePageFooter;

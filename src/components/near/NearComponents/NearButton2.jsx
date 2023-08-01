@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const RefButton = ({ children, className, style, onClick, color }) => {
+const NearButton2 = ({ children, className, style, onClick, color }) => {
   return (
     <StyledButton className={className} onClick={onClick} style={style} color={color}>
       {children}
@@ -30,4 +30,4 @@ const bgColor = {
   },
 };
 
-export default RefButton;
+export default NearButton2;

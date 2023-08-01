@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
+import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
-const RefContainer = ({ children }) => {
+const NearContainer = ({ children }) => {
   return <Container>{children}</Container>;
 };
 
@@ -24,4 +24,4 @@ const Container = styled.div`
   }
 `;
 
-export default RefContainer;
+export default NearContainer;

@@ -1,11 +1,11 @@
-import refAsset from '../RefComponents/RefAsset';
+import nearAsset from '../NearComponents/NearAsset';
 import styled, { css } from 'styled-components';
-import RefImage from '../RefComponents/RefImage';
-import RefButton from '../RefComponents/RefButton';
-import { StyledT2, StyledT4 } from '@/components/ref-org/RefStyled';
-import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
+import NearImage from '../NearComponents/NearImage';
+import NearButton2 from '../NearComponents/NearButton2';
+import { StyledT2, StyledT4 } from '@/components/near/NearStyled';
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
-const RefOrgHomePagePopularDapps = () => {
+const NearHomePagePopularDapps = () => {
   return (
     <Wrapper>
       <TitleWrapper>
@@ -18,8 +18,8 @@ const RefOrgHomePagePopularDapps = () => {
           More <ArrowRight />
         </StyledMoreButton>
 
-        <PCBg src={refAsset.img.populardapps} width={871} height={430} />
-        <MobileBg src={refAsset.img.mpopulardapps} width={428} height={436} />
+        <PCBg src={nearAsset.img.populardapps} width={871} height={430} />
+        <MobileBg src={nearAsset.img.mpopulardapps} width={428} height={436} />
       </AbsoluteWrapper>
 
       <NearButtonWrapper>
@@ -68,7 +68,7 @@ const AbsoluteWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const MobileBg = styled(RefImage)`
+const MobileBg = styled(NearImage)`
   @media (min-width: ${MEDIUM_SCREEN}) {
     display: none;
   }
@@ -77,7 +77,7 @@ const MobileBg = styled(RefImage)`
   }
 `;
 
-const PCBg = styled(RefImage)`
+const PCBg = styled(NearImage)`
   @media (max-width: ${MEDIUM_SCREEN}) {
     display: none;
   }
@@ -122,7 +122,7 @@ const NearButtonShared = css`
   line-height: 1;
 `;
 
-const NearButton = styled(RefButton)`
+const NearButton = styled(NearButton2)`
   ${NearButtonShared}
   background: #1cd7b5;
   top: 261px;
@@ -140,7 +140,7 @@ const NearButton = styled(RefButton)`
     font-size: 16px;
   }
 `;
-const PolygonButton = styled(RefButton)`
+const PolygonButton = styled(NearButton2)`
   ${NearButtonShared}
   background: #6f63f5;
   box-shadow: 10px -6px 10px 0px rgba(0, 0, 0, 0.25);
@@ -161,4 +161,4 @@ const PolygonButton = styled(RefButton)`
   }
 `;
 
-export default RefOrgHomePagePopularDapps;
+export default NearHomePagePopularDapps;

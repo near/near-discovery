@@ -1,6 +1,6 @@
-import { LARGE_SCREEN } from '../RefStyleVar';
+import { LARGE_SCREEN } from '../NearStyleVar';
 import styled from 'styled-components';
-import RefGradientBall from '@/components/ref-org/RefComponents/RefGradientBall';
+import NearGradientBall from '@/components/near/NearComponents/NearGradientBall';
 
 export const HorizontalLine = ({ style }) => {
   return <StyledHorizontalLine style={style} />;
@@ -57,7 +57,7 @@ const StyledVerticalLine = styled.div`
   }
 `;
 
-const StyledGradientBall = styled(RefGradientBall)`
+const StyledGradientBall = styled(NearGradientBall)`
   position: absolute;
   top: -29px;
   left: ${(p) => p.left || '46px'};
@@ -75,7 +75,7 @@ const BottomLineWrapper = styled.div`
   width: 140px;
 `;
 
-const StyledBottomGradientBall = styled(RefGradientBall)`
+const StyledBottomGradientBall = styled(NearGradientBall)`
   position: absolute;
   top: -12px;
   left: -6px;

@@ -1,11 +1,11 @@
 import styled from 'styled-components';
-import RefBadge from '../RefComponents/RefBadge';
-import { HIDE_LINE_SCREEN, HorizontalLine, TopLine, VerticalLine } from '@/components/ref-org/RefComponents/RefLine';
-import { StyledT2, StyledT4 } from '@/components/ref-org/RefStyled';
-import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
-import RefGradientBall from '@/components/ref-org/RefComponents/RefGradientBall';
+import NearBadge from '../NearComponents/NearBadge';
+import { HIDE_LINE_SCREEN, HorizontalLine, TopLine, VerticalLine } from '@/components/near/NearComponents/NearLine';
+import { StyledT2, StyledT4 } from '@/components/near/NearStyled';
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+import NearGradientBall from '@/components/near/NearComponents/NearGradientBall';
 
-const RefOrgHomePageIdentity = () => {
+const NearHomePageIdentity = () => {
   return (
     <div>
       <div className={'position-relative'}>
@@ -75,7 +75,7 @@ const Column = styled.div`
   }
 `;
 
-const StyledBadge = styled(RefBadge)`
+const StyledBadge = styled(NearBadge)`
   margin-bottom: 20px;
 `;
 
@@ -87,7 +87,7 @@ const Title = styled(StyledT2)`
 
 const Desc = styled(StyledT4)``;
 
-const StyledGradientBall = styled(RefGradientBall)`
+const StyledGradientBall = styled(NearGradientBall)`
   position: absolute;
   top: -29px;
   left: 66px;
@@ -97,4 +97,4 @@ const StyledGradientBall = styled(RefGradientBall)`
   }
 `;
 
-export default RefOrgHomePageIdentity;
+export default NearHomePageIdentity;

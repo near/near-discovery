@@ -1,17 +1,17 @@
-import refAsset from '../RefComponents/RefAsset';
+import nearAsset from '../NearComponents/NearAsset';
 import styled from 'styled-components';
-import RefImage from '@/components/ref-org/RefComponents/RefImage';
-import RefButton from '../RefComponents/RefButton';
-import { StyledT2 } from '@/components/ref-org/RefStyled';
-import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
+import NearImage from '@/components/near/NearComponents/NearImage';
+import NearButton2 from '../NearComponents/NearButton2';
+import { StyledT2 } from '@/components/near/NearStyled';
+import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
-const RefOrgHomePagePowered = () => {
+const NearHomePagePowered = () => {
   return (
     <div>
       <div style={{ marginBottom: 40 }}>
         <Title>
           Composable DeFi <span style={{ color: '#814DFF' }}>Experience</span>
-          <StyledIcon src={refAsset.img.sweat} width={23} height={28} />
+          <StyledIcon src={nearAsset.img.sweat} width={23} height={28} />
         </Title>
         <Title>Powered by BOS</Title>
       </div>
@@ -55,7 +55,7 @@ const WrapperButton = styled.div`
   }
 `;
 
-const StyledButton = styled(RefButton)`
+const StyledButton = styled(NearButton2)`
   border-radius: 55px;
   border: 1px solid #e9f456;
   background: #1e202f;
@@ -71,7 +71,7 @@ const StyledButton = styled(RefButton)`
   }
 `;
 
-const StyledBgButton = styled(RefButton)`
+const StyledBgButton = styled(NearButton2)`
   position: absolute;
   border-radius: 55px 55px 47px 47px;
   border: 1px solid #e9f456;
@@ -92,7 +92,7 @@ const Title = styled(StyledT2)`
   margin-bottom: 10px;
 `;
 
-const StyledIcon = styled(RefImage)`
+const StyledIcon = styled(NearImage)`
   margin-top: -20px;
   margin-left: -5px;
 
@@ -101,4 +101,4 @@ const StyledIcon = styled(RefImage)`
   }
 `;
 
-export default RefOrgHomePagePowered;
+export default NearHomePagePowered;

@@ -1,4 +1,4 @@
-const RefGradientBall = ({ gradients = ['#CFFF96', '#16FFE1'], className }) => {
+const NearGradientBall = ({ gradients = ['#CFFF96', '#16FFE1'], className }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -26,4 +26,4 @@ const RefGradientBall = ({ gradients = ['#CFFF96', '#16FFE1'], className }) => {
   );
 };
 
-export default RefGradientBall;
+export default NearGradientBall;

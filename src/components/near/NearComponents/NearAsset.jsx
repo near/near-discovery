@@ -1,29 +1,29 @@
-const refAsset = {
+const nearAsset = {
   img: {
-    iconShop: '/ref-org/icon-shop.png',
-    iconGoogle: '/ref-org/icon-google.png',
-    iconFire: '/ref-org/icon-fire.png',
-    allinone: '/ref-org/allinone.png',
-    zkevmbridge: '/ref-org/zkevmbridge.png',
-    aave: '/ref-org/aave.png',
-    dex: '/ref-org/dex.png',
-    gamma: '/ref-org/gamma.png',
-    nearstaking: '/ref-org/nearstaking.png',
-    sweat: '/ref-org/sweat.png',
-    populardapps: '/ref-org/populardapps.png',
-    mpopulardapps: '/ref-org/m-populardapps.png',
+    iconShop: '/near/icon-shop.png',
+    iconGoogle: '/near/icon-google.png',
+    iconFire: '/near/icon-fire.png',
+    allinone: '/near/allinone.png',
+    zkevmbridge: '/near/zkevmbridge.png',
+    aave: '/near/aave.png',
+    dex: '/near/dex.png',
+    gamma: '/near/gamma.png',
+    nearstaking: '/near/nearstaking.png',
+    sweat: '/near/sweat.png',
+    populardapps: '/near/populardapps.png',
+    mpopulardapps: '/near/m-populardapps.png',
   },
   logo: {
-    near: '/ref-org/logo/near.png',
-    nearstaking: '/ref-org/logo/nearstaking.png',
-    gamma: '/ref-org/logo/gamma.png',
-    zkevm: '/ref-org/logo/zkevm.png',
-    polygon: '/ref-org/logo/polygon.png',
+    near: '/near/logo/near.png',
+    nearstaking: '/near/logo/nearstaking.png',
+    gamma: '/near/logo/gamma.png',
+    zkevm: '/near/logo/zkevm.png',
+    polygon: '/near/logo/polygon.png',
   },
   animated: {
-    bridge: '/ref-org/animated/bridge.gif',
-    dapps: '/ref-org/animated/dapps.gif',
-    portfolio: '/ref-org/animated/portfolio.gif',
+    bridge: '/near/animated/bridge.gif',
+    dapps: '/near/animated/dapps.gif',
+    portfolio: '/near/animated/portfolio.gif',
   },
   svg: {
     twitter: (
@@ -67,12 +67,12 @@ const refAsset = {
     ),
   },
   avatar: {
-    a: '/ref-org/avatar/1.png',
-    b: '/ref-org/avatar/2.png',
-    c: '/ref-org/avatar/3.png',
-    d: '/ref-org/avatar/4.png',
-    e: '/ref-org/avatar/5.png',
+    a: '/near/avatar/1.png',
+    b: '/near/avatar/2.png',
+    c: '/near/avatar/3.png',
+    d: '/near/avatar/4.png',
+    e: '/near/avatar/5.png',
   },
 };
 
-export default refAsset;
+export default nearAsset;
