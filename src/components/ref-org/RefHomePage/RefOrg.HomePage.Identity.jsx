@@ -1,13 +1,25 @@
 import styled from 'styled-components';
 import RefBadge from '../RefComponents/RefBadge';
-import { HorizontalLine, TopLine } from '@/components/ref-org/RefComponents/RefLine';
+import { HIDE_LINE_SCREEN, HorizontalLine, TopLine, VerticalLine } from '@/components/ref-org/RefComponents/RefLine';
 import { StyledT2, StyledT4 } from '@/components/ref-org/RefStyled';
 import { MEDIUM_SCREEN } from '@/components/ref-org/RefStyleVar';
+import RefGradientBall from '@/components/ref-org/RefComponents/RefGradientBall';
 
 const RefOrgHomePageIdentity = () => {
   return (
     <div>
       <div className={'position-relative'}>
+        <div className={'position-relative'}>
+          <VerticalLine
+            style={{
+              height: 137,
+              top: -166,
+              left: 71,
+            }}
+          />
+          <StyledGradientBall />
+        </div>
+
         <HorizontalLine
           style={{
             left: 148,
@@ -74,5 +86,15 @@ const Title = styled(StyledT2)`
 `;
 
 const Desc = styled(StyledT4)``;
+
+const StyledGradientBall = styled(RefGradientBall)`
+  position: absolute;
+  top: -29px;
+  left: 66px;
+
+  @media (max-width: ${HIDE_LINE_SCREEN}) {
+    display: none !important;
+  }
+`;
 
 export default RefOrgHomePageIdentity;

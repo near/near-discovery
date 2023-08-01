@@ -6,6 +6,10 @@ export const HorizontalLine = ({ style }) => {
   return <StyledHorizontalLine style={style} />;
 };
 
+export const VerticalLine = ({ style }) => {
+  return <StyledVerticalLine style={style} />;
+};
+
 export const TopLine = ({ style }) => {
   return (
     <div style={{ position: 'relative' }}>
@@ -24,11 +28,25 @@ export const BottomLine = ({ style, height }) => {
   );
 };
 
-const HIDE_LINE_SCREEN = LARGE_SCREEN;
+export const HIDE_LINE_SCREEN = LARGE_SCREEN;
 const StyledHorizontalLine = styled.div`
   --size: 1px;
   --color: #494d69;
   height: var(--size);
+  background: var(--color);
+  z-index: 10;
+  pointer-events: none;
+  position: absolute;
+
+  @media (max-width: ${HIDE_LINE_SCREEN}) {
+    display: none !important;
+  }
+`;
+
+const StyledVerticalLine = styled.div`
+  --size: 1px;
+  --color: #494d69;
+  width: var(--size);
   background: var(--color);
   z-index: 10;
   pointer-events: none;
