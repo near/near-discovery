@@ -86,8 +86,8 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadataEditor: 'discom.testnet/widget/WidgetMetadataEditor',
     wrapper: 'discom.testnet/widget/DIG.Theme',
     nearcolumn: 'ref-admin.near/widget/ref-template-page',
-    warmUp: 'ref-bigboss.near/widget/ZKEVMWarmUp.warm-up',
-    zkevmcolumn: 'ref-bigboss.near/widget/ZKEVM.Template',
+    warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
+    zkevmcolumn: 'guessme.near/widget/ZKEVM.Template',
   },
 
   mainnet: {
@@ -130,7 +130,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
     wrapper: 'near/widget/DIG.Theme',
     nearcolumn: 'ref-admin.near/widget/ref-template-page',
-    warmUp: 'ref-bigboss.near/widget/ZKEVMWarmUp.warm-up',
-    zkevmcolumn: 'ref-bigboss.near/widget/ZKEVM.Template',
+    warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
+    zkevmcolumn: 'guessme.near/widget/ZKEVM.Template',
   },
 };
