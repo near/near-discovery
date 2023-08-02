@@ -31,6 +31,8 @@ const Icon = styled.div`
   border: 1px solid #494d69;
   padding: 12px 13px;
   cursor: pointer;
+  line-height: 1;
+
   path {
     fill: #979abe;
   }

@@ -77,6 +77,10 @@ const Column = styled.div`
     padding: 0 5px;
     text-align: center;
     margin: 0 auto 60px;
+
+    &:last-child {
+      margin-bottom: 40px;
+    }
   }
 `;
 
