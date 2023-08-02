@@ -297,11 +297,7 @@ const MobileTag = styled(NearBadge)`
 const StyledHorizontalLine = styled(HorizontalLine)`
   left: 211px;
   top: -154px;
-  width: 361px;
-
-  @media (min-width: 1370px) {
-    width: 427px;
-  }
+  width: 427px;
 `;
 
 export default NearHomePageFeature;
