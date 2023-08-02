@@ -34,6 +34,12 @@ const Container = styled.div`
       width:32px;
     }
   }
+  .show{
+    display:block;
+  }
+  .hidden{
+    display:none;
+  }
   .child-item {
     padding-left:64px;
   }
@@ -44,6 +50,13 @@ const Container = styled.div`
       position:absolute;
       right:-10px;
       top:-12px;
+    }
+  }
+  .parentItem{
+    position:relative;
+    .arrow{
+      position:absolute;
+      right:24px;
     }
   }
   .parentItem.active{
@@ -172,6 +185,7 @@ export const DesktopNavigationLeft = () => {
   const [showChildBox, setShowChildBox] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [openChains, setOpenChains] = useState(false);
+  const [openChainsPc, setOpenChainsPc] = useState(true);
   const [show_menu_list, set_show_menu_list] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -293,11 +307,18 @@ export const DesktopNavigationLeft = () => {
             <div className="menu">
               <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/"><div className="icon">{homeIcon}</div>Home<span className='bag'>{router.asPath == '/' ? visible_bag: null}</span></Link>
               <div>
-              <div className={`item parentItem ${isActive('nearcolumn') || isActive('zkevmcolumn') ? 'active': ''}`} style={{cursor: 'default'}}><div className="icon">{templatesIcon}</div>Chains</div>
-                <div className="">
-                  <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR<span className='bag'>{isActive('nearcolumn') ? visible_bag: null}</span></Link>
-                  <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">Polygon zkEVM<span className='bag'>{isActive('zkevmcolumn') ? visible_bag: null}</span></Link>
-                </div>
+              <div onClick={() => {
+                setOpenChainsPc(!openChainsPc);
+              }} className={`item parentItem ${isActive('nearcolumn') || isActive('zkevmcolumn') ? 'active': ''}`}>
+                <div className="icon">{templatesIcon}</div>Chains
+                <ArrowPcIcon className="arrow" style={{
+                  transform: openChainsPc ? '': 'rotate(180deg)'
+                }}></ArrowPcIcon>
+              </div>
+              <div className={`${openChainsPc ? 'show': 'hidden'}`}>
+                <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn">NEAR<span className='bag'>{isActive('nearcolumn') ? visible_bag: null}</span></Link>
+                <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn">Polygon zkEVM<span className='bag'>{isActive('zkevmcolumn') ? visible_bag: null}</span></Link>
+              </div>
               </div>
               <Link className={`item ${isActive('warmup') ? 'active': ''}`}  href="/warmup">
                 <div className="icon">{zkevmIcon}</div>
@@ -366,6 +387,12 @@ const m_closeIcon = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" 
 function ArrowIcon(props:any) {
   return <svg {...props} width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
   <path d="M16 1L8.5 7L1 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+}
+
+function ArrowPcIcon(props:any) {
+  return <svg {...props} width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11 6L6 2L1 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
   </svg>
 }
 
