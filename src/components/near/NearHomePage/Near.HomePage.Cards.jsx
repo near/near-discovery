@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import NearImage from '@/components/near/NearComponents/NearImage';
 import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 import { useRouter } from 'next/router';
+import { isMobile } from 'react-device-detect';
 
 const NearHomePageCards = () => {
   const router = useRouter();
@@ -24,6 +25,7 @@ const NearHomePageCards = () => {
         }}
         slidesPerView={'auto'}
         modules={[Autoplay]}
+        centeredSlides={isMobile}
       >
         <StyledSwiperSlide>
           <StyledRefCard
@@ -153,7 +155,7 @@ const StyledSwiperSlide = styled(SwiperSlide)`
   }
 
   @media (max-width: ${MEDIUM_SCREEN}) {
-    margin-left: 20px;
+    margin-left: 0;
   }
 `;
 
