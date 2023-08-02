@@ -121,14 +121,24 @@ const Container = styled.div`
 const ContainerMobile = styled.div`
   display:none;
   position:relative;
-  .top_menu_icon{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-  }
   @media (max-width: 900px) {
     display:block;
+  }
+  
+  .top_menu_icon{
+    position:fixed;
+    width:100%;
+    left:0;
+    align-items:center;
+    justify-content:space-between;
+    background-color:#1E202F;
     padding:24px;
+    z-index:999;
+    .right_p{
+      position:absolute;
+      right:24px;
+    }
+    
   }
   .show{
     display:block;
@@ -242,7 +252,7 @@ export const DesktopNavigationLeft = () => {
           isMobile ? <ContainerMobile>
               <div className='top_menu_icon'>
                 {shanshanLogo}
-                <span onClick={openMenu}>{m_menuIcon}</span>
+                <span className='right_p' onClick={openMenu}>{m_menuIcon}</span>
               </div>
               <div className={`menu_list ${show_menu_list ? 'show': 'hidden'}`}>
                  <div className='operation'>
