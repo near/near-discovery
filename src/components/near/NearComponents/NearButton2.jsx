@@ -14,8 +14,10 @@ const StyledButton = styled.button`
   border: 0;
   font-weight: 700;
   background: ${(p) => bgColor[p.color]?.default};
+  color: #101010;
   &:hover {
     background: ${(p) => bgColor[p.color]?.hover};
+    color: #000;
   }
 `;
 
