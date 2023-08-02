@@ -1,8 +1,9 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 const Container = styled.div`
+  display:none;
   position:relative;
   z-index:50;
   width:260px;
@@ -100,11 +101,84 @@ const Container = styled.div`
     top:31px;
     cursor:pointer;
   }
+  @media (min-width: 901px) {
+    display:block;
+  }
 `;
+const ContainerMobile = styled.div`
+  display:none;
+  position:relative;
+  .top_menu_icon{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  @media (max-width: 900px) {
+    display:block;
+    padding:24px;
+  }
+  .show{
+    display:block;
+  }
+  .hidden{
+    display:none;
+  }
+  .menu_list{
+    position:fixed;
+    width:100vw;
+    height:100vh;
+    top:0;
+    left:0;
+    background-color:#1E202F;
+    z-index:999;
+    .operation{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:24px;
+    }
+    .list{
+      .item{
+        position:relative;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        height:75px;
+        border-bottom:1px solid #332C4B;
+        font-size:24px;
+        color:#979ABE;
+        font-weight:500;
+        .arrow{
+          position:absolute;
+          right:24px;
+        }
+      }
+      .active{
+        color:#EBF479;
+        background-color:#2B2D3F;
+        border-bottom:1px solid #3B3E53;
+      }
+    }
+    .activeWhole{
+      background-color:#2B2D3F;
+      .item{
+        border-bottom:1px solid #3B3E53;
+      }
+    }
+  }
+`
 export const DesktopNavigationLeft = () => {
   const [putMenu, setPutMenu] = useState(false);
   const [showChildBox, setShowChildBox] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [openChains, setOpenChains] = useState(false);
+  const [show_menu_list, set_show_menu_list] = useState(false);
   const router = useRouter();
+  useEffect(() => {
+    if (document.documentElement.clientWidth <= 1023) {
+      setIsMobile(true)
+    }
+  }, []) 
   function isActive(name:string) {
     let paths:string[] = [];
     if (name == 'nearcolumn') {
@@ -139,8 +213,55 @@ export const DesktopNavigationLeft = () => {
   </defs>
   </svg>
   
+  const nearActive = isActive('nearcolumn') || isActive('zkevmcolumn');
+  function openMenu() {
+    set_show_menu_list(true);
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    set_show_menu_list(false);
+    document.body.style.overflow = 'auto';
+  }
   return (
-      <Container style={{width: putMenu? '80px': '260px', padding: putMenu? '10px 0': '10px'}}>
+      <>
+        {
+          isMobile ? <ContainerMobile>
+              <div className='top_menu_icon'>
+                {shanshanLogo}
+                <span onClick={openMenu}>{m_menuIcon}</span>
+              </div>
+              <div className={`menu_list ${show_menu_list ? 'show': 'hidden'}`}>
+                 <div className='operation'>
+                    {shanshanLogo}
+                    <span onClick={() => {
+                      set_show_menu_list(false);
+                    }}>{m_closeIcon}</span>
+                 </div>
+                 <div className='list'>
+                  <Link className={`item ${router.asPath == '/' ? 'active': ''}`} href="/" onClick={closeMenu}>
+                    Home
+                  </Link>
+                  <div className={`${nearActive ? 'activeWhole': ''}`}>
+                    <div onClick={() => {
+                      setOpenChains(!openChains);
+                    }} className={`item ${nearActive ? 'active': ''}`}>
+                      Chains
+                      <ArrowIcon className='arrow' style={{
+                        transform: openChains ? 'rotate(180deg)': ''
+                      }}></ArrowIcon>
+                    </div>
+                    <div className={`${openChains ? 'show': 'hidden'}`}>
+                      <Link className={`item child-item ${isActive('nearcolumn') ? 'active': ''}`}  href="/nearcolumn" onClick={closeMenu}>NEAR</Link>
+                      <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active': ''}`}  href="/zkevmcolumn" onClick={closeMenu}>Polygon zkEVM</Link>
+                    </div>
+                  </div>
+                  <Link className={`item ${isActive('warmup') ? 'active': ''}`}  onClick={closeMenu} href="/warmup">
+                      zkEVM Warm up
+                  </Link>
+                 </div>
+              </div>
+ 
+          </ContainerMobile>:<Container style={{width: putMenu? '80px': '260px', padding: putMenu? '10px 0': '10px'}}>
           <div className='putButton' style={{transform: putMenu ? 'rotateY(180deg)': '', right:putMenu ? '-21px': '0px'}} onClick={() => {
             setPutMenu(!putMenu)
           }}>{putIcon}</div>
@@ -189,9 +310,10 @@ export const DesktopNavigationLeft = () => {
             </div>
           </div>
           }
-          
-          
       </Container>
+        }
+        
+      </>
   );
 };
 
@@ -228,5 +350,25 @@ const putIcon = <svg width="21" height="26" viewBox="0 0 21 26" fill="none" xmln
 <path d="M21 0H8C3.58172 0 0 3.58172 0 8V18C0 22.4183 3.58172 26 8 26H21V0Z" fill="#373A53"/>
 <path d="M12 8L8 13L12 18" stroke="#E9F456" stroke-width="2" stroke-linecap="round"/>
 </svg>
+
+const m_menuIcon = <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 2H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round"/>
+<path d="M2 9H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round"/>
+<path d="M2 16H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round"/>
+</svg>
+
+const m_closeIcon = <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.63599 14.3638L14.3639 1.63585" stroke="#E9F456" stroke-width="3" stroke-linecap="round"/>
+<path d="M14.3643 14.3638L1.63634 1.63585" stroke="#E9F456" stroke-width="3" stroke-linecap="round"/>
+</svg>
+
+
+function ArrowIcon(props:any) {
+  return <svg {...props} width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path d="M16 1L8.5 7L1 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+}
+
+
 
 

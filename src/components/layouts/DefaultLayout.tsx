@@ -18,6 +18,13 @@ const Layout = styled.div`
 
     width: calc(100vw - 300px);
   }
+  @media (max-width: 900px) {
+    flex-direction:column;
+    .content{
+      width: 100%;
+      min-height:100vh;
+    }
+  }
 `;
 export function DefaultLayout({ children }: Props) {
   return (
