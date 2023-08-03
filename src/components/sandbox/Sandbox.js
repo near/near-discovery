@@ -76,6 +76,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
   const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
+  const [localChecked, setLocalChecked] = useState();
   const [path, setPath] = useState(undefined);
   const [lastPath, setLastPath] = useState(undefined);
   const [renderCode, setRenderCode] = useState();
@@ -94,7 +95,7 @@ export const Sandbox = ({ onboarding = false }) => {
   const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
   const jpath = JSON.stringify(path);
   const { isDraft } = filesObject[jpath] || {};
-  const showEditor = Object.keys(filesObject)?.length;
+  const showEditor = !!Object.keys(filesObject)?.length || !localChecked;
   const isModule = path?.type === 'module';
   const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
   const shouldRender = !!near && !!cache;
@@ -211,6 +212,7 @@ export const Sandbox = ({ onboarding = false }) => {
       return;
     }
 
+    setLocalChecked(true);
     loadAndOpenFile(defaultWidget, defaultWidget.split('/')[1]);
     setDefaultWidget(null);
     router.replace('/sandbox');
@@ -270,6 +272,7 @@ export const Sandbox = ({ onboarding = false }) => {
       const { componentSrc } = router.query;
 
       if (!Array.isArray(router.query.componentSrc)) {
+        setLocalChecked(true);
         return;
       }
 
