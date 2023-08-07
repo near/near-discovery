@@ -29,13 +29,15 @@ const Wrapper = styled.div`
 
     &.desktop-button {
       @media (max-width: 380px) {
-        display: inline !important;
+        display: none !important;
       }
     }
 
     &.mobile-button {
+      display: none;
+
       @media (max-width: 380px) {
-        display: none !important;
+        display: inline !important;
       }
     }
   }
@@ -96,17 +98,17 @@ export const NearconBanner = () => {
         <Text size="16px" weight="500" className="d-none d-sm-inline">
           Early Bird Tickets are live!
         </Text>
-        <Link href="http://nearcon.org" target="_blank" className="d-none d-sm-inline banner-button desktop-button">
-          <Button label="View" iconRight="ph-bold ph-arrow-right" variant="primary" fill="outline" size="small" />
-        </Link>
-        <Link href="http://nearcon.org" target="_blank" className="d-inline d-sm-none banner-button mobile-button">
+        <Link href="http://nearcon.org" target="_blank" className="banner-button desktop-button">
           <Button
-            label="Early Bird Tickets"
+            label="Get your tickets"
             iconRight="ph-bold ph-arrow-right"
             variant="primary"
             fill="outline"
             size="small"
           />
+        </Link>
+        <Link href="http://nearcon.org" target="_blank" className="banner-button mobile-button">
+          <Button label="View" iconRight="ph-bold ph-arrow-right" variant="primary" fill="outline" size="small" />
         </Link>
         <Button
           type="button"
