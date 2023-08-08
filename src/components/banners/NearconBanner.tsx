@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import icon from '@/assets/images/nearcon_banner_2023.svg';
 import { Button } from '@/components/lib/Button';
 import { useBanner } from '@/hooks/useBanner';
+import { useCurrentComponentStore } from '@/stores/current-component';
 
 type FlexProps = {
   gap?: string;
@@ -12,13 +13,6 @@ type FlexProps = {
   justifyContent?: string;
   direction?: string;
   wrap?: string;
-};
-
-type TextProps = {
-  size?: string;
-  lineHeight?: string;
-  weight?: string;
-  color?: string;
 };
 
 const Wrapper = styled.div`
@@ -32,10 +26,8 @@ const Wrapper = styled.div`
         display: none !important;
       }
     }
-
     &.mobile-button {
       display: none;
-
       @media (max-width: 380px) {
         display: inline !important;
       }
@@ -73,31 +65,21 @@ const Flex = styled.div<FlexProps>`
   }
 `;
 
-const Text = styled.p<TextProps>`
-  font-family: 'FK Grotesk', sans-serif;
-  font-size: ${(p) => p.size ?? '18px'};
-  line-height: ${(p) => p.lineHeight ?? '1.5'};
-  font-weight: ${(p) => p.weight ?? '400'};
-  color: ${(p) => p.color ?? '#000'};
-  margin: 0;
-`;
-
 export const NearconBanner = () => {
   const [isBannerVisible, setBanners] = useBanner();
+  const componentSrc = useCurrentComponentStore();
+  const isNearconWidget = componentSrc && componentSrc.src?.includes('nearcon23.near/widget/Index');
 
   const closeBanner = () => {
     setBanners(!isBannerVisible);
   };
 
-  if (!isBannerVisible) return null;
+  if (!isBannerVisible || isNearconWidget) return null;
 
   return (
     <Wrapper>
       <Flex gap="24px" alignItems="center" justifyContent="center">
         <Image src={icon} alt="nearcon-banner" />
-        <Text size="16px" weight="500" className="d-none d-sm-inline">
-          Early Bird Tickets are live!
-        </Text>
         <Link href="http://nearcon.org" target="_blank" className="banner-button desktop-button">
           <Button
             label="Get your tickets"
