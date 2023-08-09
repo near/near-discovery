@@ -9,7 +9,7 @@ import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
-import { flushEvents } from '@/utils/analytics';
+import { recordClick } from '@/utils/analytics';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import NearLogotype from '../icons/near-logotype.svg';
@@ -136,13 +136,11 @@ export function MenuLeft(props: Props) {
   const { requestAuthentication } = useSignInRedirect();
 
   function handleSignIn() {
-    flushEvents();
     props.onCloseMenu();
     requestAuthentication();
   }
 
   function handleCreateAccount() {
-    flushEvents();
     props.onCloseMenu();
     requestAuthentication(true);
   }
