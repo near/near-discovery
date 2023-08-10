@@ -13,6 +13,8 @@ import { NavigationButton } from "../NavigationButton";
 import { SignInButton } from "../SignInButton";
 import { Link } from "react-router-dom";
 import { links } from "../../../../data/links";
+import { FeedIcon } from "../icons/feed";
+import { AILogo } from "../icons/aiLogo";
 
 const StyledMenu = styled.div`
   position: fixed;
@@ -213,9 +215,9 @@ export function MenuLeft(props) {
         <div className="links-title">GenaDrop</div>
         <ul className="top-links">
           <li>
-            <NavigationButton route="/jgodwill.near/widget/GenaDrop.Minter">
-            <Editor />
-            Create
+            <NavigationButton route="/agwaze.near/widget/GenaDrop.Minter">
+              <Editor />
+              Create
             </NavigationButton>
           </li>
           <li>
@@ -227,7 +229,25 @@ export function MenuLeft(props) {
           <li>
             <NavigationButton route="/jgodwill.near/widget/GenaDrop.Explore">
               <Notebook />
-              Explore
+              Explore Near NFTs
+            </NavigationButton>
+          </li>
+          <li>
+            <NavigationButton route="/agwaze.near/widget/GenaDrop.EVMExplore">
+              <Notebook />
+              Expore EVM NFTs
+            </NavigationButton>
+          </li>
+          <li>
+            <NavigationButton route="genadrop.near/widget/GenaDrop.Home">
+              <FeedIcon />
+              Feeds
+            </NavigationButton>
+          </li>
+          <li>
+            <NavigationButton route="0xprometheus.near/widget/Genadrop-Ai-Minter">
+              <AILogo />
+              Create AI
             </NavigationButton>
           </li>
           {/* <li>
@@ -248,7 +268,7 @@ export function MenuLeft(props) {
               Docs
             </NavigationButton>
           </li> */}
-          </ul>
+        </ul>
         <ul className="bottom-links">
           {props.signedIn && (
             <li>
