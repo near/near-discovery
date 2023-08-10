@@ -19,7 +19,7 @@ const StyledNavigation = styled.div`
   right: 0;
   width: 100%;
   background-color: #fff;
-  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
   z-index: 1000;
   padding: 12px 0;
 
@@ -134,19 +134,18 @@ export function DesktopNavigation(props) {
           {searchInputFocus && <Return />}
         </div> */}
         <div className="navigation-section text-align">
-        <NavigationButton route="/jgodwill.near/widget/GenaDropmultichainminter">
+          <NavigationButton route="/agwaze.near/widget/GenaDrop.Minter">
             Create
           </NavigationButton>
           <NavigationButton route="/jgodwill.near/widget/GenaDrop.MultiListing">
             List Near Nfts
           </NavigationButton>
 
-
           <NavigationButton route="/jgodwill.near/widget/GenaDrop.Explore">
             Explore Near Nfts
           </NavigationButton>
 
-          <NavigationButton route="/0xprometheus.near/widget/Eth-Explore">
+          <NavigationButton route="/agwaze.near/widget/GenaDrop.EVMExplore">
             Explore EVM Nfts
           </NavigationButton>
           {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
