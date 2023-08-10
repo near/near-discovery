@@ -90,7 +90,7 @@ export function recordPageView(pageName: string) {
   }
 }
 
-const record = (eventType: string, e: UIEvent) => {
+const record = (eventType: string, e: UIEvent | PointerEvent) => {
   const key = get(e.target, 'placeholder', get(e.target, 'innerText', get(e.target, 'href')));
   recordEventWithProps(eventType, {
     element: truncate(key, { length: 255 }),
@@ -98,7 +98,7 @@ const record = (eventType: string, e: UIEvent) => {
     xPath: getXPath(e.target as HTMLElement),
   });
 };
-export const recordClick = (e: UIEvent) => record('click', e);
+export const recordClick = (e: UIEvent | PointerEvent) => record('click', e);
 export const recordMouseEnter = (e: UIEvent) => record('mouseover', e);
 export const recordTouchStart = (e: UIEvent | PointerEvent) => record('touchstart', e);
 
