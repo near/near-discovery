@@ -79,9 +79,19 @@ export const onboard = init({
     description: 'NEAR - BOS',
   },
   theme: 'dark',
+  accountCenter: {
+    desktop: {
+      position: 'topRight',
+      enabled: true,
+      minimal: false,
+    },
+    mobile: {
+      enabled: true,
+    },
+  },
   containerElements: {
-    // connectModal: '#near-social-navigation-bar',
-    // accountCenter: "#near-social-web3-account",
+    // accountCenter: {
+    // }
   },
 });
 
