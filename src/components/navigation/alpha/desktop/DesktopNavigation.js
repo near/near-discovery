@@ -138,16 +138,16 @@ export function DesktopNavigation(props) {
             Create
           </NavigationButton>
           <NavigationButton route="/jgodwill.near/widget/GenaDrop.MultiListing">
-            List Near Nfts
+            List NEAR NFTs
           </NavigationButton>
 
 
           <NavigationButton route="/jgodwill.near/widget/GenaDrop.Explore">
-            Explore Near Nfts
+            Explore NEAR NFTs
           </NavigationButton>
 
           <NavigationButton route="/0xprometheus.near/widget/Eth-Explore">
-            Explore EVM Nfts
+            Explore EVM NFTs
           </NavigationButton>
           {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
             Mint
