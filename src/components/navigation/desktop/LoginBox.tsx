@@ -131,7 +131,7 @@ export const LoginBox = () => {
       ];
     }
     const r = router.asPath.split('/').pop() || '';
-    return paths.includes(r);
+    return paths.some((p) => r.includes(p));
   }
 
   const isZKEVMActive = isActive('zkevmcolumn');

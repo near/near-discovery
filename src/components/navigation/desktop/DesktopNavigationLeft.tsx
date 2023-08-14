@@ -425,7 +425,7 @@ export const DesktopNavigationLeft = () => {
                 </div>
                 <Link className={`item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
                   <div className="icon">{zkevmIcon}</div>
-                  ZkEvm Warm up
+                  zkEvm Warm up
                   {isActive('warmup') ? <span className="bag">{visible_bag}</span> : null}
                 </Link>
               </div>
