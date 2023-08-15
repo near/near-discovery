@@ -1,5 +1,6 @@
-import nearAsset from '../NearComponents/NearAsset';
 import styled from 'styled-components';
+
+import nearAsset from '../NearComponents/NearAsset';
 
 const NearHomePageFooter = () => {
   return (

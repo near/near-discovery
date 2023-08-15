@@ -1,11 +1,8 @@
 import { useRouter } from 'next/router';
-
 import React, { useEffect, useState } from 'react';
-
 import styled from 'styled-components';
 
 import { onboard } from '@/data/web3';
-
 import { useEthersProviderContext } from '@/data/web3';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';

@@ -1,9 +1,11 @@
-import nearAsset from '../NearComponents/NearAsset';
 import styled, { css } from 'styled-components';
-import NearImage from '../NearComponents/NearImage';
-import NearButton2 from '../NearComponents/NearButton2';
+
 import { StyledT2, StyledT4 } from '@/components/near/NearStyled';
 import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+
+import nearAsset from '../NearComponents/NearAsset';
+import NearButton2 from '../NearComponents/NearButton2';
+import NearImage from '../NearComponents/NearImage';
 
 const NearHomePagePopularDapps = () => {
   return (

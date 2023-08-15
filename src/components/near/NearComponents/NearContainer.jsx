@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
 const NearContainer = ({ children }) => {

@@ -1,11 +1,13 @@
-import styled from 'styled-components';
-import NearGradientBackground from '../NearComponents/NearGradientBackground';
 import Image from 'next/image';
-import NearButton2, { nearButtonColor } from '../NearComponents/NearButton2';
+import styled from 'styled-components';
+
 import NearBadge from '@/components/near/NearComponents/NearBadge';
-import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 import { BottomLine, HorizontalLine, TopLine } from '@/components/near/NearComponents/NearLine';
 import { StyledT2, StyledT3, StyledT4 } from '@/components/near/NearStyled';
+import { LARGE_SCREEN, MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+
+import NearButton2, { nearButtonColor } from '../NearComponents/NearButton2';
+import NearGradientBackground from '../NearComponents/NearGradientBackground';
 
 const MOBILE_SIZE = MEDIUM_SCREEN;
 const NearHomePageFeature = ({

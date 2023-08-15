@@ -1,7 +1,9 @@
-import NearImage from './NearImage';
 import styled from 'styled-components';
+
 import { StyledT4, StyledT5 } from '@/components/near/NearStyled';
 import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+
+import NearImage from './NearImage';
 
 const NearCard = ({ bg, title, subTitle, icon, avatar, children, rightText, className, onClick }) => {
   return (

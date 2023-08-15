@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import { MetaTags } from '@/components/MetaTags';
+import NearHomePage from '@/components/near/NearHomePage/Near.HomePage';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
 import { useBosComponents } from '@/hooks/useBosComponents';
@@ -9,7 +10,6 @@ import { useDefaultLayout, useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
-import NearHomePage from '@/components/near/NearHomePage/Near.HomePage';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 

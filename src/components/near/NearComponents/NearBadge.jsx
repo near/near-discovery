@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { nearStyleVar } from '../NearStyleVar';
 
 const NearBadge = ({ children, className, padding, background }) => {

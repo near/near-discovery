@@ -1,5 +1,5 @@
-import * as nearAPI from 'near-api-js';
 import { createAction } from '@near-wallet-selector/wallet-utils';
+import * as nearAPI from 'near-api-js';
 
 const {
   transactions: { encodeSignedDelegate },

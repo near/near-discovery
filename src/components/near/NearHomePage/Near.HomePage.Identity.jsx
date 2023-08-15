@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import NearBadge from '../NearComponents/NearBadge';
+
+import NearGradientBall from '@/components/near/NearComponents/NearGradientBall';
 import { HIDE_LINE_SCREEN, HorizontalLine, TopLine, VerticalLine } from '@/components/near/NearComponents/NearLine';
 import { StyledT2, StyledT4 } from '@/components/near/NearStyled';
 import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
-import NearGradientBall from '@/components/near/NearComponents/NearGradientBall';
+
+import NearBadge from '../NearComponents/NearBadge';
 
 const NearHomePageIdentity = () => {
   return (

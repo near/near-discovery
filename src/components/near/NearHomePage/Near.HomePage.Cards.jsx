@@ -1,12 +1,14 @@
-import nearAsset from '../NearComponents/NearAsset';
-import styled from 'styled-components';
-import NearCard from '../NearComponents/NearCard';
-import { Autoplay } from 'swiper/modules';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import NearImage from '@/components/near/NearComponents/NearImage';
-import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 import { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
+import styled from 'styled-components';
+import { Autoplay } from 'swiper/modules';
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+import NearImage from '@/components/near/NearComponents/NearImage';
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+
+import nearAsset from '../NearComponents/NearAsset';
+import NearCard from '../NearComponents/NearCard';
 
 const NearHomePageCards = () => {
   const router = useRouter();

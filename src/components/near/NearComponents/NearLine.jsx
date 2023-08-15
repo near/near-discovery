@@ -1,6 +1,8 @@
-import { LARGE_SCREEN } from '../NearStyleVar';
 import styled from 'styled-components';
+
 import NearGradientBall from '@/components/near/NearComponents/NearGradientBall';
+
+import { LARGE_SCREEN } from '../NearStyleVar';
 
 export const HorizontalLine = ({ style, className }) => {
   return <StyledHorizontalLine style={style} className={className} />;
