@@ -14,6 +14,9 @@ interface SignInOptions {
     // TODO: Replace following with single callbackUrl
     successUrl?: string;
     failureUrl?: string;
+    email?: string;
+    accountId?: string;
+    isRecovery?: boolean;
 }
 
 /**
@@ -81,9 +84,9 @@ export class FastAuthWalletConnection {
           });
       }
       const iframe = document.createElement("iframe");
-      iframe.style.display = "none";
       iframe.allow = "publickey-credentials-create *; publickey-credentials-get *; clipboard-write"
-      document.body.appendChild(iframe);
+      iframe.style.width = '100%'
+      iframe.style.height = '100%'
       this._iframe = iframe;
       this._near = near;
       const authDataKey = appKeyPrefix + LOCAL_STORAGE_KEY_SUFFIX;
@@ -156,7 +159,7 @@ export class FastAuthWalletConnection {
    * wallet.requestSignIn({ contractId: 'account-with-deploy-contract.near' });
    * ```
    */
-  async requestSignIn({ contractId, methodNames, successUrl, failureUrl }: SignInOptions) {
+  async requestSignIn({ contractId, methodNames, successUrl, failureUrl, email, accountId, isRecovery }: SignInOptions) {
       const currentUrl = new URL(window.location.href);
       const newUrl = new URL(this._walletBaseUrl + LOGIN_WALLET_URL_SUFFIX);
       newUrl.searchParams.set('success_url', successUrl || currentUrl.href);
@@ -178,8 +181,31 @@ export class FastAuthWalletConnection {
           });
       }
 
+      if (email) {
+        newUrl.searchParams.append('email', email);
+      }
+      if (accountId) {
+        newUrl.searchParams.append('accountId', accountId);
+      }
+      if (isRecovery !== undefined) {
+        newUrl.searchParams.append('isRecovery', isRecovery + '');
+      }
+
       this._iframe.src = newUrl.toString();
-      this._iframe.style.display = "block";
+      var myDialog = document.createElement("dialog");
+      myDialog.style.width = '50%';
+      myDialog.style.height = '50%';
+      document.body.appendChild(myDialog)
+      myDialog.appendChild(this._iframe);
+      myDialog.showModal();
+      myDialog.addEventListener('click', function(event) {
+        var rect = myDialog.getBoundingClientRect();
+        var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+        if (!isInDialog) {
+            myDialog.close();
+        }
+      });
   }
 
   /**

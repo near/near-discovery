@@ -34,6 +34,7 @@ const SignUpPage: NextPageWithLayout = () => {
   } = useForm();
   const formValues = watch();
   const signedIn = useAuthStore((store) => store.signedIn);
+  const vmNear = useAuthStore((store) => store.vmNear);
 
   // redirect to home upon signing in
   useEffect(() => {
@@ -84,19 +85,16 @@ const SignUpPage: NextPageWithLayout = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.username || !data.email) return;
-    try {
-      const fullAccountId = `${data.username}.${network.fastAuth.accountIdSuffix}`;
-      const { publicKey, accountId, email } = await handleCreateAccount(fullAccountId, data.email, false);
-      router.push(
-        `/verify-email?accountId=${encodeURIComponent(accountId)}&email=${encodeURIComponent(email)}` +
-          (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''),
+    vmNear.selector
+      .then((selector) => selector.wallet('fast-auth-wallet'))
+      .then((fastAuthWallet) =>
+        fastAuthWallet.signIn({
+          contractId: vmNear.config.contractName,
+          email: data.email,
+          accountId: data.username,
+          isRecovery: false
+        }),
       );
-    } catch (error: any) {
-      openToast({
-        type: 'ERROR',
-        title: error.message,
-      });
-    }
   });
 
   useEffect(() => {

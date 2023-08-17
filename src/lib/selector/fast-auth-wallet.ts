@@ -22,7 +22,7 @@ export interface FastAuthWalletParams {
 }
 
 interface FastAuthWalletState {
-  wallet: nearAPI.WalletConnection;
+  wallet: FastAuthWalletConnection;
   keyStore: nearAPI.keyStores.BrowserLocalStorageKeyStore;
 }
 
@@ -131,7 +131,7 @@ const FastAuthWallet: WalletBehaviourFactory<
   };
 
   return {
-    async signIn({ contractId, methodNames, successUrl, failureUrl }) {
+    async signIn({ contractId, methodNames, successUrl, failureUrl, email, accountId, isRecovery }) {
       const existingAccounts = await getAccounts();
 
       if (existingAccounts.length) {
@@ -143,6 +143,9 @@ const FastAuthWallet: WalletBehaviourFactory<
         methodNames,
         successUrl,
         failureUrl,
+        email,
+        accountId,
+        isRecovery
       });
 
       return getAccounts();
