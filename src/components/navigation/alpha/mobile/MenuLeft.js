@@ -221,7 +221,7 @@ export function MenuLeft(props) {
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/jgodwill.near/widget/GenaDrop.MultiListing">
+            <NavigationButton route="/agwaze.near/widget/GenaDrop.NFTListing">
               <Components />
               List
             </NavigationButton>
