@@ -10,6 +10,7 @@ type AuthState = {
   requestSignInWithWallet: () => void;
   requestSignMessage: (data: string) => void;
   signedIn: boolean;
+  vmNear: any;
 };
 
 type AuthStore = AuthState & {
@@ -26,4 +27,5 @@ export const useAuthStore = create<AuthStore>((set) => ({
   requestSignMessage: () => undefined,
   signedIn: false,
   set: (state) => set((previousState) => ({ ...previousState, ...state })),
+  vmNear: null,
 }));

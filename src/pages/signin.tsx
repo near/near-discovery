@@ -21,6 +21,7 @@ const SignInPage: NextPageWithLayout = () => {
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
+  const vmNear = useAuthStore((store) => store.vmNear);
   const { redirect } = useSignInRedirect();
 
   useEffect(() => {
@@ -32,29 +33,17 @@ const SignInPage: NextPageWithLayout = () => {
   useClearCurrentComponent();
 
   const onSubmit = handleSubmit(async (data) => {
-    if (!data.email) return;
+    if (!data.email || !vmNear) return;
 
-    try {
-      const { publicKey, email } = await handleCreateAccount(null, data.email, true);
-      router.push(
-        `/verify-email?email=${email}&isRecovery=true` +
-          (publicKey ? `&publicKey=${encodeURIComponent(publicKey)}` : ''),
+    vmNear.selector
+      .then((selector) => selector.wallet('fast-auth-wallet'))
+      .then((fastAuthWallet) =>
+        fastAuthWallet.signIn({
+          contractId: vmNear.config.contractName,
+          email: data.email,
+          isRecovery: true,
+        }),
       );
-    } catch (error: any) {
-      console.log(error);
-
-      if (typeof error?.message === 'string') {
-        openToast({
-          type: 'ERROR',
-          title: error.message,
-        });
-      } else {
-        openToast({
-          type: 'ERROR',
-          title: 'Something went wrong',
-        });
-      }
-    }
   });
 
   return (
