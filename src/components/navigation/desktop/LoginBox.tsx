@@ -125,6 +125,7 @@ export const LoginBox = () => {
         'warmup',
         'ZKEVM.ExecuteRecords',
         'ZKEVM.QuestionList',
+        "ZKEVM-all-in-one"
       ];
     }
     const r = router.asPath.split('/').pop() || '';
