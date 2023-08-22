@@ -13,17 +13,23 @@ import * as nearAPI from "near-api-js";
 import icon from "./fast-auth-icon";
 import { FastAuthWalletConnection } from "./fastAuthWalletConnection";
 
+const {
+  transactions: { encodeSignedDelegate },
+} = nearAPI
+
 export interface FastAuthWalletParams {
   walletUrl?: string;
   iconUrl?: string;
   deprecated?: boolean;
   successUrl?: string;
   failureUrl?: string;
+  relayerUrl?: string;
 }
 
 interface FastAuthWalletState {
   wallet: FastAuthWalletConnection;
   keyStore: nearAPI.keyStores.BrowserLocalStorageKeyStore;
+  near: any;
 }
 
 interface FastAuthWalletExtraOptions {
@@ -63,13 +69,14 @@ const setupWalletState = async (
   return {
     wallet,
     keyStore,
+    near
   };
 };
 
 const FastAuthWallet: WalletBehaviourFactory<
   BrowserWallet,
   { params: FastAuthWalletExtraOptions }
-> = async ({ metadata, options, store, params, logger }) => {
+> = async ({ metadata, options, store, params, logger, relayerUrl }) => {
   const _state = await setupWalletState(params, options.network);
   const getAccounts = async (): Promise<Array<Account>> => {
     const accountId = _state.wallet.getAccountId();
@@ -165,46 +172,29 @@ const FastAuthWallet: WalletBehaviourFactory<
       throw new Error(`Method not supported by ${metadata.name}`);
     },
 
-    async signAndSendTransaction({
-      signerId,
-      receiverId,
-      actions,
-      callbackUrl,
-    }) {
-      logger.log("signAndSendTransaction", {
-        signerId,
-        receiverId,
-        actions,
-        callbackUrl,
-      });
-
-      const { contract } = store.getState();
-
-      if (!_state.wallet.isSignedIn() || !contract) {
-        throw new Error("Wallet not signed in");
-      }
-
+    async signAndSendTransaction({ receiverId, actions, signerId }) {
       const account = _state.wallet.account();
-
-      return account["signAndSendTransaction"]({
-        receiverId: receiverId || contract.contractId,
+  
+      const signedDelegate = await account.signedDelegate({
         actions: actions.map((action) => createAction(action)),
-        walletCallbackUrl: callbackUrl,
+        blockHeightTtl: 60,
+        receiverId,
+      });
+  
+      await fetch(relayerUrl, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
+        headers: new Headers({ 'Content-Type': 'application/json' }),
       });
     },
-
-    async signAndSendTransactions({ transactions, callbackUrl }) {
-      logger.log("signAndSendTransactions", { transactions, callbackUrl });
-
-      if (!_state.wallet.isSignedIn()) {
-        throw new Error("Wallet not signed in");
+  
+    async signAndSendTransactions({ transactions }) {
+  
+      for (let { receiverId, signerId, actions } of transactions) {
+        await this.signAndSendTransaction({ receiverId, signerId, actions });
       }
-
-      return _state.wallet.requestSignTransactions({
-        transactions: await transformTransactions(transactions),
-        callbackUrl,
-      });
-    },
+    }
   };
 };
 
@@ -214,6 +204,7 @@ export function setupFastAuthWallet({
   deprecated = false,
   successUrl = "",
   failureUrl = "",
+  relayerUrl = ""
 }: FastAuthWalletParams = {}): WalletModuleFactory<BrowserWallet> {
   return async (moduleOptions) => {
     return {
@@ -232,6 +223,7 @@ export function setupFastAuthWallet({
       init: (options) => {
         return FastAuthWallet({
           ...options,
+          relayerUrl,
           params: {
             walletUrl: resolveWalletUrl(options.options.network, walletUrl),
           },
