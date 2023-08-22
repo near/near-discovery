@@ -74,12 +74,12 @@ export class FastAuthWalletConnection {
                   if(property === 'getAccountId') {
                       return () => '';
                   }
-                  if(target[property] && typeof target[property] === 'function') {
+                  if(target[property as keyof FastAuthWalletConnection] && typeof target[property as keyof FastAuthWalletConnection] === 'function') {
                       return () => {
                           throw new Error('No window found in context, please ensure you are using WalletConnection on the browser');
                       };
                   }
-                  return target[property];
+                  return target[property as keyof FastAuthWalletConnection];
               }
           });
       }
@@ -192,15 +192,15 @@ export class FastAuthWalletConnection {
       }
 
       this._iframe.src = newUrl.toString();
-      let myDialog = document.createElement("dialog");
+      const myDialog = document.createElement("dialog");
       myDialog.style.width = '50%';
       myDialog.style.height = '50%';
       document.body.appendChild(myDialog)
       myDialog.appendChild(this._iframe);
       myDialog.showModal();
       myDialog.addEventListener('click', function(event) {
-        let rect = myDialog.getBoundingClientRect();
-        let isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+        const rect = myDialog.getBoundingClientRect();
+        const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
           rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
         if (!isInDialog) {
             myDialog.close();
