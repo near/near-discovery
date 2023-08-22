@@ -192,15 +192,15 @@ export class FastAuthWalletConnection {
       }
 
       this._iframe.src = newUrl.toString();
-      var myDialog = document.createElement("dialog");
+      let myDialog = document.createElement("dialog");
       myDialog.style.width = '50%';
       myDialog.style.height = '50%';
       document.body.appendChild(myDialog)
       myDialog.appendChild(this._iframe);
       myDialog.showModal();
       myDialog.addEventListener('click', function(event) {
-        var rect = myDialog.getBoundingClientRect();
-        var isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+        let rect = myDialog.getBoundingClientRect();
+        let isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
           rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
         if (!isInDialog) {
             myDialog.close();
