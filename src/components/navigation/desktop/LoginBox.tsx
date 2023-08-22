@@ -62,6 +62,9 @@ const NearSignInButton = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #02051e;
+  position: fixed;
+  top:28px;
+  right:30px;
   .near-icon-wrapper {
     width: 32px;
     height: 32px;
@@ -89,6 +92,9 @@ const ZKEVMSignInButton = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #ffffff;
+   position: fixed;
+  top:28px;
+  right:30px;
 `;
 
 const LoginArea = styled.div`
