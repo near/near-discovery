@@ -36,8 +36,8 @@ const SignInPage: NextPageWithLayout = () => {
     if (!data.email || !vmNear) return;
 
     vmNear.selector
-      .then((selector) => selector.wallet('fast-auth-wallet'))
-      .then((fastAuthWallet) =>
+      .then((selector: any) => selector.wallet('fast-auth-wallet'))
+      .then((fastAuthWallet: any) =>
         fastAuthWallet.signIn({
           contractId: vmNear.config.contractName,
           email: data.email,
