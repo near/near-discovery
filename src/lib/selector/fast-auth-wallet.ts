@@ -43,9 +43,9 @@ const resolveWalletUrl = (network: Network, walletUrl?: string) => {
 
   switch (network.networkId) {
     case "mainnet":
-      return "http://localhost:3000";
+      return "https://wallet.near.org/fastauth";
     case "testnet":
-      return "http://localhost:3000";
+      return "https://wallet.testnet.near.org/fastauth";
     default:
       throw new Error("Invalid wallet url");
   }
@@ -195,6 +195,47 @@ const FastAuthWallet: WalletBehaviourFactory<
         await this.signAndSendTransaction({ receiverId, signerId, actions });
       }
     }
+
+    // async signAndSendTransaction({
+    //   signerId,
+    //   receiverId,
+    //   actions,
+    //   callbackUrl,
+    // }) {
+    //   logger.log("signAndSendTransaction", {
+    //     signerId,
+    //     receiverId,
+    //     actions,
+    //     callbackUrl,
+    //   });
+
+    //   const { contract } = store.getState();
+
+    //   if (!_state.wallet.isSignedIn() || !contract) {
+    //     throw new Error("Wallet not signed in");
+    //   }
+
+    //   const account = _state.wallet.account();
+
+    //   return account["signAndSendTransaction"]({
+    //     receiverId: receiverId || contract.contractId,
+    //     actions: actions.map((action) => createAction(action)),
+    //     walletCallbackUrl: callbackUrl,
+    //   });
+    // },
+
+    // async signAndSendTransactions({ transactions, callbackUrl }) {
+    //   logger.log("signAndSendTransactions", { transactions, callbackUrl });
+
+    //   if (!_state.wallet.isSignedIn()) {
+    //     throw new Error("Wallet not signed in");
+    //   }
+
+    //   return _state.wallet.requestSignTransactions({
+    //     transactions: await transformTransactions(transactions),
+    //     callbackUrl,
+    //   });
+    // },
   };
 };
 
