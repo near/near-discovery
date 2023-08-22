@@ -191,7 +191,7 @@ const FastAuthWallet: WalletBehaviourFactory<
   
     async signAndSendTransactions({ transactions }) {
   
-      for (let { receiverId, signerId, actions } of transactions) {
+      for (const { receiverId, signerId, actions } of transactions) {
         await this.signAndSendTransaction({ receiverId, signerId, actions });
       }
     }
