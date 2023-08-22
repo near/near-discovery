@@ -89,7 +89,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     nearcolumn: 'ref-admin.near/widget/ref-template-page',
     warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
     zkevmcolumn: 'guessme.near/widget/ZKEVM.Template',
-    tabNavigation:'bluebiu.near/widget/TabNavigation',
+    tabNavigation:'ref-admin.near/widget/TabNavigation',
   },
 
   mainnet: {
@@ -134,6 +134,6 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     nearcolumn: 'ref-admin.near/widget/ref-template-page',
     warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
     zkevmcolumn: 'guessme.near/widget/ZKEVM.Template',
-    tabNavigation:'bluebiu.near/widget/TabNavigation',
+    tabNavigation:'ref-admin.near/widget/TabNavigation',
   },
 };
