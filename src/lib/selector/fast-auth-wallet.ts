@@ -34,6 +34,7 @@ interface FastAuthWalletState {
 
 interface FastAuthWalletExtraOptions {
   walletUrl: string;
+  relayerUrl: string;
 }
 
 const resolveWalletUrl = (network: Network, walletUrl?: string) => {
@@ -76,7 +77,7 @@ const setupWalletState = async (
 const FastAuthWallet: WalletBehaviourFactory<
   BrowserWallet,
   { params: FastAuthWalletExtraOptions }
-> = async ({ metadata, options, store, params, logger, relayerUrl }) => {
+> = async ({ metadata, options, store, params, logger }) => {
   const _state = await setupWalletState(params, options.network);
   const getAccounts = async (): Promise<Array<Account>> => {
     const accountId = _state.wallet.getAccountId();
@@ -138,7 +139,7 @@ const FastAuthWallet: WalletBehaviourFactory<
   };
 
   return {
-    async signIn({ contractId, methodNames, successUrl, failureUrl, email, accountId, isRecovery }) {
+    async signIn({ contractId, methodNames, successUrl, failureUrl, email, accountId, isRecovery }: any) {
       const existingAccounts = await getAccounts();
 
       if (existingAccounts.length) {
@@ -178,10 +179,10 @@ const FastAuthWallet: WalletBehaviourFactory<
       const signedDelegate = await account.signedDelegate({
         actions: actions.map((action) => createAction(action)),
         blockHeightTtl: 60,
-        receiverId,
+        receiverId: receiverId as string,
       });
   
-      await fetch(relayerUrl, {
+      await fetch(params.relayerUrl, {
         method: 'POST',
         mode: 'cors',
         body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
@@ -190,9 +191,21 @@ const FastAuthWallet: WalletBehaviourFactory<
     },
   
     async signAndSendTransactions({ transactions }) {
+      const account = _state.wallet.account();
   
       for (const { receiverId, signerId, actions } of transactions) {
-        await this.signAndSendTransaction({ receiverId, signerId, actions });
+        const signedDelegate = await account.signedDelegate({
+          actions: actions.map((action) => createAction(action)),
+          blockHeightTtl: 60,
+          receiverId: receiverId as string,
+        });
+    
+        await fetch(params.relayerUrl, {
+          method: 'POST',
+          mode: 'cors',
+          body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
+          headers: new Headers({ 'Content-Type': 'application/json' }),
+        });
       }
     }
 
@@ -264,9 +277,9 @@ export function setupFastAuthWallet({
       init: (options) => {
         return FastAuthWallet({
           ...options,
-          relayerUrl,
           params: {
             walletUrl: resolveWalletUrl(options.options.network, walletUrl),
+            relayerUrl
           },
         });
       },
