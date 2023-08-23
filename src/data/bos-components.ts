@@ -39,10 +39,11 @@ type NetworkComponents = {
   widgetMetadata: string;
   widgetMetadataEditor: string;
   wrapper: string;
-  nearcolumn: string;
+  near: string;
   warmUp: string;
-  zkevmcolumn: string;
-  tabNavigation:string;
+  'polygon-zkevm': string;
+  tabNavigation: string;
+  base: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -86,10 +87,11 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
     widgetMetadataEditor: 'discom.testnet/widget/WidgetMetadataEditor',
     wrapper: 'discom.testnet/widget/DIG.Theme',
-    nearcolumn: 'ref-admin.near/widget/ref-template-page',
+    near: 'ref-admin.near/widget/ref-template-page',
     warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
-    zkevmcolumn: 'guessme.near/widget/ZKEVM.Template',
-    tabNavigation:'ref-admin.near/widget/TabNavigation',
+    'polygon-zkevm': 'guessme.near/widget/ZKEVM.Template',
+    tabNavigation: 'ref-admin.near/widget/TabNavigation',
+    base: 'bluebiu.near/widget/Base.BaseDapps',
   },
 
   mainnet: {
@@ -131,9 +133,10 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'mob.near/widget/WidgetMetadata',
     widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
     wrapper: 'near/widget/DIG.Theme',
-    nearcolumn: 'ref-admin.near/widget/ref-template-page',
+    near: 'ref-admin.near/widget/ref-template-page',
     warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
-    zkevmcolumn: 'guessme.near/widget/ZKEVM.Template',
-    tabNavigation:'ref-admin.near/widget/TabNavigation',
+    'polygon-zkevm': 'guessme.near/widget/ZKEVM.Template',
+    tabNavigation: 'ref-admin.near/widget/TabNavigation',
+    base: 'bluebiu.near/widget/Base.BaseDapps',
   },
 };
