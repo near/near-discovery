@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
@@ -6,6 +7,7 @@ import { LoginBox } from '../navigation/desktop/LoginBox';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useCurrentComponentStore } from '@/stores/current-component';
+import { useRouter } from 'next/router';
 
 
 
@@ -42,8 +44,30 @@ export function DefaultLayout({ children }: Props) {
 
   const refTemplatepageSrc = 'ref-admin.near/widget/ref-template-page'
   const ZKEVMTemplateSrc = 'guessme.near/widget/ZKEVM.Template'
+  const ZKEVMTemplateWarmSrc = 'guessme.near/widget/ZKEVMWarmUp.warm-up'
 
-  const showTab = src !== refTemplatepageSrc && src !== ZKEVMTemplateSrc;
+  const [showTab, setShowTab] = useState(false);
+
+  const router = useRouter()
+
+  const pathName = router.pathname;
+
+  useEffect(() => {
+    setShowTab(
+      src !== refTemplatepageSrc &&
+        src !== ZKEVMTemplateSrc &&
+        src !== ZKEVMTemplateWarmSrc &&
+        src !== null
+    );
+    // console.log('src', src);
+  }, [src]);
+
+
+  useEffect(()=>{ 
+    if(pathName === '/'){
+      setShowTab(false)
+    }
+  },[pathName])
 
   return (
     <Layout>

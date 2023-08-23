@@ -102,6 +102,9 @@ const LoginArea = styled.div`
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
+  position: fixed;
+  top:28px;
+  right:30px;
   @media (min-width: 901px) {
     display: flex;
   }
