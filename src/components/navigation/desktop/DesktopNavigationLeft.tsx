@@ -464,7 +464,11 @@ export const DesktopNavigationLeft = () => {
                     setShowChildBox(false);
                   }}
                 >
-                  <div className={`item ${isActive('near') || isActive('polygon-zkevm') ? 'active' : ''}`}>
+                  <div
+                    className={`item ${
+                      isActive('near') || isActive('polygon-zkevm') || isActive('base') ? 'active' : ''
+                    }`}
+                  >
                     <div className="icon">{templatesIcon}</div>
                   </div>
                   <div className="childBox" style={{ display: showChildBox ? 'block' : 'none' }}>
@@ -525,7 +529,9 @@ export const DesktopNavigationLeft = () => {
                     onClick={() => {
                       setOpenChainsPc(!openChainsPc);
                     }}
-                    className={`item parentItem ${isActive('near') || isActive('polygon-zkevm') ? 'active' : ''}`}
+                    className={`item parentItem ${
+                      isActive('near') || isActive('polygon-zkevm') || isActive('base') ? 'active' : ''
+                    }`}
                   >
                     <div className="icon">{templatesIcon}</div>Chains
                     <ArrowPcIcon

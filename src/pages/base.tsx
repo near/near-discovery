@@ -20,6 +20,8 @@ const BaseColumn: NextPageWithLayout = () => {
   `;
   return (
     <Container>
+      <div className="title">BASE</div>
+      <p className="subTitle">Using Base conveniently and efficiently</p>
       <ComponentWrapperPage
         src={components.base || ''}
         meta={{ title: 'Connect with the BASE community.', description: 'Become part of the BASE community.' }}

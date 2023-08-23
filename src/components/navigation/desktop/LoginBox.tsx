@@ -136,12 +136,14 @@ export const LoginBox = () => {
         'ZKEVM.QuestionList',
         'ZKEVM-all-in-one',
       ];
+    } else if (name === 'base') {
+      paths = ['base', 'Base.BaseDex'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
   }
 
-  const isZKEVMActive = isActive('polygon-zkevm');
+  const isZKEVMActive = isActive('polygon-zkevm') || isActive('base');
 
   function handleSignIn() {
     flushEvents();
