@@ -196,7 +196,14 @@ export const DesktopNavigationLeft = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [openChains, setOpenChains] = useState(false);
   const [openChainsPc, setOpenChainsPc] = useState(true);
-  const [show_menu_list, set_show_menu_list] = useState(false);
+
+  let storedShowMenu = null;
+
+  if (typeof window !== 'undefined') {
+    storedShowMenu = localStorage.getItem('def-def-show-menu');
+  }
+
+  const [show_menu_list, set_show_menu_list] = useState(storedShowMenu === '1' || false);
   const router = useRouter();
   useEffect(() => {
     if (document.documentElement.clientWidth <= 1023) {
@@ -284,10 +291,18 @@ export const DesktopNavigationLeft = () => {
   function openMenu() {
     set_show_menu_list(true);
     document.body.style.overflow = 'hidden';
+
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('def-def-show-menu', '1');
+    }
   }
   function closeMenu() {
     set_show_menu_list(false);
     document.body.style.overflow = 'auto';
+
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('def-def-show-menu');
+    }
   }
   return (
     <>
@@ -465,7 +480,7 @@ export const DesktopNavigationLeft = () => {
                 </div>
                 <Link className={`item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
                   <div className="icon">{zkevmIcon}</div>
-                  zkEvm Warm up
+                  zkEVM Warm up
                   {isActive('warmup') ? <span className="bag">{visible_bag}</span> : null}
                 </Link>
               </div>
