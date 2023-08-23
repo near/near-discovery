@@ -208,7 +208,7 @@ export const DesktopNavigationLeft = () => {
     if (name == 'nearcolumn') {
       paths = ['ref-home', 'xBox', 'nearcolumn'];
     } else if (name == 'zkevmcolumn') {
-      paths = ['ZKEVMSwap.zkevm-swap', 'ZKEVMSwap.zkevm-bridge', 'ZKEVM.GAMMA', 'ZKEVM.AAVE', 'zkevmcolumn'];
+      paths = ['ZKEVMSwap.zkevm-swap', 'ZKEVM-all-in-one','ZKEVMSwap.zkevm-bridge', 'ZKEVM.GAMMA', 'ZKEVM.AAVE', 'zkevmcolumn'];
     } else if (name == 'warmup') {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
     }
