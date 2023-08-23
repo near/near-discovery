@@ -118,6 +118,9 @@ const Container = styled.div`
   @media (min-width: 901px) {
     display: block;
   }
+  .soonIcon{
+    margin-left:2px;
+  }
 `;
 const ContainerMobile = styled.div`
   display: none;
@@ -190,6 +193,14 @@ const ContainerMobile = styled.div`
     }
   }
 `;
+
+const soonIcon = (
+  <svg width="46" height="16" viewBox="0 0 46 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5.95143 2.39672C6.58841 0.940775 8.02687 0 9.61606 0H39.8839C42.7685 0 44.7048 2.96052 43.5486 5.60328L40.0486 13.6033C39.4116 15.0592 37.9731 16 36.3839 16H6.11606C3.23146 16 1.29523 13.0395 2.45143 10.3967L5.95143 2.39672Z" fill="#37394F" />
+    <path d="M11.036 12.12C10.54 12.12 10.052 12.028 9.572 11.844C9.092 11.652 8.672 11.356 8.312 10.956L8.876 10.212C9.26 10.556 9.628 10.808 9.98 10.968C10.332 11.128 10.72 11.208 11.144 11.208C11.592 11.208 11.98 11.148 12.308 11.028C12.636 10.908 12.892 10.728 13.076 10.488C13.26 10.24 13.352 9.936 13.352 9.576C13.352 9.28 13.268 9.044 13.1 8.868C12.932 8.692 12.68 8.572 12.344 8.508L11.012 8.244C10.428 8.132 10 7.916 9.728 7.596C9.456 7.268 9.32 6.888 9.32 6.456C9.32 5.96 9.44 5.516 9.68 5.124C9.92 4.732 10.264 4.424 10.712 4.2C11.168 3.976 11.712 3.864 12.344 3.864C12.8 3.864 13.264 3.944 13.736 4.104C14.216 4.264 14.628 4.512 14.972 4.848L14.42 5.604C14.14 5.356 13.824 5.156 13.472 5.004C13.128 4.852 12.756 4.776 12.356 4.776C11.74 4.776 11.256 4.912 10.904 5.184C10.552 5.448 10.376 5.82 10.376 6.3C10.376 6.58 10.46 6.8 10.628 6.96C10.796 7.112 11.056 7.22 11.408 7.284L12.74 7.548C13.124 7.62 13.436 7.752 13.676 7.944C13.924 8.136 14.104 8.36 14.216 8.616C14.336 8.872 14.396 9.144 14.396 9.432C14.396 9.992 14.26 10.472 13.988 10.872C13.716 11.272 13.328 11.58 12.824 11.796C12.32 12.012 11.724 12.12 11.036 12.12ZM18.2216 12.12C17.6936 12.12 17.2416 12.012 16.8656 11.796C16.4896 11.58 16.1976 11.288 15.9896 10.92C15.7896 10.552 15.6896 10.14 15.6896 9.684C15.6896 8.98 15.8296 8.372 16.1096 7.86C16.3976 7.34 16.7936 6.94 17.2976 6.66C17.8096 6.38 18.3976 6.24 19.0616 6.24C19.5896 6.24 20.0416 6.348 20.4176 6.564C20.7936 6.78 21.0816 7.072 21.2816 7.44C21.4896 7.8 21.5936 8.212 21.5936 8.676C21.5936 9.38 21.4496 9.992 21.1616 10.512C20.8816 11.024 20.4856 11.42 19.9736 11.7C19.4696 11.98 18.8856 12.12 18.2216 12.12ZM18.3176 11.268C18.7656 11.268 19.1616 11.164 19.5056 10.956C19.8496 10.748 20.1176 10.456 20.3096 10.08C20.5016 9.696 20.5976 9.244 20.5976 8.724C20.5976 8.244 20.4536 7.852 20.1656 7.548C19.8776 7.244 19.4776 7.092 18.9656 7.092C18.5176 7.092 18.1216 7.196 17.7776 7.404C17.4336 7.612 17.1656 7.908 16.9736 8.292C16.7816 8.668 16.6856 9.116 16.6856 9.636C16.6856 10.116 16.8296 10.508 17.1176 10.812C17.4056 11.116 17.8056 11.268 18.3176 11.268ZM25.2997 12.12C24.7717 12.12 24.3197 12.012 23.9437 11.796C23.5677 11.58 23.2757 11.288 23.0677 10.92C22.8677 10.552 22.7677 10.14 22.7677 9.684C22.7677 8.98 22.9077 8.372 23.1877 7.86C23.4757 7.34 23.8717 6.94 24.3757 6.66C24.8877 6.38 25.4757 6.24 26.1397 6.24C26.6677 6.24 27.1197 6.348 27.4957 6.564C27.8717 6.78 28.1597 7.072 28.3597 7.44C28.5677 7.8 28.6717 8.212 28.6717 8.676C28.6717 9.38 28.5277 9.992 28.2397 10.512C27.9597 11.024 27.5637 11.42 27.0517 11.7C26.5477 11.98 25.9637 12.12 25.2997 12.12ZM25.3957 11.268C25.8437 11.268 26.2397 11.164 26.5837 10.956C26.9277 10.748 27.1957 10.456 27.3877 10.08C27.5797 9.696 27.6757 9.244 27.6757 8.724C27.6757 8.244 27.5317 7.852 27.2437 7.548C26.9557 7.244 26.5557 7.092 26.0437 7.092C25.5957 7.092 25.1997 7.196 24.8557 7.404C24.5117 7.612 24.2437 7.908 24.0517 8.292C23.8597 8.668 23.7637 9.116 23.7637 9.636C23.7637 10.116 23.9077 10.508 24.1957 10.812C24.4837 11.116 24.8837 11.268 25.3957 11.268ZM29.7018 12L30.6858 6.36H31.6218L31.4898 7.092C31.7298 6.788 32.0018 6.572 32.3058 6.444C32.6178 6.308 33.0018 6.24 33.4578 6.24C33.8898 6.24 34.2338 6.3 34.4898 6.42C34.7538 6.54 34.9498 6.708 35.0778 6.924C35.2058 7.132 35.2778 7.376 35.2938 7.656C35.3178 7.928 35.3058 8.22 35.2578 8.532L34.6458 12H33.6738L34.2618 8.64C34.3018 8.464 34.3178 8.288 34.3098 8.112C34.3098 7.928 34.2738 7.76 34.2018 7.608C34.1378 7.456 34.0178 7.332 33.8418 7.236C33.6738 7.14 33.4378 7.092 33.1338 7.092C32.6138 7.092 32.1898 7.252 31.8618 7.572C31.5338 7.884 31.3138 8.352 31.2018 8.976L30.6738 12H29.7018Z" fill="#979ABE" />
+  </svg>
+)
+
 export const DesktopNavigationLeft = () => {
   const [putMenu, setPutMenu] = useState(false);
   const [showChildBox, setShowChildBox] = useState(false);
@@ -350,14 +361,71 @@ export const DesktopNavigationLeft = () => {
                     onClick={closeMenu}
                   >
                     Mantle
-                  </Link> 
+                  </Link>
                   <Link
                     className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
                     href=""
                     onClick={closeMenu}
                   >
                     zkSync
-                  </Link> 
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
+                    href=""
+                    onClick={closeMenu}
+                  >
+                    Arbitrum
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                    href=""
+                    onClick={closeMenu}
+                  >
+                    Avalanche
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
+                    href=""
+                    onClick={closeMenu}
+                  >
+                    BSC
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Polygon') ? 'active' : ''}`}
+                    href=""
+                    onClick={closeMenu}
+                  >
+                    Polygon
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
+                    href=""
+                    onClick={closeMenu}
+                  >
+                    Optimism
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
+                    href=""
+                    onClick={closeMenu}
+                  >
+                    Linea
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                    href=""
+                    onClick={closeMenu}
+                  >
+                    Metis
+                    <span className='soonIcon'> {soonIcon}</span>
+                  </Link>
                 </div>
               </div>
               <Link className={`item ${isActive('warmup') ? 'active' : ''}`} onClick={closeMenu} href="/warmup">
@@ -411,7 +479,28 @@ export const DesktopNavigationLeft = () => {
                       Mantle
                     </Link>
                     <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="">
-                      zkSync
+                      zkSync <span className='soonIcon'> {soonIcon}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="">
+                      Arbitrum  <span className='soonIcon'> {soonIcon}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`} href="">
+                      Avalanche  <span className='soonIcon'> {soonIcon}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`} href="">
+                      BSC  <span className='soonIcon'> {soonIcon}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('polygon') ? 'active' : ''}`} href="">
+                      Polygon  <span className='soonIcon'> {soonIcon}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('Optimism') ? 'active' : ''}`} href="">
+                      Optimism  <span className='soonIcon'> {soonIcon}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`} href="">
+                      Linea  <span className='soonIcon'> {soonIcon}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`} href="">
+                      Metis <span className='soonIcon'> {soonIcon}</span>
                     </Link>
                   </div>
                 </div>
@@ -458,7 +547,28 @@ export const DesktopNavigationLeft = () => {
                       Mantle<span className="bag">{isActive('mantle') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="">
-                      zkSync<span className="bag">{isActive('zkSync') ? visible_bag : null}</span>
+                      zkSync <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('zkSync') ? visible_bag : null}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="">
+                      Arbitrum <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`} href="">
+                      Avalanche <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`} href="">
+                      BSC <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('BSC') ? visible_bag : null}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('Polygon') ? 'active' : ''}`} href="">
+                      Polygon <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('Polygon') ? visible_bag : null}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('Optimism') ? 'active' : ''}`} href="">
+                      Optimism <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('Optimism') ? visible_bag : null}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`} href="">
+                      Linea <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('Linea') ? visible_bag : null}</span>
+                    </Link>
+                    <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`} href="">
+                      Metis <span className='soonIcon'> {soonIcon}</span><span className="bag">{isActive('Metis') ? visible_bag : null}</span>
                     </Link>
                   </div>
                 </div>
