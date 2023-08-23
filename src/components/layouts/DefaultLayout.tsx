@@ -45,6 +45,7 @@ export function DefaultLayout({ children }: Props) {
   const refTemplatepageSrc = 'ref-admin.near/widget/ref-template-page'
   const ZKEVMTemplateSrc = 'guessme.near/widget/ZKEVM.Template'
   const ZKEVMTemplateWarmSrc = 'guessme.near/widget/ZKEVMWarmUp.warm-up'
+  const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps'
 
   const [showTab, setShowTab] = useState(false);
 
@@ -55,9 +56,10 @@ export function DefaultLayout({ children }: Props) {
   useEffect(() => {
     setShowTab(
       src !== refTemplatepageSrc &&
-        src !== ZKEVMTemplateSrc &&
-        src !== ZKEVMTemplateWarmSrc &&
-        src !== null
+      src !== ZKEVMTemplateSrc &&
+      src !== ZKEVMTemplateWarmSrc &&
+      src !== BaseSrc &&
+      src !== null
     );
     // console.log('src', src);
   }, [src]);

@@ -43,6 +43,7 @@ type NetworkComponents = {
   warmUp: string;
   'polygon-zkevm': string;
   tabNavigation: string;
+  base: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -90,6 +91,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
     'polygon-zkevm': 'guessme.near/widget/ZKEVM.Template',
     tabNavigation: 'ref-admin.near/widget/TabNavigation',
+    base: 'bluebiu.near/widget/Base.BaseDapps',
   },
 
   mainnet: {
@@ -135,5 +137,6 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
     'polygon-zkevm': 'guessme.near/widget/ZKEVM.Template',
     tabNavigation: 'ref-admin.near/widget/TabNavigation',
+    base: 'bluebiu.near/widget/Base.BaseDapps',
   },
 };
