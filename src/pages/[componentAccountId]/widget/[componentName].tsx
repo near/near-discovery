@@ -33,7 +33,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
             paddingTop: 'var(--body-top-padding)',
           }}
         >
-          <VmComponent
+          {/* <VmComponent
             key={components.tosCheck}
             src={components.tosCheck}
             props={{
@@ -42,7 +42,9 @@ const ViewComponentPage: NextPageWithLayout = () => {
               targetComponent: componentSrc,
               tosName: components.tosContent,
             }}
-          />
+          /> */}
+
+          <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
         </div>
       </div>
     </div>

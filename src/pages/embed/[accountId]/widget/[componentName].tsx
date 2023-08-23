@@ -26,16 +26,7 @@ const EmbedComponentPage: NextPageWithLayout = () => {
 
   return (
     <div className="d-inline-block position-relative overflow-hidden">
-      <VmComponent
-        key={components.tosCheck}
-        src={components.tosCheck}
-        props={{
-          logOut: authStore.logOut,
-          tosName: components.tosContent,
-          targetComponent: componentSrc,
-          targetProps: componentProps,
-        }}
-      />
+      <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
     </div>
   );
 };
