@@ -63,8 +63,8 @@ const NearSignInButton = styled.div`
   text-align: left;
   color: #02051e;
   position: fixed;
-  top:28px;
-  right:30px;
+  top: 28px;
+  right: 30px;
   .near-icon-wrapper {
     width: 32px;
     height: 32px;
@@ -92,9 +92,9 @@ const ZKEVMSignInButton = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #ffffff;
-   position: fixed;
-  top:28px;
-  right:30px;
+  position: fixed;
+  top: 28px;
+  right: 30px;
 `;
 
 const LoginArea = styled.div`
@@ -103,8 +103,8 @@ const LoginArea = styled.div`
   justify-content: flex-end;
   gap: 12px;
   position: fixed;
-  top:28px;
-  right:30px;
+  top: 28px;
+  right: 30px;
   @media (min-width: 901px) {
     display: flex;
   }
@@ -122,26 +122,26 @@ export const LoginBox = () => {
 
   function isActive(name: string) {
     let paths: string[] = [];
-    if (name == 'nearcolumn') {
-      paths = ['ref-home', 'xBox', 'nearcolumn'];
-    } else if (name == 'zkevmcolumn') {
+    if (name == 'near') {
+      paths = ['ref-home', 'xBox', 'near'];
+    } else if (name == 'polygon-zkevm') {
       paths = [
         'ZKEVMSwap.zkevm-swap',
         'ZKEVMSwap.zkevm-bridge',
         'ZKEVM.GAMMA',
         'ZKEVM.AAVE',
-        'zkevmcolumn',
+        'polygon-zkevm',
         'warmup',
         'ZKEVM.ExecuteRecords',
         'ZKEVM.QuestionList',
-        "ZKEVM-all-in-one"
+        'ZKEVM-all-in-one',
       ];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
   }
 
-  const isZKEVMActive = isActive('zkevmcolumn');
+  const isZKEVMActive = isActive('polygon-zkevm');
 
   function handleSignIn() {
     flushEvents();

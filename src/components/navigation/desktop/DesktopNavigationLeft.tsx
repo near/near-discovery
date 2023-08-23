@@ -205,10 +205,17 @@ export const DesktopNavigationLeft = () => {
   }, []);
   function isActive(name: string) {
     let paths: string[] = [];
-    if (name == 'nearcolumn') {
-      paths = ['ref-home', 'xBox', 'nearcolumn'];
-    } else if (name == 'zkevmcolumn') {
-      paths = ['ZKEVMSwap.zkevm-swap', 'ZKEVM-all-in-one', 'ZKEVMSwap.zkevm-bridge', 'ZKEVM.GAMMA', 'ZKEVM.AAVE', 'zkevmcolumn'];
+    if (name == 'near') {
+      paths = ['ref-home', 'xBox', 'near'];
+    } else if (name == 'polygon-zkevm') {
+      paths = [
+        'ZKEVMSwap.zkevm-swap',
+        'ZKEVM-all-in-one',
+        'ZKEVMSwap.zkevm-bridge',
+        'ZKEVM.GAMMA',
+        'ZKEVM.AAVE',
+        'polygon-zkevm',
+      ];
     } else if (name == 'warmup') {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
     }
@@ -273,7 +280,7 @@ export const DesktopNavigationLeft = () => {
     </svg>
   );
 
-  const nearActive = isActive('nearcolumn') || isActive('zkevmcolumn');
+  const nearActive = isActive('near') || isActive('polygon-zkevm');
   function openMenu() {
     set_show_menu_list(true);
     document.body.style.overflow = 'hidden';
@@ -324,40 +331,28 @@ export const DesktopNavigationLeft = () => {
                 </div>
                 <div className={`${openChains ? 'show' : 'hidden'}`}>
                   <Link
-                    className={`item child-item ${isActive('nearcolumn') ? 'active' : ''}`}
-                    href="/nearcolumn"
+                    className={`item child-item ${isActive('near') ? 'active' : ''}`}
+                    href="/near"
                     onClick={closeMenu}
                   >
                     NEAR
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('zkevmcolumn') ? 'active' : ''}`}
-                    href="/zkevmcolumn"
+                    className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
+                    href="/polygon-zkevm"
                     onClick={closeMenu}
                   >
                     Polygon zkEVM
                   </Link>
-                  <Link
-                    className={`item child-item ${isActive('base') ? 'active' : ''}`}
-                    href=""
-                    onClick={closeMenu}
-                  >
+                  <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="" onClick={closeMenu}>
                     Base
                   </Link>
-                  <Link
-                    className={`item child-item ${isActive('mantle') ? 'active' : ''}`}
-                    href=""
-                    onClick={closeMenu}
-                  >
+                  <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="" onClick={closeMenu}>
                     Mantle
-                  </Link> 
-                  <Link
-                    className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
-                    href=""
-                    onClick={closeMenu}
-                  >
+                  </Link>
+                  <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="" onClick={closeMenu}>
                     zkSync
-                  </Link> 
+                  </Link>
                 </div>
               </div>
               <Link className={`item ${isActive('warmup') ? 'active' : ''}`} onClick={closeMenu} href="/warmup">
@@ -394,14 +389,17 @@ export const DesktopNavigationLeft = () => {
                     setShowChildBox(false);
                   }}
                 >
-                  <div className={`item ${isActive('nearcolumn') || isActive('zkevmcolumn') ? 'active' : ''}`}>
+                  <div className={`item ${isActive('near') || isActive('polygon-zkevm') ? 'active' : ''}`}>
                     <div className="icon">{templatesIcon}</div>
                   </div>
                   <div className="childBox" style={{ display: showChildBox ? 'block' : 'none' }}>
-                    <Link className={`item child-item ${isActive('nearcolumn') ? 'active' : ''}`} href="/nearcolumn">
+                    <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
                       NEAR
                     </Link>
-                    <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active' : ''}`} href="/zkevmcolumn">
+                    <Link
+                      className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
+                      href="/polygon-zkevm"
+                    >
                       Polygon zkEVM
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="">
@@ -434,7 +432,7 @@ export const DesktopNavigationLeft = () => {
                     onClick={() => {
                       setOpenChainsPc(!openChainsPc);
                     }}
-                    className={`item parentItem ${isActive('nearcolumn') || isActive('zkevmcolumn') ? 'active' : ''}`}
+                    className={`item parentItem ${isActive('near') || isActive('polygon-zkevm') ? 'active' : ''}`}
                   >
                     <div className="icon">{templatesIcon}</div>Chains
                     <ArrowPcIcon
@@ -445,11 +443,14 @@ export const DesktopNavigationLeft = () => {
                     ></ArrowPcIcon>
                   </div>
                   <div className={`${openChainsPc ? 'show' : 'hidden'}`}>
-                    <Link className={`item child-item ${isActive('nearcolumn') ? 'active' : ''}`} href="/nearcolumn">
-                      NEAR<span className="bag">{isActive('nearcolumn') ? visible_bag : null}</span>
+                    <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
+                      NEAR<span className="bag">{isActive('near') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('zkevmcolumn') ? 'active' : ''}`} href="/zkevmcolumn">
-                      Polygon zkEVM<span className="bag">{isActive('zkevmcolumn') ? visible_bag : null}</span>
+                    <Link
+                      className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
+                      href="/polygon-zkevm"
+                    >
+                      Polygon zkEVM<span className="bag">{isActive('polygon-zkevm') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="">
                       Base<span className="bag">{isActive('base') ? visible_bag : null}</span>
