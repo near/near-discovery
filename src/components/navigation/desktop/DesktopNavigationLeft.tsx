@@ -218,8 +218,11 @@ export const DesktopNavigationLeft = () => {
       ];
     } else if (name == 'warmup') {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
+    } else if (name === 'base') {
+      paths = ['base', 'Base.BaseDex'];
     }
     const r = router.asPath.split('/').pop() || '';
+
     return paths.includes(r);
   }
   const visible_bag = (
@@ -344,7 +347,11 @@ export const DesktopNavigationLeft = () => {
                   >
                     Polygon zkEVM
                   </Link>
-                  <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="" onClick={closeMenu}>
+                  <Link
+                    className={`item child-item ${isActive('base') ? 'active' : ''}`}
+                    href="/base"
+                    onClick={closeMenu}
+                  >
                     Base
                   </Link>
                   <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="" onClick={closeMenu}>
@@ -402,7 +409,7 @@ export const DesktopNavigationLeft = () => {
                     >
                       Polygon zkEVM
                     </Link>
-                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
                       Base
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="">
@@ -452,7 +459,7 @@ export const DesktopNavigationLeft = () => {
                     >
                       Polygon zkEVM<span className="bag">{isActive('polygon-zkevm') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
                       Base<span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="">
