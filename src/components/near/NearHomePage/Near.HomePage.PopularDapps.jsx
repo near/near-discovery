@@ -122,6 +122,10 @@ const NearButtonShared = css`
   width: 247px;
   position: relative;
   line-height: 1;
+
+  &:hover {
+    color: inherit;
+  }
 `;
 
 const NearButton = styled(NearButton2)`
