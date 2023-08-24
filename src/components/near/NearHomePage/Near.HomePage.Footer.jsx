@@ -3,11 +3,15 @@ import styled from 'styled-components';
 import nearAsset from '../NearComponents/NearAsset';
 
 const NearHomePageFooter = () => {
+  const openExternalLink = (url) => {
+    window.open(url);
+  };
+
   return (
     <div className={'d-flex flex-column-reverse flex-md-row justify-content-md-between align-items-center'}>
       <div className={'d-flex gap-md-5 gap-5 mt-4 mb-mt-0'}>
-        <Nav>BOS</Nav>
-        <Nav>near</Nav>
+        <Nav onClick={() => openExternalLink('https://bos.gg')}>BOS</Nav>
+        <Nav onClick={() => openExternalLink('https://near.org')}>NEAR</Nav>
         <Nav>Docs</Nav>
       </div>
       <div className={'d-flex gap-3'}>
@@ -22,6 +26,8 @@ const NearHomePageFooter = () => {
 
 const Nav = styled.div`
   color: #979abe;
+  cursor: pointer;
+
   &:hover {
     color: #fff;
   }

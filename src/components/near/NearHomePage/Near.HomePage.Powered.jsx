@@ -68,6 +68,10 @@ const StyledButton = styled(NearButton2)`
   padding: 15px 35px;
   line-height: 1;
 
+  &:hover {
+    color: #ebf479;
+  }
+
   @media (max-width: ${MEDIUM_SCREEN}) {
     // padding: 10px 20px 11px;
   }
