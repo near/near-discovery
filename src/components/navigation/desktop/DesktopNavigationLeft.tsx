@@ -329,13 +329,7 @@ export const DesktopNavigationLeft = () => {
           <div className={`menu_list ${show_menu_list ? 'show' : 'hidden'}`}>
             <div className="operation">
               {shanshanLogo}
-              <span
-                onClick={() => {
-                  set_show_menu_list(false);
-                }}
-              >
-                {m_closeIcon}
-              </span>
+              <span onClick={closeMenu}>{m_closeIcon}</span>
             </div>
             <div className="list">
               <Link className={`item ${router.asPath == '/' ? 'active' : ''}`} href="/" onClick={closeMenu}>
