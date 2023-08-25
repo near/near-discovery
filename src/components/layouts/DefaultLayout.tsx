@@ -33,6 +33,9 @@ const Layout = styled.div`
     .content{
       width: 100%;
       min-height:100vh;
+      padding-top:70px;
+      padding-right:16px;
+      padding-left:16px;
     }
   }
 `;
@@ -58,7 +61,7 @@ export function DefaultLayout({ children }: Props) {
       src !== refTemplatepageSrc &&
       src !== ZKEVMTemplateSrc &&
       src !== ZKEVMTemplateWarmSrc &&
-      src !== BaseSrc &&
+      src !== BaseSrc && 
       src !== null
     );
     // console.log('src', src);
