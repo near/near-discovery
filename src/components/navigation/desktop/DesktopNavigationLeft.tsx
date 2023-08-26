@@ -93,7 +93,7 @@ const Container = styled.div`
     position: absolute;
     left: 80px;
     top: 0;
-    width: 180px;
+    width: 200px;
     background-color: #373a53;
     border-radius: 16px;
     padding: 10px 10px 4px 10px;
