@@ -358,28 +358,28 @@ export const DesktopNavigationLeft = () => {
                     href="/near"
                     onClick={closeMenu}
                   >
-                    NEAR
+                    NEAR(2)
                   </Link>
                   <Link
                     className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
                     href="/polygon-zkevm"
                     onClick={closeMenu}
                   >
-                    Polygon zkEVM
+                    Polygon zkEVM(5)
                   </Link>
                   <Link
                     className={`item child-item ${isActive('base') ? 'active' : ''}`}
                     href="/base"
                     onClick={closeMenu}
                   >
-                    Base
+                    Base(7)
                   </Link>
                   <Link
                     className={`item child-item ${isActive('mantle') ? 'active' : ''}`}
                     href="/mantle"
                     onClick={closeMenu}
                   >
-                    Mantle
+                    Mantle(4)
                   </Link>
                   <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
                     href="#"
@@ -485,19 +485,19 @@ export const DesktopNavigationLeft = () => {
                   </div>
                   <div className="childBox" style={{ display: showChildBox ? 'block' : 'none' }}>
                     <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
-                      NEAR
+                      NEAR(2)
                     </Link>
                     <Link
                       className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
                       href="/polygon-zkevm"
                     >
-                      Polygon zkEVM
+                      Polygon zkEVM(5)
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base
+                      Base(7)
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle
+                      Mantle(4)
                     </Link>
                     <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
                       href="#"
@@ -573,19 +573,19 @@ export const DesktopNavigationLeft = () => {
                   </div>
                   <div className={`${openChainsPc ? 'show' : 'hidden'}`}>
                     <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
-                      NEAR<span className="bag">{isActive('near') ? visible_bag : null}</span>
+                      NEAR(2)<span className="bag">{isActive('near') ? visible_bag : null}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
                       href="/polygon-zkevm"
                     >
-                      Polygon zkEVM<span className="bag">{isActive('polygon-zkevm') ? visible_bag : null}</span>
+                      Polygon zkEVM(5)<span className="bag">{isActive('polygon-zkevm') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base<span className="bag">{isActive('base') ? visible_bag : null}</span>
+                      Base(7)<span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle<span className="bag">{isActive('mantle') ? visible_bag : null}</span>
+                      Mantle(4)<span className="bag">{isActive('mantle') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
                       href="#"
