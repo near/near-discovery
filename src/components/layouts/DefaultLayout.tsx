@@ -31,6 +31,9 @@ const Layout = styled.div`
     .content {
       width: 100%;
       min-height: 100vh;
+      padding-top: 70px;
+      padding-right: 16px;
+      padding-left: 16px;
     }
   }
 `;

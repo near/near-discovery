@@ -381,51 +381,55 @@ export const DesktopNavigationLeft = () => {
                   >
                     Mantle
                   </Link>
-                  <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="" onClick={closeMenu}>
+                  <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     zkSync
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
                     className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
-                    href=""
-                    onClick={closeMenu}
-                  >
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     Arbitrum
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
                     className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
-                    href=""
-                    onClick={closeMenu}
-                  >
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     Avalanche
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
-                  <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`} href="" onClick={closeMenu}>
+                  <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     BSC
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
                     className={`item child-item ${isActive('Polygon') ? 'active' : ''}`}
-                    href=""
-                    onClick={closeMenu}
-                  >
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     Polygon
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
                     className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
-                    href=""
-                    onClick={closeMenu}
-                  >
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     Optimism
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
-                  <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`} href="" onClick={closeMenu}>
+                  <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     Linea
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
-                  <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`} href="" onClick={closeMenu}>
+                  <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => { event.preventDefault(); }}>
                     Metis
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
@@ -474,9 +478,8 @@ export const DesktopNavigationLeft = () => {
                   }}
                 >
                   <div
-                    className={`item ${
-                      isActive('near') || isActive('polygon-zkevm') || isActive('base') ? 'active' : ''
-                    }`}
+                    className={`item ${isActive('near') || isActive('polygon-zkevm') || isActive('base') ? 'active' : ''
+                      }`}
                   >
                     <div className="icon">{templatesIcon}</div>
                   </div>
@@ -496,28 +499,44 @@ export const DesktopNavigationLeft = () => {
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
                       Mantle
                     </Link>
-                    <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       zkSync <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Arbitrum <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Avalanche <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       BSC <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('polygon') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('polygon') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Polygon <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('Optimism') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Optimism <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Linea <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Metis <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                   </div>
@@ -541,9 +560,8 @@ export const DesktopNavigationLeft = () => {
                     onClick={() => {
                       setOpenChainsPc(!openChainsPc);
                     }}
-                    className={`item parentItem ${
-                      isActive('near') || isActive('polygon-zkevm') || isActive('base') ? 'active' : ''
-                    }`}
+                    className={`item parentItem ${isActive('near') || isActive('polygon-zkevm') || isActive('base') ? 'active' : ''
+                      }`}
                   >
                     <div className="icon">{templatesIcon}</div>Chains
                     <ArrowPcIcon
@@ -569,35 +587,51 @@ export const DesktopNavigationLeft = () => {
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
                       Mantle<span className="bag">{isActive('mantle') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       zkSync <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('zkSync') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Arbitrum <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Avalanche <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       BSC <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('BSC') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('Polygon') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('Polygon') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Polygon <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('Polygon') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('Optimism') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Optimism <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('Optimism') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Linea <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('Linea') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`} href="">
+                    <Link className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => { event.preventDefault(); }}>
                       Metis <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('Metis') ? visible_bag : null}</span>
                     </Link>
