@@ -134,7 +134,7 @@ export function DesktopNavigation(props) {
           {searchInputFocus && <Return />}
         </div> */}
         <div className="navigation-section text-align">
-          <NavigationButton route="/jgodwill.near/widget/GenaDropmultichainminter">
+          <NavigationButton route="/jgodwill.near/widget/GenaDrop.Create">
             Create
           </NavigationButton>
           <NavigationButton route="/agwaze.near/widget/GenaDrop.NFTListing">
