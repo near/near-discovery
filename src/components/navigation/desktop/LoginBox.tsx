@@ -138,12 +138,14 @@ export const LoginBox = () => {
       ];
     } else if (name === 'base') {
       paths = ['base', 'Base.BaseDex'];
+    } else if (name === 'mantle') {
+      paths = ['mantle', 'Mantle.Swap'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
   }
 
-  const isZKEVMActive = isActive('polygon-zkevm') || isActive('base');
+  const isZKEVMActive = isActive('polygon-zkevm') || isActive('base') || isActive('mantle');
 
   function handleSignIn() {
     flushEvents();
