@@ -9,8 +9,6 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useRouter } from 'next/router';
 
-
-
 interface Props {
   children: ReactNode;
 }
@@ -24,52 +22,53 @@ const Layout = styled.div`
     position: relative;
 
     width: calc(100vw - 300px);
-    .tab{
-      margin-bottom:80px;
+    .tab {
+      margin-bottom: 80px;
     }
   }
   @media (max-width: 900px) {
-    flex-direction:column;
-    .content{
+    flex-direction: column;
+    .content {
       width: 100%;
-      min-height:100vh;
+      min-height: 100vh;
     }
   }
 `;
 
 export function DefaultLayout({ children }: Props) {
-
   const src = useCurrentComponentStore((store) => store.src);
   const components = useBosComponents();
 
-  const refTemplatepageSrc = 'ref-admin.near/widget/ref-template-page'
-  const ZKEVMTemplateSrc = 'guessme.near/widget/ZKEVM.Template'
-  const ZKEVMTemplateWarmSrc = 'guessme.near/widget/ZKEVMWarmUp.warm-up'
-  const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps'
+  const refTemplatepageSrc = 'ref-admin.near/widget/ref-template-page';
+  const ZKEVMTemplateSrc = 'guessme.near/widget/ZKEVM.Template';
+  const ZKEVMTemplateWarmSrc = 'guessme.near/widget/ZKEVMWarmUp.warm-up';
+  const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps';
+
+  const MantleSrc = 'bluebiu.near/widget/Mantle.MantleTemplate';
 
   const [showTab, setShowTab] = useState(false);
 
-  const router = useRouter()
+  const router = useRouter();
 
   const pathName = router.pathname;
 
   useEffect(() => {
     setShowTab(
       src !== refTemplatepageSrc &&
-      src !== ZKEVMTemplateSrc &&
-      src !== ZKEVMTemplateWarmSrc &&
-      src !== BaseSrc &&
-      src !== null
+        src !== ZKEVMTemplateSrc &&
+        src !== ZKEVMTemplateWarmSrc &&
+        src !== BaseSrc &&
+        src !== MantleSrc &&
+        src !== null,
     );
     // console.log('src', src);
   }, [src]);
 
-
-  useEffect(()=>{ 
-    if(pathName === '/'){
-      setShowTab(false)
+  useEffect(() => {
+    if (pathName === '/') {
+      setShowTab(false);
     }
-  },[pathName])
+  }, [pathName]);
 
   return (
     <Layout>
