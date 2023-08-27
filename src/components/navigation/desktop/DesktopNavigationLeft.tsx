@@ -309,7 +309,7 @@ export const DesktopNavigationLeft = () => {
     </svg>
   );
 
-  const nearActive = isActive('near') || isActive('polygon-zkevm') || isActive('base');
+  const nearActive = isActive('near') || isActive('polygon-zkevm') || isActive('base') || isActive('mantle');
   function openMenu() {
     set_show_menu_list(true);
     document.body.style.overflow = 'hidden';
