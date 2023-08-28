@@ -46,6 +46,18 @@ const zkevmIcon = (
   </svg>
 );
 
+
+const baseIcon = (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="32" height="32" rx="8" transform="matrix(1 0 0 -1 0 32)" fill="#004BFC" />
+    <path d="M15.981 27C22.0673 27 27 22.076 27 16C27 9.924 22.0673 5 15.981 5C10.2066 5 5.46987 9.432 5 15.074H19.566V16.924H5C5.46987 22.568 10.2066 27 15.981 27Z" fill="white" />
+  </svg>
+);
+
+const mantleIcon = (
+  <img src="https://ipfs.near.social/ipfs/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4"></img>
+);
+
 const NearSignInButton = styled.div`
   width: 123px;
   cursor: pointer;
@@ -92,6 +104,48 @@ const ZKEVMSignInButton = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #ffffff;
+  position: fixed;
+  top: 28px;
+  right: 30px;
+`;
+
+const BaseSignInButton = styled.div`
+  width: 123px;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #332C4B;
+  position: fixed;
+  top: 28px;
+  right: 30px;
+`;
+
+const MantleSignInButton = styled.div`
+  width: 123px;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 12px;
+  background: #00FFE0;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #332C4B;
   position: fixed;
   top: 28px;
   right: 30px;
@@ -186,6 +240,34 @@ export const LoginBox = () => {
     </LoginArea>
   );
 
+  const BaseloginArea = wallet ? null : (
+    <LoginArea>
+      <BaseSignInButton
+        onClick={() => {
+          connect();
+        }}
+      >
+        {baseIcon}
+
+        <span>Connect</span>
+      </BaseSignInButton>
+    </LoginArea>
+  );
+
+  const MantleloginArea = wallet ? null : (
+    <LoginArea>
+      <MantleSignInButton
+        onClick={() => {
+          connect();
+        }}
+      >
+        {mantleIcon}
+
+        <span>Connect</span>
+      </MantleSignInButton>
+    </LoginArea>
+  );
+
   useEffect(() => {
     if (!isZKEVMActive) {
       onboard.state.actions.updateAccountCenter({
@@ -202,5 +284,5 @@ export const LoginBox = () => {
     }
   }, [isZKEVMActive]);
 
-  return isZKEVMActive ? ZKEVMloginArea : NearLoginArea;
+  return isActive('near') ? NearLoginArea : isActive('polygon-zkevm') ? ZKEVMloginArea : isActive('base') ? BaseloginArea : MantleloginArea;
 };

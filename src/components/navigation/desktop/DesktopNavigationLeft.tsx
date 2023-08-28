@@ -375,14 +375,14 @@ export const DesktopNavigationLeft = () => {
                     href="/base"
                     onClick={closeMenu}
                   >
-                    Base(7)
+                    Base(1)
                   </Link>
                   <Link
                     className={`item child-item ${isActive('mantle') ? 'active' : ''}`}
                     href="/mantle"
                     onClick={closeMenu}
                   >
-                    Mantle(4)
+                    Mantle(1)
                   </Link>
                   <Link
                     className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
@@ -525,10 +525,10 @@ export const DesktopNavigationLeft = () => {
                       Polygon zkEVM(5)
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base(7)
+                      Base(1)
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle(4)
+                      Mantle(1)
                     </Link>
                     <Link
                       className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
@@ -649,10 +649,10 @@ export const DesktopNavigationLeft = () => {
                       Polygon zkEVM(5)<span className="bag">{isActive('polygon-zkevm') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base(7)<span className="bag">{isActive('base') ? visible_bag : null}</span>
+                      Base(1)<span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle(4)<span className="bag">{isActive('mantle') ? visible_bag : null}</span>
+                      Mantle(1)<span className="bag">{isActive('mantle') ? visible_bag : null}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
