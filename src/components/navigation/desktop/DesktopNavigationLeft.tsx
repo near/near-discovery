@@ -247,6 +247,8 @@ export const DesktopNavigationLeft = () => {
       paths = ['mantle', 'Mantle.Swap'];
     } else if (name == 'warmup') {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
+    }else if (name == 'allChains') {
+      paths = ['allChains','AllChains.AllChainsPage'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
@@ -309,7 +311,7 @@ export const DesktopNavigationLeft = () => {
     </svg>
   );
 
-  const nearActive = isActive('near') || isActive('polygon-zkevm') || isActive('base') || isActive('mantle');
+  const nearActive = isActive('near') || isActive('polygon-zkevm') || isActive('base') || isActive('mantle') || isActive('allChains');
   function openMenu() {
     set_show_menu_list(true);
     document.body.style.overflow = 'hidden';
@@ -356,6 +358,13 @@ export const DesktopNavigationLeft = () => {
                   ></ArrowIcon>
                 </div>
                 <div className={`${openChains ? 'show' : 'hidden'}`}>
+                <Link
+                    className={`item child-item ${isActive('allChains') ? 'active' : ''}`}
+                    href="/allChains"
+                    onClick={closeMenu}
+                  >
+                    All Chains
+                  </Link>
                   <Link
                     className={`item child-item ${isActive('near') ? 'active' : ''}`}
                     href="/near"
@@ -519,6 +528,9 @@ export const DesktopNavigationLeft = () => {
                     <div className="icon">{templatesIcon}</div>
                   </div>
                   <div className="childBox" style={{ display: showChildBox ? 'block' : 'none' }}>
+                  <Link className={`item child-item ${isActive('allChains') ? 'active' : ''}`} href="/allChains">
+                      All Chains
+                    </Link>
                     <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
                       NEAR(2)
                     </Link>
@@ -639,6 +651,9 @@ export const DesktopNavigationLeft = () => {
                     ></ArrowPcIcon>
                   </div>
                   <div className={`${openChainsPc ? 'show' : 'hidden'}`}>
+                    <Link className={`item child-item ${isActive('allChains') ? 'active' : ''}`} href="/allChains">
+                      All Chains<span className="bag">{isActive('allChains') ? visible_bag : null}</span>
+                    </Link>
                     <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
                       NEAR(2)<span className="bag">{isActive('near') ? visible_bag : null}</span>
                     </Link>

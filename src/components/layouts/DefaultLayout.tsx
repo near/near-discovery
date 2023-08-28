@@ -49,6 +49,7 @@ export function DefaultLayout({ children }: Props) {
   const QuestionListSrc = 'guessme.near/widget/ZKEVM.QuestionList'
   const ExecuteRecordsSrc = 'guessme.near/widget/ZKEVM.ExecuteRecords'
   const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps';
+  const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage'
 
   const MantleSrc = 'bluebiu.near/widget/Mantle.MantleTemplate';
 
@@ -67,6 +68,7 @@ export function DefaultLayout({ children }: Props) {
         src !== ExecuteRecordsSrc &&
         src !== BaseSrc &&
         src !== MantleSrc &&
+        src !== AllChainsSrc &&
         src !== null,
     );
     // console.log('src', src);
