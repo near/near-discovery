@@ -496,6 +496,10 @@ export const DesktopNavigationLeft = () => {
                   <div className="icon">{homeIcon}</div>
                   <span className="bag">{router.asPath == '/' ? visible_bag : null}</span>
                 </Link>
+                <Link className={`item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
+                  <div className="icon">{zkevmIcon}</div>
+                  {isActive('warmup') ? <span className="bag">{visible_bag}</span> : null}
+                </Link>
                 <div
                   className="hasChildBox"
                   onMouseEnter={() => {
@@ -604,10 +608,6 @@ export const DesktopNavigationLeft = () => {
                     </Link>
                   </div>
                 </div>
-                <Link className={`item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
-                  <div className="icon">{zkevmIcon}</div>
-                  {isActive('warmup') ? <span className="bag">{visible_bag}</span> : null}
-                </Link>
               </div>
             </div>
           ) : (
