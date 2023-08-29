@@ -48,7 +48,9 @@ export function DefaultLayout({ children }: Props) {
   const ZKEVMTemplateSrc = 'guessme.near/widget/ZKEVM.Template';
   const ZKEVMTemplateWarmSrc = 'guessme.near/widget/ZKEVMWarmUp.warm-up';
   const QuestionListSrc = 'guessme.near/widget/ZKEVM.QuestionList'
+  const ExecuteRecordsSrc = 'guessme.near/widget/ZKEVM.ExecuteRecords'
   const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps';
+  const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage'
 
   const MantleSrc = 'bluebiu.near/widget/Mantle.MantleTemplate';
 
@@ -64,8 +66,10 @@ export function DefaultLayout({ children }: Props) {
         src !== ZKEVMTemplateSrc &&
         src !== ZKEVMTemplateWarmSrc &&
         src !== QuestionListSrc &&
+        src !== ExecuteRecordsSrc &&
         src !== BaseSrc &&
         src !== MantleSrc &&
+        src !== AllChainsSrc &&
         src !== null,
     );
     // console.log('src', src);

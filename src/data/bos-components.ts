@@ -45,6 +45,7 @@ type NetworkComponents = {
   tabNavigation: string;
   base: string;
   mantle: string;
+  allChains:string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -94,6 +95,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     tabNavigation: 'ref-admin.near/widget/TabNavigation',
     base: 'bluebiu.near/widget/Base.BaseDapps',
     mantle: 'bluebiu.near/widget/Mantle.MantleTemplate',
+    allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
   },
 
   mainnet: {
@@ -141,5 +143,6 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     tabNavigation: 'ref-admin.near/widget/TabNavigation',
     base: 'bluebiu.near/widget/Base.BaseDapps',
     mantle: 'bluebiu.near/widget/Mantle.MantleTemplate',
+    allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
   },
 };
