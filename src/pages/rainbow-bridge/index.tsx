@@ -1,37 +1,31 @@
-import { useEthersProviderContext } from '@/data/web3';
-
-import { useState, useEffect } from 'react';
+import { setEthProvider, setNearConnection, setSignerProvider } from '@near-eth/client';
+import Big from 'big.js';
+import { ethers } from 'ethers';
+import { useEffect,useState } from 'react';
 
 import MainWrapper from '@/components/sandbox/css/MainWrapper';
-
-import { setEthProvider, setNearConnection, setSignerProvider } from '@near-eth/client';
-
-import { tokenList, Erc20Abi } from '@/pages/rainbow-bridge/components/config';
-import Big from 'big.js';
-
+import { useEthersProviderContext } from '@/data/web3';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
+import { Erc20Abi,tokenList } from '@/pages/rainbow-bridge/components/config';
 import {
   Button,
   Input,
   Separator,
   SwitchWrapper,
-  Wrapper,
   TokenDark,
   TokenLight,
+  Wrapper,
 } from '@/pages/rainbow-bridge/components/rainbow-styled-components';
 import { useAuthStore } from '@/stores/auth';
-
-import { useDefaultLayout } from '@/hooks/useLayout';
-
+import { useVmStore } from '@/stores/vm';
+import { flushEvents } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
-import { getBalance } from './balance';
 import { checkApprove, handleApprove } from './approve';
-import { useVmStore } from '@/stores/vm';
-import { ethers } from 'ethers';
-import { transfer } from './transfer';
+import { getBalance } from './balance';
 import { ConnectButton } from './components/connect';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { flushEvents } from '@/utils/analytics';
+import { transfer } from './transfer';
 
 const ethIcon = 'https://ipfs.near.social/ipfs/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee';
 
@@ -198,16 +192,6 @@ const RainbowBridge: NextPageWithLayout = () => {
           <span>Ethereum</span>
         </div>
 
-        {/* TODO: connect component */}
-
-        {/* <Widget
-          src="bluebiu.near/widget/RainbowBridge.Connect"
-          props={{
-            sourceBridge: 'eth',
-            sender: sender,
-          }}
-        /> */}
-
         <ConnectButton
           isConnected={!!wallet}
           onConnect={() => connect()}
@@ -225,8 +209,6 @@ const RainbowBridge: NextPageWithLayout = () => {
 
           <span>NEAR</span>
         </div>
-
-        {/* TODO: connect component */}
 
         <ConnectButton isConnected={signedIn} onConnect={handleSignIn} onDisConnect={logOut} />
       </div>

@@ -1,11 +1,10 @@
-import { shrinkToken, expandToken } from './utils';
-
-import { Erc20Abi } from '@/pages/rainbow-bridge/components/config';
+import type { WalletState } from '@web3-onboard/core';
 import Big from 'big.js';
-
 import { ethers } from 'ethers';
 
-import type { WalletState } from '@web3-onboard/core';
+import { Erc20Abi } from '@/pages/rainbow-bridge/components/config';
+
+import { expandToken,shrinkToken } from './utils';
 
 const fetchNearAccount = (accountId: string) =>
   fetch('https://rpc.mainnet.near.org', {

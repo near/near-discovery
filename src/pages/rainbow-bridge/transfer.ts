@@ -1,14 +1,13 @@
-import { Erc20Abi, bridgeParams } from '@/pages/rainbow-bridge/components/config';
+import type { Transfer } from '@near-eth/client';
+import { bridgedETH, bridgedNEAR, naturalETH, naturalNEAR } from '@near-eth/near-ether';
+import { bridgedNep141,naturalErc20 } from '@near-eth/nep141-erc20';
 import type { EIP1193Provider } from '@web3-onboard/core';
+import Big from 'big.js';
 import { ethers } from 'ethers';
 
-import { bridgedETH, bridgedNEAR, naturalETH, naturalNEAR } from '@near-eth/near-ether';
+import { bridgeParams,Erc20Abi } from '@/pages/rainbow-bridge/components/config';
 
-import Big from 'big.js';
-
-import { naturalErc20, bridgedNep141 } from '@near-eth/nep141-erc20';
 import { expandToken } from './utils';
-import type { Transfer } from '@near-eth/client';
 
 const transfer = async (props: {
   token: any;

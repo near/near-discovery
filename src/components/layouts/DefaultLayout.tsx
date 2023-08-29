@@ -1,13 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
-import { LoginBox } from '../navigation/desktop/LoginBox';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { useRouter } from 'next/router';
+
+import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
+import { LoginBox } from '../navigation/desktop/LoginBox';
 
 interface Props {
   children: ReactNode;
