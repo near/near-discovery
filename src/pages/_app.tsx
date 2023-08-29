@@ -13,12 +13,19 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { Toaster } from '@/components/lib/Toast';
+import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
+import {
+  handleTurnOn,
+  isNotificationSupported,
+  isPermisionGranted,
+  isPushManagerSupported,
+} from '@/utils/notifications';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -39,6 +46,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const authStore = useAuthStore();
   const componentSrc = router.query;
+  const accountId = useAuthStore((store) => store.accountId);
 
   useEffect(() => {
     initializeAnalytics();
@@ -120,6 +128,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </Script>
 
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
+
+      {/* Temporary solution. It will be replaced with the modal, that will use this component */}
+      <VmComponent
+        src="mbodnar.near/widget/TurnOn"
+        props={{
+          handleTurnOn: async () => await handleTurnOn(accountId),
+          isNotificationSupported,
+          isPushManagerSupported,
+          isPermisionGranted,
+        }}
+      />
+      {/*  */}
 
       <VmInitializer />
 
