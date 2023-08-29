@@ -9,7 +9,6 @@ import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
-import { recordClick } from '@/utils/analytics';
 
 import { UserDropdownMenu } from '../desktop/UserDropdownMenu';
 import NearLogotype from '../icons/near-logotype.svg';
