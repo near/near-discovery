@@ -13,7 +13,7 @@ let anonymousUserIdCreatedAt = '';
 
 declare global {
   interface Window {
-    rudderanalytics: Analytics | undefined;
+    rudderAnalytics: Analytics | undefined;
   }
 }
 
@@ -45,7 +45,7 @@ function getAnonymousId() {
 }
 
 export async function init() {
-  if (window?.rudderanalytics) return;
+  if (window?.rudderAnalytics) return;
 
   getAnonymousId();
 
@@ -58,9 +58,9 @@ export async function init() {
   }
 
   try {
-    window.rudderanalytics = await import('rudder-sdk-js');
-    window.rudderanalytics.load(rudderAnalyticsKey, analyticsUrl);
-    rudderAnalytics = window.rudderanalytics;
+    window.rudderAnalytics = await import('rudder-sdk-js');
+    window.rudderAnalytics.load(rudderAnalyticsKey, analyticsUrl);
+    rudderAnalytics = window.rudderAnalytics;
     if (rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
   } catch (e) {
     console.error(e);
