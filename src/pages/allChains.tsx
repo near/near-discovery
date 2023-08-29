@@ -8,7 +8,9 @@ const AllChainsColumn: NextPageWithLayout = () => {
 
   const components = useBosComponents();
 
-  const pcBgIcon = "https://ipfs.near.social/ipfs/bafkreidvk35xz6wjpdl6ial7lsuly7zbt2yjjbvgxz5jracbfjhnralupu" 
+  const pcBgIcon = "https://ipfs.near.social/ipfs/bafkreidvk35xz6wjpdl6ial7lsuly7zbt2yjjbvgxz5jracbfjhnralupu"
+
+  const mobileIcon = "https://ipfs.near.social/ipfs/bafkreigkayvd24jkreolnizn25vmjvrhw2tt6fg6pxgquieuatrcgzbvhq"
 
   const Container = styled.div`
    color:#ffffff;
@@ -36,6 +38,26 @@ const AllChainsColumn: NextPageWithLayout = () => {
     .top{
       .subTitle{
         width:50%;
+      }
+     }
+  }
+
+  @media (max-width: 900px) {
+    background-image: url(${mobileIcon});
+    background-repeat: no-repeat;
+    background-position: 48% 0;
+    .top{
+      padding: 0;
+      height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .title{
+        font-size: 26px;
+      }
+      .subTitle{
+      display: none;
       }
      }
   }

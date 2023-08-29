@@ -520,7 +520,7 @@ export const DesktopNavigationLeft = () => {
                 >
                   <div
                     className={`item ${
-                      isActive('near') || isActive('polygon-zkevm') || isActive('base') || isActive('mantle')
+                      isActive('allChains') || isActive('near') || isActive('polygon-zkevm') || isActive('base') || isActive('mantle')
                         ? 'active'
                         : ''
                     }`}
