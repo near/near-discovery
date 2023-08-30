@@ -8,6 +8,14 @@ const SwitchWrapper = styled.div`
   top: 16px;
 `;
 
+const RainbowWrapper = styled.div`
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 100px;
+`;
+
 const Wrapper = styled.div`
   display: flex;
   align-items: center;
@@ -272,4 +280,4 @@ const TokenLight = styled.div`
   }
 `;
 
-export { Button, Separator, Input, Wrapper, SwitchWrapper, TokenDark, TokenLight };
+export { Button, Separator, Input, Wrapper, SwitchWrapper, TokenDark, TokenLight, RainbowWrapper };

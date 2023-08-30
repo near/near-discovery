@@ -46,11 +46,13 @@ const zkevmIcon = (
   </svg>
 );
 
-
 const baseIcon = (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="32" height="32" rx="8" transform="matrix(1 0 0 -1 0 32)" fill="#004BFC" />
-    <path d="M15.981 27C22.0673 27 27 22.076 27 16C27 9.924 22.0673 5 15.981 5C10.2066 5 5.46987 9.432 5 15.074H19.566V16.924H5C5.46987 22.568 10.2066 27 15.981 27Z" fill="white" />
+    <path
+      d="M15.981 27C22.0673 27 27 22.076 27 16C27 9.924 22.0673 5 15.981 5C10.2066 5 5.46987 9.432 5 15.074H19.566V16.924H5C5.46987 22.568 10.2066 27 15.981 27Z"
+      fill="white"
+    />
   </svg>
 );
 
@@ -124,7 +126,7 @@ const BaseSignInButton = styled.div`
   line-height: 19px;
   letter-spacing: 0em;
   text-align: left;
-  color: #332C4B;
+  color: #332c4b;
   position: fixed;
   top: 28px;
   right: 30px;
@@ -135,7 +137,7 @@ const MantleSignInButton = styled.div`
   cursor: pointer;
   height: 40px;
   border-radius: 12px;
-  background: #00FFE0;
+  background: #00ffe0;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -145,7 +147,7 @@ const MantleSignInButton = styled.div`
   line-height: 19px;
   letter-spacing: 0em;
   text-align: left;
-  color: #332C4B;
+  color: #332c4b;
   position: fixed;
   top: 28px;
   right: 30px;
@@ -177,7 +179,7 @@ export const LoginBox = () => {
   function isActive(name: string) {
     let paths: string[] = [];
     if (name == 'near') {
-      paths = ['ref-home', 'xBox', 'near'];
+      paths = ['ref-home', 'xBox', 'near', 'rainbow-bridge'];
     } else if (name == 'polygon-zkevm') {
       paths = [
         'ZKEVMSwap.zkevm-swap',
@@ -284,5 +286,11 @@ export const LoginBox = () => {
     }
   }, [isZKEVMActive]);
 
-  return isActive('near') ? NearLoginArea : isActive('polygon-zkevm') ? ZKEVMloginArea : isActive('base') ? BaseloginArea : MantleloginArea;
+  return isActive('near')
+    ? NearLoginArea
+    : isActive('polygon-zkevm')
+    ? ZKEVMloginArea
+    : isActive('base')
+    ? BaseloginArea
+    : MantleloginArea;
 };

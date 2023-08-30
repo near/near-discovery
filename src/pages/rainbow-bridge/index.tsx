@@ -1,4 +1,3 @@
-import type { Transfer } from '@near-eth/client';
 import { setEthProvider, setNearConnection, setSignerProvider } from '@near-eth/client';
 import { Near, WalletConnection } from '@near-eth/near-ether/node_modules/near-api-js';
 import Big from 'big.js';
@@ -18,7 +17,8 @@ import {
   TokenDark,
   TokenLight,
   Wrapper,
-} from '@/pages/rainbow-bridge/components/rainbow-styled-components';
+  RainbowWrapper,
+} from './components/rainbow-styled-components';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { flushEvents } from '@/utils/analytics';
@@ -32,6 +32,7 @@ import { PendingTransfers } from './components/pending-transfers';
 import { fetchAllTransfers, type TransferList } from './service';
 import * as storage from './storage';
 import { transfer } from './transfer';
+import { GoBackNav } from './components/go-back';
 
 export const ethIcon = 'https://ipfs.near.social/ipfs/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee';
 
@@ -353,149 +354,155 @@ const RainbowBridge: NextPageWithLayout = () => {
   };
 
   return (
-    <MainWrapper>
-      <PendingTransfers
-        bothConnected={signedIn && !!sender}
-        refreshTrigger={refreshTrigger}
-        setRefreshTrigger={setRefreshTrigger}
-      ></PendingTransfers>
-      <CompletedTransfers
-        bothConnected={signedIn && !!sender}
-        switchBack={() => {
-          setTab('new-transfer');
-        }}
-        hidden={tab === 'new-transfer'}
-        refreshTrigger={refreshTrigger}
-      />
-      {tab === 'new-transfer' && (
-        <Wrapper>
-          <div className="new-transfer-title">
-            <div className="transfer-left">New Transfer</div>
+    <>
+      <GoBackNav />
 
-            <div
-              className="transfer-right"
-              onClick={() => {
-                setTab('completed-transfers');
-              }}
-            >
-              <span>Completed Transfers</span>
+      <MainWrapper>
+        <RainbowWrapper>
+          <PendingTransfers
+            bothConnected={signedIn && !!sender}
+            refreshTrigger={refreshTrigger}
+            setRefreshTrigger={setRefreshTrigger}
+          ></PendingTransfers>
+          <CompletedTransfers
+            bothConnected={signedIn && !!sender}
+            switchBack={() => {
+              setTab('new-transfer');
+            }}
+            hidden={tab === 'new-transfer'}
+            refreshTrigger={refreshTrigger}
+          />
+          {tab === 'new-transfer' && (
+            <Wrapper>
+              <div className="new-transfer-title">
+                <div className="transfer-left">New Transfer</div>
 
-              {completeIconRight}
-            </div>
-          </div>
+                <div
+                  className="transfer-right"
+                  onClick={() => {
+                    setTab('completed-transfers');
+                  }}
+                >
+                  <span>Completed Transfers</span>
 
-          <div className="choose-bridge-wrapper ">
-            <div>
-              <div className="bridge-title">From</div>
-
-              {from === 'eth' ? ethereumBox : nearBox}
-            </div>
-
-            <SwitchWrapper
-              onClick={() => {
-                setFrom(from === 'near' ? 'eth' : 'near');
-              }}
-            >
-              {switchIcon}
-            </SwitchWrapper>
-
-            <div>
-              <div className="bridge-title">To</div>
-
-              {from === 'near' ? ethereumBox : nearBox}
-            </div>
-          </div>
-
-          <div className="choose-token-wrapper">
-            <div className="bridge-title">Choose token</div>
-
-            {bothConnected && showTokensLine}
-
-            <div className="token-list-wrapper">
-              {tokenList.map((token) => {
-                const props = {
-                  token,
-                  sender,
-                  onlyShowHasBalance,
-                  onSelectToken: ({ token, nearBalance, ethBalance }: any) => {
-                    setSelectToken(token);
-                    setNearBalance(nearBalance);
-                    setEthBalance(ethBalance);
-                    setAmount(new Big(from === 'near' ? nearBalance || 0 : ethBalance || 0).toFixed());
-                  },
-                  sourceBridge: from,
-                  bothConnected,
-                  selectToken,
-                  accountId,
-                  wallet,
-                };
-                return <TokenItem {...props} key={`${token.ethereum_address}-${token.near_address}`} />;
-              })}
-            </div>
-
-            <div
-              className="bridge-title"
-              style={{
-                paddingTop: '24px',
-              }}
-            >
-              Enter Amount
-            </div>
-
-            <div className="input-wrapper">
-              <Input value={amount} onChange={inputOnChange} placeholder="0.0" />
-
-              <div className="select-token">
-                <img className="select-token-icon" src={selectToken.icon} />
-
-                <span>{selectToken.symbol}</span>
-              </div>
-            </div>
-
-            <Separator />
-
-            {bothConnected && (
-              <div className="price-and-balance-filed">
-                <div className="price-filed">≈$</div>
-
-                <div>
-                  Balance:{' '}
-                  <span
-                    className="balance-value"
-                    style={{
-                      textDecoration: new Big(from === 'near' ? nearBalance || 0 : ethBalance || 0).eq(0)
-                        ? 'none'
-                        : 'underline',
-                    }}
-                    onClick={() => {
-                      if (new Big(from === 'near' ? nearBalance || 0 : ethBalance || 0).eq(0)) {
-                        return;
-                      } else {
-                        setAmount(chainBalance);
-                      }
-                    }}
-                  >
-                    {from === 'near' ? formatBalance(nearBalance) : formatBalance(ethBalance)}
-                  </span>
+                  {completeIconRight}
                 </div>
               </div>
-            )}
 
-            <Button
-              style={{
-                background: insufficientBalance ? '#FF61D3' : '#00ffe0',
-                cursor: !canBridge ? 'not-allowed' : 'pointer',
-                opacity: !canBridge ? 0.5 : 1,
-              }}
-              aria-disabled={!canBridge}
-              onClick={onButtonClick}
-            >
-              {buttonText}
-            </Button>
-          </div>
-        </Wrapper>
-      )}
-    </MainWrapper>
+              <div className="choose-bridge-wrapper ">
+                <div>
+                  <div className="bridge-title">From</div>
+
+                  {from === 'eth' ? ethereumBox : nearBox}
+                </div>
+
+                <SwitchWrapper
+                  onClick={() => {
+                    setFrom(from === 'near' ? 'eth' : 'near');
+                  }}
+                >
+                  {switchIcon}
+                </SwitchWrapper>
+
+                <div>
+                  <div className="bridge-title">To</div>
+
+                  {from === 'near' ? ethereumBox : nearBox}
+                </div>
+              </div>
+
+              <div className="choose-token-wrapper">
+                <div className="bridge-title">Choose token</div>
+
+                {bothConnected && showTokensLine}
+
+                <div className="token-list-wrapper">
+                  {tokenList.map((token) => {
+                    const props = {
+                      token,
+                      sender,
+                      onlyShowHasBalance,
+                      onSelectToken: ({ token, nearBalance, ethBalance }: any) => {
+                        setSelectToken(token);
+                        setNearBalance(nearBalance);
+                        setEthBalance(ethBalance);
+                        setAmount(new Big(from === 'near' ? nearBalance || 0 : ethBalance || 0).toFixed());
+                      },
+                      sourceBridge: from,
+                      bothConnected,
+                      selectToken,
+                      accountId,
+                      wallet,
+                    };
+                    return <TokenItem {...props} key={`${token.ethereum_address}-${token.near_address}`} />;
+                  })}
+                </div>
+
+                <div
+                  className="bridge-title"
+                  style={{
+                    paddingTop: '24px',
+                  }}
+                >
+                  Enter Amount
+                </div>
+
+                <div className="input-wrapper">
+                  <Input value={amount} onChange={inputOnChange} placeholder="0.0" />
+
+                  <div className="select-token">
+                    <img className="select-token-icon" src={selectToken.icon} />
+
+                    <span>{selectToken.symbol}</span>
+                  </div>
+                </div>
+
+                <Separator />
+
+                {bothConnected && (
+                  <div className="price-and-balance-filed">
+                    <div className="price-filed">≈$</div>
+
+                    <div>
+                      Balance:{' '}
+                      <span
+                        className="balance-value"
+                        style={{
+                          textDecoration: new Big(from === 'near' ? nearBalance || 0 : ethBalance || 0).eq(0)
+                            ? 'none'
+                            : 'underline',
+                        }}
+                        onClick={() => {
+                          if (new Big(from === 'near' ? nearBalance || 0 : ethBalance || 0).eq(0)) {
+                            return;
+                          } else {
+                            setAmount(chainBalance);
+                          }
+                        }}
+                      >
+                        {from === 'near' ? formatBalance(nearBalance) : formatBalance(ethBalance)}
+                      </span>
+                    </div>
+                  </div>
+                )}
+
+                <Button
+                  style={{
+                    background: insufficientBalance ? '#FF61D3' : '#00ffe0',
+                    cursor: !canBridge ? 'not-allowed' : 'pointer',
+                    opacity: !canBridge ? 0.5 : 1,
+                  }}
+                  aria-disabled={!canBridge}
+                  onClick={onButtonClick}
+                >
+                  {buttonText}
+                </Button>
+              </div>
+            </Wrapper>
+          )}
+        </RainbowWrapper>
+      </MainWrapper>
+    </>
   );
 };
 
