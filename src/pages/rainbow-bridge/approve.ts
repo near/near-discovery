@@ -2,7 +2,7 @@ import type { EIP1193Provider } from '@web3-onboard/core';
 import Big from 'big.js';
 import { ethers } from 'ethers';
 
-import { bridgeParams,Erc20Abi } from '@/pages/rainbow-bridge/components/config';
+import { bridgeParams, Erc20Abi } from '@/pages/rainbow-bridge/components/config';
 
 // refresh to check allowance
 export const checkApprove = async (
@@ -17,7 +17,7 @@ export const checkApprove = async (
 
   const signer = ethersProvider.getSigner();
 
-  if (sourceBridge === 'near' || !token.ethereum_address) {
+  if (sourceBridge === 'near' || !token.ethereum_address || Big(amountIn || '0').eq(0)) {
     return true;
   }
 
@@ -40,7 +40,7 @@ export const checkApprove = async (
     });
 };
 
-export const handleApprove = (amountIn: string, token: any, provider: EIP1193Provider) => {
+export const handleApprove = async (amountIn: string, token: any, provider: EIP1193Provider) => {
   const ethersProvider = new ethers.providers.Web3Provider(provider, 'any');
 
   const signer = ethersProvider.getSigner();

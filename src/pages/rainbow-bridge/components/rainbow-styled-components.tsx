@@ -39,6 +39,8 @@ const Wrapper = styled.div`
       display: flex;
       align-items: center;
       color: #979abe;
+      gap: 4px;
+      cursor: pointer;
     }
   }
 

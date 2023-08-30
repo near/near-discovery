@@ -4,7 +4,7 @@ import { ethers } from 'ethers';
 
 import { Erc20Abi } from '@/pages/rainbow-bridge/components/config';
 
-import { expandToken,shrinkToken } from './utils';
+import { shrinkToken } from './utils';
 
 const fetchNearAccount = (accountId: string) =>
   fetch('https://rpc.mainnet.near.org', {
@@ -32,7 +32,9 @@ const getBalanceNear = async (near: any, accountId: string, token: any) => {
 
   if (token.name === 'NEAR') {
     const account = await fetchNearAccount(accountId);
-    amount = (await account.json()).amount;
+
+    console.log('amount11near: ', amount);
+    amount = (await account.json()).result.amount;
   } else {
     amount = await near.viewCall(token.near_address, 'ft_balance_of', {
       account_id: accountId,

@@ -76,23 +76,23 @@ export default function VmInitializer() {
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }) as any, // TODO: Refactor setupFastAuth() to TS
-            setupKeypom({
-              trialAccountSpecs: {
-                url:
-                  networkId == 'testnet'
-                    ? 'https://test.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY'
-                    : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
-                modalOptions: KEYPOM_OPTIONS(networkId),
-              },
-              instantSignInSpecs: {
-                url:
-                  networkId == 'testnet'
-                    ? 'https://test.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID'
-                    : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
-              },
-              networkId,
-              signInContractId,
-            }) as any, // TODO: Refactor setupKeypom() to TS
+            // setupKeypom({
+            //   trialAccountSpecs: {
+            //     url:
+            //       networkId == 'testnet'
+            //         ? 'https://test.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY'
+            //         : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
+            //     modalOptions: KEYPOM_OPTIONS(networkId),
+            //   },
+            //   instantSignInSpecs: {
+            //     url:
+            //       networkId == 'testnet'
+            //         ? 'https://test.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID'
+            //         : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
+            //   },
+            //   networkId,
+            //   signInContractId,
+            // }) as any, // TODO: Refactor setupKeypom() to TS
           ],
         }),
         customElements: {
