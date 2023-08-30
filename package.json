@@ -43,7 +43,6 @@
         "@web3-onboard/ledger": "^2.4.6",
         "@web3-onboard/react": "^2.8.7",
         "@web3-onboard/walletconnect": "^2.3.9",
-        "analytics-node": "^6.2.0",
         "big.js": "^6.1.1",
         "bn.js": "^5.1.1",
         "bootstrap": "^5.2.1",
@@ -73,7 +72,6 @@
         "zustand": "^4.3.7"
     },
     "devDependencies": {
-        "@types/analytics-node": "^3.1.11",
         "@types/big.js": "^6.1.6",
         "@types/lodash": "^4.14.194",
         "@types/styled-components": "^5.1.26",
