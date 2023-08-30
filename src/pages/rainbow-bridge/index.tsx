@@ -9,16 +9,6 @@ import { useEthersProviderContext } from '@/data/web3';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { Erc20Abi, tokenList } from '@/pages/rainbow-bridge/components/config';
-import {
-  Button,
-  Input,
-  Separator,
-  SwitchWrapper,
-  TokenDark,
-  TokenLight,
-  Wrapper,
-  RainbowWrapper,
-} from './components/rainbow-styled-components';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { flushEvents } from '@/utils/analytics';
@@ -28,11 +18,21 @@ import { checkApprove, handleApprove } from './approve';
 import { getBalance } from './balance';
 import { CompletedTransfers } from './components/completed-transfers';
 import { ConnectButton } from './components/connect';
+import { GoBackNav } from './components/go-back';
 import { PendingTransfers } from './components/pending-transfers';
+import {
+  Button,
+  Input,
+  RainbowWrapper,
+  Separator,
+  SwitchWrapper,
+  TokenDark,
+  TokenLight,
+  Wrapper,
+} from './components/rainbow-styled-components';
 import { fetchAllTransfers, type TransferList } from './service';
 import * as storage from './storage';
 import { transfer } from './transfer';
-import { GoBackNav } from './components/go-back';
 
 export const ethIcon = 'https://ipfs.near.social/ipfs/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee';
 
