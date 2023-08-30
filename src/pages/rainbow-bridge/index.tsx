@@ -8,18 +8,17 @@ import MainWrapper from '@/components/sandbox/css/MainWrapper';
 import { useEthersProviderContext } from '@/data/web3';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { Erc20Abi, tokenList } from '@/pages/rainbow-bridge/components/config';
+import { Erc20Abi, tokenList } from '@/components/rainbow-bridge/config';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { flushEvents } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
-
-import { checkApprove, handleApprove } from './approve';
-import { getBalance } from './balance';
-import { CompletedTransfers } from './components/completed-transfers';
-import { ConnectButton } from './components/connect';
-import { GoBackNav } from './components/go-back';
-import { PendingTransfers } from './components/pending-transfers';
+import { checkApprove, handleApprove } from '../../components/rainbow-bridge/approve';
+import { getBalance } from '@/components/rainbow-bridge/balance';
+import { CompletedTransfers } from '@/components/rainbow-bridge/completed-transfers';
+import { ConnectButton } from '@/components/rainbow-bridge/connect';
+import { GoBackNav } from '@/components/rainbow-bridge/go-back';
+import { PendingTransfers } from '@/components/rainbow-bridge/pending-transfers';
 import {
   Button,
   Input,
@@ -29,10 +28,10 @@ import {
   TokenDark,
   TokenLight,
   Wrapper,
-} from './components/rainbow-styled-components';
-import { fetchAllTransfers, type TransferList } from './service';
-import * as storage from './storage';
-import { transfer } from './transfer';
+} from '@/components/rainbow-bridge/rainbow-styled-components';
+import { fetchAllTransfers, type TransferList } from '../../components/rainbow-bridge/service';
+import * as storage from '@/components/rainbow-bridge/storage';
+import { transfer } from '@/components/rainbow-bridge/transfer';
 
 export const ethIcon = 'https://ipfs.near.social/ipfs/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee';
 

@@ -2,7 +2,7 @@ import type { WalletState } from '@web3-onboard/core';
 import Big from 'big.js';
 import { ethers } from 'ethers';
 
-import { Erc20Abi } from '@/pages/rainbow-bridge/components/config';
+import { Erc20Abi } from './config';
 
 import { shrinkToken } from './utils';
 
