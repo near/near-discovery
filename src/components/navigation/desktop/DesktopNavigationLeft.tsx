@@ -121,12 +121,19 @@ const Container = styled.div`
   .soonIcon {
     margin-left: 2px;
   }
+  .newIcon{
+    margin-left: 6px;
+  }
 `;
 const ContainerMobile = styled.div`
   display: none;
   position: relative;
   @media (max-width: 900px) {
     display: block;
+    .show {
+    display: block;
+    overflow: auto;
+  }
   }
 
   .top_menu_icon {
@@ -145,6 +152,7 @@ const ContainerMobile = styled.div`
   }
   .show {
     display: block;
+    overflow: auto;
   }
   .hidden {
     display: none;
@@ -192,6 +200,12 @@ const ContainerMobile = styled.div`
       }
     }
   }
+  .soonIcon {
+    margin-left: 2px;
+  }
+  .newIcon{
+    margin-left: 6px;
+  }
 `;
 
 const soonIcon = (
@@ -206,6 +220,14 @@ const soonIcon = (
     />
   </svg>
 );
+
+const newIcon = (
+  <svg width="30" height="16" viewBox="0 0 30 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="30" height="16" rx="4" fill="#E9F456" />
+    <path d="M3.948 12V3.984H5.268L9.492 10.26V3.984H10.692V12H9.372L5.148 5.724V12H3.948ZM15.2247 12.12C14.6567 12.12 14.1447 12.008 13.6887 11.784C13.2407 11.552 12.8847 11.22 12.6207 10.788C12.3567 10.348 12.2247 9.812 12.2247 9.18C12.2247 8.58 12.3487 8.06 12.5967 7.62C12.8527 7.18 13.1927 6.84 13.6167 6.6C14.0487 6.36 14.5287 6.24 15.0567 6.24C15.6087 6.24 16.0887 6.348 16.4967 6.564C16.9047 6.78 17.2167 7.072 17.4327 7.44C17.6567 7.8 17.7687 8.212 17.7687 8.676C17.7687 8.812 17.7487 8.96 17.7087 9.12C17.6767 9.28 17.6327 9.408 17.5767 9.504H13.3767C13.4167 9.864 13.5167 10.168 13.6767 10.416C13.8447 10.656 14.0687 10.84 14.3487 10.968C14.6287 11.088 14.9527 11.148 15.3207 11.148C15.6887 11.148 16.0127 11.092 16.2927 10.98C16.5807 10.868 16.8567 10.712 17.1207 10.512L17.5287 11.34C17.2167 11.596 16.8647 11.792 16.4727 11.928C16.0887 12.056 15.6727 12.12 15.2247 12.12ZM13.3767 8.64H16.6047C16.6127 8.616 16.6167 8.596 16.6167 8.58C16.6167 8.564 16.6167 8.544 16.6167 8.52C16.6167 8.248 16.5607 8.016 16.4487 7.824C16.3367 7.624 16.1687 7.468 15.9447 7.356C15.7207 7.244 15.4367 7.188 15.0927 7.188C14.8127 7.188 14.5527 7.248 14.3127 7.368C14.0807 7.48 13.8807 7.644 13.7127 7.86C13.5527 8.068 13.4407 8.328 13.3767 8.64ZM20.1277 12L18.1477 6.36H19.3597L20.7037 10.584L22.1197 6.36H23.1757L24.5797 10.584L25.9357 6.36H27.1477L25.1557 12H24.0517L22.6477 7.8L21.2437 12H20.1277Z" fill="#181A27" />
+  </svg>
+
+)
 
 export const DesktopNavigationLeft = () => {
   let storedShowMenu = null;
@@ -381,27 +403,29 @@ export const DesktopNavigationLeft = () => {
                     Polygon zkEVM(5)
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('base') ? 'active' : ''}`}
-                    href="/base"
-                    onClick={closeMenu}
-                  >
-                    Base(1)
-                  </Link>
-                  <Link
                     className={`item child-item ${isActive('mantle') ? 'active' : ''}`}
                     href="/mantle"
                     onClick={closeMenu}
                   >
                     Mantle(1)
+                    <span className='newIcon'>{newIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('base') ? 'active' : ''}`}
+                    href="/base"
+                    onClick={closeMenu}
+                  >
+                    Base(1)
+                    <span className='newIcon'>{newIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
                     }}
                   >
-                    zkSync
+                    BSC
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
@@ -412,26 +436,6 @@ export const DesktopNavigationLeft = () => {
                     }}
                   >
                     Arbitrum
-                    <span className="soonIcon"> {soonIcon}</span>
-                  </Link>
-                  <Link
-                    className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
-                    href="#"
-                    onClick={(event) => {
-                      event.preventDefault();
-                    }}
-                  >
-                    Avalanche
-                    <span className="soonIcon"> {soonIcon}</span>
-                  </Link>
-                  <Link
-                    className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
-                    href="#"
-                    onClick={(event) => {
-                      event.preventDefault();
-                    }}
-                  >
-                    BSC
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
@@ -455,6 +459,26 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
+                    className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
+                    Avalanche
+                    <span className="soonIcon"> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
+                    zkSync
+                    <span className="soonIcon"> {soonIcon}</span>
+                  </Link>
+                  <Link
                     className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
                     href="#"
                     onClick={(event) => {
@@ -465,6 +489,26 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
+                    className={`item child-item ${isActive('Scroll') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
+                    Scroll
+                    <span className="soonIcon"> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Gnosis') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
+                    Gnosis
+                    <span className="soonIcon"> {soonIcon}</span>
+                  </Link>
+                  <Link
                     className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
                     href="#"
                     onClick={(event) => {
@@ -472,6 +516,36 @@ export const DesktopNavigationLeft = () => {
                     }}
                   >
                     Metis
+                    <span className="soonIcon"> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Berachain') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
+                    Berachain
+                    <span className="soonIcon"> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Monad') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
+                    Monad
+                    <span className="soonIcon"> {soonIcon}</span>
+                  </Link>
+                  <Link
+                    className={`item child-item ${isActive('Taiko') ? 'active' : ''}`}
+                    href="#"
+                    onClick={(event) => {
+                      event.preventDefault();
+                    }}
+                  >
+                    Taiko
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                 </div>
@@ -520,15 +594,14 @@ export const DesktopNavigationLeft = () => {
                   }}
                 >
                   <div
-                    className={`item ${
-                      isActive('allChains') ||
+                    className={`item ${isActive('allChains') ||
                       isActive('near') ||
                       isActive('polygon-zkevm') ||
                       isActive('base') ||
                       isActive('mantle')
-                        ? 'active'
-                        : ''
-                    }`}
+                      ? 'active'
+                      : ''
+                      }`}
                   >
                     <div className="icon">{templatesIcon}</div>
                   </div>
@@ -545,38 +618,13 @@ export const DesktopNavigationLeft = () => {
                     >
                       Polygon zkEVM(5)
                     </Link>
-                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base(1)
-                    </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
                       Mantle(1)
+                      <span className='newIcon'>{newIcon}</span>
                     </Link>
-                    <Link
-                      className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      zkSync <span className="soonIcon"> {soonIcon}</span>
-                    </Link>
-                    <Link
-                      className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Arbitrum <span className="soonIcon"> {soonIcon}</span>
-                    </Link>
-                    <Link
-                      className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Avalanche <span className="soonIcon"> {soonIcon}</span>
+                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
+                      Base(1)
+                      <span className='newIcon'>{newIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
@@ -585,7 +633,18 @@ export const DesktopNavigationLeft = () => {
                         event.preventDefault();
                       }}
                     >
-                      BSC <span className="soonIcon"> {soonIcon}</span>
+                      BSC
+                      <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Arbitrum
+                      <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('polygon') ? 'active' : ''}`}
@@ -594,7 +653,8 @@ export const DesktopNavigationLeft = () => {
                         event.preventDefault();
                       }}
                     >
-                      Polygon <span className="soonIcon"> {soonIcon}</span>
+                      Polygon
+                      <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
@@ -603,7 +663,28 @@ export const DesktopNavigationLeft = () => {
                         event.preventDefault();
                       }}
                     >
-                      Optimism <span className="soonIcon"> {soonIcon}</span>
+                      Optimism
+                      <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Avalanche
+                      <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      zkSync
+                      <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
@@ -615,6 +696,24 @@ export const DesktopNavigationLeft = () => {
                       Linea <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
+                      className={`item child-item ${isActive('Scroll') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Scroll <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Gnosis') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Gnosis <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
                       className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
                       href="#"
                       onClick={(event) => {
@@ -622,6 +721,33 @@ export const DesktopNavigationLeft = () => {
                       }}
                     >
                       Metis <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Berachain') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Berachain <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Monad') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Monad <span className="soonIcon"> {soonIcon}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Taiko') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Taiko <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                   </div>
                 </div>
@@ -668,41 +794,11 @@ export const DesktopNavigationLeft = () => {
                     >
                       Polygon zkEVM(5)<span className="bag">{isActive('polygon-zkevm') ? visible_bag : null}</span>
                     </Link>
-                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base(1)<span className="bag">{isActive('base') ? visible_bag : null}</span>
-                    </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle(1)<span className="bag">{isActive('mantle') ? visible_bag : null}</span>
+                      Mantle(1)<span className='newIcon'>{newIcon}</span><span className="bag">{isActive('mantle') ? visible_bag : null}</span>
                     </Link>
-                    <Link
-                      className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      zkSync <span className="soonIcon"> {soonIcon}</span>
-                      <span className="bag">{isActive('zkSync') ? visible_bag : null}</span>
-                    </Link>
-                    <Link
-                      className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Arbitrum <span className="soonIcon"> {soonIcon}</span>
-                      <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
-                    </Link>
-                    <Link
-                      className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Avalanche <span className="soonIcon"> {soonIcon}</span>
-                      <span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
+                    <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
+                      Base(1)<span className='newIcon'>{newIcon}</span><span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
@@ -713,6 +809,16 @@ export const DesktopNavigationLeft = () => {
                     >
                       BSC <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('BSC') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Arbitrum <span className="soonIcon"> {soonIcon}</span>
+                      <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Polygon') ? 'active' : ''}`}
@@ -735,6 +841,26 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Optimism') ? visible_bag : null}</span>
                     </Link>
                     <Link
+                      className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Avalanche <span className="soonIcon"> {soonIcon}</span>
+                      <span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      zkSync <span className="soonIcon"> {soonIcon}</span>
+                      <span className="bag">{isActive('zkSync') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
                       className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
                       href="#"
                       onClick={(event) => {
@@ -745,14 +871,64 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Linea') ? visible_bag : null}</span>
                     </Link>
                     <Link
+                      className={`item child-item ${isActive('Scroll') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Scroll <span className="soonIcon"> {soonIcon}</span>
+                      <span className="bag">{isActive('Scroll') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Gnosis') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Gnosis <span className="Gnosis"> {soonIcon}</span>
+                      <span className="bag">{isActive('Scroll') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
                       className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
                       }}
                     >
-                      Metis <span className="soonIcon"> {soonIcon}</span>
+                      Metis <span className="Metis"> {soonIcon}</span>
                       <span className="bag">{isActive('Metis') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Berachain') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Berachain <span className="Berachain"> {soonIcon}</span>
+                      <span className="bag">{isActive('Berachain') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Monad') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Monad <span className="Monad"> {soonIcon}</span>
+                      <span className="bag">{isActive('Monad') ? visible_bag : null}</span>
+                    </Link>
+                    <Link
+                      className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                      href="#"
+                      onClick={(event) => {
+                        event.preventDefault();
+                      }}
+                    >
+                      Taiko <span className="Taiko"> {soonIcon}</span>
+                      <span className="bag">{isActive('Taiko') ? visible_bag : null}</span>
                     </Link>
                   </div>
                 </div>
@@ -857,3 +1033,4 @@ function ArrowPcIcon(props: any) {
     </svg>
   );
 }
+
