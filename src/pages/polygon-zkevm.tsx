@@ -47,6 +47,8 @@ const ZkevmColumn: NextPageWithLayout = () => {
           top: 50%;
           left: 48%;
           transform: translate(-48%, -50%);
+          display: inline-block;
+          white-space: nowrap;
          }
          .subTitle {
            font-size: 16px;
