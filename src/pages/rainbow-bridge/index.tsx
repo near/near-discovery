@@ -29,9 +29,11 @@ import {
   TokenLight,
   Wrapper,
 } from '@/components/rainbow-bridge/rainbow-styled-components';
-import { fetchAllTransfers, type TransferList } from '../../components/rainbow-bridge/service';
+import { fetchAllTransfers } from '../../components/rainbow-bridge/service';
 import * as storage from '@/components/rainbow-bridge/storage';
 import { transfer } from '@/components/rainbow-bridge/transfer';
+import { useSearchParams } from 'next/navigation';
+import { RainbowLeftMenu } from '@/components/rainbow-bridge/left-menu';
 
 export const ethIcon = 'https://ipfs.near.social/ipfs/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee';
 
@@ -357,6 +359,8 @@ const RainbowBridge: NextPageWithLayout = () => {
       <GoBackNav />
 
       <MainWrapper>
+        <RainbowLeftMenu />
+
         <RainbowWrapper>
           <PendingTransfers
             bothConnected={signedIn && !!sender}
