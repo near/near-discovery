@@ -45,11 +45,10 @@ type NetworkComponents = {
   tabNavigation: string;
   base: string;
   mantle: string;
-  allChains:string;
+  allChains: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
-  // localnet: undefined,
   testnet: {
     bosDirectory: 'one.testnet/widget/BOSDirectory',
     componentSummary: 'discom.testnet/widget/ComponentSummary',

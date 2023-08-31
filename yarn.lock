@@ -1712,6 +1712,54 @@
     "@motionone/dom" "^10.16.2"
     tslib "^2.3.1"
 
+"@near-eth/aurora-erc20@2.5.1", "@near-eth/aurora-erc20@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@near-eth/aurora-erc20/-/aurora-erc20-2.5.1.tgz#f3681120c4911e327f5dcdebd5ef43405142ccb2"
+  integrity sha512-DrIcntJmJFc45SE8KWL7VFGwcmyhRm3FZLa0GD+bJrd0dyJQwzWIw9Nsjx1QgNrC0kVZ2SJv9I5hsrIYtORFuw==
+  dependencies:
+    "@near-eth/client" "1.9.0"
+    "@near-eth/utils" "2.4.0"
+    bn.js "^5.1.3"
+    bs58 "^4.0.1"
+    ethereumjs-util "^7.0.10"
+    ethers "^5.6.9"
+    find-replacement-tx "1.2.3"
+    near-api-js "^0.45.1"
+    promisfy "^1.2.0"
+    rlp "^2.2.6"
+
+"@near-eth/aurora-ether@2.5.1", "@near-eth/aurora-ether@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@near-eth/aurora-ether/-/aurora-ether-2.5.1.tgz#83eb3d1d833105245f466b11a40ee62069fd663b"
+  integrity sha512-MElA1q0bwF+yTgR6Q1ngwrAsSeiHkEw0TmLJsPfJyoIoxAAtR0O+v1UBVMqbVkFO/ExQHhQ26gm3NTl8BGET0w==
+  dependencies:
+    "@near-eth/client" "1.9.0"
+    "@near-eth/utils" "2.4.0"
+    bn.js "^5.1.3"
+    bs58 "^4.0.1"
+    ethereumjs-util "^7.0.10"
+    ethers "^5.6.9"
+    find-replacement-tx "1.2.3"
+    near-api-js "^0.45.1"
+    promisfy "^1.2.0"
+    rlp "^2.2.6"
+
+"@near-eth/aurora-nep141@1.4.0", "@near-eth/aurora-nep141@^1.4.0":
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/@near-eth/aurora-nep141/-/aurora-nep141-1.4.0.tgz#083969bbd8cb5b73bc24bfda70859dc46b9ee82c"
+  integrity sha512-+zw2G1dEjteVRtGEoZCEf7fM+E9FSzDrwsrZB+NWz+/SEbw86hYE9lBk2sZYSRTf/sxq30MEJY9Ldfi98sJiDg==
+  dependencies:
+    "@near-eth/client" "1.9.0"
+    "@near-eth/utils" "2.4.0"
+    bn.js "^5.1.3"
+    bs58 "^4.0.1"
+    ethereumjs-util "^7.0.10"
+    ethers "^5.6.9"
+    find-replacement-tx "1.2.3"
+    near-api-js "^0.45.1"
+    promisfy "^1.2.0"
+    rlp "^2.2.6"
+
 "@near-eth/client@1.9.0", "@near-eth/client@^1.9.0":
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/@near-eth/client/-/client-1.9.0.tgz#84123940dcb2639aaf13052d3ced9c7866364dd3"
@@ -1722,7 +1770,7 @@
     ethers "^5.6.9"
     near-api-js "^0.45.1"
 
-"@near-eth/near-ether@^2.4.1":
+"@near-eth/near-ether@2.4.1", "@near-eth/near-ether@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@near-eth/near-ether/-/near-ether-2.4.1.tgz#b469a3ad4281f84bbb9fb76b26ce426d2bf48f90"
   integrity sha512-guZW9oeSHa593fthJ7F93olTxdAvXva6AWIP2gEZvCy/7wfwApqSBSU0V5MBtDSigH8CyCT1sO50SxVTWWYJnA==
@@ -1738,7 +1786,7 @@
     promisfy "^1.2.0"
     rlp "^2.2.6"
 
-"@near-eth/nep141-erc20@^2.4.1":
+"@near-eth/nep141-erc20@2.4.1", "@near-eth/nep141-erc20@^2.4.1":
   version "2.4.1"
   resolved "https://registry.yarnpkg.com/@near-eth/nep141-erc20/-/nep141-erc20-2.4.1.tgz#2595cb584725238de1997330bc5cfa1072811750"
   integrity sha512-ok6lCbt/2fEijje2t3oGZqWCFKqpf4ppme5PNqD/3MwH1HdILKFXe4tZLMTUqP+HzICfTPDUQug4qjkOVAAOng==
@@ -1754,7 +1802,20 @@
     promisfy "^1.2.0"
     rlp "^2.2.6"
 
-"@near-eth/utils@2.4.0":
+"@near-eth/rainbow@^1.1.1":
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/@near-eth/rainbow/-/rainbow-1.1.1.tgz#14c7861a8bbac7700a3eea510350ebed536f4a36"
+  integrity sha512-nZG8zp61xhjeObQ4cjZ9jCtiPTyLUqfEy68WxbWgrzMaOoL5UnnOjOOHhFM+qG176giSrfAWUNgHC5Bhdv7VaQ==
+  dependencies:
+    "@near-eth/aurora-erc20" "2.5.1"
+    "@near-eth/aurora-ether" "2.5.1"
+    "@near-eth/aurora-nep141" "1.4.0"
+    "@near-eth/client" "1.9.0"
+    "@near-eth/near-ether" "2.4.1"
+    "@near-eth/nep141-erc20" "2.4.1"
+    "@near-eth/utils" "2.4.0"
+
+"@near-eth/utils@2.4.0", "@near-eth/utils@^2.4.0":
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/@near-eth/utils/-/utils-2.4.0.tgz#91fcb439be4d8fb0255da59ec4110fb0a3759905"
   integrity sha512-LiEDDoV7Vso1FoAgOTxaiivTVjzwv5nMeQDUL8KnTn5GNmgVs5f1wEFSTdf2fVKdYpJaoxvVajucpcb9QerY9A==
@@ -6097,7 +6158,7 @@ finalhandler@1.2.0:
     statuses "2.0.1"
     unpipe "~1.0.0"
 
-find-replacement-tx@1.2.3:
+find-replacement-tx@1.2.3, find-replacement-tx@^1.2.3:
   version "1.2.3"
   resolved "https://registry.yarnpkg.com/find-replacement-tx/-/find-replacement-tx-1.2.3.tgz#3c1f44b705637ce2f12610569fa1f52340fbb9ea"
   integrity sha512-TwCsEBmPVUgD9VRrhRuY0HEPzCXl/2zamYU0ywYAGf8v+9WLCIGOsyA88ObLDLj0/5Gq8ki5XiqL+TY9B1BmPg==
@@ -7242,7 +7303,7 @@ lit@2.7.6:
     lit-element "^3.3.0"
     lit-html "^2.7.0"
 
-lite-merkle-patricia-tree@1.0.1:
+lite-merkle-patricia-tree@1.0.1, lite-merkle-patricia-tree@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/lite-merkle-patricia-tree/-/lite-merkle-patricia-tree-1.0.1.tgz#380c12f2a2da4b8dc7d00b4311d3f9ea966c1436"
   integrity sha512-9aVFZ/QVo+N0XZnCagDiaA24MEaAGVHuFoe+DL7J1cMdUmNQSOqNAmyY1pcIOgCX+nTom3g613diyZ+s3j03kA==

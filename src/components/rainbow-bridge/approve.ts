@@ -2,7 +2,7 @@ import type { EIP1193Provider } from '@web3-onboard/core';
 import Big from 'big.js';
 import { ethers } from 'ethers';
 
-import { bridgeParams, Erc20Abi } from '@/pages/rainbow-bridge/components/config';
+import { bridgeParams, Erc20Abi } from './config';
 
 // refresh to check allowance
 export const checkApprove = async (

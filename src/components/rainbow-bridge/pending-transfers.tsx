@@ -3,10 +3,8 @@ import { IN_PROGRESS, Status } from '@near-eth/client/dist/statuses';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { ethIcon, nearIcon } from '..';
-import type { TransferList } from '../service';
-import * as storage from '../storage';
-import { formateDate, shrinkToken } from '../utils';
+import { ethIcon, nearIcon } from './icons';
+import { formateDate, shrinkToken } from './utils';
 import { tokenList } from './config';
 
 const IconRight = (
