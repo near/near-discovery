@@ -29,7 +29,7 @@ import {
   TokenLight,
   Wrapper,
 } from '@/components/rainbow-bridge/rainbow-styled-components';
-import { fetchAllTransfers } from '../../components/rainbow-bridge/service';
+import { fetchAllTransfers, useTokenPrice } from '../../components/rainbow-bridge/service';
 import * as storage from '@/components/rainbow-bridge/storage';
 import { transfer } from '@/components/rainbow-bridge/transfer';
 import { useSearchParams } from 'next/navigation';
@@ -120,7 +120,7 @@ const TokenItem = (props: any) => {
     });
   }, [tokenString, sender, near, signedIn]);
 
-  if (!showToken) return <div></div>;
+  if (!showToken && bothConnected) return <div></div>;
 
   return (
     <StyledToken
@@ -162,6 +162,8 @@ const RainbowBridge: NextPageWithLayout = () => {
   const [refreshTrigger, setRefreshTrigger] = useState<boolean>(false);
 
   const { near } = useVmStore();
+
+  const priceMap = useTokenPrice();
 
   useEffect(() => {
     if (near && near.nearConnection) {
@@ -225,13 +227,24 @@ const RainbowBridge: NextPageWithLayout = () => {
     return new Big(balance).toFixed(4);
   };
 
+  const formateAddress = (address: string) => {
+    if (address.indexOf('.near') > -1) return address;
+
+    return address.slice(0, 6) + '...' + address.slice(-6);
+  };
+
+  const displayValue =
+    !priceMap?.[selectToken.near_address || 'wrap.near']?.price || !amount
+      ? '-'
+      : new Big(priceMap?.[selectToken.near_address || 'wrap.near']?.price || 0).times(amount || 0).toFixed(3);
+
   const ethereumBox = (
     <div className="choose-bridge-box">
       <div className="choose-bridge-box-select">
         <div className="choose-bridge-box-select-name">
           <img className="choose-bridge-box-icon" src={ethIcon} />
 
-          <span>Ethereum</span>
+          <span>{sender ? formateAddress(sender) : 'Ethereum'}</span>
         </div>
 
         <ConnectButton
@@ -249,7 +262,7 @@ const RainbowBridge: NextPageWithLayout = () => {
         <div className="choose-bridge-box-select-name">
           <img className="choose-bridge-box-icon" src={nearIcon} />
 
-          <span>NEAR</span>
+          <span>{signedIn ? formateAddress(accountId) : 'NEAR'}</span>
         </div>
 
         <ConnectButton isConnected={signedIn} onConnect={handleSignIn} onDisConnect={logOut} />
@@ -464,7 +477,7 @@ const RainbowBridge: NextPageWithLayout = () => {
 
                 {bothConnected && (
                   <div className="price-and-balance-filed">
-                    <div className="price-filed">≈$</div>
+                    <div className="price-filed">≈${displayValue}</div>
 
                     <div>
                       Balance:{' '}

@@ -187,6 +187,14 @@ const Wrapper = styled.div`
   }
 `;
 
+const NoListWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 120px;
+  color: #787da1;
+`;
+
 const CompletedTransfers = (props: {
   hidden: boolean;
   bothConnected: boolean;
@@ -283,6 +291,8 @@ const CompletedTransfers = (props: {
           );
         })}
       </div>
+
+      {noList && <NoListWrapper>No completed transfer yet</NoListWrapper>}
     </Wrapper>
   );
 };

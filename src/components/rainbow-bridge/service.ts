@@ -1,5 +1,7 @@
 import type { Transfer } from '@near-eth/client';
 
+import { useState, useEffect } from 'react';
+
 export interface TransferList {
   code: number;
   data: Transfer[];
@@ -30,4 +32,18 @@ export const fetchAllTransfers = async (nearAccountId: string, ethAddress: strin
         update: 0,
       };
     });
+};
+
+export const fetchTokenPrice = async () => {
+  return await fetch('https://indexer.ref.finance/list-token-price').then((res) => res.json());
+};
+
+export const useTokenPrice = () => {
+  const [priceMap, setPriceMap] = useState<any>({});
+
+  useEffect(() => {
+    fetchTokenPrice().then(setPriceMap);
+  }, []);
+
+  return priceMap;
 };

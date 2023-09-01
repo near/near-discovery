@@ -161,6 +161,7 @@ const LoginArea = styled.div`
   position: fixed;
   top: 28px;
   right: 30px;
+  z-index: 10;
   @media (min-width: 901px) {
     display: flex;
   }
@@ -175,6 +176,8 @@ export const LoginBox = () => {
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
 
   const router = useRouter();
+
+  const isHome = router.pathname === '/';
 
   function isActive(name: string) {
     let paths: string[] = [];
@@ -286,7 +289,9 @@ export const LoginBox = () => {
     }
   }, [isZKEVMActive]);
 
-  return isActive('near')
+  return isHome
+    ? null
+    : isActive('near')
     ? NearLoginArea
     : isActive('polygon-zkevm')
     ? ZKEVMloginArea

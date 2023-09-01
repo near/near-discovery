@@ -142,7 +142,7 @@ const Wrapper = styled.div`
     line-height: 17px;
     letter-spacing: 0em;
     text-align: center;
-    background: #64b5ff;
+    color: #64b5ff;
     width: 90px;
   }
 
