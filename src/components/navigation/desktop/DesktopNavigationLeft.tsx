@@ -262,6 +262,7 @@ export const DesktopNavigationLeft = () => {
         'ZKEVM.GAMMA',
         'ZKEVM.AAVE',
         'polygon-zkevm',
+        '0vix.Lending',
       ];
     } else if (name == 'base') {
       paths = ['Base.BaseDex', 'base'];
