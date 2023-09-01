@@ -13,7 +13,7 @@ export const fetchAllTransfers = async (nearAccountId: string, ethAddress: strin
       update: 0,
     };
 
-  const baseUrl = `http://139.162.85.48:8400/?ethAddress=${ethAddress}&nearAccountId=${nearAccountId}`;
+  const baseUrl = `https://backend.data-service.ref-finance.com/?ethAddress=${ethAddress}&nearAccountId=${nearAccountId}`;
 
   return fetch(baseUrl)
     .then(async (res) => {
