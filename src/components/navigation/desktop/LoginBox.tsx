@@ -289,13 +289,13 @@ export const LoginBox = () => {
     }
   }, [isZKEVMActive]);
 
-  return isHome
-    ? null
-    : isActive('near')
+  return isActive('near')
     ? NearLoginArea
     : isActive('polygon-zkevm')
     ? ZKEVMloginArea
     : isActive('base')
     ? BaseloginArea
-    : MantleloginArea;
+    : isActive('mantle')
+    ? MantleloginArea
+    : null;
 };
