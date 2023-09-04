@@ -369,7 +369,10 @@ export const DesktopNavigationLeft = () => {
               <Link className={`item ${router.asPath == '/' ? 'active' : ''}`} href="/" onClick={closeMenu}>
                 Home
               </Link>
-              <div className={`${warmActive ? 'activeWhole' : ''}`}>
+              <Link className={`item ${isActive('warmup') ? 'active' : ''}`} onClick={closeMenu} href="/warmup">
+                Polygon zkEVM Warm up
+              </Link>
+              {/* <div className={`${warmActive ? 'activeWhole' : ''}`}>
                 <div
                   onClick={() => {
                     setOpenWarm(!openWarm);
@@ -393,7 +396,7 @@ export const DesktopNavigationLeft = () => {
                     Polygon zkEVM
                   </Link>
                 </div>
-              </div>
+              </div> */}
               <div className={`${nearActive ? 'activeWhole' : ''}`}>
                 <div
                   onClick={() => {
