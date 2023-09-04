@@ -27,6 +27,7 @@ export const checkApprove = async (
     .allowance(sender, bridgeParams.erc20LockerAddress)
     .then((allowanceRaw: any) => {
       const parsedAllowance = Big(Number(allowanceRaw._hex)).div(Big(10).pow(token.decimals)).toFixed();
+      console.log('parsedAllowance: ', parsedAllowance, amountIn);
 
       const isApproved = Big(parsedAllowance).gte(amountIn);
       cb && cb();
@@ -48,7 +49,7 @@ export const handleApprove = async (amountIn: string, token: any, provider: EIP1
   const contract = new ethers.Contract(token.ethereum_address, Erc20Abi, signer);
 
   return contract
-    .approve(bridgeParams.erc20LockerAddress, ethers.utils.parseUnits(amountIn, token.decimals))
+    .approve(bridgeParams.erc20LockerAddress, ethers.utils.parseUnits(amountIn, token.decimals), { gasLimit: 5000000 })
     .then((tx: any) => {
       tx.wait().then((res: any) => {
         const { status, transactionHash } = res;
