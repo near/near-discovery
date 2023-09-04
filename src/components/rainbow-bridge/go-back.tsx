@@ -72,4 +72,22 @@ const GoBackNav = () => {
   );
 };
 
-export { GoBackNav };
+const GoBackNavSourceAllInOne = () => {
+  return (
+    <AbsoluteContainer>
+      <Link href={'/near'} className="icon">
+        {GoBackIcon}
+      </Link>
+
+      <img src={'https://ipfs.near.social/ipfs/bafkreigq5clxrflxne3bwmtxhwmji774eye5hm6nlrbospjaljuocesyuy'} alt="" />
+
+      <div className="container-text">
+        <h3>NEAR All-in-one</h3>
+        <img src="https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm" />
+        <p>@juaner.near</p>
+      </div>
+    </AbsoluteContainer>
+  );
+};
+
+export { GoBackNav, GoBackNavSourceAllInOne };

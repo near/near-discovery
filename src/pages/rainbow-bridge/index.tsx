@@ -19,7 +19,7 @@ import { checkApprove, handleApprove } from '../../components/rainbow-bridge/app
 import { getBalance } from '@/components/rainbow-bridge/balance';
 import { CompletedTransfers } from '@/components/rainbow-bridge/completed-transfers';
 import { ConnectButton } from '@/components/rainbow-bridge/connect';
-import { GoBackNav } from '@/components/rainbow-bridge/go-back';
+import { GoBackNav, GoBackNavSourceAllInOne } from '@/components/rainbow-bridge/go-back';
 import { PendingTransfers } from '@/components/rainbow-bridge/pending-transfers';
 import {
   Button,
@@ -34,7 +34,7 @@ import {
 import { fetchAllTransfers, useTokenPrice } from '../../components/rainbow-bridge/service';
 import * as storage from '@/components/rainbow-bridge/storage';
 import { transfer } from '@/components/rainbow-bridge/transfer';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { RainbowLeftMenu } from '@/components/rainbow-bridge/left-menu';
 
 export const ethIcon = 'https://ipfs.near.social/ipfs/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee';
@@ -385,9 +385,13 @@ const RainbowBridge: NextPageWithLayout = () => {
     }
   };
 
+  const search = useSearchParams();
+
+  const source = search.get('source');
+
   return (
     <>
-      <GoBackNav />
+      {source === 'all-in-one' ? <GoBackNavSourceAllInOne /> : <GoBackNav />}
 
       <MainWrapper>
         <RainbowLeftMenu />
