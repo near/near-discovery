@@ -177,8 +177,6 @@ export const LoginBox = () => {
 
   const router = useRouter();
 
-  const isHome = router.pathname === '/';
-
   function isActive(name: string) {
     let paths: string[] = [];
     if (name == 'near') {

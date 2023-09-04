@@ -4,8 +4,10 @@ import Big from 'big.js';
 import { ethers } from 'ethers';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { useSetChain } from '@web3-onboard/react';
+
 import MainWrapper from '@/components/sandbox/css/MainWrapper';
-import { useEthersProviderContext } from '@/data/web3';
+import { onboard, useEthersProviderContext } from '@/data/web3';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { Erc20Abi, tokenList } from '@/components/rainbow-bridge/config';
@@ -164,7 +166,6 @@ const RainbowBridge: NextPageWithLayout = () => {
   const { near } = useVmStore();
 
   const priceMap = useTokenPrice();
-
   useEffect(() => {
     if (near && near.nearConnection) {
       console.log('near: ', near);
@@ -189,6 +190,23 @@ const RainbowBridge: NextPageWithLayout = () => {
 
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
 
+  const [
+    {
+      chains, // the list of chains that web3-onboard was initialized with
+      connectedChain, // the current chain the user's wallet is connected to
+      settingChain, // boolean indicating if the chain is in the process of being set
+    },
+    setChain, // function to call to initiate user to switch chains in their wallet
+  ] = useSetChain();
+
+  useEffect(() => {
+    if (connectedChain && connectedChain.id !== '0x1') {
+      setChain({
+        chainId: '0x1',
+      });
+    }
+  }, [connectedChain]);
+
   const signedIn = useAuthStore((store) => store.signedIn);
   const logOut = useAuthStore((store) => store.logOut);
 
@@ -212,7 +230,7 @@ const RainbowBridge: NextPageWithLayout = () => {
 
   const tokenString = selectToken.ethereum_address + '-' + selectToken.near_address;
 
-  const bothConnected = accountId && !!sender;
+  const bothConnected = accountId && !!sender && connectedChain?.id === '0x1';
 
   function handleSignIn() {
     flushEvents();
@@ -248,7 +266,7 @@ const RainbowBridge: NextPageWithLayout = () => {
         </div>
 
         <ConnectButton
-          isConnected={!!wallet}
+          isConnected={!!wallet && !!sender && connectedChain?.id === '0x1'}
           onConnect={() => connect()}
           onDisConnect={() => (wallet ? disconnect(wallet) : null)}
         />
