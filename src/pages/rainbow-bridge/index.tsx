@@ -381,7 +381,7 @@ const RainbowBridge: NextPageWithLayout = () => {
         sourceBridge: from,
         accountId,
         near,
-      }).catch(() => {});
+      }).catch(() => null);
     }
   };
 
