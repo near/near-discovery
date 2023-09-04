@@ -33,8 +33,8 @@ const Layout = styled.div`
       width: 100%;
       min-height: 100vh;
       padding-top: 70px;
-      padding-right: 16px;
-      padding-left: 16px;
+      padding-right: 4px;
+      padding-left: 4px;
     }
   }
 `;
@@ -43,14 +43,13 @@ export function DefaultLayout({ children }: Props) {
   const src = useCurrentComponentStore((store) => store.src);
   const components = useBosComponents();
 
-
   const refTemplatepageSrc = 'ref-admin.near/widget/ref-template-page';
   const ZKEVMTemplateSrc = 'guessme.near/widget/ZKEVM.Template';
   const ZKEVMTemplateWarmSrc = 'guessme.near/widget/ZKEVMWarmUp.warm-up';
-  const QuestionListSrc = 'guessme.near/widget/ZKEVM.QuestionList'
-  const ExecuteRecordsSrc = 'guessme.near/widget/ZKEVM.ExecuteRecords'
+  const QuestionListSrc = 'guessme.near/widget/ZKEVM.QuestionList';
+  const ExecuteRecordsSrc = 'guessme.near/widget/ZKEVM.ExecuteRecords';
   const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps';
-  const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage'
+  const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage';
 
   const MantleSrc = 'bluebiu.near/widget/Mantle.MantleTemplate';
 
