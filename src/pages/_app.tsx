@@ -85,7 +85,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           key="canonical"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>山山</title>
+        <title>DapDap</title>
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
