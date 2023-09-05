@@ -149,6 +149,7 @@ const ContainerMobile = styled.div`
     .right_p {
       position: absolute;
       right: 24px;
+      top: 28px
     }
   }
   .show {
