@@ -23,8 +23,12 @@ const Container = styled.div`
     border-radius: 16px;
     cursor: pointer;
     padding-left: 32px;
-    font-size: 18px;
+    font-family: Gantari;
+    font-size: 16px;
     font-weight: 500;
+    line-height: 19px;
+    letter-spacing: 0em;
+    text-align: left;
     margin: 6px 0;
     color: rgba(151, 154, 190, 1);
     text-decoration: none;
@@ -42,6 +46,9 @@ const Container = styled.div`
   }
   .child-item {
     padding-left: 64px;
+  }
+  .disabled{
+    cursor: not-allowed;
   }
   .item.active {
     background: rgba(55, 58, 83, 1);
@@ -460,7 +467,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -478,7 +485,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Polygon') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Polygon') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -488,7 +495,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Optimism') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -498,7 +505,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('avalanche') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -508,7 +515,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('zkSync') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -518,7 +525,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Linea') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -528,7 +535,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Scroll') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Scroll') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -538,7 +545,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Gnosis') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Gnosis') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -548,7 +555,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Metis') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -558,7 +565,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Berachain') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Berachain') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -568,7 +575,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Monad') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Monad') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -578,7 +585,7 @@ export const DesktopNavigationLeft = () => {
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('Taiko') ? 'active' : ''}`}
+                    className={`item child-item ${isActive('Taiko') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
                       event.preventDefault();
@@ -647,15 +654,14 @@ export const DesktopNavigationLeft = () => {
                   }}
                 >
                   <div
-                    className={`item ${
-                      isActive('allChains') ||
-                      isActive('near') ||
-                      isActive('polygon-zkevm') ||
-                      isActive('base') ||
-                      isActive('mantle')
+                    className={`item ${isActive('allChains') ||
+                        isActive('near') ||
+                        isActive('polygon-zkevm') ||
+                        isActive('base') ||
+                        isActive('mantle')
                         ? 'active'
                         : ''
-                    }`}
+                      }`}
                   >
                     <div className="icon">{templatesIcon}</div>
                   </div>
@@ -681,7 +687,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -695,7 +701,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('polygon') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('polygon') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -705,7 +711,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Optimism') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -715,7 +721,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('avalanche') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -725,7 +731,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('zkSync') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -735,7 +741,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Linea') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -744,7 +750,7 @@ export const DesktopNavigationLeft = () => {
                       Linea <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Scroll') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Scroll') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -753,7 +759,7 @@ export const DesktopNavigationLeft = () => {
                       Scroll <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Gnosis') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Gnosis') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -762,7 +768,7 @@ export const DesktopNavigationLeft = () => {
                       Gnosis <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Metis') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -771,7 +777,7 @@ export const DesktopNavigationLeft = () => {
                       Metis <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Berachain') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Berachain') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -780,7 +786,7 @@ export const DesktopNavigationLeft = () => {
                       Berachain <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Monad') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Monad') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -789,7 +795,7 @@ export const DesktopNavigationLeft = () => {
                       Monad <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Taiko') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Taiko') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -867,7 +873,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('BSC') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -881,7 +887,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Polygon') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Polygon') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -891,7 +897,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Polygon') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Optimism') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Optimism') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -901,7 +907,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Optimism') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('avalanche') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('avalanche') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -911,7 +917,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('zkSync') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('zkSync') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -921,7 +927,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('zkSync') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Linea') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Linea') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -931,7 +937,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Linea') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Scroll') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Scroll') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -941,7 +947,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Scroll') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Gnosis') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Gnosis') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -951,7 +957,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Scroll') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Metis') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -961,7 +967,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Metis') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Berachain') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Berachain') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -971,7 +977,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Berachain') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Monad') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Monad') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();
@@ -981,7 +987,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('Monad') ? visible_bag : null}</span>
                     </Link>
                     <Link
-                      className={`item child-item ${isActive('Metis') ? 'active' : ''}`}
+                      className={`item child-item ${isActive('Metis') ? 'active' : ''} disabled`}
                       href="#"
                       onClick={(event) => {
                         event.preventDefault();

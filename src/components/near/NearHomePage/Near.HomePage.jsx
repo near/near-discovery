@@ -139,7 +139,6 @@ const NearHomePage = () => {
 const Wrapper = styled.div`
   color: #fff;
   font-family: 'Gantari', sans-serif;
-  margin: 0 -36px;
   overflow: hidden;
 `;
 
