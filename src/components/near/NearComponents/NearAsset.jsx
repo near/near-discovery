@@ -12,6 +12,10 @@ const nearAsset = {
     sweat: '/near/sweat.png',
     populardapps: '/near/populardapps.png',
     mpopulardapps: '/near/m-populardapps.png',
+    polygon_zkevm_all_in_one: '/near/polygon_zkevm_all_in_one_banner.png',
+    near_all_in_one: '/near/near_all_in_one_banner.png',
+    base_all_in_one: '/near/base_all_in_one_banner.png',
+    mantle_all_in_one: '/near/mantle_all_in_one_banner.png',
   },
   logo: {
     near: '/near/logo/near.png',
@@ -19,6 +23,10 @@ const nearAsset = {
     gamma: '/near/logo/gamma.png',
     zkevm: '/near/logo/zkevm.png',
     polygon: '/near/logo/polygon.png',
+    polygon_zkevm_all_in_one: '/near/polygon_zkevm_all_in_one_icon.png',
+    near_all_in_one: '/near/near_all_in_one_icon.png',
+    base_all_in_one: '/near/base_all_in_one_icon.png',
+    mantle_all_in_one: '/near/mantle_all_in_one_icon.png',
   },
   animated: {
     bridge: '/near/animated/bridge.gif',

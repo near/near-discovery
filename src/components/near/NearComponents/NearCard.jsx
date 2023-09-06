@@ -5,6 +5,21 @@ import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
 import NearImage from './NearImage';
 
+const CommingIcon = styled.div`
+  position: absolute;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  background: #5f627c;
+  width: 65px;
+  border-radius: 6px;
+  top: 8px;
+  right: 8px;
+  text-align: center;
+  padding: 4px 0px;
+`;
+
 const NearCard = ({ bg, title, subTitle, icon, avatar, children, rightText, className, onClick }) => {
   return (
     <Container className={className} onClick={onClick}>
@@ -34,6 +49,8 @@ const NearCard = ({ bg, title, subTitle, icon, avatar, children, rightText, clas
         </Header>
         {children && <div>{children}</div>}
       </Content>
+
+      {!onClick && <CommingIcon>Coming</CommingIcon>}
     </Container>
   );
 };
@@ -42,6 +59,7 @@ const Container = styled.div`
   border-radius: 20px;
   background: #373a53;
   overflow: hidden;
+  position: relative;
 `;
 
 const Content = styled.div`

@@ -29,82 +29,56 @@ const NearHomePageCards = () => {
         modules={[Autoplay]}
         centeredSlides={isMobile}
       >
-        <StyledSwiperSlide>
+        <StyledSwiperSlide canClick={true}>
           <StyledRefCard
-            title={'zkEVM-bridge'}
-            subTitle={'@alpha.near'}
-            bg={nearAsset.img.zkevmbridge}
+            title={'Polygon zkEVM All-in-one'}
+            subTitle={'@bluebiu.near'}
+            bg={nearAsset.img.polygon_zkevm_all_in_one}
             icon={nearAsset.logo.zkevm}
             avatar={nearAsset.avatar.a}
             rightText={'436\nCollected'}
-            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVMSwap.zkevm-bridge')}
+            onClick={() => handleClick('/bluebiu.near/widget/ZKEVM-all-in-one')}
           >
-            <CardContent tags={['Bridge', 'Polygon zkEVM', 'Ethereum']} />
+            <CardContent tags={['Dexes', 'Bridge', 'Lending', 'Liquidity Manage']} />
           </StyledRefCard>
         </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <StyledRefCard
-            title={'Polygon zkEVM Dex'}
-            subTitle={'@polygonzkevm.near'}
-            bg={nearAsset.img.dex}
-            icon={nearAsset.logo.polygon}
-            avatar={nearAsset.avatar.b}
-            rightText={'130\nCollected'}
-            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVMSwap.zkevm-swap')}
-          >
-            <CardContent tags={['Dexes', 'Polygon zkEVM']} />
-          </StyledRefCard>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <StyledRefCard
-            title={'Gamma'}
-            subTitle={'@gamma.near'}
-            bg={nearAsset.img.gamma}
-            icon={nearAsset.logo.gamma}
-            avatar={nearAsset.avatar.c}
-            rightText={'130\nCollected'}
-            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVM.GAMMA')}
-          >
-            <CardContent tags={['Liquidity manager']} />
-          </StyledRefCard>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
-          <StyledRefCard
-            title={'AAVE v3'}
-            subTitle={'@aave-v3.near'}
-            bg={nearAsset.img.aave}
-            icon={nearAsset.logo.aave}
-            avatar={nearAsset.avatar.d}
-            rightText={'236\nCollected'}
-            onClick={() => handleClick('/ref-bigboss.near/widget/ZKEVM.AAVE')}
-          >
-            <CardContent tags={['Lending']} />
-          </StyledRefCard>
-        </StyledSwiperSlide>
-        <StyledSwiperSlide>
+        <StyledSwiperSlide canClick={true}>
           <StyledRefCard
             title={'NEAR All-in-one'}
-            subTitle={'@aabbcc.near'}
-            bg={nearAsset.img.allinone}
-            icon={nearAsset.logo.near}
-            avatar={nearAsset.avatar.e}
-            rightText={'436\nCollected'}
+            subTitle={'@juaner.near/'}
+            bg={nearAsset.img.near_all_in_one}
+            icon={nearAsset.logo.near_all_in_one}
+            avatar={nearAsset.avatar.b}
+            rightText={'130\nCollected'}
             onClick={() => handleClick('/juaner.near/widget/ref-home')}
           >
-            <CardContent tags={['Dexes', 'Lending', 'Liquid Staking', 'NEAR']} />
+            <CardContent tags={['Bridge', 'Dexes', 'Lending', 'Staking']} />
           </StyledRefCard>
         </StyledSwiperSlide>
-        <StyledSwiperSlide>
+        <StyledSwiperSlide canClick={false}>
           <StyledRefCard
-            title={'NEAR Staking'}
-            subTitle={'@aabbcc.near'}
-            bg={nearAsset.img.nearstaking}
-            icon={nearAsset.logo.nearstaking}
-            avatar={nearAsset.avatar.e}
-            rightText={'236\nCollected'}
-            onClick={() => handleClick('/ref-admin.near/widget/xBox')}
+            title={'BASE All-in-one'}
+            subTitle={'@bluebiu.near'}
+            bg={nearAsset.img.base_all_in_one}
+            icon={nearAsset.logo.base_all_in_one}
+            avatar={nearAsset.avatar.c}
+            rightText={'130\nCollected'}
+            onClick={null}
           >
-            <CardContent tags={['Liquid Staking', 'NEAR']} />
+            <CardContent tags={['Bridge', 'Dexes', 'Lending']} />
+          </StyledRefCard>
+        </StyledSwiperSlide>
+        <StyledSwiperSlide canClick={false}>
+          <StyledRefCard
+            title={'Mantle All-in-one'}
+            subTitle={'@bluebiu.near'}
+            bg={nearAsset.img.mantle_all_in_one}
+            icon={nearAsset.logo.mantle_all_in_one}
+            avatar={nearAsset.avatar.d}
+            rightText={'236\nCollected'}
+            onClick={null}
+          >
+            <CardContent tags={['Bridge', 'Dexes', 'Lending']} />
           </StyledRefCard>
         </StyledSwiperSlide>
       </Swiper>
@@ -112,12 +86,26 @@ const NearHomePageCards = () => {
   );
 };
 
+const badgetBg = {
+  Dexes: '#ACFCED',
+  Bridge: '#E3E99D',
+  Lending: '#ADFFB5',
+  'Liquidity Manage': '#AAD6FF',
+  Staking: '#C1BFFF',
+};
 const CardContent = ({ tags }) => {
   return (
     <StyledCardContent>
       <StyledBadges>
-        {tags?.map((d) => (
-          <Badge key={d}>{d}</Badge>
+        {tags?.map((d, index) => (
+          <Badge
+            style={{
+              background: badgetBg[d],
+            }}
+            key={d}
+          >
+            {d}
+          </Badge>
         ))}
       </StyledBadges>
       <StyledFires>
@@ -148,10 +136,9 @@ const Wrapper = styled.div`
 const StyledSwiperSlide = styled(SwiperSlide)`
   width: fit-content;
   margin-left: 30px;
-  cursor: pointer;
+  cursor: ${(p) => (p.canClick ? 'pointer' : 'auto')};
   padding: 10px;
   transition: transform 0.3s;
-
   &:hover {
     transform: scale(1.02);
   }
@@ -196,14 +183,13 @@ const StyledFireIcon = styled(NearImage)`
 
 const Badge = styled.div`
   border-radius: 30px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
   background: rgba(26, 46, 51, 0.25);
   font-size: 14px;
   font-weight: 400;
   line-height: 1;
-  padding: 4px 11px;
+  padding: 6px 11px;
   margin-right: 5px;
-
+  color: #000000;
   @media (max-width: ${MEDIUM_SCREEN}) {
     font-size: 12px;
   }
