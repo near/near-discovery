@@ -149,7 +149,7 @@ const ContainerMobile = styled.div`
     .right_p {
       position: absolute;
       right: 24px;
-      top: 28px
+      top: 28px;
     }
   }
   .show {
@@ -279,6 +279,8 @@ export const DesktopNavigationLeft = () => {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
+    } else if (name === 'arbitrum') {
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
@@ -342,7 +344,12 @@ export const DesktopNavigationLeft = () => {
   );
 
   const nearActive =
-    isActive('near') || isActive('polygon-zkevm') || isActive('base') || isActive('mantle') || isActive('allChains');
+    isActive('near') ||
+    isActive('polygon-zkevm') ||
+    isActive('base') ||
+    isActive('mantle') ||
+    isActive('allChains') ||
+    isActive('arbitrum');
   const warmActive = isActive('warmup');
   function openMenu() {
     set_show_menu_list(true);
@@ -464,13 +471,11 @@ export const DesktopNavigationLeft = () => {
                   </Link>
                   <Link
                     className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
-                    href="#"
-                    onClick={(event) => {
-                      event.preventDefault();
-                    }}
+                    href="/arbitrum"
+                    onClick={closeMenu}
                   >
-                    Arbitrum
-                    <span className="soonIcon"> {soonIcon}</span>
+                    Arbitrum(1)
+                    <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
                     className={`item child-item ${isActive('Polygon') ? 'active' : ''}`}
@@ -685,15 +690,9 @@ export const DesktopNavigationLeft = () => {
                       BSC
                       <span className="soonIcon"> {soonIcon}</span>
                     </Link>
-                    <Link
-                      className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Arbitrum
-                      <span className="soonIcon"> {soonIcon}</span>
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
+                      Arbitrum(1)
+                      <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('polygon') ? 'active' : ''}`}
@@ -877,14 +876,8 @@ export const DesktopNavigationLeft = () => {
                       BSC <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('BSC') ? visible_bag : null}</span>
                     </Link>
-                    <Link
-                      className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Arbitrum <span className="soonIcon"> {soonIcon}</span>
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
+                      Arbitrum(1) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
                     <Link
