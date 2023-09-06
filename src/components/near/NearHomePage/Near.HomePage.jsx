@@ -106,13 +106,14 @@ const NearHomePage = () => {
         </NearContainer>
       </Section>
 
-      <Section padding={'154px 0'}>
+      <Section mobilePadding={'60px 0 300px 0'} padding={'154px 0'}>
         <NearContainer>
           <NearHomePagePopularDapps />
         </NearContainer>
       </Section>
 
-      <Section className={"mt-5 mt-md-0"}
+      <Section
+        className={'mt-5 mt-md-0'}
         style={{
           backgroundColor: '#E9F456',
           padding: '46px 0',
@@ -149,7 +150,7 @@ const Section = styled.div`
   text-align: center;
 
   @media (max-width: ${MOBILE_SIZE}) {
-    padding: 60px 0;
+    padding: ${(p) => (p.mobilePadding ? p.mobilePadding : '60px 0')};
   }
 `;
 

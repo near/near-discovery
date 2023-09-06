@@ -14,23 +14,52 @@ const NearHomePagePopularDapps = () => {
         <Title>The most popular Dapps</Title>
         <Desc>Make your DeFi actions simple, fast and traceable</Desc>
       </TitleWrapper>
-
       <AbsoluteWrapper>
+        <PCBg src={nearAsset.img.pc_popular_bg} width={871} height={429} />
+      </AbsoluteWrapper>
+
+      <PopularDappsWrapper>
+        <PCBg src={nearAsset.img.populardapps} width={536} height={90} />
+
+        <MobileBg src={nearAsset.img.mpopulardapps} width={428} height={436} />
+
         <StyledMoreButton>
           More <ArrowRight />
         </StyledMoreButton>
+      </PopularDappsWrapper>
 
-        <PCBg src={nearAsset.img.populardapps} width={871} height={430} />
-        <MobileBg src={nearAsset.img.mpopulardapps} width={428} height={436} />
-      </AbsoluteWrapper>
+      {/* <MobileBg src={nearAsset.img.mpopulardapps} width={428} height={436} /> */}
 
       <NearButtonWrapper>
-        <PolygonButton>Polygon zkEVM</PolygonButton>
-        <NearButton>Near</NearButton>
+        <PCBg src={nearAsset.img.cand_more_dapps} width={1000} height={229} />
+
+        <MobileBg
+          style={{
+            position: 'relative',
+            bottom: '200px',
+          }}
+          src={nearAsset.img.mobile_more_dapps}
+          width={359}
+          height={319}
+        />
       </NearButtonWrapper>
     </Wrapper>
   );
 };
+
+const PopularDappsWrapper = styled.div`
+  display: flex;
+  padding-top: 120px;
+  padding-bottom: 60px;
+  align-items: center;
+  gap: 20px;
+  justify-content: center;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    display: box;
+    padding-top: 20px;
+  }
+`;
 
 const ArrowRight = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="30" height="16" viewBox="0 0 30 16" fill="none">
@@ -95,15 +124,16 @@ const StyledMoreButton = styled.div`
   align-items: center;
   flex-direction: column;
   cursor: pointer;
-  position: absolute;
   left: 670px;
   top: 117px;
 
   @media (max-width: ${MEDIUM_SCREEN}) {
-    left: 267px;
-    top: 184px;
+    left: 220px;
+    top: 230px;
     width: 72px;
     height: 72px;
+
+    position: absolute;
   }
 `;
 
