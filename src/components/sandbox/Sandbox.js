@@ -142,12 +142,13 @@ export const Sandbox = ({ onboarding = false }) => {
           const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
           const newPath = fileToPath(file);
           const code = codeDraft || codeMain;
-          updateCodeLocalStorage(newPath, codeDraft || codeMain, cache);
+          const changesMade = checkChangesMade(codeMain, codeDraft, code);
 
           const singleFileObject = {
             codeMain,
             codeDraft,
             isDraft,
+            changesMade,
             savedOnChain: true,
             new: false,
             codeLocalStorage: code,
@@ -159,9 +160,12 @@ export const Sandbox = ({ onboarding = false }) => {
             [jpath]: {
               ...state[jpath],
               ...singleFileObject,
-              changesMade: checkChangesMade(codeMain, codeDraft, code),
             },
           }));
+
+          if (changesMade) {
+            updateCodeLocalStorage(newPath, code, cache);
+          }
         }
       };
       fetchCode();
@@ -224,22 +228,14 @@ export const Sandbox = ({ onboarding = false }) => {
     setMetadata(undefined);
   };
 
-  const getAllFileLocalStorage = useCallback(
+  const collectAllFileData = useCallback(
     (filesObject) => {
       Object.values(filesObject).map((file) => {
         getFileLocalStorage(file);
-      });
-    },
-    [getFileLocalStorage],
-  );
-
-  const getAllFileSocialDB = useCallback(
-    (filesObject) => {
-      Object.values(filesObject).map((file) => {
         getFileSocialDB(file);
       });
     },
-    [getFileSocialDB],
+    [getFileLocalStorage, getFileSocialDB],
   );
 
   const firstLoad = useCallback(() => {
@@ -262,8 +258,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
       setFilesObject(filesObject);
       selectFile(filesObject[fileToJpath(path)]);
-      getAllFileLocalStorage(filesObject);
-      getAllFileSocialDB(filesObject);
+      collectAllFileData(filesObject);
 
       if (onboarding) {
         return;
@@ -278,7 +273,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
       setDefaultWidget(componentSrc.join('/'));
     });
-  }, [cache, currentStep, getAllFileLocalStorage, getAllFileSocialDB, onboarding, router.query, setComponentSrc]);
+  }, [cache, collectAllFileData, currentStep, onboarding, router.query, setComponentSrc]);
 
   const renameFile = (newName) => {
     const pathNew = nameToPath(path.type, newName);
@@ -301,8 +296,8 @@ export const Sandbox = ({ onboarding = false }) => {
   };
 
   const changeCode = (path, code) => {
-    updateCodeLocalStorage(path, code, cache);
     const jpath = JSON.stringify(path);
+    updateCodeLocalStorage(path, code, cache);
 
     setFilesObject((state) => ({
       ...state,
