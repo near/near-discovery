@@ -59,6 +59,36 @@ const baseIcon = (
 const mantleIcon = (
   <img src="https://ipfs.near.social/ipfs/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4"></img>
 );
+const arbitrumIcon = (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="32" y="32" width="32" height="32" rx="8" transform="rotate(180 32 32)" fill="black" />
+    <path
+      d="M6.75715 11.8606V20.711C6.75715 21.2742 7.05724 21.7959 7.54663 22.0776L15.2105 26.5005C15.6999 26.7821 16.3001 26.7821 16.7895 26.5005L24.4534 22.0776C24.9427 21.7959 25.2428 21.2742 25.2428 20.711V11.8606C25.2428 11.2973 24.9427 10.7756 24.4534 10.494L16.7895 6.0711C16.3001 5.78947 15.6999 5.78947 15.2105 6.0711L7.54663 10.494C7.06186 10.7756 6.75715 11.2973 6.75715 11.8606Z"
+      fill="#213147"
+    />
+    <path
+      d="M17.6755 18.0015L16.5813 20.9978C16.549 21.0809 16.549 21.1732 16.5813 21.2563L18.4603 26.4133L20.6348 25.1575L18.0263 18.0015C17.9663 17.8353 17.7355 17.8353 17.6755 18.0015Z"
+      fill="#12AAFF"
+    />
+    <path
+      d="M19.8639 12.9614C19.8039 12.7952 19.573 12.7952 19.513 12.9614L18.4188 15.9577C18.3865 16.0408 18.3865 16.1332 18.4188 16.2163L21.4982 24.6604L23.6727 23.4046L19.8639 12.9614Z"
+      fill="#12AAFF"
+    />
+    <path
+      d="M16 6.39889C16.0554 6.39889 16.1062 6.41274 16.157 6.44044L24.4488 11.2281C24.5457 11.2835 24.6057 11.385 24.6057 11.4958V21.0711C24.6057 21.1819 24.5457 21.2835 24.4488 21.3389L16.157 26.1311C16.1108 26.1588 16.0554 26.1727 16 26.1727C15.9446 26.1727 15.8938 26.1588 15.843 26.1311L7.55586 21.3435C7.45891 21.2881 7.39889 21.1865 7.39889 21.0757V11.4958C7.39889 11.385 7.45891 11.2835 7.55586 11.2281L15.8476 6.44044C15.8938 6.41274 15.9492 6.39889 16 6.39889ZM16 5C15.7045 5 15.409 5.07849 15.1459 5.23084L6.85411 10.0185C6.32779 10.3232 6 10.8864 6 11.4958V21.0711C6 21.6805 6.32779 22.2484 6.85411 22.5531L15.1459 27.3407C15.409 27.4931 15.7045 27.5716 16 27.5716C16.2955 27.5716 16.591 27.4931 16.8541 27.3407L25.1459 22.5531C25.6768 22.2484 26 21.6851 26 21.0711V11.4958C26 10.8864 25.6722 10.3186 25.1459 10.0139L16.8587 5.23084C16.591 5.07849 16.2955 5 16 5Z"
+      fill="#9DCCED"
+    />
+    <path d="M10.5198 24.6676L11.2816 22.5808L12.8144 23.8551L11.3832 25.1662L10.5198 24.6676Z" fill="#213147" />
+    <path
+      d="M15.3029 10.8126H13.2022C13.0452 10.8126 12.9021 10.9095 12.8513 11.0573L8.34533 23.4118L10.5198 24.6676L15.4829 11.0619C15.5245 10.9418 15.4367 10.8126 15.3029 10.8126Z"
+      fill="white"
+    />
+    <path
+      d="M18.9826 10.8127H16.8819C16.7249 10.8127 16.5818 10.9096 16.531 11.0573L11.3833 25.1663L13.5578 26.4221L19.158 11.0666C19.2042 10.9419 19.1118 10.8127 18.9826 10.8127Z"
+      fill="white"
+    />
+  </svg>
+);
 
 const NearSignInButton = styled.div`
   width: 123px;
@@ -148,6 +178,27 @@ const MantleSignInButton = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #332c4b;
+  position: fixed;
+  top: 28px;
+  right: 30px;
+`;
+
+const SignInButton = styled.div<{ backgroundColor: string; color: string }>`
+  width: 123px;
+  cursor: pointer;
+  height: 40px;
+  border-radius: 12px;
+  background: ${({ backgroundColor }) => backgroundColor};
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-left: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: ${({ color }) => color};
   position: fixed;
   top: 28px;
   right: 30px;
@@ -273,6 +324,22 @@ export const LoginBox = () => {
     </LoginArea>
   );
 
+  const ArbitrumloginArea = wallet ? null : (
+    <LoginArea>
+      <SignInButton
+        backgroundColor="#33549C"
+        color="#fff"
+        onClick={() => {
+          connect();
+        }}
+      >
+        {arbitrumIcon}
+
+        <span>Connect</span>
+      </SignInButton>
+    </LoginArea>
+  );
+
   useEffect(() => {
     if (!isZKEVMActive) {
       onboard.state.actions.updateAccountCenter({
@@ -297,5 +364,7 @@ export const LoginBox = () => {
     ? BaseloginArea
     : isActive('mantle')
     ? MantleloginArea
+    : isActive('arbitrum')
+    ? ArbitrumloginArea
     : null;
 };
