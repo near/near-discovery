@@ -39,6 +39,25 @@ const Layout = styled.div`
   }
 `;
 
+const SPECIAL_URL_MAP: { [key: string]: string } = {
+  'ref-home': '/near',
+  xBox: '/near',
+  nearcolumn: '/near',
+  'ZKEVMSwap.zkevm-swap': '/polygon-zkevm',
+  'ZKEVM-all-in-one': '/polygon-zkevm',
+  'ZKEVMSwap.zkevm-bridge': '/polygon-zkevm',
+  'ZKEVM.GAMMA': '/polygon-zkevm',
+  'ZKEVM.AAVE': '/polygon-zkevm',
+  zkevmcolumn: '/polygon-zkevm',
+  '0vix.Lending': '/polygon-zkevm',
+  'ZKEVM.ExecuteRecords': '/warmup',
+  'ZKEVM.QuestionList': '/warmup',
+  warmup: '/warmup',
+  'Base.BaseDex': '/base',
+  'Mantle.Swap': '/mantle',
+  'Arbitrum.Swap.Dex': '/arbitrum',
+};
+
 export function DefaultLayout({ children }: Props) {
   const src = useCurrentComponentStore((store) => store.src);
   const components = useBosComponents();
@@ -59,6 +78,7 @@ export function DefaultLayout({ children }: Props) {
   const router = useRouter();
 
   const pathName = router.pathname;
+  const componentName = router.query.componentName as string;
 
   useEffect(() => {
     setShowTab(
@@ -88,7 +108,13 @@ export function DefaultLayout({ children }: Props) {
       <div className="content">
         {showTab && (
           <div className="tab">
-            <VmComponent src={components.tabNavigation} props={{ src: src }} />
+            <VmComponent
+              src={components.tabNavigation}
+              props={{
+                src: src,
+                toUrl: SPECIAL_URL_MAP[componentName] ? SPECIAL_URL_MAP[componentName] : document.referrer || '/',
+              }}
+            />
           </div>
         )}
         <LoginBox />
