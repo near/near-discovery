@@ -8,6 +8,7 @@ type AuthState = {
   logOut: () => Promise<void>;
   refreshAllowance: () => Promise<void>;
   requestSignInWithWallet: () => void;
+  requestSignMessage: (data: string) => void;
   signedIn: boolean;
 };
 
@@ -22,6 +23,7 @@ export const useAuthStore = create<AuthStore>((set) => ({
   logOut: async () => undefined,
   refreshAllowance: async () => undefined,
   requestSignInWithWallet: () => undefined,
+  requestSignMessage: () => undefined,
   signedIn: false,
   set: (state) => set((previousState) => ({ ...previousState, ...state })),
 }));
