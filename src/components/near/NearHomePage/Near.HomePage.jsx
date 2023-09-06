@@ -141,6 +141,7 @@ const Wrapper = styled.div`
   color: #fff;
   font-family: 'Gantari', sans-serif;
   overflow: hidden;
+  margin: 0 -4px;
 `;
 
 const Section = styled.div`
