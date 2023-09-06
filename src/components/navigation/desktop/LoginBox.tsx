@@ -197,12 +197,14 @@ export const LoginBox = () => {
       paths = ['base', 'Base.BaseDex'];
     } else if (name === 'mantle') {
       paths = ['mantle', 'Mantle.Swap'];
+    } else if (name === 'arbitrum') {
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
   }
 
-  const isZKEVMActive = isActive('polygon-zkevm') || isActive('base') || isActive('mantle');
+  const isZKEVMActive = isActive('polygon-zkevm') || isActive('base') || isActive('mantle') || isActive('arbitrum');
 
   function handleSignIn() {
     flushEvents();
