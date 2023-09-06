@@ -2,6 +2,8 @@
 
 ## Setup & Development
 
+_This repo requires [pnpm](https://pnpm.io/installation)._
+
 Initialize repo:
 
 ```
