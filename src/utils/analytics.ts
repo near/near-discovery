@@ -85,8 +85,8 @@ function filterURL(url: string) {
 export function recordPageView(pageName: string) {
   if (!rudderAnalytics) {
     pendingEvents.push(() => {
-      recordPageView(pageName)
-    })
+      recordPageView(pageName);
+    });
     return;
   }
   try {
