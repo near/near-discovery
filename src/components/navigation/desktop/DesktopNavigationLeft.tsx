@@ -467,6 +467,14 @@ export const DesktopNavigationLeft = () => {
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
+                    className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
+                    href="/arbitrum"
+                    onClick={closeMenu}
+                  >
+                    Arbitrum(1)
+                    <span className="newIcon">{newIcon}</span>
+                  </Link>
+                  <Link
                     className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
                     href="#"
                     onClick={(event) => {
@@ -475,14 +483,6 @@ export const DesktopNavigationLeft = () => {
                   >
                     BSC
                     <span className="soonIcon"> {soonIcon}</span>
-                  </Link>
-                  <Link
-                    className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`}
-                    href="/arbitrum"
-                    onClick={closeMenu}
-                  >
-                    Arbitrum(1)
-                    <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
                     className={`item child-item ${isActive('Polygon') ? 'active' : ''} disabled`}
@@ -686,6 +686,10 @@ export const DesktopNavigationLeft = () => {
                       Base(1)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
+                      Arbitrum(1)
+                      <span className="newIcon">{newIcon}</span>
+                    </Link>
                     <Link
                       className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
                       href="#"
@@ -695,10 +699,6 @@ export const DesktopNavigationLeft = () => {
                     >
                       BSC
                       <span className="soonIcon"> {soonIcon}</span>
-                    </Link>
-                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
-                      Arbitrum(1)
-                      <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('polygon') ? 'active' : ''} disabled`}
@@ -872,6 +872,10 @@ export const DesktopNavigationLeft = () => {
                       Base(1)<span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
+                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
+                      Arbitrum(1) <span className="newIcon">{newIcon}</span>
+                      <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
+                    </Link>
                     <Link
                       className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
                       href="#"
@@ -881,10 +885,6 @@ export const DesktopNavigationLeft = () => {
                     >
                       BSC <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('BSC') ? visible_bag : null}</span>
-                    </Link>
-                    <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
-                      Arbitrum(1) <span className="newIcon">{newIcon}</span>
-                      <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Polygon') ? 'active' : ''} disabled`}
