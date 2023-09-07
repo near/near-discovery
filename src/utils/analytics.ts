@@ -10,6 +10,7 @@ let rudderAnalytics: Analytics | null = null;
 let anonymousUserId = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
+let pendingEvents: any = [];
 
 declare global {
   interface Window {
@@ -62,6 +63,10 @@ export async function init() {
     window.rudderAnalytics.load(rudderAnalyticsKey, analyticsUrl);
     rudderAnalytics = window.rudderAnalytics;
     if (rudderAnalytics) rudderAnalytics.setAnonymousId(getAnonymousId());
+    for (const event of pendingEvents) {
+      event();
+    }
+    pendingEvents = [];
   } catch (e) {
     console.error(e);
   }
@@ -78,7 +83,12 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics) {
+    pendingEvents.push(() => {
+      recordPageView(pageName);
+    });
+    return;
+  }
   try {
     rudderAnalytics.page('category', pageName, {
       hashId: localStorage.getItem('hashId'),
@@ -154,7 +164,8 @@ function getXPath(element: HTMLElement | null): string {
   if (element === document.body) return element.tagName;
 
   let ix = 0;
-  const siblings = element.parentNode?.children || new HTMLCollection();
+  const siblings = element.parentNode?.children;
+  if (!siblings) return '';
 
   for (let i = 0; i < siblings.length; i++) {
     const sibling = siblings[i];
