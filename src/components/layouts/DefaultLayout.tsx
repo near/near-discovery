@@ -35,6 +35,10 @@ const Layout = styled.div`
       padding-top: 70px;
       padding-right: 4px;
       padding-left: 4px;
+      .tab {
+        margin-bottom: 0;
+        margin-top: 26px;
+      }
     }
   }
 `;
@@ -83,15 +87,15 @@ export function DefaultLayout({ children }: Props) {
   useEffect(() => {
     setShowTab(
       src !== refTemplatepageSrc &&
-        src !== ZKEVMTemplateSrc &&
-        src !== ZKEVMTemplateWarmSrc &&
-        src !== QuestionListSrc &&
-        src !== ExecuteRecordsSrc &&
-        src !== BaseSrc &&
-        src !== MantleSrc &&
-        src !== AllChainsSrc &&
-        src !== ArbitrumSrc &&
-        src !== null,
+      src !== ZKEVMTemplateSrc &&
+      src !== ZKEVMTemplateWarmSrc &&
+      src !== QuestionListSrc &&
+      src !== ExecuteRecordsSrc &&
+      src !== BaseSrc &&
+      src !== MantleSrc &&
+      src !== AllChainsSrc &&
+      src !== ArbitrumSrc &&
+      src !== null,
     );
     // console.log('src', src);
   }, [src]);
