@@ -107,7 +107,7 @@ const NearSignInButton = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #02051e;
-  /* position: fixed; */
+  position: fixed;
   top: 28px;
   right: 30px;
   .near-icon-wrapper {
@@ -136,6 +136,8 @@ const NearSignInButton = styled.div`
     font-weight: 500;
     line-height: 17px;
     letter-spacing: 0em;
+    top: 25px;
+    right: 55px;
     text-align: left;
   }
 `;
