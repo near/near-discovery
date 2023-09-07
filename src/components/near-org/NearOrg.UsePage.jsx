@@ -319,7 +319,7 @@ export function NearOrgUsePage() {
 
           <Card center>
             <a href="https://www.ref.finance/" target="_blank">
-              <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/ref-finance/ref-finance.jpg" />
+              <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-ref-finance.png" />
             </a>
             <Flex direction="column" gap="8px">
               <Text size="text-xl" fontWeight="600" color="sand12">
@@ -383,7 +383,7 @@ export function NearOrgUsePage() {
           <Flex gap="24px" mobileStack="24px">
             <Card>
               <a href="https://www.seatlabnft.com/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/seatlab-nft/seatlab-nft.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-seatlab.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -401,7 +401,7 @@ export function NearOrgUsePage() {
 
             <Card>
               <a href="https://www.tamastream.io/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/tamago/tamago.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-tamago.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -463,7 +463,7 @@ export function NearOrgUsePage() {
           <Flex gap="24px" mobileStack="24px">
             <Card>
               <a href="https://sweatco.in/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/sweat-economy/sweat-economy.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/ecosystem-icon-sweat-economy.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -481,7 +481,7 @@ export function NearOrgUsePage() {
 
             <Card>
               <a href="https://blogchain.app/home" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/blogchain/blogchain.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-blogchain.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -686,7 +686,7 @@ export function NearOrgUsePage() {
 
           <Flex gap="24px" mobileStack="24px">
             <Card>
-              <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/mynearwallet/mynearwallet.jpg" />
+              <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-wallets.png" />
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
                   Non-custodial Wallets
@@ -711,7 +711,7 @@ export function NearOrgUsePage() {
 
             <Card>
               <a href="https://fewfar.com/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/few-and-far/few-and-far.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-few-far.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -812,7 +812,7 @@ export function NearOrgUsePage() {
           <Flex gap="24px" mobileStack="24px">
             <Card>
               <a href="https://youminter.com/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/youminter/youminter.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-youminter.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -838,7 +838,7 @@ export function NearOrgUsePage() {
 
             <Card>
               <a href="https://www.niche.club/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/niche/niche.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-niche.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -955,7 +955,7 @@ export function NearOrgUsePage() {
           <Flex gap="24px" mobileStack="24px">
             <Card>
               <a href="https://nearweek.com/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/nearweek/nearweek.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/v3-use-nearweek.webp" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
@@ -981,7 +981,7 @@ export function NearOrgUsePage() {
 
             <Card>
               <a href="https://sweateconomy.com/" target="_blank">
-                <CircleImg src="https://awesomenear-spaces.fra1.digitaloceanspaces.com/production/projects/sweat-economy/sweat-economy.jpg" />
+                <CircleImg src="https://pages.near.org/wp-content/uploads/2023/03/ecosystem-icon-sweat-economy.png" />
               </a>
               <Flex direction="column" gap="8px">
                 <Text size="text-xl" fontWeight="600" color="sand12">
