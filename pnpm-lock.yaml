@@ -122,8 +122,8 @@ dependencies:
     specifier: 2.1.3
     version: 2.1.3
   near-social-vm:
-    specifier: github:NearSocial/VM#2.2.3
-    version: github.com/NearSocial/VM/381ddbdc8ef5bde7975bebe8f640c1a5f9d85b94(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.0)(near-api-js@2.1.3)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    specifier: github:NearSocial/VM#2.3.2
+    version: github.com/NearSocial/VM/901945dddea1e9e81f42e9d60b00ac9d3c1e9909(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.0)(near-api-js@2.1.3)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
   next:
     specifier: 13.3.4
     version: 13.3.4(react-dom@18.2.0)(react@18.2.0)
@@ -2100,7 +2100,7 @@ packages:
       borsh: 0.7.0
       http-errors: 1.8.1
     optionalDependencies:
-      node-fetch: 2.6.11
+      node-fetch: 2.7.0
     transitivePeerDependencies:
       - encoding
     dev: false
@@ -10709,11 +10709,11 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/NearSocial/VM/381ddbdc8ef5bde7975bebe8f640c1a5f9d85b94(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.0)(near-api-js@2.1.3)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/381ddbdc8ef5bde7975bebe8f640c1a5f9d85b94}
-    id: github.com/NearSocial/VM/381ddbdc8ef5bde7975bebe8f640c1a5f9d85b94
+  github.com/NearSocial/VM/901945dddea1e9e81f42e9d60b00ac9d3c1e9909(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.0)(near-api-js@2.1.3)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/901945dddea1e9e81f42e9d60b00ac9d3c1e9909}
+    id: github.com/NearSocial/VM/901945dddea1e9e81f42e9d60b00ac9d3c1e9909
     name: near-social-vm
-    version: 2.2.3
+    version: 2.3.2
     peerDependencies:
       near-api-js: 2.1.3
       react: ^18.2.0
