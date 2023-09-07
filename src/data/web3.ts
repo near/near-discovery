@@ -271,12 +271,10 @@ export const onboard = init({
     desktop: {
       position: 'topLeft',
       enabled: true,
-      minimal: false,
     },
     mobile: {
       enabled: true,
       position: 'bottomRight',
-      minimal: true,
     },
   },
   containerElements: {},

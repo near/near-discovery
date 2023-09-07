@@ -408,13 +408,11 @@ export const LoginBox = () => {
       onboard.state.actions.updateAccountCenter({
         position: 'topRight',
         enabled: false,
-        minimal: true,
       });
     } else {
       onboard.state.actions.updateAccountCenter({
         position: 'bottomRight',
         enabled: true,
-        minimal: true,
       });
     }
   }, [isZKEVMActive]);
