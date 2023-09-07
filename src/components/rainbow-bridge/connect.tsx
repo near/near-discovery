@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { SMALL_SCREEN } from '../near/NearStyleVar';
 
 const disConnectIcon = (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -45,6 +46,10 @@ const Wrapper = styled.div`
     cursor: pointer;
     background: #00faa0;
     color: #000000;
+
+    @media (max-width: ${SMALL_SCREEN}) {
+      font-size: 15px;
+    }
   }
 `;
 

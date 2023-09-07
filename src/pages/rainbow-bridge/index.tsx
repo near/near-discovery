@@ -428,7 +428,7 @@ const RainbowBridge: NextPageWithLayout = () => {
               </div>
 
               <div className="choose-bridge-wrapper ">
-                <div>
+                <div className="choose-bridge-box-wrapper">
                   <div className="bridge-title">From</div>
 
                   {from === 'eth' ? ethereumBox : nearBox}
@@ -442,7 +442,7 @@ const RainbowBridge: NextPageWithLayout = () => {
                   {switchIcon}
                 </SwitchWrapper>
 
-                <div>
+                <div className="choose-bridge-box-wrapper">
                   <div className="bridge-title">To</div>
 
                   {from === 'near' ? ethereumBox : nearBox}

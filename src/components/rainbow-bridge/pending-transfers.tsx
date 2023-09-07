@@ -1,11 +1,12 @@
 import { act, checkStatusAll, get, type Transfer } from '@near-eth/client';
-import { IN_PROGRESS, Status } from '@near-eth/client/dist/statuses';
+import { Status } from '@near-eth/client/dist/statuses';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ethIcon, nearIcon } from './icons';
 import { formateDate, shrinkToken } from './utils';
 import { tokenList } from './config';
+import { SMALL_SCREEN } from '../near/NearStyleVar';
 
 const IconRight = (
   <svg width="14" height="5" viewBox="0 0 14 5" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -21,6 +22,11 @@ const Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
   width: 736px;
+
+  @media (max-width: ${SMALL_SCREEN}) {
+    width: 100%;
+  }
+
   padding-bottom: 32px;
   color: #787da1;
   .new-transfer-title {
@@ -37,6 +43,9 @@ const Wrapper = styled.div`
       letter-spacing: 0em;
       text-align: left;
       color: #787da1;
+      @media (max-width: ${SMALL_SCREEN}) {
+        font-size: 16px;
+      }
     }
 
     .transfer-right {
@@ -65,6 +74,9 @@ const Wrapper = styled.div`
     padding-left: 8px;
     padding-bottom: 8px;
     padding-top: 8px;
+    @media (max-width: ${SMALL_SCREEN}) {
+      font-size: 16px;
+    }
   }
 
   .transfer-list-wrapper {
@@ -74,7 +86,96 @@ const Wrapper = styled.div`
     width: 100%;
   }
 
+  .transfer-list-item-mobile {
+    @media (min-width: ${SMALL_SCREEN}) {
+      display: none;
+    }
+
+    display: flex;
+    padding: 16px;
+
+    flex-direction: column;
+
+    border-radius: 10px;
+
+    background: #25283a;
+
+    gap: 12px;
+
+    width: 100%;
+
+    position: relative;
+    .source-item {
+      color: white;
+      display: flex;
+      align-items: center;
+
+      padding-bottom: 6px;
+      border-bottom: 1px solid #4e536d;
+      justify-content: space-between;
+
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 19px;
+      letter-spacing: 0em;
+      text-align: left;
+      gap: 6px;
+
+      .source-item-amount-and-symbol {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        padding-left: 5px;
+      }
+      .source-item-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+      }
+    }
+
+    .chain-flow {
+      width: 80px;
+      padding-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      .chain-icon {
+        width: 26px;
+        height: 26px;
+        border-radius: 6px;
+      }
+    }
+    .bridge-time {
+      color: #979abe;
+      width: 175px;
+      text-align: left;
+
+      font-family: Gantari;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 16px;
+      letter-spacing: 0em;
+    }
+
+    .tx-link {
+      color: #64b5ff;
+      text-decoration: underline;
+    }
+
+    .bridge-detail {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+  }
+
   .transfer-list-item {
+    @media (max-width: ${SMALL_SCREEN}) {
+      display: none;
+    }
     display: flex;
     align-items: center;
     padding-left: 8px;
@@ -136,7 +237,6 @@ const Wrapper = styled.div`
   }
 
   .state-processing {
-    font-family: Gantari;
     font-size: 14px;
     font-weight: 500;
     line-height: 17px;
@@ -162,6 +262,19 @@ const Wrapper = styled.div`
     text-align: center;
     color: #000000;
     cursor: pointer;
+  }
+
+  .action-state {
+    @media (max-width: ${SMALL_SCREEN}) {
+      position: absolute;
+      right: 16px;
+      font-size: 15px;
+
+      width: 90px;
+      height: 30px;
+
+      border-radius: 6px;
+    }
   }
 `;
 
@@ -209,10 +322,10 @@ const PendingTransfers = (props: {
       amount: shrinkToken(item.amount, item.decimals).toFixed(),
       action:
         item.status === 'in-progress' ? (
-          <div className="state-processing"> Processing </div>
+          <div className="state-processing action-state"> Processing </div>
         ) : (
           <div
-            className="state-need-action"
+            className="state-need-action action-state"
             onClick={() => {
               act(item.id).then(() => {
                 setRefreshTrigger(!refreshTrigger);
@@ -236,16 +349,37 @@ const PendingTransfers = (props: {
       <div className="transfer-list-wrapper">
         {displayList.map((item) => {
           return (
-            <div className="transfer-list-item" key={item.startTime}>
-              <div className="source-item">
-                <img src={item.tokenMeta?.icon} className="source-item-icon" alt="" />
+            <>
+              <div className="transfer-list-item" key={item.startTime}>
+                <div className="source-item">
+                  <img src={item.tokenMeta?.icon} className="source-item-icon" alt="" />
 
-                <span>{item.amount}</span>
+                  <span>{item.amount}</span>
 
-                <span>{item.symbol}</span>
+                  <span>{item.symbol}</span>
+                </div>
+
+                <div className="bridge-detail ">
+                  <div className="chain-flow">
+                    <img src={item.fromChainIcon} className="chain-icon" alt="" />
+
+                    <div className=""> {IconRight} </div>
+
+                    <img src={item.toChainIcon} className="chain-icon" alt="" />
+                  </div>
+
+                  <div className="bridge-time"> {item.startTime} </div>
+                  <a className="tx-link" href={item.txLink} target="_blank">
+                    {' '}
+                    Tx{' '}
+                  </a>
+
+                  {item.action}
+                </div>
               </div>
+              <div className="transfer-list-item-mobile" key={item.startTime}>
+                {item.action}
 
-              <div className="bridge-detail ">
                 <div className="chain-flow">
                   <img src={item.fromChainIcon} className="chain-icon" alt="" />
 
@@ -253,16 +387,25 @@ const PendingTransfers = (props: {
 
                   <img src={item.toChainIcon} className="chain-icon" alt="" />
                 </div>
+                <div className="source-item">
+                  <div className="source-item-amount-and-symbol">
+                    <span>{item.amount}</span>
 
-                <div className="bridge-time"> {item.startTime} </div>
-                <a className="tx-link" href={item.txLink} target="_blank">
-                  {' '}
-                  Tx{' '}
-                </a>
+                    <span>{item.symbol}</span>
+                  </div>
 
-                {item.action}
+                  <img src={item.tokenMeta?.icon} className="source-item-icon" alt="" />
+                </div>
+
+                <div className="bridge-detail ">
+                  <div className="bridge-time"> {item.startTime} </div>
+                  <a className="tx-link" href={item.txLink} target="_blank">
+                    {' '}
+                    Tx{' '}
+                  </a>
+                </div>
               </div>
-            </div>
+            </>
           );
         })}
       </div>
