@@ -110,6 +110,50 @@ export default function VmInitializer() {
     });
   }, [near]);
 
+  const requestSignMessage = useCallback(
+    async (message: string) => {
+      if (!near) {
+        return;
+      }
+      const wallet = await (await near.selector).wallet();
+      const nonce = Buffer.from(Array.from(Array(32).keys()));
+      const recipient = 'social.near';
+
+      try {
+        const signedMessage = await wallet.signMessage({
+          message,
+          nonce,
+          recipient,
+        });
+
+        if (signedMessage) {
+          const verifiedSignature = wallet.verifySignature({
+            message,
+            nonce,
+            recipient,
+            publicKey: signedMessage.publicKey,
+            signature: signedMessage.signature,
+          });
+          const verifiedFullKeyBelongsToUser = await wallet.verifyFullKeyBelongsToUser({
+            publicKey: signedMessage.publicKey,
+            accountId: signedMessage.accountId,
+            network: wallet.selector.options.network,
+          });
+
+          if (verifiedFullKeyBelongsToUser && verifiedSignature) {
+            alert(`Successfully verify signed message: '${message}': \n ${JSON.stringify(signedMessage)}`);
+          } else {
+            alert(`Failed to verify signed message '${message}': \n ${JSON.stringify(signedMessage)}`);
+          }
+        }
+      } catch (err) {
+        const errMsg = err instanceof Error ? err.message : 'Something went wrong';
+        alert(errMsg);
+      }
+    },
+    [near],
+  );
+
   const requestSignInWithWallet = useCallback(() => {
     saveCurrentUrl();
     walletModal?.show();
@@ -166,6 +210,7 @@ export default function VmInitializer() {
       logOut,
       refreshAllowance,
       requestSignInWithWallet,
+      requestSignMessage,
       signedIn,
     });
   }, [
@@ -174,6 +219,7 @@ export default function VmInitializer() {
     logOut,
     refreshAllowance,
     requestSignInWithWallet,
+    requestSignMessage,
     signedIn,
     signedAccountId,
     setAuthStore,
