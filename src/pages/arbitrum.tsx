@@ -36,7 +36,7 @@ const Column: NextPageWithLayout = () => {
           display: block;
           position: absolute;
           left: -16px;
-          width: 108%;
+          width: 100%;
         }
         .logoIcon {
           display: block;

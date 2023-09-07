@@ -32,9 +32,13 @@ const Layout = styled.div`
     .content {
       width: 100%;
       min-height: 100vh;
-      padding-top: 70px;
+      padding-top: 80px;
       padding-right: 4px;
       padding-left: 4px;
+
+      .tab {
+        margin-bottom: 0px;
+      }
     }
   }
 `;
