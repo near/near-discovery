@@ -38,7 +38,7 @@ const AbsoluteContainer = styled.div`
   }
 
   @media (min-width: ${SMALL_SCREEN}) {
-    .go-back-icon-mobie {
+    .go-back-icon-mobile {
       display: none;
     }
   }
@@ -162,7 +162,7 @@ const GoBackNav = () => {
 const GoBackNavSourceAllInOne = () => {
   return (
     <AbsoluteContainer>
-      <Link href={'/juaner.near/widget/ref-home'} className="icon">
+      <Link href={'/near'} className="icon">
         {GoBackIcon}
         {GoBackIconMobile}
       </Link>
