@@ -60,6 +60,10 @@ const Container = styled.div`
   background: #373a53;
   overflow: hidden;
   position: relative;
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    width: 350px;
+    height: auto;
+  }
 `;
 
 const Content = styled.div`
@@ -111,6 +115,7 @@ const StyledImage = styled(NearImage)`
 const Title = styled(StyledT4)`
   font-weight: 700;
   color: #fff;
+  white-space: nowrap;
 `;
 
 const SubTitle = styled(StyledT5)`
@@ -134,6 +139,8 @@ const HeaderRight = styled.div`
   white-space: pre-wrap;
   text-align: right;
   line-height: 16px;
+  position: absolute;
+  right: 20px;
 `;
 
 export default NearCard;
