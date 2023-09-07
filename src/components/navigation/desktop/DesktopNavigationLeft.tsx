@@ -152,7 +152,7 @@ const ContainerMobile = styled.div`
     justify-content: space-between;
     background-color: #1e202f;
     padding: 24px;
-    z-index: 999;
+    z-index: 99;
     .right_p {
       position: absolute;
       right: 24px;

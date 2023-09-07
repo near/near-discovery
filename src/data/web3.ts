@@ -269,18 +269,17 @@ export const onboard = init({
   theme: 'dark',
   accountCenter: {
     desktop: {
-      position: 'topRight',
+      position: 'topLeft',
       enabled: true,
       minimal: false,
     },
     mobile: {
       enabled: true,
+      position: 'bottomRight',
+      minimal: true,
     },
   },
-  containerElements: {
-    // accountCenter: {
-    // }
-  },
+  containerElements: {},
 });
 
 type EthersProviderContext = {

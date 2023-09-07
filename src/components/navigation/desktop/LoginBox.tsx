@@ -10,6 +10,7 @@ import { flushEvents } from '@/utils/analytics';
 
 import { NotificationButton } from '../NotificationButton';
 import { UserDropdownMenu } from './UserDropdownMenu';
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
 const nearIcon = (
   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +107,7 @@ const NearSignInButton = styled.div`
   letter-spacing: 0em;
   text-align: left;
   color: #02051e;
-  position: fixed;
+  /* position: fixed; */
   top: 28px;
   right: 30px;
   .near-icon-wrapper {
@@ -117,6 +118,25 @@ const NearSignInButton = styled.div`
     align-items: center;
     justify-content: center;
     background: #ffffff;
+  }
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    .near-icon-wrapper {
+      display: none;
+    }
+    /* height: 436px; */
+    width: auto;
+    height: auto;
+
+    background: #ebf479;
+    padding: 6px 4px;
+    border-radius: 6px;
+    font-family: Gantari;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
   }
 `;
 
@@ -139,6 +159,27 @@ const ZKEVMSignInButton = styled.div`
   position: fixed;
   top: 28px;
   right: 30px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    .zk-evm-icon {
+      display: none;
+    }
+    width: auto;
+    height: auto;
+
+    background: #ebf479;
+    padding: 6px 4px;
+    border-radius: 6px;
+    font-family: Gantari;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+    top: 25px;
+    right: 55px;
+  }
 `;
 
 const BaseSignInButton = styled.div`
@@ -160,6 +201,27 @@ const BaseSignInButton = styled.div`
   position: fixed;
   top: 28px;
   right: 30px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    .base-icon {
+      display: none;
+    }
+    width: auto;
+    height: auto;
+
+    background: #ebf479;
+    padding: 6px 4px;
+    border-radius: 6px;
+    font-family: Gantari;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+    top: 25px;
+    right: 55px;
+  }
 `;
 
 const MantleSignInButton = styled.div`
@@ -205,16 +267,17 @@ const SignInButton = styled.div<{ backgroundColor: string; color: string }>`
 `;
 
 const LoginArea = styled.div`
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 12px;
   position: fixed;
-  top: 28px;
-  right: 30px;
-  z-index: 10;
-  @media (min-width: 901px) {
-    display: flex;
+  z-index: 100;
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    /* height: 436px; */
+    z-index: 100;
+    top: 26px;
+    right: 56px;
   }
 `;
 
@@ -289,7 +352,7 @@ export const LoginBox = () => {
           connect();
         }}
       >
-        {zkevmIcon}
+        <span className="zk-evm-icon">{zkevmIcon}</span>
 
         <span>Connect</span>
       </ZKEVMSignInButton>
@@ -303,7 +366,7 @@ export const LoginBox = () => {
           connect();
         }}
       >
-        {baseIcon}
+        <span className="base-icon">{baseIcon}</span>
 
         <span>Connect</span>
       </BaseSignInButton>
@@ -317,7 +380,7 @@ export const LoginBox = () => {
           connect();
         }}
       >
-        {mantleIcon}
+        <span className="mantle-icon">{mantleIcon}</span>
 
         <span>Connect</span>
       </MantleSignInButton>
@@ -333,7 +396,7 @@ export const LoginBox = () => {
           connect();
         }}
       >
-        {arbitrumIcon}
+        <span className="arbitrum-icon">{arbitrumIcon}</span>
 
         <span>Connect</span>
       </SignInButton>
@@ -345,13 +408,13 @@ export const LoginBox = () => {
       onboard.state.actions.updateAccountCenter({
         position: 'topRight',
         enabled: false,
-        minimal: false,
+        minimal: true,
       });
     } else {
       onboard.state.actions.updateAccountCenter({
-        position: 'topRight',
+        position: 'bottomRight',
         enabled: true,
-        minimal: false,
+        minimal: true,
       });
     }
   }, [isZKEVMActive]);

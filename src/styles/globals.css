@@ -1,6 +1,6 @@
 @import 'bootstrap';
-@import "swiper/css";
-@import "swiper/css/autoplay";
+@import 'swiper/css';
+@import 'swiper/css/autoplay';
 
 @font-face {
   font-family: 'Gantari';
@@ -133,11 +133,13 @@ a:hover {
   text-decoration: none;
 }
 
-#near-wallet-selector-modal .open{
+#near-wallet-selector-modal .open {
   z-index: 1001;
 }
 
-#w3m-modal { z-index: 1002 }
+#w3m-modal {
+  z-index: 1002;
+}
 
 #launcher {
   color-scheme: light;
@@ -162,4 +164,7 @@ a:hover {
     right: 2px;
     bottom: 10px;
   }
+}
+:root {
+  --account-center-z-index: 100;
 }

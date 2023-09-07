@@ -176,25 +176,4 @@ const NearButton = styled(NearButton2)`
     font-size: 16px;
   }
 `;
-const PolygonButton = styled(NearButton2)`
-  ${NearButtonShared}
-  background: #6f63f5;
-  box-shadow: 10px -6px 10px 0px rgba(0, 0, 0, 0.25);
-  transform: rotate(6deg);
-  top: 321px;
-  left: 61px;
-  z-index: 3;
-
-  @media (max-width: ${MEDIUM_SCREEN}) {
-    font-size: 18px;
-    top: 353px;
-  }
-
-  @media (max-width: ${BREAK_POINT}) {
-    left: 27px;
-    top: 353px;
-    font-size: 16px;
-  }
-`;
-
 export default NearHomePagePopularDapps;
