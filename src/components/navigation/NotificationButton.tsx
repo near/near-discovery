@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { MEDIUM_SCREEN } from '../near/NearStyleVar';
 
 const StyledNotificationButton = styled.div`
   margin: 0 15px;
@@ -11,6 +12,10 @@ const StyledNotificationButton = styled.div`
   height: 46px;
   width: 46px;
   border-radius: 50%;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    display: none;
+  }
 
   > div,
   a {
