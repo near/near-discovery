@@ -275,6 +275,8 @@ const LoginArea = styled.div`
   gap: 12px;
   position: fixed;
   z-index: 100;
+  top: 28px;
+  right: 30px;
   @media (max-width: ${MEDIUM_SCREEN}) {
     /* height: 436px; */
     z-index: 100;
