@@ -9,7 +9,8 @@ const SwitchWrapper = styled.div`
   top: 16px;
 
   @media (max-width: ${SMALL_SCREEN}) {
-    display: none;
+    /* display: none; */
+    transform: rotate(90deg);
   }
 `;
 
