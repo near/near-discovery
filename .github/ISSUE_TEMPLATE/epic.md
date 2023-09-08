@@ -1,6 +1,6 @@
 ---
 name: Epic
-about: Describe this issue template's purpose here.
+about: Team level milestones in support of a roadmap initiative. Used to group several like-issues under a common outcome
 title: "\U0001F537 [Epic] < Add a brief Title >"
 labels: Epic
 assignees: ''
