@@ -58,8 +58,20 @@ export const onboard = init({
     {
       id: 137,
       token: 'MATIC',
-      label: 'Matic Mainnet',
+      label: 'Polygon Mainnet',
       rpcUrl: 'https://rpc.ankr.com/polygon',
+    },
+    {
+      id: 80001,
+      token: 'MATIC',
+      label: 'Polygon Testnet Mumbai',
+      rpcUrl: 'https://rpc.ankr.com/polygon_mumbai',
+    },
+    {
+      id: 280,
+      token: 'ETH',
+      label: 'zkSync Era Testnet',
+      rpcUrl: 'https://testnet.era.zksync.dev',
     },
     {
       id: 324,
@@ -85,6 +97,18 @@ export const onboard = init({
       token: 'ETH',
       label: 'Optimism Goerli Testnet',
       rpcUrl: 'https://optimism-goerli.publicnode.com',
+    },
+    {
+      id: 1101,
+      token: 'ETH',
+      label: 'Polygon zkEVM',
+      rpcUrl: 'https://zkevm-rpc.com',
+    },
+    {
+      id: 1442,
+      token: 'ETH',
+      label: 'Polygon zkEVM Testnet',
+      rpcUrl: 'https://rpc.public.zkevm-test.net',
     },
     {
       id: 56,
@@ -181,6 +205,30 @@ export const onboard = init({
       token: 'ETC',
       label: 'Ethereum Classic Mainnet',
       rpcUrl: 'https://etc.rivet.link',
+    },
+    {
+      id: 84531,
+      token: 'ETH',
+      label: 'Base Goerli Testnet',
+      rpcUrl: 'https://goerli.base.org',
+    },
+    {
+      id: 8453,
+      token: 'ETH',
+      label: 'Base',
+      rpcUrl: 'https://mainnet.base.org',
+    },
+    {
+      id: 5001,
+      token: 'MNT',
+      label: 'Mantle Testnet',
+      rpcUrl: 'https://rpc.testnet.mantle.xyz',
+    },
+    {
+      id: 5000,
+      token: 'MNT',
+      label: 'Mantle',
+      rpcUrl: 'https://rpc.mantle.xyz',
     },
   ],
   appMetadata: {
