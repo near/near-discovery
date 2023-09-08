@@ -168,7 +168,11 @@ a:hover {
 
 @media (max-width: 650px) {
   :root {
-    --account-center-position-right: 50px;
+    --account-center-position-bottom: 50px;
+  }
+
+  body {
+    overflow-x: hidden;
   }
 }
 :root {

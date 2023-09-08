@@ -275,9 +275,10 @@ export const onboard = init({
     },
     mobile: {
       enabled: true,
-      position: 'topRight',
+      position: 'bottomRight',
     },
   },
+
   containerElements: {},
 });
 

@@ -452,12 +452,10 @@ export const LoginBox = () => {
   useEffect(() => {
     if (!isZKEVMActive) {
       onboard.state.actions.updateAccountCenter({
-        position: 'topRight',
         enabled: false,
       });
     } else {
       onboard.state.actions.updateAccountCenter({
-        position: 'topRight',
         enabled: true,
       });
     }
