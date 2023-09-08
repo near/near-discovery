@@ -102,36 +102,13 @@ export const Sandbox = ({ onboarding = false }) => {
 
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
 
-  const getFileLocalStorage = useCallback(
-    (file) => {
-      const path = fileToPath(file);
-      const jpath = fileToJpath(file);
-
-      cache
-        .asyncLocalStorageGet(StorageDomain, {
-          path,
-          type: StorageType.Code,
-        })
-        .then(({ code } = {}) => {
-          setFilesObject((state) => ({
-            ...state,
-            [jpath]: {
-              ...state[jpath],
-              codeLocalStorage: code,
-              codeVisible: code || state[jpath].codeVisible,
-            },
-          }));
-        });
-    },
-    [cache],
-  );
-
-  const getFileSocialDB = useCallback(
+  const getFileData = useCallback(
     (file) => {
       if (!file.src) {
         return;
       }
 
+      const path = fileToPath(file);
       const jpath = fileToJpath(file);
       const widgetSrc = `${file.src}/**`;
 
@@ -140,33 +117,45 @@ export const Sandbox = ({ onboarding = false }) => {
 
         if (widgetObject && file.new) {
           const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
-          const newPath = fileToPath(file);
-          const code = codeDraft || codeMain;
-          const changesMade = checkChangesMade(codeMain, codeDraft, code);
+          const onChainCode = codeDraft || codeMain;
 
-          const singleFileObject = {
-            codeMain,
-            codeDraft,
-            isDraft,
-            changesMade,
-            savedOnChain: true,
-            new: false,
-            codeLocalStorage: code,
-            codeVisible: code,
-          };
-
-          setFilesObject((state) => ({
-            ...state,
-            [jpath]: {
-              ...state[jpath],
-              ...singleFileObject,
-            },
-          }));
-
-          if (changesMade) {
-            updateCodeLocalStorage(newPath, code, cache);
-          }
+          cache
+            .asyncLocalStorageGet(StorageDomain, {
+              path,
+              type: StorageType.Code,
+            })
+            .then(({ code } = {}) => {
+              setFilesObject((state) => ({
+                ...state,
+                [jpath]: {
+                  ...state[jpath],
+                  codeMain,
+                  codeDraft,
+                  isDraft,
+                  savedOnChain: true,
+                  changesMade: code ? checkChangesMade(onChainCode, codeDraft, code) : false,
+                  codeLocalStorage: code || onChainCode,
+                  codeVisible: code || state[jpath].codeVisible || onChainCode,
+                },
+              }));
+            });
         }
+
+        cache
+          .asyncLocalStorageGet(StorageDomain, {
+            path,
+            type: StorageType.Code,
+          })
+          .then(({ code } = {}) => {
+            setFilesObject((state) => ({
+              ...state,
+              [jpath]: {
+                ...state[jpath],
+                codeLocalStorage: code,
+                codeVisible: code || state[jpath].codeVisible,
+              },
+            }));
+          });
       };
       fetchCode();
     },
@@ -206,9 +195,9 @@ export const Sandbox = ({ onboarding = false }) => {
       addFile(newFile);
       setRenderCode(null);
       selectFile(path);
-      getFileSocialDB(newFile);
+      getFileData(newFile);
     },
-    [accountId, addFile, getFileSocialDB, onboarding],
+    [accountId, addFile, getFileData, onboarding],
   );
 
   useEffect(() => {
@@ -231,11 +220,10 @@ export const Sandbox = ({ onboarding = false }) => {
   const collectAllFileData = useCallback(
     (filesObject) => {
       Object.values(filesObject).map((file) => {
-        getFileLocalStorage(file);
-        getFileSocialDB(file);
+        getFileData(file);
       });
     },
-    [getFileLocalStorage, getFileSocialDB],
+    [getFileData],
   );
 
   const firstLoad = useCallback(() => {
@@ -297,7 +285,6 @@ export const Sandbox = ({ onboarding = false }) => {
 
   const changeCode = (path, code) => {
     const jpath = JSON.stringify(path);
-    updateCodeLocalStorage(path, code, cache);
 
     setFilesObject((state) => ({
       ...state,
@@ -305,9 +292,11 @@ export const Sandbox = ({ onboarding = false }) => {
         ...state[jpath],
         codeLocalStorage: code,
         codeVisible: code,
+        savedOnChain: false,
         changesMade: checkChangesMade(state[jpath].codeMain, state[jpath].codeDraft, code),
       },
     }));
+    updateCodeLocalStorage(path, code, cache);
   };
 
   const reformat = (path, code) => {
@@ -435,7 +424,9 @@ export const Sandbox = ({ onboarding = false }) => {
     selectFile(newPath);
   };
 
+  // possibly unused
   const reloadFile = () => {
+    console.log('reloadFile which is never called');
     const onboardingPath = onboardingComponents.starter;
     selectFile(onboardingPath);
     setMainLoader(false);
