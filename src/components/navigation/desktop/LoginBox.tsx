@@ -415,7 +415,7 @@ export const LoginBox = () => {
       });
     } else {
       onboard.state.actions.updateAccountCenter({
-        position: 'bottomRight',
+        position: 'topRight',
         enabled: true,
       });
     }

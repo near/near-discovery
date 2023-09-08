@@ -269,12 +269,13 @@ export const onboard = init({
   theme: 'dark',
   accountCenter: {
     desktop: {
-      position: 'topLeft',
+      position: 'topRight',
       enabled: true,
+      minimal: false,
     },
     mobile: {
       enabled: true,
-      position: 'bottomRight',
+      position: 'topRight',
     },
   },
   containerElements: {},
