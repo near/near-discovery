@@ -86,6 +86,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
         <title>DapDap</title>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/logo.png" />
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
