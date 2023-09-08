@@ -245,6 +245,27 @@ const MantleSignInButton = styled.div`
   position: fixed;
   top: 28px;
   right: 30px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    .mantle-icon {
+      display: none;
+    }
+    width: auto;
+    height: auto;
+
+    background: #ebf479;
+    padding: 6px 4px;
+    border-radius: 6px;
+    font-family: Gantari;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+    top: 25px;
+    right: 55px;
+  }
 `;
 
 const SignInButton = styled.div<{ backgroundColor: string; color: string }>`
@@ -266,6 +287,27 @@ const SignInButton = styled.div<{ backgroundColor: string; color: string }>`
   position: fixed;
   top: 28px;
   right: 30px;
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    .arbitrum-icon {
+      display: none;
+    }
+    width: auto;
+    height: auto;
+
+    background: #ebf479;
+    padding: 6px 4px;
+    border-radius: 6px;
+    font-family: Gantari;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: #000000;
+    top: 25px;
+    right: 55px;
+  }
 `;
 
 const LoginArea = styled.div`
