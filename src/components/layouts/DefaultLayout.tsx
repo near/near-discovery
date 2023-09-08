@@ -40,6 +40,7 @@ const Layout = styled.div`
         margin-bottom: 0px;
       }
     }
+    overflow-x: hidden;
   }
 `;
 
