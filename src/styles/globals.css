@@ -167,4 +167,8 @@ a:hover {
 }
 :root {
   --account-center-z-index: 100;
+
+  @media (max-width: 650px) {
+    --account-center-position-right: 60px;
+  }
 }
