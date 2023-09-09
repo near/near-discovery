@@ -90,6 +90,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
 
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-PR996H5E9T"></Script>
+      <Script id="ga-config">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-PR996H5E9T');`}
+      </Script>
+
       <Script
         src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
         id="ze-snippet"
