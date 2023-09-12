@@ -127,20 +127,11 @@ export default function VmInitializer() {
         });
 
         if (signedMessage) {
-          const verifiedSignature = wallet.verifySignature({
-            message,
-            nonce,
-            recipient,
-            publicKey: signedMessage.publicKey,
-            signature: signedMessage.signature,
-          });
-          const verifiedFullKeyBelongsToUser = await wallet.verifyFullKeyBelongsToUser({
-            publicKey: signedMessage.publicKey,
-            accountId: signedMessage.accountId,
-            network: wallet.selector.options.network,
+          const verifiedFullKeyBelongsToUser = await wallet.verifyOwner({
+            message: signedMessage,
           });
 
-          if (verifiedFullKeyBelongsToUser && verifiedSignature) {
+          if (verifiedFullKeyBelongsToUser) {
             alert(`Successfully verify signed message: '${message}': \n ${JSON.stringify(signedMessage)}`);
           } else {
             alert(`Failed to verify signed message '${message}': \n ${JSON.stringify(signedMessage)}`);
