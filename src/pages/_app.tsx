@@ -49,6 +49,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const accountId = useAuthStore((store) => store.accountId);
 
   useEffect(() => {
+    setNotificationsSessionStorage();
+  }, []);
+
+  useEffect(() => {
     initializeAnalytics();
   }, []);
 
