@@ -101,3 +101,19 @@ export const handleOnCancel = () => {
     }),
   );
 };
+
+const getNotificationLocalStorage = () => JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+
+export const showNotificationModal = () => {
+  if (isPermisionGranted()) {
+    return false;
+  }
+
+  const state = getNotificationLocalStorage();
+
+  if ((isLocalStorageSupported() && !state.showOnTS) || state.showOnTS < Date.now()) {
+    return true;
+  }
+
+  return false;
+};
