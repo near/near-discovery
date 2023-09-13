@@ -45,3 +45,15 @@ const setProcessSuccess = () => {
     }),
   );
 };
+
+const setProcessError = (error) => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      permission: false,
+      subscribeStarted: false,
+      subscribeError: error,
+    }),
+  );
+};
