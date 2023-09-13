@@ -19,6 +19,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
+import { setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -39,6 +40,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const authStore = useAuthStore();
   const componentSrc = router.query;
+
+  useEffect(() => {
+    setNotificationsSessionStorage();
+  }, []);
 
   useEffect(() => {
     initializeAnalytics();
