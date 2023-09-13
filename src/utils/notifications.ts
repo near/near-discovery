@@ -78,3 +78,15 @@ const setProcessStarted = () => {
     }),
   );
 };
+
+export const setNotificationsSessionStorage = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      isNotificationSupported: isNotificationSupported(),
+      isPushManagerSupported: isPushManagerSupported(),
+      isPermisionGranted: isPermisionGranted(),
+    }),
+  );
+};
