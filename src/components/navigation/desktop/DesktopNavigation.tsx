@@ -210,7 +210,7 @@ export const DesktopNavigation = () => {
           )}
           {signedIn && (
             <>
-              <NotificationButton />
+              <NotificationButton preview={true} />
               <UserDropdownMenu />
             </>
           )}
