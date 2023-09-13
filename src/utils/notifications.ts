@@ -57,3 +57,13 @@ const setProcessError = (error) => {
     }),
   );
 };
+
+const setProcessEnded = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      subscribeStarted: false,
+    }),
+  );
+};
