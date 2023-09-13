@@ -32,6 +32,13 @@ export const handleTurnOn = async (accountId: string) => {
     return;
   }
 
+    await handleRequestPermission();
+    await registerServiceWorker();
+    const subscription = await handlePushManagerSubscribe();
+    await sendToPushServer({
+      subscription,
+      accountId,
+    });
 };
 
 const setProcessSuccess = () => {
