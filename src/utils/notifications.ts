@@ -67,3 +67,14 @@ const setProcessEnded = () => {
     }),
   );
 };
+
+const setProcessStarted = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      permission: false,
+      subscribeStarted: true,
+    }),
+  );
+};
