@@ -1,14 +1,20 @@
+import {
+  isLocalStorageSupported,
+  isNotificationSupported,
+  isPermisionGranted,
+  isPushManagerSupported,
+} from './notificationsHelpers';
+import {
+  getNotificationLocalStorage,
+  NOTIFICATIONS_STORAGE,
+  setProcessEnded,
+  setProcessError,
+  setProcessStarted,
+  setProcessSuccess,
+} from './notificationsLocalStorage';
+
 const applicationServerKey = '';
 const HOST = '/subscriptions/create';
-const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
-
-export const isNotificationSupported = () => typeof window !== 'undefined' && 'Notification' in window;
-
-export const isPushManagerSupported = () => typeof window !== 'undefined' && 'PushManager' in window;
-
-export const isPermisionGranted = () => typeof Notification !== 'undefined' && Notification.permission === 'granted';
-
-export const isLocalStorageSupported = () => typeof localStorage !== 'undefined';
 
 const handleRequestPermission = () => Notification.requestPermission();
 
@@ -46,69 +52,12 @@ export const handleTurnOn = async (accountId: string, hideModal) => {
     });
 
     setProcessSuccess();
-  } catch (error) {
+  } catch (error: unknown) {
     setProcessError(error);
   } finally {
     hideModal();
     setProcessEnded();
   }
-};
-
-const setProcessSuccess = () => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      permission: true,
-      subscribeStarted: false,
-      subscribeError: '',
-    }),
-  );
-};
-
-const setProcessError = (error) => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      permission: false,
-      subscribeStarted: false,
-      subscribeError: error,
-    }),
-  );
-};
-
-const setProcessEnded = () => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      subscribeStarted: false,
-    }),
-  );
-};
-
-const setProcessStarted = () => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      permission: false,
-      subscribeStarted: true,
-    }),
-  );
-};
-
-export const setNotificationsSessionStorage = () => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      isNotificationSupported: isNotificationSupported(),
-      isPushManagerSupported: isPushManagerSupported(),
-      isPermisionGranted: isPermisionGranted(),
-    }),
-  );
 };
 
 export const handleOnCancel = () => {
@@ -121,8 +70,6 @@ export const handleOnCancel = () => {
     }),
   );
 };
-
-const getNotificationLocalStorage = () => JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
 
 export const showNotificationModal = () => {
   if (isPermisionGranted()) {
