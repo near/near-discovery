@@ -74,6 +74,10 @@ const HomePage: NextPageWithLayout = () => {
           src="near/widget/NearOrg.Notifications.NotificationAlert"
           props={{
             open: showNotificationModalState,
+            handleTurnOn: () =>
+              handleTurnOn(accountId, () => {
+                setShowNotificationModalState(false);
+              }),
             isNotificationSupported,
             isPermisionGranted,
             isPushManagerSupported,
