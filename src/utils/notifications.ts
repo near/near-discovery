@@ -35,7 +35,7 @@ const sendToPushServer = (subscriptionData: object) =>
     body: JSON.stringify(subscriptionData),
   });
 
-export const handleTurnOn = async (accountId: string, hideModal) => {
+export const handleTurnOn = async (accountId: string, hideModal: () => void) => {
   if (!isNotificationSupported() && !isPushManagerSupported() && isPermisionGranted()) {
     return;
   }
