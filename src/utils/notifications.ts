@@ -1,5 +1,6 @@
 const applicationServerKey = '';
 const HOST = '/subscriptions/create';
+const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
 
 export const isNotificationSupported = () => typeof window !== 'undefined' && 'Notification' in window;
 
@@ -31,11 +32,16 @@ export const handleTurnOn = async (accountId: string) => {
     return;
   }
 
-  await handleRequestPermission();
-  await registerServiceWorker();
-  const subscription = await handlePushManagerSubscribe();
-  await sendToPushServer({
-    subscription,
-    accountId,
-  });
+};
+
+const setProcessSuccess = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      permission: true,
+      subscribeStarted: false,
+      subscribeError: '',
+    }),
+  );
 };
