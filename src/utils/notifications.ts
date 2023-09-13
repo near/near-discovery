@@ -90,3 +90,14 @@ export const setNotificationsSessionStorage = () => {
     }),
   );
 };
+
+export const handleOnCancel = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      showOnTS: Date.now() + 86400000, // 14 days
+      notNowTS: Date.now(),
+    }),
+  );
+};
