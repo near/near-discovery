@@ -6,7 +6,9 @@ export const isNotificationSupported = () => typeof window !== 'undefined' && 'N
 
 export const isPushManagerSupported = () => typeof window !== 'undefined' && 'PushManager' in window;
 
-export const isPermisionGranted = () => Notification.permission === 'granted';
+export const isPermisionGranted = () => typeof Notification !== 'undefined' && Notification.permission === 'granted';
+
+export const isLocalStorageSupported = () => typeof localStorage !== 'undefined';
 
 const handleRequestPermission = () => Notification.requestPermission();
 
