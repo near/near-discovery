@@ -27,10 +27,13 @@ const sendToPushServer = (subscriptionData: object) =>
     body: JSON.stringify(subscriptionData),
   });
 
-export const handleTurnOn = async (accountId: string) => {
+export const handleTurnOn = async (accountId: string, hideModal) => {
   if (!isNotificationSupported() && !isPushManagerSupported() && isPermisionGranted()) {
     return;
   }
+
+  try {
+    setProcessStarted();
 
     await handleRequestPermission();
     await registerServiceWorker();
@@ -39,6 +42,14 @@ export const handleTurnOn = async (accountId: string) => {
       subscription,
       accountId,
     });
+
+    setProcessSuccess();
+  } catch (error) {
+    setProcessError(error);
+  } finally {
+    hideModal();
+    setProcessEnded();
+  }
 };
 
 const setProcessSuccess = () => {
