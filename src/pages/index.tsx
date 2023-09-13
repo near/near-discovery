@@ -69,15 +69,27 @@ const HomePage: NextPageWithLayout = () => {
 
   if (signedIn || signedInOptimistic) {
     return (
-      <ComponentWrapperPage
-        src={components.tosCheck}
-        componentProps={{
-          logOut: authStore.logOut,
-          targetProps: componentProps,
-          targetComponent: components.default,
-          tosName: components.tosContent,
-        }}
-      />
+      <>
+        <VmComponent
+          src="near/widget/NearOrg.Notifications.NotificationAlert"
+          props={{
+            open: showNotificationModalState,
+            isNotificationSupported,
+            isPermisionGranted,
+            isPushManagerSupported,
+            setNotificationsSessionStorage,
+          }}
+        />
+        <ComponentWrapperPage
+          src={components.tosCheck}
+          componentProps={{
+            logOut: authStore.logOut,
+            targetProps: componentProps,
+            targetComponent: components.default,
+            tosName: components.tosContent,
+          }}
+        />
+      </>
     );
   }
 
