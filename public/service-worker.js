@@ -75,3 +75,7 @@ const getOptions = ({ path, id }) => ({
 const getNotificationTitle = ({ accountId, notificationType }) => {
   return NOTIFICATIONS_SCHEMA[notificationType].title(accountId);
 };
+
+const getNotificationOptions = ({ notificationType, ...rest }) => {
+  return NOTIFICATIONS_SCHEMA[notificationType].options({ ...rest });
+};
