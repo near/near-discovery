@@ -61,6 +61,8 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   'Base.BaseDex': '/base',
   'Mantle.Swap': '/mantle',
   'Arbitrum.Swap.Dex': '/arbitrum',
+  'Arbitrum.Pendle.TradeMarkets': '/arbitrum',
+  'Arbitrum.Pendle.TradeSwap': '/arbitrum',
 };
 
 export function DefaultLayout({ children }: Props) {
