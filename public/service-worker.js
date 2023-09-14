@@ -46,6 +46,13 @@ const NOTIFICATIONS_SCHEMA = {
       // optional
     }),
   },
+  mention: {
+    title: (accountId) => `${accountId} mentioned you in their post`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
 };
 
 const getOptions = ({ path, id }) => ({
