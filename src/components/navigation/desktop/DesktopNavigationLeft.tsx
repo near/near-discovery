@@ -287,7 +287,7 @@ export const DesktopNavigationLeft = () => {
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex','Arbitrum.Pendle.TradeMarkets'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
