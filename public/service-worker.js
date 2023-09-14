@@ -11,6 +11,13 @@ const NOTIFICATIONS_SCHEMA = {
       // optional
     }),
   },
+  fork: {
+    title: (accountId) => `${accountId} forked your component`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
 };
 
 const getOptions = ({ path, id }) => ({
