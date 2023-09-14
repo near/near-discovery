@@ -5,6 +5,8 @@ self.addEventListener('activate', (event) => console.log('SW - activateing in pr
 
 self.addEventListener('push', handlePushEvent);
 
+self.addEventListener('notificationclick', handlePushClick);
+
 const NOTIFICATIONS_SCHEMA = {
   like: {
     title: (accountId) => `${accountId} liked your post`,
