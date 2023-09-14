@@ -32,6 +32,13 @@ const NOTIFICATIONS_SCHEMA = {
       // optional
     }),
   },
+  unfollow: {
+    title: (accountId) => `${accountId} unfollowed you`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
 };
 
 const getOptions = ({ path, id }) => ({
