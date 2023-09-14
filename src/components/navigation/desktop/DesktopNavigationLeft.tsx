@@ -287,7 +287,7 @@ export const DesktopNavigationLeft = () => {
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex','Arbitrum.Pendle.TradeMarkets'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
@@ -471,7 +471,7 @@ export const DesktopNavigationLeft = () => {
                     href="/arbitrum"
                     onClick={closeMenu}
                   >
-                    Arbitrum(1)
+                    Arbitrum(2)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -688,7 +688,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
-                      Arbitrum(1)
+                      Arbitrum(2)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
@@ -874,7 +874,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
-                      Arbitrum(1) <span className="newIcon">{newIcon}</span>
+                      Arbitrum(2) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
                     <Link
