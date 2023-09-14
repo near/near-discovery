@@ -39,6 +39,13 @@ const NOTIFICATIONS_SCHEMA = {
       // optional
     }),
   },
+  replyPost: {
+    title: (accountId) => `${accountId} replied to your post`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
 };
 
 const getOptions = ({ path, id }) => ({
