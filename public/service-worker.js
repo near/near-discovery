@@ -71,3 +71,7 @@ const getOptions = ({ path, id }) => ({
     path, // TODO: at this step change to full url
   },
 });
+
+const getNotificationTitle = ({ accountId, notificationType }) => {
+  return NOTIFICATIONS_SCHEMA[notificationType].title(accountId);
+};
