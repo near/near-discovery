@@ -88,6 +88,27 @@ function handlePushEvent(event) {
   event.waitUntil(self.registration.showNotification(title, options));
 }
 
+const handlePushClick = (event) => {
+  console.log('SW -  click event received', event);
+
+  const { notification } = event;
+
+  notification.close();
+
+  event.waitUntil(
+    clients
+      .matchAll({
+        type: 'window',
+      })
+      .then((clientList) => {
+        for (const client of clientList) {
+          if (client.url === '/' && 'focus' in client) return client.focus();
+        }
+        if (clients.openWindow) return clients.openWindow(notification.data.path);
+      }),
+  );
+};
+
 const getNotificationTitle = ({ accountId, notificationType }) => {
   return NOTIFICATIONS_SCHEMA[notificationType].title(accountId);
 };
