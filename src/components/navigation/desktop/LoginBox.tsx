@@ -340,7 +340,7 @@ export const LoginBox = () => {
   function isActive(name: string) {
     let paths: string[] = [];
     if (name == 'near') {
-      paths = ['ref-home', 'xBox', 'near', 'rainbow-bridge'];
+      paths = ['ref-home', 'xBox', 'near', 'rainbow-bridge', 'MetaPool.Stake'];
     } else if (name == 'polygon-zkevm') {
       paths = [
         'ZKEVMSwap.zkevm-swap',

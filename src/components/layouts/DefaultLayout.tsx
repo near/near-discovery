@@ -48,6 +48,7 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   'ref-home': '/near',
   xBox: '/near',
   nearcolumn: '/near',
+  'MetaPool.Stake': '/near',
   'ZKEVMSwap.zkevm-swap': '/polygon-zkevm',
   'ZKEVM-all-in-one': '/polygon-zkevm',
   'ZKEVMSwap.zkevm-bridge': '/polygon-zkevm',
