@@ -53,6 +53,13 @@ const NOTIFICATIONS_SCHEMA = {
       // optional
     }),
   },
+  poke: {
+    title: (accountId) => `${accountId} poked you`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
 };
 
 const getOptions = ({ path, id }) => ({
