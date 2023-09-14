@@ -25,6 +25,13 @@ const NOTIFICATIONS_SCHEMA = {
       // optional
     }),
   },
+  follow: {
+    title: (accountId) => `${accountId} followed you`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
 };
 
 const getOptions = ({ path, id }) => ({
