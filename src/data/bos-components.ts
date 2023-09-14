@@ -21,6 +21,10 @@ type NetworkComponents = {
     homePage: string;
     learningLinks: string;
     usePage: string;
+    notifications: {
+      notificationButton: string;
+      notificationAlert: string;
+    };
   };
   notificationButton: string;
   notificationsPage: string;
@@ -64,6 +68,10 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       homePage: 'discom.testnet/widget/NearOrg.HomePage',
       learningLinks: 'discom.testnet/widget/NearOrg.LearningLinks',
       usePage: 'discom.testnet/widget/NearOrg.UsePage',
+      notifications: {
+        notificationButton: 'discom.testnet/widget/NearOrg.Notifications.NotificationButton',
+        notificationAlert: 'discom.testnet/widget/NearOrg.Notifications.NotificationAlert',
+      },
     },
     notificationButton: 'discom.testnet/widget/NotificationButton',
     notificationsPage: 'discom.testnet/widget/NotificationsPage',
@@ -105,6 +113,10 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       homePage: 'near/widget/NearOrg.HomePage',
       learningLinks: 'near/widget/NearOrg.LearningLinks',
       usePage: 'near/widget/NearOrg.UsePage',
+      notifications: {
+        notificationButton: 'near/widget/NearOrg.Notifications.NotificationButton',
+        notificationAlert: 'near/widget/NearOrg.Notifications.NotificationAlert',
+      },
     },
     notificationButton: 'near/widget/NotificationButton',
     notificationsPage: 'near/widget/NotificationsPage',
