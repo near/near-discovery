@@ -18,6 +18,13 @@ const NOTIFICATIONS_SCHEMA = {
       // optional
     }),
   },
+  replyComponent: {
+    title: (accountId) => `${accountId} replied to discussion on your component`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
 };
 
 const getOptions = ({ path, id }) => ({
