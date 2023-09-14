@@ -3,6 +3,15 @@ self.addEventListener('install', (event) => console.log('SW - installing in prog
 
 self.addEventListener('activate', (event) => console.log('SW - activateing in progress.', event));
 
+const NOTIFICATIONS_SCHEMA = {
+  like: {
+    title: (accountId) => `${accountId} liked your post`,
+    options: (props) => ({
+      ...getOptions(props),
+      // optional
+    }),
+  },
+};
 
 const getOptions = ({ path, id }) => ({
   body: '',
