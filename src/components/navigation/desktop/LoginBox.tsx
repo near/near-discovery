@@ -358,7 +358,7 @@ export const LoginBox = () => {
     } else if (name === 'mantle') {
       paths = ['mantle', 'Mantle.Swap'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
