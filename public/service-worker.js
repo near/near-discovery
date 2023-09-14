@@ -72,6 +72,20 @@ const getOptions = ({ path, id }) => ({
   },
 });
 
+// Add error handling if data will not match
+function handlePushEvent(event) {
+  console.log('SW -  push event received', event);
+
+  const notificationText = event.data.text();
+
+  const { initiatedBy = '', valueType = '', path = '', id = '' } = JSON.parse(notificationText);
+
+  const title = getNotificationTitle({ accountId: initiatedBy, notificationType: valueType });
+  const options = getNotificationOptions({ path, id, notificationType: valueType });
+
+  event.waitUntil(self.registration.showNotification(title, options));
+}
+
 const getNotificationTitle = ({ accountId, notificationType }) => {
   return NOTIFICATIONS_SCHEMA[notificationType].title(accountId);
 };
