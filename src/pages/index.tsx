@@ -34,7 +34,8 @@ const HomePage: NextPageWithLayout = () => {
       return;
     }
 
-    setShowNotificationModalState(showNotificationModal());
+    // disable while waiting for proper conditions for new and existing users
+    // setShowNotificationModalState(showNotificationModal());
   }, [signedIn]);
 
   useEffect(() => {
