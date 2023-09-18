@@ -455,7 +455,7 @@ export const DesktopNavigationLeft = () => {
                     href="/mantle"
                     onClick={closeMenu}
                   >
-                    Mantle(1)
+                    Mantle(2)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -680,7 +680,7 @@ export const DesktopNavigationLeft = () => {
                       Polygon zkEVM(5)
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle(1)
+                      Mantle(2)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
@@ -866,7 +866,7 @@ export const DesktopNavigationLeft = () => {
                       Polygon zkEVM(5)<span className="bag">{isActive('polygon-zkevm') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle(1)<span className="newIcon">{newIcon}</span>
+                      Mantle(2)<span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('mantle') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">

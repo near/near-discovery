@@ -61,6 +61,7 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   warmup: '/warmup',
   'Base.BaseDex': '/base',
   'Mantle.Swap': '/mantle',
+  'Mantle.GAMMA': '/mantle',
   'Arbitrum.Swap.Dex': '/arbitrum',
   'Arbitrum.Pendle.TradeMarkets': '/arbitrum',
   'Arbitrum.Pendle.TradeSwap': '/arbitrum',
