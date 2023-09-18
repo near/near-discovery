@@ -1,11 +1,20 @@
+import {
+  isLocalStorageSupported,
+  isNotificationSupported,
+  isPermisionGranted,
+  isPushManagerSupported,
+} from './notificationsHelpers';
+import {
+  getNotificationLocalStorage,
+  NOTIFICATIONS_STORAGE,
+  setProcessEnded,
+  setProcessError,
+  setProcessStarted,
+  setProcessSuccess,
+} from './notificationsLocalStorage';
+
 const applicationServerKey = '';
 const HOST = '/subscriptions/create';
-
-export const isNotificationSupported = () => typeof window !== 'undefined' && 'Notification' in window;
-
-export const isPushManagerSupported = () => typeof window !== 'undefined' && 'PushManager' in window;
-
-export const isPermisionGranted = () => Notification.permission === 'granted';
 
 const handleRequestPermission = () => Notification.requestPermission();
 
@@ -26,16 +35,52 @@ const sendToPushServer = (subscriptionData: object) =>
     body: JSON.stringify(subscriptionData),
   });
 
-export const handleTurnOn = async (accountId: string) => {
+export const handleTurnOn = async (accountId: string, hideModal: () => void) => {
   if (!isNotificationSupported() && !isPushManagerSupported() && isPermisionGranted()) {
     return;
   }
 
-  await handleRequestPermission();
-  await registerServiceWorker();
-  const subscription = await handlePushManagerSubscribe();
-  await sendToPushServer({
-    subscription,
-    accountId,
-  });
+  try {
+    setProcessStarted();
+
+    await handleRequestPermission();
+    await registerServiceWorker();
+    const subscription = await handlePushManagerSubscribe();
+    await sendToPushServer({
+      subscription,
+      accountId,
+    });
+
+    setProcessSuccess();
+  } catch (error: unknown) {
+    setProcessError(error);
+  } finally {
+    hideModal();
+    setProcessEnded();
+  }
+};
+
+export const handleOnCancel = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      showOnTS: Date.now() + 86400000, // 14 days
+      notNowTS: Date.now(),
+    }),
+  );
+};
+
+export const showNotificationModal = () => {
+  if (isPermisionGranted()) {
+    return false;
+  }
+
+  const state = getNotificationLocalStorage();
+
+  if ((isLocalStorageSupported() && !state.showOnTS) || state.showOnTS < Date.now()) {
+    return true;
+  }
+
+  return false;
 };
