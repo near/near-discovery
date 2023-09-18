@@ -74,7 +74,7 @@ const HomePage: NextPageWithLayout = () => {
     return (
       <>
         <VmComponent
-          src="near/widget/NearOrg.Notifications.NotificationAlert"
+          src={components.nearOrg.notifications.notificationAlert}
           props={{
             open: showNotificationModalState,
             handleTurnOn: () =>
