@@ -6,10 +6,14 @@ import { openToast } from '@/components/lib/Toast';
 import { MetaTags } from '@/components/MetaTags';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
+import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
+import { handleOnCancel, handleTurnOn, showNotificationModal } from '@/utils/notifications';
+import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
+import { setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
@@ -22,6 +26,17 @@ const HomePage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const authStore = useAuthStore();
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
+  const [showNotificationModalState, setShowNotificationModalState] = useState(false);
+  const accountId = useAuthStore((store) => store.accountId);
+
+  useEffect(() => {
+    if (!signedIn) {
+      return;
+    }
+
+    // disable while waiting for proper conditions for new and existing users
+    // setShowNotificationModalState(showNotificationModal());
+  }, [signedIn]);
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -58,15 +73,35 @@ const HomePage: NextPageWithLayout = () => {
 
   if (signedIn || signedInOptimistic) {
     return (
-      <ComponentWrapperPage
-        src={components.tosCheck}
-        componentProps={{
-          logOut: authStore.logOut,
-          targetProps: componentProps,
-          targetComponent: components.default,
-          tosName: components.tosContent,
-        }}
-      />
+      <>
+        <VmComponent
+          src={components.nearOrg.notifications.alert}
+          props={{
+            open: showNotificationModalState,
+            handleTurnOn: () =>
+              handleTurnOn(accountId, () => {
+                setShowNotificationModalState(false);
+              }),
+            handleOnCancel: () => {
+              handleOnCancel();
+              setShowNotificationModalState(false);
+            },
+            isNotificationSupported,
+            isPermisionGranted,
+            isPushManagerSupported,
+            setNotificationsSessionStorage,
+          }}
+        />
+        <ComponentWrapperPage
+          src={components.tosCheck}
+          componentProps={{
+            logOut: authStore.logOut,
+            targetProps: componentProps,
+            targetComponent: components.default,
+            tosName: components.tosContent,
+          }}
+        />
+      </>
     );
   }
 
