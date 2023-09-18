@@ -13,8 +13,8 @@ import {
   setProcessSuccess,
 } from './notificationsLocalStorage';
 
-const applicationServerKey = '';
-const HOST = '/subscriptions/create';
+const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
+const HOST = 'https://notification-server-mainnet-7tk2cmmtcq-ew.a.run.app/subscriptions/create';
 
 const handleRequestPermission = () => Notification.requestPermission();
 
