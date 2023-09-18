@@ -31,6 +31,9 @@ const handlePushManagerSubscribe = async () => {
 
 const sendToPushServer = (subscriptionData: object) =>
   fetch(HOST, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
     method: 'POST',
     body: JSON.stringify(subscriptionData),
   });
@@ -47,7 +50,7 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
     await registerServiceWorker();
     const subscription = await handlePushManagerSubscribe();
     await sendToPushServer({
-      subscription,
+      PushSubscriptionObject: subscription,
       accountId,
     });
 
