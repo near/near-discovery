@@ -89,6 +89,7 @@ const HomePage: NextPageWithLayout = () => {
             isPermisionGranted,
             isPushManagerSupported,
             setNotificationsSessionStorage,
+            onOpenChange: () => setShowNotificationModalState(false),
           }}
         />
         <ComponentWrapperPage
