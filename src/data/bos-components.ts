@@ -21,9 +21,12 @@ type NetworkComponents = {
     homePage: string;
     learningLinks: string;
     usePage: string;
+    notifications: {
+      page: string;
+      alert: string;
+    };
   };
   notificationButton: string;
-  notificationsPage: string;
   peoplePage: string;
   profileImage: string;
   profileInlineBlock: string;
@@ -64,9 +67,12 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       homePage: 'discom.testnet/widget/NearOrg.HomePage',
       learningLinks: 'discom.testnet/widget/NearOrg.LearningLinks',
       usePage: 'discom.testnet/widget/NearOrg.UsePage',
+      notifications: {
+        page: 'discom.testnet/widget/NearOrg.Notifications.Notifications',
+        alert: 'discom.testnet/widget/NearOrg.Notifications.NotificationAlert',
+      },
     },
     notificationButton: 'discom.testnet/widget/NotificationButton',
-    notificationsPage: 'discom.testnet/widget/NotificationsPage',
     peoplePage: 'discom.testnet/widget/PeoplePage',
     profileImage: 'eugenethedream/widget/ProfileImage',
     profileInlineBlock: 'eugenethedream/widget/Profile.InlineBlock',
@@ -105,9 +111,12 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       homePage: 'near/widget/NearOrg.HomePage',
       learningLinks: 'near/widget/NearOrg.LearningLinks',
       usePage: 'near/widget/NearOrg.UsePage',
+      notifications: {
+        page: 'near/widget/NearOrg.Notifications.Notifications',
+        alert: 'near/widget/NearOrg.Notifications.NotificationAlert',
+      },
     },
     notificationButton: 'near/widget/NotificationButton',
-    notificationsPage: 'near/widget/NotificationsPage',
     peoplePage: 'near/widget/PeoplePage',
     profileImage: 'mob.near/widget/ProfileImage',
     profileInlineBlock: 'mob.near/widget/Profile.InlineBlock',
