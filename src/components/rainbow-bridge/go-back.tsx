@@ -21,6 +21,9 @@ const AbsoluteContainer = styled.div`
     margin: 0 14px 0 30px;
   }
   .container-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     h3 {
       font-size: 20px;
       font-weight: 700;
@@ -152,8 +155,6 @@ const GoBackNav = () => {
 
       <div className="container-text">
         <h3>NEAR-Ethereum Bridge </h3>
-        <img src="https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm" />
-        <p>@bluebiu.near</p>
       </div>
     </AbsoluteContainer>
   );
@@ -171,8 +172,6 @@ const GoBackNavSourceAllInOne = () => {
 
       <div className="container-text">
         <h3>NEAR All-in-one</h3>
-        <img src="https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm" />
-        <p>@juaner.near</p>
       </div>
     </AbsoluteContainer>
   );
