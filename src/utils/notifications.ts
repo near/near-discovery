@@ -14,7 +14,7 @@ import {
 } from './notificationsLocalStorage';
 
 const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
-const HOST = 'https://notification-server-mainnet-7tk2cmmtcq-ew.a.run.app/subscriptions/create';
+const HOST = 'https://notification-server-mainnet-7tk2cmmtcq-ew.a.run.app';
 
 const handleRequestPermission = () => Notification.requestPermission();
 
@@ -37,7 +37,7 @@ const handlePushManagerSubscribe = async () => {
 };
 
 const sendToPushServer = (subscriptionData: object) =>
-  fetch(HOST, {
+  fetch(`${HOST}/subscriptions/create`, {
     headers: {
       'Content-Type': 'application/json',
     },
