@@ -7,6 +7,7 @@ import {
 import {
   getNotificationLocalStorage,
   NOTIFICATIONS_STORAGE,
+  setClearData,
   setProcessEnded,
   setProcessError,
   setProcessStarted,
@@ -34,6 +35,20 @@ const handlePushManagerSubscribe = async () => {
     userVisibleOnly: true,
     applicationServerKey,
   });
+};
+
+export const handlePushManagerUnsubscribe = async () => {
+  const serviceWorker = await navigator.serviceWorker.ready;
+  const subscription = await serviceWorker.pushManager.getSubscription();
+
+  try {
+    setClearData();
+    await pushServerUnsubscribe(subscription);
+    await unregisterServiceWorker();
+    await subscription?.unsubscribe();
+  } catch (error) {
+    // TODO: handle
+  }
 };
 
 const sendToPushServer = (subscriptionData: object) =>
