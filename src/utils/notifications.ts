@@ -45,6 +45,15 @@ const sendToPushServer = (subscriptionData: object) =>
     body: JSON.stringify(subscriptionData),
   });
 
+const pushServerUnsubscribe = (subscription: any) =>
+  fetch(`${HOST}/subscriptions/delete`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ endpoint: subscription?.endpoint }),
+  });
+
 export const handleTurnOn = async (accountId: string, hideModal: () => void) => {
   if (!isNotificationSupported() && !isPushManagerSupported() && isPermisionGranted()) {
     return;
