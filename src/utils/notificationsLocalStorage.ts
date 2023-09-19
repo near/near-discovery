@@ -47,6 +47,10 @@ export const setProcessStarted = () => {
   );
 };
 
+export const setClearData = () => {
+  localStorage.setItem(NOTIFICATIONS_STORAGE, JSON.stringify({}));
+};
+
 export const setNotificationsSessionStorage = () => {
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
