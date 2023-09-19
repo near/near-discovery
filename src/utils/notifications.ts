@@ -91,7 +91,7 @@ export const handleOnCancel = () => {
 };
 
 export const showNotificationModal = () => {
-  if (isPermisionGranted()) {
+  if (isPermisionGranted() && getNotificationLocalStorage()?.permission) {
     return false;
   }
 
