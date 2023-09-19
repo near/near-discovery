@@ -7,6 +7,7 @@ import {
 import {
   getNotificationLocalStorage,
   NOTIFICATIONS_STORAGE,
+  setClearData,
   setProcessEnded,
   setProcessError,
   setProcessStarted,
@@ -14,11 +15,18 @@ import {
 } from './notificationsLocalStorage';
 
 const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
-const HOST = 'https://notification-server-mainnet-7tk2cmmtcq-ew.a.run.app/subscriptions/create';
+const HOST = 'https://notification-server-mainnet-7tk2cmmtcq-ew.a.run.app';
 
 const handleRequestPermission = () => Notification.requestPermission();
 
 const registerServiceWorker = () => navigator.serviceWorker.register('/service-worker.js');
+
+const unregisterServiceWorker = async () => {
+  const registrations = await navigator.serviceWorker.getRegistrations();
+  for (const registration of registrations) {
+    await registration.unregister();
+  }
+};
 
 const handlePushManagerSubscribe = async () => {
   const serviceWorker = await navigator.serviceWorker.ready;
@@ -29,13 +37,36 @@ const handlePushManagerSubscribe = async () => {
   });
 };
 
+export const handlePushManagerUnsubscribe = async () => {
+  const serviceWorker = await navigator.serviceWorker.ready;
+  const subscription = await serviceWorker.pushManager.getSubscription();
+
+  try {
+    setClearData();
+    await pushServerUnsubscribe(subscription);
+    await unregisterServiceWorker();
+    await subscription?.unsubscribe();
+  } catch (error) {
+    // TODO: handle
+  }
+};
+
 const sendToPushServer = (subscriptionData: object) =>
-  fetch(HOST, {
+  fetch(`${HOST}/subscriptions/create`, {
     headers: {
       'Content-Type': 'application/json',
     },
     method: 'POST',
     body: JSON.stringify(subscriptionData),
+  });
+
+const pushServerUnsubscribe = (subscription: any) =>
+  fetch(`${HOST}/subscriptions/delete`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+    body: JSON.stringify({ endpoint: subscription?.endpoint }),
   });
 
 export const handleTurnOn = async (accountId: string, hideModal: () => void) => {
@@ -75,7 +106,7 @@ export const handleOnCancel = () => {
 };
 
 export const showNotificationModal = () => {
-  if (isPermisionGranted()) {
+  if (isPermisionGranted() && getNotificationLocalStorage()?.permission) {
     return false;
   }
 

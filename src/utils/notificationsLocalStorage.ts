@@ -1,4 +1,9 @@
-import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from './notificationsHelpers';
+import {
+  isLocalStorageSupported,
+  isNotificationSupported,
+  isPermisionGranted,
+  isPushManagerSupported,
+} from './notificationsHelpers';
 
 export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
 
@@ -47,6 +52,10 @@ export const setProcessStarted = () => {
   );
 };
 
+export const setClearData = () => {
+  localStorage.setItem(NOTIFICATIONS_STORAGE, JSON.stringify({}));
+};
+
 export const setNotificationsSessionStorage = () => {
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
@@ -59,4 +68,5 @@ export const setNotificationsSessionStorage = () => {
   );
 };
 
-export const getNotificationLocalStorage = () => JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+export const getNotificationLocalStorage = () =>
+  isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
