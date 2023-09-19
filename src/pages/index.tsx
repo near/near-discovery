@@ -73,6 +73,7 @@ const HomePage: NextPageWithLayout = () => {
   if (signedIn || signedInOptimistic) {
     return (
       <>
+        <button onClick={handlePushManagerUnsubscribe}>UNSUBSCRIBE</button>
         <VmComponent
           src={components.nearOrg.notifications.alert}
           props={{
