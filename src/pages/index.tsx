@@ -11,7 +11,12 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { handleOnCancel, handleTurnOn, showNotificationModal } from '@/utils/notifications';
+import {
+  handleOnCancel,
+  handlePushManagerUnsubscribe,
+  handleTurnOn,
+  showNotificationModal,
+} from '@/utils/notifications';
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
 import { setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
