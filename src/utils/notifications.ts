@@ -20,6 +20,13 @@ const handleRequestPermission = () => Notification.requestPermission();
 
 const registerServiceWorker = () => navigator.serviceWorker.register('/service-worker.js');
 
+const unregisterServiceWorker = async () => {
+  const registrations = await navigator.serviceWorker.getRegistrations();
+  for (const registration of registrations) {
+    await registration.unregister();
+  }
+};
+
 const handlePushManagerSubscribe = async () => {
   const serviceWorker = await navigator.serviceWorker.ready;
 
