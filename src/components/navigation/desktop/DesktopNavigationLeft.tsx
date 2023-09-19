@@ -659,7 +659,8 @@ export const DesktopNavigationLeft = () => {
                       isActive('near') ||
                       isActive('polygon-zkevm') ||
                       isActive('base') ||
-                      isActive('mantle')
+                      isActive('mantle') ||
+                      isActive('arbitrum')
                         ? 'active'
                         : ''
                     }`}
