@@ -32,18 +32,6 @@ type ProductionNetwork = {
   };
 };
 
-export interface TosData {
-  showTos: boolean;
-  agreementsForUser: UserTosAgreement[];
-  latestTosVersion: number;
-}
-
-type UserTosAgreement = {
-  accountId: string;
-  blockHeight: number;
-  value: number;
-};
-
 // type DevelopmentNetwork = {
 //   networkId: 'localnet';
 //   viewAccountId: string;
