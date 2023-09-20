@@ -2,7 +2,7 @@
 name: Secondary Focus Area
 about: This issue serves to help us propose and organize support for impactful work,
   as a secondary priority to epics & planned roadmap items
-title: "\U0001F3AF [Secondary Focus Area] <Add a brief Title>"
+title: "\U0001F525  [Secondary Focus Area] <Add a brief Title>"
 labels: ''
 assignees: ''
 
