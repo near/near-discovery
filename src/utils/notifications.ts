@@ -37,7 +37,7 @@ const handlePushManagerSubscribe = async () => {
   });
 };
 
-export const handlePushManagerUnsubscribe = async () => {
+export const handlePushManagerUnsubscribe = async (hide: () => void) => {
   const serviceWorker = await navigator.serviceWorker.ready;
   const subscription = await serviceWorker.pushManager.getSubscription();
 
@@ -48,6 +48,8 @@ export const handlePushManagerUnsubscribe = async () => {
     await subscription?.unsubscribe();
   } catch (error) {
     // TODO: handle
+  } finally {
+    hide();
   }
 };
 
