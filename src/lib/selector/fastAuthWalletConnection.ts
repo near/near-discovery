@@ -1,6 +1,5 @@
-import { serialize } from 'borsh';
 import type { InMemorySigner,keyStores, Near} from 'near-api-js';
-import { KeyPair, transactions } from 'near-api-js';
+import { KeyPair, transactions, utils } from 'near-api-js';
 const { SCHEMA } = transactions
 import { ConnectedWalletAccount } from 'near-api-js';
 
@@ -211,19 +210,34 @@ export class FastAuthWalletConnection {
   /**
    * Requests the user to quickly sign for a transaction or batch of transactions by redirecting to the NEAR wallet.
    */
-  async requestSignTransactions({ transactions, meta, callbackUrl }: RequestSignTransactionsOptions): Promise<void> {
+  async requestSignTransactions({ transactions, meta, callbackUrl }: RequestSignTransactionsOptions): Promise<(() => void)> {
       const currentUrl = new URL(window.location.href);
-      const newUrl = new URL('sign', this._walletBaseUrl);
+      const newUrl = new URL(this._walletBaseUrl + '/sign/');
 
       newUrl.searchParams.set('transactions', transactions
-          .map(transaction => serialize(SCHEMA, transaction))
+          .map(transaction => utils.serialize.serialize(SCHEMA, transaction))
           .map(serialized => Buffer.from(serialized).toString('base64'))
           .join(','));
-      newUrl.searchParams.set('callbackUrl', callbackUrl || currentUrl.href);
+      newUrl.searchParams.set('success_url', callbackUrl || currentUrl.href);
+      newUrl.searchParams.set('failure_url', callbackUrl || currentUrl.href);
       if (meta) newUrl.searchParams.set('meta', meta);
 
       this._iframe.src = newUrl.toString();
-      this._iframe.style.display = "block";
+      const myDialog = document.createElement("dialog");
+      myDialog.style.width = '50%';
+      myDialog.style.height = '50%';
+      document.body.appendChild(myDialog);
+      myDialog.appendChild(this._iframe);
+      myDialog.showModal();
+      myDialog.addEventListener('click', function(event) {
+        const rect = myDialog.getBoundingClientRect();
+        const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
+          rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
+        if (!isInDialog) {
+            myDialog.close();
+        }
+      });
+      return () => myDialog.close()
   }
 
   /**
