@@ -6,8 +6,9 @@ import {
 } from './notificationsHelpers';
 import {
   getNotificationLocalStorage,
-  NOTIFICATIONS_STORAGE,
   setClearData,
+  setHandleOnCancel,
+  setHandleOnCancelBanner,
   setProcessEnded,
   setProcessError,
   setProcessStarted,
@@ -97,24 +98,10 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
 };
 
 export const handleOnCancel = () => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      showOnTS: Date.now() + 86400000, // 14 days
-      notNowTS: Date.now(),
-      bannerNotNowTS: undefined,
-    }),
-  );
+  setHandleOnCancel();
 };
 export const handleOnCancelBanner = () => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      bannerNotNowTS: Date.now(),
-    }),
-  );
+  setHandleOnCancelBanner();
 };
 
 export const showNotificationModal = () => {
