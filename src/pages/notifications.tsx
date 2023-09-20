@@ -19,6 +19,19 @@ const NotificationsPage: NextPageWithLayout = () => {
   return (
     <ComponentWrapperPage
       src={components.nearOrg.notifications.page}
+      // TODO: fill
+      meta={{ title: '', description: '' }}
+      componentProps={{
+        isLocalStorageSupported,
+        isNotificationSupported,
+        isPermisionGranted,
+        isPushManagerSupported,
+        handleOnCancel,
+        getNotificationLocalStorage,
+        handleOnCancelBanner,
+        accountId,
+        handleTurnOn,
+      }}
     />
   );
 };
