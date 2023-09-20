@@ -6,8 +6,9 @@ import {
 } from './notificationsHelpers';
 import {
   getNotificationLocalStorage,
-  NOTIFICATIONS_STORAGE,
   setClearData,
+  setHandleOnCancel,
+  setHandleOnCancelBanner,
   setProcessEnded,
   setProcessError,
   setProcessStarted,
@@ -37,7 +38,7 @@ const handlePushManagerSubscribe = async () => {
   });
 };
 
-export const handlePushManagerUnsubscribe = async () => {
+export const handlePushManagerUnsubscribe = async (hide: () => void) => {
   const serviceWorker = await navigator.serviceWorker.ready;
   const subscription = await serviceWorker.pushManager.getSubscription();
 
@@ -48,6 +49,8 @@ export const handlePushManagerUnsubscribe = async () => {
     await subscription?.unsubscribe();
   } catch (error) {
     // TODO: handle
+  } finally {
+    hide();
   }
 };
 
@@ -95,14 +98,10 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
 };
 
 export const handleOnCancel = () => {
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorage(),
-      showOnTS: Date.now() + 86400000, // 14 days
-      notNowTS: Date.now(),
-    }),
-  );
+  setHandleOnCancel();
+};
+export const handleOnCancelBanner = () => {
+  setHandleOnCancelBanner();
 };
 
 export const showNotificationModal = () => {
