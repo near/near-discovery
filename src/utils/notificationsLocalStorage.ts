@@ -7,6 +7,18 @@ import {
 
 export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
 
+export const setHandleOnCancel = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      showOnTS: Date.now() + 86400000, // 14 days
+      notNowTS: Date.now(),
+      bannerNotNowTS: undefined,
+    }),
+  );
+};
+
 export const setProcessSuccess = () => {
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
