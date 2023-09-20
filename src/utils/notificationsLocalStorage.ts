@@ -37,6 +37,7 @@ export const setProcessSuccess = () => {
       permission: true,
       subscribeStarted: false,
       subscribeError: '',
+      isPermisionGranted: true,
     }),
   );
 };
