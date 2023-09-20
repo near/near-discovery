@@ -66,6 +66,9 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   'Arbitrum.Pendle.TradeMarkets': '/arbitrum',
   'Arbitrum.Pendle.TradeSwap': '/arbitrum',
   'Bsc.Swap.Dex': '/bsc',
+  'Metis.Swap.Dex': '/metis',
+  'Polygon.Swap.Dex': '/polygon',
+  'Linea.Swap.Dex': '/linea',
 };
 
 export function DefaultLayout({ children }: Props) {
@@ -80,9 +83,29 @@ export function DefaultLayout({ children }: Props) {
   const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps';
   const ArbitrumSrc = 'bluebiu.near/widget/Arbitrum.Dapps';
   const BscSrc = 'bluebiu.near/widget/Bsc.Dapps';
+  const LineaSrc = 'bluebiu.near/widget/Linea.Dapps';
+  const PolygonSrc = 'bluebiu.near/widget/Polygon.Dapps';
+  const MetisSrc = 'bluebiu.near/widget/Metis.Dapps';
+
   const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage';
 
   const MantleSrc = 'bluebiu.near/widget/Mantle.MantleTemplate';
+
+  const nowShowTabList = [
+    refTemplatepageSrc,
+    ZKEVMTemplateSrc,
+    ZKEVMTemplateWarmSrc,
+    QuestionListSrc,
+    ExecuteRecordsSrc,
+    BaseSrc,
+    MantleSrc,
+    AllChainsSrc,
+    ArbitrumSrc,
+    BscSrc,
+    LineaSrc,
+    PolygonSrc,
+    MetisSrc,
+  ];
 
   const [showTab, setShowTab] = useState(false);
 
@@ -92,19 +115,7 @@ export function DefaultLayout({ children }: Props) {
   const componentName = router.query.componentName as string;
 
   useEffect(() => {
-    setShowTab(
-      src !== refTemplatepageSrc &&
-        src !== ZKEVMTemplateSrc &&
-        src !== ZKEVMTemplateWarmSrc &&
-        src !== QuestionListSrc &&
-        src !== ExecuteRecordsSrc &&
-        src !== BaseSrc &&
-        src !== MantleSrc &&
-        src !== AllChainsSrc &&
-        src !== ArbitrumSrc &&
-        src !== BscSrc &&
-        src !== null,
-    );
+    setShowTab(!nowShowTabList.some((s) => s == src) && src !== null);
     // console.log('src', src);
   }, [src]);
 

@@ -48,6 +48,9 @@ type NetworkComponents = {
   allChains: string;
   arbitrum: string;
   bsc: string;
+  linea: string;
+  metis: string;
+  polygon: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -99,6 +102,9 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
     arbitrum: 'bluebiu.near/widget/Arbitrum.Dapps',
     bsc: 'bluebiu.near/widget/Bsc.Dapps',
+    linea: 'bluebiu.near/widget/Linea.Dapps',
+    polygon: 'bluebiu.near/widget/Polygon.Dapps',
+    metis: 'bluebiu.near/widget/Metis.Dapps',
   },
 
   mainnet: {
@@ -149,5 +155,8 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
     arbitrum: 'bluebiu.near/widget/Arbitrum.Dapps',
     bsc: 'bluebiu.near/widget/Bsc.Dapps',
+    linea: 'bluebiu.near/widget/Linea.Dapps',
+    polygon: 'bluebiu.near/widget/Polygon.Dapps',
+    metis: 'bluebiu.near/widget/Metis.Dapps',
   },
 };
