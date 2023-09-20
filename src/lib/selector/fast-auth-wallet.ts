@@ -34,10 +34,10 @@ interface FastAuthWalletExtraOptions {
   relayerUrl: string;
 }
 
-const processSignedDelegates = (relayerUrl, closeDialog, event) => {
-  if(event.data.signedDelegates && event.data.signedDelegates.split(',').some(s => deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64')))) {
+const processSignedDelegates = (relayerUrl: string, closeDialog: () => void, event: MessageEvent) => {
+  if(event.data.signedDelegates && event.data.signedDelegates.split(',').some((s: string) => deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64')))) {
     closeDialog && closeDialog();
-    Promise.all(event.data.signedDelegates.split(',').map((s) => {
+    Promise.all(event.data.signedDelegates.split(',').map((s: string) => {
       const signedDelegate = deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64'))
       return fetch(relayerUrl, {
         method: 'POST',
@@ -215,7 +215,7 @@ const FastAuthWallet: WalletBehaviourFactory<
           transactions: [transaction],
         }
         const closeDialog = await _state.wallet.requestSignTransactions(arg);
-        const listener = (e) => {
+        const listener = (e: MessageEvent) => {
           const shouldRemove = processSignedDelegates(params.relayerUrl, closeDialog, e);
           if(shouldRemove) {
             window.removeEventListener("message", listener, false);
@@ -255,7 +255,7 @@ const FastAuthWallet: WalletBehaviourFactory<
           callbackUrl,
         }
         const closeDialog = await _state.wallet.requestSignTransactions(arg)
-        const listener = (e) => {
+        const listener = (e: MessageEvent) => {
           const shouldRemove = processSignedDelegates(params.relayerUrl, closeDialog, e);
           if(shouldRemove) {
             window.removeEventListener("message", listener, false);
