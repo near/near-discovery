@@ -668,7 +668,10 @@ export const DesktopNavigationLeft = () => {
                       isActive('base') ||
                       isActive('mantle') ||
                       isActive('arbitrum') ||
-                      isActive('bsc')
+                      isActive('bsc') ||
+                      isActive('polygon') ||
+                      isActive('linea') ||
+                      isActive('metis')
                         ? 'active'
                         : ''
                     }`}
