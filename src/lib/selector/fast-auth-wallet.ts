@@ -58,9 +58,9 @@ const resolveWalletUrl = (network: Network, walletUrl?: string) => {
 
   switch (network.networkId) {
     case "mainnet":
-      return "http://localhost:3000/fastauth";
+      return "https://wallet.near.org/fastauth";
     case "testnet":
-      return "http://localhost:3000/fastauth";
+      return "http://wallet.testnet.near.org/fastauth";
     default:
       throw new Error("Invalid wallet url");
   }
