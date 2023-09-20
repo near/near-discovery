@@ -1,3 +1,4 @@
+import { encodeSignedDelegate,SCHEMA, SignedDelegate } from "@near-js/transactions";
 import type {
   Account,
   BrowserWallet,
@@ -8,15 +9,11 @@ import type {
   WalletModuleFactory,
 } from "@near-wallet-selector/core";
 import { createAction } from "@near-wallet-selector/wallet-utils";
-import * as nearAPI from "near-api-js";
+import * as nearAPI from 'near-api-js'
+import { deserialize } from "near-api-js/lib/utils/serialize";
 
 import icon from "./fast-auth-icon";
 import { FastAuthWalletConnection } from "./fastAuthWalletConnection";
-
-const {
-  transactions: { encodeSignedDelegate },
-} = nearAPI
-
 export interface FastAuthWalletParams {
   walletUrl?: string;
   iconUrl?: string;
@@ -37,6 +34,23 @@ interface FastAuthWalletExtraOptions {
   relayerUrl: string;
 }
 
+const processSignedDelegates = (relayerUrl, closeDialog, event) => {
+  if(event.data.signedDelegates && event.data.signedDelegates.split(',').some(s => deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64')))) {
+    closeDialog && closeDialog();
+    Promise.all(event.data.signedDelegates.split(',').map((s) => {
+      const signedDelegate = deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64'))
+      return fetch(relayerUrl, {
+        method: 'POST',
+        mode: 'cors',
+        body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+      })
+    }))  
+    return true;
+  }
+  return false;
+}
+
 const resolveWalletUrl = (network: Network, walletUrl?: string) => {
   if (walletUrl) {
     return walletUrl;
@@ -44,9 +58,9 @@ const resolveWalletUrl = (network: Network, walletUrl?: string) => {
 
   switch (network.networkId) {
     case "mainnet":
-      return "https://wallet.near.org/fastauth";
+      return "http://localhost:3000/fastauth";
     case "testnet":
-      return "https://wallet.testnet.near.org/fastauth";
+      return "http://localhost:3000/fastauth";
     default:
       throw new Error("Invalid wallet url");
   }
@@ -175,25 +189,40 @@ const FastAuthWallet: WalletBehaviourFactory<
 
     async signAndSendTransaction({ receiverId, actions, signerId }) {
       const account = _state.wallet.account();
-  
-      const signedDelegate = await account.signedDelegate({
-        actions: actions.map((action) => createAction(action)),
-        blockHeightTtl: 60,
-        receiverId: receiverId as string,
-      });
-  
-      await fetch(params.relayerUrl, {
-        method: 'POST',
-        mode: 'cors',
-        body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
-        headers: new Headers({ 'Content-Type': 'application/json' }),
-      });
-    },
-  
-    async signAndSendTransactions({ transactions }) {
-      const account = _state.wallet.account();
-  
-      for (const { receiverId, signerId, actions } of transactions) {
+
+      const { accessKey } = await account.findAccessKey(receiverId as string, []);
+      
+      const needsFAK = accessKey.permission !== 'FullAccess' && accessKey.permission.FunctionCall.receiver_id !== receiverId;
+
+      if (needsFAK) {
+        const { signer, networkId, provider } = account.connection;
+        const block = await provider.block({ finality: "final" })
+        const localKey = await signer.getPublicKey(account.accountId, networkId);
+        const txAccessKey = await account.accessKeyForTransaction(
+          receiverId as string,
+          actions.map(createAction),
+          localKey
+        );
+        const transaction = nearAPI.transactions.createTransaction(
+          account.accountId,
+          nearAPI.utils.PublicKey.from(txAccessKey.public_key),
+          receiverId as string,
+          txAccessKey.access_key.nonce + 1,
+          actions.map(createAction),
+          nearAPI.utils.serialize.base_decode(block.header.hash)
+        );
+        const arg = {
+          transactions: [transaction],
+        }
+        const closeDialog = await _state.wallet.requestSignTransactions(arg);
+        const listener = (e) => {
+          const shouldRemove = processSignedDelegates(params.relayerUrl, closeDialog, e);
+          if(shouldRemove) {
+            window.removeEventListener("message", listener, false);
+          }
+        };
+        window.addEventListener('message', listener);
+      } else {
         const signedDelegate = await account.signedDelegate({
           actions: actions.map((action) => createAction(action)),
           blockHeightTtl: 60,
@@ -207,48 +236,50 @@ const FastAuthWallet: WalletBehaviourFactory<
           headers: new Headers({ 'Content-Type': 'application/json' }),
         });
       }
+  
+      
+    },
+  
+    async signAndSendTransactions({ transactions, callbackUrl }) {
+      const account = _state.wallet.account();
+      const { accessKey } = await account.findAccessKey('', []);
+
+      const needsFAK = transactions.some(({receiverId}) => {
+        return accessKey.permission !== 'FullAccess' && accessKey.permission.FunctionCall.receiver_id !== receiverId;
+      })
+      
+
+      if(needsFAK) {
+        const arg = {
+          transactions: await transformTransactions(transactions),
+          callbackUrl,
+        }
+        const closeDialog = await _state.wallet.requestSignTransactions(arg)
+        const listener = (e) => {
+          const shouldRemove = processSignedDelegates(params.relayerUrl, closeDialog, e);
+          if(shouldRemove) {
+            window.removeEventListener("message", listener, false);
+          }
+        };
+        window.addEventListener('message', listener);
+        
+      } else {
+        for (const { receiverId, signerId, actions } of transactions) {
+          const signedDelegate = await account.signedDelegate({
+            actions: actions.map((action) => createAction(action)),
+            blockHeightTtl: 60,
+            receiverId: receiverId as string,
+          });
+      
+          await fetch(params.relayerUrl, {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+          });
+        }
+      }
     }
-
-    // async signAndSendTransaction({
-    //   signerId,
-    //   receiverId,
-    //   actions,
-    //   callbackUrl,
-    // }) {
-    //   logger.log("signAndSendTransaction", {
-    //     signerId,
-    //     receiverId,
-    //     actions,
-    //     callbackUrl,
-    //   });
-
-    //   const { contract } = store.getState();
-
-    //   if (!_state.wallet.isSignedIn() || !contract) {
-    //     throw new Error("Wallet not signed in");
-    //   }
-
-    //   const account = _state.wallet.account();
-
-    //   return account["signAndSendTransaction"]({
-    //     receiverId: receiverId || contract.contractId,
-    //     actions: actions.map((action) => createAction(action)),
-    //     walletCallbackUrl: callbackUrl,
-    //   });
-    // },
-
-    // async signAndSendTransactions({ transactions, callbackUrl }) {
-    //   logger.log("signAndSendTransactions", { transactions, callbackUrl });
-
-    //   if (!_state.wallet.isSignedIn()) {
-    //     throw new Error("Wallet not signed in");
-    //   }
-
-    //   return _state.wallet.requestSignTransactions({
-    //     transactions: await transformTransactions(transactions),
-    //     callbackUrl,
-    //   });
-    // },
   };
 };
 
