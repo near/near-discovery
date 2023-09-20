@@ -1,4 +1,4 @@
-import type { InMemorySigner,keyStores, Near} from 'near-api-js';
+import type { InMemorySigner,keyStores, Near, WalletConnection} from 'near-api-js';
 import { KeyPair, transactions, utils } from 'near-api-js';
 const { SCHEMA } = transactions
 import { ConnectedWalletAccount } from 'near-api-js';
@@ -296,7 +296,7 @@ export class FastAuthWalletConnection {
    */
   account() {
       if (!this._connectedAccount) {
-          this._connectedAccount = new ConnectedWalletAccount(this, this._near.connection, this._authData.accountId as string);
+          this._connectedAccount = new ConnectedWalletAccount(this as unknown as WalletConnection, this._near.connection, this._authData.accountId as string);
       }
       return this._connectedAccount;
   }
