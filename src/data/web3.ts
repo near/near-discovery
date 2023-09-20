@@ -149,6 +149,8 @@ export const onboard = init({
       token: 'XDAI',
       label: 'Gnosis',
       rpcUrl: 'https://rpc.ankr.com/gnosis',
+      icon: 'https://ipfs.near.social/ipfs/bafkreigl7y5n7xqlasn4wokkhxk3hoostz2u7qgvezvzfni2b6g2r4ayfu',
+      color: 'transparent',
     },
     {
       id: 10200,
@@ -234,6 +236,8 @@ export const onboard = init({
       token: 'ETH',
       label: 'Linea Mainnet',
       rpcUrl: 'https://rpc.linea.build',
+      icon: 'https://ipfs.near.social/ipfs/bafkreib57cxzdodeqejjh6y7psgb4hjvnt3wpjhq2hdpjcu2tynhwnw2iq',
+      color: 'transparent',
     },
 
     {
@@ -247,6 +251,8 @@ export const onboard = init({
       token: 'METIS',
       label: 'Metis Andromeda Mainnet',
       rpcUrl: 'https://metis-mainnet.public.blastapi.io',
+      icon: 'https://ipfs.near.social/ipfs/bafkreibnqsbiyguhxo64nulq27mdyjhsusnp5rj4fqruuxf5smmmj6xvsi',
+      color: 'transparent',
     },
     {
       id: 588,
