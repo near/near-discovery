@@ -19,6 +19,7 @@
         "@keypom/selector": "1.2.3",
         "@monaco-editor/react": "^4.4.6",
         "@near-js/biometric-ed25519": "0.3.0",
+        "@near-js/transactions": "^0.2.1",
         "@near-wallet-selector/core": "8.5.1",
         "@near-wallet-selector/here-wallet": "8.5.1",
         "@near-wallet-selector/meteor-wallet": "8.5.1",
