@@ -54,12 +54,12 @@ const HomePage: NextPageWithLayout = () => {
       const tosAccepted =
         tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
       // check if user has already turned on notifications
-      const { permission } = getNotificationLocalStorage();
+      const { showOnTS } = getNotificationLocalStorage();
 
-      if (tosAccepted && !permission) {
+      if ((tosAccepted && !showOnTS) || (tosAccepted && showOnTS < Date.now())) {
         setTimeout(() => {
           setShowNotificationModalState(showNotificationModal());
-        }, 5000);
+        }, 10000);
       }
     }
   }, [cacheTosData]);
