@@ -103,6 +103,16 @@ export const handleOnCancel = () => {
       ...getNotificationLocalStorage(),
       showOnTS: Date.now() + 86400000, // 14 days
       notNowTS: Date.now(),
+      bannerNotNowTS: undefined,
+    }),
+  );
+};
+export const handleOnCancelBanner = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      bannerNotNowTS: Date.now(),
     }),
   );
 };
