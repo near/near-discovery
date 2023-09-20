@@ -90,7 +90,15 @@ const arbitrumIcon = (
     />
   </svg>
 );
-
+const bscIcon = (
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect x="32" y="32" width="32" height="32" rx="8" transform="rotate(180 32 32)" fill="white" />
+    <path
+      d="M18.0311 22.6097V24.8507L15.9707 26L13.9709 24.8507V22.6097L15.9707 23.7589L18.0311 22.6097ZM7 14.8503L8.99978 15.9995V19.8505L12.4549 21.8043V24.0453L7 20.9998V14.8503ZM24.9404 14.8503V20.9998L19.4248 24.0453V21.8043L22.88 19.8505V16.0005L24.9404 14.8503ZM19.4248 11.8047L21.4852 12.954V15.1951L18.0301 17.1488V21.0572L16.0303 22.2065L14.0305 21.0572V17.1497L10.4551 15.1951V12.954L12.5155 11.8047L15.9707 13.7585L19.4248 11.8047ZM10.4551 16.8049L12.4549 17.9542V20.1953L10.4551 19.046V16.8049ZM21.4852 16.8049V19.046L19.4854 20.1953V17.9542L21.4852 16.8049ZM8.99978 9.85097L11.0602 11.0002L8.99978 12.1495V14.3906L7 13.2413V11.0002L8.99978 9.85097ZM22.9396 9.85097L25 11.0002V13.2413L22.9396 14.3906V12.1495L20.9398 11.0002L22.9396 9.85097ZM15.9697 9.85097L18.0301 11.0002L15.9697 12.1495L13.9699 11.0002L15.9697 9.85097ZM15.9697 6L21.4852 9.04555L19.4854 10.1948L16.0303 8.24107L12.5155 10.1957L10.5157 9.04648L15.9697 6Z"
+      fill="#F3BA2F"
+    />
+  </svg>
+);
 const NearSignInButton = styled.div`
   width: 123px;
   cursor: pointer;
@@ -289,7 +297,7 @@ const SignInButton = styled.div<{ backgroundColor: string; color: string }>`
   right: 30px;
 
   @media (max-width: ${MEDIUM_SCREEN}) {
-    .arbitrum-icon {
+    .icon {
       display: none;
     }
     width: auto;
@@ -359,12 +367,15 @@ export const LoginBox = () => {
       paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA'];
     } else if (name === 'arbitrum') {
       paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle'];
+    } else if (name === 'bsc') {
+      paths = ['bsc', 'Bsc.Swap.Dex'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
   }
 
-  const isZKEVMActive = isActive('polygon-zkevm') || isActive('base') || isActive('mantle') || isActive('arbitrum');
+  const isZKEVMActive =
+    isActive('polygon-zkevm') || isActive('base') || isActive('mantle') || isActive('arbitrum') || isActive('bsc');
 
   function handleSignIn() {
     flushEvents();
@@ -442,7 +453,23 @@ export const LoginBox = () => {
           connect();
         }}
       >
-        <span className="arbitrum-icon">{arbitrumIcon}</span>
+        <span className="icon">{arbitrumIcon}</span>
+
+        <span>Connect</span>
+      </SignInButton>
+    </LoginArea>
+  );
+
+  const BscloginArea = wallet ? null : (
+    <LoginArea>
+      <SignInButton
+        backgroundColor="#D39808"
+        color="#fff"
+        onClick={() => {
+          connect();
+        }}
+      >
+        <span className="icon">{bscIcon}</span>
 
         <span>Connect</span>
       </SignInButton>
@@ -471,5 +498,7 @@ export const LoginBox = () => {
     ? MantleloginArea
     : isActive('arbitrum')
     ? ArbitrumloginArea
+    : isActive('bsc')
+    ? BscloginArea
     : null;
 };

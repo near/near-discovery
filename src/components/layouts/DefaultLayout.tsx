@@ -65,6 +65,7 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   'Arbitrum.Swap.Dex': '/arbitrum',
   'Arbitrum.Pendle.TradeMarkets': '/arbitrum',
   'Arbitrum.Pendle.TradeSwap': '/arbitrum',
+  'Bsc.Swap.Dex': '/bsc',
 };
 
 export function DefaultLayout({ children }: Props) {
@@ -78,6 +79,7 @@ export function DefaultLayout({ children }: Props) {
   const ExecuteRecordsSrc = 'guessme.near/widget/ZKEVM.ExecuteRecords';
   const BaseSrc = 'bluebiu.near/widget/Base.BaseDapps';
   const ArbitrumSrc = 'bluebiu.near/widget/Arbitrum.Dapps';
+  const BscSrc = 'bluebiu.near/widget/Bsc.Dapps';
   const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage';
 
   const MantleSrc = 'bluebiu.near/widget/Mantle.MantleTemplate';
@@ -100,6 +102,7 @@ export function DefaultLayout({ children }: Props) {
         src !== MantleSrc &&
         src !== AllChainsSrc &&
         src !== ArbitrumSrc &&
+        src !== BscSrc &&
         src !== null,
     );
     // console.log('src', src);

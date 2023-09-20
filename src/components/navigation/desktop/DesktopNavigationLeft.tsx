@@ -288,6 +288,8 @@ export const DesktopNavigationLeft = () => {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
       paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets'];
+    } else if (name === 'bsc') {
+      paths = ['bsc', 'Bsc.Swap.Dex'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
@@ -356,7 +358,8 @@ export const DesktopNavigationLeft = () => {
     isActive('base') ||
     isActive('mantle') ||
     isActive('allChains') ||
-    isActive('arbitrum');
+    isActive('arbitrum') ||
+    isActive('bsc');
   const warmActive = isActive('warmup');
   function openMenu() {
     set_show_menu_list(true);
@@ -475,14 +478,12 @@ export const DesktopNavigationLeft = () => {
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
-                    className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
-                    href="#"
-                    onClick={(event) => {
-                      event.preventDefault();
-                    }}
+                    className={`item child-item ${isActive('bsc') ? 'active' : ''}`}
+                    href="/bsc"
+                    onClick={closeMenu}
                   >
-                    BSC
-                    <span className="soonIcon"> {soonIcon}</span>
+                    BSC(1)
+                    <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
                     className={`item child-item ${isActive('Polygon') ? 'active' : ''} disabled`}
@@ -660,7 +661,8 @@ export const DesktopNavigationLeft = () => {
                       isActive('polygon-zkevm') ||
                       isActive('base') ||
                       isActive('mantle') ||
-                      isActive('arbitrum')
+                      isActive('arbitrum') ||
+                      isActive('bsc')
                         ? 'active'
                         : ''
                     }`}
@@ -692,15 +694,9 @@ export const DesktopNavigationLeft = () => {
                       Arbitrum(2)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
-                    <Link
-                      className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      BSC
-                      <span className="soonIcon"> {soonIcon}</span>
+                    <Link className={`item child-item ${isActive('bsc') ? 'active' : ''}`} href="/bsc">
+                      BSC(1)
+                      <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('polygon') ? 'active' : ''} disabled`}
@@ -878,15 +874,9 @@ export const DesktopNavigationLeft = () => {
                       Arbitrum(2) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
-                    <Link
-                      className={`item child-item ${isActive('BSC') ? 'active' : ''} disabled`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      BSC <span className="soonIcon"> {soonIcon}</span>
-                      <span className="bag">{isActive('BSC') ? visible_bag : null}</span>
+                    <Link className={`item child-item ${isActive('bsc') ? 'active' : ''}`} href="/bsc">
+                      BSC(1) <span className="newIcon">{newIcon}</span>
+                      <span className="bag">{isActive('bsc') ? visible_bag : null}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Polygon') ? 'active' : ''} disabled`}

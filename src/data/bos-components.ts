@@ -47,6 +47,7 @@ type NetworkComponents = {
   mantle: string;
   allChains: string;
   arbitrum: string;
+  bsc: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -97,6 +98,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     mantle: 'bluebiu.near/widget/Mantle.MantleTemplate',
     allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
     arbitrum: 'bluebiu.near/widget/Arbitrum.Dapps',
+    bsc: 'bluebiu.near/widget/Bsc.Dapps',
   },
 
   mainnet: {
@@ -146,5 +148,6 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     mantle: 'bluebiu.near/widget/Mantle.MantleTemplate',
     allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
     arbitrum: 'bluebiu.near/widget/Arbitrum.Dapps',
+    bsc: 'bluebiu.near/widget/Bsc.Dapps',
   },
 };
