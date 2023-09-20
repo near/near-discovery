@@ -19,6 +19,16 @@ export const setHandleOnCancel = () => {
   );
 };
 
+export const setHandleOnCancelBanner = () => {
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorage(),
+      bannerNotNowTS: Date.now(),
+    }),
+  );
+};
+
 export const setProcessSuccess = () => {
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
