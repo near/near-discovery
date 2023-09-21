@@ -1,7 +1,9 @@
 import type { InMemorySigner, keyStores, Near, WalletConnection } from 'near-api-js';
-import { KeyPair, transactions, utils } from 'near-api-js';
-const { SCHEMA } = transactions;
+import { KeyPair, utils } from 'near-api-js';
 import { ConnectedWalletAccount } from 'near-api-js';
+import { deserialize } from 'near-api-js/lib/utils/serialize';
+import type { Transaction } from '@near-js/transactions'
+import { SCHEMA, SignedDelegate } from '@near-js/transactions';
 
 const LOGIN_WALLET_URL_SUFFIX = '/login/';
 const LOCAL_STORAGE_KEY_SUFFIX = '_wallet_auth_key';
@@ -23,7 +25,7 @@ interface SignInOptions {
  */
 interface RequestSignTransactionsOptions {
   /** list of transactions to sign */
-  transactions: transactions.Transaction[];
+  transactions: Transaction[];
   /** url NEAR Wallet will redirect to after transaction signing is complete */
   callbackUrl?: string;
   /** meta information NEAR Wallet will send back to the application. `meta` will be attached to the `callbackUrl` as a url search param */
@@ -232,7 +234,7 @@ export class FastAuthWalletConnection {
     transactions,
     meta,
     callbackUrl,
-  }: RequestSignTransactionsOptions): Promise<() => void> {
+  }: RequestSignTransactionsOptions): Promise<{ signedDelegates: SignedDelegate[]; closeDialog: () => void }> {
     const currentUrl = new URL(window.location.href);
     const newUrl = new URL(this._walletBaseUrl + '/sign/');
 
@@ -265,7 +267,25 @@ export class FastAuthWalletConnection {
         myDialog.close();
       }
     });
-    return () => myDialog.close();
+    return new Promise((resolve) => {
+      const listener = (e: MessageEvent) => {
+        if (
+          e.data.signedDelegates &&
+          e.data.signedDelegates
+            .split(',')
+            .some((s: string) => deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64')))
+        ) {
+          window.removeEventListener('message', listener);
+          resolve({
+            signedDelegates: e.data.signedDelegates
+              .split(',')
+              .map((s: string) => deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64'))),
+            closeDialog: () => myDialog.close(),
+          });
+        }
+      };
+      window.addEventListener('message', listener);
+    });
   }
 
   /**
