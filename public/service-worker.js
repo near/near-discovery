@@ -63,7 +63,7 @@ const getOptions = ({ path, id }) => ({
   tag: id,
   timestamp: Date.now(),
   data: {
-    path, // TODO: at this step change to full url
+    path: getPath({}),
   },
 });
 
