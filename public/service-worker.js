@@ -67,7 +67,10 @@ const getOptions = ({ path, id }) => ({
   },
 });
 
-// Add error handling if data will not match
+const getPath = ({ path }) => {
+  return `http://near.org/notifications/${path || ''}`;
+};
+
 function handlePushEvent(event) {
   console.log('SW -  push event received', event);
 
