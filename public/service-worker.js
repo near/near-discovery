@@ -67,10 +67,13 @@ const getOptions = ({ path, id }) => ({
   },
 });
 
+// TODO: handle beta.near.org version redirection
+// TODO: improve by redirecting to events path
 const getPath = ({ path }) => {
   return `http://near.org/notifications/${path || ''}`;
 };
 
+// TODO: Add error handling if data will not match
 function handlePushEvent(event) {
   console.log('SW -  push event received', event);
 
@@ -110,7 +113,7 @@ const getNotificationTitle = ({ accountId, notificationType }) => {
 };
 
 const getNotificationOptions = ({ notificationType, ...rest }) => {
-  return NOTIFICATIONS_SCHEMA[notificationType].options({ ...rest });
+  return NOTIFICATIONS_SCHEMA[notificationType].options(rest);
 };
 
 self.addEventListener('install', (event) => console.log('SW - installing in progress.', event));
