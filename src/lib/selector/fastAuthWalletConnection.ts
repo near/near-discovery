@@ -1,6 +1,6 @@
-import type { InMemorySigner,keyStores, Near, WalletConnection} from 'near-api-js';
+import type { InMemorySigner, keyStores, Near, WalletConnection } from 'near-api-js';
 import { KeyPair, transactions, utils } from 'near-api-js';
-const { SCHEMA } = transactions
+const { SCHEMA } = transactions;
 import { ConnectedWalletAccount } from 'near-api-js';
 
 const LOGIN_WALLET_URL_SUFFIX = '/login/';
@@ -8,26 +8,26 @@ const LOCAL_STORAGE_KEY_SUFFIX = '_wallet_auth_key';
 const PENDING_ACCESS_KEY_PREFIX = 'pending_key'; // browser storage key for a pending access key (i.e. key has been generated but we are not sure it was added yet)
 
 interface SignInOptions {
-    contractId?: string;
-    methodNames?: string[];
-    // TODO: Replace following with single callbackUrl
-    successUrl?: string;
-    failureUrl?: string;
-    email?: string;
-    accountId?: string;
-    isRecovery?: boolean;
+  contractId?: string;
+  methodNames?: string[];
+  // TODO: Replace following with single callbackUrl
+  successUrl?: string;
+  failureUrl?: string;
+  email?: string;
+  accountId?: string;
+  isRecovery?: boolean;
 }
 
 /**
  * Information to send NEAR wallet for signing transactions and redirecting the browser back to the calling application
  */
 interface RequestSignTransactionsOptions {
-    /** list of transactions to sign */
-    transactions: transactions.Transaction[];
-    /** url NEAR Wallet will redirect to after transaction signing is complete */
-    callbackUrl?: string;
-    /** meta information NEAR Wallet will send back to the application. `meta` will be attached to the `callbackUrl` as a url search param */
-    meta?: string;
+  /** list of transactions to sign */
+  transactions: transactions.Transaction[];
+  /** url NEAR Wallet will redirect to after transaction signing is complete */
+  callbackUrl?: string;
+  /** meta information NEAR Wallet will send back to the application. `meta` will be attached to the `callbackUrl` as a url search param */
+  meta?: string;
 }
 
 export class FastAuthWalletConnection {
@@ -60,45 +60,52 @@ export class FastAuthWalletConnection {
   _iframe: HTMLIFrameElement;
 
   constructor(near: Near, appKeyPrefix: string) {
-      if (typeof(appKeyPrefix) !== 'string') {
-          throw new Error('Please define a clear appKeyPrefix for this WalletConnection instance as the second argument to the constructor');
-      }
+    if (typeof appKeyPrefix !== 'string') {
+      throw new Error(
+        'Please define a clear appKeyPrefix for this WalletConnection instance as the second argument to the constructor',
+      );
+    }
 
-      if (typeof window === 'undefined') {
-          return new Proxy(this, {
-              get(target, property) {
-                  if(property === 'isSignedIn') {
-                      return () => false;
-                  }
-                  if(property === 'getAccountId') {
-                      return () => '';
-                  }
-                  if(target[property as keyof FastAuthWalletConnection] && typeof target[property as keyof FastAuthWalletConnection] === 'function') {
-                      return () => {
-                          throw new Error('No window found in context, please ensure you are using WalletConnection on the browser');
-                      };
-                  }
-                  return target[property as keyof FastAuthWalletConnection];
-              }
-          });
-      }
-      const iframe = document.createElement("iframe");
-      iframe.allow = "publickey-credentials-create *; publickey-credentials-get *; clipboard-write"
-      iframe.style.width = '100%'
-      iframe.style.height = '100%'
-      this._iframe = iframe;
-      this._near = near;
-      const authDataKey = appKeyPrefix + LOCAL_STORAGE_KEY_SUFFIX;
-      const authData = JSON.parse(window.localStorage.getItem(authDataKey) as string);
-      this._networkId = near.config.networkId;
-      this._walletBaseUrl = near.config.walletUrl;
-      appKeyPrefix = appKeyPrefix || near.config.contractName || 'default';
-      this._keyStore = (near.connection.signer as InMemorySigner).keyStore;
-      this._authData = authData || { allKeys: [] };
-      this._authDataKey = authDataKey;
-      if (!this.isSignedIn()) {
-          this._completeSignInPromise = this._completeSignInWithAccessKey();
-      }
+    if (typeof window === 'undefined') {
+      return new Proxy(this, {
+        get(target, property) {
+          if (property === 'isSignedIn') {
+            return () => false;
+          }
+          if (property === 'getAccountId') {
+            return () => '';
+          }
+          if (
+            target[property as keyof FastAuthWalletConnection] &&
+            typeof target[property as keyof FastAuthWalletConnection] === 'function'
+          ) {
+            return () => {
+              throw new Error(
+                'No window found in context, please ensure you are using WalletConnection on the browser',
+              );
+            };
+          }
+          return target[property as keyof FastAuthWalletConnection];
+        },
+      });
+    }
+    const iframe = document.createElement('iframe');
+    iframe.allow = 'publickey-credentials-create *; publickey-credentials-get *; clipboard-write';
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    this._iframe = iframe;
+    this._near = near;
+    const authDataKey = appKeyPrefix + LOCAL_STORAGE_KEY_SUFFIX;
+    const authData = JSON.parse(window.localStorage.getItem(authDataKey) as string);
+    this._networkId = near.config.networkId;
+    this._walletBaseUrl = near.config.walletUrl;
+    appKeyPrefix = appKeyPrefix || near.config.contractName || 'default';
+    this._keyStore = (near.connection.signer as InMemorySigner).keyStore;
+    this._authData = authData || { allKeys: [] };
+    this._authDataKey = authDataKey;
+    if (!this.isSignedIn()) {
+      this._completeSignInPromise = this._completeSignInWithAccessKey();
+    }
   }
 
   /**
@@ -110,7 +117,7 @@ export class FastAuthWalletConnection {
    * ```
    */
   isSignedIn() {
-      return !!this._authData.accountId;
+    return !!this._authData.accountId;
   }
 
   /**
@@ -124,12 +131,12 @@ export class FastAuthWalletConnection {
    * ```
    */
   async isSignedInAsync() {
-      if (!this._completeSignInPromise) {
-          return this.isSignedIn();
-      }
-
-      await this._completeSignInPromise;
+    if (!this._completeSignInPromise) {
       return this.isSignedIn();
+    }
+
+    await this._completeSignInPromise;
+    return this.isSignedIn();
   }
 
   /**
@@ -141,7 +148,7 @@ export class FastAuthWalletConnection {
    * ```
    */
   getAccountId() {
-      return this._authData.accountId || '';
+    return this._authData.accountId || '';
   }
 
   /**
@@ -158,86 +165,107 @@ export class FastAuthWalletConnection {
    * wallet.requestSignIn({ contractId: 'account-with-deploy-contract.near' });
    * ```
    */
-  async requestSignIn({ contractId, methodNames, successUrl, failureUrl, email, accountId, isRecovery }: SignInOptions) {
-      const currentUrl = new URL(window.location.href);
-      const newUrl = new URL(this._walletBaseUrl + LOGIN_WALLET_URL_SUFFIX);
-      newUrl.searchParams.set('success_url', successUrl || currentUrl.href);
-      newUrl.searchParams.set('failure_url', failureUrl || currentUrl.href);
-      if (contractId) {
-          /* Throws exception if contract account does not exist */
-          const contractAccount = await this._near.account(contractId);
-          await contractAccount.state();
+  async requestSignIn({
+    contractId,
+    methodNames,
+    successUrl,
+    failureUrl,
+    email,
+    accountId,
+    isRecovery,
+  }: SignInOptions) {
+    const currentUrl = new URL(window.location.href);
+    const newUrl = new URL(this._walletBaseUrl + LOGIN_WALLET_URL_SUFFIX);
+    newUrl.searchParams.set('success_url', successUrl || currentUrl.href);
+    newUrl.searchParams.set('failure_url', failureUrl || currentUrl.href);
+    if (contractId) {
+      /* Throws exception if contract account does not exist */
+      const contractAccount = await this._near.account(contractId);
+      await contractAccount.state();
 
-          newUrl.searchParams.set('contract_id', contractId);
-          const accessKey = KeyPair.fromRandom('ed25519');
-          newUrl.searchParams.set('public_key', accessKey.getPublicKey().toString());
-          await this._keyStore.setKey(this._networkId, PENDING_ACCESS_KEY_PREFIX + accessKey.getPublicKey(), accessKey);
-      }
+      newUrl.searchParams.set('contract_id', contractId);
+      const accessKey = KeyPair.fromRandom('ed25519');
+      newUrl.searchParams.set('public_key', accessKey.getPublicKey().toString());
+      await this._keyStore.setKey(this._networkId, PENDING_ACCESS_KEY_PREFIX + accessKey.getPublicKey(), accessKey);
+    }
 
-      if (methodNames) {
-          methodNames.forEach(methodName => {
-              newUrl.searchParams.append('methodNames', methodName);
-          });
-      }
-
-      if (email) {
-        newUrl.searchParams.append('email', email);
-      }
-      if (accountId) {
-        newUrl.searchParams.append('accountId', accountId);
-      }
-      if (isRecovery !== undefined) {
-        newUrl.searchParams.append('isRecovery', isRecovery + '');
-      }
-
-      this._iframe.src = newUrl.toString();
-      const myDialog = document.createElement("dialog");
-      myDialog.style.width = '50%';
-      myDialog.style.height = '50%';
-      document.body.appendChild(myDialog)
-      myDialog.appendChild(this._iframe);
-      myDialog.showModal();
-      myDialog.addEventListener('click', function(event) {
-        const rect = myDialog.getBoundingClientRect();
-        const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
-          rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
-        if (!isInDialog) {
-            myDialog.close();
-        }
+    if (methodNames) {
+      methodNames.forEach((methodName) => {
+        newUrl.searchParams.append('methodNames', methodName);
       });
+    }
+
+    if (email) {
+      newUrl.searchParams.append('email', email);
+    }
+    if (accountId) {
+      newUrl.searchParams.append('accountId', accountId);
+    }
+    if (isRecovery !== undefined) {
+      newUrl.searchParams.append('isRecovery', isRecovery + '');
+    }
+
+    this._iframe.src = newUrl.toString();
+    const myDialog = document.createElement('dialog');
+    myDialog.style.width = '50%';
+    myDialog.style.height = '50%';
+    document.body.appendChild(myDialog);
+    myDialog.appendChild(this._iframe);
+    myDialog.showModal();
+    myDialog.addEventListener('click', function (event) {
+      const rect = myDialog.getBoundingClientRect();
+      const isInDialog =
+        rect.top <= event.clientY &&
+        event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.left + rect.width;
+      if (!isInDialog) {
+        myDialog.close();
+      }
+    });
   }
 
   /**
    * Requests the user to quickly sign for a transaction or batch of transactions by redirecting to the NEAR wallet.
    */
-  async requestSignTransactions({ transactions, meta, callbackUrl }: RequestSignTransactionsOptions): Promise<(() => void)> {
-      const currentUrl = new URL(window.location.href);
-      const newUrl = new URL(this._walletBaseUrl + '/sign/');
+  async requestSignTransactions({
+    transactions,
+    meta,
+    callbackUrl,
+  }: RequestSignTransactionsOptions): Promise<() => void> {
+    const currentUrl = new URL(window.location.href);
+    const newUrl = new URL(this._walletBaseUrl + '/sign/');
 
-      newUrl.searchParams.set('transactions', transactions
-          .map(transaction => utils.serialize.serialize(SCHEMA, transaction))
-          .map(serialized => Buffer.from(serialized).toString('base64'))
-          .join(','));
-      newUrl.searchParams.set('success_url', callbackUrl || currentUrl.href);
-      newUrl.searchParams.set('failure_url', callbackUrl || currentUrl.href);
-      if (meta) newUrl.searchParams.set('meta', meta);
+    newUrl.searchParams.set(
+      'transactions',
+      transactions
+        .map((transaction) => utils.serialize.serialize(SCHEMA, transaction))
+        .map((serialized) => Buffer.from(serialized).toString('base64'))
+        .join(','),
+    );
+    newUrl.searchParams.set('success_url', callbackUrl || currentUrl.href);
+    newUrl.searchParams.set('failure_url', callbackUrl || currentUrl.href);
+    if (meta) newUrl.searchParams.set('meta', meta);
 
-      this._iframe.src = newUrl.toString();
-      const myDialog = document.createElement("dialog");
-      myDialog.style.width = '50%';
-      myDialog.style.height = '50%';
-      document.body.appendChild(myDialog);
-      myDialog.appendChild(this._iframe);
-      myDialog.showModal();
-      myDialog.addEventListener('click', function(event) {
-        const rect = myDialog.getBoundingClientRect();
-        const isInDialog = (rect.top <= event.clientY && event.clientY <= rect.top + rect.height &&
-          rect.left <= event.clientX && event.clientX <= rect.left + rect.width);
-        if (!isInDialog) {
-            myDialog.close();
-        }
-      });
-      return () => myDialog.close()
+    this._iframe.src = newUrl.toString();
+    const myDialog = document.createElement('dialog');
+    myDialog.style.width = '50%';
+    myDialog.style.height = '50%';
+    document.body.appendChild(myDialog);
+    myDialog.appendChild(this._iframe);
+    myDialog.showModal();
+    myDialog.addEventListener('click', function (event) {
+      const rect = myDialog.getBoundingClientRect();
+      const isInDialog =
+        rect.top <= event.clientY &&
+        event.clientY <= rect.top + rect.height &&
+        rect.left <= event.clientX &&
+        event.clientX <= rect.left + rect.width;
+      if (!isInDialog) {
+        myDialog.close();
+      }
+    });
+    return () => myDialog.close();
   }
 
   /**
@@ -245,29 +273,29 @@ export class FastAuthWalletConnection {
    * Complete sign in for a given account id and public key. To be invoked by the app when getting a callback from the wallet.
    */
   async _completeSignInWithAccessKey() {
-      const currentUrl = new URL(window.location.href);
-      const publicKey = currentUrl.searchParams.get('public_key') || '';
-      const allKeys = (currentUrl.searchParams.get('all_keys') || '').split(',');
-      const accountId = currentUrl.searchParams.get('account_id') || '';
-      // TODO: Handle errors during login
-      if (accountId) {
-          const authData = {
-              accountId,
-              allKeys
-          };
-          window.localStorage.setItem(this._authDataKey, JSON.stringify(authData));
-          if (publicKey) {
-              await this._moveKeyFromTempToPermanent(accountId, publicKey);
-          }
-          this._authData = authData;
+    const currentUrl = new URL(window.location.href);
+    const publicKey = currentUrl.searchParams.get('public_key') || '';
+    const allKeys = (currentUrl.searchParams.get('all_keys') || '').split(',');
+    const accountId = currentUrl.searchParams.get('account_id') || '';
+    // TODO: Handle errors during login
+    if (accountId) {
+      const authData = {
+        accountId,
+        allKeys,
+      };
+      window.localStorage.setItem(this._authDataKey, JSON.stringify(authData));
+      if (publicKey) {
+        await this._moveKeyFromTempToPermanent(accountId, publicKey);
       }
-      currentUrl.searchParams.delete('public_key');
-      currentUrl.searchParams.delete('all_keys');
-      currentUrl.searchParams.delete('account_id');
-      currentUrl.searchParams.delete('meta');
-      currentUrl.searchParams.delete('transactionHashes');
+      this._authData = authData;
+    }
+    currentUrl.searchParams.delete('public_key');
+    currentUrl.searchParams.delete('all_keys');
+    currentUrl.searchParams.delete('account_id');
+    currentUrl.searchParams.delete('meta');
+    currentUrl.searchParams.delete('transactionHashes');
 
-      window.history.replaceState({}, document.title, currentUrl.toString());
+    window.history.replaceState({}, document.title, currentUrl.toString());
   }
 
   /**
@@ -276,9 +304,9 @@ export class FastAuthWalletConnection {
    * @param publicKey The public key being set to the key store
    */
   async _moveKeyFromTempToPermanent(accountId: string, publicKey: string) {
-      const keyPair = await this._keyStore.getKey(this._networkId, PENDING_ACCESS_KEY_PREFIX + publicKey);
-      await this._keyStore.setKey(this._networkId, accountId, keyPair);
-      await this._keyStore.removeKey(this._networkId, PENDING_ACCESS_KEY_PREFIX + publicKey);
+    const keyPair = await this._keyStore.getKey(this._networkId, PENDING_ACCESS_KEY_PREFIX + publicKey);
+    await this._keyStore.setKey(this._networkId, accountId, keyPair);
+    await this._keyStore.removeKey(this._networkId, PENDING_ACCESS_KEY_PREFIX + publicKey);
   }
 
   /**
@@ -287,17 +315,21 @@ export class FastAuthWalletConnection {
    * walletConnection.signOut();
    */
   signOut() {
-      this._authData = {};
-      window.localStorage.removeItem(this._authDataKey);
+    this._authData = {};
+    window.localStorage.removeItem(this._authDataKey);
   }
 
   /**
    * Returns the current connected wallet account
    */
   account() {
-      if (!this._connectedAccount) {
-          this._connectedAccount = new ConnectedWalletAccount(this as unknown as WalletConnection, this._near.connection, this._authData.accountId as string);
-      }
-      return this._connectedAccount;
+    if (!this._connectedAccount) {
+      this._connectedAccount = new ConnectedWalletAccount(
+        this as unknown as WalletConnection,
+        this._near.connection,
+        this._authData.accountId as string,
+      );
+    }
+    return this._connectedAccount;
   }
 }
