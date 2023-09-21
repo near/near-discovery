@@ -2,7 +2,7 @@ import type { InMemorySigner, keyStores, Near, WalletConnection } from 'near-api
 import { KeyPair, utils } from 'near-api-js';
 import { ConnectedWalletAccount } from 'near-api-js';
 import { deserialize } from 'near-api-js/lib/utils/serialize';
-import type { Transaction } from '@near-js/transactions'
+import type { Transaction } from '@near-js/transactions';
 import { SCHEMA, SignedDelegate } from '@near-js/transactions';
 
 const LOGIN_WALLET_URL_SUFFIX = '/login/';
