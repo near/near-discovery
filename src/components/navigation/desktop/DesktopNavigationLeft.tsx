@@ -39,6 +39,9 @@ const Container = styled.div`
       width: 32px;
     }
   }
+  .item:hover{
+    background: rgba(55, 58, 83, 1);
+  }
   .show {
     display: block;
   }
@@ -661,20 +664,19 @@ export const DesktopNavigationLeft = () => {
                   }}
                 >
                   <div
-                    className={`item ${
-                      isActive('allChains') ||
-                      isActive('near') ||
-                      isActive('polygon-zkevm') ||
-                      isActive('base') ||
-                      isActive('mantle') ||
-                      isActive('arbitrum') ||
-                      isActive('bsc') ||
-                      isActive('polygon') ||
-                      isActive('linea') ||
-                      isActive('metis')
+                    className={`item ${isActive('allChains') ||
+                        isActive('near') ||
+                        isActive('polygon-zkevm') ||
+                        isActive('base') ||
+                        isActive('mantle') ||
+                        isActive('arbitrum') ||
+                        isActive('bsc') ||
+                        isActive('polygon') ||
+                        isActive('linea') ||
+                        isActive('metis')
                         ? 'active'
                         : ''
-                    }`}
+                      }`}
                   >
                     <div className="icon">{templatesIcon}</div>
                   </div>
@@ -905,6 +907,7 @@ export const DesktopNavigationLeft = () => {
                       onClick={(event) => {
                         event.preventDefault();
                       }}
+                      
                     >
                       Avalanche <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
