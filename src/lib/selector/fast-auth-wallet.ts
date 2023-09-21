@@ -10,7 +10,6 @@ import type {
 } from '@near-wallet-selector/core';
 import { createAction } from '@near-wallet-selector/wallet-utils';
 import * as nearAPI from 'near-api-js';
-import { deserialize } from 'near-api-js/lib/utils/serialize';
 
 import icon from './fast-auth-icon';
 import { FastAuthWalletConnection } from './fastAuthWalletConnection';
@@ -34,30 +33,6 @@ interface FastAuthWalletExtraOptions {
   relayerUrl: string;
 }
 
-const processSignedDelegates = (relayerUrl: string, closeDialog: () => void, event: MessageEvent) => {
-  if (
-    event.data.signedDelegates &&
-    event.data.signedDelegates
-      .split(',')
-      .some((s: string) => deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64')))
-  ) {
-    closeDialog && closeDialog();
-    Promise.all(
-      event.data.signedDelegates.split(',').map((s: string) => {
-        const signedDelegate = deserialize(SCHEMA, SignedDelegate, Buffer.from(s, 'base64'));
-        return fetch(relayerUrl, {
-          method: 'POST',
-          mode: 'cors',
-          body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
-          headers: new Headers({ 'Content-Type': 'application/json' }),
-        });
-      }),
-    );
-    return true;
-  }
-  return false;
-};
-
 const resolveWalletUrl = (network: Network, walletUrl?: string) => {
   if (walletUrl) {
     return walletUrl;
@@ -67,7 +42,7 @@ const resolveWalletUrl = (network: Network, walletUrl?: string) => {
     case 'mainnet':
       return 'https://wallet.near.org/fastauth';
     case 'testnet':
-      return 'http://wallet.testnet.near.org/fastauth';
+      return 'https://wallet.testnet.near.org/fastauth';
     default:
       throw new Error('Invalid wallet url');
   }
@@ -209,14 +184,16 @@ const FastAuthWallet: WalletBehaviourFactory<BrowserWallet, { params: FastAuthWa
         const arg = {
           transactions: [transaction],
         };
-        const closeDialog = await _state.wallet.requestSignTransactions(arg);
-        const listener = (e: MessageEvent) => {
-          const shouldRemove = processSignedDelegates(params.relayerUrl, closeDialog, e);
-          if (shouldRemove) {
-            window.removeEventListener('message', listener, false);
-          }
-        };
-        window.addEventListener('message', listener);
+        const { closeDialog, signedDelegates } = await _state.wallet.requestSignTransactions(arg);
+        closeDialog();
+        signedDelegates.forEach((signedDelegate) =>
+          fetch(params.relayerUrl, {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+          }),
+        );
       } else {
         const signedDelegate = await account.signedDelegate({
           actions: actions.map((action) => createAction(action)),
@@ -246,14 +223,16 @@ const FastAuthWallet: WalletBehaviourFactory<BrowserWallet, { params: FastAuthWa
           transactions: await transformTransactions(transactions),
           callbackUrl,
         };
-        const closeDialog = await _state.wallet.requestSignTransactions(arg);
-        const listener = (e: MessageEvent) => {
-          const shouldRemove = processSignedDelegates(params.relayerUrl, closeDialog, e);
-          if (shouldRemove) {
-            window.removeEventListener('message', listener, false);
-          }
-        };
-        window.addEventListener('message', listener);
+        const { closeDialog, signedDelegates } = await _state.wallet.requestSignTransactions(arg);
+        closeDialog();
+        signedDelegates.forEach((signedDelegate) =>
+          fetch(params.relayerUrl, {
+            method: 'POST',
+            mode: 'cors',
+            body: JSON.stringify(Array.from(encodeSignedDelegate(signedDelegate))),
+            headers: new Headers({ 'Content-Type': 'application/json' }),
+          }),
+        );
       } else {
         for (const { receiverId, signerId, actions } of transactions) {
           const signedDelegate = await account.signedDelegate({
