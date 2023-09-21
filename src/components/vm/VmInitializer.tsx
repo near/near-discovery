@@ -214,7 +214,7 @@ export default function VmInitializer() {
     signedIn,
     signedAccountId,
     setAuthStore,
-    near
+    near,
   ]);
 
   useEffect(() => {

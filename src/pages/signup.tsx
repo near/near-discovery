@@ -92,7 +92,7 @@ const SignUpPage: NextPageWithLayout = () => {
           contractId: vmNear.config.contractName,
           email: data.email,
           accountId: data.username,
-          isRecovery: false
+          isRecovery: false,
         }),
       );
   });
