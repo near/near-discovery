@@ -498,7 +498,7 @@ export const DesktopNavigationLeft = () => {
                     href="/linea"
                     onClick={closeMenu}
                   >
-                    Linea(1)
+                    Linea(2)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
 
@@ -709,7 +709,7 @@ export const DesktopNavigationLeft = () => {
                     </Link>
 
                     <Link className={`item child-item ${isActive('linea') ? 'active' : ''}`} href="/linea">
-                      Linea(1) <span className="newIcon">{newIcon}</span>
+                      Linea(2) <span className="newIcon">{newIcon}</span>
                     </Link>
 
                     <Link className={`item child-item ${isActive('metis') ? 'active' : ''} `} href="/metis">
@@ -876,7 +876,7 @@ export const DesktopNavigationLeft = () => {
                     </Link>
 
                     <Link className={`item child-item ${isActive('linea') ? 'active' : ''} `} href="/linea">
-                      Linea(1)<span className="newIcon">{newIcon}</span>
+                      Linea(2)<span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('linea') ? visible_bag : null}</span>
                     </Link>
 
