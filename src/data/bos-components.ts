@@ -51,6 +51,8 @@ type NetworkComponents = {
   linea: string;
   metis: string;
   polygon: string;
+  gnosis: string;
+  zkSync: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -105,6 +107,8 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     linea: 'bluebiu.near/widget/Linea.Dapps',
     polygon: 'bluebiu.near/widget/Polygon.Dapps',
     metis: 'bluebiu.near/widget/Metis.Dapps',
+    gnosis: 'bluebiu.near/widget/Gnosis.Dapps',
+    zkSync: 'bluebiu.near/widget/zkSync.Dapps',
   },
 
   mainnet: {
@@ -158,5 +162,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     linea: 'bluebiu.near/widget/Linea.Dapps',
     polygon: 'bluebiu.near/widget/Polygon.Dapps',
     metis: 'bluebiu.near/widget/Metis.Dapps',
+    gnosis: 'bluebiu.near/widget/Gnosis.Dapps',
+    zkSync: 'bluebiu.near/widget/zkSync.Dapps',
   },
 };
