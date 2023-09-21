@@ -92,7 +92,7 @@ export class FastAuthWalletConnection {
       });
     }
     const iframe = document.createElement('iframe');
-    iframe.allow = 'publickey-credentials-create *; publickey-credentials-get *; clipboard-write';
+    iframe.allow = 'publickey-credentials-get *; clipboard-write';
     iframe.style.width = '100%';
     iframe.style.height = '100%';
     this._iframe = iframe;
