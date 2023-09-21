@@ -146,6 +146,13 @@ const metisIcon = (
   </svg>
 );
 
+const GnosisIcon = (
+  <img src="https://ipfs.near.social/ipfs/bafkreiflvhldlljkmvy6i7xos6w5i56i4nt5mwr7pgu6f3kowqnqdz2vme" />
+);
+const ZkSyncIcon = (
+  <img src="https://ipfs.near.social/ipfs/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu" />
+);
+
 const NearSignInButton = styled.div`
   width: 123px;
   cursor: pointer;
@@ -417,11 +424,15 @@ export const LoginBox = () => {
     } else if (name === 'bsc') {
       paths = ['bsc', 'Bsc.Swap.Dex'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex'];
+      paths = ['linea', 'Linea.Swap.Dex','Linea.Liquidity.GAMMA.GAMMA'];
     } else if (name === 'polygon') {
       paths = ['polygon', 'Polygon.Swap.Dex'];
     } else if (name === 'metis') {
       paths = ['metis', 'Metis.Swap.Dex'];
+    } else if (name === 'gnosis') {
+      paths = ['gnosis', 'Gnosis.Swap.Dex'];
+    } else if (name === 'zkSync') {
+      paths = ['zkSync', 'zkSync.Swap.Dex'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
@@ -435,7 +446,9 @@ export const LoginBox = () => {
     isActive('bsc') ||
     isActive('polygon') ||
     isActive('linea') ||
-    isActive('metis');
+    isActive('metis') ||
+    isActive('gnosis') ||
+    isActive('zkSync');
 
   function handleSignIn() {
     flushEvents();
@@ -596,6 +609,36 @@ export const LoginBox = () => {
     </LoginArea>
   );
 
+  const GnosisloginArea = wallet ? null : (
+    <LoginArea>
+      <SignInButton
+        backgroundColor="#04795B"
+        color="#fff"
+        onClick={() => {
+          connect();
+        }}
+      >
+        <span className="icon">{GnosisIcon}</span>
+        <span>Connect</span>
+      </SignInButton>
+    </LoginArea>
+  );
+
+  const ZkSyncloginArea = wallet ? null : (
+    <LoginArea>
+      <SignInButton
+        backgroundColor="#3B6BDC"
+        color="#fff"
+        onClick={() => {
+          connect();
+        }}
+      >
+        <span className="icon">{ZkSyncIcon}</span>
+        <span>Connect</span>
+      </SignInButton>
+    </LoginArea>
+  );
+
   useEffect(() => {
     if (!isDappActive) {
       onboard.state.actions.updateAccountCenter({
@@ -626,5 +669,9 @@ export const LoginBox = () => {
     ? PolygonloginArea
     : isActive('metis')
     ? MetisloginArea
+    : isActive('gnosis')
+    ? GnosisloginArea
+    : isActive('zkSync')
+    ? ZkSyncloginArea
     : null;
 };
