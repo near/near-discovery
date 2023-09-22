@@ -74,10 +74,19 @@ export const setProcessSuccess = () => {
 };
 
 export const setProcessError = (error: unknown) => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        permission: false,
+        subscribeStarted: false,
+        subscribeError: error,
+      },
       permission: false,
       subscribeStarted: false,
       subscribeError: error,
