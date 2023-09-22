@@ -143,10 +143,19 @@ export const setClearData = () => {
 };
 
 export const setNotificationsSessionStorage = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        isNotificationSupported: isNotificationSupported(),
+        isPushManagerSupported: isPushManagerSupported(),
+        isPermisionGranted: isPermisionGranted(),
+      },
       isNotificationSupported: isNotificationSupported(),
       isPushManagerSupported: isPushManagerSupported(),
       isPermisionGranted: isPermisionGranted(),
@@ -154,7 +163,7 @@ export const setNotificationsSessionStorage = () => {
   );
 };
 
-export const getNotificationLocalStorage = () =>
+export const getNotificationLocalStorageFull = () =>
   isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
 
 export const getNotificationLocalStorage = () => {
