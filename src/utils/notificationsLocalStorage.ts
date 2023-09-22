@@ -93,3 +93,14 @@ export const setNotificationsSessionStorage = () => {
 
 export const getNotificationLocalStorage = () =>
   isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+
+export const getNotificationLocalStorage = () => {
+  if (!isLocalStorageSupported()) {
+    return;
+  }
+
+  const accountIdLS = getLSAccountId();
+
+  const notificationsLS = isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+  return notificationsLS[accountIdLS];
+};
