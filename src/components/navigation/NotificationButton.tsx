@@ -11,7 +11,11 @@ import {
 } from '@/utils/notificationsHelpers';
 import { getNotificationLocalStorage } from '@/utils/notificationsLocalStorage';
 
-export function NotificationButton() {
+type Props = {
+  mobileView?: boolean;
+};
+
+export function NotificationButton(props: Props) {
   const components = useBosComponents();
 
   return (
@@ -26,6 +30,7 @@ export function NotificationButton() {
         getNotificationLocalStorage,
         handleOnCancelBanner,
         handleTurnOn,
+        mobileView: props.mobileView ?? false,
       }}
     />
   );
