@@ -182,7 +182,7 @@ export function MenuLeft(props: Props) {
         )}
         {signedIn && (
           <div className="logged-in-btns">
-            <NotificationButton />
+            <NotificationButton mobileView={true} />
             <UserDropdownMenu />
           </div>
         )}
