@@ -372,7 +372,10 @@ export const DesktopNavigationLeft = () => {
     isActive('arbitrum') ||
     isActive('bsc') ||
     isActive('gnosis') ||
-    isActive('zkSync');
+    isActive('zkSync') ||
+    isActive('polygon') ||
+    isActive('linea') ||
+    isActive('metis');
   const warmActive = isActive('warmup');
   function openMenu() {
     set_show_menu_list(true);
@@ -673,7 +676,10 @@ export const DesktopNavigationLeft = () => {
                       isActive('linea') ||
                       isActive('metis') ||
                       isActive('gnosis') ||
-                      isActive('zkSync')
+                      isActive('zkSync') ||
+                      isActive('polygon') ||
+                      isActive('linea') ||
+                      isActive('metis')
                         ? 'active'
                         : ''
                     }`}
