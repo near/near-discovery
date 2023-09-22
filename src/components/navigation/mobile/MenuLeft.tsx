@@ -93,20 +93,13 @@ const StyledMenu = styled.div`
     margin-top: auto;
     display: flex;
 
-    .nav-notification-button {
-      margin: 0;
-      min-width: 46px;
-      min-height: 46px;
-      margin-right: 20px;
-
-      a {
+    & > div {
+      &:first-child {
+        margin: 0 20px 0 0;
         min-width: 46px;
         min-height: 46px;
       }
-    }
-
-    > div {
-      :nth-child(2) {
+      &:nth-child(2) {
         width: fill-available;
         > button {
           width: 100%;
@@ -182,7 +175,7 @@ export function MenuLeft(props: Props) {
         )}
         {signedIn && (
           <div className="logged-in-btns">
-            <NotificationButton />
+            <NotificationButton mobileView={true} />
             <UserDropdownMenu />
           </div>
         )}
