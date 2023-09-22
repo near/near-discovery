@@ -51,10 +51,20 @@ export const setHandleOnCancelBanner = () => {
 };
 
 export const setProcessSuccess = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        permission: true,
+        subscribeStarted: false,
+        subscribeError: '',
+        isPermisionGranted: true,
+      },
       permission: true,
       subscribeStarted: false,
       subscribeError: '',
