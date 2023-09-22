@@ -16,10 +16,19 @@ const getLSAccountId = (): string => {
 };
 
 export const setHandleOnCancel = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        showOnTS: Date.now() + 86400000, // 14 days
+        notNowTS: Date.now(),
+        bannerNotNowTS: undefined,
+      },
       showOnTS: Date.now() + 86400000, // 14 days
       notNowTS: Date.now(),
       bannerNotNowTS: undefined,
