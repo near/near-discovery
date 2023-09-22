@@ -67,10 +67,10 @@ const getOptions = ({ path, id }) => ({
   },
 });
 
-// TODO: handle beta.near.org version redirection
+// TODO: handle beta.near.org and near.org version redirection
 // TODO: improve by redirecting to events path
 const getPath = ({ path }) => {
-  return `http://near.org/notifications/${path || ''}`;
+  return `http://beta.near.org/notifications/${path || ''}`;
 };
 
 // TODO: Add error handling if data will not match
