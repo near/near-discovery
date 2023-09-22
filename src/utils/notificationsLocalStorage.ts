@@ -8,9 +8,6 @@ import {
 export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 
-// sprawdzam
-// near-social-vm:v01::accountId:
-
 const getLSAccountId = (): string => {
   return localStorage.getItem(LS_ACCOUNT_ID) || '';
 };
@@ -37,10 +34,17 @@ export const setHandleOnCancel = () => {
 };
 
 export const setHandleOnCancelBanner = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        bannerNotNowTS: Date.now(),
+      },
       bannerNotNowTS: Date.now(),
     }),
   );
