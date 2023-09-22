@@ -112,10 +112,18 @@ export const setProcessEnded = () => {
 };
 
 export const setProcessStarted = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        permission: false,
+        subscribeStarted: true,
+      },
       permission: false,
       subscribeStarted: true,
     }),
