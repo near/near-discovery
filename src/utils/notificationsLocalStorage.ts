@@ -6,6 +6,14 @@ import {
 } from './notificationsHelpers';
 
 export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
+const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
+
+// sprawdzam
+// near-social-vm:v01::accountId:
+
+const getLSAccountId = (): string => {
+  return localStorage.getItem(LS_ACCOUNT_ID) || '';
+};
 
 export const setHandleOnCancel = () => {
   localStorage.setItem(
