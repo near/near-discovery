@@ -424,7 +424,7 @@ export const LoginBox = () => {
     } else if (name === 'bsc') {
       paths = ['bsc', 'Bsc.Swap.Dex'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex','Linea.Liquidity.GAMMA.GAMMA'];
+      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Liquidity.GAMMA'];
     } else if (name === 'polygon') {
       paths = ['polygon', 'Polygon.Swap.Dex'];
     } else if (name === 'metis') {
