@@ -39,7 +39,7 @@ const Container = styled.div`
       width: 32px;
     }
   }
-  .item:hover{
+  .item:hover {
     background: rgba(55, 58, 83, 1);
   }
   .show {
@@ -252,17 +252,26 @@ export const DesktopNavigationLeft = () => {
   }
 
   const [putMenu, setPutMenu] = useState(storedShowMenu === '1' || false);
+
   const [showChildBox, setShowChildBox] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [openChains, setOpenChains] = useState(false);
   const [openChainsPc, setOpenChainsPc] = useState(true);
-  const [openWarm, setOpenWarm] = useState(false);
   const [showWarmBox, setShowWarmBox] = useState(false);
   const [openWarmPc, setOpenWarmPc] = useState(true);
 
   const [show_menu_list, set_show_menu_list] = useState(false);
 
   const router = useRouter();
+
+  useEffect(() => {
+    const changePutEvent = new CustomEvent('changePutEvent', {
+      detail: putMenu,
+    });
+
+    window.dispatchEvent(changePutEvent);
+  }, [putMenu]);
+
   useEffect(() => {
     if (document.documentElement.clientWidth <= 1023) {
       setIsMobile(true);
@@ -685,7 +694,7 @@ export const DesktopNavigationLeft = () => {
                       isActive('metis')
                         ? 'active'
                         : ''
-                      }`}
+                    }`}
                   >
                     <div className="icon">{templatesIcon}</div>
                   </div>
@@ -908,7 +917,6 @@ export const DesktopNavigationLeft = () => {
                       onClick={(event) => {
                         event.preventDefault();
                       }}
-                      
                     >
                       Avalanche <span className="soonIcon"> {soonIcon}</span>
                       <span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
