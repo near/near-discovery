@@ -131,7 +131,15 @@ export const setProcessStarted = () => {
 };
 
 export const setClearData = () => {
-  localStorage.setItem(NOTIFICATIONS_STORAGE, JSON.stringify({}));
+  const accountIdLS = getLSAccountId();
+
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {},
+    }),
+  );
 };
 
 export const setNotificationsSessionStorage = () => {
