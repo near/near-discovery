@@ -95,10 +95,17 @@ export const setProcessError = (error: unknown) => {
 };
 
 export const setProcessEnded = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        subscribeStarted: false,
+      },
       subscribeStarted: false,
     }),
   );
