@@ -12,6 +12,7 @@ import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
+import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import {
   CommitButton,
   EthersProviderContext,
@@ -32,8 +33,6 @@ import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
 import { networkId, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
-
-import { setupFastAuthWallet } from '../../lib/selector/fast-auth-wallet';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);

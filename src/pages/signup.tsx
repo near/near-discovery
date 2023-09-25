@@ -12,7 +12,6 @@ import { useCurrentComponentStore } from '@/stores/current-component';
 import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
-import { handleCreateAccount } from '../utils/auth';
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
 
 const ErrorText = styled.p`
