@@ -83,14 +83,14 @@ const StyledNavigation = styled.div`
         color: #9ba1a6;
       }
     }
+  }
 
-    img {
-      position: absolute;
-      right: 16px;
-      top: 10px;
-      width: 20px;
-      height: 20px;
-    }
+  .return-icon-image {
+    position: absolute;
+    right: 16px;
+    top: 10px;
+    width: 20px;
+    height: 20px;
   }
 
   .right-side-actions {
@@ -198,7 +198,7 @@ export const DesktopNavigation = () => {
             </TypeAheadDropdownContainer>
           )}
 
-          {searchIsFocused && <Image src={ReturnIconImage} alt="Return" />}
+          {searchIsFocused && <Image className="return-icon-image" src={ReturnIconImage} alt="Return" />}
         </div>
         <MainNavigationMenu />
         <div className="right-side-actions">
