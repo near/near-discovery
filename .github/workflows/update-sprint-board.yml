@@ -1,0 +1,21 @@
+on:
+  schedule:
+    # TODO: Run "at 05:00, only on Sunday" 
+    # currently testing w/ every 5 mins" 
+    - cron: '*/5 * * * *'
+
+jobs:
+  move-to-next-iteration:
+    name: Move to next iteration
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: blombard/move-to-next-iteration@master
+      with:
+        owner: near
+        number: 92
+        token: ${{ secrets.GITHUB_TOKEN }}
+        iteration-field: sprint
+        iteration: last
+        new-iteration: current
+        statuses: No status,Selected,Blocked,In Progress,review
