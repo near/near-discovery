@@ -1,7 +1,7 @@
 on:
   schedule:
-    # Runs "at 05:00, only on Sunday" 
-    - cron: '*/5 * * * *'
+    # Runs "at 05:00, only on Monday" 
+    - cron: '0 5 * * 1'
 
 jobs:
   move-to-next-iteration:
@@ -17,4 +17,4 @@ jobs:
         iteration-field: sprint
         iteration: last
         new-iteration: current
-        statuses: No status,Selected,Blocked,In Progress,review
+        statuses: No status,Selected,Blocked,In Progress,In Review,To Do
