@@ -13,7 +13,7 @@ jobs:
       with:
         owner: near
         number: 92
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.CG_PROJECT_WORKFLOW_SECRET }}
         iteration-field: sprint
         iteration: last
         new-iteration: current
