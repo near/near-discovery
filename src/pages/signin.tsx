@@ -13,7 +13,6 @@ import { useAuthStore } from '@/stores/auth';
 import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
-import { handleCreateAccount } from '../utils/auth';
 import { isValidEmail } from '../utils/form-validation';
 
 const SignInPage: NextPageWithLayout = () => {
