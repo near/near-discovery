@@ -227,17 +227,18 @@ export function MenuLeft(props) {
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/jgodwill.near/widget/GenaDrop.Explore">
-              <Notebook />
-              Explore Near NFTs
+            <NavigationButton route="/harrydhillon.near/widget/NFTSwap.NFT-Trade">
+              <Components />
+              Swap
             </NavigationButton>
           </li>
           <li>
-            <NavigationButton route="/agwaze.near/widget/GenaDrop.EVMExplore">
+            <NavigationButton route="/agwaze.near/widget/GenaDrop.Explore">
               <Notebook />
-              Expore EVM NFTs
+              Explore
             </NavigationButton>
           </li>
+
           <li>
             <NavigationButton route="genadrop.near/widget/GenaDrop.Home">
               <FeedIcon />

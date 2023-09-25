@@ -140,20 +140,13 @@ export function DesktopNavigation(props) {
           <NavigationButton route="/agwaze.near/widget/GenaDrop.NFTListing">
             List NEAR NFTs
           </NavigationButton>
+          <NavigationButton route="/harrydhillon.near/widget/NFTSwap.NFT-Trade">
+            Swap NFTs
+          </NavigationButton>
 
           <NavigationButton route="/agwaze.near/widget/GenaDrop.Explore">
             Explore
           </NavigationButton>
-
-          {/* <NavigationButton route="/0xprometheus.near/widget/Eth-Explore">
-            Explore EVM NFTs
-          </NavigationButton> */}
-          {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("discover")}>
-            Mint
-          </NavDropdownButton> */}
-          {/* <NavDropdownButton onMouseEnter={() => setMenuDropdown("develop")}>
-            Develop
-          </NavDropdownButton> */}
         </div>
         <div className="user-section">
           {!props.signedIn && (
