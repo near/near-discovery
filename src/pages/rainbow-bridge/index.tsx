@@ -220,7 +220,20 @@ const RainbowBridge: NextPageWithLayout = () => {
   const [nearBalance, setNearBalance] = useState<string>('');
   const [ethBalance, setEthBalance] = useState<string>('');
 
-  const sender = wallet?.accounts?.[0]?.address || '';
+  const [sender, setSender] = useState<string>('');
+
+  useEffect(() => {
+    if (!wallet || !provider) return;
+
+    const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
+
+    etherProvider.send('eth_requestAccounts', []).then((accounts) => {
+      const currentAccount = accounts[0];
+      const originalCaseAddress = ethers.utils.getAddress(currentAccount);
+
+      setSender(originalCaseAddress.toString());
+    });
+  }, [wallet, provider]);
 
   const defaultToken = tokenList[0];
 
