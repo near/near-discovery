@@ -318,7 +318,7 @@ const RainbowBridge: NextPageWithLayout = () => {
     fetchAllTransfers(accountId, sender).then(async (res) => {
       if (res.update === 1) {
         const newTransfers = res.data.reduce(
-          (pre, cur) => ({
+          (pre: any, cur: any) => ({
             ...pre,
             [cur.id]: cur,
           }),

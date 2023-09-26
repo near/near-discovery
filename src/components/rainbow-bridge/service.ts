@@ -15,13 +15,18 @@ export const fetchAllTransfers = async (nearAccountId: string, ethAddress: strin
       update: 0,
     };
 
-  const baseUrl = `https://backend.data-service.ref-finance.com/?ethAddress=${ethAddress}&nearAccountId=${nearAccountId}`;
+  const baseUrl = `https://api.data-service.ref.finance/rainbow/get_transfers?ethAddress=${ethAddress}&nearAccountId=${nearAccountId}`;
 
   return fetch(baseUrl)
     .then(async (res) => {
-      const parsedResult = (await res.json()) as TransferList;
+      const parsedResult = await res.json();
+      console.log('parsedResult: ', parsedResult);
+
+      const transferList = parsedResult.map((r: any) => r.transfer_json);
+
       return {
-        ...parsedResult,
+        data: transferList,
+        code: 1,
         update: 1,
       };
     })
