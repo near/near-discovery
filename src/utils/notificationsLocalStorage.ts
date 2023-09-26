@@ -168,7 +168,7 @@ export const getNotificationLocalStorageFull = () =>
 
 export const getNotificationLocalStorage = () => {
   if (!isLocalStorageSupported()) {
-    return;
+    return {};
   }
 
   const accountIdLS = getLSAccountId();
