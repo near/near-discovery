@@ -6,12 +6,26 @@ import {
 } from './notificationsHelpers';
 
 export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
+const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
+
+const getLSAccountId = (): string => {
+  return localStorage.getItem(LS_ACCOUNT_ID) || '';
+};
 
 export const setHandleOnCancel = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        showOnTS: Date.now() + 86400000, // 14 days
+        notNowTS: Date.now(),
+        bannerNotNowTS: undefined,
+      },
       showOnTS: Date.now() + 86400000, // 14 days
       notNowTS: Date.now(),
       bannerNotNowTS: undefined,
@@ -20,20 +34,37 @@ export const setHandleOnCancel = () => {
 };
 
 export const setHandleOnCancelBanner = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        bannerNotNowTS: Date.now(),
+      },
       bannerNotNowTS: Date.now(),
     }),
   );
 };
 
 export const setProcessSuccess = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        permission: true,
+        subscribeStarted: false,
+        subscribeError: '',
+        isPermisionGranted: true,
+      },
       permission: true,
       subscribeStarted: false,
       subscribeError: '',
@@ -43,10 +74,19 @@ export const setProcessSuccess = () => {
 };
 
 export const setProcessError = (error: unknown) => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        permission: false,
+        subscribeStarted: false,
+        subscribeError: error,
+      },
       permission: false,
       subscribeStarted: false,
       subscribeError: error,
@@ -55,20 +95,35 @@ export const setProcessError = (error: unknown) => {
 };
 
 export const setProcessEnded = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        subscribeStarted: false,
+      },
       subscribeStarted: false,
     }),
   );
 };
 
 export const setProcessStarted = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        permission: false,
+        subscribeStarted: true,
+      },
       permission: false,
       subscribeStarted: true,
     }),
@@ -76,14 +131,31 @@ export const setProcessStarted = () => {
 };
 
 export const setClearData = () => {
-  localStorage.setItem(NOTIFICATIONS_STORAGE, JSON.stringify({}));
-};
+  const accountIdLS = getLSAccountId();
 
-export const setNotificationsSessionStorage = () => {
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
-      ...getNotificationLocalStorage(),
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {},
+    }),
+  );
+};
+
+export const setNotificationsSessionStorage = () => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+
+  localStorage.setItem(
+    NOTIFICATIONS_STORAGE,
+    JSON.stringify({
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        isNotificationSupported: isNotificationSupported(),
+        isPushManagerSupported: isPushManagerSupported(),
+        isPermisionGranted: isPermisionGranted(),
+      },
       isNotificationSupported: isNotificationSupported(),
       isPushManagerSupported: isPushManagerSupported(),
       isPermisionGranted: isPermisionGranted(),
@@ -91,5 +163,16 @@ export const setNotificationsSessionStorage = () => {
   );
 };
 
-export const getNotificationLocalStorage = () =>
+export const getNotificationLocalStorageFull = () =>
   isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+
+export const getNotificationLocalStorage = () => {
+  if (!isLocalStorageSupported()) {
+    return {};
+  }
+
+  const accountIdLS = getLSAccountId();
+
+  const notificationsLS = isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+  return notificationsLS[accountIdLS];
+};
