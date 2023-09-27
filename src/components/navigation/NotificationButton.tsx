@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
@@ -15,23 +16,29 @@ type Props = {
   mobileView?: boolean;
 };
 
+const Wrapper = styled.div`
+  margin: 0 -1rem;
+`;
+
 export function NotificationButton(props: Props) {
   const components = useBosComponents();
 
   return (
-    <VmComponent
-      src={components.nearOrg.notifications.button}
-      props={{
-        isLocalStorageSupported,
-        isNotificationSupported,
-        isPermisionGranted,
-        isPushManagerSupported,
-        handleOnCancel,
-        getNotificationLocalStorage,
-        handleOnCancelBanner,
-        handleTurnOn,
-        mobileView: props.mobileView ?? false,
-      }}
-    />
+    <Wrapper>
+      <VmComponent
+        src={components.nearOrg.notifications.button}
+        props={{
+          isLocalStorageSupported,
+          isNotificationSupported,
+          isPermisionGranted,
+          isPushManagerSupported,
+          handleOnCancel,
+          getNotificationLocalStorage,
+          handleOnCancelBanner,
+          handleTurnOn,
+          mobileView: props.mobileView ?? false,
+        }}
+      />
+    </Wrapper>
   );
 }
