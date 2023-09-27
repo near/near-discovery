@@ -54,7 +54,7 @@ const HomePage: NextPageWithLayout = () => {
       const tosAccepted =
         tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
       // check if user has already turned on notifications
-      const { showOnTS } = getNotificationLocalStorage();
+      const { showOnTS } = getNotificationLocalStorage() || {};
 
       if ((tosAccepted && !showOnTS) || (tosAccepted && showOnTS < Date.now())) {
         setTimeout(() => {
