@@ -31,6 +31,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/validators',
+        destination: 'https://pages.near.org/validators',
+        permanent: true,
+      },
+      {
         source: '/edit/:path*',
         destination: '/sandbox/:path*',
         permanent: true,
