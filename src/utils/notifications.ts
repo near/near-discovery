@@ -15,6 +15,23 @@ import {
   setProcessSuccess,
 } from './notificationsLocalStorage';
 
+interface SubscriptionData {
+  subscription: object;
+  accountId: string;
+  source: SubscriptionDataSource;
+}
+
+interface SubscriptionDataSource {
+  host: string;
+  hostname: string;
+  href: string;
+  origin: string;
+  pathname: string;
+  port: string;
+  protocol: string;
+  hash: string;
+}
+
 const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
 const HOST = 'https://notification-server-mainnet-7tk2cmmtcq-ew.a.run.app';
 
