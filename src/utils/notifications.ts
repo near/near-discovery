@@ -82,7 +82,7 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
   }
 };
 
-const sendToPushServer = (subscriptionData: object) =>
+const sendToPushServer = (subscriptionData: SubscriptionData) =>
   fetch(`${HOST}/subscriptions/create`, {
     headers: {
       'Content-Type': 'application/json',
