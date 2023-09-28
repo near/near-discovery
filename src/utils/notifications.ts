@@ -91,6 +91,8 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
   try {
     setProcessStarted();
 
+    const { host, hostname, href, origin, pathname, port, protocol, hash } = window.location || {};
+
     await handleRequestPermission();
     await registerServiceWorker();
     const subscription = await handlePushManagerSubscribe();
