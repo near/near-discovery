@@ -1,7 +1,18 @@
 {
   "name": "NEAR isn't just a Layer 1 blockchain — it's the platform for an Open Web.",
   "short_name": "NEAR",
-  "icons": [],
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "any",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "48x48",
+      "type": "image/ico"
+    }
+  ],
   "theme_color": "#ffffff",
   "background_color": "#ffffff",
   "display": "standalone"
