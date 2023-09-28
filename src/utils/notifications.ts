@@ -96,9 +96,20 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
     await handleRequestPermission();
     await registerServiceWorker();
     const subscription = await handlePushManagerSubscribe();
+
     await sendToPushServer({
       subscription,
       accountId,
+      source: {
+        host,
+        hostname,
+        href,
+        origin,
+        pathname,
+        port,
+        protocol,
+        hash,
+      },
     });
 
     setProcessSuccess();
