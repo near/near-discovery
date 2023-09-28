@@ -82,7 +82,7 @@ function handlePushEvent(event) {
   const { initiatedBy = '', valueType = '', path = '', id = '' } = JSON.parse(notificationText);
 
   const title = getNotificationTitle({ accountId: initiatedBy, notificationType: valueType });
-  const options = getNotificationOptions({ path, id, notificationType: valueType });
+  const { origin = '' } = JSON.parse(notificationText);
 
   event.waitUntil(self.registration.showNotification(title, options));
 }
