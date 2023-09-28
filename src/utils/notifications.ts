@@ -108,12 +108,14 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
   try {
     setProcessStarted();
 
+    // get set of data from window.location
     const { host, hostname, href, origin, pathname, port, protocol, hash } = window.location || {};
 
     await handleRequestPermission();
     await registerServiceWorker();
     const subscription = await handlePushManagerSubscribe();
 
+    // creating subscriptionData object that will be sent to server
     await sendToPushServer({
       subscription,
       accountId,
