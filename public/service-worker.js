@@ -69,7 +69,7 @@ const getOptions = ({ path, id }) => ({
 
 // TODO: improve by redirecting to events path
 const getPath = ({ path }) => {
-  return `http://beta.near.org/notifications/${path || ''}`;
+  return path || 'https://near.org/notifications';
 };
 
 // TODO: Add error handling if data will not match
