@@ -67,7 +67,7 @@ const Search = styled.div`
     background-repeat: no-repeat;
     border-radius: 50px;
     padding: 7px 25px 7px 44px;
-    background-position: 12px 8px;
+    background-position: 12px center;
     border: 1px solid var(--sand6);
     background-color: white;
     font-size: 16px;
