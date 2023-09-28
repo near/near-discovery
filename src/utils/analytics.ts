@@ -106,6 +106,7 @@ const record = (eventType: string, e: UIEvent | PointerEvent) => {
     element: truncate(key, { length: 255 }),
     url: e.target ? filterURL((e.target as HTMLElement).baseURI) : '',
     xPath: getXPath(e.target as HTMLElement),
+    componentSrc: getComponentName(e.target as HTMLElement),
   });
 };
 export const recordClick = (e: UIEvent | PointerEvent) => record('click', e);
@@ -156,6 +157,12 @@ export function recordEvent(eventLabel: string) {
   } catch (e) {
     console.error(e);
   }
+}
+
+function getComponentName(element: HTMLElement | null): string {
+  if (!element) return '';
+  if (element.hasAttribute('data-key')) return element.getAttribute('data-key') || '';
+  return ''
 }
 
 function getXPath(element: HTMLElement | null): string {
