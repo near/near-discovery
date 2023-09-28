@@ -7,6 +7,10 @@ import { Button } from '@/components/lib/Button';
 import { useBanner } from '@/hooks/useBanner';
 import { useCurrentComponentStore } from '@/stores/current-component';
 
+type Props = {
+  inline?: boolean;
+};
+
 type FlexProps = {
   gap?: string;
   alignItems?: string;
@@ -15,8 +19,11 @@ type FlexProps = {
   wrap?: string;
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{
+  inline?: boolean;
+}>`
   background: #00ec97;
+  border-radius: ${(p) => (p.inline ? '5px' : 0)};
 
   .banner-button {
     font-size: 14px;
@@ -65,7 +72,7 @@ const Flex = styled.div<FlexProps>`
   }
 `;
 
-export const NearconBanner = () => {
+export const NearconBanner = (props: Props) => {
   const [isBannerVisible, setBanners] = useBanner();
   const componentSrc = useCurrentComponentStore();
   const isNearconWidget = componentSrc && componentSrc.src?.includes('nearcon23.near/widget/Index');
@@ -77,7 +84,7 @@ export const NearconBanner = () => {
   if (!isBannerVisible || isNearconWidget) return null;
 
   return (
-    <Wrapper>
+    <Wrapper inline={props.inline}>
       <Flex gap="24px" alignItems="center" justifyContent="center">
         <Image src={icon} alt="nearcon-banner" />
         <Link href="http://nearcon.org" target="_blank" className="banner-button desktop-button">
