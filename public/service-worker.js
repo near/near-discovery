@@ -63,11 +63,10 @@ const getOptions = ({ path, id }) => ({
   tag: id,
   timestamp: Date.now(),
   data: {
-    path: getPath({}),
+    path: getPath({ path }),
   },
 });
 
-// TODO: handle beta.near.org and near.org version redirection
 // TODO: improve by redirecting to events path
 const getPath = ({ path }) => {
   return `http://beta.near.org/notifications/${path || ''}`;
