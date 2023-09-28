@@ -79,7 +79,7 @@ function handlePushEvent(event) {
 
   const notificationText = event.data.text();
 
-  const { initiatedBy = '', valueType = '', path = '', id = '' } = JSON.parse(notificationText);
+  const { initiatedBy = '', valueType = '', id = '' } = JSON.parse(notificationText);
 
   const title = getNotificationTitle({ accountId: initiatedBy, notificationType: valueType });
   const { origin = '' } = JSON.parse(notificationText);
