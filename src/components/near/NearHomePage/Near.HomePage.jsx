@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { StyledT1, StyledT2, StyledT3 } from '@/components/near/NearStyled';
+import { StyledT1, StyledT2, StyledT3, StyledT6 } from '@/components/near/NearStyled';
 
 import nearAsset from '../NearComponents/NearAsset';
 import NearContainer from '../NearComponents/NearContainer';
@@ -20,14 +20,14 @@ const NearHomePage = () => {
     <Wrapper>
       <Section padding={'40px 0 0px'}>
         <NearContainer>
-          <StyledT1>
+          {/* <StyledT1>
             Decentralized One-stop shop
             <StyledIconImage src={nearAsset.img.iconShop} alt={'near'} width={106} height={103} />
-          </StyledT1>
-          <StyledT1>
-            The Easiest way to <StyledIconImage src={nearAsset.img.iconGoogle} alt={'near'} width={106} height={103} />
-            Dive into Web3.0
-          </StyledT1>
+          </StyledT1> */}
+          <StyledT6>
+            Your Universal Entry  <StyledIconImage src={nearAsset.img.iconNewHome} alt={'near'} width={130} height={136} style={{ margin: "0 -24px 14px 4px" }} />
+            Point Into <span style={{ color: '#EBF479' }}>L2s</span>
+          </StyledT6>
           <StyledT3 style={{ margin: '25px 0 0' }}>
             Join a growing family of <b>12,345</b> community members
           </StyledT3>

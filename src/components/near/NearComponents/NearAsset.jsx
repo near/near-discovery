@@ -2,6 +2,7 @@ const nearAsset = {
   img: {
     iconShop: '/near/icon-shop.png',
     iconGoogle: '/near/icon-google.png',
+    iconNewHome: '/near/icon-new-home.png',
     iconFire: '/near/icon-fire.png',
     allinone: '/near/allinone.png',
     zkevmbridge: '/near/zkevmbridge.png',

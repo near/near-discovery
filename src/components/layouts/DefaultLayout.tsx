@@ -71,6 +71,7 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   'Linea.Swap.Dex': '/linea',
   'Gnosis.Swap.Dex': '/gnosis',
   'ZkSync.Swap.Dex': '/zkSync',
+   'Avalanche.Swap.Dex': '/avalanche',
 };
 
 export function DefaultLayout({ children }: Props) {
@@ -90,6 +91,7 @@ export function DefaultLayout({ children }: Props) {
   const MetisSrc = 'bluebiu.near/widget/Metis.Dapps';
   const GnosisSrc = 'bluebiu.near/widget/Gnosis.Dapps';
   const ZkSyncSrc = 'bluebiu.near/widget/zkSync.Dapps';
+  const avalancheSrc = 'bluebiu.near/widget/Avalanche.Dapps';
 
   const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage';
 
@@ -111,6 +113,7 @@ export function DefaultLayout({ children }: Props) {
     MetisSrc,
     GnosisSrc,
     ZkSyncSrc,
+    avalancheSrc,
   ];
 
   const [showTab, setShowTab] = useState(false);

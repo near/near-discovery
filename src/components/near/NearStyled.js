@@ -69,3 +69,23 @@ export const StyledT5 = styled.div`
     font-size: 14px;
   }
 `;
+
+export const StyledT6 = styled.div`
+  font-size: 60px;
+  line-height: 1.2;
+  font-weight: 700;
+  display: flex;
+  align-items: flex-end;
+
+  @media (max-width: 1400px) {
+    display: inline-block;
+  }
+
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    font-size: 42px;
+  }
+
+  @media (max-width: ${SMALL_SCREEN}) {
+    font-size: 32px;
+  }
+`;

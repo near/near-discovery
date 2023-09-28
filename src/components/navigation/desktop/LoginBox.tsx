@@ -153,6 +153,10 @@ const ZkSyncIcon = (
   <img src="https://ipfs.near.social/ipfs/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu" />
 );
 
+const AvalanchecIcon = (
+  <img src="https://ipfs.near.social/ipfs/bafkreie2h3qc42tkuj73ip6qs6nl463qm5qiumkicnw5wy4x5jvkjhvrdi" />
+);
+
 const NearSignInButton = styled.div`
   width: 123px;
   cursor: pointer;
@@ -433,6 +437,8 @@ export const LoginBox = () => {
       paths = ['gnosis', 'Gnosis.Swap.Dex'];
     } else if (name === 'zkSync') {
       paths = ['zkSync', 'zkSync.Swap.Dex'];
+    }else if (name === 'avalanche') {
+      paths = ['avalanche', 'avalanche.Swap.Dex'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
@@ -448,7 +454,8 @@ export const LoginBox = () => {
     isActive('linea') ||
     isActive('metis') ||
     isActive('gnosis') ||
-    isActive('zkSync');
+    isActive('zkSync') ||
+    isActive('avalanche');
 
   function handleSignIn() {
     flushEvents();
@@ -639,6 +646,21 @@ export const LoginBox = () => {
     </LoginArea>
   );
 
+  const AvalancheloginArea = wallet ? null : (
+    <LoginArea>
+      <SignInButton
+        backgroundColor="#FFFFFF"
+        color="#000000"
+        onClick={() => {
+          connect();
+        }}
+      >
+        <span className="icon">{AvalanchecIcon}</span>
+        <span>Connect</span>
+      </SignInButton>
+    </LoginArea>
+  );
+
   useEffect(() => {
     if (!isDappActive) {
       onboard.state.actions.updateAccountCenter({
@@ -673,5 +695,7 @@ export const LoginBox = () => {
     ? GnosisloginArea
     : isActive('zkSync')
     ? ZkSyncloginArea
+    : isActive('avalanche')
+    ? AvalancheloginArea
     : null;
 };
