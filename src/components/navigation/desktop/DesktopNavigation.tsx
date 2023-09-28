@@ -5,19 +5,20 @@ import type { FormEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { NearconBanner } from '@/components/banners/NearconBanner';
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 
-import NearLogotype from '../icons/near-logotype.svg';
+import NearLogo from '../icons/near-logo.svg';
 import ReturnIconImage from '../icons/return.svg';
 import SearchIconImage from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
+import { UserDropdownMenu } from '../UserDropdownMenu';
 import { MainNavigationMenu } from './MainNavigationMenu';
 import { TypeAheadDropdown } from './TypeAheadDropdown';
-import { UserDropdownMenu } from './UserDropdownMenu';
 
 const Wrapper = styled.div<{
   scrolled?: boolean;
@@ -44,6 +45,14 @@ const Container = styled.div`
 const Logo = styled.a`
   text-decoration: none;
   cursor: pointer;
+  outline: none;
+  margin-right: auto;
+  transition: all 200ms;
+
+  &:hover,
+  &:focus {
+    opacity: 0.5;
+  }
 
   img {
     width: 110px;
@@ -69,7 +78,7 @@ const Search = styled.div`
     :focus {
       outline: 0;
       border-color: var(--violet8);
-      box-shadow: 0px 0px 0px 4px var(--violet4);
+      box-shadow: 0 0 0 4px var(--violet4);
 
       & ~ img {
         opacity: 1;
@@ -162,55 +171,59 @@ export const DesktopNavigation = () => {
   };
 
   return (
-    <Wrapper scrolled={scrolled}>
-      <Container className="container-xl">
-        <Link href="/" passHref legacyBehavior>
-          <Logo>
-            <Image priority src={NearLogotype} alt="NEAR" />
-          </Logo>
-        </Link>
+    <>
+      <NearconBanner />
 
-        <Search>
-          <form onSubmit={handleSearchSubmit}>
-            <input
-              placeholder="Search NEAR"
-              style={{ backgroundImage: `url(${SearchIconImage.src})` }}
-              onFocus={() => {
-                setSearchIsFocused(true);
-                recordEvent('click-navigation-search');
-              }}
-              onBlur={() => {
-                setSearchIsFocused(false);
-              }}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              ref={searchRef}
-            />
-            <Image src={ReturnIconImage} alt="Return" />
-          </form>
+      <Wrapper scrolled={scrolled}>
+        <Container className="container-xl">
+          <Link href="/" passHref legacyBehavior>
+            <Logo>
+              <Image priority src={NearLogo} alt="NEAR" />
+            </Logo>
+          </Link>
 
-          {showTypeAheadDropdown && (
-            <TypeAheadDropdownContainer>
-              <TypeAheadDropdown term={searchTerm} focusChange={setSearchIsFocused} />
-            </TypeAheadDropdownContainer>
-          )}
-        </Search>
+          <Search>
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                placeholder="Search NEAR"
+                style={{ backgroundImage: `url(${SearchIconImage.src})` }}
+                onFocus={() => {
+                  setSearchIsFocused(true);
+                  recordEvent('click-navigation-search');
+                }}
+                onBlur={() => {
+                  setSearchIsFocused(false);
+                }}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                ref={searchRef}
+              />
+              <Image src={ReturnIconImage} alt="Return" />
+            </form>
 
-        <MainNavigationMenu />
+            {showTypeAheadDropdown && (
+              <TypeAheadDropdownContainer>
+                <TypeAheadDropdown term={searchTerm} focusChange={setSearchIsFocused} />
+              </TypeAheadDropdownContainer>
+            )}
+          </Search>
 
-        <Actions>
-          {signedIn ? (
-            <>
-              <NotificationButton />
-              <UserDropdownMenu />
-            </>
-          ) : (
-            <>
-              <Button label="Sign In" variant="secondary" onClick={handleSignIn} />
-              <Button label="Create Account" variant="primary" onClick={handleCreateAccount} />
-            </>
-          )}
-        </Actions>
-      </Container>
-    </Wrapper>
+          <MainNavigationMenu />
+
+          <Actions>
+            {signedIn ? (
+              <>
+                <NotificationButton />
+                <UserDropdownMenu />
+              </>
+            ) : (
+              <>
+                <Button label="Sign In" variant="secondary" onClick={handleSignIn} />
+                <Button label="Create Account" variant="primary" onClick={handleCreateAccount} />
+              </>
+            )}
+          </Actions>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
