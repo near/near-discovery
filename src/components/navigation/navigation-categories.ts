@@ -63,7 +63,7 @@ export const navigationCategories = [
           },
           {
             title: 'GitHub',
-            url: 'https://github.com/near',
+            url: 'https://github.com/near/dx',
           },
         ],
       },
