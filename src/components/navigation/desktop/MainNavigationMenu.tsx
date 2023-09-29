@@ -32,7 +32,6 @@ const NavList = styled(NavigationMenu.List)`
   margin: 0;
   padding: 0;
   height: 100%;
-  gap: 0.5rem;
 `;
 
 const NavItem = styled(NavigationMenu.Item)`
