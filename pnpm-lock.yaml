@@ -8840,8 +8840,8 @@ packages:
       - encoding
     dev: false
 
-  /near-fastauth-wallet@0.0.5:
-    resolution: {integrity: sha512-0sZs6PxP/3HiC1KrPe9l08OanjeHFWWSxTcz1FWiZLtDo/wSIipJbRg3PhFThgzgLBBQhqqalD3XQC/3bRN3HQ==}
+  /near-fastauth-wallet-module@0.0.6:
+    resolution: {integrity: sha512-JZyOpcyf1y99+gArpvs3Jjouu/9laa+VVHwSTXJSictSneTBIr0qUyf8pAdTUpUzzuNvFDUPjBiWlQLRrt8MJA==}
     dependencies:
       '@near-js/transactions': 0.2.1
       '@near-wallet-selector/core': 8.5.3(near-api-js@2.1.4)
