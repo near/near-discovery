@@ -71,7 +71,7 @@ const Search = styled.div`
     border: 1px solid var(--sand6);
     background-color: white;
     font-size: 16px;
-    margin-left: 30px;
+    margin-left: 1rem;
     width: 200px;
     transition: all 200ms;
 
@@ -114,7 +114,7 @@ const Actions = styled.div`
   margin-left: auto;
   position: relative;
   z-index: 10;
-  gap: 10px;
+  gap: 0.5rem;
 `;
 
 export const DesktopNavigation = () => {

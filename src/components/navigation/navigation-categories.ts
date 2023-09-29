@@ -1,5 +1,28 @@
 export const navigationCategories = [
   {
+    title: 'Discover',
+    sections: [
+      {
+        title: null,
+        links: [
+          {
+            title: 'Components',
+            url: '/components',
+          },
+          {
+            title: 'Applications',
+            url: '/applications',
+          },
+          {
+            title: 'Gateways',
+            url: 'https://near.org/gateways',
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     title: 'Platform',
     sections: [
       {
