@@ -116,7 +116,12 @@ export const AccordionMenu = (props: Props) => (
                 {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
                 {section.links.map((link) => (
-                  <Link href={link.url} key={link.title} onClick={props.onCloseMenu}>
+                  <Link
+                    href={link.url}
+                    target={link.url.indexOf('http') === 0 ? '_blank' : undefined}
+                    key={link.title}
+                    onClick={props.onCloseMenu}
+                  >
                     {link.title}
                   </Link>
                 ))}

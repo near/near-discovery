@@ -152,7 +152,9 @@ export const MainNavigationMenu = () => {
 
                       {section.links.map((link) => (
                         <NavLink key={link.title} asChild>
-                          <Link href={link.url}>{link.title}</Link>
+                          <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
+                            {link.title}
+                          </Link>
                         </NavLink>
                       ))}
                     </Section>
