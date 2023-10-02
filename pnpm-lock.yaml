@@ -116,7 +116,7 @@ dependencies:
   lodash:
     specifier: ^4.17.21
     version: 4.17.21
-  near-fastauth-wallet-module:
+  near-fastauth-wallet:
     specifier: ^0.0.8
     version: 0.0.8
   near-social-vm:
@@ -8486,8 +8486,8 @@ packages:
       - encoding
     dev: false
 
-  /near-fastauth-wallet-module@0.0.8:
-    resolution: {integrity: sha512-RWf191r8mmIegewG2/S81qA/DXJSZNsd24Y9wFMYR5Wdxp2bWRjLGBUqMNyC+uIKNTV4EePCm6R3WtOjJsOIig==}
+  /near-fastauth-wallet@0.0.8:
+    resolution: {integrity: sha512-Zye70+vz5BiXLslw13T/Rx0MQTjcwO/FQMZRdfTGMs0eNBO5zhBK/a7YpmDdFxOn3nCz7LRner8HVVVVGmbkFg==}
     dependencies:
       '@near-js/transactions': 0.2.1
       '@near-wallet-selector/core': 8.5.3(near-api-js@2.1.4)
