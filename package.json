@@ -52,7 +52,7 @@
         "iframe-resizer-react": "^1.1.0",
         "local-storage": "^2.0.0",
         "lodash": "^4.17.21",
-        "near-fastauth-wallet-module": "^0.0.8",
+        "near-fastauth-wallet": "^0.0.8",
         "near-social-vm": "github:NearSocial/VM#2.4.2",
         "next": "13.3.4",
         "prettier": "^2.7.1",
