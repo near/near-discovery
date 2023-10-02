@@ -12,7 +12,7 @@ import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
-import { setupFastAuthWallet } from 'near-fastauth-wallet-module';
+import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import {
   CommitButton,
   EthersProviderContext,
