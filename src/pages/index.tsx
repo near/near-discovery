@@ -33,7 +33,7 @@ const HomePage: NextPageWithLayout = () => {
   const [isHomeScreenApp, setHomeScreenApp] = useState(false);
   const [iosHomeScreenPrompt, setIosHomeScreenPrompt] = useState(false);
   const iOSDevice = useMemo(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== 'undefined') {
       return isIOS();
     }
     return false;
@@ -75,7 +75,7 @@ const HomePage: NextPageWithLayout = () => {
         } else {
           setTimeout(() => {
             setShowNotificationModalState(showNotificationModal());
-          }, 10000);
+          }, 3000);
         }
       }
     }
@@ -132,7 +132,7 @@ const HomePage: NextPageWithLayout = () => {
     }
   }, [iOSDevice]);
 
-  console.log("iOSDevice: ", iOSDevice, "isHomeScreenApp: ", isHomeScreenApp);
+  console.log('iOSDevice: ', iOSDevice, 'isHomeScreenApp: ', isHomeScreenApp);
 
   if (signedIn || signedInOptimistic) {
     return (
@@ -151,8 +151,7 @@ const HomePage: NextPageWithLayout = () => {
           }}
         />
         <VmComponent
-          // src={components.nearOrg.notifications.iosHomeScreenAlert}
-          src="dima_sheleg.near/widget/NearOrg.Notifications.HomeScreenAlert"
+          src={components.nearOrg.notifications.iosHomeScreenAlert}
           props={{
             open: iosHomeScreenPrompt,
             onOpenChange: handleHomeScreenClose,
