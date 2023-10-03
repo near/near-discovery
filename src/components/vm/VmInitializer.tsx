@@ -98,6 +98,9 @@ export default function VmInitializer() {
         customElements: {
           Link: ({ href, to, ...rest }: any) => <Link href={sanitizeUrl(href ?? to)} {...rest} />,
         },
+        features: {
+          "enableWidgetSrcDataKey": false,
+        }
       });
   }, [initNear]);
 
