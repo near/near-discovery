@@ -10,7 +10,6 @@ import { navigationCategories } from '../navigation-categories';
 const Wrapper = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
   z-index: 1;
   flex-grow: 1;
   padding: 0 1rem;
