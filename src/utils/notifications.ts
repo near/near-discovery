@@ -16,8 +16,9 @@ import {
 } from './notificationsLocalStorage';
 
 const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
+
 const HOST = 'https://discovery-notifications-mainnet.near.org';
-const GATEWAY_URL = 'https://beta.near.org';
+const GATEWAY_URL = 'https://near.org';
 
 // Will be used for error handling in future works
 const isIOS = () => {
