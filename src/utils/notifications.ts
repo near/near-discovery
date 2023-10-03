@@ -20,13 +20,12 @@ const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwE
 const HOST = 'https://discovery-notifications-mainnet.near.org';
 const GATEWAY_URL = 'https://near.org';
 
-// Will be used for error handling in future works
-const isIOS = () => {
+export const isIOS = () => {
   const browserInfo = navigator.userAgent.toLowerCase();
 
   return (
-    browserInfo.match('iphone') ||
-    browserInfo.match('ipad') ||
+    browserInfo.includes('iphone') ||
+    browserInfo.includes('ipad') ||
     ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform)
   );
 };

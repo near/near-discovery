@@ -11,9 +11,9 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { handleOnCancel, handleTurnOn, showNotificationModal } from '@/utils/notifications';
+import { handleOnCancel, handleTurnOn, isIOS, showNotificationModal } from '@/utils/notifications';
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
-import { setNotificationsSessionStorage, getNotificationLocalStorage } from '@/utils/notificationsLocalStorage';
+import { getNotificationLocalStorage, setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout, TosData } from '@/utils/types';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
@@ -30,9 +30,21 @@ const HomePage: NextPageWithLayout = () => {
   const accountId = useAuthStore((store) => store.accountId);
   const [tosData, setTosData] = useState<TosData | null>(null);
   const cacheTosData = useMemo(() => tosData, [tosData?.latestTosVersion]);
+  const [isHomeScreenApp, setHomeScreenApp] = useState(false);
+  const [iosHomeScreenPrompt, setIosHomeScreenPrompt] = useState(false);
+  const iOSDevice = useMemo(() => {
+    if (typeof window !== "undefined") {
+      return isIOS();
+    }
+    return false;
+  }, []);
 
   const handleModalCloseOnEsc = useCallback(() => {
     setShowNotificationModalState(false);
+  }, []);
+
+  const handleHomeScreenClose = useCallback(() => {
+    setIosHomeScreenPrompt(false);
   }, []);
 
   const turnNotificationsOn = useCallback(
@@ -57,19 +69,24 @@ const HomePage: NextPageWithLayout = () => {
       const { showOnTS } = getNotificationLocalStorage() || {};
 
       if ((tosAccepted && !showOnTS) || (tosAccepted && showOnTS < Date.now())) {
-        setTimeout(() => {
-          setShowNotificationModalState(showNotificationModal());
-        }, 10000);
+        // let's test it on preview first and then I can change that
+        if (iOSDevice && !isHomeScreenApp) {
+          setIosHomeScreenPrompt(true);
+        } else {
+          setTimeout(() => {
+            setShowNotificationModalState(showNotificationModal());
+          }, 10000);
+        }
       }
     }
-  }, [cacheTosData]);
+  }, [iOSDevice, isHomeScreenApp, cacheTosData]);
 
   useEffect(() => {
     if (!signedIn) {
       return;
     }
     checkNotificationModal();
-  }, [signedIn, cacheTosData]);
+  }, [signedIn, cacheTosData, checkNotificationModal]);
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -103,6 +120,19 @@ const HomePage: NextPageWithLayout = () => {
       });
     }
   }, [signedIn]);
+  useEffect(() => {
+    if (iOSDevice) {
+      setHomeScreenApp(window.matchMedia('(display-mode: standalone)').matches);
+    }
+  }, [iOSDevice]);
+
+  useEffect(() => {
+    if (iOSDevice) {
+      window.matchMedia('(display-mode: standalone)').addEventListener('change', (e) => setHomeScreenApp(e.matches));
+    }
+  }, [iOSDevice]);
+
+  console.log("iOSDevice: ", iOSDevice, "isHomeScreenApp: ", isHomeScreenApp);
 
   if (signedIn || signedInOptimistic) {
     return (
@@ -118,6 +148,14 @@ const HomePage: NextPageWithLayout = () => {
             isPushManagerSupported,
             setNotificationsSessionStorage,
             onOpenChange: handleModalCloseOnEsc,
+          }}
+        />
+        <VmComponent
+          // src={components.nearOrg.notifications.iosHomeScreenAlert}
+          src="dima_sheleg.near/widget/NearOrg.Notifications.HomeScreenAlert"
+          props={{
+            open: iosHomeScreenPrompt,
+            onOpenChange: handleHomeScreenClose,
           }}
         />
         <ComponentWrapperPage
