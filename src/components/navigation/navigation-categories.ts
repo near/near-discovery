@@ -1,28 +1,5 @@
 export const navigationCategories = [
   {
-    title: 'Discover',
-    sections: [
-      {
-        title: null,
-        links: [
-          {
-            title: 'Components',
-            url: '/components',
-          },
-          {
-            title: 'Applications',
-            url: '/applications',
-          },
-          {
-            title: 'Gateways',
-            url: 'https://near.org/gateways',
-          },
-        ],
-      },
-    ],
-  },
-
-  {
     title: 'Platform',
     sections: [
       {
@@ -129,6 +106,37 @@ export const navigationCategories = [
           {
             title: 'View All',
             url: 'https://docs.near.org/tools/welcome',
+          },
+        ],
+      },
+    ],
+  },
+
+  {
+    title: 'Discover',
+    sections: [
+      {
+        title: null,
+        links: [
+          {
+            title: 'Applications',
+            url: '/applications',
+          },
+          {
+            title: 'Components',
+            url: '/components',
+          },
+          {
+            title: 'Gateways',
+            url: '/gateways',
+          },
+          {
+            title: 'People',
+            url: '/people',
+          },
+          {
+            title: 'Standards & Proposals',
+            url: 'https://github.com/near/NEPs',
           },
         ],
       },
