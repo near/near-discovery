@@ -76,7 +76,7 @@ export const setProcessSuccess = () => {
 export const setProcessError = (error: any) => {
   const accountIdLS = getLSAccountId();
   const localStorageByAccountId = getNotificationLocalStorage();
-  const errorMessage = error.message ? error.message : "";
+  const errorMessage = error.message ? error.message : 'unknown';
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
