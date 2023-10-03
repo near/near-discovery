@@ -1,9 +1,10 @@
 export const navigationCategories = [
   {
     title: 'Platform',
+    visible: 'all',
     sections: [
       {
-        title: 'Blockchain OS',
+        title: null,
         links: [
           {
             title: 'Decentralized Front-Ends',
@@ -45,6 +46,7 @@ export const navigationCategories = [
 
   {
     title: 'Developers',
+    visible: 'all',
     sections: [
       {
         title: 'Resources',
@@ -114,6 +116,7 @@ export const navigationCategories = [
 
   {
     title: 'Discover',
+    visible: 'all',
     sections: [
       {
         title: null,
@@ -145,6 +148,7 @@ export const navigationCategories = [
 
   {
     title: 'Community',
+    visible: 'all',
     sections: [
       {
         title: 'Ecosystem',
@@ -176,7 +180,52 @@ export const navigationCategories = [
   },
 
   {
+    title: 'Connect',
+    visible: 'mobile',
+    sections: [
+      {
+        title: null,
+        links: [
+          {
+            title: 'Discord',
+            url: 'http://near.chat/',
+          },
+          {
+            title: 'Discourse',
+            url: 'https://gov.near.org/',
+          },
+          {
+            title: 'GitHub',
+            url: 'https://github.com/near',
+          },
+          {
+            title: 'Reddit',
+            url: 'https://www.reddit.com/r/nearprotocol/',
+          },
+          {
+            title: 'Telegram',
+            url: 'https://t.me/cryptonear',
+          },
+          {
+            title: 'WeChat',
+            url: 'https://pages.near.org/wechat',
+          },
+          {
+            title: 'X',
+            url: 'https://twitter.com/nearprotocol',
+          },
+          {
+            title: 'YouTube',
+            url: 'https://www.youtube.com/channel/UCuKdIYVN8iE3fv8alyk1aMw',
+          },
+        ],
+      },
+    ],
+  },
+
+  {
     title: 'About',
+    visible: 'all',
     sections: [
       {
         title: null,

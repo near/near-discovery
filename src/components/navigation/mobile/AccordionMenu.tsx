@@ -101,35 +101,37 @@ const SectionTitle = styled.p`
 export const AccordionMenu = (props: Props) => (
   <Wrapper>
     <AccordionRoot type="multiple">
-      {navigationCategories.map((category) => (
-        <AccordionItem value={category.title} key={category.title}>
-          <AccordionHeader>
-            <AccordionTrigger>
-              {category.title}
-              <i className="ph-bold ph-caret-down" />
-            </AccordionTrigger>
-          </AccordionHeader>
+      {navigationCategories
+        .filter((category) => category.visible === 'all' || category.visible === 'mobile')
+        .map((category) => (
+          <AccordionItem value={category.title} key={category.title}>
+            <AccordionHeader>
+              <AccordionTrigger>
+                {category.title}
+                <i className="ph-bold ph-caret-down" />
+              </AccordionTrigger>
+            </AccordionHeader>
 
-          <AccordionContent>
-            {category.sections.map((section) => (
-              <Section key={section.title}>
-                {section.title && <SectionTitle>{section.title}</SectionTitle>}
+            <AccordionContent>
+              {category.sections.map((section) => (
+                <Section key={section.title}>
+                  {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
-                {section.links.map((link) => (
-                  <Link
-                    href={link.url}
-                    target={link.url.indexOf('http') === 0 ? '_blank' : undefined}
-                    key={link.title}
-                    onClick={props.onCloseMenu}
-                  >
-                    {link.title}
-                  </Link>
-                ))}
-              </Section>
-            ))}
-          </AccordionContent>
-        </AccordionItem>
-      ))}
+                  {section.links.map((link) => (
+                    <Link
+                      href={link.url}
+                      target={link.url.indexOf('http') === 0 ? '_blank' : undefined}
+                      key={link.title}
+                      onClick={props.onCloseMenu}
+                    >
+                      {link.title}
+                    </Link>
+                  ))}
+                </Section>
+              ))}
+            </AccordionContent>
+          </AccordionItem>
+        ))}
     </AccordionRoot>
   </Wrapper>
 );

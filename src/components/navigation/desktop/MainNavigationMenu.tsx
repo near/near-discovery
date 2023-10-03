@@ -138,29 +138,31 @@ export const MainNavigationMenu = () => {
     <Wrapper>
       <NavRoot delayDuration={0}>
         <NavList>
-          {navigationCategories.map((category) => (
-            <NavItem key={category.title}>
-              <NavTrigger onMouseEnter={recordMouseEnter}>{category.title}</NavTrigger>
+          {navigationCategories
+            .filter((category) => category.visible === 'all' || category.visible === 'desktop')
+            .map((category) => (
+              <NavItem key={category.title}>
+                <NavTrigger onMouseEnter={recordMouseEnter}>{category.title}</NavTrigger>
 
-              <NavContent>
-                <Container>
-                  {category.sections.map((section) => (
-                    <Section key={section.title}>
-                      {section.title && <SectionTitle>{section.title}</SectionTitle>}
+                <NavContent>
+                  <Container>
+                    {category.sections.map((section) => (
+                      <Section key={section.title}>
+                        {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
-                      {section.links.map((link) => (
-                        <NavLink key={link.title} asChild>
-                          <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
-                            {link.title}
-                          </Link>
-                        </NavLink>
-                      ))}
-                    </Section>
-                  ))}
-                </Container>
-              </NavContent>
-            </NavItem>
-          ))}
+                        {section.links.map((link) => (
+                          <NavLink key={link.title} asChild>
+                            <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
+                              {link.title}
+                            </Link>
+                          </NavLink>
+                        ))}
+                      </Section>
+                    ))}
+                  </Container>
+                </NavContent>
+              </NavItem>
+            ))}
         </NavList>
       </NavRoot>
     </Wrapper>
