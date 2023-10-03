@@ -43,11 +43,15 @@ const unregisterServiceWorker = async () => {
 
 const handlePushManagerSubscribe = async () => {
   const serviceWorker = await navigator.serviceWorker.ready;
-
-  return await serviceWorker.pushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey,
-  });
+  try {
+    return await serviceWorker.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey,
+    });
+  } catch (e) {
+    console.error('Error while subscribing to service-worker.', e);
+    throw e;
+  }
 };
 
 export const handlePushManagerUnsubscribe = async (hide: () => void) => {
