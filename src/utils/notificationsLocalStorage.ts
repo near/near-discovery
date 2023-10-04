@@ -73,10 +73,10 @@ export const setProcessSuccess = () => {
   );
 };
 
-export const setProcessError = (error: unknown) => {
+export const setProcessError = (error: any) => {
   const accountIdLS = getLSAccountId();
   const localStorageByAccountId = getNotificationLocalStorage();
-
+  const errorMessage = error.message ? error.message : 'unknown';
   localStorage.setItem(
     NOTIFICATIONS_STORAGE,
     JSON.stringify({
@@ -85,11 +85,11 @@ export const setProcessError = (error: unknown) => {
         ...localStorageByAccountId,
         permission: false,
         subscribeStarted: false,
-        subscribeError: error,
+        subscribeError: errorMessage,
       },
       permission: false,
       subscribeStarted: false,
-      subscribeError: error,
+      subscribeError: errorMessage,
     }),
   );
 };

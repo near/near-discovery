@@ -12,6 +12,7 @@ import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
+import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import {
   CommitButton,
   EthersProviderContext,
@@ -27,7 +28,6 @@ import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { setupFastAuth } from '@/lib/selector/setup';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
@@ -68,14 +68,12 @@ export default function VmInitializer() {
             }),
             setupNightly(),
             setupWelldoneWallet(),
-            setupFastAuth({
-              networkId,
-              signInContractId,
+            setupFastAuthWallet({
               relayerUrl:
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-            }) as any, // TODO: Refactor setupFastAuth() to TS
+            }),
             setupKeypom({
               trialAccountSpecs: {
                 url:
@@ -202,6 +200,7 @@ export default function VmInitializer() {
       refreshAllowance,
       requestSignInWithWallet,
       requestSignMessage,
+      vmNear: near,
       signedIn,
     });
   }, [
@@ -214,6 +213,7 @@ export default function VmInitializer() {
     signedIn,
     signedAccountId,
     setAuthStore,
+    near,
   ]);
 
   useEffect(() => {

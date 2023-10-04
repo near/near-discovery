@@ -16,8 +16,9 @@ import {
 } from './notificationsLocalStorage';
 
 const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
-const HOST = 'https://notification-server-mainnet-7tk2cmmtcq-ew.a.run.app';
-const GATEWAY_URL = 'https://beta.near.org';
+
+const HOST = 'https://discovery-notifications-mainnet.near.org';
+const GATEWAY_URL = 'https://near.org';
 
 // Will be used for error handling in future works
 const isIOS = () => {
@@ -43,11 +44,15 @@ const unregisterServiceWorker = async () => {
 
 const handlePushManagerSubscribe = async () => {
   const serviceWorker = await navigator.serviceWorker.ready;
-
-  return await serviceWorker.pushManager.subscribe({
-    userVisibleOnly: true,
-    applicationServerKey,
-  });
+  try {
+    return await serviceWorker.pushManager.subscribe({
+      userVisibleOnly: true,
+      applicationServerKey,
+    });
+  } catch (e) {
+    console.error('Error while subscribing to service-worker.', e);
+    throw e;
+  }
 };
 
 export const handlePushManagerUnsubscribe = async (hide: () => void) => {
