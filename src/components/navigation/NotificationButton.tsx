@@ -3,47 +3,42 @@ import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { handleOnCancel, handleOnCancelBanner, handleTurnOn } from '@/utils/notifications';
+import {
+  isLocalStorageSupported,
+  isNotificationSupported,
+  isPermisionGranted,
+  isPushManagerSupported,
+} from '@/utils/notificationsHelpers';
+import { getNotificationLocalStorage } from '@/utils/notificationsLocalStorage';
 
-const StyledNotificationButton = styled.div`
-  margin: 0 15px;
-  border: 0.5px solid #e3e3e0;
-  background-color: #f3f3f2;
-  height: 46px;
-  width: 46px;
-  border-radius: 50%;
+type Props = {
+  mobileView?: boolean;
+};
 
-  > div,
-  a {
-    width: 100%;
-    height: 100%;
-  }
-
-  a {
-    color: #1b1b18 !important;
-    background-color: #f3f3f2 !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    i {
-      font-size: 18px !important;
-    }
-  }
-
-  :hover {
-    a,
-    i {
-      color: white;
-    }
-  }
+const Wrapper = styled.div`
+  margin: 0 -1rem;
 `;
 
-export function NotificationButton() {
+export function NotificationButton(props: Props) {
   const components = useBosComponents();
 
   return (
-    <StyledNotificationButton className="nav-notification-button">
-      <VmComponent src={components.notificationButton} />
-    </StyledNotificationButton>
+    <Wrapper>
+      <VmComponent
+        src={components.nearOrg.notifications.button}
+        props={{
+          isLocalStorageSupported,
+          isNotificationSupported,
+          isPermisionGranted,
+          isPushManagerSupported,
+          handleOnCancel,
+          getNotificationLocalStorage,
+          handleOnCancelBanner,
+          handleTurnOn,
+          mobileView: props.mobileView ?? false,
+        }}
+      />
+    </Wrapper>
   );
 }
