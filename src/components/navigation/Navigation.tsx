@@ -7,11 +7,11 @@ export const Navigation = () => {
   const [matches, setMatches] = useState(true);
 
   useEffect(() => {
-    setMatches(window.matchMedia('(min-width: 1025px)').matches);
+    setMatches(window.matchMedia('(min-width: 1120px)').matches);
   }, []);
 
   useEffect(() => {
-    window.matchMedia('(min-width: 1025px)').addEventListener('change', (e) => setMatches(e.matches));
+    window.matchMedia('(min-width: 1120px)').addEventListener('change', (e) => setMatches(e.matches));
   }, []);
 
   return (
