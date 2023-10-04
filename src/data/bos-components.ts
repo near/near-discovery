@@ -21,9 +21,14 @@ type NetworkComponents = {
     homePage: string;
     learningLinks: string;
     usePage: string;
+    notifications: {
+      page: string;
+      alert: string;
+      settings: string;
+      button: string;
+    };
   };
   notificationButton: string;
-  notificationsPage: string;
   peoplePage: string;
   profileImage: string;
   profileInlineBlock: string;
@@ -64,9 +69,14 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       homePage: 'discom.testnet/widget/NearOrg.HomePage',
       learningLinks: 'discom.testnet/widget/NearOrg.LearningLinks',
       usePage: 'discom.testnet/widget/NearOrg.UsePage',
+      notifications: {
+        page: 'discom.testnet/widget/NearOrg.Notifications.Notifications',
+        alert: 'discom.testnet/widget/NearOrg.Notifications.NotificationAlert',
+        settings: 'discom.testnet/widget/NearOrg.Notifications.Settings',
+        button: 'discom.testnet/widget/NearOrg.Notifications.NotificationButton',
+      },
     },
     notificationButton: 'discom.testnet/widget/NotificationButton',
-    notificationsPage: 'discom.testnet/widget/NotificationsPage',
     peoplePage: 'discom.testnet/widget/PeoplePage',
     profileImage: 'eugenethedream/widget/ProfileImage',
     profileInlineBlock: 'eugenethedream/widget/Profile.InlineBlock',
@@ -105,9 +115,14 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       homePage: 'near/widget/NearOrg.HomePage',
       learningLinks: 'near/widget/NearOrg.LearningLinks',
       usePage: 'near/widget/NearOrg.UsePage',
+      notifications: {
+        page: 'near/widget/NearOrg.Notifications.Notifications',
+        alert: 'near/widget/NearOrg.Notifications.NotificationAlert',
+        settings: 'near/widget/NearOrg.Notifications.Settings',
+        button: 'near/widget/NearOrg.Notifications.NotificationButton',
+      },
     },
     notificationButton: 'near/widget/NotificationButton',
-    notificationsPage: 'near/widget/NotificationsPage',
     peoplePage: 'near/widget/PeoplePage',
     profileImage: 'mob.near/widget/ProfileImage',
     profileInlineBlock: 'mob.near/widget/Profile.InlineBlock',

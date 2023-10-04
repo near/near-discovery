@@ -1,16 +1,20 @@
 import { isPassKeyAvailable } from '@near-js/biometric-ed25519';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { openToast } from '@/components/lib/Toast';
 import { MetaTags } from '@/components/MetaTags';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
+import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import type { NextPageWithLayout } from '@/utils/types';
+import { handleOnCancel, handleTurnOn, showNotificationModal } from '@/utils/notifications';
+import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
+import { setNotificationsSessionStorage, getNotificationLocalStorage } from '@/utils/notificationsLocalStorage';
+import type { NextPageWithLayout, TosData } from '@/utils/types';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 
@@ -22,6 +26,50 @@ const HomePage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const authStore = useAuthStore();
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
+  const [showNotificationModalState, setShowNotificationModalState] = useState(false);
+  const accountId = useAuthStore((store) => store.accountId);
+  const [tosData, setTosData] = useState<TosData | null>(null);
+  const cacheTosData = useMemo(() => tosData, [tosData?.latestTosVersion]);
+
+  const handleModalCloseOnEsc = useCallback(() => {
+    setShowNotificationModalState(false);
+  }, []);
+
+  const turnNotificationsOn = useCallback(
+    () =>
+      handleTurnOn(accountId, () => {
+        setShowNotificationModalState(false);
+      }),
+    [],
+  );
+
+  const pauseNotifications = useCallback(() => {
+    handleOnCancel();
+    setShowNotificationModalState(false);
+  }, []);
+
+  const checkNotificationModal = useCallback(() => {
+    if (tosData && tosData.agreementsForUser.length > 0) {
+      // show notification modal for new users
+      const tosAccepted =
+        tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
+      // check if user has already turned on notifications
+      const { showOnTS } = getNotificationLocalStorage() || {};
+
+      if ((tosAccepted && !showOnTS) || (tosAccepted && showOnTS < Date.now())) {
+        setTimeout(() => {
+          setShowNotificationModalState(showNotificationModal());
+        }, 10000);
+      }
+    }
+  }, [cacheTosData]);
+
+  useEffect(() => {
+    if (!signedIn) {
+      return;
+    }
+    checkNotificationModal();
+  }, [signedIn, cacheTosData]);
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -58,15 +106,31 @@ const HomePage: NextPageWithLayout = () => {
 
   if (signedIn || signedInOptimistic) {
     return (
-      <ComponentWrapperPage
-        src={components.tosCheck}
-        componentProps={{
-          logOut: authStore.logOut,
-          targetProps: componentProps,
-          targetComponent: components.default,
-          tosName: components.tosContent,
-        }}
-      />
+      <>
+        <VmComponent
+          src={components.nearOrg.notifications.alert}
+          props={{
+            open: showNotificationModalState,
+            handleTurnOn: turnNotificationsOn,
+            handleOnCancel: pauseNotifications,
+            isNotificationSupported,
+            isPermisionGranted,
+            isPushManagerSupported,
+            setNotificationsSessionStorage,
+            onOpenChange: handleModalCloseOnEsc,
+          }}
+        />
+        <ComponentWrapperPage
+          src={components.tosCheck}
+          componentProps={{
+            logOut: authStore.logOut,
+            targetProps: componentProps,
+            targetComponent: components.default,
+            tosName: components.tosContent,
+            recordToC: setTosData,
+          }}
+        />
+      </>
     );
   }
 

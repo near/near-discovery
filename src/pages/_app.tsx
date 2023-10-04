@@ -19,6 +19,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
+import { setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -39,6 +40,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const authStore = useAuthStore();
   const componentSrc = router.query;
+
+  useEffect(() => {
+    setNotificationsSessionStorage();
+  }, []);
 
   useEffect(() => {
     initializeAnalytics();
@@ -78,6 +83,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Head>
         <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
+        <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="favicon.ico" />
         <link
           rel="canonical"
