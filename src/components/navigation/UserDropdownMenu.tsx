@@ -8,14 +8,23 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 
-const StyledDropdown = styled.div`
+const Wrapper = styled.div`
   > button {
     all: unset;
     display: flex;
     align-items: center;
     border-radius: 50px;
-    background-color: #161615;
+    background-color: var(--sand12);
     padding: 4px;
+    transition: all 200ms;
+
+    &:hover {
+      background-color: var(--black);
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 4px var(--violet4);
+    }
   }
   .d-inline-block {
     width: unset !important;
@@ -53,11 +62,10 @@ const StyledDropdown = styled.div`
   }
 
   .DropdownMenuContent {
-    min-width: 220px;
     background-color: #161615;
     border-radius: 6px;
     margin-top: 11px;
-    padding: 5px;
+    padding: 12px;
     box-shadow: 0px 10px 38px -10px rgba(22, 23, 24, 0.35), 0px 10px 20px -15px rgba(22, 23, 24, 0.2);
     animation-duration: 600ms;
     animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -85,9 +93,8 @@ const StyledDropdown = styled.div`
     border-radius: 3px;
     display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 12px;
     position: relative;
-    padding-left: 25px;
     user-select: none;
     outline: none;
   }
@@ -145,6 +152,25 @@ const StyledDropdown = styled.div`
       transform: translateX(0);
     }
   }
+
+  @media (max-width: 800px) {
+    .profile-info,
+    .ph {
+      display: none;
+    }
+
+    > button {
+      background: var(--sand6);
+      padding: 1px;
+    }
+
+    .d-inline-block {
+      img {
+        width: 43px !important;
+        height: 43px !important;
+      }
+    }
+  }
 `;
 
 export const UserDropdownMenu = () => {
@@ -161,7 +187,7 @@ export const UserDropdownMenu = () => {
   }, [near]);
 
   return (
-    <StyledDropdown>
+    <Wrapper>
       <DropdownMenu.Root>
         <DropdownMenu.Trigger>
           <VmComponent
@@ -200,6 +226,6 @@ export const UserDropdownMenu = () => {
           <DropdownMenu.Arrow style={{ fill: '#161615' }} />
         </DropdownMenu.Content>
       </DropdownMenu.Root>
-    </StyledDropdown>
+    </Wrapper>
   );
 };
