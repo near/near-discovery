@@ -1,105 +1,103 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import type { FormEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { NearconBanner } from '@/components/banners/NearconBanner';
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 
-import LogoBlack from '../icons/logo-black.svg';
-import NearLogotype from '../icons/near-logotype.svg';
+import NearLogo from '../icons/near-logo.svg';
 import ReturnIconImage from '../icons/return.svg';
 import SearchIconImage from '../icons/search.svg';
 import { NotificationButton } from '../NotificationButton';
+import { UserDropdownMenu } from '../UserDropdownMenu';
 import { MainNavigationMenu } from './MainNavigationMenu';
 import { TypeAheadDropdown } from './TypeAheadDropdown';
-import { UserDropdownMenu } from './UserDropdownMenu';
 
-const StyledNavigation = styled.div`
+const Wrapper = styled.div<{
+  scrolled?: boolean;
+}>`
+  --nav-height: 75px;
   z-index: 1000;
   position: sticky;
   top: 0;
   left: 0;
   right: 0;
   background-color: white;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  height: var(--nav-height);
+  box-shadow: ${(p) => (p.scrolled ? '0 1px 0 var(--sand6)' : 'none')};
+`;
 
-  &.border-bottom {
-    border-bottom: 1px solid #e3e3e0;
-  }
+const Container = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  margin: 0 auto;
+`;
 
-  a {
-    :hover {
-      text-decoration: none;
-      cursor: pointer;
-    }
+const Logo = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  outline: none;
+  margin-right: auto;
+  transition: all 200ms;
+
+  &:hover,
+  &:focus {
+    opacity: 0.5;
   }
 
   img {
     width: 110px;
-    &.logo-only {
-      width: 27px;
-      height: 27px;
-    }
   }
+`;
 
-  .container-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+const Search = styled.div`
+  position: relative;
+  z-index: 10;
 
-  nav {
-    margin: 0 auto;
-  }
+  input {
+    background-repeat: no-repeat;
+    border-radius: 50px;
+    padding: 7px 25px 7px 44px;
+    background-position: 12px center;
+    border: 1px solid var(--sand6);
+    background-color: white;
+    font-size: 16px;
+    margin-left: 1rem;
+    width: 200px;
+    transition: all 200ms;
 
-  .form-wrapper {
-    position: relative;
-    z-index: 10;
+    :focus {
+      outline: 0;
+      border-color: var(--violet8);
+      box-shadow: 0 0 0 4px var(--violet4);
 
-    input {
-      background-repeat: no-repeat;
-      border-radius: 50px;
-      padding: 7px 25px 7px 44px;
-      background-position: 12px 8px;
-      border: 1px solid #e3e3e0;
-      background-color: white;
-      font-size: 16px;
-      margin-left: 30px;
-      width: 200px;
-
-      :focus {
-        outline: 0;
-        border: 1px solid #6d62d4;
-        box-shadow: 0px 0px 0px 4px #cbc7f4;
-      }
-
-      ::placeholder {
-        color: #9ba1a6;
+      & ~ img {
+        opacity: 1;
       }
     }
-  }
 
-  .return-icon-image {
-    position: absolute;
-    right: 16px;
-    top: 10px;
-    width: 20px;
-    height: 20px;
-  }
+    ::placeholder {
+      color: #9ba1a6;
+    }
 
-  .right-side-actions {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-    position: relative;
-    z-index: 10;
-    gap: 10px;
+    & ~ img {
+      position: absolute;
+      right: 16px;
+      top: 10px;
+      width: 20px;
+      height: 20px;
+      opacity: 0;
+      transition: all 200ms;
+    }
   }
 `;
 
@@ -108,6 +106,15 @@ const TypeAheadDropdownContainer = styled.div`
   top: 100%;
   left: 31px;
   margin-top: 10px;
+`;
+
+const Actions = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  position: relative;
+  z-index: 10;
+  gap: 0.5rem;
 `;
 
 export const DesktopNavigation = () => {
@@ -121,17 +128,6 @@ export const DesktopNavigation = () => {
   const searchFocusTimeout = useRef<NodeJS.Timeout>();
   const signedIn = useAuthStore((store) => store.signedIn);
   const { requestAuthentication } = useSignInRedirect();
-
-  const setSearchIsFocused = (isFocused: boolean) => {
-    if (isFocused) {
-      _setSearchIsFocused(true);
-      clearTimeout(searchFocusTimeout.current);
-    } else {
-      searchFocusTimeout.current = setTimeout(() => {
-        _setSearchIsFocused(false);
-      }, 100);
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -149,73 +145,85 @@ export const DesktopNavigation = () => {
     };
   }, []);
 
-  function handleSignIn() {
-    requestAuthentication();
-  }
+  const setSearchIsFocused = (isFocused: boolean) => {
+    if (isFocused) {
+      _setSearchIsFocused(true);
+      clearTimeout(searchFocusTimeout.current);
+    } else {
+      searchFocusTimeout.current = setTimeout(() => {
+        _setSearchIsFocused(false);
+      }, 100);
+    }
+  };
 
-  function handleCreateAccount() {
+  const handleSignIn = () => {
+    requestAuthentication();
+  };
+
+  const handleCreateAccount = () => {
     requestAuthentication(true);
-  }
+  };
+
+  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push(`/${components.search.indexPage}?term=${encodeURIComponent(searchTerm)}`);
+    setSearchIsFocused(false);
+  };
 
   return (
-    <StyledNavigation className={`${scrolled ? 'border-bottom' : ''}`}>
-      <div className="container-xl container-fluid container-wrapper">
-        <Link href="/">
-          <Image
-            priority
-            className={signedIn ? 'logo-only' : ''}
-            src={signedIn ? LogoBlack : NearLogotype}
-            alt="NEAR"
-          />
-        </Link>
+    <>
+      <NearconBanner />
 
-        <div className="form-wrapper">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              router.push(`/${components.search.indexPage}?term=${encodeURIComponent(searchTerm)}`);
-              setSearchIsFocused(false);
-            }}
-          >
-            <input
-              placeholder="Search"
-              style={{ backgroundImage: `url(${SearchIconImage.src})` }}
-              onFocus={() => {
-                setSearchIsFocused(true);
-                recordEvent('click-navigation-search');
-              }}
-              onBlur={() => {
-                setSearchIsFocused(false);
-              }}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              ref={searchRef}
-            />
-          </form>
+      <Wrapper scrolled={scrolled}>
+        <Container className="container-xl">
+          <Link href="/" passHref legacyBehavior>
+            <Logo>
+              <Image priority src={NearLogo} alt="NEAR" />
+            </Logo>
+          </Link>
 
-          {showTypeAheadDropdown && (
-            <TypeAheadDropdownContainer>
-              <TypeAheadDropdown term={searchTerm} focusChange={setSearchIsFocused} />
-            </TypeAheadDropdownContainer>
-          )}
+          <Search>
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                placeholder="Search NEAR"
+                style={{ backgroundImage: `url(${SearchIconImage.src})` }}
+                onFocus={() => {
+                  setSearchIsFocused(true);
+                  recordEvent('click-navigation-search');
+                }}
+                onBlur={() => {
+                  setSearchIsFocused(false);
+                }}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                ref={searchRef}
+              />
+              <Image src={ReturnIconImage} alt="Return" />
+            </form>
 
-          {searchIsFocused && <Image className="return-icon-image" src={ReturnIconImage} alt="Return" />}
-        </div>
-        <MainNavigationMenu />
-        <div className="right-side-actions">
-          {!signedIn && (
-            <>
-              <Button label="Sign In" variant="secondary" onClick={handleSignIn} />
-              <Button label="Create Account" variant="primary" onClick={handleCreateAccount} />
-            </>
-          )}
-          {signedIn && (
-            <>
-              <NotificationButton />
-              <UserDropdownMenu />
-            </>
-          )}
-        </div>
-      </div>
-    </StyledNavigation>
+            {showTypeAheadDropdown && (
+              <TypeAheadDropdownContainer>
+                <TypeAheadDropdown term={searchTerm} focusChange={setSearchIsFocused} />
+              </TypeAheadDropdownContainer>
+            )}
+          </Search>
+
+          <MainNavigationMenu />
+
+          <Actions>
+            {signedIn ? (
+              <>
+                <NotificationButton />
+                <UserDropdownMenu />
+              </>
+            ) : (
+              <>
+                <Button label="Sign In" variant="secondary" onClick={handleSignIn} />
+                <Button label="Create Account" variant="primary" onClick={handleCreateAccount} />
+              </>
+            )}
+          </Actions>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
