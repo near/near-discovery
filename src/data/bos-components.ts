@@ -26,6 +26,7 @@ type NetworkComponents = {
       alert: string;
       settings: string;
       button: string;
+      iosHomeScreenAlert: string;
     };
   };
   notificationButton: string;
@@ -74,6 +75,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         alert: 'discom.testnet/widget/NearOrg.Notifications.NotificationAlert',
         settings: 'discom.testnet/widget/NearOrg.Notifications.Settings',
         button: 'discom.testnet/widget/NearOrg.Notifications.NotificationButton',
+        iosHomeScreenAlert: 'discom.testnet/widget/NearOrg.Notifications.HomeScreenAlert',
       },
     },
     notificationButton: 'discom.testnet/widget/NotificationButton',
@@ -120,6 +122,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         alert: 'near/widget/NearOrg.Notifications.NotificationAlert',
         settings: 'near/widget/NearOrg.Notifications.Settings',
         button: 'near/widget/NearOrg.Notifications.NotificationButton',
+        iosHomeScreenAlert: 'near/widget/NearOrg.Notifications.HomeScreenAlert',
       },
     },
     notificationButton: 'near/widget/NotificationButton',
