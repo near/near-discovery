@@ -47,13 +47,18 @@ const HomePage: NextPageWithLayout = () => {
     setIosHomeScreenPrompt(false);
   }, []);
 
-  const turnNotificationsOn = useCallback(
-    () =>
-      handleTurnOn(accountId, () => {
-        setShowNotificationModalState(false);
-      }),
-    [],
-  );
+  const turnNotificationsOn = useCallback(() => {
+    // for iOS devices, show a different modal asking the user to add the app to their home screen
+    // if the user has already added the app to their home screen, show the regular notification modal
+    if (iOSDevice && !isHomeScreenApp) {
+      setIosHomeScreenPrompt(true);
+      setShowNotificationModalState(false);
+      return;
+    }
+    return handleTurnOn(accountId, () => {
+      setShowNotificationModalState(false);
+    });
+  }, [accountId, iOSDevice, isHomeScreenApp]);
 
   const pauseNotifications = useCallback(() => {
     handleOnCancel();
@@ -61,32 +66,28 @@ const HomePage: NextPageWithLayout = () => {
   }, []);
 
   const checkNotificationModal = useCallback(() => {
-    if (tosData && tosData.agreementsForUser.length > 0) {
+    if (cacheTosData && cacheTosData.agreementsForUser.length > 0) {
       // show notification modal for new users
       const tosAccepted =
-        tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
+        cacheTosData.agreementsForUser[cacheTosData.agreementsForUser.length - 1].value ===
+        cacheTosData.latestTosVersion;
       // check if user has already turned on notifications
       const { showOnTS } = getNotificationLocalStorage() || {};
 
-      if ((tosAccepted && !showOnTS) || (tosAccepted && showOnTS < Date.now())) {
-        // let's test it on preview first and then I can change that
-        if (iOSDevice && !isHomeScreenApp) {
-          setIosHomeScreenPrompt(true);
-        } else {
-          setTimeout(() => {
-            setShowNotificationModalState(showNotificationModal());
-          }, 3000);
-        }
+      if (!iosHomeScreenPrompt && ((tosAccepted && !showOnTS) || (tosAccepted && showOnTS < Date.now()))) {
+        setTimeout(() => {
+          setShowNotificationModalState(showNotificationModal());
+        }, 3000);
       }
     }
-  }, [iOSDevice, isHomeScreenApp, cacheTosData]);
+  }, [cacheTosData, iosHomeScreenPrompt]);
 
   useEffect(() => {
     if (!signedIn) {
       return;
     }
     checkNotificationModal();
-  }, [signedIn, cacheTosData, checkNotificationModal]);
+  }, [signedIn, checkNotificationModal]);
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -132,8 +133,6 @@ const HomePage: NextPageWithLayout = () => {
     }
   }, [iOSDevice]);
 
-  console.log('iOSDevice: ', iOSDevice, 'isHomeScreenApp: ', isHomeScreenApp);
-
   if (signedIn || signedInOptimistic) {
     return (
       <>
@@ -148,6 +147,7 @@ const HomePage: NextPageWithLayout = () => {
             isPushManagerSupported,
             setNotificationsSessionStorage,
             onOpenChange: handleModalCloseOnEsc,
+            iOSDevice,
           }}
         />
         <VmComponent
