@@ -5,7 +5,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import {
-  detestIOSVersion,
+  detectIOSVersion,
   handleOnCancel,
   handleOnCancelBanner,
   handleTurnOn,
@@ -33,7 +33,7 @@ const NotificationsPage: NextPageWithLayout = () => {
 
   const iOSVersion = useMemo(() => {
     if (typeof window !== 'undefined' && iOSDevice) {
-      return detestIOSVersion();
+      return detectIOSVersion();
     }
     return;
   }, [iOSDevice]);

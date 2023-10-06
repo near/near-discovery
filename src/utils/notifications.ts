@@ -33,7 +33,7 @@ export const isIOS = () => {
   );
 };
 
-export const detestIOSVersion = () => {
+export const detectIOSVersion = () => {
   const userAgent = navigator.userAgent;
   const iOSVersionMatch = userAgent.match(/iPhone|iPad|iPod/i);
   let iOSVersion;

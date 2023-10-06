@@ -12,7 +12,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import {
-  detestIOSVersion,
+  detectIOSVersion,
   handleOnCancel,
   handleTurnOn,
   isIOS,
@@ -48,7 +48,7 @@ const HomePage: NextPageWithLayout = () => {
 
   const iOSVersion = useMemo(() => {
     if (typeof window !== 'undefined' && iOSDevice) {
-      return detestIOSVersion();
+      return detectIOSVersion();
     }
     return;
   }, [iOSDevice]);
