@@ -173,6 +173,6 @@ export const getNotificationLocalStorage = () => {
 
   const accountIdLS = getLSAccountId();
 
-  const notificationsLS = isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+  const notificationsLS = JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
   return notificationsLS[accountIdLS];
 };
