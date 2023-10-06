@@ -147,7 +147,7 @@ export const showNotificationModal = () => {
     return false;
   }
 
-  const state = getNotificationLocalStorage();
+  const state = getNotificationLocalStorage() || {};
 
   if ((isLocalStorageSupported() && !state.showOnTS) || state.showOnTS < Date.now()) {
     return true;
