@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -7,6 +9,7 @@ import {
   handleOnCancelBanner,
   handlePushManagerUnsubscribe,
   handleTurnOn,
+  isIOS,
 } from '@/utils/notifications';
 import {
   isLocalStorageSupported,
@@ -20,6 +23,12 @@ import type { NextPageWithLayout } from '@/utils/types';
 const NotificationsSettingsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const accountId = useAuthStore((store) => store.accountId);
+  const iOSDevice = useMemo(() => {
+    if (typeof window !== 'undefined') {
+      return isIOS();
+    }
+    return false;
+  }, []);
 
   return (
     <ComponentWrapperPage
@@ -37,6 +46,7 @@ const NotificationsSettingsPage: NextPageWithLayout = () => {
         accountId,
         handleTurnOn,
         handlePushManagerUnsubscribe,
+        iOSDevice,
       }}
     />
   );

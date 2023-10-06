@@ -11,7 +11,14 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { handleOnCancel, handleTurnOn, isIOS, showNotificationModal } from '@/utils/notifications';
+import {
+  detestIOSVersion,
+  handleOnCancel,
+  handleTurnOn,
+  isIOS,
+  recomendedIOSVersion,
+  showNotificationModal,
+} from '@/utils/notifications';
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
 import { getNotificationLocalStorage, setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout, TosData } from '@/utils/types';
@@ -38,6 +45,13 @@ const HomePage: NextPageWithLayout = () => {
     }
     return false;
   }, []);
+
+  const iOSVersion = useMemo(() => {
+    if (typeof window !== 'undefined' && iOSDevice) {
+      return detestIOSVersion();
+    }
+    return;
+  }, [iOSDevice]);
 
   const handleModalCloseOnEsc = useCallback(() => {
     setShowNotificationModalState(false);
@@ -148,6 +162,8 @@ const HomePage: NextPageWithLayout = () => {
             setNotificationsSessionStorage,
             onOpenChange: handleModalCloseOnEsc,
             iOSDevice,
+            iOSVersion,
+            recomendedIOSVersion,
           }}
         />
         <VmComponent
