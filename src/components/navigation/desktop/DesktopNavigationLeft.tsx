@@ -314,7 +314,9 @@ export const DesktopNavigationLeft = () => {
     } else if (name === 'zkSync') {
       paths = ['zkSync', 'zkSync.Swap.Dex'];
     } else if (name === 'avalanche') {
-      paths = ['avalanche', 'avalanche.Swap.Dex'];
+      paths = ['avalanche', 'Avalanche.Lending'];
+    } else if (name === 'optimism') {
+      paths = ['optimism', 'Optimism.Lending'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
@@ -388,6 +390,7 @@ export const DesktopNavigationLeft = () => {
     isActive('gnosis') ||
     isActive('zkSync') ||
     isActive('avalanche') ||
+    isActive('optimism') ||
     isActive('polygon') ||
     isActive('linea') ||
     isActive('metis');
@@ -542,6 +545,14 @@ export const DesktopNavigationLeft = () => {
                     NEAR(4)
                   </Link>
                   <Link
+                    className={`item child-item ${isActive('optimism') ? 'active' : ''} `}
+                    href="/optimism"
+                    onClick={closeMenu}
+                  >
+                    Optimism (2)
+                    <span className="newIcon">{newIcon}</span>
+                  </Link>
+                  <Link
                     className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
                     href="/polygon-zkevm"
                     onClick={closeMenu}
@@ -582,16 +593,6 @@ export const DesktopNavigationLeft = () => {
                     }}
                   >
                     Monad
-                    <span className="soonIcon"> {soonIcon}</span>
-                  </Link>
-                  <Link
-                    className={`item child-item ${isActive('Optimism') ? 'active' : ''} disabled`}
-                    href="#"
-                    onClick={(event) => {
-                      event.preventDefault();
-                    }}
-                  >
-                    Optimism
                     <span className="soonIcon"> {soonIcon}</span>
                   </Link>
                   <Link
@@ -686,7 +687,7 @@ export const DesktopNavigationLeft = () => {
                       isActive('metis') ||
                       isActive('gnosis') ||
                       isActive('zkSync') ||
-                      isActive('polygon') ||
+                      isActive('optimism') ||
                       isActive('avalanche') ||
                       isActive('linea') ||
                       isActive('metis')
@@ -731,6 +732,9 @@ export const DesktopNavigationLeft = () => {
                     <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
                       NEAR(5)
                     </Link>
+                    <Link className={`item child-item ${isActive('optimism') ? 'active' : ''}`} href="/optimism">
+                      Optimism(2)<span className="newIcon">{newIcon}</span>
+                    </Link>
                     <Link
                       className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
                       href="/polygon-zkevm"
@@ -761,16 +765,6 @@ export const DesktopNavigationLeft = () => {
                       }}
                     >
                       Monad <span className="soonIcon"> {soonIcon}</span>
-                    </Link>
-                    <Link
-                      className={`item child-item ${isActive('Optimism') ? 'active' : ''} disabled`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Optimism
-                      <span className="soonIcon"> {soonIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Scroll') ? 'active' : ''} disabled`}
@@ -878,6 +872,10 @@ export const DesktopNavigationLeft = () => {
                     <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
                       NEAR(5)<span className="bag">{isActive('near') ? visible_bag : null}</span>
                     </Link>
+                    <Link className={`item child-item ${isActive('optimism') ? 'active' : ''} `} href="/optimism">
+                      Optimism(2) <span className="newIcon">{newIcon}</span>
+                      <span className="bag">{isActive('optimism') ? visible_bag : null}</span>
+                    </Link>
                     <Link
                       className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
                       href="/polygon-zkevm"
@@ -912,16 +910,6 @@ export const DesktopNavigationLeft = () => {
                     >
                       Monad <span className="Monad"> {soonIcon}</span>
                       <span className="bag">{isActive('Monad') ? visible_bag : null}</span>
-                    </Link>
-                    <Link
-                      className={`item child-item ${isActive('Optimism') ? 'active' : ''} disabled`}
-                      href="#"
-                      onClick={(event) => {
-                        event.preventDefault();
-                      }}
-                    >
-                      Optimism <span className="soonIcon"> {soonIcon}</span>
-                      <span className="bag">{isActive('Optimism') ? visible_bag : null}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Scroll') ? 'active' : ''} disabled`}

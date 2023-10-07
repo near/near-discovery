@@ -72,6 +72,7 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   'Gnosis.Swap.Dex': '/gnosis',
   'ZkSync.Swap.Dex': '/zkSync',
    'Avalanche.Swap.Dex': '/avalanche',
+   'Optimism.Swap.Dex': '/optimism',
 };
 
 export function DefaultLayout({ children }: Props) {
@@ -92,6 +93,7 @@ export function DefaultLayout({ children }: Props) {
   const GnosisSrc = 'bluebiu.near/widget/Gnosis.Dapps';
   const ZkSyncSrc = 'bluebiu.near/widget/zkSync.Dapps';
   const avalancheSrc = 'bluebiu.near/widget/Avalanche.Dapps';
+  const optimismSrc = 'bluebiu.near/widget/Optimism.Dapps';
 
   const AllChainsSrc = 'bluebiu.near/widget/AllChains.AllChainsPage';
 
@@ -114,6 +116,7 @@ export function DefaultLayout({ children }: Props) {
     GnosisSrc,
     ZkSyncSrc,
     avalancheSrc,
+    optimismSrc,
   ];
 
   const [showTab, setShowTab] = useState(false);
