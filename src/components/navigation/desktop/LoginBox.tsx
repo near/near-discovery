@@ -428,7 +428,7 @@ export const LoginBox = () => {
     } else if (name === 'mantle') {
       paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle','Arbitrum.Lending'];
     } else if (name === 'bsc') {
       paths = ['bsc', 'Bsc.Swap.Dex'];
     } else if (name === 'linea') {

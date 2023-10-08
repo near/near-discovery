@@ -36,7 +36,7 @@ const NearHomePageCards = () => {
             bg={nearAsset.img.polygon_zkevm_all_in_one}
             icon={nearAsset.logo.zkevm}
             avatar={nearAsset.avatar.a}
-            rightText={'436\nCollected'}
+            // rightText={'436\nCollected'}
             onClick={() => handleClick('/bluebiu.near/widget/ZKEVM-all-in-one')}
           >
             <CardContent tags={['Dexes', 'Bridge', 'Lending', 'Liquidity Manage']} />
@@ -45,11 +45,11 @@ const NearHomePageCards = () => {
         <StyledSwiperSlide canClick={true}>
           <StyledRefCard
             title={'NEAR All-in-one'}
-            subTitle={'@juaner.near/'}
+            subTitle={'@juaner.near'}
             bg={nearAsset.img.near_all_in_one}
             icon={nearAsset.logo.near_all_in_one}
             avatar={nearAsset.avatar.b}
-            rightText={'130\nCollected'}
+            // rightText={'130\nCollected'}
             onClick={() => handleClick('/juaner.near/widget/ref-home')}
           >
             <CardContent tags={['Bridge', 'Dexes', 'Lending', 'Staking']} />
@@ -62,7 +62,7 @@ const NearHomePageCards = () => {
             bg={nearAsset.img.base_all_in_one}
             icon={nearAsset.logo.base_all_in_one}
             avatar={nearAsset.avatar.c}
-            rightText={'130\nCollected'}
+            // rightText={'130\nCollected'}
             onClick={null}
           >
             <CardContent tags={['Bridge', 'Dexes', 'Lending']} />
@@ -75,7 +75,7 @@ const NearHomePageCards = () => {
             bg={nearAsset.img.mantle_all_in_one}
             icon={nearAsset.logo.mantle_all_in_one}
             avatar={nearAsset.avatar.d}
-            rightText={'236\nCollected'}
+            // rightText={'236\nCollected'}
             onClick={null}
           >
             <CardContent tags={['Bridge', 'Dexes', 'Lending']} />

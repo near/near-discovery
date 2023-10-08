@@ -87,6 +87,9 @@ const Container = styled.div`
   .small .item.active {
     background: transparent;
   }
+  /* .small .item:hover {
+    background: transparent;
+  } */
   .small .item .icon {
     width: auto;
   }
@@ -300,7 +303,7 @@ export const DesktopNavigationLeft = () => {
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets','Arbitrum.Lending'];
     } else if (name === 'bsc') {
       paths = ['bsc', 'Bsc.Swap.Dex'];
     } else if (name === 'polygon') {
@@ -478,7 +481,7 @@ export const DesktopNavigationLeft = () => {
                     href="/arbitrum"
                     onClick={closeMenu}
                   >
-                    Arbitrum(2)
+                    Arbitrum(6)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -494,7 +497,7 @@ export const DesktopNavigationLeft = () => {
                     href="/base"
                     onClick={closeMenu}
                   >
-                    Base(1)
+                    Base(6)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -502,7 +505,7 @@ export const DesktopNavigationLeft = () => {
                     href="/bsc"
                     onClick={closeMenu}
                   >
-                    BSC(1)
+                    BSC(4)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -510,7 +513,7 @@ export const DesktopNavigationLeft = () => {
                     href="/gnosis"
                     onClick={closeMenu}
                   >
-                    Gnosis(1)
+                    Gnosis(2)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -518,7 +521,7 @@ export const DesktopNavigationLeft = () => {
                     href="/linea"
                     onClick={closeMenu}
                   >
-                    Linea(2)
+                    Linea(4)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -526,7 +529,7 @@ export const DesktopNavigationLeft = () => {
                     href="/mantle"
                     onClick={closeMenu}
                   >
-                    Mantle(2)
+                    Mantle(6)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -549,7 +552,7 @@ export const DesktopNavigationLeft = () => {
                     href="/optimism"
                     onClick={closeMenu}
                   >
-                    Optimism (2)
+                    Optimism (1)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -702,28 +705,28 @@ export const DesktopNavigationLeft = () => {
                       All Chains
                     </Link>
                     <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
-                      Arbitrum(5)
+                      Arbitrum(6)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`} href="/avalanche">
                       Avalanche(1) <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base(5)
+                      Base(6)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('bsc') ? 'active' : ''}`} href="/bsc">
-                      BSC(3)
+                      BSC(4)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('gnosis') ? 'active' : ''}`} href="/gnosis">
-                      Gnosis(1) <span className="newIcon">{newIcon}</span>
+                      Gnosis(2) <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('linea') ? 'active' : ''}`} href="/linea">
-                      Linea(3) <span className="newIcon">{newIcon}</span>
+                      Linea(4) <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle(5)
+                      Mantle(6)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('metis') ? 'active' : ''} `} href="/metis">
@@ -733,7 +736,7 @@ export const DesktopNavigationLeft = () => {
                       NEAR(5)
                     </Link>
                     <Link className={`item child-item ${isActive('optimism') ? 'active' : ''}`} href="/optimism">
-                      Optimism(2)<span className="newIcon">{newIcon}</span>
+                      Optimism(1)<span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('polygon-zkevm') ? 'active' : ''}`}
@@ -742,11 +745,11 @@ export const DesktopNavigationLeft = () => {
                       Polygon zkEVM(6)
                     </Link>
                     <Link className={`item child-item ${isActive('polygon') ? 'active' : ''} `} href="/polygon">
-                      Polygon(4)
+                      Polygon(5)
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="/zkSync">
-                      zkSync(1) <span className="newIcon">{newIcon}</span>
+                      zkSync(2) <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link
                       className={`item child-item ${isActive('Berachain') ? 'active' : ''} disabled`}
@@ -837,7 +840,7 @@ export const DesktopNavigationLeft = () => {
                       All Chains<span className="bag">{isActive('allChains') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('arbitrum') ? 'active' : ''}`} href="/arbitrum">
-                      Arbitrum(5) <span className="newIcon">{newIcon}</span>
+                      Arbitrum(6) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('arbitrum') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('avalanche') ? 'active' : ''}`} href="/avalanche">
@@ -845,23 +848,23 @@ export const DesktopNavigationLeft = () => {
                       <span className="bag">{isActive('avalanche') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('base') ? 'active' : ''}`} href="/base">
-                      Base(5)<span className="newIcon">{newIcon}</span>
+                      Base(6)<span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('base') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('bsc') ? 'active' : ''}`} href="/bsc">
-                      BSC(3) <span className="newIcon">{newIcon}</span>
+                      BSC(4) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('bsc') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('gnosis') ? 'active' : ''}`} href="/gnosis">
-                      Gnosis(1) <span className="newIcon">{newIcon}</span>
+                      Gnosis(2) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('gnosis') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('linea') ? 'active' : ''} `} href="/linea">
-                      Linea(3)<span className="newIcon">{newIcon}</span>
+                      Linea(4)<span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('linea') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('mantle') ? 'active' : ''}`} href="/mantle">
-                      Mantle(5)<span className="newIcon">{newIcon}</span>
+                      Mantle(6)<span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('mantle') ? visible_bag : null}</span>
                     </Link>
 
@@ -873,7 +876,7 @@ export const DesktopNavigationLeft = () => {
                       NEAR(5)<span className="bag">{isActive('near') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('optimism') ? 'active' : ''} `} href="/optimism">
-                      Optimism(2) <span className="newIcon">{newIcon}</span>
+                      Optimism(1) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('optimism') ? visible_bag : null}</span>
                     </Link>
                     <Link
@@ -884,11 +887,11 @@ export const DesktopNavigationLeft = () => {
                     </Link>
 
                     <Link className={`item child-item ${isActive('polygon') ? 'active' : ''} `} href="/polygon">
-                      Polygon(4) <span className="newIcon">{newIcon}</span>
+                      Polygon(5) <span className="newIcon">{newIcon}</span>
                       <span className="bag">{isActive('polygon') ? visible_bag : null}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('zkSync') ? 'active' : ''}`} href="/zkSync">
-                      zkSync(1) <span className="newIcon"> {newIcon}</span>
+                      zkSync(2) <span className="newIcon"> {newIcon}</span>
                       <span className="bag">{isActive('zkSync') ? visible_bag : null}</span>
                     </Link>
                     <Link
