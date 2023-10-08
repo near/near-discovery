@@ -260,6 +260,13 @@ const Wrapper = styled.div`
   }
 `;
 
+const RainbowBridgeContainer = styled.div`
+  max-width: 1320px;
+
+  margin: auto;
+  position: relative;
+`;
+
 const Input = styled.input`
   background: none;
   color: white;
@@ -358,4 +365,14 @@ const TokenLight = styled.div`
   }
 `;
 
-export { Button, Separator, Input, Wrapper, SwitchWrapper, TokenDark, TokenLight, RainbowWrapper };
+export {
+  Button,
+  Separator,
+  Input,
+  Wrapper,
+  SwitchWrapper,
+  TokenDark,
+  TokenLight,
+  RainbowWrapper,
+  RainbowBridgeContainer,
+};
