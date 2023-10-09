@@ -27,6 +27,7 @@ type NetworkComponents = {
       settings: string;
       button: string;
     };
+    learnPage: string;
   };
   notificationButton: string;
   peoplePage: string;
@@ -75,6 +76,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         settings: 'discom.testnet/widget/NearOrg.Notifications.Settings',
         button: 'discom.testnet/widget/NearOrg.Notifications.NotificationButton',
       },
+      learnPage: 'discom.testnet/widget/NearOrg.LearnPage',
     },
     notificationButton: 'discom.testnet/widget/NotificationButton',
     peoplePage: 'discom.testnet/widget/PeoplePage',
@@ -121,6 +123,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         settings: 'near/widget/NearOrg.Notifications.Settings',
         button: 'near/widget/NearOrg.Notifications.NotificationButton',
       },
+      learnPage: 'near/widget/NearOrg.LearnPage',
     },
     notificationButton: 'near/widget/NotificationButton',
     peoplePage: 'near/widget/PeoplePage',
