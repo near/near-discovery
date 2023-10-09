@@ -5,11 +5,11 @@ import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useCurrentComponentStore } from '@/stores/current-component';
 
-const StyledCurrentComponent = styled.div`
+const Wrapper = styled.div`
   border: 1px solid #eeeeec;
   background-color: #f9f9f8;
   border-radius: 4px;
-  min-height: 100%;
+  min-width: 253px;
 
   .title {
     color: #868682;
@@ -31,7 +31,7 @@ const StyledCurrentComponent = styled.div`
     justify-content: center;
   }
   > div {
-    padding: 15px;
+    padding: 15px 15px 0;
     div:nth-child(1) {
       flex-direction: column;
       text-align: center;
@@ -64,7 +64,7 @@ export const CurrentComponent = () => {
   if (!src) return null;
 
   return (
-    <StyledCurrentComponent className="current-component">
+    <Wrapper>
       <div className="title">Current Component</div>
       <VmComponent
         src={components.componentSummary}
@@ -74,6 +74,6 @@ export const CurrentComponent = () => {
           showTags: true,
         }}
       />
-    </StyledCurrentComponent>
+    </Wrapper>
   );
 };
