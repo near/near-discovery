@@ -82,12 +82,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   return (
     <>
       <Head>
-        <script type="text/javascript" async>
-          {`var _iub = _iub || [];
-_iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"cookiePolicyInOtherWindow":true,"lang":"en","rebuildIframe":false,"siteId":3335032,"cookiePolicyId":71185313,"cookiePolicyUrl":"https://near.org/cookies", "banner":{ "backgroundColor":"#FFFFFF","closeButtonDisplay":false,"explicitWithdrawal":true,"listPurposes":true,"position":"float-bottom-center","rejectButtonCaptionColor":"#FFFFFF","rejectButtonColor":"#0073CE","rejectButtonDisplay":true,"textColor":"#000000" }};`}
-        </script>
-        <script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3335032.js" defer></script>
-        <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" defer></script>
         <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="icon" href="favicon.ico" />
