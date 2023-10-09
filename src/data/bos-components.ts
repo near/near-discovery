@@ -18,10 +18,7 @@ type NetworkComponents = {
     ecosystemGetFundingPage: string;
     ecosystemOverviewPage: string;
     ecosystemWorkAndEarnPage: string;
-    footer: string;
     homePage: string;
-    learningLinks: string;
-    usePage: string;
     notifications: {
       page: string;
       alert: string;
@@ -68,10 +65,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       ecosystemGetFundingPage: 'discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'discom.testnet/widget/NearOrg.Ecosystem.OverviewPage',
       ecosystemWorkAndEarnPage: 'discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage',
-      footer: 'discom.testnet/widget/NearOrg.Footer',
       homePage: 'discom.testnet/widget/NearOrg.HomePage',
-      learningLinks: 'discom.testnet/widget/NearOrg.LearningLinks',
-      usePage: 'discom.testnet/widget/NearOrg.UsePage',
       notifications: {
         page: 'discom.testnet/widget/NearOrg.Notifications.Notifications',
         alert: 'discom.testnet/widget/NearOrg.Notifications.NotificationAlert',
@@ -116,10 +110,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
       ecosystemGetFundingPage: 'near/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'near/widget/NearOrg.Ecosystem.OverviewPage',
       ecosystemWorkAndEarnPage: 'near/widget/NearOrg.Ecosystem.WorkAndEarnPage',
-      footer: 'near/widget/NearOrg.Footer',
       homePage: 'near/widget/NearOrg.HomePage',
-      learningLinks: 'near/widget/NearOrg.LearningLinks',
-      usePage: 'near/widget/NearOrg.UsePage',
       notifications: {
         page: 'near/widget/NearOrg.Notifications.Notifications',
         alert: 'near/widget/NearOrg.Notifications.NotificationAlert',
