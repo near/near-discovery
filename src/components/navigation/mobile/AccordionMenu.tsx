@@ -2,6 +2,9 @@ import * as Accordion from '@radix-ui/react-accordion';
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import { useCurrentComponentStore } from '@/stores/current-component';
+
+import { CurrentComponent } from '../CurrentComponent';
 import { navigationCategories } from '../navigation-categories';
 
 type Props = {
@@ -90,6 +93,10 @@ const Section = styled.div`
   }
 `;
 
+const CurrentComponentSection = styled.div`
+  padding: 24px;
+`;
+
 const SectionTitle = styled.p`
   font: var(--text-s);
   color: var(--sand12);
@@ -98,40 +105,50 @@ const SectionTitle = styled.p`
   margin: 0;
 `;
 
-export const AccordionMenu = (props: Props) => (
-  <Wrapper>
-    <AccordionRoot type="multiple">
-      {navigationCategories
-        .filter((category) => category.visible === 'all' || category.visible === 'mobile')
-        .map((category) => (
-          <AccordionItem value={category.title} key={category.title}>
-            <AccordionHeader>
-              <AccordionTrigger>
-                {category.title}
-                <i className="ph-bold ph-caret-down" />
-              </AccordionTrigger>
-            </AccordionHeader>
+export const AccordionMenu = (props: Props) => {
+  const currentComponentSrc = useCurrentComponentStore((store) => store.src);
 
-            <AccordionContent>
-              {category.sections.map((section) => (
-                <Section key={section.title}>
-                  {section.title && <SectionTitle>{section.title}</SectionTitle>}
+  return (
+    <Wrapper>
+      <AccordionRoot type="multiple">
+        {navigationCategories
+          .filter((category) => category.visible === 'all' || category.visible === 'mobile')
+          .map((category) => (
+            <AccordionItem value={category.title} key={category.title}>
+              <AccordionHeader>
+                <AccordionTrigger>
+                  {category.title}
+                  <i className="ph-bold ph-caret-down" />
+                </AccordionTrigger>
+              </AccordionHeader>
 
-                  {section.links.map((link) => (
-                    <Link
-                      href={link.url}
-                      target={link.url.indexOf('http') === 0 ? '_blank' : undefined}
-                      key={link.title}
-                      onClick={props.onCloseMenu}
-                    >
-                      {link.title}
-                    </Link>
-                  ))}
-                </Section>
-              ))}
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-    </AccordionRoot>
-  </Wrapper>
-);
+              <AccordionContent>
+                {category.sections.map((section) => (
+                  <Section key={section.title}>
+                    {section.title && <SectionTitle>{section.title}</SectionTitle>}
+
+                    {section.links.map((link) => (
+                      <Link
+                        href={link.url}
+                        target={link.url.indexOf('http') === 0 ? '_blank' : undefined}
+                        key={link.title}
+                        onClick={props.onCloseMenu}
+                      >
+                        {link.title}
+                      </Link>
+                    ))}
+                  </Section>
+                ))}
+
+                {currentComponentSrc && category.title === 'Develop' && (
+                  <CurrentComponentSection>
+                    <CurrentComponent />
+                  </CurrentComponentSection>
+                )}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+      </AccordionRoot>
+    </Wrapper>
+  );
+};
