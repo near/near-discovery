@@ -1,20 +1,20 @@
-import { MetaTags } from '@/components/MetaTags';
-import { NearOrgEcosystemOverviewPage } from '@/components/near-org/NearOrg.Ecosystem.OverviewPage';
-import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
+import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EcosystemOverviewPage: NextPageWithLayout = () => {
-  useClearCurrentComponent();
+  const components = useBosComponents();
 
   return (
-    <>
-      <MetaTags
-        title="Near Protocol Ecosystem"
-        description="Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO."
-      />
-      <NearOrgEcosystemOverviewPage />
-    </>
+    <ComponentWrapperPage
+      src={components.nearOrg.ecosystemOverviewPage}
+      meta={{
+        title: 'NEAR | Ecosystem Overview',
+        description:
+          'Projects building on NEAR are at the center. The Ecosystem is supporting them with everything they need to succeed.	DAOs: A new way to organize, fund, and empower communities · Explore DAOs, participate or get funding · NEARWEEK · Human Guild · TenK DAO.',
+      }}
+    />
   );
 };
 
