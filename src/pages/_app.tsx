@@ -84,7 +84,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Head>
         <script type="text/javascript" async>
           {`var _iub = _iub || [];
-_iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"cookiePolicyInOtherWindow":true,"lang":"en","perPurposeConsent":true,"purposes":"1,5,4","rebuildIframe":false,"siteId":3335032,"cookiePolicyId":71185313,"cookiePolicyUrl":"https://near.org/cookies", "banner":{ "acceptButtonCaptionColor":"#FFFFFF","acceptButtonColor":"#0073CE","acceptButtonDisplay":true,"backgroundColor":"#FFFFFF","closeButtonDisplay":false,"customizeButtonCaptionColor":"#4D4D4D","customizeButtonColor":"#DADADA","customizeButtonDisplay":true,"explicitWithdrawal":true,"listPurposes":true,"position":"float-bottom-center","rejectButtonCaptionColor":"#FFFFFF","rejectButtonColor":"#0073CE","rejectButtonDisplay":true,"showPurposesToggles":true,"textColor":"#000000" }};`}
+_iub.csConfiguration = {"askConsentAtCookiePolicyUpdate":true,"cookiePolicyInOtherWindow":true,"lang":"en","rebuildIframe":false,"siteId":3335032,"cookiePolicyId":71185313,"cookiePolicyUrl":"https://near.org/cookies", "banner":{ "backgroundColor":"#FFFFFF","closeButtonDisplay":false,"explicitWithdrawal":true,"listPurposes":true,"position":"float-bottom-center","rejectButtonCaptionColor":"#FFFFFF","rejectButtonColor":"#0073CE","rejectButtonDisplay":true,"textColor":"#000000" }};`}
         </script>
         <script type="text/javascript" src="https://cs.iubenda.com/autoblocking/3335032.js" defer></script>
         <script type="text/javascript" src="//cdn.iubenda.com/cs/iubenda_cs.js" charSet="UTF-8" defer></script>
