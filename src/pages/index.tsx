@@ -11,7 +11,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import type { NextPageWithLayout, TosData } from '@/utils/types';
+import type { NextPageWithLayout, TocData } from '@/utils/types';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 
@@ -23,8 +23,8 @@ const HomePage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const authStore = useAuthStore();
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
-  const [tosData, setTosData] = useState<TosData | null>(null);
-  const cachedTosData = useMemo(() => tosData, [tosData?.latestTosVersion]);
+  const [tocData, setTocData] = useState<TocData | null>(null);
+  const cachedTocData = useMemo(() => tocData, [tocData?.latestTosVersion]);
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -62,7 +62,7 @@ const HomePage: NextPageWithLayout = () => {
   if (signedIn || signedInOptimistic) {
     return (
       <>
-        <NotificationsAlert tosData={cachedTosData} />
+        <NotificationsAlert tocData={cachedTocData} />
 
         <ComponentWrapperPage
           src={components.tosCheck}
@@ -71,7 +71,7 @@ const HomePage: NextPageWithLayout = () => {
             targetProps: componentProps,
             targetComponent: components.default,
             tosName: components.tosContent,
-            recordToC: setTosData,
+            recordToC: setTocData,
           }}
         />
       </>
