@@ -1,16 +1,13 @@
-import { useMemo } from 'react';
-
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useIosDevice } from '@/hooks/useIosDevice';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import {
-  detectIOSVersion,
   handleOnCancel,
   handleOnCancelBanner,
   handleTurnOn,
-  isIOS,
-  recomendedIOSVersion,
+  recommendedIosVersionForNotifications,
 } from '@/utils/notifications';
 import {
   isLocalStorageSupported,
@@ -24,25 +21,12 @@ import type { NextPageWithLayout } from '@/utils/types';
 const NotificationsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const accountId = useAuthStore((store) => store.accountId);
-  const iOSDevice = useMemo(() => {
-    if (typeof window !== 'undefined') {
-      return isIOS();
-    }
-    return false;
-  }, []);
-
-  const iOSVersion = useMemo(() => {
-    if (typeof window !== 'undefined' && iOSDevice) {
-      return detectIOSVersion();
-    }
-    return;
-  }, [iOSDevice]);
+  const { isIosDevice, versionOfIos } = useIosDevice();
 
   return (
     <ComponentWrapperPage
       src={components.nearOrg.notifications.page}
-      // TODO: fill
-      meta={{ title: '', description: '' }}
+      meta={{ title: 'NEAR | Notifications', description: '' }}
       componentProps={{
         isLocalStorageSupported,
         isNotificationSupported,
@@ -53,9 +37,9 @@ const NotificationsPage: NextPageWithLayout = () => {
         handleOnCancelBanner,
         accountId,
         handleTurnOn,
-        iOSDevice,
-        iOSVersion,
-        recomendedIOSVersion,
+        iOSDevice: isIosDevice,
+        iOSVersion: versionOfIos,
+        recomendedIOSVersion: recommendedIosVersionForNotifications,
       }}
     />
   );
