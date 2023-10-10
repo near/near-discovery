@@ -21,35 +21,7 @@ const HOST = 'https://discovery-notifications-mainnet.near.org';
 const GATEWAY_URL = 'https://near.org';
 
 // min version for iOS to support notifications
-export const recomendedIOSVersion = 16.4;
-
-export const isIOS = () => {
-  const browserInfo = navigator.userAgent.toLowerCase();
-
-  return (
-    browserInfo.includes('iphone') ||
-    browserInfo.includes('ipad') ||
-    ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform)
-  );
-};
-
-export const detectIOSVersion = () => {
-  const userAgent = navigator.userAgent;
-  const iOSVersionMatch = userAgent.match(/iPhone|iPad|iPod/i);
-  let iOSVersion;
-  if (iOSVersionMatch) {
-    // Extract the iOS version from the user agent
-    const iOSVersionString = userAgent.match(/OS (\d+)_(\d+)_?(\d+)?/);
-    if (iOSVersionString) {
-      const versionParts = iOSVersionString
-        .slice(1)
-        .filter((i) => i !== undefined)
-        .map(Number);
-      iOSVersion = Number(versionParts.map(Number).join('.'));
-    }
-  }
-  return iOSVersion;
-};
+export const recommendedIosVersionForNotifications = 16.4;
 
 const handleRequestPermission = () => Notification.requestPermission();
 
