@@ -52,8 +52,9 @@ export function useBosLoaderInitializer() {
   useEffect(() => {
     if (loaderUrl) {
       fetchRedirectMap(loaderUrl);
-    } else {
+    } else if (flags) {
+      // We need to check if "flags" has fully resolved to avoid prematurely setting "hasResolved: true"
       setStore({ hasResolved: true });
     }
-  }, [fetchRedirectMap, loaderUrl, setStore]);
+  }, [flags, fetchRedirectMap, loaderUrl, setStore]);
 }
