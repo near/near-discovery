@@ -31,7 +31,6 @@ const AllChainsColumn: NextPageWithLayout = () => {
     }
     .subTitle{
       font-size:20px;
-      width:30%;
     }
    }
 
