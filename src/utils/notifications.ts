@@ -23,9 +23,21 @@ const GATEWAY_URL = 'https://near.org';
 // min version for iOS to support notifications
 export const recommendedIosVersionForNotifications = 16.4;
 
-const handleRequestPermission = () => Notification.requestPermission();
+const handleRequestPermission = () => {
+  try {
+    return Notification.requestPermission();
+  } catch (error) {
+    console.error('Error while requesting permission.', error);
+  }
+};
 
-const registerServiceWorker = () => navigator.serviceWorker.register('/service-worker.js');
+const registerServiceWorker = () => {
+  try {
+    return navigator.serviceWorker.register('/service-worker.js');
+  } catch (error) {
+    console.error('Error while registering service-worker.', error);
+  }
+};
 
 const unregisterServiceWorker = async () => {
   const registrations = await navigator.serviceWorker.getRegistrations();
@@ -115,7 +127,9 @@ export const handleOnCancelBanner = () => {
 };
 
 export const showNotificationModal = () => {
-  if (isPermisionGranted() && getNotificationLocalStorage()?.permission) {
+  const grantedPermission = isPermisionGranted();
+  const { permission: initialPermissionGrantedByUser } = getNotificationLocalStorage() ?? {};
+  if (grantedPermission && initialPermissionGrantedByUser) {
     return false;
   }
 

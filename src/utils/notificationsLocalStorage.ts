@@ -1,3 +1,5 @@
+import { openToast } from '@/components/lib/Toast';
+
 import {
   isLocalStorageSupported,
   isNotificationSupported,
@@ -92,6 +94,13 @@ export const setProcessError = (error: any) => {
       subscribeError: errorMessage,
     }),
   );
+  openToast({
+    id: 'notifications-subscription-error',
+    type: 'ERROR',
+    title: 'Push notification error',
+    description: `${errorMessage}. Please try again later or send us a message if the problem persists.`,
+    duration: 5000,
+  });
 };
 
 export const setProcessEnded = () => {
