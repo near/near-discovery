@@ -36,6 +36,10 @@ export const navigationCategories = [
         title: 'Resources',
         links: [
           {
+            title: 'Sandbox',
+            url: '/sandbox',
+          },
+          {
             title: 'Tools',
             url: 'https://docs.near.org/tools/welcome',
           },
@@ -106,6 +110,10 @@ export const navigationCategories = [
           {
             title: 'Events',
             url: '/events',
+          },
+          {
+            title: 'Founders',
+            url: '/horizon',
           },
         ],
       },

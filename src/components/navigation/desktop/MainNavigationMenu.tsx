@@ -96,7 +96,7 @@ const NavLink = styled(NavigationMenu.Link)`
   min-width: 120px;
   padding: 7px 0;
   font: var(--text-s);
-  color: var(--sand10);
+  color: var(--sand12);
   transition: color 200ms;
   white-space: nowrap;
   outline: none;
@@ -125,10 +125,11 @@ const CurrentComponentSection = styled.div`
 `;
 
 const SectionTitle = styled.p`
-  font: var(--text-s);
-  color: var(--sand12);
-  font-weight: 600;
-  padding: 7px 0;
+  font: var(--text-xs);
+  color: var(--sand10);
+  font-weight: 450;
+  padding: 12px 0;
+  letter-spacing: 0.24px;
   margin: 0;
 `;
 
