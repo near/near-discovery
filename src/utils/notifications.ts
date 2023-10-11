@@ -20,20 +20,24 @@ const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwE
 const HOST = 'https://discovery-notifications-mainnet.near.org';
 const GATEWAY_URL = 'https://near.org';
 
-// Will be used for error handling in future works
-const isIOS = () => {
-  const browserInfo = navigator.userAgent.toLowerCase();
+// min version for iOS to support notifications
+export const recommendedIosVersionForNotifications = 16.4;
 
-  return (
-    browserInfo.match('iphone') ||
-    browserInfo.match('ipad') ||
-    ['iPad Simulator', 'iPhone Simulator', 'iPod Simulator', 'iPad', 'iPhone', 'iPod'].includes(navigator.platform)
-  );
+const handleRequestPermission = () => {
+  try {
+    return Notification.requestPermission();
+  } catch (error) {
+    console.error('Error while requesting permission.', error);
+  }
 };
 
-const handleRequestPermission = () => Notification.requestPermission();
-
-const registerServiceWorker = () => navigator.serviceWorker.register('/service-worker.js');
+const registerServiceWorker = () => {
+  try {
+    return navigator.serviceWorker.register('/service-worker.js');
+  } catch (error) {
+    console.error('Error while registering service-worker.', error);
+  }
+};
 
 const unregisterServiceWorker = async () => {
   const registrations = await navigator.serviceWorker.getRegistrations();
@@ -123,11 +127,13 @@ export const handleOnCancelBanner = () => {
 };
 
 export const showNotificationModal = () => {
-  if (isPermisionGranted() && getNotificationLocalStorage()?.permission) {
+  const grantedPermission = isPermisionGranted();
+  const { permission: initialPermissionGrantedByUser } = getNotificationLocalStorage() ?? {};
+  if (grantedPermission && initialPermissionGrantedByUser) {
     return false;
   }
 
-  const state = getNotificationLocalStorage();
+  const state = getNotificationLocalStorage() || {};
 
   if ((isLocalStorageSupported() && !state.showOnTS) || state.showOnTS < Date.now()) {
     return true;

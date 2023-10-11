@@ -1,113 +1,59 @@
 export const navigationCategories = [
   {
-    title: 'Platform',
+    title: 'Develop',
     visible: 'all',
     sections: [
       {
-        title: null,
+        title: 'Docs',
         links: [
           {
-            title: 'Decentralized Front-Ends',
-            url: 'https://docs.near.org/bos/components',
+            title: 'All',
+            url: 'https://docs.near.org',
           },
           {
-            title: 'Decentralized Hosting',
-            url: 'https://docs.near.org/bos/tutorial/bos-gateway',
+            title: 'Overview',
+            url: 'https://docs.near.org/concepts/welcome',
           },
           {
-            title: 'Data Platform',
-            url: 'https://docs.near.org/concepts/data-flow/data-storage',
+            title: 'Smart Contracts',
+            url: 'https://docs.near.org/develop/contracts/welcome',
           },
-          {
-            title: 'Fast Auth',
-            url: 'https://docs.near.org/tools/fastauth-sdk',
-          },
-          {
-            title: 'Near Protocol',
-            url: 'https://docs.near.org/concepts/web3/near',
-          },
-        ],
-      },
-      {
-        title: 'Discover',
-        links: [
           {
             title: 'Applications',
-            url: '/applications',
+            url: 'https://docs.near.org/develop/integrate/welcome',
           },
           {
-            title: 'Gateways',
-            url: 'https://near.org/gateways',
+            title: 'Data Query',
+            url: 'https://docs.near.org/bos/queryapi/intro',
+          },
+          {
+            title: 'RPC',
+            url: 'https://docs.near.org/api/rpc/introduction',
           },
         ],
       },
-    ],
-  },
-
-  {
-    title: 'Developers',
-    visible: 'all',
-    sections: [
       {
         title: 'Resources',
         links: [
           {
-            title: 'Documentation',
-            url: 'https://docs.near.org',
+            title: 'Tools',
+            url: 'https://docs.near.org/tools/welcome',
           },
           {
-            title: 'Sandbox',
-            url: '/sandbox',
-          },
-          {
-            title: 'Tutorials',
+            title: 'Examples & Tutorials',
             url: 'https://docs.near.org/bos/tutorial/quickstart',
           },
           {
             title: 'GitHub',
             url: 'https://github.com/near/dx',
           },
-        ],
-      },
-      {
-        title: 'Discover',
-        links: [
-          {
-            title: 'Components',
-            url: '/components',
-          },
           {
             title: 'Standards & Proposals',
             url: 'https://github.com/near/NEPs',
           },
-        ],
-      },
-      {
-        title: 'Tools',
-        links: [
           {
-            title: 'VS Code Extension',
-            url: 'https://docs.near.org/bos/dev/vscode',
-          },
-          {
-            title: 'BOS Loader',
-            url: 'https://docs.near.org/bos/dev/bos-loader',
-          },
-          {
-            title: 'APIs',
-            url: 'https://docs.near.org/bos/api/home',
-          },
-          {
-            title: 'SDKs',
-            url: 'https://docs.near.org/sdk/welcome',
-          },
-          {
-            title: 'Command Line Tools',
-            url: 'https://github.com/bos-cli-rs/bos-cli-rs',
-          },
-          {
-            title: 'View All',
-            url: 'https://docs.near.org/tools/welcome',
+            title: 'Technical Papers',
+            url: 'https://docs.near.org/concepts/advanced/papers',
           },
         ],
       },
@@ -133,46 +79,33 @@ export const navigationCategories = [
             title: 'Gateways',
             url: '/gateways',
           },
-          {
-            title: 'People',
-            url: '/people',
-          },
-          {
-            title: 'Standards & Proposals',
-            url: 'https://github.com/near/NEPs',
-          },
         ],
       },
     ],
   },
 
   {
-    title: 'Community',
+    title: 'Ecosystem',
     visible: 'all',
     sections: [
       {
-        title: 'Ecosystem',
+        title: null,
         links: [
           {
             title: 'Overview',
             url: '/ecosystem',
           },
           {
+            title: 'People',
+            url: '/people',
+          },
+          {
             title: 'News',
-            url: 'https://near.org/nearweekapp.near/widget/nearweek-news',
+            url: '/nearweekapp.near/widget/NEARWEEKNews',
           },
           {
             title: 'Events',
             url: '/events',
-          },
-        ],
-      },
-      {
-        title: 'Discover',
-        links: [
-          {
-            title: 'People',
-            url: '/people',
           },
         ],
       },
