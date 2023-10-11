@@ -161,7 +161,13 @@ const Section = styled.div`
 
 const StyledIconImage = styled(NearImage)`
   @media (max-width: ${LARGE_SCREEN}) {
-    display: none;
+    /* display: none; */
+    height: 20%;
+  }
+  @media (max-width: 900px) {
+    /* display: none; */
+    width: 20%;
+    height: 20%;
   }
 `;
 

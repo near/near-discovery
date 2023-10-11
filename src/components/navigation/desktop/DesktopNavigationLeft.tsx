@@ -87,9 +87,9 @@ const Container = styled.div`
   .small .item.active {
     background: transparent;
   }
-  /* .small .item:hover {
+  .small .item:hover {
     background: transparent;
-  } */
+  }
   .small .item .icon {
     width: auto;
   }
