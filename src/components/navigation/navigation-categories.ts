@@ -101,7 +101,7 @@ export const navigationCategories = [
           },
           {
             title: 'News',
-            url: '/nearweekapp.near/widget/NEARWEEKNews',
+            url: '/nearweekapp.near/widget/nearweek-news',
           },
           {
             title: 'Events',
