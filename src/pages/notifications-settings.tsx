@@ -22,6 +22,7 @@ const NotificationsSettingsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const accountId = useAuthStore((store) => store.accountId);
   const { isIosDevice } = useIosDevice();
+  const { subscribeStarted } = getNotificationLocalStorage() || {};
 
   return (
     <ComponentWrapperPage
@@ -39,6 +40,8 @@ const NotificationsSettingsPage: NextPageWithLayout = () => {
         handleTurnOn,
         handlePushManagerUnsubscribe,
         iOSDevice: isIosDevice,
+        loading: subscribeStarted,
+        disabled: !accountId || subscribeStarted,
       }}
     />
   );

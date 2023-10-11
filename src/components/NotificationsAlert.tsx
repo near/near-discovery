@@ -26,6 +26,7 @@ export const NotificationsAlert = ({ tosData }: Props) => {
   const [isHomeScreenApp, setHomeScreenApp] = useState(false);
   const [iosHomeScreenPrompt, setIosHomeScreenPrompt] = useState(false);
   const { isIosDevice, versionOfIos } = useIosDevice();
+  const { showOnTS, subscribeStarted, subscribeError } = getNotificationLocalStorage() || {};
 
   const handleModalCloseOnEsc = useCallback(() => {
     setShowNotificationModalState(false);
@@ -59,15 +60,15 @@ export const NotificationsAlert = ({ tosData }: Props) => {
       const tosAccepted =
         tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
       // check if user has already turned on notifications
-      const { showOnTS } = getNotificationLocalStorage() || {};
+      const showNotificationPrompt = showNotificationModal();
 
-      if (!iosHomeScreenPrompt && ((tosAccepted && !showOnTS) || (tosAccepted && showOnTS < Date.now()))) {
+      if (!subscribeError && showNotificationPrompt && tosAccepted && (!showOnTS || !iosHomeScreenPrompt)) {
         setTimeout(() => {
-          setShowNotificationModalState(showNotificationModal());
+          setShowNotificationModalState(showNotificationPrompt);
         }, 3000);
       }
     }
-  }, [tosData, iosHomeScreenPrompt]);
+  }, [tosData, subscribeError, showOnTS, iosHomeScreenPrompt]);
 
   useEffect(() => {
     if (!signedIn) {
@@ -85,7 +86,10 @@ export const NotificationsAlert = ({ tosData }: Props) => {
   useEffect(() => {
     if (isIosDevice) {
       window.matchMedia('(display-mode: standalone)').addEventListener('change', (e) => setHomeScreenApp(e.matches));
-      // TODO: Remove event listener on cleanup
+      // Remove event listener
+      return () => {
+        window.matchMedia('(display-mode: standalone)').removeEventListener('change', () => setHomeScreenApp(false));
+      };
     }
   }, [isIosDevice]);
 
@@ -107,6 +111,7 @@ export const NotificationsAlert = ({ tosData }: Props) => {
           iOSDevice: isIosDevice,
           iOSVersion: versionOfIos,
           recomendedIOSVersion: recommendedIosVersionForNotifications,
+          loading: subscribeStarted,
         }}
       />
       <VmComponent
