@@ -12,13 +12,13 @@ import {
 } from '@/utils/notifications';
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
 import { getNotificationLocalStorage, setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
-import type { TocData } from '@/utils/types';
+import type { TosData } from '@/utils/types';
 
 type Props = {
-  tocData: TocData | null;
+  tosData: TosData | null;
 };
 
-export const NotificationsAlert = ({ tocData }: Props) => {
+export const NotificationsAlert = ({ tosData }: Props) => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const components = useBosComponents();
   const [showNotificationModalState, setShowNotificationModalState] = useState(false);
@@ -55,10 +55,10 @@ export const NotificationsAlert = ({ tocData }: Props) => {
   }, []);
 
   const checkNotificationModal = useCallback(() => {
-    if (tocData && tocData.agreementsForUser.length > 0) {
+    if (tosData && tosData.agreementsForUser.length > 0) {
       // show notification modal for new users
       const tosAccepted =
-        tocData.agreementsForUser[tocData.agreementsForUser.length - 1].value === tocData.latestTosVersion;
+        tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
       // check if user has already turned on notifications
       const showNotificationPrompt = showNotificationModal();
 
@@ -68,7 +68,7 @@ export const NotificationsAlert = ({ tocData }: Props) => {
         }, 3000);
       }
     }
-  }, [tocData, subscribeError, showOnTS, iosHomeScreenPrompt]);
+  }, [tosData, subscribeError, showOnTS, iosHomeScreenPrompt]);
 
   useEffect(() => {
     if (!signedIn) {
