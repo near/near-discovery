@@ -63,7 +63,7 @@ const NavTrigger = styled(NavigationMenu.Trigger)`
 
 const NavContent = styled(NavigationMenu.Content)`
   position: absolute;
-  top: calc(100% - 1rem);
+  top: calc(100% - 1rem + 1px);
   left: 0;
   padding-top: 1rem;
   transform-origin: center top;
@@ -87,8 +87,9 @@ const Container = styled.div`
   padding: 16px 0;
   transform-origin: center top;
   background: var(--white);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  clip-path: inset(0px -100px -100px -100px);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.06);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
 `;
 
 const NavLink = styled(NavigationMenu.Link)`
