@@ -1,5 +1,6 @@
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useIosDevice } from '@/hooks/useIosDevice';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import {
@@ -20,12 +21,13 @@ import type { NextPageWithLayout } from '@/utils/types';
 const NotificationsSettingsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const accountId = useAuthStore((store) => store.accountId);
+  const { isIosDevice } = useIosDevice();
+  const { subscribeStarted } = getNotificationLocalStorage() || {};
 
   return (
     <ComponentWrapperPage
       src={components.nearOrg.notifications.settings}
-      // TODO: fill
-      meta={{ title: '', description: '' }}
+      meta={{ title: 'NEAR | Notification Settings', description: '' }}
       componentProps={{
         isLocalStorageSupported,
         isNotificationSupported,
@@ -37,6 +39,9 @@ const NotificationsSettingsPage: NextPageWithLayout = () => {
         accountId,
         handleTurnOn,
         handlePushManagerUnsubscribe,
+        iOSDevice: isIosDevice,
+        loading: subscribeStarted,
+        disabled: !accountId || subscribeStarted,
       }}
     />
   );
