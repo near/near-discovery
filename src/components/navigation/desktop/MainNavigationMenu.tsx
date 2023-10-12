@@ -2,14 +2,16 @@ import * as NavigationMenu from '@radix-ui/react-navigation-menu';
 import Link from 'next/link';
 import styled from 'styled-components';
 
-import { Button } from '@/components/lib/Button';
+import { useCurrentComponentStore } from '@/stores/current-component';
 import { recordMouseEnter } from '@/utils/analytics';
 
+import { CurrentComponent } from '../CurrentComponent';
 import { navigationCategories } from '../navigation-categories';
 
 const Wrapper = styled.div`
   position: relative;
   display: flex;
+  justify-content: center;
   z-index: 1;
   flex-grow: 1;
   padding: 0 1rem;
@@ -92,7 +94,7 @@ const Container = styled.div`
 const NavLink = styled(NavigationMenu.Link)`
   display: inline-block;
   min-width: 120px;
-  padding: 8px 0;
+  padding: 7px 0;
   font: var(--text-s);
   color: var(--sand10);
   transition: color 200ms;
@@ -109,31 +111,30 @@ const NavLink = styled(NavigationMenu.Link)`
 const Section = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 24px 24px 0;
-
-  &:nth-child(1),
-  &:nth-child(2) {
-    padding-top: 0;
-  }
-
-  &:nth-child(odd) {
-    border-right: 1px solid var(--sand4);
-  }
+  padding: 0 24px 0;
+  gap: 24px;
+  border-right: 1px solid var(--sand4);
 
   &:first-child:last-child {
     border-right: none;
   }
 `;
 
+const CurrentComponentSection = styled.div`
+  padding: 0 24px 0;
+`;
+
 const SectionTitle = styled.p`
   font: var(--text-s);
   color: var(--sand12);
   font-weight: 600;
-  padding: 8px 0;
+  padding: 7px 0;
   margin: 0;
 `;
 
 export const MainNavigationMenu = () => {
+  const currentComponentSrc = useCurrentComponentStore((store) => store.src);
+
   return (
     <Wrapper>
       <NavRoot delayDuration={0}>
@@ -146,19 +147,27 @@ export const MainNavigationMenu = () => {
 
                 <NavContent>
                   <Container>
-                    {category.sections.map((section) => (
-                      <Section key={section.title}>
-                        {section.title && <SectionTitle>{section.title}</SectionTitle>}
+                    <Section>
+                      {category.sections.map((section) => (
+                        <div key={section.title}>
+                          {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
-                        {section.links.map((link) => (
-                          <NavLink key={link.title} asChild>
-                            <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
-                              {link.title}
-                            </Link>
-                          </NavLink>
-                        ))}
-                      </Section>
-                    ))}
+                          {section.links.map((link) => (
+                            <NavLink key={link.title} asChild>
+                              <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
+                                {link.title}
+                              </Link>
+                            </NavLink>
+                          ))}
+                        </div>
+                      ))}
+                    </Section>
+
+                    {currentComponentSrc && category.title === 'Develop' && (
+                      <CurrentComponentSection>
+                        <CurrentComponent />
+                      </CurrentComponentSection>
+                    )}
                   </Container>
                 </NavContent>
               </NavItem>

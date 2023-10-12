@@ -13,6 +13,7 @@ type NetworkComponents = {
   };
   image: string;
   nearOrg: {
+    cookiePolicy: string;
     ecosystemCommunityPage: string;
     ecosystemGetFundingPage: string;
     ecosystemOverviewPage: string;
@@ -26,6 +27,7 @@ type NetworkComponents = {
       alert: string;
       settings: string;
       button: string;
+      iosHomeScreenAlert: string;
     };
   };
   notificationButton: string;
@@ -61,6 +63,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     },
     image: 'eugenethedream/widget/Image',
     nearOrg: {
+      cookiePolicy: 'discom.testnet/widget/NearOrg.CookiePolicy',
       ecosystemCommunityPage: 'discom.testnet/widget/NearOrg.Ecosystem.CommunityPage',
       ecosystemGetFundingPage: 'discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'discom.testnet/widget/NearOrg.Ecosystem.OverviewPage',
@@ -74,6 +77,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         alert: 'discom.testnet/widget/NearOrg.Notifications.NotificationAlert',
         settings: 'discom.testnet/widget/NearOrg.Notifications.Settings',
         button: 'discom.testnet/widget/NearOrg.Notifications.NotificationButton',
+        iosHomeScreenAlert: 'discom.testnet/widget/NearOrg.Notifications.HomeScreenAlert',
       },
     },
     notificationButton: 'discom.testnet/widget/NotificationButton',
@@ -107,6 +111,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     },
     image: 'mob.near/widget/Image',
     nearOrg: {
+      cookiePolicy: 'near/widget/NearOrg.CookiePolicy',
       ecosystemCommunityPage: 'near/widget/NearOrg.Ecosystem.CommunityPage',
       ecosystemGetFundingPage: 'near/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'near/widget/NearOrg.Ecosystem.OverviewPage',
@@ -120,6 +125,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         alert: 'near/widget/NearOrg.Notifications.NotificationAlert',
         settings: 'near/widget/NearOrg.Notifications.Settings',
         button: 'near/widget/NearOrg.Notifications.NotificationButton',
+        iosHomeScreenAlert: 'near/widget/NearOrg.Notifications.HomeScreenAlert',
       },
     },
     notificationButton: 'near/widget/NotificationButton',
