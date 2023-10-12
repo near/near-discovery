@@ -71,7 +71,7 @@ const Search = styled.div`
     border: 1px solid var(--sand6);
     background-color: white;
     font-size: 16px;
-    margin-left: 1rem;
+    margin-left: 2rem;
     width: 200px;
     transition: all 200ms;
 
