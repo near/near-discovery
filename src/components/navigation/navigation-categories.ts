@@ -11,7 +11,7 @@ export const navigationCategories = [
             url: 'https://docs.near.org',
           },
           {
-            title: 'Overview',
+            title: 'Protocol',
             url: 'https://docs.near.org/concepts/welcome',
           },
           {
