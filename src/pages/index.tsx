@@ -3,9 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 
 import { openToast } from '@/components/lib/Toast';
-import { MetaTags } from '@/components/MetaTags';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
 import { NotificationsAlert } from '@/components/NotificationsAlert';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -79,13 +77,13 @@ const HomePage: NextPageWithLayout = () => {
   }
 
   return (
-    <>
-      <MetaTags
-        title={`NEAR | The OS for an Open Web`}
-        description={`"NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today."`}
-      />
-      <NearOrgHomePage />
-    </>
+    <ComponentWrapperPage
+      src={components.nearOrg.homePage}
+      meta={{
+        title: `NEAR | The OS for an Open Web`,
+        description: `"NEAR isn’t just a Layer 1 blockchain — it’s the Blockchain Operating System for an  Open Web. Create and discover decentralized apps, and help build the future of the web, today."`,
+      }}
+    />
   );
 };
 

@@ -80,9 +80,7 @@ const AccordionContent = styled(Accordion.Content)`
 `;
 
 const Section = styled.div`
-  &:last-child {
-    padding: 0 0 0.5rem;
-  }
+  padding: 0.5rem 0;
 
   a {
     display: block;
@@ -95,14 +93,21 @@ const Section = styled.div`
 
 const CurrentComponentSection = styled.div`
   padding: 24px;
+  border-top: 1px solid var(--sand6);
+
+  > div {
+    max-width: 350px;
+  }
 `;
 
 const SectionTitle = styled.p`
-  font: var(--text-s);
-  color: var(--sand12);
-  font-weight: 600;
-  padding: 1rem 24px;
-  margin: 0;
+  font: var(--text-xs);
+  color: var(--sand10);
+  font-weight: 450;
+  padding: 0.5rem 24px 1rem;
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.24px;
+  border-bottom: 1px solid var(--sand6);
 `;
 
 export const AccordionMenu = (props: Props) => {

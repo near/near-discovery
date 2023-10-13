@@ -14,14 +14,12 @@ type NetworkComponents = {
   image: string;
   nearOrg: {
     cookiePolicy: string;
+    ecosystemPage: string;
     ecosystemCommunityPage: string;
     ecosystemGetFundingPage: string;
     ecosystemOverviewPage: string;
     ecosystemWorkAndEarnPage: string;
-    footer: string;
     homePage: string;
-    learningLinks: string;
-    usePage: string;
     notifications: {
       page: string;
       alert: string;
@@ -29,6 +27,7 @@ type NetworkComponents = {
       button: string;
       iosHomeScreenAlert: string;
     };
+    learnPage: string;
   };
   notificationButton: string;
   peoplePage: string;
@@ -64,14 +63,12 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     image: 'eugenethedream/widget/Image',
     nearOrg: {
       cookiePolicy: 'discom.testnet/widget/NearOrg.CookiePolicy',
+      ecosystemPage: 'discom.testnet/widget/NearOrg.EcosystemPage',
       ecosystemCommunityPage: 'discom.testnet/widget/NearOrg.Ecosystem.CommunityPage',
       ecosystemGetFundingPage: 'discom.testnet/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'discom.testnet/widget/NearOrg.Ecosystem.OverviewPage',
       ecosystemWorkAndEarnPage: 'discom.testnet/widget/NearOrg.Ecosystem.WorkAndEarnPage',
-      footer: 'discom.testnet/widget/NearOrg.Footer',
       homePage: 'discom.testnet/widget/NearOrg.HomePage',
-      learningLinks: 'discom.testnet/widget/NearOrg.LearningLinks',
-      usePage: 'discom.testnet/widget/NearOrg.UsePage',
       notifications: {
         page: 'discom.testnet/widget/NearOrg.Notifications.Notifications',
         alert: 'discom.testnet/widget/NearOrg.Notifications.NotificationAlert',
@@ -79,6 +76,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         button: 'discom.testnet/widget/NearOrg.Notifications.NotificationButton',
         iosHomeScreenAlert: 'discom.testnet/widget/NearOrg.Notifications.HomeScreenAlert',
       },
+      learnPage: 'discom.testnet/widget/NearOrg.LearnPage',
     },
     notificationButton: 'discom.testnet/widget/NotificationButton',
     peoplePage: 'discom.testnet/widget/PeoplePage',
@@ -112,14 +110,12 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     image: 'mob.near/widget/Image',
     nearOrg: {
       cookiePolicy: 'near/widget/NearOrg.CookiePolicy',
+      ecosystemPage: 'near/widget/NearOrg.EcosystemPage',
       ecosystemCommunityPage: 'near/widget/NearOrg.Ecosystem.CommunityPage',
       ecosystemGetFundingPage: 'near/widget/NearOrg.Ecosystem.GetFundingPage',
       ecosystemOverviewPage: 'near/widget/NearOrg.Ecosystem.OverviewPage',
       ecosystemWorkAndEarnPage: 'near/widget/NearOrg.Ecosystem.WorkAndEarnPage',
-      footer: 'near/widget/NearOrg.Footer',
       homePage: 'near/widget/NearOrg.HomePage',
-      learningLinks: 'near/widget/NearOrg.LearningLinks',
-      usePage: 'near/widget/NearOrg.UsePage',
       notifications: {
         page: 'near/widget/NearOrg.Notifications.Notifications',
         alert: 'near/widget/NearOrg.Notifications.NotificationAlert',
@@ -127,6 +123,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
         button: 'near/widget/NearOrg.Notifications.NotificationButton',
         iosHomeScreenAlert: 'near/widget/NearOrg.Notifications.HomeScreenAlert',
       },
+      learnPage: 'near/widget/NearOrg.LearnPage',
     },
     notificationButton: 'near/widget/NotificationButton',
     peoplePage: 'near/widget/PeoplePage',
