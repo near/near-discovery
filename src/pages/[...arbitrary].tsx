@@ -3,7 +3,6 @@
 const extendableRoutes: Record<string, string> = {
   about: 'https://pages.near.org/about',
   blog: 'https://pages.near.org/blog',
-  learn: 'https://pages.near.org/learn',
   papers: 'https://pages.near.org/papers',
 };
 
@@ -13,6 +12,7 @@ const extendableRoutes: Record<string, string> = {
 // on demand at runtime
 const extendableFallbacks: Record<string, string> = {
   ecosystem: 'https://pages.near.org/ecosystem',
+  learn: 'https://pages.near.org/learn',
 };
 
 const finiteRoutes: Record<string, string> = {
