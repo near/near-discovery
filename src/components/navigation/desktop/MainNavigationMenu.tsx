@@ -82,19 +82,21 @@ const NavContent = styled(NavigationMenu.Content)`
 `;
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 16px 0;
+  display: flex;
+  padding: 12px 0;
   transform-origin: center top;
   background: var(--white);
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.06);
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
+  max-height: calc(100dvh - var(--nav-height));
+  overflow: auto;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
 `;
 
 const NavLink = styled(NavigationMenu.Link)`
-  display: inline-block;
-  min-width: 120px;
+  display: block;
   padding: 7px 0;
   font: var(--text-s);
   color: var(--sand12);
@@ -106,6 +108,7 @@ const NavLink = styled(NavigationMenu.Link)`
   &:focus {
     color: var(--sand12);
     text-decoration: underline;
+    text-underline-offset: 2px;
   }
 `;
 
@@ -113,16 +116,13 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 24px 0;
-  gap: 24px;
-  border-right: 1px solid var(--sand4);
-
-  &:first-child:last-child {
-    border-right: none;
-  }
+  min-width: 200px;
 `;
 
 const CurrentComponentSection = styled.div`
-  padding: 0 24px 0;
+  padding: 0 24px;
+  margin: 5px 0;
+  border-left: 1px solid var(--sand4);
 `;
 
 const SectionTitle = styled.p`
@@ -149,21 +149,19 @@ export const MainNavigationMenu = () => {
 
                 <NavContent>
                   <Container>
-                    <Section>
-                      {category.sections.map((section) => (
-                        <div key={section.title}>
-                          {section.title && <SectionTitle>{section.title}</SectionTitle>}
+                    {category.sections.map((section) => (
+                      <Section key={section.title}>
+                        {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
-                          {section.links.map((link) => (
-                            <NavLink key={link.title} asChild>
-                              <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
-                                {link.title}
-                              </Link>
-                            </NavLink>
-                          ))}
-                        </div>
-                      ))}
-                    </Section>
+                        {section.links.map((link) => (
+                          <NavLink key={link.title} asChild>
+                            <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
+                              {link.title}
+                            </Link>
+                          </NavLink>
+                        ))}
+                      </Section>
+                    ))}
 
                     {currentComponentSrc && category.title === 'Develop' && (
                       <CurrentComponentSection>

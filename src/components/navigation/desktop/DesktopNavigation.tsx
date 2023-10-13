@@ -48,10 +48,11 @@ const Logo = styled.a`
   outline: none;
   margin-right: auto;
   transition: all 200ms;
+  border-radius: 4px;
 
-  &:hover,
   &:focus {
-    opacity: 0.5;
+    outline: 2px solid var(--violet4);
+    outline-offset: 0.3rem;
   }
 
   img {
