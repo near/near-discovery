@@ -12,7 +12,7 @@ const EcosystemCommunityPage: NextPageWithLayout = () => {
       meta={{
         title: 'NEAR | Join the Community',
         description:
-          'he NEAR community is a globally distributed home to builders, founders, and contributors. Get started supporting the Blockchain Operating System and protocol’s ecosystem of applications and experiences.',
+          'The NEAR community is a globally distributed home to builders, founders, and contributors. Get started supporting the Blockchain Operating System and protocol’s ecosystem of applications and experiences.',
       }}
     />
   );
