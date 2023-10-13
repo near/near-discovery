@@ -37,7 +37,6 @@ const Wrapper = styled.div<{
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100%;
   margin: 0 auto;
 `;
@@ -46,7 +45,6 @@ const Logo = styled.a`
   text-decoration: none;
   cursor: pointer;
   outline: none;
-  margin-right: auto;
   transition: all 200ms;
   border-radius: 4px;
 

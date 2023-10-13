@@ -11,11 +11,19 @@ import { navigationCategories } from '../navigation-categories';
 const Wrapper = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
   z-index: 1;
   flex-grow: 1;
   padding: 0 1rem;
   height: var(--nav-height);
+
+  @media (min-width: 1145px) {
+    // This center aligns the nav items in the center of the viewport on larger screens
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: min-content;
+  }
 `;
 
 const NavRoot = styled(NavigationMenu.Root)`
