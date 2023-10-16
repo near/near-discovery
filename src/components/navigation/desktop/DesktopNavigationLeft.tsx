@@ -303,7 +303,7 @@ export const DesktopNavigationLeft = () => {
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets','Arbitrum.Lending'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets', 'Arbitrum.Lending'];
     } else if (name === 'bsc') {
       paths = ['bsc', 'Bsc.Swap.Dex'];
     } else if (name === 'polygon') {
@@ -428,31 +428,7 @@ export const DesktopNavigationLeft = () => {
               <Link className={`item ${isActive('warmup') ? 'active' : ''}`} onClick={closeMenu} href="/warmup">
                 Polygon zkEVM Warm up
               </Link>
-              {/* <div className={`${warmActive ? 'activeWhole' : ''}`}>
-                <div
-                  onClick={() => {
-                    setOpenWarm(!openWarm);
-                  }}
-                  className={`item ${warmActive ? 'active' : ''}`}
-                >
-                  Warm up
-                  <ArrowIcon
-                    className="arrow"
-                    style={{
-                      transform: openWarm ? 'rotate(180deg)' : '',
-                    }}
-                  ></ArrowIcon>
-                </div>
-                <div className={`${openWarm ? 'show' : 'hidden'}`}>
-                  <Link
-                    className={`item child-item ${isActive('warmup') ? 'active' : ''}`}
-                    href="/warmup"
-                    onClick={closeMenu}
-                  >
-                    Polygon zkEVM
-                  </Link>
-                </div>
-              </div> */}
+
               <div className={`${nearActive ? 'activeWhole' : ''}`}>
                 <div
                   onClick={() => {
@@ -678,7 +654,8 @@ export const DesktopNavigationLeft = () => {
                   }}
                 >
                   <div
-                    className={`item ${isActive('allChains') ||
+                    className={`item ${
+                      isActive('allChains') ||
                       isActive('near') ||
                       isActive('polygon-zkevm') ||
                       isActive('base') ||
@@ -694,9 +671,9 @@ export const DesktopNavigationLeft = () => {
                       isActive('avalanche') ||
                       isActive('linea') ||
                       isActive('metis')
-                      ? 'active'
-                      : ''
-                      }`}
+                        ? 'active'
+                        : ''
+                    }`}
                   >
                     <div className="icon">{templatesIcon}</div>
                   </div>
@@ -730,7 +707,7 @@ export const DesktopNavigationLeft = () => {
                       <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('metis') ? 'active' : ''} `} href="/metis">
-                      Metis(2)  <span className="newIcon">{newIcon}</span>
+                      Metis(2) <span className="newIcon">{newIcon}</span>
                     </Link>
                     <Link className={`item child-item ${isActive('near') ? 'active' : ''}`} href="/near">
                       NEAR(5)
