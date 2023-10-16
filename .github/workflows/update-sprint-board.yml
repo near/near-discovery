@@ -17,4 +17,4 @@ jobs:
         iteration-field: sprint
         iteration: last
         new-iteration: current
-        statuses: None,Selected,Blocked,Progress,In Review,To Do
+        statuses: None,Selected,Blocked,In Progress,In Review,Todo

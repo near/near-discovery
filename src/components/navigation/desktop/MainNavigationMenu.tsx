@@ -11,11 +11,19 @@ import { navigationCategories } from '../navigation-categories';
 const Wrapper = styled.div`
   position: relative;
   display: flex;
-  justify-content: center;
   z-index: 1;
   flex-grow: 1;
   padding: 0 1rem;
   height: var(--nav-height);
+
+  @media (min-width: 1145px) {
+    // This center aligns the nav items in the center of the viewport on larger screens
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    max-width: min-content;
+  }
 `;
 
 const NavRoot = styled(NavigationMenu.Root)`
@@ -63,7 +71,7 @@ const NavTrigger = styled(NavigationMenu.Trigger)`
 
 const NavContent = styled(NavigationMenu.Content)`
   position: absolute;
-  top: calc(100% - 1rem);
+  top: calc(100% - 1rem + 1px);
   left: 0;
   padding-top: 1rem;
   transform-origin: center top;
@@ -82,21 +90,24 @@ const NavContent = styled(NavigationMenu.Content)`
 `;
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  padding: 16px 0;
+  display: flex;
+  padding: 12px 0;
   transform-origin: center top;
   background: var(--white);
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-  clip-path: inset(0px -100px -100px -100px);
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.06);
+  border-bottom-left-radius: 2px;
+  border-bottom-right-radius: 2px;
+  max-height: calc(100dvh - var(--nav-height));
+  overflow: auto;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
 `;
 
 const NavLink = styled(NavigationMenu.Link)`
-  display: inline-block;
-  min-width: 120px;
+  display: block;
   padding: 7px 0;
   font: var(--text-s);
-  color: var(--sand10);
+  color: var(--sand12);
   transition: color 200ms;
   white-space: nowrap;
   outline: none;
@@ -105,6 +116,7 @@ const NavLink = styled(NavigationMenu.Link)`
   &:focus {
     color: var(--sand12);
     text-decoration: underline;
+    text-underline-offset: 2px;
   }
 `;
 
@@ -112,23 +124,21 @@ const Section = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 24px 0;
-  gap: 24px;
-  border-right: 1px solid var(--sand4);
-
-  &:first-child:last-child {
-    border-right: none;
-  }
+  min-width: 200px;
 `;
 
 const CurrentComponentSection = styled.div`
-  padding: 0 24px 0;
+  padding: 0 24px;
+  margin: 5px 0;
+  border-left: 1px solid var(--sand4);
 `;
 
 const SectionTitle = styled.p`
-  font: var(--text-s);
-  color: var(--sand12);
-  font-weight: 600;
-  padding: 7px 0;
+  font: var(--text-xs);
+  color: var(--sand10);
+  font-weight: 450;
+  padding: 12px 0;
+  letter-spacing: 0.24px;
   margin: 0;
 `;
 
@@ -147,21 +157,19 @@ export const MainNavigationMenu = () => {
 
                 <NavContent>
                   <Container>
-                    <Section>
-                      {category.sections.map((section) => (
-                        <div key={section.title}>
-                          {section.title && <SectionTitle>{section.title}</SectionTitle>}
+                    {category.sections.map((section) => (
+                      <Section key={section.title}>
+                        {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
-                          {section.links.map((link) => (
-                            <NavLink key={link.title} asChild>
-                              <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
-                                {link.title}
-                              </Link>
-                            </NavLink>
-                          ))}
-                        </div>
-                      ))}
-                    </Section>
+                        {section.links.map((link) => (
+                          <NavLink key={link.title} asChild>
+                            <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
+                              {link.title}
+                            </Link>
+                          </NavLink>
+                        ))}
+                      </Section>
+                    ))}
 
                     {currentComponentSrc && category.title === 'Develop' && (
                       <CurrentComponentSection>
