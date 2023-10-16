@@ -10574,7 +10574,6 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
-
   github.com/NearSocial/VM/32a404f19063eb53e907980bbfc56601fb608e8a(@babel/core@7.23.0)(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.0)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
     resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/32a404f19063eb53e907980bbfc56601fb608e8a}
     id: github.com/NearSocial/VM/32a404f19063eb53e907980bbfc56601fb608e8a
