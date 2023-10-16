@@ -14,6 +14,7 @@ const wcV2InitOptions: any = {
   version: 2,
   projectId: '72b7b3359ab477e339a070f615806aa6',
   requiredChains: [1, 56],
+  dappUrl: "https://near.org"
 };
 
 const walletConnect = walletConnectModule(wcV2InitOptions);
