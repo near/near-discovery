@@ -57,18 +57,18 @@ const NOTIFICATIONS_SCHEMA = {
   },
 };
 
-const getOptions = ({ path, id }) => ({
+const getOptions = ({ path = '', id }) => ({
   body: '',
   icon: './favicon.png',
   tag: id,
   timestamp: Date.now(),
   data: {
-    path: getPath({}),
+    path: getPath(path),
   },
 });
 
-const getPath = ({ path }) => {
-  return `http://near.org/notifications/${path || ''}`;
+const getPath = (path) => {
+  return `http://near.org/notifications/${path}`;
 };
 
 // TODO: Add error handling if data will not match
