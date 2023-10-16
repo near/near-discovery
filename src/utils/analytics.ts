@@ -162,7 +162,7 @@ export function recordEvent(eventLabel: string) {
 function getComponentName(element: HTMLElement | null): string {
   if (!element) return '';
   if (element.hasAttribute('data-component')) return element.getAttribute('data-component') || '';
-  return ''
+  return '';
 }
 
 function getXPath(element: HTMLElement | null): string {
