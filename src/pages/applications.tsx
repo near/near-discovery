@@ -8,11 +8,8 @@ const ApplicationsPage: NextPageWithLayout = () => {
 
   return (
     <ComponentWrapperPage
-      src={components.componentsPage}
-      componentProps={{
-        tab: 'apps',
-      }}
-      meta={{ title: 'Applications built on the BOS', description: 'BOS Applications' }}
+      src={components.applicationsPage}
+      meta={{ title: 'NEAR | Applications', description: 'Featured applications built on NEAR' }}
     />
   );
 };

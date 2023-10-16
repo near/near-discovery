@@ -1,6 +1,7 @@
 import type { NetworkId } from '@/utils/types';
 
 type NetworkComponents = {
+  applicationsPage: string;
   bosDirectory: string;
   componentSummary: string;
   componentsPage: string;
@@ -50,6 +51,7 @@ type NetworkComponents = {
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
   // localnet: undefined,
   testnet: {
+    applicationsPage: 'discom.testnet/widget/AppLibrary.IndexPage',
     bosDirectory: 'one.testnet/widget/BOSDirectory',
     componentSummary: 'discom.testnet/widget/ComponentSummary',
     componentsPage: 'discom.testnet/widget/ComponentsPage',
@@ -97,6 +99,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
   },
 
   mainnet: {
+    applicationsPage: 'near/widget/AppLibrary.IndexPage',
     bosDirectory: 'onboarder.near/widget/BOSDirectory',
     componentSummary: 'near/widget/ComponentSummary',
     componentsPage: 'near/widget/ComponentsPage',
