@@ -161,7 +161,7 @@ export function recordEvent(eventLabel: string) {
 
 function getComponentName(element: HTMLElement | null): string {
   if (!element) return '';
-  if (element.hasAttribute('data-key')) return element.getAttribute('data-key') || '';
+  if (element.hasAttribute('data-component')) return element.getAttribute('data-component') || '';
   return ''
 }
 
