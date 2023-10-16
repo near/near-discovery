@@ -31,13 +31,12 @@ const Wrapper = styled.div<{
   right: 0;
   background-color: white;
   height: var(--nav-height);
-  box-shadow: ${(p) => (p.scrolled ? '0 1px 0 var(--sand6)' : 'none')};
+  box-shadow: 0 1px 0 var(--sand6);
 `;
 
 const Container = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 100%;
   margin: 0 auto;
 `;
@@ -46,12 +45,12 @@ const Logo = styled.a`
   text-decoration: none;
   cursor: pointer;
   outline: none;
-  margin-right: auto;
   transition: all 200ms;
+  border-radius: 4px;
 
-  &:hover,
   &:focus {
-    opacity: 0.5;
+    outline: 2px solid var(--violet4);
+    outline-offset: 0.3rem;
   }
 
   img {

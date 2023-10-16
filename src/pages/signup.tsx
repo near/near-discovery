@@ -152,6 +152,7 @@ const SignUpPage: NextPageWithLayout = () => {
                 message: 'Please enter a valid email address',
               },
             })}
+            autoCapitalize="off"
             onChange={(e) => {
               clearErrors('email');
               setValue('email', e.target.value);
@@ -171,6 +172,7 @@ const SignUpPage: NextPageWithLayout = () => {
         <InputContainer>
           <label htmlFor="username">Account ID</label>
           <input
+            autoCapitalize="off"
             autoComplete="webauthn username"
             {...register('username', {
               required: 'Please enter a valid account ID',
