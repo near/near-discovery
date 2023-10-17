@@ -240,7 +240,7 @@ const Uniswap: NextPageWithLayout = () => {
             }}
           >
             <img src={sourceIcon} alt="" />
-            Source
+            View Code
           </div>
           <div className="top-login-select">
             <div className="select-item-wrapper" onClick={handleSelectItemClick}>
