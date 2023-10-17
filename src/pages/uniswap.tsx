@@ -234,7 +234,7 @@ const Uniswap: NextPageWithLayout = () => {
             className="top-login-Source"
             onClick={() => {
               window.open(
-                'https://alpha.dapdap.net/near/widget/ComponentDetailsPage?src=dapdapbos.near/widget/Uniswap.Swap.Dex&tab=source',
+                'https://near.social/near/widget/ComponentDetailsPage?src=dapdapbos.near/widget/Uniswap.Swap.Dex&tab=source',
                 '_blank',
               );
             }}
