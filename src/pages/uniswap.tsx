@@ -7,6 +7,7 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useEthersProviderContext } from '@/data/web3';
 import { ethers } from 'ethers';
+import { useSetChain } from '@web3-onboard/react';
 
 const formateAddress = (address: string) => {
   if (address.indexOf('.near') > -1) return address;
@@ -23,13 +24,21 @@ const Uniswap: NextPageWithLayout = () => {
   };
 
   const [sender, setSender] = useState<string>('');
-  console.log('sender: ', sender);
 
   const ethersProviderContext = useEthersProviderContext();
 
   const { provider, useConnectWallet } = ethersProviderContext;
 
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+
+  const [
+    {
+      chains, // the list of chains that web3-onboard was initialized with
+      connectedChain, // the current chain the user's wallet is connected to
+      settingChain, // boolean indicating if the chain is in the process of being set
+    },
+    setChain, // function to call to initiate user to switch chains in their wallet
+  ] = useSetChain();
 
   useEffect(() => {
     if (!wallet || !provider) return;
@@ -205,6 +214,14 @@ const Uniswap: NextPageWithLayout = () => {
       chainId: 42220,
     },
   ];
+
+  useEffect(() => {
+    if (connectedChain) {
+      const findSelectedIndex = popupsData.findIndex((item) => item.chainId === eval(connectedChain.id));
+
+      setSelectedItem(findSelectedIndex);
+    }
+  }, [connectedChain]);
 
   return (
     <>
