@@ -55,6 +55,7 @@ type NetworkComponents = {
   zkSync: string;
   avalanche: string;
   optimism: string;
+  uniswap: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -113,6 +114,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     zkSync: 'bluebiu.near/widget/zkSync.Dapps',
     avalanche: 'bluebiu.near/widget/Avalanche.Dapps',
     optimism: 'bluebiu.near/widget/Optimism.Dapps',
+    uniswap: 'dapdapbos.near/widget/Uniswap.Swap.Dex',
   },
 
   mainnet: {
@@ -170,5 +172,6 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     zkSync: 'bluebiu.near/widget/zkSync.Dapps',
     avalanche: 'bluebiu.near/widget/Avalanche.Dapps',
     optimism: 'bluebiu.near/widget/Optimism.Dapps',
+    uniswap: 'dapdapbos.near/widget/Uniswap.Swap.Dex',
   },
 };

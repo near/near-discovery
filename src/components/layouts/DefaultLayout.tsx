@@ -23,6 +23,7 @@ const Layout = styled.div`
     position: relative;
 
     width: calc(100vw - 300px);
+    height: 100vh;
     .tab {
       margin-bottom: 80px;
     }
@@ -71,8 +72,8 @@ const SPECIAL_URL_MAP: { [key: string]: string } = {
   'Linea.Swap.Dex': '/linea',
   'Gnosis.Swap.Dex': '/gnosis',
   'ZkSync.Swap.Dex': '/zkSync',
-   'Avalanche.Swap.Dex': '/avalanche',
-   'Optimism.Swap.Dex': '/optimism',
+  'Avalanche.Swap.Dex': '/avalanche',
+  'Optimism.Swap.Dex': '/optimism',
 };
 
 export function DefaultLayout({ children }: Props) {
@@ -139,9 +140,10 @@ export function DefaultLayout({ children }: Props) {
 
   return (
     <Layout>
-      <DesktopNavigationLeft />
+      {pathName !== '/uniswap' && <DesktopNavigationLeft />}
+
       <div className="content">
-        {showTab && (
+        {pathName !== '/uniswap' && showTab && (
           <div className="tab">
             <VmComponent
               src={components.tabNavigation}
