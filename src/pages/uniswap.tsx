@@ -294,8 +294,10 @@ const Uniswap: NextPageWithLayout = () => {
       </TopContent>
 
       <ComponentWrapperPage
+        componentProps={{
+          chainId: connectedChain ? eval(connectedChain.id) : 1,
+        }}
         src={components.uniswap || ''}
-        // meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
       />
     </>
   );
