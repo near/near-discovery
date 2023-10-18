@@ -219,6 +219,8 @@ const Uniswap: NextPageWithLayout = () => {
     if (connectedChain) {
       const findSelectedIndex = popupsData.findIndex((item) => item.chainId === eval(connectedChain.id));
 
+      if (findSelectedIndex === -1) return;
+
       setSelectedItem(findSelectedIndex);
     }
   }, [connectedChain]);
@@ -246,7 +248,9 @@ const Uniswap: NextPageWithLayout = () => {
             <div className="select-item-wrapper" onClick={handleSelectItemClick}>
               <div
                 className="selsect-item-img"
-                style={{ backgroundColor: selectedItem !== null ? popupsData[selectedItem].bgColor : 'transparent' }}
+                style={{
+                  backgroundColor: selectedItem !== null ? popupsData[selectedItem].bgColor : 'transparent',
+                }}
               >
                 {selectedItem !== null && <img src={popupsData[selectedItem].icon} alt="" />}
               </div>
