@@ -1,3 +1,4 @@
+import type { idOS } from '@idos-network/idos-sdk';
 import type Big from 'big.js';
 import { create } from 'zustand';
 
@@ -11,6 +12,7 @@ type AuthState = {
   requestSignMessage: (data: string) => void;
   signedIn: boolean;
   vmNear: any;
+  idOS: idOS | null;
 };
 
 type AuthStore = AuthState & {
@@ -28,4 +30,5 @@ export const useAuthStore = create<AuthStore>((set) => ({
   signedIn: false,
   set: (state) => set((previousState) => ({ ...previousState, ...state })),
   vmNear: null,
+  idOS: null,
 }));

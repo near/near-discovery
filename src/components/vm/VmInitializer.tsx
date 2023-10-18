@@ -1,4 +1,5 @@
 import { sanitizeUrl } from '@braintree/sanitize-url';
+import type { idOS } from '@idos-network/idos-sdk';
 import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
@@ -32,6 +33,7 @@ import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
 import { networkId, signInContractId } from '@/utils/config';
+import { idOSInit } from '@/utils/idOS';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 export default function VmInitializer() {
@@ -39,6 +41,7 @@ export default function VmInitializer() {
   const [signedAccountId, setSignedAccountId] = useState(null);
   const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
   const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(null);
+  const [idOS, setIdOS] = useState<idOS | null>(null);
   const ethersProviderContext = useEthersProviderContext();
   const { initNear } = useInitNear();
   const near = useNear();
@@ -48,6 +51,27 @@ export default function VmInitializer() {
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
+
+  const init = useCallback(async () => {
+    const idos = await idOSInit();
+    // const wallet = await (await near.selector).wallet();
+    // console.log("wallet: ", wallet);
+    // try {
+    //   await idos?.auth.setNearSigner(wallet); // a WalletSelector.Wallet
+    //   await idos?.crypto.init();
+    // } catch (error: any) {
+    //   console.error('Failed to set signer: ', error);
+    // }
+    if (idos) {
+      setIdOS(idos);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (accountId && near && near.selector) {
+      init();
+    }
+  }, [accountId, init, near]);
 
   useEffect(() => {
     initNear &&
@@ -203,6 +227,7 @@ export default function VmInitializer() {
       requestSignMessage,
       vmNear: near,
       signedIn,
+      idOS,
     });
   }, [
     account,
@@ -215,6 +240,7 @@ export default function VmInitializer() {
     signedAccountId,
     setAuthStore,
     near,
+    idOS,
   ]);
 
   useEffect(() => {
