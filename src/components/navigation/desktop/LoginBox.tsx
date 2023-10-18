@@ -424,21 +424,21 @@ export const LoginBox = () => {
         'ZKEVM-all-in-one',
       ];
     } else if (name === 'base') {
-      paths = ['base', 'Base.BaseDex'];
+      paths = ['base', 'Base.BaseDex','Base.Lending'];
     } else if (name === 'mantle') {
-      paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA'];
+      paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA','Mantle.Lending'];
     } else if (name === 'arbitrum') {
       paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle','Arbitrum.Lending'];
     } else if (name === 'bsc') {
-      paths = ['bsc', 'Bsc.Swap.Dex'];
+      paths = ['bsc', 'Bsc.Swap.Dex','Bsc.Lending'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Liquidity.GAMMA'];
-    } else if (name === 'polygon') {
-      paths = ['polygon', 'Polygon.Swap.Dex'];
+      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Liquidity.GAMMA','Linea.Lending'];
+    } else if (name === 'polygon') { 
+      paths = ['polygon', 'Polygon.Swap.Dex','Polygon.Lending'];
     } else if (name === 'metis') {
       paths = ['metis', 'Metis.Swap.Dex'];
     } else if (name === 'gnosis') {
-      paths = ['gnosis', 'Gnosis.Swap.Dex'];
+      paths = ['gnosis', 'Gnosis.Swap.Dex','Gnosis.Lending'];
     } else if (name === 'zkSync') {
       paths = ['zkSync', 'zkSync.Swap.Dex'];
     }else if (name === 'avalanche') {
