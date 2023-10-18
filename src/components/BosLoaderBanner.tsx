@@ -40,12 +40,15 @@ export function BosLoaderBanner() {
 
   return (
     <Banner>
-      <div>
+      <div className="mx-2">
         <p>Loading components from: {redirectMapStore.loaderUrl}</p>
         {redirectMapStore.failedToLoad && (
           <p style={{ color: 'red' }}>
             BOS Loader fetch error, see console logs. CORS errors may be misleading and mean your endpoint cannot be
-            reached
+            reached. Check your{' '}
+            <a href="https://github.com/near/bos-loader/blob/main/README.md#compatibility" target="_blank">
+              browser compatibility
+            </a>
           </p>
         )}
       </div>
