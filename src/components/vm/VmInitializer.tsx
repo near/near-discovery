@@ -55,6 +55,9 @@ export default function VmInitializer() {
   const init = useCallback(async () => {
     const idos = await idOSInit();
     // const wallet = await (await near.selector).wallet();
+    // if (!wallet) {
+    //   return;
+    // }
     // console.log("wallet: ", wallet);
     // try {
     //   await idos?.auth.setNearSigner(wallet); // a WalletSelector.Wallet
