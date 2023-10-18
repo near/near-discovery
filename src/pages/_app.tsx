@@ -132,6 +132,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       {getLayout(<Component {...pageProps} />)}
 
       <Toaster />
+
+      <div id="idos_container" style={{ width: '150px', height: '30px', margin: 0, padding: 0 }} />
     </>
   );
 }
