@@ -15,6 +15,73 @@ const formateAddress = (address: string) => {
   return address.slice(0, 6) + '...' + address.slice(-6);
 };
 
+const popupsData = [
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreib2xwrmfnnwcuvtuixlucdlrdwaltjthvc7uspsmjt4nfnlnes364',
+    bgColor: '#353E63',
+    text: 'Ethereum',
+    chainId: 1,
+    rpcUrl: 'https://rpc.ankr.com/eth',
+
+    blockExplorerUrls: ['https://etherscan.io/'],
+  },
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreigqoy6czilxyuo3hkdfbayvwfxvf6qz67wiiom5laidqpb3f4eh2y',
+    bgColor: '#284A6C',
+    text: 'Arbitrum',
+    chainId: 42161,
+    rpcUrl: 'https://arb1.arbitrum.io/rpc',
+
+    blockExplorerUrls: ['https://arbiscan.io/'],
+  },
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreicu6zq3j22j5626ymafngaeqdzpo72w3nt2tgkebmbpoylc7y2bjy',
+    bgColor: '#57392F',
+    text: 'Optimism',
+    chainId: 10,
+    rpcUrl: 'https://rpc.ankr.com/optimism',
+
+    blockExplorerUrls: ['https://optimistic.etherscan.io/'],
+  },
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreifdzdcxsmntauvxdejkewxoyqns3xbmsvgappnef3fcxxpbjfq5pq',
+    bgColor: '#442D66',
+    text: 'Polygon',
+    chainId: 137,
+    rpcUrl: 'https://rpc.ankr.com/polygon',
+
+    blockExplorerUrls: ['https://polygonscan.com/'],
+  },
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreidnp2h5uuix552e2nh4ynbcxlgv4n4bvxiite7u3cles5f6dkacfm',
+    bgColor: '#24376B',
+    text: 'Base',
+    chainId: 8453,
+    rpcUrl: 'https://mainnet.base.org',
+
+    blockExplorerUrls: ['https://explorer.baseprotocol.org/'],
+  },
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreiah7oxcpgdrnmfgpzbozwgvivvr26cqwzlfy6yjpm5qtzjjc2tvvu',
+    bgColor: '#554D42',
+    text: 'BNB Chain',
+    chainId: 56,
+    rpcUrl: 'https://bsc.publicnode.com',
+    blockExplorerUrls: ['https://bscscan.com/'],
+    token: 'BNB',
+  },
+
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreieredwbwk6u7coh3iarekx2p2zlvbkq6twkktrtfcb3l3r7j2du2e',
+    bgColor: '#565B49',
+    text: 'Celo',
+    chainId: 42220,
+    rpcUrl: 'https://rpc.ankr.com/celo',
+
+    blockExplorerUrls: ['https://explorer.celo.org/mainnet/'],
+  },
+];
+
 const Uniswap: NextPageWithLayout = () => {
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
   const [selectedItem, setSelectedItem] = useState<number | null>(0);
@@ -56,7 +123,27 @@ const Uniswap: NextPageWithLayout = () => {
   const handleItemClick = ({ index, chainId }: { index: number; chainId: number }) => {
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
 
-    etherProvider.send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }]);
+    etherProvider
+      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }])
+      .catch((err) => {
+        const chain = {
+          chainId: `0x${Number(chainId).toString(16)}`,
+          chainName: popupsData[index].text,
+          nativeCurrency: popupsData[index].token
+            ? { name: popupsData[index].token, symbol: popupsData[index].token, decimals: 18 }
+            : {
+                name: 'Ethereum',
+                symbol: 'ETH',
+                decimals: 18,
+              },
+          rpcUrls: [popupsData[index].rpcUrl],
+          blockExplorerUrls: popupsData[index].blockExplorerUrls,
+        };
+
+        if (err.code === 4902) {
+          etherProvider.send('wallet_addEthereumChain', [chain]);
+        }
+      });
 
     setSelectedItem(index);
     setIsSelectItemClicked(false);
@@ -168,52 +255,6 @@ const Uniswap: NextPageWithLayout = () => {
   const sourceIcon = 'https://ipfs.near.social/ipfs/bafkreihz27oqiw4djztfrsvmjnxcv7zfgiztdqzlkpo5jdejxpt2nybu54';
 
   const checkMark = 'https://ipfs.near.social/ipfs/bafkreibrxtpffmzoe46yg3qbt3pivpukf5ne4zra73g6blxofkpowlmupm';
-
-  const popupsData = [
-    {
-      icon: 'https://ipfs.near.social/ipfs/bafkreib2xwrmfnnwcuvtuixlucdlrdwaltjthvc7uspsmjt4nfnlnes364',
-      bgColor: '#353E63',
-      text: 'Ethereum',
-      chainId: 1,
-    },
-    {
-      icon: 'https://ipfs.near.social/ipfs/bafkreigqoy6czilxyuo3hkdfbayvwfxvf6qz67wiiom5laidqpb3f4eh2y',
-      bgColor: '#284A6C',
-      text: 'Arbitrum',
-      chainId: 42161,
-    },
-    {
-      icon: 'https://ipfs.near.social/ipfs/bafkreicu6zq3j22j5626ymafngaeqdzpo72w3nt2tgkebmbpoylc7y2bjy',
-      bgColor: '#57392F',
-      text: 'Optimism',
-      chainId: 10,
-    },
-    {
-      icon: 'https://ipfs.near.social/ipfs/bafkreifdzdcxsmntauvxdejkewxoyqns3xbmsvgappnef3fcxxpbjfq5pq',
-      bgColor: '#442D66',
-      text: 'Polygon',
-      chainId: 137,
-    },
-    {
-      icon: 'https://ipfs.near.social/ipfs/bafkreidnp2h5uuix552e2nh4ynbcxlgv4n4bvxiite7u3cles5f6dkacfm',
-      bgColor: '#24376B',
-      text: 'Base',
-      chainId: 8453,
-    },
-    {
-      icon: 'https://ipfs.near.social/ipfs/bafkreiah7oxcpgdrnmfgpzbozwgvivvr26cqwzlfy6yjpm5qtzjjc2tvvu',
-      bgColor: '#554D42',
-      text: 'BNB Chain',
-      chainId: 56,
-    },
-
-    {
-      icon: 'https://ipfs.near.social/ipfs/bafkreieredwbwk6u7coh3iarekx2p2zlvbkq6twkktrtfcb3l3r7j2du2e',
-      bgColor: '#565B49',
-      text: 'Celo',
-      chainId: 42220,
-    },
-  ];
 
   useEffect(() => {
     if (connectedChain) {
