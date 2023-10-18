@@ -18,26 +18,16 @@ pnpm dev
 
 ## Local Component Development
 
-1. Run an instance of a component server like [near/bos-loader](https://github.com/near/bos-loader) which serves component code in the following format
+To start local component development you need to follow this steps:
 
-   ```json
-   {
-     "components": {
-       "<component path 1>": {
-         "code": "<component 1 code>"
-       },
-       "<component path 2>": {
-         "code": "<component 2 code>"
-       }
-     }
-   }
-   ```
+1. Run commands as mentioned in [Setup & Development](#setup--development).
 
-   this will be used as a `redirectMap` in `ViewPage`
+2. Navigate to [near-discovery-components](https://github.com/near/near-discovery-components) and follow [Local development with BOS-Loader](https://github.com/near/near-discovery-components/blob/develop/CONTRIBUTING.md#local-development-with-bos-loader) section.
 
-2. Open the `/flags` route of your viewer and set the BOS Loader URL e.g. `http://127.0.0.1:3030`
+3. *(optional)* Make a copy of `".env.example"` called `".env.local"`. **`NEXT_PUBLIC_NETWORK_ID`** allows you to choose working environment.
 
-Note: there is no hot reload, you must refresh the page to see component changes
+*Note:* The **`NEXT_PUBLIC_NETWORK_ID`** value should be the same as chosen working environment in `near-discovery-components`. More about [environments](https://github.com/near/near-discovery-components/blob/develop/CONTRIBUTING.md#testing-across-multiple-environments).
+
 
 ## Local VM Development
 
