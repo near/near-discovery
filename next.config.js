@@ -21,6 +21,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/docs',
+        destination: 'https://docs.near.org',
+        permanent: true,
+      },
+      {
         source: '/ethcc',
         destination: 'https://www.eventbrite.com/e/near-ethcc-tickets-655229297467',
         permanent: false,
