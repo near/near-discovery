@@ -54,27 +54,14 @@ export default function VmInitializer() {
 
   const init = useCallback(async () => {
     const idos = await idOSInit();
-    // const wallet = await (await near.selector).wallet();
-    // if (!wallet) {
-    //   return;
-    // }
-    // console.log("wallet: ", wallet);
-    // try {
-    //   await idos?.auth.setNearSigner(wallet); // a WalletSelector.Wallet
-    //   await idos?.crypto.init();
-    // } catch (error: any) {
-    //   console.error('Failed to set signer: ', error);
-    // }
     if (idos) {
       setIdOS(idos);
     }
   }, []);
 
   useEffect(() => {
-    if (accountId && near && near.selector) {
-      init();
-    }
-  }, [accountId, init, near]);
+    init();
+  }, [init]);
 
   useEffect(() => {
     initNear &&
