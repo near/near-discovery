@@ -250,7 +250,7 @@ const Uniswap: NextPageWithLayout = () => {
   `;
   const logoUrl = 'https://ipfs.near.social/ipfs/bafkreihjoszjyw5ebgi2uur7jbkykdowwixexlk5oy24y24mu2q3a45qkq';
 
-  const narrowUrl = 'https://ipfs.near.social/ipfs/bafkreif6pnnesttu7pgeu2bbfw57qthonizx2fgiwc5gyduiexvnonfcju';
+  const narrowUrl = 'https://ipfs.near.social/ipfs/bafkreien4qagdjuudb6yj53wutsj4f6zfodrgv4ztftzjgkvcdtjnjk564';
 
   const sourceIcon = 'https://ipfs.near.social/ipfs/bafkreihz27oqiw4djztfrsvmjnxcv7zfgiztdqzlkpo5jdejxpt2nybu54';
 

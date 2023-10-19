@@ -64,34 +64,23 @@ const Column: NextPageWithLayout = () => {
 
   const bgIcon = (
     <svg width="100%" height="100%" viewBox="0 0 375 245" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <g filter="url(#filter0_f_2081_5325)">
-        <path d="M187.5 80C98.306 80 26 118.056 26 165L349 165C349 118.056 276.694 80 187.5 80Z" fill="#0042C1" />
+      <g filter="url(#filter0_f_3785_11479)">
+        <path d="M187.5 80C98.306 80 26 118.056 26 165L349 165C349 118.056 276.694 80 187.5 80Z" fill="#60DFFF" />
       </g>
       <defs>
-        <filter
-          id="filter0_f_2081_5325"
-          x="-54"
-          y="0"
-          width="483"
-          height="245"
-          filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
-        >
+        <filter id="filter0_f_3785_11479" x="-54" y="0" width="483" height="245" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
           <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-          <feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_2081_5325" />
+          <feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_3785_11479" />
         </filter>
       </defs>
     </svg>
+
   );
 
   const logoIcon = (
-    <svg width="126" height="126" viewBox="0 0 126 126" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path
-        opacity="0.05"
-        d="M62.8912 126C97.7493 126 126 97.7989 126 63C126 28.2011 97.7493 0 62.8912 0C29.8195 0 2.69108 25.3833 0 57.6965H83.4236V68.292H0C2.69108 100.617 29.8195 126 62.8912 126Z"
-        fill="white"
-      />
+    <svg width="100%" height="126" viewBox="0 0 141 147" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path opacity="0.05" fill-rule="evenodd" clip-rule="evenodd" d="M115.707 49.129C129.273 49.129 140.271 38.1311 140.271 24.5645C140.271 10.9979 129.273 0 115.707 0C102.14 0 91.1423 10.9979 91.1423 24.5645C91.1423 38.1311 102.14 49.129 115.707 49.129ZM0.310547 21.7082H28.3027V120.537H115.707V146.244H0.310547V21.7082Z" fill="white" />
     </svg>
   );
 

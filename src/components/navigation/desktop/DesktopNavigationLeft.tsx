@@ -513,7 +513,7 @@ export const DesktopNavigationLeft = () => {
                     href="/metis"
                     onClick={closeMenu}
                   >
-                    Metis(1)
+                    Metis(2)
                     <span className="newIcon">{newIcon}</span>
                   </Link>
                   <Link
@@ -521,7 +521,7 @@ export const DesktopNavigationLeft = () => {
                     href="/near"
                     onClick={closeMenu}
                   >
-                    NEAR(4)
+                    NEAR(5)
                   </Link>
                   <Link
                     className={`item child-item ${isActive('optimism') ? 'active' : ''} `}
@@ -536,7 +536,7 @@ export const DesktopNavigationLeft = () => {
                     href="/polygon-zkevm"
                     onClick={closeMenu}
                   >
-                    Polygon zkEVM(5)
+                    Polygon zkEVM(6)
                   </Link>
                   <Link
                     className={`item child-item ${isActive('polygon') ? 'active' : ''} `}
