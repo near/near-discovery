@@ -1,3 +1,4 @@
+import { setupModal } from '@near-wallet-selector/modal-ui';
 import { useCallback, useEffect } from 'react';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
@@ -11,23 +12,36 @@ const SettingsPage: NextPageWithLayout = () => {
   const idOS = useAuthStore((store) => store.idOS);
   const near = useAuthStore((store) => store.vmNear);
 
-  console.log('settings | idOS: ', idOS);
+  // console.log('settings | idOS: ', idOS);
 
   const connectIdOS = useCallback(async () => {
-    if (!idOS) {
+    if (!near || !idOS) {
       return;
     }
-    const wallet = await (await near.selector).wallet();
-    if (!wallet) {
-      return;
-    }
-    console.log('wallet: ', wallet);
-    try {
-      await idOS?.auth.setNearSigner(wallet); // a WalletSelector.Wallet
-      await idOS?.crypto.init();
-    } catch (error: any) {
-      console.error('Failed to set signer: ', error);
-    }
+    // const contractId = idOS.grants.near.defaultContractId; // returns undefined
+    console.log('idOS init with selector: ', idOS);
+    console.log('near: ', near);
+    console.log('near.config.contractName: ', near.config.contractName);
+
+    near.selector.then((selector: any) => {
+      const selectorModal = setupModal(selector, {
+        contractId: near.config.contractName,
+        methodNames: idOS.grants.near.contractMethods,
+      });
+      selectorModal.on('onHide', async () => {
+        try {
+          // console.log("selectorModal: ", selectorModal);
+          const wallet = await selector.wallet();
+          console.log('wallet: ', wallet);
+          await idOS.auth.setNearSigner(wallet);
+          await idOS.crypto.init();
+          console.log('wallet selector + idOS is ready');
+        } catch (error) {
+          console.error('Failed to init wallet + idOS: ', error);
+        }
+      });
+      selectorModal.show();
+    });
   }, [idOS, near]);
 
   const getUserInfo = useCallback(async () => {
@@ -44,9 +58,9 @@ const SettingsPage: NextPageWithLayout = () => {
     }
   }, [idOS]);
 
-  useEffect(() => {
-    getUserInfo();
-  }, [getUserInfo]);
+  // useEffect(() => {
+  //   getUserInfo();
+  // }, [getUserInfo]);
 
   return (
     <ComponentWrapperPage
