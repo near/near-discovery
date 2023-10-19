@@ -213,6 +213,7 @@ const Uniswap: NextPageWithLayout = () => {
             justify-content: space-between;
             align-items: center;
             padding: 8px;
+            border-radius: 8px;
             .flex-grow {
               flex-grow: 1;
             }
@@ -230,9 +231,11 @@ const Uniswap: NextPageWithLayout = () => {
               color: #fff;
             }
           }
+          .select-popups-item:hover{
+            background: rgba(31, 35, 53, 0.5);
+          }
           .selected {
             background: rgba(31, 35, 53, 0.5);
-            border-radius: 8px;
           }
         }
       }
