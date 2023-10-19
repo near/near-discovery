@@ -49,6 +49,7 @@ const AllChainsColumn: NextPageWithLayout = () => {
     background-position: 48% 0;
     margin: -54px 0;
     padding: 54px 0;
+    height: auto;
     .top{
       padding: 0;
       height: 260px;
