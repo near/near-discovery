@@ -23,7 +23,9 @@ const Layout = styled.div`
     position: relative;
 
     width: calc(100vw - 300px);
-    height: 100vh;
+    height: 100%;
+    min-height: 100vh;
+
     .tab {
       margin-bottom: 80px;
     }
