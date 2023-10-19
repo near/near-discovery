@@ -11,9 +11,19 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/nearcon23.near/widget/Index',
+        destination: 'https://nearcon.app',
+        permanent: true,
+      },
+      {
         source: '/consensus',
         destination: 'https://nearconsensus2023.splashthat.com/',
         permanent: false,
+      },
+      {
+        source: '/docs',
+        destination: 'https://docs.near.org',
+        permanent: true,
       },
       {
         source: '/ethcc',
