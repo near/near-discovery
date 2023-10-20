@@ -44,6 +44,11 @@ type UserTosAgreement = {
   value: number;
 };
 
+export type IdosUser = {
+  humanId?: string;
+  address?: string;
+};
+
 // type DevelopmentNetwork = {
 //   networkId: 'localnet';
 //   viewAccountId: string;
