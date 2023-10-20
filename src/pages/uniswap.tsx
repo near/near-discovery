@@ -131,7 +131,7 @@ const popupsData = [
     text: 'Ethereum',
     chainId: 1,
     rpcUrl: 'https://rpc.ankr.com/eth',
-
+    token: 'ETH',
     blockExplorerUrls: ['https://etherscan.io/'],
   },
   {
@@ -139,8 +139,9 @@ const popupsData = [
     bgColor: '#284A6C',
     text: 'Arbitrum',
     chainId: 42161,
-    rpcUrl: 'https://arb1.arbitrum.io/rpc',
+    token: 'ETH',
 
+    rpcUrl: 'https://arb1.arbitrum.io/rpc',
     blockExplorerUrls: ['https://arbiscan.io/'],
   },
   {
@@ -148,8 +149,9 @@ const popupsData = [
     bgColor: '#57392F',
     text: 'Optimism',
     chainId: 10,
-    rpcUrl: 'https://rpc.ankr.com/optimism',
+    token: 'ETH',
 
+    rpcUrl: 'https://rpc.ankr.com/optimism',
     blockExplorerUrls: ['https://optimistic.etherscan.io/'],
   },
   {
@@ -158,7 +160,7 @@ const popupsData = [
     text: 'Polygon',
     chainId: 137,
     rpcUrl: 'https://rpc.ankr.com/polygon',
-
+    token: 'MATIC',
     blockExplorerUrls: ['https://polygonscan.com/'],
   },
   {
@@ -186,8 +188,18 @@ const popupsData = [
     text: 'Celo',
     chainId: 42220,
     rpcUrl: 'https://rpc.ankr.com/celo',
-
+    token: 'CELO',
     blockExplorerUrls: ['https://explorer.celo.org/mainnet/'],
+  },
+
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreiatkfaofvotv3zftmsjiveu2drdkzcyosdzhijynglo57ch35nwji',
+    bgColor: 'rgb(83,55,72)',
+    text: 'Avalanche',
+    chainId: 43114,
+    rpcUrl: 'https://rpc.ankr.com/avalanche',
+    token: 'AVAX',
+    blockExplorerUrls: ['https://snowtrace.io/'],
   },
 ];
 
