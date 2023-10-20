@@ -11,6 +11,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
+import { getClient } from '../../../../ldserver';
 
 type ComponentMetaPreview = {
   title: string;
@@ -72,11 +73,18 @@ export const getServerSideProps: GetServerSideProps<{
     };
   }
 
+  const client = await getClient();
+  const flags = await client.allFlagsState({
+    kind: 'machine',
+    key: 'vercel-for-static-deferred-pre-rendering',
+  });
+
   const meta = await fetchPreviewData(componentAccountId, componentName);
 
   return {
     props: {
       meta,
+      featureFlags: flags.toJSON(),
     },
   };
 };
