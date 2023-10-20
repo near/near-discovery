@@ -115,13 +115,17 @@ export default function VmInitializer() {
   }, [initNear]);
 
   useEffect(() => {
-    if (!near) {
+    if (!near || !idOS) {
       return;
     }
     near.selector.then((selector: any) => {
-      setWalletModal(setupModal(selector, { contractId: near.config.contractName }));
+      const selectorModal = setupModal(selector, {
+        contractId: near.config.contractName,
+        methodNames: idOS.grants.near.contractMethods,
+      });
+      setWalletModal(selectorModal);
     });
-  }, [near]);
+  }, [idOS, near]);
 
   const requestSignMessage = useCallback(
     async (message: string) => {
