@@ -50,7 +50,9 @@ type NetworkComponents = {
 
 export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | undefined> => {
   const testnetTLA =
-    process.env.NEXT_DISCOVERY_COMPONENTS_DEPLOYMENT_BRANCH === 'develop' ? 'discom-dev.testnet' : 'discom.testnet';
+    process.env.NEXT_PUBLIC_DISCOVERY_COMPONENTS_DEPLOYMENT_BRANCH === 'develop'
+      ? 'discom-dev.testnet'
+      : 'discom.testnet';
 
   return {
     testnet: {
