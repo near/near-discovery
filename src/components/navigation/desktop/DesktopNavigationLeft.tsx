@@ -295,31 +295,31 @@ export const DesktopNavigationLeft = () => {
         '0vix.Lending',
       ];
     } else if (name == 'base') {
-      paths = ['Base.BaseDex', 'base','Base.Lending'];
+      paths = ['Base.BaseDex', 'base','Base.Lending','Base.All-in-one'];
     } else if (name === 'mantle') {
-      paths = ['mantle', 'Mantle.Swap','Mantle.Lending'];
+      paths = ['mantle', 'Mantle.Swap','Mantle.Lending','Mantle.All-in-one'];
     } else if (name == 'warmup') {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets', 'Arbitrum.Lending'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets', 'Arbitrum.Lending','Arbitrum.All-in-one'];
     } else if (name === 'bsc') {
-      paths = ['bsc', 'Bsc.Swap.Dex','Bsc.Lending'];
+      paths = ['bsc', 'Bsc.Swap.Dex','Bsc.Lending','Bsc.All-in-one'];
     } else if (name === 'polygon') {
-      paths = ['polygon', 'Polygon.Swap.Dex','Polygon.Lending'];
+      paths = ['polygon', 'Polygon.Swap.Dex','Polygon.Lending','Polygon.All-in-one'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex','Linea.Lending'];
+      paths = ['linea', 'Linea.Swap.Dex','Linea.Lending','Linea.All-in-one'];
     } else if (name === 'metis') {
-      paths = ['metis', 'Metis.Swap.Dex'];
+      paths = ['metis', 'Metis.Swap.Dex','Metis.All-in-one'];
     } else if (name === 'gnosis') {
-      paths = ['gnosis', 'Gnosis.Swap.Dex','Gnosis.Lending'];
+      paths = ['gnosis', 'Gnosis.Swap.Dex','Gnosis.Lending','Gnosis.All-in-one'];
     } else if (name === 'zkSync') {
-      paths = ['zkSync', 'zkSync.Swap.Dex'];
+      paths = ['zkSync', 'zkSync.Swap.Dex','zkSync.All-in-one'];
     } else if (name === 'avalanche') {
-      paths = ['avalanche', 'Avalanche.Lending'];
+      paths = ['avalanche', 'Avalanche.Lending','Avalanche.All-in-one'];
     } else if (name === 'optimism') {
-      paths = ['optimism', 'Optimism.Lending'];
+      paths = ['optimism', 'Optimism.Lending','Optimism.All-in-one'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
