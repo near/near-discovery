@@ -17,7 +17,6 @@
     "dependencies": {
         "@braintree/sanitize-url": "6.0.0",
         "@keypom/selector": "1.2.3",
-        "@launchdarkly/node-server-sdk": "^9.0.1",
         "@monaco-editor/react": "^4.4.6",
         "@near-js/biometric-ed25519": "0.3.0",
         "@near-wallet-selector/core": "8.5.1",
@@ -51,7 +50,6 @@
         "eslint-config-next": "13.3.4",
         "firebase": "^9.19.1",
         "iframe-resizer-react": "^1.1.0",
-        "launchdarkly-react-client-sdk": "^3.0.9",
         "local-storage": "^2.0.0",
         "lodash": "^4.17.21",
         "near-fastauth-wallet": "^0.0.8",
