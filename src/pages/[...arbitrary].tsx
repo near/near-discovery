@@ -55,6 +55,7 @@ import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'ne
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import { getClient } from '../../ldserver';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -80,10 +81,17 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
     };
   }
 
+  const client = await getClient();
+  const flags = await client.allFlagsState({
+    kind: 'machine',
+    key: 'vercel-for-static-deferred-pre-rendering',
+  });
+
   if (finiteRoutes[context.params.arbitrary[0]]) {
     return {
       props: {
         url: finiteRoutes[context.params.arbitrary[0]],
+        featureFlags: flags.toJSON(),
       },
     };
   }
