@@ -11,7 +11,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
-import type { ComponentType } from 'react';
 
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
@@ -23,7 +22,6 @@ import { init as initializeAnalytics } from '@/utils/analytics';
 import { setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import { withLDProvider, useLDClient } from 'launchdarkly-react-client-sdk';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -33,7 +31,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-function App({ Component, pageProps }: AppPropsWithLayout) {
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
@@ -43,18 +41,12 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
   const authStore = useAuthStore();
   const componentSrc = router.query;
 
-  const featureFlagClient = useLDClient();
-
   useEffect(() => {
     setNotificationsSessionStorage();
   }, []);
 
   useEffect(() => {
     initializeAnalytics();
-  }, []);
-
-  useEffect(() => {
-    featureFlagClient?.identify({ key: localStorage.getItem('anonymousUserId') || '' });
   }, []);
 
   useEffect(() => {
@@ -143,13 +135,3 @@ function App({ Component, pageProps }: AppPropsWithLayout) {
     </>
   );
 }
-
-export default withLDProvider({
-  clientSideID: process.env.NEXT_PUBLIC_LAUNCHDARKLY_CLIENT_SDK || '62e1709a62f81c1133cf2f00',
-  reactOptions: {
-    useCamelCaseFlagKeys: false,
-  },
-  options: {
-    streaming: false,
-  },
-})(App as ComponentType);
