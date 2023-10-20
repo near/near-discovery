@@ -27,6 +27,7 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    environment: preview
     steps:
       - uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
@@ -38,6 +39,13 @@ jobs:
           cache: 'pnpm'
       - name: Install dependencies
         run: pnpm install
+      - name: Use variables
+        run: |
+          touch .env
+          echo LAUNCHDARKLY_NODE_SDK=${{ vars.LAUNCHDARKLY_NODE_SDK }} >> .env
+          echo "setting LAUNCHDARKLY_NODE_SDK variable"
+        env:
+          LAUNCHDARKLY_NODE_SDK: ${{ vars.LAUNCHDARKLY_NODE_SDK }}
       - name: Run lint check
         run: pnpm run build
 
