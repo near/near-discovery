@@ -214,6 +214,13 @@ export const UserDropdownMenu = () => {
             <i className="ph-duotone ph-user"></i>
             Profile
           </DropdownMenu.Item>
+          <DropdownMenu.Item
+            className="DropdownMenuItem"
+            onClick={() => router.push(`/settings`)}
+          >
+            <i className="ph ph-gear"></i>
+            Settings
+          </DropdownMenu.Item>
           <DropdownMenu.Item className="DropdownMenuItem" onClick={() => withdrawStorage()}>
             <i className="ph-duotone ph-bank"></i>
             {availableStorage && `Withdraw ${availableStorage.div(1000).toFixed(2)}kb`}
