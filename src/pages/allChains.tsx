@@ -17,8 +17,7 @@ const AllChainsColumn: NextPageWithLayout = () => {
    color:#ffffff;
    margin: -54px -36px;
    padding: 54px 36px;
-   height:100vh;
-   overflow: auto;
+   height: 100%;
    background-image: url(${pcBgIcon});
    background-repeat: no-repeat;
    background-position: 24% 0%;
