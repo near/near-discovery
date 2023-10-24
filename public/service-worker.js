@@ -116,8 +116,13 @@ const getNotificationOptions = ({ notificationType, ...rest }) => {
 
 self.addEventListener('install', (event) => console.log('SW - installing in progress.', event));
 
-self.addEventListener('activate', (event) => console.log('SW - activateing in progress.', event));
+self.addEventListener('activate', (event) => console.log('SW - activating in progress.', event));
 
 self.addEventListener('push', handlePushEvent);
 
 self.addEventListener('notificationclick', handlePushClick);
+
+// PWA Support
+self.addEventListener('fetch', (event) => {
+  event.respondWith(fetch(request));
+});
