@@ -1,9 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useIosDevice } from '@/hooks/useIosDevice';
 import { useAuthStore } from '@/stores/auth';
+import { useTermsOfServiceStore } from '@/stores/terms-of-service';
 import {
   handleOnCancel,
   handleTurnOn,
@@ -12,13 +14,13 @@ import {
 } from '@/utils/notifications';
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
 import { getNotificationLocalStorage, setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
-import type { TosData } from '@/utils/types';
 
-type Props = {
-  tosData: TosData | null;
-};
+const Wrapper = styled.div`
+  position: absolute;
+  color: transparent;
+`;
 
-export const NotificationsAlert = ({ tosData }: Props) => {
+export const NotificationsAlert = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const components = useBosComponents();
   const [showNotificationModalState, setShowNotificationModalState] = useState(false);
@@ -27,6 +29,7 @@ export const NotificationsAlert = ({ tosData }: Props) => {
   const [iosHomeScreenPrompt, setIosHomeScreenPrompt] = useState(false);
   const { isIosDevice, versionOfIos } = useIosDevice();
   const { showOnTS, subscribeStarted, subscribeError } = getNotificationLocalStorage() || {};
+  const tosData = useTermsOfServiceStore((store) => store.tosData);
 
   const handleModalCloseOnEsc = useCallback(() => {
     setShowNotificationModalState(false);
@@ -65,7 +68,7 @@ export const NotificationsAlert = ({ tosData }: Props) => {
       if (!subscribeError && showNotificationPrompt && tosAccepted && (!showOnTS || !iosHomeScreenPrompt)) {
         setTimeout(() => {
           setShowNotificationModalState(showNotificationPrompt);
-        }, 3000);
+        }, 4000);
       }
     }
   }, [tosData, subscribeError, showOnTS, iosHomeScreenPrompt]);
@@ -96,31 +99,35 @@ export const NotificationsAlert = ({ tosData }: Props) => {
   if (!signedIn) return null;
 
   return (
-    <>
-      <VmComponent
-        src={components.nearOrg.notifications.alert}
-        props={{
-          open: showNotificationModalState,
-          handleTurnOn: turnNotificationsOn,
-          handleOnCancel: pauseNotifications,
-          isNotificationSupported,
-          isPermisionGranted,
-          isPushManagerSupported,
-          setNotificationsSessionStorage,
-          onOpenChange: handleModalCloseOnEsc,
-          iOSDevice: isIosDevice,
-          iOSVersion: versionOfIos,
-          recomendedIOSVersion: recommendedIosVersionForNotifications,
-          loading: subscribeStarted,
-        }}
-      />
-      <VmComponent
-        src={components.nearOrg.notifications.iosHomeScreenAlert}
-        props={{
-          open: iosHomeScreenPrompt,
-          onOpenChange: handleHomeScreenClose,
-        }}
-      />
-    </>
+    <Wrapper>
+      {showNotificationModalState && (
+        <VmComponent
+          src={components.nearOrg.notifications.alert}
+          props={{
+            open: true,
+            handleTurnOn: turnNotificationsOn,
+            handleOnCancel: pauseNotifications,
+            isNotificationSupported,
+            isPermisionGranted,
+            isPushManagerSupported,
+            setNotificationsSessionStorage,
+            onOpenChange: handleModalCloseOnEsc,
+            iOSDevice: isIosDevice,
+            iOSVersion: versionOfIos,
+            recomendedIOSVersion: recommendedIosVersionForNotifications,
+            loading: subscribeStarted,
+          }}
+        />
+      )}
+      {iosHomeScreenPrompt && (
+        <VmComponent
+          src={components.nearOrg.notifications.iosHomeScreenAlert}
+          props={{
+            open: true,
+            onOpenChange: handleHomeScreenClose,
+          }}
+        />
+      )}
+    </Wrapper>
   );
 };
