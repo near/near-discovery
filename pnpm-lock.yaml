@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@braintree/sanitize-url':
     specifier: 6.0.0
@@ -113,8 +117,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   near-fastauth-wallet:
-    specifier: ^0.0.8
-    version: 0.0.8
+    specifier: ^0.0.9
+    version: 0.0.9
   near-social-vm:
     specifier: github:NearSocial/VM#2.5.1
     version: github.com/NearSocial/VM/32a404f19063eb53e907980bbfc56601fb608e8a(@babel/core@7.23.0)(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.0)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -8482,8 +8486,8 @@ packages:
       - encoding
     dev: false
 
-  /near-fastauth-wallet@0.0.8:
-    resolution: {integrity: sha512-Zye70+vz5BiXLslw13T/Rx0MQTjcwO/FQMZRdfTGMs0eNBO5zhBK/a7YpmDdFxOn3nCz7LRner8HVVVVGmbkFg==}
+  /near-fastauth-wallet@0.0.9:
+    resolution: {integrity: sha512-QdIj2SXHFJugpYMx5RuZL3Di63IrpRMa6BNE9tvOw+7Gcb1QbA1BSUmvji+SsUmcHKszz9G5+PnJxaD/8nRxLg==}
     dependencies:
       '@near-js/transactions': 0.2.1
       '@near-wallet-selector/core': 8.5.3(near-api-js@2.1.4)
@@ -10574,6 +10578,7 @@ packages:
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
+
   github.com/NearSocial/VM/32a404f19063eb53e907980bbfc56601fb608e8a(@babel/core@7.23.0)(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.0)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
     resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/32a404f19063eb53e907980bbfc56601fb608e8a}
     id: github.com/NearSocial/VM/32a404f19063eb53e907980bbfc56601fb608e8a
@@ -10656,7 +10661,3 @@ packages:
       - supports-color
       - utf-8-validate
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
