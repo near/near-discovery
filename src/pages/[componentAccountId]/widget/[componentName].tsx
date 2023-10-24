@@ -109,13 +109,12 @@ const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSideProps
             }}
           >
             <VmComponent
-              key={components.tosCheck}
-              src={components.tosCheck}
+              key={components.wrapper}
+              src={components.wrapper}
               props={{
                 logOut: authStore.logOut,
                 targetProps: componentProps,
                 targetComponent: componentSrc,
-                tosName: components.tosContent,
               }}
             />
           </div>
