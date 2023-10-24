@@ -4,7 +4,7 @@ import { VmComponent } from '@/components/vm/VmComponent';
 
 import { Layout, Tab } from '../utils/const';
 
-const Preview = ({ tab, layout, renderCode, jpath, parsedWidgetProps, isModule, widgets }) => (
+const Preview = ({ tab, layout, renderCode, jpath, parsedWidgetProps, isModule }) => (
   <div
     className={`${tab === Tab.Widget || (layout === Layout.Split && tab !== Tab.Metadata) ? '' : 'visually-hidden'}`}
   >
@@ -39,13 +39,7 @@ const Preview = ({ tab, layout, renderCode, jpath, parsedWidgetProps, isModule, 
                   margin: 0,
                 }}
               >
-                <VmComponent
-                  key={widgets.wrapper}
-                  src={widgets.wrapper}
-                  props={{
-                    children: <VmComponent key={`preview-${jpath}`} code={renderCode} props={parsedWidgetProps} />,
-                  }}
-                />
+                <VmComponent key={`preview-${jpath}`} code={renderCode} props={parsedWidgetProps} />
               </div>
             ) : (
               !isModule && (

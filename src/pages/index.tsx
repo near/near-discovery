@@ -1,6 +1,6 @@
 import { isPassKeyAvailable } from '@near-js/biometric-ed25519';
 import { useRouter } from 'next/router';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { openToast } from '@/components/lib/Toast';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
@@ -9,7 +9,8 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import type { NextPageWithLayout, TosData } from '@/utils/types';
+import { useTermsOfServiceStore } from '@/stores/terms-of-service';
+import type { NextPageWithLayout } from '@/utils/types';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 
@@ -19,10 +20,8 @@ const HomePage: NextPageWithLayout = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const components = useBosComponents();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
-  const authStore = useAuthStore();
-  const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
-  const [tosData, setTosData] = useState<TosData | null>(null);
-  const cachedTosData = useMemo(() => tosData, [tosData?.latestTosVersion]);
+  const logOut = useAuthStore((store) => store.logOut);
+  const setTosData = useTermsOfServiceStore((store) => store.setTosData);
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -34,13 +33,6 @@ const HomePage: NextPageWithLayout = () => {
       setComponentSrc(null);
     }
   }, [signedIn, setComponentSrc]);
-
-  useEffect(() => {
-    // If we are loading the ActivityPage, process the query params into componentProps
-    if (signedIn || signedInOptimistic) {
-      setComponentProps(router.query);
-    }
-  }, [router.query, signedIn, signedInOptimistic]);
 
   useEffect(() => {
     if (signedIn) {
@@ -60,15 +52,14 @@ const HomePage: NextPageWithLayout = () => {
   if (signedIn || signedInOptimistic) {
     return (
       <>
-        <NotificationsAlert tosData={cachedTosData} />
+        <NotificationsAlert />
 
         <ComponentWrapperPage
-          src={components.tosCheck}
+          src={components.wrapper}
           componentProps={{
-            logOut: authStore.logOut,
-            targetProps: componentProps,
+            logOut,
+            targetProps: router.query,
             targetComponent: components.default,
-            tosName: components.tosContent,
             recordToC: setTosData,
           }}
         />
