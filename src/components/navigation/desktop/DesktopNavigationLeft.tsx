@@ -295,31 +295,37 @@ export const DesktopNavigationLeft = () => {
         '0vix.Lending',
       ];
     } else if (name == 'base') {
-      paths = ['Base.BaseDex', 'base','Base.Lending','Base.All-in-one'];
+      paths = ['Base.BaseDex', 'base', 'Base.Lending', 'Base.All-in-one'];
     } else if (name === 'mantle') {
-      paths = ['mantle', 'Mantle.Swap','Mantle.Lending','Mantle.All-in-one'];
+      paths = ['mantle', 'Mantle.Swap', 'Mantle.Lending', 'Mantle.All-in-one'];
     } else if (name == 'warmup') {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets', 'Arbitrum.Lending','Arbitrum.All-in-one'];
+      paths = [
+        'arbitrum',
+        'Arbitrum.Swap.Dex',
+        'Arbitrum.Pendle.TradeMarkets',
+        'Arbitrum.Lending',
+        'Arbitrum.All-in-one',
+      ];
     } else if (name === 'bsc') {
-      paths = ['bsc', 'Bsc.Swap.Dex','Bsc.Lending','Bsc.All-in-one'];
+      paths = ['bsc', 'Bsc.Swap.Dex', 'Bsc.Lending', 'Bsc.All-in-one'];
     } else if (name === 'polygon') {
-      paths = ['polygon', 'Polygon.Swap.Dex','Polygon.Lending','Polygon.All-in-one'];
+      paths = ['polygon', 'Polygon.Swap.Dex', 'Polygon.Lending', 'Polygon.All-in-one'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex','Linea.Lending','Linea.All-in-one'];
+      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Lending', 'Linea.All-in-one'];
     } else if (name === 'metis') {
-      paths = ['metis', 'Metis.Swap.Dex','Metis.All-in-one'];
+      paths = ['metis', 'Metis.Swap.Dex', 'Metis.All-in-one'];
     } else if (name === 'gnosis') {
-      paths = ['gnosis', 'Gnosis.Swap.Dex','Gnosis.Lending','Gnosis.All-in-one'];
+      paths = ['gnosis', 'Gnosis.Swap.Dex', 'Gnosis.Lending', 'Gnosis.All-in-one'];
     } else if (name === 'zkSync') {
-      paths = ['zkSync', 'zkSync.Swap.Dex','zkSync.All-in-one'];
+      paths = ['zkSync', 'zkSync.Swap.Dex', 'zkSync.All-in-one'];
     } else if (name === 'avalanche') {
-      paths = ['avalanche', 'Avalanche.Lending','Avalanche.All-in-one'];
+      paths = ['avalanche', 'Avalanche.Lending', 'Avalanche.All-in-one'];
     } else if (name === 'optimism') {
-      paths = ['optimism', 'Optimism.Lending','Optimism.All-in-one'];
+      paths = ['optimism', 'Optimism.Lending', 'Optimism.All-in-one'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
@@ -913,6 +919,10 @@ export const DesktopNavigationLeft = () => {
                     </Link>
                   </div>
                 </div>
+                <Link className={`item ${router.asPath == '/portfolio' ? 'active' : ''}`} href="/portfolio">
+                  <div className="icon">{portfolioIcon}</div>Portfolio
+                  <span className="bag">{router.asPath == '/portfolio' ? visible_bag : null}</span>
+                </Link>
               </div>
             </div>
           )}
@@ -957,6 +967,15 @@ const zkevmIcon = (
         <rect width="20" height="20" fill="white" />
       </clipPath>
     </defs>
+  </svg>
+);
+
+const portfolioIcon = (
+  <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M18 6.5V9.5C18 11.985 13.97 14 9 14C4.03 14 0 11.985 0 9.5V6.5C0 8.985 4.03 11 9 11C13.97 11 18 8.985 18 6.5ZM0 11.5C0 13.985 4.03 16 9 16C13.97 16 18 13.985 18 11.5V14.5C18 16.985 13.97 19 9 19C4.03 19 0 16.985 0 14.5V11.5ZM9 9C4.03 9 0 6.985 0 4.5C0 2.015 4.03 0 9 0C13.97 0 18 2.015 18 4.5C18 6.985 13.97 9 9 9Z"
+      fill="currentColor"
+    />
   </svg>
 );
 
