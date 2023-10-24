@@ -7,14 +7,13 @@ import { useEffect, useState } from 'react';
 import { singletonHook } from 'react-singleton-hook';
 
 import icon from '@/assets/images/near_social_icon.svg';
+import { networkId } from '@/utils/config';
 
 const web3onboardKey = 'web3-onboard:connectedWallets';
 
 const wcV2InitOptions: any = {
-  version: 2,
   projectId: '72b7b3359ab477e339a070f615806aa6',
-  requiredChains: [1, 56],
-  dappUrl: "https://near.org"
+  dappUrl: networkId === 'testnet' ? "https://test.near.org" : "https://near.org"
 };
 
 const walletConnect = walletConnectModule(wcV2InitOptions);
