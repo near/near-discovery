@@ -1,11 +1,28 @@
 {
-	
 	"short_name": "Near",
 	"name": "The OS for an open web",
 	"start_url": "/near/widget/ActivityPage",
 	"scope": "/",
-	"display_override": ["window-control-overlay", "minimal-ui"],
 	"display": "standalone",
+	"prefer_related_applications": false,
+	"theme_color": "#000000",
+	"background_color": "#000000",
+	"orientation": "any",
+	"shortcuts": [
+		{
+			"name":"Near",
+			"url": "/near/widget/ActivityPage",
+			"description":"The OS for an open web"
+		}
+	],
+	"screenshots": [
+		{
+			"src": "bos-meta.png",
+			"sizes": "1200x630",
+			"type": "image/png",
+			"description": "A screenshot of the home page"
+		}
+	],
 	"icons": [
 		{
 			"src": "apple-touch-icon.png",
