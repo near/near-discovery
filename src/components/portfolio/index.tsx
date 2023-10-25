@@ -285,9 +285,11 @@ export const HoldingTable = styled.table`
   }
 
   thead tr:first-child th:last-child {
-    padding-right: 14px;
+    padding-right: 28px;
     position: absolute;
-    right: 14px;
+    right: 0;
+
+    /* border-top-left: none; */
   }
 
   tbody td {
@@ -686,6 +688,9 @@ export const NoAssetWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  border: 1px solid #373a53;
+
   position: absolute;
   flex-direction: column;
 
@@ -695,8 +700,8 @@ export const NoAssetWrapper = styled.div`
 
   gap: 12px;
   top: 10px;
-  left: 0;
-  width: 100%;
+  left: -1px;
+  width: calc(100% + 2px);
   padding: 100px 0px;
 `;
 
@@ -711,4 +716,6 @@ export const NoAssetText = styled.div`
 
 export const HoldingTableWrapper = styled.div`
   position: relative;
+  border-radius: 16px;
+  border: 1px solid #373a53;
 `;
