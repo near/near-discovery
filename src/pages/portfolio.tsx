@@ -90,7 +90,14 @@ const PortfolioDailyData = () => {
   ];
 
   return (
-    <ChartContainer>
+    <ChartContainer
+    
+      style={{
+        position: "relative",
+        top: "100px"
+      }}
+    
+    >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={200}
@@ -4161,6 +4168,8 @@ const PortfolioPage: NextPageWithLayout = () => {
 
   return (
     <Wrapper>
+
+      <div className='frcb'>
       <Profile className="frcs">
         {DefaultProfileIcon}
 
@@ -4176,6 +4185,11 @@ const PortfolioPage: NextPageWithLayout = () => {
           </div>
         </div>
       </Profile>
+
+      <PortfolioDailyData></PortfolioDailyData>
+        
+      </div>
+     
 
       <PortfolioTabs>
         {['Wallet', 'Protocol'].map((tab) => {
