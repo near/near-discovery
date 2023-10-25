@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import {
   AllNetWorkTab,
+  ChartDataWrapper,
   CheckBox,
   DiffWrapper,
   HoldingTable,
@@ -46,7 +47,7 @@ const PortfolioDailyData = () => {
   const ChartContainer = styled.div`
     color: #fff;
     width: 425px;
-    height: 100px;
+    height: 120px;
   `;
 
   const { netCurve24h, diff } = useNetCurve24h();
@@ -55,34 +56,35 @@ const PortfolioDailyData = () => {
 
   if (!netCurve24h || !diff) return <></>;
 
-  const data = netCurve24h.usd_value_list.map((item: number[], index: number) => {
-    return {
-      ts: item[0],
-      value: item[1],
-    };
-  });
+  const data = netCurve24h;
 
   return (
     <ChartContainer
       style={{
         position: 'relative',
-        top: '100px',
+        // top: '60px',
       }}
     >
-      <TotalBalanceWrapper>
-        <span className="format-decimals">
-          $
-          <span className="integer-part">{formateValueWithThousandSeparatorAndFont(totalBalance || 0, 4).integer}</span>
-          <span className="decimal-part">{formateValueWithThousandSeparatorAndFont(totalBalance || 0, 4).decimal}</span>
-        </span>
-      </TotalBalanceWrapper>
+      <ChartDataWrapper>
+        <TotalBalanceWrapper>
+          <span className="format-decimals">
+            $
+            <span className="integer-part">
+              {formateValueWithThousandSeparatorAndFont(totalBalance || 0, 4).integer}
+            </span>
+            <span className="decimal-part">
+              {formateValueWithThousandSeparatorAndFont(totalBalance || 0, 4).decimal}
+            </span>
+          </span>
+        </TotalBalanceWrapper>
 
-      <DiffWrapper dir={diff.dir}>{diff.value}</DiffWrapper>
+        <DiffWrapper dir={diff.dir}>{diff.value}</DiffWrapper>
+      </ChartDataWrapper>
 
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
           width={200}
-          height={60}
+          height={200}
           data={data}
           margin={{
             top: 5,
@@ -98,9 +100,17 @@ const PortfolioDailyData = () => {
             </linearGradient>
           </defs>
           <CartesianGrid stroke="transparent" />
-          <XAxis dataKey="value" tick={false} axisLine={false} tickLine={false} />
-          <YAxis axisLine={false} tick={false} tickLine={false} />
-          <Area type="linear" dataKey="value" stroke="#63C341" fill="url(#gradient)" />
+          <YAxis width={0} axisLine={false} tick={false} tickLine={false} domain={['dataMin', 'dataMax']} />
+          <Area
+            height={100}
+            width={425}
+            type="linear"
+            dataKey="usd_value"
+            stroke="#63C341"
+            fill="url(#gradient)"
+            min={Math.min(...data.map((item) => item.usd_value))}
+            max={Math.max(...data.map((item) => item.usd_value))}
+          />
         </AreaChart>
       </ResponsiveContainer>
     </ChartContainer>
@@ -140,11 +150,14 @@ const ChainList = ['op', 'eth', 'metis', 'era', 'bsc', 'base', 'mnt', 'avax', 'p
 const useAllPorfolioDataList = () => {
   const [sortBy, setSortBy] = useState<'usd_value' | 'price' | 'amount'>('usd_value');
 
-  const { allChainsBalance, allChainList, allTokenList, protocolList } = useSenderPortfolioData();
+  const data = useSenderPortfolioData();
+  console.log('data: ', data);
+
+  const { allChainsBalance, allChainList, allTokenList, protocolList } = data;
 
   const allChainListSupported = allChainList.filter((item) => ChainList.includes(item.id));
 
-  const allChainMap = allChainListSupported.reduce((pre, cur) => {
+  const allChainMap = allChainList.reduce((pre, cur) => {
     return {
       ...pre,
       [cur.id]: cur,
@@ -154,7 +167,6 @@ const useAllPorfolioDataList = () => {
   const supportedChainList: any[] = [];
 
   allChainListSupported.forEach((chain) => {
-    // if (findToken || findProtocol) {
     const this_chain_value = allChainsBalance.chain_list.find((chain_info) => {
       return chain_info.id === chain.id;
     });
@@ -165,7 +177,6 @@ const useAllPorfolioDataList = () => {
         ...chain,
       });
     }
-    // }
   });
 
   const totalUsdValueOfSupportedChains = supportedChainList.reduce((total, item) => total + item.usd_value, 0);
@@ -330,9 +341,9 @@ const WalletComponent = (props: any) => {
                       <div className="token-symbol">{token.symbol}</div>
 
                       <div className="chain-info">
-                        <img src={token.chain_info.logo_url} className="chain-icon" />
+                        <img src={token?.chain_info?.logo_url || ''} className="chain-icon" />
 
-                        <div className="chain-name"> {token.chain_info.name} </div>
+                        <div className="chain-name"> {token.chain_info?.name} </div>
                       </div>
                     </div>
                   </div>
@@ -513,8 +524,8 @@ const ProtocolItem = (props: any) => {
       <div className="protocol-title">
         <div className="title-filed">
           <div className="icon-filed">
-            <img className="protocol-icon" src={protocolItem.logo_url} />
-            <img className="chain-icon " src={protocolItem.chain_info?.logo_url} />
+            <img className="protocol-icon" src={protocolItem.logo_url || ''} />
+            <img className="chain-icon " src={protocolItem.chain_info?.logo_url || ''} />
           </div>
 
           <div>
@@ -575,7 +586,7 @@ const ProtocolItem = (props: any) => {
 
                     return [
                       <div className="frcs" key={token.id}>
-                        <img className="token-icon" src={token.logo_url} />
+                        <img className="token-icon" src={token.logo_url || ''} />
                         <div className="token-name">{token.name}</div>
                       </div>,
                       formateValue(token.amount, 4),
@@ -597,7 +608,7 @@ const ProtocolItem = (props: any) => {
 
                     return [
                       <div className="frcs" key={token.id}>
-                        <img className="token-icon" src={token.logo_url} />
+                        <img className="token-icon" src={token.logo_url || ''} />
                         <div className="token-name">{token.name}</div>
                       </div>,
                       formateValue(token.amount, 4),
@@ -618,7 +629,7 @@ const ProtocolItem = (props: any) => {
                     if (checkHideValue(token.amount * token.price)) return ['omit', 'omit', 'omit'];
                     return [
                       <div className="frcs" key={token.id}>
-                        <img className="token-icon" src={token.logo_url} />
+                        <img className="token-icon" src={token.logo_url || ''} />
                         <div className="token-name">{token.name}</div>
                       </div>,
                       formateValue(token.amount, 4),
@@ -636,7 +647,7 @@ const ProtocolItem = (props: any) => {
 
               const tokenSeries = (
                 <div className={` ${name === 'Deposit' ? 'frcs' : 'fccc'}  token-series`}>
-                  <IconSeries ulrs={supply_token_list.map((token: any) => token.logo_url)} />
+                  <IconSeries ulrs={supply_token_list.map((token: any) => token.logo_url || '')} />
 
                   <span className="symbo-series">
                     {supply_token_list.map((token: any, index: number) => (
@@ -718,7 +729,7 @@ const ProtocolItem = (props: any) => {
 const PortfolioPage: NextPageWithLayout = () => {
   const { sender, wallet, provider, connect } = useEthersSender();
 
-  const [CurTab, setCurTab] = useState<'Wallet' | 'Protocol'>('Protocol');
+  const [CurTab, setCurTab] = useState<'Wallet' | 'Protocol'>('Wallet');
 
   const [network, setNetwork] = useState<string>('all');
 
@@ -740,7 +751,7 @@ const PortfolioPage: NextPageWithLayout = () => {
 
   return (
     <Wrapper>
-      <div className="frcb">
+      <div className="frcb-start">
         <Profile className="frcs">
           {DefaultProfileIcon}
 

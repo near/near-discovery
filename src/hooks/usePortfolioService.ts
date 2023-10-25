@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import useEthersSender from './useEthersSender';
 import Big from 'big.js';
 
-interface NetCurve24hUserList {
-  usd_value_list: number[][];
+interface NetCurve24hUserItem {
+  timestamp: number;
+  usd_value: number;
 }
 
 const PUBLIC_DEBANK_URL = 'https://api.debank.com';
@@ -13,21 +14,25 @@ const DAPDAP_DEBANK_URL = 'https://test-api.dapdap.net/debank';
 export const useNetCurve24h = () => {
   const { sender } = useEthersSender();
 
-  const [netCurve24h, setNetCurve24h] = useState<NetCurve24hUserList>();
+  const [netCurve24h, setNetCurve24h] = useState<NetCurve24hUserItem[]>();
 
   const [diff, setDiff] = useState<{ value: string; dir: 'desc' | 'asc' }>();
+
+  const senderParams = JSON.stringify({
+    id: sender,
+  });
 
   useEffect(() => {
     if (!sender) return;
 
-    fetch(`${PUBLIC_DEBANK_URL}/asset/net_curve_24h?user_addr=${sender}`)
+    fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_net_curve&params=${senderParams}`)
       .then((response) => response.json())
       .then((data) => {
-        const value_list = data?.data?.usd_value_list;
+        const value_list = data?.data;
 
-        const first_item = value_list[0][1];
+        const first_item = value_list[0].usd_value;
 
-        const last_item = value_list[value_list.length - 1][1];
+        const last_item = value_list[value_list.length - 1].usd_value;
 
         // calculate percentage last_item to fist_item,
 
@@ -50,12 +55,16 @@ export const useNetCurve24h = () => {
 export const useTotalBalance = () => {
   const { sender } = useEthersSender();
 
+  const senderParams = JSON.stringify({
+    id: sender,
+  });
+
   const [totalBalance, setTotalBalance] = useState<number>();
 
   useEffect(() => {
     if (!sender) return;
 
-    fetch(`${PUBLIC_DEBANK_URL}/user/total_balance?user_addr=${sender}`)
+    fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_balance&params=${senderParams}`)
       .then((response) => response.json())
       .then((data) => setTotalBalance(data?.data?.total_usd_value));
   }, [sender]);
@@ -135,19 +144,20 @@ export const useSenderPortfolioData = () => {
       (res) => res.json(),
     );
 
-    const allChainList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/chain/list`).then((res) => res.json());
+    const allChainList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/chain/list&params=""`).then((res) => res.json());
 
-    const allTokenList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/all_token_list?params=${senderParams}`).then((res) =>
+    const allTokenList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/all_token_list&params=${senderParams}`).then((res) =>
       res.json(),
     );
 
     const protocolList = fetch(
-      `${DAPDAP_DEBANK_URL}?url=/v1/user/all_complex_protocol_list?params=${senderParams}`,
+      `${DAPDAP_DEBANK_URL}?url=/v1/user/all_complex_protocol_list&params=${senderParams}`,
     ).then((res) => res.json());
 
     const fetchList = [allChainsBalance, allChainList, allTokenList, protocolList];
 
     return Promise.all(fetchList).then((responses) => {
+      console.log('responses: ', responses);
       setAllChainsBalance(responses[0].data);
       setAllChainList(responses[1].data);
       setAllTokenList(responses[2].data);

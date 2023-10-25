@@ -16,6 +16,8 @@ function addThousandSeparator(numberString: string) {
 }
 
 const formateValue = (value: string | number, precision: number) => {
+  if (Big(value).eq(0)) return '0';
+
   if (Big(value).lt(Big(10).pow(-precision))) {
     return `< ${Big(10).pow(-precision).toFixed(precision)}`;
   } else {
@@ -24,6 +26,8 @@ const formateValue = (value: string | number, precision: number) => {
 };
 
 const formateValueWithThousandSeparator = (value: string | number, precision: number) => {
+  if (Big(value).eq(0)) return '0';
+
   if (Big(value).lt(Big(10).pow(-precision))) {
     return `< ${Big(10).pow(-precision).toFixed(precision)}`;
   } else {
@@ -32,6 +36,12 @@ const formateValueWithThousandSeparator = (value: string | number, precision: nu
 };
 
 const formateValueWithThousandSeparatorAndFont = (value: string | number, precision: number) => {
+  if (Big(value).eq(0))
+    return {
+      integer: '0',
+      decimal: '',
+    };
+
   if (Big(value).lt(Big(10).pow(-precision))) {
     return {
       integer: '',

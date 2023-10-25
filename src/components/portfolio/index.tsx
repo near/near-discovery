@@ -22,6 +22,13 @@ export const Wrapper = styled.div`
     gap: 12px;
   }
 
+  .frcb-start {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
   .fccc {
     display: flex;
     flex-direction: column;
@@ -57,6 +64,7 @@ export const Profile = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
+  position: relative;
 
   .address-filed {
     display: flex;
@@ -647,7 +655,7 @@ export const ProtocolBalanceFiled = styled.div`
 `;
 
 export const TotalBalanceWrapper = styled.div`
-  position: absolute;
+  /* position: absolute; */
   left: 0;
   top: 0;
 `;
@@ -661,4 +669,12 @@ export const DiffWrapper = styled.div<{ dir: 'desc' | 'asc' }>`
   text-align: left;
 
   color: ${(p) => (p.dir === 'desc' ? '#FF6F6F' : '#63C341')};
+`;
+
+export const ChartDataWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  /* gap: 12px; */
+
+  position: relative;
 `;
