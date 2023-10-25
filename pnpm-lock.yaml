@@ -2,7 +2,7 @@ lockfileVersion: '6.0'
 
 dependencies:
   '@braintree/sanitize-url':
-    specifier: 6.0.0
+    specifier: ^6.0.0
     version: 6.0.0
   '@keypom/selector':
     specifier: 1.2.3
@@ -59,13 +59,13 @@ dependencies:
     specifier: ^7.58.1
     version: 7.73.0(next@13.5.6)(react@18.2.0)
   '@types/node':
-    specifier: 18.18.1
+    specifier: ^18.18.1
     version: 18.18.1
   '@types/react':
-    specifier: 18.2.23
+    specifier: ^18.2.23
     version: 18.2.23
   '@types/react-dom':
-    specifier: 18.2.1
+    specifier: ^18.2.1
     version: 18.2.1
   '@web3-onboard/core':
     specifier: ^2.20.2
@@ -95,10 +95,10 @@ dependencies:
     specifier: ^2.3.2
     version: 2.3.2
   eslint:
-    specifier: 8.50.0
+    specifier: ^8.50.0
     version: 8.50.0
   eslint-config-next:
-    specifier: 13.5.3
+    specifier: ^13.5.3
     version: 13.5.3(eslint@8.50.0)(typescript@5.2.2)
   firebase:
     specifier: ^9.19.1
@@ -119,13 +119,13 @@ dependencies:
     specifier: github:NearSocial/VM#2.5.1
     version: github.com/NearSocial/VM/32a404f19063eb53e907980bbfc56601fb608e8a(@babel/core@7.23.0)(@popperjs/core@2.11.8)(@types/react-dom@18.2.1)(@types/react@18.2.23)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
   next:
-    specifier: 13.5.6
+    specifier: ^13.5.6
     version: 13.5.6(@babel/core@7.23.0)(react-dom@18.2.0)(react@18.2.0)
   prettier:
     specifier: ^2.7.1
     version: 2.8.8
   react:
-    specifier: 18.2.0
+    specifier: ^18.2.0
     version: 18.2.0
   react-bootstrap:
     specifier: ^2.5.0
@@ -134,7 +134,7 @@ dependencies:
     specifier: ^6.1.2
     version: 6.2.3(react-dom@18.2.0)(react@18.2.0)
   react-dom:
-    specifier: 18.2.0
+    specifier: ^18.2.0
     version: 18.2.0(react@18.2.0)
   react-hook-form:
     specifier: ^7.43.9
@@ -155,7 +155,7 @@ dependencies:
     specifier: ^5.3.6
     version: 5.3.11(@babel/core@7.23.0)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
   typescript:
-    specifier: 5.2.2
+    specifier: ^5.2.2
     version: 5.2.2
   zustand:
     specifier: ^4.3.7
