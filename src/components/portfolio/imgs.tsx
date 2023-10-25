@@ -2,18 +2,18 @@ import React from 'react';
 
 export const DefaultProfileIcon = (
   <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="52" width="52" height="52" rx="26" transform="rotate(90 52 0)" fill="url(#paint0_angular_4147_3979)" />
+    <rect width="52" height="52" rx="26" fill="url(#paint0_angular_36_2297)" />
     <defs>
       <radialGradient
-        id="paint0_angular_4147_3979"
+        id="paint0_angular_36_2297"
         cx="0"
         cy="0"
         r="1"
         gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(78 26) rotate(-116.169) scale(30.3221 30.3221)"
+        gradientTransform="translate(26 26) rotate(90) scale(26)"
       >
-        <stop stop-color="#4A67FF" />
-        <stop offset="1" stop-color="#EBF479" />
+        <stop stop-color="#00D1FF" />
+        <stop offset="1" stop-color="#FF008A" />
       </radialGradient>
     </defs>
   </svg>
