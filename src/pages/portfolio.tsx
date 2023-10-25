@@ -120,7 +120,6 @@ const PortfolioDailyData = () => {
           <CartesianGrid stroke="transparent" />
           <XAxis dataKey="name" tick={false} axisLine={false} tickLine={false} />
           <YAxis axisLine={false} tick={false} tickLine={false} />
-          <Tooltip />
           <Area type="linear" dataKey="uv" stroke="#63C341" fill="url(#gradient)" />
         </AreaChart>
       </ResponsiveContainer>
