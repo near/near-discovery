@@ -3664,13 +3664,13 @@ const useAllPorfolioDataList = () => {
       }
     });
 
-  const parsedProtocolList = protocolList.map((protocol) => {
+  const parsedProtocolList = protocolList.map((protocol: any) => {
     const protocolNetUsdValue = protocol.portfolio_item_list.reduce(
-      (total, item) => total + item.stats.net_usd_value,
+      (total: number, item: any) => total + item.stats.net_usd_value,
       0,
-    );
+    ) as number;
 
-    const protocolRewardUsdValue = protocol.portfolio_item_list.reduce((total, item) => {
+    const protocolRewardUsdValue = protocol.portfolio_item_list.reduce((total: number, item: any) => {
       const itemDetail = item.detail as any;
 
       if (!itemDetail.reward_token_list) {
