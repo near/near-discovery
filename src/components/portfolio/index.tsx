@@ -252,6 +252,9 @@ export const HoldingTable = styled.table`
   width: 100%;
   background: #181a27;
 
+  position: relative;
+  z-index: 10;
+
   padding-bottom: 8px;
 
   border-radius: 16px;
@@ -676,5 +679,36 @@ export const ChartDataWrapper = styled.div`
   flex-direction: column;
   /* gap: 12px; */
 
+  position: relative;
+`;
+
+export const NoAssetWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  flex-direction: column;
+
+  background: #181a27;
+
+  border-radius: 16px;
+
+  gap: 12px;
+  top: 10px;
+  left: 0;
+  width: 100%;
+  padding: 100px 0px;
+`;
+
+export const NoAssetText = styled.div`
+  font-family: Gantari;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  color: #5e617e;
+`;
+
+export const HoldingTableWrapper = styled.div`
   position: relative;
 `;

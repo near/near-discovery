@@ -18,6 +18,8 @@ export const useNetCurve24h = () => {
 
   const [diff, setDiff] = useState<{ value: string; dir: 'desc' | 'asc' }>();
 
+  const totalBalance = useTotalBalance();
+
   const senderParams = JSON.stringify({
     id: sender,
   });
@@ -29,6 +31,7 @@ export const useNetCurve24h = () => {
       .then((response) => response.json())
       .then((data) => {
         const value_list = data?.data;
+        console.log('value_list: ', value_list);
 
         const first_item = value_list[0].usd_value;
 
@@ -46,10 +49,13 @@ export const useNetCurve24h = () => {
         });
 
         setNetCurve24h(data?.data);
+      })
+      .catch((err) => {
+        console.log(err);
       });
   }, [sender]);
 
-  return { netCurve24h, diff };
+  return { netCurve24h, diff, totalBalance };
 };
 
 export const useTotalBalance = () => {
@@ -156,13 +162,24 @@ export const useSenderPortfolioData = () => {
 
     const fetchList = [allChainsBalance, allChainList, allTokenList, protocolList];
 
-    return Promise.all(fetchList).then((responses) => {
-      console.log('responses: ', responses);
-      setAllChainsBalance(responses[0].data);
-      setAllChainList(responses[1].data);
-      setAllTokenList(responses[2].data);
-      setProtocolList(responses[3].data);
-    });
+    return Promise.all(fetchList)
+      .then((responses) => {
+        // if (responses[0].code == 0) {
+        //   setAllChainsBalance(responses[0].data);
+        // }
+        // if (responses[1].code == 0) {
+        //   setAllChainList(responses[1].data);
+        // }
+        // if (responses[2].code == 0) {
+        //   setAllTokenList(responses[2].data);
+        // }
+        // if (responses[3].code === 0) {
+        //   setProtocolList(responses[3].data);
+        // }
+      })
+      .catch((err) => {
+        console.log('err1111: ', err);
+      });
   };
 
   useEffect(() => {

@@ -9,9 +9,12 @@ import {
   CheckBox,
   DiffWrapper,
   HoldingTable,
+  HoldingTableWrapper,
   HoldingTitle,
   NetWorkTab,
   NetworkTabWrapper,
+  NoAssetText,
+  NoAssetWrapper,
   PortfolioTabs,
   Profile,
   ProtocolArrowWrapper,
@@ -29,6 +32,7 @@ import {
   ArrowDone,
   DefaultProfileIcon,
   MetaMaskIcon,
+  NoAssetsIcon,
   ProtocolArrowDown,
   sortArrowDown,
 } from '@/components/portfolio/imgs';
@@ -42,6 +46,7 @@ import {
 } from '@/utils/formate';
 import type { NextPageWithLayout } from '@/utils/types';
 import { useNetCurve24h, useSenderPortfolioData, useTotalBalance } from '@/hooks/usePortfolioService';
+import { NoDataLayout } from '@/components/portfolio/common';
 
 const PortfolioDailyData = () => {
   const ChartContainer = styled.div`
@@ -50,11 +55,9 @@ const PortfolioDailyData = () => {
     height: 120px;
   `;
 
-  const { netCurve24h, diff } = useNetCurve24h();
+  const { netCurve24h, diff, totalBalance } = useNetCurve24h();
 
-  const totalBalance = useTotalBalance();
-
-  if (!netCurve24h || !diff) return <></>;
+  if (!netCurve24h || !diff || totalBalance === undefined) return <></>;
 
   const data = netCurve24h;
 
@@ -268,6 +271,10 @@ const WalletComponent = (props: any) => {
     return pre.plus(cur.price * cur.amount);
   }, Big(0));
 
+  const displayAllTokenList = parsedAllTokenList.filter(filterFunc);
+
+  const hasData = displayAllTokenList.length > 0;
+
   return (
     <>
       <HoldingTitle>
@@ -286,76 +293,80 @@ const WalletComponent = (props: any) => {
         </div>
       </HoldingTitle>
 
-      <HoldingTable>
-        <thead>
-          <tr>
-            <th>Token</th>
+      <HoldingTableWrapper>
+        <HoldingTable>
+          <thead>
+            <tr>
+              <th>Token</th>
 
-            <th>
-              <div
-                className="frcs-gm"
-                onClick={() => {
-                  setSortBy('price');
-                }}
-              >
-                <span>Price</span>{' '}
-                <SortArrowDownWrapper active={sortBy === 'price'}> {sortArrowDown} </SortArrowDownWrapper>{' '}
-              </div>{' '}
-            </th>
+              <th>
+                <div
+                  className="frcs-gm"
+                  onClick={() => {
+                    setSortBy('price');
+                  }}
+                >
+                  <span>Price</span>{' '}
+                  <SortArrowDownWrapper active={sortBy === 'price'}> {sortArrowDown} </SortArrowDownWrapper>{' '}
+                </div>{' '}
+              </th>
 
-            <th>
-              <div
-                className="frcs-gm"
-                onClick={() => {
-                  setSortBy('amount');
-                }}
-              >
-                <span>Amount</span>{' '}
-                <SortArrowDownWrapper active={sortBy === 'amount'}> {sortArrowDown} </SortArrowDownWrapper>{' '}
-              </div>{' '}
-            </th>
+              <th>
+                <div
+                  className="frcs-gm"
+                  onClick={() => {
+                    setSortBy('amount');
+                  }}
+                >
+                  <span>Amount</span>{' '}
+                  <SortArrowDownWrapper active={sortBy === 'amount'}> {sortArrowDown} </SortArrowDownWrapper>{' '}
+                </div>{' '}
+              </th>
 
-            <th>
-              <div
-                className="frcs-gm"
-                onClick={() => {
-                  setSortBy('usd_value');
-                }}
-              >
-                <span>USD value</span>{' '}
-                <SortArrowDownWrapper active={sortBy === 'usd_value'}> {sortArrowDown} </SortArrowDownWrapper>{' '}
-              </div>{' '}
-            </th>
-          </tr>
-        </thead>
+              <th>
+                <div
+                  className="frcs-gm"
+                  onClick={() => {
+                    setSortBy('usd_value');
+                  }}
+                >
+                  <span>USD value</span>{' '}
+                  <SortArrowDownWrapper active={sortBy === 'usd_value'}> {sortArrowDown} </SortArrowDownWrapper>{' '}
+                </div>{' '}
+              </th>
+            </tr>
+          </thead>
 
-        <tbody>
-          {parsedAllTokenList.filter(filterFunc).map((token: any) => {
-            return (
-              <tr key={token.id}>
-                <td>
-                  <div className="frcs token-info">
-                    <img src={token.logo_url || ''} className="token-icon" />
+          <tbody>
+            {displayAllTokenList.map((token: any) => {
+              return (
+                <tr key={token.id}>
+                  <td>
+                    <div className="frcs token-info">
+                      <img src={token.logo_url || ''} className="token-icon" />
 
-                    <div>
-                      <div className="token-symbol">{token.symbol}</div>
+                      <div>
+                        <div className="token-symbol">{token.symbol}</div>
 
-                      <div className="chain-info">
-                        <img src={token?.chain_info?.logo_url || ''} className="chain-icon" />
+                        <div className="chain-info">
+                          <img src={token?.chain_info?.logo_url || ''} className="chain-icon" />
 
-                        <div className="chain-name"> {token.chain_info?.name} </div>
+                          <div className="chain-name"> {token.chain_info?.name} </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </td>
-                <td>{formateValue(token.price, 2)}</td>
-                <td>{formateValue(token.amount, 4)}</td>
-                <td>${formateValueWithThousandSeparator(token.usd_value, 4)}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </HoldingTable>
+                  </td>
+                  <td>{formateValue(token.price, 2)}</td>
+                  <td>{formateValue(token.amount, 4)}</td>
+                  <td>${formateValueWithThousandSeparator(token.usd_value, 4)}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </HoldingTable>
+
+        {!hasData && <NoDataLayout></NoDataLayout>}
+      </HoldingTableWrapper>
     </>
   );
 };
@@ -373,9 +384,11 @@ const ProtocolComponent = (props: any) => {
 
   const [openOptions, setOpenOptions] = useState<boolean>(false);
 
-  const [isHide, setIsHide] = useState<boolean>(false);
+  const [isHide, setIsHide] = useState<boolean>(true);
 
   const [isExpand, setIsExpand] = useState<boolean>(false);
+
+  const displayProtocolList = parsedProtocolList.filter(filterFunc);
 
   return (
     <>
@@ -433,7 +446,7 @@ const ProtocolComponent = (props: any) => {
         </div>
       </YourAssetsTitle>
 
-      {parsedProtocolList.filter(filterFunc).map((protocol: any, index: number) => {
+      {displayProtocolList.map((protocol: any, index: number) => {
         return (
           <ProtocolItem
             isHide={isHide}
@@ -443,6 +456,13 @@ const ProtocolComponent = (props: any) => {
           ></ProtocolItem>
         );
       })}
+      <div
+        style={{
+          position: 'relative',
+        }}
+      >
+        {displayProtocolList.length === 0 && <NoDataLayout shrink={true}></NoDataLayout>}
+      </div>
     </>
   );
 };
@@ -726,9 +746,7 @@ const ProtocolItem = (props: any) => {
   );
 };
 
-const PortfolioPage: NextPageWithLayout = () => {
-  const { sender, wallet, provider, connect } = useEthersSender();
-
+const PortFolioDataArea = () => {
   const [CurTab, setCurTab] = useState<'Wallet' | 'Protocol'>('Wallet');
 
   const [network, setNetwork] = useState<string>('all');
@@ -750,27 +768,7 @@ const PortfolioPage: NextPageWithLayout = () => {
   };
 
   return (
-    <Wrapper>
-      <div className="frcb-start">
-        <Profile className="frcs">
-          {DefaultProfileIcon}
-
-          <div className="">
-            <div className="address-filed ">
-              <span>{formateAddress(sender)}</span>
-              <div className="arrow-filed frcc">{ArrowDone}</div>
-            </div>
-
-            <div className="frcs metamask-filed">
-              {MetaMaskIcon}
-              <span>MetaMask</span>
-            </div>
-          </div>
-        </Profile>
-
-        <PortfolioDailyData></PortfolioDailyData>
-      </div>
-
+    <>
       <PortfolioTabs>
         {['Wallet', 'Protocol'].map((tab) => {
           const isActive = tab === CurTab.toString();
@@ -789,7 +787,6 @@ const PortfolioPage: NextPageWithLayout = () => {
           );
         })}
       </PortfolioTabs>
-
       <NetworkTabWrapper>
         <AllNetWorkTab
           onClick={() => {
@@ -852,6 +849,36 @@ const PortfolioPage: NextPageWithLayout = () => {
           }}
         ></ProtocolComponent>
       )}
+    </>
+  );
+};
+
+const PortfolioPage: NextPageWithLayout = () => {
+  const { sender, wallet, provider, connect } = useEthersSender();
+
+  return (
+    <Wrapper>
+      <div className="frcb-start">
+        <Profile className="frcs">
+          {DefaultProfileIcon}
+
+          <div className="">
+            <div className="address-filed ">
+              <span>{formateAddress(sender)}</span>
+              <div className="arrow-filed frcc">{ArrowDone}</div>
+            </div>
+
+            <div className="frcs metamask-filed">
+              {MetaMaskIcon}
+              <span>MetaMask</span>
+            </div>
+          </div>
+        </Profile>
+
+        {/* <PortfolioDailyData></PortfolioDailyData> */}
+      </div>
+
+      <PortFolioDataArea></PortFolioDataArea>
     </Wrapper>
   );
 };
