@@ -645,3 +645,20 @@ export const ProtocolBalanceFiled = styled.div`
   flex-direction: column;
   gap: 4px;
 `;
+
+export const TotalBalanceWrapper = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+`;
+
+export const DiffWrapper = styled.div<{ dir: 'desc' | 'asc' }>`
+  font-family: Gantari;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+
+  color: ${(p) => (p.dir === 'desc' ? '#FF6F6F' : '#63C341')};
+`;
