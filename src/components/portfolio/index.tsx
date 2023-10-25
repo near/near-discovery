@@ -250,9 +250,11 @@ export const HoldingTable = styled.table`
     text-align: left;
     color: #7c7f96;
     padding: 14px 0;
+    position: relative;
 
     > div {
       cursor: pointer;
+      width: max-content;
     }
   }
 
@@ -262,6 +264,8 @@ export const HoldingTable = styled.table`
 
   thead tr:first-child th:last-child {
     padding-right: 14px;
+    position: absolute;
+    right: 14px;
   }
 
   tbody td {
@@ -273,10 +277,18 @@ export const HoldingTable = styled.table`
     text-align: left;
     color: white;
     padding: 14px 0px;
+    position: relative;
   }
 
   tbody tr td:first-child {
     padding-left: 20px;
+  }
+
+  tbody tr td:last-child {
+    padding-right: 20px;
+    position: absolute;
+
+    right: 14px;
   }
 
   .token-info {
