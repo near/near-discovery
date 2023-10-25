@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
+
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useEffect, useState } from 'react';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const hotIcon = 'https://ipfs.near.social/ipfs/bafkreiewzowjm4fk7m5x3h32k6b4hpcdvwg23wndqpo5frzjiqr35xwnd4';

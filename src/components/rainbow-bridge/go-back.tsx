@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import styled from 'styled-components';
+
 import { SMALL_SCREEN } from '../near/NearStyleVar';
 
 const AbsoluteContainer = styled.div`

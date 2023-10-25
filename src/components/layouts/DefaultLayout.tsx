@@ -2,9 +2,9 @@ import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 import styled from 'styled-components';
 
+import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
 import { DesktopNavigationTop } from '../navigation/desktop/DesktopNavigationTop';
 import { LoginBox } from '../navigation/desktop/LoginBox';
-import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
 
 interface Props {
   children: ReactNode;

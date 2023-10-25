@@ -1,46 +1,44 @@
+import Big from 'big.js';
 import React, { useEffect, useState } from 'react';
 import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
 import styled from 'styled-components';
 
-import { useDefaultLayout } from '@/hooks/useLayout';
-import type { NextPageWithLayout } from '@/utils/types';
-
-import { Wallet, ethers } from 'ethers';
-import { useEthersProviderContext } from '@/data/web3';
-import useEthersSender from '@/hooks/useEthersSender';
-import Big from 'big.js';
 import {
+  AllNetWorkTab,
+  CheckBox,
+  HoldingTable,
+  HoldingTitle,
+  NetWorkTab,
+  NetworkTabWrapper,
+  PortfolioTabs,
+  Profile,
+  ProtocolArrowWrapper,
+  ProtocolCard,
+  ProtocolSelectBox,
+  ProtocolTable,
+  SortArrowDownWrapper,
+  Wrapper,
+  YourAssetsTitle,
+} from '@/components/portfolio';
+import { IconSeries } from '@/components/portfolio/icons';
+import {
+  AllNetWorkIcon,
+  ArrowDone,
   DefaultProfileIcon,
   MetaMaskIcon,
-  ArrowDone,
-  AllNetWorkIcon,
-  sortArrowDown,
   ProtocolArrowDown,
+  sortArrowDown,
 } from '@/components/portfolio/imgs';
-import {
-  Wrapper,
-  Profile,
-  PortfolioTabs,
-  NetworkTabWrapper,
-  NetWorkTab,
-  AllNetWorkTab,
-  HoldingTitle,
-  HoldingTable,
-  SortArrowDownWrapper,
-  YourAssetsTitle,
-  ProtocolSelectBox,
-  CheckBox,
-  ProtocolCard,
-  ProtocolArrowWrapper,
-  ProtocolTable,
-} from '@/components/portfolio';
+import { useEthersProviderContext } from '@/data/web3';
+import useEthersSender from '@/hooks/useEthersSender';
+import { useDefaultLayout } from '@/hooks/useLayout';
 import {
   formateAddress,
   formateValue,
   formateValueWithThousandSeparator,
   formateValueWithThousandSeparatorAndFont,
 } from '@/utils/formate';
-import { IconSeries } from '@/components/portfolio/icons';
+import type { NextPageWithLayout } from '@/utils/types';
 
 const PortfolioDailyData = () => {
   const ChartContainer = styled.div`
