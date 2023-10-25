@@ -7,8 +7,6 @@ interface NetCurve24hUserItem {
   usd_value: number;
 }
 
-const PUBLIC_DEBANK_URL = 'https://api.debank.com';
-
 const DAPDAP_DEBANK_URL = 'https://test-api.dapdap.net/debank';
 
 export const useNetCurve24h = () => {

@@ -47,6 +47,11 @@ import {
 import type { NextPageWithLayout } from '@/utils/types';
 import { useNetCurve24h, useSenderPortfolioData, useTotalBalance } from '@/hooks/usePortfolioService';
 import { NoDataLayout } from '@/components/portfolio/common';
+import { VmComponent } from '@/components/vm/VmComponent';
+
+const ExecutionRecords = () => {
+  return <VmComponent src="bluebiu.near/widget/ZKEVM.ExecuteRecords"></VmComponent>;
+};
 
 const PortfolioDailyData = () => {
   const ChartContainer = styled.div`
@@ -747,7 +752,7 @@ const ProtocolItem = (props: any) => {
 };
 
 const PortFolioDataArea = () => {
-  const [CurTab, setCurTab] = useState<'Wallet' | 'Protocol'>('Wallet');
+  const [CurTab, setCurTab] = useState<'Wallet' | 'Protocol' | 'Execution Records'>('Wallet');
 
   const [network, setNetwork] = useState<string>('all');
 
@@ -770,14 +775,14 @@ const PortFolioDataArea = () => {
   return (
     <>
       <PortfolioTabs>
-        {['Wallet', 'Protocol'].map((tab) => {
+        {['Wallet', 'Protocol', 'Execution Records'].map((tab) => {
           const isActive = tab === CurTab.toString();
           return (
             <div
               key={tab}
               className={`item ${isActive ? 'active' : ''}`}
               onClick={() => {
-                setCurTab(tab as 'Wallet' | 'Protocol');
+                setCurTab(tab as 'Wallet' | 'Protocol' | 'Execution Records');
               }}
             >
               {tab}
@@ -787,48 +792,51 @@ const PortFolioDataArea = () => {
           );
         })}
       </PortfolioTabs>
-      <NetworkTabWrapper>
-        <AllNetWorkTab
-          onClick={() => {
-            setNetwork('all');
-          }}
-        >
-          {AllNetWorkIcon}
 
-          <div>
-            <div className="network-name">All Networks</div>
-            <div className="usd-value">${formateValueWithThousandSeparator(totalUsdValueOfSupportedChains, 4)}</div>
-          </div>
-        </AllNetWorkTab>
+      {CurTab !== 'Execution Records' && (
+        <NetworkTabWrapper>
+          <AllNetWorkTab
+            onClick={() => {
+              setNetwork('all');
+            }}
+          >
+            {AllNetWorkIcon}
 
-        {supportedChainList.map((chain) => {
-          return (
-            <NetWorkTab
-              active={network === chain.id}
-              key={chain.community_id}
-              onClick={() => {
-                setNetwork(chain.id);
-              }}
-              className="frcs-gm"
-            >
-              {chain.logo_url ? (
-                <img className="network-icon-chain" src={chain.logo_url} />
-              ) : (
-                <div className="default-icon network-icon">{chain.name[0]}</div>
-              )}
+            <div>
+              <div className="network-name">All Networks</div>
+              <div className="usd-value">${formateValueWithThousandSeparator(totalUsdValueOfSupportedChains, 4)}</div>
+            </div>
+          </AllNetWorkTab>
 
-              <div>
-                <div className="network-name">{chain.name}</div>
+          {supportedChainList.map((chain) => {
+            return (
+              <NetWorkTab
+                active={network === chain.id}
+                key={chain.community_id}
+                onClick={() => {
+                  setNetwork(chain.id);
+                }}
+                className="frcs-gm"
+              >
+                {chain.logo_url ? (
+                  <img className="network-icon-chain" src={chain.logo_url} />
+                ) : (
+                  <div className="default-icon network-icon">{chain.name[0]}</div>
+                )}
 
-                <div className="value-filed frcs-gm">
-                  <div className="usd-value">${formateValueWithThousandSeparator(chain.usd_value, 2)}</div>
-                  <div className="usd-value-percent">{chain.percentage}%</div>
+                <div>
+                  <div className="network-name">{chain.name}</div>
+
+                  <div className="value-filed frcs-gm">
+                    <div className="usd-value">${formateValueWithThousandSeparator(chain.usd_value, 2)}</div>
+                    <div className="usd-value-percent">{chain.percentage}%</div>
+                  </div>
                 </div>
-              </div>
-            </NetWorkTab>
-          );
-        })}
-      </NetworkTabWrapper>
+              </NetWorkTab>
+            );
+          })}
+        </NetworkTabWrapper>
+      )}
 
       {CurTab === 'Wallet' && (
         <WalletComponent
@@ -849,6 +857,8 @@ const PortFolioDataArea = () => {
           }}
         ></ProtocolComponent>
       )}
+
+      {CurTab === 'Execution Records' && <ExecutionRecords></ExecutionRecords>}
     </>
   );
 };
@@ -875,7 +885,7 @@ const PortfolioPage: NextPageWithLayout = () => {
           </div>
         </Profile>
 
-        {/* <PortfolioDailyData></PortfolioDailyData> */}
+        <PortfolioDailyData></PortfolioDailyData>
       </div>
 
       <PortFolioDataArea></PortFolioDataArea>
