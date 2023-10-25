@@ -48,6 +48,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 import { useNetCurve24h, useSenderPortfolioData, useTotalBalance } from '@/hooks/usePortfolioService';
 import { NoDataLayout } from '@/components/portfolio/common';
 import { VmComponent } from '@/components/vm/VmComponent';
+import { CheckDot } from '../components/portfolio/index';
 
 const ExecutionRecords = () => {
   return <VmComponent src="bluebiu.near/widget/ZKEVM.ExecuteRecords"></VmComponent>;
@@ -278,6 +279,10 @@ const WalletComponent = (props: any) => {
 
   const displayAllTokenList = parsedAllTokenList.filter(filterFunc);
 
+  const [openOptions, setOpenOptions] = useState<boolean>(false);
+
+  const [isHide, setIsHide] = useState<boolean>(true);
+
   const hasData = displayAllTokenList.length > 0;
 
   return (
@@ -285,16 +290,54 @@ const WalletComponent = (props: any) => {
       <HoldingTitle>
         <div className="holding-text">Holding</div>
 
-        <div className="holding-value">
-          <span className="format-decimals">
-            $
-            <span className="integer-part">
-              {formateValueWithThousandSeparatorAndFont(value_all.toFixed(), 4).integer}
+        <div className="frcs">
+          <div className="holding-value">
+            <span className="format-decimals">
+              $
+              <span className="integer-part">
+                {formateValueWithThousandSeparatorAndFont(value_all.toFixed(), 4).integer}
+              </span>
+              <span className="decimal-part">
+                {formateValueWithThousandSeparatorAndFont(value_all.toFixed(), 4).decimal}
+              </span>
             </span>
-            <span className="decimal-part">
-              {formateValueWithThousandSeparatorAndFont(value_all.toFixed(), 4).decimal}
-            </span>
-          </span>
+          </div>
+
+          <div
+            className="asset-function-button"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+              setOpenOptions((b) => !b);
+            }}
+          >
+            <div className="dot" />
+            <div className="dot" />
+            <div className="dot" />
+
+            {openOptions && (
+              <ProtocolSelectBox
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                }}
+              >
+                <div className="function-item">
+                  <div>Hide</div>
+                  <div className="minimum-value-box">{'< $0.1'}</div>
+
+                  <CheckBox
+                    active={isHide}
+                    onClick={() => {
+                      setIsHide((h) => !h);
+                    }}
+                  >
+                    <div></div>
+                  </CheckBox>
+                </div>
+              </ProtocolSelectBox>
+            )}
+          </div>
         </div>
       </HoldingTitle>
 
@@ -344,6 +387,8 @@ const WalletComponent = (props: any) => {
 
           <tbody>
             {displayAllTokenList.map((token: any) => {
+              if (isHide && token.usd_value < 0.1) return <></>;
+
               return (
                 <tr key={token.id}>
                   <td>
@@ -426,25 +471,49 @@ const ProtocolComponent = (props: any) => {
 
                 <div className="minimum-value-box">{'< $0.1'}</div>
 
-                <CheckBox active={isHide}>
-                  <div
-                    onClick={() => {
-                      setIsHide((h) => !h);
-                    }}
-                  ></div>
+                <CheckBox
+                  active={isHide}
+                  onClick={() => {
+                    setIsHide((h) => !h);
+                  }}
+                >
+                  <div></div>
                 </CheckBox>
               </div>
 
-              <div className="function-item">
-                <div>Expand</div>
+              <div className="function-item" style={{ gap: '28px' }}>
+                <div
+                  className="frcs"
+                  onClick={() => {
+                    setIsExpand(false);
+                  }}
+                >
+                  <CheckDot active={!isExpand}>
+                    <div />
+                  </CheckDot>
 
-                <CheckBox active={isExpand}>
+                  <div>Collapse</div>
+                </div>
+
+                <div
+                  className="frcs"
+                  onClick={() => {
+                    setIsExpand(true);
+                  }}
+                >
+                  <CheckDot active={isExpand}>
+                    <div />
+                  </CheckDot>
+                  <div>Expand</div>
+                </div>
+
+                {/* <CheckBox active={isExpand}>
                   <div
                     onClick={() => {
                       setIsExpand((h) => !h);
                     }}
                   ></div>
-                </CheckBox>
+                </CheckBox> */}
               </div>
             </ProtocolSelectBox>
           )}

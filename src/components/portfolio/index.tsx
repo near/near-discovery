@@ -6,6 +6,27 @@ export const Wrapper = styled.div`
   position: relative;
   font-family: Gantari;
 
+  .asset-function-button {
+    border: 1px solid #373a53;
+    background: #373a53;
+    width: 26px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4px;
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 100%;
+    background: #c7cdff;
+  }
+
   .format-decimals {
     white-space: nowrap;
     .integer-part {
@@ -369,27 +390,6 @@ export const YourAssetsTitle = styled.div`
     letter-spacing: 0em;
     text-align: left;
   }
-
-  .asset-function-button {
-    border: 1px solid #373a53;
-    background: #373a53;
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 4px;
-    border-radius: 8px;
-    cursor: pointer;
-    position: relative;
-  }
-
-  .dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 100%;
-    background: #c7cdff;
-  }
 `;
 
 export const SortArrowDownWrapper = styled.div<{ active: boolean }>`
@@ -420,6 +420,10 @@ export const ProtocolSelectBox = styled.div`
     align-items: center;
     justify-content: space-between;
     gap: 8px;
+
+    > div {
+      cursor: pointer;
+    }
   }
   .minimum-value-box {
     background: linear-gradient(0deg, rgba(11, 12, 19, 0.5), rgba(11, 12, 19, 0.5)),
@@ -435,6 +439,8 @@ export const ProtocolSelectBox = styled.div`
 export const CheckBox = styled.div<{ active: boolean }>`
   width: 35px;
   height: 20px;
+
+  cursor: pointer;
 
   position: relative;
   border-radius: 25px;
@@ -718,4 +724,29 @@ export const HoldingTableWrapper = styled.div`
   position: relative;
   border-radius: 16px;
   border: 1px solid #373a53;
+`;
+
+export const CheckDot = styled.div<{ active: boolean }>`
+  cursor: pointer;
+
+  width: 16px;
+  height: 16px;
+
+  border-radius: 100%;
+
+  border: 1px solid #373a53;
+  background: linear-gradient(0deg, #19191f, #19191f), linear-gradient(0deg, #373a53, #373a53);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > div {
+    display: ${(p) => (p.active ? 'block' : 'none')};
+    width: 8px;
+    height: 8px;
+    background: #ebf479;
+
+    border-radius: 100%;
+  }
 `;
