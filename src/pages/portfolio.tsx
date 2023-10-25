@@ -34,7 +34,12 @@ import {
   ProtocolArrowWrapper,
   ProtocolTable,
 } from '@/components/portfolio';
-import { formateAddress, formateValue } from '@/utils/formate';
+import {
+  formateAddress,
+  formateValue,
+  formateValueWithThousandSeparator,
+  formateValueWithThousandSeparatorAndFont,
+} from '@/utils/formate';
 import { IconSeries } from '@/components/portfolio/icons';
 
 const PortfolioDailyData = () => {
@@ -91,12 +96,10 @@ const PortfolioDailyData = () => {
 
   return (
     <ChartContainer
-    
       style={{
-        position: "relative",
-        top: "100px"
+        position: 'relative',
+        top: '100px',
       }}
-    
     >
       <ResponsiveContainer width="100%" height="100%">
         <AreaChart
@@ -3728,7 +3731,17 @@ const WalletComponent = (props: any) => {
       <HoldingTitle>
         <div className="holding-text">Holding</div>
 
-        <div className="holding-value">${formateValue(value_all.toFixed(), 4)}</div>
+        <div className="holding-value">
+          <span className="format-decimals">
+            $
+            <span className="integer-part">
+              {formateValueWithThousandSeparatorAndFont(value_all.toFixed(), 4).integer}
+            </span>
+            <span className="decimal-part">
+              {formateValueWithThousandSeparatorAndFont(value_all.toFixed(), 4).decimal}
+            </span>
+          </span>
+        </div>
       </HoldingTitle>
 
       <HoldingTable>
@@ -3795,7 +3808,7 @@ const WalletComponent = (props: any) => {
                 </td>
                 <td>{formateValue(token.price, 2)}</td>
                 <td>{formateValue(token.amount, 4)}</td>
-                <td>${formateValue(token.usd_value, 4)}</td>
+                <td>${formateValueWithThousandSeparator(token.usd_value, 4)}</td>
               </tr>
             );
           })}
@@ -3958,6 +3971,10 @@ const ProtocolItem = (props: any) => {
     return pre;
   }, {});
 
+  const checkHideValue = (value: number) => {
+    return isHide && value < 0.01;
+  };
+
   if (!protocolItem.chain_info) return <></>;
 
   return (
@@ -3977,7 +3994,24 @@ const ProtocolItem = (props: any) => {
         </div>
 
         <div className="value-filed">
-          <div>${formateValue(protocolItem.protocol_usd_value, 4)}</div>
+          <span className="format-decimals">
+            <span
+              className="integer-part"
+              style={{
+                fontSize: '24px',
+              }}
+            >
+              ${formateValueWithThousandSeparatorAndFont(protocolItem.protocol_usd_value, 4).integer}
+            </span>
+            <span
+              className="decimal-part"
+              style={{
+                fontSize: '18px',
+              }}
+            >
+              {formateValueWithThousandSeparatorAndFont(protocolItem.protocol_usd_value, 4).decimal}
+            </span>
+          </span>
 
           <ProtocolArrowWrapper
             onClick={() => {
@@ -4006,13 +4040,15 @@ const ProtocolItem = (props: any) => {
                   showTitle={false}
                   columns={['Supplied', 'Balance', 'USD Value']}
                   rows={supply_token_list.map((token: any) => {
+                    if (checkHideValue(token.amount * token.price)) return ['omit', 'omit', 'omit'];
+
                     return [
                       <div className="frcs" key={token.id}>
                         <img className="token-icon" src={token.logo_url} />
                         <div className="token-name">{token.name}</div>
                       </div>,
                       formateValue(token.amount, 4),
-                      formateValue(token.amount * token.price, 4),
+                      formateValueWithThousandSeparator(token.amount * token.price, 4),
                     ];
                   })}
                 ></ProtocolTableGenerator>,
@@ -4026,13 +4062,15 @@ const ProtocolItem = (props: any) => {
                   showTitle={false}
                   columns={['Rewards', 'Balance', 'USD Value']}
                   rows={reward_token_list.map((token: any) => {
+                    if (checkHideValue(token.amount * token.price)) return ['omit', 'omit', 'omit'];
+
                     return [
                       <div className="frcs" key={token.id}>
                         <img className="token-icon" src={token.logo_url} />
                         <div className="token-name">{token.name}</div>
                       </div>,
                       formateValue(token.amount, 4),
-                      formateValue(token.amount * token.price, 4),
+                      formateValueWithThousandSeparator(token.amount * token.price, 4),
                     ];
                   })}
                 ></ProtocolTableGenerator>,
@@ -4046,16 +4084,17 @@ const ProtocolItem = (props: any) => {
                   showTitle={false}
                   columns={['Borrowed', 'Balance', 'USD Value']}
                   rows={borrow_token_list.map((token: any) => {
+                    if (checkHideValue(token.amount * token.price)) return ['omit', 'omit', 'omit'];
                     return [
                       <div className="frcs" key={token.id}>
                         <img className="token-icon" src={token.logo_url} />
                         <div className="token-name">{token.name}</div>
                       </div>,
                       formateValue(token.amount, 4),
-                      formateValue(token.amount * token.price, 4),
+                      `$${formateValueWithThousandSeparator(token.amount * token.price, 4)}`,
                     ];
                   })}
-                ></ProtocolTableGenerator>,
+                />,
               );
             }
           }
@@ -4096,7 +4135,7 @@ const ProtocolItem = (props: any) => {
                   {reward_token_list.map((token: any) => {
                     return (
                       <div className="frcs reward-item" key={token.id + token.chain}>
-                        {`${formateValue(token.amount, 4)} ${token.symbol} $(${formateValue(
+                        {`${formateValue(token.amount, 4)} ${token.symbol} $(${formateValueWithThousandSeparator(
                           token.amount * token.price,
                           4,
                         )})`}
@@ -4106,7 +4145,9 @@ const ProtocolItem = (props: any) => {
                 </div>
               );
 
-              const usd_value = `$${formateValue(item.stats.net_usd_value, 4)}`;
+              const usd_value = `$${formateValueWithThousandSeparator(item.stats.net_usd_value, 4)}`;
+
+              if (checkHideValue(item.stats.net_usd_value)) return ['omit', 'omit', 'omit', 'omit'];
 
               return [tokenSeries, balanceList, rewardList, usd_value];
             });
@@ -4168,28 +4209,25 @@ const PortfolioPage: NextPageWithLayout = () => {
 
   return (
     <Wrapper>
+      <div className="frcb">
+        <Profile className="frcs">
+          {DefaultProfileIcon}
 
-      <div className='frcb'>
-      <Profile className="frcs">
-        {DefaultProfileIcon}
+          <div className="">
+            <div className="address-filed ">
+              <span>{formateAddress(sender)}</span>
+              <div className="arrow-filed frcc">{ArrowDone}</div>
+            </div>
 
-        <div className="">
-          <div className="address-filed ">
-            <span>{formateAddress(sender)}</span>
-            <div className="arrow-filed frcc">{ArrowDone}</div>
+            <div className="frcs metamask-filed">
+              {MetaMaskIcon}
+              <span>MetaMask</span>
+            </div>
           </div>
+        </Profile>
 
-          <div className="frcs metamask-filed">
-            {MetaMaskIcon}
-            <span>MetaMask</span>
-          </div>
-        </div>
-      </Profile>
-
-      <PortfolioDailyData></PortfolioDailyData>
-        
+        <PortfolioDailyData></PortfolioDailyData>
       </div>
-     
 
       <PortfolioTabs>
         {['Wallet', 'Protocol'].map((tab) => {
@@ -4220,7 +4258,7 @@ const PortfolioPage: NextPageWithLayout = () => {
 
           <div>
             <div className="network-name">All Networks</div>
-            <div className="usd-value">${formateValue(totalUsdValueOfSupportedChains, 4)}</div>
+            <div className="usd-value">${formateValueWithThousandSeparator(totalUsdValueOfSupportedChains, 4)}</div>
           </div>
         </AllNetWorkTab>
 
@@ -4244,7 +4282,7 @@ const PortfolioPage: NextPageWithLayout = () => {
                 <div className="network-name">{chain.name}</div>
 
                 <div className="value-filed frcs-gm">
-                  <div className="usd-value">${formateValue(chain.usd_value, 2)}</div>
+                  <div className="usd-value">${formateValueWithThousandSeparator(chain.usd_value, 2)}</div>
                   <div className="usd-value-percent">{chain.percentage}%</div>
                 </div>
               </div>

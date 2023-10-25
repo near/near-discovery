@@ -5,6 +5,17 @@ export const Wrapper = styled.div`
   max-width: 1000px;
   position: relative;
   font-family: Gantari;
+
+  .format-decimals {
+    white-space: nowrap;
+    .integer-part {
+      font-size: 24px;
+    }
+    .decimal-part {
+      font-size: 16px;
+    }
+  }
+
   .frcs {
     display: flex;
     align-items: center;
@@ -373,7 +384,7 @@ export const SortArrowDownWrapper = styled.div<{ active: boolean }>`
 `;
 
 export const ProtocolSelectBox = styled.div`
-  width: 238px;
+  width: max-content;
   background: #303142;
   padding: 10px 16px;
   font-family: Gantari;
@@ -387,22 +398,24 @@ export const ProtocolSelectBox = styled.div`
   position: absolute;
   right: 0;
   top: 32px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   z-index: 100;
-
   .function-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 8px;
   }
-
   .minimum-value-box {
-    background: linear-gradient(0deg, rgba(11, 12, 19, 1), rgba(11, 12, 19, 1)), linear-gradient(0deg, #373a53, #373a53);
+    background: linear-gradient(0deg, rgba(11, 12, 19, 0.5), rgba(11, 12, 19, 0.5)),
+      linear-gradient(0deg, #373a53, #373a53);
     border: 1px solid #373a53;
-    padding: 8px;
+    padding: 8px 16px;
     border-radius: 12px;
     white-space: nowrap;
+    margin-right: 12px;
   }
 `;
 
