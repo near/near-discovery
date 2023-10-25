@@ -3,7 +3,6 @@ import Big from 'big.js';
 import { ethers } from 'ethers';
 
 import { Erc20Abi } from './config';
-
 import { shrinkToken } from './utils';
 
 const fetchNearAccount = (accountId: string) =>

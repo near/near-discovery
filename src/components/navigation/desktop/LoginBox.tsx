@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 import { onboard } from '@/data/web3';
 import { useEthersProviderContext } from '@/data/web3';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -10,7 +11,6 @@ import { flushEvents } from '@/utils/analytics';
 
 import { NotificationButton } from '../NotificationButton';
 import { UserDropdownMenu } from './UserDropdownMenu';
-import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
 const nearIcon = (
   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
 import { DesktopNavigationTop } from '../navigation/desktop/DesktopNavigationTop';
 import { LoginBox } from '../navigation/desktop/LoginBox';
 

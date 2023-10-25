@@ -3,10 +3,10 @@ import { Status } from '@near-eth/client/dist/statuses';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { SMALL_SCREEN } from '../near/NearStyleVar';
+import { tokenList } from './config';
 import { ethIcon, nearIcon } from './icons';
 import { formateDate, shrinkToken } from './utils';
-import { tokenList } from './config';
-import { SMALL_SCREEN } from '../near/NearStyleVar';
 
 const IconRight = (
   <svg width="14" height="5" viewBox="0 0 14 5" fill="none" xmlns="http://www.w3.org/2000/svg">

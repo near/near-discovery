@@ -1,42 +1,42 @@
 import { setEthProvider, setNearConnection, setSignerProvider } from '@near-eth/client';
 import { Near, WalletConnection } from '@near-eth/near-ether/node_modules/near-api-js';
+import { useSetChain } from '@web3-onboard/react';
 import Big from 'big.js';
 import { ethers } from 'ethers';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { useSetChain } from '@web3-onboard/react';
-
-import MainWrapper from '@/components/sandbox/css/MainWrapper';
-import { onboard, useEthersProviderContext } from '@/data/web3';
-import { useDefaultLayout } from '@/hooks/useLayout';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { Erc20Abi, tokenList } from '@/components/rainbow-bridge/config';
-import { useAuthStore } from '@/stores/auth';
-import { useVmStore } from '@/stores/vm';
-import { flushEvents } from '@/utils/analytics';
-import type { NextPageWithLayout } from '@/utils/types';
-import { checkApprove, handleApprove } from '../../components/rainbow-bridge/approve';
 import { getBalance } from '@/components/rainbow-bridge/balance';
 import { CompletedTransfers } from '@/components/rainbow-bridge/completed-transfers';
+import { Erc20Abi, tokenList } from '@/components/rainbow-bridge/config';
 import { ConnectButton } from '@/components/rainbow-bridge/connect';
 import { GoBackNav, GoBackNavSourceAllInOne } from '@/components/rainbow-bridge/go-back';
+import { RainbowLeftMenu } from '@/components/rainbow-bridge/left-menu';
 import { PendingTransfers } from '@/components/rainbow-bridge/pending-transfers';
 import {
   Button,
   Input,
+  RainbowBridgeContainer,
   RainbowWrapper,
   Separator,
   SwitchWrapper,
   TokenDark,
   TokenLight,
   Wrapper,
-  RainbowBridgeContainer,
 } from '@/components/rainbow-bridge/rainbow-styled-components';
-import { fetchAllTransfers, useTokenPrice } from '../../components/rainbow-bridge/service';
 import * as storage from '@/components/rainbow-bridge/storage';
 import { transfer } from '@/components/rainbow-bridge/transfer';
-import { useRouter, useSearchParams } from 'next/navigation';
-import { RainbowLeftMenu } from '@/components/rainbow-bridge/left-menu';
+import MainWrapper from '@/components/sandbox/css/MainWrapper';
+import { onboard, useEthersProviderContext } from '@/data/web3';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
+import { useAuthStore } from '@/stores/auth';
+import { useVmStore } from '@/stores/vm';
+import { flushEvents } from '@/utils/analytics';
+import type { NextPageWithLayout } from '@/utils/types';
+
+import { checkApprove, handleApprove } from '../../components/rainbow-bridge/approve';
+import { fetchAllTransfers, useTokenPrice } from '../../components/rainbow-bridge/service';
 
 export const ethIcon = 'https://ipfs.near.social/ipfs/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee';
 
