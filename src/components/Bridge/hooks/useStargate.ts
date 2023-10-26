@@ -1,10 +1,10 @@
 import Big from 'big.js';
-import { Contract, providers,utils } from 'ethers';
+import { Contract, providers, utils } from 'ethers';
 import { useState } from 'react';
 
 import { chainCofig } from '@/config/bridge';
 import useAccount from '@/hooks/useAccount';
-import { usePriceStore } from '@/stores/price';
+import { myPriceStore } from '@/stores/price';
 
 import type { Chain, Token } from '../types';
 
@@ -79,7 +79,7 @@ export default function useStargate() {
       dstNativeAddr: '0x0000000000000000000000000000000000000001',
     });
     setFee(res[0].toString());
-    const price = usePriceStore((store) => store.price);
+    const price = myPriceStore((store) => store.price);
     const tokenPrice = price[chain.nativeCurrency.symbol];
     if (tokenPrice) {
       return (

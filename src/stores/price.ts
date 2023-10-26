@@ -8,7 +8,7 @@ type PriceStore = PriceState & {
   set: (update: PriceState) => void;
 };
 
-export const usePriceStore = create<PriceStore>((set) => ({
+export const myPriceStore = create<PriceStore>((set) => ({
   price: {},
   set: (params) => set(() => ({ ...params })),
 }));
