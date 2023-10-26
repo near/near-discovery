@@ -10,6 +10,7 @@ import { useDefaultLayout, useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
+import NewHomePage from './homePage';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 
@@ -63,7 +64,7 @@ const HomePage: NextPageWithLayout = () => {
   //     <NearOrgHomePage />
   //   </>
   // );
-  return <NearHomePage />;
+  return <NewHomePage />;
 };
 
 HomePage.getLayout = useDefaultLayout;

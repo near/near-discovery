@@ -29,9 +29,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
       <div className="row">
         <div
           className="d-inline-block"
-          style={{
-            paddingTop: 'var(--body-top-padding)',
-          }}
         >
           {/* <VmComponent
             key={components.tosCheck}
