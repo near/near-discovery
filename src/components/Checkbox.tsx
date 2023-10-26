@@ -42,15 +42,7 @@ const StyledCheckbox = styled.div<{ checked: boolean; disabled?: boolean }>`
   }`}
 `;
 
-const Checkbox = ({
-  checked,
-  disabled,
-  onClick = () => {},
-}: {
-  checked: boolean;
-  disabled?: boolean;
-  onClick?: () => void;
-}) => {
+const Checkbox = ({ checked, disabled, onClick }: { checked: boolean; disabled?: boolean; onClick?: () => void }) => {
   return <StyledCheckbox checked={checked} disabled={disabled} onClick={onClick} />;
 };
 
