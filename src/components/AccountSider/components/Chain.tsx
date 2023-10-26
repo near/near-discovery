@@ -6,8 +6,8 @@ import useSwitchChain from '@/hooks/useSwitchChain';
 import chains from '@/config/chains';
 import Loading from '@/components/Icons/Loading';
 
-const StyledContainer = styled.div<{ mt?: number }>`
-  width: 204px;
+const StyledContainer = styled.div<{ mt?: number; showName?: boolean }>`
+  width: ${({ showName }) => (showName ? '204px' : '70px')};
   height: 38px;
   margin: 0 auto;
   border: 1px solid #373a53;
@@ -60,7 +60,7 @@ const ChainItem = styled(StyledChain)<{ active?: boolean }>`
   ${({ active }) => active && 'background-color: #ebf479; pointer-events: none;color: #000'}
 `;
 
-const Chain = ({ mt }: { mt?: number }) => {
+const Chain = ({ mt, showName = true }: { mt?: number; showName?: boolean }) => {
   const { chainId } = useAccount();
   const currentChain = useMemo(() => (chainId ? chains[chainId] : null), [chainId]);
   const { switching, switchNetwork } = useSwitchChain();
@@ -78,6 +78,7 @@ const Chain = ({ mt }: { mt?: number }) => {
   return (
     <StyledContainer
       mt={mt}
+      showName={showName}
       onClick={(ev) => {
         ev.stopPropagation();
         setShowList(!showList);
@@ -86,7 +87,9 @@ const Chain = ({ mt }: { mt?: number }) => {
       <StyledChain>
         {currentChain && !switching && <ChainLogo src={currentChain.icon} />}
         {switching && <Loading />}
-        <ChainName>{switching ? 'Request' : currentChain ? currentChain.chainName : 'Select Network'}</ChainName>
+        <ChainName>
+          {switching ? 'Request' : currentChain ? (showName ? currentChain.chainName : '') : 'Select Network'}
+        </ChainName>
       </StyledChain>
       <ArrowIconWrapper>
         <ArrowIcon size={12} />

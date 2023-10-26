@@ -2,8 +2,20 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import { menuData } from '@/data/menuData';
+import Chain from '@/components/AccountSider/components/Chain';
+import AccountItem from '@/components/AccountSider/components/AccountItem';
+import { useLayoutStore } from '@/stores/layout';
+
+const LoginContainer = styled.div`
+  width: auto;
+  align-items: center;
+  display: flex;
+  gap: 10px;
+`;
+const AccountWrapper = styled.div`
+  cursor: pointer;
+`;
 
 export const DesktopNavigationTop = () => {
   const Container = styled.div`
@@ -132,21 +144,17 @@ export const DesktopNavigationTop = () => {
     }
   `;
 
-  const LoginContainer = styled.div`
-    width: auto;
-    align-items: center;
-  `;
-
   const logoUrl = 'https://ipfs.near.social/ipfs/bafkreifzlmyfwus3t24c5xwz5hg5j4p7tk2pa4lisq4qkxuyky5huxkz6e';
 
   const lockUrl = 'https://ipfs.near.social/ipfs/bafkreihwfdlygayrdbdjzofkt7js7dhaopyvys7pyglb7zdqvsao7ynt2u';
+
+  const setLayoutStore = useLayoutStore((store) => store.set);
 
   const router = useRouter();
   const currentPath = router.pathname;
 
   const [showSubmenu, setShowSubmenu] = useState(false);
   const [activeParentIndex, setActiveParentIndex] = useState(-1);
-
   useEffect(() => {
     const parentIndex = menuData.findIndex(
       (item) =>
@@ -221,7 +229,14 @@ export const DesktopNavigationTop = () => {
           })}
         </MenuContainer>
         <LoginContainer>
-          <div className="container-login"></div>
+          <Chain showName={false} />
+          <AccountWrapper
+            onClick={() => {
+              setLayoutStore({ showAccountSider: true });
+            }}
+          >
+            <AccountItem showCopy={false} logoSize={28} />
+          </AccountWrapper>
         </LoginContainer>
       </div>
 

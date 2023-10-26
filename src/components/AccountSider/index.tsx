@@ -1,5 +1,6 @@
 import { memo, useState } from 'react';
 import styled from 'styled-components';
+import { useLayoutStore } from '@/stores/layout';
 import Header from './components/Header';
 import Chain from './components/Chain';
 import Amount from './components/Amount';
@@ -8,7 +9,7 @@ import Split from './components/Split';
 import Tokens from './components/Tokens';
 import BridgeWrapper from './components/BridgeWrapper';
 
-const StyledPanel = styled.div`
+const StyledPanel = styled.div<{ display: boolean }>`
   width: 352px;
   height: calc(100% - 40px);
   border-radius: 32px;
@@ -22,6 +23,8 @@ const StyledPanel = styled.div`
   right: 20px;
   top: 20px;
   z-index: 50;
+  transition: 0.5s;
+  transform: translate(${({ display }) => (display ? 0 : 400)}px);
 `;
 const Content = styled.div`
   position: relative;
@@ -38,11 +41,19 @@ const Bg = styled.div`
   left: 0px;
   border-radius: 0px 0px 32px 32px;
 `;
+const CloseIcon = styled.div`
+  position: absolute;
+  padding: 5px;
+  left: -27px;
+  top: 16px;
+  cursor: pointer;
+`;
 
 const AccountSider = () => {
   const [tab, setTab] = useState<'bridge' | 'account'>('account');
+  const layoutStore = useLayoutStore();
   return (
-    <StyledPanel>
+    <StyledPanel display={layoutStore.showAccountSider}>
       <Content>
         <Header />
         {tab === 'account' && (
@@ -68,6 +79,20 @@ const AccountSider = () => {
         )}
       </Content>
       <Bg />
+      {layoutStore.showAccountSider && (
+        <CloseIcon
+          onClick={() => {
+            layoutStore.set({
+              showAccountSider: false,
+            });
+          }}
+        >
+          <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M1 12L6 6.5L1 1" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+            <path d="M9 12L14 6.5L9 1" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+          </svg>
+        </CloseIcon>
+      )}
     </StyledPanel>
   );
 };
