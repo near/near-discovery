@@ -4,7 +4,7 @@ const CurrencyIconWrapper = styled.div<{ mr: number }>`
   position: relative;
   margin-right: ${({ mr }) => mr}px;
 `;
-const CurrencyIcon = styled.img<{ size: number }>`
+const StyledCurrencyIcon = styled.img<{ size: number }>`
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
   border-radius: 50%;
@@ -25,7 +25,7 @@ const Empty = styled.div<{ size: number }>`
   background-color: #979abe;
 `;
 
-export default ({
+export default function CurrencyIcon({
   token,
   chain,
   size = 38,
@@ -35,12 +35,12 @@ export default ({
   chain?: string;
   size?: number;
   mr?: number;
-}) => {
+}) {
   return (
     <CurrencyIconWrapper mr={mr}>
-      {token && <CurrencyIcon size={size} src={token} />}
+      {token && <StyledCurrencyIcon size={size} src={token} />}
       {chain && <ChainIcon size={size * 0.6} src={chain} />}
       {!token && <Empty size={size} />}
     </CurrencyIconWrapper>
   );
-};
+}

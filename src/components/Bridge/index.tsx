@@ -1,7 +1,7 @@
 import Big from 'big.js';
 import { utils } from 'ethers';
 import { debounce } from 'lodash';
-import { memo, useCallback, useEffect,useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import useAccount from '@/hooks/useAccount';
@@ -96,8 +96,8 @@ const Bridge = () => {
       );
     }
     if (!item) return;
-    if ((item as Token).address) {
-      setSelectedTokenAddress((item as Token).address);
+    if (item as Token) {
+      setSelectedTokenAddress((item as Token).address || '');
     } else {
       setSelectedChainId(item.chainId);
     }

@@ -24,7 +24,7 @@ export default function useApprove({
   const { account, provider } = useAccount();
 
   const checkApproved = async () => {
-    if (!token || !amount || !chain || !spender) return;
+    if (!token?.address || !amount || !chain || !spender) return;
     const provider = new JsonRpcProvider(chain?.rpcUrls[0]);
     const TokenContract = new Contract(
       token.address,
@@ -49,7 +49,7 @@ export default function useApprove({
   };
 
   const approve = async () => {
-    if (!token || !amount || !chain || !spender) return;
+    if (!token?.address || !amount || !chain || !spender) return;
     setApproving(true);
     try {
       const signer = provider.getSigner(account);

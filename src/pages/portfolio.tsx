@@ -1,6 +1,6 @@
 import Big from 'big.js';
 import React, { useEffect, useState } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, YAxis } from 'recharts';
 import styled from 'styled-components';
 
 import {

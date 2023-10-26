@@ -56,7 +56,7 @@ const DialogTokens = ({
       const _tokens = ev?.target.value
         ? tokens.filter((token) => {
             return (
-              token.address === ev.target.value || token.name.toLowerCase().includes(ev.target.value?.toLowerCase())
+              token.address === ev.target.value || token.name?.toLowerCase().includes(ev.target.value?.toLowerCase())
             );
           })
         : tokens;

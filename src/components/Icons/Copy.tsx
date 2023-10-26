@@ -9,7 +9,7 @@ const CopyIcon = styled.div`
   }
 `;
 
-export default ({ size = 16, onCopy }: { size?: number; onCopy: () => void }) => {
+export default function Copy({ size = 16, onCopy }: { size?: number; onCopy: () => void }) {
   return (
     <CopyIcon
       style={{ width: size * 1.5, lineHeight: size * 1.5 + 'px' }}
@@ -36,4 +36,4 @@ export default ({ size = 16, onCopy }: { size?: number; onCopy: () => void }) =>
       </svg>
     </CopyIcon>
   );
-};
+}

@@ -4,6 +4,8 @@ declare module 'nanoid' {
   export function nanoid(size?: number): string;
 }
 
+declare module 'recharts';
+
 interface Window {
   zE: (name: string, method: string) => void | undefined;
 }
