@@ -33,6 +33,10 @@
 			"sizes": "192x192"
 		},
 		{
+			"src": "logo512png",
+			"sizes": "512x512"
+		},
+		{
 			"src": "favicon.ico",
 			"sizes": "64x64"
 		},

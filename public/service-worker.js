@@ -121,8 +121,3 @@ self.addEventListener('activate', (event) => console.log('SW - activating in pro
 self.addEventListener('push', handlePushEvent);
 
 self.addEventListener('notificationclick', handlePushClick);
-
-// PWA Support
-self.addEventListener('fetch', (event) => {
-  event.respondWith(fetch(request));
-});
