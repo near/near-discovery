@@ -46,6 +46,9 @@ import {
 } from '@/utils/formate';
 import type { NextPageWithLayout } from '@/utils/types';
 import { useNetCurve24h, useSenderPortfolioData, useTotalBalance } from '@/hooks/usePortfolioService';
+
+import type { AllChainBalanceInterface } from '@/hooks/usePortfolioService';
+
 import { NoDataLayout } from '@/components/portfolio/common';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { CheckDot } from '../components/portfolio/index';
@@ -54,14 +57,14 @@ const ExecutionRecords = () => {
   return <VmComponent src="bluebiu.near/widget/ZKEVM.ExecuteRecords"></VmComponent>;
 };
 
-const PortfolioDailyData = () => {
+const PortfolioDailyData = ({ totalBalance }: { totalBalance: number | undefined }) => {
   const ChartContainer = styled.div`
     color: #fff;
     width: 425px;
     height: 120px;
   `;
 
-  const { netCurve24h, diff, totalBalance } = useNetCurve24h();
+  const { netCurve24h, diff } = useNetCurve24h();
 
   if (!netCurve24h || !diff || totalBalance === undefined) return <></>;
 
@@ -71,7 +74,6 @@ const PortfolioDailyData = () => {
     <ChartContainer
       style={{
         position: 'relative',
-        // top: '60px',
       }}
     >
       <ChartDataWrapper>
@@ -156,13 +158,13 @@ const colorConfig = {
 
 const ChainList = ['op', 'eth', 'metis', 'era', 'bsc', 'base', 'mnt', 'avax', 'pze', 'matic', 'xdai', 'linea', 'arb'];
 
-const useAllPorfolioDataList = () => {
+const useAllPorfolioDataList = (allChainsBalance: AllChainBalanceInterface) => {
   const [sortBy, setSortBy] = useState<'usd_value' | 'price' | 'amount'>('usd_value');
 
   const data = useSenderPortfolioData();
   console.log('data: ', data);
 
-  const { allChainsBalance, allChainList, allTokenList, protocolList } = data;
+  const { allChainList, allTokenList, protocolList } = data;
 
   const allChainListSupported = allChainList.filter((item) => ChainList.includes(item.id));
 
@@ -439,6 +441,7 @@ const ProtocolComponent = (props: any) => {
   const [isExpand, setIsExpand] = useState<boolean>(false);
 
   const displayProtocolList = parsedProtocolList.filter(filterFunc);
+  console.log('displayProtocolList: ', displayProtocolList);
 
   return (
     <>
@@ -820,19 +823,24 @@ const ProtocolItem = (props: any) => {
   );
 };
 
-const PortFolioDataArea = () => {
+const PortFolioDataArea = ({
+  totalBalance,
+  allChainsBalance,
+}: {
+  totalBalance: number | undefined;
+  allChainsBalance: AllChainBalanceInterface;
+}) => {
   const [CurTab, setCurTab] = useState<'Wallet' | 'Protocol' | 'Execution Records'>('Wallet');
 
   const [network, setNetwork] = useState<string>('all');
 
-  const data = useAllPorfolioDataList();
+  const data = useAllPorfolioDataList(allChainsBalance);
 
   const {
     parsedAllTokenList,
     parsedProtocolList,
     totalUsdValueOfSupportedChains,
     supportedChainList,
-    allChainsBalance,
     sortBy,
     setSortBy,
   } = data;
@@ -935,6 +943,8 @@ const PortFolioDataArea = () => {
 const PortfolioPage: NextPageWithLayout = () => {
   const { sender, wallet, provider, connect } = useEthersSender();
 
+  const { totalBalance, allChainsBalance } = useTotalBalance();
+
   return (
     <Wrapper>
       <div className="frcb-start">
@@ -954,10 +964,10 @@ const PortfolioPage: NextPageWithLayout = () => {
           </div>
         </Profile>
 
-        <PortfolioDailyData></PortfolioDailyData>
+        <PortfolioDailyData totalBalance={totalBalance}></PortfolioDailyData>
       </div>
 
-      <PortFolioDataArea></PortFolioDataArea>
+      <PortFolioDataArea totalBalance={totalBalance} allChainsBalance={allChainsBalance}></PortFolioDataArea>
     </Wrapper>
   );
 };

@@ -16,8 +16,6 @@ export const useNetCurve24h = () => {
 
   const [diff, setDiff] = useState<{ value: string; dir: 'desc' | 'asc' }>();
 
-  const totalBalance = useTotalBalance();
-
   const senderParams = JSON.stringify({
     id: sender,
   });
@@ -53,7 +51,7 @@ export const useNetCurve24h = () => {
       });
   }, [sender]);
 
-  return { netCurve24h, diff, totalBalance };
+  return { netCurve24h, diff };
 };
 
 export const useTotalBalance = () => {
@@ -65,15 +63,24 @@ export const useTotalBalance = () => {
 
   const [totalBalance, setTotalBalance] = useState<number>();
 
+  const [allChainsBalance, setAllChainsBalance] = useState<AllChainBalanceInterface>({
+    total_usd_value: 0,
+    chain_list: [],
+  });
+
   useEffect(() => {
     if (!sender) return;
 
     fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_balance&params=${senderParams}`)
       .then((response) => response.json())
-      .then((data) => setTotalBalance(data?.data?.total_usd_value));
+      .then((data) => {
+        setAllChainsBalance(data?.data);
+
+        setTotalBalance(data?.data?.total_usd_value);
+      });
   }, [sender]);
 
-  return totalBalance;
+  return { totalBalance, allChainsBalance };
 };
 
 interface ChainListItem {
@@ -86,7 +93,7 @@ interface ChainListItem {
   is_support_pre_exec: boolean;
 }
 
-interface AllChainBalanceInterface {
+export interface AllChainBalanceInterface {
   total_usd_value: number;
   chain_list: ChainlistBalance[];
 }
@@ -126,11 +133,6 @@ interface UserTokenItemInterface {
 export const useSenderPortfolioData = () => {
   const { sender } = useEthersSender();
 
-  const [allChainsBalance, setAllChainsBalance] = useState<AllChainBalanceInterface>({
-    total_usd_value: 0,
-    chain_list: [],
-  });
-
   const [allChainList, setAllChainList] = useState<ChainListItem[]>([]);
 
   const [allTokenList, setAllTokenList] = useState<UserTokenItemInterface[]>([]);
@@ -144,10 +146,6 @@ export const useSenderPortfolioData = () => {
       id: sender,
     });
 
-    const allChainsBalance = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_balance&params=${senderParams}`).then(
-      (res) => res.json(),
-    );
-
     const allChainList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/chain/list&params=""`).then((res) => res.json());
 
     const allTokenList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/all_token_list&params=${senderParams}`).then((res) =>
@@ -158,22 +156,19 @@ export const useSenderPortfolioData = () => {
       `${DAPDAP_DEBANK_URL}?url=/v1/user/all_complex_protocol_list&params=${senderParams}`,
     ).then((res) => res.json());
 
-    const fetchList = [allChainsBalance, allChainList, allTokenList, protocolList];
+    const fetchList = [allChainList, allTokenList, protocolList];
 
     return Promise.all(fetchList)
       .then((responses) => {
-        // if (responses[0].code == 0) {
-        //   setAllChainsBalance(responses[0].data);
-        // }
-        // if (responses[1].code == 0) {
-        //   setAllChainList(responses[1].data);
-        // }
-        // if (responses[2].code == 0) {
-        //   setAllTokenList(responses[2].data);
-        // }
-        // if (responses[3].code === 0) {
-        //   setProtocolList(responses[3].data);
-        // }
+        if (responses[0].code == '0') {
+          setAllChainList(responses[0].data);
+        }
+        if (responses[1].code == '0') {
+          setAllTokenList(responses[1].data);
+        }
+        if (responses[2].code === '0') {
+          setProtocolList(responses[2].data);
+        }
       })
       .catch((err) => {
         console.log('err1111: ', err);
@@ -184,5 +179,5 @@ export const useSenderPortfolioData = () => {
     fetchAll();
   }, [sender]);
 
-  return { allChainsBalance, allChainList, allTokenList, protocolList };
+  return { allChainList, allTokenList, protocolList };
 };

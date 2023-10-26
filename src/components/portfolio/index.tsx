@@ -307,8 +307,14 @@ export const HoldingTable = styled.table`
 
   thead tr:first-child th:last-child {
     padding-right: 28px;
-    position: absolute;
+    /* position: absolute; */
     right: 0;
+
+    > div {
+      cursor: pointer;
+      width: 100%;
+      justify-content: end;
+    }
 
     /* border-top-left: none; */
   }
