@@ -36,7 +36,7 @@
         "@sentry/nextjs": "^7.58.1",
         "@types/node": "18.18.1",
         "@types/react": "18.2.0",
-        "@types/react-dom": "18.2.1",
+        "@types/react-dom": "18.2.10",
         "@web3-onboard/core": "^2.20.2",
         "@web3-onboard/injected-wallets": "^2.10.1",
         "@web3-onboard/ledger": "^2.4.6",
