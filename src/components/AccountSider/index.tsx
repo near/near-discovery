@@ -11,13 +11,12 @@ import BridgeWrapper from './components/BridgeWrapper';
 
 const StyledPanel = styled.div<{ display: boolean }>`
   width: 352px;
-  height: calc(100% - 40px);
+  height: calc(100vh - 40px);
   border-radius: 32px;
   border: 1px solid #343838;
   box-sizing: border-box;
   padding: 20px 0px;
   background-color: #141414;
-  min-height: calc(100vh - 40px);
   --padding-x: 20px;
   position: fixed;
   right: 20px;
