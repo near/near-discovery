@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { zkSync } from '@/config/tokens/zkSync';
 
 export const zkSyncTokens = {

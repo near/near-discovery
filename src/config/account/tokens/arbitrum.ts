@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { arbitrum } from '@/config/tokens/arbitrum';
 
 export const arbitrumTokens = {

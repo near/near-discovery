@@ -1,4 +1,4 @@
-import { Token } from '@/types';
+import type { Token } from '@/types';
 
 const CHAIN_ID = 59144;
 export const linea: { [key: string]: Token } = {

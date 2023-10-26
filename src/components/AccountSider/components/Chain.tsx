@@ -1,10 +1,11 @@
-import { memo, useMemo, useState, useEffect } from 'react';
+import { memo, useEffect,useMemo, useState } from 'react';
 import styled from 'styled-components';
+
 import ArrowIcon from '@/components/Icons/ArrowIcon';
+import Loading from '@/components/Icons/Loading';
+import chains from '@/config/chains';
 import useAccount from '@/hooks/useAccount';
 import useSwitchChain from '@/hooks/useSwitchChain';
-import chains from '@/config/chains';
-import Loading from '@/components/Icons/Loading';
 
 const StyledContainer = styled.div<{ mt?: number; showName?: boolean }>`
   width: ${({ showName }) => (showName ? '204px' : '70px')};

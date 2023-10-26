@@ -2,9 +2,10 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { menuData } from '@/data/menuData';
-import Chain from '@/components/AccountSider/components/Chain';
+
 import AccountItem from '@/components/AccountSider/components/AccountItem';
+import Chain from '@/components/AccountSider/components/Chain';
+import { menuData } from '@/data/menuData';
 import { useLayoutStore } from '@/stores/layout';
 
 const LoginContainer = styled.div`

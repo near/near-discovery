@@ -1,8 +1,10 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import ArrowIcon from '@/components/Icons/ArrowIcon';
-import Split from './Split';
+
 import Bridge from '@/components/Bridge';
+import ArrowIcon from '@/components/Icons/ArrowIcon';
+
+import Split from './Split';
 
 const StyledBridgeWrapper = styled.div`
   color: #fff;

@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
+import type { Chain, Token } from '../types';
 import CurrencyRow from './CurrencyRow';
-import { Chain, Token } from '../types';
 
 const StyledCurrencyList = styled.div`
   padding: 0px 0px 20px;

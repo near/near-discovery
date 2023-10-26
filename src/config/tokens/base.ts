@@ -1,4 +1,4 @@
-import { Token } from '@/types';
+import type { Token } from '@/types';
 
 const CHAIN_ID = 8453;
 export const base: { [key: string]: Token } = {

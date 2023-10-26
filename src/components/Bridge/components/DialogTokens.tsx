@@ -1,8 +1,10 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import Modal from '@/components/Modal';
-import CurrencyList from './CurrencyList';
+
 import type { Chain, Token } from '../types';
+import CurrencyList from './CurrencyList';
 
 const InputWarpper = styled.div`
   height: 46px;

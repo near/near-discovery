@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { mantle } from '@/config/tokens/mantle';
 
 export const mantleTokens = {

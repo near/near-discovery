@@ -1,6 +1,6 @@
 import Big from 'big.js';
 
-export function balanceFormated(balance?: string, digits: number = 4) {
+export function balanceFormated(balance?: string, digits = 4) {
   if (!balance) return '0';
   const _balance = new Big(balance);
   if (_balance.eq(0)) return '0';
@@ -8,7 +8,7 @@ export function balanceFormated(balance?: string, digits: number = 4) {
   return _balance.toFixed(digits);
 }
 
-export function valueFormated(balance?: string, price?: string, digits: number = 2) {
+export function valueFormated(balance?: string, price?: string, digits = 2) {
   if (!balance || !price) return '0';
   const _balance = new Big(balance);
   const _price = new Big(price);

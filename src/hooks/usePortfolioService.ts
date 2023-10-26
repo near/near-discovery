@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import useEthersSender from './useEthersSender';
 import Big from 'big.js';
+import React, { useEffect, useState } from 'react';
+
+import useEthersSender from './useEthersSender';
 
 interface NetCurve24hUserItem {
   timestamp: number;

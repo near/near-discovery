@@ -1,7 +1,9 @@
 import { useMemo } from 'react';
+
 import chains from '@/config/chains';
+import type { Chain } from '@/types';
+
 import useAccount from './useAccount';
-import { Chain } from '@/types';
 
 export default function useChain(id?: number) {
   const { chainId } = useAccount();

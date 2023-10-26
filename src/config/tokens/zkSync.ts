@@ -1,4 +1,4 @@
-import { Token } from '@/types';
+import type { Token } from '@/types';
 
 const CHAIN_ID = 324;
 export const zkSync: { [key: string]: Token } = {

@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import CopyButton from '@/components/CopyButton';
 import useAccount from '@/hooks/useAccount';
 import { ellipsAccount } from '@/utils/account';

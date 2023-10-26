@@ -1,7 +1,8 @@
 import { useMemo } from 'react';
-import useAccount from '@/hooks/useAccount';
+
 import tokens from '@/config/account/tokens';
-import { Token } from '@/types';
+import useAccount from '@/hooks/useAccount';
+import type { Token } from '@/types';
 
 export default function () {
   const { chainId } = useAccount();

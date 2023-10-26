@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
@@ -5,7 +6,6 @@ import { menuData } from '@/data/menuData';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useEffect, useState } from 'react';
 
 const NewHomePage: NextPageWithLayout = () => {
   const components = useBosComponents();

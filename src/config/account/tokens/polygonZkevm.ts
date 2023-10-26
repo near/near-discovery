@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { polygonZkevm } from '@/config/tokens/polygonZkevm';
 
 export const polygonZkevmTokens = {

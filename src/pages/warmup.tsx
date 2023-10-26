@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { Container } from 'react-bootstrap';
-import styled from 'styled-components';
 
 const hotIcon = 'https://ipfs.near.social/ipfs/bafkreiewzowjm4fk7m5x3h32k6b4hpcdvwg23wndqpo5frzjiqr35xwnd4';
 

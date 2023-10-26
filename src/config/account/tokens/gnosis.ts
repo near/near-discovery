@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { gnosis } from '@/config/tokens/gnosis';
 
 export const gnosisTokens = {

@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
+
 import useAccount from '@/hooks/useAccount';
+
 import type { InviteCodeRecord } from '../types';
 
 export default function () {

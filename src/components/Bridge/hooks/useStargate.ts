@@ -1,10 +1,12 @@
-import { useState } from 'react';
-import { Contract, utils, providers } from 'ethers';
 import Big from 'big.js';
-import useAccount from '@/hooks/useAccount';
+import { Contract, providers,utils } from 'ethers';
+import { useState } from 'react';
+
 import { chainCofig } from '@/config/bridge';
+import useAccount from '@/hooks/useAccount';
 import { usePriceStore } from '@/stores/price';
-import { Chain, Token } from '../types';
+
+import type { Chain, Token } from '../types';
 
 const { JsonRpcProvider } = providers;
 

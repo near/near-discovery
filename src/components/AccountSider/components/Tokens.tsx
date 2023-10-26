@@ -1,13 +1,15 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import CurrencyIcon from '@/components/CurrencyIcon';
-import useChain from '@/hooks/useChain';
-import { usePriceStore } from '@/stores/price';
-import useTokenBalance from '@/hooks/useCurrencyBalance';
-import useTokens from '../hooks/useTokens';
-import { balanceFormated, valueFormated } from '@/utils/balance';
-import { Token } from '@/types';
 import Loading from '@/components/Icons/Loading';
+import useChain from '@/hooks/useChain';
+import useTokenBalance from '@/hooks/useCurrencyBalance';
+import { usePriceStore } from '@/stores/price';
+import { Token } from '@/types';
+import { balanceFormated, valueFormated } from '@/utils/balance';
+
+import useTokens from '../hooks/useTokens';
 
 const StyledContainer = styled.div<{ mt?: number }>`
   margin-top: ${({ mt }) => mt + 'px'};

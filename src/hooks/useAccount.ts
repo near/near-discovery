@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
 import { useConnectWallet } from '@web3-onboard/react';
-import chains from '@/config/chains';
 import { ethers } from 'ethers';
+import { useMemo } from 'react';
+
+import chains from '@/config/chains';
 
 export default function useAccount() {
   const [{ wallet }] = useConnectWallet();

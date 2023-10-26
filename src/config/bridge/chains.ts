@@ -1,5 +1,6 @@
-import chains from '../chains';
 import type { Chain } from '@/types';
+
+import chains from '../chains';
 
 export const supportChains = {
   8453: chains[8453],

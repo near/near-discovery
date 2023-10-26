@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { metis } from '@/config/tokens/metis';
 
 export const metisTokens = {

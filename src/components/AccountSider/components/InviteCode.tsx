@@ -1,8 +1,10 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import CopyButton from '@/components/CopyButton';
-import useInviteCode from '../hooks/useInviteCode';
 import Loading from '@/components/Icons/Loading';
+
+import useInviteCode from '../hooks/useInviteCode';
 
 const StyledInviteCode = styled.div<{ display?: boolean }>`
   width: 145px;

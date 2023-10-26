@@ -1,17 +1,18 @@
-import { baseTokens } from './base';
-import { ethereumTokens } from './ethereum';
+import type { Token } from '@/types';
+
 import { arbitrumTokens } from './arbitrum';
 import { avalancheTokens } from './avalanche';
+import { baseTokens } from './base';
 import { bscTokens } from './bsc';
+import { ethereumTokens } from './ethereum';
+import { gnosisTokens } from './gnosis';
 import { lineaTokens } from './linea';
+import { mantleTokens } from './mantle';
 import { metisTokens } from './metis';
 import { optimismTokens } from './optimism';
 import { polygonTokens } from './polygon';
-import { gnosisTokens } from './gnosis';
 import { polygonZkevmTokens } from './polygonZkevm';
 import { zkSyncTokens } from './zkSync';
-import { mantleTokens } from './mantle';
-import { Token } from '@/types';
 
 export default {
   42161: arbitrumTokens,

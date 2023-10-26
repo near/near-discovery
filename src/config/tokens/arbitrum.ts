@@ -1,4 +1,4 @@
-import { Token } from '@/types';
+import type { Token } from '@/types';
 
 const CHAIN_ID = 42161;
 export const arbitrum: { [key: string]: Token } = {

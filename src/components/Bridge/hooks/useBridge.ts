@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { Token, Chain } from '../types';
+
+import type { Chain,Token } from '../types';
 
 export default ({
   chainId,

@@ -1,13 +1,12 @@
+import { useSetChain } from '@web3-onboard/react';
+import { useRouter } from 'next/router';
+
+import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import chains from '@/config/chains';
+import { dapps } from '@/config/dapps';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { dapps } from '@/config/dapps';
-import { useRouter } from 'next/router';
-import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-
-import chains from '@/config/chains';
-
-import { useSetChain } from '@web3-onboard/react';
 
 // set dynamic routes for dapps in config file
 

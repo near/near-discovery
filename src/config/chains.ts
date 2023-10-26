@@ -1,4 +1,4 @@
-import { Chain } from '@/types';
+import type { Chain } from '@/types';
 
 //TODO: need wrap token address
 //TODO: need all chains live on dapdap

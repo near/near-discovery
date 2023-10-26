@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { avalanche } from '@/config/tokens/avalanche';
 
 export const avalancheTokens = {

@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { linea } from '@/config/tokens/linea';
 
 export const lineaTokens = {

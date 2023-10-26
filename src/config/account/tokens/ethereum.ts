@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { ethereum } from '@/config/tokens/ethereum';
 
 export const ethereumTokens = {

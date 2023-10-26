@@ -1,13 +1,15 @@
 import { memo, useState } from 'react';
 import styled from 'styled-components';
+
 import { useLayoutStore } from '@/stores/layout';
-import Header from './components/Header';
-import Chain from './components/Chain';
-import Amount from './components/Amount';
+
 import Actions from './components/Actions';
+import Amount from './components/Amount';
+import BridgeWrapper from './components/BridgeWrapper';
+import Chain from './components/Chain';
+import Header from './components/Header';
 import Split from './components/Split';
 import Tokens from './components/Tokens';
-import BridgeWrapper from './components/BridgeWrapper';
 
 const StyledPanel = styled.div<{ display: boolean }>`
   width: 352px;

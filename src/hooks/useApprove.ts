@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import useAccount from './useAccount';
-import { Contract, providers, utils } from 'ethers';
 import Big from 'big.js';
-import { Chain, Token } from '@/types';
+import { Contract, providers, utils } from 'ethers';
+import { useEffect, useState } from 'react';
+
+import type { Chain, Token } from '@/types';
+
+import useAccount from './useAccount';
 
 const { JsonRpcProvider, Web3Provider } = providers;
 

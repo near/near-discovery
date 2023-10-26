@@ -1,9 +1,10 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import useTokenBalance from '@/hooks/useCurrencyBalance';
+
 import useChain from '@/hooks/useChain';
-import { balanceFormated, valueFormated } from '@/utils/balance';
+import useTokenBalance from '@/hooks/useCurrencyBalance';
 import { usePriceStore } from '@/stores/price';
+import { balanceFormated, valueFormated } from '@/utils/balance';
 
 const StyledWrapper = styled.div<{ mt?: number }>`
   text-align: center;

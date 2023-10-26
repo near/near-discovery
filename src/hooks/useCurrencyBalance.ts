@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
 import { Contract, providers, utils } from 'ethers';
+import { useEffect,useState } from 'react';
+
 import chains from '@/config/chains';
-import useAccount from './useAccount';
 import type { Token } from '@/types';
+
+import useAccount from './useAccount';
 
 export default function useTokenBalance({
   currency,

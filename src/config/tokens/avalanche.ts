@@ -1,4 +1,4 @@
-import { Token } from '@/types';
+import type { Token } from '@/types';
 
 const CHAIN_ID = 43114;
 export const avalanche: { [key: string]: Token } = {

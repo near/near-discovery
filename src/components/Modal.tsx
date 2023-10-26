@@ -1,5 +1,7 @@
-import { ReactNode, memo } from 'react';
+import type { ReactNode} from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
+
 import CloseIcon from './Icons/Close';
 
 const Dialog = styled.div`

@@ -1,10 +1,12 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { balanceFormated } from '@/utils/balance';
-import { Token } from '../types';
-import useTokenBalance from '@/hooks/useCurrencyBalance';
-import Loading from '@/components/Icons/Loading';
+
 import CurrencyIcon from '@/components/CurrencyIcon';
+import Loading from '@/components/Icons/Loading';
+import useTokenBalance from '@/hooks/useCurrencyBalance';
+import { balanceFormated } from '@/utils/balance';
+
+import type { Token } from '../types';
 
 const StyledCurrencyRow = styled.div`
   padding: 10px 20px;

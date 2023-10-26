@@ -1,22 +1,24 @@
-import { memo, useState, useCallback, useEffect } from 'react';
-import styled from 'styled-components';
 import Big from 'big.js';
 import { utils } from 'ethers';
+import { debounce } from 'lodash';
+import { memo, useCallback, useEffect,useState } from 'react';
+import styled from 'styled-components';
+
 import useAccount from '@/hooks/useAccount';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
-import useTokensAndChains from './hooks/useTokensAndChains';
-import useDestination from './hooks/useDestination';
-import Select from './components/Select';
-import Input from './components/Input';
-import Destination from './components/Destination';
-import Routes from './components/Routes';
+
 import Button from './components/Button';
+import Destination from './components/Destination';
 import DialogChains from './components/DialogChains';
 import DialogTokens from './components/DialogTokens';
-import useBridge from './hooks/useBridge';
+import Input from './components/Input';
+import Routes from './components/Routes';
+import Select from './components/Select';
 import useBestRoute from './hooks/useBestRoute';
-import { Chain, Token } from './types';
-import { debounce } from 'lodash';
+import useBridge from './hooks/useBridge';
+import useDestination from './hooks/useDestination';
+import useTokensAndChains from './hooks/useTokensAndChains';
+import type { Chain, Token } from './types';
 
 const Container = styled.div`
   width: 100%;

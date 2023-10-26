@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import type { ReactNode } from 'react';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import AccountSider from '../AccountSider';
 import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
 import { DesktopNavigationTop } from '../navigation/desktop/DesktopNavigationTop';

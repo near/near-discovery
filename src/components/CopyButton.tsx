@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+
 import CopyIcon from '@/components/Icons/Copy';
 import { copyText } from '@/utils/copy';
-import styled from 'styled-components';
 
 const Tooltip = styled.div<{
   isTooltipDisplayed: boolean;

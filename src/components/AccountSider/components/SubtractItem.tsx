@@ -1,6 +1,7 @@
+import { useConnectWallet } from '@web3-onboard/react';
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useConnectWallet } from '@web3-onboard/react';
+
 import InviteCode from './InviteCode';
 
 const StyledSubtractItem = styled.div`

@@ -1,4 +1,4 @@
-import { Token } from '@/components/Bridge/types';
+import type { Token } from '@/components/Bridge/types';
 import { optimism } from '@/config/tokens/optimism';
 
 export const optimismTokens = {
