@@ -1,10 +1,10 @@
 import { useCallback, useState } from 'react';
 
-import { usePriceStore } from '@/stores/price';
+import { myPriceStore } from '@/stores/price';
 
 const DELAY = 1000 * 60 * 5;
 export default function () {
-  const setPriceStore = usePriceStore((store) => store.set);
+  const setPriceStore = myPriceStore((store) => store.set);
   const [pending, setPending] = useState(false);
   const initializePrice = useCallback(async () => {
     if (pending) return;

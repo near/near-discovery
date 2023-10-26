@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import useChain from '@/hooks/useChain';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
-import { usePriceStore } from '@/stores/price';
+import { myPriceStore } from '@/stores/price';
 import { balanceFormated, valueFormated } from '@/utils/balance';
 
 const StyledWrapper = styled.div<{ mt?: number }>`
@@ -23,7 +23,7 @@ const StyledValue = styled.div`
 const Amount = ({ mt }: { mt?: number }) => {
   const currentChain = useChain();
   const { balance } = useTokenBalance({ isNative: true });
-  const price = usePriceStore((store) => store.price);
+  const price = myPriceStore((store) => store.price);
   return (
     <StyledWrapper mt={mt}>
       <StyledAmount>
