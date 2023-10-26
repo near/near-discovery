@@ -89,8 +89,7 @@ const Bridge = () => {
     if (type === 'token') {
       setSelectableTokens(
         Object.values(tokens).sort((a, b) => {
-          if (a.chainId === inputChain?.chainId) return 1;
-          return -1;
+          return a.chainId === inputChain?.chainId ? -1 : 1;
         }),
       );
     }

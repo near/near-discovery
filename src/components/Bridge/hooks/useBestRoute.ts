@@ -29,7 +29,7 @@ export default function useBestRoute() {
         setChecking(false);
         setTrade({
           time: '1min',
-          amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(2, 1) : '-') + '  ' + targetToken.symbol,
+          amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(2, 0) : '-') + '  ' + targetToken.symbol,
           gasCost: response,
           dex: 'Stargate',
         });

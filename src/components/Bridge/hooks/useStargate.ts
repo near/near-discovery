@@ -23,7 +23,7 @@ export default function useStargate() {
   }) => {
     if (!targetToken || !chain || !targetChain) return;
     const _inputChain = chainCofig[chain.chainId];
-    const _outputChain = chainCofig[chain.chainId];
+    const _outputChain = chainCofig[targetChain.chainId];
     const provider = new JsonRpcProvider(chain.rpcUrls[0]);
     const RouterContract = new Contract(
       _inputChain.router,

@@ -71,7 +71,7 @@ const Input = ({
       </Header>
       <InputWrapper>
         <StyledInput
-          value={amount}
+          value={amount || ''}
           onInput={(ev: React.ChangeEvent<HTMLInputElement>) => {
             if (isNaN(Number(ev.target.value))) return;
             onChange(ev.target.value);

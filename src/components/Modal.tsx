@@ -69,8 +69,13 @@ const Modal = ({
 }) => {
   return (
     <Dialog className={display ? 'display' : ''}>
-      <Overlay>
-        <Main width={width}>
+      <Overlay onClick={onClose}>
+        <Main
+          width={width}
+          onClick={(ev) => {
+            ev.stopPropagation();
+          }}
+        >
           <Header>
             <Title>{title}</Title>
             <CloseIcon onClose={onClose} />
