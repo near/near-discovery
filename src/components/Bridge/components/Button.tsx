@@ -7,7 +7,7 @@ import { chainCofig } from '@/config/bridge';
 import useApprove from '@/hooks/useApprove';
 import useSwitchChain from '@/hooks/useSwitchChain';
 
-import type { Chain,Token } from '../types';
+import type { Chain, Token } from '../types';
 
 const StyledButton = styled.button`
   font-size: 18px;
@@ -52,7 +52,7 @@ const Button = ({
   chainId?: number;
   checking?: boolean;
   onSuccess: (hash: string) => void;
-  swap: Function;
+  swap: any;
   swaping?: boolean;
 }) => {
   const { switching, switchNetwork } = useSwitchChain();
