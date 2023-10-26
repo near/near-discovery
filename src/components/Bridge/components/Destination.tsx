@@ -61,7 +61,7 @@ const Destination = ({
           }}
           disabled={disabled}
         />
-        <Label>I'm transferring to another address</Label>
+        <Label>{"I'm transferring to another address"}</Label>
       </Header>
       {checked && (
         <InputWrapper>
