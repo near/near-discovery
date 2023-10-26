@@ -30,17 +30,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
         <div
           className="d-inline-block"
         >
-          {/* <VmComponent
-            key={components.tosCheck}
-            src={components.tosCheck}
-            props={{
-              logOut: authStore.logOut,
-              targetProps: componentProps,
-              targetComponent: componentSrc,
-              tosName: components.tosContent,
-            }}
-          /> */}
-
           <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
         </div>
       </div>
