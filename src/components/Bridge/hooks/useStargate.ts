@@ -6,12 +6,11 @@ import { chainCofig } from '@/config/bridge';
 import coinGeckoIds from '@/config/coinGeckoId';
 import { Chain, Token } from '../types';
 
-const { JsonRpcProvider, Web3Provider } = providers;
+const { JsonRpcProvider } = providers;
 
 export default function useStargate() {
-  const { account } = useAccount();
+  const { account, provider } = useAccount();
   const [fee, setFee] = useState();
-
   const getQouteInfo = async ({
     targetToken,
     chain,
@@ -107,8 +106,8 @@ export default function useStargate() {
     destination?: string;
     onSuccess: (hash: string) => void;
   }) => {
-    const provider = new Web3Provider(window.ethereum);
-    const signer = provider.getSigner(account);
+    if (!provider) return;
+    const signer = await provider.getSigner(account);
     const _amount = utils.parseUnits(amount, token.decimals);
     const _inputChain = chainCofig[chain.chainId];
     const _outputChain = chainCofig[targetChain.chainId];

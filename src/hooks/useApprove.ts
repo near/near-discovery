@@ -19,7 +19,7 @@ export default function useApprove({
 }) {
   const [approved, setApproved] = useState(false);
   const [approving, setApproving] = useState(false);
-  const { account } = useAccount();
+  const { account, provider } = useAccount();
 
   const checkApproved = async () => {
     if (!token || !amount || !chain || !spender) return;
@@ -47,11 +47,9 @@ export default function useApprove({
   };
 
   const approve = async () => {
-    if (!window.ethereum) return;
     if (!token || !amount || !chain || !spender) return;
     setApproving(true);
     try {
-      const provider = new Web3Provider(window.ethereum);
       const signer = provider.getSigner(account);
       const TokenContract = new Contract(
         token.address,
