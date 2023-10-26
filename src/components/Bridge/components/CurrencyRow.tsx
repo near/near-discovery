@@ -4,6 +4,7 @@ import { balanceFormated } from '@/utils/balance';
 import { Token } from '../types';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
 import Loading from '@/components/Icons/Loading';
+import CurrencyIcon from '@/components/CurrencyIcon';
 
 const StyledCurrencyRow = styled.div`
   padding: 10px 20px;
@@ -34,23 +35,6 @@ const CurrencySymbol = styled.div`
 const CurrencyName = styled.div`
   font-size: 14px;
 `;
-const CurrencyIconWrapper = styled.div`
-  position: relative;
-`;
-const CurrencyIcon = styled.img`
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  margin-right: 20px;
-`;
-const ChainIcon = styled.img`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  right: 10px;
-  bottom: -3px;
-`;
 const CurrencyAmount = styled.div`
   font-size: 18px;
   font-weight: 500px;
@@ -80,11 +64,7 @@ const CurrencyRow = ({
       }}
     >
       <CurrencyLabel>
-        <CurrencyIconWrapper>
-          <CurrencyIcon src={currency.icon} />
-          {chainIcon && <ChainIcon src={chainIcon} />}
-        </CurrencyIconWrapper>
-
+        <CurrencyIcon token={currency.icon} chain={chainIcon} />
         <div>
           <CurrencySymbol>{currency.symbol}</CurrencySymbol>
           <CurrencyName>{currency.name}</CurrencyName>

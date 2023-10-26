@@ -5,7 +5,6 @@ import useApprove from '@/hooks/useApprove';
 import useSwitchChain from '@/hooks/useSwitchChain';
 import { chainCofig } from '@/config/bridge';
 import Big from 'big.js';
-import useBestRoute from '../hooks/useBestRoute';
 
 import type { Token, Chain } from '../types';
 

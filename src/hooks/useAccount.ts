@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useConnectWallet } from '@web3-onboard/react';
+import chains from '@/config/chains';
 import { ethers } from 'ethers';
 
 export default function useAccount() {
@@ -11,6 +12,7 @@ export default function useAccount() {
         account: wallet.accounts[0].address,
         chainId: Number(wallet.chains[0].id),
         provider: new ethers.providers.Web3Provider(wallet.provider, 'any'),
+        chain: chains[Number(wallet.chains[0].id)],
       };
     }
     return {};

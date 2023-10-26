@@ -3,7 +3,7 @@ import { Contract, utils, providers } from 'ethers';
 import Big from 'big.js';
 import useAccount from '@/hooks/useAccount';
 import { chainCofig } from '@/config/bridge';
-import coinGeckoIds from '@/config/coinGeckoId';
+import { usePriceStore } from '@/stores/price';
 import { Chain, Token } from '../types';
 
 const { JsonRpcProvider } = providers;
@@ -77,15 +77,12 @@ export default function useStargate() {
       dstNativeAddr: '0x0000000000000000000000000000000000000001',
     });
     setFee(res[0].toString());
-    const coinGeckoId = coinGeckoIds[chain.nativeCurrency.symbol];
-    if (coinGeckoId) {
-      const _priceRes = await fetch(
-        `https://api.coingecko.com/api/v3/simple/price?vs_currencies=usd&ids=${coinGeckoId}`,
+    const price = usePriceStore((store) => store.price);
+    const tokenPrice = price[chain.nativeCurrency.symbol];
+    if (tokenPrice) {
+      return (
+        '$' + new Big(utils.formatUnits(res[0].toString(), chain.nativeCurrency.decimals)).mul(tokenPrice).toFixed(4)
       );
-      const priceRes = await _priceRes.json();
-      const price = priceRes[coinGeckoId].usd;
-
-      return '$' + new Big(utils.formatUnits(res[0].toString(), chain.nativeCurrency.decimals)).mul(price).toFixed(4);
     }
     return utils.formatUnits(res[0].toString(), chain.nativeCurrency.decimals) + '  ' + chain.nativeCurrency.symbol;
   };

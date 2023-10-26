@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
+import useTokenPrice from '@/hooks/useTokenPrice';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
@@ -35,13 +36,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
+  const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const authStore = useAuthStore();
   const componentSrc = router.query;
-
   useEffect(() => {
     initializeAnalytics();
+    initializePrice();
   }, []);
 
   useEffect(() => {

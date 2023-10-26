@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Contract, providers, utils } from 'ethers';
-import Big from 'big.js';
+import chains from '@/config/chains';
 import useAccount from './useAccount';
 import type { Token } from '@/types';
 
@@ -19,14 +19,15 @@ export default function useTokenBalance({
 }) {
   const [balance, setBalance] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
-  const { account } = useAccount();
+  const { account, chainId } = useAccount();
 
   useEffect(() => {
     const getBalance = async () => {
-      if (!currency || !rpcUrl || !account) return;
+      const _rpcUrl = rpcUrl ? rpcUrl : chainId ? chains[chainId].rpcUrls[0] : '';
+      if (!currency || !_rpcUrl || !account || !currency.address) return;
       setLoading(true);
       try {
-        const provider = new providers.JsonRpcProvider(rpcUrl);
+        const provider = new providers.JsonRpcProvider(_rpcUrl);
         const TokenContract = new Contract(
           currency.address,
           [
@@ -60,10 +61,11 @@ export default function useTokenBalance({
       }
     };
     const getNativeBalance = async () => {
-      if (!rpcUrl || !account) return;
+      const _rpcUrl = rpcUrl ? rpcUrl : chainId ? chains[chainId].rpcUrls[0] : '';
+      if (!_rpcUrl || !account) return;
       setLoading(true);
       try {
-        const provider = new providers.JsonRpcProvider(rpcUrl);
+        const provider = new providers.JsonRpcProvider(_rpcUrl);
         const amount = await provider.getBalance(account);
         setBalance(isPure ? amount.toString() : utils.formatUnits(amount.toString(), currency?.decimals).toString());
         setLoading(false);
@@ -71,7 +73,8 @@ export default function useTokenBalance({
         setLoading(false);
       }
     };
-    if ((currency?.address || isNative) && account) currency?.isNative || isNative ? getNativeBalance() : getBalance();
-  }, [currency?.address, account, updater]);
+    if (!!(currency?.address || currency?.isNative || isNative) && account)
+      currency?.isNative || isNative ? getNativeBalance() : getBalance();
+  }, [currency, account, updater]);
   return { balance, loading };
 }

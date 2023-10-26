@@ -19,5 +19,3 @@ export const tokens = {
   ...optimismTokens,
   ...polygonTokens,
 };
-
-console.log(baseTokens);
