@@ -69,10 +69,6 @@ export const Sandbox = ({ onboarding = false }) => {
 
   const router = useRouter();
   const widgets = useBosComponents();
-  const tos = {
-    checkComponentPath: widgets.tosCheck,
-    contentComponentPath: widgets.tosContent,
-  };
 
   const [mainLoader, setMainLoader] = useState(false);
   const [filesObject, setFilesObject] = useState({});
@@ -538,7 +534,6 @@ export const Sandbox = ({ onboarding = false }) => {
               <div className="container-fluid mt-1" style={{ position: 'relative' }}>
                 <Search
                   widgets={widgets}
-                  tos={tos}
                   logOut={logOut}
                   loadAndOpenFile={loadAndOpenFile}
                   refs={refs}
