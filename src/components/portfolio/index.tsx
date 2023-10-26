@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   max-width: 1000px;
   position: relative;
   font-family: Gantari;
-
+  margin: 0 auto;
   .asset-function-button {
     border: 1px solid #373a53;
     background: #373a53;

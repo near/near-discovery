@@ -37,6 +37,7 @@ export const DappPage: NextPageWithLayout = () => {
   });
 
   const curChainId = connectedChain ? eval(connectedChain.id) : DEFAULT_CHAIN_ID;
+  console.log('curChainId: ', curChainId);
 
   return (
     <ComponentWrapperPage
