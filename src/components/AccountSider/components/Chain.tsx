@@ -51,6 +51,7 @@ const ChainList = styled.div<{ display?: boolean }>`
   left: 0px;
   box-sizing: border-box;
   display: ${({ display }) => (display ? 'block' : 'none')};
+  z-index: 200;
 `;
 const ChainItem = styled(StyledChain)<{ active?: boolean }>`
   padding: 0px 10px;
