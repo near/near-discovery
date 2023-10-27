@@ -113,18 +113,31 @@ const Bridge = () => {
   useEffect(() => {
     if (inputChain?.chainId === outputChain?.chainId) {
       setErrorTips('Select different network');
+      return;
+    }
+    if (!inputChain || !outputChain) {
+      setErrorTips('Select a network');
+      return;
+    }
+    if (!inputToken || !outputToken) {
+      setErrorTips('Select a token');
+      return;
     }
     if (amount && balance) {
       if (new Big(amount).gt(balance)) setErrorTips('Insufficient balance');
+      return;
     }
     if (destination && !utils.isAddress(destination)) {
       setErrorTips('Change destination address');
+      return;
     }
     if (gasCost && nativeTokenBalance && new Big(gasCost).gt(nativeTokenBalance)) {
-      setErrorTips('Change destination address');
+      setErrorTips('Not enough gas');
+      return;
     }
     if (!trade) {
       setErrorTips('Relayer: gas too low');
+      return;
     }
     setErrorTips('');
   }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, nativeTokenBalance, trade]);
