@@ -11,7 +11,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 // set dynamic routes for dapps in config file
 
 const dappSrcMap = {
-  dex: 'dapdap-dapp.near/widget/DappSwapRouter',
+  dex: 'dapdapbos.near/widget/DappSwapRouter',
 } as { [key: string]: string };
 
 export const DappPage: NextPageWithLayout = () => {

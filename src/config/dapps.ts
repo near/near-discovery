@@ -11,7 +11,7 @@ export const dapps = [
     on_chain_ids: [5000], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
     dappSrc: {
-      5000: 'dapdap-dapp.near/widget/DappEntry.MantleSwap',
+      5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
     } as { [key: number]: string },
   },
   {
@@ -24,7 +24,7 @@ export const dapps = [
     on_chain_ids: [5000], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
     dappSrc: {
-      5000: 'dapdap-dapp.near/widget/DappEntry.MantleSwap',
+      5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
     } as { [key: number]: string },
   },
   {
@@ -38,7 +38,7 @@ export const dapps = [
     on_chain_ids: [5000], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
     dappSrc: {
-      5000: 'dapdap-dapp.near/widget/DappEntry.MantleSwap',
+      5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
     } as { [key: number]: string },
   },
 
@@ -53,7 +53,7 @@ export const dapps = [
     on_chain_ids: [5000], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
     dappSrc: {
-      5000: 'dapdap-dapp.near/widget/DappEntry.MantleSwap',
+      5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
     } as { [key: number]: string },
   },
   {
@@ -66,8 +66,8 @@ export const dapps = [
     on_chain_ids: [5000, 59144], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
     dappSrc: {
-      5000: 'dapdap-dapp.near/widget/DappEntry.MantleSwap',
-      59144: 'dapdap-dapp.near/widget/DappEntry.LineaSwap',
+      5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
+      59144: 'dapdapbos.near/widget/DappEntry.LineaSwap',
     } as { [key: number]: string },
   },
 
@@ -82,8 +82,8 @@ export const dapps = [
     on_chain_ids: [59144, 324], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 59144,
     dappSrc: {
-      59144: 'dapdap-dapp.near/widget/DappEntry.LineaSwap',
-      324: 'dapdap-dapp.near/widget/DappEntry.ZkSyncSwap',
+      59144: 'dapdapbos.near/widget/DappEntry.LineaSwap',
+      324: 'dapdapbos.near/widget/DappEntry.ZkSyncSwap',
     } as { [key: number]: string },
   },
 
@@ -97,9 +97,9 @@ export const dapps = [
     on_chain_ids: [42161, 56, 137], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 42161,
     dappSrc: {
-      42161: 'dapdap-dapp.near/widget/DappEntry.ArbitrumSwap',
-      56: 'dapdap-dapp.near/widget/DappEntry.BSCSwap',
-      137: 'dapdap-dapp.near/widget/DappEntry.PolygonSwap',
+      42161: 'dapdapbos.near/widget/DappEntry.ArbitrumSwap',
+      56: 'dapdapbos.near/widget/DappEntry.BSCSwap',
+      137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
     } as { [key: number]: string },
   },
   {
@@ -113,7 +113,7 @@ export const dapps = [
     on_chain_ids: [8453], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 8453,
     dappSrc: {
-      8453: 'dapdap-dapp.near/widget/DappEntry.BaseSwap',
+      8453: 'dapdapbos.near/widget/DappEntry.BaseSwap',
     } as { [key: number]: string },
   },
   {
@@ -126,7 +126,7 @@ export const dapps = [
     on_chain_ids: [8453], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 8453,
     dappSrc: {
-      8453: 'dapdap-dapp.near/widget/DappEntry.BaseSwap',
+      8453: 'dapdapbos.near/widget/DappEntry.BaseSwap',
     } as { [key: number]: string },
   },
 
@@ -141,7 +141,7 @@ export const dapps = [
     on_chain_ids: [8453], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 8453,
     dappSrc: {
-      8453: 'dapdap-dapp.near/widget/DappEntry.BaseSwap',
+      8453: 'dapdapbos.near/widget/DappEntry.BaseSwap',
     } as { [key: number]: string },
   },
 
@@ -156,7 +156,7 @@ export const dapps = [
     on_chain_ids: [8453], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 8453,
     dappSrc: {
-      8453: 'dapdap-dapp.near/widget/DappEntry.BaseSwap',
+      8453: 'dapdapbos.near/widget/DappEntry.BaseSwap',
     } as { [key: number]: string },
   },
 
@@ -170,7 +170,7 @@ export const dapps = [
     on_chain_ids: [56], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 56,
     dappSrc: {
-      56: 'dapdap-dapp.near/widget/DappEntry.BSCSwap',
+      56: 'dapdapbos.near/widget/DappEntry.BSCSwap',
     } as { [key: number]: string },
   },
 
@@ -184,7 +184,7 @@ export const dapps = [
     on_chain_ids: [56], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 56,
     dappSrc: {
-      56: 'dapdap-dapp.near/widget/DappEntry.BSCSwap',
+      56: 'dapdapbos.near/widget/DappEntry.BSCSwap',
     } as { [key: number]: string },
   },
 
@@ -198,7 +198,7 @@ export const dapps = [
     on_chain_ids: [56], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 56,
     dappSrc: {
-      56: 'dapdap-dapp.near/widget/DappEntry.BSCSwap',
+      56: 'dapdapbos.near/widget/DappEntry.BSCSwap',
     } as { [key: number]: string },
   },
 
@@ -212,7 +212,7 @@ export const dapps = [
     on_chain_ids: [42161], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 42161,
     dappSrc: {
-      42161: 'dapdap-dapp.near/widget/DappEntry.ArbitrumSwap',
+      42161: 'dapdapbos.near/widget/DappEntry.ArbitrumSwap',
     } as { [key: number]: string },
   },
 
@@ -226,7 +226,7 @@ export const dapps = [
     on_chain_ids: [42161], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 42161,
     dappSrc: {
-      42161: 'dapdap-dapp.near/widget/DappEntry.ArbitrumSwap',
+      42161: 'dapdapbos.near/widget/DappEntry.ArbitrumSwap',
     } as { [key: number]: string },
   },
 
@@ -240,7 +240,7 @@ export const dapps = [
     on_chain_ids: [42161], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 42161,
     dappSrc: {
-      42161: 'dapdap-dapp.near/widget/DappEntry.ArbitrumSwap',
+      42161: 'dapdapbos.near/widget/DappEntry.ArbitrumSwap',
     } as { [key: number]: string },
   },
 
@@ -255,7 +255,7 @@ export const dapps = [
     on_chain_ids: [324], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 324,
     dappSrc: {
-      324: 'dapdap-dapp.near/widget/DappEntry.ZkSyncSwap',
+      324: 'dapdapbos.near/widget/DappEntry.ZkSyncSwap',
     } as { [key: number]: string },
   },
 
@@ -270,7 +270,7 @@ export const dapps = [
     on_chain_ids: [324], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 324,
     dappSrc: {
-      324: 'dapdap-dapp.near/widget/DappEntry.ZkSyncSwap',
+      324: 'dapdapbos.near/widget/DappEntry.ZkSyncSwap',
     } as { [key: number]: string },
   },
 
@@ -285,7 +285,7 @@ export const dapps = [
     on_chain_ids: [324], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 324,
     dappSrc: {
-      324: 'dapdap-dapp.near/widget/DappEntry.ZkSyncSwap',
+      324: 'dapdapbos.near/widget/DappEntry.ZkSyncSwap',
     } as { [key: number]: string },
   },
 
@@ -299,7 +299,7 @@ export const dapps = [
     on_chain_ids: [42161], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 42161,
     dappSrc: {
-      42161: 'dapdap-dapp.near/widget/DappEntry.ArbitrumSwap',
+      42161: 'dapdapbos.near/widget/DappEntry.ArbitrumSwap',
     } as { [key: number]: string },
   },
 
@@ -313,7 +313,7 @@ export const dapps = [
     on_chain_ids: [42161], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 42161,
     dappSrc: {
-      42161: 'dapdap-dapp.near/widget/DappEntry.ArbitrumSwap',
+      42161: 'dapdapbos.near/widget/DappEntry.ArbitrumSwap',
     } as { [key: number]: string },
   },
 
@@ -328,8 +328,8 @@ export const dapps = [
     on_chain_ids: [100, 137], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 100,
     dappSrc: {
-      100: 'dapdap-dapp.near/widget/DappEntry.GnosisSwap',
-      137: 'dapdap-dapp.near/widget/DappEntry.PolygonSwap',
+      100: 'dapdapbos.near/widget/DappEntry.GnosisSwap',
+      137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
     } as { [key: number]: string },
   },
 
@@ -344,7 +344,7 @@ export const dapps = [
     on_chain_ids: [137], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 137,
     dappSrc: {
-      137: 'dapdap-dapp.near/widget/DappEntry.PolygonSwap',
+      137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
     } as { [key: number]: string },
   },
 
@@ -358,7 +358,7 @@ export const dapps = [
     on_chain_ids: [137], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 137,
     dappSrc: {
-      137: 'dapdap-dapp.near/widget/DappEntry.PolygonSwap',
+      137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
     } as { [key: number]: string },
   },
 
@@ -372,7 +372,7 @@ export const dapps = [
     on_chain_ids: [137], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 137,
     dappSrc: {
-      137: 'dapdap-dapp.near/widget/DappEntry.PolygonSwap',
+      137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
     } as { [key: number]: string },
   },
 
@@ -386,7 +386,7 @@ export const dapps = [
     on_chain_ids: [1088], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 1088,
     dappSrc: {
-      1088: 'dapdap-dapp.near/widget/DappEntry.MetisSwap',
+      1088: 'dapdapbos.near/widget/DappEntry.MetisSwap',
     } as { [key: number]: string },
   },
 
@@ -400,7 +400,7 @@ export const dapps = [
     on_chain_ids: [1088], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 1088,
     dappSrc: {
-      1088: 'dapdap-dapp.near/widget/DappEntry.MetisSwap',
+      1088: 'dapdapbos.near/widget/DappEntry.MetisSwap',
     } as { [key: number]: string },
   },
 
@@ -414,7 +414,7 @@ export const dapps = [
     on_chain_ids: [1088], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 1088,
     dappSrc: {
-      1088: 'dapdap-dapp.near/widget/DappEntry.MetisSwap',
+      1088: 'dapdapbos.near/widget/DappEntry.MetisSwap',
     } as { [key: number]: string },
   },
 ];
