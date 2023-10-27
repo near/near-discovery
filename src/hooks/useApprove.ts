@@ -79,6 +79,10 @@ export default function useApprove({
   };
 
   useEffect(() => {
+    if (token?.isNative) {
+      setApproved(true);
+      return;
+    }
     if (token && amount && chain && spender) checkApproved();
   }, [token, amount, chain, spender]);
 

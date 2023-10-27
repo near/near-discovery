@@ -40,7 +40,7 @@ const Content = styled.div`
 const Routes = ({ trade }: { trade?: Trade }) => {
   return (
     <Container>
-      <Header>
+      {/* <Header>
         <Label>Select Bridge Route</Label>
         <AmountWrapper>
           <Amount>1 Routes</Amount>
@@ -48,7 +48,7 @@ const Routes = ({ trade }: { trade?: Trade }) => {
             <ArrowIcon size={10} />
           </AmountArrow>
         </AmountWrapper>
-      </Header>
+      </Header> */}
       {trade && (
         <Content>
           <Route trade={trade} />

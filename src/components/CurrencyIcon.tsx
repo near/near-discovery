@@ -16,7 +16,8 @@ const ChainIcon = styled.img<{ size: number }>`
   border-radius: 4px;
   right: -${({ size }) => size / 3}px;
   bottom: -3px;
-  border: 3px solid #1f2121;
+  padding: 3px;
+  background-color: #1f2121;
 `;
 const Empty = styled.div<{ size: number }>`
   width: ${({ size }) => size}px;

@@ -215,7 +215,7 @@ export default function useStargate() {
             ],
             signer,
           );
-    const method = token.isNative ? 'swapEth' : 'swap';
+    const method = token.isNative ? 'swapETH' : 'swap';
     const params = token.isNative
       ? [
           _outputChain.dstId,
@@ -223,7 +223,7 @@ export default function useStargate() {
           account,
           _amount.toString(),
           new Big(_amount.toString()).mul(0.995).toString(),
-          { value: fee },
+          { value: new Big((fee || '0')?.toString()).add(_amount.toString()).toString() },
         ]
       : [
           _outputChain.dstId,

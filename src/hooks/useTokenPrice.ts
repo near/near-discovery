@@ -18,7 +18,8 @@ export default function () {
       setTimeout(() => {
         initializePrice();
       }, DELAY);
-    } finally {
+      setPending(false);
+    } catch (err) {
       setPending(false);
     }
   }, [pending]);
