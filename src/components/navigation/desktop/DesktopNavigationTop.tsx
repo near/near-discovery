@@ -236,10 +236,14 @@ export const DesktopNavigationTop = () => {
                 {item.version === false ? (
                   <div key={index} className={className}>
                     <span>{item.title}</span>
-                    <div className="current-version">
-                      <img src={lockUrl} alt="" />
-                      Lv.3
-                    </div>
+                    <>
+                      {item.level && (
+                        <div className="current-version">
+                          <img src={lockUrl} alt="" />
+                          Lv.3
+                        </div>
+                      )}
+                    </>
                   </div>
                 ) : (
                   <Link
