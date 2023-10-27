@@ -25,13 +25,13 @@ import {
   TotalBalanceWrapper,
   Wrapper,
   YourAssetsTitle,
+  DefaultProfileIcon,
 } from '@/components/portfolio';
 import { NoDataLayout } from '@/components/portfolio/common';
 import { IconSeries } from '@/components/portfolio/icons';
 import {
   AllNetWorkIcon,
   ArrowDone,
-  DefaultProfileIcon,
   MetaMaskIcon,
   NoAssetsIcon,
   ProtocolArrowDown,
@@ -948,7 +948,7 @@ const PortfolioPage: NextPageWithLayout = () => {
     <Wrapper>
       <div className="frcb-start">
         <Profile className="frcs">
-          {DefaultProfileIcon}
+          <DefaultProfileIcon></DefaultProfileIcon>
 
           <div className="">
             <div className="address-filed ">

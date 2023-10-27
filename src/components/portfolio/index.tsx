@@ -756,3 +756,10 @@ export const CheckDot = styled.div<{ active: boolean }>`
     border-radius: 100%;
   }
 `;
+
+export const DefaultProfileIcon = styled.div`
+  background-image: conic-gradient(from 180deg at 50% 50%, rgb(0, 209, 255) 0deg, rgb(255, 0, 138) 360deg);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+`;
