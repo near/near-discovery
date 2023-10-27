@@ -3,8 +3,7 @@ import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useEthersProviderContext } from '@/data/web3';
 import useAccount from '@/hooks/useAccount';
-
-const BASE_URL = 'https://test-api.dapdap.net';
+import * as http from '@/utils/http';
 
 const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
   font-family: Gantari;
@@ -133,10 +132,15 @@ const InviteCodePage = () => {
   const check = async () => {
     if (!account) return;
     try {
-      const res = await fetch(`${BASE_URL}/api/invite/check-address/${account}`);
-      const resJSON = await res.json();
-      if (resJSON.data?.is_activated) {
-        router.replace('/');
+      const res = await http.get(`/api/invite/check-address/${account}`);
+      if (res.data?.is_activated) {
+        const tokens = await http.post('/api/auth/access-token', {
+          address: account,
+        });
+        if (tokens.access_token) {
+          window.localStorage.setItem(http.AUTH_TOKENS, JSON.stringify(tokens));
+          router.replace('/');
+        }
       }
     } catch (error) {
       setInvited(false);
@@ -147,15 +151,9 @@ const InviteCodePage = () => {
     if (!account || !code || loading) return;
     setLoading(true);
     try {
-      const res = await fetch(`${BASE_URL}/api/invite/activate`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          address: account,
-          code,
-        }),
+      const res = await http.post(`/api/invite/activate`, {
+        address: account,
+        code,
       });
       const resJSON = await res.json();
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import useAccount from '@/hooks/useAccount';
+import * as http from '@/utils/http';
 
 import type { InviteCodeRecord } from '../types';
 
@@ -13,9 +14,8 @@ export default function () {
     const getList = async () => {
       try {
         setLoading(true);
-        const res = await fetch(`/api/dapdap/invite/get-address-code/${account}`);
-        const data = await res.json();
-        setList(data?.data?.map((record: InviteCodeRecord) => ({ code: record.code, is_used: record.is_used })));
+        const res = await http.get(`/api/dapdap/invite/get-address-code/${account}`);
+        setList(res?.data?.map((record: InviteCodeRecord) => ({ code: record.code, is_used: record.is_used })));
       } finally {
         setLoading(false);
       }

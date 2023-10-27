@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { usePriceStore } from '@/stores/price';
+import * as http from '@/utils/http';
 
 const DELAY = 1000 * 60 * 5;
 export default function () {
@@ -10,10 +11,9 @@ export default function () {
     if (pending) return;
     setPending(true);
     try {
-      const res = await fetch('https://test-api.dapdap.net/get-token-price-by-dapdap');
-      const data = await res.json();
+      const res = await http.get('https://test-api.dapdap.net/get-token-price-by-dapdap');
       setPriceStore({
-        price: data.data,
+        price: res.data,
       });
       setTimeout(() => {
         initializePrice();
