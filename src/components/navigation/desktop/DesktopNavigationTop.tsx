@@ -36,6 +36,7 @@ export const DesktopNavigationTop = () => {
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      position: relative;
     }
     .container-submenu {
       display: none;
@@ -97,14 +98,21 @@ export const DesktopNavigationTop = () => {
   `;
 
   const MenuContainer = styled.div`
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    transform: translate(-50%);
+
     flex: 1;
     display: flex;
     justify-content: center;
     font-family: Gantari;
     font-size: 18px;
     font-weight: 500;
-    margin: 0 24% 0 14%;
+
+    gap: 50px;
+    /* margin: 0 24% 0 14%; */
     align-items: center;
     .container-menu-item {
       display: flex;
