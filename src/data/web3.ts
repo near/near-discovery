@@ -276,11 +276,11 @@ export const onboard = init({
   accountCenter: {
     desktop: {
       position: 'topRight',
-      enabled: true,
+      enabled: false,
       minimal: false,
     },
     mobile: {
-      enabled: true,
+      enabled: false,
       position: 'bottomRight',
     },
   },

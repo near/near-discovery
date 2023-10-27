@@ -29,13 +29,14 @@ export const DesktopNavigationTop = () => {
 
     background-color: rgba(0, 0, 0, 0.9);
 
-    z-index: 100;
+    z-index: 1;
 
     .container-nav {
       display: flex;
       align-items: center;
       justify-content: space-between;
       width: 100%;
+      position: relative;
     }
     .container-submenu {
       display: none;
@@ -97,14 +98,21 @@ export const DesktopNavigationTop = () => {
   `;
 
   const MenuContainer = styled.div`
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 50%;
+
+    transform: translate(-50%);
+
     flex: 1;
     display: flex;
     justify-content: center;
     font-family: Gantari;
     font-size: 18px;
     font-weight: 500;
-    margin: 0 24% 0 14%;
+
+    gap: 50px;
+    /* margin: 0 24% 0 14%; */
     align-items: center;
     .container-menu-item {
       display: flex;
@@ -236,10 +244,14 @@ export const DesktopNavigationTop = () => {
                 {item.version === false ? (
                   <div key={index} className={className}>
                     <span>{item.title}</span>
-                    <div className="current-version">
-                      <img src={lockUrl} alt="" />
-                      Lv.3
-                    </div>
+                    <>
+                      {item.level && (
+                        <div className="current-version">
+                          <img src={lockUrl} alt="" />
+                          Lv.3
+                        </div>
+                      )}
+                    </>
                   </div>
                 ) : (
                   <Link

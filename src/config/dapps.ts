@@ -24,7 +24,7 @@ export const dapps = [
     type: 'dex',
     on_chain_ids: [5000], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
-    logo: 'https://ipfs.near.social/ipfs/bafkreicwvufboezdhcjnvmwmy5ctbd7d4zimdivuaawn5g3bs2hxb567ra',
+    logo: 'https://ipfs.near.social/ipfs/bafkreidzxjgiaisjnva6rjdsvcr5f4urskismfu4dljfyby5l3hxdnjx5u',
     dappSrc: {
       5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
     } as { [key: number]: string },
@@ -33,7 +33,7 @@ export const dapps = [
     name: 'FusionX V3',
     dappRoute: 'fusionx-v3',
     TBD_TOKEN: 'Y',
-    logo: 'https://ipfs.near.social/ipfs/bafkreifiphkr4bvatimqrz2lty4fgygb2awpvbcsri2bny23w47dactnly',
+    logo: 'https://ipfs.near.social/ipfs/bafkreic6yr27mq42yx6o4fklwbkl5r6dvwc2x5elri6zczye7uskvrlc5e',
     description:
       'A Native DeFi ecosystem offering an AMM and a range of innovative financial services on the Mantle Network.', // dapp radar
     tags: ['Dexes'],
@@ -54,6 +54,7 @@ export const dapps = [
     type: 'dex',
     on_chain_ids: [5000, 59144], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
+    logo:'https://ipfs.near.social/ipfs/bafkreictpy7n6edfe5boqidwwowccjv4cppterjxtp3ou3wdxagl6adiou',
     dappSrc: {
       5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
       59144: 'dapdapbos.near/widget/DappEntry.LineaSwap',
@@ -71,7 +72,7 @@ export const dapps = [
     type: 'dex',
     on_chain_ids: [59144, 324], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 59144,
-    logo: 'https://ipfs.near.social/ipfs/bafkreiemiwcf4pvz6ijo7tcxfobp5oftqj5mf7vszse33ziud3walq4pqy',
+    logo: 'https://ipfs.near.social/ipfs/bafkreicqpts7rramccqvvw7tajq5ax56ssxbs7dspxipbxxov4d6zucbw4',
     dappSrc: {
       59144: 'dapdapbos.near/widget/DappEntry.LineaSwap',
       324: 'dapdapbos.near/widget/DappEntry.ZkSyncSwap',
@@ -98,7 +99,7 @@ export const dapps = [
     name: 'BaseSwap',
     dappRoute: 'baseSwap',
     TBD_TOKEN: 'N',
-    logo: 'https://www.gitbook.com/cdn-cgi/image/width=40,dpr=2,height=40,fit=contain,format=auto/https%3A%2F%2F1348261154-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F2l8R5PBQEb9j87AEVFTv%252Ficon%252FfO1NO60iKDdgbEaPqmpQ%252FBaseswap_Logo.png%3Falt%3Dmedia%26token%3Dc22d4fa3-7fc5-4927-b4c1-0ccc3f337cdb',
+    logo: 'https://ipfs.near.social/ipfs/bafkreia6o7raj6x55wmkt4hxjjul6ydz2oq32olfgco4xw67xzgvxsbxa4',
     description:
       'The premier DEX on Base Chain. Crafted by a Based team, for a Based community. From simple to sophisticated, BaseSwap offers it all.', // dapp radar
     tags: ['Dexes'],
@@ -113,7 +114,7 @@ export const dapps = [
     name: 'Synthswap',
     dappRoute: 'Synthswap',
     TBD_TOKEN: 'N',
-    logo: 'https://ipfs.near.social/ipfs/bafkreic5uadneebbpsfml74x3yqberba5tpnertxp4etqmj6m5tggmfziu',
+    logo: 'https://ipfs.near.social/ipfs/bafkreieeeqe7h7ehtxt3jjaqwyqxgzdpqjzv5vkk3zbx7lsh7kxqtv547m',
     description: 'Synthswap is the leading DEX on Base, completely audited by PeckShield.',
     tags: ['Dexes'],
     type: 'dex',
@@ -190,7 +191,7 @@ export const dapps = [
     name: 'Orion',
     dappRoute: 'orion',
     TBD_TOKEN: 'N',
-    logo: 'https://ipfs.near.social/ipfs/bafkreidzcztdcx6mez6hhhmhglfv7m7vh45ijgshmikhnforoksmbczlrq',
+    logo: 'https://ipfs.near.social/ipfs/bafkreid76v6okuhmrsj7qztgnvnxedob3ibrttwiaivnxaxptnow23y6t4',
     description: 'The CEXs you love with the wallet you trust. Only on Orion.',
     tags: ['Dexes'],
     type: 'dex',
@@ -220,7 +221,7 @@ export const dapps = [
     name: 'Chronos V1',
     dappRoute: 'chronos-v1',
     TBD_TOKEN: 'N',
-    logo: 'https://ipfs.near.social/ipfs/bafkreieikyrqroy4j272w2w3cwa2ehswvpmmcmdyf6yyfjzaqnynsqh64a',
+    logo: 'https://ipfs.near.social/ipfs/bafkreibmy53ll3pjjs2ts7lvhlmcsoaped5qipdai3dgyb4xx3uxksdtlm',
     description: 'A community driven liquidity layer & AMM on Arbitrum',
     tags: ['Dexes'],
     type: 'dex',
@@ -250,7 +251,7 @@ export const dapps = [
     name: 'SpaceFi',
     dappRoute: 'SpaceFi',
     TBD_TOKEN: 'N',
-    logo: 'https://ipfs.near.social/ipfs/bafkreifjliccmtazc7sfzf3b45jyxpuabbhyqf4rt4ylensgbzc2nlbsru',
+    logo: 'https://ipfs.near.social/ipfs/bafkreihlykr7jjajj4ddm6uxxu3n44n2p7s4cc2issd46fnr37kwco7alu',
     description:
       'SpaceFi is the DeFi hub on zk-Rollups with DEX+NFT+Spacebase+Launchpad, exploring the Layer2 ecosystem.',
     tags: ['Dexes'],
@@ -265,7 +266,7 @@ export const dapps = [
   {
     name: 'Velocore V1',
     dappRoute: 'Velocore-V1',
-    logo: 'https://ipfs.near.social/ipfs/bafkreiavgtnnawec2d3xyum2osccpaotv4ivp6k77nuyaun5b6cp646viy',
+    logo: 'https://ipfs.near.social/ipfs/bafkreifeodttoaen6redxzqxz7jvqdmsnmncsnrmjxtxgporsacy4ku6ea',
     TBD_TOKEN: 'N',
     description:
       'Velocore is the first and the most optimal veDEX on multiple chains, built on the strong foundation of Velodrome.',
@@ -282,7 +283,7 @@ export const dapps = [
     name: 'veSync',
     dappRoute: 'veSync',
     TBD_TOKEN: 'N',
-    logo: 'https://ipfs.near.social/ipfs/bafkreig3pzndzzb7zl7nrftklr2mxamzg5h76tcfth2aj3bwle7l44ylx4',
+    logo: 'https://ipfs.near.social/ipfs/bafkreigwgzvlmztx4a4z4qcwyrxof23gghs7zl4ujqqztgmezgydnsgape',
     description:
       'veSync is a community-driven, ve(3,3) Decentralized Exchange (DEX) built on the zkSync network, providing a powerful and efficient platform for DeFi liquidity.',
     tags: ['Dexes'],
@@ -300,7 +301,7 @@ export const dapps = [
     TBD_TOKEN: 'N',
     description: 'The native liquidity layer on Arbitrum',
     tags: ['Dexes'],
-    logo: 'https://ipfs.near.social/ipfs/bafkreiczb5evv63erkpwoozxb6qmbwat63ywebt2pdlctc6gey4cqp2ln4',
+    logo: 'https://ipfs.near.social/ipfs/bafkreicod5xxs5sirml6rgxrrhqbc4vlsusedr7t4semrmdaloqukxjs6a',
     type: 'dex',
     on_chain_ids: [42161], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 42161,
@@ -328,7 +329,7 @@ export const dapps = [
     name: 'Honeyswap',
     dappRoute: 'honeyswap',
     TBD_TOKEN: 'N',
-    logo: 'https://ipfs.near.social/ipfs/bafkreigpb3scxgcvddqzongudv3m77bh363rzyxidzuudk6wx32qa6vgia',
+    logo: 'https://ipfs.near.social/ipfs/bafkreiekp7osfgpzfcboawj7yj3mirxxaxwcbvdkb5mgpbui6boz47dhoy',
     description:
       'Honeyswap is network of decentralized exchanges which are supported and maintained by the 1Hive community.',
     tags: ['Dexes'],
@@ -344,7 +345,7 @@ export const dapps = [
   {
     name: 'PearlFi',
     dappRoute: 'pearlFi',
-    logo: 'https://ipfs.near.social/ipfs/bafkreidtzrrtkb7xbr6trlgir7mg3icshyeho2y374hosn76fszwuullti',
+    logo: 'https://ipfs.near.social/ipfs/bafkreihltljvxhpi7zszyc67wsinxzcj2fakufti6koeoelst74av7j4eq',
     TBD_TOKEN: 'N',
     description:
       'The Pearl thesis is a ve(3,3) flywheel that runs in reverse with bribes driving the ecosystem forward.',
@@ -361,9 +362,7 @@ export const dapps = [
     name: 'QuickSwap',
     dappRoute: 'quickSwap',
     TBD_TOKEN: 'N',
-
-    logo: 'https://ipfs.near.social/ipfs/bafkreida55shh44tqd4ingcunnu6u34g5bm3jugoaasy7a365kutoomjru',
-
+    logo: 'https://ipfs.near.social/ipfs/bafkreibox4d5bhaw2hvgf4m42acvuvzbmdaufoy53grhffyuaz5pafcbse',
     description: 'QuickSwap is a next-generation layer-2 decentralized exchange and Automated Market Maker.',
     tags: ['Dexes'],
     type: 'dex',
@@ -392,7 +391,7 @@ export const dapps = [
   {
     name: 'Maia V3',
     dappRoute: 'maia-v3',
-    logo: 'https://ipfs.near.social/ipfs/bafkreidd6jb57eubtntolotq3f5gzmhy252d5rq2jmg6glr7nuijon3dr4',
+    logo: 'https://ipfs.near.social/ipfs/bafkreibdq7fvaobgp6tuna5k2s7u43mkecy4jeumbfw3lgwrd2ft2uftoe',
     TBD_TOKEN: 'N',
     description: 'Maia is the yield powerhouse of Metis with its community rooted in this Ethereum L2.',
     tags: ['Dexes'],
@@ -407,7 +406,7 @@ export const dapps = [
   {
     name: 'Netswap',
     dappRoute: 'netswap',
-    logo: 'https://ipfs.near.social/ipfs/bafkreicczubd47v7zr2cln7l3xts66ek77d4m3neqp3j7dl2cjhjcwphwa',
+    logo: 'https://ipfs.near.social/ipfs/bafkreicoh23atiwall72voi6xchtqq4cmvfm2z5ge257ynw5hvkspyod2e',
     TBD_TOKEN: 'N',
     description: 'One-stop trade, earn and win crypto on our decentralized platform based on the MetisDAO ecosystem',
     tags: ['Dexes'],

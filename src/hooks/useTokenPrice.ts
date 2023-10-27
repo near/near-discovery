@@ -13,7 +13,7 @@ export default function () {
     try {
       const res = await http.get('https://test-api.dapdap.net/get-token-price-by-dapdap');
       setPriceStore({
-        price: res.data,
+        price: res.data || {},
       });
       setTimeout(() => {
         initializePrice();

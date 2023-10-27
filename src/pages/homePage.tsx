@@ -442,10 +442,12 @@ const NewHomePage: NextPageWithLayout = () => {
 
   const [selectedTab, setSelectedTab] = useState(() => {
     if (typeof window !== 'undefined') {
-      return window.localStorage.getItem('selectedTab') || '';
+      const storedSelectedTab = window.localStorage.getItem('selectedTab');
+      return storedSelectedTab || 'TBD';
     }
-    return '';
+    return 'TBD';
   });
+  
   const handleTabClick = (path: string) => {
     setSelectedTab(path);
   };
@@ -480,13 +482,18 @@ const NewHomePage: NextPageWithLayout = () => {
     const keyword = event.target.value;
     setSearchValue(keyword);
   };
-
+  console.log('dapps:', dapps);
+  console.log('selectedFunction:', selectedFunction);
+  console.log('selectedMenu:', selectedMenu);  
+  console.log('Before filter:', dapps.length, dapps);
   const filteredDapps = dapps.filter(
     ({ name, tags, on_chain_ids }) =>
       name.toLowerCase().includes(searchValue.toLowerCase()) &&
       (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
       (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
   );
+  console.log('After filter:', filteredDapps.length, filteredDapps);  
+  
 
   return (
     <NewHomePage>

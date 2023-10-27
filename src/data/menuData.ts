@@ -168,6 +168,6 @@ export const menuData = [
       },
     ],
   },
-  { title: 'Loyalty', path: '', version: true },
-  { title: 'Portfolio', path: '', version: false },
+  { title: 'Loyalty', path: '', version: false },
+  { title: 'Portfolio', path: '', version: false, level: true },
 ];
