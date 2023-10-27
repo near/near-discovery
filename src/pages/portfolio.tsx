@@ -880,6 +880,7 @@ const PortFolioDataArea = ({
       {CurTab !== 'Execution Records' && (
         <NetworkTabWrapper>
           <AllNetWorkTab
+            active={network === 'all'}
             onClick={() => {
               setNetwork('all');
             }}
@@ -961,7 +962,7 @@ const PortfolioPage: NextPageWithLayout = () => {
           <div className="">
             <div className="address-filed ">
               <span>{formateAddress(sender)}</span>
-              <div className="arrow-filed frcc">{ArrowDone}</div>
+              {/* <div className="arrow-filed frcc">{ArrowDone}</div> */}
             </div>
 
             <div className="frcs metamask-filed">

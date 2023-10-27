@@ -156,9 +156,13 @@ export const NetWorkTab = styled.div<{ active: boolean }>`
   max-width: max-content;
   height: 50px;
   border-radius: 10px;
-  background: #35374980;
-  border: 1px solid ${(p) => (p.active ? '#EBF479' : 'transparent')};
+  background: ${(p) => (p.active ? 'linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%)' : '#35374980')};
+  border: 1px solid transparent;
   padding: 8px;
+
+  :hover {
+    border: 1px solid #ebf479;
+  }
 
   .network-icon-chain {
     width: 36px;
@@ -182,7 +186,7 @@ export const NetWorkTab = styled.div<{ active: boolean }>`
     line-height: 19px;
     letter-spacing: 0em;
     text-align: left;
-    color: white;
+    color: ${(p) => (p.active ? '#2D2F42' : 'white')};
   }
   .usd-value-percent {
     font-family: Gantari;
@@ -195,15 +199,22 @@ export const NetWorkTab = styled.div<{ active: boolean }>`
   }
 `;
 
-export const AllNetWorkTab = styled.div`
+export const AllNetWorkTab = styled.div<{ active: boolean }>`
   width: 152px;
   height: 50px;
-  background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
+  background: ${(p) => (p.active ? 'linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%)' : '#35374980')};
+
   border-radius: 10px;
   padding: 16px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  border: 1px solid transparent;
+
+  :hover {
+    border: 1px solid #ebf479;
+  }
 
   > div {
     cursor: pointer;
@@ -224,7 +235,7 @@ export const AllNetWorkTab = styled.div`
     line-height: 19px;
     letter-spacing: 0em;
     text-align: left;
-    color: #2d2f42;
+    color: ${(p) => (p.active ? '#2D2F42' : 'white')};
   }
 `;
 
