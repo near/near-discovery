@@ -245,10 +245,14 @@ export default function useStargate() {
       const _bridgeTxs = JSON.parse(bridgeTxs);
       _bridgeTxs[tx.hash] = {
         amount,
-        label: `${chain.chainName} -> ${targetChain.chainName} Chain`,
+        inputChain: chain.chainName,
+        outputChain: targetChain.chainName,
         symbol: token.symbol,
         tx: tx.hash,
+        time: Date.now(),
+        scan: chain.blockExplorers,
         isStargate: true,
+        duration: '1 min',
       };
       localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
     }
