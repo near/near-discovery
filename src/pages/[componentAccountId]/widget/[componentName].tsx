@@ -7,6 +7,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
+import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -25,15 +26,15 @@ const ViewComponentPage: NextPageWithLayout = () => {
   }, [router.query]);
 
   return (
-    <div className="container-xl">
-      <div className="row">
-        <div
-          className="d-inline-block"
-        >
-          <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
-        </div>
-      </div>
-    </div>
+    // <div className="container-xl">
+    //   <div className="row">
+    //     <div className="d-inline-block">
+    //       <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
+    //     </div>
+    //   </div>
+    // </div>
+
+    <ComponentWrapperPage src={componentSrc} />
   );
 };
 
