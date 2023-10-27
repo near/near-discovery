@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEthersProviderContext } from '@/data/web3';
 import useAccount from '@/hooks/useAccount';
 import * as http from '@/utils/http';
+import { getAccessToken } from '@/apis';
 
 const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
   font-family: Gantari;
@@ -134,13 +135,9 @@ const InviteCodePage = () => {
     try {
       const res = await http.get(`/api/invite/check-address/${account}`);
       if (res.data?.is_activated) {
-        const tokens = await http.post('/api/auth/access-token', {
-          address: account,
-        });
-        if (tokens.access_token) {
-          window.localStorage.setItem(http.AUTH_TOKENS, JSON.stringify(tokens));
-          router.replace('/');
-        }
+        await getAccessToken(account);
+        window.localStorage.setItem('LOGINED_ACCOUNT', account);
+        router.replace('/');
       }
     } catch (error) {
       setInvited(false);
@@ -159,6 +156,8 @@ const InviteCodePage = () => {
 
       setLoading(false);
       if (resJSON.data?.is_success) {
+        await getAccessToken(account);
+        window.localStorage.setItem('LOGINED_ACCOUNT', account);
         router.replace('/');
       }
     } catch (error) {

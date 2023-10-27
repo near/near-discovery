@@ -42,14 +42,14 @@ const get = async (url: string, query?: Record<string, any>) => {
   };
   if (!query) {
     const res = await fetch(getUrl(url), options);
-    return res.json();
+    return res.json() as any;
   }
 
   query = removeEmptyKeys(query);
   const queryStr = objectToQueryString(query);
 
   const res = await fetch(`${getUrl(url)}?${queryStr}`, options);
-  return res.json();
+  return res.json() as any;
 };
 
 const post = async (url: string, data: object) => {
@@ -62,7 +62,7 @@ const post = async (url: string, data: object) => {
     },
     body: JSON.stringify(data),
   });
-  return await res.json();
+  return (await res.json()) as any;
 };
 
 export { get, post, AUTH_TOKENS };

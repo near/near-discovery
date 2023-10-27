@@ -22,7 +22,6 @@ import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import useAccount from '@/hooks/useAccount';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -42,13 +41,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const authStore = useAuthStore();
   const componentSrc = router.query;
-  const { account } = useAccount();
 
   useEffect(() => {
+    if (router.pathname === 'uniswap') {
+      return;
+    }
+    const account = window.localStorage.getItem('LOGINED_ACCOUNT');
+
     if (!account) {
       router.replace('/invite-code');
     }
-  }, [account]);
+  }, []);
 
   useEffect(() => {
     initializeAnalytics();
