@@ -23,7 +23,7 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
       props.logined
         ? ''
         : `
-    background: url('./bg-invite-code.svg') no-repeat;
+    background: url('./images/bg-invite-code.svg') no-repeat;
     background-size: 100% 100%;
     `}
   }
@@ -192,7 +192,7 @@ const InviteCodePage = () => {
         <div className="yellow"></div>
         <div className="blue"></div>
         <div className="content">
-          {!account && <img src="./Eureka-logo.svg" />}
+          {!account && <img src={'/images/eureka-logo.svg'} />}
           <div className="title">
             {!account ? (
               <p>
@@ -200,7 +200,7 @@ const InviteCodePage = () => {
               </p>
             ) : (
               <p>
-                <img src="./subtract.svg" style={{ marginRight: '20px' }} />
+                <img src="./images/subtract.svg" style={{ marginRight: '20px' }} />
                 Got an invite code?
               </p>
             )}
@@ -225,7 +225,7 @@ const InviteCodePage = () => {
               {account ? (
                 <span className="logout">
                   Log out
-                  <img src="./arrow-right.svg" />
+                  <img src={'/images/arrow-right.svg'} />
                 </span>
               ) : (
                 '💡 Invited users only'
