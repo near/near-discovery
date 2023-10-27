@@ -412,9 +412,6 @@ const NewHomePage: NextPageWithLayout = () => {
   `;
 
   const [selectedMenu, setSelectedMenu] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.localStorage.getItem('selectedMenu') || '';
-    }
     return '';
   });
   const handleMenuClick = (path: string) => {
@@ -426,9 +423,7 @@ const NewHomePage: NextPageWithLayout = () => {
   };
 
   const [selectedMedalMenu, setSelectedMedalMenu] = useState(() => {
-    if (typeof window !== 'undefined') {
-      return window.localStorage.getItem('selectedMedalMenu') || '';
-    }
+ 
     return '';
   });
   const handleMedalMenuClick = (path: string) => {
@@ -441,10 +436,7 @@ const NewHomePage: NextPageWithLayout = () => {
   };
 
   const [selectedTab, setSelectedTab] = useState(() => {
-    if (typeof window !== 'undefined') {
-      const storedSelectedTab = window.localStorage.getItem('selectedTab');
-      return storedSelectedTab || 'TBD';
-    }
+
     return 'TBD';
   });
   
@@ -453,10 +445,7 @@ const NewHomePage: NextPageWithLayout = () => {
   };
 
   const [selectedFunction, setSelectedFunction] = useState<string[]>(() => {
-    if (typeof window !== 'undefined') {
-      const storedSelectedFunction = window.localStorage.getItem('selectedFunction');
-      return storedSelectedFunction ? JSON.parse(storedSelectedFunction) : [];
-    }
+  
     return [];
   });
 
@@ -468,14 +457,15 @@ const NewHomePage: NextPageWithLayout = () => {
     }
   };
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      window.localStorage.setItem('selectedMenu', selectedMenu);
-      window.localStorage.setItem('selectedMedalMenu', selectedMedalMenu);
-      window.localStorage.setItem('selectedTab', selectedTab);
-      localStorage.setItem('selectedFunction', JSON.stringify(selectedFunction));
-    }
-  }, [selectedMenu, selectedMedalMenu, selectedTab, selectedFunction]);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     window.localStorage.setItem('selectedMenu', selectedMenu);
+  //     window.localStorage.setItem('selectedMedalMenu', selectedMedalMenu);
+  //     // window.localStorage.setItem('selectedTab', selectedTab);
+  //     localStorage.setItem('selectedFunction', JSON.stringify(selectedFunction));
+  //   }
+  // }, [selectedMenu, selectedMedalMenu, selectedFunction]);
+
   const [searchValue, setSearchValue] = useState('');
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
