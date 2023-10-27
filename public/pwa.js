@@ -4,7 +4,7 @@
   if ('serviceWorker' in navigator) {
     try {
       const registration = await navigator.serviceWorker.register(
-        'pwa.js');
+        './pwa.js');
     } catch (error) {
       console.error(`PWA Registration failed with ${error}`);
     }
@@ -18,9 +18,11 @@ const addResourcesToCache = async (resources) => {
 };
 
 const putInCache = async (request, response) => {
-  if(request.method !== "POST" && request.url.indexOf("chrome-extension:") === -1) {
+  if(request.method !== "POST" && request.url.indexOf("chrome-extension") === -1) {
     const cache = await caches.open('v1');
-    await cache.put(request, response);
+    try { 
+      await cache.put(request, response);
+    } catch(e) {console.log('caught error while adding to cache for request %s ', request)}
   }
 };
 
