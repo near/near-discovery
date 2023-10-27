@@ -1,8 +1,9 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import SelectTokens from './SelectTokens';
+
+import type { Chain, SelectClick,Token } from '../types';
 import SelectChains from './SelectChains';
-import type { Token, Chain, SelectClick } from '../types';
+import SelectTokens from './SelectTokens';
 
 const Container = styled.div`
   width: 100%;

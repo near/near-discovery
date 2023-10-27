@@ -1,4 +1,4 @@
-import { SupportDex } from '@/components/Bridge/types';
+import type { SupportDex } from '@/components/Bridge/types';
 export { tokens } from './tokens';
 export { supportChains as chains } from './chains';
 

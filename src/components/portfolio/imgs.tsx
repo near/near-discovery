@@ -1,24 +1,5 @@
 import React from 'react';
 
-export const DefaultProfileIcon = (
-  <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="52" height="52" rx="26" fill="url(#paint0_angular_36_2297)" />
-    <defs>
-      <radialGradient
-        id="paint0_angular_36_2297"
-        cx="0"
-        cy="0"
-        r="1"
-        gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(26 26) rotate(90) scale(26)"
-      >
-        <stop stop-color="#00D1FF" />
-        <stop offset="1" stop-color="#FF008A" />
-      </radialGradient>
-    </defs>
-  </svg>
-);
-
 export const MetaMaskIcon = (
   <img
     width={16}

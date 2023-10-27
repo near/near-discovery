@@ -1,6 +1,7 @@
-import { Chain } from '@/types';
 import { useState } from 'react';
+
 import { useVmStore } from '@/stores/vm';
+import type { Chain } from '@/types';
 
 export default () => {
   const [switching, setSwitching] = useState(false);

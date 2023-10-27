@@ -1,8 +1,10 @@
-import { useState } from 'react';
-import { chainCofig } from '@/config/bridge';
 import Big from 'big.js';
+import { useState } from 'react';
+
+import { chainCofig } from '@/config/bridge';
+
+import type { Chain, Token, Trade } from '../types';
 import useStargate from './useStargate';
-import { Chain, Token, Trade } from '../types';
 
 export default function useBestRoute() {
   const { getQouteInfo, swap: stargateSwap, gasCost } = useStargate();
@@ -23,6 +25,7 @@ export default function useBestRoute() {
   }) => {
     try {
       setChecking(true);
+      setTrade(undefined);
       const _inputChain = chainCofig[chain.chainId];
       if (_inputChain.dex === 'Stargate') {
         const response = await getQouteInfo({ targetToken, chain, targetChain });

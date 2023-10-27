@@ -262,7 +262,7 @@ const Wrapper = styled.div`
 `;
 
 const RainbowBridgeContainer = styled.div`
-  max-width: 1320px;
+  /* max-width: 1320px; */
 
   margin: auto;
   position: relative;

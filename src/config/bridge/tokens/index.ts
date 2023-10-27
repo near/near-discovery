@@ -1,8 +1,8 @@
-import { baseTokens } from './base';
-import { ethereumTokens } from './ethereum';
 import { arbitrumTokens } from './arbitrum';
 import { avalancheTokens } from './avalanche';
+import { baseTokens } from './base';
 import { bscTokens } from './bsc';
+import { ethereumTokens } from './ethereum';
 import { lineaTokens } from './linea';
 import { metisTokens } from './metis';
 import { optimismTokens } from './optimism';
@@ -19,5 +19,3 @@ export const tokens = {
   ...optimismTokens,
   ...polygonTokens,
 };
-
-console.log(baseTokens);

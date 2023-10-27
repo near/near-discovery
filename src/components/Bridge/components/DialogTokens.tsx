@@ -1,8 +1,10 @@
 import { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import Modal from '@/components/Modal';
-import CurrencyList from './CurrencyList';
+
 import type { Chain, Token } from '../types';
+import CurrencyList from './CurrencyList';
 
 const InputWarpper = styled.div`
   height: 46px;
@@ -54,7 +56,7 @@ const DialogTokens = ({
       const _tokens = ev?.target.value
         ? tokens.filter((token) => {
             return (
-              token.address === ev.target.value || token.name.toLowerCase().includes(ev.target.value?.toLowerCase())
+              token.address === ev.target.value || token.name?.toLowerCase().includes(ev.target.value?.toLowerCase())
             );
           })
         : tokens;

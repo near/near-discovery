@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import useAccount from './useAccount';
-import { Contract, providers, utils } from 'ethers';
 import Big from 'big.js';
-import { Chain, Token } from '@/types';
+import { Contract, providers, utils } from 'ethers';
+import { useEffect, useState } from 'react';
+
+import type { Chain, Token } from '@/types';
+
+import useAccount from './useAccount';
 
 const { JsonRpcProvider, Web3Provider } = providers;
 
@@ -22,7 +24,7 @@ export default function useApprove({
   const { account, provider } = useAccount();
 
   const checkApproved = async () => {
-    if (!token || !amount || !chain || !spender) return;
+    if (!token?.address || !amount || !chain || !spender) return;
     const provider = new JsonRpcProvider(chain?.rpcUrls[0]);
     const TokenContract = new Contract(
       token.address,
@@ -47,7 +49,7 @@ export default function useApprove({
   };
 
   const approve = async () => {
-    if (!token || !amount || !chain || !spender) return;
+    if (!token?.address || !amount || !chain || !spender) return;
     setApproving(true);
     try {
       const signer = provider.getSigner(account);

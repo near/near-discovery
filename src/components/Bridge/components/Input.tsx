@@ -1,7 +1,9 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import { balanceFormated } from '@/utils/balance';
+
 import Loading from '@/components/Icons/Loading';
+import { balanceFormated } from '@/utils/balance';
+
 import { Token } from '../types';
 
 const Container = styled.div`

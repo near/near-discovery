@@ -3,32 +3,63 @@ import { useRouter } from 'next/navigation';
 import React from 'react';
 import styled from 'styled-components';
 
+export const LeftMenuContainer = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+
+  .flex-grow {
+    flex-grow: 1;
+  }
+  .contentOut {
+    /* padding-top: 25px;
+    margin-left: 35px; */
+  }
+  .contentOut p {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #ffffff;
+  }
+  @media (max-width: 900px) {
+    display: grid;
+    .contentOut {
+      padding: 0;
+      margin: 0 0 36px 0;
+    }
+    .contentOut p {
+      display: none;
+    }
+  }
+`;
+
 const MenuContainer = styled.div`
-  padding: 128px 12px 35px 20px;
-  position: absolute;
   margin-right: 35px;
+  padding-top: 100px;
+
   .item {
     display: flex;
     align-items: center;
     padding-left: 40px;
-    width: 167px;
-    height: 46px;
+    width: 180px;
+    height: 64px;
     font-weight: 500;
-    font-size: 14px;
+    font-size: 16px;
     color: #7e8a93;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 2px;
     border-right: 3px solid transparent;
     transition: 0.5s;
+    border-radius: 16px;
     :hover {
-      background-image: linear-gradient(270deg, rgba(55, 58, 83, 0) 0%, #373a53 50%, rgba(55, 58, 83, 0) 100%);
-      color: #fff;
+      background: linear-gradient(270deg, #373a53 0%, rgba(55, 58, 83, 0) 100%);
+      color: #ffffff;
     }
   }
   .item.active {
-    background-image: linear-gradient(270deg, #373a53 0%, rgba(55, 58, 83, 0) 100%);
-    color: #fff;
-    border-color: #00ffa3;
+    color: #ffffff;
+    background: linear-gradient(270deg, #373a53 0%, rgba(55, 58, 83, 0) 100%);
   }
   .item.disable {
     cursor: not-allowed;
@@ -39,7 +70,7 @@ const MenuContainer = styled.div`
   @media (max-width: 900px) {
     margin: 0;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 16px;
     background: #222436;
     position: fixed;
@@ -55,9 +86,8 @@ const MenuContainer = styled.div`
       display: grid;
       text-align: center;
       align-items: center;
-      margin-bottom: 0;
       span {
-        margin-left: 26px;
+        margin-left: 40px;
         margin-bottom: -28px;
       }
     }

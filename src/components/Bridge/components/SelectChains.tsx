@@ -1,8 +1,9 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import SelectLabel from './SelectLabel';
+
+import type { Chain, SelectClick } from '../types';
 import SelectItem from './SelectItem';
-import { Chain, SelectClick } from '../types';
+import SelectLabel from './SelectLabel';
 
 const Container = styled.div`
   width: 50%;

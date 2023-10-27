@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
-import type { Token, Chain } from '../types';
+
+import type { Chain, Token } from '../types';
 
 export default ({
   chainId,
@@ -22,6 +23,15 @@ export default ({
         Object.values(tokens).some((token) => {
           if (token.poolId === outputToken?.poolId && token.chainId === chain.chainId) {
             setOutputToken(token);
+            return true;
+          }
+          return false;
+        });
+      }
+      if (type === 'in' && inputToken?.chainId !== chain.chainId) {
+        Object.values(tokens).some((token) => {
+          if (token.poolId === inputToken?.poolId && token.chainId === chain.chainId) {
+            setInputToken(token);
             return true;
           }
           return false;

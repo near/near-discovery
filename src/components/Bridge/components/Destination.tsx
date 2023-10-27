@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import Checkbox from '@/components/Checkbox';
 
 const Container = styled.div`
@@ -60,7 +61,7 @@ const Destination = ({
           }}
           disabled={disabled}
         />
-        <Label>I'm transferring to another address</Label>
+        <Label>{"I'm transferring to another address"}</Label>
       </Header>
       {checked && (
         <InputWrapper>

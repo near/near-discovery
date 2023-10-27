@@ -1,4 +1,4 @@
-import { Chain } from '@/types';
+import type { Chain } from '@/types';
 
 //TODO: need wrap token address
 //TODO: need all chains live on dapdap
@@ -12,6 +12,15 @@ export default {
     rpcUrls: ['https://developer-access-mainnet.base.org'],
     blockExplorers: 'https://basescan.org',
   },
+  5000: {
+    chainId: 5000,
+    chainName: 'Mantle',
+    icon: 'https://ipfs.near.social/ipfs/bafkreicmbhykgsvj4rdujduh2fujbsrgp3mkqpqlw2weyuxdfqpwtka6la',
+    nativeCurrency: { name: 'MNT', symbol: 'MNT', decimals: 18 },
+    rpcUrls: ['https://mantle-mainnet.public.blastapi.io'],
+    blockExplorers: 'https://mantlescan.info',
+  },
+
   1: {
     chainId: 1,
     chainName: 'Ethereum',
@@ -32,7 +41,7 @@ export default {
     chainId: 43114,
     chainName: 'Avalanche',
     icon: 'https://ipfs.near.social/ipfs/bafkreid6iw3oxfkyps37bts62rw33vr6q4aekwa36bfq7ywdhsiiqh5po4',
-    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+    nativeCurrency: { name: 'AVAX', symbol: 'AVAX', decimals: 18 },
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
     blockExplorers: 'https://snowtrace.io',
   },
@@ -75,5 +84,31 @@ export default {
     nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
     rpcUrls: ['https://polygon.llamarpc.com'],
     blockExplorers: 'https://polygonscan.com',
+  },
+
+  1101: {
+    chainId: 1101,
+    chainName: 'Polygon zkEVM',
+    icon: 'https://ipfs.near.social/ipfs/bafkreicmrfbaejeef4br5g6fekzhcrrc2rfw4hcmusie2t2m4qsl45x2qe',
+    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+    rpcUrls: ['https://zkevm-rpc.com'],
+    blockExplorers: 'https://zkevm.polygonscan.com',
+  },
+  324: {
+    chainId: 324,
+    chainName: 'zkSync',
+    icon: 'https://ipfs.near.social/ipfs/bafkreido2creciicfwo7ceojij2kmn524c63pthhteez6higs5msym4rg4',
+    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+    rpcUrls: ['https://mainnet.era.zksync.io'],
+    blockExplorers: 'https://explorer.zksync.io/',
+  },
+
+  100: {
+    chainId: 100,
+    chainName: 'Gnosis',
+    icon: 'https://ipfs.near.social/ipfs/bafkreigl7y5n7xqlasn4wokkhxk3hoostz2u7qgvezvzfni2b6g2r4ayfu',
+    nativeCurrency: { name: 'XDAI', symbol: 'XDAI', decimals: 18 },
+    rpcUrls: ['https://rpc.ankr.com/gnosis'],
+    blockExplorers: 'https://gnosisscan.io/',
   },
 } as { [key: number]: Chain };

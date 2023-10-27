@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
-import { tokens as configTokens, chains as configChains } from '@/config/bridge';
+
+import { chains as configChains,tokens as configTokens } from '@/config/bridge';
+
 import type { Chain, Token } from '../types';
 
 export default function useTokensAndChains() {

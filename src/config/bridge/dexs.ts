@@ -1,4 +1,4 @@
-import type { SupportDex, Dex } from '@/components/Bridge/types';
+import type { Dex,SupportDex } from '@/components/Bridge/types';
 
 export default {
   Stargate: {

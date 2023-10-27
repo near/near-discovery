@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { Container } from 'react-bootstrap';
+import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
@@ -44,17 +46,23 @@ const WarmUp: NextPageWithLayout = () => {
     return () => window.removeEventListener('setItemEvent', getPutMenu);
   }, []);
 
+  const Container = styled.div`
+    margin: 0 10%;
+  `;
+
   return (
-    <ComponentWrapperPage
-      src={components.warmUp}
-      componentProps={{
-        hotIcon,
-        trendIcon,
-        myQuestIcon,
-        innerWidth,
-      }}
-      meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
-    />
+    <Container>
+      <ComponentWrapperPage
+        src={components.warmUp}
+        componentProps={{
+          hotIcon,
+          trendIcon,
+          myQuestIcon,
+          innerWidth,
+        }}
+        meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
+      />
+    </Container>
   );
 };
 

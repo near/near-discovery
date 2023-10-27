@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   max-width: 1000px;
   position: relative;
   font-family: Gantari;
-
+  margin: 0 auto;
   .asset-function-button {
     border: 1px solid #373a53;
     background: #373a53;
@@ -755,4 +755,11 @@ export const CheckDot = styled.div<{ active: boolean }>`
 
     border-radius: 100%;
   }
+`;
+
+export const DefaultProfileIcon = styled.div`
+  background-image: conic-gradient(from 180deg at 50% 50%, rgb(0, 209, 255) 0deg, rgb(255, 0, 138) 360deg);
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
 `;

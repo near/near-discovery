@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-const Loading = styled.div<{ size: number }>`
+const StyledLoading = styled.div<{ size: number }>`
   width: ${({ size }) => size + 'px'};
   height: ${({ size }) => size + 'px'};
-  line-height: ${({ size }) => size + 'px'};
+  line-height: ${({ size }) => size - 2 + 'px'};
   animation: loading 1s linear infinite;
   transform-origin: center center;
   display: inline-block;
@@ -18,9 +18,9 @@ const Loading = styled.div<{ size: number }>`
   }
 `;
 
-export default ({ size = 18 }: { size?: number }) => {
+export default function Loading({ size = 18 }: { size?: number }) {
   return (
-    <Loading size={size}>
+    <StyledLoading size={size}>
       <svg width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle opacity="0.2" cx="9" cy="9" r="8" stroke="white" stroke-width="2" />
         <path
@@ -30,6 +30,6 @@ export default ({ size = 18 }: { size?: number }) => {
           stroke-linecap="round"
         />
       </svg>
-    </Loading>
+    </StyledLoading>
   );
-};
+}

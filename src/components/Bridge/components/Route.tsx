@@ -1,7 +1,9 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import dexs from '@/config/bridge/dexs';
-import { Trade } from '../types';
+
+import type { Trade } from '../types';
 
 const Container = styled.div`
   padding: 10px;

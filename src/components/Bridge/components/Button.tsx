@@ -1,13 +1,13 @@
+import Big from 'big.js';
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
+
 import LoadingIcon from '@/components/Icons/Loading';
+import { chainCofig } from '@/config/bridge';
 import useApprove from '@/hooks/useApprove';
 import useSwitchChain from '@/hooks/useSwitchChain';
-import { chainCofig } from '@/config/bridge';
-import Big from 'big.js';
-import useBestRoute from '../hooks/useBestRoute';
 
-import type { Token, Chain } from '../types';
+import type { Chain, Token } from '../types';
 
 const StyledButton = styled.button`
   font-size: 18px;
@@ -52,7 +52,7 @@ const Button = ({
   chainId?: number;
   checking?: boolean;
   onSuccess: (hash: string) => void;
-  swap: Function;
+  swap: any;
   swaping?: boolean;
 }) => {
   const { switching, switchNetwork } = useSwitchChain();

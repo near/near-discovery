@@ -2,8 +2,22 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+import useAccount from '@/hooks/useAccount';
+import AccountItem from '@/components/AccountSider/components/AccountItem';
+import Chain from '@/components/AccountSider/components/Chain';
 import { menuData } from '@/data/menuData';
+import { useLayoutStore } from '@/stores/layout';
+import ConnectWallet from '@/components/ConnectWallet';
+
+const LoginContainer = styled.div`
+  width: auto;
+  align-items: center;
+  display: flex;
+  gap: 10px;
+`;
+const AccountWrapper = styled.div`
+  cursor: pointer;
+`;
 
 export const DesktopNavigationTop = () => {
   const Container = styled.div`
@@ -60,6 +74,12 @@ export const DesktopNavigationTop = () => {
           opacity: 1;
         }
       }
+      .submenu-item-disable {
+        cursor: not-allowed;
+        &:hover {
+          opacity: 0.5;
+        }
+      }
     }
   `;
 
@@ -77,7 +97,7 @@ export const DesktopNavigationTop = () => {
     font-family: Gantari;
     font-size: 18px;
     font-weight: 500;
-    margin: 0 14%;
+    margin: 0 24% 0 14%;
     align-items: center;
     .container-menu-item {
       margin: 0 10px;
@@ -126,28 +146,24 @@ export const DesktopNavigationTop = () => {
     }
   `;
 
-  const LoginContainer = styled.div`
-    width: auto;
-    align-items: center;
-  `;
-
   const logoUrl = 'https://ipfs.near.social/ipfs/bafkreifzlmyfwus3t24c5xwz5hg5j4p7tk2pa4lisq4qkxuyky5huxkz6e';
 
   const lockUrl = 'https://ipfs.near.social/ipfs/bafkreihwfdlygayrdbdjzofkt7js7dhaopyvys7pyglb7zdqvsao7ynt2u';
 
+  const setLayoutStore = useLayoutStore((store) => store.set);
+  const { account } = useAccount();
   const router = useRouter();
   const currentPath = router.pathname;
 
   const [showSubmenu, setShowSubmenu] = useState(false);
   const [activeParentIndex, setActiveParentIndex] = useState(-1);
-
   useEffect(() => {
     const parentIndex = menuData.findIndex(
       (item) =>
         item.path === currentPath || (item.children && item.children.some((child) => child.path === currentPath)),
     );
     setActiveParentIndex(parentIndex);
-    setShowSubmenu(parentIndex > -1);
+    setShowSubmenu(parentIndex === 1 || parentIndex === 2);
   }, [currentPath]);
 
   const handleMenuClick = (index: number, hasChildren: boolean) => {
@@ -162,8 +178,12 @@ export const DesktopNavigationTop = () => {
       setShowSubmenu(false);
       setActiveParentIndex(-1);
     }
-    if (index === 2 && activeParentIndex === 2) {
-      setActiveParentIndex(-1);
+
+    if (hasChildren && index !== activeParentIndex) {
+      const firstChildPath = menuData[index]?.children?.[0]?.path;
+      if (firstChildPath) {
+        router.push(firstChildPath);
+      }
     }
   };
 
@@ -187,41 +207,69 @@ export const DesktopNavigationTop = () => {
                 <span>{item.title}</span>
               </div>
             ) : (
-              <Link
-                key={index}
-                href={item.path || ''}
-                className={className}
-                onClick={() => handleMenuClick(index, hasChildren)}
-              >
-                <span>{item.title}</span>
-                {item.version === false && (
-                  <div className="current-version">
-                    <img src={lockUrl} alt="" />
-                    Lv.3
+              <>
+                {item.version === false ? (
+                  <div key={index} className={className}>
+                    <span>{item.title}</span>
+                    <div className="current-version">
+                      <img src={lockUrl} alt="" />
+                      Lv.3
+                    </div>
                   </div>
+                ) : (
+                  <Link
+                    key={index}
+                    href={item.path || ''}
+                    className={className}
+                    onClick={() => handleMenuClick(index, hasChildren)}
+                  >
+                    <span>{item.title}</span>
+                  </Link>
                 )}
-              </Link>
+              </>
             );
           })}
         </MenuContainer>
-        <LoginContainer>
-          <div className="container-login"></div>
-        </LoginContainer>
+        {account ? (
+          <LoginContainer>
+            <Chain showName={false} />
+            <AccountWrapper
+              onClick={() => {
+                setLayoutStore({ showAccountSider: true });
+              }}
+            >
+              <AccountItem showCopy={false} logoSize={28} />
+            </AccountWrapper>
+          </LoginContainer>
+        ) : (
+          <ConnectWallet />
+        )}
       </div>
 
-      {activeParentIndex === 2 && showSubmenu && (
+      {showSubmenu && (
         <div className={`container-submenu ${showSubmenu ? 'show' : ''}`}>
           {menuData[activeParentIndex]?.children?.map((child, childIndex) => (
-            <Link
-              key={childIndex}
-              href={child.path || ''}
-              className={`submenu-item ${child.path === currentPath ? 'active' : ''}`}
-            >
-              <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
-                <img src={child.icon} alt="" />
-              </div>
-              {child.title}
-            </Link>
+            <>
+              {child.disable ? (
+                <div key={childIndex} className="submenu-item submenu-item-disable">
+                  <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
+                    <img src={child.icon} alt="" />
+                  </div>
+                  {child.title}
+                </div>
+              ) : (
+                <Link
+                  key={childIndex}
+                  href={child.path || ''}
+                  className={`submenu-item ${child.path === currentPath ? 'active' : ''}`}
+                >
+                  <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
+                    <img src={child.icon} alt="" />
+                  </div>
+                  {child.title}
+                </Link>
+              )}
+            </>
           ))}
         </div>
       )}

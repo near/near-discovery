@@ -1,8 +1,10 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import ArrowIcon from '@/components/Icons/ArrowIcon';
-import Route from './Route';
+
 import type { Trade } from '../types';
+import Route from './Route';
 
 const Container = styled.div`
   margin-top: 10px;

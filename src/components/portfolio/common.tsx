@@ -1,7 +1,7 @@
-import { NoAssetsIcon } from './imgs';
-import { NoAssetText, NoAssetWrapper } from '.';
-
 import React from 'react';
+
+import { NoAssetText, NoAssetWrapper } from '.';
+import { NoAssetsIcon } from './imgs';
 
 export const NoDataLayout = ({ shrink }: { shrink?: boolean }) => {
   return (

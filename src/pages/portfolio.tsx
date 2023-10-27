@@ -1,6 +1,6 @@
 import Big from 'big.js';
 import React, { useEffect, useState } from 'react';
-import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, YAxis } from 'recharts';
 import styled from 'styled-components';
 
 import {
@@ -25,19 +25,23 @@ import {
   TotalBalanceWrapper,
   Wrapper,
   YourAssetsTitle,
+  DefaultProfileIcon,
 } from '@/components/portfolio';
+import { NoDataLayout } from '@/components/portfolio/common';
 import { IconSeries } from '@/components/portfolio/icons';
 import {
   AllNetWorkIcon,
   ArrowDone,
-  DefaultProfileIcon,
   MetaMaskIcon,
   NoAssetsIcon,
   ProtocolArrowDown,
   sortArrowDown,
 } from '@/components/portfolio/imgs';
+import { VmComponent } from '@/components/vm/VmComponent';
 import useEthersSender from '@/hooks/useEthersSender';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import type { AllChainBalanceInterface } from '@/hooks/usePortfolioService';
+import { useNetCurve24h, useSenderPortfolioData, useTotalBalance } from '@/hooks/usePortfolioService';
 import {
   formateAddress,
   formateValue,
@@ -45,13 +49,10 @@ import {
   formateValueWithThousandSeparatorAndFont,
 } from '@/utils/formate';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useNetCurve24h, useSenderPortfolioData, useTotalBalance } from '@/hooks/usePortfolioService';
 
-import type { AllChainBalanceInterface } from '@/hooks/usePortfolioService';
-
-import { NoDataLayout } from '@/components/portfolio/common';
-import { VmComponent } from '@/components/vm/VmComponent';
 import { CheckDot } from '../components/portfolio/index';
+
+const DEFAULT_TOKEN_ICON = 'https://ipfs.near.social/ipfs/bafkreiddol6jzrlwliyh2vrjk3u2ajp3z5cubb5gzedifearly2bvdraay';
 
 const ExecutionRecords = () => {
   return <VmComponent src="bluebiu.near/widget/ZKEVM.ExecuteRecords"></VmComponent>;
@@ -395,7 +396,7 @@ const WalletComponent = (props: any) => {
                 <tr key={token.id}>
                   <td>
                     <div className="frcs token-info">
-                      <img src={token.logo_url || ''} className="token-icon" />
+                      <img src={token.logo_url || DEFAULT_TOKEN_ICON} className="token-icon" />
 
                       <div>
                         <div className="token-symbol">{token.symbol}</div>
@@ -555,8 +556,6 @@ const ProtocolTableGenerator = ({
   name: colorKeyEnums;
   showTitle: boolean;
 }) => {
-  console.log('colorConfig[name]  ', colorConfig[name] || colorConfig['default']);
-
   return (
     <ProtocolTable
       titleColor={(colorConfig[name] || colorConfig['default']).titleColor}
@@ -672,7 +671,7 @@ const ProtocolItem = (props: any) => {
 
             const { supply_token_list, reward_token_list, borrow_token_list } = item.detail;
 
-            if (supply_token_list) {
+            if (supply_token_list && supply_token_list.length > 0) {
               renderList.push(
                 <ProtocolTableGenerator
                   name={name}
@@ -694,29 +693,35 @@ const ProtocolItem = (props: any) => {
               );
             }
 
-            if (reward_token_list) {
-              renderList.push(
-                <ProtocolTableGenerator
-                  name={name}
-                  showTitle={false}
-                  columns={['Rewards', 'Balance', 'USD Value']}
-                  rows={reward_token_list.map((token: any) => {
-                    if (checkHideValue(token.amount * token.price)) return ['omit', 'omit', 'omit'];
+            if (reward_token_list && reward_token_list.length > 0) {
+              const rows = reward_token_list.map((token: any) => {
+                if (checkHideValue(token.amount * token.price)) return false;
 
-                    return [
-                      <div className="frcs" key={token.id}>
-                        <img className="token-icon" src={token.logo_url || ''} />
-                        <div className="token-name">{token.name}</div>
-                      </div>,
-                      formateValue(token.amount, 4),
-                      formateValueWithThousandSeparator(token.amount * token.price, 4),
-                    ];
-                  })}
-                ></ProtocolTableGenerator>,
-              );
+                return [
+                  <div className="frcs" key={token.id}>
+                    <img className="token-icon" src={token.logo_url || ''} />
+                    <div className="token-name">{token.name}</div>
+                  </div>,
+                  formateValue(token.amount, 4),
+                  formateValueWithThousandSeparator(token.amount * token.price, 4),
+                ];
+              });
+
+              const displayRows = rows.filter((row: any) => row !== false);
+
+              if (displayRows.length > 0) {
+                renderList.push(
+                  <ProtocolTableGenerator
+                    name={name}
+                    showTitle={false}
+                    columns={['Rewards', 'Balance', 'USD Value']}
+                    rows={displayRows}
+                  ></ProtocolTableGenerator>,
+                );
+              }
             }
 
-            if (borrow_token_list) {
+            if (borrow_token_list && borrow_token_list.length > 0) {
               renderList.push(
                 <ProtocolTableGenerator
                   name={name}
@@ -801,14 +806,16 @@ const ProtocolItem = (props: any) => {
               columns = ['Position', 'Balance', 'USD value'];
             }
 
-            renderList.push(
-              <ProtocolTableGenerator
-                name={name}
-                showTitle={false}
-                columns={columns}
-                rows={rows}
-              ></ProtocolTableGenerator>,
-            );
+            if (rows.length > 0) {
+              renderList.push(
+                <ProtocolTableGenerator
+                  name={name}
+                  showTitle={false}
+                  columns={columns}
+                  rows={rows}
+                ></ProtocolTableGenerator>,
+              );
+            }
           }
 
           if (renderList.length > 0) {
@@ -949,7 +956,7 @@ const PortfolioPage: NextPageWithLayout = () => {
     <Wrapper>
       <div className="frcb-start">
         <Profile className="frcs">
-          {DefaultProfileIcon}
+          <DefaultProfileIcon></DefaultProfileIcon>
 
           <div className="">
             <div className="address-filed ">

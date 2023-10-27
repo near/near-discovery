@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+
 import ArrowIcon from '@/components/Icons/ArrowIcon';
 
 const Container = styled.div`
