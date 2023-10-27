@@ -1,5 +1,6 @@
 import Big from 'big.js';
 import React, { useEffect, useState } from 'react';
+import * as http from '@/utils/http';
 
 import useEthersSender from './useEthersSender';
 
@@ -24,8 +25,9 @@ export const useNetCurve24h = () => {
   useEffect(() => {
     if (!sender) return;
 
-    fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_net_curve&params=${senderParams}`)
-      .then((response) => response.json())
+    http
+      .get(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_net_curve&params=${senderParams}`)
+      // .then((response) => response.json())
       .then((data) => {
         const value_list = data?.data;
         console.log('value_list: ', value_list);
@@ -72,13 +74,11 @@ export const useTotalBalance = () => {
   useEffect(() => {
     if (!sender) return;
 
-    fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_balance&params=${senderParams}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setAllChainsBalance(data?.data);
+    http.get(`${DAPDAP_DEBANK_URL}?url=/v1/user/total_balance&params=${senderParams}`).then((data) => {
+      setAllChainsBalance(data?.data);
 
-        setTotalBalance(data?.data?.total_usd_value);
-      });
+      setTotalBalance(data?.data?.total_usd_value);
+    });
   }, [sender]);
 
   return { totalBalance, allChainsBalance };
@@ -147,33 +147,18 @@ export const useSenderPortfolioData = () => {
       id: sender,
     });
 
-    const allChainList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/chain/list&params=""`).then((res) => res.json());
+    const allChainList = await http.get(`${DAPDAP_DEBANK_URL}?url=/v1/chain/list&params=""`);
 
-    const allTokenList = fetch(`${DAPDAP_DEBANK_URL}?url=/v1/user/all_token_list&params=${senderParams}`).then((res) =>
-      res.json(),
+    const allTokenList = await http.get(`${DAPDAP_DEBANK_URL}?url=/v1/user/all_token_list&params=${senderParams}`);
+
+    const protocolList = await http.get(
+      `${DAPDAP_DEBANK_URL}?url=/v1/user/all_complex_protocol_list&params=${senderParams}`,
     );
 
-    const protocolList = fetch(
-      `${DAPDAP_DEBANK_URL}?url=/v1/user/all_complex_protocol_list&params=${senderParams}`,
-    ).then((res) => res.json());
-
     const fetchList = [allChainList, allTokenList, protocolList];
-
-    return Promise.all(fetchList)
-      .then((responses) => {
-        if (responses[0].code == '0') {
-          setAllChainList(responses[0].data);
-        }
-        if (responses[1].code == '0') {
-          setAllTokenList(responses[1].data);
-        }
-        if (responses[2].code === '0') {
-          setProtocolList(responses[2].data);
-        }
-      })
-      .catch((err) => {
-        console.log('err1111: ', err);
-      });
+    setAllChainList(fetchList[0].data);
+    setAllTokenList(fetchList[1].data);
+    setProtocolList(fetchList[2].data);
   };
 
   useEffect(() => {

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEthersProviderContext } from '@/data/web3';
 import useAccount from '@/hooks/useAccount';
 import * as http from '@/utils/http';
-import { getAccessToken } from '@/apis';
+import { getAccessToken, insertedAccessKey } from '@/apis';
 
 const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
   font-family: Gantari;
@@ -177,6 +177,9 @@ const InviteCodePage = () => {
   const logout = () => {
     if (!account || !wallet) return;
     disconnect(wallet);
+    window.localStorage.setItem(http.AUTH_TOKENS, '{}');
+    window.localStorage.setItem('LOGINED_ACCOUNT', '');
+    insertedAccessKey('');
   };
 
   useEffect(() => {

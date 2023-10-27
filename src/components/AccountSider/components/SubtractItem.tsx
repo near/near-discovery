@@ -1,8 +1,11 @@
 import { useConnectWallet } from '@web3-onboard/react';
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import * as http from '@/utils/http';
+import { getAccessToken, insertedAccessKey } from '@/apis';
 
 import InviteCode from './InviteCode';
+import useAccount from '@/hooks/useAccount';
 
 const StyledSubtractItem = styled.div`
   display: flex;
@@ -27,6 +30,8 @@ const StyledInviteCode = styled(Item)`
 const SubtractItem = () => {
   const [showCode, setShowCode] = useState<boolean>(false);
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const { account } = useAccount();
+
   useEffect(() => {
     const hideCode = () => {
       setShowCode(false);
@@ -36,6 +41,12 @@ const SubtractItem = () => {
       document.removeEventListener('click', hideCode);
     };
   }, []);
+
+  useEffect(() => {
+    if (!account) return;
+    window.localStorage.setItem('LOGINED_ACCOUNT', '');
+    getAccessToken(account);
+  }, [account]);
 
   return (
     <StyledSubtractItem>
@@ -78,7 +89,14 @@ const SubtractItem = () => {
       </StyledInviteCode>
       <Item
         onClick={() => {
-          wallet ? disconnect(wallet) : connect();
+          if (wallet) {
+            disconnect(wallet);
+            window.localStorage.setItem(http.AUTH_TOKENS, '{}');
+            window.localStorage.setItem('LOGINED_ACCOUNT', '');
+            insertedAccessKey('');
+          } else {
+            connect();
+          }
         }}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

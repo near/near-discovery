@@ -1,6 +1,6 @@
 import * as http from '@/utils/http';
 
-const insertedData = (accessToken: string) => {
+export const insertedAccessKey = (accessToken: string) => {
   const dbName = 'cacheDb';
   const tableName = 'cache-v1';
 
@@ -25,7 +25,7 @@ const insertedData = (accessToken: string) => {
 
     const data = {
       key: '{"action":"LocalStorage","domain":{"src":"guessme.near/widget/ZKEVMWarmUp.add-to-quest-card","type":"public"},"key":"AccessKey"}',
-      value: `Bearer ${accessToken}`,
+      value: accessToken ? `Bearer ${accessToken}` : '',
     };
 
     const r = store.add(data.value, data.key);
@@ -45,7 +45,7 @@ export const getAccessToken = async (address: string) => {
     address,
   });
   window.localStorage.setItem(http.AUTH_TOKENS, JSON.stringify(res));
-  insertedData(res.access_token);
+  insertedAccessKey(res.access_token);
 };
 
 export const refreshAccessToken = async () => {
