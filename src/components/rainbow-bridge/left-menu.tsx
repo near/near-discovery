@@ -49,7 +49,7 @@ const MenuContainer = styled.div`
     color: #7e8a93;
     cursor: pointer;
     margin-bottom: 2px;
-    border-right: 3px solid transparent;
+    /* border-right: 3px solid transparent; */
     transition: 0.5s;
     border-radius: 16px;
     :hover {
