@@ -482,9 +482,9 @@ const NewHomePage: NextPageWithLayout = () => {
   };
 
   const filteredDapps = dapps.filter(
-    ({ name, type, on_chain_ids }) =>
+    ({ name, tags, on_chain_ids }) =>
       name.toLowerCase().includes(searchValue.toLowerCase()) &&
-      (selectedFunction.length === 0 || type.some((type) => selectedFunction.includes(type))) &&
+      (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
       (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
   );
 
@@ -511,40 +511,40 @@ const NewHomePage: NextPageWithLayout = () => {
           <div className="page-function-list">
             <div className="page-function-list">
               <div
-                className={`function-list-item bridge ${selectedFunction.includes('bridge') ? 'bridgeActive' : ''}`}
-                onClick={() => handleFunctionClick('bridge')}
+                className={`function-list-item bridge ${selectedFunction.includes('Bridge') ? 'bridgeActive' : ''}`}
+                onClick={() => handleFunctionClick('Bridge')}
               >
                 Bridge
               </div>
               <div
-                className={`function-list-item dex ${selectedFunction.includes('dex') ? 'dexActive' : ''}`}
-                onClick={() => handleFunctionClick('dex')}
+                className={`function-list-item dex ${selectedFunction.includes('Dexes') ? 'dexActive' : ''}`}
+                onClick={() => handleFunctionClick('Dexes')}
               >
                 Dex
               </div>
               <div
-                className={`function-list-item lending ${selectedFunction.includes('lending') ? 'lendingActive' : ''}`}
-                onClick={() => handleFunctionClick('lending')}
+                className={`function-list-item lending ${selectedFunction.includes('Lending') ? 'lendingActive' : ''}`}
+                onClick={() => handleFunctionClick('Lending')}
               >
                 Lending
               </div>
               <div
                 className={`function-list-item liquidity ${
-                  selectedFunction.includes('liquidity') ? 'liquidityActive' : ''
+                  selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
                 }`}
-                onClick={() => handleFunctionClick('liquidity')}
+                onClick={() => handleFunctionClick('Liquidity')}
               >
                 Liquidity
               </div>
               <div
-                className={`function-list-item staking ${selectedFunction.includes('staking') ? 'stakingActive' : ''}`}
-                onClick={() => handleFunctionClick('staking')}
+                className={`function-list-item staking ${selectedFunction.includes('Staking') ? 'stakingActive' : ''}`}
+                onClick={() => handleFunctionClick('Staking')}
               >
                 Staking
               </div>
               <div
-                className={`function-list-item yield ${selectedFunction.includes('yield') ? 'yieldActive' : ''}`}
-                onClick={() => handleFunctionClick('yield')}
+                className={`function-list-item yield ${selectedFunction.includes('Yield') ? 'yieldActive' : ''}`}
+                onClick={() => handleFunctionClick('Yield')}
               >
                 Yield
               </div>
