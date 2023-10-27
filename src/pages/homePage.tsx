@@ -6,12 +6,15 @@ import { menuData } from '@/data/menuData';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import { dapps } from '@/config/dapps';
+import Link from 'next/link';
+import chains from '@/config/chains';
 
 const NewHomePage: NextPageWithLayout = () => {
   const components = useBosComponents();
 
-  const netWorkBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
-
+  const pageLeftBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
+  const pageBottomBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
   const docsIcon = 'https://ipfs.near.social/ipfs/bafkreiae3ujempvwh2mowlpqoitmz7ohcawkrx2u26cezeit443ni475oe';
   const teleIcon = 'https://ipfs.near.social/ipfs/bafkreihsnpk5thlrjlk3jakd6vximvtdcqknsikhdu7fgpkw2jusmjptgq';
   const HelpIcon = 'https://ipfs.near.social/ipfs/bafkreighqgtfiphvdd32lg3io3k447ola32na3ovjppdrhtvfurccbekke';
@@ -36,39 +39,25 @@ const NewHomePage: NextPageWithLayout = () => {
   );
 
   const NewHomePage = styled.div`
+    margin: 0 -36px;
+    padding: 0 36px;
+    background-image: url(${pageLeftBg});
+    background-repeat: no-repeat;
+    /* background-size: 228px 228px; */
+    background-position: 0 -60px;
     color: #979abe;
     width: 100%;
-    height: 100vh;
+    height: 100%;
     display: flex;
+    position: relative;
   `;
 
   const NewHomePageLeft = styled.div`
     width: 20%;
     height: 100%;
-    position: relative;
-    .home-page-connect {
-      display: flex;
-      position: absolute;
-      bottom: -48px;
-      left: 0;
-      .page-connect-item {
-        margin-right: 14px;
-        img {
-          width: 19px;
-          margin-bottom: 14px;
-        }
-        p {
-          font-size: 14px;
-          color: rgba(94, 97, 126, 1);
-        }
-      }
-    }
   `;
 
   const PageLeftItem = styled.div`
-    /* background-image: url(${netWorkBg});
-      background-repeat: no-repeat;
-      background-size: cover; */
     margin-bottom: 45px;
     .page-netWork-list {
       display: flex;
@@ -83,7 +72,7 @@ const NewHomePage: NextPageWithLayout = () => {
         color: #ffffff;
         display: flex;
         cursor: pointer;
-        .list-item-icon {
+        img {
           width: 24px;
           height: 24px;
           line-height: 24px;
@@ -112,17 +101,47 @@ const NewHomePage: NextPageWithLayout = () => {
         display: flex;
         cursor: pointer;
       }
-      .Dex {
-        background: linear-gradient(0deg, rgba(165, 95, 255, 0.3), rgba(165, 95, 255, 0.3));
-        border: 1px solid #a55fff;
+      .bridge {
+        border: 1px solid rgba(227, 233, 157, 1);
       }
-      .Lending {
-        background: linear-gradient(0deg, rgba(255, 191, 25, 0.3), rgba(255, 191, 25, 0.3));
-        border: 1px solid rgba(255, 191, 25, 1);
+      .dex {
+        border: 1px solid rgba(172, 252, 237, 1);
       }
-      .Liquidity {
-        background: linear-gradient(0deg, rgba(33, 148, 255, 0.3), rgba(33, 148, 255, 0.3));
-        border: 1px solid rgba(33, 148, 255, 1);
+      .lending {
+        border: 1px solid rgba(173, 255, 181, 1);
+      }
+      .liquidity {
+        border: 1px solid rgba(170, 214, 255, 1);
+      }
+      .staking {
+        border: 1px solid rgba(193, 191, 255, 1);
+      }
+      .yield {
+        border: 1px solid rgba(249, 181, 230, 1);
+      }
+      .bridgeActive {
+        background: rgba(227, 233, 157, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .dexActive {
+        background: rgba(172, 252, 237, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .lendingActive {
+        background: rgba(173, 255, 181, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .liquidityActive {
+        background: rgba(170, 214, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .stakingActive {
+        background: rgba(193, 191, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .yieldActive {
+        background: rgba(249, 181, 230, 1);
+        color: rgba(0, 0, 0, 1);
       }
     }
     .page-medal-list {
@@ -145,15 +164,17 @@ const NewHomePage: NextPageWithLayout = () => {
       }
     }
   `;
+
   const LeftItemTitle = styled.div`
     font-size: 16px;
     margin-bottom: 18px;
   `;
+
   const NewHomePageRight = styled.div`
     margin-left: 40px;
-    width: 80%;
+    width: 90%;
     .page-right-content {
-      width: 80%;
+      width: 90%;
       position: relative;
       .page-right-tab {
         border: 1px solid rgba(52, 56, 56, 1);
@@ -200,11 +221,156 @@ const NewHomePage: NextPageWithLayout = () => {
         }
       }
     }
+    .tbd-content {
+      .tbd-content-item {
+        display: inline-block;
+        text-decoration: none;
+        color: #979abe;
+        width: 300px;
+        height: 215px;
+        margin-right: 24px;
+        margin-bottom: 28px;
+        background: linear-gradient(180deg, #373a53 0%, #13141b 100%);
+        border-radius: 20px;
+        padding: 20px;
+        .content-item-title {
+          display: flex;
+          margin-bottom: 16px;
+          .item-title-icon {
+            margin-right: 14px;
+            img {
+              width: 72px;
+              height: 72px;
+            }
+          }
+          .item-title-text {
+            h1 {
+              font-size: 20px;
+              font-weight: 700;
+              color: #ffffff;
+              margin-bottom: 4px;
+            }
+            p {
+              font-size: 12px;
+              margin-bottom: 6px;
+            }
+            .title-text-icon {
+              display: flex;
+              img {
+                width: 20px;
+                height: 20px;
+                margin-right: 4px;
+              }
+            }
+          }
+        }
+        .content-item-text {
+          text-align: left;
+          margin-bottom: 20px;
+          height: 50px;
+          p {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 3;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            font-size: 14px;
+            line-height: 17px;
+            letter-spacing: 0em;
+          }
+        }
+        .content-item-tag {
+          display: flex;
+          .item-tag-item {
+            margin-right: 10px;
+            padding: 2px 8px;
+            font-size: 12px;
+            color: #000000;
+            border-radius: 30px;
+          }
+          .Dexes {
+            background: #acfced;
+          }
+          .Bridge {
+            background: #e3e99d;
+          }
+          .Lending {
+            background: #adffb5;
+          }
+          .Liquidity {
+            background: #aad6ff;
+          }
+        }
+      }
+    }
+    .tbd-table-content {
+      width: 90%;
+      border: 1px solid rgba(52, 56, 56, 1);
+      border-radius: 32px;
+      padding: 20px;
+      background: linear-gradient(180deg, #141414 0%, #141414 100%), linear-gradient(0deg, #343838, #343838);
+      color: rgba(151, 154, 190, 1);
+      font-weight: 400;
+      table {
+        width: 100%;
+        tr th {
+          font-weight: 400;
+        }
+        tr td {
+          border-bottom: 1px solid rgba(52, 56, 56, 1);
+          padding: 12px 2px;
+          img {
+            width: 42px;
+            height: 42px;
+            margin-right: 10px;
+          }
+          h1 {
+            font-family: Gantari;
+            font-size: 16px;
+            font-weight: 700;
+            line-height: 19px;
+            letter-spacing: 0em;
+            text-align: left;
+            display: inline-block;
+            color: #ffffff;
+          }
+          .content-item-tag {
+            display: flex;
+            .item-tag-item {
+              margin-right: 10px;
+              padding: 2px 8px;
+              font-size: 12px;
+              color: #000000;
+              border-radius: 30px;
+            }
+            .Dexes {
+              background: #acfced;
+            }
+            .Bridge {
+              background: #e3e99d;
+            }
+            .Lending {
+              background: #adffb5;
+            }
+            .Liquidity {
+              background: #aad6ff;
+            }
+            .Staking {
+              background: #c1bfff;
+            }
+            .Yield {
+              background: #f9b5e6;
+            }
+          }
+        }
+      }
+    }
   `;
+
   const Search = styled.div`
     margin-bottom: 26px;
     input {
-      width: 80%;
+      width: 90%;
       height: 48px;
       line-height: 48px;
       background: transparent;
@@ -212,6 +378,7 @@ const NewHomePage: NextPageWithLayout = () => {
       padding-right: 24px;
       border-radius: 12px;
       padding: 16px;
+      color: #ffffff;
     }
     input:focus {
       outline: none;
@@ -225,15 +392,37 @@ const NewHomePage: NextPageWithLayout = () => {
       cursor: pointer;
     }
   `;
+
+  const NewHomePageFooter = styled.div`
+    display: flex;
+    position: absolute;
+    bottom: -50px;
+    left: 25px;
+    .page-connect-item {
+      margin-right: 14px;
+      img {
+        width: 19px;
+        margin-bottom: 14px;
+      }
+      p {
+        font-size: 14px;
+        color: rgba(94, 97, 126, 1);
+      }
+    }
+  `;
+
   const [selectedMenu, setSelectedMenu] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.localStorage.getItem('selectedMenu') || '';
     }
     return '';
   });
-
   const handleMenuClick = (path: string) => {
-    setSelectedMenu(path);
+    if (selectedMenu === path) {
+      setSelectedMenu('');
+    } else {
+      setSelectedMenu(path);
+    }
   };
 
   const [selectedMedalMenu, setSelectedMedalMenu] = useState(() => {
@@ -242,9 +431,13 @@ const NewHomePage: NextPageWithLayout = () => {
     }
     return '';
   });
-
   const handleMedalMenuClick = (path: string) => {
     setSelectedMedalMenu(path);
+  };
+
+  const [selectedView, setSelectedView] = useState('grid');
+  const handlesetSelectedView = (name: string) => {
+    setSelectedView(name);
   };
 
   const [selectedTab, setSelectedTab] = useState(() => {
@@ -253,9 +446,24 @@ const NewHomePage: NextPageWithLayout = () => {
     }
     return '';
   });
-
   const handleTabClick = (path: string) => {
     setSelectedTab(path);
+  };
+
+  const [selectedFunction, setSelectedFunction] = useState<string[]>(() => {
+    if (typeof window !== 'undefined') {
+      const storedSelectedFunction = window.localStorage.getItem('selectedFunction');
+      return storedSelectedFunction ? JSON.parse(storedSelectedFunction) : [];
+    }
+    return [];
+  });
+
+  const handleFunctionClick = (functionType: string) => {
+    if (selectedFunction.includes(functionType)) {
+      setSelectedFunction(selectedFunction.filter((type) => type !== functionType));
+    } else {
+      setSelectedFunction([...selectedFunction, functionType]);
+    }
   };
 
   useEffect(() => {
@@ -263,8 +471,22 @@ const NewHomePage: NextPageWithLayout = () => {
       window.localStorage.setItem('selectedMenu', selectedMenu);
       window.localStorage.setItem('selectedMedalMenu', selectedMedalMenu);
       window.localStorage.setItem('selectedTab', selectedTab);
+      localStorage.setItem('selectedFunction', JSON.stringify(selectedFunction));
     }
-  }, [selectedMenu, selectedMedalMenu, selectedTab]);
+  }, [selectedMenu, selectedMedalMenu, selectedTab, selectedFunction]);
+  const [searchValue, setSearchValue] = useState('');
+
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const keyword = event.target.value;
+    setSearchValue(keyword);
+  };
+
+  const filteredDapps = dapps.filter(
+    ({ name, tags, on_chain_ids }) =>
+      name.toLowerCase().includes(searchValue.toLowerCase()) &&
+      (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
+      (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
+  );
 
   return (
     <NewHomePage>
@@ -272,16 +494,14 @@ const NewHomePage: NextPageWithLayout = () => {
         <PageLeftItem>
           <LeftItemTitle>Network</LeftItemTitle>
           <div className="page-netWork-list">
-            {menuData[2]?.children?.map((child, index) => (
+            {Object.values(chains).map((child, index) => (
               <div
-                className={`netWork-list-item ${selectedMenu === child.path ? 'active' : ''}`}
+                className={`netWork-list-item ${selectedMenu === String(child.chainId) ? 'active' : ''}`}
                 key={index}
-                onClick={() => child.path && handleMenuClick(child.path)}
+                onClick={() => child.chainId && handleMenuClick(String(child.chainId))}
               >
-                <div className="list-item-icon" style={{ backgroundColor: child.bgColor }}>
-                  <img src={child.icon} alt="" />
-                </div>
-                {child.title}
+                <img src={child.icon} alt="" />
+                {child.chainName}
               </div>
             ))}
           </div>
@@ -289,13 +509,49 @@ const NewHomePage: NextPageWithLayout = () => {
         <PageLeftItem>
           <LeftItemTitle>Function</LeftItemTitle>
           <div className="page-function-list">
-            <div className="function-list-item Dex">Dex</div>
-            <div className="function-list-item Lending">Lending</div>
-            <div className="function-list-item Liquidity">Liquidity</div>
-            <div className="function-list-item">Staking</div>
+            <div className="page-function-list">
+              <div
+                className={`function-list-item bridge ${selectedFunction.includes('Bridge') ? 'bridgeActive' : ''}`}
+                onClick={() => handleFunctionClick('Bridge')}
+              >
+                Bridge
+              </div>
+              <div
+                className={`function-list-item dex ${selectedFunction.includes('Dexes') ? 'dexActive' : ''}`}
+                onClick={() => handleFunctionClick('Dexes')}
+              >
+                Dex
+              </div>
+              <div
+                className={`function-list-item lending ${selectedFunction.includes('Lending') ? 'lendingActive' : ''}`}
+                onClick={() => handleFunctionClick('Lending')}
+              >
+                Lending
+              </div>
+              <div
+                className={`function-list-item liquidity ${
+                  selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
+                }`}
+                onClick={() => handleFunctionClick('Liquidity')}
+              >
+                Liquidity
+              </div>
+              <div
+                className={`function-list-item staking ${selectedFunction.includes('Staking') ? 'stakingActive' : ''}`}
+                onClick={() => handleFunctionClick('Staking')}
+              >
+                Staking
+              </div>
+              <div
+                className={`function-list-item yield ${selectedFunction.includes('Yield') ? 'yieldActive' : ''}`}
+                onClick={() => handleFunctionClick('Yield')}
+              >
+                Yield
+              </div>
+            </div>
           </div>
         </PageLeftItem>
-        <PageLeftItem>
+        {/* <PageLeftItem>
           <LeftItemTitle>Medal Quest</LeftItemTitle>
           <div className="page-medal-list">
             <div
@@ -317,25 +573,12 @@ const NewHomePage: NextPageWithLayout = () => {
               No
             </div>
           </div>
-        </PageLeftItem>
-
-        <div className="home-page-connect">
-          <div className="page-connect-item">
-            <img src={docsIcon} alt="" />
-            <p>Docs</p>
-          </div>
-          <div className="page-connect-item" style={{ marginRight: '24px' }}>
-            <img src={teleIcon} alt="" />
-          </div>
-          <div className="page-connect-item">
-            <img src={HelpIcon} alt="" />
-            <p>Help & Feedback</p>
-          </div>
-        </div>
+        </PageLeftItem> */}
       </NewHomePageLeft>
+
       <NewHomePageRight>
         <Search>
-          <input type="text" />
+          <input type="text" placeholder="search..." value={searchValue} onChange={handleSearch} autoFocus />
           {SearchIcon}
         </Search>
         <div className="page-right-content">
@@ -350,25 +593,213 @@ const NewHomePage: NextPageWithLayout = () => {
               className={`right-tab-item ${selectedTab === 'token' ? 'active' : ''}`}
               onClick={() => handleTabClick('token')}
             >
-              Native token  
+              Native token
             </div>
           </div>
           <div className="page-right-switch">
-            <div className="right-switch-item active">{gridIcon}</div>
-            <div className="right-switch-item">{tableIcon}</div>
+            <div
+              className={`right-switch-item ${selectedView === 'grid' ? 'active' : ''}`}
+              onClick={() => handlesetSelectedView('grid')}
+            >
+              {gridIcon}
+            </div>
+            <div
+              className={`right-switch-item ${selectedView === 'table' ? 'active' : ''}`}
+              onClick={() => handlesetSelectedView('table')}
+            >
+              {tableIcon}
+            </div>
           </div>
         </div>
         {selectedTab == 'TBD' ? (
           <>
-            <p>Token-TBD🔥</p>
+            {selectedView === 'grid' ? (
+              <div className="tbd-content">
+                {filteredDapps
+                  .filter((dapp) => dapp.TBD_TOKEN === 'Y')
+                  .map((dapp, index) => (
+                    <Link className="tbd-content-item" key={index} href={'dapp/' + dapp.dappRoute}>
+                      <div className="content-item-title">
+                        <div className="item-title-icon">
+                          <img src={dapp.logo} alt="" />
+                        </div>
+                        <div className="item-title-text">
+                          <h1>{dapp.name}</h1>
+                          <p>Token TBD🔥</p>
+                          <div className="title-text-icon">
+                            {chains.hasOwnProperty(dapp.DEFAULT_CHAIN_ID) ? (
+                              <>
+                                <img src={chains[dapp.DEFAULT_CHAIN_ID].icon} alt="" />
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="content-item-text">
+                        <p>{dapp.description}</p>
+                      </div>
+                      <div className="content-item-tag">
+                        {dapp.tags.map((tag, index) => (
+                          <div className={`item-tag-item ${tag}`} key={index}>
+                            {tag}
+                          </div>
+                        ))}
+                      </div>
+                    </Link>
+                  ))}
+              </div>
+            ) : (
+              <div className="tbd-table-content">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Native token</th>
+                      <th>Network</th>
+                      <th>Function</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredDapps
+                      .filter((dapp) => dapp.TBD_TOKEN === 'Y')
+                      .map((dapp, index) => (
+                        <tr key={index}>
+                          <td>
+                            <img src={dapp.logo} alt="" />
+                            <h1> {dapp.name}</h1>
+                          </td>
+                          <td>TBD🔥</td>
+                          <td>
+                            <div className="title-text-icon">
+                              {dapp.on_chain_ids.map((chainId, index) => (
+                                <img
+                                  key={index}
+                                  src={chains[chainId].icon}
+                                  alt=""
+                                  style={{ width: '20px', height: '20px' }}
+                                />
+                              ))}
+                            </div>
+                          </td>
+                          <td>
+                            <div className="content-item-tag">
+                              {dapp.tags.map((tag, index) => (
+                                <div className={`item-tag-item ${tag}`} key={index}>
+                                  {tag}
+                                </div>
+                              ))}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </>
         ) : null}
         {selectedTab == 'token' ? (
           <>
-            <p>Native token</p>
+            {selectedView === 'grid' ? (
+              <div className="tbd-content">
+                {filteredDapps
+                  .filter((dapp) => dapp.TBD_TOKEN === 'N')
+                  .map((dapp, index) => (
+                    <Link className="tbd-content-item" key={index} href={'dapp/' + dapp.dappRoute}>
+                      <div className="content-item-title">
+                        <div className="item-title-icon">
+                          <img src={dapp.logo} alt="" />
+                        </div>
+                        <div className="item-title-text">
+                          <h1>{dapp.name}</h1>
+                          <p>Token TBD🔥</p>
+                          <div className="title-text-icon">
+                            {dapp.on_chain_ids.map((chainId, index) => (
+                              <img key={index} src={chains[chainId].icon} alt="" />
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="content-item-text">
+                        <p>{dapp.description}</p>
+                      </div>
+                      <div className="content-item-tag">
+                        {dapp.tags.map((tag, index) => (
+                          <div className={`item-tag-item ${tag}`} key={index}>
+                            {tag}
+                          </div>
+                        ))}
+                      </div>
+                    </Link>
+                  ))}
+              </div>
+            ) : (
+              <div className="tbd-table-content">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Native token</th>
+                      <th>Network</th>
+                      <th>Function</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredDapps
+                      .filter((dapp) => dapp.TBD_TOKEN === 'N')
+                      .map((dapp, index) => (
+                        <tr key={index}>
+                          <td>
+                            <img src={dapp.logo} alt="" />
+                            <h1> {dapp.name}</h1>
+                          </td>
+                          <td>TBD🔥</td>
+                          <td>
+                            <div className="title-text-icon">
+                              {dapp.on_chain_ids.map((chainId, index) => (
+                                <img
+                                  key={index}
+                                  src={chains[chainId].icon}
+                                  alt=""
+                                  style={{ width: '20px', height: '20px' }}
+                                />
+                              ))}
+                            </div>
+                          </td>
+                          <td>
+                            <div className="content-item-tag">
+                              {dapp.tags.map((tag, index) => (
+                                <div className={`item-tag-item ${tag}`} key={index}>
+                                  {tag}
+                                </div>
+                              ))}
+                            </div>
+                          </td>
+                        </tr>
+                      ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
           </>
         ) : null}
       </NewHomePageRight>
+
+      <NewHomePageFooter>
+        <div className="page-connect-item">
+          <img src={docsIcon} alt="" />
+          <p>Docs</p>
+        </div>
+        <div className="page-connect-item" style={{ marginRight: '24px' }}>
+          <img src={teleIcon} alt="" />
+        </div>
+        <div className="page-connect-item">
+          <img src={HelpIcon} alt="" />
+          <p>Help & Feedback</p>
+        </div>
+      </NewHomePageFooter>
     </NewHomePage>
   );
 };

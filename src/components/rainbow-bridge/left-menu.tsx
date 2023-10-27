@@ -36,7 +36,7 @@ export const LeftMenuContainer = styled.div`
 
 const MenuContainer = styled.div`
   margin-right: 35px;
-  padding-top: 100px;
+  /* padding-top: 100px; */
 
   .item {
     display: flex;

@@ -16,11 +16,11 @@ const SwitchWrapper = styled.div`
 `;
 
 const RainbowWrapper = styled.div`
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;
+  /* padding-top: 100px; */
 
   @media (max-width: ${SMALL_SCREEN}) {
     padding-top: 0px;

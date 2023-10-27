@@ -22,12 +22,19 @@ const AccountWrapper = styled.div`
 export const DesktopNavigationTop = () => {
   const Container = styled.div`
     color: #979abe;
-    padding: 26px 36px 0 36px;
+    padding: 20px 36px 0 36px;
+    position: sticky;
+    top: 0;
     width: 100%;
+
+    background-color: rgba(0, 0, 0, 0.9);
+
+    z-index: 100;
+
     .container-nav {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       width: 100%;
     }
     .container-submenu {
@@ -100,10 +107,13 @@ export const DesktopNavigationTop = () => {
     margin: 0 24% 0 14%;
     align-items: center;
     .container-menu-item {
+      display: flex;
+      align-items: center;
       margin: 0 10px;
       flex: 1;
       text-align: center;
       align-items: center;
+      white-space: nowrap;
       cursor: pointer;
       text-decoration: none;
       color: #979abe;
@@ -133,6 +143,7 @@ export const DesktopNavigationTop = () => {
           line-height: 14px;
           letter-spacing: 0em;
           text-align: left;
+          white-space: nowrap;
           img {
             width: 12px;
             height: 12px;
@@ -157,11 +168,25 @@ export const DesktopNavigationTop = () => {
 
   const [showSubmenu, setShowSubmenu] = useState(false);
   const [activeParentIndex, setActiveParentIndex] = useState(-1);
+
+  const extendPaths = {
+    '/near': ['/rainbow-bridge'],
+  } as {
+    [key: string]: string[];
+  };
+
   useEffect(() => {
     const parentIndex = menuData.findIndex(
       (item) =>
-        item.path === currentPath || (item.children && item.children.some((child) => child.path === currentPath)),
+        item.path === currentPath ||
+        (item.children &&
+          item.children.some(
+            (child) =>
+              child.path === currentPath ||
+              (child.path && extendPaths[child.path] && extendPaths[child.path].includes(currentPath)),
+          )),
     );
+
     setActiveParentIndex(parentIndex);
     setShowSubmenu(parentIndex === 1 || parentIndex === 2);
   }, [currentPath]);
@@ -248,29 +273,33 @@ export const DesktopNavigationTop = () => {
 
       {showSubmenu && (
         <div className={`container-submenu ${showSubmenu ? 'show' : ''}`}>
-          {menuData[activeParentIndex]?.children?.map((child, childIndex) => (
-            <>
-              {child.disable ? (
-                <div key={childIndex} className="submenu-item submenu-item-disable">
-                  <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
-                    <img src={child.icon} alt="" />
+          {menuData[activeParentIndex]?.children?.map((child, childIndex) => {
+            const extendActive = extendPaths[child?.path || '']?.includes(currentPath);
+
+            return (
+              <>
+                {child.disable ? (
+                  <div key={childIndex} className="submenu-item submenu-item-disable">
+                    <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
+                      <img src={child.icon} alt="" />
+                    </div>
+                    {child.title}
                   </div>
-                  {child.title}
-                </div>
-              ) : (
-                <Link
-                  key={childIndex}
-                  href={child.path || ''}
-                  className={`submenu-item ${child.path === currentPath ? 'active' : ''}`}
-                >
-                  <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
-                    <img src={child.icon} alt="" />
-                  </div>
-                  {child.title}
-                </Link>
-              )}
-            </>
-          ))}
+                ) : (
+                  <Link
+                    key={childIndex}
+                    href={child.path || ''}
+                    className={`submenu-item ${child.path === currentPath || extendActive ? 'active' : ''}`}
+                  >
+                    <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
+                      <img src={child.icon} alt="" />
+                    </div>
+                    {child.title}
+                  </Link>
+                )}
+              </>
+            );
+          })}
         </div>
       )}
     </Container>

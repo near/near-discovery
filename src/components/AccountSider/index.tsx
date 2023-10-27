@@ -1,8 +1,8 @@
 import { memo, useState } from 'react';
 import styled from 'styled-components';
-
 import { useLayoutStore } from '@/stores/layout';
-
+import TransactionTips from '@/components/Bridge/components/TransactionTips';
+import useTxs from '../Bridge/hooks/useTxs';
 import Actions from './components/Actions';
 import Amount from './components/Amount';
 import BridgeWrapper from './components/BridgeWrapper';
@@ -49,10 +49,19 @@ const CloseIcon = styled.div`
   top: 16px;
   cursor: pointer;
 `;
+const TipsWrapper = styled.div`
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
+  margin-top: 20px;
+  position: relative;
+`;
 
 const AccountSider = () => {
   const [tab, setTab] = useState<'bridge' | 'account'>('account');
   const layoutStore = useLayoutStore();
+  const [updater, setUpdater] = useState(1);
+  const { count, txs, loading: txLoading } = useTxs(updater);
+
   return (
     <StyledPanel display={layoutStore.showAccountSider}>
       <Content>
@@ -67,7 +76,10 @@ const AccountSider = () => {
                 type === 'bridge' && setTab('bridge');
               }}
             />
-            <Split mt={30} />
+            <TipsWrapper>
+              <TransactionTips count={count} />
+            </TipsWrapper>
+            <Split mt={20} />
             <Tokens mt={20} />
           </>
         )}
@@ -75,6 +87,12 @@ const AccountSider = () => {
           <BridgeWrapper
             onBack={() => {
               setTab('account');
+            }}
+            count={count}
+            txs={txs}
+            txLoading={txLoading}
+            refreshTxs={() => {
+              setUpdater(Date.now());
             }}
           />
         )}

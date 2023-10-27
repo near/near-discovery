@@ -26,6 +26,8 @@ import {
   Wrapper,
   YourAssetsTitle,
   DefaultProfileIcon,
+  ProtocolTableHeader,
+  ProtocolTableRow,
 } from '@/components/portfolio';
 import { NoDataLayout } from '@/components/portfolio/common';
 import { IconSeries } from '@/components/portfolio/icons';
@@ -564,25 +566,21 @@ const ProtocolTableGenerator = ({
       <div className="type-title">{name}</div>
 
       <table>
-        <thead>
-          <tr>
-            {columns.map((column, index) => {
-              return <th key={column + index}>{column}</th>;
-            })}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, index) => {
-            return (
-              <tr key={index + '-row-tr' + index}>
-                {row.map((item, index) => {
-                  if (item === 'omit') return <></>;
-                  return <td key={index + 'row-td'}>{item}</td>;
-                })}
-              </tr>
-            );
+        <ProtocolTableHeader size={columns.length}>
+          {columns.map((column, index) => {
+            return <div key={column + index}>{column}</div>;
           })}
-        </tbody>{' '}
+        </ProtocolTableHeader>
+        {rows.map((row, index) => {
+          return (
+            <ProtocolTableRow size={row.filter((item) => item !== 'omit').length} key={index + '-row-tr' + index}>
+              {row.map((item, index) => {
+                if (item === 'omit') return <></>;
+                return <div key={index + 'row-td'}>{item}</div>;
+              })}
+            </ProtocolTableRow>
+          );
+        })}
       </table>
     </ProtocolTable>
   );
@@ -749,7 +747,7 @@ const ProtocolItem = (props: any) => {
 
               const tokenSeries = (
                 <div className={` ${name === 'Deposit' ? 'frcs' : 'fccc'}  token-series`}>
-                  <IconSeries ulrs={supply_token_list.map((token: any) => token.logo_url || '')} />
+                  <IconSeries ulrs={supply_token_list.map((token: any) => token.logo_url || DEFAULT_TOKEN_ICON)} />
 
                   <span className="symbo-series">
                     {supply_token_list.map((token: any, index: number) => (
@@ -880,6 +878,7 @@ const PortFolioDataArea = ({
       {CurTab !== 'Execution Records' && (
         <NetworkTabWrapper>
           <AllNetWorkTab
+            active={network === 'all'}
             onClick={() => {
               setNetwork('all');
             }}
@@ -961,7 +960,7 @@ const PortfolioPage: NextPageWithLayout = () => {
           <div className="">
             <div className="address-filed ">
               <span>{formateAddress(sender)}</span>
-              <div className="arrow-filed frcc">{ArrowDone}</div>
+              {/* <div className="arrow-filed frcc">{ArrowDone}</div> */}
             </div>
 
             <div className="frcs metamask-filed">

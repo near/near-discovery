@@ -1,5 +1,5 @@
 import { setEthProvider, setNearConnection, setSignerProvider } from '@near-eth/client';
-import { Near, WalletConnection } from '@near-eth/near-ether/node_modules/near-api-js';
+// import { Near, WalletConnection } from '@near-eth/near-ether/node_modules/near-api-js';
 import { useSetChain } from '@web3-onboard/react';
 import Big from 'big.js';
 import { ethers } from 'ethers';
@@ -170,27 +170,27 @@ const RainbowBridge: NextPageWithLayout = () => {
   const { near } = useVmStore();
 
   const priceMap = useTokenPrice();
-  useEffect(() => {
-    if (near && near.nearConnection) {
-      console.log('near: ', near);
-      const nearConnection = new WalletConnection(
-        new Near({
-          ...near,
-          ...near.config,
-          nodeUrl: 'https://archival-rpc.mainnet.near.org',
-        }),
-        'dapdap',
-      );
-      setNearConnection(nearConnection);
-    }
+  // useEffect(() => {
+  //   if (near && near.nearConnection) {
+  //     console.log('near: ', near);
+  //     const nearConnection = new WalletConnection(
+  //       new Near({
+  //         ...near,
+  //         ...near.config,
+  //         nodeUrl: 'https://archival-rpc.mainnet.near.org',
+  //       }),
+  //       'dapdap',
+  //     );
+  //     setNearConnection(nearConnection);
+  //   }
 
-    if (provider) {
-      const etherProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth');
-      const signerProvider = new ethers.providers.Web3Provider(provider, 'any');
-      setEthProvider(etherProvider);
-      setSignerProvider(signerProvider);
-    }
-  }, [near, provider]);
+  //   if (provider) {
+  //     const etherProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth');
+  //     const signerProvider = new ethers.providers.Web3Provider(provider, 'any');
+  //     setEthProvider(etherProvider);
+  //     setSignerProvider(signerProvider);
+  //   }
+  // }, [near, provider]);
 
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
 
@@ -408,7 +408,7 @@ const RainbowBridge: NextPageWithLayout = () => {
 
   return (
     <>
-      {source === 'all-in-one' ? <GoBackNavSourceAllInOne /> : <GoBackNav />}
+      {/* {source === 'all-in-one' ? <GoBackNavSourceAllInOne /> : <GoBackNav />} */}
 
       <MainWrapper>
         <RainbowBridgeContainer>
