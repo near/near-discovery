@@ -424,27 +424,27 @@ export const LoginBox = () => {
         'ZKEVM-all-in-one',
       ];
     } else if (name === 'base') {
-      paths = ['base', 'Base.BaseDex','Base.Lending','Base.All-in-one'];
+      paths = ['base', 'Base.BaseDex', 'Base.Lending', 'Base.All-in-one'];
     } else if (name === 'mantle') {
-      paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA','Mantle.Lending','Mantle.All-in-one'];
+      paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA', 'Mantle.Lending', 'Mantle.All-in-one'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle','Arbitrum.Lending','Arbitrum.All-in-one'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle', 'Arbitrum.Lending', 'Arbitrum.All-in-one'];
     } else if (name === 'bsc') {
-      paths = ['bsc', 'Bsc.Swap.Dex','Bsc.Lending','Bsc.All-in-one'];
+      paths = ['bsc', 'Bsc.Swap.Dex', 'Bsc.Lending', 'Bsc.All-in-one'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Liquidity.GAMMA','Linea.Lending','Linea.All-in-one'];
-    } else if (name === 'polygon') { 
-      paths = ['polygon', 'Polygon.Swap.Dex','Polygon.Lending','Polygon.All-in-one'];
+      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Liquidity.GAMMA', 'Linea.Lending', 'Linea.All-in-one'];
+    } else if (name === 'polygon') {
+      paths = ['polygon', 'Polygon.Swap.Dex', 'Polygon.Lending', 'Polygon.All-in-one'];
     } else if (name === 'metis') {
-      paths = ['metis', 'Metis.Swap.Dex','Metis.All-in-one'];
+      paths = ['metis', 'Metis.Swap.Dex', 'Metis.All-in-one'];
     } else if (name === 'gnosis') {
-      paths = ['gnosis', 'Gnosis.Swap.Dex','Gnosis.Lending','Gnosis.All-in-one'];
+      paths = ['gnosis', 'Gnosis.Swap.Dex', 'Gnosis.Lending', 'Gnosis.All-in-one'];
     } else if (name === 'zkSync') {
-      paths = ['zkSync', 'zkSync.Swap.Dex','zkSync.All-in-one'];
-    }else if (name === 'avalanche') {
-      paths = ['avalanche', 'Avalanche.Lending','Avalanche.All-in-one'];
-    }else if (name === 'optimism') {
-      paths = ['optimism', 'Optimism.Lending','Optimism.All-in-one'];
+      paths = ['zkSync', 'zkSync.Swap.Dex', 'zkSync.All-in-one'];
+    } else if (name === 'avalanche') {
+      paths = ['avalanche', 'Avalanche.Lending', 'Avalanche.All-in-one'];
+    } else if (name === 'optimism') {
+      paths = ['optimism', 'Optimism.Lending', 'Optimism.All-in-one'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
@@ -690,7 +690,7 @@ export const LoginBox = () => {
       });
     } else {
       onboard.state.actions.updateAccountCenter({
-        enabled: true,
+        enabled: false,
       });
     }
   }, [isDappActive]);
