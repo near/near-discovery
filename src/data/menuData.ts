@@ -138,7 +138,7 @@ export const menuData = [
       },
       {
         title: 'NEAR',
-        path: '/near',
+        path: '/rainbow-bridge',
         icon: 'https://ipfs.near.social/ipfs/bafkreigoy3v2tgilvuuu73n7dkecskypb6egkn5w2kg7nqiwbzf3whp7my',
         bgColor: '#57CDB8',
       },
@@ -169,5 +169,5 @@ export const menuData = [
     ],
   },
   { title: 'Loyalty', path: '', version: false },
-  { title: 'Portfolio', path: '', version: false,level:true },
+  { title: 'Portfolio', path: '', version: false, level: true },
 ];
