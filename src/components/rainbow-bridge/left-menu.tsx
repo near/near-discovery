@@ -151,7 +151,7 @@ const RainbowLeftMenu = () => {
 
   const source = search.get('source');
 
-  if (source !== 'all-in-one') return <div></div>;
+  // if (source !== 'all-in-one') return <div></div>;
 
   return (
     <MenuContainer>
