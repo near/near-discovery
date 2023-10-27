@@ -5,7 +5,7 @@ import CurrencyIcon from '@/components/CurrencyIcon';
 import Loading from '@/components/Icons/Loading';
 import useChain from '@/hooks/useChain';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
-import { myPriceStore } from '@/stores/price';
+import { usePriceStore } from '@/stores/price';
 import { Token } from '@/types';
 import { balanceFormated, valueFormated } from '@/utils/balance';
 
@@ -55,7 +55,7 @@ const Balance = styled.div`
 
 const Token = ({ token }: { token: Token }) => {
   const chain = useChain(token.chainId);
-  const price = myPriceStore((store) => store.price);
+  const price = usePriceStore((store) => store.price);
   const { balance, loading } = useTokenBalance({ currency: token });
   return (
     <TokenWrapper>

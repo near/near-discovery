@@ -28,7 +28,7 @@ export const ethereumTokens = {
     poolId: 7,
   },
   '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51': {
-    ...ethereum.frax,
+    ...ethereum.sUSD,
     poolId: 14,
   },
   '0x5f98805A4E8be255a32880FDeC7F6728C6568bA0': {

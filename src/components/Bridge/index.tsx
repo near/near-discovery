@@ -123,8 +123,11 @@ const Bridge = () => {
     if (gasCost && nativeTokenBalance && new Big(gasCost).gt(nativeTokenBalance)) {
       setErrorTips('Change destination address');
     }
+    if (!trade) {
+      setErrorTips('Relayer: gas too low');
+    }
     setErrorTips('');
-  }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, nativeTokenBalance]);
+  }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, nativeTokenBalance, trade]);
 
   useEffect(() => {
     debouncedBestRoute();

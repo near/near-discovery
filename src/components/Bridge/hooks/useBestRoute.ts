@@ -25,6 +25,7 @@ export default function useBestRoute() {
   }) => {
     try {
       setChecking(true);
+      setTrade(undefined);
       const _inputChain = chainCofig[chain.chainId];
       if (_inputChain.dex === 'Stargate') {
         const response = await getQouteInfo({ targetToken, chain, targetChain });

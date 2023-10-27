@@ -2,11 +2,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+import useAccount from '@/hooks/useAccount';
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
 import { menuData } from '@/data/menuData';
 import { useLayoutStore } from '@/stores/layout';
+import ConnectWallet from '@/components/ConnectWallet';
 
 const LoginContainer = styled.div`
   width: auto;
@@ -150,7 +151,7 @@ export const DesktopNavigationTop = () => {
   const lockUrl = 'https://ipfs.near.social/ipfs/bafkreihwfdlygayrdbdjzofkt7js7dhaopyvys7pyglb7zdqvsao7ynt2u';
 
   const setLayoutStore = useLayoutStore((store) => store.set);
-
+  const { account } = useAccount();
   const router = useRouter();
   const currentPath = router.pathname;
 
@@ -229,16 +230,20 @@ export const DesktopNavigationTop = () => {
             );
           })}
         </MenuContainer>
-        <LoginContainer>
-          <Chain showName={false} />
-          <AccountWrapper
-            onClick={() => {
-              setLayoutStore({ showAccountSider: true });
-            }}
-          >
-            <AccountItem showCopy={false} logoSize={28} />
-          </AccountWrapper>
-        </LoginContainer>
+        {account ? (
+          <LoginContainer>
+            <Chain showName={false} />
+            <AccountWrapper
+              onClick={() => {
+                setLayoutStore({ showAccountSider: true });
+              }}
+            >
+              <AccountItem showCopy={false} logoSize={28} />
+            </AccountWrapper>
+          </LoginContainer>
+        ) : (
+          <ConnectWallet />
+        )}
       </div>
 
       {showSubmenu && (

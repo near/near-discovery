@@ -1,4 +1,4 @@
-import { memo, useEffect,useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import ArrowIcon from '@/components/Icons/ArrowIcon';

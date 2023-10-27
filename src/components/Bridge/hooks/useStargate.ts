@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { chainCofig } from '@/config/bridge';
 import useAccount from '@/hooks/useAccount';
-import { myPriceStore } from '@/stores/price';
+import { usePriceStore } from '@/stores/price';
 
 import type { Chain, Token } from '../types';
 
@@ -13,6 +13,7 @@ const { JsonRpcProvider } = providers;
 export default function useStargate() {
   const { account, provider } = useAccount();
   const [fee, setFee] = useState();
+  const priceStore = usePriceStore((store) => store.price);
   const getQouteInfo = async ({
     targetToken,
     chain,
@@ -79,8 +80,7 @@ export default function useStargate() {
       dstNativeAddr: '0x0000000000000000000000000000000000000001',
     });
     setFee(res[0].toString());
-    const price = myPriceStore((store) => store.price);
-    const tokenPrice = price[chain.nativeCurrency.symbol];
+    const tokenPrice = priceStore[chain.nativeCurrency.symbol];
     if (tokenPrice) {
       return (
         '$' + new Big(utils.formatUnits(res[0].toString(), chain.nativeCurrency.decimals)).mul(tokenPrice).toFixed(4)
