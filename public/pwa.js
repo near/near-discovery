@@ -26,20 +26,12 @@ const putInCache = async (request, response) => {
   }
 };
 
-const cacheFirst = async ({ request, preloadResponsePromise }) => {
+const cacheFirst = async ({ request }) => {
   // First try to get the resource from the cache
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
     console.log('returning %s from cache for request %s ', responseFromCache, request)
     return responseFromCache;
-  }
-
-  // Next try to use the preloaded response, if it's there
-  const preloadResponse = await preloadResponsePromise;
-  if (preloadResponse) {
-    console.info('using preload response', preloadResponse);
-    putInCache(request, preloadResponse.clone());
-    return preloadResponse;
   }
 
   // Next try to get the resource from the network
@@ -89,7 +81,6 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     cacheFirst({
       request: event.request,
-      preloadResponsePromise: event.preloadResponse,
     })
   );
 });
