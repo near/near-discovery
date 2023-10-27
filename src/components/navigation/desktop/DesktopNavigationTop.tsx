@@ -29,7 +29,7 @@ export const DesktopNavigationTop = () => {
 
     background-color: rgba(0, 0, 0, 0.9);
 
-    z-index: 100;
+    z-index: 1;
 
     .container-nav {
       display: flex;
