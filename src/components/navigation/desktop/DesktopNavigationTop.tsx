@@ -99,10 +99,10 @@ export const DesktopNavigationTop = () => {
 
   const MenuContainer = styled.div`
     position: absolute;
-    top: 0;
+    top: 50%;
     left: 50%;
 
-    transform: translate(-50%);
+    transform: translate(-50%, -50%);
 
     flex: 1;
     display: flex;
@@ -179,6 +179,8 @@ export const DesktopNavigationTop = () => {
 
   const extendPaths = {
     '/near': ['/rainbow-bridge'],
+    '/rainbow-bridge': ['/near'],
+
   } as {
     [key: string]: string[];
   };

@@ -4,8 +4,22 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import { useSearchParams } from 'next/navigation';
 
 const NearColumn: NextPageWithLayout = () => {
+
+
+
+  const search = useSearchParams()
+
+
+
+  const initTab = search.get('initTab')
+
+
+
+ console.log({initTab})
+
   const components = useBosComponents();
   const Container = styled.div`
     .top {
@@ -102,6 +116,9 @@ const NearColumn: NextPageWithLayout = () => {
       <ComponentWrapperPage
         src={components.near || ''}
         meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
+        componentProps={{
+          initTab
+        }}
       />
     </Container>
   );

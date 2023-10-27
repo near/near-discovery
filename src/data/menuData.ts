@@ -169,5 +169,5 @@ export const menuData = [
     ],
   },
   { title: 'Loyalty', path: '', version: false },
-  { title: 'Portfolio', path: '', version: false, level: true },
+  { title: 'Portfolio', path: '', version: false,level:true },
 ];

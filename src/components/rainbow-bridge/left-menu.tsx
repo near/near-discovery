@@ -161,7 +161,7 @@ const RainbowLeftMenu = () => {
       </div>
       <div
         onClick={() => {
-          router.push('juaner.near/widget/ref-home?initTab=swap');
+          router.push('near?initTab=swap');
         }}
         className={`item `}
       >
@@ -170,7 +170,7 @@ const RainbowLeftMenu = () => {
       </div>
       <div
         onClick={() => {
-          router.push('juaner.near/widget/ref-home?initTab=lending');
+          router.push('near?initTab=lending');
         }}
         className={`item `}
       >
@@ -180,7 +180,7 @@ const RainbowLeftMenu = () => {
       <div
         className={`item `}
         onClick={() => {
-          router.push('juaner.near/widget/ref-home?initTab=staking');
+          router.push('near?initTab=staking');
         }}
       >
         <span className="icon">{stakingIcon}</span>

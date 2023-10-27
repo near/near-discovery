@@ -176,7 +176,7 @@ export const dapps = [
     name: 'THENA V1',
     dappRoute: 'THENA-V1',
     TBD_TOKEN: 'N',
-    logo: 'https://ipfs.near.social/ipfs/bafkreidps2jipljarabsxbqtiuj6lyupfhvpsesiffmsjzjt4zb73r7qfq',
+    logo: 'https://ipfs.near.social/ipfs/bafkreid3zf4c6chl56k3zz53u6jajnhgha3c5trrixgczmzpqpedhkhfxe',
     description: 'THENA is THE native liquidity layer & AMM on BNB Chain',
     tags: ['Dexes'],
     type: 'dex',
