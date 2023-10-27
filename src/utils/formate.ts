@@ -21,7 +21,7 @@ const formateValue = (value: string | number, precision: number) => {
   if (Big(value).lt(Big(10).pow(-precision))) {
     return `< ${Big(10).pow(-precision).toFixed(precision)}`;
   } else {
-    return Big(value).toFixed(precision);
+    return parseFloat(Big(value).toFixed(precision));
   }
 };
 

@@ -8,7 +8,10 @@ export const Wrapper = styled.div`
   margin: 0 auto;
   .asset-function-button {
     border: 1px solid #373a53;
-    background: #373a53;
+    :hover {
+      background: #373a53;
+    }
+
     width: 26px;
     height: 26px;
     display: flex;
@@ -242,7 +245,7 @@ export const AllNetWorkTab = styled.div<{ active: boolean }>`
 export const NetworkTabWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   flex-wrap: wrap;
 
   > div {
@@ -260,7 +263,7 @@ export const HoldingTitle = styled.div`
 
   position: relative;
 
-  top: 8px;
+  top: 20px;
 
   .holding-text {
     font-family: Gantari;
@@ -316,9 +319,23 @@ export const HoldingTable = styled.table`
     padding-left: 20px;
   }
 
+  thead tr:first-child th:nth-child(2) {
+    padding-left: 20px;
+
+    position: absolute;
+    left: 30%;
+  }
+
+  thead tr:first-child th:nth-child(3) {
+    padding-left: 20px;
+
+    position: absolute;
+    left: 60%;
+  }
+
   thead tr:first-child th:last-child {
     padding-right: 28px;
-    /* position: absolute; */
+    position: absolute;
     right: 0;
 
     > div {
@@ -346,10 +363,21 @@ export const HoldingTable = styled.table`
     padding-left: 20px;
   }
 
+  tbody tr td:nth-child(2) {
+    padding-left: 20px;
+    position: absolute;
+    left: 30%;
+  }
+
+  tbody tr td:nth-child(3) {
+    padding-left: 20px;
+    position: absolute;
+    left: 60%;
+  }
+
   tbody tr td:last-child {
     padding-right: 20px;
     position: absolute;
-
     right: 14px;
   }
 
@@ -397,7 +425,7 @@ export const YourAssetsTitle = styled.div`
 
   position: relative;
 
-  top: 8px;
+  top: 18px;
 
   .assets-text {
     font-family: Gantari;
@@ -529,6 +557,9 @@ export const ProtocolCard = styled.div`
           width: 16px;
           right: -4px;
           bottom: -4px;
+          border: 2px solid #181a27;
+          border-radius: 4px;
+          background: linear-gradient(0deg, #181a27, #181a27), linear-gradient(0deg, #2d2f42, #2d2f42);
         }
       }
 
@@ -622,8 +653,11 @@ export const ProtocolTable = styled.div<{ titleColor: string; titleBg: string }>
     background: ${(p) => p.titleBg};
   }
 
+  padding-bottom: 16px;
   table {
     width: 100%;
+
+    /* padding-bottom: 12px; */
 
     .token-icon {
       width: 20px;
@@ -673,6 +707,43 @@ export const ProtocolTable = styled.div<{ titleColor: string; titleBg: string }>
       text-align: right;
       padding-right: 16px;
     }
+  }
+`;
+
+export const ProtocolTableHeader = styled.div<{ size: number }>`
+  display: grid;
+  grid-template-columns: repeat(${(p) => p.size - 1}, 1fr) auto;
+
+  padding: 0 16px 16px 16px;
+
+  font-family: Gantari;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #7c7f96;
+  white-space: nowrap;
+
+  border-bottom: 1px solid #373a53;
+`;
+
+export const ProtocolTableRow = styled.div<{ size: number }>`
+  display: grid;
+  grid-template-columns: repeat(${(p) => p.size - 1}, 1fr) auto;
+
+  /* padding: 0 16px 12px 16px; */
+
+  > div {
+    padding-top: 16px;
+  }
+
+  > div:first-child {
+    padding-left: 12px;
+  }
+
+  > div:last-child {
+    padding-right: 12px;
   }
 `;
 

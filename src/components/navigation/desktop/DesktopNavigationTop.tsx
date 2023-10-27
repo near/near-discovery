@@ -34,7 +34,7 @@ export const DesktopNavigationTop = () => {
     .container-nav {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       width: 100%;
     }
     .container-submenu {
@@ -113,6 +113,7 @@ export const DesktopNavigationTop = () => {
       flex: 1;
       text-align: center;
       align-items: center;
+      white-space: nowrap;
       cursor: pointer;
       text-decoration: none;
       color: #979abe;
