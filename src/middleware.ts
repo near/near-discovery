@@ -8,6 +8,6 @@ export function middleware(request: NextRequest) {
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: '/bsc',
+  matcher: '/404',
   // matcher: '/((?!invite-code|uniswap|_next/static|_next/image|favicon.ico|api|images|fonts).*)',
 };
