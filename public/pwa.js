@@ -20,9 +20,7 @@ const addResourcesToCache = async (resources) => {
 const putInCache = async (request, response) => {
   if(request.method !== "POST" && request.url.indexOf("chrome-extension") === -1) {
     const cache = await caches.open('v1');
-    try { 
-      await cache.put(request, response);
-    } catch(e) {console.log('caught error while adding to cache for request %s ', request)}
+    await cache.put(request, response);
   }
 };
 
@@ -35,18 +33,21 @@ const cacheFirst = async ({ request }) => {
   }
 
   // Next try to get the resource from the network
+  let responseFromNetwork
   try {
-    const responseFromNetwork = await fetch(request.clone());
+    responseFromNetwork = await fetch(request.clone());
     // response may be used only once
     // we need to save clone to put one copy in cache
     // and serve second one
     putInCache(request, responseFromNetwork.clone());
-    return responseFromNetwork;
   } catch (error) {
     // in the case when the network request fails,
     // there is nothing we can do, but we must always
     // return a Response object
-    return fetch(request.clone());
+    console.log('caught error while adding to cache for request %s ', request)
+  } 
+  finally {
+    return responseFromNetwork;
   }
 };
 
