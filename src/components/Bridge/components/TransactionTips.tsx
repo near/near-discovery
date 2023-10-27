@@ -11,7 +11,7 @@ function TransactionTips({ mt, count }: { mt?: number; count?: number }) {
       <Alert text={`${count} transactions to be continued`} />
     </StyledContainer>
   ) : (
-    ''
+    <div />
   );
 }
 
