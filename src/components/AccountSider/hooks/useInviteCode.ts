@@ -14,7 +14,7 @@ export default function () {
     const getList = async () => {
       try {
         setLoading(true);
-        const res = await http.get(`/api/dapdap/invite/get-address-code/${account}`);
+        const res = await http.get(`/api/invite/get-address-code/${account}`);
         setList(res?.data?.map((record: InviteCodeRecord) => ({ code: record.code, is_used: record.is_used })));
       } finally {
         setLoading(false);
