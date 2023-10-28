@@ -23,6 +23,8 @@ import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import * as http from '@/utils/http';
+import { getAccessToken, insertedAccessKey } from '@/apis';
 import InviteCodePage from './invite-code';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
@@ -47,9 +49,28 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
 
   useEffect(() => {
-    const check = () => {
+    const check = async () => {
       const _account = window.localStorage.getItem('LOGINED_ACCOUNT');
-      setAuthStatus(account && (_account || '').toLowerCase() === (account || '').toLowerCase() ? 1 : 0);
+      if (account && (_account || '').toLowerCase() === (account || '').toLowerCase()) {
+        setAuthStatus(1);
+        return;
+      }
+      if (!account) {
+        setAuthStatus(0);
+        return;
+      }
+      try {
+        const res = await http.get(`/api/invite/check-address/${account}`);
+        if (res.data?.is_activated) {
+          await getAccessToken(account);
+          window.localStorage.setItem('LOGINED_ACCOUNT', account);
+          setAuthStatus(1);
+          return;
+        }
+        setAuthStatus(0);
+      } catch (err) {
+        setAuthStatus(0);
+      }
     };
     if (router.pathname === 'uniswap') {
       setAuthStatus(1);
