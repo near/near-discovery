@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
 import { useEthersProviderContext } from '@/data/web3';
@@ -184,7 +184,7 @@ const InviteCodePage = () => {
 
   useEffect(() => {
     check();
-  }, [account, check]);
+  }, [account]);
 
   return (
     <StyledInviteCodePage logined={!!account} loading={loading}>
@@ -238,4 +238,4 @@ const InviteCodePage = () => {
   );
 };
 
-export default InviteCodePage;
+export default memo(InviteCodePage);

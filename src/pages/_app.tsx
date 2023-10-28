@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
@@ -18,10 +18,12 @@ import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
+import useAccount from '@/hooks/useAccount';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import InviteCodePage from './invite-code';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -38,21 +40,23 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
+  const [authStatus, setAuthStatus] = useState(-1); // -1 unknow; 1 authed; 0 unauthed
   const router = useRouter();
   const authStore = useAuthStore();
+  const { account } = useAccount();
   const componentSrc = router.query;
 
   useEffect(() => {
+    const check = () => {
+      const _account = window.localStorage.getItem('LOGINED_ACCOUNT');
+      setAuthStatus(account && (_account || '').toLowerCase() === (account || '').toLowerCase() ? 1 : 0);
+    };
     if (router.pathname === 'uniswap') {
-      return;
+      setAuthStatus(1);
+    } else {
+      check();
     }
-    const account = window.localStorage.getItem('LOGINED_ACCOUNT');
-
-    if (!account) {
-      router.replace('/invite-code');
-    }
-  }, []);
-
+  }, [account]);
   useEffect(() => {
     initializeAnalytics();
     initializePrice();
@@ -83,7 +87,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       }
     }
 
-    () => {
+    return () => {
       clearInterval(interval);
     };
   }, []);
@@ -148,9 +152,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
-
-      {getLayout(<Component {...pageProps} />)}
-
+      {getLayout(authStatus === 1 ? <Component {...pageProps} /> : authStatus === 0 ? <InviteCodePage /> : <div />)}
       <Toaster />
     </>
   );

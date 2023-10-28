@@ -42,11 +42,11 @@ const SubtractItem = () => {
     };
   }, []);
 
-  useEffect(() => {
-    if (!account) return;
-    window.localStorage.setItem('LOGINED_ACCOUNT', '');
-    getAccessToken(account);
-  }, [account]);
+  // useEffect(() => {
+  //   if (!account) return;
+  //   window.localStorage.setItem('LOGINED_ACCOUNT', '');
+  //   getAccessToken(account);
+  // }, [account]);
 
   return (
     <StyledSubtractItem>
@@ -90,6 +90,7 @@ const SubtractItem = () => {
       <Item
         onClick={() => {
           if (wallet) {
+            setShowCode(false);
             disconnect(wallet);
             window.localStorage.setItem(http.AUTH_TOKENS, '{}');
             window.localStorage.setItem('LOGINED_ACCOUNT', '');
