@@ -2,12 +2,13 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import useAccount from '@/hooks/useAccount';
+
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
-import { menuData } from '@/data/menuData';
-import { useLayoutStore } from '@/stores/layout';
 import ConnectWallet from '@/components/ConnectWallet';
+import { menuData } from '@/data/menuData';
+import useAccount from '@/hooks/useAccount';
+import { useLayoutStore } from '@/stores/layout';
 
 const LoginContainer = styled.div`
   width: auto;
@@ -49,6 +50,7 @@ export const DesktopNavigationTop = () => {
       &.show {
         display: flex;
         border-bottom: 1px solid #343838;
+        animation: slideDown 0.5s ease forwards; 
       }
       .submenu-item {
         margin: 5px 0;
@@ -87,6 +89,16 @@ export const DesktopNavigationTop = () => {
         &:hover {
           opacity: 0.5;
         }
+      }
+    }
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
       }
     }
   `;
@@ -234,9 +246,8 @@ export const DesktopNavigationTop = () => {
               item.path === currentPath || (item.children && item.children.some((child) => child.path === currentPath));
             const isParentActive = activeParentIndex === index;
             const hasChildren = !!item.children;
-            const className = `container-menu-item ${isActive || isParentActive ? 'active' : ''} ${
-              item.version === false ? 'version' : ''
-            }`;
+            const className = `container-menu-item ${isActive || isParentActive ? 'active' : ''} ${item.version === false ? 'version' : ''
+              }`;
             return item.children ? (
               <div key={index} className={className} onClick={() => handleMenuClick(index, hasChildren)}>
                 <span>{item.title}</span>
