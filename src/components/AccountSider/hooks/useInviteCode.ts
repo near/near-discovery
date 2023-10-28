@@ -5,7 +5,7 @@ import * as http from '@/utils/http';
 
 import type { InviteCodeRecord } from '../types';
 
-export default function () {
+export default function (show: boolean) {
   const { account } = useAccount();
   const [list, setList] = useState<InviteCodeRecord[]>();
   const [loading, setLoading] = useState<boolean>(false);
@@ -20,8 +20,8 @@ export default function () {
         setLoading(false);
       }
     };
-    if (account) getList();
-  }, [account]);
+    if (account && show) getList();
+  }, [account, show]);
 
   return { list, loading };
 }

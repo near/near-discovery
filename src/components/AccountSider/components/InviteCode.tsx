@@ -31,6 +31,8 @@ const Header = styled.div`
 `;
 const List = styled.div`
   padding-top: 10px;
+  max-height: calc(100vh - 160px);
+  overflow-y: auto;
 `;
 const StyledLoading = styled.div`
   text-align: center;
@@ -50,7 +52,7 @@ const Code = styled.div`
 `;
 
 const InviteCode = ({ show, onClose }: { show: boolean; onClose: () => void }) => {
-  const { list, loading } = useInviteCode();
+  const { list, loading } = useInviteCode(show);
   return (
     <StyledInviteCode
       display={show}
