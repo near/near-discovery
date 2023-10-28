@@ -130,20 +130,6 @@ const InviteCodePage = () => {
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const check = async () => {
-    if (!account) return;
-    try {
-      const res = await http.get(`/api/invite/check-address/${account}`);
-      if (res.data?.is_activated) {
-        await getAccessToken(account);
-        window.localStorage.setItem('LOGINED_ACCOUNT', account);
-        router.replace('/');
-      }
-    } catch (error) {
-      setInvited(false);
-    }
-  };
-
   const proceed = async () => {
     if (!account || !code || loading) return;
     setLoading(true);
@@ -181,10 +167,6 @@ const InviteCodePage = () => {
     window.localStorage.setItem('LOGINED_ACCOUNT', '');
     insertedAccessKey('');
   };
-
-  useEffect(() => {
-    check();
-  }, [account]);
 
   return (
     <StyledInviteCodePage logined={!!account} loading={loading}>

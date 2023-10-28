@@ -3,6 +3,7 @@ import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import * as http from '@/utils/http';
 import { getAccessToken, insertedAccessKey } from '@/apis';
+import { useLayoutStore } from '@/stores/layout';
 
 import InviteCode from './InviteCode';
 import useAccount from '@/hooks/useAccount';
@@ -31,7 +32,7 @@ const SubtractItem = () => {
   const [showCode, setShowCode] = useState<boolean>(false);
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const { account } = useAccount();
-
+  const setLayoutStore = useLayoutStore((store) => store.set);
   useEffect(() => {
     const hideCode = () => {
       setShowCode(false);
@@ -90,11 +91,11 @@ const SubtractItem = () => {
       <Item
         onClick={() => {
           if (wallet) {
-            setShowCode(false);
             disconnect(wallet);
             window.localStorage.setItem(http.AUTH_TOKENS, '{}');
             window.localStorage.setItem('LOGINED_ACCOUNT', '');
             insertedAccessKey('');
+            setLayoutStore({ showAccountSider: false });
           } else {
             connect();
           }
