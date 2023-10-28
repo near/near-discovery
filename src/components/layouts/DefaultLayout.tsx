@@ -32,9 +32,9 @@ export function DefaultLayout({ children }: Props) {
       {pathName !== '/uniswap' && <DesktopNavigationTop />}
 
       <div className="content">
-        <div style={{ display: 'none' }}>
+        {/* <div style={{ display: 'none' }}>
           <LoginBox />
-        </div>
+        </div> */}
         {children}
       </div>
       <AccountSider />
