@@ -89,9 +89,9 @@ const Chain = ({ mt, showName = true }: { mt?: number; showName?: boolean }) => 
       <StyledChain>
         {currentChain && !switching && <ChainLogo src={currentChain.icon} />}
         {switching && <Loading />}
-        <ChainName>
-          {switching ? 'Request' : currentChain ? (showName ? currentChain.chainName : '') : 'Select Network'}
-        </ChainName>
+        {showName && (
+          <ChainName>{switching ? 'Request' : currentChain ? currentChain.chainName : 'Select Network'}</ChainName>
+        )}
       </StyledChain>
       <ArrowIconWrapper>
         <ArrowIcon size={12} />
