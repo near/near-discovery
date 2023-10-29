@@ -14,6 +14,14 @@ const useLoginAndLogout = () => {
   const [logging, setLogging] = useState(false);
   const [logged, setLogged] = useState(false);
 
+  const logout = () => {
+    window.localStorage.setItem(LOGINED_ACCOUNT, '');
+    window.localStorage.setItem(http.AUTH_TOKENS, '{}');
+    insertedAccessKey('');
+    setCookie(LOGINED_ACCOUNT, '');
+    setLogged(false);
+  };
+
   const login = useCallback(async () => {
     if (!account) return;
     setLogging(true);
@@ -29,17 +37,11 @@ const useLoginAndLogout = () => {
       } catch (error) {
         setLogged(false);
       }
+    } else {
+      logout();
     }
     setLogging(false);
   }, [account]);
-
-  const logout = () => {
-    window.localStorage.setItem(LOGINED_ACCOUNT, '');
-    window.localStorage.setItem(http.AUTH_TOKENS, '{}');
-    insertedAccessKey('');
-    setCookie(LOGINED_ACCOUNT, '');
-    setLogged(false);
-  };
 
   useEffect(() => {
     if (account) {
