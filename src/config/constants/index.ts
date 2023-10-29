@@ -1,0 +1,1 @@
+export const LOGINED_ACCOUNT = 'LOGINED_ACCOUNT';

@@ -61,3 +61,24 @@ export const refreshAccessToken = async () => {
     }),
   );
 };
+
+export const checkAddressIsInvited = async (account: string) => {
+  try {
+    const res = await http.get(`/api/invite/check-address/${account}`);
+    return !!res.data?.is_activated;
+  } catch (error) {
+    return false;
+  }
+};
+
+export const inviteCodeActivate = async (account: string, code: string) => {
+  try {
+    const res = await http.post(`/api/invite/activate`, {
+      address: account,
+      code,
+    });
+    return !!res.data?.is_success;
+  } catch (error) {
+    return false;
+  }
+};

@@ -18,13 +18,10 @@ import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
-import useAccount from '@/hooks/useAccount';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import * as http from '@/utils/http';
-import { getAccessToken, insertedAccessKey } from '@/apis';
 import InviteCodePage from './invite-code';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
@@ -42,42 +39,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
-  const [authStatus, setAuthStatus] = useState(-1); // -1 unknow; 1 authed; 0 unauthed
+  const [authStatus, setAuthStatus] = useState(1); // -1 unknow; 1 authed; 0 unauthed
   const router = useRouter();
   const authStore = useAuthStore();
-  const { account } = useAccount();
   const componentSrc = router.query;
 
-  useEffect(() => {
-    const check = async () => {
-      const _account = window.localStorage.getItem('LOGINED_ACCOUNT');
-      if (account && (_account || '').toLowerCase() === (account || '').toLowerCase()) {
-        setAuthStatus(1);
-        return;
-      }
-      if (!account) {
-        setAuthStatus(0);
-        return;
-      }
-      try {
-        const res = await http.get(`/api/invite/check-address/${account}`);
-        if (res.data?.is_activated) {
-          await getAccessToken(account);
-          window.localStorage.setItem('LOGINED_ACCOUNT', account);
-          setAuthStatus(1);
-          return;
-        }
-        setAuthStatus(0);
-      } catch (err) {
-        setAuthStatus(0);
-      }
-    };
-    if (router.pathname === 'uniswap') {
-      setAuthStatus(1);
-    } else {
-      check();
-    }
-  }, [account]);
   useEffect(() => {
     initializeAnalytics();
     initializePrice();

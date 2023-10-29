@@ -1,10 +1,10 @@
 import React, { useEffect, useState, memo } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { useEthersProviderContext } from '@/data/web3';
+import { useSearchParams } from 'next/navigation';
 import useAccount from '@/hooks/useAccount';
-import * as http from '@/utils/http';
-import { getAccessToken, insertedAccessKey } from '@/apis';
+import { inviteCodeActivate } from '@/apis';
+import useLoginAndLogout from '@/hooks/useLoginAndLogout';
 
 const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
   font-family: Gantari;
@@ -123,53 +123,42 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
 
 const InviteCodePage = () => {
   const router = useRouter();
-  const { useConnectWallet } = useEthersProviderContext();
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const searchParams = useSearchParams();
   const { account } = useAccount();
-  const [invited, setInvited] = useState(false);
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
+  const { login, connectAndlogin, logging, disconnectAndlogout, logged } = useLoginAndLogout();
 
   const proceed = async () => {
     if (!account || !code || loading) return;
     setLoading(true);
     try {
-      const res = await http.post(`/api/invite/activate`, {
-        address: account,
-        code,
-      });
-      const resJSON = await res.json();
-
+      const isActivated = await inviteCodeActivate(account, code);
       setLoading(false);
-      if (resJSON.data?.is_success) {
-        await getAccessToken(account);
-        window.localStorage.setItem('LOGINED_ACCOUNT', account);
-        router.replace('/');
+      if (isActivated) {
+        login();
       }
     } catch (error) {
       setLoading(false);
-      setInvited(false);
     }
   };
+
+  useEffect(() => {
+    if (logged) {
+      router.replace(searchParams.get('source') || '/');
+    }
+  }, [logged]);
 
   const handlerClick = () => {
     if (account) {
       proceed();
     } else {
-      connect();
+      connectAndlogin();
     }
   };
 
-  const logout = () => {
-    if (!account || !wallet) return;
-    disconnect(wallet);
-    window.localStorage.setItem(http.AUTH_TOKENS, '{}');
-    window.localStorage.setItem('LOGINED_ACCOUNT', '');
-    insertedAccessKey('');
-  };
-
   return (
-    <StyledInviteCodePage logined={!!account} loading={loading}>
+    <StyledInviteCodePage logined={!!account} loading={loading || logging}>
       <main>
         <div className="yellow"></div>
         <div className="blue"></div>
@@ -203,7 +192,7 @@ const InviteCodePage = () => {
             {account ? 'Proceed' : 'Connect Wallet'}
           </button>
           <p>
-            <span className="notice" onClick={logout}>
+            <span className="notice" onClick={disconnectAndlogout}>
               {account ? (
                 <span className="logout">
                   Log out

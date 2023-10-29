@@ -1,12 +1,10 @@
-import { useConnectWallet } from '@web3-onboard/react';
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import * as http from '@/utils/http';
-import { getAccessToken, insertedAccessKey } from '@/apis';
 import { useLayoutStore } from '@/stores/layout';
-
+import useLoginAndLogout from '@/hooks/useLoginAndLogout';
 import InviteCode from './InviteCode';
 import useAccount from '@/hooks/useAccount';
+import { useRouter } from 'next/router';
 
 const StyledSubtractItem = styled.div`
   display: flex;
@@ -29,10 +27,12 @@ const StyledInviteCode = styled(Item)`
 `;
 
 const SubtractItem = () => {
+  const router = useRouter();
   const [showCode, setShowCode] = useState<boolean>(false);
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const { account } = useAccount();
+  const { connectAndlogin, disconnectAndlogout } = useLoginAndLogout();
   const setLayoutStore = useLayoutStore((store) => store.set);
+
   useEffect(() => {
     const hideCode = () => {
       setShowCode(false);
@@ -42,12 +42,6 @@ const SubtractItem = () => {
       document.removeEventListener('click', hideCode);
     };
   }, []);
-
-  // useEffect(() => {
-  //   if (!account) return;
-  //   window.localStorage.setItem('LOGINED_ACCOUNT', '');
-  //   getAccessToken(account);
-  // }, [account]);
 
   return (
     <StyledSubtractItem>
@@ -89,15 +83,15 @@ const SubtractItem = () => {
         />
       </StyledInviteCode>
       <Item
-        onClick={() => {
-          if (wallet) {
-            disconnect(wallet);
-            window.localStorage.setItem(http.AUTH_TOKENS, '{}');
-            window.localStorage.setItem('LOGINED_ACCOUNT', '');
-            insertedAccessKey('');
+        onClick={async () => {
+          if (account) {
+            await disconnectAndlogout();
             setLayoutStore({ showAccountSider: false });
+            setTimeout(() => {
+              router.replace(`/invite-code?source=${router.pathname}`);
+            }, 100);
           } else {
-            connect();
+            connectAndlogin();
           }
         }}
       >
