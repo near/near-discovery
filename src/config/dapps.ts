@@ -54,7 +54,7 @@ export const dapps = [
     type: 'dex',
     on_chain_ids: [5000, 59144], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 5000,
-    logo:'https://ipfs.near.social/ipfs/bafkreictpy7n6edfe5boqidwwowccjv4cppterjxtp3ou3wdxagl6adiou',
+    logo: 'https://ipfs.near.social/ipfs/bafkreictpy7n6edfe5boqidwwowccjv4cppterjxtp3ou3wdxagl6adiou',
     dappSrc: {
       5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
       59144: 'dapdapbos.near/widget/DappEntry.LineaSwap',
@@ -343,6 +343,22 @@ export const dapps = [
   },
 
   {
+    name: 'HorizonDEX',
+    dappRoute: 'horizonDEX',
+    TBD_TOKEN: 'N',
+    logo: 'https://ipfs.near.social/ipfs/bafkreiekp7osfgpzfcboawj7yj3mirxxaxwcbvdkb5mgpbui6boz47dhoy',
+    description: 'All current DEXs on BASE & LINEA are built on the standard Uniswap-V2 model.',
+    tags: ['Dexes'],
+    type: 'dex',
+    on_chain_ids: [8453, 59144], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 8453,
+    dappSrc: {
+      8453: 'dapdapbos.near/widget/DappEntry.BaseSwap',
+      137: 'dapdapbos.near/widget/DappEntry.LineaSwap',
+    } as { [key: number]: string },
+  },
+
+  {
     name: 'PearlFi',
     dappRoute: 'pearlFi',
     logo: 'https://ipfs.near.social/ipfs/bafkreihltljvxhpi7zszyc67wsinxzcj2fakufti6koeoelst74av7j4eq',
@@ -366,10 +382,11 @@ export const dapps = [
     description: 'QuickSwap is a next-generation layer-2 decentralized exchange and Automated Market Maker.',
     tags: ['Dexes'],
     type: 'dex',
-    on_chain_ids: [137], // get chain config from chains.ts
+    on_chain_ids: [137], // get chain config from chains.ts, TODO:
     DEFAULT_CHAIN_ID: 137,
     dappSrc: {
       137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
+      // TODO:
     } as { [key: number]: string },
   },
 
@@ -416,5 +433,256 @@ export const dapps = [
     dappSrc: {
       1088: 'dapdapbos.near/widget/DappEntry.MetisSwap',
     } as { [key: number]: string },
+  },
+
+  {
+    name: 'Balancer',
+    dappRoute: 'balancer', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreie7ikpsbxhjkvwuhwhfyt7exssk7m36wnjdeasnvpxn4lzxjeq4da',
+    TBD_TOKEN: 'N',
+    description:
+      'A decentralized automated market maker (AMM) protocol built on Ethereum that represents a flexible building block for programmable liquidity.',
+    tags: ['Dexes'],
+    // type: 'dex',
+    on_chain_ids: [1101], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 1101,
+
+    extendProps: {
+      defaultDex: 'Balancer',
+    },
+    dappSrc: {
+      1101: 'guessme.near/widget/ZKEVMSwap.zkevm-swap',
+    } as { [key: number]: string },
+  },
+  {
+    name: 'Pancake Swap',
+    dappRoute: 'pancake-swap',
+    logo: 'https://ipfs.near.social/ipfs/bafkreiag326f7l2dfyoy7iivyr27e34ockcu5yktb75xvz2ppnn5dfyap4',
+    TBD_TOKEN: 'N',
+    description: 'PancakeSwap helps you make the most out of your crypto in three ways: Trade, Earn, and Win.',
+    tags: ['Dexes'],
+    // type: 'dex', //TODO:
+    on_chain_ids: [1101], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 1101,
+    extendProps: {
+      defaultDex: 'Pancake Swap',
+    },
+    dappSrc: {
+      1101: 'guessme.near/widget/ZKEVMSwap.zkevm-swap',
+    } as { [key: number]: string },
+  },
+
+  {
+    name: '0vix',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreidhzpw4f3j2ufxxnqapfc4zyeythbds4uop44dbgnfnk2ymqgp7aa',
+    TBD_TOKEN: 'Y',
+    description: '0VIX is a Decentralized Finance (DeFi) liquidity market protocol, built on Polygon.',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [137, 1101], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 137,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Agave',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreicagi5msm7flwzqkgemb6odyx6r4jbhnvrhustzyuboznh6rr6bbu',
+    TBD_TOKEN: 'Y',
+    description: 'Agave, in a few words, is Aave on xDai.',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [100], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 100,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Benqi',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreibwn7ekxtgnkczolfnwpjemz4hdm27mftcnd4yqjocvdvlw7nb4sm',
+    TBD_TOKEN: 'N',
+    description: 'The DeFi and Web3 protocol for all.',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [43114], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 43114,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'C.R.E.A.M.',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreig6xa6pd2za7xxssj5ul7xfx7mvfayjnqvxvxgmv6hgeb6pya43cm',
+    TBD_TOKEN: 'N',
+    description:
+      'C.R.E.A.M. Finance is a decentralized lending protocol for individuals and protocols to access financial services. ',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [42161, 56, 137], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 42161,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Granary Finance',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreiaudgxte56nl6eedzg6inp4w3xobp25chpayt3ojuiblhzkzgsifq',
+    TBD_TOKEN: 'Y',
+    description:
+      'Granary Finance is a decentralized, user-driven borrowing and lending liquidity market inspired by Aave.',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [43114, 8453, 42161, 56, 10], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 43114,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Iron Bank',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreibj5orc77anv4ys5dpallk4u27e52gvosxcdbcm5curxlw3ffmhsy',
+    TBD_TOKEN: 'N',
+    description: 'A Decentralized Lending Platform focused on Capital Efficiency',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [43114, 10], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 43114,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'LayerBank',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreidqfdregtnl6vbpuvdp5g2fvekuz24zti4owzgjzkgz5n7nfmoafq',
+    TBD_TOKEN: 'Y',
+    description: 'The Ultimate Money Market for All EVM-Layers',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [59144], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 59144,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Lendle',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreih5p5podfnagabzxizmsje2y2qhccfjspxuvgkcexkunqsy7v7j64',
+    TBD_TOKEN: 'N',
+    description: 'Earn interest on your cryptos with the #1 lending and borrowing platform on Mantle Network',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [5000], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 5000,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Moonwell',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreih2qmod4k2buqgbg4yayyo4t353za2tknxw5xb272x4fekqtbwjve',
+    TBD_TOKEN: 'N',
+    description:
+      'Moonwell is an open and decentralized lending and borrowing protocol built on Base, Moonbeam, and Moonriver. ',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [8453], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 8453,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'mendi finance',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreifziawsf2l5nvz5eak2csyhp3ln7ldij53clfaxptbx7353uwone4',
+    TBD_TOKEN: 'N',
+    description:
+      'Mendi Finance is a decentralized lending protocol for individuals, institutions and protocols to access financial services. ',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [59144], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 59144,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Radiant',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreihivtnhg2bi44rrmuxyefnobbqnons23ha5bwzekfqatew4z2bda4',
+    TBD_TOKEN: 'N',
+    description: 'Earn Interest & Borrow Assets Cross-Chain, Seamlessly',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [42161, 56], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 42161,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Reactorfusion',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreicvlu4cwvtx6vwasc2vzzfnkmmkgrwn34zk42mogacvklxh3yav7e',
+    TBD_TOKEN: 'N',
+    description: 'ReactorFusion is a decentralized, non-custodial lending protocol.',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [324], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 324,
+    dappSrc: {} as { [key: number]: string },
+  },
+  {
+    name: 'Sonne',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreida3sat55yql3apjhngucnilyf7qck6ji32pekkoc2rrg4habf4va',
+    TBD_TOKEN: 'N',
+    description:
+      'Sonne Finance is a decentralized lending protocol for individuals, institutions and protocols to access financial services.',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [10, 8453], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 10,
+    dappSrc: {} as { [key: number]: string },
+  },
+  {
+    name: 'Venus',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreib4zhl7kkpllunevcepxzmrge75halcj57th7ksxkpf5bqcxzciy4',
+    TBD_TOKEN: 'N',
+    description: 'Simple and powerful community-driven finance for the entire globe.',
+    tags: ['Lending'],
+    type: 'lending',
+    on_chain_ids: [56], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 56,
+    dappSrc: {} as { [key: number]: string },
+  },
+
+  {
+    name: 'Pendle',
+    dappRoute: 'pendle', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreiedaqqpcuw6oj5mao263fizx3gksybdmw5x2p7xeka7wngzip5zeu',
+    TBD_TOKEN: 'N',
+    description:
+      'Pendle is a permissionless yield-trading protocol where users can execute various yield-management strategies.',
+    tags: ['Yield'],
+    type: 'yield',
+    on_chain_ids: [42161], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 42161,
+    dappSrc: {
+      42161: 'bluebiu.near/widget/Arbitrum.Pendle.TradeMarkets',
+    } as { [key: number]: string },
+  },
+
+  {
+    name: 'Gamma',
+    dappRoute: '', //TODO:
+    logo: 'https://ipfs.near.social/ipfs/bafkreigq2itome7z2xktsxcxsitqkqsdtaulnyhu2z4ekc6udecl7ihfhi',
+    TBD_TOKEN: 'N',
+    description: 'A protocol for active liquidity management and market making strategies',
+    tags: ['Liquidity'],
+    type: 'liquidity',
+    on_chain_ids: [59144, 5000, 1101], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 59144,
+    dappSrc: {} as { [key: number]: string },
   },
 ];

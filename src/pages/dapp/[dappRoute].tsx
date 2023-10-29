@@ -27,7 +27,7 @@ export const DappPage: NextPageWithLayout = () => {
 
   const dappConfig = dapps.find((dapp) => dapp.dappRoute === dappRoute);
 
-  if (!dappConfig) return <></>;
+  if (!dappConfig || !dappRoute) return <></>;
 
   const DEFAULT_CHAIN_ID = dappConfig.DEFAULT_CHAIN_ID;
 
@@ -36,7 +36,10 @@ export const DappPage: NextPageWithLayout = () => {
   });
 
   const curChainId = connectedChain ? eval(connectedChain.id) : DEFAULT_CHAIN_ID;
-  console.log('curChainId: ', curChainId);
+
+  const dappSrc = dappConfig.dappSrc[curChainId] || dappConfig.dappSrc[DEFAULT_CHAIN_ID];
+
+  if (!dappSrc) return <></>;
 
   return (
     <ComponentWrapperPage
@@ -48,9 +51,10 @@ export const DappPage: NextPageWithLayout = () => {
         dappConfig,
         curChainId,
         chains,
-        dappSrc: dappConfig.dappSrc[curChainId] || dappConfig.dappSrc[DEFAULT_CHAIN_ID],
+        dappSrc: dappSrc,
+        ...(dappConfig.extendProps || {}),
       }}
-      src={dappSrcMap[dappConfig.type]}
+      src={dappSrcMap[dappConfig.type || 'undefined'] || dappSrc}
     />
   );
 };

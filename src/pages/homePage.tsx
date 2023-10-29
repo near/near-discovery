@@ -423,7 +423,6 @@ const NewHomePage: NextPageWithLayout = () => {
   };
 
   const [selectedMedalMenu, setSelectedMedalMenu] = useState(() => {
- 
     return '';
   });
   const handleMedalMenuClick = (path: string) => {
@@ -436,16 +435,14 @@ const NewHomePage: NextPageWithLayout = () => {
   };
 
   const [selectedTab, setSelectedTab] = useState(() => {
-
     return 'TBD';
   });
-  
+
   const handleTabClick = (path: string) => {
     setSelectedTab(path);
   };
 
   const [selectedFunction, setSelectedFunction] = useState<string[]>(() => {
-  
     return [];
   });
 
@@ -474,7 +471,7 @@ const NewHomePage: NextPageWithLayout = () => {
   };
   console.log('dapps:', dapps);
   console.log('selectedFunction:', selectedFunction);
-  console.log('selectedMenu:', selectedMenu);  
+  console.log('selectedMenu:', selectedMenu);
   console.log('Before filter:', dapps.length, dapps);
   const filteredDapps = dapps.filter(
     ({ name, tags, on_chain_ids }) =>
@@ -482,8 +479,7 @@ const NewHomePage: NextPageWithLayout = () => {
       (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
       (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
   );
-  console.log('After filter:', filteredDapps.length, filteredDapps);  
-  
+  console.log('After filter:', filteredDapps.length, filteredDapps);
 
   return (
     <NewHomePage>
@@ -614,38 +610,41 @@ const NewHomePage: NextPageWithLayout = () => {
               <div className="tbd-content">
                 {filteredDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'Y')
-                  .map((dapp, index) => (
-                    <Link className="tbd-content-item" key={index} href={'dapp/' + dapp.dappRoute}>
-                      <div className="content-item-title">
-                        <div className="item-title-icon">
-                          <img src={dapp.logo} alt="" />
-                        </div>
-                        <div className="item-title-text">
-                          <h1>{dapp.name}</h1>
-                          <p>Token TBD🔥</p>
-                          <div className="title-text-icon">
-                            {chains.hasOwnProperty(dapp.DEFAULT_CHAIN_ID) ? (
-                              <>
-                                <img src={chains[dapp.DEFAULT_CHAIN_ID].icon} alt="" />
-                              </>
-                            ) : (
-                              <></>
-                            )}
+                  .map((dapp, index) => {
+                    const href = dapp.dappRoute ? 'dapp/' + dapp.dappRoute : '/';
+                    return (
+                      <Link className="tbd-content-item" key={index} href={href}>
+                        <div className="content-item-title">
+                          <div className="item-title-icon">
+                            <img src={dapp.logo} alt="" />
+                          </div>
+                          <div className="item-title-text">
+                            <h1>{dapp.name}</h1>
+                            <p>Token TBD🔥</p>
+                            <div className="title-text-icon">
+                              {chains.hasOwnProperty(dapp.DEFAULT_CHAIN_ID) ? (
+                                <>
+                                  <img src={chains[dapp.DEFAULT_CHAIN_ID].icon} alt="" />
+                                </>
+                              ) : (
+                                <></>
+                              )}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                      <div className="content-item-text">
-                        <p>{dapp.description}</p>
-                      </div>
-                      <div className="content-item-tag">
-                        {dapp.tags.map((tag, index) => (
-                          <div className={`item-tag-item ${tag}`} key={index}>
-                            {tag}
-                          </div>
-                        ))}
-                      </div>
-                    </Link>
-                  ))}
+                        <div className="content-item-text">
+                          <p>{dapp.description}</p>
+                        </div>
+                        <div className="content-item-tag">
+                          {dapp.tags.map((tag, index) => (
+                            <div className={`item-tag-item ${tag}`} key={index}>
+                              {tag}
+                            </div>
+                          ))}
+                        </div>
+                      </Link>
+                    );
+                  })}
               </div>
             ) : (
               <div className="tbd-table-content">
@@ -704,7 +703,11 @@ const NewHomePage: NextPageWithLayout = () => {
                 {filteredDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'N')
                   .map((dapp, index) => (
-                    <Link className="tbd-content-item" key={index} href={'dapp/' + dapp.dappRoute}>
+                    <Link
+                      className="tbd-content-item"
+                      key={index}
+                      href={!dapp.dappRoute ? '/' : 'dapp/' + dapp.dappRoute}
+                    >
                       <div className="content-item-title">
                         <div className="item-title-icon">
                           <img src={dapp.logo} alt="" />

@@ -25,17 +25,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
-  return (
-    // <div className="container-xl">
-    //   <div className="row">
-    //     <div className="d-inline-block">
-    //       <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
-    //     </div>
-    //   </div>
-    // </div>
-
-    <ComponentWrapperPage src={componentSrc} />
-  );
+  return <ComponentWrapperPage src={componentSrc} componentProps={componentProps} />;
 };
 
 ViewComponentPage.getLayout = useDefaultLayout;
