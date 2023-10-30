@@ -179,7 +179,7 @@ const InviteCodePage = ({ setChecked }: { setChecked: (checked: boolean) => void
 
   const handlerClick = () => {
     if (account) {
-      // proceed();
+      proceed();
     } else {
       connect();
     }
