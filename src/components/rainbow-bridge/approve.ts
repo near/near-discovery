@@ -49,10 +49,12 @@ export const handleApprove = async (amountIn: string, token: any, provider: EIP1
   const contract = new ethers.Contract(token.ethereum_address, Erc20Abi, signer);
 
   return contract
-    .approve(bridgeParams.erc20LockerAddress, ethers.utils.parseUnits(amountIn, token.decimals), { gasLimit: 5000000 })
+    .approve(bridgeParams.erc20LockerAddress, ethers.utils.parseUnits(amountIn, token.decimals))
     .then((tx: any) => {
-      tx.wait().then((res: any) => {
+      return tx.wait().then((res: any) => {
         const { status, transactionHash } = res;
+
+        return { status, transactionHash };
         // deal with tx wait
       });
     })
