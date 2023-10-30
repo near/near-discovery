@@ -10,274 +10,334 @@ import { dapps } from '@/config/dapps';
 import Link from 'next/link';
 import chains from '@/config/chains';
 
-const NewHomePage: NextPageWithLayout = () => {
-  const components = useBosComponents();
+const pageLeftBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
+const pageBottomBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
+const docsIcon = 'https://ipfs.near.social/ipfs/bafkreiae3ujempvwh2mowlpqoitmz7ohcawkrx2u26cezeit443ni475oe';
+const teleIcon = 'https://ipfs.near.social/ipfs/bafkreihsnpk5thlrjlk3jakd6vximvtdcqknsikhdu7fgpkw2jusmjptgq';
+const HelpIcon = 'https://ipfs.near.social/ipfs/bafkreighqgtfiphvdd32lg3io3k447ola32na3ovjppdrhtvfurccbekke';
 
-  const pageLeftBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
-  const pageBottomBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
-  const docsIcon = 'https://ipfs.near.social/ipfs/bafkreiae3ujempvwh2mowlpqoitmz7ohcawkrx2u26cezeit443ni475oe';
-  const teleIcon = 'https://ipfs.near.social/ipfs/bafkreihsnpk5thlrjlk3jakd6vximvtdcqknsikhdu7fgpkw2jusmjptgq';
-  const HelpIcon = 'https://ipfs.near.social/ipfs/bafkreighqgtfiphvdd32lg3io3k447ola32na3ovjppdrhtvfurccbekke';
+const SearchIcon = (
+  <img src="https://ipfs.near.social/ipfs/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim" alt="" />
+);
 
-  const SearchIcon = (
-    <img src="https://ipfs.near.social/ipfs/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim" alt="" />
-  );
-  const gridIcon = (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-      <rect y="6.3999" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-      <rect x="6.39976" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-      <rect x="6.39976" y="6.3999" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-    </svg>
-  );
-  const tableIcon = (
-    <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="12" height="2.4" rx="1.2" fill="currentColor" />
-      <rect y="4.7998" width="12" height="2.4" rx="1.2" fill="currentColor" />
-      <rect y="9.59961" width="12" height="2.4" rx="1.2" fill="currentColor" />
-    </svg>
-  );
+const gridIcon = (
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="5.60005" height="5.60005" rx="1" fill="currentColor" />
+    <rect y="6.3999" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
+    <rect x="6.39976" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
+    <rect x="6.39976" y="6.3999" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
+  </svg>
+);
 
-  const NewHomePage = styled.div`
-    margin: 0 -36px;
-    padding: 0 36px;
-    background-image: url(${pageLeftBg});
-    background-repeat: no-repeat;
-    /* background-size: 228px 228px; */
-    background-position: 0 -60px;
-    color: #979abe;
-    width: 100%;
-    height: 100%;
+const tableIcon = (
+  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <rect width="12" height="2.4" rx="1.2" fill="currentColor" />
+    <rect y="4.7998" width="12" height="2.4" rx="1.2" fill="currentColor" />
+    <rect y="9.59961" width="12" height="2.4" rx="1.2" fill="currentColor" />
+  </svg>
+);
+
+const NewHomePage = styled.div`
+  margin: 0 -36px;
+  padding: 0 36px;
+  background-image: url(${pageLeftBg});
+  background-repeat: no-repeat;
+  /* background-size: 228px 228px; */
+  background-position: 0 -60px;
+  color: #979abe;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+`;
+
+const NewHomePageLeft = styled.div`
+  width: 20%;
+  height: 100%;
+`;
+
+const PageLeftItem = styled.div`
+  margin-bottom: 45px;
+  .page-netWork-list {
     display: flex;
-    position: relative;
-  `;
-
-  const NewHomePageLeft = styled.div`
-    width: 20%;
-    height: 100%;
-  `;
-
-  const PageLeftItem = styled.div`
-    margin-bottom: 45px;
-    .page-netWork-list {
+    flex-wrap: wrap;
+    .netWork-list-item {
+      margin-right: 12px;
+      margin-bottom: 12px;
+      flex-basis: auto;
+      border: 1px solid #5e617e;
+      border-radius: 10px;
+      padding: 4px 8px 4px 4px;
+      color: #ffffff;
       display: flex;
-      flex-wrap: wrap;
-      .netWork-list-item {
-        margin-right: 12px;
-        margin-bottom: 12px;
-        flex-basis: auto;
-        border: 1px solid #5e617e;
+      cursor: pointer;
+      img {
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        align-items: center;
         border-radius: 8px;
-        padding: 4px 8px 4px 4px;
-        color: #ffffff;
-        display: flex;
+        margin-right: 10px;
+      }
+    }
+    .active {
+      background: rgba(235, 244, 121, 1);
+      color: rgba(24, 26, 39, 1);
+    }
+  }
+  .page-function-list {
+    display: flex;
+    flex-wrap: wrap;
+    .function-list-item {
+      margin-right: 12px;
+      margin-bottom: 12px;
+      flex-basis: auto;
+      border: 1px solid #5e617e;
+      border-radius: 8px;
+      padding: 6px 20px;
+      color: #ffffff;
+      display: flex;
+      cursor: pointer;
+    }
+    .bridge {
+      border: 1px solid rgba(227, 233, 157, 1);
+    }
+    .dex {
+      border: 1px solid rgba(172, 252, 237, 1);
+    }
+    .lending {
+      border: 1px solid rgba(173, 255, 181, 1);
+    }
+    .liquidity {
+      border: 1px solid rgba(170, 214, 255, 1);
+    }
+    .staking {
+      border: 1px solid rgba(193, 191, 255, 1);
+    }
+    .yield {
+      border: 1px solid rgba(249, 181, 230, 1);
+    }
+    .bridgeActive {
+      background: rgba(227, 233, 157, 1);
+      color: rgba(0, 0, 0, 1);
+    }
+    .dexActive {
+      background: rgba(172, 252, 237, 1);
+      color: rgba(0, 0, 0, 1);
+    }
+    .lendingActive {
+      background: rgba(173, 255, 181, 1);
+      color: rgba(0, 0, 0, 1);
+    }
+    .liquidityActive {
+      background: rgba(170, 214, 255, 1);
+      color: rgba(0, 0, 0, 1);
+    }
+    .stakingActive {
+      background: rgba(193, 191, 255, 1);
+      color: rgba(0, 0, 0, 1);
+    }
+    .yieldActive {
+      background: rgba(249, 181, 230, 1);
+      color: rgba(0, 0, 0, 1);
+    }
+  }
+  .page-medal-list {
+    display: flex;
+    flex-wrap: wrap;
+    .medal-list-item {
+      margin-right: 12px;
+      margin-bottom: 12px;
+      flex-basis: auto;
+      border: 1px solid #5e617e;
+      border-radius: 8px;
+      padding: 6px 20px;
+      color: #ffffff;
+      display: flex;
+      cursor: pointer;
+    }
+    .active {
+      background: rgba(235, 244, 121, 1);
+      color: rgba(24, 26, 39, 1);
+    }
+  }
+`;
+
+const LeftItemTitle = styled.div`
+  font-size: 16px;
+  margin-bottom: 18px;
+`;
+
+const NewHomePageRight = styled.div`
+  margin-left: 40px;
+  width: 90%;
+  .page-right-content {
+    width: 90%;
+    position: relative;
+    .page-right-tab {
+      border: 1px solid rgba(52, 56, 56, 1);
+      background-color: #151515;
+      padding: 5px;
+      border-radius: 32px;
+      color: rgba(255, 255, 255, 1);
+      display: flex;
+      width: fit-content;
+      margin-bottom: 30px;
+      .right-tab-item {
+        font-size: 20px;
+        font-weight: 700;
+        padding: 8px 24px;
         cursor: pointer;
+        border-radius: 32px;
+      }
+      .active {
+        background: #ebf479;
+        color: #000000;
+      }
+    }
+    .page-right-switch {
+      position: absolute;
+      right: 0;
+      top: 0;
+      border: 1px solid #5e617e;
+      padding: 4px;
+      display: flex;
+      border-radius: 8px;
+      .right-switch-item {
+        font-size: 12px;
+        color: #5e617e;
+        border-radius: 6px;
+        width: 24px;
+        height: 24px;
+        line-height: 24px;
+        text-align: center;
+        align-items: center;
+      }
+      .active {
+        background: #5e617e;
+        color: #000000;
+      }
+    }
+  }
+  .tbd-content {
+    .tbd-content-item {
+      display: inline-block;
+      text-decoration: none;
+      color: #979abe;
+      width: 300px;
+      height: 215px;
+      margin-right: 24px;
+      margin-bottom: 28px;
+      background: linear-gradient(180deg, #373a53 0%, #13141b 100%);
+      border-radius: 20px;
+      padding: 20px;
+      .content-item-title {
+        display: flex;
+        margin-bottom: 16px;
+        .item-title-icon {
+          margin-right: 14px;
+          img {
+            width: 72px;
+            height: 72px;
+          }
+        }
+        .item-title-text {
+          h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 4px;
+          }
+          p {
+            font-size: 12px;
+            margin-bottom: 6px;
+          }
+          .title-text-icon {
+            display: flex;
+            img {
+              width: 20px;
+              height: 20px;
+              margin-right: 4px;
+            }
+          }
+        }
+      }
+      .content-item-text {
+        text-align: left;
+        margin-bottom: 20px;
+        height: 50px;
+        p {
+          display: -webkit-box;
+          -webkit-box-orient: vertical;
+          -webkit-line-clamp: 3;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          font-size: 14px;
+          line-height: 17px;
+          letter-spacing: 0em;
+        }
+      }
+      .content-item-tag {
+        display: flex;
+        .item-tag-item {
+          margin-right: 10px;
+          padding: 2px 8px;
+          font-size: 12px;
+          color: #000000;
+          border-radius: 30px;
+        }
+        .Dexes {
+          background: #acfced;
+        }
+        .Bridge {
+          background: #e3e99d;
+        }
+        .Lending {
+          background: #adffb5;
+        }
+        .Liquidity {
+          background: #aad6ff;
+        }
+        .Staking {
+          background: #c1bfff;
+        }
+        .Yield {
+          background: #f9b5e6;
+        }
+      }
+    }
+  }
+  .tbd-table-content {
+    width: 90%;
+    border: 1px solid rgba(52, 56, 56, 1);
+    border-radius: 32px;
+    padding: 20px;
+    background: linear-gradient(180deg, #141414 0%, #141414 100%), linear-gradient(0deg, #343838, #343838);
+    color: rgba(151, 154, 190, 1);
+    font-weight: 400;
+    table {
+      width: 100%;
+      tr th {
+        font-weight: 400;
+      }
+      tr td {
+        border-bottom: 1px solid rgba(52, 56, 56, 1);
+        padding: 12px 2px;
         img {
-          width: 24px;
-          height: 24px;
-          line-height: 24px;
-          text-align: center;
-          align-items: center;
-          border-radius: 10px;
+          width: 42px;
+          height: 42px;
           margin-right: 10px;
         }
-      }
-      .active {
-        background: rgba(235, 244, 121, 1);
-        color: rgba(24, 26, 39, 1);
-      }
-    }
-    .page-function-list {
-      display: flex;
-      flex-wrap: wrap;
-      .function-list-item {
-        margin-right: 12px;
-        margin-bottom: 12px;
-        flex-basis: auto;
-        border: 1px solid #5e617e;
-        border-radius: 8px;
-        padding: 6px 20px;
-        color: #ffffff;
-        display: flex;
-        cursor: pointer;
-      }
-      .bridge {
-        border: 1px solid rgba(227, 233, 157, 1);
-      }
-      .dex {
-        border: 1px solid rgba(172, 252, 237, 1);
-      }
-      .lending {
-        border: 1px solid rgba(173, 255, 181, 1);
-      }
-      .liquidity {
-        border: 1px solid rgba(170, 214, 255, 1);
-      }
-      .staking {
-        border: 1px solid rgba(193, 191, 255, 1);
-      }
-      .yield {
-        border: 1px solid rgba(249, 181, 230, 1);
-      }
-      .bridgeActive {
-        background: rgba(227, 233, 157, 1);
-        color: rgba(0, 0, 0, 1);
-      }
-      .dexActive {
-        background: rgba(172, 252, 237, 1);
-        color: rgba(0, 0, 0, 1);
-      }
-      .lendingActive {
-        background: rgba(173, 255, 181, 1);
-        color: rgba(0, 0, 0, 1);
-      }
-      .liquidityActive {
-        background: rgba(170, 214, 255, 1);
-        color: rgba(0, 0, 0, 1);
-      }
-      .stakingActive {
-        background: rgba(193, 191, 255, 1);
-        color: rgba(0, 0, 0, 1);
-      }
-      .yieldActive {
-        background: rgba(249, 181, 230, 1);
-        color: rgba(0, 0, 0, 1);
-      }
-    }
-    .page-medal-list {
-      display: flex;
-      flex-wrap: wrap;
-      .medal-list-item {
-        margin-right: 12px;
-        margin-bottom: 12px;
-        flex-basis: auto;
-        border: 1px solid #5e617e;
-        border-radius: 8px;
-        padding: 6px 20px;
-        color: #ffffff;
-        display: flex;
-        cursor: pointer;
-      }
-      .active {
-        background: rgba(235, 244, 121, 1);
-        color: rgba(24, 26, 39, 1);
-      }
-    }
-  `;
-
-  const LeftItemTitle = styled.div`
-    font-size: 16px;
-    margin-bottom: 18px;
-  `;
-
-  const NewHomePageRight = styled.div`
-    margin-left: 40px;
-    width: 90%;
-    .page-right-content {
-      width: 90%;
-      position: relative;
-      .page-right-tab {
-        border: 1px solid rgba(52, 56, 56, 1);
-        background-color: #151515;
-        padding: 5px;
-        border-radius: 32px;
-        color: rgba(255, 255, 255, 1);
-        display: flex;
-        width: fit-content;
-        margin-bottom: 30px;
-        .right-tab-item {
-          font-size: 20px;
+        h1 {
+          font-family: Gantari;
+          font-size: 16px;
           font-weight: 700;
-          padding: 8px 24px;
-          cursor: pointer;
-          border-radius: 32px;
-        }
-        .active {
-          background: #ebf479;
-          color: #000000;
-        }
-      }
-      .page-right-switch {
-        position: absolute;
-        right: 0;
-        top: 0;
-        border: 1px solid #5e617e;
-        padding: 4px;
-        display: flex;
-        border-radius: 8px;
-        .right-switch-item {
-          font-size: 12px;
-          color: #5e617e;
-          border-radius: 6px;
-          width: 24px;
-          height: 24px;
-          line-height: 24px;
-          text-align: center;
-          align-items: center;
-        }
-        .active {
-          background: #5e617e;
-          color: #000000;
-        }
-      }
-    }
-    .tbd-content {
-      .tbd-content-item {
-        display: inline-block;
-        text-decoration: none;
-        color: #979abe;
-        width: 300px;
-        height: 215px;
-        margin-right: 24px;
-        margin-bottom: 28px;
-        background: linear-gradient(180deg, #373a53 0%, #13141b 100%);
-        border-radius: 20px;
-        padding: 20px;
-        .content-item-title {
-          display: flex;
-          margin-bottom: 16px;
-          .item-title-icon {
-            margin-right: 14px;
-            img {
-              width: 72px;
-              height: 72px;
-            }
-          }
-          .item-title-text {
-            h1 {
-              font-size: 20px;
-              font-weight: 700;
-              color: #ffffff;
-              margin-bottom: 4px;
-            }
-            p {
-              font-size: 12px;
-              margin-bottom: 6px;
-            }
-            .title-text-icon {
-              display: flex;
-              img {
-                width: 20px;
-                height: 20px;
-                margin-right: 4px;
-              }
-            }
-          }
-        }
-        .content-item-text {
+          line-height: 19px;
+          letter-spacing: 0em;
           text-align: left;
-          margin-bottom: 20px;
-          height: 50px;
-          p {
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 3;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            font-size: 14px;
-            line-height: 17px;
-            letter-spacing: 0em;
-          }
+          display: inline-block;
+          color: #ffffff;
         }
         .content-item-tag {
           display: flex;
@@ -309,113 +369,55 @@ const NewHomePage: NextPageWithLayout = () => {
         }
       }
     }
-    .tbd-table-content {
-      width: 90%;
-      border: 1px solid rgba(52, 56, 56, 1);
-      border-radius: 32px;
-      padding: 20px;
-      background: linear-gradient(180deg, #141414 0%, #141414 100%), linear-gradient(0deg, #343838, #343838);
-      color: rgba(151, 154, 190, 1);
-      font-weight: 400;
-      table {
-        width: 100%;
-        tr th {
-          font-weight: 400;
-        }
-        tr td {
-          border-bottom: 1px solid rgba(52, 56, 56, 1);
-          padding: 12px 2px;
-          img {
-            width: 42px;
-            height: 42px;
-            margin-right: 10px;
-          }
-          h1 {
-            font-family: Gantari;
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 19px;
-            letter-spacing: 0em;
-            text-align: left;
-            display: inline-block;
-            color: #ffffff;
-          }
-          .content-item-tag {
-            display: flex;
-            .item-tag-item {
-              margin-right: 10px;
-              padding: 2px 8px;
-              font-size: 12px;
-              color: #000000;
-              border-radius: 30px;
-            }
-            .Dexes {
-              background: #acfced;
-            }
-            .Bridge {
-              background: #e3e99d;
-            }
-            .Lending {
-              background: #adffb5;
-            }
-            .Liquidity {
-              background: #aad6ff;
-            }
-            .Staking {
-              background: #c1bfff;
-            }
-            .Yield {
-              background: #f9b5e6;
-            }
-          }
-        }
-      }
-    }
-  `;
+  }
+`;
 
-  const Search = styled.div`
-    margin-bottom: 26px;
-    input {
-      width: 90%;
-      height: 48px;
-      line-height: 48px;
-      background: transparent;
-      border: 1px #373a53 solid;
-      padding-right: 24px;
-      border-radius: 12px;
-      padding: 16px;
-      color: #ffffff;
-    }
-    input:focus {
-      outline: none;
-      color: #ffffff;
-      border: 1px solid rgba(235, 244, 121, 0.3);
-      background: #0d0e12;
-      box-shadow: none;
-    }
+const Search = styled.div`
+  margin-bottom: 26px;
+  input {
+    width: 90%;
+    height: 48px;
+    line-height: 48px;
+    background: transparent;
+    border: 1px #373a53 solid;
+    padding-right: 24px;
+    border-radius: 12px;
+    padding: 16px;
+    color: #ffffff;
+  }
+  input:focus {
+    outline: none;
+    color: #ffffff;
+    border: 1px solid rgba(235, 244, 121, 0.3);
+    background: #0d0e12;
+    box-shadow: none;
+  }
+  img {
+    margin-left: -36px;
+    cursor: pointer;
+  }
+`;
+
+const NewHomePageFooter = styled.div`
+  display: flex;
+  position: absolute;
+  bottom: -50px;
+  left: 25px;
+  .page-connect-item {
+    margin-right: 14px;
     img {
-      margin-left: -36px;
-      cursor: pointer;
+      width: 19px;
+      margin-bottom: 14px;
     }
-  `;
+    p {
+      font-size: 14px;
+      color: rgba(94, 97, 126, 1);
+    }
+  }
+`;
 
-  const NewHomePageFooter = styled.div`
-    display: flex;
-    position: absolute;
-    bottom: -50px;
-    left: 25px;
-    .page-connect-item {
-      margin-right: 14px;
-      img {
-        width: 19px;
-        margin-bottom: 14px;
-      }
-      p {
-        font-size: 14px;
-        color: rgba(94, 97, 126, 1);
-      }
-    }
-  `;
+const NewHomePageContent: NextPageWithLayout = () => {
+  const components = useBosComponents();
 
   const [selectedMenu, setSelectedMenu] = useState(() => {
     return '';
@@ -443,7 +445,6 @@ const NewHomePage: NextPageWithLayout = () => {
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
   });
-
   const handleTabClick = (path: string) => {
     setSelectedTab(path);
   };
@@ -451,7 +452,6 @@ const NewHomePage: NextPageWithLayout = () => {
   const [selectedFunction, setSelectedFunction] = useState<string[]>(() => {
     return [];
   });
-
   const handleFunctionClick = (functionType: string) => {
     if (selectedFunction.includes(functionType)) {
       setSelectedFunction(selectedFunction.filter((type) => type !== functionType));
@@ -460,17 +460,7 @@ const NewHomePage: NextPageWithLayout = () => {
     }
   };
 
-  // useEffect(() => {
-  //   if (typeof window !== 'undefined') {
-  //     window.localStorage.setItem('selectedMenu', selectedMenu);
-  //     window.localStorage.setItem('selectedMedalMenu', selectedMedalMenu);
-  //     // window.localStorage.setItem('selectedTab', selectedTab);
-  //     localStorage.setItem('selectedFunction', JSON.stringify(selectedFunction));
-  //   }
-  // }, [selectedMenu, selectedMedalMenu, selectedFunction]);
-
   const [searchValue, setSearchValue] = useState('');
-
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const keyword = event.target.value;
     setSearchValue(keyword);
@@ -481,6 +471,17 @@ const NewHomePage: NextPageWithLayout = () => {
       (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
       (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
   );
+  const sortedDapps = filteredDapps.sort((a, b) => {
+    const nameA = a.name.toLowerCase();
+    const nameB = b.name.toLowerCase();
+    if (nameA < nameB) {
+      return -1;
+    }
+    if (nameA > nameB) {
+      return 1;
+    }
+    return 0;
+  });
 
   return (
     <NewHomePage>
@@ -609,7 +610,7 @@ const NewHomePage: NextPageWithLayout = () => {
           <>
             {selectedView === 'grid' ? (
               <div className="tbd-content">
-                {filteredDapps
+                {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'Y')
                   .map((dapp, index) => {
                     const href = dapp.dappRoute ? 'dapp/' + dapp.dappRoute : '/';
@@ -655,7 +656,7 @@ const NewHomePage: NextPageWithLayout = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredDapps
+                    {sortedDapps
                       .filter((dapp) => dapp.TBD_TOKEN === 'Y')
                       .map((dapp, index) => (
                         <tr key={index}>
@@ -697,7 +698,7 @@ const NewHomePage: NextPageWithLayout = () => {
           <>
             {selectedView === 'grid' ? (
               <div className="tbd-content">
-                {filteredDapps
+                {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'N')
                   .map((dapp, index) => (
                     <Link
@@ -744,7 +745,7 @@ const NewHomePage: NextPageWithLayout = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {filteredDapps
+                    {sortedDapps
                       .filter((dapp) => dapp.TBD_TOKEN === 'N')
                       .map((dapp, index) => (
                         <tr key={index}>
@@ -801,6 +802,6 @@ const NewHomePage: NextPageWithLayout = () => {
   );
 };
 
-NewHomePage.getLayout = useDefaultLayout;
+NewHomePageContent.getLayout = useDefaultLayout;
 
-export default NewHomePage;
+export default NewHomePageContent;

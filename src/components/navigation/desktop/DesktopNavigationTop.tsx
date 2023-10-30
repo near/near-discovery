@@ -26,10 +26,11 @@ const Container = styled.div`
   position: sticky;
   top: 0;
   width: 100%;
-
-  background-color: rgba(0, 0, 0, 0.9);
-
   z-index: 1;
+  background: #000000;
+  &.show-border {
+    border-bottom: 1px solid #343838;
+  }
 
   .container-nav {
     display: flex;
@@ -187,6 +188,7 @@ const extendPaths = {
 };
 
 export const DesktopNavigationTop = () => {
+  
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
   const router = useRouter();
@@ -194,6 +196,20 @@ export const DesktopNavigationTop = () => {
 
   const [showSubmenu, setShowSubmenu] = useState(false);
   const [activeParentIndex, setActiveParentIndex] = useState(-1);
+  const [showBorder, setShowBorder] = useState(false);
+  const hasSubmenu = activeParentIndex === 1 || activeParentIndex === 2;
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      setShowBorder(scrollTop > 0 && !hasSubmenu);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [hasSubmenu]);
 
   useEffect(() => {
     const parentIndex = menuData.findIndex(
@@ -233,7 +249,7 @@ export const DesktopNavigationTop = () => {
   };
 
   return (
-    <Container>
+    <Container className={showBorder ? 'show-border' : ''}>
       <div className="container-nav">
         <LogoContainer>
           <img src={logoUrl} alt="" />

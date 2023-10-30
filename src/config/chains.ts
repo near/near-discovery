@@ -106,7 +106,7 @@ export default {
   100: {
     chainId: 100,
     chainName: 'Gnosis',
-    icon: 'https://ipfs.near.social/ipfs/bafkreigl7y5n7xqlasn4wokkhxk3hoostz2u7qgvezvzfni2b6g2r4ayfu',
+    icon: 'https://ipfs.near.social/ipfs/bafkreiazsyndhevopspbjue3ztz5r5mypuzpa5gjragm3hdg6ey33rfheu',
     nativeCurrency: { name: 'XDAI', symbol: 'XDAI', decimals: 18 },
     rpcUrls: ['https://rpc.ankr.com/gnosis'],
     blockExplorers: 'https://gnosisscan.io/',
