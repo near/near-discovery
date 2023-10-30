@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-
 import useAccount from '@/hooks/useAccount';
-import * as http from '@/utils/http';
-
+import { get } from '@/utils/http';
 import type { InviteCodeRecord } from '../types';
 
 export default function (show: boolean) {
@@ -14,7 +12,7 @@ export default function (show: boolean) {
     const getList = async () => {
       try {
         setLoading(true);
-        const res = await http.get(`/api/invite/get-address-code/${account}`);
+        const res = await get(`/api/invite/get-address-code/${account}`);
         setList(res?.data?.map((record: InviteCodeRecord) => ({ code: record.code, is_used: record.is_used })));
       } finally {
         setLoading(false);

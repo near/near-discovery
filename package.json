@@ -55,7 +55,6 @@
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.9.0",
     "classnames": "^2.3.2",
-    "cookies-next": "^4.0.0",
     "eslint": "8.39.0",
     "eslint-config-next": "13.3.4",
     "ethers": "^5.5.0",

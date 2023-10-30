@@ -7,8 +7,6 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { NearOrgHomePage } from '@/components/near-org/NearOrg.HomePage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout, useSimpleLayout } from '@/hooks/useLayout';
-import { useAuthStore } from '@/stores/auth';
-import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import NewHomePage from './homePage';

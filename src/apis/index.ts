@@ -77,8 +77,14 @@ export const inviteCodeActivate = async (account: string, code: string) => {
       address: account,
       code,
     });
-    return !!res.data?.is_success;
+    return {
+      isSuccess: !!res.data?.is_success,
+      errorMsg: res.msg,
+    };
   } catch (error) {
-    return false;
+    return {
+      isSuccess: false,
+      errorMsg: '',
+    };
   }
 };

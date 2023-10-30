@@ -1,7 +1,6 @@
 import Big from 'big.js';
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
-
 import LoadingIcon from '@/components/Icons/Loading';
 import { chainCofig } from '@/config/bridge';
 import useApprove from '@/hooks/useApprove';
