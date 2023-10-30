@@ -9,6 +9,7 @@ import useAccount from '@/hooks/useAccount';
 import { useAccountCheckerStore } from '@/stores/accountChecker';
 import { useLayoutStore } from '@/stores/layout';
 import { useSearchParams } from 'next/navigation';
+import { dapps } from '@/config/dapps';
 
 const BackRoute = styled.div`
   /* position: absolute; */
@@ -231,6 +232,13 @@ export const DesktopNavigationTop = () => {
   const accountCheckerStore = useAccountCheckerStore();
   const currentPath = router.pathname;
 
+  const query = router.query;
+  // console.log('query: ', query, currentPath);
+
+  const dappRoute = query.dappRoute;
+
+  const dappConfig = dapps.find((item) => typeof dappRoute === 'string' && item.dappRoute.indexOf(dappRoute) > -1);
+
   const [showSubmenu, setShowSubmenu] = useState(false);
   const [activeParentIndex, setActiveParentIndex] = useState(-1);
   const [showBorder, setShowBorder] = useState(false);
@@ -238,9 +246,9 @@ export const DesktopNavigationTop = () => {
 
   const search = useSearchParams();
 
-  const dappLogo = search.get('logo');
+  const dappLogo = search.get('logo') || dappConfig?.logo;
 
-  const name = search.get('name');
+  const name = search.get('name') || dappConfig?.name;
 
   useEffect(() => {
     const handleScroll = () => {
