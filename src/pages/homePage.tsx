@@ -621,7 +621,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                 {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'Y')
                   .map((dapp, index) => {
-                    const href = dapp.dappRoute || '/';
+                    const href = dapp.dappRoute + `?name=${dapp.name}&logo=${dapp.logo}` || '/';
                     return (
                       <Link className="tbd-content-item" key={index} href={href}>
                         <div className="content-item-title">
@@ -671,7 +671,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                           key={index}
                           onClick={(e) => {
                             const href = dapp.dappRoute || '/';
-                            router.push(href);
+                            router.push(href + `?name=${dapp.name}&logo=${dapp.logo}`);
                           }}
                         >
                           <td>
@@ -715,7 +715,11 @@ const NewHomePageContent: NextPageWithLayout = () => {
                 {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'N')
                   .map((dapp, index) => (
-                    <Link className="tbd-content-item" key={index} href={dapp.dappRoute || '/'}>
+                    <Link
+                      className="tbd-content-item"
+                      key={index}
+                      href={dapp.dappRoute + `?name=${dapp.name}&logo=${dapp.logo}` || '/'}
+                    >
                       <div className="content-item-title">
                         <div className="item-title-icon">
                           <img src={dapp.logo} alt="" />
@@ -761,7 +765,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                         <tr
                           key={index}
                           onClick={(e) => {
-                            const href = dapp.dappRoute || '/';
+                            const href = dapp.dappRoute + `?name=${dapp.name}&logo=${dapp.logo}` || '/';
                             router.push(href);
                           }}
                         >

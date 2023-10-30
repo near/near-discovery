@@ -8,6 +8,45 @@ import { menuData } from '@/data/menuData';
 import useAccount from '@/hooks/useAccount';
 import { useAccountCheckerStore } from '@/stores/accountChecker';
 import { useLayoutStore } from '@/stores/layout';
+import { useSearchParams } from 'next/navigation';
+
+const BackRoute = styled.div`
+  /* position: absolute; */
+  width: 100%;
+
+  border-bottom: 1px solid #343838;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 6px;
+
+  .back-icon {
+    padding-left: 100px;
+    padding-right: 8px;
+  }
+
+  .dapp-logo {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+  }
+
+  .dapp-name {
+    font-size: 16px;
+    font-style: italic;
+    font-weight: 900;
+    line-height: 24px;
+    letter-spacing: 0em;
+    text-align: left;
+    color: var(--button-color);
+  }
+`;
+
+const backIcon = (
+  <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M7 12L2 6.5L7 1" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+  </svg>
+);
 
 const LoginContainer = styled.div`
   width: auto;
@@ -187,7 +226,6 @@ const extendPaths = {
 };
 
 export const DesktopNavigationTop = () => {
-  
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
   const router = useRouter();
@@ -198,6 +236,12 @@ export const DesktopNavigationTop = () => {
   const [activeParentIndex, setActiveParentIndex] = useState(-1);
   const [showBorder, setShowBorder] = useState(false);
   const hasSubmenu = activeParentIndex === 1 || activeParentIndex === 2;
+
+  const search = useSearchParams();
+
+  const dappLogo = search.get('logo');
+
+  const name = search.get('name');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -345,6 +389,18 @@ export const DesktopNavigationTop = () => {
             );
           })}
         </div>
+      )}
+
+      {dappLogo && name && (
+        <BackRoute>
+          <Link className="back-icon" href="/">
+            {backIcon}
+          </Link>
+
+          <img className="dapp-logo" src={dappLogo} />
+
+          <div className="dapp-name">{name}</div>
+        </BackRoute>
       )}
     </Container>
   );
