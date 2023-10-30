@@ -382,7 +382,7 @@ export const dapps = [
     description: 'QuickSwap is a next-generation layer-2 decentralized exchange and Automated Market Maker.',
     tags: ['Dexes'],
     type: 'dex',
-    on_chain_ids: [137], // get chain config from chains.ts, TODO:
+    on_chain_ids: [137,1101], // get chain config from chains.ts, TODO:
     DEFAULT_CHAIN_ID: 137,
     dappSrc: {
       137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
@@ -489,7 +489,7 @@ export const dapps = [
     name: 'Agave',
     dappRoute: '', //TODO:
     logo: 'https://ipfs.near.social/ipfs/bafkreicagi5msm7flwzqkgemb6odyx6r4jbhnvrhustzyuboznh6rr6bbu',
-    TBD_TOKEN: 'Y',
+    TBD_TOKEN: 'N',
     description: 'Agave, in a few words, is Aave on xDai.',
     tags: ['Lending'],
     type: 'lending',
@@ -556,7 +556,7 @@ export const dapps = [
     name: 'LayerBank',
     dappRoute: '', //TODO:
     logo: 'https://ipfs.near.social/ipfs/bafkreidqfdregtnl6vbpuvdp5g2fvekuz24zti4owzgjzkgz5n7nfmoafq',
-    TBD_TOKEN: 'Y',
+    TBD_TOKEN: 'N',
     description: 'The Ultimate Money Market for All EVM-Layers',
     tags: ['Lending'],
     type: 'lending',

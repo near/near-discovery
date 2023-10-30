@@ -47,9 +47,9 @@ export default {
   },
   56: {
     chainId: 56,
-    chainName: 'BNB',
-    icon: 'https://ipfs.near.social/ipfs/bafkreiddwc2z4cctwwjro5w25w6avavdghg3xcjjvtzxkvm2bntwyzlrqq',
-    nativeCurrency: { name: 'BNB', symbol: 'BNB', decimals: 18 },
+    chainName: 'BSC',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibtexscwwgqupgb7anrseqdpogvt4cckyv4kavr7o3jgtcqzjkx5m',
+    nativeCurrency: { name: 'BSC', symbol: 'BSC', decimals: 18 },
     rpcUrls: ['https://binance.llamarpc.com'],
     blockExplorers: 'https://bscscan.com',
   },

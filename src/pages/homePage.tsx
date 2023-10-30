@@ -298,13 +298,13 @@ const NewHomePage: NextPageWithLayout = () => {
             background: #adffb5;
           }
           .Liquidity {
-            background: #aad6ff;  
+            background: #aad6ff;
           }
           .Staking {
-            background: #C1BFFF;
+            background: #c1bfff;
           }
           .Yield {
-            background: #F9B5E6;
+            background: #f9b5e6;
           }
         }
       }
@@ -475,17 +475,12 @@ const NewHomePage: NextPageWithLayout = () => {
     const keyword = event.target.value;
     setSearchValue(keyword);
   };
-  console.log('dapps:', dapps);
-  console.log('selectedFunction:', selectedFunction);
-  console.log('selectedMenu:', selectedMenu);
-  console.log('Before filter:', dapps.length, dapps);
   const filteredDapps = dapps.filter(
     ({ name, tags, on_chain_ids }) =>
       name.toLowerCase().includes(searchValue.toLowerCase()) &&
       (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
       (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
   );
-  console.log('After filter:', filteredDapps.length, filteredDapps);
 
   return (
     <NewHomePage>
@@ -628,13 +623,9 @@ const NewHomePage: NextPageWithLayout = () => {
                             <h1>{dapp.name}</h1>
                             <p>Token TBD🔥</p>
                             <div className="title-text-icon">
-                              {chains.hasOwnProperty(dapp.DEFAULT_CHAIN_ID) ? (
-                                <>
-                                  <img src={chains[dapp.DEFAULT_CHAIN_ID].icon} alt="" />
-                                </>
-                              ) : (
-                                <></>
-                              )}
+                              {dapp.on_chain_ids.map((chainId, index) => (
+                                <img key={index} src={chains[chainId].icon} alt="" />
+                              ))}
                             </div>
                           </div>
                         </div>
