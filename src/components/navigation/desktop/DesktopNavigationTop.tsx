@@ -14,7 +14,6 @@ const BackRoute = styled.div`
   /* position: absolute; */
   width: 100%;
 
-  border-bottom: 1px solid #343838;
   display: flex;
   align-items: center;
   gap: 12px;
