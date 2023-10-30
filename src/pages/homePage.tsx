@@ -298,7 +298,13 @@ const NewHomePage: NextPageWithLayout = () => {
             background: #adffb5;
           }
           .Liquidity {
-            background: #aad6ff;
+            background: #aad6ff;  
+          }
+          .Staking {
+            background: #C1BFFF;
+          }
+          .Yield {
+            background: #F9B5E6;
           }
         }
       }
