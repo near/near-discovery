@@ -24,7 +24,7 @@ export default {
   1: {
     chainId: 1,
     chainName: 'Ethereum',
-    icon: 'https://ipfs.near.social/ipfs/bafkreiashn3iawpvw66ejmyo3asdn4m5x25haijwyhubxjuzw7g7c7qq7a',
+    icon: 'https://ipfs.near.social/ipfs/bafkreicjsbkvvcxahxjejkctwopcnmzbeskxhfrkg7lyawhkhzrxcmvgfy',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://eth.llamarpc.com'],
     blockExplorers: 'https://etherscan.io',
@@ -32,7 +32,7 @@ export default {
   42161: {
     chainId: 42161,
     chainName: 'Arbitrum',
-    icon: 'https://ipfs.near.social/ipfs/bafkreicbrc7qqle4c7hmdcjhw23ciyund3zy42wlm3akfa6eafho6tm43e',
+    icon: 'https://ipfs.near.social/ipfs/bafkreiajyg2iof2wygtgromy6a2yfl2fqavfy235k7afc4frr7xnljvu2a',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://eth.llamarpc.com'],
     blockExplorers: 'https://arbiscan.io',
@@ -40,7 +40,7 @@ export default {
   43114: {
     chainId: 43114,
     chainName: 'Avalanche',
-    icon: 'https://ipfs.near.social/ipfs/bafkreid6iw3oxfkyps37bts62rw33vr6q4aekwa36bfq7ywdhsiiqh5po4',
+    icon: 'https://ipfs.near.social/ipfs/bafkreig47jh4spznafxdn2nemwt5uij7pgimfpbjrt5m4cwbi4dccfvvpe',
     nativeCurrency: { name: 'AVAX', symbol: 'AVAX', decimals: 18 },
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
     blockExplorers: 'https://snowtrace.io',
@@ -80,7 +80,7 @@ export default {
   137: {
     chainId: 137,
     chainName: 'Polygon',
-    icon: 'https://ipfs.near.social/ipfs/bafkreicmrfbaejeef4br5g6fekzhcrrc2rfw4hcmusie2t2m4qsl45x2qe',
+    icon: 'https://ipfs.near.social/ipfs/bafkreic6p22qh3ytwkpmv5hq6a3ppdq7xoyvnmeog3wbtugnao434q6d7a',
     nativeCurrency: { name: 'MATIC', symbol: 'MATIC', decimals: 18 },
     rpcUrls: ['https://polygon.llamarpc.com'],
     blockExplorers: 'https://polygonscan.com',
@@ -89,7 +89,7 @@ export default {
   1101: {
     chainId: 1101,
     chainName: 'Polygon zkEVM',
-    icon: 'https://ipfs.near.social/ipfs/bafkreicmrfbaejeef4br5g6fekzhcrrc2rfw4hcmusie2t2m4qsl45x2qe',
+    icon: 'https://ipfs.near.social/ipfs/bafkreie5b65e7cp7jtvhrwgibvoqpf7ekj4v7jgo2egjr3qmfsl3p4ulam',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://zkevm-rpc.com'],
     blockExplorers: 'https://zkevm.polygonscan.com',
@@ -97,7 +97,7 @@ export default {
   324: {
     chainId: 324,
     chainName: 'zkSync',
-    icon: 'https://ipfs.near.social/ipfs/bafkreido2creciicfwo7ceojij2kmn524c63pthhteez6higs5msym4rg4',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibcq6agazqmv5euwf355v7x7hlinz3jkuins2bkfffdbp3jgbjj6u',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://mainnet.era.zksync.io'],
     blockExplorers: 'https://explorer.zksync.io/',
