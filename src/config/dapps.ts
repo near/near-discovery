@@ -3,7 +3,7 @@ import type { Token } from '@/types';
 export const dapps = [
   {
     name: 'Agni Finance',
-    dappRoute: 'agni-finance',
+    dappRoute: '/dapp/agni-finance',
     TBD_TOKEN: 'Y',
     description: 'High-Capital Efficiency AMM-based DEX & Launchpad', // dapp radar
     tags: ['Dexes'],
@@ -17,7 +17,7 @@ export const dapps = [
   },
   {
     name: 'Ammos Finance',
-    dappRoute: 'agni-finance',
+    dappRoute: '/dapp/agni-finance',
     TBD_TOKEN: 'Y',
     description: 'Ultra capital-efficient decentralised exchange with low fees, built on Mantle Layer 2.', // dapp radar
     tags: ['Dexes'],
@@ -31,7 +31,7 @@ export const dapps = [
   },
   {
     name: 'FusionX V3',
-    dappRoute: 'fusionx-v3',
+    dappRoute: '/dapp/fusionx-v3',
     TBD_TOKEN: 'Y',
     logo: 'https://ipfs.near.social/ipfs/bafkreic6yr27mq42yx6o4fklwbkl5r6dvwc2x5elri6zczye7uskvrlc5e',
     description:
@@ -47,7 +47,7 @@ export const dapps = [
 
   {
     name: 'iZiSwap',
-    dappRoute: 'iziswap',
+    dappRoute: '/dapp/iziswap',
     TBD_TOKEN: 'N',
     description: 'A Multi-chain DeFi Protocol Providing One-Stop Liquidity as a Service', // dapp radar
     tags: ['Dexes'],
@@ -64,7 +64,7 @@ export const dapps = [
 
   {
     name: 'Syncswap',
-    dappRoute: 'Syncswap',
+    dappRoute: '/dapp/Syncswap',
     TBD_TOKEN: 'Y',
     description:
       'Powered by zero-knowledge technology, SyncSwap brings more people easy-to-use and low-cost DeFi with complete Ethereum security.',
@@ -81,7 +81,7 @@ export const dapps = [
 
   {
     name: 'Apeswap',
-    dappRoute: 'apeswap',
+    dappRoute: '/dapp/apeswap',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreidwg3iip6lpy24x73e2eopoyib6sc36cqwaljfnjig4nnrelj7a5a',
     description: "Jump in to decentralized finance with ApeSwap's easy-to-use DeFi Hub", // dapp radar
@@ -97,7 +97,7 @@ export const dapps = [
   },
   {
     name: 'BaseSwap',
-    dappRoute: 'baseSwap',
+    dappRoute: '/dapp/baseSwap',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreia6o7raj6x55wmkt4hxjjul6ydz2oq32olfgco4xw67xzgvxsbxa4',
     description:
@@ -112,7 +112,7 @@ export const dapps = [
   },
   {
     name: 'Synthswap',
-    dappRoute: 'Synthswap',
+    dappRoute: '/dapp/Synthswap',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreieeeqe7h7ehtxt3jjaqwyqxgzdpqjzv5vkk3zbx7lsh7kxqtv547m',
     description: 'Synthswap is the leading DEX on Base, completely audited by PeckShield.',
@@ -127,7 +127,7 @@ export const dapps = [
 
   {
     name: 'SwapBased',
-    dappRoute: 'SwapBased',
+    dappRoute: '/dapp/SwapBased',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreidhivnirorddkdudcd6oca6gvhps66audqn3lppsoehlyvorf6p4i',
     description:
@@ -143,7 +143,7 @@ export const dapps = [
 
   {
     name: 'RocketSwap',
-    dappRoute: 'rocketswap',
+    dappRoute: '/dapp/rocketswap',
     TBD_TOKEN: 'N',
     description:
       'RocketSwap is the first community initiated and driven decentralized exchange on Base Mainnet Network', // dapp radar
@@ -159,7 +159,7 @@ export const dapps = [
 
   {
     name: 'Biswap',
-    dappRoute: 'biSwap',
+    dappRoute: '/dapp/biSwap',
     TBD_TOKEN: 'N',
     description: 'Boost capital efficiency with flexible trading & earning features on Biswap', // dapp radar
     tags: ['Dexes'],
@@ -174,7 +174,7 @@ export const dapps = [
 
   {
     name: 'THENA V1',
-    dappRoute: 'THENA-V1',
+    dappRoute: '/dapp/THENA-V1',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreid3zf4c6chl56k3zz53u6jajnhgha3c5trrixgczmzpqpedhkhfxe',
     description: 'THENA is THE native liquidity layer & AMM on BNB Chain',
@@ -189,7 +189,7 @@ export const dapps = [
 
   {
     name: 'Orion',
-    dappRoute: 'orion',
+    dappRoute: '/dapp/orion',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreid76v6okuhmrsj7qztgnvnxedob3ibrttwiaivnxaxptnow23y6t4',
     description: 'The CEXs you love with the wallet you trust. Only on Orion.',
@@ -204,7 +204,7 @@ export const dapps = [
 
   {
     name: 'Camelot',
-    dappRoute: 'camelot',
+    dappRoute: '/dapp/camelot',
     TBD_TOKEN: 'N',
     description: 'An innovative and highly flexible DEX built to support the Arbitrum ecosystem.',
     tags: ['Dexes'],
@@ -219,7 +219,7 @@ export const dapps = [
 
   {
     name: 'Chronos V1',
-    dappRoute: 'chronos-v1',
+    dappRoute: '/dapp/chronos-v1',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreibmy53ll3pjjs2ts7lvhlmcsoaped5qipdai3dgyb4xx3uxksdtlm',
     description: 'A community driven liquidity layer & AMM on Arbitrum',
@@ -234,7 +234,7 @@ export const dapps = [
 
   {
     name: 'Spartadex',
-    dappRoute: 'Spartadex',
+    dappRoute: '/dapp/Spartadex',
     TBD_TOKEN: 'N',
     description: 'The first DEX with gamified yield',
     logo: 'https://ipfs.near.social/ipfs/bafkreibo6w6552c3xwppsaqmnfku4pforczds45ueibsrt34zj2xcpi76u',
@@ -249,7 +249,7 @@ export const dapps = [
 
   {
     name: 'SpaceFi',
-    dappRoute: 'SpaceFi',
+    dappRoute: '/dapp/SpaceFi',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreihlykr7jjajj4ddm6uxxu3n44n2p7s4cc2issd46fnr37kwco7alu',
     description:
@@ -265,7 +265,7 @@ export const dapps = [
 
   {
     name: 'Velocore V1',
-    dappRoute: 'Velocore-V1',
+    dappRoute: '/dapp/Velocore-V1',
     logo: 'https://ipfs.near.social/ipfs/bafkreifeodttoaen6redxzqxz7jvqdmsnmncsnrmjxtxgporsacy4ku6ea',
     TBD_TOKEN: 'N',
     description:
@@ -281,7 +281,7 @@ export const dapps = [
 
   {
     name: 'veSync',
-    dappRoute: 'veSync',
+    dappRoute: '/dapp/veSync',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreigwgzvlmztx4a4z4qcwyrxof23gghs7zl4ujqqztgmezgydnsgape',
     description:
@@ -297,7 +297,7 @@ export const dapps = [
 
   {
     name: 'Ramses V1',
-    dappRoute: 'ramses-v1',
+    dappRoute: '/dapp/ramses-v1',
     TBD_TOKEN: 'N',
     description: 'The native liquidity layer on Arbitrum',
     tags: ['Dexes'],
@@ -312,7 +312,7 @@ export const dapps = [
 
   {
     name: 'Ramses V2',
-    dappRoute: 'ramses-v2',
+    dappRoute: '/dapp/ramses-v2',
     logo: 'https://ipfs.near.social/ipfs/bafkreidgayoqzg4kqxz6eag4eridejkx3rszflfwbnitfqfohlmpk54w3i',
     TBD_TOKEN: 'N',
     description: 'The native liquidity layer on Arbitrum',
@@ -327,7 +327,7 @@ export const dapps = [
 
   {
     name: 'Honeyswap',
-    dappRoute: 'honeyswap',
+    dappRoute: '/dapp/honeyswap',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreiekp7osfgpzfcboawj7yj3mirxxaxwcbvdkb5mgpbui6boz47dhoy',
     description:
@@ -344,7 +344,7 @@ export const dapps = [
 
   {
     name: 'HorizonDEX',
-    dappRoute: 'horizonDEX',
+    dappRoute: '/dapp/horizonDEX',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreiekp7osfgpzfcboawj7yj3mirxxaxwcbvdkb5mgpbui6boz47dhoy',
     description: 'All current DEXs on BASE & LINEA are built on the standard Uniswap-V2 model.',
@@ -360,7 +360,7 @@ export const dapps = [
 
   {
     name: 'PearlFi',
-    dappRoute: 'pearlFi',
+    dappRoute: '/dapp/pearlFi',
     logo: 'https://ipfs.near.social/ipfs/bafkreihltljvxhpi7zszyc67wsinxzcj2fakufti6koeoelst74av7j4eq',
     TBD_TOKEN: 'N',
     description:
@@ -376,13 +376,13 @@ export const dapps = [
 
   {
     name: 'QuickSwap',
-    dappRoute: 'quickSwap',
+    dappRoute: '/dapp/quickSwap',
     TBD_TOKEN: 'N',
     logo: 'https://ipfs.near.social/ipfs/bafkreibox4d5bhaw2hvgf4m42acvuvzbmdaufoy53grhffyuaz5pafcbse',
     description: 'QuickSwap is a next-generation layer-2 decentralized exchange and Automated Market Maker.',
     tags: ['Dexes'],
     type: 'dex',
-    on_chain_ids: [137,1101], // get chain config from chains.ts, TODO:
+    on_chain_ids: [137, 1101], // get chain config from chains.ts, TODO:
     DEFAULT_CHAIN_ID: 137,
     dappSrc: {
       137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
@@ -392,7 +392,7 @@ export const dapps = [
 
   {
     name: 'Retro',
-    dappRoute: 'retro',
+    dappRoute: '/dapp/retro',
     logo: 'https://ipfs.near.social/ipfs/bafkreiaqpbeth37uxmbe6iwqduoad76dncozbuoa3bwgcbcxcmputkuzfu',
     TBD_TOKEN: 'N',
     description: 'Retro is more than just a decentralized exchange and automated market maker.',
@@ -407,7 +407,7 @@ export const dapps = [
 
   {
     name: 'Maia V3',
-    dappRoute: 'maia-v3',
+    dappRoute: '/dapp/maia-v3',
     logo: 'https://ipfs.near.social/ipfs/bafkreibdq7fvaobgp6tuna5k2s7u43mkecy4jeumbfw3lgwrd2ft2uftoe',
     TBD_TOKEN: 'N',
     description: 'Maia is the yield powerhouse of Metis with its community rooted in this Ethereum L2.',
@@ -422,7 +422,7 @@ export const dapps = [
 
   {
     name: 'Netswap',
-    dappRoute: 'netswap',
+    dappRoute: '/dapp/netswap',
     logo: 'https://ipfs.near.social/ipfs/bafkreicoh23atiwall72voi6xchtqq4cmvfm2z5ge257ynw5hvkspyod2e',
     TBD_TOKEN: 'N',
     description: 'One-stop trade, earn and win crypto on our decentralized platform based on the MetisDAO ecosystem',
@@ -437,7 +437,7 @@ export const dapps = [
 
   {
     name: 'Balancer',
-    dappRoute: 'balancer', //TODO:
+    dappRoute: '/dapp/balancer', //TODO:
     logo: 'https://ipfs.near.social/ipfs/bafkreie7ikpsbxhjkvwuhwhfyt7exssk7m36wnjdeasnvpxn4lzxjeq4da',
     TBD_TOKEN: 'N',
     description:
@@ -456,7 +456,7 @@ export const dapps = [
   },
   {
     name: 'Pancake Swap',
-    dappRoute: 'pancake-swap',
+    dappRoute: '/dapp/pancake-swap',
     logo: 'https://ipfs.near.social/ipfs/bafkreiag326f7l2dfyoy7iivyr27e34ockcu5yktb75xvz2ppnn5dfyap4',
     TBD_TOKEN: 'N',
     description: 'PancakeSwap helps you make the most out of your crypto in three ways: Trade, Earn, and Win.',
@@ -474,7 +474,11 @@ export const dapps = [
 
   {
     name: '0vix',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Polygon.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: '0vix',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreidhzpw4f3j2ufxxnqapfc4zyeythbds4uop44dbgnfnk2ymqgp7aa',
     TBD_TOKEN: 'Y',
     description: '0VIX is a Decentralized Finance (DeFi) liquidity market protocol, built on Polygon.',
@@ -487,7 +491,11 @@ export const dapps = [
 
   {
     name: 'Agave',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Gnosis.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Agave',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreicagi5msm7flwzqkgemb6odyx6r4jbhnvrhustzyuboznh6rr6bbu',
     TBD_TOKEN: 'N',
     description: 'Agave, in a few words, is Aave on xDai.',
@@ -500,7 +508,11 @@ export const dapps = [
 
   {
     name: 'Benqi',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Avalanche.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Benqi',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreibwn7ekxtgnkczolfnwpjemz4hdm27mftcnd4yqjocvdvlw7nb4sm',
     TBD_TOKEN: 'N',
     description: 'The DeFi and Web3 protocol for all.',
@@ -513,7 +525,11 @@ export const dapps = [
 
   {
     name: 'C.R.E.A.M.',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'C.R.E.A.M.',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreig6xa6pd2za7xxssj5ul7xfx7mvfayjnqvxvxgmv6hgeb6pya43cm',
     TBD_TOKEN: 'N',
     description:
@@ -527,7 +543,11 @@ export const dapps = [
 
   {
     name: 'Granary Finance',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Granary Finance',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreiaudgxte56nl6eedzg6inp4w3xobp25chpayt3ojuiblhzkzgsifq',
     TBD_TOKEN: 'Y',
     description:
@@ -541,7 +561,11 @@ export const dapps = [
 
   {
     name: 'Iron Bank',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Avalanche.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Iron Bank',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreibj5orc77anv4ys5dpallk4u27e52gvosxcdbcm5curxlw3ffmhsy',
     TBD_TOKEN: 'N',
     description: 'A Decentralized Lending Platform focused on Capital Efficiency',
@@ -554,7 +578,11 @@ export const dapps = [
 
   {
     name: 'LayerBank',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Linea.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'LayerBank',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreidqfdregtnl6vbpuvdp5g2fvekuz24zti4owzgjzkgz5n7nfmoafq',
     TBD_TOKEN: 'N',
     description: 'The Ultimate Money Market for All EVM-Layers',
@@ -567,7 +595,11 @@ export const dapps = [
 
   {
     name: 'Lendle',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Mantle.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Lendle',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreih5p5podfnagabzxizmsje2y2qhccfjspxuvgkcexkunqsy7v7j64',
     TBD_TOKEN: 'N',
     description: 'Earn interest on your cryptos with the #1 lending and borrowing platform on Mantle Network',
@@ -580,7 +612,11 @@ export const dapps = [
 
   {
     name: 'Moonwell',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Base.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Lendle',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreih2qmod4k2buqgbg4yayyo4t353za2tknxw5xb272x4fekqtbwjve',
     TBD_TOKEN: 'N',
     description:
@@ -594,7 +630,11 @@ export const dapps = [
 
   {
     name: 'mendi finance',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Linea.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'mendi finance',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreifziawsf2l5nvz5eak2csyhp3ln7ldij53clfaxptbx7353uwone4',
     TBD_TOKEN: 'N',
     description:
@@ -608,7 +648,11 @@ export const dapps = [
 
   {
     name: 'Radiant',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Radiant',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreihivtnhg2bi44rrmuxyefnobbqnons23ha5bwzekfqatew4z2bda4',
     TBD_TOKEN: 'N',
     description: 'Earn Interest & Borrow Assets Cross-Chain, Seamlessly',
@@ -621,7 +665,11 @@ export const dapps = [
 
   {
     name: 'Reactorfusion',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/zkSync.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Reactorfusion',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreicvlu4cwvtx6vwasc2vzzfnkmmkgrwn34zk42mogacvklxh3yav7e',
     TBD_TOKEN: 'N',
     description: 'ReactorFusion is a decentralized, non-custodial lending protocol.',
@@ -633,7 +681,11 @@ export const dapps = [
   },
   {
     name: 'Sonne',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Optimism.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Sonne',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreida3sat55yql3apjhngucnilyf7qck6ji32pekkoc2rrg4habf4va',
     TBD_TOKEN: 'N',
     description:
@@ -646,7 +698,11 @@ export const dapps = [
   },
   {
     name: 'Venus',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Bsc.All-in-one', //TODO:
+    extendProps: {
+      defaultDapp: 'Venus',
+      defaultTab: 'Lending',
+    },
     logo: 'https://ipfs.near.social/ipfs/bafkreib4zhl7kkpllunevcepxzmrge75halcj57th7ksxkpf5bqcxzciy4',
     TBD_TOKEN: 'N',
     description: 'Simple and powerful community-driven finance for the entire globe.',
@@ -659,7 +715,7 @@ export const dapps = [
 
   {
     name: 'Pendle',
-    dappRoute: 'pendle', //TODO:
+    dappRoute: '/dapp/pendle', //TODO:
     logo: 'https://ipfs.near.social/ipfs/bafkreiedaqqpcuw6oj5mao263fizx3gksybdmw5x2p7xeka7wngzip5zeu',
     TBD_TOKEN: 'N',
     description:
@@ -675,7 +731,7 @@ export const dapps = [
 
   {
     name: 'Gamma',
-    dappRoute: '', //TODO:
+    dappRoute: 'bluebiu.near/widget/Linea.Liquidity.GAMMA', //TODO:
     logo: 'https://ipfs.near.social/ipfs/bafkreigq2itome7z2xktsxcxsitqkqsdtaulnyhu2z4ekc6udecl7ihfhi',
     TBD_TOKEN: 'N',
     description: 'A protocol for active liquidity management and market making strategies',

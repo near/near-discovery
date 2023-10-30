@@ -9,6 +9,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 import { dapps } from '@/config/dapps';
 import Link from 'next/link';
 import chains from '@/config/chains';
+import { useRouter } from 'next/router';
 
 const pageLeftBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
 const pageBottomBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
@@ -317,6 +318,10 @@ const NewHomePageRight = styled.div`
     color: rgba(151, 154, 190, 1);
     font-weight: 400;
     table {
+      tbody tr {
+        cursor: pointer;
+      }
+
       width: 100%;
       tr th {
         font-weight: 400;
@@ -461,6 +466,9 @@ const NewHomePageContent: NextPageWithLayout = () => {
   };
 
   const [searchValue, setSearchValue] = useState('');
+
+  const router = useRouter();
+
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     const keyword = event.target.value;
     setSearchValue(keyword);
@@ -613,7 +621,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                 {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'Y')
                   .map((dapp, index) => {
-                    const href = dapp.dappRoute ? 'dapp/' + dapp.dappRoute : '/';
+                    const href = dapp.dappRoute || '/';
                     return (
                       <Link className="tbd-content-item" key={index} href={href}>
                         <div className="content-item-title">
@@ -659,7 +667,13 @@ const NewHomePageContent: NextPageWithLayout = () => {
                     {sortedDapps
                       .filter((dapp) => dapp.TBD_TOKEN === 'Y')
                       .map((dapp, index) => (
-                        <tr key={index}>
+                        <tr
+                          key={index}
+                          onClick={(e) => {
+                            const href = dapp.dappRoute || '/';
+                            router.push(href);
+                          }}
+                        >
                           <td>
                             <img src={dapp.logo} alt="" />
                             <h1> {dapp.name}</h1>
@@ -701,17 +715,13 @@ const NewHomePageContent: NextPageWithLayout = () => {
                 {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'N')
                   .map((dapp, index) => (
-                    <Link
-                      className="tbd-content-item"
-                      key={index}
-                      href={!dapp.dappRoute ? '/' : 'dapp/' + dapp.dappRoute}
-                    >
+                    <Link className="tbd-content-item" key={index} href={dapp.dappRoute || '/'}>
                       <div className="content-item-title">
                         <div className="item-title-icon">
                           <img src={dapp.logo} alt="" />
                         </div>
                         <div className="item-title-text">
-                          <h1 style={{marginBottom:'12px'}}>{dapp.name}</h1>
+                          <h1 style={{ marginBottom: '12px' }}>{dapp.name}</h1>
                           {/* <p>Token TBD🔥</p> */}
                           <div className="title-text-icon">
                             {dapp.on_chain_ids.map((chainId, index) => (
@@ -748,7 +758,13 @@ const NewHomePageContent: NextPageWithLayout = () => {
                     {sortedDapps
                       .filter((dapp) => dapp.TBD_TOKEN === 'N')
                       .map((dapp, index) => (
-                        <tr key={index}>
+                        <tr
+                          key={index}
+                          onClick={(e) => {
+                            const href = dapp.dappRoute || '/';
+                            router.push(href);
+                          }}
+                        >
                           <td>
                             <img src={dapp.logo} alt="" />
                             <h1> {dapp.name}</h1>
