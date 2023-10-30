@@ -474,7 +474,7 @@ export const dapps = [
 
   {
     name: '0vix',
-    dappRoute: 'bluebiu.near/widget/Polygon.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Polygon.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: '0vix',
       defaultTab: 'Lending',
@@ -491,7 +491,7 @@ export const dapps = [
 
   {
     name: 'Agave',
-    dappRoute: 'bluebiu.near/widget/Gnosis.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Gnosis.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Agave',
       defaultTab: 'Lending',
@@ -508,7 +508,7 @@ export const dapps = [
 
   {
     name: 'Benqi',
-    dappRoute: 'bluebiu.near/widget/Avalanche.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Avalanche.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Benqi',
       defaultTab: 'Lending',
@@ -525,7 +525,7 @@ export const dapps = [
 
   {
     name: 'C.R.E.A.M.',
-    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'C.R.E.A.M.',
       defaultTab: 'Lending',
@@ -543,7 +543,7 @@ export const dapps = [
 
   {
     name: 'Granary Finance',
-    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Granary Finance',
       defaultTab: 'Lending',
@@ -561,7 +561,7 @@ export const dapps = [
 
   {
     name: 'Iron Bank',
-    dappRoute: 'bluebiu.near/widget/Avalanche.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Avalanche.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Iron Bank',
       defaultTab: 'Lending',
@@ -578,7 +578,7 @@ export const dapps = [
 
   {
     name: 'LayerBank',
-    dappRoute: 'bluebiu.near/widget/Linea.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Linea.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'LayerBank',
       defaultTab: 'Lending',
@@ -595,7 +595,7 @@ export const dapps = [
 
   {
     name: 'Lendle',
-    dappRoute: 'bluebiu.near/widget/Mantle.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Mantle.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Lendle',
       defaultTab: 'Lending',
@@ -612,7 +612,7 @@ export const dapps = [
 
   {
     name: 'Moonwell',
-    dappRoute: 'bluebiu.near/widget/Base.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Base.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Lendle',
       defaultTab: 'Lending',
@@ -630,7 +630,7 @@ export const dapps = [
 
   {
     name: 'mendi finance',
-    dappRoute: 'bluebiu.near/widget/Linea.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Linea.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'mendi finance',
       defaultTab: 'Lending',
@@ -648,7 +648,7 @@ export const dapps = [
 
   {
     name: 'Radiant',
-    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Radiant',
       defaultTab: 'Lending',
@@ -665,7 +665,7 @@ export const dapps = [
 
   {
     name: 'Reactorfusion',
-    dappRoute: 'bluebiu.near/widget/zkSync.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/zkSync.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Reactorfusion',
       defaultTab: 'Lending',
@@ -681,7 +681,7 @@ export const dapps = [
   },
   {
     name: 'Sonne',
-    dappRoute: 'bluebiu.near/widget/Optimism.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Optimism.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Sonne',
       defaultTab: 'Lending',
@@ -698,7 +698,7 @@ export const dapps = [
   },
   {
     name: 'Venus',
-    dappRoute: 'bluebiu.near/widget/Bsc.All-in-one', //TODO:
+    dappRoute: 'bluebiu.near/widget/Bsc.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Venus',
       defaultTab: 'Lending',
