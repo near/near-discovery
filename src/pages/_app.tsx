@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
@@ -19,7 +19,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
 import { useAuthStore } from '@/stores/auth';
-import { init as initializeAnalytics } from '@/utils/analytics';
+import useAccountChecker from '@/hooks/useAccountChecker';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 import InviteCodePage from './invite-code';
@@ -39,13 +39,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
-  const [authStatus, setAuthStatus] = useState(1); // -1 unknow; 1 authed; 0 unauthed
   const router = useRouter();
   const authStore = useAuthStore();
+  const { checked, setChecked } = useAccountChecker();
   const componentSrc = router.query;
 
   useEffect(() => {
-    initializeAnalytics();
     initializePrice();
   }, []);
 
@@ -139,7 +138,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
-      {getLayout(authStatus === 1 ? <Component {...pageProps} /> : authStatus === 0 ? <InviteCodePage /> : <div />)}
+      {getLayout(checked ? <Component {...pageProps} /> : <InviteCodePage setChecked={setChecked} />)}
       <Toaster />
     </>
   );

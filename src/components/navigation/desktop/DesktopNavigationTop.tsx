@@ -2,12 +2,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
-import ConnectWallet from '@/components/ConnectWallet';
 import { menuData } from '@/data/menuData';
 import useAccount from '@/hooks/useAccount';
+import { useAccountCheckerStore } from '@/stores/accountChecker';
 import { useLayoutStore } from '@/stores/layout';
 
 const LoginContainer = styled.div`
@@ -16,8 +15,8 @@ const LoginContainer = styled.div`
   display: flex;
   gap: 10px;
 `;
-const AccountWrapper = styled.div`
-  cursor: pointer;
+const AccountWrapper = styled.div<{ disabled: boolean }>`
+  cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
 
 const Container = styled.div`
@@ -192,6 +191,7 @@ export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
   const router = useRouter();
+  const accountCheckerStore = useAccountCheckerStore();
   const currentPath = router.pathname;
 
   const [showSubmenu, setShowSubmenu] = useState(false);
@@ -299,15 +299,19 @@ export const DesktopNavigationTop = () => {
           <LoginContainer>
             <Chain showName={false} />
             <AccountWrapper
+              disabled={!accountCheckerStore.accounts[account]}
               onClick={() => {
-                setLayoutStore({ showAccountSider: true });
+                console.log(accountCheckerStore.accounts);
+                if (accountCheckerStore.accounts[account]) {
+                  setLayoutStore({ showAccountSider: true });
+                }
               }}
             >
               <AccountItem showCopy={false} logoSize={28} />
             </AccountWrapper>
           </LoginContainer>
         ) : (
-          <ConnectWallet />
+          <div />
         )}
       </div>
 

@@ -16,7 +16,6 @@ const StyledInviteCode = styled.div<{ display?: boolean }>`
   );
   border-radius: 12px;
   position: absolute;
-  padding: 16px;
   right: 0px;
   top: 34px;
   display: ${({ display }) => (display ? 'block' : 'none')};
@@ -27,12 +26,13 @@ const Header = styled.div`
   font-weight: 700;
   color: #fff;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-  padding-bottom: 16px;
+  padding: 16px;
 `;
 const List = styled.div`
   padding-top: 10px;
   max-height: calc(100vh - 160px);
   overflow-y: auto;
+  padding: 16px;
 `;
 const StyledLoading = styled.div`
   text-align: center;

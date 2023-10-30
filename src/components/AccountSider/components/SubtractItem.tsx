@@ -1,10 +1,9 @@
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLayoutStore } from '@/stores/layout';
-import useLoginAndLogout from '@/hooks/useLoginAndLogout';
+import useAuth from '@/hooks/useAuth';
 import InviteCode from './InviteCode';
 import useAccount from '@/hooks/useAccount';
-import { useRouter } from 'next/router';
 
 const StyledSubtractItem = styled.div`
   display: flex;
@@ -27,10 +26,9 @@ const StyledInviteCode = styled(Item)`
 `;
 
 const SubtractItem = () => {
-  const router = useRouter();
   const [showCode, setShowCode] = useState<boolean>(false);
   const { account } = useAccount();
-  const { connectAndlogin, disconnectAndlogout } = useLoginAndLogout();
+  const { connect, logout } = useAuth();
   const setLayoutStore = useLayoutStore((store) => store.set);
 
   useEffect(() => {
@@ -85,13 +83,10 @@ const SubtractItem = () => {
       <Item
         onClick={async () => {
           if (account) {
-            await disconnectAndlogout();
+            await logout();
             setLayoutStore({ showAccountSider: false });
-            setTimeout(() => {
-              router.replace(`/invite-code?source=${router.pathname}`);
-            }, 100);
           } else {
-            connectAndlogin();
+            connect();
           }
         }}
       >

@@ -22,6 +22,7 @@ const Tooltip = styled.div<{
   border-radius: 16px;
   opacity: 0.7;
   width: max-content;
+  z-index: 20;
 `;
 const StyledCopyButton = styled.div<{ color: string }>`
   color: ${({ color }) => color};

@@ -1,10 +1,10 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useState, memo } from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
 import useAccount from '@/hooks/useAccount';
 import { inviteCodeActivate } from '@/apis';
-import useLoginAndLogout from '@/hooks/useLoginAndLogout';
+import useAuth from '@/hooks/useAuth';
+import LoadingIcon from '@/components/Icons/Loading';
+import { useAccountCheckerStore } from '@/stores/accountChecker';
 
 const yellowbg = 'https://ipfs.near.social/ipfs/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje';
 const bluebg = 'https://ipfs.near.social/ipfs/bafkreicqa3b3urjhrrc2xt3kgnyhfuntagepjj7zfnley74u6gjqfmjm44';
@@ -105,7 +105,7 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
     background-color: rgba(0, 0, 0, 0.5);
     color: #fff;
     font-weight: 500;
-    margin: 36px 0;
+    margin: 36px 0 10px;
     caret-color: #ebf479;
     ::placeholder {
       color: #5e617e;
@@ -121,6 +121,11 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
     font-weight: 500;
     cursor: ${(props) => (props.loading ? 'not-allowed' : 'pointer')};
     z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    margin: 0 auto;
   }
   .notice {
     display: inline-block;
@@ -137,40 +142,46 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
     }
   }
 `;
+const ErrorTips = styled.div`
+  color: #ff64b8;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 22px;
+  margin-bottom: 30px;
+`;
 
-const InviteCodePage = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
+const InviteCodePage = ({ setChecked }: { setChecked: (checked: boolean) => void }) => {
   const { account } = useAccount();
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
-  const { login, connectAndlogin, logging, disconnectAndlogout, logged } = useLoginAndLogout();
+  const { connect, logging, logout } = useAuth();
+  const [errorTips, setErrorTips] = useState<string>('');
+  const accountCheckerStore = useAccountCheckerStore();
 
   const proceed = async () => {
     if (!account || !code || loading) return;
     setLoading(true);
     try {
-      const isActivated = await inviteCodeActivate(account, code);
+      const { isSuccess, errorMsg } = await inviteCodeActivate(account, code);
       setLoading(false);
-      if (isActivated) {
-        login();
+      if (!isSuccess) {
+        setErrorTips(errorMsg);
+      } else {
+        const _accounts = accountCheckerStore.accounts;
+        _accounts[account] = true;
+        accountCheckerStore.set({ accounts: _accounts });
+        setChecked(true);
       }
     } catch (error) {
       setLoading(false);
     }
   };
 
-  useEffect(() => {
-    if (logged) {
-      router.replace(searchParams.get('source') || '/');
-    }
-  }, [logged]);
-
   const handlerClick = () => {
     if (account) {
       // proceed();
     } else {
-      connectAndlogin();
+      connect();
     }
   };
 
@@ -205,15 +216,18 @@ const InviteCodePage = () => {
                 placeholder="invte code"
                 onChange={(e) => {
                   setCode(e.target.value);
+                  setErrorTips('');
                 }}
               />
             )}
+            {true && <ErrorTips>{errorTips}</ErrorTips>}
           </div>
-          <button className="connect-btn" onClick={handlerClick}>
+          <button className="connect-btn" onClick={handlerClick} disabled={!!(account && !code)}>
+            {loading && <LoadingIcon />}
             {account ? 'Proceed' : 'Connect Wallet'}
           </button>
           <p>
-            <span className="notice" onClick={disconnectAndlogout}>
+            <span className="notice" onClick={logout}>
               {account ? (
                 <span className="logout">
                   Log out
