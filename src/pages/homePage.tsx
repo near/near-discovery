@@ -621,7 +621,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                 {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'Y')
                   .map((dapp, index) => {
-                    const href = dapp.dappRoute + `?name=${dapp.name}&logo=${dapp.logo}` || '/';
+                    const href = dapp.dappRoute || '/';
                     return (
                       <Link className="tbd-content-item" key={index} href={href}>
                         <div className="content-item-title">
@@ -671,7 +671,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                           key={index}
                           onClick={(e) => {
                             const href = dapp.dappRoute || '/';
-                            router.push(href + `?name=${dapp.name}&logo=${dapp.logo}`);
+                            router.push(href);
                           }}
                         >
                           <td>
@@ -715,11 +715,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                 {sortedDapps
                   .filter((dapp) => dapp.TBD_TOKEN === 'N')
                   .map((dapp, index) => (
-                    <Link
-                      className="tbd-content-item"
-                      key={index}
-                      href={dapp.dappRoute + `?name=${dapp.name}&logo=${dapp.logo}` || '/'}
-                    >
+                    <Link className="tbd-content-item" key={index} href={dapp.dappRoute || '/'}>
                       <div className="content-item-title">
                         <div className="item-title-icon">
                           <img src={dapp.logo} alt="" />
@@ -765,7 +761,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                         <tr
                           key={index}
                           onClick={(e) => {
-                            const href = dapp.dappRoute + `?name=${dapp.name}&logo=${dapp.logo}` || '/';
+                            const href = dapp.dappRoute || '/';
                             router.push(href);
                           }}
                         >
