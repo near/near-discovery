@@ -711,8 +711,8 @@ const NewHomePageContent: NextPageWithLayout = () => {
                           <img src={dapp.logo} alt="" />
                         </div>
                         <div className="item-title-text">
-                          <h1>{dapp.name}</h1>
-                          <p>Token TBD🔥</p>
+                          <h1 style={{marginBottom:'12px'}}>{dapp.name}</h1>
+                          {/* <p>Token TBD🔥</p> */}
                           <div className="title-text-icon">
                             {dapp.on_chain_ids.map((chainId, index) => (
                               <img key={index} src={chains[chainId].icon} alt="" />
@@ -740,7 +740,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                     <tr>
                       <th>Name</th>
                       <th>Native token</th>
-                      <th>Network</th>
+                      {/* <th>Network</th> */}
                       <th>Function</th>
                     </tr>
                   </thead>
@@ -753,7 +753,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
                             <img src={dapp.logo} alt="" />
                             <h1> {dapp.name}</h1>
                           </td>
-                          <td>TBD🔥</td>
+                          {/* <td>TBD🔥</td> */}
                           <td>
                             <div className="title-text-icon">
                               {dapp.on_chain_ids.map((chainId, index) => (
