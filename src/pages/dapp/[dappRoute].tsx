@@ -1,12 +1,13 @@
 import { useSetChain } from '@web3-onboard/react';
 import { useRouter } from 'next/router';
-
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import { useLayoutStore } from '../../stores/layout';
+import { useCallback } from 'react';
 
 // set dynamic routes for dapps in config file
 
@@ -18,6 +19,17 @@ export const DappPage: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { dappRoute } = router.query;
+
+  const setLayoutStore = useLayoutStore((store) => store.set);
+
+  const bridgeCb = useCallback(
+    () =>
+      setLayoutStore({
+        defaultTab: 'bridge',
+        showAccountSider: true,
+      }),
+    [],
+  );
 
   const [
     {
@@ -51,7 +63,9 @@ export const DappPage: NextPageWithLayout = () => {
         dappConfig,
         curChainId,
         chains,
+        curChain: chains[curChainId],
         dappSrc: dappSrc,
+        bridgeCb,
         ...(dappConfig.extendProps || {}),
       }}
       src={dappSrcMap[dappConfig.type || 'undefined'] || dappSrc}

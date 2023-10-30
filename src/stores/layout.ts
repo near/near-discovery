@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 type LayoutState = {
   showAccountSider: boolean;
+  defaultTab?: 'bridge' | 'account';
 };
 
 type LayoutStore = LayoutState & {
@@ -10,5 +11,6 @@ type LayoutStore = LayoutState & {
 
 export const useLayoutStore = create<LayoutStore>((set) => ({
   showAccountSider: false,
+
   set: (params) => set(() => ({ ...params })),
 }));

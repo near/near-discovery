@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLayoutStore } from '@/stores/layout';
 import TransactionTips from '@/components/Bridge/components/TransactionTips';
@@ -57,8 +57,16 @@ const TipsWrapper = styled.div`
 `;
 
 const AccountSider = () => {
-  const [tab, setTab] = useState<'bridge' | 'account'>('account');
   const layoutStore = useLayoutStore();
+  const defaultTab = layoutStore.defaultTab;
+  const [tab, setTab] = useState<'bridge' | 'account'>('account');
+
+  useEffect(() => {
+    if (layoutStore.showAccountSider && defaultTab === 'bridge') {
+      setTab('bridge');
+    }
+  }, [layoutStore.showAccountSider, defaultTab]);
+
   const [updater, setUpdater] = useState(1);
   const { count, txs, loading: txLoading } = useTxs(updater);
 
