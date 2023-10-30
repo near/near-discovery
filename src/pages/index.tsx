@@ -60,6 +60,9 @@ const HomePage: NextPageWithLayout = () => {
             logOut,
             targetProps: router.query,
             targetComponent: components.default,
+            tosDomainName: process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME,
+            termsCid: process.env.NEXT_PUBLIC_TERMS_CID,
+            privacyCid: process.env.NEXT_PUBLIC_PRIVACY_CID,
             recordToC: setTosData,
           }}
         />
