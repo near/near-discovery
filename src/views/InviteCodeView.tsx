@@ -28,7 +28,7 @@ export const StyledInviteCodePage = styled.div<{ logined: boolean; loading: bool
       props.logined
         ? ''
         : `
-    background: url('./images/bg-invite-code.svg') no-repeat;
+    background: url('/images/bg-invite-code.svg') no-repeat;
     background-size: 100% 100%;
     `}
   }
