@@ -19,6 +19,7 @@ export const DappPage: NextPageWithLayout = () => {
   const router = useRouter();
 
   const { dappRoute } = router.query;
+  console.log('dappRoute: ', dappRoute);
 
   const setLayoutStore = useLayoutStore((store) => store.set);
 
@@ -37,7 +38,7 @@ export const DappPage: NextPageWithLayout = () => {
     },
   ] = useSetChain();
 
-  const dappConfig = dapps.find((dapp) => dapp.dappRoute === dappRoute);
+  const dappConfig = dapps.find((dapp) => typeof dappRoute === 'string' && dapp.dappRoute.indexOf(dappRoute) > -1);
 
   if (!dappConfig || !dappRoute) return <></>;
 
