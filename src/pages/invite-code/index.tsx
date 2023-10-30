@@ -6,6 +6,9 @@ import useAccount from '@/hooks/useAccount';
 import { inviteCodeActivate } from '@/apis';
 import useLoginAndLogout from '@/hooks/useLoginAndLogout';
 
+const yellowbg = 'https://ipfs.near.social/ipfs/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje';
+const bluebg = 'https://ipfs.near.social/ipfs/bafkreicqa3b3urjhrrc2xt3kgnyhfuntagepjj7zfnley74u6gjqfmjm44';
+
 const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
   font-family: Gantari;
   background-color: #000;
@@ -29,24 +32,31 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
   }
   .yellow {
     position: absolute;
-    width: 319px;
-    height: 319px;
+    width: 228px;
+    height: 228px;
     left: 0;
     right: 0;
     pointer-events: none;
+    img {
+      width: 165%;
+      height: 165%;
+      position: absolute;
+      top: -30%;
+      left: -25%;
+    }
   }
-  .yellow::before {
+  /* .yellow::before {
     content: '';
     position: absolute;
     top: -10px;
     left: -10px;
     right: -10px;
     bottom: -10px;
-    background: rgba(235, 244, 121, 0.3);
+    background: rgba(235, 244, 121, 0.2);
     filter: blur(10px);
     border-radius: 50%;
     filter: blur(10px);
-  }
+  } */
   .content {
     position: relative;
   }
@@ -57,8 +67,15 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
     right: 0;
     bottom: 0;
     pointer-events: none;
+    img {
+      width: 160%;
+      height: 160%;
+      position: absolute;
+      right: -38%;
+      bottom: -36%;
+    }
   }
-  .blue::before {
+  /* .blue::before {
     content: '';
     position: absolute;
     top: -10px;
@@ -68,7 +85,7 @@ const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
     background: rgba(24, 104, 178, 0.2);
     border-radius: 50%;
     filter: blur(10px);
-  }
+  } */
   .title {
     font-size: 42px;
     font-weight: 700;
@@ -151,7 +168,7 @@ const InviteCodePage = () => {
 
   const handlerClick = () => {
     if (account) {
-      proceed();
+      // proceed();
     } else {
       connectAndlogin();
     }
@@ -160,8 +177,12 @@ const InviteCodePage = () => {
   return (
     <StyledInviteCodePage logined={!!account} loading={loading || logging}>
       <main>
-        <div className="yellow"></div>
-        <div className="blue"></div>
+        <div className="yellow">
+          <img src={yellowbg} alt="" />
+        </div>
+        <div className="blue">
+          <img src={bluebg} alt="" />
+        </div>
         <div className="content">
           {!account && <img src={'/images/eureka-logo.svg'} />}
           <div className="title">
