@@ -8,7 +8,7 @@ const EditPage: NextPageWithLayout = () => {
   const router = useRouter();
 
   useEffect(() => {
-    router.replace(router.asPath.replace('/edit/', '/sandbox/'));
+    router.replace(router.asPath.replace(/^\/edit/, '/sandbox'));
   }, []);
 
   return null;
