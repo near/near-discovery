@@ -45,11 +45,6 @@ const nextConfig = {
         destination: 'https://pages.near.org/validators',
         permanent: true,
       },
-      {
-        source: '/edit/:path*',
-        destination: '/sandbox/:path*',
-        permanent: true,
-      },
     ];
   },
   rewrites: async () => [
@@ -62,10 +57,9 @@ const nextConfig = {
 
 module.exports = nextConfig;
 
-
 // Injected content via Sentry wizard below
 
-const { withSentryConfig } = require("@sentry/nextjs");
+const { withSentryConfig } = require('@sentry/nextjs');
 
 module.exports = withSentryConfig(
   module.exports,
@@ -76,8 +70,8 @@ module.exports = withSentryConfig(
     // Suppresses source map uploading logs during build
     silent: true,
 
-    org: "near-protocol",
-    project: "near-discovery",
+    org: 'near-protocol',
+    project: 'near-discovery',
   },
   {
     // For all available options, see:
@@ -90,12 +84,12 @@ module.exports = withSentryConfig(
     transpileClientSDK: true,
 
     // Routes browser requests to Sentry through a Next.js rewrite to circumvent ad-blockers (increases server load)
-    tunnelRoute: "/monitoring",
+    tunnelRoute: '/monitoring',
 
     // Hides source maps from generated client bundles
     hideSourceMaps: true,
 
     // Automatically tree-shake Sentry logger statements to reduce bundle size
     disableLogger: true,
-  }
+  },
 );
