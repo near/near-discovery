@@ -17,7 +17,7 @@ export const dapps = [
   },
   {
     name: 'Ammos Finance',
-    dappRoute: 'agni-finance',
+    dappRoute: 'ammos-finance',
     TBD_TOKEN: 'Y',
     description: 'Ultra capital-efficient decentralised exchange with low fees, built on Mantle Layer 2.', // dapp radar
     tags: ['Dexes'],
@@ -489,7 +489,7 @@ export const dapps = [
     name: 'Agave',
     dappRoute: '', //TODO:
     logo: 'https://ipfs.near.social/ipfs/bafkreicagi5msm7flwzqkgemb6odyx6r4jbhnvrhustzyuboznh6rr6bbu',
-    TBD_TOKEN: 'Y',
+    TBD_TOKEN: 'N',
     description: 'Agave, in a few words, is Aave on xDai.',
     tags: ['Lending'],
     type: 'lending',
@@ -556,7 +556,7 @@ export const dapps = [
     name: 'LayerBank',
     dappRoute: '', //TODO:
     logo: 'https://ipfs.near.social/ipfs/bafkreidqfdregtnl6vbpuvdp5g2fvekuz24zti4owzgjzkgz5n7nfmoafq',
-    TBD_TOKEN: 'Y',
+    TBD_TOKEN: 'N',
     description: 'The Ultimate Money Market for All EVM-Layers',
     tags: ['Lending'],
     type: 'lending',
