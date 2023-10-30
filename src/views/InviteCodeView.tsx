@@ -171,6 +171,7 @@ export default function InviteCodeView() {
         setErrorTips(errorMsg);
       } else {
         setCookie('AUTHED_ACCOUNT', account);
+        router.replace(searchParams.get('source') || '/');
       }
     } catch (error) {
       setLoading(false);
