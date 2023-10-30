@@ -6,7 +6,6 @@ import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
 import { menuData } from '@/data/menuData';
 import useAccount from '@/hooks/useAccount';
-import { useAccountCheckerStore } from '@/stores/accountChecker';
 import { useLayoutStore } from '@/stores/layout';
 import { useSearchParams } from 'next/navigation';
 import { dapps } from '@/config/dapps';
@@ -54,7 +53,7 @@ const LoginContainer = styled.div`
   display: flex;
   gap: 10px;
 `;
-const AccountWrapper = styled.div<{ disabled: boolean }>`
+const AccountWrapper = styled.div<{ disabled?: boolean }>`
   cursor: ${({ disabled }) => (disabled ? 'not-allowed' : 'pointer')};
 `;
 
@@ -229,7 +228,6 @@ export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
   const router = useRouter();
-  const accountCheckerStore = useAccountCheckerStore();
   const currentPath = router.pathname;
 
   const query = router.query;
@@ -350,12 +348,8 @@ export const DesktopNavigationTop = () => {
           <LoginContainer>
             <Chain showName={false} />
             <AccountWrapper
-              disabled={!accountCheckerStore.accounts[account]}
               onClick={() => {
-                console.log(accountCheckerStore.accounts);
-                if (accountCheckerStore.accounts[account]) {
-                  setLayoutStore({ showAccountSider: true });
-                }
+                setLayoutStore({ showAccountSider: true });
               }}
             >
               <AccountItem showCopy={false} logoSize={28} />

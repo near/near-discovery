@@ -19,10 +19,8 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
 import { useAuthStore } from '@/stores/auth';
-import useAccountChecker from '@/hooks/useAccountChecker';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import InviteCodePage from './invite-code';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -41,12 +39,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const authStore = useAuthStore();
-  const { checked, setChecked } = useAccountChecker();
   const componentSrc = router.query;
-
-  useEffect(() => {
-    initializePrice();
-  }, []);
 
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
@@ -60,6 +53,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, [authStore.accountId, authStore.signedIn, componentSrc]);
 
   useEffect(() => {
+    initializePrice();
     const interval = setInterval(zendeskCheck, 20);
 
     function zendeskCheck() {
@@ -77,7 +71,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       clearInterval(interval);
     };
   }, []);
-
   return (
     <>
       <Head>
@@ -138,7 +131,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
-      {getLayout(checked ? <Component {...pageProps} /> : <InviteCodePage setChecked={setChecked} />)}
+      {getLayout(<Component {...pageProps} />)}
       <Toaster />
     </>
   );
