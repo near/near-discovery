@@ -1,7 +1,9 @@
 import { setEthProvider, setNearConnection, setSignerProvider } from '@near-eth/client';
 // import { Near, WalletConnection } from '@near-eth/near-ether/node_modules/near-api-js';
 import { useSetChain } from '@web3-onboard/react';
+import useSwitchChain from '@/hooks/useSwitchChain';
 import Big from 'big.js';
+import chains from '@/config/chains';
 import { ethers } from 'ethers';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -170,33 +172,11 @@ const RainbowBridge: NextPageWithLayout = () => {
   const { near } = useVmStore();
 
   const priceMap = useTokenPrice();
-  // useEffect(() => {
-  //   if (near && near.nearConnection) {
-  //     console.log('near: ', near);
-  //     const nearConnection = new WalletConnection(
-  //       new Near({
-  //         ...near,
-  //         ...near.config,
-  //         nodeUrl: 'https://archival-rpc.mainnet.near.org',
-  //       }),
-  //       'dapdap',
-  //     );
-  //     setNearConnection(nearConnection);
-  //   }
-
-  //   if (provider) {
-  //     const etherProvider = new ethers.providers.JsonRpcProvider('https://rpc.ankr.com/eth');
-  //     const signerProvider = new ethers.providers.Web3Provider(provider, 'any');
-  //     setEthProvider(etherProvider);
-  //     setSignerProvider(signerProvider);
-  //   }
-  // }, [near, provider]);
 
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
 
   const [
     {
-      chains, // the list of chains that web3-onboard was initialized with
       connectedChain, // the current chain the user's wallet is connected to
       settingChain, // boolean indicating if the chain is in the process of being set
     },
@@ -226,8 +206,15 @@ const RainbowBridge: NextPageWithLayout = () => {
 
   const [sender, setSender] = useState<string>('');
 
+  const { switchNetwork, switching } = useSwitchChain();
+
   useEffect(() => {
-    if (!wallet || !provider) return;
+    const isEth = connectedChain?.id === '0x1';
+    if (!wallet || !provider || !isEth) {
+      setSender('');
+
+      return;
+    }
 
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -237,7 +224,7 @@ const RainbowBridge: NextPageWithLayout = () => {
 
       setSender(originalCaseAddress.toString());
     });
-  }, [wallet, provider]);
+  }, [wallet, provider, connectedChain]);
 
   const defaultToken = tokenList[0];
 
@@ -273,6 +260,14 @@ const RainbowBridge: NextPageWithLayout = () => {
       ? '-'
       : new Big(priceMap?.[selectToken.near_address || 'wrap.near']?.price || 0).times(amount || 0).toFixed(3);
 
+  const handlerEthConnect = useCallback(async () => {
+    if (connectedChain?.id === '0x1') {
+      switchNetwork(chains[1]);
+    } else {
+      connect();
+    }
+  }, [connectedChain]);
+
   const ethereumBox = (
     <div className="choose-bridge-box">
       <div className="choose-bridge-box-select">
@@ -284,7 +279,7 @@ const RainbowBridge: NextPageWithLayout = () => {
 
         <ConnectButton
           isConnected={!!wallet && !!sender && connectedChain?.id === '0x1'}
-          onConnect={() => connect()}
+          onConnect={() => handlerEthConnect()}
           onDisConnect={() => (wallet ? disconnect(wallet) : null)}
         />
       </div>
@@ -402,14 +397,8 @@ const RainbowBridge: NextPageWithLayout = () => {
     }
   };
 
-  const search = useSearchParams();
-
-  const source = search.get('source');
-
   return (
     <>
-      {/* {source === 'all-in-one' ? <GoBackNavSourceAllInOne /> : <GoBackNav />} */}
-
       <MainWrapper>
         <RainbowBridgeContainer>
           <LeftMenuContainer>
