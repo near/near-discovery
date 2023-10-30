@@ -1,15 +1,15 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import chains from '@/config/chains';
+import { dapps } from '@/config/dapps';
 import { menuData } from '@/data/menuData';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { dapps } from '@/config/dapps';
-import Link from 'next/link';
-import chains from '@/config/chains';
-import { useRouter } from 'next/router';
 
 const pageLeftBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
 const pageBottomBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
@@ -238,9 +238,10 @@ const NewHomePageRight = styled.div`
         margin-bottom: 16px;
         .item-title-icon {
           margin-right: 14px;
+          width: 72px;
+          height: 72px;
           img {
-            width: 72px;
-            height: 72px;
+            width: 100%;
           }
         }
         .item-title-text {
@@ -331,7 +332,6 @@ const NewHomePageRight = styled.div`
         padding: 12px 2px;
         img {
           width: 42px;
-          height: 42px;
           margin-right: 10px;
         }
         h1 {
