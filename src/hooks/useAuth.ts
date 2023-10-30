@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import useAccount from './useAccount';
 import { useEthersProviderContext } from '@/data/web3';
 import * as http from '@/utils/http';
@@ -8,6 +9,7 @@ import { setCookie, deleteCookie } from 'cookies-next';
 
 const useAuth = () => {
   const { account } = useAccount();
+  const searchParams = useSearchParams();
   const { useConnectWallet } = useEthersProviderContext();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [logging, setLogging] = useState(false);
@@ -21,25 +23,23 @@ const useAuth = () => {
     router.replace(`/login?source=/`);
   };
 
-  const login = useCallback(
-    async (cb: () => void) => {
-      if (!account) return;
-      setLogging(true);
-      try {
-        await getAccessToken(account);
-        setLogging(false);
-        setCookie('AUTHED_ACCOUNT', account);
-        cb();
-      } catch (error) {
-        setLogging(false);
-      }
-    },
-    [account],
-  );
+  const login = useCallback(async () => {
+    if (!account) return;
+    setLogging(true);
+    try {
+      await getAccessToken(account);
+      setLogging(false);
+      setCookie('AUTHED_ACCOUNT', account);
+      router.replace(searchParams.get('source') || '/');
+    } catch (error) {
+      setLogging(false);
+    }
+  }, [account]);
 
   useEffect(() => {
     if (account) {
       setCookie('LOGIN_ACCOUNT', account);
+      login();
     } else {
       deleteCookie('LOGIN_ACCOUNT');
     }

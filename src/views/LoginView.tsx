@@ -1,22 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import useAuth from '@/hooks/useAuth';
-import useAccount from '@/hooks/useAccount';
-import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
 import LoadingIcon from '@/components/Icons/Loading';
 import { StyledInviteCodePage, yellowbg, bluebg } from './InviteCodeView';
 
 export default function LoginView() {
-  const { connect, connecting, login } = useAuth();
-  const { account } = useAccount();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  useEffect(() => {
-    account &&
-      login(() => {
-        router.replace(searchParams.get('source') || '/');
-      });
-  }, [account]);
+  const { connect, connecting } = useAuth();
   return (
     <StyledInviteCodePage logined={false} loading={false}>
       <main>

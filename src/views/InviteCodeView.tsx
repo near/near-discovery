@@ -182,13 +182,6 @@ export default function InviteCodeView() {
     proceed();
   };
 
-  useEffect(() => {
-    account &&
-      login(() => {
-        router.replace(searchParams.get('source') || '/');
-      });
-  }, [account]);
-
   return (
     <StyledInviteCodePage logined={!!account} loading={loading || logging}>
       <main>
