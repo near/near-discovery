@@ -29,6 +29,8 @@ type NetworkComponents = {
       iosHomeScreenAlert: string;
     };
     learnPage: string;
+    termsPage: string;
+    privacyPage: string;
   };
   notificationButton: string;
   peoplePage: string;
@@ -82,6 +84,8 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
           iosHomeScreenAlert: `${testnetTLA}/widget/NearOrg.Notifications.HomeScreenAlert`,
         },
         learnPage: `${testnetTLA}/widget/NearOrg.LearnPage`,
+        termsPage: `${testnetTLA}/widget/NearOrg.TermsPage`,
+        privacyPage: `${testnetTLA}/widget/NearOrg.PrivacyPage`,
       },
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
       peoplePage: `${testnetTLA}/widget/PeoplePage`,
@@ -128,6 +132,8 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
           iosHomeScreenAlert: 'near/widget/NearOrg.Notifications.HomeScreenAlert',
         },
         learnPage: 'near/widget/NearOrg.LearnPage',
+        termsPage: 'near/widget/NearOrg.TermsPage',
+        privacyPage: 'near/widget/NearOrg.PrivacyPage',
       },
       notificationButton: 'near/widget/NotificationButton',
       peoplePage: 'near/widget/PeoplePage',

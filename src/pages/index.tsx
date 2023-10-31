@@ -22,6 +22,8 @@ const HomePage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const logOut = useAuthStore((store) => store.logOut);
   const setTosData = useTermsOfServiceStore((store) => store.setTosData);
+  const termsDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ipfs/${process.env.NEXT_PUBLIC_TERMS_CID}`;
+  const privacyDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ipfs/${process.env.NEXT_PUBLIC_PRIVACY_CID}`;
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
@@ -60,9 +62,8 @@ const HomePage: NextPageWithLayout = () => {
             logOut,
             targetProps: router.query,
             targetComponent: components.default,
-            tosDomainName: process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME,
-            termsCid: process.env.NEXT_PUBLIC_TERMS_CID,
-            privacyCid: process.env.NEXT_PUBLIC_PRIVACY_CID,
+            termsDomainName,
+            privacyDomainName,
             recordToC: setTosData,
           }}
         />
