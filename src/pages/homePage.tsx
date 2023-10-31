@@ -749,8 +749,8 @@ const NewHomePageContent: NextPageWithLayout = () => {
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Native token</th>
-                      {/* <th>Network</th> */}
+                      {/* <th>Native token</th> */}
+                      <th>Network</th>
                       <th>Function</th>
                     </tr>
                   </thead>
