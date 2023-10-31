@@ -46,7 +46,7 @@ export default ({
       if (!outputChain) {
         setOutputToken(token);
       } else {
-        let tempChainId: number = 0;
+        let tempChainId: number | null = null;
         let tempToken: Token | null = null;
         const result = Object.values(tokens).some((_token) => {
           if (_token.poolId === token.poolId) {

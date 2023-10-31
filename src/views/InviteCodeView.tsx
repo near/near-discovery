@@ -127,7 +127,7 @@ export const StyledInviteCodePage = styled.div<{ logined: boolean; loading: bool
     justify-content: center;
     align-items: center;
     gap: 6px;
-    margin: 0 auto;
+    margin: 0 auto 10px;
   }
   .notice {
     display: inline-block;
