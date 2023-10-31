@@ -56,22 +56,32 @@ const Wrapper = styled.div`
     }
   }
 `;
+type Props = {
+  onCloseMenu?: () => void;
+};
 
-export const CurrentComponent = () => {
+export const CurrentComponent = (props: Props) => {
   const src = useCurrentComponentStore((store) => store.src);
   const components = useBosComponents();
 
   if (!src) return null;
 
+  const handleCloseMenu = () => {
+    if (props.onCloseMenu) {
+      props.onCloseMenu();
+    }
+  };
+
   return (
     <Wrapper>
-      <div className="title">Current Component</div>
+      <div className="title">Current Component 123</div>
       <VmComponent
         src={components.componentSummary}
         props={{
           src,
           size: 'medium',
           showTags: true,
+          onCloseMenu: handleCloseMenu,
         }}
       />
     </Wrapper>
