@@ -2,9 +2,10 @@ import React from 'react';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 import { VmComponent } from '@/components/vm/VmComponent';
+
 import { Filetype } from '../utils/const';
 
-const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disable }) => {
+const Search = ({ widgets, logOut, loadAndOpenFile, refs, refSearch, disable }) => {
   return (
     <>
       {widgets.editorComponentSearch && (
@@ -22,10 +23,9 @@ const Search = ({ widgets, tos, logOut, loadAndOpenFile, refs, refSearch, disabl
                     {/* We use the component search widget as a VM entry point to add a TOS check wrapper.
                 It does not need to be this component, just some <Widget /> on the page */}
                     <VmComponent
-                      src={tos.checkComponentPath}
+                      src={widgets.wrapper}
                       props={{
                         logOut: logOut,
-                        tosName: tos.contentComponentPath,
                         targetComponent: widgets.editorComponentSearch,
                         targetProps: () => ({
                           extraButtons: ({ widgetName, widgetPath, onHide }) => (
