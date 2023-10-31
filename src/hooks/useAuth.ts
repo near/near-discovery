@@ -4,7 +4,7 @@ import { useSearchParams } from 'next/navigation';
 import useAccount from './useAccount';
 import { useEthersProviderContext } from '@/data/web3';
 import * as http from '@/utils/http';
-import { getAccessToken, insertedAccessKey } from '@/apis';
+import { getAccessToken, insertedAccessKey, checkAddressIsInvited } from '@/apis';
 import { setCookie, deleteCookie } from 'cookies-next';
 
 const useAuth = () => {
@@ -27,6 +27,11 @@ const useAuth = () => {
     if (!account) return;
     setLogging(true);
     try {
+      const checked = await checkAddressIsInvited(account);
+      if (!checked) {
+        router.replace(`/invite-code?source=/`);
+        return;
+      }
       await getAccessToken(account);
       setLogging(false);
       setCookie('AUTHED_ACCOUNT', account);

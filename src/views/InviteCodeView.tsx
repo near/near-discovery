@@ -156,7 +156,7 @@ export default function InviteCodeView() {
   const { account } = useAccount();
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
-  const { logging, logout, login } = useAuth();
+  const { logging, logout } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [errorTips, setErrorTips] = useState<string>('');
