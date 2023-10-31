@@ -10,7 +10,7 @@ const TermsPage: NextPageWithLayout = () => {
   return (
     <ComponentWrapperPage
       src={components.nearOrg.termsPage}
-      meta={{ title: 'Terms', description: '' }}
+      meta={{ title: 'Terms of Use', description: '' }}
       componentProps={{
         termsDomainName,
       }}

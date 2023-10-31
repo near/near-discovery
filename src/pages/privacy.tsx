@@ -10,7 +10,7 @@ const PrivacyPage: NextPageWithLayout = () => {
   return (
     <ComponentWrapperPage
       src={components.nearOrg.privacyPage}
-      meta={{ title: 'Privacy', description: '' }}
+      meta={{ title: 'Privacy Policy', description: '' }}
       componentProps={{
         privacyDomainName,
       }}
