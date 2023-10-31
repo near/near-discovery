@@ -18,7 +18,7 @@ const useAuth = () => {
     insertedAccessKey('');
     deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
-    router.replace(`/login?source=${router.pathname}`);
+    router.replace(`/login?source=/`);
   };
 
   const login = useCallback(async () => {
@@ -27,7 +27,7 @@ const useAuth = () => {
     try {
       const checked = await checkAddressIsInvited(account);
       if (!checked) {
-        router.replace(`/invite-code?source=${router.pathname}`);
+        router.replace(`/invite-code?source=/`);
         return;
       }
       await getAccessToken(account);
