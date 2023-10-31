@@ -46,13 +46,24 @@ export default ({
       if (!outputChain) {
         setOutputToken(token);
       } else {
-        Object.values(tokens).some((_token) => {
-          if (token.poolId === _token?.poolId && token.chainId === outputChain.chainId) {
+        let tempChainId: number = 0;
+        let tempToken: Token | null = null;
+        const result = Object.values(tokens).some((_token) => {
+          if (_token.poolId === token.poolId) {
+            tempChainId = _token.chainId;
+            tempToken = _token;
+          }
+          if (token.poolId === _token.poolId && _token.chainId === outputChain.chainId) {
             setOutputToken(token);
             return true;
           }
           return false;
         });
+        if (!result && tempChainId && tempToken) {
+          setOutputChain(chains[tempChainId]);
+          setOutputToken(tempToken);
+        }
+        console.log('result', result);
       }
 
       if (token.chainId !== inputChain?.chainId) {

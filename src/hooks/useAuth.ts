@@ -41,7 +41,7 @@ const useAuth = () => {
   }, [account]);
 
   useEffect(() => {
-    if (account && !getCookie('LOGIN_ACCOUNT')) {
+    if (account?.toLowerCase() !== getCookie('LOGIN_ACCOUNT')?.toLowerCase()) {
       setCookie('LOGIN_ACCOUNT', account);
       login();
     }

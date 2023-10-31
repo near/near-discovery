@@ -111,6 +111,10 @@ const Bridge = () => {
   const debouncedBestRoute = debounce(handleBestRoute, 500);
 
   useEffect(() => {
+    if (!amount || new Big(amount).eq(0)) {
+      setErrorTips('Enter An Amount');
+      return;
+    }
     if (inputChain?.chainId === outputChain?.chainId) {
       setErrorTips('Select different network');
       return;
@@ -123,19 +127,18 @@ const Bridge = () => {
       setErrorTips('Select a token');
       return;
     }
-    if (amount && balance) {
-      if (new Big(amount).gt(balance)) setErrorTips('Insufficient balance');
-      return;
-    }
     if (destination && !utils.isAddress(destination)) {
       setErrorTips('Change destination address');
       return;
+    }
+    if (amount && balance) {
+      if (new Big(amount).gt(balance)) setErrorTips('Insufficient balance');
     }
     if (gasCost && nativeTokenBalance && new Big(gasCost).gt(nativeTokenBalance)) {
       setErrorTips('Not enough gas');
       return;
     }
-    if (!trade) {
+    if (!trade && !checking) {
       setErrorTips('Relayer: gas too low');
       return;
     }

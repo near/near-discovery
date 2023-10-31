@@ -74,10 +74,6 @@ const Button = ({
     return <StyledButton disabled>{errorTips}</StyledButton>;
   }
 
-  if (!amount || new Big(amount).eq(0)) {
-    return <StyledButton disabled>Enter An Amount</StyledButton>;
-  }
-
   if (isWrongNetwork && inputChain) {
     return (
       <StyledButton
