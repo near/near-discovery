@@ -91,6 +91,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
 
+      <Script src="https://tag.safary.club/stag.js?id=prd_oQeo6Zgbib"></Script>
+
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-PR996H5E9T"></Script>
       <Script id="ga-config">
         {`
