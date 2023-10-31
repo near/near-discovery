@@ -1,0 +1,24 @@
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - ecp88
+ categories:
+   - title: 🎉 New Features
+      labels:
+        - feature
+   - title: Dependencies 🔨
+        labels:
+          - dependency
+   - title: Breaking Changes 🛠
+      labels:
+        - breaking-change
+   - title: 🐛 Fixes
+      labels: 
+        - bug
+   - title: Enhancements 🌟
+      labels:
+        - enhancement
+        - '*'
