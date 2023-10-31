@@ -17,7 +17,6 @@ export const insertedAccessKey = (accessToken: string) => {
   request.onerror = (event: any) => {
     console.error('Failed to open database:', event.target?.error);
   };
-
   request.onsuccess = (event: any) => {
     const db = event.target?.result;
     const transaction = db.transaction(tableName, 'readwrite');
