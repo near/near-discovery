@@ -62,14 +62,24 @@ const ChainItem = styled(StyledChain)<{ active?: boolean }>`
   ${({ active }) => active && 'background-color: #ebf479; pointer-events: none;color: #000'}
 `;
 
-const Chain = ({ mt, showName = true }: { mt?: number; showName?: boolean }) => {
+const Chain = ({
+  mt,
+  showName = true,
+  showChains,
+  setShowChains,
+}: {
+  mt?: number;
+  showName?: boolean;
+  showChains?: boolean;
+  setShowChains?: (show: boolean) => void;
+}) => {
   const { chainId } = useAccount();
   const currentChain = useMemo(() => (chainId ? chains[chainId] : null), [chainId]);
   const { switching, switchNetwork } = useSwitchChain();
   const [showList, setShowList] = useState(false);
   useEffect(() => {
     const hideList = () => {
-      setShowList(false);
+      showName ? setShowChains?.(false) : setShowList(false);
     };
     document.addEventListener('click', hideList);
     return () => {
@@ -83,7 +93,7 @@ const Chain = ({ mt, showName = true }: { mt?: number; showName?: boolean }) => 
       showName={showName}
       onClick={(ev) => {
         ev.stopPropagation();
-        setShowList(!showList);
+        showName ? setShowChains?.(!showChains) : setShowList(!showList);
       }}
     >
       <StyledChain>
@@ -96,7 +106,7 @@ const Chain = ({ mt, showName = true }: { mt?: number; showName?: boolean }) => 
       <ArrowIconWrapper>
         <ArrowIcon size={12} />
       </ArrowIconWrapper>
-      <ChainList display={showList}>
+      <ChainList display={showName ? showChains : showList}>
         {Object.values(chains).map((chain) => (
           <ChainItem
             key={chain.chainId}

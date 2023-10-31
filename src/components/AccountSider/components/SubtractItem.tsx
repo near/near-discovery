@@ -25,15 +25,14 @@ const StyledInviteCode = styled(Item)`
   position: relative;
 `;
 
-const SubtractItem = () => {
-  const [showCode, setShowCode] = useState<boolean>(false);
+const SubtractItem = ({ showCodes, setShowCodes }: { showCodes: boolean; setShowCodes: (show: boolean) => void }) => {
   const { account } = useAccount();
   const { connect, logout } = useAuth();
   const setLayoutStore = useLayoutStore((store) => store.set);
 
   useEffect(() => {
     const hideCode = () => {
-      setShowCode(false);
+      setShowCodes(false);
     };
     document.addEventListener('click', hideCode);
     return () => {
@@ -46,7 +45,7 @@ const SubtractItem = () => {
       <StyledInviteCode
         onClick={(ev) => {
           ev.stopPropagation();
-          setShowCode(!showCode);
+          setShowCodes(!showCodes);
         }}
       >
         <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -72,10 +71,10 @@ const SubtractItem = () => {
           </defs>
         </svg>
         <InviteCode
-          show={showCode}
+          show={showCodes}
           onClose={() => {
             setTimeout(() => {
-              setShowCode(false);
+              setShowCodes(false);
             }, 500);
           }}
         />

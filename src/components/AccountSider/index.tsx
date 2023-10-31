@@ -1,15 +1,10 @@
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useLayoutStore } from '@/stores/layout';
-import TransactionTips from '@/components/Bridge/components/TransactionTips';
 import useTxs from '../Bridge/hooks/useTxs';
-import Actions from './components/Actions';
-import Amount from './components/Amount';
 import BridgeWrapper from './components/BridgeWrapper';
-import Chain from './components/Chain';
 import Header from './components/Header';
-import Split from './components/Split';
-import Tokens from './components/Tokens';
+import AccountWrapper from './components/AccountWrapper';
 
 const StyledPanel = styled.div<{ display: boolean }>`
   width: 352px;
@@ -49,17 +44,13 @@ const CloseIcon = styled.div`
   top: 16px;
   cursor: pointer;
 `;
-const TipsWrapper = styled.div`
-  padding-left: var(--padding-x);
-  padding-right: var(--padding-x);
-  margin-top: 20px;
-  position: relative;
-`;
 
 const AccountSider = () => {
   const layoutStore = useLayoutStore();
   const defaultTab = layoutStore.defaultTab;
   const [tab, setTab] = useState<'bridge' | 'account'>('account');
+  const [showChains, setShowChains] = useState(false);
+  const [showCodes, setShowCodes] = useState(false);
 
   useEffect(() => {
     if (layoutStore.showAccountSider && defaultTab === 'bridge') {
@@ -70,26 +61,20 @@ const AccountSider = () => {
   const [updater, setUpdater] = useState(1);
   const { count, txs, loading: txLoading } = useTxs(updater);
 
+  useEffect(() => {
+    if (showChains) setShowCodes(false);
+  }, [showChains]);
+
+  useEffect(() => {
+    if (showCodes) setShowChains(false);
+  }, [showCodes]);
+
   return (
     <StyledPanel display={layoutStore.showAccountSider}>
       <Content>
-        <Header />
+        <Header showCodes={showCodes} setShowCodes={setShowCodes} />
         {tab === 'account' && (
-          <>
-            <Chain mt={30} />
-            <Amount mt={30} />
-            <Actions
-              mt={30}
-              onClick={(type) => {
-                type === 'bridge' && setTab('bridge');
-              }}
-            />
-            <TipsWrapper>
-              <TransactionTips count={count} />
-            </TipsWrapper>
-            <Split mt={20} />
-            <Tokens mt={20} />
-          </>
+          <AccountWrapper count={count} setTab={setTab} showChains={showChains} setShowChains={setShowChains} />
         )}
         {tab === 'bridge' && (
           <BridgeWrapper

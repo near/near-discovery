@@ -12,11 +12,11 @@ const StyledHeader = styled.div`
   justify-content: space-between;
 `;
 
-const Header = () => {
+const Header = ({ showCodes, setShowCodes }: { showCodes: boolean; setShowCodes: (show: boolean) => void }) => {
   return (
     <StyledHeader>
       <AccountItem />
-      <SubtractItem />
+      <SubtractItem showCodes={showCodes} setShowCodes={setShowCodes} />
     </StyledHeader>
   );
 };
