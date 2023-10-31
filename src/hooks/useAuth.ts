@@ -1,10 +1,10 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useRouter } from 'next/router';
 import useAccount from './useAccount';
 import { useEthersProviderContext } from '@/data/web3';
 import * as http from '@/utils/http';
 import { getAccessToken, insertedAccessKey, checkAddressIsInvited } from '@/apis';
-import { setCookie, deleteCookie, getCookie } from 'cookies-next';
+import { setCookie, deleteCookie } from 'cookies-next';
 
 const useAuth = () => {
   const { account } = useAccount();
@@ -22,7 +22,10 @@ const useAuth = () => {
   };
 
   const login = useCallback(async () => {
-    if (!account) return;
+    if (!account) {
+      return;
+    }
+    setCookie('LOGIN_ACCOUNT', account);
     setLogging(true);
     try {
       const checked = await checkAddressIsInvited(account);
@@ -37,13 +40,6 @@ const useAuth = () => {
         router.replace((router.query?.source as string) || '/');
     } catch (error) {
       setLogging(false);
-    }
-  }, [account]);
-
-  useEffect(() => {
-    if (account?.toLowerCase() !== getCookie('LOGIN_ACCOUNT')?.toLowerCase()) {
-      setCookie('LOGIN_ACCOUNT', account);
-      login();
     }
   }, [account]);
 

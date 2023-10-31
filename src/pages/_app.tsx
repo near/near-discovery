@@ -10,17 +10,20 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect } from 'react';
-
+import { useCallback, useEffect } from 'react';
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
+import useAuth from '@/hooks/useAuth';
+import useAccount from '@/hooks/useAccount';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import { deleteCookie } from 'cookies-next';
+import { debounce } from 'lodash';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -39,7 +42,23 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const authStore = useAuthStore();
+  const { account } = useAccount();
+  const { login } = useAuth();
   const componentSrc = router.query;
+
+  const accountInit = useCallback(() => {
+    if (account) {
+      login();
+    } else {
+      deleteCookie('LOGIN_ACCOUNT');
+    }
+  }, [account]);
+
+  const _accountInit = debounce(accountInit, 500);
+
+  useEffect(() => {
+    _accountInit();
+  }, [account]);
 
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
@@ -71,6 +90,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       clearInterval(interval);
     };
   }, []);
+
   return (
     <>
       <Head>
