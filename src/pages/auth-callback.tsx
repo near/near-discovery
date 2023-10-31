@@ -2,6 +2,7 @@ import type { User } from 'firebase/auth';
 import { isSignInWithEmailLink, signInWithEmailLink } from 'firebase/auth';
 import * as nearAPI from 'near-api-js';
 import { useRouter } from 'next/router';
+import type { MutableRefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
@@ -12,7 +13,6 @@ import { network, signInContractId } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { firebaseAuth } from '../utils/firebase';
-import type { MutableRefObject } from 'react';
 
 const AuthCallbackPage: NextPageWithLayout = () => {
   const router = useRouter();

@@ -7,8 +7,28 @@ import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
+
+const arrowDown = (
+  <svg
+    className="arrow-down-mobile"
+    width="11"
+    height="7"
+    viewBox="0 0 11 7"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M1 1L5.5 5.09091L10 1" stroke="white" stroke-width="1.63636" stroke-linecap="round" />
+  </svg>
+);
 
 const StyledDropdown = styled.div`
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    .profile-image {
+      display: none;
+    }
+  }
+
   > button {
     all: unset;
     display: flex;
@@ -49,6 +69,37 @@ const StyledDropdown = styled.div`
     }
     .profile-username {
       color: #a1a09a;
+    }
+  }
+  @media (max-width: ${MEDIUM_SCREEN}) {
+    .drop-down-trigger-button {
+      border: 1px solid #ebf479;
+      border-radius: 6px;
+    }
+    .profile-info {
+      margin: 0 8px;
+      line-height: normal;
+      max-width: 110px;
+      font-size: 12px;
+
+      color: white;
+
+      .profile-name,
+      .profile-username {
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+
+      .profile-name {
+        color: white;
+      }
+      .profile-username {
+        color: white;
+      }
+    }
+
+    .arrow-down-pc {
+      color: white;
     }
   }
 
@@ -163,21 +214,24 @@ export const UserDropdownMenu = () => {
   return (
     <StyledDropdown>
       <DropdownMenu.Root>
-        <DropdownMenu.Trigger>
-          <VmComponent
-            src={components.profileImage}
-            props={{
-              accountId,
-              className: 'd-inline-block',
-            }}
-          />
+        <DropdownMenu.Trigger className="drop-down-trigger-button">
+          <div className="profile-image">
+            <VmComponent
+              src={components.profileImage}
+              props={{
+                accountId,
+                className: 'd-inline-block',
+              }}
+            />
+          </div>
+
           <div className="profile-info">
             <div className="profile-name">
               <VmComponent src={components.profileName} />
             </div>
             <div className="profile-username">{accountId}</div>
           </div>
-          <i className="ph ph-caret-down"></i>
+          <i className="ph ph-caret-down arrow-down-pc "></i>
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content className="DropdownMenuContent" sideOffset={-5}>

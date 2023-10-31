@@ -80,12 +80,12 @@ export const Content = styled.div`
 `;
 
 export const Title = styled(ToastPrimitive.Title)`
-  font: 450 16px/1.5 'Mona Sans', sans-serif;
+  font: 450 16px/1.5 'Gantari', sans-serif;
   color: currentColor;
 `;
 
 export const Description = styled(ToastPrimitive.Description)`
-  font: 450 14px/1.5 'Mona Sans', sans-serif;
+  font: 450 14px/1.5 'Gantari', sans-serif;
   color: currentColor;
   opacity: 0.8;
 `;

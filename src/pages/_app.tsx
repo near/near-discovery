@@ -78,12 +78,15 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     <>
       <Head>
         <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
-        <link rel="icon" href="favicon.ico" />
         <link
           rel="canonical"
           href={`${process.env.NEXT_PUBLIC_HOSTNAME}/near/widget/NearOrg.HomePage`}
           key="canonical"
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <title>DapDap</title>
+        <link rel="shortcut icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/logo.png" />
       </Head>
       <Script id="google-tag-manager" strategy="afterInteractive">
         {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -94,6 +97,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </Script>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
+
+      <Script src="https://tag.safary.club/stag.js?id=prd_oQeo6Zgbib"></Script>
+
+      <Script async src="https://www.googletagmanager.com/gtag/js?id=G-PR996H5E9T"></Script>
+      <Script id="ga-config">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-PR996H5E9T');`}
+      </Script>
 
       <Script
         src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"

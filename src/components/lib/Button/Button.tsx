@@ -346,6 +346,137 @@ export const Button = forwardRef<HTMLButtonElement, Props>(
       conditionalAttributes['aria-label'] = label;
     }
 
+    const variants: Record<Variant, any> = {
+      primary: {
+        outline: {
+          background: 'var(--sand1)',
+          border: 'var(--sand6)',
+          color: 'var(--violet8)',
+          iconColor: 'var(--violet9)',
+          hover: {
+            border: 'var(--violet6)',
+          },
+          focus: {
+            border: 'var(--violet9)',
+          },
+          active: {
+            background: 'var(--violet2)',
+            border: 'var(--violet7)',
+          },
+        },
+        solid: {
+          background: 'linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%)',
+          border: 'var(--sand12)',
+          color: '#02051E',
+          iconColor: 'var(--sand9)',
+          hover: {
+            background: 'var(--sand11)',
+            border: 'var(--sand11)',
+          },
+          focus: {},
+          active: {},
+        },
+      },
+      secondary: {
+        outline: {
+          background: 'var(--sand1)',
+          border: 'var(--sand6)',
+          color: 'var(--sand12)',
+          iconColor: 'var(--sand10)',
+          hover: {
+            border: 'var(--sand8)',
+          },
+          focus: {
+            border: 'var(--violet8)',
+          },
+          active: {
+            background: 'var(--sand3)',
+            border: 'var(--sand8)',
+          },
+        },
+        solid: {
+          background: 'var(--sand3)',
+          border: 'var(--sand6)',
+          color: 'var(--sand12)',
+          iconColor: 'var(--sand11)',
+          hover: {
+            background: 'var(--sand4)',
+          },
+          focus: {
+            border: 'var(--violet8)',
+          },
+          active: {
+            background: 'var(--sand5)',
+          },
+        },
+      },
+      destructive: {
+        outline: {
+          background: 'var(--sand1)',
+          border: 'var(--sand6)',
+          color: 'var(--red8)',
+          iconColor: 'var(--red9)',
+          hover: {
+            border: 'var(--red6)',
+          },
+          focus: {
+            border: 'var(--violet8)',
+          },
+          active: {
+            background: 'var(--red2)',
+            border: 'var(--red7)',
+          },
+        },
+        solid: {
+          background: 'var(--red9)',
+          border: 'var(--red8)',
+          color: 'var(--red12)',
+          iconColor: 'var(--red11)',
+          hover: {
+            background: 'var(--red10)',
+          },
+          focus: {
+            border: 'var(--red11)',
+          },
+          active: {
+            background: 'var(--red8)',
+          },
+        },
+      },
+      affirmative: {
+        outline: {
+          background: 'var(--sand1)',
+          border: 'var(--sand6)',
+          color: 'var(--green11)',
+          iconColor: 'var(--green10)',
+          hover: {
+            border: 'var(--green9)',
+          },
+          focus: {
+            border: 'var(--violet8)',
+          },
+          active: {
+            background: 'var(--green2)',
+            border: 'var(--green8)',
+          },
+        },
+        solid: {
+          background: 'var(--green9)',
+          border: 'var(--green8)',
+          color: 'var(--green12)',
+          iconColor: 'var(--green11)',
+          hover: {
+            background: 'var(--green10)',
+          },
+          focus: {
+            border: 'var(--green11)',
+          },
+          active: {
+            background: 'var(--green8)',
+          },
+        },
+      },
+    };
     const styledProps: StyledProps = {
       disabled,
       fill,

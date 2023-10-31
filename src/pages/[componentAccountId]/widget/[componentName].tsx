@@ -28,12 +28,12 @@ const ViewComponentPage: NextPageWithLayout = () => {
     <div className="container-xl">
       <div className="row">
         <div
-          className="d-inline-block position-relative overflow-hidden"
+          className="d-inline-block"
           style={{
             paddingTop: 'var(--body-top-padding)',
           }}
         >
-          <VmComponent
+          {/* <VmComponent
             key={components.tosCheck}
             src={components.tosCheck}
             props={{
@@ -42,7 +42,9 @@ const ViewComponentPage: NextPageWithLayout = () => {
               targetComponent: componentSrc,
               tosName: components.tosContent,
             }}
-          />
+          /> */}
+
+          <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
         </div>
       </div>
     </div>

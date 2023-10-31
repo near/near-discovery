@@ -39,10 +39,26 @@ type NetworkComponents = {
   widgetMetadata: string;
   widgetMetadataEditor: string;
   wrapper: string;
+  near: string;
+  warmUp: string;
+  'polygon-zkevm': string;
+  tabNavigation: string;
+  base: string;
+  mantle: string;
+  allChains: string;
+  arbitrum: string;
+  bsc: string;
+  linea: string;
+  metis: string;
+  polygon: string;
+  gnosis: string;
+  zkSync: string;
+  avalanche: string;
+  optimism: string;
+  uniswap: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
-  // localnet: undefined,
   testnet: {
     bosDirectory: 'one.testnet/widget/BOSDirectory',
     componentSummary: 'discom.testnet/widget/ComponentSummary',
@@ -82,6 +98,23 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
     widgetMetadataEditor: 'discom.testnet/widget/WidgetMetadataEditor',
     wrapper: 'discom.testnet/widget/DIG.Theme',
+    near: 'ref-admin.near/widget/ref-template-page',
+    warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
+    'polygon-zkevm': 'guessme.near/widget/ZKEVM.Template',
+    tabNavigation: 'ref-admin.near/widget/TabNavigation',
+    base: 'bluebiu.near/widget/Base.BaseDapps',
+    mantle: 'bluebiu.near/widget/Mantle.MantleTemplate',
+    allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
+    arbitrum: 'bluebiu.near/widget/Arbitrum.Dapps',
+    bsc: 'bluebiu.near/widget/Bsc.Dapps',
+    linea: 'bluebiu.near/widget/Linea.Dapps',
+    polygon: 'bluebiu.near/widget/Polygon.Dapps',
+    metis: 'bluebiu.near/widget/Metis.Dapps',
+    gnosis: 'bluebiu.near/widget/Gnosis.Dapps',
+    zkSync: 'bluebiu.near/widget/zkSync.Dapps',
+    avalanche: 'bluebiu.near/widget/Avalanche.Dapps',
+    optimism: 'bluebiu.near/widget/Optimism.Dapps',
+    uniswap: 'dapdapbos.near/widget/Uniswap.Swap.Dex',
   },
 
   mainnet: {
@@ -123,5 +156,22 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     widgetMetadata: 'mob.near/widget/WidgetMetadata',
     widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
     wrapper: 'near/widget/DIG.Theme',
+    near: 'ref-admin.near/widget/ref-template-page',
+    warmUp: 'guessme.near/widget/ZKEVMWarmUp.warm-up',
+    'polygon-zkevm': 'guessme.near/widget/ZKEVM.Template',
+    tabNavigation: 'ref-admin.near/widget/TabNavigation',
+    base: 'bluebiu.near/widget/Base.BaseDapps',
+    mantle: 'bluebiu.near/widget/Mantle.MantleTemplate',
+    allChains: 'bluebiu.near/widget/AllChains.AllChainsPage',
+    arbitrum: 'bluebiu.near/widget/Arbitrum.Dapps',
+    bsc: 'bluebiu.near/widget/Bsc.Dapps',
+    linea: 'bluebiu.near/widget/Linea.Dapps',
+    polygon: 'bluebiu.near/widget/Polygon.Dapps',
+    metis: 'bluebiu.near/widget/Metis.Dapps',
+    gnosis: 'bluebiu.near/widget/Gnosis.Dapps',
+    zkSync: 'bluebiu.near/widget/zkSync.Dapps',
+    avalanche: 'bluebiu.near/widget/Avalanche.Dapps',
+    optimism: 'bluebiu.near/widget/Optimism.Dapps',
+    uniswap: 'dapdapbos.near/widget/Uniswap.Swap.Dex',
   },
 };
