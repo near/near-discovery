@@ -40,8 +40,6 @@ type NetworkComponents = {
     indexPage: string;
     typeAheadDropdown: string;
   };
-  tosCheck: string;
-  tosContent: string;
   viewSource: string;
   widgetMetadata: string;
   widgetMetadataEditor: string;
@@ -95,12 +93,10 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         indexPage: `${testnetTLA}/widget/Search.IndexPage`,
         typeAheadDropdown: `${testnetTLA}/widget/Search.TypeAheadDropdown`,
       },
-      tosCheck: `${testnetTLA}/widget/TosCheck`,
-      tosContent: `${testnetTLA}/widget/TosContent`,
       viewSource: 'eugenethedream/widget/WidgetSource',
       widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
       widgetMetadataEditor: `${testnetTLA}/widget/WidgetMetadataEditor`,
-      wrapper: `${testnetTLA}/widget/DIG.Theme`,
+      wrapper: `${testnetTLA}/widget/GatewayWrapper`,
     },
 
     mainnet: {
@@ -143,12 +139,10 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         indexPage: 'near/widget/Search.IndexPage',
         typeAheadDropdown: 'near/widget/Search.TypeAheadDropdown',
       },
-      tosCheck: 'near/widget/TosCheck',
-      tosContent: 'adminalpha.near/widget/TosContent',
       viewSource: 'mob.near/widget/WidgetSource',
       widgetMetadata: 'mob.near/widget/WidgetMetadata',
       widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
-      wrapper: 'near/widget/DIG.Theme',
+      wrapper: 'near/widget/GatewayWrapper',
     },
   };
 })();
