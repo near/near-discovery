@@ -74,7 +74,7 @@ export const CurrentComponent = (props: Props) => {
 
   return (
     <Wrapper>
-      <div className="title">Current Component 123</div>
+      <div className="title">Current Component</div>
       <VmComponent
         src={components.componentSummary}
         props={{
