@@ -543,7 +543,7 @@ export const dapps = [
 
   {
     name: 'Granary Finance',
-    dappRoute: 'bluebiu.near/widget/Arbitrum.All-in-one?defaultTab=Lending', //TODO:
+    dappRoute: 'bluebiu.near/widget/Avalanche.All-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: 'Granary Finance',
       defaultTab: 'Lending',
