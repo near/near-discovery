@@ -73,7 +73,6 @@ const DialogTokens = ({
   useEffect(() => {
     filterTokens();
   }, [tokens]);
-
   return (
     <Modal
       display={display}
@@ -85,7 +84,7 @@ const DialogTokens = ({
             <Input placeholder="Search name or paste address" onChange={filterTokens} />
           </InputWarpper>
           {!data.length && <Empty>No token.</Empty>}
-          {data.length && (
+          {!!data.length && (
             <CurrencyList tokens={data} chains={chains} selectedCurrency={currentToken} onClick={onSelect} />
           )}
         </>

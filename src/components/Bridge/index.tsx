@@ -1,7 +1,7 @@
 import Big from 'big.js';
 import { utils } from 'ethers';
 import { debounce } from 'lodash';
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useCallback, useEffect, useState, useMemo } from 'react';
 import styled from 'styled-components';
 import useAccount from '@/hooks/useAccount';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
@@ -51,7 +51,6 @@ const Bridge = () => {
   const [showChainDialog, setShowChainDialog] = useState<boolean>(false);
   const [selectedTokenAddress, setSelectedTokenAddress] = useState<string>('');
   const [selectedChainId, setSelectedChainId] = useState<number>();
-  const [selectableTokens, setSelectableTokens] = useState<Token[]>([]);
   const [selectableChains, setSelectableChains] = useState<Chain[]>([]);
   const [errorTips, setErrorTips] = useState<string>('');
   const [clickType, setClickType] = useState<'in' | 'out'>();
@@ -72,40 +71,40 @@ const Bridge = () => {
   });
   const { checked, setChecked, destination, setDestination } = useDestination();
   const { getBestRoute, gasCost, trade, checking, swap, swaping } = useBestRoute();
+  const selectableTokens = useMemo<Token[]>(() => {
+    return Object.values(tokens)
+      .filter((token) => (inputChain?.chainId || 1) === token.chainId)
+      .sort((a, b) => {
+        return a.chainId === inputChain?.chainId ? -1 : 1;
+      });
+  }, [inputChain]);
 
-  const handleSelectClick = useCallback((type: 'chain' | 'token', item?: Token | Chain) => {
-    type === 'token' ? setShowTokenDialog(true) : setShowChainDialog(true);
-    if (type === 'chain') {
-      if ((clickType === 'in' && inputToken) || (clickType === 'out' && outputToken)) {
-        const _token = clickType === 'in' ? inputToken : outputToken;
-        const _selectableChains: Chain[] = [];
-        Object.values(tokens).forEach((token) => {
-          if (token.poolId === _token?.poolId) {
-            _selectableChains.push(chains[token.chainId]);
-          }
-        });
-        setSelectableChains(_selectableChains);
-      } else {
-        setSelectableChains(Object.values(chains));
+  const handleSelectClick = useCallback(
+    (type: 'chain' | 'token', item?: Token | Chain) => {
+      type === 'token' ? setShowTokenDialog(true) : setShowChainDialog(true);
+      if (type === 'chain') {
+        if ((clickType === 'in' && inputToken) || (clickType === 'out' && outputToken)) {
+          const _token = clickType === 'in' ? inputToken : outputToken;
+          const _selectableChains: Chain[] = [];
+          Object.values(tokens).forEach((token) => {
+            if (token.poolId === _token?.poolId) {
+              _selectableChains.push(chains[token.chainId]);
+            }
+          });
+          setSelectableChains(_selectableChains);
+        } else {
+          setSelectableChains(Object.values(chains));
+        }
       }
-    }
-    if (type === 'token') {
-      console.log('clickType', clickType);
-      setSelectableTokens(
-        Object.values(tokens)
-          .filter((token) => (clickType === 'in' ? inputChain?.chainId : outputChain?.chainId) === token.chainId)
-          .sort((a, b) => {
-            return a.chainId === inputChain?.chainId ? -1 : 1;
-          }),
-      );
-    }
-    if (!item) return;
-    if (item as Token) {
-      setSelectedTokenAddress((item as Token).address || '');
-    } else {
-      setSelectedChainId(item.chainId);
-    }
-  }, []);
+      if (!item) return;
+      if (item as Token) {
+        setSelectedTokenAddress((item as Token).address || '');
+      } else {
+        setSelectedChainId(item.chainId);
+      }
+    },
+    [inputChain, outputChain, clickType],
+  );
 
   const handleBestRoute = useCallback(() => {
     if (!inputChain || !outputChain || !outputToken || inputChain.chainId === outputChain.chainId) return;

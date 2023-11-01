@@ -50,14 +50,14 @@ const getEthBalance = async (sender: string, token: any, wallet: WalletState) =>
     return '0';
   }
 
-  if (token.ethereum_address) {
+  if (token.ethereum_address && sender) {
     const Interface = new ethers.utils.Interface(Erc20Abi);
 
     const ethersProvider = new ethers.providers.Web3Provider(wallet.provider, 'any');
     return ethersProvider
       .call({
         to: token.ethereum_address,
-        data: Interface.encodeFunctionData('balanceOf', [sender]),
+        data: Interface?.encodeFunctionData('balanceOf', [sender]),
       })
       .then((rawBalance) => {
         const receiverBalanceHex = Interface.decodeFunctionResult('balanceOf', rawBalance);
