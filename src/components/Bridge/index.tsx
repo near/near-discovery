@@ -62,11 +62,11 @@ const Bridge = () => {
     chains,
     tokens,
   });
-  const { balance, loading } = useTokenBalance({ currency: inputToken, rpcUrl: inputChain?.rpcUrls[0], updater });
+  const { balance, loading } = useTokenBalance({ currency: inputToken, inputChain, updater });
   const { balance: nativeTokenBalance } = useTokenBalance({
     isNative: true,
     isPure: true,
-    rpcUrl: inputChain?.rpcUrls[0],
+    inputChain,
     updater,
   });
   const { checked, setChecked, destination, setDestination } = useDestination();
@@ -103,7 +103,7 @@ const Bridge = () => {
         setSelectedChainId(item.chainId);
       }
     },
-    [inputChain, outputChain, clickType],
+    [inputChain, outputChain, clickType, inputToken, outputToken],
   );
 
   const handleBestRoute = useCallback(() => {
@@ -134,10 +134,13 @@ const Bridge = () => {
       setErrorTips('Change destination address');
       return;
     }
-    if (amount && balance) {
-      if (new Big(amount).gt(balance)) setErrorTips('Insufficient balance');
+    if (amount) {
+      if (new Big(amount).gt(balance || 0)) {
+        setErrorTips('Insufficient balance');
+        return;
+      }
     }
-    if (gasCost && nativeTokenBalance && new Big(gasCost).gt(nativeTokenBalance)) {
+    if (gasCost && new Big(gasCost).gt(nativeTokenBalance || 0)) {
       setErrorTips('Not enough gas');
       return;
     }

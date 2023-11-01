@@ -45,7 +45,6 @@ const CurrencyAmount = styled.div`
 const CurrencyRow = ({
   currency,
   selectedCurrency,
-  rpcUrl,
   updater,
   chainIcon,
   onClick,
@@ -57,7 +56,7 @@ const CurrencyRow = ({
   chainIcon?: string;
   onClick: (chain: Token) => void;
 }) => {
-  const { loading, balance } = useTokenBalance({ currency, rpcUrl, updater });
+  const { loading, balance } = useTokenBalance({ currency, updater });
   return (
     <StyledCurrencyRow
       className={currency.address === selectedCurrency ? 'active' : ''}

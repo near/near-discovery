@@ -30,7 +30,6 @@ export default function useBestRoute() {
       if (_inputChain.dex === 'Stargate') {
         const response = await getQouteInfo({ targetToken, chain, targetChain });
         setChecking(false);
-        console.log('response', response);
         setTrade({
           time: '1min',
           amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(2, 0) : '-') + '  ' + targetToken.symbol,

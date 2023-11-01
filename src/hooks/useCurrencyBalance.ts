@@ -1,20 +1,20 @@
 import { Contract, providers, utils } from 'ethers';
-import { useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import chains from '@/config/chains';
-import type { Token } from '@/types';
+import type { Chain, Token } from '@/types';
 
 import useAccount from './useAccount';
 
 export default function useTokenBalance({
   currency,
-  rpcUrl,
+  inputChain,
   updater,
   isNative,
   isPure,
 }: {
   currency?: Token;
-  rpcUrl?: string;
+  inputChain?: Chain;
   updater?: number;
   isNative?: boolean;
   isPure?: boolean;
@@ -24,12 +24,12 @@ export default function useTokenBalance({
   const { account, chainId } = useAccount();
 
   useEffect(() => {
+    const rpcUrl = inputChain?.rpcUrls[0] ? inputChain?.rpcUrls[0] : chainId ? chains[chainId].rpcUrls[0] : '';
     const getBalance = async () => {
-      const _rpcUrl = rpcUrl ? rpcUrl : chainId ? chains[chainId].rpcUrls[0] : '';
-      if (!currency || !_rpcUrl || !account || !currency.address) return;
+      if (!currency || !rpcUrl || !account || !currency.address) return;
       setLoading(true);
       try {
-        const provider = new providers.JsonRpcProvider(_rpcUrl);
+        const provider = new providers.JsonRpcProvider(rpcUrl);
         const TokenContract = new Contract(
           currency.address,
           [
@@ -63,11 +63,10 @@ export default function useTokenBalance({
       }
     };
     const getNativeBalance = async () => {
-      const _rpcUrl = rpcUrl ? rpcUrl : chainId ? chains[chainId].rpcUrls[0] : '';
-      if (!_rpcUrl || !account) return;
+      if (!rpcUrl || !account) return;
       setLoading(true);
       try {
-        const provider = new providers.JsonRpcProvider(_rpcUrl);
+        const provider = new providers.JsonRpcProvider(rpcUrl);
         const amount = await provider.getBalance(account);
         setBalance(isPure ? amount.toString() : utils.formatUnits(amount.toString(), currency?.decimals).toString());
         setLoading(false);
@@ -77,6 +76,6 @@ export default function useTokenBalance({
     };
     if (!!(currency?.address || currency?.isNative || isNative) && account)
       currency?.isNative || isNative ? getNativeBalance() : getBalance();
-  }, [currency, account, updater]);
+  }, [currency, account, updater, inputChain]);
   return { balance, loading };
 }
