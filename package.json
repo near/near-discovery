@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@braintree/sanitize-url": "^6.0.4",
-    "@idos-network/idos-sdk": "^0.0.24",
+    "@idos-network/idos-sdk": "^0.0.26",
     "@keypom/selector": "1.2.3",
     "@monaco-editor/react": "^4.4.6",
     "@near-js/biometric-ed25519": "0.3.0",
