@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 import styled from 'styled-components';
 import CurrencyIcon from '../CurrencyIcon';
 import { formateTxDate } from '@/utils/date';
@@ -63,6 +63,10 @@ const LoadingWrapper = styled.div`
   justify-content: center;
   margin-top: 60px;
 `;
+const Empty = styled.div`
+  text-align: center;
+  padding-top: 60px;
+`;
 
 const History = ({ tx }: { tx: any }) => {
   const priceStore = usePriceStore((store) => store.price);
@@ -97,9 +101,14 @@ const History = ({ tx }: { tx: any }) => {
 };
 
 const Historys = ({ txs, loading }: { txs: any; loading?: boolean }) => {
+  const list = useMemo(() => Object.values(txs || {}), [txs]);
   return (
     <StyledContainer>
-      {!loading && Object.values(txs || {})?.map((tx: any) => <History tx={tx} key={tx.tx} />)}
+      {!loading && list?.length ? (
+        list.map((tx: any) => <History tx={tx} key={tx.tx} />)
+      ) : (
+        <Empty>No transactions</Empty>
+      )}
       {loading && (
         <LoadingWrapper>
           <Loading size={30} />

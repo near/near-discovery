@@ -27,7 +27,7 @@ const SelectChains = ({ chain, disabled, onClick }: { chain?: Chain; disabled?: 
     <Container
       className={disabled ? 'disabled' : ''}
       onClick={() => {
-        onClick('chain', chain);
+        !disabled && onClick('chain', chain);
       }}
     >
       <SelectLabel label="Network" />

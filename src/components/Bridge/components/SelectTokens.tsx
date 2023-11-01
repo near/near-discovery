@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 
-import type { SelectClick,Token } from '../types';
+import type { SelectClick, Token } from '../types';
 import SelectItem from './SelectItem';
 import SelectLabel from './SelectLabel';
 
@@ -28,7 +28,7 @@ const SelectTokens = ({ token, disabled, onClick }: { token?: Token; disabled?: 
     <Container
       className={disabled ? 'disabled' : ''}
       onClick={() => {
-        onClick('token', token);
+        !disabled && onClick('token', token);
       }}
     >
       <SelectLabel label="Token" />

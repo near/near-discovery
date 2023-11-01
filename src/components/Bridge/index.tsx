@@ -3,10 +3,8 @@ import { utils } from 'ethers';
 import { debounce } from 'lodash';
 import { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 import useAccount from '@/hooks/useAccount';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
-
 import Button from './components/Button';
 import Destination from './components/Destination';
 import DialogChains from './components/DialogChains';
@@ -14,6 +12,7 @@ import DialogTokens from './components/DialogTokens';
 import Input from './components/Input';
 import Routes from './components/Routes';
 import Select from './components/Select';
+import ExchangeIcon from '../Icons/ExchangeIcon';
 import useBestRoute from './hooks/useBestRoute';
 import useBridge from './hooks/useBridge';
 import useDestination from './hooks/useDestination';
@@ -40,8 +39,11 @@ const Label = styled.div`
   color: #979abe;
   margin-top: 10px;
 `;
-const Space = styled.div`
-  margin-top: 10px;
+const StyledExchangeIcon = styled.div`
+  color: #979abe;
+  width: 30px;
+  height: 30px;
+  margin: 20px auto 0px;
 `;
 
 const Bridge = () => {
@@ -57,8 +59,7 @@ const Bridge = () => {
   const [amount, setAmount] = useState<string>();
   const { account, chainId } = useAccount();
   const { tokens, chains } = useTokensAndChains();
-  const { inputToken, outputToken, inputChain, outputChain, selectToken, selectChain } = useBridge({
-    chainId,
+  const { inputToken, outputToken, inputChain, outputChain, selectToken, selectChain, onExchange } = useBridge({
     chains,
     tokens,
   });
@@ -89,10 +90,13 @@ const Bridge = () => {
       }
     }
     if (type === 'token') {
+      console.log('clickType', clickType);
       setSelectableTokens(
-        Object.values(tokens).sort((a, b) => {
-          return a.chainId === inputChain?.chainId ? -1 : 1;
-        }),
+        Object.values(tokens)
+          .filter((token) => (clickType === 'in' ? inputChain?.chainId : outputChain?.chainId) === token.chainId)
+          .sort((a, b) => {
+            return a.chainId === inputChain?.chainId ? -1 : 1;
+          }),
       );
     }
     if (!item) return;
@@ -170,6 +174,9 @@ const Bridge = () => {
               }}
             />
           </>
+          <StyledExchangeIcon onClick={onExchange}>
+            <ExchangeIcon />
+          </StyledExchangeIcon>
           <>
             <Label>To</Label>
             <Select

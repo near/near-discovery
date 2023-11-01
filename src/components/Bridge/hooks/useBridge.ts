@@ -1,9 +1,8 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import type { Chain, Token } from '../types';
 
 export default ({
-  chainId,
   chains,
   tokens,
 }: {
@@ -13,7 +12,7 @@ export default ({
 }) => {
   const [inputToken, setInputToken] = useState<Token>();
   const [outputToken, setOutputToken] = useState<Token>();
-  const [inputChain, setInputChain] = useState<Chain>();
+  const [inputChain, setInputChain] = useState<Chain | undefined>(chains[1]);
   const [outputChain, setOutputChain] = useState<Chain>();
 
   const selectChain = useCallback(
@@ -74,10 +73,14 @@ export default ({
     [inputChain],
   );
 
-  useEffect(() => {
-    if (!chainId || inputChain) return;
-    setInputChain(chains[chainId]);
-  }, [chainId]);
+  const onExchange = useCallback(() => {
+    const [_outputToken, _inputToken] = [inputToken, outputToken];
+    const [_outputChain, _inputChain] = [inputChain, outputChain];
+    setInputChain(_inputChain);
+    setOutputChain(_outputChain);
+    setInputToken(_inputToken);
+    setOutputToken(_outputToken);
+  }, [inputToken, outputToken, inputChain, outputChain]);
 
-  return { inputToken, outputToken, inputChain, outputChain, selectChain, selectToken };
+  return { inputToken, outputToken, inputChain, outputChain, selectChain, selectToken, onExchange };
 };
