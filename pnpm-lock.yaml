@@ -9,8 +9,8 @@ dependencies:
     specifier: ^6.0.4
     version: 6.0.4
   '@idos-network/idos-sdk':
-    specifier: ^0.0.24
-    version: 0.0.24
+    specifier: ^0.0.26
+    version: 0.0.26
   '@keypom/selector':
     specifier: 1.2.3
     version: 1.2.3(@near-js/accounts@0.1.4)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.1)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.7.0)(@types/react@18.2.33)(near-api-js@2.1.4)(react-dom@18.2.0)(react@18.2.0)
@@ -2109,19 +2109,19 @@ packages:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
     dev: true
 
-  /@idos-network/idos-sdk@0.0.24:
-    resolution: {integrity: sha512-26LAv7lx2QwpxPZkPGRb9JM9dqTKK6QM8v9pHF6wQZ5DsOjXUilFL1pros1JWviAQgurN2YjpnsteCEoG7tO5Q==}
+  /@idos-network/idos-sdk@0.0.26:
+    resolution: {integrity: sha512-0VqfFuOYXrur6LsxSdRJVjHb8B1HRnPjuQzYhMZqzPyg3KOeMAM3bbAB3JmOH47foWIHMyMNAggo3cyAB4zBOw==}
     dependencies:
       '@digitalbazaar/ed25519-signature-2020': 5.2.0
       '@digitalbazaar/ed25519-verification-key-2020': 4.1.0
       '@digitalbazaar/vc': 6.0.2
-      '@kwilteam/kwil-js': 0.2.1
+      '@kwilteam/kwil-js': 0.3.0
       '@stablelib/base64': 1.0.1
       '@stablelib/binary': 1.0.1
       '@stablelib/bytes': 1.0.1
-      '@stablelib/sha256': 1.0.1
+      '@stablelib/utf8': 1.0.1
       borsh: 1.0.0
-      ethers: 6.8.0
+      ethers: 6.8.1
       jsonld: 8.3.1
       jsonld-document-loader: 2.0.0
       near-api-js: 2.1.4
@@ -2237,21 +2237,19 @@ packages:
       - near-api-js
     dev: false
 
-  /@kwilteam/kwil-js@0.2.1:
-    resolution: {integrity: sha512-nul9MWWe34cbGVDom3JY0lwEqDDa/D1J+u7929QSlinpyFCp/yxmV8E0pBfZsCHAfaR8Uto21ZLV0FN6fuWRsg==}
+  /@kwilteam/kwil-js@0.3.0:
+    resolution: {integrity: sha512-SS+Emn4XqiWX2L3pcfEflAXVVv+eceHBVAtnXbgDW/8Owqw34YVNWE/LRhApREedqzZo/GPoGvaSQRMjHHkyaA==}
     engines: {node: '>=18.0.0'}
     dependencies:
       axios: 0.27.2
       dotenv: 16.3.1
-      ethers: 6.8.0
+      ethers: 6.8.1
       ethers5: /ethers@5.7.2
       jssha: 3.3.1
       long: 5.2.3
-      near-api-js: 2.1.4
     transitivePeerDependencies:
       - bufferutil
       - debug
-      - encoding
       - utf-8-validate
     dev: false
 
@@ -4632,6 +4630,10 @@ packages:
       '@stablelib/wipe': 1.0.1
     dev: false
 
+  /@stablelib/utf8@1.0.1:
+    resolution: {integrity: sha512-FrYD1xadah/TtAP6VJ04lDD5h9rdDj/d8wH/jMYTtHqZBv9z2btdvEU8vTxdjdkFmo1b/BH+t3R1wi/mYhCCNg==}
+    dev: false
+
   /@stablelib/wipe@1.0.1:
     resolution: {integrity: sha512-WfqfX/eXGiAd3RJe4VU2snh/ZPwtSjLG4ynQ/vYzvghTh7dHFcI1wl+nrkWG6lGhukOxOsUHfv8dUXr58D0ayg==}
     dev: false
@@ -5941,8 +5943,8 @@ packages:
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
-      caniuse-lite: 1.0.30001554
-      electron-to-chromium: 1.4.567
+      caniuse-lite: 1.0.30001559
+      electron-to-chromium: 1.4.574
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
     dev: false
@@ -6020,6 +6022,10 @@ packages:
 
   /caniuse-lite@1.0.30001554:
     resolution: {integrity: sha512-A2E3U//MBwbJVzebddm1YfNp7Nud5Ip+IPn4BozBmn4KqVX7AvluoIDFWjsv5OkGnKUXQVmMSoMKLa3ScCblcQ==}
+    dev: false
+
+  /caniuse-lite@1.0.30001559:
+    resolution: {integrity: sha512-cPiMKZgqgkg5LY3/ntGeLFUpi6tzddBNS58A4tnTgQw1zON7u2sZMU7SzOeVH4tj20++9ggL+V6FDOFMTaFFYA==}
     dev: false
 
   /canonicalize@1.0.8:
@@ -6491,8 +6497,8 @@ packages:
     resolution: {integrity: sha512-dBGSmoUIK6h2vadDctrDnhhTO01PR2hJk0mRNEfrRDPCjaIwrfy4J+eziEQ9Q1m8By4f/CSRgKM1h53ydKfdNg==}
     dev: false
 
-  /electron-to-chromium@1.4.567:
-    resolution: {integrity: sha512-8KR114CAYQ4/r5EIEsOmOMqQ9j0MRbJZR3aXD/KFA8RuKzyoUB4XrUCg+l8RUGqTVQgKNIgTpjaG8YHRPAbX2w==}
+  /electron-to-chromium@1.4.574:
+    resolution: {integrity: sha512-bg1m8L0n02xRzx4LsTTMbBPiUd9yIR+74iPtS/Ao65CuXvhVZHP0ym1kSdDG3yHFDXqHQQBKujlN1AQ8qZnyFg==}
     dev: false
 
   /elliptic@6.5.4:
@@ -7154,8 +7160,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /ethers@6.8.0:
-    resolution: {integrity: sha512-zrFbmQRlraM+cU5mE4CZTLBurZTs2gdp2ld0nG/f3ecBK+x6lZ69KSxBqZ4NjclxwfTxl5LeNufcBbMsTdY53Q==}
+  /ethers@6.8.1:
+    resolution: {integrity: sha512-iEKm6zox5h1lDn6scuRWdIdFJUCGg3+/aQWu0F4K0GVyEZiktFkqrJbRjTn1FlYEPz7RKA707D6g5Kdk6j7Ljg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@adraffy/ens-normalize': 1.10.0

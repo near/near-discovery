@@ -214,10 +214,7 @@ export const UserDropdownMenu = () => {
             <i className="ph-duotone ph-user"></i>
             Profile
           </DropdownMenu.Item>
-          <DropdownMenu.Item
-            className="DropdownMenuItem"
-            onClick={() => router.push(`/settings`)}
-          >
+          <DropdownMenu.Item className="DropdownMenuItem" onClick={() => router.push(`/settings`)}>
             <i className="ph ph-gear"></i>
             Settings
           </DropdownMenu.Item>
