@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
+import { openToast } from '@/components/lib/Toast';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -49,7 +50,13 @@ const SettingsPage: NextPageWithLayout = () => {
       }
       setIdosUser(userInfo);
     } catch (error: any) {
+      const errorMessage = error.message ? error.message : 'unknown';
       console.error('Failed to get user info: ', error);
+      openToast({
+        type: 'ERROR',
+        title: 'Failed to get user info from IDOS',
+        description: `${errorMessage}`,
+      });
     }
   }, [idOS]);
 
@@ -67,7 +74,13 @@ const SettingsPage: NextPageWithLayout = () => {
         credentials = await idOS.data.list('credentials');
         resolve();
       } catch (error: any) {
+        const errorMessage = error.message ? error.message : 'unknown';
         console.error('Failed to get credentials: ', error);
+        openToast({
+          type: 'ERROR',
+          title: 'Failed to get credentials from IDOS',
+          description: `${errorMessage}`,
+        });
         reject();
       }
     });
