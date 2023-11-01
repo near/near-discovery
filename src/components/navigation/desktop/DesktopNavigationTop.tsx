@@ -111,6 +111,11 @@ const Container = styled.div`
         align-items: center;
         border-radius: 10px;
         margin-right: 10px;
+        flex-shrink: 0;
+      }
+      .submenu-item-title {
+        flex-grow: 1;
+        white-space: nowrap;
       }
       &:hover {
         opacity: 1;
@@ -372,7 +377,7 @@ export const DesktopNavigationTop = () => {
                     <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
                       <img src={child.icon} alt="" />
                     </div>
-                    {child.title}
+                    <span className="submenu-item-title">{child.title}</span>
                   </div>
                 ) : (
                   <Link
@@ -383,7 +388,7 @@ export const DesktopNavigationTop = () => {
                     <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
                       <img src={child.icon} alt="" />
                     </div>
-                    {child.title}
+                    <span className="submenu-item-title">{child.title}</span>
                   </Link>
                 )}
               </>
