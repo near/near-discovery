@@ -6,6 +6,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
+import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EmbedComponentPage: NextPageWithLayout = () => {
@@ -33,6 +34,8 @@ const EmbedComponentPage: NextPageWithLayout = () => {
           logOut: authStore.logOut,
           targetComponent: componentSrc,
           targetProps: componentProps,
+          termsDomainName,
+          privacyDomainName,
         }}
       />
     </div>

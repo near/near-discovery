@@ -56,3 +56,5 @@ export const networks: Record<NetworkId, Network> = {
 export const networkId: NetworkId = (process.env.NEXT_PUBLIC_NETWORK_ID as NetworkId) || 'testnet';
 export const network = networks[networkId];
 export const signInContractId = networkId === 'testnet' ? 'v1.social08.testnet' : 'social.near';
+export const termsDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ipfs/${process.env.NEXT_PUBLIC_TERMS_CID}`;
+export const privacyDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ipfs/${process.env.NEXT_PUBLIC_PRIVACY_CID}`;
