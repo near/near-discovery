@@ -801,7 +801,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
         ) : null}
       </NewHomePageRight>
 
-      <NewHomePageFooter>
+      {/* <NewHomePageFooter>
         <div className="page-connect-item">
           <img src={docsIcon} alt="" />
           <p>Docs</p>
@@ -813,7 +813,7 @@ const NewHomePageContent: NextPageWithLayout = () => {
           <img src={HelpIcon} alt="" />
           <p>Help & Feedback</p>
         </div>
-      </NewHomePageFooter>
+      </NewHomePageFooter> */}
     </NewHomePage>
   );
 };
