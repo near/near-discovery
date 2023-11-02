@@ -30,6 +30,7 @@ type NetworkComponents = {
     };
     learnPage: string;
   };
+  relayerDemo: string;
   notificationButton: string;
   peoplePage: string;
   profileImage: string;
@@ -83,6 +84,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         },
         learnPage: `${testnetTLA}/widget/NearOrg.LearnPage`,
       },
+      relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
       peoplePage: `${testnetTLA}/widget/PeoplePage`,
       profileImage: 'eugenethedream/widget/ProfileImage',
@@ -129,6 +131,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         },
         learnPage: 'near/widget/NearOrg.LearnPage',
       },
+      relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
       notificationButton: 'near/widget/NotificationButton',
       peoplePage: 'near/widget/PeoplePage',
       profileImage: 'mob.near/widget/ProfileImage',
