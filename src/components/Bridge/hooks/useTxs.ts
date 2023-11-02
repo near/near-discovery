@@ -1,9 +1,10 @@
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, useRef } from 'react';
 
 export default function useTxs(updater?: number) {
   const [count, setCount] = useState(0);
   const [txs, setTxs] = useState();
   const [loading, setLoading] = useState(false);
+  const timer = useRef<any>();
   const getTxsStatus = useCallback(async () => {
     setLoading(true);
     try {
@@ -20,6 +21,10 @@ export default function useTxs(updater?: number) {
       });
       setCount(txIds.length);
       setTxs(_bridgeTxs);
+      clearTimeout(timer.current);
+      timer.current = setTimeout(() => {
+        getTxsStatus();
+      }, 1000 * 60);
     } finally {
       setLoading(false);
     }

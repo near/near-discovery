@@ -46,7 +46,7 @@ const StyledExchangeIcon = styled.div`
   margin: 20px auto 0px;
 `;
 
-const Bridge = () => {
+const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   const [showTokenDialog, setShowTokenDialog] = useState<boolean>(false);
   const [showChainDialog, setShowChainDialog] = useState<boolean>(false);
   const [selectedTokenAddress, setSelectedTokenAddress] = useState<string>('');
@@ -62,11 +62,11 @@ const Bridge = () => {
     chains,
     tokens,
   });
-  const { balance, loading } = useTokenBalance({ currency: inputToken, inputChain, updater });
+  const { balance, loading } = useTokenBalance({ currency: inputToken, updater });
   const { balance: nativeTokenBalance } = useTokenBalance({
     isNative: true,
     isPure: true,
-    inputChain,
+    currency: { chainId: inputChain?.chainId || 1, symbol: '', icon: '', decimals: 18 },
     updater,
   });
   const { checked, setChecked, destination, setDestination } = useDestination();
@@ -220,6 +220,7 @@ const Bridge = () => {
             swaping={swaping}
             onSuccess={(hash) => {
               setUpdater(Date.now());
+              onSuccess();
             }}
           />
         </>

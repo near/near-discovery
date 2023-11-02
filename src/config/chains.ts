@@ -34,7 +34,7 @@ export default {
     chainName: 'Arbitrum',
     icon: 'https://ipfs.near.social/ipfs/bafkreiajyg2iof2wygtgromy6a2yfl2fqavfy235k7afc4frr7xnljvu2a',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-    rpcUrls: ['https://eth.llamarpc.com'],
+    rpcUrls: ['https://arb1.arbitrum.io/rpc'],
     blockExplorers: 'https://arbiscan.io',
   },
   43114: {

@@ -24,6 +24,25 @@ const Item = styled.div`
 const StyledInviteCode = styled(Item)`
   position: relative;
 `;
+const StyledDisconnect = styled(Item)`
+  position: relative;
+  .tips {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: rgba(55, 58, 83, 0.5);
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: 500;
+    color: #ff61d3;
+    position: absolute;
+    bottom: -41px;
+    right: 0px;
+    display: none;
+  }
+  &:hover .tips {
+    display: block;
+  }
+`;
 
 const SubtractItem = ({ showCodes, setShowCodes }: { showCodes: boolean; setShowCodes: (show: boolean) => void }) => {
   const { account } = useAccount();
@@ -79,7 +98,7 @@ const SubtractItem = ({ showCodes, setShowCodes }: { showCodes: boolean; setShow
           }}
         />
       </StyledInviteCode>
-      <Item
+      <StyledDisconnect
         onClick={async () => {
           if (account) {
             await logout();
@@ -95,7 +114,8 @@ const SubtractItem = ({ showCodes, setShowCodes }: { showCodes: boolean; setShow
             fill="#979ABE"
           />
         </svg>
-      </Item>
+        <div className="tips">Disconnect</div>
+      </StyledDisconnect>
     </StyledSubtractItem>
   );
 };

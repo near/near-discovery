@@ -135,7 +135,7 @@ const BridgeWrapper = ({
           <TransactionTips count={count} />
         </TipsWrapper>
       )}
-      <Box>{showHistory ? <BridgeHistory txs={txs} loading={txLoading} /> : <Bridge />}</Box>
+      <Box>{showHistory ? <BridgeHistory txs={txs} loading={txLoading} /> : <Bridge onSuccess={refreshTxs} />}</Box>
     </StyledBridgeWrapper>
   );
 };

@@ -2,19 +2,17 @@ import { Contract, providers, utils } from 'ethers';
 import { useEffect, useState } from 'react';
 
 import chains from '@/config/chains';
-import type { Chain, Token } from '@/types';
+import type { Token } from '@/types';
 
 import useAccount from './useAccount';
 
 export default function useTokenBalance({
   currency,
-  inputChain,
   updater,
   isNative,
   isPure,
 }: {
   currency?: Token;
-  inputChain?: Chain;
   updater?: number;
   isNative?: boolean;
   isPure?: boolean;
@@ -22,9 +20,9 @@ export default function useTokenBalance({
   const [balance, setBalance] = useState<string>();
   const [loading, setLoading] = useState<boolean>(false);
   const { account, chainId } = useAccount();
-
   useEffect(() => {
-    const rpcUrl = inputChain?.rpcUrls[0] ? inputChain?.rpcUrls[0] : chainId ? chains[chainId].rpcUrls[0] : '';
+    const _chainId = currency?.chainId ? currency.chainId : chainId;
+    const rpcUrl = _chainId ? chains[_chainId].rpcUrls[0] : '';
     const getBalance = async () => {
       if (!currency || !rpcUrl || !account || !currency.address) return;
       setLoading(true);
@@ -76,6 +74,6 @@ export default function useTokenBalance({
     };
     if (!!(currency?.address || currency?.isNative || isNative) && account)
       currency?.isNative || isNative ? getNativeBalance() : getBalance();
-  }, [currency, account, updater, inputChain]);
+  }, [currency, account, updater, chainId]);
   return { balance, loading };
 }

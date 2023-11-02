@@ -31,7 +31,7 @@ export default function useBestRoute() {
         const response = await getQouteInfo({ targetToken, chain, targetChain });
         setChecking(false);
         setTrade({
-          time: '1min',
+          time: '5min',
           amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(2, 0) : '-') + '  ' + targetToken.symbol,
           gasCost: response,
           dex: 'Stargate',
