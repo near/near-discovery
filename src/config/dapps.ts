@@ -732,7 +732,7 @@ export const dapps = [
   {
     name: 'Gamma',
     dappRoute: 'bluebiu.near/widget/Linea.Liquidity.GAMMA', //TODO:
-    logo: 'https://ipfs.near.social/ipfs/bafkreigq2itome7z2xktsxcxsitqkqsdtaulnyhu2z4ekc6udecl7ihfhi',
+    logo: 'https://ipfs.near.social/ipfs/bafkreibwvipasq4updgsl354x7m7y5yy7ypwort5v7xcxusg2uy5voz2xy',
     TBD_TOKEN: 'N',
     description: 'A protocol for active liquidity management and market making strategies',
     tags: ['Liquidity'],
