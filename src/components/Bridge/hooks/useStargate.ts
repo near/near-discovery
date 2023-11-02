@@ -252,7 +252,7 @@ export default function useStargate() {
         time: Date.now(),
         scan: chain.blockExplorers,
         isStargate: true,
-        duration: '1 min',
+        duration: '5 min',
       };
       localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
     }
