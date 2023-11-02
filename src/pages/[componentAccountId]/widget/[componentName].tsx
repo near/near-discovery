@@ -10,6 +10,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
+import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 type ComponentMetaPreview = {
@@ -115,6 +116,8 @@ const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSideProps
                 logOut: authStore.logOut,
                 targetProps: componentProps,
                 targetComponent: componentSrc,
+                termsDomainName,
+                privacyDomainName,
               }}
             />
           </div>

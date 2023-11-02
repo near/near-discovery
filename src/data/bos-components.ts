@@ -29,6 +29,8 @@ type NetworkComponents = {
       iosHomeScreenAlert: string;
     };
     learnPage: string;
+    termsPage: string;
+    privacyPage: string;
   };
   relayerDemo: string;
   notificationButton: string;
@@ -83,6 +85,8 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
           iosHomeScreenAlert: `${testnetTLA}/widget/NearOrg.Notifications.HomeScreenAlert`,
         },
         learnPage: `${testnetTLA}/widget/NearOrg.LearnPage`,
+        termsPage: `${testnetTLA}/widget/NearOrg.TermsPage`,
+        privacyPage: `${testnetTLA}/widget/NearOrg.PrivacyPage`,
       },
       relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
@@ -130,6 +134,8 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
           iosHomeScreenAlert: 'near/widget/NearOrg.Notifications.HomeScreenAlert',
         },
         learnPage: 'near/widget/NearOrg.LearnPage',
+        termsPage: 'near/widget/NearOrg.TermsPage',
+        privacyPage: 'near/widget/NearOrg.PrivacyPage',
       },
       relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
       notificationButton: 'near/widget/NotificationButton',
