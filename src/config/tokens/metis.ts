@@ -18,4 +18,13 @@ export const metis: { [key: string]: Token } = {
     decimals: 18,
     address: '0x420000000000000000000000000000000000000A',
   },
+  metis: {
+    chainId: CHAIN_ID,
+    address: '0xDeadDeAddeAddEAddeadDEaDDEAdDeaDDeAD0000',
+    decimals: 18,
+    symbol: 'METIS',
+    name: 'Metis Token',
+    icon: 'https://assets.coingecko.com/coins/images/15595/small/metis.jpeg?1660285312',
+    isNative: true,
+  },
 };

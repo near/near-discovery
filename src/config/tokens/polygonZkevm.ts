@@ -2,6 +2,14 @@ import type { Token } from '@/types';
 
 const CHAIN_ID = 1101;
 export const polygonZkevm: { [key: string]: Token } = {
+  eth: {
+    chainId: CHAIN_ID,
+    name: 'ETH',
+    symbol: 'ETH',
+    icon: 'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628',
+    decimals: 18,
+    isNative: true,
+  },
   matic: {
     chainId: CHAIN_ID,
     address: '0xa2036f0538221a77A3937F1379699f44945018d0',
