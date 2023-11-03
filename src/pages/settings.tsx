@@ -25,7 +25,7 @@ const SettingsPage: NextPageWithLayout = () => {
     await new Promise<void>(async (resolve, reject) => {
       try {
         console.log('waiting for signer...');
-        const currentUser = await idOS.setSigner('NEAR', wallet);
+        const currentUser = (await idOS.setSigner('NEAR', wallet)) as any;
         setIdosStore({ currentUser });
         resolve();
       } catch (error: any) {
