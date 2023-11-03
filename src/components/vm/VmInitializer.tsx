@@ -1,5 +1,4 @@
 import { sanitizeUrl } from '@braintree/sanitize-url';
-import type { idOS } from '@idos-network/idos-sdk';
 import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
@@ -28,20 +27,20 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
+import { useIdOS } from '@/hooks/useIdOS';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
 import { networkId, signInContractId } from '@/utils/config';
-import { idOSInit } from '@/utils/idOS';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
+
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
   const [signedAccountId, setSignedAccountId] = useState(null);
   const [availableStorage, setAvailableStorage] = useState<Big | null>(null);
   const [walletModal, setWalletModal] = useState<WalletSelectorModal | null>(null);
-  const [idOS, setIdOS] = useState<idOS | null>(null);
   const ethersProviderContext = useEthersProviderContext();
   const { initNear } = useInitNear();
   const near = useNear();
@@ -51,17 +50,7 @@ export default function VmInitializer() {
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
-
-  const init = useCallback(async () => {
-    const idos = await idOSInit();
-    if (idos) {
-      setIdOS(idos);
-    }
-  }, []);
-
-  useEffect(() => {
-    init();
-  }, [init]);
+  const idOS = useIdOS();
 
   useEffect(() => {
     initNear &&
@@ -121,11 +110,11 @@ export default function VmInitializer() {
     near.selector.then((selector: any) => {
       const selectorModal = setupModal(selector, {
         contractId: near.config.contractName,
-        methodNames: idOS.grants.near.contractMethods,
+        methodNames: idOS.near.contractMethods,
       });
       setWalletModal(selectorModal);
     });
-  }, [idOS, near]);
+  }, [near]);
 
   const requestSignMessage = useCallback(
     async (message: string) => {
@@ -221,7 +210,6 @@ export default function VmInitializer() {
       requestSignMessage,
       vmNear: near,
       signedIn,
-      idOS,
     });
   }, [
     account,
@@ -234,7 +222,6 @@ export default function VmInitializer() {
     signedAccountId,
     setAuthStore,
     near,
-    idOS,
   ]);
 
   useEffect(() => {
