@@ -135,15 +135,21 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <div
         id="idos_container"
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          width: '150px',
-          height: '30px',
-          margin: 0,
-          padding: 0,
-        }}
+        style={
+          !router.route.startsWith('/settings')
+            ? ({
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: 0,
+                height: 0,
+                margin: 0,
+                padding: 0,
+                opacity: 0,
+                overflow: 'hidden',
+              } as React.CSSProperties)
+            : undefined
+        }
       />
     </>
   );

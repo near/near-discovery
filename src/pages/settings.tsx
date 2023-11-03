@@ -15,6 +15,8 @@ const SettingsPage: NextPageWithLayout = () => {
   const idosUser = useIdosStore((state) => state.currentUser);
   const idosCredentials = useIdosStore((state) => state.credentials);
   const setIdosStore = useIdosStore((state) => state.set);
+  const createAccountUrl =
+    'https://app.fractal.id/authorize?client_id=PXAbBxPErSPMXiKmMYQ3ged8Qxwqg1Px7ymhsuhaGP4&redirect_uri=https%3A%2F%2Fnear.org%2Fsettings&response_type=code&scope=contact%3Aread%20verification.uniqueness%3Aread%20verification.uniqueness.details%3Aread%20verification.idos%3Aread%20verification.idos.details%3Aread%20verification.wallet-near%3Aread%20verification.wallet-near.details%3Aread';
 
   const connectIdOS = useCallback(async () => {
     if (!near || !idOS) {
@@ -23,7 +25,6 @@ const SettingsPage: NextPageWithLayout = () => {
     const wallet = await (await near.selector).wallet();
     await new Promise<void>(async (resolve, reject) => {
       try {
-        console.log('waiting for signer...');
         const currentUser = (await idOS.setSigner('NEAR', wallet)) as any;
         setIdosStore({ currentUser });
         resolve();
@@ -47,7 +48,6 @@ const SettingsPage: NextPageWithLayout = () => {
 
     await new Promise<void>(async (resolve, reject) => {
       try {
-        console.log('waiting for signature...');
         const credentials = await idOS.data.list('credentials');
         setIdosStore({ credentials });
         resolve();
@@ -66,8 +66,6 @@ const SettingsPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (idosUser && !idosUser.humanId) {
-      const idosPrototype = Object.getPrototypeOf(idOS);
-      const createAccountUrl = idosPrototype?.constructor?.profileProviders[0];
       openToast({
         type: 'INFO',
         title: 'No idOS profile found.',
