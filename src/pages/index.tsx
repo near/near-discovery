@@ -10,6 +10,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useTermsOfServiceStore } from '@/stores/terms-of-service';
+import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
@@ -60,6 +61,8 @@ const HomePage: NextPageWithLayout = () => {
             logOut,
             targetProps: router.query,
             targetComponent: components.default,
+            termsDomainName,
+            privacyDomainName,
             recordToC: setTosData,
           }}
         />
