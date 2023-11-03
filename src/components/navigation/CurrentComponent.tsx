@@ -56,12 +56,21 @@ const Wrapper = styled.div`
     }
   }
 `;
+type Props = {
+  onCloseMenu?: () => void;
+};
 
-export const CurrentComponent = () => {
+export const CurrentComponent = (props: Props) => {
   const src = useCurrentComponentStore((store) => store.src);
   const components = useBosComponents();
 
   if (!src) return null;
+
+  const handleCloseMenu = () => {
+    if (props.onCloseMenu) {
+      props.onCloseMenu();
+    }
+  };
 
   return (
     <Wrapper>
@@ -72,6 +81,7 @@ export const CurrentComponent = () => {
           src,
           size: 'medium',
           showTags: true,
+          onCloseMenu: handleCloseMenu,
         }}
       />
     </Wrapper>

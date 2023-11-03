@@ -34,7 +34,10 @@ type NetworkComponents = {
     fastAuthAndRelayersPage: string;
     dataInfrastructurePage: string;
     dataAvailabilityPage: string;
+    termsPage: string;
+    privacyPage: string;
   };
+  relayerDemo: string;
   notificationButton: string;
   peoplePage: string;
   profileImage: string;
@@ -92,7 +95,10 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         fastAuthAndRelayersPage: `${testnetTLA}/widget/NearOrg.FastAuthAndRelayersPage`,
         dataInfrastructurePage: `${testnetTLA}/widget/NearOrg.DataInfrastructurePage`,
         dataAvailabilityPage: `${testnetTLA}/widget/NearOrg.DataAvailabilityPage`,
+        termsPage: `${testnetTLA}/widget/NearOrg.TermsPage`,
+        privacyPage: `${testnetTLA}/widget/NearOrg.PrivacyPage`,
       },
+      relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
       peoplePage: `${testnetTLA}/widget/PeoplePage`,
       profileImage: 'eugenethedream/widget/ProfileImage',
@@ -143,7 +149,10 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         fastAuthAndRelayersPage: 'near/widget/NearOrg.FastAuthAndRelayersPage',
         dataInfrastructurePage: 'near/widget/NearOrg.DataInfrastructurePage',
         dataAvailabilityPage: 'near/widget/NearOrg.DataAvailabilityPage',
+        termsPage: 'near/widget/NearOrg.TermsPage',
+        privacyPage: 'near/widget/NearOrg.PrivacyPage',
       },
+      relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
       notificationButton: 'near/widget/NotificationButton',
       peoplePage: 'near/widget/PeoplePage',
       profileImage: 'mob.near/widget/ProfileImage',
