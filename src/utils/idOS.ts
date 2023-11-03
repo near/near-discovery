@@ -5,7 +5,7 @@ import { openToast } from '@/components/lib/Toast';
 export const defaultIdosInitOptions = {
   container: '#idos_container',
   // nodeUrl: 'https://nodes.playground.idos.network',
-  nodeUrl: 'https://nodes.staging.idos.network',
+  // nodeUrl: 'https://nodes.staging.idos.network',
 };
 
 export async function idOSInit(options = defaultIdosInitOptions) {
