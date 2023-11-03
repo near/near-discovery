@@ -9,7 +9,6 @@ export function useIdOS() {
   const init = useCallback(async () => {
     await new Promise<void>(async (resolve, reject) => {
       try {
-        console.log('waiting for authentication...');
         const idos = (await idOS.init({ container: '#idos_container' } as {
           nodeUrl: string;
           container: string;

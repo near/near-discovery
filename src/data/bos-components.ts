@@ -113,7 +113,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         typeAheadDropdown: `${testnetTLA}/widget/Search.TypeAheadDropdown`,
       },
       settings: {
-        index: 'discom.testnet/widget/Settings.Index',
+        index: `${testnetTLA}/widget/Settings.Index`,
       },
       viewSource: 'eugenethedream/widget/WidgetSource',
       widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
