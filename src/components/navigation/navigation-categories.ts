@@ -1,5 +1,40 @@
 export const navigationCategories = [
   {
+    title: 'Platform',
+    visible: 'all',
+    sections: [
+      {
+        title: null,
+        links: [
+          {
+            title: 'The Blockchain',
+            url: '/blockchain',
+          },
+          {
+            title: 'Open Web Applications',
+            url: '/open-web-applications',
+          },
+          {
+            title: 'Onboarding',
+            url: '/fast-auth-and-relayers',
+          },
+          {
+            title: 'Data Infrastructure',
+            url: '/data-infrastructure',
+          },
+
+          // The following link should be uncommented and deployed on Nov 9th:
+
+          // {
+          //   title: 'Data Availability',
+          //   url: '/data-availability',
+          // },
+        ],
+      },
+    ],
+  },
+
+  {
     title: 'Develop',
     visible: 'all',
     sections: [

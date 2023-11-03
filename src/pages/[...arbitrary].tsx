@@ -38,7 +38,6 @@ const finiteRoutes: Record<string, string> = {
   'newsletter-thank-you': 'https://pages.near.org/newsletter-thank-you',
   nyc: 'https://pages.near.org/nyc',
   owc: 'https://pages.near.org/owc',
-  privacy: 'https://pages.near.org/privacy/',
   sailgpsf: 'https://pages.near.org/sailgpsf',
   sf: 'https://pages.near.org/sf',
   spill: 'https://pages.near.org/spill',
