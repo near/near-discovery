@@ -3,8 +3,10 @@ import { create } from 'zustand';
 
 import type { IdosUser, IdosWalletInfo } from '@/utils/types';
 
+type IdosTypeTemp = idOS & { setSigner(signer: string, wallet: any): void };
+
 type IdosState = {
-  idOS?: idOS;
+  idOS?: IdosTypeTemp;
   currentUser?: IdosUser;
   credentials?: object[];
   wallets?: IdosWalletInfo[];
