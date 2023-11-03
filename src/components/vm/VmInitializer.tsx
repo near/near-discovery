@@ -35,7 +35,6 @@ import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics'
 import { networkId, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
-
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
   const [signedAccountId, setSignedAccountId] = useState(null);
@@ -114,7 +113,7 @@ export default function VmInitializer() {
       });
       setWalletModal(selectorModal);
     });
-  }, [near]);
+  }, [idOS, near]);
 
   const requestSignMessage = useCallback(
     async (message: string) => {

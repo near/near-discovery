@@ -9,8 +9,8 @@ dependencies:
     specifier: ^6.0.4
     version: 6.0.4
   '@idos-network/idos-sdk':
-    specifier: ^0.0.26
-    version: 0.0.26
+    specifier: ^0.0.27
+    version: 0.0.27
   '@keypom/selector':
     specifier: 1.2.3
     version: 1.2.3(@near-js/accounts@0.1.4)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.1)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.7.0)(@types/react@18.2.34)(near-api-js@2.1.4)(react-dom@18.2.0)(react@18.2.0)
@@ -2091,8 +2091,8 @@ packages:
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
     dev: true
 
-  /@idos-network/idos-sdk@0.0.26:
-    resolution: {integrity: sha512-0VqfFuOYXrur6LsxSdRJVjHb8B1HRnPjuQzYhMZqzPyg3KOeMAM3bbAB3JmOH47foWIHMyMNAggo3cyAB4zBOw==}
+  /@idos-network/idos-sdk@0.0.27:
+    resolution: {integrity: sha512-9xNRD+2A86lHejJfyDf7fp7DQrRGOwBkA+G7dKHGu18RBTknocaZLIniOwcdmEXeJ7fqZT125tEGDWFSmoPeRQ==}
     dependencies:
       '@digitalbazaar/ed25519-signature-2020': 5.2.0
       '@digitalbazaar/ed25519-verification-key-2020': 4.1.0
