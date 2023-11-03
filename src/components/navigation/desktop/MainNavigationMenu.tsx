@@ -16,7 +16,7 @@ const Wrapper = styled.div`
   padding: 0 1rem;
   height: var(--nav-height);
 
-  @media (min-width: 1145px) {
+  @media (min-width: 1400px) {
     // This center aligns the nav items in the center of the viewport on larger screens
     position: absolute;
     left: 0;

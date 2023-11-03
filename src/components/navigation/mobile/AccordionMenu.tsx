@@ -147,7 +147,7 @@ export const AccordionMenu = (props: Props) => {
 
                 {currentComponentSrc && category.title === 'Develop' && (
                   <CurrentComponentSection>
-                    <CurrentComponent />
+                    <CurrentComponent {...props} />
                   </CurrentComponentSection>
                 )}
               </AccordionContent>

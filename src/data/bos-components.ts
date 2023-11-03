@@ -29,7 +29,15 @@ type NetworkComponents = {
       iosHomeScreenAlert: string;
     };
     learnPage: string;
+    blockchainPage: string;
+    openWebApplicationsPage: string;
+    fastAuthAndRelayersPage: string;
+    dataInfrastructurePage: string;
+    dataAvailabilityPage: string;
+    termsPage: string;
+    privacyPage: string;
   };
+  relayerDemo: string;
   notificationButton: string;
   peoplePage: string;
   profileImage: string;
@@ -82,7 +90,15 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
           iosHomeScreenAlert: `${testnetTLA}/widget/NearOrg.Notifications.HomeScreenAlert`,
         },
         learnPage: `${testnetTLA}/widget/NearOrg.LearnPage`,
+        blockchainPage: `${testnetTLA}/widget/NearOrg.BlockchainPage`,
+        openWebApplicationsPage: `${testnetTLA}/widget/NearOrg.OpenWebApplicationsPage`,
+        fastAuthAndRelayersPage: `${testnetTLA}/widget/NearOrg.FastAuthAndRelayersPage`,
+        dataInfrastructurePage: `${testnetTLA}/widget/NearOrg.DataInfrastructurePage`,
+        dataAvailabilityPage: `${testnetTLA}/widget/NearOrg.DataAvailabilityPage`,
+        termsPage: `${testnetTLA}/widget/NearOrg.TermsPage`,
+        privacyPage: `${testnetTLA}/widget/NearOrg.PrivacyPage`,
       },
+      relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
       peoplePage: `${testnetTLA}/widget/PeoplePage`,
       profileImage: 'eugenethedream/widget/ProfileImage',
@@ -128,7 +144,15 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
           iosHomeScreenAlert: 'near/widget/NearOrg.Notifications.HomeScreenAlert',
         },
         learnPage: 'near/widget/NearOrg.LearnPage',
+        blockchainPage: 'near/widget/NearOrg.BlockchainPage',
+        openWebApplicationsPage: 'near/widget/NearOrg.OpenWebApplicationsPage',
+        fastAuthAndRelayersPage: 'near/widget/NearOrg.FastAuthAndRelayersPage',
+        dataInfrastructurePage: 'near/widget/NearOrg.DataInfrastructurePage',
+        dataAvailabilityPage: 'near/widget/NearOrg.DataAvailabilityPage',
+        termsPage: 'near/widget/NearOrg.TermsPage',
+        privacyPage: 'near/widget/NearOrg.PrivacyPage',
       },
+      relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
       notificationButton: 'near/widget/NotificationButton',
       peoplePage: 'near/widget/PeoplePage',
       profileImage: 'mob.near/widget/ProfileImage',
