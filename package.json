@@ -16,11 +16,13 @@
   },
   "dependencies": {
     "@braintree/sanitize-url": "^6.0.4",
+    "@idos-network/idos-sdk": "^0.0.27",
     "@keypom/selector": "1.2.3",
     "@monaco-editor/react": "^4.4.6",
     "@near-js/biometric-ed25519": "0.3.0",
     "@near-wallet-selector/core": "8.7.0",
     "@near-wallet-selector/here-wallet": "8.7.0",
+    "@near-wallet-selector/ledger": "^8.7.0",
     "@near-wallet-selector/meteor-wallet": "8.7.0",
     "@near-wallet-selector/modal-ui": "8.7.0",
     "@near-wallet-selector/my-near-wallet": "8.7.0",
