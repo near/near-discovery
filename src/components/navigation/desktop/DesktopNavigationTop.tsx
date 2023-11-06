@@ -59,15 +59,13 @@ const AccountWrapper = styled.div<{ disabled?: boolean }>`
 
 const Container = styled.div`
   color: #979abe;
-  padding: 20px 36px 0 36px;
+  padding: 20px 36px;
   position: sticky;
   top: 0;
   width: 100%;
   z-index: 1;
-  background: #000000;
-  &.show-border {
-    border-bottom: 1px solid #343838;
-  }
+  background: #16181d;
+  border-bottom: 1px solid #21232a;
 
   .container-nav {
     display: flex;
@@ -148,14 +146,13 @@ const Container = styled.div`
 const LogoContainer = styled.div`
   width: auto;
   align-items: center;
-  padding-bottom: 20px;
 `;
 
 const MenuContainer = styled.div`
+  width: 40%;
   position: absolute;
   top: 50%;
   left: 50%;
-
   transform: translate(-50%, -50%);
 
   flex: 1;
@@ -168,72 +165,101 @@ const MenuContainer = styled.div`
   gap: 50px;
   /* margin: 0 24% 0 14%; */
   align-items: center;
-  .container-menu-item {
-    display: flex;
-    align-items: center;
-    margin: 0 10px;
-    flex: 1;
-    text-align: center;
-    align-items: center;
-    white-space: nowrap;
+`;
+
+const Search = styled.div`
+  width: 100%;
+  position: relative;
+  input {
+    width: 100%;
+    height: 48px;
+    line-height: 48px;
+    background: transparent;
+    border: 1px solid #343743;
+    padding-right: 24px;
+    border-radius: 50px;
+    padding: 16px 16px 16px 50px;
+    color: #ffffff;
+    background: linear-gradient(0deg, #282a33, #282a33), linear-gradient(0deg, #343743, #343743);
+  }
+  input:focus {
+    outline: none;
+    color: #ffffff;
+    border: 1px solid #343743;
+    background: linear-gradient(0deg, #282a33, #282a33), linear-gradient(0deg, #343743, #343743);
+    box-shadow: none;
+  }
+  img {
+    position: absolute;
+    left: 20px;
+    top: 16px;
+    margin-left: 0;
     cursor: pointer;
-    text-decoration: none;
-    color: #979abe;
-    position: relative;
-    &:hover {
-      color: #ebf479;
-    }
-    &.active {
+  }
+  .switch-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+`;
+
+const MenuContent = styled.div`
+  display: none;
+  padding-top: 40px;
+  margin: 0 10%;
+  color: #ffffff;
+  display: flex;
+  font-family: Gantari;
+  .menu-content-item {
+    h1 {
+      font-size: 20px;
       font-weight: 700;
-      color: #ebf479;
     }
-    &.version {
-      cursor: not-allowed;
-      span {
-        opacity: 0.6;
-      }
-      .current-version {
-        margin-left: 6px;
-        padding: 4px 14px 4px 8px;
-        background: rgba(55, 58, 83, 0.5);
-        border-radius: 10px;
-        display: inline-block;
-        font-family: Gantari;
-        font-size: 12px;
-        font-style: italic;
-        font-weight: 400;
-        line-height: 14px;
-        letter-spacing: 0em;
-        text-align: left;
-        white-space: nowrap;
-        img {
-          width: 12px;
-          height: 12px;
-          margin-right: 4px;
-        }
-      }
-    }
-    &.version:hover {
+    p {
+      font-size: 14px;
+      font-weight: 400;
       color: #979abe;
+      margin-bottom: 20px;
+    }
+
+    .item-list-ingle {
+      display: inline-block;
+      margin-top: 16px;
+      width: 50%;
+      font-size: 16px;
+    }
+  }
+  &.show {
+    display: flex;
+    animation: slideDown 0.5s ease forwards;
+  }
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 `;
 
-const logoUrl = 'https://ipfs.near.social/ipfs/bafkreifzlmyfwus3t24c5xwz5hg5j4p7tk2pa4lisq4qkxuyky5huxkz6e';
+const logoUrl = 'https://ipfs.near.social/ipfs/bafkreig5ka5mpgawcpswpfqinzpyuxl7wmfbs7xeln3l7udigzvbtotlle';
 
-const lockUrl = 'https://ipfs.near.social/ipfs/bafkreihwfdlygayrdbdjzofkt7js7dhaopyvys7pyglb7zdqvsao7ynt2u';
-const extendPaths = {
-  '/near': ['/rainbow-bridge'],
-  '/rainbow-bridge': ['/near'],
-} as {
-  [key: string]: string[];
-};
+const SearchIcon = (
+  <img src="https://ipfs.near.social/ipfs/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim" alt="" />
+);
+
+const ExpandIcon = 'https://ipfs.near.social/ipfs/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi';
+
+const CloseIcon = 'https://ipfs.near.social/ipfs/bafkreigws2l7qkqzlqlt7dr4v6ncbdske4xvktr2ipbwk7mqyent7bbfza';
 
 export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
   const router = useRouter();
-  const currentPath = router.pathname;
 
   const query = router.query;
   // console.log('query: ', query, currentPath);
@@ -242,112 +268,28 @@ export const DesktopNavigationTop = () => {
 
   const dappConfig = dapps.find((item) => typeof dappRoute === 'string' && item.dappRoute.indexOf(dappRoute) > -1);
 
-  const [showSubmenu, setShowSubmenu] = useState(false);
-  const [activeParentIndex, setActiveParentIndex] = useState(-1);
-  const [showBorder, setShowBorder] = useState(false);
-  const hasSubmenu = activeParentIndex === 1 || activeParentIndex === 2;
-
   const search = useSearchParams();
 
   const dappLogo = search.get('logo') || dappConfig?.logo;
 
   const name = search.get('name') || dappConfig?.name;
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      setShowBorder(scrollTop > 0 && !hasSubmenu);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [hasSubmenu]);
-
-  useEffect(() => {
-    const parentIndex = menuData.findIndex(
-      (item) =>
-        item.path === currentPath ||
-        (item.children &&
-          item.children.some(
-            (child) =>
-              child.path === currentPath ||
-              (child.path && extendPaths[child.path] && extendPaths[child.path].includes(currentPath)),
-          )),
-    );
-
-    setActiveParentIndex(parentIndex);
-    setShowSubmenu(parentIndex === 1 || parentIndex === 2);
-  }, [currentPath]);
-
-  const handleMenuClick = (index: number, hasChildren: boolean) => {
-    if (hasChildren) {
-      if (index === activeParentIndex) {
-        setShowSubmenu(!showSubmenu);
-      } else {
-        setShowSubmenu(true);
-        setActiveParentIndex(index);
-      }
-    } else {
-      setShowSubmenu(false);
-      setActiveParentIndex(-1);
-    }
-
-    if (hasChildren && index !== activeParentIndex) {
-      const firstChildPath = menuData[index]?.children?.[0]?.path;
-      if (firstChildPath) {
-        router.push(firstChildPath);
-      }
-    }
-  };
+  const [showMenuContent, setShowMenuContent] = useState(false);
 
   return (
-    <Container className={showBorder ? 'show-border' : ''}>
+    <Container>
       <div className="container-nav">
         <LogoContainer>
           <img src={logoUrl} alt="" />
         </LogoContainer>
         <MenuContainer>
-          {menuData.map((item, index) => {
-            const isActive =
-              item.path === currentPath || (item.children && item.children.some((child) => child.path === currentPath));
-            const isParentActive = activeParentIndex === index;
-            const hasChildren = !!item.children;
-            const className = `container-menu-item ${isActive || isParentActive ? 'active' : ''} ${
-              item.version === false ? 'version' : ''
-            }`;
-            return item.children ? (
-              <div key={index} className={className} onClick={() => handleMenuClick(index, hasChildren)}>
-                <span>{item.title}</span>
-              </div>
-            ) : (
-              <>
-                {item.version === false ? (
-                  <div key={index} className={className}>
-                    <span>{item.title}</span>
-                    <>
-                      {item.level && (
-                        <div className="current-version">
-                          <img src={lockUrl} alt="" />
-                          Lv.3
-                        </div>
-                      )}
-                    </>
-                  </div>
-                ) : (
-                  <Link
-                    key={index}
-                    href={item.path || ''}
-                    className={className}
-                    onClick={() => handleMenuClick(index, hasChildren)}
-                  >
-                    <span>{item.title}</span>
-                  </Link>
-                )}
-              </>
-            );
-          })}
+          <Search>
+            <input type="text" placeholder="search dapps, chains..." autoFocus />
+            {SearchIcon}
+            <div className="switch-icon" onClick={() => setShowMenuContent(!showMenuContent)}>
+              <img src={showMenuContent ? CloseIcon : ExpandIcon} alt="" />
+            </div>
+          </Search>
         </MenuContainer>
         {account ? (
           <LoginContainer>
@@ -365,38 +307,6 @@ export const DesktopNavigationTop = () => {
         )}
       </div>
 
-      {showSubmenu && (
-        <div className={`container-submenu ${showSubmenu ? 'show' : ''}`}>
-          {menuData[activeParentIndex]?.children?.map((child, childIndex) => {
-            const extendActive = extendPaths[child?.path || '']?.includes(currentPath);
-
-            return (
-              <>
-                {child.disable ? (
-                  <div key={childIndex} className="submenu-item submenu-item-disable">
-                    <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
-                      <img src={child.icon} alt="" />
-                    </div>
-                    <span className="submenu-item-title">{child.title}</span>
-                  </div>
-                ) : (
-                  <Link
-                    key={childIndex}
-                    href={child.path || ''}
-                    className={`submenu-item ${child.path === currentPath || extendActive ? 'active' : ''}`}
-                  >
-                    <div className="submenu-item-icon" style={{ backgroundColor: child.bgColor }}>
-                      <img src={child.icon} alt="" />
-                    </div>
-                    <span className="submenu-item-title">{child.title}</span>
-                  </Link>
-                )}
-              </>
-            );
-          })}
-        </div>
-      )}
-
       {dappLogo && name && (
         <BackRoute>
           <Link className="back-icon" href="/">
@@ -407,6 +317,22 @@ export const DesktopNavigationTop = () => {
 
           <div className="dapp-name">{name}</div>
         </BackRoute>
+      )}
+
+      {showMenuContent && (
+        <MenuContent className={showMenuContent ? 'show' : ''}>
+          <div className="menu-content-item">
+            <h1>Explore Dapps</h1>
+            <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
+            <div className="item-list-ingle">Dex</div>
+            <div className="item-list-ingle">Staking</div>
+            <div className="item-list-ingle">Lending</div>
+            <div className="item-list-ingle">Liquidity</div>
+            <div className='content-item-arrow'>
+              
+            </div>
+          </div>
+        </MenuContent>
       )}
     </Container>
   );
