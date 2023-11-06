@@ -44,6 +44,21 @@ type UserTosAgreement = {
   value: number;
 };
 
+export type IdosUser = {
+  humanId?: string;
+  address?: string;
+  publicKey?: string;
+};
+
+export type IdosWalletInfo = {
+  address: string;
+  human_id: string;
+  id: string;
+  message: string;
+  public_key: string;
+  signature: string;
+};
+
 // type DevelopmentNetwork = {
 //   networkId: 'localnet';
 //   viewAccountId: string;

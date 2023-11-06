@@ -17,8 +17,8 @@ const RelayerDemoPage: NextPageWithLayout = () => {
         fastAuthWallet.setRelayerUrl({
           relayerUrl:
             networkId === 'testnet'
-              ? 'http://fastauth.demo.near-relayer-testnet.api.pagoda.co/relay'
-              : 'http://basic.demo.near-relayer-mainnet.api.pagoda.co/relay',
+              ? 'https://fastauth.demo.near-relayer-testnet.api.pagoda.co/relay'
+              : 'https://basic.demo.near-relayer-mainnet.api.pagoda.co/relay',
         }),
       );
   }, [vmNear?.selector]);
