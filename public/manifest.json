@@ -12,7 +12,8 @@
 		{
 			"name":"Near",
 			"url": "/near/widget/ActivityPage",
-			"description":"The OS for an open web"
+			"description":"The OS for an open web",
+			"icons": [{ "src": "/bos-meta-96x96.png", "sizes": "96x96", "type": "image/png" }]
 		}
 	],
 	"screenshots": [
@@ -20,8 +21,15 @@
 			"src": "bos-meta.png",
 			"sizes": "1200x630",
 			"type": "image/png",
-			"description": "A screenshot of the home page"
-		}
+			"description": "A screenshot of the home page",
+			"form_factor": "wide"
+		},
+		{
+      "src": "bos-meta.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "description": "A screenshot of the home page"
+    }
 	],
 	"icons": [
 		{
@@ -46,7 +54,7 @@
 		},
 		{
 			"src": "favicon.png",
-			"sizes": "1064x1064",
+			"sizes": "1024x1024",
 			"type": "image/png"
 		}
 	]
