@@ -39,15 +39,13 @@ const cacheFirst = async ({ request }) => {
     // response may be used only once
     // we need to save clone to put one copy in cache
     // and serve second one
-    putInCache(request, responseFromNetwork.clone());
+    await putInCache(request, responseFromNetwork.clone());
+    return responseFromNetwork;
   } catch (error) {
     // in the case when the network request fails,
     // there is nothing we can do, but we must always
     // return a Response object
     console.log('caught error while adding to cache for request %s ', request)
-  } 
-  finally {
-    return responseFromNetwork;
   }
 };
 
