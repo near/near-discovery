@@ -48,6 +48,9 @@ type NetworkComponents = {
     indexPage: string;
     typeAheadDropdown: string;
   };
+  settings: {
+    index: string;
+  };
   viewSource: string;
   widgetMetadata: string;
   widgetMetadataEditor: string;
@@ -109,6 +112,9 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         indexPage: `${testnetTLA}/widget/Search.IndexPage`,
         typeAheadDropdown: `${testnetTLA}/widget/Search.TypeAheadDropdown`,
       },
+      settings: {
+        index: `${testnetTLA}/widget/Settings.Index`,
+      },
       viewSource: 'eugenethedream/widget/WidgetSource',
       widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
       widgetMetadataEditor: `${testnetTLA}/widget/WidgetMetadataEditor`,
@@ -162,6 +168,9 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       search: {
         indexPage: 'near/widget/Search.IndexPage',
         typeAheadDropdown: 'near/widget/Search.TypeAheadDropdown',
+      },
+      settings: {
+        index: 'near/widget/Settings.Index',
       },
       viewSource: 'mob.near/widget/WidgetSource',
       widgetMetadata: 'mob.near/widget/WidgetMetadata',
