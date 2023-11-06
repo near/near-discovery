@@ -2,6 +2,7 @@ import { sanitizeUrl } from '@braintree/sanitize-url';
 import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
+import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
 import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
@@ -93,6 +94,7 @@ export default function VmInitializer() {
               networkId,
               signInContractId,
             }) as any, // TODO: Refactor setupKeypom() to TS
+            setupLedger(),
           ],
         }),
         customElements: {
