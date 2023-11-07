@@ -58,6 +58,7 @@ const AccountWrapper = styled.div<{ disabled?: boolean }>`
 `;
 
 const Container = styled.div`
+  position: relative;
   color: #979abe;
   padding: 20px 36px;
   position: sticky;
@@ -205,13 +206,33 @@ const Search = styled.div`
 `;
 
 const MenuContent = styled.div`
+  position: absolute;
+  left: 0;
+  top: 78px;
+  background: #16181D;
+  width: 100%;
   display: none;
-  padding-top: 40px;
-  margin: 0 10%;
+  padding: 40px 10% 0 10%;
   color: #ffffff;
   display: flex;
   font-family: Gantari;
+  &.show {
+    display: flex;
+    animation: slideDown 0.5s ease forwards;
+  }
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
   .menu-content-item {
+    display: flex;
+    margin-right: 60px;
     h1 {
       font-size: 20px;
       font-weight: 700;
@@ -229,19 +250,64 @@ const MenuContent = styled.div`
       width: 50%;
       font-size: 16px;
     }
-  }
-  &.show {
-    display: flex;
-    animation: slideDown 0.5s ease forwards;
-  }
-  @keyframes slideDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
+
+    .content-item-arrow {
+      display: inline-block;
+      margin-left: 12px;
+      img {
+        margin-top: 24px;
+      }
     }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
+  }
+  .menu-content-deep {
+    padding-left: 60px;
+    border-left: 1px solid #383b48;
+    .contenr-deep-item {
+      display: flex;
+      margin-bottom: 36px;
+      .deep-item-left {
+        margin-right: 20px;
+        line-height: 62px;
+        width: 42px;
+      }
+      .deep-item-text {
+        h1 {
+          font-size: 20px;
+          font-weight: 700;
+          display: inline-block;
+        }
+        p {
+          font-size: 14px;
+          font-weight: 400;
+          color: #979abe;
+        }
+        .current-version {
+          color: #ebf479;
+          display: inline-block;
+          margin-left: 6px;
+          padding: 4px 14px 4px 8px;
+          background: rgba(55, 58, 83, 0.5);
+          border-radius: 10px;
+          display: inline-block;
+          font-family: Gantari;
+          font-size: 12px;
+          font-style: italic;
+          font-weight: 400;
+          line-height: 14px;
+          letter-spacing: 0em;
+          text-align: left;
+          white-space: nowrap;
+          img {
+            width: 12px;
+            height: 12px;
+            margin-right: 4px;
+          }
+        }
+      }
+    }
+    .deep-item-special {
+      opacity: 0.5;
+      margin-bottom: 0;
     }
   }
 `;
@@ -254,7 +320,17 @@ const SearchIcon = (
 
 const ExpandIcon = 'https://ipfs.near.social/ipfs/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi';
 
-const CloseIcon = 'https://ipfs.near.social/ipfs/bafkreigws2l7qkqzlqlt7dr4v6ncbdske4xvktr2ipbwk7mqyent7bbfza';
+const CloseIcon = 'https://ipfs.near.social/ipfs/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu';
+
+const ArrowIcon = 'https://ipfs.near.social/ipfs/bafkreibrhom3ayevbwnd5e2u65w3qqgqgzk7qumggejceoy5t7ozydu7gm';
+
+const DeepDive = 'https://ipfs.near.social/ipfs/bafkreicrbwiivaavc7dnlyfr72mnuvd36fhpwrw2yxvwp2afebbkso7d6m';
+
+const Shotcuts = 'https://ipfs.near.social/ipfs/bafkreideqs5vzneww4ejycligpml3prkr5wd6rhkalsyhyxcfo7mcdegyq';
+
+const Portfolio = 'https://ipfs.near.social/ipfs/bafkreidtkanbzjdnycy2c3cie32jv2lglg7vsbhvodtlztk7e5sftyrece';
+
+const lockUrl = 'https://ipfs.near.social/ipfs/bafkreigkzmvkujzp5ned6vk55vr6w2vy3lwcbyr4dw35nyddsxtgxy4hcq';
 
 export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
@@ -322,14 +398,66 @@ export const DesktopNavigationTop = () => {
       {showMenuContent && (
         <MenuContent className={showMenuContent ? 'show' : ''}>
           <div className="menu-content-item">
-            <h1>Explore Dapps</h1>
-            <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
-            <div className="item-list-ingle">Dex</div>
-            <div className="item-list-ingle">Staking</div>
-            <div className="item-list-ingle">Lending</div>
-            <div className="item-list-ingle">Liquidity</div>
-            <div className='content-item-arrow'>
-              
+            <div className="content-item-text">
+              <h1>Explore Dapps</h1>
+              <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
+              <div className="item-list-ingle">Dex</div>
+              <div className="item-list-ingle">Staking</div>
+              <div className="item-list-ingle">Lending</div>
+              <div className="item-list-ingle">Liquidity</div>
+            </div>
+            <div className="content-item-arrow">
+              <img src={ArrowIcon} alt="" />
+            </div>
+          </div>
+          <div className="menu-content-item">
+            <div className="content-item-text">
+              <h1>Explore Blockchains</h1>
+              <p>Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems.</p>
+              <div className="item-list-ingle">Polygon zkEVM</div>
+              <div className="item-list-ingle">BSC chain</div>
+              <div className="item-list-ingle">Arbitrum</div>
+              <div className="item-list-ingle">Polygon</div>
+              <div className="item-list-ingle">BASE</div>
+              <div className="item-list-ingle">Mantle</div>
+              <div className="item-list-ingle">Avalanche</div>
+              <div className="item-list-ingle">Gnosis</div>
+            </div>
+            <div className="content-item-arrow">
+              <img src={ArrowIcon} alt="" />
+            </div>
+          </div>
+          <div className="menu-content-deep">
+            <div className="contenr-deep-item">
+              <div className="deep-item-left">
+                <img src={DeepDive} alt="" />
+              </div>
+              <div className="deep-item-text">
+                <h1>DeepDive</h1>
+                <p> DeepDive the hotest L2 Blockcchain to get more intension of reward.</p>
+              </div>
+            </div>
+            <div className="contenr-deep-item">
+              <div className="deep-item-left">
+                <img src={Shotcuts} alt="" />
+              </div>
+              <div className="deep-item-text">
+                <h1>Shotcuts</h1>
+                <p>Shortcuts integrate common functions and the most popular dapps.</p>
+              </div>
+            </div>
+            <div className="contenr-deep-item deep-item-special">
+              <div className="deep-item-left">
+                <img src={Portfolio} alt="" />
+              </div>
+              <div className="deep-item-text">
+                <h1>Portfolio</h1>
+                <div className="current-version">
+                  <img src={lockUrl} alt="" />
+                  Lv.3
+                </div>
+                <p>Access your assets and positions directly from your portfolio after Lv.3.</p>
+              </div>
             </div>
           </div>
         </MenuContent>

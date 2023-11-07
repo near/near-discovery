@@ -3,821 +3,175 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import chains from '@/config/chains';
-import { dapps } from '@/config/dapps';
-import { menuData } from '@/data/menuData';
-import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
-const pageLeftBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
-const pageBottomBg = 'https://ipfs.near.social/ipfs/bafkreib4gjasib7bgfxtjajhgapcxmc2fibrz47felojxdh7z4u5m7yix4';
-const docsIcon = 'https://ipfs.near.social/ipfs/bafkreiae3ujempvwh2mowlpqoitmz7ohcawkrx2u26cezeit443ni475oe';
-const teleIcon = 'https://ipfs.near.social/ipfs/bafkreihsnpk5thlrjlk3jakd6vximvtdcqknsikhdu7fgpkw2jusmjptgq';
-const HelpIcon = 'https://ipfs.near.social/ipfs/bafkreighqgtfiphvdd32lg3io3k447ola32na3ovjppdrhtvfurccbekke';
+const logoUrl = 'https://ipfs.near.social/ipfs/bafkreig5ka5mpgawcpswpfqinzpyuxl7wmfbs7xeln3l7udigzvbtotlle';
+const bannerBg = 'https://ipfs.near.social/ipfs/bafkreigu5rr2jqcw53jwawwyw7ug7uza4gpev2dpftxgs3w7exib2m4bmu';
+const blueBg = 'https://ipfs.near.social/ipfs/bafkreihu2rxecbig3cyici5sbvjus42fazzorn2lq22b32arr3slzbzdye';
+const yellowBg = 'https://ipfs.near.social/ipfs/bafkreiejilw7ah4y2nhn3ohhzl73u7flxafygpiwksc4iepq75s43f3gfa';
+const quick = 'https://ipfs.near.social/ipfs/bafkreic3hzaaz2iteac2oruyk62an47db2vo3z4furlk2rwhxyzks3m23i';
+const arrow = 'https://ipfs.near.social/ipfs/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi';
+const discover = 'https://ipfs.near.social/ipfs/bafkreic5n7m4pvmtudbuhlgggfkkwv7ynqd66tml2ffh5rx4vvbowlf4qu';
+const earn = 'https://ipfs.near.social/ipfs/bafkreib54d2j2gfmn5nw45woc3wcntukrub4zcexaeksguj2fsbojesqoq';
 
-const SearchIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim" alt="" />
-);
-
-const gridIcon = (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-    <rect y="6.3999" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-    <rect x="6.39976" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-    <rect x="6.39976" y="6.3999" width="5.60005" height="5.60005" rx="1" fill="currentColor" />
-  </svg>
-);
-
-const tableIcon = (
-  <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect width="12" height="2.4" rx="1.2" fill="currentColor" />
-    <rect y="4.7998" width="12" height="2.4" rx="1.2" fill="currentColor" />
-    <rect y="9.59961" width="12" height="2.4" rx="1.2" fill="currentColor" />
-  </svg>
-);
-
-const NewHomePage = styled.div`
-  margin: 0 -36px;
-  padding: 0 36px;
-  background-image: url(${pageLeftBg});
-  background-repeat: no-repeat;
-  /* background-size: 228px 228px; */
-  background-position: 0 -60px;
-  color: #979abe;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  position: relative;
-`;
-
-const NewHomePageLeft = styled.div`
-  width: 20%;
-  height: 100%;
-`;
-
-const PageLeftItem = styled.div`
-  margin-bottom: 45px;
-  .page-netWork-list {
-    display: flex;
-    flex-wrap: wrap;
-    .netWork-list-item {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      flex-basis: auto;
-      border: 1px solid #5e617e;
-      border-radius: 10px;
-      padding: 4px 8px 4px 4px;
-      color: #ffffff;
+const HomePage = styled.div`
+  padding: 0 10%;
+  .home-page-content {
+    .it-works-list {
       display: flex;
-      cursor: pointer;
-      img {
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        text-align: center;
-        align-items: center;
-        border-radius: 8px;
-        margin-right: 10px;
-      }
-    }
-    .active {
-      background: rgba(235, 244, 121, 1);
-      color: rgba(24, 26, 39, 1);
-    }
-  }
-  .page-function-list {
-    display: flex;
-    flex-wrap: wrap;
-    .function-list-item {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      flex-basis: auto;
-      border: 1px solid #5e617e;
-      border-radius: 8px;
-      padding: 6px 20px;
-      color: #ffffff;
-      display: flex;
-      cursor: pointer;
-    }
-    .bridge {
-      border: 1px solid rgba(227, 233, 157, 1);
-    }
-    .dex {
-      border: 1px solid rgba(172, 252, 237, 1);
-    }
-    .lending {
-      border: 1px solid rgba(173, 255, 181, 1);
-    }
-    .liquidity {
-      border: 1px solid rgba(170, 214, 255, 1);
-    }
-    .staking {
-      border: 1px solid rgba(193, 191, 255, 1);
-    }
-    .yield {
-      border: 1px solid rgba(249, 181, 230, 1);
-    }
-    .bridgeActive {
-      background: rgba(227, 233, 157, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .dexActive {
-      background: rgba(172, 252, 237, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .lendingActive {
-      background: rgba(173, 255, 181, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .liquidityActive {
-      background: rgba(170, 214, 255, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .stakingActive {
-      background: rgba(193, 191, 255, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .yieldActive {
-      background: rgba(249, 181, 230, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-  }
-  .page-medal-list {
-    display: flex;
-    flex-wrap: wrap;
-    .medal-list-item {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      flex-basis: auto;
-      border: 1px solid #5e617e;
-      border-radius: 8px;
-      padding: 6px 20px;
-      color: #ffffff;
-      display: flex;
-      cursor: pointer;
-    }
-    .active {
-      background: rgba(235, 244, 121, 1);
-      color: rgba(24, 26, 39, 1);
-    }
-  }
-`;
-
-const LeftItemTitle = styled.div`
-  font-size: 16px;
-  margin-bottom: 18px;
-`;
-
-const NewHomePageRight = styled.div`
-  margin-left: 40px;
-  width: 90%;
-  .page-right-content {
-    width: 90%;
-    position: relative;
-    .page-right-tab {
-      border: 1px solid rgba(52, 56, 56, 1);
-      background-color: #151515;
-      padding: 5px;
-      border-radius: 32px;
-      color: rgba(255, 255, 255, 1);
-      display: flex;
-      width: fit-content;
-      margin-bottom: 30px;
-      .right-tab-item {
-        font-size: 20px;
-        font-weight: 700;
-        padding: 8px 24px;
-        cursor: pointer;
-        border-radius: 32px;
-      }
-      .active {
-        background: #ebf479;
-        color: #000000;
-      }
-    }
-    .page-right-switch {
-      position: absolute;
-      right: 0;
-      top: 0;
-      border: 1px solid #5e617e;
-      padding: 4px;
-      display: flex;
-      border-radius: 8px;
-      .right-switch-item {
-        font-size: 12px;
-        color: #5e617e;
-        border-radius: 6px;
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        text-align: center;
-        align-items: center;
-      }
-      .active {
-        background: #5e617e;
-        color: #000000;
-      }
-    }
-  }
-  .tbd-content {
-    .tbd-content-item {
-      display: inline-block;
-      text-decoration: none;
-      color: #979abe;
-      width: 300px;
-      height: 215px;
-      margin-right: 24px;
-      margin-bottom: 28px;
-      background: linear-gradient(180deg, #373a53 0%, #13141b 100%);
-      border-radius: 20px;
-      padding: 20px;
-      .content-item-title {
-        display: flex;
-        margin-bottom: 16px;
-        .item-title-icon {
-          margin-right: 14px;
-          width: 72px;
-          height: 72px;
-          img {
-            width: 100%;
-          }
-        }
-        .item-title-text {
-          h1 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ffffff;
-            margin-bottom: 4px;
-          }
-          p {
-            font-size: 12px;
-            margin-bottom: 6px;
-          }
-          .title-text-icon {
-            display: flex;
-            img {
-              width: 20px;
-              height: 20px;
-              margin-right: 4px;
-            }
-          }
-        }
-      }
-      .content-item-text {
-        text-align: left;
-        margin-bottom: 20px;
-        height: 50px;
-        p {
-          display: -webkit-box;
-          -webkit-box-orient: vertical;
-          -webkit-line-clamp: 3;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          font-size: 14px;
-          line-height: 17px;
-          letter-spacing: 0em;
-        }
-      }
-      .content-item-tag {
-        display: flex;
-        .item-tag-item {
-          margin-right: 10px;
-          padding: 2px 8px;
-          font-size: 12px;
-          color: #000000;
-          border-radius: 30px;
-        }
-        .Dexes {
-          background: #acfced;
-        }
-        .Bridge {
-          background: #e3e99d;
-        }
-        .Lending {
-          background: #adffb5;
-        }
-        .Liquidity {
-          background: #aad6ff;
-        }
-        .Staking {
-          background: #c1bfff;
-        }
-        .Yield {
-          background: #f9b5e6;
-        }
-      }
-    }
-  }
-  .tbd-table-content {
-    width: 90%;
-    border: 1px solid rgba(52, 56, 56, 1);
-    border-radius: 32px;
-    padding: 20px;
-    background: linear-gradient(180deg, #141414 0%, #141414 100%), linear-gradient(0deg, #343838, #343838);
-    color: rgba(151, 154, 190, 1);
-    font-weight: 400;
-    table {
-      tbody tr {
-        cursor: pointer;
-      }
-
-      width: 100%;
-      tr th {
-        font-weight: 400;
-      }
-      tr td {
-        border-bottom: 1px solid rgba(52, 56, 56, 1);
-        padding: 12px 2px;
-        img {
-          width: 42px;
-          margin-right: 10px;
-        }
+      .works-list-item {
+        background: linear-gradient(180deg, #373a53 0%, #16181d 100%);
+        padding: 30px;
+        border-radius: 20px;
+        color: #d2d2d2;
+        position: relative;
+        margin-bottom: 60px;
         h1 {
-          font-family: Gantari;
-          font-size: 16px;
+          font-size: 26px;
           font-weight: 700;
-          line-height: 19px;
-          letter-spacing: 0em;
-          text-align: left;
-          display: inline-block;
+          margin-bottom: 14px;
           color: #ffffff;
         }
-        .content-item-tag {
-          display: flex;
-          .item-tag-item {
-            margin-right: 10px;
-            padding: 2px 8px;
-            font-size: 12px;
-            color: #000000;
-            border-radius: 30px;
-          }
-          .Dexes {
-            background: #acfced;
-          }
-          .Bridge {
-            background: #e3e99d;
-          }
-          .Lending {
-            background: #adffb5;
-          }
-          .Liquidity {
-            background: #aad6ff;
-          }
-          .Staking {
-            background: #c1bfff;
-          }
-          .Yield {
-            background: #f9b5e6;
+        p {
+          font-size: 18px;
+        }
+        a {
+          color: #d2d2d2;
+          text-decoration: underline;
+        }
+        .list-item-img {
+          position: absolute;
+          right: 12px;
+          top: -36px;
+          img {
+            width: 120px;
+            height: 120px;
           }
         }
+      }
+      .works-list-arrow {
+        padding: 40px 24px 0 24px;
       }
     }
   }
 `;
 
-const Search = styled.div`
-  margin-bottom: 26px;
-  input {
-    width: 90%;
-    height: 48px;
-    line-height: 48px;
-    background: transparent;
-    border: 1px #373a53 solid;
-    padding-right: 24px;
-    border-radius: 12px;
-    padding: 16px;
+const Banner = styled.div`
+  width: 100%;
+  height: 448px;
+  position: relative;
+  background-image: url(${bannerBg});
+  background-repeat: no-repeat;
+  background-size: 86%;
+  background-position-x: 50%;
+  .blue-bg {
+    position: absolute;
+    right: 0;
+    /* bottom: 0; */
+  }
+  .yellow-bg {
+    position: absolute;
+    left: 15%;
+    top: -20%;
+  }
+  .banner-content {
+    font-family: Gantari;
     color: #ffffff;
-  }
-  input:focus {
-    outline: none;
-    color: #ffffff;
-    border: 1px solid rgba(235, 244, 121, 0.3);
-    background: #0d0e12;
-    box-shadow: none;
-  }
-  img {
-    margin-left: -36px;
-    cursor: pointer;
-  }
-`;
-
-const NewHomePageFooter = styled.div`
-  display: flex;
-  position: absolute;
-  bottom: -50px;
-  left: 25px;
-  .page-connect-item {
-    margin-right: 14px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
     img {
-      width: 19px;
-      margin-bottom: 14px;
+      height: 76px;
+    }
+    h1 {
+      font-size: 42px;
+      font-weight: 700;
+      margin: 32px 0 20px 0;
+      span {
+        color: #ebf479;
+      }
     }
     p {
-      font-size: 14px;
-      color: rgba(94, 97, 126, 1);
+      font-size: 20px;
+      font-weight: 500;
     }
   }
 `;
 
-const NewHomePageContent: NextPageWithLayout = () => {
-  const components = useBosComponents();
+const Title = styled.div`
+  font-size: 36px;
+  font-weight: 700;
+  background-image: linear-gradient(270deg, #ebf479 0%, #979abe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 36px;
+  display: inline-block;
+`;
 
-  const [selectedMenu, setSelectedMenu] = useState(() => {
-    return '';
-  });
-  const handleMenuClick = (path: string) => {
-    if (selectedMenu === path) {
-      setSelectedMenu('');
-    } else {
-      setSelectedMenu(path);
-    }
-  };
-
-  const [selectedMedalMenu, setSelectedMedalMenu] = useState(() => {
-    return '';
-  });
-  const handleMedalMenuClick = (path: string) => {
-    setSelectedMedalMenu(path);
-  };
-
-  const [selectedView, setSelectedView] = useState('grid');
-  const handlesetSelectedView = (name: string) => {
-    setSelectedView(name);
-  };
-
-  const [selectedTab, setSelectedTab] = useState(() => {
-    return 'TBD';
-  });
-  const handleTabClick = (path: string) => {
-    setSelectedTab(path);
-  };
-
-  const [selectedFunction, setSelectedFunction] = useState<string[]>(() => {
-    return [];
-  });
-  const handleFunctionClick = (functionType: string) => {
-    if (selectedFunction.includes(functionType)) {
-      setSelectedFunction(selectedFunction.filter((type) => type !== functionType));
-    } else {
-      setSelectedFunction([...selectedFunction, functionType]);
-    }
-  };
-
-  const [searchValue, setSearchValue] = useState('');
-
-  const router = useRouter();
-
-  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const keyword = event.target.value;
-    setSearchValue(keyword);
-  };
-  const filteredDapps = dapps.filter(
-    ({ name, tags, on_chain_ids }) =>
-      name.toLowerCase().includes(searchValue.toLowerCase()) &&
-      (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
-      (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
-  );
-  const sortedDapps = filteredDapps.sort((a, b) => {
-    const nameA = a.name.toLowerCase();
-    const nameB = b.name.toLowerCase();
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  });
-
+const HomeContent: NextPageWithLayout = () => {
   return (
-    <NewHomePage>
-      <NewHomePageLeft>
-        <PageLeftItem>
-          <LeftItemTitle>Network</LeftItemTitle>
-          <div className="page-netWork-list">
-            {Object.values(chains).map((child, index) => (
-              <div
-                className={`netWork-list-item ${selectedMenu === String(child.chainId) ? 'active' : ''}`}
-                key={index}
-                onClick={() => child.chainId && handleMenuClick(String(child.chainId))}
-              >
-                <img src={child.icon} alt="" />
-                {child.chainName}
-              </div>
-            ))}
-          </div>
-        </PageLeftItem>
-        <PageLeftItem>
-          <LeftItemTitle>Function</LeftItemTitle>
-          <div className="page-function-list">
-            <div className="page-function-list">
-              <div
-                className={`function-list-item bridge ${selectedFunction.includes('Bridge') ? 'bridgeActive' : ''}`}
-                onClick={() => handleFunctionClick('Bridge')}
-              >
-                Bridge
-              </div>
-              <div
-                className={`function-list-item dex ${selectedFunction.includes('Dexes') ? 'dexActive' : ''}`}
-                onClick={() => handleFunctionClick('Dexes')}
-              >
-                Dex
-              </div>
-              <div
-                className={`function-list-item lending ${selectedFunction.includes('Lending') ? 'lendingActive' : ''}`}
-                onClick={() => handleFunctionClick('Lending')}
-              >
-                Lending
-              </div>
-              <div
-                className={`function-list-item liquidity ${
-                  selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
-                }`}
-                onClick={() => handleFunctionClick('Liquidity')}
-              >
-                Liquidity
-              </div>
-              <div
-                className={`function-list-item staking ${selectedFunction.includes('Staking') ? 'stakingActive' : ''}`}
-                onClick={() => handleFunctionClick('Staking')}
-              >
-                Staking
-              </div>
-              <div
-                className={`function-list-item yield ${selectedFunction.includes('Yield') ? 'yieldActive' : ''}`}
-                onClick={() => handleFunctionClick('Yield')}
-              >
-                Yield
-              </div>
+    <HomePage>
+      <Banner>
+        <div className="blue-bg">
+          <img src={blueBg} alt="" />
+        </div>
+        <div className="yellow-bg">
+          <img src={yellowBg} alt="" />
+        </div>
+        <div className="banner-content">
+          <img src={logoUrl} alt="" />
+          <h1>
+            your universal entry point into <span>L2s</span>
+          </h1>
+          <span>Built on Bos </span>
+        </div>
+      </Banner>
+      <div className="home-page-content">
+        <Title>How it works</Title>
+        <div className="it-works-list">
+          <div className="works-list-item">
+            <h1>Quick Sign-In</h1>
+            <p>Create an account or log in within seconds to obtain your unique web3 identity.</p>
+            <a href="#">Sign in / View my profile</a>
+            <div className="list-item-img">
+              <img src={quick} alt="" />
             </div>
           </div>
-        </PageLeftItem>
-        {/* <PageLeftItem>
-          <LeftItemTitle>Medal Quest</LeftItemTitle>
-          <div className="page-medal-list">
-            <div
-              className={`medal-list-item ${selectedMedalMenu === 'Both' ? 'active' : ''}`}
-              onClick={() => handleMedalMenuClick('Both')}
-            >
-              Both
-            </div>
-            <div
-              className={`medal-list-item ${selectedMedalMenu === 'Yes' ? 'active' : ''}`}
-              onClick={() => handleMedalMenuClick('Yes')}
-            >
-              Yes
-            </div>
-            <div
-              className={`medal-list-item ${selectedMedalMenu === 'No' ? 'active' : ''}`}
-              onClick={() => handleMedalMenuClick('No')}
-            >
-              No
+          <div className="works-list-arrow">
+            <img src={arrow} alt="" />
+          </div>
+          <div className="works-list-item">
+            <h1>Discover DApps</h1>
+            <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
+            <a href="#">Explore</a>
+            <div className="list-item-img">
+              <img src={discover} alt="" />
             </div>
           </div>
-        </PageLeftItem> */}
-      </NewHomePageLeft>
-
-      <NewHomePageRight>
-        <Search>
-          <input type="text" placeholder="search..." value={searchValue} onChange={handleSearch} autoFocus />
-          {SearchIcon}
-        </Search>
-        <div className="page-right-content">
-          <div className="page-right-tab">
-            <div
-              className={`right-tab-item ${selectedTab === 'TBD' ? 'active' : ''}`}
-              onClick={() => handleTabClick('TBD')}
-            >
-              Token-TBD🔥
-            </div>
-            <div
-              className={`right-tab-item ${selectedTab === 'token' ? 'active' : ''}`}
-              onClick={() => handleTabClick('token')}
-            >
-              Native token
-            </div>
+          <div className="works-list-arrow">
+            <img src={arrow} alt="" />
           </div>
-          <div className="page-right-switch">
-            <div
-              className={`right-switch-item ${selectedView === 'grid' ? 'active' : ''}`}
-              onClick={() => handlesetSelectedView('grid')}
-            >
-              {gridIcon}
-            </div>
-            <div
-              className={`right-switch-item ${selectedView === 'table' ? 'active' : ''}`}
-              onClick={() => handlesetSelectedView('table')}
-            >
-              {tableIcon}
+          <div className="works-list-item">
+            <h1>Earn Rewards</h1>
+            <p>
+              Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the way.
+            </p>
+            <a href="#">View</a>
+            <div className="list-item-img">
+              <img src={earn} alt="" />
             </div>
           </div>
         </div>
-        {selectedTab == 'TBD' ? (
-          <>
-            {selectedView === 'grid' ? (
-              <div className="tbd-content">
-                {sortedDapps
-                  .filter((dapp) => dapp.TBD_TOKEN === 'Y')
-                  .map((dapp, index) => {
-                    const href = dapp.dappRoute || '/';
-                    return (
-                      <Link className="tbd-content-item" key={index} href={href}>
-                        <div className="content-item-title">
-                          <div className="item-title-icon">
-                            <img src={dapp.logo} alt="" />
-                          </div>
-                          <div className="item-title-text">
-                            <h1>{dapp.name}</h1>
-                            <p>Token TBD🔥</p>
-                            <div className="title-text-icon">
-                              {dapp.on_chain_ids.map((chainId, index) => (
-                                <img key={index} src={chains[chainId].icon} alt="" />
-                              ))}
-                            </div>
-                          </div>
-                        </div>
-                        <div className="content-item-text">
-                          <p>{dapp.description}</p>
-                        </div>
-                        <div className="content-item-tag">
-                          {dapp.tags.map((tag, index) => (
-                            <div className={`item-tag-item ${tag}`} key={index}>
-                              {tag}
-                            </div>
-                          ))}
-                        </div>
-                      </Link>
-                    );
-                  })}
-              </div>
-            ) : (
-              <div className="tbd-table-content">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      <th>Native token</th>
-                      <th>Network</th>
-                      <th>Function</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {sortedDapps
-                      .filter((dapp) => dapp.TBD_TOKEN === 'Y')
-                      .map((dapp, index) => (
-                        <tr
-                          key={index}
-                          onClick={(e) => {
-                            const href = dapp.dappRoute || '/';
-                            router.push(href);
-                          }}
-                        >
-                          <td>
-                            <img src={dapp.logo} alt="" />
-                            <h1> {dapp.name}</h1>
-                          </td>
-                          <td>TBD🔥</td>
-                          <td>
-                            <div className="title-text-icon">
-                              {dapp.on_chain_ids.map((chainId, index) => (
-                                <img
-                                  key={index}
-                                  src={chains[chainId].icon}
-                                  alt=""
-                                  style={{ width: '20px', height: '20px' }}
-                                />
-                              ))}
-                            </div>
-                          </td>
-                          <td>
-                            <div className="content-item-tag">
-                              {dapp.tags.map((tag, index) => (
-                                <div className={`item-tag-item ${tag}`} key={index}>
-                                  {tag}
-                                </div>
-                              ))}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </>
-        ) : null}
-        {selectedTab == 'token' ? (
-          <>
-            {selectedView === 'grid' ? (
-              <div className="tbd-content">
-                {sortedDapps
-                  .filter((dapp) => dapp.TBD_TOKEN === 'N')
-                  .map((dapp, index) => (
-                    <Link className="tbd-content-item" key={index} href={dapp.dappRoute || '/'}>
-                      <div className="content-item-title">
-                        <div className="item-title-icon">
-                          <img src={dapp.logo} alt="" />
-                        </div>
-                        <div className="item-title-text">
-                          <h1 style={{ marginBottom: '12px' }}>{dapp.name}</h1>
-                          {/* <p>Token TBD🔥</p> */}
-                          <div className="title-text-icon">
-                            {dapp.on_chain_ids.map((chainId, index) => (
-                              <img key={index} src={chains[chainId].icon} alt="" />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                      <div className="content-item-text">
-                        <p>{dapp.description}</p>
-                      </div>
-                      <div className="content-item-tag">
-                        {dapp.tags.map((tag, index) => (
-                          <div className={`item-tag-item ${tag}`} key={index}>
-                            {tag}
-                          </div>
-                        ))}
-                      </div>
-                    </Link>
-                  ))}
-              </div>
-            ) : (
-              <div className="tbd-table-content">
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Name</th>
-                      {/* <th>Native token</th> */}
-                      <th>Network</th>
-                      <th>Function</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {sortedDapps
-                      .filter((dapp) => dapp.TBD_TOKEN === 'N')
-                      .map((dapp, index) => (
-                        <tr
-                          key={index}
-                          onClick={(e) => {
-                            const href = dapp.dappRoute || '/';
-                            router.push(href);
-                          }}
-                        >
-                          <td>
-                            <img src={dapp.logo} alt="" />
-                            <h1> {dapp.name}</h1>
-                          </td>
-                          {/* <td>TBD🔥</td> */}
-                          <td>
-                            <div className="title-text-icon">
-                              {dapp.on_chain_ids.map((chainId, index) => (
-                                <img
-                                  key={index}
-                                  src={chains[chainId].icon}
-                                  alt=""
-                                  style={{ width: '20px', height: '20px' }}
-                                />
-                              ))}
-                            </div>
-                          </td>
-                          <td>
-                            <div className="content-item-tag">
-                              {dapp.tags.map((tag, index) => (
-                                <div className={`item-tag-item ${tag}`} key={index}>
-                                  {tag}
-                                </div>
-                              ))}
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
-          </>
-        ) : null}
-      </NewHomePageRight>
-
-      {/* <NewHomePageFooter>
-        <div className="page-connect-item">
-          <img src={docsIcon} alt="" />
-          <p>Docs</p>
-        </div>
-        <div className="page-connect-item" style={{ marginRight: '24px' }}>
-          <img src={teleIcon} alt="" />
-        </div>
-        <div className="page-connect-item">
-          <img src={HelpIcon} alt="" />
-          <p>Help & Feedback</p>
-        </div>
-      </NewHomePageFooter> */}
-    </NewHomePage>
+        <Title>Explore Dapps</Title>
+      </div>
+    </HomePage>
   );
 };
 
-NewHomePageContent.getLayout = useDefaultLayout;
+HomeContent.getLayout = useDefaultLayout;
 
-export default NewHomePageContent;
+export default HomeContent;
