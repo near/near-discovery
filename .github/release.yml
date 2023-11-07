@@ -8,15 +8,15 @@ changelog:
     - title: "\U0001F389 New Features"
       labels:
         - feature
-    - title: "Dependencies \U0001F528"
+    - title: "\U0001F528 Dependencies"
       labels:
         - dependency
-    - title: "Breaking Changes \U0001F6E0"
+    - title: "\U0001F6E0 Breaking Changes"
       labels:
         - breaking-change
     - title: "\U0001F41B Fixes"
       labels:
         - bug
-    - title: "Enhancements \U0001F31F"
+    - title: "\U0001F31F Enhancements"
       labels:
         - enhancement
