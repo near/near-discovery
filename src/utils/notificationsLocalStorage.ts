@@ -10,6 +10,8 @@ import type { NotificationLocalStorageByAccountId, NotificationLocalStorageFull 
 
 export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
+const oneDayMiliseconds = 86400000;
+const twoWeeksMiliseconds = oneDayMiliseconds * 14;
 
 const getLSAccountId = (): string => {
   return localStorage.getItem(LS_ACCOUNT_ID) || '';
@@ -25,11 +27,11 @@ export const setHandleOnCancel = () => {
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
         ...localStorageByAccountId,
-        showOnTS: Date.now() + 86400000, // 14 days
+        showOnTS: Date.now() + twoWeeksMiliseconds,
         notNowTS: Date.now(),
         bannerNotNowTS: undefined,
       },
-      showOnTS: Date.now() + 86400000, // 14 days
+      showOnTS: Date.now() + twoWeeksMiliseconds,
       notNowTS: Date.now(),
       bannerNotNowTS: undefined,
     }),
