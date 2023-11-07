@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
@@ -13,7 +13,7 @@ import {
   showNotificationModal,
 } from '@/utils/notifications';
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
-import { getNotificationLocalStorage, setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
+import { getNotificationLocalStorage, setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -22,6 +22,7 @@ const Wrapper = styled.div`
 
 export const NotificationsAlert = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
+  const isSignedIn = useMemo(() => signedIn, [signedIn]);
   const components = useBosComponents();
   const [showNotificationModalState, setShowNotificationModalState] = useState(false);
   const accountId = useAuthStore((store) => store.accountId);
@@ -64,6 +65,7 @@ export const NotificationsAlert = () => {
         tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
       // check if user has already turned on notifications
       const showNotificationPrompt = showNotificationModal();
+      console.log('showing notification modal: ', showNotificationPrompt);
 
       if (!subscribeError && showNotificationPrompt && tosAccepted && (!showOnTS || !iosHomeScreenPrompt)) {
         setTimeout(() => {
@@ -74,20 +76,24 @@ export const NotificationsAlert = () => {
   }, [tosData, subscribeError, showOnTS, iosHomeScreenPrompt]);
 
   useEffect(() => {
-    if (!signedIn) {
+    if (!isSignedIn) {
       return;
     }
+    console.log('NotificationsAlert | isSignedIn: ', isSignedIn);
+
     checkNotificationModal();
-  }, [signedIn, checkNotificationModal]);
+  }, [isSignedIn, checkNotificationModal]);
 
   useEffect(() => {
     if (isIosDevice) {
+      console.log('1. NotificationAlert | isIosDevice: ', isIosDevice);
       setHomeScreenApp(window.matchMedia('(display-mode: standalone)').matches);
     }
   }, [isIosDevice]);
 
   useEffect(() => {
     if (isIosDevice) {
+      console.log('2. NotificationAlert | isIosDevice: ', isIosDevice);
       window.matchMedia('(display-mode: standalone)').addEventListener('change', (e) => setHomeScreenApp(e.matches));
       // Remove event listener
       return () => {
@@ -96,7 +102,7 @@ export const NotificationsAlert = () => {
     }
   }, [isIosDevice]);
 
-  if (!signedIn) return null;
+  if (!isSignedIn) return null;
 
   return (
     <Wrapper>
@@ -110,7 +116,7 @@ export const NotificationsAlert = () => {
             isNotificationSupported,
             isPermisionGranted,
             isPushManagerSupported,
-            setNotificationsSessionStorage,
+            setNotificationsSessionStorage: setNotificationsLocalStorage,
             onOpenChange: handleModalCloseOnEsc,
             iOSDevice: isIosDevice,
             iOSVersion: versionOfIos,

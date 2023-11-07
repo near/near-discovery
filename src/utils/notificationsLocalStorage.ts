@@ -6,6 +6,7 @@ import {
   isPermisionGranted,
   isPushManagerSupported,
 } from './notificationsHelpers';
+import type { NotificationLocalStorageByAccountId, NotificationLocalStorageFull } from './types';
 
 export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
 const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
@@ -151,7 +152,7 @@ export const setClearData = () => {
   );
 };
 
-export const setNotificationsSessionStorage = () => {
+export const setNotificationsLocalStorage = () => {
   const accountIdLS = getLSAccountId();
   const localStorageByAccountId = getNotificationLocalStorage();
 
@@ -172,16 +173,17 @@ export const setNotificationsSessionStorage = () => {
   );
 };
 
-export const getNotificationLocalStorageFull = () =>
+export const getNotificationLocalStorageFull = (): NotificationLocalStorageFull =>
   isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
 
-export const getNotificationLocalStorage = () => {
+export const getNotificationLocalStorage = (): NotificationLocalStorageByAccountId => {
   if (!isLocalStorageSupported()) {
-    return {};
+    return {} as NotificationLocalStorageFull;
   }
 
   const accountIdLS = getLSAccountId();
+  console.log('getNotificationLocalStorage | accountIdLS: ', accountIdLS);
 
-  const notificationsLS = JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
-  return notificationsLS[accountIdLS];
+  const notificationsLS: NotificationLocalStorageFull = JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+  return notificationsLS[accountIdLS] || {};
 };

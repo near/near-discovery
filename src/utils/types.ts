@@ -59,6 +59,30 @@ export type IdosWalletInfo = {
   signature: string;
 };
 
+export type NotificationSubscriptionData = {
+  subscription: PushSubscription;
+  accountId: string;
+  gateway: string;
+};
+
+export type NotificationLocalStorageByAccountId = {
+  isNotificationSupported: boolean;
+  isPushManagerSupported: boolean;
+  isPermisionGranted: boolean;
+  notNowTS?: number;
+  showOnTS?: number;
+  permission?: boolean;
+  subscribeStarted?: boolean;
+  subscribeError?: string;
+  bannerNotNowTS?: number;
+};
+
+export interface NotificationLocalStorage {
+  [accountId: string]: NotificationLocalStorageByAccountId;
+}
+
+export type NotificationLocalStorageFull = NotificationLocalStorage & NotificationLocalStorageByAccountId;
+
 // type DevelopmentNetwork = {
 //   networkId: 'localnet';
 //   viewAccountId: string;

@@ -14,6 +14,7 @@ import {
   setProcessStarted,
   setProcessSuccess,
 } from './notificationsLocalStorage';
+import type { NotificationSubscriptionData } from './types';
 
 const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
 
@@ -75,7 +76,7 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
   }
 };
 
-const sendToPushServer = (subscriptionData: object) =>
+const sendToPushServer = (subscriptionData: NotificationSubscriptionData) =>
   fetch(`${HOST}/subscriptions/create`, {
     headers: {
       'Content-Type': 'application/json',
@@ -84,7 +85,7 @@ const sendToPushServer = (subscriptionData: object) =>
     body: JSON.stringify(subscriptionData),
   });
 
-const pushServerUnsubscribe = (subscription: any) =>
+const pushServerUnsubscribe = (subscription: PushSubscription | null) =>
   fetch(`${HOST}/subscriptions/delete`, {
     headers: {
       'Content-Type': 'application/json',
@@ -129,13 +130,14 @@ export const handleOnCancelBanner = () => {
 export const showNotificationModal = () => {
   const grantedPermission = isPermisionGranted();
   const { permission: initialPermissionGrantedByUser } = getNotificationLocalStorage() ?? {};
+
   if (grantedPermission && initialPermissionGrantedByUser) {
     return false;
   }
 
   const state = getNotificationLocalStorage() || {};
 
-  if ((isLocalStorageSupported() && !state.showOnTS) || state.showOnTS < Date.now()) {
+  if ((isLocalStorageSupported() && !state.showOnTS) || (state && state.showOnTS && state.showOnTS < Date.now())) {
     return true;
   }
 

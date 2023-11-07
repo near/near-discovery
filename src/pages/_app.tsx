@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
@@ -19,7 +19,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
-import { setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
+import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -40,10 +40,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const authStore = useAuthStore();
   const componentSrc = router.query;
+  const isSignedIn = useMemo(() => authStore.signedIn, [authStore.signedIn]);
 
   useEffect(() => {
-    setNotificationsSessionStorage();
-  }, []);
+    // this check is needed to init localStorage for notifications after user signs in
+    if (isSignedIn) {
+      setNotificationsLocalStorage();
+    }
+  }, [isSignedIn]);
 
   useEffect(() => {
     initializeAnalytics();
