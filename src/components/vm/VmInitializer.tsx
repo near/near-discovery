@@ -2,6 +2,7 @@ import { sanitizeUrl } from '@braintree/sanitize-url';
 import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
+import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
 import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
@@ -28,6 +29,7 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
+import { useIdOS } from '@/hooks/useIdOS';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
@@ -49,6 +51,7 @@ export default function VmInitializer() {
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
+  const idOS = useIdOS();
 
   useEffect(() => {
     initNear &&
@@ -93,6 +96,7 @@ export default function VmInitializer() {
               signInContractId,
             }) as any, // TODO: Refactor setupKeypom() to TS
             setupNearMobileWallet(),
+            setupLedger(),
           ],
         }),
         customElements: {
@@ -103,13 +107,17 @@ export default function VmInitializer() {
   }, [initNear]);
 
   useEffect(() => {
-    if (!near) {
+    if (!near || !idOS) {
       return;
     }
     near.selector.then((selector: any) => {
-      setWalletModal(setupModal(selector, { contractId: near.config.contractName }));
+      const selectorModal = setupModal(selector, {
+        contractId: near.config.contractName,
+        methodNames: idOS.near.contractMethods,
+      });
+      setWalletModal(selectorModal);
     });
-  }, [near]);
+  }, [idOS, near]);
 
   const requestSignMessage = useCallback(
     async (message: string) => {
