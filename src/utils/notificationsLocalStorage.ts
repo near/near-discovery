@@ -31,9 +31,6 @@ export const setHandleOnCancel = () => {
         notNowTS: Date.now(),
         bannerNotNowTS: undefined,
       },
-      showOnTS: Date.now() + twoWeeksMiliseconds,
-      notNowTS: Date.now(),
-      bannerNotNowTS: undefined,
     }),
   );
 };
@@ -50,7 +47,6 @@ export const setHandleOnCancelBanner = () => {
         ...localStorageByAccountId,
         bannerNotNowTS: Date.now(),
       },
-      bannerNotNowTS: Date.now(),
     }),
   );
 };
@@ -70,10 +66,6 @@ export const setProcessSuccess = () => {
         subscribeError: '',
         isPermisionGranted: true,
       },
-      permission: true,
-      subscribeStarted: false,
-      subscribeError: '',
-      isPermisionGranted: true,
     }),
   );
 };
@@ -92,9 +84,6 @@ export const setProcessError = (error: any) => {
         subscribeStarted: false,
         subscribeError: errorMessage,
       },
-      permission: false,
-      subscribeStarted: false,
-      subscribeError: errorMessage,
     }),
   );
   openToast({
@@ -118,7 +107,6 @@ export const setProcessEnded = () => {
         ...localStorageByAccountId,
         subscribeStarted: false,
       },
-      subscribeStarted: false,
     }),
   );
 };
@@ -136,8 +124,6 @@ export const setProcessStarted = () => {
         permission: false,
         subscribeStarted: true,
       },
-      permission: false,
-      subscribeStarted: true,
     }),
   );
 };
@@ -168,9 +154,6 @@ export const setNotificationsLocalStorage = () => {
         isPushManagerSupported: isPushManagerSupported(),
         isPermisionGranted: isPermisionGranted(),
       },
-      isNotificationSupported: isNotificationSupported(),
-      isPushManagerSupported: isPushManagerSupported(),
-      isPermisionGranted: isPermisionGranted(),
     }),
   );
 };

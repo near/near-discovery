@@ -31,6 +31,8 @@ export const NotificationsAlert = () => {
   const { isIosDevice, versionOfIos } = useIosDevice();
   const { showOnTS, subscribeStarted, subscribeError } = getNotificationLocalStorage() || {};
   const tosData = useTermsOfServiceStore((store) => store.tosData);
+  const showModalOnTs = useMemo(() => showOnTS, [showOnTS]);
+  const subscriptionError = useMemo(() => subscribeError, [subscribeError]);
 
   const handleModalCloseOnEsc = useCallback(() => {
     setShowNotificationModalState(false);
@@ -67,13 +69,13 @@ export const NotificationsAlert = () => {
       const showNotificationPrompt = showNotificationModal();
       console.log('showing notification modal: ', showNotificationPrompt);
 
-      if (!subscribeError && showNotificationPrompt && tosAccepted && (!showOnTS || !iosHomeScreenPrompt)) {
+      if (!subscriptionError && showNotificationPrompt && tosAccepted && (!showModalOnTs || !iosHomeScreenPrompt)) {
         setTimeout(() => {
           setShowNotificationModalState(showNotificationPrompt);
         }, 4000);
       }
     }
-  }, [tosData, subscribeError, showOnTS, iosHomeScreenPrompt]);
+  }, [tosData, subscriptionError, showModalOnTs, iosHomeScreenPrompt]);
 
   useEffect(() => {
     if (!isSignedIn) {
@@ -86,14 +88,12 @@ export const NotificationsAlert = () => {
 
   useEffect(() => {
     if (isIosDevice) {
-      console.log('1. NotificationAlert | isIosDevice: ', isIosDevice);
       setHomeScreenApp(window.matchMedia('(display-mode: standalone)').matches);
     }
   }, [isIosDevice]);
 
   useEffect(() => {
     if (isIosDevice) {
-      console.log('2. NotificationAlert | isIosDevice: ', isIosDevice);
       window.matchMedia('(display-mode: standalone)').addEventListener('change', (e) => setHomeScreenApp(e.matches));
       // Remove event listener
       return () => {
