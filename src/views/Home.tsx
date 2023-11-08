@@ -486,8 +486,11 @@ const ViewAll = styled.div`
   position: absolute;
   right: 0;
   top: 16px;
-  color: #ebf479;
   font-size: 16px;
+  a {
+    color: #ebf479;
+    text-decoration: none;
+  }
   img {
     width: 16px;
     margin-left: 8px;
@@ -501,8 +504,8 @@ const Paragraph = styled.div`
 `;
 
 const Footer = styled.div`
-width: 100%;
-text-align: center;
+  width: 100%;
+  text-align: center;
   position: absolute;
   bottom: -36px;
   left: 0;
@@ -608,8 +611,10 @@ const HomeContent: NextPageWithLayout = () => {
             Native token
           </div>
           <ViewAll>
-            <span>View all</span>
-            <img src={arrow} alt="" />
+            <Link href="/Home/AllDapps">
+              <span>View all</span>
+              <img src={arrow} alt="" />
+            </Link>
           </ViewAll>
         </div>
         {selectedTab == 'TBD' ? (
@@ -678,8 +683,10 @@ const HomeContent: NextPageWithLayout = () => {
         <div style={{ position: 'relative' }}>
           <Title>Explore Layer 2 Blockchains</Title>
           <ViewAll>
-            <span>View all</span>
-            <img src={arrow} alt="" />
+            <Link href="/">
+              <span>View all</span>
+              <img src={arrow} alt="" />
+            </Link>
           </ViewAll>
         </div>
         <div className="explore-layer-list">
