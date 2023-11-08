@@ -108,8 +108,8 @@ dependencies:
     specifier: ^4.17.21
     version: 4.17.21
   near-fastauth-wallet:
-    specifier: ^0.0.9
-    version: 0.0.9
+    specifier: ^0.0.10
+    version: 0.0.10
   near-social-vm:
     specifier: github:NearSocial/VM#2.5.2
     version: github.com/NearSocial/VM/9fe2d4ec05727ee2e2db8ddf198556220a169a4f(@babel/core@7.23.0)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
@@ -2606,18 +2606,6 @@ packages:
       - encoding
     dev: false
 
-  /@near-wallet-selector/core@8.5.3(near-api-js@2.1.4):
-    resolution: {integrity: sha512-KN0fgrkUz9jpbSImPI4RDYM/S9ARSIcjEP49SVEJp5AQlULrpazJoMRnAWgXRjzvAncSeDOVjb8fAkqxKl3YRQ==}
-    peerDependencies:
-      near-api-js: ^1.0.0 || ^2.0.0
-    dependencies:
-      borsh: 0.7.0
-      events: 3.3.0
-      js-sha256: 0.9.0
-      near-api-js: 2.1.4
-      rxjs: 7.8.1
-    dev: false
-
   /@near-wallet-selector/core@8.7.0(near-api-js@2.1.4):
     resolution: {integrity: sha512-H1Mc0xyWsy5Vjscn8gjK8y0X1wG5EBH9VuVQ+mFOtdyt8y+7Pttf/0dD91oAIwCo7Pu/ryPukcr6IGAz1R05cA==}
     peerDependencies:
@@ -2738,16 +2726,6 @@ packages:
     dependencies:
       '@near-wallet-selector/core': 8.7.0(near-api-js@2.1.4)
       is-mobile: 4.0.0
-      near-api-js: 2.1.4
-    dev: false
-
-  /@near-wallet-selector/wallet-utils@8.5.3(near-api-js@2.1.4):
-    resolution: {integrity: sha512-Ag5bRtQwkPciMSeTrd6TOQyAV3tUWSQTRsZxFqy+aYsQA6vBSI3qsXLSlbjvIQGA8vRgyQdzkkilHWu3gC/Mrg==}
-    peerDependencies:
-      near-api-js: ^1.0.0 || ^2.0.0
-    dependencies:
-      '@near-wallet-selector/core': 8.5.3(near-api-js@2.1.4)
-      bn.js: 5.2.1
       near-api-js: 2.1.4
     dev: false
 
@@ -8895,12 +8873,12 @@ packages:
       - encoding
     dev: false
 
-  /near-fastauth-wallet@0.0.9:
-    resolution: {integrity: sha512-QdIj2SXHFJugpYMx5RuZL3Di63IrpRMa6BNE9tvOw+7Gcb1QbA1BSUmvji+SsUmcHKszz9G5+PnJxaD/8nRxLg==}
+  /near-fastauth-wallet@0.0.10:
+    resolution: {integrity: sha512-eby+wE6gJeAElFFbsyEMg4bGYIOCcj9LKepkgwdpHwNBCE5wg0dfZVWamQEAa8PPXJK/oz1DU+VvbYQAuB29sg==}
     dependencies:
       '@near-js/transactions': 0.2.1
       '@near-wallet-selector/core': 8.7.0(near-api-js@2.1.4)
-      '@near-wallet-selector/wallet-utils': 8.5.3(near-api-js@2.1.4)
+      '@near-wallet-selector/wallet-utils': 8.7.0(near-api-js@2.1.4)
       near-api-js: 2.1.4
       tslib: 2.6.2
     transitivePeerDependencies:
