@@ -1,5 +1,6 @@
 import { openToast } from '@/components/lib/Toast';
 
+import { localStorageAccountIdKey, notificationsLocalStorageKey } from './config';
 import {
   isLocalStorageSupported,
   isNotificationSupported,
@@ -8,13 +9,11 @@ import {
 } from './notificationsHelpers';
 import type { NotificationLocalStorageByAccountId, NotificationLocalStorageFull } from './types';
 
-export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
-const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 const oneDayMiliseconds = 86400000;
-const twoWeeksMiliseconds = oneDayMiliseconds * 14;
+const periodMiliseconds = oneDayMiliseconds * 180; // 180 days
 
 const getLSAccountId = (): string => {
-  return localStorage.getItem(LS_ACCOUNT_ID) || '';
+  return localStorage.getItem(localStorageAccountIdKey) || '';
 };
 
 export const setHandleOnCancel = () => {
@@ -22,12 +21,12 @@ export const setHandleOnCancel = () => {
   const localStorageByAccountId = getNotificationLocalStorage();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
         ...localStorageByAccountId,
-        showOnTS: Date.now() + twoWeeksMiliseconds,
+        showOnTS: Date.now() + periodMiliseconds,
         notNowTS: Date.now(),
         bannerNotNowTS: undefined,
       },
@@ -40,7 +39,7 @@ export const setHandleOnCancelBanner = () => {
   const localStorageByAccountId = getNotificationLocalStorage();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
@@ -56,7 +55,7 @@ export const setProcessSuccess = () => {
   const localStorageByAccountId = getNotificationLocalStorage();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
@@ -75,7 +74,7 @@ export const setProcessError = (error: any) => {
   const localStorageByAccountId = getNotificationLocalStorage();
   const errorMessage = error.message ? error.message : 'unknown';
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
@@ -100,7 +99,7 @@ export const setProcessEnded = () => {
   const localStorageByAccountId = getNotificationLocalStorage();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
@@ -116,7 +115,7 @@ export const setProcessStarted = () => {
   const localStorageByAccountId = getNotificationLocalStorage();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
@@ -132,7 +131,7 @@ export const setClearData = () => {
   const accountIdLS = getLSAccountId();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {},
@@ -145,7 +144,7 @@ export const setNotificationsLocalStorage = () => {
   const localStorageByAccountId = getNotificationLocalStorage();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {
@@ -159,7 +158,7 @@ export const setNotificationsLocalStorage = () => {
 };
 
 export const getNotificationLocalStorageFull = (): NotificationLocalStorageFull =>
-  isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+  isLocalStorageSupported() && JSON.parse(localStorage.getItem(notificationsLocalStorageKey) || '{}');
 
 export const getNotificationLocalStorage = (): NotificationLocalStorageByAccountId => {
   if (!isLocalStorageSupported()) {
@@ -167,8 +166,8 @@ export const getNotificationLocalStorage = (): NotificationLocalStorageByAccount
   }
 
   const accountIdLS = getLSAccountId();
-  console.log('getNotificationLocalStorage | accountIdLS: ', accountIdLS);
-
-  const notificationsLS: NotificationLocalStorageFull = JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+  const notificationsLS: NotificationLocalStorageFull = JSON.parse(
+    localStorage.getItem(notificationsLocalStorageKey) || '{}',
+  );
   return notificationsLS[accountIdLS] || {};
 };

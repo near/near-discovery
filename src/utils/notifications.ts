@@ -1,3 +1,4 @@
+import { notificationApplicationServerKey, notificationsGatewayUrl, notificationsHostName } from './config';
 import {
   isLocalStorageSupported,
   isNotificationSupported,
@@ -15,11 +16,6 @@ import {
   setProcessSuccess,
 } from './notificationsLocalStorage';
 import type { NotificationSubscriptionData } from './types';
-
-const applicationServerKey = 'BH_QFHjBU9x3VlmE9_XM4Awhm5vj2wF9WNQIz5wdlO6hc5anwEHLu6NLW521kCom7o9xChL5xvwTsHLK4dZpVVc';
-
-const HOST = 'https://discovery-notifications-mainnet.near.org';
-const GATEWAY_URL = 'https://near.org';
 
 // min version for iOS to support notifications
 export const recommendedIosVersionForNotifications = 16.4;
@@ -52,7 +48,7 @@ const handlePushManagerSubscribe = async () => {
   try {
     return await serviceWorker.pushManager.subscribe({
       userVisibleOnly: true,
-      applicationServerKey,
+      applicationServerKey: notificationApplicationServerKey,
     });
   } catch (e) {
     console.error('Error while subscribing to service-worker.', e);
@@ -77,7 +73,7 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
 };
 
 const sendToPushServer = (subscriptionData: NotificationSubscriptionData) =>
-  fetch(`${HOST}/subscriptions/create`, {
+  fetch(`${notificationsHostName}/subscriptions/create`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -86,7 +82,7 @@ const sendToPushServer = (subscriptionData: NotificationSubscriptionData) =>
   });
 
 const pushServerUnsubscribe = (subscription: PushSubscription | null) =>
-  fetch(`${HOST}/subscriptions/delete`, {
+  fetch(`${notificationsHostName}/subscriptions/delete`, {
     headers: {
       'Content-Type': 'application/json',
     },
@@ -108,7 +104,7 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
     await sendToPushServer({
       subscription,
       accountId,
-      gateway: GATEWAY_URL,
+      gateway: notificationsGatewayUrl,
     });
 
     setProcessSuccess();

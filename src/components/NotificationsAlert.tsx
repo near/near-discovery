@@ -67,7 +67,6 @@ export const NotificationsAlert = () => {
         tosData.agreementsForUser[tosData.agreementsForUser.length - 1].value === tosData.latestTosVersion;
       // check if user has already turned on notifications
       const showNotificationPrompt = showNotificationModal();
-      console.log('showing notification modal: ', showNotificationPrompt);
 
       if (!subscriptionError && showNotificationPrompt && tosAccepted && (!showModalOnTs || !iosHomeScreenPrompt)) {
         setTimeout(() => {
@@ -81,7 +80,6 @@ export const NotificationsAlert = () => {
     if (!isSignedIn) {
       return;
     }
-    console.log('NotificationsAlert | isSignedIn: ', isSignedIn);
 
     checkNotificationModal();
   }, [isSignedIn, checkNotificationModal]);
