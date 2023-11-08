@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import chains from '@/config/chains';
+import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { dapps } from '@/config/dapps';
-import chains from '@/config/chains';
 
 const logoUrl = 'https://ipfs.near.social/ipfs/bafkreig5ka5mpgawcpswpfqinzpyuxl7wmfbs7xeln3l7udigzvbtotlle';
 const bannerBg = 'https://ipfs.near.social/ipfs/bafkreigu5rr2jqcw53jwawwyw7ug7uza4gpev2dpftxgs3w7exib2m4bmu';
@@ -683,7 +683,7 @@ const HomeContent: NextPageWithLayout = () => {
         <div style={{ position: 'relative' }}>
           <Title>Explore Layer 2 Blockchains</Title>
           <ViewAll>
-            <Link href="/">
+            <Link href="/Home/Blockchains">
               <span>View all</span>
               <img src={arrow} alt="" />
             </Link>
