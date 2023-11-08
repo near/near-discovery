@@ -212,7 +212,7 @@ const MenuContent = styled.div`
   background: #16181D;
   width: 100%;
   display: none;
-  padding: 40px 10% 0 10%;
+  padding: 40px 12% 28px 12%;
   color: #ffffff;
   display: flex;
   font-family: Gantari;
