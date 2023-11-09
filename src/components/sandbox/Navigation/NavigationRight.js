@@ -25,7 +25,12 @@ const NavigationRight = ({
   accountId,
   filesObject,
 }) => {
-  const code = filesObject[JSON.stringify(path)]?.codeVisible;
+  const file = filesObject[JSON.stringify(path)];
+  const code = file?.codeVisible;
+  const forkOf = file?.forkOf;
+  if (forkOf && !metadata?.forkOf) {
+    metadata = { ...metadata, forkOf };
+  }
 
   return (
     <Nav variant="pills mb-2 mt-2 ms-auto" activeKey={jpath}>
