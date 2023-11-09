@@ -375,58 +375,76 @@ const Title = styled.div`
   display: inline-block;
 `;
 
-const Carousel = styled.div`
-  width: 100%;
-  background-image: url(${carouselbg});
-  border-radius: 20px;
-  height: 352px;
-  align-items: center;
-  padding: 26px;
-  background-repeat: no-repeat;
-  background-size: cover;
+const CarouselList = styled.div`
   position: relative;
-  margin-bottom: 42px;
   .carousel-right-icon {
     position: absolute;
     right: -26px;
     top: 50%;
+    cursor: pointer;
   }
-  .carousel-content {
-    background: linear-gradient(180deg, rgba(55, 58, 83, 0.9) 0%, rgba(19, 20, 27, 0.9) 100%);
-    padding: 24px;
+  .carousel {
+    display: none;
+    width: 100%;
+    background-image: url(${carouselbg});
     border-radius: 20px;
-    width: fit-content;
-    img {
-      width: 72px;
-      height: 72px;
-    }
-    h1 {
-      font-size: 32px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 14px 0;
-    }
-    p {
-      font-size: 14px;
-      color: #979abe;
-    }
-    .carousel-btn {
-      display: flex;
-      .carousel-btn-item {
-        flex: 1;
-        margin-right: 18px;
-        background: linear-gradient(0deg, #373a53, #373a53),
-          linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-        font-size: 16px;
-        color: #ffffff;
-        text-align: center;
-        align-items: center;
-        height: 43px;
-        line-height: 43px;
-        border-radius: 12px;
-        border: 1px solid #373a53;
+    height: 352px;
+    align-items: center;
+    padding: 26px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin-bottom: 42px;
+    animation: slideIn 0.5s forwards;
+    will-change: transform;
+    @keyframes slideIn {
+      from {
+        transform: translate3d(100%, 0, 0);
+      }
+      to {
+        transform: translate3d(0, 0, 0);
       }
     }
+    .carousel-content {
+      background: linear-gradient(180deg, rgba(55, 58, 83, 0.9) 0%, rgba(19, 20, 27, 0.9) 100%);
+      padding: 24px;
+      border-radius: 20px;
+      width: fit-content;
+      img {
+        width: 72px;
+        height: 72px;
+      }
+      h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 14px 0;
+      }
+      p {
+        font-size: 14px;
+        color: #979abe;
+      }
+      .carousel-btn {
+        display: flex;
+        .carousel-btn-item {
+          flex: 1;
+          margin-right: 18px;
+          background: linear-gradient(0deg, #373a53, #373a53),
+            linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          font-size: 16px;
+          color: #ffffff;
+          text-align: center;
+          align-items: center;
+          height: 43px;
+          line-height: 43px;
+          border-radius: 12px;
+          border: 1px solid #373a53;
+        }
+      }
+    }
+  }
+  .active {
+    display: block;
   }
 `;
 
@@ -520,6 +538,25 @@ const HomeContent: NextPageWithLayout = () => {
     setSelectedTab(path);
   };
 
+  const carouselData = [
+    {
+      title: 'SyncSwap',
+    },
+    {
+      title: 'Test',
+    },
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleCarouselClick = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
+  };
+
+  const Carousel = ({ active, children }: { active: boolean; children: React.ReactNode }) => {
+    return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
+  };
+
   return (
     <HomePage>
       <Banner>
@@ -576,27 +613,33 @@ const HomeContent: NextPageWithLayout = () => {
         </div>
 
         <Title>Explore Dapps</Title>
-        <Carousel>
-          <div className="carousel-right-icon">
+
+        <CarouselList>
+          <div className="carousel-right-icon" onClick={handleCarouselClick}>
             <img src={carouseicon} alt="" />
           </div>
-          <div className="carousel-content">
-            <img src={syncIcon} alt="" />
-            <h1>SyncSwap</h1>
-            <Tag>
-              <div className="tag-item Dexes">Dexes</div>
-              <div className="tag-item Bridge">Bridge</div>
-              <div className="tag-item Liquidity">Liquidity</div>
-            </Tag>
-            <p>Seamless and Efficient Trading on zk Rollups</p>
-            <div className="carousel-btn">
-              <div className="carousel-btn-item">Collect</div>
-              <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                View
+          {carouselData.map((child, index) => (
+            <Carousel key={index} active={index === activeIndex}>
+              <div className="carousel-content">
+                <img src={syncIcon} alt="" />
+                <h1>{child.title}</h1>
+                <Tag>
+                  <div className="tag-item Dexes">Dexes</div>
+                  <div className="tag-item Bridge">Bridge</div>
+                  <div className="tag-item Liquidity">Liquidity</div>
+                </Tag>
+                <p>Seamless and Efficient Trading on zk Rollups</p>
+                <div className="carousel-btn">
+                  <div className="carousel-btn-item">Collect</div>
+                  <div className="carousel-btn-item" style={{ marginRight: '0' }}>
+                    View
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </Carousel>
+            </Carousel>
+          ))}
+        </CarouselList>
+
         <div className="token-tab-list">
           <div
             className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
@@ -611,7 +654,7 @@ const HomeContent: NextPageWithLayout = () => {
             Native token
           </div>
           <ViewAll>
-            <Link href="/Home/AllDapps">
+            <Link href="/home/allDapps">
               <span>View all</span>
               <img src={arrow} alt="" />
             </Link>
@@ -683,7 +726,7 @@ const HomeContent: NextPageWithLayout = () => {
         <div style={{ position: 'relative' }}>
           <Title>Explore Layer 2 Blockchains</Title>
           <ViewAll>
-            <Link href="/Home/Blockchains">
+            <Link href="/home/blockchains">
               <span>View all</span>
               <img src={arrow} alt="" />
             </Link>

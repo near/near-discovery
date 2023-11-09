@@ -42,112 +42,112 @@ const AllDappsPage = styled.div`
       }
     }
   }
-  .tab-content{
+  .tab-content {
     /* padding: 20px 0; */
     .page-netWork-list {
-    display: flex;
-    flex-wrap: wrap;
-    .netWork-list-item {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      flex-basis: auto;
-      border: 1px solid #5e617e;
-      border-radius: 10px;
-      padding: 4px 8px 4px 4px;
-      color: #ffffff;
       display: flex;
-      cursor: pointer;
-      img {
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        text-align: center;
-        align-items: center;
-        border-radius: 8px;
-        margin-right: 10px;
+      flex-wrap: wrap;
+      .netWork-list-item {
+        margin-right: 12px;
+        margin-bottom: 12px;
+        flex-basis: auto;
+        border: 1px solid #5e617e;
+        border-radius: 10px;
+        padding: 4px 8px 4px 4px;
+        color: #ffffff;
+        display: flex;
+        cursor: pointer;
+        img {
+          width: 24px;
+          height: 24px;
+          line-height: 24px;
+          text-align: center;
+          align-items: center;
+          border-radius: 8px;
+          margin-right: 10px;
+        }
+      }
+      .active {
+        background: rgba(235, 244, 121, 1);
+        color: rgba(24, 26, 39, 1);
       }
     }
-    .active {
-      background: rgba(235, 244, 121, 1);
-      color: rgba(24, 26, 39, 1);
-    }
-  }
-  .page-function-list {
-    display: flex;
-    flex-wrap: wrap;
-    .function-list-item {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      flex-basis: auto;
-      border: 1px solid #5e617e;
-      border-radius: 8px;
-      padding: 6px 20px;
-      color: #ffffff;
+    .page-function-list {
       display: flex;
-      cursor: pointer;
+      flex-wrap: wrap;
+      .function-list-item {
+        margin-right: 12px;
+        margin-bottom: 12px;
+        flex-basis: auto;
+        border: 1px solid #5e617e;
+        border-radius: 8px;
+        padding: 6px 20px;
+        color: #ffffff;
+        display: flex;
+        cursor: pointer;
+      }
+      .bridge {
+        border: 1px solid rgba(227, 233, 157, 1);
+      }
+      .dex {
+        border: 1px solid rgba(172, 252, 237, 1);
+      }
+      .lending {
+        border: 1px solid rgba(173, 255, 181, 1);
+      }
+      .liquidity {
+        border: 1px solid rgba(170, 214, 255, 1);
+      }
+      .staking {
+        border: 1px solid rgba(193, 191, 255, 1);
+      }
+      .yield {
+        border: 1px solid rgba(249, 181, 230, 1);
+      }
+      .bridgeActive {
+        background: rgba(227, 233, 157, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .dexActive {
+        background: rgba(172, 252, 237, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .lendingActive {
+        background: rgba(173, 255, 181, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .liquidityActive {
+        background: rgba(170, 214, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .stakingActive {
+        background: rgba(193, 191, 255, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .yieldActive {
+        background: rgba(249, 181, 230, 1);
+        color: rgba(0, 0, 0, 1);
+      }
     }
-    .bridge {
-      border: 1px solid rgba(227, 233, 157, 1);
-    }
-    .dex {
-      border: 1px solid rgba(172, 252, 237, 1);
-    }
-    .lending {
-      border: 1px solid rgba(173, 255, 181, 1);
-    }
-    .liquidity {
-      border: 1px solid rgba(170, 214, 255, 1);
-    }
-    .staking {
-      border: 1px solid rgba(193, 191, 255, 1);
-    }
-    .yield {
-      border: 1px solid rgba(249, 181, 230, 1);
-    }
-    .bridgeActive {
-      background: rgba(227, 233, 157, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .dexActive {
-      background: rgba(172, 252, 237, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .lendingActive {
-      background: rgba(173, 255, 181, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .liquidityActive {
-      background: rgba(170, 214, 255, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .stakingActive {
-      background: rgba(193, 191, 255, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-    .yieldActive {
-      background: rgba(249, 181, 230, 1);
-      color: rgba(0, 0, 0, 1);
-    }
-  }
-  .page-medal-list {
-    display: flex;
-    flex-wrap: wrap;
-    .medal-list-item {
-      margin-right: 12px;
-      margin-bottom: 12px;
-      flex-basis: auto;
-      border: 1px solid #5e617e;
-      border-radius: 8px;
-      padding: 6px 20px;
-      color: #ffffff;
+    .page-medal-list {
       display: flex;
-      cursor: pointer;
+      flex-wrap: wrap;
+      .medal-list-item {
+        margin-right: 12px;
+        margin-bottom: 12px;
+        flex-basis: auto;
+        border: 1px solid #5e617e;
+        border-radius: 8px;
+        padding: 6px 20px;
+        color: #ffffff;
+        display: flex;
+        cursor: pointer;
+      }
+      .active {
+        background: rgba(235, 244, 121, 1);
+        color: rgba(24, 26, 39, 1);
+      }
     }
-    .active {
-      background: rgba(235, 244, 121, 1);
-      color: rgba(24, 26, 39, 1);
-    }
-  }
   }
   .tab-content-page {
     display: flex;
@@ -213,6 +213,12 @@ const BreadCrumbs = styled.div`
   color: #979abe;
   font-size: 14px;
   margin-bottom: 30px;
+  a {
+    text-decoration: none;
+    color: #979abe;
+    display: inline-block;
+    cursor: pointer;
+  }
   svg {
     margin: 0 8px;
   }
@@ -220,58 +226,76 @@ const BreadCrumbs = styled.div`
     color: #ffffff;
   }
 `;
-const Carousel = styled.div`
-  width: 100%;
-  background-image: url(${carouselbg});
-  border-radius: 20px;
-  height: 352px;
-  align-items: center;
-  padding: 26px;
-  background-repeat: no-repeat;
-  background-size: cover;
+const CarouselList = styled.div`
   position: relative;
-  margin-bottom: 42px;
   .carousel-right-icon {
     position: absolute;
     right: -26px;
     top: 50%;
+    cursor: pointer;
   }
-  .carousel-content {
-    background: linear-gradient(180deg, rgba(55, 58, 83, 0.9) 0%, rgba(19, 20, 27, 0.9) 100%);
-    padding: 24px;
+  .carousel {
+    display: none;
+    width: 100%;
+    background-image: url(${carouselbg});
     border-radius: 20px;
-    width: fit-content;
-    img {
-      width: 72px;
-      height: 72px;
-    }
-    h1 {
-      font-size: 32px;
-      font-weight: 700;
-      color: #ffffff;
-      margin: 14px 0;
-    }
-    p {
-      font-size: 14px;
-      color: #979abe;
-    }
-    .carousel-btn {
-      display: flex;
-      .carousel-btn-item {
-        flex: 1;
-        margin-right: 18px;
-        background: linear-gradient(0deg, #373a53, #373a53),
-          linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-        font-size: 16px;
-        color: #ffffff;
-        text-align: center;
-        align-items: center;
-        height: 43px;
-        line-height: 43px;
-        border-radius: 12px;
-        border: 1px solid #373a53;
+    height: 352px;
+    align-items: center;
+    padding: 26px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin-bottom: 42px;
+    animation: slideIn 0.5s forwards;
+    will-change: transform;
+    @keyframes slideIn {
+      from {
+        transform: translate3d(100%, 0, 0);
+      }
+      to {
+        transform: translate3d(0, 0, 0);
       }
     }
+    .carousel-content {
+      background: linear-gradient(180deg, rgba(55, 58, 83, 0.9) 0%, rgba(19, 20, 27, 0.9) 100%);
+      padding: 24px;
+      border-radius: 20px;
+      width: fit-content;
+      img {
+        width: 72px;
+        height: 72px;
+      }
+      h1 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #ffffff;
+        margin: 14px 0;
+      }
+      p {
+        font-size: 14px;
+        color: #979abe;
+      }
+      .carousel-btn {
+        display: flex;
+        .carousel-btn-item {
+          flex: 1;
+          margin-right: 18px;
+          background: linear-gradient(0deg, #373a53, #373a53),
+            linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          font-size: 16px;
+          color: #ffffff;
+          text-align: center;
+          align-items: center;
+          height: 43px;
+          line-height: 43px;
+          border-radius: 12px;
+          border: 1px solid #373a53;
+        }
+      }
+    }
+  }
+  .active {
+    display: block;
   }
 `;
 
@@ -316,7 +340,7 @@ const Tag = styled.div`
 
 const Title = styled.div`
   font-size: 16px;
-  margin:30px 0 18px 0;
+  margin: 30px 0 18px 0;
   color: rgba(151, 154, 190, 1);
 `;
 
@@ -383,36 +407,58 @@ const AllDappsColumn: NextPageWithLayout = () => {
     return 0;
   });
 
+  const carouselData = [
+    {
+      title: 'SyncSwap',
+    },
+    {
+      title: 'Test',
+    },
+  ];
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleCarouselClick = () => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
+  };
+
+  const Carousel = ({ active, children }: { active: boolean; children: React.ReactNode }) => {
+    return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
+  };
+
   return (
     <AllDappsPage>
-
       <BreadCrumbs>
-        Home
+        <Link href="/">Home</Link>
         {arrow}
         <span>All Dapps</span>
       </BreadCrumbs>
 
-      <Carousel>
-        <div className="carousel-right-icon">
+      <CarouselList>
+        <div className="carousel-right-icon" onClick={handleCarouselClick}>
           <img src={carouseicon} alt="" />
         </div>
-        <div className="carousel-content">
-          <img src={syncIcon} alt="" />
-          <h1>SyncSwap</h1>
-          <Tag>
-            <div className="tag-item Dexes">Dexes</div>
-            <div className="tag-item Bridge">Bridge</div>
-            <div className="tag-item Liquidity">Liquidity</div>
-          </Tag>
-          <p>Seamless and Efficient Trading on zk Rollups</p>
-          <div className="carousel-btn">
-            <div className="carousel-btn-item">Collect</div>
-            <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-              View
+        {carouselData.map((child, index) => (
+          <Carousel key={index} active={index === activeIndex}>
+            <div className="carousel-content">
+              <img src={syncIcon} alt="" />
+              <h1>{child.title}</h1>
+              <Tag>
+                <div className="tag-item Dexes">Dexes</div>
+                <div className="tag-item Bridge">Bridge</div>
+                <div className="tag-item Liquidity">Liquidity</div>
+              </Tag>
+              <p>Seamless and Efficient Trading on zk Rollups</p>
+              <div className="carousel-btn">
+                <div className="carousel-btn-item">Collect</div>
+                <div className="carousel-btn-item" style={{ marginRight: '0' }}>
+                  View
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </Carousel>
+          </Carousel>
+        ))}
+      </CarouselList>
 
       <div className="token-tab-list">
         <div className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`} onClick={() => handleTabClick('TBD')}>
@@ -425,7 +471,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           Native token
         </div>
       </div>
-      <div className='tab-content'>
+      <div className="tab-content">
         <Title>Network</Title>
         <div className="page-netWork-list">
           {Object.values(chains).map((child, index) => (
@@ -461,8 +507,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
               Lending
             </div>
             <div
-              className={`function-list-item liquidity ${selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
-                }`}
+              className={`function-list-item liquidity ${
+                selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
+              }`}
               onClick={() => handleFunctionClick('Liquidity')}
             >
               Liquidity
@@ -534,36 +581,38 @@ const AllDappsColumn: NextPageWithLayout = () => {
             })}
         </div>
       ) : null}
-      {selectedTab == 'token' ? (<>
-        <div className="tab-content-page">
-          {sortedDapps
-            .filter((dapp) => dapp.TBD_TOKEN === 'N')
-            .map((dapp, index) => {
-              return (
-                <div className="tab-content-item" key={index}>
-                  <div className="content-item-img">
-                    <img src={dapp.logo} alt="" />
+      {selectedTab == 'token' ? (
+        <>
+          <div className="tab-content-page">
+            {sortedDapps
+              .filter((dapp) => dapp.TBD_TOKEN === 'N')
+              .map((dapp, index) => {
+                return (
+                  <div className="tab-content-item" key={index}>
+                    <div className="content-item-img">
+                      <img src={dapp.logo} alt="" />
+                    </div>
+                    <div className="content-item-text">
+                      <h1>{dapp.name}</h1>
+                      <p>{dapp.description}</p>
+                      <Tag>
+                        {dapp.tags.map((tag, index) => (
+                          <div className={`tag-item ${tag}`} key={index}>
+                            {tag}
+                          </div>
+                        ))}
+                      </Tag>
+                    </div>
+                    <div className="content-item-btn">
+                      <div className="item-btn-item">Collect</div>
+                      <div className="item-btn-item">View</div>
+                    </div>
                   </div>
-                  <div className="content-item-text">
-                    <h1>{dapp.name}</h1>
-                    <p>{dapp.description}</p>
-                    <Tag>
-                      {dapp.tags.map((tag, index) => (
-                        <div className={`tag-item ${tag}`} key={index}>
-                          {tag}
-                        </div>
-                      ))}
-                    </Tag>
-                  </div>
-                  <div className="content-item-btn">
-                    <div className="item-btn-item">Collect</div>
-                    <div className="item-btn-item">View</div>
-                  </div>
-                </div>
-              );
-            })}
-        </div>
-      </>) : null}
+                );
+              })}
+          </div>
+        </>
+      ) : null}
 
       <Footer>
         <img src={footer} alt="" />
