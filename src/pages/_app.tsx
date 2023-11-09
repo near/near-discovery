@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
@@ -38,16 +38,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
-  const authStore = useAuthStore();
+  const signedIn = useAuthStore((store) => store.signedIn);
+  const accountId = useAuthStore((store) => store.accountId);
   const componentSrc = router.query;
-  const isSignedIn = useMemo(() => authStore.signedIn, [authStore.signedIn]);
 
   useEffect(() => {
     // this check is needed to init localStorage for notifications after user signs in
-    if (isSignedIn) {
+    if (signedIn) {
       setNotificationsLocalStorage();
     }
-  }, [isSignedIn]);
+  }, [signedIn]);
 
   useEffect(() => {
     initializeAnalytics();
@@ -56,13 +56,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
     if (!window.zE) return;
-    if (!authStore.signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
+    if (!signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
       window.zE('webWidget', 'hide');
       return;
     }
-    localStorage.setItem('accountId', authStore.accountId);
+    localStorage.setItem('accountId', accountId);
     window.zE('webWidget', 'show');
-  }, [authStore.accountId, authStore.signedIn, componentSrc]);
+  }, [accountId, signedIn, componentSrc]);
 
   useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);

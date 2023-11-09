@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
@@ -22,17 +22,14 @@ const Wrapper = styled.div`
 
 export const NotificationsAlert = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
-  const isSignedIn = useMemo(() => signedIn, [signedIn]);
+  const accountId = useAuthStore((store) => store.accountId);
   const components = useBosComponents();
   const [showNotificationModalState, setShowNotificationModalState] = useState(false);
-  const accountId = useAuthStore((store) => store.accountId);
   const [isHomeScreenApp, setHomeScreenApp] = useState(false);
   const [iosHomeScreenPrompt, setIosHomeScreenPrompt] = useState(false);
   const { isIosDevice, versionOfIos } = useIosDevice();
   const { showOnTS, subscribeStarted, subscribeError } = getNotificationLocalStorage() || {};
   const tosData = useTermsOfServiceStore((store) => store.tosData);
-  const showModalOnTs = useMemo(() => showOnTS, [showOnTS]);
-  const subscriptionError = useMemo(() => subscribeError, [subscribeError]);
 
   const handleModalCloseOnEsc = useCallback(() => {
     setShowNotificationModalState(false);
@@ -68,21 +65,21 @@ export const NotificationsAlert = () => {
       // check if user has already turned on notifications
       const showNotificationPrompt = showNotificationModal();
 
-      if (!subscriptionError && showNotificationPrompt && tosAccepted && (!showModalOnTs || !iosHomeScreenPrompt)) {
+      if (!subscribeError && showNotificationPrompt && tosAccepted && (!showOnTS || !iosHomeScreenPrompt)) {
         setTimeout(() => {
           setShowNotificationModalState(showNotificationPrompt);
         }, 4000);
       }
     }
-  }, [tosData, subscriptionError, showModalOnTs, iosHomeScreenPrompt]);
+  }, [tosData, subscribeError, showOnTS, iosHomeScreenPrompt]);
 
   useEffect(() => {
-    if (!isSignedIn) {
+    if (!signedIn) {
       return;
     }
 
     checkNotificationModal();
-  }, [isSignedIn, checkNotificationModal]);
+  }, [signedIn, checkNotificationModal]);
 
   useEffect(() => {
     if (isIosDevice) {
@@ -100,7 +97,7 @@ export const NotificationsAlert = () => {
     }
   }, [isIosDevice]);
 
-  if (!isSignedIn) return null;
+  if (!signedIn) return null;
 
   return (
     <Wrapper>
