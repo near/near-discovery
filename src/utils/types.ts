@@ -66,9 +66,9 @@ export type NotificationSubscriptionData = {
 };
 
 export type NotificationLocalStorageByAccountId = {
-  isNotificationSupported: boolean;
-  isPushManagerSupported: boolean;
-  isPermisionGranted: boolean;
+  isNotificationSupported?: boolean;
+  isPushManagerSupported?: boolean;
+  isPermisionGranted?: boolean;
   notNowTS?: number;
   showOnTS?: number;
   permission?: boolean;
