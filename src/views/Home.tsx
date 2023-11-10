@@ -656,7 +656,7 @@ const HomeContent: NextPageWithLayout = () => {
             Native token
           </div>
           <ViewAll>
-            <Link href="/home/allDapps">
+            <Link href="/home/all-dapps">
               <span>View all</span>
               <img src={arrow} alt="" />
             </Link>
@@ -687,7 +687,7 @@ const HomeContent: NextPageWithLayout = () => {
                     <div className="content-item-btn">
                       <div className="item-btn-item">Collect</div>
                       <div className="item-btn-item">
-                        <Link href="/home/dappsDetails">View</Link>
+                        <Link href="/home/dapps-details">View</Link>
                       </div>
                     </div>
                   </div>
@@ -749,7 +749,7 @@ const HomeContent: NextPageWithLayout = () => {
                 </Gold>
                 <p>Ethereum scalability with zkEVM performance and security</p>
                 <div className="list-item-bottom">
-                  <Link href="/home/chainsDetails">
+                  <Link href="/home/chains-details">
                     Deep Dive
                     <img src={arrowBlock} alt="" />
                   </Link>
