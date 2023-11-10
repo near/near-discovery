@@ -151,7 +151,7 @@ const AllDappsPage = styled.div`
   }
   .tab-content-page {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap;  
     position: relative;
     margin-bottom: 100px;
 
@@ -162,7 +162,6 @@ const AllDappsPage = styled.div`
       width: 390px;
       display: flex;
       flex-basis: calc(30% - 20px);
-      flex-grow: 1;
       .content-item-img {
         margin-right: 16px;
         img {
@@ -202,10 +201,6 @@ const AllDappsPage = styled.div`
           margin-bottom: 14px;
         }
       }
-    }
-
-    .tab-content-item:nth-child(3n) {
-      margin-right: 0;
     }
   }
 `;

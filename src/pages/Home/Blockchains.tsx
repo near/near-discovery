@@ -70,11 +70,11 @@ const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
   .blockchains-conetent-item {
-    flex-grow: 1;
-    margin-bottom: 30px;
-    height: 435px;
-    margin-right: 30px;
+
+    width: auto;
     flex-basis: calc(30% - 20px);
+    margin-bottom: 30px;
+    margin-right: 30px;
     background: #21232a;
     border: 1px solid #21232a;
     border-radius: 20px;
@@ -113,7 +113,7 @@ const BlockchainsConetent = styled.div`
       font-weight: 300;
     }
     .body-paragraph {
-      /* width: 320px; */
+      width: 360px;
       height: 85px;
       margin-bottom: 20px;
       overflow: hidden;
@@ -159,18 +159,12 @@ const BlockchainsConetent = styled.div`
       }
     }
   }
-  .blockchains-conetent-item:nth-child(3n) {
-    margin-right: 0;
-  }
-  .blockchains-conetent-item:last-child:nth-child(3n + 1) {
-    flex-basis: 30%;
-  }
   .conetent-item-img {
-    padding: 0;
+    /* padding: 0;
     background-color: transparent;
     border: none;
     position: relative;
-    overflow: hidden;
+    overflow: hidden; */
     img {
       width: 100%;
       height: 100%;
