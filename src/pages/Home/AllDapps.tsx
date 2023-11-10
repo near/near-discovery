@@ -151,7 +151,7 @@ const AllDappsPage = styled.div`
   }
   .tab-content-page {
     display: flex;
-    flex-wrap: wrap;  
+    flex-wrap: wrap;
     position: relative;
     margin-bottom: 100px;
 
@@ -189,8 +189,7 @@ const AllDappsPage = styled.div`
       }
       .content-item-btn {
         .item-btn-item {
-          background: linear-gradient(0deg, #373a53, #373a53),
-            linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
           border: 1px solid #373a53;
           font-size: 14px;
           color: #ffffff;
@@ -199,6 +198,9 @@ const AllDappsPage = styled.div`
           align-items: center;
           border-radius: 16px;
           margin-bottom: 14px;
+          a {
+            color: #ffffff;
+          }
         }
       }
     }
@@ -275,8 +277,7 @@ const CarouselList = styled.div`
         .carousel-btn-item {
           flex: 1;
           margin-right: 18px;
-          background: linear-gradient(0deg, #373a53, #373a53),
-            linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
           font-size: 16px;
           color: #ffffff;
           text-align: center;
@@ -568,8 +569,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     </Tag>
                   </div>
                   <div className="content-item-btn">
-                    <div className="item-btn-item">Collect</div>
-                    <div className="item-btn-item">View</div>
+                    <div className="item-btn-item">
+                      <Link href="#">Collect</Link>
+                    </div>
+                    <div className="item-btn-item">
+                      <Link href="/home/dappsDetails">View</Link>
+                    </div>
                   </div>
                 </div>
               );
@@ -599,8 +604,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       </Tag>
                     </div>
                     <div className="content-item-btn">
-                      <div className="item-btn-item">Collect</div>
-                      <div className="item-btn-item">View</div>
+                      <div className="item-btn-item">
+                        <Link href="#">Collect</Link>
+                      </div>
+                      <div className="item-btn-item">
+                        <Link href="/home/dappsDetails">View</Link>
+                      </div>
                     </div>
                   </div>
                 );

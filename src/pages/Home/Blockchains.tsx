@@ -70,7 +70,6 @@ const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
   .blockchains-conetent-item {
-
     width: auto;
     flex-basis: calc(30% - 20px);
     margin-bottom: 30px;
@@ -98,8 +97,7 @@ const BlockchainsConetent = styled.div`
         }
         p {
           border: 1px solid #373a53;
-          background: linear-gradient(0deg, #373a53, #373a53),
-            linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
           color: #979abe;
           border-radius: 8px;
           padding: 6px 12px;
@@ -150,6 +148,9 @@ const BlockchainsConetent = styled.div`
         height: 16px;
         margin-left: 10px;
       }
+      a{
+        color: #000000;
+      }
     }
     &:hover {
       cursor: pointer;
@@ -160,11 +161,11 @@ const BlockchainsConetent = styled.div`
     }
   }
   .conetent-item-img {
-    /* padding: 0;
+    padding: 0;
     background-color: transparent;
     border: none;
     position: relative;
-    overflow: hidden; */
+    overflow: hidden;
     img {
       width: 100%;
       height: 100%;
@@ -230,8 +231,10 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                 <img src={leftarrow} alt="" />
               </span>
               <div className="list-item-bottom">
-                Deep Dive
+                <Link href='/home/chainsDetails'>
+                  Deep Dive
                 <img src={arrowBlock} alt="" />
+                </Link>
               </div>
             </div>
             {index === 4 && (

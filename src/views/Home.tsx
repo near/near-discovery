@@ -132,8 +132,7 @@ const Content = styled.div`
       }
       .content-item-btn {
         .item-btn-item {
-          background: linear-gradient(0deg, #373a53, #373a53),
-            linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
           border: 1px solid #373a53;
           font-size: 14px;
           color: #ffffff;
@@ -142,6 +141,9 @@ const Content = styled.div`
           align-items: center;
           border-radius: 16px;
           margin-bottom: 14px;
+          a {
+            color: #ffffff;
+          }
         }
       }
     }
@@ -199,6 +201,9 @@ const Content = styled.div`
           height: 16px;
           margin-left: 10px;
         }
+        a {
+          color: #000000;
+        }
       }
       &:hover {
         cursor: pointer;
@@ -228,8 +233,7 @@ const Content = styled.div`
         margin-bottom: 12px;
         width: fit-content;
         border: 1px solid #373a53;
-        background: linear-gradient(0deg, #373a53, #373a53),
-          linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+        background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
         font-size: 16px;
         font-weight: 700;
         border-radius: 16px;
@@ -682,7 +686,9 @@ const HomeContent: NextPageWithLayout = () => {
                     </div>
                     <div className="content-item-btn">
                       <div className="item-btn-item">Collect</div>
-                      <div className="item-btn-item">View</div>
+                      <div className="item-btn-item">
+                        <Link href="/home/dappsDetails">View</Link>
+                      </div>
                     </div>
                   </div>
                 );
@@ -741,10 +747,12 @@ const HomeContent: NextPageWithLayout = () => {
                   <img src={gold} alt="" className="gold-icon" />
                   <p>10</p>
                 </Gold>
-                <p>{child.blockExplorers}</p>
+                <p>Ethereum scalability with zkEVM performance and security</p>
                 <div className="list-item-bottom">
-                  Deep Dive
-                  <img src={arrowBlock} alt="" />
+                  <Link href="/home/chainsDetails">
+                    Deep Dive
+                    <img src={arrowBlock} alt="" />
+                  </Link>
                 </div>
               </div>
             ))}
