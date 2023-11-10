@@ -366,7 +366,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         <BreadCrumbs>
           <Link href="/">Home</Link>
           {arrow}
-          <Link href="/home/all-dapps">All Dapps</Link>
+          <Link href="/alldapps">All Dapps</Link>
           {arrow}
           <span>SyncSwap</span>
         </BreadCrumbs>

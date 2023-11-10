@@ -231,7 +231,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                 <img src={leftarrow} alt="" />
               </span>
               <div className="list-item-bottom">
-                <Link href='/home/chains-details'>
+                <Link href='/chains-details'>
                   Deep Dive
                 <img src={arrowBlock} alt="" />
                 </Link>
