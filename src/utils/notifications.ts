@@ -72,6 +72,23 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
   }
 };
 
+export const blockNotification = async () => {
+  const data = {
+    accountId: 'erditkurteshi.near',
+    endpoint: '/preferences/set',
+    dapp: 'mention',
+    block: true,
+  };
+
+  await fetch('https://rpc.mainnet.near.org/preferences/set', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+};
+
 const sendToPushServer = (subscriptionData: NotificationSubscriptionData) =>
   fetch(`${notificationsHostName}/subscriptions/create`, {
     headers: {
