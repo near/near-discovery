@@ -222,8 +222,12 @@ const Content = styled.div`
     .shortcuts-content-img {
       width: 70%;
       margin-right: 48px;
+      border: 2px solid #373A52;
+      border-radius: 20px;
+
       img {
         width: 100%;
+        border-radius: 20px;
       }
     }
     .shortcuts-content-list {
@@ -276,6 +280,9 @@ const Content = styled.div`
       color: #979abe;
       margin-bottom: 40px;
       text-decoration: underline;
+      a {
+        color: #979abe;
+      }
     }
     img {
       width: 100%;
@@ -583,7 +590,8 @@ const HomeContent: NextPageWithLayout = () => {
           <div className="works-list-item">
             <h1>Quick Sign-In</h1>
             <p>Create an account or log in within seconds to obtain your unique web3 identity.</p>
-            <a href="#">Sign in / View my profile</a>
+            {/* <a href="#">Sign in / View my profile</a> */}
+            <a href="#">View my profile</a>
             <div className="list-item-img">
               <img src={quick} alt="" />
             </div>
@@ -594,7 +602,7 @@ const HomeContent: NextPageWithLayout = () => {
           <div className="works-list-item">
             <h1>Discover DApps</h1>
             <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-            <a href="#">Explore</a>
+            <Link href="/alldapps">Explore</Link>
             <div className="list-item-img">
               <img src={discover} alt="" />
             </div>
@@ -765,7 +773,7 @@ const HomeContent: NextPageWithLayout = () => {
         </Paragraph>
         <div className="shortcuts-content">
           <div className="shortcuts-content-img">
-            <img src={shortcutsIcon} alt="" />
+            <img src="./shortcut.gif" alt="" />
           </div>
           <div className="shortcuts-content-list">
             {Object.values(chains).map((child, index) => (
@@ -784,7 +792,9 @@ const HomeContent: NextPageWithLayout = () => {
           <div className="frotnend-content-title">
             Powered by <span>BOS</span>allows us to redesign the Web3 user journey
           </div>
-          <p>Learn more</p>
+          <p>
+            <Link href="https://near.org/"> Learn more</Link>
+          </p>
           <img src={decentralizedIcon} alt="" />
         </div>
 
@@ -797,7 +807,9 @@ const HomeContent: NextPageWithLayout = () => {
             <div className="content-item-text">
               <h1>User Journey</h1>
               <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-              <span>Explore</span>
+              <Link href="https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8">
+                <span>Explore</span>
+              </Link>
             </div>
           </div>
           <div className="learning-content-item">
