@@ -430,7 +430,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         <BreadCrumbs>
           <Link href="/">Home</Link>
           {arrow}
-          <Link href="/home/blockchains">L2 Blockchains</Link>
+          <Link href="/blockchains">L2 Blockchains</Link>
           {arrow}
           <span>Polygon zkEVM </span>
         </BreadCrumbs>

@@ -608,7 +608,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                         <Link href="#">Collect</Link>
                       </div>
                       <div className="item-btn-item">
-                        <Link href="/home/dapps-details">View</Link>
+                        <Link href="/dapps-details">View</Link>
                       </div>
                     </div>
                   </div>
