@@ -8,13 +8,13 @@ assignees: Assign the likely EM once this epic is ready for Feedback or Ready fo
 ---
 
 ## High Level Goal
-(abstract of the feature/functionalty that this Epic will introduce)
+(2-3 sentences describing the feature/functionalty that this Epic will introduce)
 
 ## Background Info
 (Link to Hypothesis doc or any relevant supportive information)
 
 ## UX Designs
-(Link to the actual designs or the Task to request design resources)
+(Link to the actual designs or the task(s) to request design resources)
 
 ## Move the Needle
 (list the OKRs and KPIs which this epic should affect)
