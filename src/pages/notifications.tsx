@@ -8,7 +8,8 @@ import {
   handleOnCancel,
   handleOnCancelBanner,
   handleTurnOn,
-  recommendedIosVersionForNotifications} from '@/utils/notifications';
+  recommendedIosVersionForNotifications,
+} from '@/utils/notifications';
 import {
   isLocalStorageSupported,
   isNotificationSupported,
