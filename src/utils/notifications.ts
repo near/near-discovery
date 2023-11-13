@@ -80,7 +80,7 @@ export const blockNotification = async () => {
     block: true,
   };
 
-  await fetch('https://rpc.mainnet.near.org/preferences/set', {
+  await fetch(`${notificationsHostName}/preferences/set`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
