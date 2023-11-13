@@ -67,6 +67,14 @@ const Content = styled.div`
           height: 120px;
         }
       }
+      @media (max-width: 1688px) {
+        padding: 100px 30px 30px;
+        .list-item-img {
+          position: absolute;
+          top: -56px;
+          right: 36%;
+        }
+      }
     }
     .works-list-arrow {
       padding: 40px 24px 0 24px;
@@ -104,7 +112,7 @@ const Content = styled.div`
       min-width: 390px;
       display: flex;
       flex-basis: calc(30% - 20px);
-      /* flex-grow: 1; */
+      flex-grow: 1;
       .content-item-img {
         margin-right: 16px;
         img {
@@ -222,7 +230,7 @@ const Content = styled.div`
     .shortcuts-content-img {
       width: 70%;
       margin-right: 48px;
-      border: 2px solid #373A52;
+      border: 2px solid #373a52;
       border-radius: 20px;
 
       img {
@@ -578,7 +586,7 @@ const HomeContent: NextPageWithLayout = () => {
         <div className="banner-content">
           <img src={logoUrl} alt="" />
           <h1>
-            your universal entry point into <span>L2s</span>
+            Your universal entry point into <span>L2s</span>
           </h1>
           <span>Built on Bos </span>
         </div>
