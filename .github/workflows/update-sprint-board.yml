@@ -15,6 +15,6 @@ jobs:
         number: 92
         token: ${{ secrets.CG_PROJECT_WORKFLOW_SECRET }}
         iteration-field: sprint
-        iteration: last
-        new-iteration: current
+        iteration: current
+        new-iteration: next
         statuses: None,Selected,Blocked,In Progress,In Review,Todo,Ready for Development
