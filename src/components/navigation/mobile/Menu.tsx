@@ -2,7 +2,6 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-import { NearconBanner } from '@/components/banners/NearconBanner';
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -117,8 +116,6 @@ export function Menu(props: Props) {
   return (
     <Wrapper visible={props.isVisible}>
       <InnerWrapper>
-        <NearconBanner inline />
-
         <SearchButton onClick={search}>Search NEAR</SearchButton>
 
         <AccordionMenu onCloseMenu={props.onCloseMenu} />
