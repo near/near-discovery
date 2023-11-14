@@ -19,7 +19,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics } from '@/utils/analytics';
-import { setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
+import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -38,12 +38,16 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
-  const authStore = useAuthStore();
+  const signedIn = useAuthStore((store) => store.signedIn);
+  const accountId = useAuthStore((store) => store.accountId);
   const componentSrc = router.query;
 
   useEffect(() => {
-    setNotificationsSessionStorage();
-  }, []);
+    // this check is needed to init localStorage for notifications after user signs in
+    if (signedIn) {
+      setNotificationsLocalStorage();
+    }
+  }, [signedIn]);
 
   useEffect(() => {
     initializeAnalytics();
@@ -52,13 +56,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
     if (!window.zE) return;
-    if (!authStore.signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
+    if (!signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
       window.zE('webWidget', 'hide');
       return;
     }
-    localStorage.setItem('accountId', authStore.accountId);
+    localStorage.setItem('accountId', accountId);
     window.zE('webWidget', 'show');
-  }, [authStore.accountId, authStore.signedIn, componentSrc]);
+  }, [accountId, signedIn, componentSrc]);
 
   useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);
