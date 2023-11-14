@@ -47,7 +47,7 @@ assignees: Assign the likely EM once this epic is ready for Feedback or Ready fo
 
   </p>
 
-- **Suggested Release Milestone**
+- **Suggested Release Milestones**
 
   _(If you have an idea of how the above requirements can be grouped into release phases - detail that here)_
 
