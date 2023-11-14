@@ -95,8 +95,8 @@ export default function VmInitializer() {
               networkId,
               signInContractId,
             }) as any, // TODO: Refactor setupKeypom() to TS
-            setupNearMobileWallet(),
             setupLedger(),
+            setupNearMobileWallet(),
           ],
         }),
         customElements: {
