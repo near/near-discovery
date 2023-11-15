@@ -1,12 +1,14 @@
+/* eslint-disable react/display-name */
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import React from 'react';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -348,6 +350,19 @@ const Footer = styled.div`
   left: 0;
 `;
 
+const carouselData = [
+  {
+    title: 'SyncSwap',
+  },
+  {
+    title: 'Test',
+  },
+];
+
+const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
+  return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
+});
+
 const AllDappsColumn: NextPageWithLayout = () => {
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
@@ -403,24 +418,11 @@ const AllDappsColumn: NextPageWithLayout = () => {
     return 0;
   });
 
-  const carouselData = [
-    {
-      title: 'SyncSwap',
-    },
-    {
-      title: 'Test',
-    },
-  ];
-
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleCarouselClick = () => {
+  const handleCarouselClick = useCallback(() => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
-  };
-
-  const Carousel = ({ active, children }: { active: boolean; children: React.ReactNode }) => {
-    return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
-  };
+  }, [carouselData.length]);
 
   return (
     <AllDappsPage>
@@ -435,7 +437,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           <img src={carouseicon} alt="" />
         </div>
         {carouselData.map((child, index) => (
-          <Carousel key={index} active={index === activeIndex}>
+            <Carousel key={index} active={index === activeIndex}>
             <div className="carousel-content">
               <img src={syncIcon} alt="" />
               <h1>{child.title}</h1>
