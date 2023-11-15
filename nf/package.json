@@ -1,0 +1,24 @@
+{
+    "name": "marketing",
+    "private": true,
+    "engines": {
+        "node": ">=18.0.0",
+        "npm": ">=0.39.0"
+    },
+    "scripts": {
+      "dev": "next dev -p 4000",
+      "build": "next build",
+      "start": "next start"
+    },
+    "dependencies": {
+      "next": "^13.5.6",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0"
+    },
+    "devDependencies": {
+      "@types/node": "^18.11.9",
+      "@types/react": "^18.2.25",
+      "@types/react-dom": "^18.2.10",
+      "typescript": "^5.2.2"
+    }
+  }

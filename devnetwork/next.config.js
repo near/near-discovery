@@ -45,12 +45,25 @@ const nextConfig = {
         destination: 'https://pages.near.org/validators',
         permanent: true,
       },
+      {
+        source: '/nf',
+        destination: `${process.env.NEXT_PUBLIC_NF_HOSTNAME}/nf/home`,
+        permanent: false,
+      },
     ];
   },
   rewrites: async () => [
     {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
+    },
+    {
+      source: '/nf',
+      destination: `${process.env.NEXT_PUBLIC_NF_HOSTNAME}/`,
+    },
+    {
+      source: '/nf/:path*',
+      destination: `${process.env.NEXT_PUBLIC_NF_HOSTNAME}/:path*`,
     },
   ],
 };
