@@ -200,13 +200,14 @@ const Content = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 100px;
+    padding-left: 18px;
     .layer-list-item {
       margin: 0 18px 20px 0;
       background: #21232a;
       border-radius: 20px;
       padding: 20px 60px;
       border-bottom: 1px solid #383b48;
-      flex-basis: calc(25% - 20px);
+      flex-basis: calc(25% - 18px);
       color: #ffffff;
       text-align: center;
       position: relative;
@@ -250,7 +251,7 @@ const Content = styled.div`
         }
       }
       @media (max-width: 1668px) {
-        flex-basis: calc(33% - 20px);
+        flex-basis: calc(33% - 18px);
       }
     }
     /* .layer-list-item:nth-child(4n) {
