@@ -11,7 +11,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 import React from 'react';
 
 const logoUrl = 'https://ipfs.near.social/ipfs/bafkreig5ka5mpgawcpswpfqinzpyuxl7wmfbs7xeln3l7udigzvbtotlle';
-const bannerBg = 'https://ipfs.near.social/ipfs/bafkreigu5rr2jqcw53jwawwyw7ug7uza4gpev2dpftxgs3w7exib2m4bmu';
+const bannerBg = 'https://ipfs.near.social/ipfs/bafkreie44wbxt4lxvf3vfdq5nzah2m3jmkegfpkt7gopcnswmvjkzkxtbu';
 const blueBg = 'https://ipfs.near.social/ipfs/bafkreihu2rxecbig3cyici5sbvjus42fazzorn2lq22b32arr3slzbzdye';
 const yellowBg = 'https://ipfs.near.social/ipfs/bafkreiejilw7ah4y2nhn3ohhzl73u7flxafygpiwksc4iepq75s43f3gfa';
 const quick = 'https://ipfs.near.social/ipfs/bafkreic3hzaaz2iteac2oruyk62an47db2vo3z4furlk2rwhxyzks3m23i';
@@ -388,12 +388,18 @@ const Banner = styled.div`
   position: relative;
   background-image: url(${bannerBg});
   background-repeat: no-repeat;
-  background-size: 86%;
-  background-position-x: 50%;
+  background-size: 94%;
+  background-position-x: 18%;
   .blue-bg {
     position: absolute;
     right: 0;
     /* bottom: 0; */
+    @media (max-width: 1556px) {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
   }
   .yellow-bg {
     position: absolute;
@@ -423,6 +429,9 @@ const Banner = styled.div`
       font-size: 20px;
       font-weight: 500;
     }
+  }
+  @media (max-width: 1500px) {
+    height: 336px;
   }
 `;
 
