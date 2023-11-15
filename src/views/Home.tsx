@@ -1,12 +1,14 @@
+/* eslint-disable react/display-name */
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import React from 'react';
 
 const logoUrl = 'https://ipfs.near.social/ipfs/bafkreig5ka5mpgawcpswpfqinzpyuxl7wmfbs7xeln3l7udigzvbtotlle';
 const bannerBg = 'https://ipfs.near.social/ipfs/bafkreigu5rr2jqcw53jwawwyw7ug7uza4gpev2dpftxgs3w7exib2m4bmu';
@@ -105,11 +107,11 @@ const Content = styled.div`
     flex-wrap: wrap;
     position: relative;
     margin-bottom: 100px;
+    padding: 0 0 0 30px;
 
     .tab-content-item {
-      margin: 30px 60px 0 0;
+      margin: 30px 30px 0 0;
       border-bottom: 1px solid #383b48;
-      min-width: 390px;
       display: flex;
       flex-basis: calc(30% - 20px);
       flex-grow: 1;
@@ -122,6 +124,7 @@ const Content = styled.div`
       }
       .content-item-text {
         margin-right: 16px;
+        width: 210px;
         h1 {
           font-size: 20px;
           font-weight: 700;
@@ -135,7 +138,6 @@ const Content = styled.div`
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          width: 200px;
         }
       }
       .content-item-btn {
@@ -155,15 +157,44 @@ const Content = styled.div`
         }
       }
     }
-
-    /* .tab-content-item:nth-child(3n) {
-      margin-right: 0;
-    } */
-    /* .tab-content-item:last-child,
-    .tab-content-item:nth-last-child(2),
-    .tab-content-item:nth-last-child(3) {
-      border-bottom: none;
-    } */
+    @media (max-width: 1700px) {
+      .tab-content-item {
+        .content-item-text {
+          width: 120px;
+        }
+      }
+    }
+    @media (max-width: 1478px) {
+      .tab-content-item {
+        flex-basis: calc(45% - 20px);
+        .content-item-text {
+          width: 260px;
+        }
+      }
+    }
+    @media (max-width: 1397px) {
+      .tab-content-item {
+        flex-basis: calc(45% - 20px);
+        .content-item-text {
+          width: 200px;
+        }
+      }
+    }
+    @media (max-width: 1227px) {
+      .tab-content-item {
+        flex-basis: calc(45% - 20px);
+        .content-item-text {
+          width: 160px;
+        }
+      }
+    }
+    @media (max-width: 1227px) {
+      .tab-content-item {
+        .content-item-text {
+          width: 500px;
+        }
+      }
+    }
   }
   .explore-layer-list {
     display: flex;
@@ -175,7 +206,6 @@ const Content = styled.div`
       border-radius: 20px;
       padding: 20px 60px;
       border-bottom: 1px solid #383b48;
-      width: 300px;
       flex-basis: calc(25% - 20px);
       color: #ffffff;
       text-align: center;
@@ -218,6 +248,9 @@ const Content = styled.div`
         .list-item-bottom {
           display: block;
         }
+      }
+      @media (max-width: 1668px) {
+        flex-basis: calc(33% - 20px);
       }
     }
     /* .layer-list-item:nth-child(4n) {
@@ -263,6 +296,16 @@ const Content = styled.div`
           margin-right: 10px;
           margin-top: 8px;
         }
+      }
+    }
+    @media (max-width: 1539px) {
+      display: block;
+      .shortcuts-content-img {
+        width: 100%;
+        margin-bottom: 24px;
+      }
+      .shortcuts-content-list {
+        width: 100%;
       }
     }
   }
@@ -546,6 +589,19 @@ const Footer = styled.div`
   left: 0;
 `;
 
+const carouselData = [
+  {
+    title: 'SyncSwap',
+  },
+  {
+    title: 'Test',
+  },
+];
+
+const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
+  return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
+});
+
 const HomeContent: NextPageWithLayout = () => {
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
@@ -555,24 +611,11 @@ const HomeContent: NextPageWithLayout = () => {
     setSelectedTab(path);
   };
 
-  const carouselData = [
-    {
-      title: 'SyncSwap',
-    },
-    {
-      title: 'Test',
-    },
-  ];
-
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const handleCarouselClick = () => {
+  const handleCarouselClick = useCallback(() => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
-  };
-
-  const Carousel = ({ active, children }: { active: boolean; children: React.ReactNode }) => {
-    return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
-  };
+  }, [carouselData.length]);
 
   return (
     <HomePage>
