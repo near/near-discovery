@@ -72,15 +72,19 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
   }
 };
 
-export const blockNotification = async () => {
+export const manageNotification = async (accountId: string, notificationType: string, block: boolean) => {
+  const serviceWorker = await navigator.serviceWorker.ready;
+  const subscription = await serviceWorker.pushManager.getSubscription();
+  const endpoint = "/preferences/set"
+
   const data = {
-    accountId: 'erditkurteshi.near',
-    endpoint: '/preferences/set',
-    dapp: 'mention',
-    block: true,
+    accountId: accountId,
+    endpoint: subscription?.endpoint,
+    dapp: notificationType,
+    block: block,
   };
 
-  await fetch(`${notificationsHostName}/preferences/set`, {
+  await fetch(`${notificationsHostName}${endpoint}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
