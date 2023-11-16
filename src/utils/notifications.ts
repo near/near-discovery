@@ -75,7 +75,7 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
 export const manageNotification = async (accountId: string, notificationType: string, block: boolean) => {
   const serviceWorker = await navigator.serviceWorker.ready;
   const subscription = await serviceWorker.pushManager.getSubscription();
-  const endpoint = "/preferences/set"
+  const endpoint = '/preferences/set';
 
   const data = {
     accountId: accountId,
