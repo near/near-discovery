@@ -76,7 +76,7 @@ export default function VmInitializer() {
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-              walletUrl: 'https://fast-auth-signer-mjbzyj6m7-near-developer-console.vercel.app',
+              walletUrl: 'https://fast-auth-signer-ofyhvi0tg-near-developer-console.vercel.app',
             }),
             setupKeypom({
               trialAccountSpecs: {
