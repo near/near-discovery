@@ -110,7 +110,7 @@ export const Sandbox = ({ onboarding = false }) => {
 
       const fetchCode = () => {
         const widgetObject = cache.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
-        fetch(`https://api.near.social/keys`, {
+        fetch(`${near.config.apiUrl}/keys`, {
           method: 'POST',
           body: JSON.stringify({ keys: [file.src], options: { return_type: 'BlockHeight' } }),
           headers: {
