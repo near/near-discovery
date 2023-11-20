@@ -45,6 +45,11 @@ const nextConfig = {
         destination: 'https://pages.near.org/validators',
         permanent: true,
       },
+      {
+        source: '/da',
+        destination: 'https://near.org/blog/near-foundation-launches-near-da-to-offer-secure-cost-effective-data-availability-for-eth-rollups-and-ethereum-developers',
+        permanent: true,
+      },
     ];
   },
   rewrites: async () => [
