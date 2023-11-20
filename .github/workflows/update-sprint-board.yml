@@ -1,7 +1,7 @@
 on:
   schedule:
-    # Runs "at 05:00, only on Monday" 
-    - cron: '0 5 * * 1'
+    # Runs "at 05:00, only on Saturday" 
+    - cron: '0 5 * * 6'
 
 jobs:
   move-to-next-iteration:
