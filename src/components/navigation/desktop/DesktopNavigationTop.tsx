@@ -209,7 +209,7 @@ const MenuContent = styled.div`
   position: absolute;
   left: 0;
   top: 78px;
-  background: #16181D;
+  background: #16181d;
   width: 100%;
   display: none;
   padding: 40px 12% 28px 12%;
@@ -262,6 +262,10 @@ const MenuContent = styled.div`
   .menu-content-deep {
     padding-left: 60px;
     border-left: 1px solid #383b48;
+    a {
+      color: #ffffff;
+      text-decoration: none;
+    }
     .contenr-deep-item {
       display: flex;
       margin-bottom: 36px;
@@ -355,9 +359,11 @@ export const DesktopNavigationTop = () => {
   return (
     <Container>
       <div className="container-nav">
-        <LogoContainer>
-          <img src={logoUrl} alt="" />
-        </LogoContainer>
+        <Link href="/">
+          <LogoContainer>
+            <img src={logoUrl} alt="" />
+          </LogoContainer>
+        </Link>
         <MenuContainer>
           <Search>
             <input type="text" placeholder="search dapps, chains..." autoFocus />
@@ -428,24 +434,28 @@ export const DesktopNavigationTop = () => {
             </div>
           </div>
           <div className="menu-content-deep">
-            <div className="contenr-deep-item">
-              <div className="deep-item-left">
-                <img src={DeepDive} alt="" />
+            <Link href="/warmup">
+              <div className="contenr-deep-item">
+                <div className="deep-item-left">
+                  <img src={DeepDive} alt="" />
+                </div>
+                <div className="deep-item-text">
+                  <h1>DeepDive</h1>
+                  <p> DeepDive the hotest L2 Blockcchain to get more intension of reward.</p>
+                </div>
               </div>
-              <div className="deep-item-text">
-                <h1>DeepDive</h1>
-                <p> DeepDive the hotest L2 Blockcchain to get more intension of reward.</p>
+            </Link>
+            <Link href="/all-in-one">
+              <div className="contenr-deep-item">
+                <div className="deep-item-left">
+                  <img src={Shotcuts} alt="" />
+                </div>
+                <div className="deep-item-text">
+                  <h1>Shotcuts</h1>
+                  <p>Shortcuts integrate common functions and the most popular dapps.</p>
+                </div>
               </div>
-            </div>
-            <div className="contenr-deep-item">
-              <div className="deep-item-left">
-                <img src={Shotcuts} alt="" />
-              </div>
-              <div className="deep-item-text">
-                <h1>Shotcuts</h1>
-                <p>Shortcuts integrate common functions and the most popular dapps.</p>
-              </div>
-            </div>
+            </Link>
             <div className="contenr-deep-item deep-item-special">
               <div className="deep-item-left">
                 <img src={Portfolio} alt="" />
