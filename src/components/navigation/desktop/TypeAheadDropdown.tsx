@@ -21,7 +21,10 @@ export const TypeAheadDropdown = (props: Props) => {
         props.focusChange(false);
       }}
     >
-      <VmComponent src={components.search.typeAheadDropdown} props={{ term: props.term }} />
+      <VmComponent
+        src={components.search.typeAheadDropdown}
+        props={{ term: props.term, focusChange: props.focusChange }}
+      />
     </div>
   );
 };

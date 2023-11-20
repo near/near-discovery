@@ -1,99 +1,67 @@
 import { openToast } from '@/components/lib/Toast';
 
+import { localStorageAccountIdKey, notificationsLocalStorageKey } from './config';
 import {
   isLocalStorageSupported,
   isNotificationSupported,
   isPermisionGranted,
   isPushManagerSupported,
 } from './notificationsHelpers';
+import type { NotificationLocalStorageByAccountId, NotificationLocalStorageFull } from './types';
 
-export const NOTIFICATIONS_STORAGE = 'push-notifications-v0';
-const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
+const oneDayMiliseconds = 86400000;
+const periodMiliseconds = oneDayMiliseconds * 180; // 180 days
 
 const getLSAccountId = (): string => {
-  return localStorage.getItem(LS_ACCOUNT_ID) || '';
+  return localStorage.getItem(localStorageAccountIdKey) || '';
+};
+
+const updateLocalStorage = (data: NotificationLocalStorageByAccountId) => {
+  const accountIdLS = getLSAccountId();
+  const localStorageByAccountId = getNotificationLocalStorage();
+  localStorage.setItem(
+    notificationsLocalStorageKey,
+    JSON.stringify({
+      ...getNotificationLocalStorageFull(),
+      [accountIdLS]: {
+        ...localStorageByAccountId,
+        ...data,
+      },
+    }),
+  );
 };
 
 export const setHandleOnCancel = () => {
-  const accountIdLS = getLSAccountId();
-  const localStorageByAccountId = getNotificationLocalStorage();
-
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorageFull(),
-      [accountIdLS]: {
-        ...localStorageByAccountId,
-        showOnTS: Date.now() + 86400000, // 14 days
-        notNowTS: Date.now(),
-        bannerNotNowTS: undefined,
-      },
-      showOnTS: Date.now() + 86400000, // 14 days
-      notNowTS: Date.now(),
-      bannerNotNowTS: undefined,
-    }),
-  );
+  updateLocalStorage({
+    showOnTS: Date.now() + periodMiliseconds,
+    notNowTS: Date.now(),
+    bannerNotNowTS: undefined,
+  });
 };
 
 export const setHandleOnCancelBanner = () => {
-  const accountIdLS = getLSAccountId();
-  const localStorageByAccountId = getNotificationLocalStorage();
-
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorageFull(),
-      [accountIdLS]: {
-        ...localStorageByAccountId,
-        bannerNotNowTS: Date.now(),
-      },
-      bannerNotNowTS: Date.now(),
-    }),
-  );
+  updateLocalStorage({
+    bannerNotNowTS: Date.now(),
+  });
 };
 
 export const setProcessSuccess = () => {
-  const accountIdLS = getLSAccountId();
-  const localStorageByAccountId = getNotificationLocalStorage();
-
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorageFull(),
-      [accountIdLS]: {
-        ...localStorageByAccountId,
-        permission: true,
-        subscribeStarted: false,
-        subscribeError: '',
-        isPermisionGranted: true,
-      },
-      permission: true,
-      subscribeStarted: false,
-      subscribeError: '',
-      isPermisionGranted: true,
-    }),
-  );
+  updateLocalStorage({
+    permission: true,
+    subscribeStarted: false,
+    subscribeError: '',
+    isPermisionGranted: true,
+  });
 };
 
 export const setProcessError = (error: any) => {
-  const accountIdLS = getLSAccountId();
-  const localStorageByAccountId = getNotificationLocalStorage();
   const errorMessage = error.message ? error.message : 'unknown';
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorageFull(),
-      [accountIdLS]: {
-        ...localStorageByAccountId,
-        permission: false,
-        subscribeStarted: false,
-        subscribeError: errorMessage,
-      },
-      permission: false,
-      subscribeStarted: false,
-      subscribeError: errorMessage,
-    }),
-  );
+  updateLocalStorage({
+    permission: false,
+    subscribeStarted: false,
+    subscribeError: errorMessage,
+  });
+
   openToast({
     id: 'notifications-subscription-error',
     type: 'ERROR',
@@ -104,46 +72,23 @@ export const setProcessError = (error: any) => {
 };
 
 export const setProcessEnded = () => {
-  const accountIdLS = getLSAccountId();
-  const localStorageByAccountId = getNotificationLocalStorage();
-
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorageFull(),
-      [accountIdLS]: {
-        ...localStorageByAccountId,
-        subscribeStarted: false,
-      },
-      subscribeStarted: false,
-    }),
-  );
+  updateLocalStorage({
+    subscribeStarted: false,
+  });
 };
 
 export const setProcessStarted = () => {
-  const accountIdLS = getLSAccountId();
-  const localStorageByAccountId = getNotificationLocalStorage();
-
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorageFull(),
-      [accountIdLS]: {
-        ...localStorageByAccountId,
-        permission: false,
-        subscribeStarted: true,
-      },
-      permission: false,
-      subscribeStarted: true,
-    }),
-  );
+  updateLocalStorage({
+    permission: false,
+    subscribeStarted: true,
+  });
 };
 
 export const setClearData = () => {
   const accountIdLS = getLSAccountId();
 
   localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
+    notificationsLocalStorageKey,
     JSON.stringify({
       ...getNotificationLocalStorageFull(),
       [accountIdLS]: {},
@@ -151,37 +96,29 @@ export const setClearData = () => {
   );
 };
 
-export const setNotificationsSessionStorage = () => {
-  const accountIdLS = getLSAccountId();
-  const localStorageByAccountId = getNotificationLocalStorage();
-
-  localStorage.setItem(
-    NOTIFICATIONS_STORAGE,
-    JSON.stringify({
-      ...getNotificationLocalStorageFull(),
-      [accountIdLS]: {
-        ...localStorageByAccountId,
-        isNotificationSupported: isNotificationSupported(),
-        isPushManagerSupported: isPushManagerSupported(),
-        isPermisionGranted: isPermisionGranted(),
-      },
-      isNotificationSupported: isNotificationSupported(),
-      isPushManagerSupported: isPushManagerSupported(),
-      isPermisionGranted: isPermisionGranted(),
-    }),
-  );
+// This method is called first from src/pages/_app.tsx
+// which means that all other calls of updateLocalStorage
+// will have isNotificationSupported, isPushManagerSupported
+// and isPermisionGranted defined
+export const setNotificationsLocalStorage = () => {
+  updateLocalStorage({
+    isNotificationSupported: isNotificationSupported(),
+    isPushManagerSupported: isPushManagerSupported(),
+    isPermisionGranted: isPermisionGranted(),
+  });
 };
 
-export const getNotificationLocalStorageFull = () =>
-  isLocalStorageSupported() && JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
+export const getNotificationLocalStorageFull = (): NotificationLocalStorageFull =>
+  isLocalStorageSupported() && JSON.parse(localStorage.getItem(notificationsLocalStorageKey) || '{}');
 
-export const getNotificationLocalStorage = () => {
+export const getNotificationLocalStorage = (): NotificationLocalStorageByAccountId => {
   if (!isLocalStorageSupported()) {
-    return {};
+    return {} as NotificationLocalStorageFull;
   }
 
   const accountIdLS = getLSAccountId();
-
-  const notificationsLS = JSON.parse(localStorage.getItem(NOTIFICATIONS_STORAGE) || '{}');
-  return notificationsLS[accountIdLS];
+  const notificationsLS: NotificationLocalStorageFull = JSON.parse(
+    localStorage.getItem(notificationsLocalStorageKey) || '{}',
+  );
+  return notificationsLS[accountIdLS] || {};
 };

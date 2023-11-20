@@ -10,10 +10,8 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useTermsOfServiceStore } from '@/stores/terms-of-service';
-import { privacyDomainName, termsDomainName } from '@/utils/config';
+import { localStorageAccountIdKey, privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
-
-const LS_ACCOUNT_ID = 'near-social-vm:v01::accountId:';
 
 const HomePage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -25,7 +23,7 @@ const HomePage: NextPageWithLayout = () => {
   const setTosData = useTermsOfServiceStore((store) => store.setTosData);
 
   useEffect(() => {
-    const optimisticAccountId = window.localStorage.getItem(LS_ACCOUNT_ID);
+    const optimisticAccountId = window.localStorage.getItem(localStorageAccountIdKey);
     setSignedInOptimistic(!!optimisticAccountId);
   }, []);
 

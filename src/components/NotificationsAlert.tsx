@@ -13,7 +13,7 @@ import {
   showNotificationModal,
 } from '@/utils/notifications';
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
-import { getNotificationLocalStorage, setNotificationsSessionStorage } from '@/utils/notificationsLocalStorage';
+import { getNotificationLocalStorage, setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 
 const Wrapper = styled.div`
   position: absolute;
@@ -22,9 +22,9 @@ const Wrapper = styled.div`
 
 export const NotificationsAlert = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
+  const accountId = useAuthStore((store) => store.accountId);
   const components = useBosComponents();
   const [showNotificationModalState, setShowNotificationModalState] = useState(false);
-  const accountId = useAuthStore((store) => store.accountId);
   const [isHomeScreenApp, setHomeScreenApp] = useState(false);
   const [iosHomeScreenPrompt, setIosHomeScreenPrompt] = useState(false);
   const { isIosDevice, versionOfIos } = useIosDevice();
@@ -77,6 +77,7 @@ export const NotificationsAlert = () => {
     if (!signedIn) {
       return;
     }
+
     checkNotificationModal();
   }, [signedIn, checkNotificationModal]);
 
@@ -110,7 +111,7 @@ export const NotificationsAlert = () => {
             isNotificationSupported,
             isPermisionGranted,
             isPushManagerSupported,
-            setNotificationsSessionStorage,
+            setNotificationsSessionStorage: setNotificationsLocalStorage,
             onOpenChange: handleModalCloseOnEsc,
             iOSDevice: isIosDevice,
             iOSVersion: versionOfIos,
