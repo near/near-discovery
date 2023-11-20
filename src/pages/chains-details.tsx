@@ -23,7 +23,6 @@ const chart = 'https://ipfs.near.social/ipfs/bafkreiabil4iocii42zymoulnypymio4qz
 const star = 'https://ipfs.near.social/ipfs/bafkreiduogs6um2scfu53rprwmjjt6f55npfycomoe4za2ve7uucej52vu';
 const line = 'https://ipfs.near.social/ipfs/bafkreia3362z25o4wope7mt3jffallldmtmodasm5crpltkfurnem2wxfe';
 const chainsconetentImg = 'https://ipfs.near.social/ipfs/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq';
-const footer = 'https://ipfs.near.social/ipfs/bafkreiaryuyqhofb3wb4nfljxcclyn7iycrxxblcxefr37gvt4f3y3nao4';
 
 const ChainsDetails = styled.div`
   color: #ffffff;
@@ -415,14 +414,28 @@ const Tag = styled.div`
     border: 1px solid rgba(249, 181, 230, 1);
   }
 `;
+
 const Footer = styled.div`
   width: 100%;
   text-align: center;
   position: absolute;
   bottom: -36px;
   left: 0;
+  display: flex;
+  color: rgba(151, 154, 190, 1);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 10%;
+  .footer-item {
+    flex: 1;
+    text-align: center;
+  }
+  .footer-center {
+    img {
+      margin-right: 32px;
+    }
+  }
 `;
-
 const ChainsDetailsColumn: NextPageWithLayout = () => {
   return (
     <ChainsDetails>
@@ -612,7 +625,31 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         </div>
       </ChainsDetailsActivities>
       <Footer>
-        <img src={footer} alt="" />
+        <div className="footer-item footer-left">
+          Made with ❤️ by DapXDap team.
+          <br /> Bulit on BOS & NEAR Protocol
+        </div>
+        <div className="footer-item footer-center">
+          <div className="footer-center-img">
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="footer-item footer-right">Copyright 2023 DapXDap</div>
       </Footer>
     </ChainsDetails>
   );

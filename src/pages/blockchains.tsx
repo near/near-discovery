@@ -14,7 +14,6 @@ const diagonaltop = 'https://ipfs.near.social/ipfs/bafkreiewy27itzs3bq2et7bxmnv3
 const leftarrow = 'https://ipfs.near.social/ipfs/bafkreihvymef5y4q6a5lpnwea4fcygi4wrrb2tbzitswc3xnaufs6qnzjy';
 const arrowBlock = 'https://ipfs.near.social/ipfs/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge';
 const chainsconetentImg = 'https://ipfs.near.social/ipfs/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq';
-const footer = 'https://ipfs.near.social/ipfs/bafkreiaryuyqhofb3wb4nfljxcclyn7iycrxxblcxefr37gvt4f3y3nao4';
 const BlockchainsPage = styled.div`
   color: #ffffff;
   padding: 0 12% 80px 12%;
@@ -79,6 +78,10 @@ const BlockchainsConetent = styled.div`
     border-radius: 20px;
     padding: 19px 12px 38px 12px;
     position: relative;
+    a {
+      color: #ffffff;
+      text-decoration: none;
+    }
     .content-item-title {
       display: flex;
       margin-bottom: 18px;
@@ -148,7 +151,7 @@ const BlockchainsConetent = styled.div`
         height: 16px;
         margin-left: 10px;
       }
-      a{
+      a {
         color: #000000;
       }
     }
@@ -183,6 +186,20 @@ const Footer = styled.div`
   position: absolute;
   bottom: -36px;
   left: 0;
+  display: flex;
+  color: rgba(151, 154, 190, 1);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 10%;
+  .footer-item {
+    flex: 1;
+    text-align: center;
+  }
+  .footer-center {
+    img {
+      margin-right: 32px;
+    }
+  }
 `;
 
 const BlockchainsColumn: NextPageWithLayout = () => {
@@ -207,35 +224,39 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         {Object.values(chains).map((child, index) => (
           <>
             <div className="blockchains-conetent-item" key={index}>
-              <div className="content-item-title">
-                <div className="item-title-img">
-                  <img src={child.icon} alt="" />
+              <Link href="/chains-details">
+                <div className="content-item-title">
+                  <div className="item-title-img">
+                    <img src={child.icon} alt="" />
+                  </div>
+                  <div className="item-title-right">
+                    <h1>{child.chainName}</h1>
+                    <p>
+                      Add to MetaMask <img src={diagonaltop} alt="" />
+                    </p>
+                  </div>
                 </div>
-                <div className="item-title-right">
-                  <h1>{child.chainName}</h1>
-                  <p>
-                    Add to MetaMask <img src={diagonaltop} alt="" />
-                  </p>
-                </div>
-              </div>
-              <p className="body-paragraph">
-                Polygon zkEVM Beta is the leading ZK scaling solution that is equivalent to Ethereum Virtual Machine:
-                The vast majority of existing smart contracts, developer tools and wallets work seamlessly.
-              </p>
-              <p className="minor-paragraph">Technology</p>
-              <h3>ZK Rollup</h3>
-              <p className="minor-paragraph">Native Token</p>
-              <h3>TBD🔥</h3>
-              <span>
-                Learn more
-                <img src={leftarrow} alt="" />
-              </span>
-              <div className="list-item-bottom">
-                <Link href='/chains-details'>
-                  Deep Dive
-                <img src={arrowBlock} alt="" />
-                </Link>
-              </div>
+                <p className="body-paragraph">
+                  Polygon zkEVM Beta is the leading ZK scaling solution that is equivalent to Ethereum Virtual Machine:
+                  The vast majority of existing smart contracts, developer tools and wallets work seamlessly.
+                </p>
+                <p className="minor-paragraph">Technology</p>
+                <h3>ZK Rollup</h3>
+                <p className="minor-paragraph">Native Token</p>
+                <h3>TBD🔥</h3>
+                <span>
+                  Learn more
+                  <img src={leftarrow} alt="" />
+                </span>
+                {child.chainName === 'Polygon zkEVM' && (
+                  <div className="list-item-bottom">
+                    <Link href="#">
+                      Deep Dive
+                      <img src={arrowBlock} alt="" />
+                    </Link>
+                  </div>
+                )}
+              </Link>
             </div>
             {index === 4 && (
               <div className="blockchains-conetent-item conetent-item-img">
@@ -246,7 +267,31 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         ))}
       </BlockchainsConetent>
       <Footer>
-        <img src={footer} alt="" />
+        <div className="footer-item footer-left">
+          Made with ❤️ by DapXDap team.
+          <br /> Bulit on BOS & NEAR Protocol
+        </div>
+        <div className="footer-item footer-center">
+          <div className="footer-center-img">
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="footer-item footer-right">Copyright 2023 DapXDap</div>
       </Footer>
     </BlockchainsPage>
   );

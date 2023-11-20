@@ -18,7 +18,6 @@ const gold = 'https://ipfs.near.social/ipfs/bafkreidegqrrzlwh4wlfrquhd6n3n7dczef
 const several = 'https://ipfs.near.social/ipfs/bafkreib4xkaqeaxyfbdbjnvvnptlch3t6qtautxw2miflew4oqmc45nxdy';
 const arrowBlock = 'https://ipfs.near.social/ipfs/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge';
 const dappsDetails = 'https://ipfs.near.social/ipfs/bafybeibz3uwngzvaffn5hfsk7eg33tv3pmletxhocc4brvow6a463s5w2i';
-const footer = 'https://ipfs.near.social/ipfs/bafkreiaryuyqhofb3wb4nfljxcclyn7iycrxxblcxefr37gvt4f3y3nao4';
 
 const DappsDetails = styled.div`
   color: #ffffff;
@@ -358,6 +357,20 @@ const Footer = styled.div`
   position: absolute;
   bottom: -36px;
   left: 0;
+  display: flex;
+  color: rgba(151, 154, 190, 1);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 10%;
+  .footer-item {
+    flex: 1;
+    text-align: center;
+  }
+  .footer-center {
+    img {
+      margin-right: 32px;
+    }
+  }
 `;
 const DappsDetailsColumn: NextPageWithLayout = () => {
   return (
@@ -541,36 +554,58 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       <DappsDetailBottom>
         <Title>Related Dapps</Title>
         <div className="tab-content">
-          {dapps
-            .slice(0, 3)
-            .map((dapp, index) => {
-              return (
-                <div className="tab-content-item" key={index}>
-                  <div className="content-item-img">
-                    <img src={dapp.logo} alt="" />
-                  </div>
-                  <div className="content-item-text">
-                    <h1>{dapp.name}</h1>
-                    <p>{dapp.description}</p>
-                    <Tag>
-                      {dapp.tags.map((tag, index) => (
-                        <div className={`tag-item ${tag}`} key={index}>
-                          {tag}
-                        </div>
-                      ))}
-                    </Tag>
-                  </div>
-                  <div className="content-item-btn">
-                    <div className="item-btn-item">Collect</div>
-                    <div className="item-btn-item">View</div>
-                  </div>
+          {dapps.slice(0, 3).map((dapp, index) => {
+            return (
+              <div className="tab-content-item" key={index}>
+                <div className="content-item-img">
+                  <img src={dapp.logo} alt="" />
                 </div>
-              );
-            })}
+                <div className="content-item-text">
+                  <h1>{dapp.name}</h1>
+                  <p>{dapp.description}</p>
+                  <Tag>
+                    {dapp.tags.map((tag, index) => (
+                      <div className={`tag-item ${tag}`} key={index}>
+                        {tag}
+                      </div>
+                    ))}
+                  </Tag>
+                </div>
+                <div className="content-item-btn">
+                  <div className="item-btn-item">Collect</div>
+                  <div className="item-btn-item">View</div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </DappsDetailBottom>
       <Footer>
-        <img src={footer} alt="" />
+        <div className="footer-item footer-left">
+          Made with ❤️ by DapXDap team.
+          <br /> Bulit on BOS & NEAR Protocol
+        </div>
+        <div className="footer-item footer-center">
+          <div className="footer-center-img">
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="footer-item footer-right">Copyright 2023 DapXDap</div>
       </Footer>
     </DappsDetails>
   );

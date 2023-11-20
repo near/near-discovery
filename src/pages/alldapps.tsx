@@ -19,7 +19,6 @@ const carouselbg = 'https://ipfs.near.social/ipfs/bafybeicoasvzxskocvjpdzanvpzip
 const carouseicon = 'https://ipfs.near.social/ipfs/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e';
 const syncIcon = 'https://ipfs.near.social/ipfs/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y';
 const arrows = 'https://ipfs.near.social/ipfs/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi';
-const footer = 'https://ipfs.near.social/ipfs/bafkreiaryuyqhofb3wb4nfljxcclyn7iycrxxblcxefr37gvt4f3y3nao4';
 
 const AllDappsPage = styled.div`
   color: #ffffff;
@@ -348,6 +347,20 @@ const Footer = styled.div`
   position: absolute;
   bottom: -36px;
   left: 0;
+  display: flex;
+  color: rgba(151, 154, 190, 1);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 10%;
+  .footer-item {
+    flex: 1;
+    text-align: center;
+  }
+  .footer-center {
+    img {
+      margin-right: 32px;
+    }
+  }
 `;
 
 const carouselData = [
@@ -437,7 +450,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           <img src={carouseicon} alt="" />
         </div>
         {carouselData.map((child, index) => (
-            <Carousel key={index} active={index === activeIndex}>
+          <Carousel key={index} active={index === activeIndex}>
             <div className="carousel-content">
               <img src={syncIcon} alt="" />
               <h1>{child.title}</h1>
@@ -619,9 +632,32 @@ const AllDappsColumn: NextPageWithLayout = () => {
           </div>
         </>
       ) : null}
-
       <Footer>
-        <img src={footer} alt="" />
+        <div className="footer-item footer-left">
+          Made with ❤️ by DapXDap team.
+          <br /> Bulit on BOS & NEAR Protocol
+        </div>
+        <div className="footer-item footer-center">
+          <div className="footer-center-img">
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="footer-item footer-right">Copyright 2023 DapXDap</div>
       </Footer>
     </AllDappsPage>
   );

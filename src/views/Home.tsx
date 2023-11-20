@@ -23,13 +23,17 @@ const earn = 'https://ipfs.near.social/ipfs/bafkreib54d2j2gfmn5nw45woc3wcntukrub
 const carouselbg = 'https://ipfs.near.social/ipfs/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty';
 const carouseicon = 'https://ipfs.near.social/ipfs/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e';
 const gold = 'https://ipfs.near.social/ipfs/bafkreidegqrrzlwh4wlfrquhd6n3n7dczefy32hu5locsx5yj6hllqfkuq';
-const shortcutsIcon = 'https://ipfs.near.social/ipfs/bafkreidzyndlxwqshuuejb7xfpycpsn5srfdmprxuilireqy4mqn45ghre';
+const deppDiveIcon = 'https://ipfs.near.social/ipfs/bafkreiefxqwxsnq625upyk2j652nbljpkwkfrfdzvqdbjihpiug4qdbu7y';
+const deppDiveLeftIcon = 'https://ipfs.near.social/ipfs/bafkreic2z67ie73en2gtwwckbfcdinktlugbcuisouyidqjvkflnj5vl7i';
+const deppDiveRightIcon = 'https://ipfs.near.social/ipfs/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya';
+const deppDivebgIcon = 'https://ipfs.near.social/ipfs/bafkreifbf26yanusxqoo5vailxujr3ocys6mg2ixw7uji4u26j2dt6rk4m';
+const deppDiveArrowIcon = 'https://ipfs.near.social/ipfs/bafkreigz2kmyjuaq4jihinperqe2jgiuwhsx6e36glet7i2juxcj7ouuca';
+const shortcutsIcon = 'https://ipfs.near.social/ipfs/bafkreidxtwffr6u2hd2lhvx64fmxgmci2lmrrc7xesm2522tupm7r26sku';
 const decentralizedIcon = 'https://ipfs.near.social/ipfs/bafkreibhxqbh3tlqm6cqwqmu7j6afzsc7qab743bvn43zg4klk54tvyceq';
 const learningOne = 'https://ipfs.near.social/ipfs/bafkreigsyle3grerozvpmp42vhv3d36ny4gdc4vkgthcwefjyinvoangwy';
 const learningTwo = 'https://ipfs.near.social/ipfs/bafybeibgwjzaepfwgtmej4dnjjvtlnbtqukkn3fkde4ufvejnc2hf4yofi';
 const learningThree = 'https://ipfs.near.social/ipfs/bafkreihnl55yd5ud2nchalsgeyzy2tjq7cqw2bvp25cikxkixj55h6zyte';
 const learningIcon = 'https://ipfs.near.social/ipfs/bafkreicgtx436rdzzaj4qgilgti63niv5ymeesxjzfwmtopsrlmoipehxi';
-const footer = 'https://ipfs.near.social/ipfs/bafkreiaryuyqhofb3wb4nfljxcclyn7iycrxxblcxefr37gvt4f3y3nao4';
 
 const HomePage = styled.div`
   padding: 0 12% 80px 12%;
@@ -37,295 +41,418 @@ const HomePage = styled.div`
 `;
 
 const Content = styled.div`
-  .it-works-list {
-    display: flex;
-    .works-list-item {
-      flex: 1;
-      background: linear-gradient(180deg, #373a53 0%, #16181d 100%);
-      padding: 30px;
-      border-radius: 20px;
-      color: #d2d2d2;
-      position: relative;
-      margin-bottom: 60px;
-      h1 {
-        font-size: 26px;
-        font-weight: 700;
-        margin-bottom: 14px;
-        color: #ffffff;
-      }
-      p {
-        font-size: 18px;
-      }
-      a {
-        color: #d2d2d2;
-        text-decoration: underline;
-      }
-      .list-item-img {
-        position: absolute;
-        right: 12px;
-        top: -36px;
-        img {
-          width: 120px;
-          height: 120px;
-        }
-      }
-      @media (max-width: 1688px) {
-        padding: 80px 30px 30px;
-        .list-item-img {
-          position: absolute;
-          top: -56px;
-          right: 36%;
-        }
-      }
-    }
-    .works-list-arrow {
-      padding: 40px 24px 0 24px;
-    }
-  }
-  .token-tab-list {
-    width: 100%;
-    color: #ffffff;
-    border-bottom: 1px solid #383b48;
-    font-size: 18px;
-    color: #979abe;
-    display: flex;
-    position: relative;
-    .tab-list-item {
-      padding: 10px 40px;
-      margin-right: 24px;
-      font-weight: 700;
-      cursor: pointer;
-      &.active {
-        color: #ffffff;
-        border-bottom: 4px #ebf479 solid;
-      }
-    }
-  }
-  .tab-content {
-    /* border-bottom: 1px solid #383b48; */
-    display: flex;
-    flex-wrap: wrap;
-    position: relative;
-    margin-bottom: 100px;
-    padding: 0 0 0 30px;
-
-    .tab-content-item {
-      margin: 30px 30px 0 0;
-      border-bottom: 1px solid #383b48;
+  .how-it-works {
+    .it-works-list {
       display: flex;
-      flex-basis: calc(30% - 20px);
-      flex-grow: 1;
-      .content-item-img {
-        margin-right: 16px;
-        img {
-          width: 72px;
-          height: 72px;
-        }
-      }
-      .content-item-text {
-        margin-right: 16px;
-        width: 210px;
+      .works-list-item {
+        flex: 1;
+        background: linear-gradient(180deg, #373a53 0%, #16181d 100%);
+        padding: 30px;
+        border-radius: 20px;
+        color: #d2d2d2;
+        position: relative;
+        margin-bottom: 60px;
         h1 {
-          font-size: 20px;
+          font-size: 26px;
           font-weight: 700;
+          margin-bottom: 14px;
           color: #ffffff;
-          margin: 0;
         }
         p {
-          font-size: 14px;
-          color: #979abe;
-          margin: 6px 0 9px 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          font-size: 18px;
+        }
+        a {
+          color: #d2d2d2;
+          text-decoration: underline;
+        }
+        .list-item-img {
+          position: absolute;
+          right: 12px;
+          top: -36px;
+          img {
+            width: 120px;
+            height: 120px;
+          }
+        }
+        @media (max-width: 1688px) {
+          padding: 80px 30px 30px;
+          .list-item-img {
+            position: absolute;
+            top: -56px;
+            right: 36%;
+          }
         }
       }
-      .content-item-btn {
-        .item-btn-item {
-          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-          border: 1px solid #373a53;
-          font-size: 14px;
+      .works-list-arrow {
+        padding: 40px 24px 0 24px;
+      }
+    }
+  }
+
+  .explore-dapps {
+    .token-tab-list {
+      width: 100%;
+      color: #ffffff;
+      border-bottom: 1px solid #383b48;
+      font-size: 18px;
+      color: #979abe;
+      display: flex;
+      position: relative;
+      .tab-list-item {
+        padding: 10px 40px;
+        margin-right: 24px;
+        font-weight: 700;
+        cursor: pointer;
+        &.active {
           color: #ffffff;
-          padding: 6px 20px;
-          text-align: center;
-          align-items: center;
-          border-radius: 16px;
-          margin-bottom: 14px;
-          a {
+          border-bottom: 4px #ebf479 solid;
+        }
+      }
+    }
+
+    .tab-content {
+      /* border-bottom: 1px solid #383b48; */
+      display: flex;
+      flex-wrap: wrap;
+      position: relative;
+      margin-bottom: 100px;
+      padding: 0 0 0 30px;
+
+      .tab-content-item {
+        margin: 30px 30px 0 0;
+        border-bottom: 1px solid #383b48;
+        display: flex;
+        flex-basis: calc(30% - 20px);
+        flex-grow: 1;
+        .content-item-img {
+          margin-right: 16px;
+          img {
+            width: 72px;
+            height: 72px;
+          }
+        }
+        .content-item-text {
+          margin-right: 16px;
+          width: 210px;
+          h1 {
+            font-size: 20px;
+            font-weight: 700;
             color: #ffffff;
+            margin: 0;
+          }
+          p {
+            font-size: 14px;
+            color: #979abe;
+            margin: 6px 0 9px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+        }
+        .content-item-btn {
+          .item-btn-item {
+            background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+            border: 1px solid #373a53;
+            font-size: 14px;
+            color: #ffffff;
+            padding: 6px 20px;
+            text-align: center;
+            align-items: center;
+            border-radius: 16px;
+            margin-bottom: 14px;
+            a {
+              color: #ffffff;
+            }
+          }
+        }
+      }
+      @media (max-width: 1700px) {
+        .tab-content-item {
+          .content-item-text {
+            width: 120px;
+          }
+        }
+      }
+      @media (max-width: 1478px) {
+        .tab-content-item {
+          flex-basis: calc(45% - 20px);
+          .content-item-text {
+            width: 260px;
+          }
+        }
+      }
+      @media (max-width: 1397px) {
+        .tab-content-item {
+          flex-basis: calc(45% - 20px);
+          .content-item-text {
+            width: 200px;
+          }
+        }
+      }
+      @media (max-width: 1227px) {
+        .tab-content-item {
+          flex-basis: calc(45% - 20px);
+          .content-item-text {
+            width: 160px;
+          }
+        }
+      }
+      @media (max-width: 1227px) {
+        .tab-content-item {
+          .content-item-text {
+            width: 500px;
           }
         }
       }
     }
-    @media (max-width: 1700px) {
-      .tab-content-item {
-        .content-item-text {
-          width: 120px;
-        }
-      }
-    }
-    @media (max-width: 1478px) {
-      .tab-content-item {
-        flex-basis: calc(45% - 20px);
-        .content-item-text {
-          width: 260px;
-        }
-      }
-    }
-    @media (max-width: 1397px) {
-      .tab-content-item {
-        flex-basis: calc(45% - 20px);
-        .content-item-text {
-          width: 200px;
-        }
-      }
-    }
-    @media (max-width: 1227px) {
-      .tab-content-item {
-        flex-basis: calc(45% - 20px);
-        .content-item-text {
-          width: 160px;
-        }
-      }
-    }
-    @media (max-width: 1227px) {
-      .tab-content-item {
-        .content-item-text {
-          width: 500px;
-        }
-      }
-    }
   }
-  .explore-layer-list {
-    display: flex;
-    flex-wrap: wrap;
-    margin-bottom: 100px;
-    padding-left: 18px;
-    .layer-list-item {
-      margin: 0 18px 20px 0;
-      background: #21232a;
-      border-radius: 20px;
-      padding: 20px 60px;
-      border-bottom: 1px solid #383b48;
-      flex-basis: calc(25% - 18px);
-      color: #ffffff;
-      text-align: center;
-      position: relative;
-      img {
-        width: 72px;
-        height: 72px;
-      }
-      h1 {
-        font-size: 20px;
-        font-weight: 700;
-        margin: 8px 0 12px 0;
-      }
-      p {
-        font-size: 14px;
-        color: #979abe;
-      }
-      .list-item-bottom {
-        display: none;
-        height: 28px;
-        line-height: 28px;
-        left: 0;
-        border-radius: 0 0 20px 20px;
-        background: #ebf479e5;
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        color: #000000;
+
+  .explore-layer-blockchains {
+    .explore-layer-list {
+      display: flex;
+      flex-wrap: wrap;
+      margin-bottom: 100px;
+      padding-left: 18px;
+      .layer-list-item {
+        margin: 0 18px 20px 0;
+        background: #21232a;
+        border-radius: 20px;
+        padding: 20px 60px;
+        border-bottom: 1px solid #383b48;
+        flex-basis: calc(25% - 18px);
+        color: #ffffff;
+        text-align: center;
+        position: relative;
         img {
-          width: 16px;
-          height: 16px;
-          margin-left: 10px;
+          width: 72px;
+          height: 72px;
         }
-        a {
-          color: #000000;
+        h1 {
+          font-size: 20px;
+          font-weight: 700;
+          margin: 8px 0 12px 0;
         }
-      }
-      &:hover {
-        cursor: pointer;
+        p {
+          font-size: 14px;
+          color: #979abe;
+        }
         .list-item-bottom {
-          display: block;
+          display: none;
+          height: 28px;
+          line-height: 28px;
+          left: 0;
+          border-radius: 0 0 20px 20px;
+          background: #ebf479e5;
+          position: absolute;
+          bottom: 0;
+          width: 100%;
+          color: #000000;
+          img {
+            width: 16px;
+            height: 16px;
+            margin-left: 10px;
+          }
+          a {
+            color: #000000;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+          .list-item-bottom {
+            display: block;
+          }
+        }
+        @media (max-width: 1668px) {
+          flex-basis: calc(33% - 18px);
         }
       }
-      @media (max-width: 1668px) {
-        flex-basis: calc(33% - 18px);
-      }
-    }
-    /* .layer-list-item:nth-child(4n) {
+      /* .layer-list-item:nth-child(4n) {
       margin-right: 0;
     } */
+    }
   }
-  .shortcuts-content {
-    display: flex;
-    margin-bottom: 100px;
-    .shortcuts-content-img {
-      width: 70%;
-      margin-right: 48px;
-      border: 2px solid #373a52;
-      border-radius: 20px;
 
+  .deep-dive {
+    .deepDive-title {
+      width: 100%;
+      text-align: center;
       img {
-        width: 100%;
-        height: 100%;
-        border-radius: 20px;
+        height: 93px;
+        margin-bottom: 32px;
+        margin-right: 20px;
       }
     }
-    .shortcuts-content-list {
-      width: 30%;
-      .shortcuts-list-item {
-        margin-right: 12px;
-        margin-bottom: 12px;
-        width: fit-content;
-        border: 1px solid #373a53;
-        background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-        font-size: 16px;
-        font-weight: 700;
-        border-radius: 16px;
-        color: #ffffff;
-        height: 60px;
-        line-height: 60px;
-        padding: 0 16px;
-        display: flex;
+    .deepDive-content {
+      display: flex;
+      margin-bottom: 100px;
+      .deepDive-content-img {
+        width: 70%;
+        margin-right: 48px;
+        border-radius: 20px;
         img {
-          width: 40px;
-          height: 40px;
-          text-align: center;
-          align-items: center;
-          border-radius: 8px;
-          margin-right: 10px;
-          margin-top: 8px;
+          width: 100%;
+          height: 100%;
+          border-radius: 20px;
+        }
+      }
+      .deepDive-content-list {
+        width: 30%;
+        color: #ffffff;
+        .deepDive-list-item {
+          background: linear-gradient(180deg, #a55fff 0%, #21232a 100%);
+          border-radius: 32px;
+          padding: 30px;
+          position: relative;
+          height: 207px;
+          font-weight: 700;
+          margin-bottom: 20px;
+          .item-right-bg {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+          }
+          .item-bg-icon {
+            position: absolute;
+            left: 20px;
+            top: 20px;
+          }
+          .item-arrow-icon {
+            position: absolute;
+            top: 60px;
+            right: 30px;
+          }
+          p {
+            font-size: 18px;
+            font-weight: 700;
+          }
+          h1 {
+            font-size: 24px;
+            font-weight: 700;
+          }
         }
       }
     }
-    @media (max-width: 1539px) {
-      display: block;
+  }
+
+  .shortcuts {
+    .shortcuts-title {
+      width: 100%;
+      text-align: center;
+      img {
+        height: 93px;
+        margin-bottom: 32px;
+        margin-right: 20px;
+      }
+    }
+    .shortcuts-content {
+      display: flex;
+      margin-bottom: 100px;
       .shortcuts-content-img {
-        width: 100%;
-        margin-bottom: 24px;
+        width: 70%;
+        margin-right: 48px;
+        border: 2px solid #373a52;
+        border-radius: 20px;
+        position: relative;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 20px;
+        }
+        .shortcuts-img-banner {
+          display: none;
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          width: 100%;
+          background: rgba(55, 58, 83, 0.8);
+          padding: 14px 45px;
+          border-radius: 0 0 20px 20px;
+          h1 {
+            color: rgba(235, 244, 121, 1);
+            font-size: 16px;
+            font-weight: 700;
+          }
+          p {
+            color: rgba(255, 255, 255, 1);
+            font-size: 16px;
+            font-weight: 700;
+            display: list-item;
+            margin: 0;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+          .shortcuts-img-banner {
+            display: block;
+          }
+        }
       }
       .shortcuts-content-list {
-        width: 100%;
+        width: 30%;
+        .shortcuts-list-item {
+          margin-right: 12px;
+          margin-bottom: 12px;
+          width: fit-content;
+          border: 1px solid #373a53;
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          font-size: 16px;
+          font-weight: 700;
+          border-radius: 16px;
+          color: #ffffff;
+          height: 60px;
+          line-height: 60px;
+          padding: 0 16px;
+          display: flex;
+          img {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            align-items: center;
+            border-radius: 8px;
+            margin-right: 10px;
+            margin-top: 8px;
+          }
+        }
+      }
+      @media (max-width: 1539px) {
+        display: block;
+        .shortcuts-content-img {
+          width: 100%;
+          margin-bottom: 24px;
+        }
+        .shortcuts-content-list {
+          width: 100%;
+        }
       }
     }
   }
-  .decentralized-frotnend-content {
+
+  .decentralized-frotnend {
     text-align: center;
     margin-bottom: 86px;
-    .frotnend-content-title {
-      font-family: Gantari;
-      font-size: 26px;
-      font-weight: 500;
-      color: #ffffff;
-      margin-bottom: 14px;
-      span {
-        background: #00ec97;
-        color: #000000;
-        border-radius: 10px;
-        padding: 6px;
-        margin: 0 10px;
+    .decentralized-frotnend-title {
+      width: 100%;
+      text-align: center;
+      img {
+        width: fit-content;
+        height: 93px;
+        margin-bottom: 32px;
+        margin-right: 20px;
+      }
+      .frotnend-content-title {
+        font-family: Gantari;
+        font-size: 26px;
+        font-weight: 500;
+        color: #ffffff;
+        margin-bottom: 14px;
+        span {
+          background: #00ec97;
+          color: #000000;
+          border-radius: 10px;
+          padding: 6px;
+          margin: 0 10px;
+        }
       }
     }
     p {
@@ -341,44 +468,48 @@ const Content = styled.div`
       width: 100%;
     }
   }
-  .learning-content-item {
-    display: flex;
-    overflow: hidden;
+
+  .learning {
     .learning-content-item {
-      min-width: 539px;
-      background: #21232ae5;
-      border-radius: 20px;
-      padding: 28px 26px;
       display: flex;
-      margin-right: 20px;
-      .content-item-img {
+      overflow: hidden;
+      .learning-content-item {
+        min-width: 539px;
+        background: #21232ae5;
+        border-radius: 20px;
+        padding: 28px 26px;
+        display: flex;
         margin-right: 20px;
-        img {
-          width: 150px;
-          height: 150px;
+        .content-item-img {
+          margin-right: 20px;
+          img {
+            width: 150px;
+            height: 150px;
+          }
         }
-      }
-      .content-item-text {
-        color: #ffffff;
-        h1 {
-          font-size: 26px;
-          font-weight: 700;
-        }
-        p {
-          font-size: 18px;
-          color: #d2d2d2;
-        }
-        span {
-          color: #d2d2d2;
-          text-decoration: underline;
+        .content-item-text {
+          color: #ffffff;
+          h1 {
+            font-size: 26px;
+            font-weight: 700;
+          }
+          p {
+            font-size: 18px;
+            color: #d2d2d2;
+          }
+          span {
+            color: #d2d2d2;
+            text-decoration: underline;
+          }
         }
       }
     }
-  }
-  .learning-icon {
-    width: 100%;
-    text-align: center;
-    margin-top: 30px;
+
+    .learning-icon {
+      width: 100%;
+      text-align: center;
+      margin-top: 30px;
+    }
   }
 `;
 
@@ -598,6 +729,20 @@ const Footer = styled.div`
   position: absolute;
   bottom: -36px;
   left: 0;
+  display: flex;
+  color: rgba(151, 154, 190, 1);
+  font-size: 14px;
+  font-weight: 400;
+  padding: 0 10%;
+  .footer-item {
+    flex: 1;
+    text-align: center;
+  }
+  .footer-center {
+    img {
+      margin-right: 32px;
+    }
+  }
 `;
 
 const carouselData = [
@@ -647,212 +792,269 @@ const HomeContent: NextPageWithLayout = () => {
       </Banner>
 
       <Content>
-        <Title>How it works</Title>
-        <div className="it-works-list">
-          <div className="works-list-item">
-            <h1>Quick Sign-In</h1>
-            <p>Create an account or log in within seconds to obtain your unique web3 identity.</p>
-            {/* <a href="#">Sign in / View my profile</a> */}
-            <a href="#">View my profile</a>
-            <div className="list-item-img">
-              <img src={quick} alt="" />
+        <div className="how-it-works">
+          <Title>How it works</Title>
+          <div className="it-works-list">
+            <div className="works-list-item">
+              <h1>Quick Sign-In</h1>
+              <p>Create an account or log in within seconds to obtain your unique web3 identity.</p>
+              {/* <a href="#">Sign in / View my profile</a> */}
+              <a href="#">View my profile</a>
+              <div className="list-item-img">
+                <img src={quick} alt="" />
+              </div>
             </div>
-          </div>
-          <div className="works-list-arrow">
-            <img src={arrow} alt="" />
-          </div>
-          <div className="works-list-item">
-            <h1>Discover DApps</h1>
-            <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-            <Link href="/alldapps">Explore</Link>
-            <div className="list-item-img">
-              <img src={discover} alt="" />
+            <div className="works-list-arrow">
+              <img src={arrow} alt="" />
             </div>
-          </div>
-          <div className="works-list-arrow">
-            <img src={arrow} alt="" />
-          </div>
-          <div className="works-list-item">
-            <h1>Earn Rewards</h1>
-            <p>
-              Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the way.
-            </p>
-            <a href="#">View</a>
-            <div className="list-item-img">
-              <img src={earn} alt="" />
+            <div className="works-list-item">
+              <h1>Discover DApps</h1>
+              <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
+              <Link href="/alldapps">Explore</Link>
+              <div className="list-item-img">
+                <img src={discover} alt="" />
+              </div>
+            </div>
+            <div className="works-list-arrow">
+              <img src={arrow} alt="" />
+            </div>
+            <div className="works-list-item">
+              <h1>Earn Rewards</h1>
+              <p>
+                Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the
+                way.
+              </p>
+              <a href="#">View</a>
+              <div className="list-item-img">
+                <img src={earn} alt="" />
+              </div>
             </div>
           </div>
         </div>
 
-        <Title>Explore Dapps</Title>
+        <div className="explore-dapps">
+          <Title>Explore Dapps</Title>
 
-        <CarouselList>
-          <div className="carousel-right-icon" onClick={handleCarouselClick}>
-            <img src={carouseicon} alt="" />
-          </div>
-          {carouselData.map((child, index) => (
-            <Carousel key={index} active={index === activeIndex}>
-              <div className="carousel-content">
-                <img src={syncIcon} alt="" />
-                <h1>{child.title}</h1>
-                <Tag>
-                  <div className="tag-item Dexes">Dexes</div>
-                  <div className="tag-item Bridge">Bridge</div>
-                  <div className="tag-item Liquidity">Liquidity</div>
-                </Tag>
-                <p>Seamless and Efficient Trading on zk Rollups</p>
-                <div className="carousel-btn">
-                  <div className="carousel-btn-item">Collect</div>
-                  <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                    View
+          <CarouselList>
+            <div className="carousel-right-icon" onClick={handleCarouselClick}>
+              <img src={carouseicon} alt="" />
+            </div>
+            {carouselData.map((child, index) => (
+              <Carousel key={index} active={index === activeIndex}>
+                <div className="carousel-content">
+                  <img src={syncIcon} alt="" />
+                  <h1>{child.title}</h1>
+                  <Tag>
+                    <div className="tag-item Dexes">Dexes</div>
+                    <div className="tag-item Bridge">Bridge</div>
+                    <div className="tag-item Liquidity">Liquidity</div>
+                  </Tag>
+                  <p>Seamless and Efficient Trading on zk Rollups</p>
+                  <div className="carousel-btn">
+                    <div className="carousel-btn-item">Collect</div>
+                    <div className="carousel-btn-item" style={{ marginRight: '0' }}>
+                      View
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Carousel>
-          ))}
-        </CarouselList>
+              </Carousel>
+            ))}
+          </CarouselList>
 
-        <div className="token-tab-list">
-          <div
-            className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
-            onClick={() => handleTabClick('TBD')}
-          >
-            Token-TBD🔥
+          <div className="token-tab-list">
+            <div
+              className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
+              onClick={() => handleTabClick('TBD')}
+            >
+              Token-TBD🔥
+            </div>
+            <div
+              className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
+              onClick={() => handleTabClick('token')}
+            >
+              Native token
+            </div>
+            <ViewAll>
+              <Link href="/alldapps">
+                <span>View all</span>
+                <img src={arrow} alt="" />
+              </Link>
+            </ViewAll>
           </div>
-          <div
-            className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
-            onClick={() => handleTabClick('token')}
-          >
-            Native token
-          </div>
-          <ViewAll>
-            <Link href="/alldapps">
-              <span>View all</span>
-              <img src={arrow} alt="" />
-            </Link>
-          </ViewAll>
-        </div>
-        {selectedTab == 'TBD' ? (
-          <div className="tab-content">
-            {dapps
-              .filter((dapp) => dapp.TBD_TOKEN === 'Y')
-              .slice(0, 9)
-              .map((dapp, index) => {
-                return (
-                  <div className="tab-content-item" key={index}>
-                    <div className="content-item-img">
-                      <img src={dapp.logo} alt="" />
-                    </div>
-                    <div className="content-item-text">
-                      <h1>{dapp.name}</h1>
-                      <p>{dapp.description}</p>
-                      <Tag>
-                        {dapp.tags.map((tag, index) => (
-                          <div className={`tag-item ${tag}`} key={index}>
-                            {tag}
-                          </div>
-                        ))}
-                      </Tag>
-                    </div>
-                    <div className="content-item-btn">
-                      <div className="item-btn-item">Collect</div>
-                      <div className="item-btn-item">
-                        <Link href="/dapps-details">View</Link>
+          {selectedTab == 'TBD' ? (
+            <div className="tab-content">
+              {dapps
+                .filter((dapp) => dapp.TBD_TOKEN === 'Y')
+                .slice(0, 9)
+                .map((dapp, index) => {
+                  return (
+                    <div className="tab-content-item" key={index}>
+                      <div className="content-item-img">
+                        <img src={dapp.logo} alt="" />
+                      </div>
+                      <div className="content-item-text">
+                        <h1>{dapp.name}</h1>
+                        <p>{dapp.description}</p>
+                        <Tag>
+                          {dapp.tags.map((tag, index) => (
+                            <div className={`tag-item ${tag}`} key={index}>
+                              {tag}
+                            </div>
+                          ))}
+                        </Tag>
+                      </div>
+                      <div className="content-item-btn">
+                        <div className="item-btn-item">Collect</div>
+                        <div className="item-btn-item">
+                          <Link href="/dapps-details">View</Link>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
-          </div>
-        ) : null}
-        {selectedTab == 'token' ? (
-          <div className="tab-content">
-            {dapps
-              .filter((dapp) => dapp.TBD_TOKEN === 'N')
-              .slice(0, 9)
-              .map((dapp, index) => {
-                return (
-                  <div className="tab-content-item" key={index}>
-                    <div className="content-item-img">
-                      <img src={dapp.logo} alt="" />
+                  );
+                })}
+            </div>
+          ) : null}
+          {selectedTab == 'token' ? (
+            <div className="tab-content">
+              {dapps
+                .filter((dapp) => dapp.TBD_TOKEN === 'N')
+                .slice(0, 9)
+                .map((dapp, index) => {
+                  return (
+                    <div className="tab-content-item" key={index}>
+                      <div className="content-item-img">
+                        <img src={dapp.logo} alt="" />
+                      </div>
+                      <div className="content-item-text">
+                        <h1>{dapp.name}</h1>
+                        <p>{dapp.description}</p>
+                        <Tag>
+                          {dapp.tags.map((tag, index) => (
+                            <div className={`tag-item ${tag}`} key={index}>
+                              {tag}
+                            </div>
+                          ))}
+                        </Tag>
+                      </div>
+                      <div className="content-item-btn">
+                        <div className="item-btn-item">Collect</div>
+                        <div className="item-btn-item">View</div>
+                      </div>
                     </div>
-                    <div className="content-item-text">
-                      <h1>{dapp.name}</h1>
-                      <p>{dapp.description}</p>
-                      <Tag>
-                        {dapp.tags.map((tag, index) => (
-                          <div className={`tag-item ${tag}`} key={index}>
-                            {tag}
-                          </div>
-                        ))}
-                      </Tag>
-                    </div>
-                    <div className="content-item-btn">
-                      <div className="item-btn-item">Collect</div>
-                      <div className="item-btn-item">View</div>
-                    </div>
-                  </div>
-                );
-              })}
-          </div>
-        ) : null}
-
-        <div style={{ position: 'relative' }}>
-          <Title>Explore Layer 2 Blockchains</Title>
-          <ViewAll>
-            <Link href="/blockchains">
-              <span>View all</span>
-              <img src={arrow} alt="" />
-            </Link>
-          </ViewAll>
-        </div>
-        <div className="explore-layer-list">
-          {Object.values(chains)
-            .slice(0, 8)
-            .map((child, index) => (
-              <div className="layer-list-item" key={index}>
-                <img src={child.icon} alt="" />
-                <h1>{child.chainName}</h1>
-                <Gold>
-                  <img src={gold} alt="" className="gold-icon" />
-                  <p>10</p>
-                </Gold>
-                <p>Ethereum scalability with zkEVM performance and security</p>
-                <div className="list-item-bottom">
-                  <Link href="/chains-details">
-                    Deep Dive
-                    <img src={arrowBlock} alt="" />
-                  </Link>
-                </div>
-              </div>
-            ))}
+                  );
+                })}
+            </div>
+          ) : null}
         </div>
 
-        <Title>Shortcuts</Title>
-        <Paragraph>
-          Shortcuts integrate common functions and the most popular dapps, makes your Defi journey much easier and
-          seamless.
-        </Paragraph>
-        <div className="shortcuts-content">
-          <div className="shortcuts-content-img">
-            <img src="./shortcut.gif" alt="" />
+        <div className="explore-layer-blockchains">
+          <div style={{ position: 'relative' }}>
+            <Title>Explore Layer 2 Blockchains</Title>
+            <ViewAll>
+              <Link href="/blockchains">
+                <span>View all</span>
+                <img src={arrow} alt="" />
+              </Link>
+            </ViewAll>
           </div>
-          <div className="shortcuts-content-list">
-            {Object.values(chains).map((child, index) => (
-              <div style={{ display: 'inline-block' }} key={index}>
-                <div className="shortcuts-list-item">
+          <div className="explore-layer-list">
+            {Object.values(chains)
+              .slice(0, 8)
+              .map((child, index) => (
+                <div className="layer-list-item" key={index}>
                   <img src={child.icon} alt="" />
-                  {child.chainName}
+                  <h1>{child.chainName}</h1>
+                  <Gold>
+                    <img src={gold} alt="" className="gold-icon" />
+                    <p>10</p>
+                  </Gold>
+                  <p>Ethereum scalability with zkEVM performance and security</p>
+                  {child.chainName === 'Polygon zkEVM' && (
+                    <div className="list-item-bottom">
+                      <Link href="#">
+                        Deep Dive
+                        <img src={arrowBlock} alt="" />
+                      </Link>
+                    </div>
+                  )}
                 </div>
-              </div>
-            ))}
+              ))}
           </div>
         </div>
 
-        <div className="decentralized-frotnend-content">
-          <Title>Decentralized frotnend</Title>
-          <div className="frotnend-content-title">
-            Powered by <span>BOS</span>allows us to redesign the Web3 user journey
+        <div className="deep-dive">
+          <div className="deepDive-title">
+            <img src={deppDiveIcon} alt="" />
+            <Title>Deep Dive</Title>
+            <Paragraph>
+              Real-time DApp trend data, simple and economical one-click interaction, and easily accessible historical
+              transaction data.
+            </Paragraph>
+          </div>
+          <div className="deepDive-content">
+            <div className="deepDive-content-img">
+              <img src={deppDiveLeftIcon} alt="" />
+            </div>
+            <div className="deepDive-content-list">
+              <div className="deepDive-list-item">
+                <div className="item-right-bg">
+                  <img src={deppDiveRightIcon} alt="" />
+                </div>
+                <div className="item-bg-icon">
+                  <img src={deppDivebgIcon} alt="" />
+                </div>
+                <div className="item-arrow-icon">
+                  <img src={deppDiveArrowIcon} alt="" />
+                </div>
+                <p>Deep Dive into</p>
+                <h1>Polygon zkEVM</h1>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="shortcuts">
+          <div className="shortcuts-title">
+            <img src={shortcutsIcon} alt="" />
+            <Title>Shortcuts</Title>
+            <Paragraph>
+              Shortcuts integrate common functions and the most popular dapps, makes your Defi journey much easier and
+              seamless.
+            </Paragraph>
+          </div>
+          <div className="shortcuts-content">
+            <div className="shortcuts-content-img">
+              <img src="./shortcut.gif" alt="" />
+              <div className="shortcuts-img-banner">
+                <h1>Connect L1 to L2 with Ease</h1>
+                <p>Quick and Secure: Transition your assets from Ethereum to Layer 2 swiftly and securely.</p>
+                <p>Cost-Effective: Benefit from lower transaction fees for maximized efficiency. User-Friendly: Our</p>
+                <p>step-by-step guidance simplifies the bridging process for all users.</p>
+              </div>
+            </div>
+            <div className="shortcuts-content-list">
+              {Object.values(chains).map((child, index) => (
+                <div style={{ display: 'inline-block' }} key={index}>
+                  <div className="shortcuts-list-item">
+                    <img src={child.icon} alt="" />
+                    {child.chainName}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="decentralized-frotnend">
+          <div className="decentralized-frotnend-title">
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreianvp55gpfwvvlamdmvq6yx5omqomtjcntbtkiouv4bxukpgcbwwe"
+              alt=""
+            />
+            <Title>Decentralized frotnend</Title>
+            <div className="frotnend-content-title">
+              Powered by <span>BOS</span>allows us to redesign the Web3 user journey
+            </div>
           </div>
           <p>
             <Link href="https://near.org/"> Learn more</Link>
@@ -860,47 +1062,73 @@ const HomeContent: NextPageWithLayout = () => {
           <img src={decentralizedIcon} alt="" />
         </div>
 
-        <Title>Learning</Title>
-        <div className="learning-content-item">
+        <div className="learning">
+          <Title>Learning</Title>
           <div className="learning-content-item">
-            <div className="content-item-img">
-              <img src={learningOne} alt="" />
+            <div className="learning-content-item">
+              <div className="content-item-img">
+                <img src={learningOne} alt="" />
+              </div>
+              <div className="content-item-text">
+                <h1>User Journey</h1>
+                <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
+                <Link href="https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8">
+                  <span>Explore</span>
+                </Link>
+              </div>
             </div>
-            <div className="content-item-text">
-              <h1>User Journey</h1>
-              <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-              <Link href="https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8">
+            <div className="learning-content-item">
+              <div className="content-item-img">
+                <img src={learningTwo} alt="" />
+              </div>
+              <div className="content-item-text">
+                <h1>User Journey</h1>
+                <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
                 <span>Explore</span>
-              </Link>
+              </div>
+            </div>
+            <div className="learning-content-item">
+              <div className="content-item-img">
+                <img src={learningThree} alt="" />
+              </div>
+              <div className="content-item-text">
+                <h1>User Journey</h1>
+                <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
+                <span>Explore</span>
+              </div>
             </div>
           </div>
-          <div className="learning-content-item">
-            <div className="content-item-img">
-              <img src={learningTwo} alt="" />
-            </div>
-            <div className="content-item-text">
-              <h1>User Journey</h1>
-              <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-              <span>Explore</span>
-            </div>
+          <div className="learning-icon">
+            <img src={learningIcon} alt="" />
           </div>
-          <div className="learning-content-item">
-            <div className="content-item-img">
-              <img src={learningThree} alt="" />
-            </div>
-            <div className="content-item-text">
-              <h1>User Journey</h1>
-              <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-              <span>Explore</span>
-            </div>
-          </div>
-        </div>
-        <div className="learning-icon">
-          <img src={learningIcon} alt="" />
         </div>
       </Content>
       <Footer>
-        <img src={footer} alt="" />
+        <div className="footer-item footer-left">
+          Made with ❤️ by DapXDap team.
+          <br /> Bulit on BOS & NEAR Protocol
+        </div>
+        <div className="footer-item footer-center">
+          <div className="footer-center-img">
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74"
+              alt=""
+            />
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm"
+              alt=""
+            />
+          </div>
+        </div>
+        <div className="footer-item footer-right">Copyright 2023 DapXDap</div>
       </Footer>
     </HomePage>
   );
