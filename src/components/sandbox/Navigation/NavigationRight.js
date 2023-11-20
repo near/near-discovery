@@ -29,7 +29,7 @@ const NavigationRight = ({
   const code = file?.codeVisible;
   const forkOf = file?.forkOf;
   if (forkOf && !metadata?.forkOf) {
-    metadata = { ...metadata, forkOf };
+    metadata = { ...metadata, fork_of: forkOf };
   }
 
   return (
