@@ -110,47 +110,59 @@ export const Sandbox = ({ onboarding = false }) => {
 
       const fetchCode = () => {
         const widgetObject = cache.socialGet(near, widgetSrc, false, undefined, undefined, fetchCode);
+        fetch(`${near.config.apiUrl}/keys`, {
+          method: 'POST',
+          body: JSON.stringify({ keys: [file.src], options: { return_type: 'BlockHeight' } }),
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        })
+          .then((response) => response.json())
+          .then((sourceWidget) => {
+            const srcArr = file.src.split('/');
+            const forkOf = file.src + '@' + sourceWidget[srcArr[0]][srcArr[1]][srcArr[2]];
 
-        if (widgetObject && file.new) {
-          const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
-          const onChainCode = codeDraft || codeMain;
+            if (widgetObject && file.new) {
+              const { codeMain, codeDraft, isDraft } = getWidgetDetails(widgetObject);
+              const onChainCode = codeDraft || codeMain;
+              cache
+                .asyncLocalStorageGet(StorageDomain, {
+                  path,
+                  type: StorageType.Code,
+                })
+                .then(({ code } = {}) => {
+                  setFilesObject((state) => ({
+                    ...state,
+                    [jpath]: {
+                      ...state[jpath],
+                      codeMain,
+                      codeDraft,
+                      isDraft,
+                      savedOnChain: true,
+                      changesMade: code ? checkChangesMade(onChainCode, codeDraft, code) : false,
+                      codeLocalStorage: code || onChainCode,
+                      codeVisible: code || state[jpath].codeVisible || onChainCode,
+                      forkOf,
+                    },
+                  }));
+                });
+            }
 
-          cache
-            .asyncLocalStorageGet(StorageDomain, {
-              path,
-              type: StorageType.Code,
-            })
-            .then(({ code } = {}) => {
-              setFilesObject((state) => ({
-                ...state,
-                [jpath]: {
-                  ...state[jpath],
-                  codeMain,
-                  codeDraft,
-                  isDraft,
-                  savedOnChain: true,
-                  changesMade: code ? checkChangesMade(onChainCode, codeDraft, code) : false,
-                  codeLocalStorage: code || onChainCode,
-                  codeVisible: code || state[jpath].codeVisible || onChainCode,
-                },
-              }));
-            });
-        }
-
-        cache
-          .asyncLocalStorageGet(StorageDomain, {
-            path,
-            type: StorageType.Code,
-          })
-          .then(({ code } = {}) => {
-            setFilesObject((state) => ({
-              ...state,
-              [jpath]: {
-                ...state[jpath],
-                codeLocalStorage: code,
-                codeVisible: code || state[jpath].codeVisible,
-              },
-            }));
+            cache
+              .asyncLocalStorageGet(StorageDomain, {
+                path,
+                type: StorageType.Code,
+              })
+              .then(({ code } = {}) => {
+                setFilesObject((state) => ({
+                  ...state,
+                  [jpath]: {
+                    ...state[jpath],
+                    codeLocalStorage: code,
+                    codeVisible: code || state[jpath].codeVisible,
+                  },
+                }));
+              });
           });
       };
       fetchCode();
