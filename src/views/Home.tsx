@@ -549,7 +549,7 @@ const Banner = styled.div`
       height: 76px;
     }
     h1 {
-      font-size: 42px;
+      /* font-size: 42px; */
       font-weight: 700;
       margin: 32px 0 20px 0;
       span {
@@ -785,9 +785,9 @@ const HomeContent: NextPageWithLayout = () => {
         <div className="banner-content">
           <img src={logoUrl} alt="" />
           <h1>
-            Your universal entry point into <span>L2s</span>
+            Your Universal Entry Point Into <span>L2s</span>
           </h1>
-          <span>Built on Bos </span>
+          <span>Built On Bos </span>
         </div>
       </Banner>
 
