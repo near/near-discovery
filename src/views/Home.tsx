@@ -298,6 +298,10 @@ const Content = styled.div`
       .deepDive-content-list {
         width: 30%;
         color: #ffffff;
+        a {
+          color: #ffffff;
+          text-decoration: none;
+        }
         .deepDive-list-item {
           background: linear-gradient(180deg, #a55fff 0%, #21232a 100%);
           border-radius: 32px;
@@ -329,6 +333,9 @@ const Content = styled.div`
             font-size: 24px;
             font-weight: 700;
           }
+        }
+        .list-item-sprcial {
+          background: linear-gradient(180deg, #256CB0 0%, #21232a 100%);
         }
       }
     }
@@ -799,7 +806,7 @@ const HomeContent: NextPageWithLayout = () => {
               <h1>Quick Sign-In</h1>
               <p>Create an account or log in within seconds to obtain your unique web3 identity.</p>
               {/* <a href="#">Sign in / View my profile</a> */}
-              <a href="#">View my profile</a>
+              {/* <a href="#">View my profile</a> */}
               <div className="list-item-img">
                 <img src={quick} alt="" />
               </div>
@@ -971,7 +978,7 @@ const HomeContent: NextPageWithLayout = () => {
                   <p>Ethereum scalability with zkEVM performance and security</p>
                   {child.chainName === 'Polygon zkEVM' && (
                     <div className="list-item-bottom">
-                      <Link href="#">
+                      <Link href="/warmup">
                         Deep Dive
                         <img src={arrowBlock} alt="" />
                       </Link>
@@ -996,18 +1003,36 @@ const HomeContent: NextPageWithLayout = () => {
               <img src={deppDiveLeftIcon} alt="" />
             </div>
             <div className="deepDive-content-list">
-              <div className="deepDive-list-item">
+              <Link href="/warmup">
+                <div className="deepDive-list-item">
+                  <div className="item-right-bg">
+                    <img src={deppDiveRightIcon} alt="" />
+                  </div>
+                  <div className="item-bg-icon">
+                    <img src={deppDivebgIcon} alt="" />
+                  </div>
+                  <div className="item-arrow-icon">
+                    <img src={deppDiveArrowIcon} alt="" />
+                  </div>
+                  <p>Deep Dive into</p>
+                  <h1>Polygon zkEVM</h1>
+                </div>
+              </Link>
+              <div className="deepDive-list-item list-item-sprcial">
                 <div className="item-right-bg">
                   <img src={deppDiveRightIcon} alt="" />
                 </div>
                 <div className="item-bg-icon">
-                  <img src={deppDivebgIcon} alt="" />
+                  <img
+                    src="https://ipfs.near.social/ipfs/bafkreie7thart7hj63xd2q27eronnchjfikyxjh3jwhzbjckvbp74so4fi"
+                    alt=""
+                  />
                 </div>
                 <div className="item-arrow-icon">
                   <img src={deppDiveArrowIcon} alt="" />
                 </div>
                 <p>Deep Dive into</p>
-                <h1>Polygon zkEVM</h1>
+                <h1>Linea</h1>
               </div>
             </div>
           </div>

@@ -434,7 +434,7 @@ export const DesktopNavigationTop = () => {
             </div>
           </div>
           <div className="menu-content-deep">
-            <Link href="/warmup">
+            <Link href="/warmup" onClick={() => setShowMenuContent(false)}>
               <div className="contenr-deep-item">
                 <div className="deep-item-left">
                   <img src={DeepDive} alt="" />
@@ -445,7 +445,7 @@ export const DesktopNavigationTop = () => {
                 </div>
               </div>
             </Link>
-            <Link href="/all-in-one">
+            <Link href="/all-in-one" onClick={() => setShowMenuContent(false)}>
               <div className="contenr-deep-item">
                 <div className="deep-item-left">
                   <img src={Shotcuts} alt="" />
