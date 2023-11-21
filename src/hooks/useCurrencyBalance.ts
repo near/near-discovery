@@ -22,6 +22,10 @@ export default function useTokenBalance({
   const { account, chainId } = useAccount();
   useEffect(() => {
     const _chainId = currency?.chainId ? currency.chainId : chainId;
+    if (!_chainId || !chains || !chains[_chainId]) {
+      console.error('Invalid _chainId or chains is undefined');
+      return;
+    }
     const rpcUrl = _chainId ? chains[_chainId].rpcUrls[0] : '';
     const getBalance = async () => {
       if (!currency || !rpcUrl || !account || !currency.address) return;

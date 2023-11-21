@@ -242,6 +242,11 @@ const TopContentComponent = () => {
   }, [wallet, provider]);
 
   const handleItemClick = ({ index, chainId }: { index: number; chainId: number }) => {
+    if (!popupsData || !popupsData[index]) {
+      console.error('Invalid index or popupsData is undefined');
+      return;
+    }
+
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
 
     etherProvider
