@@ -60,7 +60,15 @@ const nextConfig = {
   ],
 };
 
-module.exports = nextConfig;
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  sw: 'next-pwa-sw.js',
+  importScripts: ['/pwa.js'],
+  cacheStartUrl: false,
+  cacheOnFrontEndNav: true,
+  skipWaiting: false
+})
+module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below
 
