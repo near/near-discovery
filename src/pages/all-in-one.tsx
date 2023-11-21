@@ -252,7 +252,7 @@ const AllInOne: NextPageWithLayout = () => {
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <span>Polygon zkEVM ShortCut</span>
+        <span>{selectedItem !== null && popupsData[selectedItem].title} ShortCut</span>
       </BreadCrumbs>
 
       <div className="top-login-select">
