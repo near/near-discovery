@@ -15,7 +15,7 @@ export default function LoginView() {
           <img src={bluebg} alt="" />
         </div>
         <div className="content">
-          <img src="https://assets.dapdap.net/images/logo.png"  style={{height:'60px'}}/>
+          <img src="https://assets.dapdap.net/images/logo.png" style={{ height: '60px' }} />
           <div className="title">
             <p>
               Your Universal Entry Point Into <span>L2s</span>{' '}

@@ -192,7 +192,7 @@ export default function InviteCodeView() {
           <img src={bluebg} alt="" />
         </div>
         <div className="content">
-          {!account && <img src='https://assets.dapdap.net/images/logo.png'/>}
+          {!account && <img src="https://assets.dapdap.net/images/logo.png" />}
           <div className="title">
             <p>
               <img src="https://assets.dapdap.net/images/logo.png" style={{ marginRight: '20px' }} />
