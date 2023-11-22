@@ -226,15 +226,17 @@ const BreadCrumbs = styled.div`
 `;
 const CarouselList = styled.div`
   position: relative;
+  overflow: hidden;
   .carousel-right-icon {
     position: absolute;
-    right: -26px;
-    top: 50%;
+    right: 0;
+    top: 40%;
+    z-index: 1;
     cursor: pointer;
   }
   .carousel {
     display: none;
-    width: 100%;
+    width: 97%;
     background-image: url(${carouselbg});
     border-radius: 20px;
     height: 352px;

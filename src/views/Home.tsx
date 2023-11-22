@@ -335,7 +335,7 @@ const Content = styled.div`
           }
         }
         .list-item-sprcial {
-          background: linear-gradient(180deg, #256CB0 0%, #21232a 100%);
+          background: linear-gradient(180deg, #256cb0 0%, #21232a 100%);
         }
       }
     }
@@ -477,7 +477,7 @@ const Content = styled.div`
   }
 
   .learning {
-    .learning-content-item {
+    .learning-contents-item {
       display: flex;
       overflow: hidden;
       .learning-content-item {
@@ -514,8 +514,29 @@ const Content = styled.div`
 
     .learning-icon {
       width: 100%;
+      display: flex;
       text-align: center;
+      justify-content: center;
       margin-top: 30px;
+      .learning-icon-item {
+        border: 1px solid rgba(55, 58, 83, 1);
+        width: 55px;
+        height: 30px;
+        line-height: 26px;
+        text-align: center;
+        border-radius: 16px;
+        margin-right: 14px;
+        cursor: pointer;
+        transition: all 0.3s ease-in-out;
+        &:hover{
+          background: #272A38;
+        }
+      }
+      .learning-icon-right {
+        img {
+          transform: rotate(180deg);
+        }
+      }
     }
   }
 `;
@@ -586,15 +607,17 @@ const Title = styled.div`
 
 const CarouselList = styled.div`
   position: relative;
+  overflow: hidden;
   .carousel-right-icon {
     position: absolute;
-    right: -26px;
-    top: 50%;
+    right: 0;
+    top: 40%;
+    z-index: 1;
     cursor: pointer;
   }
   .carousel {
     display: none;
-    width: 100%;
+    width: 97%;
     background-image: url(${carouselbg});
     border-radius: 20px;
     height: 352px;
@@ -765,6 +788,21 @@ const Carousel = React.memo(({ active, children }: { active: boolean; children: 
   return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
 });
 
+const initialLearningData = [
+  {
+    icon: learningOne,
+    title: 'User Journey',
+  },
+  {
+    icon: learningTwo,
+    title: 'User Journey',
+  },
+  {
+    icon: learningThree,
+    title: 'User Journey',
+  },
+];
+
 const HomeContent: NextPageWithLayout = () => {
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
@@ -779,6 +817,26 @@ const HomeContent: NextPageWithLayout = () => {
   const handleCarouselClick = useCallback(() => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
   }, [carouselData.length]);
+
+  const [learningData, setLearningData] = useState(initialLearningData);
+
+  const handleLeftClick = () => {
+    const newData = [...learningData];
+    const lastItem = newData.pop();
+    if (lastItem) {
+      newData.unshift(lastItem);
+      setLearningData(newData);
+    }
+  };
+
+  const handleRightClick = () => {
+    const newData = [...learningData];
+    const firstItem = newData.shift();
+    if (firstItem) {
+      newData.push(firstItem);
+      setLearningData(newData);
+    }
+  };
 
   return (
     <HomePage>
@@ -1089,42 +1147,35 @@ const HomeContent: NextPageWithLayout = () => {
 
         <div className="learning">
           <Title>Learning</Title>
-          <div className="learning-content-item">
-            <div className="learning-content-item">
-              <div className="content-item-img">
-                <img src={learningOne} alt="" />
+          <div className="learning-contents-item">
+            {learningData.map((item, index) => (
+              <div className="learning-content-item" key={index}>
+                <div className="content-item-img">
+                  <img src={item.icon} alt="" />
+                </div>
+                <div className="content-item-text">
+                  <h1>{item.title}</h1>
+                  <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
+                  <Link href="https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8">
+                    <span>Explore</span>
+                  </Link>
+                </div>
               </div>
-              <div className="content-item-text">
-                <h1>User Journey</h1>
-                <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-                <Link href="https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8">
-                  <span>Explore</span>
-                </Link>
-              </div>
-            </div>
-            <div className="learning-content-item">
-              <div className="content-item-img">
-                <img src={learningTwo} alt="" />
-              </div>
-              <div className="content-item-text">
-                <h1>User Journey</h1>
-                <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-                <span>Explore</span>
-              </div>
-            </div>
-            <div className="learning-content-item">
-              <div className="content-item-img">
-                <img src={learningThree} alt="" />
-              </div>
-              <div className="content-item-text">
-                <h1>User Journey</h1>
-                <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-                <span>Explore</span>
-              </div>
-            </div>
+            ))}
           </div>
           <div className="learning-icon">
-            <img src={learningIcon} alt="" />
+            <div className="learning-icon-item learning-icon-left" onClick={handleRightClick}>
+              <img
+                src="https://ipfs.near.social/ipfs/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy"
+                alt=""
+              />
+            </div>
+            <div className="learning-icon-item learning-icon-right" onClick={handleLeftClick}>
+              <img
+                src="https://ipfs.near.social/ipfs/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy"
+                alt=""
+              />
+            </div>
           </div>
         </div>
       </Content>
