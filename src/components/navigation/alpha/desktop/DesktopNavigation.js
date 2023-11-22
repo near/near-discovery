@@ -115,36 +115,18 @@ export function DesktopNavigation(props) {
         <Link to="/" className="logo-link">
           <Logo />
         </Link>
-        {/* <div className="form-wrapper">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              history.push(
-                `/calebjacob.near/widget/GlobalSearchPage?term=${e.target[0].value}`
-              );
-            }}
-          >
-            <input
-              placeholder="Search"
-              style={{ backgroundImage: `url(${image})` }}
-              onFocus={() => setSearchInputFocus(true)}
-              onBlur={() => setSearchInputFocus(false)}
-            />
-          </form>
-          {searchInputFocus && <Return />}
-        </div> */}
         <div className="navigation-section text-align">
-          <NavigationButton route="/jgodwill.near/widget/GenaDrop.Create">
+          <NavigationButton route="/bos.genadrop.near/widget/GenaDrop.Create">
             Create
           </NavigationButton>
-          <NavigationButton route="/agwaze.near/widget/GenaDrop.NFTListing">
+          <NavigationButton route="/bos.genadrop.near/widget/GenaDrop.MultiListing.Index">
             List NEAR NFTs
           </NavigationButton>
-          <NavigationButton route="/harrydhillon.near/widget/NFTSwap.NFT-Trade">
+          <NavigationButton route="/bos.genadrop.near/widget/GenaDrop.NFT.Swap.NFT-Trade">
             Swap NFTs
           </NavigationButton>
 
-          <NavigationButton route="/agwaze.near/widget/GenaDrop.Explore">
+          <NavigationButton route="/bos.genadrop.near/widget/GenaDrop.Explore">
             Explore
           </NavigationButton>
         </div>

@@ -19,13 +19,13 @@ const TestnetWidgets = {
 
 const MainnetWidgets = {
   image: "mob.near/widget/Image",
-  default: "jgodwill.near/widget/GenaDrop.Home",
+  default: "bos.genadrop.near/widget/GenaDrop.Home.Index",
   viewSource: "mob.near/widget/WidgetSource",
   widgetMetadataEditor: "mob.near/widget/WidgetMetadataEditor",
   widgetMetadata: "mob.near/widget/WidgetMetadata",
   profileImage: "mob.near/widget/ProfileImage",
   notificationButton: "mob.near/widget/NotificationButton",
-  profilePage: "genadrop.near/widget/GenaDrop.Profile.Main",
+  profilePage: "bos.genadrop.near/widget/GenaDrop.Profile.Main",
   profileName: "patrick.near/widget/ProfileName",
   editorComponentSearch: "mob.near/widget/Editor.ComponentSearch",
   profileInlineBlock: "mob.near/widget/Profile.InlineBlock",
