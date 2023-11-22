@@ -224,39 +224,37 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         {Object.values(chains).map((child, index) => (
           <>
             <div className="blockchains-conetent-item" key={index}>
-              <Link href="/chains-details">
-                <div className="content-item-title">
-                  <div className="item-title-img">
-                    <img src={child.icon} alt="" />
-                  </div>
-                  <div className="item-title-right">
-                    <h1>{child.chainName}</h1>
-                    <p>
-                      Add to MetaMask <img src={diagonaltop} alt="" />
-                    </p>
-                  </div>
+              <div className="content-item-title">
+                <div className="item-title-img">
+                  <img src={child.icon} alt="" />
                 </div>
-                <p className="body-paragraph">
-                  Polygon zkEVM Beta is the leading ZK scaling solution that is equivalent to Ethereum Virtual Machine:
-                  The vast majority of existing smart contracts, developer tools and wallets work seamlessly.
-                </p>
-                <p className="minor-paragraph">Technology</p>
-                <h3>ZK Rollup</h3>
-                <p className="minor-paragraph">Native Token</p>
-                <h3>TBD🔥</h3>
-                <span>
-                  Learn more
-                  <img src={leftarrow} alt="" />
-                </span>
-                {child.chainName === 'Polygon zkEVM' && (
-                  <div className="list-item-bottom">
-                    <Link href="#">
-                      Deep Dive
-                      <img src={arrowBlock} alt="" />
-                    </Link>
-                  </div>
-                )}
-              </Link>
+                <div className="item-title-right">
+                  <h1>{child.chainName}</h1>
+                  <p>
+                    Add to MetaMask <img src={diagonaltop} alt="" />
+                  </p>
+                </div>
+              </div>
+              <p className="body-paragraph">
+                Polygon zkEVM Beta is the leading ZK scaling solution that is equivalent to Ethereum Virtual Machine:
+                The vast majority of existing smart contracts, developer tools and wallets work seamlessly.
+              </p>
+              <p className="minor-paragraph">Technology</p>
+              <h3>ZK Rollup</h3>
+              <p className="minor-paragraph">Native Token</p>
+              <h3>TBD🔥</h3>
+              <span>
+                Learn more
+                <img src={leftarrow} alt="" />
+              </span>
+              {child.chainName === 'Polygon zkEVM' && (
+                <div className="list-item-bottom">
+                  <Link href="/chains-details">
+                    Deep Dive
+                    <img src={arrowBlock} alt="" />
+                  </Link>
+                </div>
+              )}
             </div>
             {index === 4 && (
               <div className="blockchains-conetent-item conetent-item-img">
