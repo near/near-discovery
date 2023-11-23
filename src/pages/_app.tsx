@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
@@ -22,7 +22,7 @@ import useAccount from '@/hooks/useAccount';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import { deleteCookie } from 'cookies-next';
+import { deleteCookie, getCookie } from 'cookies-next';
 import { debounce } from 'lodash';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
@@ -44,13 +44,21 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const authStore = useAuthStore();
   const { account } = useAccount();
   const { login, logging } = useAuth();
+  const loginTimer = useRef<any>();
   const componentSrc = router.query;
 
   const accountInit = useCallback(() => {
     login();
+    clearTimeout(loginTimer.current);
+    if (!account && getCookie('LOGIN_ACCOUNT')) {
+      loginTimer.current = setTimeout(() => {
+        deleteCookie('LOGIN_ACCOUNT');
+        router.replace('/login');
+      }, 3000);
+    }
   }, [account]);
 
-  const _accountInit = debounce(accountInit, 100);
+  const _accountInit = debounce(accountInit, 500);
 
   useEffect(() => {
     _accountInit();

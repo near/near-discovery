@@ -22,10 +22,7 @@ const useAuth = () => {
   };
 
   const login = useCallback(async () => {
-    if (!account) {
-      deleteCookie('LOGIN_ACCOUNT');
-      return;
-    }
+    if (!account) return;
     const cachedAccount = getCookie('AUTHED_ACCOUNT');
     setCookie('LOGIN_ACCOUNT', account);
     if (cachedAccount !== account) {
