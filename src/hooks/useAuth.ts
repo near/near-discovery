@@ -24,12 +24,12 @@ const useAuth = () => {
   const login = useCallback(async () => {
     if (!account) {
       deleteCookie('LOGIN_ACCOUNT');
+      router.replace('/login');
       return;
     }
     const cachedAccount = getCookie('AUTHED_ACCOUNT');
-
+    setCookie('LOGIN_ACCOUNT', account);
     if (cachedAccount !== account) {
-      setCookie('LOGIN_ACCOUNT', account);
       setLogging(true);
       try {
         const checked = await checkAddressIsInvited(account);
