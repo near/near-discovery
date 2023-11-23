@@ -53,7 +53,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     if (!account && getCookie('LOGIN_ACCOUNT')) {
       loginTimer.current = setTimeout(() => {
         deleteCookie('LOGIN_ACCOUNT');
-        router.replace('/login');
       }, 3000);
     }
   }, [account]);
