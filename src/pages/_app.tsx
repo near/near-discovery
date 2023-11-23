@@ -43,7 +43,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const authStore = useAuthStore();
   const { account } = useAccount();
-  const { login } = useAuth();
+  const { login, logging } = useAuth();
   const componentSrc = router.query;
 
   const accountInit = useCallback(() => {
@@ -147,7 +147,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
-      {getLayout(<Component {...pageProps} />)}
+      {getLayout(<Component {...pageProps} logging={logging} />)}
       <Toaster />
     </>
   );

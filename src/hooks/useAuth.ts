@@ -43,6 +43,8 @@ const useAuth = () => {
       } catch (error) {
         setLogging(false);
       }
+    } else {
+      setLogging(false);
     }
     if (router.pathname === '/login' || router.pathname === '/invite-code') {
       router.replace((router.query?.source as string) || '/');

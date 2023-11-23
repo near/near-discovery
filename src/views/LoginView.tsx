@@ -3,7 +3,7 @@ import useAuth from '@/hooks/useAuth';
 import LoadingIcon from '@/components/Icons/Loading';
 import { StyledInviteCodePage, yellowbg, bluebg } from './InviteCodeView';
 
-export default function LoginView() {
+export default function LoginView({ logging }: { logging: boolean }) {
   const { connect, connecting } = useAuth();
   return (
     <StyledInviteCodePage logined={false} loading={false}>
@@ -28,7 +28,7 @@ export default function LoginView() {
             }}
             disabled={connecting}
           >
-            {connecting && <LoadingIcon />}
+            {(connecting || logging) && <LoadingIcon />}
             Connect Wallet
           </button>
           <p>💡 Invited users only</p>
