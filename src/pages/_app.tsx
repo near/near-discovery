@@ -47,11 +47,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
 
   const accountInit = useCallback(() => {
-    if (account) {
-      login();
-    } else {
-      deleteCookie('LOGIN_ACCOUNT');
-    }
+    login();
   }, [account]);
 
   const _accountInit = debounce(accountInit, 500);
