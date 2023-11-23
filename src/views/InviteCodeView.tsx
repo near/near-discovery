@@ -192,10 +192,10 @@ export default function InviteCodeView() {
           <img src={bluebg} alt="" />
         </div>
         <div className="content">
-          {!account && <img src={'/images/eureka-logo.svg'} />}
+          {!account && <img src='https://assets.dapdap.net/images/logo.png'/>}
           <div className="title">
             <p>
-              <img src="./images/subtract.svg" style={{ marginRight: '20px' }} />
+              <img src="https://assets.dapdap.net/images/logo.png" style={{ marginRight: '20px' }} />
               Got an invite code?
             </p>
           </div>
