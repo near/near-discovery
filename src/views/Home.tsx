@@ -10,30 +10,62 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 import React from 'react';
 
-const logoUrl = 'https://ipfs.near.social/ipfs/bafkreig5ka5mpgawcpswpfqinzpyuxl7wmfbs7xeln3l7udigzvbtotlle';
-const bannerBg = 'https://ipfs.near.social/ipfs/bafkreie44wbxt4lxvf3vfdq5nzah2m3jmkegfpkt7gopcnswmvjkzkxtbu';
-const blueBg = 'https://ipfs.near.social/ipfs/bafkreihu2rxecbig3cyici5sbvjus42fazzorn2lq22b32arr3slzbzdye';
-const yellowBg = 'https://ipfs.near.social/ipfs/bafkreiejilw7ah4y2nhn3ohhzl73u7flxafygpiwksc4iepq75s43f3gfa';
-const quick = 'https://ipfs.near.social/ipfs/bafkreic3hzaaz2iteac2oruyk62an47db2vo3z4furlk2rwhxyzks3m23i';
+const blueBg = (
+  <svg width="719" height="719" viewBox="0 0 719 719" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.6" filter="url(#filter0_f_513_4283)">
+      <circle cx="359.5" cy="359.5" r="159.5" fill="#1868B3" />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f_513_4283"
+        x="0"
+        y="0"
+        width="719"
+        height="719"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_513_4283" />
+      </filter>
+    </defs>
+  </svg>
+);
+const yellowBg = (
+  <svg width="628" height="570" viewBox="0 0 628 570" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.4" filter="url(#filter0_f_513_4284)">
+      <circle cx="314" cy="256" r="114" fill="#EBF479" />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f_513_4284"
+        x="0"
+        y="-58"
+        width="628"
+        height="628"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_513_4284" />
+      </filter>
+    </defs>
+  </svg>
+);
+
+//test
 const syncIcon = 'https://ipfs.near.social/ipfs/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y';
-const arrow = 'https://ipfs.near.social/ipfs/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi';
-const arrowBlock = 'https://ipfs.near.social/ipfs/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge';
-const discover = 'https://ipfs.near.social/ipfs/bafkreic5n7m4pvmtudbuhlgggfkkwv7ynqd66tml2ffh5rx4vvbowlf4qu';
-const earn = 'https://ipfs.near.social/ipfs/bafkreib54d2j2gfmn5nw45woc3wcntukrub4zcexaeksguj2fsbojesqoq';
 const carouselbg = 'https://ipfs.near.social/ipfs/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty';
-const carouseicon = 'https://ipfs.near.social/ipfs/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e';
-const gold = 'https://ipfs.near.social/ipfs/bafkreidegqrrzlwh4wlfrquhd6n3n7dczefy32hu5locsx5yj6hllqfkuq';
-const deppDiveIcon = 'https://ipfs.near.social/ipfs/bafkreiefxqwxsnq625upyk2j652nbljpkwkfrfdzvqdbjihpiug4qdbu7y';
-const deppDiveLeftIcon = 'https://ipfs.near.social/ipfs/bafkreic2z67ie73en2gtwwckbfcdinktlugbcuisouyidqjvkflnj5vl7i';
+
+
+//home-deepdive-scatter
 const deppDiveRightIcon = 'https://ipfs.near.social/ipfs/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya';
-const deppDivebgIcon = 'https://ipfs.near.social/ipfs/bafkreifbf26yanusxqoo5vailxujr3ocys6mg2ixw7uji4u26j2dt6rk4m';
-const deppDiveArrowIcon = 'https://ipfs.near.social/ipfs/bafkreigz2kmyjuaq4jihinperqe2jgiuwhsx6e36glet7i2juxcj7ouuca';
-const shortcutsIcon = 'https://ipfs.near.social/ipfs/bafkreidxtwffr6u2hd2lhvx64fmxgmci2lmrrc7xesm2522tupm7r26sku';
 const decentralizedIcon = 'https://ipfs.near.social/ipfs/bafkreibhxqbh3tlqm6cqwqmu7j6afzsc7qab743bvn43zg4klk54tvyceq';
 const learningOne = 'https://ipfs.near.social/ipfs/bafkreigsyle3grerozvpmp42vhv3d36ny4gdc4vkgthcwefjyinvoangwy';
 const learningTwo = 'https://ipfs.near.social/ipfs/bafybeibgwjzaepfwgtmej4dnjjvtlnbtqukkn3fkde4ufvejnc2hf4yofi';
 const learningThree = 'https://ipfs.near.social/ipfs/bafkreihnl55yd5ud2nchalsgeyzy2tjq7cqw2bvp25cikxkixj55h6zyte';
-const learningIcon = 'https://ipfs.near.social/ipfs/bafkreicgtx436rdzzaj4qgilgti63niv5ymeesxjzfwmtopsrlmoipehxi';
 
 const HomePage = styled.div`
   padding: 0 12% 80px 12%;
@@ -85,6 +117,9 @@ const Content = styled.div`
       }
       .works-list-arrow {
         padding: 40px 24px 0 24px;
+        img {
+          width: 20px;
+        }
       }
     }
   }
@@ -319,11 +354,17 @@ const Content = styled.div`
             position: absolute;
             left: 20px;
             top: 20px;
+            img{
+              width: 150px;
+            }
           }
           .item-arrow-icon {
             position: absolute;
             top: 60px;
             right: 30px;
+            img {
+              width: 26px;
+            }
           }
           p {
             font-size: 18px;
@@ -528,8 +569,8 @@ const Content = styled.div`
         margin-right: 14px;
         cursor: pointer;
         transition: all 0.3s ease-in-out;
-        &:hover{
-          background: #272A38;
+        &:hover {
+          background: #272a38;
         }
       }
       .learning-icon-right {
@@ -545,7 +586,7 @@ const Banner = styled.div`
   width: 100%;
   height: 448px;
   position: relative;
-  background-image: url(${bannerBg});
+  background-image: url(https://assets.dapdap.net/images/home-banner-bg.png);
   background-repeat: no-repeat;
   background-size: 94%;
   background-position-x: 18%;
@@ -614,6 +655,9 @@ const CarouselList = styled.div`
     top: 40%;
     z-index: 1;
     cursor: pointer;
+    img {
+      height: 36px;
+    }
   }
   .carousel {
     display: none;
@@ -744,6 +788,7 @@ const ViewAll = styled.div`
   img {
     width: 16px;
     margin-left: 8px;
+    margin-bottom: 4px;
   }
 `;
 
@@ -841,14 +886,10 @@ const HomeContent: NextPageWithLayout = () => {
   return (
     <HomePage>
       <Banner>
-        <div className="blue-bg">
-          <img src={blueBg} alt="" />
-        </div>
-        <div className="yellow-bg">
-          <img src={yellowBg} alt="" />
-        </div>
+        <div className="blue-bg">{blueBg}</div>
+        <div className="yellow-bg">{yellowBg}</div>
         <div className="banner-content">
-          <img src={logoUrl} alt="" />
+          <img src="https://assets.dapdap.net/images/logo.png" alt="" />
           <h1>
             Your Universal Entry Point Into <span>L2s</span>
           </h1>
@@ -866,22 +907,22 @@ const HomeContent: NextPageWithLayout = () => {
               {/* <a href="#">Sign in / View my profile</a> */}
               {/* <a href="#">View my profile</a> */}
               <div className="list-item-img">
-                <img src={quick} alt="" />
+                <img src='https://assets.dapdap.net/images/home-itworks-quick.png' alt="" />
               </div>
             </div>
             <div className="works-list-arrow">
-              <img src={arrow} alt="" />
+              <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
             </div>
             <div className="works-list-item">
               <h1>Discover DApps</h1>
               <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
               <Link href="/alldapps">Explore</Link>
               <div className="list-item-img">
-                <img src={discover} alt="" />
+                <img src='https://assets.dapdap.net/images/home-itworks-discover.png' alt="" />
               </div>
             </div>
             <div className="works-list-arrow">
-              <img src={arrow} alt="" />
+              <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
             </div>
             <div className="works-list-item">
               <h1>Earn Rewards</h1>
@@ -891,7 +932,7 @@ const HomeContent: NextPageWithLayout = () => {
               </p>
               <a href="#">View</a>
               <div className="list-item-img">
-                <img src={earn} alt="" />
+                <img src='https://assets.dapdap.net/images/home-itworks-earn.png' alt="" />
               </div>
             </div>
           </div>
@@ -902,7 +943,7 @@ const HomeContent: NextPageWithLayout = () => {
 
           <CarouselList>
             <div className="carousel-right-icon" onClick={handleCarouselClick}>
-              <img src={carouseicon} alt="" />
+              <img src="https://assets.dapdap.net/images/arrows-carousel.png" alt="" />
             </div>
             {carouselData.map((child, index) => (
               <Carousel key={index} active={index === activeIndex}>
@@ -942,7 +983,7 @@ const HomeContent: NextPageWithLayout = () => {
             <ViewAll>
               <Link href="/alldapps">
                 <span>View all</span>
-                <img src={arrow} alt="" />
+                <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
               </Link>
             </ViewAll>
           </div>
@@ -1018,7 +1059,7 @@ const HomeContent: NextPageWithLayout = () => {
             <ViewAll>
               <Link href="/blockchains">
                 <span>View all</span>
-                <img src={arrow} alt="" />
+                <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
               </Link>
             </ViewAll>
           </div>
@@ -1030,7 +1071,7 @@ const HomeContent: NextPageWithLayout = () => {
                   <img src={child.icon} alt="" />
                   <h1>{child.chainName}</h1>
                   <Gold>
-                    <img src={gold} alt="" className="gold-icon" />
+                    <img src="https://assets.dapdap.net/images/gold.png" alt="" className="gold-icon" />
                     <p>10</p>
                   </Gold>
                   <p>Ethereum scalability with zkEVM performance and security</p>
@@ -1038,7 +1079,7 @@ const HomeContent: NextPageWithLayout = () => {
                     <div className="list-item-bottom">
                       <Link href="/warmup">
                         Deep Dive
-                        <img src={arrowBlock} alt="" />
+                        <img src="https://assets.dapdap.net/images/arrow-black.png" alt="" />
                       </Link>
                     </div>
                   )}
@@ -1049,7 +1090,7 @@ const HomeContent: NextPageWithLayout = () => {
 
         <div className="deep-dive">
           <div className="deepDive-title">
-            <img src={deppDiveIcon} alt="" />
+            <img src='https://assets.dapdap.net/images/home-deepdive.png' alt="" />
             <Title>Deep Dive</Title>
             <Paragraph>
               Real-time DApp trend data, simple and economical one-click interaction, and easily accessible historical
@@ -1058,7 +1099,7 @@ const HomeContent: NextPageWithLayout = () => {
           </div>
           <div className="deepDive-content">
             <div className="deepDive-content-img">
-              <img src={deppDiveLeftIcon} alt="" />
+              <img src='https://assets.dapdap.net/images/home-deepdive-example.png' alt="" />
             </div>
             <div className="deepDive-content-list">
               <Link href="/warmup">
@@ -1067,10 +1108,10 @@ const HomeContent: NextPageWithLayout = () => {
                     <img src={deppDiveRightIcon} alt="" />
                   </div>
                   <div className="item-bg-icon">
-                    <img src={deppDivebgIcon} alt="" />
+                    <img src='https://assets.dapdap.net/images/polygon-zkEVM-bg.png' alt="" />
                   </div>
                   <div className="item-arrow-icon">
-                    <img src={deppDiveArrowIcon} alt="" />
+                    <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                   </div>
                   <p>Deep Dive into</p>
                   <h1>Polygon zkEVM</h1>
@@ -1087,7 +1128,7 @@ const HomeContent: NextPageWithLayout = () => {
                   />
                 </div>
                 <div className="item-arrow-icon">
-                  <img src={deppDiveArrowIcon} alt="" />
+                  <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                 </div>
                 <p>Deep Dive into</p>
                 <h1>Linea</h1>
@@ -1098,7 +1139,7 @@ const HomeContent: NextPageWithLayout = () => {
 
         <div className="shortcuts">
           <div className="shortcuts-title">
-            <img src={shortcutsIcon} alt="" />
+            <img src='https://assets.dapdap.net/images/home-shortcuts.png' alt="" />
             <Title>Shortcuts</Title>
             <Paragraph>
               Shortcuts integrate common functions and the most popular dapps, makes your Defi journey much easier and
