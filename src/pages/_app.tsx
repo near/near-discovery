@@ -50,7 +50,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     login();
   }, [account]);
 
-  const _accountInit = debounce(accountInit, 500);
+  const _accountInit = debounce(accountInit, 100);
 
   useEffect(() => {
     _accountInit();

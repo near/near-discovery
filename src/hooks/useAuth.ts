@@ -24,7 +24,6 @@ const useAuth = () => {
   const login = useCallback(async () => {
     if (!account) {
       deleteCookie('LOGIN_ACCOUNT');
-      router.replace('/login');
       return;
     }
     const cachedAccount = getCookie('AUTHED_ACCOUNT');
