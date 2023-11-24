@@ -110,8 +110,8 @@ dependencies:
     specifier: ^0.0.10
     version: 0.0.10
   near-social-vm:
-    specifier: github:NearSocial/VM#2.5.2
-    version: github.com/NearSocial/VM/9fe2d4ec05727ee2e2db8ddf198556220a169a4f(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    specifier: github:NearSocial/VM#replace-in-with-hasownproperty
+    version: github.com/NearSocial/VM/f3b74c72d8af79d39b36bb13869a940f2b195844(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
   next:
     specifier: ^13.5.6
     version: 13.5.6(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)
@@ -12837,9 +12837,9 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/NearSocial/VM/9fe2d4ec05727ee2e2db8ddf198556220a169a4f(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/9fe2d4ec05727ee2e2db8ddf198556220a169a4f}
-    id: github.com/NearSocial/VM/9fe2d4ec05727ee2e2db8ddf198556220a169a4f
+  github.com/NearSocial/VM/f3b74c72d8af79d39b36bb13869a940f2b195844(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/f3b74c72d8af79d39b36bb13869a940f2b195844}
+    id: github.com/NearSocial/VM/f3b74c72d8af79d39b36bb13869a940f2b195844
     name: near-social-vm
     version: 2.5.2
     peerDependencies:
