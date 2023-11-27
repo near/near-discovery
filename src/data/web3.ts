@@ -15,7 +15,7 @@ const web3onboardKey = 'web3-onboard:connectedWallets';
 const wcV2InitOptions: any = {
   version: 2,
   projectId: '72b7b3359ab477e339a070f615806aa6',
-  requiredChains: Object.keys(chains),
+  requiredChains: Object.keys(chains).map((chain) => Number(chain)),
 };
 
 const walletConnect = walletConnectModule(wcV2InitOptions);
@@ -292,7 +292,7 @@ export const onboard = init({
 
 type EthersProviderContext = {
   provider?: EIP1193Provider;
-  useConnectWallet: typeof useConnectWallet;
+  useConnectWallet: any;
 };
 
 const defaultEthersProviderContext: EthersProviderContext = { useConnectWallet };
