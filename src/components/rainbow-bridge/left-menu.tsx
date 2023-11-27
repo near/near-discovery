@@ -123,8 +123,8 @@ const swapIcon = (
 const bridgeIcon = (
   <svg width="21" height="12" viewBox="0 0 21 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M19 4.50013C18.1667 3.16679 15 3.31402e-05 8.5 1.00014C2.12521 1.98099 0.5 7.5 0.5 12.0002H7C7 12.0002 6.86536 7.63464 9.5 5.00016C12.0496 2.45072 16.5 2.50003 19 4.50013ZM11 6.49995C11 6.49995 12.8865 4.22155 16 4.99996C20 6 21 9.18538 21 12H16.7838C16.7838 12 17 9.49993 15.8108 7.99993C14.6908 6.58724 12.5 5.99993 11 6.49995Z"
       fill="currentColor"
     />
@@ -136,11 +136,11 @@ const stakingIcon = (
     <path
       d="M5.293 11C3.90435 9.99854 3 8.36383 3 6.51724C3 3.47015 5.46243 1 8.5 1C11.5376 1 14 3.47015 14 6.51724C14 8.36383 13.0957 9.99854 11.707 11"
       stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
+      strokeWidth="2"
+      strokeLinecap="round"
     />
-    <path d="M1 11H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-    <path d="M4 15H13" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    <path d="M1 11H16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M4 15H13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 

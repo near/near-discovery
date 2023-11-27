@@ -6,7 +6,7 @@ import BridgeWrapper from './components/BridgeWrapper';
 import Header from './components/Header';
 import AccountWrapper from './components/AccountWrapper';
 
-const StyledPanel = styled.div<{ display: boolean }>`
+const StyledPanel = styled.div<{ display: number }>`
   width: 352px;
   height: calc(100vh - 40px);
   border-radius: 32px;
@@ -70,7 +70,7 @@ const AccountSider = () => {
   }, [showCodes]);
 
   return (
-    <StyledPanel display={layoutStore.showAccountSider}>
+    <StyledPanel display={layoutStore.showAccountSider ? 1:0}>
       <Content>
         <Header showCodes={showCodes} setShowCodes={setShowCodes} />
         {tab === 'account' && (
@@ -100,8 +100,8 @@ const AccountSider = () => {
           }}
         >
           <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 12L6 6.5L1 1" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
-            <path d="M9 12L14 6.5L9 1" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+            <path d="M1 12L6 6.5L1 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
+            <path d="M9 12L14 6.5L9 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </CloseIcon>
       )}

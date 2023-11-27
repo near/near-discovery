@@ -120,8 +120,8 @@ const GoBackIconMobile = (
       <rect width="32" height="26" rx="8" fill="#373A53" fill-opacity="0.5" />
     </g>
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M13.4926 17.7803L8.71967 13.0074C8.42678 12.7145 8.42678 12.2396 8.71967 11.9467L13.4926 7.17373C13.7855 6.88083 14.2604 6.88083 14.5533 7.17373C14.8462 7.46662 14.8462 7.94149 14.5533 8.23439L11.0607 11.727L21.25 11.727C21.6642 11.727 22 12.0628 22 12.477C22 12.8912 21.6642 13.227 21.25 13.227L11.0607 13.227L14.5533 16.7197C14.8462 17.0126 14.8462 17.4874 14.5533 17.7803C14.2604 18.0732 13.7855 18.0732 13.4926 17.7803Z"
       fill="#979ABE"
     />
@@ -133,9 +133,9 @@ const GoBackIconMobile = (
         width="52"
         height="46"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feGaussianBlur in="BackgroundImageFix" stdDeviation="5" />
         <feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_2997_1980" />
         <feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_2997_1980" result="shape" />

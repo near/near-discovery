@@ -7,8 +7,8 @@ import chains from '@/config/chains';
 import useAccount from '@/hooks/useAccount';
 import useSwitchChain from '@/hooks/useSwitchChain';
 
-const StyledContainer = styled.div<{ mt?: number; showName?: boolean }>`
-  width: ${({ showName }) => (showName ? '204px' : '70px')};
+const StyledContainer = styled.div<{ $mt?: number; $showName?: number }>`
+  width: ${({ $showName }) => ($showName ? '204px' : '70px')};
   height: 38px;
   margin: 0 auto;
   border: 1px solid #373a53;
@@ -20,7 +20,7 @@ const StyledContainer = styled.div<{ mt?: number; showName?: boolean }>`
   position: relative;
   box-sizing: border-box;
   padding: 0px 10px 0px 4px;
-  margin-top: ${({ mt }) => mt + 'px'};
+  margin-top: ${({ $mt }) => $mt + 'px'};
 `;
 const StyledChain = styled.div`
   display: flex;
@@ -42,7 +42,7 @@ const ChainName = styled.div`
 const ArrowIconWrapper = styled.div`
   color: #979abe;
 `;
-const ChainList = styled.div<{ display?: boolean }>`
+const ChainList = styled.div<{ display?: number }>`
   width: 204px;
   border: 1px solid #373a53;
   border-radius: 8px;
@@ -54,7 +54,7 @@ const ChainList = styled.div<{ display?: boolean }>`
   display: ${({ display }) => (display ? 'block' : 'none')};
   z-index: 200;
 `;
-const ChainItem = styled(StyledChain)<{ active?: boolean }>`
+const ChainItem = styled(StyledChain)<{ active?: number }>`
   padding: 0px 10px;
   &:hover {
     background-color: rgba(255, 255, 255, 0.1);
@@ -89,8 +89,8 @@ const Chain = ({
 
   return (
     <StyledContainer
-      mt={mt}
-      showName={showName}
+      $mt={mt}
+      $showName={showName ? 1: 0}
       onClick={(ev) => {
         ev.stopPropagation();
         showName ? setShowChains?.(!showChains) : setShowList(!showList);
@@ -106,14 +106,14 @@ const Chain = ({
       <ArrowIconWrapper>
         <ArrowIcon size={12} />
       </ArrowIconWrapper>
-      <ChainList display={showName ? showChains : showList}>
+      <ChainList display={showName ? Number(showChains || 0) : Number(showList || 0)}>
         {Object.values(chains).map((chain) => (
           <ChainItem
             key={chain.chainId}
             onClick={() => {
               switchNetwork(chain);
             }}
-            active={chain.chainId === currentChain?.chainId}
+            active={chain.chainId === currentChain?.chainId ? 1: 0}
           >
             <ChainLogo src={chain.icon} />
             <ChainName>{chain.chainName}</ChainName>

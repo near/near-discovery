@@ -11,8 +11,8 @@ export const MetaMaskIcon = (
 export const ArrowDone = (
   <svg width="11" height="5" viewBox="0 0 11 5" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0.182131 0.246408C0.45993 -0.0441239 0.955372 -0.0833777 1.28873 0.158732L5.5 3.21726L9.71127 0.158732C10.0446 -0.0833777 10.5401 -0.0441239 10.8179 0.246408C11.0957 0.536939 11.0506 0.968731 10.7173 1.21084L5.5 5L0.282731 1.21084C-0.0506283 0.968731 -0.0956685 0.536939 0.182131 0.246408Z"
       fill="#C7CDFF"
     />
@@ -40,8 +40,8 @@ export const sortArrowDown = (
 export const ProtocolArrowDown = (
   <svg width="14" height="8" viewBox="0 0 14 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M0.231804 0.359841C0.585368 -0.0644363 1.21593 -0.12176 1.64021 0.231804L7.00003 4.69832L12.3598 0.231804C12.7841 -0.12176 13.4147 -0.0644363 13.7682 0.359841C14.1218 0.784118 14.0645 1.41468 13.6402 1.76825L7.00003 7.30173L0.359841 1.76825C-0.0644363 1.41468 -0.12176 0.784118 0.231804 0.359841Z"
       fill="#C7CDFF"
     />

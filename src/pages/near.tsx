@@ -89,9 +89,9 @@ const NearColumn: NextPageWithLayout = () => {
           width="483"
           height="245"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_2081_3803" />
         </filter>
@@ -103,8 +103,8 @@ const NearColumn: NextPageWithLayout = () => {
     <svg width="134" height="113" viewBox="0 0 134 113" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         opacity="0.05"
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M21.1579 23.32V90.422L56.4211 64.7848L59.9474 67.7939L30.3768 108.321C19.3898 118.128 0 111.493 0 97.9245V15.0753C0 1.04203 20.525 -5.35005 31.1182 5.3841L112.842 88.1955V23.8468L81.1053 46.7306L77.5789 43.7215L102.73 5.89117C113.228 -5.04173 134 1.29245 134 15.4265V96.4402C134 110.473 113.475 116.866 102.882 106.131L21.1579 23.32Z"
         fill="white"
       />

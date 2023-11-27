@@ -10,7 +10,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1 1L4 4L1 7" stroke="#979ABE" stroke-linecap="round" />
+    <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
 
@@ -34,9 +34,9 @@ const SelectBg: React.FC<SelectBgProps> = ({ bgColor }) => (
         width="720"
         height="241"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="sRGB"
+        colorInterpolationFilters="sRGB"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
         <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
         <feGaussianBlur stdDeviation="40" result="effect1_foregroundBlur_510_1870" />
       </filter>

@@ -6,7 +6,7 @@ import Loading from '@/components/Icons/Loading';
 
 import useInviteCode from '../hooks/useInviteCode';
 
-const StyledInviteCode = styled.div<{ display?: boolean }>`
+const StyledInviteCode = styled.div<{ display?: number }>`
   width: 145px;
   background: linear-gradient(
     98.9deg,
@@ -55,7 +55,7 @@ const InviteCode = ({ show, onClose }: { show: boolean; onClose: () => void }) =
   const { list, loading } = useInviteCode(show);
   return (
     <StyledInviteCode
-      display={show}
+      display={show ? 1: 0}
       onClick={(ev) => {
         ev.stopPropagation();
       }}

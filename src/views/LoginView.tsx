@@ -6,7 +6,7 @@ import { StyledInviteCodePage, yellowbg, bluebg } from './InviteCodeView';
 export default function LoginView({ logging }: { logging: boolean }) {
   const { connect, connecting } = useAuth();
   return (
-    <StyledInviteCodePage logined={false} loading={false}>
+    <StyledInviteCodePage $logined={false} $loading={false}>
       <main>
         <div className="yellow">
           <img src={yellowbg} alt="" />

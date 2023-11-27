@@ -43,7 +43,7 @@ const BackRoute = styled.div`
 
 const backIcon = (
   <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 12L2 6.5L7 1" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+    <path d="M7 12L2 6.5L7 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 

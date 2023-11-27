@@ -11,7 +11,7 @@ import { setCookie } from 'cookies-next';
 export const yellowbg = 'https://ipfs.near.social/ipfs/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje';
 export const bluebg = 'https://ipfs.near.social/ipfs/bafkreicqa3b3urjhrrc2xt3kgnyhfuntagepjj7zfnley74u6gjqfmjm44';
 
-export const StyledInviteCodePage = styled.div<{ logined: boolean; loading: boolean }>`
+export const StyledInviteCodePage = styled.div<{ $logined: boolean; $loading: boolean }>`
   font-family: Gantari;
   background-color: #000;
   height: 100vh;
@@ -25,7 +25,7 @@ export const StyledInviteCodePage = styled.div<{ logined: boolean; loading: bool
     font-size: 16px;
     text-align: center;
     ${(props) =>
-      props.logined
+      props.$logined
         ? ''
         : `
     background: url('/images/bg-invite-code.svg') no-repeat;
@@ -92,7 +92,7 @@ export const StyledInviteCodePage = styled.div<{ logined: boolean; loading: bool
     font-size: 42px;
     font-weight: 700;
     margin-top: 75px;
-    margin-bottom: ${(props) => (props.logined ? '16px' : '180px')};
+    margin-bottom: ${(props) => (props.$logined ? '16px' : '180px')};
     span {
       color: #ebf479;
     }
@@ -121,7 +121,7 @@ export const StyledInviteCodePage = styled.div<{ logined: boolean; loading: bool
     outline: none;
     border-radius: 10px;
     font-weight: 500;
-    cursor: ${(props) => (props.loading ? 'not-allowed' : 'pointer')};
+    cursor: ${(props) => (props.$loading ? 'not-allowed' : 'pointer')};
     z-index: 5;
     display: flex;
     justify-content: center;
@@ -135,7 +135,7 @@ export const StyledInviteCodePage = styled.div<{ logined: boolean; loading: bool
     font-size: 16px;
     margin-top: 20px;
     font-weight: 500;
-    cursor: ${(props) => (props.logined ? 'pointer' : 'default')};
+    cursor: ${(props) => (props.$logined ? 'pointer' : 'default')};
   }
   .logout {
     display: flex;
@@ -183,7 +183,7 @@ export default function InviteCodeView() {
   };
 
   return (
-    <StyledInviteCodePage logined={!!account} loading={loading || logging}>
+    <StyledInviteCodePage $logined={!!account} $loading={loading || logging}>
       <main>
         <div className="yellow">
           <img src={yellowbg} alt="" />

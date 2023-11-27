@@ -366,8 +366,8 @@ export const DesktopNavigationLeft = () => {
           y2="12.5624"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#EEF3BF" />
-          <stop offset="1" stop-color="#E9F456" />
+          <stop stopColor="#EEF3BF" />
+          <stop offset="1" stopColor="#E9F456" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_1_257"
@@ -377,12 +377,12 @@ export const DesktopNavigationLeft = () => {
           y2="9.06897"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#EEF3BF" />
-          <stop offset="1" stop-color="#E9F456" />
+          <stop stopColor="#EEF3BF" />
+          <stop offset="1" stopColor="#E9F456" />
         </linearGradient>
         <linearGradient id="paint2_linear_1_257" x1="3.5" y1="0" x2="3.5" y2="3" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#EEF3BF" />
-          <stop offset="1" stop-color="#E9F456" />
+          <stop stopColor="#EEF3BF" />
+          <stop offset="1" stopColor="#E9F456" />
         </linearGradient>
       </defs>
     </svg>
@@ -990,14 +990,14 @@ const shanshanLogoSvg = (
       fill="black"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M19.625 2.48514L7.42193 5.75495C5.43462 6.28745 4.25525 8.33016 4.78775 10.3175L8.05756 22.5206C8.59006 24.5079 10.6328 25.6872 12.6201 25.1547L24.8232 21.8849C26.8105 21.3524 27.9899 19.3097 27.4574 17.3224L24.1875 5.11932C23.655 3.132 21.6123 1.95264 19.625 2.48514ZM7.10054 4.5555C4.45079 5.2655 2.8783 7.98911 3.5883 10.6389L6.85811 22.842C7.56811 25.4917 10.2917 27.0642 12.9415 26.3542L25.1446 23.0844C27.7943 22.3744 29.3668 19.6508 28.6568 17.001L25.387 4.79793C24.677 2.14817 21.9534 0.57569 19.3036 1.28569L7.10054 4.5555Z"
       fill="#EBF479"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M15.0454 7.9507L11.7892 8.82321C11.2557 8.96615 10.9391 9.51449 11.0821 10.048L11.4412 11.3883C11.5841 11.9217 12.1325 12.2383 12.6659 12.0954L15.6242 11.3027C16.7112 11.0114 17.8286 11.6565 18.1199 12.7436C18.4112 13.8307 17.7661 14.948 16.679 15.2393L13.7208 16.032C13.1873 16.1749 12.8707 16.7233 13.0136 17.2567L13.3879 18.6533C13.5308 19.1868 14.0791 19.5034 14.6126 19.3604L17.8689 18.4879C20.7786 17.7083 22.5054 14.7174 21.7258 11.8076C20.9461 8.89782 17.9552 7.17103 15.0454 7.9507Z"
       fill="#EBF479"
     />
@@ -1058,14 +1058,14 @@ const shanshanPutLogo = (
       fill="black"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M19.625 2.48502L7.42193 5.75483C5.43462 6.28733 4.25525 8.33004 4.78775 10.3174L8.05756 22.5204C8.59006 24.5078 10.6328 25.6871 12.6201 25.1546L24.8232 21.8848C26.8105 21.3523 27.9899 19.3096 27.4574 17.3223L24.1875 5.1192C23.655 3.13188 21.6123 1.95252 19.625 2.48502ZM7.10054 4.55537C4.45079 5.26537 2.8783 7.98899 3.5883 10.6387L6.85811 22.8418C7.56811 25.4916 10.2917 27.0641 12.9415 26.3541L25.1446 23.0843C27.7943 22.3743 29.3668 19.6506 28.6568 17.0009L25.387 4.79781C24.677 2.14805 21.9534 0.575568 19.3036 1.28557L7.10054 4.55537Z"
       fill="#EBF479"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M15.0454 7.9507L11.7892 8.82321C11.2557 8.96615 10.9391 9.51449 11.0821 10.048L11.4412 11.3883C11.5841 11.9217 12.1325 12.2383 12.6659 12.0954L15.6242 11.3027C16.7112 11.0114 17.8286 11.6565 18.1199 12.7436C18.4112 13.8307 17.7661 14.948 16.679 15.2393L13.7208 16.032C13.1873 16.1749 12.8707 16.7233 13.0136 17.2567L13.3879 18.6533C13.5308 19.1868 14.0791 19.5034 14.6126 19.3604L17.8689 18.4879C20.7786 17.7083 22.5054 14.7174 21.7258 11.8076C20.9461 8.89782 17.9552 7.17103 15.0454 7.9507Z"
       fill="#EBF479"
     />
@@ -1075,29 +1075,29 @@ const shanshanPutLogo = (
 const putIcon = (
   <svg width="21" height="26" viewBox="0 0 21 26" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21 0H8C3.58172 0 0 3.58172 0 8V18C0 22.4183 3.58172 26 8 26H21V0Z" fill="#373A53" />
-    <path d="M12 8L8 13L12 18" stroke="#E9F456" stroke-width="2" stroke-linecap="round" />
+    <path d="M12 8L8 13L12 18" stroke="#E9F456" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const m_menuIcon = (
   <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 2H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
-    <path d="M2 9H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
-    <path d="M2 16H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
+    <path d="M2 2H20" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
+    <path d="M2 9H20" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
+    <path d="M2 16H20" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
   </svg>
 );
 
 const m_closeIcon = (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1.63599 14.3638L14.3639 1.63585" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
-    <path d="M14.3643 14.3638L1.63634 1.63585" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
+    <path d="M1.63599 14.3638L14.3639 1.63585" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
+    <path d="M14.3643 14.3638L1.63634 1.63585" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
   </svg>
 );
 
 function ArrowIcon(props: any) {
   return (
     <svg {...props} width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 1L8.5 7L1 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M16 1L8.5 7L1 0.999999" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -1105,7 +1105,7 @@ function ArrowIcon(props: any) {
 function ArrowPcIcon(props: any) {
   return (
     <svg {...props} width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11 6L6 2L1 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M11 6L6 2L1 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

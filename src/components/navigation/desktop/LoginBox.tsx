@@ -15,8 +15,8 @@ import { UserDropdownMenu } from './UserDropdownMenu';
 const nearIcon = (
   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M2.21053 2.47646V9.60233L5.89474 6.8798L6.26316 7.19935L3.1737 11.5031C2.0258 12.5446 0 11.8399 0 10.3991V1.60091C0 0.110658 2.1444 -0.568147 3.25115 0.571763L11.7895 9.3659V2.5324L8.47368 4.96254L8.10526 4.64299L10.733 0.625611C11.8298 -0.535405 14 0.137252 14 1.63821V10.2414C14 11.7317 11.8556 12.4105 10.7488 11.2706L2.21053 2.47646Z"
       fill="#332C4B"
     />
@@ -104,8 +104,8 @@ const lineaIcon = (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="32" y="32" width="32" height="32" rx="8" transform="rotate(180 32 32)" fill="#131313" />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M21.2625 13.6465C22.8218 13.6465 24.0858 12.3825 24.0858 10.8232C24.0858 9.26401 22.8218 8 21.2625 8C19.7033 8 18.4393 9.26401 18.4393 10.8232C18.4393 12.3825 19.7033 13.6465 21.2625 13.6465ZM8 10.4949H11.2172V21.8535H21.2627V24.8081H8V10.4949Z"
       fill="#56DAFF"
     />
@@ -128,9 +128,9 @@ const polygonIcon = (
         y2="9.96749"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#A726C1" />
-        <stop offset="0.88" stop-color="#803BDF" />
-        <stop offset="1" stop-color="#7B3FE4" />
+        <stop stopColor="#A726C1" />
+        <stop offset="0.88" stopColor="#803BDF" />
+        <stop offset="1" stopColor="#7B3FE4" />
       </linearGradient>
     </defs>
   </svg>
