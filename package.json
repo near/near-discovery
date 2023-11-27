@@ -15,7 +15,6 @@
     "prettier:write": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json}'"
   },
   "dependencies": {
-    "@braintree/sanitize-url": "^6.0.4",
     "@idos-network/idos-sdk": "^0.0.27",
     "@keypom/selector": "1.2.3",
     "@monaco-editor/react": "^4.4.6",
@@ -46,12 +45,13 @@
     "bootstrap": "^5.2.1",
     "bootstrap-icons": "^1.9.0",
     "classnames": "^2.3.2",
+    "dompurify": "^3.0.6",
     "firebase": "^9.19.1",
     "iframe-resizer-react": "^1.1.0",
     "local-storage": "^2.0.0",
     "lodash": "^4.17.21",
     "near-fastauth-wallet": "^0.0.10",
-    "near-social-vm": "github:NearSocial/VM#replace-in-with-hasownproperty",
+    "near-social-vm": "github:NearSocial/VM#improve-sanitize",
     "next": "^13.5.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
@@ -68,6 +68,7 @@
   },
   "devDependencies": {
     "@types/big.js": "^6.1.6",
+    "@types/dompurify": "^3.0.5",
     "@types/lodash": "^4.14.194",
     "@types/node": "^18.18.1",
     "@types/react": "^18.2.25",
