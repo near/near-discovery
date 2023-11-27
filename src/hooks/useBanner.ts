@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
  * Show or hide the banner
  */
 export function useBanner() {
-  const [isBannerVisible, setBanner] = useState<boolean>(true);
+  const [isBannerVisible, setBanner] = useState<boolean>(false);
 
   useEffect(() => {
     const bannerState = localStorage.getItem('hintVisible');
