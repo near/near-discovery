@@ -1,5 +1,6 @@
-import { sanitizeUrl } from '@braintree/sanitize-url';
+import { sanitize } from 'dompurify';
 import { setupKeypom } from '@keypom/selector';
+import type { WalletSelector } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
@@ -32,6 +33,7 @@ import { useEthersProviderContext } from '@/data/web3';
 import { useIdOS } from '@/hooks/useIdOS';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
+import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
 import { networkId, signInContractId } from '@/utils/config';
@@ -100,7 +102,7 @@ export default function VmInitializer() {
           ],
         }),
         customElements: {
-          Link: ({ href, to, ...rest }: any) => <Link href={sanitizeUrl(href ?? to)} {...rest} />,
+          Link: ({ href, to, ...rest }: any) => <Link href={sanitize(href ?? to)} {...rest} />,
         },
         features: { enableComponentSrcDataKey: true },
       });
@@ -110,7 +112,7 @@ export default function VmInitializer() {
     if (!near || !idOS) {
       return;
     }
-    near.selector.then((selector: any) => {
+    near.selector.then((selector: WalletSelector) => {
       const selectorModal = setupModal(selector, {
         contractId: near.config.contractName,
         methodNames: idOS.near.contractMethods,
@@ -164,6 +166,7 @@ export default function VmInitializer() {
     if (!near) {
       return;
     }
+    useIdosStore.persist.clearStorage();
     const wallet = await (await near.selector).wallet();
     wallet.signOut();
     near.accountId = null;
