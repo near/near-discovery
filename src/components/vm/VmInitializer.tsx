@@ -1,4 +1,4 @@
-import { sanitizeUrl } from '@braintree/sanitize-url';
+import { sanitize } from 'dompurify';
 import { setupKeypom } from '@keypom/selector';
 import type { WalletSelector } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
@@ -102,7 +102,7 @@ export default function VmInitializer() {
           ],
         }),
         customElements: {
-          Link: ({ href, to, ...rest }: any) => <Link href={sanitizeUrl(href ?? to)} {...rest} />,
+          Link: ({ href, to, ...rest }: any) => <Link href={sanitize(href ?? to)} {...rest} />,
         },
         features: { enableComponentSrcDataKey: true },
       });

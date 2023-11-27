@@ -5,9 +5,6 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
-  '@braintree/sanitize-url':
-    specifier: ^6.0.4
-    version: 6.0.4
   '@idos-network/idos-sdk':
     specifier: ^0.0.27
     version: 0.0.27
@@ -98,6 +95,9 @@ dependencies:
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
+  dompurify:
+    specifier: ^3.0.6
+    version: 3.0.6
   firebase:
     specifier: ^9.19.1
     version: 9.23.0
@@ -114,8 +114,8 @@ dependencies:
     specifier: ^0.0.10
     version: 0.0.10
   near-social-vm:
-    specifier: github:NearSocial/VM#replace-in-with-hasownproperty
-    version: github.com/NearSocial/VM/f3b74c72d8af79d39b36bb13869a940f2b195844(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    specifier: github:NearSocial/VM#improve-sanitize
+    version: github.com/NearSocial/VM/8fc244fdf9ae10d8a48fdea5595c0c26a9d90bdf(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
   next:
     specifier: ^13.5.6
     version: 13.5.6(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)
@@ -160,6 +160,9 @@ devDependencies:
   '@types/big.js':
     specifier: ^6.1.6
     version: 6.2.0
+  '@types/dompurify':
+    specifier: ^3.0.5
+    version: 3.0.5
   '@types/lodash':
     specifier: ^4.14.194
     version: 4.14.199
@@ -534,14 +537,6 @@ packages:
       '@babel/helper-string-parser': 7.23.4
       '@babel/helper-validator-identifier': 7.22.20
       to-fast-properties: 2.0.0
-    dev: false
-
-  /@braintree/sanitize-url@6.0.0:
-    resolution: {integrity: sha512-mgmE7XBYY/21erpzhexk4Cj1cyTQ9LzvnTxtzM17BJ7ERMNE6W72mQRo0I1Ud8eFJ+RVVIcBNhLFZ3GX4XFz5w==}
-    dev: false
-
-  /@braintree/sanitize-url@6.0.4:
-    resolution: {integrity: sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==}
     dev: false
 
   /@cbor-extract/cbor-extract-darwin-arm64@2.1.1:
@@ -4213,7 +4208,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.25)(react@18.2.0)
       '@radix-ui/react-context': 1.0.1(@types/react@18.2.25)(react@18.2.0)
@@ -5900,6 +5895,12 @@ packages:
       '@types/ms': 0.7.32
     dev: false
 
+  /@types/dompurify@3.0.5:
+    resolution: {integrity: sha512-1Wg0g3BtQF7sSb27fJQAKck1HECM6zV1EB66j8JH9i3LCjYabJa0FSdiSgsD5K/RbrsR0SiraKacLB+T8ZVYAg==}
+    dependencies:
+      '@types/trusted-types': 2.0.4
+    dev: true
+
   /@types/estree@1.0.2:
     resolution: {integrity: sha512-VeiPZ9MMwXjO32/Xu7+OwflfmeoRwkE/qzndw42gGtgJwZopBnzy2gD//NN1+go1mADzkDcqf/KnFRSjTJ8xJA==}
     dev: false
@@ -6001,7 +6002,6 @@ packages:
 
   /@types/trusted-types@2.0.4:
     resolution: {integrity: sha512-IDaobHimLQhjwsQ/NMwRVfa/yL7L/wriQPMhw1ZJall0KX6E1oxk29XMDeilW5qTIg5aoiqf5Udy8U/51aNoQQ==}
-    dev: false
 
   /@types/unist@2.0.10:
     resolution: {integrity: sha512-IfYcSBWE3hLpBg8+X2SEa8LVkJdJEkT2Ese2aaLs3ptGdVtABxndrMaxuFlQ1qdFf9Q5rDvDpxI3WwgvKFAsQA==}
@@ -7828,6 +7828,10 @@ packages:
     engines: {node: '>= 4'}
     dependencies:
       domelementtype: 2.3.0
+    dev: false
+
+  /dompurify@3.0.6:
+    resolution: {integrity: sha512-ilkD8YEnnGh1zJ240uJsW7AzE+2qpbOUYjacomn3AvJ6J4JhKGSZ2nh4wUIXPZrEPppaCLx5jFe8T89Rk8tQ7w==}
     dev: false
 
   /domutils@2.8.0:
@@ -12841,9 +12845,9 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/NearSocial/VM/f3b74c72d8af79d39b36bb13869a940f2b195844(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/f3b74c72d8af79d39b36bb13869a940f2b195844}
-    id: github.com/NearSocial/VM/f3b74c72d8af79d39b36bb13869a940f2b195844
+  github.com/NearSocial/VM/8fc244fdf9ae10d8a48fdea5595c0c26a9d90bdf(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/8fc244fdf9ae10d8a48fdea5595c0c26a9d90bdf}
+    id: github.com/NearSocial/VM/8fc244fdf9ae10d8a48fdea5595c0c26a9d90bdf
     name: near-social-vm
     version: 2.5.2
     peerDependencies:
@@ -12851,7 +12855,6 @@ packages:
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@braintree/sanitize-url': 6.0.0
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-alert-dialog': 1.0.5(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-aspect-ratio': 1.0.3(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
@@ -12887,6 +12890,7 @@ packages:
       bootstrap-icons: 1.11.1
       collections: 5.1.13
       deep-equal: 2.2.3
+      dompurify: 3.0.6
       elliptic: 6.5.4
       ethers: 5.7.2
       idb: 7.1.1
