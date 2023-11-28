@@ -18,8 +18,8 @@ const Layout = styled.div`
     padding: 54px 36px;
     flex-grow: 1;
     position: relative;
-    height: 100%;
     min-height: 100vh;
+    height: 100%;
   }
 `;
 
