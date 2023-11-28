@@ -22,6 +22,10 @@ export const StyledIconBox = styled.div`
   width: 100px;
   height: 100px;
   flex-shrink: 0;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 export const StyledIcon = styled.img`

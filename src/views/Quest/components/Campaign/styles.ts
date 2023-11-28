@@ -27,7 +27,7 @@ export const StyledHeader = styled.div`
   gap: 12px;
 `;
 
-export const StyledHeartBox = styled.div`
+export const StyledHeartBox = styled.div<{ $active?: boolean }>`
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.3);
@@ -36,6 +36,12 @@ export const StyledHeartBox = styled.div`
   text-align: center;
   padding-top: 2px;
   cursor: pointer;
+
+  ${({ $active }) =>
+    $active &&
+    `
+  border: 1px solid rgba(255, 107, 142, 0.30);
+  background: rgba(255, 107, 142, 0.15);`}
 `;
 
 export const StyledDesc = styled.div`
