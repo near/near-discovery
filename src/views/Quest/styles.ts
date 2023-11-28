@@ -21,7 +21,7 @@ export const StyledTitle = styled.div`
 
 export const StyledCoin = styled.div<{ $size: number }>`
   width: ${({ $size }) => $size}px;
-  height: ${({ $size }) => $size - 0.5}px;
+  height: ${({ $size }) => $size - 1}px;
   background-image: url(/images/quest/coin.png);
   background-size: 100%;
   background-repeat: no-repeat;

@@ -19,7 +19,8 @@ export const StyledContainer = styled.div`
   justify-content: center;
   position: fixed;
   right: 30px;
-  bottom: 76px;
+  bottom: 58px;
+  z-index: 100;
 `;
 
 export const StyledBox = styled.div`
