@@ -7,7 +7,7 @@ export default {
   8453: {
     chainId: 8453,
     chainName: 'Base',
-    icon: 'https://ipfs.near.social/ipfs/bafkreie5bhns75smpybjndl3utvzpaftrlrwqrblwg44ntzjsnit6lajzm',
+    icon: 'https://ipfs.near.social/ipfs/bafkreif24bmxzparik2t2nkog6km5diuwcysvxdv2j5ygzkzwm3pxs573a',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://developer-access-mainnet.base.org'],
     blockExplorers: 'https://basescan.org',
@@ -56,7 +56,7 @@ export default {
   59144: {
     chainId: 59144,
     chainName: 'Linea',
-    icon: 'https://ipfs.near.social/ipfs/bafkreidase4ydzf6b7cme2tx5r45vt6ua2mzdkoykwcrbydfudb4xvekvy',
+    icon: 'https://ipfs.near.social/ipfs/bafkreib5v3jonanuknj5db5ysuhb6ubowv2pqnopyg3yraknfr3jn7el4u',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://linea.blockpi.network/v1/rpc/public'],
     blockExplorers: 'https://lineascan.build',
@@ -64,7 +64,7 @@ export default {
   1088: {
     chainId: 1088,
     chainName: 'Metis',
-    icon: 'https://ipfs.near.social/ipfs/bafkreibye3shfb7bmpnsqw3yscb7yxd4kjsbnszeyluivnrslobvrcd2ci',
+    icon: 'https://ipfs.near.social/ipfs/bafkreifjzbjcownp4mlvkyai4yks55bdjevci7uj7i3nbc45sg65ulmtwu',
     nativeCurrency: { name: 'METIS', symbol: 'METIS', decimals: 18 },
     rpcUrls: ['https://andromeda.metis.io/?owner=1088'],
     blockExplorers: 'https://andromeda-explorer.metis.io',
@@ -72,7 +72,7 @@ export default {
   10: {
     chainId: 10,
     chainName: 'Optimism',
-    icon: 'https://ipfs.near.social/ipfs/bafkreia4smb3wz4f3jozeuatdtvtxcxk2orwx4jdxzt3nx42f6rw57d27y',
+    icon: 'https://ipfs.near.social/ipfs/bafkreidax5cwumzbzrttt7iswlzhdndtbzyiyrg6yy4jbtydm2ihvlpo6a',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://rpc.ankr.com/optimism'],
     blockExplorers: 'https://optimistic.etherscan.io',

@@ -54,6 +54,8 @@ const Container = styled.div`
     border-radius: 12px;
     padding: 4px;
     display: flex;
+    z-index: 2;
+    width: fit-content;
     cursor: pointer;
     position: relative;
 
@@ -130,9 +132,15 @@ const Container = styled.div`
       }
     }
   }
-  .select-bg-icon {
+  .content-page {
+    z-index: 1;
+    width: 100%;
     position: absolute;
-    top: 4%;
+  }
+  .select-bg-icon {
+    z-index: 0;
+    position: absolute;
+    top: 50%;
     left: 50%;
     .select-bg-content {
       width: 560px;
@@ -147,7 +155,7 @@ const Container = styled.div`
       .select-bg {
         position: absolute;
         right: 20%;
-        top: -12%;
+        top: -60%;
       }
     }
   }
@@ -370,10 +378,12 @@ const AllInOne: NextPageWithLayout = () => {
           </div>
         </div>
       </div>
-      <ComponentWrapperPage
-        src={selectedPath ? (components as any)[selectedPath] : components.arbitrum}
-        meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
-      />
+      <div className="content-page">
+        <ComponentWrapperPage
+          src={selectedPath ? (components as any)[selectedPath] : components.arbitrum}
+          meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
+        />
+      </div>
     </Container>
   );
 };

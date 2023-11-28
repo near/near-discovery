@@ -288,6 +288,11 @@ const CarouselList = styled.div`
           line-height: 43px;
           border-radius: 12px;
           border: 1px solid #373a53;
+          img{
+            width: 12px;
+            height: 8px;
+            margin-left: 6px;
+          }
         }
       }
     }
@@ -462,9 +467,10 @@ const AllDappsColumn: NextPageWithLayout = () => {
               </Tag>
               <p>Seamless and Efficient Trading on zk Rollups</p>
               <div className="carousel-btn">
-                <div className="carousel-btn-item">Collect</div>
+                <div className="carousel-btn-item">View Detail</div>
                 <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                  View
+                  Dapp
+                  <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                 </div>
               </div>
             </div>
@@ -586,11 +592,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
                   </div>
                   <div className="content-item-btn">
                     <div className="item-btn-item">
-                      <Link href="#">Collect</Link>
+                      <Link href="/dapps-details">Detail</Link>
                     </div>
-                    <div className="item-btn-item">
-                      <Link href="/dapps-details">View</Link>
-                    </div>
+                    <div className="item-btn-item">Dapp</div>
                   </div>
                 </div>
               );
@@ -621,11 +625,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     </div>
                     <div className="content-item-btn">
                       <div className="item-btn-item">
-                        <Link href="#">Collect</Link>
+                        <Link href="/dapps-details">Detail</Link>
                       </div>
-                      <div className="item-btn-item">
-                        <Link href="/dapps-details">View</Link>
-                      </div>
+                      <div className="item-btn-item">Dapp</div>
                     </div>
                   </div>
                 );

@@ -572,8 +572,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                   </Tag>
                 </div>
                 <div className="content-item-btn">
-                  <div className="item-btn-item">Collect</div>
-                  <div className="item-btn-item">View</div>
+                  <div className="item-btn-item">Detail</div>
+                  <div className="item-btn-item">Dapp</div>
                 </div>
               </div>
             );

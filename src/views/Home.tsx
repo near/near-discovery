@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/display-name */
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -58,7 +59,6 @@ const yellowBg = (
 //test
 const syncIcon = 'https://ipfs.near.social/ipfs/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y';
 const carouselbg = 'https://ipfs.near.social/ipfs/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty';
-
 
 //home-deepdive-scatter
 const deppDiveRightIcon = 'https://ipfs.near.social/ipfs/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya';
@@ -354,7 +354,7 @@ const Content = styled.div`
             position: absolute;
             left: 20px;
             top: 20px;
-            img{
+            img {
               width: 150px;
             }
           }
@@ -390,6 +390,13 @@ const Content = styled.div`
         height: 93px;
         margin-bottom: 32px;
         margin-right: 20px;
+      }
+      p {
+        color: rgba(255, 255, 255, 1);
+        font-family: Gantari;
+        font-size: 26px;
+        font-weight: 500;
+        margin-bottom: 42px;
       }
     }
     .shortcuts-content {
@@ -715,6 +722,10 @@ const CarouselList = styled.div`
           line-height: 43px;
           border-radius: 12px;
           border: 1px solid #373a53;
+          img {
+            width: 12px;
+            height: 8px;
+          }
         }
       }
     }
@@ -899,7 +910,7 @@ const HomeContent: NextPageWithLayout = () => {
 
       <Content>
         <div className="how-it-works">
-          <Title>How it works</Title>
+          <Title>How It Works</Title>
           <div className="it-works-list">
             <div className="works-list-item">
               <h1>Quick Sign-In</h1>
@@ -907,7 +918,7 @@ const HomeContent: NextPageWithLayout = () => {
               {/* <a href="#">Sign in / View my profile</a> */}
               {/* <a href="#">View my profile</a> */}
               <div className="list-item-img">
-                <img src='https://assets.dapdap.net/images/home-itworks-quick.png' alt="" />
+                <img src="https://assets.dapdap.net/images/home-itworks-quick.png" alt="" />
               </div>
             </div>
             <div className="works-list-arrow">
@@ -918,7 +929,7 @@ const HomeContent: NextPageWithLayout = () => {
               <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
               <Link href="/alldapps">Explore</Link>
               <div className="list-item-img">
-                <img src='https://assets.dapdap.net/images/home-itworks-discover.png' alt="" />
+                <img src="https://assets.dapdap.net/images/home-itworks-discover.png" alt="" />
               </div>
             </div>
             <div className="works-list-arrow">
@@ -932,7 +943,7 @@ const HomeContent: NextPageWithLayout = () => {
               </p>
               <a href="#">View</a>
               <div className="list-item-img">
-                <img src='https://assets.dapdap.net/images/home-itworks-earn.png' alt="" />
+                <img src="https://assets.dapdap.net/images/home-itworks-earn.png" alt="" />
               </div>
             </div>
           </div>
@@ -957,9 +968,9 @@ const HomeContent: NextPageWithLayout = () => {
                   </Tag>
                   <p>Seamless and Efficient Trading on zk Rollups</p>
                   <div className="carousel-btn">
-                    <div className="carousel-btn-item">Collect</div>
+                    <div className="carousel-btn-item">View Detail</div>
                     <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                      View
+                      Dapp <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                     </div>
                   </div>
                 </div>
@@ -1010,10 +1021,10 @@ const HomeContent: NextPageWithLayout = () => {
                         </Tag>
                       </div>
                       <div className="content-item-btn">
-                        <div className="item-btn-item">Collect</div>
                         <div className="item-btn-item">
-                          <Link href="/dapps-details">View</Link>
+                          <Link href="/dapps-details">Detail</Link>
                         </div>
+                        <div className="item-btn-item">Dapp</div>
                       </div>
                     </div>
                   );
@@ -1043,8 +1054,10 @@ const HomeContent: NextPageWithLayout = () => {
                         </Tag>
                       </div>
                       <div className="content-item-btn">
-                        <div className="item-btn-item">Collect</div>
-                        <div className="item-btn-item">View</div>
+                        <div className="item-btn-item">
+                          <Link href="/dapps-details">Detail</Link>
+                        </div>
+                        <div className="item-btn-item">Dapp</div>
                       </div>
                     </div>
                   );
@@ -1090,7 +1103,7 @@ const HomeContent: NextPageWithLayout = () => {
 
         <div className="deep-dive">
           <div className="deepDive-title">
-            <img src='https://assets.dapdap.net/images/home-deepdive.png' alt="" />
+            <img src="https://assets.dapdap.net/images/home-deepdive.png" alt="" />
             <Title>Deep Dive</Title>
             <Paragraph>
               Real-time DApp trend data, simple and economical one-click interaction, and easily accessible historical
@@ -1099,7 +1112,7 @@ const HomeContent: NextPageWithLayout = () => {
           </div>
           <div className="deepDive-content">
             <div className="deepDive-content-img">
-              <img src='https://assets.dapdap.net/images/home-deepdive-example.png' alt="" />
+              <img src="https://assets.dapdap.net/images/home-deepdive-example.png" alt="" />
             </div>
             <div className="deepDive-content-list">
               <Link href="/warmup">
@@ -1108,7 +1121,7 @@ const HomeContent: NextPageWithLayout = () => {
                     <img src={deppDiveRightIcon} alt="" />
                   </div>
                   <div className="item-bg-icon">
-                    <img src='https://assets.dapdap.net/images/polygon-zkEVM-bg.png' alt="" />
+                    <img src="https://assets.dapdap.net/images/polygon-zkEVM-bg.png" alt="" />
                   </div>
                   <div className="item-arrow-icon">
                     <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
@@ -1139,11 +1152,13 @@ const HomeContent: NextPageWithLayout = () => {
 
         <div className="shortcuts">
           <div className="shortcuts-title">
-            <img src='https://assets.dapdap.net/images/home-shortcuts.png' alt="" />
+            <img src="https://assets.dapdap.net/images/home-shortcuts.png" alt="" />
             <Title>Shortcuts</Title>
+            <p>Streamline your crypto experience with intuitive processes and comprehensive support.</p>
             <Paragraph>
-              Shortcuts integrate common functions and the most popular dapps, makes your Defi journey much easier and
-              seamless.
+              With our streamlined shortcut features, users from all levels can easily familiarize themselves with and
+              harness the power of core decentralized applications. With dapdap, embark on a simplified yet robust Web3
+              journey. From asset bridging to earning passive income through liquidity provision, we've got you covered.
             </Paragraph>
           </div>
           <div className="shortcuts-content">
