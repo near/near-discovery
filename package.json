@@ -12,7 +12,9 @@
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx,json}'",
-    "prettier:write": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json}'"
+    "prettier:write": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "prepare": "is-ci || husky install && npm install commitizen -g",
+    "commit": "cz"
   },
   "dependencies": {
     "@idos-network/idos-sdk": "^0.0.27",
@@ -67,6 +69,8 @@
     "zustand": "^4.3.7"
   },
   "devDependencies": {
+    "@commitlint/cli": "^18.4.3",
+    "@commitlint/config-conventional": "^18.4.3",
     "@types/big.js": "^6.1.6",
     "@types/dompurify": "^3.0.5",
     "@types/lodash": "^4.14.194",
@@ -75,10 +79,18 @@
     "@types/react-dom": "^18.2.10",
     "@types/styled-components": "^5.1.26",
     "@typescript-eslint/eslint-plugin": "^5.59.2",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.50.0",
     "eslint-config-next": "^13.5.4",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "husky": "^8.0.0",
+    "is-ci": "^3.0.1",
     "prettier": "^2.7.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
