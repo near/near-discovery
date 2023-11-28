@@ -1,7 +1,8 @@
 import Yours from '../Quest/components/Yours';
-import Swiper from './components/swiper';
-import Tabs from './components/tabs';
-import Leaderboard from './components/leaderboard';
+import Swiper from './components/Swiper';
+import Tabs from './components/Tabs';
+import Leaderboard from './components/Leaderboard';
+import Quests from './components/Quests';
 import { StyledContainer } from './styles';
 
 import { memo, useState } from 'react';
@@ -28,6 +29,7 @@ const QuestLeaderboardView = () => {
       />
 
       {tab === 'leaderboard' && <Leaderboard />}
+      {tab === 'quests' && <Quests />}
     </StyledContainer>
   );
 };
