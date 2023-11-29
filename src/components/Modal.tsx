@@ -3,7 +3,7 @@ import CloseIcon from './Icons/Close';
 
 import { motion, AnimatePresence } from 'framer-motion';
 import { memo } from 'react';
-import { container } from '@/components/animation';
+import { modal, overlay } from '@/components/animation';
 
 import type { ReactNode } from 'react';
 
@@ -13,13 +13,9 @@ const Dialog = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-  display: none;
   z-index: 9000;
-  &.display {
-    display: block;
-  }
 `;
-const Overlay = styled.div`
+const Overlay = styled(motion.div)`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
@@ -32,8 +28,8 @@ const Overlay = styled.div`
     align-items: flex-end;
   }
 `;
-const Main = styled.div<{ width: number }>`
-  width: ${({ width }) => width + 'px'};
+const Main = styled(motion.div)<{ $width: number }>`
+  width: ${({ $width }) => $width + 'px'};
   border-radius: 16px;
   border: 1px solid #2c334b;
   background-color: #181a27;
@@ -76,12 +72,13 @@ const Modal = ({
   onClose: () => void;
 }) => {
   return (
-    <Dialog className={display ? 'display' : ''}>
-      <AnimatePresence mode="wait">
-        <Overlay onClick={onClose}>
-          <motion.div {...container}>
+    <AnimatePresence mode="wait">
+      {display && (
+        <Dialog>
+          <Overlay onClick={onClose} {...overlay}>
             <Main
-              width={width}
+              {...modal}
+              $width={width}
               onClick={(ev) => {
                 ev.stopPropagation();
               }}
@@ -94,10 +91,10 @@ const Modal = ({
               </Header>
               <Content>{content}</Content>
             </Main>
-          </motion.div>
-        </Overlay>
-      </AnimatePresence>
-    </Dialog>
+          </Overlay>
+        </Dialog>
+      )}
+    </AnimatePresence>
   );
 };
 
