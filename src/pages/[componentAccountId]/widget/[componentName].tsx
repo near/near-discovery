@@ -82,7 +82,8 @@ async function fetchPreviewData(accountId: string, componentName: string): Promi
 //   };
 // };
 
-const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+// const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.componentAccountId}/widget/${router.query.componentName}`;
