@@ -73,11 +73,21 @@ export const getServerSideProps: GetServerSideProps<{
     };
   }
 
-  const meta = await fetchPreviewData(componentAccountId, componentName);
+  let meta;
+
+  try {
+    meta = await fetchPreviewData(componentAccountId, componentName);
+  } catch (err) {
+    console.warn('Failed to fetchPreview ', err);
+  }
 
   return {
     props: {
-      meta,
+      meta: meta || {
+        title: '',
+        description: '',
+        imageUrl: '',
+      },
     },
   };
 };
