@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export { StyledLabel } from '../Details/styles';
 export { StyledCoin } from '@/views/Quest/styles';
@@ -26,7 +27,7 @@ export const StyledItemContainer = styled.div`
   }
 `;
 
-export const StyledItemTop = styled.div`
+export const StyledItemTop = styled(motion.header)`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -89,13 +90,8 @@ export const StyledProcessBars = styled.div`
   margin-top: 40px;
 `;
 
-export const StyledExpandContainer = styled.div`
+export const StyledExpandContainer = styled(motion.section)`
   padding-left: 34px;
-  display: none;
-  // transition: height 0.4s ease-out, opacity 0.5s ease-in;
-  &.open {
-    display: block;
-  }
 `;
 
 export const StyledExpand = styled.div`

@@ -15,13 +15,15 @@ import {
   StyledExpand,
 } from './styles';
 
+import { AnimatePresence } from 'framer-motion';
+
 import { memo, useState } from 'react';
 
 const ActionItem = () => {
   const [open, setOpen] = useState(false);
   return (
     <StyledItemContainer>
-      <StyledItemTop>
+      <StyledItemTop initial={false}>
         <StyledItemLeft>
           <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
             <circle cx="11.5" cy="11.5" r="11" fill="#1E2028" stroke="#EBF479" />
@@ -81,16 +83,30 @@ const ActionItem = () => {
         </StyledDapps>
         <StyledMore>View all Dapps</StyledMore>
       </StyledExpandContainer> */}
-      <StyledExpandContainer className={open ? 'open' : ''}>
-        <StyledExpand>
-          <StyledDesc>
-            💡Dap Dap is a one-stop dApp aggregator designed to serve as the universal entry point to Layer 2s (L2).
-          </StyledDesc>
-          <StyledExpandButtonBox>
-            <StyledExpandButton>Got it</StyledExpandButton>
-          </StyledExpandButtonBox>
-        </StyledExpand>
-      </StyledExpandContainer>
+      <AnimatePresence initial={false}>
+        {open && (
+          <StyledExpandContainer
+            key="content"
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={{
+              open: { opacity: 1, height: 'auto' },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+            transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+          >
+            <StyledExpand>
+              <StyledDesc>
+                💡Dap Dap is a one-stop dApp aggregator designed to serve as the universal entry point to Layer 2s (L2).
+              </StyledDesc>
+              <StyledExpandButtonBox>
+                <StyledExpandButton>Got it</StyledExpandButton>
+              </StyledExpandButtonBox>
+            </StyledExpand>
+          </StyledExpandContainer>
+        )}
+      </AnimatePresence>
     </StyledItemContainer>
   );
 };
