@@ -62,28 +62,29 @@ async function fetchPreviewData(accountId: string, componentName: string): Promi
   // };
 }
 
-export const getServerSideProps: GetServerSideProps<{
-  meta: ComponentMetaPreview | null;
-}> = async ({ params }) => {
-  const componentAccountId = params?.componentAccountId;
-  const componentName = params?.componentName;
+// export const getServerSideProps: GetServerSideProps<{
+//   meta: ComponentMetaPreview | null;
+// }> = async ({ params }) => {
+//   const componentAccountId = params?.componentAccountId;
+//   const componentName = params?.componentName;
 
-  if (typeof componentAccountId !== 'string' || typeof componentName !== 'string') {
-    return {
-      notFound: true,
-    };
-  }
+//   if (typeof componentAccountId !== 'string' || typeof componentName !== 'string') {
+//     return {
+//       notFound: true,
+//     };
+//   }
 
-  const meta = await fetchPreviewData(componentAccountId, componentName);
+//   const meta = await fetchPreviewData(componentAccountId, componentName);
 
-  return {
-    props: {
-      meta,
-    },
-  };
-};
+//   return {
+//     props: {
+//       meta,
+//     },
+//   };
+// };
 
-const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+// const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.componentAccountId}/widget/${router.query.componentName}`;
@@ -101,7 +102,7 @@ const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSideProps
 
   return (
     <>
-      {meta && <MetaTags title={meta.title} description={meta.description} image={meta.imageUrl} />}
+      {/*meta && <MetaTags title={meta.title} description={meta.description} image={meta.imageUrl} />*/}
       <div className="container-xl">
         <div className="row">
           <div
