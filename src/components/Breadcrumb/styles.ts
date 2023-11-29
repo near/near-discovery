@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export const StyledContainer = styled.div`
   font-size: 14px;
@@ -9,7 +10,7 @@ export const StyledContainer = styled.div`
   align-items: center;
 `;
 
-export const StyledNav = styled.div<{ $active: boolean }>`
+export const StyledNav = styled(motion.div)<{ $active: boolean }>`
   display: flex;
   gap: 9px;
   align-items: center;

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
-import { openToast } from '@/components/lib/Toast';
+import useToast from '@/hooks/useToast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
@@ -22,6 +22,7 @@ const ErrorText = styled.p`
 
 const SignUpPage: NextPageWithLayout = () => {
   const router = useRouter();
+  const toast = useToast();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const [isAccountAvailable, setIsAccountAvailable] = useState<boolean | null>(null);
   const [isAccountValid, setIsAccountValid] = useState<boolean | null>(null);
@@ -40,14 +41,12 @@ const SignUpPage: NextPageWithLayout = () => {
     const checkPassKey = async (): Promise<void> => {
       const isPasskeyReady = await isPassKeyAvailable();
       if (!isPasskeyReady) {
-        openToast({
+        toast.info({
           title: '',
-          type: 'INFO',
-          description: 'Passkey support is required for account creation. Try using an updated version of Chrome or Safari to create an account.',
-          duration: 5000,
-        })
+          text: 'Passkey support is required for account creation. Try using an updated version of Chrome or Safari to create an account.',
+        });
       }
-    }
+    };
     checkPassKey();
   }, []);
 
@@ -109,8 +108,7 @@ const SignUpPage: NextPageWithLayout = () => {
         )}&email=${encodeURIComponent(email)}`,
       );
     } catch (error: any) {
-      openToast({
-        type: 'ERROR',
+      toast.fail({
         title: error.message,
       });
     }

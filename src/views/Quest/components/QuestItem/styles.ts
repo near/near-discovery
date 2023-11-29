@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export { StyledCoin } from '../../styles';
 
-export const StyledContainer = styled.div<{ $isCampaign?: boolean; $mt?: number }>`
+export const StyledContainer = styled(motion.div)<{ $isCampaign?: boolean; $mt?: number }>`
   border-radius: 20px;
   border: 1px solid #373a53;
   background: #2c2e3e;
@@ -12,6 +13,7 @@ export const StyledContainer = styled.div<{ $isCampaign?: boolean; $mt?: number 
   padding: 18px 14px 14px;
   box-sizing: border-box;
   position: relative;
+  cursor: pointer;
 
   ${({ $isCampaign }) =>
     $isCampaign &&

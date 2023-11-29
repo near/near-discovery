@@ -38,6 +38,7 @@ const Tabs = ({ current, onChange }: { current: Tab; onChange: (tab: Tab) => voi
             index.current = TABS.findIndex((tab) => tab.key === current);
             onChange(tab.key);
           }}
+          key={tab.key}
         >
           <StyledTab $active={current === tab.key}>
             {tab.key === 'quests' && <StyledFist $size={37} />}

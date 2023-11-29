@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export { StyledTitle, StyledCoin } from '../../styles';
 
@@ -27,7 +28,7 @@ export const StyledHeader = styled.div`
   gap: 12px;
 `;
 
-export const StyledHeartBox = styled.div<{ $active?: boolean }>`
+export const StyledHeartBox = styled(motion.div)<{ $active?: boolean }>`
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.3);

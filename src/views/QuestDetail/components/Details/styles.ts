@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
 export { StyledTitle } from '../../styles';
 export { JoinedAccountsBox, JoinedAccounts, JoinedAccountsAmount } from '@/views/Quest/components/Campaign/styles';
@@ -21,7 +22,7 @@ export const StyledHeader = styled.div`
   margin-top: 10px;
 `;
 
-export const StyledHeartBox = styled.div<{ $active?: boolean }>`
+export const StyledHeartBox = styled(motion.div)<{ $active?: boolean }>`
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.3);

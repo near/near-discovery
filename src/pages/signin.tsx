@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
-import { openToast } from '@/components/lib/Toast';
+import useToast from '@/hooks/useToast';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -15,6 +15,7 @@ import { handleCreateAccount } from '../utils/auth';
 import { isValidEmail } from '../utils/form-validation';
 
 const SignInPage: NextPageWithLayout = () => {
+  const toast = useToast();
   const { register, handleSubmit, setValue } = useForm();
   const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
@@ -39,13 +40,11 @@ const SignInPage: NextPageWithLayout = () => {
       console.log(error);
 
       if (typeof error?.message === 'string') {
-        openToast({
-          type: 'ERROR',
+        toast.fail({
           title: error.message,
         });
       } else {
-        openToast({
-          type: 'ERROR',
+        toast.fail({
           title: 'Something went wrong',
         });
       }

@@ -4,6 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
+import 'react-toastify/dist/ReactToastify.css';
 
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
@@ -11,7 +12,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useCallback, useEffect, useRef } from 'react';
-import { Toaster } from '@/components/lib/Toast';
+import { ToastContainer } from 'react-toastify';
+import { useState } from 'react';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
@@ -38,6 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
+  const [ready, setReady] = useState(false);
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
@@ -88,7 +91,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         clearInterval(interval);
       }
     }
-
+    setReady(true);
     return () => {
       clearInterval(interval);
     };
@@ -155,7 +158,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <VmInitializer />
       {getLayout(<Component {...pageProps} logging={logging} />)}
-      <Toaster />
+      {ready && (
+        <ToastContainer
+          position={window.innerWidth > 768 ? 'top-right' : 'bottom-right'}
+          autoClose={5000}
+          hideProgressBar={true}
+          theme="dark"
+          newestOnTop
+          rtl={false}
+          pauseOnFocusLoss
+          closeButton={false}
+        />
+      )}
     </>
   );
 }

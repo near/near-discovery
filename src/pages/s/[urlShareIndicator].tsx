@@ -1,9 +1,8 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
-import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { openToast } from '@/components/lib/Toast';
+import useToast from '@/hooks/useToast';
 import { MetaTags } from '@/components/MetaTags';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -131,14 +130,13 @@ export const getServerSideProps: GetServerSideProps<{
 
 const ShareUrlPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     if (meta?.redirectUrl) {
       router.replace(meta.redirectUrl);
     } else {
-      openToast({
-        id: 'invalid-share-url',
-        type: 'ERROR',
+      toast.fail({
         title: 'Invalid URL',
       });
       router.replace('/');

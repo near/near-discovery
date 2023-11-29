@@ -6,7 +6,7 @@ import type { MutableRefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { openToast } from '@/components/lib/Toast';
+import useToast from '@/hooks/useToast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { network, signInContractId } from '@/utils/config';
@@ -18,6 +18,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
   const router = useRouter();
   const [statusMessage, setStatusMessage] = useState('Loading...');
   const { redirect } = useSignInRedirect();
+  const toast = useToast();
   const pendingSignInRef: MutableRefObject<null | Promise<void>> = useRef(null);
 
   useEffect(() => {
@@ -131,8 +132,7 @@ const AuthCallbackPage: NextPageWithLayout = () => {
           };
           const message = errorMessages[error.code] || error.message;
           router.push('/signup');
-          openToast({
-            type: 'ERROR',
+          toast.fail({
             title: message,
           });
         });

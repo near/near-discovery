@@ -14,7 +14,7 @@ const Swipper = ({ images }: { images: string[] }) => {
         style={{ left: '-18px' }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-          <path d="M9 1L2 8L9 15" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+          <path d="M9 1L2 8L9 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
         </svg>
       </StyledSwiperArrowButton>
       <StyledImagesBox>
@@ -37,7 +37,7 @@ const Swipper = ({ images }: { images: string[] }) => {
         style={{ right: '-18px' }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-          <path d="M1 1L8 8L1 15" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+          <path d="M1 1L8 8L1 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
         </svg>
       </StyledSwiperArrowButton>
     </StyledContainer>

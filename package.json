@@ -78,6 +78,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.48.2",
     "react-singleton-hook": "^4.0.1",
+    "react-toastify": "^9.1.3",
     "recharts": "^2.10.1",
     "rudder-sdk-js": "^2.45.0",
     "styled-components": "^6.1.1",

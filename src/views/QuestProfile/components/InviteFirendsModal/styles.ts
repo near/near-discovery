@@ -37,6 +37,7 @@ export const StyledCopyButton = styled.div`
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
+  transition: 0.3s;
   &:hover {
     opacity: 0.8;
   }
@@ -117,6 +118,13 @@ export const StyledClaimButton = styled.button`
   color: #ebf479;
   font-size: 16px;
   font-weight: 500;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.8;
+  }
+  &:active {
+    opacity: 0.6;
+  }
 `;
 
 export const StyledRow = styled.div`

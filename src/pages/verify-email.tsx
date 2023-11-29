@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
-import { openToast } from '@/components/lib/Toast';
+import useToast from '@/hooks/useToast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -14,6 +14,7 @@ import { firebaseAuth } from '../utils/firebase';
 // TODO refactor: thoroughly test since param handling changed
 const VerifyEmailPage: NextPageWithLayout = () => {
   const { query } = useRouter();
+  const toast = useToast();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
 
   useEffect(() => {
@@ -36,22 +37,19 @@ const VerifyEmailPage: NextPageWithLayout = () => {
         url: `${window.location.origin}/auth-callback?publicKey=${query.publicKey}&accountId=${query.accountId}`,
         handleCodeInApp: true,
       });
-      openToast({
-        type: 'SUCCESS',
+      toast.success({
         title: 'Email resent successfully!',
       });
     } catch (error: any) {
       console.log(error);
 
       if (typeof error?.message === 'string') {
-        openToast({
-          type: 'ERROR',
+        toast.fail({
           title: error.message,
         });
         return;
       }
-      openToast({
-        type: 'ERROR',
+      toast.fail({
         title: 'Something went wrong',
       });
     }

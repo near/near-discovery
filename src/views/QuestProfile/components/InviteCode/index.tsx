@@ -13,7 +13,7 @@ const InviteCode = ({ onClick }: { onClick: VoidFunction }) => {
             d="M55 0C55 2.76142 52.7614 5 50 5C47.2386 5 45 2.76142 45 0H12C5.37258 0 0 5.37258 0 12V40C0 46.6274 5.37258 52 12 52H45C45 49.2386 47.2386 47 50 47C52.7614 47 55 49.2386 55 52H136C142.627 52 148 46.6274 148 40V12C148 5.37258 142.627 0 136 0H55Z"
             fill="url(#paint0_linear_1_2)"
           />
-          <line x1="50.5" y1="6.5" x2="50.5" y2="46.5" stroke="black" stroke-linecap="round" stroke-dasharray="1 3" />
+          <line x1="50.5" y1="6.5" x2="50.5" y2="46.5" stroke="black" strokeLinecap="round" strokeDasharray="1 3" />
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"

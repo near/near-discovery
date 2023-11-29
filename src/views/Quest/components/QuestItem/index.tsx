@@ -26,7 +26,7 @@ type QuestItemProps = {
 
 const QuestItem = ({ live, claimable, isCampaign, mt }: QuestItemProps) => {
   return (
-    <StyledContainer $isCampaign={isCampaign} $mt={mt}>
+    <StyledContainer $isCampaign={isCampaign} $mt={mt} whileHover={{ opacity: 0.9 }}>
       <StyledTask>
         <StyledIconBox>
           <StyledIcon src="https://i1.huishahe.com/uploads/tu/202204/3/d4116f6117%20(1).jpg" />

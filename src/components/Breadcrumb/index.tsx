@@ -34,6 +34,7 @@ const Breadcrumb = ({ style, navs }: BreadcrumbProps) => {
           onClick={() => {
             if (pathname !== nav.path) router.push(nav.path);
           }}
+          whileHover={{ color: '#ebf479' }}
         >
           {nav.name}
           {i !== navs.length - 1 && LeftArrow}

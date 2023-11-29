@@ -1,8 +1,10 @@
 import { StyledNewCodeBox, StyledNewCodeBg, StyledNewCode, StyledCopyIcon } from './styles';
 
 import { memo } from 'react';
+import useCopy from '@/hooks/useCopy';
 
 const InviteCode = () => {
+  const { copy } = useCopy();
   return (
     <StyledNewCodeBox>
       <StyledNewCodeBg>
@@ -36,7 +38,11 @@ const InviteCode = () => {
         </svg>
       </StyledNewCodeBg>
       <StyledNewCode>N5VZN</StyledNewCode>
-      <StyledCopyIcon>
+      <StyledCopyIcon
+        onClick={() => {
+          copy('N5VZN');
+        }}
+      >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <g clip-path="url(#clip0_1078_5989)">
             <path

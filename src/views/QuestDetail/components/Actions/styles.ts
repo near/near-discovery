@@ -51,6 +51,9 @@ export const StyledItemRight = styled.div`
 export const StyledIconBox = styled.div`
   cursor: pointer;
   transition: 0.5s;
+  &:hover {
+    opacity: 0.8;
+  }
   &.open {
     transform: rotate(90deg);
   }
