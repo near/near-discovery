@@ -47,8 +47,8 @@ const nextConfig = {
       destination: 'https://near.dataplane.rudderstack.com/:path*',
     },
     {
-      source: '/api/dapdap/:path*',
-      destination: 'https://test-api.dapdap.net/api/:path*',
+      source: '/dapdap/:path*',
+      destination: 'https://test-api.dapdap.net/:path*',
     },
   ],
 };
