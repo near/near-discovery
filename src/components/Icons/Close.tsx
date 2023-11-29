@@ -2,10 +2,11 @@ import styled from 'styled-components';
 
 const CloseIcon = styled.div`
   cursor: pointer;
-  transition: 0.5s;
-  :hover {
+  transition: 0.3s;
+  transform-origin: center;
+  &:hover {
     opacity: 0.8;
-    transform: scale(1.3);
+    transform: scale(1.2);
   }
 `;
 

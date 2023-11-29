@@ -92,7 +92,7 @@ export const StyledProcessBars = styled.div`
 export const StyledExpandContainer = styled.div`
   padding-left: 34px;
   display: none;
-
+  // transition: height 0.4s ease-out, opacity 0.5s ease-in;
   &.open {
     display: block;
   }

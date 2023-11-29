@@ -1,8 +1,11 @@
-import type { ReactNode} from 'react';
-import { memo } from 'react';
 import styled from 'styled-components';
-
 import CloseIcon from './Icons/Close';
+
+import { motion, AnimatePresence } from 'framer-motion';
+import { memo } from 'react';
+import { container } from '@/components/animation';
+
+import type { ReactNode } from 'react';
 
 const Dialog = styled.div`
   position: fixed;
@@ -11,7 +14,7 @@ const Dialog = styled.div`
   top: 0;
   bottom: 0;
   display: none;
-
+  z-index: 9000;
   &.display {
     display: block;
   }
@@ -19,8 +22,7 @@ const Dialog = styled.div`
 const Overlay = styled.div`
   width: 100%;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
+  background: rgba(0, 0, 0, 0.6);
   position: absolute;
   z-index: 9999;
   display: flex;
@@ -56,6 +58,10 @@ const Content = styled.div`
   border-radius: 0px 0px 16px 16px;
 `;
 
+const StyledCloseIcon = styled.div`
+  color: #979abe;
+`;
+
 const Modal = ({
   display,
   title,
@@ -71,20 +77,26 @@ const Modal = ({
 }) => {
   return (
     <Dialog className={display ? 'display' : ''}>
-      <Overlay onClick={onClose}>
-        <Main
-          width={width}
-          onClick={(ev) => {
-            ev.stopPropagation();
-          }}
-        >
-          <Header>
-            <Title>{title}</Title>
-            <CloseIcon onClose={onClose} />
-          </Header>
-          <Content>{content}</Content>
-        </Main>
-      </Overlay>
+      <AnimatePresence mode="wait">
+        <Overlay onClick={onClose}>
+          <motion.div {...container}>
+            <Main
+              width={width}
+              onClick={(ev) => {
+                ev.stopPropagation();
+              }}
+            >
+              <Header>
+                <Title>{title}</Title>
+                <StyledCloseIcon>
+                  <CloseIcon onClose={onClose} />
+                </StyledCloseIcon>
+              </Header>
+              <Content>{content}</Content>
+            </Main>
+          </motion.div>
+        </Overlay>
+      </AnimatePresence>
     </Dialog>
   );
 };

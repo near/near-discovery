@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export { StyledCoin } from '../../styles';
 
-export const StyledContainer = styled.div`
+export const StyledContainer = styled.div<{ $isCampaign?: boolean; $mt?: number }>`
   border-radius: 20px;
   border: 1px solid #373a53;
   background: #2c2e3e;
@@ -11,6 +11,15 @@ export const StyledContainer = styled.div`
   flex-shrink: 0;
   padding: 18px 14px 14px;
   box-sizing: border-box;
+  position: relative;
+
+  ${({ $isCampaign }) =>
+    $isCampaign &&
+    `
+  background: radial-gradient(100% 100% at 0% 0%, #AE92FF 0%, #6D2DF3 100%);
+  `}
+
+  ${({ $mt }) => $mt && `margin-top: ${$mt}px`}
 `;
 
 export const StyledTask = styled.div`
@@ -41,8 +50,8 @@ export const StyledTaskName = styled.div`
   text-transform: capitalize;
 `;
 
-export const StyledTaskDesc = styled.div`
-  color: #979abe;
+export const StyledTaskDesc = styled.div<{ $isCampaign?: boolean }>`
+  color: ${({ $isCampaign }) => ($isCampaign ? 'rgba(255,255,255,0.6)' : '#979abe')};
   font-size: 15px;
   font-weight: 400;
   line-height: 120%;
@@ -61,7 +70,6 @@ export const StyledTags = styled.div`
   align-items: center;
   gap: 8px;
   flex-wrap: nowrap;
-  margin-top: 14px;
 `;
 
 export const StyledTag = styled.div`
@@ -77,4 +85,37 @@ export const StyledTag = styled.div`
   display: flex;
   align-items: center;
   gap: 8px;
+`;
+
+export const StyledLive = styled.div`
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(32, 34, 47, 0.8);
+  width: 53px;
+  height: 26px;
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+`;
+
+export const StyledCalimable = styled.div`
+  color: #ebf479;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 120%;
+`;
+
+export const StyledFooter = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
 `;
