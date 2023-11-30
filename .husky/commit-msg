@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+npx --no -- commitlint --edit ${1} --verbose
+
+#run dependency-check to ensure referenced libraries have been imported in package.json
+./node_modules/dependency-check/cli.js ./package.json --verbose --missing  src/*.*
