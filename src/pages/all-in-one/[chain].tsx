@@ -237,9 +237,6 @@ const AllInOne: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    if (!chain || !popupsData[chain]) {
-      router.replace('/all-in-one/arbitrum');
-    }
     if (chain && popupsData[chain]) {
       clearTimeout(timer);
       timer = setTimeout(() => {
