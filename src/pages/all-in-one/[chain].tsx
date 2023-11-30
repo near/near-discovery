@@ -54,7 +54,6 @@ const Container = styled.div`
   position: relative;
   .top-login-select {
     margin-right: 16px;
-    background: rgba(21, 22, 23, 1);
     border-radius: 12px;
     padding: 4px;
     display: flex;
