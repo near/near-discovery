@@ -71,7 +71,7 @@ const BlockchainsBanner = styled.div`
 const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /* justify-content: center; */
   .blockchains-conetent-item {
     width: 32%;
     flex-basis: calc(32% - 20px);
