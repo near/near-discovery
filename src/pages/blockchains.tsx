@@ -1,8 +1,9 @@
-import styled from 'styled-components';
 import Link from 'next/link';
+import styled from 'styled-components';
+
+import chains from '@/config/chains';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import chains from '@/config/chains';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +70,7 @@ const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
   .blockchains-conetent-item {
-    width: auto;
+    width: 30%;
     flex-basis: calc(30% - 20px);
     margin-bottom: 30px;
     margin-right: 30px;
@@ -78,6 +79,9 @@ const BlockchainsConetent = styled.div`
     border-radius: 20px;
     padding: 19px 12px 38px 12px;
     position: relative;
+    @media (max-width:1250px) {
+      flex-basis: calc(45% - 20px);
+    }
     a {
       color: #ffffff;
       text-decoration: none;
@@ -104,7 +108,6 @@ const BlockchainsConetent = styled.div`
           color: #979abe;
           border-radius: 8px;
           padding: 6px 12px;
-          font-weight: 300;
         }
       }
     }
@@ -114,7 +117,7 @@ const BlockchainsConetent = styled.div`
       font-weight: 300;
     }
     .body-paragraph {
-      width: 360px;
+      width: 100%;
       height: 85px;
       margin-bottom: 20px;
       overflow: hidden;
@@ -128,8 +131,12 @@ const BlockchainsConetent = styled.div`
       font-size: 16px;
       margin-bottom: 20px;
     }
-    span {
+    h4 {
+      font-size: 16px;
       color: #ebf479;
+      a{
+        color: #ebf479;
+      }
       img {
         margin-left: 8px;
       }
@@ -153,13 +160,6 @@ const BlockchainsConetent = styled.div`
       }
       a {
         color: #000000;
-      }
-    }
-    &:hover {
-      cursor: pointer;
-      border: 1px solid #ebf479;
-      .list-item-bottom {
-        display: block;
       }
     }
   }
@@ -243,10 +243,10 @@ const BlockchainsColumn: NextPageWithLayout = () => {
               <h3>ZK Rollup</h3>
               <p className="minor-paragraph">Native Token</p>
               <h3>TBD🔥</h3>
-              <span>
-                Learn more
+              <h4>
+               <Link href="/chains-details">Learn more</Link>
                 <img src={leftarrow} alt="" />
-              </span>
+              </h4>
               {child.chainName === 'Polygon zkEVM' && (
                 <div className="list-item-bottom">
                   <Link href="/chains-details">

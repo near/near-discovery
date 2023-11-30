@@ -474,7 +474,7 @@ export const dapps = [
 
   {
     name: '0vix',
-    dappRoute: 'bluebiu.near/widget/Polygon.All-in-one?defaultTab=Lending', //TODO:
+    dappRoute: 'bluebiu.near/widget/ZKEVM-all-in-one?defaultTab=Lending', //TODO:
     extendProps: {
       defaultDapp: '0vix',
       defaultTab: 'Lending',

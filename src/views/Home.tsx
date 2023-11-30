@@ -151,16 +151,17 @@ const Content = styled.div`
       flex-wrap: wrap;
       position: relative;
       margin-bottom: 100px;
-      padding: 0 0 0 30px;
 
       .tab-content-item {
-        margin: 30px 30px 0 0;
+        margin: 30px 20px 0 0; 
         border-bottom: 1px solid #383b48;
         display: flex;
-        flex-basis: calc(30% - 20px);
-        flex-grow: 1;
+        width: 30%;
+        flex-basis: calc(33.3333% - 20px); 
+        box-sizing: border-box;
         .content-item-img {
           margin-right: 16px;
+          width: 20%;
           img {
             width: 72px;
             height: 72px;
@@ -168,7 +169,7 @@ const Content = styled.div`
         }
         .content-item-text {
           margin-right: 16px;
-          width: 210px;
+          width: 49%;
           h1 {
             font-size: 20px;
             font-weight: 700;
@@ -185,6 +186,7 @@ const Content = styled.div`
           }
         }
         .content-item-btn {
+          width: 22%;
           .item-btn-item {
             background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
             border: 1px solid #373a53;
@@ -201,42 +203,31 @@ const Content = styled.div`
             }
           }
         }
-      }
-      @media (max-width: 1880px) {
-        .tab-content-item {
-          .content-item-text {
-            width: 150px;
+        @media (max-width: 1500px) {
+          flex-basis: calc(50% - 20px);
+          .content-item-img{
+            width: 15%;
+          }
+          .content-item-text{
+            width: 60%;
           }
         }
-      }
-      @media (max-width: 1700px) {
-        .tab-content-item {
-          flex-basis: calc(45% - 20px);
-          .content-item-text {
-            width: 260px;
+        @media (max-width: 1400px) {
+          flex-basis: calc(50% - 20px);
+          .content-item-img{
+            width: 15%;
+          }
+          .content-item-text{
+            width: 50%;
           }
         }
-      }
-      @media (max-width: 1397px) {
-        .tab-content-item {
-          flex-basis: calc(45% - 20px);
-          .content-item-text {
-            width: 200px;
+        @media (max-width: 975px) {
+          flex-basis: calc(100% - 20px);
+          .content-item-img{
+            width: 15%;
           }
-        }
-      }
-      @media (max-width: 1227px) {
-        .tab-content-item {
-          flex-basis: calc(45% - 20px);
-          .content-item-text {
-            width: 160px;
-          }
-        }
-      }
-      @media (max-width: 1227px) {
-        .tab-content-item {
-          .content-item-text {
-            width: 500px;
+          .content-item-text{
+            width: 70%;
           }
         }
       }
@@ -975,9 +966,9 @@ const HomeContent: NextPageWithLayout = () => {
                   </Tag>
                   <p>Seamless and Efficient Trading on zk Rollups</p>
                   <div className="carousel-btn">
-                    <div className="carousel-btn-item"><Link  href="/dapps-details">View Detail</Link></div>
+                    <div className="carousel-btn-item"><Link href="/dapps-details">View Detail</Link></div>
                     <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                    <Link href='/dapp/Syncswap'>Dapp</Link> <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                      <Link href='/dapp/Syncswap'>Dapp</Link> <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                     </div>
                   </div>
                 </div>
