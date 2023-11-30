@@ -44,22 +44,22 @@ function returnImageUrl(data: ImageData | undefined) {
 async function fetchPreviewData(accountId: string, componentName: string): Promise<ComponentMetaPreview | null> {
   return null;
   const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`);
-   const responseData: ComponentPayload = await response.json();
-   const metadata = responseData[accountId]?.widget?.[componentName]?.metadata;
-  
-   if (!metadata) {
-     return null;
-   }
-  
-   const strippedDescriptionVFile = await remark().use(strip).process(metadata.description);
-   // recommended conversion from remark docs
-   const strippedDescription = String(strippedDescriptionVFile);
-  
-   return {
-     title: `${metadata.name} by ${accountId} on BOS`,
-     description: strippedDescription,
-     imageUrl: returnImageUrl(metadata.image),
-   };
+  const responseData: ComponentPayload = await response.json();
+  const metadata = responseData[accountId]?.widget?.[componentName]?.metadata;
+
+  if (!metadata) {
+    return null;
+  }
+
+  const strippedDescriptionVFile = await remark().use(strip).process(metadata.description);
+  // recommended conversion from remark docs
+  const strippedDescription = String(strippedDescriptionVFile);
+
+  return {
+    title: `${metadata.name} by ${accountId} on BOS`,
+    description: strippedDescription,
+    imageUrl: returnImageUrl(metadata.image),
+  };
 }
 
 export const getServerSideProps: GetServerSideProps<{
