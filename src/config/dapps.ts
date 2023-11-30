@@ -713,22 +713,21 @@ export const dapps = [
     dappSrc: {} as { [key: number]: string },
   },
 
-  {
-    name: 'Pendle',
-    dappRoute: '/dapp/pendle', //TODO:
-    logo: 'https://ipfs.near.social/ipfs/bafkreiedaqqpcuw6oj5mao263fizx3gksybdmw5x2p7xeka7wngzip5zeu',
-    TBD_TOKEN: 'N',
-    description:
-      'Pendle is a permissionless yield-trading protocol where users can execute various yield-management strategies.',
-    tags: ['Yield'],
-    type: 'yield',
-    on_chain_ids: [42161], // get chain config from chains.ts
-    DEFAULT_CHAIN_ID: 42161,
-    dappSrc: {
-      42161: 'bluebiu.near/widget/Arbitrum.Pendle.TradeMarkets',
-    } as { [key: number]: string },
-  },
-
+  // {
+  //   name: 'Pendle',
+  //   dappRoute: '/dapp/pendle', //TODO:
+  //   logo: 'https://ipfs.near.social/ipfs/bafkreiedaqqpcuw6oj5mao263fizx3gksybdmw5x2p7xeka7wngzip5zeu',
+  //   TBD_TOKEN: 'N',
+  //   description:
+  //     'Pendle is a permissionless yield-trading protocol where users can execute various yield-management strategies.',
+  //   tags: ['Yield'],
+  //   type: 'yield',
+  //   on_chain_ids: [42161], // get chain config from chains.ts
+  //   DEFAULT_CHAIN_ID: 42161,
+  //   dappSrc: {
+  //     42161: 'bluebiu.near/widget/Arbitrum.Pendle.TradeMarkets',
+  //   } as { [key: number]: string },
+  // },
   {
     name: 'Gamma',
     dappRoute: 'bluebiu.near/widget/Linea.Liquidity.GAMMA', //TODO:
