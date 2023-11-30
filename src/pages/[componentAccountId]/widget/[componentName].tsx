@@ -43,7 +43,9 @@ function returnImageUrl(data: ImageData | undefined) {
 
 async function fetchPreviewData(accountId: string, componentName: string): Promise<ComponentMetaPreview | null> {
   return null;
-  const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`);
+  const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`, {
+    signal: AbortSignal.timeout(2000),
+  });
   const responseData: ComponentPayload = await response.json();
   const metadata = responseData[accountId]?.widget?.[componentName]?.metadata;
 
@@ -78,8 +80,12 @@ export const getServerSideProps: GetServerSideProps<{
 
   try {
     meta = await fetchPreviewData(componentAccountId, componentName);
-  } catch (err) {
-    console.warn('Failed to fetchPreview ', err);
+  } catch (err: any) {
+    if (err.name === 'TimeoutError') {
+      console.warn('fetchPreview aborted due to a timeout', err);
+    } else {
+      console.warn('Failed to fetchPreview ', err);
+    }
   }
 
   return {
