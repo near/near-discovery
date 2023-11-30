@@ -43,47 +43,62 @@ function returnImageUrl(data: ImageData | undefined) {
 
 async function fetchPreviewData(accountId: string, componentName: string): Promise<ComponentMetaPreview | null> {
   return null;
-  // const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`);
-  // const responseData: ComponentPayload = await response.json();
-  // const metadata = responseData[accountId]?.widget?.[componentName]?.metadata;
-  //
-  // if (!metadata) {
-  //   return null;
-  // }
-  //
-  // const strippedDescriptionVFile = await remark().use(strip).process(metadata.description);
-  // // recommended conversion from remark docs
-  // const strippedDescription = String(strippedDescriptionVFile);
-  //
-  // return {
-  //   title: `${metadata.name} by ${accountId} on BOS`,
-  //   description: strippedDescription,
-  //   imageUrl: returnImageUrl(metadata.image),
-  // };
+  const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`, {
+    signal: AbortSignal.timeout(2000),
+  });
+  const responseData: ComponentPayload = await response.json();
+  const metadata = responseData[accountId]?.widget?.[componentName]?.metadata;
+
+  if (!metadata) {
+    return null;
+  }
+
+  const strippedDescriptionVFile = await remark().use(strip).process(metadata.description);
+  // recommended conversion from remark docs
+  const strippedDescription = String(strippedDescriptionVFile);
+
+  return {
+    title: `${metadata.name} by ${accountId} on BOS`,
+    description: strippedDescription,
+    imageUrl: returnImageUrl(metadata.image),
+  };
 }
 
-// export const getServerSideProps: GetServerSideProps<{
-//   meta: ComponentMetaPreview | null;
-// }> = async ({ params }) => {
-//   const componentAccountId = params?.componentAccountId;
-//   const componentName = params?.componentName;
+export const getServerSideProps: GetServerSideProps<{
+  meta: ComponentMetaPreview | null;
+}> = async ({ params }) => {
+  const componentAccountId = params?.componentAccountId;
+  const componentName = params?.componentName;
 
-//   if (typeof componentAccountId !== 'string' || typeof componentName !== 'string') {
-//     return {
-//       notFound: true,
-//     };
-//   }
+  if (typeof componentAccountId !== 'string' || typeof componentName !== 'string') {
+    return {
+      notFound: true,
+    };
+  }
 
-//   const meta = await fetchPreviewData(componentAccountId, componentName);
+  let meta;
 
-//   return {
-//     props: {
-//       meta,
-//     },
-//   };
-// };
+  try {
+    meta = await fetchPreviewData(componentAccountId, componentName);
+  } catch (err: any) {
+    if (err.name === 'TimeoutError') {
+      console.warn('fetchPreview aborted due to a timeout', err);
+    } else {
+      console.warn('Failed to fetchPreview ', err);
+    }
+  }
 
-// const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+  return {
+    props: {
+      meta: meta || {
+        title: '',
+        description: '',
+        imageUrl: '',
+      },
+    },
+  };
+};
+
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);

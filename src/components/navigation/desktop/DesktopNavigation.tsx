@@ -18,6 +18,7 @@ import { NotificationButton } from '../NotificationButton';
 import { UserDropdownMenu } from '../UserDropdownMenu';
 import { MainNavigationMenu } from './MainNavigationMenu';
 import { TypeAheadDropdown } from './TypeAheadDropdown';
+import { HorizonBanner } from '@/components/banner/Horizon';
 
 const Wrapper = styled.div<{
   scrolled?: boolean;
@@ -170,6 +171,7 @@ export const DesktopNavigation = () => {
 
   return (
     <>
+      <HorizonBanner />
       <Wrapper scrolled={scrolled}>
         <Container className="container-xl">
           <Link href="/" passHref legacyBehavior>
