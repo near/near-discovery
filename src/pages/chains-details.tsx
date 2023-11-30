@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -268,6 +269,10 @@ const ChainsDetailsHot = styled.div`
           align-items: center;
           border-radius: 16px;
           margin-bottom: 14px;
+          a{
+            color: #ffffff;
+            text-decoration: none;
+          }
         }
       }
     }
@@ -567,8 +572,12 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                   </Tag>
                 </div>
                 <div className="content-item-btn">
-                  <div className="item-btn-item">Detail</div>
-                  <div className="item-btn-item">Dapp</div>
+                  <div className="item-btn-item">
+                    <Link href="/dapps-details">Detail</Link>
+                  </div>
+                  <div className="item-btn-item">
+                    <Link href={dapp.dappRoute}>Dapp</Link>
+                  </div>
                 </div>
               </div>
             );

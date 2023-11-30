@@ -3,13 +3,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import React from 'react';
 
 const blueBg = (
   <svg width="719" height="719" viewBox="0 0 719 719" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -197,18 +197,19 @@ const Content = styled.div`
             margin-bottom: 14px;
             a {
               color: #ffffff;
+              text-decoration: none;
             }
           }
         }
       }
-      @media (max-width: 1700px) {
+      @media (max-width: 1880px) {
         .tab-content-item {
           .content-item-text {
-            width: 120px;
+            width: 150px;
           }
         }
       }
-      @media (max-width: 1478px) {
+      @media (max-width: 1700px) {
         .tab-content-item {
           flex-basis: calc(45% - 20px);
           .content-item-text {
@@ -289,6 +290,7 @@ const Content = styled.div`
           }
           a {
             color: #000000;
+            text-decoration: none;
           }
         }
         &:hover {
@@ -517,6 +519,7 @@ const Content = styled.div`
       text-decoration: underline;
       a {
         color: #979abe;
+        text-decoration: none;
       }
     }
     img {
@@ -722,6 +725,10 @@ const CarouselList = styled.div`
           line-height: 43px;
           border-radius: 12px;
           border: 1px solid #373a53;
+          a{
+            color: #ffffff;
+            text-decoration: none;
+          }
           img {
             width: 12px;
             height: 8px;
@@ -968,9 +975,9 @@ const HomeContent: NextPageWithLayout = () => {
                   </Tag>
                   <p>Seamless and Efficient Trading on zk Rollups</p>
                   <div className="carousel-btn">
-                    <div className="carousel-btn-item">View Detail</div>
+                    <div className="carousel-btn-item"><Link  href="/dapps-details">View Detail</Link></div>
                     <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                      Dapp <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                    <Link href='/dapp/Syncswap'>Dapp</Link> <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                     </div>
                   </div>
                 </div>
@@ -1024,7 +1031,9 @@ const HomeContent: NextPageWithLayout = () => {
                         <div className="item-btn-item">
                           <Link href="/dapps-details">Detail</Link>
                         </div>
-                        <div className="item-btn-item">Dapp</div>
+                        <div className="item-btn-item">
+                          <Link href={dapp.dappRoute}>Dapp</Link>
+                        </div>
                       </div>
                     </div>
                   );
@@ -1057,7 +1066,9 @@ const HomeContent: NextPageWithLayout = () => {
                         <div className="item-btn-item">
                           <Link href="/dapps-details">Detail</Link>
                         </div>
-                        <div className="item-btn-item">Dapp</div>
+                        <div className="item-btn-item">
+                          <Link href={dapp.dappRoute}>Dapp</Link>
+                        </div>
                       </div>
                     </div>
                   );

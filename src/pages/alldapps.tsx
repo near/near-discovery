@@ -2,13 +2,13 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import React from 'react';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -200,6 +200,7 @@ const AllDappsPage = styled.div`
           margin-bottom: 14px;
           a {
             color: #ffffff;
+            text-decoration: none;
           }
         }
       }
@@ -288,6 +289,10 @@ const CarouselList = styled.div`
           line-height: 43px;
           border-radius: 12px;
           border: 1px solid #373a53;
+          a{
+            color: #ffffff;
+            text-decoration: none;
+          }
           img{
             width: 12px;
             height: 8px;
@@ -467,9 +472,11 @@ const AllDappsColumn: NextPageWithLayout = () => {
               </Tag>
               <p>Seamless and Efficient Trading on zk Rollups</p>
               <div className="carousel-btn">
-                <div className="carousel-btn-item">View Detail</div>
+                <div className="carousel-btn-item">
+                  <Link href="/dapps-details">View Detail</Link>
+                </div>
                 <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                  Dapp
+                  <Link href='/dapp/Syncswap'>Dapp</Link>
                   <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                 </div>
               </div>
@@ -525,9 +532,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
               Lending
             </div>
             <div
-              className={`function-list-item liquidity ${
-                selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
-              }`}
+              className={`function-list-item liquidity ${selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
+                }`}
               onClick={() => handleFunctionClick('Liquidity')}
             >
               Liquidity
@@ -594,7 +600,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     <div className="item-btn-item">
                       <Link href="/dapps-details">Detail</Link>
                     </div>
-                    <div className="item-btn-item">Dapp</div>
+                    <div className="item-btn-item"> <Link href={dapp.dappRoute}>Dapp</Link></div>
                   </div>
                 </div>
               );
@@ -627,7 +633,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       <div className="item-btn-item">
                         <Link href="/dapps-details">Detail</Link>
                       </div>
-                      <div className="item-btn-item">Dapp</div>
+                      <div className="item-btn-item">
+                        <Link href={dapp.dappRoute}>Dapp</Link>
+                      </div>
                     </div>
                   </div>
                 );
