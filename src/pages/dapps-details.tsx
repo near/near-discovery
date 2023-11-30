@@ -177,7 +177,7 @@ const DappsDetailsContent = styled.div`
     }
   }
   .right-side-substance {
-    width: 30%;
+    width: 36%;
     .right-side-item {
       border: 1px solid #ebf4794d;
       background: #1c1d2a;
@@ -429,7 +429,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             <div className="body-left-several">
               <img src={several} alt="" />
               <p>12K+</p>
-              <div className="left-several-btn">+ Favorite</div>
+              {/* <div className="left-several-btn">+ Favorite</div> */}
             </div>
             <div className="left-enter-Dapp">
               <div className="enter-Dapp-item">
@@ -567,10 +567,10 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         </div>
         <div className="right-side-substance">
           <Title>Quest & Rewards</Title>
-          <Golds>
+          {/* <Golds>
             <img src={gold} alt="" />
             <span>10</span>
-          </Golds>
+          </Golds> */}
           <div className="right-side-item">
             <input type="radio" />
             <p>bridge atleast 0.1 ETH to Polygon zkEVM</p>

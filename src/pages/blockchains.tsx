@@ -87,6 +87,7 @@ const BlockchainsConetent = styled.div`
       flex-basis: calc(45% - 20px);
     }
     &:hover{
+      border: 1px #ebf479 solid;
       .list-item-bottom{
         display: inline-block;
       }
