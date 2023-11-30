@@ -321,7 +321,6 @@ const Tag = styled.div`
     padding: 2px 8px;
     font-size: 12px;
     display: flex;
-    cursor: pointer;
   }
   .Bridge {
     color: rgba(227, 233, 157, 1);
@@ -435,8 +434,15 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             <div className="left-enter-Dapp">
               <div className="enter-Dapp-item">
                 <p>Blockchain</p>
-                <img src={syncIcon} alt="" />
-                <img src={syncIcon} alt="" />
+                <img 
+                src='https://ipfs.near.social/ipfs/bafkreicjsbkvvcxahxjejkctwopcnmzbeskxhfrkg7lyawhkhzrxcmvgfy' 
+                alt="" />
+                <img 
+                src='https://ipfs.near.social/ipfs/bafkreie5b65e7cp7jtvhrwgibvoqpf7ekj4v7jgo2egjr3qmfsl3p4ulam' 
+                alt="" />
+                 <img 
+                src='https://ipfs.near.social/ipfs/bafkreib5v3jonanuknj5db5ysuhb6ubowv2pqnopyg3yraknfr3jn7el4u' 
+                alt="" />
               </div>
               <div className="enter-Dapp-item">
                 <p>Blockchain</p>

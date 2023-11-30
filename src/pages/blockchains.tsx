@@ -1,7 +1,9 @@
+import { ethers } from 'ethers';
 import Link from 'next/link';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
+import { ethereum } from '@/config/tokens/ethereum';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -69,11 +71,13 @@ const BlockchainsBanner = styled.div`
 const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   .blockchains-conetent-item {
-    width: 30%;
-    flex-basis: calc(30% - 20px);
+    width: 32%;
+    flex-basis: calc(32% - 20px);
     margin-bottom: 30px;
-    margin-right: 30px;
+    margin-right: 15px;
+    margin-left: 15px;
     background: #21232a;
     border: 1px solid #21232a;
     border-radius: 20px;
@@ -81,6 +85,11 @@ const BlockchainsConetent = styled.div`
     position: relative;
     @media (max-width:1250px) {
       flex-basis: calc(45% - 20px);
+    }
+    &:hover{
+      .list-item-bottom{
+        display: inline-block;
+      }
     }
     a {
       color: #ffffff;
@@ -108,6 +117,8 @@ const BlockchainsConetent = styled.div`
           color: #979abe;
           border-radius: 8px;
           padding: 6px 12px;
+          font-weight: 500;
+          cursor: pointer;
         }
       }
     }
@@ -203,6 +214,25 @@ const Footer = styled.div`
 `;
 
 const BlockchainsColumn: NextPageWithLayout = () => {
+
+  const addMetaMask = async ({ index, chainId, chainName, rpcUrls }: { index: number; chainId: number; chainName: string; rpcUrls: string[] }) => {
+
+    const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
+
+    etherProvider
+      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }])
+      .catch((err) => {
+        const chain = {
+          chainId: `0x${Number(chainId).toString(16)}`,
+          chainName: chainName,
+          rpcUrls: rpcUrls,
+        };
+
+        if (err.code === 4902) {
+          etherProvider.send('wallet_addEthereumChain', [chain]);
+        }
+      });
+  }
   return (
     <BlockchainsPage>
       <BreadCrumbs>
@@ -230,7 +260,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                 </div>
                 <div className="item-title-right">
                   <h1>{child.chainName}</h1>
-                  <p>
+                  <p onClick={() => addMetaMask({ index, chainId: child.chainId, chainName: child.chainName,  rpcUrls: child.rpcUrls })}>
                     Add to MetaMask <img src={diagonaltop} alt="" />
                   </p>
                 </div>
@@ -244,7 +274,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
               <p className="minor-paragraph">Native Token</p>
               <h3>TBD🔥</h3>
               <h4>
-               <Link href="/chains-details">Learn more</Link>
+                <Link href="/chains-details">Learn more</Link>
                 <img src={leftarrow} alt="" />
               </h4>
               {child.chainName === 'Polygon zkEVM' && (

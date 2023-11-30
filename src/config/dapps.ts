@@ -15,20 +15,20 @@ export const dapps = [
       5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
     } as { [key: number]: string },
   },
-  {
-    name: 'Ammos Finance',
-    dappRoute: '/dapp/agni-finance',
-    TBD_TOKEN: 'Y',
-    description: 'Ultra capital-efficient decentralised exchange with low fees, built on Mantle Layer 2.', // dapp radar
-    tags: ['Dexes'],
-    type: 'dex',
-    on_chain_ids: [5000], // get chain config from chains.ts
-    DEFAULT_CHAIN_ID: 5000,
-    logo: 'https://ipfs.near.social/ipfs/bafkreidzxjgiaisjnva6rjdsvcr5f4urskismfu4dljfyby5l3hxdnjx5u',
-    dappSrc: {
-      5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
-    } as { [key: number]: string },
-  },
+  // {
+  //   name: 'Ammos Finance',
+  //   dappRoute: '/dapp/agni-finance',
+  //   TBD_TOKEN: 'Y',
+  //   description: 'Ultra capital-efficient decentralised exchange with low fees, built on Mantle Layer 2.', // dapp radar
+  //   tags: ['Dexes'],
+  //   type: 'dex',
+  //   on_chain_ids: [5000], // get chain config from chains.ts
+  //   DEFAULT_CHAIN_ID: 5000,
+  //   logo: 'https://ipfs.near.social/ipfs/bafkreidzxjgiaisjnva6rjdsvcr5f4urskismfu4dljfyby5l3hxdnjx5u',
+  //   dappSrc: {
+  //     5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
+  //   } as { [key: number]: string },
+  // },
   {
     name: 'FusionX V3',
     dappRoute: '/dapp/fusionx-v3',

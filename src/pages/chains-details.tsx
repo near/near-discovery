@@ -412,7 +412,6 @@ const Tag = styled.div`
     padding: 2px 8px;
     font-size: 12px;
     display: flex;
-    cursor: pointer;
   }
   .Bridge {
     color: rgba(227, 233, 157, 1);
