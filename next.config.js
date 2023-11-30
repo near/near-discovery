@@ -35,11 +35,6 @@ const nextConfig = {
         destination: '/sandbox/:path*',
         permanent: true,
       },
-      {
-        source: '/all-in-one',
-        destination: '/all-in-one/arbitrum',
-        permanent: false,
-      },
     ];
   },
   rewrites: async () => [
