@@ -1,13 +1,13 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import Spinner from '@/components/Spinner';
 import { ethers } from 'ethers';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
 
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -290,9 +290,9 @@ const popupsData: {
     chainId: 137,
     rpcUrls: ['https://polygon.llamarpc.com'],
   },
-  zkSync: {
+  zksync: {
     title: 'zkSync',
-    path: 'zkSync',
+    path: 'zksync',
     icon: 'https://ipfs.near.social/ipfs/bafkreicwo7gbj23ay4r6w5wwdwllyaxd6eo4w2cngr64sp26z5wmke7xju',
     bgColor: '#FFFFFF',
     selectBgColor: '#3b6bdc',
@@ -300,13 +300,15 @@ const popupsData: {
     rpcUrls: ['https://mainnet.era.zksync.io'],
   },
 };
+let timer: any = null;
 const AllInOne: NextPageWithLayout = () => {
   const router = useRouter();
-  const chain = (router.query.chain as string) || 'arbitrum';
+  const chain = router.query.chain as string;
   const currentChain = popupsData[chain] || popupsData['arbitrum'];
   const components = useBosComponents();
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
-  const [selectedPath, setSelectedPath] = useState<string | null>(null);
+  const [showComponent, setShowComponent] = useState(false);
+  const [switching, setSwitching] = useState(false);
 
   const handleSelectItemClick = () => {
     setIsSelectItemClicked(!isSelectItemClicked);
@@ -314,25 +316,52 @@ const AllInOne: NextPageWithLayout = () => {
   const handleItemClick = (path: string) => {
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
     const currentChain = popupsData[path];
+    setSwitching(true);
     etherProvider
       .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(currentChain.chainId).toString(16)}` }])
       .then(() => {
-        router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
+        setShowComponent(false);
+        setSwitching(false);
+        setTimeout(() => {
+          router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
+        }, 500);
       })
       .catch((err) => {
+        if (err?.code !== 4902) {
+          setSwitching(false);
+          return;
+        }
         const chain = {
           chainId: `0x${Number(currentChain.chainId).toString(16)}`,
           chainName: currentChain.title,
           rpcUrls: [currentChain.rpcUrls],
         };
 
-        etherProvider.send('wallet_addEthereumChain', [chain]).then((res) => {
-          router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
-        });
+        etherProvider
+          .send('wallet_addEthereumChain', [chain])
+          .then((res) => {
+            setShowComponent(false);
+            setSwitching(false);
+            setTimeout(() => {
+              router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
+            }, 500);
+          })
+          .catch((err) => {
+            setSwitching(false);
+          });
       });
 
     setIsSelectItemClicked(false);
   };
+
+  useEffect(() => {
+    if (chain && popupsData[chain]) {
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        setShowComponent(true);
+      }, 500);
+    }
+  }, [chain]);
 
   return (
     <Container key={chain}>
@@ -341,67 +370,79 @@ const AllInOne: NextPageWithLayout = () => {
         {arrow}
         <span>{currentChain.title} ShortCut</span>
       </BreadCrumbs>
-
-      <div className="top-login-select">
-        <div className="select-item-wrapper" onClick={handleSelectItemClick}>
-          <div
-            className="selsect-item-img"
-            style={{
-              backgroundColor: currentChain.bgColor,
-            }}
-          >
-            <img src={currentChain.icon} alt="" />
-          </div>
-          <div className="selsect-item-text">
-            <p> {currentChain.title}</p>
-          </div>
-          <div className="selsect-item-icon">
-            <img
-              style={{ transform: isSelectItemClicked ? 'rotate(180deg)' : 'rotate(0deg)' }}
-              src={narrowUrl}
-              alt=""
-            />
-          </div>
-        </div>
-
-        {isSelectItemClicked && (
-          <div className="login-select-popup">
-            {Object.values(popupsData).map((item) => (
+      {switching ? (
+        <Spinner />
+      ) : (
+        <>
+          {' '}
+          <div className="top-login-select">
+            <div className="select-item-wrapper" onClick={handleSelectItemClick}>
               <div
-                className={`select-popups-item ${chain === item.path ? 'selected' : ''}`}
-                key={item.path}
-                onClick={() => handleItemClick(item.path)}
+                className="selsect-item-img"
+                style={{
+                  backgroundColor: currentChain.bgColor,
+                }}
               >
-                <div className="popup-item-img" style={{ backgroundColor: item.bgColor }}>
-                  <img src={item.icon} alt="" />
-                </div>
-                <div className="popups-item-text">{item.title}</div>
-                <div className="flex-grow"></div>
-                {chain === item.path && (
-                  <div className="check-mark">
-                    <img src={checkMark} alt="check-mark" />
-                  </div>
-                )}
+                <img src={currentChain.icon} alt="" />
               </div>
-            ))}
-          </div>
-        )}
-      </div>
+              <div className="selsect-item-text">
+                <p> {currentChain.title}</p>
+              </div>
+              <div className="selsect-item-icon">
+                <img
+                  style={{ transform: isSelectItemClicked ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                  src={narrowUrl}
+                  alt=""
+                />
+              </div>
+            </div>
 
-      <div className="select-bg-icon">
-        <div className="select-bg-content">
-          <img src={currentChain.icon} alt="" />
-          <div className="select-bg">
-            <SelectBg bgColor={currentChain.selectBgColor} />
+            {isSelectItemClicked && (
+              <div className="login-select-popup">
+                {Object.values(popupsData).map((item) => (
+                  <div
+                    className={`select-popups-item ${chain === item.path ? 'selected' : ''}`}
+                    key={item.path}
+                    onClick={() => handleItemClick(item.path)}
+                  >
+                    <div className="popup-item-img" style={{ backgroundColor: item.bgColor }}>
+                      <img src={item.icon} alt="" />
+                    </div>
+                    <div className="popups-item-text">{item.title}</div>
+                    <div className="flex-grow"></div>
+                    {chain === item.path && (
+                      <div className="check-mark">
+                        <img src={checkMark} alt="check-mark" />
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        </div>
-      </div>
-      <div className="content-page">
-        <ComponentWrapperPage
-          src={(components as any)[chain]}
-          meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
-        />
-      </div>
+          {showComponent && (
+            <>
+              <div className="select-bg-icon">
+                <div className="select-bg-content">
+                  <img src={currentChain.icon} alt="" />
+                  <div className="select-bg">
+                    <SelectBg bgColor={currentChain.selectBgColor} />
+                  </div>
+                </div>
+              </div>
+              <div className="content-page">
+                <ComponentWrapperPage
+                  src={(components as any)[chain === 'zksync' ? 'zkSync' : chain]}
+                  meta={{
+                    title: 'Connect with the NEAR community.',
+                    description: 'Become part of the NEAR community.',
+                  }}
+                />
+              </div>
+            </>
+          )}
+        </>
+      )}
     </Container>
   );
 };
