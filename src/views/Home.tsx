@@ -1086,7 +1086,7 @@ const HomeContent: NextPageWithLayout = () => {
               .slice(0, 8)
               .map((child, index) => (
                 <div className="layer-list-item" key={index}>
-                  <Link href='/depps-details'>
+                  <Link href='/chains-details'>
                     <img src={child.icon} alt="" />
                     <h1>{child.chainName}</h1>
                     <Gold>
