@@ -86,7 +86,6 @@ async function returnMetaPreviewForComment(accountId: string, blockHeight: strin
   } catch (err) {
     console.warn('Failed to fetch meta preview for Comment', err);
   }
-
   return null;
 }
 
@@ -109,7 +108,6 @@ async function returnMetaPreviewForPost(accountId: string, blockHeight: string):
   } catch (err) {
     console.warn('Failed to fetch meta preview for Post', err);
   }
-
   return null;
 }
 
