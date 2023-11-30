@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 import { ethers } from 'ethers';
@@ -6,6 +6,9 @@ import { ethers } from 'ethers';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
+
 import type { NextPageWithLayout } from '@/utils/types';
 
 const arrow = (
@@ -177,8 +180,18 @@ const BreadCrumbs = styled.div`
     color: #ffffff;
   }
 `;
-const popupsData = [
-  {
+const popupsData: {
+  [key: string]: {
+    title: string;
+    path: string;
+    icon: string;
+    bgColor: string;
+    selectBgColor: string;
+    chainId: number;
+    rpcUrls: string[];
+  };
+} = {
+  arbitrum: {
     title: 'Arbitrum',
     path: 'arbitrum',
     icon: 'https://ipfs.near.social/ipfs/bafkreicxdjysr5urjg2hfpfts2b7ptb6q3fge7ncuhzw4puqybi4dwlbdu',
@@ -187,7 +200,7 @@ const popupsData = [
     chainId: 42161,
     rpcUrls: ['https://arb1.arbitrum.io/rpc'],
   },
-  {
+  avalanche: {
     title: 'Avalanche',
     path: 'avalanche',
     icon: 'https://ipfs.near.social/ipfs/bafkreifdm3vpor4xyh2y7ibcr4dsy262qgesegy7slrfjbo4imohqd4sfq',
@@ -196,7 +209,7 @@ const popupsData = [
     chainId: 43114,
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
   },
-  {
+  base: {
     title: 'BASE',
     path: 'base',
     icon: 'https://ipfs.near.social/ipfs/bafkreientyvw2l6v2jvtcq5pptg5xftj2dyobnk3yaykbu5mb6tpomzc3q',
@@ -205,7 +218,7 @@ const popupsData = [
     chainId: 8453,
     rpcUrls: ['https://developer-access-mainnet.base.org'],
   },
-  {
+  bsc: {
     title: 'BSC',
     path: 'bsc',
     icon: 'https://ipfs.near.social/ipfs/bafkreiczurnr4ai5epzfovu4btugbrfsoc57d42wnz22kdjmogz3ewfgcm',
@@ -214,7 +227,7 @@ const popupsData = [
     chainId: 56,
     rpcUrls: ['https://binance.llamarpc.com'],
   },
-  {
+  gnosis: {
     title: 'Gnosis',
     path: 'gnosis',
     icon: 'https://ipfs.near.social/ipfs/bafkreiazsyndhevopspbjue3ztz5r5mypuzpa5gjragm3hdg6ey33rfheu',
@@ -223,7 +236,7 @@ const popupsData = [
     chainId: 100,
     rpcUrls: ['https://rpc.ankr.com/gnosis'],
   },
-  {
+  linea: {
     title: 'Linea',
     path: 'linea',
     icon: 'https://ipfs.near.social/ipfs/bafkreiek2q3da5dpzt7jlvdp5y4b7xh2tsdb5syh75b3amfwhb7x6vi7oa',
@@ -232,7 +245,7 @@ const popupsData = [
     chainId: 59144,
     rpcUrls: ['https://linea.blockpi.network/v1/rpc/public'],
   },
-  {
+  mantle: {
     title: 'Mantle',
     path: 'mantle',
     icon: 'https://ipfs.near.social/ipfs/bafkreiboehkc3sfdmzzsv7abvhssavcicom3mjjm4wje3zgm3nzg5w4kbu',
@@ -241,7 +254,7 @@ const popupsData = [
     chainId: 5000,
     rpcUrls: ['https://mantle-mainnet.public.blastapi.io'],
   },
-  {
+  metis: {
     title: 'Metis',
     path: 'metis',
     icon: 'https://ipfs.near.social/ipfs/bafkreiaekamkcbf7ixg3w6wl25zd4orgkmshxkz36vncpomenfu3ryymty',
@@ -250,7 +263,7 @@ const popupsData = [
     chainId: 1088,
     rpcUrls: ['https://andromeda.metis.io/?owner=1088'],
   },
-  {
+  optimism: {
     title: 'Optimism',
     path: 'optimism',
     icon: 'https://ipfs.near.social/ipfs/bafkreihejurzfytybrvjy2b5vie5eppb4erhaimhtv25koseml3vhv3lse',
@@ -259,7 +272,7 @@ const popupsData = [
     chainId: 10,
     rpcUrls: ['https://rpc.ankr.com/optimism'],
   },
-  {
+  'polygon-zkevm': {
     title: 'Polygon zkEVM',
     path: 'polygon-zkevm',
     icon: 'https://ipfs.near.social/ipfs/bafkreielam3balduseacp3gulszhxiwzf7hcyoaau6goxdwgsavqfou5hi',
@@ -268,7 +281,7 @@ const popupsData = [
     chainId: 1101,
     rpcUrls: ['https://zkevm-rpc.com'],
   },
-  {
+  polygon: {
     title: 'Polygon',
     path: 'polygon',
     icon: 'https://ipfs.near.social/ipfs/bafkreicq7b2rylubg6pli3mgxjdpml4rdju2upxq25a6nd35xepiqakgfy',
@@ -277,7 +290,7 @@ const popupsData = [
     chainId: 137,
     rpcUrls: ['https://polygon.llamarpc.com'],
   },
-  {
+  zkSync: {
     title: 'zkSync',
     path: 'zkSync',
     icon: 'https://ipfs.near.social/ipfs/bafkreicwo7gbj23ay4r6w5wwdwllyaxd6eo4w2cngr64sp26z5wmke7xju',
@@ -286,42 +299,47 @@ const popupsData = [
     chainId: 324,
     rpcUrls: ['https://mainnet.era.zksync.io'],
   },
-];
+};
 const AllInOne: NextPageWithLayout = () => {
+  const router = useRouter();
+  const chain = (router.query.chain as string) || 'arbitrum';
+  const currentChain = popupsData[chain] || popupsData['arbitrum'];
   const components = useBosComponents();
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
-  const [selectedItem, setSelectedItem] = useState<number | null>(0);
   const [selectedPath, setSelectedPath] = useState<string | null>(null);
+
   const handleSelectItemClick = () => {
     setIsSelectItemClicked(!isSelectItemClicked);
   };
-  const handleItemClick = ({ index, chainId }: { index: number; chainId: number }) => {
+  const handleItemClick = (path: string) => {
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
-
+    const currentChain = popupsData[path];
     etherProvider
-      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }])
+      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(currentChain.chainId).toString(16)}` }])
+      .then(() => {
+        router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
+      })
       .catch((err) => {
         const chain = {
-          chainId: `0x${Number(chainId).toString(16)}`,
-          chainName: popupsData[index].title,
-          rpcUrls: [popupsData[index].rpcUrls],
+          chainId: `0x${Number(currentChain.chainId).toString(16)}`,
+          chainName: currentChain.title,
+          rpcUrls: [currentChain.rpcUrls],
         };
 
-        if (err.code === 4902) {
-          etherProvider.send('wallet_addEthereumChain', [chain]);
-        }
+        etherProvider.send('wallet_addEthereumChain', [chain]).then((res) => {
+          router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
+        });
       });
 
-    setSelectedItem(index);
     setIsSelectItemClicked(false);
-    setSelectedPath(popupsData[index].path);
   };
+
   return (
-    <Container>
+    <Container key={chain}>
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <span>{selectedItem !== null && popupsData[selectedItem].title} ShortCut</span>
+        <span>{currentChain.title} ShortCut</span>
       </BreadCrumbs>
 
       <div className="top-login-select">
@@ -329,13 +347,13 @@ const AllInOne: NextPageWithLayout = () => {
           <div
             className="selsect-item-img"
             style={{
-              backgroundColor: selectedItem !== null ? popupsData[selectedItem].bgColor : 'transparent',
+              backgroundColor: currentChain.bgColor,
             }}
           >
-            {selectedItem !== null && <img src={popupsData[selectedItem].icon} alt="" />}
+            <img src={currentChain.icon} alt="" />
           </div>
           <div className="selsect-item-text">
-            <p> {selectedItem !== null && popupsData[selectedItem].title}</p>
+            <p> {currentChain.title}</p>
           </div>
           <div className="selsect-item-icon">
             <img
@@ -348,18 +366,18 @@ const AllInOne: NextPageWithLayout = () => {
 
         {isSelectItemClicked && (
           <div className="login-select-popup">
-            {popupsData.map((item, index) => (
+            {Object.values(popupsData).map((item) => (
               <div
-                className={`select-popups-item ${selectedItem === index ? 'selected' : ''}`}
-                key={index}
-                onClick={() => handleItemClick({ index, chainId: item.chainId })}
+                className={`select-popups-item ${chain === item.path ? 'selected' : ''}`}
+                key={item.path}
+                onClick={() => handleItemClick(item.path)}
               >
                 <div className="popup-item-img" style={{ backgroundColor: item.bgColor }}>
                   <img src={item.icon} alt="" />
                 </div>
                 <div className="popups-item-text">{item.title}</div>
                 <div className="flex-grow"></div>
-                {selectedItem === index && (
+                {chain === item.path && (
                   <div className="check-mark">
                     <img src={checkMark} alt="check-mark" />
                   </div>
@@ -372,15 +390,15 @@ const AllInOne: NextPageWithLayout = () => {
 
       <div className="select-bg-icon">
         <div className="select-bg-content">
-          <img src={selectedItem !== null ? popupsData[selectedItem].icon : '#'} alt="" />
+          <img src={currentChain.icon} alt="" />
           <div className="select-bg">
-            <SelectBg bgColor={selectedItem !== null ? popupsData[selectedItem].selectBgColor : 'transparent'} />
+            <SelectBg bgColor={currentChain.selectBgColor} />
           </div>
         </div>
       </div>
       <div className="content-page">
         <ComponentWrapperPage
-          src={selectedPath ? (components as any)[selectedPath] : components.arbitrum}
+          src={(components as any)[chain]}
           meta={{ title: 'Connect with the NEAR community.', description: 'Become part of the NEAR community.' }}
         />
       </div>
