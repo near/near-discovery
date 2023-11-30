@@ -250,6 +250,10 @@ const Content = styled.div`
         color: #ffffff;
         text-align: center;
         position: relative;
+        a{
+          color: #ffffff;
+          text-decoration: none;
+        }
         img {
           width: 72px;
           height: 72px;
@@ -1082,21 +1086,23 @@ const HomeContent: NextPageWithLayout = () => {
               .slice(0, 8)
               .map((child, index) => (
                 <div className="layer-list-item" key={index}>
-                  <img src={child.icon} alt="" />
-                  <h1>{child.chainName}</h1>
-                  <Gold>
-                    <img src="https://assets.dapdap.net/images/gold.png" alt="" className="gold-icon" />
-                    <p>10</p>
-                  </Gold>
-                  <p>Ethereum scalability with zkEVM performance and security</p>
-                  {child.chainName === 'Polygon zkEVM' && (
-                    <div className="list-item-bottom">
-                      <Link href="/warmup">
-                        Deep Dive
-                        <img src="https://assets.dapdap.net/images/arrow-black.png" alt="" />
-                      </Link>
-                    </div>
-                  )}
+                  <Link href='/depps-details'>
+                    <img src={child.icon} alt="" />
+                    <h1>{child.chainName}</h1>
+                    <Gold>
+                      <img src="https://assets.dapdap.net/images/gold.png" alt="" className="gold-icon" />
+                      <p>10</p>
+                    </Gold>
+                    <p>Ethereum scalability with zkEVM performance and security</p>
+                    {child.chainName === 'Polygon zkEVM' && (
+                      <div className="list-item-bottom">
+                        <Link href="/warmup">
+                          Deep Dive
+                          <img src="https://assets.dapdap.net/images/arrow-black.png" alt="" />
+                        </Link>
+                      </div>
+                    )}
+                  </Link>
                 </div>
               ))}
           </div>

@@ -102,6 +102,10 @@ const DappsDetailsTitle = styled.div`
           font-size: 16px;
           font-weight: 700;
           line-height: 58px;
+          a{
+            color: #02051e;
+            text-decoration: none;
+          }
         }
       }
     }
@@ -449,7 +453,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                 <h1>TBD🔥</h1>
               </div>
               <div className="enter-Dapp-item Dapp-item-special">
-                Enter Dapp
+                <Link href='/dapp/Syncswap'>Enter Dapp</Link>
                 {/* <img src={arrowBlock} alt="" /> */}
               </div>
             </div>
