@@ -83,11 +83,7 @@ export const HorizonBanner = (props: Props) => {
   return (
     <Wrapper inline={props.inline}>
       <Flex gap="14px" alignItems="center" justifyContent="center">
-        <Link
-          href="https://airtable.com/appFoIqAoY0ikoVIb/shrst8Tt4PUtYTSvD"
-          target="_blank"
-          className="banner-button desktop-button"
-        >
+        <Link href="https://www.hzn.xyz/hzn/" target="_blank" className="banner-button desktop-button">
           <Button
             label="Apply to the next Horizon Accelerator Program"
             iconRight="ph-bold ph-arrow-right"
@@ -96,11 +92,7 @@ export const HorizonBanner = (props: Props) => {
             size="small"
           />
         </Link>
-        <Link
-          href="https://airtable.com/appFoIqAoY0ikoVIb/shrst8Tt4PUtYTSvD"
-          target="_blank"
-          className="banner-button mobile-button"
-        >
+        <Link href="https://www.hzn.xyz/hzn/" target="_blank" className="banner-button mobile-button">
           <Button
             label="Apply to the next Horizon Accelerator Program"
             iconRight="ph-bold ph-arrow-right"
