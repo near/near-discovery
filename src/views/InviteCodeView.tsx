@@ -192,12 +192,9 @@ export default function InviteCodeView() {
           <img src={bluebg} alt="" />
         </div>
         <div className="content">
-          {!account && <img src="https://assets.dapdap.net/images/logo.png" />}
+          <img src="https://assets.dapdap.net/images/logo.png" />
           <div className="title">
-            <p>
-              <img src="https://assets.dapdap.net/images/logo.png" style={{ marginRight: '20px' }} />
-              Got an invite code?
-            </p>
+            <p>Got an invite code?</p>
           </div>
           <p>Eureka is currently in beta. Get an invite code from an existing user to sign up</p>
           <div>

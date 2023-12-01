@@ -31,6 +31,7 @@ const useAuth = () => {
         const checked = await checkAddressIsInvited(account);
         if (!checked) {
           deleteCookie('AUTHED_ACCOUNT');
+          router.replace('/invite-code');
           return;
         }
         await getAccessToken(account);
