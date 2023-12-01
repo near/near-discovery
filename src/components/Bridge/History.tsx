@@ -104,7 +104,7 @@ const Historys = ({ txs, loading }: { txs: any; loading?: boolean }) => {
   const list = useMemo(() => Object.values(txs || {}), [txs]);
   return (
     <StyledContainer>
-      {!loading && list?.length && list.map((tx: any) => <History tx={tx} key={tx.tx} />)}
+      {!loading && !!list?.length && list.map((tx: any) => <History tx={tx} key={tx.tx} />)}
       {!loading && !list?.length && <Empty>No transactions</Empty>}
       {loading && (
         <LoadingWrapper>

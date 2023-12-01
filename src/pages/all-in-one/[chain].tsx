@@ -204,7 +204,7 @@ const AllInOne: NextPageWithLayout = () => {
         setShowComponent(false);
         setSwitching(false);
         setTimeout(() => {
-          router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
+          router.push(`/all-in-one/${currentChain.path}`);
         }, 500);
       })
       .catch((err) => {
@@ -224,7 +224,7 @@ const AllInOne: NextPageWithLayout = () => {
             setShowComponent(false);
             setSwitching(false);
             setTimeout(() => {
-              router.push(`/all-in-one/${currentChain.title.toLowerCase()}`);
+              router.push(`/all-in-one/${currentChain.path}`);
             }, 500);
           })
           .catch((err) => {
@@ -243,7 +243,6 @@ const AllInOne: NextPageWithLayout = () => {
       }, 500);
     }
   }, [chain]);
-
   return (
     <Container key={chain}>
       <BreadCrumbs>
