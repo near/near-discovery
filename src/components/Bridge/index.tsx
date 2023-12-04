@@ -234,7 +234,6 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
         }}
         onSelect={(chain: Chain) => {
           clickType && selectChain(clickType, chain);
-          setShowChainDialog(false);
         }}
       />
       <DialogTokens

@@ -50,9 +50,10 @@ const DialogTokens = ({
   onSelect: (chain: Token) => void;
 }) => {
   const [data, setData] = useState<Token[]>(tokens || []);
-
+  const [searchVal, setSearchValue] = useState<string>();
   const filterTokens = useCallback(
     (ev?: React.ChangeEvent<HTMLInputElement>) => {
+      setSearchValue(ev?.target.value);
       const _tokens = ev?.target.value
         ? tokens.filter((token) => {
             return (
@@ -73,19 +74,34 @@ const DialogTokens = ({
   useEffect(() => {
     filterTokens();
   }, [tokens]);
+
+  const handleClose = useCallback(() => {
+    onClose();
+    setSearchValue('');
+    filterTokens();
+  }, [onClose]);
+
   return (
     <Modal
       display={display}
       title="Select Token"
-      onClose={onClose}
+      onClose={handleClose}
       content={
         <>
           <InputWarpper>
-            <Input placeholder="Search name or paste address" onChange={filterTokens} />
+            <Input placeholder="Search name or paste address" value={searchVal} onChange={filterTokens} />
           </InputWarpper>
           {!data.length && <Empty>No token.</Empty>}
           {!!data.length && (
-            <CurrencyList tokens={data} chains={chains} selectedCurrency={currentToken} onClick={onSelect} />
+            <CurrencyList
+              tokens={data}
+              chains={chains}
+              selectedCurrency={currentToken}
+              onClick={(currency) => {
+                onSelect(currency);
+                handleClose();
+              }}
+            />
           )}
         </>
       }
