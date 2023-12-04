@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export { StyledTitle } from '../../styles';
+export { LoadingWrapper } from '../Campaign/styles';
 
 export const StyledContainer = styled.div`
   margin-top: 45px;

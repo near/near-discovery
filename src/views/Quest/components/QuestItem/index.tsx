@@ -1,3 +1,6 @@
+import { memo } from 'react';
+import { useRouter } from 'next/navigation';
+
 import ProcessBar from '../ProcessBar';
 import {
   StyledContainer,
@@ -15,39 +18,40 @@ import {
   StyledFooter,
 } from './styles';
 
-import { memo } from 'react';
-
-type QuestItemProps = {
-  live?: boolean;
-  claimable?: boolean;
-  isCampaign?: boolean;
-  mt?: number;
-};
-
-const QuestItem = ({ live, claimable, isCampaign, mt }: QuestItemProps) => {
+const QuestItem = ({
+  quest: { isCampaign, mt, claimable, live, logo, name, description, total_action, reward, is_period, id },
+}: {
+  quest: any;
+}) => {
+  const router = useRouter();
   return (
-    <StyledContainer $isCampaign={isCampaign} $mt={mt} whileHover={{ opacity: 0.9 }}>
+    <StyledContainer
+      $isCampaign={isCampaign}
+      $mt={mt}
+      whileHover={{ opacity: 0.9 }}
+      onClick={() => {
+        router.push(`/quest/detail?id=${id}`);
+      }}
+    >
       <StyledTask>
-        <StyledIconBox>
-          <StyledIcon src="https://i1.huishahe.com/uploads/tu/202204/3/d4116f6117%20(1).jpg" />
-        </StyledIconBox>
+        <StyledIconBox>{logo && <StyledIcon src={logo} />}</StyledIconBox>
         <div>
-          <StyledTaskName>DapDap Newbie</StyledTaskName>
-          <StyledTaskDesc $isCampaign={isCampaign}>Follow the newbie guide</StyledTaskDesc>
+          <StyledTaskName>{name}</StyledTaskName>
+          <StyledTaskDesc $isCampaign={isCampaign}>{description}</StyledTaskDesc>
         </div>
       </StyledTask>
       <StyledProcessBars>
-        <ProcessBar size={4} value={0} noBorder={true} />
-        <ProcessBar size={4} value={50} noBorder={true} />
-        <ProcessBar size={4} value={100} noBorder={true} />
+        {new Array(total_action || 0).map((i) => (
+          <ProcessBar size={4} value={0} noBorder={true} />
+        ))}
       </StyledProcessBars>
       <StyledFooter>
         <StyledTags>
           <StyledTag style={{ padding: '0px 10px 0px 6px' }}>
             <StyledCoin $size={18} />
-            <span style={{ color: '#EBF479' }}>20 PTS</span>
+            <span style={{ color: '#EBF479' }}>{reward} PTS</span>
           </StyledTag>
-          <StyledTag>Once</StyledTag>
+          <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag>
         </StyledTags>
         {claimable && <StyledCalimable>To be claimed!</StyledCalimable>}
       </StyledFooter>

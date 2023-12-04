@@ -4,14 +4,19 @@ import QuestLists from './components/QuestLists';
 import Yours from './components/Yours';
 import { StyledContainer } from './styles';
 
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 const QuestView = () => {
+  const [id, setId] = useState<string>();
   return (
     <StyledContainer>
       <Breadcrumb navs={[{ name: 'Quest Campaign', path: '/quest' }]} />
-      <Campaign />
-      <QuestLists />
+      <Campaign
+        onLoad={(campainId) => {
+          setId(campainId);
+        }}
+      />
+      <QuestLists id={id} />
       <Yours />
     </StyledContainer>
   );

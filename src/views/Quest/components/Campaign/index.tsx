@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import Loading from '@/components/Icons/Loading';
 
 import useCampaignList from '../../hooks/useCampaignList';
@@ -103,9 +103,16 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
   );
 };
 
-const Campaigns = () => {
+const Campaigns = ({ onLoad }: { onLoad: (id: string) => void }) => {
   const { loading: categoryLoading, categories } = useCategoryList();
   const { loading, campaigns } = useCampaignList();
+
+  useEffect(() => {
+    if (!loading && campaigns.length) {
+      onLoad(campaigns[0].id);
+    }
+  }, [loading, campaigns]);
+
   return (
     <StyledCampaipnsContainer>
       {loading || categoryLoading ? (

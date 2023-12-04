@@ -1,3 +1,7 @@
+import Loading from '@/components/Icons/Loading';
+
+import useQuestList from '../../hooks/useQuestList';
+
 import ProcessBar from '../ProcessBar';
 import QuestItem from '../QuestItem';
 import {
@@ -8,11 +12,13 @@ import {
   StyledHeaderProcessBox,
   StyledHeaderProcessDesc,
   StyledListBox,
+  LoadingWrapper,
 } from './styles';
 
 import { memo } from 'react';
 
-const QuestLists = () => {
+const QuestLists = ({ id }: { id?: string }) => {
+  const { loading, quests } = useQuestList(id);
   return (
     <StyledContainer>
       <StyledHeader>
@@ -25,14 +31,31 @@ const QuestLists = () => {
           <ProcessBar size={8} value={20} />
         </StyledHeaderProcessBox>
       </StyledHeader>
-      <StyledSubTitle style={{ color: 'var(--onboarding-color' }}>#onboarding</StyledSubTitle>
-      <StyledListBox>
-        <QuestItem />
-      </StyledListBox>
-      <StyledSubTitle style={{ color: 'var(--social-color' }}>#social</StyledSubTitle>
-      <StyledListBox></StyledListBox>
-      <StyledSubTitle style={{ color: 'var(--engage-color' }}>#engage</StyledSubTitle>
-      <StyledListBox></StyledListBox>
+      {loading ? (
+        <LoadingWrapper>
+          <Loading size={60} />
+        </LoadingWrapper>
+      ) : (
+        <>
+          {Object.values(quests).map((items) => {
+            const _quests = items as any[];
+            return _quests?.length ? (
+              <>
+                <StyledSubTitle style={{ color: `var(--${_quests[0].quest_category_name}-color` }}>
+                  #{_quests[0].quest_category_name}
+                </StyledSubTitle>
+                <StyledListBox>
+                  {_quests.map((item) => (
+                    <QuestItem quest={item} />
+                  ))}
+                </StyledListBox>
+              </>
+            ) : (
+              <div key={Date.now()} />
+            );
+          })}
+        </>
+      )}
     </StyledContainer>
   );
 };
