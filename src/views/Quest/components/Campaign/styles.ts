@@ -3,6 +3,17 @@ import { motion } from 'framer-motion';
 
 export { StyledTitle, StyledCoin } from '../../styles';
 
+export const StyledCampaipnsContainer = styled.div`
+  height: 222px;
+`;
+
+export const LoadingWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 222px;
+`;
+
 export const StyledCampaipnContainer = styled.div`
   margin-top: 33px;
   border-radius: 32px;

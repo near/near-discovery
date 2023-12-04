@@ -3,18 +3,22 @@ import Toast from '@/components/Toast';
 
 export default function useToast() {
   const success = (params: { title: string; text?: string }) => {
-    toast(<Toast type="success" {...params} />);
+    return toast(<Toast type="success" {...params} />);
   };
   const fail = (params: { title: string; text?: string }) => {
-    toast(<Toast type="error" {...params} />);
+    return toast(<Toast type="error" {...params} />);
   };
   const info = (params: { title: string; text?: string }) => {
-    toast(<Toast type="info" {...params} />);
+    return toast(<Toast type="info" {...params} />);
   };
-
+  const loading = (params: { title: string; text?: string }) => {
+    return toast(<Toast type="pending" {...params} />);
+  };
   return {
     success,
     fail,
     info,
+    loading,
+    dismiss: toast.dismiss,
   };
 }

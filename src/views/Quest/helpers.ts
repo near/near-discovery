@@ -1,8 +1,9 @@
-const MINUTE_IN_SECONDS = 60;
-const HOUR_IN_SECONDS = 3600;
-const DAY_IN_SECONDS = 86400;
+import { format } from 'date-fns';
 
 export const getTimePeriods = (seconds: number) => {
+  const MINUTE_IN_SECONDS = 60;
+  const HOUR_IN_SECONDS = 3600;
+  const DAY_IN_SECONDS = 86400;
   let delta = Math.abs(seconds);
   const timeLeft = {
     days: 0,
@@ -33,4 +34,22 @@ export const getTimePeriods = (seconds: number) => {
 
 export const toTwo = (num: number): string => {
   return num < 10 ? '0' + num : '' + num;
+};
+
+export const formatTotalUsers = (users: number) => {
+  if (!users) return '0';
+  if (users > 1e6) return `${Math.ceil(users / 1e6)}M+`;
+  if (users > 1e3) return `${Math.ceil(users / 1e6)}K+`;
+  return `${users}+`;
+};
+
+export const formatPeriodDate = (start: string, end: string) => {
+  console.log(start, end);
+  if (!start || !end) return '';
+  const patterns = 'yyyy/MM/dd';
+  const _start = format(new Date(Number(start)), patterns);
+  const _end = format(new Date(Number(end)), patterns);
+  const hour = format(new Date(Number(end)), 'HH:mm');
+
+  return `${_start} - ${_end} ${hour}`;
 };

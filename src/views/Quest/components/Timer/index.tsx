@@ -5,9 +5,9 @@ import useCountdown from '@/hooks/useCountdown';
 import { memo, useEffect, useState } from 'react';
 import { getTimePeriods, toTwo } from '../../helpers';
 
-const Timer = () => {
+const Timer = ({ endTime }: { endTime: number }) => {
   const [ready, setReady] = useState(false);
-  const { secondsRemaining } = useCountdown(new Date('2023-12-25').getTime() / 1000);
+  const { secondsRemaining } = useCountdown(endTime / 1000);
   const timeLeft = getTimePeriods(secondsRemaining);
 
   useEffect(() => {
