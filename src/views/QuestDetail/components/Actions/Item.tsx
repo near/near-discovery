@@ -19,7 +19,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import { memo, useState } from 'react';
 
-const ActionItem = () => {
+const ActionItem = ({ action }: { action: any }) => {
   const [open, setOpen] = useState(false);
   return (
     <StyledItemContainer>
@@ -39,7 +39,7 @@ const ActionItem = () => {
             strokeLinejoin="round"
           />
         </svg> */}
-          <span>Execute at least one swapping on any Dapp & blockchain</span>
+          <span>{action.name}</span>
         </StyledItemLeft>
         <StyledItemRight>
           <StyledIconBox

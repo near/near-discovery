@@ -20,18 +20,22 @@ export const StyledButtons = styled.div`
   gap: 18px;
 `;
 
-export const StyledLeftButton = styled.div`
+export const StyledLeftButton = styled.div<{ $disabled: boolean }>`
   transition: 0.3s;
-  cursor: pointer;
+
+  ${({ $disabled }) =>
+    $disabled
+      ? `opacity: 0.4;`
+      : `
   &:hover {
     opacity: 0.8;
   }
   &:active {
     opacity: 0.6;
-  }
+  } 
+  cursor: pointer;
+  `}
 `;
-
-export const StyledRightButton = styled(StyledLeftButton)``;
 
 export const StyledRecommendList = styled.div`
   margin-top: 30px;
@@ -39,5 +43,4 @@ export const StyledRecommendList = styled.div`
   gap: 15px;
   flex-direction: nowrap;
   width: 100%;
-  overflow-x: auto;
 `;

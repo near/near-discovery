@@ -93,8 +93,8 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
                   <ellipse cx="15.006" cy="15.001" rx="1.5" ry="1.5" fill="white" />
                   <ellipse cx="21.002" cy="15.001" rx="1.5" ry="1.5" fill="white" />
                 </svg>
-                <JoinedAccountsAmount>{formatTotalUsers(campaign.total_users)}</JoinedAccountsAmount>
               </JoinedAccounts>
+              <JoinedAccountsAmount>{formatTotalUsers(campaign.total_users)}</JoinedAccountsAmount>
             </>
           )}
         </JoinedAccountsBox>

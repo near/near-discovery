@@ -5,24 +5,36 @@ import { StyledContainer, StyledHeader, StyledLabel, StyledButton, StyledCoin, S
 
 import { memo } from 'react';
 
-const Actions = () => {
+const Actions = ({
+  actions,
+  endTime,
+  rewards,
+  completed,
+}: {
+  actions: any;
+  endTime: number;
+  rewards: number;
+  completed: number;
+}) => {
   return (
     <StyledContainer>
       <StyledHeader>
         <StyledLabel>Actions</StyledLabel>
-        <Timer />
+        {endTime && <Timer endTime={Number(endTime)} />}
       </StyledHeader>
-      <ActionItem />
+      {actions.map((action: any) => (
+        <ActionItem key={action.id} action={action} />
+      ))}
       <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>
       <StyledProcessBars>
-        <ProcessBar size={4} value={0} noBorder={true} />
-        <ProcessBar size={4} value={50} noBorder={true} />
-        <ProcessBar size={4} value={100} noBorder={true} />
+        {actions.map((action: any) => (
+          <ProcessBar size={4} value={0} noBorder={true} key={action.id} />
+        ))}
       </StyledProcessBars>
-      <StyledButton>
+      <StyledButton disabled={!completed}>
         <span>Claim</span>
         <StyledCoin $size={20} />
-        <span>200 PTS</span>
+        <span>{rewards} PTS</span>
       </StyledButton>
     </StyledContainer>
   );
