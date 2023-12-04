@@ -169,12 +169,8 @@ export default function InviteCodeView() {
   return (
     <StyledInviteCodePage $logined={!!account} $loading={loading || logging}>
       <main>
-        <div className="yellow">
-          <img src={yellowbg} alt="" />
-        </div>
-        <div className="blue">
-          <img src={bluebg} alt="" />
-        </div>
+        <div className="yellow"></div>
+        <div className="blue"></div>
         <div className="content">
           <div className="title">
             <svg xmlns="http://www.w3.org/2000/svg" width="53" height="50" viewBox="0 0 53 50" fill="none">
