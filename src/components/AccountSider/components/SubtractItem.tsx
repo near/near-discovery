@@ -16,9 +16,13 @@ const Item = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(115, 119, 155, 0.5);
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.3s;
+
+  &:hover{
+    background-color: rgba(115, 119, 155, 0.5);
+  }
 `;
 
 const StyledInviteCode = styled(Item)`
