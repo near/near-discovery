@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useUserInfo(id?: string) {
   const [info, setInfo] = useState<any>();
@@ -9,7 +10,7 @@ export default function useUserInfo(id?: string) {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`http://139.162.85.48:8101/api/user?campaign_id=${id}`);
+      const result = await get(`${QUEST_PATH}:8101/api/user?campaign_id=${id}`);
       const data = result.data || [];
       setInfo(data);
       setLoading(false);

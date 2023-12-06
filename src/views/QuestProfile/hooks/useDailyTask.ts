@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import useToast from '@/hooks/useToast';
 import { get, post } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useDailyTask() {
   const [tasks, setTasks] = useState<any>([]);
@@ -12,7 +13,7 @@ export default function useDailyTask() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get('http://139.162.85.48:8101/api/quest/daily_check_in');
+      const result = await get(`${QUEST_PATH}:8101/api/quest/daily_check_in`);
       const data = result.data || [];
       setTasks(data);
       setLoading(false);
@@ -25,7 +26,7 @@ export default function useDailyTask() {
     if (claiming) return;
     setClaiming(true);
     try {
-      await post('http://139.162.85.48:8101/api/quest/daily_check_in', {});
+      await post(`${QUEST_PATH}:8101/api/quest/daily_check_in`, {});
       setClaiming(false);
       toast.success({ title: 'Claimed successfully' });
       queryTasks();

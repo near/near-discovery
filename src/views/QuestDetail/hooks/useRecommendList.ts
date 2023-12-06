@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useRecommendList(campaign_id: string) {
   const [recommends, setRecommends] = useState<any>([]);
@@ -12,9 +13,7 @@ export default function useRecommendList(campaign_id: string) {
       if (loading) return;
       setLoading(true);
       try {
-        const result = await get(
-          `http://139.162.85.48:8101/api/quest/recommend_list?campaign_id=1&page=${_page}&page_szie=2`,
-        );
+        const result = await get(`${QUEST_PATH}:8101/api/quest/recommend_list?campaign_id=1&page=${_page}&page_szie=2`);
         const data = result.data.data || [];
         setRecommends(data);
         setLoading(false);

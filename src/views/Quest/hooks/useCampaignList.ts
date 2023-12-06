@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useCampaignList() {
   const [campaigns, setCampaigns] = useState<any[]>([]);
@@ -9,7 +10,7 @@ export default function useCampaignList() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get('http://139.162.85.48:9991/operations/Quest/GetCampaignList');
+      const result = await get(`${QUEST_PATH}:9991/operations/Quest/GetCampaignList`);
       setCampaigns(result.data?.data || []);
       setLoading(false);
     } catch (err) {

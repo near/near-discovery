@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useQuestList(campaign_id?: string) {
   const [quests, setQuests] = useState<any>({});
@@ -9,7 +10,7 @@ export default function useQuestList(campaign_id?: string) {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`http://139.162.85.48:8101/api/quest/list?campaign_id=${campaign_id}`);
+      const result = await get(`${QUEST_PATH}:8101/api/quest/list?campaign_id=${campaign_id}`);
       const data = result.data || [];
       const _quests: any = {};
       data.forEach((record: any) => {

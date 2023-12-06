@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { get, post } from '@/utils/http';
 import useToast from '@/hooks/useToast';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useLike(id: string, category: string) {
   const [like, setLike] = useState(false);
@@ -10,7 +11,7 @@ export default function useLike(id: string, category: string) {
   const queryLike = useCallback(async () => {
     if (loading) return;
     try {
-      const result = await get(`http://139.162.85.48:8101/api/user/favorite?id=${id}&category=${category}`);
+      const result = await get(`${QUEST_PATH}:8101/api/user/favorite?id=${id}&category=${category}`);
       const data = result.data?.favorite;
       setLike(data);
       setLoading(false);

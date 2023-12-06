@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+
 import {
   StyledDapp,
   StyledDappIcon,
@@ -14,7 +16,8 @@ import {
 
 import { memo } from 'react';
 
-const FavoriteDapp = ({ name, description }: any) => {
+const FavoriteDapp = ({ name, description, route, id }: any) => {
+  const router = useRouter();
   return (
     <StyledDapp>
       <StyledDappIcon />
@@ -34,8 +37,20 @@ const FavoriteDapp = ({ name, description }: any) => {
         </StyledDappTags>
       </StyledDappInfo>
       <StyledDappButtons>
-        <StyledDappButton>Detail</StyledDappButton>
-        <StyledDappButton>Dapp</StyledDappButton>
+        <StyledDappButton
+          onClick={() => {
+            id && router.push(`/quest/detail?id=${id}`);
+          }}
+        >
+          Detail
+        </StyledDappButton>
+        <StyledDappButton
+          onClick={() => {
+            route && router.push(route);
+          }}
+        >
+          Dapp
+        </StyledDappButton>
       </StyledDappButtons>
     </StyledDapp>
   );

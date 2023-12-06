@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { get } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useLeaderboard() {
   const [list, setList] = useState<any>([]);
@@ -14,7 +15,7 @@ export default function useLeaderboard() {
       if (loading) return;
       setLoading(true);
       try {
-        const result = await get(`http://139.162.85.48:8101/api/quest/leaderboard?page=${_page || page}&page_szie=10`);
+        const result = await get(`${QUEST_PATH}:8101/api/quest/leaderboard?page=${_page || page}&page_szie=10`);
         const data = result.data.data || [];
         setList(data);
         setLoading(false);
