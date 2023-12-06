@@ -31,14 +31,16 @@ export default function CurrencyIcon({
   chain,
   size = 38,
   mr = 20,
+  className,
 }: {
   token?: string;
   chain?: string;
   size?: number;
   mr?: number;
+  className?: string;
 }) {
   return (
-    <CurrencyIconWrapper mr={mr}>
+    <CurrencyIconWrapper mr={mr} className={className}>
       {token && <StyledCurrencyIcon size={size} src={token} />}
       {chain && <ChainIcon size={size * 0.6} src={chain} />}
       {!token && <Empty size={size} />}

@@ -35,7 +35,7 @@ const Actions = ({ mt, onClick }: { mt?: number; onClick: (type: string) => void
       >
         Bridge
       </Button>
-      <Button disabled>Buy</Button>
+      {/* <Button disabled>Buy</Button> */}
     </StyledContainer>
   );
 };

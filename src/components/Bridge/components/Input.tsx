@@ -51,7 +51,7 @@ const MaxButton = styled.button`
   font-size: 12px;
   font-weight: 400;
   color: #979abe;
-  background-color: rgba(151, 154, 190, 0.5);
+  background-color: rgba(151, 154, 190, 0.3);
 `;
 
 const Input = ({

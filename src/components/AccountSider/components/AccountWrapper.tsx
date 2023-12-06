@@ -1,11 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import TransactionTips from '@/components/Bridge/components/TransactionTips';
 import Actions from './Actions';
 import Amount from './Amount';
 import Chain from './Chain';
-import Split from './Split';
 import Tokens from './Tokens';
+import Activties from './Activties';
+import AccountTabs from './AccountTabs';
 
 const TipsWrapper = styled.div`
   padding-left: var(--padding-x);
@@ -25,6 +26,7 @@ export default function AccountWrapper({
   showChains?: boolean;
   setShowChains?: (show: boolean) => void;
 }) {
+  const [accountTab, setAccountTab] = useState('Tokens');
   return (
     <>
       <Chain mt={30} showChains={showChains} setShowChains={setShowChains} />
@@ -38,8 +40,14 @@ export default function AccountWrapper({
       <TipsWrapper>
         <TransactionTips count={count} />
       </TipsWrapper>
-      <Split mt={20} />
-      <Tokens mt={20} />
+      <AccountTabs
+        active={accountTab}
+        onTabClick={(tab: string) => {
+          setAccountTab(tab);
+        }}
+      />
+      {accountTab === 'Tokens' && <Tokens mt={20} />}
+      {accountTab === 'Activties' && <Activties />}
     </>
   );
 }
