@@ -18,9 +18,9 @@ const arrow = (
   </svg>
 );
 
-const narrowUrl = 'https://ipfs.near.social/ipfs/bafkreien4qagdjuudb6yj53wutsj4f6zfodrgv4ztftzjgkvcdtjnjk564';
+const narrowUrl = 'https://assets.dapdap.net/images/bafkreien4qagdjuudb6yj53wutsj4f6zfodrgv4ztftzjgkvcdtjnjk564.svg';
 
-const checkMark = 'https://ipfs.near.social/ipfs/bafkreig7b3k2jhkk6znb56pdsaj2f4mzadbxdac37lypsbdgwkj2obxu4y';
+const checkMark = 'https://assets.dapdap.net/images/bafkreig7b3k2jhkk6znb56pdsaj2f4mzadbxdac37lypsbdgwkj2obxu4y.svg';
 
 interface SelectBgProps {
   bgColor: string;

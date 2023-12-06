@@ -15,7 +15,7 @@ export const polygonZkevm: { [key: string]: Token } = {
     address: '0xa2036f0538221a77A3937F1379699f44945018d0',
     name: 'MATIC',
     symbol: 'MATIC',
-    icon: 'https://ipfs.near.social/ipfs/bafkreih5yowurclpyrr5bwzonh76ywld22riv4mjp2scne6ye7746dcjl4',
+    icon: 'https://assets.dapdap.net/images/bafkreih5yowurclpyrr5bwzonh76ywld22riv4mjp2scne6ye7746dcjl4.svg',
     decimals: 18,
   },
   usdc: {

@@ -57,15 +57,15 @@ const yellowBg = (
 );
 
 //test
-const syncIcon = 'https://ipfs.near.social/ipfs/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y';
-const carouselbg = 'https://ipfs.near.social/ipfs/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty';
+const syncIcon = 'https://assets.dapdap.net/images/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y.svg';
+const carouselbg = 'https://assets.dapdap.net/images/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty.svg';
 
 //home-deepdive-scatter
-const deppDiveRightIcon = 'https://ipfs.near.social/ipfs/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya';
-const decentralizedIcon = 'https://ipfs.near.social/ipfs/bafkreibhxqbh3tlqm6cqwqmu7j6afzsc7qab743bvn43zg4klk54tvyceq';
-const learningOne = 'https://ipfs.near.social/ipfs/bafkreigsyle3grerozvpmp42vhv3d36ny4gdc4vkgthcwefjyinvoangwy';
-const learningTwo = 'https://ipfs.near.social/ipfs/bafybeibgwjzaepfwgtmej4dnjjvtlnbtqukkn3fkde4ufvejnc2hf4yofi';
-const learningThree = 'https://ipfs.near.social/ipfs/bafkreihnl55yd5ud2nchalsgeyzy2tjq7cqw2bvp25cikxkixj55h6zyte';
+const deppDiveRightIcon = 'https://assets.dapdap.net/images/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya.svg';
+const decentralizedIcon = 'https://assets.dapdap.net/images/bafkreibhxqbh3tlqm6cqwqmu7j6afzsc7qab743bvn43zg4klk54tvyceq.svg';
+const learningOne = 'https://assets.dapdap.net/images/bafkreigsyle3grerozvpmp42vhv3d36ny4gdc4vkgthcwefjyinvoangwy.svg';
+const learningTwo = 'https://assets.dapdap.net/images/bafybeibgwjzaepfwgtmej4dnjjvtlnbtqukkn3fkde4ufvejnc2hf4yofi.svg';
+const learningThree = 'https://assets.dapdap.net/images/bafkreihnl55yd5ud2nchalsgeyzy2tjq7cqw2bvp25cikxkixj55h6zyte.svg';
 
 const HomePage = styled.div`
   padding: 0 12% 80px 12%;
@@ -1143,7 +1143,7 @@ const HomeContent: NextPageWithLayout = () => {
                 </div>
                 <div className="item-bg-icon">
                   <img
-                    src="https://ipfs.near.social/ipfs/bafkreie7thart7hj63xd2q27eronnchjfikyxjh3jwhzbjckvbp74so4fi"
+                    src="https://assets.dapdap.net/images/bafkreie7thart7hj63xd2q27eronnchjfikyxjh3jwhzbjckvbp74so4fi.svg"
                     alt=""
                   />
                 </div>
@@ -1194,7 +1194,7 @@ const HomeContent: NextPageWithLayout = () => {
         <div className="decentralized-frotnend">
           <div className="decentralized-frotnend-title">
             <img
-              src="https://ipfs.near.social/ipfs/bafkreianvp55gpfwvvlamdmvq6yx5omqomtjcntbtkiouv4bxukpgcbwwe"
+              src="https://assets.dapdap.net/images/bafkreianvp55gpfwvvlamdmvq6yx5omqomtjcntbtkiouv4bxukpgcbwwe.svg"
               alt=""
             />
             <Title>Decentralized frotnend</Title>
@@ -1229,13 +1229,13 @@ const HomeContent: NextPageWithLayout = () => {
           <div className="learning-icon">
             <div className="learning-icon-item learning-icon-left" onClick={handleRightClick}>
               <img
-                src="https://ipfs.near.social/ipfs/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy"
+                src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""
               />
             </div>
             <div className="learning-icon-item learning-icon-right" onClick={handleLeftClick}>
               <img
-                src="https://ipfs.near.social/ipfs/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy"
+                src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""
               />
             </div>
@@ -1250,19 +1250,19 @@ const HomeContent: NextPageWithLayout = () => {
         <div className="footer-item footer-center">
           <div className="footer-center-img">
             <img
-              src="https://ipfs.near.social/ipfs/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay"
+              src="https://assets.dapdap.net/images/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay.svg"
               alt=""
             />
             <img
-              src="https://ipfs.near.social/ipfs/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm"
+              src="https://assets.dapdap.net/images/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm.svg"
               alt=""
             />
             <img
-              src="https://ipfs.near.social/ipfs/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74"
+              src="https://assets.dapdap.net/images/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74.svg"
               alt=""
             />
             <img
-              src="https://ipfs.near.social/ipfs/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm"
+              src="https://assets.dapdap.net/images/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm.svg"
               alt=""
             />
           </div>

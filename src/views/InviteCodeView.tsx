@@ -8,8 +8,8 @@ import LoadingIcon from '@/components/Icons/Loading';
 import useAccount from '@/hooks/useAccount';
 import { setCookie } from 'cookies-next';
 
-export const yellowbg = 'https://ipfs.near.social/ipfs/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje';
-export const bluebg = 'https://ipfs.near.social/ipfs/bafkreicqa3b3urjhrrc2xt3kgnyhfuntagepjj7zfnley74u6gjqfmjm44';
+export const yellowbg = 'https://assets.dapdap.net/images/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje.svg';
+export const bluebg = 'https://assets.dapdap.net/images/bafkreicqa3b3urjhrrc2xt3kgnyhfuntagepjj7zfnley74u6gjqfmjm44.svg';
 
 export const StyledInviteCodePage = styled.div<{ $logined: boolean; $loading: boolean }>`
   font-family: Gantari;

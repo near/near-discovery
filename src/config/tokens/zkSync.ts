@@ -32,6 +32,6 @@ export const zkSync: { [key: string]: Token } = {
     decimals: 18,
     symbol: 'LUSD',
     name: 'LUSD Stablecoin',
-    icon: 'https://ipfs.near.social/ipfs/bafkreihbwhrsi447phga5fya4eb4nprudswmh4n5togvpyy4gowntcei5e',
+    icon: 'https://assets.dapdap.net/images/bafkreihbwhrsi447phga5fya4eb4nprudswmh4n5togvpyy4gowntcei5e.png',
   },
 };

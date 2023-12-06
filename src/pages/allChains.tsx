@@ -9,9 +9,9 @@ const AllChainsColumn: NextPageWithLayout = () => {
 
   const components = useBosComponents();
 
-  const pcBgIcon = "https://ipfs.near.social/ipfs/bafkreidvk35xz6wjpdl6ial7lsuly7zbt2yjjbvgxz5jracbfjhnralupu"
+  const pcBgIcon = "https://assets.dapdap.net/images/bafkreidvk35xz6wjpdl6ial7lsuly7zbt2yjjbvgxz5jracbfjhnralupu"
 
-  const mobileIcon = "https://ipfs.near.social/ipfs/bafkreigkayvd24jkreolnizn25vmjvrhw2tt6fg6pxgquieuatrcgzbvhq"
+  const mobileIcon = "https://assets.dapdap.net/images/bafkreigkayvd24jkreolnizn25vmjvrhw2tt6fg6pxgquieuatrcgzbvhq.svg"
 
   const Container = styled.div`
    color:#ffffff;

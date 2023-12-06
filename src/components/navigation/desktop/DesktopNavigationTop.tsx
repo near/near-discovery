@@ -147,6 +147,9 @@ const Container = styled.div`
 const LogoContainer = styled.div`
   width: auto;
   align-items: center;
+  img{
+    height: 32px;
+  }
 `;
 
 const MenuContainer = styled.div`
@@ -316,25 +319,25 @@ const MenuContent = styled.div`
   }
 `;
 
-const logoUrl = 'https://ipfs.near.social/ipfs/bafkreig5ka5mpgawcpswpfqinzpyuxl7wmfbs7xeln3l7udigzvbtotlle';
+const logoUrl = 'https://assets.dapdap.net/images/logo.png';
 
 const SearchIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim" alt="" />
+  <img src="https://assets.dapdap.net/images/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim.svg" alt="" />
 );
 
-const ExpandIcon = 'https://ipfs.near.social/ipfs/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi';
+const ExpandIcon = 'https://assets.dapdap.net/images/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi.svg';
 
-const CloseIcon = 'https://ipfs.near.social/ipfs/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu';
+const CloseIcon = 'https://assets.dapdap.net/images/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu.svg';
 
-const ArrowIcon = 'https://ipfs.near.social/ipfs/bafkreibrhom3ayevbwnd5e2u65w3qqgqgzk7qumggejceoy5t7ozydu7gm';
+const ArrowIcon = 'https://assets.dapdap.net/images/bafkreibrhom3ayevbwnd5e2u65w3qqgqgzk7qumggejceoy5t7ozydu7gm.svg';
 
-const DeepDive = 'https://ipfs.near.social/ipfs/bafkreicrbwiivaavc7dnlyfr72mnuvd36fhpwrw2yxvwp2afebbkso7d6m';
+const DeepDive = 'https://assets.dapdap.net/images/bafkreicrbwiivaavc7dnlyfr72mnuvd36fhpwrw2yxvwp2afebbkso7d6m.svg';
 
-const Shotcuts = 'https://ipfs.near.social/ipfs/bafkreideqs5vzneww4ejycligpml3prkr5wd6rhkalsyhyxcfo7mcdegyq';
+const Shotcuts = 'https://assets.dapdap.net/images/bafkreideqs5vzneww4ejycligpml3prkr5wd6rhkalsyhyxcfo7mcdegyq.svg';
 
-const Portfolio = 'https://ipfs.near.social/ipfs/bafkreidtkanbzjdnycy2c3cie32jv2lglg7vsbhvodtlztk7e5sftyrece';
+const Portfolio = 'https://assets.dapdap.net/images/bafkreidtkanbzjdnycy2c3cie32jv2lglg7vsbhvodtlztk7e5sftyrece.svg';
 
-const lockUrl = 'https://ipfs.near.social/ipfs/bafkreigkzmvkujzp5ned6vk55vr6w2vy3lwcbyr4dw35nyddsxtgxy4hcq';
+const lockUrl = 'https://assets.dapdap.net/images/bafkreigkzmvkujzp5ned6vk55vr6w2vy3lwcbyr4dw35nyddsxtgxy4hcq.svg';
 
 export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
