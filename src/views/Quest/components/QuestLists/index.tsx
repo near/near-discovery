@@ -46,7 +46,7 @@ const QuestLists = ({ id }: { id?: string }) => {
                 </StyledSubTitle>
                 <StyledListBox>
                   {_quests.map((item) => (
-                    <QuestItem quest={item} />
+                    <QuestItem quest={item} key={item.id} />
                   ))}
                 </StyledListBox>
               </>

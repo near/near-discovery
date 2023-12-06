@@ -39,6 +39,7 @@ const QuestItem = ({
   mt?: number;
 }) => {
   const router = useRouter();
+  const actions = Array.from({ length: total_action }, (val, i) => i);
   return (
     <StyledContainer
       $isCampaign={isCampaign}
@@ -56,8 +57,8 @@ const QuestItem = ({
         </div>
       </StyledTask>
       <StyledProcessBars>
-        {new Array(total_action || 0, 1).map((item, i) => (
-          <ProcessBar size={4} value={action_completed >= i ? 100 : 0} noBorder={true} />
+        {actions.map((item, i) => (
+          <ProcessBar size={4} key={i} value={action_completed >= i ? 100 : 0} noBorder={true} />
         ))}
       </StyledProcessBars>
       <StyledFooter>

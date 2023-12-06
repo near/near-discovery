@@ -44,7 +44,7 @@ const Recommends = ({ campaignId }: { campaignId: string }) => {
       </StyledHeader>
       <StyledRecommendList>
         {recommends.map((recommend: any) => (
-          <QuestItem quest={recommend} />
+          <QuestItem quest={recommend} key={recommend.id} />
         ))}
       </StyledRecommendList>
     </StyledContainer>
