@@ -12,18 +12,18 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const arrowyellow = 'https://ipfs.near.social/ipfs/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi';
-const titleBg = 'https://ipfs.near.social/ipfs/bafkreidyzwmfb3u4uxrz2l6n3mzzpfcwvsyhkxiigh7xdmsgiomtbxfjve';
-const syncIcon = 'https://ipfs.near.social/ipfs/bafkreidvtwihnl2ggpdxz6y5odaghigvap42p2lqdyxgex5gnl6fo4qxie';
-const gold = 'https://ipfs.near.social/ipfs/bafkreidegqrrzlwh4wlfrquhd6n3n7dczefy32hu5locsx5yj6hllqfkuq';
-const diagonaltop = 'https://ipfs.near.social/ipfs/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a';
-const Dapps = 'https://ipfs.near.social/ipfs/bafkreifyko6xoxde4srussisqazc3jnyqwqrwvhvphifknq4ybxa4kj7yu';
-const DeepDive = 'https://ipfs.near.social/ipfs/bafkreig4bv3xu73ouxj5x7zt4qlvnnbvgdqzj5oq6te6y7ax4tz2yid2ma';
-const Shotcut = 'https://ipfs.near.social/ipfs/bafkreibexhymj2bp2zhuhlwzcik5o42zg6xvt5i7rbsxcpk7ty7l6mmxum';
-const chart = 'https://ipfs.near.social/ipfs/bafkreiabil4iocii42zymoulnypymio4qzflzedpldpcdnmaz2s5bzncmy';
-const star = 'https://ipfs.near.social/ipfs/bafkreiduogs6um2scfu53rprwmjjt6f55npfycomoe4za2ve7uucej52vu';
-const line = 'https://ipfs.near.social/ipfs/bafkreia3362z25o4wope7mt3jffallldmtmodasm5crpltkfurnem2wxfe';
-const chainsconetentImg = 'https://ipfs.near.social/ipfs/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq';
+const arrowyellow = 'https://assets.dapdap.net/images/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi.svg';
+const titleBg = 'https://assets.dapdap.net/images/bafkreidyzwmfb3u4uxrz2l6n3mzzpfcwvsyhkxiigh7xdmsgiomtbxfjve.svg';
+const syncIcon = 'https://assets.dapdap.net/images/bafkreidvtwihnl2ggpdxz6y5odaghigvap42p2lqdyxgex5gnl6fo4qxie.svg';
+const gold = 'https://assets.dapdap.net/images/bafkreidegqrrzlwh4wlfrquhd6n3n7dczefy32hu5locsx5yj6hllqfkuq.svg';
+const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
+const Dapps = 'https://assets.dapdap.net/images/bafkreifyko6xoxde4srussisqazc3jnyqwqrwvhvphifknq4ybxa4kj7yu.svg';
+const DeepDive = 'https://assets.dapdap.net/images/bafkreig4bv3xu73ouxj5x7zt4qlvnnbvgdqzj5oq6te6y7ax4tz2yid2ma.svg';
+const Shotcut = 'https://assets.dapdap.net/images/bafkreibexhymj2bp2zhuhlwzcik5o42zg6xvt5i7rbsxcpk7ty7l6mmxum.svg';
+const chart = 'https://assets.dapdap.net/images/bafkreiabil4iocii42zymoulnypymio4qzflzedpldpcdnmaz2s5bzncmy.svg';
+const star = 'https://assets.dapdap.net/images/bafkreiduogs6um2scfu53rprwmjjt6f55npfycomoe4za2ve7uucej52vu.svg';
+const line = 'https://assets.dapdap.net/images/bafkreia3362z25o4wope7mt3jffallldmtmodasm5crpltkfurnem2wxfe.svg';
+const chainsconetentImg = 'https://assets.dapdap.net/images/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq.svg';
 
 const ChainsDetails = styled.div`
   color: #ffffff;
@@ -660,19 +660,19 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         <div className="footer-item footer-center">
           <div className="footer-center-img">
             <img
-              src="https://ipfs.near.social/ipfs/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay"
+              src="https://assets.dapdap.net/images/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay.svg"
               alt=""
             />
             <img
-              src="https://ipfs.near.social/ipfs/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm"
+              src="https://assets.dapdap.net/images/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm.svg"
               alt=""
             />
             <img
-              src="https://ipfs.near.social/ipfs/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74"
+              src="https://assets.dapdap.net/images/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74.svg"
               alt=""
             />
             <img
-              src="https://ipfs.near.social/ipfs/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm"
+              src="https://assets.dapdap.net/images/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm.svg"
               alt=""
             />
           </div>

@@ -6,7 +6,7 @@ export const polygon: { [key: string]: Token } = {
     chainId: CHAIN_ID,
     name: 'MATIC',
     symbol: 'MATIC',
-    icon: 'https://ipfs.near.social/ipfs/bafkreih5yowurclpyrr5bwzonh76ywld22riv4mjp2scne6ye7746dcjl4',
+    icon: 'https://assets.dapdap.net/images/bafkreih5yowurclpyrr5bwzonh76ywld22riv4mjp2scne6ye7746dcjl4.svg',
     decimals: 18,
     isNative: true,
   },

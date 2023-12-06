@@ -38,7 +38,7 @@ export const avalanche: { [key: string]: Token } = {
     chainId: CHAIN_ID,
     name: 'AVAX',
     symbol: 'AVAX',
-    icon: 'https://ipfs.near.social/ipfs/bafkreiaxodsgromeeaihu44fazsxdopkrqvinqzhyfxvx5mrbcmduqdfpq',
+    icon: 'https://assets.dapdap.net/images/bafkreiaxodsgromeeaihu44fazsxdopkrqvinqzhyfxvx5mrbcmduqdfpq.svg',
     decimals: 18,
     isNative: true,
   },

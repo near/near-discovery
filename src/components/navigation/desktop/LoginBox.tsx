@@ -58,7 +58,7 @@ const baseIcon = (
 );
 
 const mantleIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4"></img>
+  <img src="https://assets.dapdap.net/images/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4.svg"></img>
 );
 const arbitrumIcon = (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,18 +147,18 @@ const metisIcon = (
 );
 
 const GnosisIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreiflvhldlljkmvy6i7xos6w5i56i4nt5mwr7pgu6f3kowqnqdz2vme" />
+  <img src="https://assets.dapdap.net/images/bafkreiflvhldlljkmvy6i7xos6w5i56i4nt5mwr7pgu6f3kowqnqdz2vme.png" />
 );
 const ZkSyncIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu" />
+  <img src="https://assets.dapdap.net/images/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu.png" />
 );
 
 const AvalanchecIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreie2h3qc42tkuj73ip6qs6nl463qm5qiumkicnw5wy4x5jvkjhvrdi" />
+  <img src="https://assets.dapdap.net/images/bafkreie2h3qc42tkuj73ip6qs6nl463qm5qiumkicnw5wy4x5jvkjhvrdi.svg" />
 );
 
 const OptimismIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreidax5cwumzbzrttt7iswlzhdndtbzyiyrg6yy4jbtydm2ihvlpo6a" />
+  <img src="https://assets.dapdap.net/images/bafkreidax5cwumzbzrttt7iswlzhdndtbzyiyrg6yy4jbtydm2ihvlpo6a.svg" />
 );
 
 const NearSignInButton = styled.div`

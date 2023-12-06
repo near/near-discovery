@@ -3,7 +3,7 @@ import React from 'react';
 export const MetaMaskIcon = (
   <img
     width={16}
-    src="https://ipfs.near.social/ipfs/bafkreibaoxmk33xaub4u4evqf7tgymniar47pcfo2rsose5c5jymrmybxq"
+    src="https://assets.dapdap.net/images/bafkreibaoxmk33xaub4u4evqf7tgymniar47pcfo2rsose5c5jymrmybxq.png"
     alt=""
   />
 );

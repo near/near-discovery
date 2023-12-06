@@ -56,6 +56,6 @@ export const arbitrum: { [key: string]: Token } = {
     decimals: 18,
     symbol: 'ARB',
     name: 'Arbitrum',
-    icon: 'https://ipfs.near.social/ipfs/bafkreid7njdklgdliaqs57sth2ixfrxpss6xe5vjprcgcp6rwqcb4zl3me',
+    icon: 'https://assets.dapdap.net/images/bafkreid7njdklgdliaqs57sth2ixfrxpss6xe5vjprcgcp6rwqcb4zl3me.png',
   },
 };
