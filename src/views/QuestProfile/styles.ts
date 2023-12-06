@@ -36,3 +36,23 @@ export const StyledSteps = styled.div<{ $size: number }>`
 export const StyledTabsBox = styled.div`
   position: relative;
 `;
+
+export const LoadingWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Empty = styled.div`
+  color: #fff;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100px;
+`;

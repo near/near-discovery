@@ -1,21 +1,25 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
 
 export default function useRecommendList(campaign_id: string) {
   const [recommends, setRecommends] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
+  const [maxPage, setMaxPage] = useState(1);
 
   const queryRecommends = useCallback(
     async (_page: number) => {
       if (loading) return;
       setLoading(true);
       try {
-        const result = await get(`/quest/api/quest/recommend_list?campaign_id=1&page=${_page}&page_szie=2`);
-        const data = result.data || [];
+        const result = await get(
+          `http://139.162.85.48:8101/api/quest/recommend_list?campaign_id=1&page=${_page}&page_szie=2`,
+        );
+        const data = result.data.data || [];
         setRecommends(data);
         setLoading(false);
         setPage(_page);
+        setMaxPage(result.data.total_page);
       } catch (err) {
         setLoading(false);
       }
@@ -35,5 +39,5 @@ export default function useRecommendList(campaign_id: string) {
     if (campaign_id) queryRecommends(1);
   }, [campaign_id]);
 
-  return { loading, recommends, page, handlePageChange };
+  return { loading, recommends, page, maxPage, handlePageChange };
 }

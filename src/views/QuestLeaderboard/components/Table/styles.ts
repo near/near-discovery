@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import type { Align } from '../../types';
 
+export { LoadingWrapper, Empty } from '@/views/QuestProfile/styles';
 export { StyledCoin } from '@/views/Quest/styles';
 
 export const StyledContainer = styled.div`

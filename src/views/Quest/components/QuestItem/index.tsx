@@ -19,9 +19,24 @@ import {
 } from './styles';
 
 const QuestItem = ({
-  quest: { isCampaign, mt, claimable, live, logo, name, description, total_action, reward, is_period, id },
+  quest: {
+    isCampaign,
+    is_claimed,
+    participation_status,
+    live,
+    logo,
+    name,
+    description,
+    total_action,
+    action_completed,
+    reward,
+    is_period,
+    id,
+  },
+  mt,
 }: {
   quest: any;
+  mt?: number;
 }) => {
   const router = useRouter();
   return (
@@ -41,8 +56,8 @@ const QuestItem = ({
         </div>
       </StyledTask>
       <StyledProcessBars>
-        {new Array(total_action || 0).map((i) => (
-          <ProcessBar size={4} value={0} noBorder={true} />
+        {new Array(total_action || 0, 1).map((item, i) => (
+          <ProcessBar size={4} value={action_completed >= i ? 100 : 0} noBorder={true} />
         ))}
       </StyledProcessBars>
       <StyledFooter>
@@ -53,7 +68,7 @@ const QuestItem = ({
           </StyledTag>
           <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag>
         </StyledTags>
-        {claimable && <StyledCalimable>To be claimed!</StyledCalimable>}
+        {!is_claimed && participation_status === 'completed' && <StyledCalimable>To be claimed!</StyledCalimable>}
       </StyledFooter>
 
       {live && (

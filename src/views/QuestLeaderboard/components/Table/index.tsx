@@ -1,3 +1,10 @@
+import { memo } from 'react';
+
+import { ellipsAccount } from '@/utils/account';
+import { balanceShortFormated } from '@/utils/balance';
+import Loading from '@/components/Icons/Loading';
+
+import { COLUMNS, RANK_COLORS } from './config';
 import {
   StyledContainer,
   StyledHeader,
@@ -12,40 +19,9 @@ import {
   StyledPageDesc,
   StyledPageButtons,
   StyledPageButton,
+  LoadingWrapper,
+  Empty,
 } from './styles';
-
-import { memo } from 'react';
-
-import { ellipsAccount } from '@/utils/account';
-import { balanceShortFormated } from '@/utils/balance';
-import { COLUMNS, RANK_COLORS } from './config';
-
-const data = [
-  {
-    rank: 1,
-    user: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
-    pts: 10,
-    avatar: '',
-  },
-  {
-    rank: 2,
-    user: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
-    pts: 10,
-    avatar: '',
-  },
-  {
-    rank: 3,
-    user: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
-    pts: 10,
-    avatar: '',
-  },
-  {
-    rank: 4,
-    user: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
-    pts: 10,
-    avatar: '',
-  },
-];
 
 export const Rank = ({ rank }: { rank: number }) => {
   return (
@@ -96,7 +72,7 @@ export const PTS = ({ pts }: { pts: number }) => {
   );
 };
 
-const Table = () => {
+const Table = ({ list, maxPage, page, handlePageChange, loading }: any) => {
   return (
     <StyledContainer>
       <StyledHeader>
@@ -106,34 +82,56 @@ const Table = () => {
           </StyledColumn>
         ))}
       </StyledHeader>
-      <StyledBody>
-        {data.map((row) => (
-          <StyledRow key={row.rank}>
-            {COLUMNS.map((column) => (
-              <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
-                {column.key === 'rank' && <Rank rank={row.rank} />}
-                {column.key === 'user' && <User user={row.user} avatar={row.avatar} />}
-                {column.key === 'pts' && <PTS pts={row.pts} />}
-              </StyledCell>
+      {loading ? (
+        <LoadingWrapper>
+          <Loading size={60} />
+        </LoadingWrapper>
+      ) : list.length > 0 ? (
+        <>
+          <StyledBody>
+            {list.map((row: any) => (
+              <StyledRow key={row.rank}>
+                {COLUMNS.map((column) => (
+                  <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
+                    {column.key === 'rank' && <Rank rank={row.rank} />}
+                    {column.key === 'user' && <User user={row.user} avatar={row.account.avatar} />}
+                    {column.key === 'pts' && <PTS pts={row.reward} />}
+                  </StyledCell>
+                ))}
+              </StyledRow>
             ))}
-          </StyledRow>
-        ))}
-      </StyledBody>
-      <StyledPageBox>
-        <StyledPageDesc>Page 1 of 1200</StyledPageDesc>
-        <StyledPageButtons>
-          <StyledPageButton>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-              <path d="M9 1L2 8L9 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
-            </svg>
-          </StyledPageButton>
-          <StyledPageButton>
-            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-              <path d="M1 1L8 8L1 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
-            </svg>
-          </StyledPageButton>
-        </StyledPageButtons>
-      </StyledPageBox>
+          </StyledBody>
+          <StyledPageBox>
+            <StyledPageDesc>
+              Page {page} of {maxPage}
+            </StyledPageDesc>
+            <StyledPageButtons>
+              <StyledPageButton
+                $disabled={page === 1}
+                onClick={() => {
+                  page > 1 && handlePageChange(-1);
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+                  <path d="M9 1L2 8L9 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
+                </svg>
+              </StyledPageButton>
+              <StyledPageButton
+                $disabled={page === maxPage}
+                onClick={() => {
+                  maxPage > page && handlePageChange(1);
+                }}
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
+                  <path d="M1 1L8 8L1 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
+                </svg>
+              </StyledPageButton>
+            </StyledPageButtons>
+          </StyledPageBox>
+        </>
+      ) : (
+        <Empty>No Data</Empty>
+      )}
     </StyledContainer>
   );
 };

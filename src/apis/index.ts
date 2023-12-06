@@ -63,7 +63,7 @@ export const refreshAccessToken = async () => {
 
 export const checkAddressIsInvited = async (account: string) => {
   try {
-    const res = await http.get(`/dapdap/api/invite/check-address/${account}`);
+    const res = await http.get(`/api/invite/check-address/${account}`);
     return !!res.data?.is_activated;
   } catch (error) {
     return false;
@@ -72,7 +72,7 @@ export const checkAddressIsInvited = async (account: string) => {
 
 export const inviteCodeActivate = async (account: string, code: string) => {
   try {
-    const res = await http.post(`/dapdap/api/invite/activate`, {
+    const res = await http.post(`/api/invite/activate`, {
       address: account,
       code,
     });

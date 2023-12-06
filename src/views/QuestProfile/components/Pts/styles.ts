@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import type { Align } from './types';
 
 export { StyledCoin } from '@/views/Quest/styles';
+export { LoadingWrapper, Empty } from '../../styles';
 
 export const StyledContainer = styled.div`
   margin-top: 30px;

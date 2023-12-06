@@ -44,7 +44,6 @@ export const formatTotalUsers = (users: number) => {
 };
 
 export const formatPeriodDate = (start: string, end: string) => {
-  console.log(start, end);
   if (!start || !end) return '';
   const patterns = 'yyyy/MM/dd';
   const _start = format(new Date(Number(start)), patterns);

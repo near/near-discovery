@@ -1,4 +1,11 @@
 import Modal from '@/components/Modal';
+
+import { memo, useMemo } from 'react';
+import { ellipsAccount } from '@/utils/account';
+import Loading from '@/components/Icons/Loading';
+import useInviteCode from '@/components/AccountSider/hooks/useInviteCode';
+import useCopy from '@/hooks/useCopy';
+
 import InviteCode from './InviteCode';
 import {
   StyledTitle,
@@ -18,11 +25,9 @@ import {
   StyledRewards,
   StyledUserName,
   StyledUserAddress,
+  LoadingWrapper,
+  Empty,
 } from './styles';
-
-import { memo } from 'react';
-import { ellipsAccount } from '@/utils/account';
-
 import type { Column } from '../Pts/types';
 
 export const COLUMNS: Column[] = [
@@ -53,33 +58,34 @@ export const COLUMNS: Column[] = [
   },
 ];
 
-const data = [
-  {
-    friend: {
-      avatar: '',
-      name: '@GavinAdams8',
-      address: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
-    },
-    code: 'PMEYR',
-    status: 'Pending...',
-    rewards: 20,
-    used: true,
-  },
-];
-
-const Friend = ({ name, address, avatar }: { name: string; address: string; avatar: string }) => {
+const Friend = ({ username, address, avatar }: { username: string; address: string; avatar: string }) => {
   return (
     <>
-      <StyledAvatar />
+      <StyledAvatar src={avatar} />
       <div>
-        <StyledUserName>{name}</StyledUserName>
+        <StyledUserName>{username}</StyledUserName>
         <StyledUserAddress>{ellipsAccount(address)}</StyledUserAddress>
       </div>
     </>
   );
 };
 
-const InviteFirendsModal = ({ open, onClose }: { open: boolean; onClose: VoidFunction }) => {
+const InviteFirendsModal = ({
+  open,
+  list,
+  totalRewards,
+  reward,
+  onClose,
+}: {
+  list: any;
+  totalRewards: number;
+  reward: number;
+  open: boolean;
+  onClose: VoidFunction;
+}) => {
+  const { list: codeList, loading } = useInviteCode(open);
+  const { copy } = useCopy();
+  const newCodes = useMemo(() => codeList.filter((code, i) => !code.is_used && i < 8), [codeList]);
   return (
     <Modal
       display={open}
@@ -90,7 +96,11 @@ const InviteFirendsModal = ({ open, onClose }: { open: boolean; onClose: VoidFun
         <>
           <StyledHeader>
             <StyledSubTitle>New code</StyledSubTitle>
-            <StyledCopyButton>
+            <StyledCopyButton
+              onClick={() => {
+                copy(newCodes.map((code) => code.code).join(','));
+              }}
+            >
               <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
                 <g clip-path="url(#clip0_1078_5958)">
                   <path
@@ -111,18 +121,29 @@ const InviteFirendsModal = ({ open, onClose }: { open: boolean; onClose: VoidFun
               <span>Copy All</span>
             </StyledCopyButton>
           </StyledHeader>
-          <StyledNewCodes>
-            <InviteCode />
-            <InviteCode />
-          </StyledNewCodes>
+          {loading ? (
+            <LoadingWrapper style={{ height: 116 }}>
+              <Loading size={30} />
+            </LoadingWrapper>
+          ) : newCodes.length > 0 ? (
+            <StyledNewCodes>
+              {newCodes.map((code) => (
+                <InviteCode key={code.code} code={code.code} />
+              ))}
+            </StyledNewCodes>
+          ) : (
+            <Empty>No codes.</Empty>
+          )}
+
           <StyledHeader>
-            <StyledSubTitle>Invited friends (12)</StyledSubTitle>
+            <StyledSubTitle>Invited friends ({list.length})</StyledSubTitle>
           </StyledHeader>
           <StyledDescBox>
             <StyledDesc>
-              You invited 12 friends, 6 of them are active, you will get 10 PTS for each active account.
+              You invited {list.length} friends, 6 of them are active, you will get {reward} PTS for each active
+              account.
             </StyledDesc>
-            <StyledClaimButton>Claim 60 PTS</StyledClaimButton>
+            <StyledClaimButton>Claim {totalRewards} PTS</StyledClaimButton>
           </StyledDescBox>
           <StyledTableHeader>
             {COLUMNS.map((column) => (
@@ -132,16 +153,16 @@ const InviteFirendsModal = ({ open, onClose }: { open: boolean; onClose: VoidFun
             ))}
           </StyledTableHeader>
           <StyledBody>
-            {data.map((row) => (
+            {list.map((row: any) => (
               <StyledRow key={row.code}>
                 {COLUMNS.map((column) => (
                   <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
-                    {column.key === 'friend' && <Friend {...row.friend} />}
-                    {column.key === 'code' && <span className={row.used ? 'delete' : ''}>{row.code}</span>}
-                    {column.key === 'status' && row.status}
+                    {column.key === 'friend' && <Friend {...row.invited_user} />}
+                    {column.key === 'code' && <span className="delete">{row.code}</span>}
+                    {column.key === 'status' && (row.status === 'Pending' ? row.status + '...' : row.status)}
                     {column.key === 'rewards' &&
-                      (row.rewards ? (
-                        <StyledRewards>{row.rewards} PTS</StyledRewards>
+                      (row.reward ? (
+                        <StyledRewards>{row.reward} PTS</StyledRewards>
                       ) : (
                         <span className="rewards">-</span>
                       ))}

@@ -3,7 +3,7 @@ import { StyledNewCodeBox, StyledNewCodeBg, StyledNewCode, StyledCopyIcon } from
 import { memo } from 'react';
 import useCopy from '@/hooks/useCopy';
 
-const InviteCode = () => {
+const InviteCode = ({ code }: { code: string }) => {
   const { copy } = useCopy();
   return (
     <StyledNewCodeBox>
@@ -37,10 +37,10 @@ const InviteCode = () => {
           </defs>
         </svg>
       </StyledNewCodeBg>
-      <StyledNewCode>N5VZN</StyledNewCode>
+      <StyledNewCode>{code}</StyledNewCode>
       <StyledCopyIcon
         onClick={() => {
-          copy('N5VZN');
+          copy(code);
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

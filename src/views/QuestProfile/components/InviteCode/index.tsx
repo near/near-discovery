@@ -2,7 +2,7 @@ import { StyledContainer, StyledBg, StyledValue } from './styles';
 
 import { memo } from 'react';
 
-const InviteCode = ({ onClick }: { onClick: VoidFunction }) => {
+const InviteCode = ({ onClick, total }: { onClick: VoidFunction; total: number }) => {
   return (
     <StyledContainer onClick={onClick}>
       <StyledBg>
@@ -38,7 +38,7 @@ const InviteCode = ({ onClick }: { onClick: VoidFunction }) => {
       </StyledBg>
       <StyledValue>
         <span>Invited</span>
-        <span className="num"> 12</span>
+        <span className="num"> {total}</span>
       </StyledValue>
     </StyledContainer>
   );

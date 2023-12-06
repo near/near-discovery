@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export { StyledCoin } from '@/views/Quest/styles';
+export { LoadingWrapper } from '../../styles';
 
 export const StyledContainer = styled.div`
   width: 741px;

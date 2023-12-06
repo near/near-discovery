@@ -6,12 +6,12 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { container } from '@/components/animation';
 
-const Quests = () => {
+const Quests = ({ onLoad, id }: { onLoad: (id: string) => void; id?: string }) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>
-        <Campaign />
-        <QuestLists />
+        <Campaign onLoad={onLoad} />
+        <QuestLists id={id} />
       </motion.div>
     </AnimatePresence>
   );

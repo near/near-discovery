@@ -1,20 +1,17 @@
+import { memo } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { container } from '@/components/animation';
+
 import { StyledContainer, StyledTitle, StyledHeader, StyledUpdateButton, StyledCurrentRow, StyledCell } from './styles';
 import Total from '../Total';
 import Table, { User, PTS } from '../Table';
-
-import { memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-
 import { COLUMNS } from '../Table/config';
-import { container } from '@/components/animation';
+import useLeaderboard from '../../hooks/useLeaderboard';
+import useUserInfo from '../../hooks/useUserInfo';
 
-const Leaderboard = () => {
-  const row = {
-    rank: 4,
-    user: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
-    pts: 10,
-    avatar: '',
-  };
+const Leaderboard = ({ id }: { id?: string }) => {
+  const { loading, list, page, info, maxPage, handlePageChange } = useLeaderboard();
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo(id);
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>
@@ -31,17 +28,19 @@ const Leaderboard = () => {
               <span>Update every 15 mins</span>
             </StyledUpdateButton>
           </StyledHeader>
-          <Total />
-          <StyledCurrentRow>
-            {COLUMNS.map((column) => (
-              <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
-                {column.key === 'rank' && row.rank}
-                {column.key === 'user' && <User user={row.user} avatar={row.avatar} />}
-                {column.key === 'pts' && <PTS pts={row.pts} />}
-              </StyledCell>
-            ))}
-          </StyledCurrentRow>
-          <Table />
+          <Total info={info} />
+          {userInfo.address && (
+            <StyledCurrentRow>
+              {COLUMNS.map((column) => (
+                <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
+                  {column.key === 'rank' && userInfo.rank}
+                  {column.key === 'user' && <User user={userInfo.address} avatar={userInfo.avatar} />}
+                  {column.key === 'pts' && <PTS pts={userInfo.reward} />}
+                </StyledCell>
+              ))}
+            </StyledCurrentRow>
+          )}
+          <Table list={list} maxPage={maxPage} page={page} handlePageChange={handlePageChange} loading={loading} />
         </StyledContainer>
       </motion.div>
     </AnimatePresence>

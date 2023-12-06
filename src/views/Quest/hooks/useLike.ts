@@ -10,7 +10,7 @@ export default function useLike(id: string, category: string) {
   const queryLike = useCallback(async () => {
     if (loading) return;
     try {
-      const result = await get(`/quest/api/user/favorite?id=${id}&category=${category}`);
+      const result = await get(`http://139.162.85.48:8101/api/user/favorite?id=${id}&category=${category}`);
       const data = result.data?.favorite;
       setLike(data);
       setLoading(false);

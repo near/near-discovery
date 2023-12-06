@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+export { LoadingWrapper, Empty } from '../../styles';
+
 export const StyledContainer = styled.div`
   padding-top: 40px;
 `;

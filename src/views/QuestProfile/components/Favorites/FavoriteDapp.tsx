@@ -14,19 +14,19 @@ import {
 
 import { memo } from 'react';
 
-const FavoriteDapp = () => {
+const FavoriteDapp = ({ name, description }: any) => {
   return (
     <StyledDapp>
       <StyledDappIcon />
       <StyledDappInfo>
         <StyledHeader>
-          <StyledDappTitle>SyncSwap</StyledDappTitle>
+          <StyledDappTitle>{name}</StyledDappTitle>
           <StyledDappCoins>
             {Coin}
             <span>10</span>
           </StyledDappCoins>
         </StyledHeader>
-        <StyledDappDesc>Seamless and Efficient Trading hiahhogsohgsohg</StyledDappDesc>
+        <StyledDappDesc>{description}</StyledDappDesc>
         <StyledDappTags>
           <StyledDappTag className="dexs">Dexes</StyledDappTag>
           <StyledDappTag className="bridge">Bridge</StyledDappTag>

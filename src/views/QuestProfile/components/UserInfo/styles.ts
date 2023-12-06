@@ -59,12 +59,20 @@ export const StyledAvatar = styled.img`
   border-radius: 50%;
 `;
 
-export const StyledAddress = styled.div`
+export const StyledName = styled.div`
   color: #fff;
   text-align: center;
   font-size: 32px;
   font-weight: 500;
   margin-top: 30px;
+`;
+
+export const StyledAddress = styled.div`
+  color: #fff;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  margin-top: 10px;
 `;
 
 export const StyledLabels = styled.div`

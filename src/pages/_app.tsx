@@ -164,6 +164,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           autoClose={5000}
           hideProgressBar={true}
           theme="dark"
+          toastStyle={{ backgroundColor: 'transparent', boxShadow: 'none' }}
           newestOnTop
           rtl={false}
           pauseOnFocusLoss

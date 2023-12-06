@@ -1,0 +1,43 @@
+import { useCallback, useEffect, useState } from 'react';
+import useToast from '@/hooks/useToast';
+import { get, post } from '@/utils/http';
+
+export default function useDailyTask() {
+  const [tasks, setTasks] = useState<any>([]);
+  const [loading, setLoading] = useState(false);
+  const [claiming, setClaiming] = useState(false);
+  const toast = useToast();
+
+  const queryTasks = useCallback(async () => {
+    if (loading) return;
+    setLoading(true);
+    try {
+      const result = await get('http://139.162.85.48:8101/api/quest/daily_check_in');
+      const data = result.data || [];
+      setTasks(data);
+      setLoading(false);
+    } catch (err) {
+      setLoading(false);
+    }
+  }, [loading]);
+
+  const claim = useCallback(async () => {
+    if (claiming) return;
+    setClaiming(true);
+    try {
+      await post('http://139.162.85.48:8101/api/quest/daily_check_in', {});
+      setClaiming(false);
+      toast.success({ title: 'Claimed successfully' });
+      queryTasks();
+    } catch (err) {
+      setClaiming(false);
+      toast.fail({ title: 'Claimed failed' });
+    }
+  }, [claiming]);
+
+  useEffect(() => {
+    queryTasks();
+  }, []);
+
+  return { loading, tasks, claiming, claim };
+}

@@ -11,6 +11,7 @@ import {
   StyledCoin,
   StyledMedal,
   StyledSteps,
+  StyledName,
 } from './styles';
 
 import { memo } from 'react';
@@ -21,6 +22,7 @@ const UserInfo = () => {
     <StyledContainer>
       <StyledContent>
         <StyledAvatar />
+        <StyledName>@dappmeup</StyledName>
         <StyledAddress>{ellipsAccount('0xC25d79fc4970479B88068Ce8891eD9bE5799210D')}</StyledAddress>
         <StyledLabels>
           <StyledLabel>

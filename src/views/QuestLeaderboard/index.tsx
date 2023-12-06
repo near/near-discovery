@@ -10,7 +10,8 @@ import { memo, useState } from 'react';
 import type { Tab } from './types';
 
 const QuestLeaderboardView = () => {
-  const [tab, setTab] = useState<Tab>('leaderboard');
+  const [tab, setTab] = useState<Tab>('quests');
+  const [id, setId] = useState<string>();
   return (
     <StyledContainer>
       <Yours />
@@ -28,8 +29,15 @@ const QuestLeaderboardView = () => {
         }}
       />
 
-      {tab === 'leaderboard' && <Leaderboard />}
-      {tab === 'quests' && <Quests />}
+      {tab === 'leaderboard' && <Leaderboard id={id} />}
+      {tab === 'quests' && (
+        <Quests
+          id={id}
+          onLoad={(id) => {
+            setId(id);
+          }}
+        />
+      )}
     </StyledContainer>
   );
 };

@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compiler: { styledComponents: true },
-  reactStrictMode: true,
+  reactStrictMode: false,
   redirects: async () => {
     return [
       {
@@ -49,14 +49,6 @@ const nextConfig = {
     {
       source: '/dapdap/:path*',
       destination: 'https://test-api.dapdap.net/:path*',
-    },
-    {
-      source: '/operations/:path*',
-      destination: 'http://139.162.85.48:9991/operations/:path*',
-    },
-    {
-      source: '/quest/:path*',
-      destination: 'http://139.162.85.48:8101/:path*',
     },
   ],
 };

@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 import type { Align } from '../Pts/types';
 
+export { LoadingWrapper, Empty } from '../../styles';
+
 export const StyledTitle = styled.div`
   color: #fff;
   font-size: 26px;
@@ -53,12 +55,15 @@ export const StyledNewCodes = styled.div`
   padding: 0px 30px;
   margin-top: 20px;
   margin-bottom: 38px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
 `;
 
 export const StyledNewCodeBox = styled.div`
   position: relative;
   width: 203px;
   height: 52px;
+  flex-shrink: 0;
 `;
 
 export const StyledNewCodeBg = styled.div`
@@ -158,7 +163,10 @@ export const StyledTableHeader = styled.div`
   margin-top: 30px;
 `;
 
-export const StyledBody = styled.div``;
+export const StyledBody = styled.div`
+  max-height: calc(100vh - 410px);
+  overflow-x: auto;
+`;
 
 export const StyledCell = styled.div<{ $gap?: number; $width: number; $align?: Align }>`
   display: flex;
@@ -168,7 +176,7 @@ export const StyledCell = styled.div<{ $gap?: number; $width: number; $align?: A
   justify-content: ${({ $align }) => ($align === 'left' ? 'flex-start' : $align === 'right' ? 'flex-end' : 'center')};
 
   & .delete {
-    text-decoration-line: strikethrough;
+    text-decoration: line-through;
   }
 
   & .rewards {

@@ -9,7 +9,7 @@ export default function useQuestList(campaign_id?: string) {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`/quest/api/quest/list?campaign_id=${campaign_id}`);
+      const result = await get(`http://139.162.85.48:8101/api/quest/list?campaign_id=${campaign_id}`);
       const data = result.data || [];
       const _quests: any = {};
       data.forEach((record: any) => {

@@ -9,7 +9,7 @@ export default function useCampaignList() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get('/operations/Quest/GetCampaignList');
+      const result = await get('http://139.162.85.48:9991/operations/Quest/GetCampaignList');
       setCampaigns(result.data?.data || []);
       setLoading(false);
     } catch (err) {

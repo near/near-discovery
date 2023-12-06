@@ -1,3 +1,5 @@
+import { memo, useState } from 'react';
+
 import UserInfo from './components/UserInfo';
 import DailyTask from './components/DailyTask';
 import Tabs from './components/Tabs';
@@ -8,13 +10,14 @@ import Pts from './components/Pts';
 import InviteFirendsModal from './components/InviteFirendsModal';
 import { StyledContainer, StyledTabsBox } from './styles';
 
-import { memo, useState } from 'react';
+import useInviteList from './hooks/useInviteList';
 
 import type { Tab } from './types';
 
 const QuestLeaderboardView = () => {
-  const [tab, setTab] = useState<Tab>('pts');
+  const [tab, setTab] = useState<Tab>('quests');
   const [openCodes, setOpenCodes] = useState(false);
+  const { loading, list, totalRewards, reward } = useInviteList();
   return (
     <>
       <StyledContainer>
@@ -29,8 +32,9 @@ const QuestLeaderboardView = () => {
           />
           <InviteCode
             onClick={() => {
-              setOpenCodes(true);
+              if (list.length > 0) setOpenCodes(true);
             }}
+            total={list.length}
           />
         </StyledTabsBox>
         {tab === 'quests' && <Quests />}
@@ -39,6 +43,9 @@ const QuestLeaderboardView = () => {
       </StyledContainer>
       <InviteFirendsModal
         open={openCodes}
+        list={list}
+        totalRewards={totalRewards}
+        reward={reward}
         onClose={() => {
           setOpenCodes(false);
         }}

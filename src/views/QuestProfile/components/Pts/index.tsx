@@ -1,3 +1,10 @@
+import { motion, AnimatePresence } from 'framer-motion';
+import { memo } from 'react';
+import { container } from '@/components/animation';
+import { format } from 'date-fns';
+import Loading from '@/components/Icons/Loading';
+import useClaimedList from '../../hooks/useClaimedList';
+
 import {
   StyledContainer,
   StyledHeader,
@@ -11,12 +18,9 @@ import {
   StyledQuestTitle,
   StyledQuestRewards,
   StyledCoin,
+  LoadingWrapper,
+  Empty,
 } from './styles';
-
-import { motion, AnimatePresence } from 'framer-motion';
-import { memo } from 'react';
-import { container } from '@/components/animation';
-
 import type { Column } from './types';
 
 export const COLUMNS: Column[] = [
@@ -41,35 +45,17 @@ export const COLUMNS: Column[] = [
   },
 ];
 
-const data = [
-  {
-    quest: 1,
-    rewards: 20,
-    time: 'Sep 12, 2023, 20:45',
-  },
-  {
-    quest: 2,
-    rewards: 20,
-    time: 'Sep 12, 2023, 20:45',
-  },
-  {
-    quest: 3,
-    rewards: 20,
-    time: 'Sep 12, 2023, 20:45',
-  },
-];
-
-const Quest = () => {
+const Quest = ({ logo, name, reward }: any) => {
   return (
     <>
       <StyledQuestIconBox>
-        <StyledQuestIcon />
+        <StyledQuestIcon src={logo} />
       </StyledQuestIconBox>
       <div>
-        <StyledQuestTitle>Newbie</StyledQuestTitle>
+        <StyledQuestTitle>{name}</StyledQuestTitle>
         <StyledQuestRewards>
           <StyledCoin $size={19} />
-          <span>20</span>
+          <span>{reward}</span>
         </StyledQuestRewards>
       </div>
     </>
@@ -77,6 +63,7 @@ const Quest = () => {
 };
 
 const Pts = () => {
+  const { loading, list } = useClaimedList();
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>
@@ -88,19 +75,27 @@ const Pts = () => {
               </StyledColumn>
             ))}
           </StyledHeader>
-          <StyledBody>
-            {data.map((row) => (
-              <StyledRow key={row.quest}>
-                {COLUMNS.map((column) => (
-                  <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
-                    {column.key === 'quest' && <Quest />}
-                    {column.key === 'reward' && <StyledRewards>{row.rewards}</StyledRewards>}
-                    {column.key === 'time' && <span>{row.time}</span>}
-                  </StyledCell>
-                ))}
-              </StyledRow>
-            ))}
-          </StyledBody>
+          {loading ? (
+            <LoadingWrapper>
+              <Loading size={40} />
+            </LoadingWrapper>
+          ) : list.length > 0 ? (
+            <StyledBody>
+              {list.map((row: any) => (
+                <StyledRow key={row.id}>
+                  {COLUMNS.map((column) => (
+                    <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
+                      {column.key === 'quest' && <Quest {...row} />}
+                      {column.key === 'reward' && <StyledRewards>{row.reward}</StyledRewards>}
+                      {column.key === 'time' && <span>{format(row.claimed_at, 'MMM dd,yyyy,HH:mm')}</span>}
+                    </StyledCell>
+                  ))}
+                </StyledRow>
+              ))}
+            </StyledBody>
+          ) : (
+            <Empty>No Data.</Empty>
+          )}
         </StyledContainer>
       </motion.div>
     </AnimatePresence>

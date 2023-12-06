@@ -5,7 +5,7 @@ import type { InviteCodeRecord } from '../types';
 
 export default function (show: boolean) {
   const { account } = useAccount();
-  const [list, setList] = useState<InviteCodeRecord[]>();
+  const [list, setList] = useState<InviteCodeRecord[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
