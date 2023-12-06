@@ -3,6 +3,23 @@ import type { Chain } from '@/types';
 //TODO: need wrap token address
 //TODO: need all chains live on dapdap
 
+export const colors: { [key: number]: string } = {
+  8453: '0, 56, 255',
+  5000: '65, 109, 109',
+  1: '',
+  42161: '25, 70, 137',
+  43114: '142, 3, 3',
+  56: '151, 110, 6',
+  59144: '',
+  1088: '',
+  10: '169, 51, 51',
+  137: '67, 25, 137',
+  1101: '169, 84, 255',
+  324: '87, 53, 181',
+  100: '10, 71, 23',
+  0: '235, 244, 121',
+};
+
 export default {
   8453: {
     chainId: 8453,

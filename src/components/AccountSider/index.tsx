@@ -5,6 +5,8 @@ import useTxs from '../Bridge/hooks/useTxs';
 import BridgeWrapper from './components/BridgeWrapper';
 import Header from './components/Header';
 import AccountWrapper from './components/AccountWrapper';
+import useAccount from '@/hooks/useAccount';
+import { colors } from '@/config/chains';
 
 const StyledPanel = styled.div<{ display: number }>`
   width: 352px;
@@ -26,10 +28,14 @@ const Content = styled.div`
   position: relative;
   z-index: 60;
 `;
-const Bg = styled.div`
+const Bg = styled.div<{ $chain: number }>`
   width: 100%;
   height: 40%;
-  background: linear-gradient(45deg, rgba(235, 244, 121, 0.2) 10%, rgba(20, 20, 20, 0.8) 50%);
+  background: linear-gradient(
+    45deg,
+    rgba(${({ $chain }) => colors[$chain] || colors[0]}, 0.2) 10%,
+    rgba(20, 20, 20, 0.8) 50%
+  );
 
   position: absolute;
   z-index: 51;
@@ -51,6 +57,7 @@ const AccountSider = () => {
   const [tab, setTab] = useState<'bridge' | 'account'>('account');
   const [showChains, setShowChains] = useState(false);
   const [showCodes, setShowCodes] = useState(false);
+  const { chainId } = useAccount();
 
   useEffect(() => {
     if (layoutStore.showAccountSider && defaultTab === 'bridge') {
@@ -70,7 +77,7 @@ const AccountSider = () => {
   }, [showCodes]);
 
   return (
-    <StyledPanel display={layoutStore.showAccountSider ? 1:0}>
+    <StyledPanel display={layoutStore.showAccountSider ? 1 : 0}>
       <Content>
         <Header showCodes={showCodes} setShowCodes={setShowCodes} />
         {tab === 'account' && (
@@ -90,7 +97,7 @@ const AccountSider = () => {
           />
         )}
       </Content>
-      <Bg />
+      <Bg $chain={chainId || 0} />
       {layoutStore.showAccountSider && (
         <CloseIcon
           onClick={() => {
