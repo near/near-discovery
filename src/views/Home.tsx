@@ -1,13 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/display-name */
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
 
-import chains from '@/config/chains';
-import { dapps } from '@/config/dapps';
+import { get } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -61,11 +61,14 @@ const syncIcon = 'https://assets.dapdap.net/images/bafkreihzr73on5kcq3zgwjg3jwum
 const carouselbg = 'https://assets.dapdap.net/images/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty.svg';
 
 //home-deepdive-scatter
-const deppDiveRightIcon = 'https://assets.dapdap.net/images/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya.svg';
-const decentralizedIcon = 'https://assets.dapdap.net/images/bafkreibhxqbh3tlqm6cqwqmu7j6afzsc7qab743bvn43zg4klk54tvyceq.svg';
+const deppDiveRightIcon =
+  'https://assets.dapdap.net/images/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya.svg';
+const decentralizedIcon =
+  'https://assets.dapdap.net/images/bafkreibhxqbh3tlqm6cqwqmu7j6afzsc7qab743bvn43zg4klk54tvyceq.svg';
 const learningOne = 'https://assets.dapdap.net/images/bafkreigsyle3grerozvpmp42vhv3d36ny4gdc4vkgthcwefjyinvoangwy.svg';
 const learningTwo = 'https://assets.dapdap.net/images/bafybeibgwjzaepfwgtmej4dnjjvtlnbtqukkn3fkde4ufvejnc2hf4yofi.svg';
-const learningThree = 'https://assets.dapdap.net/images/bafkreihnl55yd5ud2nchalsgeyzy2tjq7cqw2bvp25cikxkixj55h6zyte.svg';
+const learningThree =
+  'https://assets.dapdap.net/images/bafkreihnl55yd5ud2nchalsgeyzy2tjq7cqw2bvp25cikxkixj55h6zyte.svg';
 
 const HomePage = styled.div`
   padding: 0 12% 80px 12%;
@@ -153,11 +156,11 @@ const Content = styled.div`
       margin-bottom: 100px;
 
       .tab-content-item {
-        margin: 30px 20px 0 0; 
+        margin: 30px 20px 0 0;
         border-bottom: 1px solid #383b48;
         display: flex;
         width: 30%;
-        flex-basis: calc(33.3333% - 20px); 
+        flex-basis: calc(33.3333% - 20px);
         box-sizing: border-box;
         .content-item-img {
           margin-right: 16px;
@@ -205,28 +208,28 @@ const Content = styled.div`
         }
         @media (max-width: 1500px) {
           flex-basis: calc(50% - 20px);
-          .content-item-img{
+          .content-item-img {
             width: 15%;
           }
-          .content-item-text{
+          .content-item-text {
             width: 60%;
           }
         }
         @media (max-width: 1400px) {
           flex-basis: calc(50% - 20px);
-          .content-item-img{
+          .content-item-img {
             width: 15%;
           }
-          .content-item-text{
+          .content-item-text {
             width: 50%;
           }
         }
         @media (max-width: 975px) {
           flex-basis: calc(100% - 20px);
-          .content-item-img{
+          .content-item-img {
             width: 15%;
           }
-          .content-item-text{
+          .content-item-text {
             width: 70%;
           }
         }
@@ -250,7 +253,7 @@ const Content = styled.div`
         color: #ffffff;
         text-align: center;
         position: relative;
-        a{
+        a {
           color: #ffffff;
           text-decoration: none;
         }
@@ -262,8 +265,18 @@ const Content = styled.div`
           font-size: 20px;
           font-weight: 700;
           margin: 8px 0 12px 0;
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         p {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
+          text-overflow: ellipsis;
           font-size: 14px;
           color: #979abe;
         }
@@ -720,7 +733,7 @@ const CarouselList = styled.div`
           line-height: 43px;
           border-radius: 12px;
           border: 1px solid #373a53;
-          a{
+          a {
             color: #ffffff;
             text-decoration: none;
           }
@@ -861,22 +874,41 @@ const initialLearningData = [
 ];
 
 const HomeContent: NextPageWithLayout = () => {
+  const [networkList, setNetworkList] = useState<any[]>([]);
+  const [dappList, setDappList] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchNetworkData = async () => {
+      try {
+        const resultNetwork = await get(`${QUEST_PATH}:9991/operations/Network/GetList`);
+        setNetworkList(resultNetwork.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultNetwork data:', error);
+      }
+    };
+    const fetchDappData = async () => {
+      try {
+        const resultDapp = await get(`${QUEST_PATH}:9991/operations/Dapp/GetList`);
+        setDappList(resultDapp.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultDapp data:', error);
+      }
+    };
+    fetchDappData();
+    fetchNetworkData();
+  }, []);
+
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
   });
-
   const handleTabClick = (path: string) => {
     setSelectedTab(path);
   };
 
   const [activeIndex, setActiveIndex] = useState(0);
-
   const handleCarouselClick = useCallback(() => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
   }, [carouselData.length]);
-
   const [learningData, setLearningData] = useState(initialLearningData);
-
   const handleLeftClick = () => {
     const newData = [...learningData];
     const lastItem = newData.pop();
@@ -885,7 +917,6 @@ const HomeContent: NextPageWithLayout = () => {
       setLearningData(newData);
     }
   };
-
   const handleRightClick = () => {
     const newData = [...learningData];
     const firstItem = newData.shift();
@@ -957,26 +988,34 @@ const HomeContent: NextPageWithLayout = () => {
             <div className="carousel-right-icon" onClick={handleCarouselClick}>
               <img src="https://assets.dapdap.net/images/arrows-carousel.png" alt="" />
             </div>
-            {carouselData.map((child, index) => (
-              <Carousel key={index} active={index === activeIndex}>
-                <div className="carousel-content">
-                  <img src={syncIcon} alt="" />
-                  <h1>{child.title}</h1>
-                  <Tag>
-                    <div className="tag-item Dexes">Dexes</div>
-                    <div className="tag-item Bridge">Bridge</div>
-                    <div className="tag-item Liquidity">Liquidity</div>
-                  </Tag>
-                  <p>Seamless and Efficient Trading on zk Rollups</p>
-                  <div className="carousel-btn">
-                    <div className="carousel-btn-item"><Link href="/dapps-details">View Detail</Link></div>
-                    <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                      <Link href='/dapp/Syncswap'>Dapp</Link> <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+            {dappList
+              .filter((dapp) => dapp.recommend === true)
+              .map((child, index) => (
+                <Carousel key={index} active={index === activeIndex}>
+                  <div className="carousel-content">
+                    <img src={child.recommend_icon} alt="" />
+                    <h1>{child.title}</h1>
+                    <Tag>
+                      {child.tag &&
+                        child.tag.map((tagItem: string, index: number) => (
+                          <div className={`tag-item ${tagItem}`} key={index}>
+                            {tagItem}
+                          </div>
+                        ))}
+                    </Tag>
+                    <p>{child.description}</p>
+                    <div className="carousel-btn">
+                      <div className="carousel-btn-item">
+                        <Link href="/dapps-details">View Detail</Link>
+                      </div>
+                      <div className="carousel-btn-item" style={{ marginRight: '0' }}>
+                        <Link href={child.route}>Dapp</Link>{' '}
+                        <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              </Carousel>
-            ))}
+                </Carousel>
+              ))}
           </CarouselList>
 
           <div className="token-tab-list">
@@ -1001,8 +1040,8 @@ const HomeContent: NextPageWithLayout = () => {
           </div>
           {selectedTab == 'TBD' ? (
             <div className="tab-content">
-              {dapps
-                .filter((dapp) => dapp.TBD_TOKEN === 'Y')
+              {dappList
+                .filter((dapp) => dapp.tbd_token === 'Y')
                 .slice(0, 9)
                 .map((dapp, index) => {
                   return (
@@ -1014,11 +1053,12 @@ const HomeContent: NextPageWithLayout = () => {
                         <h1>{dapp.name}</h1>
                         <p>{dapp.description}</p>
                         <Tag>
-                          {dapp.tags.map((tag, index) => (
-                            <div className={`tag-item ${tag}`} key={index}>
-                              {tag}
-                            </div>
-                          ))}
+                          {dapp.tag &&
+                            dapp.tag.map((tagItem: string, index: number) => (
+                              <div className={`tag-item ${tagItem}`} key={index}>
+                                {tagItem}
+                              </div>
+                            ))}
                         </Tag>
                       </div>
                       <div className="content-item-btn">
@@ -1026,7 +1066,7 @@ const HomeContent: NextPageWithLayout = () => {
                           <Link href="/dapps-details">Detail</Link>
                         </div>
                         <div className="item-btn-item">
-                          <Link href={dapp.dappRoute}>Dapp</Link>
+                          <Link href={dapp.route}>Dapp</Link>
                         </div>
                       </div>
                     </div>
@@ -1036,8 +1076,8 @@ const HomeContent: NextPageWithLayout = () => {
           ) : null}
           {selectedTab == 'token' ? (
             <div className="tab-content">
-              {dapps
-                .filter((dapp) => dapp.TBD_TOKEN === 'N')
+              {dappList
+                .filter((dapp) => dapp.tbd_token === 'N')
                 .slice(0, 9)
                 .map((dapp, index) => {
                   return (
@@ -1049,11 +1089,12 @@ const HomeContent: NextPageWithLayout = () => {
                         <h1>{dapp.name}</h1>
                         <p>{dapp.description}</p>
                         <Tag>
-                          {dapp.tags.map((tag, index) => (
-                            <div className={`tag-item ${tag}`} key={index}>
-                              {tag}
-                            </div>
-                          ))}
+                          {dapp.tag &&
+                            dapp.tag.map((tagItem: string, index: number) => (
+                              <div className={`tag-item ${tagItem}`} key={index}>
+                                {tagItem}
+                              </div>
+                            ))}
                         </Tag>
                       </div>
                       <div className="content-item-btn">
@@ -1061,7 +1102,7 @@ const HomeContent: NextPageWithLayout = () => {
                           <Link href="/dapps-details">Detail</Link>
                         </div>
                         <div className="item-btn-item">
-                          <Link href={dapp.dappRoute}>Dapp</Link>
+                          <Link href={dapp.route}>Dapp</Link>
                         </div>
                       </div>
                     </div>
@@ -1082,19 +1123,18 @@ const HomeContent: NextPageWithLayout = () => {
             </ViewAll>
           </div>
           <div className="explore-layer-list">
-            {Object.values(chains)
-              .slice(0, 8)
-              .map((child, index) => (
+            {networkList &&
+              networkList.slice(0, 8).map((child, index) => (
                 <div className="layer-list-item" key={index}>
-                  <Link href='/chains-details'>
-                    <img src={child.icon} alt="" />
-                    <h1>{child.chainName}</h1>
-                    <Gold>
+                  <Link href="/chains-details">
+                    <img src={child.logo} alt="" />
+                    <h1>{child.name}</h1>
+                    {/* <Gold>
                       <img src="https://assets.dapdap.net/images/gold.png" alt="" className="gold-icon" />
                       <p>10</p>
-                    </Gold>
-                    <p>Ethereum scalability with zkEVM performance and security</p>
-                    {child.chainName === 'Polygon zkEVM' && (
+                    </Gold> */}
+                    <p>{child.description}</p>
+                    {child.name === 'Polygon zkEVM' && (
                       <div className="list-item-bottom">
                         <Link href="/warmup">
                           Deep Dive
@@ -1179,14 +1219,15 @@ const HomeContent: NextPageWithLayout = () => {
               </div>
             </div>
             <div className="shortcuts-content-list">
-              {Object.values(chains).map((child, index) => (
-                <div style={{ display: 'inline-block' }} key={index}>
-                  <div className="shortcuts-list-item">
-                    <img src={child.icon} alt="" />
-                    {child.chainName}
+              {networkList &&
+                networkList.map((child, index) => (
+                  <div style={{ display: 'inline-block' }} key={index}>
+                    <div className="shortcuts-list-item">
+                      <img src={child.logo} alt="" />
+                      {child.name}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </div>
           </div>
         </div>

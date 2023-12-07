@@ -1,7 +1,9 @@
 import { ethers } from 'ethers';
 import Link from 'next/link';
 import styled from 'styled-components';
-
+import React, { useCallback, useEffect, useState } from 'react';
+import { get } from '@/utils/http';
+import { QUEST_PATH } from '@/config/quest';
 import chains from '@/config/chains';
 import { ethereum } from '@/config/tokens/ethereum';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -12,11 +14,13 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const blockchainsBg = 'https://assets.dapdap.net/images/bafkreic3dbmrzuihpcmtgjbxvc7ipyu7hvfvsrhlvfv4uwibwhedfh7vmi.svg';
+const blockchainsBg =
+  'https://assets.dapdap.net/images/bafkreic3dbmrzuihpcmtgjbxvc7ipyu7hvfvsrhlvfv4uwibwhedfh7vmi.svg';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
 const leftarrow = 'https://assets.dapdap.net/images/bafkreihvymef5y4q6a5lpnwea4fcygi4wrrb2tbzitswc3xnaufs6qnzjy.svg';
 const arrowBlock = 'https://assets.dapdap.net/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
-const chainsconetentImg = 'https://assets.dapdap.net/images/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq.svg';
+const chainsconetentImg =
+  'https://assets.dapdap.net/images/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq.svg';
 const BlockchainsPage = styled.div`
   color: #ffffff;
   padding: 0 12% 80px 12%;
@@ -83,12 +87,12 @@ const BlockchainsConetent = styled.div`
     border-radius: 20px;
     padding: 19px 12px 38px 12px;
     position: relative;
-    @media (max-width:1250px) {
+    @media (max-width: 1250px) {
       flex-basis: calc(45% - 20px);
     }
-    &:hover{
+    &:hover {
       border: 1px #ebf479 solid;
-      .list-item-bottom{
+      .list-item-bottom {
         display: inline-block;
       }
     }
@@ -120,6 +124,7 @@ const BlockchainsConetent = styled.div`
           padding: 6px 12px;
           font-weight: 500;
           cursor: pointer;
+          width: fit-content;
         }
       }
     }
@@ -146,7 +151,7 @@ const BlockchainsConetent = styled.div`
     h4 {
       font-size: 16px;
       color: #ebf479;
-      a{
+      a {
         color: #ebf479;
       }
       img {
@@ -215,9 +220,30 @@ const Footer = styled.div`
 `;
 
 const BlockchainsColumn: NextPageWithLayout = () => {
+  const [networkList, setNetworkList] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchNetworkData = async () => {
+      try {
+        const resultNetwork = await get(`${QUEST_PATH}:9991/operations/Network/GetList`);
+        setNetworkList(resultNetwork.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultNetwork data:', error);
+      }
+    };
+    fetchNetworkData();
+  }, []);
 
-  const addMetaMask = async ({ index, chainId, chainName, rpcUrls }: { index: number; chainId: number; chainName: string; rpcUrls: string[] }) => {
-
+  const addMetaMask = async ({
+    index,
+    chainId,
+    chainName,
+    rpcUrls,
+  }: {
+    index: number;
+    chainId: number;
+    chainName: string;
+    rpcUrls: string[];
+  }) => {
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
 
     etherProvider
@@ -233,7 +259,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
           etherProvider.send('wallet_addEthereumChain', [chain]);
         }
       });
-  }
+  };
   return (
     <BlockchainsPage>
       <BreadCrumbs>
@@ -252,48 +278,55 @@ const BlockchainsColumn: NextPageWithLayout = () => {
       </BlockchainsBanner>
 
       <BlockchainsConetent>
-        {Object.values(chains).map((child, index) => (
-          <>
-            <div className="blockchains-conetent-item" key={index}>
-              <div className="content-item-title">
-                <div className="item-title-img">
-                  <img src={child.icon} alt="" />
+        {networkList &&
+          networkList.map((child, index) => (
+            <>
+              <div className="blockchains-conetent-item" key={index}>
+                <div className="content-item-title">
+                  <div className="item-title-img">
+                    <img src={child.logo} alt="" />
+                  </div>
+                  <div className="item-title-right">
+                    <h1>{child.name}</h1>
+                    <p
+                      onClick={() =>
+                        addMetaMask({
+                          index,
+                          chainId: child.chain_id,
+                          chainName: child.name,
+                          rpcUrls: child.rpc,
+                        })
+                      }
+                    >
+                      Add to MetaMask <img src={diagonaltop} alt="" />
+                    </p>
+                  </div>
                 </div>
-                <div className="item-title-right">
-                  <h1>{child.chainName}</h1>
-                  <p onClick={() => addMetaMask({ index, chainId: child.chainId, chainName: child.chainName,  rpcUrls: child.rpcUrls })}>
-                    Add to MetaMask <img src={diagonaltop} alt="" />
-                  </p>
-                </div>
+                <p className="body-paragraph">{child.description}</p>
+                <p className="minor-paragraph">Technology</p>
+                <h3>{child.technology}</h3>
+                <p className="minor-paragraph">Native Token</p>
+                {child.tbd_token === 'Y' ? <h3>Token-TBD🔥</h3> : <h3>Native token</h3>}
+                <h4>
+                  <Link href="/chains-details">Learn more</Link>
+                  <img src={leftarrow} alt="" />
+                </h4>
+                {child.chainName === 'Polygon zkEVM' && (
+                  <div className="list-item-bottom">
+                    <Link href="/warmup">
+                      Deep Dive
+                      <img src={arrowBlock} alt="" />
+                    </Link>
+                  </div>
+                )}
               </div>
-              <p className="body-paragraph">
-                Polygon zkEVM Beta is the leading ZK scaling solution that is equivalent to Ethereum Virtual Machine:
-                The vast majority of existing smart contracts, developer tools and wallets work seamlessly.
-              </p>
-              <p className="minor-paragraph">Technology</p>
-              <h3>ZK Rollup</h3>
-              <p className="minor-paragraph">Native Token</p>
-              <h3>TBD🔥</h3>
-              <h4>
-                <Link href="/chains-details">Learn more</Link>
-                <img src={leftarrow} alt="" />
-              </h4>
-              {child.chainName === 'Polygon zkEVM' && (
-                <div className="list-item-bottom">
-                  <Link href="/warmup">
-                    Deep Dive
-                    <img src={arrowBlock} alt="" />
-                  </Link>
+              {index === 4 && (
+                <div className="blockchains-conetent-item conetent-item-img">
+                  <img src={chainsconetentImg} alt="" />
                 </div>
               )}
-            </div>
-            {index === 4 && (
-              <div className="blockchains-conetent-item conetent-item-img">
-                <img src={chainsconetentImg} alt="" />
-              </div>
-            )}
-          </>
-        ))}
+            </>
+          ))}
       </BlockchainsConetent>
       <Footer>
         <div className="footer-item footer-left">
