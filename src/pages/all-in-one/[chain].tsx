@@ -9,6 +9,7 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useRouter } from 'next/router';
+import useAddAction from '@/hooks/useAddAction';
 
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -190,6 +191,7 @@ const AllInOne: NextPageWithLayout = () => {
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
   const [switching, setSwitching] = useState(false);
+  const { addAction } = useAddAction('all-in-one');
 
   const handleSelectItemClick = () => {
     setIsSelectItemClicked(!isSelectItemClicked);
@@ -317,6 +319,7 @@ const AllInOne: NextPageWithLayout = () => {
                     title: 'Connect with the NEAR community.',
                     description: 'Become part of the NEAR community.',
                   }}
+                  componentProps={{ addAction }}
                 />
               </div>
             </>

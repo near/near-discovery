@@ -40,7 +40,7 @@ const DailyTask = () => {
                         />
                       </svg>
                     )}
-                    {task.status === 'will_claim' && <StyledCoin $size={19} />}
+                    {['will_claim', 'claim'].includes(task.status) && <StyledCoin $size={19} />}
                   </StyledDayIcon>
                   <StyledDayValue>+{task.reward} PTS</StyledDayValue>
                 </StyledDay>

@@ -1,5 +1,3 @@
-import type { Token } from '@/types';
-
 export const dapps = [
   {
     name: 'Agni Finance',
@@ -15,20 +13,37 @@ export const dapps = [
       5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
     } as { [key: number]: string },
   },
-  // {
-  //   name: 'Ammos Finance',
-  //   dappRoute: '/dapp/agni-finance',
-  //   TBD_TOKEN: 'Y',
-  //   description: 'Ultra capital-efficient decentralised exchange with low fees, built on Mantle Layer 2.', // dapp radar
-  //   tags: ['Dexes'],
-  //   type: 'dex',
-  //   on_chain_ids: [5000], // get chain config from chains.ts
-  //   DEFAULT_CHAIN_ID: 5000,
-  //   logo: 'https://assets.dapdap.net/images/bafkreidzxjgiaisjnva6rjdsvcr5f4urskismfu4dljfyby5l3hxdnjx5u.svg',
-  //   dappSrc: {
-  //     5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
-  //   } as { [key: number]: string },
-  // },
+  {
+    name: 'Ammos Finance',
+    dappRoute: '/dapp/ammos-finance',
+    TBD_TOKEN: 'Y',
+    description: 'Ultra capital-efficient decentralised exchange with low fees, built on Mantle Layer 2.', // dapp radar
+    tags: ['Dexes'],
+    type: 'dex',
+    on_chain_ids: [5000], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 5000,
+    logo: 'https://assets.dapdap.net/images/bafkreidzxjgiaisjnva6rjdsvcr5f4urskismfu4dljfyby5l3hxdnjx5u.svg',
+    extendProps: {
+      defaultDex: 'Ammos Finance',
+    },
+    dappSrc: {
+      5000: 'dapdapbos.near/widget/DappEntry.MantleSwap',
+    } as { [key: number]: string },
+  },
+  {
+    name: 'Velodrome V1',
+    dappRoute: '/dapp/velodrome-v1',
+    TBD_TOKEN: 'Y',
+    description: 'Protocol Information. A revolutionary new AMM based on Solidly launched on Optimism.', // dapp radar
+    tags: ['Dexes'],
+    type: 'dex',
+    on_chain_ids: [10], // get chain config from chains.ts
+    DEFAULT_CHAIN_ID: 10,
+    logo: 'https://ipfs.near.social/ipfs/bafkreieey4ie6pk6eyg3nrwnkdqlxb4gff3t4pkdq3ihaag2x3qbi3k7em',
+    dappSrc: {
+      10: 'dapdapbos.near/widget/DappEntry.OptimismSwap',
+    } as { [key: number]: string },
+  },
   {
     name: 'FusionX V3',
     dappRoute: '/dapp/fusionx-v3',
@@ -341,7 +356,6 @@ export const dapps = [
       137: 'dapdapbos.near/widget/DappEntry.PolygonSwap',
     } as { [key: number]: string },
   },
-
   {
     name: 'HorizonDEX',
     dappRoute: '/dapp/horizonDEX',
