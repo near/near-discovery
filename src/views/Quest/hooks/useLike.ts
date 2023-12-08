@@ -28,7 +28,7 @@ export default function useLike(id: string, category: string) {
         title: 'Liking',
       });
       try {
-        await post('/quest//api/user/favorite', {
+        await post(`${QUEST_PATH}:8101/api/user/favorite`, {
           id,
           category,
           favorite,

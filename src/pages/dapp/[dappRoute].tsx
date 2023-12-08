@@ -1,28 +1,19 @@
-import { useSetChain } from '@web3-onboard/react';
-import { useRouter } from 'next/router';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import chains from '@/config/chains';
-import { dapps } from '@/config/dapps';
-import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useLayoutStore } from '../../stores/layout';
+import { useLayoutStore } from '@/stores/layout';
+import { useDappStore } from '@/stores/dapp';
+import { useChainsStore } from '@/stores/chains';
 import { useCallback } from 'react';
+import useAccount from '@/hooks/useAccount';
 
 // set dynamic routes for dapps in config file
 
-const dappSrcMap = {
-  dex: 'dapdapbos.near/widget/DappSwapRouter',
-} as { [key: string]: string };
-
 export const DappPage: NextPageWithLayout = () => {
-  const router = useRouter();
-
-  const { dappRoute } = router.query;
-  console.log('dappRoute: ', dappRoute);
-
+  const chains = useChainsStore((store: any) => store.chains);
+  const { chainId } = useAccount();
+  const dapp = useDappStore((store: any) => store.dapp);
   const setLayoutStore = useLayoutStore((store) => store.set);
-
   const bridgeCb = useCallback(
     () =>
       setLayoutStore({
@@ -32,44 +23,34 @@ export const DappPage: NextPageWithLayout = () => {
     [],
   );
 
-  const [
-    {
-      connectedChain, // the current chain the user's wallet is connected to
-    },
-  ] = useSetChain();
+  if (!dapp || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
 
-  const dappConfig = dapps.find((dapp) => typeof dappRoute === 'string' && dapp.dappRoute.indexOf(dappRoute) > -1);
+  const dappChains = dapp.dapp_network?.map((network: any) =>
+    chains.find((_chain: any) => _chain.id === network.network_id),
+  );
+  let default_chain_id = dapp.default_chain_id;
+  if (!default_chain_id) {
+    const default_chain = chains.find((_chain: any) => _chain.id === dapp.default_network_id);
+    default_chain_id = default_chain.chain_id;
+  }
+  const curChain = chains.find((_chain: any) => _chain.chain_id === default_chain_id);
+  const network = dapp.dapp_network?.find((_network: any) => _network.network_id === curChain.id);
 
-  if (!dappConfig || !dappRoute) return <></>;
-
-  const DEFAULT_CHAIN_ID = dappConfig.DEFAULT_CHAIN_ID;
-
-  const CHAIN_LIST = dappConfig.on_chain_ids.map((id) => {
-    return chains[id];
-  });
-
-  const curChainId = connectedChain ? eval(connectedChain.id) : DEFAULT_CHAIN_ID;
-
-  const dappSrc = dappConfig.dappSrc[curChainId] || dappConfig.dappSrc[DEFAULT_CHAIN_ID];
-
-  if (!dappSrc) return <></>;
-
+  if (!network?.dapp_src) return <div />;
+  console.log(network.dapp_src);
   return (
     <ComponentWrapperPage
       componentProps={{
-        chainId: curChainId,
-        name: dappConfig.name,
-        CHAIN_LIST,
-        DEFAULT_CHAIN_ID,
-        dappConfig,
-        curChainId,
-        chains,
-        curChain: chains[curChainId],
-        dappSrc: dappSrc,
+        chainId,
+        name: dapp.name,
+        CHAIN_LIST: dappChains,
+        DEFAULT_CHAIN_ID: dapp.default_chain_id,
+        curChain,
+        defaultDex: dapp.name,
+        ...dapp,
         bridgeCb,
-        ...(dappConfig.extendProps || {}),
       }}
-      src={dappSrcMap[dappConfig.type || 'undefined'] || dappSrc}
+      src={network.dapp_src}
     />
   );
 };

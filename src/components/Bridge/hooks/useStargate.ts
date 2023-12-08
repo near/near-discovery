@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { chainCofig } from '@/config/bridge';
 import useAccount from '@/hooks/useAccount';
 import { usePriceStore } from '@/stores/price';
+import useAddAction from '@/hooks/useAddAction';
 
 import type { Chain, Token } from '../types';
 
@@ -13,6 +14,7 @@ const { JsonRpcProvider } = providers;
 export default function useStargate() {
   const { account, provider } = useAccount();
   const [fee, setFee] = useState();
+  const { addAction } = useAddAction('wallet/bridge');
   const priceStore = usePriceStore((store) => store.price);
   const getQouteInfo = async ({
     targetToken,
@@ -243,6 +245,17 @@ export default function useStargate() {
       onSuccess(tx.hash);
       const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
       const _bridgeTxs = JSON.parse(bridgeTxs);
+      addAction({
+        type: 'Bridge',
+        fromChainId: chain.chainId,
+        toChainId: targetChain.chainId,
+        token,
+        amount,
+        template: 'Stargate Bridge',
+        add: false,
+        status: res.status,
+        transactionHash: tx.hash,
+      });
       _bridgeTxs[tx.hash] = {
         amount,
         inputChain: chain.chainName,

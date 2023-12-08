@@ -9,6 +9,7 @@ import styled from 'styled-components';
 import { get } from '@/utils/http';
 import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import useDappOpen from '@/hooks/useDappOpen';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const blueBg = (
@@ -200,6 +201,7 @@ const Content = styled.div`
             align-items: center;
             border-radius: 16px;
             margin-bottom: 14px;
+            cursor: pointer;
             a {
               color: #ffffff;
               text-decoration: none;
@@ -845,7 +847,6 @@ const Footer = styled.div`
   }
 `;
 
-
 const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
   return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
 });
@@ -868,6 +869,7 @@ const initialLearningData = [
 const HomeContent: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const [dappList, setDappList] = useState<any[]>([]);
+  const { open } = useDappOpen();
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -1057,8 +1059,13 @@ const HomeContent: NextPageWithLayout = () => {
                         <div className="item-btn-item">
                           <Link href="/dapps-details">Detail</Link>
                         </div>
-                        <div className="item-btn-item">
-                          <Link href={dapp.route}>Dapp</Link>
+                        <div
+                          className="item-btn-item"
+                          onClick={() => {
+                            open(dapp, 'home');
+                          }}
+                        >
+                          Dapp
                         </div>
                       </div>
                     </div>

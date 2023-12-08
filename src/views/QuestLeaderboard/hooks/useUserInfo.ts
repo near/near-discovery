@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
 import { QUEST_PATH } from '@/config/quest';
 
-export default function useUserInfo(id?: string) {
+export default function useUserInfo() {
   const [info, setInfo] = useState<any>();
   const [loading, setLoading] = useState(false);
 
@@ -10,18 +10,18 @@ export default function useUserInfo(id?: string) {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`${QUEST_PATH}:8101/api/user?campaign_id=${id}`);
+      const result = await get(`${QUEST_PATH}:8101/api/user`);
       const data = result.data || [];
       setInfo(data);
       setLoading(false);
     } catch (err) {
       setLoading(false);
     }
-  }, [id, loading]);
+  }, [loading]);
 
   useEffect(() => {
-    if (id) queryInfo();
-  }, [id]);
+    queryInfo();
+  }, []);
 
   return { loading, info };
 }

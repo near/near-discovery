@@ -11,7 +11,7 @@ import useUserInfo from '../../hooks/useUserInfo';
 
 const Leaderboard = ({ id }: { id?: string }) => {
   const { loading, list, page, info, maxPage, handlePageChange } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo(id);
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo();
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>

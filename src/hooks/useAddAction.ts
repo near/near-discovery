@@ -7,7 +7,6 @@ import { post } from '@/utils/http';
 export default function useAddAction(source: string) {
   const { account, chainId } = useAccount();
   const uuid = useUUIdStore((store: any) => store.uuid);
-  console.log(uuid);
   const addAction = useCallback(
     (data: any) => {
       let params: any = { source };

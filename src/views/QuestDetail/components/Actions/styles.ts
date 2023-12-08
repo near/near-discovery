@@ -4,7 +4,9 @@ import { motion } from 'framer-motion';
 export { StyledLabel } from '../Details/styles';
 export { StyledCoin } from '@/views/Quest/styles';
 
-export const StyledContainer = styled.div``;
+export const StyledContainer = styled.div`
+  flex-grow: 1;
+`;
 
 export const StyledHeader = styled.div`
   display: flex;
@@ -21,6 +23,7 @@ export const StyledItemContainer = styled.div`
   padding: 30px 24px 24px;
   margin-top: 20px;
   overflow: hidden;
+  transition: 0.3s;
 
   &:hover {
     border: 1px solid #ebf479;
@@ -113,7 +116,8 @@ export const StyledDapps = styled.div`
   gap: 16px;
 `;
 
-export const StyledDapp = styled.div`
+export const StyledDapp = styled(motion.div)`
+  cursor: pointer;
   border-radius: 12px;
   border: 1px solid #373a53;
   background: rgba(55, 58, 83, 0.2);

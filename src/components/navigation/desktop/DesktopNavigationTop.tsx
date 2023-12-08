@@ -147,7 +147,7 @@ const Container = styled.div`
 const LogoContainer = styled.div`
   width: auto;
   align-items: center;
-  img{
+  img {
     height: 32px;
   }
 `;
@@ -394,9 +394,14 @@ export const DesktopNavigationTop = () => {
 
       {dappLogo && name && (
         <BackRoute>
-          <Link className="back-icon" href="/">
+          <div
+            className="back-icon"
+            onClick={() => {
+              router.back();
+            }}
+          >
             {backIcon}
-          </Link>
+          </div>
 
           <img className="dapp-logo" src={dappLogo} />
 

@@ -21,6 +21,7 @@ import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
 import useAuth from '@/hooks/useAuth';
 import useAccount from '@/hooks/useAccount';
+import useChains from '@/hooks/useChains';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
@@ -40,6 +41,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
+  useChains();
   const [ready, setReady] = useState(false);
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);

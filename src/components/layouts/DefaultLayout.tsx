@@ -13,13 +13,16 @@ interface Props {
 }
 
 const Layout = styled.div`
-  background: #16181D;
+  background: #16181d;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   .content {
     padding: 54px 36px;
     flex-grow: 1;
     position: relative;
-    min-height: 100vh;
-    height: 100%;
+
+    box-sizing: border-box;
   }
 `;
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledLoading = styled.div<{ size: number }>`
+const StyledLoading = styled.div<{ size: number; $mr?: string }>`
   width: ${({ size }) => size + 'px'};
   height: ${({ size }) => size + 'px'};
   line-height: ${({ size }) => size - 2 + 'px'};
@@ -8,6 +8,7 @@ const StyledLoading = styled.div<{ size: number }>`
   transform-origin: center center;
   display: inline-block;
   text-align: center;
+  ${({ $mr }) => $mr && 'margin-right:' + $mr + ';'}
   @keyframes loading {
     0% {
       transform: rotate(0deg);
@@ -18,9 +19,9 @@ const StyledLoading = styled.div<{ size: number }>`
   }
 `;
 
-export default function Loading({ size = 18 }: { size?: number }) {
+export default function Loading({ size = 18, mr }: { size?: number; mr?: string }) {
   return (
-    <StyledLoading size={size}>
+    <StyledLoading size={size} $mr={mr}>
       <svg width={size} height={size} viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle opacity="0.2" cx="9" cy="9" r="8" stroke="white" strokeWidth="2" />
         <path

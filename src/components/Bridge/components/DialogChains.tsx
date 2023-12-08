@@ -56,6 +56,7 @@ const DialogChains = ({
               key={chain.chainId}
               onClick={() => {
                 onSelect(chain);
+                onClose();
               }}
               active={currentChainId === chain.chainId}
             >

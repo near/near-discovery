@@ -16,7 +16,6 @@ const QuestDetailView = () => {
   const searchParams = useSearchParams();
   const { loading, info } = useQuestInfo(searchParams.get('id') || '');
   const { loading: categoryLoading, categories } = useCategoryList();
-  console.log(info);
   return (
     <StyledContainer>
       <Breadcrumb
@@ -36,7 +35,8 @@ const QuestDetailView = () => {
                 actions={info.actions}
                 endTime={info.quest.end_time}
                 rewards={info.quest.reward}
-                completed={info.quest.completed}
+                completed={info.quest.action_completed}
+                id={searchParams.get('id') || ''}
               />
             </StyledTopBox>
             <Recommends campaignId={info.quest.quest_campaign_id} />

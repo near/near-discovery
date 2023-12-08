@@ -123,6 +123,8 @@ html {
   -webkit-font-smoothing: antialiased;
   color: var(--sand12);
   font: var(--text-base);
+  font-family: Gantari;
+  background-color: #16181d;
 }
 
 a {
@@ -181,20 +183,24 @@ a:hover {
   --account-center-z-index: 100;
 }
 
+body::-webkit-scrollbar,
 div::-webkit-scrollbar {
   width: 6px;
   height: 6px;
   /**/
 }
+body::-webkit-scrollbar-track,
 div::-webkit-scrollbar-track {
   background: transparent;
   border-radius: 6px;
 }
+body::-webkit-scrollbar-thumb,
 div::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.1);
   border-radius: 6px;
   cursor: pointer;
 }
+body::-webkit-scrollbar-thumb:hover,
 div::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
 }
