@@ -311,7 +311,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                   <Link href="/chains-details">Learn more</Link>
                   <img src={leftarrow} alt="" />
                 </h4>
-                {child.chainName === 'Polygon zkEVM' && (
+                {child.name === 'Polygon zkEVM' && (
                   <div className="list-item-bottom">
                     <Link href="/warmup">
                       Deep Dive

@@ -1,10 +1,11 @@
 /* eslint-disable react/display-name */
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
-import React from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import axios from 'axios';
 import styled from 'styled-components';
-
+import { QUEST_PATH } from '@/config/quest';
+import { get } from '@/utils/http';
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -150,92 +151,92 @@ const AllDappsPage = styled.div`
     }
   }
   .tab-content-page {
-      /* border-bottom: 1px solid #383b48; */
-      display: flex;
-      flex-wrap: wrap;
-      position: relative;
-      margin-bottom: 100px;
+    /* border-bottom: 1px solid #383b48; */
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 100px;
 
-      .tab-content-item {
-        margin: 30px 20px 0 0; 
-        border-bottom: 1px solid #383b48;
-        display: flex;
-        width: 30%;
-        flex-basis: calc(33.3333% - 20px); 
-        box-sizing: border-box;
-        .content-item-img {
-          margin-right: 16px;
-          width: 20%;
-          img {
-            width: 72px;
-            height: 72px;
-          }
+    .tab-content-item {
+      margin: 30px 20px 0 0;
+      border-bottom: 1px solid #383b48;
+      display: flex;
+      width: 30%;
+      flex-basis: calc(33.3333% - 20px);
+      box-sizing: border-box;
+      .content-item-img {
+        margin-right: 16px;
+        width: 20%;
+        img {
+          width: 72px;
+          height: 72px;
         }
-        .content-item-text {
-          margin-right: 16px;
-          width: 49%;
-          h1 {
-            font-size: 20px;
-            font-weight: 700;
+      }
+      .content-item-text {
+        margin-right: 16px;
+        width: 49%;
+        h1 {
+          font-size: 20px;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+        p {
+          font-size: 14px;
+          color: #979abe;
+          margin: 6px 0 9px 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .content-item-btn {
+        width: 22%;
+        .item-btn-item {
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          border: 1px solid #373a53;
+          font-size: 14px;
+          color: #ffffff;
+          padding: 6px 20px;
+          text-align: center;
+          align-items: center;
+          border-radius: 16px;
+          margin-bottom: 14px;
+          a {
             color: #ffffff;
-            margin: 0;
-          }
-          p {
-            font-size: 14px;
-            color: #979abe;
-            margin: 6px 0 9px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
-        .content-item-btn {
-          width: 22%;
-          .item-btn-item {
-            background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-            border: 1px solid #373a53;
-            font-size: 14px;
-            color: #ffffff;
-            padding: 6px 20px;
-            text-align: center;
-            align-items: center;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            a {
-              color: #ffffff;
-              text-decoration: none;
-            }
-          }
-        }
-        @media (max-width: 1500px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 60%;
-          }
-        }
-        @media (max-width: 1400px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 50%;
-          }
-        }
-        @media (max-width: 975px) {
-          flex-basis: calc(100% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 70%;
+            text-decoration: none;
           }
         }
       }
+      @media (max-width: 1500px) {
+        flex-basis: calc(50% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 60%;
+        }
+      }
+      @media (max-width: 1400px) {
+        flex-basis: calc(50% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 50%;
+        }
+      }
+      @media (max-width: 975px) {
+        flex-basis: calc(100% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 70%;
+        }
+      }
     }
+  }
 `;
 const BreadCrumbs = styled.div`
   color: #979abe;
@@ -319,11 +320,11 @@ const CarouselList = styled.div`
           line-height: 43px;
           border-radius: 12px;
           border: 1px solid #373a53;
-          a{
+          a {
             color: #ffffff;
             text-decoration: none;
           }
-          img{
+          img {
             width: 12px;
             height: 8px;
             margin-left: 6px;
@@ -418,6 +419,29 @@ const Carousel = React.memo(({ active, children }: { active: boolean; children: 
 });
 
 const AllDappsColumn: NextPageWithLayout = () => {
+  const [networkList, setNetworkList] = useState<any[]>([]);
+  const [dappList, setDappList] = useState<any[]>([]);
+  useEffect(() => {
+    const fetchNetworkData = async () => {
+      try {
+        const resultNetwork = await get(`${QUEST_PATH}:9991/operations/Network/GetList`);
+        setNetworkList(resultNetwork.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultNetwork data:', error);
+      }
+    };
+    const fetchDappData = async () => {
+      try {
+        const resultDapp = await get(`${QUEST_PATH}:9991/operations/Dapp/GetList`);
+        setDappList(resultDapp.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultDapp data:', error);
+      }
+    };
+    fetchDappData();
+    fetchNetworkData();
+  }, []);
+
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
   });
@@ -455,23 +479,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
     setSelectedMedalMenu(path);
   };
 
-  const filteredDapps = dapps.filter(
-    ({ tags, on_chain_ids }) =>
-      (selectedFunction.length === 0 || tags.some((tags) => selectedFunction.includes(tags))) &&
-      (selectedMenu === '' || on_chain_ids.includes(parseInt(selectedMenu))),
-  );
-  const sortedDapps = filteredDapps.sort((a, b) => {
-    const nameA = a.name.toLowerCase();
-    const nameB = b.name.toLowerCase();
-    if (nameA < nameB) {
-      return -1;
-    }
-    if (nameA > nameB) {
-      return 1;
-    }
-    return 0;
-  });
-
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleCarouselClick = useCallback(() => {
@@ -490,29 +497,34 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <div className="carousel-right-icon" onClick={handleCarouselClick}>
           <img src={carouseicon} alt="" />
         </div>
-        {carouselData.map((child, index) => (
-          <Carousel key={index} active={index === activeIndex}>
-            <div className="carousel-content">
-              <img src={syncIcon} alt="" />
-              <h1>{child.title}</h1>
-              <Tag>
-                <div className="tag-item Dexes">Dexes</div>
-                <div className="tag-item Bridge">Bridge</div>
-                <div className="tag-item Liquidity">Liquidity</div>
-              </Tag>
-              <p>Seamless and Efficient Trading on zk Rollups</p>
-              <div className="carousel-btn">
-                <div className="carousel-btn-item">
-                  <Link href="/dapps-details">View Detail</Link>
-                </div>
-                <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                  <Link href='/dapp/Syncswap'>Dapp</Link>
-                  <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+        {dappList
+          .filter((dapp) => dapp.recommend === true)
+          .map((child, index) => (
+            <Carousel key={index} active={index === activeIndex}>
+              <div className="carousel-content">
+                <img src={child.recommend_icon} alt="" />
+                <h1>{child.title}</h1>
+                <Tag>
+                  {child.tag &&
+                    child.tag.map((tagItem: string, index: number) => (
+                      <div className={`tag-item ${tagItem}`} key={index}>
+                        {tagItem}
+                      </div>
+                    ))}
+                </Tag>
+                <p>{child.description}</p>
+                <div className="carousel-btn">
+                  <div className="carousel-btn-item">
+                    <Link href="/dapps-details">View Detail</Link>
+                  </div>
+                  <div className="carousel-btn-item" style={{ marginRight: '0' }}>
+                    <Link href={child.route}>Dapp</Link>{' '}
+                    <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                  </div>
                 </div>
               </div>
-            </div>
-          </Carousel>
-        ))}
+            </Carousel>
+          ))}
       </CarouselList>
 
       <div className="token-tab-list">
@@ -529,16 +541,17 @@ const AllDappsColumn: NextPageWithLayout = () => {
       <div className="tab-content">
         <Title>Network</Title>
         <div className="page-netWork-list">
-          {Object.values(chains).map((child, index) => (
-            <div
-              className={`netWork-list-item ${selectedMenu === String(child.chainId) ? 'active' : ''}`}
-              key={index}
-              onClick={() => child.chainId && handleMenuClick(String(child.chainId))}
-            >
-              <img src={child.icon} alt="" />
-              {child.chainName}
-            </div>
-          ))}
+          {networkList &&
+            networkList.map((child, index) => (
+              <div
+                className={`netWork-list-item ${selectedMenu === String(child.chain_id) ? 'active' : ''}`}
+                key={index}
+                onClick={() => child.chain_id && handleMenuClick(String(child.chain_id))}
+              >
+                <img src={child.logo} alt="" />
+                {child.name}
+              </div>
+            ))}
         </div>
         <Title>Function</Title>
         <div className="page-function-list">
@@ -562,8 +575,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
               Lending
             </div>
             <div
-              className={`function-list-item liquidity ${selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
-                }`}
+              className={`function-list-item liquidity ${
+                selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
+              }`}
               onClick={() => handleFunctionClick('Liquidity')}
             >
               Liquidity
@@ -607,8 +621,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
       </div>
       {selectedTab == 'TBD' ? (
         <div className="tab-content-page">
-          {sortedDapps
-            .filter((dapp) => dapp.TBD_TOKEN === 'Y')
+          {dappList
+            .filter((dapp) => dapp.tbd_token === 'Y')
+            .slice(0, 9)
             .map((dapp, index) => {
               return (
                 <div className="tab-content-item" key={index}>
@@ -619,18 +634,22 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     <h1>{dapp.name}</h1>
                     <p>{dapp.description}</p>
                     <Tag>
-                      {dapp.tags.map((tag, index) => (
-                        <div className={`tag-item ${tag}`} key={index}>
-                          {tag}
-                        </div>
-                      ))}
+                      {/* {dapp.tag &&
+                        dapp.tag.map((tagItem: string, index: number) => (
+                          <div className={`tag-item ${tagItem}`} key={index}>
+                            {tagItem}
+                          </div>
+                        ))} */}
                     </Tag>
                   </div>
                   <div className="content-item-btn">
                     <div className="item-btn-item">
                       <Link href="/dapps-details">Detail</Link>
                     </div>
-                    <div className="item-btn-item"> <Link href={dapp.dappRoute}>Dapp</Link></div>
+                    <div className="item-btn-item">
+                      {' '}
+                      <Link href={dapp.route}>Dapp</Link>
+                    </div>
                   </div>
                 </div>
               );
@@ -640,8 +659,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
       {selectedTab == 'token' ? (
         <>
           <div className="tab-content-page">
-            {sortedDapps
-              .filter((dapp) => dapp.TBD_TOKEN === 'N')
+            {dappList
+              .filter((dapp) => dapp.tbd_token === 'N')
+              .slice(0, 9)
               .map((dapp, index) => {
                 return (
                   <div className="tab-content-item" key={index}>
@@ -652,11 +672,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       <h1>{dapp.name}</h1>
                       <p>{dapp.description}</p>
                       <Tag>
-                        {dapp.tags.map((tag, index) => (
-                          <div className={`tag-item ${tag}`} key={index}>
-                            {tag}
-                          </div>
-                        ))}
+                        {dapp.tag &&
+                          dapp.tag.map((tagItem: string, index: number) => (
+                            <div className={`tag-item ${tagItem}`} key={index}>
+                              {tagItem}
+                            </div>
+                          ))}
                       </Tag>
                     </div>
                     <div className="content-item-btn">
@@ -664,7 +685,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                         <Link href="/dapps-details">Detail</Link>
                       </div>
                       <div className="item-btn-item">
-                        <Link href={dapp.dappRoute}>Dapp</Link>
+                        <Link href={dapp.route}>Dapp</Link>
                       </div>
                     </div>
                   </div>

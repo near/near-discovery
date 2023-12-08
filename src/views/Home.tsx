@@ -845,14 +845,6 @@ const Footer = styled.div`
   }
 `;
 
-const carouselData = [
-  {
-    title: 'SyncSwap',
-  },
-  {
-    title: 'Test',
-  },
-];
 
 const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
   return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
@@ -906,8 +898,8 @@ const HomeContent: NextPageWithLayout = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const handleCarouselClick = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
-  }, [carouselData.length]);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % dappList.filter((dapp) => dapp.recommend === true).length);
+  }, [dappList.filter((dapp) => dapp.recommend === true).length]);
   const [learningData, setLearningData] = useState(initialLearningData);
   const handleLeftClick = () => {
     const newData = [...learningData];
@@ -996,12 +988,12 @@ const HomeContent: NextPageWithLayout = () => {
                     <img src={child.recommend_icon} alt="" />
                     <h1>{child.title}</h1>
                     <Tag>
-                      {child.tag &&
+                      {/* {child.tag &&
                         child.tag.map((tagItem: string, index: number) => (
                           <div className={`tag-item ${tagItem}`} key={index}>
                             {tagItem}
                           </div>
-                        ))}
+                        ))} */}
                     </Tag>
                     <p>{child.description}</p>
                     <div className="carousel-btn">
@@ -1053,12 +1045,12 @@ const HomeContent: NextPageWithLayout = () => {
                         <h1>{dapp.name}</h1>
                         <p>{dapp.description}</p>
                         <Tag>
-                          {dapp.tag &&
+                          {/* {dapp.tag &&
                             dapp.tag.map((tagItem: string, index: number) => (
                               <div className={`tag-item ${tagItem}`} key={index}>
                                 {tagItem}
                               </div>
-                            ))}
+                            ))} */}
                         </Tag>
                       </div>
                       <div className="content-item-btn">
