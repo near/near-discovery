@@ -109,6 +109,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           window.zESettings = {
             webWidget: {
               color: { theme: '#2b2f31' },
+              zIndex: 1022,
               offset: {
                 horizontal: '10px',
                 vertical: '10px',
