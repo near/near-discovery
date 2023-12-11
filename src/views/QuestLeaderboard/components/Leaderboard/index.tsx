@@ -6,12 +6,8 @@ import { StyledContainer, StyledTitle, StyledHeader, StyledUpdateButton, StyledC
 import Total from '../Total';
 import Table, { User, PTS } from '../Table';
 import { COLUMNS } from '../Table/config';
-import useLeaderboard from '../../hooks/useLeaderboard';
-import useUserInfo from '../../hooks/useUserInfo';
 
-const Leaderboard = ({ id }: { id?: string }) => {
-  const { loading, list, page, info, maxPage, handlePageChange } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo();
+const Leaderboard = ({ loading, list, page, info, maxPage, handlePageChange, userLoading, userInfo }: any) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>

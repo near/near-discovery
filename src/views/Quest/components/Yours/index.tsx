@@ -4,7 +4,7 @@ import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
 
 const Yours = () => {
   const { loading, info } = useUserInfo();
-  console.log(info);
+
   return (
     <StyledContainer>
       <StyledBox>

@@ -2,6 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/display-name */
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
@@ -870,6 +871,7 @@ const HomeContent: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const [dappList, setDappList] = useState<any[]>([]);
   const { open } = useDappOpen();
+  const router = useRouter();
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -961,7 +963,12 @@ const HomeContent: NextPageWithLayout = () => {
             <div className="works-list-arrow">
               <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
             </div>
-            <div className="works-list-item">
+            <div
+              className="works-list-item"
+              onClick={() => {
+                router.push('/quest');
+              }}
+            >
               <h1>Earn Rewards</h1>
               <p>
                 Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the

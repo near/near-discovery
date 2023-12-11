@@ -1,6 +1,5 @@
 import Loading from '@/components/Icons/Loading';
-
-import useQuestList from '../../hooks/useQuestList';
+import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
 
 import ProcessBar from '../ProcessBar';
 import QuestItem from '../QuestItem';
@@ -17,8 +16,8 @@ import {
 
 import { memo } from 'react';
 
-const QuestLists = ({ id }: { id?: string }) => {
-  const { loading, quests } = useQuestList(id);
+const QuestLists = ({ id, loading, quests }: any) => {
+  const { info: userInfo = {} } = useUserInfo(id);
   return (
     <StyledContainer>
       <StyledHeader>
@@ -26,7 +25,7 @@ const QuestLists = ({ id }: { id?: string }) => {
         <StyledHeaderProcessBox>
           <StyledHeaderProcessDesc>
             <span>You‘ve achieved</span>
-            <span style={{ fontWeight: '700' }}> 45%</span>
+            <span style={{ fontWeight: '700' }}> {userInfo?.achieved || 0}%</span>
           </StyledHeaderProcessDesc>
           <ProcessBar size={8} value={20} />
         </StyledHeaderProcessBox>
@@ -41,10 +40,13 @@ const QuestLists = ({ id }: { id?: string }) => {
             const _quests = items as any[];
             return _quests?.length ? (
               <>
-                <StyledSubTitle style={{ color: `var(--${_quests[0].quest_category_name}-color` }}>
+                <StyledSubTitle
+                  key={_quests[0].quest_category_name}
+                  style={{ color: `var(--${_quests[0].quest_category_name}-color` }}
+                >
                   #{_quests[0].quest_category_name}
                 </StyledSubTitle>
-                <StyledListBox>
+                <StyledListBox key={_quests[0].quest_category_name}>
                   {_quests.map((item) => (
                     <QuestItem quest={item} key={item.id} />
                   ))}

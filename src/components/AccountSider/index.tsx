@@ -4,17 +4,18 @@ import { useLayoutStore } from '@/stores/layout';
 import useTxs from '../Bridge/hooks/useTxs';
 import BridgeWrapper from './components/BridgeWrapper';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import AccountWrapper from './components/AccountWrapper';
 import useAccount from '@/hooks/useAccount';
 import { colors } from '@/config/chains';
 
 const StyledPanel = styled.div<{ display: number }>`
   width: 352px;
-  height: calc(100vh - 40px);
+  height: calc(100vh - 20px);
   border-radius: 32px;
   border: 1px solid #343838;
   box-sizing: border-box;
-  padding: 20px 0px;
+  padding: 20px 0px 0px;
   background-color: #141414;
   --padding-x: 20px;
   position: fixed;
@@ -27,6 +28,12 @@ const StyledPanel = styled.div<{ display: number }>`
 const Content = styled.div`
   position: relative;
   z-index: 60;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+const Main = styled.div`
+  flex-grow: 1;
 `;
 const Bg = styled.div<{ $chain: number }>`
   width: 100%;
@@ -80,22 +87,25 @@ const AccountSider = () => {
     <StyledPanel display={layoutStore.showAccountSider ? 1 : 0}>
       <Content>
         <Header showCodes={showCodes} setShowCodes={setShowCodes} />
-        {tab === 'account' && (
-          <AccountWrapper count={count} setTab={setTab} showChains={showChains} setShowChains={setShowChains} />
-        )}
-        {tab === 'bridge' && (
-          <BridgeWrapper
-            onBack={() => {
-              setTab('account');
-            }}
-            count={count}
-            txs={txs}
-            txLoading={txLoading}
-            refreshTxs={() => {
-              setUpdater(Date.now());
-            }}
-          />
-        )}
+        <Main>
+          {tab === 'account' && (
+            <AccountWrapper count={count} setTab={setTab} showChains={showChains} setShowChains={setShowChains} />
+          )}
+          {tab === 'bridge' && (
+            <BridgeWrapper
+              onBack={() => {
+                setTab('account');
+              }}
+              count={count}
+              txs={txs}
+              txLoading={txLoading}
+              refreshTxs={() => {
+                setUpdater(Date.now());
+              }}
+            />
+          )}
+        </Main>
+        <Footer />
       </Content>
       <Bg $chain={chainId || 0} />
       {layoutStore.showAccountSider && (

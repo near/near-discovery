@@ -1,9 +1,10 @@
+import { memo, useState } from 'react';
+import { useRouter } from 'next/router';
 import { StyledContainer, StyledSwiperArrowButton, StyledImagesBox, StyledImages, StyledImage } from './styles';
 
-import { memo, useState } from 'react';
-
-const Swipper = ({ images }: { images: string[] }) => {
+const Swipper = ({ banners }: { banners: { banner: string; link: string }[] }) => {
   const [current, setCurrent] = useState(0);
+  const router = useRouter();
   return (
     <StyledContainer>
       <StyledSwiperArrowButton
@@ -20,19 +21,30 @@ const Swipper = ({ images }: { images: string[] }) => {
       <StyledImagesBox>
         <StyledImages
           style={{
-            width: images.length * 100 + '%',
-            transform: `translateX(-${current * (100 / images.length)}%)`,
+            width: banners.length * 100 + '%',
+            transform: `translateX(-${current * (100 / banners.length)}%)`,
           }}
         >
-          {images.map((img) => (
-            <StyledImage key={img} src={img} />
+          {banners.map((banner) => (
+            <StyledImage
+              key={banner.banner}
+              src={banner.banner}
+              onClick={() => {
+                if (!banner.link) return;
+                if (banner.link.includes('http')) {
+                  window.open(banner.link, '_blank');
+                  return;
+                }
+                router.push(banner.link);
+              }}
+            />
           ))}
         </StyledImages>
       </StyledImagesBox>
       <StyledSwiperArrowButton
-        $disabled={current === images.length - 1}
+        $disabled={current === banners.length - 1}
         onClick={() => {
-          current < images.length - 1 && setCurrent(current + 1);
+          current < banners.length - 1 && setCurrent(current + 1);
         }}
         style={{ right: '-18px' }}
       >

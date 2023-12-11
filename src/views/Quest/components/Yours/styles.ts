@@ -20,7 +20,7 @@ export const StyledContainer = styled.div`
   position: fixed;
   right: 30px;
   bottom: 58px;
-  z-index: 100;
+  z-index: 30;
 `;
 
 export const StyledBox = styled.div`
