@@ -7,7 +7,6 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import { get } from '@/utils/http';
-import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useDappOpen from '@/hooks/useDappOpen';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -768,7 +767,7 @@ const Tag = styled.div`
     color: rgba(227, 233, 157, 1);
     border: 1px solid rgba(227, 233, 157, 1);
   }
-  .Dexes {
+  .DEX {
     color: rgba(172, 252, 237, 1);
     border: 1px solid rgba(172, 252, 237, 1);
   }
@@ -873,7 +872,7 @@ const HomeContent: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`${QUEST_PATH}:9991/operations/Network/GetList`);
+        const resultNetwork = await get(`https://ttapi.ref-finance.com/operations/Network/GetList`);
         setNetworkList(resultNetwork.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);
@@ -881,7 +880,7 @@ const HomeContent: NextPageWithLayout = () => {
     };
     const fetchDappData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}:9991/operations/Dapp/GetList`);
+        const resultDapp = await get(`https://ttapi.ref-finance.com/operations/Dapp/GetList`);
         setDappList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
@@ -990,12 +989,16 @@ const HomeContent: NextPageWithLayout = () => {
                     <img src={child.recommend_icon} alt="" />
                     <h1>{child.title}</h1>
                     <Tag>
-                      {/* {child.tag &&
-                        child.tag.map((tagItem: string, index: number) => (
-                          <div className={`tag-item ${tagItem}`} key={index}>
-                            {tagItem}
-                          </div>
-                        ))} */}
+                      {child.tag &&
+                        (Array.isArray(child.tag) ? (
+                          child.tag.map((tagItem: string, index: number) => (
+                            <div className={`tag-item ${tagItem}`} key={index}>
+                              {tagItem}
+                            </div>
+                          ))
+                        ) : (
+                          <div className={`tag-item ${child.tag}`}>{child.tag}</div>
+                        ))}
                     </Tag>
                     <p>{child.description}</p>
                     <div className="carousel-btn">
@@ -1047,12 +1050,16 @@ const HomeContent: NextPageWithLayout = () => {
                         <h1>{dapp.name}</h1>
                         <p>{dapp.description}</p>
                         <Tag>
-                          {/* {dapp.tag &&
-                            dapp.tag.map((tagItem: string, index: number) => (
-                              <div className={`tag-item ${tagItem}`} key={index}>
-                                {tagItem}
-                              </div>
-                            ))} */}
+                          {dapp.tag &&
+                            (Array.isArray(dapp.tag) ? (
+                              dapp.tag.map((tagItem: string, index: number) => (
+                                <div className={`tag-item ${tagItem}`} key={index}>
+                                  {tagItem}
+                                </div>
+                              ))
+                            ) : (
+                              <div className={`tag-item ${dapp.tag}`}>{dapp.tag}</div>
+                            ))}
                         </Tag>
                       </div>
                       <div className="content-item-btn">
@@ -1089,10 +1096,14 @@ const HomeContent: NextPageWithLayout = () => {
                         <p>{dapp.description}</p>
                         <Tag>
                           {dapp.tag &&
-                            dapp.tag.map((tagItem: string, index: number) => (
-                              <div className={`tag-item ${tagItem}`} key={index}>
-                                {tagItem}
-                              </div>
+                            (Array.isArray(dapp.tag) ? (
+                              dapp.tag.map((tagItem: string, index: number) => (
+                                <div className={`tag-item ${tagItem}`} key={index}>
+                                  {tagItem}
+                                </div>
+                              ))
+                            ) : (
+                              <div className={`tag-item ${dapp.tag}`}>{dapp.tag}</div>
                             ))}
                         </Tag>
                       </div>
