@@ -10,7 +10,7 @@ export default function useFavoriteDapps() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`${QUEST_PATH}:8101/api/dapp/favorite_list`);
+      const result = await get(`${QUEST_PATH}/api/dapp/favorite_list`);
       const data = result.data || [];
       setList(data);
       setLoading(false);

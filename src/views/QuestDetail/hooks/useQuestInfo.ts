@@ -12,7 +12,7 @@ export default function useQuestInfo(id?: string, source?: string) {
     try {
       const params = id ? `id=${id}` : `source=${source}`;
 
-      const result = await get(`${QUEST_PATH}:8101/api/quest?${params}`);
+      const result = await get(`${QUEST_PATH}/api/quest?${params}`);
       const data = result.data || [];
       setInfo(data);
       setLoading(false);

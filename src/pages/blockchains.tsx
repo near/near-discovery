@@ -3,6 +3,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import React, { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
+import { TTAPI_PATH } from '@/config/quest';
 import chains from '@/config/chains';
 import { ethereum } from '@/config/tokens/ethereum';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -223,7 +224,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`https://ttapi.ref-finance.com/operations/Network/GetList`);
+        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
         setNetworkList(resultNetwork.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);

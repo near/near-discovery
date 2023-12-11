@@ -14,7 +14,7 @@ export default function useRewardsClaim(onSuccess: VoidFunction) {
       title: 'Claiming',
     });
     try {
-      const result = await post(`${QUEST_PATH}:8101/api/quest/claim`, {
+      const result = await post(`${QUEST_PATH}/api/quest/claim`, {
         id,
       });
       console.log(result);

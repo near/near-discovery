@@ -13,7 +13,7 @@ export default function useDailyTask() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`${QUEST_PATH}:8101/api/quest/daily_check_in`);
+      const result = await get(`${QUEST_PATH}/api/quest/daily_check_in`);
       const data = result.data || [];
       setTasks(data);
       setLoading(false);
@@ -26,7 +26,7 @@ export default function useDailyTask() {
     if (claiming) return;
     setClaiming(true);
     try {
-      await post(`${QUEST_PATH}:8101/api/quest/daily_check_in`, {});
+      await post(`${QUEST_PATH}/api/quest/daily_check_in`, {});
       setClaiming(false);
       toast.success({ title: 'Claimed successfully' });
       queryTasks();

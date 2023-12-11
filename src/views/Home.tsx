@@ -8,6 +8,7 @@ import axios from 'axios';
 import styled from 'styled-components';
 
 import { get } from '@/utils/http';
+import { TTAPI_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useDappOpen from '@/hooks/useDappOpen';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -874,7 +875,7 @@ const HomeContent: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`https://ttapi.ref-finance.com/operations/Network/GetList`);
+        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
         setNetworkList(resultNetwork.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);
@@ -882,7 +883,7 @@ const HomeContent: NextPageWithLayout = () => {
     };
     const fetchDappData = async () => {
       try {
-        const resultDapp = await get(`https://ttapi.ref-finance.com/operations/Dapp/GetList`);
+        const resultDapp = await get(`${TTAPI_PATH}/operations/Dapp/GetList`);
         setDappList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);

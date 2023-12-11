@@ -10,7 +10,7 @@ export default function useReport() {
     setLoading(true);
 
     try {
-      await post(`${QUEST_PATH}:8101/api/quest/source`, {
+      await post(`${QUEST_PATH}/api/quest/source`, {
         source,
       });
       setLoading(false);

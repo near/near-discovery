@@ -10,7 +10,7 @@ export default function useClaimedList() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`${QUEST_PATH}:8101/api/quest/claimed_list`);
+      const result = await get(`${QUEST_PATH}/api/quest/claimed_list`);
       const data = result.data || [];
       setList(data);
       setLoading(false);

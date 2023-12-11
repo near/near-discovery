@@ -11,7 +11,7 @@ export default function useLike(id: string, category: string) {
   const queryLike = useCallback(async () => {
     if (loading) return;
     try {
-      const result = await get(`${QUEST_PATH}:8101/api/user/favorite?id=${id}&category=${category}`);
+      const result = await get(`${QUEST_PATH}/api/user/favorite?id=${id}&category=${category}`);
       const data = result.data?.favorite;
       setLike(data);
       setLoading(false);
@@ -28,7 +28,7 @@ export default function useLike(id: string, category: string) {
         title: 'Liking',
       });
       try {
-        await post(`${QUEST_PATH}:8101/api/user/favorite`, {
+        await post(`${QUEST_PATH}/api/user/favorite`, {
           id,
           category,
           favorite,
