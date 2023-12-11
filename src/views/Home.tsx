@@ -966,7 +966,7 @@ const HomeContent: NextPageWithLayout = () => {
             <div
               className="works-list-item"
               onClick={() => {
-                router.push('/quest');
+                router.push('/quest/leaderboard');
               }}
             >
               <h1>Earn Rewards</h1>
