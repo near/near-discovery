@@ -1,8 +1,6 @@
 import { memo, useEffect } from 'react';
 import Loading from '@/components/Icons/Loading';
 
-import useCampaignList from '../../hooks/useCampaignList';
-import useCategoryList from '../../hooks/useCategoryList';
 import useLike from '../../hooks/useLike';
 
 import Timer from '../Timer';
@@ -103,16 +101,12 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
   );
 };
 
-const Campaigns = ({ onLoad }: { onLoad: (id: string) => void }) => {
-  const { loading: categoryLoading, categories } = useCategoryList();
-  const { loading, campaigns } = useCampaignList();
-
+const Campaigns = ({ onLoad, loading, campaigns, categoryLoading, categories }: any) => {
   useEffect(() => {
     if (!loading && campaigns.length) {
       onLoad(campaigns[0].id);
     }
   }, [loading, campaigns]);
-
   return (
     <StyledCampaipnsContainer>
       {loading || categoryLoading ? (
@@ -120,7 +114,7 @@ const Campaigns = ({ onLoad }: { onLoad: (id: string) => void }) => {
           <Loading size={30} />
         </LoadingWrapper>
       ) : (
-        campaigns.map((campaign) => <Campaign key={campaign.id} campaign={campaign} categories={categories} />)
+        campaigns.map((campaign: any) => <Campaign key={campaign.id} campaign={campaign} categories={categories} />)
       )}
     </StyledCampaipnsContainer>
   );

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export { StyledCoin } from '@/views/Quest/styles';
 export { StyledFist } from '@/views/QuestLeaderboard/styles';
 
-export const StyledTabs = styled.div<{ $width: number; $mt: number }>`
+export const StyledTabs = styled.div<{ $width: number }>`
   display: flex;
   align-items: center;
   border-radius: 32px;
@@ -13,7 +13,7 @@ export const StyledTabs = styled.div<{ $width: number; $mt: number }>`
   height: 66px;
   padding: 8px;
   box-sizing: border-box;
-  margin: ${({ $mt }) => $mt}px auto 0px;
+  margin: 0 auto;
 `;
 
 export const StyledTabWrap = styled.div`

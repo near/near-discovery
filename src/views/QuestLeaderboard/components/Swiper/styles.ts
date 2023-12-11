@@ -4,6 +4,7 @@ export const StyledContainer = styled.div`
   width: 100%;
   height: 320px;
   position: relative;
+  margin-bottom: 60px;
 `;
 
 export const StyledSwiperArrowButton = styled.div<{ $disabled: boolean }>`

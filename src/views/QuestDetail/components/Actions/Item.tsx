@@ -120,6 +120,14 @@ const ActionItem = ({ action, completed }: { action: any; completed: boolean }) 
                         });
                         return;
                       }
+                      if (action.source.includes('landing')) {
+                        router.push('/landing');
+                        return;
+                      }
+                      if (action.source.includes('http')) {
+                        window.open(action.source, '_blank');
+                        return;
+                      }
                       router.push('/' + action.source);
                     }}
                   >

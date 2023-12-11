@@ -18,7 +18,7 @@ const TABS: { name: string; key: Tab }[] = [
 
 const Tabs = ({ current, onChange }: { current: Tab; onChange: (tab: Tab) => void }) => {
   return (
-    <StyledTabs $width={500} $mt={60}>
+    <StyledTabs $width={500}>
       {TABS.map((tab, i) => (
         <StyledTabWrap
           onClick={() => {

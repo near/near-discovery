@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useRouter } from 'next/router';
-import { useSearchParams } from 'next/navigation';
 import { inviteCodeActivate } from '@/apis';
 import useAuth from '@/hooks/useAuth';
 import LoadingIcon from '@/components/Icons/Loading';
 import useAccount from '@/hooks/useAccount';
 import { setCookie } from 'cookies-next';
 
-export const yellowbg = 'https://assets.dapdap.net/images/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje.svg';
-export const bluebg = 'https://assets.dapdap.net/images/bafkreicqa3b3urjhrrc2xt3kgnyhfuntagepjj7zfnley74u6gjqfmjm44.svg';
+export const yellowbg =
+  'https://assets.dapdap.net/images/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje.svg';
+export const bluebg =
+  'https://assets.dapdap.net/images/bafkreicqa3b3urjhrrc2xt3kgnyhfuntagepjj7zfnley74u6gjqfmjm44.svg';
 
 export const StyledInviteCodePage = styled.div<{ $logined: boolean; $loading: boolean }>`
   font-family: Gantari;
@@ -142,7 +143,6 @@ export default function InviteCodeView() {
   const [loading, setLoading] = useState(false);
   const { logging, logout } = useAuth();
   const router = useRouter();
-  const searchParams = useSearchParams();
   const [errorTips, setErrorTips] = useState<string>('');
 
   const proceed = async () => {
@@ -155,7 +155,7 @@ export default function InviteCodeView() {
         setErrorTips(errorMsg);
       } else {
         setCookie('AUTHED_ACCOUNT', account);
-        router.replace(searchParams.get('source') || '/');
+        router.replace('/landing');
       }
     } catch (error) {
       setLoading(false);

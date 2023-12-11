@@ -5,13 +5,13 @@ import { QUEST_PATH } from '@/config/quest';
 export default function useReport() {
   const [loading, setLoading] = useState(false);
 
-  const handleReport = useCallback(async (id: string) => {
+  const handleReport = useCallback(async (source: string) => {
     if (loading) return;
     setLoading(true);
 
     try {
       await post(`${QUEST_PATH}:8101/api/quest/source`, {
-        id,
+        source,
       });
       setLoading(false);
     } catch (err) {

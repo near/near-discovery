@@ -10,6 +10,7 @@ const StyledHeader = styled.div`
   padding-right: var(--padding-x);
   display: flex;
   justify-content: space-between;
+  flex-shrink: 0;
 `;
 
 const Header = ({ showCodes, setShowCodes }: { showCodes: boolean; setShowCodes: (show: boolean) => void }) => {
