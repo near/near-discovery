@@ -1,16 +1,18 @@
 import { useCallback } from 'react';
 import useAccount from './useAccount';
-import chains from '@/config/chains';
+import { useChainsStore } from '@/stores/chains';
 import { useUUIdStore } from '@/stores/uuid';
 import { post } from '@/utils/http';
 
 export default function useAddAction(source: string) {
   const { account, chainId } = useAccount();
+  const chains = useChainsStore((store: any) => store.chains);
   const uuid = useUUIdStore((store: any) => store.uuid);
   const addAction = useCallback(
     (data: any) => {
       let params: any = { source };
       if (!chainId || !account) return;
+      const currentChain = chains.find((chain: any) => chain.chain_id === chainId);
       if (data.type === 'Swap') {
         params = {
           action_title: `Swap ${Number(data.inputCurrencyAmount)} ${data.inputCurrency.symbol} on ${data.template}`,
@@ -22,22 +24,22 @@ export default function useAddAction(source: string) {
           template: data.template,
           action_status: data.status === 1 ? 'Success' : 'Failed',
           tx_id: data.transactionHash,
-          action_network_id: chains[chainId].chainName,
+          action_network_id: currentChain.name,
           chain_id: chainId,
         };
       }
       if (data.type === 'Bridge') {
-        const fromChain = chains[data.fromChainId];
-        const toChain = chains[data.toChainId];
+        const fromChain = chains.find((chain: any) => chain.chain_id === data.fromChainId);
+        const toChain = chains.find((chain: any) => chain.chain_id === data.toChainId);
         params = {
-          action_title: `Bridge ${data.token.symbol} from ${fromChain.chainName} to ${toChain.chainName}`,
+          action_title: `Bridge ${data.token.symbol} from ${fromChain.name} to ${toChain.name}`,
           action_type: 'Bridge',
           action_tokens: JSON.stringify([`${data.token.symbol}`]),
           action_amount: data.amount,
           account_id: account,
           account_info: uuid,
           template: data.template,
-          action_network_id: chains[chainId].chainName,
+          action_network_id: currentChain.name,
           action_switch: data.add ? 1 : 0,
           action_status: data.status === 1 ? 'Success' : 'Failed',
           tx_id: data.transactionHash,
@@ -57,7 +59,7 @@ export default function useAddAction(source: string) {
           action_switch: data.add ? 1 : 0,
           action_status: data.status === 1 ? 'Success' : 'Failed',
           tx_id: data.transactionHash,
-          action_network_id: chains[chainId].chainName,
+          action_network_id: currentChain.name,
           chain_id: chainId,
         };
       }
@@ -68,7 +70,7 @@ export default function useAddAction(source: string) {
           action_tokens: JSON.stringify([data.token0, data.token1]),
           action_amount: data.amount,
           account_id: account,
-          action_network_id: chains[chainId].chainName,
+          action_network_id: currentChain.name,
           account_info: uuid,
           template: data.template,
           action_status: data.status === 1 ? 'Success' : 'Failed',

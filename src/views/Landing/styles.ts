@@ -7,11 +7,10 @@ export const StyledContainer = styled.div`
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding-top: 80px;
 `;
 export const StyledLeftPanel = styled.div`
   max-width: 430px;
+  padding-top: 80px;
 `;
 export const StyledTitle = styled.div`
   color: #fff;
@@ -86,7 +85,7 @@ export const StyledClaimButton = styled(motion.button)`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
-
+  opacity: 1;
   &:disabled {
     opacity: 0.5;
     background: #7c7f96;
@@ -107,5 +106,7 @@ export const StyledSkipButton = styled(motion.button)`
   font-weight: 500;
   line-height: normal;
 `;
-export const StyledRightPanel = styled.div``;
+export const StyledRightPanel = styled.div`
+  padding-top: 80px;
+`;
 export const StyledRightImg = styled.img``;

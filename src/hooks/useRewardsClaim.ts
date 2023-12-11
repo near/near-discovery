@@ -14,13 +14,15 @@ export default function useRewardsClaim(onSuccess: VoidFunction) {
       title: 'Claiming',
     });
     try {
-      await post(`${QUEST_PATH}:8101/api/quest/claim`, {
+      const result = await post(`${QUEST_PATH}:8101/api/quest/claim`, {
         id,
       });
+      console.log(result);
       toast.dismiss(toastId);
       toast.success({
         title: `Claimed successfully`,
       });
+      onSuccess();
       setLoading(false);
     } catch (err) {
       setLoading(false);

@@ -50,6 +50,8 @@ const StyledCloseIcon = styled.div`
   right: 27px;
   top: 26px;
   color: #979abe;
+  cursor: pointer;
+  z-index: 10;
 `;
 
 export default function SuccessModal({ open, onClose }: { open: boolean; onClose: VoidFunction }) {
@@ -57,13 +59,12 @@ export default function SuccessModal({ open, onClose }: { open: boolean; onClose
   return (
     <Modal
       display={open}
-      onClose={onClose}
       width={451}
       content={
         <StyledContent>
-          <StyledCloseIcon>
+          {/* <StyledCloseIcon>
             <CloseIcon onClose={onClose} />
-          </StyledCloseIcon>
+          </StyledCloseIcon> */}
           <StyledIcon />
           <StyledTitle>Congrats!</StyledTitle>
           <StyledDesc>

@@ -1,9 +1,9 @@
-import { memo, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Loading from '@/components/Icons/Loading';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import useRewardsClaim from '@/hooks/useRewardsClaim';
 import useQuestInfo from '@/views/QuestDetail/hooks/useQuestInfo';
+import useReport from './hooks/useReport';
 
 import {
   StyledContainer,
@@ -22,15 +22,29 @@ import {
   StyledRightImg,
 } from './styles';
 import SuccessModal from './SuccessModal';
+import Bridge from './Bridge';
 import { steps, bgs } from './config';
 
 const LandingView = () => {
-  const searchParams = useSearchParams();
   const router = useRouter();
-  const step = Number(searchParams.get('step') || '1');
-  const { loading, handleClaim } = useRewardsClaim(() => {});
+  const [step, setStep] = useState(0);
+  const [continuable, setContinuable] = useState(false);
+  const { loading, handleClaim } = useRewardsClaim(() => {
+    setSuccess(true);
+  });
   const [success, setSuccess] = useState(false);
   const { loading: infoLoading, info } = useQuestInfo('', 'landing');
+  const { handleReport } = useReport();
+  useEffect(() => {
+    if (step < 2) return;
+    setContinuable(true);
+  }, [step]);
+
+  useEffect(() => {
+    if (info?.quest) {
+      setStep((info.quest.action_completed || 0) + 1);
+    }
+  }, [info]);
   return (
     <>
       <StyledContainer>
@@ -52,16 +66,30 @@ const LandingView = () => {
           ))}
           <StyledButtons>
             <StyledClaimButton
-              disabled={loading}
+              disabled={loading || !continuable}
               whileHover={{ opacity: 0.8 }}
               whileTap={{ opacity: 0.6 }}
               style={{ width: '70%' }}
               onClick={() => {
-                handleClaim('');
+                if (loading || !continuable) return;
+                if (step === 1) {
+                  handleReport('landing');
+                  setStep(2);
+                  return;
+                }
+                if (step === 2) {
+                  handleReport('landing?step=2');
+                  setStep(3);
+                  return;
+                }
+                if (step === 3) {
+                  handleClaim(info.quest.id);
+                  handleReport('landing?step=3');
+                }
               }}
             >
               {loading && <Loading mr="5px" />}
-              {step === 3 ? `Claim ${steps[step - 1].rewards} PTS` : 'Continue'}
+              {step === 3 ? 'Claim 140 PTS' : 'Continue'}
             </StyledClaimButton>
             <StyledSkipButton
               onClick={() => {
@@ -74,6 +102,13 @@ const LandingView = () => {
             </StyledSkipButton>
           </StyledButtons>
         </StyledLeftPanel>
+        {step === 1 && (
+          <Bridge
+            onSuccess={() => {
+              setContinuable(true);
+            }}
+          />
+        )}
         <StyledRightPanel>{step !== 1 && <StyledRightImg src={bgs[step]} />}</StyledRightPanel>
       </StyledContainer>
       <SuccessModal

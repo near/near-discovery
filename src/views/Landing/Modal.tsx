@@ -42,22 +42,12 @@ const Content = styled.div`
   border-radius: 0px 0px 16px 16px;
 `;
 
-const Modal = ({
-  display,
-  width = 460,
-  content,
-  onClose,
-}: {
-  display: boolean;
-  width?: number;
-  content: ReactNode;
-  onClose: () => void;
-}) => {
+const Modal = ({ display, width = 460, content }: { display: boolean; width?: number; content: ReactNode }) => {
   return (
     <AnimatePresence mode="wait">
       {display && (
         <Dialog>
-          <Overlay onClick={onClose} {...overlay}>
+          <Overlay {...overlay}>
             <Main
               {...modal}
               $width={width}
