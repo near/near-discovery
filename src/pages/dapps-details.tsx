@@ -293,7 +293,7 @@ const DappsDetailBottom = styled.div`
           width: 50%;
         }
       }
-      @media (max-width: 975px) {
+      @media (max-width: 1200px) {
         flex-basis: calc(100% - 20px);
         .content-item-img {
           width: 15%;
@@ -417,7 +417,9 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchactivityData = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/action/get-actions-by-dapp?dapp_id=${dapp_id}&page=1&page_size=10`);
+          const response = await fetch(
+            `${QUEST_PATH}/api/action/get-actions-by-dapp?dapp_id=${dapp_id}&page=1&page_size=10`,
+          );
           const data = await response.json();
           setActivity(data.data.data);
         } catch (error) {

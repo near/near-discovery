@@ -4,7 +4,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { TTAPI_PATH } from '@/config/quest';
@@ -229,7 +229,7 @@ const Content = styled.div`
             width: 50%;
           }
         }
-        @media (max-width: 975px) {
+        @media (max-width: 1200px) {
           flex-basis: calc(100% - 20px);
           .content-item-img {
             width: 15%;
@@ -915,22 +915,36 @@ const HomeContent: NextPageWithLayout = () => {
   const handleCarouselClick = useCallback(() => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % dappList.filter((dapp) => dapp.recommend === true).length);
   }, [dappList.filter((dapp) => dapp.recommend === true).length]);
-  const [learningData, setLearningData] = useState(initialLearningData);
-  const handleLeftClick = () => {
-    const newData = [...learningData];
-    const lastItem = newData.pop();
-    if (lastItem) {
-      newData.unshift(lastItem);
-      setLearningData(newData);
+
+  const [items, setItems] = useState([initialLearningData[2], ...initialLearningData, initialLearningData[0]]);
+  const [currentIndex, setCurrentIndex] = useState(1);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    if (carouselRef.current) {
+      const carousel = carouselRef.current;
+      carousel.style.transition = 'none';
+      carousel.style.transform = `translateX(-${currentIndex * 550}px)`;
+      setTimeout(() => {
+        carousel.style.transition = '';
+      }, 0);
+    }
+  }, [currentIndex]);
+
+  const handleTransitionEnd = () => {
+    if (currentIndex === 0) {
+      setCurrentIndex(items.length - 2);
+    } else if (currentIndex === items.length - 1) {
+      setCurrentIndex(1);
     }
   };
+
+  const handleLeftClick = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % (items.length - 2));
+  };
+
   const handleRightClick = () => {
-    const newData = [...learningData];
-    const firstItem = newData.shift();
-    if (firstItem) {
-      newData.push(firstItem);
-      setLearningData(newData);
-    }
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length - 2) % (items.length - 2));
   };
 
   return (
@@ -1271,29 +1285,41 @@ const HomeContent: NextPageWithLayout = () => {
         <div className="learning">
           <Title>Learning</Title>
           <div className="learning-contents-item">
-            {learningData.map((item, index) => (
-              <div className="learning-content-item" key={index}>
-                <div className="content-item-img">
-                  <img src={item.icon} alt="" />
+            <div
+              ref={carouselRef}
+              onTransitionEnd={handleTransitionEnd}
+              style={{
+                display: 'flex',
+                width: `${items.length * 539}px`,
+                transform: `translateX(-${currentIndex * 539}px)`,
+                transition: 'transform 0.8s ease-in-out',
+                willChange: 'transform',
+              }}
+            >
+              {items.map((item, index) => (
+                <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '539px' }}>
+                  <div className="content-item-img">
+                    <img src={item.icon} alt="" />
+                  </div>
+                  <div className="content-item-text">
+                    <h1>{item.title}</h1>
+                    <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
+                    <Link href="https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8">
+                      <span>Explore</span>
+                    </Link>
+                  </div>
                 </div>
-                <div className="content-item-text">
-                  <h1>{item.title}</h1>
-                  <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
-                  <Link href="https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8">
-                    <span>Explore</span>
-                  </Link>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
           <div className="learning-icon">
-            <div className="learning-icon-item learning-icon-left" onClick={handleRightClick}>
+            <div className="learning-icon-item learning-icon-left" onClick={handleLeftClick}>
               <img
                 src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""
               />
             </div>
-            <div className="learning-icon-item learning-icon-right" onClick={handleLeftClick}>
+            <div className="learning-icon-item learning-icon-right" onClick={handleRightClick}>
               <img
                 src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""

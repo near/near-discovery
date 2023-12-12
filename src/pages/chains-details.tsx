@@ -341,7 +341,7 @@ const ChainsDetailsHot = styled.div`
           width: 50%;
         }
       }
-      @media (max-width: 975px) {
+      @media (max-width: 1200px) {
         flex-basis: calc(100% - 20px);
         .content-item-img {
           width: 15%;
