@@ -378,27 +378,6 @@ const Title = styled.div`
   display: inline-block;
 `;
 
-const Footer = styled.div`
-  width: 100%;
-  text-align: center;
-  position: absolute;
-  bottom: -36px;
-  left: 0;
-  display: flex;
-  color: rgba(151, 154, 190, 1);
-  font-size: 14px;
-  font-weight: 400;
-  padding: 0 10%;
-  .footer-item {
-    flex: 1;
-    text-align: center;
-  }
-  .footer-center {
-    img {
-      margin-right: 32px;
-    }
-  }
-`;
 const DappsDetailsColumn: NextPageWithLayout = () => {
   return (
     <DappsDetails>
@@ -618,33 +597,6 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
           })}
         </div>
       </DappsDetailBottom>
-      <Footer>
-        <div className="footer-item footer-left">
-          Made with ❤️ by DapXDap team.
-          <br /> Bulit on BOS & NEAR Protocol
-        </div>
-        <div className="footer-item footer-center">
-          <div className="footer-center-img">
-            <img
-              src="https://assets.dapdap.net/images/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay.svg"
-              alt=""
-            />
-            <img
-              src="https://assets.dapdap.net/images/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm.svg"
-              alt=""
-            />
-            <img
-              src="https://assets.dapdap.net/images/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74.svg"
-              alt=""
-            />
-            <img
-              src="https://assets.dapdap.net/images/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm.svg"
-              alt=""
-            />
-          </div>
-        </div>
-        <div className="footer-item footer-right">Copyright 2023 DapXDap</div>
-      </Footer>
     </DappsDetails>
   );
 };
