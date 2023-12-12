@@ -1,10 +1,9 @@
-import Campaign from '@/views/Quest/components/Campaign';
-import QuestLists from '@/views/Quest/components/QuestLists';
-
+import { AnimatePresence,motion } from 'framer-motion';
 import { memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
 import { container } from '@/components/animation';
+import Campaign from '@/views/Quest/components/Campaign';
+import QuestLists from '@/views/Quest/components/QuestLists';
 
 const Quests = ({
   onLoad,

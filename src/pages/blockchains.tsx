@@ -1,12 +1,13 @@
 import { ethers } from 'ethers';
 import Link from 'next/link';
-import styled from 'styled-components';
 import React, { useCallback, useEffect, useState } from 'react';
-import { get } from '@/utils/http';
-import { TTAPI_PATH } from '@/config/quest';
+import styled from 'styled-components';
+
 import chains from '@/config/chains';
+import { TTAPI_PATH } from '@/config/quest';
 import { ethereum } from '@/config/tokens/ethereum';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const arrow = (

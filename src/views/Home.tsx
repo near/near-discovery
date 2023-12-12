@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/display-name */
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
-import { get } from '@/utils/http';
 import { TTAPI_PATH } from '@/config/quest';
-import { useDefaultLayout } from '@/hooks/useLayout';
 import useDappOpen from '@/hooks/useDappOpen';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const blueBg = (

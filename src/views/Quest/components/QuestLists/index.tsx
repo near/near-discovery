@@ -1,20 +1,20 @@
+import { memo } from 'react';
+
 import Loading from '@/components/Icons/Loading';
 import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
 
 import ProcessBar from '../ProcessBar';
 import QuestItem from '../QuestItem';
 import {
+  LoadingWrapper,
   StyledContainer,
-  StyledTitle,
   StyledHeader,
-  StyledSubTitle,
   StyledHeaderProcessBox,
   StyledHeaderProcessDesc,
   StyledListBox,
-  LoadingWrapper,
+  StyledSubTitle,
+  StyledTitle,
 } from './styles';
-
-import { memo } from 'react';
 
 const QuestLists = ({ id, loading, quests }: any) => {
   const { info: userInfo = {} } = useUserInfo(id);

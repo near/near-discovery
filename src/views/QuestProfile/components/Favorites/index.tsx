@@ -1,14 +1,14 @@
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence,motion } from 'framer-motion';
 import { memo } from 'react';
+
 import { container } from '@/components/animation';
 import Loading from '@/components/Icons/Loading';
 
-import FavoriteDapp from './FavoriteDapp';
-import { QuestPanel } from '../Quests';
-import { StyledContainer, StyledTitle, StyledDapps, LoadingWrapper, Empty } from './styles';
-
-import useFavorites from '../../hooks/useFavorites';
 import useFavoriteDapps from '../../hooks/useFavoriteDapps';
+import useFavorites from '../../hooks/useFavorites';
+import { QuestPanel } from '../Quests';
+import FavoriteDapp from './FavoriteDapp';
+import { Empty,LoadingWrapper, StyledContainer, StyledDapps, StyledTitle } from './styles';
 
 const Favorites = () => {
   const { loading, list, info } = useFavorites();

@@ -1,15 +1,16 @@
+import { memo } from 'react';
+
 import QuestItem from '@/views/Quest/components/QuestItem';
+
+import useRecommendList from '../../hooks/useRecommendList';
 import {
+  StyledButtons,
   StyledContainer,
   StyledHeader,
-  StyledTitle,
-  StyledButtons,
   StyledLeftButton,
   StyledRecommendList,
+  StyledTitle,
 } from './styles';
-
-import { memo } from 'react';
-import useRecommendList from '../../hooks/useRecommendList';
 
 const Recommends = ({ campaignId }: { campaignId: string }) => {
   const { loading, recommends, handlePageChange, page, maxPage } = useRecommendList(campaignId);

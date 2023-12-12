@@ -1,9 +1,7 @@
 import { setEthProvider, setNearConnection, setSignerProvider } from '@near-eth/client';
 import { Near, WalletConnection } from '@near-eth/near-ether/node_modules/near-api-js';
 import { useSetChain } from '@web3-onboard/react';
-import useSwitchChain from '@/hooks/useSwitchChain';
 import Big from 'big.js';
-import chains from '@/config/chains';
 import { ethers } from 'ethers';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -14,6 +12,7 @@ import { Erc20Abi, tokenList } from '@/components/rainbow-bridge/config';
 import { ConnectButton } from '@/components/rainbow-bridge/connect';
 import { GoBackNav, GoBackNavSourceAllInOne } from '@/components/rainbow-bridge/go-back';
 import { RainbowLeftMenu } from '@/components/rainbow-bridge/left-menu';
+import { LeftMenuContainer } from '@/components/rainbow-bridge/left-menu';
 import { PendingTransfers } from '@/components/rainbow-bridge/pending-transfers';
 import {
   Button,
@@ -26,15 +25,14 @@ import {
   TokenLight,
   Wrapper,
 } from '@/components/rainbow-bridge/rainbow-styled-components';
-
-import { LeftMenuContainer } from '@/components/rainbow-bridge/left-menu';
-
 import * as storage from '@/components/rainbow-bridge/storage';
 import { transfer } from '@/components/rainbow-bridge/transfer';
 import MainWrapper from '@/components/sandbox/css/MainWrapper';
+import chains from '@/config/chains';
 import { onboard, useEthersProviderContext } from '@/data/web3';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
+import useSwitchChain from '@/hooks/useSwitchChain';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { flushEvents } from '@/utils/analytics';

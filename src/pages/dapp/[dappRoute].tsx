@@ -1,11 +1,12 @@
-import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import { useDefaultLayout } from '@/hooks/useLayout';
-import type { NextPageWithLayout } from '@/utils/types';
-import { useLayoutStore } from '@/stores/layout';
-import { useDappStore } from '@/stores/dapp';
-import { useChainsStore } from '@/stores/chains';
 import { useCallback } from 'react';
+
+import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import useAccount from '@/hooks/useAccount';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { useChainsStore } from '@/stores/chains';
+import { useDappStore } from '@/stores/dapp';
+import { useLayoutStore } from '@/stores/layout';
+import type { NextPageWithLayout } from '@/utils/types';
 
 // set dynamic routes for dapps in config file
 

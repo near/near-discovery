@@ -1,13 +1,15 @@
 import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { useLayoutStore } from '@/stores/layout';
-import useTxs from '../Bridge/hooks/useTxs';
-import BridgeWrapper from './components/BridgeWrapper';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import AccountWrapper from './components/AccountWrapper';
-import useAccount from '@/hooks/useAccount';
+
 import { colors } from '@/config/chains';
+import useAccount from '@/hooks/useAccount';
+import { useLayoutStore } from '@/stores/layout';
+
+import useTxs from '../Bridge/hooks/useTxs';
+import AccountWrapper from './components/AccountWrapper';
+import BridgeWrapper from './components/BridgeWrapper';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 const StyledPanel = styled.div<{ display: number }>`
   width: 352px;

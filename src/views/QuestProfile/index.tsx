@@ -1,23 +1,21 @@
 import { memo, useState } from 'react';
 
-import UserInfo from './components/UserInfo';
 import DailyTask from './components/DailyTask';
-import Tabs from './components/Tabs';
-import InviteCode from './components/InviteCode';
-import Quests from './components/Quests';
 import Favorites from './components/Favorites';
-import Pts from './components/Pts';
+import InviteCode from './components/InviteCode';
 import InviteFirendsModal from './components/InviteFirendsModal';
-import { StyledContainer, StyledTabsBox } from './styles';
-
+import Pts from './components/Pts';
+import Quests from './components/Quests';
+import Tabs from './components/Tabs';
+import UserInfo from './components/UserInfo';
 import useInviteList from './hooks/useInviteList';
-
+import { StyledContainer, StyledTabsBox } from './styles';
 import type { Tab } from './types';
 
 const QuestLeaderboardView = () => {
   const [tab, setTab] = useState<Tab>('quests');
   const [openCodes, setOpenCodes] = useState(false);
-  const { loading, list, totalRewards, reward } = useInviteList();
+  const {  list, totalRewards, reward } = useInviteList();
   return (
     <>
       <StyledContainer>

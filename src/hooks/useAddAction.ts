@@ -1,8 +1,10 @@
 import { useCallback } from 'react';
-import useAccount from './useAccount';
+
 import { useChainsStore } from '@/stores/chains';
 import { useUUIdStore } from '@/stores/uuid';
 import { post } from '@/utils/http';
+
+import useAccount from './useAccount';
 
 export default function useAddAction(source: string) {
   const { account, chainId } = useAccount();

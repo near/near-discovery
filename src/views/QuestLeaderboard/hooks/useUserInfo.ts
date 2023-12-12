@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { get } from '@/utils/http';
+
 import { QUEST_PATH } from '@/config/quest';
+import { get } from '@/utils/http';
 
 export default function useUserInfo(id?: string) {
   const [info, setInfo] = useState<any>();

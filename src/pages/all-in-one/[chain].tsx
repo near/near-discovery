@@ -1,16 +1,15 @@
+import { ethers } from 'ethers';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
-import Spinner from '@/components/Spinner';
-import { ethers } from 'ethers';
-import popupsData from '@/config/all-in-one/chains';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import Spinner from '@/components/Spinner';
+import popupsData from '@/config/all-in-one/chains';
+import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useRouter } from 'next/router';
-import useAddAction from '@/hooks/useAddAction';
-
 import type { NextPageWithLayout } from '@/utils/types';
 
 const arrow = (

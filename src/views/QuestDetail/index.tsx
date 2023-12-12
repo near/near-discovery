@@ -1,16 +1,16 @@
+import { useSearchParams } from 'next/navigation';
+import { memo } from 'react';
+
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
-import Yours from '../Quest/components/Yours';
-import Details from './components/Details';
-import Actions from './components/Actions';
-import Recommends from './components/Recommends';
-
-import { StyledContainer, StyledTopBox } from './styles';
-
-import { memo } from 'react';
-import { useSearchParams } from 'next/navigation';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
+
+import Yours from '../Quest/components/Yours';
+import Actions from './components/Actions';
+import Details from './components/Details';
+import Recommends from './components/Recommends';
 import useQuestInfo from './hooks/useQuestInfo';
+import { StyledContainer, StyledTopBox } from './styles';
 
 const QuestDetailView = () => {
   const searchParams = useSearchParams();

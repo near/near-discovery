@@ -1,14 +1,15 @@
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
+import { dapps } from '@/config/dapps';
 import { menuData } from '@/data/menuData';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
-import { useSearchParams } from 'next/navigation';
-import { dapps } from '@/config/dapps';
 
 const BackRoute = styled.div`
   /* position: absolute; */

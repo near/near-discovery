@@ -1,10 +1,8 @@
-import { StyledContainer, StyledNav } from './styles';
-
-import { useRouter, usePathname } from 'next/navigation';
-
+import { usePathname,useRouter } from 'next/navigation';
 import { memo } from 'react';
-
 import type { CSSProperties } from 'styled-components/dist/types';
+
+import { StyledContainer, StyledNav } from './styles';
 
 export type Nav = {
   name: string;

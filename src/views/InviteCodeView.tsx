@@ -1,11 +1,12 @@
+import { setCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useRouter } from 'next/router';
+
 import { inviteCodeActivate } from '@/apis';
-import useAuth from '@/hooks/useAuth';
 import LoadingIcon from '@/components/Icons/Loading';
 import useAccount from '@/hooks/useAccount';
-import { setCookie } from 'cookies-next';
+import useAuth from '@/hooks/useAuth';
 
 export const yellowbg =
   'https://assets.dapdap.net/images/bafkreicy6iwoxezg764uhfezusxpc6xd7r3s3hg2nnjdcgt5ktazdnsyje.svg';

@@ -1,10 +1,9 @@
+import { AnimatePresence,motion } from 'framer-motion';
+import type { ReactNode } from 'react';
+import { memo } from 'react';
 import styled from 'styled-components';
 
-import { motion, AnimatePresence } from 'framer-motion';
-import { memo } from 'react';
 import { modal, overlay } from '@/components/animation';
-
-import type { ReactNode } from 'react';
 
 const Dialog = styled.div`
   position: fixed;

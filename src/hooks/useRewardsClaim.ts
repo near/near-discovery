@@ -1,7 +1,8 @@
 import { useCallback, useState } from 'react';
-import { get, post } from '@/utils/http';
-import useToast from '@/hooks/useToast';
+
 import { QUEST_PATH } from '@/config/quest';
+import useToast from '@/hooks/useToast';
+import { get, post } from '@/utils/http';
 
 export default function useRewardsClaim(onSuccess: VoidFunction) {
   const [loading, setLoading] = useState(false);

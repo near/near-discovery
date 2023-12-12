@@ -1,7 +1,8 @@
 import { useCallback } from 'react';
-import useToast from './useToast';
 
 import { copyText } from '@/utils/copy';
+
+import useToast from './useToast';
 
 export default function useCopy() {
   const toast = useToast();

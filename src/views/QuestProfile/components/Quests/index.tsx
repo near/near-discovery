@@ -1,18 +1,20 @@
-import QuestItem from '@/views/Quest/components/QuestItem';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence,motion } from 'framer-motion';
 import { memo } from 'react';
+
 import { container } from '@/components/animation';
 import Loading from '@/components/Icons/Loading';
+import QuestItem from '@/views/Quest/components/QuestItem';
+
 import useUserParticipations from '../../hooks/useUserParticipations';
 import {
+  Empty,
+  LoadingWrapper,
   StyledContainer,
   StyledHeader,
-  StyledTitle,
-  StyledLabels,
   StyledLabel,
+  StyledLabels,
   StyledQuests,
-  LoadingWrapper,
-  Empty,
+  StyledTitle,
 } from './styles';
 
 export const QuestPanel = ({ title, info, list, loading }: any) => {

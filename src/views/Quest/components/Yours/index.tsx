@@ -1,6 +1,8 @@
 import { memo } from 'react';
-import { StyledContainer, StyledBox, StyledLabel, StyledValue, StyledCoin, StyledLine } from './styles';
+
 import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
+
+import { StyledBox, StyledCoin, StyledContainer, StyledLabel, StyledLine,StyledValue } from './styles';
 
 const Yours = () => {
   const { loading, info } = useUserInfo();

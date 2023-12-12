@@ -2,9 +2,9 @@ import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import useToast from '@/hooks/useToast';
 import { MetaTags } from '@/components/MetaTags';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import useToast from '@/hooks/useToast';
 import type { NextPageWithLayout } from '@/utils/types';
 
 type MetaPreview = {

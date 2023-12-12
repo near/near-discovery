@@ -1,6 +1,6 @@
-import { create } from 'zustand';
-import { persist, createJSONStorage } from 'zustand/middleware';
 import { v4 as uuidv4 } from 'uuid';
+import { create } from 'zustand';
+import { createJSONStorage,persist } from 'zustand/middleware';
 
 export const useUUIdStore = create(
   persist(

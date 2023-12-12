@@ -1,21 +1,21 @@
-import { memo } from 'react';
 import { useRouter } from 'next/navigation';
+import { memo } from 'react';
 
 import ProcessBar from '../ProcessBar';
 import {
-  StyledContainer,
-  StyledTask,
-  StyledIconBox,
-  StyledIcon,
-  StyledTaskName,
-  StyledTaskDesc,
-  StyledProcessBars,
-  StyledTags,
-  StyledTag,
-  StyledCoin,
-  StyledLive,
   StyledCalimable,
+  StyledCoin,
+  StyledContainer,
   StyledFooter,
+  StyledIcon,
+  StyledIconBox,
+  StyledLive,
+  StyledProcessBars,
+  StyledTag,
+  StyledTags,
+  StyledTask,
+  StyledTaskDesc,
+  StyledTaskName,
 } from './styles';
 
 const QuestItem = ({

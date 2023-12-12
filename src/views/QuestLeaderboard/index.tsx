@@ -1,17 +1,17 @@
-import { memo, useState, useMemo } from 'react';
+import { memo, useMemo,useState } from 'react';
 
 import useCampaignList from '@/views/Quest/hooks/useCampaignList';
-import useQuestList from '@/views/Quest/hooks/useQuestList';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
+import useQuestList from '@/views/Quest/hooks/useQuestList';
+
 import Yours from '../Quest/components/Yours';
-import Swiper from './components/Swiper';
-import Tabs from './components/Tabs';
 import Leaderboard from './components/Leaderboard';
 import Quests from './components/Quests';
-import { StyledContainer } from './styles';
+import Swiper from './components/Swiper';
+import Tabs from './components/Tabs';
 import useLeaderboard from './hooks/useLeaderboard';
 import useUserInfo from './hooks/useUserInfo';
-
+import { StyledContainer } from './styles';
 import type { Tab } from './types';
 
 const QuestLeaderboardView = () => {

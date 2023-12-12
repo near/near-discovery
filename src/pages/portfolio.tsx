@@ -7,6 +7,7 @@ import {
   AllNetWorkTab,
   ChartDataWrapper,
   CheckBox,
+  DefaultProfileIcon,
   DiffWrapper,
   HoldingTable,
   HoldingTableWrapper,
@@ -21,13 +22,12 @@ import {
   ProtocolCard,
   ProtocolSelectBox,
   ProtocolTable,
+  ProtocolTableHeader,
+  ProtocolTableRow,
   SortArrowDownWrapper,
   TotalBalanceWrapper,
   Wrapper,
   YourAssetsTitle,
-  DefaultProfileIcon,
-  ProtocolTableHeader,
-  ProtocolTableRow,
 } from '@/components/portfolio';
 import { NoDataLayout } from '@/components/portfolio/common';
 import { IconSeries } from '@/components/portfolio/icons';

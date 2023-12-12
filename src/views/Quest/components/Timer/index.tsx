@@ -1,9 +1,9 @@
-import { StyledContainer, StyledItem, StyledValue, StyledDesc } from './styles';
+import { memo, useEffect, useState } from 'react';
 
 import useCountdown from '@/hooks/useCountdown';
 
-import { memo, useEffect, useState } from 'react';
 import { getTimePeriods, toTwo } from '../../helpers';
+import { StyledContainer, StyledDesc,StyledItem, StyledValue } from './styles';
 
 const Timer = ({ endTime }: { endTime: number }) => {
   const [ready, setReady] = useState(false);

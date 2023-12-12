@@ -1,25 +1,26 @@
-import { motion, AnimatePresence } from 'framer-motion';
-import { memo } from 'react';
-import { container } from '@/components/animation';
 import { format } from 'date-fns';
-import Loading from '@/components/Icons/Loading';
-import useClaimedList from '../../hooks/useClaimedList';
+import { AnimatePresence,motion } from 'framer-motion';
+import { memo } from 'react';
 
+import { container } from '@/components/animation';
+import Loading from '@/components/Icons/Loading';
+
+import useClaimedList from '../../hooks/useClaimedList';
 import {
-  StyledContainer,
-  StyledHeader,
-  StyledColumn,
+  Empty,
+  LoadingWrapper,
   StyledBody,
   StyledCell,
-  StyledRow,
-  StyledRewards,
-  StyledQuestIconBox,
-  StyledQuestIcon,
-  StyledQuestTitle,
-  StyledQuestRewards,
   StyledCoin,
-  LoadingWrapper,
-  Empty,
+  StyledColumn,
+  StyledContainer,
+  StyledHeader,
+  StyledQuestIcon,
+  StyledQuestIconBox,
+  StyledQuestRewards,
+  StyledQuestTitle,
+  StyledRewards,
+  StyledRow,
 } from './styles';
 import type { Column } from './types';
 

@@ -1,8 +1,6 @@
-import QuestDetailView from '@/views/QuestDetail';
-
 import { useDefaultLayout } from '@/hooks/useLayout';
-
 import type { NextPageWithLayout } from '@/utils/types';
+import QuestDetailView from '@/views/QuestDetail';
 
 const QuestDetailPage: NextPageWithLayout = () => {
   return <QuestDetailView />;

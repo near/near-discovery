@@ -1,7 +1,7 @@
+import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
-import Link from 'next/link';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';

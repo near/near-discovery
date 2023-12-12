@@ -1,8 +1,9 @@
-import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { memo, useMemo } from 'react';
-import { useChainsStore } from '@/stores/chains';
-import useAddAction from '@/hooks/useAddAction';
+
+import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { LANDING_CHAINS } from '@/config/bridge/chains';
+import useAddAction from '@/hooks/useAddAction';
+import { useChainsStore } from '@/stores/chains';
 
 const Bridge = ({ onSuccess }: { onSuccess: VoidFunction }) => {
   const chains = useChainsStore((store: any) => store.chains);

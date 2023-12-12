@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import useAccount from '@/hooks/useAccount';
-import { useDefaultLayout } from '@/hooks/useLayout';
 
 import popupsData from '@/config/all-in-one/chains';
+import useAccount from '@/hooks/useAccount';
+import { useDefaultLayout } from '@/hooks/useLayout';
 
 const AllInOne = () => {
   const router = useRouter();

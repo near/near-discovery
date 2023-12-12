@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
+
 import useAccount from '@/hooks/useAccount';
 import { get } from '@/utils/http';
+
 import type { InviteCodeRecord } from '../types';
 
 export default function (show: boolean) {

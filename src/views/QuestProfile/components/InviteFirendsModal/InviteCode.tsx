@@ -1,7 +1,8 @@
-import { StyledNewCodeBox, StyledNewCodeBg, StyledNewCode, StyledCopyIcon } from './styles';
-
 import { memo } from 'react';
+
 import useCopy from '@/hooks/useCopy';
+
+import { StyledCopyIcon,StyledNewCode, StyledNewCodeBg, StyledNewCodeBox } from './styles';
 
 const InviteCode = ({ code }: { code: string }) => {
   const { copy } = useCopy();

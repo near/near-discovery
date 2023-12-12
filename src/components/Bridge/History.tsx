@@ -1,9 +1,11 @@
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
-import CurrencyIcon from '../CurrencyIcon';
-import { formateTxDate } from '@/utils/date';
-import { balanceFormated, valueFormated } from '@/utils/balance';
+
 import { usePriceStore } from '@/stores/price';
+import { balanceFormated, valueFormated } from '@/utils/balance';
+import { formateTxDate } from '@/utils/date';
+
+import CurrencyIcon from '../CurrencyIcon';
 import Loading from '../Icons/Loading';
 
 const StyledContainer = styled.div``;
