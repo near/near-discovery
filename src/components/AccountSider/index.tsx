@@ -36,6 +36,7 @@ const Content = styled.div`
 `;
 const Main = styled.div`
   flex-grow: 1;
+  overflow-y: auto;
 `;
 const Bg = styled.div<{ $chain: number }>`
   width: 100%;
