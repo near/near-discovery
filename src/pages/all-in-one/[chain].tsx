@@ -1,7 +1,7 @@
 import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
@@ -191,6 +191,7 @@ const AllInOne: NextPageWithLayout = () => {
   const [showComponent, setShowComponent] = useState(false);
   const [switching, setSwitching] = useState(false);
   const { addAction } = useAddAction('all-in-one');
+  const popupRef = useRef<HTMLDivElement | null>(null);
 
   const handleSelectItemClick = () => {
     setIsSelectItemClicked(!isSelectItemClicked);
@@ -244,6 +245,20 @@ const AllInOne: NextPageWithLayout = () => {
       }, 500);
     }
   }, [chain]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: { target: any; }) => {
+      if (popupRef.current && !popupRef.current.contains(event.target)) {
+        setIsSelectItemClicked(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
   return (
     <Container key={chain}>
       <BreadCrumbs>
@@ -279,7 +294,7 @@ const AllInOne: NextPageWithLayout = () => {
             </div>
 
             {isSelectItemClicked && (
-              <div className="login-select-popup">
+              <div className="login-select-popup" ref={popupRef}>
                 {Object.values(popupsData).map((item) => (
                   <div
                     className={`select-popups-item ${chain === item.path ? 'selected' : ''}`}

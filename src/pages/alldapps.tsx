@@ -428,11 +428,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
   function getCategoryNames(dappCategories: any, categoryArray: any[]) {
     const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
     return categories.map((categoryItem: any) => {
-      const categoryId = typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
+      const categoryId =
+        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
       const category = categoryArray.find((c: any) => c.id === categoryId);
       return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
     });
-  }  
+  }
 
   const [activeIndex, setActiveIndex] = useState(0);
 
@@ -576,13 +577,13 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
       <div className="token-tab-list">
         <div className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`} onClick={() => handleTabClick('TBD')}>
-          Token-TBD🔥
+          🔥 Token-TBD
         </div>
         <div
           className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
           onClick={() => handleTabClick('token')}
         >
-          Native token
+          💰 Native token
         </div>
       </div>
       <div className="tab-content">
@@ -720,7 +721,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
           </div>
         </>
       ) : null}
-
     </AllDappsPage>
   );
 };

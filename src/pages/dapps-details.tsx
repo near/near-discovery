@@ -96,14 +96,17 @@ const DappsDetailsTitle = styled.div`
           }
         }
         .Dapp-item-special {
+          width: auto;
+          display: flex;
+          align-items: center;
           background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
           color: #02051e;
           font-size: 16px;
           font-weight: 700;
-          line-height: 58px;
-          a{
+          a {
             color: #02051e;
             text-decoration: none;
+            margin-right: 8px;
           }
         }
       }
@@ -152,16 +155,18 @@ const DappsDetailsContent = styled.div`
     .left-side-tab {
       background: rgba(33, 35, 42, 0.9);
       border-radius: 20px;
-      padding: 20px 24px;
+      padding: 20px 0;
       table {
         width: 100%;
         tr {
           th {
+            padding: 0 24px;
             color: rgba(124, 127, 150, 1);
             font-size: 14px;
             font-weight: 400;
           }
           td {
+            padding: 0 24px;
             font-size: 14px;
             font-weight: 400;
             height: 44px;
@@ -175,6 +180,9 @@ const DappsDetailsContent = styled.div`
               background: conic-gradient(from 180deg at 50% 50%, #00d1ff 0deg, #ff008a 360deg);
             }
           }
+        }
+        tr:has(td):hover {
+          background-color: rgba(53, 55, 73, 0.5);
         }
       }
     }
@@ -207,92 +215,92 @@ const DappsDetailsContent = styled.div`
 const DappsDetailBottom = styled.div`
   padding: 0 12%;
   .tab-content {
-      /* border-bottom: 1px solid #383b48; */
-      display: flex;
-      flex-wrap: wrap;
-      position: relative;
-      margin-bottom: 100px;
+    /* border-bottom: 1px solid #383b48; */
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 100px;
 
-      .tab-content-item {
-        margin: 30px 20px 0 0; 
-        border-bottom: 1px solid #383b48;
-        display: flex;
-        width: 30%;
-        flex-basis: calc(33.3333% - 20px); 
-        box-sizing: border-box;
-        .content-item-img {
-          margin-right: 16px;
-          width: 20%;
-          img {
-            width: 72px;
-            height: 72px;
-          }
+    .tab-content-item {
+      margin: 30px 20px 0 0;
+      border-bottom: 1px solid #383b48;
+      display: flex;
+      width: 30%;
+      flex-basis: calc(33.3333% - 20px);
+      box-sizing: border-box;
+      .content-item-img {
+        margin-right: 16px;
+        width: 20%;
+        img {
+          width: 72px;
+          height: 72px;
         }
-        .content-item-text {
-          margin-right: 16px;
-          width: 49%;
-          h1 {
-            font-size: 20px;
-            font-weight: 700;
+      }
+      .content-item-text {
+        margin-right: 16px;
+        width: 49%;
+        h1 {
+          font-size: 20px;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+        p {
+          font-size: 14px;
+          color: #979abe;
+          margin: 6px 0 9px 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .content-item-btn {
+        width: 22%;
+        .item-btn-item {
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          border: 1px solid #373a53;
+          font-size: 12px;
+          color: #ffffff;
+          padding: 6px 20px;
+          text-align: center;
+          align-items: center;
+          border-radius: 16px;
+          margin-bottom: 14px;
+          a {
             color: #ffffff;
-            margin: 0;
-          }
-          p {
-            font-size: 14px;
-            color: #979abe;
-            margin: 6px 0 9px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
-        .content-item-btn {
-          width: 22%;
-          .item-btn-item {
-            background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-            border: 1px solid #373a53;
-            font-size: 14px;
-            color: #ffffff;
-            padding: 6px 20px;
-            text-align: center;
-            align-items: center;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            a {
-              color: #ffffff;
-              text-decoration: none;
-            }
-          }
-        }
-        @media (max-width: 1500px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 60%;
-          }
-        }
-        @media (max-width: 1400px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 50%;
-          }
-        }
-        @media (max-width: 975px) {
-          flex-basis: calc(100% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 70%;
+            text-decoration: none;
           }
         }
       }
+      @media (max-width: 1500px) {
+        flex-basis: calc(50% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 60%;
+        }
+      }
+      @media (max-width: 1400px) {
+        flex-basis: calc(50% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 50%;
+        }
+      }
+      @media (max-width: 975px) {
+        flex-basis: calc(100% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 70%;
+        }
+      }
     }
+  }
 `;
 
 const BreadCrumbs = styled.div`
@@ -372,7 +380,7 @@ const Golds = styled.div`
 
 const Title = styled.div`
   font-family: Gantari;
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 700;
   color: #ffffff;
   display: inline-block;
@@ -416,23 +424,26 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             <div className="left-enter-Dapp">
               <div className="enter-Dapp-item">
                 <p>Blockchain</p>
-                <img 
-                src='https://assets.dapdap.net/images/bafkreicjsbkvvcxahxjejkctwopcnmzbeskxhfrkg7lyawhkhzrxcmvgfy.svg' 
-                alt="" />
-                <img 
-                src='https://assets.dapdap.net/images/bafkreie5b65e7cp7jtvhrwgibvoqpf7ekj4v7jgo2egjr3qmfsl3p4ulam.svg' 
-                alt="" />
-                 <img 
-                src='https://assets.dapdap.net/images/bafkreib5v3jonanuknj5db5ysuhb6ubowv2pqnopyg3yraknfr3jn7el4u.svg' 
-                alt="" />
+                <img
+                  src="https://assets.dapdap.net/images/bafkreicjsbkvvcxahxjejkctwopcnmzbeskxhfrkg7lyawhkhzrxcmvgfy.svg"
+                  alt=""
+                />
+                <img
+                  src="https://assets.dapdap.net/images/bafkreie5b65e7cp7jtvhrwgibvoqpf7ekj4v7jgo2egjr3qmfsl3p4ulam.svg"
+                  alt=""
+                />
+                <img
+                  src="https://assets.dapdap.net/images/bafkreib5v3jonanuknj5db5ysuhb6ubowv2pqnopyg3yraknfr3jn7el4u.svg"
+                  alt=""
+                />
               </div>
               <div className="enter-Dapp-item">
-                <p>Blockchain</p>
+                <p>Native Token</p>
                 <h1>TBD🔥</h1>
               </div>
               <div className="enter-Dapp-item Dapp-item-special">
-                <Link href='/dapp/Syncswap'>Enter Dapp</Link>
-                {/* <img src={arrowBlock} alt="" /> */}
+                <Link href="/dapp/Syncswap">Enter Dapp</Link>
+                <img src={arrowBlock} alt="" />
               </div>
             </div>
           </div>
@@ -549,17 +560,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         </div>
         <div className="right-side-substance">
           <Title>Quest & Rewards</Title>
-          {/* <Golds>
-            <img src={gold} alt="" />
-            <span>10</span>
-          </Golds> */}
           <div className="right-side-item">
-            <input type="radio" />
-            <p>bridge atleast 0.1 ETH to Polygon zkEVM</p>
-            <Golds>
-              <img src={gold} alt="" />
-              <span>+5</span>
-            </Golds>
+          
           </div>
         </div>
       </DappsDetailsContent>

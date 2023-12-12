@@ -97,11 +97,12 @@ const Content = styled.div`
           color: #ffffff;
         }
         p {
-          font-size: 18px;
+          font-size: 16px;
         }
         a {
           color: #d2d2d2;
           text-decoration: underline;
+          font-size: 18px;
         }
         .list-item-img {
           position: absolute;
@@ -196,7 +197,7 @@ const Content = styled.div`
           .item-btn-item {
             background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
             border: 1px solid #373a53;
-            font-size: 14px;
+            font-size: 12px;
             color: #ffffff;
             padding: 6px 20px;
             text-align: center;
@@ -325,10 +326,20 @@ const Content = styled.div`
     .deepDive-title {
       width: 100%;
       text-align: center;
+      .title {
+        font-size: 42px;
+      }
       img {
         height: 93px;
         margin-bottom: 32px;
         margin-right: 20px;
+      }
+      p {
+        color: rgba(255, 255, 255, 1);
+        font-family: Gantari;
+        font-size: 26px;
+        font-weight: 500;
+        margin-bottom: 42px;
       }
     }
     .deepDive-content {
@@ -411,6 +422,9 @@ const Content = styled.div`
         font-size: 26px;
         font-weight: 500;
         margin-bottom: 42px;
+      }
+      .title {
+        font-size: 42px;
       }
     }
     .shortcuts-content {
@@ -503,6 +517,9 @@ const Content = styled.div`
     .decentralized-frotnend-title {
       width: 100%;
       text-align: center;
+      .title{
+        font-size: 42px;
+      }
       img {
         width: fit-content;
         height: 93px;
@@ -568,6 +585,7 @@ const Content = styled.div`
             color: #d2d2d2;
           }
           span {
+            font-size: 18px;
             color: #d2d2d2;
             text-decoration: underline;
           }
@@ -831,7 +849,6 @@ const Paragraph = styled.div`
   margin: -24px 0 30px 0;
 `;
 
-
 const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
   return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
 });
@@ -882,11 +899,9 @@ const HomeContent: NextPageWithLayout = () => {
   function getCategoryNames(dappCategories: any[], categoryArray: any[]) {
     return dappCategories.map((categoryItem: any) => {
       const category = categoryArray.find((c: any) => c.id === categoryItem.category_id);
-      return category && typeof category === 'object' && 'name' in category
-        ? category.name
-        : 'Category not found';
+      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
     });
-  }  
+  }
 
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
@@ -1154,11 +1169,11 @@ const HomeContent: NextPageWithLayout = () => {
         <div className="deep-dive">
           <div className="deepDive-title">
             <img src="https://assets.dapdap.net/images/home-deepdive.png" alt="" />
-            <Title>Deep Dive</Title>
-            <Paragraph>
+            <Title className="title">Deep Dive</Title>
+            <p>
               Real-time DApp trend data, simple and economical one-click interaction, and easily accessible historical
               transaction data.
-            </Paragraph>
+            </p>
           </div>
           <div className="deepDive-content">
             <div className="deepDive-content-img">
@@ -1203,7 +1218,7 @@ const HomeContent: NextPageWithLayout = () => {
         <div className="shortcuts">
           <div className="shortcuts-title">
             <img src="https://assets.dapdap.net/images/home-shortcuts.png" alt="" />
-            <Title>Shortcuts</Title>
+            <Title className="title">Shortcuts</Title>
             <p>Streamline your crypto experience with intuitive processes and comprehensive support.</p>
             <Paragraph>
               With our streamlined shortcut features, users from all levels can easily familiarize themselves with and
@@ -1241,7 +1256,7 @@ const HomeContent: NextPageWithLayout = () => {
               src="https://assets.dapdap.net/images/bafkreianvp55gpfwvvlamdmvq6yx5omqomtjcntbtkiouv4bxukpgcbwwe.svg"
               alt=""
             />
-            <Title>Decentralized frotnend</Title>
+            <Title className='title'>Decentralized frotnend</Title>
             <div className="frotnend-content-title">
               Powered by <span>BOS</span>allows us to redesign the Web3 user journey
             </div>
@@ -1286,7 +1301,6 @@ const HomeContent: NextPageWithLayout = () => {
           </div>
         </div>
       </Content>
-      
     </HomePage>
   );
 };

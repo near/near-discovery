@@ -10,13 +10,56 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 
+const blueBg = (
+  <svg width="719" height="719" viewBox="0 0 719 719" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.6" filter="url(#filter0_f_513_4283)">
+      <circle cx="359.5" cy="359.5" r="159.5" fill="#1868B3" />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f_513_4283"
+        x="0"
+        y="0"
+        width="719"
+        height="719"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_513_4283" />
+      </filter>
+    </defs>
+  </svg>
+);
+const yellowBg = (
+  <svg width="628" height="570" viewBox="0 0 628 570" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g opacity="0.4" filter="url(#filter0_f_513_4284)">
+      <circle cx="314" cy="256" r="114" fill="#EBF479" />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f_513_4284"
+        x="0"
+        y="-58"
+        width="628"
+        height="628"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_513_4284" />
+      </filter>
+    </defs>
+  </svg>
+);
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const blockchainsBg =
-  'https://assets.dapdap.net/images/bafkreic3dbmrzuihpcmtgjbxvc7ipyu7hvfvsrhlvfv4uwibwhedfh7vmi.svg';
+const blockchainsBg = 'https://assets.dapdap.net/images/home-banner-bg.png';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
 const leftarrow = 'https://assets.dapdap.net/images/bafkreihvymef5y4q6a5lpnwea4fcygi4wrrb2tbzitswc3xnaufs6qnzjy.svg';
 const arrowBlock = 'https://assets.dapdap.net/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
@@ -58,6 +101,21 @@ const BlockchainsBanner = styled.div`
   background-position-y: 26%;
   display: flex;
   align-items: center;
+  .yellow-bg {
+    position: absolute;
+    left: 15%;
+    top: -20%;
+  }
+  .blue-bg {
+    position: absolute;
+    right: 0;
+    @media (max-width: 1556px) {
+      width: 50%;
+      img {
+        width: 100%;
+      }
+    }
+  }
   .blockchainsBanner-title {
     color: #ffe7e7;
     h1 {
@@ -247,6 +305,8 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         <span>L2 Blockchains</span>
       </BreadCrumbs>
       <BlockchainsBanner>
+        <div className="blue-bg">{blueBg}</div>
+        <div className="yellow-bg">{yellowBg}</div>
         <div className="blockchainsBanner-title">
           <h1>List of Layer 2 Blockchains</h1>
           <p>
