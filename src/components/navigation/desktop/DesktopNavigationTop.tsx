@@ -7,9 +7,12 @@ import styled from 'styled-components';
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
 import { dapps } from '@/config/dapps';
+import { TTAPI_PATH } from '@/config/quest';
 import { menuData } from '@/data/menuData';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
+import { get } from '@/utils/http';
+import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const BackRoute = styled.div`
   /* position: absolute; */
@@ -247,6 +250,10 @@ const MenuContent = styled.div`
       color: #979abe;
       margin-bottom: 20px;
     }
+    a {
+      color: #ffffff;
+      text-decoration: none;
+    }
 
     .item-list-ingle {
       display: inline-block;
@@ -344,6 +351,21 @@ export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
   const router = useRouter();
+  const [networkList, setNetworkList] = useState<any[]>([]);
+  const { loading, categories } = useCategoryDappList();
+  const categoryArray = Object.values(categories);
+
+  useEffect(() => {
+    const fetchNetworkData = async () => {
+      try {
+        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
+        setNetworkList(resultNetwork.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultNetwork data:', error);
+      }
+    };
+    fetchNetworkData();
+  }, []);
 
   const query = router.query;
   // console.log('query: ', query, currentPath);
@@ -416,31 +438,37 @@ export const DesktopNavigationTop = () => {
             <div className="content-item-text">
               <h1>Explore Dapps</h1>
               <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
-              <div className="item-list-ingle">Dex</div>
-              <div className="item-list-ingle">Staking</div>
-              <div className="item-list-ingle">Lending</div>
-              <div className="item-list-ingle">Liquidity</div>
+              {categoryArray &&
+                categoryArray.map((item: any, index: number) => {
+                  return (
+                    <div className="item-list-ingle" key={index}>
+                      {item.name}
+                    </div>
+                  );
+                })}
             </div>
-            <div className="content-item-arrow">
-              <img src={ArrowIcon} alt="" />
-            </div>
+            <Link href="/alldapps" onClick={() => setShowMenuContent(false)}>
+              <div className="content-item-arrow">
+                <img src={ArrowIcon} alt="" />
+              </div>
+            </Link>
           </div>
           <div className="menu-content-item">
             <div className="content-item-text">
               <h1>Explore Blockchains</h1>
               <p>Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems.</p>
-              <div className="item-list-ingle">Polygon zkEVM</div>
-              <div className="item-list-ingle">BSC chain</div>
-              <div className="item-list-ingle">Arbitrum</div>
-              <div className="item-list-ingle">Polygon</div>
-              <div className="item-list-ingle">BASE</div>
-              <div className="item-list-ingle">Mantle</div>
-              <div className="item-list-ingle">Avalanche</div>
-              <div className="item-list-ingle">Gnosis</div>
+              {networkList &&
+                networkList.map((child, index) => (
+                  <Link href={`/chains-details?id=${child.id}`} key={index} onClick={() => setShowMenuContent(false)}>
+                    <div className="item-list-ingle">{child.name}</div>
+                  </Link>
+                ))}
             </div>
-            <div className="content-item-arrow">
-              <img src={ArrowIcon} alt="" />
-            </div>
+            <Link href="/blockchains" onClick={() => setShowMenuContent(false)}>
+              <div className="content-item-arrow">
+                <img src={ArrowIcon} alt="" />
+              </div>
+            </Link>
           </div>
           <div className="menu-content-deep">
             <Link href="/warmup" onClick={() => setShowMenuContent(false)}>

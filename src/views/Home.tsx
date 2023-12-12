@@ -432,13 +432,14 @@ const Content = styled.div`
       margin-bottom: 100px;
       .shortcuts-content-img {
         width: 70%;
+        height: fit-content;
         margin-right: 48px;
         border: 2px solid #373a52;
         border-radius: 20px;
         position: relative;
         img {
           width: 100%;
-          height: 100%;
+          /* height: 100%; */
           border-radius: 20px;
         }
         .shortcuts-img-banner {
@@ -517,7 +518,7 @@ const Content = styled.div`
     .decentralized-frotnend-title {
       width: 100%;
       text-align: center;
-      .title{
+      .title {
         font-size: 42px;
       }
       img {
@@ -1076,7 +1077,7 @@ const HomeContent: NextPageWithLayout = () => {
                       </div>
                       <div className="content-item-btn">
                         <div className="item-btn-item">
-                          <Link href="/dapps-details">Detail</Link>
+                          <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                         </div>
                         <div
                           className="item-btn-item"
@@ -1117,7 +1118,7 @@ const HomeContent: NextPageWithLayout = () => {
                       </div>
                       <div className="content-item-btn">
                         <div className="item-btn-item">
-                          <Link href="/dapps-details">Detail</Link>
+                          <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                         </div>
                         <div className="item-btn-item">
                           <Link href={dapp.route}>Dapp</Link>
@@ -1144,7 +1145,7 @@ const HomeContent: NextPageWithLayout = () => {
             {networkList &&
               networkList.slice(0, 8).map((child, index) => (
                 <div className="layer-list-item" key={index}>
-                  <Link href="/chains-details">
+                  <Link href={`/chains-details?id=${child.id}`}>
                     <img src={child.logo} alt="" />
                     <h1>{child.name}</h1>
                     {/* <Gold>
@@ -1256,7 +1257,7 @@ const HomeContent: NextPageWithLayout = () => {
               src="https://assets.dapdap.net/images/bafkreianvp55gpfwvvlamdmvq6yx5omqomtjcntbtkiouv4bxukpgcbwwe.svg"
               alt=""
             />
-            <Title className='title'>Decentralized frotnend</Title>
+            <Title className="title">Decentralized frotnend</Title>
             <div className="frotnend-content-title">
               Powered by <span>BOS</span>allows us to redesign the Web3 user journey
             </div>

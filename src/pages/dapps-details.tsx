@@ -6,6 +6,8 @@ import styled from 'styled-components';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import { TTAPI_PATH } from '@/config/quest';
+import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -71,12 +73,12 @@ const DappsDetailsTitle = styled.div`
       .left-enter-Dapp {
         display: flex;
         .enter-Dapp-item {
+          width: auto;
           background: #373a5380;
           border-radius: 8px;
           padding: 8px 27px;
           text-align: center;
           margin-right: 16px;
-          width: 150px;
           height: 72px;
           p {
             color: #979abe;
@@ -387,6 +389,34 @@ const Title = styled.div`
 `;
 
 const DappsDetailsColumn: NextPageWithLayout = () => {
+  const router = useRouter();
+  const { dapp_id } = router.query;
+  const [data, setData] = useState<any>(null);
+  console.log(data);
+  const { loading, categories } = useCategoryDappList();
+  const categoryArray = Object.values(categories);
+  useEffect(() => {
+    if (dapp_id) {
+      fetch(`${TTAPI_PATH}/operations/Dapp/GetOne?id=${dapp_id}`)
+        .then((response) => response.json())
+        .then((data) => setData(data.data.data));
+    }
+  }, [dapp_id]);
+
+  function getCategoryNames(dappCategories: any[], categoryArray: any[]) {
+    if (!Array.isArray(dappCategories)) {
+      return [];
+    }
+    return dappCategories.map((categoryItem: any) => {
+      const category = categoryArray.find((c: any) => c.id === categoryItem.category_id);
+      if (category) {
+        return category.name;
+      } else {
+        return 'Category not found';
+      }
+    });
+  }
+  const categoryNames = getCategoryNames(data?.dapp_category, categoryArray);
   return (
     <DappsDetails>
       <DappsDetailsTitle>
@@ -395,24 +425,27 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
           {arrow}
           <Link href="/alldapps">All Dapps</Link>
           {arrow}
-          <span>SyncSwap</span>
+          <span>{data && data.name}</span>
         </BreadCrumbs>
         <div className="header-details-body">
           <div className="details-body-left">
             <div className="body-left-detailed">
-              <img src={syncIcon} alt="" />
+              <img src={data && data.logo} alt="" />
               <div className="left-detailed-text">
                 <h1>
-                  SyncSwap
-                  <Golds>
+                  {data && data.name}
+                  {/* <Golds>
                     <img src={gold} alt="" />
                     <span>10</span>
-                  </Golds>
+                  </Golds> */}
                 </h1>
                 <Tag>
-                  <div className="tag-item Dexes">Dexes</div>
-                  <div className="tag-item Bridge">Bridge</div>
-                  <div className="tag-item Liquidity">Liquidity</div>
+                  {categoryNames &&
+                    categoryNames.map((categoryName: string, index: number) => (
+                      <div className={`tag-item ${categoryName}`} key={index}>
+                        {categoryName}
+                      </div>
+                    ))}
                 </Tag>
               </div>
             </div>
@@ -439,7 +472,11 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
               </div>
               <div className="enter-Dapp-item">
                 <p>Native Token</p>
-                <h1>TBD🔥</h1>
+                {data && data.tbd_token === 'Y' ? (
+                  <h1>Token-TBD🔥</h1>
+                ) : (
+                  <h1>{JSON.parse(data && data.native_currency).name}</h1>
+                )}
               </div>
               <div className="enter-Dapp-item Dapp-item-special">
                 <Link href="/dapp/Syncswap">Enter Dapp</Link>
@@ -456,11 +493,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       <DappsDetailsContent>
         <div className="left-side-substance">
           <Title>Description</Title>
-          <p>
-            Polygon zkEVM is aiming to become a decentralized Ethereum Layer 2 scalability solution that uses
-            cryptographic zero-knowledge proofs to offer validity and finality of off-chain transactions. Polygon zkEVM
-            wants to be equivalent with the Ethereum Virtual Machine.
-          </p>
+          <p>{data && data.description}</p>
           <Title>Activity</Title>
           <div className="title-right-list">
             <div className="right-list-item">
@@ -560,9 +593,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         </div>
         <div className="right-side-substance">
           <Title>Quest & Rewards</Title>
-          <div className="right-side-item">
-          
-          </div>
+          {/* <div className="right-side-item"></div> */}
         </div>
       </DappsDetailsContent>
 

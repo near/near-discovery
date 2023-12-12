@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import { TTAPI_PATH } from '@/config/quest';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -23,7 +24,8 @@ const Shotcut = 'https://assets.dapdap.net/images/bafkreibexhymj2bp2zhuhlwzcik5o
 const chart = 'https://assets.dapdap.net/images/bafkreiabil4iocii42zymoulnypymio4qzflzedpldpcdnmaz2s5bzncmy.svg';
 const star = 'https://assets.dapdap.net/images/bafkreiduogs6um2scfu53rprwmjjt6f55npfycomoe4za2ve7uucej52vu.svg';
 const line = 'https://assets.dapdap.net/images/bafkreia3362z25o4wope7mt3jffallldmtmodasm5crpltkfurnem2wxfe.svg';
-const chainsconetentImg = 'https://assets.dapdap.net/images/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq.svg';
+const chainsconetentImg =
+  'https://assets.dapdap.net/images/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq.svg';
 
 const ChainsDetails = styled.div`
   color: #ffffff;
@@ -84,7 +86,7 @@ const ChainsDetailsTitle = styled.div`
           padding: 8px 27px;
           text-align: center;
           margin-right: 16px;
-          width: 150px;
+          width: auto;
           height: 72px;
           p {
             color: #979abe;
@@ -220,92 +222,92 @@ const BreadCrumbs = styled.div`
 const ChainsDetailsHot = styled.div`
   padding: 0 12%;
   .tab-content {
-      /* border-bottom: 1px solid #383b48; */
-      display: flex;
-      flex-wrap: wrap;
-      position: relative;
-      margin-bottom: 100px;
+    /* border-bottom: 1px solid #383b48; */
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    margin-bottom: 100px;
 
-      .tab-content-item {
-        margin: 30px 20px 0 0; 
-        border-bottom: 1px solid #383b48;
-        display: flex;
-        width: 30%;
-        flex-basis: calc(33.3333% - 20px); 
-        box-sizing: border-box;
-        .content-item-img {
-          margin-right: 16px;
-          width: 20%;
-          img {
-            width: 72px;
-            height: 72px;
-          }
+    .tab-content-item {
+      margin: 30px 20px 0 0;
+      border-bottom: 1px solid #383b48;
+      display: flex;
+      width: 30%;
+      flex-basis: calc(33.3333% - 20px);
+      box-sizing: border-box;
+      .content-item-img {
+        margin-right: 16px;
+        width: 20%;
+        img {
+          width: 72px;
+          height: 72px;
         }
-        .content-item-text {
-          margin-right: 16px;
-          width: 49%;
-          h1 {
-            font-size: 20px;
-            font-weight: 700;
+      }
+      .content-item-text {
+        margin-right: 16px;
+        width: 49%;
+        h1 {
+          font-size: 20px;
+          font-weight: 700;
+          color: #ffffff;
+          margin: 0;
+        }
+        p {
+          font-size: 14px;
+          color: #979abe;
+          margin: 6px 0 9px 0;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+      }
+      .content-item-btn {
+        width: 22%;
+        .item-btn-item {
+          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+          border: 1px solid #373a53;
+          font-size: 14px;
+          color: #ffffff;
+          padding: 6px 20px;
+          text-align: center;
+          align-items: center;
+          border-radius: 16px;
+          margin-bottom: 14px;
+          a {
             color: #ffffff;
-            margin: 0;
-          }
-          p {
-            font-size: 14px;
-            color: #979abe;
-            margin: 6px 0 9px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
-        .content-item-btn {
-          width: 22%;
-          .item-btn-item {
-            background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-            border: 1px solid #373a53;
-            font-size: 14px;
-            color: #ffffff;
-            padding: 6px 20px;
-            text-align: center;
-            align-items: center;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            a {
-              color: #ffffff;
-              text-decoration: none;
-            }
-          }
-        }
-        @media (max-width: 1500px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 60%;
-          }
-        }
-        @media (max-width: 1400px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 50%;
-          }
-        }
-        @media (max-width: 975px) {
-          flex-basis: calc(100% - 20px);
-          .content-item-img{
-            width: 15%;
-          }
-          .content-item-text{
-            width: 70%;
+            text-decoration: none;
           }
         }
       }
+      @media (max-width: 1500px) {
+        flex-basis: calc(50% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 60%;
+        }
+      }
+      @media (max-width: 1400px) {
+        flex-basis: calc(50% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 50%;
+        }
+      }
+      @media (max-width: 975px) {
+        flex-basis: calc(100% - 20px);
+        .content-item-img {
+          width: 15%;
+        }
+        .content-item-text {
+          width: 70%;
+        }
+      }
     }
+  }
 `;
 
 const ChainsDetailsActivities = styled.div`
@@ -440,6 +442,16 @@ const Tag = styled.div`
 `;
 
 const ChainsDetailsColumn: NextPageWithLayout = () => {
+  const router = useRouter();
+  const { id } = router.query;
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
+    if (id) {
+      fetch(`${TTAPI_PATH}/operations/Network/GetOne?id=${id}`)
+        .then((response) => response.json())
+        .then((data) => setData(data.data.data));
+    }
+  }, [id]);
   return (
     <ChainsDetails>
       <ChainsDetailsTitle>
@@ -448,19 +460,19 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           {arrow}
           <Link href="/blockchains">L2 Blockchains</Link>
           {arrow}
-          <span>Polygon zkEVM </span>
+          <span>{data && data.name}</span>
         </BreadCrumbs>
         <div className="header-details-body">
           <div className="details-body-left">
             <div className="body-left-detailed">
-              <img src={syncIcon} alt="" />
+              <img src={data && data.logo} alt="" />
               <div className="left-detailed-text">
                 <h1>
-                  Polygon zkEVM
-                  <Golds>
+                  <span>{data && data.name}</span>
+                  {/* <Golds>
                     <img src={gold} alt="" />
                     <span>20</span>
-                  </Golds>
+                  </Golds> */}
                 </h1>
                 <p>
                   Add to MetaMask <img src={diagonaltop} alt="" />
@@ -470,7 +482,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
             <div className="left-enter-Dapp">
               <div className="enter-Dapp-item">
                 <p>Technology</p>
-                <h1>ZK Rollup</h1>
+                <h1>{data && data.technology}</h1>
               </div>
               <div className="enter-Dapp-item">
                 <p>Native Token</p>
