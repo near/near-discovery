@@ -4,12 +4,13 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,45 +88,52 @@ const AllDappsPage = styled.div`
         display: flex;
         cursor: pointer;
       }
-      .bridge {
+      .Bridge {
         border: 1px solid rgba(227, 233, 157, 1);
       }
-      .dex {
+      .Swap {
         border: 1px solid rgba(172, 252, 237, 1);
       }
-      .lending {
+      .Dex {
+        border: 1px solid rgba(172, 252, 237, 1);
+      }
+      .Lending {
         border: 1px solid rgba(173, 255, 181, 1);
       }
-      .liquidity {
+      .Liquidity {
         border: 1px solid rgba(170, 214, 255, 1);
       }
-      .staking {
+      .Staking {
         border: 1px solid rgba(193, 191, 255, 1);
       }
-      .yield {
+      .Yield {
         border: 1px solid rgba(249, 181, 230, 1);
       }
-      .bridgeActive {
+      .BridgeActive {
         background: rgba(227, 233, 157, 1);
         color: rgba(0, 0, 0, 1);
       }
-      .dexActive {
+      .SwapActive {
         background: rgba(172, 252, 237, 1);
         color: rgba(0, 0, 0, 1);
       }
-      .lendingActive {
+      .DexActive {
+        background: rgba(172, 252, 237, 1);
+        color: rgba(0, 0, 0, 1);
+      }
+      .LendingActive {
         background: rgba(173, 255, 181, 1);
         color: rgba(0, 0, 0, 1);
       }
-      .liquidityActive {
+      .LiquidityActive {
         background: rgba(170, 214, 255, 1);
         color: rgba(0, 0, 0, 1);
       }
-      .stakingActive {
+      .StakingActive {
         background: rgba(193, 191, 255, 1);
         color: rgba(0, 0, 0, 1);
       }
-      .yieldActive {
+      .YieldActive {
         background: rgba(249, 181, 230, 1);
         color: rgba(0, 0, 0, 1);
       }
@@ -349,7 +357,10 @@ const Tag = styled.div`
     padding: 2px 8px;
     font-size: 12px;
     display: flex;
-    cursor: pointer;
+  }
+  .Swap {
+    color: rgba(172, 252, 237, 1);
+    border: 1px solid rgba(172, 252, 237, 1);
   }
   .Bridge {
     color: rgba(227, 233, 157, 1);
@@ -405,15 +416,6 @@ const Footer = styled.div`
   }
 `;
 
-const carouselData = [
-  {
-    title: 'SyncSwap',
-  },
-  {
-    title: 'Test',
-  },
-];
-
 const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
   return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
 });
@@ -421,6 +423,9 @@ const Carousel = React.memo(({ active, children }: { active: boolean; children: 
 const AllDappsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const [dappList, setDappList] = useState<any[]>([]);
+  const [carouselList, setCarouselList] = useState<any[]>([]);
+  const { loading, categories } = useCategoryDappList();
+  const categoryArray = Object.values(categories);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -430,17 +435,32 @@ const AllDappsColumn: NextPageWithLayout = () => {
         console.error('Error fetching resultNetwork data:', error);
       }
     };
-    const fetchDappData = async () => {
+    const fetchCarouselData = async () => {
       try {
         const resultDapp = await get(`${TTAPI_PATH}/operations/Dapp/GetList`);
-        setDappList(resultDapp.data?.data || []);
+        setCarouselList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
     };
-    fetchDappData();
+    fetchCarouselData();
     fetchNetworkData();
   }, []);
+
+  function getCategoryNames(dappCategories: any, categoryArray: any[]) {
+    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
+    return categories.map((categoryItem: any) => {
+      const categoryId = typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
+      const category = categoryArray.find((c: any) => c.id === categoryId);
+      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
+    });
+  }  
+
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleCarouselClick = useCallback(() => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % dappList.filter((dapp) => dapp.recommend === true).length);
+  }, [dappList.filter((dapp) => dapp.recommend === true).length]);
 
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
@@ -464,26 +484,73 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const [selectedFunction, setSelectedFunction] = useState<string[]>(() => {
     return [];
   });
-  const handleFunctionClick = (functionType: string) => {
-    if (selectedFunction.includes(functionType)) {
-      setSelectedFunction(selectedFunction.filter((type) => type !== functionType));
+  const handleFunctionClick = (functionType: any) => {
+    const id = functionType.id;
+    if (selectedFunction.includes(id)) {
+      setSelectedFunction(selectedFunction.filter((type) => type !== id));
     } else {
-      setSelectedFunction([...selectedFunction, functionType]);
+      setSelectedFunction([...selectedFunction, id]);
     }
   };
 
-  const [selectedMedalMenu, setSelectedMedalMenu] = useState(() => {
-    return '';
-  });
-  const handleMedalMenuClick = (path: string) => {
-    setSelectedMedalMenu(path);
+  const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
+  const handleMedalMenuClick = (path: number) => {
+    if (selectedMedalMenu === path) {
+      setSelectedMedalMenu('');
+    } else {
+      setSelectedMedalMenu(path);
+    }
   };
 
-  const [activeIndex, setActiveIndex] = useState(0);
+  const fetchDappData = async () => {
+    try {
+      const resultDapp = await get(`${TTAPI_PATH}/operations/Dapp/GetList`);
+      setDappList(resultDapp.data?.data || []);
+    } catch (error) {
+      console.error('Error fetching resultDapp data:', error);
+    }
+  };
+  useEffect(() => {
+    const fetchFilteredDappData = async () => {
+      try {
+        const params = {
+          tbd_token: selectedTab === 'TBD',
+          network_ids: selectedMenu,
+          category_ids: selectedFunction.length ? selectedFunction.join(',') : undefined,
+          quest: selectedMedalMenu,
+        };
 
-  const handleCarouselClick = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselData.length);
-  }, [carouselData.length]);
+        if (typeof params !== 'object') {
+          throw new Error('params is not an object');
+        }
+
+        const entries = Object.entries(params);
+        if (!Array.isArray(entries)) {
+          throw new Error('Object.entries(params) did not return an array');
+        }
+
+        const filteredEntries = entries.filter(([, value]) => value !== undefined && value !== '');
+        if (!Array.isArray(filteredEntries)) {
+          throw new Error('filter did not return an array');
+        }
+
+        const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
+
+        const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=300`;
+
+        const resultDapp = await get(url);
+        setDappList(resultDapp.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching filtered dapp data:', error);
+      }
+    };
+
+    if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
+      fetchFilteredDappData();
+    } else {
+      fetchDappData();
+    }
+  }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab]);
 
   return (
     <AllDappsPage>
@@ -497,38 +564,36 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <div className="carousel-right-icon" onClick={handleCarouselClick}>
           <img src={carouseicon} alt="" />
         </div>
-        {dappList
+        {carouselList
           .filter((dapp) => dapp.recommend === true)
-          .map((child, index) => (
-            <Carousel key={index} active={index === activeIndex}>
-              <div className="carousel-content">
-                <img src={child.recommend_icon} alt="" />
-                <h1>{child.title}</h1>
-                <Tag>
-                  {child.tag &&
-                    (Array.isArray(child.tag) ? (
-                      child.tag.map((tagItem: string, index: number) => (
-                        <div className={`tag-item ${tagItem}`} key={index}>
-                          {tagItem}
-                        </div>
-                      ))
-                    ) : (
-                      <div className={`tag-item ${child.tag}`}>{child.tag}</div>
+          .map((child, index) => {
+            const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
+            return (
+              <Carousel key={index} active={index === activeIndex}>
+                <div className="carousel-content">
+                  <img src={child.recommend_icon} alt="" />
+                  <h1>{child.title}</h1>
+                  <Tag>
+                    {categoryNames.map((categoryName: string, index: number) => (
+                      <div className={`tag-item ${categoryName}`} key={index}>
+                        {categoryName}
+                      </div>
                     ))}
-                </Tag>
-                <p>{child.description}</p>
-                <div className="carousel-btn">
-                  <div className="carousel-btn-item">
-                    <Link href="/dapps-details">View Detail</Link>
-                  </div>
-                  <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                    <Link href={child.route}>Dapp</Link>{' '}
-                    <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                  </Tag>
+                  <p>{child.description}</p>
+                  <div className="carousel-btn">
+                    <div className="carousel-btn-item">
+                      <Link href="/dapps-details">View Detail</Link>
+                    </div>
+                    <div className="carousel-btn-item" style={{ marginRight: '0' }}>
+                      <Link href={child.route}>Dapp</Link>{' '}
+                      <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Carousel>
-          ))}
+              </Carousel>
+            );
+          })}
       </CarouselList>
 
       <div className="token-tab-list">
@@ -548,9 +613,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
           {networkList &&
             networkList.map((child, index) => (
               <div
-                className={`netWork-list-item ${selectedMenu === String(child.chain_id) ? 'active' : ''}`}
+                className={`netWork-list-item ${selectedMenu === String(child.id) ? 'active' : ''}`}
                 key={index}
-                onClick={() => child.chain_id && handleMenuClick(String(child.chain_id))}
+                onClick={() => child.id && handleMenuClick(String(child.id))}
               >
                 <img src={child.logo} alt="" />
                 {child.name}
@@ -561,64 +626,40 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <Title>Function</Title>
         <div className="page-function-list">
           <div className="page-function-list">
-            <div
-              className={`function-list-item bridge ${selectedFunction.includes('Bridge') ? 'bridgeActive' : ''}`}
-              onClick={() => handleFunctionClick('Bridge')}
-            >
-              Bridge
-            </div>
-            <div
-              className={`function-list-item dex ${selectedFunction.includes('Dexes') ? 'dexActive' : ''}`}
-              onClick={() => handleFunctionClick('Dexes')}
-            >
-              Dex
-            </div>
-            <div
-              className={`function-list-item lending ${selectedFunction.includes('Lending') ? 'lendingActive' : ''}`}
-              onClick={() => handleFunctionClick('Lending')}
-            >
-              Lending
-            </div>
-            <div
-              className={`function-list-item liquidity ${
-                selectedFunction.includes('Liquidity') ? 'liquidityActive' : ''
-              }`}
-              onClick={() => handleFunctionClick('Liquidity')}
-            >
-              Liquidity
-            </div>
-            <div
-              className={`function-list-item staking ${selectedFunction.includes('Staking') ? 'stakingActive' : ''}`}
-              onClick={() => handleFunctionClick('Staking')}
-            >
-              Staking
-            </div>
-            <div
-              className={`function-list-item yield ${selectedFunction.includes('Yield') ? 'yieldActive' : ''}`}
-              onClick={() => handleFunctionClick('Yield')}
-            >
-              Yield
-            </div>
+            {categoryArray &&
+              categoryArray.map((item: any, index: number) => {
+                return (
+                  <div
+                    key={index}
+                    className={`function-list-item ${item.name} ${
+                      selectedFunction.includes(item.id) ? item.name + 'Active' : ''
+                    }`}
+                    onClick={() => handleFunctionClick(item)}
+                  >
+                    {item.name}
+                  </div>
+                );
+              })}
           </div>
         </div>
 
         <Title>Medal Quest</Title>
         <div className="page-medal-list">
           <div
-            className={`medal-list-item ${selectedMedalMenu === 'Both' ? 'active' : ''}`}
-            onClick={() => handleMedalMenuClick('Both')}
+            className={`medal-list-item ${selectedMedalMenu === 0 ? 'active' : ''}`}
+            onClick={() => handleMedalMenuClick(0)}
           >
             Both
           </div>
           <div
-            className={`medal-list-item ${selectedMedalMenu === 'Yes' ? 'active' : ''}`}
-            onClick={() => handleMedalMenuClick('Yes')}
+            className={`medal-list-item ${selectedMedalMenu === 1 ? 'active' : ''}`}
+            onClick={() => handleMedalMenuClick(1)}
           >
             Yes
           </div>
           <div
-            className={`medal-list-item ${selectedMedalMenu === 'No' ? 'active' : ''}`}
-            onClick={() => handleMedalMenuClick('No')}
+            className={`medal-list-item ${selectedMedalMenu === 2 ? 'active' : ''}`}
+            onClick={() => handleMedalMenuClick(2)}
           >
             No
           </div>
@@ -630,6 +671,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
             .filter((dapp) => dapp.tbd_token === 'Y')
             .slice(0, 9)
             .map((dapp, index) => {
+              const categoryData = dapp.dapp_category || dapp.category_ids;
+              const categoryNames = getCategoryNames(categoryData, categoryArray);
               return (
                 <div className="tab-content-item" key={index}>
                   <div className="content-item-img">
@@ -639,16 +682,11 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     <h1>{dapp.name}</h1>
                     <p>{dapp.description}</p>
                     <Tag>
-                      {dapp.tag &&
-                        (Array.isArray(dapp.tag) ? (
-                          dapp.tag.map((tagItem: string, index: number) => (
-                            <div className={`tag-item ${tagItem}`} key={index}>
-                              {tagItem}
-                            </div>
-                          ))
-                        ) : (
-                          <div className={`tag-item ${dapp.tag}`}>{dapp.tag}</div>
-                        ))}
+                      {categoryNames.map((categoryName: string, index: number) => (
+                        <div className={`tag-item ${categoryName}`} key={index}>
+                          {categoryName}
+                        </div>
+                      ))}
                     </Tag>
                   </div>
                   <div className="content-item-btn">
@@ -672,6 +710,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
               .filter((dapp) => dapp.tbd_token === 'N')
               .slice(0, 9)
               .map((dapp, index) => {
+                const categoryData = dapp.dapp_category || dapp.category_ids;
+                const categoryNames = getCategoryNames(categoryData, categoryArray);
                 return (
                   <div className="tab-content-item" key={index}>
                     <div className="content-item-img">
@@ -681,16 +721,11 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       <h1>{dapp.name}</h1>
                       <p>{dapp.description}</p>
                       <Tag>
-                        {dapp.tag &&
-                          (Array.isArray(dapp.tag) ? (
-                            dapp.tag.map((tagItem: string, index: number) => (
-                              <div className={`tag-item ${tagItem}`} key={index}>
-                                {tagItem}
-                              </div>
-                            ))
-                          ) : (
-                            <div className={`tag-item ${dapp.tag}`}>{dapp.tag}</div>
-                          ))}
+                        {categoryNames.map((categoryName: string, index: number) => (
+                          <div className={`tag-item ${categoryName}`} key={index}>
+                            {categoryName}
+                          </div>
+                        ))}
                       </Tag>
                     </div>
                     <div className="content-item-btn">

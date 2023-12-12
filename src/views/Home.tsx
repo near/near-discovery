@@ -1,16 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/display-name */
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 
-import { get } from '@/utils/http';
 import { TTAPI_PATH } from '@/config/quest';
-import { useDefaultLayout } from '@/hooks/useLayout';
+import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 import useDappOpen from '@/hooks/useDappOpen';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const blueBg = (
@@ -765,6 +766,10 @@ const Tag = styled.div`
     font-size: 12px;
     display: flex;
   }
+  .Swap {
+    color: rgba(172, 252, 237, 1);
+    border: 1px solid rgba(172, 252, 237, 1);
+  }
   .Bridge {
     color: rgba(227, 233, 157, 1);
     border: 1px solid rgba(227, 233, 157, 1);
@@ -870,6 +875,8 @@ const initialLearningData = [
 const HomeContent: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const [dappList, setDappList] = useState<any[]>([]);
+  const { loading, categories } = useCategoryDappList();
+  const categoryArray = Object.values(categories);
   const { open } = useDappOpen();
   const router = useRouter();
   useEffect(() => {
@@ -892,6 +899,15 @@ const HomeContent: NextPageWithLayout = () => {
     fetchDappData();
     fetchNetworkData();
   }, []);
+
+  function getCategoryNames(dappCategories: any[], categoryArray: any[]) {
+    return dappCategories.map((categoryItem: any) => {
+      const category = categoryArray.find((c: any) => c.id === categoryItem.category_id);
+      return category && typeof category === 'object' && 'name' in category
+        ? category.name
+        : 'Category not found';
+    });
+  }  
 
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'TBD';
@@ -991,36 +1007,34 @@ const HomeContent: NextPageWithLayout = () => {
             </div>
             {dappList
               .filter((dapp) => dapp.recommend === true)
-              .map((child, index) => (
-                <Carousel key={index} active={index === activeIndex}>
-                  <div className="carousel-content">
-                    <img src={child.recommend_icon} alt="" />
-                    <h1>{child.title}</h1>
-                    <Tag>
-                      {child.tag &&
-                        (Array.isArray(child.tag) ? (
-                          child.tag.map((tagItem: string, index: number) => (
-                            <div className={`tag-item ${tagItem}`} key={index}>
-                              {tagItem}
-                            </div>
-                          ))
-                        ) : (
-                          <div className={`tag-item ${child.tag}`}>{child.tag}</div>
+              .map((child, index) => {
+                const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
+                return (
+                  <Carousel key={index} active={index === activeIndex}>
+                    <div className="carousel-content">
+                      <img src={child.recommend_icon} alt="" />
+                      <h1>{child.title}</h1>
+                      <Tag>
+                        {categoryNames.map((categoryName: string, index: number) => (
+                          <div className={`tag-item ${categoryName}`} key={index}>
+                            {categoryName}
+                          </div>
                         ))}
-                    </Tag>
-                    <p>{child.description}</p>
-                    <div className="carousel-btn">
-                      <div className="carousel-btn-item">
-                        <Link href="/dapps-details">View Detail</Link>
-                      </div>
-                      <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                        <Link href={child.route}>Dapp</Link>{' '}
-                        <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                      </Tag>
+                      <p>{child.description}</p>
+                      <div className="carousel-btn">
+                        <div className="carousel-btn-item">
+                          <Link href="/dapps-details">View Detail</Link>
+                        </div>
+                        <div className="carousel-btn-item" style={{ marginRight: '0' }}>
+                          <Link href={child.route}>Dapp</Link>{' '}
+                          <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Carousel>
-              ))}
+                  </Carousel>
+                );
+              })}
           </CarouselList>
 
           <div className="token-tab-list">
@@ -1049,6 +1063,7 @@ const HomeContent: NextPageWithLayout = () => {
                 .filter((dapp) => dapp.tbd_token === 'Y')
                 .slice(0, 9)
                 .map((dapp, index) => {
+                  const categoryNames = getCategoryNames(dapp.dapp_category, categoryArray);
                   return (
                     <div className="tab-content-item" key={index}>
                       <div className="content-item-img">
@@ -1058,16 +1073,11 @@ const HomeContent: NextPageWithLayout = () => {
                         <h1>{dapp.name}</h1>
                         <p>{dapp.description}</p>
                         <Tag>
-                          {dapp.tag &&
-                            (Array.isArray(dapp.tag) ? (
-                              dapp.tag.map((tagItem: string, index: number) => (
-                                <div className={`tag-item ${tagItem}`} key={index}>
-                                  {tagItem}
-                                </div>
-                              ))
-                            ) : (
-                              <div className={`tag-item ${dapp.tag}`}>{dapp.tag}</div>
-                            ))}
+                          {categoryNames.map((categoryName: string, index: number) => (
+                            <div className={`tag-item ${categoryName}`} key={index}>
+                              {categoryName}
+                            </div>
+                          ))}
                         </Tag>
                       </div>
                       <div className="content-item-btn">
@@ -1094,6 +1104,7 @@ const HomeContent: NextPageWithLayout = () => {
                 .filter((dapp) => dapp.tbd_token === 'N')
                 .slice(0, 9)
                 .map((dapp, index) => {
+                  const categoryNames = getCategoryNames(dapp.dapp_category, categoryArray);
                   return (
                     <div className="tab-content-item" key={index}>
                       <div className="content-item-img">
@@ -1103,16 +1114,11 @@ const HomeContent: NextPageWithLayout = () => {
                         <h1>{dapp.name}</h1>
                         <p>{dapp.description}</p>
                         <Tag>
-                          {dapp.tag &&
-                            (Array.isArray(dapp.tag) ? (
-                              dapp.tag.map((tagItem: string, index: number) => (
-                                <div className={`tag-item ${tagItem}`} key={index}>
-                                  {tagItem}
-                                </div>
-                              ))
-                            ) : (
-                              <div className={`tag-item ${dapp.tag}`}>{dapp.tag}</div>
-                            ))}
+                          {categoryNames.map((categoryName: string, index: number) => (
+                            <div className={`tag-item ${categoryName}`} key={index}>
+                              {categoryName}
+                            </div>
+                          ))}
                         </Tag>
                       </div>
                       <div className="content-item-btn">
