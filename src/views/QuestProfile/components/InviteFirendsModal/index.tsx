@@ -1,34 +1,34 @@
-import Modal from '@/components/Modal';
-
 import { memo, useMemo } from 'react';
-import { ellipsAccount } from '@/utils/account';
-import Loading from '@/components/Icons/Loading';
-import useInviteCode from '@/components/AccountSider/hooks/useInviteCode';
-import useCopy from '@/hooks/useCopy';
 
+import useInviteCode from '@/components/AccountSider/hooks/useInviteCode';
+import Loading from '@/components/Icons/Loading';
+import Modal from '@/components/Modal';
+import useCopy from '@/hooks/useCopy';
+import { ellipsAccount } from '@/utils/account';
+
+import type { Column } from '../Pts/types';
 import InviteCode from './InviteCode';
 import {
-  StyledTitle,
-  StyledSubTitle,
-  StyledHeader,
-  StyledCopyButton,
-  StyledNewCodes,
-  StyledDescBox,
-  StyledDesc,
-  StyledClaimButton,
-  StyledRow,
-  StyledColumn,
-  StyledTableHeader,
+  Empty,
+  LoadingWrapper,
+  StyledAvatar,
   StyledBody,
   StyledCell,
-  StyledAvatar,
+  StyledClaimButton,
+  StyledColumn,
+  StyledCopyButton,
+  StyledDesc,
+  StyledDescBox,
+  StyledHeader,
+  StyledNewCodes,
   StyledRewards,
-  StyledUserName,
+  StyledRow,
+  StyledSubTitle,
+  StyledTableHeader,
+  StyledTitle,
   StyledUserAddress,
-  LoadingWrapper,
-  Empty,
+  StyledUserName,
 } from './styles';
-import type { Column } from '../Pts/types';
 
 export const COLUMNS: Column[] = [
   {

@@ -1,7 +1,8 @@
 import { useCallback, useEffect } from 'react';
-import { get } from '@/utils/http';
+
 import { TTAPI_PATH } from '@/config/quest';
 import { useChainsStore } from '@/stores/chains';
+import { get } from '@/utils/http';
 
 export default function useChains() {
   const setChains = useChainsStore((store: any) => store.set);

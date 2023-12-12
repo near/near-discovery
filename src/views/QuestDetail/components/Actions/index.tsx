@@ -1,10 +1,12 @@
 import { memo } from 'react';
-import useRewardsClaim from '@/hooks/useRewardsClaim';
+
 import Loading from '@/components/Icons/Loading';
-import Timer from '@/views/Quest/components/Timer';
+import useRewardsClaim from '@/hooks/useRewardsClaim';
 import ProcessBar from '@/views/Quest/components/ProcessBar';
+import Timer from '@/views/Quest/components/Timer';
+
 import ActionItem from './Item';
-import { StyledContainer, StyledHeader, StyledLabel, StyledButton, StyledCoin, StyledProcessBars } from './styles';
+import { StyledButton, StyledCoin, StyledContainer, StyledHeader, StyledLabel, StyledProcessBars } from './styles';
 
 const Actions = ({
   actions,

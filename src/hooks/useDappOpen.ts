@@ -1,6 +1,7 @@
-import { useDappStore } from '@/stores/dapp';
-import { useCallback } from 'react';
 import { useRouter } from 'next/navigation';
+import { useCallback } from 'react';
+
+import { useDappStore } from '@/stores/dapp';
 
 export default function useDappOpen() {
   const router = useRouter();

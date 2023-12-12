@@ -1,6 +1,7 @@
-import { memo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { StyledContainer, StyledSwiperArrowButton, StyledImagesBox, StyledImages, StyledImage } from './styles';
+import { memo, useState } from 'react';
+
+import { StyledContainer, StyledImage,StyledImages, StyledImagesBox, StyledSwiperArrowButton } from './styles';
 
 const Swipper = ({ banners }: { banners: { banner: string; link: string }[] }) => {
   const [current, setCurrent] = useState(0);

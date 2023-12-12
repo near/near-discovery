@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import InfoIcon from '@/components/Icons/Info';
 
 const StyledAlert = styled.div<{ type: string }>`

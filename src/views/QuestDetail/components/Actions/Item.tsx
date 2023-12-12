@@ -1,24 +1,25 @@
 import { AnimatePresence } from 'framer-motion';
-import { memo, useState } from 'react';
-import useDappOpen from '@/hooks/useDappOpen';
 import { useRouter } from 'next/navigation';
+import { memo, useState } from 'react';
+
+import useDappOpen from '@/hooks/useDappOpen';
 import { useLayoutStore } from '@/stores/layout';
 
 import {
+  StyledDapp,
+  StyledDappIcon,
+  StyledDapps,
+  StyledDesc,
+  StyledExpand,
+  StyledExpandButton,
+  StyledExpandButtonBox,
+  StyledExpandContainer,
+  StyledIconBox,
   StyledItemContainer,
   StyledItemLeft,
   StyledItemRight,
-  StyledIconBox,
-  StyledExpandContainer,
   StyledItemTop,
-  StyledDesc,
-  StyledDapps,
-  StyledDapp,
-  StyledDappIcon,
   StyledMore,
-  StyledExpandButton,
-  StyledExpandButtonBox,
-  StyledExpand,
 } from './styles';
 
 const ActionItem = ({ action, completed }: { action: any; completed: boolean }) => {

@@ -1,18 +1,20 @@
 import { memo } from 'react';
-import useDailyTask from '../../hooks/useDailyTask';
+
 import Loading from '@/components/Icons/Loading';
+
+import useDailyTask from '../../hooks/useDailyTask';
 import {
+  LoadingWrapper,
+  StyledButton,
+  StyledCoin,
   StyledContainer,
-  StyledTitle,
-  StyledDays,
   StyledDay,
   StyledDayHeader,
   StyledDayIcon,
+  StyledDays,
   StyledDayValue,
   StyledFists,
-  StyledButton,
-  StyledCoin,
-  LoadingWrapper,
+  StyledTitle,
 } from './styles';
 
 const DailyTask = () => {

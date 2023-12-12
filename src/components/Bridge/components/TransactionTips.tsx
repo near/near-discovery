@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import Alert from '@/components/Alert';
 
 const StyledContainer = styled.div<{ mt?: number }>`

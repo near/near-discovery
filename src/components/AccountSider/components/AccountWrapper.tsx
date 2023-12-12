@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import styled from 'styled-components';
+
 import TransactionTips from '@/components/Bridge/components/TransactionTips';
+
+import AccountTabs from './AccountTabs';
 import Actions from './Actions';
+import Activties from './Activties';
 import Amount from './Amount';
 import Chain from './Chain';
 import Tokens from './Tokens';
-import Activties from './Activties';
-import AccountTabs from './AccountTabs';
 
 const TipsWrapper = styled.div`
   padding-left: var(--padding-x);

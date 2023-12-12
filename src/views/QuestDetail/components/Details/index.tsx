@@ -1,32 +1,33 @@
+import { memo } from 'react';
+
+import { formatPeriodDate,formatTotalUsers } from '@/views/Quest/helpers';
+import useLike from '@/views/Quest/hooks/useLike';
+
 import {
-  StyledContainer,
-  StyledType,
-  StyledHeader,
-  StyledHeartBox,
-  StyledDesc,
-  StyledIconBox,
-  StyledIcon,
-  StyledRewardBox,
-  StyledTimeBox,
-  StyledLabel,
-  StyledRewardsAndTimeBox,
-  StyledQuestInfo,
-  StyledQuestInfoItemBox,
-  StyledQuestInfoItem,
-  StyledQuestInfoIcon,
-  StyledQuestInfoLabel,
-  StyledQuestInfoValue,
-  StyledTitle,
-  StyledCoin,
-  StyledParticipants,
-  JoinedAccountsBox,
   JoinedAccounts,
   JoinedAccountsAmount,
+  JoinedAccountsBox,
+  StyledCoin,
+  StyledContainer,
+  StyledDesc,
+  StyledHeader,
+  StyledHeartBox,
+  StyledIcon,
+  StyledIconBox,
+  StyledLabel,
+  StyledParticipants,
+  StyledQuestInfo,
+  StyledQuestInfoIcon,
+  StyledQuestInfoItem,
+  StyledQuestInfoItemBox,
+  StyledQuestInfoLabel,
+  StyledQuestInfoValue,
+  StyledRewardBox,
+  StyledRewardsAndTimeBox,
+  StyledTimeBox,
+  StyledTitle,
+  StyledType,
 } from './styles';
-
-import { memo } from 'react';
-import useLike from '@/views/Quest/hooks/useLike';
-import { formatTotalUsers, formatPeriodDate } from '@/views/Quest/helpers';
 
 const Details = ({ quest, category }: { quest: any; category: any }) => {
   const { like, handleLike } = useLike(quest.id, 'quest');

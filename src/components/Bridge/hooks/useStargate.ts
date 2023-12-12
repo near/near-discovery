@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import { chainCofig } from '@/config/bridge';
 import useAccount from '@/hooks/useAccount';
-import { usePriceStore } from '@/stores/price';
 import useAddAction from '@/hooks/useAddAction';
+import { usePriceStore } from '@/stores/price';
 
 import type { Chain, Token } from '../types';
 

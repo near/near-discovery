@@ -1,9 +1,8 @@
-import { StyledTabs, StyledTab, StyledCoin, StyledFist, StyledTabWrap, StyledTabActiveBg } from './styles';
-
-import { memo } from 'react';
 import { motion } from 'framer-motion';
+import { memo } from 'react';
 
 import type { Tab } from '../../types';
+import { StyledCoin, StyledFist, StyledTab, StyledTabActiveBg,StyledTabs, StyledTabWrap } from './styles';
 
 const TABS: { name: string; key: Tab }[] = [
   {

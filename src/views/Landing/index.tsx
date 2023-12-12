@@ -1,30 +1,31 @@
+import { useRouter } from 'next/navigation';
 import { memo, useEffect, useState } from 'react';
+
 import Loading from '@/components/Icons/Loading';
 import Spinner from '@/components/Spinner';
-import { useRouter } from 'next/navigation';
 import useRewardsClaim from '@/hooks/useRewardsClaim';
 import useQuestInfo from '@/views/QuestDetail/hooks/useQuestInfo';
-import useReport from './hooks/useReport';
 
+import Bridge from './Bridge';
+import { bgs,steps } from './config';
+import useReport from './hooks/useReport';
 import {
-  StyledContainer,
-  StyledLeftPanel,
-  StyledTitle,
-  StyledDesc,
-  StyledStep,
-  StyledStepHeader,
-  StyledStepTitle,
-  StyledStepCoins,
-  StyledStepDesc,
   StyledButtons,
   StyledClaimButton,
-  StyledSkipButton,
-  StyledRightPanel,
+  StyledContainer,
+  StyledDesc,
+  StyledLeftPanel,
   StyledRightImg,
+  StyledRightPanel,
+  StyledSkipButton,
+  StyledStep,
+  StyledStepCoins,
+  StyledStepDesc,
+  StyledStepHeader,
+  StyledStepTitle,
+  StyledTitle,
 } from './styles';
 import SuccessModal from './SuccessModal';
-import Bridge from './Bridge';
-import { steps, bgs } from './config';
 
 const LandingView = () => {
   const router = useRouter();

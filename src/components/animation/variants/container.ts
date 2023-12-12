@@ -34,7 +34,6 @@ export const modal = {
 export const overlay = {
   initial: { opacity: 0 },
   animate: {
-    y: 0,
     opacity: 1,
   },
   exit: { opacity: 0 },

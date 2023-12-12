@@ -1,10 +1,12 @@
-import { useCallback, useState } from 'react';
+import { deleteCookie, getCookie,setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
-import useAccount from './useAccount';
+import { useCallback, useState } from 'react';
+
+import { checkAddressIsInvited,getAccessToken, insertedAccessKey } from '@/apis';
 import { useEthersProviderContext } from '@/data/web3';
 import * as http from '@/utils/http';
-import { getAccessToken, insertedAccessKey, checkAddressIsInvited } from '@/apis';
-import { setCookie, deleteCookie, getCookie } from 'cookies-next';
+
+import useAccount from './useAccount';
 
 const useAuth = () => {
   const { account } = useAccount();

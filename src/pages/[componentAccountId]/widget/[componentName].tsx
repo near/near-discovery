@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
-import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();

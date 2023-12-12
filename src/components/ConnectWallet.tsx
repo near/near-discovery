@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { useConnectWallet } from '@web3-onboard/react';
+import styled from 'styled-components';
 
 const StyledConnectWallet = styled.button`
   height: 38px;

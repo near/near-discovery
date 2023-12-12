@@ -1,9 +1,11 @@
 import { memo, useState } from 'react';
 import styled from 'styled-components';
+
 import Bridge from '@/components/Bridge';
+import TransactionTips from '@/components/Bridge/components/TransactionTips';
 import BridgeHistory from '@/components/Bridge/History';
 import ArrowIcon from '@/components/Icons/ArrowIcon';
-import TransactionTips from '@/components/Bridge/components/TransactionTips';
+
 import Split from './Split';
 
 const StyledBridgeWrapper = styled.div`

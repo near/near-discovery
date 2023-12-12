@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import styled from 'styled-components';
 
 export { StyledTitle } from '../../styles';
 export { JoinedAccountsBox, JoinedAccounts, JoinedAccountsAmount } from '@/views/Quest/components/Campaign/styles';

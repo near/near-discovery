@@ -6,9 +6,9 @@ import type { MutableRefObject } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import useToast from '@/hooks/useToast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
+import useToast from '@/hooks/useToast';
 import { network, signInContractId } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 

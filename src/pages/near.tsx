@@ -1,10 +1,10 @@
+import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useSearchParams } from 'next/navigation';
 
 const NearColumn: NextPageWithLayout = () => {
 

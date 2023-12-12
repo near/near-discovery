@@ -1,26 +1,26 @@
 import { memo } from 'react';
 
+import Loading from '@/components/Icons/Loading';
 import { ellipsAccount } from '@/utils/account';
 import { balanceShortFormated } from '@/utils/balance';
-import Loading from '@/components/Icons/Loading';
 
 import { COLUMNS, RANK_COLORS } from './config';
 import {
-  StyledContainer,
-  StyledHeader,
-  StyledColumn,
+  Empty,
+  LoadingWrapper,
   StyledBody,
   StyledCell,
-  StyledRow,
-  StyledRankIcon,
-  StyledUserAvatar,
   StyledCoin,
+  StyledColumn,
+  StyledContainer,
+  StyledHeader,
   StyledPageBox,
-  StyledPageDesc,
-  StyledPageButtons,
   StyledPageButton,
-  LoadingWrapper,
-  Empty,
+  StyledPageButtons,
+  StyledPageDesc,
+  StyledRankIcon,
+  StyledRow,
+  StyledUserAvatar,
 } from './styles';
 
 export const Rank = ({ rank }: { rank: number }) => {

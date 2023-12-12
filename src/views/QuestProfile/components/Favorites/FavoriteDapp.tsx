@@ -1,20 +1,19 @@
 import { useRouter } from 'next/navigation';
+import { memo } from 'react';
 
 import {
   StyledDapp,
-  StyledDappIcon,
-  StyledDappInfo,
-  StyledHeader,
-  StyledDappTitle,
+  StyledDappButton,
+  StyledDappButtons,
   StyledDappCoins,
   StyledDappDesc,
-  StyledDappTags,
+  StyledDappIcon,
+  StyledDappInfo,
   StyledDappTag,
-  StyledDappButtons,
-  StyledDappButton,
+  StyledDappTags,
+  StyledDappTitle,
+  StyledHeader,
 } from './styles';
-
-import { memo } from 'react';
 
 const FavoriteDapp = ({ name, description, route, id }: any) => {
   const router = useRouter();

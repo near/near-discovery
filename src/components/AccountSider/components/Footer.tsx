@@ -1,10 +1,10 @@
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
-
-import { useLayoutStore } from '@/stores/layout';
-import useAuth from '@/hooks/useAuth';
-import useAccount from '@/hooks/useAccount';
 import { useRouter } from 'next/router';
+import styled from 'styled-components';
+
+import useAccount from '@/hooks/useAccount';
+import useAuth from '@/hooks/useAuth';
+import { useLayoutStore } from '@/stores/layout';
 
 const StyledContainer = styled.div`
   margin: 0px 14px;
@@ -53,7 +53,7 @@ export const StyledDisconnectButton = styled(motion.div)`
   }
 `;
 
-export default () => {
+export default function Footer () {
   const { account } = useAccount();
   const { connect, logout } = useAuth();
   const router = useRouter();

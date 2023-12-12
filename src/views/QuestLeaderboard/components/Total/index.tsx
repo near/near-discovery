@@ -1,16 +1,16 @@
+import { memo } from 'react';
+
+import { formateValueWithThousandSeparator } from '@/utils/formate';
+
 import {
+  StyledCoin,
+  StyledFist,
+  StyledPerson,
   StyledTotalBox,
   StyledTotalItem,
   StyledTotalLabel,
   StyledTotalValue,
-  StyledCoin,
-  StyledFist,
-  StyledPerson,
 } from './styles';
-
-import { memo } from 'react';
-
-import { formateValueWithThousandSeparator } from '@/utils/formate';
 
 const Total = ({ info = {} }: any) => {
   return (

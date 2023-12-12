@@ -1,7 +1,9 @@
 import React from 'react';
-import useAuth from '@/hooks/useAuth';
+
 import LoadingIcon from '@/components/Icons/Loading';
-import { StyledInviteCodePage, yellowbg, bluebg } from './InviteCodeView';
+import useAuth from '@/hooks/useAuth';
+
+import { bluebg,StyledInviteCodePage, yellowbg } from './InviteCodeView';
 
 export default function LoginView({ logging }: { logging: boolean }) {
   const { connect, connecting } = useAuth();

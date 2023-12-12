@@ -1,14 +1,14 @@
 /* eslint-disable react/display-name */
+import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
-import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
-import { get } from '@/utils/http';
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
+import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 

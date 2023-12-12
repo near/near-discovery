@@ -1,6 +1,6 @@
-import { StyledContainer, StyledBg, StyledValue } from './styles';
-
 import { memo } from 'react';
+
+import { StyledBg, StyledContainer, StyledValue } from './styles';
 
 const InviteCode = ({ onClick, total }: { onClick: VoidFunction; total: number }) => {
   return (

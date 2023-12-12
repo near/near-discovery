@@ -1,11 +1,12 @@
+import { AnimatePresence,motion } from 'framer-motion';
 import { memo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+
 import { container } from '@/components/animation';
 
-import { StyledContainer, StyledTitle, StyledHeader, StyledUpdateButton, StyledCurrentRow, StyledCell } from './styles';
-import Total from '../Total';
-import Table, { User, PTS } from '../Table';
+import Table, { PTS,User } from '../Table';
 import { COLUMNS } from '../Table/config';
+import Total from '../Total';
+import { StyledCell,StyledContainer, StyledCurrentRow, StyledHeader, StyledTitle, StyledUpdateButton } from './styles';
 
 const Leaderboard = ({ loading, list, page, info, maxPage, handlePageChange, userLoading, userInfo }: any) => {
   return (

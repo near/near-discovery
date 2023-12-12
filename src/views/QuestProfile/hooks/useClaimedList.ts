@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
-import { get } from '@/utils/http';
+
 import { QUEST_PATH } from '@/config/quest';
+import { get } from '@/utils/http';
 
 export default function useClaimedList() {
   const [list, setList] = useState<any>([]);

@@ -1,11 +1,10 @@
 import { memo } from 'react';
 import styled from 'styled-components';
-import CurrencyIcon from '@/components/CurrencyIcon';
 
+import CurrencyIcon from '@/components/CurrencyIcon';
+import useAccount from '@/hooks/useAccount';
 import useChain from '@/hooks/useChain';
 import { useTransactionsStore } from '@/stores/transactions';
-import useAccount from '@/hooks/useAccount';
-
 import { fToNow } from '@/utils/format-time';
 
 const StyledContainer = styled.div<{ mt?: number }>`

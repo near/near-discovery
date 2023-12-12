@@ -1,21 +1,22 @@
+import { memo } from 'react';
+
+import { ellipsAccount } from '@/utils/account';
+
 import {
+  StyledAddress,
+  StyledAvatar,
+  StyledBg,
+  StyledBigCircle,
+  StyledCoin,
   StyledContainer,
   StyledContent,
-  StyledBg,
-  StyledSmallCircle,
-  StyledBigCircle,
-  StyledAvatar,
-  StyledAddress,
-  StyledLabels,
   StyledLabel,
-  StyledCoin,
+  StyledLabels,
   StyledMedal,
-  StyledSteps,
   StyledName,
+  StyledSmallCircle,
+  StyledSteps,
 } from './styles';
-
-import { memo } from 'react';
-import { ellipsAccount } from '@/utils/account';
 
 const UserInfo = () => {
   return (

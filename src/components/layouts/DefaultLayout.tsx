@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import AccountSider from '../AccountSider';
+import Footer from '../Footer';
 import { DesktopNavigationLeft } from '../navigation/desktop/DesktopNavigationLeft';
 import { DesktopNavigationTop } from '../navigation/desktop/DesktopNavigationTop';
 import { LoginBox } from '../navigation/desktop/LoginBox';
@@ -17,6 +18,7 @@ const Layout = styled.div`
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  position: relative;
   .content {
     padding: 54px 36px;
     flex-grow: 1;
@@ -40,6 +42,7 @@ export function DefaultLayout({ children }: Props) {
         </div> */}
         {children}
       </div>
+      {pathName !== '/uniswap' && <Footer />}
       <AccountSider />
     </Layout>
   );

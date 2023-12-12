@@ -1,27 +1,26 @@
 import { memo, useEffect } from 'react';
+
 import Loading from '@/components/Icons/Loading';
 
+import { formatPeriodDate,formatTotalUsers } from '../../helpers';
 import useLike from '../../hooks/useLike';
-
 import Timer from '../Timer';
 import {
-  StyledCampaipnContainer,
-  StyledBox,
-  StyledHeader,
-  StyledTitle,
-  StyledHeartBox,
-  StyledDesc,
-  StyledTags,
-  StyledTag,
-  StyledCoin,
-  JoinedAccountsBox,
   JoinedAccounts,
   JoinedAccountsAmount,
-  StyledCampaipnsContainer,
+  JoinedAccountsBox,
   LoadingWrapper,
+  StyledBox,
+  StyledCampaipnContainer,
+  StyledCampaipnsContainer,
+  StyledCoin,
+  StyledDesc,
+  StyledHeader,
+  StyledHeartBox,
+  StyledTag,
+  StyledTags,
+  StyledTitle,
 } from './styles';
-
-import { formatTotalUsers, formatPeriodDate } from '../../helpers';
 
 const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) => {
   const { like, handleLike } = useLike(campaign.id, 'quest_campaign');

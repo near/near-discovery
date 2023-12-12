@@ -1,11 +1,11 @@
-import styled from 'styled-components';
-import CloseIcon from './Icons/Close';
-
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence,motion } from 'framer-motion';
+import type { ReactNode } from 'react';
 import { memo } from 'react';
+import styled from 'styled-components';
+
 import { modal, overlay } from '@/components/animation';
 
-import type { ReactNode } from 'react';
+import CloseIcon from './Icons/Close';
 
 const Dialog = styled.div`
   position: fixed;

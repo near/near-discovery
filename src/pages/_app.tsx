@@ -6,27 +6,28 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+import { deleteCookie, getCookie } from 'cookies-next';
+import { debounce } from 'lodash';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useCallback, useEffect, useRef } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { useState } from 'react';
+import { ToastContainer } from 'react-toastify';
+
+import useAccount from '@/hooks/useAccount';
+import useAuth from '@/hooks/useAuth';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
+import useInitialData from '@/hooks/useInitialData';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
-import useAuth from '@/hooks/useAuth';
-import useAccount from '@/hooks/useAccount';
-import useInitialData from '@/hooks/useInitialData';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import { deleteCookie, getCookie } from 'cookies-next';
-import { debounce } from 'lodash';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
