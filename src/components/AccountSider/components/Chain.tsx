@@ -108,7 +108,6 @@ const Chain = ({
   showChains?: boolean;
   setShowChains?: (show: boolean) => void;
 }) => {
-  console.log(showName);
   const { chainId } = useAccount();
   const currentChain = useMemo(() => (chainId ? chains[chainId] : null), [chainId]);
   const { switching, switchNetwork } = useSwitchChain();
@@ -166,7 +165,7 @@ const Chain = ({
                     stroke="#272938"
                   />
                 </svg>
-                <div className="text">Your wallet's current network is unsupported.</div>
+                <div className="text">Your wallet&apos;s current network is unsupported.</div>
               </EmptyChainTips>
             )}
           </EmptyChainLogo>
