@@ -562,7 +562,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                   <p>{child.description}</p>
                   <div className="carousel-btn">
                     <div className="carousel-btn-item">
-                      <Link href="/dapps-details">View Detail</Link>
+                      <Link href={`/dapps-details?dapp_id=${child.id}`}>View Detail</Link>
                     </div>
                     <div className="carousel-btn-item" style={{ marginRight: '0' }}>
                       <Link href={child.route}>Dapp</Link>{' '}
@@ -670,7 +670,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                   </div>
                   <div className="content-item-btn">
                     <div className="item-btn-item">
-                      <Link href="/dapps-details">Detail</Link>
+                      <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                     </div>
                     <div className="item-btn-item">
                       {' '}
@@ -709,7 +709,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     </div>
                     <div className="content-item-btn">
                       <div className="item-btn-item">
-                        <Link href="/dapps-details">Detail</Link>
+                        <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                       </div>
                       <div className="item-btn-item">
                         <Link href={dapp.route}>Dapp</Link>

@@ -28,7 +28,7 @@ const popupsData: {
     rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
   },
   base: {
-    title: 'BASE',
+    title: 'Base',
     path: 'base',
     icon: 'https://assets.dapdap.net/images/bafkreientyvw2l6v2jvtcq5pptg5xftj2dyobnk3yaykbu5mb6tpomzc3q.svg',
     bgColor: '#0038FF',

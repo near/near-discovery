@@ -4,9 +4,10 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { dapps } from '@/config/dapps';
+import { get } from '@/utils/http';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const arrow = (
@@ -335,11 +336,15 @@ const Tag = styled.div`
     font-size: 12px;
     display: flex;
   }
+  .Swap {
+    color: rgba(172, 252, 237, 1);
+    border: 1px solid rgba(172, 252, 237, 1);
+  }
   .Bridge {
     color: rgba(227, 233, 157, 1);
     border: 1px solid rgba(227, 233, 157, 1);
   }
-  .Dexes {
+  .DEX {
     color: rgba(172, 252, 237, 1);
     border: 1px solid rgba(172, 252, 237, 1);
   }
@@ -392,16 +397,75 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
   const router = useRouter();
   const { dapp_id } = router.query;
   const [data, setData] = useState<any>(null);
-  console.log(data);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
+  const [networkList, setNetworkList] = useState<any[]>([]);
+  const [relatedDapps, setRelatedDapps] = useState<any>(null);
+  const [activity, setActivity] = useState<any>(null);
   useEffect(() => {
-    if (dapp_id) {
-      fetch(`${TTAPI_PATH}/operations/Dapp/GetOne?id=${dapp_id}`)
-        .then((response) => response.json())
-        .then((data) => setData(data.data.data));
-    }
+    const fetchNetworkData = async () => {
+      try {
+        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
+        setNetworkList(resultNetwork.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultNetwork data:', error);
+      }
+    };
+    fetchNetworkData();
+  }, []);
+  useEffect(() => {
+    const fetchactivityData = async () => {
+      if (dapp_id) {
+        try {
+          const response = await fetch(`${QUEST_PATH}/api/action/get-actions-by-dapp?dapp_id=${dapp_id}&page=1&page_size=10`);
+          const data = await response.json();
+          setActivity(data.data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    fetchactivityData();
   }, [dapp_id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (dapp_id) {
+        try {
+          const response = await fetch(`${TTAPI_PATH}/operations/Dapp/GetOne?id=${dapp_id}`);
+          const data = await response.json();
+          setData(data.data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    fetchData();
+  }, [dapp_id]);
+
+  useEffect(() => {
+    const fetchRelatedDapps = async () => {
+      if (dapp_id) {
+        try {
+          const response = await fetch(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
+          const data = await response.json();
+          setRelatedDapps(data.data);
+        } catch (error) {
+          console.error('Error fetching related dapps:', error);
+        }
+      }
+    };
+    fetchRelatedDapps();
+  }, [dapp_id]);
+
+  function getCategoryNamess(dappCategories: any, categoryArray: any[]) {
+    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
+    return categories.map((categoryItem: any) => {
+      const categoryId =
+        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
+      const category = categoryArray.find((c: any) => c.id === categoryId);
+      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
+    });
+  }
 
   function getCategoryNames(dappCategories: any[], categoryArray: any[]) {
     if (!Array.isArray(dappCategories)) {
@@ -457,26 +521,20 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             <div className="left-enter-Dapp">
               <div className="enter-Dapp-item">
                 <p>Blockchain</p>
-                <img
-                  src="https://assets.dapdap.net/images/bafkreicjsbkvvcxahxjejkctwopcnmzbeskxhfrkg7lyawhkhzrxcmvgfy.svg"
-                  alt=""
-                />
-                <img
-                  src="https://assets.dapdap.net/images/bafkreie5b65e7cp7jtvhrwgibvoqpf7ekj4v7jgo2egjr3qmfsl3p4ulam.svg"
-                  alt=""
-                />
-                <img
-                  src="https://assets.dapdap.net/images/bafkreib5v3jonanuknj5db5ysuhb6ubowv2pqnopyg3yraknfr3jn7el4u.svg"
-                  alt=""
-                />
+                {data &&
+                  data.dapp_network.map((item: any, index: number) => {
+                    const networkItem = networkList.find((network: any) => network.id === item.network_id);
+                    const logo = networkItem ? networkItem.logo : '';
+                    return (
+                      <div key={index} style={{ display: 'inline-block' }}>
+                        <img src={logo} alt="" />
+                      </div>
+                    );
+                  })}
               </div>
               <div className="enter-Dapp-item">
                 <p>Native Token</p>
-                {data && data.tbd_token === 'Y' ? (
-                  <h1>Token-TBD🔥</h1>
-                ) : (
-                  <h1>{JSON.parse(data && data.native_currency).name}</h1>
-                )}
+                {data && data.tbd_token === 'Y' ? <h1>Token-TBD🔥</h1> : <h1>-</h1>}
               </div>
               <div className="enter-Dapp-item Dapp-item-special">
                 <Link href="/dapp/Syncswap">Enter Dapp</Link>
@@ -600,34 +658,36 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       <DappsDetailBottom>
         <Title>Related Dapps</Title>
         <div className="tab-content">
-          {dapps.slice(0, 3).map((dapp, index) => {
-            return (
-              <div className="tab-content-item" key={index}>
-                <div className="content-item-img">
-                  <img src={dapp.logo} alt="" />
-                </div>
-                <div className="content-item-text">
-                  <h1>{dapp.name}</h1>
-                  <p>{dapp.description}</p>
-                  <Tag>
-                    {dapp.tags.map((tag, index) => (
-                      <div className={`tag-item ${tag}`} key={index}>
-                        {tag}
-                      </div>
-                    ))}
-                  </Tag>
-                </div>
-                <div className="content-item-btn">
-                  <div className="item-btn-item">
-                    <Link href="/dapps-details">Detail</Link>
+          {relatedDapps &&
+            relatedDapps.map((dapp: any, index: number) => {
+              const categoryNamess = getCategoryNamess(dapp.category_ids, categoryArray);
+              return (
+                <div className="tab-content-item" key={index}>
+                  <div className="content-item-img">
+                    <img src={dapp.logo} alt="" />
                   </div>
-                  <div className="item-btn-item">
-                    <Link href={dapp.dappRoute}>Dapp</Link>
+                  <div className="content-item-text">
+                    <h1>{dapp.name}</h1>
+                    <p>{dapp.description}</p>
+                    <Tag>
+                      {categoryNamess.map((categoryName: string, index: number) => (
+                        <div className={`tag-item ${categoryName}`} key={index}>
+                          {categoryName}
+                        </div>
+                      ))}
+                    </Tag>
+                  </div>
+                  <div className="content-item-btn">
+                    <div className="item-btn-item">
+                      <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+                    </div>
+                    <div className="item-btn-item">
+                      <Link href={dapp.route}>Dapp</Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </DappsDetailBottom>
     </DappsDetails>

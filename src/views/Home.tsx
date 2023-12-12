@@ -193,8 +193,8 @@ const Content = styled.div`
           }
         }
         .content-item-btn {
-          width: 22%;
           .item-btn-item {
+            max-width: 78px;
             background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
             border: 1px solid #373a53;
             font-size: 12px;
@@ -1019,7 +1019,7 @@ const HomeContent: NextPageWithLayout = () => {
                       <p>{child.description}</p>
                       <div className="carousel-btn">
                         <div className="carousel-btn-item">
-                          <Link href="/dapps-details">View Detail</Link>
+                          <Link href={`/dapps-details?dapp_id=${child.id}`}>View Detail</Link>
                         </div>
                         <div className="carousel-btn-item" style={{ marginRight: '0' }}>
                           <Link href={child.route}>Dapp</Link>{' '}

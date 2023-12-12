@@ -3,14 +3,41 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { dapps } from '@/config/dapps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
+import popupsData from '@/config/all-in-one/chains';
+import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
+import { ethers } from 'ethers';
 
+interface SelectBgProps {
+  bgColor: string;
+}
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
+  </svg>
+);
+const SelectBg: React.FC<SelectBgProps> = ({ bgColor }) => (
+  <svg width="1300" height="420" viewBox="0 0 1149 302" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g filter="url(#filter0_f_21_1792)">
+      <path d="M574.5 200C367.669 200 200 288.2 200 397L949 397C949 288.2 781.331 200 574.5 200Z" fill={bgColor} />
+    </g>
+    <defs>
+      <filter
+        id="filter0_f_21_1792"
+        x="0"
+        y="0"
+        width="1149"
+        height="597"
+        filterUnits="userSpaceOnUse"
+        color-interpolation-filters="sRGB"
+      >
+        <feFlood flood-opacity="0" result="BackgroundImageFix" />
+        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
+        <feGaussianBlur stdDeviation="100" result="effect1_foregroundBlur_21_1792" />
+      </filter>
+    </defs>
   </svg>
 );
 const arrowyellow = 'https://assets.dapdap.net/images/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi.svg';
@@ -37,14 +64,28 @@ const ChainsDetailsTitle = styled.div`
   background: #000000;
   margin: -54px -36px;
   padding: 30px 12% 0 12%;
-  background-image: url(${titleBg});
-  background-repeat: no-repeat;
-  background-size: auto;
-  background-position-x: 50%;
   width: auto;
   .header-details-body {
     display: flex;
+    position: relative;
+    .details-body-img {
+      overflow: hidden;
+      position: absolute;
+      z-index: 0;
+      bottom: 0;
+      opacity: 0.3;
+      img {
+        width: 300px;
+        position: absolute;
+        left: 36%;
+        top: 50%;
+      }
+      svg {
+        z-index: 0;
+      }
+    }
     .details-body-left {
+      z-index: 1;
       .body-left-detailed {
         display: flex;
         margin-bottom: 66px;
@@ -60,12 +101,12 @@ const ChainsDetailsTitle = styled.div`
             color: #ffffff;
           }
           p {
+            cursor: pointer;
             border: 1px solid #373a53;
             background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
             color: #979abe;
             border-radius: 8px;
             padding: 6px 12px;
-            font-weight: 300;
             height: 30px;
             line-height: 16px;
             width: fit-content;
@@ -115,6 +156,7 @@ const ChainsDetailsTitle = styled.div`
       }
     }
     .details-body-right {
+      z-index: 1;
       display: flex;
       flex: 1;
       text-align: center;
@@ -202,6 +244,8 @@ const ChainsDetailsContent = styled.div`
 `;
 
 const BreadCrumbs = styled.div`
+  position: relative;
+  z-index: 1;
   color: #979abe;
   font-size: 14px;
   margin-bottom: 30px;
@@ -415,11 +459,15 @@ const Tag = styled.div`
     font-size: 12px;
     display: flex;
   }
+  .Swap {
+    color: rgba(172, 252, 237, 1);
+    border: 1px solid rgba(172, 252, 237, 1);
+  }
   .Bridge {
     color: rgba(227, 233, 157, 1);
     border: 1px solid rgba(227, 233, 157, 1);
   }
-  .Dexes {
+  .DEX {
     color: rgba(172, 252, 237, 1);
     border: 1px solid rgba(172, 252, 237, 1);
   }
@@ -445,13 +493,97 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState<any>(null);
+  const [hotDapps, setHotDapps] = useState<any>(null);
+  const [activities, setActivities] = useState<any>(null);
+  const [matchedItem, setMatchedItem] = useState<any>(null);
+  const { loading, categories } = useCategoryDappList();
+  const categoryArray = Object.values(categories);
+  function getCategoryNames(dappCategories: any, categoryArray: any[]) {
+    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
+    return categories.map((categoryItem: any) => {
+      const categoryId =
+        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
+      const category = categoryArray.find((c: any) => c.id === categoryId);
+      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
+    });
+  }
   useEffect(() => {
-    if (id) {
-      fetch(`${TTAPI_PATH}/operations/Network/GetOne?id=${id}`)
-        .then((response) => response.json())
-        .then((data) => setData(data.data.data));
-    }
+    const fetchActivities = async () => {
+      if (id) {
+        try {
+          const response = await fetch(
+            `${QUEST_PATH}/api/action/get-popular-actions-by-network?network_id=${id}&page=1&page_size=10`,
+          );
+          const data = await response.json();
+          setActivities(data.data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    fetchActivities();
   }, [id]);
+  useEffect(() => {
+    const fetchData = async () => {
+      if (id) {
+        try {
+          const response = await fetch(`${TTAPI_PATH}/operations/Network/GetOne?id=${id}`);
+          const data = await response.json();
+          setData(data.data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    fetchData();
+  }, [id]);
+  useEffect(() => {
+    const fetchhotDappsData = async () => {
+      if (id) {
+        try {
+          const response = await fetch(`${QUEST_PATH}/api/dapp/hot_list?network_id=${id}`);
+          const data = await response.json();
+          setHotDapps(data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    fetchhotDappsData();
+  }, [id]);
+  useEffect(() => {
+    if (data) {
+      const popupsArray = Object.values(popupsData);
+      setMatchedItem(popupsArray.find((item) => item.title === data.name));
+    }
+  }, [data, popupsData]);
+
+  const addMetaMask = async ({
+    chainId,
+    chainName,
+    rpcUrls,
+  }: {
+    chainId: number;
+    chainName: string;
+    rpcUrls: string[];
+  }) => {
+    const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
+
+    etherProvider
+      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }])
+      .catch((err) => {
+        const chain = {
+          chainId: `0x${Number(chainId).toString(16)}`,
+          chainName: chainName,
+          rpcUrls: rpcUrls,
+        };
+
+        if (err.code === 4902) {
+          etherProvider.send('wallet_addEthereumChain', [chain]);
+        }
+      });
+  };
+
   return (
     <ChainsDetails>
       <ChainsDetailsTitle>
@@ -463,6 +595,10 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           <span>{data && data.name}</span>
         </BreadCrumbs>
         <div className="header-details-body">
+          <div className="details-body-img">
+            <img src={matchedItem && matchedItem.icon} alt="" />
+            <SelectBg bgColor={matchedItem && matchedItem.selectBgColor} />
+          </div>
           <div className="details-body-left">
             <div className="body-left-detailed">
               <img src={data && data.logo} alt="" />
@@ -474,7 +610,15 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                     <span>20</span>
                   </Golds> */}
                 </h1>
-                <p>
+                <p
+                  onClick={() =>
+                    addMetaMask({
+                      chainId: data.chain_id,
+                      chainName: data.name,
+                      rpcUrls: data.rpc,
+                    })
+                  }
+                >
                   Add to MetaMask <img src={diagonaltop} alt="" />
                 </p>
               </div>
@@ -515,11 +659,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
       <ChainsDetailsContent>
         <div className="left-side-substance">
           <Title>Description</Title>
-          <p>
-            Polygon zkEVM is aiming to become a decentralized Ethereum Layer 2 scalability solution that uses
-            cryptographic zero-knowledge proofs to offer validity and finality of off-chain transactions. Polygon zkEVM
-            wants to be equivalent with the Ethereum Virtual Machine.
-          </p>
+          <p>{data && data.description}</p>
           <Title>Milestones</Title>
           <div className="left-milestones-item">
             <div className="milestones-item-img">
@@ -564,34 +704,34 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
       <ChainsDetailsHot>
         <Title>Hot Dapps on Polygon zkEVM</Title>
         <div className="tab-content">
-          {dapps.slice(0, 9).map((dapp, index) => {
-            return (
-              <div className="tab-content-item" key={index}>
-                <div className="content-item-img">
-                  <img src={dapp.logo} alt="" />
-                </div>
-                <div className="content-item-text">
-                  <h1>{dapp.name}</h1>
-                  <p>{dapp.description}</p>
-                  <Tag>
-                    {dapp.tags.map((tag, index) => (
-                      <div className={`tag-item ${tag}`} key={index}>
-                        {tag}
-                      </div>
-                    ))}
-                  </Tag>
-                </div>
-                <div className="content-item-btn">
-                  <div className="item-btn-item">
-                    <Link href="/dapps-details">Detail</Link>
+          {hotDapps &&
+            hotDapps.map((dapp: any, index: number) => {
+              const categoryNames = getCategoryNames(dapp.category_ids, categoryArray);
+              return (
+                <div className="tab-content-item" key={index}>
+                  <div className="content-item-img">
+                    <img src={dapp.logo} alt="" />
                   </div>
-                  <div className="item-btn-item">
-                    <Link href={dapp.dappRoute}>Dapp</Link>
+                  <div className="content-item-text">
+                    <h1>{dapp.name}</h1>
+                    <p>{dapp.description}</p>
+                    <Tag>
+                      {categoryNames.map((categoryName: string, index: number) => (
+                        <div className={`tag-item ${categoryName}`} key={index}>
+                          {categoryName}
+                        </div>
+                      ))}
+                    </Tag>
+                  </div>
+                  <div className="content-item-btn">
+                    <div className="item-btn-item">
+                      <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+                    </div>
+                    <div className="item-btn-item">Dapp</div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </ChainsDetailsHot>
 
