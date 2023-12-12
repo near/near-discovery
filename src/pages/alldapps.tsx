@@ -648,7 +648,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <div className="tab-content-page">
           {dappList
             .filter((dapp) => dapp.tbd_token === 'Y')
-            .slice(0, 9)
             .map((dapp, index) => {
               const categoryData = dapp.dapp_category || dapp.category_ids;
               const categoryNames = getCategoryNames(categoryData, categoryArray);
@@ -687,7 +686,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
           <div className="tab-content-page">
             {dappList
               .filter((dapp) => dapp.tbd_token === 'N')
-              .slice(0, 9)
               .map((dapp, index) => {
                 const categoryData = dapp.dapp_category || dapp.category_ids;
                 const categoryNames = getCategoryNames(categoryData, categoryArray);
