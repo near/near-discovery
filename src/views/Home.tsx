@@ -613,6 +613,10 @@ const Content = styled.div`
         &:hover {
           background: #272a38;
         }
+        &.disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
       }
       .learning-icon-right {
         img {
@@ -916,20 +920,24 @@ const HomeContent: NextPageWithLayout = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % dappList.filter((dapp) => dapp.recommend === true).length);
   }, [dappList.filter((dapp) => dapp.recommend === true).length]);
 
-  const [items, setItems] = useState([initialLearningData[2], ...initialLearningData, initialLearningData[0]]);
-  const [currentIndex, setCurrentIndex] = useState(1);
+  const [items, setItems] = useState(initialLearningData);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [learningPage, setLearningPage] = useState(1);
   const carouselRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (carouselRef.current) {
-      const carousel = carouselRef.current;
-      carousel.style.transition = 'none';
-      carousel.style.transform = `translateX(-${currentIndex * 550}px)`;
-      setTimeout(() => {
-        carousel.style.transition = '';
-      }, 0);
+      const page = Math.ceil(carouselRef.current.clientWidth / 539);
+      setLearningPage(page);
     }
-  }, [currentIndex]);
+    // if (carouselRef.current && currentIndex === items.length - 1) {
+    //   const carousel = carouselRef.current;
+    //   carousel.style.transform = `translateX(-${currentIndex * 550}px)`;
+    //   setTimeout(() => {
+    //     carousel.style.transition = '0.5s';
+    //   }, 0);
+    // }
+  }, []);
 
   const handleTransitionEnd = () => {
     if (currentIndex === 0) {
@@ -940,11 +948,12 @@ const HomeContent: NextPageWithLayout = () => {
   };
 
   const handleLeftClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % (items.length - 2));
+    if (currentIndex > 0) setCurrentIndex(currentIndex - 1);
   };
 
   const handleRightClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + items.length - 2) % (items.length - 2));
+    console.log('currentIndex', currentIndex, learningPage);
+    if (currentIndex < learningPage - 1) setCurrentIndex(currentIndex + 1);
   };
 
   return (
@@ -1289,15 +1298,14 @@ const HomeContent: NextPageWithLayout = () => {
 
         <div className="learning">
           <Title>Learning</Title>
-          <div className="learning-contents-item">
+          <div className="learning-contents-item" ref={carouselRef}>
             <div
-              ref={carouselRef}
-              onTransitionEnd={handleTransitionEnd}
+              // onTransitionEnd={handleTransitionEnd}
               style={{
                 display: 'flex',
                 width: `${items.length * 539}px`,
+                transition: '0.5s',
                 transform: `translateX(-${currentIndex * 539}px)`,
-                transition: 'transform 0.8s ease-in-out',
                 willChange: 'transform',
               }}
             >
@@ -1318,13 +1326,19 @@ const HomeContent: NextPageWithLayout = () => {
             </div>
           </div>
           <div className="learning-icon">
-            <div className="learning-icon-item learning-icon-left" onClick={handleLeftClick}>
+            <div
+              className={`learning-icon-item learning-icon-left ${currentIndex === 0 && 'disabled'}`}
+              onClick={handleLeftClick}
+            >
               <img
                 src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""
               />
             </div>
-            <div className="learning-icon-item learning-icon-right" onClick={handleRightClick}>
+            <div
+              className={`learning-icon-item learning-icon-right ${currentIndex === items.length - 1 && 'disabled'}`}
+              onClick={handleRightClick}
+            >
               <img
                 src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""
