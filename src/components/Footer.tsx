@@ -56,7 +56,7 @@ const Footer = () => {
   const pathName = router.pathname;
   return (
     <StyledContainer>
-      <div className={`footer-item  ${pathName === '/' ? 'footer-left' : ''}`}>
+      <div className="footer-item">
         <div>Made with ❤️ by DapDap team.</div>
         <div>Bulit on BOS & NEAR Protocol</div>
       </div>
@@ -84,7 +84,7 @@ const Footer = () => {
           />
         </StyledSocials>
       </div>
-      <div className={`footer-item ${pathName === '/' ? 'footer-right' : ''}`}>Copyright 2023 DapDap</div>
+      <div className="footer-item">Copyright 2023 DapDap</div>
     </StyledContainer>
   );
 };

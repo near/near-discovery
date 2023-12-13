@@ -7,8 +7,7 @@ import styled from 'styled-components';
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
 import { dapps } from '@/config/dapps';
-import { TTAPI_PATH } from '@/config/quest';
-import { menuData } from '@/data/menuData';
+import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
 import { get } from '@/utils/http';
@@ -210,9 +209,66 @@ const Search = styled.div`
     top: 0;
     cursor: pointer;
   }
+  .search-results {
+    width: 100%;
+    position: absolute;
+    top: 55px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
+    background-color: rgb(48, 49, 66);
+    color: rgba(151, 154, 190, 1);
+    border: 1px solid rgba(55, 58, 83, 1);
+    border-radius: 12px;
+    max-height: 600px;
+    overflow: auto;
+    padding: 20px 30px;
+    .search-results-item {
+      a {
+        text-decoration: none;
+      }
+      .results-item-title {
+        p {
+          font-size: 12px;
+          display: inline-block;
+        }
+        .item-title-right {
+          float: right;
+          cursor: pointer;
+        }
+      }
+      .results-item-list {
+        display: flex;
+        img {
+          position: inherit;
+          width: 30px;
+          height: 30px;
+        }
+        p {
+          font-size: 14px;
+          color: #ffffff;
+          margin-top: 6px;
+          margin-left: 10px;
+        }
+      }
+    }
+  }
+`;
+
+const MaskLayer = styled.div`
+  position: fixed;
+  top: 80px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 0;
+  backdrop-filter: blur(6px);
 `;
 
 const MenuContent = styled.div`
+  z-index: 1;
   position: absolute;
   left: 0;
   top: 78px;
@@ -253,6 +309,7 @@ const MenuContent = styled.div`
     a {
       color: #ffffff;
       text-decoration: none;
+      height: fit-content;
     }
 
     .item-list-ingle {
@@ -354,6 +411,10 @@ export const DesktopNavigationTop = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
+  const [searchContent, setSearchContent] = useState('');
+  const [searchResults, setSearchResults] = useState<any | null>(null);
+  const [showAll, setShowAll] = useState(false);
+  const [showNetworkAll, setShowNetworkAll] = useState(false);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -366,8 +427,21 @@ export const DesktopNavigationTop = () => {
     fetchNetworkData();
   }, []);
 
+  useEffect(() => {
+    const fetchSearchData = async () => {
+      if (searchContent) {
+        try {
+          const result = await get(`${QUEST_PATH}/api/search?content=${searchContent}`);
+          setSearchResults(result.data);
+        } catch (error) {
+          console.error('Error fetching search data:', error);
+        }
+      }
+    };
+    fetchSearchData();
+  }, [searchContent]);
+
   const query = router.query;
-  // console.log('query: ', query, currentPath);
 
   const dappRoute = query.dappRoute;
 
@@ -391,11 +465,77 @@ export const DesktopNavigationTop = () => {
         </Link>
         <MenuContainer>
           <Search>
-            <input type="text" placeholder="search dapps, chains..." autoFocus />
+            <input
+              type="text"
+              placeholder="search dapps, chains..."
+              value={searchContent}
+              onChange={(e) => setSearchContent(e.target.value)}
+              autoFocus
+            />
             {SearchIcon}
             <div className="switch-icon" onClick={() => setShowMenuContent(!showMenuContent)}>
               <img src={showMenuContent ? CloseIcon : ExpandIcon} alt="" />
             </div>
+            {searchContent && (
+              <div className="search-results">
+                <div className="search-results-item">
+                  <div className="results-item-title">
+                    <p>Dapp</p>
+                    <p className="item-title-right" onClick={() => setShowAll(!showAll)}>
+                      {showAll ? 'Close' : 'View More'}
+                    </p>
+                  </div>
+                  {searchResults &&
+                    (showAll ? searchResults.dapps : searchResults.dapps.slice(0, 5)).map(
+                      (item: any, index: number) => (
+                        <Link
+                          key={index}
+                          href={`/dapps-details?dapp_id=${item.id}`}
+                          onClick={() => setSearchContent('')}
+                        >
+                          <div className="results-item-list">
+                            <img src={item.logo} alt="" />
+                            <p>{item.name}</p>
+                          </div>
+                        </Link>
+                      ),
+                    )}
+                </div>
+                <div className="search-results-item">
+                  <div className="results-item-title">
+                    <p>Blockchain</p>
+                    <p className="item-title-right" onClick={() => setShowNetworkAll(!showNetworkAll)}>
+                      {showNetworkAll ? 'Close' : 'View More'}
+                    </p>
+                  </div>
+                  {searchResults &&
+                    (showNetworkAll ? searchResults.networks : searchResults.networks.slice(0, 5)).map(
+                      (item: any, index: number) => (
+                        <Link key={index} href={`/chains-details?id=${item.id}`} onClick={() => setSearchContent('')}>
+                          <div className="results-item-list">
+                            <img src={item.logo} alt="" />
+                            <p>{item.name}</p>
+                          </div>
+                        </Link>
+                      ),
+                    )}
+                </div>
+                <div className="search-results-item">
+                  <div className="results-item-title">
+                    <p>Quest</p>
+                  </div>
+                  {searchResults &&
+                    (showAll ? searchResults.quests : searchResults.quests).map((item: any, index: number) => (
+                      <Link key={index} href="#">
+                        <div className="results-item-list">
+                          <img src={item.logo} alt="" />
+                          <p>{item.name}</p>
+                        </div>
+                      </Link>
+                    ))}
+                </div>
+              </div>
+            )}
           </Search>
         </MenuContainer>
         {account ? (
@@ -432,91 +572,94 @@ export const DesktopNavigationTop = () => {
       )}
 
       {showMenuContent && (
-        <MenuContent className={showMenuContent ? 'show' : ''}>
-          <div className="menu-content-item">
-            <div className="content-item-text">
-              <h1>Explore Dapps</h1>
-              <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
-              {categoryArray &&
-                categoryArray.map((item: any, index: number) => {
-                  return (
-                    <div
-                      className="item-list-ingle"
-                      key={index}
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => {
-                        router.push({
-                          pathname: '/alldapps',
-                          query: { category: item.id },
-                        });
-                      }}
-                    >
-                      {item.name}
-                    </div>
-                  );
-                })}
-            </div>
-            <Link href="/alldapps" onClick={() => setShowMenuContent(false)}>
-              <div className="content-item-arrow">
-                <img src={ArrowIcon} alt="" />
+        <>
+          <MaskLayer onClick={() => setShowMenuContent(false)} />
+          <MenuContent className={showMenuContent ? 'show' : ''}>
+            <div className="menu-content-item">
+              <div className="content-item-text">
+                <h1>Explore Dapps</h1>
+                <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
+                {categoryArray &&
+                  categoryArray.map((item: any, index: number) => {
+                    return (
+                      <div
+                        className="item-list-ingle"
+                        key={index}
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          router.push({
+                            pathname: '/alldapps',
+                            query: { category: item.id },
+                          });
+                        }}
+                      >
+                        {item.name}
+                      </div>
+                    );
+                  })}
               </div>
-            </Link>
-          </div>
-          <div className="menu-content-item">
-            <div className="content-item-text">
-              <h1>Explore Blockchains</h1>
-              <p>Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems.</p>
-              {networkList &&
-                networkList.map((child, index) => (
-                  <Link href={`/chains-details?id=${child.id}`} key={index} onClick={() => setShowMenuContent(false)}>
-                    <div className="item-list-ingle">{child.name}</div>
-                  </Link>
-                ))}
+              <Link href="/alldapps" onClick={() => setShowMenuContent(false)}>
+                <div className="content-item-arrow">
+                  <img src={ArrowIcon} alt="" />
+                </div>
+              </Link>
             </div>
-            <Link href="/blockchains" onClick={() => setShowMenuContent(false)}>
-              <div className="content-item-arrow">
-                <img src={ArrowIcon} alt="" />
+            <div className="menu-content-item">
+              <div className="content-item-text">
+                <h1>Explore Blockchains</h1>
+                <p>Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems.</p>
+                {networkList &&
+                  networkList.map((child, index) => (
+                    <Link href={`/chains-details?id=${child.id}`} key={index} onClick={() => setShowMenuContent(false)}>
+                      <div className="item-list-ingle">{child.name}</div>
+                    </Link>
+                  ))}
               </div>
-            </Link>
-          </div>
-          <div className="menu-content-deep">
-            <Link href="/warmup" onClick={() => setShowMenuContent(false)}>
-              <div className="contenr-deep-item">
+              <Link href="/blockchains" onClick={() => setShowMenuContent(false)}>
+                <div className="content-item-arrow">
+                  <img src={ArrowIcon} alt="" />
+                </div>
+              </Link>
+            </div>
+            <div className="menu-content-deep">
+              <Link href="/warmup" onClick={() => setShowMenuContent(false)}>
+                <div className="contenr-deep-item">
+                  <div className="deep-item-left">
+                    <img src={DeepDive} alt="" />
+                  </div>
+                  <div className="deep-item-text">
+                    <h1>DeepDive</h1>
+                    <p> DeepDive the hotest L2 Blockcchain to get more intension of reward.</p>
+                  </div>
+                </div>
+              </Link>
+              <Link href="/all-in-one" onClick={() => setShowMenuContent(false)}>
+                <div className="contenr-deep-item">
+                  <div className="deep-item-left">
+                    <img src={Shotcuts} alt="" />
+                  </div>
+                  <div className="deep-item-text">
+                    <h1>Shotcuts</h1>
+                    <p>Shortcuts integrate common functions and the most popular dapps.</p>
+                  </div>
+                </div>
+              </Link>
+              <div className="contenr-deep-item deep-item-special">
                 <div className="deep-item-left">
-                  <img src={DeepDive} alt="" />
+                  <img src={Portfolio} alt="" />
                 </div>
                 <div className="deep-item-text">
-                  <h1>DeepDive</h1>
-                  <p> DeepDive the hotest L2 Blockcchain to get more intension of reward.</p>
+                  <h1>Portfolio</h1>
+                  <div className="current-version">
+                    <img src={lockUrl} alt="" />
+                    Lv.3
+                  </div>
+                  <p>Access your assets and positions directly from your portfolio after Lv.3.</p>
                 </div>
-              </div>
-            </Link>
-            <Link href="/all-in-one" onClick={() => setShowMenuContent(false)}>
-              <div className="contenr-deep-item">
-                <div className="deep-item-left">
-                  <img src={Shotcuts} alt="" />
-                </div>
-                <div className="deep-item-text">
-                  <h1>Shotcuts</h1>
-                  <p>Shortcuts integrate common functions and the most popular dapps.</p>
-                </div>
-              </div>
-            </Link>
-            <div className="contenr-deep-item deep-item-special">
-              <div className="deep-item-left">
-                <img src={Portfolio} alt="" />
-              </div>
-              <div className="deep-item-text">
-                <h1>Portfolio</h1>
-                <div className="current-version">
-                  <img src={lockUrl} alt="" />
-                  Lv.3
-                </div>
-                <p>Access your assets and positions directly from your portfolio after Lv.3.</p>
               </div>
             </div>
-          </div>
-        </MenuContent>
+          </MenuContent>
+        </>
       )}
     </Container>
   );
