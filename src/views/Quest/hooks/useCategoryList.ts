@@ -29,7 +29,6 @@ export default function useCategoryList() {
   }, [loading]);
 
   useEffect(() => {
-    console.log('00000000000000');
     queryCategories();
   }, []);
 

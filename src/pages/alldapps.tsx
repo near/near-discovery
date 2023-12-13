@@ -11,6 +11,7 @@ import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
+import useDappOpen from '@/hooks/useDappOpen';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const arrow = (
@@ -211,6 +212,7 @@ const AllDappsPage = styled.div`
           align-items: center;
           border-radius: 16px;
           margin-bottom: 14px;
+          cursor: pointer;
           a {
             color: #ffffff;
             text-decoration: none;
@@ -408,6 +410,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const { open } = useDappOpen();
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -687,9 +690,13 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     <div className="item-btn-item">
                       <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                     </div>
-                    <div className="item-btn-item">
-                      {' '}
-                      <Link href={dapp.route}>Dapp</Link>
+                    <div
+                      className="item-btn-item"
+                      onClick={() => {
+                        open(dapp, 'alldapps');
+                      }}
+                    >
+                      Dapp
                     </div>
                   </div>
                 </div>
@@ -725,8 +732,13 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       <div className="item-btn-item">
                         <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                       </div>
-                      <div className="item-btn-item">
-                        <Link href={dapp.route}>Dapp</Link>
+                      <div
+                        className="item-btn-item"
+                        onClick={() => {
+                          open(dapp, 'alldapps');
+                        }}
+                      >
+                        Dapp
                       </div>
                     </div>
                   </div>

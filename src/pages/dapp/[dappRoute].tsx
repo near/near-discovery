@@ -38,7 +38,6 @@ export const DappPage: NextPageWithLayout = () => {
   const network = dapp.dapp_network?.find((_network: any) => _network.network_id === curChain.id);
 
   if (!network?.dapp_src) return <div />;
-  console.log(network.dapp_src);
   return (
     <ComponentWrapperPage
       componentProps={{
