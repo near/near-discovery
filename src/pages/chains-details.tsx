@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -584,6 +584,13 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
       });
   };
 
+  const nativeCurrency = useMemo(() => {
+    try {
+      if (data.native_currency) return JSON.parse(data.native_currency);
+    } catch (err) {}
+    return {};
+  }, [data]);
+
   return (
     <ChainsDetails>
       <ChainsDetailsTitle>
@@ -630,7 +637,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
               </div>
               <div className="enter-Dapp-item">
                 <p>Native Token</p>
-                <h1>TBD🔥</h1>
+                <h1>{nativeCurrency.symbol}</h1>
               </div>
             </div>
           </div>
