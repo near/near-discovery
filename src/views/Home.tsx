@@ -13,6 +13,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import useCategoryDappList from './Quest/hooks/useCategoryDappList';
+import popupsData from '@/config/all-in-one/chains';
 
 const blueBg = (
   <svg width="719" height="719" viewBox="0 0 719 719" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -474,6 +475,9 @@ const Content = styled.div`
       }
       .shortcuts-content-list {
         width: 30%;
+        a {
+          text-decoration: none;
+        }
         .shortcuts-list-item {
           margin-right: 12px;
           margin-bottom: 12px;
@@ -880,6 +884,7 @@ const HomeContent: NextPageWithLayout = () => {
   const categoryArray = Object.values(categories);
   const { open } = useDappOpen();
   const router = useRouter();
+  const popupsDataArray = Object.values(popupsData);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -1267,14 +1272,20 @@ const HomeContent: NextPageWithLayout = () => {
             </div>
             <div className="shortcuts-content-list">
               {networkList &&
-                networkList.map((child, index) => (
-                  <div style={{ display: 'inline-block' }} key={index}>
-                    <div className="shortcuts-list-item">
-                      <img src={child.logo} alt="" />
-                      {child.name}
+                networkList.map((child, index) => {
+                  const matchedItem = popupsDataArray.find((item) => item.chainId === child.chain_id);
+                  const path = matchedItem ? matchedItem.path : '';
+                  return (
+                    <div style={{ display: 'inline-block' }} key={index}>
+                      <Link href={`/all-in-one/${path}`}>
+                        <div className="shortcuts-list-item">
+                          <img src={child.logo} alt="" />
+                          {child.name}
+                        </div>
+                      </Link>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
             </div>
           </div>
         </div>
