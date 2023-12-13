@@ -26,6 +26,7 @@ const BackRoute = styled.div`
   .back-icon {
     padding-left: 100px;
     padding-right: 8px;
+    cursor: pointer;
   }
 
   .dapp-logo {

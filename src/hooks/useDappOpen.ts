@@ -1,12 +1,14 @@
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-
 import { useDappStore } from '@/stores/dapp';
+
+import { get } from '@/utils/http';
+import { TTAPI_PATH } from '@/config/quest';
 
 export default function useDappOpen() {
   const router = useRouter();
   const setDapp = useDappStore((store: any) => store.set);
-  const open = useCallback((dapp: any, from: 'home' | 'quest') => {
+  const open = useCallback(async (dapp: any, from: 'home' | 'quest' | 'alldapps') => {
     let _dapp = {} as any;
     if (from === 'quest') {
       _dapp = {
@@ -14,13 +16,22 @@ export default function useDappOpen() {
         default_network_id: dapp.network_id,
         name: dapp.dapp_name,
         logo: dapp.dapp_logo,
+        route: dapp.route,
       };
       setDapp({ dapp: _dapp });
-    } else {
+    }
+    if (from === 'home') {
+      _dapp.route = dapp.route;
       setDapp({ dapp });
     }
 
-    router.push(dapp.route);
+    if (from === 'alldapps') {
+      const result = await get(`${TTAPI_PATH}/operations/Dapp/GetOne?id=${dapp.id}`);
+      _dapp = result.data.data;
+      setDapp({ dapp: _dapp });
+    }
+
+    router.push(_dapp.route);
   }, []);
   return { open };
 }
