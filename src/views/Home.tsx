@@ -905,7 +905,7 @@ const HomeContent: NextPageWithLayout = () => {
   }
 
   const [selectedTab, setSelectedTab] = useState(() => {
-    return 'TBD';
+    return 'token';
   });
   const handleTabClick = (path: string) => {
     setSelectedTab(path);
@@ -1048,16 +1048,16 @@ const HomeContent: NextPageWithLayout = () => {
 
           <div className="token-tab-list">
             <div
-              className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
-              onClick={() => handleTabClick('TBD')}
-            >
-              Token-TBD🔥
-            </div>
-            <div
               className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
               onClick={() => handleTabClick('token')}
             >
               Native token
+            </div>
+            <div
+              className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
+              onClick={() => handleTabClick('TBD')}
+            >
+              Token-TBD🔥
             </div>
             <ViewAll>
               <Link href="/alldapps">
@@ -1134,8 +1134,13 @@ const HomeContent: NextPageWithLayout = () => {
                         <div className="item-btn-item">
                           <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                         </div>
-                        <div className="item-btn-item">
-                          <Link href={dapp.route}>Dapp</Link>
+                        <div
+                          className="item-btn-item"
+                          onClick={() => {
+                            open(dapp, 'home');
+                          }}
+                        >
+                          Dapp
                         </div>
                       </div>
                     </div>

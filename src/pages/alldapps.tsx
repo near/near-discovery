@@ -2,6 +2,7 @@
 import axios from 'axios';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { useSearchParams, usePathname } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import chains from '@/config/chains';
@@ -404,6 +405,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const [carouselList, setCarouselList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -442,7 +446,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   }, [dappList.filter((dapp) => dapp.recommend === true).length]);
 
   const [selectedTab, setSelectedTab] = useState(() => {
-    return 'TBD';
+    return 'token';
   });
 
   const handleTabClick = (path: string) => {
@@ -460,16 +464,23 @@ const AllDappsColumn: NextPageWithLayout = () => {
     }
   };
 
-  const [selectedFunction, setSelectedFunction] = useState<string[]>(() => {
-    return [];
-  });
+  const [selectedFunction, setSelectedFunction] = useState<string[]>([]);
   const handleFunctionClick = (functionType: any) => {
     const id = functionType.id;
-    if (selectedFunction.includes(id)) {
-      setSelectedFunction(selectedFunction.filter((type) => type !== id));
+    let _selectedFunction: string[] = [];
+    if (selectedFunction.includes(String(id))) {
+      _selectedFunction = selectedFunction.filter((type) => type !== String(id));
     } else {
-      setSelectedFunction([...selectedFunction, id]);
+      _selectedFunction = [...selectedFunction, String(id)];
     }
+
+    const params = new URLSearchParams(searchParams);
+    if (_selectedFunction.length) {
+      params.set('category', _selectedFunction.join(','));
+    } else {
+      params.delete('category');
+    }
+    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
   };
 
   const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
@@ -489,6 +500,13 @@ const AllDappsColumn: NextPageWithLayout = () => {
       console.error('Error fetching resultDapp data:', error);
     }
   };
+  useEffect(() => {
+    if (router.query.category) {
+      setSelectedFunction((router.query.category as string).split(','));
+    } else {
+      setSelectedFunction([]);
+    }
+  }, [router.query.category]);
   useEffect(() => {
     const fetchFilteredDappData = async () => {
       try {
@@ -516,14 +534,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
         const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
 
         const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=300`;
-
         const resultDapp = await get(url);
         setDappList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching filtered dapp data:', error);
       }
     };
-
     if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
       fetchFilteredDappData();
     } else {
@@ -576,14 +592,14 @@ const AllDappsColumn: NextPageWithLayout = () => {
       </CarouselList>
 
       <div className="token-tab-list">
-        <div className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`} onClick={() => handleTabClick('TBD')}>
-          🔥 Token-TBD
-        </div>
         <div
           className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
           onClick={() => handleTabClick('token')}
         >
           💰 Native token
+        </div>
+        <div className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`} onClick={() => handleTabClick('TBD')}>
+          🔥 Token-TBD
         </div>
       </div>
       <div className="tab-content">
@@ -611,7 +627,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                   <div
                     key={index}
                     className={`function-list-item ${item.name} ${
-                      selectedFunction.includes(item.id) ? item.name + 'Active' : ''
+                      selectedFunction.includes(String(item.id)) ? item.name + 'Active' : ''
                     }`}
                     onClick={() => handleFunctionClick(item)}
                   >

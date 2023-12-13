@@ -354,7 +354,6 @@ export const DesktopNavigationTop = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
-
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -441,7 +440,17 @@ export const DesktopNavigationTop = () => {
               {categoryArray &&
                 categoryArray.map((item: any, index: number) => {
                   return (
-                    <div className="item-list-ingle" key={index}>
+                    <div
+                      className="item-list-ingle"
+                      key={index}
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        router.push({
+                          pathname: '/alldapps',
+                          query: { category: item.id },
+                        });
+                      }}
+                    >
                       {item.name}
                     </div>
                   );
