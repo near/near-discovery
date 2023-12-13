@@ -162,7 +162,7 @@ const MenuContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
+  z-index: 30;
   flex: 1;
   display: flex;
   justify-content: center;
