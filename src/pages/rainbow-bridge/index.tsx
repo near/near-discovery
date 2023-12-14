@@ -32,7 +32,6 @@ import chains from '@/config/chains';
 import { onboard, useEthersProviderContext } from '@/data/web3';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import useSwitchChain from '@/hooks/useSwitchChain';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 import { flushEvents } from '@/utils/analytics';
@@ -41,9 +40,11 @@ import type { NextPageWithLayout } from '@/utils/types';
 import { checkApprove, handleApprove } from '../../components/rainbow-bridge/approve';
 import { fetchAllTransfers, useTokenPrice } from '../../components/rainbow-bridge/service';
 
-export const ethIcon = 'https://assets.dapdap.net/images/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee.png';
+export const ethIcon =
+  'https://assets.dapdap.net/images/bafkreicxwo5knrruycnmm4m3ays5qidadxsgxcpgrz3ijikvpzql7l7pee.png';
 
-export const nearIcon = 'https://assets.dapdap.net/images/bafkreihnvs6cfknhtffsiloh5ea2qowajjcsndjh4by7bubbtyjia3yo6q.png';
+export const nearIcon =
+  'https://assets.dapdap.net/images/bafkreihnvs6cfknhtffsiloh5ea2qowajjcsndjh4by7bubbtyjia3yo6q.png';
 
 function useInterval(callback: any, delay: number) {
   const savedCallback = useRef<any>();
@@ -226,8 +227,6 @@ const RainbowBridge: NextPageWithLayout = () => {
 
   const [sender, setSender] = useState<string>('');
 
-  const { switchNetwork, switching } = useSwitchChain();
-
   useEffect(() => {
     const isEth = connectedChain?.id === '0x1';
     if (!wallet || !provider || !isEth) {
@@ -282,7 +281,7 @@ const RainbowBridge: NextPageWithLayout = () => {
 
   const handlerEthConnect = useCallback(async () => {
     if (connectedChain?.id === '0x1') {
-      switchNetwork(chains[1]);
+      setChain({ chainId: `0x${chains[1].chainId.toString(16)}` });
     } else {
       connect();
     }

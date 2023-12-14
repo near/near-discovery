@@ -1,11 +1,10 @@
-import Big from 'big.js';
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
 
 import LoadingIcon from '@/components/Icons/Loading';
 import { chainCofig } from '@/config/bridge';
 import useApprove from '@/hooks/useApprove';
-import useSwitchChain from '@/hooks/useSwitchChain';
+import { useSetChain } from '@web3-onboard/react';
 
 import type { Chain, Token } from '../types';
 
@@ -36,7 +35,6 @@ const Button = ({
   outputToken,
   outputChain,
   destination,
-  chainId,
   checking,
   swap,
   swaping,
@@ -55,14 +53,17 @@ const Button = ({
   swap: any;
   swaping?: boolean;
 }) => {
-  const { switching, switchNetwork } = useSwitchChain();
+  const [{ settingChain, connectedChain }, setChain] = useSetChain();
 
-  const isWrongNetwork = useMemo(() => chainId !== inputChain?.chainId, [chainId, inputChain]);
+  const isWrongNetwork = useMemo(
+    () => Number(connectedChain?.id) !== inputChain?.chainId,
+    [connectedChain?.id, inputChain],
+  );
 
   const spender = useMemo(() => {
-    if (!inputChain || !inputToken || inputChain.chainId !== chainId) return '';
+    if (!inputChain || !inputToken || inputChain.chainId !== Number(connectedChain?.id)) return '';
     return inputToken.isNative ? chainCofig[inputChain.chainId].ethRouter : chainCofig[inputChain?.chainId].router;
-  }, [inputChain, inputToken, chainId]);
+  }, [inputChain, inputToken, connectedChain?.id]);
 
   const { approved, approve, approving } = useApprove({
     token: inputToken,
@@ -78,12 +79,12 @@ const Button = ({
   if (isWrongNetwork && inputChain) {
     return (
       <StyledButton
-        disabled={switching}
+        disabled={settingChain}
         onClick={() => {
-          switchNetwork(inputChain);
+          setChain({ chainId: `0x${inputChain.chainId.toString(16)}` });
         }}
       >
-        {switching && <LoadingIcon />}
+        {settingChain && <LoadingIcon />}
         {`Switch network to ${inputChain.chainName}`}
       </StyledButton>
     );

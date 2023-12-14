@@ -10,6 +10,7 @@ import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSetChain } from '@web3-onboard/react';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const arrow = (
@@ -189,52 +190,21 @@ const AllInOne: NextPageWithLayout = () => {
   const components = useBosComponents();
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
-  const [switching, setSwitching] = useState(false);
+  const [{ settingChain }, setChain] = useSetChain();
   const { addAction } = useAddAction('all-in-one');
   const popupRef = useRef<HTMLDivElement | null>(null);
 
   const handleSelectItemClick = () => {
     setIsSelectItemClicked(!isSelectItemClicked);
   };
-  const handleItemClick = (path: string) => {
-    const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
-    const currentChain = popupsData[path];
-    setSwitching(true);
-    etherProvider
-      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(currentChain.chainId).toString(16)}` }])
-      .then(() => {
-        setShowComponent(false);
-        setSwitching(false);
-        setTimeout(() => {
-          router.push(`/all-in-one/${currentChain.path}`);
-        }, 500);
-      })
-      .catch((err) => {
-        if (err?.code !== 4902) {
-          setSwitching(false);
-          return;
-        }
-        const chain = {
-          chainId: `0x${Number(currentChain.chainId).toString(16)}`,
-          chainName: currentChain.title,
-          rpcUrls: [currentChain.rpcUrls],
-        };
-
-        etherProvider
-          .send('wallet_addEthereumChain', [chain])
-          .then((res) => {
-            setShowComponent(false);
-            setSwitching(false);
-            setTimeout(() => {
-              router.push(`/all-in-one/${currentChain.path}`);
-            }, 500);
-          })
-          .catch((err) => {
-            setSwitching(false);
-          });
-      });
-
+  const handleItemClick = async (path: string) => {
     setIsSelectItemClicked(false);
+    const currentChain = popupsData[path];
+    const result = await setChain({ chainId: `0x${currentChain.chainId.toString(16)}` });
+    if (result) {
+      setShowComponent(false);
+      router.push(`/all-in-one/${currentChain.path}`);
+    }
   };
 
   useEffect(() => {
@@ -247,7 +217,7 @@ const AllInOne: NextPageWithLayout = () => {
   }, [chain]);
 
   useEffect(() => {
-    const handleClickOutside = (event: { target: any; }) => {
+    const handleClickOutside = (event: { target: any }) => {
       if (popupRef.current && !popupRef.current.contains(event.target)) {
         setIsSelectItemClicked(false);
       }
@@ -266,80 +236,76 @@ const AllInOne: NextPageWithLayout = () => {
         {arrow}
         <span>{currentChain.title} ShortCut</span>
       </BreadCrumbs>
-      {switching ? (
-        <Spinner />
-      ) : (
-        <>
-          {' '}
-          <div className="top-login-select">
-            <div className="select-item-wrapper" onClick={handleSelectItemClick}>
-              <div
-                className="selsect-item-img"
-                style={{
-                  backgroundColor: currentChain.bgColor,
-                }}
-              >
-                <img src={currentChain.icon} alt="" />
-              </div>
-              <div className="selsect-item-text">
-                <p> {currentChain.title}</p>
-              </div>
-              <div className="selsect-item-icon">
-                <img
-                  style={{ transform: isSelectItemClicked ? 'rotate(180deg)' : 'rotate(0deg)' }}
-                  src={narrowUrl}
-                  alt=""
-                />
-              </div>
+      <>
+        {' '}
+        <div className="top-login-select">
+          <div className="select-item-wrapper" onClick={handleSelectItemClick}>
+            <div
+              className="selsect-item-img"
+              style={{
+                backgroundColor: currentChain.bgColor,
+              }}
+            >
+              <img src={currentChain.icon} alt="" />
             </div>
-
-            {isSelectItemClicked && (
-              <div className="login-select-popup" ref={popupRef}>
-                {Object.values(popupsData).map((item) => (
-                  <div
-                    className={`select-popups-item ${chain === item.path ? 'selected' : ''}`}
-                    key={item.path}
-                    onClick={() => handleItemClick(item.path)}
-                  >
-                    <div className="popup-item-img" style={{ backgroundColor: item.bgColor }}>
-                      <img src={item.icon} alt="" />
-                    </div>
-                    <div className="popups-item-text">{item.title}</div>
-                    <div className="flex-grow"></div>
-                    {chain === item.path && (
-                      <div className="check-mark">
-                        <img src={checkMark} alt="check-mark" />
-                      </div>
-                    )}
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="selsect-item-text">
+              <p> {currentChain.title}</p>
+            </div>
+            <div className="selsect-item-icon">
+              <img
+                style={{ transform: isSelectItemClicked ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                src={narrowUrl}
+                alt=""
+              />
+            </div>
           </div>
-          {showComponent && (
-            <>
-              <div className="select-bg-icon">
-                <div className="select-bg-content">
-                  <img src={currentChain.icon} alt="" />
-                  <div className="select-bg">
-                    <SelectBg bgColor={currentChain.selectBgColor} />
+
+          {isSelectItemClicked && (
+            <div className="login-select-popup" ref={popupRef}>
+              {Object.values(popupsData).map((item) => (
+                <div
+                  className={`select-popups-item ${chain === item.path ? 'selected' : ''}`}
+                  key={item.path}
+                  onClick={() => handleItemClick(item.path)}
+                >
+                  <div className="popup-item-img" style={{ backgroundColor: item.bgColor }}>
+                    <img src={item.icon} alt="" />
                   </div>
+                  <div className="popups-item-text">{item.title}</div>
+                  <div className="flex-grow"></div>
+                  {chain === item.path && (
+                    <div className="check-mark">
+                      <img src={checkMark} alt="check-mark" />
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        {showComponent && (
+          <>
+            <div className="select-bg-icon">
+              <div className="select-bg-content">
+                <img src={currentChain.icon} alt="" />
+                <div className="select-bg">
+                  <SelectBg bgColor={currentChain.selectBgColor} />
                 </div>
               </div>
-              <div className="content-page">
-                <ComponentWrapperPage
-                  src={(components as any)[chain === 'zksync' ? 'zkSync' : chain]}
-                  meta={{
-                    title: 'Connect with the NEAR community.',
-                    description: 'Become part of the NEAR community.',
-                  }}
-                  componentProps={{ addAction }}
-                />
-              </div>
-            </>
-          )}
-        </>
-      )}
+            </div>
+            <div className="content-page">
+              <ComponentWrapperPage
+                src={(components as any)[chain === 'zksync' ? 'zkSync' : chain]}
+                meta={{
+                  title: 'Connect with the NEAR community.',
+                  description: 'Become part of the NEAR community.',
+                }}
+                componentProps={{ addAction }}
+              />
+            </div>
+          </>
+        )}
+      </>
     </Container>
   );
 };

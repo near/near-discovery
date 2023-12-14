@@ -151,7 +151,6 @@ export const onboard = init({
       label: 'Gnosis',
       rpcUrl: 'https://rpc.ankr.com/gnosis',
       icon: 'https://assets.dapdap.net/images/bafkreigl7y5n7xqlasn4wokkhxk3hoostz2u7qgvezvzfni2b6g2r4ayfu.png',
-      color: 'transparent',
     },
     {
       id: 10200,

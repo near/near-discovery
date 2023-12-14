@@ -6,8 +6,7 @@ import ArrowIcon from '@/components/Icons/ArrowIcon';
 import Loading from '@/components/Icons/Loading';
 import { overlay } from '@/components/animation';
 import chains from '@/config/chains';
-import useAccount from '@/hooks/useAccount';
-import useSwitchChain from '@/hooks/useSwitchChain';
+import { useSetChain } from '@web3-onboard/react';
 
 const StyledContainer = styled.div<{ $mt?: number; $showName?: number }>`
   width: ${({ $showName }) => ($showName ? '204px' : '70px')};
@@ -108,9 +107,11 @@ const Chain = ({
   showChains?: boolean;
   setShowChains?: (show: boolean) => void;
 }) => {
-  const { chainId } = useAccount();
-  const currentChain = useMemo(() => (chainId ? chains[chainId] : null), [chainId]);
-  const { switching, switchNetwork } = useSwitchChain();
+  const [{ connectedChain, settingChain }, setChain] = useSetChain();
+  const currentChain = useMemo(
+    () => (connectedChain?.id ? chains[Number(connectedChain?.id)] : null),
+    [connectedChain?.id],
+  );
   const [showList, setShowList] = useState(false);
   const [showEmptyChainTips, setShowEmptyChainTips] = useState(false);
   useEffect(() => {
@@ -133,8 +134,8 @@ const Chain = ({
       }}
     >
       <StyledChain>
-        {currentChain && !switching && <ChainLogo src={currentChain.icon} />}
-        {!currentChain && !switching && (
+        {currentChain && !settingChain && <ChainLogo src={currentChain.icon} />}
+        {!currentChain && !settingChain && (
           <EmptyChainLogo
             onMouseEnter={() => {
               !showName && setShowEmptyChainTips(true);
@@ -170,9 +171,9 @@ const Chain = ({
             )}
           </EmptyChainLogo>
         )}
-        {switching && <Loading />}
+        {settingChain && <Loading />}
         {showName && (
-          <ChainName>{switching ? 'Request' : currentChain ? currentChain.chainName : 'Select Network'}</ChainName>
+          <ChainName>{settingChain ? 'Request' : currentChain ? currentChain.chainName : 'Select Network'}</ChainName>
         )}
       </StyledChain>
       <ArrowIconWrapper>
@@ -183,7 +184,7 @@ const Chain = ({
           <ChainItem
             key={chain.chainId}
             onClick={() => {
-              switchNetwork(chain);
+              setChain({ chainId: `0x${chain.chainId.toString(16)}` });
             }}
             active={chain.chainId === currentChain?.chainId ? 1 : 0}
           >
