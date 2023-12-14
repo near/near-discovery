@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 
 import Loading from '@/components/Icons/Loading';
 
-import { formatPeriodDate,formatTotalUsers } from '../../helpers';
+import { formatPeriodDate, formatTotalUsers } from '../../helpers';
 import useLike from '../../hooks/useLike';
 import Timer from '../Timer';
 import {
@@ -68,7 +68,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
             {campaign.quests.total_category.map(
               ({ total, quest_category_id }: { total: number; quest_category_id: number }) => (
                 <>
-                  <span style={{ color: `var(--${categories[quest_category_id].name}-color` }} key={quest_category_id}>
+                  <span style={{ color: `var(--${categories[quest_category_id]?.name}-color` }} key={quest_category_id}>
                     {total} #{categories[quest_category_id].name}
                   </span>
                 </>

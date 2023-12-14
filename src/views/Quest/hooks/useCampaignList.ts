@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
 export default function useCampaignList() {
@@ -11,8 +11,8 @@ export default function useCampaignList() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`${TTAPI_PATH}/operations/Quest/GetCampaignList`);
-      setCampaigns(result.data?.data || []);
+      const result = await get(`${QUEST_PATH}/api/quest/campaign_list`);
+      setCampaigns(result.data || []);
       setLoading(false);
     } catch (err) {
       setLoading(false);
