@@ -588,6 +588,7 @@ export const DesktopNavigationTop = () => {
                         key={index}
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
+                          setShowMenuContent(false);
                           router.push({
                             pathname: '/alldapps',
                             query: { category: item.id },
