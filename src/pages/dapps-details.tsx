@@ -7,7 +7,7 @@ import { dapps } from '@/config/dapps';
 import { get } from '@/utils/http';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const arrow = (
@@ -405,8 +405,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
-        setNetworkList(resultNetwork.data?.data || []);
+        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
+        setNetworkList(resultNetwork.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);
       }
@@ -433,9 +433,9 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchData = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${TTAPI_PATH}/operations/Dapp/GetOne?id=${dapp_id}`);
+          const response = await fetch(`${QUEST_PATH}/api/dapp?id=${dapp_id}`);
           const data = await response.json();
-          setData(data.data.data);
+          setData(data.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }

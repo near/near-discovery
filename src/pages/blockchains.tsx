@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import { ethereum } from '@/config/tokens/ethereum';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
@@ -261,8 +261,8 @@ const BlockchainsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
-        setNetworkList(resultNetwork.data?.data || []);
+        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
+        setNetworkList(resultNetwork.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);
       }

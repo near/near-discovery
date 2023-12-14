@@ -7,7 +7,7 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
@@ -888,15 +888,15 @@ const HomeContent: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
-        setNetworkList(resultNetwork.data?.data || []);
+        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
+        setNetworkList(resultNetwork.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);
       }
     };
     const fetchDappData = async () => {
       try {
-        const resultDapp = await get(`${TTAPI_PATH}/operations/Dapp/GetList`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=100`);
         setDappList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
@@ -905,7 +905,6 @@ const HomeContent: NextPageWithLayout = () => {
     fetchDappData();
     fetchNetworkData();
   }, []);
-
   function getCategoryNames(dappCategories: any[], categoryArray: any[]) {
     return dappCategories.map((categoryItem: any) => {
       const category = categoryArray.find((c: any) => c.id === categoryItem.category_id);

@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import { useChainsStore } from '@/stores/chains';
 import { get } from '@/utils/http';
 
@@ -9,7 +9,7 @@ export default function useChains() {
 
   const queryChains = useCallback(async () => {
     try {
-      const res = await get(`${TTAPI_PATH}/operations/Network/GetList`);
+      const res = await get(`${QUEST_PATH}/api/network/list`);
       setChains({ chains: res.data.data });
     } catch (err) {}
   }, []);

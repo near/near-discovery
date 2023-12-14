@@ -7,7 +7,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
-import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -414,15 +414,15 @@ const AllDappsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
-        setNetworkList(resultNetwork.data?.data || []);
+        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
+        setNetworkList(resultNetwork.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);
       }
     };
     const fetchCarouselData = async () => {
       try {
-        const resultDapp = await get(`${TTAPI_PATH}/operations/Dapp/GetList`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=100`);
         setCarouselList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
@@ -497,7 +497,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
   const fetchDappData = async () => {
     try {
-      const resultDapp = await get(`${TTAPI_PATH}/operations/Dapp/GetList`);
+      const resultDapp = await get(`${QUEST_PATH}/api/network/list`);
       setDappList(resultDapp.data?.data || []);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);

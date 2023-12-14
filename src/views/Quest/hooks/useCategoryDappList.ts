@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { get } from '@/utils/http';
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useCategoryList() {
   const [categories, setCategories] = useState<any>({});
@@ -16,8 +16,8 @@ export default function useCategoryList() {
     if (loading) return;
     setLoading(true);
     try {
-      const result = await get(`${TTAPI_PATH}/operations/Dapp/GetCategoryList`);
-      const data = result.data?.data || [];
+      const result = await get(`${QUEST_PATH}/api/dapp/category_list`);
+      const data = result.data || [];
       const _categories = data.reduce((acc: any, category: any) => ({ ...acc, [category.id]: category }), {});
       setCategories(_categories);
       setLoading(false);

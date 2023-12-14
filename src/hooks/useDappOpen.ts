@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import { useDappStore } from '@/stores/dapp';
 
 import { get } from '@/utils/http';
-import { TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 
 export default function useDappOpen() {
   const router = useRouter();
@@ -26,8 +26,8 @@ export default function useDappOpen() {
     }
 
     if (from === 'alldapps') {
-      const result = await get(`${TTAPI_PATH}/operations/Dapp/GetOne?id=${dapp.id}`);
-      _dapp = result.data.data;
+      const result = await get(`${QUEST_PATH}/api/dapp?id=${dapp.id}`);
+      _dapp = result.data;
       setDapp({ dapp: _dapp });
     }
 

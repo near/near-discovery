@@ -1,18 +1,17 @@
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
 import { dapps } from '@/config/dapps';
-import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
 import { get } from '@/utils/http';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
-import popupsData from '@/config/all-in-one/chains';
 
 const BackRoute = styled.div`
   /* position: absolute; */
@@ -408,7 +407,7 @@ const lockUrl = 'https://assets.dapdap.net/images/bafkreigkzmvkujzp5ned6vk55vr6w
 
 export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
-  const { account, chainId } = useAccount();
+  const { account } = useAccount();
   const router = useRouter();
   const [networkList, setNetworkList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
@@ -420,8 +419,8 @@ export const DesktopNavigationTop = () => {
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
-        const resultNetwork = await get(`${TTAPI_PATH}/operations/Network/GetList`);
-        setNetworkList(resultNetwork.data?.data || []);
+        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
+        setNetworkList(resultNetwork.data || []);
       } catch (error) {
         console.error('Error fetching resultNetwork data:', error);
       }
@@ -456,15 +455,6 @@ export const DesktopNavigationTop = () => {
   const name = search.get('name') || dappConfig?.name;
 
   const [showMenuContent, setShowMenuContent] = useState(false);
-
-  const allInOnePath = useMemo(() => {
-    if (chainId) {
-      const chains = Object.values(popupsData);
-      const chain = chains.find((chain) => chain.chainId === chainId);
-      return `/all-in-one/${chain ? chain.path : 'arbitrum'}`;
-    }
-    return '/all-in-one';
-  }, [chainId]);
 
   return (
     <Container>
@@ -644,7 +634,7 @@ export const DesktopNavigationTop = () => {
                   </div>
                 </div>
               </Link>
-              <Link href={allInOnePath} onClick={() => setShowMenuContent(false)}>
+              <Link href="/all-in-one" onClick={() => setShowMenuContent(false)}>
                 <div className="contenr-deep-item">
                   <div className="deep-item-left">
                     <img src={Shotcuts} alt="" />

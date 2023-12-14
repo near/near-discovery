@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { QUEST_PATH, TTAPI_PATH } from '@/config/quest';
+import { QUEST_PATH } from '@/config/quest';
 import popupsData from '@/config/all-in-one/chains';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 import { ethers } from 'ethers';
@@ -527,9 +527,9 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     const fetchData = async () => {
       if (id) {
         try {
-          const response = await fetch(`${TTAPI_PATH}/operations/Network/GetOne?id=${id}`);
+          const response = await fetch(`${QUEST_PATH}/api/network?id=${id}`);
           const data = await response.json();
-          setData(data.data.data);
+          setData(data.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
