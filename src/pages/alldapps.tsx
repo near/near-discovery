@@ -422,7 +422,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     };
     const fetchCarouselData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=100`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
         setCarouselList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
@@ -497,7 +497,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
   const fetchDappData = async () => {
     try {
-      const resultDapp = await get(`${QUEST_PATH}/api/network/list`);
+      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
       setDappList(resultDapp.data?.data || []);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
@@ -536,7 +536,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
         const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
 
-        const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=300`;
+        const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=30`;
         const resultDapp = await get(url);
         setDappList(resultDapp.data?.data || []);
       } catch (error) {
