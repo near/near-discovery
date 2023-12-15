@@ -1,4 +1,3 @@
-import { sanitize } from 'dompurify';
 import { setupKeypom } from '@keypom/selector';
 import type { WalletSelector } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
@@ -15,6 +14,7 @@ import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
+import { sanitize } from 'dompurify';
 import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import {
   CommitButton,
@@ -36,7 +36,13 @@ import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
-import { networkId, signInContractId } from '@/utils/config';
+import {
+  commitModalBypassAuthorIds,
+  commitModalBypassSources,
+  isLocalEnvironment,
+  networkId,
+  signInContractId,
+} from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 export default function VmInitializer() {
@@ -104,7 +110,14 @@ export default function VmInitializer() {
         customElements: {
           Link: ({ href, to, ...rest }: any) => <Link href={sanitize(href ?? to)} {...rest} />,
         },
-        features: { enableComponentSrcDataKey: true },
+        features: {
+          commitModalBypass: {
+            authorIds: commitModalBypassAuthorIds,
+            sources: commitModalBypassSources,
+          },
+          enableComponentSrcDataKey: true,
+          enableWidgetSrcWithCodeOverride: isLocalEnvironment,
+        },
       });
   }, [initNear]);
 
