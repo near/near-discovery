@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import useAccount from '@/hooks/useAccount';
@@ -26,17 +26,26 @@ export const DappPage: NextPageWithLayout = () => {
 
   if (!dapp || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
 
-  const dappChains = dapp.dapp_network?.map((network: any) =>
-    chains.find((_chain: any) => _chain.id === network.network_id),
-  );
-  let default_chain_id = dapp.default_chain_id;
-  if (!default_chain_id) {
-    const default_chain = chains.find((_chain: any) => _chain.id === dapp.default_network_id);
-    default_chain_id = default_chain.chain_id;
-  }
-  const curChain = chains.find((_chain: any) => _chain.chain_id === default_chain_id);
-  const network = dapp.dapp_network?.find((_network: any) => _network.network_id === curChain.id);
+  const dappChains = useMemo(() => {
+    if (!chains?.length) return [];
+    return dapp.dapp_network?.map((network: any) => chains.find((_chain: any) => _chain.id === network.network_id));
+  }, [chains]);
 
+  const default_chain_id = useMemo(() => {
+    if (dapp.default_chain_id) return dapp.default_chain_id;
+    const default_chain = chains.find((_chain: any) => _chain.id === dapp.default_network_id);
+    return default_chain.chain_id;
+  }, [chains]);
+
+  const curChain = useMemo(() => {
+    if (!chains?.length) return {};
+    return chains.find((_chain: any) => _chain.chain_id === default_chain_id);
+  }, [chains, default_chain_id]);
+
+  const network = useMemo(
+    () => dapp.dapp_network?.find((_network: any) => _network.network_id === curChain?.id),
+    [curChain],
+  );
   if (!network?.dapp_src) return <div />;
   return (
     <ComponentWrapperPage
