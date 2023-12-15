@@ -23,9 +23,6 @@ export const DappPage: NextPageWithLayout = () => {
       }),
     [],
   );
-
-  if (!dapp || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
-
   const dappChains = useMemo(() => {
     if (!chains?.length) return [];
     return dapp.dapp_network?.map((network: any) => chains.find((_chain: any) => _chain.id === network.network_id));
@@ -46,6 +43,10 @@ export const DappPage: NextPageWithLayout = () => {
     () => dapp.dapp_network?.find((_network: any) => _network.network_id === curChain?.id),
     [curChain],
   );
+
+  if (!dapp || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
+
+ 
   if (!network?.dapp_src) return <div />;
   return (
     <ComponentWrapperPage
