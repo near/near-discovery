@@ -135,6 +135,10 @@ const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
   /* justify-content: center; */
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
   .blockchains-conetent-item {
     width: 32%;
     flex-basis: calc(32% - 20px);
@@ -154,10 +158,6 @@ const BlockchainsConetent = styled.div`
       .list-item-bottom {
         display: inline-block;
       }
-    }
-    a {
-      color: #ffffff;
-      text-decoration: none;
     }
     .content-item-title {
       display: flex;
@@ -326,7 +326,15 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         {networkList &&
           networkList.map((child, index) => (
             <>
-              <div className="blockchains-conetent-item" key={index}>
+              <Link
+                key={index}
+                href={child.name === 'Polygon zkEVM' ? '/warmup' : ''}
+                onClick={(e) => {
+                  if (child.name !== 'Polygon zkEVM') e.preventDefault();
+                }}
+                className="blockchains-conetent-item"
+                style={{ cursor: child.name === 'Polygon zkEVM' ? 'pointer' : 'default' }}
+              >
                 <div className="content-item-title">
                   <div className="item-title-img">
                     <img src={child.logo} alt="" />
@@ -358,13 +366,11 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                 </h4>
                 {child.name === 'Polygon zkEVM' && (
                   <div className="list-item-bottom">
-                    <Link href="/warmup">
-                      Deep Dive
-                      <img src={arrowBlock} alt="" />
-                    </Link>
+                    Deep Dive
+                    <img src={arrowBlock} alt="" />
                   </div>
                 )}
-              </div>
+              </Link>
               {index === 4 && (
                 <div className="blockchains-conetent-item conetent-item-img">
                   <img src={chainsconetentImg} alt="" />

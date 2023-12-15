@@ -60,11 +60,6 @@ const yellowBg = (
   </svg>
 );
 
-//test
-const syncIcon = 'https://assets.dapdap.net/images/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y.svg';
-const carouselbg = 'https://assets.dapdap.net/images/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty.svg';
-
-//home-deepdive-scatter
 const deppDiveRightIcon =
   'https://assets.dapdap.net/images/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya.svg';
 const decentralizedIcon =
@@ -711,9 +706,8 @@ const CarouselList = styled.div`
   .carousel {
     display: none;
     width: 97%;
-    background-image: url(${carouselbg});
     border-radius: 20px;
-    height: 352px;
+    height: auto;
     align-items: center;
     padding: 26px;
     background-repeat: no-repeat;
@@ -734,7 +728,7 @@ const CarouselList = styled.div`
       background: linear-gradient(180deg, rgba(55, 58, 83, 0.9) 0%, rgba(19, 20, 27, 0.9) 100%);
       padding: 24px;
       border-radius: 20px;
-      width: fit-content;
+      width: 354px;
       img {
         width: 72px;
         height: 72px;
@@ -858,8 +852,8 @@ const Paragraph = styled.div`
   margin: -24px 0 30px 0;
 `;
 
-const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
-  return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
+const Carousel = React.memo(({ active, children, style }: { active: boolean; children: React.ReactNode, style?: React.CSSProperties }) => {
+  return <div className={`carousel ${active ? 'active' : ''}`} style={style}>{children}</div>;
 });
 
 const initialLearningData = [
@@ -1032,10 +1026,10 @@ const HomeContent: NextPageWithLayout = () => {
               .map((child, index) => {
                 const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
                 return (
-                  <Carousel key={index} active={index === activeIndex}>
+                  <Carousel key={index} active={index === activeIndex} style={{backgroundImage:`url(${child.recommend_icon})`}}>
                     <div className="carousel-content">
-                      <img src={child.recommend_icon} alt="" />
-                      <h1>{child.title}</h1>
+                      <img src={child.logo} alt="" />
+                      <h1>{child.name}</h1>
                       <Tag>
                         {categoryNames.map((categoryName: string, index: number) => (
                           <div className={`tag-item ${categoryName}`} key={index}>
