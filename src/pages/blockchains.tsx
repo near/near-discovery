@@ -245,6 +245,12 @@ const BlockchainsConetent = styled.div`
     border: none;
     position: relative;
     overflow: hidden;
+    @media (min-width: 1556px) {
+     text-align: center;
+      img {
+        width: auto!important;
+      }
+    }
     img {
       width: 100%;
       height: 100%;

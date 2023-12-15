@@ -1,12 +1,12 @@
+import { useSetChain } from '@web3-onboard/react';
+import { motion } from 'framer-motion';
 import { memo, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
-import { motion } from 'framer-motion';
 
+import { overlay } from '@/components/animation';
 import ArrowIcon from '@/components/Icons/ArrowIcon';
 import Loading from '@/components/Icons/Loading';
-import { overlay } from '@/components/animation';
 import chains from '@/config/chains';
-import { useSetChain } from '@web3-onboard/react';
 
 const StyledContainer = styled.div<{ $mt?: number; $showName?: number }>`
   width: ${({ $showName }) => ($showName ? '204px' : '70px')};
@@ -79,6 +79,7 @@ const EmptyChainTips = styled(motion.div)`
   height: 44px;
   left: -178px;
   top: -4px;
+  z-index: 30;
   .bg {
     position: absolute;
     left: 0px;
