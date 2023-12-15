@@ -630,7 +630,7 @@ const Banner = styled.div`
   width: 100%;
   height: 448px;
   position: relative;
-  background-image: url(https://assets.dapdap.net/images/home-banner-bg.png);
+  background-image: url(https://assets.dapdap.net/images/banner.png);
   background-repeat: no-repeat;
   background-size: 94%;
   background-position-x: 18%;
