@@ -328,15 +328,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         {networkList &&
           networkList.map((child, index) => (
             <>
-              <Link
-                key={index}
-                href={child.name === 'Polygon zkEVM' ? '/warmup' : ''}
-                onClick={(e) => {
-                  if (child.name !== 'Polygon zkEVM') e.preventDefault();
-                }}
-                className="blockchains-conetent-item"
-                style={{ cursor: child.name === 'Polygon zkEVM' ? 'pointer' : 'default' }}
-              >
+              <div key={index} className="blockchains-conetent-item">
                 <div className="content-item-title">
                   <div className="item-title-img">
                     <img src={child.logo} alt="" />
@@ -367,12 +359,12 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                   <img src={leftarrow} alt="" />
                 </h4>
                 {child.name === 'Polygon zkEVM' && (
-                  <div className="list-item-bottom">
+                  <Link href='/warmup' className="list-item-bottom">
                     Deep Dive
                     <img src={arrowBlock} alt="" />
-                  </div>
+                  </Link>
                 )}
-              </Link>
+              </div>
               {index === 4 && (
                 <div className="blockchains-conetent-item conetent-item-img">
                   <img src={chainsconetentImg} alt="" />
