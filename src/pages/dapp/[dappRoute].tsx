@@ -31,7 +31,7 @@ export const DappPage: NextPageWithLayout = () => {
   const default_chain_id = useMemo(() => {
     if (dapp.default_chain_id) return dapp.default_chain_id;
     const default_chain = chains.find((_chain: any) => _chain.id === dapp.default_network_id);
-    return default_chain.chain_id;
+    return default_chain?.chain_id;
   }, [chains]);
 
   const curChain = useMemo(() => {
@@ -44,7 +44,7 @@ export const DappPage: NextPageWithLayout = () => {
     [curChain],
   );
 
-  if (!dapp || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
+  if (!dapp || !default_chain_id || !curChain || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
 
  
   if (!network?.dapp_src) return <div />;
