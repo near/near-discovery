@@ -890,7 +890,7 @@ const HomeContent: NextPageWithLayout = () => {
     };
     const fetchDappData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=100`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=10`);
         setDappList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
