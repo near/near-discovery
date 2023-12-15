@@ -134,6 +134,8 @@ const BlockchainsBanner = styled.div`
 const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
   /* justify-content: center; */
   a {
     color: #ffffff;
@@ -245,12 +247,12 @@ const BlockchainsConetent = styled.div`
     border: none;
     position: relative;
     overflow: hidden;
-    @media (min-width: 1556px) {
+    /* @media (min-width: 1556px) {
      text-align: center;
       img {
         width: auto!important;
       }
-    }
+    } */
     img {
       width: 100%;
       height: 100%;
