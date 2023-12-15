@@ -396,9 +396,15 @@ const Title = styled.div`
   color: rgba(151, 154, 190, 1);
 `;
 
-const Carousel = React.memo(({ active, children, style }: { active: boolean; children: React.ReactNode, style?: React.CSSProperties }) => {
-  return <div className={`carousel ${active ? 'active' : ''}`} style={style}>{children}</div>;
-});
+const Carousel = React.memo(
+  ({ active, children, style }: { active: boolean; children: React.ReactNode; style?: React.CSSProperties }) => {
+    return (
+      <div className={`carousel ${active ? 'active' : ''}`} style={style}>
+        {children}
+      </div>
+    );
+  },
+);
 
 const AllDappsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
@@ -444,8 +450,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handleCarouselClick = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % dappList.filter((dapp) => dapp.recommend === true).length);
-  }, [dappList.filter((dapp) => dapp.recommend === true).length]);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.filter((dapp) => dapp.recommend === true).length);
+  }, [carouselList.filter((dapp) => dapp.recommend === true).length]);
 
   const [selectedTab, setSelectedTab] = useState(() => {
     return 'token';
@@ -566,7 +572,11 @@ const AllDappsColumn: NextPageWithLayout = () => {
           .map((child, index) => {
             const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
             return (
-              <Carousel key={index} active={index === activeIndex} style={{backgroundImage: `url(${child.recommend_icon})`}}>
+              <Carousel
+                key={index}
+                active={index === activeIndex}
+                style={{ backgroundImage: `url(${child.recommend_icon})` }}
+              >
                 <div className="carousel-content">
                   <img src={child.logo} alt="" />
                   <h1>{child.name}</h1>
