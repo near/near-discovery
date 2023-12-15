@@ -279,9 +279,8 @@ const CarouselList = styled.div`
   .carousel {
     display: none;
     width: 97%;
-    background-image: url(${carouselbg});
     border-radius: 20px;
-    height: 352px;
+    height: auto;
     align-items: center;
     padding: 26px;
     background-repeat: no-repeat;
@@ -302,7 +301,7 @@ const CarouselList = styled.div`
       background: linear-gradient(180deg, rgba(55, 58, 83, 0.9) 0%, rgba(19, 20, 27, 0.9) 100%);
       padding: 24px;
       border-radius: 20px;
-      width: fit-content;
+      width: 354px;
       img {
         width: 72px;
         height: 72px;
@@ -397,8 +396,8 @@ const Title = styled.div`
   color: rgba(151, 154, 190, 1);
 `;
 
-const Carousel = React.memo(({ active, children }: { active: boolean; children: React.ReactNode }) => {
-  return <div className={`carousel ${active ? 'active' : ''}`}>{children}</div>;
+const Carousel = React.memo(({ active, children, style }: { active: boolean; children: React.ReactNode, style?: React.CSSProperties }) => {
+  return <div className={`carousel ${active ? 'active' : ''}`} style={style}>{children}</div>;
 });
 
 const AllDappsColumn: NextPageWithLayout = () => {
@@ -567,10 +566,10 @@ const AllDappsColumn: NextPageWithLayout = () => {
           .map((child, index) => {
             const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
             return (
-              <Carousel key={index} active={index === activeIndex}>
+              <Carousel key={index} active={index === activeIndex} style={{backgroundImage: `url(${child.recommend_icon})`}}>
                 <div className="carousel-content">
-                  <img src={child.recommend_icon} alt="" />
-                  <h1>{child.title}</h1>
+                  <img src={child.logo} alt="" />
+                  <h1>{child.name}</h1>
                   <Tag>
                     {categoryNames.map((categoryName: string, index: number) => (
                       <div className={`tag-item ${categoryName}`} key={index}>
