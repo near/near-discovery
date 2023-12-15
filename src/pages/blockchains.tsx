@@ -59,7 +59,7 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const blockchainsBg = 'https://assets.dapdap.net/images/home-banner-bg.png';
+const blockchainsBg = 'https://assets.dapdap.net/images/banner.png';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
 const leftarrow = 'https://assets.dapdap.net/images/bafkreihvymef5y4q6a5lpnwea4fcygi4wrrb2tbzitswc3xnaufs6qnzjy.svg';
 const arrowBlock = 'https://assets.dapdap.net/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
@@ -134,7 +134,13 @@ const BlockchainsBanner = styled.div`
 const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
   /* justify-content: center; */
+  a {
+    color: #ffffff;
+    text-decoration: none;
+  }
   .blockchains-conetent-item {
     width: 32%;
     flex-basis: calc(32% - 20px);
@@ -154,10 +160,6 @@ const BlockchainsConetent = styled.div`
       .list-item-bottom {
         display: inline-block;
       }
-    }
-    a {
-      color: #ffffff;
-      text-decoration: none;
     }
     .content-item-title {
       display: flex;
@@ -245,6 +247,12 @@ const BlockchainsConetent = styled.div`
     border: none;
     position: relative;
     overflow: hidden;
+    /* @media (min-width: 1556px) {
+     text-align: center;
+      img {
+        width: auto!important;
+      }
+    } */
     img {
       width: 100%;
       height: 100%;
@@ -320,7 +328,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         {networkList &&
           networkList.map((child, index) => (
             <>
-              <div className="blockchains-conetent-item" key={index}>
+              <div key={index} className="blockchains-conetent-item">
                 <div className="content-item-title">
                   <div className="item-title-img">
                     <img src={child.logo} alt="" />
@@ -351,12 +359,10 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                   <img src={leftarrow} alt="" />
                 </h4>
                 {child.name === 'Polygon zkEVM' && (
-                  <div className="list-item-bottom">
-                    <Link href="/warmup">
-                      Deep Dive
-                      <img src={arrowBlock} alt="" />
-                    </Link>
-                  </div>
+                  <Link href='/warmup' className="list-item-bottom">
+                    Deep Dive
+                    <img src={arrowBlock} alt="" />
+                  </Link>
                 )}
               </div>
               {index === 4 && (
