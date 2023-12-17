@@ -1,14 +1,14 @@
+import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
+import popupsData from '@/config/all-in-one/chains';
+import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { QUEST_PATH } from '@/config/quest';
-import popupsData from '@/config/all-in-one/chains';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
-import { ethers } from 'ethers';
 
 interface SelectBgProps {
   bgColor: string;
@@ -62,7 +62,8 @@ const ChainsDetails = styled.div`
 
 const ChainsDetailsTitle = styled.div`
   background: #000000;
-  margin: -54px -36px;
+  /* margin: -54px -36px; */
+  margin: -54px 0;
   padding: 30px 12% 0 12%;
   width: auto;
   .header-details-body {
@@ -189,7 +190,8 @@ const ChainsDetailsTitle = styled.div`
       .body-right-img {
         position: absolute;
         bottom: 0;
-        right: 2%;
+        /* right: 2%; */
+        right: 0;
       }
     }
   }
@@ -200,7 +202,8 @@ const ChainsDetailsContent = styled.div`
   padding: 100px 12%;
   .left-side-substance {
     width: 70%;
-    margin-right: 86px;
+    /* margin-right: 86px; */
+    padding-right: 86px;
     p {
       font-size: 14px;
       font-weight: 300;
@@ -240,6 +243,9 @@ const ChainsDetailsContent = styled.div`
   }
   .right-side-substance {
     width: 30%;
+    img{
+      width: 100%;
+    }
   }
 `;
 
@@ -269,18 +275,20 @@ const ChainsDetailsHot = styled.div`
     /* border-bottom: 1px solid #383b48; */
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-between;
     position: relative;
     margin-bottom: 100px;
 
     .tab-content-item {
-      margin: 30px 20px 0 0;
+      margin: 30px 0 0 0;
       border-bottom: 1px solid #383b48;
       display: flex;
       width: 30%;
       flex-basis: calc(33.3333% - 20px);
+      justify-content: space-between;
       box-sizing: border-box;
       .content-item-img {
-        margin-right: 16px;
+        /* margin-right: 16px; */
         width: 20%;
         img {
           width: 72px;
@@ -288,7 +296,7 @@ const ChainsDetailsHot = styled.div`
         }
       }
       .content-item-text {
-        margin-right: 16px;
+        /* margin-right: 16px; */
         width: 49%;
         h1 {
           font-size: 20px;
@@ -746,7 +754,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         <Title>Activities</Title>
         <div style={{ marginBottom: '24px' }}>
           <p>The most popular actions from other users</p>
-          <div className="right-btn-item">
+          <div className="right-btn-item" style={{marginRight: 0}}>
             <img src={DeepDive} alt="" />
             <p>DeepDive</p>
           </div>
