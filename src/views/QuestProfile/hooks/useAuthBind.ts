@@ -29,7 +29,6 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
   const code = searchParams.get('code');
   const handleBind = useCallback(
     async (type: AuthType, data?: any) => {
-      console.log(32, type, data);
       if (loading) return;
       setType(type);
       setLoading(true);
@@ -49,7 +48,7 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
         toast.dismiss(toastId);
         if (result.code !== 0) throw new Error(result.msg);
         toast.success({
-          title: `${config.label} bound successfully`,
+          title: `${config.label} bind successfully`,
         });
         setLoading(false);
         onSuccess();
@@ -57,7 +56,7 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
         setLoading(false);
         toast.dismiss(toastId);
         toast.fail({
-          title: `${config.label} bound failed`,
+          title: `${config.label} bind failed`,
         });
       }
     },
@@ -67,6 +66,8 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
   useEffect(() => {
     const type = sessionStorage.getItem('_auth_type');
     if (!code || !type) return;
+    const state = sessionStorage.getItem('_auth_state');
+    if (searchParams.get('state') !== state && type === 'twitter') return;
     handleBind(type as AuthType);
     sessionStorage.removeItem('_auth_type');
   }, [code]);

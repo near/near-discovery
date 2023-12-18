@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import Loading from '@/components/Icons/Loading';
+import { v4 as uuidv4 } from 'uuid';
 import useAuthConfig from '../../hooks/useAuthConfig';
 import useAuthBind from '../../hooks/useAuthBind';
 import { StyledSocialsWrapper, StyledSocialItem } from './styles';
@@ -52,14 +53,16 @@ const Socials = ({ info, onSuccess }: any) => {
           whileTap={{ opacity: 0.6 }}
           onClick={() => {
             let path = '';
+            const state = uuidv4();
+            sessionStorage.setItem('_auth_state', state);
             if (item.key === 'twitter') {
-              path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${config.twitter_redirect_url}&scope=tweet.read%20users.read%20follows.read%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain`;
+              path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20offline.access&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
               window.open(path, '_self');
               sessionStorage.setItem('_auth_type', 'twitter');
               return;
             }
             if (item.key === 'discord') {
-              path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${config.discord_redirect_url}&scope=identify`;
+              path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
               window.open(path, '_self');
               sessionStorage.setItem('_auth_type', 'discord');
               return;
