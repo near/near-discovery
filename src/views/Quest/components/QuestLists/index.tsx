@@ -17,7 +17,7 @@ import {
 } from './styles';
 
 const QuestLists = ({ id, loading, quests }: any) => {
-  const { info: userInfo = {} } = useUserInfo(id);
+  const { info: userInfo = {} } = useUserInfo({ id });
   return (
     <StyledContainer>
       <StyledHeader>

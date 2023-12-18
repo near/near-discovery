@@ -1,47 +1,81 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
+import Loading from '@/components/Icons/Loading';
+import InviteCode from './InviteCode';
+import useRewardsClaim from '../../hooks/useRewardsClaim';
+import {
+  StyledPanel,
+  StyledPanelHeader,
+  StyledButton,
+  StyledPanelContent,
+  StyledPanelFriends,
+  StyledPanelFriendsTitle,
+  JoinedAccounts,
+  JoinedAccount,
+} from './styles';
 
-import { StyledBg, StyledContainer, StyledValue } from './styles';
-
-const InviteCode = ({ onClick, total }: { onClick: VoidFunction; total: number }) => {
+const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) => {
+  const { loading, handleClaim } = useRewardsClaim();
+  const activeList = useMemo(() => list.filter((item: any) => item.status === 'Active'), [list]);
+  const pendingList = useMemo(() => list.filter((item: any) => item.status === 'Pending'), [list]);
   return (
-    <StyledContainer onClick={onClick}>
-      <StyledBg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="148" height="52" viewBox="0 0 148 52" fill="none">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M55 0C55 2.76142 52.7614 5 50 5C47.2386 5 45 2.76142 45 0H12C5.37258 0 0 5.37258 0 12V40C0 46.6274 5.37258 52 12 52H45C45 49.2386 47.2386 47 50 47C52.7614 47 55 49.2386 55 52H136C142.627 52 148 46.6274 148 40V12C148 5.37258 142.627 0 136 0H55Z"
-            fill="url(#paint0_linear_1_2)"
-          />
-          <line x1="50.5" y1="6.5" x2="50.5" y2="46.5" stroke="black" strokeLinecap="round" strokeDasharray="1 3" />
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M35 26.1268C35 25.7817 34.9018 25.4437 34.7168 25.1523C34.5888 24.9507 34.4223 24.7762 34.2269 24.639C34.0315 24.5017 33.8109 24.4043 33.5778 24.3523C33.3447 24.3003 33.1037 24.2947 32.8685 24.3359C32.6332 24.3771 32.4084 24.4642 32.2068 24.5923L24.9809 29.1818L17.7955 24.6005C17.5206 24.4253 17.2037 24.3272 16.878 24.3165C16.5523 24.3057 16.2296 24.3828 15.9439 24.5395C15.6581 24.6962 15.4197 24.9269 15.2537 25.2073C15.0876 25.4878 15 25.8077 15 26.1336V32.3636C15 33.087 15.2873 33.7806 15.7988 34.2921C16.3103 34.8036 17.004 35.0909 17.7273 35.0909H32.2727C32.996 35.0909 33.6897 34.8036 34.2012 34.2921C34.7127 33.7806 35 33.087 35 32.3636V26.1268ZM31.4739 16.7988C30.9625 16.2873 30.2688 16 29.5455 16H20.4545C19.7312 16 19.0375 16.2873 18.5261 16.7988C18.0146 17.3103 17.7273 18.004 17.7273 18.7273V23.2727L25.015 27.8182L32.2727 23.2727V18.7273C32.2727 18.004 31.9854 17.3103 31.4739 16.7988ZM25 24.1821C25.2117 24.1821 25.4147 24.0985 25.565 23.9494V23.9499L27.6359 21.8908L27.6691 21.8567C28.0037 21.5073 28.1877 21.0405 28.1814 20.5567C28.1752 20.073 27.9793 19.6111 27.6359 19.2703C27.2854 18.9227 26.8117 18.7277 26.318 18.7277C25.8243 18.7277 25.3506 18.9227 25 19.2703C24.6494 18.9227 24.1757 18.7277 23.6821 18.7277C23.1884 18.7277 22.7147 18.9227 22.3641 19.2703C22.0199 19.6118 21.8238 20.075 21.8184 20.5598C21.813 21.0447 21.9985 21.5122 22.335 21.8612L22.3641 21.8903L24.435 23.9494C24.5853 24.0985 24.7884 24.1821 25 24.1821Z"
-            fill="#1E2028"
-          />
-          <defs>
-            <linearGradient
-              id="paint0_linear_1_2"
-              x1="2.41541e-07"
-              y1="51.7524"
-              x2="86.7278"
-              y2="-25.1427"
-              gradientUnits="userSpaceOnUse"
-            >
-              <stop stop-color="#62FFF6" />
-              <stop offset="0.520833" stop-color="#B479FF" />
-              <stop offset="1" stop-color="#FFC289" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </StyledBg>
-      <StyledValue>
-        <span>Invited</span>
-        <span className="num"> {total}</span>
-      </StyledValue>
-    </StyledContainer>
+    <StyledPanel>
+      <StyledPanelHeader>
+        <div>
+          Invited <span className="num">{total}</span> friends
+        </div>
+        <StyledButton
+          disabled={loading || totalRewards === 0}
+          onClick={() => {
+            handleClaim();
+          }}
+        >
+          {loading && <Loading />}
+          <span style={{ marginLeft: '4px' }}> Claim {totalRewards} PTS</span>
+        </StyledButton>
+      </StyledPanelHeader>
+      <StyledPanelContent>
+        <StyledPanelFriends>
+          <div>
+            <StyledPanelFriendsTitle>{activeList.length} active friends</StyledPanelFriendsTitle>
+            <JoinedAccounts>
+              {activeList.slice(0, 5).map((item: any) => (
+                <JoinedAccount key={item.code} src={item.invited_user.address} />
+              ))}
+              {activeList.length > 6 && (
+                <div className="more">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <rect width="30" height="30" rx="15" fill="#747474" />
+                    <circle cx="21.5" cy="15.5" r="1.5" fill="#D9D9D9" />
+                    <circle cx="15.5" cy="15.5" r="1.5" fill="#D9D9D9" />
+                    <circle cx="9.5" cy="15.5" r="1.5" fill="#D9D9D9" />
+                  </svg>
+                </div>
+              )}
+            </JoinedAccounts>
+          </div>
+          <div>
+            <StyledPanelFriendsTitle>{pendingList.length} pending friends</StyledPanelFriendsTitle>
+            <JoinedAccounts>
+              {pendingList.slice(0, 5).map((item: any) => (
+                <JoinedAccount key={item.code} src={item.invited_user.address} />
+              ))}
+              {pendingList.length > 6 && (
+                <div className="more">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
+                    <rect width="30" height="30" rx="15" fill="#747474" />
+                    <circle cx="21.5" cy="15.5" r="1.5" fill="#D9D9D9" />
+                    <circle cx="15.5" cy="15.5" r="1.5" fill="#D9D9D9" />
+                    <circle cx="9.5" cy="15.5" r="1.5" fill="#D9D9D9" />
+                  </svg>
+                </div>
+              )}
+            </JoinedAccounts>
+          </div>
+        </StyledPanelFriends>
+        <InviteCode onClick={onInviteCodeClick} />
+      </StyledPanelContent>
+    </StyledPanel>
   );
 };
 
-export default memo(InviteCode);
+export default memo(InviteCodePanel);

@@ -13,6 +13,7 @@ const StyledContainer = styled.div`
   font-size: 14px;
   font-weight: 400;
   padding: 0 2%;
+  height: 60px;
   .footer-item {
     flex: 1;
     text-align: center;

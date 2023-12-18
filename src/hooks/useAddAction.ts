@@ -28,6 +28,7 @@ export default function useAddAction(source: string) {
           tx_id: data.transactionHash,
           action_network_id: currentChain.name,
           chain_id: chainId,
+          action_switch: data.add ? 1 : 0,
         };
       }
       if (data.type === 'Bridge') {
