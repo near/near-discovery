@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
-export default function useUserInfo(id?: string) {
+export default function useUserInfo({ id, updater }: { id?: string; updater?: number }) {
   const [info, setInfo] = useState<any>();
   const [loading, setLoading] = useState(false);
 
@@ -22,7 +22,7 @@ export default function useUserInfo(id?: string) {
 
   useEffect(() => {
     queryInfo();
-  }, [id]);
+  }, [id, updater]);
 
   return { loading, info };
 }

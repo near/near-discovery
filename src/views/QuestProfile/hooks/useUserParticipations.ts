@@ -16,17 +16,22 @@ export default function useUserParticipations() {
       const data = result.data || [];
       let unclaimed = 0;
       let completed = 0;
+      let inprocess = 0;
+
       data.forEach((item: any) => {
         if (item.participation_status === 'completed') {
           completed++;
           if (!item.is_claimed) unclaimed++;
           return;
         }
+        if (item.participation_status === 'in_process') {
+          inprocess++;
+        }
       });
       setInfo({
         unclaimed,
         completed,
-        inprocess: data.length - unclaimed - completed,
+        inprocess,
       });
       setList(data);
       setLoading(false);

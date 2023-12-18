@@ -1,38 +1,50 @@
 import { memo, useState } from 'react';
-
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
-import InviteCode from './components/InviteCode';
+import InviteCodePanel from './components/InviteCode';
 import InviteFirendsModal from './components/InviteFirendsModal';
 import Pts from './components/Pts';
 import Quests from './components/Quests';
 import Tabs from './components/Tabs';
 import UserInfo from './components/UserInfo';
 import useInviteList from './hooks/useInviteList';
-import { StyledContainer, StyledTabsBox } from './styles';
+import useUserInfo from '../QuestLeaderboard/hooks/useUserInfo';
+import { StyledContainer, StyledTabsBox, StyledPanelWrapper } from './styles';
 import type { Tab } from './types';
 
-const QuestLeaderboardView = () => {
+const QuestProfileView = () => {
   const [tab, setTab] = useState<Tab>('quests');
+  const [updater, setUpdater] = useState(Date.now());
   const [openCodes, setOpenCodes] = useState(false);
-  const {  list, totalRewards, reward } = useInviteList();
+  const { list, totalRewards, reward } = useInviteList();
+  const { info: userInfo = {} } = useUserInfo({ updater });
   return (
     <>
+      <script async src="https://telegram.org/js/telegram-widget.js?22" />
       <StyledContainer>
-        <UserInfo />
-        <DailyTask />
+        <UserInfo
+          info={userInfo}
+          onSuccess={() => {
+            setUpdater(Date.now());
+          }}
+        />
+        <StyledPanelWrapper>
+          <InviteCodePanel
+            onInviteCodeClick={() => {
+              if (list.length > 0) setOpenCodes(true);
+            }}
+            total={list.length}
+            totalRewards={totalRewards}
+            list={list}
+          />
+          <DailyTask />
+        </StyledPanelWrapper>
         <StyledTabsBox>
           <Tabs
             current={tab}
             onChange={(_tab) => {
               setTab(_tab);
             }}
-          />
-          <InviteCode
-            onClick={() => {
-              if (list.length > 0) setOpenCodes(true);
-            }}
-            total={list.length}
           />
         </StyledTabsBox>
         {tab === 'quests' && <Quests />}
@@ -52,4 +64,4 @@ const QuestLeaderboardView = () => {
   );
 };
 
-export default memo(QuestLeaderboardView);
+export default memo(QuestProfileView);

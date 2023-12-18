@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const StyledContainer = styled.div`
   width: 1244px;
   max-width: 100%;
-  margin: 0 auto;
   padding-bottom: 100px;
+  margin: 0 auto;
   --onboarding-color: #787dff;
   --social-color: #aad6ff;
   --engage-color: #f4ca79;
@@ -56,4 +56,30 @@ export const Empty = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 100px;
+`;
+
+export const StyledPanelWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-top: 20px;
+`;
+
+export const StyledButton = styled.button`
+  width: 140px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
+  color: #1e2028;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  transition: 0.3s;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.8;
+  }
 `;

@@ -53,7 +53,7 @@ export const StyledDisconnectButton = styled(motion.div)`
   }
 `;
 
-export default function Footer () {
+export default function Footer() {
   const { account } = useAccount();
   const { connect, logout } = useAuth();
   const router = useRouter();
@@ -64,7 +64,7 @@ export default function Footer () {
         whileHover={{ opacity: 0.8 }}
         whileTap={{ opacity: 0.6 }}
         onClick={() => {
-          router.push('/quest/profile');
+          router.push('/profile');
           setLayoutStore({ showAccountSider: false });
         }}
       >
@@ -93,4 +93,4 @@ export default function Footer () {
       </StyledDisconnectButton>
     </StyledContainer>
   );
-};
+}
