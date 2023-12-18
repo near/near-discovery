@@ -508,52 +508,51 @@ const AllDappsColumn: NextPageWithLayout = () => {
       console.error('Error fetching resultDapp data:', error);
     }
   };
+  const fetchFilteredDappData = async () => {
+    try {
+      const params = {
+        tbd_token: selectedTab === 'TBD',
+        network_ids: selectedMenu,
+        category_ids: selectedFunction.length ? selectedFunction.join(',') : undefined,
+        quest: selectedMedalMenu,
+      };
+
+      if (typeof params !== 'object') {
+        throw new Error('params is not an object');
+      }
+
+      const entries = Object.entries(params);
+      if (!Array.isArray(entries)) {
+        throw new Error('Object.entries(params) did not return an array');
+      }
+
+      const filteredEntries = entries.filter(([, value]) => value !== undefined && value !== '');
+      if (!Array.isArray(filteredEntries)) {
+        throw new Error('filter did not return an array');
+      }
+
+      const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
+
+      const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=30`;
+      const resultDapp = await get(url);
+      setDappList(resultDapp.data?.data || []);
+    } catch (error) {
+      console.error('Error fetching filtered dapp data:', error);
+    }
+  };
   useEffect(() => {
     if (router.query.category) {
       setSelectedFunction((router.query.category as string).split(','));
-    } else {
-      setSelectedFunction([]);
     }
   }, [router.query.category]);
   useEffect(() => {
-    const fetchFilteredDappData = async () => {
-      try {
-        const params = {
-          tbd_token: selectedTab === 'TBD',
-          network_ids: selectedMenu,
-          category_ids: selectedFunction.length ? selectedFunction.join(',') : undefined,
-          quest: selectedMedalMenu,
-        };
-
-        if (typeof params !== 'object') {
-          throw new Error('params is not an object');
-        }
-
-        const entries = Object.entries(params);
-        if (!Array.isArray(entries)) {
-          throw new Error('Object.entries(params) did not return an array');
-        }
-
-        const filteredEntries = entries.filter(([, value]) => value !== undefined && value !== '');
-        if (!Array.isArray(filteredEntries)) {
-          throw new Error('filter did not return an array');
-        }
-
-        const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
-
-        const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=30`;
-        const resultDapp = await get(url);
-        setDappList(resultDapp.data?.data || []);
-      } catch (error) {
-        console.error('Error fetching filtered dapp data:', error);
-      }
-    };
     if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
       fetchFilteredDappData();
-    } else {
+    } else if (!router.query.category) {
       fetchDappData();
     }
-  }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab]);
+  }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category]);
+  
 
   return (
     <AllDappsPage>

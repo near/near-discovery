@@ -208,6 +208,12 @@ const BlockchainsConetent = styled.div`
       font-weight: 400;
       font-size: 16px;
       margin-bottom: 20px;
+      img {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        margin-right: 4px;
+      }
     }
     h4 {
       font-size: 16px;
@@ -354,8 +360,16 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                 <h3>{child.technology}</h3>
                 <p className="minor-paragraph">Native Token</p>
                 <h3>
-                  <img src={JSON.parse(child.native_currency).logo} alt="" />
-                  {JSON.parse(child.native_currency).name}
+                  {child.tbd_token === 'Y' ? (
+                    'TBD🔥'
+                  ) : (
+                    <>
+                      {JSON.parse(child.native_currency).logo && (
+                        <img src={JSON.parse(child.native_currency).logo} alt="" />
+                      )}
+                      {JSON.parse(child.native_currency).name}
+                    </>
+                  )}
                 </h3>
                 <h4>
                   <Link href={`/chains-details?id=${child.id}`}>Learn more</Link>

@@ -84,7 +84,7 @@ const ChainsDetailsTitle = styled.div`
       }
       svg {
         z-index: 0;
-        opacity: 0.5;
+        opacity: 0.8;
       }
     }
     .details-body-left {
@@ -680,8 +680,14 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
               <div className="enter-Dapp-item">
                 <p>Native Token</p>
                 <h1>
-                  <img src={nativeCurrency.logo} alt="" />
-                  {nativeCurrency.symbol}
+                  {data && data.tbd_token === 'Y' ? (
+                    'TBD🔥'
+                  ) : (
+                    <>
+                      {nativeCurrency.logo && <img src={nativeCurrency.logo} alt="" />}
+                      {nativeCurrency.symbol}
+                    </>
+                  )}
                 </h1>
               </div>
             </div>
@@ -796,9 +802,19 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           {activities &&
             activities.map((item: any, index: number) => {
               const networkItem = networkList.find((network) => network.id === item.network_id);
+              if (!networkItem) {
+                return null;
+              }
               return (
                 <div className="activities-list-item" key={index}>
-                  <p>{item.action_title}</p>
+                  <p
+                    dangerouslySetInnerHTML={{
+                      __html: item.action_title.replace(
+                        /\d+/g,
+                        (match: string) => `<span style="color: rgba(151, 154, 190, 1);">${match}</span>`,
+                      ),
+                    }}
+                  ></p>
                   <h2>
                     Total Execution <span>- </span>
                   </h2>
