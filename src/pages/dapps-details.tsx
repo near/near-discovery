@@ -3,24 +3,22 @@ import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { dapps } from '@/config/dapps';
-import { get } from '@/utils/http';
-import { useDefaultLayout } from '@/hooks/useLayout';
-import type { NextPageWithLayout } from '@/utils/types';
 import { QUEST_PATH } from '@/config/quest';
+import useDappOpen from '@/hooks/useDappOpen';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { get } from '@/utils/http';
+import type { NextPageWithLayout } from '@/utils/types';
+import { StyledCoin, StyledProcessBars, StyledTag } from '@/views/Quest/components/QuestItem/styles';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
+import ProcessBar from '@/views/Quest/components/ProcessBar';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-
-const syncIcon = 'https://assets.dapdap.net/images/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y.svg';
-const gold = 'https://assets.dapdap.net/images/bafkreidegqrrzlwh4wlfrquhd6n3n7dczefy32hu5locsx5yj6hllqfkuq.svg';
 const several = 'https://assets.dapdap.net/images/bafkreib4xkaqeaxyfbdbjnvvnptlch3t6qtautxw2miflew4oqmc45nxdy.svg';
 const arrowBlock = 'https://assets.dapdap.net/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
-const dappsDetails = 'https://assets.dapdap.net/images/bafybeibz3uwngzvaffn5hfsk7eg33tv3pmletxhocc4brvow6a463s5w2i.svg';
 
 const DappsDetails = styled.div`
   color: #ffffff;
@@ -106,6 +104,7 @@ const DappsDetailsTitle = styled.div`
           color: #02051e;
           font-size: 16px;
           font-weight: 700;
+          cursor: pointer;
           a {
             color: #02051e;
             text-decoration: none;
@@ -193,23 +192,47 @@ const DappsDetailsContent = styled.div`
   .right-side-substance {
     width: 36%;
     .right-side-item {
-      border: 1px solid #ebf4794d;
-      background: #1c1d2a;
-      border-radius: 16px;
+      width: auto;
+      border: 1px solid rgba(55, 58, 83, 1);
+      background: rgb(44, 46, 62);
+      border-radius: 20px;
       display: -webkit-box;
-      margin-top: 28px;
-      padding: 30px 20px;
-      input {
-        width: 23px;
-        height: 23px;
-        border: 1px solid #ebf479;
+      margin-top: 15px;
+      padding: 24px 20px 20px 20px;
+      margin-bottom: 15px;
+      .side-item-icon {
+        width: 102px;
+        height: 105px;
+        margin-right: 27px;
+        img {
+          width: 100%;
+          height: 100%;
+        }
       }
-      p {
-        font-size: 18px;
-        font-weight: 500;
-        color: #ffffff;
-        margin: 0 0 0 12px;
+      .side-item-text {
         width: 70%;
+        h1 {
+          font-family: Gantari;
+          font-size: 18px;
+          font-weight: 700;
+          color: rgba(255, 255, 255, 1);
+        }
+        p {
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          height: 72px;
+          overflow: hidden;
+          font-family: Gantari;
+          font-size: 15px;
+          font-weight: 400;
+          color: rgba(151, 154, 190, 1);
+        }
+        .side-item-tag {
+          display: flex;
+          gap: 8px;
+          margin-top: 11px;
+        }
       }
     }
   }
@@ -402,6 +425,9 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const [relatedDapps, setRelatedDapps] = useState<any>(null);
   const [activity, setActivity] = useState<any>(null);
+  const [questList, setQuestList] = useState<any[]>([]);
+  const { open } = useDappOpen();
+  const [advertise, setAdvertise] = useState<any>([]);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -414,6 +440,39 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     fetchNetworkData();
   }, []);
   useEffect(() => {
+    const fetchData = async () => {
+      if (dapp_id) {
+        try {
+          const response = await fetch(`${QUEST_PATH}/api/dapp?id=${dapp_id}`);
+          const data = await response.json();
+          setData(data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    const fetchRelatedDapps = async () => {
+      if (dapp_id) {
+        try {
+          const response = await fetch(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
+          const data = await response.json();
+          setRelatedDapps(data.data);
+        } catch (error) {
+          console.error('Error fetching related dapps:', error);
+        }
+      }
+    };
+    const fetchquestList = async () => {
+      if (dapp_id) {
+        try {
+          const response = await fetch(`${QUEST_PATH}/api/quest/list_by_dapp?dapp_id=${dapp_id}`);
+          const data = await response.json();
+          setQuestList(data.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
     const fetchactivityData = async () => {
       if (dapp_id) {
         try {
@@ -427,36 +486,22 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         }
       }
     };
-    fetchactivityData();
-  }, [dapp_id]);
-  useEffect(() => {
-    const fetchData = async () => {
+    const fetchAdvertiseasync = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp?id=${dapp_id}`);
+          const response = await fetch(`${QUEST_PATH}/api/ad?category=dapp&category_id=${dapp_id}`);
           const data = await response.json();
-          setData(data.data);
+          setAdvertise(data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
       }
     };
     fetchData();
-  }, [dapp_id]);
-
-  useEffect(() => {
-    const fetchRelatedDapps = async () => {
-      if (dapp_id) {
-        try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
-          const data = await response.json();
-          setRelatedDapps(data.data);
-        } catch (error) {
-          console.error('Error fetching related dapps:', error);
-        }
-      }
-    };
     fetchRelatedDapps();
+    fetchactivityData();
+    fetchquestList();
+    fetchAdvertiseasync();
   }, [dapp_id]);
 
   function getCategoryNamess(dappCategories: any, categoryArray: any[]) {
@@ -482,6 +527,19 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       }
     });
   }
+  function formatDate(dateStr: string): string {
+    const dateObj = new Date(dateStr);
+    const options: Intl.DateTimeFormatOptions = {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    };
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    return formatter.format(dateObj);
+  }
+
   const categoryNames = getCategoryNames(data?.dapp_category, categoryArray);
   return (
     <DappsDetails>
@@ -538,14 +596,19 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                 <p>Native Token</p>
                 {data && data.tbd_token === 'Y' ? <h1>Token-TBD🔥</h1> : <h1>-</h1>}
               </div>
-              <div className="enter-Dapp-item Dapp-item-special">
-                <Link href="/dapp/Syncswap">Enter Dapp</Link>
+              <div
+                className="enter-Dapp-item Dapp-item-special"
+                onClick={() => {
+                  open(data, 'home');
+                }}
+              >
+                <div>Enter Dapp</div>
                 <img src={arrowBlock} alt="" />
               </div>
             </div>
           </div>
           <div className="details-body-right">
-            <img src={dappsDetails} alt="" />
+            <img src={advertise?.data?.ad_images} alt="" />
           </div>
         </div>
       </DappsDetailsTitle>
@@ -557,11 +620,11 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
           <Title>Activity</Title>
           <div className="title-right-list">
             <div className="right-list-item">
-              <p>356</p>
+              <p>-</p>
               <span>Participants</span>
             </div>
             <div className="right-list-item">
-              <p>654</p>
+              <p>-</p>
               <span>Acctions</span>
             </div>
           </div>
@@ -575,85 +638,50 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
-                <tr>
-                  <td>
-                    <div className="td-avatar"></div>
-                    0x3bcb...b717
-                  </td>
-                  <td>bridge 0.1 ETH from ethereum to polygon zkEVM </td>
-                  <td style={{ color: ' #979ABE' }}>Sep 15, 2023, 21:23</td>
-                </tr>
+                {activity &&
+                  activity.map((item: any, index: number) => {
+                    <tr key={index}>
+                      <td>
+                        <div className="td-avatar"></div>
+                        {item.account_id}
+                      </td>
+                      <td>{item.action_title}</td>
+                      <td style={{ color: ' #979ABE' }}>{formatDate('2023-12-05T14:54:39.541554+00:00')}</td>
+                    </tr>;
+                  })}
               </tbody>
             </table>
           </div>
         </div>
         <div className="right-side-substance">
           <Title>Quest & Rewards</Title>
-          {/* <div className="right-side-item"></div> */}
+          {questList &&
+            questList.map((item, index) => {
+              const actions = Array.from({ length: item.total_action }, (val, i) => i);
+              return (
+                <div className="right-side-item" key={index}>
+                  <div className="side-item-icon">
+                    <img src={item.logo} alt="" />
+                  </div>
+                  <div className="side-item-text">
+                    <h1>{item.name}</h1>
+                    <p>{item.description}</p>
+                    <StyledProcessBars style={{ marginTop: '0' }}>
+                      {actions.map((action, i) => (
+                        <ProcessBar size={4} key={i} value={item.action_completed >= i ? 100 : 0} noBorder={true} />
+                      ))}
+                    </StyledProcessBars>
+                    <div className="side-item-tag">
+                      <StyledTag style={{ padding: '0px 10px 0px 6px' }}>
+                        <StyledCoin $size={18} />
+                        <span style={{ color: '#EBF479' }}>{item.reward} PTS</span>
+                      </StyledTag>
+                      <StyledTag>{item.is_period ? 'Period' : 'Once'}</StyledTag>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
         </div>
       </DappsDetailsContent>
 
@@ -683,8 +711,13 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                     <div className="item-btn-item">
                       <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                     </div>
-                    <div className="item-btn-item">
-                      <Link href={dapp.route}>Dapp</Link>
+                    <div
+                      className="item-btn-item"
+                      onClick={() => {
+                        open(dapp, 'alldapps');
+                      }}
+                    >
+                      <p>Dapp</p>
                     </div>
                   </div>
                 </div>

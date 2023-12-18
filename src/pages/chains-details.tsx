@@ -7,8 +7,10 @@ import styled from 'styled-components';
 import popupsData from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
+import useDappOpen from '@/hooks/useDappOpen';
 
 interface SelectBgProps {
   bgColor: string;
@@ -61,7 +63,6 @@ const ChainsDetails = styled.div`
 `;
 
 const ChainsDetailsTitle = styled.div`
-  background: #000000;
   /* margin: -54px -36px; */
   margin: -54px 0;
   padding: 30px 12% 0 12%;
@@ -74,15 +75,16 @@ const ChainsDetailsTitle = styled.div`
       position: absolute;
       z-index: 0;
       bottom: 0;
-      opacity: 0.3;
       img {
         width: 300px;
         position: absolute;
-        left: 36%;
+        left: 22%;
         top: 50%;
+        opacity: 0.1;
       }
       svg {
         z-index: 0;
+        opacity: 0.5;
       }
     }
     .details-body-left {
@@ -123,7 +125,7 @@ const ChainsDetailsTitle = styled.div`
         display: flex;
         margin-bottom: 30px;
         .enter-Dapp-item {
-          background: #373a5380;
+          background: rgba(22, 24, 29, 0.5);
           border-radius: 8px;
           padding: 8px 27px;
           text-align: center;
@@ -219,6 +221,9 @@ const ChainsDetailsContent = styled.div`
       }
       .milestones-item-text {
         margin-top: 12px;
+        a {
+          text-decoration: none;
+        }
         h2 {
           font-size: 16px;
           font-weight: 500;
@@ -242,8 +247,8 @@ const ChainsDetailsContent = styled.div`
     }
   }
   .right-side-substance {
-    width: 30%;
-    img{
+    width: 360px;
+    img {
       width: 100%;
     }
   }
@@ -275,12 +280,12 @@ const ChainsDetailsHot = styled.div`
     /* border-bottom: 1px solid #383b48; */
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
     position: relative;
     margin-bottom: 100px;
+    padding-right: 30px;
 
     .tab-content-item {
-      margin: 30px 0 0 0;
+      margin: 30px 20px 0 0;
       border-bottom: 1px solid #383b48;
       display: flex;
       width: 30%;
@@ -316,6 +321,7 @@ const ChainsDetailsHot = styled.div`
       .content-item-btn {
         width: 22%;
         .item-btn-item {
+          cursor: pointer;
           background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
           border: 1px solid #373a53;
           font-size: 14px;
@@ -501,10 +507,13 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   const router = useRouter();
   const { id } = router.query;
   const [data, setData] = useState<any>(null);
+  const [networkList, setNetworkList] = useState<any[]>([]);
   const [hotDapps, setHotDapps] = useState<any>(null);
   const [activities, setActivities] = useState<any>(null);
   const [matchedItem, setMatchedItem] = useState<any>(null);
   const { loading, categories } = useCategoryDappList();
+  const [advertise, setAdvertise] = useState<any>([]);
+  const { open } = useDappOpen();
   const categoryArray = Object.values(categories);
   function getCategoryNames(dappCategories: any, categoryArray: any[]) {
     const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
@@ -516,21 +525,16 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     });
   }
   useEffect(() => {
-    const fetchActivities = async () => {
-      if (id) {
-        try {
-          const response = await fetch(
-            `${QUEST_PATH}/api/action/get-popular-actions-by-network?network_id=${id}&page=1&page_size=10`,
-          );
-          const data = await response.json();
-          setActivities(data.data.data);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
+    const fetchNetworkData = async () => {
+      try {
+        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
+        setNetworkList(resultNetwork.data || []);
+      } catch (error) {
+        console.error('Error fetching resultNetwork data:', error);
       }
     };
-    fetchActivities();
-  }, [id]);
+    fetchNetworkData();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       if (id) {
@@ -543,9 +547,6 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         }
       }
     };
-    fetchData();
-  }, [id]);
-  useEffect(() => {
     const fetchhotDappsData = async () => {
       if (id) {
         try {
@@ -557,7 +558,34 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         }
       }
     };
+    const fetchActivities = async () => {
+      if (id) {
+        try {
+          const response = await fetch(
+            `${QUEST_PATH}/api/action/get-popular-actions-by-network?network_id=${id}&page=1&page_size=10`,
+          );
+          const data = await response.json();
+          setActivities(data.data?.data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    const fetchAdvertiseasync = async () => {
+      if (id) {
+        try {
+          const response = await fetch(`${QUEST_PATH}/api/ad?category=network&category_id=${id}`);
+          const data = await response.json();
+          setAdvertise(data);
+        } catch (error) {
+          console.error('Error fetching data:', error);
+        }
+      }
+    };
+    fetchData();
     fetchhotDappsData();
+    fetchActivities();
+    fetchAdvertiseasync();
   }, [id]);
   useEffect(() => {
     if (data) {
@@ -595,6 +623,12 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   const nativeCurrency = useMemo(() => {
     try {
       if (data.native_currency) return JSON.parse(data.native_currency);
+    } catch (err) {}
+    return {};
+  }, [data]);
+  const milestonesData = useMemo(() => {
+    try {
+      if (data.milestones) return JSON.parse(data.milestones);
     } catch (err) {}
     return {};
   }, [data]);
@@ -645,7 +679,10 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
               </div>
               <div className="enter-Dapp-item">
                 <p>Native Token</p>
-                <h1>{nativeCurrency.symbol}</h1>
+                <h1>
+                  <img src={nativeCurrency.logo} alt="" />
+                  {nativeCurrency.symbol}
+                </h1>
               </div>
             </div>
           </div>
@@ -663,9 +700,9 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                 <img src={Shotcut} alt="" />
                 <p>Shotcut</p>
               </div>
-              <div className="body-right-img">
+              {/* <div className="body-right-img">
                 <img src={chart} alt="" />
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -676,43 +713,32 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           <Title>Description</Title>
           <p>{data && data.description}</p>
           <Title>Milestones</Title>
-          <div className="left-milestones-item">
-            <div className="milestones-item-img">
-              <div>
-                <img src={star} alt="" />
-              </div>
-              <div>
-                <img src={line} alt="" />
-              </div>
-            </div>
-            <div className="milestones-item-text">
-              <h2>Polygon zkEVM Mainnet Beta is Live</h2>
-              <p>2023 Mar 27th</p>
-              <span>
-                Learn more <img src={arrowyellow} alt="" />
-              </span>
-            </div>
-          </div>
-          <div className="left-milestones-item">
-            <div className="milestones-item-img">
-              <div>
-                <img src={star} alt="" />
-              </div>
-              <div>
-                <img src={line} alt="" />
-              </div>
-            </div>
-            <div className="milestones-item-text">
-              <h2>Polygon zkEVM Mainnet Beta is Live</h2>
-              <p>2023 Mar 27th</p>
-              <span>
-                Learn more <img src={arrowyellow} alt="" />
-              </span>
-            </div>
-          </div>
+          {milestonesData.length > 0
+            ? milestonesData.map((item: any, index: number) => (
+                <div className="left-milestones-item" key={index}>
+                  <div className="milestones-item-img">
+                    <div>
+                      <img src={star} alt="" />
+                    </div>
+                    <div>
+                      <img src={line} alt="" />
+                    </div>
+                  </div>
+                  <div className="milestones-item-text">
+                    <h2>{item.title}</h2>
+                    <p>{item.date}</p>
+                    <Link href={item.url}>
+                      <span>
+                        Learn more <img src={arrowyellow} alt="" />
+                      </span>
+                    </Link>
+                  </div>
+                </div>
+              ))
+            : null}
         </div>
         <div className="right-side-substance">
-          <img src={chainsconetentImg} alt="" />
+          <img src={advertise?.data?.ad_images} alt="" />
         </div>
       </ChainsDetailsContent>
 
@@ -742,7 +768,14 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                     <div className="item-btn-item">
                       <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                     </div>
-                    <div className="item-btn-item">Dapp</div>
+                    <div
+                      className="item-btn-item"
+                      onClick={() => {
+                        open(dapp, 'alldapps');
+                      }}
+                    >
+                      Dapp
+                    </div>
                   </div>
                 </div>
               );
@@ -754,48 +787,28 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         <Title>Activities</Title>
         <div style={{ marginBottom: '24px' }}>
           <p>The most popular actions from other users</p>
-          <div className="right-btn-item" style={{marginRight: 0}}>
+          <div className="right-btn-item" style={{ marginRight: 0 }}>
             <img src={DeepDive} alt="" />
             <p>DeepDive</p>
           </div>
         </div>
         <div className="details-activities-list">
-          <div className="activities-list-item">
-            <p>
-              Bridge <span> 0.01 </span> ETH to Polygon zkEVM
-            </p>
-            <h2>
-              Total Execution <span>1223 </span>
-            </h2>
-            <h3>
-              <img src={syncIcon} alt="" />
-              ETH-Polygon zkEVM Bridge
-            </h3>
-          </div>
-          <div className="activities-list-item">
-            <p>
-              Bridge <span> 0.01 </span> ETH to Polygon zkEVM
-            </p>
-            <h2>
-              Total Execution <span>1223 </span>
-            </h2>
-            <h3>
-              <img src={syncIcon} alt="" />
-              ETH-Polygon zkEVM Bridge
-            </h3>
-          </div>
-          <div className="activities-list-item">
-            <p>
-              Bridge <span> 0.01 </span> ETH to Polygon zkEVM
-            </p>
-            <h2>
-              Total Execution <span>1223 </span>
-            </h2>
-            <h3>
-              <img src={syncIcon} alt="" />
-              ETH-Polygon zkEVM Bridge
-            </h3>
-          </div>
+          {activities &&
+            activities.map((item: any, index: number) => {
+              const networkItem = networkList.find((network) => network.id === item.network_id);
+              return (
+                <div className="activities-list-item" key={index}>
+                  <p>{item.action_title}</p>
+                  <h2>
+                    Total Execution <span>- </span>
+                  </h2>
+                  <h3>
+                    <img src={networkItem.logo} alt="" />
+                    {networkItem.name}
+                  </h3>
+                </div>
+              );
+            })}
         </div>
       </ChainsDetailsActivities>
     </ChainsDetails>

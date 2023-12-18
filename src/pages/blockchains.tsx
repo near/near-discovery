@@ -353,13 +353,16 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                 <p className="minor-paragraph">Technology</p>
                 <h3>{child.technology}</h3>
                 <p className="minor-paragraph">Native Token</p>
-                <h3>{JSON.parse(child.native_currency).name}</h3>
+                <h3>
+                  <img src={JSON.parse(child.native_currency).logo} alt="" />
+                  {JSON.parse(child.native_currency).name}
+                </h3>
                 <h4>
                   <Link href={`/chains-details?id=${child.id}`}>Learn more</Link>
                   <img src={leftarrow} alt="" />
                 </h4>
                 {child.name === 'Polygon zkEVM' && (
-                  <Link href='/warmup' className="list-item-bottom">
+                  <Link href="/warmup" className="list-item-bottom">
                     Deep Dive
                     <img src={arrowBlock} alt="" />
                   </Link>

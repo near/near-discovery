@@ -30,7 +30,7 @@ const AllDappsPage = styled.div`
   .token-tab-list {
     width: 100%;
     color: #ffffff;
-    border-bottom: 1px solid #383b48;
+    border-bottom: 1px solid rgba(33, 35, 42, 1);
     font-size: 18px;
     color: #979abe;
     display: flex;
@@ -169,7 +169,7 @@ const AllDappsPage = styled.div`
 
     .tab-content-item {
       margin: 30px 20px 0 0;
-      border-bottom: 1px solid #383b48;
+      border-bottom: 1px solid rgba(38, 40, 47, 1);
       display: flex;
       width: 30%;
       flex-basis: calc(33.3333% - 20px);
