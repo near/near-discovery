@@ -18,7 +18,7 @@ const QuestLeaderboardView = () => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
   const { loading, list, page, info, maxPage, handlePageChange } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo();
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo({});
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();

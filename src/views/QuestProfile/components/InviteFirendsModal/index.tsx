@@ -5,6 +5,7 @@ import Loading from '@/components/Icons/Loading';
 import Modal from '@/components/Modal';
 import useCopy from '@/hooks/useCopy';
 import { ellipsAccount } from '@/utils/account';
+import useRewardsClaim from '../../hooks/useRewardsClaim';
 
 import type { Column } from '../Pts/types';
 import InviteCode from './InviteCode';
@@ -86,6 +87,7 @@ const InviteFirendsModal = ({
   const { list: codeList, loading } = useInviteCode(open);
   const { copy } = useCopy();
   const newCodes = useMemo(() => codeList.filter((code, i) => !code.is_used && i < 8), [codeList]);
+  const { loading: claiming, handleClaim } = useRewardsClaim();
   return (
     <Modal
       display={open}
@@ -143,7 +145,15 @@ const InviteFirendsModal = ({
               You invited {list.length} friends, 6 of them are active, you will get {reward} PTS for each active
               account.
             </StyledDesc>
-            <StyledClaimButton>Claim {totalRewards} PTS</StyledClaimButton>
+            <StyledClaimButton
+              disabled={claiming || totalRewards === 0}
+              onClick={() => {
+                handleClaim();
+              }}
+            >
+              {claiming && <Loading />}
+              Claim {totalRewards} PTS
+            </StyledClaimButton>
           </StyledDescBox>
           <StyledTableHeader>
             {COLUMNS.map((column) => (

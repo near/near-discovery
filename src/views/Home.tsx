@@ -7,13 +7,14 @@ import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import popupsData from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
+
 import useCategoryDappList from './Quest/hooks/useCategoryDappList';
-import popupsData from '@/config/all-in-one/chains';
 
 const blueBg = (
   <svg width="719" height="719" viewBox="0 0 719 719" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -852,9 +853,15 @@ const Paragraph = styled.div`
   margin: -24px 0 30px 0;
 `;
 
-const Carousel = React.memo(({ active, children, style }: { active: boolean; children: React.ReactNode, style?: React.CSSProperties }) => {
-  return <div className={`carousel ${active ? 'active' : ''}`} style={style}>{children}</div>;
-});
+const Carousel = React.memo(
+  ({ active, children, style }: { active: boolean; children: React.ReactNode; style?: React.CSSProperties }) => {
+    return (
+      <div className={`carousel ${active ? 'active' : ''}`} style={style}>
+        {children}
+      </div>
+    );
+  },
+);
 
 const initialLearningData = [
   {
@@ -1026,7 +1033,11 @@ const HomeContent: NextPageWithLayout = () => {
               .map((child, index) => {
                 const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
                 return (
-                  <Carousel key={index} active={index === activeIndex} style={{backgroundImage:`url(${child.recommend_icon})`}}>
+                  <Carousel
+                    key={index}
+                    active={index === activeIndex}
+                    style={{ backgroundImage: `url(${child.recommend_icon})` }}
+                  >
                     <div className="carousel-content">
                       <img src={child.logo} alt="" />
                       <h1>{child.name}</h1>
@@ -1198,8 +1209,8 @@ const HomeContent: NextPageWithLayout = () => {
             <img src="https://assets.dapdap.net/images/home-deepdive.png" alt="" />
             <Title className="title">Deep Dive</Title>
             <p>
-              Real-time DApp trend data, simple and economical one-click interaction, and easily accessible historical
-              transaction data.
+              Real-time DApp trend data, simple and economical one-click interaction,
+              <br /> and easily accessible historical transaction data.
             </p>
           </div>
           <div className="deepDive-content">
@@ -1249,8 +1260,10 @@ const HomeContent: NextPageWithLayout = () => {
             <p>Streamline your crypto experience with intuitive processes and comprehensive support.</p>
             <Paragraph>
               With our streamlined shortcut features, users from all levels can easily familiarize themselves with and
-              harness the power of core decentralized applications. With dapdap, embark on a simplified yet robust Web3
-              journey. From asset bridging to earning passive income through liquidity provision, we've got you covered.
+              harness the power of core decentralized applications.
+              <br />
+              With dapdap, embark on a simplified yet robust Web3 journey. From asset bridging to earning passive income
+              through liquidity provision, we've got you covered.
             </Paragraph>
           </div>
           <div className="shortcuts-content">

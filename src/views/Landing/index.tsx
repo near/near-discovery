@@ -7,7 +7,7 @@ import useRewardsClaim from '@/hooks/useRewardsClaim';
 import useQuestInfo from '@/views/QuestDetail/hooks/useQuestInfo';
 
 import Bridge from './Bridge';
-import { bgs,steps } from './config';
+import { bgs, steps } from './config';
 import useReport from './hooks/useReport';
 import {
   StyledButtons,
@@ -53,7 +53,7 @@ const LandingView = () => {
         <Spinner />
       ) : (
         <>
-          <StyledContainer>
+          <StyledContainer style={{ width: step === 1 ? '1200px' : '90%' }}>
             <StyledLeftPanel>
               <StyledTitle>3 Steps to Earn DapDap PTS</StyledTitle>
               <StyledDesc>
@@ -107,14 +107,17 @@ const LandingView = () => {
                 </StyledSkipButton>
               </StyledButtons>
             </StyledLeftPanel>
-            {step === 1 && (
+            {step === 1 ? (
               <Bridge
                 onSuccess={() => {
                   setContinuable(true);
                 }}
               />
+            ) : (
+              <StyledRightPanel>
+                <StyledRightImg src={bgs[step]} />
+              </StyledRightPanel>
             )}
-            <StyledRightPanel>{step !== 1 && <StyledRightImg src={bgs[step]} />}</StyledRightPanel>
           </StyledContainer>
         </>
       )}

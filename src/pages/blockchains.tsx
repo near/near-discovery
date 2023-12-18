@@ -101,6 +101,9 @@ const BlockchainsBanner = styled.div`
   background-position-y: 26%;
   display: flex;
   align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-left: 12px;
   .yellow-bg {
     position: absolute;
     left: 15%;

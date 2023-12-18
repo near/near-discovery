@@ -1,7 +1,7 @@
 import { memo } from 'react';
-
 import { ellipsAccount } from '@/utils/account';
-
+import Socials from './Socials';
+import useAccount from '@/hooks/useAccount';
 import {
   StyledAddress,
   StyledAvatar,
@@ -16,29 +16,39 @@ import {
   StyledName,
   StyledSmallCircle,
   StyledSteps,
+  StyledInfo,
+  StyledLabelsWrapper,
 } from './styles';
 
-const UserInfo = () => {
+const UserInfo = ({ info, onSuccess }: any) => {
+  const { account } = useAccount();
   return (
     <StyledContainer>
       <StyledContent>
-        <StyledAvatar />
-        <StyledName>@dappmeup</StyledName>
-        <StyledAddress>{ellipsAccount('0xC25d79fc4970479B88068Ce8891eD9bE5799210D')}</StyledAddress>
-        <StyledLabels>
-          <StyledLabel>
-            <StyledCoin $size={21} />
-            <span style={{ color: '#EBF479' }}>535 PTS</span>
-          </StyledLabel>
-          <StyledLabel>
-            <StyledMedal $size={22} />
-            <span>Rank #2345</span>
-          </StyledLabel>
-          <StyledLabel>
+        <StyledInfo>
+          <StyledAvatar src={info.avatar} />
+          <div>
+            <StyledName>{info.username}</StyledName>
+            <StyledAddress>{ellipsAccount(account)}</StyledAddress>
+          </div>
+        </StyledInfo>
+        <StyledLabelsWrapper>
+          <StyledLabels>
+            <StyledLabel>
+              <StyledCoin $size={21} />
+              <span style={{ color: '#EBF479' }}>{info.reward} PTS</span>
+            </StyledLabel>
+            <StyledLabel>
+              <StyledMedal $size={22} />
+              <span>Rank #{info.rank}</span>
+            </StyledLabel>
+            {/* <StyledLabel>
             <StyledSteps $size={25} />
             <span>Beginner</span>
-          </StyledLabel>
-        </StyledLabels>
+          </StyledLabel> */}
+          </StyledLabels>
+          <Socials info={info} onSuccess={onSuccess} />
+        </StyledLabelsWrapper>
       </StyledContent>
       <StyledBg />
       <StyledSmallCircle />

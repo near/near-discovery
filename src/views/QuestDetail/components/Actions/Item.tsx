@@ -101,7 +101,7 @@ const ActionItem = ({ action, completed }: { action: any; completed: boolean }) 
                     whileHover={{ opacity: 0.8 }}
                     whileTap={{ opacity: 0.6 }}
                     onClick={() => {
-                      dapp.route && dappOpen(dapp, 'quest');
+                      dapp.route && dappOpen({ ...dapp, route: `/${dapp.route}` }, 'quest');
                     }}
                   >
                     <StyledDappIcon src={dapp.dapp_logo} />
@@ -113,6 +113,7 @@ const ActionItem = ({ action, completed }: { action: any; completed: boolean }) 
                 <StyledExpandButtonBox>
                   <StyledExpandButton
                     onClick={() => {
+                      setOpen(false);
                       if (!action.source) return;
                       if (action.source === 'wallet/bridge') {
                         setLayout({

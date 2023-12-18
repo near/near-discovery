@@ -1,17 +1,18 @@
 /* eslint-disable react/display-name */
 import axios from 'axios';
 import Link from 'next/link';
+import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import { useSearchParams, usePathname } from 'next/navigation';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import chains from '@/config/chains';
 import { dapps } from '@/config/dapps';
 import { QUEST_PATH } from '@/config/quest';
+import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
-import useDappOpen from '@/hooks/useDappOpen';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const arrow = (
@@ -634,6 +635,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
           <div className="page-function-list">
             {categoryArray &&
               categoryArray.map((item: any, index: number) => {
+                // REF-5789 隐藏Bridge
+                if (item.name === 'Bridge') return null;
                 return (
                   <div
                     key={index}

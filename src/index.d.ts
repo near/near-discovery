@@ -8,4 +8,9 @@ declare module 'recharts';
 
 interface Window {
   zE: (name: string, method: string) => void | undefined;
+  Telegram: {
+    Login: {
+      auth: any;
+    };
+  };
 }
