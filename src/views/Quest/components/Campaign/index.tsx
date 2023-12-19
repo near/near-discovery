@@ -69,7 +69,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
               ({ total, quest_category_id }: { total: number; quest_category_id: number }) => (
                 <>
                   <span style={{ color: `var(--${categories[quest_category_id]?.name}-color` }} key={quest_category_id}>
-                    {total} #{categories[quest_category_id].name}
+                    {total} #{categories[quest_category_id]?.name}
                   </span>
                 </>
               ),
