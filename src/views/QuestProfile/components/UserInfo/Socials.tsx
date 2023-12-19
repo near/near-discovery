@@ -71,7 +71,7 @@ const Socials = ({ info, onSuccess }: any) => {
               if (window.Telegram) {
                 window.Telegram.Login.auth({ bot_id: config.telegram_bot_id, request_access: true }, (data: any) => {
                   if (data) {
-                    handleBind('telegram', { ...data, id: data.id.toString(), auth_date: data.auth_date.toString() });
+                    handleBind('telegram', { ...data, id: data.id.toString() });
                   }
                 });
               }
