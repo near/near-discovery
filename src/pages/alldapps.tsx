@@ -166,7 +166,7 @@ const AllDappsPage = styled.div`
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 
     .tab-content-item {
       margin: 30px 20px 0 0;
@@ -397,6 +397,46 @@ const Title = styled.div`
   color: rgba(151, 154, 190, 1);
 `;
 
+const Pagination = styled.div`
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  .pagination-item{
+    width: 55px;
+    height: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(55, 58, 83, 1);
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    img{
+      width: 6px;
+      height: 12px;
+    }
+    &:hover{
+      background:linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+    }
+  }
+  .pagination-right{
+    img{
+      transform: rotate(180deg);
+    }
+  }
+  .pagination-number {
+    font-family: Gantari;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(151, 154, 190, 1);
+    cursor: pointer;
+  }
+  .active {
+    color: rgba(255, 255, 255, 1);
+  }
+`
+
 const Carousel = React.memo(
   ({ active, children, style }: { active: boolean; children: React.ReactNode; style?: React.CSSProperties }) => {
     return (
@@ -409,7 +449,7 @@ const Carousel = React.memo(
 
 const AllDappsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
-  const [dappList, setDappList] = useState<any[]>([]);
+  const [dappList, setDappList] = useState<any>(null);
   const [carouselList, setCarouselList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
@@ -417,6 +457,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { open } = useDappOpen();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -428,8 +470,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
     };
     const fetchCarouselData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=31`);
         setCarouselList(resultDapp.data?.data || []);
+        setTotalPages(resultDapp.data.total_page || 0);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
@@ -501,15 +544,15 @@ const AllDappsColumn: NextPageWithLayout = () => {
     }
   };
 
-  const fetchDappData = async () => {
+  const fetchDappData = async (page: number) => {
     try {
-      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
-      setDappList(resultDapp.data?.data || []);
+      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=${page}&page_size=31`);
+      setDappList(resultDapp.data || []);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
     }
   };
-  const fetchFilteredDappData = async () => {
+  const fetchFilteredDappData = async (page: number) => {
     try {
       const params = {
         tbd_token: selectedTab === 'TBD',
@@ -534,9 +577,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
       const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
 
-      const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=30`;
+      const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=${page}&page_size=31`;
       const resultDapp = await get(url);
-      setDappList(resultDapp.data?.data || []);
+      setDappList(resultDapp.data || []);
     } catch (error) {
       console.error('Error fetching filtered dapp data:', error);
     }
@@ -544,16 +587,17 @@ const AllDappsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     if (router.query.category) {
       setSelectedFunction((router.query.category as string).split(','));
+    }else{
+      setSelectedFunction([]);
     }
   }, [router.query.category]);
   useEffect(() => {
     if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
-      fetchFilteredDappData();
+      fetchFilteredDappData(currentPage);
     } else if (!router.query.category) {
-      fetchDappData();
+      fetchDappData(currentPage);
     }
-  }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category]);
-  
+  }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
 
   return (
     <AllDappsPage>
@@ -640,9 +684,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
                 return (
                   <div
                     key={index}
-                    className={`function-list-item ${item.name} ${
-                      selectedFunction.includes(String(item.id)) ? item.name + 'Active' : ''
-                    }`}
+                    className={`function-list-item ${item.name} ${selectedFunction.includes(String(item.id)) ? item.name + 'Active' : ''
+                      }`}
                     onClick={() => handleFunctionClick(item)}
                   >
                     {item.name}
@@ -676,9 +719,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
       </div>
       {selectedTab == 'TBD' ? (
         <div className="tab-content-page">
-          {dappList
-            .filter((dapp) => dapp.tbd_token === 'Y')
-            .map((dapp, index) => {
+          {dappList && dappList.data
+            .filter((dapp: any) => dapp.tbd_token === 'Y')
+            .map((dapp: any, index: number) => {
               const categoryData = dapp.dapp_category || dapp.category_ids;
               const categoryNames = getCategoryNames(categoryData, categoryArray);
               return (
@@ -718,9 +761,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
       {selectedTab == 'token' ? (
         <>
           <div className="tab-content-page">
-            {dappList
-              .filter((dapp) => dapp.tbd_token === 'N')
-              .map((dapp, index) => {
+            {dappList && dappList.data
+              .filter((dapp: any) => dapp.tbd_token === 'N')
+              .map((dapp: any, index: number) => {
                 const categoryData = dapp.dapp_category || dapp.category_ids;
                 const categoryNames = getCategoryNames(categoryData, categoryArray);
                 return (
@@ -758,6 +801,34 @@ const AllDappsColumn: NextPageWithLayout = () => {
           </div>
         </>
       ) : null}
+      <Pagination>
+        <div
+          className='pagination-item'
+          onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+          style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
+
+        >
+          <img src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg" alt="" />
+        </div>
+        {Array.from(Array(totalPages).keys()).map((page) => (
+          Math.abs(currentPage - (page + 1)) <= 5 && (
+            <div
+              key={page}
+              className={`pagination-number ${currentPage === page + 1 ? 'active' : ''}`}
+              onClick={() => setCurrentPage(page + 1)}
+            >
+              {page + 1}
+            </div>
+          )
+        ))}
+        <div
+          className='pagination-item pagination-right'
+          onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
+          style={{ cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', opacity: currentPage === totalPages ? 0.5 : 1 }}
+        >
+          <img src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg" alt="" />
+        </div>
+      </Pagination>
     </AllDappsPage>
   );
 };
