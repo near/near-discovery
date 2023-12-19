@@ -1,3 +1,4 @@
+import { useSetChain } from '@web3-onboard/react';
 import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,7 +11,6 @@ import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useSetChain } from '@web3-onboard/react';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const arrow = (
@@ -139,12 +139,12 @@ const Container = styled.div`
   .content-page {
     z-index: 1;
     width: 100%;
-    position: absolute;
+    /* position: absolute; */
   }
   .select-bg-icon {
     z-index: 0;
     position: absolute;
-    top: 50%;
+    top: 60px;
     left: 50%;
     .select-bg-content {
       width: 560px;
