@@ -587,6 +587,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     if (router.query.category) {
       setSelectedFunction((router.query.category as string).split(','));
+    }else{
+      setSelectedFunction([]);
     }
   }, [router.query.category]);
   useEffect(() => {
