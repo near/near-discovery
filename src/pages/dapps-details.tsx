@@ -8,9 +8,9 @@ import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
+import ProcessBar from '@/views/Quest/components/ProcessBar';
 import { StyledCoin, StyledProcessBars, StyledTag } from '@/views/Quest/components/QuestItem/styles';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
-import ProcessBar from '@/views/Quest/components/ProcessBar';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -249,7 +249,7 @@ const DappsDetailBottom = styled.div`
 
     .tab-content-item {
       margin: 30px 20px 0 0;
-      border-bottom: 1px solid #383b48;
+      border-bottom: 1px solid rgba(38, 40, 47, 1);
       display: flex;
       width: 30%;
       flex-basis: calc(33.3333% - 20px);

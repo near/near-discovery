@@ -6,11 +6,11 @@ import styled from 'styled-components';
 
 import popupsData from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
+import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
-import useDappOpen from '@/hooks/useDappOpen';
 
 interface SelectBgProps {
   bgColor: string;
@@ -85,6 +85,7 @@ const ChainsDetailsTitle = styled.div`
       svg {
         z-index: 0;
         opacity: 0.8;
+        width: 80%;
       }
     }
     .details-body-left {
@@ -286,7 +287,7 @@ const ChainsDetailsHot = styled.div`
 
     .tab-content-item {
       margin: 30px 20px 0 0;
-      border-bottom: 1px solid #383b48;
+      border-bottom: 1px solid rgba(38, 40, 47, 1);
       display: flex;
       width: 30%;
       flex-basis: calc(33.3333% - 20px);
@@ -623,13 +624,13 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   const nativeCurrency = useMemo(() => {
     try {
       if (data.native_currency) return JSON.parse(data.native_currency);
-    } catch (err) {}
+    } catch (err) { }
     return {};
   }, [data]);
   const milestonesData = useMemo(() => {
     try {
       if (data.milestones) return JSON.parse(data.milestones);
-    } catch (err) {}
+    } catch (err) { }
     return {};
   }, [data]);
 
@@ -694,18 +695,26 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           </div>
           <div className="details-body-right">
             <div className="body-right-btn">
-              <div className="right-btn-item">
-                <img src={Dapps} alt="" />
-                <p>Dapps</p>
-              </div>
-              <div className="right-btn-item">
-                <img src={DeepDive} alt="" />
-                <p>DeepDive</p>
-              </div>
-              <div className="right-btn-item">
-                <img src={Shotcut} alt="" />
-                <p>Shotcut</p>
-              </div>
+              <Link href='/alldapps'>
+                <div className="right-btn-item">
+                  <img src={Dapps} alt="" />
+                  <p>Dapps</p>
+                </div>
+              </Link>
+              {data && data.deepdive && (
+                <Link href='/warmup'>
+                  <div className="right-btn-item">
+                    <img src={DeepDive} alt="" />
+                    <p>DeepDive</p>
+                  </div>
+                </Link>
+              )}
+              <Link href={`/all-in-one/${matchedItem && matchedItem.path}`}>
+                <div className="right-btn-item">
+                  <img src={Shotcut} alt="" />
+                  <p>Shotcut</p>
+                </div>
+              </Link>
               {/* <div className="body-right-img">
                 <img src={chart} alt="" />
               </div> */}
@@ -721,26 +730,28 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           <Title>Milestones</Title>
           {milestonesData.length > 0
             ? milestonesData.map((item: any, index: number) => (
-                <div className="left-milestones-item" key={index}>
-                  <div className="milestones-item-img">
-                    <div>
-                      <img src={star} alt="" />
-                    </div>
-                    <div>
-                      <img src={line} alt="" />
-                    </div>
+              <div className="left-milestones-item" key={index}>
+                <div className="milestones-item-img">
+                  <div>
+                    <img src={star} alt="" />
                   </div>
-                  <div className="milestones-item-text">
-                    <h2>{item.title}</h2>
-                    <p>{item.date}</p>
+                  <div>
+                    <img src={line} alt="" />
+                  </div>
+                </div>
+                <div className="milestones-item-text">
+                  <h2>{item.title}</h2>
+                  <p>{item.date}</p>
+                  {item.url && (
                     <Link href={item.url}>
                       <span>
                         Learn more <img src={arrowyellow} alt="" />
                       </span>
                     </Link>
-                  </div>
+                  )}
                 </div>
-              ))
+              </div>
+            ))
             : null}
         </div>
         <div className="right-side-substance">
@@ -749,7 +760,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
       </ChainsDetailsContent>
 
       <ChainsDetailsHot>
-        <Title>Hot Dapps on Polygon zkEVM</Title>
+        <Title>Hot Dapps on {data && data.name}</Title>
         <div className="tab-content">
           {hotDapps &&
             hotDapps.map((dapp: any, index: number) => {
@@ -793,10 +804,14 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         <Title>Activities</Title>
         <div style={{ marginBottom: '24px' }}>
           <p>The most popular actions from other users</p>
-          <div className="right-btn-item" style={{ marginRight: 0 }}>
-            <img src={DeepDive} alt="" />
-            <p>DeepDive</p>
-          </div>
+          {data && data.deepdive && (
+            <Link href='/warmup'>
+              <div className="right-btn-item" style={{ marginRight: 0 }}>
+                <img src={DeepDive} alt="" />
+                <p>DeepDive</p>
+              </div>
+            </Link>
+          )}
         </div>
         <div className="details-activities-list">
           {activities &&
