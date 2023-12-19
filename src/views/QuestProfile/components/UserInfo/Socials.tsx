@@ -80,7 +80,7 @@ const Socials = ({ info, onSuccess }: any) => {
         >
           <span style={{ color: info[item.key]?.is_bind ? '#979ABE' : '#373A53' }}>{item.icon}</span>
           {info[item.key]?.is_bind ? (
-            <div>{info.twitter?.twitter_username}</div>
+            <div>{info[item.key]?.[`${item.key}_username`]}</div>
           ) : loading && type === item.key ? (
             <Loading />
           ) : (
