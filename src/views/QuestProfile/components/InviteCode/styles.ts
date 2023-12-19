@@ -84,6 +84,7 @@ export const StyledPanelFriendsTitle = styled.div`
 export const JoinedAccounts = styled.div`
   display: flex;
   align-items: center;
+  height: 30px;
   .more {
     margin-right: -10px;
   }
