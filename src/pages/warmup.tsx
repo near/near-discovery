@@ -57,7 +57,7 @@ const Page = styled.div`
   width: 100%;
   gap: 28px;
   color: white;
-  padding: 32px 120px;
+  padding:0  120px 32px 120px;
   background-image: url(${newUIbg});
   background-repeat: no-repeat;
   background-size: 100%;
@@ -66,7 +66,7 @@ const Page = styled.div`
   .page-head {
     display: flex;
     padding-top: 50px;
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
     .details-body-left {
       .body-left-detailed {
         display: flex;
@@ -207,7 +207,9 @@ const WarmUp: NextPageWithLayout = () => {
             </div>
           </div>
         </div>
-        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.input-search" />
+        <div style={{ marginBottom: '30px' }}>
+          <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.input-search" />
+        </div>
         <div className="page-quest-wrapper">
           <div className="quest-title">
             <img src={myQuestIcon} width={'39'} alt="" />
