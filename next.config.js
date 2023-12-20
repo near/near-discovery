@@ -47,16 +47,16 @@ const nextConfig = {
       },
       {
         source: '/da',
-        destination: 'https://near.org/blog/near-foundation-launches-near-da-to-offer-secure-cost-effective-data-availability-for-eth-rollups-and-ethereum-developers',
+        destination: '/data-availability',
         permanent: true,
-      },
+      }
     ];
   },
   rewrites: async () => [
     {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
-    },
+    }
   ],
 };
 
