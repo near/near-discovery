@@ -4,7 +4,6 @@ export { StyledCoin } from '../../styles';
 
 export const StyledContainer = styled.div`
   border-radius: 33px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
   background: radial-gradient(72.14% 104.62% at 47.64% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
     radial-gradient(185.62% 109.56% at 0% 71.21%, #ff38a1 0%, #7138cd 55.21%, #4400b2 100%);
   box-shadow: 0px 0px 50px 0px rgba(255, 255, 255, 0.15) inset;
@@ -21,6 +20,7 @@ export const StyledContainer = styled.div`
   right: 30px;
   bottom: 58px;
   z-index: 30;
+  cursor: pointer;
 `;
 
 export const StyledBox = styled.div`

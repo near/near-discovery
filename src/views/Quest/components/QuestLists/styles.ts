@@ -39,7 +39,7 @@ export const StyledHeaderProcessDesc = styled.div`
 export const StyledListBox = styled.div`
   margin-top: 14px;
   display: flex;
-  gap: 15px;
-  flex-wrap: nowrap;
+  gap: 14px;
+  flex-wrap: wrap;
   margin-bottom: 40px;
 `;

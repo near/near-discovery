@@ -139,6 +139,7 @@ const Container = styled.div`
   .content-page {
     z-index: 1;
     width: 100%;
+    position: relative;
     /* position: absolute; */
   }
   .select-bg-icon {
