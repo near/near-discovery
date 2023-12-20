@@ -4,6 +4,7 @@ import { memo } from 'react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
+import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
 
 import Yours from '../Quest/components/Yours';
 import Actions from './components/Actions';
@@ -16,6 +17,7 @@ const QuestDetailView = () => {
   const searchParams = useSearchParams();
   const { loading, info } = useQuestInfo(searchParams.get('id') || '');
   const { loading: categoryLoading, categories } = useCategoryList();
+  const { info: userInfo = {} } = useUserInfo({ updater: 1 });
   return (
     <StyledContainer>
       <Breadcrumb
@@ -43,7 +45,7 @@ const QuestDetailView = () => {
           </>
         )
       )}
-      <Yours />
+      <Yours info={userInfo} />
     </StyledContainer>
   );
 };

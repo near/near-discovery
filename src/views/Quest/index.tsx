@@ -1,6 +1,7 @@
 import { memo, useState } from 'react';
 
 import Breadcrumb from '@/components/Breadcrumb';
+import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
 
 import Campaign from './components/Campaign';
 import QuestLists from './components/QuestLists';
@@ -13,6 +14,7 @@ import { StyledContainer } from './styles';
 const QuestView = () => {
   const [id, setId] = useState<string>();
   const { loading, campaigns } = useCampaignList();
+  const { info: userInfo = {} } = useUserInfo({ updater: 1 });
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
   return (
@@ -28,7 +30,7 @@ const QuestView = () => {
         categories={categories}
       />
       <QuestLists id={id} loading={questingLoading} quests={quests} />
-      <Yours />
+      <Yours info={userInfo} />
     </StyledContainer>
   );
 };

@@ -18,7 +18,7 @@ const QuestLeaderboardView = () => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
   const { loading, list, page, info, maxPage, handlePageChange } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({});
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: 'leaderboard', updater: 1 });
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
@@ -28,10 +28,10 @@ const QuestLeaderboardView = () => {
       .filter((campaign: any) => campaign.banner)
       .map((campaign) => ({ banner: campaign.banner, link: campaign.link }));
   }, [campaigns]);
-  console.log('campaigns', campaigns);
+
   return (
     <StyledContainer>
-      <Yours />
+      <Yours info={userInfo} />
       {!!banners.length && <Swiper banners={banners} />}
       <Tabs
         current={tab}
@@ -46,7 +46,7 @@ const QuestLeaderboardView = () => {
       {tab === 'quests' && (
         <Quests
           id={id}
-          {...{ campaignLoading, campaigns, questingLoading, quests, categoryLoading, categories }}
+          {...{ campaignLoading, campaigns, questingLoading, quests, categoryLoading, categories, userInfo }}
           onLoad={(id: string) => {
             setId(id);
           }}
