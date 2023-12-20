@@ -81,7 +81,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
       <StyledBox>
         {campaign.end_time && <Timer endTime={Number(campaign.end_time)} />}
         <JoinedAccountsBox>
-          {campaign.total_users !== 0 && (
+          {campaign.total_users > 5 && (
             <>
               <JoinedAccounts>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -91,9 +91,9 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
                   <ellipse cx="21.002" cy="15.001" rx="1.5" ry="1.5" fill="white" />
                 </svg>
               </JoinedAccounts>
-              <JoinedAccountsAmount>{formatTotalUsers(campaign.total_users)}</JoinedAccountsAmount>
             </>
           )}
+          <JoinedAccountsAmount>{formatTotalUsers(campaign.total_users)}</JoinedAccountsAmount>
         </JoinedAccountsBox>
       </StyledBox>
     </StyledCampaipnContainer>
