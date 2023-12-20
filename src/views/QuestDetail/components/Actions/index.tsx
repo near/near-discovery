@@ -38,7 +38,7 @@ const Actions = ({
         ))}
       </StyledProcessBars>
       <StyledButton
-        disabled={!completed || loading}
+        disabled={completed < actions.length || loading}
         onClick={() => {
           handleClaim(id);
         }}
