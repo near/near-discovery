@@ -1002,18 +1002,20 @@ const HomeContent: NextPageWithLayout = () => {
             <div className="works-list-arrow">
               <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
             </div>
-            <div
-              className="works-list-item"
-              onClick={() => {
-                router.push('/quest/leaderboard');
-              }}
-            >
+            <div className="works-list-item">
               <h1>Earn Rewards</h1>
               <p>
                 Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the
                 way.
               </p>
-              <a href="#">View</a>
+              <a
+                href="#"
+                onClick={() => {
+                  router.push('/quest/leaderboard');
+                }}
+              >
+                View
+              </a>
               <div className="list-item-img">
                 <img src="https://assets.dapdap.net/images/home-itworks-earn.png" alt="" />
               </div>

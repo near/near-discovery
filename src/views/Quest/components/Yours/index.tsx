@@ -1,10 +1,15 @@
 import { memo } from 'react';
-
+import { useRouter } from 'next/navigation';
 import { StyledBox, StyledCoin, StyledContainer, StyledLabel, StyledLine, StyledValue } from './styles';
 
 const Yours = ({ info }: any) => {
+  const router = useRouter();
   return (
-    <StyledContainer>
+    <StyledContainer
+      onClick={() => {
+        router.push('/profile');
+      }}
+    >
       <StyledBox>
         <StyledLabel>Your PTS</StyledLabel>
         <StyledValue>

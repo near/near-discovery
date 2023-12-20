@@ -22,7 +22,7 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
         <StyledTitle>Quest</StyledTitle>
         <StyledHeaderProcessBox>
           <StyledHeaderProcessDesc>
-            <span>You‘ve achieved</span>
+            <span>You&apos;ve achieved</span>
             <span style={{ fontWeight: '700' }}> {achieved || 0}%</span>
           </StyledHeaderProcessDesc>
           <ProcessBar size={8} value={achieved || 0} />
@@ -34,26 +34,28 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
         </LoadingWrapper>
       ) : (
         <>
-          {Object.values(quests).map((items) => {
-            const _quests = items as any[];
-            return _quests?.length ? (
-              <>
-                <StyledSubTitle
-                  key={_quests[0].quest_category_name}
-                  style={{ color: `var(--${_quests[0].quest_category_name}-color` }}
-                >
-                  #{_quests[0].quest_category_name}
-                </StyledSubTitle>
-                <StyledListBox key={_quests[0].quest_category_name}>
-                  {_quests.map((item) => (
-                    <QuestItem quest={item} key={item.id} />
-                  ))}
-                </StyledListBox>
-              </>
-            ) : (
-              <div key={Date.now()} />
-            );
-          })}
+          {Object.values(quests)
+            .sort((a: any, b: any) => b.length - a.length)
+            .map((items) => {
+              const _quests = items as any[];
+              return _quests?.length ? (
+                <>
+                  <StyledSubTitle
+                    key={_quests[0].quest_category_name}
+                    style={{ color: `var(--${_quests[0].quest_category_name}-color` }}
+                  >
+                    #{_quests[0].quest_category_name}
+                  </StyledSubTitle>
+                  <StyledListBox key={_quests[0].quest_category_name}>
+                    {_quests.map((item) => (
+                      <QuestItem quest={item} key={item.id} />
+                    ))}
+                  </StyledListBox>
+                </>
+              ) : (
+                <div key={Date.now()} />
+              );
+            })}
         </>
       )}
     </StyledContainer>

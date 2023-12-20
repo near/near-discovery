@@ -32,11 +32,11 @@ export default function useDailyTask() {
       const result = await post(`${QUEST_PATH}/api/quest/daily_check_in`, {});
       if (result.code !== 0) throw new Error(result.msg);
       setClaiming(false);
-      toast.success({ title: 'Claimed successfully' });
+      toast.success({ title: 'Dapped successfully' });
       queryTasks();
     } catch (err) {
       setClaiming(false);
-      toast.fail({ title: 'Claimed failed' });
+      toast.fail({ title: 'Dapped failed' });
     }
   }, [claiming]);
 
