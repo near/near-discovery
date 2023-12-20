@@ -20,7 +20,7 @@ const QuestDetailView = () => {
     <StyledContainer>
       <Breadcrumb
         navs={[
-          { name: 'Quest Campaign', path: '/quest' },
+          { name: 'Quest Campaign', path: '/quest/leaderboard' },
           { name: 'Quest detail', path: '/quest/detail' },
         ]}
       />

@@ -27,7 +27,7 @@ const QuestLists = ({ id, loading, quests }: any) => {
             <span>You‘ve achieved</span>
             <span style={{ fontWeight: '700' }}> {userInfo?.achieved || 0}%</span>
           </StyledHeaderProcessDesc>
-          <ProcessBar size={8} value={20} />
+          <ProcessBar size={8} value={userInfo?.achieved || 0} />
         </StyledHeaderProcessBox>
       </StyledHeader>
       {loading ? (

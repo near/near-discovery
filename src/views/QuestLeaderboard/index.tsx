@@ -1,7 +1,7 @@
 import { memo, useMemo, useState } from 'react';
 
 import useCampaignList from '@/views/Quest/hooks/useCampaignList';
-import useCategoryList from '@/views/Quest/hooks/useCategoryDappList';
+import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useQuestList from '@/views/Quest/hooks/useQuestList';
 
 import Yours from '../Quest/components/Yours';
