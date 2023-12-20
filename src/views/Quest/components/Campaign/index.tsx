@@ -64,7 +64,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
             <span style={{ color: '#EBF479' }}>Extra {campaign.reward} PTS</span>
           </StyledTag>
           <StyledTag>
-            <span>{campaign.quests.total} Qusts:</span>
+            <span>{campaign.quests.total} Quests:</span>
             {campaign.quests.total_category.map(
               ({ total, quest_category_id }: { total: number; quest_category_id: number }) => (
                 <>
