@@ -30,7 +30,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
         <div>
           <StyledHeader>
             <StyledTitle>{campaign.name}</StyledTitle>
-            <StyledHeartBox
+            {/* <StyledHeartBox
               whileHover={{ opacity: 0.9 }}
               whileTap={{ opacity: 0.7 }}
               onClick={() => {
@@ -54,7 +54,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
                   />
                 </svg>
               )}
-            </StyledHeartBox>
+            </StyledHeartBox> */}
           </StyledHeader>
           <StyledDesc>{campaign.description}</StyledDesc>
         </div>
@@ -80,7 +80,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
       </StyledBox>
       <StyledBox>
         {campaign.end_time && <Timer endTime={Number(campaign.end_time)} />}
-        <JoinedAccountsBox>
+        {/* <JoinedAccountsBox>
           {campaign.total_users > 5 && (
             <>
               <JoinedAccounts>
@@ -94,7 +94,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
             </>
           )}
           <JoinedAccountsAmount>{formatTotalUsers(campaign.total_users)}</JoinedAccountsAmount>
-        </JoinedAccountsBox>
+        </JoinedAccountsBox> */}
       </StyledBox>
     </StyledCampaipnContainer>
   );
