@@ -58,7 +58,7 @@ const QuestItem = ({
       </StyledTask>
       <StyledProcessBars>
         {actions.map((item, i) => (
-          <ProcessBar size={4} key={i} value={action_completed >= i ? 100 : 0} noBorder={true} />
+          <ProcessBar size={4} key={i} value={action_completed >= i + 1 ? 100 : 0} noBorder={true} />
         ))}
       </StyledProcessBars>
       <StyledFooter>
