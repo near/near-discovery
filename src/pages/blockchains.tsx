@@ -275,6 +275,7 @@ const BlockchainsConetent = styled.div`
 
 const BlockchainsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
+  const [advertise, setAdvertise] = useState<any>([]);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -284,7 +285,17 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         console.error('Error fetching resultNetwork data:', error);
       }
     };
+    const fetchAdvertiseasync = async () => {
+      try {
+        const response = await fetch(`${QUEST_PATH}/api/ad?category=network`);
+        const data = await response.json();
+        setAdvertise(data.data[0]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     fetchNetworkData();
+    fetchAdvertiseasync();
   }, []);
 
   const addMetaMask = async ({
@@ -387,7 +398,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
               </div>
               {index === 4 && (
                 <div className="blockchains-conetent-item conetent-item-img">
-                  <img src={chainsconetentImg} alt="" />
+                  <img src={advertise?.ad_images} alt="" />
                 </div>
               )}
             </>

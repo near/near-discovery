@@ -957,7 +957,7 @@ const HomeContent: NextPageWithLayout = () => {
   };
 
   const handleRightClick = () => {
-    console.log('currentIndex', currentIndex, learningPage);
+    // console.log('currentIndex', currentIndex, learningPage);
     if (currentIndex < learningPage - 1) setCurrentIndex(currentIndex + 1);
   };
 

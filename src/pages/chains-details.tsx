@@ -577,7 +577,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         try {
           const response = await fetch(`${QUEST_PATH}/api/ad?category=network&category_id=${id}`);
           const data = await response.json();
-          setAdvertise(data);
+          setAdvertise(data.data[0]);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -755,7 +755,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
             : null}
         </div>
         <div className="right-side-substance">
-          <img src={advertise?.data?.ad_images} alt="" />
+          <img src={advertise?.ad_images} alt="" />
         </div>
       </ChainsDetailsContent>
 
@@ -800,48 +800,48 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         </div>
       </ChainsDetailsHot>
 
-      <ChainsDetailsActivities>
-        <Title>Activities</Title>
-        <div style={{ marginBottom: '24px' }}>
-          <p>The most popular actions from other users</p>
-          {data && data.deepdive && (
+      {data && data.deepdive && (
+        <ChainsDetailsActivities>
+          <Title>Activities</Title>
+          <div style={{ marginBottom: '24px' }}>
+            <p>The most popular actions from other users</p>
             <Link href='/warmup'>
               <div className="right-btn-item" style={{ marginRight: 0 }}>
                 <img src={DeepDive} alt="" />
                 <p>DeepDive</p>
               </div>
             </Link>
-          )}
-        </div>
-        <div className="details-activities-list">
-          {activities &&
-            activities.map((item: any, index: number) => {
-              const networkItem = networkList.find((network) => network.id === item.network_id);
-              if (!networkItem) {
-                return null;
-              }
-              return (
-                <div className="activities-list-item" key={index}>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: item.action_title.replace(
-                        /\d+/g,
-                        (match: string) => `<span style="color: rgba(151, 154, 190, 1);">${match}</span>`,
-                      ),
-                    }}
-                  ></p>
-                  <h2>
-                    Total Execution <span>- </span>
-                  </h2>
-                  <h3>
-                    <img src={networkItem.logo} alt="" />
-                    {networkItem.name}
-                  </h3>
-                </div>
-              );
-            })}
-        </div>
-      </ChainsDetailsActivities>
+          </div>
+          <div className="details-activities-list">
+            {activities &&
+              activities.map((item: any, index: number) => {
+                const networkItem = networkList.find((network) => network.id === item.network_id);
+                if (!networkItem) {
+                  return null;
+                }
+                return (
+                  <div className="activities-list-item" key={index}>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: item.action_title.replace(
+                          /\d+/g,
+                          (match: string) => `<span style="color: rgba(151, 154, 190, 1);">${match}</span>`,
+                        ),
+                      }}
+                    ></p>
+                    <h2>
+                      Total Execution <span>- </span>
+                    </h2>
+                    <h3>
+                      <img src={networkItem.logo} alt="" />
+                      {networkItem.name}
+                    </h3>
+                  </div>
+                );
+              })}
+          </div>
+        </ChainsDetailsActivities>
+      )}
     </ChainsDetails>
   );
 };

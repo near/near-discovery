@@ -3,7 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
@@ -20,9 +20,7 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const carouselbg = 'https://assets.dapdap.net/images/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty.svg';
 const carouseicon = 'https://assets.dapdap.net/images/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e.svg';
-const syncIcon = 'https://assets.dapdap.net/images/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y.svg';
 
 const AllDappsPage = styled.div`
   color: #ffffff;
@@ -51,7 +49,41 @@ const AllDappsPage = styled.div`
     /* padding: 20px 0; */
     .page-netWork-list {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap; 
+      width: 100%;
+      .netWork-list-conter{
+        display: flex;
+        flex-wrap: wrap;
+        width: 84%;
+      }
+      .netWork-list-btn{
+        width: 12%;
+        border: 1px solid rgba(55, 58, 83, 1);
+        height: 32px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        background-color: rgb(45,48,58);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        cursor: pointer;
+        .list-btn-img{
+          width: 8px;
+          margin-left: 8px;
+          transform: rotate(270deg);
+        }
+        .rotate{
+          transform: rotate(90deg);
+        }
+      }
+      .netWork-list-line{
+        width: 1px;
+        height: 30px;
+        margin: 0 20px;
+        background-color: rgb(45,48,58);
+      }
       .netWork-list-item {
         margin-right: 12px;
         margin-bottom: 12px;
@@ -76,6 +108,15 @@ const AllDappsPage = styled.div`
         background: rgba(235, 244, 121, 1);
         color: rgba(24, 26, 39, 1);
       }
+      .none{
+        display: none;
+      }
+      .block{
+        display: block;
+      }
+    }
+    .expanded{
+      overflow: hidden;
     }
     .page-function-list {
       display: flex;
@@ -459,6 +500,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const { open } = useDappOpen();
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [listHeight, setListHeight] = useState('auto');
+  const listRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -587,7 +631,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     if (router.query.category) {
       setSelectedFunction((router.query.category as string).split(','));
-    }else{
+    } else {
       setSelectedFunction([]);
     }
   }, [router.query.category]);
@@ -599,6 +643,36 @@ const AllDappsColumn: NextPageWithLayout = () => {
     }
   }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
 
+  const toggleExpanded = () => {
+    if (isExpanded) {
+      setListHeight(`auto`);
+      setIsExpanded(false);
+    } else {
+      setListHeight('45px');
+      setIsExpanded(true);
+    }
+  };
+
+  useEffect(() => {
+    const checkHeight = () => {
+      if (listRef.current && listRef.current.offsetHeight > 45) {
+        setListHeight('45px');
+        setIsExpanded(true);
+      } else {
+        setListHeight('auto');
+      }
+    };
+    if (typeof window !== 'undefined') {
+      const timer = setTimeout(checkHeight, 0);
+      window.addEventListener('resize', checkHeight);
+
+      return () => {
+        window.removeEventListener('resize', checkHeight);
+        clearTimeout(timer);
+      };
+    }
+  }, [networkList, typeof window !== 'undefined' && window.innerWidth, typeof window !== 'undefined' && window.innerHeight]);
+  
   return (
     <AllDappsPage>
       <BreadCrumbs>
@@ -660,9 +734,13 @@ const AllDappsColumn: NextPageWithLayout = () => {
       </div>
       <div className="tab-content">
         <Title>Network</Title>
-        <div className="page-netWork-list">
-          {networkList &&
-            networkList.map((child, index) => (
+        <div
+          className={`page-netWork-list ${isExpanded ? 'expanded' : ''}`}
+          ref={listRef}
+          style={{ height: listHeight }}
+        >
+          <div className='netWork-list-conter'>
+            {networkList && networkList.map((child, index) => (
               <div
                 className={`netWork-list-item ${selectedMenu === String(child.id) ? 'active' : ''}`}
                 key={index}
@@ -672,7 +750,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
                 {child.name}
               </div>
             ))}
-          <div className=""></div>
+          </div>
+          <div className='netWork-list-line'> </div>
+          <div className='netWork-list-btn' onClick={toggleExpanded}>
+            {isExpanded ? 'Other Chains' : 'Close Chains'}
+            <img src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg" alt="" className={`list-btn-img ${isExpanded ? '' : 'rotate'}`} />
+          </div>
         </div>
         <Title>Function</Title>
         <div className="page-function-list">
