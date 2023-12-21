@@ -45,6 +45,8 @@ export const StyledPanel = styled.div`
   backdrop-filter: blur(3px);
   padding: 24px 20px;
   width: 50%;
+  height: 200px;
+  box-sizing: border-box;
 `;
 
 export const StyledPanelHeader = styled.div`
