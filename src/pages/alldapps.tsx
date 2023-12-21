@@ -505,7 +505,75 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const listRef = useRef<HTMLDivElement>(null);
   const [activeIndex, setActiveIndex] = useState(0);
   const [selectedFunction, setSelectedFunction] = useState<string[]>([]);
-  const [isFavoriteTabActive, setIsFavoriteTabActive] = useState(false);
+  const [isFavoriteList, setIsFavoriteList] = useState<any[]>([]);
+  const [isFavoriteTab, setIsFavoriteTab] = useState(false);
+  const [selectedTab, setSelectedTab] = useState(() => {
+    return 'token';
+  });
+  const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
+  const [selectedMenu, setSelectedMenu] = useState(() => {
+    return '';
+  });
+
+  function getCategoryNames(dappCategories: any, categoryArray: any[]) {
+    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
+    return categories.map((categoryItem: any) => {
+      const categoryId =
+        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
+      const category = categoryArray.find((c: any) => c.id === categoryId);
+      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
+    });
+  }
+  const handleCarouselClick = useCallback(() => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.filter((dapp) => dapp.recommend === true).length);
+  }, [carouselList.filter((dapp) => dapp.recommend === true).length]);
+  const handleTabClick = (path: string) => {
+    if (path === 'favorites') {
+      setIsFavoriteTab(true);
+    } else {
+      setIsFavoriteTab(false);
+    }
+    setSelectedTab(path);
+  };
+  const handleMenuClick = (path: string) => {
+    if (selectedMenu === path) {
+      setSelectedMenu('');
+    } else {
+      setSelectedMenu(path);
+    }
+  };
+  const handleFunctionClick = (functionType: any) => {
+    const id = functionType.id;
+    let _selectedFunction: string[] = [];
+    if (selectedFunction.includes(String(id))) {
+      _selectedFunction = selectedFunction.filter((type) => type !== String(id));
+    } else {
+      _selectedFunction = [...selectedFunction, String(id)];
+    }
+    const params = new URLSearchParams(searchParams);
+    if (_selectedFunction.length) {
+      params.set('category', _selectedFunction.join(','));
+    } else {
+      params.delete('category');
+    }
+    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+  };
+  const handleMedalMenuClick = (path: number) => {
+    if (selectedMedalMenu === path) {
+      setSelectedMedalMenu('');
+    } else {
+      setSelectedMedalMenu(path);
+    }
+  };
+
+  const fetchIsFavoriteList = async () => {
+    try {
+      const resultDapp = await get(`${QUEST_PATH}/api/dapp/favorite_list`);
+      setIsFavoriteList(resultDapp.data || []);
+    } catch (error) {
+      console.error('Error fetching resultDapp data:', error);
+    }
+  };
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -526,82 +594,13 @@ const AllDappsColumn: NextPageWithLayout = () => {
     };
     fetchCarouselData();
     fetchNetworkData();
+    fetchIsFavoriteList();
   }, []);
-
-  function getCategoryNames(dappCategories: any, categoryArray: any[]) {
-    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
-    return categories.map((categoryItem: any) => {
-      const categoryId =
-        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
-      const category = categoryArray.find((c: any) => c.id === categoryId);
-      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
-    });
-  }
-
-  const handleCarouselClick = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.filter((dapp) => dapp.recommend === true).length);
-  }, [carouselList.filter((dapp) => dapp.recommend === true).length]);
-
-  const [selectedTab, setSelectedTab] = useState(() => {
-    return 'token';
-  });
-
-  const handleTabClick = (path: string) => {
-    setDappList([]);
-    if (path === 'favorites') {
-      setIsFavoriteTabActive(true);
-    } else {
-      setIsFavoriteTabActive(false);
-    }
-    setSelectedTab(path);
-  };
-
-  const [selectedMenu, setSelectedMenu] = useState(() => {
-    return '';
-  });
-  const handleMenuClick = (path: string) => {
-    if (selectedMenu === path) {
-      setSelectedMenu('');
-    } else {
-      setSelectedMenu(path);
-    }
-  };
-
-  const handleFunctionClick = (functionType: any) => {
-    const id = functionType.id;
-    let _selectedFunction: string[] = [];
-    if (selectedFunction.includes(String(id))) {
-      _selectedFunction = selectedFunction.filter((type) => type !== String(id));
-    } else {
-      _selectedFunction = [...selectedFunction, String(id)];
-    }
-
-    const params = new URLSearchParams(searchParams);
-    if (_selectedFunction.length) {
-      params.set('category', _selectedFunction.join(','));
-    } else {
-      params.delete('category');
-    }
-    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
-  };
-
-  const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
-  const handleMedalMenuClick = (path: number) => {
-    if (selectedMedalMenu === path) {
-      setSelectedMedalMenu('');
-    } else {
-      setSelectedMedalMenu(path);
-    }
-  };
 
   const fetchDappData = async (page: number) => {
     try {
       const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?&page=${page}&page_size=31`);
-      if (Array.isArray(resultDapp.data?.data)) {
-        setDappList(resultDapp.data?.data || []);
-      } else {
-        setDappList([]);
-      }
+      setDappList(resultDapp.data?.data || []);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
     }
@@ -610,34 +609,29 @@ const AllDappsColumn: NextPageWithLayout = () => {
     try {
       const params = {
         tbd_token: selectedTab === 'TBD',
-        is_favorite: isFavoriteTabActive,
         network_ids: selectedMenu,
         category_ids: selectedFunction.length ? selectedFunction.join(',') : undefined,
         quest: selectedMedalMenu,
+        is_favorite: isFavoriteTab,
       };
-
       if (typeof params !== 'object') {
         throw new Error('params is not an object');
       }
-
       const entries = Object.entries(params);
       if (!Array.isArray(entries)) {
         throw new Error('Object.entries(params) did not return an array');
       }
-
       const filteredEntries = entries.filter(([, value]) => value !== undefined && value !== '');
       if (!Array.isArray(filteredEntries)) {
         throw new Error('filter did not return an array');
       }
-
       const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
-
       const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=${page}&page_size=31`;
       const resultDapp = await get(url);
-      if (Array.isArray(resultDapp.data?.data)) {
-        setDappList(resultDapp.data?.data || []);
+      if (selectedTab === 'favorites') {
+        setIsFavoriteList(resultDapp.data?.data || []);
       } else {
-        setDappList([]);
+        setDappList(resultDapp.data?.data || []);
       }
     } catch (error) {
       console.error('Error fetching filtered dapp data:', error);
@@ -647,14 +641,17 @@ const AllDappsColumn: NextPageWithLayout = () => {
     const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
     setSelectedFunction(categoryFromQuery);
   }, [router.query.category]);
-
   useEffect(() => {
     const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
     if (JSON.stringify(categoryFromQuery) === JSON.stringify(selectedFunction)) {
-      if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '' || selectedTab === 'favorites') {
+      if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
         fetchFilteredDappData(currentPage);
       } else {
-        fetchDappData(currentPage);
+        if (selectedTab === 'favorites') {
+          fetchIsFavoriteList();
+        } else {
+          fetchDappData(currentPage);
+        }
       }
     }
   }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
@@ -668,7 +665,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
       setIsExpanded(true);
     }
   };
-
   useEffect(() => {
     const checkHeight = () => {
       if (listRef.current && listRef.current.offsetHeight > 45) {
@@ -921,8 +917,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
       {selectedTab == 'favorites' ? (
         <>
           <div className="tab-content-page">
-            {dappList &&
-              dappList.map((dapp: any, index: number) => {
+            {isFavoriteList &&
+              isFavoriteList.map((dapp: any, index: number) => {
                 const categoryData = dapp.dapp_category || dapp.category_ids;
                 const categoryNames = getCategoryNames(categoryData, categoryArray);
                 return (
@@ -960,7 +956,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           </div>
         </>
       ) : null}
-      {dappList && dappList.length > 0 && (
+      {dappList && dappList.length > 0 && selectedTab !== 'favorites' && (
         <Pagination>
           <div
             className="pagination-item"
