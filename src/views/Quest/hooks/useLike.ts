@@ -29,11 +29,12 @@ export default function useLike(id: string, category: string) {
         title: 'Liking',
       });
       try {
-        await post(`${QUEST_PATH}/api/user/favorite`, {
+        const result = await post(`${QUEST_PATH}/api/user/favorite`, {
           id,
           category,
           favorite,
         });
+        if (result.code !== 0) throw new Error(result.msg);
         toast.dismiss(toastId);
         toast.success({
           title: `${favorite ? 'Liked' : 'Unliked'} successfully`,
