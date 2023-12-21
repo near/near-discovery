@@ -281,17 +281,6 @@ const WarmUp: NextPageWithLayout = () => {
               src: 'https://assets.ref.finance/images/zkevm-swap.png',
             }}
           />
-
-          <ComponentWrapperPage
-            src="guessme.near/widget/ZKEVMWarmUp.hot-dapp-card"
-            componentProps={{
-              background: 'linear-gradient(180deg, #4A80A7 0%, #343149 100%)',
-              dappName: '0vix',
-              creator: 'bluebiu.near',
-              widgetSrc: 'bluebiu.near/widget/0vix.Lending',
-              src: 'https://assets.ref.finance/images/zkevm-swap.png',
-            }}
-          />
         </CardListWrapper>
       </Page>
     </Container>

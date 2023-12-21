@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo, useState } from 'react';
 
 import Loading from '@/components/Icons/Loading';
 import useRewardsClaim from '@/hooks/useRewardsClaim';
@@ -22,6 +22,8 @@ const Actions = ({
   id: string;
 }) => {
   const { loading, handleClaim } = useRewardsClaim(() => {});
+  const [cbCompleted, setCbCompleted] = useState(0);
+  const completedCount = useMemo(() => completed + cbCompleted, [completed, cbCompleted]);
   return (
     <StyledContainer>
       <StyledHeader>
@@ -29,16 +31,23 @@ const Actions = ({
         {endTime && <Timer endTime={Number(endTime)} />}
       </StyledHeader>
       {actions.map((action: any, i: number) => (
-        <ActionItem key={action.id} action={action} completed={action.status === 'completed'} />
+        <ActionItem
+          key={action.id}
+          action={action}
+          completed={action.status === 'completed'}
+          onSuccess={() => {
+            setCbCompleted((prev) => prev + 1);
+          }}
+        />
       ))}
       <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>
       <StyledProcessBars>
         {actions.map((action: any, i: number) => (
-          <ProcessBar size={4} value={i < completed ? 100 : 0} noBorder={true} key={action.id} />
+          <ProcessBar size={4} value={i < completedCount ? 100 : 0} noBorder={true} key={action.id} />
         ))}
       </StyledProcessBars>
       <StyledButton
-        disabled={completed < actions.length || loading}
+        disabled={completedCount < actions.length || loading}
         onClick={() => {
           handleClaim(id);
         }}
