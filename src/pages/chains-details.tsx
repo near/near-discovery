@@ -427,10 +427,12 @@ const ChainsDetailsActivities = styled.div`
       h3 {
         font-size: 14px;
         color: #979abe;
+        margin-bottom: 2px;
         img {
           width: 20px;
           height: 20px;
           margin-right: 6px;
+          margin-top: -2px;
         }
       }
     }
@@ -624,13 +626,13 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   const nativeCurrency = useMemo(() => {
     try {
       if (data.native_currency) return JSON.parse(data.native_currency);
-    } catch (err) { }
+    } catch (err) {}
     return {};
   }, [data]);
   const milestonesData = useMemo(() => {
     try {
       if (data.milestones) return JSON.parse(data.milestones);
-    } catch (err) { }
+    } catch (err) {}
     return {};
   }, [data]);
 
@@ -695,14 +697,14 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           </div>
           <div className="details-body-right">
             <div className="body-right-btn">
-              <Link href='/alldapps'>
+              <Link href="/alldapps">
                 <div className="right-btn-item">
                   <img src={Dapps} alt="" />
                   <p>Dapps</p>
                 </div>
               </Link>
               {data && data.deepdive && (
-                <Link href='/warmup'>
+                <Link href="/warmup">
                   <div className="right-btn-item">
                     <img src={DeepDive} alt="" />
                     <p>DeepDive</p>
@@ -730,28 +732,28 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           <Title>Milestones</Title>
           {milestonesData.length > 0
             ? milestonesData.map((item: any, index: number) => (
-              <div className="left-milestones-item" key={index}>
-                <div className="milestones-item-img">
-                  <div>
-                    <img src={star} alt="" />
+                <div className="left-milestones-item" key={index}>
+                  <div className="milestones-item-img">
+                    <div>
+                      <img src={star} alt="" />
+                    </div>
+                    <div>
+                      <img src={line} alt="" />
+                    </div>
                   </div>
-                  <div>
-                    <img src={line} alt="" />
+                  <div className="milestones-item-text">
+                    <h2>{item.title}</h2>
+                    <p>{item.date}</p>
+                    {item.url && (
+                      <Link href={item.url}>
+                        <span>
+                          Learn more <img src={arrowyellow} alt="" />
+                        </span>
+                      </Link>
+                    )}
                   </div>
                 </div>
-                <div className="milestones-item-text">
-                  <h2>{item.title}</h2>
-                  <p>{item.date}</p>
-                  {item.url && (
-                    <Link href={item.url}>
-                      <span>
-                        Learn more <img src={arrowyellow} alt="" />
-                      </span>
-                    </Link>
-                  )}
-                </div>
-              </div>
-            ))
+              ))
             : null}
         </div>
         <div className="right-side-substance">
@@ -804,9 +806,9 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         <ChainsDetailsActivities>
           <Title>Activities</Title>
           <div style={{ marginBottom: '24px' }}>
-            <p>The most popular actions from other users</p>
-            <Link href='/warmup'>
-              <div className="right-btn-item" style={{ marginRight: 0 }}>
+            <p style={{ marginBottom: '0' }}>The most popular actions from other users</p>
+            <Link href="/warmup">
+              <div className="right-btn-item" style={{ marginRight: 0, marginTop: '-22px' }}>
                 <img src={DeepDive} alt="" />
                 <p>DeepDive</p>
               </div>
@@ -830,7 +832,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                       }}
                     ></p>
                     <h2>
-                      Total Execution <span>- </span>
+                      Total Execution <span>{item.count}</span>
                     </h2>
                     <h3>
                       <img src={networkItem.logo} alt="" />
