@@ -23,7 +23,7 @@ import {
 } from './styles';
 
 const DailyTask = () => {
-  const { loading, tasks, claiming, claim } = useDailyTask();
+  const { loading, tasks, claiming, consecutiveDays, claim } = useDailyTask();
 
   return (
     <StyledPanel>
@@ -34,7 +34,7 @@ const DailyTask = () => {
               <StyledHeader>
                 <div>
                   <StyledTitle>
-                    Signed in for <span style={{ color: '#EBF479', fontSize: '32px', fontWeight: 700 }}>1</span>{' '}
+                    Signed in for <span style={{ color: '#EBF479', fontSize: '32px', fontWeight: 700 }}>{consecutiveDays}</span>{' '}
                     consecutive days
                   </StyledTitle>
                   <StyledTips>Starts from 00:00 UTC</StyledTips>

@@ -42,6 +42,7 @@ export default function useDailyTask() {
         return false;
       });
       setTasks(cloneDeep(tasks));
+      setConsecutiveDays((prev) => prev + 1);
     } catch (err) {
       setClaiming(false);
       toast.fail({ title: 'Dapped failed' });
