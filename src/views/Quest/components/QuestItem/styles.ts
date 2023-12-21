@@ -45,9 +45,10 @@ export const StyledIconBox = styled.div`
   justify-content: center;
 `;
 
-export const StyledIcon = styled.img`
+export const StyledIcon = styled.img<{ $disabled: boolean }>`
   max-width: 100px;
   max-height: 100px;
+  ${({ $disabled }) => $disabled && 'filter: grayscale(100%)'}
 `;
 
 export const StyledTaskName = styled.div`

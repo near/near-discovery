@@ -49,10 +49,13 @@ const Socials = ({ info, onSuccess }: any) => {
       {Object.values(AUTHS).map((item) => (
         <StyledSocialItem
           key={item.key}
-          whileHover={{ color: '#979ABE' }}
-          whileTap={{ opacity: 0.6 }}
-          style={{ color: info[item.key]?.is_bind ? '#979ABE' : '#373A53' }}
+          {...(info[item.key]?.is_bind ? {} : { whileHover: { color: '#979ABE' }, whileTap: { opacity: 0.6 } })}
+          style={{
+            color: info[item.key]?.is_bind ? '#979ABE' : '#373A53',
+            cursor: info[item.key]?.is_bind ? 'not-allowed' : 'pointer',
+          }}
           onClick={() => {
+            if (info[item.key]?.is_bind) return;
             let path = '';
             const state = (Date.now() + Math.random() * 10000).toFixed(0);
             sessionStorage.setItem('_auth_state', state);

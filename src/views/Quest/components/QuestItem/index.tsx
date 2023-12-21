@@ -50,7 +50,7 @@ const QuestItem = ({
       }}
     >
       <StyledTask>
-        <StyledIconBox>{logo && <StyledIcon src={logo} />}</StyledIconBox>
+        <StyledIconBox>{logo && <StyledIcon src={logo} $disabled={live === false} />}</StyledIconBox>
         <div>
           <StyledTaskName>{name}</StyledTaskName>
           {/* <StyledTaskDesc $isCampaign={isCampaign}>{description}</StyledTaskDesc> */}
@@ -74,12 +74,12 @@ const QuestItem = ({
         </StyledFooter>
       </div>
 
-      {live && (
+      {live !== undefined && (
         <StyledLive>
           <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
-            <circle cx="4" cy="4" r="4" fill="#31B03E" />
+            <circle cx="4" cy="4" r="4" fill={live ? '#31B03E' : '#979ABE'} />
           </svg>
-          <span>Live</span>
+          <span>{live ? 'Live' : 'Expired'}</span>
         </StyledLive>
       )}
     </StyledContainer>
