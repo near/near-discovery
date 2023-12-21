@@ -591,7 +591,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     if (data) {
       const popupsArray = Object.values(popupsData);
-      setMatchedItem(popupsArray.find((item) => item.title === data.name));
+      setMatchedItem(popupsArray.find((item) => item.chainId === data.chain_id));
     }
   }, [data, popupsData]);
 

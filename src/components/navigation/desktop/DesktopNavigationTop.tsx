@@ -527,7 +527,7 @@ export const DesktopNavigationTop = () => {
                   </div>
                   {searchResults &&
                     (showAll ? searchResults.quests : searchResults.quests).map((item: any, index: number) => (
-                      <Link key={index} href="#">
+                      <Link key={index} href={`/quest/detail?id=${item.id}`} onClick={() => setSearchContent('')}>
                         <div className="results-item-list">
                           <img src={item.logo} alt="" />
                           <p>{item.name}</p>

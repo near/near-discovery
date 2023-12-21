@@ -562,7 +562,7 @@ const Content = styled.div`
       display: flex;
       overflow: hidden;
       .learning-content-item {
-        min-width: 539px;
+        /* min-width: 539px; */
         background: #21232ae5;
         border-radius: 20px;
         padding: 28px 26px;
@@ -932,7 +932,7 @@ const HomeContent: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (carouselRef.current) {
-      const page = Math.ceil(carouselRef.current.clientWidth / 539);
+      const page = Math.ceil(carouselRef.current.clientWidth / 0.3);
       setLearningPage(page);
     }
     // if (carouselRef.current && currentIndex === items.length - 1) {
@@ -1322,14 +1322,14 @@ const HomeContent: NextPageWithLayout = () => {
               // onTransitionEnd={handleTransitionEnd}
               style={{
                 display: 'flex',
-                width: `${items.length * 539}px`,
+                width: `${items.length * 35}%`,
                 transition: '0.5s',
-                transform: `translateX(-${currentIndex * 539}px)`,
+                transform: `translateX(-${currentIndex * 35}%)`,
                 willChange: 'transform',
               }}
             >
               {items.map((item, index) => (
-                <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '539px' }}>
+                <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '35%' }}>
                   <div className="content-item-img">
                     <img src={item.icon} alt="" />
                   </div>
