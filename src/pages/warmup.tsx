@@ -189,7 +189,7 @@ const WarmUp: NextPageWithLayout = () => {
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <Link href="#">Deep Dive</Link>
+        Deep Dive
         {arrow}
         <span>Polygon zkEVM</span>
       </BreadCrumbs>
@@ -232,7 +232,7 @@ const WarmUp: NextPageWithLayout = () => {
           </a>
         </div>
         <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.trend-list" />
-        <div className="page-quest-wrapper">
+        <div className="page-quest-wrapper" style={{ marginTop: '40px' }}>
           <div className="quest-title">
             <img src={hotIcon} width={'26'} alt="" />
             Hot Polygon zkEVM DApps{' '}
