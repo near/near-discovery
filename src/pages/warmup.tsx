@@ -189,7 +189,7 @@ const WarmUp: NextPageWithLayout = () => {
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <Link href="#">Deep Dive</Link>
+        Deep Dive
         {arrow}
         <span>Polygon zkEVM</span>
       </BreadCrumbs>
@@ -232,7 +232,7 @@ const WarmUp: NextPageWithLayout = () => {
           </a>
         </div>
         <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.trend-list" />
-        <div className="page-quest-wrapper">
+        <div className="page-quest-wrapper" style={{ marginTop: '40px' }}>
           <div className="quest-title">
             <img src={hotIcon} width={'26'} alt="" />
             Hot Polygon zkEVM DApps{' '}
@@ -278,17 +278,6 @@ const WarmUp: NextPageWithLayout = () => {
               creator: 'guessme.near',
               widgetSrc: 'guessme.near/widget/ZKEVM.GAMMA',
 
-              src: 'https://assets.ref.finance/images/zkevm-swap.png',
-            }}
-          />
-
-          <ComponentWrapperPage
-            src="guessme.near/widget/ZKEVMWarmUp.hot-dapp-card"
-            componentProps={{
-              background: 'linear-gradient(180deg, #4A80A7 0%, #343149 100%)',
-              dappName: '0vix',
-              creator: 'bluebiu.near',
-              widgetSrc: 'bluebiu.near/widget/0vix.Lending',
               src: 'https://assets.ref.finance/images/zkevm-swap.png',
             }}
           />

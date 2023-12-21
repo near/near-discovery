@@ -49,40 +49,40 @@ const AllDappsPage = styled.div`
     /* padding: 20px 0; */
     .page-netWork-list {
       display: flex;
-      flex-wrap: nowrap; 
+      flex-wrap: nowrap;
       width: 100%;
-      .netWork-list-conter{
+      .netWork-list-conter {
         display: flex;
         flex-wrap: wrap;
         width: 84%;
       }
-      .netWork-list-btn{
+      .netWork-list-btn {
         width: 12%;
         border: 1px solid rgba(55, 58, 83, 1);
         height: 32px;
         font-size: 14px;
         font-weight: 500;
         text-align: center;
-        background-color: rgb(45,48,58);
+        background-color: rgb(45, 48, 58);
         display: flex;
         align-items: center;
         justify-content: center;
         border-radius: 8px;
         cursor: pointer;
-        .list-btn-img{
+        .list-btn-img {
           width: 8px;
           margin-left: 8px;
           transform: rotate(270deg);
         }
-        .rotate{
+        .rotate {
           transform: rotate(90deg);
         }
       }
-      .netWork-list-line{
+      .netWork-list-line {
         width: 1px;
         height: 30px;
         margin: 0 20px;
-        background-color: rgb(45,48,58);
+        background-color: rgb(45, 48, 58);
       }
       .netWork-list-item {
         margin-right: 12px;
@@ -108,14 +108,14 @@ const AllDappsPage = styled.div`
         background: rgba(235, 244, 121, 1);
         color: rgba(24, 26, 39, 1);
       }
-      .none{
+      .none {
         display: none;
       }
-      .block{
+      .block {
         display: block;
       }
     }
-    .expanded{
+    .expanded {
       overflow: hidden;
     }
     .page-function-list {
@@ -445,7 +445,7 @@ const Pagination = styled.div`
   justify-content: center;
   align-items: center;
   gap: 20px;
-  .pagination-item{
+  .pagination-item {
     width: 55px;
     height: 30px;
     border-radius: 16px;
@@ -453,16 +453,16 @@ const Pagination = styled.div`
     text-align: center;
     line-height: 25px;
     cursor: pointer;
-    img{
+    img {
       width: 6px;
       height: 12px;
     }
-    &:hover{
-      background:linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+    &:hover {
+      background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
     }
   }
-  .pagination-right{
-    img{
+  .pagination-right {
+    img {
       transform: rotate(180deg);
     }
   }
@@ -476,7 +476,7 @@ const Pagination = styled.div`
   .active {
     color: rgba(255, 255, 255, 1);
   }
-`
+`;
 
 const Carousel = React.memo(
   ({ active, children, style }: { active: boolean; children: React.ReactNode; style?: React.CSSProperties }) => {
@@ -503,6 +503,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const [isExpanded, setIsExpanded] = useState(true);
   const [listHeight, setListHeight] = useState('auto');
   const listRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedFunction, setSelectedFunction] = useState<string[]>([]);
+  const [isFavoriteTabActive, setIsFavoriteTabActive] = useState(false);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -535,8 +538,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
     });
   }
 
-  const [activeIndex, setActiveIndex] = useState(0);
-
   const handleCarouselClick = useCallback(() => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.filter((dapp) => dapp.recommend === true).length);
   }, [carouselList.filter((dapp) => dapp.recommend === true).length]);
@@ -546,6 +547,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
   });
 
   const handleTabClick = (path: string) => {
+    setDappList([]);
+    if (path === 'favorites') {
+      setIsFavoriteTabActive(true);
+    } else {
+      setIsFavoriteTabActive(false);
+    }
     setSelectedTab(path);
   };
 
@@ -560,7 +567,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
     }
   };
 
-  const [selectedFunction, setSelectedFunction] = useState<string[]>([]);
   const handleFunctionClick = (functionType: any) => {
     const id = functionType.id;
     let _selectedFunction: string[] = [];
@@ -590,8 +596,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
   const fetchDappData = async (page: number) => {
     try {
-      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=${page}&page_size=31`);
-      setDappList(resultDapp.data || []);
+      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?&page=${page}&page_size=31`);
+      if (Array.isArray(resultDapp.data?.data)) {
+        setDappList(resultDapp.data?.data || []);
+      } else {
+        setDappList([]);
+      }
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
     }
@@ -600,6 +610,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     try {
       const params = {
         tbd_token: selectedTab === 'TBD',
+        is_favorite: isFavoriteTabActive,
         network_ids: selectedMenu,
         category_ids: selectedFunction.length ? selectedFunction.join(',') : undefined,
         quest: selectedMedalMenu,
@@ -623,23 +634,28 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
       const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=${page}&page_size=31`;
       const resultDapp = await get(url);
-      setDappList(resultDapp.data || []);
+      if (Array.isArray(resultDapp.data?.data)) {
+        setDappList(resultDapp.data?.data || []);
+      } else {
+        setDappList([]);
+      }
     } catch (error) {
       console.error('Error fetching filtered dapp data:', error);
     }
   };
   useEffect(() => {
-    if (router.query.category) {
-      setSelectedFunction((router.query.category as string).split(','));
-    } else {
-      setSelectedFunction([]);
-    }
+    const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
+    setSelectedFunction(categoryFromQuery);
   }, [router.query.category]);
+
   useEffect(() => {
-    if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
-      fetchFilteredDappData(currentPage);
-    } else if (!router.query.category) {
-      fetchDappData(currentPage);
+    const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
+    if (JSON.stringify(categoryFromQuery) === JSON.stringify(selectedFunction)) {
+      if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '' || selectedTab === 'favorites') {
+        fetchFilteredDappData(currentPage);
+      } else {
+        fetchDappData(currentPage);
+      }
     }
   }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
 
@@ -671,8 +687,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
         clearTimeout(timer);
       };
     }
-  }, [networkList, typeof window !== 'undefined' && window.innerWidth, typeof window !== 'undefined' && window.innerHeight]);
-  
+  }, [
+    networkList,
+    typeof window !== 'undefined' && window.innerWidth,
+    typeof window !== 'undefined' && window.innerHeight,
+  ]);
+
   return (
     <AllDappsPage>
       <BreadCrumbs>
@@ -731,6 +751,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <div className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`} onClick={() => handleTabClick('TBD')}>
           🔥 Token-TBD
         </div>
+        <div
+          className={`tab-list-item ${selectedTab === 'favorites' ? 'active' : ''}`}
+          onClick={() => handleTabClick('favorites')}
+        >
+          ❤️ Favorites
+        </div>
       </div>
       <div className="tab-content">
         <Title>Network</Title>
@@ -739,22 +765,27 @@ const AllDappsColumn: NextPageWithLayout = () => {
           ref={listRef}
           style={{ height: listHeight }}
         >
-          <div className='netWork-list-conter'>
-            {networkList && networkList.map((child, index) => (
-              <div
-                className={`netWork-list-item ${selectedMenu === String(child.id) ? 'active' : ''}`}
-                key={index}
-                onClick={() => child.id && handleMenuClick(String(child.id))}
-              >
-                <img src={child.logo} alt="" />
-                {child.name}
-              </div>
-            ))}
+          <div className="netWork-list-conter">
+            {networkList &&
+              networkList.map((child, index) => (
+                <div
+                  className={`netWork-list-item ${selectedMenu === String(child.id) ? 'active' : ''}`}
+                  key={index}
+                  onClick={() => child.id && handleMenuClick(String(child.id))}
+                >
+                  <img src={child.logo} alt="" />
+                  {child.name}
+                </div>
+              ))}
           </div>
-          <div className='netWork-list-line'> </div>
-          <div className='netWork-list-btn' onClick={toggleExpanded}>
+          <div className="netWork-list-line"> </div>
+          <div className="netWork-list-btn" onClick={toggleExpanded}>
             {isExpanded ? 'Other Chains' : 'Close Chains'}
-            <img src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg" alt="" className={`list-btn-img ${isExpanded ? '' : 'rotate'}`} />
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+              className={`list-btn-img ${isExpanded ? '' : 'rotate'}`}
+            />
           </div>
         </div>
         <Title>Function</Title>
@@ -767,8 +798,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
                 return (
                   <div
                     key={index}
-                    className={`function-list-item ${item.name} ${selectedFunction.includes(String(item.id)) ? item.name + 'Active' : ''
-                      }`}
+                    className={`function-list-item ${item.name} ${
+                      selectedFunction.includes(String(item.id)) ? item.name + 'Active' : ''
+                    }`}
                     onClick={() => handleFunctionClick(item)}
                   >
                     {item.name}
@@ -802,51 +834,95 @@ const AllDappsColumn: NextPageWithLayout = () => {
       </div>
       {selectedTab == 'TBD' ? (
         <div className="tab-content-page">
-          {dappList && dappList.data
-            .filter((dapp: any) => dapp.tbd_token === 'Y')
-            .map((dapp: any, index: number) => {
-              const categoryData = dapp.dapp_category || dapp.category_ids;
-              const categoryNames = getCategoryNames(categoryData, categoryArray);
-              return (
-                <div className="tab-content-item" key={index}>
-                  <div className="content-item-img">
-                    <img src={dapp.logo} alt="" />
-                  </div>
-                  <div className="content-item-text">
-                    <h1>{dapp.name}</h1>
-                    <p>{dapp.description}</p>
-                    <Tag>
-                      {categoryNames.map((categoryName: string, index: number) => (
-                        <div className={`tag-item ${categoryName}`} key={index}>
-                          {categoryName}
-                        </div>
-                      ))}
-                    </Tag>
-                  </div>
-                  <div className="content-item-btn">
-                    <div className="item-btn-item">
-                      <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+          {dappList &&
+            dappList
+              .filter((dapp: any) => dapp.tbd_token === 'Y')
+              .map((dapp: any, index: number) => {
+                const categoryData = dapp.dapp_category || dapp.category_ids;
+                const categoryNames = getCategoryNames(categoryData, categoryArray);
+                return (
+                  <div className="tab-content-item" key={index}>
+                    <div className="content-item-img">
+                      <img src={dapp.logo} alt="" />
                     </div>
-                    <div
-                      className="item-btn-item"
-                      onClick={() => {
-                        open(dapp, 'alldapps');
-                      }}
-                    >
-                      Dapp
+                    <div className="content-item-text">
+                      <h1>{dapp.name}</h1>
+                      <p>{dapp.description}</p>
+                      <Tag>
+                        {categoryNames.map((categoryName: string, index: number) => (
+                          <div className={`tag-item ${categoryName}`} key={index}>
+                            {categoryName}
+                          </div>
+                        ))}
+                      </Tag>
+                    </div>
+                    <div className="content-item-btn">
+                      <div className="item-btn-item">
+                        <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+                      </div>
+                      <div
+                        className="item-btn-item"
+                        onClick={() => {
+                          open(dapp, 'alldapps');
+                        }}
+                      >
+                        Dapp
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
       ) : null}
       {selectedTab == 'token' ? (
         <>
           <div className="tab-content-page">
-            {dappList && dappList.data
-              .filter((dapp: any) => dapp.tbd_token === 'N')
-              .map((dapp: any, index: number) => {
+            {dappList &&
+              dappList
+                .filter((dapp: any) => dapp.tbd_token === 'N')
+                .map((dapp: any, index: number) => {
+                  const categoryData = dapp.dapp_category || dapp.category_ids;
+                  const categoryNames = getCategoryNames(categoryData, categoryArray);
+                  return (
+                    <div className="tab-content-item" key={index}>
+                      <div className="content-item-img">
+                        <img src={dapp.logo} alt="" />
+                      </div>
+                      <div className="content-item-text">
+                        <h1>{dapp.name}</h1>
+                        <p>{dapp.description}</p>
+                        <Tag>
+                          {categoryNames.map((categoryName: string, index: number) => (
+                            <div className={`tag-item ${categoryName}`} key={index}>
+                              {categoryName}
+                            </div>
+                          ))}
+                        </Tag>
+                      </div>
+                      <div className="content-item-btn">
+                        <div className="item-btn-item">
+                          <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+                        </div>
+                        <div
+                          className="item-btn-item"
+                          onClick={() => {
+                            open(dapp, 'alldapps');
+                          }}
+                        >
+                          Dapp
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+          </div>
+        </>
+      ) : null}
+      {selectedTab == 'favorites' ? (
+        <>
+          <div className="tab-content-page">
+            {dappList &&
+              dappList.map((dapp: any, index: number) => {
                 const categoryData = dapp.dapp_category || dapp.category_ids;
                 const categoryNames = getCategoryNames(categoryData, categoryArray);
                 return (
@@ -884,34 +960,45 @@ const AllDappsColumn: NextPageWithLayout = () => {
           </div>
         </>
       ) : null}
-      <Pagination>
-        <div
-          className='pagination-item'
-          onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
-          style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
-
-        >
-          <img src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg" alt="" />
-        </div>
-        {Array.from(Array(totalPages).keys()).map((page) => (
-          Math.abs(currentPage - (page + 1)) <= 5 && (
-            <div
-              key={page}
-              className={`pagination-number ${currentPage === page + 1 ? 'active' : ''}`}
-              onClick={() => setCurrentPage(page + 1)}
-            >
-              {page + 1}
-            </div>
-          )
-        ))}
-        <div
-          className='pagination-item pagination-right'
-          onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
-          style={{ cursor: currentPage === totalPages ? 'not-allowed' : 'pointer', opacity: currentPage === totalPages ? 0.5 : 1 }}
-        >
-          <img src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg" alt="" />
-        </div>
-      </Pagination>
+      {dappList && dappList.length > 0 && (
+        <Pagination>
+          <div
+            className="pagination-item"
+            onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+            style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
+          >
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+            />
+          </div>
+          {Array.from(Array(totalPages).keys()).map(
+            (page) =>
+              Math.abs(currentPage - (page + 1)) <= 5 && (
+                <div
+                  key={page}
+                  className={`pagination-number ${currentPage === page + 1 ? 'active' : ''}`}
+                  onClick={() => setCurrentPage(page + 1)}
+                >
+                  {page + 1}
+                </div>
+              ),
+          )}
+          <div
+            className="pagination-item pagination-right"
+            onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
+            style={{
+              cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+              opacity: currentPage === totalPages ? 0.5 : 1,
+            }}
+          >
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+            />
+          </div>
+        </Pagination>
+      )}
     </AllDappsPage>
   );
 };

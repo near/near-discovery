@@ -8,12 +8,15 @@ export const StyledContainer = styled(motion.div)<{ $isCampaign?: boolean; $mt?:
   border: 1px solid #373a53;
   background: #2c2e3e;
   width: 300px;
-  height: 214px;
+  height: 186px;
   flex-shrink: 0;
-  padding: 18px 14px 14px;
+  padding: 14px;
   box-sizing: border-box;
   position: relative;
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   ${({ $isCampaign }) =>
     $isCampaign &&
@@ -27,6 +30,9 @@ export const StyledContainer = styled(motion.div)<{ $isCampaign?: boolean; $mt?:
 export const StyledTask = styled.div`
   display: flex;
   gap: 14px;
+  flex-grow: 1;
+  max-height: 100px;
+  overflow: hidden;
 `;
 
 export const StyledIconBox = styled.div`
@@ -64,7 +70,6 @@ export const StyledProcessBars = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  margin-top: 40px;
 `;
 
 export const StyledTags = styled.div`
