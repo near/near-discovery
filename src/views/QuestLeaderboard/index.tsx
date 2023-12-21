@@ -10,7 +10,7 @@ import Quests from './components/Quests';
 import Swiper from './components/Swiper';
 import Tabs from './components/Tabs';
 import useLeaderboard from './hooks/useLeaderboard';
-import useUserInfo from './hooks/useUserInfo';
+import useUserInfo from '../../hooks/useUserInfo';
 import { StyledContainer } from './styles';
 import type { Tab } from './types';
 

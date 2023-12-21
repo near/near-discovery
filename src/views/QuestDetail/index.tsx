@@ -4,7 +4,7 @@ import { memo } from 'react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
-import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
+import useUserInfo from '@/hooks/useUserInfo';
 
 import Yours from '../Quest/components/Yours';
 import Actions from './components/Actions';

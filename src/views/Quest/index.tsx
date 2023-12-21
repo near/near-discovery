@@ -1,7 +1,7 @@
 import { memo, useState } from 'react';
 
 import Breadcrumb from '@/components/Breadcrumb';
-import useUserInfo from '@/views/QuestLeaderboard/hooks/useUserInfo';
+import useUserInfo from '@/hooks/useUserInfo';
 
 import Campaign from './components/Campaign';
 import QuestLists from './components/QuestLists';

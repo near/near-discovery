@@ -8,7 +8,7 @@ import Quests from './components/Quests';
 import Tabs from './components/Tabs';
 import UserInfo from './components/UserInfo';
 import useInviteList from './hooks/useInviteList';
-import useUserInfo from '../QuestLeaderboard/hooks/useUserInfo';
+import useUserInfo from '../../hooks/useUserInfo';
 import { StyledContainer, StyledTabsBox, StyledPanelWrapper } from './styles';
 import type { Tab } from './types';
 

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import CopyButton from '@/components/CopyButton';
 import useAccount from '@/hooks/useAccount';
+import { useUserStore } from '@/stores/user';
 import { ellipsAccount } from '@/utils/account';
 
 const StyledItem = styled.div`
@@ -16,6 +17,11 @@ const Logo = styled.div<{ size: number }>`
   border-radius: 50%;
   background-image: conic-gradient(from 180deg at 50% 50%, #00d1ff 0deg, #ff008a 360deg);
 `;
+const LogoImage = styled.img<{ size: number }>`
+  width: ${({ size }) => size}px;
+  height: ${({ size }) => size}px;
+  border-radius: 50%;
+`;
 const Account = styled.div`
   font-size: 16px;
   font-weight: 700;
@@ -24,10 +30,11 @@ const Account = styled.div`
 
 const AccountItem = ({ showCopy = true, logoSize = 38 }: { showCopy?: boolean; logoSize?: number }) => {
   const { account } = useAccount();
+  const userInfo = useUserStore((store: any) => store.user);
   return (
     <StyledItem>
-      <Logo size={logoSize} />
-      <Account>{ellipsAccount(account)}</Account>
+      {userInfo?.avatar ? <LogoImage src={userInfo.avatar} size={logoSize} /> : <Logo size={logoSize} />}
+      <Account>{userInfo?.username ? userInfo?.username : ellipsAccount(account)}</Account>
       {account && showCopy && (
         <CopyButton
           size={16}
