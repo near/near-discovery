@@ -21,7 +21,7 @@ const FavoriteDapp = ({ name, description, route, logo, category_ids, id }: any)
   const { categories } = useCategoryDappList();
 
   const categoryNames = useMemo(() => {
-    let names: { id: number; name: string }[] = [];
+    const names: { id: number; name: string }[] = [];
     category_ids.forEach((id: number) => {
       const item = categories[id];
       if (item) {
