@@ -14,7 +14,7 @@ export interface Dex {
   tags: string[];
 }
 
-export type SupportDex = 'Stargate';
+export type SupportDex = 'Stargate' | 'Lifi';
 
 export interface Trade {
   time: string;

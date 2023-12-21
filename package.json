@@ -15,6 +15,7 @@
   "dependencies": {
     "@braintree/sanitize-url": "6.0.4",
     "@keypom/selector": "^1.2.3",
+    "@lifi/sdk": "^2.5.0",
     "@monaco-editor/react": "^4.6.0",
     "@near-eth/aurora-erc20": "^2.5.1",
     "@near-eth/aurora-ether": "^2.5.1",

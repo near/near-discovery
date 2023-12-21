@@ -114,12 +114,12 @@ export default {
   324: {
     chainId: 324,
     chainName: 'zkSync',
+    engine: 'lifi',
     icon: 'https://assets.dapdap.net/images/bafkreibcq6agazqmv5euwf355v7x7hlinz3jkuins2bkfffdbp3jgbjj6u.svg',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://mainnet.era.zksync.io'],
     blockExplorers: 'https://explorer.zksync.io/',
   },
-
   100: {
     chainId: 100,
     chainName: 'Gnosis',
