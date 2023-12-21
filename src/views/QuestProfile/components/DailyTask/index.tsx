@@ -19,6 +19,7 @@ import {
   StyledHeader,
   StyledTitle,
   StyledPanel,
+  StyledTips,
 } from './styles';
 
 const DailyTask = () => {
@@ -31,10 +32,13 @@ const DailyTask = () => {
           <StyledContent>
             <StyledDaysWrapper>
               <StyledHeader>
-                <StyledTitle>
-                  Signed in for <span style={{ color: '#EBF479', fontSize: '32px', fontWeight: 700 }}>1</span>{' '}
-                  consecutive days
-                </StyledTitle>
+                <div>
+                  <StyledTitle>
+                    Signed in for <span style={{ color: '#EBF479', fontSize: '32px', fontWeight: 700 }}>1</span>{' '}
+                    consecutive days
+                  </StyledTitle>
+                  <StyledTips>Starts from 00:00 UTC</StyledTips>
+                </div>
                 <StyledButton
                   disabled={claiming}
                   onClick={() => {
@@ -45,6 +49,7 @@ const DailyTask = () => {
                   <span style={{ marginLeft: '4px' }}>Dap me up!</span>
                 </StyledButton>
               </StyledHeader>
+
               <StyledDays>
                 {tasks.map((task: any) => (
                   <StyledDay

@@ -39,7 +39,7 @@ export const StyledDays = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 14px;
   width: 100%;
 `;
 
@@ -87,4 +87,10 @@ export const StyledFists = styled.div`
   background-image: url(/images/quest/fists.png);
   background-size: 100%;
   background-repeat: no-repeat;
+`;
+
+export const StyledTips = styled.div`
+  color: #979abe;
+  font-size: 12px;
+  font-weight: 400;
 `;
