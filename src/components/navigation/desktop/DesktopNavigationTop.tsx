@@ -472,6 +472,7 @@ export const DesktopNavigationTop = () => {
               value={searchContent}
               onChange={(e) => setSearchContent(e.target.value)}
               autoFocus
+              id="nav-top-search"
             />
             {SearchIcon}
             <div className="switch-icon" onClick={() => setShowMenuContent(!showMenuContent)}>

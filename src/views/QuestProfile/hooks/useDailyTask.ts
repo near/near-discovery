@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import useToast from '@/hooks/useToast';
 import { get, post } from '@/utils/http';
+import { cloneDeep } from 'lodash';
 
 export default function useDailyTask() {
   const [tasks, setTasks] = useState<any>([]);
@@ -33,12 +34,19 @@ export default function useDailyTask() {
       if (result.code !== 0) throw new Error(result.msg);
       setClaiming(false);
       toast.success({ title: 'Dapped successfully' });
-      queryTasks();
+      tasks.some((task: any) => {
+        if (task.status === 'will_claim') {
+          task.status = 'claimed';
+          return true;
+        }
+        return false;
+      });
+      setTasks(cloneDeep(tasks));
     } catch (err) {
       setClaiming(false);
       toast.fail({ title: 'Dapped failed' });
     }
-  }, [claiming]);
+  }, [claiming, tasks]);
 
   useEffect(() => {
     queryTasks();

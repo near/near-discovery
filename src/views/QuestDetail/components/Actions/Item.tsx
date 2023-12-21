@@ -132,6 +132,10 @@ const ActionItem = ({ action, completed, onSuccess }: { action: any; completed: 
                     onClick={() => {
                       setOpen(false);
                       if (!action.source) return;
+                      if (action.source === 'search') {
+                        document.getElementById('nav-top-search')?.focus();
+                        return;
+                      }
                       if (action.source === 'wallet/bridge') {
                         setLayout({
                           showAccountSider: true,

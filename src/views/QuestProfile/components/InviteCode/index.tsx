@@ -39,7 +39,7 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
             <StyledPanelFriendsTitle>{activeList.length} active friends</StyledPanelFriendsTitle>
             <JoinedAccounts>
               {activeList.slice(0, 5).map((item: any) => (
-                <JoinedAccount key={item.code} src={item.invited_user.address} />
+                <JoinedAccount key={item.code} src={item.invited_user.avatar} />
               ))}
               {activeList.length > 6 && (
                 <div className="more">
@@ -57,7 +57,7 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
             <StyledPanelFriendsTitle>{pendingList.length} pending friends</StyledPanelFriendsTitle>
             <JoinedAccounts>
               {pendingList.slice(0, 5).map((item: any) => (
-                <JoinedAccount key={item.code} src={item.invited_user.address} />
+                <JoinedAccount key={item.code} src={item.invited_user.avatar} />
               ))}
               {pendingList.length > 6 && (
                 <div className="more">
