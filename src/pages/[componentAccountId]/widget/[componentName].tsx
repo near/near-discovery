@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { VmComponent } from '@/components/vm/VmComponent';
+import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
@@ -16,7 +17,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const components = useBosComponents();
-
+  const { addAction } = useAddAction('all-in-one');
   useEffect(() => {
     setComponentSrc(componentSrc);
   }, [setComponentSrc, componentSrc]);
@@ -25,7 +26,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
-  return <ComponentWrapperPage src={componentSrc} componentProps={componentProps} />;
+  return <ComponentWrapperPage src={componentSrc} componentProps={{ ...componentProps, addAction }} />;
 };
 
 ViewComponentPage.getLayout = useDefaultLayout;
