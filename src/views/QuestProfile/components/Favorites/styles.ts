@@ -21,7 +21,7 @@ export const StyledDapp = styled.div`
   margin-top: 30px;
 `;
 
-export const StyledDappIcon = styled.div`
+export const StyledDappIcon = styled.img`
   width: 72px;
   height: 72px;
   flex-shrink: 0;

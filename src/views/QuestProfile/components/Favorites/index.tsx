@@ -1,4 +1,4 @@
-import { AnimatePresence,motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { memo } from 'react';
 
 import { container } from '@/components/animation';
@@ -8,7 +8,7 @@ import useFavoriteDapps from '../../hooks/useFavoriteDapps';
 import useFavorites from '../../hooks/useFavorites';
 import { QuestPanel } from '../Quests';
 import FavoriteDapp from './FavoriteDapp';
-import { Empty,LoadingWrapper, StyledContainer, StyledDapps, StyledTitle } from './styles';
+import { Empty, LoadingWrapper, StyledContainer, StyledDapps, StyledTitle } from './styles';
 
 const Favorites = () => {
   const { loading, list, info } = useFavorites();
@@ -17,7 +17,7 @@ const Favorites = () => {
     <AnimatePresence mode="wait">
       <motion.div {...container}>
         <StyledContainer>
-          <StyledTitle>Your favorite Dapps ({list.length})</StyledTitle>
+          <StyledTitle>Your favorite Dapps ({dappList.length || 0})</StyledTitle>
           {dappLoading ? (
             <LoadingWrapper>
               <Loading size={40} />

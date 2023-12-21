@@ -788,34 +788,6 @@ const Tag = styled.div`
     font-size: 12px;
     display: flex;
   }
-  .Swap {
-    color: rgba(172, 252, 237, 1);
-    border: 1px solid rgba(172, 252, 237, 1);
-  }
-  .Bridge {
-    color: rgba(227, 233, 157, 1);
-    border: 1px solid rgba(227, 233, 157, 1);
-  }
-  .DEX {
-    color: rgba(172, 252, 237, 1);
-    border: 1px solid rgba(172, 252, 237, 1);
-  }
-  .Lending {
-    color: rgba(173, 255, 181, 1);
-    border: 1px solid rgba(173, 255, 181, 1);
-  }
-  .Liquidity {
-    color: #aad6ff;
-    border: 1px solid #aad6ff;
-  }
-  .Staking {
-    color: rgba(193, 191, 255, 1);
-    border: 1px solid rgba(193, 191, 255, 1);
-  }
-  .Yield {
-    color: rgba(249, 181, 230, 1);
-    border: 1px solid rgba(249, 181, 230, 1);
-  }
 `;
 
 const Gold = styled.div`
