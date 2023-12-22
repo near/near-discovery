@@ -41,7 +41,7 @@ const DailyTask = () => {
                   <StyledTips>Starts from 00:00 UTC</StyledTips>
                 </div>
                 <StyledButton
-                  disabled={claiming}
+                  disabled={currentDay.status === 'claimed' || claiming}
                   onClick={() => {
                     claim();
                   }}
@@ -53,7 +53,7 @@ const DailyTask = () => {
 
               <StyledDays>
                 {tasks.map((task: any) => (
-                  <StyledDay key={task.day} style={{ opacity: task.day === currentDay ? 1 : 0.6 }}>
+                  <StyledDay key={task.day} style={{ opacity: task.day === currentDay.day ? 1 : 0.6 }}>
                     <StyledDayHeader>Day{task.day}</StyledDayHeader>
                     <StyledDayIcon>
                       {task.status === 'claimed' && (

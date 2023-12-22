@@ -9,7 +9,7 @@ export default function useDailyTask() {
   const [tasks, setTasks] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [claiming, setClaiming] = useState(false);
-  const [currentDay, setCurrentDay] = useState(-1);
+  const [currentDay, setCurrentDay] = useState<any>({});
   const [consecutiveDays, setConsecutiveDays] = useState(0);
   const toast = useToast();
 
@@ -22,7 +22,7 @@ export default function useDailyTask() {
       setTasks(data);
       data.some((task: any, i: number) => {
         if (task.status === 'will_claim') {
-          setCurrentDay(data[i - 1].day);
+          setCurrentDay(data[i - 1]);
           return true;
         }
         return false;
