@@ -103,26 +103,17 @@ export default function useLifi() {
           fromTokenAddress: realToken.address as string,
           fromAddress: account,
           toChainId: targetChain.chainId,
-          toTokenAddress: destination ? destination : realToken.address as string,
-          toAddress: account,
+          toTokenAddress: realToken.address as string,
+          toAddress: destination ? destination : account,
         }
 
-        console.log('routeRequest: ', routeRequest)
-
         const res = await lifi.getRoutes(routeRequest)
-
         if (!res.routes || res.routes.length === 0) {
           return
         }
-
         const selectRoute = res.routes[0]
-
-        console.log(selectRoute)
-
-
-        const val = await lifi.executeRoute(signer, selectRoute)
-
-        console.log('val: ', val)
+        const res = await lifi.executeRoute(signer, selectRoute)
+        onSuccess(res.tx ? res.tx : '')
       }
     } catch (e) {
       console.log(e)

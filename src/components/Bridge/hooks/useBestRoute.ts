@@ -39,7 +39,7 @@ export default function useBestRoute() {
           token: targetToken,
           targetChain: targetChain,
           targetToken: targetToken,
-          amount: amount ? amount.toString() : '0.0001',
+          amount: amount.toString(),
         })
         if (response) {
           setTrade({
@@ -47,6 +47,7 @@ export default function useBestRoute() {
             amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(2, 0) : '-') + '  ' + targetToken.symbol,
             gasCost: response?.gasCostUSD,
             dex: 'Lifi',
+            response,
           });
         }
       } else if (_inputChain.dex === 'Stargate') {
@@ -84,8 +85,6 @@ export default function useBestRoute() {
     destination?: string;
     onSuccess: (hash: string) => void;
   }) {
-
-
     try {
       setSwaping(true);
       const _inputChain = chainCofig[chain.chainId];
