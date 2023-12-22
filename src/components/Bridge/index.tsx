@@ -1,7 +1,7 @@
 import Big from 'big.js';
 import { utils } from 'ethers';
 import { debounce } from 'lodash';
-import { memo, useCallback, useEffect, useMemo,useState } from 'react';
+import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import useAccount from '@/hooks/useAccount';
@@ -68,7 +68,6 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   const { balance: nativeTokenBalance } = useTokenBalance({
     isNative: true,
     isPure: true,
-    currency: { chainId: inputChain?.chainId || 1, symbol: '', icon: '', decimals: 18 },
     updater,
   });
   const { checked, setChecked, destination, setDestination } = useDestination();
