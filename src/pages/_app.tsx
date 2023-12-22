@@ -42,7 +42,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
-  useInitialData();
+  const { getInitialData } = useInitialData();
   const [ready, setReady] = useState(false);
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
@@ -54,7 +54,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
 
   const accountInit = useCallback(() => {
-    login();
+    login(() => {
+      getInitialData();
+    });
     clearTimeout(loginTimer.current);
     if (!account && getCookie('LOGIN_ACCOUNT')) {
       loginTimer.current = setTimeout(() => {

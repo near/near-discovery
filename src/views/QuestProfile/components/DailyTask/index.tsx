@@ -23,7 +23,7 @@ import {
 } from './styles';
 
 const DailyTask = () => {
-  const { loading, tasks, claiming, consecutiveDays, claim } = useDailyTask();
+  const { loading, tasks, claiming, consecutiveDays, currentDay, claim } = useDailyTask();
 
   return (
     <StyledPanel>
@@ -53,11 +53,7 @@ const DailyTask = () => {
 
               <StyledDays>
                 {tasks.map((task: any) => (
-                  <StyledDay
-                    key={task.day}
-                    $disabled={['claimed', 'claim'].includes(task.status)}
-                    style={{ opacity: ['claimed', 'claim'].includes(task.status) ? 1 : 0.5 }}
-                  >
+                  <StyledDay key={task.day} style={{ opacity: task.day === currentDay ? 1 : 0.6 }}>
                     <StyledDayHeader>Day{task.day}</StyledDayHeader>
                     <StyledDayIcon>
                       {task.status === 'claimed' && (

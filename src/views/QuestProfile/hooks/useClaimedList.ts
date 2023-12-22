@@ -14,7 +14,7 @@ export default function useClaimedList() {
       if (loading) return;
       setLoading(true);
       try {
-        const result = await get(`${QUEST_PATH}/api/quest/claimed_list?page=${_page || page}&page_szie=1`);
+        const result = await get(`${QUEST_PATH}/api/quest/claimed_list?page=${_page || page}&page_size=10`);
         const data = result.data.data || [];
         _page && setPage(_page);
         setMaxPage(result.data.total_page);

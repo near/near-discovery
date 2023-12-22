@@ -25,8 +25,10 @@ export default function useInitialData() {
     } catch (err) {}
   }, []);
 
-  useEffect(() => {
+  const getInitialData = () => {
     queryChains();
     queryUserInfo();
-  }, []);
+  };
+
+  return { getInitialData };
 }

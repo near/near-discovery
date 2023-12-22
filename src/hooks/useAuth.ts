@@ -19,35 +19,39 @@ const useAuth = () => {
     router.replace(`/login?source=/`);
   };
 
-  const login = useCallback(async () => {
-    if (!wallet || !wallet.accounts[0].address) {
-      setLogging(false);
-      return;
-    }
-    const cachedAccount = getCookie('AUTHED_ACCOUNT');
-    setCookie('LOGIN_ACCOUNT', wallet.accounts[0].address);
-    if (cachedAccount !== wallet.accounts[0].address) {
-      setLogging(true);
-      try {
-        const checked = await checkAddressIsInvited(wallet.accounts[0].address);
-        if (!checked) {
-          deleteCookie('AUTHED_ACCOUNT');
-          router.replace('/invite-code');
-          return;
-        }
-        await getAccessToken(wallet.accounts[0].address);
+  const login = useCallback(
+    async (cb?: VoidFunction) => {
+      if (!wallet || !wallet.accounts[0].address) {
         setLogging(false);
-        setCookie('AUTHED_ACCOUNT', wallet.accounts[0].address);
-      } catch (error) {
+        return;
+      }
+      const cachedAccount = getCookie('AUTHED_ACCOUNT');
+      setCookie('LOGIN_ACCOUNT', wallet.accounts[0].address);
+      if (cachedAccount !== wallet.accounts[0].address) {
+        setLogging(true);
+        try {
+          const checked = await checkAddressIsInvited(wallet.accounts[0].address);
+          if (!checked) {
+            deleteCookie('AUTHED_ACCOUNT');
+            router.replace('/invite-code');
+            return;
+          }
+          await getAccessToken(wallet.accounts[0].address);
+          setLogging(false);
+          setCookie('AUTHED_ACCOUNT', wallet.accounts[0].address);
+          cb?.();
+        } catch (error) {
+          setLogging(false);
+        }
+      } else {
         setLogging(false);
       }
-    } else {
-      setLogging(false);
-    }
-    if (router.pathname === '/login' || router.pathname === '/invite-code') {
-      router.replace((router.query?.source as string) || '/');
-    }
-  }, [wallet]);
+      if (router.pathname === '/login' || router.pathname === '/invite-code') {
+        router.replace((router.query?.source as string) || '/');
+      }
+    },
+    [wallet],
+  );
 
   return { login, connect, logout, logging, connecting };
 };

@@ -17,8 +17,9 @@ import type { Tab } from './types';
 const QuestLeaderboardView = () => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
-  const { loading, list, page, info, maxPage, handlePageChange } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: 'leaderboard', updater: 1 });
+  const [updater, setUpdater] = useState(1);
+  const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: 'leaderboard', updater });
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
@@ -41,7 +42,23 @@ const QuestLeaderboardView = () => {
       />
 
       {tab === 'leaderboard' && (
-        <Leaderboard id={id} {...{ loading, list, page, info, maxPage, handlePageChange, userLoading, userInfo }} />
+        <Leaderboard
+          id={id}
+          {...{
+            loading,
+            list,
+            page,
+            info,
+            maxPage,
+            handlePageChange,
+            userLoading,
+            userInfo,
+            handleRefresh: () => {
+              handleRefresh();
+              setUpdater(Date.now());
+            },
+          }}
+        />
       )}
       {tab === 'quests' && (
         <Quests

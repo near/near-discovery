@@ -9,6 +9,7 @@ export default function useDailyTask() {
   const [tasks, setTasks] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [claiming, setClaiming] = useState(false);
+  const [currentDay, setCurrentDay] = useState(-1);
   const [consecutiveDays, setConsecutiveDays] = useState(0);
   const toast = useToast();
 
@@ -19,6 +20,13 @@ export default function useDailyTask() {
       const result = await get(`${QUEST_PATH}/api/quest/daily_check_in`);
       const data = result.data.data || [];
       setTasks(data);
+      data.some((task: any, i: number) => {
+        if (task.status === 'will_claim') {
+          setCurrentDay(data[i - 1].day);
+          return true;
+        }
+        return false;
+      });
       setConsecutiveDays(result.data.consecutive_days);
       setLoading(false);
     } catch (err) {
@@ -53,5 +61,5 @@ export default function useDailyTask() {
     queryTasks();
   }, []);
 
-  return { loading, tasks, consecutiveDays, claiming, claim };
+  return { loading, tasks, consecutiveDays, claiming, currentDay, claim };
 }

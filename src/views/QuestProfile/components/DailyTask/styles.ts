@@ -44,15 +44,13 @@ export const StyledDays = styled.div`
   width: 100%;
 `;
 
-export const StyledDay = styled.div<{ $disabled: boolean }>`
+export const StyledDay = styled.div`
   flex-grow: 1;
   height: 80px;
   flex-shrink: 0;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.3);
-
-  ${({ $disabled }) => $disabled && `opacity: 0.6`}
 `;
 
 export const StyledDayHeader = styled.div`
