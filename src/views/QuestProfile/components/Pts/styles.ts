@@ -3,6 +3,12 @@ import styled from 'styled-components';
 import type { Align } from './types';
 
 export { StyledCoin } from '@/views/Quest/styles';
+export {
+  StyledPageBox,
+  StyledPageDesc,
+  StyledPageButtons,
+  StyledPageButton,
+} from '@/views/QuestLeaderboard/components/Table/styles';
 export { LoadingWrapper, Empty } from '../../styles';
 
 export const StyledContainer = styled.div`
