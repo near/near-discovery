@@ -10,6 +10,7 @@ export const StyledContainer = styled.div`
   gap: 30px;
   align-items: center;
   width: 100%;
+  height: 100%;
 `;
 
 export const StyledHeader = styled.div`

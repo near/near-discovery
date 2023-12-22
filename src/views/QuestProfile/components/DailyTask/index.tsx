@@ -34,7 +34,8 @@ const DailyTask = () => {
               <StyledHeader>
                 <div>
                   <StyledTitle>
-                    Signed in for <span style={{ color: '#EBF479', fontSize: '32px', fontWeight: 700 }}>{consecutiveDays}</span>{' '}
+                    Signed in for{' '}
+                    <span style={{ color: '#EBF479', fontSize: '32px', fontWeight: 700 }}>{consecutiveDays}</span>{' '}
                     consecutive days
                   </StyledTitle>
                   <StyledTips>Starts from 00:00 UTC</StyledTips>
@@ -54,8 +55,8 @@ const DailyTask = () => {
                 {tasks.map((task: any) => (
                   <StyledDay
                     key={task.day}
-                    $disabled={task.status === 'claimed'}
-                    style={{ opacity: task.status === 'claimed' ? 1 : 0.5 }}
+                    $disabled={['claimed', 'claim'].includes(task.status)}
+                    style={{ opacity: ['claimed', 'claim'].includes(task.status) ? 1 : 0.5 }}
                   >
                     <StyledDayHeader>Day{task.day}</StyledDayHeader>
                     <StyledDayIcon>
