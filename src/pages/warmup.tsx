@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -163,6 +164,7 @@ const WarmUp: NextPageWithLayout = () => {
   const components = useBosComponents();
   const [innerWidth, setInnerWidth] = useState<number>();
   const [putMenu, setPutMenu] = useState(false);
+  const { addAction } = useAddAction('all-in-one');
   useEffect(() => {
     const offset = putMenu ? 170 : 350;
 
@@ -219,7 +221,7 @@ const WarmUp: NextPageWithLayout = () => {
             Execute Records
           </a>
         </div>
-        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.quest-list" />
+        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.quest-list" componentProps={{ addAction }} />
         <div className="page-quest-wrapper">
           <div className="quest-title">
             <img src={trendIcon} width={'26'} alt="" />
