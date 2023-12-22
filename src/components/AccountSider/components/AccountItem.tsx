@@ -49,7 +49,7 @@ const AccountItem = ({ showCopy = true, logoSize = 38 }: { showCopy?: boolean; l
       <div>
         <Account>{userInfo?.username ? userInfo?.username : ellipsAccount(account)}</Account>
         <Address>
-          <span>{ellipsAccount(account)} </span>
+          {userInfo?.username && <span>{ellipsAccount(account)} </span>}
           {account && showCopy && (
             <CopyButton
               size={16}
