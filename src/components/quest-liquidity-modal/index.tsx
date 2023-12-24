@@ -7,7 +7,7 @@ import { BaseListItem, BaseModal } from '@/components';
 import useTokenBalance from '@/hooks/useTokenBalance';
 
 import { dexs, iconMap, SwapTokens, WETH_ADDRESS } from './const';
-import SwapBtn from './swap-btn';
+import LiquidityBtn from './liquidity-btn';
 
 interface IProps {
   item: any;
@@ -24,7 +24,7 @@ const ItemImg = styled.img`
   width: 20px;
   height: 20px;
 `;
-const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
+const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
   //   const [tokenBalance, setTokenBalance] = useState(0);
 
   //   const { account, provider } = useAccount();
@@ -53,7 +53,7 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
   const { tokenBalance, isError, isLoading, update } = useTokenBalance(token?.address, token?.decimals);
 
   return (
-    <BaseModal title="Swap" onClose={onCloseModal}>
+    <BaseModal title="Add Liquidity" onClose={onCloseModal}>
       <Wrapper>
         <BaseListItem title="Dapp">
           <ItemImg src={iconMap[item.template]} style={{ marginRight: '5px' }} />
@@ -63,67 +63,16 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
         <BaseListItem title="Your balance">
           {tokenBalance ? Big(tokenBalance).toFixed(4, 0) : ''} {currencyCode}
         </BaseListItem>
-        <BaseListItem title="Swap pair">
+        <BaseListItem title="Pool">
+          {item.action_tokens && typeof item.action_tokens === 'string' && parseActionTokens(item.action_tokens)}
+        </BaseListItem>
+        <BaseListItem title="To">
           {item.action_tokens && typeof item.action_tokens === 'string' && parseActionTokens(item.action_tokens)}
         </BaseListItem>
       </Wrapper>
-      <SwapBtn
-        title={item.template}
-        uniType={dexs[item?.template].uniType}
-        currencyCode={currencyCode}
-        inputCurrency={{
-          address: '0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4', //TODO
-          symbol: 'DAI', //TODO,
-          decimals: 18, //TODO
-        }}
-        inputCurrencyAmount={item.action_amount}
-        maxInputBalance={tokenBalance}
-        outputCurrency={{
-          address: 'native', //TODO
-          symbol: 'ETH', //TODO
-          decimals: 18, //TODO
-        }}
-        routerAddress={dexs[item?.template].routerAddress}
-        wethAddress={WETH_ADDRESS}
-        //   amountOutFn= {"guessme.near/widget/ZKEVMSwap.swap-quoter"}
-        //   handlerV2="guessme.near/widget/ZKEVMSwap.swap-handler"
-        outputCurrencyAmount={1} //TODO
-        noPair={false}
-        token={token}
-        updateBalance={update}
-      />
+      <LiquidityBtn />
     </BaseModal>
   );
 };
 
-export default QuestSwapModal;
-
-{
-  /* <Widget
-        src="guessme.near/widget/ZKEVMWarmUp.quest-modal-swap-btn"
-        props={{
-
-          title: item.template,
-          add: false,
-          uniType: dexs[item?.template].uniType,
-          currencyCode,
-          inputCurrency: {
-            address: "0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4", //TODO
-            symbol: "", //TODO,
-            decimals: 8, //TODO
-          },
-          inputCurrencyAmount: item.action_amount,
-          maxInputBalance: balance,
-          outputCurrency: {
-            address: "native", //TODO
-            symbol: "", //TODO
-          },
-          routerAddress: dexs[item?.template].routerAddress,
-          wethAddress: "0x4f9a0e7fd2bf6067db6994cf12e4495df938e6e9",
-          amountOutFn: "guessme.near/widget/ZKEVMSwap.swap-quoter",
-          handlerV2: "guessme.near/widget/ZKEVMSwap.swap-handler",
-          outputCurrencyAmount: 1, //TODO
-          noPair: false,
-        }}
-      /> */
-}
+export default QuestLiquidityModal;

@@ -2,8 +2,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import SwapModal from '@/components/quest-swap-modal';
+import { QuestBridgeModal, QuestLiquidityModal, QuestSwapModal } from '@/components';
 import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -167,6 +166,8 @@ const WarmUp: NextPageWithLayout = () => {
   const [putMenu, setPutMenu] = useState(false);
   const { addAction } = useAddAction('all-in-one');
   const [showSwap, setShowSwap] = useState(false);
+  const [show, setShow] = useState(false);
+  const [show1, setShow1] = useState(false);
   useEffect(() => {
     const offset = putMenu ? 170 : 350;
 
@@ -203,9 +204,9 @@ const WarmUp: NextPageWithLayout = () => {
             <img src={myQuestIcon} width={'39'} alt="" />
             测试页面!!!!
           </div>
-          <button onClick={() => setShowSwap(true)}>one swap</button>
+          <button onClick={() => setShowSwap(true)}>swap</button>
           {showSwap ? (
-            <SwapModal
+            <QuestSwapModal
               item={{
                 account_id: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
                 account_info: 'bbf6003a-5e9b-4582-85ed-93b5086ca7c8',
@@ -220,6 +221,44 @@ const WarmUp: NextPageWithLayout = () => {
                 _partial: true,
               }}
               onCloseModal={() => setShowSwap(false)}
+            />
+          ) : null}
+          <button onClick={() => setShow(true)}>bridge</button>
+          {show ? (
+            <QuestBridgeModal
+              item={{
+                account_id: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
+                account_info: 'bbf6003a-5e9b-4582-85ed-93b5086ca7c8',
+                action_id: 1121,
+                action_title: 'Swap 1 DAI on QuickSwap',
+                action_tokens: '["DAI","ETH"]',
+                count_number: 3,
+                action_amount: 1,
+                template: 'Bridge',
+                timestamp: 1703125744,
+                _custom_generated_pk: false,
+                _partial: true,
+              }}
+              onCloseModal={() => setShow(false)}
+            />
+          ) : null}
+          <button onClick={() => setShow1(true)}>Liquidity</button>
+          {show1 ? (
+            <QuestLiquidityModal
+              item={{
+                account_id: '0xC25d79fc4970479B88068Ce8891eD9bE5799210D',
+                account_info: 'bbf6003a-5e9b-4582-85ed-93b5086ca7c8',
+                action_id: 1121,
+                action_title: 'Swap 1 DAI on QuickSwap',
+                action_tokens: '["DAI","ETH"]',
+                count_number: 3,
+                action_amount: 1,
+                template: 'Bridge',
+                timestamp: 1703125744,
+                _custom_generated_pk: false,
+                _partial: true,
+              }}
+              onCloseModal={() => setShow1(false)}
             />
           ) : null}
           <a href="/guessme.near/widget/ZKEVM.ExecuteRecords" className="execute-records">
