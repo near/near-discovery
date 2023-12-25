@@ -2,6 +2,7 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { memo, useState, useEffect } from 'react';
 
+import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useLayoutStore } from '@/stores/layout';
 import useActionCheck from '../../hooks/useActionCheck';
@@ -22,8 +23,21 @@ import {
   StyledItemTop,
   StyledMore,
 } from './styles';
+import Loading from '@/components/Icons/Loading';
 
-const ActionItem = ({ action, completed, onSuccess }: { action: any; completed: boolean; onSuccess: VoidFunction }) => {
+const ActionItem = ({
+  action,
+  completed,
+  userInfo,
+  config,
+  onSuccess,
+}: {
+  action: any;
+  completed: boolean;
+  userInfo: any;
+  config: any;
+  onSuccess: VoidFunction;
+}) => {
   const [open, setOpen] = useState(false);
   const [actionCompleted, setActionCompleted] = useState(completed);
   const router = useRouter();
@@ -33,6 +47,9 @@ const ActionItem = ({ action, completed, onSuccess }: { action: any; completed: 
     setActionCompleted(true);
     onSuccess();
   });
+
+  const { loading: binding, type, handleBind } = useAuthBind({ onSuccess });
+
   useEffect(() => {
     setActionCompleted(completed);
   }, [completed]);
@@ -147,6 +164,34 @@ const ActionItem = ({ action, completed, onSuccess }: { action: any; completed: 
                         router.push('/landing');
                         return;
                       }
+                      if (action.category.startsWith('twitter') && !userInfo.twitter.is_bind) {
+                        const state = (Date.now() + Math.random() * 10000).toFixed(0);
+                        sessionStorage.setItem('_auth_state', state);
+                        const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
+                        window.open(path, '_blank');
+                        sessionStorage.setItem('_auth_type', 'twitter');
+                        return;
+                      }
+                      if (action.category.startsWith('discord') && !userInfo.discord.is_bind) {
+                        const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
+                        window.open(path, '_blank');
+                        sessionStorage.setItem('_auth_type', 'discord');
+                        return;
+                      }
+                      if (action.category.startsWith('telegram') && !userInfo.telegram.is_bind) {
+                        if (window.Telegram) {
+                          window.Telegram.Login.auth(
+                            { bot_id: config.telegram_bot_id, request_access: true },
+                            (data: any) => {
+                              if (data) {
+                                handleBind('telegram', { ...data, id: data.id.toString() });
+                              }
+                            },
+                          );
+                        }
+                        return;
+                      }
+
                       if (action.source.includes('http')) {
                         window.open(action.source, '_blank');
                         return;
@@ -154,7 +199,7 @@ const ActionItem = ({ action, completed, onSuccess }: { action: any; completed: 
                       router.push('/' + action.source);
                     }}
                   >
-                    Got it
+                    {binding && <Loading />} Got it
                   </StyledExpandButton>
                 </StyledExpandButtonBox>
               )}
