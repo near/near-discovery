@@ -34,10 +34,10 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
         </LoadingWrapper>
       ) : (
         <>
-          {Object.values(quests)
-            .sort((a: any, b: any) => b.length - a.length)
-            .map((items) => {
-              const _quests = items as any[];
+          {Object.keys(quests)
+            .sort((a: any, b: any) => b - a)
+            .map((key) => {
+              const _quests = quests[key] as any[];
               return _quests?.length ? (
                 <div key={_quests[0].quest_category_name + Math.random()}>
                   <StyledSubTitle style={{ color: `var(--${_quests[0].quest_category_name}-color` }}>

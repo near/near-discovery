@@ -66,13 +66,13 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
           </StyledTag>
           <StyledTag>
             <span>{campaign.quests.total} Quests:</span>
-            {campaign.quests.total_category.map(
-              ({ total, quest_category_id }: { total: number; quest_category_id: number }) => (
+            {campaign.quests.total_category
+              .sort((a: any, b: any) => b.quest_category_id - a.quest_category_id)
+              .map(({ total, quest_category_id }: { total: number; quest_category_id: number }) => (
                 <span style={{ color: `var(--${categories[quest_category_id]?.name}-color` }} key={quest_category_id}>
                   {total} #{categories[quest_category_id]?.name}
                 </span>
-              ),
-            )}
+              ))}
           </StyledTag>
           <StyledTag>{formatPeriodDate(campaign.start_time, campaign.end_time)} UTC</StyledTag>
         </StyledTags>
