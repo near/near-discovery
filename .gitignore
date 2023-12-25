@@ -4,7 +4,8 @@
 /node_modules
 /.pnp
 .pnp.js
-.pnpm-store 
+.pnpm-store
+.pnpm-lock.yaml 
 
 # testing
 /coverage
