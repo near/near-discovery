@@ -43,7 +43,7 @@ export default function useDailyTask() {
       setClaiming(false);
       toast.success({ title: 'Dapped successfully' });
       tasks.some((task: any) => {
-        if (task.status === 'will_claim') {
+        if (task.status === 'claim') {
           task.status = 'claimed';
           return true;
         }

@@ -1,4 +1,5 @@
 import { memo, useState } from 'react';
+import useReport from '@/views/Landing/hooks/useReport';
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
 import InviteCodePanel from './components/InviteCode';
@@ -18,6 +19,7 @@ const QuestProfileView = () => {
   const [openCodes, setOpenCodes] = useState(false);
   const { list, totalRewards, reward } = useInviteList();
   const { info: userInfo = {} } = useUserInfo({ updater });
+  const { handleReport } = useReport();
   return (
     <>
       <StyledContainer>
@@ -30,6 +32,7 @@ const QuestProfileView = () => {
         <StyledPanelWrapper>
           <InviteCodePanel
             onInviteCodeClick={() => {
+              handleReport('invite');
               if (list.length > 0) setOpenCodes(true);
             }}
             total={list.length}
