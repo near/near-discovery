@@ -1,4 +1,4 @@
-import { sanitize } from 'dompurify';
+import { isValidAttribute } from 'dompurify';
 import { setupKeypom } from '@keypom/selector';
 import type { WalletSelector } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
@@ -38,6 +38,7 @@ import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
 import { networkId, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
+import { mapValues } from 'lodash';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
@@ -102,7 +103,14 @@ export default function VmInitializer() {
           ],
         }),
         customElements: {
-          Link: ({ href, to, ...rest }: any) => <Link href={sanitize(href ?? to)} {...rest} />,
+          Link: ({ to, href, ...rest }: { to: string | object | undefined; href: string | object }) => {
+            const cleanProps = mapValues({ to, href, ...rest }, (val: any, key: string) => {
+              if (!['to', 'href'].includes(key)) return val;
+              return typeof val === 'string' && isValidAttribute('a', 'href', val) ? val : 'about:blank';
+            });
+
+            return <Link {...cleanProps} />;
+          },
         },
         features: { enableComponentSrcDataKey: true },
       });
