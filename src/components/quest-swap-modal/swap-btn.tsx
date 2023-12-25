@@ -1,3 +1,4 @@
+import { useRequest } from 'ahooks';
 import Big from 'big.js';
 import { Contract, utils } from 'ethers';
 import type { ChangeEvent, FC } from 'react';
@@ -8,7 +9,7 @@ import useAccount from '@/hooks/useAccount';
 import useAddAction from '@/hooks/useAddAction';
 import useToast from '@/hooks/useToast';
 
-import { ALLOWANCE_ABI, APPROVE_ABI, ROUTER_ABI, WETH_ABI } from './const';
+import { ALLOWANCE_ABI, APPROVE_ABI, QUOTE_ABI, QuoteContractAddress, ROUTER_ABI, WETH_ABI } from './const';
 
 const SwapButton = styled.button`
   width: 100%;
@@ -145,7 +146,7 @@ const SwapBtn: FC<IProps> = ({
   const { account, provider, chainId } = useAccount();
   const toast = useToast();
   const { addAction } = useAddAction('all-in-one');
-  const [inputValue, setInputValue] = useState(null);
+  const [inputValue, setInputValue] = useState('');
   const [isDisabled, setIsDisabled] = useState(true);
   const [btnText, setBtnText] = useState('Swap');
   const [isApproved, setIsApproved] = useState(true);
@@ -165,35 +166,78 @@ const SwapBtn: FC<IProps> = ({
 
   useEffect(() => {
     inputRef?.current?.focus();
-
-    // TODO ?
-    if (noPair || Big(outputCurrencyAmount).lt('0.00000000001')) {
-      setIsDisabled(true);
-      setBtnText('Insufficient Liquidity');
-    }
   }, []);
 
   useEffect(() => {
-    if (Big(inputValue || 0).gt(Big(maxInputBalance || 0))) {
-      setIsDisabled(true);
-      setBtnText('Insufficient Balance');
-    } else {
-      if (!inputValue || inputValue == 0) {
+    (async () => {
+      if (Big(inputValue || 0).gt(Big(maxInputBalance || 0))) {
         setIsDisabled(true);
-        setBtnText('Swap');
+        setBtnText('Insufficient Balance');
       } else {
-        setIsDisabled(false);
-        setBtnText('Swap');
-        if (inputCurrency.address !== 'native') {
-          getAllowance();
+        if (!inputValue || inputValue === 0 || isNaN(inputValue)) {
+          setIsDisabled(true);
+          setBtnText('Swap');
+        } else {
+          const outAmount = await calcOutAmount();
+          // console.log(' out: ', outAmount);
+          if (Big(outAmount).lt('0.00000000001')) {
+            setIsDisabled(true);
+            setBtnText('Insufficient Liquidity');
+          } else {
+            setIsDisabled(false);
+            setBtnText('Swap');
+            if (inputCurrency.address !== 'native') {
+              getAllowance();
+            }
+          }
         }
       }
-    }
+    })();
   }, [inputValue, maxInputBalance]);
 
+  const calcOutAmount = async () => {
+    if (!inputCurrency.address || !outputCurrency.address || !inputValue) {
+      return 0;
+    }
+
+    if (wrapType) {
+      return inputValue;
+    }
+
+    const currentCurrency = inputCurrency;
+    const currentAmount = Big(inputValue).mul(0.995).toFixed(5);
+    const outCurrency = outputCurrency;
+
+    const iface = new utils.Interface(QUOTE_ABI);
+
+    const path = [
+      currentCurrency.address === 'native' ? wethAddress : currentCurrency.address,
+      outCurrency.address === 'native' ? wethAddress : outCurrency.address,
+    ];
+    const pathBytes = '0x' + path.map((address) => address.substring(2)).join('');
+    const inputs = [pathBytes, utils.parseUnits(currentAmount, currentCurrency.decimals)];
+    const encodedData = iface.encodeFunctionData('quoteExactInput', inputs);
+
+    try {
+      const data = await provider.call({
+        to: QuoteContractAddress,
+        data: encodedData,
+      });
+      const decodedData = iface.decodeFunctionResult('quoteExactInput', data);
+
+      const amountOut = decodedData[0];
+      // const fee = decodedData[1];
+      const estimate = Big(amountOut.toString()).div(Big(10).pow(outCurrency.decimals)).toFixed(18);
+
+      return Big(estimate).gt(0.01) ? estimate : Big(estimate).toFixed(10);
+    } catch (error) {
+      console.error('CALL ERROR: ', error);
+      return 0;
+    }
+  };
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    console.info(e.target.value, parseFloat(e.target.value), value);
+    const value = e.target.value ? Number(e.target.value) : '';
     setInputValue(value);
   };
 
@@ -201,12 +245,12 @@ const SwapBtn: FC<IProps> = ({
     // setBtnLoading(true);
     const TokenContract = new Contract(inputCurrency.address, ALLOWANCE_ABI, provider.getSigner());
     const allowanceRaw = await TokenContract.allowance(account, routerAddress);
-    console.info(
-      'allowanceRaw: ',
-      allowanceRaw,
-      allowanceRaw.toString(),
-      utils.formatUnits(allowanceRaw._hex, inputCurrency.decimals),
-    );
+    // console.info(
+    //   'allowanceRaw: ',
+    //   allowanceRaw,
+    //   allowanceRaw.toString(),
+    //   utils.formatUnits(allowanceRaw._hex, inputCurrency.decimals),
+    // );
     // setBtnLoading(false);
     const isApprove = !Big(utils.formatUnits(allowanceRaw._hex, inputCurrency.decimals)).lt(Big(inputValue || 0));
     setIsApproved(isApprove);

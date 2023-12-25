@@ -6,7 +6,38 @@ export const iconMap = {
   QuickSwap: 'https://ipfs.near.social/ipfs/bafkreibzpvczmrw2jvua3lsuwmvb7ldlztsszbo4dd6jagfsqkk6ub5opa',
   Balancer: 'https://ipfs.near.social/ipfs/bafkreieg6jpfhxra6c3dspiijg6fj5ga5dpqcn4vmtzdceqa3nheredq5m',
 };
-
+export const QUOTE_ABI = [
+  {
+    inputs: [
+      {
+        internalType: 'bytes',
+        name: 'path',
+        type: 'bytes',
+      },
+      {
+        internalType: 'uint256',
+        name: 'amountIn',
+        type: 'uint256',
+      },
+    ],
+    name: 'quoteExactInput',
+    outputs: [
+      {
+        internalType: 'uint256',
+        name: 'amountOut',
+        type: 'uint256',
+      },
+      {
+        internalType: 'uint16[]',
+        name: 'fees',
+        type: 'uint16[]',
+      },
+    ],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+];
+export const QuoteContractAddress = '0x55BeE1bD3Eb9986f6d2d963278de09eE92a3eF1D';
 export const WETH_ADDRESS = '0x4f9a0e7fd2bf6067db6994cf12e4495df938e6e9';
 export const WETH_ABI = [
   {

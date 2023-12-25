@@ -50,6 +50,7 @@
     "@web3-onboard/ledger": "^2.5.2",
     "@web3-onboard/react": "^2.8.13",
     "@web3-onboard/walletconnect": "^2.5.0",
+    "ahooks": "^3.7.8",
     "analytics-node": "^6.2.0",
     "big.js": "^6.2.1",
     "bn.js": "^5.2.1",
