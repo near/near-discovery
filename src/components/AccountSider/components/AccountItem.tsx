@@ -26,6 +26,9 @@ const Account = styled.div`
   font-size: 16px;
   font-weight: 700;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 const Address = styled.div`
   color: #fff;
@@ -47,20 +50,40 @@ const AccountItem = ({ showCopy = true, logoSize = 38 }: { showCopy?: boolean; l
     <StyledItem>
       {userInfo?.avatar ? <LogoImage src={userInfo.avatar} size={logoSize} /> : <Logo size={logoSize} />}
       <div>
-        <Account>{userInfo?.username ? userInfo?.username : ellipsAccount(account)}</Account>
-        <Address>
-          {userInfo?.username && <span>{ellipsAccount(account)} </span>}
-          {account && showCopy && (
-            <CopyButton
-              size={16}
-              text={account}
-              tooltipMessage="Copied"
-              tooltipTop={-31}
-              tooltipRight={-12}
-              tooltipFontSize={12}
-            />
-          )}
-        </Address>
+        <Account>
+          {userInfo?.username ? (
+            userInfo?.username
+          ) : (
+            <>
+              {ellipsAccount(account)}
+              {account && showCopy && (
+                <CopyButton
+                  size={16}
+                  text={account}
+                  tooltipMessage="Copied"
+                  tooltipTop={-31}
+                  tooltipRight={-12}
+                  tooltipFontSize={12}
+                />
+              )}
+            </>
+          )}{' '}
+        </Account>
+        {userInfo?.username && (
+          <Address>
+            <span>{ellipsAccount(account)} </span>
+            {account && showCopy && (
+              <CopyButton
+                size={16}
+                text={account}
+                tooltipMessage="Copied"
+                tooltipTop={-31}
+                tooltipRight={-12}
+                tooltipFontSize={12}
+              />
+            )}
+          </Address>
+        )}
       </div>
     </StyledItem>
   ) : (
