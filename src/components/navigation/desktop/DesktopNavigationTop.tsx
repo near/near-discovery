@@ -625,7 +625,7 @@ export const DesktopNavigationTop = () => {
               </Link>
             </div>
             <div className="menu-content-deep">
-              <Link href="/warmup" onClick={() => setShowMenuContent(false)}>
+              <Link href="/warmup " onClick={() => setShowMenuContent(false)}>
                 <div className="contenr-deep-item">
                   <div className="deep-item-left">
                     <img src={DeepDive} alt="" />

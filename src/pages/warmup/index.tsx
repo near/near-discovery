@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
+// eslint-disable-next-line simple-import-sort/imports
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -7,6 +9,10 @@ import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import InputSearch from './search';
+import HotDapps from './hot-dapps';
+import MyQuest from './my-quest';
+import QuestTrends from './quest-trends';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -153,13 +159,6 @@ const Page = styled.div`
   }
 `;
 
-const CardListWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 24px;
-`;
-
 const WarmUp: NextPageWithLayout = () => {
   const components = useBosComponents();
   const [innerWidth, setInnerWidth] = useState<number>();
@@ -210,80 +209,38 @@ const WarmUp: NextPageWithLayout = () => {
           </div>
         </div>
         <div style={{ marginBottom: '30px' }}>
-          <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.input-search" />
+          <InputSearch></InputSearch>
         </div>
         <div className="page-quest-wrapper">
           <div className="quest-title">
             <img src={myQuestIcon} width={'39'} alt="" />
             My Quest
           </div>
-          <a href="/guessme.near/widget/ZKEVM.ExecuteRecords" className="execute-records">
+          <a href="/warmup/my-quest/execute-records" className="execute-records">
             Execute Records
           </a>
         </div>
-        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.quest-list" componentProps={{ addAction }} />
+        <MyQuest />
+        {/* <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.quest-list" componentProps={{ addAction }} /> */}
         <div className="page-quest-wrapper">
           <div className="quest-title">
             <img src={trendIcon} width={'26'} alt="" />
             Quest Trends{' '}
           </div>
 
-          <a className="view-all" href="/guessme.near/widget/ZKEVM.QuestionList">
+          <a className="view-all" href="/warmup/quest-trends/question-list">
             <span>View All</span>
             {ArrowRight}
           </a>
         </div>
-        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.trend-list" />
+        <QuestTrends />
         <div className="page-quest-wrapper" style={{ marginTop: '40px' }}>
           <div className="quest-title">
             <img src={hotIcon} width={'26'} alt="" />
             Hot Polygon zkEVM DApps{' '}
           </div>
         </div>
-        <CardListWrapper>
-          <ComponentWrapperPage
-            src="guessme.near/widget/ZKEVMWarmUp.hot-dapp-card"
-            componentProps={{
-              background: 'linear-gradient(180deg, #7347DA 0%, #202445 100%)',
-              dappName: 'Polygon zkEVM All-in-one',
-              creator: 'bluebiu.near',
-              widgetSrc: 'bluebiu.near/widget/ZKEVM-all-in-one',
-              src: 'https://assets.ref.finance/images/zkevm-swap.png',
-            }}
-          />
-          <ComponentWrapperPage
-            src="guessme.near/widget/ZKEVMWarmUp.hot-dapp-card"
-            componentProps={{
-              background: 'linear-gradient(180deg, #8C36D8 0%, #24264C 100%)',
-              dappName: 'Polygon zkEVM Dex',
-              creator: 'guessme.near',
-              widgetSrc: 'guessme.near/widget/ZKEVMSwap.zkevm-swap',
-              src: 'https://assets.ref.finance/images/zkevm-swap.png',
-            }}
-          />
-          <ComponentWrapperPage
-            src="guessme.near/widget/ZKEVMWarmUp.hot-dapp-card"
-            componentProps={{
-              background: 'linear-gradient(180deg, #7347DA 0%, #202445 100%)',
-              dappName: 'zkEVM-bridge',
-              creator: 'guessme.near',
-              widgetSrc: 'guessme.near/widget/ZKEVMSwap.zkevm-bridge',
-              src: 'https://assets.ref.finance/images/zkevm-swap.png',
-            }}
-          />
-
-          <ComponentWrapperPage
-            src="guessme.near/widget/ZKEVMWarmUp.hot-dapp-card"
-            componentProps={{
-              background: 'linear-gradient(180deg, #895C5C 0%, #343149 100%)',
-              dappName: 'Gamma',
-              creator: 'guessme.near',
-              widgetSrc: 'guessme.near/widget/ZKEVM.GAMMA',
-
-              src: 'https://assets.ref.finance/images/zkevm-swap.png',
-            }}
-          />
-        </CardListWrapper>
+        <HotDapps />
       </Page>
     </Container>
   );
