@@ -82,4 +82,8 @@ export const StyledButton = styled.button`
   &:active {
     opacity: 0.8;
   }
+  &:disabled {
+    background: #7c7f96;
+    opacity: 0.5;
+  }
 `;

@@ -1,5 +1,5 @@
-import { AnimatePresence,motion } from 'framer-motion';
-import { memo } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { memo, useMemo, useState } from 'react';
 
 import { container } from '@/components/animation';
 import Loading from '@/components/Icons/Loading';
@@ -17,7 +17,20 @@ import {
   StyledTitle,
 } from './styles';
 
+const LABELS = ['All', 'In process', 'Completed'];
+
 export const QuestPanel = ({ title, info, list, loading }: any) => {
+  const [type, setType] = useState('All');
+
+  const filteredList = useMemo(() => {
+    return list.filter((item: any) => {
+      if (type === 'All') return true;
+      if (type === 'In process') return item.participation_status === 'in_process';
+      if (type === 'Completed') return item.participation_status === 'completed';
+      return true;
+    });
+  }, [list, type]);
+
   return (
     <StyledContainer>
       <StyledHeader>
@@ -25,9 +38,21 @@ export const QuestPanel = ({ title, info, list, loading }: any) => {
           {title} ({list.length})
         </StyledTitle>
         <StyledLabels>
-          <StyledLabel>In process ({info.inprocess})</StyledLabel>
-          <StyledLabel>Completed ({info.completed})</StyledLabel>
-          <StyledLabel>Unclaimed ({info.unclaimed})</StyledLabel>
+          {LABELS.map((label) => (
+            <StyledLabel
+              onClick={() => {
+                setType(label);
+              }}
+              $active={label === type}
+              key={label}
+              whileTap={{ opacity: 0.6 }}
+              whileHover={{ opacity: 0.8 }}
+            >
+              {label}
+              {label === 'In process' && `(${info.inprocess})`}
+              {label === 'Completed' && `(${info.completed})`}
+            </StyledLabel>
+          ))}
         </StyledLabels>
       </StyledHeader>
       {loading ? (
@@ -37,7 +62,7 @@ export const QuestPanel = ({ title, info, list, loading }: any) => {
       ) : list.length > 0 ? (
         <>
           <StyledQuests>
-            {list.map((item: any) => (
+            {filteredList.map((item: any) => (
               <QuestItem
                 key={item.id}
                 quest={{ ...item, live: Date.now() < item.end_time && Date.now() > item.start_time }}

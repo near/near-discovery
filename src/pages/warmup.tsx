@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -20,33 +21,12 @@ const ArrowRight = (
     />
   </svg>
 );
-const myQuestImgUrl = 'https://ipfs.near.social/ipfs/bafkreied733todmtzbzvnx3cwzhggf3vnlxriiv7ukoqk4nonay5cgx3fm';
-
-const trendImgUrl = 'https://ipfs.near.social/ipfs/bafkreiclfd6ivmfsw75gyxnhncz7q5d6r3utji2ew5we47eru6bsjt6s64';
-
-const hotImgUrl = 'https://ipfs.near.social/ipfs/bafkreida3fifpbsbadyny242ol6tmha2lpl32kwnxthzeokwqh3c5n733y';
 const newUIbg = 'https://ipfs.near.social/ipfs/bafkreifua4bxuylicypouz6ng3pstjam4zvr3nifvchutndwlo5zuklxtu';
 const zkEVMIcon = 'https://assets.dapdap.net/images/bafkreie5b65e7cp7jtvhrwgibvoqpf7ekj4v7jgo2egjr3qmfsl3p4ulam.svg';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
 const hotIcon = 'https://assets.dapdap.net/images/bafkreiewzowjm4fk7m5x3h32k6b4hpcdvwg23wndqpo5frzjiqr35xwnd4.png';
 const trendIcon = 'https://assets.dapdap.net/images/bafkreid7uzfypfjyz7lvfjwpxyq5ikjxvzxf66vibmfujqhiafhwrcg2tm.png';
 const myQuestIcon = 'https://assets.dapdap.net/images/bafkreigdmz5vpe5h2ifmenv5fklls4jay7smqvjw7u35e6xaclkwa3te6e.png';
-const topImg = 'https://ipfs.near.social/ipfs/bafkreih4g6tq57itr2w3qy6gtrix6adxv3dr6ilgqrofqm7jr67gmpitju';
-
-const trendsImg = 'https://ipfs.near.social/ipfs/bafkreiajqyqbq3egqtu6ddznvl6caghpjffulhfia4f6bsmmlo76t5qosq';
-
-const closeIcon = 'https://ipfs.near.social/ipfs/bafkreiay565opvpvtxexcxkfo7cif3ecn4znoarnutcvhjggiczjpuvbbq';
-
-const titleIcon = (
-  <svg width="193" height="16" viewBox="0 0 193 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M2 14.0001C36 10.5001 112.6 3.20006 147 2.00006C190 0.500062 199.5 4.50006 185 8.00006"
-      stroke="#E9F456"
-      stroke-width="3"
-      stroke-linecap="round"
-    />
-  </svg>
-);
 
 const Container = styled.div`
   margin: 0 8%;
@@ -78,15 +58,16 @@ const Page = styled.div`
   width: 100%;
   gap: 28px;
   color: white;
-  padding: 32px 120px;
+  padding: 0 120px 60px 120px;
   background-image: url(${newUIbg});
   background-repeat: no-repeat;
   background-size: 100%;
   font-family: 'Gantari';
+  z-index: 1;
   .page-head {
     display: flex;
     padding-top: 50px;
-    margin-bottom: 24px;
+    /* margin-bottom: 24px; */
     .details-body-left {
       .body-left-detailed {
         display: flex;
@@ -122,7 +103,7 @@ const Page = styled.div`
     }
   }
   .page-quest-wrapper {
-    margin-top: 30px;
+    /* margin-top: 30px; */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -172,72 +153,18 @@ const Page = styled.div`
   }
 `;
 
-const Seperator = styled.div`
-  border: 1px solid #292c42;
-  height: 1px;
-  width: 100%;
-  margin: 20px 0px;
-`;
-
 const CardListWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
   gap: 24px;
 `;
-const MenuContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  .item {
-    flex-grow: 1;
-    text-align: center;
-    padding: 10px 0;
-    font-weight: 500;
-    font-size: 16px;
-    color: #7e8a93;
-    cursor: pointer;
-    margin-bottom: 2px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    .item-img {
-      width: 100%;
-      height: 42px;
-      img {
-        width: 40px;
-        height: 40px;
-      }
-    }
-  }
-  .item.active {
-    color: #fff;
-    position: relative;
-  }
-  .item.active::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 3px;
-    background-color: #e9f456;
-    border-radius: 5px;
-  }
-  .item.disable {
-    cursor: not-allowed;
-  }
-  .icon {
-    width: 26px;
-  }
-`;
 
 const WarmUp: NextPageWithLayout = () => {
   const components = useBosComponents();
-
   const [innerWidth, setInnerWidth] = useState<number>();
-
   const [putMenu, setPutMenu] = useState(false);
+  const { addAction } = useAddAction('all-in-one');
   useEffect(() => {
     const offset = putMenu ? 170 : 350;
 
@@ -256,9 +183,7 @@ const WarmUp: NextPageWithLayout = () => {
     const getPutMenu = (e: any) => {
       setPutMenu(e.detail);
     };
-
     window.addEventListener('changePutEvent', getPutMenu);
-
     return () => window.removeEventListener('setItemEvent', getPutMenu);
   }, []);
   return (
@@ -266,7 +191,7 @@ const WarmUp: NextPageWithLayout = () => {
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <Link href="#">Deep Dive</Link>
+        Deep Dive
         {arrow}
         <span>Polygon zkEVM</span>
       </BreadCrumbs>
@@ -284,7 +209,9 @@ const WarmUp: NextPageWithLayout = () => {
             </div>
           </div>
         </div>
-        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.input-search" />
+        <div style={{ marginBottom: '30px' }}>
+          <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.input-search" />
+        </div>
         <div className="page-quest-wrapper">
           <div className="quest-title">
             <img src={myQuestIcon} width={'39'} alt="" />
@@ -294,9 +221,7 @@ const WarmUp: NextPageWithLayout = () => {
             Execute Records
           </a>
         </div>
-        {/* <MyQuestPage /> */}
-        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.quest-list" />
-        <Seperator />
+        <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.quest-list" componentProps={{ addAction }} />
         <div className="page-quest-wrapper">
           <div className="quest-title">
             <img src={trendIcon} width={'26'} alt="" />
@@ -309,7 +234,7 @@ const WarmUp: NextPageWithLayout = () => {
           </a>
         </div>
         <ComponentWrapperPage src="guessme.near/widget/ZKEVMWarmUp.trend-list" />
-        <div className="page-quest-wrapper">
+        <div className="page-quest-wrapper" style={{ marginTop: '40px' }}>
           <div className="quest-title">
             <img src={hotIcon} width={'26'} alt="" />
             Hot Polygon zkEVM DApps{' '}
@@ -355,17 +280,6 @@ const WarmUp: NextPageWithLayout = () => {
               creator: 'guessme.near',
               widgetSrc: 'guessme.near/widget/ZKEVM.GAMMA',
 
-              src: 'https://assets.ref.finance/images/zkevm-swap.png',
-            }}
-          />
-
-          <ComponentWrapperPage
-            src="guessme.near/widget/ZKEVMWarmUp.hot-dapp-card"
-            componentProps={{
-              background: 'linear-gradient(180deg, #4A80A7 0%, #343149 100%)',
-              dappName: '0vix',
-              creator: 'bluebiu.near',
-              widgetSrc: 'bluebiu.near/widget/0vix.Lending',
               src: 'https://assets.ref.finance/images/zkevm-swap.png',
             }}
           />

@@ -43,8 +43,10 @@ export const StyledPanel = styled.div`
   border: 1px solid #21232a;
   background: rgba(22, 24, 29, 0.5);
   backdrop-filter: blur(3px);
-  padding: 24px 20px;
+  padding: 20px;
   width: 50%;
+  height: 200px;
+  box-sizing: border-box;
 `;
 
 export const StyledPanelHeader = styled.div`
@@ -84,6 +86,7 @@ export const StyledPanelFriendsTitle = styled.div`
 export const JoinedAccounts = styled.div`
   display: flex;
   align-items: center;
+  height: 30px;
   .more {
     margin-right: -10px;
   }

@@ -1,7 +1,7 @@
 import { memo, useMemo, useState } from 'react';
 
 import useCampaignList from '@/views/Quest/hooks/useCampaignList';
-import useCategoryList from '@/views/Quest/hooks/useCategoryDappList';
+import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useQuestList from '@/views/Quest/hooks/useQuestList';
 
 import Yours from '../Quest/components/Yours';
@@ -10,15 +10,16 @@ import Quests from './components/Quests';
 import Swiper from './components/Swiper';
 import Tabs from './components/Tabs';
 import useLeaderboard from './hooks/useLeaderboard';
-import useUserInfo from './hooks/useUserInfo';
+import useUserInfo from '../../hooks/useUserInfo';
 import { StyledContainer } from './styles';
 import type { Tab } from './types';
 
 const QuestLeaderboardView = () => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
-  const { loading, list, page, info, maxPage, handlePageChange } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({});
+  const [updater, setUpdater] = useState(1);
+  const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: 'leaderboard', updater });
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
@@ -28,10 +29,10 @@ const QuestLeaderboardView = () => {
       .filter((campaign: any) => campaign.banner)
       .map((campaign) => ({ banner: campaign.banner, link: campaign.link }));
   }, [campaigns]);
-  console.log('campaigns', campaigns);
+
   return (
     <StyledContainer>
-      <Yours />
+      <Yours info={userInfo} />
       {!!banners.length && <Swiper banners={banners} />}
       <Tabs
         current={tab}
@@ -41,12 +42,28 @@ const QuestLeaderboardView = () => {
       />
 
       {tab === 'leaderboard' && (
-        <Leaderboard id={id} {...{ loading, list, page, info, maxPage, handlePageChange, userLoading, userInfo }} />
+        <Leaderboard
+          id={id}
+          {...{
+            loading,
+            list,
+            page,
+            info,
+            maxPage,
+            handlePageChange,
+            userLoading,
+            userInfo,
+            handleRefresh: () => {
+              handleRefresh();
+              setUpdater(Date.now());
+            },
+          }}
+        />
       )}
       {tab === 'quests' && (
         <Quests
           id={id}
-          {...{ campaignLoading, campaigns, questingLoading, quests, categoryLoading, categories }}
+          {...{ campaignLoading, campaigns, questingLoading, quests, categoryLoading, categories, userInfo }}
           onLoad={(id: string) => {
             setId(id);
           }}

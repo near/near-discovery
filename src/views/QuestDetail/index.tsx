@@ -4,6 +4,7 @@ import { memo } from 'react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
+import useUserInfo from '@/hooks/useUserInfo';
 
 import Yours from '../Quest/components/Yours';
 import Actions from './components/Actions';
@@ -16,11 +17,12 @@ const QuestDetailView = () => {
   const searchParams = useSearchParams();
   const { loading, info } = useQuestInfo(searchParams.get('id') || '');
   const { loading: categoryLoading, categories } = useCategoryList();
+  const { info: userInfo = {} } = useUserInfo({ updater: 1 });
   return (
     <StyledContainer>
       <Breadcrumb
         navs={[
-          { name: 'Quest Campaign', path: '/quest' },
+          { name: 'Quest Campaign', path: '/quest/leaderboard' },
           { name: 'Quest detail', path: '/quest/detail' },
         ]}
       />
@@ -37,13 +39,14 @@ const QuestDetailView = () => {
                 rewards={info.quest.reward}
                 completed={info.quest.action_completed}
                 id={searchParams.get('id') || ''}
+                userInfo={userInfo}
               />
             </StyledTopBox>
             <Recommends campaignId={info.quest.quest_campaign_id} />
           </>
         )
       )}
-      <Yours />
+      <Yours info={userInfo} />
     </StyledContainer>
   );
 };

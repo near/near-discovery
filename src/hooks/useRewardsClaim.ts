@@ -18,6 +18,7 @@ export default function useRewardsClaim(onSuccess: VoidFunction) {
       const result = await post(`${QUEST_PATH}/api/quest/claim`, {
         id,
       });
+      if (result.code !== 0) throw new Error(result.msg);
       toast.dismiss(toastId);
       toast.success({
         title: `Claimed successfully`,

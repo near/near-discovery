@@ -19,10 +19,12 @@ import {
   StyledHeader,
   StyledTitle,
   StyledPanel,
+  StyledTips,
 } from './styles';
 
 const DailyTask = () => {
-  const { loading, tasks, claiming, claim } = useDailyTask();
+  const { loading, tasks, claiming, consecutiveDays, currentDay, claim } = useDailyTask();
+
   return (
     <StyledPanel>
       <StyledContainer>
@@ -30,11 +32,16 @@ const DailyTask = () => {
           <StyledContent>
             <StyledDaysWrapper>
               <StyledHeader>
-                <StyledTitle>
-                  Signed in for <span style={{ color: '#EBF479' }}>1</span> consecutive days
-                </StyledTitle>
+                <div>
+                  <StyledTitle>
+                    Signed in for{' '}
+                    <span style={{ color: '#EBF479', fontSize: '32px', fontWeight: 700 }}>{consecutiveDays}</span>{' '}
+                    consecutive days
+                  </StyledTitle>
+                  <StyledTips>Starts from 00:00 UTC</StyledTips>
+                </div>
                 <StyledButton
-                  disabled={claiming}
+                  disabled={currentDay.status === 'claimed' || claiming}
                   onClick={() => {
                     claim();
                   }}
@@ -43,9 +50,10 @@ const DailyTask = () => {
                   <span style={{ marginLeft: '4px' }}>Dap me up!</span>
                 </StyledButton>
               </StyledHeader>
+
               <StyledDays>
                 {tasks.map((task: any) => (
-                  <StyledDay key={task.day} $disabled={task.status === 'claimed'}>
+                  <StyledDay key={task.day} style={{ opacity: task.day === currentDay.day ? 1 : 0.6 }}>
                     <StyledDayHeader>Day{task.day}</StyledDayHeader>
                     <StyledDayIcon>
                       {task.status === 'claimed' && (

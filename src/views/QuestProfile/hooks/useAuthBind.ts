@@ -45,8 +45,8 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
           params = data;
         }
         const result = await post(`${QUEST_PATH}${config.path}`, params);
-        toast.dismiss(toastId);
         if (result.code !== 0) throw new Error(result.msg);
+        toast.dismiss(toastId);
         toast.success({
           title: `${config.label} bind successfully`,
         });

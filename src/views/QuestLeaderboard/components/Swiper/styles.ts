@@ -46,6 +46,7 @@ export const StyledImage = styled.img`
   border-radius: 32px;
   width: 100%;
   height: 320px;
+  cursor: pointer;
 `;
 
 export const StyledImagesBox = styled.div`

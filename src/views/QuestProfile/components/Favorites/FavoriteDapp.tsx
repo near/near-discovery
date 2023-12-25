@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
+import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 import {
   StyledDapp,
@@ -15,24 +16,41 @@ import {
   StyledHeader,
 } from './styles';
 
-const FavoriteDapp = ({ name, description, route, id }: any) => {
+const FavoriteDapp = ({ name, description, route, logo, category_ids, id }: any) => {
   const router = useRouter();
+  const { categories } = useCategoryDappList();
+
+  const categoryNames = useMemo(() => {
+    const names: { id: number; name: string }[] = [];
+    category_ids.forEach((id: number) => {
+      const item = categories[id];
+      if (item) {
+        names.push({
+          id: item.id,
+          name: item.name,
+        });
+      }
+    });
+    return names;
+  }, [categories]);
   return (
     <StyledDapp>
-      <StyledDappIcon />
+      <StyledDappIcon src={logo} />
       <StyledDappInfo>
         <StyledHeader>
           <StyledDappTitle>{name}</StyledDappTitle>
-          <StyledDappCoins>
+          {/* <StyledDappCoins>
             {Coin}
             <span>10</span>
-          </StyledDappCoins>
+          </StyledDappCoins> */}
         </StyledHeader>
         <StyledDappDesc>{description}</StyledDappDesc>
         <StyledDappTags>
-          <StyledDappTag className="dexs">Dexes</StyledDappTag>
-          <StyledDappTag className="bridge">Bridge</StyledDappTag>
-          <StyledDappTag className="liquidity">Liquidity</StyledDappTag>
+          {categoryNames.map((category: any) => (
+            <StyledDappTag className={category.name} key={category.id}>
+              {category.name}
+            </StyledDappTag>
+          ))}
         </StyledDappTags>
       </StyledDappInfo>
       <StyledDappButtons>

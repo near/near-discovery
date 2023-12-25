@@ -16,6 +16,7 @@ export default function useRewardsClaim() {
     });
     try {
       const result = await post(`${QUEST_PATH}/api/invite/claim`, {});
+      if (result.code !== 0) throw new Error(result.msg);
       toast.dismiss(toastId);
       toast.success({
         title: `Claimed successfully`,

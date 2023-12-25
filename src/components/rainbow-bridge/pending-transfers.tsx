@@ -1,6 +1,6 @@
 import { act, checkStatusAll, get, type Transfer } from '@near-eth/client';
 import { Status } from '@near-eth/client/dist/statuses';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import { SMALL_SCREEN } from '../near/NearStyleVar';
@@ -295,49 +295,54 @@ const PendingTransfers = (props: {
         filter: (t: Transfer) =>
           (t.status === Status.ACTION_NEEDED || t.status === Status.IN_PROGRESS) && t.completedStep !== null,
       });
-
-      console.log('check status end');
+      console.log('check status end', list);
 
       setPendingList(list);
     });
   }, [refreshTrigger]);
 
-  const displayList = pendingList.map((item: any) => {
-    const fromChain = item.type.includes('sendToEthereum') ? 'near' : 'eth';
-    const tx = item?.burnHashes?.[0] || item?.lockHashes?.[0];
+  const displayList = useMemo(() => {
+    return pendingList.map((item: any) => {
+      const fromChain = item.type.includes('sendToEthereum') ? 'near' : 'eth';
+      const tx = item?.burnHashes?.[0] || item?.lockHashes?.[0];
 
-    const token = tokenList.find(
-      (token) => token.ethereum_address == item.sourceToken || token.near_address === item.sourceToken,
-    );
+      const token = tokenList.find(
+        (token) => token.ethereum_address == item.sourceToken || token.near_address === item.sourceToken,
+      );
 
-    return {
-      ...item,
-      tokenAddress: item.sourceToken,
-      symbol: item.symbol,
-      startTime: formateDate(item.startTime),
-      fromChainIcon: item.type.includes('sendToEthereum') ? nearIcon : ethIcon,
-      toChainIcon: item.type.includes('sendToEthereum') ? ethIcon : nearIcon,
-      tx: item?.burnHashes?.[0] || item?.lockHashes?.[0],
-      txLink: fromChain == 'eth' ? `https://etherscan.io/tx/${tx}` : `https://nearblocks.io/txns/${tx}`,
-      amount: shrinkToken(item.amount, item.decimals).toFixed(),
-      action:
-        item.status === 'in-progress' ? (
-          <div className="state-processing action-state"> Processing </div>
-        ) : (
-          <div
-            className="state-need-action action-state"
-            onClick={() => {
-              act(item.id).then(() => {
-                setRefreshTrigger(!refreshTrigger);
-              });
-            }}
-          >
-            Finalize
-          </div>
+      return {
+        ...item,
+        tokenAddress: item.sourceToken,
+        symbol: item.symbol,
+        startTime: formateDate(item.startTime),
+        fromChainIcon: item.type.includes('sendToEthereum') ? nearIcon : ethIcon,
+        toChainIcon: item.type.includes('sendToEthereum') ? ethIcon : nearIcon,
+        tx: item?.burnHashes?.[0] || item?.lockHashes?.[0],
+        txLink: fromChain == 'eth' ? `https://etherscan.io/tx/${tx}` : `https://nearblocks.io/txns/${tx}`,
+        amount: shrinkToken(item.amount, item.decimals).toFixed(),
+        action: (
+          <>
+            {item.status === 'in-progress' && <div className="state-processing action-state"> Processing </div>}
+            {item.status === 'action-needed' && (
+              <div
+                className="state-need-action action-state"
+                onClick={() => {
+                  act(item.id)
+                    .then(() => {
+                      setRefreshTrigger(!refreshTrigger);
+                    })
+                    .catch(() => {});
+                }}
+              >
+                Finalize
+              </div>
+            )}
+          </>
         ),
-      tokenMeta: token,
-    };
-  });
+        tokenMeta: token,
+      };
+    });
+  }, [pendingList]);
 
   if (!bothConnected || pendingList.length == 0) return <div></div>;
 
@@ -349,8 +354,8 @@ const PendingTransfers = (props: {
       <div className="transfer-list-wrapper">
         {displayList.map((item) => {
           return (
-            <>
-              <div className="transfer-list-item" key={item.startTime}>
+            <div key={item.tx}>
+              <div className="transfer-list-item">
                 <div className="source-item">
                   <img src={item.tokenMeta?.icon} className="source-item-icon" alt="" />
 
@@ -377,7 +382,7 @@ const PendingTransfers = (props: {
                   {item.action}
                 </div>
               </div>
-              <div className="transfer-list-item-mobile" key={item.startTime}>
+              <div className="transfer-list-item-mobile">
                 {item.action}
 
                 <div className="chain-flow">
@@ -405,7 +410,7 @@ const PendingTransfers = (props: {
                   </a>
                 </div>
               </div>
-            </>
+            </div>
           );
         })}
       </div>

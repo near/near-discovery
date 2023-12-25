@@ -10,6 +10,7 @@ export const StyledContainer = styled.div`
   gap: 30px;
   align-items: center;
   width: 100%;
+  height: 100%;
 `;
 
 export const StyledHeader = styled.div`
@@ -39,19 +40,17 @@ export const StyledDays = styled.div`
   display: flex;
   gap: 10px;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 14px;
   width: 100%;
 `;
 
-export const StyledDay = styled.div<{ $disabled: boolean }>`
+export const StyledDay = styled.div`
   flex-grow: 1;
   height: 80px;
   flex-shrink: 0;
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.3);
-
-  ${({ $disabled }) => $disabled && `opacity: 0.6`}
 `;
 
 export const StyledDayHeader = styled.div`
@@ -87,4 +86,10 @@ export const StyledFists = styled.div`
   background-image: url(/images/quest/fists.png);
   background-size: 100%;
   background-repeat: no-repeat;
+`;
+
+export const StyledTips = styled.div`
+  color: #979abe;
+  font-size: 12px;
+  font-weight: 400;
 `;

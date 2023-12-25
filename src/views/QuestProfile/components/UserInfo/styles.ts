@@ -124,7 +124,7 @@ export const StyledSocialItem = styled(motion.button)`
   align-items: center;
   box-sizing: border-box;
   gap: 8px;
-  color: #979abe;
+  color: #373a53;
   font-size: 14px;
   font-weight: 700;
   line-height: normal;

@@ -562,7 +562,7 @@ const Content = styled.div`
       display: flex;
       overflow: hidden;
       .learning-content-item {
-        min-width: 539px;
+        /* min-width: 539px; */
         background: #21232ae5;
         border-radius: 20px;
         padding: 28px 26px;
@@ -788,34 +788,6 @@ const Tag = styled.div`
     font-size: 12px;
     display: flex;
   }
-  .Swap {
-    color: rgba(172, 252, 237, 1);
-    border: 1px solid rgba(172, 252, 237, 1);
-  }
-  .Bridge {
-    color: rgba(227, 233, 157, 1);
-    border: 1px solid rgba(227, 233, 157, 1);
-  }
-  .DEX {
-    color: rgba(172, 252, 237, 1);
-    border: 1px solid rgba(172, 252, 237, 1);
-  }
-  .Lending {
-    color: rgba(173, 255, 181, 1);
-    border: 1px solid rgba(173, 255, 181, 1);
-  }
-  .Liquidity {
-    color: #aad6ff;
-    border: 1px solid #aad6ff;
-  }
-  .Staking {
-    color: rgba(193, 191, 255, 1);
-    border: 1px solid rgba(193, 191, 255, 1);
-  }
-  .Yield {
-    color: rgba(249, 181, 230, 1);
-    border: 1px solid rgba(249, 181, 230, 1);
-  }
 `;
 
 const Gold = styled.div`
@@ -932,7 +904,7 @@ const HomeContent: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (carouselRef.current) {
-      const page = Math.ceil(carouselRef.current.clientWidth / 539);
+      const page = Math.ceil(carouselRef.current.clientWidth / 0.3);
       setLearningPage(page);
     }
     // if (carouselRef.current && currentIndex === items.length - 1) {
@@ -957,7 +929,7 @@ const HomeContent: NextPageWithLayout = () => {
   };
 
   const handleRightClick = () => {
-    console.log('currentIndex', currentIndex, learningPage);
+    // console.log('currentIndex', currentIndex, learningPage);
     if (currentIndex < learningPage - 1) setCurrentIndex(currentIndex + 1);
   };
 
@@ -1002,18 +974,13 @@ const HomeContent: NextPageWithLayout = () => {
             <div className="works-list-arrow">
               <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
             </div>
-            <div
-              className="works-list-item"
-              onClick={() => {
-                router.push('/quest/leaderboard');
-              }}
-            >
+            <div className="works-list-item">
               <h1>Earn Rewards</h1>
               <p>
                 Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the
                 way.
               </p>
-              <a href="#">View</a>
+              <Link href="/quest/leaderboard">View</Link>
               <div className="list-item-img">
                 <img src="https://assets.dapdap.net/images/home-itworks-earn.png" alt="" />
               </div>
@@ -1320,14 +1287,14 @@ const HomeContent: NextPageWithLayout = () => {
               // onTransitionEnd={handleTransitionEnd}
               style={{
                 display: 'flex',
-                width: `${items.length * 539}px`,
+                width: `${items.length * 35}%`,
                 transition: '0.5s',
-                transform: `translateX(-${currentIndex * 539}px)`,
+                transform: `translateX(-${currentIndex * 35}%)`,
                 willChange: 'transform',
               }}
             >
               {items.map((item, index) => (
-                <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '539px' }}>
+                <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '35%' }}>
                   <div className="content-item-img">
                     <img src={item.icon} alt="" />
                   </div>

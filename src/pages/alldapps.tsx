@@ -3,7 +3,7 @@ import axios from 'axios';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import chains from '@/config/chains';
@@ -20,9 +20,7 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const carouselbg = 'https://assets.dapdap.net/images/bafybeicoasvzxskocvjpdzanvpzip2zoortjo7gttbrmqnuf3vsenvhvty.svg';
 const carouseicon = 'https://assets.dapdap.net/images/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e.svg';
-const syncIcon = 'https://assets.dapdap.net/images/bafkreihzr73on5kcq3zgwjg3jwumiyutxm3np77sri4xfmc5dhtaqmwi3y.svg';
 
 const AllDappsPage = styled.div`
   color: #ffffff;
@@ -51,7 +49,41 @@ const AllDappsPage = styled.div`
     /* padding: 20px 0; */
     .page-netWork-list {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      width: 100%;
+      .netWork-list-conter {
+        display: flex;
+        flex-wrap: wrap;
+        width: 84%;
+      }
+      .netWork-list-btn {
+        width: 12%;
+        border: 1px solid rgba(55, 58, 83, 1);
+        height: 32px;
+        font-size: 14px;
+        font-weight: 500;
+        text-align: center;
+        background-color: rgb(45, 48, 58);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        cursor: pointer;
+        .list-btn-img {
+          width: 8px;
+          margin-left: 8px;
+          transform: rotate(270deg);
+        }
+        .rotate {
+          transform: rotate(90deg);
+        }
+      }
+      .netWork-list-line {
+        width: 1px;
+        height: 30px;
+        margin: 0 20px;
+        background-color: rgb(45, 48, 58);
+      }
       .netWork-list-item {
         margin-right: 12px;
         margin-bottom: 12px;
@@ -76,6 +108,15 @@ const AllDappsPage = styled.div`
         background: rgba(235, 244, 121, 1);
         color: rgba(24, 26, 39, 1);
       }
+      .none {
+        display: none;
+      }
+      .block {
+        display: block;
+      }
+    }
+    .expanded {
+      overflow: hidden;
     }
     .page-function-list {
       display: flex;
@@ -166,7 +207,7 @@ const AllDappsPage = styled.div`
     display: flex;
     flex-wrap: wrap;
     position: relative;
-    margin-bottom: 100px;
+    /* margin-bottom: 100px; */
 
     .tab-content-item {
       margin: 30px 20px 0 0;
@@ -397,6 +438,46 @@ const Title = styled.div`
   color: rgba(151, 154, 190, 1);
 `;
 
+const Pagination = styled.div`
+  margin-top: 30px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  .pagination-item {
+    width: 55px;
+    height: 30px;
+    border-radius: 16px;
+    border: 1px solid rgba(55, 58, 83, 1);
+    text-align: center;
+    line-height: 25px;
+    cursor: pointer;
+    img {
+      width: 6px;
+      height: 12px;
+    }
+    &:hover {
+      background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+    }
+  }
+  .pagination-right {
+    img {
+      transform: rotate(180deg);
+    }
+  }
+  .pagination-number {
+    font-family: Gantari;
+    font-size: 14px;
+    font-weight: 400;
+    color: rgba(151, 154, 190, 1);
+    cursor: pointer;
+  }
+  .active {
+    color: rgba(255, 255, 255, 1);
+  }
+`;
+
 const Carousel = React.memo(
   ({ active, children, style }: { active: boolean; children: React.ReactNode; style?: React.CSSProperties }) => {
     return (
@@ -409,7 +490,7 @@ const Carousel = React.memo(
 
 const AllDappsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
-  const [dappList, setDappList] = useState<any[]>([]);
+  const [dappList, setDappList] = useState<any>(null);
   const [carouselList, setCarouselList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
@@ -417,6 +498,83 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const pathname = usePathname();
   const router = useRouter();
   const { open } = useDappOpen();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [listHeight, setListHeight] = useState('auto');
+  const listRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedFunction, setSelectedFunction] = useState<string[]>([]);
+  const [isFavoriteList, setIsFavoriteList] = useState<any[]>([]);
+  const [isFavoriteTab, setIsFavoriteTab] = useState(false);
+  const [selectedTab, setSelectedTab] = useState(() => {
+    return 'token';
+  });
+  const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
+  const [selectedMenu, setSelectedMenu] = useState('');
+
+  function getCategoryNames(dappCategories: any, categoryArray: any[]) {
+    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
+    return categories.map((categoryItem: any) => {
+      const categoryId =
+        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
+      const category = categoryArray.find((c: any) => c.id === categoryId);
+      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
+    });
+  }
+  const handleCarouselClick = useCallback(() => {
+    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.filter((dapp) => dapp.recommend === true).length);
+  }, [carouselList.filter((dapp) => dapp.recommend === true).length]);
+  const handleTabClick = (path: string) => {
+    if (path === 'favorites') {
+      setIsFavoriteTab(true);
+    } else {
+      setIsFavoriteTab(false);
+    }
+    setSelectedTab(path);
+  };
+  const handleMenuClick = (path: string) => {
+    const _selectedMenu = selectedMenu === path ? '' : path;
+    const params = new URLSearchParams(searchParams);
+    if (_selectedMenu) {
+      params.set('network', _selectedMenu);
+    } else {
+      params.delete('network');
+    }
+    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+  };
+  const handleFunctionClick = (functionType: any) => {
+    const id = functionType.id;
+    let _selectedFunction: string[] = [];
+    if (selectedFunction.includes(String(id))) {
+      _selectedFunction = selectedFunction.filter((type) => type !== String(id));
+    } else {
+      _selectedFunction = [...selectedFunction, String(id)];
+    }
+    const params = new URLSearchParams(searchParams);
+    if (_selectedFunction.length) {
+      params.set('category', _selectedFunction.join(','));
+    } else {
+      params.delete('category');
+    }
+    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+  };
+  const handleMedalMenuClick = (path: number) => {
+    if (selectedMedalMenu === path) {
+      setSelectedMedalMenu('');
+    } else {
+      setSelectedMedalMenu(path);
+    }
+  };
+
+  const fetchIsFavoriteList = async () => {
+    try {
+      const resultDapp = await get(`${QUEST_PATH}/api/dapp/favorite_list`);
+      setIsFavoriteList(resultDapp.data || []);
+    } catch (error) {
+      console.error('Error fetching resultDapp data:', error);
+    }
+  };
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -428,132 +586,115 @@ const AllDappsColumn: NextPageWithLayout = () => {
     };
     const fetchCarouselData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=31`);
         setCarouselList(resultDapp.data?.data || []);
+        setTotalPages(resultDapp.data.total_page || 0);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
     };
     fetchCarouselData();
     fetchNetworkData();
+    fetchIsFavoriteList();
   }, []);
 
-  function getCategoryNames(dappCategories: any, categoryArray: any[]) {
-    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
-    return categories.map((categoryItem: any) => {
-      const categoryId =
-        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
-      const category = categoryArray.find((c: any) => c.id === categoryId);
-      return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
-    });
-  }
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  const handleCarouselClick = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.filter((dapp) => dapp.recommend === true).length);
-  }, [carouselList.filter((dapp) => dapp.recommend === true).length]);
-
-  const [selectedTab, setSelectedTab] = useState(() => {
-    return 'token';
-  });
-
-  const handleTabClick = (path: string) => {
-    setSelectedTab(path);
-  };
-
-  const [selectedMenu, setSelectedMenu] = useState(() => {
-    return '';
-  });
-  const handleMenuClick = (path: string) => {
-    if (selectedMenu === path) {
-      setSelectedMenu('');
-    } else {
-      setSelectedMenu(path);
-    }
-  };
-
-  const [selectedFunction, setSelectedFunction] = useState<string[]>([]);
-  const handleFunctionClick = (functionType: any) => {
-    const id = functionType.id;
-    let _selectedFunction: string[] = [];
-    if (selectedFunction.includes(String(id))) {
-      _selectedFunction = selectedFunction.filter((type) => type !== String(id));
-    } else {
-      _selectedFunction = [...selectedFunction, String(id)];
-    }
-
-    const params = new URLSearchParams(searchParams);
-    if (_selectedFunction.length) {
-      params.set('category', _selectedFunction.join(','));
-    } else {
-      params.delete('category');
-    }
-    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
-  };
-
-  const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
-  const handleMedalMenuClick = (path: number) => {
-    if (selectedMedalMenu === path) {
-      setSelectedMedalMenu('');
-    } else {
-      setSelectedMedalMenu(path);
-    }
-  };
-
-  const fetchDappData = async () => {
+  const fetchDappData = async (page: number) => {
     try {
-      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
+      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?&page=${page}&page_size=31`);
       setDappList(resultDapp.data?.data || []);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
     }
   };
-  const fetchFilteredDappData = async () => {
+  const fetchFilteredDappData = async (page: number) => {
     try {
       const params = {
         tbd_token: selectedTab === 'TBD',
         network_ids: selectedMenu,
         category_ids: selectedFunction.length ? selectedFunction.join(',') : undefined,
         quest: selectedMedalMenu,
+        is_favorite: isFavoriteTab,
       };
-
       if (typeof params !== 'object') {
         throw new Error('params is not an object');
       }
-
       const entries = Object.entries(params);
       if (!Array.isArray(entries)) {
         throw new Error('Object.entries(params) did not return an array');
       }
-
       const filteredEntries = entries.filter(([, value]) => value !== undefined && value !== '');
       if (!Array.isArray(filteredEntries)) {
         throw new Error('filter did not return an array');
       }
-
       const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
-
-      const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=1&page_size=30`;
+      const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=${page}&page_size=31`;
       const resultDapp = await get(url);
-      setDappList(resultDapp.data?.data || []);
+      if (selectedTab === 'favorites') {
+        setIsFavoriteList(resultDapp.data?.data || []);
+      } else {
+        setDappList(resultDapp.data?.data || []);
+      }
     } catch (error) {
       console.error('Error fetching filtered dapp data:', error);
     }
   };
   useEffect(() => {
-    if (router.query.category) {
-      setSelectedFunction((router.query.category as string).split(','));
-    }
+    const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
+    setSelectedFunction(categoryFromQuery);
   }, [router.query.category]);
+
   useEffect(() => {
-    if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
-      fetchFilteredDappData();
-    } else if (!router.query.category) {
-      fetchDappData();
+    const networkFromQuery = router.query.network ? (router.query.network as string) : '';
+    setSelectedMenu(networkFromQuery);
+  }, [router.query.network]);
+
+  useEffect(() => {
+    const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
+    if (JSON.stringify(categoryFromQuery) === JSON.stringify(selectedFunction)) {
+      if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
+        fetchFilteredDappData(currentPage);
+      } else {
+        if (selectedTab === 'favorites') {
+          fetchIsFavoriteList();
+        } else {
+          fetchDappData(currentPage);
+        }
+      }
     }
-  }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category]);
-  
+  }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
+
+  const toggleExpanded = () => {
+    if (isExpanded) {
+      setListHeight(`auto`);
+      setIsExpanded(false);
+    } else {
+      setListHeight('45px');
+      setIsExpanded(true);
+    }
+  };
+  useEffect(() => {
+    const checkHeight = () => {
+      if (listRef.current && listRef.current.offsetHeight > 45) {
+        setListHeight('45px');
+        setIsExpanded(true);
+      } else {
+        setListHeight('auto');
+      }
+    };
+    if (typeof window !== 'undefined') {
+      const timer = setTimeout(checkHeight, 0);
+      window.addEventListener('resize', checkHeight);
+
+      return () => {
+        window.removeEventListener('resize', checkHeight);
+        clearTimeout(timer);
+      };
+    }
+  }, [
+    networkList,
+    typeof window !== 'undefined' && window.innerWidth,
+    typeof window !== 'undefined' && window.innerHeight,
+  ]);
 
   return (
     <AllDappsPage>
@@ -613,22 +754,42 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <div className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`} onClick={() => handleTabClick('TBD')}>
           🔥 Token-TBD
         </div>
+        <div
+          className={`tab-list-item ${selectedTab === 'favorites' ? 'active' : ''}`}
+          onClick={() => handleTabClick('favorites')}
+        >
+          ❤️ Favorites
+        </div>
       </div>
       <div className="tab-content">
         <Title>Network</Title>
-        <div className="page-netWork-list">
-          {networkList &&
-            networkList.map((child, index) => (
-              <div
-                className={`netWork-list-item ${selectedMenu === String(child.id) ? 'active' : ''}`}
-                key={index}
-                onClick={() => child.id && handleMenuClick(String(child.id))}
-              >
-                <img src={child.logo} alt="" />
-                {child.name}
-              </div>
-            ))}
-          <div className=""></div>
+        <div
+          className={`page-netWork-list ${isExpanded ? 'expanded' : ''}`}
+          ref={listRef}
+          style={{ height: listHeight }}
+        >
+          <div className="netWork-list-conter">
+            {networkList &&
+              networkList.map((child, index) => (
+                <div
+                  className={`netWork-list-item ${selectedMenu === String(child.id) ? 'active' : ''}`}
+                  key={index}
+                  onClick={() => child.id && handleMenuClick(String(child.id))}
+                >
+                  <img src={child.logo} alt="" />
+                  {child.name}
+                </div>
+              ))}
+          </div>
+          <div className="netWork-list-line"> </div>
+          <div className="netWork-list-btn" onClick={toggleExpanded}>
+            {isExpanded ? 'Other Chains' : 'Close Chains'}
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+              className={`list-btn-img ${isExpanded ? '' : 'rotate'}`}
+            />
+          </div>
         </div>
         <Title>Function</Title>
         <div className="page-function-list">
@@ -676,51 +837,95 @@ const AllDappsColumn: NextPageWithLayout = () => {
       </div>
       {selectedTab == 'TBD' ? (
         <div className="tab-content-page">
-          {dappList
-            .filter((dapp) => dapp.tbd_token === 'Y')
-            .map((dapp, index) => {
-              const categoryData = dapp.dapp_category || dapp.category_ids;
-              const categoryNames = getCategoryNames(categoryData, categoryArray);
-              return (
-                <div className="tab-content-item" key={index}>
-                  <div className="content-item-img">
-                    <img src={dapp.logo} alt="" />
-                  </div>
-                  <div className="content-item-text">
-                    <h1>{dapp.name}</h1>
-                    <p>{dapp.description}</p>
-                    <Tag>
-                      {categoryNames.map((categoryName: string, index: number) => (
-                        <div className={`tag-item ${categoryName}`} key={index}>
-                          {categoryName}
-                        </div>
-                      ))}
-                    </Tag>
-                  </div>
-                  <div className="content-item-btn">
-                    <div className="item-btn-item">
-                      <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+          {dappList &&
+            dappList
+              .filter((dapp: any) => dapp.tbd_token === 'Y')
+              .map((dapp: any, index: number) => {
+                const categoryData = dapp.dapp_category || dapp.category_ids;
+                const categoryNames = getCategoryNames(categoryData, categoryArray);
+                return (
+                  <div className="tab-content-item" key={index}>
+                    <div className="content-item-img">
+                      <img src={dapp.logo} alt="" />
                     </div>
-                    <div
-                      className="item-btn-item"
-                      onClick={() => {
-                        open(dapp, 'alldapps');
-                      }}
-                    >
-                      Dapp
+                    <div className="content-item-text">
+                      <h1>{dapp.name}</h1>
+                      <p>{dapp.description}</p>
+                      <Tag>
+                        {categoryNames.map((categoryName: string, index: number) => (
+                          <div className={`tag-item ${categoryName}`} key={index}>
+                            {categoryName}
+                          </div>
+                        ))}
+                      </Tag>
+                    </div>
+                    <div className="content-item-btn">
+                      <div className="item-btn-item">
+                        <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+                      </div>
+                      <div
+                        className="item-btn-item"
+                        onClick={() => {
+                          open(dapp, 'alldapps');
+                        }}
+                      >
+                        Dapp
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
         </div>
       ) : null}
       {selectedTab == 'token' ? (
         <>
           <div className="tab-content-page">
-            {dappList
-              .filter((dapp) => dapp.tbd_token === 'N')
-              .map((dapp, index) => {
+            {dappList &&
+              dappList
+                .filter((dapp: any) => dapp.tbd_token === 'N')
+                .map((dapp: any, index: number) => {
+                  const categoryData = dapp.dapp_category || dapp.category_ids;
+                  const categoryNames = getCategoryNames(categoryData, categoryArray);
+                  return (
+                    <div className="tab-content-item" key={index}>
+                      <div className="content-item-img">
+                        <img src={dapp.logo} alt="" />
+                      </div>
+                      <div className="content-item-text">
+                        <h1>{dapp.name}</h1>
+                        <p>{dapp.description}</p>
+                        <Tag>
+                          {categoryNames.map((categoryName: string, index: number) => (
+                            <div className={`tag-item ${categoryName}`} key={index}>
+                              {categoryName}
+                            </div>
+                          ))}
+                        </Tag>
+                      </div>
+                      <div className="content-item-btn">
+                        <div className="item-btn-item">
+                          <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
+                        </div>
+                        <div
+                          className="item-btn-item"
+                          onClick={() => {
+                            open(dapp, 'alldapps');
+                          }}
+                        >
+                          Dapp
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+          </div>
+        </>
+      ) : null}
+      {selectedTab == 'favorites' ? (
+        <>
+          <div className="tab-content-page">
+            {isFavoriteList &&
+              isFavoriteList.map((dapp: any, index: number) => {
                 const categoryData = dapp.dapp_category || dapp.category_ids;
                 const categoryNames = getCategoryNames(categoryData, categoryArray);
                 return (
@@ -758,6 +963,45 @@ const AllDappsColumn: NextPageWithLayout = () => {
           </div>
         </>
       ) : null}
+      {dappList && dappList.length > 0 && selectedTab !== 'favorites' && (
+        <Pagination>
+          <div
+            className="pagination-item"
+            onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+            style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
+          >
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+            />
+          </div>
+          {Array.from(Array(totalPages).keys()).map(
+            (page) =>
+              Math.abs(currentPage - (page + 1)) <= 5 && (
+                <div
+                  key={page}
+                  className={`pagination-number ${currentPage === page + 1 ? 'active' : ''}`}
+                  onClick={() => setCurrentPage(page + 1)}
+                >
+                  {page + 1}
+                </div>
+              ),
+          )}
+          <div
+            className="pagination-item pagination-right"
+            onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
+            style={{
+              cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+              opacity: currentPage === totalPages ? 0.5 : 1,
+            }}
+          >
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+            />
+          </div>
+        </Pagination>
+      )}
     </AllDappsPage>
   );
 };

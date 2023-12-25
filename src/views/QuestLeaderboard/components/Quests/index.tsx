@@ -1,4 +1,4 @@
-import { AnimatePresence,motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { memo } from 'react';
 
 import { container } from '@/components/animation';
@@ -14,6 +14,7 @@ const Quests = ({
   quests,
   categoryLoading,
   categories,
+  userInfo,
 }: any) => {
   return (
     <AnimatePresence mode="wait">
@@ -25,7 +26,7 @@ const Quests = ({
           categoryLoading={categoryLoading}
           categories={categories}
         />
-        <QuestLists id={id} loading={questingLoading} quests={quests} />
+        <QuestLists id={id} loading={questingLoading} quests={quests} achieved={userInfo?.achieved} />
       </motion.div>
     </AnimatePresence>
   );

@@ -6,11 +6,11 @@ import styled from 'styled-components';
 
 import popupsData from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
+import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
-import useDappOpen from '@/hooks/useDappOpen';
 
 interface SelectBgProps {
   bgColor: string;
@@ -85,6 +85,7 @@ const ChainsDetailsTitle = styled.div`
       svg {
         z-index: 0;
         opacity: 0.8;
+        width: 80%;
       }
     }
     .details-body-left {
@@ -286,7 +287,7 @@ const ChainsDetailsHot = styled.div`
 
     .tab-content-item {
       margin: 30px 20px 0 0;
-      border-bottom: 1px solid #383b48;
+      border-bottom: 1px solid rgba(38, 40, 47, 1);
       display: flex;
       width: 30%;
       flex-basis: calc(33.3333% - 20px);
@@ -426,10 +427,12 @@ const ChainsDetailsActivities = styled.div`
       h3 {
         font-size: 14px;
         color: #979abe;
+        margin-bottom: 2px;
         img {
           width: 20px;
           height: 20px;
           margin-right: 6px;
+          margin-top: -2px;
         }
       }
     }
@@ -550,7 +553,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     const fetchhotDappsData = async () => {
       if (id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp/hot_list?network_id=${id}`);
+          const response = await fetch(`${QUEST_PATH}/api/dapp/hot_list?network_id=${id}&size=10`);
           const data = await response.json();
           setHotDapps(data.data);
         } catch (error) {
@@ -576,7 +579,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         try {
           const response = await fetch(`${QUEST_PATH}/api/ad?category=network&category_id=${id}`);
           const data = await response.json();
-          setAdvertise(data);
+          setAdvertise(data.data[0]);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -590,7 +593,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   useEffect(() => {
     if (data) {
       const popupsArray = Object.values(popupsData);
-      setMatchedItem(popupsArray.find((item) => item.title === data.name));
+      setMatchedItem(popupsArray.find((item) => item.chainId === data.chain_id));
     }
   }, [data, popupsData]);
 
@@ -694,18 +697,26 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           </div>
           <div className="details-body-right">
             <div className="body-right-btn">
-              <div className="right-btn-item">
-                <img src={Dapps} alt="" />
-                <p>Dapps</p>
-              </div>
-              <div className="right-btn-item">
-                <img src={DeepDive} alt="" />
-                <p>DeepDive</p>
-              </div>
-              <div className="right-btn-item">
-                <img src={Shotcut} alt="" />
-                <p>Shotcut</p>
-              </div>
+              <Link href="/alldapps">
+                <div className="right-btn-item">
+                  <img src={Dapps} alt="" />
+                  <p>Dapps</p>
+                </div>
+              </Link>
+              {data && data.deepdive && (
+                <Link href="/warmup">
+                  <div className="right-btn-item">
+                    <img src={DeepDive} alt="" />
+                    <p>DeepDive</p>
+                  </div>
+                </Link>
+              )}
+              <Link href={`/all-in-one/${matchedItem && matchedItem.path}`}>
+                <div className="right-btn-item">
+                  <img src={Shotcut} alt="" />
+                  <p>Shotcut</p>
+                </div>
+              </Link>
               {/* <div className="body-right-img">
                 <img src={chart} alt="" />
               </div> */}
@@ -733,23 +744,25 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                   <div className="milestones-item-text">
                     <h2>{item.title}</h2>
                     <p>{item.date}</p>
-                    <Link href={item.url}>
-                      <span>
-                        Learn more <img src={arrowyellow} alt="" />
-                      </span>
-                    </Link>
+                    {item.url && (
+                      <Link href={item.url}>
+                        <span>
+                          Learn more <img src={arrowyellow} alt="" />
+                        </span>
+                      </Link>
+                    )}
                   </div>
                 </div>
               ))
             : null}
         </div>
         <div className="right-side-substance">
-          <img src={advertise?.data?.ad_images} alt="" />
+          <img src={advertise?.ad_images} alt="" />
         </div>
       </ChainsDetailsContent>
 
       <ChainsDetailsHot>
-        <Title>Hot Dapps on Polygon zkEVM</Title>
+        <Title>Hot Dapps on {data && data.name}</Title>
         <div className="tab-content">
           {hotDapps &&
             hotDapps.map((dapp: any, index: number) => {
@@ -789,44 +802,48 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
         </div>
       </ChainsDetailsHot>
 
-      <ChainsDetailsActivities>
-        <Title>Activities</Title>
-        <div style={{ marginBottom: '24px' }}>
-          <p>The most popular actions from other users</p>
-          <div className="right-btn-item" style={{ marginRight: 0 }}>
-            <img src={DeepDive} alt="" />
-            <p>DeepDive</p>
+      {data && data.deepdive && (
+        <ChainsDetailsActivities>
+          <Title>Activities</Title>
+          <div style={{ marginBottom: '24px' }}>
+            <p style={{ marginBottom: '0' }}>The most popular actions from other users</p>
+            <Link href="/warmup">
+              <div className="right-btn-item" style={{ marginRight: 0, marginTop: '-22px' }}>
+                <img src={DeepDive} alt="" />
+                <p>DeepDive</p>
+              </div>
+            </Link>
           </div>
-        </div>
-        <div className="details-activities-list">
-          {activities &&
-            activities.map((item: any, index: number) => {
-              const networkItem = networkList.find((network) => network.id === item.network_id);
-              if (!networkItem) {
-                return null;
-              }
-              return (
-                <div className="activities-list-item" key={index}>
-                  <p
-                    dangerouslySetInnerHTML={{
-                      __html: item.action_title.replace(
-                        /\d+/g,
-                        (match: string) => `<span style="color: rgba(151, 154, 190, 1);">${match}</span>`,
-                      ),
-                    }}
-                  ></p>
-                  <h2>
-                    Total Execution <span>- </span>
-                  </h2>
-                  <h3>
-                    <img src={networkItem.logo} alt="" />
-                    {networkItem.name}
-                  </h3>
-                </div>
-              );
-            })}
-        </div>
-      </ChainsDetailsActivities>
+          <div className="details-activities-list">
+            {activities &&
+              activities.map((item: any, index: number) => {
+                const networkItem = networkList.find((network) => network.id === item.network_id);
+                if (!networkItem) {
+                  return null;
+                }
+                return (
+                  <div className="activities-list-item" key={index}>
+                    <p
+                      dangerouslySetInnerHTML={{
+                        __html: item.action_title.replace(
+                          /\d+/g,
+                          (match: string) => `<span style="color: rgba(151, 154, 190, 1);">${match}</span>`,
+                        ),
+                      }}
+                    ></p>
+                    <h2>
+                      Total Execution <span>{item.count}</span>
+                    </h2>
+                    <h3>
+                      <img src={networkItem.logo} alt="" />
+                      {networkItem.name}
+                    </h3>
+                  </div>
+                );
+              })}
+          </div>
+        </ChainsDetailsActivities>
+      )}
     </ChainsDetails>
   );
 };

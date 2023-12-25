@@ -76,8 +76,9 @@ export default function useTokenBalance({
         setLoading(false);
       }
     };
-    if (!!(currency?.address || currency?.isNative || isNative) && account)
-      currency?.address ? getBalance() : getNativeBalance();
+    if (!!(currency?.address || currency?.isNative || isNative) && account) {
+      currency?.address && !currency?.isNative ? getBalance() : getNativeBalance();
+    }
   }, [currency, account, updater, chainId]);
   return { balance, loading };
 }
