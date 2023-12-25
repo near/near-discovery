@@ -5,6 +5,8 @@ import useRewardsClaim from '@/hooks/useRewardsClaim';
 import ProcessBar from '@/views/Quest/components/ProcessBar';
 import Timer from '@/views/Quest/components/Timer';
 
+import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
+
 import ActionItem from './Item';
 import { StyledButton, StyledCoin, StyledContainer, StyledHeader, StyledLabel, StyledProcessBars } from './styles';
 
@@ -26,6 +28,7 @@ const Actions = ({
   const { loading, handleClaim } = useRewardsClaim(() => {});
   const [cbCompleted, setCbCompleted] = useState(0);
   const completedCount = useMemo(() => completed + cbCompleted, [completed, cbCompleted]);
+  const config = useAuthConfig();
   return (
     <StyledContainer>
       <StyledHeader>
@@ -41,6 +44,7 @@ const Actions = ({
           onSuccess={() => {
             setCbCompleted((prev) => prev + 1);
           }}
+          config={config}
         />
       ))}
       <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>

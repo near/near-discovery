@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { memo, useState, useEffect } from 'react';
-import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
+
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useLayoutStore } from '@/stores/layout';
@@ -29,11 +29,13 @@ const ActionItem = ({
   action,
   completed,
   userInfo,
+  config,
   onSuccess,
 }: {
   action: any;
   completed: boolean;
   userInfo: any;
+  config: any;
   onSuccess: VoidFunction;
 }) => {
   const [open, setOpen] = useState(false);
@@ -45,7 +47,7 @@ const ActionItem = ({
     setActionCompleted(true);
     onSuccess();
   });
-  const config = useAuthConfig();
+
   const { loading: binding, type, handleBind } = useAuthBind({ onSuccess });
 
   useEffect(() => {
