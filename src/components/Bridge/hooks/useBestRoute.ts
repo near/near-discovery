@@ -39,7 +39,7 @@ export default function useBestRoute() {
           token: targetToken,
           targetChain: targetChain,
           targetToken: targetToken,
-          amount: amount.toString(),
+          amount: amount,
         })
         if (response) {
           setTrade({
@@ -91,7 +91,7 @@ export default function useBestRoute() {
       const _outputChain = chainCofig[targetChain.chainId];
       // 有一个使用Lifi的就使用lifi交易
       if (_inputChain.dex === 'Lifi' || _outputChain.dex === 'Lifi') {
-        lifiSwap({
+        await lifiSwap({
           chain: chain,
           token: token,
           targetChain: targetChain,
@@ -113,6 +113,7 @@ export default function useBestRoute() {
       }
       setSwaping(false);
     } catch (err) {
+      console.log(err)
       setSwaping(false);
     }
   };
