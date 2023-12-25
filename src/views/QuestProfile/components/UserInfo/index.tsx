@@ -1,7 +1,9 @@
 import { memo } from 'react';
-import { ellipsAccount } from '@/utils/account';
-import Socials from './Socials';
+
 import useAccount from '@/hooks/useAccount';
+import { ellipsAccount } from '@/utils/account';
+
+import Socials from './Socials';
 import {
   StyledAddress,
   StyledAvatar,
@@ -10,14 +12,14 @@ import {
   StyledCoin,
   StyledContainer,
   StyledContent,
+  StyledInfo,
   StyledLabel,
   StyledLabels,
+  StyledLabelsWrapper,
   StyledMedal,
   StyledName,
   StyledSmallCircle,
   StyledSteps,
-  StyledInfo,
-  StyledLabelsWrapper,
 } from './styles';
 
 const UserInfo = ({ info, onSuccess }: any) => {

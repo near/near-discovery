@@ -4,26 +4,37 @@ import Loading from '@/components/Icons/Loading';
 import useRewardsClaim from '@/hooks/useRewardsClaim';
 import ProcessBar from '@/views/Quest/components/ProcessBar';
 import Timer from '@/views/Quest/components/Timer';
-
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 
 import ActionItem from './Item';
-import { StyledButton, StyledCoin, StyledContainer, StyledHeader, StyledLabel, StyledProcessBars } from './styles';
+import {
+  StyledButton,
+  StyledCoin,
+  StyledContainer,
+  StyledHeader,
+  StyledLabel,
+  StyledProcessBars,
+  StyledTimerBox,
+} from './styles';
 
 const Actions = ({
   actions,
   endTime,
+  startTime,
   rewards,
   completed,
   id,
   userInfo,
+  isLive,
 }: {
   actions: any;
+  startTime: number;
   endTime: number;
   rewards: number;
   completed: number;
   id: string;
   userInfo: any;
+  isLive: boolean;
 }) => {
   const { loading, handleClaim } = useRewardsClaim(() => {});
   const [cbCompleted, setCbCompleted] = useState(0);
@@ -33,7 +44,10 @@ const Actions = ({
     <StyledContainer>
       <StyledHeader>
         <StyledLabel>Actions</StyledLabel>
-        {endTime && <Timer endTime={Number(endTime)} />}
+        <StyledTimerBox>
+          <div>Upcoming</div>
+          {startTime > Date.now() ? <Timer endTime={Number(startTime)} /> : <Timer endTime={Number(endTime)} />}{' '}
+        </StyledTimerBox>
       </StyledHeader>
       {actions.map((action: any, i: number) => (
         <ActionItem
@@ -45,6 +59,7 @@ const Actions = ({
             setCbCompleted((prev) => prev + 1);
           }}
           config={config}
+          isLive={isLive}
         />
       ))}
       <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>

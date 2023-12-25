@@ -1,6 +1,6 @@
+import useToast from '@/hooks/useToast';
 import { useBosLoaderStore } from '@/stores/bos-loader';
 import { useVmStore } from '@/stores/vm';
-import useToast from '@/hooks/useToast';
 
 import { Spinner } from '../lib/Spinner';
 

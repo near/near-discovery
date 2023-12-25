@@ -21,7 +21,8 @@ export default function useTokenBalance({
   const [loading, setLoading] = useState<boolean>(false);
   const { account, chainId } = useAccount();
   useEffect(() => {
-    const _chainId = currency?.chainId ? currency.chainId : chainId;
+    const _chainId = currency?.chainId || chainId;
+
     if (!_chainId || !chains || !chains[_chainId]) {
       console.error('Invalid _chainId or chains is undefined');
       return;
@@ -76,8 +77,10 @@ export default function useTokenBalance({
         setLoading(false);
       }
     };
+
     if (!!(currency?.address || currency?.isNative || isNative) && account)
       currency?.address ? getBalance() : getNativeBalance();
   }, [currency, account, updater, chainId]);
+
   return { balance, loading };
 }

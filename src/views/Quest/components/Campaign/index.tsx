@@ -20,6 +20,7 @@ import {
   StyledTag,
   StyledTags,
   StyledTitle,
+  StyledTimerBox,
 } from './styles';
 
 const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) => {
@@ -67,11 +68,9 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
             <span>{campaign.quests.total} Quests:</span>
             {campaign.quests.total_category.map(
               ({ total, quest_category_id }: { total: number; quest_category_id: number }) => (
-                <>
-                  <span style={{ color: `var(--${categories[quest_category_id]?.name}-color` }} key={quest_category_id}>
-                    {total} #{categories[quest_category_id]?.name}
-                  </span>
-                </>
+                <span style={{ color: `var(--${categories[quest_category_id]?.name}-color` }} key={quest_category_id}>
+                  {total} #{categories[quest_category_id]?.name}
+                </span>
               ),
             )}
           </StyledTag>
@@ -79,7 +78,14 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
         </StyledTags>
       </StyledBox>
       <StyledBox>
-        {campaign.end_time && <Timer endTime={Number(campaign.end_time)} />}
+        <StyledTimerBox>
+          <div>Upcoming</div>
+          {campaign.start_time > Date.now() ? (
+            <Timer endTime={Number(campaign.start_time)} />
+          ) : (
+            <Timer endTime={Number(campaign.end_time)} />
+          )}
+        </StyledTimerBox>
         {/* <JoinedAccountsBox>
           {campaign.total_users > 5 && (
             <>

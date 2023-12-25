@@ -11,9 +11,9 @@ import {
   StyledContainer,
   StyledCurrentRow,
   StyledHeader,
+  StyledRefreshIcon,
   StyledTitle,
   StyledUpdateButton,
-  StyledRefreshIcon,
 } from './styles';
 
 const Leaderboard = ({

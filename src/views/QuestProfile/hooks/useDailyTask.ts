@@ -1,9 +1,9 @@
+import { cloneDeep } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
 
 import { QUEST_PATH } from '@/config/quest';
 import useToast from '@/hooks/useToast';
 import { get, post } from '@/utils/http';
-import { cloneDeep } from 'lodash';
 
 export default function useDailyTask() {
   const [tasks, setTasks] = useState<any>([]);

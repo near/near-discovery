@@ -3,8 +3,8 @@ import { memo } from 'react';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
-import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useUserInfo from '@/hooks/useUserInfo';
+import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 
 import Yours from '../Quest/components/Yours';
 import Actions from './components/Actions';
@@ -36,10 +36,12 @@ const QuestDetailView = () => {
               <Actions
                 actions={info.actions}
                 endTime={info.quest.end_time}
+                startTime={info.quest.start_time}
                 rewards={info.quest.reward}
                 completed={info.quest.action_completed}
                 id={searchParams.get('id') || ''}
                 userInfo={userInfo}
+                isLive={info.quest.status === 'ongoing'}
               />
             </StyledTopBox>
             <Recommends campaignId={info.quest.quest_campaign_id} />

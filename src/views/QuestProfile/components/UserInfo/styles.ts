@@ -1,5 +1,5 @@
-import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import styled from 'styled-components';
 
 export { StyledCoin } from '@/views/Quest/styles';
 export { StyledMedal, StyledSteps } from '../../styles';

@@ -1,7 +1,9 @@
-import styled from 'styled-components';
-import { useChainsStore } from '@/stores/chains';
-import Loading from '../Icons/Loading';
 import { useMemo } from 'react';
+import styled from 'styled-components';
+
+import { useChainsStore } from '@/stores/chains';
+
+import Loading from '../Icons/Loading';
 
 const StyledToast = styled.div`
   border-radius: 16px;

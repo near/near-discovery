@@ -12,14 +12,14 @@ import {
   StyledDay,
   StyledDayHeader,
   StyledDayIcon,
-  StyledDaysWrapper,
   StyledDays,
+  StyledDaysWrapper,
   StyledDayValue,
   StyledFists,
   StyledHeader,
-  StyledTitle,
   StyledPanel,
   StyledTips,
+  StyledTitle,
 } from './styles';
 
 const DailyTask = () => {

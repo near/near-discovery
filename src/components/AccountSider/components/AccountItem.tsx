@@ -1,4 +1,4 @@
-import { memo, useState, useEffect } from 'react';
+import { memo, useEffect,useState } from 'react';
 import styled from 'styled-components';
 
 import CopyButton from '@/components/CopyButton';

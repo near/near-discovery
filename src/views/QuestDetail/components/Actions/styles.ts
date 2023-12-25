@@ -1,8 +1,8 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export { StyledLabel } from '../Details/styles';
 export { StyledCoin } from '@/views/Quest/styles';
+export { StyledLabel } from '../Details/styles';
 
 export const StyledContainer = styled.div`
   flex-grow: 1;
@@ -22,7 +22,6 @@ export const StyledItemContainer = styled.div`
   box-sizing: border-box;
   padding: 30px 24px 24px;
   margin-top: 20px;
-  overflow: hidden;
   transition: 0.3s;
 
   &:hover {
@@ -54,13 +53,26 @@ export const StyledItemRight = styled.div`
 export const StyledIconBox = styled.div`
   cursor: pointer;
   transition: 0.5s;
+  position: relative;
   &:hover {
     opacity: 0.8;
   }
   &.open {
     transform: rotate(90deg);
   }
-  .tips {
+  .loading {
+    animation: loading 1s linear infinite;
+  }
+  svg {
+    vertical-align: inherit;
+  }
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `;
 
@@ -174,4 +186,39 @@ export const StyledExpandButton = styled.div`
   &:active {
     opacity: 0.8;
   }
+`;
+
+export const RefreshTips = styled(motion.div)`
+  display: flex;
+  position: absolute;
+  justify-content: center;
+  align-items: center;
+  right: -30px;
+  top: -34px;
+  z-index: 30;
+  border-radius: 6px;
+  border: 1px solid #373a53;
+  background: #262836;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.25);
+  width: 237px;
+  height: 32px;
+  flex-shrink: 0;
+  .text {
+    position: relative;
+    z-index: 10;
+    color: #979abe;
+    font-family: Gantari;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+`;
+
+export const StyledTimerBox = styled.div`
+  display: flex;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  gap: 20px;
 `;

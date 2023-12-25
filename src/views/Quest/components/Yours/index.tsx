@@ -1,5 +1,6 @@
-import { memo } from 'react';
 import { useRouter } from 'next/navigation';
+import { memo } from 'react';
+
 import { StyledBox, StyledCoin, StyledContainer, StyledLabel, StyledLine, StyledValue } from './styles';
 
 const Yours = ({ info }: any) => {

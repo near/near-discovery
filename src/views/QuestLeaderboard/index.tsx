@@ -4,13 +4,13 @@ import useCampaignList from '@/views/Quest/hooks/useCampaignList';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useQuestList from '@/views/Quest/hooks/useQuestList';
 
+import useUserInfo from '../../hooks/useUserInfo';
 import Yours from '../Quest/components/Yours';
 import Leaderboard from './components/Leaderboard';
 import Quests from './components/Quests';
 import Swiper from './components/Swiper';
 import Tabs from './components/Tabs';
 import useLeaderboard from './hooks/useLeaderboard';
-import useUserInfo from '../../hooks/useUserInfo';
 import { StyledContainer } from './styles';
 import type { Tab } from './types';
 

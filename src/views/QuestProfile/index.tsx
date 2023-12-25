@@ -1,5 +1,8 @@
 import { memo, useState } from 'react';
+
 import useReport from '@/views/Landing/hooks/useReport';
+
+import useUserInfo from '../../hooks/useUserInfo';
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
 import InviteCodePanel from './components/InviteCode';
@@ -9,8 +12,7 @@ import Quests from './components/Quests';
 import Tabs from './components/Tabs';
 import UserInfo from './components/UserInfo';
 import useInviteList from './hooks/useInviteList';
-import useUserInfo from '../../hooks/useUserInfo';
-import { StyledContainer, StyledTabsBox, StyledPanelWrapper } from './styles';
+import { StyledContainer, StyledPanelWrapper,StyledTabsBox } from './styles';
 import type { Tab } from './types';
 
 const QuestProfileView = () => {

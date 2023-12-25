@@ -1,10 +1,10 @@
+import { useSetChain } from '@web3-onboard/react';
 import { memo, useMemo } from 'react';
 import styled from 'styled-components';
 
 import LoadingIcon from '@/components/Icons/Loading';
 import { chainCofig } from '@/config/bridge';
 import useApprove from '@/hooks/useApprove';
-import { useSetChain } from '@web3-onboard/react';
 
 import type { Chain, Token } from '../types';
 

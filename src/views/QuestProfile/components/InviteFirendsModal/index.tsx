@@ -5,8 +5,8 @@ import Loading from '@/components/Icons/Loading';
 import Modal from '@/components/Modal';
 import useCopy from '@/hooks/useCopy';
 import { ellipsAccount } from '@/utils/account';
-import useRewardsClaim from '../../hooks/useRewardsClaim';
 
+import useRewardsClaim from '../../hooks/useRewardsClaim';
 import type { Column } from '../Pts/types';
 import InviteCode from './InviteCode';
 import {

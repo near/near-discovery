@@ -1,16 +1,18 @@
 import { memo, useMemo } from 'react';
+
 import Loading from '@/components/Icons/Loading';
-import InviteCode from './InviteCode';
+
 import useRewardsClaim from '../../hooks/useRewardsClaim';
+import InviteCode from './InviteCode';
 import {
-  StyledPanel,
-  StyledPanelHeader,
+  JoinedAccount,
+  JoinedAccounts,
   StyledButton,
+  StyledPanel,
   StyledPanelContent,
   StyledPanelFriends,
   StyledPanelFriendsTitle,
-  JoinedAccounts,
-  JoinedAccount,
+  StyledPanelHeader,
 } from './styles';
 
 const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) => {

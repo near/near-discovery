@@ -104,3 +104,11 @@ export const JoinedAccountsAmount = styled.div`
   font-weight: 400;
   line-height: normal;
 `;
+
+export const StyledTimerBox = styled.div`
+  display: flex;
+  color: #fff;
+  font-size: 36px;
+  font-weight: 700;
+  gap: 20px;
+`;

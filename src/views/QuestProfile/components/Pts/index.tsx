@@ -15,16 +15,16 @@ import {
   StyledColumn,
   StyledContainer,
   StyledHeader,
+  StyledPageBox,
+  StyledPageButton,
+  StyledPageButtons,
+  StyledPageDesc,
   StyledQuestIcon,
   StyledQuestIconBox,
   StyledQuestRewards,
   StyledQuestTitle,
   StyledRewards,
   StyledRow,
-  StyledPageBox,
-  StyledPageDesc,
-  StyledPageButtons,
-  StyledPageButton,
 } from './styles';
 import type { Column } from './types';
 

@@ -1,9 +1,11 @@
 import { memo } from 'react';
-import Loading from '@/components/Icons/Loading';
 import { v4 as uuidv4 } from 'uuid';
-import useAuthConfig from '../../hooks/useAuthConfig';
+
+import Loading from '@/components/Icons/Loading';
+
 import useAuthBind from '../../hooks/useAuthBind';
-import { StyledSocialsWrapper, StyledSocialItem } from './styles';
+import useAuthConfig from '../../hooks/useAuthConfig';
+import { StyledSocialItem,StyledSocialsWrapper } from './styles';
 
 const AUTHS = {
   twitter: {

@@ -1,9 +1,9 @@
 import { useRouter } from 'next/navigation';
 import { useCallback } from 'react';
-import { useDappStore } from '@/stores/dapp';
 
-import { get } from '@/utils/http';
 import { QUEST_PATH } from '@/config/quest';
+import { useDappStore } from '@/stores/dapp';
+import { get } from '@/utils/http';
 
 export default function useDappOpen() {
   const router = useRouter();

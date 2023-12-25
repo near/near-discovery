@@ -3,13 +3,13 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import popupsData from '@/config/all-in-one/chains';
 import chains from '@/config/chains';
 import { QUEST_PATH } from '@/config/quest';
 import { ethereum } from '@/config/tokens/ethereum';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
-import popupsData from '@/config/all-in-one/chains';
 
 const blueBg = (
   <svg width="719" height="719" viewBox="0 0 719 719" fill="none" xmlns="http://www.w3.org/2000/svg">
