@@ -4,22 +4,44 @@ import { LiFi } from '@lifi/sdk'
 import type { RoutesRequest, Route } from '@lifi/sdk'
 import { useState } from 'react';
 
+import useAddAction from '@/hooks/useAddAction';
 import useAccount from '@/hooks/useAccount';
 
 import type { Chain, Token } from '../types';
 
+
+export const ISSERVER = typeof window === "undefined";
 
 // 初始化lifi
 export const lifi = new LiFi({
   integrator: 'DapDap'
 })
 
+const lifiTokenKey = 'lifi-token'
 let tokens: any = {}
-lifi.getTokens().then(res => {
-  tokens = res.tokens
-})
+getLifiTokens().then(res => tokens = res)
 
-async function getRoute(chain: Chain, targetChain: Chain, token: Token, account: string | undefined, amount: string): Promise<Route | undefined> {
+async function getLifiTokens() {
+  if (!ISSERVER) {
+    const tokensJSONString = window.sessionStorage.getItem(lifiTokenKey)
+    if (tokensJSONString) {
+      try {
+        return JSON.parse(tokensJSONString)
+      } catch (e) {
+        console.log(e)
+      }
+    }
+    const res = await lifi.getTokens()
+    tokens = res.tokens
+    window.sessionStorage.setItem(lifiTokenKey, JSON.stringify(tokens));
+    return tokens
+  }
+
+  return []
+}
+
+
+async function getRoute(chain: Chain, targetChain: Chain, token: Token, account: string | undefined, amount: string, destination?: string): Promise<Route | undefined> {
   const chainTokenList = tokens[chain.chainId]
 
   const filterTokens = chainTokenList.filter((item: any) => item.symbol.toUpperCase() === token.symbol.toUpperCase())
@@ -39,7 +61,7 @@ async function getRoute(chain: Chain, targetChain: Chain, token: Token, account:
     fromAddress: account,
     toChainId: targetChain.chainId,
     toTokenAddress: realToken.address,
-    toAddress: account,
+    toAddress: destination ? destination : account,
   }
 
   const res = await lifi.getRoutes(routeRequest)
@@ -57,6 +79,7 @@ async function getRoute(chain: Chain, targetChain: Chain, token: Token, account:
 export default function useLifi() {
   const { account, provider } = useAccount();
   const [fee, setFee] = useState();
+  const { addAction } = useAddAction('wallet/bridge');
 
 
   const getQouteInfo = async ({
@@ -95,11 +118,37 @@ export default function useLifi() {
   }) => {
     if (!provider) return;
     const signer = await provider.getSigner(account);
-    const selectRoute: Route | undefined = await getRoute(chain, targetChain, token, account, amount);
+    const selectRoute: Route | undefined = await getRoute(chain, targetChain, token, account, amount, destination);
     if (selectRoute) {
-      const executeRes = await lifi.executeRoute(signer, selectRoute);
-      console.log(executeRes)
-      onSuccess(executeRes.id ? executeRes.id : '');
+      const tx = await lifi.executeRoute(signer, selectRoute);
+      console.log(tx)
+      onSuccess(tx.id ? tx.id : '');
+
+      const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
+      const _bridgeTxs = JSON.parse(bridgeTxs);
+      addAction({
+        type: 'Bridge',
+        fromChainId: chain.chainId,
+        toChainId: targetChain.chainId,
+        token,
+        amount,
+        template: 'Lifi Bridge',
+        add: false,
+        status: 1,
+        transactionHash: tx.id,
+      });
+      _bridgeTxs[tx.id] = {
+        amount,
+        inputChain: chain.chainName,
+        outputChain: targetChain.chainName,
+        symbol: token.symbol,
+        tx: tx.id,
+        time: Date.now(),
+        scan: chain.blockExplorers,
+        isStargate: false,
+        duration: '5 min',
+      };
+      localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
     }
   };
 
