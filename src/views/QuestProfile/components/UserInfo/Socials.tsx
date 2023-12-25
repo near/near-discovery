@@ -49,21 +49,25 @@ const Socials = ({ info, onSuccess }: any) => {
       {Object.values(AUTHS).map((item) => (
         <StyledSocialItem
           key={item.key}
-          whileHover={{ opacity: 0.8 }}
-          whileTap={{ opacity: 0.6 }}
+          {...(info[item.key]?.is_bind ? {} : { whileHover: { color: '#979ABE' }, whileTap: { opacity: 0.6 } })}
+          style={{
+            color: info[item.key]?.is_bind ? '#979ABE' : '#373A53',
+            cursor: info[item.key]?.is_bind ? 'not-allowed' : 'pointer',
+          }}
           onClick={() => {
+            if (info[item.key]?.is_bind) return;
             let path = '';
-            const state = uuidv4();
+            const state = (Date.now() + Math.random() * 10000).toFixed(0);
             sessionStorage.setItem('_auth_state', state);
             if (item.key === 'twitter') {
-              path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20offline.access&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
-              window.open(path, '_self');
+              path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
+              window.open(path, '_blank');
               sessionStorage.setItem('_auth_type', 'twitter');
               return;
             }
             if (item.key === 'discord') {
               path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
-              window.open(path, '_self');
+              window.open(path, '_blank');
               sessionStorage.setItem('_auth_type', 'discord');
               return;
             }
@@ -78,14 +82,14 @@ const Socials = ({ info, onSuccess }: any) => {
             }
           }}
         >
-          <span style={{ color: info[item.key]?.is_bind ? '#979ABE' : '#373A53' }}>{item.icon}</span>
+          <span>{item.icon}</span>
           {info[item.key]?.is_bind ? (
-            <div>{info.twitter?.twitter_username}</div>
+            <div>{info[item.key]?.[`${item.key}_username`]}</div>
           ) : loading && type === item.key ? (
             <Loading />
           ) : (
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="12" fill="#373A53" />
+              <circle cx="12" cy="12" r="12" fill="currentColor" />
               <path
                 d="M8 11.5C7.72386 11.5 7.5 11.7239 7.5 12C7.5 12.2761 7.72386 12.5 8 12.5L8 11.5ZM17.3536 12.3536C17.5488 12.1583 17.5488 11.8417 17.3536 11.6464L14.1716 8.46447C13.9763 8.2692 13.6597 8.2692 13.4645 8.46447C13.2692 8.65973 13.2692 8.97631 13.4645 9.17157L16.2929 12L13.4645 14.8284C13.2692 15.0237 13.2692 15.3403 13.4645 15.5355C13.6597 15.7308 13.9763 15.7308 14.1716 15.5355L17.3536 12.3536ZM8 12.5L17 12.5L17 11.5L8 11.5L8 12.5Z"
                 fill="#1C1D29"

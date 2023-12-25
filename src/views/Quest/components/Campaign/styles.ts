@@ -68,6 +68,7 @@ export const StyledTags = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
+  flex-wrap: wrap;
 `;
 
 export const StyledTag = styled.div`

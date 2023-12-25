@@ -51,6 +51,17 @@ const nextConfig = {
       destination: 'https://test-api.dapdap.net/:path*',
     },
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ipfs.near.social',
+        port: '',
+        pathname: '/ipfs/**',
+      },
+    ],
+  },
+  transpilePackages: ['ahooks'],
 };
 
 module.exports = nextConfig;

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
-
+import { useChainsStore } from '@/stores/chains';
 import Loading from '../Icons/Loading';
+import { useMemo } from 'react';
 
 const StyledToast = styled.div`
   border-radius: 16px;
@@ -52,7 +53,14 @@ const IconWrapper = styled.div`
   flex-shrink: 0;
 `;
 
-export default function Toast({ type, title, text, closeToast }: any) {
+export default function Toast({ type, title, text, tx, chainId, closeToast }: any) {
+  const chains = useChainsStore((store: any) => store.chains);
+  const txLink = useMemo(() => {
+    if (!tx || !chainId) return '';
+    const currentChain = chains.find((chain: any) => chain.chain_id === chainId);
+    if (!currentChain) return '';
+    return `${currentChain.block_explorer}/tx/${tx}`;
+  }, [tx, chainId]);
   return (
     <StyledToast>
       <IconWrapper>
@@ -79,6 +87,16 @@ export default function Toast({ type, title, text, closeToast }: any) {
         <StyledDesc>
           <StyledTitle>{title}</StyledTitle>
           <StyledSecondaryText>{text}</StyledSecondaryText>
+          {tx && chainId && (
+            <StyledSecondaryText
+              style={{ textDecoration: 'underline' }}
+              onClick={() => {
+                window.open(txLink, '_blank');
+              }}
+            >
+              View Transaction
+            </StyledSecondaryText>
+          )}
         </StyledDesc>
         <StyledCloseWrapper onClick={closeToast}>
           <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">

@@ -30,7 +30,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
         <div>
           <StyledHeader>
             <StyledTitle>{campaign.name}</StyledTitle>
-            <StyledHeartBox
+            {/* <StyledHeartBox
               whileHover={{ opacity: 0.9 }}
               whileTap={{ opacity: 0.7 }}
               onClick={() => {
@@ -54,7 +54,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
                   />
                 </svg>
               )}
-            </StyledHeartBox>
+            </StyledHeartBox> */}
           </StyledHeader>
           <StyledDesc>{campaign.description}</StyledDesc>
         </div>
@@ -64,12 +64,12 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
             <span style={{ color: '#EBF479' }}>Extra {campaign.reward} PTS</span>
           </StyledTag>
           <StyledTag>
-            <span>{campaign.quests.total} Qusts:</span>
+            <span>{campaign.quests.total} Quests:</span>
             {campaign.quests.total_category.map(
               ({ total, quest_category_id }: { total: number; quest_category_id: number }) => (
                 <>
                   <span style={{ color: `var(--${categories[quest_category_id]?.name}-color` }} key={quest_category_id}>
-                    {total} #{categories[quest_category_id].name}
+                    {total} #{categories[quest_category_id]?.name}
                   </span>
                 </>
               ),
@@ -80,8 +80,8 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
       </StyledBox>
       <StyledBox>
         {campaign.end_time && <Timer endTime={Number(campaign.end_time)} />}
-        <JoinedAccountsBox>
-          {campaign.total_users !== 0 && (
+        {/* <JoinedAccountsBox>
+          {campaign.total_users > 5 && (
             <>
               <JoinedAccounts>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30" fill="none">
@@ -91,10 +91,10 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
                   <ellipse cx="21.002" cy="15.001" rx="1.5" ry="1.5" fill="white" />
                 </svg>
               </JoinedAccounts>
-              <JoinedAccountsAmount>{formatTotalUsers(campaign.total_users)}</JoinedAccountsAmount>
             </>
           )}
-        </JoinedAccountsBox>
+          <JoinedAccountsAmount>{formatTotalUsers(campaign.total_users)}</JoinedAccountsAmount>
+        </JoinedAccountsBox> */}
       </StyledBox>
     </StyledCampaipnContainer>
   );

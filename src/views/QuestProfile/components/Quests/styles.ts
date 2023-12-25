@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import { motion } from 'framer-motion';
 export { LoadingWrapper, Empty } from '../../styles';
 
 export const StyledContainer = styled.div`
@@ -20,23 +20,29 @@ export const StyledTitle = styled.div`
 `;
 
 export const StyledLabels = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 14px;
-`;
-
-export const StyledLabel = styled.div`
-  border-radius: 12px;
+  border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: #1c1d29;
-  width: 127px;
+  width: 292px;
   height: 40px;
-  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  box-sizing: border-box;
+`;
+
+export const StyledLabel = styled(motion.div)<{ $active: boolean }>`
+  height: 32px;
   color: #fff;
   font-size: 14px;
   font-weight: 400;
-  line-height: 40px;
+  line-height: 32px;
   text-align: center;
+  flex-grow: 1;
+  border-radius: 8px;
+  cursor: pointer;
+
+  ${({ $active }) => $active && `background: #2C2E3E`}
 `;
 
 export const StyledQuests = styled.div`

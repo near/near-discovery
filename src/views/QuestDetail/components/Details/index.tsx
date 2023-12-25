@@ -141,7 +141,7 @@ const Details = ({ quest, category }: { quest: any; category: any }) => {
           </StyledQuestInfoItem>
         </StyledQuestInfoItemBox>
       </StyledQuestInfo>
-      <StyledParticipants>
+      {/* <StyledParticipants>
         <StyledLabel>Participants</StyledLabel>
         <JoinedAccountsBox style={{ marginTop: '16px' }}>
           {quest.total_user !== 0 && (
@@ -158,7 +158,7 @@ const Details = ({ quest, category }: { quest: any; category: any }) => {
             </>
           )}
         </JoinedAccountsBox>
-      </StyledParticipants>
+      </StyledParticipants> */}
     </StyledContainer>
   );
 };

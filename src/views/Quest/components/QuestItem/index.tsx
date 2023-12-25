@@ -50,34 +50,36 @@ const QuestItem = ({
       }}
     >
       <StyledTask>
-        <StyledIconBox>{logo && <StyledIcon src={logo} />}</StyledIconBox>
+        <StyledIconBox>{logo && <StyledIcon src={logo} $disabled={live === false} />}</StyledIconBox>
         <div>
           <StyledTaskName>{name}</StyledTaskName>
-          <StyledTaskDesc $isCampaign={isCampaign}>{description}</StyledTaskDesc>
+          {/* <StyledTaskDesc $isCampaign={isCampaign}>{description}</StyledTaskDesc> */}
         </div>
       </StyledTask>
-      <StyledProcessBars>
-        {actions.map((item, i) => (
-          <ProcessBar size={4} key={i} value={action_completed >= i ? 100 : 0} noBorder={true} />
-        ))}
-      </StyledProcessBars>
-      <StyledFooter>
-        <StyledTags>
-          <StyledTag style={{ padding: '0px 10px 0px 6px' }}>
-            <StyledCoin $size={18} />
-            <span style={{ color: '#EBF479' }}>{reward} PTS</span>
-          </StyledTag>
-          <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag>
-        </StyledTags>
-        {!is_claimed && participation_status === 'completed' && <StyledCalimable>To be claimed!</StyledCalimable>}
-      </StyledFooter>
+      <div>
+        <StyledProcessBars>
+          {actions.map((item, i) => (
+            <ProcessBar size={4} key={i} value={action_completed >= i + 1 ? 100 : 0} noBorder={true} />
+          ))}
+        </StyledProcessBars>
+        <StyledFooter>
+          <StyledTags>
+            <StyledTag style={{ padding: '0px 10px 0px 6px' }}>
+              <StyledCoin $size={18} />
+              <span style={{ color: '#EBF479' }}>{reward} PTS</span>
+            </StyledTag>
+            {/* <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag> */}
+          </StyledTags>
+          {!is_claimed && participation_status === 'completed' && <StyledCalimable>To be claimed!</StyledCalimable>}
+        </StyledFooter>
+      </div>
 
-      {live && (
+      {live !== undefined && (
         <StyledLive>
           <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none">
-            <circle cx="4" cy="4" r="4" fill="#31B03E" />
+            <circle cx="4" cy="4" r="4" fill={live ? '#31B03E' : '#979ABE'} />
           </svg>
-          <span>Live</span>
+          <span>{live ? 'Live' : 'Expired'}</span>
         </StyledLive>
       )}
     </StyledContainer>

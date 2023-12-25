@@ -9,6 +9,7 @@ import { ethereum } from '@/config/tokens/ethereum';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
+import popupsData from '@/config/all-in-one/chains';
 
 const blueBg = (
   <svg width="719" height="719" viewBox="0 0 719 719" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,10 +62,6 @@ const arrow = (
 );
 const blockchainsBg = 'https://assets.dapdap.net/images/banner.png';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
-const leftarrow = 'https://assets.dapdap.net/images/bafkreihvymef5y4q6a5lpnwea4fcygi4wrrb2tbzitswc3xnaufs6qnzjy.svg';
-const arrowBlock = 'https://assets.dapdap.net/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
-const chainsconetentImg =
-  'https://assets.dapdap.net/images/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq.svg';
 const BlockchainsPage = styled.div`
   color: #ffffff;
   padding: 0 12% 80px 12%;
@@ -101,7 +98,7 @@ const BlockchainsBanner = styled.div`
   background-position-y: 26%;
   display: flex;
   align-items: center;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   padding-left: 12px;
   .yellow-bg {
@@ -137,7 +134,7 @@ const BlockchainsBanner = styled.div`
 const BlockchainsConetent = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: 0 auto;
   /* justify-content: center; */
   a {
@@ -153,9 +150,9 @@ const BlockchainsConetent = styled.div`
     background: #21232a;
     border: 1px solid #21232a;
     border-radius: 20px;
-    padding: 19px 12px 38px 12px;
+    padding: 20px;
     position: relative;
-    @media (max-width: 1250px) {
+    @media (max-width: 1350px) {
       flex-basis: calc(45% - 20px);
     }
     &:hover {
@@ -218,35 +215,27 @@ const BlockchainsConetent = styled.div`
         margin-right: 4px;
       }
     }
-    h4 {
-      font-size: 16px;
-      color: #ebf479;
-      a {
-        color: #ebf479;
-      }
-      img {
-        margin-left: 8px;
-      }
-    }
-    .list-item-bottom {
-      text-align: center;
-      display: none;
-      height: 28px;
-      line-height: 28px;
-      left: 0;
-      border-radius: 0 0 20px 20px;
-      background: #ebf479e5;
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      color: #000000;
-      img {
-        width: 16px;
-        height: 16px;
-        margin-left: 10px;
-      }
-      a {
-        color: #000000;
+    .minor-paragraph-btn {
+      display: flex;
+      gap: 10px;
+      .paragraph-btn-item {
+        cursor: pointer;
+        flex: 1;
+        border: 1px solid rgba(55, 58, 83, 1);
+        background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+        font-family: Gantari;
+        font-size: 16px;
+        font-weight: 500;
+        border-radius: 12px;
+        padding: 12px 0;
+        text-align: center;
+        &:hover {
+          background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
+          color: rgba(30, 32, 40, 1);
+        }
+        @media (max-width: 1478px) {
+          font-size: 14px;
+        }
       }
     }
   }
@@ -275,6 +264,8 @@ const BlockchainsConetent = styled.div`
 
 const BlockchainsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
+  const [advertise, setAdvertise] = useState<any>([]);
+  const popupsDataArray = Object.values(popupsData);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -284,7 +275,17 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         console.error('Error fetching resultNetwork data:', error);
       }
     };
+    const fetchAdvertiseasync = async () => {
+      try {
+        const response = await fetch(`${QUEST_PATH}/api/ad?category=network`);
+        const data = await response.json();
+        setAdvertise(data.data[0]);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
     fetchNetworkData();
+    fetchAdvertiseasync();
   }, []);
 
   const addMetaMask = async ({
@@ -335,63 +336,70 @@ const BlockchainsColumn: NextPageWithLayout = () => {
 
       <BlockchainsConetent>
         {networkList &&
-          networkList.map((child, index) => (
-            <>
-              <div key={index} className="blockchains-conetent-item">
-                <div className="content-item-title">
-                  <div className="item-title-img">
-                    <img src={child.logo} alt="" />
+          networkList.map((child, index) => {
+            const matchedItem = popupsDataArray.find((item) => item.chainId === child.chain_id);
+            const path = matchedItem ? matchedItem.path : '';
+            return (
+              <>
+                <div key={index} className="blockchains-conetent-item">
+                  <div className="content-item-title">
+                    <div className="item-title-img">
+                      <img src={child.logo} alt="" />
+                    </div>
+                    <div className="item-title-right">
+                      <h1>{child.name}</h1>
+                      <p
+                        onClick={() =>
+                          addMetaMask({
+                            index,
+                            chainId: child.chain_id,
+                            chainName: child.name,
+                            rpcUrls: child.rpc,
+                          })
+                        }
+                      >
+                        Add to MetaMask <img src={diagonaltop} alt="" />
+                      </p>
+                    </div>
                   </div>
-                  <div className="item-title-right">
-                    <h1>{child.name}</h1>
-                    <p
-                      onClick={() =>
-                        addMetaMask({
-                          index,
-                          chainId: child.chain_id,
-                          chainName: child.name,
-                          rpcUrls: child.rpc,
-                        })
-                      }
-                    >
-                      Add to MetaMask <img src={diagonaltop} alt="" />
-                    </p>
+                  <p className="body-paragraph">{child.description}</p>
+                  <p className="minor-paragraph">Technology</p>
+                  <h3>{child.technology || '-'}</h3>
+                  <p className="minor-paragraph">Native Token</p>
+                  <h3>
+                    {child.tbd_token === 'Y' ? (
+                      'TBD🔥'
+                    ) : (
+                      <>
+                        {JSON.parse(child.native_currency).logo && (
+                          <img src={JSON.parse(child.native_currency).logo} alt="" />
+                        )}
+                        {JSON.parse(child.native_currency).name}
+                      </>
+                    )}
+                  </h3>
+                  <div className="minor-paragraph-btn">
+                    <Link href={`/chains-details?id=${child.id}`} className="paragraph-btn-item">
+                      View Detail
+                    </Link>
+                    <Link href={`/all-in-one/${path}`} className="paragraph-btn-item">
+                      Shortcut
+                    </Link>
+                    {child.deepdive && (
+                      <Link href="/warmup" className="paragraph-btn-item">
+                        Deep Dive
+                      </Link>
+                    )}
                   </div>
                 </div>
-                <p className="body-paragraph">{child.description}</p>
-                <p className="minor-paragraph">Technology</p>
-                <h3>{child.technology}</h3>
-                <p className="minor-paragraph">Native Token</p>
-                <h3>
-                  {child.tbd_token === 'Y' ? (
-                    'TBD🔥'
-                  ) : (
-                    <>
-                      {JSON.parse(child.native_currency).logo && (
-                        <img src={JSON.parse(child.native_currency).logo} alt="" />
-                      )}
-                      {JSON.parse(child.native_currency).name}
-                    </>
-                  )}
-                </h3>
-                <h4>
-                  <Link href={`/chains-details?id=${child.id}`}>Learn more</Link>
-                  <img src={leftarrow} alt="" />
-                </h4>
-                {child.name === 'Polygon zkEVM' && (
-                  <Link href="/warmup" className="list-item-bottom">
-                    Deep Dive
-                    <img src={arrowBlock} alt="" />
-                  </Link>
+                {index === 4 && (
+                  <div className="blockchains-conetent-item conetent-item-img">
+                    <img src={advertise?.ad_images} alt="" />
+                  </div>
                 )}
-              </div>
-              {index === 4 && (
-                <div className="blockchains-conetent-item conetent-item-img">
-                  <img src={chainsconetentImg} alt="" />
-                </div>
-              )}
-            </>
-          ))}
+              </>
+            );
+          })}
       </BlockchainsConetent>
     </BlockchainsPage>
   );

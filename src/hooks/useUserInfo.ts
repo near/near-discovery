@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
-export default function useUserInfo({ id, updater }: { id?: string; updater?: number }) {
+export default function useUserInfo({ id, updater, from }: { id?: string; updater?: number; from?: string }) {
   const [info, setInfo] = useState<any>();
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,11 @@ export default function useUserInfo({ id, updater }: { id?: string; updater?: nu
   }, [loading, id]);
 
   useEffect(() => {
-    queryInfo();
+    if (from === 'leaderboard') {
+      if (id) queryInfo();
+    } else {
+      queryInfo();
+    }
   }, [id, updater]);
 
   return { loading, info };

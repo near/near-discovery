@@ -18,7 +18,8 @@ export default function useCategoryList() {
     setLoading(true);
     try {
       const result = await get(`${QUEST_PATH}/api/quest/category_list`);
-      const data = result.data?.data || [];
+
+      const data = result.data || [];
       const _categories = data.reduce((acc: any, category: any) => ({ ...acc, [category.id]: category }), {});
       setCategories(_categories);
       setLoading(false);

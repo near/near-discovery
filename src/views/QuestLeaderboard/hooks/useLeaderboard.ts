@@ -16,7 +16,7 @@ export default function useLeaderboard() {
       if (loading) return;
       setLoading(true);
       try {
-        const result = await get(`${QUEST_PATH}/api/quest/leaderboard?page=${_page || page}&page_szie=10`);
+        const result = await get(`${QUEST_PATH}/api/quest/leaderboard?page=${_page || page}&page_size=10`);
         const data = result.data.data || [];
         setList(data);
         setLoading(false);
@@ -49,9 +49,13 @@ export default function useLeaderboard() {
     [page],
   );
 
+  const handleRefresh = useCallback(() => {
+    queryLeaderboard(1);
+  }, []);
+
   useEffect(() => {
     queryLeaderboard(1);
   }, []);
 
-  return { loading, list, page, info, maxPage, handlePageChange };
+  return { loading, list, page, info, maxPage, handlePageChange, handleRefresh };
 }
