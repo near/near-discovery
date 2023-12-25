@@ -511,9 +511,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     return 'token';
   });
   const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
-  const [selectedMenu, setSelectedMenu] = useState(() => {
-    return '';
-  });
+  const [selectedMenu, setSelectedMenu] = useState('');
 
   function getCategoryNames(dappCategories: any, categoryArray: any[]) {
     const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
@@ -536,11 +534,14 @@ const AllDappsColumn: NextPageWithLayout = () => {
     setSelectedTab(path);
   };
   const handleMenuClick = (path: string) => {
-    if (selectedMenu === path) {
-      setSelectedMenu('');
+    const _selectedMenu = selectedMenu === path ? '' : path;
+    const params = new URLSearchParams(searchParams);
+    if (_selectedMenu) {
+      params.set('network', _selectedMenu);
     } else {
-      setSelectedMenu(path);
+      params.delete('network');
     }
+    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
   };
   const handleFunctionClick = (functionType: any) => {
     const id = functionType.id;
@@ -641,6 +642,12 @@ const AllDappsColumn: NextPageWithLayout = () => {
     const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
     setSelectedFunction(categoryFromQuery);
   }, [router.query.category]);
+
+  useEffect(() => {
+    const networkFromQuery = router.query.network ? (router.query.network as string) : '';
+    setSelectedMenu(networkFromQuery);
+  }, [router.query.network]);
+
   useEffect(() => {
     const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
     if (JSON.stringify(categoryFromQuery) === JSON.stringify(selectedFunction)) {

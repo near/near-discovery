@@ -22,7 +22,6 @@ export default function useActionCheck(cb: VoidFunction) {
         title: `Action refreshed successfully`,
       });
       setLoading(false);
-      cb();
       if (result.data?.status === 'completed') cb();
     } catch (err) {
       setLoading(false);
