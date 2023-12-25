@@ -60,6 +60,8 @@ export const StyledIconBox = styled.div`
   &.open {
     transform: rotate(90deg);
   }
+  .tips {
+  }
 `;
 
 export const StyledButton = styled.button`

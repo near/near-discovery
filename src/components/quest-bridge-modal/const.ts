@@ -1,4 +1,4 @@
-export const iconMap = {
+export const iconMap: any = {
   // 'native bridge': 'https://ipfs.near.social/ipfs/bafkreigawbz26l7mhfewlxwnjomos6njdkchnfnw2dnb6xtzf7j2t6jdxm',
   'Pancake Swap': 'https://repository-images.githubusercontent.com/440462673/6872d684-f7ed-463c-9a5c-76542eddbcc4',
 

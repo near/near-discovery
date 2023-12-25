@@ -50,7 +50,7 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
 
   const currencyCode = currencyCodeMatch ? currencyCodeMatch[1] : '';
   const token = SwapTokens.find((item) => item.symbol === currencyCode);
-  const { tokenBalance, isError, isLoading, update } = useTokenBalance(token?.address, token?.decimals);
+  const { tokenBalance, isError, isLoading, update } = useTokenBalance(token?.address || '', token?.decimals || 0);
 
   return (
     <BaseModal title="Swap" onClose={onCloseModal}>
@@ -77,7 +77,7 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
           decimals: 18, //TODO
         }}
         inputCurrencyAmount={item.action_amount}
-        maxInputBalance={tokenBalance}
+        maxInputBalance={Number(tokenBalance || 0)}
         outputCurrency={{
           address: 'native', //TODO
           symbol: 'ETH', //TODO

@@ -24,9 +24,9 @@ const TOKEN_ABI = [
   },
 ];
 
-export default function useTokenBalance(address: string, decimals: () => void) {
+export default function useTokenBalance(address: string, decimals: number) {
   const { account, provider } = useAccount();
-  const [tokenBalance, setTokenBalance] = useState(0);
+  const [tokenBalance, setTokenBalance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [fresh, setFresh] = useState(0);

@@ -121,17 +121,11 @@ interface IProps {
   updateBalance: () => void;
 }
 
-const Liquidity: FC<IProps> = ({
-  inputCurrency,
-
-  currencyCode,
-
-  maxInputBalance,
-}) => {
+const Liquidity: FC<any> = ({ inputCurrency, currencyCode, maxInputBalance, getAllowance }) => {
   const { account, provider, chainId } = useAccount();
   const toast = useToast();
   const { addAction } = useAddAction('all-in-one');
-  const [inputValue, setInputValue] = useState(null);
+  const [inputValue, setInputValue] = useState<any>();
   const [isDisabled, setIsDisabled] = useState(true);
   const [btnText, setBtnText] = useState('Swap');
   const [isApproved, setIsApproved] = useState(true);
@@ -140,7 +134,7 @@ const Liquidity: FC<IProps> = ({
   const [isWrapping, setIsWrapping] = useState(false);
   const [toastId, setToastId] = useState(0);
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     inputRef?.current?.focus();

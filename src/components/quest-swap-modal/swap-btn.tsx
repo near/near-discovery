@@ -1,4 +1,3 @@
-import { useRequest } from 'ahooks';
 import Big from 'big.js';
 import { Contract, utils } from 'ethers';
 import type { ChangeEvent, FC } from 'react';
@@ -121,7 +120,7 @@ interface IProps {
   updateBalance: () => void;
 }
 
-const SwapBtn: FC<IProps> = ({
+const SwapBtn: FC<any> = ({
   noPair,
   inputCurrency,
   outputCurrency,
@@ -146,16 +145,16 @@ const SwapBtn: FC<IProps> = ({
   const { account, provider, chainId } = useAccount();
   const toast = useToast();
   const { addAction } = useAddAction('all-in-one');
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState(0);
   const [isDisabled, setIsDisabled] = useState(true);
   const [btnText, setBtnText] = useState('Swap');
   const [isApproved, setIsApproved] = useState(true);
   const [isApproving, setIsApproving] = useState(false);
   const [isSwapping, setIsSwapping] = useState(false);
   const [isWrapping, setIsWrapping] = useState(false);
-  const [toastId, setToastId] = useState(0);
+  const [toastId, setToastId] = useState<any>();
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   // 1: ETH=>WETH 2:WETH=>ETH 0: others
   const wrapType =
     inputCurrency.address === 'native' && outputCurrency.address === wethAddress
@@ -238,7 +237,7 @@ const SwapBtn: FC<IProps> = ({
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value ? Number(e.target.value) : '';
-    setInputValue(value);
+    setInputValue(Number(value || 0));
   };
 
   const getAllowance = async () => {
@@ -270,8 +269,8 @@ const SwapBtn: FC<IProps> = ({
       routerAddress,
       utils.parseUnits(Big(inputValue).toFixed(inputCurrency.decimals).toString(), inputCurrency.decimals),
     )
-      .then((tx) => {
-        tx.wait().then((res) => {
+      .then((tx: any) => {
+        tx.wait().then((res: any) => {
           console.info('approve-success', res);
           const { status, transactionHash } = res;
           toast?.dismiss(toastId);
@@ -287,7 +286,7 @@ const SwapBtn: FC<IProps> = ({
           });
         });
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.info('approve-error', err);
 
         setIsApproving(false);
@@ -301,9 +300,9 @@ const SwapBtn: FC<IProps> = ({
       });
   };
 
-  function successCallback(tx, callback: () => void) {
+  function successCallback(tx: any, callback: () => void) {
     tx.wait()
-      .then((res) => {
+      .then((res: any) => {
         updateBalance();
         const { status, transactionHash } = res;
         console.log('tx res', res);
@@ -330,7 +329,7 @@ const SwapBtn: FC<IProps> = ({
           chainId,
         });
       })
-      .catch((err) => {
+      .catch((err: any) => {
         toast?.fail({
           title: 'Swap Failed!',
           text: `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
@@ -340,24 +339,24 @@ const SwapBtn: FC<IProps> = ({
       });
   }
 
-  const handleWrap = (type: 1 | 2, handleSuccess: () => void, handleError: () => void) => {
+  const handleWrap = (type: 1 | 2, handleSuccess: (tx: any) => void, handleError: (err: any) => void) => {
     const WethContract = new Contract(wethAddress, WETH_ABI, provider.getSigner());
     if (type === 1) {
       WethContract.deposit({
         value: utils.parseEther(Big(inputValue).toFixed(18).toString()),
       })
-        .then((tx) => {
+        .then((tx: any) => {
           handleSuccess?.(tx);
         })
-        .catch((err) => {
+        .catch((err: any) => {
           handleError?.(err);
         });
     } else {
       WethContract.withdraw(utils.parseEther(Big(inputValue).toFixed(18).toString()))
-        .then((tx) => {
+        .then((tx: any) => {
           handleSuccess?.(tx);
         })
-        .catch((err) => {
+        .catch((err: any) => {
           handleError?.(err);
         });
     }
@@ -397,7 +396,7 @@ const SwapBtn: FC<IProps> = ({
 
       const amount = utils.parseUnits(Big(inputCurrencyAmount).toFixed(inputCurrency.decimals), inputCurrency.decimals);
 
-      const multicallParams = [];
+      const multicallParams: any[] = [];
 
       const _inputCurrencyAddress = inputCurrency.address === 'native' ? wethAddress : inputCurrency.address;
       const _outputCurrencyAddress = outputCurrency.address === 'native' ? wethAddress : outputCurrency.address;
@@ -450,19 +449,19 @@ const SwapBtn: FC<IProps> = ({
               ...options,
               gasLimit: gas,
             })
-              .then((tx) => {
+              .then((tx: any) => {
                 console.info('tx: ', tx);
                 successCallback(tx, () => {
                   setIsSwapping(false);
                   setBtnText('Swap');
                 });
               })
-              .catch((err) => {
+              .catch((err: any) => {
                 console.info(888888, err);
                 onError(err);
               });
           })
-          .catch((err) => {
+          .catch((err: any) => {
             console.info(99999, err);
             onError(err);
           });
@@ -518,7 +517,7 @@ const SwapBtn: FC<IProps> = ({
           },
         ];
 
-        const token_indices = {};
+        const token_indices: any = {};
         for (let i = 0; i < assets.length; i++) {
           token_indices[assets[i]] = i;
         }
@@ -647,7 +646,7 @@ const SwapBtn: FC<IProps> = ({
               ...options,
               gasLimit: gas,
             })
-              .then((tx) => {
+              .then((tx: any) => {
                 successCallback(tx, () => {
                   setIsSwapping(false);
                   setBtnText('Swap');
@@ -655,7 +654,7 @@ const SwapBtn: FC<IProps> = ({
                   //TODO close or refresh
                 });
               })
-              .catch((err) => {
+              .catch((err: any) => {
                 onError(err);
               });
           })

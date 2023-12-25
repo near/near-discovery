@@ -117,10 +117,11 @@ interface IProps {
   handleSyncswap: any;
   stable: string;
   syncSwapPoolAddress: string;
+  token: any;
   updateBalance: () => void;
 }
 
-const Bridge: FC<IProps> = ({
+const Bridge: FC<any> = ({
   noPair,
   inputCurrency,
   outputCurrency,
@@ -145,7 +146,7 @@ const Bridge: FC<IProps> = ({
   const { account, provider, chainId } = useAccount();
   const toast = useToast();
   const { addAction } = useAddAction('all-in-one');
-  const [inputValue, setInputValue] = useState(null);
+  const [inputValue, setInputValue] = useState<any>(null);
   const [isDisabled, setIsDisabled] = useState(true);
   const [btnText, setBtnText] = useState('Bridge');
   const [isApproved, setIsApproved] = useState(true);
@@ -153,7 +154,7 @@ const Bridge: FC<IProps> = ({
   const [isSwapping, setIsSwapping] = useState(false);
   const [toastId, setToastId] = useState(0);
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   useEffect(() => {
     inputRef?.current?.focus();
@@ -212,8 +213,8 @@ const Bridge: FC<IProps> = ({
       routerAddress,
       utils.parseUnits(Big(inputValue).toFixed(inputCurrency.decimals).toString(), inputCurrency.decimals),
     )
-      .then((tx) => {
-        tx.wait().then((res) => {
+      .then((tx: any) => {
+        tx.wait().then((res: any) => {
           console.info('approve-success', res);
           const { status, transactionHash } = res;
           toast?.dismiss(toastId);
@@ -229,7 +230,7 @@ const Bridge: FC<IProps> = ({
           });
         });
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.info('approve-error', err);
 
         setIsApproving(false);
@@ -243,9 +244,9 @@ const Bridge: FC<IProps> = ({
       });
   };
 
-  function successCallback(tx, callback: () => void) {
+  function successCallback(tx: any, callback: () => void) {
     tx.wait()
-      .then((res) => {
+      .then((res: any) => {
         updateBalance();
         const { status, transactionHash } = res;
         console.log('tx res', res);
@@ -272,7 +273,7 @@ const Bridge: FC<IProps> = ({
           chainId,
         });
       })
-      .catch((err) => {
+      .catch((err: any) => {
         toast?.fail({
           title: 'Swap Failed!',
           text: `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
