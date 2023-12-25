@@ -18,7 +18,7 @@ export const StyledContainer = styled.div`
   justify-content: center;
   position: fixed;
   right: 30px;
-  bottom: 58px;
+  bottom: 118px;
   z-index: 30;
   cursor: pointer;
 `;

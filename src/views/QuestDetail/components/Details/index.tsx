@@ -3,6 +3,8 @@ import { memo } from 'react';
 import { formatPeriodDate, formatTotalUsers } from '@/views/Quest/helpers';
 import useLike from '@/views/Quest/hooks/useLike';
 
+import { formatDescription } from '../../helper';
+
 import {
   JoinedAccounts,
   JoinedAccountsAmount,
@@ -63,7 +65,7 @@ const Details = ({ quest, category }: { quest: any; category: any }) => {
           )}
         </StyledHeartBox>
       </StyledHeader>
-      <StyledDesc>{quest.description}</StyledDesc>
+      <StyledDesc dangerouslySetInnerHTML={{ __html: formatDescription(quest.description) }} />
       <StyledIconBox>{quest.logo && <StyledIcon src={quest.logo} />}</StyledIconBox>
       <StyledRewardsAndTimeBox>
         <div>

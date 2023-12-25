@@ -65,7 +65,7 @@ const LandingView = () => {
                     <StyledStepTitle>
                       Step {i + 1}. {_step.title}
                     </StyledStepTitle>
-                    <StyledStepCoins>+{_step.rewards}PTS</StyledStepCoins>
+                    {/* <StyledStepCoins>+{_step.rewards}PTS</StyledStepCoins> */}
                   </StyledStepHeader>
                   <StyledStepDesc>{_step.desc}</StyledStepDesc>
                 </StyledStep>

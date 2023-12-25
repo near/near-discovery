@@ -58,6 +58,13 @@ export const StyledAvatar = styled.img`
   border-radius: 50%;
 `;
 
+export const StyledAvatarBox = styled.div`
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-image: conic-gradient(from 180deg at 50% 50%, #00d1ff 0deg, #ff008a 360deg);
+`;
+
 export const StyledName = styled.div`
   color: #fff;
   text-align: center;

@@ -19,6 +19,7 @@ import {
   StyledMedal,
   StyledName,
   StyledSmallCircle,
+  StyledAvatarBox,
   StyledSteps,
 } from './styles';
 
@@ -28,7 +29,8 @@ const UserInfo = ({ info, onSuccess }: any) => {
     <StyledContainer>
       <StyledContent>
         <StyledInfo>
-          <StyledAvatar src={info.avatar} />
+          {info.avatar ? <StyledAvatar src={info.avatar} /> : <StyledAvatarBox />}
+
           <div>
             <StyledName>{info.username}</StyledName>
             <StyledAddress>{ellipsAccount(account)}</StyledAddress>

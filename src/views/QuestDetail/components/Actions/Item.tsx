@@ -8,6 +8,7 @@ import { useLayoutStore } from '@/stores/layout';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 
 import useActionCheck from '../../hooks/useActionCheck';
+import { formatDescription } from '../../helper';
 import {
   StyledDapp,
   StyledDappIcon,
@@ -56,7 +57,7 @@ const ActionItem = ({
 
   const handleClick = useCallback(() => {
     setOpen(false);
-    if (!action.source) return;
+
     if (action.source === 'search') {
       document.getElementById('nav-top-search')?.focus();
       return;
@@ -72,6 +73,7 @@ const ActionItem = ({
       router.push('/landing');
       return;
     }
+
     if (action.category.startsWith('twitter') && !userInfo.twitter.is_bind) {
       const state = (Date.now() + Math.random() * 10000).toFixed(0);
       sessionStorage.setItem('_auth_state', state);
@@ -101,6 +103,7 @@ const ActionItem = ({
       window.open(action.source, '_blank');
       return;
     }
+    if (!action.source) return;
     router.push('/' + action.source);
   }, [router, config, action]);
 
@@ -111,6 +114,7 @@ const ActionItem = ({
   useEffect(() => {
     setActionCompleted(completed);
   }, [completed]);
+
   return (
     <StyledItemContainer>
       <StyledItemTop
@@ -221,7 +225,7 @@ const ActionItem = ({
             transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
           >
             <StyledExpand>
-              <StyledDesc>{action.description}</StyledDesc>
+              <StyledDesc dangerouslySetInnerHTML={{ __html: formatDescription(action.description) }} />
               <StyledDapps>
                 {action.operators?.map((dapp: any) => (
                   <StyledDapp

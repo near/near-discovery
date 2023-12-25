@@ -45,7 +45,7 @@ const Actions = ({
       <StyledHeader>
         <StyledLabel>Actions</StyledLabel>
         <StyledTimerBox>
-          <div>Upcoming</div>
+          {startTime > Date.now() && <div>Upcoming</div>}
           {startTime > Date.now() ? <Timer endTime={Number(startTime)} /> : <Timer endTime={Number(endTime)} />}{' '}
         </StyledTimerBox>
       </StyledHeader>

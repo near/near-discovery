@@ -79,7 +79,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
       </StyledBox>
       <StyledBox>
         <StyledTimerBox>
-          <div>Upcoming</div>
+          {campaign.start_time > Date.now() && <div>Upcoming</div>}
           {campaign.start_time > Date.now() ? (
             <Timer endTime={Number(campaign.start_time)} />
           ) : (
