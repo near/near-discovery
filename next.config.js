@@ -61,6 +61,7 @@ const nextConfig = {
       },
     ],
   },
+  transpilePackages: ['ahooks'],
 };
 
 module.exports = nextConfig;

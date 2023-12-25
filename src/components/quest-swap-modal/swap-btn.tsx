@@ -1,4 +1,4 @@
-import { useRequest } from 'ahooks';
+import { useDebounce } from 'ahooks';
 import Big from 'big.js';
 import { Contract, utils } from 'ethers';
 import type { ChangeEvent, FC } from 'react';
@@ -146,7 +146,8 @@ const SwapBtn: FC<IProps> = ({
   const { account, provider, chainId } = useAccount();
   const toast = useToast();
   const { addAction } = useAddAction('all-in-one');
-  const [inputValue, setInputValue] = useState('');
+  const [initInputValue, setInputValue] = useState('');
+  const inputValue = useDebounce(initInputValue, { wait: 1000 });
   const [isDisabled, setIsDisabled] = useState(true);
   const [btnText, setBtnText] = useState('Swap');
   const [isApproved, setIsApproved] = useState(true);
@@ -179,7 +180,7 @@ const SwapBtn: FC<IProps> = ({
           setBtnText('Swap');
         } else {
           const outAmount = await calcOutAmount();
-          // console.log(' out: ', outAmount);
+          console.log(' out: ', outAmount);
           if (Big(outAmount).lt('0.00000000001')) {
             setIsDisabled(true);
             setBtnText('Insufficient Liquidity');
@@ -196,6 +197,8 @@ const SwapBtn: FC<IProps> = ({
   }, [inputValue, maxInputBalance]);
 
   const calcOutAmount = async () => {
+    console.log('calc');
+
     if (!inputCurrency.address || !outputCurrency.address || !inputValue) {
       return 0;
     }
@@ -732,7 +735,7 @@ const SwapBtn: FC<IProps> = ({
           <input
             ref={inputRef}
             type="number"
-            value={inputValue}
+            value={initInputValue}
             onChange={handleInputChange}
             maxLength={String(maxInputBalance).length + 2}
             max={maxInputBalance}
