@@ -14,12 +14,14 @@ const Actions = ({
   rewards,
   completed,
   id,
+  userInfo,
 }: {
   actions: any;
   endTime: number;
   rewards: number;
   completed: number;
   id: string;
+  userInfo: any;
 }) => {
   const { loading, handleClaim } = useRewardsClaim(() => {});
   const [cbCompleted, setCbCompleted] = useState(0);
@@ -35,6 +37,7 @@ const Actions = ({
           key={action.id}
           action={action}
           completed={action.status === 'completed'}
+          userInfo={userInfo}
           onSuccess={() => {
             setCbCompleted((prev) => prev + 1);
           }}

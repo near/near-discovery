@@ -39,6 +39,7 @@ const QuestDetailView = () => {
                 rewards={info.quest.reward}
                 completed={info.quest.action_completed}
                 id={searchParams.get('id') || ''}
+                userInfo={userInfo}
               />
             </StyledTopBox>
             <Recommends campaignId={info.quest.quest_campaign_id} />
