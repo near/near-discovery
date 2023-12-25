@@ -1,17 +1,13 @@
 import Big from 'big.js';
 import { Contract, providers, utils } from 'ethers';
-import { ConnectionsRequest, LiFi, ChainType, QuoteRequest, RoutesRequest } from '@lifi/sdk'
+import { LiFi } from '@lifi/sdk'
+import type { RoutesRequest, Route } from '@lifi/sdk'
 import { useState } from 'react';
 
-import { chainCofig } from '@/config/bridge';
 import useAccount from '@/hooks/useAccount';
-import useAddAction from '@/hooks/useAddAction';
-import { usePriceStore } from '@/stores/price';
 
 import type { Chain, Token } from '../types';
-import { ExecException, ExecOptions } from 'child_process';
 
-const { JsonRpcProvider } = providers;
 
 // 初始化lifi
 export const lifi = new LiFi({
@@ -23,7 +19,7 @@ lifi.getTokens().then(res => {
   tokens = res.tokens
 })
 
-async function getRoute(chain, targetChain, token, account, amount) {
+async function getRoute(chain: Chain, targetChain: Chain, token: Token, account: string | undefined, amount: string): Promise<Route | undefined> {
   const chainTokenList = tokens[chain.chainId]
 
   const filterTokens = chainTokenList.filter((item: any) => item.symbol.toUpperCase() === token.symbol.toUpperCase())
@@ -99,10 +95,12 @@ export default function useLifi() {
   }) => {
     if (!provider) return;
     const signer = await provider.getSigner(account);
-    const selectRoute = await getRoute(chain, targetChain, token, account, amount);
-    const executeRes = await lifi.executeRoute(signer, selectRoute);
-    console.log(executeRes)
-    onSuccess(executeRes.id ? executeRes.id : '');
+    const selectRoute: Route | undefined = await getRoute(chain, targetChain, token, account, amount);
+    if (selectRoute) {
+      const executeRes = await lifi.executeRoute(signer, selectRoute);
+      console.log(executeRes)
+      onSuccess(executeRes.id ? executeRes.id : '');
+    }
   };
 
   return {
