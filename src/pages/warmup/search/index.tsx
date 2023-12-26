@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+import SearchConfig from '@/utils/warmup-search-config';
 
 // import SearchConfig from './config';
 
@@ -404,14 +405,14 @@ const InputSearch: NextPageWithLayout = () => {
         )}
       </div>
 
-      {/* <SearchConfig
+      <SearchConfig
         onLoad={(newHintList: any) => {
           if (JSON.stringify(newHintList) !== JSON.stringify(hintList)) {
             setHintList(newHintList);
           }
         }}
         search={state.text}
-      /> */}
+      />
 
       {!!state.text && hintList.length > 0 && !state.selectClose && (
         <div className="search-hint-list">
