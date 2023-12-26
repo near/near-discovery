@@ -560,6 +560,7 @@ const Content = styled.div`
 
   .learning {
     .learning-contents-item {
+      height: 206px;
       display: flex;
       overflow: hidden;
       .learning-content-item {
@@ -596,6 +597,9 @@ const Content = styled.div`
     }
 
     .learning-icon {
+      @media (min-width: 2400px) {
+        display: none;
+      }
       width: 100%;
       display: flex;
       text-align: center;
@@ -905,7 +909,7 @@ const HomeContent: NextPageWithLayout = () => {
 
   useEffect(() => {
     if (carouselRef.current) {
-      const page = Math.ceil(carouselRef.current.clientWidth / 0.3);
+      const page = Math.ceil(carouselRef.current.clientWidth / 540);
       setLearningPage(page);
     }
     // if (carouselRef.current && currentIndex === items.length - 1) {
@@ -1288,14 +1292,14 @@ const HomeContent: NextPageWithLayout = () => {
               // onTransitionEnd={handleTransitionEnd}
               style={{
                 display: 'flex',
-                width: `${items.length * 35}%`,
+                width: `${items.length * 540}px`,
                 transition: '0.5s',
-                transform: `translateX(-${currentIndex * 35}%)`,
+                transform: `translateX(-${currentIndex * 540}px)`,
                 willChange: 'transform',
               }}
             >
               {items.map((item, index) => (
-                <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '35%' }}>
+                <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '540px' }}>
                   <div className="content-item-img">
                     <img src={item.icon} alt="" />
                   </div>

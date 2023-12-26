@@ -760,9 +760,9 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
               ))
             : null}
         </div>
-        <div className="right-side-substance">
+        <Link href={advertise?.ad_link} className="right-side-substance">
           <img src={advertise?.ad_images} alt="" />
-        </div>
+        </Link>
       </ChainsDetailsContent>
 
       <ChainsDetailsHot>
