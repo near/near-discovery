@@ -160,31 +160,6 @@ const Page = styled.div`
 `;
 
 const WarmUp: NextPageWithLayout = () => {
-  const components = useBosComponents();
-  const [innerWidth, setInnerWidth] = useState<number>();
-  const [putMenu, setPutMenu] = useState(false);
-  const { addAction } = useAddAction('all-in-one');
-  useEffect(() => {
-    const offset = putMenu ? 170 : 350;
-
-    const innerWidth = window.innerWidth;
-    setInnerWidth(innerWidth > 900 ? innerWidth - offset : innerWidth);
-    const handleResize = () => {
-      const innerWidth = window.innerWidth;
-
-      setInnerWidth(innerWidth > 900 ? innerWidth - offset : innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [putMenu]);
-
-  useEffect(() => {
-    const getPutMenu = (e: any) => {
-      setPutMenu(e.detail);
-    };
-    window.addEventListener('changePutEvent', getPutMenu);
-    return () => window.removeEventListener('setItemEvent', getPutMenu);
-  }, []);
   return (
     <Container>
       <BreadCrumbs>

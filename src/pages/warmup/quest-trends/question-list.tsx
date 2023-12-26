@@ -283,9 +283,7 @@ const QuestionList: NextPageWithLayout = () => {
   useEffect(() => {
     const fetchHotActionList = async () => {
       try {
-        const resultNetwork = await get(
-          `${QUEST_PATH}/api/action/get-hot-action?hot_number=20&action_network_id=zkEVM`,
-        );
+        const resultNetwork = await get(`${QUEST_PATH}/api/action/get-hot-action?hot_number=20&chain_id=1101`);
         setHotActionList(resultNetwork.data);
         setSearchActionList(resultNetwork.data);
       } catch (error) {

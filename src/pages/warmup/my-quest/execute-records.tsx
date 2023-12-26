@@ -603,7 +603,7 @@ const ExecuteRecords: NextPageWithLayout = () => {
   const fetchRecordList = async () => {
     try {
       const resultRecordList = await get(
-        `${QUEST_PATH}/api/action/get-action-records-by-account?account_id=${sender}&page=${currentPage}&size=${pageSize}&action_type=${searchAction}&action_status=${searchStatus}&template=${searchTemplate}&action_network_id=zkEVM`,
+        `${QUEST_PATH}/api/action/get-action-records-by-account?account_id=${sender}&page=${currentPage}&size=${pageSize}&action_type=${searchAction}&action_status=${searchStatus}&template=${searchTemplate}&chain_id=1101`,
       );
       if (resultRecordList.code === 0) {
         setRecordList(resultRecordList.items);

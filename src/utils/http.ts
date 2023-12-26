@@ -65,4 +65,17 @@ const post = async (url: string, data: object) => {
   return (await res.json()) as any;
 };
 
-export { get, post, AUTH_TOKENS };
+const deleteRequest = async (url: string, data: object) => {
+  const tokens = JSON.parse(window.localStorage.getItem(AUTH_TOKENS) || '{}');
+  const res = await fetch(getUrl(url), {
+    method: 'DELETE',
+    headers: {
+      Authorization: `Bearer ${tokens.access_token || ''}`,
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+  return (await res.json()) as any;
+};
+
+export { get, post, deleteRequest, AUTH_TOKENS };

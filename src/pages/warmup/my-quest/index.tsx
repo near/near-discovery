@@ -6,9 +6,11 @@ import { styled } from 'styled-components';
 import { QUEST_PATH } from '@/config/quest';
 import { useEthersProviderContext } from '@/data/web3';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { get } from '@/utils/http';
+import { useUUIdStore } from '@/stores/uuid';
+import { deleteRequest, get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
-import { getCorrectAccessKey } from '@/utils/auth';
+
+import QuestCard from './quest-card';
 
 const arrowDown = (
   <svg width="8" height="15" viewBox="0 0 8 15" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -138,6 +140,7 @@ const CardListWrapper = styled.div`
   align-items: center;
   gap: 18px;
   flex-wrap: wrap;
+  margin-bottom: 60px;
   .CardListWrapper-title {
     display: none;
   }
@@ -330,10 +333,43 @@ const OperationWrapper = styled.div`
 `;
 
 const MyQuest: NextPageWithLayout = () => {
+  const [innerWidth, setInnerWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const [putMenu, setPutMenu] = useState(false);
+  const [showAll, setShowAll] = useState(false);
+  const [showRemoveAll, setShowRemoveAll] = useState(false);
+  const [shouldRemoveAll, setShouldRemoveAll] = useState(false);
   const [sender, setSender] = useState<string>('');
   const ethersProviderContext = useEthersProviderContext();
   const { provider, useConnectWallet } = ethersProviderContext;
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const [showSwitch, setShowSwitch] = useState(false);
+  const [myQuestList, setMyQuestList] = useState<any[]>([]);
+  const [forceReload, setForceReload] = useState(false);
+  const [questLoadDone, setQuestLoadDone] = useState(false);
+  const uuid = useUUIdStore((store: any) => store.uuid);
+  const [realList, setRealList] = useState<any[]>([]);
+  const [haveMoreCard, setHaveMoreCard] = useState(false);
+  useEffect(() => {
+    const offset = putMenu ? 170 : 350;
+
+    const innerWidth = window.innerWidth;
+    setInnerWidth(innerWidth > 900 ? innerWidth - offset : innerWidth);
+    const handleResize = () => {
+      const innerWidth = window.innerWidth;
+
+      setInnerWidth(innerWidth > 900 ? innerWidth - offset : innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [putMenu]);
+
+  useEffect(() => {
+    const getPutMenu = (e: any) => {
+      setPutMenu(e.detail);
+    };
+    window.addEventListener('changePutEvent', getPutMenu);
+    return () => window.removeEventListener('setItemEvent', getPutMenu);
+  }, []);
   useEffect(() => {
     if (!wallet || !provider) return;
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
@@ -344,24 +380,195 @@ const MyQuest: NextPageWithLayout = () => {
     });
   }, [wallet, provider]);
 
-  //   const uuid = localStorage.getItem('zkevm-warm-up-uuid');
+  const fetchMyQuestList = async () => {
+    try {
+      const resultMyQuestList = await get(
+        `${QUEST_PATH}/api/action/get-action-by-account?account_id=${sender}&account_info=${uuid}&chain_id=1101`,
+      );
+      if (resultMyQuestList.code === 0) {
+        setMyQuestList(resultMyQuestList.data);
+      }
+    } catch (error) {
+      console.error('Error fetching resultMyQuestList data:', error);
+    }
+  };
+  useEffect(() => {
+    fetchMyQuestList();
+  }, [sender]);
 
-  const [showSwitch, setShowSwitch] = useState(false);
-  const [myQuestList, setMyQuestList] = useState([]);
-  const [forceReload, setForceReload] = useState(false);
-  const [questLoadDone, setQuestLoadDone] = useState(false);
+  function showSwitchUpdate() {
+    setShowSwitch(!showSwitch);
+  }
+  useEffect(() => {
+    const itemWidth = 259;
+    const itemMargin = 10;
+    const resultInnerWidth = innerWidth - 240;
+    const size = resultInnerWidth ? Math.floor(resultInnerWidth / (itemWidth + itemMargin)) * 2 : 0;
+    setRealList(myQuestList.slice(0, Math.min(size, myQuestList.length)));
+  }, [myQuestList]);
 
-  //   const fetchMyQuestList = async () => {
-  //     try {
-  //       const resultMyQuestList = await get(`https://test-api.dapdap.net/api/action/get-special-action`);
-  //       console.log(resultMyQuestList);
-  //     } catch (error) {
-  //       console.error('Error fetching resultMyQuestList data:', error);
-  //     }
-  //   };
-  //   fetchMyQuestList();
+  useEffect(() => {
+    setHaveMoreCard(true);
+  }, [realList, myQuestList]);
+  useEffect(() => {
+    if (!shouldRemoveAll) return;
 
-  return <>-</>;
+    const action_id_list = myQuestList.map((item) => item.action_id.toString());
+
+    const fetchDeleteQuestList = async () => {
+      try {
+        const resultDeleteQuestList = await deleteRequest(
+          `${QUEST_PATH}/api/action/batch-delete-action`,
+          action_id_list,
+        );
+        if (resultDeleteQuestList.code === 0) {
+          setMyQuestList([]);
+          setShowRemoveAll(false);
+        }
+      } catch (error) {
+        console.error('Error fetching resultMyQuestList data:', error);
+      }
+    };
+
+    fetchDeleteQuestList();
+    setShouldRemoveAll(false);
+  }, [shouldRemoveAll]);
+
+  function handleRemoveAll() {
+    setShouldRemoveAll(true);
+  }
+  const onDelete = async (action_id: any) => {
+    const action = { action_id: action_id };
+    try {
+      const resultDeleteQuestList = await deleteRequest(`${QUEST_PATH}/api/action/delete-action-by-id`, action);
+      if (resultDeleteQuestList.code === 0) {
+        fetchMyQuestList();
+      }
+    } catch (error) {
+      console.error('Error fetching resultMyQuestList data:', error);
+    }
+  };
+  return myQuestList.length > 0 ? (
+    <CardListWrapper>
+      <div className="CardListWrapper-title">
+        <div className="CardListWrapper-title-text">{myQuestList.length} Quests</div>
+        <div className="CardListWrapper-title-btn">
+          <a href="/guessme.near/widget/ZKEVM.ExecuteRecords" className="execute-records">
+            Execute Records
+          </a>
+          <div className="title-btn-icon" onClick={showSwitchUpdate}>
+            <img src={showSwitch ? closeIcon : switchIcon} alt="Icon" />
+          </div>
+        </div>
+      </div>
+      {realList.map((item, index) => {
+        return (
+          <QuestCard
+            key={item.action_id + '-' + index}
+            item={item}
+            onDelete={onDelete}
+            showPopup={showSwitch || false}
+          />
+        );
+      })}
+      {haveMoreCard &&
+        showAll &&
+        myQuestList.map((item, index) => {
+          return (
+            <QuestCard
+              key={item.action_id + '-' + index}
+              item={item}
+              onDelete={onDelete}
+              showPopup={false}
+              isInMoreList={true}
+              onStickyTop={() => {
+                const curList = myQuestList;
+                const curIndex = curList.findIndex((curItem) => curItem.action_id === item.action_id);
+                const newList = [curList[curIndex], ...curList.slice(0, curIndex), ...curList.slice(curIndex + 1)];
+                setMyQuestList(newList);
+              }}
+            />
+          );
+        })}
+      <OperationWrapper>
+        {haveMoreCard && (
+          <div
+            className="show-all"
+            onClick={() => {
+              setShowAll(!showAll);
+            }}
+          >
+            <span>
+              {showAll ? 'Hide more quests' : 'Show all quests'}
+              <span className={`down-icon`}>{showAll ? arrowUp : arrowDown}</span>
+            </span>
+          </div>
+        )}
+
+        <div
+          className="remove-all"
+          style={{
+            color: showRemoveAll ? '#FF61D3' : '',
+          }}
+          onClick={() => {
+            setShowRemoveAll(!showRemoveAll);
+          }}
+        >
+          Remove all
+          <div
+            className="delete-icon"
+            style={{
+              border: showRemoveAll ? '2px solid #ff61d3' : '',
+            }}
+          >
+            <div
+              className="row-bar"
+              style={{
+                background: showRemoveAll ? '#ff61d3' : '',
+              }}
+            ></div>
+          </div>
+        </div>
+
+        {showRemoveAll && (
+          <div className="delete-card">
+            <span>Are you sure you want to remove all quests?</span>
+
+            <div className="delete-card-operation">
+              <div
+                className="delete-card-cancel-button"
+                onClick={() => {
+                  setShowRemoveAll(false);
+                }}
+              >
+                Cancel
+              </div>
+
+              <div
+                className="delete-card-delete-button"
+                onClick={() => {
+                  handleRemoveAll();
+                }}
+              >
+                Remove all
+              </div>
+            </div>
+          </div>
+        )}
+      </OperationWrapper>
+    </CardListWrapper>
+  ) : (
+    <NoQuestWrapper>
+      <div className="no-quest-tip">
+        <span className="no-quest-tip-text">
+          You can add a quest when making transaction, and the quest will be listed here after successful transaction.
+        </span>
+        <div className="search-tip">{searchTip}</div>
+
+        <div className="trends-tip">{trendsTip}</div>
+      </div>
+    </NoQuestWrapper>
+  );
 };
 
 MyQuest.getLayout = useDefaultLayout;
