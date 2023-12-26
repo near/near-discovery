@@ -146,7 +146,7 @@ const SwapBtn: FC<any> = ({
   const { account, provider, chainId } = useAccount();
   const toast = useToast();
   const { addAction } = useAddAction('all-in-one');
-  const [initInputValue, setInputValue] = useState('');
+  const [initInputValue, setInputValue] = useState<number | string>('');
   const inputValue = useDebounce(initInputValue, { wait: 1000 });
   const [isDisabled, setIsDisabled] = useState(true);
   const [btnText, setBtnText] = useState('Swap');
@@ -175,6 +175,7 @@ const SwapBtn: FC<any> = ({
         setIsDisabled(true);
         setBtnText('Insufficient Balance');
       } else {
+        // @ts-ignore
         if (!inputValue || inputValue === 0 || isNaN(inputValue)) {
           setIsDisabled(true);
           setBtnText('Swap');

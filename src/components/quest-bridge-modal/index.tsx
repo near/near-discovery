@@ -9,7 +9,7 @@ import { BaseListItem, BaseModal } from '@/components';
 import useTokenBalance from '@/hooks/useTokenBalance';
 import useAccount from '@/hooks/useAccount';
 
-import BridgeBtn from './bridge-btn';
+// import BridgeBtn from './bridge-btn';
 import { dexs, iconMap, SwapTokens, WETH_ADDRESS } from './const';
 
 interface IProps {
@@ -79,7 +79,7 @@ const QuestBridgeModal: FC<IProps> = ({ item, onCloseModal }) => {
           {item.action_tokens && typeof item.action_tokens === 'string' && parseActionTokens(item.action_tokens)}
         </BaseListItem>
       </Wrapper>
-      <BridgeBtn
+      {/* <BridgeBtn
         title={item.template}
         // uniType={dexs[item?.template].uniType}
         currencyCode={currencyCode}
@@ -103,7 +103,7 @@ const QuestBridgeModal: FC<IProps> = ({ item, onCloseModal }) => {
         noPair={false}
         token={token}
         updateBalance={update}
-      />
+      /> */}
     </BaseModal>
   );
 };
