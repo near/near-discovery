@@ -247,6 +247,7 @@ const Content = styled.div`
       margin-bottom: 100px;
       padding-left: 18px;
       .layer-list-item {
+        width: 300px;
         margin: 0 18px 20px 0;
         background: #21232a;
         border-radius: 20px;
@@ -862,6 +863,30 @@ const HomeContent: NextPageWithLayout = () => {
   const { open } = useDappOpen();
   const router = useRouter();
   const popupsDataArray = Object.values(popupsData);
+  const [innerWidth, setInnerWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0);
+  const [putMenu, setPutMenu] = useState(false);
+  const [realList, setRealList] = useState<any[]>([]);
+  useEffect(() => {
+    const offset = putMenu ? 170 : 350;
+
+    const innerWidth = window.innerWidth;
+    setInnerWidth(innerWidth > 900 ? innerWidth - offset : innerWidth);
+    const handleResize = () => {
+      const innerWidth = window.innerWidth;
+
+      setInnerWidth(innerWidth > 900 ? innerWidth - offset : innerWidth);
+    };
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [putMenu]);
+
+  useEffect(() => {
+    const getPutMenu = (e: any) => {
+      setPutMenu(e.detail);
+    };
+    window.addEventListener('changePutEvent', getPutMenu);
+    return () => window.removeEventListener('setItemEvent', getPutMenu);
+  }, []);
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -882,6 +907,14 @@ const HomeContent: NextPageWithLayout = () => {
     fetchDappData();
     fetchNetworkData();
   }, []);
+  useEffect(() => {
+    const itemWidth = 300;
+    const itemMargin = 10;
+    const resultInnerWidth = innerWidth - 240;
+    const size = resultInnerWidth ? Math.floor(resultInnerWidth / (itemWidth + itemMargin)) * 2 : 0;
+    setRealList(networkList.slice(0, Math.min(size, networkList.length)));
+  }, [networkList]);
+
   function getCategoryNames(dappCategories: any[], categoryArray: any[]) {
     return dappCategories.map((categoryItem: any) => {
       const category = categoryArray.find((c: any) => c.id === categoryItem.category_id);
@@ -1150,8 +1183,8 @@ const HomeContent: NextPageWithLayout = () => {
             </ViewAll>
           </div>
           <div className="explore-layer-list">
-            {networkList &&
-              networkList.slice(0, 8).map((child, index) => (
+            {realList &&
+              realList.map((child, index) => (
                 <div className="layer-list-item" key={index}>
                   <Link href={`/chains-details?id=${child.id}`}>
                     <img src={child.logo} alt="" />
