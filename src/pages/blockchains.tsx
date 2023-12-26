@@ -393,9 +393,13 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                   </div>
                 </div>
                 {index === 4 && (
-                  <Link href={advertise?.ad_link} className="blockchains-conetent-item conetent-item-img">
-                    <img src={advertise?.ad_images} alt="" />
-                  </Link>
+                  <>
+                    {advertise?.ad_link && (
+                      <Link href={advertise?.ad_link} className="blockchains-conetent-item conetent-item-img">
+                        <img src={advertise?.ad_images} alt="" />
+                      </Link>
+                    )}
+                  </>
                 )}
               </>
             );
