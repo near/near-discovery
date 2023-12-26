@@ -175,8 +175,7 @@ const SwapBtn: FC<any> = ({
         setIsDisabled(true);
         setBtnText('Insufficient Balance');
       } else {
-        // @ts-ignore
-        if (!inputValue || inputValue === 0 || isNaN(inputValue)) {
+        if (!inputValue || inputValue === 0 || isNaN(inputValue as number)) {
           setIsDisabled(true);
           setBtnText('Swap');
         } else {
