@@ -54,6 +54,7 @@ const QuestCardWrapper = styled.div`
     width: 259px;
     border: 1px solid transparent;
     position: relative;
+    cursor: pointer;
     .quest-card-inner {
       border-radius: 20px;
       background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
@@ -62,9 +63,7 @@ const QuestCardWrapper = styled.div`
       position: relative;
       text-decoration: none;
       color: #02051e;
-
       padding: 0px 12px;
-
       padding-top: 20px;
 
       .quest-card-name {
@@ -93,6 +92,165 @@ const QuestCardWrapper = styled.div`
       .trend-card-execute-mobile {
         display: none;
       }
+    }
+    .one-click-execution {
+      display: none;
+      position: absolute;
+      margin: 0 14px;
+      .click-execution-btn {
+        cursor: pointer;
+        display: inline-block;
+        background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
+        color: rgba(30, 32, 40, 1);
+        white-space: nowrap;
+        height: 32px;
+        line-height: 32px;
+        font-size: 14px;
+        border-radius: 8px;
+        margin-right: 12px;
+        padding: 0 15px;
+      }
+      .click-execution-arrow {
+        cursor: pointer;
+        display: inline-block;
+        border: 1px solid rgba(236, 244, 136, 1);
+        background: linear-gradient(0deg, rgba(24, 26, 39, 0.8), rgba(24, 26, 39, 0.8)),
+          linear-gradient(0deg, #ecf488, #ecf488);
+        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        text-align: center;
+        align-items: center;
+        line-height: 30px;
+        img {
+          width: 12px;
+        }
+      }
+    }
+    .one-clickExecution-masklayer {
+      background: rgba(22, 24, 29, 1);
+      opacity: 0.8;
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      right: 0;
+      left: 0;
+      bottom: 0;
+      z-index: 1;
+    }
+    .one-clickExecution-popup {
+      width: 450px;
+      border: 1px solid rgba(55, 58, 83, 1);
+      border-radius: 32px;
+      background: linear-gradient(0deg, #262836, #262836), linear-gradient(0deg, #373a53, #373a53);
+      padding: 20px 30px;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 30;
+      .clickExecution-popup-title {
+        margin-bottom: 16px;
+        h1 {
+          font-size: 26px;
+          font-weight: 500;
+          color: rgba(255, 255, 255, 1);
+          display: inline-block;
+          margin: 0;
+        }
+        img {
+          float: right;
+          cursor: pointer;
+        }
+      }
+      .clickExecution-popup-content {
+        margin-bottom: 20px;
+        background: rgba(27, 30, 39, 1);
+        border-radius: 12px;
+        padding: 22px 12px 1px 12px;
+        .popup-content-item {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 18px;
+          img {
+            width: 20px;
+            height: 20px;
+          }
+          p {
+            color: rgba(151, 154, 190, 1);
+            font-size: 14px;
+            font-weight: 500;
+            margin: 0;
+          }
+          h1 {
+            color: rgba(255, 255, 255, 1);
+            font-size: 14px;
+            font-weight: 500;
+          }
+        }
+      }
+      .clickExecution-popup-btn {
+        display: flex;
+        .popup-swap-input {
+          width: 70%;
+          position: relative;
+          input {
+            width: 100%;
+            height: 48px;
+            line-height: 48px;
+            background: transparent;
+            border: 1px solid rgba(235, 244, 121, 0.2);
+            padding-right: 24px;
+            border-radius: 12px;
+            padding: 16px 56px 16px 16px;
+            color: #ffffff;
+            background: linear-gradient(0deg, #282a33, #282a33), linear-gradient(0deg, #343743, #343743);
+          }
+          input:focus {
+            outline: none;
+            color: #ffffff;
+            border: 1px solid rgba(235, 244, 121, 0.2);
+            background: none;
+          }
+          span {
+            font-size: 14px;
+            color: rgba(151, 154, 190, 1);
+            position: absolute;
+            right: 12px;
+            top: 14px;
+          }
+        }
+        .popup-swap-btn {
+          width: 30%;
+          margin-left: 12px;
+          background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
+          height: 48px;
+          line-height: 48px;
+          text-align: center;
+          border-radius: 12px;
+          font-size: 16px;
+          color: rgba(2, 5, 30, 1);
+        }
+        .disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          width: 100%;
+          background: rgb(255, 97, 211);
+          color: #ffffff;
+        }
+      }
+    }
+  }
+  .quest-card-out:hover {
+    border: 1px solid rgba(235, 244, 121, 1);
+    .one-click-execution {
+      display: inline-block;
+    }
+    .quest-card-inner {
+      background: linear-gradient(0deg, rgba(22, 24, 29, 0.8), rgba(22, 24, 29, 0.8)),
+        linear-gradient(0deg, #ebf479, #ebf479);
+      filter: blur(4px);
     }
   }
 
@@ -412,7 +570,7 @@ const QuestCard: NextPageWithLayout = (props) => {
   }
   const token = SwapTokens.find((item) => item.symbol === currencyCode);
   const handleButtonClick = () => {
-    setShowPopup(false);
+    setShowPopup(true);
   };
   const closeButtonClick = () => {
     setShowPopup(false);
@@ -482,6 +640,64 @@ const QuestCard: NextPageWithLayout = (props) => {
           </div>
           <div className="trend-card-execute-mobile">{item.count_number} times</div>
         </div>
+        <div className="one-click-execution">
+          <div className="click-execution-btn" onClick={() => handleButtonClick()}>
+            One-Click Execution
+          </div>
+          <a className="click-execution-arrow" href={link}>
+            <img
+              src="https://ipfs.near.social/ipfs/bafkreiaintqynrr22hf6vcvvqul7qfwpncvoryt5d4vk6ma4w6bum6rypi"
+              alt=""
+            />
+          </a>
+        </div>
+
+        {showPopup ? (
+          <>
+            <div className="one-clickExecution-masklayer"></div>
+            <div className="one-clickExecution-popup">
+              <div className="clickExecution-popup-title">
+                <h1>Swap</h1>
+                <img
+                  src="https://ipfs.near.social/ipfs/bafkreif62pul5mxaiz3vnwi63qzxf5g7j6ifjesxmrkx2xjwmpddfiddbq"
+                  onClick={() => closeButtonClick()}
+                  alt=""
+                />
+              </div>
+              <div className="clickExecution-popup-content">
+                <div className="popup-content-item">
+                  <p>Dapp</p>
+                  <h1>
+                    {item.template && iconMap[item.template as keyof typeof iconMap]} {item.template}
+                  </h1>
+                </div>
+                <div className="popup-content-item">
+                  <p>Suggestion</p>
+                  <h1>{displayTitles}</h1>
+                </div>
+                <div className="popup-content-item">
+                  <p>Your balance</p>
+                  <h1>-</h1>
+                </div>
+                <div className="popup-content-item">
+                  <p>Swap pair</p>
+                  {item.action_tokens && typeof item.action_tokens === 'string' && (
+                    <h1>{parseActionTokens(item.action_tokens)}</h1>
+                  )}
+                </div>
+              </div>
+              <div className="clickExecution-popup-btn">
+                <div className="popup-swap-input">
+                  <input type="text" autoComplete="off" />
+                  <span>{currencyCode}</span>
+                </div>
+                <div className={`popup-swap-btn ${isSwapDisabled ? 'disabled' : ''}`} onClick={handleSwapButtonClick}>
+                  {isSwapDisabled ? 'Insufficient balance' : swapping ? 'Swapping...' : 'Swap'}
+                </div>
+              </div>
+            </div>
+          </>
+        ) : null}
       </div>
 
       <div className="quest-card-execute-date">
