@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from 'react';
-
+import { useSetChain } from '@web3-onboard/react';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import useAccount from '@/hooks/useAccount';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -17,6 +17,7 @@ export const DappPage: NextPageWithLayout = () => {
   const dapp = useDappStore((store: any) => store.dapp);
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { addAction } = useAddAction('dapp');
+  const [{ settingChain }, setChain] = useSetChain();
   const bridgeCb = useCallback(
     () =>
       setLayoutStore({
@@ -61,6 +62,8 @@ export const DappPage: NextPageWithLayout = () => {
         ...dapp,
         addAction,
         bridgeCb,
+        onSwitchChain: setChain,
+        switchingChain: settingChain,
       }}
       src={network.dapp_src}
     />

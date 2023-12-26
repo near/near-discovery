@@ -40,7 +40,7 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
       try {
         let params = {};
         if (type === 'twitter' || type === 'discord') {
-          params = { code };
+          params = { code, redirect_uri: window.location.href };
         }
         if (type === 'telegram') {
           params = data;

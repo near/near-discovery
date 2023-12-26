@@ -62,6 +62,10 @@ const ActionItem = ({
       document.getElementById('nav-top-search')?.focus();
       return;
     }
+    if (action.source === 'invite') {
+      router.push('/profile');
+      return;
+    }
     if (action.source === 'wallet/bridge') {
       setLayout({
         showAccountSider: true,
