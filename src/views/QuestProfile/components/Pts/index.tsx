@@ -21,7 +21,7 @@ import {
   StyledPageDesc,
   StyledQuestIcon,
   StyledQuestIconBox,
-  StyledQuestRewards,
+  StyledQuestSource,
   StyledQuestTitle,
   StyledRewards,
   StyledRow,
@@ -50,7 +50,7 @@ export const COLUMNS: Column[] = [
   },
 ];
 
-const Quest = ({ logo, name, reward }: any) => {
+const Quest = ({ logo, name, source }: any) => {
   return (
     <>
       <StyledQuestIconBox>
@@ -58,10 +58,7 @@ const Quest = ({ logo, name, reward }: any) => {
       </StyledQuestIconBox>
       <div>
         <StyledQuestTitle>{name}</StyledQuestTitle>
-        <StyledQuestRewards>
-          <StyledCoin $size={19} />
-          <span>{reward}</span>
-        </StyledQuestRewards>
+        <StyledQuestSource>{source}</StyledQuestSource>
       </div>
     </>
   );
@@ -92,8 +89,8 @@ const Pts = () => {
                     {COLUMNS.map((column) => (
                       <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
                         {column.key === 'quest' && <Quest {...row} />}
-                        {column.key === 'reward' && <StyledRewards>{row.reward}</StyledRewards>}
-                        {column.key === 'time' && <span>{format(row.claim_time * 1000, 'MMM dd,yyyy,HH:mm')}</span>}
+                        {column.key === 'reward' && <StyledRewards>+{row.reward} PTS</StyledRewards>}
+                        {column.key === 'time' && <span>{format(row.claim_time * 1000, 'MMM dd, yyyy, HH:mm')}</span>}
                       </StyledCell>
                     ))}
                   </StyledRow>

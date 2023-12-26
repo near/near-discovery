@@ -76,10 +76,12 @@ const QuestItem = ({
               <StyledCoin $size={18} />
               <span style={{ color: '#EBF479' }}>{reward} PTS</span>
             </StyledTag>
-            <StyledTag>
-              <Steps step={STEPS_MAP[difficulty]} />
-              {difficulty}
-            </StyledTag>
+            {difficulty && (
+              <StyledTag>
+                <Steps step={STEPS_MAP[difficulty]} />
+                {difficulty}
+              </StyledTag>
+            )}
             {/* <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag> */}
           </StyledTags>
           {!is_claimed && participation_status === 'completed' && <StyledCalimable>To be claimed!</StyledCalimable>}

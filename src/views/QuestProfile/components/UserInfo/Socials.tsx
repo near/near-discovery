@@ -5,7 +5,7 @@ import Loading from '@/components/Icons/Loading';
 
 import useAuthBind from '../../hooks/useAuthBind';
 import useAuthConfig from '../../hooks/useAuthConfig';
-import { StyledSocialItem,StyledSocialsWrapper } from './styles';
+import { StyledSocialItem, StyledSocialsWrapper } from './styles';
 
 const AUTHS = {
   twitter: {
@@ -63,14 +63,16 @@ const Socials = ({ info, onSuccess }: any) => {
             sessionStorage.setItem('_auth_state', state);
             if (item.key === 'twitter') {
               path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
-              window.open(path, '_blank');
               sessionStorage.setItem('_auth_type', 'twitter');
+              sessionStorage.setItem('_auth_redirect', window.location.href);
+              window.open(path, '_blank');
               return;
             }
             if (item.key === 'discord') {
               path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
-              window.open(path, '_blank');
               sessionStorage.setItem('_auth_type', 'discord');
+              sessionStorage.setItem('_auth_redirect', window.location.href);
+              window.open(path, '_blank');
               return;
             }
             if (item.key === 'telegram') {

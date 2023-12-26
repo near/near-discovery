@@ -15,9 +15,12 @@ import { StyledContainer, StyledTopBox } from './styles';
 
 const QuestDetailView = () => {
   const searchParams = useSearchParams();
-  const { loading, info } = useQuestInfo(searchParams.get('id') || '');
+  const _id = searchParams.get('id');
+  const id = _id?.includes('?') ? _id.split('?')[0] : _id;
+  const { loading, info } = useQuestInfo(id || '');
   const { loading: categoryLoading, categories } = useCategoryList();
   const { info: userInfo = {} } = useUserInfo({ updater: 1 });
+
   return (
     <StyledContainer>
       <Breadcrumb
@@ -32,16 +35,17 @@ const QuestDetailView = () => {
         info && (
           <>
             <StyledTopBox>
-              <Details quest={info.quest} category={categories[info.quest.quest_category_id]} />
+              <Details quest={info.quest} category={categories[info.quest?.quest_category_id]} />
               <Actions
                 actions={info.actions}
                 endTime={info.quest.end_time}
                 startTime={info.quest.start_time}
                 rewards={info.quest.reward}
                 completed={info.quest.action_completed}
-                id={searchParams.get('id') || ''}
+                id={id || ''}
                 userInfo={userInfo}
                 isLive={info.quest.status === 'ongoing'}
+                claimed={info.quest.is_claimed}
               />
             </StyledTopBox>
             <Recommends campaignId={info.quest.quest_campaign_id} />

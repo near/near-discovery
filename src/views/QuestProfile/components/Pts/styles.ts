@@ -28,7 +28,8 @@ export const StyledRow = styled.div`
   margin-bottom: 20px;
 
   &:hover {
-    background: rgba(55, 58, 83, 0.2);
+    background: #2c2e3e;
+    cursor: pointer;
   }
 `;
 
@@ -83,12 +84,15 @@ export const StyledQuestTitle = styled.div`
   text-transform: capitalize;
 `;
 
-export const StyledQuestRewards = styled.div`
+export const StyledQuestSource = styled.div`
   display: flex;
   gap: 6px;
   align-items: center;
-  color: #ebf479;
-  font-size: 16px;
-  font-weight: 500;
   margin-top: 8px;
+  color: #979abe;
+  font-family: Gantari;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 `;

@@ -54,6 +54,7 @@ export const StyledIconBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
 `;
 
 export const StyledIcon = styled.img`
@@ -105,6 +106,7 @@ export const StyledRewardsAndTimeBox = styled.div`
 
 export const StyledQuestInfo = styled.div`
   margin-top: 40px;
+  width: 410px;
 `;
 
 export const StyledQuestInfoItemBox = styled.div`

@@ -57,7 +57,7 @@ const FavoriteDapp = ({ name, description, route, logo, category_ids, id }: any)
       <StyledDappButtons>
         <StyledDappButton
           onClick={() => {
-            router.push(`/dapps-details`);
+            router.push(`/dapps-details?dapp_id=${id}`);
           }}
         >
           Detail

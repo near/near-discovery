@@ -40,7 +40,7 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
       try {
         let params = {};
         if (type === 'twitter' || type === 'discord') {
-          params = { code, redirect_uri: window.location.href };
+          params = { code, redirect_uri: sessionStorage.getItem('_auth_redirect') };
         }
         if (type === 'telegram') {
           params = data;
@@ -66,6 +66,7 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
 
   useEffect(() => {
     const type = sessionStorage.getItem('_auth_type');
+    console.log(code, type);
     if (!code || !type) return;
     const state = sessionStorage.getItem('_auth_state');
     if (searchParams.get('state') !== state && type === 'twitter') return;

@@ -53,7 +53,7 @@ const ActionItem = ({
   });
   const [showRefreshTips, setShowRefreshTips] = useState(false);
 
-  const { loading: binding, type, handleBind } = useAuthBind({ onSuccess });
+  const { loading: binding, type, handleBind } = useAuthBind({ onSuccess: () => {} });
 
   const handleClick = useCallback(() => {
     setOpen(false);
@@ -78,21 +78,25 @@ const ActionItem = ({
       return;
     }
 
-    if (action.category.startsWith('twitter') && !userInfo.twitter.is_bind) {
+    if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
       const state = (Date.now() + Math.random() * 10000).toFixed(0);
       sessionStorage.setItem('_auth_state', state);
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
-      window.open(path, '_blank');
       sessionStorage.setItem('_auth_type', 'twitter');
-      return;
-    }
-    if (action.category.startsWith('discord') && !userInfo.discord.is_bind) {
-      const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
+      sessionStorage.setItem('_auth_redirect', window.location.href);
       window.open(path, '_blank');
-      sessionStorage.setItem('_auth_type', 'discord');
       return;
     }
-    if (action.category.startsWith('telegram') && !userInfo.telegram.is_bind) {
+
+    if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
+      const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
+      sessionStorage.setItem('_auth_type', 'discord');
+      sessionStorage.setItem('_auth_redirect', window.location.href);
+      window.open(path, '_blank');
+      return;
+    }
+
+    if (action.category.startsWith('telegram') && !userInfo.telegram?.is_bind) {
       if (window.Telegram) {
         window.Telegram.Login.auth({ bot_id: config.telegram_bot_id, request_access: true }, (data: any) => {
           if (data) {
@@ -158,7 +162,7 @@ const ActionItem = ({
           <span>{action.name}</span>
         </StyledItemLeft>
         <StyledItemRight>
-          {action.description && (
+          {action.description ? (
             <StyledIconBox
               className={open ? 'open' : ''}
               onClick={(ev) => {
@@ -166,13 +170,22 @@ const ActionItem = ({
                 setOpen(!open);
               }}
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17" fill="none">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="13"
+                height="17"
+                viewBox="0 0 13 17"
+                fill="none"
+                style={{ verticalAlign: 'middle' }}
+              >
                 <path
                   d="M11.7507 7.82802C12.3448 8.2238 12.3448 9.09671 11.7507 9.49249L1.55441 16.285C0.889837 16.7277 -7.10367e-07 16.2513 -6.75462e-07 15.4528L-8.1642e-08 1.86775C-4.67367e-08 1.06921 0.889838 0.592786 1.55442 1.03551L11.7507 7.82802Z"
                   fill="#979ABE"
                 />
               </svg>
             </StyledIconBox>
+          ) : (
+            <div style={{ width: '13px' }} />
           )}
           {!actionCompleted && isLive ? (
             <StyledIconBox

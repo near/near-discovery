@@ -26,6 +26,7 @@ const Actions = ({
   id,
   userInfo,
   isLive,
+  claimed,
 }: {
   actions: any;
   startTime: number;
@@ -35,6 +36,7 @@ const Actions = ({
   id: string;
   userInfo: any;
   isLive: boolean;
+  claimed: boolean;
 }) => {
   const { loading, handleClaim } = useRewardsClaim(() => {});
   const [cbCompleted, setCbCompleted] = useState(0);
@@ -69,7 +71,7 @@ const Actions = ({
         ))}
       </StyledProcessBars>
       <StyledButton
-        disabled={completedCount < actions.length || loading}
+        disabled={completedCount < actions.length || loading || claimed}
         onClick={() => {
           handleClaim(id);
         }}
