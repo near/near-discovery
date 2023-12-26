@@ -112,6 +112,7 @@ const Content = styled.div`
         }
         @media (max-width: 1688px) {
           padding: 80px 30px 30px;
+          margin-top: 8px;
           .list-item-img {
             position: absolute;
             top: -56px;

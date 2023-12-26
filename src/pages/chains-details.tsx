@@ -401,12 +401,16 @@ const ChainsDetailsActivities = styled.div`
     }
   }
   .details-activities-list {
-    display: flex;
+    /* display: flex; */
     .activities-list-item {
+      display: inline-block;
+      width: 298px;
+      height: 136px;
       background: #21232a;
       border-radius: 16px;
       padding: 18px 15px;
       margin-right: 18px;
+      margin-bottom: 18px;
       p {
         font-size: 16px;
         font-weight: 500;
@@ -816,7 +820,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           </div>
           <div className="details-activities-list">
             {activities &&
-              activities.map((item: any, index: number) => {
+              activities.slice(0, 4).map((item: any, index: number) => {
                 const networkItem = networkList.find((network) => network.id === item.network_id);
                 if (!networkItem) {
                   return null;
