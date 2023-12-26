@@ -15,6 +15,8 @@ export default function useAddAction(source: string) {
       let params: any = { source };
       if (!chainId || !account) return;
       const currentChain = chains.find((chain: any) => chain.chain_id === chainId);
+      console.info('addaction data: ', data);
+
       if (data.type === 'Swap') {
         params = {
           action_title: `Swap ${Number(data.inputCurrencyAmount)} ${data.inputCurrency.symbol} on ${data.template}`,
@@ -29,26 +31,35 @@ export default function useAddAction(source: string) {
           action_network_id: currentChain.name,
           chain_id: chainId,
           action_switch: data.add ? 1 : 0,
+          token_in_currency: data?.token_in_currency,
+          token_out_currency: data?.token_out_currency,
         };
       }
       if (data.type === 'Bridge') {
-        const fromChain = chains.find((chain: any) => chain.chain_id === data.fromChainId);
-        const toChain = chains.find((chain: any) => chain.chain_id === data.toChainId);
-        params = {
-          action_title: `Bridge ${data.token.symbol} from ${fromChain.name} to ${toChain.name}`,
-          action_type: 'Bridge',
-          action_tokens: JSON.stringify([`${data.token.symbol}`]),
-          action_amount: data.amount,
-          account_id: account,
-          account_info: uuid,
-          template: data.template,
-          action_network_id: currentChain.name,
-          action_switch: data.add ? 1 : 0,
-          action_status: data.status === 1 ? 'Success' : 'Failed',
-          tx_id: data.transactionHash,
-          chain_id: data.fromChainId,
-          to_chain_id: data.toChainId,
-        };
+        console.info('add action bridge ', data);
+        try {
+          const fromChain = chains.find((chain: any) => chain.chain_id === data.fromChainId);
+          const toChain = chains.find((chain: any) => chain.chain_id === data.toChainId);
+          console.info('chains: ', fromChain, toChain, currentChain);
+          params = {
+            action_title: `Bridge ${data.token.symbol} from ${fromChain?.name} to ${toChain?.name}`,
+            action_type: 'Bridge',
+            action_tokens: JSON.stringify([`${data.token.symbol}`]),
+            action_amount: data.amount,
+            account_id: account,
+            account_info: uuid,
+            template: data.template,
+            action_network_id: currentChain?.name,
+            action_switch: data.add ? 1 : 0,
+            action_status: data.status === 1 ? 'Success' : 'Failed',
+            tx_id: data.transactionHash,
+            chain_id: data.fromChainId,
+            to_chain_id: data.toChainId,
+          };
+          console.info('params:', params);
+        } catch (error) {
+          console.info('bridge err', error);
+        }
       }
       if (data.type === 'Lending') {
         params = {
@@ -81,7 +92,7 @@ export default function useAddAction(source: string) {
           tx_id: data.transactionHash,
         };
       }
-
+      console.info('addaction params: ', params);
       post('/api/action/add', params);
     },
     [chainId, account],

@@ -1,10 +1,13 @@
 import Big from 'big.js';
 import type { FC } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { ethers, BigNumber, utils, Contract } from 'ethers';
+import useToast from '@/hooks/useToast';
 
 import { BaseListItem, BaseModal } from '@/components';
 import useTokenBalance from '@/hooks/useTokenBalance';
+import useAccount from '@/hooks/useAccount';
 
 import BridgeBtn from './bridge-btn';
 import { dexs, iconMap, SwapTokens, WETH_ADDRESS } from './const';
@@ -25,9 +28,20 @@ const ItemImg = styled.img`
   height: 20px;
 `;
 const QuestBridgeModal: FC<IProps> = ({ item, onCloseModal }) => {
-  //   const [tokenBalance, setTokenBalance] = useState(0);
-
-  //   const { account, provider } = useAccount();
+  const toast = useToast();
+  const { account, provider, chainId } = useAccount();
+  const [gasLimit, setGasLimit] = useState(BigNumber.from('300000'));
+  const [isContractAllowedToSpendToken, setIsContractAllowedToSpendToken] = useState(false);
+  const [name, setName] = useState('');
+  const [nonce, setNonce] = useState('');
+  // State.init({
+  //   gasLimit: BigNumber.from("300000"),
+  //   add: true,
+  //   // onChangeAdd: (add) => {
+  //   //   State.update({ add });
+  //   // },
+  //   hide: true,
+  // });
 
   const parseActionTokens = (actionTokensString: string) => {
     try {
@@ -48,9 +62,15 @@ const QuestBridgeModal: FC<IProps> = ({ item, onCloseModal }) => {
 
   const currencyCodeMatch = displayTitles.match(/\b\s*([A-Za-z]+)\s*on\b/);
 
-  const currencyCode = currencyCodeMatch ? currencyCodeMatch[1] : '';
+  // const currencyCode = currencyCodeMatch ? currencyCodeMatch[1] : '';
+  // TODO DEBUG
+  const currencyCode = 'ETH';
   const token = SwapTokens.find((item) => item.symbol === currencyCode);
-  const { tokenBalance, isError, isLoading, update } = useTokenBalance(token?.address || '', token?.decimals || 0);
+  console.log(token, currencyCode);
+  const { tokenBalance, isError, isLoading, update } = useTokenBalance(
+    token?.address || 'native',
+    token?.decimals || 0,
+  );
 
   return (
     <BaseModal title="Bridge" onClose={onCloseModal}>

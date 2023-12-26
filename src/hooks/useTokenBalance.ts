@@ -24,19 +24,21 @@ const TOKEN_ABI = [
   },
 ];
 
-export default function useTokenBalance(address: string, decimals: number) {
+export default function useTokenBalance(address: string | 'native', decimals: number) {
+  // console.info('use-token-bal:', address, decimals);
   const { account, provider } = useAccount();
   const [tokenBalance, setTokenBalance] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [fresh, setFresh] = useState(0);
+
   const getBalance = async () => {
     if (!account || !address) return;
     setIsLoading(true);
     try {
       if (address === 'native') {
-        console.log(4444444444444);
         const rawBalance = await provider.getBalance(account);
+        // console.info('get-native-bal', rawBalance);
         setTokenBalance(utils.formatEther(rawBalance));
       } else {
         const TokenContract = new Contract(address, TOKEN_ABI, provider.getSigner());
@@ -45,6 +47,7 @@ export default function useTokenBalance(address: string, decimals: number) {
       }
     } catch (error) {
       setIsError(true);
+      console.info('useTokenBalance_ERROR', error);
     } finally {
       setIsLoading(false);
     }

@@ -2,6 +2,7 @@ import type { BigSource } from 'big.js';
 import Big from 'big.js';
 import { useState } from 'react';
 import { styled } from 'styled-components';
+import { QuestBridgeModal, QuestLiquidityModal, QuestSwapModal } from '@/components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -490,16 +491,26 @@ const SwapTokens = [
   },
 ];
 
+enum ModalType {
+  SWAP = 'SWAP',
+  BRIDGE = 'BRIDGE',
+  LIQUIDITY = 'LIQUIDITY',
+}
+
 const QuestCard: NextPageWithLayout = (props) => {
   const { isInMoreList, onStickyTop, item, onDelete } = props;
   const [showDelete, setShowDelete] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+
   const onCancel = () => setShowDelete(false);
   const [balanceLoaded, setBalanceLoaded] = useState(false);
   const [balance, setbalance] = useState('0');
   const [inputValue, setInputValue] = useState('');
   const [outputCurrency, setoutputCurrency] = useState({});
   const [swapping, setSwapping] = useState(false);
+
+  const [showSwap, setShowSwap] = useState(false);
+  const [modalType, setModalType] = useState<ModalType>();
+
   let link = '';
   if (!item) {
     return null;
@@ -570,11 +581,19 @@ const QuestCard: NextPageWithLayout = (props) => {
   }
   const token = SwapTokens.find((item) => item.symbol === currencyCode);
   const handleButtonClick = () => {
-    setShowPopup(true);
+    console.info('item.template: ', item.template);
+    if (['Pancake Swap', 'QuickSwap', 'Balancer'].includes(item?.template)) {
+      setModalType(ModalType.SWAP);
+    }
+    if (item?.template === 'Bridge') {
+      setModalType(ModalType.BRIDGE);
+    }
+    if (item?.template === 'Liquidity') {
+      setModalType(ModalType.LIQUIDITY);
+    }
+    setShowSwap(true);
   };
-  const closeButtonClick = () => {
-    setShowPopup(false);
-  };
+
   const expandToken = (value: BigSource, decimals: number) => {
     return new Big(value).mul(new Big(10).pow(decimals));
   };
@@ -651,53 +670,6 @@ const QuestCard: NextPageWithLayout = (props) => {
             />
           </a>
         </div>
-
-        {showPopup ? (
-          <>
-            <div className="one-clickExecution-masklayer"></div>
-            <div className="one-clickExecution-popup">
-              <div className="clickExecution-popup-title">
-                <h1>Swap</h1>
-                <img
-                  src="https://ipfs.near.social/ipfs/bafkreif62pul5mxaiz3vnwi63qzxf5g7j6ifjesxmrkx2xjwmpddfiddbq"
-                  onClick={() => closeButtonClick()}
-                  alt=""
-                />
-              </div>
-              <div className="clickExecution-popup-content">
-                <div className="popup-content-item">
-                  <p>Dapp</p>
-                  <h1>
-                    {item.template && iconMap[item.template as keyof typeof iconMap]} {item.template}
-                  </h1>
-                </div>
-                <div className="popup-content-item">
-                  <p>Suggestion</p>
-                  <h1>{displayTitles}</h1>
-                </div>
-                <div className="popup-content-item">
-                  <p>Your balance</p>
-                  <h1>-</h1>
-                </div>
-                <div className="popup-content-item">
-                  <p>Swap pair</p>
-                  {item.action_tokens && typeof item.action_tokens === 'string' && (
-                    <h1>{parseActionTokens(item.action_tokens)}</h1>
-                  )}
-                </div>
-              </div>
-              <div className="clickExecution-popup-btn">
-                <div className="popup-swap-input">
-                  <input type="text" autoComplete="off" />
-                  <span>{currencyCode}</span>
-                </div>
-                <div className={`popup-swap-btn ${isSwapDisabled ? 'disabled' : ''}`} onClick={handleSwapButtonClick}>
-                  {isSwapDisabled ? 'Insufficient balance' : swapping ? 'Swapping...' : 'Swap'}
-                </div>
-              </div>
-            </div>
-          </>
-        ) : null}
       </div>
 
       <div className="quest-card-execute-date">
@@ -728,6 +700,9 @@ const QuestCard: NextPageWithLayout = (props) => {
           </div>
         </div>
       </div>
+      {showSwap && modalType === ModalType.SWAP ? (
+        <QuestSwapModal item={item} onCloseModal={() => setShowSwap(false)} />
+      ) : null}
     </QuestCardWrapper>
   );
 };

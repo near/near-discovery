@@ -28,7 +28,7 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
   //   const [tokenBalance, setTokenBalance] = useState(0);
 
   //   const { account, provider } = useAccount();
-
+  console.info('swapmodal item: ', item);
   const parseActionTokens = (actionTokensString: string) => {
     try {
       const actionTokensArray = JSON.parse(actionTokensString);
@@ -50,7 +50,13 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
 
   const currencyCode = currencyCodeMatch ? currencyCodeMatch[1] : '';
   const token = SwapTokens.find((item) => item.symbol === currencyCode);
-  const { tokenBalance, isError, isLoading, update } = useTokenBalance(token?.address || '', token?.decimals || 0);
+  console.info('currencyCode:', currencyCode, 'token:', token);
+
+  let addr = token?.address;
+  if (currencyCode === 'ETH') {
+    addr = 'native';
+  }
+  const { tokenBalance, isError, isLoading, update } = useTokenBalance(addr || '', token?.decimals || 0);
 
   return (
     <BaseModal title="Swap" onClose={onCloseModal}>

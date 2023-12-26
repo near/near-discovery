@@ -146,7 +146,7 @@ const SwapBtn: FC<any> = ({
   const { account, provider, chainId } = useAccount();
   const toast = useToast();
   const { addAction } = useAddAction('all-in-one');
-  const [initInputValue, setInputValue] = useState(0);
+  const [initInputValue, setInputValue] = useState('');
   const inputValue = useDebounce(initInputValue, { wait: 1000 });
   const [isDisabled, setIsDisabled] = useState(true);
   const [btnText, setBtnText] = useState('Swap');
@@ -241,7 +241,7 @@ const SwapBtn: FC<any> = ({
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value ? Number(e.target.value) : '';
-    setInputValue(Number(value || 0));
+    setInputValue(value);
   };
 
   const getAllowance = async () => {
@@ -367,7 +367,7 @@ const SwapBtn: FC<any> = ({
   };
 
   const onError = (err: any) => {
-    console.info('error00', err);
+    console.info('onError', err);
     setIsSwapping(false);
     setBtnText('Swap');
 
@@ -398,7 +398,7 @@ const SwapBtn: FC<any> = ({
       const iface = new utils.Interface(ROUTER_ABI);
       console.info('iface: ', iface);
 
-      const amount = utils.parseUnits(Big(inputCurrencyAmount).toFixed(inputCurrency.decimals), inputCurrency.decimals);
+      const amount = utils.parseUnits(Big(inputValue).toFixed(inputCurrency.decimals), inputCurrency.decimals);
 
       const multicallParams: any[] = [];
 
@@ -461,12 +461,12 @@ const SwapBtn: FC<any> = ({
                 });
               })
               .catch((err: any) => {
-                console.info(888888, err);
+                console.info('multicall_error', err);
                 onError(err);
               });
           })
           .catch((err: any) => {
-            console.info(99999, err);
+            console.info('estimateGas_error', err);
             onError(err);
           });
       }
