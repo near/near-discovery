@@ -599,30 +599,27 @@ const ExecuteRecords: NextPageWithLayout = () => {
       setSender(originalCaseAddress.toString());
     });
   }, [wallet, provider]);
-
-  const fetchRecordList = async () => {
-    try {
-      const resultRecordList = await get(
-        `${QUEST_PATH}/api/action/get-action-records-by-account?account_id=${sender}&page=${currentPage}&size=${pageSize}&action_type=${searchAction}&action_status=${searchStatus}&template=${searchTemplate}&chain_id=1101`,
-      );
-      if (resultRecordList.code === 0) {
-        setRecordList(resultRecordList.items);
-        setTotalPageSize(resultRecordList.total);
-        setTotalPage(resultRecordList.pages);
-        setCurrentPage(resultRecordList.page);
-      }
-    } catch (error) {
-      console.error('Error fetching resultNetwork data:', error);
-    }
-  };
   function get_current_page_range() {
     const start = (currentPage - 1) * pageSize + 1;
     const end = start - 1 + recordList.length;
     return `${Math.min(start, end) || 0}-${end || 0}`;
   }
-  if (sender) {
+  const fetchRecordList = async () => {
+    try {
+      const resultRecordList = await get(
+        `${QUEST_PATH}/api/action/get-action-records-by-account?account_id=${sender}&page=${currentPage}&size=${pageSize}&action_type=${searchAction}&action_status=${searchStatus}&template=${searchTemplate}&chain_id=1101`,
+      );
+      setRecordList(resultRecordList.items);
+      setTotalPageSize(resultRecordList.total);
+      setTotalPage(resultRecordList.pages);
+      setCurrentPage(resultRecordList.page);
+    } catch (error) {
+      console.error('Error fetching resultNetwork data:', error);
+    }
+  };
+  useEffect(() => {
     fetchRecordList();
-  }
+  }, [sender, currentPage, pageSize, searchAction, searchTemplate, searchStatus]);
   function getTime(timestamp: any) {
     const myDate = new Date(Big(timestamp).mul(1000).toNumber());
     const year = myDate.getFullYear();
@@ -723,7 +720,7 @@ const ExecuteRecords: NextPageWithLayout = () => {
   const polygon_base = 'https://zkevm.polygonscan.com/tx/';
 
   const formatTx = (tx: string) => {
-    console.log('tx: ', tx);
+    // console.log('tx: ', tx);
     if (!tx) return '-';
     else {
       return (
