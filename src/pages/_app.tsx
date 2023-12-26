@@ -44,6 +44,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const { getInitialData } = useInitialData();
   const [ready, setReady] = useState(false);
+  const [updater, setUpdater] = useState(1);
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
@@ -56,6 +57,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const accountInit = useCallback(() => {
     login(() => {
       getInitialData();
+      setUpdater(Date.now());
     });
     clearTimeout(loginTimer.current);
     if (!account && getCookie('LOGIN_ACCOUNT')) {
@@ -162,7 +164,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
-      {getLayout(<Component {...pageProps} logging={logging} />)}
+      {getLayout(<Component {...pageProps} logging={logging} key={updater} />)}
       {ready && (
         <ToastContainer
           position={window.innerWidth > 768 ? 'top-right' : 'bottom-right'}

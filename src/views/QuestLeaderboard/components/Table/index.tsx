@@ -94,7 +94,7 @@ const Table = ({ list, maxPage, page, handlePageChange, loading }: any) => {
                 {COLUMNS.map((column) => (
                   <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
                     {column.key === 'rank' && <Rank rank={row.rank} />}
-                    {column.key === 'user' && <User user={row.user} avatar={row.account.avatar} />}
+                    {column.key === 'user' && <User user={row.account.address} avatar={row.account.avatar} />}
                     {column.key === 'pts' && <PTS pts={row.reward} />}
                   </StyledCell>
                 ))}

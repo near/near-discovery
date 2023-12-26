@@ -35,7 +35,7 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
       ) : (
         <>
           {Object.keys(quests)
-            .sort((a: any, b: any) => b - a)
+            .sort((a: any, b: any) => a - b)
             .map((key) => {
               const _quests = quests[key] as any[];
               return _quests?.length ? (

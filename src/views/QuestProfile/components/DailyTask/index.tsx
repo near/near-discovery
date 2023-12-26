@@ -22,8 +22,8 @@ import {
   StyledTitle,
 } from './styles';
 
-const DailyTask = () => {
-  const { loading, tasks, claiming, consecutiveDays, currentDay, claim } = useDailyTask();
+const DailyTask = ({ onSuccess }: { onSuccess: VoidFunction }) => {
+  const { loading, tasks, claiming, consecutiveDays, currentDay, claim } = useDailyTask({ onSuccess });
 
   return (
     <StyledPanel>

@@ -1,7 +1,6 @@
 import { memo, useState } from 'react';
 
 import useReport from '@/views/Landing/hooks/useReport';
-
 import useUserInfo from '../../hooks/useUserInfo';
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
@@ -12,7 +11,7 @@ import Quests from './components/Quests';
 import Tabs from './components/Tabs';
 import UserInfo from './components/UserInfo';
 import useInviteList from './hooks/useInviteList';
-import { StyledContainer, StyledPanelWrapper,StyledTabsBox } from './styles';
+import { StyledContainer, StyledPanelWrapper, StyledTabsBox } from './styles';
 import type { Tab } from './types';
 
 const QuestProfileView = () => {
@@ -21,7 +20,9 @@ const QuestProfileView = () => {
   const [openCodes, setOpenCodes] = useState(false);
   const { list, totalRewards, reward } = useInviteList();
   const { info: userInfo = {} } = useUserInfo({ updater });
+
   const { handleReport } = useReport();
+
   return (
     <>
       <StyledContainer>
@@ -41,7 +42,12 @@ const QuestProfileView = () => {
             totalRewards={totalRewards}
             list={list}
           />
-          <DailyTask />
+          <DailyTask
+            onSuccess={() => {
+              setUpdater(Date.now());
+            }}
+            key={updater}
+          />
         </StyledPanelWrapper>
         <StyledTabsBox>
           <Tabs
@@ -51,9 +57,9 @@ const QuestProfileView = () => {
             }}
           />
         </StyledTabsBox>
-        {tab === 'quests' && <Quests />}
-        {tab === 'favorites' && <Favorites />}
-        {tab === 'pts' && <Pts />}
+        {tab === 'quests' && <Quests key={updater} />}
+        {tab === 'favorites' && <Favorites key={updater} />}
+        {tab === 'pts' && <Pts key={updater} />}
       </StyledContainer>
       <InviteFirendsModal
         open={openCodes}
