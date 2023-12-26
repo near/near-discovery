@@ -7,11 +7,11 @@ import { BaseListItem, BaseModal } from '@/components';
 import useTokenBalance from '@/hooks/useTokenBalance';
 
 import { dexs, iconMap, SwapTokens, WETH_ADDRESS } from './const';
-import LiquidityBtn from './liquidity-btn';
+// import LiquidityBtn from './liquidity-btn';
 
 interface IProps {
-  item: any;
-  onCloseModal: any;
+  item?: any;
+  onCloseModal?: any;
 }
 
 const Wrapper = styled.div`
@@ -50,6 +50,7 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
 
   const currencyCode = currencyCodeMatch ? currencyCodeMatch[1] : '';
   const token = SwapTokens.find((item) => item.symbol === currencyCode);
+
   const { tokenBalance, isError, isLoading, update } = useTokenBalance(token?.address || '', token?.decimals || 0);
 
   return (
@@ -70,7 +71,7 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
           {item.action_tokens && typeof item.action_tokens === 'string' && parseActionTokens(item.action_tokens)}
         </BaseListItem>
       </Wrapper>
-      <LiquidityBtn />
+      {/* <LiquidityBtn /> */}
     </BaseModal>
   );
 };

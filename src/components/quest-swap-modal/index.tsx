@@ -77,23 +77,15 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
         title={item.template}
         uniType={dexs[item?.template].uniType}
         currencyCode={currencyCode}
-        inputCurrency={{
-          address: '0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4', //TODO
-          symbol: 'DAI', //TODO,
-          decimals: 18, //TODO
-        }}
+        inputCurrency={JSON.parse(item?.token_in_currency)}
         inputCurrencyAmount={item.action_amount}
         maxInputBalance={Number(tokenBalance || 0)}
-        outputCurrency={{
-          address: 'native', //TODO
-          symbol: 'ETH', //TODO
-          decimals: 18, //TODO
-        }}
+        outputCurrency={JSON.parse(item?.token_out_currency)}
         routerAddress={dexs[item?.template].routerAddress}
         wethAddress={WETH_ADDRESS}
         //   amountOutFn= {"guessme.near/widget/ZKEVMSwap.swap-quoter"}
         //   handlerV2="guessme.near/widget/ZKEVMSwap.swap-handler"
-        outputCurrencyAmount={1} //TODO
+        // outputCurrencyAmount={1}
         noPair={false}
         token={token}
         updateBalance={update}
@@ -103,33 +95,3 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
 };
 
 export default QuestSwapModal;
-
-{
-  /* <Widget
-        src="guessme.near/widget/ZKEVMWarmUp.quest-modal-swap-btn"
-        props={{
-
-          title: item.template,
-          add: false,
-          uniType: dexs[item?.template].uniType,
-          currencyCode,
-          inputCurrency: {
-            address: "0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4", //TODO
-            symbol: "", //TODO,
-            decimals: 8, //TODO
-          },
-          inputCurrencyAmount: item.action_amount,
-          maxInputBalance: balance,
-          outputCurrency: {
-            address: "native", //TODO
-            symbol: "", //TODO
-          },
-          routerAddress: dexs[item?.template].routerAddress,
-          wethAddress: "0x4f9a0e7fd2bf6067db6994cf12e4495df938e6e9",
-          amountOutFn: "guessme.near/widget/ZKEVMSwap.swap-quoter",
-          handlerV2: "guessme.near/widget/ZKEVMSwap.swap-handler",
-          outputCurrencyAmount: 1, //TODO
-          noPair: false,
-        }}
-      /> */
-}

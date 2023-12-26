@@ -122,25 +122,18 @@ interface IProps {
 }
 
 const SwapBtn: FC<any> = ({
-  noPair,
+  // noPair,
   inputCurrency,
   outputCurrency,
   currencyCode,
-  inputCurrencyAmount,
-  outputCurrencyAmount,
+  // inputCurrencyAmount,
+  // outputCurrencyAmount,
   maxInputBalance,
   routerAddress,
   wethAddress,
   title,
-  fee,
+  // fee,
   uniType,
-  chainName,
-  handlerV2,
-  handlerV3,
-  handlerSolidly,
-  handleSyncswap,
-  stable,
-  syncSwapPoolAddress,
   updateBalance,
 }) => {
   const { account, provider, chainId } = useAccount();
@@ -311,12 +304,11 @@ const SwapBtn: FC<any> = ({
         const { status, transactionHash } = res;
         console.log('tx res', res);
 
-        // TODO
         addAction?.({
           type: 'Swap',
           inputCurrencyAmount: inputValue,
           inputCurrency,
-          outputCurrencyAmount,
+          // outputCurrencyAmount,
           outputCurrency,
           template: title,
           status,
@@ -371,7 +363,6 @@ const SwapBtn: FC<any> = ({
     setIsSwapping(false);
     setBtnText('Swap');
 
-    //TODO close or refresh
     toast?.dismiss(toastId);
     toast?.fail({
       title: 'Swap Failed!',
@@ -654,8 +645,6 @@ const SwapBtn: FC<any> = ({
                 successCallback(tx, () => {
                   setIsSwapping(false);
                   setBtnText('Swap');
-
-                  //TODO close or refresh
                 });
               })
               .catch((err: any) => {
