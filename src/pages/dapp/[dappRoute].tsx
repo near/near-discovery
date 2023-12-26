@@ -6,6 +6,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useChainsStore } from '@/stores/chains';
 import { useDappStore } from '@/stores/dapp';
 import { useLayoutStore } from '@/stores/layout';
+import useAddAction from '@/hooks/useAddAction';
 import type { NextPageWithLayout } from '@/utils/types';
 
 // set dynamic routes for dapps in config file
@@ -15,6 +16,7 @@ export const DappPage: NextPageWithLayout = () => {
   const { chainId } = useAccount();
   const dapp = useDappStore((store: any) => store.dapp);
   const setLayoutStore = useLayoutStore((store) => store.set);
+  const { addAction } = useAddAction('dapp');
   const bridgeCb = useCallback(
     () =>
       setLayoutStore({
@@ -46,7 +48,6 @@ export const DappPage: NextPageWithLayout = () => {
 
   if (!dapp || !default_chain_id || !curChain || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
 
- 
   if (!network?.dapp_src) return <div />;
   return (
     <ComponentWrapperPage
@@ -58,6 +59,7 @@ export const DappPage: NextPageWithLayout = () => {
         curChain,
         defaultDex: dapp.name,
         ...dapp,
+        addAction,
         bridgeCb,
       }}
       src={network.dapp_src}
