@@ -251,7 +251,6 @@ const Content = styled.div`
         background: #21232a;
         border-radius: 20px;
         padding: 20px 60px;
-        border-bottom: 1px solid #383b48;
         flex-basis: calc(25% - 18px);
         color: #ffffff;
         text-align: center;

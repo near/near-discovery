@@ -176,6 +176,24 @@ const Wrapper = styled.div`
 `;
 
 const closeIcon = 'https://ipfs.near.social/ipfs/bafkreiay565opvpvtxexcxkfo7cif3ecn4znoarnutcvhjggiczjpuvbbq';
+const searchIcon = (
+  <svg width="26" height="20" viewBox="0 0 26 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M16.5382 9.0191C16.5382 13.1718 13.1718 16.5382 9.0191 16.5382C4.86642 16.5382 1.5 13.1718 1.5 9.0191C1.5 4.86642 4.86642 1.5 9.0191 1.5C13.1718 1.5 16.5382 4.86642 16.5382 9.0191Z"
+      stroke="#EBF479"
+      stroke-width="3"
+    />
+    <rect
+      x="19.1655"
+      y="12.4033"
+      width="7.89171"
+      height="3.38216"
+      rx="1.69108"
+      transform="rotate(30 19.1655 12.4033)"
+      fill="#EBF479"
+    />
+  </svg>
+);
 
 const iconsMap = {
   'ZkEvm-bridge': (
@@ -385,7 +403,7 @@ const InputSearch: NextPageWithLayout = () => {
             </div>
           )}
 
-          <div className="search-wrapper">{/* Assuming searchIcon is defined */}</div>
+          <div className="search-wrapper">{searchIcon}</div>
         </div>
 
         {!!link && (
