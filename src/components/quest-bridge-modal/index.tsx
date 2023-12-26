@@ -30,18 +30,6 @@ const ItemImg = styled.img`
 const QuestBridgeModal: FC<IProps> = ({ item, onCloseModal }) => {
   const toast = useToast();
   const { account, provider, chainId } = useAccount();
-  const [gasLimit, setGasLimit] = useState(BigNumber.from('300000'));
-  const [isContractAllowedToSpendToken, setIsContractAllowedToSpendToken] = useState(false);
-  const [name, setName] = useState('');
-  const [nonce, setNonce] = useState('');
-  // State.init({
-  //   gasLimit: BigNumber.from("300000"),
-  //   add: true,
-  //   // onChangeAdd: (add) => {
-  //   //   State.update({ add });
-  //   // },
-  //   hide: true,
-  // });
 
   const parseActionTokens = (actionTokensString: string) => {
     try {

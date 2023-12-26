@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Big from 'big.js';
 import { Contract, utils } from 'ethers';
 import type { ChangeEvent, FC } from 'react';
@@ -153,30 +154,41 @@ const Bridge: FC<any> = ({
   const [isApproving, setIsApproving] = useState(false);
   const [isSwapping, setIsSwapping] = useState(false);
   const [toastId, setToastId] = useState(0);
-
+  const [isContractAllowedToSpendToken, setIsContractAllowedToSpendToken] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
+  // const [gasLimit, setGasLimit] = useState(BigNumber.from('300000'));
 
+  // State.init({
+  //   gasLimit: BigNumber.from("300000"),
+  //   add: true,
+  //   // onChangeAdd: (add) => {
+  //   //   State.update({ add });
+  //   // },
+  //   hide: true,
+  // });
+  const [name, setName] = useState('');
+  const [nonce, setNonce] = useState('');
   useEffect(() => {
     inputRef?.current?.focus();
   }, []);
 
-  useEffect(() => {
-    if (Big(inputValue || 0).gt(Big(maxInputBalance || 0))) {
-      setIsDisabled(true);
-      setBtnText('Insufficient Balance');
-    } else {
-      if (!inputValue || inputValue == 0) {
-        setIsDisabled(true);
-        setBtnText('Bridge');
-      } else {
-        setIsDisabled(false);
-        setBtnText('Bridge');
-        if (inputCurrency.address !== 'native') {
-          getAllowance();
-        }
-      }
-    }
-  }, [inputValue, maxInputBalance]);
+  // useEffect(() => {
+  //   if (Big(inputValue || 0).gt(Big(maxInputBalance || 0))) {
+  //     setIsDisabled(true);
+  //     setBtnText('Insufficient Balance');
+  //   } else {
+  //     if (!inputValue || inputValue == 0) {
+  //       setIsDisabled(true);
+  //       setBtnText('Bridge');
+  //     } else {
+  //       setIsDisabled(false);
+  //       setBtnText('Bridge');
+  //       if (inputCurrency.address !== 'native') {
+  //         getAllowance();
+  //       }
+  //     }
+  //   }
+  // }, [inputValue, maxInputBalance]);
 
   // const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
   //   const value = e.target.value;
@@ -566,7 +578,7 @@ const Bridge: FC<any> = ({
     erc20contract
       .name()
       .then((name: any) => {
-        setName(name);
+        // setName(name);
       })
       .catch((e: any) => {
         console.log('name error', e);
@@ -583,13 +595,13 @@ const Bridge: FC<any> = ({
 
     erc20contract
       .allowance(sender, BRIDGE_CONTRACT_ADDRESS)
-      .then((data) => {
+      .then((data: any) => {
         const allowance = Number(utils.formatUnits(data, token.decimals));
         console.log('allowance: ', allowance);
 
         setIsContractAllowedToSpendToken(allowance >= Number(amount));
       })
-      .catch((e) => {
+      .catch((e: any) => {
         console.log('setIsContractAllowedToSpendToken', e);
       });
   };
@@ -606,7 +618,7 @@ const Bridge: FC<any> = ({
       .then((nonce: any) => {
         console.log('nonce', nonce);
 
-        setNonce(nonce);
+        // setNonce(nonce);
       })
       .catch((e: any) => {
         console.log('setNonce err:', e);
@@ -714,7 +726,8 @@ const Bridge: FC<any> = ({
           s,
         ]);
         toast?.dismiss(toastId);
-        handleBridge({ ...props, permit });
+        // handleBridge({ ...props, permit });
+        handleBridge({ permit });
       })
       .catch((err: any) => {
         toast?.dismiss(toastId);
@@ -802,7 +815,7 @@ const Bridge: FC<any> = ({
             ref={inputRef}
             type="number"
             value={inputValue}
-            onChange={handleInputChange}
+            // onChange={handleInputChange}
             maxLength={String(maxInputBalance).length + 2}
             max={maxInputBalance}
             autoComplete="off"
