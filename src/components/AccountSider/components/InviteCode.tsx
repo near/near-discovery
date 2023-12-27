@@ -55,29 +55,31 @@ const InviteCode = ({ show, onClose }: { show: boolean; onClose: () => void }) =
   const { list, loading } = useInviteCode(show);
   return (
     <StyledInviteCode
-      display={show ? 1: 0}
+      display={show ? 1 : 0}
       onClick={(ev) => {
         ev.stopPropagation();
       }}
     >
       <Header>Invite Code</Header>
       <List>
-        {list?.map((record) => (
-          <Item deleted={record.is_used} key={record.code}>
-            <Code>{record.code}</Code>
-            <CopyButton
-              size={10}
-              text={record.code}
-              tooltipMessage="Copied"
-              tooltipTop={-31}
-              tooltipRight={-12}
-              tooltipFontSize={12}
-              buttonColor="rgba(255,255,255,0.6)"
-              cb={onClose}
-            />
-          </Item>
-        ))}
-        {loading && (
+        {list
+          ?.filter((item) => !item.is_used)
+          .map((record) => (
+            <Item deleted={record.is_used} key={record.code}>
+              <Code>{record.code}</Code>
+              <CopyButton
+                size={10}
+                text={record.code}
+                tooltipMessage="Copied"
+                tooltipTop={-31}
+                tooltipRight={-12}
+                tooltipFontSize={12}
+                buttonColor="rgba(255,255,255,0.6)"
+                cb={onClose}
+              />
+            </Item>
+          ))}
+        {loading && !list?.filter((item) => !item.is_used).length && (
           <StyledLoading>
             <Loading size={30} />
           </StyledLoading>

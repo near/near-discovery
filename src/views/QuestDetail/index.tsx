@@ -1,5 +1,5 @@
 import { useSearchParams } from 'next/navigation';
-import { memo } from 'react';
+import { memo, useState } from 'react';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
@@ -18,8 +18,9 @@ const QuestDetailView = () => {
   const _id = searchParams.get('id');
   const id = _id?.includes('?') ? _id.split('?')[0] : _id;
   const { loading, info } = useQuestInfo(id || '');
+  const [updater, setUpdater] = useState(1);
   const { loading: categoryLoading, categories } = useCategoryList();
-  const { info: userInfo = {} } = useUserInfo({ updater: 1 });
+  const { info: userInfo = {} } = useUserInfo({ updater });
 
   return (
     <StyledContainer>
@@ -46,6 +47,9 @@ const QuestDetailView = () => {
                 userInfo={userInfo}
                 isLive={info.quest.status === 'ongoing'}
                 claimed={info.quest.is_claimed}
+                onSuccess={() => {
+                  setUpdater(Date.now());
+                }}
               />
             </StyledTopBox>
             <Recommends campaignId={info.quest.quest_campaign_id} />

@@ -1,55 +1,15 @@
 import Link from 'next/link';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
-import { dapps } from '@/config/dapps';
 import { QUEST_PATH } from '@/config/quest';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
 import { get } from '@/utils/http';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
-
-const BackRoute = styled.div`
-  /* position: absolute; */
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding-bottom: 6px;
-
-  .back-icon {
-    padding-left: 100px;
-    padding-right: 8px;
-    cursor: pointer;
-  }
-
-  .dapp-logo {
-    width: 32px;
-    height: 32px;
-    cursor: pointer;
-  }
-
-  .dapp-name {
-    font-size: 16px;
-    font-style: italic;
-    font-weight: 900;
-    line-height: 24px;
-    letter-spacing: 0em;
-    text-align: left;
-    color: var(--button-color);
-  }
-`;
-
-const backIcon = (
-  <svg width="8" height="13" viewBox="0 0 8 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M7 12L2 6.5L7 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
-  </svg>
-);
 
 const LoginContainer = styled.div`
   width: auto;
@@ -269,7 +229,7 @@ const MaskLayer = styled.div`
 `;
 
 const MenuContent = styled.div`
-  z-index: 1;
+  z-index: 100;
   position: absolute;
   left: 0;
   top: 78px;
@@ -442,18 +402,6 @@ export const DesktopNavigationTop = () => {
     fetchSearchData();
   }, [searchContent]);
 
-  const query = router.query;
-
-  const dappRoute = query.dappRoute;
-
-  const dappConfig = dapps.find((item) => typeof dappRoute === 'string' && item.dappRoute.indexOf(dappRoute) > -1);
-
-  const search = useSearchParams();
-
-  const dappLogo = search.get('logo') || dappConfig?.logo;
-
-  const name = search.get('name') || dappConfig?.name;
-
   const [showMenuContent, setShowMenuContent] = useState(false);
 
   return (
@@ -555,23 +503,6 @@ export const DesktopNavigationTop = () => {
           <div />
         )}
       </div>
-
-      {dappLogo && name && (
-        <BackRoute>
-          <div
-            className="back-icon"
-            onClick={() => {
-              router.back();
-            }}
-          >
-            {backIcon}
-          </div>
-
-          <img className="dapp-logo" src={dappLogo} />
-
-          <div className="dapp-name">{name}</div>
-        </BackRoute>
-      )}
 
       {showMenuContent && (
         <>

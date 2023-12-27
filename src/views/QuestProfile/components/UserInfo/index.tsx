@@ -51,7 +51,7 @@ const UserInfo = ({ info, onSuccess }: any) => {
             <span>Beginner</span>
           </StyledLabel> */}
           </StyledLabels>
-          <Socials info={info} onSuccess={onSuccess} />
+          {/* <Socials info={info} onSuccess={onSuccess} /> */}
         </StyledLabelsWrapper>
       </StyledContent>
       <StyledBg />

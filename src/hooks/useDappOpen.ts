@@ -17,6 +17,7 @@ export default function useDappOpen() {
         name: dapp.dapp_name,
         logo: dapp.dapp_logo,
         route: dapp.route,
+        theme: dapp.theme,
       };
       setDapp({ dapp: _dapp });
     }

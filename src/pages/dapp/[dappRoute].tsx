@@ -1,5 +1,6 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 import { useSetChain } from '@web3-onboard/react';
+import styled from 'styled-components';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import useAccount from '@/hooks/useAccount';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -7,9 +8,19 @@ import { useChainsStore } from '@/stores/chains';
 import { useDappStore } from '@/stores/dapp';
 import { useLayoutStore } from '@/stores/layout';
 import useAddAction from '@/hooks/useAddAction';
+import Breadcrumb from '@/components/Breadcrumb';
 import type { NextPageWithLayout } from '@/utils/types';
 
 // set dynamic routes for dapps in config file
+
+const DappName = styled.div`
+  color: #fff;
+  font-family: Gantari;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+`;
 
 export const DappPage: NextPageWithLayout = () => {
   const chains = useChainsStore((store: any) => store.chains);
@@ -18,6 +29,7 @@ export const DappPage: NextPageWithLayout = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { addAction } = useAddAction('dapp');
   const [{ settingChain }, setChain] = useSetChain();
+  const [ready, setReady] = useState(false);
   const bridgeCb = useCallback(
     () =>
       setLayoutStore({
@@ -47,26 +59,47 @@ export const DappPage: NextPageWithLayout = () => {
     [curChain],
   );
 
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
   if (!dapp || !default_chain_id || !curChain || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
 
   if (!network?.dapp_src) return <div />;
-  return (
-    <ComponentWrapperPage
-      componentProps={{
-        chainId,
-        name: dapp.name,
-        CHAIN_LIST: dappChains,
-        DEFAULT_CHAIN_ID: dapp.default_chain_id,
-        curChain,
-        defaultDex: dapp.name,
-        ...dapp,
-        addAction,
-        bridgeCb,
-        onSwitchChain: setChain,
-        switchingChain: settingChain,
-      }}
-      src={network.dapp_src}
-    />
+  return ready ? (
+    <>
+      <Breadcrumb
+        navs={[
+          { name: 'Home', path: '/' },
+          { name: 'Dapps', path: '/alldapps' },
+          { name: dapp.name, path: '' },
+        ]}
+      />
+      <div style={{ margin: '0 auto', padding: '40px 0px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '11px', justifyContent: 'center' }}>
+          <img src={dapp.logo} style={{ width: '32px', height: '31px' }} />
+          <DappName>{dapp.name}</DappName>
+        </div>
+        <ComponentWrapperPage
+          componentProps={{
+            chainId,
+            name: dapp.name,
+            CHAIN_LIST: dappChains,
+            DEFAULT_CHAIN_ID: dapp.default_chain_id,
+            curChain,
+            defaultDex: dapp.name,
+            ...dapp,
+            addAction,
+            bridgeCb,
+            onSwitchChain: setChain,
+            switchingChain: settingChain,
+          }}
+          src={network.dapp_src}
+        />
+      </div>
+    </>
+  ) : (
+    <div />
   );
 };
 

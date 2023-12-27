@@ -22,6 +22,15 @@ const StyledContainer = styled.div<{ display: number }>`
   transform: translate(${({ display }) => (display ? 0 : 400)}px);
 `;
 
+const StyledLayer = styled.div<{ display: number }>`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: ${({ display }) => (display ? 'block' : 'none')};
+`;
+
 const StyledPanel = styled.div`
   border-radius: 32px;
   border: 1px solid #343838;
@@ -102,47 +111,57 @@ const AccountSider = () => {
   }, [showCodes]);
 
   return (
-    <StyledContainer display={layoutStore.showAccountSider ? 1 : 0}>
-      <StyledPanel>
-        <Content>
-          <Header showCodes={showCodes} setShowCodes={setShowCodes} />
-          <Main>
-            {tab === 'account' && (
-              <AccountWrapper count={count} setTab={setTab} showChains={showChains} setShowChains={setShowChains} />
-            )}
-            {tab === 'bridge' && (
-              <BridgeWrapper
-                onBack={() => {
-                  setTab('account');
-                }}
-                count={count}
-                txs={txs}
-                txLoading={txLoading}
-                refreshTxs={() => {
-                  setUpdater(Date.now());
-                }}
-              />
-            )}
-          </Main>
-          <Footer />
-        </Content>
-        <Bg $chain={chainId || 0} />
-      </StyledPanel>
-      {layoutStore.showAccountSider && (
-        <CloseIcon
-          onClick={() => {
-            layoutStore.set({
-              showAccountSider: false,
-            });
-          }}
-        >
-          <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M1 12L6 6.5L1 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
-            <path d="M9 12L14 6.5L9 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
-          </svg>
-        </CloseIcon>
-      )}
-    </StyledContainer>
+    <>
+      <StyledLayer
+        display={layoutStore.showAccountSider ? 1 : 0}
+        onClick={() => {
+          layoutStore.set({
+            showAccountSider: false,
+          });
+        }}
+      />
+      <StyledContainer display={layoutStore.showAccountSider ? 1 : 0}>
+        <StyledPanel>
+          <Content>
+            <Header showCodes={showCodes} setShowCodes={setShowCodes} />
+            <Main>
+              {tab === 'account' && (
+                <AccountWrapper count={count} setTab={setTab} showChains={showChains} setShowChains={setShowChains} />
+              )}
+              {tab === 'bridge' && (
+                <BridgeWrapper
+                  onBack={() => {
+                    setTab('account');
+                  }}
+                  count={count}
+                  txs={txs}
+                  txLoading={txLoading}
+                  refreshTxs={() => {
+                    setUpdater(Date.now());
+                  }}
+                />
+              )}
+            </Main>
+            <Footer />
+          </Content>
+          <Bg $chain={chainId || 0} />
+        </StyledPanel>
+        {layoutStore.showAccountSider && (
+          <CloseIcon
+            onClick={() => {
+              layoutStore.set({
+                showAccountSider: false,
+              });
+            }}
+          >
+            <svg width="16" height="13" viewBox="0 0 16 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M1 12L6 6.5L1 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
+              <path d="M9 12L14 6.5L9 1" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </CloseIcon>
+        )}
+      </StyledContainer>
+    </>
   );
 };
 

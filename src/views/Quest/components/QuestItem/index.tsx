@@ -84,7 +84,13 @@ const QuestItem = ({
             )}
             {/* <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag> */}
           </StyledTags>
-          {!is_claimed && participation_status === 'completed' && <StyledCalimable>To be claimed!</StyledCalimable>}
+          {is_claimed ? (
+            <StyledCalimable style={{ color: '#979ABE' }}>Claimed</StyledCalimable>
+          ) : participation_status === 'completed' ? (
+            <StyledCalimable>Unclaimed</StyledCalimable>
+          ) : (
+            ''
+          )}
         </StyledFooter>
       </div>
 
