@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
+export { StyledCoin } from '@/views/Quest/styles';
+
 export const StyledContainer = styled.div`
   height: 100%;
   margin: 0 auto;
@@ -8,7 +10,7 @@ export const StyledContainer = styled.div`
   justify-content: space-between;
 `;
 export const StyledLeftPanel = styled.div`
-  max-width: 430px;
+  max-width: 550px;
   padding-top: 80px;
 `;
 export const StyledTitle = styled.div`
@@ -19,6 +21,14 @@ export const StyledTitle = styled.div`
   font-weight: 700;
   line-height: normal;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  .coin {
+    margin: 0px 6px;
+  }
+  .coin_color {
+    color: #ebf479;
+  }
 `;
 export const StyledDesc = styled.div`
   margin-top: 17px;
@@ -109,3 +119,10 @@ export const StyledRightPanel = styled.div`
   padding-top: 80px;
 `;
 export const StyledRightImg = styled.img``;
+
+export const StyledProcessBars = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 40px;
+`;
