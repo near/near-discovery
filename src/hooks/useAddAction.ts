@@ -12,7 +12,7 @@ export default function useAddAction(source: string) {
   const uuid = useUUIdStore((store: any) => store.uuid);
   const addAction = useCallback(
     (data: any) => {
-      let params: any = { source };
+      let params: any = {};
       if (!chainId || !account) return;
       const currentChain = chains.find((chain: any) => chain.chain_id === chainId);
       console.info('addaction data: ', data);
@@ -90,9 +90,11 @@ export default function useAddAction(source: string) {
           action_status: data.status === 1 ? 'Success' : 'Failed',
           action_switch: data.add ? 1 : 0,
           tx_id: data.transactionHash,
+          chain_id: data.chain_id,
         };
       }
       console.info('addaction params: ', params);
+      params.source = source;
       post('/api/action/add', params);
     },
     [chainId, account],

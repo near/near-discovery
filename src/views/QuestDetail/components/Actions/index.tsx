@@ -40,7 +40,10 @@ const Actions = ({
   claimed: boolean;
   onSuccess: VoidFunction;
 }) => {
-  const { loading, handleClaim } = useRewardsClaim(() => {});
+  const [claimedSuccess, setClaimedSuccess] = useState(false);
+  const { loading, handleClaim } = useRewardsClaim(() => {
+    setClaimedSuccess(true);
+  });
   const [cbCompleted, setCbCompleted] = useState(0);
   const completedCount = useMemo(() => completed + cbCompleted, [completed, cbCompleted]);
   const config = useAuthConfig();
@@ -59,8 +62,8 @@ const Actions = ({
           action={action}
           completed={action.status === 'completed'}
           userInfo={userInfo}
-          onSuccess={() => {
-            setCbCompleted((prev) => prev + 1);
+          onSuccess={(type) => {
+            if (type !== 1) setCbCompleted((prev) => prev + 1);
             onSuccess();
           }}
           config={config}
@@ -74,7 +77,7 @@ const Actions = ({
         ))}
       </StyledProcessBars>
       <StyledButton
-        disabled={completedCount < actions.length || loading || claimed}
+        disabled={completedCount < actions.length || loading || claimed || claimedSuccess}
         onClick={() => {
           handleClaim(id);
         }}

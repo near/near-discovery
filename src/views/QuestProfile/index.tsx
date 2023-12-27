@@ -36,7 +36,7 @@ const QuestProfileView = () => {
           <InviteCodePanel
             onInviteCodeClick={() => {
               handleReport('invite');
-              if (list.length > 0) setOpenCodes(true);
+              setOpenCodes(true);
             }}
             total={list.length}
             totalRewards={totalRewards}

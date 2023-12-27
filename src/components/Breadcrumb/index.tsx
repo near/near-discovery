@@ -1,4 +1,4 @@
-import { usePathname,useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 import type { CSSProperties } from 'styled-components/dist/types';
 
@@ -22,15 +22,14 @@ const LeftArrow = (
 
 const Breadcrumb = ({ style, navs }: BreadcrumbProps) => {
   const router = useRouter();
-  const pathname = usePathname();
   return (
     <StyledContainer style={style}>
       {navs.map((nav, i) => (
         <StyledNav
-          $active={pathname === nav.path}
+          $active={i === navs.length - 1}
           key={nav.path}
           onClick={() => {
-            if (pathname !== nav.path) router.push(nav.path);
+            if (i !== navs.length - 1) router.push(nav.path);
           }}
           whileHover={{ color: '#ebf479' }}
         >

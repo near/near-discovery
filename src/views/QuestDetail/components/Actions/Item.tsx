@@ -40,7 +40,7 @@ const ActionItem = ({
   userInfo: any;
   config: any;
   isLive: boolean;
-  onSuccess: VoidFunction;
+  onSuccess: (type?: number) => void;
 }) => {
   const [open, setOpen] = useState(false);
   const [actionCompleted, setActionCompleted] = useState(completed);
@@ -52,8 +52,15 @@ const ActionItem = ({
     onSuccess();
   });
   const [showRefreshTips, setShowRefreshTips] = useState(false);
-
-  const { loading: binding, type, handleBind } = useAuthBind({ onSuccess });
+  const {
+    loading: binding,
+    type,
+    handleBind,
+  } = useAuthBind({
+    onSuccess: () => {
+      onSuccess(1);
+    },
+  });
 
   const handleClick = useCallback(() => {
     setOpen(false);
@@ -112,7 +119,7 @@ const ActionItem = ({
     }
     if (!action.source) return;
     router.push('/' + action.source);
-  }, [router, config, action]);
+  }, [router, config, action, userInfo]);
 
   const handleDappRedirect = useCallback((dapp: any) => {
     dapp.route && dappOpen({ ...dapp, route: `/${dapp.route}` }, 'quest');
@@ -222,11 +229,6 @@ const ActionItem = ({
           )}
         </StyledItemRight>
       </StyledItemTop>
-      {/* <StyledExpandContainer>
-        <StyledDesc>Choose one dapp to swapping.</StyledDesc>
-       
-        <StyledMore>View all Dapps</StyledMore>
-      </StyledExpandContainer> */}
       <AnimatePresence initial={false}>
         {open && (
           <StyledExpandContainer
@@ -243,20 +245,31 @@ const ActionItem = ({
             <StyledExpand>
               <StyledDesc dangerouslySetInnerHTML={{ __html: formatDescription(action.description) }} />
               <StyledDapps>
-                {action.operators?.map((dapp: any) => (
-                  <StyledDapp
-                    key={dapp.dapp_id}
-                    whileHover={{ opacity: 0.8 }}
-                    whileTap={{ opacity: 0.6 }}
-                    onClick={() => {
-                      handleDappRedirect(dapp);
-                    }}
-                  >
-                    <StyledDappIcon src={dapp.dapp_logo} />
-                    <span>{dapp.dapp_name}</span>
-                  </StyledDapp>
-                ))}
+                {action.operators
+                  ?.filter((item: any, i: number) => i < 10)
+                  .map((dapp: any) => (
+                    <StyledDapp
+                      key={dapp.dapp_id}
+                      whileHover={{ opacity: 0.8 }}
+                      whileTap={{ opacity: 0.6 }}
+                      onClick={() => {
+                        handleDappRedirect(dapp);
+                      }}
+                    >
+                      <StyledDappIcon src={dapp.dapp_logo} />
+                      <span>{dapp.dapp_name}</span>
+                    </StyledDapp>
+                  ))}
               </StyledDapps>
+              {action.operators?.length > 10 && (
+                <StyledMore
+                  onClick={() => {
+                    router.push('/alldapps');
+                  }}
+                >
+                  View all Dapps
+                </StyledMore>
+              )}
               {/* {(action.operators?.length === 0 || !action.operators) && (
                 <StyledExpandButtonBox>
                   <StyledExpandButton onClick={() => {}}>{binding && <Loading />} Got it</StyledExpandButton>
