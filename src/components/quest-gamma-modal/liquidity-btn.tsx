@@ -4,11 +4,10 @@ import type { ChangeEvent, FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { BaseButton } from '@/components';
 import useAccount from '@/hooks/useAccount';
 import useAddAction from '@/hooks/useAddAction';
 import useToast from '@/hooks/useToast';
-
-import { BaseButton } from '@/components';
 
 // import { ALLOWANCE_ABI, APPROVE_ABI, ROUTER_ABI, WETH_ABI } from './const';
 
@@ -89,7 +88,6 @@ const Comment = styled.span`
   align-items: center;
   font-size: 14px;
   padding: 8px 0;
-  color: ${(props) => (props?.isError ? '#E25D58' : '#7C7F96')};
 `;
 
 interface IProps {
@@ -174,8 +172,8 @@ const Btn: FC<IProps> = ({ pairId, token0Bal, token1Bal, token0, token1, decimal
       .catch((e: any) => console.log(e));
   };
   const getFromDepositAmount = (depositAmount: [number, number], tokenDecimal: number) => {
-    let a = new Big(depositAmount[0].toString());
-    let b = new Big(depositAmount[1].toString());
+    const a = new Big(depositAmount[0].toString());
+    const b = new Big(depositAmount[1].toString());
 
     if (a.eq(0) && b.eq(0)) return '0';
 
@@ -350,8 +348,8 @@ const Btn: FC<IProps> = ({ pairId, token0Bal, token1Bal, token0, token1, decimal
     setIsError(false);
     setLoadingMsg('Depositing...');
 
-    const token0Wei = utils.parseUnits(amount0, decimals0);
-    const token1Wei = utils.parseUnits(amount1, decimals1);
+    const token0Wei = utils.parseUnits(amount0 as string, decimals0);
+    const token1Wei = utils.parseUnits(amount1 as string, decimals1);
 
     const proxyAbi = [
       'function deposit(uint256, uint256,address,address,uint256[4] memory)  external returns (uint256)',
