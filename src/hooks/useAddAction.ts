@@ -15,7 +15,7 @@ export default function useAddAction(source: string) {
       let params: any = {};
       if (!chainId || !account) return;
       const currentChain = chains.find((chain: any) => chain.chain_id === chainId);
-      console.info('addaction data: ', data);
+      console.info('addAction data: ', data);
 
       if (data.type === 'Swap') {
         params = {
@@ -36,11 +36,14 @@ export default function useAddAction(source: string) {
         };
       }
       if (data.type === 'Bridge') {
-        console.info('add action bridge ', data);
         try {
-          const fromChain = chains.find((chain: any) => chain.chain_id === data.fromChainId);
-          const toChain = chains.find((chain: any) => chain.chain_id === data.toChainId);
-          console.info('chains: ', fromChain, toChain, currentChain);
+          const fromChain = chains.find((chain: any) => chain.chain_id === data.fromChainId) || {
+            name: 'Ethereum Mainnet',
+          };
+          const toChain = chains.find((chain: any) => chain.chain_id === data.toChainId) || {
+            name: 'Ethereum Mainnet',
+          };
+          // console.info('chains: ', fromChain, toChain, currentChain);
           params = {
             action_title: `Bridge ${data.token.symbol} from ${fromChain?.name} to ${toChain?.name}`,
             action_type: 'Bridge',
@@ -55,6 +58,8 @@ export default function useAddAction(source: string) {
             tx_id: data.transactionHash,
             chain_id: data.fromChainId,
             to_chain_id: data.toChainId,
+            token_in_currency: fromChain?.name,
+            token_out_currency: toChain?.name,
           };
           console.info('params:', params);
         } catch (error) {
@@ -93,7 +98,7 @@ export default function useAddAction(source: string) {
           chain_id: data.chain_id,
         };
       }
-      console.info('addaction params: ', params);
+      console.info('addAction params: ', params);
       params.source = source;
       post('/api/action/add', params);
     },

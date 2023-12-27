@@ -2,8 +2,8 @@ import type { BigSource } from 'big.js';
 import Big from 'big.js';
 import { useState } from 'react';
 import { styled } from 'styled-components';
-import { QuestBridgeModal, QuestGammaModal, QuestSwapModal } from '@/components';
 
+import { QuestBridgeModal, QuestGammaModal, QuestSwapModal } from '@/components';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -493,7 +493,7 @@ const SwapTokens = [
 
 enum ModalType {
   SWAP = 'SWAP',
-  BRIDGE = 'BRIDGE',
+  NATIVE_BRIDGE = 'NATIVE_BRIDGE',
   GAMMA = 'GAMMA',
 }
 
@@ -510,6 +510,7 @@ const QuestCard: NextPageWithLayout = (props) => {
 
   const [showSwap, setShowSwap] = useState(false);
   const [showGamma, setShowGamma] = useState(false);
+  const [showNativeBridge, setShowNativeBridge] = useState(false);
   const [modalType, setModalType] = useState<ModalType>();
 
   let link = '';
@@ -587,8 +588,9 @@ const QuestCard: NextPageWithLayout = (props) => {
       setModalType(ModalType.SWAP);
       setShowSwap(true);
     }
-    if (item?.template === 'Bridge') {
-      setModalType(ModalType.BRIDGE);
+    if (item?.template === 'native bridge') {
+      setModalType(ModalType.NATIVE_BRIDGE);
+      setShowNativeBridge(true);
     }
     if (item?.template === 'Gamma') {
       setModalType(ModalType.GAMMA);
@@ -704,6 +706,9 @@ const QuestCard: NextPageWithLayout = (props) => {
       </div>
       {showSwap && modalType === ModalType.SWAP ? (
         <QuestSwapModal item={item} onCloseModal={() => setShowSwap(false)} />
+      ) : null}
+      {showNativeBridge && modalType === ModalType.NATIVE_BRIDGE ? (
+        <QuestBridgeModal item={item} onCloseModal={() => setShowNativeBridge(false)} />
       ) : null}
       {showGamma && modalType === ModalType.GAMMA ? (
         <QuestGammaModal
