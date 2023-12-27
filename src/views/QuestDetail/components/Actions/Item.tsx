@@ -53,11 +53,10 @@ const ActionItem = ({
   });
   const [showRefreshTips, setShowRefreshTips] = useState(false);
 
-  const { loading: binding, type, handleBind } = useAuthBind({ onSuccess: () => {} });
+  const { loading: binding, type, handleBind } = useAuthBind({ onSuccess });
 
   const handleClick = useCallback(() => {
     setOpen(false);
-
     if (action.source === 'search') {
       document.getElementById('nav-top-search')?.focus();
       return;
@@ -129,7 +128,7 @@ const ActionItem = ({
         initial={false}
         onClick={() => {
           if (!isLive) return;
-          if (action.operators?.length === 0 || !action.operators || !binding) {
+          if (action.operators?.length === 0 || !action.operators) {
             handleClick();
             return;
           }

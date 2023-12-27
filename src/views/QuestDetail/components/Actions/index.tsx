@@ -27,6 +27,7 @@ const Actions = ({
   userInfo,
   isLive,
   claimed,
+  onSuccess,
 }: {
   actions: any;
   startTime: number;
@@ -37,6 +38,7 @@ const Actions = ({
   userInfo: any;
   isLive: boolean;
   claimed: boolean;
+  onSuccess: VoidFunction;
 }) => {
   const { loading, handleClaim } = useRewardsClaim(() => {});
   const [cbCompleted, setCbCompleted] = useState(0);
@@ -59,6 +61,7 @@ const Actions = ({
           userInfo={userInfo}
           onSuccess={() => {
             setCbCompleted((prev) => prev + 1);
+            onSuccess();
           }}
           config={config}
           isLive={isLive}
