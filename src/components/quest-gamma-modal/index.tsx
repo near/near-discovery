@@ -6,8 +6,8 @@ import styled from 'styled-components';
 import { BaseListItem, BaseModal } from '@/components';
 import useTokenBalance from '@/hooks/useTokenBalance';
 
-import { dexs, iconMap, SwapTokens, WETH_ADDRESS } from './const';
-// import LiquidityBtn from './liquidity-btn';
+import { iconMap, SwapTokens } from './const';
+import LiquidityBtn from './liquidity-btn';
 
 interface IProps {
   item?: any;
@@ -28,7 +28,7 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
   //   const [tokenBalance, setTokenBalance] = useState(0);
 
   //   const { account, provider } = useAccount();
-
+  console.info('item', item);
   const parseActionTokens = (actionTokensString: string) => {
     try {
       const actionTokensArray = JSON.parse(actionTokensString);
@@ -44,14 +44,22 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
     }
   };
 
-  const displayTitles = item.action_title;
+  const tokenArray = JSON.parse(item.action_tokens);
+  const token0 = tokenArray[0];
+  const token1 = tokenArray[1];
 
-  const currencyCodeMatch = displayTitles.match(/\b\s*([A-Za-z]+)\s*on\b/);
+  const tokenObj0 = SwapTokens.find((item) => item.symbol === token0);
+  const tokenObj1 = SwapTokens.find((item) => item.symbol === token1);
+  console.info('token:', tokenObj0, tokenObj1);
 
-  const currencyCode = currencyCodeMatch ? currencyCodeMatch[1] : '';
-  const token = SwapTokens.find((item) => item.symbol === currencyCode);
-
-  const { tokenBalance, isError, isLoading, update } = useTokenBalance(token?.address || '', token?.decimals || 0);
+  const { tokenBalance: tokenBalance0, update: update0 } = useTokenBalance(
+    tokenObj0?.address || '',
+    tokenObj0?.decimals || 0,
+  );
+  const { tokenBalance: tokenBalance1, update: update1 } = useTokenBalance(
+    tokenObj1?.address || '',
+    tokenObj1?.decimals || 0,
+  );
 
   return (
     <BaseModal title="Add Liquidity" onClose={onCloseModal}>
@@ -60,18 +68,25 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
           <ItemImg src={iconMap[item.template]} style={{ marginRight: '5px' }} />
           {item.template}
         </BaseListItem>
-        <BaseListItem title="Suggestion">{displayTitles}</BaseListItem>
+        <BaseListItem title="Suggestion"></BaseListItem>
         <BaseListItem title="Your balance">
-          {tokenBalance ? Big(tokenBalance).toFixed(4, 0) : ''} {currencyCode}
+          {tokenBalance0 ? Big(tokenBalance0).toFixed(4, 0) : ''} {token0} + &nbsp;
+          {tokenBalance1 ? Big(tokenBalance1).toFixed(4, 0) : ''} {token1}
         </BaseListItem>
         <BaseListItem title="Pool">
           {item.action_tokens && typeof item.action_tokens === 'string' && parseActionTokens(item.action_tokens)}
         </BaseListItem>
-        <BaseListItem title="To">
-          {item.action_tokens && typeof item.action_tokens === 'string' && parseActionTokens(item.action_tokens)}
-        </BaseListItem>
+        <BaseListItem title="To">Polygon zkEVM</BaseListItem>
       </Wrapper>
-      {/* <LiquidityBtn /> */}
+      <LiquidityBtn
+        pairId={item?.pairId} //TODO
+        token0Bal={tokenBalance0}
+        token1Bal={tokenBalance1}
+        token0={token0}
+        token1={token1}
+        decimals0={tokenObj0?.decimals || 0}
+        decimals1={tokenObj1?.decimals || 0}
+      />
     </BaseModal>
   );
 };

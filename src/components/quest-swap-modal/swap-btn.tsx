@@ -9,37 +9,21 @@ import useAccount from '@/hooks/useAccount';
 import useAddAction from '@/hooks/useAddAction';
 import useToast from '@/hooks/useToast';
 
+import { BaseButton } from '@/components';
+
 import { ALLOWANCE_ABI, APPROVE_ABI, QUOTE_ABI, QuoteContractAddress, ROUTER_ABI, WETH_ABI } from './const';
 
-const SwapButton = styled.button`
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 10px;
-  background-color: var(--button-color);
-  color: var(--button-text-color);
-  font-size: 16px;
-  line-height: 1;
-  border: none;
-  transition: 0.5s;
-  cursor: pointer;
-  font-weight: 700;
-  :hover {
-    opacity: 0.8;
-  }
-  &:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-`;
 const ModalSwapBtnWrapper = styled.div`
   display: block;
+  .swap-btn {
+    width: 130px;
+  }
   .clickExecution-popup-btn {
     display: flex;
+    gap: 10px;
     .popup-swap-input {
-      width: 70%;
+      /* width: 70%; */
+      flex-grow: 1;
       position: relative;
       input {
         width: 100%;
@@ -151,7 +135,7 @@ const SwapBtn: FC<any> = ({
 
   const inputRef = useRef<HTMLInputElement>(null);
   // 1: ETH=>WETH 2:WETH=>ETH 0: others
-  const wrapType =
+  const wrapType: any =
     inputCurrency.address === 'native' && outputCurrency.address === wethAddress
       ? 1
       : inputCurrency.address === wethAddress && outputCurrency.address === 'native'
@@ -658,60 +642,65 @@ const SwapBtn: FC<any> = ({
     }
   };
 
+  const handleWrapClick = () => {
+    const id = toast?.loading({
+      title: `Swap ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
+    });
+    setToastId(id);
+    setIsWrapping(true);
+    handleWrap(
+      wrapType,
+      (res) => {
+        successCallback(res, () => {
+          setIsWrapping(false);
+        });
+      },
+      (err) => {
+        setIsWrapping(false);
+        toast?.dismiss(toastId);
+        toast?.fail({
+          title: 'Swap Failed!',
+          text: err?.message?.includes('user rejected transaction')
+            ? 'User rejected transaction'
+            : `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
+        });
+      },
+    );
+  };
+
   const renderBtn = () => {
     if (wrapType) {
       // eth=> weth  weth=>eth
       return (
-        <div className="popup-swap-btn">
-          <SwapButton
-            onClick={() => {
-              const id = toast?.loading({
-                title: `Swap ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
-              });
-              setToastId(id);
-              setIsWrapping(true);
-              handleWrap(
-                wrapType,
-                (res) => {
-                  successCallback(res, () => {
-                    setIsWrapping(false);
-                  });
-                },
-                (err) => {
-                  setIsWrapping(false);
-                  toast?.dismiss(toastId);
-                  toast?.fail({
-                    title: 'Swap Failed!',
-                    text: err?.message?.includes('user rejected transaction')
-                      ? 'User rejected transaction'
-                      : `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
-                  });
-                },
-              );
-            }}
-            disabled={isWrapping}
-          >
-            {wrapType === 1 ? (isWrapping ? 'Wrapping...' : 'Wrap') : isWrapping ? 'Unwrapping...' : 'Unwrap'}
-          </SwapButton>
-        </div>
+        <BaseButton
+          className="swap-btn"
+          onClick={handleWrapClick}
+          disabled={isWrapping}
+          label={wrapType === 1 ? (isWrapping ? 'Wrapping...' : 'Wrap') : isWrapping ? 'Unwrapping...' : 'Unwrap'}
+          size="large"
+        />
       );
     } else {
       // others
       if (!isApproved) {
         return (
-          <div className="popup-swap-btn">
-            <SwapButton onClick={handleApprove} disabled={isApproving}>
-              {isApproving ? ' Approving...' : ' Approve'}
-            </SwapButton>
-          </div>
+          <BaseButton
+            className="swap-btn"
+            onClick={handleApprove}
+            disabled={isApproving}
+            label={isApproving ? ' Approving...' : ' Approve'}
+            size="large"
+          />
         );
       } else {
         return (
-          <div className={`popup-swap-btn ${isDisabled ? 'disabled' : ''}`}>
-            <SwapButton onClick={handleSwap} disabled={isSwapping || isDisabled}>
-              {btnText}
-            </SwapButton>
-          </div>
+          <BaseButton
+            className="swap-btn"
+            onClick={handleSwap}
+            disabled={isSwapping || isDisabled}
+            label={btnText}
+            size="large"
+          />
         );
       }
     }
@@ -738,145 +727,3 @@ const SwapBtn: FC<any> = ({
   );
 };
 export default SwapBtn;
-
-{
-  /* {!isDisabled && uniType === 'v2' && isSwapping && (
-          <Widget
-            src={handlerV2}
-            props={{
-              inputCurrencyAmount: inputValue,
-              outputCurrencyAmount,
-              inputCurrency,
-              outputCurrency,
-              wethAddress,
-              account,
-              routerAddress,
-              swapping: isSwapping,
-              title,
-              onSuccess: (res) => {
-                console.info('success', res);
-                successCallback(res, () => {
-                  setIsSwapping(false);
-                  setBtnText('Swap');
-    
-                  //TODO close or refresh
-                });
-              },
-              onError: (err) => {
-                console.info('error00', err);
-                setIsSwapping(false);
-                setBtnText('Swap');
-    
-                //TODO close or refresh
-                toast?.dismiss(toastId);
-                toast?.fail({
-                  title: 'Swap Failed!',
-                  text: err?.message?.includes('user rejected transaction')
-                    ? 'User rejected transaction'
-                    : `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
-                });
-              },
-            }}
-          />
-        )} */
-}
-
-{
-  /* {!isDisabled && uniType === 'solidly' && isSwapping && (
-          <Widget
-            src={handlerSolidly}
-            props={{
-              inputCurrencyAmount: inputValue,
-              outputCurrencyAmount,
-              inputCurrency,
-              outputCurrency,
-              wethAddress,
-              account,
-              routerAddress,
-              swapping: isSwapping,
-              title,
-              stable,
-              onSuccess: (res) => {
-                successCallback(res, () => {
-                  setIsSwapping(false);
-                });
-              },
-              onError: (err) => {
-                setIsSwapping(false);
-                toast?.dismiss(toastId);
-                toast?.fail({
-                  title: 'Swap Failed!',
-                  text: err?.message?.includes('user rejected transaction')
-                    ? 'User rejected transaction'
-                    : `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
-                });
-              },
-            }}
-          />
-        )}
-    
-        {!isDisabled && uniType === 'Syncswap' && isSwapping && (
-          <Widget
-            src={handleSyncswap}
-            props={{
-              inputCurrencyAmount: inputValue,
-              outputCurrencyAmount,
-              inputCurrency,
-              outputCurrency,
-              wethAddress,
-              account,
-              routerAddress,
-              swapping: isSwapping,
-              title,
-              stable,
-              syncSwapPoolAddress,
-              onSuccess: (res) => {
-                successCallback(res, () => {
-                  setIsSwapping(false);
-                });
-              },
-              onError: (err) => {
-                setIsSwapping(false);
-                toast?.dismiss(toastId);
-                toast?.fail({
-                  title: 'Swap Failed!',
-                  text: err?.message?.includes('user rejected transaction')
-                    ? 'User rejected transaction'
-                    : `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
-                });
-              },
-            }}
-          />
-        )}
-    
-        {!isDisabled && uniType === 'v3' && isSwapping && (
-          <Widget
-            src={handlerV3}
-            props={{
-              inputCurrencyAmount: inputValue,
-              inputCurrency,
-              wethAddress,
-              outputCurrency,
-              account,
-              fee,
-              routerAddress,
-              swapping: isSwapping,
-              onSuccess: (res) => {
-                successCallback(res, () => {
-                  setIsSwapping(false);
-                });
-              },
-              onError: (err) => {
-                setIsSwapping(false);
-                toast?.dismiss(toastId);
-                toast?.fail({
-                  title: 'Swap Failed!',
-                  text: err?.message?.includes('user rejected transaction')
-                    ? 'User rejected transaction'
-                    : `Swaped ${inputValue} ${inputCurrency.symbol} to ${outputCurrency.symbol}`,
-                });
-              },
-            }}
-          />
-        )} */
-}

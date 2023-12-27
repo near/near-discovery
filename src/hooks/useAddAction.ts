@@ -90,6 +90,7 @@ export default function useAddAction(source: string) {
           action_status: data.status === 1 ? 'Success' : 'Failed',
           action_switch: data.add ? 1 : 0,
           tx_id: data.transactionHash,
+          chain_id: chainId,
         };
       }
       console.info('addaction params: ', params);

@@ -2,7 +2,7 @@ import type { BigSource } from 'big.js';
 import Big from 'big.js';
 import { useState } from 'react';
 import { styled } from 'styled-components';
-import { QuestBridgeModal, QuestLiquidityModal, QuestSwapModal } from '@/components';
+import { QuestBridgeModal, QuestGammaModal, QuestSwapModal } from '@/components';
 
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -494,7 +494,7 @@ const SwapTokens = [
 enum ModalType {
   SWAP = 'SWAP',
   BRIDGE = 'BRIDGE',
-  LIQUIDITY = 'LIQUIDITY',
+  GAMMA = 'GAMMA',
 }
 
 const QuestCard: NextPageWithLayout = (props) => {
@@ -509,6 +509,7 @@ const QuestCard: NextPageWithLayout = (props) => {
   const [swapping, setSwapping] = useState(false);
 
   const [showSwap, setShowSwap] = useState(false);
+  const [showGamma, setShowGamma] = useState(false);
   const [modalType, setModalType] = useState<ModalType>();
 
   let link = '';
@@ -584,14 +585,15 @@ const QuestCard: NextPageWithLayout = (props) => {
     console.info('item.template: ', item.template);
     if (['Pancake Swap', 'QuickSwap', 'Balancer'].includes(item?.template)) {
       setModalType(ModalType.SWAP);
+      setShowSwap(true);
     }
     if (item?.template === 'Bridge') {
       setModalType(ModalType.BRIDGE);
     }
-    if (item?.template === 'Liquidity') {
-      setModalType(ModalType.LIQUIDITY);
+    if (item?.template === 'Gamma') {
+      setModalType(ModalType.GAMMA);
+      setShowGamma(true);
     }
-    setShowSwap(true);
   };
 
   const expandToken = (value: BigSource, decimals: number) => {
@@ -702,6 +704,26 @@ const QuestCard: NextPageWithLayout = (props) => {
       </div>
       {showSwap && modalType === ModalType.SWAP ? (
         <QuestSwapModal item={item} onCloseModal={() => setShowSwap(false)} />
+      ) : null}
+      {showGamma && modalType === ModalType.GAMMA ? (
+        <QuestGammaModal
+          //TODO debug
+          // item={item}
+          item={{
+            pairId: 'USDT-DAI', //gamma pairid
+            account_id: '0xc25d79fc4970479b88068ce8891ed9be5799210d',
+            account_info: 'b1fe48f8-a954-4819-8f8b-c64768896bf9',
+            action_id: 1148,
+            action_title: 'Deposit USDT-DAI on Gamma',
+            action_tokens: '["USDT","DAI"]',
+            count_number: 1,
+            template: 'Gamma',
+            timestamp: 1703631952,
+            token_in_currency: null,
+            token_out_currency: null,
+          }}
+          onCloseModal={() => setShowGamma(false)}
+        />
       ) : null}
     </QuestCardWrapper>
   );
