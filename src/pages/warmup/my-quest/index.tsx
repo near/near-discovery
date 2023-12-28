@@ -397,7 +397,9 @@ const MyQuest: NextPageWithLayout = () => {
     setLoading(false);
   };
   useEffect(() => {
-    fetchMyQuestList();
+    if (sender) {
+      fetchMyQuestList();
+    }
   }, [sender]);
 
   function showSwitchUpdate() {
@@ -408,11 +410,12 @@ const MyQuest: NextPageWithLayout = () => {
     const itemMargin = 10;
     const resultInnerWidth = innerWidth - 240;
     const size = resultInnerWidth ? Math.floor(resultInnerWidth / (itemWidth + itemMargin)) * 2 : 0;
-    setRealList(myQuestList.slice(0, Math.min(size, myQuestList.length)));
+    const newRealList = myQuestList.slice(0, Math.min(size, myQuestList.length));
+    setRealList(newRealList);
     setRemainingQuests(
-      myQuestList.filter((item) => !realList.find((realItem) => realItem.action_id === item.action_id)),
+      myQuestList.filter((item) => !newRealList.find((realItem) => realItem.action_id === item.action_id)),
     );
-  }, [myQuestList, realList]);
+  }, [myQuestList]);
 
   useEffect(() => {
     setHaveMoreCard(true);
@@ -455,7 +458,7 @@ const MyQuest: NextPageWithLayout = () => {
       console.error('Error fetching resultMyQuestList data:', error);
     }
   };
-return !loading && myQuestList.length > 0 ? (
+  return !loading && myQuestList.length > 0 ? (
     <CardListWrapper>
       <div className="CardListWrapper-title">
         <div className="CardListWrapper-title-text">{myQuestList.length} Quests</div>
