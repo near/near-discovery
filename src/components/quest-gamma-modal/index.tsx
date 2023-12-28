@@ -28,7 +28,6 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
   //   const [tokenBalance, setTokenBalance] = useState(0);
 
   //   const { account, provider } = useAccount();
-  console.info('item', item);
   const parseActionTokens = (actionTokensString: string) => {
     try {
       const actionTokensArray = JSON.parse(actionTokensString);
@@ -50,7 +49,7 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
 
   const tokenObj0 = SwapTokens.find((item) => item.symbol === token0);
   const tokenObj1 = SwapTokens.find((item) => item.symbol === token1);
-  console.info('token:', tokenObj0, tokenObj1);
+  console.info('gamma props:', item);
 
   const { tokenBalance: tokenBalance0, update: update0 } = useTokenBalance(
     tokenObj0?.address || '',
@@ -60,6 +59,15 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
     tokenObj1?.address || '',
     tokenObj1?.decimals || 0,
   );
+  let amount0, amount1, pairId;
+  const { extra_data } = item;
+  if (extra_data) {
+    const obj = JSON.parse(extra_data);
+    amount0 = obj.amount0;
+    amount1 = obj.amount1;
+    pairId = obj.pairId;
+  }
+  // console.log(111, amount0, amount1, pairId);
 
   return (
     <BaseModal title="Add Liquidity" onClose={onCloseModal}>
@@ -68,7 +76,10 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
           <ItemImg src={iconMap[item.template]} style={{ marginRight: '5px' }} />
           {item.template}
         </BaseListItem>
-        <BaseListItem title="Suggestion"></BaseListItem>
+        <BaseListItem title="Suggestion">
+          {amount0 ? Big(amount0).toFixed(4, 0) : ''} {token0} + &nbsp;
+          {amount1 ? Big(amount1).toFixed(4, 0) : ''} {token1}
+        </BaseListItem>
         <BaseListItem title="Your balance">
           {tokenBalance0 ? Big(tokenBalance0).toFixed(4, 0) : ''} {token0} + &nbsp;
           {tokenBalance1 ? Big(tokenBalance1).toFixed(4, 0) : ''} {token1}
@@ -79,7 +90,7 @@ const QuestLiquidityModal: FC<IProps> = ({ item, onCloseModal }) => {
         <BaseListItem title="To">Polygon zkEVM</BaseListItem>
       </Wrapper>
       <LiquidityBtn
-        pairId={item?.pairId} //TODO
+        pairId={pairId}
         token0Bal={tokenBalance0}
         token1Bal={tokenBalance1}
         token0={token0}

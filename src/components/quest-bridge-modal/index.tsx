@@ -54,10 +54,10 @@ const QuestBridgeModal: FC<IProps> = ({ item, onCloseModal }) => {
       <Wrapper>
         <BaseListItem title="Dapp">
           <ItemImg src={iconMap[item.template]} style={{ marginRight: '5px' }} />
-          {item.template}
+          {item?.template}
         </BaseListItem>
         <BaseListItem title="Suggestion">
-          {}
+          {item?.action_amount}
           {currencyCode}
         </BaseListItem>
         <BaseListItem title="Your balance">

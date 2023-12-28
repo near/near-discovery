@@ -712,21 +712,20 @@ const QuestCard: NextPageWithLayout = (props) => {
       ) : null}
       {showGamma && modalType === ModalType.GAMMA ? (
         <QuestGammaModal
-          //TODO debug
-          // item={item}
-          item={{
-            pairId: 'USDT-DAI', //gamma pairid
-            account_id: '0xc25d79fc4970479b88068ce8891ed9be5799210d',
-            account_info: 'b1fe48f8-a954-4819-8f8b-c64768896bf9',
-            action_id: 1148,
-            action_title: 'Deposit USDT-DAI on Gamma',
-            action_tokens: '["USDT","DAI"]',
-            count_number: 1,
-            template: 'Gamma',
-            timestamp: 1703631952,
-            token_in_currency: null,
-            token_out_currency: null,
-          }}
+          item={item}
+          // item={{
+          //   pairId: 'USDT-DAI', //gamma pairid
+          //   account_id: '0xc25d79fc4970479b88068ce8891ed9be5799210d',
+          //   account_info: 'b1fe48f8-a954-4819-8f8b-c64768896bf9',
+          //   action_id: 1148,
+          //   action_title: 'Deposit USDT-DAI on Gamma',
+          //   action_tokens: '["USDT","DAI"]',
+          //   count_number: 1,
+          //   template: 'Gamma',
+          //   timestamp: 1703631952,
+          //   token_in_currency: null,
+          //   token_out_currency: null,
+          // }}
           onCloseModal={() => setShowGamma(false)}
         />
       ) : null}

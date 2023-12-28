@@ -5,11 +5,10 @@ import type { ChangeEvent, FC } from 'react';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { BaseButton } from '@/components';
 import useAccount from '@/hooks/useAccount';
 import useAddAction from '@/hooks/useAddAction';
 import useToast from '@/hooks/useToast';
-
-import { BaseButton } from '@/components';
 
 import { ALLOWANCE_ABI, APPROVE_ABI, QUOTE_ABI, QuoteContractAddress, ROUTER_ABI, WETH_ABI } from './const';
 
@@ -297,7 +296,7 @@ const SwapBtn: FC<any> = ({
           template: title,
           status,
           transactionHash,
-          // add: props.add,
+          add: true,
         });
         toast?.dismiss(toastId);
         if (status !== 1) throw new Error('');

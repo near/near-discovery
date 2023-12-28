@@ -45,7 +45,7 @@ export default function useAddAction(source: string) {
           };
           // console.info('chains: ', fromChain, toChain, currentChain);
           params = {
-            action_title: `Bridge ${data.token.symbol} from ${fromChain?.name} to ${toChain?.name}`,
+            action_title: `Bridge ${data.amount} ${data.token.symbol} from ${fromChain?.name} to ${toChain?.name}`,
             action_type: 'Bridge',
             action_tokens: JSON.stringify([`${data.token.symbol}`]),
             action_amount: data.amount,
@@ -58,8 +58,10 @@ export default function useAddAction(source: string) {
             tx_id: data.transactionHash,
             chain_id: data.fromChainId,
             to_chain_id: data.toChainId,
-            token_in_currency: fromChain?.name,
-            token_out_currency: toChain?.name,
+            extra_data: {
+              from: fromChain?.name,
+              to: toChain?.name,
+            },
           };
           console.info('params:', params);
         } catch (error) {
@@ -96,6 +98,7 @@ export default function useAddAction(source: string) {
           action_switch: data.add ? 1 : 0,
           tx_id: data.transactionHash,
           chain_id: data.chain_id,
+          extra_data: data.extra_data,
         };
       }
       console.info('addAction params: ', params);

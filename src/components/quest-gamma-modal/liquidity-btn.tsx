@@ -366,15 +366,20 @@ const Btn: FC<IProps> = ({ pairId, token0Bal, token1Bal, token0, token1, decimal
         const { status, transactionHash } = receipt;
 
         addAction?.({
-          type: 'Btn',
+          type: 'Liquidity',
           action: 'Deposit',
           token0,
           token1,
           amount: amount0,
           template: 'Gamma',
           status: status,
-          // add: can_add_action,
+          add: true,
           transactionHash,
+          extra_data: JSON.stringify({
+            amount0,
+            amount1,
+            pairId,
+          }),
         });
         setIsLoading(false);
 

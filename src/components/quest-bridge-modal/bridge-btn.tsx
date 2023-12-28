@@ -320,18 +320,18 @@ const Bridge: FC<IProps> = ({ token, maxInputBalance, updateBalance }) => {
           .then((receipt: any) => {
             const { transactionHash, status } = receipt;
             updateBalance();
-            // TODO ?
-            // props.addAction?.({
-            //   type: "Bridge",
-            //   fromChainId: chainId,
-            //   toChainId: chainId === 1 ? 1101 : 1,
-            //   token: token,
-            //   amount: amount,
-            //   template: "native bridge",
-            //   add: state.add,
-            //   status,
-            //   transactionHash,
-            // });
+
+            addAction?.({
+              type: 'Bridge',
+              fromChainId: chainId,
+              toChainId: chainId === 1 ? 1101 : 1,
+              token: token,
+              amount: amount,
+              template: 'native bridge',
+              add: true,
+              status,
+              transactionHash,
+            });
             toast?.dismiss(toastId);
             toast?.success({
               title: 'Bridge Successfully!',
