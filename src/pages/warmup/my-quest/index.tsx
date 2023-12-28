@@ -348,7 +348,9 @@ const MyQuest: NextPageWithLayout = () => {
   const [questLoadDone, setQuestLoadDone] = useState(false);
   const uuid = useUUIdStore((store: any) => store.uuid);
   const [realList, setRealList] = useState<any[]>([]);
+  const [remainingQuests, setRemainingQuests] = useState<any[]>([]);
   const [haveMoreCard, setHaveMoreCard] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const offset = putMenu ? 170 : 350;
 
@@ -381,6 +383,7 @@ const MyQuest: NextPageWithLayout = () => {
   }, [wallet, provider]);
 
   const fetchMyQuestList = async () => {
+    setLoading(true);
     try {
       const resultMyQuestList = await get(
         `${QUEST_PATH}/api/action/get-action-by-account?account_id=${sender}&account_info=${uuid}&chain_id=1101`,
@@ -391,6 +394,7 @@ const MyQuest: NextPageWithLayout = () => {
     } catch (error) {
       console.error('Error fetching resultMyQuestList data:', error);
     }
+    setLoading(false);
   };
   useEffect(() => {
     fetchMyQuestList();
@@ -405,7 +409,10 @@ const MyQuest: NextPageWithLayout = () => {
     const resultInnerWidth = innerWidth - 240;
     const size = resultInnerWidth ? Math.floor(resultInnerWidth / (itemWidth + itemMargin)) * 2 : 0;
     setRealList(myQuestList.slice(0, Math.min(size, myQuestList.length)));
-  }, [myQuestList]);
+    setRemainingQuests(
+      myQuestList.filter((item) => !realList.find((realItem) => realItem.action_id === item.action_id)),
+    );
+  }, [myQuestList, realList]);
 
   useEffect(() => {
     setHaveMoreCard(true);
@@ -448,7 +455,7 @@ const MyQuest: NextPageWithLayout = () => {
       console.error('Error fetching resultMyQuestList data:', error);
     }
   };
-  return myQuestList.length > 0 ? (
+return !loading && myQuestList.length > 0 ? (
     <CardListWrapper>
       <div className="CardListWrapper-title">
         <div className="CardListWrapper-title-text">{myQuestList.length} Quests</div>
@@ -473,7 +480,7 @@ const MyQuest: NextPageWithLayout = () => {
       })}
       {haveMoreCard &&
         showAll &&
-        myQuestList.map((item, index) => {
+        remainingQuests.map((item, index) => {
           return (
             <QuestCard
               key={item.action_id + '-' + index}
