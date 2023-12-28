@@ -222,7 +222,6 @@ const Btn: FC<IProps> = ({ pairId, token0Bal, token1Bal, token0, token1, decimal
     proxyContract
       .getDepositAmount(hypeAddress, addresses[token0 as AddrKey], token0Wei)
       .then((depositAmount: any) => {
-        console.info(222222222, depositAmount);
         const amount1 = getFromDepositAmount(depositAmount, decimals1);
 
         setAmount1(amount1);
@@ -231,7 +230,7 @@ const Btn: FC<IProps> = ({ pairId, token0Bal, token1Bal, token0, token1, decimal
         checkApproval(amount, amount1);
       })
       .catch((e: any) => {
-        console.info(3333333333, e);
+        console.info('getDepositAmountError===', e);
         setIsLoading(true);
         setIsError(true);
         setAmount1(0);

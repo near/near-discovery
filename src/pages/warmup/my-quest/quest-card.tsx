@@ -115,8 +115,9 @@ const QuestCardWrapper = styled.div`
         cursor: pointer;
         display: inline-block;
         border: 1px solid rgba(236, 244, 136, 1);
-        background: linear-gradient(0deg, rgba(24, 26, 39, 0.8), rgba(24, 26, 39, 0.8)),
-          linear-gradient(0deg, #ecf488, #ecf488);
+        /* background: linear-gradient(0deg, rgba(24, 26, 39, 0.8), rgba(24, 26, 39, 0.8)),
+          linear-gradient(0deg, #ecf488, #ecf488); */
+        background: rgba(24, 26, 39, 0.8);
         border-radius: 8px;
         width: 32px;
         height: 32px;
