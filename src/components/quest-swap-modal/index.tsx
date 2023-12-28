@@ -65,7 +65,9 @@ const QuestSwapModal: FC<IProps> = ({ item, onCloseModal }) => {
           <ItemImg src={iconMap[item.template]} style={{ marginRight: '5px' }} />
           {item.template}
         </BaseListItem>
-        <BaseListItem title="Suggestion">{displayTitles}</BaseListItem>
+        <BaseListItem title="Suggestion">
+          {item?.action_amount} {currencyCode}
+        </BaseListItem>
         <BaseListItem title="Your balance">
           {tokenBalance ? Big(tokenBalance).toFixed(4, 0) : ''} {currencyCode}
         </BaseListItem>

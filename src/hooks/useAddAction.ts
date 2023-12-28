@@ -45,7 +45,7 @@ export default function useAddAction(source: string) {
           };
           // console.info('chains: ', fromChain, toChain, currentChain);
           params = {
-            action_title: `Bridge ${data.amount} ${data.token.symbol} from ${fromChain?.name} to ${toChain?.name}`,
+            action_title: `Bridge ${data.amount} ${data.token.symbol} to ${toChain?.name}`,
             action_type: 'Bridge',
             action_tokens: JSON.stringify([`${data.token.symbol}`]),
             action_amount: data.amount,
