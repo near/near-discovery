@@ -683,7 +683,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   function renderPagination(tab: string, data: any[]) {
     return (
       tab === selectedTab &&
-      data.length >= 30 && (
+      (currentPage > 1 || data.length >= 30) && (
         <Pagination>
           <div
             className="pagination-item"
