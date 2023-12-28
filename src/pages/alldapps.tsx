@@ -490,7 +490,8 @@ const Carousel = React.memo(
 
 const AllDappsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
-  const [dappList, setDappList] = useState<any>(null);
+  const [nativeToken, setNativeToken] = useState<any[]>([]);
+  const [tokenTBD, setTokenTBD] = useState<any[]>([]);
   const [carouselList, setCarouselList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
@@ -532,6 +533,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
       setIsFavoriteTab(false);
     }
     setSelectedTab(path);
+    setCurrentPage(1);
   };
   const handleMenuClick = (path: string) => {
     const _selectedMenu = selectedMenu === path ? '' : path;
@@ -575,6 +577,24 @@ const AllDappsColumn: NextPageWithLayout = () => {
       console.error('Error fetching resultDapp data:', error);
     }
   };
+  const fetchNativeToken = async (page: number) => {
+    try {
+      const resultNativeToken = await get(
+        `${QUEST_PATH}/api/dapp/filter_list?tbd_token=false&page=${page}&page_size=30`,
+      );
+      setNativeToken(resultNativeToken.data?.data || []);
+    } catch (error) {
+      console.error('Error fetching resultDapp data:', error);
+    }
+  };
+  const fetchTokenTBD = async (page: number) => {
+    try {
+      const resultTokenTBD = await get(`${QUEST_PATH}/api/dapp/filter_list?tbd_token=true&page=${page}&page_size=30`);
+      setTokenTBD(resultTokenTBD.data?.data || []);
+    } catch (error) {
+      console.error('Error fetching resultDapp data:', error);
+    }
+  };
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -586,26 +606,19 @@ const AllDappsColumn: NextPageWithLayout = () => {
     };
     const fetchCarouselData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=31`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
         setCarouselList(resultDapp.data?.data || []);
         setTotalPages(resultDapp.data.total_page || 0);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
     };
+    fetchTokenTBD(currentPage);
+    fetchNativeToken(currentPage);
     fetchCarouselData();
     fetchNetworkData();
     fetchIsFavoriteList();
   }, []);
-
-  const fetchDappData = async (page: number) => {
-    try {
-      const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?&page=${page}&page_size=31`);
-      setDappList(resultDapp.data?.data || []);
-    } catch (error) {
-      console.error('Error fetching resultDapp data:', error);
-    }
-  };
   const fetchFilteredDappData = async (page: number) => {
     try {
       const params = {
@@ -627,12 +640,14 @@ const AllDappsColumn: NextPageWithLayout = () => {
         throw new Error('filter did not return an array');
       }
       const queryString = filteredEntries.map(([key, value]) => `${key}=${value}`).join('&');
-      const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=${page}&page_size=31`;
+      const url = `${QUEST_PATH}/api/dapp/filter_list?${queryString}&page=${page}&page_size=30`;
       const resultDapp = await get(url);
       if (selectedTab === 'favorites') {
         setIsFavoriteList(resultDapp.data?.data || []);
-      } else {
-        setDappList(resultDapp.data?.data || []);
+      } else if (selectedTab === 'TBD') {
+        setTokenTBD(resultDapp.data?.data || []);
+      } else if (selectedTab === 'token') {
+        setNativeToken(resultDapp.data?.data || []);
       }
     } catch (error) {
       console.error('Error fetching filtered dapp data:', error);
@@ -656,12 +671,59 @@ const AllDappsColumn: NextPageWithLayout = () => {
       } else {
         if (selectedTab === 'favorites') {
           fetchIsFavoriteList();
-        } else {
-          fetchDappData(currentPage);
+        } else if (selectedTab === 'TBD') {
+          fetchTokenTBD(currentPage);
+        } else if (selectedTab === 'token') {
+          fetchNativeToken(currentPage);
         }
       }
     }
   }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
+
+  function renderPagination(tab: string, data: any[]) {
+    return (
+      tab === selectedTab &&
+      data.length >= 30 && (
+        <Pagination>
+          <div
+            className="pagination-item"
+            onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
+            style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
+          >
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+            />
+          </div>
+          {Array.from(Array(totalPages).keys()).map(
+            (page) =>
+              Math.abs(currentPage - (page + 1)) <= 5 && (
+                <div
+                  key={page}
+                  className={`pagination-number ${currentPage === page + 1 ? 'active' : ''}`}
+                  onClick={() => setCurrentPage(page + 1)}
+                >
+                  {page + 1}
+                </div>
+              ),
+          )}
+          <div
+            className="pagination-item pagination-right"
+            onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
+            style={{
+              cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
+              opacity: currentPage === totalPages ? 0.5 : 1,
+            }}
+          >
+            <img
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              alt=""
+            />
+          </div>
+        </Pagination>
+      )
+    );
+  }
 
   const toggleExpanded = () => {
     if (isExpanded) {
@@ -837,8 +899,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
       </div>
       {selectedTab == 'TBD' ? (
         <div className="tab-content-page">
-          {dappList &&
-            dappList
+          {tokenTBD &&
+            tokenTBD
               .filter((dapp: any) => dapp.tbd_token === 'Y')
               .map((dapp: any, index: number) => {
                 const categoryData = dapp.dapp_category || dapp.category_ids;
@@ -880,44 +942,42 @@ const AllDappsColumn: NextPageWithLayout = () => {
       {selectedTab == 'token' ? (
         <>
           <div className="tab-content-page">
-            {dappList &&
-              dappList
-                .filter((dapp: any) => dapp.tbd_token === 'N')
-                .map((dapp: any, index: number) => {
-                  const categoryData = dapp.dapp_category || dapp.category_ids;
-                  const categoryNames = getCategoryNames(categoryData, categoryArray);
-                  return (
-                    <div className="tab-content-item" key={index}>
-                      <div className="content-item-img">
-                        <img src={dapp.logo} alt="" />
+            {nativeToken &&
+              nativeToken.map((dapp: any, index: number) => {
+                const categoryData = dapp.dapp_category || dapp.category_ids;
+                const categoryNames = getCategoryNames(categoryData, categoryArray);
+                return (
+                  <div className="tab-content-item" key={index}>
+                    <div className="content-item-img">
+                      <img src={dapp.logo} alt="" />
+                    </div>
+                    <div className="content-item-text">
+                      <h1>{dapp.name}</h1>
+                      <p>{dapp.description}</p>
+                      <Tag>
+                        {categoryNames.map((categoryName: string, index: number) => (
+                          <div className={`tag-item ${categoryName}`} key={index}>
+                            {categoryName}
+                          </div>
+                        ))}
+                      </Tag>
+                    </div>
+                    <div className="content-item-btn">
+                      <div className="item-btn-item">
+                        <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
                       </div>
-                      <div className="content-item-text">
-                        <h1>{dapp.name}</h1>
-                        <p>{dapp.description}</p>
-                        <Tag>
-                          {categoryNames.map((categoryName: string, index: number) => (
-                            <div className={`tag-item ${categoryName}`} key={index}>
-                              {categoryName}
-                            </div>
-                          ))}
-                        </Tag>
-                      </div>
-                      <div className="content-item-btn">
-                        <div className="item-btn-item">
-                          <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
-                        </div>
-                        <div
-                          className="item-btn-item"
-                          onClick={() => {
-                            open(dapp, 'alldapps');
-                          }}
-                        >
-                          Dapp
-                        </div>
+                      <div
+                        className="item-btn-item"
+                        onClick={() => {
+                          open(dapp, 'alldapps');
+                        }}
+                      >
+                        Dapp
                       </div>
                     </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
           </div>
         </>
       ) : null}
@@ -963,45 +1023,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
           </div>
         </>
       ) : null}
-      {dappList && dappList.length > 0 && selectedTab !== 'favorites' && (
-        <Pagination>
-          <div
-            className="pagination-item"
-            onClick={() => currentPage > 1 && setCurrentPage(currentPage - 1)}
-            style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
-          >
-            <img
-              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
-              alt=""
-            />
-          </div>
-          {Array.from(Array(totalPages).keys()).map(
-            (page) =>
-              Math.abs(currentPage - (page + 1)) <= 5 && (
-                <div
-                  key={page}
-                  className={`pagination-number ${currentPage === page + 1 ? 'active' : ''}`}
-                  onClick={() => setCurrentPage(page + 1)}
-                >
-                  {page + 1}
-                </div>
-              ),
-          )}
-          <div
-            className="pagination-item pagination-right"
-            onClick={() => currentPage < totalPages && setCurrentPage(currentPage + 1)}
-            style={{
-              cursor: currentPage === totalPages ? 'not-allowed' : 'pointer',
-              opacity: currentPage === totalPages ? 0.5 : 1,
-            }}
-          >
-            <img
-              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
-              alt=""
-            />
-          </div>
-        </Pagination>
-      )}
+      {renderPagination('token', nativeToken)}
+      {renderPagination('tbd', tokenTBD)}
+      {renderPagination('favorite', isFavoriteList)}
     </AllDappsPage>
   );
 };

@@ -859,6 +859,8 @@ const initialLearningData = [
 
 const HomeContent: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
+  const [nativeToken, setNativeToken] = useState<any[]>([]);
+  const [tokenTBD, setTokenTBD] = useState<any[]>([]);
   const [dappList, setDappList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
@@ -882,13 +884,34 @@ const HomeContent: NextPageWithLayout = () => {
         console.error('Error fetching resultDapp data:', error);
       }
     };
+    const fetchNativeToken = async () => {
+      try {
+        const resultNativeToken = await get(`${QUEST_PATH}/api/dapp/filter_list?tbd_token=false&page=1&page_size=10`);
+        setNativeToken(resultNativeToken.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultDapp data:', error);
+      }
+    };
+    const fetchTokenTBD = async () => {
+      try {
+        const resultTokenTBD = await get(`${QUEST_PATH}/api/dapp/filter_list?tbd_token=true&page=1&page_size=10`);
+        setTokenTBD(resultTokenTBD.data?.data || []);
+      } catch (error) {
+        console.error('Error fetching resultDapp data:', error);
+      }
+    };
+    fetchTokenTBD();
+    fetchNativeToken();
     fetchDappData();
     fetchNetworkData();
   }, []);
 
-  function getCategoryNames(dappCategories: any[], categoryArray: any[]) {
-    return dappCategories.map((categoryItem: any) => {
-      const category = categoryArray.find((c: any) => c.id === categoryItem.category_id);
+  function getCategoryNames(dappCategories: any, categoryArray: any[]) {
+    const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
+    return categories.map((categoryItem: any) => {
+      const categoryId =
+        typeof categoryItem === 'object' && categoryItem !== null ? categoryItem.category_id : categoryItem;
+      const category = categoryArray.find((c: any) => c.id === categoryId);
       return category && typeof category === 'object' && 'name' in category ? category.name : 'Category not found';
     });
   }
@@ -1061,11 +1084,10 @@ const HomeContent: NextPageWithLayout = () => {
           </div>
           {selectedTab == 'TBD' ? (
             <div className="tab-content">
-              {dappList
-                .filter((dapp) => dapp.tbd_token === 'Y')
-                .slice(0, 9)
-                .map((dapp, index) => {
-                  const categoryNames = getCategoryNames(dapp.dapp_category, categoryArray);
+              {tokenTBD &&
+                tokenTBD.slice(0, 9).map((dapp, index) => {
+                  const categoryData = dapp.dapp_category || dapp.category_ids;
+                  const categoryNames = getCategoryNames(categoryData, categoryArray);
                   return (
                     <div className="tab-content-item" key={index}>
                       <div className="content-item-img">
@@ -1102,11 +1124,10 @@ const HomeContent: NextPageWithLayout = () => {
           ) : null}
           {selectedTab == 'token' ? (
             <div className="tab-content">
-              {dappList
-                .filter((dapp) => dapp.tbd_token === 'N')
-                .slice(0, 9)
-                .map((dapp, index) => {
-                  const categoryNames = getCategoryNames(dapp.dapp_category, categoryArray);
+              {nativeToken &&
+                nativeToken.slice(0, 9).map((dapp, index) => {
+                  const categoryData = dapp.dapp_category || dapp.category_ids;
+                  const categoryNames = getCategoryNames(categoryData, categoryArray);
                   return (
                     <div className="tab-content-item" key={index}>
                       <div className="content-item-img">
