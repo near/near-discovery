@@ -500,7 +500,7 @@ const MyQuest: NextPageWithLayout = () => {
           );
         })}
       <OperationWrapper>
-        {haveMoreCard && (
+        {haveMoreCard && showAll && (
           <div
             className="show-all"
             onClick={() => {
