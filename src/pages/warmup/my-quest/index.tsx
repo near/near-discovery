@@ -417,8 +417,9 @@ const MyQuest: NextPageWithLayout = () => {
   }, [myQuestList]);
 
   useEffect(() => {
-    setHaveMoreCard(true);
-  }, [realList, myQuestList]);
+    setHaveMoreCard(myQuestList.length > realList.length);
+  }, [myQuestList, realList]);
+
   useEffect(() => {
     if (!shouldRemoveAll) return;
 
@@ -499,7 +500,7 @@ const MyQuest: NextPageWithLayout = () => {
           );
         })}
       <OperationWrapper>
-        {haveMoreCard && showAll && (
+        {haveMoreCard && (
           <div
             className="show-all"
             onClick={() => {

@@ -754,6 +754,7 @@ const CarouselList = styled.div`
       .carousel-btn {
         display: flex;
         .carousel-btn-item {
+          cursor: pointer;
           flex: 1;
           margin-right: 18px;
           background: linear-gradient(0deg, #373a53, #373a53),
@@ -773,6 +774,7 @@ const CarouselList = styled.div`
           img {
             width: 12px;
             height: 8px;
+            margin-left: 8px;
           }
         }
       }
@@ -861,7 +863,7 @@ const HomeContent: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const [nativeToken, setNativeToken] = useState<any[]>([]);
   const [tokenTBD, setTokenTBD] = useState<any[]>([]);
-  const [dappList, setDappList] = useState<any[]>([]);
+  const [exploreDappList, setExploreDappList] = useState<any[]>([]);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
   const { open } = useDappOpen();
@@ -878,15 +880,15 @@ const HomeContent: NextPageWithLayout = () => {
     };
     const fetchDappData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=10`);
-        setDappList(resultDapp.data?.data || []);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?is_recommend=true`);
+        setExploreDappList(resultDapp.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
     };
     const fetchNativeToken = async () => {
       try {
-        const resultNativeToken = await get(`${QUEST_PATH}/api/dapp/filter_list?tbd_token=false&page=1&page_size=10`);
+        const resultNativeToken = await get(`${QUEST_PATH}/api/dapp/list?tbd_token=N`);
         setNativeToken(resultNativeToken.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
@@ -894,7 +896,7 @@ const HomeContent: NextPageWithLayout = () => {
     };
     const fetchTokenTBD = async () => {
       try {
-        const resultTokenTBD = await get(`${QUEST_PATH}/api/dapp/filter_list?tbd_token=true&page=1&page_size=10`);
+        const resultTokenTBD = await get(`${QUEST_PATH}/api/dapp/list?tbd_token=Y`);
         setTokenTBD(resultTokenTBD.data?.data || []);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
@@ -925,8 +927,8 @@ const HomeContent: NextPageWithLayout = () => {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const handleCarouselClick = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % dappList.filter((dapp) => dapp.recommend === true).length);
-  }, [dappList.filter((dapp) => dapp.recommend === true).length]);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % exploreDappList.length);
+  }, [exploreDappList.filter((dapp) => dapp.recommend === true).length]);
 
   const [items, setItems] = useState(initialLearningData);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -1026,40 +1028,44 @@ const HomeContent: NextPageWithLayout = () => {
             <div className="carousel-right-icon" onClick={handleCarouselClick}>
               <img src="https://assets.dapdap.net/images/arrows-carousel.png" alt="" />
             </div>
-            {dappList
-              .filter((dapp) => dapp.recommend === true)
-              .map((child, index) => {
-                const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
-                return (
-                  <Carousel
-                    key={index}
-                    active={index === activeIndex}
-                    style={{ backgroundImage: `url(${child.recommend_icon})` }}
-                  >
-                    <div className="carousel-content">
-                      <img src={child.logo} alt="" />
-                      <h1>{child.name}</h1>
-                      <Tag>
-                        {categoryNames.map((categoryName: string, index: number) => (
-                          <div className={`tag-item ${categoryName}`} key={index}>
-                            {categoryName}
-                          </div>
-                        ))}
-                      </Tag>
-                      <p>{child.description}</p>
-                      <div className="carousel-btn">
-                        <div className="carousel-btn-item">
-                          <Link href={`/dapps-details?dapp_id=${child.id}`}>View Detail</Link>
+            {exploreDappList.map((child, index) => {
+              const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
+              return (
+                <Carousel
+                  key={index}
+                  active={index === activeIndex}
+                  style={{ backgroundImage: `url(${child.recommend_icon})` }}
+                >
+                  <div className="carousel-content">
+                    <img src={child.logo} alt="" />
+                    <h1>{child.name}</h1>
+                    <Tag>
+                      {categoryNames.map((categoryName: string, index: number) => (
+                        <div className={`tag-item ${categoryName}`} key={index}>
+                          {categoryName}
                         </div>
-                        <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                          <Link href={child.route}>Dapp</Link>{' '}
-                          <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
-                        </div>
+                      ))}
+                    </Tag>
+                    <p>{child.description}</p>
+                    <div className="carousel-btn">
+                      <div className="carousel-btn-item">
+                        <Link href={`/dapps-details?dapp_id=${child.id}`}>View Detail</Link>
+                      </div>
+                      <div
+                        className="carousel-btn-item"
+                        style={{ marginRight: '0' }}
+                        onClick={() => {
+                          open(child, 'home');
+                        }}
+                      >
+                        Dapp
+                        <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                       </div>
                     </div>
-                  </Carousel>
-                );
-              })}
+                  </div>
+                </Carousel>
+              );
+            })}
           </CarouselList>
 
           <div className="token-tab-list">
