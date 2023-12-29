@@ -68,6 +68,7 @@ const Actions = ({
           }}
           config={config}
           isLive={isLive}
+          id={id}
         />
       ))}
       <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>

@@ -22,7 +22,7 @@ const MAPS = {
 
 type AuthType = 'telegram' | 'twitter' | 'discord';
 
-export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) {
+export default function useAuthBind({ onSuccess, redirect_uri }: { onSuccess: VoidFunction; redirect_uri: string }) {
   const [loading, setLoading] = useState(false);
   const [type, setType] = useState<AuthType>();
   const toast = useToast();
@@ -40,7 +40,7 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
       try {
         let params = {};
         if (type === 'twitter' || type === 'discord') {
-          params = { code, redirect_uri: sessionStorage.getItem('_auth_redirect') };
+          params = { code, redirect_uri };
         }
         if (type === 'telegram') {
           params = data;
@@ -66,7 +66,7 @@ export default function useAuthBind({ onSuccess }: { onSuccess: VoidFunction }) 
 
   useEffect(() => {
     const type = sessionStorage.getItem('_auth_type');
-    console.log(code, type);
+
     if (!code || !type) return;
     const state = sessionStorage.getItem('_auth_state');
     if (searchParams.get('state') !== state && type === 'twitter') return;

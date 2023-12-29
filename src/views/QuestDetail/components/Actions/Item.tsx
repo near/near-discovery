@@ -33,6 +33,7 @@ const ActionItem = ({
   userInfo,
   config,
   isLive,
+  id,
   onSuccess,
 }: {
   action: any;
@@ -40,6 +41,7 @@ const ActionItem = ({
   userInfo: any;
   config: any;
   isLive: boolean;
+  id: string;
   onSuccess: (type?: number) => void;
 }) => {
   const [open, setOpen] = useState(false);
@@ -60,6 +62,7 @@ const ActionItem = ({
     onSuccess: () => {
       onSuccess(1);
     },
+    redirect_uri: `${window.location.origin}${window.location.pathname}?id=${id}`,
   });
 
   const handleClick = useCallback(() => {
@@ -89,7 +92,6 @@ const ActionItem = ({
       sessionStorage.setItem('_auth_state', state);
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
       sessionStorage.setItem('_auth_type', 'twitter');
-      sessionStorage.setItem('_auth_redirect', window.location.href);
       window.open(path, '_blank');
       return;
     }
@@ -97,7 +99,6 @@ const ActionItem = ({
     if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
       const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
       sessionStorage.setItem('_auth_type', 'discord');
-      sessionStorage.setItem('_auth_redirect', window.location.href);
       window.open(path, '_blank');
       return;
     }
