@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { inviteCodeActivate } from '@/apis';
+import { inviteCodeActivate, getAccessToken } from '@/apis';
 import LoadingIcon from '@/components/Icons/Loading';
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
@@ -155,6 +155,7 @@ export default function InviteCodeView() {
       if (!isSuccess) {
         setErrorTips(errorMsg);
       } else {
+        await getAccessToken(account);
         setCookie('AUTHED_ACCOUNT', account);
         router.replace('/landing');
       }
