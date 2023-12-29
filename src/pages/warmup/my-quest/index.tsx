@@ -427,10 +427,9 @@ const MyQuest: NextPageWithLayout = () => {
 
     const fetchDeleteQuestList = async () => {
       try {
-        const resultDeleteQuestList = await deleteRequest(
-          `${QUEST_PATH}/api/action/batch-delete-action`,
-          action_id_list,
-        );
+        const resultDeleteQuestList = await deleteRequest(`${QUEST_PATH}/api/action/batch-delete-action`, {
+          action_id_list: action_id_list,
+        });
         if (resultDeleteQuestList.code === 0) {
           setMyQuestList([]);
           setShowRemoveAll(false);
