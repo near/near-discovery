@@ -395,7 +395,9 @@ const MyQuest: NextPageWithLayout = () => {
   };
   useEffect(() => {
     if (sender) {
-      fetchMyQuestList();
+      setTimeout(() => {
+        fetchMyQuestList();
+      }, 100);
     }
   }, [sender]);
 
