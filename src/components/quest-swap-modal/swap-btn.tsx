@@ -109,7 +109,7 @@ const SwapBtn: FC<any> = ({
   inputCurrency,
   outputCurrency,
   currencyCode,
-  // inputCurrencyAmount,
+  inputCurrencyAmount,
   // outputCurrencyAmount,
   maxInputBalance,
   routerAddress,
@@ -135,9 +135,9 @@ const SwapBtn: FC<any> = ({
   const inputRef = useRef<HTMLInputElement>(null);
   // 1: ETH=>WETH 2:WETH=>ETH 0: others
   const wrapType: any =
-    inputCurrency.address === 'native' && outputCurrency.address === wethAddress
+    inputCurrency?.address === 'native' && outputCurrency?.address === wethAddress
       ? 1
-      : inputCurrency.address === wethAddress && outputCurrency.address === 'native'
+      : inputCurrency?.address === wethAddress && outputCurrency?.address === 'native'
         ? 2
         : 0;
 
@@ -717,6 +717,7 @@ const SwapBtn: FC<any> = ({
             maxLength={String(maxInputBalance).length + 2}
             max={maxInputBalance}
             autoComplete="off"
+            placeholder={inputCurrencyAmount}
           />
           <span>{currencyCode}</span>
         </div>
