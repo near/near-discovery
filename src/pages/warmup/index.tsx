@@ -13,6 +13,7 @@ import InputSearch from './search';
 import HotDapps from './hot-dapps';
 import MyQuest from './my-quest';
 import QuestTrends from './quest-trends';
+import { ethers } from 'ethers';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -160,6 +161,31 @@ const Page = styled.div`
 `;
 
 const WarmUp: NextPageWithLayout = () => {
+  const addMetaMask = async ({
+    chainId,
+    chainName,
+    rpcUrls,
+  }: {
+    chainId: number;
+    chainName: string;
+    rpcUrls: string[];
+  }) => {
+    const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
+
+    etherProvider
+      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }])
+      .catch((err) => {
+        const chain = {
+          chainId: `0x${Number(chainId).toString(16)}`,
+          chainName: chainName,
+          rpcUrls: rpcUrls,
+        };
+
+        if (err.code === 4902) {
+          etherProvider.send('wallet_addEthereumChain', [chain]);
+        }
+      });
+  };
   return (
     <Container>
       <BreadCrumbs>
@@ -176,7 +202,15 @@ const WarmUp: NextPageWithLayout = () => {
               <img src={zkEVMIcon} alt="" />
               <div className="left-detailed-text">
                 <h1>Polygon zkEVM</h1>
-                <p>
+                <p
+                  onClick={() =>
+                    addMetaMask({
+                      chainId: 1101,
+                      chainName: 'Polygon zkEVM',
+                      rpcUrls: ['https://zkevm-rpc.com'],
+                    })
+                  }
+                >
                   Add to MetaMask <img src={diagonaltop} alt="" />
                 </p>
               </div>

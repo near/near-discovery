@@ -408,17 +408,17 @@ const InputSearch: NextPageWithLayout = () => {
 
         {!!link && (
           <a className="input-button" href={link}>
-            Execute
+            Go to Execute
           </a>
         )}
         {!link && (
           <div
             className="input-button"
             style={{
-              opacity: 0.3,
+              background: 'linear-gradient(180deg, #5F614D 0%, #3A3D11 100%)',
             }}
           >
-            Execute
+            Go to Execute
           </div>
         )}
       </div>

@@ -618,7 +618,9 @@ const ExecuteRecords: NextPageWithLayout = () => {
     }
   };
   useEffect(() => {
-    fetchRecordList();
+    if (sender) {
+      fetchRecordList();
+    }
   }, [sender, currentPage, pageSize, searchAction, searchTemplate, searchStatus]);
   function getTime(timestamp: any) {
     const myDate = new Date(Big(timestamp).mul(1000).toNumber());
@@ -647,19 +649,21 @@ const ExecuteRecords: NextPageWithLayout = () => {
   function click_left() {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      if (currentPage - 1 >= 1) {
+      if (currentPage > 1) {
         setCurrentPage(currentPage - 1);
       }
     }, duration);
   }
+
   function click_right() {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      if (currentPage + 1 <= currentPage) {
+      if (currentPage < totalPage) {
         setCurrentPage(currentPage + 1);
       }
     }, duration);
   }
+
   function click_right_most() {
     clearTimeout(timer);
     timer = setTimeout(() => {
@@ -814,7 +818,7 @@ const ExecuteRecords: NextPageWithLayout = () => {
         <table>
           <thead>
             <tr>
-              <th style={{ width: '20%' }}>Quest</th>
+              <th style={{ width: '30%' }}>Quest</th>
               <th style={{ width: '10%' }}>
                 <div
                   className="head_th"
@@ -873,7 +877,7 @@ const ExecuteRecords: NextPageWithLayout = () => {
                   </div>
                 </div>
               </th>
-              <th style={{ width: '15%' }}>
+              <th style={{ width: '10%' }}>
                 <div className="head_th" onClick={switch_status_select}>
                   Status
                   <span className="arrow" style={{ marginLeft: '5px' }}>

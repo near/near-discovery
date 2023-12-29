@@ -285,7 +285,9 @@ const QuestTrends: NextPageWithLayout = () => {
         console.error('Error fetching resultNetwork data:', error);
       }
     };
-    fetchQuestTrends();
+    setTimeout(() => {
+      fetchQuestTrends();
+    }, 100);
   }, []);
   function formatTitle(title: string) {
     const regex = /\b\d+(\.\d+)?\b/g;
