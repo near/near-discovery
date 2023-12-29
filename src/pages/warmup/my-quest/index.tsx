@@ -350,7 +350,6 @@ const MyQuest: NextPageWithLayout = () => {
   const [realList, setRealList] = useState<any[]>([]);
   const [remainingQuests, setRemainingQuests] = useState<any[]>([]);
   const [haveMoreCard, setHaveMoreCard] = useState(false);
-  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const offset = putMenu ? 170 : 350;
 
@@ -383,7 +382,6 @@ const MyQuest: NextPageWithLayout = () => {
   }, [wallet, provider]);
 
   const fetchMyQuestList = async () => {
-    setLoading(true);
     try {
       const resultMyQuestList = await get(
         `${QUEST_PATH}/api/action/get-action-by-account?account_id=${sender}&account_info=${uuid}&chain_id=1101`,
@@ -394,7 +392,6 @@ const MyQuest: NextPageWithLayout = () => {
     } catch (error) {
       console.error('Error fetching resultMyQuestList data:', error);
     }
-    setLoading(false);
   };
   useEffect(() => {
     if (sender) {
@@ -457,7 +454,7 @@ const MyQuest: NextPageWithLayout = () => {
       console.error('Error fetching resultMyQuestList data:', error);
     }
   };
-  return !loading && myQuestList.length > 0 ? (
+  return myQuestList.length > 0 ? (
     <CardListWrapper>
       <div className="CardListWrapper-title">
         <div className="CardListWrapper-title-text">{myQuestList.length} Quests</div>
