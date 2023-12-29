@@ -50,25 +50,25 @@ export const DappPage: NextPageWithLayout = () => {
     return default_chain?.chain_id;
   }, [chains]);
 
-  const network = useMemo(
-    () => dapp.dapp_network?.find((_network: any) => _network.network_id === currentChain?.id),
-    [currentChain],
-  );
-
   useEffect(() => {
     setReady(true);
   }, []);
-
-  useEffect(() => {
-    if (!chains?.length) return;
-    setCurrentChain(chains.find((_chain: any) => _chain.chain_id === default_chain_id));
-  }, [chains, default_chain_id]);
 
   useEffect(() => {
     if (!chainId) return;
     if (!chains?.length) return;
     setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chainId));
   }, [chainId]);
+
+  useEffect(() => {
+    if (!chains?.length) return;
+    setCurrentChain(chains.find((_chain: any) => _chain.chain_id === default_chain_id));
+  }, [chains, default_chain_id]);
+
+  const network = useMemo(
+    () => dapp.dapp_network?.find((_network: any) => _network.network_id === currentChain?.id),
+    [currentChain],
+  );
 
   if (!dapp || !default_chain_id || !currentChain || (!dapp.default_chain_id && !dapp.default_network_id))
     return <div />;
