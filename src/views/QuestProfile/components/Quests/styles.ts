@@ -47,6 +47,6 @@ export const StyledLabel = styled(motion.div)<{ $active: boolean }>`
 
 export const StyledQuests = styled.div`
   display: flex;
-  gap: 15px;
+  gap: 14px;
   flex-wrap: wrap;
 `;

@@ -29,6 +29,7 @@ export const DappPage: NextPageWithLayout = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { addAction } = useAddAction('dapp');
   const [{ settingChain }, setChain] = useSetChain();
+  const [currentChain, setCurrentChain] = useState<any>();
   const [ready, setReady] = useState(false);
   const bridgeCb = useCallback(
     () =>
@@ -49,23 +50,31 @@ export const DappPage: NextPageWithLayout = () => {
     return default_chain?.chain_id;
   }, [chains]);
 
-  const curChain = useMemo(() => {
-    if (!chains?.length) return {};
-    return chains.find((_chain: any) => _chain.chain_id === default_chain_id);
-  }, [chains, default_chain_id]);
-
   const network = useMemo(
-    () => dapp.dapp_network?.find((_network: any) => _network.network_id === curChain?.id),
-    [curChain],
+    () => dapp.dapp_network?.find((_network: any) => _network.network_id === currentChain?.id),
+    [currentChain],
   );
 
   useEffect(() => {
     setReady(true);
   }, []);
 
-  if (!dapp || !default_chain_id || !curChain || (!dapp.default_chain_id && !dapp.default_network_id)) return <div />;
+  useEffect(() => {
+    if (!chains?.length) return;
+    setCurrentChain(chains.find((_chain: any) => _chain.chain_id === default_chain_id));
+  }, [chains, default_chain_id]);
+
+  useEffect(() => {
+    if (!chainId) return;
+    if (!chains?.length) return;
+    setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chainId));
+  }, [chainId]);
+
+  if (!dapp || !default_chain_id || !currentChain || (!dapp.default_chain_id && !dapp.default_network_id))
+    return <div />;
 
   if (!network?.dapp_src) return <div />;
+
   return ready ? (
     <>
       <Breadcrumb
@@ -85,8 +94,7 @@ export const DappPage: NextPageWithLayout = () => {
             chainId,
             name: dapp.name,
             CHAIN_LIST: dappChains,
-            DEFAULT_CHAIN_ID: dapp.default_chain_id,
-            curChain,
+            curChain: currentChain,
             defaultDex: dapp.name,
             ...dapp,
             addAction,

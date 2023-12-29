@@ -8,6 +8,7 @@ import popupsData from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import useReport from '@/views/Landing/hooks/useReport';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
@@ -522,6 +523,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   const [advertise, setAdvertise] = useState<any>([]);
   const { open } = useDappOpen();
   const categoryArray = Object.values(categories);
+  const { handleReport } = useReport();
   function getCategoryNames(dappCategories: any, categoryArray: any[]) {
     const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
     return categories.map((categoryItem: any) => {
@@ -639,6 +641,12 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     } catch (err) {}
     return {};
   }, [data]);
+
+  useEffect(() => {
+    if (Number(id) === 3) {
+      handleReport('chains-details?id=3');
+    }
+  }, [id]);
 
   return (
     <ChainsDetails>
