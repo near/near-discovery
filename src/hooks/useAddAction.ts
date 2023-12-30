@@ -58,10 +58,10 @@ export default function useAddAction(source: string) {
             tx_id: data.transactionHash,
             chain_id: data.fromChainId,
             to_chain_id: data.toChainId,
-            extra_data: {
+            extra_data: JSON.stringify({
               from: fromChain?.name,
               to: toChain?.name,
-            },
+            }),
           };
           console.info('params:', params);
         } catch (error) {
