@@ -520,7 +520,7 @@ const Bridge: FC<IProps> = ({ token, maxInputBalance, updateBalance }) => {
         ]);
         toast?.dismiss(toastId);
         // handleBridge({ ...props, permit });
-        handleBridge({ permit });
+        handleBridge({ amount: inputValue, token, network: network, permit });
       })
       .catch((err: any) => {
         toast?.dismiss(toastId);
@@ -559,21 +559,22 @@ const Bridge: FC<IProps> = ({ token, maxInputBalance, updateBalance }) => {
   const onConfirm = () => {
     if (token.symbol !== 'ETH' && network === 'ethereum') {
       // 以太坊上的非ETH
-      const res = handleApprove();
-      console.log('approve res', res);
-      if (res) {
-        res
-          .then((tx: any) => {
-            console.log('approve resolve', tx);
-            handlePermit();
-          })
-          .catch((e: any) => {
-            console.log('confirmerror:', e);
-          });
-      } else {
-        console.log('approve rejected');
-        handlePermit();
-      }
+      handlePermit();
+      // const res = handleApprove();
+      // console.log('approve res', res);
+      // if (res) {
+      //   res
+      //     .then((tx: any) => {
+      //       console.log('approve resolve', tx);
+      //       handlePermit();
+      //     })
+      //     .catch((e: any) => {
+      //       console.log('confirmerror:', e);
+      //     });
+      // } else {
+      //   console.log('approve rejected');
+      //   handlePermit();
+      // }
     } else {
       handleBridge({ amount: inputValue, token, network: network });
     }
