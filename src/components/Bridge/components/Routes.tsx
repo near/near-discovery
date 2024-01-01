@@ -37,7 +37,13 @@ const Content = styled.div`
   margin-top: 10px;
 `;
 
-const Routes = ({ trade }: { trade?: Trade }) => {
+const Routes = ({ 
+  trades, selectedTradeIndex, onSelected
+ } : { 
+  trades?: Trade[];
+  selectedTradeIndex: number;
+  onSelected: (index: number) => void
+}) => {
   return (
     <Container>
       {/* <Header>
@@ -49,9 +55,14 @@ const Routes = ({ trade }: { trade?: Trade }) => {
           </AmountArrow>
         </AmountWrapper>
       </Header> */}
-      {trade && (
+      {trades && (
         <Content>
-          <Route trade={trade} />
+          {
+            trades ? trades.map((trade, index) => 
+            <Route onSelected={() => {
+              onSelected(index)
+            }} selected={ selectedTradeIndex === index } trade={trade} />): null
+          }
         </Content>
       )}
     </Container>

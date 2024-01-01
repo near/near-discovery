@@ -8,7 +8,8 @@ import useTokenBalance from '@/hooks/useCurrencyBalance';
 import { usePriceStore } from '@/stores/price';
 import { Token } from '@/types';
 import { balanceFormated, valueFormated } from '@/utils/balance';
-
+import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains'
+import useAccount from '@/hooks/useAccount';
 import useTokens from '../hooks/useTokens';
 
 const StyledContainer = styled.div<{ mt?: number }>`
@@ -82,10 +83,19 @@ const Token = ({ token }: { token: Token }) => {
 };
 
 const Tokens = ({ mt }: { mt?: number }) => {
-  const tokens = useTokens();
+  // const tokens = useTokens();
+  const { chainId } = useAccount();
+  const { lifiTokens } = useTokensAndChains()
+
+  let tokens: Token[] = []
+  if (chainId) {
+    tokens = lifiTokens[chainId]
+  }
+  
+
   return (
     <StyledContainer mt={mt}>
-      {tokens?.map((_token, i) => (
+      {tokens?.slice(0, 10).map((_token, i) => (
         <Token key={_token.address || 'native'} token={_token} />
       ))}
     </StyledContainer>

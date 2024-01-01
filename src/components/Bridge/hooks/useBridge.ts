@@ -1,74 +1,49 @@
 import { useCallback, useState } from 'react';
-
 import type { Chain, Token } from '../types';
+import useAccount from '@/hooks/useAccount';
 
 export default ({
   chains,
   tokens,
+  lifiTokens,
 }: {
   chainId?: number;
   chains: { [key: number]: Chain };
   tokens: { [key: string]: Token };
+  lifiTokens: { [key: string]: Token[]  }
 }) => {
+  const { chainId } = useAccount()
+
+
   const [inputToken, setInputToken] = useState<Token>();
   const [outputToken, setOutputToken] = useState<Token>();
-  const [inputChain, setInputChain] = useState<Chain | undefined>(chains[1]);
+  const [inputChain, setInputChain] = useState<Chain | undefined>(chainId ? chains[chainId] : chains[1]);
   const [outputChain, setOutputChain] = useState<Chain>();
 
   const selectChain = useCallback(
     (type: 'in' | 'out', chain: Chain) => {
       type === 'in' ? setInputChain(chain) : setOutputChain(chain);
+
       if (type === 'out' && outputToken?.chainId !== chain.chainId) {
-        Object.values(tokens).some((token) => {
-          if (token.poolId === outputToken?.poolId && token.chainId === chain.chainId) {
-            setOutputToken(token);
-            return true;
-          }
-          return false;
-        });
+        if (outputToken) {
+          setOutputToken(undefined)
+        }
       }
       if (type === 'in' && inputToken?.chainId !== chain.chainId) {
-        Object.values(tokens).some((token) => {
-          if (token.poolId === inputToken?.poolId && token.chainId === chain.chainId) {
-            setInputToken(token);
-            return true;
-          }
-          return false;
-        });
+        if (inputChain) {
+          setInputToken(undefined)
+        }
       }
     },
-    [outputToken],
+    [inputChain, outputToken],
   );
   const selectToken = useCallback(
     (type: 'in' | 'out', token: Token) => {
-      setInputToken(token);
-      if (!outputChain) {
-        setOutputToken(token);
+      if (type === 'in') {
+        setInputToken(token);
       } else {
-        let tempChainId: number | null = null;
-        let tempToken: Token | null = null;
-        const result = Object.values(tokens).some((_token) => {
-          if (_token.poolId === token.poolId) {
-            tempChainId = _token.chainId;
-            tempToken = _token;
-          }
-          if (token.poolId === _token.poolId && _token.chainId === outputChain.chainId) {
-            setOutputToken(token);
-            return true;
-          }
-          return false;
-        });
-        if (!result && tempChainId && tempToken) {
-          setOutputChain(chains[tempChainId]);
-          setOutputToken(tempToken);
-        }
-        console.log('result', result);
+        setOutputToken(token);
       }
-
-      if (token.chainId !== inputChain?.chainId) {
-        setInputChain(chains[token.chainId]);
-      }
-      if (token.chainId === outputChain?.chainId) setOutputChain(undefined);
     },
     [inputChain],
   );

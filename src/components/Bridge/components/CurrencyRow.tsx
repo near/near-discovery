@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import CurrencyIcon from '@/components/CurrencyIcon';
 import Loading from '@/components/Icons/Loading';
-import useTokenBalance from '@/hooks/useCurrencyBalance';
+import useTokenBalance from '../hooks/useTokenBalance';
 import { balanceFormated } from '@/utils/balance';
 
 import type { Token } from '../types';
@@ -36,6 +36,10 @@ const CurrencySymbol = styled.div`
 `;
 const CurrencyName = styled.div`
   font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 80%;
+  word-break: break-all;
 `;
 const CurrencyAmount = styled.div`
   font-size: 18px;
@@ -47,6 +51,8 @@ const CurrencyRow = ({
   selectedCurrency,
   updater,
   chainIcon,
+  loading,
+  balance,
   onClick,
 }: {
   currency: Token;
@@ -54,9 +60,12 @@ const CurrencyRow = ({
   rpcUrl?: string;
   updater?: number;
   chainIcon?: string;
+  loading: boolean,
+  balance: string,
   onClick: (chain: Token) => void;
 }) => {
-  const { loading, balance } = useTokenBalance({ currency, updater });
+  
+  // const { loading, balance } = useTokenBalance({ tokensByChain: currency });
   return (
     <StyledCurrencyRow
       className={currency.address === selectedCurrency ? 'active' : ''}
@@ -71,7 +80,7 @@ const CurrencyRow = ({
           <CurrencyName>{currency.name}</CurrencyName>
         </div>
       </CurrencyLabel>
-      <CurrencyAmount>{loading ? <Loading /> : balanceFormated(balance, 4)}</CurrencyAmount>
+      <CurrencyAmount key={chainIcon}>{loading ? <Loading /> : balanceFormated(balance, 4)}</CurrencyAmount>
     </StyledCurrencyRow>
   );
 };

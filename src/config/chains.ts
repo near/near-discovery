@@ -1,5 +1,6 @@
 import type { Chain } from '@/types';
 
+
 //TODO: need wrap token address
 //TODO: need all chains live on dapdap
 
@@ -20,7 +21,7 @@ export const colors: { [key: number]: string } = {
   0: '235, 244, 121',
 };
 
-export default {
+const chainCofig = {
   8453: {
     chainId: 8453,
     chainName: 'Base',
@@ -129,3 +130,6 @@ export default {
     blockExplorers: 'https://gnosisscan.io/',
   },
 } as { [key: number]: Chain };
+
+
+export default chainCofig

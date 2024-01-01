@@ -7,6 +7,7 @@ import { overlay } from '@/components/animation';
 import ArrowIcon from '@/components/Icons/ArrowIcon';
 import Loading from '@/components/Icons/Loading';
 import chains from '@/config/chains';
+import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains'
 
 const StyledContainer = styled.div<{ $mt?: number; $showName?: number }>`
   width: ${({ $showName }) => ($showName ? '204px' : '70px')};
@@ -108,6 +109,7 @@ const Chain = ({
   showChains?: boolean;
   setShowChains?: (show: boolean) => void;
 }) => {
+  const { chains } = useTokensAndChains()
   const [{ connectedChain, settingChain }, setChain] = useSetChain();
   const currentChain = useMemo(
     () => (connectedChain?.id ? chains[Number(connectedChain?.id)] : null),

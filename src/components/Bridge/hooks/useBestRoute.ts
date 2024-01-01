@@ -3,6 +3,8 @@ import { useState } from 'react';
 import { chainCofig } from '@/config/bridge';
 
 import type { Chain, Token, Trade } from '../types';
+import type { Route } from '@lifi/sdk'
+import { tokens as configTokens } from '@/config/bridge';
 import useStargate from './useStargate';
 import useLifi from './useLifi';
 
@@ -11,58 +13,79 @@ export default function useBestRoute() {
   const { getQouteInfo: getLifiQouteInfo, swap: lifiSwap, gasCost: getLifiCost } = useLifi();
   const [checking, setChecking] = useState(false);
   const [swaping, setSwaping] = useState(false);
-  const [trade, setTrade] = useState<Trade>();
+  const [trades, setTrades] = useState<Trade[]>([]);
 
   const getBestRoute = async ({
     chain,
-    targetToken,
     targetChain,
+    inputToken,
+    targetToken,
     amount,
   }: {
     chain: Chain;
     targetChain: Chain;
+    inputToken: Token;
     targetToken: Token;
     amount?: string;
   }) => {
 
-
     try {
       setChecking(true);
-      setTrade(undefined);
+      setTrades([]);
       const _inputChain = chainCofig[chain.chainId];
       const _outputChain = chainCofig[targetChain.chainId];
-      // 有一个使用Lifi的就使用lifi交易
-      if (_inputChain.dex === 'Lifi' || _outputChain.dex === 'Lifi') {
-        setChecking(false)
-        const response = await getLifiQouteInfo({
-          chain: chain,
-          token: targetToken,
-          targetChain: targetChain,
-          targetToken: targetToken,
-          amount: amount ? amount.toString() : '',
-        })
-        if (response) {
-          setTrade({
+      const tradeList: Trade[] = []
+
+      // 判断是否需要使用Stargate
+      // 判断Stargate配置中是否有这些链的配置
+      // 配置中必须有Stargate
+      // 两个链不能相同
+      // 两个token必须相同
+      if (
+        _inputChain && _outputChain
+      && _inputChain.dex === 'Stargate' && _outputChain.dex === 'Stargate' 
+      && chain.chainId !== targetChain.chainId
+      && inputToken.symbol === targetToken.symbol) {
+        try {
+          const response = await getQouteInfo({ targetToken, chain, targetChain });
+          tradeList.push({
             time: '5min',
-            amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(2, 0) : '-') + '  ' + targetToken.symbol,
-            gasCost: response?.gasCostUSD,
-            dex: 'Lifi',
-          });
+            amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(4, 0) : '-') + '  ' + targetToken.symbol,
+            gasCost: response,
+            dex: 'Stargate',
+          })
+        } catch (e) {
+          console.log(e)
         }
-      } else if (_inputChain.dex === 'Stargate') {
-        const response = await getQouteInfo({ targetToken, chain, targetChain });
-        setChecking(false);
-        setTrade({
-          time: '5min',
-          amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(2, 0) : '-') + '  ' + targetToken.symbol,
-          gasCost: response,
-          dex: 'Stargate',
-        });
+      } 
+
+      const response = await getLifiQouteInfo({
+        chain: chain,
+        token: inputToken,
+        targetChain: targetChain,
+        targetToken: targetToken,
+        amount: amount ? amount.toString() : '',
+      })
+
+      if (response) {
+        response.forEach(item => {
+          tradeList.push({
+            time: '5min',
+            amount: (item.toAmount ? new Big(item.toAmount || 0).div(Math.pow(10, targetToken.decimals)).toFixed(4, 0) : '-') + '  ' + targetToken.symbol,
+            gasCost: '$' + item?.gasCostUSD,
+            dex: 'Lifi',
+            route: item,
+          })
+        })
       }
+
+      setChecking(false)
+      setTrades(tradeList)
+
     } catch (err) {
       console.log('error', err);
       setChecking(false);
-      setTrade(undefined);
+      setTrades([]);
       return [];
     }
   };
@@ -74,6 +97,7 @@ export default function useBestRoute() {
     targetChain,
     destination,
     amount,
+    route,
     onSuccess,
   }: {
     chain: Chain;
@@ -82,14 +106,15 @@ export default function useBestRoute() {
     targetToken: Token;
     amount: string;
     destination?: string;
+    route?: Trade,
     onSuccess: (hash: string) => void;
   }) {
     try {
       setSwaping(true);
       const _inputChain = chainCofig[chain.chainId];
       const _outputChain = chainCofig[targetChain.chainId];
-      // 有一个使用Lifi的就使用lifi交易
-      if (_inputChain.dex === 'Lifi' || _outputChain.dex === 'Lifi') {
+
+      if (route?.route && route?.dex === 'Lifi') {
         await lifiSwap({
           chain: chain,
           token: token,
@@ -97,25 +122,29 @@ export default function useBestRoute() {
           targetToken: targetToken,
           amount,
           destination,
+          route: route?.route,
           onSuccess,
         })
-      } else if (_inputChain.dex === 'Stargate') {
+      } else if (route?.dex === 'Stargate') {
+        // 判断native
         await stargateSwap({
           chain: chain,
           token: token,
           targetChain: targetChain,
           targetToken: targetToken,
-          amount,
+          amount: amount,
           destination,
           onSuccess,
         });
       }
       setSwaping(false);
+      setTrades([])
     } catch (err) {
       console.log(err)
+      setTrades([])
       setSwaping(false);
     }
   };
 
-  return { getBestRoute, swap, trade, checking, swaping, gasCost };
+  return { getBestRoute, swap, trades, checking, swaping, gasCost };
 }

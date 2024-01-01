@@ -15,6 +15,8 @@ const Container = styled.div`
   border: 1px solid #373a53;
   border-radius: 16px;
   background-color: rgba(55, 58, 83, 0.5);
+  margin-bottom: 10px;
+  cursor: pointer;
 `;
 const Flex = styled.div`
   display: flex;
@@ -65,10 +67,12 @@ const Desc = styled.div`
   color: #979abe;
 `;
 
-const Route = ({ trade }: { trade: Trade }) => {
+const Route = (
+  { trade, selected, onSelected } : 
+  { trade: Trade, selected: boolean, onSelected: (chain: Trade) => void;}) => {
   const dex = dexs[trade.dex];
   return (
-    <Container>
+    <Container onClick={() => onSelected(trade)} style={{ border: selected ? '1px solid #d7d7d7' : 0 }}>
       <Flex>
         <RouteWrapper>
           <RouteIcon src={dex?.icon} />
