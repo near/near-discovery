@@ -59,7 +59,7 @@ const Routes = ({
         <Content>
           {
             trades ? trades.map((trade, index) => 
-            <Route onSelected={() => {
+            <Route key={trade.amount} onSelected={() => {
               onSelected(index)
             }} selected={ selectedTradeIndex === index } trade={trade} />): null
           }

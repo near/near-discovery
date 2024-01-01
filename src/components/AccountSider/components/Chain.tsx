@@ -6,7 +6,6 @@ import styled from 'styled-components';
 import { overlay } from '@/components/animation';
 import ArrowIcon from '@/components/Icons/ArrowIcon';
 import Loading from '@/components/Icons/Loading';
-import chains from '@/config/chains';
 import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains'
 
 const StyledContainer = styled.div<{ $mt?: number; $showName?: number }>`

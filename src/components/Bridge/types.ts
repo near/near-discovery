@@ -23,3 +23,7 @@ export interface Trade {
   dex: SupportDex;
   route?: any;
 }
+
+export interface LifiChainToken {
+  [chainId: number]: Token[];
+}

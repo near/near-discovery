@@ -16,12 +16,14 @@ export default function useTokensAndChains() {
       _chains[chain.chainId] = chain;
     });
 
-    getLifiChains().then((lifiChains) => {
-      lifiChains.forEach(chain => {
-        _chains[chain.chainId] = chain;
-      })
-      setChains(_chains);
-    })
+    setChains(_chains);
+
+    // getLifiChains().then((lifiChains) => {
+    //   lifiChains.forEach(chain => {
+    //     _chains[chain.chainId] = chain;
+    //   })
+    //   setChains(_chains);
+    // })
   }, []);
 
   useEffect(() => {

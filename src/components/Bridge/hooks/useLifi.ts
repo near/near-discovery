@@ -1,6 +1,7 @@
 import Big from 'big.js';
 import { Contract, providers, utils } from 'ethers';
 import { LiFi } from '@lifi/sdk'
+import useLifiChainToken from '@/stores/lifi-chain-token';
 import { chains as configChains } from '@/config/bridge';
 import type { RoutesRequest, Route, Chain as LiFiChain, Token as LiFiToken, TokensResponse } from '@lifi/sdk'
 import { useState } from 'react';
@@ -8,8 +9,7 @@ import { useState } from 'react';
 import useAddAction from '@/hooks/useAddAction';
 import useAccount from '@/hooks/useAccount';
 
-import type { Chain, Token } from '../types';
-
+import type { Chain, Token, LifiChainToken } from '../types';
 
 export const ISSERVER = typeof window === "undefined";
 
@@ -18,9 +18,6 @@ export const lifi = new LiFi({
   integrator: 'DapDap'
 })
 
-interface LifiChainToken {
-  [chainId: number]: Token[];
-}
 
 const lifiTokenKey = 'lifi-token'
 const lifiChainKey = 'lifi-chain'
@@ -30,8 +27,13 @@ export const tokens: LifiChainToken = {}
 export const chains: Chain[] = []
 getLifiChains().then(res => {
   chains.push(...res)
-  getLifiTokens().then(res => Object.assign(tokens, res))
+  useLifiChainToken.setState({ chains })
+  getLifiTokens().then(res => {
+    Object.assign(tokens, res)
+    useLifiChainToken.setState({ tokens })
+  })
 })
+
 
 /**
  * 获取所有lifiToken
@@ -117,24 +119,22 @@ export async function getLifiChains():Promise<Chain[]> {
         rpcUrls: metamask.rpcUrls,
         blockExplorers: metamask.blockExplorerUrls.length ? metamask.blockExplorerUrls[0]: '',
       }
-    }) 
+    })
 
     window.sessionStorage.setItem(lifiChainKey, JSON.stringify(realLifiChain))
     chainLoaded = true
     return realLifiChain
   }
-
   return []
 }
 
-
 async function getRoute(
-  chain: Chain, 
-  targetChain: Chain, 
-  token: Token, 
+  chain: Chain,
+  targetChain: Chain,
+  token: Token,
   targetToken: Token,
-  account: string | undefined, 
-  amount: string, 
+  account: string | undefined,
+  amount: string,
   destination?: string): Promise<Route[] | undefined> {
 
   const _amount = utils.parseUnits(amount.toString(), token.decimals)
