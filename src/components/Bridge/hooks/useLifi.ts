@@ -81,7 +81,7 @@ export async function getLifiTokens(): Promise<LifiChainToken> {
       })
     })
 
-    // window.sessionStorage.setItem(lifiTokenKey, JSON.stringify(resTokens))
+    window.sessionStorage.setItem(lifiTokenKey, JSON.stringify(resTokens))
     tokenLoaded = true
     return resTokens
   }

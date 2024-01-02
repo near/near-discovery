@@ -70,13 +70,28 @@ const Desc = styled.div`
 const Route = (
   { trade, selected, onSelected } : 
   { trade: Trade, selected: boolean, onSelected: (chain: Trade) => void;}) => {
+  const route = trade.route
   const dex = dexs[trade.dex];
+
+  const bridgeDetail: any = {}
+
+  if (route) {
+    if (route.steps && route.steps.length) {
+      const toolDetails = route.steps[0].toolDetails
+      bridgeDetail.icon = toolDetails.logoURI
+      bridgeDetail.name = toolDetails.name
+    }
+  } else if (dex) {
+    bridgeDetail.icon = dex.icon
+    bridgeDetail.name = dex.name
+  }
+
   return (
     <Container onClick={() => onSelected(trade)} style={{ border: selected ? '1px solid #d7d7d7' : 0 }}>
       <Flex>
         <RouteWrapper>
-          <RouteIcon src={dex?.icon} />
-          <RouteName>{dex?.name}</RouteName>
+          <RouteIcon src={bridgeDetail.icon} />
+          <RouteName>{bridgeDetail.name}</RouteName>
         </RouteWrapper>
         <Tags>
           <Tag className="best">Best Return</Tag>
