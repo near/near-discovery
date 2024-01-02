@@ -60,7 +60,7 @@ const LandingView = () => {
             <StyledLeftPanel>
               <StyledTitle>
                 <div> 3 Steps to Earn DapDap </div> <StyledCoin $size={31} className="coin" />
-                <div className="coin_color">200 PTS</div>
+                <div className="coin_color">{info?.quest?.reward} PTS</div>
               </StyledTitle>
               <StyledDesc>
                 Welcome! Follow us to explore DapDap in just 3 steps, play with dapdap and get lots of points rewards.

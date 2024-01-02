@@ -35,7 +35,7 @@ export const QuestPanel = ({ title, info, list, loading }: any) => {
     <StyledContainer>
       <StyledHeader>
         <StyledTitle>
-          {title} ({list.length})
+          {title} ({filteredList.length})
         </StyledTitle>
         <StyledLabels>
           {LABELS.map((label) => (
