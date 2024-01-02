@@ -754,4 +754,20 @@ export const dapps = [
     DEFAULT_CHAIN_ID: 59144,
     dappSrc: {} as { [key: number]: string },
   },
+  {
+    name: 'Aura',
+    // dappRoute: '/dapp/aura',
+    dappRoute: 'dapdapbos.near/widget/Staking.Aura.Index',
+    TBD_TOKEN: 'N',
+    logo: '',
+    description: 'TODO',
+    tags: ['Dexes'],
+    type: 'dex',
+    on_chain_ids: [100],
+    DEFAULT_CHAIN_ID: 100,
+    dappSrc: {
+      // 100: 'dapdapbos.near/widget/Staking.Aura.AuraIndex',
+      // TODO:
+    } as { [key: number]: string },
+  },
 ];

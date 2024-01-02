@@ -551,7 +551,7 @@ const select_template_list = [
   },
   {
     id: 'native bridge',
-    name: 'native bridge',
+    name: 'Native Bridge',
     icon: template_icons['native bridge'],
   },
   {
@@ -926,7 +926,7 @@ const ExecuteRecords: NextPageWithLayout = () => {
                         src={template_icons[record.template as keyof typeof template_icons]}
                         style={{ marginRight: '6px' }}
                       ></img>
-                      {record.template}
+                      {record?.template === 'native bridge' ? 'Native Bridge' : record?.template}
                     </td>
 
                     <td

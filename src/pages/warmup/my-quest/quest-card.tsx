@@ -660,7 +660,8 @@ const QuestCard: NextPageWithLayout = (props) => {
         >
           <div className="quest-card-info">{displayTitle}</div>
           <div className="quest-card-name">
-            {item.template && iconMap[item.template as keyof typeof iconMap]} {item.template}
+            {item.template && iconMap[item.template as keyof typeof iconMap]}{' '}
+            {item?.template === 'native bridge' ? 'Native Bridge' : item?.template}
           </div>
           <div className="trend-card-execute-mobile">{item.count_number} times</div>
         </div>
