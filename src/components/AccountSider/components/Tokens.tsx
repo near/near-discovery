@@ -56,39 +56,39 @@ const Token = ({ token }: { token: Token }) => {
   const price = usePriceStore((store) => store.price);
   const { balance, loading } = useTokenBalance({ currency: token });
   return (
-    <TokenWrapper>
-      <StyledToken>
-        <CurrencyIcon token={token.icon} chain={chain?.icon} />
-        <div>
-          <TokenSymbol>
-            <Symbol>{token.symbol}</Symbol>
-            {token.isNative && <GasTag>Gas token</GasTag>}
-          </TokenSymbol>
-          <Price>${valueFormated('1', price[token.symbol]) || '-'}</Price>
-        </div>
-      </StyledToken>
-      <Balance>
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            <Symbol>{balanceFormated(balance)}</Symbol>
-            <Price>${valueFormated(balance, price[token.symbol])}</Price>
-          </>
-        )}
-      </Balance>
-    </TokenWrapper>
+      <TokenWrapper>
+        <StyledToken>
+          <CurrencyIcon token={token.icon} chain={chain?.icon} />
+          <div>
+            <TokenSymbol>
+              <Symbol>{token.symbol}</Symbol>
+              {token.isNative && <GasTag>Gas token</GasTag>}
+            </TokenSymbol>
+            <Price>${valueFormated('1', price[token.symbol]) || '-'}</Price>
+          </div>
+        </StyledToken>
+        <Balance>
+          {loading ? (
+              <Loading />
+          ) : (
+              <>
+                <Symbol>{balanceFormated(balance)}</Symbol>
+                <Price>${valueFormated(balance, price[token.symbol])}</Price>
+              </>
+          )}
+        </Balance>
+      </TokenWrapper>
   );
 };
 
 const Tokens = ({ mt }: { mt?: number }) => {
   const tokens = useTokens();
   return (
-    <StyledContainer mt={mt}>
-      {tokens?.map((_token, i) => (
-        <Token key={_token.address || 'native'} token={_token} />
-      ))}
-    </StyledContainer>
+      <StyledContainer mt={mt}>
+        {tokens?.map((_token, i) => (
+            <Token key={_token.address || 'native'} token={_token} />
+        ))}
+      </StyledContainer>
   );
 };
 

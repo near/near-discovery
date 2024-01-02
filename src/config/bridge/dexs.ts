@@ -6,4 +6,9 @@ export default {
     name: 'Stargate',
     tags: ['faster', 'best'],
   },
+  Lifi: {
+    icon: '/lifi.jpg',
+    name: 'Lifi',
+    tags: ['faster', 'best'],
+  },
 } as { [key in SupportDex]: Dex };

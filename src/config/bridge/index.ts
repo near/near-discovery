@@ -53,6 +53,12 @@ export const chainCofig = {
     router: '0xB0D502E938ed5f4df2E681fE6E419ff29631d62b',
     ethRouter: '0xB49c4e680174E331CB0A7fF3Ab58afC9738d5F8b',
   },
+  324: {
+    dex: 'Lifi',
+    dstId: -1,
+    router: '0xB0D502E938ed5f4df2E681fE6E419ff29631d62b',
+    ethRouter: '0xB49c4e680174E331CB0A7fF3Ab58afC9738d5F8b',
+  },
 } as {
   [key: number]: {
     dex: SupportDex;

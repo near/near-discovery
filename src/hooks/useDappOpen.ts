@@ -12,8 +12,8 @@ export default function useDappOpen() {
     let _dapp = {} as any;
     if (from === 'quest') {
       _dapp = {
-        dapp_network: [{ network_id: dapp.network_id, dapp_src: dapp.dapp_src }],
-        default_network_id: dapp.network_id,
+        dapp_network: dapp.dapp_network,
+        default_chain_id: dapp.default_chain_id,
         name: dapp.dapp_name,
         logo: dapp.dapp_logo,
         route: dapp.route,

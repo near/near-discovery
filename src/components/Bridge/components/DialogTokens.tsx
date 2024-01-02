@@ -2,7 +2,7 @@ import { memo, useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import Modal from '@/components/Modal';
-
+import { useTokensBalance } from '../hooks/useTokenBalance'
 import type { Chain, Token } from '../types';
 import CurrencyList from './CurrencyList';
 
@@ -51,6 +51,9 @@ const DialogTokens = ({
 }) => {
   const [data, setData] = useState<Token[]>(tokens || []);
   const [searchVal, setSearchValue] = useState<string>();
+  const { loading, balances } = useTokensBalance({
+    tokensByChain: tokens,
+  })
   const filterTokens = useCallback(
     (ev?: React.ChangeEvent<HTMLInputElement>) => {
       setSearchValue(ev?.target.value);
@@ -95,6 +98,8 @@ const DialogTokens = ({
           {!!data.length && (
             <CurrencyList
               tokens={data}
+              loading={loading}
+              balances={balances}
               chains={chains}
               selectedCurrency={currentToken}
               onClick={(currency) => {
