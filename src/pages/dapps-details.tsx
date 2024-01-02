@@ -252,12 +252,14 @@ const DappsDetailsContent = styled.div`
           display: flex;
           gap: 8px;
           margin-top: 11px;
+          @media (max-width: 1600px) {
+            display: grid;
+          }
         }
       }
     }
   }
 `;
-
 const DappsDetailBottom = styled.div`
   padding: 0 12%;
   .tab-content {
@@ -735,12 +737,12 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                       ))}
                     </StyledProcessBars>
                     <div className="side-item-tag">
-                      <StyledTag style={{ padding: '0px 10px 0px 6px' }}>
+                      <StyledTag style={{ padding: '0px 10px 0px 6px', width: 'fit-content' }}>
                         <StyledCoin $size={18} />
                         <span style={{ color: '#EBF479' }}>{item.reward} PTS</span>
                       </StyledTag>
                       {item.difficulty && (
-                        <StyledTag>
+                        <StyledTag style={{ width: 'fit-content' }}>
                           <Steps step={STEPS_MAP[item.difficulty]} />
                           {item.difficulty}
                         </StyledTag>
