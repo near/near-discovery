@@ -361,6 +361,7 @@ const CarouselList = styled.div`
       .carousel-btn {
         display: flex;
         .carousel-btn-item {
+          cursor: pointer;
           flex: 1;
           margin-right: 18px;
           background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
@@ -524,7 +525,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     });
   }
   const handleCarouselClick = useCallback(() => {
-    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.filter((dapp) => dapp.recommend === true).length);
+    setActiveIndex((prevIndex) => (prevIndex + 1) % carouselList.length);
   }, [carouselList.filter((dapp) => dapp.recommend === true).length]);
   const handleTabClick = (path: string) => {
     if (path === 'favorites') {
@@ -573,6 +574,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     try {
       const resultDapp = await get(`${QUEST_PATH}/api/dapp/favorite_list`);
       setIsFavoriteList(resultDapp.data || []);
+      setTotalPages(resultDapp.data.total_page || 0);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
     }
@@ -583,6 +585,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
         `${QUEST_PATH}/api/dapp/filter_list?tbd_token=false&page=${page}&page_size=30`,
       );
       setNativeToken(resultNativeToken.data?.data || []);
+      setTotalPages(resultNativeToken.data.total_page || 0);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
     }
@@ -591,6 +594,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     try {
       const resultTokenTBD = await get(`${QUEST_PATH}/api/dapp/filter_list?tbd_token=true&page=${page}&page_size=30`);
       setTokenTBD(resultTokenTBD.data?.data || []);
+      setTotalPages(resultTokenTBD.data.total_page || 0);
     } catch (error) {
       console.error('Error fetching resultDapp data:', error);
     }
@@ -606,9 +610,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
     };
     const fetchCarouselData = async () => {
       try {
-        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?page=1&page_size=30`);
+        const resultDapp = await get(`${QUEST_PATH}/api/dapp/list?is_recommend=true`);
         setCarouselList(resultDapp.data?.data || []);
-        setTotalPages(resultDapp.data.total_page || 0);
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
@@ -683,7 +686,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   function renderPagination(tab: string, data: any[]) {
     return (
       tab === selectedTab &&
-      (currentPage > 1 || data.length >= 30) && (
+      totalPages > 1 && (
         <Pagination>
           <div
             className="pagination-item"
@@ -770,40 +773,44 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <div className="carousel-right-icon" onClick={handleCarouselClick}>
           <img src={carouseicon} alt="" />
         </div>
-        {carouselList
-          .filter((dapp) => dapp.recommend === true)
-          .map((child, index) => {
-            const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
-            return (
-              <Carousel
-                key={index}
-                active={index === activeIndex}
-                style={{ backgroundImage: `url(${child.recommend_icon})` }}
-              >
-                <div className="carousel-content">
-                  <img src={child.logo} alt="" />
-                  <h1>{child.name}</h1>
-                  <Tag>
-                    {categoryNames.map((categoryName: string, index: number) => (
-                      <div className={`tag-item ${categoryName}`} key={index}>
-                        {categoryName}
-                      </div>
-                    ))}
-                  </Tag>
-                  <p>{child.description}</p>
-                  <div className="carousel-btn">
-                    <div className="carousel-btn-item">
-                      <Link href={`/dapps-details?dapp_id=${child.id}`}>View Detail</Link>
+        {carouselList.map((child, index) => {
+          const categoryNames = getCategoryNames(child.dapp_category, categoryArray);
+          return (
+            <Carousel
+              key={index}
+              active={index === activeIndex}
+              style={{ backgroundImage: `url(${child.recommend_icon})` }}
+            >
+              <div className="carousel-content">
+                <img src={child.logo} alt="" />
+                <h1>{child.name}</h1>
+                <Tag>
+                  {categoryNames.map((categoryName: string, index: number) => (
+                    <div className={`tag-item ${categoryName}`} key={index}>
+                      {categoryName}
                     </div>
-                    <div className="carousel-btn-item" style={{ marginRight: '0' }}>
-                      <Link href={child.route}>Dapp</Link>{' '}
-                      <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
-                    </div>
+                  ))}
+                </Tag>
+                <p>{child.description}</p>
+                <div className="carousel-btn">
+                  <div className="carousel-btn-item">
+                    <Link href={`/dapps-details?dapp_id=${child.id}`}>View Detail</Link>
+                  </div>
+                  <div
+                    className="carousel-btn-item"
+                    style={{ marginRight: '0' }}
+                    onClick={() => {
+                      open(child, 'home');
+                    }}
+                  >
+                    Dapp
+                    <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                   </div>
                 </div>
-              </Carousel>
-            );
-          })}
+              </div>
+            </Carousel>
+          );
+        })}
       </CarouselList>
 
       <div className="token-tab-list">

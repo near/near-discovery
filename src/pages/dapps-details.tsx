@@ -9,6 +9,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import ProcessBar from '@/views/Quest/components/ProcessBar';
+import Steps from '@/views/Quest/components/QuestItem/step-icon';
 import { StyledCoin, StyledProcessBars, StyledTag } from '@/views/Quest/components/QuestItem/styles';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 import useLike from '@/views/Quest/hooks/useLike';
@@ -190,12 +191,27 @@ const DappsDetailsContent = styled.div`
         tr:has(td):hover {
           background-color: rgba(53, 55, 73, 0.5);
         }
+        @media (max-width: 1380px) {
+          tr {
+            td {
+              padding: 0 18px;
+            }
+          }
+        }
+        @media (max-width: 1327px) {
+          tr {
+            td {
+              padding: 0 8px;
+            }
+          }
+        }
       }
     }
   }
   .right-side-substance {
     width: 36%;
     .right-side-item {
+      text-decoration: none;
       width: auto;
       border: 1px solid rgba(55, 58, 83, 1);
       background: rgb(44, 46, 62);
@@ -205,8 +221,8 @@ const DappsDetailsContent = styled.div`
       padding: 24px 20px 20px 20px;
       margin-bottom: 15px;
       .side-item-icon {
-        width: 102px;
-        height: 105px;
+        width: 30%;
+        height: 70%;
         margin-right: 27px;
         img {
           width: 100%;
@@ -214,7 +230,7 @@ const DappsDetailsContent = styled.div`
         }
       }
       .side-item-text {
-        width: 70%;
+        width: 60%;
         h1 {
           font-family: Gantari;
           font-size: 18px;
@@ -420,6 +436,12 @@ const Title = styled.div`
   display: inline-block;
 `;
 
+const STEPS_MAP: { [key: string]: number } = {
+  Begginer: 1,
+  Intermediate: 2,
+  Senior: 3,
+};
+
 const DappsDetailsColumn: NextPageWithLayout = () => {
   const router = useRouter();
   const { dapp_id } = router.query;
@@ -489,7 +511,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             `${QUEST_PATH}/api/action/get-actions-by-dapp?dapp_id=${dapp_id}&page=1&page_size=10`,
           );
           const data = await response.json();
-          setActivity(data.data.data);
+          setActivity(data.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -506,11 +528,13 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         }
       }
     };
-    fetchData();
-    fetchRelatedDapps();
-    fetchactivityData();
-    fetchquestList();
-    fetchAdvertiseasync();
+    if (dapp_id) {
+      fetchData();
+      fetchRelatedDapps();
+      fetchactivityData();
+      fetchquestList();
+      fetchAdvertiseasync();
+    }
   }, [dapp_id]);
 
   function getCategoryNamess(dappCategories: any, categoryArray: any[]) {
@@ -536,18 +560,25 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       }
     });
   }
-  function formatDate(dateStr: string): string {
-    const dateObj = new Date(dateStr);
-    const options: Intl.DateTimeFormatOptions = {
+  function formatDate(timestamp: number) {
+    const date = new Date((timestamp + 8 * 60 * 60) * 1000);
+    const options = {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    };
-    const formatter = new Intl.DateTimeFormat('en-US', options);
-    return formatter.format(dateObj);
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: false,
+    } as const;
+    return date.toLocaleString('en-US', options);
   }
+
+  const formatId = (tx: string) => {
+    if (!tx) return '-';
+    else {
+      return <>{tx.substring(0, 6) + '...' + tx.substring(tx.length - 4, tx.length)}</>;
+    }
+  };
 
   const categoryNames = getCategoryNames(data?.dapp_category, categoryArray);
   return (
@@ -603,11 +634,11 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                 </Tag>
               </div>
             </div>
-            <div className="body-left-several">
+            {/* <div className="body-left-several">
               <img src={several} alt="" />
               <p>12K+</p>
-              {/* <div className="left-several-btn">+ Favorite</div> */}
-            </div>
+              <div className="left-several-btn">+ Favorite</div>
+            </div> */}
             <div className="left-enter-Dapp">
               <div className="enter-Dapp-item">
                 <p>Blockchain</p>
@@ -654,7 +685,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
               <span>Participants</span>
             </div>
             <div className="right-list-item">
-              <p>-</p>
+              <p>{activity && activity.data.length}</p>
               <span>Acctions</span>
             </div>
           </div>
@@ -669,15 +700,17 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
               </thead>
               <tbody>
                 {activity &&
-                  activity.map((item: any, index: number) => {
-                    <tr key={index}>
-                      <td>
-                        <div className="td-avatar"></div>
-                        {item.account_id}
-                      </td>
-                      <td>{item.action_title}</td>
-                      <td style={{ color: ' #979ABE' }}>{formatDate('2023-12-05T14:54:39.541554+00:00')}</td>
-                    </tr>;
+                  activity.data.map((item: any, index: number) => {
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <div className="td-avatar"></div>
+                          {formatId(item.account_id)}
+                        </td>
+                        <td>{item.action_title}</td>
+                        <td style={{ color: ' #979ABE' }}>{formatDate(item.timestamp)}</td>
+                      </tr>
+                    );
                   })}
               </tbody>
             </table>
@@ -689,7 +722,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             questList.map((item, index) => {
               const actions = Array.from({ length: item.total_action }, (val, i) => i);
               return (
-                <div className="right-side-item" key={index}>
+                <Link href={`/quest/detail?id=${item.id}`} className="right-side-item" key={index}>
                   <div className="side-item-icon">
                     <img src={item.logo} alt="" />
                   </div>
@@ -706,10 +739,15 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                         <StyledCoin $size={18} />
                         <span style={{ color: '#EBF479' }}>{item.reward} PTS</span>
                       </StyledTag>
-                      <StyledTag>{item.is_period ? 'Period' : 'Once'}</StyledTag>
+                      {item.difficulty && (
+                        <StyledTag>
+                          <Steps step={STEPS_MAP[item.difficulty]} />
+                          {item.difficulty}
+                        </StyledTag>
+                      )}
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
         </div>

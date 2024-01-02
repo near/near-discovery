@@ -8,9 +8,9 @@ import popupsData from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import useReport from '@/views/Landing/hooks/useReport';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
+import useReport from '@/views/Landing/hooks/useReport';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 interface SelectBgProps {
@@ -44,18 +44,12 @@ const SelectBg: React.FC<SelectBgProps> = ({ bgColor }) => (
   </svg>
 );
 const arrowyellow = 'https://assets.dapdap.net/images/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi.svg';
-const titleBg = 'https://assets.dapdap.net/images/bafkreidyzwmfb3u4uxrz2l6n3mzzpfcwvsyhkxiigh7xdmsgiomtbxfjve.svg';
-const syncIcon = 'https://assets.dapdap.net/images/bafkreidvtwihnl2ggpdxz6y5odaghigvap42p2lqdyxgex5gnl6fo4qxie.svg';
-const gold = 'https://assets.dapdap.net/images/bafkreidegqrrzlwh4wlfrquhd6n3n7dczefy32hu5locsx5yj6hllqfkuq.svg';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
 const Dapps = 'https://assets.dapdap.net/images/bafkreifyko6xoxde4srussisqazc3jnyqwqrwvhvphifknq4ybxa4kj7yu.svg';
 const DeepDive = 'https://assets.dapdap.net/images/bafkreig4bv3xu73ouxj5x7zt4qlvnnbvgdqzj5oq6te6y7ax4tz2yid2ma.svg';
 const Shotcut = 'https://assets.dapdap.net/images/bafkreibexhymj2bp2zhuhlwzcik5o42zg6xvt5i7rbsxcpk7ty7l6mmxum.svg';
-const chart = 'https://assets.dapdap.net/images/bafkreiabil4iocii42zymoulnypymio4qzflzedpldpcdnmaz2s5bzncmy.svg';
 const star = 'https://assets.dapdap.net/images/bafkreiduogs6um2scfu53rprwmjjt6f55npfycomoe4za2ve7uucej52vu.svg';
 const line = 'https://assets.dapdap.net/images/bafkreia3362z25o4wope7mt3jffallldmtmodasm5crpltkfurnem2wxfe.svg';
-const chainsconetentImg =
-  'https://assets.dapdap.net/images/bafkreifk3lg7hueyd54w4pqibjejewq6k37cbupfkbmrfb43hal2ofohfq.svg';
 
 const ChainsDetails = styled.div`
   color: #ffffff;
@@ -451,24 +445,6 @@ const Title = styled.div`
   display: inline-block;
 `;
 
-const Golds = styled.div`
-  float: right;
-  background: linear-gradient(180deg, #ffe98b 0%, #ffdd4d 100%);
-  border-radius: 16px;
-  padding: 4px 8px;
-  font-size: 14px;
-  font-weight: 700;
-  color: #000000;
-  width: auto;
-  margin-left: 12px;
-  height: 26px;
-  line-height: 18px;
-  img {
-    width: 18px !important;
-    height: 18px !important;
-    margin-right: 2px !important;
-  }
-`;
 const Tag = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -519,7 +495,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   const [hotDapps, setHotDapps] = useState<any>(null);
   const [activities, setActivities] = useState<any>(null);
   const [matchedItem, setMatchedItem] = useState<any>(null);
-  const { loading, categories } = useCategoryDappList();
+  const { categories } = useCategoryDappList();
   const [advertise, setAdvertise] = useState<any>([]);
   const { open } = useDappOpen();
   const categoryArray = Object.values(categories);
