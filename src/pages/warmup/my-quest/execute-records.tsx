@@ -622,21 +622,15 @@ const ExecuteRecords: NextPageWithLayout = () => {
       fetchRecordList();
     }
   }, [sender, currentPage, pageSize, searchAction, searchTemplate, searchStatus]);
-  function getTime(timestamp: any) {
-    const myDate = new Date(Big(timestamp).mul(1000).toNumber());
-    const year = myDate.getFullYear();
-    let month = Number(myDate.getMonth() + 1) + '';
-    let date = myDate.getDate() + '';
-    const hour = myDate.getHours() < 10 ? '0' + myDate.getHours() : myDate.getHours();
-    const minute = myDate.getMinutes() < 10 ? '0' + myDate.getMinutes() : myDate.getMinutes();
-    const second = myDate.getSeconds() < 10 ? '0' + myDate.getSeconds() : myDate.getSeconds();
-    if (date.length == 1) {
-      date = '0' + date;
-    }
-    if (month.length == 1) {
-      month = '0' + month;
-    }
-    return year + '-' + month + '-' + date + ' ' + hour + ':' + minute + ':' + second + '  ';
+  function getTime(timestamp: number) {
+    const date = new Date((timestamp + 8 * 60 * 60) * 1000);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hour = String(date.getHours()).padStart(2, '0');
+    const minute = String(date.getMinutes()).padStart(2, '0');
+    const second = String(date.getSeconds()).padStart(2, '0');
+    return `${year}-${month}-${day} ${hour}:${minute}:${second}`;
   }
   let timer: string | number | NodeJS.Timeout | undefined;
   const duration = 500;
