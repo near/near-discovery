@@ -537,7 +537,8 @@ const select_action_list = [
   { id: '', name: 'All Actions' },
   { id: 'Swap', name: 'Swap' },
   { id: 'Bridge', name: 'Bridge' },
-  { id: 'Lending', name: 'Lending' },
+  // { id: 'Lending', name: 'Lending' },
+  { id: 'Liquidity', name: 'Liquidity' },
   // {id: 'Staking', name: 'Staking'},
 ];
 const select_template_list = [
