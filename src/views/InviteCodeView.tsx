@@ -18,6 +18,7 @@ export const StyledInviteCodePage = styled.div<{ $logined: boolean; $loading: bo
   background-color: #000;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
   color: #fff;
   display: flex;
   justify-content: center;
