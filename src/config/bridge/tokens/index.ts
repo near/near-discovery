@@ -7,6 +7,7 @@ import { lineaTokens } from './linea';
 import { metisTokens } from './metis';
 import { optimismTokens } from './optimism';
 import { polygonTokens } from './polygon';
+import { zkSyncTokens } from './zkSync';
 
 export const tokens = {
   ...baseTokens,
@@ -18,4 +19,5 @@ export const tokens = {
   ...metisTokens,
   ...optimismTokens,
   ...polygonTokens,
+  ...zkSyncTokens,
 };

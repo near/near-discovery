@@ -38,6 +38,7 @@ const Button = ({
   checking,
   swap,
   swaping,
+  route,
   onSuccess,
 }: {
   errorTips: string;
@@ -51,6 +52,7 @@ const Button = ({
   checking?: boolean;
   onSuccess: (hash: string) => void;
   swap: any;
+  route?: any;
   swaping?: boolean;
 }) => {
   const [{ settingChain, connectedChain }, setChain] = useSetChain();
@@ -109,7 +111,7 @@ const Button = ({
   return (
     <StyledButton
       onClick={() => {
-        if (!inputToken || !inputChain || !outputToken || !outputChain) return;
+        if (!inputToken || !inputChain || !outputToken || !outputChain || !amount) return;
         swap({
           token: inputToken,
           chain: inputChain,
@@ -117,6 +119,7 @@ const Button = ({
           targetChain: outputChain,
           destination,
           amount,
+          route,
           onSuccess,
         });
       }}

@@ -1,5 +1,6 @@
 import type { Chain } from '@/types';
 
+
 //TODO: need wrap token address
 //TODO: need all chains live on dapdap
 
@@ -20,7 +21,7 @@ export const colors: { [key: number]: string } = {
   0: '235, 244, 121',
 };
 
-export default {
+const chainCofig = {
   8453: {
     chainId: 8453,
     chainName: 'Base',
@@ -114,12 +115,12 @@ export default {
   324: {
     chainId: 324,
     chainName: 'zkSync',
+    engine: 'lifi',
     icon: 'https://assets.dapdap.net/images/bafkreibcq6agazqmv5euwf355v7x7hlinz3jkuins2bkfffdbp3jgbjj6u.svg',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://mainnet.era.zksync.io'],
     blockExplorers: 'https://explorer.zksync.io/',
   },
-
   100: {
     chainId: 100,
     chainName: 'Gnosis',
@@ -129,3 +130,6 @@ export default {
     blockExplorers: 'https://gnosisscan.io/',
   },
 } as { [key: number]: Chain };
+
+
+export default chainCofig

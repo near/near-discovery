@@ -4,11 +4,20 @@ const CHAIN_ID = 324;
 export const zkSync: { [key: string]: Token } = {
   eth: {
     chainId: CHAIN_ID,
+    // address: '0x0000000000000000000000000000000000000000',
     name: 'ETH',
     symbol: 'ETH',
     icon: 'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628',
     decimals: 18,
     isNative: true,
+  },
+  weth: {
+    chainId: CHAIN_ID,
+    // address: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
+    name: 'WETH',
+    symbol: 'WETH',
+    icon: 'https://static.debank.com/image/era_token/logo_url/0x5aea5775959fbc2557cc8789bc1bf90a239d9a91/61844453e63cf81301f845d7864236f6.png',
+    decimals: 18,
   },
   usdc: {
     chainId: CHAIN_ID,

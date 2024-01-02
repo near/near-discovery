@@ -14,11 +14,16 @@ export interface Dex {
   tags: string[];
 }
 
-export type SupportDex = 'Stargate';
+export type SupportDex = 'Stargate' | 'Lifi';
 
 export interface Trade {
   time: string;
   amount: string;
   gasCost?: string;
   dex: SupportDex;
+  route?: any;
+}
+
+export interface LifiChainToken {
+  [chainId: number]: Token[];
 }

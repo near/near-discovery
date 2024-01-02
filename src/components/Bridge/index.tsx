@@ -5,7 +5,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 import useAccount from '@/hooks/useAccount';
-import useTokenBalance from '@/hooks/useCurrencyBalance';
+import useTokenBalance from './hooks/useTokenBalance';
 
 import ExchangeIcon from '../Icons/ExchangeIcon';
 import Button from './components/Button';
@@ -19,7 +19,7 @@ import useBestRoute from './hooks/useBestRoute';
 import useBridge from './hooks/useBridge';
 import useDestination from './hooks/useDestination';
 import useTokensAndChains from './hooks/useTokensAndChains';
-import type { Chain, Token } from './types';
+import type { Chain, Token, Trade } from './types';
 
 const Container = styled.div`
   width: 100%;
@@ -58,61 +58,49 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   const [clickType, setClickType] = useState<'in' | 'out'>();
   const [updater, setUpdater] = useState<number>(0);
   const [amount, setAmount] = useState<string>();
+  const [selectableTokens, setSelectableTokens] = useState<Token[]>([]);
+  const [selectedTradeIndex, setSelectedTradeIndex] = useState<number>(-1);
   const { account, chainId } = useAccount();
-  const { tokens, chains } = useTokensAndChains();
+  const { tokens, chains, lifiTokens } = useTokensAndChains();
   const { inputToken, outputToken, inputChain, outputChain, selectToken, selectChain, onExchange } = useBridge({
     chains,
     tokens,
+    lifiTokens,
   });
-  const { balance, loading } = useTokenBalance({ currency: inputToken, updater });
-  const { balance: nativeTokenBalance } = useTokenBalance({
-    isNative: true,
-    isPure: true,
-    updater,
-  });
+  const { balance, loading } = useTokenBalance({ tokensByChain: inputToken });
   const { checked, setChecked, destination, setDestination } = useDestination();
-  const { getBestRoute, gasCost, trade, checking, swap, swaping } = useBestRoute();
-  const selectableTokens = useMemo<Token[]>(() => {
-    return Object.values(tokens)
-      .filter((token) => (inputChain?.chainId || 1) === token.chainId)
-      .sort((a, b) => {
-        return a.chainId === inputChain?.chainId ? -1 : 1;
-      });
-  }, [inputChain]);
-
+  const { getBestRoute, gasCost, trades, checking, swap, swaping } = useBestRoute();
   const handleSelectClick = useCallback(
-    (type: 'chain' | 'token', item?: Token | Chain) => {
-      type === 'token' ? setShowTokenDialog(true) : setShowChainDialog(true);
+    (type: 'chain' | 'token', clickType: string, item?: Token | Chain) => {
       if (type === 'chain') {
-        if ((clickType === 'in' && inputToken) || (clickType === 'out' && outputToken)) {
-          const _token = clickType === 'in' ? inputToken : outputToken;
-          const _selectableChains: Chain[] = [];
-          Object.values(tokens).forEach((token) => {
-            if (token.poolId === _token?.poolId) {
-              _selectableChains.push(chains[token.chainId]);
-            }
-          });
-          setSelectableChains(_selectableChains);
-        } else {
-          setSelectableChains(Object.values(chains));
+        setSelectableChains(Object.values(chains));
+        setShowChainDialog(true);
+      } else if (type === 'token') {
+        const curChain = clickType === 'in' ? inputChain : outputChain 
+        if (curChain) {
+          setSelectableTokens(lifiTokens[curChain.chainId])
+          setShowTokenDialog(true)
         }
       }
+
       if (!item) return;
       if (item as Token) {
+
         setSelectedTokenAddress((item as Token).address || '');
       } else {
         setSelectedChainId(item.chainId);
       }
     },
-    [inputChain, outputChain, clickType, inputToken, outputToken],
+    [inputChain, outputChain, clickType, inputToken, outputToken, chains],
   );
 
   const handleBestRoute = useCallback(() => {
-    if (!inputChain || !outputChain || !outputToken || inputChain.chainId === outputChain.chainId) return;
-    getBestRoute({ chain: inputChain, targetToken: outputToken, targetChain: outputChain, amount });
-  }, [inputChain, outputChain, outputToken, amount]);
+    if (!inputChain || !outputChain || !outputToken || !inputToken) return;
+    getBestRoute({ chain: inputChain, inputToken, targetToken: outputToken, targetChain: outputChain, amount });
+  }, [inputChain, outputChain, outputToken, inputToken, amount]);
 
-  const debouncedBestRoute = debounce(handleBestRoute, 500);
+  // 此处失效，无作用
+  const debouncedBestRoute = useCallback(debounce(handleBestRoute, 500), [inputChain, outputChain, outputToken, inputToken, amount]);
 
   useEffect(() => {
     if (!amount || new Big(amount).eq(0)) {
@@ -141,20 +129,33 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
         return;
       }
     }
-    if (gasCost && new Big(gasCost).gt(nativeTokenBalance || 0)) {
-      setErrorTips('Not enough gas');
-      return;
-    }
-    if (!trade && !checking) {
-      setErrorTips('Relayer: gas too low');
+    
+    // if (gasCost && new Big(gasCost).gt(balance || 0)) {
+    //   setErrorTips('Not enough gas');
+    //   return;
+    // }
+
+    if (!(trades && trades.length) && !checking) {
+      // setErrorTips('Relayer: gas too low');
+      setErrorTips('Relayer: no route');
       return;
     }
     setErrorTips('');
-  }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, nativeTokenBalance, trade]);
+  }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, trades]);
 
   useEffect(() => {
     debouncedBestRoute();
   }, [inputChain, outputChain, amount, outputToken]);
+
+  useEffect(() => {
+    if (trades.length) {
+      setSelectedTradeIndex(0)
+    } else {
+      setSelectedTradeIndex(-1)
+    }
+  }, [trades])
+
+  const route = trades.length && selectedTradeIndex > -1 ? trades[selectedTradeIndex] : null
 
   return (
     <Container>
@@ -173,7 +174,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
               chain={inputChain}
               onClick={(type: 'chain' | 'token', item?: Token | Chain) => {
                 setClickType('in');
-                handleSelectClick(type, item);
+                handleSelectClick(type, 'in', item);
               }}
             />
           </>
@@ -185,10 +186,9 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             <Select
               token={outputToken}
               chain={outputChain}
-              tokenDisabled
               onClick={(type: 'chain' | 'token', item?: Token | Chain) => {
                 setClickType('out');
-                handleSelectClick(type, item);
+                handleSelectClick(type, 'out', item);
               }}
             />
           </>
@@ -206,7 +206,15 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             destination={destination}
             setDestination={setDestination}
           />
-          <Routes trade={trade} />
+          {
+            selectedTradeIndex > -1 
+            ? <Routes 
+                trades={trades} 
+                selectedTradeIndex={selectedTradeIndex}
+                onSelected={setSelectedTradeIndex}
+              /> 
+            : null
+          }
           <Button
             errorTips={errorTips}
             inputToken={inputToken}
@@ -218,6 +226,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             chainId={chainId}
             checking={checking}
             swap={swap}
+            route={route}
             swaping={swaping}
             onSuccess={(hash) => {
               setUpdater(Date.now());
