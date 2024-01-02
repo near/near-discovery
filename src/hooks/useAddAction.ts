@@ -43,7 +43,7 @@ export default function useAddAction(source: string) {
           const toChain = chains.find((chain: any) => chain.chain_id === data.toChainId) || {
             name: 'Ethereum Mainnet',
           };
-          // console.info('chains: ', fromChain, toChain, currentChain);
+          console.info('chains: ', fromChain, toChain, currentChain);
           params = {
             action_title: `Bridge ${data.amount} ${data.token.symbol} to ${toChain?.name}`,
             action_type: 'Bridge',
@@ -52,7 +52,8 @@ export default function useAddAction(source: string) {
             account_id: account,
             account_info: uuid,
             template: data.template,
-            action_network_id: currentChain?.name,
+            // action_network_id: currentChain?.name,
+            action_network_id: fromChain?.name,
             action_switch: data.add ? 1 : 0,
             action_status: data.status === 1 ? 'Success' : 'Failed',
             tx_id: data.transactionHash,
