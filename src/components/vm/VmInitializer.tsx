@@ -14,7 +14,8 @@ import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
-import { sanitize } from 'dompurify';
+import { isValidAttribute } from 'dompurify';
+import { mapValues } from 'lodash';
 import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import {
   CommitButton,
@@ -108,7 +109,15 @@ export default function VmInitializer() {
           ],
         }),
         customElements: {
-          Link: ({ href, to, ...rest }: any) => <Link href={sanitize(href ?? to)} {...rest} />,
+          Link: ({ to, href, ...rest }: { to: string | object | undefined; href: string | object }) => {
+            const cleanProps = mapValues({ to, href, ...rest }, (val: any, key: string) => {
+              if (!['to', 'href'].includes(key)) return val;
+              if (key === 'href' && !val) val = to;
+              return typeof val === 'string' && isValidAttribute('a', 'href', val) ? val : 'about:blank';
+            });
+
+            return <Link {...cleanProps} />;
+          },
         },
         features: {
           commitModalBypass: {
