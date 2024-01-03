@@ -245,6 +245,8 @@ const AllDappsPage = styled.div`
       .content-item-btn {
         width: 22%;
         .item-btn-item {
+          display: inline-block;
+          text-decoration: none;
           background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
           border: 1px solid #373a53;
           font-size: 14px;
@@ -361,6 +363,7 @@ const CarouselList = styled.div`
       .carousel-btn {
         display: flex;
         .carousel-btn-item {
+          text-decoration: none;
           cursor: pointer;
           flex: 1;
           margin-right: 18px;
@@ -652,6 +655,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
       } else if (selectedTab === 'token') {
         setNativeToken(resultDapp.data?.data || []);
       }
+      setTotalPages(resultDapp.data.total_page || 0);
     } catch (error) {
       console.error('Error fetching filtered dapp data:', error);
     }
@@ -793,9 +797,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
                 </Tag>
                 <p>{child.description}</p>
                 <div className="carousel-btn">
-                  <div className="carousel-btn-item">
-                    <Link href={`/dapps-details?dapp_id=${child.id}`}>View Detail</Link>
-                  </div>
+                  <Link href={`/dapps-details?dapp_id=${child.id}`} className="carousel-btn-item">
+                    View Detail
+                  </Link>
                   <div
                     className="carousel-btn-item"
                     style={{ marginRight: '0' }}
@@ -970,9 +974,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       </Tag>
                     </div>
                     <div className="content-item-btn">
-                      <div className="item-btn-item">
-                        <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
-                      </div>
+                      <Link href={`/dapps-details?dapp_id=${dapp.id}`} className="item-btn-item">
+                        Detail
+                      </Link>
                       <div
                         className="item-btn-item"
                         onClick={() => {
@@ -1012,9 +1016,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       </Tag>
                     </div>
                     <div className="content-item-btn">
-                      <div className="item-btn-item">
-                        <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
-                      </div>
+                      <Link className="item-btn-item" href={`/dapps-details?dapp_id=${dapp.id}`}>
+                        Detail
+                      </Link>
                       <div
                         className="item-btn-item"
                         onClick={() => {

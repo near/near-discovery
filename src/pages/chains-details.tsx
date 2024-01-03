@@ -317,6 +317,8 @@ const ChainsDetailsHot = styled.div`
       .content-item-btn {
         width: 22%;
         .item-btn-item {
+          text-decoration: none;
+          display: inline-block;
           cursor: pointer;
           background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
           border: 1px solid #373a53;
@@ -774,9 +776,9 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                     </Tag>
                   </div>
                   <div className="content-item-btn">
-                    <div className="item-btn-item">
-                      <Link href={`/dapps-details?dapp_id=${dapp.id}`}>Detail</Link>
-                    </div>
+                    <Link className="item-btn-item" href={`/dapps-details?dapp_id=${dapp.id}`}>
+                      Detail
+                    </Link>
                     <div
                       className="item-btn-item"
                       onClick={() => {

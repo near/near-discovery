@@ -24,6 +24,9 @@ export const supportChains = {
   1088: chains[1088],
   10: chains[10],
   137: chains[137],
+  1101: chains[1101],
+  100: chains[100],
+  5000: chains[5000],
   324: chains[324], // lifi
 } as { [key: number]: Chain };
 
