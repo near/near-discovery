@@ -19,4 +19,5 @@ export const steps = [
 export const bgs: { [key: number]: string } = {
   2: '/images/landing/2.png',
   3: '/images/landing/3.png',
+  4: '/images/landing/3.png',
 };

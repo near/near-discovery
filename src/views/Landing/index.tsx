@@ -32,7 +32,7 @@ import SuccessModal from './SuccessModal';
 
 const LandingView = () => {
   const router = useRouter();
-  const [step, setStep] = useState(0);
+  const [step, setStep] = useState(1);
   const [continuable, setContinuable] = useState(false);
   const { loading, handleClaim } = useRewardsClaim(() => {
     setSuccess(true);
@@ -47,7 +47,7 @@ const LandingView = () => {
 
   useEffect(() => {
     if (info?.quest) {
-      setStep((info.quest.action_completed || 0) + 1);
+      setStep(info.quest.action_completed || 1);
     }
   }, [info]);
   return (
@@ -56,7 +56,7 @@ const LandingView = () => {
         <Spinner />
       ) : (
         <>
-          <StyledContainer style={{ width: step === 1 ? '1200px' : '90%' }}>
+          <StyledContainer>
             <StyledLeftPanel>
               <StyledTitle>
                 <div> 3 Steps to Earn DapDap </div> <StyledCoin $size={31} className="coin" />
@@ -71,7 +71,7 @@ const LandingView = () => {
                     <StyledStepTitle>
                       Step {i + 1}. {_step.title}
                     </StyledStepTitle>
-                    {info?.quest?.action_completed > i && (
+                    {step - 1 > i && (
                       <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
                         <circle cx="11.5" cy="11.5" r="11" fill="#EBF479" stroke="#EBF479" />
                         <path
@@ -91,12 +91,7 @@ const LandingView = () => {
               ))}
               <StyledProcessBars>
                 {info?.actions.map((action: any, i: number) => (
-                  <ProcessBar
-                    size={4}
-                    value={i < info?.quest.action_completed ? 100 : 0}
-                    noBorder={true}
-                    key={action.id}
-                  />
+                  <ProcessBar size={4} value={i < step - 1 ? 100 : 0} noBorder={true} key={action.id} />
                 ))}
               </StyledProcessBars>
               <StyledButtons>
@@ -107,23 +102,23 @@ const LandingView = () => {
                   style={{ width: '70%' }}
                   onClick={() => {
                     if (loading || !continuable) return;
-                    if (step === 1) {
-                      setStep(2);
-                      return;
-                    }
                     if (step === 2) {
                       handleReport('landing?step=2');
                       setStep(3);
                       return;
                     }
                     if (step === 3) {
-                      handleClaim(info.quest.id);
                       handleReport('landing?step=3');
+                      setStep(4);
+                      return;
+                    }
+                    if (step === 4) {
+                      handleClaim(info.quest.id);
                     }
                   }}
                 >
                   {loading && <Loading mr="5px" />}
-                  {step === 3 ? 'Claim 140 PTS' : 'Continue'}
+                  {step === 4 ? 'Claim 140 PTS' : 'Continue'}
                 </StyledClaimButton>
                 <StyledSkipButton
                   onClick={() => {
@@ -137,11 +132,14 @@ const LandingView = () => {
               </StyledButtons>
             </StyledLeftPanel>
             {step === 1 ? (
-              <Bridge
-                onSuccess={() => {
-                  setContinuable(true);
-                }}
-              />
+              <div style={{ width: '500px' }}>
+                <Bridge
+                  onSuccess={() => {
+                    setContinuable(true);
+                    setStep(2);
+                  }}
+                />
+              </div>
             ) : (
               <StyledRightPanel>
                 <StyledRightImg src={bgs[step]} />

@@ -7,7 +7,9 @@ export const StyledContainer = styled.div`
   height: 100%;
   margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 80px;
+  max-width: 1200px;
 `;
 export const StyledLeftPanel = styled.div`
   max-width: 550px;
@@ -95,9 +97,11 @@ export const StyledClaimButton = styled(motion.button)`
   font-weight: 700;
   line-height: normal;
   opacity: 1;
+  cursor: pointer;
   &:disabled {
     opacity: 0.5;
     background: #7c7f96;
+    cursor: not-allowed;
   }
 `;
 export const StyledSkipButton = styled(motion.button)`
