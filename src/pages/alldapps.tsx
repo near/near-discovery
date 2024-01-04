@@ -619,11 +619,8 @@ const AllDappsColumn: NextPageWithLayout = () => {
         console.error('Error fetching resultDapp data:', error);
       }
     };
-    fetchTokenTBD(currentPage);
-    fetchNativeToken(currentPage);
     fetchCarouselData();
     fetchNetworkData();
-    fetchIsFavoriteList();
   }, []);
   const fetchFilteredDappData = async (page: number) => {
     try {
@@ -686,7 +683,6 @@ const AllDappsColumn: NextPageWithLayout = () => {
       }
     }
   }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
-
   function renderPagination(tab: string, data: any[]) {
     return (
       tab === selectedTab &&
