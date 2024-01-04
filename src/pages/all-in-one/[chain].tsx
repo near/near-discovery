@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+import swapConfig from '@/config/swap/networks';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import Spinner from '@/components/Spinner';
@@ -301,7 +302,7 @@ const AllInOne: NextPageWithLayout = () => {
                   title: 'Connect with the NEAR community.',
                   description: 'Become part of the NEAR community.',
                 }}
-                componentProps={{ addAction }}
+                componentProps={{ addAction, swapConfig: swapConfig[currentChain?.chainId] }}
               />
             </div>
           </>

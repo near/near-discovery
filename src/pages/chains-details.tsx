@@ -782,7 +782,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                     <div
                       className="item-btn-item"
                       onClick={() => {
-                        open(dapp, 'alldapps');
+                        open({ dapp, from: 'alldapps' });
                       }}
                     >
                       Dapp

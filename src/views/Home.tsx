@@ -1058,7 +1058,7 @@ const HomeContent: NextPageWithLayout = () => {
                         className="carousel-btn-item"
                         style={{ marginRight: '0' }}
                         onClick={() => {
-                          open(child, 'home');
+                          open({ dapp: child, from: 'home' });
                         }}
                       >
                         Dapp
@@ -1120,7 +1120,7 @@ const HomeContent: NextPageWithLayout = () => {
                         <div
                           className="item-btn-item"
                           onClick={() => {
-                            open(dapp, 'home');
+                            open({ dapp, from: 'home' });
                           }}
                         >
                           Dapp
@@ -1160,7 +1160,7 @@ const HomeContent: NextPageWithLayout = () => {
                         <div
                           className="item-btn-item"
                           onClick={() => {
-                            open(dapp, 'home');
+                            open({ dapp, from: 'home' });
                           }}
                         >
                           Dapp

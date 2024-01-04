@@ -8,7 +8,7 @@ import { get } from '@/utils/http';
 export default function useDappOpen() {
   const router = useRouter();
   const setDapp = useDappStore((store: any) => store.set);
-  const open = useCallback(async (dapp: any, from: 'home' | 'quest' | 'alldapps') => {
+  const open = useCallback(async ({ dapp, from }: { dapp: any; from: 'home' | 'quest' | 'alldapps' }) => {
     let _dapp = {} as any;
     if (from === 'quest') {
       _dapp = {

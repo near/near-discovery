@@ -123,7 +123,7 @@ const ActionItem = ({
   }, [router, config, action, userInfo]);
 
   const handleDappRedirect = useCallback((dapp: any) => {
-    dapp.route && dappOpen({ ...dapp, route: `/${dapp.route}` }, 'quest');
+    dapp.route && dappOpen({ dapp: { ...dapp, route: `/${dapp.route}` }, from: 'quest' });
   }, []);
 
   useEffect(() => {

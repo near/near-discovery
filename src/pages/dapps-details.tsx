@@ -664,7 +664,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
               <div
                 className="enter-Dapp-item Dapp-item-special"
                 onClick={() => {
-                  open(data, 'home');
+                  open({ dapp: data, from: 'home' });
                 }}
               >
                 <div>Enter Dapp</div>
@@ -786,7 +786,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                     <div
                       className="item-btn-item"
                       onClick={() => {
-                        open(dapp, 'alldapps');
+                        open({ dapp, from: 'alldapps' });
                       }}
                     >
                       <p>Dapp</p>

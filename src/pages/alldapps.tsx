@@ -800,7 +800,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                     className="carousel-btn-item"
                     style={{ marginRight: '0' }}
                     onClick={() => {
-                      open(child, 'home');
+                      open({ dapp: child, from: 'home' });
                     }}
                   >
                     Dapp
@@ -935,7 +935,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       <div
                         className="item-btn-item"
                         onClick={() => {
-                          open(dapp, 'alldapps');
+                          open({ dapp, from: 'alldapps' });
                         }}
                       >
                         Dapp
@@ -976,7 +976,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       <div
                         className="item-btn-item"
                         onClick={() => {
-                          open(dapp, 'alldapps');
+                          open({ dapp, from: 'alldapps' });
                         }}
                       >
                         Dapp
@@ -1018,7 +1018,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       <div
                         className="item-btn-item"
                         onClick={() => {
-                          open(dapp, 'alldapps');
+                          open({ dapp, from: 'alldapps' });
                         }}
                       >
                         Dapp

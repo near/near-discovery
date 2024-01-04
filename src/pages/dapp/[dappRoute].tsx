@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState, useEffect } from 'react';
 import { useSetChain } from '@web3-onboard/react';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import useAccount from '@/hooks/useAccount';
@@ -9,6 +10,10 @@ import { useDappStore } from '@/stores/dapp';
 import { useLayoutStore } from '@/stores/layout';
 import useAddAction from '@/hooks/useAddAction';
 import Breadcrumb from '@/components/Breadcrumb';
+import dappConfig from '@/config/dapp';
+import wethConfig from '@/config/contract/weth';
+import chainsConfig from '@/config/chains';
+import { bridge as dappBridgeTheme } from '@/config/theme/dapp';
 import type { NextPageWithLayout } from '@/utils/types';
 
 // set dynamic routes for dapps in config file
@@ -22,7 +27,8 @@ const DappName = styled.div`
   line-height: normal;
 `;
 
-export const DappPage: NextPageWithLayout = () => {
+export const DappPage: NextPageWithLayout = (props) => {
+  const router = useRouter();
   const chains = useChainsStore((store: any) => store.chains);
   const { chainId } = useAccount();
   const dapp = useDappStore((store: any) => store.dapp);
@@ -31,6 +37,9 @@ export const DappPage: NextPageWithLayout = () => {
   const [{ settingChain }, setChain] = useSetChain();
   const [currentChain, setCurrentChain] = useState<any>();
   const [ready, setReady] = useState(false);
+  const [localConfig, setLocalConfig] = useState<any>();
+  const dappPathname = router.query.dappRoute as string;
+
   const bridgeCb = useCallback(
     () =>
       setLayoutStore({
@@ -50,9 +59,30 @@ export const DappPage: NextPageWithLayout = () => {
     return default_chain?.chain_id;
   }, [chains]);
 
+  const getLocalConfig = useCallback(async () => {
+    if (!dappPathname) {
+      setLocalConfig(null);
+      return;
+    }
+    const config = dappConfig[dappPathname];
+    if (!config) {
+      setLocalConfig(null);
+      return;
+    }
+    let result: any = null;
+    if (config.type === 'swap') {
+      result = await import(`@/config/swap/dapps/${dappPathname}`);
+    }
+    setLocalConfig({ ...result, theme: config.theme });
+  }, [dappPathname]);
+
   useEffect(() => {
     setReady(true);
   }, []);
+
+  useEffect(() => {
+    getLocalConfig();
+  }, [dappPathname]);
 
   useEffect(() => {
     if (!chainId) return;
@@ -73,7 +103,7 @@ export const DappPage: NextPageWithLayout = () => {
   if (!dapp || !default_chain_id || !currentChain || (!dapp.default_chain_id && !dapp.default_network_id))
     return <div />;
 
-  if (!network?.dapp_src) return <div />;
+  if (!network?.dapp_src || !localConfig) return <div />;
 
   return ready ? (
     <>
@@ -97,12 +127,20 @@ export const DappPage: NextPageWithLayout = () => {
             curChain: currentChain,
             defaultDex: dapp.name,
             ...dapp,
+            wethAddress: wethConfig[currentChain.chain_id],
+            dexConfig: {
+              ...localConfig.basic,
+              ...localConfig.networks[currentChain.chain_id],
+              theme: localConfig.theme,
+            },
             addAction,
             bridgeCb,
             onSwitchChain: setChain,
             switchingChain: settingChain,
+            nativeCurrency: chainsConfig[currentChain.chain_id].nativeCurrency,
+            theme: { bridge: dappBridgeTheme[currentChain.chain_id] },
           }}
-          src={network.dapp_src}
+          src={'bluebiu.near/widget/Swap.Dex'}
         />
       </div>
     </>
