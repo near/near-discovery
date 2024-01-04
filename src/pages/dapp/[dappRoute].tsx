@@ -140,7 +140,7 @@ export const DappPage: NextPageWithLayout = (props) => {
             nativeCurrency: chainsConfig[currentChain.chain_id].nativeCurrency,
             theme: { bridge: dappBridgeTheme[currentChain.chain_id] },
           }}
-          src={'bluebiu.near/widget/Swap.Dex'}
+          src={network.dapp_src}
         />
       </div>
     </>
