@@ -56,7 +56,15 @@ const StyledCloseIcon = styled.div`
   z-index: 10;
 `;
 
-export default function SuccessModal({ open, onClose }: { open: boolean; onClose: VoidFunction }) {
+export default function SuccessModal({
+  open,
+  reward,
+  onClose,
+}: {
+  open: boolean;
+  reward?: number;
+  onClose: VoidFunction;
+}) {
   const router = useRouter();
   return (
     <Modal
@@ -70,7 +78,7 @@ export default function SuccessModal({ open, onClose }: { open: boolean; onClose
           <StyledIcon />
           <StyledTitle>Congrats!</StyledTitle>
           <StyledDesc>
-            <span>You’ve got 140</span> <StyledCoin $size={21} />
+            <span>You’ve got {reward}</span> <StyledCoin $size={21} />
             <span>PTS</span>
           </StyledDesc>
           <StyledClaimButton

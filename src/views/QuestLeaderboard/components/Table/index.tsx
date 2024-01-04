@@ -58,7 +58,7 @@ export const User = ({ user, avatar }: { user: string; avatar: string }) => {
   return (
     <>
       <StyledUserAvatar src={avatar} />
-      <span>{ellipsAccount(user)}</span>
+      <span>{user}</span>
     </>
   );
 };

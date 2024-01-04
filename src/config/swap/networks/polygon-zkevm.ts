@@ -13,7 +13,7 @@ export default {
     noAccountTips: 'Polygon zkEVM Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Polygon zkEVM Chain.',
   },
-  defalutDex: 'Pancake Swap',
+  defalutDex: 'QuickSwap',
   dexs: {
     QuickSwap: {
       ...quickSwapBasic,

@@ -150,6 +150,7 @@ const LandingView = () => {
       )}
       <SuccessModal
         open={success}
+        reward={info?.quest?.reward}
         onClose={() => {
           setSuccess(false);
         }}

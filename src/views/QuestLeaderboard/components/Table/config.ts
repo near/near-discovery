@@ -8,7 +8,7 @@ export const COLUMNS: Column[] = [
     gap: 10,
   },
   {
-    label: 'User address',
+    label: 'Address',
     width: 60,
     key: 'user',
     align: 'left',
