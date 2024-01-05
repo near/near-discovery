@@ -302,6 +302,7 @@ const MenuContent = styled.div`
         margin-right: 20px;
         line-height: 62px;
         width: 42px;
+        flex-shrink: 0;
       }
       .deep-item-text {
         h1 {
