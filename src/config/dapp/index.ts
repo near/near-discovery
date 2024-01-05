@@ -2,7 +2,7 @@ export default {
   'agni-finance': {
     type: 'swap',
     theme: {
-      button: { background: '#FFC9B1' },
+      button: { background: '#FFC9B1', color: '#261E1B' },
     },
   },
   'ammos-finance': {
@@ -14,7 +14,7 @@ export default {
   ape: {
     type: 'swap',
     theme: {
-      button: { background: '#FFB300' },
+      button: { background: '#FFB300', color: '#000000' },
     },
   },
   balancer: {
@@ -26,7 +26,7 @@ export default {
   'base-swap': {
     type: 'swap',
     theme: {
-      button: { background: '#0038FF' },
+      button: { background: '#0038FF', color: '#FFFFFF' },
     },
   },
   'bi-swap': {
@@ -38,7 +38,7 @@ export default {
   camelot: {
     type: 'swap',
     theme: {
-      button: { background: '#FFAF1E' },
+      button: { background: '#FFAF1E', color: '#000' },
     },
   },
   'chronos-v1': {
@@ -62,13 +62,13 @@ export default {
   'horizon-dex': {
     type: 'swap',
     theme: {
-      button: { background: '#61DFFF' },
+      button: { background: '#61DFFF', color: '#000000' },
     },
   },
   hummus: {
     type: 'swap',
     theme: {
-      button: { background: '#F3722B' },
+      button: { background: '#F3722B', color: '#FFFFFF' },
     },
   },
   'izi-swap': {
@@ -146,7 +146,7 @@ export default {
   'rocket-swap': {
     type: 'swap',
     theme: {
-      button: { background: '#11B5B1' },
+      button: { background: '#11B5B1', color: '#FFFFFF' },
     },
   },
   'space-fi': {
@@ -158,25 +158,25 @@ export default {
   sparta: {
     type: 'swap',
     theme: {
-      button: { background: '#8C6A45' },
+      button: { background: '#8C6A45', color: '#FFFFFF' },
     },
   },
   'swap-based': {
     type: 'swap',
     theme: {
-      button: { background: '#1651EF' },
+      button: { background: '#1651EF', color: '#FFFFFF' },
     },
   },
   'sync-swap': {
     type: 'swap',
     theme: {
-      button: { background: '#45499F' },
+      button: { background: '#45499F', color: '#FFFFFF' },
     },
   },
   'synth-swap': {
     type: 'swap',
     theme: {
-      button: { background: 'linear-gradient(90deg, #1B8F97 1.68%, #F133FF 100%)' },
+      button: { background: 'linear-gradient(90deg, #1B8F97 1.68%, #F133FF 100%)', color: '#fff' },
     },
   },
   'thena-v1': {
