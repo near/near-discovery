@@ -15,6 +15,7 @@ const Item = styled.div`
   width: 100%;
   text-align: left;
   align-items: center;
+  overflow: hidden;
 `;
 const DownArrow = styled.div`
   color: #979abe;

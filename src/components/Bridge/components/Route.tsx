@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import styled from 'styled-components';
+import Checkbox from '@/components/Checkbox';
 
 import dexs from '@/config/bridge/dexs';
 
@@ -67,6 +68,10 @@ const Desc = styled.div`
   color: #979abe;
 `;
 
+const StyledCheckBox = styled.div`
+  margin-left: 5px;
+`;
+
 const Route = (
   { trade, selected, onSelected } : 
   { trade: Trade, selected: boolean, onSelected: (chain: Trade) => void;}) => {
@@ -87,16 +92,23 @@ const Route = (
   }
 
   return (
-    <Container onClick={() => onSelected(trade)} style={{ border: selected ? '1px solid #d7d7d7' : 0 }}>
+    <Container onClick={() => onSelected(trade)} style={{ border: selected ? '1px solid #ebf479' : 0 }}>
       <Flex>
         <RouteWrapper>
           <RouteIcon src={bridgeDetail.icon} />
           <RouteName>{bridgeDetail.name}</RouteName>
         </RouteWrapper>
-        <Tags>
-          <Tag className="best">Best Return</Tag>
-          <Tag className="fast">Fastest</Tag>
-        </Tags>
+        <Flex>
+          <Tags>
+            {
+              trade.tags?.map((tag, index) => {
+                return index === 0 ? <Tag className="best">{ tag }</Tag> : <Tag className="fast">{ tag }</Tag>
+              })
+            }
+          </Tags>
+          <StyledCheckBox><Checkbox checked={selected} round /></StyledCheckBox>
+        </Flex>
+        
       </Flex>
       <Flex>
         <Amount>~{trade?.amount}</Amount>

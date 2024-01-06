@@ -21,6 +21,7 @@ export interface Trade {
   amount: string;
   gasCost?: string;
   dex: SupportDex;
+  tags: string[];
   route?: any;
 }
 

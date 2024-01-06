@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
+import _ from 'lodash'
 
 import { chains as configChains,tokens as configTokens } from '@/config/bridge';
 import { getLifiChains, getLifiTokens } from './useLifi'
 
 import type { Chain, Token } from '../types';
+
+const nativeToken = _.groupBy(Object.values(configTokens), chain => chain.chainId)
 
 export default function useTokensAndChains() {
   const [tokens, setTokens] = useState<{ [key: string]: Token }>(configTokens);
@@ -17,6 +20,8 @@ export default function useTokensAndChains() {
     });
 
     setChains(_chains);
+
+    
 
     // getLifiChains().then((lifiChains) => {
     //   lifiChains.forEach(chain => {
@@ -32,7 +37,7 @@ export default function useTokensAndChains() {
 
   useEffect(() => {
     getLifiTokens().then((resLifiTokens) => {
-      Object.assign(lifiTokens, resLifiTokens)
+      Object.assign(lifiTokens, nativeToken, resLifiTokens)
       setLifiTokens(lifiTokens);
     })
   }, []);

@@ -12,6 +12,7 @@ const StyledContainer = styled.div``;
 const StyledHistory = styled.div`
   border-bottom: 1px solid #343838;
   padding-bottom: 10px;
+  margin-top: 10px;
 `;
 const Header = styled.div`
   display: flex;
@@ -76,7 +77,7 @@ const History = ({ tx }: { tx: any }) => {
     <StyledHistory>
       <Header>
         <TokenWrapper>
-          <CurrencyIcon token={'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628'} />
+          <CurrencyIcon token={tx.fromTokenUrl ? tx.fromTokenUrl : 'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628'} />
           <Token>
             <TokenSymbol>
               {balanceFormated(tx.amount)} {tx.symbol}
@@ -104,6 +105,9 @@ const History = ({ tx }: { tx: any }) => {
 
 const Historys = ({ txs, loading }: { txs: any; loading?: boolean }) => {
   const list = useMemo(() => Object.values(txs || {}), [txs]);
+
+  list.sort((a: any, b: any) => b.time - a.time)
+
   return (
     <StyledContainer>
       {!loading && !!list?.length && list.map((tx: any) => <History tx={tx} key={tx.tx} />)}
