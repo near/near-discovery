@@ -69,7 +69,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   });
   const { balance, loading } = useTokenBalance({ tokensByChain: inputToken });
   const { checked, setChecked, destination, setDestination } = useDestination();
-  const { getBestRoute, gasCost, trades, checking, swap, swaping } = useBestRoute();
+  const { getBestRoute, gasCost, trades, setTrades, checking, swap, swaping } = useBestRoute();
   const handleSelectClick = useCallback(
     (type: 'chain' | 'token', clickType: string, item?: Token | Chain) => {
       if (type === 'chain') {
@@ -85,7 +85,6 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
 
       if (!item) return;
       if (item as Token) {
-
         setSelectedTokenAddress((item as Token).address || '');
       } else {
         setSelectedChainId(item.chainId);
@@ -95,12 +94,11 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   );
 
   const handleBestRoute = useCallback(() => {
+    setTrades([])
+    setErrorTips('')
     if (!inputChain || !outputChain || !outputToken || !inputToken) return;
     getBestRoute({ chain: inputChain, inputToken, targetToken: outputToken, targetChain: outputChain, amount });
   }, [inputChain, outputChain, outputToken, inputToken, amount]);
-
-  // 此处失效，无作用
-  const debouncedBestRoute = useCallback(debounce(handleBestRoute, 500), [inputChain, outputChain, outputToken, inputToken, amount]);
 
   useEffect(() => {
     if (!amount || new Big(amount).eq(0)) {
@@ -144,8 +142,14 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, trades]);
 
   useEffect(() => {
-    debouncedBestRoute();
-  }, [inputChain, outputChain, amount, outputToken]);
+    const timer = setTimeout(() => {
+      handleBestRoute()
+    }, 1000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [inputChain, outputChain, amount, outputToken, inputToken]);
 
   useEffect(() => {
     if (trades.length) {

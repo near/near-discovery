@@ -6,7 +6,7 @@ import type { Chain, Token, Trade } from '../types';
 import type { Route } from '@lifi/sdk'
 import { tokens as configTokens } from '@/config/bridge';
 import useStargate from './useStargate';
-import useLifi from './useLifi';
+import useLifi,  { computeDuration } from './useLifi';
 
 export default function useBestRoute() {
   const { getQouteInfo, swap: stargateSwap, gasCost } = useStargate();
@@ -36,29 +36,7 @@ export default function useBestRoute() {
       const _outputChain = chainCofig[targetChain.chainId];
       const tradeList: Trade[] = []
 
-      // 判断是否需要使用Stargate
-      // 判断Stargate配置中是否有这些链的配置
-      // 配置中必须有Stargate
-      // 两个链不能相同
-      // 两个token必须相同
-      if (
-        _inputChain && _outputChain
-      && _inputChain.dex === 'Stargate' && _outputChain.dex === 'Stargate' 
-      && chain.chainId !== targetChain.chainId
-      && inputToken.symbol === targetToken.symbol) {
-        try {
-          const response = await getQouteInfo({ targetToken, chain, targetChain });
-          tradeList.push({
-            time: '5min',
-            amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(4, 0) : '-') + '  ' + targetToken.symbol,
-            gasCost: response,
-            dex: 'Stargate',
-          })
-        } catch (e) {
-          console.log(e)
-        }
-      } 
-
+      let hasStargate = false
       const response = await getLifiQouteInfo({
         chain: chain,
         token: inputToken,
@@ -70,18 +48,51 @@ export default function useBestRoute() {
       if (response) {
         response.forEach(item => {
           tradeList.push({
-            time: '5min',
+            time: computeDuration(item),
             amount: (item.toAmount ? new Big(item.toAmount || 0).div(Math.pow(10, targetToken.decimals)).toFixed(4, 0) : '-') + '  ' + targetToken.symbol,
             gasCost: '$' + item?.gasCostUSD,
             dex: 'Lifi',
             route: item,
+            tags: item.tags ? (item.tags as string[]).slice(0, 2) : [],
           })
+
+          if (item.steps && item.steps.length) {
+            const toolDetails = item.steps[0].toolDetails
+            if (toolDetails.name === 'Stargate') {
+              hasStargate = true
+            }
+          }
         })
       }
 
+      // 判断是否需要使用Stargate
+      // 判断lifi中没有提供Stargate桥
+      // 判断Stargate配置中是否有这些链的配置
+      // 配置中必须有Stargate
+      // 两个链不能相同
+      // 两个token必须相同
+      if (
+        !hasStargate
+      && _inputChain && _outputChain
+      && _inputChain.dex === 'Stargate' && _outputChain.dex === 'Stargate' 
+      && chain.chainId !== targetChain.chainId
+      && inputToken.symbol === targetToken.symbol) {
+        try {
+          const response = await getQouteInfo({ targetToken, chain, targetChain });
+          tradeList.unshift({
+            time: '5min',
+            amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(4, 0) : '-') + '  ' + targetToken.symbol,
+            gasCost: response,
+            dex: 'Stargate',
+            tags: ['Best Return', 'Fastest'],
+          })
+        } catch (e) {
+          console.log(e)
+        }
+      } 
+
       setChecking(false)
       setTrades(tradeList)
-
     } catch (err) {
       console.log('error', err);
       setChecking(false);
@@ -139,12 +150,16 @@ export default function useBestRoute() {
       }
       setSwaping(false);
       setTrades([])
+      setChecking(false);
     } catch (err) {
       console.log(err)
-      setTrades([])
+      // setTrades([])
+      // setChecking(false);
       setSwaping(false);
     }
   };
 
-  return { getBestRoute, swap, trades, checking, swaping, gasCost };
+
+
+  return { getBestRoute, swap, trades, checking, swaping, gasCost, setTrades };
 }

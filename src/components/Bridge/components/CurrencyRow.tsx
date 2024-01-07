@@ -16,7 +16,7 @@ const StyledCurrencyRow = styled.div`
   cursor: pointer;
   margin: 10px 0px;
   color: #fff;
-  :hover {
+  &:hover {
     background-color: rgba(255, 255, 255, 0.1);
   }
   &.active {
@@ -29,6 +29,9 @@ const CurrencyLabel = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  flex: 4;
+  width: 10px;
+  overflow: hidden;
 `;
 const CurrencySymbol = styled.div`
   font-size: 18px;
@@ -38,12 +41,14 @@ const CurrencyName = styled.div`
   font-size: 14px;
   text-overflow: ellipsis;
   overflow: hidden;
-  width: 80%;
   word-break: break-all;
+  white-space: nowrap;
 `;
 const CurrencyAmount = styled.div`
   font-size: 18px;
   font-weight: 500px;
+  flex: 1;
+  text-align: right;
 `;
 
 const CurrencyRow = ({

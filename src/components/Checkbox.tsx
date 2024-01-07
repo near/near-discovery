@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import styled from 'styled-components';
 
-const StyledCheckbox = styled.div<{ checked: boolean; disabled?: boolean }>`
+const StyledCheckbox = styled.div<{ checked: boolean; disabled?: boolean; round?: boolean; }>`
   width: 17px;
   height: 17px;
   cursor: pointer;
@@ -40,10 +40,13 @@ const StyledCheckbox = styled.div<{ checked: boolean; disabled?: boolean }>`
       opacity: 0.8;
       pointer-events: none;
   }`}
+  ${({ round }) => round && ` &::after {
+    border-radius: 100%;
+  }`}
 `;
 
-const Checkbox = ({ checked, disabled, onClick }: { checked: boolean; disabled?: boolean; onClick?: () => void }) => {
-  return <StyledCheckbox checked={checked} disabled={disabled} onClick={onClick} />;
+const Checkbox = ({ checked, disabled, round, onClick }: { checked: boolean; disabled?: boolean; round?: boolean; onClick?: () => void }) => {
+  return <StyledCheckbox checked={checked} disabled={disabled} round={round} onClick={onClick} />;
 };
 
 export default memo(Checkbox);

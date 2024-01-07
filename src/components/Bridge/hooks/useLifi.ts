@@ -158,6 +158,15 @@ async function getRoute(
   return res.routes
 }
 
+export function computeDuration(route:Route): string {
+  let duration: number = 0
+  route.steps.forEach(step => {
+    duration += step.estimate.executionDuration
+  })
+
+  return Math.ceil(duration / 60) + ' min'
+}
+
 export default function useLifi() {
   const { account, provider } = useAccount();
   const [fee, setFee] = useState();
@@ -169,15 +178,17 @@ export default function useLifi() {
     targetChain,
     targetToken,
     amount,
+    destination,
   }: {
     chain: Chain;
     token: Token;
     targetChain: Chain;
     targetToken: Token;
     amount: string;
+    destination?: string;
   }) => {
     if (!targetToken || !chain || !targetChain || !amount) return;
-    return getRoute(chain, targetChain, token, targetToken, account, amount)
+    return getRoute(chain, targetChain, token, targetToken, account, amount, destination ? destination : account)
   };
 
   const swap = async ({
@@ -203,9 +214,22 @@ export default function useLifi() {
     const signer = await provider.getSigner(account);
     if (route) {
       const tx = await lifi.executeRoute(signer, route);
-      onSuccess(tx.id ? tx.id : '');
-
+      console.log(tx)
       try {
+        const process = tx.steps[0].execution?.process
+        if (!process) {
+          return
+        }
+        let txHash = process[0].txHash
+        const start = process[0].startedAt
+        const end = process[process.length - 1].doneAt as number
+        const duration =  Math.ceil((end - start) / 1000 / 60)
+        txHash = txHash || ''
+        onSuccess(txHash);
+        if (!txHash) {
+          return
+        }
+     
         const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
         const _bridgeTxs = JSON.parse(bridgeTxs);
         addAction({
@@ -217,18 +241,20 @@ export default function useLifi() {
           template: 'Lifi Bridge',
           add: false,
           status: 1,
-          transactionHash: tx.id,
+          transactionHash: txHash,
         });
-        _bridgeTxs[tx.id] = {
+        _bridgeTxs[txHash] = {
           amount,
           inputChain: chain.chainName,
           outputChain: targetChain.chainName,
           symbol: token.symbol,
-          tx: tx.id,
+          tx: txHash,
           time: Date.now(),
           scan: chain.blockExplorers,
           isStargate: false,
-          duration: '5 min',
+          duration: duration + ' min',
+          status: 'success',
+          fromTokenUrl: tx.fromToken.logoURI,
         };
         localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
       } catch(e) {}
