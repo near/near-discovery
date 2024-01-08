@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
+import { useAuthStore } from '@/stores/auth';
 
 export function useSignInRedirect() {
   const router = useRouter();
+  const vmNear = useAuthStore((store) => store.vmNear);
 
   const redirect = useCallback(
     (hardRefresh = false) => {
@@ -29,9 +31,21 @@ export function useSignInRedirect() {
   const requestAuthentication = useCallback(
     (createAccount = false) => {
       saveCurrentUrl();
-      router.push(createAccount ? '/signup' : '/signin');
+      if (!vmNear) return;
+      if (createAccount) {
+        vmNear.selector
+          .then((selector: any) => selector.wallet('fast-auth-wallet'))
+          .then((fastAuthWallet: any) =>
+            fastAuthWallet.signIn({
+              contractId: vmNear.config.contractName,
+              isRecovery: false,
+            }),
+          );
+      } else {
+        router.push('/signin');
+      }
     },
-    [router, saveCurrentUrl],
+    [router, saveCurrentUrl, vmNear],
   );
 
   return {
