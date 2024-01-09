@@ -30,12 +30,19 @@ const SignInPage: NextPageWithLayout = () => {
   useEffect(() => {
     if (vmNear?.selector && searchParams.get('account_id') && searchParams.get('public_key')) {
       vmNear.selector
-        .then((selector: any) => selector.wallet('fast-auth-wallet'))
-        .then((fastAuthWallet: any) =>
-          fastAuthWallet.signIn({
-            contractId: vmNear.config.contractName,
-          }),
-        );
+        .then((selector: any) => {
+          const walletSelectorState = selector.store.getState();
+          if (walletSelectorState === 'fast-auth-wallet') {
+            return selector.wallet('fast-auth-wallet');
+          }
+        })
+        .then((fastAuthWallet: any) => {
+          if (fastAuthWallet) {
+            fastAuthWallet.signIn({
+              contractId: vmNear.config.contractName,
+            });
+          }
+        });
     }
   }, [searchParams, vmNear]);
 
