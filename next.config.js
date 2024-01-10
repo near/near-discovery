@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
   compiler: { styledComponents: true },
   reactStrictMode: true,
   redirects: async () => {
@@ -58,6 +59,14 @@ const nextConfig = {
       destination: 'https://near.dataplane.rudderstack.com/:path*',
     }
   ],
+  headers: async () => [
+    {
+      source: '/:path*',
+      headers: [{
+        key: 'Referrer-Policy',
+        value: 'strict-origin-when-cross-origin,same-origin'
+      }]
+  }]
 };
 
 module.exports = nextConfig;
