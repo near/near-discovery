@@ -32,7 +32,8 @@ const SignInPage: NextPageWithLayout = () => {
       vmNear.selector
         .then((selector: any) => {
           const walletSelectorState = selector.store.getState();
-          if (walletSelectorState === 'fast-auth-wallet') {
+
+          if (walletSelectorState.selectedWalletId === 'fast-auth-wallet') {
             return selector.wallet('fast-auth-wallet');
           }
         })
