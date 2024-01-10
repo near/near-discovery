@@ -10,6 +10,7 @@ type IdosState = {
   idOS?: IdosTypeTemp;
   currentUser?: IdosUser;
   hasProfile?: boolean;
+  connectedWallet?: string;
   credentials?: object[];
   wallets?: IdosWalletInfo[];
 };
@@ -24,6 +25,7 @@ export const useIdosStore = create(
       idOS: undefined,
       currentUser: undefined,
       hasProfile: false,
+      connectedWallet: undefined,
       credentials: undefined,
       wallets: undefined,
       set: (state) => set((previousState) => ({ ...previousState, ...state })),
