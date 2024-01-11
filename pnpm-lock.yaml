@@ -1,12 +1,16 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@idos-network/idos-sdk':
     specifier: ^0.0.27
     version: 0.0.27
   '@keypom/selector':
     specifier: 1.2.3
-    version: 1.2.3(@near-js/accounts@0.1.4)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.1)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.9.1)(@types/react@18.2.25)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0)
+    version: 1.2.3(@near-js/accounts@0.1.4)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.1)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.9.2)(@types/react@18.2.25)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0)
   '@monaco-editor/react':
     specifier: ^4.4.6
     version: 4.5.2(monaco-editor@0.44.0)(react-dom@18.2.0)(react@18.2.0)
@@ -14,41 +18,41 @@ dependencies:
     specifier: 0.3.0
     version: 0.3.0
   '@near-wallet-selector/core':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/here-wallet':
-    specifier: 8.9.1
-    version: 8.9.1(borsh@0.7.0)(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(borsh@0.7.0)(near-api-js@2.1.3)
   '@near-wallet-selector/ledger':
-    specifier: ^8.9.1
-    version: 8.9.1(near-api-js@2.1.3)(typescript@5.2.2)
+    specifier: ^8.9.2
+    version: 8.9.2(near-api-js@2.1.3)(typescript@5.2.2)
   '@near-wallet-selector/meteor-wallet':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/modal-ui':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/my-near-wallet':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/near-mobile-wallet':
-    specifier: ^8.9.1
-    version: 8.9.1(near-api-js@2.1.3)(typescript@5.2.2)
+    specifier: ^8.9.2
+    version: 8.9.2(near-api-js@2.1.3)(typescript@5.2.2)
   '@near-wallet-selector/near-wallet':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/neth':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/nightly':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/sender':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@near-wallet-selector/welldone-wallet':
-    specifier: 8.9.1
-    version: 8.9.1(near-api-js@2.1.3)
+    specifier: 8.9.2
+    version: 8.9.2(near-api-js@2.1.3)
   '@radix-ui/react-accordion':
     specifier: ^1.1.1
     version: 1.1.2(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
@@ -2214,17 +2218,6 @@ packages:
       '@floating-ui/utils': 0.1.6
     dev: false
 
-  /@floating-ui/react-dom@2.0.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-5qhlDvjaLmAst/rKb3VdlCinwTF4EYMiVxuuc/HVUjs46W0zgtbMmAZ1UTsDrRTxRmUEzl92mOtWbeeXL26lSQ==}
-    peerDependencies:
-      react: '>=16.8.0'
-      react-dom: '>=16.8.0'
-    dependencies:
-      '@floating-ui/dom': 1.5.3
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
-
   /@floating-ui/react-dom@2.0.4(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-CF8k2rgKeh/49UrnIBs4BdxPUV6vize/Db1d/YbCLyp9GiVZ0BEwf5AiDSxJRCr6yOkGqTFHtmrULxkEfYZ7dQ==}
     peerDependencies:
@@ -2435,7 +2428,7 @@ packages:
       '@near-js/types': 0.0.4
       '@near-js/utils': 0.0.4
       '@near-js/wallet-account': 0.0.6
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       bn.js: 5.2.1
       borsh: 0.7.0
       near-seed-phrase: 0.2.0
@@ -2444,7 +2437,7 @@ packages:
       - near-api-js
     dev: false
 
-  /@keypom/selector@1.2.3(@near-js/accounts@0.1.4)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.1)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.9.1)(@types/react@18.2.25)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0):
+  /@keypom/selector@1.2.3(@near-js/accounts@0.1.4)(@near-js/crypto@0.0.4)(@near-js/keystores-browser@0.0.4)(@near-js/keystores-node@0.0.4)(@near-js/keystores@0.0.4)(@near-js/transactions@0.2.1)(@near-js/types@0.0.4)(@near-js/utils@0.0.4)(@near-js/wallet-account@0.0.6)(@near-wallet-selector/core@8.9.2)(@types/react@18.2.25)(near-api-js@2.1.3)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-Z/VlZwhSt3NJ+Dv5AkgXNZ2rcFbbrd4F2sC5oTDm/TH6ocoyx5MR6ltxCWEP5/D/8Zi1MghtCtZpxrh1sHub5A==}
     requiresBuild: true
     peerDependencies:
@@ -2470,7 +2463,7 @@ packages:
       '@near-js/types': 0.0.4
       '@near-js/utils': 0.0.4
       '@near-js/wallet-account': 0.0.6
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       '@types/react': 18.2.25
       bn.js: 5.2.1
       borsh: 0.7.0
@@ -2608,8 +2601,8 @@ packages:
     engines: {node: '>=14.0.0'}
     dev: false
 
-  /@meteorwallet/sdk@1.0.5(near-api-js@2.1.3):
-    resolution: {integrity: sha512-2HT3F6O8lMvj1STD/ir09R43jPLlRVFPoR8dD+qsASUe73ZJumX8r3Uef4g9waAjKZza5B7wmi4XpamFaKrlkg==}
+  /@meteorwallet/sdk@1.0.9(near-api-js@2.1.3):
+    resolution: {integrity: sha512-frJM+rwmx18MCVsfHn0O8oaJfB41BqaXW6cyhZ3EtMw3b87DUJyfSuJi9K0HQl7oGG0+wvMZOKRBVVcMiZzoDg==}
     peerDependencies:
       near-api-js: ^2.0.0
     dependencies:
@@ -3000,8 +2993,8 @@ packages:
       rxjs: 7.8.1
     dev: false
 
-  /@near-wallet-selector/core@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-EY8PmKyNoW/pWsZFZM9V2sluSMn1DPQ8PDj+veiOCbuMP2USJ5j9qxJd1iJy07JbmI/40EuCA6IAZ6SbukzaUQ==}
+  /@near-wallet-selector/core@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-vCUoVOezCn5+5etHT0ejzgJ7DpnkUjLasYLYjjUh+E2BlUzrI63qMWfvdL8eoUoELXY7vtJVMEy/Td1kgrt10w==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
@@ -3012,8 +3005,8 @@ packages:
       rxjs: 7.8.1
     dev: false
 
-  /@near-wallet-selector/core@8.9.1(near-api-js@2.1.4):
-    resolution: {integrity: sha512-EY8PmKyNoW/pWsZFZM9V2sluSMn1DPQ8PDj+veiOCbuMP2USJ5j9qxJd1iJy07JbmI/40EuCA6IAZ6SbukzaUQ==}
+  /@near-wallet-selector/core@8.9.2(near-api-js@2.1.4):
+    resolution: {integrity: sha512-vCUoVOezCn5+5etHT0ejzgJ7DpnkUjLasYLYjjUh+E2BlUzrI63qMWfvdL8eoUoELXY7vtJVMEy/Td1kgrt10w==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
@@ -3024,28 +3017,28 @@ packages:
       rxjs: 7.8.1
     dev: false
 
-  /@near-wallet-selector/here-wallet@8.9.1(borsh@0.7.0)(near-api-js@2.1.3):
-    resolution: {integrity: sha512-jSKb1z7JEPEK4RHHKNWaasMxAc39bD8TOMt2MdcFmxMPxvYuB14RqyrBx18dwZmzR+kZVbrY2AmKzxxec+56KA==}
+  /@near-wallet-selector/here-wallet@8.9.2(borsh@0.7.0)(near-api-js@2.1.3):
+    resolution: {integrity: sha512-LJ8vO4NAAPzkHDdPEfq5IEGqzLS8Zmg7fKhIuxL1E7iAAAHFg7P5yxjP+jh8wwa0x7fZPs0aoYRsug1kCJanxA==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
       '@here-wallet/core': 1.5.1(bn.js@5.2.1)(borsh@0.7.0)(near-api-js@2.1.3)
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       bn.js: 5.2.1
       near-api-js: 2.1.3
     transitivePeerDependencies:
       - borsh
     dev: false
 
-  /@near-wallet-selector/ledger@8.9.1(near-api-js@2.1.3)(typescript@5.2.2):
-    resolution: {integrity: sha512-kckcSoRqDV8jONsvUnKiyp1TDvAmljMfbW+IueiC9I/qfg1Om1X3xN24toz92dAiLCYrciKgY2uZsTP54yGNIA==}
+  /@near-wallet-selector/ledger@8.9.2(near-api-js@2.1.3)(typescript@5.2.2):
+    resolution: {integrity: sha512-1sCg5mkeSh3NrlrszS1ZR094owj9FuFjO3kn6IG1HMiouHub/YtDK9cIgJLsZ7A2EmPowR+lOsyFX6Wuo5Trwg==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
       '@ledgerhq/hw-transport': 6.27.1
       '@ledgerhq/hw-transport-webhid': 6.27.1
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
-      '@near-wallet-selector/wallet-utils': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
+      '@near-wallet-selector/wallet-utils': 8.9.2(near-api-js@2.1.3)
       bn.js: 5.2.1
       is-mobile: 4.0.0
       near-api-js: 2.1.3
@@ -3054,20 +3047,20 @@ packages:
       - typescript
     dev: false
 
-  /@near-wallet-selector/meteor-wallet@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-3mg/0fDHg4c5Hqcne8t98rKKLNBgkZknfDI9sy3P4HxtBQ/Uk2VKRsdE39KFvd50fpBsQCCVfZVrNUmuk8jczQ==}
+  /@near-wallet-selector/meteor-wallet@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-GIfPVi4FakvJNbkeQffjXLFy0t8vTj3fXSRPny+0JmfiNJr7FBd4/QopmYsWsNpxLT+nekl7TBQsJvjovWooqg==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@meteorwallet/sdk': 1.0.5(near-api-js@2.1.3)
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@meteorwallet/sdk': 1.0.9(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       near-api-js: 2.1.3
     dev: false
 
-  /@near-wallet-selector/modal-ui@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-JJxtWu+uELVG2YeeLWPT5pJC+62x7coFCbwrQ/oNCP9ZY37YFsifaZDjyY+6/EecogKD8TanzHIpR+q3JTFU6A==}
+  /@near-wallet-selector/modal-ui@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-v4TTyZpCTsJ1NiovPER1mWpiHXk0minJ5G6I/72cqcPM7gbPEBoMXpW4djY/hN7uTMr+oPyEfZK1gnM4tTEP2Q==}
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       copy-to-clipboard: 3.3.3
       qrcode: 1.5.3
       react: 18.2.0
@@ -3076,22 +3069,22 @@ packages:
       - near-api-js
     dev: false
 
-  /@near-wallet-selector/my-near-wallet@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-gxnkCqdnG2j4X+5e0AJH6wwLOHbLmIidlYz+XMHXvuXw7CWHpYjtl1Xzlcm2B06Rv6F0veeEFBYWMYzltbqyqA==}
+  /@near-wallet-selector/my-near-wallet@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-K+jOLLl8uuJGrEzly8FuTvX2AveevhyUA21CQFRF4wrAl8+Wq6D6juf428tvOILdl56iGV2hC9Iv7quWrrL/Ug==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
-      '@near-wallet-selector/wallet-utils': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
+      '@near-wallet-selector/wallet-utils': 8.9.2(near-api-js@2.1.3)
       near-api-js: 2.1.3
     dev: false
 
-  /@near-wallet-selector/near-mobile-wallet@8.9.1(near-api-js@2.1.3)(typescript@5.2.2):
-    resolution: {integrity: sha512-o/7R0LDVVEvwlIQqnNe0Zs1NPwfz7FOIa+B2KxFali8iE6O7Zw+MtXqtAIvkZks5zeLehNB3zXmEsZEWLzKdag==}
+  /@near-wallet-selector/near-mobile-wallet@8.9.2(near-api-js@2.1.3)(typescript@5.2.2):
+    resolution: {integrity: sha512-sd8etOomosRRwdUtn5AiQmDligWZgKELRGQMkJeUxCxL89yMqxwDtv9e9jKZs29Xwp1KANaIVhQaAdUZYlzLlA==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       '@peersyst/near-mobile-signer': 1.0.11(typescript@5.2.2)
       near-api-js: 2.1.3
     transitivePeerDependencies:
@@ -3107,23 +3100,23 @@ packages:
       - uncss
     dev: false
 
-  /@near-wallet-selector/near-wallet@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-oM+3B1k/Ywp3RgAiZyuRktZ7gQnkBhIc7MazM2TIAEB2rzcvmgC1bpnF1lRHOjh44CqaL4aPU4DYGdVn8Sg6cQ==}
+  /@near-wallet-selector/near-wallet@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-tXTOnqv+2AhioLYqzuQ7D1xyfHxwhoNZFUsciMeeLEqqnd9sYV8TPbkklvKw1A7Kf2725PrhARD4oZhSdYqTZg==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
-      '@near-wallet-selector/my-near-wallet': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
+      '@near-wallet-selector/my-near-wallet': 8.9.2(near-api-js@2.1.3)
       near-api-js: 2.1.3
     dev: false
 
-  /@near-wallet-selector/neth@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-CmIlJdnsP0yfDfuC8EuekfEThUZxGSsU5imGXqdYX8SdTIiU46soZbhOe7OKD+Y1/j520HThJzgke3KWCwj1HA==}
+  /@near-wallet-selector/neth@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-rGdqRFbxqg0ZTAUDijfn9PyrtD2u8dEbaogJOPJVPlnWkAlcqcu4qx9vQCxv0SFlT3FJdMbpBmeSywvlS79oBw==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
       '@metamask/detect-provider': 2.0.0
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       bn.js: 5.2.1
       ethers: 5.7.2
       is-mobile: 4.0.0
@@ -3134,23 +3127,23 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@near-wallet-selector/nightly@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-GbD7H7UGrxvcfa/4GKgHhhmUK4bihV1a4R3c4viGSsO0+6uATnyhsAu5zK11vz2NU9zX9n4OTbg9Vffrv/tDqQ==}
+  /@near-wallet-selector/nightly@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-s5U94VQrLnDLgL1KBDRtmnWbUUu5jH7TlW1XzNsjcWOIvXZtib/xGQfizrBmpGXceSqntSjTWawOJzL/1gZQgg==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
-      '@near-wallet-selector/wallet-utils': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
+      '@near-wallet-selector/wallet-utils': 8.9.2(near-api-js@2.1.3)
       is-mobile: 4.0.0
       near-api-js: 2.1.3
     dev: false
 
-  /@near-wallet-selector/sender@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-j9OK8E2bO3UjpiQfhWPcICUZcJDjfOfeGzlB/mQiiNwRalMd2+nMw6JFsNIv2Oe9g4GO97k/7ipL3KNkBnv0sQ==}
+  /@near-wallet-selector/sender@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-Lg5/n6pbYJODhTG+dmZ2KnCyaIBbnutD/SqsdH+we/xbtmrFTIKrkVlyikJ4Nm7D06/B8eBJveU9aoFu1PXmUQ==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       is-mobile: 4.0.0
       near-api-js: 2.1.3
     dev: false
@@ -3165,23 +3158,23 @@ packages:
       near-api-js: 2.1.4
     dev: false
 
-  /@near-wallet-selector/wallet-utils@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-T7KXOLfeFXc+LL3hMvmqBEVB4LhlQD4l8VSNM+AuaZIBAg16gPbT1Q1580oH6kH3SILogvIjIDetLIVtdhGi7w==}
+  /@near-wallet-selector/wallet-utils@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-k2Sr66Al9q2T25xQRUlWR4hIEL4LXH24VIHdmKPG9zXT3hlR7zKdHcxEz6vEYgm3fwqva9P9s3WgsZ1+GORtCQ==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
       bn.js: 5.2.1
       near-api-js: 2.1.3
     dev: false
 
-  /@near-wallet-selector/welldone-wallet@8.9.1(near-api-js@2.1.3):
-    resolution: {integrity: sha512-oS/iWmZmfnDP3zKQpo5aC+VuEJbJO+U+xgty6Jddx9yZnDUAXrtfsrC/d79QdN9S2a0UqxS4FtvA+N7I+6EPnQ==}
+  /@near-wallet-selector/welldone-wallet@8.9.2(near-api-js@2.1.3):
+    resolution: {integrity: sha512-QGY7I2NxEYJuPDkhjdbtT/RqmI2b1+4afNBtrx21Ir6XHws1Y711gapshIzdHLetxrmZ5lSdTWh8AWSKvR4gRw==}
     peerDependencies:
       near-api-js: ^1.0.0 || ^2.0.0
     dependencies:
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.3)
-      '@near-wallet-selector/wallet-utils': 8.9.1(near-api-js@2.1.3)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.3)
+      '@near-wallet-selector/wallet-utils': 8.9.2(near-api-js@2.1.3)
       is-mobile: 4.0.0
       near-api-js: 2.1.3
     dev: false
@@ -4623,7 +4616,7 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@types/react': 18.2.25
       react: 18.2.0
     dev: false
@@ -4664,7 +4657,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.25)(react@18.2.0)
       '@radix-ui/react-primitive': 1.0.3(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.25)(react@18.2.0)
@@ -4919,8 +4912,8 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.1
-      '@floating-ui/react-dom': 2.0.2(react-dom@18.2.0)(react@18.2.0)
+      '@babel/runtime': 7.23.4
+      '@floating-ui/react-dom': 2.0.4(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-arrow': 1.0.3(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.25)(react@18.2.0)
       '@radix-ui/react-context': 1.0.1(@types/react@18.2.25)(react@18.2.0)
@@ -5086,7 +5079,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.10)(@types/react@18.2.25)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.25)(react@18.2.0)
@@ -5233,7 +5226,7 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.2.25)(react@18.2.0)
       '@types/react': 18.2.25
       react: 18.2.0
@@ -5473,7 +5466,7 @@ packages:
       '@types/react':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@radix-ui/react-use-callback-ref': 1.0.1(@types/react@18.2.25)(react@18.2.0)
       '@types/react': 18.2.25
       react: 18.2.0
@@ -5589,7 +5582,7 @@ packages:
       react: '>=16.14.0'
       react-dom: '>=16.14.0'
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@popperjs/core': 2.11.8
       '@react-aria/ssr': 3.8.0(react@18.2.0)
       '@restart/hooks': 0.4.11(react@18.2.0)
@@ -7165,10 +7158,10 @@ packages:
     resolution: {integrity: sha512-dlcsNBIiWhPkHdOEEKnehA+RNUWDc4UqFtnIXU4uuYDPtA4LDkr7qip2p0VvFAEXNDr0yWZ9PJyIRiGjRLQzwQ==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
       is-string: 1.0.7
     dev: true
 
@@ -7181,18 +7174,18 @@ packages:
     resolution: {integrity: sha512-LzLoiOMAxvy+Gd3BAq3B7VeIgPdo+Q8hthvKtXybMvRV0jrXfJM/t8mw7nNlpEcVlVUnCnM2KSX4XU5HmpodOA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
       es-shim-unscopables: 1.0.0
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
     dev: true
 
   /array.prototype.flat@1.3.2:
     resolution: {integrity: sha512-djYB+Zx2vLewY8RWlNCUdHjDXs2XOgm602S9E7P/UpHgfeHL00cRiIF+IN/G/aUJ7kGPb6yO/ErDI5V2s8iycA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
       es-shim-unscopables: 1.0.0
@@ -7202,7 +7195,7 @@ packages:
     resolution: {integrity: sha512-Ewyx0c9PmpcsByhSW4r+9zDU7sGjFc86qf/kKtuSCRdhfbk0SNLLkaT5qvcHnRGgc5NP/ly/y+qkXkqONX54CQ==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
       es-shim-unscopables: 1.0.0
@@ -7211,11 +7204,11 @@ packages:
   /array.prototype.tosorted@1.1.2:
     resolution: {integrity: sha512-HuQCHOlk1Weat5jzStICBCd83NxiIMwqDg/dHEsoefabn/hJRj5pVdWcPUSpRrwhwxZOsQassMpgN/xRYFBMIg==}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
       es-shim-unscopables: 1.0.0
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
     dev: true
 
   /arraybuffer.prototype.slice@1.0.2:
@@ -7521,13 +7514,6 @@ packages:
   /cachedir@2.3.0:
     resolution: {integrity: sha512-A+Fezp4zxnit6FanDmv9EqXNAi3vt9DWp51/71UEhXukb7QUuvtv9344h91dyAxuTLoSYJFU299qzR3tzwPAhw==}
     engines: {node: '>=6'}
-    dev: true
-
-  /call-bind@1.0.2:
-    resolution: {integrity: sha512-7O+FbCihrB5WGbFYesctwmTKae6rOiIzmz1icreWJ+0aA7LJfuqhEso2T9ncpcFtzMQtzXf2QGGueWJGTYsqrA==}
-    dependencies:
-      function-bind: 1.1.1
-      get-intrinsic: 1.2.1
     dev: true
 
   /call-bind@1.0.5:
@@ -8118,14 +8104,6 @@ packages:
       clone: 1.0.4
     dev: true
 
-  /define-data-property@1.1.0:
-    resolution: {integrity: sha512-UzGwzcjyv3OtAvolTj1GoyNYzfFR+iqbGjcnBEENZVCpM4/Ng1yhGNvS3lR/xDS74Tb2wGG9WzNSNIOS9UVb2g==}
-    engines: {node: '>= 0.4'}
-    dependencies:
-      get-intrinsic: 1.2.2
-      gopd: 1.0.1
-      has-property-descriptors: 1.0.0
-
   /define-data-property@1.1.1:
     resolution: {integrity: sha512-E7uGkTzkk1d0ByLeSc6ZsFS79Axg+m1P/VsgYsxHgiuc3tFSj+MjMIwe90FC4lOAZzNBdY7kkO2P2wKdsQ1vgQ==}
     engines: {node: '>= 0.4'}
@@ -8138,7 +8116,7 @@ packages:
     resolution: {integrity: sha512-8QmQKqEASLd5nx0U1B1okLElbUuuttJ/AnYmRXbbbGDWh6uS208EjD4Xqq/I9wK7u0v6O08XhTWnt5XtEbR6Dg==}
     engines: {node: '>= 0.4'}
     dependencies:
-      define-data-property: 1.1.0
+      define-data-property: 1.1.1
       has-property-descriptors: 1.0.0
       object-keys: 1.1.1
 
@@ -8259,7 +8237,7 @@ packages:
   /dom-helpers@5.2.1:
     resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       csstype: 3.1.2
     dev: false
 
@@ -8406,11 +8384,11 @@ packages:
       array-buffer-byte-length: 1.0.0
       arraybuffer.prototype.slice: 1.0.2
       available-typed-arrays: 1.0.5
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       es-set-tostringtag: 2.0.1
       es-to-primitive: 1.2.1
       function.prototype.name: 1.1.6
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
       get-symbol-description: 1.0.0
       globalthis: 1.0.3
       gopd: 1.0.1
@@ -8418,7 +8396,7 @@ packages:
       has-property-descriptors: 1.0.0
       has-proto: 1.0.1
       has-symbols: 1.0.3
-      internal-slot: 1.0.5
+      internal-slot: 1.0.6
       is-array-buffer: 3.0.2
       is-callable: 1.2.7
       is-negative-zero: 2.0.2
@@ -8441,7 +8419,7 @@ packages:
       typed-array-byte-offset: 1.0.0
       typed-array-length: 1.0.4
       unbox-primitive: 1.0.2
-      which-typed-array: 1.1.11
+      which-typed-array: 1.1.13
     dev: true
 
   /es-get-iterator@1.1.3:
@@ -8462,12 +8440,12 @@ packages:
     resolution: {integrity: sha512-GhoY8uYqd6iwUl2kgjTm4CZAf6oo5mHK7BPqx3rKgx893YSsy0LGHV6gfqqQvZt/8xM8xeOnfXBCfqclMKkJ5g==}
     dependencies:
       asynciterator.prototype: 1.0.0
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
       es-set-tostringtag: 2.0.1
       function-bind: 1.1.1
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
       globalthis: 1.0.3
       has-property-descriptors: 1.0.0
       has-proto: 1.0.1
@@ -9358,15 +9336,6 @@ packages:
     resolution: {integrity: sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg==}
     engines: {node: 6.* || 8.* || >= 10.*}
 
-  /get-intrinsic@1.2.1:
-    resolution: {integrity: sha512-2DcsyfABl+gVHEfCOaTrWgyt+tb6MSEGmKq+kI5HwLbIYgjgmMcV8KQ41uaKz1xxUcn9tJtgFbQUEVcEbd0FYw==}
-    dependencies:
-      function-bind: 1.1.1
-      has: 1.0.3
-      has-proto: 1.0.1
-      has-symbols: 1.0.3
-    dev: true
-
   /get-intrinsic@1.2.2:
     resolution: {integrity: sha512-0gSo4ml/0j98Y3lngkFEot/zhiCeWsbYIlZ+uZOVgzLyLaUw7wxUL+nCTP0XJvJg1AXulJRI3UJi8GsbDuxdGA==}
     dependencies:
@@ -9879,7 +9848,6 @@ packages:
       get-intrinsic: 1.2.2
       hasown: 2.0.0
       side-channel: 1.0.4
-    dev: false
 
   /intl-messageformat@9.13.0:
     resolution: {integrity: sha512-7sGC7QnSQGa5LZP7bXLDhVDtQOeKGeBFGHF2Y8LVBwYZoQZCgWeKoPGTa5GMG8g/TzDgeXuYJQis7Ggiw2xTOw==}
@@ -10723,8 +10691,8 @@ packages:
   /mdast-util-from-markdown@1.3.1:
     resolution: {integrity: sha512-4xTO/M8c82qBcnQc1tgpNtubGUW/Y1tBQ1B0i5CtSoelOLKFYlElIr3bvgREYYO5iRqbMY1YuqZng0GVOI8Qww==}
     dependencies:
-      '@types/mdast': 3.0.13
-      '@types/unist': 2.0.8
+      '@types/mdast': 3.0.15
+      '@types/unist': 2.0.10
       decode-named-character-reference: 1.0.2
       mdast-util-to-string: 3.2.0
       micromark: 3.2.0
@@ -10819,8 +10787,8 @@ packages:
   /mdast-util-to-markdown@1.5.0:
     resolution: {integrity: sha512-bbv7TPv/WC49thZPg3jXuqzuvI45IL2EVAr/KxF0BSdHsU0ceFHOmwQn6evxAh1GaoK/6GQ1wp4R4oW2+LFL/A==}
     dependencies:
-      '@types/mdast': 3.0.13
-      '@types/unist': 2.0.8
+      '@types/mdast': 3.0.15
+      '@types/unist': 2.0.10
       longest-streak: 3.1.0
       mdast-util-phrasing: 3.0.1
       mdast-util-to-string: 3.2.0
@@ -11359,7 +11327,7 @@ packages:
     resolution: {integrity: sha512-eby+wE6gJeAElFFbsyEMg4bGYIOCcj9LKepkgwdpHwNBCE5wg0dfZVWamQEAa8PPXJK/oz1DU+VvbYQAuB29sg==}
     dependencies:
       '@near-js/transactions': 0.2.1
-      '@near-wallet-selector/core': 8.9.1(near-api-js@2.1.4)
+      '@near-wallet-selector/core': 8.9.2(near-api-js@2.1.4)
       '@near-wallet-selector/wallet-utils': 8.7.0(near-api-js@2.1.4)
       near-api-js: 2.1.4
       tslib: 2.6.2
@@ -11576,7 +11544,7 @@ packages:
     resolution: {integrity: sha512-jCBs/0plmPsOnrKAfFQXRG2NFjlhZgjjcBLSmTnEhU8U6vVTsVe8ANeQJCHTl3gSsI4J+0emOoCgoKlmQPMgmA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
     dev: true
@@ -11585,7 +11553,7 @@ packages:
     resolution: {integrity: sha512-UPbPHML6sL8PI/mOqPwsH4G6iyXcCGzLin8KvEPenOZN5lpCNBZZQ+V62vdjB1mQHrmqGQt5/OJzemUA+KJmEA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
     dev: true
@@ -11593,10 +11561,10 @@ packages:
   /object.groupby@1.0.1:
     resolution: {integrity: sha512-HqaQtqLnp/8Bn4GL16cj+CUYbnpe1bh0TtEaWvybszDG4tgxCJuRpV8VGuvNaI1fAnI4lUJzDG55MXcOH4JZcQ==}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
     dev: true
 
   /object.hasown@1.1.3:
@@ -11610,7 +11578,7 @@ packages:
     resolution: {integrity: sha512-aU6xnDFYT3x17e/f0IiiwlGPTy2jzMySGfUB4fq6z7CV8l85CWHDk5ErhyhpfDHhrOMwGFhSQkhMGHaIotA6Ng==}
     engines: {node: '>= 0.4'}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
     dev: true
@@ -12254,7 +12222,7 @@ packages:
       react: '>=16.3.0'
       react-dom: '>=16.3.0'
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@popperjs/core': 2.11.8
       '@restart/hooks': 0.4.11(react@18.2.0)
       '@types/warning': 3.0.1
@@ -12372,7 +12340,7 @@ packages:
       react: '>=16.6.0'
       react-dom: '>=16.6.0'
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       dom-helpers: 5.2.1
       loose-envify: 1.4.0
       prop-types: 15.8.1
@@ -12750,7 +12718,7 @@ packages:
     resolution: {integrity: sha512-tMNCiqYVkXIZgc2Hnoy2IvC/f8ezc5koaRFkCjrpWzGpCd3qbZXPzVy9MAZzK1ch/X0jvSkojys3oqJN0qCmdA==}
     engines: {node: '>= 0.4'}
     dependencies:
-      define-data-property: 1.1.0
+      define-data-property: 1.1.1
       functions-have-names: 1.2.3
       has-property-descriptors: 1.0.0
 
@@ -12937,10 +12905,10 @@ packages:
   /string.prototype.matchall@4.0.10:
     resolution: {integrity: sha512-rGXbGmOEosIQi6Qva94HUjgPs9vKW+dkG7Y8Q5O2OYkWL6wFaTRZO8zM4mhP94uX55wgyrXzfS2aGtGzUL7EJQ==}
     dependencies:
-      call-bind: 1.0.2
+      call-bind: 1.0.5
       define-properties: 1.2.1
       es-abstract: 1.22.2
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
       has-symbols: 1.0.3
       internal-slot: 1.0.5
       regexp.prototype.flags: 1.5.1
@@ -13404,7 +13372,7 @@ packages:
     peerDependencies:
       react: '>=15.0.0'
     dependencies:
-      '@babel/runtime': 7.23.1
+      '@babel/runtime': 7.23.4
       '@types/react': 18.2.25
       invariant: 2.2.4
       react: 18.2.0
@@ -13613,7 +13581,7 @@ packages:
   /vfile@5.3.7:
     resolution: {integrity: sha512-r7qlzkgErKjobAmyNIkkSpizsFPYiUPuJb5pNW1RB4JcYVZhs4lIbVqk8XPk033CV/1z8ss5pkax8SuhGpcG8g==}
     dependencies:
-      '@types/unist': 2.0.8
+      '@types/unist': 2.0.10
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.3
       vfile-message: 3.1.4
@@ -13730,17 +13698,6 @@ packages:
   /which-module@2.0.1:
     resolution: {integrity: sha512-iBdZ57RDvnOR9AGBhML2vFZf7h8vmBjhoaZqODJBFWHVtKkDmKuHai3cx5PgVMrX5YDNp27AofYbAwctSS+vhQ==}
     dev: false
-
-  /which-typed-array@1.1.11:
-    resolution: {integrity: sha512-qe9UWWpkeG5yzZ0tNYxDmd7vo58HDBc39mZ0xWWpolAGADdFOzkfamWLDxkOWcvHQKVmdTyQdLD4NOfjLWTKew==}
-    engines: {node: '>= 0.4'}
-    dependencies:
-      available-typed-arrays: 1.0.5
-      call-bind: 1.0.5
-      for-each: 0.3.3
-      gopd: 1.0.1
-      has-tostringtag: 1.0.0
-    dev: true
 
   /which-typed-array@1.1.13:
     resolution: {integrity: sha512-P5Nra0qjSncduVPEAr7xhoF5guty49ArDTwzJ/yNuPIbZppyRxFQsRCWrocxIY+CnMVG+qfbU2FmDKyvSGClow==}
@@ -14062,7 +14019,3 @@ packages:
       - supports-color
       - utf-8-validate
     dev: false
-
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
