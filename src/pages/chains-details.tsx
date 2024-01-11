@@ -591,7 +591,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     rpcUrls: string[];
   }) => {
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
-
+    console.log(222, chainId, chainName, rpcUrls);
     etherProvider
       .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }])
       .catch((err) => {

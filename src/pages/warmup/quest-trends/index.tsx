@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
-import styled from 'styled-components';
 
 const QuestTrendsPage = styled.div`
   display: flex;
@@ -25,8 +25,7 @@ const QuestTrendsPage = styled.div`
     justify-content: center;
     flex-direction: column;
     height: 108px;
-    background: linear-gradient(0deg, #181a27, #181a27), linear-gradient(0deg, #332c4b, #332c4b);
-    border: 1px solid #332c4b;
+    background: linear-gradient(0deg, rgba(55, 58, 83, 0), rgba(55, 58, 83, 1));
     gap: 8px;
     padding: 0px 12px;
 
@@ -96,7 +95,7 @@ const QuestTrendsPage = styled.div`
     line-height: 17px;
     letter-spacing: 0em;
     text-align: left;
-    color: #979abe;
+    color: #5e617e;
     width: 250px;
     padding: 8px 12px;
     display: flex;

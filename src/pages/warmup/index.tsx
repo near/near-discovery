@@ -99,6 +99,7 @@ const Page = styled.div`
             height: 30px;
             line-height: 16px;
             width: fit-content;
+            cursor: pointer;
             img {
               width: 12px;
               height: 12px;
@@ -120,7 +121,7 @@ const Page = styled.div`
       align-items: center;
       gap: 12px;
       font-size: 18px;
-      font-weight: 500;
+      font-weight: 700;
       line-height: 22px;
       text-align: left;
     }
@@ -168,7 +169,7 @@ const WarmUp: NextPageWithLayout = () => {
   }: {
     chainId: number;
     chainName: string;
-    rpcUrls: string[];
+    rpcUrls: string;
   }) => {
     const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
 
@@ -207,7 +208,7 @@ const WarmUp: NextPageWithLayout = () => {
                     addMetaMask({
                       chainId: 1101,
                       chainName: 'Polygon zkEVM',
-                      rpcUrls: ['https://zkevm-rpc.com'],
+                      rpcUrls: '["https://zkevm-rpc.com"]',
                     })
                   }
                 >

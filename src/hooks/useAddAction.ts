@@ -19,7 +19,8 @@ export default function useAddAction(source: string) {
 
       if (data.type === 'Swap') {
         params = {
-          action_title: `Swap ${Number(data.inputCurrencyAmount)} ${data.inputCurrency.symbol} on ${data.template}`,
+          // action_title: `Swap ${Number(data.inputCurrencyAmount)} ${data.inputCurrency.symbol} on ${data.template}`,
+          action_title: `Swap ${data.inputCurrency.symbol} on ${data.template}`,
           action_type: 'Swap',
           action_tokens: JSON.stringify([`${data.inputCurrency.symbol}`, `${data.outputCurrency.symbol}`]),
           action_amount: data?.inputCurrencyAmount ? data?.inputCurrencyAmount.toString() : '',

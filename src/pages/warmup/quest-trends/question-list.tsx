@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
-import { QUEST_PATH } from '@/config/quest';
 
 const Container = styled.div`
   margin: 0 8%;
@@ -116,7 +116,7 @@ const ListItem = styled.div`
     .item-title {
       font-size: 16px;
       color: #fff;
-      font-weight: 700;
+      font-weight: 500;
       flex-wrap: wrap;
       text-align: center;
       .num {
@@ -134,6 +134,7 @@ const ListItem = styled.div`
       }
       span {
         font-size: 14px;
+        font-size: 400;
         color: #979abe;
       }
     }
