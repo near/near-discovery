@@ -9,6 +9,7 @@ export const ethereum: { [key: string]: Token } = {
     icon: 'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628',
     decimals: 18,
     isNative: true,
+    address: 'native',
   },
   usdc: {
     chainId: CHAIN_ID,
