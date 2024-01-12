@@ -1,6 +1,9 @@
 import type { WalletSelector } from '@near-wallet-selector/core';
-import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import hereImage from '@near-wallet-selector/here-wallet/assets/here-wallet-icon.png';
+import meteorImage from '@near-wallet-selector/meteor-wallet/assets/meteor-icon.png';
+import myNearImage from '@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png';
+import nightlyImage from '@near-wallet-selector/nightly/assets/nightly.png';
+import { useCallback, useState } from 'react';
 
 import { openToast } from '@/components/lib/Toast';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
@@ -8,33 +11,36 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
-import type { IdosUser, NextPageWithLayout } from '@/utils/types';
+import type { NextPageWithLayout } from '@/utils/types';
 
 const SettingsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const near = useAuthStore((store) => store.vmNear);
+  const accountId = useAuthStore((store) => store.accountId);
   const idOS = useIdosStore((state) => state.idOS);
-  const idosUser = useIdosStore((state) => state.currentUser);
+  const idosProfileExist = useIdosStore((state) => state.hasProfile);
   const idosCredentials = useIdosStore((state) => state.credentials);
+  const connectedWallet = useIdosStore((state) => state.connectedWallet);
   const setIdosStore = useIdosStore((state) => state.set);
   const [error, setError] = useState<string | null>(null);
-  const [showTooltip, setShowTooltip] = useState(false);
-  const createAccountUrl =
-    'https://app.fractal.id/authorize?client_id=PXAbBxPErSPMXiKmMYQ3ged8Qxwqg1Px7ymhsuhaGP4&redirect_uri=https%3A%2F%2Fnear.org%2Fsettings&response_type=code&scope=contact%3Aread%20verification.uniqueness%3Aread%20verification.uniqueness.details%3Aread%20verification.idos%3Aread%20verification.idos.details%3Aread%20verification.wallet-near%3Aread%20verification.wallet-near.details%3Aread';
-  const router = useRouter();
 
   const connectIdOS = useCallback(async () => {
-    if (!near || !idOS) return;
-    const wallet = (await (await near.selector).wallet()) as WalletSelector['wallet'];
+    if (!near || !idOS || !accountId) return;
+    const wallet = (await (await near.selector).wallet()) as WalletSelector['wallet'] | any;
+    const hasProfile = await idOS.hasProfile(accountId);
+    setIdosStore({ hasProfile, connectedWallet: wallet.id });
     try {
-      const currentUser = idosUser ?? ((await idOS.setSigner('NEAR', wallet)) as unknown as IdosUser);
-      setIdosStore({ currentUser });
+      if (hasProfile) {
+        await idOS.setSigner('NEAR', wallet);
+        const credentials = idosCredentials ?? (await idOS.data.list('credentials'));
+        setIdosStore({ credentials });
+      }
     } catch (error: any) {
       console.error('Failed to init wallet + idOS: ', error);
       const errorMessage = error.message ? error.message : 'unknown';
       setError(errorMessage);
     } finally {
-      if ((idosUser && !idosUser.humanId) || (!idosCredentials && error)) {
+      if (!idosCredentials && error) {
         openToast({
           type: 'ERROR',
           title: 'Failed to init wallet + idOS:',
@@ -42,64 +48,26 @@ const SettingsPage: NextPageWithLayout = () => {
         });
       }
     }
-  }, [error, idOS, idosCredentials, idosUser, near, setIdosStore]);
+  }, [near, idOS, accountId, setIdosStore, idosCredentials, error]);
 
-  const collectUserInfo = useCallback(async () => {
-    if (!idOS) {
-      return;
-    }
-
-    try {
-      if (!idosCredentials) {
-        const credentials = idosCredentials ?? (await idOS.data.list('credentials'));
-        setIdosStore({ credentials });
-      }
-    } catch (error: any) {
-      const errorMessage = error.message ? error.message : 'unknown';
-      console.error('Failed to get credentials: ', error);
-      openToast({
-        type: 'ERROR',
-        title: 'Failed to get credentials from IDOS',
-        description: `${errorMessage}`,
-      });
-    }
-  }, [idOS, idosCredentials, setIdosStore]);
-
-  useEffect(() => {
-    if (idosUser && !idosUser.humanId) {
-      openToast({
-        type: 'INFO',
-        title: 'No idOS profile found.',
-        description: "Need an idOS profile? Now you'll be redirected to the idOS website to create one.",
-      });
-
-      setTimeout(() => {
-        router.push(createAccountUrl);
-      }, 3000);
-    }
-  }, [idosUser, idOS, router]);
-
-  useEffect(() => {
-    if (idosUser && idosUser.humanId && !idosCredentials) {
-      collectUserInfo();
-    }
-  }, [collectUserInfo, idosCredentials, idosUser]);
-
-  useEffect(() => {
-    if (router && router.query && router.query.code) {
-      setShowTooltip(true);
-    }
-  }, [router]);
+  const walletImages = [
+    { name: 'meteor-wallet', ...meteorImage },
+    { name: 'here-wallet', ...hereImage },
+    { name: 'my-near-wallet', ...myNearImage },
+    { name: 'nightly-wallet', ...nightlyImage },
+  ];
 
   return (
     <ComponentWrapperPage
       src={components.settings.index}
       meta={{ title: 'NEAR | Settings', description: '' }}
       componentProps={{
-        idosConnected: idosUser?.humanId ?? false,
+        idosConnected: !accountId ? false : idosProfileExist,
         connectIdOS,
-        idosCredentials,
-        showTooltip: showTooltip ?? false,
+        idosCredentials: !accountId ? undefined : idosCredentials,
+        showTooltip: false,
+        walletImages,
+        connectedWallet: !accountId ? undefined : connectedWallet,
       }}
     />
   );
