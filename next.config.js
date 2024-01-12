@@ -58,6 +58,15 @@ const nextConfig = {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
     }
+  ],
+  headers: async () => [
+    {
+        source: '/:path*',
+        headers: [{
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin'
+        }]
+      }
   ]
 };
 
