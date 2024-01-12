@@ -54,12 +54,20 @@ export const mantle: { [key: string]: Token } = {
     name: 'Dai Stablecoin',
     icon: 'https://ipfs.near.social/ipfs/bafkreieuxntkdzi2mzkzdcbk6kahwxqpftxnipxcwc4oe4p4jm2rhj2xhu',
   },
-
   wmnt: {
     address: '0x78c1b0c915c4faa5fffa6cabf0219da63d7f4cb8',
     chainId: CHAIN_ID,
-    symbol: 'WMNT',
     decimals: 18,
+    symbol: 'WMNT',
+    name: 'Wrapped Mantle',
     icon: 'https://ipfs.near.social/ipfs/bafkreibmrdi5ww5rk657jqglnaek5nptc6ze3kljferdsdewcirx4jijhe',
+  },
+  lend: {
+    chainId: CHAIN_ID,
+    address: '0x25356aeca4210ef7553140edb9b8026089e49396',
+    decimals: 18,
+    symbol: 'LEND',
+    name: 'Lendle Protocol Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreig36gyyl6bv2s6f5c2kq22x4omgaclfzyf5ifvjmsxl55svptlq3e',
   },
 };

@@ -160,4 +160,29 @@ export const polygon: { [key: string]: Token } = {
     name: 'RETRO',
     icon: 'https://assets.coingecko.com/coins/images/31136/small/retro.png?1690885867',
   },
+
+  aave: {
+    chainId: CHAIN_ID,
+    address: '0xD6DF932A45C0f255f85145f286eA0b292B21C90B',
+    decimals: 18,
+    symbol: 'AAVE',
+    name: 'Aave (PoS)',
+    icon: 'https://ipfs.near.social/ipfs/bafkreicmsnivbvp2xd3ewcjb5kybgnbnevbcojhn4mgub7rregnbtqcige',
+  },
+  quick: {
+    chainId: CHAIN_ID,
+    address: '0x831753dd7087cac61ab5644b308642cc1c33dc13',
+    decimals: 18,
+    symbol: 'QUICK',
+    name: 'Quickswap',
+    icon: 'https://ipfs.near.social/ipfs/bafkreic7svq723bgukivtik7lb3xujjq24s7wsxto4bfzlh235k2ejzjme',
+  },
+  link: {
+    chainId: CHAIN_ID,
+    address: '0x53E0bca35eC356BD5ddDFebbD1Fc0fD03FaBad39',
+    decimals: 18,
+    symbol: 'LINK',
+    name: 'ChainLink Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreidrq7qk3d6epwaxobq4gk7yowljr5tnslxwrsbd7vnw3srkt7ok3u',
+  },
 };

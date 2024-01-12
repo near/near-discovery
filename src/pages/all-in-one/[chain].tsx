@@ -1,17 +1,18 @@
 import { useSetChain } from '@web3-onboard/react';
-import { ethers } from 'ethers';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import swapConfig from '@/config/swap/networks';
+import lendingConfig from '@/config/lending/networks';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import Spinner from '@/components/Spinner';
 import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { usePriceStore } from '@/stores/price';
+import { multicall } from '@/utils/multicall';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const arrow = (
@@ -193,6 +194,7 @@ const AllInOne: NextPageWithLayout = () => {
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
   const [{ settingChain }, setChain] = useSetChain();
+  const prices = usePriceStore((store) => store.price);
   const { addAction } = useAddAction('all-in-one');
   const popupRef = useRef<HTMLDivElement | null>(null);
 
@@ -302,7 +304,12 @@ const AllInOne: NextPageWithLayout = () => {
                   title: 'Connect with the NEAR community.',
                   description: 'Become part of the NEAR community.',
                 }}
-                componentProps={{ addAction, swapConfig: swapConfig[currentChain?.chainId] }}
+                componentProps={{
+                  addAction,
+                  swapConfig: swapConfig[currentChain?.chainId],
+                  lendingConfig: { ...lendingConfig[currentChain?.chainId], multicall },
+                  prices,
+                }}
               />
             </div>
           </>

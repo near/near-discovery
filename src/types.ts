@@ -6,7 +6,7 @@ interface BasicCurrency {
 
 export interface Token {
   chainId: number;
-  address?: string;
+  address: string;
   name?: string;
   symbol: string;
   icon: string;

@@ -9,6 +9,7 @@ export const optimism: { [key: string]: Token } = {
     icon: 'https://assets.coingecko.com/coins/images/279/standard/ethereum.png?1696501628',
     decimals: 18,
     isNative: true,
+    address: 'native',
   },
   dai: {
     chainId: CHAIN_ID,
@@ -124,5 +125,13 @@ export const optimism: { [key: string]: Token } = {
     symbol: 'WBTC',
     name: 'Wrapped BTC',
     icon: 'https://ipfs.near.social/ipfs/bafkreigdklwcldjo4w7viyrym54hdb43wgpv23mbicetszygzapttbgo7q',
+  },
+  usdt: {
+    chainId: CHAIN_ID,
+    address: '0x94b008aA00579c1307B0EF2c499aD98a8ce58e58',
+    decimals: 6,
+    symbol: 'USDT',
+    name: 'Tether USD',
+    icon: 'https://ipfs.near.social/ipfs/bafkreih45jy7ggj45ck34rf736kb67smsoa52wd7e46c2grh6etd3bhe5i',
   },
 };

@@ -107,4 +107,20 @@ export const linea: { [key: string]: Token } = {
     name: 'Wrapped BTC',
     icon: 'https://assets.coingecko.com/coins/images/7598/small/wrapped_bitcoin_wbtc.png?1548822744',
   },
+  lab: {
+    chainId: CHAIN_ID,
+    address: '0xB97F21D1f2508fF5c73E7B5AF02847640B1ff75d',
+    decimals: 18,
+    symbol: 'LAB',
+    name: 'LineaBank Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihjcqx2wtmzq6l2dobpx7oe5zb5epz3frvgzw6wfnojkps7d6cjce',
+  },
+  mendi: {
+    chainId: CHAIN_ID,
+    address: '0x43E8809ea748EFf3204ee01F08872F063e44065f',
+    decimals: 18,
+    symbol: 'MENDI',
+    name: 'Mendi Finance',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihtevj6whwlekvhfymajsosbhkqxljqwumgniacye724pxvt24tk4',
+  },
 };
