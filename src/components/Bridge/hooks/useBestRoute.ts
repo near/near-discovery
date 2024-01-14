@@ -5,12 +5,15 @@ import { chainCofig } from '@/config/bridge';
 import type { Chain, Token, Trade } from '../types';
 import type { Route } from '@lifi/sdk'
 import { tokens as configTokens } from '@/config/bridge';
+import useToast from '@/hooks/useToast';
 import useStargate from './useStargate';
 import useLifi,  { computeDuration } from './useLifi';
+import { formatException } from '../util/'
 
 export default function useBestRoute() {
   const { getQouteInfo, swap: stargateSwap, gasCost } = useStargate();
   const { getQouteInfo: getLifiQouteInfo, swap: lifiSwap, gasCost: getLifiCost } = useLifi();
+  const { fail } = useToast()
   const [checking, setChecking] = useState(false);
   const [swaping, setSwaping] = useState(false);
   const [trades, setTrades] = useState<Trade[]>([]);
@@ -21,12 +24,14 @@ export default function useBestRoute() {
     inputToken,
     targetToken,
     amount,
+    destination,
   }: {
     chain: Chain;
     targetChain: Chain;
     inputToken: Token;
     targetToken: Token;
     amount?: string;
+    destination?: string;
   }) => {
 
     try {
@@ -43,6 +48,7 @@ export default function useBestRoute() {
         targetChain: targetChain,
         targetToken: targetToken,
         amount: amount ? amount.toString() : '',
+        destination,
       })
 
       if (response) {
@@ -53,7 +59,7 @@ export default function useBestRoute() {
             gasCost: '$' + item?.gasCostUSD,
             dex: 'Lifi',
             route: item,
-            tags: item.tags ? (item.tags as string[]).slice(0, 2) : [],
+            tags: [],
           })
 
           if (item.steps && item.steps.length) {
@@ -84,13 +90,36 @@ export default function useBestRoute() {
             amount: (amount ? new Big(amount || 0).mul(0.995).toFixed(4, 0) : '-') + '  ' + targetToken.symbol,
             gasCost: response,
             dex: 'Stargate',
-            tags: ['Best Return', 'Fastest'],
+            tags: [],
           })
         } catch (e) {
           console.log(e)
         }
       } 
 
+      if (tradeList.length) {
+        let fastestIndex = 0
+        let fastestTime = parseInt(tradeList[0].time)
+        let bestReturnindex = 0
+        let bestReturnAmount = parseFloat(tradeList[0].amount)
+        tradeList.forEach((item, index) => {
+          const currentTime = parseInt(item.time)
+          const currentAmount = parseFloat(item.amount)
+          if (currentTime < fastestTime) {
+            fastestTime = currentTime
+            fastestIndex = index
+          }
+
+          if (currentAmount > bestReturnAmount) {
+            bestReturnAmount = currentAmount
+            bestReturnindex = index
+          }
+        })
+
+        tradeList[bestReturnindex].tags.push('Best Return')
+        tradeList[fastestIndex].tags.push('Fastest')
+      }
+      
       setChecking(false)
       setTrades(tradeList)
     } catch (err) {
@@ -110,6 +139,7 @@ export default function useBestRoute() {
     amount,
     route,
     onSuccess,
+    onFail,
   }: {
     chain: Chain;
     token: Token;
@@ -119,6 +149,7 @@ export default function useBestRoute() {
     destination?: string;
     route?: Trade,
     onSuccess: (hash: string) => void;
+    onFail: () => void;
   }) {
     try {
       setSwaping(true);
@@ -151,11 +182,16 @@ export default function useBestRoute() {
       setSwaping(false);
       setTrades([])
       setChecking(false);
-    } catch (err) {
+    } catch (err: any) {
       console.log(err)
       // setTrades([])
       // setChecking(false);
       setSwaping(false);
+      fail({
+        title: err.name ? err.name : 'Transaction failed',
+        text: formatException(err.message),
+      })
+      onFail()
     }
   };
 

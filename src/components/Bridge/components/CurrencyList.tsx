@@ -15,9 +15,9 @@ const StyledCurrencyList = styled.div`
   }
 `;
 
-function filterBalance (balances: balance[], symbol: string): string {
+function filterBalance (balances: balance[], address: string): string {
   for (const balance of balances) {
-    if (balance.symbol === symbol) {
+    if (balance.address === address) {
       return balance.amount
     }
   }
@@ -46,7 +46,7 @@ const CurrencyList = ({
           key={token.address}
           currency={token}
           loading={loading}
-          balance={filterBalance(balances, token.symbol)}
+          balance={filterBalance(balances, token.address)}
           selectedCurrency={selectedCurrency}
           rpcUrl={chains[token.chainId].rpcUrls[0]}
           chainIcon={chains[token.chainId].icon}

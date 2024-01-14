@@ -17,6 +17,7 @@ const Item = styled.div`
   align-items: center;
   overflow: hidden;
 `;
+
 const DownArrow = styled.div`
   color: #979abe;
 `;
@@ -24,6 +25,12 @@ const ItemLogo = styled.img`
   width: 26px;
   height: 26px;
 `;
+
+const RoundItemLogo = styled(ItemLogo)`
+  border-radius: 26px;
+  display: block;
+`
+
 const ItemSymbol = styled.div`
   font-size: 16px;
   color: #fff;
@@ -47,13 +54,15 @@ interface Item {
   symbol: string;
 }
 
-const Select = ({ item }: { item?: Item }) => {
+const Select = ({ item, roundImg = false }: { item?: Item, roundImg?: boolean }) => {
   return (
     <Container>
       <Item>
         {item ? (
           <>
-            <ItemLogo src={item.icon} />
+            {
+              roundImg ? <RoundItemLogo src={item.icon} /> : <ItemLogo src={item.icon} />
+            }
             <ItemSymbol>{item.symbol}</ItemSymbol>
           </>
         ) : (

@@ -32,7 +32,7 @@ const SelectTokens = ({ token, disabled, onClick }: { token?: Token; disabled?: 
       }}
     >
       <SelectLabel label="Token" />
-      <SelectItem item={token} />
+      <SelectItem roundImg={true} item={token} />
     </Container>
   );
 };

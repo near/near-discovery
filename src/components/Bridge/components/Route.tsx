@@ -27,6 +27,7 @@ const Flex = styled.div`
 const RouteWrapper = styled.div`
   display: flex;
   gap: 10px;
+  align-items: center;
 `;
 const RouteIcon = styled.img`
   width: 30px;
@@ -102,7 +103,7 @@ const Route = (
           <Tags>
             {
               trade.tags?.map((tag, index) => {
-                return index === 0 ? <Tag className="best">{ tag }</Tag> : <Tag className="fast">{ tag }</Tag>
+                return tag.indexOf('Best') > -1 ? <Tag className="best">{ tag }</Tag> : <Tag className="fast">{ tag }</Tag>
               })
             }
           </Tags>

@@ -33,7 +33,27 @@ const Input = styled.input`
   color: #fff;
   background-color: transparent;
   flex-grow: 1;
+  &::placeholder {
+    color: #979ABE;
+    font-size: 14px;
+    font-weight: 400;
+  }
 `;
+
+const Paste = styled.div`
+  width: 39px;
+  height: 22px;
+  line-height: 22px;
+  text-align: center;
+  flex-shrink: 0;
+  border-radius: 4px;
+  border: 1px solid #979ABE;
+  background: rgba(151, 154, 190, 0.30);
+  color: #979ABE;
+  font-size: 12px;
+  font-weight: 400;
+  cursor: pointer;
+`
 
 const Destination = ({
   checked,
@@ -67,10 +87,17 @@ const Destination = ({
         <InputWrapper>
           <Input
             value={destination}
+            placeholder='Destination Address'
             onChange={(ev) => {
               setDestination(ev.target.value);
             }}
           />
+          <Paste onClick={async () => {
+            const val = await navigator.clipboard.readText()
+            if (val) {
+              setDestination(val)
+            }
+          }}>Paste</Paste>
         </InputWrapper>
       )}
     </Container>

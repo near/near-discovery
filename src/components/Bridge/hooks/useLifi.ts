@@ -216,11 +216,12 @@ export default function useLifi() {
       const tx = await lifi.executeRoute(signer, route);
       console.log(tx)
       try {
-        const process = tx.steps[0].execution?.process
+        const process = tx.steps[tx.steps.length - 1].execution?.process
         if (!process) {
           return
         }
-        let txHash = process[0].txHash
+        let txHash = process[process.length - 1].txHash
+        const txLink = process[process.length - 1].txLink
         const start = process[0].startedAt
         const end = process[process.length - 1].doneAt as number
         const duration =  Math.ceil((end - start) / 1000 / 60)
@@ -249,6 +250,7 @@ export default function useLifi() {
           outputChain: targetChain.chainName,
           symbol: token.symbol,
           tx: txHash,
+          txLink,
           time: Date.now(),
           scan: chain.blockExplorers,
           isStargate: false,

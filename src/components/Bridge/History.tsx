@@ -95,7 +95,7 @@ const History = ({ tx }: { tx: any }) => {
       </StyledDesc>
       <StyledDesc mt={6}>
         {formateTxDate(tx.time)}{' '}
-        <StyledTx href={tx.scan + '/tx/' + tx.tx} target="_blank">
+        <StyledTx href={tx.txLink ? tx.txLink : tx.scan + '/tx/' + tx.tx} target="_blank">
           Tx
         </StyledTx>
       </StyledDesc>

@@ -54,6 +54,7 @@ export default function useTokenBalance({
 export interface balance {
     symbol: string;
     amount: string;
+    address: string;
 }
 
 export function useTokensBalance({ 
@@ -91,6 +92,7 @@ export function useTokensBalance({
                     setBalances(amountBigThan0.map(token => ({
                         symbol: token.symbol,
                         amount: token.amount,
+                        address: token.address,
                     })))
                     
                 } else {
