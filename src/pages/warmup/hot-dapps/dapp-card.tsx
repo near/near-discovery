@@ -10,7 +10,7 @@ const DappCardWrapper = styled.a`
   text-decoration: none;
 
   gap: 6px;
-  width: 248px;
+  width: 240px;
   height: 108px;
   border-radius: 20px;
 

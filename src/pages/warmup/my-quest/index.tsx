@@ -138,7 +138,7 @@ const NoQuestWrapper = styled.div`
 const CardListWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 18px;
+  gap: 17px;
   flex-wrap: wrap;
   margin-bottom: 60px;
   .CardListWrapper-title {

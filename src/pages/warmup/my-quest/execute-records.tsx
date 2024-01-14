@@ -555,11 +555,11 @@ const select_template_list = [
     name: 'Native Bridge',
     icon: template_icons['native bridge'],
   },
-  {
-    id: '0vix Lending',
-    name: '0vix',
-    icon: template_icons['0vix Lending'],
-  },
+  // {
+  //   id: '0vix Lending',
+  //   name: '0vix',
+  //   icon: template_icons['0vix Lending'],
+  // },
   {
     id: 'Gamma',
     name: 'Gamma',
