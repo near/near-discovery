@@ -86,7 +86,7 @@ const InviteFirendsModal = ({
 }) => {
   const { list: codeList, loading } = useInviteCode(open);
   const { copy } = useCopy();
-  const newCodes = useMemo(() => codeList.filter((code, i) => !code.is_used && i < 8), [codeList]);
+  const newCodes = useMemo(() => codeList.filter((code, i) => !code.is_used), [codeList]);
   const { loading: claiming, handleClaim } = useRewardsClaim();
   return (
     <Modal
