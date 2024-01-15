@@ -14,11 +14,31 @@ export default ({
 }) => {
   const { chainId } = useAccount()
 
+  const _chainId = chainId ? chainId : 1
+  const initiInputChain = chains[_chainId]
 
-  const [inputToken, setInputToken] = useState<Token>();
+  const [inputToken, setInputToken] = useState<Token | undefined>();
   const [outputToken, setOutputToken] = useState<Token>();
-  const [inputChain, setInputChain] = useState<Chain | undefined>(chainId ? chains[chainId] : chains[1]);
+  const [inputChain, setInputChain] = useState<Chain | undefined>(initiInputChain);
   const [outputChain, setOutputChain] = useState<Chain>();
+
+  let initInputToken = undefined
+  if (inputChain) {
+    const chainTokens = lifiTokens[inputChain?.chainId]
+    if (chainTokens?.length) {
+      chainTokens.some(token => {
+        if (token.symbol === 'ETH') {
+          initInputToken = token
+          return true
+        }
+        return false
+      })
+    }
+
+    if (!inputToken && initInputToken) {
+      setInputToken(initInputToken)
+    }
+  }
 
   const selectChain = useCallback(
     (type: 'in' | 'out', chain: Chain) => {

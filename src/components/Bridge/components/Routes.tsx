@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import styled from 'styled-components';
 
 import ArrowIcon from '@/components/Icons/ArrowIcon';
@@ -25,6 +25,7 @@ const AmountWrapper = styled.div`
   gap: 5px;
   color: #979abe;
   align-items: center;
+  cursor: pointer;
 `;
 const Amount = styled.div`
   font-size: 12px;
@@ -33,6 +34,10 @@ const Amount = styled.div`
 const AmountArrow = styled.div`
   transform: rotate(-90deg);
 `;
+
+const AmountArrowMore = styled.div`
+`;
+
 const Content = styled.div`
   margin-top: 10px;
 `;
@@ -44,27 +49,44 @@ const Routes = ({
   selectedTradeIndex: number;
   onSelected: (index: number) => void
 }) => {
+
+  const [showMore, setShowMore] = useState<boolean>(false)
+
   return (
     <Container>
-      {/* <Header>
-        <Label>Select Bridge Route</Label>
-        <AmountWrapper>
-          <Amount>1 Routes</Amount>
-          <AmountArrow>
-            <ArrowIcon size={10} />
-          </AmountArrow>
-        </AmountWrapper>
-      </Header> */}
-      {trades && (
-        <Content>
-          {
-            trades ? trades.map((trade, index) => 
-            <Route key={trade.amount} onSelected={() => {
-              onSelected(index)
-            }} selected={ selectedTradeIndex === index } trade={trade} />): null
-          }
-        </Content>
-      )}
+      {trades && trades.length ? (
+        <>
+          <Header>
+            <Label>Select Bridge Route</Label>
+            <AmountWrapper onClick={() => {
+              setShowMore(!showMore)
+            }}>
+              <Amount>{trades?.length} Routes</Amount>
+              {
+                showMore ? 
+                <AmountArrowMore>
+                  <ArrowIcon size={10} />
+                </AmountArrowMore> : 
+                <AmountArrow>
+                  <ArrowIcon size={10} />
+                </AmountArrow>
+              }
+            </AmountWrapper>
+          </Header>
+          <Content>
+              {
+                trades.map((trade, index) => {
+                  return (
+                    index === 0 || showMore ? <Route key={trade.amount} onSelected={() => {
+                      onSelected(index)
+                    }} selected={ selectedTradeIndex === index } trade={trade} 
+                    /> : null
+                  )
+                })
+              }
+            </Content>
+        </>
+      ) : null}
     </Container>
   );
 };

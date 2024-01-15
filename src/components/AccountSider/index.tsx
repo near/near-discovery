@@ -36,11 +36,11 @@ const StyledPanel = styled.div`
   border: 1px solid #343838;
   box-sizing: border-box;
   padding: 20px 0px 0px;
-  background-color: #141414;
+  background: #262836;
   position: relative;
   z-index: 52;
   height: 100%;
-  --padding-x: 20px;
+  --padding-x: 15px;
 `;
 const Content = styled.div`
   position: relative;
@@ -124,6 +124,7 @@ const AccountSider = () => {
         <StyledPanel>
           <Content>
             <Header showCodes={showCodes} setShowCodes={setShowCodes} />
+            <Footer />
             <Main>
               {tab === 'account' && (
                 <AccountWrapper count={count} setTab={setTab} showChains={showChains} setShowChains={setShowChains} />
@@ -142,9 +143,9 @@ const AccountSider = () => {
                 />
               )}
             </Main>
-            <Footer />
+            
           </Content>
-          <Bg $chain={chainId || 0} />
+          {/* <Bg $chain={chainId || 0} /> */}
         </StyledPanel>
         {layoutStore.showAccountSider && (
           <CloseIcon

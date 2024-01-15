@@ -40,6 +40,7 @@ const Button = ({
   swaping,
   route,
   onSuccess,
+  onFail,
 }: {
   errorTips: string;
   inputToken?: Token;
@@ -51,6 +52,7 @@ const Button = ({
   chainId?: number;
   checking?: boolean;
   onSuccess: (hash: string) => void;
+  onFail?: () => void;
   swap: any;
   route?: any;
   swaping?: boolean;
@@ -121,7 +123,8 @@ const Button = ({
           amount,
           route,
           onSuccess,
-        });
+          onFail,
+        })
       }}
       disabled={swaping || !inputToken || !inputChain || !outputToken || !outputChain}
     >

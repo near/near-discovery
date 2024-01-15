@@ -41,11 +41,18 @@ const Label = styled.div`
   color: #979abe;
   margin-top: 10px;
 `;
+
+const LabelTopMinus = styled(Label)`
+  margin-top: -30px;
+`
+
 const StyledExchangeIcon = styled.div`
   color: #979abe;
   width: 30px;
   height: 30px;
-  margin: 20px auto 0px;
+  margin: 10px auto 0px;
+  position: relative;
+  z-index: 10;
 `;
 
 const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
@@ -78,6 +85,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
       } else if (type === 'token') {
         const curChain = clickType === 'in' ? inputChain : outputChain 
         if (curChain) {
+          console.log(lifiTokens[curChain.chainId])
           setSelectableTokens(lifiTokens[curChain.chainId])
           setShowTokenDialog(true)
         }
@@ -96,9 +104,17 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   const handleBestRoute = useCallback(() => {
     setTrades([])
     setErrorTips('')
+    setSelectedTradeIndex(-1)
     if (!inputChain || !outputChain || !outputToken || !inputToken) return;
-    getBestRoute({ chain: inputChain, inputToken, targetToken: outputToken, targetChain: outputChain, amount });
-  }, [inputChain, outputChain, outputToken, inputToken, amount]);
+    getBestRoute({ 
+      chain: inputChain, 
+      inputToken, 
+      targetToken: outputToken, 
+      targetChain: outputChain, 
+      amount, 
+      destination: checked ? destination : undefined 
+    });
+  }, [inputChain, outputChain, outputToken, inputToken, amount, destination]);
 
   useEffect(() => {
     if (!amount || new Big(amount).eq(0)) {
@@ -121,6 +137,13 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
       setErrorTips('Change destination address');
       return;
     }
+
+    if (!(trades && trades.length) && !checking) {
+      // setErrorTips('Relayer: gas too low');
+      setErrorTips('no route');
+      return;
+    }
+
     if (amount) {
       if (new Big(amount).gt(balance || 0)) {
         setErrorTips('Insufficient balance');
@@ -133,13 +156,14 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
     //   return;
     // }
 
-    if (!(trades && trades.length) && !checking) {
+    if ((trades && trades.length) && selectedTradeIndex === -1) {
       // setErrorTips('Relayer: gas too low');
-      setErrorTips('Relayer: no route');
+      setErrorTips('select a route');
       return;
     }
+
     setErrorTips('');
-  }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, trades]);
+  }, [inputChain, outputChain, amount, balance, destination, chainId, gasCost, trades, selectedTradeIndex]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -149,15 +173,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
     return () => {
       clearTimeout(timer);
     };
-  }, [inputChain, outputChain, amount, outputToken, inputToken]);
-
-  useEffect(() => {
-    if (trades.length) {
-      setSelectedTradeIndex(0)
-    } else {
-      setSelectedTradeIndex(-1)
-    }
-  }, [trades])
+  }, [inputChain, outputChain, amount, outputToken, inputToken, destination]);
 
   const route = trades.length && selectedTradeIndex > -1 ? trades[selectedTradeIndex] : null
 
@@ -186,7 +202,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             <ExchangeIcon />
           </StyledExchangeIcon>
           <>
-            <Label>To</Label>
+            <LabelTopMinus>To</LabelTopMinus>
             <Select
               token={outputToken}
               chain={outputChain}
@@ -210,15 +226,11 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             destination={destination}
             setDestination={setDestination}
           />
-          {
-            selectedTradeIndex > -1 
-            ? <Routes 
-                trades={trades} 
-                selectedTradeIndex={selectedTradeIndex}
-                onSelected={setSelectedTradeIndex}
-              /> 
-            : null
-          }
+          <Routes 
+            trades={trades} 
+            selectedTradeIndex={selectedTradeIndex}
+            onSelected={setSelectedTradeIndex}
+          /> 
           <Button
             errorTips={errorTips}
             inputToken={inputToken}
@@ -235,6 +247,10 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             onSuccess={(hash) => {
               setUpdater(Date.now());
               onSuccess();
+              handleBestRoute()
+            }}
+            onFail={() => {
+              handleBestRoute()
             }}
           />
         </>

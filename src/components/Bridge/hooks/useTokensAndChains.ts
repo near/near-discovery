@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import _ from 'lodash'
 
-import { chains as configChains,tokens as configTokens } from '@/config/bridge';
+import { chains as configChains, tokens as configTokens } from '@/config/bridge';
 import { getLifiChains, getLifiTokens } from './useLifi'
 
 import type { Chain, Token } from '../types';
@@ -15,13 +15,13 @@ export default function useTokensAndChains() {
 
   useEffect(() => {
     const _chains: { [key: number]: Chain } = {};
+
     Object.values(configChains).forEach((chain) => {
       _chains[chain.chainId] = chain;
     });
 
     setChains(_chains);
 
-    
 
     // getLifiChains().then((lifiChains) => {
     //   lifiChains.forEach(chain => {

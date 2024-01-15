@@ -6,8 +6,8 @@ export function formateTxDate(_date: any) {
   const day = date.getDate();
   const year = date.getFullYear();
   const hour = date.getHours();
-  const toTwo = (num: number) => (num > 10 ? num : '0' + num);
-  const hourStr = hour > 12 ? 23 - hour : hour;
+  const toTwo = (num: number) => (num >= 10 ? num : '0' + num);
+  const hourStr = hour % 12;
   const minutes = date.getMinutes();
   const unit = hour > 11 ? 'PM' : 'AM';
 

@@ -15,8 +15,8 @@ const Header = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
-  padding-left: var(--padding-x);
-  padding-right: var(--padding-x);
+  padding-left: 25px;
+  padding-right: 25px;
 `;
 const StyledArrowIcon = styled.div`
   cursor: pointer;
@@ -82,7 +82,7 @@ const BridgeWrapper = ({
   const [showHistory, setShowHistory] = useState(false);
   return (
     <StyledBridgeWrapper>
-      <Split mt={20} />
+      <Split mt={0} />
       <Header>
         <StyledArrowIcon
           onClick={() => {
