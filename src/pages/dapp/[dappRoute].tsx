@@ -8,12 +8,16 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useChainsStore } from '@/stores/chains';
 import { useDappStore } from '@/stores/dapp';
 import { useLayoutStore } from '@/stores/layout';
+import { usePriceStore } from '@/stores/price';
 import useAddAction from '@/hooks/useAddAction';
 import Breadcrumb from '@/components/Breadcrumb';
 import dappConfig from '@/config/dapp';
 import wethConfig from '@/config/contract/weth';
+import multicallConfig from '@/config/contract/multicall';
+import { multicall } from '@/utils/multicall';
 import chainsConfig from '@/config/chains';
 import { bridge as dappBridgeTheme } from '@/config/theme/dapp';
+import { useDebounceFn } from 'ahooks';
 import type { NextPageWithLayout } from '@/utils/types';
 
 // set dynamic routes for dapps in config file
@@ -27,7 +31,7 @@ const DappName = styled.div`
   line-height: normal;
 `;
 
-export const DappPage: NextPageWithLayout = (props) => {
+export const DappPage: NextPageWithLayout = () => {
   const router = useRouter();
   const chains = useChainsStore((store: any) => store.chains);
   const { chainId } = useAccount();
@@ -38,6 +42,7 @@ export const DappPage: NextPageWithLayout = (props) => {
   const [currentChain, setCurrentChain] = useState<any>();
   const [ready, setReady] = useState(false);
   const [localConfig, setLocalConfig] = useState<any>();
+  const prices = usePriceStore((store) => store.price);
   const dappPathname = router.query.dappRoute as string;
 
   const bridgeCb = useCallback(
@@ -73,8 +78,21 @@ export const DappPage: NextPageWithLayout = (props) => {
     if (config.type === 'swap') {
       result = await import(`@/config/swap/dapps/${dappPathname}`);
     }
+    if (config.type === 'lending') {
+      result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
+    }
     setLocalConfig({ ...result, theme: config.theme });
   }, [dappPathname]);
+
+  const { run } = useDebounceFn(
+    (chain_id) => {
+      if (!chains?.length) return;
+      setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chain_id));
+    },
+    {
+      wait: 500,
+    },
+  );
 
   useEffect(() => {
     setReady(true);
@@ -85,15 +103,14 @@ export const DappPage: NextPageWithLayout = (props) => {
   }, [dappPathname]);
 
   useEffect(() => {
-    if (!chainId) return;
     if (!chains?.length) return;
-    setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chainId));
-  }, [chainId]);
+    run(default_chain_id);
+  }, [chains, default_chain_id]);
 
   useEffect(() => {
-    if (!chains?.length) return;
-    setCurrentChain(chains.find((_chain: any) => _chain.chain_id === default_chain_id));
-  }, [chains, default_chain_id]);
+    if (!currentChain || !chainId || !chains?.length) return;
+    run(chainId);
+  }, [chainId]);
 
   const network = useMemo(
     () => dapp.dapp_network?.find((_network: any) => _network.network_id === currentChain?.id),
@@ -128,17 +145,20 @@ export const DappPage: NextPageWithLayout = (props) => {
             defaultDex: dapp.name,
             ...dapp,
             wethAddress: wethConfig[currentChain.chain_id],
+            multicallAddress: multicallConfig[currentChain.chain_id],
             dexConfig: {
               ...localConfig.basic,
               ...localConfig.networks[currentChain.chain_id],
               theme: localConfig.theme,
             },
+            prices,
             addAction,
             bridgeCb,
             onSwitchChain: setChain,
             switchingChain: settingChain,
             nativeCurrency: chainsConfig[currentChain.chain_id].nativeCurrency,
             theme: { bridge: dappBridgeTheme[currentChain.chain_id] },
+            multicall,
           }}
           src={network.dapp_src}
         />

@@ -9,4 +9,4 @@ export default {
   10: '0xD9bfE9979e9CA4b2fe84bA5d4Cf963bBcB376974',
   137: '0xed386Fe855C1EFf2f843B910923Dd8846E45C5A4',
   324: '0x1ADC6Ac76c6d35cED013cA0513919f7f53586fAf',
-};
+} as { [key: number]: string };
