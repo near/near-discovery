@@ -3,9 +3,10 @@ import hereImage from '@near-wallet-selector/here-wallet/assets/here-wallet-icon
 import meteorImage from '@near-wallet-selector/meteor-wallet/assets/meteor-icon.png';
 import myNearImage from '@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png';
 import nightlyImage from '@near-wallet-selector/nightly/assets/nightly.png';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { openToast } from '@/components/lib/Toast';
+import type { ToastType } from '@/components/lib/Toast/store';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -22,7 +23,14 @@ const SettingsPage: NextPageWithLayout = () => {
   const idosCredentials = useIdosStore((state) => state.credentials);
   const connectedWallet = useIdosStore((state) => state.connectedWallet);
   const setIdosStore = useIdosStore((state) => state.set);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<{ type: ToastType; title: string; description?: string } | null>(null);
+
+  const walletImages = [
+    { name: 'meteor-wallet', ...meteorImage },
+    { name: 'here-wallet', ...hereImage },
+    { name: 'my-near-wallet', ...myNearImage },
+    { name: 'nightly-wallet', ...nightlyImage },
+  ];
 
   const connectIdOS = useCallback(async () => {
     if (!near || !idOS || !accountId) return;
@@ -34,28 +42,32 @@ const SettingsPage: NextPageWithLayout = () => {
         await idOS.setSigner('NEAR', wallet);
         const credentials = idosCredentials ?? (await idOS.data.list('credentials'));
         setIdosStore({ credentials });
+      } else {
+        setError({
+          type: 'INFO',
+          title: `No idOS profile found for ${accountId}`,
+        });
       }
     } catch (error: any) {
       console.error('Failed to init wallet + idOS: ', error);
       const errorMessage = error.message ? error.message : 'unknown';
-      setError(errorMessage);
-    } finally {
-      if (!idosCredentials && error) {
-        openToast({
-          type: 'ERROR',
-          title: 'Failed to init wallet + idOS:',
-          description: `${error}`,
-        });
-      }
+      setError({
+        type: 'ERROR',
+        title: 'Falilure during idOS initialization:',
+        description: `${errorMessage}`,
+      });
     }
-  }, [near, idOS, accountId, setIdosStore, idosCredentials, error]);
+  }, [near, idOS, accountId, setIdosStore, idosCredentials]);
 
-  const walletImages = [
-    { name: 'meteor-wallet', ...meteorImage },
-    { name: 'here-wallet', ...hereImage },
-    { name: 'my-near-wallet', ...myNearImage },
-    { name: 'nightly-wallet', ...nightlyImage },
-  ];
+  useEffect(() => {
+    if (!idosCredentials && error) {
+      openToast({
+        type: error.type,
+        title: error.title,
+        description: error.description,
+      });
+    }
+  }, [error, idosCredentials]);
 
   return (
     <ComponentWrapperPage
