@@ -4,6 +4,7 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { LANDING_CHAINS } from '@/config/bridge/chains';
 import useAddAction from '@/hooks/useAddAction';
 import { useChainsStore } from '@/stores/chains';
+import { CHAIN_ID } from './config';
 
 const Bridge = ({ onSuccess }: { onSuccess: VoidFunction }) => {
   const chains = useChainsStore((store: any) => store.chains);
@@ -14,7 +15,7 @@ const Bridge = ({ onSuccess }: { onSuccess: VoidFunction }) => {
     );
   }, [chains]);
   const currentChain = useMemo(() => {
-    const _chainId = 1101;
+    const _chainId = CHAIN_ID;
     return chains.find((chain: any) => chain.chain_id === _chainId);
   }, [chains]);
 
@@ -22,7 +23,7 @@ const Bridge = ({ onSuccess }: { onSuccess: VoidFunction }) => {
     <ComponentWrapperPage
       componentProps={{
         chains: supportChains,
-        currentChain: { ...currentChain, src: LANDING_CHAINS[1101] },
+        currentChain: { ...currentChain, src: LANDING_CHAINS[CHAIN_ID] },
         addAction: (data: any) => {
           addAction(data);
           onSuccess();
