@@ -45,6 +45,8 @@ import {
   signInContractId,
 } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
+import { useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/router';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
@@ -60,7 +62,9 @@ export default function VmInitializer() {
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
+  const searchParams = useSearchParams();
   const idOS = useIdOS();
+  const router = useRouter();
   const idosSDK = useIdosStore((state) => state.idOS);
 
   useEffect(() => {
@@ -88,7 +92,6 @@ export default function VmInitializer() {
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-              walletUrl: 'http://localhost:3000',
             }),
             setupKeypom({
               trialAccountSpecs: {
@@ -145,6 +148,19 @@ export default function VmInitializer() {
       setWalletModal(selectorModal);
     });
   }, [idOS, near]);
+
+  useEffect(() => {
+    // Show wallet selector
+    window.addEventListener(
+      'message',
+      (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+        if (e.data.showWalletSelector) {
+          walletModal?.show();
+        }
+      },
+      false,
+    );
+  }, [walletModal]);
 
   const requestSignMessage = useCallback(
     async (message: string) => {
