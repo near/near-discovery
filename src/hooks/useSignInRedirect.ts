@@ -32,18 +32,14 @@ export function useSignInRedirect() {
     (createAccount = false) => {
       saveCurrentUrl();
       if (!vmNear) return;
-      if (createAccount) {
-        vmNear.selector
-          .then((selector: any) => selector.wallet('fast-auth-wallet'))
-          .then((fastAuthWallet: any) =>
-            fastAuthWallet.signIn({
-              contractId: vmNear.config.contractName,
-              isRecovery: false,
-            }),
-          );
-      } else {
-        router.push('/signin');
-      }
+      vmNear.selector
+        .then((selector: any) => selector.wallet('fast-auth-wallet'))
+        .then((fastAuthWallet: any) =>
+          fastAuthWallet.signIn({
+            contractId: vmNear.config.contractName,
+            isRecovery: !createAccount,
+          }),
+        );
     },
     [router, saveCurrentUrl, vmNear],
   );
