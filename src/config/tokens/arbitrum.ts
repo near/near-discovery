@@ -251,4 +251,20 @@ export const arbitrum: { [key: string]: Token } = {
     name: 'Rocket Pool ETH',
     icon: 'https://ipfs.near.social/ipfs/bafkreicgk4jnpvyfe7jqup46y5epyxoemounktft6yxtym7o7wcagiecpy',
   },
+  sushi: {
+    chainId: CHAIN_ID,
+    address: '0xd4d42F0b6DEF4CE0383636770eF773390d85c61A',
+    decimals: 18,
+    symbol: 'SUSHI',
+    name: 'SushiToken',
+    icon: 'https://ipfs.near.social/ipfs/bafkreif5a3jne5ol2d57r2terziofqhosgl5txptv7q7bit42qt5jzoaqa',
+  },
+  sliz: {
+    chainId: CHAIN_ID,
+    address: '0x463913D3a3D3D291667D53B8325c598Eb88D3B0e',
+    decimals: 18,
+    symbol: 'SLIZ',
+    name: 'SolidLizard dex token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreifygw42y5orsb3l4xxz2blupunkfu4dh3nqlspvc5c3dciadkrcfi',
+  },
 };

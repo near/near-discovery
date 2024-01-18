@@ -51,7 +51,7 @@ export const ethereum: { [key: string]: Token } = {
     icon: 'https://assets.coingecko.com/coins/images/13422/standard/FRAX_icon.png?1696513182',
     decimals: 18,
   },
-  sUSD: {
+  susd: {
     address: '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51',
     chainId: CHAIN_ID,
     name: 'Synth sUSD',

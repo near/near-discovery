@@ -1,6 +1,5 @@
 import type { Chain } from '@/types';
 
-
 //TODO: need wrap token address
 //TODO: need all chains live on dapdap
 
@@ -129,7 +128,14 @@ const chainCofig = {
     rpcUrls: ['https://rpc.ankr.com/gnosis'],
     blockExplorers: 'https://gnosisscan.io/',
   },
+  169: {
+    chainId: 169,
+    chainName: 'Manta',
+    icon: 'https://assets.dapdap.net/images/bafkreiazsyndhevopspbjue3ztz5r5mypuzpa5gjragm3hdg6ey33rfheu.svg',
+    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+    rpcUrls: ['https://1rpc.io/manta'],
+    blockExplorers: 'https://pacific-explorer.manta.network/',
+  },
 } as { [key: number]: Chain };
 
-
-export default chainCofig
+export default chainCofig;

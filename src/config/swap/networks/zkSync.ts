@@ -2,6 +2,7 @@ import { basic as spaceFiBasic, networks as spaceFiNetworks } from '../dapps/spa
 import { basic as velocoreV1Basic, networks as velocoreV1Networks } from '../dapps/velocore-v1';
 import { basic as veSyncBasic, networks as veSyncNetworks } from '../dapps/ve-sync';
 import { basic as syncSwapBasic, networks as syncSwapNetworks } from '../dapps/sync-swap';
+import { basic as zkSwapBasic, networks as zkSwapNetworks } from '../dapps/zk-swap';
 
 const CHAIN_ID = 324;
 
@@ -31,6 +32,10 @@ export default {
     Syncswap: {
       ...syncSwapBasic,
       ...syncSwapNetworks[CHAIN_ID],
+    },
+    'zkSwap Finance': {
+      ...zkSwapBasic,
+      ...zkSwapNetworks[CHAIN_ID],
     },
   },
 };

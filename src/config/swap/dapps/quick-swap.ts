@@ -1,5 +1,6 @@
 import { polygon } from '@/config/tokens/polygon';
 import { polygonZkevm } from '@/config/tokens/polygonZkevm';
+import { manta } from '@/config/tokens/manta';
 
 const basic = {
   name: 'QuickSwap',
@@ -32,6 +33,26 @@ const networks = {
       polygonZkevm['matic'],
       polygonZkevm['usdt'],
       polygonZkevm['dai'],
+    ],
+  },
+  169: {
+    routerAddress: '0xfdE3eaC61C5Ad5Ed617eB1451cc7C3a0AC197564',
+    quoterAddress: '0x3005827fB92A0cb7D0f65738D6D645d98A4Ad96b',
+    amountOutFn: 'bluebiu.near/widget/PolygonZkevm.Swap.QuickSwapAmountOut',
+    defaultCurrencies: {
+      input: manta['weth'],
+      output: manta['usdc'],
+    },
+    tokens: [
+      manta['weth'],
+      manta['usdc'],
+      manta['usdt'],
+      manta['wbtc'],
+      manta['dai'],
+      manta['matic'],
+      manta['quick'],
+      manta['wsteth'],
+      manta['wusdm'],
     ],
   },
 };

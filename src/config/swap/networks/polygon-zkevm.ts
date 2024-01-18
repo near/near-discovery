@@ -1,6 +1,7 @@
 import { basic as quickSwapBasic, networks as quickSwapNetworks } from '../dapps/quick-swap';
 import { basic as balancerBasic, networks as balancerNetworks } from '../dapps/balancer';
 import { basic as pancakeSwapBasic, networks as pancakeSwapNetworks } from '../dapps/pancake-swap';
+import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
 
 const CHAIN_ID = 1101;
 
@@ -26,6 +27,10 @@ export default {
     'Pancake Swap': {
       ...pancakeSwapBasic,
       ...pancakeSwapNetworks[CHAIN_ID],
+    },
+    SushiSwap: {
+      ...sushiBasic,
+      ...sushiNetworks[CHAIN_ID],
     },
   },
 };

@@ -13,7 +13,7 @@ export default {
     noAccountTips: 'Linea Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Linea Chain.',
   },
-  defalutDex: 'Syncswap',
+  defalutDex: 'HorizonDEX',
   dexs: {
     HorizonDEX: {
       ...HorizonDEXBasic,

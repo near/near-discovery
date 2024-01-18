@@ -296,11 +296,11 @@ const networks = {
         stableDebtTokenAddress: '0xC539CA809d6d7C3B37759c4A4484202204AA1484',
         variableDebtTokenAddress: ' 0x9dd559b1d7454979b1699d710885Ba5C658277E3',
       },
-      [optimism['sUSD'].address]: {
+      [optimism['susd'].address]: {
         decimals: 18,
         symbol: 'grainSUSD',
         address: '0x8AaA9d29305D331aE67AD65495B9e22cf98f9035',
-        underlyingToken: optimism['sUSD'],
+        underlyingToken: optimism['susd'],
         stableDebtTokenAddress: '0xF0E94bdC2D589EaD059072aC1BF27c67ACf931B6',
         variableDebtTokenAddress: '0xc0031304549E494f1F48A9AC568242B1a6Ca1804',
       },

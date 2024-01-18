@@ -3,6 +3,7 @@ import { basic as apeBasic, networks as apeNetworks } from '../dapps/ape';
 import { basic as honeyBasic, networks as honeyNetworks } from '../dapps/honey-swap';
 import { basic as quickSwapBasic, networks as quickSwapNetworks } from '../dapps/quick-swap';
 import { basic as pearlFiBasic, networks as pearlFiNetworks } from '../dapps/pearl-fi';
+import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
 
 const CHAIN_ID = 137;
 
@@ -36,6 +37,10 @@ export default {
     PearlFi: {
       ...pearlFiBasic,
       ...pearlFiNetworks[CHAIN_ID],
+    },
+    SushiSwap: {
+      ...sushiBasic,
+      ...sushiNetworks[CHAIN_ID],
     },
   },
 };
