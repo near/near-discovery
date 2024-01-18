@@ -1,3 +1,16 @@
+export type Record = {
+  user: string;
+  rank: number;
+  pts: number;
+  avatar: string;
+};
+export type Column = {
+  label: string;
+  width: number;
+  key: keyof Record;
+  align?: Align;
+  gap: number;
+};
 export type StyledFlexType = {
   $direction?: string;
   $wrap?: string;
@@ -14,6 +27,8 @@ export type StyledButtonType = {
   $borderStyle?: string;
   $borderColor?: string;
 }
+export type Align = 'left' | 'right' | 'center';
+
 export type Tab = 'leaderboard' | 'quests';
 
 // 0: 未查询 1: 查询中 1: 查询成功（未注册） 2: 查询失败（已注册）

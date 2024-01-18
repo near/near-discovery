@@ -11,8 +11,8 @@ import {
 import bnsAvatar from '@/assets/images/bns_avatar.svg';
 import Image from 'next/image';
 import { COIN_TYLE_LIST, COIN_TYLE_MAP } from '../../constants';
-const YourBnsNames = ({ bnsNames, onClick }) => {
-  const handleClick = function (bnsName) {
+const YourBnsNames = ({ bnsNames, onClick }: any) => {
+  const handleClick = function (bnsName: any) {
     onClick && onClick(bnsName)
   }
   return (
@@ -20,7 +20,7 @@ const YourBnsNames = ({ bnsNames, onClick }) => {
       <StyledHead>Your BNS Names ({bnsNames.length})</StyledHead>
       <StyledFlex $justify='flex-start' $gap='13px' $wrap='wrap'>
         {
-          bnsNames.map((bnsName, index) => {
+          bnsNames.map((bnsName: any, index: number) => {
             const filterCoinTypeList = COIN_TYLE_LIST.filter(coinType => bnsName.addresses && bnsName.addresses[coinType])
             return (
               <StyledBnsName key={index} onClick={() => handleClick(bnsName)}>

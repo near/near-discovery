@@ -9,7 +9,7 @@ import {
 } from './styles';
 
 
-const RelatedQuests = ({ loading, questList = [] }) => {
+const RelatedQuests = ({ loading, questList = [] }: any) => {
   return (
     <StyledContainer>
       <StyledHead>Related Quests</StyledHead>
@@ -20,7 +20,7 @@ const RelatedQuests = ({ loading, questList = [] }) => {
       ) : (
         <StyledQuestList>
           {
-            questList.map(quest => <QuestItem quest={quest} key={quest.id + Math.random()} />)
+            questList.map((quest: any) => <QuestItem quest={quest} key={quest.id + Math.random()} />)
           }
         </StyledQuestList>
       )}

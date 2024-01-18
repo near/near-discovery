@@ -14,7 +14,7 @@ import Tabs from './components/Tabs';
 import { StyledContainer } from './styles';
 import type { Tab } from './types';
 
-const BnsLeaderboardView = () => {
+const BnsLeaderboardView = (props: any) => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
   const [updater, setUpdater] = useState(1);
@@ -43,7 +43,6 @@ const BnsLeaderboardView = () => {
 
       {tab === 'leaderboard' && (
         <Leaderboard
-          id={id}
           {...{
             loading,
             list,
@@ -62,7 +61,6 @@ const BnsLeaderboardView = () => {
       )}
       {tab === 'quests' && (
         <Quests
-          id={id}
           {...{ campaignLoading, campaigns, questingLoading, quests, categoryLoading, categories, userInfo }}
           onLoad={(id: string) => {
             setId(id);

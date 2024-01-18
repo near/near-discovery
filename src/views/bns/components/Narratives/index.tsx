@@ -22,7 +22,7 @@ const iconRight = (
     <path d="M1 5.2C0.558172 5.2 0.2 5.55817 0.2 6C0.2 6.44183 0.558172 6.8 1 6.8L1 5.2ZM17.5657 6.56569C17.8781 6.25327 17.8781 5.74674 17.5657 5.43432L12.4745 0.343147C12.1621 0.0307274 11.6556 0.0307274 11.3431 0.343147C11.0307 0.655566 11.0307 1.1621 11.3431 1.47452L15.8686 6L11.3431 10.5255C11.0307 10.8379 11.0307 11.3444 11.3431 11.6569C11.6556 11.9693 12.1621 11.9693 12.4745 11.6569L17.5657 6.56569ZM1 6.8L17 6.8L17 5.2L1 5.2L1 6.8Z" fill="white" />
   </svg>
 )
-const Campaign = function ({ campaign }) {
+const Campaign = function ({ campaign }: any) {
   const router = useRouter()
   const { loading, questList } = useQuestList(campaign.id)
   return (
@@ -56,7 +56,7 @@ const Campaign = function ({ campaign }) {
         // slidesPerView={2}
         >
           {
-            questList.map((quest, index) => (
+            questList.map((quest: any, index: number) => (
               <SwiperSlide key={index}>
                 <QuestItem quest={quest} />
               </SwiperSlide>
@@ -82,9 +82,9 @@ const Narratives = ({ campaigns, loading }: any) => {
       ) : (
         <StyledFlex>
           {
-            campaigns.map(campaign => {
+            campaigns.map((campaign: any, index: number) => {
               return (
-                <Campaign campaign={campaign} />
+                <Campaign key={index} campaign={campaign} />
               )
             })
           }

@@ -20,7 +20,7 @@ export const CHAIN_LIST = [
 ]
 
 export const COIN_TYLE_LIST = [0, 60, 614, 3, 397, 966, 714, 501, 118, 52752, 3030, 931]
-export const COIN_TYLE_MAP = {
+export const COIN_TYLE_MAP: any = {
   0: {
     label: 'BTC',
     icon: 'https://www.basename.app/assets/edit/addresses/btc.png'

@@ -82,7 +82,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
 };
 const SlideButtonList = function () {
   const swiper = useSwiper()
-  const handleClickSlideButton = function (type) {
+  const handleClickSlideButton = function (type: string) {
     if (type === 'prev') {
       swiper.slidePrev()
     } else {
@@ -96,7 +96,7 @@ const SlideButtonList = function () {
     </>
   )
 }
-const QuestList = ({ questList }) => {
+const QuestList = ({ questList }: any) => {
   return (
     <StyledQuestList>
       <Swiper
@@ -104,7 +104,7 @@ const QuestList = ({ questList }) => {
         slidesPerView={4}
       >
         {
-          questList.map((quest, index) => (
+          questList.map((quest: any, index: number) => (
             <SwiperSlide key={index}>
               <QuestItem quest={quest} />
             </SwiperSlide>
@@ -116,7 +116,7 @@ const QuestList = ({ questList }) => {
   )
 }
 
-const QuestCampaign = ({ campaign, categories }) => {
+const QuestCampaign = ({ campaign, categories }: any) => {
   const { loading, questList } = useQuestList(campaign.id);
   return loading ? (
     <StyledLoadingWrapper>

@@ -14,7 +14,7 @@ import useLeaderboard from './hooks/useLeaderboard';
 import { StyledContainer } from './styles';
 import type { Tab } from './types';
 
-const QuestLeaderboardView = () => {
+const QuestLeaderboardView = (props: any) => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
   const [updater, setUpdater] = useState(1);

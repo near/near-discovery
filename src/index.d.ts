@@ -6,6 +6,7 @@ declare module 'nanoid' {
 
 declare module 'recharts';
 
+declare module '@ensdomains/eth-ens-namehash';
 interface Window {
   zE: (name: string, method: string) => void | undefined;
   Telegram: {

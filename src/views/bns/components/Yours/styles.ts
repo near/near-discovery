@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export { StyledCoin } from '../../styles';
+export { StyledCoin } from '@/views/Quest/styles';
 
 export const StyledContainer = styled.div`
   border-radius: 33px;

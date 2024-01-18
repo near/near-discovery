@@ -1,8 +1,11 @@
+import { getAccessToken, inviteCodeActivate } from '@/apis';
 import enterButton from '@/assets/images/enter_button.svg';
 import iconWarning from '@/assets/images/icon_warning.svg';
 import loginBg from '@/assets/images/login_bg.png';
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
+import { setCookie } from 'cookies-next';
+import _ from 'lodash';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { memo, useRef, useState } from 'react';
@@ -16,7 +19,6 @@ import {
   StyledText,
   StyledWrapper
 } from './styles';
-import _ from 'lodash';
 const LoginView = () => {
   const router = useRouter();
   const { account } = useAccount();
@@ -24,17 +26,17 @@ const LoginView = () => {
   const [errorTips, setErrorTips] = useState<string>('');
   const [loading, setLoading] = useState(false);
   const { logging, logout } = useAuth();
-  const inputRef = useRef([])
+  const inputRef = useRef<any>([])
 
 
-  const handleChange = function (event, index) {
+  const handleChange = function (event: any, index: number) {
     const value = event.target.value
     const curr = _.cloneDeep(codeList)
     curr[index] = value
     setCodeList(curr)
     curr[index] && inputRef.current[index + 1] && inputRef.current[index + 1].focus()
   }
-  const handleKeyDown = function (event, index) {
+  const handleKeyDown = function (event: any, index: number) {
     if (event.code === "Backspace") {
       const curr = _.cloneDeep(codeList)
       curr[index] = ''
@@ -42,7 +44,7 @@ const LoginView = () => {
       inputRef.current[index - 1] && inputRef.current[index - 1].focus()
     }
   }
-  const handlePaste = function (event) {
+  const handlePaste = function (event: any) {
     const text = event.clipboardData.getData('text')
     const array = text.split('')
     setCodeList(array)
@@ -77,7 +79,7 @@ const LoginView = () => {
         <StyledFlex $align='flex-end' $justify='flex-start' $gap='8px' >
           {
             codeList.map((code, index) => (
-              <StyledCodeInputWrapper>
+              <StyledCodeInputWrapper key={index}>
                 <StyledCodeInput
                   value={code}
                   ref={ref => inputRef.current[index] = ref}

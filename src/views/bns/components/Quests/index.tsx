@@ -33,14 +33,14 @@ const Quests = ({
               <QuestCampaign
                 onLoad={onLoad}
                 loading={campaignLoading}
-                campaigns={campaigns.filter(campaign => !campaign.category)}
+                campaigns={campaigns.filter((campaign: any) => !campaign.category)}
                 categoryLoading={categoryLoading}
                 categories={categories}
               />
               <Narratives
                 onLoad={onLoad}
                 loading={campaignLoading}
-                campaigns={campaigns.filter(campaign => campaign.category)}
+                campaigns={campaigns.filter((campaign: any) => campaign.category)}
                 categoryLoading={categoryLoading}
                 categories={categories}
               />

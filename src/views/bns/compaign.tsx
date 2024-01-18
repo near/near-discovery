@@ -26,12 +26,11 @@ import {
   StyledUserName,
   StyledWrapper
 } from './styles';
-import { QueryNameStatusType } from './types';
-import _ from 'lodash';
+import type { QueryNameStatusType } from './types';
 
-import namehash from "@ensdomains/eth-ens-namehash"
-import RegisterDialog from './components/RegisterDialog';
+import namehash from "@ensdomains/eth-ens-namehash";
 import NetworkDialog from './components/NetworkDialog';
+import RegisterDialog from './components/RegisterDialog';
 const CampaignView = () => {
   const router = useRouter()
   const contract = useBnsContract()
@@ -39,32 +38,31 @@ const CampaignView = () => {
   const { connect, connecting } = useAuth();
   const [value, setValue] = useState('')
   const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0)
-  const [campaignId, setCampaignId] = useState()
-  const [bnsNames, setBnsNames] = useState([])
-  const [currentBnsName, setCurrentBnsName] = useState({
+  const [bnsNames, setBnsNames] = useState<any>([])
+  const [currentBnsName, setCurrentBnsName] = useState<any>({
 
   })
   const [showRegisterDialg, setShowRegisterDialg] = useState(false)
   const [priceLabel, setPriceLabel] = useState({
 
   })
-  const [showNetworkDialog, setShowNetworkDialog] = useState(false)
-  const { loading, questList } = useQuestList(router.query.id)
+  const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
+  const { loading, questList } = useQuestList(router.query.id as string)
 
-  const getBnsAddress = async function (name) {
+  const getBnsAddress = async function (name: string) {
     return await http.get('https://api.basename.app/records/base/' + name)
   }
   const getBnsNames = async function () {
     try {
-      const firstResponse = await http.get('https://api.basename.app/v1/names?address=' + ethers.utils.getAddress(account))
-      const promiseArray = []
-      firstResponse.map(bnsName => {
+      const firstResponse = await http.get('https://api.basename.app/v1/names?address=' + ethers.utils.getAddress(account as string))
+      const promiseArray: any = []
+      firstResponse.map((bnsName: any) => {
         promiseArray.push(getBnsAddress(bnsName.name))
       })
       const node = await contract.read({
         address: '0x0363696B6D369859f5fb4994a5Ade574CD91D220',
         functionName: 'node',
-        args: [ethers.utils.getAddress(account)]
+        args: [ethers.utils.getAddress(account as string)]
       })
       const primaryName = await contract.read({
         address: '0xa92659104Eb42309Ae9482F1D1AE934B9Ee51dc3',
@@ -82,7 +80,7 @@ const CampaignView = () => {
     }
   }
 
-  const handleInputChange = async function (event) {
+  const handleInputChange = async function (event: any) {
     const normalizedName = namehash.normalize(event).split('.').join('')
     try {
       setValue(event)
@@ -108,7 +106,7 @@ const CampaignView = () => {
       console.log(error)
     }
   }
-  const handleClickBnsName = function (value) {
+  const handleClickBnsName = function (value: any) {
     setCurrentBnsName(value)
     setShowNetworkDialog(true)
   }
@@ -147,14 +145,14 @@ const CampaignView = () => {
         </StyledWrapper>
       </StyledFlex>
       <StyledImage>
-        <Image src={desktop} width={678} height={419} />
+        <Image src={desktop} width={678} height={419} alt='desktop' />
       </StyledImage>
       <StyledFlex $direction='column' $gap='16px' style={{ position: 'relative', top: '-44px' }}>
         <StyledUserName>Web3 Username</StyledUserName>
         <StyledText $size='20px' $weight='600'>Web3 naming (.base) for the next billion+ users on Base</StyledText>
       </StyledFlex>
       <StyledFlex $direction='column' $gap='20px'>
-        <InputWithEmoji queryStatus={queryNameStatus} onChange={event => handleInputChange(event)} />
+        <InputWithEmoji queryStatus={queryNameStatus} onChange={(event: any) => handleInputChange(event)} />
         {
           queryNameStatus > 1 && <QueryResult label={value} status={queryNameStatus} onClaim={handleClaim} />
         }

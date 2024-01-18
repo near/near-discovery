@@ -8,7 +8,8 @@ import Image from 'next/image';
 import { memo, useMemo, useState } from 'react';
 import { COIN_TYLE_LIST, COIN_TYLE_MAP } from '../../constants';
 import useBnsContract from '../../hooks/useBnsContract';
-import { SaveNetworkStatusType } from '../../types';
+import type { SaveNetworkStatusType } from '../../types';
+import { formatsByName } from "@ensdomains/address-encoder";
 import {
   StyledAddressInput,
   StyledAddressInputWrapper,
@@ -50,17 +51,17 @@ const iconUnChecked = (
     <circle cx="8" cy="8" r="7.5" fill="#1E2028" stroke="#979ABE" />
   </svg>
 )
-const NetworkDialog = ({ bnsName, setBnsName, onClose }) => {
+const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsName: any, onClose: any }) => {
   const { account } = useAccount()
   const contract = useBnsContract()
   const [saveStatus, setSaveStatus] = useState<SaveNetworkStatusType>(0)
 
-  const [addAddresses, setAddresses] = useState({
+  const [addAddresses, setAddresses] = useState<any>({
 
   })
   const filterCoinTypeList = useMemo(() => COIN_TYLE_LIST.filter(coinType => typeof bnsName.addresses[coinType] === 'string'), [bnsName])
   const addValues = useMemo(() => {
-    const object = {}
+    const object: any = {}
     Object.keys(bnsName.addresses).forEach(coinType => {
       if (typeof addAddresses[coinType] === 'string' && bnsName.addresses[coinType]) {
         object[coinType] = bnsName.addresses[coinType]
@@ -72,7 +73,7 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }) => {
   const handleSave = function () {
     setSaveStatus(2)
   }
-  const handleClickCoinType = function (coinType) {
+  const handleClickCoinType = function (coinType: string) {
     const curr = _.cloneDeep(addAddresses)
     if (typeof curr[coinType] === 'string') {
       delete curr[coinType]
@@ -82,29 +83,29 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }) => {
     setAddresses(curr)
   }
   const handleAdd = function () {
-    setBnsName(prev => {
+    setBnsName((prev: any) => {
       const curr = _.cloneDeep(bnsName)
       curr.addresses = Object.assign(curr.addresses, addAddresses)
       return curr
     })
     setSaveStatus(0)
   }
-  const handleDelete = function (coinType) {
+  const handleDelete = function (coinType: string) {
     if (typeof addAddresses[coinType] === 'string') {
-      setAddresses(prev => {
+      setAddresses((prev: any) => {
         const curr = _.cloneDeep(addAddresses)
         delete curr[coinType]
         return curr
       })
-      setBnsName(prev => {
+      setBnsName((prev: any) => {
         const curr = _.cloneDeep(prev)
         delete curr.addresses[coinType]
         return curr
       })
     }
   }
-  const handleInputChange = function (event, coinType) {
-    setBnsName(prev => {
+  const handleInputChange = function (event: any, coinType: string) {
+    setBnsName((prev: any) => {
       const curr = _.cloneDeep(prev)
       curr.addresses[coinType] = event.target.value
       return curr
@@ -124,7 +125,7 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }) => {
     }
   }
   const handleConfirm = async function () {
-    const args = []
+    const args: any = []
     const iface = new ethers.utils.Interface([{
       "inputs": [
         {
@@ -196,12 +197,12 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }) => {
             <StyledWrapper style={{ marginBottom: 30, height: 300, overflow: 'auto' }}>
               <StyledFlex $direction='column' $gap='30px'>
                 {
-                  filterCoinTypeList.map(coinType => {
+                  filterCoinTypeList.map((coinType: any) => {
                     const coin = COIN_TYLE_MAP[coinType]
                     return (
-                      <StyledFlex $direction='column' $gap='10px' style={{ width: '100%' }}>
+                      <StyledFlex key={coinType} $direction='column' $gap='10px' style={{ width: '100%' }}>
                         <StyledFlex $justify='flex-start' $gap='6px' style={{ width: '100%' }}>
-                          <Image src={coin.icon} width={18} height={18} />
+                          <Image src={coin.icon} width={18} height={18} alt='iconCoin' />
                           <StyledText $size='14px' $weight='500' $line='120%'>{coin.label}</StyledText>
                         </StyledFlex>
                         <StyledAddressInputWrapper>
@@ -223,7 +224,7 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }) => {
           saveStatus === 1 && <StyledDialogBody style={{ width: 536, paddingTop: 20 }}>
             <StyledFlex $wrap='wrap' $gap='10px'>
               {
-                COIN_TYLE_LIST.map(coinType => {
+                COIN_TYLE_LIST.map((coinType: any) => {
                   const coin = COIN_TYLE_MAP[coinType]
                   return (
                     <StyledButton
@@ -276,7 +277,7 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }) => {
                   {Object.keys(addValues).map(coinType => {
                     const coin = COIN_TYLE_MAP[coinType]
                     return (
-                      <StyledText $size='16px'>{coin.label}: {_.truncate(addValues[coinType], { length: 10 })}</StyledText>
+                      <StyledText $size='16px' key={coinType}>{coin.label}: {_.truncate(addValues[coinType], { length: 10 })}</StyledText>
                     )
                   })}
                 </StyledFlex>

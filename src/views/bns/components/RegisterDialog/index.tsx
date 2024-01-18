@@ -8,7 +8,7 @@ import { ethers } from 'ethers';
 import Image from 'next/image';
 import { memo, useMemo, useState } from 'react';
 import useBnsContract from '../../hooks/useBnsContract';
-import { RegisterStatusType } from '../../types';
+import type { RegisterStatusType } from '../../types';
 import { encodeFunctionData } from 'viem';
 import {
   StyledButton,
@@ -42,7 +42,7 @@ const iconCircle = (
     <path opacity="0.5" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
-const RegisterDialog = ({ priceLabel, onClose }) => {
+const RegisterDialog = ({ priceLabel, onClose }: any) => {
 
   const router = useRouter()
   const { account } = useAccount()

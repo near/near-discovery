@@ -64,7 +64,7 @@ const GuideView = () => {
         <StyledFlex $direction='column' $gap='10px'>
           {
             stepList.map((step, index) => (
-              <StyledGuidStep className={stepIndex === index ? 'active' : ''}>
+              <StyledGuidStep key={index} className={stepIndex === index ? 'active' : ''}>
                 <StyledFlex $justify='space-between' style={{ marginBottom: 8 }}>
                   <StyledText $size='20px'>{step.name}</StyledText>
                   {stepIndex === index && iconChecked}
@@ -75,7 +75,7 @@ const GuideView = () => {
           }
         </StyledFlex>
         <StyledFlex $gap='10px' style={{ marginTop: 47, marginBottom: 20 }}>
-          {stepList.map((step, index) => <StyledGuideStepLine className={index === stepIndex ? 'active' : ''}></StyledGuideStepLine>)}
+          {stepList.map((step, index) => <StyledGuideStepLine key={index} className={index === stepIndex ? 'active' : ''}></StyledGuideStepLine>)}
         </StyledFlex>
         <StyledFlex $gap='20px'>
           <StyledGuideContinueButton>Continue</StyledGuideContinueButton>
@@ -94,8 +94,8 @@ const GuideView = () => {
               chains: supportChains,
               currentChain: { ...currentChain, src: LANDING_CHAINS[8453] },
               addAction: (data: any) => {
-                addAction(data);
-                onSuccess();
+                // addAction(data);
+                // onSuccess();
               },
               from: 'landing',
             }}

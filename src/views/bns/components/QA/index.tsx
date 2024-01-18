@@ -34,7 +34,7 @@ const QA = () => {
             <StyledQuestion key={index}>
               <StyledQuestionName>
                 <StyledFlex $gap='16px'>
-                  <StyledSvg><Image src={question.icon} alt={index} /></StyledSvg>
+                  <StyledSvg><Image src={question.icon} alt={question.name} /></StyledSvg>
                   <StyledText $size='20px' $weight='700' $line='120%'>{question.name}</StyledText>
                 </StyledFlex>
                 <StyledIconRight>

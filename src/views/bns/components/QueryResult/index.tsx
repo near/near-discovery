@@ -3,7 +3,7 @@ import { memo } from 'react';
 import iconCoin from '@/assets/images/icon_coin.svg';
 import Image from 'next/image';
 import { CHAIN_LIST } from '../../constants';
-import {
+import type {
   QueryNameStatusType
 } from '../../types';
 import {

@@ -76,8 +76,8 @@ const Table = ({ list, maxPage, page, handlePageChange, loading }: any) => {
   return (
     <StyledContainer>
       <StyledHeader>
-        {COLUMNS.map((column) => (
-          <StyledColumn key={column.key} $width={column.width} $align={column.align}>
+        {COLUMNS.map((column, index) => (
+          <StyledColumn key={index} $width={column.width} $align={column.align}>
             {column.label}
           </StyledColumn>
         ))}
@@ -91,8 +91,8 @@ const Table = ({ list, maxPage, page, handlePageChange, loading }: any) => {
           <StyledBody>
             {list.map((row: any) => (
               <StyledRow key={row.rank}>
-                {COLUMNS.map((column) => (
-                  <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
+                {COLUMNS.map((column, index) => (
+                  <StyledCell key={index} $width={column.width} $gap={column.gap} $align={column.align}>
                     {column.key === 'rank' && <Rank rank={row.rank} />}
                     {column.key === 'user' && <User user={row.account.address} avatar={row.account.avatar} />}
                     {column.key === 'pts' && <PTS pts={row.reward} />}
