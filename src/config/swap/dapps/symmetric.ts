@@ -16,17 +16,17 @@ const networks = {
       gnosis['wxdai'],
       gnosis['gno'],
       gnosis['agve'],
-      gnosis['symm'],
+      // gnosis['symm'],
       gnosis['usdc'],
       gnosis['dai'],
       gnosis['weth'],
       gnosis['wbtc'],
     ],
     pools: [
-      [
-        [gnosis['symm'].address, gnosis['gno'].address],
-        '0xd3078c1568ece597f2df457a4bbf670fb8076e71000200000000000000000002',
-      ],
+      // [
+      //   [gnosis['symm'].address, gnosis['gno'].address],
+      //   '0xd3078c1568ece597f2df457a4bbf670fb8076e71000200000000000000000002',
+      // ],
       [
         [gnosis['weth'].address, gnosis['gno'].address],
         '0x81d167725577d26b020e197b1226380b8189b2b800020000000000000000004b',
@@ -35,10 +35,10 @@ const networks = {
         [gnosis['agve'].address, gnosis['wxdai'].address],
         '0xcbd22f241a29d23f1165fcbe8d50ec32d192d199000200000000000000000015',
       ],
-      [
-        [gnosis['agve'].address, gnosis['symm'].address],
-        '0x7fd75e4feab8195e7f41b6ac16064134e3cdbd8e000200000000000000000029',
-      ],
+      // [
+      //   [gnosis['agve'].address, gnosis['symm'].address],
+      //   '0x7fd75e4feab8195e7f41b6ac16064134e3cdbd8e000200000000000000000029',
+      // ],
       [
         [gnosis['usdc'].address, gnosis['wxdai'].address],
         '0xa4458034865ba70e4d0fb6f3353d9fa57df2eab5000100000000000000000010',

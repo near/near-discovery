@@ -22,7 +22,7 @@ const networks = {
       avalanche['usdt'],
       avalanche['usdc.e'],
       avalanche['usdt.e'],
-      avalanche['phar'],
+      // avalanche['phar'],
       avalanche['dai.e'],
       avalanche['eth'],
       avalanche['btc.b'],
