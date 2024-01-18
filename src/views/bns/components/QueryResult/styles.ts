@@ -123,12 +123,13 @@ export const StyledStatusWrapper = styled.div`
   justify-content: space-between;
   width: 432px;
   height: 48px;
-  padding: 16px 11px 16px 17px;
+  padding: 0 11px 0 17px;
   border-radius: 12px;
   border: 2px solid #F5D80C;
   background: #16181D;
   &.success {
     border-color: #03EA1A;
+    padding: 0 5px 0 17px;
     ${StyledStatus} {
       cursor: pointer;
       display: flex;

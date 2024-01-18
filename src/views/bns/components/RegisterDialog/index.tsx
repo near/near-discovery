@@ -6,7 +6,7 @@ import * as http from '@/utils/http';
 import namehash from "@ensdomains/eth-ens-namehash";
 import { ethers } from 'ethers';
 import Image from 'next/image';
-import { memo, useMemo, useState } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 import useBnsContract from '../../hooks/useBnsContract';
 import type { RegisterStatusType } from '../../types';
 import { encodeFunctionData } from 'viem';
@@ -140,6 +140,10 @@ const RegisterDialog = ({ priceLabel, onClose }: any) => {
       console.log('error', error)
     }
   }
+
+  useEffect(() => {
+    setRegisterStatus(0)
+  }, [])
   return (
     <StyledDialog>
       <StyledDialogContainer>
@@ -148,7 +152,7 @@ const RegisterDialog = ({ priceLabel, onClose }: any) => {
             {iconClose}
           </StyledSvg>
         </StyledDialogHead>
-        {/* {registerStatus === 0 || registerStatus === 1 ? (
+        {registerStatus === 0 || registerStatus === 1 ? (
           <StyledDialogBody>
             <StyledFlex $direction='column' $gap='14px' style={{ marginBottom: 27 }}>
               <Image src={bnsAvatar} width={48} alt="bnsAvatar" />
@@ -239,31 +243,31 @@ const RegisterDialog = ({ priceLabel, onClose }: any) => {
             </StyledFlex>
 
           </StyledDialogBody>
-        ) : ( */}
-        <StyledDialogBody>
-          <StyledUserNameButtonWrapper>
-            <StyledUserNameButton>
-              <StyledUserName>3210.base</StyledUserName>
-            </StyledUserNameButton>
-          </StyledUserNameButtonWrapper>
-          <StyledFlex $direction='column' $gap='20px' style={{ marginTop: 35, marginBottom: 45 }}>
-            <StyledText $size='40px' $weight='700' $line='100%'>Congratulations!</StyledText>
-            <StyledText $size='16px' $line='120%'>You’ve just got your own .base name</StyledText>
-          </StyledFlex>
-          <StyledFlex $direction='column' $gap='20px'>
-            <StyledButton $borderRadius='12px' onClick={() => router.push('https://www.basename.app/names')}>
-              <StyledText $size='16px' $weight='500' $line='120%'>Check on Basescan</StyledText>
-            </StyledButton>
-            <StyledButton
-              $borderRadius='12px'
-              $borderWidth='0'
-              $background='#EBF479'
-            >
-              <StyledText $color='#1E2028' $size='16px' $weight='700'>Claim <Image src={iconCain} alt='iconCain' /> 200 PTS</StyledText>
-            </StyledButton>
-          </StyledFlex>
-        </StyledDialogBody>
-        {/* )} */}
+        ) : (
+          <StyledDialogBody>
+            <StyledUserNameButtonWrapper>
+              <StyledUserNameButton>
+                <StyledUserName>3210.base</StyledUserName>
+              </StyledUserNameButton>
+            </StyledUserNameButtonWrapper>
+            <StyledFlex $direction='column' $gap='20px' style={{ marginTop: 35, marginBottom: 45 }}>
+              <StyledText $size='40px' $weight='700' $line='100%'>Congratulations!</StyledText>
+              <StyledText $size='16px' $line='120%'>You’ve just got your own .base name</StyledText>
+            </StyledFlex>
+            <StyledFlex $direction='column' $gap='20px'>
+              <StyledButton $borderRadius='12px' onClick={() => router.push('https://www.basename.app/names')}>
+                <StyledText $size='16px' $weight='500' $line='120%'>Check on Basescan</StyledText>
+              </StyledButton>
+              <StyledButton
+                $borderRadius='12px'
+                $borderWidth='0'
+                $background='#EBF479'
+              >
+                <StyledText $color='#1E2028' $size='16px' $weight='700'>Claim <Image src={iconCain} alt='iconCain' /> 200 PTS</StyledText>
+              </StyledButton>
+            </StyledFlex>
+          </StyledDialogBody>
+        )}
 
       </StyledDialogContainer>
     </StyledDialog>

@@ -26,34 +26,43 @@ const QueryResult = ({ label, status, onClaim }: { label: string, status: QueryN
   const handleClaim = function () {
     onClaim && onClaim()
   }
-  return (
+  return label.length > 0 ? (
     <StyledQueryResult>
-      <StyledStatusWrapper className={status === 2 ? 'success' : ''}>
-        <StyledFlex $gap='11px'>
-          <StyledChainListWrapper>
-            <StyledChainList>
-              {
-                CHAIN_LIST.map((chain, index) => {
-                  return (
-                    <StyledChain key={index}>
-                      <Image src={chain.icon} width={20} height={20} alt='chain' />
-                    </StyledChain>
-                  )
-                })
-              }
-            </StyledChainList>
-          </StyledChainListWrapper>
-          <StyledText $size='16px' $weight='700'>{label}</StyledText>
-        </StyledFlex>
-        {
-          status === 2 ? (
-            <StyledStatus onClick={() => handleClaim()}>Claim</StyledStatus>
-          ) : (
-            <StyledStatus>Taken</StyledStatus>
-          )
-        }
+      {
+        label.length < 3 ? (
+          <StyledText $size='15px' $weight='600' style={{ opacity: 0.5 }}>
+            Minimum of 3 characters
+          </StyledText>
+        ) : (
+          <StyledStatusWrapper className={status === 2 ? 'success' : ''}>
+            <StyledFlex $gap='11px'>
+              <StyledChainListWrapper>
+                <StyledChainList>
+                  {
+                    CHAIN_LIST.map((chain, index) => {
+                      return (
+                        <StyledChain key={index}>
+                          <Image src={chain.icon} width={20} height={20} alt='chain' />
+                        </StyledChain>
+                      )
+                    })
+                  }
+                </StyledChainList>
+              </StyledChainListWrapper>
+              <StyledText $size='16px' $weight='700'>{label}</StyledText>
+            </StyledFlex>
+            {
+              status === 2 ? (
+                <StyledStatus onClick={() => handleClaim()}>Claim</StyledStatus>
+              ) : (
+                <StyledStatus>Taken</StyledStatus>
+              )
+            }
 
-      </StyledStatusWrapper>
+          </StyledStatusWrapper>
+        )
+      }
+
       {
         status === 2 && (
           <StyledFlex $direction='column' $gap='20px' style={{ marginTop: 18 }}>
@@ -70,8 +79,8 @@ const QueryResult = ({ label, status, onClaim }: { label: string, status: QueryN
           </StyledFlex>
         )
       }
-    </StyledQueryResult>
-  );
+    </StyledQueryResult >
+  ) : <></>;
 };
 
 export default memo(QueryResult);

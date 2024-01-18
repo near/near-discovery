@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 export { StyledCoin, StyledTitle } from '@/views/Quest/styles';
 export {
-  StyledLoadingWrapper,
-  StyledFlex
+  StyledButton, StyledFlex, StyledLoadingWrapper, StyledText, StyledSvg
 } from '../../styles';
 
 export const StyledCampaipnsContainer = styled.div`
@@ -27,7 +26,7 @@ export const StyledCampaipnContainer = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
 `;
 
 export const StyledBox = styled.div`

@@ -1,11 +1,11 @@
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import BnsLeaderboardView from '@/views/bns/leaderboard';
+import QuestLeaderboardView from '@/views/QuestLeaderboard';
 
-const BnsLeaderboardPage: NextPageWithLayout = () => {
-  return <BnsLeaderboardView />;
+const QuestLeaderboardPage: NextPageWithLayout = () => {
+  return <QuestLeaderboardView />;
 };
 
-BnsLeaderboardPage.getLayout = useDefaultLayout;
+QuestLeaderboardPage.getLayout = useDefaultLayout;
 
-export default BnsLeaderboardView;
+export default QuestLeaderboardView;

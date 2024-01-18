@@ -2,6 +2,7 @@ import DapXBNS from '@/assets/images/DapXBNS.svg';
 import desktop from '@/assets/images/desktop.png';
 import discountMark from '@/assets/images/discount_mark.svg';
 import iconAchieved from '@/assets/images/icon_achieved.svg';
+import Breadcrumb from '@/components/Breadcrumb';
 import { DesktopNavigationTop } from '@/components/navigation/desktop/DesktopNavigationTop';
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
@@ -9,7 +10,7 @@ import * as http from '@/utils/http';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import InputWithEmoji from './components/InputWithEmoji';
 import QA from './components/QA';
 import QueryResult from './components/QueryResult';
@@ -19,6 +20,7 @@ import useBnsContract from './hooks/useBnsContract';
 import useQuestList from './hooks/useQuestList';
 import {
   StyledAchieved,
+  StyledContainer,
   StyledFlex,
   StyledImage,
   StyledSvg,
@@ -48,6 +50,8 @@ const CampaignView = () => {
   })
   const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
   const { loading, questList } = useQuestList(router.query.id as string)
+
+  const timerRef = useRef<any>(null)
 
   const getBnsAddress = async function (name: string) {
     return await http.get('https://api.basename.app/records/base/' + name)
@@ -80,10 +84,9 @@ const CampaignView = () => {
     }
   }
 
-  const handleInputChange = async function (event: any) {
+  const handleGetQueryNameStatus = async function (event: any) {
     const normalizedName = namehash.normalize(event).split('.').join('')
     try {
-      setValue(event)
       setQueryNameStatus(1)
       const firstResponse = await contract.read({
         address: '0x4079d84889e0E1AC22beec60dc8e5E7b621bf55D',
@@ -106,6 +109,14 @@ const CampaignView = () => {
       console.log(error)
     }
   }
+  const handleInputChange = function (event: any) {
+    setQueryNameStatus(0)
+    setValue(event)
+    timerRef.current && clearTimeout(timerRef.current)
+    timerRef.current = setTimeout(() => {
+      handleGetQueryNameStatus(event)
+    }, 1000)
+  }
   const handleClickBnsName = function (value: any) {
     setCurrentBnsName(value)
     setShowNetworkDialog(true)
@@ -119,6 +130,13 @@ const CampaignView = () => {
   return (
     <StyledWrapper>
       <DesktopNavigationTop />
+      <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
+        <Breadcrumb navs={[
+          { name: 'Home', path: '/' },
+          { name: 'Quest', path: '/bns/leaderboard' },
+          { name: 'DapDap X BNS', path: '/bns/campaign' },
+        ]} />
+      </StyledContainer>
       <StyledFlex $gap='20px' style={{
         background: 'linear-gradient(90deg, #06D0FF 0%, #C55EEC 50%, #FF9802 100%)',
         height: 254
@@ -152,10 +170,8 @@ const CampaignView = () => {
         <StyledText $size='20px' $weight='600'>Web3 naming (.base) for the next billion+ users on Base</StyledText>
       </StyledFlex>
       <StyledFlex $direction='column' $gap='20px'>
-        <InputWithEmoji queryStatus={queryNameStatus} onChange={(event: any) => handleInputChange(event)} />
-        {
-          queryNameStatus > 1 && <QueryResult label={value} status={queryNameStatus} onClaim={handleClaim} />
-        }
+        <InputWithEmoji queryStatus={queryNameStatus} value={value} setValue={setValue} onChange={(event: any) => handleInputChange(event)} />
+        {queryNameStatus > 1 && <QueryResult label={value} status={queryNameStatus} onClaim={handleClaim} />}
       </StyledFlex>
       {bnsNames.length > 0 && <YourBnsNames bnsNames={bnsNames} onClick={handleClickBnsName} />}
       <StyledFlex style={{ marginTop: 80 }} $direction='column' $gap='100px'>

@@ -1,6 +1,6 @@
 import Big from 'big.js';
 
-export function balanceFormated(balance?: string, digits = 4) {
+export function balanceFormated(balance?: string | number, digits = 4) {
   if (!balance) return '0';
   const _balance = new Big(balance);
   if (_balance.eq(0)) return '0';
