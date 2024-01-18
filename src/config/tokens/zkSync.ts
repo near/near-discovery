@@ -168,4 +168,20 @@ export const zkSync: { [key: string]: Token } = {
     name: 'Celer Network BUSD',
     icon: 'https://ipfs.near.social/ipfs/bafkreibp36dfkfjzgnnbb7u4jxh57gpjmfjerc6pefmyzhueulz5ovd5xy',
   },
+  zf: {
+    chainId: CHAIN_ID,
+    address: '0x31C2c031fDc9d33e974f327Ab0d9883Eae06cA4A',
+    decimals: 18,
+    symbol: 'ZF',
+    name: 'zkSwap Finance',
+    icon: 'https://ipfs.near.social/ipfs/bafkreicankglmavov2ysq6ax7ezbdpno6ebu6zrc7ququnjgnrfuxzrzum',
+  },
+  velocore: {
+    chainId: CHAIN_ID,
+    address: '0x99bBE51be7cCe6C8b84883148fD3D12aCe5787F2',
+    decimals: 18,
+    symbol: 'VC',
+    name: 'Velocore',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihvtu2nfnzgzc6jbcdvd22fmtufkxoawttgbt3nmagc5rcvfjjcki',
+  },
 };

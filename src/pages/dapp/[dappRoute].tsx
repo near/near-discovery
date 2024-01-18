@@ -112,10 +112,20 @@ export const DappPage: NextPageWithLayout = () => {
     run(chainId);
   }, [chainId]);
 
-  const network = useMemo(
-    () => dapp.dapp_network?.find((_network: any) => _network.network_id === currentChain?.id),
-    [currentChain],
-  );
+  const network = useMemo(() => {
+    if (!dapp.dapp_network) return null;
+    const _network = dapp.dapp_network?.find((_network: any) => _network.network_id === currentChain?.id);
+    return _network || dapp.dapp_network[0];
+  }, [currentChain]);
+
+  const isChainSupported = useMemo(() => {
+    if (chainId !== currentChain?.chain_id) return false;
+    if (!dappChains.length) return false;
+    if (!dappChains.find((dapp: any) => dapp.chain_id === chainId)) {
+      return false;
+    }
+    return true;
+  }, [chainId, currentChain, dappChains]);
 
   if (!dapp || !default_chain_id || !currentChain || (!dapp.default_chain_id && !dapp.default_network_id))
     return <div />;
@@ -159,6 +169,7 @@ export const DappPage: NextPageWithLayout = () => {
             nativeCurrency: chainsConfig[currentChain.chain_id].nativeCurrency,
             theme: { bridge: dappBridgeTheme[currentChain.chain_id] },
             multicall,
+            isChainSupported,
           }}
           src={network.dapp_src}
         />

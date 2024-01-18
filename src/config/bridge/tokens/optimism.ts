@@ -30,7 +30,7 @@ export const optimismTokens = {
     poolId: 15,
   },
   '0x8c6f28f2F1A3C87F0f938b96d27520d9751ec8d9': {
-    ...optimism.sUSD,
+    ...optimism.susd,
     poolId: 14,
   },
 } as { [key: string]: Token };

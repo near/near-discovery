@@ -4,6 +4,8 @@ import { basic as chronosV1Basic, networks as chronosV1Networks } from '../dapps
 import { basic as ramsesV1Basic, networks as ramsesV1Networks } from '../dapps/ramses-v1';
 import { basic as ramsesV2Basic, networks as ramsesV2Networks } from '../dapps/ramses-v2';
 import { basic as spartaBasic, networks as spartaNetworks } from '../dapps/sparta';
+import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
+import { basic as solidLizardBasic, networks as solidLizardNetworks } from '../dapps/solid-lizard';
 
 const CHAIN_ID = 42161;
 
@@ -41,6 +43,14 @@ export default {
     'Ramses V1': {
       ...ramsesV1Basic,
       ...ramsesV1Networks[CHAIN_ID],
+    },
+    SushiSwap: {
+      ...sushiBasic,
+      ...sushiNetworks[CHAIN_ID],
+    },
+    SolidLizard: {
+      ...solidLizardBasic,
+      ...solidLizardNetworks[CHAIN_ID],
     },
   },
 };

@@ -1,5 +1,6 @@
 import { linea } from '@/config/tokens/linea';
 import { mantle } from '@/config/tokens/mantle';
+import { manta } from '@/config/tokens/manta';
 
 const basic = {
   name: 'iZiSwap',
@@ -28,6 +29,27 @@ const networks = {
       output: mantle['usdc'],
     },
     tokens: [mantle['weth'], mantle['usdc'], mantle['mnt'], mantle['usdt'], mantle['wbtc'], mantle['wmnt']],
+  },
+  169: {
+    factoryAddress: '0x8c7d3063579BdB0b90997e18A770eaE32E1eBb08',
+    routerAddress: '0x02F55D53DcE23B4AA962CC68b0f685f26143Bdb2',
+    quoterAddress: '0x33531bDBFE34fa6Fd5963D0423f7699775AacaaF',
+    fees: [3000, 10000],
+    defaultCurrencies: {
+      input: manta['weth'],
+      output: manta['usdc'],
+    },
+    tokens: [
+      manta['weth'],
+      manta['usdc'],
+      manta['iusd'],
+      manta['izi'],
+      manta['usdt'],
+      manta['wbtc'],
+      manta['dai'],
+      manta['wsteth'],
+      manta['tia'],
+    ],
   },
 };
 

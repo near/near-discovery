@@ -1,5 +1,6 @@
 import { basic as joeTraderBasic, networks as joeTraderNetworks } from '../dapps/trader-joe';
 import { basic as pangolinBasic, networks as pangolinNetworks } from '../dapps/pangolin';
+import { basic as pharaohBasic, networks as pharaohNetworks } from '../dapps/pharaoh';
 
 const CHAIN_ID = 43114;
 
@@ -21,6 +22,10 @@ export default {
     Pangolin: {
       ...pangolinBasic,
       ...pangolinNetworks[CHAIN_ID],
+    },
+    Pharaoh: {
+      ...pharaohBasic,
+      ...pharaohNetworks[CHAIN_ID],
     },
   },
 };

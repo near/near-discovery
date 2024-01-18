@@ -123,4 +123,12 @@ export const avalanche: { [key: string]: Token } = {
     name: 'Avalaunch',
     icon: 'https://ipfs.near.social/ipfs/bafkreiaxodsgromeeaihu44fazsxdopkrqvinqzhyfxvx5mrbcmduqdfpq',
   },
+  phar: {
+    chainId: CHAIN_ID,
+    address: '0xaaab9d12a30504559b0c5a9a5977fee4a6081c6b',
+    decimals: 18,
+    symbol: 'PHAR',
+    name: 'PHARAOH',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibmhma6xbsypqfytcuvfsntksowzw4omkrthtu5wbpvohvyw4rqlq',
+  },
 };

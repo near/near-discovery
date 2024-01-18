@@ -107,4 +107,28 @@ export const base: { [key: string]: Token } = {
     name: 'Horizon',
     icon: 'https://ipfs.near.social/ipfs/bafkreiehzfpq27pwv4nsoqp45ehekfpfevfpt2l63wm7fmzgcjn5cmhvzm',
   },
+  aero: {
+    chainId: CHAIN_ID,
+    address: '0x940181a94a35a4569e4529a3cdfb74e38fd98631',
+    decimals: 18,
+    symbol: 'AERO',
+    name: 'Aerodrome',
+    icon: 'https://ipfs.near.social/ipfs/bafkreic3hltmqcjuz6nkqn3tjw4dmqcrgbbvuvmbncejyzuqhtj6navxqa',
+  },
+  bvm: {
+    chainId: CHAIN_ID,
+    address: '0xd386a121991E51Eab5e3433Bf5B1cF4C8884b47a',
+    decimals: 18,
+    symbol: 'BVM',
+    name: 'BasedVelocimeter',
+    icon: 'https://ipfs.near.social/ipfs/bafkreif5v6cfcqxlusijhonbjuiiywbynlftafwo4a3bztde3cvlye4qhe',
+  },
+  bmx: {
+    chainId: CHAIN_ID,
+    address: '0x548f93779fBC992010C07467cBaf329DD5F059B7',
+    decimals: 18,
+    symbol: 'BMX',
+    name: 'BMX',
+    icon: 'https://ipfs.near.social/ipfs/bafkreiacekb2ntq2vrwgluxzxnsmqdx3ppjoou7fooyelgwhdc5pkr76gy',
+  },
 };

@@ -1,8 +1,12 @@
+import chainCofig from '@/config/chains';
+
+export const CHAIN_ID = 59144;
+
 export const steps = [
   {
     title: 'Bridge',
     rewards: 100,
-    desc: 'Using the shortcut on the right, Transfer any token available from Ethereum to Polygon zkEVM',
+    desc: `Using the shortcut on the right, Transfer any token available from Ethereum to ${chainCofig[CHAIN_ID].chainName}`,
   },
   {
     title: 'Learn about Deep Dive',
