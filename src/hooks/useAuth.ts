@@ -2,7 +2,7 @@ import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 
-import { checkAddressIsInvited, getAccessToken, insertedAccessKey } from '@/apis';
+import { checkAddressIsInvited, getAccessToken, insertedAccessKey, getBnsUserName } from '@/apis';
 import { useEthersProviderContext } from '@/data/web3';
 import * as http from '@/utils/http';
 const useAuth = () => {
@@ -30,6 +30,12 @@ const useAuth = () => {
       if (cachedAccount !== wallet.accounts[0].address) {
         setLogging(true);
         try {
+          const result = await getBnsUserName(wallet.accounts[0].address)
+          if (result.name) {
+            setCookie('BNS_NAME', result.name);
+            setCookie('AUTHED_ACCOUNT', wallet.accounts[0].address);
+            return
+          }
           const checked = await checkAddressIsInvited(wallet.accounts[0].address);
           if (!checked) {
             deleteCookie('AUTHED_ACCOUNT');

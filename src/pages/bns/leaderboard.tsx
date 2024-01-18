@@ -8,4 +8,4 @@ const BnsLeaderboardPage: NextPageWithLayout = () => {
 
 BnsLeaderboardPage.getLayout = useDefaultLayout;
 
-export default BnsLeaderboardView;
+export default BnsLeaderboardPage;

@@ -1,3 +1,3 @@
-import InviteCodeView from '@/views/InviteCodeView';
+import BnsInviteCodeView from '@/views/bns/InviteCode';
 
-export default InviteCodeView;
+export default BnsInviteCodeView;

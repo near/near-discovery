@@ -87,3 +87,12 @@ export const inviteCodeActivate = async (account: string, code: string) => {
     };
   }
 };
+
+
+export const getBnsUserName = async (address) => {
+  try {
+    return http.get('https://resolver-api.basename.app/v1/addresses/' + address)
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}

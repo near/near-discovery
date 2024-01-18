@@ -59,6 +59,12 @@ const nextConfig = {
         port: '',
         pathname: '/ipfs/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.basename.app',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   transpilePackages: ['ahooks'],
