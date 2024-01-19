@@ -53,7 +53,7 @@
     "local-storage": "^2.0.0",
     "lodash": "^4.17.21",
     "near-fastauth-wallet": "^0.0.10",
-    "near-social-vm": "github:NearSocial/VM#use_attr_patch",
+    "near-social-vm": "github:NearSocial/VM#filter-ethers-utils",
     "next": "^13.5.6",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
