@@ -287,7 +287,7 @@ export const StyledText = styled.div<{
   font-style: normal;
   font-weight: ${props => props.$weight || '400'};
   line-height: ${props => props.$line || 'normal'};
-  text-align: ${props => props.$line || 'left'};
+  text-align: ${props => props.$textAlign || 'left'};
   &.center {
     display: flex;
     align-items: center;

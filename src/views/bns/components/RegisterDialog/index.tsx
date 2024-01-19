@@ -42,15 +42,13 @@ const iconCircle = (
     <path opacity="0.5" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
-const RegisterDialog = ({ priceLabel, onClose }: any) => {
+const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
 
   const router = useRouter()
   const { account } = useAccount()
   const contract = useBnsContract()
 
   const [registerStatus, setRegisterStatus] = useState<RegisterStatusType>(0)
-
-  const discount = false
   const [year, setYear] = useState(1)
   const totalPrice = useMemo(() => year * priceLabel.price, [priceLabel.price, year])
   const discountPrice = useMemo(() => 0.4 * year * priceLabel.price, [priceLabel.price, year])
@@ -184,7 +182,7 @@ const RegisterDialog = ({ priceLabel, onClose }: any) => {
                         $background='linear-gradient(90deg, #06D0FF 0%, #C55EEC 50%, #FF9802 100%)'
                         $borderWidth='0px'
                       >
-                        <StyledText $size='16px' $line='120%'>DapDap Discount</StyledText>
+                        <StyledText $size='14px' $line='120%'>60% off</StyledText>
                       </StyledButton>
                     </StyledFlex>
                     <StyledText $size='16px' $line='120%'>-${balanceFormated(discountPrice, 2)}</StyledText>

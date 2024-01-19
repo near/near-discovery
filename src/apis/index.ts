@@ -96,3 +96,11 @@ export const getBnsUserName = async (address: any) => {
     return Promise.reject(error)
   }
 }
+
+export const getBnsDiscount = async () => {
+  try {
+    return await http.get('/api/quest/bns_discount');
+  } catch (error) {
+    return Promise.reject(error)
+  }
+}

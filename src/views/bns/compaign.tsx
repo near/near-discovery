@@ -18,6 +18,7 @@ import RelatedQuests from './components/RelatedQuests';
 import YourBnsNames from './components/YourBnsNames';
 import useBnsContract from './hooks/useBnsContract';
 import useQuestList from './hooks/useQuestList';
+import { getBnsDiscount } from '@/apis'
 import {
   StyledAchieved,
   StyledContainer,
@@ -50,6 +51,7 @@ const CampaignView = () => {
   })
   const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
   const { loading, questList } = useQuestList(router.query.id as string)
+  const [discount, setDiscount] = useState(false)
 
   const timerRef = useRef<any>(null)
 
@@ -84,7 +86,15 @@ const CampaignView = () => {
     }
   }
 
-  const handleGetQueryNameStatus = async function (event: any) {
+  const handleGetBnsDiscount = async () => {
+    try {
+      const result = await getBnsDiscount()
+      setDiscount(result.data.discount)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const handleQuery = async function (event: any) {
     const normalizedName = namehash.normalize(event).split('.').join('')
     try {
       setQueryNameStatus(1)
@@ -95,6 +105,8 @@ const CampaignView = () => {
       })
       const secondResponse = await http.get('https://api.basename.app/v1/registration/' + normalizedName + '/is-name-available')
       if (firstResponse && secondResponse) {
+        // 查询Bns优惠
+        handleGetBnsDiscount()
         setQueryNameStatus(2)
       } else {
         setQueryNameStatus(3)
@@ -114,7 +126,7 @@ const CampaignView = () => {
     setValue(event)
     timerRef.current && clearTimeout(timerRef.current)
     timerRef.current = setTimeout(() => {
-      handleGetQueryNameStatus(event)
+      handleQuery(event)
     }, 1000)
   }
   const handleClickBnsName = function (value: any) {
@@ -178,7 +190,7 @@ const CampaignView = () => {
         <RelatedQuests loading={loading} questList={questList} />
         <QA />
       </StyledFlex>
-      {showRegisterDialg && <RegisterDialog priceLabel={priceLabel} onClose={() => setShowRegisterDialg(false)} />}
+      {showRegisterDialg && <RegisterDialog priceLabel={priceLabel} discount={discount} onClose={() => setShowRegisterDialg(false)} />}
       {showNetworkDialog && <NetworkDialog bnsName={currentBnsName} setBnsName={setCurrentBnsName} onClose={() => setShowNetworkDialog(false)} />}
     </StyledWrapper >
   );
