@@ -61,6 +61,7 @@ export default function VmInitializer() {
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
   const idOS = useIdOS();
+  const idosSDK = useIdosStore((state) => state.idOS);
 
   useEffect(() => {
     initNear &&
@@ -188,6 +189,7 @@ export default function VmInitializer() {
     if (!near) {
       return;
     }
+    await idosSDK?.reset({ enclave: true });
     useIdosStore.persist.clearStorage();
     const wallet = await (await near.selector).wallet();
     wallet.signOut();
@@ -196,7 +198,7 @@ export default function VmInitializer() {
     setSignedAccountId(null);
     resetAnalytics();
     localStorage.removeItem('accountId');
-  }, [near]);
+  }, [idosSDK, near]);
 
   const refreshAllowance = useCallback(async () => {
     alert("You're out of access key allowance. Need sign in again to refresh it");
