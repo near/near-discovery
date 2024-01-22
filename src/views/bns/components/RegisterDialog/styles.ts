@@ -50,6 +50,7 @@ export const StyledInputNumberButton = styled.button`
 `
 export const StyledLoadingButton = styled.div`
   position: relative;
+  width: 100%;
   height: 50px;
   border-radius: 12px;
   display: flex;
@@ -58,6 +59,7 @@ export const StyledLoadingButton = styled.div`
   &:after {
     content: "";
     position: absolute;
+    border-radius: 12px;
     left: 0;
     top: 0;
     right: 0;

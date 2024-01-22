@@ -6,7 +6,7 @@ import Loading from '@/components/Icons/Loading';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useLayoutStore } from '@/stores/layout';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
-
+import { setCookie, getCookie } from 'cookies-next';
 import useActionCheck from '../../hooks/useActionCheck';
 import { formatDescription } from '../../helper';
 import {
@@ -92,6 +92,7 @@ const ActionItem = ({
       sessionStorage.setItem('_auth_state', state);
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=${state}&code_challenge=challenge&code_challenge_method=plain`;
       sessionStorage.setItem('_auth_type', 'twitter');
+      sessionStorage.setItem('clickedTwitter', true)
       window.open(path, '_blank');
       return;
     }
@@ -198,6 +199,7 @@ const ActionItem = ({
             <StyledIconBox
               onClick={(ev) => {
                 ev.stopPropagation();
+                if (action.category.startsWith('twitter') && !sessionStorage.getItem('clickedTwitter')) return
                 if (!checking) handleRefresh(action.id);
               }}
               onMouseEnter={() => {

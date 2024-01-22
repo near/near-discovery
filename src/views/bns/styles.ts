@@ -288,6 +288,8 @@ export const StyledText = styled.div<{
   font-weight: ${props => props.$weight || '400'};
   line-height: ${props => props.$line || 'normal'};
   text-align: ${props => props.$textAlign || 'left'};
+  box-sizing: border-box;
+  word-wrap: break-word;
   &.center {
     display: flex;
     align-items: center;
