@@ -2,6 +2,8 @@ import { arbitrum } from '@/config/tokens/arbitrum';
 import { avalanche } from '@/config/tokens/avalanche';
 import { base } from '@/config/tokens/base';
 import { bsc } from '@/config/tokens/bsc';
+import { linea } from '@/config/tokens/linea';
+import { metis } from '@/config/tokens/metis';
 import { optimism } from '@/config/tokens/optimism';
 
 const basic = {
@@ -13,6 +15,7 @@ const basic = {
 };
 
 const networks = {
+  // arb
   42161: {
     oracleAddress: '0xe12e084FC4550387cB2b252b5F289BA38b755354',
     poolAddressProvider: '0x642cc899652B068D1bED786c4B060Ec1027D1563',
@@ -86,6 +89,7 @@ const networks = {
       },
     },
   },
+  // avalanche
   43114: {
     oracleAddress: '0x5A3423210536d930150080F699248EDeBC65E2B4',
     poolAddressProvider: '0xEDc83309549e36f3c7FD8c2C5C54B4c8e5FA00FC',
@@ -151,6 +155,7 @@ const networks = {
       },
     },
   },
+  // base
   8453: {
     oracleAddress: '0x5A3423210536d930150080F699248EDeBC65E2B4',
     poolAddressProvider: '0xEDc83309549e36f3c7FD8c2C5C54B4c8e5FA00FC',
@@ -192,6 +197,7 @@ const networks = {
       },
     },
   },
+  // bsc
   56: {
     oracleAddress: '0x417cA1091Fa4C329cEe19452851dff46902440a5',
     poolAddressProvider: '0x12c26138b666360AB2B7A1B149dF9Cf6642CDfBf',
@@ -249,6 +255,7 @@ const networks = {
       },
     },
   },
+  // op
   10: {
     oracleAddress: '0x9aEeFef549323511E027D70562f0C7EdcDEB294C',
     poolAddressProvider: '0xdDE5dC81e40799750B92079723Da2acAF9e1C6D6',
@@ -303,6 +310,106 @@ const networks = {
         underlyingToken: optimism['susd'],
         stableDebtTokenAddress: '0xF0E94bdC2D589EaD059072aC1BF27c67ACf931B6',
         variableDebtTokenAddress: '0xc0031304549E494f1F48A9AC568242B1a6Ca1804',
+      },
+    },
+  },
+  // metis
+  1088: {
+    oracleAddress: '0xC4ae6CEA0f15F5a44e0F8EEA1D516aF2Eccb9709',
+    poolAddressProvider: '0xE2dfcb86C99599DAFC12028F67b8456f99c9de4c',
+    aaveProtocolDataProviderAddress: '0x10615D451a5b91C92ce8538703E7AABA5d5cCC4D',
+    lendingPoolAddress: '0x65dEc665ea1e96Ee5203DB321b5Cd413b81B2bd2',
+    wethGateway: '0x4d8d90FAF90405b9743Ce600E98A2Aa8CdF579a0',
+    markets: {
+      [metis['m.usdc'].address]: {
+        decimals: 6,
+        symbol: 'grainUSDC',
+        address: '0x37FA438EdfB7044E9444b4022b2516C4dAA4592F',
+        underlyingToken: metis['m.usdc'],
+        stableDebtTokenAddress: '0x9e398d935d3e9e02319124110aab1b4646944f45',
+        variableDebtTokenAddress: '0x1eee9a7452c6e73e6fae6b6f95bfcb3afebeddbd',
+      },
+      [metis['m.usdt'].address]: {
+        decimals: 6,
+        symbol: 'grainUSDT',
+        address: '0x18bA3e87876f4982810d321D447b81d01Cdf6668',
+        underlyingToken: metis['m.usdt'],
+        stableDebtTokenAddress: '',
+        variableDebtTokenAddress: '',
+      },
+      [metis['metis'].address]: {
+        decimals: 18,
+        symbol: 'grainMETIS',
+        address: '0x7f5eC43a46dF54471DAe95d3C05BEBe7301b75Ff',
+        underlyingToken: metis['metis'],
+        stableDebtTokenAddress: '0x179659d5e67c64b54b0df4960389787ffa4db6c2',
+        variableDebtTokenAddress: '0xeaf4cbd2622bf807a02091804db775cdce2169fb',
+      },
+      [metis['m.wbtc'].address]: {
+        decimals: 8,
+        symbol: 'grainWBTC',
+        address: '0x826ED083724909196e6598452Be4fDFe0FA6C7CD',
+        underlyingToken: metis['m.wbtc'],
+        stableDebtTokenAddress: '0xcdce2de35069a192c74a44adc94323bf80f8adcf',
+        variableDebtTokenAddress: '0x9ae05c138ebaa84c0e65ee63edd5ad64a8b78ab6',
+      },
+      [metis['weth'].address]: {
+        decimals: 18,
+        symbol: 'grainWETH',
+        address: '0x73d49aC28C4Fea2B8e7C6BF45d64A2e68ed53bE0',
+        underlyingToken: metis['weth'],
+        stableDebtTokenAddress: '0xcbd8930edde3f64cff1f1b1f079282d1377db62b',
+        variableDebtTokenAddress: '0xe772bf4d6f458552bc6a0e067efd69b9c1acbcc3',
+      },
+    },
+  },
+  // Linea
+  59144: {
+    oracleAddress: '0x8429d0AFade80498EAdb9919E41437A14d45A00B',
+    poolAddressProvider: '0x3884fcD0DB58C0fE9f6DA852fa43DB898524be95',
+    aaveProtocolDataProviderAddress: '0xd2abC5d7841d49C40Fd35A1Ec832ee1daCC8D339',
+    lendingPoolAddress: '0x871AfF0013bE6218B61b28b274a6F53DB131795F',
+    wethGateway: '0x9546F673eF71Ff666ae66d01Fd6E7C6Dae5a9995',
+    markets: {
+      [linea['usdc'].address]: {
+        decimals: 6,
+        symbol: 'grainUSDC',
+        address: '0x5C4866349ff0Bf1e7C4b7f6d8bB2dBcbe76f8895',
+        underlyingToken: linea['usdc'],
+        stableDebtTokenAddress: '',
+        variableDebtTokenAddress: '',
+      },
+      [linea['usdt'].address]: {
+        decimals: 6,
+        symbol: 'grainUSDT',
+        address: '0xa0f8323A84AdC89346eD3F7c5dcddf799916b51E',
+        underlyingToken: linea['usdt'],
+        stableDebtTokenAddress: '',
+        variableDebtTokenAddress: '',
+      },
+      [linea['dai'].address]: {
+        decimals: 18,
+        symbol: 'grainDAI',
+        address: '0x245B368d5a969179Df711774e7BdC5eC670e92EF',
+        underlyingToken: linea['dai'],
+        stableDebtTokenAddress: '0x6F2783E0f6fDaCD7ce8E87b69CEfB5Fb6Be25791',
+        variableDebtTokenAddress: '0xd4c3692B753302Ef0Ef1d50dd7928D60ef00B9ff',
+      },
+      [linea['weth'].address]: {
+        decimals: 18,
+        symbol: 'grainWETH',
+        address: '0xB36535765A7421B397Cfd9fEc03cF96aA99C8D08',
+        underlyingToken: linea['weth'],
+        stableDebtTokenAddress: '',
+        variableDebtTokenAddress: '',
+      },
+      [linea['wbtc'].address]: {
+        decimals: 8,
+        symbol: 'grainBTC',
+        address: '0xdc66aC2336742E387b766B4c264c993ee6a3EF28',
+        underlyingToken: linea['wbtc'],
+        stableDebtTokenAddress: '',
+        variableDebtTokenAddress: '',
       },
     },
   },
