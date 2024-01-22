@@ -61,15 +61,12 @@ export default function useAuthBind({ onSuccess, redirect_uri }: { onSuccess: Vo
         });
       }
     },
-    [code],
+    [code, loading],
   );
 
   useEffect(() => {
     const type = sessionStorage.getItem('_auth_type');
-
     if (!code || !type) return;
-    const state = sessionStorage.getItem('_auth_state');
-    if (searchParams.get('state') !== state && type === 'twitter') return;
     handleBind(type as AuthType);
     sessionStorage.removeItem('_auth_type');
   }, [code]);
