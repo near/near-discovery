@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export { StyledCoin, StyledTitle } from '@/views/Quest/styles';
 export {
-  StyledButton, StyledFlex, StyledLoadingWrapper, StyledText, StyledSvg
+  StyledButton, StyledFlex, StyledLoadingWrapper, StyledText, StyledSvg, StyledWrapper
 } from '../../styles';
 
 export const StyledCampaipnsContainer = styled.div`
@@ -24,8 +24,8 @@ export const StyledQuestCampaign = styled.div`
 export const StyledCampaipnContainer = styled.div`
   padding: 0 30px;
   box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
+  /* display: flex;
+  justify-content: space-between; */
   /* align-items: center; */
 `;
 
@@ -128,7 +128,7 @@ export const StyledSwiperButton = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  left: -21px;
+  left: 10px;
   top: 76px;
   width: 36px;
   height: 44px;

@@ -10,6 +10,7 @@ import { memo, useEffect, useMemo, useState } from 'react';
 import useBnsContract from '../../hooks/useBnsContract';
 import type { RegisterStatusType } from '../../types';
 import { encodeFunctionData } from 'viem';
+import useToast from '@/hooks/useToast';
 import {
   StyledButton,
   StyledDialog,
@@ -44,6 +45,7 @@ const iconCircle = (
 )
 const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
 
+  const toast = useToast()
   const router = useRouter()
   const { account } = useAccount()
   const contract = useBnsContract()
@@ -134,7 +136,10 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
       })
       setRegisterStatus(2)
     } catch (error) {
-      setRegisterStatus(2)
+      setRegisterStatus(0)
+      error.reason && toast.fail({
+        title: error.reason
+      })
       console.log('error', error)
     }
   }
@@ -154,7 +159,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
           <StyledDialogBody>
             <StyledFlex $direction='column' $gap='14px' style={{ marginBottom: 27 }}>
               <Image src={bnsAvatar} width={48} alt="bnsAvatar" />
-              <StyledText $size='26px' $weight='500'>{priceLabel.label}.base</StyledText>
+              <StyledText $size='26px' $weight='500' style={{ maxWidth: 360, textAlign: 'center' }}>{priceLabel.label}.base</StyledText>
             </StyledFlex>
             <StyledInputNumber>
               <StyledInputNumberButton disabled={year === 1} onClick={() => handleMinus()}>-</StyledInputNumberButton>
@@ -216,6 +221,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
                     $background='linear-gradient(90deg, #06D0FF 0%, #C55EEC 50%, #FF9802 100%)'
                     $borderRadius='12px'
                     $borderWidth='0'
+                    onClick={() => router.push('/quest/detail?id=28')}
                   >
                     <StyledText $size='16px' $weight='500' $line='12px'>Get price on 60% off {iconRight}</StyledText>
                   </StyledButton>

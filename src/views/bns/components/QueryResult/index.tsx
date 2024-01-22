@@ -49,7 +49,9 @@ const QueryResult = ({ label, status, onClaim }: { label: string, status: QueryN
                   }
                 </StyledChainList>
               </StyledChainListWrapper>
-              <StyledText $size='16px' $weight='700'>{label}</StyledText>
+              <StyledWrapper style={{maxWidth: 270, overflow: 'auto'}}>
+                <StyledText $size='16px' $weight='700'>{label}</StyledText>
+              </StyledWrapper>
             </StyledFlex>
             {
               status === 2 ? (

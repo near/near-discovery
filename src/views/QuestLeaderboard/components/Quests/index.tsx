@@ -5,6 +5,7 @@ import { container } from '@/components/animation';
 import Campaign from '@/views/Quest/components/Campaign';
 import QuestLists from '@/views/Quest/components/QuestLists';
 
+import { StyledContainer } from './styles';
 const Quests = ({
   onLoad,
   id,
@@ -22,11 +23,13 @@ const Quests = ({
         <Campaign
           onLoad={onLoad}
           loading={campaignLoading}
-          campaigns={campaigns}
+          campaigns={campaigns.filter(campaign => campaign.category === '')}
           categoryLoading={categoryLoading}
           categories={categories}
         />
-        <QuestLists id={id} loading={questingLoading} quests={quests} achieved={userInfo?.achieved} />
+        <StyledContainer>
+          <QuestLists id={id} loading={questingLoading} quests={quests} achieved={userInfo?.achieved} />
+        </StyledContainer>
       </motion.div>
     </AnimatePresence>
   );
