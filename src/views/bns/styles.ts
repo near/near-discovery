@@ -198,6 +198,9 @@ export const StyledDialog = styled.div`
   z-index: 999;
 `
 export const StyledWrapper = styled.div`
+  --onboarding-color: #787dff;
+  --social-color: #aad6ff;
+  --engage-color: #f4ca79;
 `
 
 export const StyledWidthFull = styled.div`

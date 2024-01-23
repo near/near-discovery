@@ -45,7 +45,7 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
                   </StyledSubTitle> */}
                   <StyledListBox>
                     {_quests.map((item) => (
-                      <QuestItem quest={item} categoryName={_quests[0].quest_category_name} key={item.id + Math.random()} />
+                      <QuestItem quest={item} key={item.id + Math.random()} />
                     ))}
                   </StyledListBox>
                 </div>
