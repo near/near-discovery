@@ -21,7 +21,8 @@ import {
   StyledStatusContent,
   StyledStatusWrapper,
   StyledSvg,
-  StyledText
+  StyledText,
+  StyledWrapper
 } from './styles';
 
 const QueryResult = ({ label, status, onClaim }: { label: string, status: QueryNameStatusType, onClaim: any }) => {
@@ -32,9 +33,11 @@ const QueryResult = ({ label, status, onClaim }: { label: string, status: QueryN
     <StyledQueryResult>
       {
         label.length < 3 ? (
-          <StyledText $size='15px' $weight='600' style={{ opacity: 0.5 }}>
-            Minimum of 3 characters
-          </StyledText>
+          <StyledWrapper style={{ width: 432, opacity: 0.5 }}>
+            <StyledText $size='15px' $weight='600'>
+              Minimum of 3 characters
+            </StyledText>
+          </StyledWrapper>
         ) : (
           <StyledStatusWrapper className={status === 2 ? 'success' : ''}>
             <StyledStatusContent>
