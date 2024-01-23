@@ -86,3 +86,22 @@ export const StyledCheckedStatus = styled.div`
   font-weight: 400;
   line-height: normal;
 `
+
+export const StyledPlusButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #373A53;
+  background: #2E3142;
+  /* color: #979ABE; */
+  stroke: #979ABE;
+  fill: #979ABE;
+  &:hover {
+    background: #333649;
+    stroke: #FFF;
+    fill: #FFF;
+  }
+`

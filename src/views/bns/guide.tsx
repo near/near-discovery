@@ -4,7 +4,7 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { LANDING_CHAINS } from '@/config/bridge/chains';
 import { useChainsStore } from '@/stores/chains';
 import Image from 'next/image';
-import { memo, useMemo } from 'react';
+import { memo, useMemo, useState } from 'react';
 
 import {
   StyledFlex,
@@ -18,6 +18,8 @@ import {
 } from './styles';
 
 import DapXBNS from '@/assets/images/DapXBNS.svg';
+import { getCookie } from 'cookies-next';
+import { useRouter } from 'next/router';
 const iconChecked = (
   <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
     <circle cx="11.5" cy="11.5" r="11" fill="#EBF479" stroke="#EBF479" />
@@ -25,7 +27,44 @@ const iconChecked = (
   </svg>
 
 )
+
+// const FirstStep = memo(function (props) {
+//   const supportChains = useMemo(() => {
+//     return Object.keys(LANDING_CHAINS).map((_chainId) =>
+//       chains.find((_chain: any) => _chain.chain_id === Number(_chainId)),
+//     );
+//   }, [chains]);
+//   const currentChain = useMemo(() => {
+//     const _chainId = 8453;
+//     return chains.find((chain: any) => chain.chain_id === _chainId);
+//   }, [chains]);
+//   return (
+//     <ComponentWrapperPage
+//       componentProps={{
+//         chains: supportChains,
+//         currentChain: { ...currentChain, src: LANDING_CHAINS[8453] },
+//         addAction: (data: any) => {
+//           // addAction(data);
+//           onSuccess();
+//         },
+//         from: 'landing',
+//       }}
+//       src={'dapdapbos.near/widget/BridgeEntry'}
+//     />
+//   )
+// })
+// const SecondStep = memo(function (props) {
+//   return (
+
+//   )
+// })
+// const ThirdStep = memo(function (props) {
+//   return (
+
+//   )
+// })
 const GuideView = () => {
+  const router = useRouter()
   const chains = useChainsStore((store: any) => store.chains);
   const stepList = [{
     name: 'Step 1. Bridge',
@@ -37,7 +76,7 @@ const GuideView = () => {
     name: 'Step 3. Explore Base',
     desc: 'Experience how to use Base seamlessly in DapDap.'
   }]
-  const stepIndex = 0
+
   const supportChains = useMemo(() => {
     return Object.keys(LANDING_CHAINS).map((_chainId) =>
       chains.find((_chain: any) => _chain.chain_id === Number(_chainId)),
@@ -47,13 +86,32 @@ const GuideView = () => {
     const _chainId = 8453;
     return chains.find((chain: any) => chain.chain_id === _chainId);
   }, [chains]);
+  const [stepIndex, setStepIndex] = useState<number>(0)
+
+  // const componentMap = {
+  //   0: <FirstStep />,
+  //   1: <SecondStep />,
+  //   2: <ThirdStep />,
+  // }
+
+
+  const handleContinue = function () {
+    handleChangeStepIndex(stepIndex + 1)
+  }
+  const handleSkip = function () {
+    handleChangeStepIndex(3)
+  }
+  const handleChangeStepIndex = function (index: number) {
+    setStepIndex(index)
+    index > 2 && router.push('/bns/leaderboard')
+  }
 
   return (
     <StyledFlex $gap='125px' $align='flex-start'>
       <StyledWrapper style={{ width: 529 }}>
         <StyledFlex $justify='flex-start' $gap='11px'>
           <StyledSvg><Image src={iconHand} alt='iconHand' /></StyledSvg>
-          <StyledText $size='32px' $line='normal' $weight='700'>Hi, reffer.base!</StyledText>
+          <StyledText $size='32px' $line='normal' $weight='700'>Hi, {getCookie('BNS_NAME')}!</StyledText>
         </StyledFlex>
         <StyledText $size='32px' $line='normal' $weight='700' style={{ width: 578 }}>
           3 Steps to experience Base in DapDap and earn Dapdap<Image src={iconCoin} alt='iconCoin' style={{ marginLeft: 4, marginRight: 4 }} /><span style={{ color: '#EBF479' }}>200 PTS</span>
@@ -78,8 +136,8 @@ const GuideView = () => {
           {stepList.map((step, index) => <StyledGuideStepLine key={index} className={index === stepIndex ? 'active' : ''}></StyledGuideStepLine>)}
         </StyledFlex>
         <StyledFlex $gap='20px'>
-          <StyledGuideContinueButton>Continue</StyledGuideContinueButton>
-          <StyledGuideSkipButton>Skip</StyledGuideSkipButton>
+          <StyledGuideContinueButton onClick={handleContinue}>Continue</StyledGuideContinueButton>
+          <StyledGuideSkipButton onClick={handleSkip}>Skip</StyledGuideSkipButton>
         </StyledFlex>
       </StyledWrapper >
 
@@ -87,14 +145,12 @@ const GuideView = () => {
         <StyledSvg>
           <Image src={DapXBNS} alt='DapXBNS' />
         </StyledSvg>
-
         <StyledWrapper>
           <ComponentWrapperPage
             componentProps={{
               chains: supportChains,
               currentChain: { ...currentChain, src: LANDING_CHAINS[8453] },
               addAction: (data: any) => {
-                // addAction(data);
                 // onSuccess();
               },
               from: 'landing',
@@ -103,7 +159,7 @@ const GuideView = () => {
           />
         </StyledWrapper>
       </StyledWrapper>
-    </StyledFlex >
+    </StyledFlex>
   );
 };
 

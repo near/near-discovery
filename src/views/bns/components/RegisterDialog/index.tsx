@@ -1,15 +1,18 @@
 import bnsAvatar from '@/assets/images/bns_avatar.svg';
 import iconCain from '@/assets/images/icon_coin.svg';
+import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains';
 import useAccount from '@/hooks/useAccount';
+import useToast from '@/hooks/useToast';
 import { balanceFormated } from '@/utils/balance';
 import * as http from '@/utils/http';
 import namehash from "@ensdomains/eth-ens-namehash";
+import { useSetChain } from '@web3-onboard/react';
 import { ethers } from 'ethers';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { memo, useEffect, useMemo, useState } from 'react';
 import useBnsContract from '../../hooks/useBnsContract';
 import type { RegisterStatusType } from '../../types';
-import { encodeFunctionData } from 'viem';
 import {
   StyledButton,
   StyledDialog,
@@ -26,7 +29,6 @@ import {
   StyledUserNameButton,
   StyledUserNameButtonWrapper
 } from './styles';
-import { useRouter } from 'next/router';
 const iconClose = (
   <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
     <path d="M7.73284 6.00004L11.7359 1.99701C12.0368 1.696 12.0882 1.2593 11.8507 1.0219L10.9779 0.14909C10.7404 -0.0884124 10.3043 -0.0363122 10.0028 0.264491L6.00013 4.26743L1.99719 0.264591C1.69619 -0.036712 1.25948 -0.0884125 1.02198 0.14939L0.149174 1.0223C-0.0882277 1.2594 -0.0368271 1.6961 0.264576 1.99711L4.26761 6.00004L0.264576 10.0033C-0.0363271 10.3041 -0.0884277 10.7405 0.149174 10.978L1.02198 11.8509C1.25948 12.0884 1.69619 12.0369 1.99719 11.736L6.00033 7.73276L10.0029 11.7354C10.3044 12.037 10.7405 12.0884 10.978 11.8509L11.8508 10.978C12.0882 10.7405 12.0368 10.3041 11.736 10.0029L7.73284 6.00004Z" fill="#979ABE" />
@@ -42,8 +44,16 @@ const iconCircle = (
     <path opacity="0.5" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
-const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
+const RegisterDialog = ({
+  priceLabel,
+  onClose,
+  discount,
+  setShowSwitchNetworkDialog,
+  currentChain,
+  setChain
+}: any) => {
 
+  const toast = useToast()
   const router = useRouter()
   const { account } = useAccount()
   const contract = useBnsContract()
@@ -61,6 +71,10 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
   }
 
   const handleRegister = async function () {
+    if (currentChain && currentChain.chainName !== 'Base') {
+      setShowSwitchNetworkDialog(true)
+      return
+    }
     const response = await http.post('https://api.basename.app/v1/registration/register-request-with-signature', {
       toAddress: account,
       label: priceLabel.label,
@@ -133,8 +147,11 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
         ]
       })
       setRegisterStatus(2)
-    } catch (error) {
-      setRegisterStatus(2)
+    } catch (error: any) {
+      setRegisterStatus(0)
+      error.reason && toast.fail({
+        title: error.reason
+      })
       console.log('error', error)
     }
   }
@@ -154,7 +171,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
           <StyledDialogBody>
             <StyledFlex $direction='column' $gap='14px' style={{ marginBottom: 27 }}>
               <Image src={bnsAvatar} width={48} alt="bnsAvatar" />
-              <StyledText $size='26px' $weight='500'>{priceLabel.label}.base</StyledText>
+              <StyledText $size='26px' $weight='500' style={{ maxWidth: 360, textAlign: 'center' }}>{priceLabel.label}.base</StyledText>
             </StyledFlex>
             <StyledInputNumber>
               <StyledInputNumberButton disabled={year === 1} onClick={() => handleMinus()}>-</StyledInputNumberButton>
@@ -216,6 +233,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
                     $background='linear-gradient(90deg, #06D0FF 0%, #C55EEC 50%, #FF9802 100%)'
                     $borderRadius='12px'
                     $borderWidth='0'
+                    onClick={() => router.push('/quest/detail?id=28')}
                   >
                     <StyledText $size='16px' $weight='500' $line='12px'>Get price on 60% off {iconRight}</StyledText>
                   </StyledButton>
@@ -245,7 +263,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount }: any) => {
           <StyledDialogBody>
             <StyledUserNameButtonWrapper>
               <StyledUserNameButton>
-                <StyledUserName>3210.base</StyledUserName>
+                <StyledUserName>{priceLabel.label}</StyledUserName>
               </StyledUserNameButton>
             </StyledUserNameButtonWrapper>
             <StyledFlex $direction='column' $gap='20px' style={{ marginTop: 35, marginBottom: 45 }}>

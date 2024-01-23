@@ -34,6 +34,7 @@ const useAuth = () => {
           if (result.name) {
             setCookie('BNS_NAME', result.name);
             setCookie('AUTHED_ACCOUNT', wallet.accounts[0].address);
+            router.replace('/bns/guide')
             return
           }
           const checked = await checkAddressIsInvited(wallet.accounts[0].address);

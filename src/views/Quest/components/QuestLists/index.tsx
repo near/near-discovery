@@ -40,12 +40,12 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
               const _quests = quests[key] as any[];
               return _quests?.length ? (
                 <div key={_quests[0].quest_category_name + Math.random()}>
-                  <StyledSubTitle style={{ color: `var(--${_quests[0].quest_category_name}-color` }}>
+                  {/* <StyledSubTitle style={{ color: `var(--${_quests[0].quest_category_name}-color` }}>
                     #{_quests[0].quest_category_name}
-                  </StyledSubTitle>
+                  </StyledSubTitle> */}
                   <StyledListBox>
                     {_quests.map((item) => (
-                      <QuestItem quest={item} key={item.id + Math.random()} />
+                      <QuestItem quest={item} categoryName={_quests[0].quest_category_name} key={item.id + Math.random()} />
                     ))}
                   </StyledListBox>
                 </div>

@@ -54,4 +54,25 @@ export default {
   avage: {
     type: 'lending',
   },
+  'tender-finance': {
+    type: 'lending',
+  },
+  'we-piggy': {
+    type: 'lending',
+  },
+  filda: {
+    type: 'lending',
+  },
+  'trader-joe': {
+    type: 'lending',
+  },
+  'lodestar-v1': {
+    type: 'lending',
+  },
+  liqee: {
+    type: 'lending',
+  },
+  'shoebill-v2': {
+    type: 'lending',
+  },
 };

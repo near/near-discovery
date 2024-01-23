@@ -129,7 +129,7 @@ export const StyledCodeInput = styled.input`
   outline: none;
   border: none;
   background: transparent;
-  width: 16px;
+  width: 22px;
   border-bottom: 2px solid #000;
   text-align: center;
   color: #000;
@@ -288,6 +288,7 @@ export const StyledText = styled.div<{
   font-weight: ${props => props.$weight || '400'};
   line-height: ${props => props.$line || 'normal'};
   text-align: ${props => props.$textAlign || 'left'};
+  box-sizing: border-box;
   &.center {
     display: flex;
     align-items: center;

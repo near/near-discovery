@@ -27,7 +27,7 @@ const QA = () => {
   }]
   return (
     <StyledContainer>
-      <StyledHead>Related Quests</StyledHead>
+      <StyledHead>Q&A</StyledHead>
       <StyledFlex $direction='column' $gap='30px'>
         {
           questionList.map((question, index) => (

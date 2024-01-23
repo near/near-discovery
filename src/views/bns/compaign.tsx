@@ -1,16 +1,21 @@
+import { getBnsDiscount } from '@/apis';
 import DapXBNS from '@/assets/images/DapXBNS.svg';
 import desktop from '@/assets/images/desktop.png';
 import discountMark from '@/assets/images/discount_mark.svg';
 import iconAchieved from '@/assets/images/icon_achieved.svg';
+import AccountSider from '@/components/AccountSider';
 import Breadcrumb from '@/components/Breadcrumb';
+import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains';
 import { DesktopNavigationTop } from '@/components/navigation/desktop/DesktopNavigationTop';
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
 import * as http from '@/utils/http';
+import QuestItem from '@/views/Quest/components/QuestItem';
+import { useSetChain } from '@web3-onboard/react';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { memo, useEffect, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import InputWithEmoji from './components/InputWithEmoji';
 import QA from './components/QA';
 import QueryResult from './components/QueryResult';
@@ -18,7 +23,6 @@ import RelatedQuests from './components/RelatedQuests';
 import YourBnsNames from './components/YourBnsNames';
 import useBnsContract from './hooks/useBnsContract';
 import useQuestList from './hooks/useQuestList';
-import { getBnsDiscount } from '@/apis'
 import {
   StyledAchieved,
   StyledContainer,
@@ -34,12 +38,15 @@ import type { QueryNameStatusType } from './types';
 import namehash from "@ensdomains/eth-ens-namehash";
 import NetworkDialog from './components/NetworkDialog';
 import RegisterDialog from './components/RegisterDialog';
+import SwitchNetwork from './components/SwitchNetwork';
 const CampaignView = () => {
   const router = useRouter()
   const contract = useBnsContract()
+  const { chains } = useTokensAndChains()
   const { account } = useAccount();
   const { connect, connecting } = useAuth();
   const [value, setValue] = useState('')
+
   const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0)
   const [bnsNames, setBnsNames] = useState<any>([])
   const [currentBnsName, setCurrentBnsName] = useState<any>({
@@ -50,11 +57,20 @@ const CampaignView = () => {
 
   })
   const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
+
+  const [showSwitchNetworkDialog, setShowSwitchNetworkDialog] = useState<boolean>(false)
   const { loading, questList } = useQuestList(router.query.id as string)
   const [discount, setDiscount] = useState(false)
 
+  const [{ connectedChain, settingChain }, setChain] = useSetChain();
+  const currentChain: any = useMemo(
+    () => (connectedChain?.id ? chains[Number(connectedChain?.id)] : null),
+    [connectedChain?.id],
+  );
+
   const timerRef = useRef<any>(null)
 
+  const twitterQuest: any = useMemo(() => questList.find((quest: any) => quest.id === 28), [questList])
   const getBnsAddress = async function (name: string) {
     return await http.get('https://api.basename.app/records/base/' + name)
   }
@@ -126,7 +142,7 @@ const CampaignView = () => {
     setValue(event)
     timerRef.current && clearTimeout(timerRef.current)
     timerRef.current = setTimeout(() => {
-      handleQuery(event)
+      event.length > 0 && handleQuery(event)
     }, 1000)
   }
   const handleClickBnsName = function (value: any) {
@@ -167,12 +183,15 @@ const CampaignView = () => {
             </StyledSvg>
           </StyledFlex>
         </StyledWrapper>
-        <StyledWrapper style={{ position: 'relative' }}>
-          {/* <QuestItem /> */}
-          <StyledAchieved>
-            <Image src={iconAchieved} alt='iconAchieved' />
-          </StyledAchieved>
+        {twitterQuest && <StyledWrapper style={{ position: 'relative' }}>
+          <QuestItem quest={twitterQuest} />
+          {
+            twitterQuest.action_completed + 1 >= twitterQuest.total_action && <StyledAchieved>
+              <Image src={iconAchieved} alt='iconAchieved' />
+            </StyledAchieved>
+          }
         </StyledWrapper>
+        }
       </StyledFlex>
       <StyledImage>
         <Image src={desktop} width={678} height={419} alt='desktop' />
@@ -190,8 +209,28 @@ const CampaignView = () => {
         <RelatedQuests loading={loading} questList={questList} />
         <QA />
       </StyledFlex>
-      {showRegisterDialg && <RegisterDialog priceLabel={priceLabel} discount={discount} onClose={() => setShowRegisterDialg(false)} />}
-      {showNetworkDialog && <NetworkDialog bnsName={currentBnsName} setBnsName={setCurrentBnsName} onClose={() => setShowNetworkDialog(false)} />}
+      {showRegisterDialg && (
+        <RegisterDialog
+          priceLabel={priceLabel}
+          discount={discount}
+          setShowSwitchNetworkDialog={setShowSwitchNetworkDialog}
+          currentChain={currentChain}
+          setChain={setChain}
+          onClose={() => setShowRegisterDialg(false)}
+        />
+      )}
+      {showNetworkDialog && (
+        <NetworkDialog
+          bnsName={currentBnsName}
+          setShowSwitchNetworkDialog={setShowSwitchNetworkDialog}
+          setBnsName={setCurrentBnsName}
+          currentChain={currentChain}
+          setChain={setChain}
+          onClose={() => setShowNetworkDialog(false)}
+        />
+      )}
+      {showSwitchNetworkDialog && <SwitchNetwork chainId={8453} onClose={() => setShowSwitchNetworkDialog(false)} />}
+      <AccountSider />
     </StyledWrapper >
   );
 };

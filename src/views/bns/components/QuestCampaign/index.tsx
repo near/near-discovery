@@ -1,16 +1,16 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 
 
 import QuestItem from '@/views/Quest/components/QuestItem';
 import { formatPeriodDate } from '@/views/Quest/helpers';
 import useLike from '@/views/Quest/hooks/useLike';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import useQuestList from '../../hooks/useQuestList';
 import Timer from '../Timer';
 
 import Loading from '@/components/Icons/Loading';
+import { useRouter } from 'next/router';
 import {
-  StyledBox,
   StyledButton,
   StyledCampaipnContainer,
   StyledCampaipnsContainer,
@@ -27,9 +27,9 @@ import {
   StyledTags,
   StyledText,
   StyledTimerBox,
-  StyledTitle
+  StyledTitle,
+  StyledWrapper
 } from './styles';
-import { useRouter } from 'next/router';
 
 
 const iconLeft = (
@@ -56,13 +56,29 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
   }
   return (
     <StyledCampaipnContainer onClick={handleClickExplore}>
-      <StyledBox>
-        <div>
-          <StyledHeader>
-            <StyledTitle>{campaign.name}</StyledTitle>
-          </StyledHeader>
-          <StyledDesc>{campaign.description}</StyledDesc>
-        </div>
+      <StyledFlex $direction='column' $align='flex-start'>
+        <StyledFlex $align='flex-start' $justify='space-between'>
+          <StyledWrapper style={{ width: 665 }}>
+            <StyledHeader>
+              <StyledTitle>{campaign.name}</StyledTitle>
+            </StyledHeader>
+            <StyledDesc>{campaign.description}</StyledDesc>
+          </StyledWrapper>
+          <StyledButton $width='506px' $height='auto' $background="#2C2E3E" $borderRadius='33px' style={{ paddingTop: 8, paddingRight: 8, paddingBottom: 8, paddingLeft: 40 }}>
+            <StyledTimerBox>
+              {campaign.start_time > Date.now() && <div>Upcoming</div>}
+              {campaign.start_time > Date.now() ? (
+                <Timer endTime={Number(campaign.start_time)} />
+              ) : (
+                <Timer endTime={Number(campaign.end_time)} />
+              )}
+            </StyledTimerBox>
+            <StyledButton style={{ marginLeft: 48 }} $width='227px' $borderRadius='27px' $background='linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%)'>
+              <StyledText $color='#02051E' $size='16px' $weight='700'>Explore now</StyledText>
+              <StyledSvg style={{ marginLeft: 9 }}>{iconExploreRight}</StyledSvg>
+            </StyledButton>
+          </StyledButton>
+        </StyledFlex>
         <StyledTags>
           <StyledTag style={{ padding: '0px 10px 0px 6px' }}>
             <StyledCoin $size={20} />
@@ -80,48 +96,29 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
           </StyledTag>
           <StyledTag>{formatPeriodDate(campaign.start_time, campaign.end_time)} UTC</StyledTag>
         </StyledTags>
-      </StyledBox>
-      <StyledBox>
-        <StyledButton $height='auto' $background="#2C2E3E" $borderRadius='33px' style={{ paddingTop: 8, paddingRight: 8, paddingBottom: 8, paddingLeft: 40 }}>
-          <StyledTimerBox>
-            {campaign.start_time > Date.now() && <div>Upcoming</div>}
-            {campaign.start_time > Date.now() ? (
-              <Timer endTime={Number(campaign.start_time)} />
-            ) : (
-              <Timer endTime={Number(campaign.end_time)} />
-            )}
-          </StyledTimerBox>
-          <StyledButton style={{ marginLeft: 48 }} $width='227px' $borderRadius='27px' $background='linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%)'>
-            <StyledText $color='#02051E' $size='16px' $weight='700'>Explore now</StyledText>
-            <StyledSvg style={{ marginLeft: 9 }}>{iconExploreRight}</StyledSvg>
-          </StyledButton>
-        </StyledButton>
-      </StyledBox>
+      </StyledFlex>
     </StyledCampaipnContainer>
   );
 };
-const SlideButtonList = function () {
-  const swiper = useSwiper()
-  const handleClickSlideButton = function (type: string) {
+const QuestList = ({ questList }: any) => {
+  const swiperRef = useRef<any>(null);
+  const handleClickSlideButton = function (event: any, type: string) {
+    event.stopPropagation()
     if (type === 'prev') {
-      swiper.slidePrev()
+      swiperRef.current && swiperRef.current.slidePrev()
     } else {
-      swiper.slideNext()
+      swiperRef.current && swiperRef.current.slideNext()
     }
   }
   return (
-    <>
-      <StyledSwiperButton onClick={() => handleClickSlideButton('prev')}>{iconLeft}</StyledSwiperButton>
-      <StyledSwiperButton className='right' onClick={() => handleClickSlideButton('next')}>{iconRight}</StyledSwiperButton>
-    </>
-  )
-}
-const QuestList = ({ questList }: any) => {
-  return (
     <StyledQuestList>
       <Swiper
-        spaceBetween={18}
-        slidesPerView={4}
+        width={402}
+        spaceBetween={15}
+        slidesPerView={1}
+        onSwiper={(swiper) => {
+          swiperRef.current = swiper;
+        }}
       >
         {
           questList.map((quest: any, index: number) => (
@@ -130,8 +127,9 @@ const QuestList = ({ questList }: any) => {
             </SwiperSlide>
           ))
         }
-        <SlideButtonList />
       </Swiper>
+      <StyledSwiperButton onClick={(event) => handleClickSlideButton(event, 'prev')}>{iconLeft}</StyledSwiperButton>
+      <StyledSwiperButton className='right' onClick={(event) => handleClickSlideButton(event, 'next')}>{iconRight}</StyledSwiperButton>
     </StyledQuestList>
   )
 }
@@ -152,9 +150,7 @@ const QuestCampaign = ({ campaign, categories }: any) => {
 const Index = ({ onLoad, campaigns, categories }: any) => {
   return (
     <StyledCampaipnsContainer>
-      <StyledHeader style={{ marginTop: 40, marginBottom: 20 }}>
-        <StyledTitle>Quest Campaign</StyledTitle>
-      </StyledHeader>
+      <StyledHeader style={{ marginTop: 40, marginBottom: 20 }}>Quest Campaign</StyledHeader>
       <StyledFlex $direction='column' $gap='30px'>
         {campaigns.map((campaign: any) => <QuestCampaign key={campaign.id} campaign={campaign} categories={categories} />)}
       </StyledFlex>
