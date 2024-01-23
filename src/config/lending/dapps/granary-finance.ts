@@ -8,7 +8,7 @@ import { optimism } from '@/config/tokens/optimism';
 
 const basic = {
   name: 'Granary Finance',
-  icon: 'https://ipfs.near.social/ipfs/bafkreihovftnvueysjuj7wansa74k3bgtfs4hkip4bgdvguh6nhehkvg5e',
+  icon: '/images/apps/granary.png',
   data: 'bluebiu.near/widget/Lending.Data.Radiant',
   handler: 'bluebiu.near/widget/Lending.Handler.Radiant',
   type: 'aave2',

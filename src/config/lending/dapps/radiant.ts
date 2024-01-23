@@ -3,7 +3,7 @@ import { bsc } from '@/config/tokens/bsc';
 
 const basic = {
   name: 'Radiant',
-  icon: 'https://ipfs.near.social/ipfs/bafkreigbuxe2ernc4xqtnepturk55k3rnqzs3tikqfzdpptky7i6cwypfu',
+  icon: '/images/apps/radiant.png',
   data: 'bluebiu.near/widget/Lending.Data.Radiant',
   handler: 'bluebiu.near/widget/Lending.Handler.Radiant',
   handlerClaim: 'bluebiu.near/widget/Arbitrum.Lending.RadiantClaimHandler',

@@ -2,7 +2,7 @@ import { gnosis } from '@/config/tokens/gnosis';
 
 const basic = {
   name: 'Agave',
-  icon: 'https://ipfs.near.social/ipfs/bafkreidnjva6lfgk24dzwhxrw2kuzegoochsczau5bqtmudhyyxvmcampq',
+  icon: '/images/apps/agave.png',
   data: 'bluebiu.near/widget/Lending.Data.Radiant',
   handler: 'bluebiu.near/widget/Lending.Handler.Radiant',
 };
