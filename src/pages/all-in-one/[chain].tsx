@@ -190,7 +190,6 @@ const AllInOne: NextPageWithLayout = () => {
   const router = useRouter();
   const chain = router.query.chain as string;
   const currentChain = popupsData[chain] || popupsData['arbitrum'];
-  const components = useBosComponents();
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
   const [{ settingChain }, setChain] = useSetChain();
@@ -299,15 +298,19 @@ const AllInOne: NextPageWithLayout = () => {
             </div>
             <div className="content-page">
               <ComponentWrapperPage
-                src={(components as any)[chain === 'zksync' ? 'zkSync' : chain]}
+                src="bluebiu.near/widget/All-in-one"
                 meta={{
                   title: 'Connect with the NEAR community.',
                   description: 'Become part of the NEAR community.',
                 }}
                 componentProps={{
                   addAction,
-                  swapConfig: swapConfig[currentChain?.chainId],
-                  lendingConfig: { ...lendingConfig[currentChain?.chainId], multicall },
+                  multicall,
+                  chainId: currentChain.chainId,
+                  defaultTab: currentChain.defaultTab,
+                  menuConfig: currentChain.menuConfig,
+                  ...(swapConfig[currentChain?.chainId] || {}),
+                  ...(lendingConfig[currentChain?.chainId] || {}),
                   prices,
                 }}
               />

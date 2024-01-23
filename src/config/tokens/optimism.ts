@@ -157,4 +157,12 @@ export const optimism: { [key: string]: Token } = {
     name: 'VelodromeV2',
     icon: 'https://ipfs.near.social/ipfs/bafkreifvigcwmpoucqlef3ee7c7sx6ivwbks5qxzmdsp23rgheqllaxx54',
   },
+  link: {
+    chainId: CHAIN_ID,
+    address: '0x350a791Bfc2C21F9Ed5d10980Dad2e2638ffa7f6',
+    decimals: 18,
+    symbol: 'LINK',
+    name: 'ChainLink Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreidrq7qk3d6epwaxobq4gk7yowljr5tnslxwrsbd7vnw3srkt7ok3u',
+  },
 };

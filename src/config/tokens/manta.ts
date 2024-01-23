@@ -2,6 +2,15 @@ import type { Token } from '@/types';
 
 const CHAIN_ID = 169;
 export const manta: { [key: string]: Token } = {
+  eth: {
+    address: 'native',
+    isNative: true,
+    chainId: CHAIN_ID,
+    symbol: 'ETH',
+    decimals: 18,
+    name: 'Ether',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibspnls7q67q25r2ifv2rrfmvzl744pzuh3s5ekigeqkmyycl2auq',
+  },
   weth: {
     address: '0x0Dc808adcE2099A9F62AA87D9670745AbA741746',
     chainId: CHAIN_ID,
@@ -107,5 +116,13 @@ export const manta: { [key: string]: Token } = {
     symbol: 'iUSD',
     name: 'iZUMi Bond USD',
     icon: 'https://ipfs.near.social/ipfs/bafkreiabjt25div73chcsnfhfqlfxj62j5fp2fvnl427qv3mlicx2bwanq',
+  },
+  lab: {
+    chainId: CHAIN_ID,
+    address: '0x20A512dbdC0D006f46E6cA11329034Eb3d18c997',
+    decimals: 18,
+    symbol: 'LAB',
+    name: 'LineaBank Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihjcqx2wtmzq6l2dobpx7oe5zb5epz3frvgzw6wfnojkps7d6cjce',
   },
 };

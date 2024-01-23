@@ -1,6 +1,7 @@
 import multicall from '@/config/contract/multicall';
 import weth from '@/config/contract/weth';
 import cream from '../dapps/cream';
+import filda from '../dapps/filda';
 
 const CHAIN_ID = 137;
 const CHAIN_NAME = 'Polygon';
@@ -21,6 +22,10 @@ export default {
     'C.R.E.A.M.': {
       ...cream.basic,
       ...cream.networks[CHAIN_ID],
+    },
+    FilDA: {
+      ...filda.basic,
+      ...filda.networks[CHAIN_ID],
     },
   },
 };

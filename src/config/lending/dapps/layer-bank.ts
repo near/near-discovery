@@ -1,8 +1,9 @@
 import { linea } from '@/config/tokens/linea';
+import { manta } from '@/config/tokens/manta';
 
 const basic = {
   name: 'LayerBank',
-  icon: 'https://ipfs.near.social/ipfs/bafkreiecfhuuc6grbyfxfv4uzgaciofdug6sdqv7efruu4uwmzclfqmcs4',
+  icon: '/images/apps/layer-bank.png',
   data: 'bluebiu.near/widget/Lending.Data.LayerBank',
   handler: 'bluebiu.near/widget/Lending.Handler.LayerBank',
   handlerClaim: 'bluebiu.near/widget/Linea.Lending.LayerBankHandlerClaim',
@@ -35,6 +36,51 @@ const networks = {
       },
     },
     rewardToken: linea['lab'],
+  },
+  169: {
+    unitrollerAddress: '0xB7A23Fc0b066051dE58B922dC1a08f33DF748bbf',
+    oracleAddress: '0x38f4384B457F81A4895c93a7503c255eFd0746d2',
+    rateModelSlopeAddress: '0x27F85bD47740139a56e34124B33481ea6e1e660D',
+    distributionAddress: '0x67c10B7b8eEFe92EB4DfdEeedd94263632E483b0',
+    markets: {
+      '0x472D43A8f00A41c3431e549367d2DE2E07c5e388': {
+        decimals: 18,
+        symbol: 'lwUSDM',
+        address: '0x472D43A8f00A41c3431e549367d2DE2E07c5e388',
+        underlyingToken: manta['wusdm'],
+      },
+      '0x71384B2c17433Ba1D8F6Fe895E9B2E7953dCED68': {
+        decimals: 18,
+        symbol: 'lSTONE',
+        address: '0x71384B2c17433Ba1D8F6Fe895E9B2E7953dCED68',
+        underlyingToken: manta['stone'],
+      },
+      '0x7479c717f2B72116D15B4eaF8D540C497E07e0B6': {
+        decimals: 18,
+        symbol: 'lETH',
+        address: '0x7479c717f2B72116D15B4eaF8D540C497E07e0B6',
+        underlyingToken: manta['eth'],
+      },
+      '0x7Def25c6C2b4Bc9e9fB5122D22650F8EcdFeff45': {
+        decimals: 18,
+        symbol: 'lUSDC',
+        address: '0x7Def25c6C2b4Bc9e9fB5122D22650F8EcdFeff45',
+        underlyingToken: manta['usdc'],
+      },
+      '0x9d8Ecb502d2Ac290644D70A096165188D47e21A4': {
+        decimals: 18,
+        symbol: 'lTIA',
+        address: '0x9d8Ecb502d2Ac290644D70A096165188D47e21A4',
+        underlyingToken: manta['tia'],
+      },
+      '0xDF4b60ce539648AB05541827A3bf0a079a5fc1C2': {
+        decimals: 18,
+        symbol: 'lwstETH',
+        address: '0xDF4b60ce539648AB05541827A3bf0a079a5fc1C2',
+        underlyingToken: manta['wsteth'],
+      },
+    },
+    rewardToken: manta['lab'],
   },
 };
 
