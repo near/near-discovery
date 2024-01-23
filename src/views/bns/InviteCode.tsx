@@ -9,6 +9,7 @@ import _ from 'lodash';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { memo, useRef, useState } from 'react';
+import useToast from '@/hooks/useToast';
 import {
   StyledCodeInput,
   StyledCodeInputWrapper,
@@ -22,6 +23,7 @@ import {
 const LoginView = () => {
   const router = useRouter();
   const { account } = useAccount();
+  const toast = useToast();
   const [codeList, setCodeList] = useState(new Array(6).fill(''))
   const [errorTips, setErrorTips] = useState<string>('');
   const [loading, setLoading] = useState(false);
@@ -46,6 +48,10 @@ const LoginView = () => {
   }
   const handlePaste = function (event: any) {
     const text = event.clipboardData.getData('text')
+    if (text.length !== 6) {
+      setErrorTips('Invalid invite code. Please try another')
+      return
+    }
     const array = text.split('')
     setCodeList(array)
     inputRef.current && inputRef.current[array.length - 1].focus()

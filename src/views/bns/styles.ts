@@ -129,7 +129,7 @@ export const StyledCodeInput = styled.input`
   outline: none;
   border: none;
   background: transparent;
-  width: 16px;
+  width: 22px;
   border-bottom: 2px solid #000;
   text-align: center;
   color: #000;

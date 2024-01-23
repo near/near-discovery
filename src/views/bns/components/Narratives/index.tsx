@@ -35,7 +35,7 @@ const iconSwiperRight = (
 const Campaign = function ({ campaign }: any) {
   const router = useRouter()
   const { loading, questList } = useQuestList(campaign.id)
-  const swiperRef = useRef();
+  const swiperRef = useRef<any>(null);
   const handleClickSlideButton = function (event: any, type: string) {
     event.stopPropagation()
     if (type === 'prev') {
@@ -85,7 +85,7 @@ const Campaign = function ({ campaign }: any) {
           {
             questList.map((quest: any, index: number) => (
               <SwiperSlide key={index}>
-                <QuestItem quest={quest} showDesc />
+                <QuestItem quest={quest} />
               </SwiperSlide>
             ))
           }

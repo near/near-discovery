@@ -23,7 +23,7 @@ const Quests = ({
         <Campaign
           onLoad={onLoad}
           loading={campaignLoading}
-          campaigns={campaigns.filter(campaign => campaign.category === '')}
+          campaigns={campaigns.filter((campaign: any) => campaign.category === '')}
           categoryLoading={categoryLoading}
           categories={categories}
         />

@@ -46,7 +46,7 @@ const QuestItem = ({
   mt,
 }: {
   quest: any;
-  categoryName: string;
+  categoryName?: string;
   mt?: number;
 }) => {
   const router = useRouter();
