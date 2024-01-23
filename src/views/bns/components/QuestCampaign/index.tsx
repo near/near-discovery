@@ -4,14 +4,13 @@ import { memo, useRef } from 'react';
 import QuestItem from '@/views/Quest/components/QuestItem';
 import { formatPeriodDate } from '@/views/Quest/helpers';
 import useLike from '@/views/Quest/hooks/useLike';
-import { Swiper, SwiperSlide, useSwiper } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import useQuestList from '../../hooks/useQuestList';
 import Timer from '../Timer';
 
 import Loading from '@/components/Icons/Loading';
 import { useRouter } from 'next/router';
 import {
-  StyledBox,
   StyledButton,
   StyledCampaipnContainer,
   StyledCampaipnsContainer,
@@ -151,9 +150,7 @@ const QuestCampaign = ({ campaign, categories }: any) => {
 const Index = ({ onLoad, campaigns, categories }: any) => {
   return (
     <StyledCampaipnsContainer>
-      <StyledHeader style={{ marginTop: 40, marginBottom: 20 }}>
-        <StyledTitle>Quest Campaign</StyledTitle>
-      </StyledHeader>
+      <StyledHeader style={{ marginTop: 40, marginBottom: 20 }}>Quest Campaign</StyledHeader>
       <StyledFlex $direction='column' $gap='30px'>
         {campaigns.map((campaign: any) => <QuestCampaign key={campaign.id} campaign={campaign} categories={categories} />)}
       </StyledFlex>

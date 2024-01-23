@@ -2,6 +2,7 @@ import { memo, useRef } from 'react';
 
 import Loading from '@/components/Icons/Loading';
 import QuestItem from '@/views/Quest/components/QuestItem';
+import { useRouter } from 'next/router';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useQuestList from '../../hooks/useQuestList';
 import {
@@ -13,13 +14,12 @@ import {
   StyledLoadingWrapper,
   StyledSvg,
   StyledText,
-  StyledTitle,
-  StyledWrapper
+  StyledWrapper,
+  StyledExplore
 } from './styles';
-import { useRouter } from 'next/router';
 const iconRight = (
-  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
-    <path d="M1 5.2C0.558172 5.2 0.2 5.55817 0.2 6C0.2 6.44183 0.558172 6.8 1 6.8L1 5.2ZM17.5657 6.56569C17.8781 6.25327 17.8781 5.74674 17.5657 5.43432L12.4745 0.343147C12.1621 0.0307274 11.6556 0.0307274 11.3431 0.343147C11.0307 0.655566 11.0307 1.1621 11.3431 1.47452L15.8686 6L11.3431 10.5255C11.0307 10.8379 11.0307 11.3444 11.3431 11.6569C11.6556 11.9693 12.1621 11.9693 12.4745 11.6569L17.5657 6.56569ZM1 6.8L17 6.8L17 5.2L1 5.2L1 6.8Z" fill="white" />
+  <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12">
+    <path d="M1 5.2C0.558172 5.2 0.2 5.55817 0.2 6C0.2 6.44183 0.558172 6.8 1 6.8L1 5.2ZM17.5657 6.56569C17.8781 6.25327 17.8781 5.74674 17.5657 5.43432L12.4745 0.343147C12.1621 0.0307274 11.6556 0.0307274 11.3431 0.343147C11.0307 0.655566 11.0307 1.1621 11.3431 1.47452L15.8686 6L11.3431 10.5255C11.0307 10.8379 11.0307 11.3444 11.3431 11.6569C11.6556 11.9693 12.1621 11.9693 12.4745 11.6569L17.5657 6.56569ZM1 6.8L17 6.8L17 5.2L1 5.2L1 6.8Z" />
   </svg>
 )
 const iconSwiperLeft = (
@@ -61,17 +61,12 @@ const Campaign = function ({ campaign }: any) {
         >
           <StyledText $size='14px' $weight='500'>{campaign.quests.total} Qusts</StyledText>
         </StyledButton>
-        <StyledButton
-          $width='227px'
-          $borderRadius='12px'
-          $borderColor='#979ABE'
-          $background='transparent'
-        >
+        <StyledExplore>
           <StyledFlex $gap='9px'>
             <StyledText $size='16px' $weight='700'>Explore now</StyledText>
             <StyledSvg>{iconRight}</StyledSvg>
           </StyledFlex>
-        </StyledButton>
+        </StyledExplore>
       </StyledWrapper>
       <StyledWrapper style={{ width: 823 }}>
         <Swiper
@@ -93,7 +88,7 @@ const Campaign = function ({ campaign }: any) {
         <StyledFlex
           $justify='flex-end'
           $gap='18px'
-          style={{ marginTop: 20, position: 'relative', zIndex: 50 }}
+          style={{ marginTop: 20, position: 'relative', zIndex: 10 }}
         >
           <StyledButton
             $width='36px'
@@ -120,9 +115,7 @@ const Campaign = function ({ campaign }: any) {
 const Narratives = ({ campaigns, loading }: any) => {
   return (
     <StyledContainer>
-      <StyledHeader style={{ marginTop: 50, marginBottom: 17 }}>
-        <StyledTitle>Narratives</StyledTitle>
-      </StyledHeader>
+      <StyledHeader style={{ marginTop: 50, marginBottom: 17 }}>Narratives</StyledHeader>
       {loading ? (
         <StyledLoadingWrapper>
           <Loading size={60} />

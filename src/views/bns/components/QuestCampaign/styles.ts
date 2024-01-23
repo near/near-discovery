@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export { StyledCoin, StyledTitle } from '@/views/Quest/styles';
 export {
-  StyledButton, StyledFlex, StyledLoadingWrapper, StyledText, StyledSvg, StyledWrapper
+  StyledButton, StyledFlex, StyledLoadingWrapper, StyledSvg, StyledText, StyledWrapper
 } from '../../styles';
 
 export const StyledCampaipnsContainer = styled.div`
@@ -37,9 +37,13 @@ export const StyledBox = styled.div`
 `;
 
 export const StyledHeader = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  color: #FFF;
+  font-family: Gantari;
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 120%; /* 31.2px */
+  text-transform: capitalize;
 `;
 
 export const StyledHeartBox = styled(motion.div) <{ $active?: boolean }>`
@@ -136,7 +140,7 @@ export const StyledSwiperButton = styled.div`
   border-radius: 12px;
   border: 1px solid rgba(255, 255, 255, 0.20);
   background: #393A4C;
-  z-index: 50;
+  z-index: 10;
   &.right {
     left: unset;
     right: 10px;

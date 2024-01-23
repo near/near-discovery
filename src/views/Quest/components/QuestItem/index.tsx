@@ -35,6 +35,7 @@ const QuestItem = ({
     logo,
     name,
     description,
+    sub_name,
     total_action,
     action_completed,
     reward,
@@ -65,7 +66,7 @@ const QuestItem = ({
         <StyledIconBox>{logo && <StyledIcon src={logo} $disabled={live === false} />}</StyledIconBox>
         <div>
           <StyledTaskName>{name}</StyledTaskName>
-          <StyledTaskDesc $isCampaign={isCampaign}>{description}</StyledTaskDesc>
+          <StyledTaskDesc $isCampaign={isCampaign}>{sub_name}</StyledTaskDesc>
         </div>
       </StyledTask>
       <div>

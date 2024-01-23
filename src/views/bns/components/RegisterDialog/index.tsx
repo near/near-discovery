@@ -44,19 +44,19 @@ const iconCircle = (
     <path opacity="0.5" d="M8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1C4.13401 1 1 4.13401 1 8" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 )
-const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDialog }: any) => {
+const RegisterDialog = ({
+  priceLabel,
+  onClose,
+  discount,
+  setShowSwitchNetworkDialog,
+  currentChain,
+  setChain
+}: any) => {
 
   const toast = useToast()
   const router = useRouter()
   const { account } = useAccount()
   const contract = useBnsContract()
-
-  const { chains } = useTokensAndChains()
-  const [{ connectedChain, settingChain }, setChain] = useSetChain();
-  const currentChain: any = useMemo(
-    () => (connectedChain?.id ? chains[Number(connectedChain?.id)] : null),
-    [connectedChain?.id],
-  );
 
   const [registerStatus, setRegisterStatus] = useState<RegisterStatusType>(0)
   const [year, setYear] = useState(1)

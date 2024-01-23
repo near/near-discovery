@@ -57,7 +57,7 @@ const InputWithEmoji = ({ onChange, queryStatus }: { onChange: any, queryStatus:
           <StyledInputLinearGradient>
             <StyledInputContainer>
               <StyledSvg style={{ marginLeft: 15 }} className={queryStatus === 1 ? 'loading' : ''}>{queryStatus === 1 ? iconCircle : iconSearch}</StyledSvg>
-              <StyledInput value={value} onChange={(event) => handleInputChange(event)} onBlur={() => setIsFocus(false)} onFocus={() => setIsFocus(true)} />
+              <StyledInput placeholder='yourname' value={value} onChange={(event) => handleInputChange(event)} onBlur={() => setIsFocus(false)} onFocus={() => setIsFocus(true)} />
               <StyledInputSuffix style={{ marginRight: 12 }}>.base</StyledInputSuffix>
             </StyledInputContainer>
           </StyledInputLinearGradient>
