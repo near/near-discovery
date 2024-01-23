@@ -1,5 +1,7 @@
-import useToast from '@/hooks/useToast';
-import { memo, useEffect } from 'react';
+import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains';
+import { useSetChain } from '@web3-onboard/react';
+import Image from 'next/image';
+import { memo, useEffect, useMemo } from 'react';
 import {
   StyledButton,
   StyledDialog,
@@ -7,25 +9,40 @@ import {
   StyledFlex,
   StyledText
 } from './styles';
-import Image from 'next/image';
 
-const SwitchNetwork = ({ onClose }: any) => {
+const SwitchNetwork = ({ onClose, chainId }: any) => {
 
-  const toast = useToast()
-
-
+  const { chains } = useTokensAndChains()
+  const [{ connectedChain, settingChain }, setChain] = useSetChain();
+  const chain = useMemo(() => chains[chainId], [chains])
+  const handleSwitch = async function () {
+    const result = await setChain({ chainId: `0x${Number(chainId).toString(16)}` });
+    if (result) {
+      onClose()
+    }
+  }
   useEffect(() => {
-    setRegisterStatus(0)
   }, [])
   return (
     <StyledDialog>
       <StyledDialogContainer>
-        <StyledFlex>
-          <Image src='https://assets.dapdap.net/images/bafkreif24bmxzparik2t2nkog6km5diuwcysvxdv2j5ygzkzwm3pxs573a.svg' />
-          <StyledText></StyledText>
+        <StyledFlex $gap='8px'>
+          <Image width={26} height={26} src={chain.icon} alt='chainImage' />
+          <StyledText $size='18px' $weight='500'>{chain.chainName}</StyledText>
         </StyledFlex>
-        <StyledText></StyledText>
-        <StyledButton></StyledButton>
+        <StyledText $size='18px' $weight='700' style={{ marginTop: 17, marginBottom: 22 }}>Please connect to {chain.chainName}</StyledText>
+        <StyledButton
+          $height='46px'
+          $borderWidth='0'
+          $background='#0038FF'
+          $borderRadius='8px'
+          onClick={handleSwitch}
+        >
+          <StyledText $size='18px' $weight='700'>Switch Network</StyledText>
+        </StyledButton>
+        <StyledButton $background='transparent' $borderWidth='0' onClick={onClose}>
+          <StyledText $color='#979ABE' $size='14px'>Close</StyledText>
+        </StyledButton>
       </StyledDialogContainer>
     </StyledDialog>
   );

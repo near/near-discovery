@@ -36,6 +36,7 @@ import type { QueryNameStatusType } from './types';
 import namehash from "@ensdomains/eth-ens-namehash";
 import NetworkDialog from './components/NetworkDialog';
 import RegisterDialog from './components/RegisterDialog';
+import SwitchNetwork from './components/SwitchNetwork';
 const CampaignView = () => {
   const router = useRouter()
   const contract = useBnsContract()
@@ -52,12 +53,14 @@ const CampaignView = () => {
 
   })
   const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
+
+  const [showSwitchNetworkDialog, setShowSwitchNetworkDialog] = useState<boolean>(false)
   const { loading, questList } = useQuestList(router.query.id as string)
   const [discount, setDiscount] = useState(false)
 
   const timerRef = useRef<any>(null)
 
-  const twitterQuest = useMemo(() => questList.find(quest => quest.id === 28), [questList])
+  const twitterQuest: any = useMemo(() => questList.find((quest: any) => quest.id === 28), [questList])
   const getBnsAddress = async function (name: string) {
     return await http.get('https://api.basename.app/records/base/' + name)
   }
@@ -196,8 +199,9 @@ const CampaignView = () => {
         <RelatedQuests loading={loading} questList={questList} />
         <QA />
       </StyledFlex>
-      {showRegisterDialg && <RegisterDialog priceLabel={priceLabel} discount={discount} onClose={() => setShowRegisterDialg(false)} />}
+      {showRegisterDialg && <RegisterDialog priceLabel={priceLabel} discount={discount} setShowSwitchNetworkDialog={setShowSwitchNetworkDialog} onClose={() => setShowRegisterDialg(false)} />}
       {showNetworkDialog && <NetworkDialog bnsName={currentBnsName} setBnsName={setCurrentBnsName} onClose={() => setShowNetworkDialog(false)} />}
+      {showSwitchNetworkDialog && <SwitchNetwork chainId={8453} onClose={() => setShowSwitchNetworkDialog(false)} />}
       <AccountSider />
     </StyledWrapper >
   );

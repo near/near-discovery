@@ -102,7 +102,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
   );
 };
 const QuestList = ({ questList }: any) => {
-  const swiperRef = useRef();
+  const swiperRef = useRef<any>(null);
   const handleClickSlideButton = function (event: any, type: string) {
     event.stopPropagation()
     if (type === 'prev') {
@@ -124,7 +124,7 @@ const QuestList = ({ questList }: any) => {
         {
           questList.map((quest: any, index: number) => (
             <SwiperSlide key={index}>
-              <QuestItem quest={quest} showDesc />
+              <QuestItem quest={quest} />
             </SwiperSlide>
           ))
         }

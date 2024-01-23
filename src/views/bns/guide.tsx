@@ -18,6 +18,7 @@ import {
 } from './styles';
 
 import DapXBNS from '@/assets/images/DapXBNS.svg';
+import { getCookie } from 'cookies-next';
 const iconChecked = (
   <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
     <circle cx="11.5" cy="11.5" r="11" fill="#EBF479" stroke="#EBF479" />
@@ -53,7 +54,7 @@ const GuideView = () => {
       <StyledWrapper style={{ width: 529 }}>
         <StyledFlex $justify='flex-start' $gap='11px'>
           <StyledSvg><Image src={iconHand} alt='iconHand' /></StyledSvg>
-          <StyledText $size='32px' $line='normal' $weight='700'>Hi, reffer.base!</StyledText>
+          <StyledText $size='32px' $line='normal' $weight='700'>Hi, {getCookie('BNS_NAME')}!</StyledText>
         </StyledFlex>
         <StyledText $size='32px' $line='normal' $weight='700' style={{ width: 578 }}>
           3 Steps to experience Base in DapDap and earn Dapdap<Image src={iconCoin} alt='iconCoin' style={{ marginLeft: 4, marginRight: 4 }} /><span style={{ color: '#EBF479' }}>200 PTS</span>
