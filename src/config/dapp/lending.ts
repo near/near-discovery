@@ -63,7 +63,7 @@ export default {
   filda: {
     type: 'lending',
   },
-  'trader-joe': {
+  'trader-joe-lend': {
     type: 'lending',
   },
   'lodestar-v1': {
