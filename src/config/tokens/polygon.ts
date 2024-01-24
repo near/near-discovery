@@ -193,4 +193,12 @@ export const polygon: { [key: string]: Token } = {
     name: 'SushiToken',
     icon: 'https://ipfs.near.social/ipfs/bafkreif5a3jne5ol2d57r2terziofqhosgl5txptv7q7bit42qt5jzoaqa',
   },
+  crv: {
+    chainId: CHAIN_ID,
+    address: '0x172370d5Cd63279eFa6d502DAB29171933a610AF',
+    decimals: 18,
+    symbol: 'CRV',
+    name: 'Token CRV (PoS)',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihfv7kul7d6e2fxnlpalx3p7wx47ylhw7tauozhipcughshj25ehm',
+  },
 };

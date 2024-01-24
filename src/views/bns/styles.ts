@@ -34,6 +34,11 @@ export const StyledInvitedUsers = styled.div`
   line-height: normal;
 `
 // guide
+
+export const StyledVideo = styled.div`
+  width: 700px;
+  height: 388px;
+`
 export const StyledGuidStep = styled.div`
   /* width: 529px; */
   width: 100%;
@@ -65,14 +70,18 @@ export const StyledGuideContinueButton = styled.button`
   flex: 1;
   height: 48px;
   border-radius: 10px;
-  background: #EBF479;
-  color: #000;
   text-align: center;
+  border-radius: 12px;
+  background: rgba(124, 127, 150, 0.5);
+  color: #000;
   font-family: Gantari;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  font-weight: 500;
+  &.complete {
+    font-weight: 700;
+    border-radius: 10px;
+    background: #EBF479;
+  }
+
 `
 export const StyledGuideSkipButton = styled.button`
   outline: none;
@@ -198,6 +207,9 @@ export const StyledDialog = styled.div`
   z-index: 999;
 `
 export const StyledWrapper = styled.div`
+  --onboarding-color: #787dff;
+  --social-color: #aad6ff;
+  --engage-color: #f4ca79;
 `
 
 export const StyledWidthFull = styled.div`
@@ -289,7 +301,6 @@ export const StyledText = styled.div<{
   line-height: ${props => props.$line || 'normal'};
   text-align: ${props => props.$textAlign || 'left'};
   box-sizing: border-box;
-  word-wrap: break-word;
   &.center {
     display: flex;
     align-items: center;

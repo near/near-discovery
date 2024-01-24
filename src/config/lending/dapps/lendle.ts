@@ -2,7 +2,7 @@ import { mantle } from '@/config/tokens/mantle';
 
 const basic = {
   name: 'Lendle',
-  icon: 'https://ipfs.near.social/ipfs/bafkreibh3m63rrgsbl3ihtugfaqj7vbwxni6sefjbsen5nuyqexy4opepi',
+  icon: '/images/apps/lendle.png',
   data: 'bluebiu.near/widget/Lending.Data.Lendle',
   handler: 'bluebiu.near/widget/Lending.Handler.Radiant',
   handlerClaim: 'bluebiu.near/widget/Mantle.Lending.LendleClaimHandler',

@@ -1,6 +1,7 @@
 import bnsAvatar from '@/assets/images/bns_avatar.svg';
-import iconPlus from '@/assets/images/icon_plus.svg';
+// import iconPlus from '@/assets/images/icon_plus.svg';
 import useAccount from '@/hooks/useAccount';
+import { formatsByName } from "@ensdomains/address-encoder";
 import namehash from "@ensdomains/eth-ens-namehash";
 import { ethers } from 'ethers';
 import _ from 'lodash';
@@ -9,7 +10,6 @@ import { memo, useMemo, useState } from 'react';
 import { COIN_TYLE_LIST, COIN_TYLE_MAP } from '../../constants';
 import useBnsContract from '../../hooks/useBnsContract';
 import type { SaveNetworkStatusType } from '../../types';
-import { formatsByName } from "@ensdomains/address-encoder";
 import {
   StyledAddressInput,
   StyledAddressInputWrapper,
@@ -20,6 +20,7 @@ import {
   StyledDialogContainer,
   StyledDialogHead,
   StyledFlex,
+  StyledPlusButton,
   StyledSvg,
   StyledText,
   StyledWrapper
@@ -51,48 +52,82 @@ const iconUnChecked = (
     <circle cx="8" cy="8" r="7.5" fill="#1E2028" stroke="#979ABE" />
   </svg>
 )
-const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsName: any, onClose: any }) => {
+
+const iconWarning = (
+  <svg stroke="currentColor" fill="none" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
+    <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"></path>
+  </svg>
+)
+
+const iconPlus = (
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="11" cy="11" r="10.5" stroke="#979ABE" />
+    <path d="M10.464 14.876V11.69H7.35V10.286H10.464V7.1H12.012V10.286H15.126V11.69H12.012V14.876H10.464Z" fill="#979ABE" />
+  </svg>
+)
+const iconWhitePlus = (
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="11" cy="11" r="10.5" stroke="#FFFFFF" />
+    <path d="M10.464 14.876V11.69H7.35V10.286H10.464V7.1H12.012V10.286H15.126V11.69H12.012V14.876H10.464Z" fill="#FFFFFF" />
+  </svg>
+)
+const NetworkDialog = ({
+  bnsName,
+  setBnsName,
+  onClose,
+  currentChain,
+  setChain,
+  setShowSwitchNetworkDialog
+}: any) => {
   const { account } = useAccount()
   const contract = useBnsContract()
   const [saveStatus, setSaveStatus] = useState<SaveNetworkStatusType>(0)
-
-  const [addAddresses, setAddresses] = useState<any>({
+  const [addAddresses, setAddAddresses] = useState<any>({
 
   })
-  const filterCoinTypeList = useMemo(() => COIN_TYLE_LIST.filter(coinType => typeof bnsName.addresses[coinType] === 'string'), [bnsName])
+  const addresses = useMemo(() => {
+    const object: any = {
+
+    }
+    Object.keys(bnsName.addresses).forEach(key => {
+      const address = bnsName.addresses[key]
+      object[key] = typeof address === 'string' ? [address, false] : address
+    })
+    return object
+  }, [bnsName.addresses])
+  const filterCoinTypeList = useMemo(() => COIN_TYLE_LIST.filter(coinType => typeof addresses[coinType] === 'object'), [bnsName, addresses])
+
   const addValues = useMemo(() => {
     const object: any = {}
-    Object.keys(bnsName.addresses).forEach(coinType => {
-      if (typeof addAddresses[coinType] === 'string' && bnsName.addresses[coinType]) {
-        object[coinType] = bnsName.addresses[coinType]
+    Object.keys(addresses).forEach(coinType => {
+      if (typeof addAddresses[coinType] === 'object' && addresses[coinType] && addresses[coinType][0] && !addresses[coinType][1]) {
+        object[coinType] = addresses[coinType][0]
       }
     })
     return object
-  }, [bnsName.addresses, addAddresses])
+  }, [addresses, addAddresses])
   const saveDisabled = useMemo(() => Object.keys(addValues).length === 0, [addValues])
   const handleSave = function () {
     setSaveStatus(2)
   }
   const handleClickCoinType = function (coinType: string) {
     const curr = _.cloneDeep(addAddresses)
-    if (typeof curr[coinType] === 'string') {
+    if (typeof curr[coinType] === 'object') {
       delete curr[coinType]
     } else {
-      curr[coinType] = ''
+      curr[coinType] = ['', false]
     }
-    setAddresses(curr)
+    setAddAddresses(curr)
   }
   const handleAdd = function () {
-    setBnsName((prev: any) => {
-      const curr = _.cloneDeep(bnsName)
-      curr.addresses = Object.assign(curr.addresses, addAddresses)
-      return curr
-    })
+    const curr = _.cloneDeep(bnsName)
+    curr.addresses = Object.assign(curr.addresses, addAddresses)
+    setBnsName(curr)
     setSaveStatus(0)
   }
   const handleDelete = function (coinType: string) {
-    if (typeof addAddresses[coinType] === 'string') {
-      setAddresses((prev: any) => {
+    if (typeof addAddresses[coinType] === 'object') {
+      setAddAddresses((prev: any) => {
         const curr = _.cloneDeep(addAddresses)
         delete curr[coinType]
         return curr
@@ -105,13 +140,28 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsN
     }
   }
   const handleInputChange = function (event: any, coinType: string) {
-    setBnsName((prev: any) => {
-      const curr = _.cloneDeep(prev)
-      curr.addresses[coinType] = event.target.value
-      return curr
-    })
+    const value = event.target.value
+    let invalidAddress = false
+    if (value.length > 0) {
+      try {
+        const coin = COIN_TYLE_MAP[coinType]
+        const decodedAddress = formatsByName[coin.label].decoder(value)
+      } catch (error) {
+        invalidAddress = true
+      }
+    }
+    const currBnsName = _.cloneDeep(bnsName)
+    const currAddAddresses = _.cloneDeep(addAddresses)
+    currBnsName.addresses[coinType] = [value, invalidAddress]
+    currAddAddresses[coinType] = [value, invalidAddress]
+    setBnsName(currBnsName)
+    setAddAddresses(currAddAddresses)
   }
   const handleSetPrimary = async function () {
+    if (currentChain && currentChain.chainName !== 'Base') {
+      setShowSwitchNetworkDialog(true)
+      return
+    }
     const nameHash = namehash.hash(bnsName.name)
     try {
       const response = await contract.write({
@@ -119,7 +169,6 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsN
         functionName: 'setName',
         args: [nameHash]
       })
-      console.log('response', response)
     } catch (error) {
       console.log(error)
     }
@@ -151,8 +200,10 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsN
     }]);
     const nameHash = namehash.hash(bnsName.name)
     Object.keys(addValues).forEach(coinType => {
+      const length = (addValues[coinType] + '').length
+      const value = length % 2 === 0 ? addValues[coinType] : addValues[coinType].slice(0, -1)
       args.push(
-        iface.encodeFunctionData('setAddr', [nameHash, coinType, addValues[coinType]])
+        iface.encodeFunctionData('setAddr', [nameHash, coinType, value])
       )
     })
     const response = await contract.multicall({
@@ -167,7 +218,7 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsN
           {
             saveStatus === 1 ? (
               <StyledFlex $gap='15px'>
-                <StyledSvg>{iconBack}</StyledSvg>
+                <StyledSvg style={{ cursor: 'pointer' }} onClick={() => setSaveStatus(0)}>{iconBack}</StyledSvg>
                 <StyledText $size='16px' $weight='700'>Add Network</StyledText>
               </StyledFlex>
             ) : saveStatus === 2 ? (
@@ -191,9 +242,14 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsN
                 <StyledText $color='#979ABE' $size='12px'>Set as Primary</StyledText>
               </StyledButton>
             </StyledFlex>
-            <StyledButton onClick={() => setSaveStatus(1)} style={{ marginTop: 23, marginBottom: 30 }}>
-              <Image src={iconPlus} alt="iconPlus" />
-            </StyledButton>
+            <StyledPlusButton onClick={() => setSaveStatus(1)} style={{ marginTop: 23, marginBottom: 30 }}>
+              <StyledSvg className='gray'>
+                {iconPlus}
+              </StyledSvg>
+              <StyledSvg className='white'>
+                {iconWhitePlus}
+              </StyledSvg>
+            </StyledPlusButton>
             <StyledWrapper style={{ marginBottom: 30, height: 300, overflow: 'auto' }}>
               <StyledFlex $direction='column' $gap='30px'>
                 {
@@ -206,9 +262,15 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsN
                           <StyledText $size='14px' $weight='500' $line='120%'>{coin.label}</StyledText>
                         </StyledFlex>
                         <StyledAddressInputWrapper>
-                          <StyledAddressInput value={bnsName.addresses[coinType]} onChange={(event) => handleInputChange(event, coinType)} />
+                          <StyledAddressInput value={addresses[coinType][0]} onChange={(event) => handleInputChange(event, coinType)} />
                           <StyledSvg style={{ cursor: 'pointer' }} onClick={() => handleDelete(coinType)}>{iconDelete}</StyledSvg>
                         </StyledAddressInputWrapper>
+                        {addresses[coinType][1] && <StyledFlex $justify='flex-start' $gap='6px' style={{ width: '100%', color: 'rgb(247, 187, 67)' }}>
+                          <StyledSvg>
+                            {iconWarning}
+                          </StyledSvg>
+                          <StyledText $color='rgb(247, 187, 67)' $size='12px' $weight='700'>Invalid address</StyledText>
+                        </StyledFlex>}
                       </StyledFlex>
                     )
                   })
@@ -233,11 +295,11 @@ const NetworkDialog = ({ bnsName, setBnsName, onClose }: { bnsName: any, setBnsN
                       $height='120px'
                       $background='#2E3142'
                       style={{ flexDirection: 'column', gap: 17, position: 'relative' }}
-                      disabled={bnsName.addresses[coinType]}
+                      disabled={addresses[coinType]}
                       onClick={() => handleClickCoinType(coinType)}
                     >
                       <StyledCheckedStatus>
-                        {bnsName.addresses[coinType] ? 'added' : (typeof addAddresses[coinType] === 'string' ? iconChecked : iconUnChecked)}
+                        {addresses[coinType] ? 'added' : (typeof addAddresses[coinType] === 'object' ? iconChecked : iconUnChecked)}
                       </StyledCheckedStatus>
                       <Image src={coin.icon} width={40} height={40} alt="coinType" />
                       <StyledText $size='16px' $weight='700'>{coin.label}</StyledText>

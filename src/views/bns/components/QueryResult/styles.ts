@@ -117,19 +117,26 @@ export const StyledStatus = styled.div`
   font-weight: 700;
   line-height: 100%;
 `
-export const StyledStatusWrapper = styled.div`
+export const StyledStatusContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: 100%;
+  padding: 0 11px 0 17px;
+  background: #000;
+  border-radius: 12px;
+`
+export const StyledStatusWrapper = styled.div`
   width: 432px;
   height: 48px;
-  padding: 0 11px 0 17px;
   border-radius: 12px;
-  border: 2px solid #F5D80C;
-  background: #16181D;
+  background: linear-gradient(to right, rgb(245, 217, 10), rgb(255, 122, 0));
+  padding: 2px;
   &.success {
-    border-color: #03EA1A;
-    padding: 0 5px 0 17px;
+    background: linear-gradient(to right, rgb(0, 255, 26), rgb(35, 254, 175));
+    ${StyledStatusContent} {
+      padding: 0 3px 0 17px;
+    }
     ${StyledStatus} {
       cursor: pointer;
       display: flex;
@@ -165,6 +172,7 @@ export const StyledReward = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 13px;
   width: 183px;
   height: 87px;
   flex-shrink: 0;
@@ -192,8 +200,8 @@ export const StyledChainList = styled.div`
   animation: 10s ease 0s infinite normal none running ${AnimationSwitch};
 `
 export const StyledGetPriceOff = styled.div`
-  width: 100%;
-  text-align: right;
+  
+  vertical-align: baseline;
   font-family: Gantari;
   font-size: 16px;
   font-style: normal;
@@ -203,4 +211,16 @@ export const StyledGetPriceOff = styled.div`
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+`
+export const StyledPriceOff = styled.span`
+  /* text-decoration-line: underline; */
+  border-bottom: 1px dashed #979ABE;
+`
+
+export const StyledLabelWrapper = styled.div`
+  max-width: 270px;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display:none
+  }
 `

@@ -131,7 +131,7 @@ const chainCofig = {
   169: {
     chainId: 169,
     chainName: 'Manta',
-    icon: 'https://assets.dapdap.net/images/bafkreiazsyndhevopspbjue3ztz5r5mypuzpa5gjragm3hdg6ey33rfheu.svg',
+    icon: 'https://ipfs.near.social/ipfs/bafkreib7p2gc7pd3qdvwusnny3c5s6sfupetbu4b77yigouxe2ne7ew2fq',
     nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
     rpcUrls: ['https://1rpc.io/manta'],
     blockExplorers: 'https://pacific-explorer.manta.network/',

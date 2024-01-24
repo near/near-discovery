@@ -220,8 +220,11 @@ export default function useLifi() {
         if (!process) {
           return
         }
-        let txHash = process[process.length - 1].txHash
-        const txLink = process[process.length - 1].txLink
+
+        const outChainProcess = process.filter(item => item.type === 'CROSS_CHAIN')[0]
+
+        let txHash = outChainProcess.txHash
+        const txLink = outChainProcess.txLink
         const start = process[0].startedAt
         const end = process[process.length - 1].doneAt as number
         const duration =  Math.ceil((end - start) / 1000 / 60)
@@ -259,7 +262,9 @@ export default function useLifi() {
           fromTokenUrl: tx.fromToken.logoURI,
         };
         localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
-      } catch(e) {}
+      } catch(e) {
+        console.log(e)
+      }
     }
   };
 

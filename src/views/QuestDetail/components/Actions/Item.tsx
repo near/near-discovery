@@ -88,12 +88,17 @@ const ActionItem = ({
     }
 
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
+      if (action.category === 'twitter_follow') {
+        const key = '_clicked_twitter_' + action.id
+        const clickedNumber = Number(sessionStorage.getItem(key)) || 0
+        sessionStorage.setItem(key, (clickedNumber + 1) + '')
+      }
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
       sessionStorage.setItem('_auth_type', 'twitter');
-      sessionStorage.setItem('clickedTwitter', '1')
       window.open(path, '_blank');
       return;
     }
+
 
     if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
       const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
@@ -197,8 +202,13 @@ const ActionItem = ({
             <StyledIconBox
               onClick={(ev) => {
                 ev.stopPropagation();
-                if (action.category.startsWith('twitter') && !sessionStorage.getItem('clickedTwitter')) return
-                if (!checking) handleRefresh(action.id);
+                if (checking) return
+                if (action.category === 'twitter_follow') {
+                  const clickedNumber = Number(sessionStorage.getItem('_clicked_twitter_' + action.id)) || 0
+                  clickedNumber >= 2 && handleRefresh(action.id)
+                } else {
+                  handleRefresh(action.id)
+                }
               }}
               onMouseEnter={() => {
                 setShowRefreshTips(true);

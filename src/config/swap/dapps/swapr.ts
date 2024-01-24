@@ -2,7 +2,7 @@ import { gnosis } from '@/config/tokens/gnosis';
 
 const basic = {
   name: 'Swapr',
-  logo: 'https://ipfs.near.social/ipfs/bafkreih6d6orfzzitmxv7dfme6fg346gf5avj7ujzoffoqbb653fcj5h4u',
+  logo: '/images/apps/swapr.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

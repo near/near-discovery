@@ -66,6 +66,9 @@ const Button = ({
 
   const spender = useMemo(() => {
     if (!inputChain || !inputToken || inputChain.chainId !== Number(connectedChain?.id)) return '';
+    if (!chainCofig[inputChain?.chainId]) {
+      return ''
+    }
     return inputToken.isNative ? chainCofig[inputChain.chainId].ethRouter : chainCofig[inputChain?.chainId].router;
   }, [inputChain, inputToken, connectedChain?.id]);
 

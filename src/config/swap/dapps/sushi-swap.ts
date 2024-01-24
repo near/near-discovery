@@ -6,7 +6,7 @@ import { polygonZkevm } from '@/config/tokens/polygonZkevm';
 
 const basic = {
   name: 'SushiSwap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreif5a3jne5ol2d57r2terziofqhosgl5txptv7q7bit42qt5jzoaqa',
+  logo: '/images/apps/sushi.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 

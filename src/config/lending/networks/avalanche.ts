@@ -3,6 +3,7 @@ import weth from '@/config/contract/weth';
 import benqi from '../dapps/benqi';
 import granary from '../dapps/granary-finance';
 import ironBank from '../dapps/iron-bank';
+import traderJoe from '../dapps/trader-joe-lend';
 
 const CHAIN_ID = 43114;
 const CHAIN_NAME = 'Avalanche';
@@ -39,6 +40,10 @@ export default {
     'Iron Bank': {
       ...ironBank.basic,
       ...ironBank.networks[CHAIN_ID],
+    },
+    'Trader Joe': {
+      ...traderJoe.basic,
+      ...traderJoe.networks[CHAIN_ID],
     },
   },
 };

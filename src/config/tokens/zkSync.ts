@@ -183,5 +183,6 @@ export const zkSync: { [key: string]: Token } = {
     symbol: 'VC',
     name: 'Velocore',
     icon: 'https://ipfs.near.social/ipfs/bafkreihvtu2nfnzgzc6jbcdvd22fmtufkxoawttgbt3nmagc5rcvfjjcki',
+    priceKey: 'velocore',
   },
 };

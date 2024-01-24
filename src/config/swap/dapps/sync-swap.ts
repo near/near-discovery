@@ -3,7 +3,7 @@ import { zkSync } from '@/config/tokens/zkSync';
 
 const basic = {
   name: 'Syncswap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiemiwcf4pvz6ijo7tcxfobp5oftqj5mf7vszse33ziud3walq4pqy',
+  logo: '/images/apps/sync-swap.png',
   amountOutFn: 'bluebiu.near/widget/Linea.Swap.SyncSwapAmountOut',
 };
 const networks = {

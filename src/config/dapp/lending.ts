@@ -1,4 +1,4 @@
-export default {
+const ROUTE_CONFIG = {
   agave: {
     type: 'lending',
   },
@@ -70,4 +70,27 @@ export default {
       '--repay-bg-hover-color': '#CA55B0',
     },
   },
+  'tender-finance': {
+    type: 'lending',
+  },
+  'we-piggy': {
+    type: 'lending',
+  },
+  filda: {
+    type: 'lending',
+  },
+  'trader-joe-lend': {
+    type: 'lending',
+  },
+  'lodestar-v1': {
+    type: 'lending',
+  },
+  liqee: {
+    type: 'lending',
+  },
+  'shoebill-v2': {
+    type: 'lending',
+  },
 };
+
+export default ROUTE_CONFIG;

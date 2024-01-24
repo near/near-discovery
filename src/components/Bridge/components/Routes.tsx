@@ -77,7 +77,7 @@ const Routes = ({
               {
                 trades.map((trade, index) => {
                   return (
-                    index === 0 || showMore ? <Route key={trade.amount} onSelected={() => {
+                    index === 0 || showMore ? <Route key={trade.amount + index} onSelected={() => {
                       onSelected(index)
                     }} selected={ selectedTradeIndex === index } trade={trade} 
                     /> : null

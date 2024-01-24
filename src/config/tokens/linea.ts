@@ -123,4 +123,12 @@ export const linea: { [key: string]: Token } = {
     name: 'Mendi Finance',
     icon: 'https://ipfs.near.social/ipfs/bafkreihtevj6whwlekvhfymajsosbhkqxljqwumgniacye724pxvt24tk4',
   },
+  wsteth: {
+    chainId: CHAIN_ID,
+    address: '0xB5beDd42000b71FddE22D3eE8a79Bd49A568fC8F',
+    decimals: 18,
+    symbol: 'wstETH',
+    name: 'Wrapped liquid staked Ether 2.0',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibukwahpp2ei74ax5acm6p7uwcnbsfvdzkizsdzqu26yfbxndpvra',
+  },
 };

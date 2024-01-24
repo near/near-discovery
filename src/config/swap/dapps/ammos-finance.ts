@@ -2,7 +2,7 @@ import { mantle } from '@/config/tokens/mantle';
 
 const basic = {
   name: 'Ammos Finance',
-  logo: 'https://ipfs.near.social/ipfs/bafkreicwvufboezdhcjnvmwmy5ctbd7d4zimdivuaawn5g3bs2hxb567ra',
+  logo: '/images/apps/ammos-finance.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.RamsesV2AmountOut',
 };
 const networks = {

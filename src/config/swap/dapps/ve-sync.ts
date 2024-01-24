@@ -2,7 +2,7 @@ import { zkSync } from '@/config/tokens/zkSync';
 
 const basic = {
   name: 'veSync',
-  logo: 'https://ipfs.near.social/ipfs/bafkreig3pzndzzb7zl7nrftklr2mxamzg5h76tcfth2aj3bwle7l44ylx4',
+  logo: '/images/apps/ve-sync.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ChronosV1AmountOut',
 };
 const networks = {

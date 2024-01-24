@@ -10,6 +10,7 @@ import optimism from './optimism';
 import polygon from './polygon';
 import zkSync from './zkSync';
 // import polygonZkevm from './polygon-zkevm';
+import manta from './manta';
 
 export default {
   42161: arbitrum,
@@ -24,4 +25,5 @@ export default {
   137: polygon,
   324: zkSync,
   // 1101: polygonZkevm,
+  169: manta,
 } as { [key: number]: any };

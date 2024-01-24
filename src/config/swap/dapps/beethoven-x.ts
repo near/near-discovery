@@ -1,7 +1,7 @@
 import { optimism } from '@/config/tokens/optimism';
 const basic = {
   name: 'Beethoven X',
-  logo: 'https://ipfs.near.social/ipfs/bafkreidjavlt5eoxajtoeny5ilfso2elx2hchgcpkdczibo2ar3v2juurq',
+  logo: '/images/apps/beethoven-x.png',
   amountOutFn: 'bluebiu.near/widget/Metis.Swap.HummusExchangeAmountOut',
 };
 const networks = {

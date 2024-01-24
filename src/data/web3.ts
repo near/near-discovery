@@ -271,6 +271,12 @@ export const onboard = init({
       label: 'Metis Goerli Testnet',
       rpcUrl: 'https://goerli.gateway.metisdevops.link	',
     },
+    {
+      id: 169,
+      token: 'Manta',
+      label: 'Manta',
+      rpcUrl: 'https://1rpc.io/manta',
+    },
   ],
   appMetadata: {
     name: 'NEAR',

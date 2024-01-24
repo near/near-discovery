@@ -2,7 +2,7 @@ import { arbitrum } from '@/config/tokens/arbitrum';
 
 const basic = {
   name: 'Ramses V2',
-  logo: 'https://ipfs.near.social/ipfs/bafkreidgayoqzg4kqxz6eag4eridejkx3rszflfwbnitfqfohlmpk54w3i',
+  logo: '/images/apps/ramses.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.RamsesV2AmountOut',
 };
 const networks = {

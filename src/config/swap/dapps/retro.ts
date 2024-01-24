@@ -2,7 +2,7 @@ import { polygon } from '@/config/tokens/polygon';
 
 const basic = {
   name: 'Retro',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiaqpbeth37uxmbe6iwqduoad76dncozbuoa3bwgcbcxcmputkuzfu',
+  logo: '/images/apps/retro.png',
   amountOutFn: 'bluebiu.near/widget/Mantle.Swap.AgniFinanceAmountOut',
 };
 const networks = {

@@ -2,7 +2,7 @@ import { bsc } from '@/config/tokens/bsc';
 
 const basic = {
   name: 'Orion',
-  logo: 'https://ipfs.near.social/ipfs/bafkreidzcztdcx6mez6hhhmhglfv7m7vh45ijgshmikhnforoksmbczlrq',
+  logo: '/images/apps/orion.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

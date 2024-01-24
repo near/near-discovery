@@ -3,7 +3,7 @@ import { polygon } from '@/config/tokens/polygon';
 
 const basic = {
   name: 'Honeyswap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreigpb3scxgcvddqzongudv3m77bh363rzyxidzuudk6wx32qa6vgia',
+  logo: '/images/apps/honey-swap.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

@@ -19,6 +19,7 @@ import useBestRoute from './hooks/useBestRoute';
 import useBridge from './hooks/useBridge';
 import useDestination from './hooks/useDestination';
 import useTokensAndChains from './hooks/useTokensAndChains';
+import { isNumeric } from './util'
 import type { Chain, Token, Trade } from './types';
 
 const Container = styled.div`
@@ -28,6 +29,7 @@ const Container = styled.div`
   gap: 10px;
   background-color: transparent;
   color: red;
+  padding-bottom: 40px;
 `;
 const Empty = styled.div`
   font-size: 16px;
@@ -140,7 +142,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
 
     if (!(trades && trades.length) && !checking) {
       // setErrorTips('Relayer: gas too low');
-      setErrorTips('no route');
+      setErrorTips('No route');
       return;
     }
 
@@ -158,7 +160,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
 
     if ((trades && trades.length) && selectedTradeIndex === -1) {
       // setErrorTips('Relayer: gas too low');
-      setErrorTips('select a route');
+      setErrorTips('Select a route');
       return;
     }
 
@@ -217,7 +219,13 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             loading={loading}
             amount={amount}
             onChange={(value: string) => {
-              setAmount(value);
+              if (value === '') {
+                setAmount(value);
+                return
+              }
+              if (isNumeric(value)) {
+                setAmount(value);
+              }
             }}
           />
           <Destination

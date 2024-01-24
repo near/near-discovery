@@ -2,7 +2,7 @@ import { metis } from '@/config/tokens/metis';
 
 const basic = {
   name: 'Hummus',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiaiitmjkwsqrrfppr3funhnuxjrb3lca533adgphq577chhmygua4',
+  logo: '/images/apps/hummus.png',
   amountOutFn: 'bluebiu.near/widget/Metis.Swap.HummusExchangeAmountOut',
 };
 const networks = {

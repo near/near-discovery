@@ -2,7 +2,7 @@ import { base } from '@/config/tokens/base';
 
 const basic = {
   name: 'Synthswap',
-  logo: 'https://www.synthswap.io/_next/image?url=%2Fimages%2Fsynth.png&w=48&q=75',
+  logo: '/images/apps/synth-swap.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 

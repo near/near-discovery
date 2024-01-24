@@ -12,7 +12,8 @@ export default function useQuestList(campaign_id?: string) {
     setLoading(true);
     try {
       const result = await get(`${QUEST_PATH}/api/quest/list?campaign_id=${campaign_id}`);
-      setQuestList(result.data || []);
+      const data = result.data
+      setQuestList(data ? data.sort((prev: any, next: any) => prev.quest_category_id - next.quest_category_id) : []);
       setLoading(false);
     } catch (err) {
       setLoading(false);

@@ -2,7 +2,7 @@ import { zkSync } from '@/config/tokens/zkSync';
 
 const basic = {
   name: 'SpaceFi',
-  logo: '	https://ipfs.near.social/ipfs/bafkreifjliccmtazc7sfzf3b45jyxpuabbhyqf4rt4ylensgbzc2nlbsru',
+  logo: '/images/apps/space-fi.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

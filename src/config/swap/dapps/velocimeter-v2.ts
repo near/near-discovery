@@ -3,7 +3,7 @@ import { base } from '@/config/tokens/base';
 
 const basic = {
   name: 'Velocimeter V2',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiavyiu3yx63yvsapaig3v3isljxbfrr4p6v4qu2dl6n7kofsdcedm',
+  logo: '/images/apps/velocimeter.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ChronosV1AmountOut',
 };
 const networks = {

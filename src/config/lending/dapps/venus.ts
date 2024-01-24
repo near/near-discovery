@@ -2,7 +2,7 @@ import { bsc } from '@/config/tokens/bsc';
 
 const basic = {
   name: 'Venus',
-  icon: 'https://ipfs.near.social/ipfs/bafkreiejzp4eub7pxuwgzlxmudwlodlnwnqqfk5qhqp7oqj3cmsy7wuzjm',
+  icon: '/images/apps/venus.png',
   data: 'bluebiu.near/widget/Lending.Data.Venus',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
 };

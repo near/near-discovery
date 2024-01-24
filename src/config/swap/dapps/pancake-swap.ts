@@ -2,7 +2,7 @@ import { polygonZkevm } from '@/config/tokens/polygonZkevm';
 
 const basic = {
   name: 'Pancake Swap',
-  logo: 'https://repository-images.githubusercontent.com/440462673/6872d684-f7ed-463c-9a5c-76542eddbcc4',
+  logo: '/images/apps/pancake.png',
   amountOutFn: 'bluebiu.near/widget/PolygonZkevm.Swap.PancakeSwapAmountOut',
 };
 const networks = {

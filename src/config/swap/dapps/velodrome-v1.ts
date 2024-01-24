@@ -1,7 +1,7 @@
 import { optimism } from '@/config/tokens/optimism';
 const basic = {
   name: 'Velodrome V1',
-  logo: 'https://ipfs.near.social/ipfs/bafkreieey4ie6pk6eyg3nrwnkdqlxb4gff3t4pkdq3ihaag2x3qbi3k7em',
+  logo: '/images/apps/velodrome.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ChronosV1AmountOut',
 };
 const networks = {

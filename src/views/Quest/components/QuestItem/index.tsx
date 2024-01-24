@@ -35,18 +35,18 @@ const QuestItem = ({
     logo,
     name,
     description,
+    sub_name,
     total_action,
     action_completed,
     reward,
     is_period,
     difficulty,
     id,
+    quest_category_name
   },
-  categoryName,
   mt,
 }: {
   quest: any;
-  categoryName?: string;
   mt?: number;
 }) => {
   const router = useRouter();
@@ -65,7 +65,7 @@ const QuestItem = ({
         <StyledIconBox>{logo && <StyledIcon src={logo} $disabled={live === false} />}</StyledIconBox>
         <div>
           <StyledTaskName>{name}</StyledTaskName>
-          <StyledTaskDesc $isCampaign={isCampaign}>{description}</StyledTaskDesc>
+          <StyledTaskDesc $isCampaign={isCampaign}>{sub_name}</StyledTaskDesc>
         </div>
       </StyledTask>
       <div>
@@ -87,7 +87,7 @@ const QuestItem = ({
               </StyledTag>
             )}
             {/* <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag> */}
-            {categoryName && <StyledCategoryName style={{ color: `var(--${categoryName}-color` }}>#{categoryName}</StyledCategoryName>}
+            {quest_category_name && <StyledCategoryName style={{ color: `var(--${quest_category_name}-color)` }}>#{quest_category_name}</StyledCategoryName>}
           </StyledTags>
           {is_claimed ? (
             <StyledCalimable style={{ color: '#979ABE' }}>Claimed</StyledCalimable>

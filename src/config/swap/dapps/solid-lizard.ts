@@ -2,7 +2,7 @@ import { arbitrum } from '@/config/tokens/arbitrum';
 
 const basic = {
   name: 'SolidLizard',
-  logo: 'https://ipfs.near.social/ipfs/bafkreifygw42y5orsb3l4xxz2blupunkfu4dh3nqlspvc5c3dciadkrcfi',
+  logo: '/images/apps/solid-lizard.png',
   amountOutFn: 'bluebiu.near/widget/Swap.Data.SolidLizardAmountOut',
 };
 

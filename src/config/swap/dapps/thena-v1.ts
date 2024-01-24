@@ -1,7 +1,7 @@
 import { bsc } from '@/config/tokens/bsc';
 const basic = {
   name: 'THENA V1',
-  logo: 'https://ipfs.near.social/ipfs/bafkreidps2jipljarabsxbqtiuj6lyupfhvpsesiffmsjzjt4zb73r7qfq',
+  logo: '/images/apps/thena.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ChronosV1AmountOut',
 };
 const networks = {

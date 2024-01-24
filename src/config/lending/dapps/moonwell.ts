@@ -2,7 +2,7 @@ import { base } from '@/config/tokens/base';
 
 const basic = {
   name: 'Moonwell',
-  icon: 'https://ipfs.near.social/ipfs/bafkreih3un4tcbwp3tneicomraozegmftz45sfx4rtg3qyui67nfdrptei',
+  icon: '/images/apps/moonwell.png',
   data: 'bluebiu.near/widget/Lending.Data.Moonwell',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
   handlerClaim: 'bluebiu.near/widget/Base.Lending.MoonwellHandlerClaim',

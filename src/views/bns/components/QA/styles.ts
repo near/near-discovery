@@ -18,6 +18,7 @@ export const StyledHead = styled.div`
 
 
 export const StyledQuestion = styled.div`
+  width: 100%;
   overflow: hidden;
   border-radius: 16px;
   border: 1px solid #373A53;
@@ -35,6 +36,10 @@ export const StyledIconRight = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  &.active {
+    transform: rotate(90deg);
+  }
 
 `
 export const StyledQuestionDesc = styled.div`

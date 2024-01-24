@@ -4,6 +4,8 @@ import venus from '../dapps/venus';
 import cream from '../dapps/cream';
 import radiant from '../dapps/radiant';
 import granary from '../dapps/granary-finance';
+import filda from '../dapps/filda';
+import liqee from '../dapps/liqee';
 
 const CHAIN_ID = 56;
 const CHAIN_NAME = 'BSC';
@@ -19,7 +21,7 @@ export default {
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,
   },
-  defaultDapp: 'Granary Finance',
+  defaultDapp: 'Venus',
   dapps: {
     Venus: {
       ...venus.basic,
@@ -36,6 +38,14 @@ export default {
     'Granary Finance': {
       ...granary.basic,
       ...granary.networks[CHAIN_ID],
+    },
+    FilDA: {
+      ...filda.basic,
+      ...filda.networks[CHAIN_ID],
+    },
+    Liqee: {
+      ...liqee.basic,
+      ...liqee.networks[CHAIN_ID],
     },
   },
 };

@@ -12,6 +12,7 @@ export interface Token {
   icon: string;
   decimals: number;
   isNative?: boolean;
+  priceKey?: string;
 }
 
 export interface Chain {

@@ -2,7 +2,7 @@ import { mantle } from '@/config/tokens/mantle';
 
 const basic = {
   name: 'Agni Finance',
-  logo: 'https://ipfs.near.social/ipfs/bafkreihkerekcdjd3cgxzklknlx6ai7zxil24sdcji6fahtlpueqsids6u',
+  logo: '/images/apps/agni-finance.png',
   amountOutFn: 'bluebiu.near/widget/Mantle.Swap.AgniFinanceAmountOut',
 };
 const networks = {

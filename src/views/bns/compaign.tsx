@@ -5,11 +5,13 @@ import discountMark from '@/assets/images/discount_mark.svg';
 import iconAchieved from '@/assets/images/icon_achieved.svg';
 import AccountSider from '@/components/AccountSider';
 import Breadcrumb from '@/components/Breadcrumb';
+import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains';
 import { DesktopNavigationTop } from '@/components/navigation/desktop/DesktopNavigationTop';
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
 import * as http from '@/utils/http';
 import QuestItem from '@/views/Quest/components/QuestItem';
+import { useSetChain } from '@web3-onboard/react';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -39,10 +41,13 @@ import RegisterDialog from './components/RegisterDialog';
 import SwitchNetwork from './components/SwitchNetwork';
 const CampaignView = () => {
   const router = useRouter()
+  const compaignId = '6'
   const contract = useBnsContract()
+  const { chains } = useTokensAndChains()
   const { account } = useAccount();
   const { connect, connecting } = useAuth();
   const [value, setValue] = useState('')
+
   const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0)
   const [bnsNames, setBnsNames] = useState<any>([])
   const [currentBnsName, setCurrentBnsName] = useState<any>({
@@ -55,8 +60,14 @@ const CampaignView = () => {
   const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
 
   const [showSwitchNetworkDialog, setShowSwitchNetworkDialog] = useState<boolean>(false)
-  const { loading, questList } = useQuestList(router.query.id as string)
+  const { loading, questList } = useQuestList(compaignId)
   const [discount, setDiscount] = useState(false)
+
+  const [{ connectedChain, settingChain }, setChain] = useSetChain();
+  const currentChain: any = useMemo(
+    () => (connectedChain?.id ? chains[Number(connectedChain?.id)] : null),
+    [connectedChain?.id],
+  );
 
   const timerRef = useRef<any>(null)
 
@@ -146,13 +157,12 @@ const CampaignView = () => {
     account && getBnsNames()
   }, [])
   return (
-    <StyledWrapper>
+    <StyledWrapper style={{ paddingBottom: 120 }}>
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb navs={[
-          { name: 'Home', path: '/' },
-          { name: 'Quest', path: '/bns/leaderboard' },
-          { name: 'DapDap X BNS', path: '/bns/campaign' },
+          { name: 'Quest', path: '/quest/leaderboard' },
+          { name: 'DapDap X BNS', path: '/quest/campaign/DapDapXBNS' },
         ]} />
       </StyledContainer>
       <StyledFlex $gap='20px' style={{
@@ -199,8 +209,26 @@ const CampaignView = () => {
         <RelatedQuests loading={loading} questList={questList} />
         <QA />
       </StyledFlex>
-      {showRegisterDialg && <RegisterDialog priceLabel={priceLabel} discount={discount} setShowSwitchNetworkDialog={setShowSwitchNetworkDialog} onClose={() => setShowRegisterDialg(false)} />}
-      {showNetworkDialog && <NetworkDialog bnsName={currentBnsName} setBnsName={setCurrentBnsName} onClose={() => setShowNetworkDialog(false)} />}
+      {showRegisterDialg && (
+        <RegisterDialog
+          priceLabel={priceLabel}
+          discount={discount}
+          setShowSwitchNetworkDialog={setShowSwitchNetworkDialog}
+          currentChain={currentChain}
+          setChain={setChain}
+          onClose={() => setShowRegisterDialg(false)}
+        />
+      )}
+      {showNetworkDialog && (
+        <NetworkDialog
+          bnsName={currentBnsName}
+          setShowSwitchNetworkDialog={setShowSwitchNetworkDialog}
+          setBnsName={setCurrentBnsName}
+          currentChain={currentChain}
+          setChain={setChain}
+          onClose={() => setShowNetworkDialog(false)}
+        />
+      )}
       {showSwitchNetworkDialog && <SwitchNetwork chainId={8453} onClose={() => setShowSwitchNetworkDialog(false)} />}
       <AccountSider />
     </StyledWrapper >

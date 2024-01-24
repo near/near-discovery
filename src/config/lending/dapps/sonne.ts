@@ -3,10 +3,15 @@ import { optimism } from '@/config/tokens/optimism';
 
 const basic = {
   name: 'Sonne',
-  icon: 'https://ipfs.near.social/ipfs/bafkreih3zbgnxv34qmlr62j5nq62uai6hsiykiyip3wgmfa7djewbwbdtq',
+  icon: '/images/apps/sonne.png',
   data: 'bluebiu.near/widget/Lending.Data.Sonne',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
   handlerClaim: 'bluebiu.near/widget/Linea.Lending.MendiHandlerClaim',
+};
+
+const rewardToken = {
+  icon: 'https://ipfs.near.social/ipfs/bafkreiagqfppcrymfj426ik74axff645ohvi7va5v4yxlszdbu3xstyqeq',
+  symbol: 'SONNE',
 };
 
 const networks = {
@@ -40,6 +45,7 @@ const networks = {
         underlyingToken: base['usdc'],
       },
     },
+    rewardToken,
   },
   10: {
     unitrollerAddress: '0x60CF091cD3f50420d50fD7f707414d0DF4751C58',
@@ -89,6 +95,7 @@ const networks = {
         underlyingToken: optimism['usdt'],
       },
     },
+    rewardToken,
   },
 };
 

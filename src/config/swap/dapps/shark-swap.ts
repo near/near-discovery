@@ -2,7 +2,7 @@ import { base } from '@/config/tokens/base';
 
 const basic = {
   name: 'SharkSwap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreia7oozhsapdw6x3eebz2v3x2nixwabwpboguqfjvhgg7xithkjhta',
+  logo: '/images/apps/shark-swap.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 

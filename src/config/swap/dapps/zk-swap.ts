@@ -2,7 +2,7 @@ import { zkSync } from '@/config/tokens/zkSync';
 
 const basic = {
   name: 'zkSwap Finance',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiesthfx736q4xkn3t352fo73jxgrfd2523kbru76vtpxuodzxrmja',
+  logo: '/images/apps/zk-swap.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

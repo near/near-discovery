@@ -1,4 +1,5 @@
 import { memo, useEffect, useRef, useState } from 'react';
+import emojiRegex from 'emoji-regex'
 import {
   StyledEmojiWrapper,
   StyledFlex,
@@ -36,7 +37,11 @@ const InputWithEmoji = ({ onChange, queryStatus }: { onChange: any, queryStatus:
   const [isFocus, setIsFocus] = useState(false)
   const handleInputChange = function (event: any) {
     const value = event.target.value
-    setValue(value)
+    const array = _.split(value, '')
+    const txtReg = /[0-9a-zA-Z]/
+    const emojiReg = emojiRegex()
+    const filterArray = array.filter(txt => txtReg.test(txt) || emojiReg.test(txt))
+    setValue(filterArray.join(''))
   }
   const handleClickEmoji = function () {
     setShowPicker(prev => !prev)
@@ -57,7 +62,7 @@ const InputWithEmoji = ({ onChange, queryStatus }: { onChange: any, queryStatus:
           <StyledInputLinearGradient>
             <StyledInputContainer>
               <StyledSvg style={{ marginLeft: 15 }} className={queryStatus === 1 ? 'loading' : ''}>{queryStatus === 1 ? iconCircle : iconSearch}</StyledSvg>
-              <StyledInput value={value} onChange={(event) => handleInputChange(event)} onBlur={() => setIsFocus(false)} onFocus={() => setIsFocus(true)} />
+              <StyledInput placeholder='yourname' value={value} onChange={(event) => handleInputChange(event)} onBlur={() => setIsFocus(false)} onFocus={() => setIsFocus(true)} />
               <StyledInputSuffix style={{ marginRight: 12 }}>.base</StyledInputSuffix>
             </StyledInputContainer>
           </StyledInputLinearGradient>

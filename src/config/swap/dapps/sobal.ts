@@ -2,7 +2,7 @@ import { base } from '@/config/tokens/base';
 
 const basic = {
   name: 'Sobal',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiamtzxprny2zkyw2szix3ko5oozp4yldnhk742k3sez2il7vd3r6e',
+  logo: '/images/apps/sobal.png',
   amountOutFn: 'bluebiu.near/widget/Metis.Swap.HummusExchangeAmountOut',
 };
 const networks = {

@@ -1016,7 +1016,7 @@ const HomeContent: NextPageWithLayout = () => {
                 Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the
                 way.
               </p>
-              <Link href="/bns/leaderboard">View</Link>
+              <Link href="/quest/leaderboard">View</Link>
               <div className="list-item-img">
                 <img src="https://assets.dapdap.net/images/home-itworks-earn.png" alt="" />
               </div>
