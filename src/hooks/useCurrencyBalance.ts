@@ -21,6 +21,10 @@ export default function useTokenBalance({
   const [loading, setLoading] = useState<boolean>(false);
   const { account, chainId } = useAccount();
   useEffect(() => {
+    if (!currency) {
+      return
+    }
+
     const _chainId = currency?.chainId || chainId;
 
     if (!_chainId || !chains || !chains[_chainId]) {

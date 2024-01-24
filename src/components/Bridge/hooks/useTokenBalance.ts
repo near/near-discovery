@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { lifi } from './useLifi'
+import { lifi, getLifiTokens } from './useLifi'
 import type { Token as LiFiToken, TokenAmount } from '@lifi/sdk'
 import type { Token } from '../types';
 
@@ -29,6 +29,7 @@ export default function useTokenBalance({
             lifi.getTokenBalancesForChains(account, {
                 [lifiToken.chainId]: [lifiToken],
             })
+
             .then(res => {
                 const vals: TokenAmount[] = res[tokensByChain.chainId]
                 if (vals && vals.length) {
@@ -73,37 +74,62 @@ export function useTokensBalance({
         setBalances(defaultVals)
         if (account && tokensByChain && tokensByChain.length) {
             const chainId = tokensByChain[0].chainId
-            const lifiTokens: LiFiToken[] = tokensByChain.map(item => ({
-                symbol: item.symbol,
-                decimals: item.decimals,
-                name: item.name ? item.name : '',
-                priceUSD: '',
-                address: item.address ? item.address : '',
-                chainId: item.chainId,
-            }))
 
-            lifi.getTokenBalancesForChains(account, {
-                [chainId]: lifiTokens,
-            })
-            .then(res => {
-                const vals: TokenAmount[] = res[chainId]
-                const amountBigThan0 = vals.filter(token => Number(token.amount) > 0)
-                if (amountBigThan0 && amountBigThan0.length) {
-                    setBalances(amountBigThan0.map(token => ({
-                        symbol: token.symbol,
-                        amount: token.amount,
-                        address: token.address,
-                    })))
-                    
-                } else {
-                    setBalances(defaultVals)
-                }
-                setLoading(false)
-            })
-            .catch(e => {
+
+            if (chainId === 5000) {
                 setLoading(false)
                 setBalances(defaultVals)
+                return
+            }
+
+            getLifiTokens().then(chainTokens => {
+                const lifiTokens: LiFiToken[] =  tokensByChain.map((item) => {
+                    let address = item.address ? item.address : ''
+                    if (item.isNative) {
+                        const tokens: Token[] = chainTokens[item.chainId]
+                        const lifiTokens = tokens.filter(_token => _token.symbol === item.symbol)
+                        if (lifiTokens && lifiTokens.length) {
+                            address = lifiTokens[0].address
+                        }
+                    }
+    
+                    return {
+                        symbol: item.symbol,
+                        decimals: item.decimals,
+                        name: item.name ? item.name : '',
+                        priceUSD: '',
+                        address,
+                        chainId: item.chainId,
+                    }
+                })
+    
+                lifi.getTokenBalancesForChains(account, {
+                    [chainId]: lifiTokens,
+                })
+                .then(res => {
+                    console.log('res: ', res)
+    
+                    const vals: TokenAmount[] = res[chainId]
+                    const amountBigThan0 = vals.filter(token => Number(token.amount) > 0)
+                    if (amountBigThan0 && amountBigThan0.length) {
+                        setBalances(amountBigThan0.map(token => ({
+                            symbol: token.symbol,
+                            amount: token.amount,
+                            address: token.address,
+                        })))
+                        
+                    } else {
+                        setBalances(defaultVals)
+                    }
+                    setLoading(false)
+                })
+                .catch(e => {
+                    setLoading(false)
+                    setBalances(defaultVals)
+                })
             })
+
+            
         } else {
             setLoading(false)
             setBalances(defaultVals)

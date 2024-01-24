@@ -160,9 +160,8 @@ const CampaignView = () => {
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb navs={[
-          { name: 'Home', path: '/' },
-          { name: 'Quest', path: '/bns/leaderboard' },
-          { name: 'DapDap X BNS', path: '/bns/campaign' },
+          { name: 'Quest', path: '/quest/leaderboard' },
+          { name: 'DapDap X BNS', path: '/quest/campaign/DapDapXBNS' },
         ]} />
       </StyledContainer>
       <StyledFlex $gap='20px' style={{
