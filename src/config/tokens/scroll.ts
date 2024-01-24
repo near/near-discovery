@@ -76,4 +76,28 @@ export const scroll: { [key: string]: Token } = {
     decimals: 18,
     address: '0x95a52ec1d60e74cd3eb002fe54a2c74b185a4c16',
   },
+  crv: {
+    chainId: CHAIN_ID,
+    address: '0xB755039eDc7910C1F1BD985D48322E55A31AC0bF',
+    decimals: 18,
+    symbol: 'CRV',
+    name: 'Curve DAO Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihfv7kul7d6e2fxnlpalx3p7wx47ylhw7tauozhipcughshj25ehm',
+  },
+  aave: {
+    chainId: CHAIN_ID,
+    address: '0x79379C0E09a41d7978f883a56246290eE9a8c4d3',
+    decimals: 18,
+    symbol: 'AAVE',
+    name: 'Aave Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreicmsnivbvp2xd3ewcjb5kybgnbnevbcojhn4mgub7rregnbtqcige',
+  },
+  reth: {
+    chainId: CHAIN_ID,
+    address: '0x53878b874283351d26d206fa512aece1bef6c0dd',
+    decimals: 18,
+    symbol: 'rETH',
+    name: 'Rocket Pool ETH',
+    icon: 'https://ipfs.near.social/ipfs/bafkreicgk4jnpvyfe7jqup46y5epyxoemounktft6yxtym7o7wcagiecpy',
+  },
 };
