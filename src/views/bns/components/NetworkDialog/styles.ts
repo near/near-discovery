@@ -1,4 +1,6 @@
 import styled from 'styled-components'
+
+
 export {
   StyledButton, StyledDialog, StyledFlex, StyledSvg, StyledText, StyledWrapper
 } from '../../styles'
@@ -96,12 +98,19 @@ export const StyledPlusButton = styled.button`
   border-radius: 10px;
   border: 1px solid #373A53;
   background: #2E3142;
-  /* color: #979ABE; */
-  stroke: #979ABE;
-  fill: #979ABE;
+  .gray {
+    display: flex;
+  }
+  .white {
+    display: none;
+  }
   &:hover {
     background: #333649;
-    stroke: #FFF;
-    fill: #FFF;
+    .gray {
+      display: none;
+    }
+    .white {
+      display: flex;
+    }
   }
 `

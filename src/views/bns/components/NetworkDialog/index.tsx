@@ -61,8 +61,14 @@ const iconWarning = (
 
 const iconPlus = (
   <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="11" cy="11" r="10.5" />
-    <path d="M10.464 14.876V11.69H7.35V10.286H10.464V7.1H12.012V10.286H15.126V11.69H12.012V14.876H10.464Z" />
+    <circle cx="11" cy="11" r="10.5" stroke="#979ABE" />
+    <path d="M10.464 14.876V11.69H7.35V10.286H10.464V7.1H12.012V10.286H15.126V11.69H12.012V14.876H10.464Z" fill="#979ABE" />
+  </svg>
+)
+const iconWhitePlus = (
+  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="11" cy="11" r="10.5" stroke="#FFFFFF" />
+    <path d="M10.464 14.876V11.69H7.35V10.286H10.464V7.1H12.012V10.286H15.126V11.69H12.012V14.876H10.464Z" fill="#FFFFFF" />
   </svg>
 )
 const NetworkDialog = ({
@@ -237,7 +243,12 @@ const NetworkDialog = ({
               </StyledButton>
             </StyledFlex>
             <StyledPlusButton onClick={() => setSaveStatus(1)} style={{ marginTop: 23, marginBottom: 30 }}>
-              {iconPlus}
+              <StyledSvg className='gray'>
+                {iconPlus}
+              </StyledSvg>
+              <StyledSvg className='white'>
+                {iconWhitePlus}
+              </StyledSvg>
             </StyledPlusButton>
             <StyledWrapper style={{ marginBottom: 30, height: 300, overflow: 'auto' }}>
               <StyledFlex $direction='column' $gap='30px'>
