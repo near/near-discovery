@@ -1,5 +1,6 @@
 import weths from '../../contract/weth';
 import { basic as metavaultV3Basic, networks as metavaultV3Networks } from '../dapps/metavault-v3';
+import { basic as skydromeBasic, networks as skydromeNetworks } from '../dapps/skydrome';
 
 const CHAIN_ID = 534352;
 
@@ -17,6 +18,10 @@ export default {
     'Metavault V3': {
       ...metavaultV3Basic,
       ...metavaultV3Networks[CHAIN_ID],
+    },
+    Skydrome: {
+      ...skydromeBasic,
+      ...skydromeNetworks[CHAIN_ID],
     },
   },
 };

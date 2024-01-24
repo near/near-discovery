@@ -370,4 +370,11 @@ export default {
       '--button-text-color': '',
     },
   },
+  skydrome: {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
 };

@@ -68,4 +68,12 @@ export const scroll: { [key: string]: Token } = {
     decimals: 18,
     address: '0xf610A9dfB7C89644979b4A0f27063E9e7d7Cda32',
   },
+  sky: {
+    chainId: CHAIN_ID,
+    name: 'Skydrome',
+    symbol: 'SKY',
+    icon: '/images/tokens/sky.png',
+    decimals: 18,
+    address: '0x95a52ec1d60e74cd3eb002fe54a2c74b185a4c16',
+  },
 };
