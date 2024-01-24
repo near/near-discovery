@@ -52,7 +52,7 @@ const DialogChains = ({
       content={
         <Chains>
           {chains.map((chain) => (
-            <StyledChain
+            chain.chainId === 5000 ? null : <StyledChain
               key={chain.chainId}
               onClick={() => {
                 onSelect(chain);

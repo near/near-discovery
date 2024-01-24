@@ -14,3 +14,7 @@ export function formatException(errMsg: string): string {
 
     return _msg
 }
+
+export function isNumeric(value: any): boolean {
+    return !isNaN(parseFloat(value)) && isFinite(value);
+}
