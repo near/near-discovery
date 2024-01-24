@@ -137,6 +137,14 @@ export const bsc: { [key: string]: Token } = {
     name: 'Binance-Peg BUSD Token',
     icon: 'https://ipfs.near.social/ipfs/bafkreibp36dfkfjzgnnbb7u4jxh57gpjmfjerc6pefmyzhueulz5ovd5xy',
   },
+  tusd: {
+    chainId: CHAIN_ID,
+    address: '0x40af3827F39D0EAcBF4A168f8D4ee67c121D11c9',
+    decimals: 18,
+    symbol: 'TUSD',
+    name: 'TrueUSD',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibxsfa4pd4tpotiibvnv22dmj6mswqgdnljrrvdjbsatbapyxdsjq',
+  },
   bsw: {
     chainId: CHAIN_ID,
     address: '0x965F527D9159dCe6288a2219DB51fc6Eef120dD1',
