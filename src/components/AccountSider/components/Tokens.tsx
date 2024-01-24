@@ -55,15 +55,18 @@ const Balance = styled.div`
 const Token = ({ token, loading, balance }: { token: Token; loading: boolean; balance: string }) => {
   const chain = useChain(token.chainId);
   const price = usePriceStore((store) => store.price);
+  const isMantle = token.chainId === 5000
+  const _token = isMantle ? token : undefined
+  const result = useTokenBalance({ currency: _token });
   let _loading
   let _balance
-  if (token.chainId === 5000) {
-    const result = useTokenBalance({ currency: token });
+  if (isMantle) {
     _loading = result.loading
     _balance = result.balance
+  } else {
+    _loading = loading
+    _balance = balance
   }
-
-  
   
   return (
       <TokenWrapper>
