@@ -34,6 +34,11 @@ export const StyledInvitedUsers = styled.div`
   line-height: normal;
 `
 // guide
+
+export const StyledVideo = styled.div`
+  width: 700px;
+  height: 388px;
+`
 export const StyledGuidStep = styled.div`
   /* width: 529px; */
   width: 100%;
@@ -65,14 +70,18 @@ export const StyledGuideContinueButton = styled.button`
   flex: 1;
   height: 48px;
   border-radius: 10px;
-  background: #EBF479;
-  color: #000;
   text-align: center;
+  border-radius: 12px;
+  background: rgba(124, 127, 150, 0.5);
+  color: #000;
   font-family: Gantari;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
+  font-weight: 500;
+  &.complete {
+    font-weight: 700;
+    border-radius: 10px;
+    background: #EBF479;
+  }
+
 `
 export const StyledGuideSkipButton = styled.button`
   outline: none;

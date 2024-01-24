@@ -156,7 +156,7 @@ const CampaignView = () => {
     account && getBnsNames()
   }, [])
   return (
-    <StyledWrapper>
+    <StyledWrapper style={{ paddingBottom: 120 }}>
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb navs={[
