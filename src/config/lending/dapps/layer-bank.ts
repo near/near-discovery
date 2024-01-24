@@ -1,5 +1,6 @@
 import { linea } from '@/config/tokens/linea';
 import { manta } from '@/config/tokens/manta';
+import { scroll } from '@/config/tokens/scroll';
 
 const basic = {
   name: 'LayerBank',
@@ -81,6 +82,33 @@ const networks = {
       },
     },
     rewardToken: manta['lab'],
+  },
+  534352: {
+    unitrollerAddress: '0xEC53c830f4444a8A56455c6836b5D2aA794289Aa',
+    oracleAddress: '0x760bd7Fc100F217678D1b521404D2E93Db7Bec5F',
+    rateModelSlopeAddress: '0x18941f10B29a7F6d5290F3B1D5fcC7ae9f6f8DF4',
+    distributionAddress: '0xF1F897601A525F57c5EA751a1F3ec5f9ADAc0321',
+    markets: {
+      '0x274C3795dadfEbf562932992bF241ae087e0a98C': {
+        decimals: 18,
+        symbol: 'lETH',
+        address: '0x274C3795dadfEbf562932992bF241ae087e0a98C',
+        underlyingToken: { ...scroll['eth'], address: '0x0000000000000000000000000000000000000000' },
+      },
+      '0x0D8F8e271DD3f2fC58e5716d3Ff7041dBe3F0688': {
+        decimals: 18,
+        symbol: 'lUSDC',
+        address: '0x0D8F8e271DD3f2fC58e5716d3Ff7041dBe3F0688',
+        underlyingToken: scroll['usdc'],
+      },
+      '0xB6966083c7b68175B4BF77511608AEe9A80d2Ca4': {
+        decimals: 18,
+        symbol: 'wstETH',
+        address: '0xB6966083c7b68175B4BF77511608AEe9A80d2Ca4',
+        underlyingToken: scroll['wsteth'],
+      },
+    },
+    rewardToken: scroll['lab'],
   },
 };
 

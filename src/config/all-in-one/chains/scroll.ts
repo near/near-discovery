@@ -10,7 +10,11 @@ export default {
   menuConfig: {
     Swap: {
       tab: 'Swap',
-      path: 'bluebiu.near/widget/Manta.Swap',
+      path: 'bluebiu.near/widget/Scroll.Swap',
+    },
+    Lending: {
+      tab: 'Lending',
+      path: 'bluebiu.near/widget/Scroll.Lending',
     },
   },
 };

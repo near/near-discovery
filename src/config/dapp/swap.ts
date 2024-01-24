@@ -363,4 +363,11 @@ export default {
       '--button-text-color': '',
     },
   },
+  'metavault-v3': {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
 };
