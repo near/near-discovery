@@ -5,8 +5,8 @@ export const bsc: { [key: string]: Token } = {
   usdt: {
     chainId: CHAIN_ID,
     address: '0x55d398326f99059fF775485246999027B3197955',
-    symbol: 'BSC-USD',
-    name: 'Binance-Peg BSC-USD',
+    symbol: 'USDT',
+    name: 'Tether USD',
     icon: 'https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661',
     decimals: 18,
   },
