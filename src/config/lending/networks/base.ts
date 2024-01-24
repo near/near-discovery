@@ -18,7 +18,7 @@ export default {
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,
   },
-  defaultDapp: 'Granary Finance',
+  defaultDapp: 'Moonwell',
   dapps: {
     Moonwell: {
       ...moonwell.basic,

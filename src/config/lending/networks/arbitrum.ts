@@ -22,7 +22,7 @@ export default {
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,
   },
-  defaultDapp: 'Lodestar V1',
+  defaultDapp: 'Radiant',
   dapps: {
     Radiant: {
       ...radiant.basic,
