@@ -4,7 +4,7 @@ import { manta } from '@/config/tokens/manta';
 
 const basic = {
   name: 'iZiSwap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreifsgwu2zd6y2n5alekr5qgdhzoivlkl5wujtq3z7gnm5pw4jy7sgi',
+  logo: '/images/apps/izi-swap.png',
   amountOutFn: 'bluebiu.near/widget/Linea.Swap.IziSwapAmountOut',
 };
 const networks = {

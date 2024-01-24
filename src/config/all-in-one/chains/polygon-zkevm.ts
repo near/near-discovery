@@ -6,6 +6,7 @@ export default {
   selectBgColor: '#A55FFF',
   chainId: 1101,
   rpcUrls: ['https://zkevm-rpc.com'],
+  defaultTab: 'Bridge',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',

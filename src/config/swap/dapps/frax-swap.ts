@@ -1,7 +1,7 @@
 import { optimism } from '@/config/tokens/optimism';
 const basic = {
   name: 'Frax Swap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreihmgwok5dhlb64c3dib5irnc2vacmljcyfeten6dhzfqpolsvjy74',
+  logo: '/images/apps/frax.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

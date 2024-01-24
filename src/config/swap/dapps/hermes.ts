@@ -2,7 +2,7 @@ import { metis } from '@/config/tokens/metis';
 
 const basic = {
   name: 'Hermes',
-  logo: 'https://ipfs.near.social/ipfs/bafybeiamt2iuucwebbklhvmq5dz3hir63u3ovkvusbuz3k2wpsiwhulnzy',
+  logo: '/images/apps/hermes.png',
   amountOutFn: 'bluebiu.near/widget/Swap.Data.HermesAmountOut',
 };
 const networks = {

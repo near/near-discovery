@@ -2,7 +2,7 @@ import { mantle } from '@/config/tokens/mantle';
 
 const basic = {
   name: 'Cleopatra Exchange',
-  logo: 'https://ipfs.near.social/ipfs/bafkreibncghvd7ajh5fdqxzittwyl2bukx32i4fjpr4xzd4aznjs5y2wly',
+  logo: '/images/apps/cleopatra.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ChronosV1AmountOut',
 };
 const networks = {

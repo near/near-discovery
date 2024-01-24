@@ -2,7 +2,7 @@ import { metis } from '@/config/tokens/metis';
 
 const basic = {
   name: 'Netswap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreicczubd47v7zr2cln7l3xts66ek77d4m3neqp3j7dl2cjhjcwphwa',
+  logo: '/images/apps/net-swap.png',
   amountOutFn: 'bluebiu.near/widget/Metis.Swap.NetSwapAmountOut',
 };
 const networks = {

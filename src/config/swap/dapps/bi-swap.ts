@@ -2,7 +2,7 @@ import { bsc } from '@/config/tokens/bsc';
 
 const basic = {
   name: 'Biswap',
-  logo: 'https://www.gitbook.com/cdn-cgi/image/width=40,dpr=2,height=40,fit=contain,format=auto/https%3A%2F%2F3913055502-files.gitbook.io%2F~%2Ffiles%2Fv0%2Fb%2Fgitbook-legacy-files%2Fo%2Fspaces%252F-MYxuX082CiatAs0SbU8%252Favatar-1619452090567.png%3Fgeneration%3D1619452091011230%26alt%3Dmedia',
+  logo: '/images/apps/bi-swap.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

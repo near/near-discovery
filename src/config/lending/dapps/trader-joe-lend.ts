@@ -2,7 +2,7 @@ import { avalanche } from '@/config/tokens/avalanche';
 
 const basic = {
   name: 'Trader Joe',
-  logo: '/images/apps/trader-joe.png',
+  icon: '/images/apps/trader-joe.png',
   data: 'bluebiu.near/widget/Lending.Data.TraderJoe',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
   handlerClaim: 'bluebiu.near/widget/Avalanche.Lending.BenqiClaimHandler',

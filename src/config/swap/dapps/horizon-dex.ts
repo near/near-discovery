@@ -3,7 +3,7 @@ import { linea } from '@/config/tokens/linea';
 
 const basic = {
   name: 'HorizonDEX',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiaqpbeth37uxmbe6iwqduoad76dncozbuoa3bwgcbcxcmputkuzfu',
+  logo: '/images/apps/horizon-dex.png',
   amountOutFn: 'bluebiu.near/widget/Base.Swap.HorizonDexAmountOut',
 };
 const networks = {

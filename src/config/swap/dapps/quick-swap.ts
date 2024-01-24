@@ -4,7 +4,7 @@ import { manta } from '@/config/tokens/manta';
 
 const basic = {
   name: 'QuickSwap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreida55shh44tqd4ingcunnu6u34g5bm3jugoaasy7a365kutoomjru',
+  logo: '/images/apps/quick-swap.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 const networks = {

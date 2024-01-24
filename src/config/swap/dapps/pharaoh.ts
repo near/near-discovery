@@ -2,7 +2,7 @@ import { avalanche } from '@/config/tokens/avalanche';
 
 const basic = {
   name: 'Pharaoh',
-  logo: 'https://ipfs.near.social/ipfs/bafkreictkr54jtz4rb3qk3bxdts2rvj37ngi4bi3hsghqubkhalxdojp3i',
+  logo: '/images/apps/pharaoh.png',
   amountOutFn: 'bluebiu.near/widget/Mantle.Swap.AgniFinanceAmountOut',
 };
 const networks = {

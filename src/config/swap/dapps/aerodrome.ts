@@ -2,7 +2,7 @@ import { base } from '@/config/tokens/base';
 
 const basic = {
   name: 'Aerodrome',
-  logo: 'https://ipfs.near.social/ipfs/bafkreifdavntsjutat26jxehjjhco55ebrlwydd3finptfylhq22ijbggu',
+  logo: '/images/apps/aerodrome.png',
   amountOutFn: 'bluebiu.near/widget/Swap.Data.AerodromeAmountOut',
 };
 

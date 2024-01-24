@@ -6,6 +6,7 @@ export default {
   selectBgColor: '#00dacc',
   chainId: 1088,
   rpcUrls: ['https://andromeda.metis.io/?owner=1088'],
+  defaultTab: 'Bridge',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',

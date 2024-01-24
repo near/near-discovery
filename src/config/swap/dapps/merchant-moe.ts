@@ -2,7 +2,7 @@ import { mantle } from '@/config/tokens/mantle';
 
 const basic = {
   name: 'Merchant Moe',
-  logo: 'https://ipfs.near.social/ipfs/bafkreieuc24dv6zbdjoxazhxduqsh66gwyuf6ioeczbn4dbhwofmvatqvu',
+  logo: '/images/apps/merchant-moe.png',
   amountOutFn: 'bluebiu.near/widget/Swap.Data.MerchantMoeAmountOut',
 };
 const networks = {

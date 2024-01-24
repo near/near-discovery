@@ -2,7 +2,7 @@ import { gnosis } from '@/config/tokens/gnosis';
 
 const basic = {
   name: 'Elk',
-  logo: 'https://ipfs.near.social/ipfs/bafkreifua7ed6ubnfei33y6hjehrqfacmqzd55io22bqhw4pf5tydegz5e',
+  logo: '/images/apps/elk.png',
   amountOutFn: 'bluebiu.near/widget/Swap.Data.ElkAmountOut',
 };
 const networks = {

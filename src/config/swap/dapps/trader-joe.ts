@@ -2,7 +2,7 @@ import { avalanche } from '@/config/tokens/avalanche';
 import { bsc } from '@/config/tokens/bsc';
 const basic = {
   name: 'Trader Joe',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiayj2bv6br4lt77qzhty7yu6butss42lqoatekdyk3is76yjxlw4e',
+  logo: '/images/apps/trader-joe.png',
   amountOutFn: 'bluebiu.near/widget/Avalanche.Swap.JoeTraderAmountOut',
 };
 const networks = {
