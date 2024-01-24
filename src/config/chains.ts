@@ -136,6 +136,14 @@ const chainCofig = {
     rpcUrls: ['https://1rpc.io/manta'],
     blockExplorers: 'https://pacific-explorer.manta.network/',
   },
+  534352: {
+    chainId: 534352,
+    chainName: 'Scroll',
+    icon: '/images/chains/scroll.png',
+    nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+    rpcUrls: ['https://rpc.scroll.io'],
+    blockExplorers: 'https://scrollscan.com/',
+  },
 } as { [key: number]: Chain };
 
 export default chainCofig;

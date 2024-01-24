@@ -6,6 +6,7 @@ export default {
   selectBgColor: '#35bde3',
   chainId: 169,
   rpcUrls: ['https://1rpc.io/manta'],
+  defaultTab: 'Swap',
   menuConfig: {
     Swap: {
       tab: 'Swap',
