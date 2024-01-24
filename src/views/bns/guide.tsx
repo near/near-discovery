@@ -2,9 +2,11 @@ import iconCoin from '@/assets/images/icon_coin.svg';
 import iconHand from '@/assets/images/icon_hand.svg';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { LANDING_CHAINS } from '@/config/bridge/chains';
+import useAddAction from '@/hooks/useAddAction';
 import { useChainsStore } from '@/stores/chains';
 import Image from 'next/image';
 import { memo, useMemo, useState } from 'react';
+
 
 import {
   StyledFlex,
@@ -14,8 +16,8 @@ import {
   StyledGuideStepLine,
   StyledSvg,
   StyledText,
-  StyledWrapper,
-  StyledVideo
+  StyledVideo,
+  StyledWrapper
 } from './styles';
 
 import DapXBNS from '@/assets/images/DapXBNS.svg';
@@ -30,6 +32,7 @@ const iconChecked = (
 )
 
 const FirstStep = function (props: any) {
+  const { addAction } = useAddAction('landing');
   const chains = useChainsStore((store: any) => store.chains);
   const supportChains = useMemo(() => {
     return Object.keys(LANDING_CHAINS).map((_chainId) =>
@@ -47,6 +50,7 @@ const FirstStep = function (props: any) {
         currentChain: { ...currentChain, src: LANDING_CHAINS[8453] },
         addAction: (data: any) => {
           props.onSucess && props.onSucess(data)
+          addAction(data)
         },
         from: 'landing',
       }}

@@ -41,6 +41,7 @@ import RegisterDialog from './components/RegisterDialog';
 import SwitchNetwork from './components/SwitchNetwork';
 const CampaignView = () => {
   const router = useRouter()
+  const compaignId = '6'
   const contract = useBnsContract()
   const { chains } = useTokensAndChains()
   const { account } = useAccount();
@@ -59,7 +60,7 @@ const CampaignView = () => {
   const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
 
   const [showSwitchNetworkDialog, setShowSwitchNetworkDialog] = useState<boolean>(false)
-  const { loading, questList } = useQuestList(router.query.id as string)
+  const { loading, questList } = useQuestList(compaignId)
   const [discount, setDiscount] = useState(false)
 
   const [{ connectedChain, settingChain }, setChain] = useSetChain();
