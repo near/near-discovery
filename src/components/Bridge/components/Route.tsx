@@ -38,6 +38,10 @@ const RouteName = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: #979abe;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 100px;
 `;
 const Tags = styled.div`
   display: flex;
@@ -97,7 +101,7 @@ const Route = (
       <Flex>
         <RouteWrapper>
           <RouteIcon src={bridgeDetail.icon} />
-          <RouteName>{bridgeDetail.name}</RouteName>
+          <RouteName title={bridgeDetail.name}>{bridgeDetail.name}</RouteName>
         </RouteWrapper>
         <Flex>
           <Tags>

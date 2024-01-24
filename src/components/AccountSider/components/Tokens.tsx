@@ -5,6 +5,7 @@ import CurrencyIcon from '@/components/CurrencyIcon';
 import Loading from '@/components/Icons/Loading';
 import useChain from '@/hooks/useChain';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
+import { useTokensBalance } from '@/components/Bridge/hooks/useTokenBalance'
 import { usePriceStore } from '@/stores/price';
 import { Token } from '@/types';
 import { balanceFormated, valueFormated } from '@/utils/balance';
@@ -51,10 +52,19 @@ const Balance = styled.div`
   color: #fff;
 `;
 
-const Token = ({ token }: { token: Token }) => {
+const Token = ({ token, loading, balance }: { token: Token; loading: boolean; balance: string }) => {
   const chain = useChain(token.chainId);
   const price = usePriceStore((store) => store.price);
-  const { balance, loading } = useTokenBalance({ currency: token });
+  let _loading
+  let _balance
+  if (token.chainId === 5000) {
+    const result = useTokenBalance({ currency: token });
+    _loading = result.loading
+    _balance = result.balance
+  }
+
+  
+  
   return (
       <TokenWrapper>
         <StyledToken>
@@ -68,12 +78,12 @@ const Token = ({ token }: { token: Token }) => {
           </div>
         </StyledToken>
         <Balance>
-          {loading ? (
+          {_loading ? (
               <Loading />
           ) : (
               <>
-                <Symbol>{balanceFormated(balance)}</Symbol>
-                <Price>${valueFormated(balance, price[token.symbol])}</Price>
+                <Symbol>{balanceFormated(_balance)}</Symbol>
+                <Price>${valueFormated(_balance, price[token.symbol])}</Price>
               </>
           )}
         </Balance>
@@ -81,12 +91,27 @@ const Token = ({ token }: { token: Token }) => {
   );
 };
 
+function filterBalance (balances: any[], symbol: string): string {
+  for (const balance of balances) {
+    if (balance.symbol === symbol) {
+      return balance.amount
+    }
+  }
+  return '0'
+}
+
 const Tokens = ({ mt }: { mt?: number }) => {
   const tokens = useTokens();
+  const { loading, balances } = useTokensBalance({ tokensByChain: tokens })
+
   return (
       <StyledContainer mt={mt}>
         {tokens?.map((_token, i) => (
-            <Token key={_token.address || 'native'} token={_token} />
+            <Token 
+            key={_token.address || 'native'} 
+            token={_token} 
+            loading={loading}
+            balance={filterBalance(balances, _token.symbol)} />
         ))}
       </StyledContainer>
   );

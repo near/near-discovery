@@ -14,16 +14,17 @@ export default ({
 }) => {
   const { chainId } = useAccount()
 
-  const _chainId = chainId ? chainId : 1
-  const initiInputChain = chains[_chainId]
+  const initiInputChain = chains[1]
+
+  const initOutputChain = chains[chainId && chainId !== 5000 ? chainId : 1]
 
   const [inputToken, setInputToken] = useState<Token | undefined>();
   const [outputToken, setOutputToken] = useState<Token>();
   const [inputChain, setInputChain] = useState<Chain | undefined>(initiInputChain);
-  const [outputChain, setOutputChain] = useState<Chain>();
+  const [outputChain, setOutputChain] = useState<Chain | undefined>(initOutputChain);
 
   let initInputToken = undefined
-  if (inputChain) {
+  if (inputChain && !inputToken) {
     const chainTokens = lifiTokens[inputChain?.chainId]
     if (chainTokens?.length) {
       chainTokens.some(token => {
@@ -35,8 +36,26 @@ export default ({
       })
     }
 
-    if (!inputToken && initInputToken) {
+    if (initInputToken) {
       setInputToken(initInputToken)
+    }
+  }
+
+  let initOutputToken = undefined
+  if (outputChain && !outputToken) {
+    const chainTokens = lifiTokens[outputChain?.chainId]
+    if (chainTokens?.length) {
+      chainTokens.some(token => {
+        if (token.symbol === 'ETH') {
+          initOutputToken = token
+          return true
+        }
+        return false
+      })
+    }
+
+    if (initOutputToken) {
+      setOutputToken(initOutputToken)
     }
   }
 
