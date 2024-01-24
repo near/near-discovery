@@ -1,12 +1,12 @@
 import { useSearchParams } from 'next/navigation';
-import { memo, useState } from 'react';
+import { memo, useEffect, useState, useMemo } from 'react';
 
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
 import useUserInfo from '@/hooks/useUserInfo';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
-
 import Yours from '../Quest/components/Yours';
+import useCampaignList from '../Quest/hooks/useCampaignList';
 import Actions from './components/Actions';
 import Details from './components/Details';
 import Recommends from './components/Recommends';
@@ -20,15 +20,39 @@ const QuestDetailView = () => {
   const { loading, info } = useQuestInfo(id || '');
   const [updater, setUpdater] = useState(1);
   const { loading: categoryLoading, categories } = useCategoryList();
+  const { loading: campaignLoading, campaigns } = useCampaignList();
   const { info: userInfo = {} } = useUserInfo({ updater });
+
+  const quest = info?.quest ?? null
+  // const [navs, setNavs] = useState([
+  //   { name: 'Quest Campaign', path: '/quest/leaderboard' },
+  //   { name: 'Quest detail', path: '/quest/detail' },
+  // ])
+  const navs = useMemo(() => {
+    if (quest && campaigns.length > 0) {
+      const campaign = campaigns.find(campaign => campaign.id === quest.quest_campaign_id)
+      const array = []
+      array[0] = { name: 'Quest Campaign', path: '/quest/leaderboard' }
+      array[1] = campaign.name.replace(/\s/g, '') === 'DapDapXBNS' ?
+        {
+          name: 'DapDap X BNS',
+          path: '/quest/leaderboard/DapDapXBNS'
+        } :
+        {
+          name: 'DapDap Web3 Adventure',
+          path: '/quest/leaderboard/DapDapWeb3Adventure'
+        }
+      array[2] = { name: 'Detail', path: '/quest/detail' }
+      return array
+    }
+  }, [quest, campaigns])
+
+
 
   return (
     <StyledContainer>
       <Breadcrumb
-        navs={[
-          { name: 'Quest Campaign', path: '/quest/leaderboard' },
-          { name: 'Quest detail', path: '/quest/detail' },
-        ]}
+        navs={navs || []}
       />
       {loading || categoryLoading ? (
         <Spinner />

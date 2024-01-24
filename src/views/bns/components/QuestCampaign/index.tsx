@@ -52,7 +52,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
   const { like, handleLike } = useLike(campaign.id, 'quest_campaign');
   const handleClickExplore = function (event: any) {
     event.stopPropagation()
-    router.push('/quest/leaderboard')
+    router.push('/quest/leaderboard/' + campaign.name.replace(/\s/g, ''))
   }
   return (
     <StyledCampaipnContainer onClick={handleClickExplore}>

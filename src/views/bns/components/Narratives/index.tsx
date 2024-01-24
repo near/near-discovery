@@ -45,7 +45,7 @@ const Campaign = function ({ campaign }: any) {
     }
   }
   const handleClickCampaign = function (event: any) {
-    router.push('/bns/campaign?id=' + campaign.id)
+    router.push('/quest/leaderboard/DapDapXBNS?id=' + campaign.id)
   }
   return (
     <StyledCampaign onClick={handleClickCampaign}>

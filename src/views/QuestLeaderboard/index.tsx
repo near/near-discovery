@@ -38,9 +38,8 @@ const QuestLeaderboardView = (props: any) => {
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb navs={[
-          { name: 'Home', path: '/' },
-          { name: 'Quest', path: '/bns/leaderboard' },
-          { name: 'DapDap X BNS', path: '/quest/leaderboard' },
+          { name: 'Quest', path: '/quest/leaderboard' },
+          { name: 'DapDap Web3 Adventure', path: '/quest/leaderboard/DapDapWeb3Adventure' },
         ]} />
       </StyledContainer>
       {tab === 'quests' && (
