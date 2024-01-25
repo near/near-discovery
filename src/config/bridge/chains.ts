@@ -14,20 +14,4 @@ export const LANDING_CHAINS: { [key: number]: string } = {
   1101: 'guessme.near/widget/ZKEVMSwap.zkevm-bridge',
 };
 
-export const supportChains = {
-  8453: chains[8453],
-  1: chains[1],
-  42161: chains[42161],
-  56: chains[56],
-  43114: chains[43114],
-  59144: chains[59144],
-  1088: chains[1088],
-  10: chains[10],
-  137: chains[137],
-  1101: chains[1101],
-  100: chains[100],
-  5000: chains[5000],
-  324: chains[324], // lifi
-} as { [key: number]: Chain };
-
-
+export const supportChains = chains as { [key: number]: Chain };
