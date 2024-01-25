@@ -25,14 +25,14 @@ const networks = {
         stableDebtTokenAddress: '0x2Adc0c94A055f1FF64A35672D30Eb523ec647816',
         variableDebtTokenAddress: '0xE7CDC4e53915D50B74496847EeBa7233caE85CE5',
       },
-      [bsc['busd'].address]: {
-        decimals: 18,
-        symbol: 'valBUSD',
-        address: '0xaeD19DAB3cd68E4267aec7B2479b1eD2144Ad77f',
-        underlyingToken: bsc['busd'],
-        stableDebtTokenAddress: '0x576efee43A35e8adf9FaaC6f9DDC5f8AAc77768F',
-        variableDebtTokenAddress: '0x24758d41e5Aa89f79048076254A3d22927b2E0D4',
-      },
+      // [bsc['busd'].address]: {
+      //   decimals: 18,
+      //   symbol: 'valBUSD',
+      //   address: '0xaeD19DAB3cd68E4267aec7B2479b1eD2144Ad77f',
+      //   underlyingToken: bsc['busd'],
+      //   stableDebtTokenAddress: '0x576efee43A35e8adf9FaaC6f9DDC5f8AAc77768F',
+      //   variableDebtTokenAddress: '0x24758d41e5Aa89f79048076254A3d22927b2E0D4',
+      // },
       [bsc['cake'].address]: {
         decimals: 18,
         symbol: 'valCAKE',

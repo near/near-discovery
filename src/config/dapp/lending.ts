@@ -91,6 +91,9 @@ const ROUTE_CONFIG = {
   'shoebill-v2': {
     type: 'lending',
   },
+  aave: {
+    type: 'lending',
+  },
 };
 
 export default ROUTE_CONFIG;
