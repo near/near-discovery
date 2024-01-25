@@ -35,10 +35,13 @@ import {
 } from './styles';
 import type { QueryNameStatusType } from './types';
 
+import useUserInfo from '@/hooks/useUserInfo';
 import namehash from "@ensdomains/eth-ens-namehash";
 import NetworkDialog from './components/NetworkDialog';
 import RegisterDialog from './components/RegisterDialog';
 import SwitchNetwork from './components/SwitchNetwork';
+import Yours from './components/Yours';
+
 const CampaignView = () => {
   const router = useRouter()
   const compaignId = '6'
@@ -47,6 +50,7 @@ const CampaignView = () => {
   const { account } = useAccount();
   const { connect, connecting } = useAuth();
   const [value, setValue] = useState('')
+  const { info: userInfo = {} } = useUserInfo({ updater: 1 });
 
   const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0)
   const [bnsNames, setBnsNames] = useState<any>([])
@@ -158,6 +162,7 @@ const CampaignView = () => {
   }, [])
   return (
     <StyledWrapper style={{ paddingBottom: 120 }}>
+      <Yours info={userInfo} />
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb navs={[
@@ -186,7 +191,7 @@ const CampaignView = () => {
         {twitterQuest && <StyledWrapper style={{ position: 'relative' }}>
           <QuestItem quest={twitterQuest} />
           {
-            twitterQuest.action_completed + 1 >= twitterQuest.total_action && <StyledAchieved>
+            twitterQuest.action_completed + 1 > twitterQuest.total_action && <StyledAchieved>
               <Image src={iconAchieved} alt='iconAchieved' />
             </StyledAchieved>
           }

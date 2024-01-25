@@ -49,8 +49,8 @@ const FirstStep = function (props: any) {
         chains: supportChains,
         currentChain: { ...currentChain, src: LANDING_CHAINS[8453] },
         addAction: (data: any) => {
-          props.onSucess && props.onSucess(data)
           addAction(data)
+          props.onSuccess && props.onSuccess(data)
         },
         from: 'landing',
       }}

@@ -16,6 +16,7 @@ import {
 import data from '@emoji-mart/data';
 import Picker from '@emoji-mart/react';
 import _ from 'lodash';
+import { useRouter } from 'next/router';
 const iconSearch = (
   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="13" viewBox="0 0 14 13" fill="none">
     <path d="M10 9.00049C10.6279 8.16474 11 7.12582 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C7.6356 11 9.08777 10.2147 10 9.00049ZM10 9.00049L13 12.0005" stroke="white" stroke-width="2" stroke-linecap="round" />
@@ -32,9 +33,11 @@ const iconClose = (
   </svg>
 )
 const InputWithEmoji = ({ onChange, queryStatus }: { onChange: any, queryStatus: number, value: string, setValue: any }) => {
+  const router = useRouter()
   const [value, setValue] = useState('')
   const [showPicker, setShowPicker] = useState(false)
   const [isFocus, setIsFocus] = useState(false)
+  const inputRef = useRef<any>(null)
   const handleInputChange = function (event: any) {
     const value = event.target.value
     const array = _.split(value, '')
@@ -55,6 +58,13 @@ const InputWithEmoji = ({ onChange, queryStatus }: { onChange: any, queryStatus:
   useEffect(() => {
     handleChange()
   }, [value])
+
+
+  useEffect(() => {
+    if (inputRef.current && typeof router.query.click_yourname === 'string') {
+      inputRef.current.focus()
+    }
+  }, [inputRef.current])
   return (
     <StyledInputWithEmoji>
       <StyledFlex $gap='20px'>
@@ -62,7 +72,7 @@ const InputWithEmoji = ({ onChange, queryStatus }: { onChange: any, queryStatus:
           <StyledInputLinearGradient>
             <StyledInputContainer>
               <StyledSvg style={{ marginLeft: 15 }} className={queryStatus === 1 ? 'loading' : ''}>{queryStatus === 1 ? iconCircle : iconSearch}</StyledSvg>
-              <StyledInput placeholder='yourname' value={value} onChange={(event) => handleInputChange(event)} onBlur={() => setIsFocus(false)} onFocus={() => setIsFocus(true)} />
+              <StyledInput ref={ref => inputRef.current = ref} placeholder='yourname' value={value} onChange={(event) => handleInputChange(event)} onBlur={() => setIsFocus(false)} onFocus={() => setIsFocus(true)} />
               <StyledInputSuffix style={{ marginRight: 12 }}>.base</StyledInputSuffix>
             </StyledInputContainer>
           </StyledInputLinearGradient>
