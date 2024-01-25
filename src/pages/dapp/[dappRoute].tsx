@@ -1,23 +1,24 @@
-import { useCallback, useMemo, useState, useEffect } from 'react';
 import { useSetChain } from '@web3-onboard/react';
+import { useDebounceFn } from 'ahooks';
 import { useRouter } from 'next/router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+
+import Breadcrumb from '@/components/Breadcrumb';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import chainsConfig from '@/config/chains';
+import multicallConfig from '@/config/contract/multicall';
+import wethConfig from '@/config/contract/weth';
+import dappConfig from '@/config/dapp';
+import { bridge as dappBridgeTheme } from '@/config/theme/dapp';
 import useAccount from '@/hooks/useAccount';
+import useAddAction from '@/hooks/useAddAction';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useChainsStore } from '@/stores/chains';
 import { useDappStore } from '@/stores/dapp';
 import { useLayoutStore } from '@/stores/layout';
 import { usePriceStore } from '@/stores/price';
-import useAddAction from '@/hooks/useAddAction';
-import Breadcrumb from '@/components/Breadcrumb';
-import dappConfig from '@/config/dapp';
-import wethConfig from '@/config/contract/weth';
-import multicallConfig from '@/config/contract/multicall';
 import { multicall } from '@/utils/multicall';
-import chainsConfig from '@/config/chains';
-import { bridge as dappBridgeTheme } from '@/config/theme/dapp';
-import { useDebounceFn } from 'ahooks';
 import type { NextPageWithLayout } from '@/utils/types';
 
 // set dynamic routes for dapps in config file
@@ -69,6 +70,7 @@ export const DappPage: NextPageWithLayout = () => {
       setLocalConfig(null);
       return;
     }
+
     const config = dappConfig[dappPathname];
     if (!config) {
       setLocalConfig(null);
@@ -79,6 +81,9 @@ export const DappPage: NextPageWithLayout = () => {
       result = await import(`@/config/swap/dapps/${dappPathname}`);
     }
     if (config.type === 'lending') {
+      result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
+    }
+    if (config.type === 'staking') {
       result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
     }
     setLocalConfig({ ...result, theme: config.theme });
