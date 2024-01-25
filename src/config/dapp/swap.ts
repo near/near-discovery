@@ -377,4 +377,11 @@ export default {
       '--button-text-color': '',
     },
   },
+  ambient: {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
 };

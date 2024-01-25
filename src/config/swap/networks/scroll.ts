@@ -3,6 +3,7 @@ import { basic as metavaultV3Basic, networks as metavaultV3Networks } from '../d
 import { basic as skydromeBasic, networks as skydromeNetworks } from '../dapps/skydrome';
 import { basic as spaceFiBasic, networks as spaceFiNetworks } from '../dapps/space-fi';
 import { basic as ambientBasic, networks as ambientNetworks } from '../dapps/ambient';
+import { basic as SyncSwapBasic, networks as SyncSwapNetworks } from '../dapps/sync-swap';
 
 const CHAIN_ID = 534352;
 
@@ -15,7 +16,7 @@ export default {
     noAccountTips: 'Scroll Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Scroll Chain.',
   },
-  defalutDex: 'Ambient',
+  defalutDex: 'Metavault V3',
   dexs: {
     'Metavault V3': {
       ...metavaultV3Basic,
@@ -32,6 +33,10 @@ export default {
     Ambient: {
       ...ambientBasic,
       ...ambientNetworks[CHAIN_ID],
+    },
+    Syncswap: {
+      ...SyncSwapBasic,
+      ...SyncSwapNetworks[CHAIN_ID],
     },
   },
 };

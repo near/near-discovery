@@ -1,5 +1,6 @@
 import { linea } from '@/config/tokens/linea';
 import { zkSync } from '@/config/tokens/zkSync';
+import { scroll } from '@/config/tokens/scroll';
 
 const basic = {
   name: 'Syncswap',
@@ -46,6 +47,25 @@ const networks = {
       zkSync['dvf'],
       zkSync['lusd'],
       zkSync['reth'],
+    ],
+  },
+  534352: {
+    classicPoolAddres: '0x37BAc764494c8db4e54BDE72f6965beA9fa0AC2d',
+    stablePoolAddress: '0xE4CF807E351b56720B17A59094179e7Ed9dD3727',
+    routerAddress: '0x80e38291e06339d10AAB483C65695D004dBD5C69',
+    defaultCurrencies: {
+      input: scroll['weth'],
+      output: scroll['usdc'],
+    },
+    tokens: [
+      scroll['weth'],
+      scroll['usdc'],
+      scroll['usdt'],
+      scroll['lusd'],
+      scroll['reth'],
+      scroll['aave'],
+      scroll['crv'],
+      scroll['wbtc'],
     ],
   },
 };
