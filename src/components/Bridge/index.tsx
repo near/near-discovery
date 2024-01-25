@@ -87,7 +87,6 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
       } else if (type === 'token') {
         const curChain = clickType === 'in' ? inputChain : outputChain 
         if (curChain) {
-          console.log(lifiTokens[curChain.chainId])
           setSelectableTokens(lifiTokens[curChain.chainId])
           setShowTokenDialog(true)
         }

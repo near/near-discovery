@@ -16,5 +16,5 @@ export function formatException(errMsg: string): string {
 }
 
 export function isNumeric(value: any): boolean {
-    return !isNaN(parseFloat(value)) && isFinite(value);
+    return /^[0-9]+(\.)?([0-9]+)?$/.test(value);
 }

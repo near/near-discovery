@@ -7,7 +7,7 @@ import type { Route } from '@lifi/sdk'
 import { tokens as configTokens } from '@/config/bridge';
 import useToast from '@/hooks/useToast';
 import useStargate from './useStargate';
-import useLifi,  { computeDuration } from './useLifi';
+import useLifi, { computeDuration } from './useLifi';
 import { formatException } from '../util/'
 
 export default function useBestRoute() {
