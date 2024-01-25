@@ -5,6 +5,7 @@ import { basic as spaceFiBasic, networks as spaceFiNetworks } from '../dapps/spa
 import { basic as ambientBasic, networks as ambientNetworks } from '../dapps/ambient';
 import { basic as SyncSwapBasic, networks as SyncSwapNetworks } from '../dapps/sync-swap';
 import { basic as zebraBasic, networks as zebraNetworks } from '../dapps/zebra';
+import { basic as IziSwapBasic, networks as IziSwapNetworks } from '../dapps/izi-swap';
 
 const CHAIN_ID = 534352;
 
@@ -42,6 +43,10 @@ export default {
     Zebra: {
       ...zebraBasic,
       ...zebraNetworks[CHAIN_ID],
+    },
+    iZiSwap: {
+      ...IziSwapBasic,
+      ...IziSwapNetworks[CHAIN_ID],
     },
   },
 };

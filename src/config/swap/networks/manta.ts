@@ -1,5 +1,6 @@
 import { basic as apertureBasic, networks as apertureNetworks } from '../dapps/aperture-swap';
 import { basic as quickSwapBasic, networks as quickSwapNetworks } from '../dapps/quick-swap';
+import { basic as IziSwapBasic, networks as IziSwapNetworks } from '../dapps/izi-swap';
 
 const CHAIN_ID = 169;
 
@@ -21,6 +22,10 @@ export default {
     ApertureSwap: {
       ...apertureBasic,
       ...apertureNetworks[CHAIN_ID],
+    },
+    iZiSwap: {
+      ...IziSwapBasic,
+      ...IziSwapNetworks[CHAIN_ID],
     },
   },
 };
