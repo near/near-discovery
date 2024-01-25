@@ -2,6 +2,7 @@ import weths from '../../contract/weth';
 import { basic as metavaultV3Basic, networks as metavaultV3Networks } from '../dapps/metavault-v3';
 import { basic as skydromeBasic, networks as skydromeNetworks } from '../dapps/skydrome';
 import { basic as spaceFiBasic, networks as spaceFiNetworks } from '../dapps/space-fi';
+import { basic as ambientBasic, networks as ambientNetworks } from '../dapps/ambient';
 
 const CHAIN_ID = 534352;
 
@@ -14,7 +15,7 @@ export default {
     noAccountTips: 'Scroll Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Scroll Chain.',
   },
-  defalutDex: 'Metavault V3',
+  defalutDex: 'Ambient',
   dexs: {
     'Metavault V3': {
       ...metavaultV3Basic,
@@ -27,6 +28,10 @@ export default {
     SpaceFi: {
       ...spaceFiBasic,
       ...spaceFiNetworks[CHAIN_ID],
+    },
+    Ambient: {
+      ...ambientBasic,
+      ...ambientNetworks[CHAIN_ID],
     },
   },
 };
