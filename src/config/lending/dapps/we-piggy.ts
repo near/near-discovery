@@ -16,6 +16,7 @@ const networks = {
     unitrollerAddress: '0x8c925623708A94c7DE98a8e83e8200259fF716E0',
     oracleAddress: '0x4C78015679FabE22F6e02Ce8102AFbF7d93794eA',
     rewardAddress: '0xE6320460Aca9E4A4385058EEfD7D4D70123fC9c9',
+    apyUrl: '/wepiggy/bsc/api/v1/market/detail',
     markets: {
       '0x33A32f0ad4AA704e28C93eD8Ffa61d50d51622a7': {
         decimals: 8,
@@ -89,6 +90,7 @@ const networks = {
     unitrollerAddress: '0xaa87715E858b482931eB2f6f92E504571588390b',
     oracleAddress: '0x04d2944394b70d6e56fcf1CaD3aa6b5a43Ec8A5C',
     rewardAddress: '0x77401ff895bde043d40aae58f98de5698682c12a',
+    apyUrl: '/wepiggy/arb/api/v1/market/detail',
     markets: {
       '0x17933112E9780aBd0F27f2B7d9ddA9E840D43159': {
         decimals: 8,
@@ -106,7 +108,7 @@ const networks = {
         decimals: 8,
         symbol: 'pUSDC',
         address: '0x2Bf852e22C92Fd790f4AE54A76536c8C4217786b',
-        underlyingToken: arbitrum['usdc.e'],
+        underlyingToken: { ...arbitrum['usdc.e'], symbol: 'USDC' },
       },
       '0x8F87c9c6Efe9CA6997d6FEC8BC930C1fEd90ccC7': {
         decimals: 8,
@@ -132,6 +134,7 @@ const networks = {
     unitrollerAddress: '0x896aecb9E73Bf21C50855B7874729596d0e511CB',
     oracleAddress: '0xb205d0AeF84C666FBBe441C61DC04fEb844444E6',
     rewardAddress: '0x3157e0bbDc7E5DEa0f4c33a0Ad7211B9a4FF19Ee',
+    apyUrl: '/wepiggy/optimism/api/v1/market/detail',
     markets: {
       '0x8e1e582879Cb8baC6283368e8ede458B63F499a5': {
         decimals: 8,
@@ -143,7 +146,7 @@ const networks = {
         decimals: 8,
         symbol: 'pUSDC',
         address: '0x811Cd5CB4cC43F44600Cfa5eE3F37a402C82aec2',
-        underlyingToken: optimism['usdc.e'],
+        underlyingToken: { ...optimism['usdc.e'], symbol: 'USDC' },
       },
       '0x8158B34fF8A36dD9E4519d62C52913C24ad5554b': {
         decimals: 8,
@@ -175,6 +178,7 @@ const networks = {
     unitrollerAddress: '0xFfceAcfD39117030314A07b2C86dA36E51787948',
     oracleAddress: '0x4C78015679FabE22F6e02Ce8102AFbF7d93794eA',
     rewardAddress: '0x16b321C99Ab31A84D565ea484F035693718c3E71',
+    apyUrl: '/wepiggy/polygon/api/v1/market/detail',
     markets: {
       '0xC1B02E52e9512519EDF99671931772E452fb4399': {
         decimals: 8,

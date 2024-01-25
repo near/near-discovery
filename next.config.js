@@ -50,6 +50,22 @@ const nextConfig = {
       source: '/dapdap/:path*',
       destination: 'https://test-api.dapdap.net/:path*',
     },
+    {
+      source: '/wepiggy/arb/:path*',
+      destination: 'https://gateway.arb.bs.fortop.site/:path*',
+    },
+    {
+      source: '/wepiggy/bsc/:path*',
+      destination: 'https://gateway.bsc.bs.fortop.site/:path*',
+    },
+    {
+      source: '/wepiggy/optimism/:path*',
+      destination: 'https://gateway.optimism.bs.fortop.site/:path*',
+    },
+    {
+      source: '/wepiggy/polygon/:path*',
+      destination: 'https://gateway.polygon.bs.fortop.site/:path*',
+    },
   ],
   images: {
     remotePatterns: [
