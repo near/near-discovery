@@ -16,5 +16,7 @@ export function formatException(errMsg: string): string {
 }
 
 export function isNumeric(value: any): boolean {
-    return /^[0-9]+(\.[0-9]+)?$/.test(value);
+    console.log('value: ', value)
+    console.log(/^[0-9]+(\.)?([0-9]+)?$/.test(value))
+    return /^[0-9]+(\.)?([0-9]+)?$/.test(value);
 }
