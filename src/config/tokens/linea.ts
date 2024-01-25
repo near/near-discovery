@@ -131,4 +131,12 @@ export const linea: { [key: string]: Token } = {
     name: 'Wrapped liquid staked Ether 2.0',
     icon: 'https://ipfs.near.social/ipfs/bafkreibukwahpp2ei74ax5acm6p7uwcnbsfvdzkizsdzqu26yfbxndpvra',
   },
+  cebusd: {
+    chainId: CHAIN_ID,
+    address: '0x7d43AABC515C356145049227CeE54B608342c0ad',
+    decimals: 18,
+    symbol: 'ceBUSD',
+    name: 'Celer Network BUSD',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibp36dfkfjzgnnbb7u4jxh57gpjmfjerc6pefmyzhueulz5ovd5xy',
+  },
 };
