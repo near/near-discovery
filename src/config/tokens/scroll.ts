@@ -41,7 +41,7 @@ export const scroll: { [key: string]: Token } = {
     address: '0xedeabc3a1e7d21fe835ffa6f83a710c70bb1a051',
     name: 'LUSD Stablecoin',
     symbol: 'LUSD',
-    icon: 'https://assets.coingecko.com/coins/images/14666/standard/Group_3.png?1696514341',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihne6zw3myw5dwh72giml63vjjksmixrf435hf7cnsg5f3ubgdnde',
     decimals: 18,
   },
   wbtc: {
@@ -99,5 +99,21 @@ export const scroll: { [key: string]: Token } = {
     symbol: 'rETH',
     name: 'Rocket Pool ETH',
     icon: 'https://ipfs.near.social/ipfs/bafkreicgk4jnpvyfe7jqup46y5epyxoemounktft6yxtym7o7wcagiecpy',
+  },
+  dai: {
+    chainId: CHAIN_ID,
+    address: '0xcA77eB3fEFe3725Dc33bccB54eDEFc3D9f764f97',
+    decimals: 18,
+    symbol: 'DAI',
+    name: 'Dai Stablecoin',
+    icon: 'https://ipfs.near.social/ipfs/bafkreieuxntkdzi2mzkzdcbk6kahwxqpftxnipxcwc4oe4p4jm2rhj2xhu',
+  },
+  izi: {
+    chainId: CHAIN_ID,
+    address: '0x60D01EC2D5E98Ac51C8B4cF84DfCCE98D527c747',
+    decimals: 18,
+    symbol: 'iZi',
+    name: 'izumi Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreifsgwu2zd6y2n5alekr5qgdhzoivlkl5wujtq3z7gnm5pw4jy7sgi',
   },
 };

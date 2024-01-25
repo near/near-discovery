@@ -97,7 +97,7 @@ export const linea: { [key: string]: Token } = {
     decimals: 18,
     symbol: 'iZi',
     name: 'izumi Token',
-    icon: 'https://assets.coingecko.com/coins/images/21791/small/izumi-logo-symbol.png?1640053924',
+    icon: 'https://ipfs.near.social/ipfs/bafkreifsgwu2zd6y2n5alekr5qgdhzoivlkl5wujtq3z7gnm5pw4jy7sgi',
   },
   wbtc: {
     chainId: CHAIN_ID,
@@ -138,5 +138,13 @@ export const linea: { [key: string]: Token } = {
     symbol: 'ceBUSD',
     name: 'Celer Network BUSD',
     icon: 'https://ipfs.near.social/ipfs/bafkreibp36dfkfjzgnnbb7u4jxh57gpjmfjerc6pefmyzhueulz5ovd5xy',
+  },
+  cake: {
+    chainId: CHAIN_ID,
+    address: '0x0D1E753a25eBda689453309112904807625bEFBe',
+    decimals: 18,
+    symbol: 'CAKE',
+    name: 'PancakeSwap Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreigj4avciznhfu3j3pwqiqjq367x3tj2rmoduccyh3otk4c2sjt3hq',
   },
 };
