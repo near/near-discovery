@@ -363,4 +363,32 @@ export default {
       '--button-text-color': '',
     },
   },
+  'metavault-v3': {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
+  skydrome: {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
+  ambient: {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
+  zebra: {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
 };

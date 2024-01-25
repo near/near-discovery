@@ -2,6 +2,8 @@ import { basic as HorizonDEXBasic, networks as HorizonDEXNetworks } from '../dap
 import { basic as IziSwapBasic, networks as IziSwapNetworks } from '../dapps/izi-swap';
 import { basic as SyncSwapBasic, networks as SyncSwapNetworks } from '../dapps/sync-swap';
 import { basic as VelocoreV2Basic, networks as VelocoreV2Networks } from '../dapps/velocore-v2';
+import { basic as metavaultV3Basic, networks as metavaultV3Networks } from '../dapps/metavault-v3';
+import { basic as pancakeSwapBasic, networks as pancakeSwapNetworks } from '../dapps/pancake-swap';
 
 const CHAIN_ID = 59144;
 
@@ -14,7 +16,7 @@ export default {
     noAccountTips: 'Linea Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Linea Chain.',
   },
-  defalutDex: 'HorizonDEX',
+  defalutDex: 'Velocore V2',
   dexs: {
     HorizonDEX: {
       ...HorizonDEXBasic,
@@ -31,6 +33,14 @@ export default {
     'Velocore V2': {
       ...VelocoreV2Basic,
       ...VelocoreV2Networks[CHAIN_ID],
+    },
+    'Metavault V3': {
+      ...metavaultV3Basic,
+      ...metavaultV3Networks[CHAIN_ID],
+    },
+    'Pancake Swap': {
+      ...pancakeSwapBasic,
+      ...pancakeSwapNetworks[CHAIN_ID],
     },
   },
 };

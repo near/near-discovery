@@ -11,6 +11,7 @@ import base from './chains/base';
 import arbitrum from './chains/arbitrum';
 import avalanche from './chains/avalanche';
 import linea from './chains/linea';
+import scroll from './chains/scroll';
 
 const popupsData: {
   [key: string]: {
@@ -38,6 +39,7 @@ const popupsData: {
   avalanche,
   linea,
   manta,
+  scroll,
 };
 
 export default popupsData;

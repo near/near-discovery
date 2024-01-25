@@ -277,6 +277,12 @@ export const onboard = init({
       label: 'Manta',
       rpcUrl: 'https://1rpc.io/manta',
     },
+    {
+      id: 534352,
+      token: 'Scroll',
+      label: 'Scroll',
+      rpcUrl: 'https://rpc.scroll.io',
+    },
   ],
   appMetadata: {
     name: 'NEAR',
