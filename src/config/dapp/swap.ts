@@ -384,4 +384,11 @@ export default {
       '--button-text-color': '',
     },
   },
+  zebra: {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
 };
