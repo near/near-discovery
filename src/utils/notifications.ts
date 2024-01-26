@@ -72,6 +72,27 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
   }
 };
 
+export const manageNotification = async (accountId: string, notificationType: string, block: boolean) => {
+  const serviceWorker = await navigator.serviceWorker.ready;
+  const subscription = await serviceWorker.pushManager.getSubscription();
+  const endpoint = '/preferences/set';
+
+  const data = {
+    accountId: accountId,
+    endpoint: subscription?.endpoint,
+    dapp: notificationType,
+    block: block,
+  };
+
+  await fetch(`${notificationsHostName}${endpoint}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+  });
+};
+
 const sendToPushServer = (subscriptionData: NotificationSubscriptionData) =>
   fetch(`${notificationsHostName}/subscriptions/create`, {
     headers: {

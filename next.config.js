@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
   compiler: { styledComponents: true },
   reactStrictMode: true,
   redirects: async () => {
@@ -47,17 +48,26 @@ const nextConfig = {
       },
       {
         source: '/da',
-        destination: 'https://near.org/blog/near-foundation-launches-near-da-to-offer-secure-cost-effective-data-availability-for-eth-rollups-and-ethereum-developers',
+        destination: '/data-availability',
         permanent: true,
-      },
+      }
     ];
   },
   rewrites: async () => [
     {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
-    },
+    }
   ],
+  headers: async () => [
+    {
+        source: '/:path*',
+        headers: [{
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin'
+        }]
+      }
+  ]
 };
 
 const withPWA = require('next-pwa')({

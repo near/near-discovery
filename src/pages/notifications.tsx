@@ -4,6 +4,7 @@ import { useIosDevice } from '@/hooks/useIosDevice';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import {
+  manageNotification,
   handleOnCancel,
   handleOnCancelBanner,
   handleTurnOn,
@@ -37,6 +38,7 @@ const NotificationsPage: NextPageWithLayout = () => {
         handleOnCancelBanner,
         accountId,
         handleTurnOn,
+        manageNotification,
         iOSDevice: isIosDevice,
         iOSVersion: versionOfIos,
         recomendedIOSVersion: recommendedIosVersionForNotifications,

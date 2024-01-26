@@ -42,7 +42,10 @@ function returnImageUrl(data: ImageData | undefined) {
 }
 
 async function fetchPreviewData(accountId: string, componentName: string): Promise<ComponentMetaPreview | null> {
-  const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`);
+  return null;
+  const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`, {
+    signal: AbortSignal.timeout(2000),
+  });
   const responseData: ComponentPayload = await response.json();
   const metadata = responseData[accountId]?.widget?.[componentName]?.metadata;
 
@@ -73,16 +76,30 @@ export const getServerSideProps: GetServerSideProps<{
     };
   }
 
-  const meta = await fetchPreviewData(componentAccountId, componentName);
+  let meta;
+
+  try {
+    meta = await fetchPreviewData(componentAccountId, componentName);
+  } catch (err: any) {
+    if (err.name === 'TimeoutError') {
+      console.warn('fetchPreview aborted due to a timeout', err);
+    } else {
+      console.warn('Failed to fetchPreview ', err);
+    }
+  }
 
   return {
     props: {
-      meta,
+      meta: meta || {
+        title: '',
+        description: '',
+        imageUrl: '',
+      },
     },
   };
 };
 
-const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
+const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.componentAccountId}/widget/${router.query.componentName}`;
@@ -100,7 +117,7 @@ const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSideProps
 
   return (
     <>
-      {meta && <MetaTags title={meta.title} description={meta.description} image={meta.imageUrl} />}
+      {/*meta && <MetaTags title={meta.title} description={meta.description} image={meta.imageUrl} />*/}
       <div className="container-xl">
         <div className="row">
           <div

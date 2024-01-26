@@ -1,5 +1,5 @@
-import { sanitizeUrl } from '@braintree/sanitize-url';
 import { setupKeypom } from '@keypom/selector';
+import type { WalletSelector } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
@@ -14,6 +14,8 @@ import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Big from 'big.js';
+import { isValidAttribute } from 'dompurify';
+import { mapValues } from 'lodash';
 import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import {
   CommitButton,
@@ -32,9 +34,16 @@ import { useEthersProviderContext } from '@/data/web3';
 import { useIdOS } from '@/hooks/useIdOS';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
+import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
 import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
-import { networkId, signInContractId } from '@/utils/config';
+import {
+  commitModalBypassAuthorIds,
+  commitModalBypassSources,
+  isLocalEnvironment,
+  networkId,
+  signInContractId,
+} from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 export default function VmInitializer() {
@@ -52,6 +61,7 @@ export default function VmInitializer() {
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
   const idOS = useIdOS();
+  const idosSDK = useIdosStore((state) => state.idOS);
 
   useEffect(() => {
     initNear &&
@@ -100,9 +110,24 @@ export default function VmInitializer() {
           ],
         }),
         customElements: {
-          Link: ({ href, to, ...rest }: any) => <Link href={sanitizeUrl(href ?? to)} {...rest} />,
+          Link: ({ to, href, ...rest }: { to: string | object | undefined; href: string | object }) => {
+            const cleanProps = mapValues({ to, href, ...rest }, (val: any, key: string) => {
+              if (!['to', 'href'].includes(key)) return val;
+              if (key === 'href' && !val) val = to;
+              return typeof val === 'string' && isValidAttribute('a', 'href', val) ? val : 'about:blank';
+            });
+
+            return <Link {...cleanProps} />;
+          },
         },
-        features: { enableComponentSrcDataKey: true },
+        features: {
+          commitModalBypass: {
+            authorIds: commitModalBypassAuthorIds,
+            sources: commitModalBypassSources,
+          },
+          enableComponentSrcDataKey: true,
+          enableWidgetSrcWithCodeOverride: isLocalEnvironment,
+        },
       });
   }, [initNear]);
 
@@ -110,7 +135,7 @@ export default function VmInitializer() {
     if (!near || !idOS) {
       return;
     }
-    near.selector.then((selector: any) => {
+    near.selector.then((selector: WalletSelector) => {
       const selectorModal = setupModal(selector, {
         contractId: near.config.contractName,
         methodNames: idOS.near.contractMethods,
@@ -164,6 +189,8 @@ export default function VmInitializer() {
     if (!near) {
       return;
     }
+    await idosSDK?.reset({ enclave: true });
+    useIdosStore.persist.clearStorage();
     const wallet = await (await near.selector).wallet();
     wallet.signOut();
     near.accountId = null;
@@ -171,7 +198,7 @@ export default function VmInitializer() {
     setSignedAccountId(null);
     resetAnalytics();
     localStorage.removeItem('accountId');
-  }, [near]);
+  }, [idosSDK, near]);
 
   const refreshAllowance = useCallback(async () => {
     alert("You're out of access key allowance. Need sign in again to refresh it");
