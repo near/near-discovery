@@ -1,19 +1,17 @@
 /* eslint-disable react/display-name */
-import axios from 'axios';
 import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import chains from '@/config/chains';
-import { dapps } from '@/config/dapps';
 import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
+import { useDebounceFn } from 'ahooks';
+import { Spinner } from '@/components/lib/Spinner';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -497,7 +495,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const [nativeToken, setNativeToken] = useState<any[]>([]);
   const [tokenTBD, setTokenTBD] = useState<any[]>([]);
   const [carouselList, setCarouselList] = useState<any[]>([]);
-  const { loading, categories } = useCategoryDappList();
+  const { categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -517,6 +515,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   });
   const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
   const [selectedMenu, setSelectedMenu] = useState('');
+  const [loading, setLoading] = useState(false);
 
   function getCategoryNames(dappCategories: any, categoryArray: any[]) {
     const categories = Array.isArray(dappCategories) ? dappCategories : Object.values(dappCategories);
@@ -624,6 +623,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   }, []);
   const fetchFilteredDappData = async (page: number) => {
     try {
+      setLoading(true);
       const params = {
         tbd_token: selectedTab === 'TBD',
         network_ids: selectedMenu,
@@ -653,10 +653,33 @@ const AllDappsColumn: NextPageWithLayout = () => {
         setNativeToken(resultDapp.data?.data || []);
       }
       setTotalPages(resultDapp.data.total_page || 0);
+      setLoading(false);
     } catch (error) {
       console.error('Error fetching filtered dapp data:', error);
+      setLoading(false);
     }
   };
+  const { run } = useDebounceFn(
+    () => {
+      const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
+      if (JSON.stringify(categoryFromQuery) === JSON.stringify(selectedFunction)) {
+        if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
+          fetchFilteredDappData(currentPage);
+        } else {
+          if (selectedTab === 'favorites') {
+            fetchIsFavoriteList();
+          } else if (selectedTab === 'TBD') {
+            fetchTokenTBD(currentPage);
+          } else if (selectedTab === 'token') {
+            fetchNativeToken(currentPage);
+          }
+        }
+      }
+    },
+    {
+      wait: 500,
+    },
+  );
   useEffect(() => {
     const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
     setSelectedFunction(categoryFromQuery);
@@ -668,20 +691,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   }, [router.query.network]);
 
   useEffect(() => {
-    const categoryFromQuery = router.query.category ? (router.query.category as string).split(',') : [];
-    if (JSON.stringify(categoryFromQuery) === JSON.stringify(selectedFunction)) {
-      if (selectedMenu || selectedFunction.length || selectedMedalMenu !== '') {
-        fetchFilteredDappData(currentPage);
-      } else {
-        if (selectedTab === 'favorites') {
-          fetchIsFavoriteList();
-        } else if (selectedTab === 'TBD') {
-          fetchTokenTBD(currentPage);
-        } else if (selectedTab === 'token') {
-          fetchNativeToken(currentPage);
-        }
-      }
-    }
+    run();
   }, [selectedMenu, selectedFunction, selectedMedalMenu, selectedTab, router.query.category, currentPage]);
   function renderPagination(tab: string, data: any[]) {
     return (

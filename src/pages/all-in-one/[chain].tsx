@@ -9,7 +9,6 @@ import lendingConfig from '@/config/lending/networks';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
-import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { usePriceStore } from '@/stores/price';
 import { multicall } from '@/utils/multicall';
@@ -290,7 +289,7 @@ const AllInOne: NextPageWithLayout = () => {
           <>
             <div className="select-bg-icon">
               <div className="select-bg-content">
-                <img src={currentChain.icon} alt="" />
+                <img src={currentChain.bgIcon || currentChain.icon} alt="" />
                 <div className="select-bg">
                   <SelectBg bgColor={currentChain.selectBgColor} />
                 </div>

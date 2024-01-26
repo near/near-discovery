@@ -621,8 +621,8 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   }, [data]);
 
   useEffect(() => {
-    if (Number(id) === 3) {
-      handleReport('chains-details?id=3');
+    if (Number(id) === 4) {
+      handleReport('chains-details?id=4');
     }
   }, [id]);
 

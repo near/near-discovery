@@ -24,6 +24,7 @@ const popupsData: {
     rpcUrls: string[];
     menuConfig: any;
     defaultTab?: any;
+    bgIcon?: string;
   };
 } = {
   optimism,

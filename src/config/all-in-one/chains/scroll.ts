@@ -2,6 +2,7 @@ export default {
   title: 'Scroll',
   path: 'scroll',
   icon: '/images/chains/scroll.svg',
+  bgIcon: '/images/chains/scroll-white.svg',
   bgColor: '#fff',
   selectBgColor: '#35bde3',
   chainId: 534352,
