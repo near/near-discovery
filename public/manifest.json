@@ -1,6 +1,6 @@
 {
-	"short_name": "Near",
-	"name": "The OS for an open web",
+	"short_name": "NEAR",
+	"name": "NEAR | The OS for an Open Web",
 	"start_url": "/near/widget/ActivityPage",
 	"scope": "/",
 	"display": "standalone",
@@ -10,7 +10,7 @@
 	"orientation": "any",
 	"shortcuts": [
 		{
-			"name":"Near",
+			"name":"NEAR",
 			"url": "/near/widget/ActivityPage",
 			"description":"The OS for an open web",
 			"icons": [{ "src": "/bos-meta-96x96.png", "sizes": "96x96", "type": "image/png" }]
