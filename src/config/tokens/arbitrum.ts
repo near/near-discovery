@@ -88,7 +88,7 @@ export const arbitrum: { [key: string]: Token } = {
     address: '0x93b346b6BC2548dA6A1E7d98E9a421B42541425b',
     name: 'LUSD Stablecoin',
     symbol: 'LUSD',
-    icon: 'https://assets.coingecko.com/coins/images/14666/standard/Group_3.png?1696514341',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihne6zw3myw5dwh72giml63vjjksmixrf435hf7cnsg5f3ubgdnde',
     decimals: 18,
   },
   arb: {
