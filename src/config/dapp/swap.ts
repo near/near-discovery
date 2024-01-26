@@ -391,4 +391,11 @@ export default {
       '--button-text-color': '',
     },
   },
+  xfai: {
+    type: 'swap',
+    theme: {
+      '--button-color': '',
+      '--button-text-color': '',
+    },
+  },
 };

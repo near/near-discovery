@@ -147,4 +147,12 @@ export const linea: { [key: string]: Token } = {
     name: 'PancakeSwap Token',
     icon: 'https://ipfs.near.social/ipfs/bafkreigj4avciznhfu3j3pwqiqjq367x3tj2rmoduccyh3otk4c2sjt3hq',
   },
+  xfit: {
+    chainId: CHAIN_ID,
+    address: '0x8c56017b172226fe024dea197748fc1eaccc82b1',
+    decimals: 18,
+    symbol: 'XFIT',
+    name: 'XFIT',
+    icon: '/images/tokens/xfit.webp',
+  },
 };
