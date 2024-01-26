@@ -1,10 +1,4 @@
-import { arbitrum } from '@/config/tokens/arbitrum';
-import { avalanche } from '@/config/tokens/avalanche';
-import { base } from '@/config/tokens/base';
-import { bsc } from '@/config/tokens/bsc';
-import { linea } from '@/config/tokens/linea';
 import { metis } from '@/config/tokens/metis';
-import { optimism } from '@/config/tokens/optimism';
 
 const basic = {
   name: 'Athena Finance',

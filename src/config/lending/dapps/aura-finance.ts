@@ -1,11 +1,3 @@
-import { arbitrum } from '@/config/tokens/arbitrum';
-import { avalanche } from '@/config/tokens/avalanche';
-import { base } from '@/config/tokens/base';
-import { bsc } from '@/config/tokens/bsc';
-import { linea } from '@/config/tokens/linea';
-import { metis } from '@/config/tokens/metis';
-import { optimism } from '@/config/tokens/optimism';
-
 const basic = {
   name: 'Aura Finance',
   // icon: '/images/apps/granary.png',
@@ -16,7 +8,10 @@ const basic = {
 
 const networks = {
   //Gnosis
-  100: {},
+  100: {
+    RewardPoolDepositWrapper: '0x0Fec3d212BcC29eF3E505B555D7a7343DF0B7F76',
+    PoolContractWrapper: '0xBA12222222228d8Ba445958a75a0704d566BF2C8',
+  },
 };
 
 export default { basic, networks };
