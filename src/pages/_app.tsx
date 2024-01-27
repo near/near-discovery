@@ -55,15 +55,19 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
 
   const accountInit = useCallback(() => {
-    login(() => {
-      getInitialData();
+    if (!account) {
+      if (getCookie('LOGIN_ACCOUNT')) {
+        clearTimeout(loginTimer.current);
+        loginTimer.current = setTimeout(() => {
+          deleteCookie('LOGIN_ACCOUNT');
+        }, 3000);
+      }
       setUpdater(Date.now());
-    });
-    clearTimeout(loginTimer.current);
-    if (!account && getCookie('LOGIN_ACCOUNT')) {
-      loginTimer.current = setTimeout(() => {
-        deleteCookie('LOGIN_ACCOUNT');
-      }, 3000);
+    } else {
+      login(() => {
+        getInitialData();
+        setUpdater(Date.now());
+      });
     }
   }, [account]);
 
