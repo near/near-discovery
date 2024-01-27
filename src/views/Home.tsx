@@ -191,6 +191,9 @@ const Content = styled.div`
           }
         }
         .content-item-btn {
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
           .item-btn-item {
             display: inline-block;
             text-decoration: none;
