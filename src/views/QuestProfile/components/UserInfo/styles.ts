@@ -82,12 +82,12 @@ export const StyledAddress = styled.div`
 export const StyledLabels = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   margin-top: 35px;
 `;
 
 export const StyledLabel = styled.div`
-  border-radius: 12px;
+  border-radius: 32px;
   border: 1px solid rgba(235, 244, 121, 0.3);
   background: #1c1d29;
   padding: 14px 20px;
@@ -97,7 +97,7 @@ export const StyledLabel = styled.div`
   color: #fff;
   font-size: 14px;
   font-weight: 700;
-  height: 48px;
+  height: 40px;
   box-sizing: border-box;
 `;
 

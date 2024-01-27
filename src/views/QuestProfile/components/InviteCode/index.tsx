@@ -13,6 +13,7 @@ import {
   StyledPanelFriends,
   StyledPanelFriendsTitle,
   StyledPanelHeader,
+  StyledFriendsNum,
 } from './styles';
 
 const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) => {
@@ -20,12 +21,11 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
   const activeList = useMemo(() => list.filter((item: any) => item.status === 'Active'), [list]);
   const pendingList = useMemo(() => list.filter((item: any) => item.status === 'Pending'), [list]);
   return (
-    <StyledPanel>
+    <StyledPanel style={{ padding: '18px 9px 8px' }}>
       <StyledPanelHeader>
-        <div>
-          Invited <span className="num">{total}</span> friends
-        </div>
-        <StyledButton
+        <div>Invited Frenz</div>
+        <div className="num">{total}</div>
+        {/* <StyledButton
           disabled={loading || totalRewards === 0}
           onClick={() => {
             handleClaim();
@@ -33,9 +33,9 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
         >
           {loading && <Loading />}
           <span style={{ marginLeft: '4px' }}> Claim {totalRewards} PTS</span>
-        </StyledButton>
+        </StyledButton> */}
       </StyledPanelHeader>
-      <StyledPanelContent>
+      {/* <StyledPanelContent>
         <StyledPanelFriends>
           <div>
             <StyledPanelFriendsTitle>{activeList.length} active friends</StyledPanelFriendsTitle>
@@ -74,8 +74,11 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
             </JoinedAccounts>
           </div>
         </StyledPanelFriends>
-        <InviteCode onClick={onInviteCodeClick} />
-      </StyledPanelContent>
+      </StyledPanelContent> */}
+      <StyledFriendsNum>
+        {activeList.length} Active/ {pendingList.length} Pending
+      </StyledFriendsNum>
+      <InviteCode onClick={onInviteCodeClick} />
     </StyledPanel>
   );
 };

@@ -26,7 +26,7 @@ const DailyTask = ({ onSuccess }: { onSuccess: VoidFunction }) => {
   const { loading, tasks, claiming, consecutiveDays, currentDay, claim } = useDailyTask({ onSuccess });
 
   return (
-    <StyledPanel>
+    <StyledPanel style={{ width: '50%' }}>
       <StyledContainer>
         {!loading ? (
           <StyledContent>
