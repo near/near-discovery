@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { colors } from '@/config/chains';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
+import InviteFirendsModal from '@/views/QuestProfile/components/InviteFirendsModal';
+import useInviteList from '@/views/QuestProfile/hooks/useInviteList';
 
 import useTxs from '../Bridge/hooks/useTxs';
 import AccountWrapper from './components/AccountWrapper';
@@ -53,7 +55,7 @@ const Main = styled.div`
   flex-grow: 1;
   overflow-y: auto;
   &::-webkit-scrollbar {
-      display: none;
+    display: none;
   }
 `;
 const Bg = styled.div<{ $chain: number }>`
@@ -95,6 +97,7 @@ const AccountSider = () => {
   const [showChains, setShowChains] = useState(false);
   const [showCodes, setShowCodes] = useState(false);
   const { chainId } = useAccount();
+  const { list, totalRewards, reward } = useInviteList();
 
   useEffect(() => {
     if (layoutStore.showAccountSider && defaultTab === 'bridge') {
@@ -146,7 +149,6 @@ const AccountSider = () => {
                 />
               )}
             </Main>
-            
           </Content>
           {/* <Bg $chain={chainId || 0} /> */}
         </StyledPanel>
@@ -165,6 +167,15 @@ const AccountSider = () => {
           </CloseIcon>
         )}
       </StyledContainer>
+      <InviteFirendsModal
+        open={showCodes}
+        list={list}
+        totalRewards={totalRewards}
+        reward={reward}
+        onClose={() => {
+          setShowCodes(false);
+        }}
+      />
     </>
   );
 };
