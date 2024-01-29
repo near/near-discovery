@@ -116,4 +116,12 @@ export const scroll: { [key: string]: Token } = {
     name: 'izumi Token',
     icon: 'https://ipfs.near.social/ipfs/bafkreifsgwu2zd6y2n5alekr5qgdhzoivlkl5wujtq3z7gnm5pw4jy7sgi',
   },
+  dodo: {
+    chainId: CHAIN_ID,
+    address: '0x912aB742e1ab30ffa87038C425F9Bc8ED12B3EF4',
+    decimals: 18,
+    symbol: 'DODO',
+    name: 'DODO bird',
+    icon: '/images/tokens/dodo.webp',
+  },
 };
