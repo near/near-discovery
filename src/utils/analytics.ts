@@ -8,6 +8,7 @@ import { networkId } from './config';
 
 let rudderAnalytics: Analytics | null = null;
 let anonymousUserId = '';
+let userAgentDetail = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
 let pendingEvents: any = [];
@@ -45,7 +46,20 @@ function getAnonymousId() {
   return anonymousUserId;
 }
 
+function getUserAgent() {
+  if (!userAgentDetail) {
+    const nav: ExperimentalNaviagtor = navigator;
+    nav.userAgentData &&
+      nav.userAgentData.getHighEntropyValues(['platformVersion', 'model']).then((ua: any) => {
+        userAgentDetail = ua;
+      });
+  }
+  return userAgentDetail;
+}
+
 export async function init() {
+  getUserAgent();
+
   if (window?.rudderAnalytics) return;
 
   getAnonymousId();
@@ -93,6 +107,7 @@ export function recordPageView(pageName: string) {
     rudderAnalytics.page('category', pageName, {
       hashId: localStorage.getItem('hashId'),
       url: filterURL(window.location.href),
+      userAgentDetail,
       ref: filterURL(document.referrer),
     });
   } catch (e) {
@@ -138,6 +153,7 @@ export function recordEventWithProps(eventLabel: string, properties: Record<stri
   try {
     rudderAnalytics.track(eventLabel, {
       ...properties,
+      userAgentDetail,
       hashId: localStorage.getItem('hashId'),
       anonymousUserIdCreatedAt,
     });
@@ -152,6 +168,7 @@ export function recordEvent(eventLabel: string) {
     rudderAnalytics.track(eventLabel, {
       hashId: localStorage.getItem('hashId'),
       url: window.location.href,
+      userAgentDetail,
       anonymousUserIdCreatedAt,
     });
   } catch (e) {
