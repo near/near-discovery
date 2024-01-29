@@ -1,15 +1,14 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
+
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
+import DropdownMenuPanel from '@/components/DropdownMenuPanel';
 import AccountItem from '@/components/AccountSider/components/AccountItem';
 import Chain from '@/components/AccountSider/components/Chain';
 import { QUEST_PATH } from '@/config/quest';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
 import { get } from '@/utils/http';
-import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const LoginContainer = styled.div`
   width: auto;
@@ -214,138 +213,6 @@ const Search = styled.div`
   }
 `;
 
-const MaskLayer = styled.div`
-  position: fixed;
-  top: 80px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 0;
-  backdrop-filter: blur(6px);
-`;
-
-const MenuContent = styled.div`
-  z-index: 100;
-  position: absolute;
-  left: 0;
-  top: 78px;
-  background: #16181d;
-  width: 100%;
-  display: none;
-  padding: 40px 12% 28px 12%;
-  color: #ffffff;
-  display: flex;
-  font-family: Gantari;
-  &.show {
-    display: flex;
-    animation: slideDown 0.5s ease forwards;
-  }
-  @keyframes slideDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .menu-content-item {
-    display: flex;
-    margin-right: 60px;
-    h1 {
-      font-size: 20px;
-      font-weight: 700;
-    }
-    p {
-      font-size: 14px;
-      font-weight: 400;
-      color: #979abe;
-      margin-bottom: 20px;
-    }
-    a {
-      color: #ffffff;
-      text-decoration: none;
-      height: fit-content;
-    }
-
-    .item-list-ingle {
-      display: inline-block;
-      margin-top: 16px;
-      width: 50%;
-      font-size: 16px;
-    }
-
-    .content-item-arrow {
-      display: inline-block;
-      margin-left: 12px;
-      img {
-        margin-top: 24px;
-      }
-    }
-  }
-  .menu-content-deep {
-    padding-left: 60px;
-    border-left: 1px solid #383b48;
-    a {
-      color: #ffffff;
-      text-decoration: none;
-    }
-    .contenr-deep-item {
-      display: flex;
-      margin-bottom: 36px;
-      .deep-item-left {
-        margin-right: 20px;
-        line-height: 62px;
-        width: 42px;
-        flex-shrink: 0;
-      }
-      .deep-item-text {
-        h1 {
-          font-size: 20px;
-          font-weight: 700;
-          display: inline-block;
-        }
-        p {
-          font-size: 14px;
-          font-weight: 400;
-          color: #979abe;
-        }
-        .current-version {
-          color: #ebf479;
-          display: inline-block;
-          margin-left: 6px;
-          padding: 4px 14px 4px 8px;
-          background: rgba(55, 58, 83, 0.5);
-          border-radius: 10px;
-          display: inline-block;
-          font-family: Gantari;
-          font-size: 12px;
-          font-style: italic;
-          font-weight: 400;
-          line-height: 14px;
-          letter-spacing: 0em;
-          text-align: left;
-          white-space: nowrap;
-          img {
-            width: 12px;
-            height: 12px;
-            margin-right: 4px;
-          }
-        }
-      }
-    }
-    .deep-item-special {
-      opacity: 0.5;
-      margin-bottom: 0;
-    }
-  }
-`;
-
 const logoUrl = 'https://assets.dapdap.net/images/logo.png';
 
 const SearchIcon = (
@@ -356,38 +223,14 @@ const ExpandIcon = 'https://assets.dapdap.net/images/bafkreiam7p4ewrfedupruquxts
 
 const CloseIcon = 'https://assets.dapdap.net/images/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu.svg';
 
-const ArrowIcon = 'https://assets.dapdap.net/images/bafkreibrhom3ayevbwnd5e2u65w3qqgqgzk7qumggejceoy5t7ozydu7gm.svg';
-
-const DeepDive = 'https://assets.dapdap.net/images/bafkreicrbwiivaavc7dnlyfr72mnuvd36fhpwrw2yxvwp2afebbkso7d6m.svg';
-
-const Shotcuts = 'https://assets.dapdap.net/images/bafkreideqs5vzneww4ejycligpml3prkr5wd6rhkalsyhyxcfo7mcdegyq.svg';
-
-const Portfolio = 'https://assets.dapdap.net/images/bafkreidtkanbzjdnycy2c3cie32jv2lglg7vsbhvodtlztk7e5sftyrece.svg';
-
-const lockUrl = 'https://assets.dapdap.net/images/bafkreigkzmvkujzp5ned6vk55vr6w2vy3lwcbyr4dw35nyddsxtgxy4hcq.svg';
-
 export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
-  const router = useRouter();
-  const [networkList, setNetworkList] = useState<any[]>([]);
-  const { loading, categories } = useCategoryDappList();
-  const categoryArray = Object.values(categories);
+
   const [searchContent, setSearchContent] = useState('');
   const [searchResults, setSearchResults] = useState<any | null>(null);
   const [showAll, setShowAll] = useState(false);
   const [showNetworkAll, setShowNetworkAll] = useState(false);
-  useEffect(() => {
-    const fetchNetworkData = async () => {
-      try {
-        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
-        setNetworkList(resultNetwork.data || []);
-      } catch (error) {
-        console.error('Error fetching resultNetwork data:', error);
-      }
-    };
-    fetchNetworkData();
-  }, []);
 
   useEffect(() => {
     const fetchSearchData = async () => {
@@ -505,97 +348,7 @@ export const DesktopNavigationTop = () => {
         )}
       </div>
 
-      {showMenuContent && (
-        <>
-          <MaskLayer onClick={() => setShowMenuContent(false)} />
-          <MenuContent className={showMenuContent ? 'show' : ''}>
-            <div className="menu-content-item">
-              <div className="content-item-text">
-                <h1>Explore Dapps</h1>
-                <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
-                {categoryArray &&
-                  categoryArray.map((item: any, index: number) => {
-                    return (
-                      <div
-                        className="item-list-ingle"
-                        key={index}
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => {
-                          setShowMenuContent(false);
-                          router.push({
-                            pathname: '/alldapps',
-                            query: { category: item.id },
-                          });
-                        }}
-                      >
-                        {item.name}
-                      </div>
-                    );
-                  })}
-              </div>
-              <Link href="/alldapps" onClick={() => setShowMenuContent(false)}>
-                <div className="content-item-arrow">
-                  <img src={ArrowIcon} alt="" />
-                </div>
-              </Link>
-            </div>
-            <div className="menu-content-item">
-              <div className="content-item-text">
-                <h1>Explore Blockchains</h1>
-                <p>Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems.</p>
-                {networkList &&
-                  networkList.map((child, index) => (
-                    <Link href={`/chains-details?id=${child.id}`} key={index} onClick={() => setShowMenuContent(false)}>
-                      <div className="item-list-ingle">{child.name}</div>
-                    </Link>
-                  ))}
-              </div>
-              <Link href="/blockchains" onClick={() => setShowMenuContent(false)}>
-                <div className="content-item-arrow">
-                  <img src={ArrowIcon} alt="" />
-                </div>
-              </Link>
-            </div>
-            <div className="menu-content-deep">
-              <Link href="/warmup " onClick={() => setShowMenuContent(false)}>
-                <div className="contenr-deep-item">
-                  <div className="deep-item-left">
-                    <img src={DeepDive} alt="" />
-                  </div>
-                  <div className="deep-item-text">
-                    <h1>DeepDive</h1>
-                    <p> DeepDive the hotest L2 Blockcchain to get more intension of reward.</p>
-                  </div>
-                </div>
-              </Link>
-              <Link href="/all-in-one" onClick={() => setShowMenuContent(false)}>
-                <div className="contenr-deep-item">
-                  <div className="deep-item-left">
-                    <img src={Shotcuts} alt="" />
-                  </div>
-                  <div className="deep-item-text">
-                    <h1>Shotcuts</h1>
-                    <p>Shortcuts integrate common functions and the most popular dapps.</p>
-                  </div>
-                </div>
-              </Link>
-              <div className="contenr-deep-item deep-item-special">
-                <div className="deep-item-left">
-                  <img src={Portfolio} alt="" />
-                </div>
-                <div className="deep-item-text">
-                  <h1>Portfolio</h1>
-                  <div className="current-version">
-                    <img src={lockUrl} alt="" />
-                    Lv.3
-                  </div>
-                  <p>Access your assets and positions directly from your portfolio after Lv.3.</p>
-                </div>
-              </div>
-            </div>
-          </MenuContent>
-        </>
-      )}
+      {showMenuContent && <DropdownMenuPanel show={showMenuContent} setShow={setShowMenuContent} />}
     </Container>
   );
 };

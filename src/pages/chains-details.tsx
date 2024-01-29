@@ -687,7 +687,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
           </div>
           <div className="details-body-right">
             <div className="body-right-btn">
-              <Link href="/alldapps">
+              <Link href={`/alldapps?network=${id}`}>
                 <div className="right-btn-item">
                   <img src={Dapps} alt="" />
                   <p>Dapps</p>
