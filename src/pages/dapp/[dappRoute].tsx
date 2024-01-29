@@ -166,7 +166,14 @@ export const DappPage: NextPageWithLayout = () => {
             prices,
             addAction,
             bridgeCb,
-            onSwitchChain: setChain,
+            onSwitchChain: (params: any) => {
+              if (Number(params.chainId) === chainId) {
+                setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chainId));
+                setIsChainSupported(true);
+              } else {
+                setChain(params);
+              }
+            },
             switchingChain: settingChain,
             nativeCurrency: chainsConfig[currentChain.chain_id].nativeCurrency,
             theme: { bridge: dappBridgeTheme[currentChain.chain_id] },
