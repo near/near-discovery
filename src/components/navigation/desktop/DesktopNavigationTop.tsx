@@ -143,7 +143,7 @@ export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
 
-  const [searchContent, setSearchContent] = useState('');
+  const [searchContent, setSearchContent] = useState<string>();
 
   const [showMenuContent, setShowMenuContent] = useState(false);
 

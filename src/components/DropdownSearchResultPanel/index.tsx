@@ -41,7 +41,7 @@ const DropdownSearchResultPanel = ({ searchText, setSearchContent, show }: any) 
   }, [searchText]);
 
   return (
-    <StyledSearchResults className={show && 'show'}>
+    <StyledSearchResults className={show !== undefined ? (show ? 'show' : 'hide') : ''}>
       {empty && !loading ? (
         <Empty size={42} tips="No related Dapps, Blockchains, or Quest found" />
       ) : (

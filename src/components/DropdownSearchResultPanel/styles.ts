@@ -15,33 +15,44 @@ export const StyledSearchResults = styled.div`
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
   background-color: rgb(48, 49, 66);
   color: rgba(151, 154, 190, 1);
-  border: 1px solid rgba(55, 58, 83, 1);
+
   border-radius: 12px;
   max-height: 600px;
   overflow: auto;
-  padding: 20px 0px;
-  animation: slideUp 0.5s ease forwards;
+  height: 0;
+
   &.show {
+    border: 1px solid rgba(55, 58, 83, 1);
+    padding: 20px 0px;
     animation: slideDown 0.5s ease forwards;
+  }
+  &.hide {
+    border: 1px solid rgba(55, 58, 83, 1);
+    padding: 20px 0px;
+    animation: slideUp 0.5s ease forwards;
   }
   @keyframes slideDown {
     0% {
       opacity: 0;
       transform: translateY(-10px);
+      height: 0;
     }
     100% {
       opacity: 1;
       transform: translateY(0);
+      height: auto;
     }
   }
   @keyframes slideUp {
     0% {
       opacity: 1;
       transform: translateY(0);
+      height: auto;
     }
     100% {
       opacity: 0;
       transform: translateY(-10px);
+      height: 0;
     }
   }
 `;

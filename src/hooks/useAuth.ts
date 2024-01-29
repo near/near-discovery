@@ -16,7 +16,7 @@ const useAuth = () => {
     insertedAccessKey('');
     deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
-    deleteCookie('BNS_NAME')
+    deleteCookie('BNS_NAME');
     router.replace(`/login?source=/`);
   };
 
@@ -32,7 +32,7 @@ const useAuth = () => {
         setLogging(true);
         try {
           const checked = await checkAddressIsInvited(wallet.accounts[0].address);
-          const result = await getBnsUserName(wallet.accounts[0].address)
+          const result = await getBnsUserName(wallet.accounts[0].address);
           if (result.name) {
             setCookie('BNS_NAME', result.name);
           }
@@ -42,14 +42,14 @@ const useAuth = () => {
             return;
           }
           await getAccessToken(wallet.accounts[0].address);
+          cb?.();
           setLogging(false);
           setCookie('AUTHED_ACCOUNT', wallet.accounts[0].address);
           // BNS用户
           if (getCookie('BNS_NAME')) {
-            router.replace('/bns/guide')
-            return
+            router.replace('/bns/guide');
+            return;
           }
-          cb?.();
         } catch (error) {
           setLogging(false);
         }
