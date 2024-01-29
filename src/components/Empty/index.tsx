@@ -13,6 +13,7 @@ const StyledContainer = styled.div`
   font-weight: 400;
   line-height: normal;
   padding-top: 40px;
+  padding-bottom: 40px;
   gap: 14px;
 `;
 

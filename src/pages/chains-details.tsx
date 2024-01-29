@@ -537,7 +537,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     const fetchhotDappsData = async () => {
       if (id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp/hot_list?network_id=${id}&size=10`);
+          const response = await fetch(`${QUEST_PATH}/api/dapp/hot_list?network_id=${id}&size=9`);
           const data = await response.json();
           setHotDapps(data.data);
         } catch (error) {

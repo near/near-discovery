@@ -171,7 +171,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <VmInitializer />
 
       {updater && (
-        <SkeletonTheme baseColor="rgba(53, 54, 73, 0.3)" highlightColor="#444">
+        <SkeletonTheme baseColor="#353649" highlightColor="#444">
           {getLayout(<Component {...pageProps} logging={logging} key={updater} />)}
         </SkeletonTheme>
       )}

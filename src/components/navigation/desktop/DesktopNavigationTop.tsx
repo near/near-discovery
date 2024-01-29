@@ -1,14 +1,14 @@
 import Link from 'next/link';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 import DropdownMenuPanel from '@/components/DropdownMenuPanel';
 import AccountItem from '@/components/AccountSider/components/AccountItem';
+import DropdownSearchResultPanel from '@/components/DropdownSearchResultPanel';
 import Chain from '@/components/AccountSider/components/Chain';
-import { QUEST_PATH } from '@/config/quest';
+
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
-import { get } from '@/utils/http';
 
 const LoginContainer = styled.div`
   width: auto;
@@ -37,73 +37,6 @@ const Container = styled.div`
     justify-content: space-between;
     width: 100%;
     position: relative;
-  }
-  .container-submenu {
-    display: none;
-    align-items: center;
-    margin-top: 30px;
-    z-index: 1;
-    padding-bottom: 20px;
-    margin: 0 -36px;
-    padding: 20px 36px;
-    &.show {
-      display: flex;
-      border-bottom: 1px solid #343838;
-      animation: slideDown 0.5s ease forwards;
-    }
-    .submenu-item {
-      margin: 5px 0;
-      text-align: center;
-      opacity: 0.5;
-      background: #373a53;
-      border-radius: 10px;
-      padding: 4px 8px 4px 4px;
-      font-size: 14px;
-      margin-right: 14px;
-      color: #ffffff;
-      text-decoration: none;
-      height: 32px;
-      line-height: 26px;
-      display: flex;
-      .submenu-item-icon {
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        text-align: center;
-        align-items: center;
-        border-radius: 10px;
-        margin-right: 10px;
-        flex-shrink: 0;
-      }
-      .submenu-item-title {
-        flex-grow: 1;
-        white-space: nowrap;
-      }
-      &:hover {
-        opacity: 1;
-      }
-      &.active {
-        background-color: #ebf479;
-        color: #181a27;
-        opacity: 1;
-      }
-    }
-    .submenu-item-disable {
-      cursor: not-allowed;
-      &:hover {
-        opacity: 0.5;
-      }
-    }
-  }
-  @keyframes slideDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 `;
 
@@ -156,7 +89,7 @@ const Search = styled.div`
     background: linear-gradient(0deg, #282a33, #282a33), linear-gradient(0deg, #343743, #343743);
     box-shadow: none;
   }
-  img {
+  .switch-icon-img {
     position: absolute;
     left: 20px;
     top: 16px;
@@ -169,55 +102,38 @@ const Search = styled.div`
     top: 0;
     cursor: pointer;
   }
-  .search-results {
-    width: 100%;
+  .switch-icon-img {
+    transition: 0.3s;
+    opacity: 0;
+  }
+  .switch-icon-img.show {
+    opacity: 1;
+  }
+  .search-icon {
     position: absolute;
-    top: 55px;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-    background-color: rgb(48, 49, 66);
-    color: rgba(151, 154, 190, 1);
-    border: 1px solid rgba(55, 58, 83, 1);
-    border-radius: 12px;
-    max-height: 600px;
-    overflow: auto;
-    padding: 20px 30px;
-    .search-results-item {
-      a {
-        text-decoration: none;
-      }
-      .results-item-title {
-        p {
-          font-size: 12px;
-          display: inline-block;
-        }
-        .item-title-right {
-          float: right;
-          cursor: pointer;
-        }
-      }
-      .results-item-list {
-        display: flex;
-        img {
-          position: inherit;
-          width: 30px;
-          height: 30px;
-        }
-        p {
-          font-size: 14px;
-          color: #ffffff;
-          margin-top: 6px;
-          margin-left: 10px;
-        }
-      }
-    }
+    left: 18px;
+    top: 16px;
+  }
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+`;
+
+const InputCloseIcon = styled.div`
+  position: absolute;
+  cursor: pointer;
+  right: 12px;
+  top: 10px;
+  &:hover {
+    opacity: 0.9;
+  }
+  &:active {
+    opacity: 0.8;
   }
 `;
 
 const logoUrl = 'https://assets.dapdap.net/images/logo.png';
-
-const SearchIcon = (
-  <img src="https://assets.dapdap.net/images/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim.svg" alt="" />
-);
 
 const ExpandIcon = 'https://assets.dapdap.net/images/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi.svg';
 
@@ -228,23 +144,6 @@ export const DesktopNavigationTop = () => {
   const { account } = useAccount();
 
   const [searchContent, setSearchContent] = useState('');
-  const [searchResults, setSearchResults] = useState<any | null>(null);
-  const [showAll, setShowAll] = useState(false);
-  const [showNetworkAll, setShowNetworkAll] = useState(false);
-
-  useEffect(() => {
-    const fetchSearchData = async () => {
-      if (searchContent) {
-        try {
-          const result = await get(`${QUEST_PATH}/api/search?content=${searchContent}`);
-          setSearchResults(result.data);
-        } catch (error) {
-          console.error('Error fetching search data:', error);
-        }
-      }
-    };
-    fetchSearchData();
-  }, [searchContent]);
 
   const [showMenuContent, setShowMenuContent] = useState(false);
 
@@ -258,78 +157,59 @@ export const DesktopNavigationTop = () => {
         </Link>
         <MenuContainer>
           <Search>
-            <input
-              type="text"
-              placeholder="search dapps, chains..."
-              value={searchContent}
-              onChange={(e) => setSearchContent(e.target.value)}
-              autoFocus
-              id="nav-top-search"
-            />
-            {SearchIcon}
+            <InputWrapper>
+              <input
+                type="text"
+                placeholder="search dapps, chains..."
+                value={searchContent}
+                onChange={(e) => setSearchContent(e.target.value)}
+                autoFocus
+                id="nav-top-search"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="15"
+                viewBox="0 0 21 15"
+                fill="none"
+                className="search-icon"
+              >
+                <circle cx="7.01829" cy="7.01829" r="6.01829" stroke="#EBF479" stroke-width="2" />
+                <rect
+                  x="14.9138"
+                  y="9.64978"
+                  width="6.141"
+                  height="2.63186"
+                  rx="1.31593"
+                  transform="rotate(30 14.9138 9.64978)"
+                  fill="#EBF479"
+                />
+              </svg>
+              {searchContent && (
+                <InputCloseIcon
+                  onClick={() => {
+                    setSearchContent('');
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="#303142" />
+                    <path
+                      d="M13.444 12L16.7799 8.66415C17.0307 8.41332 17.0735 8.0494 16.8756 7.85157L16.1482 7.12424C15.9503 6.92632 15.5869 6.96974 15.3356 7.22041L12.0001 10.5561L8.66433 7.22049C8.41349 6.96941 8.04957 6.92632 7.85165 7.12449L7.12431 7.8519C6.92648 8.04949 6.96931 8.4134 7.22048 8.66423L10.5563 12L7.22048 15.336C6.96973 15.5866 6.92631 15.9503 7.12431 16.1482L7.85165 16.8756C8.04957 17.0735 8.41349 17.0306 8.66433 16.7799L12.0003 13.4439L15.3357 16.7794C15.587 17.0307 15.9504 17.0735 16.1483 16.8756L16.8757 16.1482C17.0735 15.9503 17.0307 15.5866 16.78 15.3356L13.444 12Z"
+                      fill="#979ABE"
+                    />
+                  </svg>
+                </InputCloseIcon>
+              )}
+            </InputWrapper>
             <div className="switch-icon" onClick={() => setShowMenuContent(!showMenuContent)}>
-              <img src={showMenuContent ? CloseIcon : ExpandIcon} alt="" />
+              <img src={CloseIcon} alt="" className={`switch-icon-img ${showMenuContent && 'show'}`} />
+              <img src={ExpandIcon} alt="" className={`switch-icon-img ${!showMenuContent && 'show'}`} />
             </div>
-            {searchContent && (
-              <div className="search-results">
-                <div className="search-results-item">
-                  <div className="results-item-title">
-                    <p>Dapp</p>
-                    <p className="item-title-right" onClick={() => setShowAll(!showAll)}>
-                      {showAll ? 'Close' : 'View More'}
-                    </p>
-                  </div>
-                  {searchResults &&
-                    (showAll ? searchResults.dapps : searchResults.dapps.slice(0, 5)).map(
-                      (item: any, index: number) => (
-                        <Link
-                          key={index}
-                          href={`/dapps-details?dapp_id=${item.id}`}
-                          onClick={() => setSearchContent('')}
-                        >
-                          <div className="results-item-list">
-                            <img src={item.logo} alt="" />
-                            <p>{item.name}</p>
-                          </div>
-                        </Link>
-                      ),
-                    )}
-                </div>
-                <div className="search-results-item">
-                  <div className="results-item-title">
-                    <p>Blockchain</p>
-                    <p className="item-title-right" onClick={() => setShowNetworkAll(!showNetworkAll)}>
-                      {showNetworkAll ? 'Close' : 'View More'}
-                    </p>
-                  </div>
-                  {searchResults &&
-                    (showNetworkAll ? searchResults.networks : searchResults.networks.slice(0, 5)).map(
-                      (item: any, index: number) => (
-                        <Link key={index} href={`/chains-details?id=${item.id}`} onClick={() => setSearchContent('')}>
-                          <div className="results-item-list">
-                            <img src={item.logo} alt="" />
-                            <p>{item.name}</p>
-                          </div>
-                        </Link>
-                      ),
-                    )}
-                </div>
-                <div className="search-results-item">
-                  <div className="results-item-title">
-                    <p>Quest</p>
-                  </div>
-                  {searchResults &&
-                    (showAll ? searchResults.quests : searchResults.quests).map((item: any, index: number) => (
-                      <Link key={index} href={`/quest/detail?id=${item.id}`} onClick={() => setSearchContent('')}>
-                        <div className="results-item-list">
-                          <img src={item.logo} alt="" />
-                          <p>{item.name}</p>
-                        </div>
-                      </Link>
-                    ))}
-                </div>
-              </div>
-            )}
+            <DropdownSearchResultPanel
+              searchText={searchContent}
+              setSearchContent={setSearchContent}
+              show={searchContent}
+            />
           </Search>
         </MenuContainer>
         {account ? (
