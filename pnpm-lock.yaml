@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@idos-network/idos-sdk':
     specifier: ^0.0.30
@@ -114,8 +110,8 @@ dependencies:
     specifier: ^0.0.10
     version: 0.0.10
   near-social-vm:
-    specifier: github:NearSocial/VM#filter-ethers-utils
-    version: github.com/NearSocial/VM/42b7fa310c45e7c16ab5a2a9bb5ca46bb43d8983(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
+    specifier: github:NearSocial/VM#address-bn
+    version: github.com/NearSocial/VM/e905eb70d0ce245fc3a98c7909445fb829b98eaa(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0)
   next:
     specifier: ^13.5.6
     version: 13.5.6(@babel/core@7.23.3)(react-dom@18.2.0)(react@18.2.0)
@@ -13899,9 +13895,9 @@ packages:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}
     dev: false
 
-  github.com/NearSocial/VM/42b7fa310c45e7c16ab5a2a9bb5ca46bb43d8983(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
-    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/42b7fa310c45e7c16ab5a2a9bb5ca46bb43d8983}
-    id: github.com/NearSocial/VM/42b7fa310c45e7c16ab5a2a9bb5ca46bb43d8983
+  github.com/NearSocial/VM/e905eb70d0ce245fc3a98c7909445fb829b98eaa(@babel/core@7.23.3)(@popperjs/core@2.11.8)(@types/react-dom@18.2.10)(@types/react@18.2.25)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0)(react-is@18.2.0)(react@18.2.0):
+    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/e905eb70d0ce245fc3a98c7909445fb829b98eaa}
+    id: github.com/NearSocial/VM/e905eb70d0ce245fc3a98c7909445fb829b98eaa
     name: near-social-vm
     version: 2.5.5
     peerDependencies:
@@ -13981,3 +13977,7 @@ packages:
       - supports-color
       - utf-8-validate
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
