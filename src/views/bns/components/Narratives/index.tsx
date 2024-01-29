@@ -68,7 +68,7 @@ const Campaign = function ({ campaign }: any) {
           </StyledFlex>
         </StyledExplore>
       </StyledWrapper>
-      <StyledWrapper style={{ width: 823 }}>
+      <StyledWrapper style={{ width: 889 }}>
         <Swiper
           width={402}
           spaceBetween={15}

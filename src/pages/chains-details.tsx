@@ -621,8 +621,8 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
   }, [data]);
 
   useEffect(() => {
-    if (Number(id) === 4) {
-      handleReport('chains-details?id=4');
+    if ([4, 6].includes(Number(id))) {
+      handleReport('chains-details?id=' + id);
     }
   }, [id]);
 

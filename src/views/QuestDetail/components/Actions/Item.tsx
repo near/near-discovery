@@ -87,12 +87,10 @@ const ActionItem = ({
       return;
     }
 
+    if (action.category === 'twitter_follow' && userInfo.twitter?.is_bind) {
+      sessionStorage.setItem('_clicked_twitter_' + action.id, '1')
+    }
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
-      if (action.category === 'twitter_follow') {
-        const key = '_clicked_twitter_' + action.id
-        const clickedNumber = Number(sessionStorage.getItem(key)) || 0
-        sessionStorage.setItem(key, (clickedNumber + 1) + '')
-      }
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
       sessionStorage.setItem('_auth_type', 'twitter');
       window.open(path, '_blank');
@@ -204,8 +202,8 @@ const ActionItem = ({
                 ev.stopPropagation();
                 if (checking) return
                 if (action.category === 'twitter_follow') {
-                  const clickedNumber = Number(sessionStorage.getItem('_clicked_twitter_' + action.id)) || 0
-                  clickedNumber >= 2 && handleRefresh(action.id)
+                  const clicked = sessionStorage.getItem('_clicked_twitter_' + action.id)
+                  clicked && handleRefresh(action.id)
                 } else {
                   handleRefresh(action.id)
                 }

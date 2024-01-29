@@ -1,5 +1,5 @@
 import loginBg from '@/assets/images/login_bg.png';
-import loginLogo from '@/assets/images/login_logo.png';
+import loginLogo from '@/assets/images/login_logo.svg';
 import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
 import { memo } from 'react';
