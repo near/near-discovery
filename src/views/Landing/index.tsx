@@ -46,8 +46,14 @@ const LandingView = () => {
   }, [step]);
 
   useEffect(() => {
-    if (info?.quest) {
-      setStep(info.quest.action_completed || 1);
+    if (info?.actions) {
+      let _step = 0;
+      info.actions.forEach((action: any) => {
+        if (action.status === 'completed') {
+          _step++;
+        }
+      });
+      setStep(_step + 1 || 1);
     }
   }, [info]);
   return (
