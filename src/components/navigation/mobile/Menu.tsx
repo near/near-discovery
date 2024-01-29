@@ -9,7 +9,6 @@ import { useAuthStore } from '@/stores/auth';
 
 import SearchIcon from '../icons/search.svg';
 import { AccordionMenu } from './AccordionMenu';
-import { HorizonBanner } from '@/components/banner/Horizon';
 
 type Props = {
   isVisible: boolean;
@@ -117,7 +116,6 @@ export function Menu(props: Props) {
   return (
     <Wrapper visible={props.isVisible}>
       <InnerWrapper>
-        <HorizonBanner />
         <SearchButton onClick={search}>Search NEAR</SearchButton>
 
         <AccordionMenu onCloseMenu={props.onCloseMenu} />
