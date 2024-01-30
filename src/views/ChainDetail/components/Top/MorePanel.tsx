@@ -34,7 +34,7 @@ const MorePanel = ({ technology, tbd_token, nativeCurrency, milestones }: any) =
         </StyledTag>
       </StyledTags>
       <StyledChainDesc>
-        Discover Polygon's holistic vision of an accessible Ethereum, where low fees and high-speed transactions
+        Discover Polygon&apos;s holistic vision of an accessible Ethereum, where low fees and high-speed transactions
         redefine user experience.
       </StyledChainDesc>
       <Milestones milestones={milestones} />
