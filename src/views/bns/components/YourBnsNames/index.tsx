@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 import {
   StyledBnsName,
   StyledBnsNames,
@@ -10,11 +10,19 @@ import {
 
 import bnsAvatar from '@/assets/images/bns_avatar.svg';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { COIN_TYLE_LIST, COIN_TYLE_MAP } from '../../constants';
 const YourBnsNames = ({ bnsNames, onClick }: any) => {
+  const router = useRouter()
   const handleClick = function (bnsName: any) {
     onClick && onClick(bnsName)
   }
+  useEffect(() => {
+    if (typeof router.query.Your_BNS_Names === 'string') {
+      window.scrollTo(0, 920)
+    }
+
+  }, [router.query])
   return (
     <StyledBnsNames>
       <StyledHead>Your BNS Names ({bnsNames.length})</StyledHead>

@@ -43,6 +43,7 @@ export const DappPage: NextPageWithLayout = () => {
   const [currentChain, setCurrentChain] = useState<any>();
   const [ready, setReady] = useState(false);
   const [localConfig, setLocalConfig] = useState<any>();
+  const [isChainSupported, setIsChainSupported] = useState<boolean>();
   const prices = usePriceStore((store) => store.price);
   const dappPathname = router.query.dappRoute as string;
 
@@ -92,7 +93,12 @@ export const DappPage: NextPageWithLayout = () => {
   const { run } = useDebounceFn(
     (chain_id) => {
       if (!chains?.length) return;
-      setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chain_id));
+      const isSupported = !!dapp.dapp_network.find((_chain: any) => _chain.chain_id === chain_id);
+      setIsChainSupported(isSupported && chain_id === chainId);
+
+      setCurrentChain(
+        chains.find((_chain: any) => _chain.chain_id === (isSupported ? chain_id : dapp.default_chain_id)),
+      );
     },
     {
       wait: 500,
@@ -122,15 +128,6 @@ export const DappPage: NextPageWithLayout = () => {
     const _network = dapp.dapp_network?.find((_network: any) => _network.network_id === currentChain?.id);
     return _network || dapp.dapp_network[0];
   }, [currentChain]);
-
-  const isChainSupported = useMemo(() => {
-    if (chainId !== currentChain?.chain_id) return false;
-    if (!dappChains.length) return false;
-    if (!dappChains.find((dapp: any) => dapp.chain_id === chainId)) {
-      return false;
-    }
-    return true;
-  }, [chainId, currentChain, dappChains]);
 
   if (!dapp || !default_chain_id || !currentChain || (!dapp.default_chain_id && !dapp.default_network_id))
     return <div />;
@@ -169,7 +166,14 @@ export const DappPage: NextPageWithLayout = () => {
             prices,
             addAction,
             bridgeCb,
-            onSwitchChain: setChain,
+            onSwitchChain: (params: any) => {
+              if (Number(params.chainId) === chainId) {
+                setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chainId));
+                setIsChainSupported(true);
+              } else {
+                setChain(params);
+              }
+            },
             switchingChain: settingChain,
             nativeCurrency: chainsConfig[currentChain.chain_id].nativeCurrency,
             theme: { bridge: dappBridgeTheme[currentChain.chain_id] },

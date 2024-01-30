@@ -116,6 +116,7 @@ const QuestList = ({ questList }: any) => {
         width={402}
         spaceBetween={15}
         slidesPerView={1}
+        slidesPerGroupSkip={3}
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}

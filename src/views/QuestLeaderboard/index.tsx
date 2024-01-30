@@ -52,6 +52,7 @@ const QuestLeaderboardView = (props: any) => {
         />
       )}
       <AccountSider />
+      <Yours info={userInfo} />
     </StyledWrapper>
   );
 };

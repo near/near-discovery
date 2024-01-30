@@ -14,6 +14,7 @@ import { StyledCoin, StyledProcessBars, StyledTag } from '@/views/Quest/componen
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 import useLike from '@/views/Quest/hooks/useLike';
 import { StyledHeartBox } from '@/views/QuestDetail/components/Details/styles';
+import Empty from '@/components/Empty';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -478,9 +479,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchData = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp?id=${dapp_id}`);
-          const data = await response.json();
-          setData(data.data);
+          const response = await get(`${QUEST_PATH}/api/dapp?id=${dapp_id}`);
+          setData(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -489,9 +489,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchRelatedDapps = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
-          const data = await response.json();
-          setRelatedDapps(data.data);
+          const response = await get(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
+          setRelatedDapps(response.data);
         } catch (error) {
           console.error('Error fetching related dapps:', error);
         }
@@ -500,9 +499,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchquestList = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/quest/list_by_dapp?dapp_id=${dapp_id}`);
-          const data = await response.json();
-          setQuestList(data.data);
+          const response = await get(`${QUEST_PATH}/api/quest/list_by_dapp?dapp_id=${dapp_id}`);
+          setQuestList(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -511,11 +509,10 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchactivityData = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(
+          const response = await get(
             `${QUEST_PATH}/api/action/get-actions-by-dapp?dapp_id=${dapp_id}&page=1&page_size=10`,
           );
-          const data = await response.json();
-          setActivity(data.data);
+          setActivity(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -524,9 +521,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchAdvertiseasync = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/ad?category=dapp&category_id=${dapp_id}`);
-          const data = await response.json();
-          setAdvertise(data);
+          const response = await get(`${QUEST_PATH}/api/ad?category=dapp&category_id=${dapp_id}`);
+          setAdvertise(response);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -722,7 +718,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         </div>
         <div className="right-side-substance">
           <Title>Quest</Title>
-          {questList &&
+          {questList?.length ? (
             questList.map((item, index) => {
               const actions = Array.from({ length: item.total_action }, (val, i) => i);
               return (
@@ -753,7 +749,10 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                   </div>
                 </Link>
               );
-            })}
+            })
+          ) : (
+            <Empty size={42} tips="No quest yet" />
+          )}
         </div>
       </DappsDetailsContent>
 

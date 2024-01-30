@@ -13,4 +13,13 @@ export const bridge = {
   1088: { background: 'rgba(0, 211, 255, 0.15)', color: 'rgba(0, 211, 255, 1)' },
   43114: { background: 'rgba(252, 40, 56, 0.15)', color: 'rgba(252, 40, 56, 1)' },
   324: { background: 'rgba(87, 53, 181, 0.15)', color: 'rgba(87, 53, 181, 1)' },
+  10: { background: 'rgba(169, 51, 51, 0.15)', color: 'rgba(169, 51, 51, 1)' },
+  169: {
+    background: 'rgba(255,255,255, 0.15)',
+    color: 'rgba(255,255,255, 1)',
+  },
+  534352: {
+    background: 'rgba(235, 194, 142, 0.15)',
+    color: 'rgba(235, 194, 142, 1)',
+  },
 } as { [key: number]: any };

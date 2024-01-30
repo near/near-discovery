@@ -77,8 +77,8 @@ export function useTokensBalance({ tokensByChain }: { tokensByChain?: Token[] })
         const lifiTokens: LiFiToken[] = tokensByChain.map((item) => {
           let address = item.address ? item.address : '';
           if (item.isNative) {
-            const tokens: Token[] = chainTokens[item.chainId];
-            const lifiTokens = tokens?.filter((_token) => _token.symbol === item.symbol);
+            const tokens: Token[] = chainTokens[item.chainId] || [];
+            const lifiTokens = tokens.filter((_token) => _token.symbol === item.symbol);
             if (lifiTokens && lifiTokens.length) {
               address = lifiTokens[0].address;
             }

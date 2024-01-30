@@ -77,7 +77,8 @@ const NetworkDialog = ({
   onClose,
   currentChain,
   setChain,
-  setShowSwitchNetworkDialog
+  setShowSwitchNetworkDialog,
+  onSetPrimary
 }: any) => {
   const { account } = useAccount()
   const contract = useBnsContract()
@@ -167,8 +168,9 @@ const NetworkDialog = ({
       const response = await contract.write({
         address: '0x0363696B6D369859f5fb4994a5Ade574CD91D220',
         functionName: 'setName',
-        args: [nameHash]
+        args: [bnsName.name]
       })
+      onSetPrimary(response)
     } catch (error) {
       console.log(error)
     }

@@ -87,14 +87,14 @@ const SubtractItem = ({ showCodes, setShowCodes }: { showCodes: boolean; setShow
             </linearGradient>
           </defs>
         </svg>
-        <InviteCode
+        {/* <InviteCode
           show={showCodes}
           onClose={() => {
             setTimeout(() => {
               setShowCodes(false);
             }, 500);
           }}
-        />
+        /> */}
       </StyledInviteCode>
     </StyledSubtractItem>
   );

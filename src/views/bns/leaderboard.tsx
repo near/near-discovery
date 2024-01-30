@@ -4,7 +4,7 @@ import useCampaignList from '@/views/Quest/hooks/useCampaignList';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useQuestList from '@/views/Quest/hooks/useQuestList';
 
-import Leaderboard from '@/views/QuestLeaderboard';
+import Leaderboard from '@/views/QuestLeaderboard/components/Leaderboard';
 import useLeaderboard from '@/views/QuestLeaderboard/hooks/useLeaderboard';
 import useUserInfo from '../../hooks/useUserInfo';
 import Yours from '../Quest/components/Yours';

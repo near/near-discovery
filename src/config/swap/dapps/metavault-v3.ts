@@ -3,7 +3,7 @@ import { linea } from '@/config/tokens/linea';
 
 const basic = {
   name: 'Metavault V3',
-  logo: '/images/apps/',
+  logo: '/images/apps/metavault.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.RamsesV2AmountOut',
 };
 const networks = {

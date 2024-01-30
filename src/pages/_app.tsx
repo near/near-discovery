@@ -5,6 +5,7 @@ import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import { deleteCookie, getCookie } from 'cookies-next';
 import { debounce } from 'lodash';
@@ -16,7 +17,7 @@ import Script from 'next/script';
 import { useCallback, useEffect, useRef } from 'react';
 import { useState } from 'react';
 import { ToastContainer } from 'react-toastify';
-
+import { SkeletonTheme } from 'react-loading-skeleton';
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
@@ -55,15 +56,20 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
 
   const accountInit = useCallback(() => {
-    login(() => {
-      getInitialData();
-      setUpdater(Date.now());
-    });
-    clearTimeout(loginTimer.current);
-    if (!account && getCookie('LOGIN_ACCOUNT')) {
-      loginTimer.current = setTimeout(() => {
-        deleteCookie('LOGIN_ACCOUNT');
-      }, 3000);
+    if (!account) {
+      if (getCookie('LOGIN_ACCOUNT')) {
+        clearTimeout(loginTimer.current);
+        loginTimer.current = setTimeout(() => {
+          deleteCookie('LOGIN_ACCOUNT');
+          setUpdater(Date.now());
+        }, 3000);
+      }
+    } else {
+      clearTimeout(loginTimer.current);
+      login(() => {
+        getInitialData();
+        setUpdater(Date.now());
+      });
     }
   }, [account]);
 
@@ -164,7 +170,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
       <VmInitializer />
-      {updater && getLayout(<Component {...pageProps} logging={logging} key={updater} />)}
+
+      {updater && (
+        <SkeletonTheme baseColor="#353649" highlightColor="#444">
+          {getLayout(<Component {...pageProps} logging={logging} key={updater} />)}
+        </SkeletonTheme>
+      )}
       {ready && (
         <ToastContainer
           position={window.innerWidth > 768 ? 'top-right' : 'bottom-right'}

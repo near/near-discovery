@@ -26,13 +26,13 @@ const QuestProfileView = () => {
   return (
     <>
       <StyledContainer>
-        <UserInfo
-          info={userInfo}
-          onSuccess={() => {
-            setUpdater(Date.now());
-          }}
-        />
         <StyledPanelWrapper>
+          <UserInfo
+            info={userInfo}
+            onSuccess={() => {
+              setUpdater(Date.now());
+            }}
+          />
           <InviteCodePanel
             onInviteCodeClick={() => {
               handleReport('invite');

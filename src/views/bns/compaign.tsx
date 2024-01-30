@@ -36,6 +36,7 @@ import {
 import type { QueryNameStatusType } from './types';
 
 import useUserInfo from '@/hooks/useUserInfo';
+import useReport from '@/views/Landing/hooks/useReport';
 import namehash from "@ensdomains/eth-ens-namehash";
 import NetworkDialog from './components/NetworkDialog';
 import RegisterDialog from './components/RegisterDialog';
@@ -46,6 +47,7 @@ const CampaignView = () => {
   const router = useRouter()
   const compaignId = '6'
   const contract = useBnsContract()
+  const { handleReport } = useReport();
   const { chains } = useTokensAndChains()
   const { account } = useAccount();
   const { connect, connecting } = useAuth();
@@ -157,9 +159,28 @@ const CampaignView = () => {
   const handleClaim = function () {
     setShowRegisterDialg(true)
   }
+  const handleSetPrimary = function (response: any) {
+    setShowNetworkDialog(false)
+    getBnsNames()
+  }
   useEffect(() => {
     account && getBnsNames()
   }, [])
+
+  // 上报
+  useEffect(() => {
+    if (typeof router.query.click_yourname === 'string') {
+      handleReport('quest/leaderboard/DapDapXBNS?click_yourname')
+    }
+    if (typeof router.query.Your_BNS_Names === 'string') {
+      handleReport('quest/leaderboard/DapDapXBNS?Your_BNS_Names')
+    }
+    if (typeof router.query.action64 === 'string') {
+      handleReport('quest/leaderboard/DapDapXBNS?action64')
+    }
+  }, [router.query])
+
+
   return (
     <StyledWrapper style={{ paddingBottom: 120 }}>
       <Yours info={userInfo} />
@@ -231,6 +252,7 @@ const CampaignView = () => {
           setBnsName={setCurrentBnsName}
           currentChain={currentChain}
           setChain={setChain}
+          onSetPrimary={handleSetPrimary}
           onClose={() => setShowNetworkDialog(false)}
         />
       )}

@@ -2,7 +2,7 @@ import { scroll } from '@/config/tokens/scroll';
 
 const basic = {
   name: 'Skydrome',
-  logo: '/images/apps/',
+  logo: '/images/apps/skydrome.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ChronosV1AmountOut',
 };
 const networks = {
