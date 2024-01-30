@@ -35,6 +35,14 @@ export const polygonZkevm: { [key: string]: Token } = {
     name: 'Wrapped Ether',
     icon: 'https://ipfs.near.social/ipfs/bafkreihyzmiuawyekwiyofkzm25xzrrfenhvadi6lb42juvq7tah2u7ha4',
   },
+  reth: {
+    chainId: CHAIN_ID,
+    address: '0xb23c20efce6e24acca0cef9b7b7aa196b84ec942',
+    decimals: 18,
+    symbol: 'rETH',
+    name: 'Rocket Pool ETH ',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihj6luje2jnxayh7dkezzuwrsnxtcppwotecgf235p5tyta6vzdty',
+  },
   wbtc: {
     chainId: CHAIN_ID,
     address: '0xea034fb02eb1808c2cc3adbc15f447b93cbe08e1',

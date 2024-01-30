@@ -1,9 +1,10 @@
-import { useEffect, useState } from 'react';
-import { lifi, getLifiTokens } from './useLifi';
 import type { Token as LiFiToken, TokenAmount } from '@lifi/sdk';
-import type { Token } from '../types';
+import { useEffect, useState } from 'react';
 
 import useAccount from '@/hooks/useAccount';
+
+import type { Token } from '../types';
+import { getLifiTokens, lifi } from './useLifi';
 
 export default function useTokenBalance({ tokensByChain }: { tokensByChain?: Token }) {
   const [loading, setLoading] = useState<boolean>(false);
