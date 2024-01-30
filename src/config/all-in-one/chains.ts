@@ -43,4 +43,38 @@ const popupsData: {
   scroll,
 };
 
+export const PathToId: { [key: string]: number } = {
+  optimism: 13,
+  bsc: 12,
+  gnosis: 11,
+  polygon: 10,
+  zksync: 9,
+  metis: 8,
+  'polygon-zkevm': 3,
+  mantle: 7,
+  base: 6,
+  arbitrum: 2,
+  avalanche: 5,
+  linea: 4,
+  manta: 15,
+  scroll: 17,
+};
+
+export const IdToPath: { [key: string]: string } = {
+  13: 'optimism',
+  12: 'bsc',
+  11: 'gnosis',
+  10: 'polygon',
+  9: 'zksync',
+  8: 'metis',
+  3: 'polygon-zkevm',
+  7: 'mantle',
+  6: 'base',
+  2: 'arbitrum',
+  5: 'avalanche',
+  4: 'linea',
+  15: 'manta',
+  17: 'scroll',
+};
+
 export default popupsData;

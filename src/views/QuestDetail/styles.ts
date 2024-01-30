@@ -7,6 +7,7 @@ export const StyledContainer = styled.div`
   --onboarding-color: #787dff;
   --social-color: #aad6ff;
   --engage-color: #f4ca79;
+  padding-top: 50px;
   padding-bottom: 100px;
 `;
 

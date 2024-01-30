@@ -9,18 +9,14 @@ const StyledContainer = styled.div`
   bottom: 10px;
   left: 0;
   display: flex;
+  justify-content: center;
+  align-items: center;
   color: rgba(151, 154, 190, 1);
   font-size: 14px;
   font-weight: 400;
-  padding: 0 2%;
+  padding: 0 36px;
   height: 60px;
-  .footer-item {
-    flex: 1;
-    text-align: center;
-  }
-  .footer-left {
-    text-align: left;
-  }
+
   .footer-right {
     text-align: right;
   }
@@ -35,6 +31,12 @@ const StyledSocialButton = styled(motion.div)`
   border: none;
   background-color: transparent;
   cursor: pointer;
+`;
+const StyledFooterLeft = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-grow: 1;
 `;
 
 const SocialButton = ({ src, alt, url }: { src: string; alt: string; url?: string }) => {
@@ -54,38 +56,35 @@ const SocialButton = ({ src, alt, url }: { src: string; alt: string; url?: strin
 };
 const Footer = () => {
   const router = useRouter();
-  const pathName = router.pathname;
   return (
     <StyledContainer>
-      <div className="footer-item">
-        <div>Made with ❤️ by DapDap team.</div>
+      <StyledFooterLeft>
+        <div>Created by DapDap team with ❤️ </div>
         <div>Bulit on BOS & NEAR Protocol</div>
-      </div>
-      <div className="footer-item footer-center">
         <StyledSocials>
           <SocialButton
             src="https://assets.dapdap.net/images/bafkreic2ou5l3zhdefbhswd6jomuhzmvyu5oqpbom3d3vo3djoeywxmyay.svg"
             alt="X"
             url="https://twitter.com/DapDapMeUp"
           />
-          <SocialButton
+          {/* <SocialButton
             src="https://assets.dapdap.net/images/bafkreibaof45e2fwgaphbengfh5molv6dwjkcp4zrwkixyqm3mrc3x7jhm.svg"
             alt="X"
             url="Telegram"
-          />
+          /> */}
           <SocialButton
             src="https://assets.dapdap.net/images/bafkreif3gh6hszingmncy6kg3en6xoumceepw4ys3dq3dbjd7rkn7zfb74.svg"
             alt="X"
             url="Discord"
           />
-          <SocialButton
+          {/* <SocialButton
             src="https://assets.dapdap.net/images/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm.svg"
             alt="Medium"
             url=""
-          />
+          /> */}
         </StyledSocials>
-      </div>
-      <div className="footer-item">Copyright 2023 DapDap</div>
+      </StyledFooterLeft>
+      <div className="footer-right">Copyright 2024 DapDap</div>
     </StyledContainer>
   );
 };

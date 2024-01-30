@@ -9,6 +9,7 @@ import {
   JoinedAccounts,
   StyledButton,
   StyledPanel,
+  StyledPanelWrapper,
   StyledPanelContent,
   StyledPanelFriends,
   StyledPanelFriendsTitle,
@@ -21,11 +22,12 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
   const activeList = useMemo(() => list.filter((item: any) => item.status === 'Active'), [list]);
   const pendingList = useMemo(() => list.filter((item: any) => item.status === 'Pending'), [list]);
   return (
-    <StyledPanel style={{ padding: '18px 9px 8px' }}>
-      <StyledPanelHeader>
-        <div>Invited Frenz</div>
-        <div className="num">{total}</div>
-        {/* <StyledButton
+    <StyledPanelWrapper>
+      <StyledPanel style={{ padding: '18px 9px 8px' }}>
+        <StyledPanelHeader>
+          <div>Invited Frenz</div>
+          <div className="num">{total}</div>
+          {/* <StyledButton
           disabled={loading || totalRewards === 0}
           onClick={() => {
             handleClaim();
@@ -34,8 +36,8 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
           {loading && <Loading />}
           <span style={{ marginLeft: '4px' }}> Claim {totalRewards} PTS</span>
         </StyledButton> */}
-      </StyledPanelHeader>
-      {/* <StyledPanelContent>
+        </StyledPanelHeader>
+        {/* <StyledPanelContent>
         <StyledPanelFriends>
           <div>
             <StyledPanelFriendsTitle>{activeList.length} active friends</StyledPanelFriendsTitle>
@@ -75,11 +77,12 @@ const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) 
           </div>
         </StyledPanelFriends>
       </StyledPanelContent> */}
-      <StyledFriendsNum>
-        {activeList.length} Active/ {pendingList.length} Pending
-      </StyledFriendsNum>
-      <InviteCode onClick={onInviteCodeClick} />
-    </StyledPanel>
+        <StyledFriendsNum>
+          {activeList.length} Active/ {pendingList.length} Pending
+        </StyledFriendsNum>
+        <InviteCode onClick={onInviteCodeClick} />
+      </StyledPanel>
+    </StyledPanelWrapper>
   );
 };
 

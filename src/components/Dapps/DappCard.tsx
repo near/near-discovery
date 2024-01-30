@@ -72,7 +72,7 @@ const DappCard = (props: any) => {
               open({ dapp: props, from: 'home' });
             }}
           >
-            Dapp
+            dApp
           </StyledDappButton>
         </StyledDappButtons>
       </StyledDappInner>

@@ -10,7 +10,6 @@ export const StyledDapps = styled.div`
 export const StyledDapp = styled.div`
   padding: 16px 14px 0px;
   border-radius: 20px;
-  cursor: pointer;
   transition: 0.5s;
   box-sizing: border-box;
   width: 30%;
@@ -123,7 +122,8 @@ export const StyledDappButton = styled.button`
   line-height: normal;
   cursor: pointer;
   &:hover {
-    opacity: 0.9;
+    background: #ebf479;
+    color: #000;
   }
   &:active {
     opacity: 0.8;
@@ -133,5 +133,5 @@ export const StyledDappButton = styled.button`
 export const StyledDappInner = styled.div`
   display: flex;
   border-bottom: 1px solid #26282f;
-  padding-bottom: 30px;
+  padding-bottom: 42px;
 `;

@@ -11,7 +11,7 @@ import Quests from './components/Quests';
 import Tabs from './components/Tabs';
 import UserInfo from './components/UserInfo';
 import useInviteList from './hooks/useInviteList';
-import { StyledContainer, StyledPanelWrapper, StyledTabsBox } from './styles';
+import { StyledContainer, StyledPanelWrapper, StyledTabsBox, StyledBgImg } from './styles';
 import type { Tab } from './types';
 
 const QuestProfileView = () => {
@@ -61,6 +61,7 @@ const QuestProfileView = () => {
         {tab === 'favorites' && <Favorites key={updater} />}
         {tab === 'pts' && <Pts key={updater} />}
       </StyledContainer>
+      <StyledBgImg />
       <InviteFirendsModal
         open={openCodes}
         list={list}

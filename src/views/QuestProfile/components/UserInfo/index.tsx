@@ -55,6 +55,7 @@ const UserInfo = ({ info, onSuccess }: any) => {
         </StyledLabelsWrapper>
       </StyledContent>
       <StyledBg />
+
       <StyledSmallCircle />
       <StyledBigCircle />
     </StyledContainer>

@@ -3,11 +3,14 @@ import styled from 'styled-components';
 export const StyledContainer = styled.div`
   width: 1244px;
   max-width: 100%;
-  padding-bottom: 100px;
   margin: 0 auto;
   --onboarding-color: #787dff;
   --social-color: #aad6ff;
   --engage-color: #f4ca79;
+  position: relative;
+  padding-top: 130px;
+  padding-bottom: 100px;
+  z-index: 5;
 `;
 
 export const StyledFavorite = styled.div<{ $size: number }>`
@@ -36,6 +39,7 @@ export const StyledSteps = styled.div<{ $size: number }>`
 
 export const StyledTabsBox = styled.div`
   position: relative;
+  margin-top: 84px;
 `;
 
 export const LoadingWrapper = styled.div`
@@ -63,6 +67,8 @@ export const StyledPanelWrapper = styled.div`
   align-items: center;
   gap: 24px;
   margin-top: 20px;
+  position: relative;
+  z-index: 5;
 `;
 
 export const StyledButton = styled.button`
@@ -86,4 +92,16 @@ export const StyledButton = styled.button`
     background: #7c7f96;
     opacity: 0.5;
   }
+`;
+
+export const StyledBgImg = styled.div`
+  background-image: url(/images/profile/top_bg.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100vw;
+  height: 450px;
+  position: absolute;
+  top: -80px;
+  left: 0px;
+  z-index: 1;
 `;

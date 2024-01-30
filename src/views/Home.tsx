@@ -4,8 +4,7 @@
 import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import popupsData from '@/config/all-in-one/chains';
+import popupsData, { IdToPath } from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -1037,7 +1036,7 @@ const HomeContent: NextPageWithLayout = () => {
             {networkList &&
               networkList.slice(0, 9).map((child, index) => (
                 <div className="layer-list-item" key={index}>
-                  <Link href={`/chains-details?id=${child.id}`}>
+                  <Link href={`/network/${IdToPath[child.id]}`}>
                     <img src={child.logo} alt="" />
                     <h1>{child.name}</h1>
                     {/* <Gold>

@@ -4,6 +4,7 @@ import Empty from '@/components/Empty';
 import { useDebounceFn } from 'ahooks';
 import { get } from '@/utils/http';
 import { QUEST_PATH } from '@/config/quest';
+import { IdToPath } from '@/config/all-in-one/chains';
 import ResultItem from './ResultItem';
 import { StyledSearchResults } from './styles';
 
@@ -60,7 +61,7 @@ const DropdownSearchResultPanel = ({ searchText, setSearchContent, show }: any) 
             loading={loading}
             items={searchResults?.networks}
             onClick={(item: any) => {
-              router.push(`/chains-details?id=${item.id}`);
+              router.push(`/network/${IdToPath[item.id]}`);
               setSearchContent('');
             }}
           />
