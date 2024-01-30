@@ -5,7 +5,6 @@ import { NextResponse } from 'next/server';
 export function middleware(request: NextRequest) {
   const AUTHED_ACCOUNT = request.cookies.get('AUTHED_ACCOUNT');
   const LOGIN_ACCOUNT = request.cookies.get('LOGIN_ACCOUNT');
-  console.log('LOGIN_ACCOUNT', LOGIN_ACCOUNT);
   if (!LOGIN_ACCOUNT) {
     return NextResponse.redirect(new URL(`/login?source=/`, request.url));
   }

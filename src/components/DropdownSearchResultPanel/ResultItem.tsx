@@ -23,6 +23,7 @@ const ResultItem = ({ title, loading, items, onClick }: any) => {
       {items &&
         (showAll ? items : items.slice(0, 5)).map((item: any, index: number) => (
           <StyledResultItem
+            key={item.name + index}
             onClick={(item) => {
               onClick(item);
             }}
