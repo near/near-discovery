@@ -277,9 +277,8 @@ const BlockchainsColumn: NextPageWithLayout = () => {
     };
     const fetchAdvertiseasync = async () => {
       try {
-        const response = await fetch(`${QUEST_PATH}/api/ad?category=networks`);
-        const data = await response.json();
-        setAdvertise(data.data[0]);
+        const response = await get(`${QUEST_PATH}/api/ad?category=networks`);
+        setAdvertise(response.data[0]);
       } catch (error) {
         console.error('Error fetching data:', error);
       }

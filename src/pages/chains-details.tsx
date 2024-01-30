@@ -526,9 +526,8 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     const fetchData = async () => {
       if (id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/network?id=${id}`);
-          const data = await response.json();
-          setData(data.data);
+          const response = await get(`${QUEST_PATH}/api/network?id=${id}`);
+          setData(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -537,9 +536,8 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     const fetchhotDappsData = async () => {
       if (id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp/hot_list?network_id=${id}&size=9`);
-          const data = await response.json();
-          setHotDapps(data.data);
+          const response = await get(`${QUEST_PATH}/api/dapp/hot_list?network_id=${id}&size=9`);
+          setHotDapps(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -548,11 +546,10 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     const fetchActivities = async () => {
       if (id) {
         try {
-          const response = await fetch(
+          const response = await get(
             `${QUEST_PATH}/api/action/get-popular-actions-by-network?network_id=${id}&page=1&page_size=10`,
           );
-          const data = await response.json();
-          setActivities(data.data?.data);
+          setActivities(response.data?.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -561,9 +558,8 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
     const fetchAdvertiseasync = async () => {
       if (id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/ad?category=network&category_id=${id}`);
-          const data = await response.json();
-          setAdvertise(data.data[0]);
+          const response = await get(`${QUEST_PATH}/api/ad?category=network&category_id=${id}`);
+          setAdvertise(response.data[0]);
         } catch (error) {
           console.error('Error fetching data:', error);
         }

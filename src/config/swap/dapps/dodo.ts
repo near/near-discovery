@@ -7,7 +7,6 @@ const basic = {
 };
 const networks = {
   534352: {
-    routerAddress: '0x20E77aD760eC9E922Fd2dA8847ABFbB2471B92CD',
     defaultCurrencies: {
       input: scroll['eth'],
       output: scroll['usdc'],
