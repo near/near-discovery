@@ -45,7 +45,7 @@ const Explore = ({ title, desc, items, link, loading, onLinkClick, onItemClick }
             <>
               {[1, 2].map((item) => (
                 <StyledExploreItem key={item}>
-                  <Skeleton height="24px" />
+                  <Skeleton height="24px" containerClassName="skeleton" />
                 </StyledExploreItem>
               ))}
             </>

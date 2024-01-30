@@ -34,8 +34,8 @@ const ResultItem = ({ title, loading, items, onClick }: any) => {
         ))}
       {loading && (
         <LoadingWrapper className="flex-align">
-          <Skeleton width="30px" height="30px" />
-          <Skeleton width="216px" height="18px" />
+          <Skeleton width="30px" height="30px" containerClassName="skeleton" />
+          <Skeleton width="216px" height="18px" containerClassName="skeleton" />
         </LoadingWrapper>
       )}
     </StyledResultItemContainer>
