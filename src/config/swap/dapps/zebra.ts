@@ -2,7 +2,7 @@ import { scroll } from '@/config/tokens/scroll';
 
 const basic = {
   name: 'Zebra',
-  logo: '/images/apps/',
+  logo: '/images/apps/zebra.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.RamsesV2AmountOut',
 };
 const networks = {

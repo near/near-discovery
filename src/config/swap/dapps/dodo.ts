@@ -2,7 +2,7 @@ import { scroll } from '@/config/tokens/scroll';
 
 const basic = {
   name: 'DODO',
-  logo: '/images/apps/',
+  logo: '/images/apps/dodo.png',
   amountOutFn: 'bluebiu.near/widget/Swap.Data.DodoAmountOut',
 };
 const networks = {

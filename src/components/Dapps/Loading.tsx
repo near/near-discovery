@@ -17,10 +17,9 @@ const LoadingCard = () => {
   );
 };
 
-const LoadingDapps = ({ length }: any) => {
-  console.log('length', length, new Array(length || 0));
+const LoadingDapps = ({ length, style }: any) => {
   return (
-    <StyledDapps>
+    <StyledDapps style={style}>
       {new Array(length || 0).fill('1').map((dapp: any, index: number) => (
         <LoadingCard key={index} />
       ))}
