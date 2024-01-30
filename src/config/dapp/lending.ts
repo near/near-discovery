@@ -351,10 +351,10 @@ const ROUTE_CONFIG = {
       '--repay-bg-hover-color': '',
     },
   },
-  aave: {
+  'gravita-protocol': {
     type: 'lending',
     theme: {
-      '--switch-color': '',
+      '--switch-color': '#D079FF',
       '--button-text-color': '',
       '--supply-color': '',
       '--yours-table-title': '',
@@ -362,8 +362,8 @@ const ROUTE_CONFIG = {
       '--withdraw-bg-color': '',
       '--withdraw-border-color': '',
       '--withdraw-bg-hover-color': '',
-      '--repay-bg-color': '',
-      '--repay-border-color': '',
+      '--repay-bg-color': '#D079FF',
+      '--repay-border-color': '#D079FF',
       '--repay-bg-hover-color': '',
     },
   },

@@ -299,4 +299,12 @@ export const arbitrum: { [key: string]: Token } = {
     name: 'MAGIC',
     icon: 'https://ipfs.near.social/ipfs/bafkreif7syzj3bk2mudrsxglwfgkb4tkd63yw3tit773he5sc2l5jsmb74',
   },
+  sfrxETH: {
+    chainId: CHAIN_ID,
+    address: '0x95ab45875cffdba1e5f451b950bc2e42c0053f39',
+    decimals: 18,
+    symbol: 'sfrxETH',
+    name: 'Staked Frax Ether',
+    icon: 'https://ipfs.near.social/ipfs/bafkreiaq5taf3cuvvqar5qbqpqzbj5ys2xx2skgstbaorxgxchtswispmi',
+  },
 };
