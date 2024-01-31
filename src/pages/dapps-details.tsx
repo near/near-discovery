@@ -132,7 +132,8 @@ const DappsDetailsContent = styled.div`
   display: flex;
   padding: 100px 12%;
   .left-side-substance {
-    width: 70%;
+    /* width: 70%; */
+    flex: 1;
     margin-right: 86px;
     p {
       font-size: 14px;
@@ -210,10 +211,11 @@ const DappsDetailsContent = styled.div`
     }
   }
   .right-side-substance {
-    width: 36%;
+    width: 416px;
     .right-side-item {
       text-decoration: none;
-      width: auto;
+      /* width: auto; */
+      height: 196px;
       border: 1px solid rgba(55, 58, 83, 1);
       background: rgb(44, 46, 62);
       border-radius: 20px;
@@ -233,6 +235,10 @@ const DappsDetailsContent = styled.div`
       .side-item-text {
         width: 60%;
         h1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
           font-family: Gantari;
           font-size: 18px;
           font-weight: 700;
@@ -240,9 +246,9 @@ const DappsDetailsContent = styled.div`
         }
         p {
           display: -webkit-box;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
-          height: 72px;
+          /* height: 72px; */
           overflow: hidden;
           font-family: Gantari;
           font-size: 15px;
@@ -253,9 +259,9 @@ const DappsDetailsContent = styled.div`
           display: flex;
           gap: 8px;
           margin-top: 11px;
-          @media (max-width: 1600px) {
+          /* @media (max-width: 1600px) {
             display: grid;
-          }
+          } */
         }
       }
     }
