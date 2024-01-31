@@ -3,6 +3,7 @@ export default {
   path: 'bsc',
   icon: 'https://assets.dapdap.net/images/bafkreiczurnr4ai5epzfovu4btugbrfsoc57d42wnz22kdjmogz3ewfgcm.svg',
   bgColor: '#FFBF19',
+  bgIcon: '/images/chains/bnb_white.svg',
   selectBgColor: '#FFBF19',
   chainId: 56,
   rpcUrls: ['https://binance.llamarpc.com'],

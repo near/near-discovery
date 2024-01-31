@@ -3,6 +3,7 @@ export default {
   path: 'polygon-zkevm',
   icon: 'https://assets.dapdap.net/images/bafkreielam3balduseacp3gulszhxiwzf7hcyoaau6goxdwgsavqfou5hi.svg',
   bgColor: '#A55FFF',
+  bgIcon: '/images/chains/polygon_zkevm_white.svg',
   selectBgColor: '#A55FFF',
   chainId: 1101,
   rpcUrls: ['https://zkevm-rpc.com'],

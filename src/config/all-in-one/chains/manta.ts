@@ -3,6 +3,7 @@ export default {
   path: 'manta',
   icon: '/images/chains/manta.svg',
   bgColor: '#fff',
+  bgIcon: '/images/chains/manta_white.svg',
   selectBgColor: '#35bde3',
   chainId: 169,
   rpcUrls: ['https://1rpc.io/manta'],
