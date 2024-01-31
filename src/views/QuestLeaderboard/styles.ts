@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+export const StyledWrapper = styled.div`
+  padding-top: 50px;
+`;
 export const StyledContainer = styled.div`
   width: 1244px;
   max-width: 100%;

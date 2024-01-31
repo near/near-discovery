@@ -3,8 +3,7 @@ import styled from 'styled-components';
 
 export { StyledTitle, StyledCoin } from '../../styles';
 
-export const StyledCampaipnsContainer = styled.div`
-  height: 222px;
+export const StyledCampaignsContainer = styled.div`
 `;
 
 export const LoadingWrapper = styled.div`
@@ -14,17 +13,21 @@ export const LoadingWrapper = styled.div`
   height: 222px;
 `;
 
-export const StyledCampaipnContainer = styled.div`
-  margin-top: 33px;
-  border-radius: 32px;
-  background: radial-gradient(100% 100% at 0% 0%, #ae92ff 0%, #6d2df3 100%);
-  padding: 30px 30px 26px;
-  height: 222px;
-  box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+export const StyledCampaignContainer = styled.div`
+  background: radial-gradient(100% 100% at 0% 0%, #AE92FF 0%, #6D2DF3 100%);
+  height: 254px;
 `;
+
+export const StyledCampaign = styled.div`
+  padding: 30px 30px 20px;
+  width: 1244px;
+  max-width: 100%;
+  margin: 0 auto;
+  padding-bottom: 100px;
+  --onboarding-color: #787dff;
+  --social-color: #aad6ff;
+  --engage-color: #f4ca79;
+`
 
 export const StyledBox = styled.div`
   display: flex;
@@ -35,11 +38,11 @@ export const StyledBox = styled.div`
 
 export const StyledHeader = styled.div`
   display: flex;
-  align-items: center;
-  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
 `;
 
-export const StyledHeartBox = styled(motion.div)<{ $active?: boolean }>`
+export const StyledHeartBox = styled(motion.div) <{ $active?: boolean }>`
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(0, 0, 0, 0.3);
@@ -65,11 +68,10 @@ export const StyledDesc = styled.div`
 `;
 
 export const StyledTags = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+  margin-top: 18px;
 `;
+export const StyledWrapper = styled.div`
+`
 
 export const StyledTag = styled.div`
   border-radius: 16px;

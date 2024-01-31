@@ -2,7 +2,7 @@ import { avalanche } from '@/config/tokens/avalanche';
 
 const basic = {
   name: 'Benqi',
-  icon: 'https://ipfs.near.social/ipfs/bafkreifgik7lollci7ejl72mlej2cdpvanjnyoiihu7pqpppqsa75thyem',
+  icon: '/images/apps/benqi.png',
   data: 'bluebiu.near/widget/Lending.Data.Benqi',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
   handlerClaim: 'bluebiu.near/widget/Avalanche.Lending.BenqiClaimHandler',

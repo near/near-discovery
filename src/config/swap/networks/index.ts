@@ -10,6 +10,8 @@ import optimism from './optimism';
 import polygon from './polygon';
 import zkSync from './zkSync';
 import polygonZkevm from './polygon-zkevm';
+import manta from './manta';
+import scroll from './scroll';
 
 export default {
   42161: arbitrum,
@@ -24,4 +26,6 @@ export default {
   137: polygon,
   324: zkSync,
   1101: polygonZkevm,
+  169: manta,
+  534352: scroll,
 } as { [key: number]: any };

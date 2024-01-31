@@ -56,6 +56,7 @@ type NetworkComponents = {
   avalanche: string;
   optimism: string;
   uniswap: string;
+  manta?: string;
 };
 
 export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefined> = {
@@ -172,6 +173,7 @@ export const componentsByNetworkId: Record<NetworkId, NetworkComponents | undefi
     zkSync: 'bluebiu.near/widget/zkSync.All-in-one',
     avalanche: 'bluebiu.near/widget/Avalanche.All-in-one',
     optimism: 'bluebiu.near/widget/Optimism.All-in-one',
+    manta: 'bluebiu.near/widget/All-in-one',
     uniswap: 'dapdapbos.near/widget/Uniswap.Swap.Dex',
   },
 };

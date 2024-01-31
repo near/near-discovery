@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { memo, useMemo } from 'react';
-
+import useDappOpen from '@/hooks/useDappOpen';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 import {
@@ -15,11 +15,15 @@ import {
   StyledDappTags,
   StyledDappTitle,
   StyledHeader,
+  StyledDappInner,
 } from './styles';
 
-const FavoriteDapp = ({ name, description, route, logo, category_ids, id }: any) => {
+const DappCard = (props: any) => {
+  const { name, description, route, logo, category_ids, id } = props;
+
   const router = useRouter();
   const { categories } = useCategoryDappList();
+  const { open } = useDappOpen();
 
   const categoryNames = useMemo(() => {
     const names: { id: number; name: string }[] = [];
@@ -36,45 +40,47 @@ const FavoriteDapp = ({ name, description, route, logo, category_ids, id }: any)
   }, [categories]);
   return (
     <StyledDapp>
-      <StyledDappIcon src={logo} />
-      <StyledDappInfo>
-        <StyledHeader>
-          <StyledDappTitle>{name}</StyledDappTitle>
-          {/* <StyledDappCoins>
+      <StyledDappInner>
+        <StyledDappIcon src={logo} />
+        <StyledDappInfo>
+          <StyledHeader>
+            <StyledDappTitle>{name}</StyledDappTitle>
+            {/* <StyledDappCoins>
             {Coin}
             <span>10</span>
           </StyledDappCoins> */}
-        </StyledHeader>
-        <StyledDappDesc>{description}</StyledDappDesc>
-        <StyledDappTags>
-          {categoryNames.map((category: any) => (
-            <StyledDappTag className={category.name} key={category.id}>
-              {category.name}
-            </StyledDappTag>
-          ))}
-        </StyledDappTags>
-      </StyledDappInfo>
-      <StyledDappButtons>
-        <StyledDappButton
-          onClick={() => {
-            router.push(`/dapps-details?dapp_id=${id}`);
-          }}
-        >
-          Detail
-        </StyledDappButton>
-        <StyledDappButton
-          onClick={() => {
-            route && router.push(route);
-          }}
-        >
-          Dapp
-        </StyledDappButton>
-      </StyledDappButtons>
+          </StyledHeader>
+          <StyledDappDesc>{description}</StyledDappDesc>
+          <StyledDappTags>
+            {categoryNames.map((category: any) => (
+              <StyledDappTag className={category.name} key={category.id}>
+                {category.name}
+              </StyledDappTag>
+            ))}
+          </StyledDappTags>
+        </StyledDappInfo>
+        <StyledDappButtons>
+          <StyledDappButton
+            onClick={() => {
+              router.push(`/dapps-details?dapp_id=${id}`);
+            }}
+          >
+            Detail
+          </StyledDappButton>
+          <StyledDappButton
+            onClick={() => {
+              open({ dapp: props, from: 'home' });
+            }}
+          >
+            dApp
+          </StyledDappButton>
+        </StyledDappButtons>
+      </StyledDappInner>
     </StyledDapp>
   );
 };
 
-export default memo(FavoriteDapp);
+export default memo(DappCard);
 
 export const Coin = (
   <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none">

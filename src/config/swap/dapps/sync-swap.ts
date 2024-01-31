@@ -1,9 +1,10 @@
 import { linea } from '@/config/tokens/linea';
 import { zkSync } from '@/config/tokens/zkSync';
+import { scroll } from '@/config/tokens/scroll';
 
 const basic = {
   name: 'Syncswap',
-  logo: 'https://ipfs.near.social/ipfs/bafkreiemiwcf4pvz6ijo7tcxfobp5oftqj5mf7vszse33ziud3walq4pqy',
+  logo: '/images/apps/sync-swap.png',
   amountOutFn: 'bluebiu.near/widget/Linea.Swap.SyncSwapAmountOut',
 };
 const networks = {
@@ -46,6 +47,26 @@ const networks = {
       zkSync['dvf'],
       zkSync['lusd'],
       zkSync['reth'],
+    ],
+  },
+  534352: {
+    classicPoolAddres: '0x37BAc764494c8db4e54BDE72f6965beA9fa0AC2d',
+    stablePoolAddress: '0xE4CF807E351b56720B17A59094179e7Ed9dD3727',
+    routerAddress: '0x80e38291e06339d10AAB483C65695D004dBD5C69',
+    defaultCurrencies: {
+      input: scroll['eth'],
+      output: scroll['usdc'],
+    },
+    tokens: [
+      scroll['eth'],
+      scroll['weth'],
+      scroll['usdt'],
+      scroll['dai'],
+      scroll['wbtc'],
+      scroll['usdc'],
+      scroll['wsteth'],
+      scroll['lusd'],
+      scroll['reth'],
     ],
   },
 };

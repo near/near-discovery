@@ -1,5 +1,5 @@
 import { useRouter } from 'next/navigation';
-import { memo, useEffect, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 import Loading from '@/components/Icons/Loading';
 import Spinner from '@/components/Spinner';
@@ -40,14 +40,26 @@ const LandingView = () => {
   const [success, setSuccess] = useState(false);
   const { loading: infoLoading, info } = useQuestInfo('', 'landing');
   const { handleReport } = useReport();
+  const videoRef = useRef<HTMLVideoElement>(null);
   useEffect(() => {
-    if (step < 2) return;
+    if (step === 1) return;
+    if (step === 2) {
+      setContinuable(false);
+      return;
+    }
     setContinuable(true);
   }, [step]);
 
   useEffect(() => {
-    if (info?.quest) {
-      setStep(info.quest.action_completed || 1);
+    if (info?.actions) {
+      // let _step = 0;
+      // info.actions.forEach((action: any) => {
+      //   if (action.status === 'completed') {
+      //     _step++;
+      //   }
+      // });
+      // setStep(_step + 1 || 1);
+      setStep(2);
     }
   }, [info]);
   return (
@@ -131,7 +143,7 @@ const LandingView = () => {
                 </StyledSkipButton>
               </StyledButtons>
             </StyledLeftPanel>
-            {step === 1 ? (
+            {step === 1 && (
               <div style={{ width: '500px' }}>
                 <Bridge
                   onSuccess={() => {
@@ -140,7 +152,23 @@ const LandingView = () => {
                   }}
                 />
               </div>
-            ) : (
+            )}
+            {step === 2 && (
+              <StyledRightPanel>
+                <video
+                  controls
+                  autoPlay
+                  width="700"
+                  ref={videoRef}
+                  onEnded={() => {
+                    setContinuable(true);
+                  }}
+                >
+                  <source src="/landing-test.mp4" type="video/mp4" />
+                </video>
+              </StyledRightPanel>
+            )}
+            {step > 2 && (
               <StyledRightPanel>
                 <StyledRightImg src={bgs[step]} />
               </StyledRightPanel>

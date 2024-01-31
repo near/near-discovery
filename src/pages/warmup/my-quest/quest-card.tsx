@@ -52,7 +52,7 @@ const QuestCardWrapper = styled.div`
     align-items: center;
     justify-content: center;
     /* padding: 4px; */
-    width: 259px;
+    width: 240px;
     border: 1px solid transparent;
     position: relative;
     cursor: pointer;
@@ -76,10 +76,12 @@ const QuestCardWrapper = styled.div`
         transform: translateX(-50%);
         gap: 4px;
         white-space: nowrap;
+        font-size: 13px;
+        color: #000;
 
         .quest-card-name-icon {
-          width: 26px;
-          height: 26px;
+          width: 20px;
+          height: 20px;
           border-radius: 8px;
         }
       }
@@ -263,7 +265,7 @@ const QuestCardWrapper = styled.div`
     letter-spacing: 0em;
     text-align: left;
     color: #979abe;
-    width: 250px;
+    width: 240px;
 
     padding: 8px 12px;
 

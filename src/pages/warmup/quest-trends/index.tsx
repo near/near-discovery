@@ -10,7 +10,7 @@ const QuestTrendsPage = styled.div`
   display: flex;
   -webkit-box-align: center;
   align-items: center;
-  gap: 32px;
+  gap: 17px;
   flex-wrap: wrap;
   a {
     text-decoration: none;
@@ -18,7 +18,7 @@ const QuestTrendsPage = styled.div`
 
   .trend-card {
     cursor: pointer;
-    width: 250px;
+    width: 240px;
     border-radius: 18px;
     display: flex;
     align-items: center;
@@ -96,7 +96,7 @@ const QuestTrendsPage = styled.div`
     letter-spacing: 0em;
     text-align: left;
     color: #5e617e;
-    width: 250px;
+    width: 240px;
     padding: 8px 12px;
     display: flex;
     justify-content: space-between;

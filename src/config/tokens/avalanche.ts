@@ -123,4 +123,20 @@ export const avalanche: { [key: string]: Token } = {
     name: 'Avalaunch',
     icon: 'https://ipfs.near.social/ipfs/bafkreiaxodsgromeeaihu44fazsxdopkrqvinqzhyfxvx5mrbcmduqdfpq',
   },
+  phar: {
+    chainId: CHAIN_ID,
+    address: '0xaaab9d12a30504559b0c5a9a5977fee4a6081c6b',
+    decimals: 18,
+    symbol: 'PHAR',
+    name: 'PHARAOH',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibmhma6xbsypqfytcuvfsntksowzw4omkrthtu5wbpvohvyw4rqlq',
+  },
+  mim: {
+    chainId: CHAIN_ID,
+    address: '0x130966628846bfd36ff31a822705796e8cb8c18d',
+    decimals: 18,
+    symbol: 'MIM',
+    name: 'Magic Internet Money',
+    icon: 'https://ipfs.near.social/ipfs/bafkreib435margnveti57fw3puzvlw5jr6kmzgbmxn5gju37up2h4e6as4',
+  },
 };

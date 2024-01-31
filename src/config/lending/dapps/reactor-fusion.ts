@@ -2,7 +2,7 @@ import { zkSync } from '@/config/tokens/zkSync';
 
 const basic = {
   name: 'Reactorfusion',
-  icon: 'https://ipfs.near.social/ipfs/bafkreidyqr2ytwxudwgj4xwuux67l6k2ulmkvmhrsh2egk65iye2yzyexy',
+  icon: '/images/apps/reactorfusion.png',
   data: 'bluebiu.near/widget/Lending.Data.Reactorfusion',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
 };

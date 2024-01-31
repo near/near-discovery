@@ -4,7 +4,7 @@ import { polygon } from '@/config/tokens/polygon';
 
 const basic = {
   name: 'C.R.E.A.M.',
-  icon: 'https://ipfs.near.social/ipfs/bafkreihxqzhzavb7onnxjtin2y6s7pj3y4nxb6ul42cknregyykfu24ovm',
+  icon: '/images/apps/cream.png',
   data: 'bluebiu.near/widget/Lending.Data.Cream',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
 };

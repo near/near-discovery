@@ -1,8 +1,11 @@
 import { memo, useMemo, useState } from 'react';
 
+import AccountSider from '@/components/AccountSider';
+import { DesktopNavigationTop } from '@/components/navigation/desktop/DesktopNavigationTop';
 import useCampaignList from '@/views/Quest/hooks/useCampaignList';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useQuestList from '@/views/Quest/hooks/useQuestList';
+import Breadcrumb from '@/components/Breadcrumb';
 
 import useUserInfo from '../../hooks/useUserInfo';
 import Yours from '../Quest/components/Yours';
@@ -11,10 +14,10 @@ import Quests from './components/Quests';
 import Swiper from './components/Swiper';
 import Tabs from './components/Tabs';
 import useLeaderboard from './hooks/useLeaderboard';
-import { StyledContainer } from './styles';
+import { StyledWrapper, StyledContainer } from './styles';
 import type { Tab } from './types';
 
-const QuestLeaderboardView = () => {
+const QuestLeaderboardView = (props: any) => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
   const [updater, setUpdater] = useState(1);
@@ -31,35 +34,14 @@ const QuestLeaderboardView = () => {
   }, [campaigns]);
 
   return (
-    <StyledContainer>
-      <Yours info={userInfo} />
-      {!!banners.length && <Swiper banners={banners} />}
-      <Tabs
-        current={tab}
-        onChange={(_tab) => {
-          setTab(_tab);
-        }}
-      />
-
-      {tab === 'leaderboard' && (
-        <Leaderboard
-          id={id}
-          {...{
-            loading,
-            list,
-            page,
-            info,
-            maxPage,
-            handlePageChange,
-            userLoading,
-            userInfo,
-            handleRefresh: () => {
-              handleRefresh();
-              setUpdater(Date.now());
-            },
-          }}
-        />
-      )}
+    <StyledWrapper>
+      <DesktopNavigationTop />
+      <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
+        <Breadcrumb navs={[
+          { name: 'Quest', path: '/quest/leaderboard' },
+          { name: 'DapDap Web3 Adventure', path: '/quest/leaderboard/DapDapWeb3Adventure' },
+        ]} />
+      </StyledContainer>
       {tab === 'quests' && (
         <Quests
           id={id}
@@ -69,7 +51,9 @@ const QuestLeaderboardView = () => {
           }}
         />
       )}
-    </StyledContainer>
+      <AccountSider />
+      <Yours info={userInfo} />
+    </StyledWrapper>
   );
 };
 

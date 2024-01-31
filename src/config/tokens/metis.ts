@@ -109,4 +109,12 @@ export const metis: { [key: string]: Token } = {
     name: 'WBTC Token',
     icon: 'https://ipfs.near.social/ipfs/bafkreigdklwcldjo4w7viyrym54hdb43wgpv23mbicetszygzapttbgo7q',
   },
+  hermes: {
+    chainId: CHAIN_ID,
+    address: '0xb27BbeaACA2C00d6258C3118BAB6b5B6975161c8',
+    decimals: 18,
+    symbol: 'HERMES',
+    name: 'Hermes',
+    icon: 'https://ipfs.near.social/ipfs/bafybeiamt2iuucwebbklhvmq5dz3hir63u3ovkvusbuz3k2wpsiwhulnzy',
+  },
 };

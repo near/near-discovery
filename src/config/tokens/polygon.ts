@@ -147,8 +147,8 @@ export const polygon: { [key: string]: Token } = {
     chainId: CHAIN_ID,
     address: '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
     decimals: 6,
-    symbol: 'USDC',
-    name: 'USD Coin',
+    symbol: 'USDC.e',
+    name: 'USD Coin (PoS)',
     icon: 'https://assets.coingecko.com/coins/images/6319/small/USD_Coin_icon.png?1547042389',
   },
 
@@ -184,5 +184,21 @@ export const polygon: { [key: string]: Token } = {
     symbol: 'LINK',
     name: 'ChainLink Token',
     icon: 'https://ipfs.near.social/ipfs/bafkreidrq7qk3d6epwaxobq4gk7yowljr5tnslxwrsbd7vnw3srkt7ok3u',
+  },
+  sushi: {
+    chainId: CHAIN_ID,
+    address: '0x0b3F868E0BE5597D5DB7fEB59E1CADBb0fdDa50a',
+    decimals: 18,
+    symbol: 'SUSHI',
+    name: 'SushiToken',
+    icon: 'https://ipfs.near.social/ipfs/bafkreif5a3jne5ol2d57r2terziofqhosgl5txptv7q7bit42qt5jzoaqa',
+  },
+  crv: {
+    chainId: CHAIN_ID,
+    address: '0x172370d5Cd63279eFa6d502DAB29171933a610AF',
+    decimals: 18,
+    symbol: 'CRV',
+    name: 'Token CRV (PoS)',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihfv7kul7d6e2fxnlpalx3p7wx47ylhw7tauozhipcughshj25ehm',
   },
 };

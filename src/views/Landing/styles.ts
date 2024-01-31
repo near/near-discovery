@@ -9,6 +9,7 @@ export const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
   gap: 80px;
+  padding-top: 50px;
   max-width: 1200px;
 `;
 export const StyledLeftPanel = styled.div`

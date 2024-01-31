@@ -6,6 +6,7 @@ export { StyledMedal, StyledSteps } from '../../styles';
 
 export const StyledContainer = styled.div`
   position: relative;
+  width: 370px;
 `;
 
 export const StyledContent = styled.div`
@@ -17,10 +18,10 @@ export const StyledContent = styled.div`
 
 export const StyledBg = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   border-radius: 431px;
   opacity: 0.3;
-  background: #a55fff;
+  background: #9188ff;
   filter: blur(100px);
   width: 431px;
   height: 431px;
@@ -82,13 +83,13 @@ export const StyledAddress = styled.div`
 export const StyledLabels = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 12px;
   margin-top: 35px;
 `;
 
 export const StyledLabel = styled.div`
-  border-radius: 12px;
-  border: 1px solid rgba(235, 244, 121, 0.3);
+  border-radius: 32px;
+  border: 1px solid #373a53;
   background: #1c1d29;
   padding: 14px 20px;
   display: flex;
@@ -97,7 +98,7 @@ export const StyledLabel = styled.div`
   color: #fff;
   font-size: 14px;
   font-weight: 700;
-  height: 48px;
+  height: 40px;
   box-sizing: border-box;
 `;
 

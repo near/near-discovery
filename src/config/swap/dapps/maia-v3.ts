@@ -2,7 +2,7 @@ import { metis } from '@/config/tokens/metis';
 
 const basic = {
   name: 'Maia V3',
-  logo: 'https://ipfs.near.social/ipfs/bafkreidd6jb57eubtntolotq3f5gzmhy252d5rq2jmg6glr7nuijon3dr4',
+  logo: '/images/apps/maia.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.RamsesV2AmountOut',
 };
 const networks = {

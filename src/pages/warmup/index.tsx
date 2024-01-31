@@ -65,7 +65,7 @@ const Page = styled.div`
   width: 100%;
   gap: 28px;
   color: white;
-  padding: 0 120px 60px 120px;
+  padding: 0 96px 60px;
   background-image: url(${newUIbg});
   background-repeat: no-repeat;
   background-size: 100%;

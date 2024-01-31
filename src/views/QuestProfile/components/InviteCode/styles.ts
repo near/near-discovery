@@ -3,10 +3,12 @@ export { StyledButton } from '../../styles';
 
 export const StyledContainer = styled.div`
   position: relative;
-  width: 182px;
-  height: 52px;
+  width: 157px;
+  height: 44px;
   cursor: pointer;
   transition: 0.3s;
+  margin-top: 16px;
+
   &:hover {
     opacity: 0.9;
   }
@@ -27,8 +29,8 @@ export const StyledValue = styled.div`
   font-size: 16px;
   font-weight: 500;
   position: absolute;
-  right: 30px;
-  top: 15px;
+  right: 8px;
+  top: 10px;
   z-index: 10;
   gap: 5px;
   display: flex;
@@ -37,25 +39,27 @@ export const StyledValue = styled.div`
     font-weight: 700;
   }
 `;
-
+export const StyledPanelWrapper = styled.div`
+  background: linear-gradient(to right, #7dd3f8, #c388e7, #ffc189);
+  padding: 1px;
+  border-radius: 20px;
+`;
 export const StyledPanel = styled.div`
   border-radius: 20px;
-  border: 1px solid #21232a;
-  background: rgba(22, 24, 29, 0.5);
-  backdrop-filter: blur(3px);
+  border: 1px solid #373a53;
+  background-color: #21242a;
   padding: 20px;
-  width: 50%;
-  height: 200px;
+  width: 175px;
+  height: 175px;
   box-sizing: border-box;
+  flex-shrink: 0;
 `;
 
 export const StyledPanelHeader = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   color: #fff;
   font-size: 18px;
   font-weight: 500;
+  text-align: center;
   .num {
     color: #ebf479;
     font-size: 32px;
@@ -98,4 +102,14 @@ export const JoinedAccount = styled.img`
   width: 30px;
   height: 30px;
   margin-right: -10px;
+`;
+
+export const StyledFriendsNum = styled.div`
+  color: #979abe;
+  font-family: Gantari;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  text-align: center;
 `;

@@ -33,27 +33,22 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
           <Loading size={60} />
         </LoadingWrapper>
       ) : (
-        <>
+        <StyledListBox>
           {Object.keys(quests)
             .sort((a: any, b: any) => a - b)
             .map((key) => {
               const _quests = quests[key] as any[];
               return _quests?.length ? (
-                <div key={_quests[0].quest_category_name + Math.random()}>
-                  <StyledSubTitle style={{ color: `var(--${_quests[0].quest_category_name}-color` }}>
-                    #{_quests[0].quest_category_name}
-                  </StyledSubTitle>
-                  <StyledListBox>
-                    {_quests.map((item) => (
-                      <QuestItem quest={item} key={item.id + Math.random()} />
-                    ))}
-                  </StyledListBox>
-                </div>
+                <>
+                  {_quests.map((item) => (
+                    <QuestItem quest={item} key={item.id + Math.random()} />
+                  ))}
+                </>
               ) : (
                 <div key={Date.now()} />
               );
             })}
-        </>
+        </StyledListBox>
       )}
     </StyledContainer>
   );

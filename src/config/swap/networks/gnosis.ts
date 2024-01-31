@@ -1,4 +1,8 @@
 import { basic as honeySwapBasic, networks as honeySwapNetworks } from '../dapps/honey-swap';
+import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
+import { basic as swaprBasic, networks as swaprNetworks } from '../dapps/swapr';
+import { basic as elkBasic, networks as elkNetworks } from '../dapps/elk';
+import { basic as symmetricBasic, networks as symmetricNetworks } from '../dapps/symmetric';
 
 const CHAIN_ID = 100;
 
@@ -16,6 +20,22 @@ export default {
     Honeyswap: {
       ...honeySwapBasic,
       ...honeySwapNetworks[CHAIN_ID],
+    },
+    SushiSwap: {
+      ...sushiBasic,
+      ...sushiNetworks[CHAIN_ID],
+    },
+    Swapr: {
+      ...swaprBasic,
+      ...swaprNetworks[CHAIN_ID],
+    },
+    Elk: {
+      ...elkBasic,
+      ...elkNetworks[CHAIN_ID],
+    },
+    Symmetric: {
+      ...symmetricBasic,
+      ...symmetricNetworks[CHAIN_ID],
     },
   },
 };

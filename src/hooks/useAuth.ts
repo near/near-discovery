@@ -2,7 +2,7 @@ import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 
-import { checkAddressIsInvited, getAccessToken, insertedAccessKey } from '@/apis';
+import { checkAddressIsInvited, getAccessToken, insertedAccessKey, getBnsUserName } from '@/apis';
 import { useEthersProviderContext } from '@/data/web3';
 import * as http from '@/utils/http';
 const useAuth = () => {
@@ -16,6 +16,7 @@ const useAuth = () => {
     insertedAccessKey('');
     deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
+    deleteCookie('BNS_NAME');
     router.replace(`/login?source=/`);
   };
 
@@ -31,15 +32,24 @@ const useAuth = () => {
         setLogging(true);
         try {
           const checked = await checkAddressIsInvited(wallet.accounts[0].address);
+          const result = await getBnsUserName(wallet.accounts[0].address);
+          if (result.name) {
+            setCookie('BNS_NAME', result.name);
+          }
           if (!checked) {
             deleteCookie('AUTHED_ACCOUNT');
             router.replace('/invite-code');
             return;
           }
           await getAccessToken(wallet.accounts[0].address);
+          cb?.();
           setLogging(false);
           setCookie('AUTHED_ACCOUNT', wallet.accounts[0].address);
-          cb?.();
+          // BNS用户
+          if (getCookie('BNS_NAME')) {
+            router.replace('/bns/guide');
+            return;
+          }
         } catch (error) {
           setLogging(false);
         }

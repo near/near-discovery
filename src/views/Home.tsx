@@ -1,19 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable react/display-name */
-import axios from 'axios';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-
-import popupsData from '@/config/all-in-one/chains';
+import popupsData, { IdToPath } from '@/config/all-in-one/chains';
 import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import Dapps from '@/components/Dapps';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
-
 import useCategoryDappList from './Quest/hooks/useCategoryDappList';
 
 const blueBg = (
@@ -65,10 +62,6 @@ const deppDiveRightIcon =
   'https://assets.dapdap.net/images/bafkreihhoqvns4ydkem3mbrd52fnpsqrvdzoqqoemaizjxqur7tprzadya.svg';
 const decentralizedIcon =
   'https://assets.dapdap.net/images/bafkreibhxqbh3tlqm6cqwqmu7j6afzsc7qab743bvn43zg4klk54tvyceq.svg';
-const learningOne = 'https://assets.dapdap.net/images/bafkreigsyle3grerozvpmp42vhv3d36ny4gdc4vkgthcwefjyinvoangwy.svg';
-const learningTwo = 'https://assets.dapdap.net/images/bafybeibgwjzaepfwgtmej4dnjjvtlnbtqukkn3fkde4ufvejnc2hf4yofi.svg';
-const learningThree =
-  'https://assets.dapdap.net/images/bafkreihnl55yd5ud2nchalsgeyzy2tjq7cqw2bvp25cikxkixj55h6zyte.svg';
 
 const HomePage = styled.div`
   padding: 0 12% 80px 12%;
@@ -103,21 +96,34 @@ const Content = styled.div`
         }
         .list-item-img {
           position: absolute;
-          right: 12px;
-          top: -36px;
-          img {
+          left: 50%;
+          transform: translateX(-50%);
+
+          .img-signin {
             width: 120px;
             height: 120px;
           }
+          .img-discover {
+            width: 109px;
+            height: 96px;
+          }
+          .img-works {
+            width: 90px;
+            height: 90px;
+          }
+        }
+        &:nth-child(1) .list-item-img {
+          top: -17%;
+        }
+        &:nth-child(3) .list-item-img {
+          top: -12%;
+        }
+        &:nth-child(5) .list-item-img {
+          top: -12%;
         }
         @media (max-width: 1688px) {
           padding: 80px 30px 30px;
           margin-top: 8px;
-          .list-item-img {
-            position: absolute;
-            top: -56px;
-            right: 36%;
-          }
         }
       }
       .works-list-arrow {
@@ -149,100 +155,10 @@ const Content = styled.div`
         }
       }
     }
-
-    .tab-content {
-      /* border-bottom: 1px solid #383b48; */
-      display: flex;
-      flex-wrap: wrap;
-      position: relative;
-      margin-bottom: 100px;
-
-      .tab-content-item {
-        margin: 30px 20px 0 0;
-        border-bottom: 1px solid rgba(38, 40, 47, 1);
-        display: flex;
-        width: 30%;
-        flex-basis: calc(33.3333% - 20px);
-        box-sizing: border-box;
-        .content-item-img {
-          margin-right: 16px;
-          width: 20%;
-          img {
-            width: 72px;
-            height: 72px;
-          }
-        }
-        .content-item-text {
-          margin-right: 16px;
-          width: 49%;
-          h1 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #ffffff;
-            margin: 0;
-          }
-          p {
-            font-size: 14px;
-            color: #979abe;
-            margin: 6px 0 9px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-          }
-        }
-        .content-item-btn {
-          .item-btn-item {
-            display: inline-block;
-            text-decoration: none;
-            max-width: 78px;
-            background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-            border: 1px solid #373a53;
-            font-size: 12px;
-            color: #ffffff;
-            padding: 6px 20px;
-            text-align: center;
-            align-items: center;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            cursor: pointer;
-            a {
-              color: #ffffff;
-              text-decoration: none;
-            }
-          }
-        }
-        @media (max-width: 1500px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img {
-            width: 15%;
-          }
-          .content-item-text {
-            width: 60%;
-          }
-        }
-        @media (max-width: 1400px) {
-          flex-basis: calc(50% - 20px);
-          .content-item-img {
-            width: 15%;
-          }
-          .content-item-text {
-            width: 50%;
-          }
-        }
-        @media (max-width: 1200px) {
-          flex-basis: calc(100% - 20px);
-          .content-item-img {
-            width: 15%;
-          }
-          .content-item-text {
-            width: 70%;
-          }
-        }
-      }
-    }
   }
 
   .explore-layer-blockchains {
+    margin-top: 100px;
     .explore-layer-list {
       display: flex;
       flex-wrap: wrap;
@@ -849,15 +765,15 @@ const Carousel = React.memo(
 
 const initialLearningData = [
   {
-    icon: learningOne,
+    icon: '/images/home/learning-1.jpg',
     title: 'User Journey',
   },
   {
-    icon: learningTwo,
+    icon: '/images/home/learning-2.jpg',
     title: 'User Journey',
   },
   {
-    icon: learningThree,
+    icon: '/images/home/learning-3.jpg',
     title: 'User Journey',
   },
 ];
@@ -870,7 +786,6 @@ const HomeContent: NextPageWithLayout = () => {
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
   const { open } = useDappOpen();
-  const router = useRouter();
   const popupsDataArray = Object.values(popupsData);
   useEffect(() => {
     const fetchNetworkData = async () => {
@@ -892,7 +807,13 @@ const HomeContent: NextPageWithLayout = () => {
     const fetchNativeToken = async () => {
       try {
         const resultNativeToken = await get(`${QUEST_PATH}/api/dapp/list?tbd_token=N`);
-        setNativeToken(resultNativeToken.data?.data || []);
+        const data = resultNativeToken.data?.data.slice(0, 9) || [];
+        setNativeToken(
+          data.map((item: any) => ({
+            ...item,
+            category_ids: item.dapp_category?.map((_category: any) => _category.category_id),
+          })),
+        );
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
@@ -900,7 +821,13 @@ const HomeContent: NextPageWithLayout = () => {
     const fetchTokenTBD = async () => {
       try {
         const resultTokenTBD = await get(`${QUEST_PATH}/api/dapp/list?tbd_token=Y`);
-        setTokenTBD(resultTokenTBD.data?.data || []);
+        const data = resultTokenTBD.data?.data.slice(0, 9) || [];
+        setTokenTBD(
+          data.map((item: any) => ({
+            ...item,
+            category_ids: item.dapp_category?.map((_category: any) => _category.category_id),
+          })),
+        );
       } catch (error) {
         console.error('Error fetching resultDapp data:', error);
       }
@@ -988,38 +915,38 @@ const HomeContent: NextPageWithLayout = () => {
           <Title>How It Works</Title>
           <div className="it-works-list">
             <div className="works-list-item">
+              <div className="list-item-img">
+                <img src="https://assets.dapdap.net/images/home-itworks-quick.png" alt="" className="img-signin" />
+              </div>
               <h1>Quick Sign-In</h1>
               <p>Create an account or log in within seconds to obtain your unique web3 identity.</p>
               {/* <a href="#">Sign in / View my profile</a> */}
               {/* <a href="#">View my profile</a> */}
-              <div className="list-item-img">
-                <img src="https://assets.dapdap.net/images/home-itworks-quick.png" alt="" />
-              </div>
             </div>
             <div className="works-list-arrow">
               <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
             </div>
             <div className="works-list-item">
+              <div className="list-item-img">
+                <img src="https://assets.dapdap.net/images/home-itworks-discover.png" alt="" className="img-discover" />
+              </div>
               <h1>Discover DApps</h1>
               <p>Explore a vast array of decentralized applications (DApps) easily and find your favorites.</p>
               <Link href="/alldapps">Explore</Link>
-              <div className="list-item-img">
-                <img src="https://assets.dapdap.net/images/home-itworks-discover.png" alt="" />
-              </div>
             </div>
             <div className="works-list-arrow">
               <img src="https://assets.dapdap.net/images/arrow-yellow.png" alt="" />
             </div>
             <div className="works-list-item">
+              <div className="list-item-img">
+                <img src="https://assets.dapdap.net/images/home-itworks-earn.png" alt="" className="img-works" />
+              </div>
               <h1>Earn Rewards</h1>
               <p>
                 Engage with the DApps of your choice, enjoy a seamless experience, and collect your rewards along the
                 way.
               </p>
               <Link href="/quest/leaderboard">View</Link>
-              <div className="list-item-img">
-                <img src="https://assets.dapdap.net/images/home-itworks-earn.png" alt="" />
-              </div>
             </div>
           </div>
         </div>
@@ -1091,86 +1018,8 @@ const HomeContent: NextPageWithLayout = () => {
               </Link>
             </ViewAll>
           </div>
-          {selectedTab == 'TBD' ? (
-            <div className="tab-content">
-              {tokenTBD &&
-                tokenTBD.slice(0, 9).map((dapp, index) => {
-                  const categoryData = dapp.dapp_category || dapp.category_ids;
-                  const categoryNames = getCategoryNames(categoryData, categoryArray);
-                  return (
-                    <div className="tab-content-item" key={index}>
-                      <div className="content-item-img">
-                        <img src={dapp.logo} alt="" />
-                      </div>
-                      <div className="content-item-text">
-                        <h1>{dapp.name}</h1>
-                        <p>{dapp.description}</p>
-                        <Tag>
-                          {categoryNames.map((categoryName: string, index: number) => (
-                            <div className={`tag-item ${categoryName}`} key={index}>
-                              {categoryName}
-                            </div>
-                          ))}
-                        </Tag>
-                      </div>
-                      <div className="content-item-btn">
-                        <Link className="item-btn-item" href={`/dapps-details?dapp_id=${dapp.id}`}>
-                          Detail
-                        </Link>
-                        <div
-                          className="item-btn-item"
-                          onClick={() => {
-                            open({ dapp, from: 'home' });
-                          }}
-                        >
-                          Dapp
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-          ) : null}
-          {selectedTab == 'token' ? (
-            <div className="tab-content">
-              {nativeToken &&
-                nativeToken.slice(0, 9).map((dapp, index) => {
-                  const categoryData = dapp.dapp_category || dapp.category_ids;
-                  const categoryNames = getCategoryNames(categoryData, categoryArray);
-                  return (
-                    <div className="tab-content-item" key={index}>
-                      <div className="content-item-img">
-                        <img src={dapp.logo} alt="" />
-                      </div>
-                      <div className="content-item-text">
-                        <h1>{dapp.name}</h1>
-                        <p>{dapp.description}</p>
-                        <Tag>
-                          {categoryNames.map((categoryName: string, index: number) => (
-                            <div className={`tag-item ${categoryName}`} key={index}>
-                              {categoryName}
-                            </div>
-                          ))}
-                        </Tag>
-                      </div>
-                      <div className="content-item-btn">
-                        <Link className="item-btn-item" href={`/dapps-details?dapp_id=${dapp.id}`}>
-                          Detail
-                        </Link>
-                        <div
-                          className="item-btn-item"
-                          onClick={() => {
-                            open({ dapp, from: 'home' });
-                          }}
-                        >
-                          Dapp
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-            </div>
-          ) : null}
+          {selectedTab == 'TBD' && <Dapps dapps={tokenTBD} />}
+          {selectedTab == 'token' && <Dapps dapps={nativeToken} />}
         </div>
 
         <div className="explore-layer-blockchains">
@@ -1187,7 +1036,7 @@ const HomeContent: NextPageWithLayout = () => {
             {networkList &&
               networkList.slice(0, 9).map((child, index) => (
                 <div className="layer-list-item" key={index}>
-                  <Link href={`/chains-details?id=${child.id}`}>
+                  <Link href={`/network/${IdToPath[child.id]}`}>
                     <img src={child.logo} alt="" />
                     <h1>{child.name}</h1>
                     {/* <Gold>
@@ -1238,22 +1087,6 @@ const HomeContent: NextPageWithLayout = () => {
                   <h1>Polygon zkEVM</h1>
                 </div>
               </Link>
-              {/* <div className="deepDive-list-item list-item-sprcial">
-                <div className="item-right-bg">
-                  <img src={deppDiveRightIcon} alt="" />
-                </div>
-                <div className="item-bg-icon">
-                  <img
-                    src="https://assets.dapdap.net/images/bafkreie7thart7hj63xd2q27eronnchjfikyxjh3jwhzbjckvbp74so4fi.svg"
-                    alt=""
-                  />
-                </div>
-                <div className="item-arrow-icon">
-                  <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
-                </div>
-                <p>Deep Dive into</p>
-                <h1>Linea</h1>
-              </div> */}
             </div>
           </div>
         </div>
@@ -1334,7 +1167,7 @@ const HomeContent: NextPageWithLayout = () => {
               {items.map((item, index) => (
                 <div className="learning-content-item" key={index} style={{ flex: '0 0 auto', width: '540px' }}>
                   <div className="content-item-img">
-                    <img src={item.icon} alt="" />
+                    <img src={item.icon} alt="" style={{ borderRadius: '18px' }} />
                   </div>
                   <div className="content-item-text">
                     <h1>{item.title}</h1>

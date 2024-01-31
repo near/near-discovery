@@ -1,15 +1,14 @@
 import Link from 'next/link';
-import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
+import { useState } from 'react';
+import styled from 'styled-components';
+import DropdownMenuPanel from '@/components/DropdownMenuPanel';
 import AccountItem from '@/components/AccountSider/components/AccountItem';
+import DropdownSearchResultPanel from '@/components/DropdownSearchResultPanel';
 import Chain from '@/components/AccountSider/components/Chain';
-import { QUEST_PATH } from '@/config/quest';
+
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
-import { get } from '@/utils/http';
-import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 
 const LoginContainer = styled.div`
   width: auto;
@@ -38,73 +37,6 @@ const Container = styled.div`
     justify-content: space-between;
     width: 100%;
     position: relative;
-  }
-  .container-submenu {
-    display: none;
-    align-items: center;
-    margin-top: 30px;
-    z-index: 1;
-    padding-bottom: 20px;
-    margin: 0 -36px;
-    padding: 20px 36px;
-    &.show {
-      display: flex;
-      border-bottom: 1px solid #343838;
-      animation: slideDown 0.5s ease forwards;
-    }
-    .submenu-item {
-      margin: 5px 0;
-      text-align: center;
-      opacity: 0.5;
-      background: #373a53;
-      border-radius: 10px;
-      padding: 4px 8px 4px 4px;
-      font-size: 14px;
-      margin-right: 14px;
-      color: #ffffff;
-      text-decoration: none;
-      height: 32px;
-      line-height: 26px;
-      display: flex;
-      .submenu-item-icon {
-        width: 24px;
-        height: 24px;
-        line-height: 24px;
-        text-align: center;
-        align-items: center;
-        border-radius: 10px;
-        margin-right: 10px;
-        flex-shrink: 0;
-      }
-      .submenu-item-title {
-        flex-grow: 1;
-        white-space: nowrap;
-      }
-      &:hover {
-        opacity: 1;
-      }
-      &.active {
-        background-color: #ebf479;
-        color: #181a27;
-        opacity: 1;
-      }
-    }
-    .submenu-item-disable {
-      cursor: not-allowed;
-      &:hover {
-        opacity: 0.5;
-      }
-    }
-  }
-  @keyframes slideDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 `;
 
@@ -138,7 +70,7 @@ const MenuContainer = styled.div`
 const Search = styled.div`
   width: 100%;
   position: relative;
-  input {
+  .top-nav-input {
     width: 100%;
     height: 48px;
     line-height: 48px;
@@ -149,15 +81,19 @@ const Search = styled.div`
     padding: 16px 16px 16px 50px;
     color: #ffffff;
     background: linear-gradient(0deg, #282a33, #282a33), linear-gradient(0deg, #343743, #343743);
+
+    &::placeholder {
+      color: #5e617e;
+    }
   }
-  input:focus {
+  .top-nav-input:focus {
     outline: none;
     color: #ffffff;
     border: 1px solid #343743;
     background: linear-gradient(0deg, #282a33, #282a33), linear-gradient(0deg, #343743, #343743);
     box-shadow: none;
   }
-  img {
+  .switch-icon-img {
     position: absolute;
     left: 20px;
     top: 16px;
@@ -170,238 +106,48 @@ const Search = styled.div`
     top: 0;
     cursor: pointer;
   }
-  .search-results {
-    width: 100%;
+  .switch-icon-img {
+    transition: 0.3s;
+    opacity: 0;
+  }
+  .switch-icon-img.show {
+    opacity: 1;
+  }
+  .search-icon {
     position: absolute;
-    top: 55px;
-    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.25);
-    background-color: rgb(48, 49, 66);
-    color: rgba(151, 154, 190, 1);
-    border: 1px solid rgba(55, 58, 83, 1);
-    border-radius: 12px;
-    max-height: 600px;
-    overflow: auto;
-    padding: 20px 30px;
-    .search-results-item {
-      a {
-        text-decoration: none;
-      }
-      .results-item-title {
-        p {
-          font-size: 12px;
-          display: inline-block;
-        }
-        .item-title-right {
-          float: right;
-          cursor: pointer;
-        }
-      }
-      .results-item-list {
-        display: flex;
-        img {
-          position: inherit;
-          width: 30px;
-          height: 30px;
-        }
-        p {
-          font-size: 14px;
-          color: #ffffff;
-          margin-top: 6px;
-          margin-left: 10px;
-        }
-      }
-    }
+    left: 18px;
+    top: 16px;
   }
 `;
 
-const MaskLayer = styled.div`
-  position: fixed;
-  top: 80px;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 0;
-  backdrop-filter: blur(6px);
+const InputWrapper = styled.div`
+  position: relative;
 `;
 
-const MenuContent = styled.div`
-  z-index: 100;
+const InputCloseIcon = styled.div`
   position: absolute;
-  left: 0;
-  top: 78px;
-  background: #16181d;
-  width: 100%;
-  display: none;
-  padding: 40px 12% 28px 12%;
-  color: #ffffff;
-  display: flex;
-  font-family: Gantari;
-  &.show {
-    display: flex;
-    animation: slideDown 0.5s ease forwards;
+  cursor: pointer;
+  right: 12px;
+  top: 10px;
+  &:hover {
+    opacity: 0.9;
   }
-  @keyframes slideDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  .menu-content-item {
-    display: flex;
-    margin-right: 60px;
-    h1 {
-      font-size: 20px;
-      font-weight: 700;
-    }
-    p {
-      font-size: 14px;
-      font-weight: 400;
-      color: #979abe;
-      margin-bottom: 20px;
-    }
-    a {
-      color: #ffffff;
-      text-decoration: none;
-      height: fit-content;
-    }
-
-    .item-list-ingle {
-      display: inline-block;
-      margin-top: 16px;
-      width: 50%;
-      font-size: 16px;
-    }
-
-    .content-item-arrow {
-      display: inline-block;
-      margin-left: 12px;
-      img {
-        margin-top: 24px;
-      }
-    }
-  }
-  .menu-content-deep {
-    padding-left: 60px;
-    border-left: 1px solid #383b48;
-    a {
-      color: #ffffff;
-      text-decoration: none;
-    }
-    .contenr-deep-item {
-      display: flex;
-      margin-bottom: 36px;
-      .deep-item-left {
-        margin-right: 20px;
-        line-height: 62px;
-        width: 42px;
-        flex-shrink: 0;
-      }
-      .deep-item-text {
-        h1 {
-          font-size: 20px;
-          font-weight: 700;
-          display: inline-block;
-        }
-        p {
-          font-size: 14px;
-          font-weight: 400;
-          color: #979abe;
-        }
-        .current-version {
-          color: #ebf479;
-          display: inline-block;
-          margin-left: 6px;
-          padding: 4px 14px 4px 8px;
-          background: rgba(55, 58, 83, 0.5);
-          border-radius: 10px;
-          display: inline-block;
-          font-family: Gantari;
-          font-size: 12px;
-          font-style: italic;
-          font-weight: 400;
-          line-height: 14px;
-          letter-spacing: 0em;
-          text-align: left;
-          white-space: nowrap;
-          img {
-            width: 12px;
-            height: 12px;
-            margin-right: 4px;
-          }
-        }
-      }
-    }
-    .deep-item-special {
-      opacity: 0.5;
-      margin-bottom: 0;
-    }
+  &:active {
+    opacity: 0.8;
   }
 `;
 
 const logoUrl = 'https://assets.dapdap.net/images/logo.png';
 
-const SearchIcon = (
-  <img src="https://assets.dapdap.net/images/bafkreih4njnef5mt7zzwx3l42lhkvw53aanyaxp24hvmiqv6m37fosfsim.svg" alt="" />
-);
-
 const ExpandIcon = 'https://assets.dapdap.net/images/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi.svg';
 
 const CloseIcon = 'https://assets.dapdap.net/images/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu.svg';
 
-const ArrowIcon = 'https://assets.dapdap.net/images/bafkreibrhom3ayevbwnd5e2u65w3qqgqgzk7qumggejceoy5t7ozydu7gm.svg';
-
-const DeepDive = 'https://assets.dapdap.net/images/bafkreicrbwiivaavc7dnlyfr72mnuvd36fhpwrw2yxvwp2afebbkso7d6m.svg';
-
-const Shotcuts = 'https://assets.dapdap.net/images/bafkreideqs5vzneww4ejycligpml3prkr5wd6rhkalsyhyxcfo7mcdegyq.svg';
-
-const Portfolio = 'https://assets.dapdap.net/images/bafkreidtkanbzjdnycy2c3cie32jv2lglg7vsbhvodtlztk7e5sftyrece.svg';
-
-const lockUrl = 'https://assets.dapdap.net/images/bafkreigkzmvkujzp5ned6vk55vr6w2vy3lwcbyr4dw35nyddsxtgxy4hcq.svg';
-
 export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
-  const router = useRouter();
-  const [networkList, setNetworkList] = useState<any[]>([]);
-  const { loading, categories } = useCategoryDappList();
-  const categoryArray = Object.values(categories);
-  const [searchContent, setSearchContent] = useState('');
-  const [searchResults, setSearchResults] = useState<any | null>(null);
-  const [showAll, setShowAll] = useState(false);
-  const [showNetworkAll, setShowNetworkAll] = useState(false);
-  useEffect(() => {
-    const fetchNetworkData = async () => {
-      try {
-        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
-        setNetworkList(resultNetwork.data || []);
-      } catch (error) {
-        console.error('Error fetching resultNetwork data:', error);
-      }
-    };
-    fetchNetworkData();
-  }, []);
 
-  useEffect(() => {
-    const fetchSearchData = async () => {
-      if (searchContent) {
-        try {
-          const result = await get(`${QUEST_PATH}/api/search?content=${searchContent}`);
-          setSearchResults(result.data);
-        } catch (error) {
-          console.error('Error fetching search data:', error);
-        }
-      }
-    };
-    fetchSearchData();
-  }, [searchContent]);
+  const [searchContent, setSearchContent] = useState<string>();
 
   const [showMenuContent, setShowMenuContent] = useState(false);
 
@@ -415,78 +161,60 @@ export const DesktopNavigationTop = () => {
         </Link>
         <MenuContainer>
           <Search>
-            <input
-              type="text"
-              placeholder="search dapps, chains..."
-              value={searchContent}
-              onChange={(e) => setSearchContent(e.target.value)}
-              autoFocus
-              id="nav-top-search"
-            />
-            {SearchIcon}
+            <InputWrapper>
+              <input
+                type="text"
+                placeholder="search dapps, chains..."
+                value={searchContent}
+                onChange={(e) => setSearchContent(e.target.value)}
+                autoFocus
+                id="nav-top-search"
+                className="top-nav-input"
+              />
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="21"
+                height="15"
+                viewBox="0 0 21 15"
+                fill="none"
+                className="search-icon"
+              >
+                <circle cx="7.01829" cy="7.01829" r="6.01829" stroke="#EBF479" stroke-width="2" />
+                <rect
+                  x="14.9138"
+                  y="9.64978"
+                  width="6.141"
+                  height="2.63186"
+                  rx="1.31593"
+                  transform="rotate(30 14.9138 9.64978)"
+                  fill="#EBF479"
+                />
+              </svg>
+              {searchContent && (
+                <InputCloseIcon
+                  onClick={() => {
+                    setSearchContent('');
+                  }}
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="12" fill="#303142" />
+                    <path
+                      d="M13.444 12L16.7799 8.66415C17.0307 8.41332 17.0735 8.0494 16.8756 7.85157L16.1482 7.12424C15.9503 6.92632 15.5869 6.96974 15.3356 7.22041L12.0001 10.5561L8.66433 7.22049C8.41349 6.96941 8.04957 6.92632 7.85165 7.12449L7.12431 7.8519C6.92648 8.04949 6.96931 8.4134 7.22048 8.66423L10.5563 12L7.22048 15.336C6.96973 15.5866 6.92631 15.9503 7.12431 16.1482L7.85165 16.8756C8.04957 17.0735 8.41349 17.0306 8.66433 16.7799L12.0003 13.4439L15.3357 16.7794C15.587 17.0307 15.9504 17.0735 16.1483 16.8756L16.8757 16.1482C17.0735 15.9503 17.0307 15.5866 16.78 15.3356L13.444 12Z"
+                      fill="#979ABE"
+                    />
+                  </svg>
+                </InputCloseIcon>
+              )}
+            </InputWrapper>
             <div className="switch-icon" onClick={() => setShowMenuContent(!showMenuContent)}>
-              <img src={showMenuContent ? CloseIcon : ExpandIcon} alt="" />
+              <img src={CloseIcon} alt="" className={`switch-icon-img ${showMenuContent && 'show'}`} />
+              <img src={ExpandIcon} alt="" className={`switch-icon-img ${!showMenuContent && 'show'}`} />
             </div>
-            {searchContent && (
-              <div className="search-results">
-                <div className="search-results-item">
-                  <div className="results-item-title">
-                    <p>Dapp</p>
-                    <p className="item-title-right" onClick={() => setShowAll(!showAll)}>
-                      {showAll ? 'Close' : 'View More'}
-                    </p>
-                  </div>
-                  {searchResults &&
-                    (showAll ? searchResults.dapps : searchResults.dapps.slice(0, 5)).map(
-                      (item: any, index: number) => (
-                        <Link
-                          key={index}
-                          href={`/dapps-details?dapp_id=${item.id}`}
-                          onClick={() => setSearchContent('')}
-                        >
-                          <div className="results-item-list">
-                            <img src={item.logo} alt="" />
-                            <p>{item.name}</p>
-                          </div>
-                        </Link>
-                      ),
-                    )}
-                </div>
-                <div className="search-results-item">
-                  <div className="results-item-title">
-                    <p>Blockchain</p>
-                    <p className="item-title-right" onClick={() => setShowNetworkAll(!showNetworkAll)}>
-                      {showNetworkAll ? 'Close' : 'View More'}
-                    </p>
-                  </div>
-                  {searchResults &&
-                    (showNetworkAll ? searchResults.networks : searchResults.networks.slice(0, 5)).map(
-                      (item: any, index: number) => (
-                        <Link key={index} href={`/chains-details?id=${item.id}`} onClick={() => setSearchContent('')}>
-                          <div className="results-item-list">
-                            <img src={item.logo} alt="" />
-                            <p>{item.name}</p>
-                          </div>
-                        </Link>
-                      ),
-                    )}
-                </div>
-                <div className="search-results-item">
-                  <div className="results-item-title">
-                    <p>Quest</p>
-                  </div>
-                  {searchResults &&
-                    (showAll ? searchResults.quests : searchResults.quests).map((item: any, index: number) => (
-                      <Link key={index} href={`/quest/detail?id=${item.id}`} onClick={() => setSearchContent('')}>
-                        <div className="results-item-list">
-                          <img src={item.logo} alt="" />
-                          <p>{item.name}</p>
-                        </div>
-                      </Link>
-                    ))}
-                </div>
-              </div>
-            )}
+            <DropdownSearchResultPanel
+              searchText={searchContent}
+              setSearchContent={setSearchContent}
+              show={searchContent}
+            />
           </Search>
         </MenuContainer>
         {account ? (
@@ -505,97 +233,7 @@ export const DesktopNavigationTop = () => {
         )}
       </div>
 
-      {showMenuContent && (
-        <>
-          <MaskLayer onClick={() => setShowMenuContent(false)} />
-          <MenuContent className={showMenuContent ? 'show' : ''}>
-            <div className="menu-content-item">
-              <div className="content-item-text">
-                <h1>Explore Dapps</h1>
-                <p>Filter by token TBD/native token, blockchains, mainfeatures.</p>
-                {categoryArray &&
-                  categoryArray.map((item: any, index: number) => {
-                    return (
-                      <div
-                        className="item-list-ingle"
-                        key={index}
-                        style={{ cursor: 'pointer' }}
-                        onClick={() => {
-                          setShowMenuContent(false);
-                          router.push({
-                            pathname: '/alldapps',
-                            query: { category: item.id },
-                          });
-                        }}
-                      >
-                        {item.name}
-                      </div>
-                    );
-                  })}
-              </div>
-              <Link href="/alldapps" onClick={() => setShowMenuContent(false)}>
-                <div className="content-item-arrow">
-                  <img src={ArrowIcon} alt="" />
-                </div>
-              </Link>
-            </div>
-            <div className="menu-content-item">
-              <div className="content-item-text">
-                <h1>Explore Blockchains</h1>
-                <p>Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems.</p>
-                {networkList &&
-                  networkList.map((child, index) => (
-                    <Link href={`/chains-details?id=${child.id}`} key={index} onClick={() => setShowMenuContent(false)}>
-                      <div className="item-list-ingle">{child.name}</div>
-                    </Link>
-                  ))}
-              </div>
-              <Link href="/blockchains" onClick={() => setShowMenuContent(false)}>
-                <div className="content-item-arrow">
-                  <img src={ArrowIcon} alt="" />
-                </div>
-              </Link>
-            </div>
-            <div className="menu-content-deep">
-              <Link href="/warmup " onClick={() => setShowMenuContent(false)}>
-                <div className="contenr-deep-item">
-                  <div className="deep-item-left">
-                    <img src={DeepDive} alt="" />
-                  </div>
-                  <div className="deep-item-text">
-                    <h1>DeepDive</h1>
-                    <p> DeepDive the hotest L2 Blockcchain to get more intension of reward.</p>
-                  </div>
-                </div>
-              </Link>
-              <Link href="/all-in-one" onClick={() => setShowMenuContent(false)}>
-                <div className="contenr-deep-item">
-                  <div className="deep-item-left">
-                    <img src={Shotcuts} alt="" />
-                  </div>
-                  <div className="deep-item-text">
-                    <h1>Shotcuts</h1>
-                    <p>Shortcuts integrate common functions and the most popular dapps.</p>
-                  </div>
-                </div>
-              </Link>
-              <div className="contenr-deep-item deep-item-special">
-                <div className="deep-item-left">
-                  <img src={Portfolio} alt="" />
-                </div>
-                <div className="deep-item-text">
-                  <h1>Portfolio</h1>
-                  <div className="current-version">
-                    <img src={lockUrl} alt="" />
-                    Lv.3
-                  </div>
-                  <p>Access your assets and positions directly from your portfolio after Lv.3.</p>
-                </div>
-              </div>
-            </div>
-          </MenuContent>
-        </>
-      )}
+      {showMenuContent && <DropdownMenuPanel show={showMenuContent} setShow={setShowMenuContent} />}
     </Container>
   );
 };

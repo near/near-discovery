@@ -2,8 +2,7 @@ import { ethers } from 'ethers';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-
-import popupsData from '@/config/all-in-one/chains';
+import popupsData, { IdToPath } from '@/config/all-in-one/chains';
 import chains from '@/config/chains';
 import { QUEST_PATH } from '@/config/quest';
 import { ethereum } from '@/config/tokens/ethereum';
@@ -64,7 +63,7 @@ const blockchainsBg = 'https://assets.dapdap.net/images/banner.png';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
 const BlockchainsPage = styled.div`
   color: #ffffff;
-  padding: 0 12% 80px 12%;
+  padding: 50px 12% 80px 12%;
   position: relative;
 `;
 
@@ -277,9 +276,8 @@ const BlockchainsColumn: NextPageWithLayout = () => {
     };
     const fetchAdvertiseasync = async () => {
       try {
-        const response = await fetch(`${QUEST_PATH}/api/ad?category=networks`);
-        const data = await response.json();
-        setAdvertise(data.data[0]);
+        const response = await get(`${QUEST_PATH}/api/ad?category=networks`);
+        setAdvertise(response.data[0]);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -379,7 +377,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                     )}
                   </h3>
                   <div className="minor-paragraph-btn">
-                    <Link href={`/chains-details?id=${child.id}`} className="paragraph-btn-item">
+                    <Link href={`/network/${IdToPath[child.id]}`} className="paragraph-btn-item">
                       View Detail
                     </Link>
                     <Link href={`/all-in-one/${path}`} className="paragraph-btn-item">

@@ -14,6 +14,7 @@ import { StyledCoin, StyledProcessBars, StyledTag } from '@/views/Quest/componen
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 import useLike from '@/views/Quest/hooks/useLike';
 import { StyledHeartBox } from '@/views/QuestDetail/components/Details/styles';
+import Empty from '@/components/Empty';
 
 const arrow = (
   <svg width="5" height="8" viewBox="0 0 5 8" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -131,7 +132,8 @@ const DappsDetailsContent = styled.div`
   display: flex;
   padding: 100px 12%;
   .left-side-substance {
-    width: 70%;
+    /* width: 70%; */
+    flex: 1;
     margin-right: 86px;
     p {
       font-size: 14px;
@@ -209,10 +211,11 @@ const DappsDetailsContent = styled.div`
     }
   }
   .right-side-substance {
-    width: 36%;
+    width: 416px;
     .right-side-item {
       text-decoration: none;
-      width: auto;
+      /* width: auto; */
+      height: 196px;
       border: 1px solid rgba(55, 58, 83, 1);
       background: rgb(44, 46, 62);
       border-radius: 20px;
@@ -232,6 +235,10 @@ const DappsDetailsContent = styled.div`
       .side-item-text {
         width: 60%;
         h1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
           font-family: Gantari;
           font-size: 18px;
           font-weight: 700;
@@ -239,9 +246,9 @@ const DappsDetailsContent = styled.div`
         }
         p {
           display: -webkit-box;
-          -webkit-line-clamp: 3;
+          -webkit-line-clamp: 2;
           -webkit-box-orient: vertical;
-          height: 72px;
+          /* height: 72px; */
           overflow: hidden;
           font-family: Gantari;
           font-size: 15px;
@@ -252,9 +259,9 @@ const DappsDetailsContent = styled.div`
           display: flex;
           gap: 8px;
           margin-top: 11px;
-          @media (max-width: 1600px) {
+          /* @media (max-width: 1600px) {
             display: grid;
-          }
+          } */
         }
       }
     }
@@ -478,9 +485,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchData = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp?id=${dapp_id}`);
-          const data = await response.json();
-          setData(data.data);
+          const response = await get(`${QUEST_PATH}/api/dapp?id=${dapp_id}`);
+          setData(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -489,9 +495,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchRelatedDapps = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
-          const data = await response.json();
-          setRelatedDapps(data.data);
+          const response = await get(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
+          setRelatedDapps(response.data);
         } catch (error) {
           console.error('Error fetching related dapps:', error);
         }
@@ -500,9 +505,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchquestList = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/quest/list_by_dapp?dapp_id=${dapp_id}`);
-          const data = await response.json();
-          setQuestList(data.data);
+          const response = await get(`${QUEST_PATH}/api/quest/list_by_dapp?dapp_id=${dapp_id}`);
+          setQuestList(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -511,11 +515,10 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchactivityData = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(
+          const response = await get(
             `${QUEST_PATH}/api/action/get-actions-by-dapp?dapp_id=${dapp_id}&page=1&page_size=10`,
           );
-          const data = await response.json();
-          setActivity(data.data);
+          setActivity(response.data);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -524,9 +527,8 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     const fetchAdvertiseasync = async () => {
       if (dapp_id) {
         try {
-          const response = await fetch(`${QUEST_PATH}/api/ad?category=dapp&category_id=${dapp_id}`);
-          const data = await response.json();
-          setAdvertise(data);
+          const response = await get(`${QUEST_PATH}/api/ad?category=dapp&category_id=${dapp_id}`);
+          setAdvertise(response);
         } catch (error) {
           console.error('Error fetching data:', error);
         }
@@ -664,7 +666,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
               <div
                 className="enter-Dapp-item Dapp-item-special"
                 onClick={() => {
-                  open({ dapp: data, from: 'home' });
+                  open({ dapp: data, from: 'alldapps' });
                 }}
               >
                 <div>Enter Dapp</div>
@@ -722,7 +724,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         </div>
         <div className="right-side-substance">
           <Title>Quest</Title>
-          {questList &&
+          {questList?.length ? (
             questList.map((item, index) => {
               const actions = Array.from({ length: item.total_action }, (val, i) => i);
               return (
@@ -753,7 +755,10 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                   </div>
                 </Link>
               );
-            })}
+            })
+          ) : (
+            <Empty size={42} tips="No quest yet" />
+          )}
         </div>
       </DappsDetailsContent>
 

@@ -51,7 +51,7 @@ export const ethereum: { [key: string]: Token } = {
     icon: 'https://assets.coingecko.com/coins/images/13422/standard/FRAX_icon.png?1696513182',
     decimals: 18,
   },
-  sUSD: {
+  susd: {
     address: '0x57Ab1ec28D129707052df4dF418D58a2D46d5f51',
     chainId: CHAIN_ID,
     name: 'Synth sUSD',
@@ -64,7 +64,7 @@ export const ethereum: { [key: string]: Token } = {
     chainId: CHAIN_ID,
     name: 'LUSD Stablecoin',
     symbol: 'LUSD',
-    icon: 'https://assets.coingecko.com/coins/images/14666/standard/Group_3.png?1696514341',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihne6zw3myw5dwh72giml63vjjksmixrf435hf7cnsg5f3ubgdnde',
     decimals: 6,
   },
   mai: {

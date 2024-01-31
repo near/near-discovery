@@ -9,7 +9,6 @@ import lendingConfig from '@/config/lending/networks';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
-import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { usePriceStore } from '@/stores/price';
 import { multicall } from '@/utils/multicall';
@@ -55,6 +54,7 @@ const Container = styled.div`
   margin: 0 8%;
   color: #ffffff;
   position: relative;
+  padding-top: 50px;
   .top-login-select {
     margin-right: 16px;
     border-radius: 12px;
@@ -190,7 +190,6 @@ const AllInOne: NextPageWithLayout = () => {
   const router = useRouter();
   const chain = router.query.chain as string;
   const currentChain = popupsData[chain] || popupsData['arbitrum'];
-  const components = useBosComponents();
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
   const [{ settingChain }, setChain] = useSetChain();
@@ -291,7 +290,7 @@ const AllInOne: NextPageWithLayout = () => {
           <>
             <div className="select-bg-icon">
               <div className="select-bg-content">
-                <img src={currentChain.icon} alt="" />
+                <img src={currentChain.bgIcon || currentChain.icon} alt="" />
                 <div className="select-bg">
                   <SelectBg bgColor={currentChain.selectBgColor} />
                 </div>
@@ -299,15 +298,19 @@ const AllInOne: NextPageWithLayout = () => {
             </div>
             <div className="content-page">
               <ComponentWrapperPage
-                src={(components as any)[chain === 'zksync' ? 'zkSync' : chain]}
+                src="bluebiu.near/widget/All-in-one"
                 meta={{
                   title: 'Connect with the NEAR community.',
                   description: 'Become part of the NEAR community.',
                 }}
                 componentProps={{
                   addAction,
-                  swapConfig: swapConfig[currentChain?.chainId],
-                  lendingConfig: { ...lendingConfig[currentChain?.chainId], multicall },
+                  multicall,
+                  chainId: currentChain.chainId,
+                  defaultTab: currentChain.defaultTab,
+                  menuConfig: currentChain.menuConfig,
+                  ...(swapConfig[currentChain?.chainId] || {}),
+                  ...(lendingConfig[currentChain?.chainId] || {}),
                   prices,
                 }}
               />

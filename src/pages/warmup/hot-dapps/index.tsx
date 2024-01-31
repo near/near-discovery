@@ -3,14 +3,15 @@ import { styled } from 'styled-components';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+
 import DappCard from './dapp-card';
 
 const CardListWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 24px;
-  a{
+  gap: 17px;
+  a {
     text-decoration: none;
   }
 `;

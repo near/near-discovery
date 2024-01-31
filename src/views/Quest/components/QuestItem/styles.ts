@@ -3,11 +3,11 @@ import styled from 'styled-components';
 
 export { StyledCoin } from '../../styles';
 
-export const StyledContainer = styled(motion.div)<{ $isCampaign?: boolean; $mt?: number }>`
+export const StyledContainer = styled(motion.div) <{ $isCampaign?: boolean; $mt?: number }>`
   border-radius: 20px;
   border: 1px solid #373a53;
   background: #2c2e3e;
-  width: 300px;
+  width: 402px;
   height: 186px;
   flex-shrink: 0;
   padding: 14px;
@@ -53,18 +53,30 @@ export const StyledIcon = styled.img<{ $disabled: boolean }>`
 
 export const StyledTaskName = styled.div`
   color: #fff;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 120%;
   text-transform: capitalize;
+
+  overflow:hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 `;
 
 export const StyledTaskDesc = styled.div<{ $isCampaign?: boolean }>`
   color: ${({ $isCampaign }) => ($isCampaign ? 'rgba(255,255,255,0.6)' : '#979abe')};
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
   line-height: 120%;
   margin-top: 10px;
+
+  overflow:hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: 2;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
 `;
 
 export const StyledProcessBars = styled.div`
@@ -74,6 +86,7 @@ export const StyledProcessBars = styled.div`
 `;
 
 export const StyledTags = styled.div`
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -127,3 +140,13 @@ export const StyledFooter = styled.div`
   align-items: center;
   margin-top: 14px;
 `;
+
+export const StyledCategoryName = styled.div`
+  flex: 1;
+  text-align: right;
+  font-family: Gantari;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 120%;
+`

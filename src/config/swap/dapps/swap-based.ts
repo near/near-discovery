@@ -2,7 +2,7 @@ import { base } from '@/config/tokens/base';
 
 const basic = {
   name: 'SwapBased',
-  logo: 'https://swapbased.finance/static/media/base-logo.8e4c7d33.png',
+  logo: '/images/apps/swap-based.png',
   amountOutFn: 'bluebiu.near/widget/Arbitrum.Swap.ApeAmountOut',
 };
 

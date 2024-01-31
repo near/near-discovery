@@ -2,14 +2,14 @@
 @import 'swiper/css';
 @import 'swiper/css/autoplay';
 
-@font-face {
+/* @font-face {
   font-family: 'Gantari';
   src:
     url('/fonts/Mona-Sans.woff2') format('woff2 supports variations'),
     url('/fonts/Mona-Sans.woff2') format('woff2-variations');
   font-weight: 200 900;
   font-stretch: 75% 125%;
-}
+} */
 
 @font-face {
   font-family: 'FK Grotesk';
@@ -211,4 +211,8 @@ div::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-thumb:hover,
 div::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+.skeleton {
+  line-height: 1;
 }
