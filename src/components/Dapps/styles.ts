@@ -133,5 +133,5 @@ export const StyledDappButton = styled.button`
 export const StyledDappInner = styled.div`
   display: flex;
   border-bottom: 1px solid #26282f;
-  padding-bottom: 42px;
+  padding-bottom: 33px;
 `;

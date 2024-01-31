@@ -2,14 +2,13 @@
 @import 'swiper/css';
 @import 'swiper/css/autoplay';
 
-/* @font-face {
-  font-family: 'Gantari';
-  src:
-    url('/fonts/Mona-Sans.woff2') format('woff2 supports variations'),
-    url('/fonts/Mona-Sans.woff2') format('woff2-variations');
+/* url('/fonts/Montserrat-Italic-VariableFont_wght.ttf'), */
+@font-face {
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf');
   font-weight: 200 900;
   font-stretch: 75% 125%;
-} */
+}
 
 @font-face {
   font-family: 'FK Grotesk';
