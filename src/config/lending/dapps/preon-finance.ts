@@ -1,11 +1,5 @@
 import { arbitrum } from '@/config/tokens/arbitrum';
-import { avalanche } from '@/config/tokens/avalanche';
-import { base } from '@/config/tokens/base';
-import { bsc } from '@/config/tokens/bsc';
-import { linea } from '@/config/tokens/linea';
-import { metis } from '@/config/tokens/metis';
 import { polygon } from '@/config/tokens/polygon';
-import { zkSync } from '@/config/tokens/zkSync';
 
 const BORROW_TOKEN = 'STAR';
 const BORROW_URL = 'https://ipfs.near.social/ipfs/bafkreifn26whjukvke3m35hwcl74up7kckzvahrzib4ab3arq3qyfnelfy';
@@ -13,7 +7,7 @@ const BORROW_URL = 'https://ipfs.near.social/ipfs/bafkreifn26whjukvke3m35hwcl74u
 const basic = {
   name: 'Gravita Protocol',
   // icon: '/images/apps/granary.png',
-  // data: 'bluebiu.near/widget/Lending.Data.Liquity',
+  data: 'bluebiu.near/widget/Lending.Data.Liquity',
   // handler: 'bluebiu.near/widget/Lending.Handler.Liquity',
   type: 'liquity',
   BORROW_TOKEN,
@@ -37,7 +31,7 @@ const networks = {
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT: 180,
-        MINTED: 45000,
+        MINTED: 0,
         MINTED_CAP: 500000,
       },
       [arbitrum['weth'].address]: {
@@ -49,7 +43,7 @@ const networks = {
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT: 180,
-        MINTED: 11000,
+        MINTED: 0,
         MINTED_CAP: 500000,
       },
     },
@@ -70,7 +64,7 @@ const networks = {
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT: 180,
-        MINTED: 341000,
+        MINTED: 0,
         MINTED_CAP: 500000,
       },
       [polygon['stmatic'].address]: {
@@ -82,7 +76,7 @@ const networks = {
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT: 180,
-        MINTED: 118000,
+        MINTED: 0,
         MINTED_CAP: 500000,
       },
     },

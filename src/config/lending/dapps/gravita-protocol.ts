@@ -9,7 +9,7 @@ const BORROW_URL = 'https://ipfs.near.social/ipfs/bafkreihv4qckd2us54qbgljcriwtb
 const basic = {
   name: 'Gravita Protocol',
   // icon: '/images/apps/granary.png',
-  // data: 'bluebiu.near/widget/Lending.Data.Liquity',
+  data: 'bluebiu.near/widget/Lending.Data.Liquity',
   // handler: 'bluebiu.near/widget/Lending.Handler.Liquity',
   type: 'liquity',
   BORROW_TOKEN,
