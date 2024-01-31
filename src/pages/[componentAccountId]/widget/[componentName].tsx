@@ -10,6 +10,8 @@ import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
+import { lifi } from '@/components/Bridge/init'
+
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
@@ -26,7 +28,12 @@ const ViewComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
-  return <ComponentWrapperPage src={componentSrc} componentProps={{ ...componentProps, addAction }} />;
+  return <ComponentWrapperPage src={componentSrc} componentProps={{
+    ...componentProps, addAction, getLifi: () => {
+      return lifi
+    }
+  }} />;
+
 };
 
 ViewComponentPage.getLayout = useDefaultLayout;
