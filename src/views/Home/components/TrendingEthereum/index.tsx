@@ -20,7 +20,7 @@ const TrendingEthereum = ({ chains }: any) => {
       </StyledHeader>
       <StyledChians>
         {chains.slice(0, 8).map((chain: any) => (
-          <StyledChain>
+          <StyledChain key={chain.id}>
             <StyledChainIcon src={chain.logo} />
             <StyledChainTitle>{chain.name}</StyledChainTitle>
             <StyledChainDesc>{chain.description}</StyledChainDesc>
