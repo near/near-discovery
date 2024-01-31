@@ -63,6 +63,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
           deleteCookie('LOGIN_ACCOUNT');
           setUpdater(Date.now());
         }, 3000);
+      } else {
+        setUpdater(Date.now());
       }
     } else {
       clearTimeout(loginTimer.current);
