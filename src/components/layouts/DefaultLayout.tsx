@@ -20,7 +20,7 @@ const Layout = styled.div`
   flex-direction: column;
   position: relative;
   .content {
-    padding: 54px 36px 100px;
+    padding: 0px 36px 100px;
     flex-grow: 1;
     position: relative;
 

@@ -6,6 +6,7 @@ export { StyledMedal, StyledSteps } from '../../styles';
 
 export const StyledContainer = styled.div`
   position: relative;
+  width: 370px;
 `;
 
 export const StyledContent = styled.div`
@@ -17,10 +18,10 @@ export const StyledContent = styled.div`
 
 export const StyledBg = styled.div`
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   border-radius: 431px;
   opacity: 0.3;
-  background: #a55fff;
+  background: #9188ff;
   filter: blur(100px);
   width: 431px;
   height: 431px;
@@ -88,7 +89,7 @@ export const StyledLabels = styled.div`
 
 export const StyledLabel = styled.div`
   border-radius: 32px;
-  border: 1px solid rgba(235, 244, 121, 0.3);
+  border: 1px solid #373a53;
   background: #1c1d29;
   padding: 14px 20px;
   display: flex;

@@ -23,6 +23,10 @@ import type { NextPageWithLayout } from '@/utils/types';
 
 // set dynamic routes for dapps in config file
 
+const StyledPage = styled.div`
+  padding-top: 50px;
+`;
+
 const DappName = styled.div`
   color: #fff;
   font-family: Gantari;
@@ -135,7 +139,7 @@ export const DappPage: NextPageWithLayout = () => {
   if (!network?.dapp_src || !localConfig) return <div />;
 
   return ready ? (
-    <>
+    <StyledPage>
       <Breadcrumb
         navs={[
           { name: 'Home', path: '/' },
@@ -183,7 +187,7 @@ export const DappPage: NextPageWithLayout = () => {
           src={network.dapp_src}
         />
       </div>
-    </>
+    </StyledPage>
   ) : (
     <div />
   );

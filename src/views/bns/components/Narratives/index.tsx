@@ -88,7 +88,7 @@ const Campaign = function ({ campaign }: any) {
         <StyledFlex
           $justify='flex-end'
           $gap='18px'
-          style={{ marginTop: 20, position: 'relative', zIndex: 10 }}
+          style={{ marginTop: 20, position: 'relative', zIndex: 10, paddingRight: 24 }}
         >
           <StyledButton
             $width='36px'

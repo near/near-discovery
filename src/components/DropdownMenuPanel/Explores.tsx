@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 import { useChainsStore } from '@/stores/chains';
+import { IdToPath } from '@/config/all-in-one/chains';
 import Skeleton from 'react-loading-skeleton';
 
 import { get } from '@/utils/http';
@@ -109,10 +110,7 @@ const Explores = ({ setShow }: any) => {
         onItemClick={(item: any) => {
           setShow(false);
           if (item) {
-            router.push({
-              pathname: '/chains-details',
-              query: { id: item.id },
-            });
+            router.push(`/network/${IdToPath[item.id]}`);
           } else {
             router.push('/blockchains');
           }

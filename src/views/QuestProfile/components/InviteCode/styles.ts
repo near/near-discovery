@@ -39,12 +39,15 @@ export const StyledValue = styled.div`
     font-weight: 700;
   }
 `;
-
+export const StyledPanelWrapper = styled.div`
+  background: linear-gradient(to right, #7dd3f8, #c388e7, #ffc189);
+  padding: 1px;
+  border-radius: 20px;
+`;
 export const StyledPanel = styled.div`
   border-radius: 20px;
-  border: 1px solid #21232a;
-  background: rgba(22, 24, 29, 0.5);
-  backdrop-filter: blur(3px);
+  border: 1px solid #373a53;
+  background-color: #21242a;
   padding: 20px;
   width: 175px;
   height: 175px;

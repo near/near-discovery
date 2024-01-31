@@ -70,7 +70,7 @@ const MenuContainer = styled.div`
 const Search = styled.div`
   width: 100%;
   position: relative;
-  input {
+  .top-nav-input {
     width: 100%;
     height: 48px;
     line-height: 48px;
@@ -81,8 +81,12 @@ const Search = styled.div`
     padding: 16px 16px 16px 50px;
     color: #ffffff;
     background: linear-gradient(0deg, #282a33, #282a33), linear-gradient(0deg, #343743, #343743);
+
+    &::placeholder {
+      color: #5e617e;
+    }
   }
-  input:focus {
+  .top-nav-input:focus {
     outline: none;
     color: #ffffff;
     border: 1px solid #343743;
@@ -165,6 +169,7 @@ export const DesktopNavigationTop = () => {
                 onChange={(e) => setSearchContent(e.target.value)}
                 autoFocus
                 id="nav-top-search"
+                className="top-nav-input"
               />
               <svg
                 xmlns="http://www.w3.org/2000/svg"

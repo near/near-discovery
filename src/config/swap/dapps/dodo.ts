@@ -7,6 +7,7 @@ const basic = {
 };
 const networks = {
   534352: {
+    rpc: 'https://rpc.scroll.io',
     defaultCurrencies: {
       input: scroll['eth'],
       output: scroll['usdc'],

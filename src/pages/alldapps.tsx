@@ -26,7 +26,7 @@ const carouseicon = 'https://assets.dapdap.net/images/bafkreigqhaprvqrmha234q4k2
 
 const AllDappsPage = styled.div`
   color: #ffffff;
-  padding: 0 12% 80px 12%;
+  padding: 50px 12% 80px 12%;
   position: relative;
   .token-tab-list {
     width: 100%;
