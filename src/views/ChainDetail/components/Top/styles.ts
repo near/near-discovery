@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
   position: relative;
-  height: 205px;
+  height: 274px;
   animation: chainDetailUp 0.5s ease forwards;
   &.more {
     animation: chainDetailDown 0.5s ease forwards;
@@ -11,7 +11,7 @@ export const StyledContainer = styled.div`
   @keyframes chainDetailDown {
     0% {
       transform: translateY(-10px);
-      height: 205px;
+      height: 274px;
     }
     100% {
       transform: translateY(0);
@@ -25,7 +25,7 @@ export const StyledContainer = styled.div`
     }
     100% {
       transform: translateY(-10px);
-      height: 205px;
+      height: 274px;
     }
   }
 `;
@@ -35,6 +35,10 @@ export const StyledBox = styled.div`
   padding-top: 30px;
   overflow: hidden;
   box-sizing: border-box;
+
+  .token-img {
+    width: 24px;
+  }
 `;
 export const StyledContent = styled.div`
   position: relative;
@@ -137,15 +141,11 @@ export const StyledActionText = styled.div`
 export const StyledMoreButton = styled.div`
   position: absolute;
   z-index: 12;
-  right: 0px;
+  right: calc(50% - 626px);
   bottom: -15px;
 `;
 
-export const StyledMorePanel = styled.div`
-  .token-img {
-    width: 24px;
-  }
-`;
+export const StyledMorePanel = styled.div``;
 export const StyledTags = styled.div`
   margin-top: 20px;
   display: flex;
