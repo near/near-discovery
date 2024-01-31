@@ -201,4 +201,12 @@ export const polygon: { [key: string]: Token } = {
     name: 'Token CRV (PoS)',
     icon: 'https://ipfs.near.social/ipfs/bafkreihfv7kul7d6e2fxnlpalx3p7wx47ylhw7tauozhipcughshj25ehm',
   },
+  stmatic: {
+    chainId: CHAIN_ID,
+    address: '0x3A58a54C066FdC0f2D55FC9C89F0415C92eBf3C4',
+    decimals: 18,
+    symbol: 'stMATIC',
+    name: 'Staked MATIC (PoS) ',
+    icon: 'https://raw.githubusercontent.com/SphereDeFi/TokenBook-public/main/tokens/images/STMATIC.svg',
+  },
 };

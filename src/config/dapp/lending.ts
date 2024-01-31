@@ -499,6 +499,28 @@ const ROUTE_CONFIG = {
       '--claim-color': '',
     },
   },
+  'preon-finance': {
+    type: 'lending',
+    theme: {
+      '--switch-color': '#c157f9',
+      '--button-text-color': '',
+      '--supply-color': '',
+      '--yours-table-title': '',
+      '--borrow-color': '',
+      '--withdraw-bg-color': '',
+      '--withdraw-border-color': '',
+      '--withdraw-bg-hover-color': '',
+      '--repay-bg-color': '#c157f9',
+      '--repay-border-color': '#c157f9',
+      '--repay-bg-hover-color': '',
+      '--claim-bg-hover-color': '',
+      '--claim-bg-color': '',
+      '--claim-border-color': '',
+      '--withdraw-color': '',
+      '--replay-color': '',
+      '--claim-color': '',
+    },
+  },
 };
 
 export default ROUTE_CONFIG;
