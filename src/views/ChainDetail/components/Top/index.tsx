@@ -40,6 +40,7 @@ const Top = ({ chain }: any) => {
             chainId={chain?.chainId}
             path={chain?.path}
             deepdive={chain?.deepdive}
+            id={chain?.id}
           />
           {more && (
             <MorePanel
@@ -47,6 +48,7 @@ const Top = ({ chain }: any) => {
               tbd_token={chain?.tbd_token}
               nativeCurrency={chain?.native_currency}
               milestones={chain?.milestones}
+              subname={chain?.sub_name}
             />
           )}
         </StyledContent>

@@ -49,13 +49,14 @@ export const StyledMore = styled.div`
 `;
 
 export const StyledItem = styled.div`
-  width: 310px;
+  width: 302px;
   height: 142px;
   flex-shrink: 0;
   border-radius: 20px;
-  background: #292c34;
+  background: #21232a;
   box-sizing: border-box;
   padding: 20px;
+  transition: 0.5s;
   cursor: pointer;
 
   .item-title {
@@ -66,6 +67,10 @@ export const StyledItem = styled.div`
     font-weight: 500;
     line-height: normal;
     margin-bottom: 32px;
+  }
+
+  &:hover {
+    background: #292c34;
   }
 `;
 

@@ -15,17 +15,14 @@ const NativeCurrency = ({ nativeCurrency }: any) => {
   );
 };
 
-const MorePanel = ({ technology, tbd_token, nativeCurrency, milestones }: any) => {
+const MorePanel = ({ technology, tbd_token, nativeCurrency, milestones, subname }: any) => {
   return (
     <StyledMorePanel>
       <StyledTags>
-        {technology && (
-          <StyledTag>
-            <StyledTagLabel>Technology</StyledTagLabel>
-            <StyledTagValue>{technology}</StyledTagValue>
-          </StyledTag>
-        )}
-
+        <StyledTag>
+          <StyledTagLabel>Technology</StyledTagLabel>
+          <StyledTagValue>{technology || '-'}</StyledTagValue>
+        </StyledTag>
         <StyledTag>
           <StyledTagLabel>Native Token</StyledTagLabel>
           <StyledTagValue>
@@ -33,10 +30,7 @@ const MorePanel = ({ technology, tbd_token, nativeCurrency, milestones }: any) =
           </StyledTagValue>
         </StyledTag>
       </StyledTags>
-      <StyledChainDesc>
-        Discover Polygon&apos;s holistic vision of an accessible Ethereum, where low fees and high-speed transactions
-        redefine user experience.
-      </StyledChainDesc>
+      <StyledChainDesc>{subname}</StyledChainDesc>
       <Milestones milestones={milestones} />
     </StyledMorePanel>
   );

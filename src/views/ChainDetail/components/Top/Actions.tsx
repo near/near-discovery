@@ -2,13 +2,13 @@ import { useRouter } from 'next/router';
 import { memo } from 'react';
 import { StyledActions, StyledAction, StyledActionText } from './styles';
 
-const Actions = ({ path, deepdive }: any) => {
+const Actions = ({ id, path, deepdive }: any) => {
   const router = useRouter();
   return (
     <StyledActions>
       <StyledAction
         onClick={() => {
-          router.push('/alldapps');
+          router.push(`/alldapps?network=${id}`);
         }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -25,10 +25,16 @@ const Actions = ({ path, deepdive }: any) => {
             router.push(`/all-in-one/${path}`);
           }}
         >
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path
+              d="M3.85698 2.87859C-1.28566 4.59901 -1.28566 7.40424 3.85698 9.11619L6.12754 9.87046L6.88157 12.1418C8.59295 17.2861 11.4057 17.2861 13.1171 12.1418L15.6673 4.49731C16.8025 1.06494 14.9387 -0.808035 11.5074 0.33609L3.85698 2.87859ZM8.55907 8.13309C8.43198 8.26021 8.27101 8.31954 8.11004 8.31954C7.94907 8.31954 7.78809 8.26021 7.66101 8.13309C7.54284 8.01347 7.47657 7.85208 7.47657 7.68391C7.47657 7.51574 7.54284 7.35435 7.66101 7.23474L10.8805 3.99729C11.1262 3.75151 11.5328 3.75151 11.7785 3.99729C12.0242 4.24306 12.0242 4.64986 11.7785 4.89564L8.55907 8.13309Z"
+              fill="black"
+            />
+          </svg>
           <div>Navigation</div>
         </StyledAction>
       )}
-      {true && (
+      {deepdive && (
         <StyledAction
           onClick={() => {
             router.push(`/warmup/${path}`);
