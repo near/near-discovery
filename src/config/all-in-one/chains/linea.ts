@@ -4,6 +4,7 @@ export default {
   icon: 'https://assets.dapdap.net/images/bafkreiek2q3da5dpzt7jlvdp5y4b7xh2tsdb5syh75b3amfwhb7x6vi7oa.svg',
   bgColor: '#131313',
   bgIcon: '/images/chains/linea_white.svg',
+  iconColor: '#000',
   selectBgColor: '#35bde3',
   chainId: 59144,
   rpcUrls: ['https://linea.blockpi.network/v1/rpc/public'],

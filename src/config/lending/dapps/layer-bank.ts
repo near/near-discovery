@@ -16,6 +16,7 @@ const networks = {
     oracleAddress: '0x4F5F443fEC450fD64Dce57CCacE8f5ad10b4028f',
     rateModelSlopeAddress: '0xC690549E0215192D1fFB527BB3ca4D4Ba638Cad2',
     distributionAddress: '0x5D06067f86946620C326713b846DdC8B97470957',
+    defaultMarket: '0x2aD69A0Cf272B9941c7dDcaDa7B0273E9046C4B0',
     markets: {
       '0xEa0F73296a6147FB56bAE29306Aae0FFAfF9De5F': {
         decimals: 18,

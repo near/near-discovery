@@ -35,24 +35,34 @@ const formateValueWithThousandSeparator = (value: string | number, precision: nu
   }
 };
 
-const formateValueWithThousandSeparatorAndFont = (value: string | number, precision: number) => {
+const formateValueWithThousandSeparatorAndFont = (
+  value: string | number,
+  precision: number,
+  isSimple?: boolean,
+): any => {
   if (Big(value).eq(0))
-    return {
-      integer: '0',
-      decimal: '',
-    };
+    return isSimple
+      ? '0'
+      : {
+          integer: '0',
+          decimal: '',
+        };
 
   if (Big(value).lt(Big(10).pow(-precision))) {
-    return {
-      integer: '',
-      decimal: `< ${Big(10).pow(-precision).toFixed(precision)}`,
-    };
+    return isSimple
+      ? `< ${Big(10).pow(-precision).toFixed(precision)}`
+      : {
+          integer: '',
+          decimal: `< ${Big(10).pow(-precision).toFixed(precision)}`,
+        };
   } else {
     const finalValue = addThousandSeparator(Big(value).toFixed(precision));
-    return {
-      integer: finalValue.split('.')[0],
-      decimal: '.' + finalValue.split('.')[1],
-    };
+    return isSimple
+      ? `${finalValue.split('.')[0]}.${finalValue.split('.')[1]}`
+      : {
+          integer: finalValue.split('.')[0],
+          decimal: '.' + finalValue.split('.')[1],
+        };
   }
 };
 

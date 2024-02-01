@@ -14,6 +14,7 @@ const networks = {
     oracleAddress: '0xe159031D368Bf07F803DA0E96ce747F3B44F1230',
     distributionAddress: '0x3b9B9364Bf69761d308145371c38D9b558013d40',
     lensAddress: '0x52354609AF7A8FdD1fbcF9d4D52D25B26492B69b',
+    defaultMarket: '0x333D8b480BDB25eA7Be4Dd87EEB359988CE1b30D',
     markets: {
       '0xAd7f33984bed10518012013D4aB0458D37FEE6F3': {
         decimals: 8,

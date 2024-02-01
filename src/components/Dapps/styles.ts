@@ -12,7 +12,7 @@ export const StyledDapp = styled.div`
   border-radius: 20px;
   transition: 0.5s;
   box-sizing: border-box;
-  width: 30%;
+  width: calc(33.333333333% - 20px);
   &:hover {
     background: #21232a;
   }
@@ -134,4 +134,6 @@ export const StyledDappInner = styled.div`
   display: flex;
   border-bottom: 1px solid #26282f;
   padding-bottom: 33px;
+  height: 100%;
+  box-sizing: border-box;
 `;

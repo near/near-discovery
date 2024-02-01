@@ -97,7 +97,7 @@ const networks = {
     fees: [100, 500, 3000, 10000],
     defaultCurrencies: {
       input: polygonZkevm['eth'],
-      output: polygonZkevm['usdt'],
+      output: polygonZkevm['usdc'],
     },
     tokens: [
       polygonZkevm['matic'],

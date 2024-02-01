@@ -77,7 +77,7 @@ const Top = ({ chain }: any) => {
               tbd_token={chain?.tbd_token}
               nativeCurrency={chain?.native_currency}
               milestones={chain?.milestones}
-              subname={chain?.sub_name}
+              subname={chain?.sub_description}
             />
           )}
         </StyledContent>

@@ -207,3 +207,13 @@ div::-webkit-scrollbar-thumb:hover {
 .skeleton {
   line-height: 1;
 }
+
+input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+button {
+  border: none;
+}

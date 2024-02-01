@@ -5,19 +5,19 @@ import { basic as VelocoreV2Basic, networks as VelocoreV2Networks } from '../dap
 import { basic as metavaultV3Basic, networks as metavaultV3Networks } from '../dapps/metavault-v3';
 import { basic as pancakeSwapBasic, networks as pancakeSwapNetworks } from '../dapps/pancake-swap';
 import { basic as xfaiBasic, networks as xfaiNetworks } from '../dapps/xfai';
+import chains from '../../chains';
 
 const CHAIN_ID = 59144;
 
 export default {
-  chainId: CHAIN_ID,
-  chainName: 'Linea',
+  ...chains[CHAIN_ID],
   displayChainName: 'Linea',
   wethAddress: '0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f',
   connectProps: {
     noAccountTips: 'Linea Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Linea Chain.',
   },
-  defalutDex: 'Xfai',
+  defalutDex: 'HorizonDEX',
   dexs: {
     HorizonDEX: {
       ...HorizonDEXBasic,

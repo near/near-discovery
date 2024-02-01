@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react';
 import chainsConfig from '@/config/all-in-one/chains';
 import GoMore from '@/components/GoMore';
-import Item from './Item';
+import Item from '@/views/OnBoarding/components/Trends/Item';
 import { StyledContainer, StyledTitle, StyledSubtitle, StyledList } from './styles';
 
 const QuickOnboarding = ({ activities, path }: any) => {
