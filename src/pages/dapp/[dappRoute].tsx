@@ -39,6 +39,7 @@ const DappName = styled.div`
 export const DappPage: NextPageWithLayout = () => {
   const router = useRouter();
   const chains = useChainsStore((store: any) => store.chains);
+
   const { chainId } = useAccount();
   const dapp = useDappStore((store: any) => store.dapp);
   const setLayoutStore = useLayoutStore((store) => store.set);
@@ -90,6 +91,9 @@ export const DappPage: NextPageWithLayout = () => {
     }
     if (config.type === 'staking') {
       result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
+    }
+    if (config.type === 'liquidity') {
+      result = (await import(`@/config/liquidity/dapps/${dappPathname}`))?.default;
     }
     setLocalConfig({ ...result, theme: config.theme });
   }, [dappPathname]);
