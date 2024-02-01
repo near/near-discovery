@@ -23,6 +23,7 @@ const networks = {
     StabilityPool: '0x0a3137E103a8F268Fa065f6d5922ed6173B7BDFA',
     borrowTokenAddress: '0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487',
     BorrowerOperations: '0x89F1ecCF2644902344db02788A790551Bb070351',
+    VesselManager: '0x6AdAA3eBa85c77e8566b73AEfb4C2f39Df4046Ca',
     VesselManagerOperations: '0x15f74458aE0bFdAA1a96CA1aa779D715Cc1Eefe4',
     markets: {
       [arbitrum['reth'].address]: {
@@ -81,6 +82,7 @@ const networks = {
     StabilityPool: '0x5Bd5b45f6565762928A79779F6C2DD43c15c92EE',
     borrowTokenAddress: '0xCA68ad4EE5c96871EC6C6dac2F714a8437A3Fe66',
     BorrowerOperations: '0xC818f878F27D0273Fb53B71d281C82921F0aF15c',
+    VesselManager: '0x57a1953bF194A1EF73396e442Ac7Dc761dCd23cc',
     VesselManagerOperations: '0x9D8bB5496332cbeeD59f1211f28dB8b5Eb214B6D',
     markets: {
       [polygonZkevm['reth'].address]: {
@@ -115,6 +117,7 @@ const networks = {
     StabilityPool: '0x42865C7FA0b84cf76C8e8256f3356226EDC3b1be',
     borrowTokenAddress: '0x894134a25a5faC1c2C26F1d8fBf05111a3CB9487',
     BorrowerOperations: '0x40E0e274A42D9b1a9D4B64dC6c46D21228d45C20',
+    VesselManager: '0xdC44093198ee130f92DeFed22791aa8d8df7fBfA',
     VesselManagerOperations: '0x53525a62e55B6002792B993a2C27Af70d12443e4',
     markets: {
       [linea['wsteth'].address]: {
@@ -148,6 +151,7 @@ const networks = {
     StabilityPool: '0xDAce04E411D9916169c0401033a7f76994eF5A0f',
     borrowTokenAddress: '0x5FC44E95eaa48F9eB84Be17bd3aC66B6A82Af709',
     BorrowerOperations: '0xd085Fd2338Cefb9cBD212F74d479072C1E7A25bf',
+    VesselManager: '0x8D9CDd9372740933702d606EaD3BB55dFfDC6303',
     VesselManagerOperations: '0x03569d4c117f94e72e9f63B06F406c5bc7caddE9',
     markets: {
       [zkSync['weth'].address]: {
