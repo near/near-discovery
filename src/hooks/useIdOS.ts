@@ -2,6 +2,7 @@ import { idOS } from '@idos-network/idos-sdk';
 import { useCallback, useEffect } from 'react';
 
 import { useIdosStore } from '@/stores/idosStore';
+import { recordHandledError } from '@/utils/analytics';
 
 export function useIdOS() {
   const setIdosStore = useIdosStore((state) => state.set);
@@ -15,7 +16,9 @@ export function useIdOS() {
       })) as any;
       setIdosStore({ idOS: idos });
     } catch (error: any) {
-      console.error('Failed to initialize IDOS: ', error);
+      const scope = 'Failed to initialize IDOS:';
+      console.error(scope, error);
+      recordHandledError({ scope, message: error.message || error });
     }
   }, [setIdosStore]);
 
