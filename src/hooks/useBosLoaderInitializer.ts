@@ -3,6 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useBosLoaderStore } from '@/stores/bos-loader';
 
 import { useFlags } from './useFlags';
+import { recordHandledError } from '@/utils/analytics';
 
 export function useBosLoaderInitializer() {
   const [flags] = useFlags();
@@ -37,9 +38,9 @@ export function useBosLoaderInitializer() {
           hasResolved: true,
           redirectMap: data.components,
         });
-      } catch (e) {
+      } catch (e: any) {
         console.error(e);
-
+        recordHandledError({ scope: 'requestSignMessage', message: e.message || e });
         setStore({
           failedToLoad: true,
           hasResolved: true,

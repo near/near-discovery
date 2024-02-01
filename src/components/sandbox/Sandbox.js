@@ -59,6 +59,7 @@ import {
 } from './utils/onboarding';
 import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
+import { recordHandledError } from '@/utils/analytics';
 
 export const Sandbox = ({ onboarding = false }) => {
   const near = useVmStore((store) => store.near);
@@ -319,7 +320,8 @@ export const Sandbox = ({ onboarding = false }) => {
       });
       changeCode(path, formattedCode);
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      recordHandledError({ scope: 'sandbox reformatting', message: e.message || e });
     }
   };
 
@@ -492,6 +494,7 @@ export const Sandbox = ({ onboarding = false }) => {
     } catch (e) {
       setParsedWidgetProps({});
       setPropsError(e.message);
+      recordHandledError({ scope: 'setting component props within the sandbox editor', message: e.message || e });
     }
   }, [widgetProps]);
 

@@ -162,6 +162,10 @@ export function recordEventWithProps(eventLabel: string, properties: Record<stri
   }
 }
 
+export function recordHandledError(props: Record<string, string>) {
+  recordEventWithProps('error-handled', props);
+}
+
 export function recordEvent(eventLabel: string) {
   if (!rudderAnalytics) return;
   try {
