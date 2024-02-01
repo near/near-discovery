@@ -8,7 +8,6 @@ import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearMobileWallet } from '@near-wallet-selector/near-mobile-wallet';
-import { setupNearWallet } from '@near-wallet-selector/near-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
 import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
@@ -68,6 +67,7 @@ export default function VmInitializer() {
       initNear({
         networkId,
         walletConnectCallback: recordWalletConnect,
+        errorCallback: recordHandledError,
         selector: setupWalletSelector({
           network: networkId,
           modules: [
