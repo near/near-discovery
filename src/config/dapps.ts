@@ -750,7 +750,7 @@ export const dapps = [
     description: 'A protocol for active liquidity management and market making strategies',
     tags: ['Liquidity'],
     type: 'liquidity',
-    on_chain_ids: [59144, 5000, 1101], // get chain config from chains.ts
+    on_chain_ids: [8453, 56, 10, 137, 59144, 5000, 1101], // get chain config from chains.ts
     DEFAULT_CHAIN_ID: 59144,
     dappSrc: {} as { [key: number]: string },
   },
