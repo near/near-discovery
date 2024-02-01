@@ -4,8 +4,10 @@ import { polygon } from '@/config/tokens/polygon';
 const BORROW_TOKEN = 'STAR';
 const BORROW_URL = 'https://ipfs.near.social/ipfs/bafkreifn26whjukvke3m35hwcl74up7kckzvahrzib4ab3arq3qyfnelfy';
 
+const MIN_DEBT = 180;
+
 const basic = {
-  name: 'Gravita Protocol',
+  name: 'Preon Finance',
   // icon: '/images/apps/granary.png',
   data: 'bluebiu.near/widget/Lending.Data.Liquity',
   // handler: 'bluebiu.near/widget/Lending.Handler.Liquity',
@@ -26,24 +28,22 @@ const networks = {
       [arbitrum['wst-eth'].address]: {
         decimals: 18,
         underlyingToken: arbitrum['wst-eth'],
-        // BorrowerOperations: '0xbffC680a9aA46b8B19228497E77888dA6B944B2D',
         BORROW_TOKEN,
         BORROW_URL,
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
-        MIN_DEBT: 180,
+        MIN_DEBT,
         MINTED: 0,
         MINTED_CAP: 500000,
       },
       [arbitrum['weth'].address]: {
         decimals: 18,
         underlyingToken: arbitrum['weth'],
-        // BorrowerOperations: '0xbffC680a9aA46b8B19228497E77888dA6B944B2D',
         BORROW_TOKEN,
         BORROW_URL,
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
-        MIN_DEBT: 180,
+        MIN_DEBT,
         MINTED: 0,
         MINTED_CAP: 500000,
       },
@@ -60,24 +60,22 @@ const networks = {
       [polygon['wmatic'].address]: {
         decimals: 18,
         underlyingToken: polygon['wmatic'],
-        // BorrowerOperations: '0xbffC680a9aA46b8B19228497E77888dA6B944B2D',
         BORROW_TOKEN,
         BORROW_URL,
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
-        MIN_DEBT: 180,
+        MIN_DEBT,
         MINTED: 0,
         MINTED_CAP: 500000,
       },
       [polygon['stmatic'].address]: {
         decimals: 18,
         underlyingToken: polygon['stmatic'],
-        // BorrowerOperations: '0xbffC680a9aA46b8B19228497E77888dA6B944B2D',
         BORROW_TOKEN,
         BORROW_URL,
         MAX_LTV: 88.9,
         ONE_TIME_FEE: 0.5,
-        MIN_DEBT: 180,
+        MIN_DEBT,
         MINTED: 0,
         MINTED_CAP: 500000,
       },

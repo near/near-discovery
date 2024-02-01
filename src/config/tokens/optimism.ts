@@ -76,6 +76,14 @@ export const optimism: { [key: string]: Token } = {
     name: 'Wrapped Ether',
     icon: 'https://ipfs.near.social/ipfs/bafkreihyzmiuawyekwiyofkzm25xzrrfenhvadi6lb42juvq7tah2u7ha4',
   },
+  wstETH: {
+    chainId: CHAIN_ID,
+    address: '0x1F32b1c2345538c0c6f582fCB022739c4A194Ebb',
+    decimals: 18,
+    symbol: 'wstETH',
+    name: 'Wrapped liquid staked Ether 2.0',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibukwahpp2ei74ax5acm6p7uwcnbsfvdzkizsdzqu26yfbxndpvra',
+  },
 
   mseth: {
     chainId: CHAIN_ID,
