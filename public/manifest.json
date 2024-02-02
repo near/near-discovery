@@ -4,16 +4,11 @@
 	"start_url": "/near/widget/ActivityPage",
 	"scope": "/",
 	"display": "standalone",
-	"prefer_related_applications": false,
-	"theme_color": "#000000",
-	"background_color": "#000000",
-	"orientation": "any",
 	"shortcuts": [
 		{
-			"name":"NEAR",
-			"url": "/near/widget/ActivityPage",
-			"description":"The OS for an open web",
-			"icons": [{ "src": "/bos-meta-96x96.png", "sizes": "96x96", "type": "image/png" }]
+			"name":"Ecosystem",
+			"url": "/near/widget/NearOrg.EcosystemPage",
+			"description":"A vibrant ecosystem that supports developers, founders, and contributors"
 		}
 	],
 	"screenshots": [
@@ -25,11 +20,11 @@
 			"form_factor": "wide"
 		},
 		{
-      "src": "bos-meta.png",
-      "sizes": "1200x630",
-      "type": "image/png",
-      "description": "A screenshot of the home page"
-    }
+		"src": "bos-meta.png",
+		"sizes": "1200x630",
+		"type": "image/png",
+		"description": "A screenshot of the home page"
+		}
 	],
 	"icons": [
 		{
