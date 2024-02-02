@@ -355,6 +355,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                             rpcUrls: child.rpc,
                           })
                         }
+                        data-bp="10012-001"
                       >
                         Add to MetaMask <img src={diagonaltop} alt="" />
                       </p>
@@ -377,14 +378,14 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                     )}
                   </h3>
                   <div className="minor-paragraph-btn">
-                    <Link href={`/network/${IdToPath[child.id]}`} className="paragraph-btn-item">
+                    <Link href={`/network/${IdToPath[child.id]}`} data-bp="10012-002" className="paragraph-btn-item">
                       View Detail
                     </Link>
-                    <Link href={`/all-in-one/${path}`} className="paragraph-btn-item">
+                    <Link href={`/all-in-one/${path}`} data-bp="10012-003" className="paragraph-btn-item">
                       Shortcut
                     </Link>
                     {child.deepdive && (
-                      <Link href="/warmup" className="paragraph-btn-item">
+                      <Link href="/warmup" data-bp="10012-004" className="paragraph-btn-item">
                         Deep Dive
                       </Link>
                     )}
@@ -393,7 +394,11 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                 {index === 4 && (
                   <>
                     {advertise?.ad_link && (
-                      <Link href={advertise?.ad_link} className="blockchains-conetent-item conetent-item-img">
+                      <Link
+                        data-bp="10012-005"
+                        href={advertise?.ad_link}
+                        className="blockchains-conetent-item conetent-item-img"
+                      >
                         <img src={advertise?.ad_images} alt="" />
                       </Link>
                     )}

@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useRouter } from 'next/router';
 import { StyledMore } from './styles';
 
-const GoMore = ({ label, path }: any) => {
+const GoMore = ({ label, path, bp }: any) => {
   const router = useRouter();
   return (
     <StyledMore
@@ -11,6 +11,7 @@ const GoMore = ({ label, path }: any) => {
           router.push(path);
         }
       }}
+      data-bp={bp}
     >
       <span>{label}</span>
       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="12" viewBox="0 0 16 12" fill="none">

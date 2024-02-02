@@ -1,4 +1,4 @@
-import { memo, useEffect,useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import CopyButton from '@/components/CopyButton';
@@ -39,7 +39,15 @@ const Address = styled.div`
   gap: 8px;
 `;
 
-const AccountItem = ({ showCopy = true, logoSize = 38 }: { showCopy?: boolean; logoSize?: number }) => {
+const AccountItem = ({
+  showCopy = true,
+  logoSize = 38,
+  bp,
+}: {
+  bp?: string;
+  showCopy?: boolean;
+  logoSize?: number;
+}) => {
   const { account } = useAccount();
   const userInfo = useUserStore((store: any) => store.user);
   const [ready, setReady] = useState(false);
@@ -47,7 +55,7 @@ const AccountItem = ({ showCopy = true, logoSize = 38 }: { showCopy?: boolean; l
     setReady(true);
   }, []);
   return ready ? (
-    <StyledItem>
+    <StyledItem data-bp={bp}>
       {userInfo?.avatar ? <LogoImage src={userInfo.avatar} size={logoSize} /> : <Logo size={logoSize} />}
       <div>
         <Account>

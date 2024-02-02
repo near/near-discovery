@@ -88,6 +88,7 @@ const Top = ({ chain }: any) => {
           onClick={() => {
             setMore((prev) => !prev);
           }}
+          bp="100121-005"
         />
       </StyledMoreButton>
     </StyledContainer>

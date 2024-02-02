@@ -2,13 +2,14 @@ import { memo } from 'react';
 import { useSetChain } from '@web3-onboard/react';
 import { StyledAddMeta } from './styles';
 
-const AddMetaMask = ({ chainId }: any) => {
+const AddMetaMask = ({ chainId, bp }: any) => {
   const [{}, setChain] = useSetChain();
   return (
     <StyledAddMeta
       onClick={() => {
         setChain({ chainId: `0x${chainId.toString(16)}` });
       }}
+      data-bp={bp}
     >
       <div>Add to MetaMask</div>
       <svg xmlns="http://www.w3.org/2000/svg" width="7" height="7" viewBox="0 0 7 7" fill="none">

@@ -18,7 +18,7 @@ const Header = ({ logo, name, chainId, bgColor, path, id }: any) => {
         </StyledChainLogoWrapper>
         <div>
           <StyledChainName>{name}</StyledChainName>
-          <AddMetaMask chainId={chainId} />
+          <AddMetaMask chainId={chainId} bp="100121-001" />
         </div>
       </StyledTitleWrapper>
       <Actions path={path} id={id} />

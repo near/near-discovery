@@ -19,7 +19,7 @@ import {
 } from './styles';
 
 const DappCard = (props: any) => {
-  const { name, description, route, logo, category_ids, id } = props;
+  const { name, description, route, logo, category_ids, id, bp } = props;
 
   const router = useRouter();
   const { categories } = useCategoryDappList();
@@ -61,6 +61,7 @@ const DappCard = (props: any) => {
         </StyledDappInfo>
         <StyledDappButtons>
           <StyledDappButton
+            data-bp={bp?.detail}
             onClick={() => {
               router.push(`/dapps-details?dapp_id=${id}`);
             }}
@@ -68,6 +69,7 @@ const DappCard = (props: any) => {
             Detail
           </StyledDappButton>
           <StyledDappButton
+            data-bp={bp?.dapp}
             onClick={() => {
               open({ dapp: props, from: 'home' });
             }}

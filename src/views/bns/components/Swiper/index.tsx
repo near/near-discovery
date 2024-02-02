@@ -1,9 +1,9 @@
 import { useRouter } from 'next/router';
 import { memo, useState } from 'react';
 
-import { StyledContainer, StyledImage,StyledImages, StyledImagesBox, StyledSwiperArrowButton } from './styles';
+import { StyledContainer, StyledImage, StyledImages, StyledImagesBox, StyledSwiperArrowButton } from './styles';
 
-const Swipper = ({ banners }: { banners: { banner: string; link: string }[] }) => {
+const Swipper = ({ banners, bp }: { banners: { banner: string; link: string }[]; bp?: string }) => {
   const [current, setCurrent] = useState(0);
   const router = useRouter();
   return (
@@ -38,6 +38,7 @@ const Swipper = ({ banners }: { banners: { banner: string; link: string }[] }) =
                 }
                 router.push(banner.link);
               }}
+              data-bp={bp}
             />
           ))}
         </StyledImages>

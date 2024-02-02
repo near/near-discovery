@@ -668,6 +668,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                 onClick={() => {
                   open({ dapp: data, from: 'alldapps' });
                 }}
+                data-bp="100111-001"
               >
                 <div>Enter Dapp</div>
                 <img src={arrowBlock} alt="" />
@@ -675,7 +676,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             </div>
           </div>
           <div className="details-body-right">
-            <img src={advertise?.data?.ad_images} alt="" />
+            <img src={advertise?.data?.ad_images} alt="" data-bp="100111-002" />
           </div>
         </div>
       </DappsDetailsTitle>
@@ -728,7 +729,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             questList.map((item, index) => {
               const actions = Array.from({ length: item.total_action }, (val, i) => i);
               return (
-                <Link href={`/quest/detail?id=${item.id}`} className="right-side-item" key={index}>
+                <Link href={`/quest/detail?id=${item.id}`} data-bp="100111-003" className="right-side-item" key={index}>
                   <div className="side-item-icon">
                     <img src={item.logo} alt="" />
                   </div>
@@ -785,7 +786,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                     </Tag>
                   </div>
                   <div className="content-item-btn">
-                    <Link className="item-btn-item" href={`/dapps-details?dapp_id=${dapp.id}`}>
+                    <Link className="item-btn-item" data-bp="100111-004" href={`/dapps-details?dapp_id=${dapp.id}`}>
                       Detail
                     </Link>
                     <div
@@ -793,6 +794,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                       onClick={() => {
                         open({ dapp, from: 'alldapps' });
                       }}
+                      data-bp="100111-005"
                     >
                       <p>Dapp</p>
                     </div>

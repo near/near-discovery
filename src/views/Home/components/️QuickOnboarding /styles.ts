@@ -59,6 +59,7 @@ export const StyledCard = styled.div`
   padding: 30px 26px 30px 30px;
   box-sizing: border-box;
   overflow: hidden;
+  cursor: pointer;
 `;
 
 export const StyledCardIcon = styled.img`

@@ -1,5 +1,6 @@
 import { memo } from 'react';
-
+import { useRouter } from 'next/router';
+import { IdToPath } from '@/config/all-in-one/chains';
 import {
   StyledContainer,
   StyledTitle,
@@ -13,6 +14,7 @@ import {
 } from './styles';
 
 const SeamlessNavigation = ({ chains }: any) => {
+  const router = useRouter();
   return (
     <StyledContainer>
       <StyledTitle>Seamless Navigation</StyledTitle>
@@ -24,7 +26,13 @@ const SeamlessNavigation = ({ chains }: any) => {
         <StyledImage src="/images/home/seamless.png" />
         <StyledChains>
           {chains.map((chain: any) => (
-            <StyledChain key={chain.id}>
+            <StyledChain
+              key={chain.id}
+              data-bp="1001-010"
+              onClick={() => {
+                router.push(`/network/${IdToPath[chain.id]}`);
+              }}
+            >
               <StyledChainLogo src={chain.logo} />
               <StyledChainName>{chain.name}</StyledChainName>
             </StyledChain>

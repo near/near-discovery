@@ -16,7 +16,8 @@ const StyledContainer = styled.div`
 export const StyledProfileButton = styled(motion.button)`
   border-radius: 10px;
   border: 1px solid #373a53;
-  background: linear-gradient(0deg, #373A53, #373A53),linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
+  background: linear-gradient(0deg, #373a53, #373a53),
+    linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
   width: 300px;
   height: 46px;
   flex-shrink: 0;
@@ -25,8 +26,6 @@ export const StyledProfileButton = styled(motion.button)`
   font-size: 16px;
   font-weight: 500;
 `;
-
-
 
 export default function Footer() {
   const router = useRouter();
@@ -40,6 +39,7 @@ export default function Footer() {
           router.push('/profile');
           setLayoutStore({ showAccountSider: false });
         }}
+        data-bp="30012-001"
       >
         My Profile
       </StyledProfileButton>

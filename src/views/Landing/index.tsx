@@ -47,19 +47,22 @@ const LandingView = () => {
       setContinuable(false);
       return;
     }
+    if (step === 3) {
+      setContinuable(false);
+      return;
+    }
     setContinuable(true);
   }, [step]);
 
   useEffect(() => {
     if (info?.actions) {
-      // let _step = 0;
-      // info.actions.forEach((action: any) => {
-      //   if (action.status === 'completed') {
-      //     _step++;
-      //   }
-      // });
-      // setStep(_step + 1 || 1);
-      setStep(2);
+      let _step = 0;
+      info.actions.forEach((action: any) => {
+        if (action.status === 'completed') {
+          _step++;
+        }
+      });
+      setStep(_step + 1 || 1);
     }
   }, [info]);
   return (
@@ -112,6 +115,7 @@ const LandingView = () => {
                   whileHover={{ opacity: 0.8 }}
                   whileTap={{ opacity: 0.6 }}
                   style={{ width: '70%' }}
+                  data-bp="20011-001"
                   onClick={() => {
                     if (loading || !continuable) return;
                     if (step === 2) {
@@ -138,6 +142,7 @@ const LandingView = () => {
                   }}
                   whileHover={{ opacity: 0.8 }}
                   whileTap={{ opacity: 0.6 }}
+                  data-bp="20011-001"
                 >
                   Skip
                 </StyledSkipButton>
@@ -163,6 +168,7 @@ const LandingView = () => {
                   onEnded={() => {
                     setContinuable(true);
                   }}
+                  data-bp="20011-002"
                 >
                   <source src="/landing-test.mp4" type="video/mp4" />
                 </video>
@@ -170,9 +176,25 @@ const LandingView = () => {
             )}
             {step > 2 && (
               <StyledRightPanel>
-                <StyledRightImg src={bgs[step]} />
+                <video
+                  controls
+                  autoPlay
+                  width="700"
+                  ref={videoRef}
+                  onEnded={() => {
+                    setContinuable(true);
+                  }}
+                  data-bp="20011-002"
+                >
+                  <source src="/landing-test.mp4" type="video/mp4" />
+                </video>
               </StyledRightPanel>
             )}
+            {/* {step > 3 && (
+              <StyledRightPanel>
+                <StyledRightImg src={bgs[step]} />
+              </StyledRightPanel>
+            )} */}
           </StyledContainer>
         </>
       )}

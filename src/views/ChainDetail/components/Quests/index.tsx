@@ -13,12 +13,15 @@ const Quests = ({ quests }: any) => {
           onClick={() => {
             router.push('/quest/leaderboard');
           }}
+          data-bp="100121-010"
         >
           Explore Quest
         </StyledAction>
       </StyledTitle>
       <StyledList>
-        {quests?.map((item: any, i: number) => <QuestItem quest={item} key={item.id + Math.random()} />)}
+        {quests?.map((item: any, i: number) => (
+          <QuestItem bp="100121-009" quest={item} key={item.id + Math.random()} />
+        ))}
       </StyledList>
     </StyledContainer>
   );

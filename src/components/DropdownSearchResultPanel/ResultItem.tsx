@@ -27,6 +27,7 @@ const ResultItem = ({ title, loading, items, onClick }: any) => {
             onClick={() => {
               onClick(item);
             }}
+            data-bp="3001-005"
           >
             <StyledResultItemImg src={item.logo} alt="" />
             <StyledResultItemTitle>{item.name}</StyledResultItemTitle>

@@ -32,6 +32,7 @@ const Actions = ({ mt, onClick }: { mt?: number; onClick: (type: string) => void
         onClick={() => {
           onClick('bridge');
         }}
+        data-bp="30012-003"
       >
         Bridge
       </Button>

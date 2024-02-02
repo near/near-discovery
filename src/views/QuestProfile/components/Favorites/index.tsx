@@ -22,12 +22,18 @@ const Favorites = () => {
               <Loading size={40} />
             </LoadingWrapper>
           ) : dappList.length > 0 ? (
-            <Dapps dapps={dappList} />
+            <Dapps
+              dapps={dappList}
+              bp={{
+                detail: '40012-001',
+                dapp: '40012-002',
+              }}
+            />
           ) : (
             <Empty>No Apps.</Empty>
           )}
 
-          <QuestPanel title="Your favorite quests" info={info} list={list} loading={loading} />
+          <QuestPanel title="Your favorite quests" info={info} list={list} loading={loading} bp="40012-003" />
         </StyledContainer>
       </motion.div>
     </AnimatePresence>

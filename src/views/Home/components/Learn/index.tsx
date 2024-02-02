@@ -58,6 +58,7 @@ const Learn = () => {
                   onClick={() => {
                     if (item.path) window.open(item.path, '_blank');
                   }}
+                  data-bp="1001-012"
                 >
                   Read
                 </StyledItemRead>

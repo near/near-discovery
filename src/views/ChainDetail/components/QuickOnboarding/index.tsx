@@ -23,7 +23,7 @@ const QuickOnboarding = ({ activities, path }: any) => {
       <StyledTitle>Quick Onboarding</StyledTitle>
       <StyledSubtitle>
         <span>The most popular actions from other users</span>
-        <GoMore label="More" path="" />
+        <GoMore label="More" path="" bp="100121-006" />
       </StyledSubtitle>
       <StyledList>
         {list.map((item: any, index: number) => (

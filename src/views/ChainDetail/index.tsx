@@ -27,7 +27,7 @@ const ChainDetail = ({ path }: any) => {
     <StyledContainer>
       <Top chain={{ ...currentChain, ...detail }} />
       {detail?.deepdive && <QuickOnboarding activities={activities} path={path} />}
-      <Dapps dapps={hotDapps} />
+      <Dapps dapps={hotDapps} chainName={currentChain.title} />
       <Quests quests={quests} />
     </StyledContainer>
   );

@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { memo } from 'react';
 
 import type { Tab } from '../../types';
-import { StyledCoin, StyledFist, StyledTab, StyledTabActiveBg,StyledTabs, StyledTabWrap } from './styles';
+import { StyledCoin, StyledFist, StyledTab, StyledTabActiveBg, StyledTabs, StyledTabWrap } from './styles';
 
 const TABS: { name: string; key: Tab }[] = [
   {
@@ -15,7 +15,7 @@ const TABS: { name: string; key: Tab }[] = [
   },
 ];
 
-const Tabs = ({ current, onChange }: { current: Tab; onChange: (tab: Tab) => void }) => {
+const Tabs = ({ current, onChange, bp }: { current: Tab; bp?: string; onChange: (tab: Tab) => void }) => {
   return (
     <StyledTabs $width={500}>
       {TABS.map((tab, i) => (
@@ -24,6 +24,7 @@ const Tabs = ({ current, onChange }: { current: Tab; onChange: (tab: Tab) => voi
             onChange(tab.key);
           }}
           key={tab.key}
+          data-bp={bp}
         >
           <StyledTab $active={current === tab.key}>
             {tab.key === 'quests' && <StyledFist $size={37} />}

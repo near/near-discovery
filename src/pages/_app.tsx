@@ -21,11 +21,9 @@ import { SkeletonTheme } from 'react-loading-skeleton';
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
-import { useClickTracking } from '@/hooks/useClickTracking';
-import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import useInitialData from '@/hooks/useInitialData';
-import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import useTokenPrice from '@/hooks/useTokenPrice';
+import useClickTracking from '@/hooks/useClickTracking';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
@@ -40,8 +38,8 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
-  useHashUrlBackwardsCompatibility();
-  usePageAnalytics();
+  // useHashUrlBackwardsCompatibility();
+  // usePageAnalytics();
   useClickTracking();
   const { getInitialData } = useInitialData();
   const [ready, setReady] = useState(false);
@@ -107,6 +105,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       }
     }
     setReady(true);
+
     return () => {
       clearInterval(interval);
     };

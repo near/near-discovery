@@ -37,6 +37,7 @@ const Explore = ({ title, desc, items, link, loading, onLinkClick, onItemClick }
                 onClick={() => {
                   onItemClick(item);
                 }}
+                data-bp="30011-001"
               >
                 {item.name}
               </StyledExploreItem>
@@ -54,7 +55,7 @@ const Explore = ({ title, desc, items, link, loading, onLinkClick, onItemClick }
           {items.length > 4 && <StyledExploreItem onClick={onItemClick}>...</StyledExploreItem>}
         </StyledExploreItems>
       </div>
-      <Link href={link} onClick={onLinkClick} className="explore-link">
+      <Link href={link} onClick={onLinkClick} className="explore-link" data-bp="30011-001">
         <div className="content-item-arrow">
           <ArrowIcon />
         </div>

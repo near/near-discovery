@@ -33,12 +33,13 @@ const BnsLeaderboardView = (props: any) => {
   return (
     <StyledContainer>
       <Yours info={userInfo} />
-      {!!banners.length && <Swiper banners={banners} />}
+      {!!banners.length && <Swiper banners={banners} bp="10015-001" />}
       <Tabs
         current={tab}
         onChange={(_tab) => {
           setTab(_tab);
         }}
+        bp="10015-002"
       />
 
       {tab === 'leaderboard' && (

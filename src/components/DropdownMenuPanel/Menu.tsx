@@ -12,7 +12,7 @@ import {
 
 const MenuItem = ({ title, desc, icon, extra, disabled, onClick }: any) => {
   return (
-    <StyledMenuItem onClick={onClick} style={{ opacity: disabled ? 0.5 : 1 }}>
+    <StyledMenuItem onClick={onClick} style={{ opacity: disabled ? 0.5 : 1 }} data-bp="30011-001">
       <StyledMenuIconWrapper>{icon}</StyledMenuIconWrapper>
       <div>
         <StyledMenuTitle>

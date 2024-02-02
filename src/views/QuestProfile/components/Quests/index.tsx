@@ -67,6 +67,7 @@ export const QuestPanel = ({ title, info, list, loading }: any) => {
                 key={item.id}
                 quest={{ ...item, live: Date.now() < item.end_time && Date.now() > item.start_time }}
                 mt={30}
+                bp="40011-001"
               />
             ))}
           </StyledQuests>

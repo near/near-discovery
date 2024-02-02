@@ -37,7 +37,7 @@ const DiscoveryDapps = () => {
             </StyledTab>
           ))}
         </StyledTabs>
-        <GoMore label="Explore all" path="/alldapps" />
+        <GoMore label="Explore all" path="/alldapps" bp="1001-006" />
       </StyledTabsWrapper>
       <StyledDesc>
         Experience a tailored selection of dApps, handpicked for their potential to improve your DeFi journey.
@@ -45,7 +45,7 @@ const DiscoveryDapps = () => {
       {tab === 'Y' && (
         <AnimatePresence mode="wait">
           <motion.div {...container}>
-            <Dapps dapps={featuredDapps || []} />
+            <Dapps dapps={featuredDapps || []} bp={{ detail: '1001-004', dapp: '1001-005' }} />
           </motion.div>
         </AnimatePresence>
       )}
@@ -53,7 +53,7 @@ const DiscoveryDapps = () => {
       {tab === 'N' && (
         <AnimatePresence mode="wait">
           <motion.div {...container}>
-            <Dapps dapps={upcomingDapps || []} />
+            <Dapps dapps={upcomingDapps || []} bp={{ detail: '1001-004', dapp: '1001-005' }} />
           </motion.div>
         </AnimatePresence>
       )}
