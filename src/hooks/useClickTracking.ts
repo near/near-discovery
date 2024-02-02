@@ -1,24 +1,15 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
+import { initReactTrack, report } from '@/utils/burying-point';
+import { getCookie } from 'cookies-next';
 
-import { recordClick, recordTouchStart } from '@/utils/analytics';
-
-export function useClickTracking() {
-  const onClickEvent = useCallback((event: PointerEvent) => {
-    switch (event.pointerType) {
-      case 'touch':
-        recordTouchStart(event);
-        break;
-      default:
-        recordClick(event);
-        break;
-    }
-  }, []);
-
+export default function useClickTracking() {
   useEffect(() => {
-    window.addEventListener('pointerdown', onClickEvent);
-
-    return () => {
-      window.removeEventListener('pointerdown', onClickEvent);
-    };
-  }, [onClickEvent]);
+    initReactTrack({
+      onClickEvent: (code: string) => {
+        const account = getCookie('LOGIN_ACCOUNT');
+        if (!account || !code) return;
+        report({ address: account, code });
+      },
+    });
+  }, []);
 }

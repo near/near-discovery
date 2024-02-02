@@ -3,30 +3,28 @@ import loginLogo from '@/assets/images/login_logo.svg';
 import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
 import { memo } from 'react';
-import {
-  StyledFlex,
-  StyledImage,
-  StyledInvitedUsers,
-  StyledLoginConnectWalletButton
-} from './styles';
+import { StyledFlex, StyledImage, StyledInvitedUsers, StyledLoginConnectWalletButton } from './styles';
 
 const LoginView = () => {
   const { connect, connecting } = useAuth();
   return (
-    <StyledFlex style={{ height: '100vh' }} $gap='82px'>
+    <StyledFlex style={{ height: '100vh' }} $gap="82px">
       <StyledImage>
-        <Image src={loginBg} style={{ width: 824, height: 636 }} alt='loginBg' />
+        <Image src={loginBg} style={{ width: 824, height: 636 }} alt="loginBg" />
       </StyledImage>
-      <StyledFlex $direction='column' >
+      <StyledFlex $direction="column">
         <StyledImage style={{ marginBottom: 89 }}>
-          <Image style={{ width: 409 }} src={loginLogo} alt='loginLogo' />
+          <Image style={{ width: 409 }} src={loginLogo} alt="loginLogo" />
         </StyledImage>
         <StyledLoginConnectWalletButton
           onClick={() => {
             connect();
           }}
           disabled={connecting}
-        >Connect Wallet</StyledLoginConnectWalletButton>
+          data-bp="2001-001"
+        >
+          Connect Wallet
+        </StyledLoginConnectWalletButton>
         <StyledInvitedUsers>💡 Invited users only</StyledInvitedUsers>
       </StyledFlex>
     </StyledFlex>

@@ -17,7 +17,7 @@ import {
   StyledTask,
   StyledTaskDesc,
   StyledTaskName,
-  StyledCategoryName
+  StyledCategoryName,
 } from './styles';
 
 const STEPS_MAP: { [key: string]: number } = {
@@ -42,12 +42,14 @@ const QuestItem = ({
     is_period,
     difficulty,
     id,
-    quest_category_name
+    quest_category_name,
   },
   mt,
+  bp,
 }: {
   quest: any;
   mt?: number;
+  bp?: string;
 }) => {
   const router = useRouter();
   const actions = Array.from({ length: total_action }, (val, i) => i);
@@ -57,9 +59,10 @@ const QuestItem = ({
       $mt={mt}
       whileHover={{ opacity: 0.9 }}
       onClick={(event) => {
-        event.stopPropagation()
+        event.stopPropagation();
         router.push(`/quest/detail?id=${id}`);
       }}
+      data-bp={bp}
     >
       <StyledTask>
         <StyledIconBox>{logo && <StyledIcon src={logo} $disabled={live === false} />}</StyledIconBox>
@@ -87,7 +90,11 @@ const QuestItem = ({
               </StyledTag>
             )}
             {/* <StyledTag>{is_period ? 'Period' : 'Once'}</StyledTag> */}
-            {quest_category_name && <StyledCategoryName style={{ color: `var(--${quest_category_name}-color)` }}>#{quest_category_name}</StyledCategoryName>}
+            {quest_category_name && (
+              <StyledCategoryName style={{ color: `var(--${quest_category_name}-color)` }}>
+                #{quest_category_name}
+              </StyledCategoryName>
+            )}
           </StyledTags>
           {is_claimed ? (
             <StyledCalimable style={{ color: '#979ABE' }}>Claimed</StyledCalimable>

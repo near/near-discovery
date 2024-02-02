@@ -41,7 +41,7 @@ const Compass = () => {
               <StyledCardDesc>
                 Effortlessly sift through a curated selection of dApps and identify your favourites.
               </StyledCardDesc>
-              <StyledCardButton>
+              <StyledCardButton data-bp="1001-003">
                 <div>Explore now</div>
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
                   <path

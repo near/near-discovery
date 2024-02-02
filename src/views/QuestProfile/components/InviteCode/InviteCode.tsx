@@ -4,7 +4,7 @@ import { StyledBg, StyledContainer, StyledValue } from './styles';
 
 const InviteCode = ({ onClick }: { onClick: VoidFunction }) => {
   return (
-    <StyledContainer onClick={onClick}>
+    <StyledContainer onClick={onClick} data-bp="4001-001">
       <StyledBg>
         <svg xmlns="http://www.w3.org/2000/svg" width="157" height="44" viewBox="0 0 182 52" fill="none">
           <path

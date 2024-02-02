@@ -38,6 +38,7 @@ const Decentralised = () => {
         <div>enables DapDap to realise the Open Web vision.</div>
       </StyledSubtitle>
       <StyledLearnMore
+        data-bp="1001-011"
         onClick={() => {
           window.open('https://near.org/', '_blank');
         }}

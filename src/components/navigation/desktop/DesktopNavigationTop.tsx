@@ -206,7 +206,7 @@ export const DesktopNavigationTop = () => {
                 </InputCloseIcon>
               )}
             </InputWrapper>
-            <div className="switch-icon" onClick={() => setShowMenuContent(!showMenuContent)}>
+            <div className="switch-icon" onClick={() => setShowMenuContent(!showMenuContent)} data-bp="3001-001">
               <img src={CloseIcon} alt="" className={`switch-icon-img ${showMenuContent && 'show'}`} />
               <img src={ExpandIcon} alt="" className={`switch-icon-img ${!showMenuContent && 'show'}`} />
             </div>
@@ -219,13 +219,13 @@ export const DesktopNavigationTop = () => {
         </MenuContainer>
         {account ? (
           <LoginContainer>
-            <Chain showName={false} />
+            <Chain showName={false} bp="3001-003" />
             <AccountWrapper
               onClick={() => {
                 setLayoutStore({ showAccountSider: true });
               }}
             >
-              <AccountItem showCopy={false} logoSize={28} />
+              <AccountItem showCopy={false} logoSize={28} bp="3001-004" />
             </AccountWrapper>
           </LoginContainer>
         ) : (

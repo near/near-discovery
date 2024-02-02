@@ -41,7 +41,14 @@ const QuickOnboarding = () => {
         <StyledImage src="/images/home/quick_onboarding.png" />
         <StyledCards>
           {CARDS.map((card: any) => (
-            <StyledCard key={card.name} style={{ background: card.bg }}>
+            <StyledCard
+              key={card.name}
+              style={{ background: card.bg }}
+              data-bp="1001-009"
+              onClick={() => {
+                // TODO
+              }}
+            >
               <StyledCardContent>
                 <StyledCardHeader>
                   <StyledCardTitle>

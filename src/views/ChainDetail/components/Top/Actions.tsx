@@ -10,6 +10,7 @@ const Actions = ({ id, path, deepdive }: any) => {
         onClick={() => {
           router.push(`/alldapps?network=${id}`);
         }}
+        data-bp="100121-002"
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path
@@ -24,6 +25,7 @@ const Actions = ({ id, path, deepdive }: any) => {
           onClick={() => {
             router.push(`/all-in-one/${path}`);
           }}
+          data-bp="100121-003"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
             <path
@@ -40,6 +42,7 @@ const Actions = ({ id, path, deepdive }: any) => {
             router.push(`/warmup/${path}`);
           }}
           width="141px"
+          data-bp="100121-004"
         >
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="17" viewBox="0 0 14 17" fill="none">
             <path

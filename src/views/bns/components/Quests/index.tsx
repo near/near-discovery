@@ -5,9 +5,7 @@ import { memo } from 'react';
 import Narratives from '../Narratives';
 import QuestCampaign from '../QuestCampaign';
 
-import {
-  StyledLoadingWrapper
-} from './styles';
+import { StyledLoadingWrapper } from './styles';
 const Quests = ({
   onLoad,
   id,
@@ -18,36 +16,35 @@ const Quests = ({
   categoryLoading,
   categories,
   userInfo,
-  loading
+  loading,
 }: any) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>
-        {
-          (campaignLoading || categoryLoading) ? (
-            <StyledLoadingWrapper>
-              <Loading size={60} />
-            </StyledLoadingWrapper>
-          ) : (
-            <>
-              <QuestCampaign
-                onLoad={onLoad}
-                loading={campaignLoading}
-                campaigns={campaigns.filter((campaign: any) => !campaign.category)}
-                categoryLoading={categoryLoading}
-                categories={categories}
-              />
-              <Narratives
-                onLoad={onLoad}
-                loading={campaignLoading}
-                campaigns={campaigns.filter((campaign: any) => campaign.category)}
-                categoryLoading={categoryLoading}
-                categories={categories}
-              />
-            </>
-          )
-        }
-
+        {campaignLoading || categoryLoading ? (
+          <StyledLoadingWrapper>
+            <Loading size={60} />
+          </StyledLoadingWrapper>
+        ) : (
+          <>
+            <QuestCampaign
+              onLoad={onLoad}
+              loading={campaignLoading}
+              campaigns={campaigns.filter((campaign: any) => !campaign.category)}
+              categoryLoading={categoryLoading}
+              categories={categories}
+              bp={{ wrap: '10015-003', card: '100151-001' }}
+            />
+            <Narratives
+              onLoad={onLoad}
+              loading={campaignLoading}
+              campaigns={campaigns.filter((campaign: any) => campaign.category)}
+              categoryLoading={categoryLoading}
+              categories={categories}
+              bp="10015-004"
+            />
+          </>
+        )}
       </motion.div>
     </AnimatePresence>
   );

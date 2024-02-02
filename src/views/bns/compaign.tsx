@@ -31,43 +31,39 @@ import {
   StyledSvg,
   StyledText,
   StyledUserName,
-  StyledWrapper
+  StyledWrapper,
 } from './styles';
 import type { QueryNameStatusType } from './types';
 
 import useUserInfo from '@/hooks/useUserInfo';
 import useReport from '@/views/Landing/hooks/useReport';
-import namehash from "@ensdomains/eth-ens-namehash";
+import namehash from '@ensdomains/eth-ens-namehash';
 import NetworkDialog from './components/NetworkDialog';
 import RegisterDialog from './components/RegisterDialog';
 import SwitchNetwork from './components/SwitchNetwork';
 import Yours from './components/Yours';
 
 const CampaignView = () => {
-  const router = useRouter()
-  const compaignId = '6'
-  const contract = useBnsContract()
+  const router = useRouter();
+  const compaignId = '6';
+  const contract = useBnsContract();
   const { handleReport } = useReport();
-  const { chains } = useTokensAndChains()
+  const { chains } = useTokensAndChains();
   const { account } = useAccount();
   const { connect, connecting } = useAuth();
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState('');
   const { info: userInfo = {} } = useUserInfo({ updater: 1 });
 
-  const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0)
-  const [bnsNames, setBnsNames] = useState<any>([])
-  const [currentBnsName, setCurrentBnsName] = useState<any>({
+  const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0);
+  const [bnsNames, setBnsNames] = useState<any>([]);
+  const [currentBnsName, setCurrentBnsName] = useState<any>({});
+  const [showRegisterDialg, setShowRegisterDialg] = useState(false);
+  const [priceLabel, setPriceLabel] = useState({});
+  const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false);
 
-  })
-  const [showRegisterDialg, setShowRegisterDialg] = useState(false)
-  const [priceLabel, setPriceLabel] = useState({
-
-  })
-  const [showNetworkDialog, setShowNetworkDialog] = useState<boolean>(false)
-
-  const [showSwitchNetworkDialog, setShowSwitchNetworkDialog] = useState<boolean>(false)
-  const { loading, questList } = useQuestList(compaignId)
-  const [discount, setDiscount] = useState(false)
+  const [showSwitchNetworkDialog, setShowSwitchNetworkDialog] = useState<boolean>(false);
+  const { loading, questList } = useQuestList(compaignId);
+  const [discount, setDiscount] = useState(false);
 
   const [{ connectedChain, settingChain }, setChain] = useSetChain();
   const currentChain: any = useMemo(
@@ -75,164 +71,187 @@ const CampaignView = () => {
     [connectedChain?.id],
   );
 
-  const timerRef = useRef<any>(null)
+  const timerRef = useRef<any>(null);
 
-  const twitterQuest: any = useMemo(() => questList.find((quest: any) => quest.id === 28), [questList])
+  const twitterQuest: any = useMemo(() => questList.find((quest: any) => quest.id === 28), [questList]);
   const getBnsAddress = async function (name: string) {
-    return await http.get('https://api.basename.app/records/base/' + name)
-  }
+    return await http.get('https://api.basename.app/records/base/' + name);
+  };
   const getBnsNames = async function () {
     try {
-      const firstResponse = await http.get('https://api.basename.app/v1/names?address=' + ethers.utils.getAddress(account as string))
-      const promiseArray: any = []
+      const firstResponse = await http.get(
+        'https://api.basename.app/v1/names?address=' + ethers.utils.getAddress(account as string),
+      );
+      const promiseArray: any = [];
       firstResponse.map((bnsName: any) => {
-        promiseArray.push(getBnsAddress(bnsName.name))
-      })
+        promiseArray.push(getBnsAddress(bnsName.name));
+      });
       const node = await contract.read({
         address: '0x0363696B6D369859f5fb4994a5Ade574CD91D220',
         functionName: 'node',
-        args: [ethers.utils.getAddress(account as string)]
-      })
+        args: [ethers.utils.getAddress(account as string)],
+      });
       const primaryName = await contract.read({
         address: '0xa92659104Eb42309Ae9482F1D1AE934B9Ee51dc3',
         functionName: 'name',
-        args: [node]
-      })
-      const secondResponse = await Promise.all(promiseArray)
+        args: [node],
+      });
+      const secondResponse = await Promise.all(promiseArray);
       secondResponse.forEach((response, index) => {
-        firstResponse[index]['isPrimaryName'] = firstResponse[index]['name'] == primaryName
-        firstResponse[index]['addresses'] = response.data.addresses
-      })
-      setBnsNames(firstResponse)
+        firstResponse[index]['isPrimaryName'] = firstResponse[index]['name'] == primaryName;
+        firstResponse[index]['addresses'] = response.data.addresses;
+      });
+      setBnsNames(firstResponse);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   const handleGetBnsDiscount = async () => {
     try {
-      const result = await getBnsDiscount()
-      setDiscount(result.data.discount)
+      const result = await getBnsDiscount();
+      setDiscount(result.data.discount);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   const handleQuery = async function (event: any) {
-    const normalizedName = namehash.normalize(event).split('.').join('')
+    const normalizedName = namehash.normalize(event).split('.').join('');
     try {
-      setQueryNameStatus(1)
+      setQueryNameStatus(1);
       const firstResponse = await contract.read({
         address: '0x4079d84889e0E1AC22beec60dc8e5E7b621bf55D',
         functionName: 'available',
-        args: [normalizedName]
-      })
-      const secondResponse = await http.get('https://api.basename.app/v1/registration/' + normalizedName + '/is-name-available')
+        args: [normalizedName],
+      });
+      const secondResponse = await http.get(
+        'https://api.basename.app/v1/registration/' + normalizedName + '/is-name-available',
+      );
       if (firstResponse && secondResponse) {
         // 查询Bns优惠
-        handleGetBnsDiscount()
-        setQueryNameStatus(2)
+        handleGetBnsDiscount();
+        setQueryNameStatus(2);
       } else {
-        setQueryNameStatus(3)
+        setQueryNameStatus(3);
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
     try {
-      const thirdResponse = await http.get('https://api.basename.app/v1/prices/labels/' + normalizedName)
-      setPriceLabel(thirdResponse)
+      const thirdResponse = await http.get('https://api.basename.app/v1/prices/labels/' + normalizedName);
+      setPriceLabel(thirdResponse);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   const handleInputChange = function (event: any) {
-    setQueryNameStatus(0)
-    setValue(event)
-    timerRef.current && clearTimeout(timerRef.current)
+    setQueryNameStatus(0);
+    setValue(event);
+    timerRef.current && clearTimeout(timerRef.current);
     timerRef.current = setTimeout(() => {
-      event.length > 0 && handleQuery(event)
-    }, 1000)
-  }
+      event.length > 0 && handleQuery(event);
+    }, 1000);
+  };
   const handleClickBnsName = function (value: any) {
-    setCurrentBnsName(value)
-    setShowNetworkDialog(true)
-  }
+    setCurrentBnsName(value);
+    setShowNetworkDialog(true);
+  };
   const handleClaim = function () {
-    setShowRegisterDialg(true)
-  }
+    setShowRegisterDialg(true);
+  };
   const handleSetPrimary = function (response: any) {
-    setShowNetworkDialog(false)
-    getBnsNames()
-  }
+    setShowNetworkDialog(false);
+    getBnsNames();
+  };
   useEffect(() => {
-    account && getBnsNames()
-  }, [])
+    account && getBnsNames();
+  }, []);
 
   // 上报
   useEffect(() => {
     if (typeof router.query.click_yourname === 'string') {
-      handleReport('quest/leaderboard/DapDapXBNS?click_yourname')
+      handleReport('quest/leaderboard/DapDapXBNS?click_yourname');
     }
     if (typeof router.query.Your_BNS_Names === 'string') {
-      handleReport('quest/leaderboard/DapDapXBNS?Your_BNS_Names')
+      handleReport('quest/leaderboard/DapDapXBNS?Your_BNS_Names');
     }
     if (typeof router.query.action64 === 'string') {
-      handleReport('quest/leaderboard/DapDapXBNS?action64')
+      handleReport('quest/leaderboard/DapDapXBNS?action64');
     }
-  }, [router.query])
-
+  }, [router.query]);
 
   return (
     <StyledWrapper style={{ paddingBottom: 120 }}>
       <Yours info={userInfo} />
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
-        <Breadcrumb navs={[
-          { name: 'Quest', path: '/quest/leaderboard' },
-          { name: 'DapDap X BNS', path: '/quest/campaign/DapDapXBNS' },
-        ]} />
+        <Breadcrumb
+          navs={[
+            { name: 'Quest', path: '/quest/leaderboard' },
+            { name: 'DapDap X BNS', path: '/quest/campaign/DapDapXBNS' },
+          ]}
+        />
       </StyledContainer>
-      <StyledFlex $gap='20px' style={{
-        background: 'linear-gradient(90deg, #06D0FF 0%, #C55EEC 50%, #FF9802 100%)',
-        height: 254
-      }}>
-        <StyledWrapper >
+      <StyledFlex
+        $gap="20px"
+        style={{
+          background: 'linear-gradient(90deg, #06D0FF 0%, #C55EEC 50%, #FF9802 100%)',
+          height: 254,
+        }}
+      >
+        <StyledWrapper>
           <StyledSvg>
-            <Image src={DapXBNS} alt='DapXBNS' />
+            <Image src={DapXBNS} alt="DapXBNS" />
           </StyledSvg>
           <StyledFlex>
-            <StyledFlex $direction='column' $gap='6px' style={{ width: 496 }}>
-              <StyledText $size='36px' $weight='700' $line='120%'>One quest for the best price!</StyledText>
-              <StyledText $size='20px' $line='120%'>Follow the quest on the right, you will get the best price for register BNS, and get 100 DapDap PTS.</StyledText>
+            <StyledFlex $direction="column" $gap="6px" style={{ width: 496 }}>
+              <StyledText $size="36px" $weight="700" $line="120%">
+                One quest for the best price!
+              </StyledText>
+              <StyledText $size="20px" $line="120%">
+                Follow the quest on the right, you will get the best price for register BNS, and get 100 DapDap PTS.
+              </StyledText>
             </StyledFlex>
             <StyledSvg>
-              <Image src={discountMark} alt='discountMark' />
+              <Image src={discountMark} alt="discountMark" />
             </StyledSvg>
           </StyledFlex>
         </StyledWrapper>
-        {twitterQuest && <StyledWrapper style={{ position: 'relative' }}>
-          <QuestItem quest={twitterQuest} />
-          {
-            twitterQuest.action_completed + 1 > twitterQuest.total_action && <StyledAchieved>
-              <Image src={iconAchieved} alt='iconAchieved' />
-            </StyledAchieved>
-          }
-        </StyledWrapper>
-        }
+        {twitterQuest && (
+          <StyledWrapper style={{ position: 'relative' }}>
+            <QuestItem quest={twitterQuest} />
+            {twitterQuest.action_completed + 1 > twitterQuest.total_action && (
+              <StyledAchieved>
+                <Image src={iconAchieved} alt="iconAchieved" />
+              </StyledAchieved>
+            )}
+          </StyledWrapper>
+        )}
       </StyledFlex>
       <StyledImage>
-        <Image src={desktop} width={678} height={419} alt='desktop' />
+        <Image src={desktop} width={678} height={419} alt="desktop" />
       </StyledImage>
-      <StyledFlex $direction='column' $gap='16px' style={{ position: 'relative', top: '-44px' }}>
+      <StyledFlex $direction="column" $gap="16px" style={{ position: 'relative', top: '-44px' }}>
         <StyledUserName>Web3 Username</StyledUserName>
-        <StyledText $size='20px' $weight='600'>Web3 naming (.base) for the next billion+ users on Base</StyledText>
+        <StyledText $size="20px" $weight="600">
+          Web3 naming (.base) for the next billion+ users on Base
+        </StyledText>
       </StyledFlex>
-      <StyledFlex $direction='column' $gap='20px'>
-        <InputWithEmoji queryStatus={queryNameStatus} value={value} setValue={setValue} onChange={(event: any) => handleInputChange(event)} />
-        {queryNameStatus > 1 && <QueryResult label={value} status={queryNameStatus} onClaim={handleClaim} />}
+      <StyledFlex $direction="column" $gap="20px">
+        <InputWithEmoji
+          queryStatus={queryNameStatus}
+          value={value}
+          setValue={setValue}
+          onChange={(event: any) => handleInputChange(event)}
+          bp="100152-001"
+        />
+        {queryNameStatus > 1 && (
+          <QueryResult label={value} status={queryNameStatus} onClaim={handleClaim} bp="100152-002" />
+        )}
       </StyledFlex>
       {bnsNames.length > 0 && <YourBnsNames bnsNames={bnsNames} onClick={handleClickBnsName} />}
-      <StyledFlex style={{ marginTop: 80 }} $direction='column' $gap='100px'>
-        <RelatedQuests loading={loading} questList={questList} />
+      <StyledFlex style={{ marginTop: 80 }} $direction="column" $gap="100px">
+        <RelatedQuests loading={loading} questList={questList} bp="100152-003" />
         <QA />
       </StyledFlex>
       {showRegisterDialg && (
@@ -258,7 +277,7 @@ const CampaignView = () => {
       )}
       {showSwitchNetworkDialog && <SwitchNetwork chainId={8453} onClose={() => setShowSwitchNetworkDialog(false)} />}
       <AccountSider />
-    </StyledWrapper >
+    </StyledWrapper>
   );
 };
 

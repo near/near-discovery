@@ -69,6 +69,7 @@ const Actions = ({
           config={config}
           isLive={isLive}
           id={id}
+          bp="1001511-001"
         />
       ))}
       <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>
@@ -82,6 +83,7 @@ const Actions = ({
         onClick={() => {
           handleClaim(id);
         }}
+        data-bp="1001511-002"
       >
         {loading && <Loading mr="5px" />}
         <span>Claim</span>

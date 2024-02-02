@@ -38,6 +38,7 @@ const Tabs = ({ current, onChange }: { current: Tab; onChange: (tab: Tab) => voi
             onChange(tab.key);
           }}
           key={tab.key}
+          data-bp="4001-002"
         >
           <StyledTab $active={current === tab.key}>
             {tab.key === 'quests' && <StyledFist $size={37} />}

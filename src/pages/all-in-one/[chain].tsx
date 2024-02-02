@@ -242,7 +242,7 @@ const AllInOne: NextPageWithLayout = () => {
       <>
         {' '}
         <div className="top-login-select">
-          <div className="select-item-wrapper" onClick={handleSelectItemClick}>
+          <div className="select-item-wrapper" onClick={handleSelectItemClick} data-bp="10014-002">
             <div
               className="selsect-item-img"
               style={{
@@ -270,6 +270,7 @@ const AllInOne: NextPageWithLayout = () => {
                   className={`select-popups-item ${chain === item.path ? 'selected' : ''}`}
                   key={item.path}
                   onClick={() => handleItemClick(item.path)}
+                  data-bp="10014-003"
                 >
                   <div className="popup-item-img" style={{ backgroundColor: item.bgColor }}>
                     <img src={item.icon} alt="" />

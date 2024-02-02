@@ -48,6 +48,7 @@ export const StyledChains = styled.div`
   gap: 12px;
   flex-wrap: wrap;
   width: 342px;
+  cursor: pointer;
 `;
 
 export const StyledChain = styled.div`

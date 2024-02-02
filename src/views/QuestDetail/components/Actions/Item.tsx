@@ -34,6 +34,7 @@ const ActionItem = ({
   config,
   isLive,
   id,
+  bp,
   onSuccess,
 }: {
   action: any;
@@ -42,6 +43,7 @@ const ActionItem = ({
   config: any;
   isLive: boolean;
   id: string;
+  bp?: string;
   onSuccess: (type?: number) => void;
 }) => {
   const [open, setOpen] = useState(false);
@@ -88,7 +90,7 @@ const ActionItem = ({
     }
 
     if (action.category === 'twitter_follow' && userInfo.twitter?.is_bind) {
-      sessionStorage.setItem('_clicked_twitter_' + action.id, '1')
+      sessionStorage.setItem('_clicked_twitter_' + action.id, '1');
     }
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
@@ -96,7 +98,6 @@ const ActionItem = ({
       window.open(path, '_blank');
       return;
     }
-
 
     if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
       const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
@@ -149,6 +150,7 @@ const ActionItem = ({
         style={{
           cursor: !binding && isLive ? 'pointer' : 'not-allowed',
         }}
+        data-bp={bp}
       >
         <StyledItemLeft>
           {actionCompleted ? (
@@ -200,12 +202,12 @@ const ActionItem = ({
             <StyledIconBox
               onClick={(ev) => {
                 ev.stopPropagation();
-                if (checking) return
+                if (checking) return;
                 if (action.category === 'twitter_follow') {
-                  const clicked = sessionStorage.getItem('_clicked_twitter_' + action.id)
-                  clicked && handleRefresh(action.id)
+                  const clicked = sessionStorage.getItem('_clicked_twitter_' + action.id);
+                  clicked && handleRefresh(action.id);
                 } else {
-                  handleRefresh(action.id)
+                  handleRefresh(action.id);
                 }
               }}
               onMouseEnter={() => {

@@ -756,15 +756,21 @@ const AllDappsColumn: NextPageWithLayout = () => {
         <div
           className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
           onClick={() => handleTabClick('token')}
+          data-bp="10011-003"
         >
           💰 Native token
         </div>
-        <div className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`} onClick={() => handleTabClick('TBD')}>
+        <div
+          className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
+          onClick={() => handleTabClick('TBD')}
+          data-bp="10011-003"
+        >
           🔥 Token-TBD
         </div>
         <div
           className={`tab-list-item ${selectedTab === 'favorites' ? 'active' : ''}`}
           onClick={() => handleTabClick('favorites')}
+          data-bp="10011-003"
         >
           ❤️ Favorites
         </div>
@@ -783,6 +789,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                   className={`netWork-list-item ${selectedMenu === String(child.id) ? 'active' : ''}`}
                   key={index}
                   onClick={() => child.id && handleMenuClick(String(child.id))}
+                  data-bp="10011-004"
                 >
                   <img src={child.logo} alt="" />
                   {child.name}
@@ -817,6 +824,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       selectedFunction.includes(String(item.id)) ? item.name + 'Active' : ''
                     }`}
                     onClick={() => handleFunctionClick(item)}
+                    data-bp="10011-005"
                   >
                     {item.name}
                   </div>
@@ -833,18 +841,21 @@ const AllDappsColumn: NextPageWithLayout = () => {
           <div
             className={`medal-list-item ${selectedMedalMenu === 0 ? 'active' : ''}`}
             onClick={() => handleMedalMenuClick(0)}
+            data-bp="10011-006"
           >
             Both
           </div>
           <div
             className={`medal-list-item ${selectedMedalMenu === 1 ? 'active' : ''}`}
             onClick={() => handleMedalMenuClick(1)}
+            data-bp="10011-006"
           >
             Yes
           </div>
           <div
             className={`medal-list-item ${selectedMedalMenu === 2 ? 'active' : ''}`}
             onClick={() => handleMedalMenuClick(2)}
+            data-bp="10011-006"
           >
             No
           </div>
@@ -855,7 +866,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           {loading ? (
             <LoadingDapps length={30} />
           ) : tokenTBD?.length ? (
-            <Dapps dapps={tokenTBD} />
+            <Dapps dapps={tokenTBD} bp={{ detail: '10011-001', dapp: '10011-002' }} />
           ) : (
             <Empty size={42} tips="No dapps found" />
           )}
@@ -866,7 +877,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           {loading ? (
             <LoadingDapps length={30} />
           ) : nativeToken?.length ? (
-            <Dapps dapps={nativeToken} />
+            <Dapps dapps={nativeToken} bp={{ detail: '10011-001', dapp: '10011-002' }} />
           ) : (
             <Empty size={42} tips="No dapps found" />
           )}
@@ -877,7 +888,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           {loading ? (
             <LoadingDapps length={30} />
           ) : isFavoriteList?.length ? (
-            <Dapps dapps={isFavoriteList} />
+            <Dapps dapps={isFavoriteList} bp={{ detail: '10011-001', dapp: '10011-002' }} />
           ) : (
             <Empty size={42} tips="No dapps found" />
           )}

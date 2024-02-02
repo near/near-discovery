@@ -52,6 +52,7 @@ const SocialButton = ({ icon, alt, url }: { icon: any; alt: string; url?: string
       onClick={() => {
         window.open(url, '_blank');
       }}
+      data-bp="3001-002"
     >
       {icon}
     </StyledSocialButton>

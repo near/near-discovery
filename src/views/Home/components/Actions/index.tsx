@@ -95,6 +95,7 @@ const ACTIONS = [
     ),
     path: '/alldapps',
     bg: '#BC9BFF',
+    bp: '1001-001',
   },
   {
     title: 'Earn Rewards',
@@ -181,6 +182,7 @@ const ACTIONS = [
     ),
     path: '/quest/leaderboard',
     bg: '#79F4A3',
+    bp: '1001-002',
   },
 ];
 
