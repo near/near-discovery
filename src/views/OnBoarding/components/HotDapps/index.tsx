@@ -13,7 +13,7 @@ const HotDapps = ({ dapps }: any) => {
         </StyledTitle>
         <GoMore label="View all" path="/alldapps" />
       </StyledHeader>
-      <Dapps dapps={dapps || []} />
+      <Dapps dapps={dapps || []} bp={{ detail: '100131-005', dapp: '100131-005' }} />
     </StyledContainer>
   );
 };

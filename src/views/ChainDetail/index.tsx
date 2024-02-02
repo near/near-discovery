@@ -11,7 +11,7 @@ import Quests from './components/Quests';
 import { StyledContainer } from './styles';
 
 const ChainDetail = ({ path }: any) => {
-  const { loading, detail, hotDapps, activities, quests } = useDetail(PathToId[path]);
+  const { loading, detail, hotDapps, quests } = useDetail(PathToId[path]);
   const { handleReport } = useReport();
   const currentChain = useMemo(() => {
     return chainsConfig[path];
@@ -26,7 +26,7 @@ const ChainDetail = ({ path }: any) => {
   return (
     <StyledContainer>
       <Top chain={{ ...currentChain, ...detail }} />
-      {detail?.deepdive && <QuickOnboarding activities={activities} path={path} />}
+      <QuickOnboarding path={path} />
       <Dapps dapps={hotDapps} chainName={currentChain.title} />
       <Quests quests={quests} />
     </StyledContainer>

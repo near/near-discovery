@@ -39,7 +39,7 @@ const Actions = ({ id, path, deepdive }: any) => {
       {deepdive && (
         <StyledAction
           onClick={() => {
-            router.push(`/warmup/${path}`);
+            router.push(`/onboarding/${path}`);
           }}
           width="141px"
           data-bp="100121-004"

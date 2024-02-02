@@ -39,7 +39,7 @@ const OnBoarding = ({ path }: any) => {
       <Tabs current={current} onChange={setCurrent} />
       {current === 'onboarding' && <OnBoardingActions openModal={handleModal} chain={{ ...currentChain, ...detail }} />}
       {current === 'my' && <MyActions openModal={handleModal} chain={{ ...currentChain, ...detail }} />}
-      <Trends />
+      <Trends chain={{ ...currentChain, ...detail }} />
       <HotDapps dapps={hotDapps} />
       <ExecutionModal
         type={modalType}

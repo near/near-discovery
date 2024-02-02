@@ -35,7 +35,7 @@ const Menu = ({ setShow }: any) => {
         desc="DeepDive the hotest L2 Blockcchain to get more intension of reward."
         icon={<DeepDiveIcon />}
         onClick={() => {
-          router.push('/warmup');
+          router.push('/onboarding/linea');
           setShow(false);
         }}
       />

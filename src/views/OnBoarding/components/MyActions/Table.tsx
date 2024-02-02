@@ -55,7 +55,7 @@ const Table = ({ loading, list, deleting, handleDelete, handleModal }: any) => {
       </StyledTableHeader>
       <StyledTableBody>
         {list?.map((item: any, i: number) => (
-          <StyledTableRow key={i + Date.now()}>
+          <StyledTableRow key={i + Date.now()} data-bp="100131-002">
             {COLUMNS.map((column) => (
               <div key={column.key} style={{ width: column.width }}>
                 {column.key === 'action' && <StyledTableAction>{item.action_title}</StyledTableAction>}

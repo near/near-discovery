@@ -431,7 +431,11 @@ export const DesktopNavigationLeft = () => {
               <Link className={`item ${router.asPath == '/' ? 'active' : ''}`} href="/" onClick={closeMenu}>
                 Home
               </Link>
-              <Link className={`item ${isActive('warmup') ? 'active' : ''}`} onClick={closeMenu} href="/warmup">
+              <Link
+                className={`item ${isActive('warmup') ? 'active' : ''}`}
+                onClick={closeMenu}
+                href="/onboarding/linea"
+              >
                 Polygon zkEVM Warm up
               </Link>
 
@@ -645,7 +649,7 @@ export const DesktopNavigationLeft = () => {
                     <div className="icon">{zkevmIcon}</div>
                   </div>
                   <div className="childBox" style={{ display: showWarmBox ? 'block' : 'none' }}>
-                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
+                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/onboarding/linea">
                       Polygon zkEVM
                     </Link>
                   </div>
@@ -798,7 +802,7 @@ export const DesktopNavigationLeft = () => {
                     ></ArrowPcIcon>
                   </div>
                   <div className={`${openWarmPc ? 'show' : 'hidden'}`}>
-                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
+                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/onboarding/linea">
                       Polygon zkEVM<span className="bag">{isActive('warmup') ? visible_bag : null}</span>
                     </Link>
                   </div>

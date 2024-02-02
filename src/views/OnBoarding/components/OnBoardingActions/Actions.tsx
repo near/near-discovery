@@ -82,6 +82,7 @@ const Actions = ({ bgColor, openModal, chainName }: any) => {
               onClick={() => {
                 openModal(action.key);
               }}
+              data-bp="100131-001"
             >
               One-Click Execution
             </StyledActionButton>

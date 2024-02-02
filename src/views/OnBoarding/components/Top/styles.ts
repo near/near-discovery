@@ -53,7 +53,7 @@ export const StyledChainLogoWrapper = styled.div`
 `;
 
 export const StyledChainLogo = styled.img`
-  width: 58px;
+  width: 48px;
 `;
 
 export const StyledChainName = styled.div`

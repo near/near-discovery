@@ -39,7 +39,7 @@ const useDetail = (id: number) => {
   const init = useCallback(async () => {
     try {
       setLoading(true);
-      await Promise.all([queryDetail(), queryHotDapps(), queryActivities(), queryQuests()]);
+      await Promise.all([queryDetail(), queryHotDapps(), queryQuests()]);
       setLoading(false);
     } catch (err) {
       setLoading(false);

@@ -17,6 +17,7 @@ import {
 } from './styles';
 
 const Top = ({ chain }: any) => {
+  console.log(chain);
   return (
     <StyledContainer>
       <StyledBg />
@@ -25,8 +26,8 @@ const Top = ({ chain }: any) => {
       </StyledColorBg>
       <StyledContent>
         <StyledTitleWrapper>
-          <StyledChainLogoWrapper>
-            <StyledChainLogo src={chain?.logo} />
+          <StyledChainLogoWrapper style={{ backgroundColor: chain.bgColor }}>
+            <StyledChainLogo src={chain.icon} />
           </StyledChainLogoWrapper>
           <div>
             <StyledChainName>{chain?.title}</StyledChainName>

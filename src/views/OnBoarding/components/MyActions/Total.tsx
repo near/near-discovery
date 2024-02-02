@@ -24,6 +24,7 @@ const Total = ({ chainId }: any) => {
           onClick={() => {
             router.push(`/onboarding/execute-records/${chainId}`);
           }}
+          data-bp="100131-003"
         >
           Execute Records
         </StyledTotalButton>

@@ -3,7 +3,7 @@ import GoMore from '@/components/GoMore';
 import Item from './Item';
 import { StyledContainer, StyledHeader, StyledTitle, StyledTitleImg, StyledList } from './styles';
 
-const Trends = ({ activities }: any) => {
+const Trends = ({ chain }: any) => {
   return (
     <StyledContainer>
       <StyledHeader>
@@ -11,7 +11,7 @@ const Trends = ({ activities }: any) => {
           <StyledTitleImg src="/images/onboarding/trends.png" />
           <div>Trends</div>
         </StyledTitle>
-        <GoMore label="View all" path="" />
+        <GoMore label="View all" path={`/onboarding/trends/${chain.chainId}`} />
       </StyledHeader>
       <StyledList>{}</StyledList>
     </StyledContainer>
