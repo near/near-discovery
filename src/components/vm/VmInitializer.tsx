@@ -44,7 +44,6 @@ import {
   signInContractId,
 } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
-import { useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 
 export default function VmInitializer() {
@@ -61,7 +60,6 @@ export default function VmInitializer() {
   const setAuthStore = useAuthStore((state) => state.set);
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
-  const searchParams = useSearchParams();
   const idOS = useIdOS();
   const router = useRouter();
   const idosSDK = useIdosStore((state) => state.idOS);
@@ -146,18 +144,22 @@ export default function VmInitializer() {
     });
   }, [idOS, near]);
 
+  const handleWalletSelectorMessage = useCallback(
+    (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+      if (e.data.showWalletSelector) {
+        // Show wallet selector
+        walletModal?.show();
+      }
+    },
+    [walletModal],
+  );
+
   useEffect(() => {
-    // Show wallet selector
-    window.addEventListener(
-      'message',
-      (e: MessageEvent<{ showWalletSelector: boolean }>) => {
-        if (e.data.showWalletSelector) {
-          walletModal?.show();
-        }
-      },
-      false,
-    );
-  }, [walletModal]);
+    window.addEventListener('message', handleWalletSelectorMessage, false);
+    return () => {
+      window.removeEventListener('message', handleWalletSelectorMessage, false);
+    };
+  }, []);
 
   const requestSignMessage = useCallback(
     async (message: string) => {
