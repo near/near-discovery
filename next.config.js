@@ -78,7 +78,10 @@ const withPWA = require('next-pwa')({
   cacheOnFrontEndNav: true,
   skipWaiting: false
 })
-module.exports = withPWA(nextConfig);
+const { loadEnvConfig } = require('@next/env');
+loadEnvConfig(".")
+if(!process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT)
+  module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below
 
