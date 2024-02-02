@@ -7,6 +7,7 @@ export default {
   selectBgColor: 'rgb(0,255,224)',
   chainId: 5000,
   rpcUrls: ['https://mantle-mainnet.public.blastapi.io'],
+  defaultTab: 'Lending',
   menuConfig: {
     Swap: {
       tab: 'Swap',

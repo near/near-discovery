@@ -7,6 +7,7 @@ export default {
   selectBgColor: '#3564AB',
   chainId: 42161,
   rpcUrls: ['https://arb1.arbitrum.io/rpc'],
+  defaultTab: 'Lending',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',

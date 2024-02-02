@@ -7,6 +7,7 @@ export default {
   selectBgColor: '#04795B',
   chainId: 100,
   rpcUrls: ['https://rpc.ankr.com/gnosis'],
+  defaultTab: 'Lending',
   menuConfig: {
     Swap: {
       tab: 'Swap',

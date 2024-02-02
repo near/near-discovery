@@ -7,6 +7,7 @@ export default {
   selectBgColor: '#CA0C0C',
   chainId: 10,
   rpcUrls: ['https://rpc.ankr.com/optimism'],
+  defaultTab: 'Lending',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',
