@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
 
-import Swipper from '../Swipper'
+import Step from '../Step'
 import Panel from './Panel'
 import titleNameImg from './img/titleName.svg'
 
@@ -36,24 +36,29 @@ const TitleDesc = styled.div`
     text-align: center;
 `
 
-export default function Qquests() {
-    const [list, setList] = useState([1, 2, 3, 4, 5])
+interface Props {
+    list: any[];
+    getQuestGroupList: () => void;
+    getSumaryDetail: () => void;
+}
 
+export default function Qquests({ list = [], getQuestGroupList, getSumaryDetail }: Props) {
     return <Content>
-        <Swipper>
-            <SlideWapper>
-                <PanelTitle>
-                    <img src={titleNameImg.src} />
-                    <TitleDesc>Complete Qquests to win more spins</TitleDesc>
-                </PanelTitle>
-                {
-                    list.map(item => {
-                        return <Panel key={item} />
-                    })
-                }
-            </SlideWapper>
-            <div>2</div>
-            <div>3</div>
-        </Swipper>
+        <SlideWapper>
+            <PanelTitle>
+                <img src={titleNameImg.src} />
+                <TitleDesc>Complete Qquests to win more spins</TitleDesc>
+            </PanelTitle>
+            {
+                list.map(item => {
+                    return <Panel 
+                    getQuestGroupList={getQuestGroupList} 
+                    getSumaryDetail={getSumaryDetail}
+                    value={item} 
+                    key={item.id} />
+                })
+            }
+        </SlideWapper>
+        <Step count={3} step={1}/>
     </Content>
 }

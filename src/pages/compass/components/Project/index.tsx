@@ -1,11 +1,14 @@
 import styled from 'styled-components';
-import Swipper from '../Swipper'
+import { useEffect, useState } from 'react';
+import _ from 'lodash'
 
+import Step from '../Step'
 import Panel from './Panel'
 
 const Content = styled.div`
     width: var(--main-width);
     margin: 100px auto 0;
+    position: relative;
 `
 
 const ProjectLine = styled.div`
@@ -13,17 +16,25 @@ const ProjectLine = styled.div`
     gap: 13px;
 `
 
-export default function () {
+interface Props {
+    list: any[];
+    currentChainIndex: number;
+}
+
+export default function ({ list, currentChainIndex } : Props) {
+    
+    useEffect(() => {
+
+    }, [currentChainIndex, list])
+
     return <Content>
-        <Swipper>
-            <ProjectLine>
-                <Panel />
-                <Panel />
-                <Panel />
-                <Panel />
-            </ProjectLine>
-            <div>2</div>
-            <div>3</div>
-        </Swipper>
+        <ProjectLine>
+            {
+                list.map(item => {
+                    return <Panel currentChainIndex={currentChainIndex} key={item.id} value={item}/>
+                })
+            }
+        </ProjectLine>
+        <Step count={3} step={2} />
     </Content>
 }

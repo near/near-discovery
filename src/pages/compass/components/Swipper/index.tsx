@@ -58,7 +58,7 @@ export default function Swipper({
     }
 
     const paginationConfig = pagination ? {
-        clickable: true,
+        clickable: false,
     } : false
 
 

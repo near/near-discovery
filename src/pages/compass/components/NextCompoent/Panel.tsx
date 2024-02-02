@@ -11,6 +11,8 @@ const ProjectLine = styled.div`
     background: linear-gradient(0deg, #21232A, #21232A), linear-gradient(180deg, #464B56 0%, rgba(0, 0, 0, 0) 100%);
     height: 380px;
     border-radius: 32px;
+    position: relative;
+    margin-top: 10px;
 `
 
 const IconBox = styled.img`
@@ -55,14 +57,14 @@ const ComingSoon = styled.div`
 
 const CompassIcon = styled.img`
     position: absolute;
-    right: 60px;
-    top: 0px;
+    right: 30px;
+    top: -60px;
 `
 
 const WinIcon = styled.img`
     position: absolute;
-    right: 0px;
-    top: 30px;
+    right: -30px;
+    top: -30px;
 `
 
 export default function() {

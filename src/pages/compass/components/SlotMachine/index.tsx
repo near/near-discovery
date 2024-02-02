@@ -13,6 +13,7 @@ import clamImg from './img/clam.svg'
 import btnBgImg from './img/btn-bg.svg'
 import btnImg from './img/btn.svg'
 import chainIconsImg from './img/chianIcons.svg'
+import bottomChainIconsImg from './img/bottomChainIcons.svg'
 
 import yellowLeftImg from './img/yellow-left.svg'
 import yellowMidImg from './img/yellow-mid.svg'
@@ -21,6 +22,9 @@ import yellowRightImg from './img/yellow-right.svg'
 import coverLeftImg from './img/cover-left.svg'
 import coverMidImg from './img/cover-mid.svg'
 import coverRightImg from './img/cover-right.svg'
+import { useCallback, useState } from 'react';
+
+import { postClaim } from '../../http/index'
 
 
 
@@ -45,8 +49,16 @@ const ChainIcons = styled.img`
     position: absolute;
     left: 0;
     top: 20px;
-    width: 138.89px;
-    height: 161.29px;
+    width: 149px;
+    height: 183px;
+`
+
+const BottomChainIcons = styled.img`
+    position: absolute;
+    right: 34px;
+    bottom: 144px;
+    width: 137px;
+    height: 71px;
 `
 
 const Title = styled.div`
@@ -65,19 +77,19 @@ const CompassWapper = styled.div`
     background-size: 100%;
     width: 100px;
     height: 100px;
-    top: 70px;
+    top: 80px;
     right: 20px;
 `
 
 const ControllerWapper = styled.div`
     position: absolute;
-    width: 70px;
-    top: 110px;
+    width: 100px;
+    top: 150px;
     right: 50px;
 `
 
 const Controller = styled.div`
-    width: 70px;
+    width: 100px;
     height: 104px;
     background: url(${controllerImg.src}) center 0 no-repeat;
     background-size: 170% 170%;
@@ -95,7 +107,7 @@ const ControllerBg = styled.div`
     z-index: 2;
     background: linear-gradient(180deg, #000000 35.51%, #1C1D1F 100%);
     left: calc(50% - 13px);
-    top: 65px;
+    top: 70px;
     box-shadow:inset 0px 0px 5px 0px rgba(75, 78, 88, 1);
     border: 2px solid;
     border-image-source: linear-gradient(180deg, #0B0D13 0%, #4B4E58 100%);
@@ -109,7 +121,7 @@ const ScrollWapper = styled.div`
     border-radius: 88px;
     background: linear-gradient(180deg, #0B0D13 0%, #373940 100%),
 linear-gradient(180deg, #17191D 0%, #1C1D1F 100%);
-    margin: 28px auto 0;
+    margin: 28px auto 0 54px;
     position: relative;
 `
 
@@ -247,13 +259,63 @@ const Btn = styled.div`
     position: absolute;
     top: 0;
     left: 0;
+    cursor: pointer;
+    transition: all .3s;
+    &.press {
+        top: 11px;
+    }
 `
 
-function SlotMachine() {
+interface Props {
+    totalSpins: number;
+    availableSpins: number;
+    unclaimedReward: number;
+    chainList: number[];
+    handleSpin: () => void;
+    handleClaim: () => void;
+}
+
+function SlotMachine({
+    totalSpins,
+    availableSpins,
+    unclaimedReward,
+    chainList,
+    handleSpin,
+    handleClaim,
+}: Props) {
+    const [isPressed, setIsPressed] = useState(false)
+    const [isPressing, setIsPressing] = useState(false)
+
+    console.log('chainList: ', chainList)
+
+    const handleBtnPress = useCallback(() => {
+        if (isPressing || isPressed || availableSpins <= 0) {
+            return
+        }
+
+        handleSpin()
+
+        setIsPressed(true)
+        setIsPressing(true)
+        setTimeout(() => {
+            setIsPressed(false)
+        }, 100)
+
+        setTimeout(() => {
+            setIsPressing(false)
+        }, 18000)
+
+        return () => {
+            // clearTimeout(t1)
+            // clearTimeout(t2)
+        }
+    }, [isPressing, isPressed, availableSpins])
+
     return <Wapper>
         <Screen>
             <Title>DAPDAP JACKPOT</Title>
             <ChainIcons src={chainIconsImg.src} />
+
             <CompassWapper />
             <ControllerWapper>
                 <Controller />
@@ -269,11 +331,14 @@ function SlotMachine() {
                     <ControllerBtnBg className='right' />
                 </ControllerBtnBgWapper>
                 <ControllerBtnBgWapper className='bg'>
-                    <ScrollLine no={1} />
-                    <ScrollLine no={2} />
-                    <ScrollLine no={2} />
-                    <ScrollLine no={4} />
-                    <ScrollLine no={5} />
+                    {
+                        chainList.map((item, index) => {
+                            return <ScrollLine 
+                            noIndex={index}
+                            startAni={isPressing} 
+                            no={item} />
+                        })
+                    }
                 </ControllerBtnBgWapper>
                 <ControllerBtnBgWapper className='cover'>
                     <ControllerBtnCover className='left' />
@@ -287,26 +352,28 @@ function SlotMachine() {
                 <Score>
                     <Spin renderChildren={() => <ScoreBg>
                         <ScoreText>Spins:</ScoreText>
-                        <ScoreText>5 / 32</ScoreText>
+                        <ScoreText>{availableSpins} / {totalSpins}</ScoreText>
                     </ScoreBg>} />
                 </Score>
                 <Score>
                     <Spin renderChildren={() => <ScoreBg>
-                        <ScoreText>Spins:</ScoreText>
-                        <ScoreText>5 / 32</ScoreText>
+                        <ScoreText>you win:</ScoreText>
+                        <ScoreText>{unclaimedReward} pts</ScoreText>
                     </ScoreBg>} />
-
                 </Score>
             </ScoreWapper>
+            
+            <BottomChainIcons src={bottomChainIconsImg.src} />
+
         </Screen>
 
         <ActionBar>
             <Rules />
             <BtnWapper>
                 <BtnBg />
-                <Btn />
+                <Btn className={ isPressed ? 'press' : '' } onClick={handleBtnPress} />
             </BtnWapper>
-            <Clam />
+            <Clam onClick={ handleClaim }/>
         </ActionBar>
     </Wapper>
 }

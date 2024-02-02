@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import CompassSwipper from './CompassSwipper';
+import Panel from './Panel'
 
 import lightImg from './img/light.svg'
 
@@ -10,7 +11,7 @@ const NextWapper = styled.div`
 `
 
 const MidWapper = styled.div`
-    width: 1344px;
+    width: 1244px;
     margin: 0 auto;
 `
 
@@ -25,7 +26,7 @@ export default function() {
     return <NextWapper>
         <MidWapper>
             <Title>The next Compass</Title>
-            <CompassSwipper />
+            <Panel />
         </MidWapper>
     </NextWapper>
 }

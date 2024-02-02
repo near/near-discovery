@@ -1,12 +1,17 @@
 import { useDefaultLayout } from '@/hooks/useLayout';
 import styled from 'styled-components';
+import { useSearchParams } from 'next/navigation'
 
 import Record from './components/Record'
 import SlotMachine from './components/SlotMachine'
 import Qquests from './components/Qquests'
 import Project from './components/Project'
-import Social from './components/Social';
-import NextCompoent from './components/NextCompoent';
+import Social from './components/Social'
+import NextCompoent from './components/NextCompoent'
+
+import useSummary from './hooks/useSummary';
+import useSpin from './hooks/useSpin'
+import useQuestList from './hooks/useQuestList'
 
 import bgImg from './img/bg.gif'
 import g1 from './img/g1.svg'
@@ -17,6 +22,9 @@ import g5 from './img/g5.svg'
 import subImg from './img/sub-img.svg'
 import line1Img from './img/Line1.svg'
 import line2Img from './img/Line2.svg'
+import mImg from './img/m.png'
+import { useCallback, useState } from 'react';
+
 
 
 const App = styled.div`
@@ -26,6 +34,17 @@ const App = styled.div`
     background-size: 100% auto; */
     /* background-color: #524f4b; */
     padding-top: 150px;
+`
+
+const MBg = styled.div`
+    position: absolute;
+    right: 0;
+    left: 65%;
+    top: 52%;
+    height: 939.494px;
+    z-index: 0;
+    background: url(${mImg.src}) right top no-repeat;
+    background-size: auto 100%;
 `
 
 const Title = styled.div`
@@ -132,11 +151,63 @@ const MiniTitle = styled.div`
     line-height: 24px;
     text-align: center;
     color: rgba(151, 154, 190, 1);
-
 `
 
+const ChainImgIcon = styled.img`
+    cursor: pointer;
+    transition: all .3s;
+    opacity: .3;
+    &.selected {
+        opacity: 1;
+        transform: scale(1.23);
+    }
+`
+
+const chains = [g1.src, g2.src, g3.src, g4.src, g5.src]
+
 function Compass() {
+    const searchParams = useSearchParams()
+    const compassId: string = searchParams.get('id') as string
+    console.log('compassId: ', compassId)
+
+    const {
+        participants,
+        winners,
+        totalRewardsPts,
+        totalSpins,
+        availableSpins,
+        unclaimedReward,
+        setAvailableSpins,
+        setTotalSpins,
+        setUnclaimedReward,
+        getDetail,
+    } = useSummary(compassId)
+    const { startSpin, chainList, startCliam } = useSpin(compassId, setAvailableSpins, setTotalSpins, setUnclaimedReward)
+    const { questList, getQuestGroupList } = useQuestList(compassId)
+    const [chainIndex, setChainIndex] = useState(0)
+
+    const handleSpin = useCallback(() => {
+        startSpin().then(res => {
+            // TODO change spin
+            getDetail()
+        })
+    }, [])
+
+    const handlClaim = useCallback(() => {
+        console.log(unclaimedReward)
+
+        if (unclaimedReward <= 0) {
+            return
+        }
+        startCliam().then(() => {
+            getDetail()
+        })
+    }, [unclaimedReward])
+
+    const qList = questList.dapp.length ? questList.dapp[chainIndex] : []
+
     return <App>
+        <MBg />
         <Title>Unveiling Uncharted Realms of L2s</Title>
         <IconsWapper>
             <img src={g1.src} />
@@ -147,44 +218,53 @@ function Compass() {
         </IconsWapper>
         <SubTitle>Explore the untapped potential of promising L2 chains like Base, Linea, Polygon zkEVM, Scroll, and  ZkSync as we unravel the mysteries within.</SubTitle>
         <RecordBox>
-
             <RecordLine1>
                 <img src={line1Img.src} />
             </RecordLine1>
             <RecordWapper>
-                <Record title="Participants" renderContent={() => <>25,668</>} />
+                <Record title="Participants" renderContent={() => <>{participants}</>} />
                 <Record title="Winners" renderContent={() => <AvatarBox>{
-                    [1, 2, 3, 4, 5].map((v, i) => {
-                        return <Avatar key={v} src={g1.src} />
+                    winners.map((v, i) => {
+                        return <Avatar key={v} src={v} />
                     })
                 }</AvatarBox>} />
-                <Record title="Total Rewards PTS" renderContent={() => <>25,668</>} />
+                <Record title="Total Rewards PTS" renderContent={() => <>{totalRewardsPts}</>} />
             </RecordWapper>
             <RecordLine2>
                 <img src={line2Img.src} />
             </RecordLine2>
         </RecordBox>
 
-        <SlotMachine />
+        <SlotMachine
+            chainList={chainList}
+            handleSpin={handleSpin}
+            handleClaim={handlClaim}
+            totalSpins={totalSpins}
+            availableSpins={availableSpins}
+            unclaimedReward={unclaimedReward}
+        />
 
-        <Qquests />
+        <Qquests list={questList.page} getQuestGroupList={getQuestGroupList} getSumaryDetail={getDetail}/>
 
         <SubJACKTitle src={subImg.src} />
         <MiniTitle>Obtain more spins through on-chain interactive quests</MiniTitle>
         <IconsWapper className='sub'>
-            <img src={g1.src} />
-            <img src={g2.src} />
-            <img src={g3.src} />
-            <img src={g4.src} />
-            <img src={g5.src} />
+            {
+                chains.map((chain, index) => {
+                    return <ChainImgIcon
+                        onClick={ () => setChainIndex(index) }
+                        className={chainIndex === index ? 'selected' : ''}
+                        src={chain} key={chain} />
+                })
+            }
         </IconsWapper>
 
-        <Project />
+        <Project list={qList} currentChainIndex={chainIndex}/>
 
         <SubJACKTitle className='m180' src={subImg.src} />
         <MiniTitle>Get more spins by sharing and following</MiniTitle>
 
-        <Social />
+        <Social list={questList.twitter} />
 
         <NextCompoent />
     </App>
