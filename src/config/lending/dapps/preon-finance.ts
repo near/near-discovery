@@ -5,6 +5,7 @@ const BORROW_TOKEN = 'STAR';
 const BORROW_URL = 'https://ipfs.near.social/ipfs/bafkreifn26whjukvke3m35hwcl74up7kckzvahrzib4ab3arq3qyfnelfy';
 
 const MIN_DEBT = 180;
+const MAX_LTV = 0.889;
 
 const basic = {
   name: 'Preon Finance',
@@ -30,7 +31,7 @@ const networks = {
         underlyingToken: arbitrum['wst-eth'],
         BORROW_TOKEN,
         BORROW_URL,
-        MAX_LTV: 88.9,
+        MAX_LTV,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT,
         MINTED: 0,
@@ -41,7 +42,7 @@ const networks = {
         underlyingToken: arbitrum['weth'],
         BORROW_TOKEN,
         BORROW_URL,
-        MAX_LTV: 88.9,
+        MAX_LTV,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT,
         MINTED: 0,
@@ -62,7 +63,7 @@ const networks = {
         underlyingToken: polygon['wmatic'],
         BORROW_TOKEN,
         BORROW_URL,
-        MAX_LTV: 88.9,
+        MAX_LTV,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT,
         MINTED: 0,
@@ -73,7 +74,7 @@ const networks = {
         underlyingToken: polygon['stmatic'],
         BORROW_TOKEN,
         BORROW_URL,
-        MAX_LTV: 88.9,
+        MAX_LTV,
         ONE_TIME_FEE: 0.5,
         MIN_DEBT,
         MINTED: 0,

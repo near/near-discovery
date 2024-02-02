@@ -5,7 +5,7 @@ const BORROW_URL = 'https://assets.coingecko.com/coins/images/29744/standard/ERN
 
 const MIN_DEBT = 90;
 const ONE_TIME_FEE = 1.42; //TODO
-const MAX_LTV = 83.33; // 100/108
+const MAX_LTV = 0.8333; // 100/108
 
 const basic = {
   name: 'Ethos Finance',

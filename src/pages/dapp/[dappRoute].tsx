@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Breadcrumb from '@/components/Breadcrumb';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import chainsConfig from '@/config/chains';
+import GAS_LIMIT_RECOMMENDATIONS from '@/config/contract/gas-limit';
 import multicallConfig from '@/config/contract/multicall';
 import wethConfig from '@/config/contract/weth';
 import dappConfig from '@/config/dapp';
@@ -187,6 +188,7 @@ export const DappPage: NextPageWithLayout = () => {
             theme: { bridge: dappBridgeTheme[currentChain.chain_id] },
             multicall,
             isChainSupported,
+            GAS_LIMIT_RECOMMENDATIONS,
           }}
           src={network.dapp_src}
         />
