@@ -5,7 +5,7 @@ const BORROW_URL = 'https://assets.coingecko.com/coins/images/29744/standard/ERN
 
 const MIN_DEBT = 90;
 const ONE_TIME_FEE = 1.42; //TODO
-const MAX_LTV = 92.6; // 100/108
+const MAX_LTV = 83.33; // 100/108
 
 const basic = {
   name: 'Ethos Finance',
@@ -23,9 +23,9 @@ const networks = {
     StabilityPool: '0xd839a111598d5e27bd8f7a1a18ce9bf079f0c0a2',
     // StabilityPool: '0x8B147A2d4Fc3598079C64b8BF9Ad2f776786CFed',
     borrowTokenAddress: '0xc5b001dc33727f8f26880b184090d3e252470d45',
-    VesselManager: '0xd584A5E956106DB2fE74d56A0B14a9d64BE8DC93', //TODO
+    VesselManager: '0x75C72F459f2054B46ceFD6D10eC99d0fbd777F05', //TODO
     VesselManagerOperations: '0xd584A5E956106DB2fE74d56A0B14a9d64BE8DC93', //TODO
-    BorrowerOperations: '0x0a4582d3d9ecBAb80a66DAd8A881BE3b771d3e5B',
+    BorrowerOperations: '0xaa0b41b61f76587cf85155147d7f3b7725d14eb3',
     markets: {
       [optimism['wbtc'].address]: {
         decimals: 8,
