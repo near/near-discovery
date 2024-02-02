@@ -13,7 +13,7 @@ const networks = {
     multicallAddress: multicall[59144],
     defaultCurrencies: {
       input: linea['eth'],
-      output: linea['usdt'],
+      output: linea['usdc'],
     },
     tokens: [
       linea['xfit'],

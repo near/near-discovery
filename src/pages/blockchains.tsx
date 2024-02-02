@@ -385,7 +385,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                       Shortcut
                     </Link>
                     {child.deepdive && (
-                      <Link href="/warmup" data-bp="10012-004" className="paragraph-btn-item">
+                      <Link href={`/onboarding/${path}`} data-bp="10012-004" className="paragraph-btn-item">
                         Deep Dive
                       </Link>
                     )}

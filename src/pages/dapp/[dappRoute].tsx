@@ -24,7 +24,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 // set dynamic routes for dapps in config file
 
 const StyledPage = styled.div`
-  padding-top: 50px;
+  padding: 50px 80px 0px;
 `;
 
 const DappName = styled.div`

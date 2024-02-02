@@ -162,65 +162,9 @@ const Page = styled.div`
 `;
 
 const WarmUp: NextPageWithLayout = () => {
-  const addMetaMask = async ({
-    chainId,
-    chainName,
-    rpcUrls,
-  }: {
-    chainId: number;
-    chainName: string;
-    rpcUrls: string;
-  }) => {
-    const etherProvider = new ethers.providers.Web3Provider(window.ethereum);
-
-    etherProvider
-      .send('wallet_switchEthereumChain', [{ chainId: `0x${Number(chainId).toString(16)}` }])
-      .catch((err) => {
-        const chain = {
-          chainId: `0x${Number(chainId).toString(16)}`,
-          chainName: chainName,
-          rpcUrls: rpcUrls,
-        };
-
-        if (err.code === 4902) {
-          etherProvider.send('wallet_addEthereumChain', [chain]);
-        }
-      });
-  };
   return (
     <Container>
-      <BreadCrumbs>
-        <Link href="/">Home</Link>
-        {arrow}
-        Deep Dive
-        {arrow}
-        <span>Polygon zkEVM</span>
-      </BreadCrumbs>
       <Page>
-        <div className="page-head">
-          <div className="details-body-left">
-            <div className="body-left-detailed">
-              <img src={zkEVMIcon} alt="" />
-              <div className="left-detailed-text">
-                <h1>Polygon zkEVM</h1>
-                <p
-                  onClick={() =>
-                    addMetaMask({
-                      chainId: 1101,
-                      chainName: 'Polygon zkEVM',
-                      rpcUrls: '["https://zkevm-rpc.com"]',
-                    })
-                  }
-                >
-                  Add to MetaMask <img src={diagonaltop} alt="" />
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div style={{ marginBottom: '30px' }}>
-          <InputSearch></InputSearch>
-        </div>
         <div className="page-quest-wrapper">
           <div className="quest-title">
             <img src={myQuestIcon} width={'39'} alt="" />
@@ -244,13 +188,6 @@ const WarmUp: NextPageWithLayout = () => {
           </a>
         </div>
         <QuestTrends />
-        <div className="page-quest-wrapper" style={{ marginTop: '40px' }}>
-          <div className="quest-title">
-            <img src={hotIcon} width={'26'} alt="" />
-            Hot Polygon zkEVM DApps{' '}
-          </div>
-        </div>
-        <HotDapps />
       </Page>
     </Container>
   );

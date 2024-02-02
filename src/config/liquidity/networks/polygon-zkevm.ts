@@ -1,4 +1,4 @@
-
+import gamma from '../dapps/gamma';
 const CHAIN_ID = 1101;
 
 export default {
@@ -10,7 +10,11 @@ export default {
     noAccountTips: 'Polygon zkEVM Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Polygon zkEVM Chain.',
   },
-  defalutDex: 'QuickSwap',
-  dexs: {
+  defaultDapp: 'Gamma',
+  dapps: {
+    Gamma: {
+      ...gamma.basic,
+      ...gamma.networks[CHAIN_ID],
+    },
   },
 };

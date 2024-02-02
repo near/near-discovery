@@ -3,7 +3,7 @@ import { StyledItem, StyledItemBox, StyledLabel, StyledValue, StyledItemImg, Sty
 
 const Item = ({ action_title, count, logo, name, bgColor, network_id }: any) => {
   return (
-    <StyledItem onClick={() => {}}>
+    <StyledItem onClick={() => {}} data-bp="100131-004">
       <div
         dangerouslySetInnerHTML={{
           __html: action_title.replace(

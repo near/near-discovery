@@ -11,6 +11,7 @@ import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { usePriceStore } from '@/stores/price';
+import { useAllInOneStore } from '@/stores/all-in-one';
 import { multicall } from '@/utils/multicall';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -194,6 +195,7 @@ const AllInOne: NextPageWithLayout = () => {
   const [showComponent, setShowComponent] = useState(false);
   const [{ settingChain }, setChain] = useSetChain();
   const prices = usePriceStore((store) => store.price);
+  const allInOneStore = useAllInOneStore() as any;
   const { addAction } = useAddAction('all-in-one');
   const popupRef = useRef<HTMLDivElement | null>(null);
 
@@ -313,6 +315,12 @@ const AllInOne: NextPageWithLayout = () => {
                   ...(swapConfig[currentChain?.chainId] || {}),
                   ...(lendingConfig[currentChain?.chainId] || {}),
                   prices,
+                  activeTab: allInOneStore.allInOne.tab,
+                  onReset: () => {
+                    allInOneStore.set({
+                      allInOne: {},
+                    });
+                  },
                 }}
               />
             </div>

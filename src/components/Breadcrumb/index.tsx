@@ -27,11 +27,19 @@ const Breadcrumb = ({ style, navs }: BreadcrumbProps) => {
       {navs.map((nav, i) => (
         <StyledNav
           $active={i === navs.length - 1}
-          key={nav.path}
+          $disabled={!nav.path}
+          key={nav.path || i}
           onClick={() => {
-            if (i !== navs.length - 1) router.push(nav.path);
+            if (i !== navs.length - 1 && nav.path) router.push(nav.path);
           }}
-          whileHover={{ color: '#ebf479' }}
+          whileHover={{
+            color:
+              i !== navs.length - 1 && nav.path
+                ? '#ebf479'
+                : i === navs.length - 1
+                  ? '#fff'
+                  : 'rgba(255, 255, 255, 0.5)',
+          }}
         >
           {nav.name}
           {i !== navs.length - 1 && LeftArrow}

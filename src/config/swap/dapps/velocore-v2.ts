@@ -11,7 +11,7 @@ const networks = {
     factoryAddress: '0xBe6c6A389b82306e88d74d1692B67285A9db9A47',
     defaultCurrencies: {
       input: linea['eth'],
-      output: linea['usdt'],
+      output: linea['usdc'],
     },
     tokens: [
       linea['weth'],
@@ -22,6 +22,7 @@ const networks = {
       linea['wbtc'],
       linea['bnb'],
       linea['wsteth'],
+      linea['usdc'],
     ],
   },
 };

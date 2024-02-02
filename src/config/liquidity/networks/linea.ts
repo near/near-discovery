@@ -1,3 +1,4 @@
+import gamma from '../dapps/gamma';
 
 const CHAIN_ID = 59144;
 
@@ -10,7 +11,11 @@ export default {
     noAccountTips: 'Linea Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Linea Chain.',
   },
-  defalutDex: 'Xfai',
-  dexs: {
+  defaultDapp: 'Gamma',
+  dapps: {
+    Gamma: {
+      ...gamma.basic,
+      ...gamma.networks[CHAIN_ID],
+    },
   },
 };

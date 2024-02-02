@@ -10,11 +10,11 @@ export const StyledContainer = styled.div`
   align-items: center;
 `;
 
-export const StyledNav = styled(motion.div)<{ $active: boolean }>`
+export const StyledNav = styled(motion.div)<{ $active: boolean; $disabled: boolean }>`
   display: flex;
   gap: 9px;
   align-items: center;
   transition: 0.3s;
   color: ${({ $active }) => ($active ? '#fff' : 'rgba(255, 255, 255, 0.5)')};
-  cursor: pointer;
+  cursor: ${({ $disabled }) => ($disabled ? 'default' : 'pointer')};
 `;
