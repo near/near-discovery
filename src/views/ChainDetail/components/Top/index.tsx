@@ -34,7 +34,7 @@ const NativeCurrency = ({ nativeCurrency }: any) => {
 const Top = ({ chain }: any) => {
   const [more, setMore] = useState(false);
   return (
-    <StyledContainer style={{ color: chain?.bgColor }} className={more ? 'more' : ''}>
+    <StyledContainer style={{ color: chain?.selectBgColor }} className={more ? 'more' : ''}>
       <StyledBox>
         <StyledBgWrapper>
           <StyledBg>

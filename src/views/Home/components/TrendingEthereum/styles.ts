@@ -42,6 +42,15 @@ export const StyledChain = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
+  position: relative;
+`;
+
+export const StyledChainColorBg = styled.div`
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 239px;
+  height: 134px;
 `;
 
 export const StyledChainIcon = styled.img`

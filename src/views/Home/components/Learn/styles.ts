@@ -57,7 +57,7 @@ export const StyledItemImg = styled.img`
 export const StyledItemTitle = styled.div`
   color: #fff;
   font-family: Montserrat;
-  font-size: 26px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;

@@ -38,8 +38,8 @@ export const StyledImageWrapper = styled.div`
 `;
 
 export const StyledImage = styled.img`
-  width: 784px;
-  height: 434.554px;
+  width: 703px;
+  height: 435px;
   flex-shrink: 0;
 `;
 
@@ -47,7 +47,7 @@ export const StyledChains = styled.div`
   display: flex;
   gap: 12px;
   flex-wrap: wrap;
-  width: 342px;
+  width: 446px;
   cursor: pointer;
 `;
 

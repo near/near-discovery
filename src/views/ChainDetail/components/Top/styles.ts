@@ -64,7 +64,7 @@ export const StyledBgImg = styled.img<{ more: boolean }>`
   position: absolute;
   left: 20%;
   z-index: 2;
-  bottom: ${({ more }) => (more ? '-80px' : '-100px')};
+  bottom: ${({ more }) => (more ? '-10px' : '-40px')};
   opacity: 0.1;
 `;
 

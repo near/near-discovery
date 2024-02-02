@@ -1,7 +1,8 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import { useRouter } from 'next/router';
-import { IdToPath } from '@/config/all-in-one/chains';
 import GoMore from '@/components/GoMore';
+import chainsConfig, { IdToPath } from '@/config/all-in-one/chains';
+import ChainBg from './ChainBg';
 
 import {
   StyledContainer,
@@ -12,10 +13,12 @@ import {
   StyledChainIcon,
   StyledChainTitle,
   StyledChainDesc,
+  StyledChainColorBg,
 } from './styles';
 
 const TrendingEthereum = ({ chains }: any) => {
   const router = useRouter();
+  const [showBg, setShowBg] = useState('');
   return (
     <StyledContainer>
       <StyledHeader>
@@ -30,7 +33,19 @@ const TrendingEthereum = ({ chains }: any) => {
             onClick={() => {
               router.push(`/network/${IdToPath[chain.id]}`);
             }}
+            onMouseEnter={() => {
+              setShowBg(chain.id);
+            }}
+            onMouseLeave={() => {
+              setShowBg('');
+            }}
           >
+            {showBg === chain.id && (
+              <StyledChainColorBg style={{ color: chainsConfig[IdToPath[chain.id]].selectBgColor }}>
+                <ChainBg />
+              </StyledChainColorBg>
+            )}
+
             <StyledChainIcon src={chain.logo} />
             <StyledChainTitle>{chain.name}</StyledChainTitle>
             <StyledChainDesc>{chain.description}</StyledChainDesc>

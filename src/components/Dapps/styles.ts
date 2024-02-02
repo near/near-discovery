@@ -116,7 +116,7 @@ export const StyledDappButton = styled.button`
   height: 26px;
   flex-shrink: 0;
   color: #fff;
-  font-size: 12px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
