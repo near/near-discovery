@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { getCompassDetail } from '../http/index'
- 
+
 export interface SummaryData {
     participants: number;
     winners: string[];
@@ -24,31 +24,31 @@ export default function useSummary(id: string): SummaryData {
 
     function getDetail() {
         getCompassDetail(id)
-        .then((data: any) => {
-            if (data) {
-                setParticipants(data.total_users || 0)
-                setWinners(data.winners)
-                setTotalRewardsPts(data.claimed_reward || 0)
-                if (data.user) {
-                    const { user } = data
-                    setTotalSpins(user.total_spins || 0)
-                    setAvailableSpins(user.available_spins || 0)
-                    setUnclaimedReward(user.unclaimed_reward || 0)
+            .then((data: any) => {
+                if (data) {
+                    setParticipants(data.total_users || 0)
+                    setWinners(data.winners)
+                    setTotalRewardsPts(data.claimed_reward || 0)
+                    if (data.user) {
+                        const { user } = data
+                        setTotalSpins(user.total_spins || 0)
+                        setAvailableSpins(user.available_spins || 0)
+                        setUnclaimedReward(user.unclaimed_reward || 0)
+                    }
                 }
-            }
-        })
+            })
     }
 
     useEffect(() => {
         getDetail()
     }, [id])
 
-    return { 
-        participants, 
-        winners, 
-        totalRewardsPts, 
-        totalSpins, 
-        availableSpins, 
+    return {
+        participants,
+        winners,
+        totalRewardsPts,
+        totalSpins,
+        availableSpins,
         unclaimedReward,
         setTotalSpins,
         setAvailableSpins,

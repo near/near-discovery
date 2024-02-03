@@ -71,7 +71,7 @@ export default function Panel() {
     return <ProjectLine>
         <IconBox src={LineImg.src} />
         <DescBox>
-            <TopIcon src={g2Img.src}/>
+            <TopIcon src={g2Img.src} />
             <DescTitle>Linea Compass</DescTitle>
             <DescFull>Effortlessly sift through a curated selection of dApps and identify your favourites.</DescFull>
             <ComingSoon>Coming soon...</ComingSoon>

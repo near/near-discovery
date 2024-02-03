@@ -21,8 +21,8 @@ interface Props {
     currentChainIndex: number;
 }
 
-export default function Index({ list, currentChainIndex } : Props) {
-    
+export default function Index({ list, currentChainIndex }: Props) {
+
     useEffect(() => {
 
     }, [currentChainIndex, list])
@@ -31,7 +31,7 @@ export default function Index({ list, currentChainIndex } : Props) {
         <ProjectLine>
             {
                 list.map(item => {
-                    return <Panel currentChainIndex={currentChainIndex} key={item.id} value={item}/>
+                    return <Panel currentChainIndex={currentChainIndex} key={item.id} value={item} />
                 })
             }
         </ProjectLine>

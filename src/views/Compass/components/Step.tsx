@@ -18,19 +18,19 @@ const StepItem = styled.div`
     }
 `
 
-export default function Step({ 
-    count = 3, 
+export default function Step({
+    count = 3,
     step = 1
-}: { 
+}: {
     count: number;
     step: number;
- }) {
+}) {
     const sumAry = Array.from({ length: count })
 
     return <StepWapper>
         {
             sumAry.map((item, index) => {
-                return <StepItem key={index} className={ index + 1 === step ? 'selected' : '' } />
+                return <StepItem key={index} className={index + 1 === step ? 'selected' : ''} />
 
             })
         }

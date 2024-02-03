@@ -3,8 +3,6 @@ import { useSearchParams } from 'next/navigation'
 
 import CompassApp from '@/views/Compass/home'
 
-
-
 function Compass() {
     return <CompassApp/>
 }

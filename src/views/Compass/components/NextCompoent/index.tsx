@@ -1,11 +1,10 @@
 import styled from 'styled-components';
-import CompassSwipper from './CompassSwipper';
 import Panel from './Panel'
 
 import lightImg from './img/light.svg'
 
 const NextWapper = styled.div`
-    background: #000 url(${lightImg.src}) 6% top no-repeat;
+    background: #000 url(${lightImg.src}) 28% top no-repeat;
     padding: 58px 0;
     margin-top: 50px;
 `

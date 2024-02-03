@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import useToast from '@/hooks/useToast';
 import { checkQuest } from '../http/index'
 
@@ -6,7 +6,8 @@ export default function useQuestStatus(id: number) {
     const { fail, success } = useToast()
     const [isQuestSuccess, setIsQuestSuccess] = useState(false)
 
-    async function checkQuestStatus() {
+    const checkQuestStatus = useCallback(async () => {
+        setIsQuestSuccess(true)
         const res = await checkQuest(id)
         if (res.code === 0) {
             success({
@@ -21,7 +22,8 @@ export default function useQuestStatus(id: number) {
                 text: res.msg,
             })
         }
-    }
+        setIsQuestSuccess(false)
+    }, [])
 
     return {
         isQuestSuccess,

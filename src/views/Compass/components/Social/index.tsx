@@ -20,6 +20,8 @@ const ShareWapper = styled.div`
 
 interface Props {
     list: any[];
+    onShare?: () => void;
+    onFollow?: () => void;
 }
 
 const icons: any = {
@@ -37,7 +39,11 @@ const btnTexts: any = {
     'twitter_follow': 'Follow us',
 }
 
-export default function SocialIndex({ list }: Props) {
+export default function SocialIndex({ list, onShare, onFollow }: Props) {
+    const actions: any = {
+        'twitter_quote': onShare,
+        'twitter_follow': onFollow,
+    }
 
     return <Content>
         <ShareWapper>
@@ -51,8 +57,10 @@ export default function SocialIndex({ list }: Props) {
                         spin={item.spins}
                         totalSpin={item.total_spins}
                         id={item.id}
-                        mainText={item.name} 
-                        />
+                        onAction={actions[item.category]}
+                        mainText={item.name}
+                        source={item.source}
+                    />
                 })
             }
         </ShareWapper>

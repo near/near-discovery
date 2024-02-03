@@ -233,6 +233,7 @@ const Clam = styled.div`
     background: url(${clamImg.src}) left top no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
+    opacity: .1;
 `
 
 const BtnWapper = styled.div`
@@ -273,6 +274,8 @@ interface Props {
     chainList: number[];
     handleSpin: () => void;
     handleClaim: () => void;
+    isSpining: boolean;
+    isClaiming: boolean;
 }
 
 function SlotMachine({
@@ -282,11 +285,11 @@ function SlotMachine({
     chainList,
     handleSpin,
     handleClaim,
+    isSpining,
+    isClaiming,
 }: Props) {
     const [isPressed, setIsPressed] = useState(false)
     const [isPressing, setIsPressing] = useState(false)
-
-    console.log('chainList: ', chainList)
 
     const handleBtnPress = useCallback(() => {
         if (isPressing || isPressed || availableSpins <= 0) {
@@ -294,7 +297,6 @@ function SlotMachine({
         }
 
         handleSpin()
-
         setIsPressed(true)
         setIsPressing(true)
         setTimeout(() => {
@@ -305,11 +307,10 @@ function SlotMachine({
             setIsPressing(false)
         }, 18000)
 
-        return () => {
-            // clearTimeout(t1)
-            // clearTimeout(t2)
-        }
     }, [isPressing, isPressed, availableSpins])
+
+    console.log('isClaiming: ', isClaiming)
+    console.log('isSpining: ', isSpining)
 
     return <Wapper>
         <Screen>
@@ -333,11 +334,11 @@ function SlotMachine({
                 <ControllerBtnBgWapper className='bg'>
                     {
                         chainList.map((item, index) => {
-                            return <ScrollLine 
-                            noIndex={index}
-                            key={index}
-                            startAni={isPressing} 
-                            no={item} />
+                            return <ScrollLine
+                                noIndex={index}
+                                key={index}
+                                startAni={isPressing}
+                                no={item} />
                         })
                     }
                 </ControllerBtnBgWapper>
@@ -363,7 +364,7 @@ function SlotMachine({
                     </ScoreBg>} />
                 </Score>
             </ScoreWapper>
-            
+
             <BottomChainIcons src={bottomChainIconsImg.src} />
 
         </Screen>
@@ -372,9 +373,9 @@ function SlotMachine({
             <Rules />
             <BtnWapper>
                 <BtnBg />
-                <Btn className={ isPressed ? 'press' : '' } onClick={handleBtnPress} />
+                <Btn className={isPressed ? 'press' : ''} onClick={handleBtnPress} />
             </BtnWapper>
-            <Clam onClick={ handleClaim }/>
+            <Clam onClick={handleClaim} style={{ opacity: isClaiming ? '.7' : '1' }} />
         </ActionBar>
     </Wapper>
 }

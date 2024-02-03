@@ -89,9 +89,10 @@ interface Props {
     spin: number;
     totalSpin: number;
     id: number;
+    source: string;
+    onAction?: (source?: string) => void;
 }
 
-const twitter_url = 'https://twitter.com/i/oauth2/authorize?response_type=code&client_id=VjNVVEJZRndDM1lva1BZNUpGS2M6MTpjaQ&redirect_uri=https://test.dapdap.net/quest/detail?id=24&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain'
 
 export default function SocialPanel({
     icon,
@@ -101,6 +102,8 @@ export default function SocialPanel({
     spin,
     totalSpin,
     id,
+    source,
+    onAction,
 }: Props) {
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(id)
 
@@ -117,14 +120,14 @@ export default function SocialPanel({
         <MidText>{mainText}</MidText>
 
         <ActionBtnWapper>
-            <BtnPrimary onClick={ () => {
-                window.open(twitter_url)
-            } }>{btnText}</BtnPrimary>
+            <BtnPrimary onClick={() => {
+                onAction && onAction(source)
+            }}>{btnText}</BtnPrimary>
             <FreshWapper>
                 <SpinWapper>
-                    <Spin renderChildren={() => <SpinText>+ {spin}/{ totalSpin } SPIN</SpinText>} />
+                    <Spin renderChildren={() => <SpinText>+ {spin}/{totalSpin} SPIN</SpinText>} />
                 </SpinWapper>
-                <Fresh onCheck={ checkQuestStatus }/>
+                <Fresh onCheck={checkQuestStatus} isLoading={isQuestSuccess} />
             </FreshWapper>
 
         </ActionBtnWapper>
