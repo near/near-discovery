@@ -1,54 +1,35 @@
-import { arbitrum } from '@/config/tokens/arbitrum';
-import { polygon } from '@/config/tokens/polygon';
+import { zkSync } from '@/config/tokens/zkSync';
 
-// const BORROW_TOKEN = 'STAR';
-// const BORROW_URL = 'https://ipfs.near.social/ipfs/bafkreifn26whjukvke3m35hwcl74up7kckzvahrzib4ab3arq3qyfnelfy';
+// const BORROW_TOKEN = 'GRAI';
+// const BORROW_URL = 'https://ipfs.near.social/ipfs/bafkreihv4qckd2us54qbgljcriwtbrmmmxrpmgvyg5xf5rjp456pcr25ui';
 
-// const MIN_DEBT = 180;
+// const MIN_DEBT = 200;
 
 const basic = {
-  name: 'Zerolend',
+  name: 'Gravita Protocol',
   // icon: '/images/apps/granary.png',
   // data: 'bluebiu.near/widget/Lending.Data.Liquity',
   // handler: 'bluebiu.near/widget/Lending.Handler.Liquity',
-  type: 'aave-v3',
+  type: 'liquity',
   // BORROW_TOKEN,
   // BORROW_URL,
 };
 
 const networks = {
-  //  arb
-  // 42161: {
-  //   StabilityPool: '0x6afA834Bf44fF8aB7eF89Fd417853e9B13FBfB52',
-  //   borrowTokenAddress: '0xC19669A405067927865B40Ea045a2baabbbe57f5',
-  //   VesselManager: '0x5208c0c4c95A4636eFC403960969a4a4b4CCDFC5',
-  //   VesselManagerOperations: '0x7A004E02177DA08dF4e4eEC15a0F75Fb5DE6Af04',
-  //   BorrowerOperations: '0xbffC680a9aA46b8B19228497E77888dA6B944B2D',
-  //   markets: {
-  //     [arbitrum['wst-eth'].address]: {
-  //       decimals: 18,
-  //       underlyingToken: arbitrum['wst-eth'],
-  //       BORROW_TOKEN,
-  //       BORROW_URL,
-  //       MAX_LTV: 88.9,
-  //       ONE_TIME_FEE: 0.5,
-  //       MIN_DEBT,
-  //       MINTED: 0,
-  //       MINTED_CAP: 500000,
-  //     },
-  //     [arbitrum['weth'].address]: {
-  //       decimals: 18,
-  //       underlyingToken: arbitrum['weth'],
-  //       BORROW_TOKEN,
-  //       BORROW_URL,
-  //       MAX_LTV: 88.9,
-  //       ONE_TIME_FEE: 0.5,
-  //       MIN_DEBT,
-  //       MINTED: 0,
-  //       MINTED_CAP: 500000,
-  //     },
-  //   },
-  // },
+  324: {
+    // wethGateway: '0x4d8d90FAF90405b9743Ce600E98A2Aa8CdF579a0',
+    // StabilityPool: '0xDAce04E411D9916169c0401033a7f76994eF5A0f',
+    // borrowTokenAddress: '0x5FC44E95eaa48F9eB84Be17bd3aC66B6A82Af709',
+    // BorrowerOperations: '0xd085Fd2338Cefb9cBD212F74d479072C1E7A25bf',
+    // VesselManager: '0x8D9CDd9372740933702d606EaD3BB55dFfDC6303',
+    // VesselManagerOperations: '0x03569d4c117f94e72e9f63B06F406c5bc7caddE9',
+    markets: {
+      [zkSync['weth'].address]: {
+        decimals: 18,
+        underlyingToken: zkSync['weth'],
+      },
+    },
+  },
 };
 
 export default { basic, networks };
