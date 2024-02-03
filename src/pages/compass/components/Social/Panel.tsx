@@ -93,7 +93,7 @@ interface Props {
 
 const twitter_url = 'https://twitter.com/i/oauth2/authorize?response_type=code&client_id=VjNVVEJZRndDM1lva1BZNUpGS2M6MTpjaQ&redirect_uri=https://test.dapdap.net/quest/detail?id=24&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain'
 
-export default function ({
+export default function SocialPanel({
     icon,
     mark,
     mainText,

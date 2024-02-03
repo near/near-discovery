@@ -67,7 +67,7 @@ const WinIcon = styled.img`
     top: -30px;
 `
 
-export default function() {
+export default function Panel() {
     return <ProjectLine>
         <IconBox src={LineImg.src} />
         <DescBox>

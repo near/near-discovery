@@ -71,8 +71,8 @@ export default function Swipper({
             modules={modules}
             className="mySwiper">
             {
-                children?.map((child: any) => {
-                    return <SwiperSlide>
+                children?.map((child: any, index: number) => {
+                    return <SwiperSlide key={index}>
                         <InnerSlider className={classNames.join(' ')}>
                             {child}
                         </InnerSlider>

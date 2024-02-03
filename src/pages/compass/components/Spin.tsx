@@ -47,25 +47,25 @@ const ChildBox = styled.div`
 `
 
 const size = 10
-const horList = Array.from({length: 5}, (x, index) => size * (index + 1)) 
-const verList = Array.from({length: 60}, (x, index) => size * (index + 1))
+const horList = Array.from({ length: 5 }, (x, index) => size * (index + 1))
+const verList = Array.from({ length: 80 }, (x, index) => size * (index + 1))
 
 export default function Spin({ renderChildren }: { renderChildren: any }) {
     return <SpinWapper>
         <BgTable>
             {
                 horList.map((item, index) => {
-                    return <BgHor style={{ top: item + 'px' }}/>
+                    return <BgHor key={item} style={{ top: item + 'px' }} />
                 })
             }
             {
                 verList.map((item, index) => {
-                    return <BgVer style={{ left: item + 'px' }}/>
+                    return <BgVer key={item} style={{ left: item + 'px' }} />
                 })
             }
         </BgTable>
         <ChildBox>
-            { renderChildren() }
+            {renderChildren()}
         </ChildBox>
     </SpinWapper>
 }

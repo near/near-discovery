@@ -7,7 +7,7 @@ const Content = styled.div`
     margin-top: 20px;
 `
 
-export default function () {
+export default function CompassSwipper() {
     return <Content>
         <Swipper navigation pagination={false}>
             <Panel />

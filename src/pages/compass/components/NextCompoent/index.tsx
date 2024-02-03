@@ -22,7 +22,7 @@ const Title = styled.div`
     line-height: 59px;
 `
 
-export default function() {
+export default function Index() {
     return <NextWapper>
         <MidWapper>
             <Title>The next Compass</Title>

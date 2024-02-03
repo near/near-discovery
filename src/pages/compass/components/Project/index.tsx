@@ -21,7 +21,7 @@ interface Props {
     currentChainIndex: number;
 }
 
-export default function ({ list, currentChainIndex } : Props) {
+export default function Index({ list, currentChainIndex } : Props) {
     
     useEffect(() => {
 

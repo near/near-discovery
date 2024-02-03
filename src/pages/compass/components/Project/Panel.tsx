@@ -68,7 +68,7 @@ interface Props {
 
 const chainIndexes = ['linea', 'base', 'manta', 'scroll', 'zksync']
 
-export default function({ value, currentChainIndex }: Props) {
+export default function Panel({ value, currentChainIndex }: Props) {
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(value.id)
 
     return <PanelWapper onClick={() => {

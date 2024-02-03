@@ -335,6 +335,7 @@ function SlotMachine({
                         chainList.map((item, index) => {
                             return <ScrollLine 
                             noIndex={index}
+                            key={index}
                             startAni={isPressing} 
                             no={item} />
                         })

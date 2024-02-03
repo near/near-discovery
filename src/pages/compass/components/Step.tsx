@@ -30,7 +30,7 @@ export default function Step({
     return <StepWapper>
         {
             sumAry.map((item, index) => {
-                return <StepItem className={ index + 1 === step ? 'selected' : '' } />
+                return <StepItem key={index} className={ index + 1 === step ? 'selected' : '' } />
 
             })
         }

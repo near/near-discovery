@@ -235,7 +235,7 @@ function Compass() {
             </RecordLine2>
         </RecordBox>
 
-        {/* <SlotMachine
+        <SlotMachine
             chainList={chainList}
             handleSpin={handleSpin}
             handleClaim={handlClaim}
@@ -266,7 +266,7 @@ function Compass() {
 
         <Social list={questList.twitter} />
 
-        <NextCompoent /> */}
+        <NextCompoent />
     </App>
 }
 
