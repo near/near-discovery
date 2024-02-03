@@ -29,10 +29,12 @@ const ViewComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
+  return <ComponentWrapperPage src={componentSrc} componentProps={{
+    ...componentProps, addAction, getLifi: () => {
+      return lifi
+    }
+  }} />;
 
-  return <ComponentWrapperPage src={componentSrc} componentProps={{ ...componentProps, addAction, getLifi: () => {
-    return lifi
-  } }} />;
 };
 
 ViewComponentPage.getLayout = useDefaultLayout;
