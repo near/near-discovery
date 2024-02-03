@@ -97,7 +97,7 @@ export default function ScrollLine({
         <ScrollIcons delay={noIndex} className={isScoll ? 'ani' : ''} style={transformStyle}>
             {
                 list.map(item => {
-                    return <ScrollIconItems>
+                    return <ScrollIconItems key={item}>
                         <ScrollIconItemsImg src={item} />
                     </ScrollIconItems>
                 })

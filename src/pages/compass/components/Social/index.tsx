@@ -37,7 +37,7 @@ const btnTexts: any = {
     'twitter_follow': 'Follow us',
 }
 
-export default function ({ list }: Props) {
+export default function SocialIndex({ list }: Props) {
 
     return <Content>
         <ShareWapper>
