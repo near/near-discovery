@@ -25,16 +25,18 @@ const getReactFCInitializer = ({ onClickEvent }: InitReactTrack) => {
     }
     return props;
   };
-  // @ts-ignore
-  React.createElement = function () {
-    const args = Array.prototype.slice.call(arguments);
+  // @ts-expect-error react
+  React.createElement = function (...params) {
+    // @eslint-disable-next-line
+    const args = Array.prototype.slice.call(params);
 
     let props = args[1];
     if (props && props['data-bp']) {
       props = propsWithTrackEvents(props || {});
     }
-    // @ts-ignore
-    return originalCreateElement.apply(null, args);
+    // @ts-expect-error apply
+    // @eslint-disable-next-line
+    return originalCreateElement(...args);
   };
 };
 

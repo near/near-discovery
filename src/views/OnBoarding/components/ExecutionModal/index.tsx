@@ -5,7 +5,7 @@ import BridgePanel from './BridgePanel';
 import LendingPanel from './LendingPanel';
 import LiquidityPanel from './LiquidityPanel';
 
-const Panel = memo(({ type, chainId, setTitle, ...restProps }: any) => {
+const Panel = ({ type, chainId, setTitle, ...restProps }: any) => {
   if (type === 'swap') {
     return (
       <SwapPanel
@@ -52,7 +52,7 @@ const Panel = memo(({ type, chainId, setTitle, ...restProps }: any) => {
       />
     );
   }
-});
+};
 
 const ExecutionModal = ({ open, type, chainId, onClose, ...restProps }: any) => {
   const [title, setTitle] = useState('');
