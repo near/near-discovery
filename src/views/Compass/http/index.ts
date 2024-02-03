@@ -63,3 +63,5 @@ export async function saveSource(quest_id: number) {
 export async function checkQuest(id: number) {
     return get(COMPASS_CHECK_QUEST_URL, { id })
 }
+
+export default {}
