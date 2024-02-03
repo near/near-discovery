@@ -47,8 +47,8 @@ const ChildBox = styled.div`
 `
 
 const size = 10
-const horList = Array.from({ length: 5 }, (x, index) => size * (index + 1))
-const verList = Array.from({ length: 80 }, (x, index) => size * (index + 1))
+const horList = Array.from({ length: 8 }, (x, index) => size * (index + 1))
+const verList = Array.from({ length: 48 }, (x, index) => size * (index + 1))
 
 export default function Spin({ renderChildren }: { renderChildren: any }) {
     return <SpinWapper>

@@ -14,17 +14,21 @@ export default function useSpin(
     setAvailableSpins: (arg: number) => void,
     setTotalSpins: (arg: number) => void,
     setUnclaimedReward: (arg: number) => void
-    ) {
+) {
     const [chainList, setChainList] = useState<number[]>(initSpin)
     const { fail, success } = useToast()
+    const [isSpining, setIsSpining] = useState(false)
+    const [isClaiming, setIsClaiming] = useState(false)
 
     async function startSpin() {
+        setIsSpining(true)
         const res = await postSpin(id)
         if (res.code !== 0) {
             fail({
                 title: 'Fail',
                 text: res.msg,
             })
+            setIsSpining(false)
             return
         }
 
@@ -35,9 +39,11 @@ export default function useSpin(
         setChainList(_chainList)
         setAvailableSpins(available_spins)
         setUnclaimedReward(unclaimed_reward)
+        setIsSpining(false)
     }
 
     async function startCliam() {
+        setIsClaiming(true)
         const res = await postClaim(id)
 
         if (res.code !== 0) {
@@ -45,6 +51,7 @@ export default function useSpin(
                 title: 'Fail',
                 text: res.msg,
             })
+            setIsClaiming(false)
             return
         }
 
@@ -53,7 +60,7 @@ export default function useSpin(
                 title: 'Success',
                 text: res.msg,
             })
-            return
+            setIsClaiming(false)
         }
     }
 
@@ -61,5 +68,7 @@ export default function useSpin(
         chainList,
         startSpin,
         startCliam,
+        isSpining,
+        isClaiming,
     }
 }  

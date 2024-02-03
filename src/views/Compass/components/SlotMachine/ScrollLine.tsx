@@ -89,7 +89,7 @@ export default function ScrollLine({
         scrollAni()
     }, [startAni])
 
-    const transformStyle = !isScoll && location 
+    const transformStyle = !isScoll && location
         ? { transform: `translateY(${location}px)`, transition, }
         : {}
 

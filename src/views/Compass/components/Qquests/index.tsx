@@ -51,14 +51,14 @@ export default function Qquests({ list = [], getQuestGroupList, getSumaryDetail 
             </PanelTitle>
             {
                 list.map(item => {
-                    return <Panel 
-                    getQuestGroupList={getQuestGroupList} 
-                    getSumaryDetail={getSumaryDetail}
-                    value={item} 
-                    key={item.id} />
+                    return <Panel
+                        getQuestGroupList={getQuestGroupList}
+                        getSumaryDetail={getSumaryDetail}
+                        value={item}
+                        key={item.id} />
                 })
             }
         </SlideWapper>
-        <Step count={3} step={1}/>
+        <Step count={3} step={1} />
     </Content>
 }
