@@ -76,7 +76,7 @@ export default function ScrollLine({
                 setLocation(_location)
                 setTransition('all 1.5s ease-out');
             }, 100)
-        }, 4000 + 2000 * noIndex)
+        }, 5800 + 11000 / 12 * noIndex)
     }, [no])
 
     useEffect(() => {
@@ -94,10 +94,10 @@ export default function ScrollLine({
         : {}
 
     return <ScrollLineWapper>
-        <ScrollIcons delay={noIndex} className={isScoll ? 'ani' : ''} style={transformStyle}>
+        <ScrollIcons delay={noIndex * 0.5} className={isScoll ? 'ani' : ''} style={transformStyle}>
             {
-                list.map(item => {
-                    return <ScrollIconItems key={item}>
+                list.map((item, index) => {
+                    return <ScrollIconItems key={item + index}>
                         <ScrollIconItemsImg src={item} />
                     </ScrollIconItems>
                 })

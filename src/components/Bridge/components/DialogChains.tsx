@@ -2,6 +2,7 @@ import { memo } from 'react';
 import styled from 'styled-components';
 
 import Modal from '@/components/Modal';
+import { excludeChain } from '../config/chain'
 
 import type { Chain } from '../types';
 
@@ -52,7 +53,7 @@ const DialogChains = ({
       content={
         <Chains>
           {chains.map((chain) => (
-            chain.chainId === 5000 ? null : <StyledChain
+            excludeChain(chain.chainId) ? null : <StyledChain
               key={chain.chainId}
               onClick={() => {
                 onSelect(chain);

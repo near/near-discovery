@@ -186,6 +186,7 @@ function Compass() {
     const { startSpin, chainList, startCliam, isSpining, isClaiming } = useSpin(compassId, setAvailableSpins, setTotalSpins, setUnclaimedReward)
     const { questList, getQuestGroupList } = useQuestList(compassId)
     const [chainIndex, setChainIndex] = useState(0)
+    const [ reward, setReward ] = useState(0)
     const { loading, redirectToTwitter } = useTwitterBind({ id: compassId })
 
     const handleSpin = useCallback(() => {
@@ -193,6 +194,7 @@ function Compass() {
             return
         }
         startSpin().then(res => {
+            setReward(res)
             getDetail()
         })
     }, [isSpining])
@@ -207,6 +209,9 @@ function Compass() {
     }, [unclaimedReward, isClaiming])
 
     const qList = questList.dapp.length ? questList.dapp[chainIndex] : []
+
+
+    console.log('availableSpins: ', availableSpins)
 
     return <App>
         <MBg />
@@ -244,6 +249,7 @@ function Compass() {
             totalSpins={totalSpins}
             availableSpins={availableSpins}
             unclaimedReward={unclaimedReward}
+            reward={reward}
             isSpining={isSpining}
             isClaiming={isClaiming}
         />
