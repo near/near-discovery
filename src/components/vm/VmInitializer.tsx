@@ -36,7 +36,7 @@ import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
-import { recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
+import { recordHandledError, recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
 import {
   commitModalBypassAuthorIds,
   commitModalBypassSources,
@@ -173,6 +173,7 @@ export default function VmInitializer() {
       } catch (err) {
         const errMsg = err instanceof Error ? err.message : 'Something went wrong';
         alert(errMsg);
+        recordHandledError({ scope: 'requestSignMessage', message: errMsg });
       }
     },
     [near],
