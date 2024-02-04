@@ -6,11 +6,11 @@ import { zkSync } from '@/config/tokens/zkSync';
 // const MIN_DEBT = 200;
 
 const basic = {
-  name: 'Gravita Protocol',
+  name: 'zerolend',
   // icon: '/images/apps/granary.png',
   // data: 'bluebiu.near/widget/Lending.Data.Liquity',
   // handler: 'bluebiu.near/widget/Lending.Handler.Liquity',
-  type: 'liquity',
+  type: 'aave-v3',
   // BORROW_TOKEN,
   // BORROW_URL,
 };
