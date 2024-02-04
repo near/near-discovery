@@ -37,9 +37,11 @@ export default function useSpin(
         const _chainList = rand.split('').map(Number)
 
         setChainList(_chainList)
-        setAvailableSpins(available_spins)
-        setUnclaimedReward(unclaimed_reward)
+        // setAvailableSpins(available_spins)
+        // setUnclaimedReward(unclaimed_reward)
         setIsSpining(false)
+
+        return reward
     }
 
     async function startCliam() {

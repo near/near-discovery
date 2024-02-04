@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useCallback, useState, useRef, useEffect } from 'react';
 
 import Spin from '../Spin'
 import ScrollLine from './ScrollLine';
@@ -22,7 +23,7 @@ import yellowRightImg from './img/yellow-right.svg'
 import coverLeftImg from './img/cover-left.svg'
 import coverMidImg from './img/cover-mid.svg'
 import coverRightImg from './img/cover-right.svg'
-import { useCallback, useState } from 'react';
+
 
 import { postClaim } from '../../http/index'
 
@@ -276,6 +277,12 @@ interface Props {
     handleClaim: () => void;
     isSpining: boolean;
     isClaiming: boolean;
+    reward: number;
+}
+
+function playSound(url: string): void {
+    const sound = new window.Audio(url)
+    sound.play()
 }
 
 function SlotMachine({
@@ -287,30 +294,59 @@ function SlotMachine({
     handleClaim,
     isSpining,
     isClaiming,
+    reward,
 }: Props) {
     const [isPressed, setIsPressed] = useState(false)
     const [isPressing, setIsPressing] = useState(false)
+    const [newUnclaimedReward, setNewunclaimedReward] = useState(unclaimedReward)
+
+    const rewardRef = useRef(reward)
+    const unclaimedRewardRef = useRef(unclaimedReward)
+
+    useEffect(() => {
+        rewardRef.current = reward
+    }, [reward])
+
+    useEffect(() => {
+        if (!isPressing) {
+            setNewunclaimedReward(unclaimedReward)
+        }
+        unclaimedRewardRef.current = unclaimedReward
+    }, [unclaimedReward])
 
     const handleBtnPress = useCallback(() => {
         if (isPressing || isPressed || availableSpins <= 0) {
             return
         }
 
+        playSound('/images/compass/audio/rolling.mp4')
+        
+        setTimeout(() => {
+            console.log(rewardRef.current)
+            if (rewardRef.current === 10000) {
+                playSound('/images/compass/audio/grand-prize.mp3')
+            } else if (rewardRef.current > 0) {
+                playSound('/images/compass/audio/50PTS.mp3')
+            }
+            setNewunclaimedReward(unclaimedRewardRef.current)
+        }, 11000)
+
+
         handleSpin()
-        setIsPressed(true)
-        setIsPressing(true)
         setTimeout(() => {
-            setIsPressed(false)
-        }, 100)
+            setIsPressed(true)
+            setIsPressing(true)
+            setTimeout(() => {
+                setIsPressed(false)
+            }, 100)
 
-        setTimeout(() => {
-            setIsPressing(false)
-        }, 18000)
+            setTimeout(() => {
+                setIsPressing(false)
+            }, 11000)
 
-    }, [isPressing, isPressed, availableSpins])
+        }, 300)
 
-    console.log('isClaiming: ', isClaiming)
-    console.log('isSpining: ', isSpining)
+    }, [isPressing, isPressed, availableSpins, chainList])
 
     return <Wapper>
         <Screen>
@@ -360,13 +396,12 @@ function SlotMachine({
                 <Score>
                     <Spin renderChildren={() => <ScoreBg>
                         <ScoreText>you win:</ScoreText>
-                        <ScoreText>{unclaimedReward} pts</ScoreText>
+                        <ScoreText>{newUnclaimedReward} pts</ScoreText>
                     </ScoreBg>} />
                 </Score>
             </ScoreWapper>
 
             <BottomChainIcons src={bottomChainIconsImg.src} />
-
         </Screen>
 
         <ActionBar>
@@ -377,6 +412,8 @@ function SlotMachine({
             </BtnWapper>
             <Clam onClick={handleClaim} style={{ opacity: isClaiming ? '.7' : '1' }} />
         </ActionBar>
+
+        {/* <Audio /> */}
     </Wapper>
 }
 
