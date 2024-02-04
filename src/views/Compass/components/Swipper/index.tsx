@@ -31,16 +31,16 @@ const InnerSlider = styled.div`
    
 `
 
-export default function Swipper({ 
-    children, 
+export default function Swipper({
+    children,
     pagination = true,
     navigation = false,
-} : { 
+}: {
     children: any;
     pagination?: boolean;
     navigation?: boolean;
 }) {
-    
+
     useEffect(() => {
 
     }, [children.length])

@@ -5,6 +5,7 @@ import useAccount from '@/hooks/useAccount';
 
 import type { Token } from '../types';
 import { getLifiTokens, lifi } from './useLifi';
+import { excludeChain } from '../config/chain'
 
 export default function useTokenBalance({ tokensByChain }: { tokensByChain?: Token }) {
   const [loading, setLoading] = useState<boolean>(false);
@@ -27,7 +28,6 @@ export default function useTokenBalance({ tokensByChain }: { tokensByChain?: Tok
         .getTokenBalancesForChains(account, {
           [lifiToken.chainId]: [lifiToken],
         })
-
         .then((res) => {
           const vals: TokenAmount[] = res[tokensByChain.chainId];
           if (vals && vals.length) {
@@ -67,7 +67,7 @@ export function useTokensBalance({ tokensByChain }: { tokensByChain?: Token[] })
     if (account && tokensByChain && tokensByChain.length) {
       const chainId = tokensByChain[0].chainId;
 
-      if (chainId === 5000) {
+      if (excludeChain(chainId)) {
         setLoading(false);
         setBalances(defaultVals);
         return;

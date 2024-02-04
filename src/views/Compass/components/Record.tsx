@@ -25,12 +25,12 @@ const RecordContent = styled.div`
     margin-top: 10px;
 `
 
-export default function RecordBox({ title, renderContent } : {
+export default function RecordBox({ title, renderContent }: {
     title: string;
     renderContent: () => JSX.Element;
 }) {
     return <Record>
-    <RecordTitle>{ title }</RecordTitle>
-    <RecordContent>{ renderContent() }</RecordContent>
-</Record>
+        <RecordTitle>{title}</RecordTitle>
+        <RecordContent>{renderContent()}</RecordContent>
+    </Record>
 }

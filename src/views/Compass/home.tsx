@@ -1,6 +1,8 @@
-import { useDefaultLayout } from '@/hooks/useLayout';
+import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { useSearchParams } from 'next/navigation'
+
+import { useDefaultLayout } from '@/hooks/useLayout';
 
 import Record from './components/Record'
 import SlotMachine from './components/SlotMachine'
@@ -12,6 +14,7 @@ import NextCompoent from './components/NextCompoent'
 import useSummary from './hooks/useSummary';
 import useSpin from './hooks/useSpin'
 import useQuestList from './hooks/useQuestList'
+import useTwitterBind from './hooks/useTwitterBind';
 
 import bgImg from './img/bg.gif'
 import g1 from './img/g1.svg'
@@ -23,7 +26,7 @@ import subImg from './img/sub-img.svg'
 import line1Img from './img/Line1.svg'
 import line2Img from './img/Line2.svg'
 import mImg from './img/m.png'
-import { useCallback, useState } from 'react';
+
 
 
 
@@ -168,8 +171,6 @@ const chains = [g1.src, g2.src, g3.src, g4.src, g5.src]
 function Compass() {
     const searchParams = useSearchParams()
     const compassId: string = searchParams.get('id') as string
-    console.log('compassId: ', compassId)
-
     const {
         participants,
         winners,
@@ -182,29 +183,35 @@ function Compass() {
         setUnclaimedReward,
         getDetail,
     } = useSummary(compassId)
-    const { startSpin, chainList, startCliam } = useSpin(compassId, setAvailableSpins, setTotalSpins, setUnclaimedReward)
+    const { startSpin, chainList, startCliam, isSpining, isClaiming } = useSpin(compassId, setAvailableSpins, setTotalSpins, setUnclaimedReward)
     const { questList, getQuestGroupList } = useQuestList(compassId)
     const [chainIndex, setChainIndex] = useState(0)
+    const [ reward, setReward ] = useState(0)
+    const { loading, redirectToTwitter } = useTwitterBind({ id: compassId })
 
     const handleSpin = useCallback(() => {
+        if (isSpining) {
+            return
+        }
         startSpin().then(res => {
-            // TODO change spin
+            setReward(res)
             getDetail()
         })
-    }, [])
+    }, [isSpining])
 
     const handlClaim = useCallback(() => {
-        console.log(unclaimedReward)
-
-        if (unclaimedReward <= 0) {
+        if (unclaimedReward <= 0 || isClaiming) {
             return
         }
         startCliam().then(() => {
             getDetail()
         })
-    }, [unclaimedReward])
+    }, [unclaimedReward, isClaiming])
 
     const qList = questList.dapp.length ? questList.dapp[chainIndex] : []
+
+
+    console.log('availableSpins: ', availableSpins)
 
     return <App>
         <MBg />
@@ -242,9 +249,12 @@ function Compass() {
             totalSpins={totalSpins}
             availableSpins={availableSpins}
             unclaimedReward={unclaimedReward}
+            reward={reward}
+            isSpining={isSpining}
+            isClaiming={isClaiming}
         />
 
-        <Qquests list={questList.page} getQuestGroupList={getQuestGroupList} getSumaryDetail={getDetail}/>
+        <Qquests list={questList.page} getQuestGroupList={getQuestGroupList} getSumaryDetail={getDetail} />
 
         <SubJACKTitle src={subImg.src} />
         <MiniTitle>Obtain more spins through on-chain interactive quests</MiniTitle>
@@ -252,19 +262,19 @@ function Compass() {
             {
                 chains.map((chain, index) => {
                     return <ChainImgIcon
-                        onClick={ () => setChainIndex(index) }
+                        onClick={() => setChainIndex(index)}
                         className={chainIndex === index ? 'selected' : ''}
                         src={chain} key={chain} />
                 })
             }
         </IconsWapper>
 
-        <Project list={qList} currentChainIndex={chainIndex}/>
+        <Project list={qList} currentChainIndex={chainIndex} />
 
         <SubJACKTitle className='m180' src={subImg.src} />
         <MiniTitle>Get more spins by sharing and following</MiniTitle>
 
-        <Social list={questList.twitter} />
+        <Social list={questList.twitter} onShare={redirectToTwitter} onFollow={redirectToTwitter} />
 
         <NextCompoent />
     </App>

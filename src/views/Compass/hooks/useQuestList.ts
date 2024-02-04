@@ -3,7 +3,7 @@ import { getQuestList } from '../http/index'
 
 
 export default function useQuestList(id: string) {
-    const [ questList, setQuestList ] = useState<{
+    const [questList, setQuestList] = useState<{
         twitter: any[],
         page: any[],
         dapp: any[],
@@ -15,16 +15,16 @@ export default function useQuestList(id: string) {
 
     function getQuestGroupList() {
         return getQuestList(id)
-        .then((quest) => {
-            setQuestList(quest)
-        })
+            .then((quest) => {
+                setQuestList(quest)
+            })
     }
 
     useEffect(() => {
         getQuestList(id)
-        .then((quest) => {
-            setQuestList(quest)
-        })
+            .then((quest) => {
+                setQuestList(quest)
+            })
     }, [])
 
     return {

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useCallback, useState, useRef, useEffect } from 'react';
 
 import Spin from '../Spin'
 import ScrollLine from './ScrollLine';
@@ -22,7 +23,7 @@ import yellowRightImg from './img/yellow-right.svg'
 import coverLeftImg from './img/cover-left.svg'
 import coverMidImg from './img/cover-mid.svg'
 import coverRightImg from './img/cover-right.svg'
-import { useCallback, useState } from 'react';
+
 
 import { postClaim } from '../../http/index'
 
@@ -233,6 +234,7 @@ const Clam = styled.div`
     background: url(${clamImg.src}) left top no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
+    opacity: .1;
 `
 
 const BtnWapper = styled.div`
@@ -273,6 +275,14 @@ interface Props {
     chainList: number[];
     handleSpin: () => void;
     handleClaim: () => void;
+    isSpining: boolean;
+    isClaiming: boolean;
+    reward: number;
+}
+
+function playSound(url: string): void {
+    const sound = new window.Audio(url)
+    sound.play()
 }
 
 function SlotMachine({
@@ -282,34 +292,61 @@ function SlotMachine({
     chainList,
     handleSpin,
     handleClaim,
+    isSpining,
+    isClaiming,
+    reward,
 }: Props) {
     const [isPressed, setIsPressed] = useState(false)
     const [isPressing, setIsPressing] = useState(false)
+    const [newUnclaimedReward, setNewunclaimedReward] = useState(unclaimedReward)
 
-    console.log('chainList: ', chainList)
+    const rewardRef = useRef(reward)
+    const unclaimedRewardRef = useRef(unclaimedReward)
+
+    useEffect(() => {
+        rewardRef.current = reward
+    }, [reward])
+
+    useEffect(() => {
+        if (!isPressing) {
+            setNewunclaimedReward(unclaimedReward)
+        }
+        unclaimedRewardRef.current = unclaimedReward
+    }, [unclaimedReward])
 
     const handleBtnPress = useCallback(() => {
         if (isPressing || isPressed || availableSpins <= 0) {
             return
         }
 
+        playSound('/images/compass/audio/rolling.mp4')
+        
+        setTimeout(() => {
+            console.log(rewardRef.current)
+            if (rewardRef.current === 10000) {
+                playSound('/images/compass/audio/grand-prize.mp3')
+            } else if (rewardRef.current > 0) {
+                playSound('/images/compass/audio/50PTS.mp3')
+            }
+            setNewunclaimedReward(unclaimedRewardRef.current)
+        }, 11000)
+
+
         handleSpin()
-
-        setIsPressed(true)
-        setIsPressing(true)
         setTimeout(() => {
-            setIsPressed(false)
-        }, 100)
+            setIsPressed(true)
+            setIsPressing(true)
+            setTimeout(() => {
+                setIsPressed(false)
+            }, 100)
 
-        setTimeout(() => {
-            setIsPressing(false)
-        }, 18000)
+            setTimeout(() => {
+                setIsPressing(false)
+            }, 11000)
 
-        return () => {
-            // clearTimeout(t1)
-            // clearTimeout(t2)
-        }
-    }, [isPressing, isPressed, availableSpins])
+        }, 300)
+
+    }, [isPressing, isPressed, availableSpins, chainList])
 
     return <Wapper>
         <Screen>
@@ -333,11 +370,11 @@ function SlotMachine({
                 <ControllerBtnBgWapper className='bg'>
                     {
                         chainList.map((item, index) => {
-                            return <ScrollLine 
-                            noIndex={index}
-                            key={index}
-                            startAni={isPressing} 
-                            no={item} />
+                            return <ScrollLine
+                                noIndex={index}
+                                key={index}
+                                startAni={isPressing}
+                                no={item} />
                         })
                     }
                 </ControllerBtnBgWapper>
@@ -359,23 +396,24 @@ function SlotMachine({
                 <Score>
                     <Spin renderChildren={() => <ScoreBg>
                         <ScoreText>you win:</ScoreText>
-                        <ScoreText>{unclaimedReward} pts</ScoreText>
+                        <ScoreText>{newUnclaimedReward} pts</ScoreText>
                     </ScoreBg>} />
                 </Score>
             </ScoreWapper>
-            
-            <BottomChainIcons src={bottomChainIconsImg.src} />
 
+            <BottomChainIcons src={bottomChainIconsImg.src} />
         </Screen>
 
         <ActionBar>
             <Rules />
             <BtnWapper>
                 <BtnBg />
-                <Btn className={ isPressed ? 'press' : '' } onClick={handleBtnPress} />
+                <Btn className={isPressed ? 'press' : ''} onClick={handleBtnPress} />
             </BtnWapper>
-            <Clam onClick={ handleClaim }/>
+            <Clam onClick={handleClaim} style={{ opacity: isClaiming ? '.7' : '1' }} />
         </ActionBar>
+
+        {/* <Audio /> */}
     </Wapper>
 }
 

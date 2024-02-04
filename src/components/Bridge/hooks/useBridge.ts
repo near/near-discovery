@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react';
 import type { Chain, Token } from '../types';
 import useAccount from '@/hooks/useAccount';
+import { excludeChain } from '../config/chain'
 
 export default ({
   chains,
@@ -16,7 +17,7 @@ export default ({
 
   const initiInputChain = chains[1]
 
-  const initOutputChain = chains[chainId && chainId !== 5000 ? chainId : 1]
+  const initOutputChain = chains[chainId && !excludeChain(chainId) ? chainId : 1]
 
   const [inputToken, setInputToken] = useState<Token | undefined>();
   const [outputToken, setOutputToken] = useState<Token>();
