@@ -16,6 +16,7 @@ import {
   setProcessSuccess,
 } from './notificationsLocalStorage';
 import type { NotificationSubscriptionData } from './types';
+import { recordHandledError } from './analytics';
 
 // min version for iOS to support notifications
 export const recommendedIosVersionForNotifications = 16.4;
@@ -23,16 +24,20 @@ export const recommendedIosVersionForNotifications = 16.4;
 const handleRequestPermission = () => {
   try {
     return Notification.requestPermission();
-  } catch (error) {
-    console.error('Error while requesting permission.', error);
+  } catch (error: any) {
+    const scope = 'Error while requesting Notification permission.';
+    console.error(scope, error);
+    recordHandledError({ scope, message: error.message || error });
   }
 };
 
 const registerServiceWorker = () => {
   try {
     return navigator.serviceWorker.register('/service-worker.js');
-  } catch (error) {
-    console.error('Error while registering service-worker.', error);
+  } catch (e: any) {
+    const scope = 'Error while registering the push notification service-worker';
+    console.error(scope, e);
+    recordHandledError({ scope, message: e.message || e });
   }
 };
 
@@ -50,8 +55,9 @@ const handlePushManagerSubscribe = async () => {
       userVisibleOnly: true,
       applicationServerKey: notificationApplicationServerKey,
     });
-  } catch (e) {
-    console.error('Error while subscribing to service-worker.', e);
+  } catch (e: any) {
+    const scope = 'Error while subscribing to the push notification service-worker.';
+    recordHandledError({ scope, message: e.message || e });
     throw e;
   }
 };
@@ -65,8 +71,10 @@ export const handlePushManagerUnsubscribe = async (hide: () => void) => {
     await pushServerUnsubscribe(subscription);
     await unregisterServiceWorker();
     await subscription?.unsubscribe();
-  } catch (error) {
-    // TODO: handle
+  } catch (e: any) {
+    const scope = 'Error while handling push notification unsubscribe';
+    console.error(scope, e);
+    recordHandledError({ scope, message: e.message || e });
   } finally {
     hide();
   }
@@ -129,8 +137,12 @@ export const handleTurnOn = async (accountId: string, hideModal: () => void) => 
     });
 
     setProcessSuccess();
-  } catch (error: unknown) {
+  } catch (error: any) {
     setProcessError(error);
+    recordHandledError({
+      scope: 'Error in the attempt to turn on Push Notifications',
+      message: error.message || error,
+    });
   } finally {
     hideModal();
     setProcessEnded();

@@ -13,6 +13,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
 import type { NextPageWithLayout } from '@/utils/types';
+import { recordHandledError } from '@/utils/analytics';
 
 const SettingsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
@@ -49,8 +50,10 @@ const SettingsPage: NextPageWithLayout = () => {
         });
       }
     } catch (error: any) {
-      console.error('Failed to init wallet + idOS: ', error);
+      const scope = 'Failed to init wallet + idOS: ';
+      console.error(scope, error);
       const errorMessage = error.message ? error.message : 'unknown';
+      recordHandledError({ scope, message: errorMessage || error });
       setError({
         type: 'ERROR',
         title: 'Falilure during idOS initialization:',

@@ -2,6 +2,7 @@ import Editor from '@monaco-editor/react';
 import React, { useCallback } from 'react';
 
 import { Tab } from '../utils/const';
+import { recordHandledError } from '@/utils/analytics';
 
 const TabProps = ({ tab, widgetProps, setWidgetProps, propsError }) => {
   const reformatProps = useCallback(
@@ -11,6 +12,7 @@ const TabProps = ({ tab, widgetProps, setWidgetProps, propsError }) => {
         setWidgetProps(formattedProps);
       } catch (e) {
         console.log(e);
+        recordHandledError({ scope: 'sandbox reformatProps', message: e.message || e });
       }
     },
     [setWidgetProps],
