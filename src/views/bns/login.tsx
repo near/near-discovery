@@ -16,8 +16,8 @@ const LoginView = () => {
   return (
     <StyledFlex style={{ height: '100vh' }} $gap="82px">
       <StyledImage>
-        {/* <Image src={loginBg} style={{ width: 824, height: 636 }} alt='loginBg' /> */}
-        <StyledLoginVideo width={824} height={636} autoPlay loop>
+        <Image src={loginBg} style={{ width: 824, height: 636 }} alt='loginBg' />
+        {/* <StyledLoginVideo width={824} height={636} autoplay muted loop>
           <source src="/videos/login_background.mp4" type="video/mp4" />
           <track
             src="/path/to/captions.vtt"
@@ -26,7 +26,7 @@ const LoginView = () => {
             label="English"
           />
           Your browser does not support the video tag.
-        </StyledLoginVideo>
+        </StyledLoginVideo> */}
       </StyledImage>
       <StyledFlex $direction="column">
         <StyledImage style={{ marginBottom: 89 }}>
