@@ -243,7 +243,9 @@ export const StyledSvg = styled.div`
   align-items: center;
   justify-content: center;
 `;
+export const StyledLoginVideo = styled.video`
 
+`
 export const StyledFlex = styled.div.attrs<StyledFlexType>((props) => ({
   $direction: props.$direction || 'row',
   $wrap: props.$wrap || 'wrap',
@@ -291,6 +293,7 @@ export const StyledText = styled.div<{
   $line?: string;
   $justify?: string;
   $textAlign?: string;
+  $lineClamp?: number
 }>`
   color: ${(props) => props.$color || '#FFF'};
   font-family: Gantari;
@@ -300,6 +303,14 @@ export const StyledText = styled.div<{
   line-height: ${(props) => props.$line || 'normal'};
   text-align: ${(props) => props.$textAlign || 'left'};
   box-sizing: border-box;
+  
+  &.ellipsis {
+    display: -webkit-box;
+    -webkit-line-clamp: ${(props) => props.$lineClamp || 1};
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   &.center {
     display: flex;
     align-items: center;

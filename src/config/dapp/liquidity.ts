@@ -2,8 +2,15 @@ const ROUTE_CONFIG = {
   'gamma': {
     type: 'liquidity',
     theme: {
-      '--button-color': '#783ae3',
-      '--button-text-color': '#FFFFFF',
+      '--button-color': '#FFFFFF',
+      '--button-text-color': '#1E2028',
+    },
+  },
+  'arrakis-finance': {
+    type: 'liquidity',
+    theme: {
+      '--button-color': '#FFA760',
+      '--button-text-color': '#000000',
     },
   },
 };

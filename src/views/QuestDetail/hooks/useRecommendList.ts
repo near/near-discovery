@@ -15,7 +15,7 @@ export default function useRecommendList(campaign_id: string) {
       setLoading(true);
       try {
         const result = await get(
-          `${QUEST_PATH}/api/quest/recommend_list?campaign_id=${campaign_id}&page=${_page}&page_szie=10`,
+          `${QUEST_PATH}/api/quest/recommend_list?campaign_id=${campaign_id}&page=${_page}&pagesize=3`,
         );
         const data = result.data.data || [];
         setRecommends(data);
