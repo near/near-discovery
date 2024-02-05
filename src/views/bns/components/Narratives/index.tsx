@@ -51,12 +51,8 @@ const Campaign = function ({ campaign, bp }: any) {
   return (
     <StyledCampaign onClick={handleClickCampaign}>
       <StyledWrapper style={{ width: 320 }}>
-        <StyledText $size="32px" $weight="700" $line="120%">
-          {campaign.name}
-        </StyledText>
-        <StyledText $size="14px" $line="150%" style={{ marginTop: 20, marginBottom: 20 }}>
-          {campaign.description}
-        </StyledText>
+        <StyledText $size='32px' $weight='700' $line='120%'>{campaign.name}</StyledText>
+        <StyledText $size='14px' $line="150%" $lineClamp={3} className='ellipsis' style={{ marginTop: 20, marginBottom: 20 }}>{campaign.description}</StyledText>
         <StyledButton
           $width="75px"
           $height="30px"

@@ -1,6 +1,5 @@
 import { type EIP1193Provider } from '@web3-onboard/core';
 import injectedModule, { ProviderLabel } from '@web3-onboard/injected-wallets';
-import ledgerModule from '@web3-onboard/ledger';
 import bitgetWalletModule from '@web3-onboard/bitget';
 import { init, useConnectWallet } from '@web3-onboard/react';
 import walletConnectModule from '@web3-onboard/walletconnect';
@@ -19,7 +18,6 @@ const wcV2InitOptions: any = {
 };
 
 const walletConnect = walletConnectModule(wcV2InitOptions);
-const ledger = ledgerModule(wcV2InitOptions);
 const injected = injectedModule({
   // display specific unavailable wallets
   displayUnavailable: [ProviderLabel.MetaMask, ProviderLabel.Trust],
@@ -28,7 +26,7 @@ const bitgetWallet = bitgetWalletModule();
 
 // initialize Onboard
 export const onboard = init({
-  wallets: [injected, bitgetWallet, walletConnect, ledger],
+  wallets: [injected, bitgetWallet, walletConnect],
   chains: [
     {
       id: 1,
