@@ -40,7 +40,8 @@ export const StyledLeftButton = styled.div<{ $disabled: boolean }>`
 export const StyledRecommendList = styled.div`
   margin-top: 30px;
   display: flex;
-  gap: 15px;
+  gap: 19px;
   flex-direction: nowrap;
   width: 100%;
+  overflow: hidden;
 `;

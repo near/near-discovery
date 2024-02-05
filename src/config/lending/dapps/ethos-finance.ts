@@ -21,7 +21,6 @@ const networks = {
   //  optimism
   10: {
     StabilityPool: '0xd839a111598d5e27bd8f7a1a18ce9bf079f0c0a2',
-    // StabilityPool: '0x8B147A2d4Fc3598079C64b8BF9Ad2f776786CFed',
     borrowTokenAddress: '0xc5b001dc33727f8f26880b184090d3e252470d45',
     VesselManager: '0x75C72F459f2054B46ceFD6D10eC99d0fbd777F05', //TODO
     VesselManagerOperations: '0xd584A5E956106DB2fE74d56A0B14a9d64BE8DC93', //TODO
@@ -35,6 +34,7 @@ const networks = {
         MAX_LTV,
         ONE_TIME_FEE,
         MIN_DEBT,
+        MCR: 1.1, //110%
         // MINTED: 0,
         // MINTED_CAP: 500000,
       },
@@ -46,6 +46,7 @@ const networks = {
         MAX_LTV,
         ONE_TIME_FEE,
         MIN_DEBT,
+        MCR: 1.08, //108%
         // MINTED: 0,
         // MINTED_CAP: 500000,
       },
@@ -54,9 +55,10 @@ const networks = {
         underlyingToken: optimism['wstETH'],
         BORROW_TOKEN,
         BORROW_URL,
-        MAX_LTV,
+        MAX_LTV, // UNUSED
         ONE_TIME_FEE,
         MIN_DEBT,
+        MCR: 1.1, //110%
         // MINTED: 0,
         // MINTED_CAP: 500000,
       },

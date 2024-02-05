@@ -91,7 +91,7 @@ export const DappPage: NextPageWithLayout = () => {
       result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
     }
     if (config.type === 'staking') {
-      result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
+      result = (await import(`@/config/staking/dapps/${dappPathname}`))?.default;
     }
     if (config.type === 'liquidity') {
       result = (await import(`@/config/liquidity/dapps/${dappPathname}`))?.default;
@@ -141,6 +141,7 @@ export const DappPage: NextPageWithLayout = () => {
   if (!dapp || !default_chain_id || !currentChain || (!dapp.default_chain_id && !dapp.default_network_id))
     return <div />;
 
+    console.log('====network', network)
   if (!network?.dapp_src || !localConfig) return <div />;
 
   return ready ? (
