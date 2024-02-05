@@ -91,7 +91,7 @@ export const DappPage: NextPageWithLayout = () => {
       result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
     }
     if (config.type === 'staking') {
-      result = (await import(`@/config/lending/dapps/${dappPathname}`))?.default;
+      result = (await import(`@/config/staking/dapps/${dappPathname}`))?.default;
     }
     if (config.type === 'liquidity') {
       result = (await import(`@/config/liquidity/dapps/${dappPathname}`))?.default;
