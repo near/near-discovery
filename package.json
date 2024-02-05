@@ -55,6 +55,7 @@
     "near-fastauth-wallet": "^0.0.10",
     "near-social-vm": "github:NearSocial/VM#address-bn",
     "next": "^13.5.6",
+    "next-pwa": "^5.6.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-bootstrap-typeahead": "^6.1.2",
