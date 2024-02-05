@@ -14,10 +14,10 @@ export default function useInviteList() {
     setLoading(true);
     try {
       const result = await get(`${QUEST_PATH}/api/invite/list`);
-      const data = result.data || [];
+      const data = result.data || {};
       setTotalRewards(data.reward || 0);
       setReward(data.invite_reward || 0);
-      setList(data.data);
+      setList(data.data || []);
       setLoading(false);
     } catch (err) {
       setLoading(false);
