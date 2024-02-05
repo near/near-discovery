@@ -12,6 +12,12 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/stakewars',
+        destination:
+          'https://github.com/near/stakewars-iv',
+        permanent: false,
+      },
+      {
         source: '/nearcon23.near/widget/Index',
         destination: 'https://nearcon.app',
         permanent: true,
