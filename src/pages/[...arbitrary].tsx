@@ -41,7 +41,6 @@ const finiteRoutes: Record<string, string> = {
   sailgpsf: 'https://pages.near.org/sailgpsf',
   sf: 'https://pages.near.org/sf',
   spill: 'https://pages.near.org/spill',
-  stakewars: 'https://pages.near.org/stakewars',
   'use-cases': 'https://pages.near.org/use-cases',
   'v3-developers': 'https://pages.near.org/v3-developers',
   'v3-use': 'https://pages.near.org/v3-use',
