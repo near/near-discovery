@@ -12,7 +12,7 @@ export default function useTokenBalance({ tokensByChain }: { tokensByChain?: Tok
   const [balance, setBalance] = useState<string>('0');
   const { account } = useAccount();
 
-  useEffect(() => {
+  const getBalance = function () {
     setLoading(true);
     if (account && tokensByChain && tokensByChain.address) {
       const lifiToken: LiFiToken = {
@@ -44,9 +44,10 @@ export default function useTokenBalance({ tokensByChain }: { tokensByChain?: Tok
       setLoading(false);
       setBalance('0');
     }
-  }, [tokensByChain]);
+  }
 
-  return { loading, balance };
+
+  return { loading, balance, getBalance };
 }
 
 export interface balance {

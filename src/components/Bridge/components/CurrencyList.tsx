@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import type { Chain, Token } from '../types';
 import CurrencyRow from './CurrencyRow';
-import { useTokensBalance } from '../hooks/useTokenBalance'
 import type { balance } from '../hooks/useTokenBalance'
 
 const StyledCurrencyList = styled.div`

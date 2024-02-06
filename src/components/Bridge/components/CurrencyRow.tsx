@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import CurrencyIcon from '@/components/CurrencyIcon';
 import Loading from '@/components/Icons/Loading';
-import useTokenBalance from '../hooks/useTokenBalance';
 import { balanceFormated } from '@/utils/balance';
 
 import type { Token } from '../types';
