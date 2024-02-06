@@ -1,4 +1,4 @@
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import Big from 'big.js';
 import { useDebounceFn } from 'ahooks';
 
@@ -15,14 +15,16 @@ import {
   StyledButton,
 } from './styles';
 
-import { Token } from '@/types';
+import type { Token } from '@/types';
+import type { Route } from '@lifi/sdk';
+
 import useAccount from '@/hooks/useAccount';
 import useLifi, { chains, tokens } from '@/components/Bridge/hooks/useLifi'
 import useTokenBalance from '@/components/Bridge/hooks/useTokenBalance'
 import { formatException } from '@/components/Bridge/util/index'
 import Loading from '@/components/Icons/Loading';
 import { balanceFormated } from '@/utils/balance';
-import { Route } from '@lifi/sdk';
+
 
 const fromChainId = 1
 
@@ -39,7 +41,7 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
   const routeRef = useRef<Route | null>(null)
   const btnStatus = useRef(0)
 
-  const [{ settingChain, connectedChain }, setChain] = useSetChain();
+  const [{ connectedChain }, setChain] = useSetChain();
 
   const fromChain = useMemo(() => {
     const filterChains = chains.filter(chain => chain.chainId === fromChainId)
