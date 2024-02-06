@@ -141,7 +141,6 @@ export const DappPage: NextPageWithLayout = () => {
   if (!dapp || !default_chain_id || !currentChain || (!dapp.default_chain_id && !dapp.default_network_id))
     return <div />;
 
-    console.log('====network', network)
   if (!network?.dapp_src || !localConfig) return <div />;
 
   return ready ? (

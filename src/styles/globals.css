@@ -21,8 +21,7 @@
 
 @font-face {
   font-family: '5squared pixel';
-  src:
-    url('/fonts/5squared-pixel.ttf') format('truetype');
+  src: url('/fonts/5squared-pixel.ttf') format('truetype');
   font-weight: 200 900;
   font-stretch: 75% 125%;
 }
@@ -122,6 +121,17 @@
   font-style: italic;
   font-weight: 800;
   src: url('/fonts/gantari-v1-latin-800italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+
+html {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body {
+  height: 100%;
+  overflow-y: auto;
 }
 
 body,

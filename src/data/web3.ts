@@ -20,7 +20,7 @@ const wcV2InitOptions: any = {
 const walletConnect = walletConnectModule(wcV2InitOptions);
 const injected = injectedModule({
   // display specific unavailable wallets
-  displayUnavailable: [ProviderLabel.MetaMask, ProviderLabel.Trust],
+  displayUnavailable: [ProviderLabel.MetaMask],
 });
 const bitgetWallet = bitgetWalletModule();
 

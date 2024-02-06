@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import chainsConfig from '@/config/chains';
 import { styled } from 'styled-components';
-import { QUEST_PATH } from '@/config/quest';
+import useDappsByNetwork from '@/hooks/useDappsByNetwork';
 import useAccount from '@/hooks/useAccount';
 import { useRouter } from 'next/router';
 import { get } from '@/utils/http';
+import { formatTitle } from '../helpers';
 const Container = styled.div`
   padding-top: 20px;
   padding-bottom: 65px;
@@ -501,16 +502,6 @@ const circle_selected_icon = (
   </svg>
 );
 
-const copy_icon = (
-  <svg width="11" height="12" viewBox="0 0 11 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <rect x="1" y="3" width="7" height="8" rx="2" stroke="#5285DF" />
-    <path
-      d="M2.72754 3.27246L2.72754 3C2.72754 1.89543 3.62297 1 4.72754 1H7.99941C9.10398 1 9.99941 1.89543 9.99941 3V7.36288C9.99941 8.36692 9.18548 9.18085 8.18144 9.18085V9.18085"
-      stroke="#5285DF"
-    />
-  </svg>
-);
-
 const switchIcon = 'https://ipfs.near.social/ipfs/bafkreigkkvqns7dxrbopcf22gvkpi4uvopladrr2p6arcvon7pzul7iiry';
 
 const closeIcon = 'https://ipfs.near.social/ipfs/bafkreiay565opvpvtxexcxkfo7cif3ecn4znoarnutcvhjggiczjpuvbbq';
@@ -534,34 +525,9 @@ const select_action_list = [
   { id: '', name: 'All Actions' },
   { id: 'Swap', name: 'Swap' },
   { id: 'Bridge', name: 'Bridge' },
-  // { id: 'Lending', name: 'Lending' },
+  { id: 'Lending', name: 'Lending' },
   { id: 'Liquidity', name: 'Liquidity' },
   // {id: 'Staking', name: 'Staking'},
-];
-const select_template_list = [
-  { id: '', name: 'All Templates' },
-  { id: 'Balancer', name: 'Balancer', icon: template_icons['Balancer'] },
-  { id: 'QuickSwap', name: 'QuickSwap', icon: template_icons['QuickSwap'] },
-  {
-    id: 'Pancake Swap',
-    name: 'Pancake Swap',
-    icon: template_icons['Pancake Swap'],
-  },
-  {
-    id: 'native bridge',
-    name: 'Native Bridge',
-    icon: template_icons['native bridge'],
-  },
-  // {
-  //   id: '0vix Lending',
-  //   name: '0vix',
-  //   icon: template_icons['0vix Lending'],
-  // },
-  {
-    id: 'Gamma',
-    name: 'Gamma',
-    icon: template_icons['Gamma'],
-  },
 ];
 const select_status_list = [
   { id: '', name: 'All Status' },
@@ -586,22 +552,24 @@ const ExecuteRecords = ({ chain }: any) => {
   const [showPopup, setShowPopup] = useState(false);
   const { account } = useAccount();
   const router = useRouter();
+  const { dapps } = useDappsByNetwork(chain);
   const currentChain = chainsConfig[chain];
 
   function get_current_page_range() {
     const start = (currentPage - 1) * pageSize + 1;
-    const end = start - 1 + recordList.length;
+    const end = start - 1 + recordList?.length;
     return `${Math.min(start, end) || 0}-${end || 0}`;
   }
   const fetchRecordList = async () => {
     try {
       const resultRecordList = await get(
-        `${QUEST_PATH}/api/action/get-action-records-by-account?account_id=${account}&page=${currentPage}&size=${pageSize}&action_type=${searchAction}&action_status=${searchStatus}&template=${searchTemplate}&chain_id=${chain}`,
+        `/api/action/my?account_id=${account}&page=${
+          currentPage || 1
+        }&size=${pageSize}&action_type=${searchAction}&action_status=${searchStatus}&template=${searchTemplate}&chain_id=${chain}`,
       );
-      setRecordList(resultRecordList.items);
-      setTotalPageSize(resultRecordList.total);
-      setTotalPage(resultRecordList.pages);
-      setCurrentPage(resultRecordList.page);
+      setRecordList(resultRecordList.data.data);
+      setTotalPageSize(resultRecordList.data.total);
+      setTotalPage(Math.ceil(resultRecordList.data.total / 20));
     } catch (error) {
       console.error('Error fetching resultNetwork data:', error);
     }
@@ -752,7 +720,7 @@ const ExecuteRecords = ({ chain }: any) => {
               </div>
               <div className="list-title">Dapp</div>
               <div className={`select1 `}>
-                {select_template_list.map((item) => {
+                {dapps?.map((item: any) => {
                   return (
                     <div
                       key={item.name}
@@ -820,7 +788,7 @@ const ExecuteRecords = ({ chain }: any) => {
                     {arrow_down_icon}
                   </span>
                   <div className={`select ${templateSelectBoxStatus ? 'show' : 'hide'}`}>
-                    {select_template_list.map((item) => {
+                    {dapps?.map((item: any) => {
                       return (
                         <div
                           key={item.name}
@@ -831,7 +799,7 @@ const ExecuteRecords = ({ chain }: any) => {
                           className={`item ${searchTemplate == item.id ? 'active' : ''}`}
                         >
                           <div className="template_item">
-                            {item.icon ? <img src={item.icon} width={16} height={16}></img> : null}
+                            {item.logo ? <img src={item.logo} width={16} height={16}></img> : null}
                             {item.name}
                           </div>
                           <span className="selected_icon">{selected_icon}</span>
@@ -887,15 +855,12 @@ const ExecuteRecords = ({ chain }: any) => {
               recordList.map((record, index) => {
                 return (
                   <tr key={index}>
-                    <td>{record.action_title}</td>
+                    <td>{formatTitle(record)}</td>
                     <td>{record.action_type}</td>
                     <td>
-                      <img
-                        width="16"
-                        height="16"
-                        src={template_icons[record.template as keyof typeof template_icons]}
-                        style={{ marginRight: '6px' }}
-                      ></img>
+                      {record.dapp_logo && (
+                        <img width="16" height="16" src={record.dapp_logo} style={{ marginRight: '6px' }} />
+                      )}
                       {record?.template === 'native bridge' ? 'Native Bridge' : record?.template}
                     </td>
 
@@ -917,7 +882,7 @@ const ExecuteRecords = ({ chain }: any) => {
               })}
           </tbody>
         </table>
-        {recordList.length == 0 ? <div className="emptyText">No result found</div> : null}
+        {recordList?.length == 0 ? <div className="emptyText">No result found</div> : null}
 
         <div className="page">
           <span className={`${currentPage == 1 ? 'disabled' : ''}`} onClick={click_left_most}>

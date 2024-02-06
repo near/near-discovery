@@ -17,7 +17,6 @@ import {
 } from './styles';
 
 const Top = ({ chain }: any) => {
-  console.log(chain);
   return (
     <StyledContainer>
       <StyledBg />

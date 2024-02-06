@@ -31,8 +31,7 @@ export default function useDappOpen() {
       _dapp = result.data;
       setDapp({ dapp: _dapp });
     }
-
-    router.push(_dapp.route);
+    router.push(!_dapp.route.startsWith('/') ? `/${_dapp.route}` : _dapp.route);
   }, []);
   return { open };
 }

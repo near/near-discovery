@@ -1,21 +1,30 @@
 import { memo } from 'react';
 import { formateValueWithThousandSeparator } from '@/utils/formate';
+import useSummary from '../../hooks/useSummary';
 import { StyledTotal, StyledTotalItem, StyledTotalLabel, StyledTotalValue } from './styles';
 
-const Total = () => {
+const Total = ({ chainId }: any) => {
+  const { info } = useSummary(chainId);
+
   return (
     <StyledTotal>
       <StyledTotalItem>
         <StyledTotalLabel>Total Execution</StyledTotalLabel>
-        <StyledTotalValue>502,45</StyledTotalValue>
+        <StyledTotalValue>
+          {info?.total_execution ? formateValueWithThousandSeparator(info.total_execution, 0) : '0'}
+        </StyledTotalValue>
       </StyledTotalItem>
       <StyledTotalItem>
         <StyledTotalLabel>Total trading Value</StyledTotalLabel>
-        <StyledTotalValue>$10,502.45</StyledTotalValue>
+        <StyledTotalValue>
+          $ {info?.total_trading_value ? formateValueWithThousandSeparator(info.total_trading_value, 2) : '0'}
+        </StyledTotalValue>
       </StyledTotalItem>
       <StyledTotalItem>
         <StyledTotalLabel>Total Address</StyledTotalLabel>
-        <StyledTotalValue>502,45</StyledTotalValue>
+        <StyledTotalValue>
+          {info?.total_address ? formateValueWithThousandSeparator(info.total_address, 0) : '0'}
+        </StyledTotalValue>
       </StyledTotalItem>
     </StyledTotal>
   );

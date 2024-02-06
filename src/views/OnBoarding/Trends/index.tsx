@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
-import { QUEST_PATH } from '@/config/quest';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { get } from '@/utils/http';
+import useDappOpen from '@/hooks/useDappOpen';
+import { formatTitle } from '../helpers';
+import useTrends from '../hooks/useTrends';
 import type { NextPageWithLayout } from '@/utils/types';
+import { cloneDeep } from 'lodash';
 
 const Container = styled.div`
   margin: 0 8%;
@@ -102,6 +104,7 @@ const List = styled.div`
 
 const ListItem = styled.div`
   width: 250px;
+  cursor: pointer;
   .body {
     display: flex;
     flex-direction: column;
@@ -278,101 +281,26 @@ const SwapTokens = [
 ];
 
 const QuestionList: NextPageWithLayout = ({ chain }: any) => {
-  const [hotActionList, setHotActionList] = useState<any[]>([]);
   const [searchActionList, setSearchActionList] = useState<any[]>([]);
   const [keywords, setKeywords] = useState('');
   const router = useRouter();
+  const { loading, list } = useTrends(chain, 20);
+  const { open } = useDappOpen();
 
   useEffect(() => {
-    const fetchHotActionList = async () => {
-      try {
-        const resultNetwork = await get(`${QUEST_PATH}/api/action/get-hot-action?hot_number=20&chain_id=${chain}`);
-        setHotActionList(resultNetwork.data);
-        setSearchActionList(resultNetwork.data);
-      } catch (error) {
-        console.error('Error fetching resultNetwork data:', error);
-      }
-    };
-    fetchHotActionList();
-  }, []);
+    setSearchActionList(list ? cloneDeep(list) : []);
+  }, [list]);
 
   function searchBykeyWords(e: { target: { value: string } }) {
     const value = e.target.value.toLowerCase();
-    const search_result = hotActionList.filter((action) => {
-      const { action_title } = action;
-      return action_title.toLowerCase().includes(value);
+    const search_result = list.filter((action: any) => {
+      const { template } = action;
+      return template.toLowerCase().includes(value);
     });
     setSearchActionList(search_result);
     setKeywords(value);
   }
-  function get_item_title(action: { action_title: any }) {
-    const { action_title } = action;
-    const title_low = action_title.toLowerCase();
-    const key_low = keywords.toLowerCase();
-    const start_key_index = title_low.indexOf(key_low);
-    const end_key_index = start_key_index + key_low.length;
 
-    const result: any = [];
-    const arr = action_title.split(' ');
-    arr.forEach((split: any) => {
-      if (split !== null && split !== undefined) {
-        const start_split_index = action_title.indexOf(split);
-        const end_split_index = start_split_index + split.length;
-        const start_index = Math.max(start_key_index, start_split_index);
-        const end_index = Math.min(end_key_index, end_split_index);
-        if (end_index > start_index) {
-          result.push(<span style={{ color: '#E9F456' }}>{split}</span>, ' ');
-        } else {
-          if (Number(split)) {
-            result.push(<label className="num">{split}</label>, ' ');
-          } else {
-            result.push(split, ' ');
-          }
-        }
-      }
-    });
-
-    return result;
-  }
-  function get_link(action: any) {
-    let link;
-    const arr = action.action_title.split(/\s+/);
-    const isBridge = arr[0].toLowerCase() === 'bridge';
-    const isSwap = arr[0].toLowerCase() === 'swap';
-    const isLending = ['repay', 'supply', 'borrow'].includes(arr[0].toLowerCase());
-    if (isBridge) {
-      link = '/guessme.near/widget/ZKEVMSwap.zkevm-bridge?source=question_list';
-    }
-    if (isSwap) {
-      link = '/guessme.near/widget/ZKEVMSwap.zkevm-swap?source=question_list';
-    }
-    if (isLending) {
-      link = `/guessme.near/widget/ZKEVM.AAVE${arr[0].toLowerCase() == 'supply' ? '' : '?tab=borrow'}`;
-    }
-    return link;
-  }
-  function onSaveParams(action: any) {
-    const arr = action.action_title.split(/\s+/);
-    const isBridge = arr[0].toLowerCase() === 'bridge';
-    const isSwap = arr[0].toLowerCase() === 'swap';
-    if (isBridge) {
-      const [action_type, symbol, from, chain] = arr;
-      localStorage.setItem(symbol, chain);
-    }
-
-    if (isSwap) {
-      const [action_type, amount, symbol, on, dexName1, dexName2, assetId] = arr;
-      const token = SwapTokens.find((item) => item.symbol === symbol);
-      //   console.log('token: ', token);
-
-      localStorage.setItem(
-        amount,
-        symbol,
-        // dexName1: dexName1 + (dexName2 ? ' ' + dexName2 : ''),
-        // assetId: token.address,
-      );
-    }
-  }
   return (
     <Container>
       <Back
@@ -397,22 +325,27 @@ const QuestionList: NextPageWithLayout = ({ chain }: any) => {
       <List>
         {searchActionList.map((action, index) => {
           return (
-            <ListItem key={index}>
-              <div className="itemDiv" onClick={() => onSaveParams(action)}>
-                <a className="body" href={get_link(action)}>
-                  <div className="item-title">{get_item_title(action)}</div>
+            <ListItem
+              key={index}
+              onClick={() => {
+                open({ dapp: { id: action.dapp_id }, from: 'alldapps' });
+              }}
+            >
+              <div className="itemDiv">
+                <div className="body">
+                  <div className="item-title">{formatTitle(action)}</div>
                   <div className="platform">
-                    <img src={template_icons[action.template as keyof typeof template_icons]}></img>
+                    {action.dapp_logo && <img src={action.dapp_logo} />}
                     <span>{action.template}</span>
                   </div>
                   <div className="count_number">
-                    <span>{action.count_number}</span>
+                    <span>{action.total_execution}</span>
                   </div>
-                </a>
+                </div>
               </div>
               <div className="foot">
                 <span>Total Execution</span>
-                <span>{action.count_number}</span>
+                <span>{action.total_execution}</span>
               </div>
             </ListItem>
           );

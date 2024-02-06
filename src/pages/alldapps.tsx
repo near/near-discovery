@@ -28,6 +28,9 @@ const AllDappsPage = styled.div`
   color: #ffffff;
   padding: 50px 12% 80px 12%;
   position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   .token-tab-list {
     width: 100%;
     color: #ffffff;
@@ -462,15 +465,15 @@ const AllDappsColumn: NextPageWithLayout = () => {
     } else {
       params.delete('network');
     }
-    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
   };
   const handleFunctionClick = (functionType: any) => {
     const id = functionType.id;
     let _selectedFunction: string[] = [];
     if (selectedFunction.includes(String(id))) {
-      _selectedFunction = selectedFunction.filter((type) => type !== String(id));
+      _selectedFunction = [];
     } else {
-      _selectedFunction = [...selectedFunction, String(id)];
+      _selectedFunction = [String(id)];
     }
     const params = new URLSearchParams(searchParams);
     if (_selectedFunction.length) {
@@ -478,7 +481,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     } else {
       params.delete('category');
     }
-    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
   };
   const handleMedalMenuClick = (path: number) => {
     if (selectedMedalMenu === path) {
