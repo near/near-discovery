@@ -144,27 +144,7 @@ export const Overlay = styled.div`
   bottom: 0;
   z-index: 500;
 `;
-export const StyledButtonList = styled.div`
-  /* width: 500px; */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 14px;
-`
-export const StyledLoading = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: rotate 1.5s linear  infinite;
-  @keyframes rotate {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-`
+
 export const StyledButton = styled.button`
   width: 100%;
   height: 48px;
