@@ -200,6 +200,7 @@ export default function useLifi() {
     destination,
     route,
     onSuccess,
+    onFail,
   }: {
     chain: Chain;
     token: Token;
@@ -209,6 +210,7 @@ export default function useLifi() {
     destination?: string;
     route: Route,
     onSuccess: (hash: string) => void;
+    onFail?: (e: any) => void;
   }) => {
     if (!provider) return;
     const signer = await provider.getSigner(account);
@@ -264,6 +266,7 @@ export default function useLifi() {
         localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
       } catch(e) {
         console.log(e)
+        onFail && onFail(e)
       }
     }
   };

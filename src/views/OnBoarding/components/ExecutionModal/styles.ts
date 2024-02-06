@@ -43,6 +43,15 @@ export const StyledValue = styled.div`
     text-decoration-line: underline;
     cursor: pointer;
   }
+
+  .iconWapper {
+    display: flex;
+    align-items: center;
+    .icon {
+      width: 26px;
+      margin-right: 10px;
+    }
+  }
 `;
 
 export const StyledSelect = styled.div`
