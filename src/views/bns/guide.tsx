@@ -86,7 +86,7 @@ const GuideView = () => {
   ];
   const [complete, setComplete] = useState(false);
   const [completeQuantity, setCompleteQuantity] = useState(0);
-  const [stepIndex, setStepIndex] = useState<number>(0);
+  const [stepIndex, setStepIndex] = useState<number>(Number(sessionStorage.getItem('GuideStep') || 0));
 
   const handleSucess = function () {
     setComplete(true);
@@ -102,6 +102,7 @@ const GuideView = () => {
     setStepIndex(index);
     setCompleteQuantity(index);
     setComplete(false);
+    sessionStorage.getItem('GuideStep', index + '')
     index > 2 && router.push('/quest/leaderboard');
   };
 
