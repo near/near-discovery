@@ -16,15 +16,17 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useCallback, useEffect, useRef } from 'react';
 import { useState } from 'react';
-import { ToastContainer } from 'react-toastify';
 import { SkeletonTheme } from 'react-loading-skeleton';
+import { ToastContainer } from 'react-toastify';
+
 import useAccount from '@/hooks/useAccount';
 import useAuth from '@/hooks/useAuth';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
+import useClickTracking from '@/hooks/useClickTracking';
 import useInitialData from '@/hooks/useInitialData';
 import useTokenPrice from '@/hooks/useTokenPrice';
-import useClickTracking from '@/hooks/useClickTracking';
 import { useAuthStore } from '@/stores/auth';
+import { activityReg } from '@/utils/activity-reg';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -77,7 +79,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const _accountInit = debounce(accountInit, 500);
 
   useEffect(() => {
-    _accountInit();
+    console.log(3333, account);
+
+    if (!router.pathname.match(activityReg)) {
+      _accountInit();
+    } else {
+      getInitialData();
+      setUpdater(Date.now());
+    }
   }, [account]);
 
   useEffect(() => {

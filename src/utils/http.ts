@@ -52,6 +52,27 @@ const get = async (url: string, query?: Record<string, any>) => {
   return res.json() as any;
 };
 
+const getWithoutActive = async (url: string, activity: 'coin68' | 'bitget', query?: Record<string, any>) => {
+  const tokens = JSON.parse(window.localStorage.getItem(AUTH_TOKENS) || '{}');
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${tokens.access_token || ''}`,
+      'Content-Type': 'application/json',
+      activity,
+    },
+  };
+  if (!query) {
+    const res = await fetch(getUrl(url), options);
+    return res.json() as any;
+  }
+
+  query = removeEmptyKeys(query);
+  const queryStr = objectToQueryString(query);
+  const res = await fetch(`${getUrl(url)}?${queryStr}`, options);
+  return res.json() as any;
+};
+
 const post = async (url: string, data: object) => {
   const tokens = JSON.parse(window.localStorage.getItem(AUTH_TOKENS) || '{}');
   const res = await fetch(getUrl(url), {
@@ -78,4 +99,4 @@ const deleteRequest = async (url: string, data: object) => {
   return (await res.json()) as any;
 };
 
-export { get, post, deleteRequest, AUTH_TOKENS };
+export { get, post, getWithoutActive, deleteRequest, AUTH_TOKENS };

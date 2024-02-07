@@ -1,10 +1,15 @@
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
+import { activityReg } from '@/utils/activity-reg';
+
 // This function can be marked `async` if using `await` inside
 export function middleware(request: NextRequest) {
   const AUTHED_ACCOUNT = request.cookies.get('AUTHED_ACCOUNT');
   const LOGIN_ACCOUNT = request.cookies.get('LOGIN_ACCOUNT');
+  if (request.url.match(activityReg)) {
+    return NextResponse.next();
+  }
   if (!LOGIN_ACCOUNT) {
     return NextResponse.redirect(new URL(`/login?source=/`, request.url));
   }
