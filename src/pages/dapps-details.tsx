@@ -738,7 +738,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                     <p>{item.description}</p>
                     <StyledProcessBars style={{ marginTop: '0' }}>
                       {actions.map((action, i) => (
-                        <ProcessBar size={4} key={i} value={item.action_completed >= i ? 100 : 0} noBorder={true} />
+                        <ProcessBar size={4} key={i} value={item.action_completed > i ? 100 : 0} noBorder={true} />
                       ))}
                     </StyledProcessBars>
                     <div className="side-item-tag">

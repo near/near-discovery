@@ -57,6 +57,7 @@ export const StyledListBox = styled.div`
 `;
 
 export const StyledCampaign = styled.div`
+  position: relative;
   width: 100%;
   display: flex;
   align-items: flex-start;
