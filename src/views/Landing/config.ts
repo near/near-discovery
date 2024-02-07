@@ -1,6 +1,7 @@
 import chainCofig from '@/config/chains';
 
 export const CHAIN_ID = 59144;
+export const FROM_CHAIN_ID = 1;
 
 export const steps = [
   {
@@ -9,9 +10,9 @@ export const steps = [
     desc: `Using the shortcut on the right, Transfer any token available from Ethereum to ${chainCofig[CHAIN_ID].chainName}`,
   },
   {
-    title: 'Learn about Deep Dive',
+    title: 'Learn about Quick Onboarding',
     rewards: 20,
-    desc: 'Follow the tutorial on the right to learn how to use deepdive',
+    desc: 'Follow the tutorial on the right to learn how to use Quick Onboarding',
   },
   {
     title: 'Explore Quest',

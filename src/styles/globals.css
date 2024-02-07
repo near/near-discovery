@@ -123,17 +123,6 @@
   src: url('/fonts/gantari-v1-latin-800italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
-html {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-}
-
-body {
-  height: 100%;
-  overflow-y: auto;
-}
-
 body,
 html {
   --body-top-padding: 24px;

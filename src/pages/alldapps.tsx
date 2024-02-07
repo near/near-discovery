@@ -465,7 +465,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     } else {
       params.delete('network');
     }
-    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`, undefined, { scroll: false });
   };
   const handleFunctionClick = (functionType: any) => {
     const id = functionType.id;
@@ -481,7 +481,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     } else {
       params.delete('category');
     }
-    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`, undefined, { scroll: false });
   };
   const handleMedalMenuClick = (path: number) => {
     if (selectedMedalMenu === path) {
