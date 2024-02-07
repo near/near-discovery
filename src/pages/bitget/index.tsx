@@ -8,7 +8,7 @@ import LandingPC from '@/views/marketing/pc';
 const LandingPage: NextPageWithLayout = () => {
   // from bitget
 
-  return isMobile ? <LandingMobile from="bgUser" /> : <LandingPC from="bgUser" />;
+  return isMobile ? <LandingMobile from="bg" /> : <LandingPC from="bg" />;
 };
 
 LandingPage.getLayout = useMarketingLayout;
