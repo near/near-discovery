@@ -23,7 +23,6 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
   const [address, setAddress] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
-  const [isActive, setIsActive] = useState(false);
 
   const [userStatus, setUserStatus] = useState<'uncheck' | 'new' | 'old'>('uncheck');
 
@@ -68,13 +67,35 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
     setUserStatus(status);
   }
 
-  async function checkAddress() {
+  async function checkAddressWithActive() {
     const res: any = await getWithoutActive(`${QUEST_PATH}/api/invite/check-address/${address}`, 'bitget');
 
     if ((res.code as number) !== 0) return;
-    setIsActive(res.data.is_activated);
+
+    if (res.data.is_activated) {
+      fetchAccessToken();
+    }
   }
 
+  async function checkAddress() {
+    const res: any = await get(`${QUEST_PATH}/api/invite/check-address/${address}`);
+
+    if ((res.code as number) !== 0) return;
+
+    if (res.data.is_activated) {
+      fetchAccessToken();
+    } else {
+      activeWithCode();
+    }
+  }
+
+  async function activeWithCode() {
+    const res: any = await post(`${QUEST_PATH}/api/invite/activate`, { address, code: inviteCode });
+
+    if (res.data.is_success) {
+      fetchAccessToken();
+    }
+  }
   async function fetchAccessToken() {
     await getAccessToken(address);
     setCookie('AUTHED_ACCOUNT', address);
@@ -135,14 +156,13 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
   }, [userStatus, fresh]);
 
   useEffect(() => {
-    if (isActive) {
-      fetchAccessToken();
-    }
-  }, [isActive]);
-
-  useEffect(() => {
     if (address) {
-      checkAddress();
+      if (from === 'bg') {
+        checkAddressWithActive();
+      }
+      if (from === 'bgUser') {
+        checkAddress();
+      }
     }
   }, [address]);
 
