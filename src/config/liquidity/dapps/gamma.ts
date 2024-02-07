@@ -21,6 +21,7 @@ const basic = {
     OP: '	https://app.gamma.xyz/_next/static/media/icon.3468b9ee.svg',
     SNX: 'https://app.gamma.xyz/_next/static/media/icon.b8aa30c1.svg',
     ERN: 'https://app.gamma.xyz/_next/static/media/icon.5571c161.svg',
+    WMNT: 'https://app.gamma.xyz/_next/static/media/icon.d80ccc43.svg'
   },
 };
 const networks = {
@@ -45,6 +46,7 @@ const networks = {
       WETH: '0x4200000000000000000000000000000000000006',
       'WETH-USDbC-500': '0x11c4011772594c5f124a027da35329559447853d',
     },
+    proxyAddress: '0xc40F63879630dFF5b69dd6d287f7735E65e90702'
   },
   // bsc
   56: {
@@ -103,6 +105,7 @@ const networks = {
       'USDT-WBNB-0': '0x3ec1ffd5dc29190588608ae9fd4f93750e84cda2',
       'BNBx-WBNB-0': '0x2ecbd508c00bbc8aa0cdc9100bf3956fcabe7677',
     },
+    proxyAddress: '0x1cc4eE0cB063e9db36E51F5d67218ff1f8dbfA0f'
   },
   // op
   10: {
