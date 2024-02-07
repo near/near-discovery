@@ -688,11 +688,11 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
           <Title>Activity</Title>
           <div className="title-right-list">
             <div className="right-list-item">
-              <p>-</p>
+              <p>{activity?.total_participant || '-'}</p>
               <span>Participants</span>
             </div>
             <div className="right-list-item">
-              <p>{activity && activity.data.length}</p>
+              <p>{activity?.total_execution || '-'}</p>
               <span>Acctions</span>
             </div>
           </div>
