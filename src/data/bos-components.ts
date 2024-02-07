@@ -122,7 +122,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
     },
 
     mainnet: {
-      applicationsPage: 'near/widget/AppLibrary.IndexPage',
+      applicationsPage: 'nearcatalog.near/widget/Index',
       bosDirectory: 'onboarder.near/widget/BOSDirectory',
       componentSummary: 'near/widget/ComponentSummary',
       componentsPage: 'near/widget/ComponentsPage',

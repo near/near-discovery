@@ -79,6 +79,7 @@ const nextConfig = {
 const withPWA = require('next-pwa')({
   dest: 'public',
   sw: 'next-pwa-sw.js',
+  scope: '/',
   importScripts: ['/pwa.js'],
   cacheStartUrl: false,
   cacheOnFrontEndNav: true,

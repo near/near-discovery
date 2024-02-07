@@ -78,11 +78,6 @@ const SignUpPage: NextPageWithLayout = () => {
         return setIsAccountAvailable(false);
       }
     } catch (error: any) {
-      console.log(error);
-      recordHandledError({
-        scope: 'sign-up: account availability check',
-        message: error.message || error,
-      });
       setIsAccountAvailable(false);
     }
   }, []);
