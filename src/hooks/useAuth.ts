@@ -35,6 +35,8 @@ const useAuth = () => {
           const result = await getBnsUserName(wallet.accounts[0].address);
           if (result.name) {
             setCookie('BNS_NAME', result.name);
+          } else {
+            deleteCookie('BNS_NAME')
           }
           if (!checked) {
             deleteCookie('AUTHED_ACCOUNT');

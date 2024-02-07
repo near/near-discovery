@@ -171,6 +171,7 @@ const networks = {
       'OP-USDC-3000': '0x2102bef0d9727ea50ba844e7658e38480961835c',
       'USDC-ERN-500': '0xd3c480ec7a47596ff8d63396227d1f7dc728a7f0',
     },
+    proxyAddress: '0x1E97925c365cd96D74Ec55A04569915c4D65e5e0'
   },
   // polygon
   137: {
@@ -194,6 +195,7 @@ const networks = {
       'WBTC-WETH-0': '0x4b9e26a02121a1c541403a611b542965bd4b68ce',
       'USDC-WETH-0': '0x3cc20a6795c4b57d9817399f68e83e71c8626580',
     },
+    proxyAddress: '0xA42d55074869491D60Ac05490376B74cF19B00e6'
   },
   // Linea
   59144: {
@@ -282,6 +284,7 @@ const networks = {
       'S USDC-BUSD-0': '0xd6cc4a33da7557a629e819c68fb805ddb225f517',
       'N USDT-WETH-0': '0xf3b1125c8505f038503e002e61a78253610d4f60',
     },
+    proxyAddress: '0xFc13Ebe7FEB9595D70195E9168aA7F3acE153621'
   },
   // mantle
   5000: {
@@ -397,6 +400,7 @@ const networks = {
         ammImage: 'https://app.gamma.xyz/_next/static/media/icon.a0ab20e5.svg',
       },
     ],
+    proxyAddress: '0xFc13Ebe7FEB9595D70195E9168aA7F3acE153621'
   },
   1101: {
     ALL_DATA_URL: 'https://wire2.gamma.xyz/quickswap/polygon-zkevm/hypervisors/allData',
@@ -579,6 +583,7 @@ const networks = {
         ammImage: 'https://app.gamma.xyz/_next/static/media/icon.ea1fec4d.svg',
       },
     ],
+    proxyAddress: '0x8480199e5d711399abb4d51bda329e064c89ad77'
   },
 };
 
