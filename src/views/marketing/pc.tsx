@@ -236,9 +236,20 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
         return item.is_claimed ? (
           <Styles.Button id={item.id}>Reward Already Claimed</Styles.Button>
         ) : (
-          <Styles.Button id={item.id} onClick={(e) => handleClaim(item)}>
-            Claim your<Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin> {item.reward} PTS
-          </Styles.Button>
+          <>
+            <Styles.Button id={item.id} onClick={(e) => handleClaim(item)}>
+              Claim your<Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin> {item.reward} PTS
+            </Styles.Button>
+
+            <Styles.Fresh
+              className={spin1 ? 'spin' : ''}
+              src="/images/marketing/fresh.svg"
+              onClick={() => {
+                setSpin1(true);
+                handleFresh();
+              }}
+            />
+          </>
         );
       });
     } else {
@@ -296,19 +307,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
           <Styles.Quote>Complete the following quests to earn points</Styles.Quote>
           <Styles.Title>Basic</Styles.Title>
           <Styles.Sub>Complete wallet connections to unlock more quests.</Styles.Sub>
-          <Styles.Step>
-            {renderButton()}
-            {address ? (
-              <Styles.Fresh
-                className={spin1 ? 'spin' : ''}
-                src="/images/marketing/fresh.svg"
-                onClick={() => {
-                  setSpin1(true);
-                  handleFresh();
-                }}
-              />
-            ) : null}
-          </Styles.Step>
+          <Styles.Step>{renderButton()}</Styles.Step>
           <Styles.Title>
             Advanced
             <Styles.SubTitle>
