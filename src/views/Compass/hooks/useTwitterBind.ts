@@ -42,6 +42,7 @@ export default function useTwitterBind({ id }: { id: string }) {
     // const params = { code, redirect_uri: `http://localhost:3000/quest/detail?id=24` };
 
     const result = await post(`${QUEST_PATH}${MAPS.twitter.path}`, params);
+
     if (result.code !== 0) {
       fail({
         title: 'Fail',
@@ -50,20 +51,16 @@ export default function useTwitterBind({ id }: { id: string }) {
       return
     }
 
-    if (result.code === 1) {
-      // userInfo.twitter.is_bind = true
-      queryInfo()
-      success({
-        title: 'Success',
-        text: result.msg,
-      })
-    }
+    queryInfo()
+    success({
+      title: 'Success',
+      text: result.msg,
+    })
 
   }, [code, id])
 
   useEffect(() => {
     if (userInfo.twitter && !userInfo.twitter.is_bind && code) {
-      console.log('userInfo: ', userInfo)
       bind()
     }
   }, [userInfo.twitter])

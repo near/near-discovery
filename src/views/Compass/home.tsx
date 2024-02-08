@@ -220,7 +220,7 @@ function Compass() {
             <img src={g4.src} />
             <img src={g5.src} />
         </IconsWapper>
-        <SubTitle>Explore the untapped potential of promising L2 chains like Base, Linea, Polygon zkEVM, Scroll, and  ZkSync as we unravel the mysteries within.</SubTitle>
+        <SubTitle>Explore the untapped potential of promising L2 chains like Linea, Base, Manta, Scroll, and ZkSync as we unravel the mysteries within.</SubTitle>
         <RecordBox>
             <RecordLine1>
                 <img src={line1Img.src} />
@@ -271,7 +271,12 @@ function Compass() {
         <SubJACKTitle className='m180' src={subImg.src} />
         <MiniTitle>Get more spins by sharing and following</MiniTitle>
 
-        <Social list={questList.twitter} onShare={redirectToTwitter} onFollow={redirectToTwitter} />
+        <Social 
+        list={questList.twitter} 
+        getQuestGroupList={getQuestGroupList} 
+        getSumaryDetail={getDetail}
+        onShare={redirectToTwitter} 
+        onFollow={redirectToTwitter} />
 
         <NextCompoent />
     </App>
