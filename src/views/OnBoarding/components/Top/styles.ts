@@ -3,10 +3,10 @@ import styled from 'styled-components';
 export const StyledContainer = styled.div`
   position: relative;
   width: 100%;
-  height: 310px;
+  height: 220px;
   border-radius: 20px;
   background: linear-gradient(180deg, #373a53 0%, #16181d 100%);
-  padding: 40px;
+  padding: 54px 40px 40px;
   box-sizing: border-box;
   overflow: hidden;
   margin-top: 30px;
@@ -15,6 +15,9 @@ export const StyledContainer = styled.div`
 export const StyledContent = styled.div`
   position: relative;
   z-index: 10;
+  display: flex;
+  justify-content: center;
+  position: relative;
 `;
 
 export const StyledBg = styled.div`
@@ -31,15 +34,23 @@ export const StyledBg = styled.div`
 
 export const StyledColorBg = styled.div`
   position: absolute;
-  left: 0;
+  left: 50%;
   top: 0px;
   z-index: 2;
+  transform: translateX(-50%);
 `;
 
 export const StyledTitleWrapper = styled.div`
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 23px;
+  gap: 20px;
+`;
+
+export const StyledMetaMaskWrapper = styled.div`
+  position: absolute;
+  right: -10px;
+  top: -30px;
 `;
 
 export const StyledChainLogoWrapper = styled.div`
@@ -63,6 +74,7 @@ export const StyledChainName = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  text-align: center;
 `;
 
 export const StyledSearchWrapper = styled.div`

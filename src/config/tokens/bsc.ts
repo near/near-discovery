@@ -31,7 +31,7 @@ export const bsc: { [key: string]: Token } = {
     decimals: 18,
     symbol: 'BNB',
     name: 'BNB',
-    icon: 'https://assets.dapdap.net/images/bafkreiaeq6ca67je5ocago6vk2efwxiqurxgemputx7p2nt6n2p3zo65xq.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreiaeq6ca67je5ocago6vk2efwxiqurxgemputx7p2nt6n2p3zo65xq.svg',
     isNative: true,
     address: 'native',
   },
@@ -41,7 +41,7 @@ export const bsc: { [key: string]: Token } = {
     decimals: 18,
     symbol: 'ETH',
     name: 'Binance-Peg Ethereum Token',
-    icon: 'https://assets.dapdap.net/images/bafkreibspnls7q67q25r2ifv2rrfmvzl744pzuh3s5ekigeqkmyycl2auq.png',
+    icon: 'https://assets.dapdap.tech/images/bafkreibspnls7q67q25r2ifv2rrfmvzl744pzuh3s5ekigeqkmyycl2auq.png',
   },
   the: {
     chainId: CHAIN_ID,

@@ -26,7 +26,7 @@ export const objectToQueryString = (obj: Record<string, any>): string => {
 
 const AUTH_TOKENS = 'AUTH_TOKENS';
 
-const BASE_URL = 'https://test-api.dapdap.net';
+const BASE_URL = 'https://test-api.dapdap.tech';
 
 const getUrl = (url: string) => {
   return url.startsWith('http') ? url : `${BASE_URL}${url}`;

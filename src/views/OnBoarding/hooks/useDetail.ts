@@ -5,7 +5,7 @@ import { QUEST_PATH } from '@/config/quest';
 const useDetail = (id: number) => {
   const [detail, setDetail] = useState<any>();
   const [hotDapps, setHotDapps] = useState<any>();
-  const [trends, setTrends] = useState<any>();
+  // const [summary, setSummary] = useState<any>();
   const [loading, setLoading] = useState(false);
 
   const queryDetail = useCallback(async () => {
@@ -18,15 +18,15 @@ const useDetail = (id: number) => {
     setHotDapps(response.data);
   }, [id]);
 
-  const queryTrends = useCallback(async () => {
-    const response = await get(`${QUEST_PATH}/api/action/get-special-action`);
-    // console.log('response', response);
-  }, [id]);
+  // const queryTrends = useCallback(async () => {
+  //   const response = await get(`api/action/summary?chain_id=${id}`);
+  //   // console.log('response', response);
+  // }, [id]);
 
   const init = useCallback(async () => {
     try {
       setLoading(true);
-      await Promise.all([queryDetail(), queryHotDapps(), queryTrends()]);
+      await Promise.all([queryDetail(), queryHotDapps()]);
       setLoading(false);
     } catch (err) {
       setLoading(false);

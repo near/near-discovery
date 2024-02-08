@@ -71,7 +71,7 @@ const DappCard = (props: any) => {
           <StyledDappButton
             data-bp={bp?.dapp}
             onClick={() => {
-              open({ dapp: props, from: 'home' });
+              open({ dapp: props, from: 'alldapps' });
             }}
           >
             dApp

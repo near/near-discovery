@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import Step from '../Step'
 import Panel from './Panel'
-import titleNameImg from './img/titleName.svg'
+import titleNameImg from '../../img/getPins.svg'
 
 const Content = styled.div`
     width: var(--main-width);
@@ -28,11 +28,11 @@ const PanelTitle = styled.div`
 
 const TitleDesc = styled.div`
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px;
     text-align: left;
-    margin-top: 40px;
-    color: rgba(151, 154, 190, 1);
+    margin-top: 20px;
+    color: #fff;
     text-align: center;
 `
 
@@ -47,7 +47,7 @@ export default function Qquests({ list = [], getQuestGroupList, getSumaryDetail 
         <SlideWapper>
             <PanelTitle>
                 <img src={titleNameImg.src} />
-                <TitleDesc>Complete Qquests to win more spins</TitleDesc>
+                <TitleDesc>Complete Quests to win more spins</TitleDesc>
             </PanelTitle>
             {
                 list.map(item => {

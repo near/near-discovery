@@ -99,7 +99,7 @@ export const StyledEmptyItem = styled.div`
   font-weight: 400;
   line-height: normal;
   border-radius: 16px;
-  border: 1px dashed #eef3bc;
+  border: 1px dashed rgba(238, 243, 188, 0.3);
 `;
 
 export const StyledTable = styled.div`

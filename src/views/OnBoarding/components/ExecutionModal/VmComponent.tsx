@@ -12,7 +12,7 @@ export function VmComponent(props: Props) {
   const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
   const toast = useToast();
-  const { addAction } = useAddAction('one-click-execution');
+  const { addAction } = useAddAction('quick_onboarding');
 
   if (!EthersProvider || !redirectMapStore.hasResolved) {
     return <div />;

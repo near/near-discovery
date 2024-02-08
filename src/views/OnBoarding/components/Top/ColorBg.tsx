@@ -1,31 +1,31 @@
 export default function ColorBg() {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="715" height="253" viewBox="0 0 715 253" fill="none">
-      <g filter="url(#filter0_f_4991_611)">
+    <svg xmlns="http://www.w3.org/2000/svg" width="745" height="253" viewBox="0 0 745 253" fill="none">
+      <g filter="url(#filter0_f_5683_419)">
         <path
-          d="M342.119 117C464.865 117 564.371 64.6173 564.371 0L119.866 0C119.866 64.6173 219.372 117 342.119 117Z"
-          fill="url(#paint0_linear_4991_611)"
+          d="M372.252 117C494.999 117 594.504 64.6173 594.504 0L150 0C150 64.6173 249.506 117 372.252 117Z"
+          fill="url(#paint0_linear_5683_419)"
         />
       </g>
       <defs>
         <filter
-          id="filter0_f_4991_611"
-          x="-30.1336"
+          id="filter0_f_5683_419"
+          x="0"
           y="-150"
           width="744.504"
           height="417"
           filterUnits="userSpaceOnUse"
-          colorInterpolationFilters="sRGB"
+          color-interpolation-filters="sRGB"
         >
-          <feFlood floodOpacity="0" result="BackgroundImageFix" />
+          <feFlood flood-opacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-          <feGaussianBlur stdDeviation="75" result="effect1_foregroundBlur_4991_611" />
+          <feGaussianBlur stdDeviation="75" result="effect1_foregroundBlur_5683_419" />
         </filter>
         <linearGradient
-          id="paint0_linear_4991_611"
-          x1="342.119"
+          id="paint0_linear_5683_419"
+          x1="372.252"
           y1="0"
-          x2="342.119"
+          x2="372.252"
           y2="117"
           gradientUnits="userSpaceOnUse"
         >

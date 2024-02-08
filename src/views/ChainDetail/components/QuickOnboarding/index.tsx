@@ -42,10 +42,7 @@ const QuickOnboarding = ({ path }: any) => {
   return (
     <StyledContainer>
       <StyledTitle>Quick Onboarding</StyledTitle>
-      <StyledSubtitle>
-        <span>The most popular actions from other users</span>
-        <GoMore label="More" path="" bp="100121-006" />
-      </StyledSubtitle>
+
       <StyledList>
         {MENUS.map((item: any) => (
           <StyledItem

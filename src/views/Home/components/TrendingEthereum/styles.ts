@@ -43,6 +43,12 @@ export const StyledChain = styled.div`
   align-items: center;
   cursor: pointer;
   position: relative;
+  transform-origin: center center;
+  transition: 0.3s;
+
+  &:hover {
+    transform: scale(1.04);
+  }
 `;
 
 export const StyledChainColorBg = styled.div`

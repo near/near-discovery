@@ -21,6 +21,7 @@ import {
   StyledSmallCircle,
   StyledAvatarBox,
   StyledSteps,
+  StyledNameWrapper,
 } from './styles';
 
 const UserInfo = ({ info, onSuccess }: any) => {
@@ -31,10 +32,10 @@ const UserInfo = ({ info, onSuccess }: any) => {
         <StyledInfo>
           {info.avatar ? <StyledAvatar src={info.avatar} /> : <StyledAvatarBox />}
 
-          <div>
+          <StyledNameWrapper>
             <StyledName>{info.username}</StyledName>
             <StyledAddress>{ellipsAccount(account)}</StyledAddress>
-          </div>
+          </StyledNameWrapper>
         </StyledInfo>
         <StyledLabelsWrapper>
           <StyledLabels>

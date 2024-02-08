@@ -204,7 +204,7 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
               <Styles.Step>Step 2</Styles.Step>
               <Styles.Button className={item.status !== 'completed' ? 'blur' : ''} onClick={(e) => handleClaim(item)}>
                 {claimLoading ? (
-                  <Styles.Spinner src="https://assets.dapdap.net/images/loading.gif"></Styles.Spinner>
+                  <Styles.Spinner src="https://assets.dapdap.tech/images/loading.gif"></Styles.Spinner>
                 ) : item.is_claimed ? (
                   'Reward Already Claimed'
                 ) : (

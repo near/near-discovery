@@ -15,7 +15,7 @@ const useMyQuests = (chainId: number) => {
     try {
       setLoading(true);
       const response = await get(
-        `${QUEST_PATH}/api/action/get-action-by-account?account_id=${account}&account_info=${uuid}&chain_id=${chainId}`,
+        `/api/action/get-action-by-account?account_id=${account}&account_info=${uuid}&chain_id=${chainId}`,
       );
       setList(response?.data || []);
       setLoading(false);
@@ -26,7 +26,7 @@ const useMyQuests = (chainId: number) => {
 
   const handleDelete = useCallback(async (action_id: string) => {
     try {
-      const response = await deleteRequest(`${QUEST_PATH}/api/action/delete-action-by-id`, { action_id });
+      const response = await deleteRequest(`/api/action/delete-action-by-id`, { action_id });
       if (response.code === 0) {
         queryList();
       }

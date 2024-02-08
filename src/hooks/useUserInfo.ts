@@ -12,7 +12,7 @@ export default function useUserInfo({ id, updater, from }: { id?: string; update
     setLoading(true);
     try {
       const result = await get(`${QUEST_PATH}/api/user${id ? '?campaign_id=' + id : ''}`);
-      const data = result.data || [];
+      const data = result.data || {};
       setInfo(data);
       setLoading(false);
     } catch (err) {
@@ -26,7 +26,7 @@ export default function useUserInfo({ id, updater, from }: { id?: string; update
     } else {
       queryInfo();
     }
-  }, [id, updater]);
+  }, [id, from, updater]);
 
-  return { loading, info };
+  return { loading, info, queryInfo };
 }
