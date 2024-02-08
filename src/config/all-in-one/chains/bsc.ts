@@ -7,7 +7,7 @@ export default {
   selectBgColor: '#FFBF19',
   chainId: 56,
   rpcUrls: ['https://binance.llamarpc.com'],
-  defaultTab: 'Lending',
+  defaultTab: 'Bridge',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',

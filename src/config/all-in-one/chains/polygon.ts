@@ -7,7 +7,7 @@ export default {
   selectBgColor: '#5C28D8',
   chainId: 137,
   rpcUrls: ['https://polygon.llamarpc.com'],
-  defaultTab: 'Lending',
+  defaultTab: 'Bridge',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',

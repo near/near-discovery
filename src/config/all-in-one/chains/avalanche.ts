@@ -7,7 +7,7 @@ export default {
   selectBgColor: '#AF1616',
   chainId: 43114,
   rpcUrls: ['https://api.avax.network/ext/bc/C/rpc'],
-  defaultTab: 'Lending',
+  defaultTab: 'Bridge',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',

@@ -8,7 +8,7 @@ export default {
   selectBgColor: '#35bde3',
   chainId: 59144,
   rpcUrls: ['https://linea.blockpi.network/v1/rpc/public'],
-  defaultTab: 'Lending',
+  defaultTab: 'Bridge',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',

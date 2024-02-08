@@ -7,7 +7,7 @@ export default {
   selectBgColor: '#3b6bdc',
   chainId: 324,
   rpcUrls: ['https://mainnet.era.zksync.io'],
-  defaultTab: 'Lending',
+  defaultTab: 'Swap',
   menuConfig: {
     Swap: {
       tab: 'Swap',

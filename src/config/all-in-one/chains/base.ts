@@ -7,7 +7,7 @@ export default {
   selectBgColor: '#0038FF',
   chainId: 8453,
   rpcUrls: ['https://developer-access-mainnet.base.org'],
-  defaultTab: 'Lending',
+  defaultTab: 'Bridge',
   menuConfig: {
     Bridge: {
       tab: 'Bridge',
