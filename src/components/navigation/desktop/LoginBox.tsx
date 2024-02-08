@@ -58,7 +58,7 @@ const baseIcon = (
 );
 
 const mantleIcon = (
-  <img src="https://assets.dapdap.net/images/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4.svg"></img>
+  <img src="https://assets.dapdap.tech/images/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4.svg"></img>
 );
 const arbitrumIcon = (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,18 +147,18 @@ const metisIcon = (
 );
 
 const GnosisIcon = (
-  <img src="https://assets.dapdap.net/images/bafkreiflvhldlljkmvy6i7xos6w5i56i4nt5mwr7pgu6f3kowqnqdz2vme.png" />
+  <img src="https://assets.dapdap.tech/images/bafkreiflvhldlljkmvy6i7xos6w5i56i4nt5mwr7pgu6f3kowqnqdz2vme.png" />
 );
 const ZkSyncIcon = (
-  <img src="https://assets.dapdap.net/images/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu.png" />
+  <img src="https://assets.dapdap.tech/images/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu.png" />
 );
 
 const AvalanchecIcon = (
-  <img src="https://assets.dapdap.net/images/bafkreie2h3qc42tkuj73ip6qs6nl463qm5qiumkicnw5wy4x5jvkjhvrdi.svg" />
+  <img src="https://assets.dapdap.tech/images/bafkreie2h3qc42tkuj73ip6qs6nl463qm5qiumkicnw5wy4x5jvkjhvrdi.svg" />
 );
 
 const OptimismIcon = (
-  <img src="https://assets.dapdap.net/images/bafkreidax5cwumzbzrttt7iswlzhdndtbzyiyrg6yy4jbtydm2ihvlpo6a.svg" />
+  <img src="https://assets.dapdap.tech/images/bafkreidax5cwumzbzrttt7iswlzhdndtbzyiyrg6yy4jbtydm2ihvlpo6a.svg" />
 );
 
 const NearSignInButton = styled.div`
@@ -698,28 +698,28 @@ export const LoginBox = () => {
   return isActive('near')
     ? NearLoginArea
     : isActive('polygon-zkevm')
-    ? ZKEVMloginArea
-    : isActive('base')
-    ? BaseloginArea
-    : isActive('mantle')
-    ? MantleloginArea
-    : isActive('arbitrum')
-    ? ArbitrumloginArea
-    : isActive('bsc')
-    ? BscloginArea
-    : isActive('linea')
-    ? LinealoginArea
-    : isActive('polygon')
-    ? PolygonloginArea
-    : isActive('metis')
-    ? MetisloginArea
-    : isActive('gnosis')
-    ? GnosisloginArea
-    : isActive('zkSync')
-    ? ZkSyncloginArea
-    : isActive('avalanche')
-    ? AvalancheloginArea
-    : isActive('optimism')
-    ? OptimismloginArea
-    : null;
+      ? ZKEVMloginArea
+      : isActive('base')
+        ? BaseloginArea
+        : isActive('mantle')
+          ? MantleloginArea
+          : isActive('arbitrum')
+            ? ArbitrumloginArea
+            : isActive('bsc')
+              ? BscloginArea
+              : isActive('linea')
+                ? LinealoginArea
+                : isActive('polygon')
+                  ? PolygonloginArea
+                  : isActive('metis')
+                    ? MetisloginArea
+                    : isActive('gnosis')
+                      ? GnosisloginArea
+                      : isActive('zkSync')
+                        ? ZkSyncloginArea
+                        : isActive('avalanche')
+                          ? AvalancheloginArea
+                          : isActive('optimism')
+                            ? OptimismloginArea
+                            : null;
 };

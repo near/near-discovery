@@ -1,7 +1,7 @@
 export default {
   title: 'BSC',
   path: 'bsc',
-  icon: 'https://assets.dapdap.net/images/bafkreiczurnr4ai5epzfovu4btugbrfsoc57d42wnz22kdjmogz3ewfgcm.svg',
+  icon: 'https://assets.dapdap.tech/images/bafkreiczurnr4ai5epzfovu4btugbrfsoc57d42wnz22kdjmogz3ewfgcm.svg',
   bgColor: '#FFBF19',
   bgIcon: '/images/chains/bnb_white.svg',
   selectBgColor: '#FFBF19',

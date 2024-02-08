@@ -21,8 +21,8 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const several = 'https://assets.dapdap.net/images/bafkreib4xkaqeaxyfbdbjnvvnptlch3t6qtautxw2miflew4oqmc45nxdy.svg';
-const arrowBlock = 'https://assets.dapdap.net/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
+const several = 'https://assets.dapdap.tech/images/bafkreib4xkaqeaxyfbdbjnvvnptlch3t6qtautxw2miflew4oqmc45nxdy.svg';
+const arrowBlock = 'https://assets.dapdap.tech/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
 
 const DappsDetails = styled.div`
   color: #ffffff;
