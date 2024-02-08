@@ -79,8 +79,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const _accountInit = debounce(accountInit, 500);
 
   useEffect(() => {
-    console.log(3333, account);
-
     if (!router.pathname.match(activityReg)) {
       _accountInit();
     } else {
