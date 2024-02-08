@@ -28,5 +28,5 @@ export default function useUserInfo({ id, updater, from }: { id?: string; update
     }
   }, [id, from, updater]);
 
-  return { loading, info };
+  return { loading, info, queryInfo };
 }

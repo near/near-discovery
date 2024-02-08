@@ -3,8 +3,11 @@ import { useCallback, useState, useRef, useEffect } from 'react';
 
 import Spin from '../Spin'
 import ScrollLine from './ScrollLine';
+import RuleModal from './RuleModal';
+import PrizeModal from './PrizeModal'
 
 import titleImg from './img/title.svg'
+import prizeImg from './img/prize.svg'
 import compassImg from './img/compass.svg'
 import controllerImg from './img/controller.svg'
 import actionBg from './img/action-bg.svg'
@@ -43,7 +46,6 @@ const Screen = styled.div`
     background: linear-gradient(180deg, rgba(64, 67, 76, 0.9) 0%, rgba(31, 33, 39, 0.9) 100%),
     linear-gradient(180deg, #66676D 0%, rgba(0, 0, 0, 0) 100%);
     position: relative;
-    padding-top: 25px;
 `
 
 const ChainIcons = styled.img`
@@ -59,7 +61,7 @@ const BottomChainIcons = styled.img`
     right: 34px;
     bottom: 144px;
     width: 137px;
-    height: 71px;
+    height: 100px;
 `
 
 const Title = styled.div`
@@ -72,13 +74,23 @@ const Title = styled.div`
     text-indent: -9999px;
 `
 
+const Prize = styled.div`
+    width: 528px;
+    height: 85px;
+    background: url(${prizeImg.src}) center center no-repeat;
+    background-size: 100% 100%;
+    position: absolute;
+    top: 50px;
+    left: 220px;
+`
+
 const CompassWapper = styled.div`
     position: absolute;
-    background: url(${compassImg.src}) no-repeat;
-    background-size: 100%;
-    width: 100px;
-    height: 100px;
-    top: 80px;
+    background: url(${compassImg.src}) center center no-repeat;
+    background-size: 130%;
+    width: 120px;
+    height: 120px;
+    top: 15px;
     right: 20px;
 `
 
@@ -299,6 +311,8 @@ function SlotMachine({
     const [isPressed, setIsPressed] = useState(false)
     const [isPressing, setIsPressing] = useState(false)
     const [newUnclaimedReward, setNewunclaimedReward] = useState(unclaimedReward)
+    const [ruleShow, setRuleShow] = useState(false)
+    const [prizeShow, setPrizeShow] = useState(false)
 
     const rewardRef = useRef(reward)
     const unclaimedRewardRef = useRef(unclaimedReward)
@@ -328,6 +342,8 @@ function SlotMachine({
             } else if (rewardRef.current > 0) {
                 playSound('/images/compass/audio/50PTS.mp3')
             }
+
+            setPrizeShow(true)
             setNewunclaimedReward(unclaimedRewardRef.current)
         }, 11000)
 
@@ -351,6 +367,7 @@ function SlotMachine({
     return <Wapper>
         <Screen>
             <Title>DAPDAP JACKPOT</Title>
+            <Prize />
             <ChainIcons src={chainIconsImg.src} />
 
             <CompassWapper />
@@ -405,7 +422,7 @@ function SlotMachine({
         </Screen>
 
         <ActionBar>
-            <Rules />
+            <Rules onClick={() => setRuleShow(true)}/>
             <BtnWapper>
                 <BtnBg />
                 <Btn className={isPressed ? 'press' : ''} onClick={handleBtnPress} />
@@ -413,7 +430,8 @@ function SlotMachine({
             <Clam onClick={handleClaim} style={{ opacity: isClaiming ? '.7' : '1' }} />
         </ActionBar>
 
-        {/* <Audio /> */}
+        <RuleModal show={ruleShow} onClose={() => setRuleShow(false) } />
+        <PrizeModal prize={reward + 30} show={prizeShow} onClose={() => setPrizeShow(false) } />
     </Wapper>
 }
 
