@@ -30,10 +30,10 @@ const DappsDetails = styled.div`
   padding-bottom: 100px;
 `;
 const DappsDetailsTitle = styled.div`
-  background: #000000;
-  margin: -54px -36px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(47, 50, 72, 1));
   padding: 30px 12%;
   width: auto;
+  border-radius: 0px 0px 30px 30px;
   .header-details-body {
     display: flex;
     .details-body-left {

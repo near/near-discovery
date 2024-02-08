@@ -15,8 +15,8 @@ export const StyledContainer = styled.div`
 
 export const StyledTabWrap = styled.div`
   flex-grow: 1;
-  font-size: 18px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 600;
   height: 50px;
   cursor: pointer;
   position: relative;
