@@ -32,6 +32,7 @@ const Desc = styled.div`
     font-size: 16px;
     font-weight: 400;
     margin: 10px;
+    height: 50px;
 `
 
 const FreshWapper = styled.div`
