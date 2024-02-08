@@ -145,9 +145,21 @@ export const Star = styled.img`
   margin-left: 4px;
 `;
 
-export const Fresh = styled(motion.img)`
+export const Fresh = styled.img`
   width: 20px;
   height: 20px;
+  @keyframes loading {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  &.spin {
+    animation: loading 1s linear infinite;
+    transform-origin: center center;
+  }
 `;
 
 export const Spinner = styled.img`

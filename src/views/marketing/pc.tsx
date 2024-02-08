@@ -10,6 +10,9 @@ import useCopy from '@/hooks/useCopy';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 
 import { ModalPC, Tabs } from './components';
+import Leaderboard from './components/Leaderboard';
+import useLeaderboard from './hooks/useLeaderBoard';
+import useUserInfo from './hooks/useUserInfo';
 import * as Styles from './pc-styles';
 interface IProps {
   from: 'bg' | 'bgUser';
@@ -25,11 +28,11 @@ const questImgs = {
 
 const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   console.log('from:', from, 'inviteCode:', inviteCode);
+  const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
   const [tab, setTab] = useState<'Quests' | 'Leaderboard'>('Quests');
-
   const [address, setAddress] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
@@ -43,19 +46,22 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
 
   const [fresh, setFresh] = useState(0);
   const [updater, setUpdater] = useState(0);
+  const [id, setId] = useState<string>();
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: tab, updater });
 
-  const [freshAnimate, setFreshAnimate] = useState<any>({});
-  const [inviteFreshAnimate, setInviteFreshAnimate] = useState<any>({});
   const [claimLoading, setClaimLoading] = useState(false);
 
   const [expendAnimate, setExpendAnimate] = useState<any>({ height: 0 });
 
   const [inviteNum, setInviteNum] = useState(0);
   const [inviteReward, setInviteReward] = useState(0);
-
+  const [totalReward, setTotalReward] = useState(0);
   const [codeList, setCodeList] = useState([]);
 
-  const [isFreshing, setIsFreshing] = useState(false);
+  const [spin1, setSpin1] = useState(false);
+  const [spin2, setSpin2] = useState([false, false, false, false]);
+  const [spin3, setSpin3] = useState(false);
+
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
     insertedAccessKey('');
@@ -125,8 +131,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   async function fetchQuestList() {
     const res = await get(`${QUEST_PATH}/api/activity/quest_list?category=${'bitget'}`);
 
+    setSpin1(false);
+    setSpin2([false, false, false, false]);
     if ((res.code as number) !== 0) return;
-    setIsFreshing(false);
+
     const { advanced_quests, basic_quests } = res.data;
     setAdvancedQuests(advanced_quests);
     setBasicQuests(basic_quests);
@@ -148,16 +156,18 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   }
 
   async function fetchTotalRewards() {
-    // TODO总积分
-    const res = await get(`${QUEST_PATH}/api/activity/reward/${address}`);
+    // 总积分
+    const res = await get(`${QUEST_PATH}/api/activity/reward?category=bitget`);
     if ((res.code as number) !== 0) return;
-    return res.data;
+    setSpin1(false);
+    setSpin2([false, false, false, false]);
+    setTotalReward(res.data?.reward || 0);
   }
 
   const handleFreshInviteList = async () => {
-    setInviteFreshAnimate({ rotate: 360 });
+    setSpin3(true);
     const inviteData = await fetchInviteList();
-    setInviteFreshAnimate({});
+    setSpin3(false);
     setInviteNum(inviteData?.data?.length);
     setInviteReward(inviteData?.invite_reward);
   };
@@ -171,11 +181,8 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   }
 
   const handleFresh = () => {
-    if (isFreshing) return;
-    setIsFreshing(true);
-    setFreshAnimate({ rotate: 360 });
     setFresh((n) => n + 1);
-    setUpdater((n) => n + 1);
+    setUpdater(Date.now());
   };
 
   const handleClaim = async (data: any) => {
@@ -269,7 +276,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
             <Styles.AllRewardsTitle>Your PTS</Styles.AllRewardsTitle>
             <Styles.AllRewardsPoints>
               <Styles.AllRewardsCoin src="/images/marketing/coin.svg" />
-              1200
+              {totalReward}
             </Styles.AllRewardsPoints>
           </Styles.AllRewardsLeft>
           <Styles.AllRewardsIcon src="/images/marketing/coin.svg" />
@@ -293,11 +300,13 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
             {renderButton()}
             {address ? (
               <Styles.Fresh
+                className={spin1 ? 'spin' : ''}
                 src="/images/marketing/fresh.svg"
-                onClick={handleFresh}
-                animate={freshAnimate}
-                transition={freshAnimate?.rotate ? { ease: 'linear', duration: 0.8, repeat: Infinity } : {}}
-              ></Styles.Fresh>
+                onClick={() => {
+                  setSpin1(true);
+                  handleFresh();
+                }}
+              />
             ) : null}
           </Styles.Step>
           <Styles.Title>
@@ -309,7 +318,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
           </Styles.Title>
           <Styles.CardBox>
             {advancedQuests?.length
-              ? advancedQuests.map((item) => (
+              ? advancedQuests.map((item, index) => (
                   <Styles.Card key={item.id}>
                     <Styles.CardLeft>
                       <Styles.CardIcon src={(questImgs as any)[item.category]} />
@@ -321,19 +330,27 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
                       </div>
                     </Styles.CardLeft>
                     <Styles.CardRight>
-                      {item.status === 'completed' ? <Styles.CardDone src="/images/marketing/done.svg" /> : null}
+                      {item.status === 'completed' ? (
+                        <Styles.CardDone src="/images/marketing/done.svg" />
+                      ) : (
+                        <Styles.Fresh
+                          className={spin2[index] ? 'spin' : ''}
+                          src="/images/marketing/fresh.svg"
+                          onClick={() => {
+                            setSpin2((prev) => {
+                              const temp = [...prev];
+                              temp[index] = !temp[index];
+                              return temp;
+                            });
+                            handleFresh();
+                          }}
+                        />
+                      )}
                       {!item.is_claimed ? (
                         <Styles.CardBtn disabled={item.status !== 'completed'} onClick={(e) => handleClaim(item)}>
                           Claim
                         </Styles.CardBtn>
-                      ) : (
-                        <Styles.Fresh
-                          src="/images/marketing/fresh.svg"
-                          onClick={handleFresh}
-                          animate={freshAnimate}
-                          transition={freshAnimate?.rotate ? { ease: 'linear', duration: 0.8, repeat: Infinity } : {}}
-                        />
-                      )}
+                      ) : null}
                     </Styles.CardRight>
                   </Styles.Card>
                 ))
@@ -345,11 +362,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
               <Styles.Coin src="/images/marketing/friend.svg"></Styles.Coin> + {inviteNum} PPL
               <Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin> + {inviteNum * inviteReward} PTS
               <Styles.Fresh
+                className={spin3 ? 'spin' : ''}
                 src="/images/marketing/fresh.svg"
                 onClick={handleFreshInviteList}
-                animate={inviteFreshAnimate}
-                transition={freshAnimate?.rotate ? { ease: 'linear', duration: 0.8, repeat: Infinity } : {}}
-              ></Styles.Fresh>
+              />
             </Styles.SubTitle>
           </Styles.Title>
           <Styles.InviteBox>
@@ -394,7 +410,24 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
           </Styles.InviteBox>
         </Styles.Box>
       )}
-      {tab === 'Leaderboard' && <div></div>}
+      {tab === 'Leaderboard' && (
+        <Leaderboard
+          {...{
+            loading,
+            list,
+            page,
+            info,
+            maxPage,
+            handlePageChange,
+            userLoading,
+            userInfo,
+            handleRefresh: () => {
+              handleRefresh();
+              setUpdater(Date.now());
+            },
+          }}
+        />
+      )}
 
       <Styles.Foot>
         <Styles.FootTxt>Ready to Ignite the Spark?</Styles.FootTxt>
