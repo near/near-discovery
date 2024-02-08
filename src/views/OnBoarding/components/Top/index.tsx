@@ -10,6 +10,7 @@ import {
   StyledChainLogoWrapper,
   StyledChainLogo,
   StyledChainName,
+  StyledMetaMaskWrapper,
   StyledSearchWrapper,
   StyledInputWrapper,
   StyledInput,
@@ -28,10 +29,10 @@ const Top = ({ chain }: any) => {
           <StyledChainLogoWrapper style={{ backgroundColor: chain.bgColor }}>
             <StyledChainLogo src={chain.icon} />
           </StyledChainLogoWrapper>
-          <div>
-            <StyledChainName>{chain?.title}</StyledChainName>
+          <StyledChainName>{chain?.title}</StyledChainName>
+          <StyledMetaMaskWrapper>
             <AddMetaMask chainId={chain?.chainId} />
-          </div>
+          </StyledMetaMaskWrapper>
         </StyledTitleWrapper>
         {/* <StyledSearchWrapper>
           <StyledInputWrapper>

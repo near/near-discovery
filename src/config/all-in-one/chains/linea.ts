@@ -5,7 +5,7 @@ export default {
   bgColor: '#131313',
   bgIcon: '/images/chains/linea_white.svg',
   iconColor: '#000',
-  selectBgColor: '#35bde3',
+  selectBgColor: '#00E2FF',
   chainId: 59144,
   rpcUrls: ['https://linea.blockpi.network/v1/rpc/public'],
   defaultTab: 'Bridge',
