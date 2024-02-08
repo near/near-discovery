@@ -102,7 +102,7 @@ const GuideView = () => {
     setStepIndex(index);
     setCompleteQuantity(index);
     setComplete(false);
-    sessionStorage.getItem('GuideStep', index + '')
+    sessionStorage.setItem('GuideStep', index + '');
     index > 2 && router.push('/quest/leaderboard');
   };
 
