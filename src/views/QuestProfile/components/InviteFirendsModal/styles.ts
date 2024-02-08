@@ -200,7 +200,6 @@ export const StyledRewards = styled.div`
   font-weight: 400;
   text-align: center;
   line-height: 36px;
-  color: #ebf479;
 `;
 
 export const StyledUserName = styled.div`

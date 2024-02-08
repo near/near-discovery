@@ -172,7 +172,9 @@ const InviteFirendsModal = ({
                     {column.key === 'status' && (row.status === 'Pending' ? row.status + '...' : row.status)}
                     {column.key === 'rewards' &&
                       (row.reward ? (
-                        <StyledRewards>{row.reward} PTS</StyledRewards>
+                        <StyledRewards style={{ color: row.is_claimed ? 'rgba(235, 244, 121, 0.3)' : '#ebf479' }}>
+                          {row.reward} PTS
+                        </StyledRewards>
                       ) : (
                         <span className="rewards">-</span>
                       ))}
