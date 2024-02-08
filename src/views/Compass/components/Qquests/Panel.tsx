@@ -106,8 +106,8 @@ export default function Panel({ value, getQuestGroupList, getSumaryDetail }: Pro
                     title: 'Success',
                     text: res.msg,
                 })
-                getQuestGroupList()
-                getSumaryDetail()
+                // getQuestGroupList()
+                // getSumaryDetail()
             }
 
             if (res.code !== 0) {
@@ -134,7 +134,11 @@ export default function Panel({ value, getQuestGroupList, getSumaryDetail }: Pro
         <Content>{value.description}</Content>
         <FreshWapper>
             {
-                showComplete ? <Complete/> : <Fresh onCheck={checkQuestStatus} isLoading={isQuestSuccess} />
+                showComplete ? <Complete/> : <Fresh onCheck={() => {
+                    checkQuestStatus()
+                    getQuestGroupList()
+                    getSumaryDetail()
+                }} isLoading={isQuestSuccess} />
             }
             <SpinWapper>
                 <Spin renderChildren={() =>

@@ -91,6 +91,8 @@ interface Props {
     id: number;
     source: string;
     onAction?: (source?: string) => void;
+    getQuestGroupList: () => void;
+    getSumaryDetail: () => void;
 }
 
 
@@ -104,6 +106,8 @@ export default function SocialPanel({
     id,
     source,
     onAction,
+    getQuestGroupList, 
+    getSumaryDetail,
 }: Props) {
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(id)
 
@@ -125,7 +129,11 @@ export default function SocialPanel({
                 <SpinWapper>
                     <Spin renderChildren={() => <SpinText>+ {totalSpin}/{spin} SPIN</SpinText>} />
                 </SpinWapper>
-                <Fresh onCheck={checkQuestStatus} isLoading={isQuestSuccess} />
+                <Fresh onCheck={() => { 
+                    checkQuestStatus() 
+                    getQuestGroupList()
+                    getSumaryDetail()
+                }} isLoading={isQuestSuccess} />
             </FreshWapper>
         </ActionBtnWapper>
 

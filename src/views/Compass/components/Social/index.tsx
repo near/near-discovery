@@ -22,6 +22,8 @@ interface Props {
     list: any[];
     onShare?: () => void;
     onFollow?: () => void;
+    getQuestGroupList: () => void;
+    getSumaryDetail: () => void;
 }
 
 const icons: any = {
@@ -39,7 +41,13 @@ const btnTexts: any = {
     'twitter_follow': 'Follow us',
 }
 
-export default function SocialIndex({ list, onShare, onFollow }: Props) {
+export default function SocialIndex({ 
+    list, 
+    onShare, 
+    onFollow, 
+    getQuestGroupList, 
+    getSumaryDetail 
+}: Props) {
     const actions: any = {
         'twitter_quote': onShare,
         'twitter_follow': onFollow,
@@ -60,6 +68,8 @@ export default function SocialIndex({ list, onShare, onFollow }: Props) {
                         onAction={actions[item.category]}
                         mainText={item.name}
                         source={item.source}
+                        getQuestGroupList={getQuestGroupList}
+                        getSumaryDetail={getSumaryDetail}
                     />
                 })
             }
