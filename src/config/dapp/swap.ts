@@ -408,4 +408,11 @@ export default {
       '--button-text-color': '#fff',
     },
   },
+  dodo: {
+    type: 'swap',
+    theme: {
+      '--button-color': '#FFE804',
+      '--button-text-color': '#000',
+    },
+  },
 };
