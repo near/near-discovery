@@ -6,9 +6,9 @@ import useToast from './useToast';
 
 export default function useCopy() {
   const toast = useToast();
-  const copy = useCallback((text: string) => {
+  const copy = useCallback((text: string, msg?: string) => {
     copyText(text, () => {
-      toast.success({ title: `${text} copied!` });
+      toast.success({ title: msg || `${text} copied!` });
     });
   }, []);
 
