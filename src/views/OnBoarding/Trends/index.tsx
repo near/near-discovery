@@ -7,6 +7,7 @@ import { formatTitle } from '../helpers';
 import useTrends from '../hooks/useTrends';
 import type { NextPageWithLayout } from '@/utils/types';
 import { cloneDeep } from 'lodash';
+import { DAPP_LOGO } from '../config';
 
 const Container = styled.div`
   margin: 0 8%;
@@ -335,7 +336,7 @@ const QuestionList: NextPageWithLayout = ({ chain }: any) => {
                 <div className="body">
                   <div className="item-title">{formatTitle(action)}</div>
                   <div className="platform">
-                    {action.dapp_logo && <img src={action.dapp_logo} />}
+                    <img src={DAPP_LOGO[action.template] || action.dapp_logo} />
                     <span>{action.template}</span>
                   </div>
                   <div className="count_number">

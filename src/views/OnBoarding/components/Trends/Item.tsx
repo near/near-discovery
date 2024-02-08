@@ -1,10 +1,11 @@
 import { memo } from 'react';
 import useDappOpen from '@/hooks/useDappOpen';
+import { DAPP_LOGO } from '../../config';
 import { formatTitle } from '../../helpers';
 import { StyledItem, StyledItemBox, StyledLabel, StyledValue, StyledItemImg, StyledItemImgBox } from './styles';
 
 const Item = (props: any) => {
-  const { dapp_id, action_type, action_tokens, action_amount, total_execution, bgColor, dapp_logo, template } = props;
+  const { dapp_id, total_execution, bgColor, dapp_logo, template } = props;
   const { open } = useDappOpen();
   return (
     <StyledItem
@@ -25,7 +26,7 @@ const Item = (props: any) => {
       </StyledItemBox>
       <StyledItemBox style={{ marginTop: '12px' }}>
         <StyledItemImgBox style={{ background: bgColor }}>
-          {dapp_logo && <StyledItemImg src={dapp_logo} alt="" />}
+          <StyledItemImg src={DAPP_LOGO[template] || dapp_logo} alt="" />
         </StyledItemImgBox>
         <StyledLabel>{template}</StyledLabel>
       </StyledItemBox>

@@ -32,12 +32,12 @@ const useAuth = () => {
         setLogging(true);
         try {
           const checked = await checkAddressIsInvited(wallet.accounts[0].address);
-          const result = await getBnsUserName(wallet.accounts[0].address);
-          if (result.name) {
-            setCookie('BNS_NAME', result.name);
-          } else {
-            deleteCookie('BNS_NAME')
-          }
+          // const result = await getBnsUserName(wallet.accounts[0].address);
+          // if (result.name) {
+          //   setCookie('BNS_NAME', result.name);
+          // } else {
+          //   deleteCookie('BNS_NAME')
+          // }
           if (!checked) {
             deleteCookie('AUTHED_ACCOUNT');
             router.replace('/invite-code');
@@ -48,10 +48,10 @@ const useAuth = () => {
           setLogging(false);
           setCookie('AUTHED_ACCOUNT', wallet.accounts[0].address);
           // BNS用户
-          if (getCookie('BNS_NAME')) {
-            router.replace('/bns/guide');
-            return;
-          }
+          // if (getCookie('BNS_NAME')) {
+          //   router.replace('/bns/guide');
+          //   return;
+          // }
         } catch (error) {
           setLogging(false);
         }

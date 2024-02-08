@@ -157,7 +157,8 @@ export const StyledTag = styled.div`
   height: 64px;
   flex-shrink: 0;
   border-radius: 12px;
-  background: rgba(55, 58, 83, 0.5);
+  background: rgba(33, 35, 42, 0.9);
+  backdrop-filter: blur(10px);
   display: flex;
   flex-direction: column;
   justify-content: center;
