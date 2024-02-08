@@ -231,6 +231,13 @@ export default {
       '--button-text-color': 'rgb(97, 223, 255)',
     },
   },
+  'velocore-v2': {
+    type: 'swap',
+    theme: {
+      '--button-color': 'rgb(67, 67, 60)',
+      '--button-text-color': 'rgb(97, 223, 255)',
+    },
+  },
   'velodrome-v1': {
     type: 'swap',
     theme: {
