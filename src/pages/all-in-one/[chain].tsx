@@ -302,10 +302,6 @@ const AllInOne: NextPageWithLayout = () => {
             <div className="content-page">
               <ComponentWrapperPage
                 src="bluebiu.near/widget/All-in-one"
-                meta={{
-                  title: 'Connect with the NEAR community.',
-                  description: 'Become part of the NEAR community.',
-                }}
                 componentProps={{
                   addAction,
                   multicall,
