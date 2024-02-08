@@ -54,7 +54,8 @@ import type { NextPageWithLayout } from '@/utils/types';
 
 import { CheckDot } from '../components/portfolio/index';
 
-const DEFAULT_TOKEN_ICON = 'https://assets.dapdap.net/images/bafkreiddol6jzrlwliyh2vrjk3u2ajp3z5cubb5gzedifearly2bvdraay.svg';
+const DEFAULT_TOKEN_ICON =
+  'https://assets.dapdap.tech/images/bafkreiddol6jzrlwliyh2vrjk3u2ajp3z5cubb5gzedifearly2bvdraay.svg';
 
 const ExecutionRecords = () => {
   return <VmComponent src="bluebiu.near/widget/ZKEVM.ExecuteRecords"></VmComponent>;

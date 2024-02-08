@@ -152,7 +152,10 @@ const GoBackNav = () => {
         {GoBackIconMobile}
       </Link>
 
-      <img src={'https://assets.dapdap.net/images/bafkreia75l4donjlz36m7lmdu3ymfeunk2bisfk73rvtqe55uqw7a5rhzq.png'} alt="" />
+      <img
+        src={'https://assets.dapdap.tech/images/bafkreia75l4donjlz36m7lmdu3ymfeunk2bisfk73rvtqe55uqw7a5rhzq.png'}
+        alt=""
+      />
 
       <div className="container-text">
         <h3>NEAR-Ethereum Bridge </h3>
@@ -169,7 +172,10 @@ const GoBackNavSourceAllInOne = () => {
         {GoBackIconMobile}
       </Link>
 
-      <img src={'https://assets.dapdap.net/images/bafkreigq5clxrflxne3bwmtxhwmji774eye5hm6nlrbospjaljuocesyuy.svg'} alt="" />
+      <img
+        src={'https://assets.dapdap.tech/images/bafkreigq5clxrflxne3bwmtxhwmji774eye5hm6nlrbospjaljuocesyuy.svg'}
+        alt=""
+      />
 
       <div className="container-text">
         <h3>NEAR All-in-one</h3>

@@ -1,4 +1,5 @@
 import { memo, useState } from 'react';
+import useTradeSummary from '../../hooks/useTradeSummary';
 import ActionColorBg from './ActionColorBg';
 import {
   StyledActions,
@@ -51,8 +52,9 @@ const ACTIONS = [
   },
 ];
 
-const Actions = ({ bgColor, openModal, chainName }: any) => {
+const Actions = ({ bgColor, openModal, chainName, chainId }: any) => {
   const [showBg, setShowBg] = useState('');
+  const { info } = useTradeSummary(chainId);
   return (
     <StyledActions>
       {ACTIONS.map((action: any) => (
@@ -77,7 +79,7 @@ const Actions = ({ bgColor, openModal, chainName }: any) => {
               {action.text}
               {action.key === 'bridge' && chainName}
             </StyledActionSubTitle>
-            <StyledActionDesc>Total Execution 223</StyledActionDesc>
+            <StyledActionDesc>Total Execution {info?.[action.label]?.total_execution}</StyledActionDesc>
             <StyledActionButton
               onClick={() => {
                 openModal(action.key);

@@ -21,8 +21,8 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const several = 'https://assets.dapdap.net/images/bafkreib4xkaqeaxyfbdbjnvvnptlch3t6qtautxw2miflew4oqmc45nxdy.svg';
-const arrowBlock = 'https://assets.dapdap.net/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
+const several = 'https://assets.dapdap.tech/images/bafkreib4xkaqeaxyfbdbjnvvnptlch3t6qtautxw2miflew4oqmc45nxdy.svg';
+const arrowBlock = 'https://assets.dapdap.tech/images/bafkreihv4t6xu7bzjxeqdi7do4qdbncolgyhk3d4c53vbsu22xkv3hrrge.svg';
 
 const DappsDetails = styled.div`
   color: #ffffff;
@@ -30,10 +30,10 @@ const DappsDetails = styled.div`
   padding-bottom: 100px;
 `;
 const DappsDetailsTitle = styled.div`
-  background: #000000;
-  margin: -54px -36px;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(47, 50, 72, 1));
   padding: 30px 12%;
   width: auto;
+  border-radius: 0px 0px 30px 30px;
   .header-details-body {
     display: flex;
     .details-body-left {
@@ -688,11 +688,11 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
           <Title>Activity</Title>
           <div className="title-right-list">
             <div className="right-list-item">
-              <p>-</p>
+              <p>{activity?.total_participant || '-'}</p>
               <span>Participants</span>
             </div>
             <div className="right-list-item">
-              <p>{activity && activity.data.length}</p>
+              <p>{activity?.total_execution || '-'}</p>
               <span>Acctions</span>
             </div>
           </div>
@@ -738,7 +738,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                     <p>{item.description}</p>
                     <StyledProcessBars style={{ marginTop: '0' }}>
                       {actions.map((action, i) => (
-                        <ProcessBar size={4} key={i} value={item.action_completed >= i ? 100 : 0} noBorder={true} />
+                        <ProcessBar size={4} key={i} value={item.action_completed > i ? 100 : 0} noBorder={true} />
                       ))}
                     </StyledProcessBars>
                     <div className="side-item-tag">

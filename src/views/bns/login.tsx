@@ -17,7 +17,7 @@ const LoginView = () => {
     <StyledFlex style={{ height: '100vh' }} $gap="82px">
       <StyledImage>
         {/* <Image src={loginBg} style={{ width: 824, height: 636 }} alt='loginBg' /> */}
-        <StyledLoginVideo width={824} height={636} autoPlay loop>
+        <StyledLoginVideo width={824} height={636} autoPlay muted playsInline loop>
           <source src="/videos/login_background.mp4" type="video/mp4" />
           <track
             src="/path/to/captions.vtt"

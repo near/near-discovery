@@ -21,6 +21,7 @@ const basic = {
     OP: '	https://app.gamma.xyz/_next/static/media/icon.3468b9ee.svg',
     SNX: 'https://app.gamma.xyz/_next/static/media/icon.b8aa30c1.svg',
     ERN: 'https://app.gamma.xyz/_next/static/media/icon.5571c161.svg',
+    WMNT: 'https://app.gamma.xyz/_next/static/media/icon.d80ccc43.svg'
   },
 };
 const networks = {
@@ -45,6 +46,7 @@ const networks = {
       WETH: '0x4200000000000000000000000000000000000006',
       'WETH-USDbC-500': '0x11c4011772594c5f124a027da35329559447853d',
     },
+    proxyAddress: '0xc40F63879630dFF5b69dd6d287f7735E65e90702'
   },
   // bsc
   56: {
@@ -103,6 +105,7 @@ const networks = {
       'USDT-WBNB-0': '0x3ec1ffd5dc29190588608ae9fd4f93750e84cda2',
       'BNBx-WBNB-0': '0x2ecbd508c00bbc8aa0cdc9100bf3956fcabe7677',
     },
+    proxyAddress: '0x1cc4eE0cB063e9db36E51F5d67218ff1f8dbfA0f'
   },
   // op
   10: {
@@ -171,6 +174,7 @@ const networks = {
       'OP-USDC-3000': '0x2102bef0d9727ea50ba844e7658e38480961835c',
       'USDC-ERN-500': '0xd3c480ec7a47596ff8d63396227d1f7dc728a7f0',
     },
+    proxyAddress: '0x1E97925c365cd96D74Ec55A04569915c4D65e5e0'
   },
   // polygon
   137: {
@@ -194,6 +198,7 @@ const networks = {
       'WBTC-WETH-0': '0x4b9e26a02121a1c541403a611b542965bd4b68ce',
       'USDC-WETH-0': '0x3cc20a6795c4b57d9817399f68e83e71c8626580',
     },
+    proxyAddress: '0xA42d55074869491D60Ac05490376B74cF19B00e6'
   },
   // Linea
   59144: {
@@ -282,6 +287,7 @@ const networks = {
       'S USDC-BUSD-0': '0xd6cc4a33da7557a629e819c68fb805ddb225f517',
       'N USDT-WETH-0': '0xf3b1125c8505f038503e002e61a78253610d4f60',
     },
+    proxyAddress: '0xFc13Ebe7FEB9595D70195E9168aA7F3acE153621'
   },
   // mantle
   5000: {
@@ -397,6 +403,7 @@ const networks = {
         ammImage: 'https://app.gamma.xyz/_next/static/media/icon.a0ab20e5.svg',
       },
     ],
+    proxyAddress: '0xFc13Ebe7FEB9595D70195E9168aA7F3acE153621'
   },
   1101: {
     ALL_DATA_URL: 'https://wire2.gamma.xyz/quickswap/polygon-zkevm/hypervisors/allData',
@@ -579,6 +586,7 @@ const networks = {
         ammImage: 'https://app.gamma.xyz/_next/static/media/icon.ea1fec4d.svg',
       },
     ],
+    proxyAddress: '0x8480199e5d711399abb4d51bda329e064c89ad77'
   },
 };
 

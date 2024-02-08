@@ -137,11 +137,11 @@ const InputCloseIcon = styled.div`
   }
 `;
 
-const logoUrl = 'https://assets.dapdap.net/images/logo.png';
+const logoUrl = 'https://assets.dapdap.tech/images/logo.png';
 
-const ExpandIcon = 'https://assets.dapdap.net/images/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi.svg';
+const ExpandIcon = 'https://assets.dapdap.tech/images/bafkreiam7p4ewrfedupruquxtsgrj7x2m425tky6htqdalbxa6l74hstpi.svg';
 
-const CloseIcon = 'https://assets.dapdap.net/images/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu.svg';
+const CloseIcon = 'https://assets.dapdap.tech/images/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu.svg';
 
 export const DesktopNavigationTop = () => {
   const setLayoutStore = useLayoutStore((store) => store.set);

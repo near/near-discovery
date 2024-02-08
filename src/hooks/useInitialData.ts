@@ -20,7 +20,7 @@ export default function useInitialData() {
   const queryUserInfo = useCallback(async () => {
     try {
       const result = await get(`${QUEST_PATH}/api/user`);
-      const data = result.data || [];
+      const data = result?.data || [];
       setUserInfo({ user: data });
     } catch (err) {}
   }, []);

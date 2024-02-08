@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import { useRouter } from 'next/router';
 import {
   StyledContainer,
   StyledTitle,
@@ -17,19 +18,21 @@ import {
 } from './styles';
 
 const CARDS = [
-  {
-    name: 'Polygon zkEVM',
-    icon: '/images/chains/polygon_zkevm_white.svg',
-    bg: 'linear-gradient(180deg, #a55fff 0%, #21232a 100%)',
-  },
+  // {
+  //   name: 'Polygon zkEVM',
+  //   icon: '/images/chains/polygon_zkevm_white.svg',
+  //   bg: 'linear-gradient(180deg, #a55fff 0%, #21232a 100%)',
+  // },
   {
     name: 'Linea',
     icon: '/images/chains/linea_white.svg',
     bg: 'linear-gradient(180deg, #2697ff 0%, #21232a 100%)',
+    path: '/onboarding/linea',
   },
 ];
 
 const QuickOnboarding = () => {
+  const router = useRouter();
   return (
     <StyledContainer>
       <StyledTitle>️Quick Onboarding</StyledTitle>
@@ -46,7 +49,7 @@ const QuickOnboarding = () => {
               style={{ background: card.bg }}
               data-bp="1001-009"
               onClick={() => {
-                // TODO
+                if (card.path) router.push(card.path);
               }}
             >
               <StyledCardContent>

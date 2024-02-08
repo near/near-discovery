@@ -19,7 +19,7 @@ const BnsLeaderboardView = (props: any) => {
   const [id, setId] = useState<string>();
   const [updater, setUpdater] = useState(1);
   const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: 'leaderboard', updater });
+  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: tab, updater });
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();

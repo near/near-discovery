@@ -62,7 +62,7 @@ const LandingView = () => {
           _step++;
         }
       });
-      setStep(_step + 1 || 1);
+      setStep(1);
     }
   }, [info]);
   return (

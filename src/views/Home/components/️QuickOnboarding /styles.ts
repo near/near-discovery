@@ -32,7 +32,6 @@ export const StyledSubtitle = styled.div`
 
 export const StyledImageWrapper = styled.div`
   display: flex;
-  align-items: center;
   gap: 48px;
   margin-top: 40px;
 `;

@@ -26,7 +26,7 @@ export const objectToQueryString = (obj: Record<string, any>): string => {
 
 const AUTH_TOKENS = 'AUTH_TOKENS';
 
-const BASE_URL = 'https://test-api.dapdap.net';
+const BASE_URL = 'https://test-api.dapdap.tech';
 
 const getUrl = (url: string) => {
   return url.startsWith('http') ? url : `${BASE_URL}${url}`;
@@ -39,6 +39,27 @@ const get = async (url: string, query?: Record<string, any>) => {
     headers: {
       Authorization: `Bearer ${tokens.access_token || ''}`,
       'Content-Type': 'application/json',
+    },
+  };
+  if (!query) {
+    const res = await fetch(getUrl(url), options);
+    return res.json() as any;
+  }
+
+  query = removeEmptyKeys(query);
+  const queryStr = objectToQueryString(query);
+  const res = await fetch(`${getUrl(url)}?${queryStr}`, options);
+  return res.json() as any;
+};
+
+const getWithoutActive = async (url: string, activity: 'coin68' | 'bitget', query?: Record<string, any>) => {
+  const tokens = JSON.parse(window.localStorage.getItem(AUTH_TOKENS) || '{}');
+  const options = {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${tokens.access_token || ''}`,
+      'Content-Type': 'application/json',
+      activity,
     },
   };
   if (!query) {
@@ -78,4 +99,4 @@ const deleteRequest = async (url: string, data: object) => {
   return (await res.json()) as any;
 };
 
-export { get, post, deleteRequest, AUTH_TOKENS };
+export { get, post, getWithoutActive, deleteRequest, AUTH_TOKENS };

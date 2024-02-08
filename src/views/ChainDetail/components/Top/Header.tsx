@@ -9,7 +9,7 @@ import {
   StyledChainName,
 } from './styles';
 
-const Header = ({ logo, name, chainId, bgColor, path, id }: any) => {
+const Header = ({ logo, name, chainId, bgColor, path, id, deepdive }: any) => {
   return (
     <StyledHeaderWrapper>
       <StyledTitleWrapper>
@@ -21,7 +21,7 @@ const Header = ({ logo, name, chainId, bgColor, path, id }: any) => {
           <AddMetaMask chainId={chainId} bp="100121-001" />
         </div>
       </StyledTitleWrapper>
-      <Actions path={path} id={id} />
+      <Actions path={path} id={id} deepdive={deepdive} />
     </StyledHeaderWrapper>
   );
 };

@@ -5,6 +5,7 @@ const basic = {
   icon: '/images/apps/agave.png',
   data: 'bluebiu.near/widget/Lending.Data.Radiant',
   handler: 'bluebiu.near/widget/Lending.Handler.Radiant',
+  type: 'aave2',
 };
 
 const networks = {

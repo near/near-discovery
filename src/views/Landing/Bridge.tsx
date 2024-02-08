@@ -4,7 +4,8 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { LANDING_CHAINS } from '@/config/bridge/chains';
 import useAddAction from '@/hooks/useAddAction';
 import { useChainsStore } from '@/stores/chains';
-import { CHAIN_ID } from './config';
+import configChains from '@/config/chains';
+import { CHAIN_ID, FROM_CHAIN_ID } from './config';
 
 const Bridge = ({ onSuccess }: { onSuccess: VoidFunction }) => {
   const chains = useChainsStore((store: any) => store.chains);
@@ -15,10 +16,8 @@ const Bridge = ({ onSuccess }: { onSuccess: VoidFunction }) => {
     );
   }, [chains]);
   const currentChain = useMemo(() => {
-    const _chainId = CHAIN_ID;
-    return chains.find((chain: any) => chain.chain_id === _chainId);
+    return configChains[FROM_CHAIN_ID];
   }, [chains]);
-
   return (
     <ComponentWrapperPage
       componentProps={{
@@ -29,6 +28,7 @@ const Bridge = ({ onSuccess }: { onSuccess: VoidFunction }) => {
           onSuccess();
         },
         from: 'landing',
+        defaultChainId: FROM_CHAIN_ID,
       }}
       src={'dapdapbos.near/widget/BridgeEntry'}
     />
