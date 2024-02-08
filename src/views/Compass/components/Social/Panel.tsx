@@ -107,9 +107,7 @@ export default function SocialPanel({
 }: Props) {
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(id)
 
-    return <Panel onClick={() => {
-        console.log(1)
-    }}>
+    return <Panel>
         <LogoWapper>
             <Logo>
                 <img src={icon} />
@@ -125,13 +123,11 @@ export default function SocialPanel({
             }}>{btnText}</BtnPrimary>
             <FreshWapper>
                 <SpinWapper>
-                    <Spin renderChildren={() => <SpinText>+ {spin}/{totalSpin} SPIN</SpinText>} />
+                    <Spin renderChildren={() => <SpinText>+ {totalSpin}/{spin} SPIN</SpinText>} />
                 </SpinWapper>
                 <Fresh onCheck={checkQuestStatus} isLoading={isQuestSuccess} />
             </FreshWapper>
-
         </ActionBtnWapper>
-
 
     </Panel>
 }
