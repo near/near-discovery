@@ -33,7 +33,7 @@ const handleRequestPermission = () => {
 
 const registerServiceWorker = () => {
   try {
-    return navigator.serviceWorker.register('/service-worker.js');
+    return navigator.serviceWorker.register('/push-notifications.js', { scope: '/notifications-settings' });
   } catch (e: any) {
     const scope = 'Error while registering the push notification service-worker';
     console.error(scope, e);
