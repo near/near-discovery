@@ -15,7 +15,7 @@ const MAPS = {
 
 export default function useTwitterBind({ id }: { id: string }) {
   const searchParams = useSearchParams();
-  const { info: userInfo = {} } = useUserInfo({ updater: 1 });
+  const { info: userInfo = {}, queryInfo } = useUserInfo({ updater: 1 });
   const [loading, setLoading] = useState(false);
   const code = searchParams.get('code');
   const config = useAuthConfig()
@@ -25,7 +25,7 @@ export default function useTwitterBind({ id }: { id: string }) {
   const redirectToTwitter = useCallback((source?: string) => {
     if (!userInfo.twitter || !userInfo.twitter.is_bind) {
       const { location } = window
-      const redirectUrl = encodeURIComponent(`${location.origin}/quest/detail?id=24&secondRedirect=${encodeURIComponent(location.href)}`)
+      const redirectUrl = encodeURIComponent(`${location.href}`)
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${redirectUrl}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
       window.open(path, '_blank');
       return
@@ -51,6 +51,8 @@ export default function useTwitterBind({ id }: { id: string }) {
     }
 
     if (result.code === 1) {
+      // userInfo.twitter.is_bind = true
+      queryInfo()
       success({
         title: 'Success',
         text: result.msg,

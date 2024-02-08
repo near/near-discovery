@@ -3,7 +3,7 @@ import React from 'react';
 import LoadingIcon from '@/components/Icons/Loading';
 import useAuth from '@/hooks/useAuth';
 
-import { bluebg,StyledInviteCodePage, yellowbg } from './InviteCodeView';
+import { bluebg, StyledInviteCodePage, yellowbg } from './InviteCodeView';
 
 export default function LoginView({ logging }: { logging: boolean }) {
   const { connect, connecting } = useAuth();
@@ -17,7 +17,7 @@ export default function LoginView({ logging }: { logging: boolean }) {
           <img src={bluebg} alt="" />
         </div>
         <div className="content">
-          <img src="https://assets.dapdap.net/images/logo.png" style={{ height: '60px' }} />
+          <img src="https://assets.dapdap.tech/images/logo.png" style={{ height: '60px' }} />
           <div className="title">
             <p>
               Your Universal Entry Point Into <span>L2s</span>{' '}

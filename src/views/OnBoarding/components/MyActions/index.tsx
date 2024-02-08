@@ -1,12 +1,12 @@
 import { memo } from 'react';
-import useMyQuests from '../../hooks/useMyQuests';
+import useMyActions from '../../hooks/useMyActions';
 import Total from './Total';
 import Empty from './Empty';
 import Table from './Table';
 import { StyledContainer } from './styles';
 
 const MyActions = ({ chain, handleModal }: any) => {
-  const { loading, list, deleting, handleDelete } = useMyQuests(chain?.chainId);
+  const { loading, list, deleting, handleDelete } = useMyActions(chain?.chainId, 20);
   return (
     <StyledContainer>
       <Total chainId={chain.chainId} />

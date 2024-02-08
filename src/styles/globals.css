@@ -21,8 +21,7 @@
 
 @font-face {
   font-family: '5squared pixel';
-  src:
-    url('/fonts/5squared-pixel.ttf') format('truetype');
+  src: url('/fonts/5squared-pixel.ttf') format('truetype');
   font-weight: 200 900;
   font-stretch: 75% 125%;
 }

@@ -68,13 +68,15 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
   
 
   const nativeToken: Token = {
-    chainId,
+    chainId: fromChainId,
     address: toToken.address,
     name: toToken.name,
     symbol: toToken.symbol,
     icon: '',
     decimals: toToken.decimals,
   }
+
+  console.log(nativeToken)
 
   const { balance, loading: balanceLoading, getBalance } = useTokenBalance({
     tokensByChain: nativeToken

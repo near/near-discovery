@@ -22,7 +22,7 @@ import g2 from './img/g2.svg'
 import g3 from './img/g3.svg'
 import g4 from './img/g4.svg'
 import g5 from './img/g5.svg'
-import subImg from './img/sub-img.svg'
+import subImg from './img/getPins2.svg'
 import line1Img from './img/Line1.svg'
 import line2Img from './img/Line2.svg'
 import mImg from './img/m.png'
@@ -139,8 +139,7 @@ const RecordLine2 = styled.div`
 `
 
 const SubJACKTitle = styled.img`
-    width: 782px;
-    height: 135px;
+    width: 482px;
     display: block;
     margin: 130px auto 0;
     &.m180 {
@@ -150,10 +149,11 @@ const SubJACKTitle = styled.img`
 
 const MiniTitle = styled.div`
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 500;
     line-height: 24px;
     text-align: center;
-    color: rgba(151, 154, 190, 1);
+    color: #fff;
+    margin-top: 30px;
 `
 
 const ChainImgIcon = styled.img`
@@ -186,7 +186,7 @@ function Compass() {
     const { startSpin, chainList, startCliam, isSpining, isClaiming } = useSpin(compassId, setAvailableSpins, setTotalSpins, setUnclaimedReward)
     const { questList, getQuestGroupList } = useQuestList(compassId)
     const [chainIndex, setChainIndex] = useState(0)
-    const [ reward, setReward ] = useState(0)
+    const [reward, setReward] = useState(0)
     const { loading, redirectToTwitter } = useTwitterBind({ id: compassId })
 
     const handleSpin = useCallback(() => {
@@ -210,9 +210,6 @@ function Compass() {
 
     const qList = questList.dapp.length ? questList.dapp[chainIndex] : []
 
-
-    console.log('availableSpins: ', availableSpins)
-
     return <App>
         <MBg />
         <Title>Unveiling Uncharted Realms of L2s</Title>
@@ -231,11 +228,11 @@ function Compass() {
             <RecordWapper>
                 <Record title="Participants" renderContent={() => <>{participants}</>} />
                 <Record title="Winners" renderContent={() => <AvatarBox>{
-                    winners.map((v, i) => {
+                    winners && winners.length ? winners.map((v, i) => {
                         return <Avatar key={v} src={v} />
-                    })
+                    }) : '—'
                 }</AvatarBox>} />
-                <Record title="Total Rewards PTS" renderContent={() => <>{totalRewardsPts}</>} />
+                <Record title="Accumulated Reward [PTS]" renderContent={() => <>{totalRewardsPts}</>} />
             </RecordWapper>
             <RecordLine2>
                 <img src={line2Img.src} />

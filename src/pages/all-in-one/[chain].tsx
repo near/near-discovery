@@ -21,9 +21,9 @@ const arrow = (
   </svg>
 );
 
-const narrowUrl = 'https://assets.dapdap.net/images/bafkreien4qagdjuudb6yj53wutsj4f6zfodrgv4ztftzjgkvcdtjnjk564.svg';
+const narrowUrl = 'https://assets.dapdap.tech/images/bafkreien4qagdjuudb6yj53wutsj4f6zfodrgv4ztftzjgkvcdtjnjk564.svg';
 
-const checkMark = 'https://assets.dapdap.net/images/bafkreig7b3k2jhkk6znb56pdsaj2f4mzadbxdac37lypsbdgwkj2obxu4y.svg';
+const checkMark = 'https://assets.dapdap.tech/images/bafkreig7b3k2jhkk6znb56pdsaj2f4mzadbxdac37lypsbdgwkj2obxu4y.svg';
 
 interface SelectBgProps {
   bgColor: string;
@@ -302,10 +302,6 @@ const AllInOne: NextPageWithLayout = () => {
             <div className="content-page">
               <ComponentWrapperPage
                 src="bluebiu.near/widget/All-in-one"
-                meta={{
-                  title: 'Connect with the NEAR community.',
-                  description: 'Become part of the NEAR community.',
-                }}
                 componentProps={{
                   addAction,
                   multicall,

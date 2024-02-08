@@ -22,12 +22,15 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const carouseicon = 'https://assets.dapdap.net/images/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e.svg';
+const carouseicon = 'https://assets.dapdap.tech/images/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e.svg';
 
 const AllDappsPage = styled.div`
   color: #ffffff;
   padding: 50px 12% 80px 12%;
   position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   .token-tab-list {
     width: 100%;
     color: #ffffff;
@@ -462,15 +465,15 @@ const AllDappsColumn: NextPageWithLayout = () => {
     } else {
       params.delete('network');
     }
-    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`, undefined, { scroll: false });
   };
   const handleFunctionClick = (functionType: any) => {
     const id = functionType.id;
     let _selectedFunction: string[] = [];
     if (selectedFunction.includes(String(id))) {
-      _selectedFunction = selectedFunction.filter((type) => type !== String(id));
+      _selectedFunction = [];
     } else {
-      _selectedFunction = [...selectedFunction, String(id)];
+      _selectedFunction = [String(id)];
     }
     const params = new URLSearchParams(searchParams);
     if (_selectedFunction.length) {
@@ -478,7 +481,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
     } else {
       params.delete('category');
     }
-    router.push(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`);
+    router.replace(`${pathname}${!params.toString() ? '' : '?' + params.toString()}`, undefined, { scroll: false });
   };
   const handleMedalMenuClick = (path: number) => {
     if (selectedMedalMenu === path) {
@@ -629,7 +632,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
             style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
           >
             <img
-              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              src="https://assets.dapdap.tech/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
               alt=""
             />
           </div>
@@ -654,7 +657,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
             }}
           >
             <img
-              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              src="https://assets.dapdap.tech/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
               alt=""
             />
           </div>
@@ -742,7 +745,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       }}
                     >
                       Dapp
-                      <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
+                      <img src="https://assets.dapdap.tech/images/arrow-white.png" alt="" />
                     </div>
                   </div>
                 </div>
@@ -800,7 +803,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
             <div className="netWork-list-btn" onClick={toggleExpanded}>
               {isExpanded ? 'Other Chains' : 'Close Chains'}
               <img
-                src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+                src="https://assets.dapdap.tech/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""
                 className={`list-btn-img ${isExpanded ? '' : 'rotate'}`}
               />

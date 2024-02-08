@@ -10,8 +10,13 @@ const OnBoardingActions = ({ chain, openModal }: any) => {
     <AnimatePresence mode="wait">
       <motion.div {...container}>
         <StyledContainer>
-          <Total />
-          <Actions bgColor={chain?.selectBgColor} chainName={chain?.title} openModal={openModal} />
+          <Total chainId={chain.chainId} />
+          <Actions
+            chainId={chain.chainId}
+            bgColor={chain?.selectBgColor}
+            chainName={chain?.title}
+            openModal={openModal}
+          />
         </StyledContainer>
       </motion.div>
     </AnimatePresence>

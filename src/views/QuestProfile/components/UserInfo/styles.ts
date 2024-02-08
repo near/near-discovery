@@ -66,11 +66,19 @@ export const StyledAvatarBox = styled.div`
   background-image: conic-gradient(from 180deg at 50% 50%, #00d1ff 0deg, #ff008a 360deg);
 `;
 
+export const StyledNameWrapper = styled.div`
+  width: calc(100% - 132px);
+`;
+
 export const StyledName = styled.div`
   color: #fff;
   text-align: center;
   font-size: 32px;
   font-weight: 500;
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 `;
 
 export const StyledAddress = styled.div`

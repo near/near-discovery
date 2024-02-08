@@ -1,5 +1,6 @@
 import { memo, useRef } from 'react';
 import Loading from '@/components/Icons/Loading';
+import { formatTitle } from '../../helpers';
 import {
   StyledTable,
   StyledTableHeader,
@@ -58,14 +59,16 @@ const Table = ({ loading, list, deleting, handleDelete, handleModal }: any) => {
           <StyledTableRow key={i + Date.now()} data-bp="100131-002">
             {COLUMNS.map((column) => (
               <div key={column.key} style={{ width: column.width }}>
-                {column.key === 'action' && <StyledTableAction>{item.action_title}</StyledTableAction>}
+                {column.key === 'action' && <StyledTableAction>{formatTitle(item)}</StyledTableAction>}
                 {column.key === 'dapp' && (
                   <StyledTableDapp>
-                    <StyledTableDappImg />
+                    {item.dapp_logo && <StyledTableDappImg src={item.dapp_logo} />}
                     <StyledTableDappName>{item.template}</StyledTableDappName>
                   </StyledTableDapp>
                 )}
-                {column.key === 'execution-number' && <StyledTableExecution>{item.count_number}</StyledTableExecution>}
+                {column.key === 'execution-number' && (
+                  <StyledTableExecution>{item.total_execution}</StyledTableExecution>
+                )}
                 {column.key === 'execution' && (
                   <StyledExecutionButton
                     onClick={() => {
@@ -81,9 +84,9 @@ const Table = ({ loading, list, deleting, handleDelete, handleModal }: any) => {
                 {column.key === 'clean' && (
                   <StyledClean
                     onClick={() => {
-                      if (!(currentActionId.current === item.action_id && deleting)) {
-                        handleDelete(item.action_id);
-                        currentActionId.current = item.action_id;
+                      if (!(currentActionId.current === item.id && deleting)) {
+                        handleDelete(item.id);
+                        currentActionId.current = item.id;
                       }
                     }}
                   >

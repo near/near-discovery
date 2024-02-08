@@ -37,7 +37,6 @@ const Banner = () => {
               fill="white"
             />
           </svg>
-          <div>(B.O.S).</div>
         </StyledPower>
       </StyledContent>
     </StyledContainer>

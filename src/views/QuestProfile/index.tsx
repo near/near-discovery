@@ -1,6 +1,8 @@
+import { useRouter } from 'next/router';
 import { memo, useState } from 'react';
 
 import useReport from '@/views/Landing/hooks/useReport';
+
 import useUserInfo from '../../hooks/useUserInfo';
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
@@ -11,11 +13,18 @@ import Quests from './components/Quests';
 import Tabs from './components/Tabs';
 import UserInfo from './components/UserInfo';
 import useInviteList from './hooks/useInviteList';
-import { StyledContainer, StyledPanelWrapper, StyledTabsBox, StyledBgImg } from './styles';
+import { StyledBgImg, StyledContainer, StyledPanelWrapper, StyledTabsBox } from './styles';
 import type { Tab } from './types';
 
 const QuestProfileView = () => {
-  const [tab, setTab] = useState<Tab>('quests');
+  const router = useRouter();
+  let initTab: Tab;
+  if (router?.query?.active === 'pts') {
+    initTab = 'pts';
+  } else {
+    initTab = 'quests';
+  }
+  const [tab, setTab] = useState<Tab>(initTab);
   const [updater, setUpdater] = useState(Date.now());
   const [openCodes, setOpenCodes] = useState(false);
   const { list, totalRewards, reward } = useInviteList();

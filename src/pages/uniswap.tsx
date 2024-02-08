@@ -110,13 +110,13 @@ const TopContent = styled.div`
   }
 `;
 
-const logoUrl = 'https://assets.dapdap.net/images/bafkreihjoszjyw5ebgi2uur7jbkykdowwixexlk5oy24y24mu2q3a45qkq.svg';
+const logoUrl = 'https://assets.dapdap.tech/images/bafkreihjoszjyw5ebgi2uur7jbkykdowwixexlk5oy24y24mu2q3a45qkq.svg';
 
-const narrowUrl = 'https://assets.dapdap.net/images/bafkreien4qagdjuudb6yj53wutsj4f6zfodrgv4ztftzjgkvcdtjnjk564.svg';
+const narrowUrl = 'https://assets.dapdap.tech/images/bafkreien4qagdjuudb6yj53wutsj4f6zfodrgv4ztftzjgkvcdtjnjk564.svg';
 
-const sourceIcon = 'https://assets.dapdap.net/images/bafkreihz27oqiw4djztfrsvmjnxcv7zfgiztdqzlkpo5jdejxpt2nybu54.svg';
+const sourceIcon = 'https://assets.dapdap.tech/images/bafkreihz27oqiw4djztfrsvmjnxcv7zfgiztdqzlkpo5jdejxpt2nybu54.svg';
 
-const checkMark = 'https://assets.dapdap.net/images/bafkreibrxtpffmzoe46yg3qbt3pivpukf5ne4zra73g6blxofkpowlmupm.svg';
+const checkMark = 'https://assets.dapdap.tech/images/bafkreibrxtpffmzoe46yg3qbt3pivpukf5ne4zra73g6blxofkpowlmupm.svg';
 
 const formateAddress = (address: string) => {
   if (address.indexOf('.near') > -1) return address;
@@ -126,7 +126,7 @@ const formateAddress = (address: string) => {
 
 const popupsData = [
   {
-    icon: 'https://assets.dapdap.net/images/bafkreib2xwrmfnnwcuvtuixlucdlrdwaltjthvc7uspsmjt4nfnlnes364.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreib2xwrmfnnwcuvtuixlucdlrdwaltjthvc7uspsmjt4nfnlnes364.svg',
     bgColor: '#353E63',
     text: 'Ethereum',
     chainId: 1,
@@ -135,7 +135,7 @@ const popupsData = [
     blockExplorerUrls: ['https://etherscan.io/'],
   },
   {
-    icon: 'https://assets.dapdap.net/images/bafkreigqoy6czilxyuo3hkdfbayvwfxvf6qz67wiiom5laidqpb3f4eh2y.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreigqoy6czilxyuo3hkdfbayvwfxvf6qz67wiiom5laidqpb3f4eh2y.svg',
     bgColor: '#284A6C',
     text: 'Arbitrum',
     chainId: 42161,
@@ -145,7 +145,7 @@ const popupsData = [
     blockExplorerUrls: ['https://arbiscan.io/'],
   },
   {
-    icon: 'https://assets.dapdap.net/images/bafkreicu6zq3j22j5626ymafngaeqdzpo72w3nt2tgkebmbpoylc7y2bjy.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreicu6zq3j22j5626ymafngaeqdzpo72w3nt2tgkebmbpoylc7y2bjy.svg',
     bgColor: '#57392F',
     text: 'Optimism',
     chainId: 10,
@@ -155,7 +155,7 @@ const popupsData = [
     blockExplorerUrls: ['https://optimistic.etherscan.io/'],
   },
   {
-    icon: 'https://assets.dapdap.net/images/bafkreifdzdcxsmntauvxdejkewxoyqns3xbmsvgappnef3fcxxpbjfq5pq.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreifdzdcxsmntauvxdejkewxoyqns3xbmsvgappnef3fcxxpbjfq5pq.svg',
     bgColor: '#442D66',
     text: 'Polygon',
     chainId: 137,
@@ -164,7 +164,7 @@ const popupsData = [
     blockExplorerUrls: ['https://polygonscan.com/'],
   },
   {
-    icon: 'https://assets.dapdap.net/images/bafkreidnp2h5uuix552e2nh4ynbcxlgv4n4bvxiite7u3cles5f6dkacfm.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreidnp2h5uuix552e2nh4ynbcxlgv4n4bvxiite7u3cles5f6dkacfm.svg',
     bgColor: '#24376B',
     text: 'Base',
     chainId: 8453,
@@ -173,7 +173,7 @@ const popupsData = [
     blockExplorerUrls: ['https://explorer.baseprotocol.org/'],
   },
   {
-    icon: 'https://assets.dapdap.net/images/bafkreiah7oxcpgdrnmfgpzbozwgvivvr26cqwzlfy6yjpm5qtzjjc2tvvu.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreiah7oxcpgdrnmfgpzbozwgvivvr26cqwzlfy6yjpm5qtzjjc2tvvu.svg',
     bgColor: '#554D42',
     text: 'BNB Chain',
     chainId: 56,
@@ -183,7 +183,7 @@ const popupsData = [
   },
 
   {
-    icon: 'https://assets.dapdap.net/images/bafkreieredwbwk6u7coh3iarekx2p2zlvbkq6twkktrtfcb3l3r7j2du2e.svg',
+    icon: 'https://assets.dapdap.tech/images/bafkreieredwbwk6u7coh3iarekx2p2zlvbkq6twkktrtfcb3l3r7j2du2e.svg',
     bgColor: '#565B49',
     text: 'Celo',
     chainId: 42220,
@@ -193,7 +193,7 @@ const popupsData = [
   },
 
   {
-    icon: 'https://assets.dapdap.net/images/bafkreiatkfaofvotv3zftmsjiveu2drdkzcyosdzhijynglo57ch35nwji.png',
+    icon: 'https://assets.dapdap.tech/images/bafkreiatkfaofvotv3zftmsjiveu2drdkzcyosdzhijynglo57ch35nwji.png',
     bgColor: 'rgb(83,55,72)',
     text: 'Avalanche',
     chainId: 43114,

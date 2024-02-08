@@ -146,7 +146,7 @@ const Footer = () => {
             url="https://t.me/DapDapDiscussion"
           />
           {/* <SocialButton
-            src="https://assets.dapdap.net/images/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm.svg"
+            src="https://assets.dapdap.tech/images/bafkreifyzh5mqbh6z6utj7z4dp2eelhaa654mnt6mut4oxml3mw56fqoxm.svg"
             alt="Medium"
             url=""
           /> */}
