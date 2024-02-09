@@ -228,7 +228,7 @@ function Compass() {
             <RecordWapper>
                 <Record title="Participants" renderContent={() => <>{participants}</>} />
                 <Record title="Winners" renderContent={() => <AvatarBox>{
-                    winners && winners.length ? winners.map((v, i) => {
+                    winners && winners.length ? winners.slice(0, 5).map((v, i) => {
                         return <Avatar key={v} src={v} />
                     }) : '—'
                 }</AvatarBox>} />
