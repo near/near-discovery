@@ -38,7 +38,7 @@ export const StyledImageWrapper = styled.div`
 
 export const StyledImage = styled.img`
   width: 784px;
-  height: 434.554px;
+  /* height: 434.554px; */
   flex-shrink: 0;
 `;
 
