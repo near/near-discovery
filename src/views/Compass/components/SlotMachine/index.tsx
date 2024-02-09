@@ -431,7 +431,7 @@ function SlotMachine({
         </ActionBar>
 
         <RuleModal show={ruleShow} onClose={() => setRuleShow(false) } />
-        <PrizeModal prize={reward + 30} show={prizeShow} onClose={() => setPrizeShow(false) } />
+        <PrizeModal prize={reward} show={prizeShow} onClose={() => setPrizeShow(false) } />
     </Wapper>
 }
 
