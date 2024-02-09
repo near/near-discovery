@@ -87,6 +87,7 @@ export default function VmInitializer() {
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
+              walletUrl: 'http://localhost:3000',
             }),
             setupKeypom({
               trialAccountSpecs: {
@@ -144,22 +145,13 @@ export default function VmInitializer() {
     });
   }, [idOS, near]);
 
-  const handleWalletSelectorMessage = useCallback(
-    (e: MessageEvent<{ showWalletSelector: boolean }>) => {
-      if (e.data.showWalletSelector) {
-        // Show wallet selector
-        walletModal?.show();
-      }
-    },
-    [walletModal],
-  );
-
-  useEffect(() => {
-    window.addEventListener('message', handleWalletSelectorMessage, false);
-    return () => {
-      window.removeEventListener('message', handleWalletSelectorMessage, false);
-    };
-  }, []);
+  const handleWalletSelectorMessage = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+    console.log('e.data ', e.data);
+    if (e.data.showWalletSelector) {
+      // Show wallet selector
+      walletModal?.show();
+    }
+  };
 
   const requestSignMessage = useCallback(
     async (message: string) => {
@@ -202,6 +194,18 @@ export default function VmInitializer() {
     walletModal?.show();
     return false;
   }, [saveCurrentUrl, walletModal]);
+
+  useEffect(() => {
+    window.addEventListener(
+      'message',
+      (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+        if (e.data.showWalletSelector) {
+          requestSignInWithWallet();
+        }
+      },
+      false,
+    );
+  }, [requestSignInWithWallet]);
 
   const logOut = useCallback(async () => {
     if (!near) {
