@@ -12,6 +12,12 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/stakewars',
+        destination:
+          'https://github.com/near/stakewars-iv',
+        permanent: false,
+      },
+      {
         source: '/nearcon23.near/widget/Index',
         destination: 'https://nearcon.app',
         permanent: true,
@@ -70,7 +76,19 @@ const nextConfig = {
   ]
 };
 
-module.exports = nextConfig;
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  sw: 'next-pwa-sw.js',
+  scope: '/',
+  importScripts: ['/pwa.js'],
+  cacheStartUrl: false,
+  cacheOnFrontEndNav: true,
+  skipWaiting: false
+})
+const { loadEnvConfig } = require('@next/env');
+loadEnvConfig(".")
+if(!process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT)
+  module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below
 

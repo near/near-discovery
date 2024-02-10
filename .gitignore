@@ -6,6 +6,19 @@
 .pnp.js
 .pnpm-store 
 
+
+# generated pwa-files
+**/public/precache.*.*.js
+**/public/next-pwa-sw.js
+**/public/next-pwa-sw.js.map
+**/public/workbox-*.js
+**/public/worker-*.js
+**/public/fallback-*.js
+**/public/precache.*.*.js.map
+**/public/workbox-*.js.map
+**/public/worker-*.js.map
+**/public/fallback-*.js
+
 # testing
 /coverage
 
