@@ -151,19 +151,6 @@ async function getRoute(
 
   const res = await lifi.getRoutes(routeRequest)
 
-  // const qr: QuoteRequest = {
-  //   fromChain: chain.chainId,
-  //   fromAmount: _amount.toString(),
-  //   fromToken: token.address ? token.address : '',
-  //   fromAddress: account as string,
-  //   toChain: targetChain.chainId,
-  //   toToken: targetToken.address ? targetToken.address : '',
-  //   toAddress: destination ? destination : account,
-  // }
-
-  // const v = await lifi.getQuote(qr)
-  // console.log(v)
-
   if (!res.routes || res.routes.length === 0) {
     return
   }
@@ -180,32 +167,11 @@ export function computeDuration(route:Route): string {
   return Math.ceil(duration / 60) + ' min'
 }
 
-// export function postToBack(route: Route, addAction: any, ) {
-//   try {
-//     const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
-//     const _bridgeTxs = JSON.parse(bridgeTxs);
-//     addAction({
-//       type: 'Bridge',
-//       fromChainId: route.fromChainId,
-//       toChainId: route.toChainId,
-//       token: route.fromToken.name,
-//       amount: route.fromAmount,
-//       template: 'Lifi Bridge',
-//       add: false,
-//       status: 1,
-//       transactionHash: '',
-//     });
-    
-//   } catch(e) {
-//     console.log(e)
-//     onFail && onFail(e)
-//   }
-// }
-
 export default function useLifi() {
   const { account, provider } = useAccount();
   const [fee, setFee] = useState();
   const { addAction } = useAddAction('wallet/bridge');
+  const { addAction: onboardingAction } = useAddAction('onboarding');
 
   const getQouteInfo = async ({
     chain,
@@ -236,6 +202,7 @@ export default function useLifi() {
     route,
     onSuccess,
     onFail,
+    actionName,
   }: {
     chain: Chain;
     token: Token;
@@ -244,6 +211,7 @@ export default function useLifi() {
     amount: string;
     destination?: string;
     route: Route,
+    actionName?: string;
     onSuccess: (hash: string) => void;
     onFail?: (e: any) => void;
   }) => {
@@ -285,7 +253,7 @@ export default function useLifi() {
                 const end = process[process.length - 1].doneAt
                 const duration =  Math.ceil(time / 60)
                 txHash = txHash || ''
-                onSuccess(txHash);
+                
                 if (!txHash) {
                   return
                 }
@@ -305,8 +273,10 @@ export default function useLifi() {
                 };
                 localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
                 
+                const _addAction = actionName === 'onboarding' ? onboardingAction : addAction
+
                 if (!hasActionAdded) {
-                  addAction({
+                  _addAction({
                     type: 'Bridge',
                     fromChainId: chain.chainId,
                     toChainId: targetChain.chainId,
@@ -318,6 +288,7 @@ export default function useLifi() {
                     transactionHash: txHash,
                   });
                   hasActionAdded = true
+                  onSuccess(txHash);
                   resolve(_bridgeTxs[txHash])
                 }
                 
