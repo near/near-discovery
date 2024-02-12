@@ -74,6 +74,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   } = useAuthBind({
     onSuccess: () => {
       // onSuccess(1);
+      setUpdater(Date.now());
     },
     redirect_uri: `${window.location.origin}${window.location.pathname}`,
   });
