@@ -206,6 +206,7 @@ export const InviteBody = styled(motion.div)`
   backdrop-filter: blur(10px);
   overflow-y: scroll;
   padding: 0 20px;
+  display: flex;
 `;
 
 export const Text = styled.div`
@@ -330,6 +331,7 @@ export const AllRewards = styled.div`
   right: 20px;
   width: 185px;
   height: 66px;
+  z-index: 1;
   border-radius: 33px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: radial-gradient(72.14% 104.62% at 47.64% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
@@ -366,4 +368,34 @@ export const AllRewardsIcon = styled.img`
 `;
 export const AllRewardsCoin = styled.img`
   width: 19px;
+`;
+
+export const InviteBodyIcon = styled.img`
+  width: 38px;
+  height: 38px;
+  margin-right: 20px;
+`;
+export const InviteBodyLeft = styled.div`
+  flex-grow: 1;
+`;
+export const InviteBodyRight = styled.div`
+  margin-top: 33px;
+  display: flex;
+  width: 370px;
+  height: 132px;
+  padding: 23px;
+  border-radius: 20px;
+  color: white;
+  background-color: rgba(44, 46, 62, 1);
+  border: 1px solid rgba(55, 58, 83, 1);
+`;
+export const PromptsTitle = styled.div`
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 8px;
+`;
+export const PromptsTxt = styled.div`
+  font-size: 14px;
+  font-weight: 400;
+  color: #979abe;
 `;

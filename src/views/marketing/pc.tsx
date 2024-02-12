@@ -149,7 +149,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
 
   async function fetchInviteCodes() {
     //  获取邀请码
-    const res = await get(`${QUEST_PATH}/api/invite/get-invited-info/${address}`);
+    const res = await get(`${QUEST_PATH}/api/invite/get-address-code/${address}`);
 
     if ((res.code as number) !== 0) return;
     return res.data;
@@ -396,20 +396,31 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
               </Styles.InviteBtn>
             </Styles.InviteHead>
             <Styles.InviteBody animate={expendAnimate}>
-              {codeList?.length
-                ? codeList.map((item: any, index) => (
-                    <Styles.List key={index}>
-                      <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
-                      {`${prefix}/bitget/${item?.code}`}
-                      <Styles.CopyIcon
-                        src="/images/marketing/copy.svg"
-                        onClick={() => {
-                          copy(`${prefix}/bitget/${item?.code}`);
-                        }}
-                      ></Styles.CopyIcon>
-                    </Styles.List>
-                  ))
-                : null}
+              <Styles.InviteBodyLeft>
+                {codeList?.length
+                  ? codeList.map((item: any, index) => (
+                      <Styles.List key={index}>
+                        <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
+                        {`${prefix}/bitget/${item?.code}`}
+                        <Styles.CopyIcon
+                          src="/images/marketing/copy.svg"
+                          onClick={() => {
+                            copy(`${prefix}/bitget/${item?.code}`);
+                          }}
+                        ></Styles.CopyIcon>
+                      </Styles.List>
+                    ))
+                  : null}
+              </Styles.InviteBodyLeft>
+              <Styles.InviteBodyRight>
+                <Styles.InviteBodyIcon src="/images/marketing/prompts.svg"></Styles.InviteBodyIcon>
+                <div>
+                  <Styles.PromptsTitle>Prompts</Styles.PromptsTitle>
+                  <Styles.PromptsTxt>
+                    Please open the invitation link within PC or Bitget Wallet browser for an enhanced experience.
+                  </Styles.PromptsTxt>
+                </div>
+              </Styles.InviteBodyRight>
             </Styles.InviteBody>
           </Styles.InviteBox>
         </Styles.Box>
