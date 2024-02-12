@@ -19,9 +19,11 @@ const ProjectLine = styled.div`
 interface Props {
     list: any[];
     currentChainIndex: number;
+    getQuestGroupList: () => void;
+    getSumaryDetail: () => void;
 }
 
-export default function Index({ list, currentChainIndex }: Props) {
+export default function Index({ list, currentChainIndex, getQuestGroupList, getSumaryDetail }: Props) {
 
     useEffect(() => {
 
@@ -31,7 +33,13 @@ export default function Index({ list, currentChainIndex }: Props) {
         <ProjectLine>
             {
                 list.map(item => {
-                    return <Panel currentChainIndex={currentChainIndex} key={item.id} value={item} />
+                    return <Panel
+                        currentChainIndex={currentChainIndex}
+                        key={item.id}
+                        value={item}
+                        getQuestGroupList={getQuestGroupList}
+                        getSumaryDetail={getSumaryDetail}
+                    />
                 })
             }
         </ProjectLine>
