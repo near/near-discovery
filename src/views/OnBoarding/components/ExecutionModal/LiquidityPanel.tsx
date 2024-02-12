@@ -131,7 +131,6 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
               <StyledInput
                 value={amount0}
                 onChange={(ev: any) => {
-                  console.log('===', ev.target.value)
                   if (isNaN(Number(ev.target.value))) return;
                   onTokenChangeRef.current && onTokenChangeRef.current(ev.target.value, token0.symbol)
                 }}
@@ -176,7 +175,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
           </StyledValue>
         </StyledItem>
       </StyledPanel>
-      {allData && (
+      {/* {allData && (
         <VmComponent
           src="bluebiu.near/widget/Liquidity.Data.Gamma"
           props={{
@@ -192,7 +191,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
             },
           }}
         />
-      )}
+      )} */}
       {/* <StyledButton>Deposit</StyledButton> */}
 
       {network.chainId !== Number(connectedChain?.id) ? (
@@ -212,7 +211,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
             'Switch Network'
           )}
         </StyledButton>
-      ) : (
+      ) : allData && (
         <VmComponent
           src="bluebiu.near/widget/Liquidity.Gamma.DialogButton"
           props={{
