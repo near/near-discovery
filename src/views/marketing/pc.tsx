@@ -8,6 +8,7 @@ import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKe
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
+import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 
 import { ModalPC, Tabs } from './components';
 import Leaderboard from './components/Leaderboard';
@@ -26,6 +27,7 @@ const questImgs = {
   twitter_like: '/images/marketing/like.svg',
 };
 
+// 老用户 全部模糊
 const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   console.log('from:', from, 'inviteCode:', inviteCode);
   const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
@@ -36,6 +38,8 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   const [address, setAddress] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
+  const config = useAuthConfig();
+  const [isBlur, setIsBlur] = useState(false);
 
   const [userStatus, setUserStatus] = useState<'uncheck' | 'new' | 'old'>('uncheck');
 
@@ -149,10 +153,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
 
   async function fetchInviteCodes() {
     //  获取邀请码
-    const res = await get(`${QUEST_PATH}/api/invite/get-invited-info/${address}`);
+    const res = await get(`${QUEST_PATH}/api/invite/get-address-code/${address}`);
 
     if ((res.code as number) !== 0) return;
-    return res.data;
+    return res.data.filter((item: any) => !item.is_used);
   }
 
   async function fetchTotalRewards() {
@@ -164,6 +168,11 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     setTotalReward(res.data?.reward || 0);
   }
 
+  const getInviteList = async () => {
+    const inviteData = await fetchInviteList();
+    setInviteNum(inviteData?.data?.length);
+    setInviteReward(inviteData?.invite_reward);
+  };
   const handleFreshInviteList = async () => {
     setSpin3(true);
     const inviteData = await fetchInviteList();
@@ -186,6 +195,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   };
 
   const handleClaim = async (data: any) => {
+    if (!address) return;
     if (data.status !== 'completed') return;
     if (data.is_claimed) return;
     if (claimLoading) return;
@@ -205,9 +215,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   };
 
   useEffect(() => {
+    fetchQuestList();
     if (userStatus === 'uncheck') return;
     if (userStatus === 'new') {
-      fetchQuestList();
+      // fetchQuestList();
     }
     if (userStatus === 'old') {
       setIsShowModal(true);
@@ -216,7 +227,17 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   }, [userStatus, fresh]);
 
   useEffect(() => {
+    if (userStatus === 'new') {
+      setIsBlur(false);
+    }
+    if (userStatus === 'old' || userStatus === 'uncheck' || !address) {
+      setIsBlur(true);
+    }
+  }, [userStatus, address]);
+
+  useEffect(() => {
     if (address) {
+      setUpdater(Date.now());
       if (from === 'bg') {
         checkAddressWithActive();
       }
@@ -227,8 +248,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   }, [address]);
 
   useEffect(() => {
+    if (isBlur) return;
     fetchTotalRewards();
-  }, [updater]);
+    getInviteList();
+  }, [updater, isBlur]);
 
   const renderButton = () => {
     if (address) {
@@ -262,6 +285,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   };
 
   const handleInvite = async () => {
+    if (!address) return;
     if (!expendAnimate.height) {
       const list = await fetchInviteCodes();
       setCodeList(list);
@@ -269,6 +293,38 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     } else {
       setExpendAnimate({ height: 0, border: 'none' });
     }
+  };
+
+  const openSource = (action: any) => {
+    if (isBlur) return;
+    if (action.category === 'twitter_follow' && userInfo.twitter?.is_bind) {
+      sessionStorage.setItem('_clicked_twitter_' + action.id, '1');
+    }
+    if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
+      const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
+      sessionStorage.setItem('_auth_type', 'twitter');
+      window.open(path, '_blank');
+      return;
+    }
+
+    if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
+      const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
+      sessionStorage.setItem('_auth_type', 'discord');
+      window.open(path, '_blank');
+      return;
+    }
+
+    // if (action.category.startsWith('telegram') && !userInfo.telegram?.is_bind) {
+    //   if (window.Telegram) {
+    //     window.Telegram.Login.auth({ bot_id: config.telegram_bot_id, request_access: true }, (data: any) => {
+    //       if (data) {
+    //         handleBind('telegram', { ...data, id: data.id.toString() });
+    //       }
+    //     });
+    //   }
+    //   return;
+    // }
+    // window.open(source, '_blank', 'width=850,height=550');
   };
 
   const prefix = location.origin;
@@ -315,10 +371,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
               {advancedQuests?.filter((item) => item.is_claimed).length * 100} PTS
             </Styles.SubTitle>
           </Styles.Title>
-          <Styles.CardBox>
+          <Styles.CardBox className={isBlur ? 'blur' : ''}>
             {advancedQuests?.length
               ? advancedQuests.map((item, index) => (
-                  <Styles.Card key={item.id}>
+                  <Styles.Card key={item.id} onClick={(e) => openSource(item)}>
                     <Styles.CardLeft>
                       <Styles.CardIcon src={(questImgs as any)[item.category]} />
                       <div>
@@ -335,13 +391,15 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
                         <Styles.Fresh
                           className={spin2[index] ? 'spin' : ''}
                           src="/images/marketing/fresh.svg"
-                          onClick={() => {
+                          onClick={(e) => {
+                            if (isBlur) return;
                             setSpin2((prev) => {
                               const temp = [...prev];
                               temp[index] = !temp[index];
                               return temp;
                             });
                             handleFresh();
+                            e.stopPropagation();
                           }}
                         />
                       )}
@@ -367,7 +425,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
               />
             </Styles.SubTitle>
           </Styles.Title>
-          <Styles.InviteBox>
+          <Styles.InviteBox className={isBlur ? 'blur' : ''}>
             <Styles.InviteHead>
               <div>
                 <Styles.Text>Share your invitation link to more people and earn points</Styles.Text>
@@ -391,20 +449,31 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
               </Styles.InviteBtn>
             </Styles.InviteHead>
             <Styles.InviteBody animate={expendAnimate}>
-              {codeList?.length
-                ? codeList.map((item: any, index) => (
-                    <Styles.List key={index}>
-                      <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
-                      {`${prefix}/bitget/${item?.code}`}
-                      <Styles.CopyIcon
-                        src="/images/marketing/copy.svg"
-                        onClick={() => {
-                          copy(`${prefix}/bitget/${item?.code}`);
-                        }}
-                      ></Styles.CopyIcon>
-                    </Styles.List>
-                  ))
-                : null}
+              <Styles.InviteBodyLeft>
+                {codeList?.length
+                  ? codeList.map((item: any, index) => (
+                      <Styles.List key={index}>
+                        <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
+                        {`${prefix}/bitget/${item?.code}`}
+                        <Styles.CopyIcon
+                          src="/images/marketing/copy.svg"
+                          onClick={() => {
+                            copy(`${prefix}/bitget/${item?.code}`);
+                          }}
+                        ></Styles.CopyIcon>
+                      </Styles.List>
+                    ))
+                  : null}
+              </Styles.InviteBodyLeft>
+              <Styles.InviteBodyRight>
+                <Styles.InviteBodyIcon src="/images/marketing/prompts.svg"></Styles.InviteBodyIcon>
+                <div>
+                  <Styles.PromptsTitle>Prompts</Styles.PromptsTitle>
+                  <Styles.PromptsTxt>
+                    Please open the invitation link within PC or Bitget Wallet browser for an enhanced experience.
+                  </Styles.PromptsTxt>
+                </div>
+              </Styles.InviteBodyRight>
             </Styles.InviteBody>
           </Styles.InviteBox>
         </Styles.Box>
@@ -420,6 +489,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
             handlePageChange,
             userLoading,
             userInfo,
+            totalReward,
             handleRefresh: () => {
               handleRefresh();
               setUpdater(Date.now());

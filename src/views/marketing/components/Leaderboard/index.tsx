@@ -26,6 +26,7 @@ const Leaderboard = ({
   userLoading,
   handleRefresh,
   userInfo,
+  totalReward,
 }: any) => {
   return (
     <AnimatePresence mode="wait">
@@ -56,7 +57,7 @@ const Leaderboard = ({
                 <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
                   {column.key === 'rank' && `#${userInfo.rank}`}
                   {column.key === 'user' && <User user={userInfo.address} avatar={userInfo.avatar} />}
-                  {column.key === 'pts' && <PTS pts={userInfo.reward} />}
+                  {column.key === 'pts' && <PTS pts={totalReward} />}
                 </StyledCell>
               ))}
             </StyledCurrentRow>

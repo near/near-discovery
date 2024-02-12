@@ -50,6 +50,7 @@ const Modal: FC<IProps> = ({ open, type, onClose, reward }) => {
     <>
       {mask}
       <Styles.Wrap {...params}>
+        {close}
         <Styles.FailIcon src="/images/marketing/sorry.svg"></Styles.FailIcon>
         <Styles.Title>Oops</Styles.Title>
         <Styles.FailTxt>
