@@ -8,6 +8,7 @@ import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKe
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
+import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 
 import { ModalPC, Tabs } from './components';
@@ -65,7 +66,16 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   const [spin1, setSpin1] = useState(false);
   const [spin2, setSpin2] = useState([false, false, false, false]);
   const [spin3, setSpin3] = useState(false);
-
+  const {
+    loading: binding,
+    type,
+    handleBind,
+  } = useAuthBind({
+    onSuccess: () => {
+      // onSuccess(1);
+    },
+    redirect_uri: `${window.location.origin}${window.location.pathname}`,
+  });
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
     insertedAccessKey('');

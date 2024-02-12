@@ -16,7 +16,8 @@ export default function useLeaderboard() {
       if (loading) return;
       setLoading(true);
       try {
-        const result = await get(`${QUEST_PATH}/api/activity/leaderboard?page=${_page || page}&page_size=10`);
+        const result = await get(`${QUEST_PATH}/api/activity/leaderboard?category
+=bitget&page=${_page || page}&page_size=10`);
         const data = result.data.data || [];
         setList(data);
         setLoading(false);
