@@ -14,6 +14,8 @@ import actionBg from './img/action-bg.svg'
 
 import ruleImg from './img/rule.svg'
 import clamImg from './img/clam.svg'
+import rulePressImg from './img/rule-press.svg'
+import clamPressImg from './img/clam-press.svg'
 import btnBgImg from './img/btn-bg.svg'
 import btnImg from './img/btn.svg'
 import chainIconsImg from './img/chianIcons.svg'
@@ -232,18 +234,19 @@ const ActionBar = styled.div`
     padding: 0 60px;
 `
 
-const Rules = styled.div`
+
+const Rules = styled.div<{ pressed: boolean }>`
     width: 185.5px;
     height: 92px;
-    background: url(${ruleImg.src}) left top no-repeat;
+    background:  url(${({ pressed }) => pressed ? rulePressImg.src : ruleImg.src}) left top no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
 `
 
-const Clam = styled.div`
+const Clam = styled.div<{ pressed: boolean }>`
     width: 185.5px;
     height: 92px;
-    background: url(${clamImg.src}) left top no-repeat;
+    background:  url(${({ pressed }) => pressed ? clamPressImg.src : clamImg.src}) left top no-repeat;
     background-size: 100% 100%;
     cursor: pointer;
     opacity: .1;
@@ -317,6 +320,9 @@ function SlotMachine({
     const rewardRef = useRef(reward)
     const unclaimedRewardRef = useRef(unclaimedReward)
 
+    const [rulePressed, setRulePressed] = useState(false)
+    const [claimPressed, setClaimPressed] = useState(false)
+
     useEffect(() => {
         rewardRef.current = reward
     }, [reward])
@@ -336,7 +342,6 @@ function SlotMachine({
         playSound('/images/compass/audio/rolling.mp4')
         
         setTimeout(() => {
-            console.log(rewardRef.current)
             if (rewardRef.current === 10000) {
                 playSound('/images/compass/audio/grand-prize.mp3')
             } else if (rewardRef.current > 0) {
@@ -422,12 +427,27 @@ function SlotMachine({
         </Screen>
 
         <ActionBar>
-            <Rules onClick={() => setRuleShow(true)}/>
+            <Rules pressed={rulePressed} onClick={() => {
+                setRuleShow(true)
+                setRulePressed(true)
+                setTimeout(() => {
+                    setRulePressed(false)
+                }, 100)
+            }}/>
             <BtnWapper>
                 <BtnBg />
-                <Btn className={isPressed ? 'press' : ''} onClick={handleBtnPress} />
+                <Btn style={{ opacity: availableSpins <= 0 ? '.3' : '1' }} className={isPressed ? 'press' : ''} onClick={handleBtnPress} />
             </BtnWapper>
-            <Clam onClick={handleClaim} style={{ opacity: isClaiming ? '.7' : '1' }} />
+            <Clam pressed={claimPressed} onClick={() => {
+                handleClaim()
+                if (newUnclaimedReward <= 0) {
+                    return
+                }
+                setClaimPressed(true)
+                setTimeout(() => {
+                    setClaimPressed(false)
+                }, 100)
+            }} style={{ opacity: newUnclaimedReward <= 0 ? '.3' : '1' }} />
         </ActionBar>
 
         <RuleModal show={ruleShow} onClose={() => setRuleShow(false) } />

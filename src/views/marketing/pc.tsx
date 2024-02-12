@@ -8,6 +8,7 @@ import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKe
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
+import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 
 import { ModalPC, Tabs } from './components';
@@ -47,6 +48,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   const [basicQuests, setBasicQuests] = useState<any>([]);
 
   const [reward, setReward] = useState(0);
+  const [rank, setRank] = useState(0);
 
   const [fresh, setFresh] = useState(0);
   const [updater, setUpdater] = useState(0);
@@ -65,7 +67,16 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   const [spin1, setSpin1] = useState(false);
   const [spin2, setSpin2] = useState([false, false, false, false]);
   const [spin3, setSpin3] = useState(false);
-
+  const {
+    loading: binding,
+    type,
+    handleBind,
+  } = useAuthBind({
+    onSuccess: () => {
+      // onSuccess(1);
+    },
+    redirect_uri: `${window.location.origin}${window.location.pathname}`,
+  });
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
     insertedAccessKey('');
@@ -166,6 +177,14 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     setSpin1(false);
     setSpin2([false, false, false, false]);
     setTotalReward(res.data?.reward || 0);
+    setRank(res.data?.rank || 0);
+  }
+
+  async function checkQuest(id: number) {
+    const res = await get(`${QUEST_PATH}/api/activity/check_quest?quest_id=${id}`);
+    console.log(11111, res);
+
+    // if ((res.code as number) !== 0) return;
   }
 
   const getInviteList = async () => {
@@ -324,7 +343,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     //   }
     //   return;
     // }
-    // window.open(source, '_blank', 'width=850,height=550');
+    window.open(action.source, '_blank', 'width=850,height=550');
   };
 
   const prefix = location.origin;
@@ -374,8 +393,8 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
           <Styles.CardBox className={isBlur ? 'blur' : ''}>
             {advancedQuests?.length
               ? advancedQuests.map((item, index) => (
-                  <Styles.Card key={item.id} onClick={(e) => openSource(item)}>
-                    <Styles.CardLeft>
+                  <Styles.Card key={item.id}>
+                    <Styles.CardLeft onClick={(e) => openSource(item)}>
                       <Styles.CardIcon src={(questImgs as any)[item.category]} />
                       <div>
                         <Styles.CardTitle>{item.name}</Styles.CardTitle>
@@ -391,13 +410,14 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
                         <Styles.Fresh
                           className={spin2[index] ? 'spin' : ''}
                           src="/images/marketing/fresh.svg"
-                          onClick={(e) => {
+                          onClick={async (e) => {
                             if (isBlur) return;
                             setSpin2((prev) => {
                               const temp = [...prev];
                               temp[index] = !temp[index];
                               return temp;
                             });
+                            await checkQuest(item.id);
                             handleFresh();
                             e.stopPropagation();
                           }}
@@ -415,15 +435,17 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
           </Styles.CardBox>
           <Styles.Title>
             Invite
-            <Styles.SubTitle>
-              <Styles.Coin src="/images/marketing/friend.svg"></Styles.Coin> + {inviteNum} PPL
-              <Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin> + {inviteNum * inviteReward} PTS
-              <Styles.Fresh
-                className={spin3 ? 'spin' : ''}
-                src="/images/marketing/fresh.svg"
-                onClick={handleFreshInviteList}
-              />
-            </Styles.SubTitle>
+            {!isBlur ? (
+              <Styles.SubTitle>
+                <Styles.Coin src="/images/marketing/friend.svg"></Styles.Coin> + {inviteNum} PPL
+                <Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin> + {inviteNum * inviteReward} PTS
+                <Styles.Fresh
+                  className={spin3 ? 'spin' : ''}
+                  src="/images/marketing/fresh.svg"
+                  onClick={handleFreshInviteList}
+                />
+              </Styles.SubTitle>
+            ) : null}
           </Styles.Title>
           <Styles.InviteBox className={isBlur ? 'blur' : ''}>
             <Styles.InviteHead>
@@ -490,6 +512,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
             userLoading,
             userInfo,
             totalReward,
+            myRank: rank,
             handleRefresh: () => {
               handleRefresh();
               setUpdater(Date.now());

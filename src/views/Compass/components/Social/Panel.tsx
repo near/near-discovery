@@ -4,6 +4,7 @@ import ShareImg from './img/share.svg'
 import FollowImg from './img/follow.svg'
 import Spin from '../Spin';
 import Fresh from '../Fresh';
+import Complete from '../Complate';
 import useQuestStatus from '../../hooks/useQuestStatus';
 
 const Panel = styled.div`
@@ -78,7 +79,8 @@ const SpinText = styled.div`
     height: 69px;
     line-height: 69px;
     text-align: center;
-    color: rgba(0, 61, 50, 1);
+    color: #00FFD1;
+;
 `
 
 interface Props {
@@ -90,6 +92,7 @@ interface Props {
     totalSpin: number;
     id: number;
     source: string;
+    value: any;
     onAction?: (source?: string) => void;
     getQuestGroupList: () => void;
     getSumaryDetail: () => void;
@@ -108,8 +111,11 @@ export default function SocialPanel({
     onAction,
     getQuestGroupList, 
     getSumaryDetail,
+    value,
 }: Props) {
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(id)
+    const showComplete = value.times === 1 && value.spins === value.total_spins
+
 
     return <Panel>
         <LogoWapper>
@@ -129,11 +135,13 @@ export default function SocialPanel({
                 <SpinWapper>
                     <Spin renderChildren={() => <SpinText>+ {totalSpin}/{spin} SPIN</SpinText>} />
                 </SpinWapper>
-                <Fresh onCheck={() => { 
-                    checkQuestStatus() 
-                    getQuestGroupList()
-                    getSumaryDetail()
-                }} isLoading={isQuestSuccess} />
+                {
+                    showComplete ? <Complete/> : <Fresh onCheck={async () => {
+                        await checkQuestStatus()
+                        getQuestGroupList()
+                        getSumaryDetail()
+                    }} isLoading={isQuestSuccess} />
+                }
             </FreshWapper>
         </ActionBtnWapper>
 
