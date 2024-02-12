@@ -6,6 +6,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKey } from '@/apis';
 import { QUEST_PATH } from '@/config/quest';
+import useCopy from '@/hooks/useCopy';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 
 import { Modal } from './components';
@@ -18,6 +19,7 @@ interface IProps {
 
 const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
   console.log('from:', from, 'inviteCode:', inviteCode);
+  const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
   const [address, setAddress] = useState('');
@@ -144,6 +146,21 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
     }
   };
 
+  const renderIcon = () => {
+    if (basicQuests[0].is_claimed) {
+      return <Styles.Fresh src="/images/marketing/done.svg" />;
+    } else {
+      return (
+        <Styles.Fresh
+          src="/images/marketing/fresh.svg"
+          onClick={handleFresh}
+          animate={freshAnimate}
+          transition={freshAnimate?.rotate ? { ease: 'linear', duration: 0.8, repeat: Infinity } : {}}
+        />
+      );
+    }
+  };
+
   useEffect(() => {
     if (userStatus === 'uncheck') return;
     if (userStatus === 'new') {
@@ -166,6 +183,8 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
     }
   }, [address]);
 
+  const prefix = location.origin;
+
   return (
     <Styles.Container>
       <Styles.Banner>
@@ -182,17 +201,7 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
           <Styles.Cap src="/images/marketing/cap.svg"></Styles.Cap>
         </Styles.CapWrap>
         <Styles.Title>Join Now to Win DapDap PTS</Styles.Title>
-        <Styles.Step>
-          Step 1
-          {address ? (
-            <Styles.Fresh
-              src="/images/marketing/fresh.svg"
-              onClick={handleFresh}
-              animate={freshAnimate}
-              transition={freshAnimate?.rotate ? { ease: 'linear', duration: 0.8, repeat: Infinity } : {}}
-            ></Styles.Fresh>
-          ) : null}
-        </Styles.Step>
+        <Styles.Step>Step 1{renderIcon()}</Styles.Step>
         {wallet ? (
           <Styles.Button onClick={disConnect}>Disconnect</Styles.Button>
         ) : (
@@ -225,9 +234,16 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
         )}
 
         <Styles.Step>Step 3</Styles.Step>
-        <Styles.Tips className={basicQuests[0]?.status !== 'completed' ? 'blur' : ''} onClick={goHome}>
+        <Styles.Tips className={basicQuests[0]?.status !== 'completed' ? 'blur' : 'gradient'}>
           Want more rewards? <br />
           use computer to visit our website
+          <Styles.CopyWrap
+            onClick={() => {
+              copy(`${prefix}`);
+            }}
+          >
+            <Styles.CopyIcon src="/images/marketing/copy.svg" />
+          </Styles.CopyWrap>
         </Styles.Tips>
       </Styles.Box>
       <Styles.Foot>

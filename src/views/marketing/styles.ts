@@ -92,6 +92,7 @@ export const Button = styled.div`
 `;
 
 export const Tips = styled.div`
+  position: relative;
   background-color: rgba(44, 46, 62, 1);
   border-radius: 10px;
   height: 50px;
@@ -100,11 +101,20 @@ export const Tips = styled.div`
   font-weight: 400;
   text-align: center;
   padding-top: 5px;
+
   &.blur {
     -webkit-filter: blur(2px);
     -moz-filter: blur(2px);
     -ms-filter: blur(2px);
     filter: blur(2px);
+  }
+  &.gradient {
+    border: 2px solid transparent;
+    border-radius: 10px;
+    background-clip: padding-box, border-box;
+    background-origin: padding-box, border-box;
+    background-image: linear-gradient(to right, #222, #222),
+      linear-gradient(90deg, rgba(27, 190, 202, 1), rgba(235, 244, 121, 1), rgba(112, 39, 233, 1));
   }
 `;
 
@@ -136,4 +146,18 @@ export const Fresh = styled(motion.img)`
 export const Spinner = styled.img`
   width: 18px;
   height: 18px;
+`;
+
+export const CopyWrap = styled.div`
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export const CopyIcon = styled.img`
+  width: 18px;
 `;
