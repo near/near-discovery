@@ -178,7 +178,7 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
         amount: new Big(amount).toString(),
         destination: account,
         route: routeRef.current as Route,
-        actionName: 'onboarding',
+        actionName: 'quick_onboarding',
         onSuccess: (tx) => {
           success({
             title: 'Transaction successed',
