@@ -46,10 +46,12 @@ const QuestItem = ({
   },
   mt,
   bp,
+  onClick,
 }: {
   quest: any;
   mt?: number;
   bp?: string;
+  onClick?: any;
 }) => {
   const router = useRouter();
   const actions = Array.from({ length: total_action }, (val, i) => i);
@@ -61,6 +63,7 @@ const QuestItem = ({
       onClick={(event) => {
         event.stopPropagation();
         router.push(`/quest/detail?id=${id}`);
+        onClick?.();
       }}
       data-bp={bp}
     >

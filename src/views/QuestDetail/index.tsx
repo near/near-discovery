@@ -5,13 +5,17 @@ import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
 import useUserInfo from '@/hooks/useUserInfo';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
+import ClaimedSuccessModal from './components/ClaimedSuccessModal';
 import Yours from '../Quest/components/Yours';
 import useCampaignList from '../Quest/hooks/useCampaignList';
 import Actions from './components/Actions';
 import Details from './components/Details';
 import Recommends from './components/Recommends';
 import useQuestInfo from './hooks/useQuestInfo';
+import useRecommendList from './hooks/useRecommendList';
 import { StyledContainer, StyledTopBox } from './styles';
+
+const MAX = 18;
 
 const QuestDetailView = () => {
   const searchParams = useSearchParams();
@@ -22,38 +26,34 @@ const QuestDetailView = () => {
   const { loading: categoryLoading, categories } = useCategoryList();
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { info: userInfo = {} } = useUserInfo({ updater });
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const { recommends, handlePageChange, page, maxPage } = useRecommendList(info?.quest.quest_campaign_id, MAX);
 
-  const quest = info?.quest ?? null
-  // const [navs, setNavs] = useState([
-  //   { name: 'Quest Campaign', path: '/quest/leaderboard' },
-  //   { name: 'Quest detail', path: '/quest/detail' },
-  // ])
+  const quest = info?.quest ?? null;
+
   const navs = useMemo(() => {
     if (quest && campaigns.length > 0) {
-      const campaign = campaigns.find(campaign => campaign.id === quest.quest_campaign_id)
-      const array = []
-      array[0] = { name: 'Quest Campaign', path: '/quest/leaderboard' }
-      array[1] = campaign.name.replace(/\s/g, '') === 'DapDapXBNS' ?
-        {
-          name: 'DapDap X BNS',
-          path: '/quest/leaderboard/DapDapXBNS'
-        } :
-        {
-          name: 'DapDap Web3 Adventure',
-          path: '/quest/leaderboard/DapDapWeb3Adventure'
-        }
-      array[2] = { name: 'Detail', path: '/quest/detail' }
-      return array
+      const campaign = campaigns.find((campaign) => campaign.id === quest.quest_campaign_id);
+      const array = [];
+      array[0] = { name: 'Quest Campaign', path: '/quest/leaderboard' };
+      array[1] =
+        campaign.name.replace(/\s/g, '') === 'DapDapXBNS'
+          ? {
+              name: 'DapDap X BNS',
+              path: '/quest/leaderboard/DapDapXBNS',
+            }
+          : {
+              name: 'DapDap Web3 Adventure',
+              path: '/quest/leaderboard/DapDapWeb3Adventure',
+            };
+      array[2] = { name: 'Detail', path: '/quest/detail' };
+      return array;
     }
-  }, [quest, campaigns])
-
-
+  }, [quest, campaigns]);
 
   return (
     <StyledContainer>
-      <Breadcrumb
-        navs={navs || []}
-      />
+      <Breadcrumb navs={navs || []} />
       {loading || categoryLoading ? (
         <Spinner />
       ) : (
@@ -73,10 +73,19 @@ const QuestDetailView = () => {
                 claimed={info.quest.is_claimed}
                 onSuccess={() => {
                   setUpdater(Date.now());
+                  setShowSuccessModal(true);
                 }}
               />
             </StyledTopBox>
-            <Recommends campaignId={info.quest.quest_campaign_id} />
+            <Recommends recommends={recommends} />
+            <ClaimedSuccessModal
+              open={showSuccessModal}
+              reward={info.quest.reward}
+              onClose={() => {
+                setShowSuccessModal(false);
+              }}
+              recommends={recommends}
+            />
           </>
         )
       )}

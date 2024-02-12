@@ -43,7 +43,7 @@ const COLUMNS = [
   },
 ];
 
-const Table = ({ loading, list, deleting, handleDelete, handleModal }: any) => {
+const Table = ({ loading, list, deleting, handleDelete, openModal }: any) => {
   const currentActionId = useRef<string>();
   return (
     <StyledTable>
@@ -72,7 +72,7 @@ const Table = ({ loading, list, deleting, handleDelete, handleModal }: any) => {
                 {column.key === 'execution' && (
                   <StyledExecutionButton
                     onClick={() => {
-                      handleModal(item.action_type.toLowerCase(), {
+                      openModal(item.action_type.toLowerCase(), {
                         defaultDapp: item.template,
                         defaultAmount: item.action_amount,
                       });

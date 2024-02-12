@@ -42,6 +42,10 @@ export const StyledRecommendList = styled.div`
   display: flex;
   gap: 19px;
   flex-direction: nowrap;
+  transition: 0.3s;
+`;
+
+export const StyledRecommendListWrapper = styled.div`
   width: 100%;
   overflow: hidden;
 `;

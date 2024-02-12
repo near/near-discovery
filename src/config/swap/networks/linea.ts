@@ -30,6 +30,7 @@ export default {
     Syncswap: {
       ...SyncSwapBasic,
       ...SyncSwapNetworks[CHAIN_ID],
+      oneExecutionDisabled: true,
     },
     'Velocore V2': {
       ...VelocoreV2Basic,

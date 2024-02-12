@@ -1,4 +1,4 @@
-import { AnimatePresence,motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
 import styled from 'styled-components';
@@ -28,13 +28,6 @@ const Overlay = styled(motion.div)`
 `;
 const Main = styled(motion.div)<{ $width: number }>`
   width: ${({ $width }) => $width + 'px'};
-`;
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  color: #fff;
-  padding: 30px 30px 0px 30px;
 `;
 
 const Content = styled.div`

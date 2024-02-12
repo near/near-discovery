@@ -70,7 +70,7 @@ const SwapPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
           <StyledLabel>dApp</StyledLabel>
           <SelectDapps
             currentDapp={currentDapp}
-            dapps={Object.values(network.dexs)}
+            dapps={Object.values(network.dexs).filter((item: any) => !item.oneExecutionDisabled)}
             onSelect={(dapp: any) => {
               setCurrentDapp(dapp);
             }}

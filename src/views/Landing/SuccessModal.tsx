@@ -1,7 +1,6 @@
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 
-import CloseIcon from '@/components/Icons/Close';
 import { StyledCoin } from '@/views/Quest/styles';
 
 import Modal from './Modal';

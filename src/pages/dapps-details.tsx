@@ -10,10 +10,12 @@ import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
 import ProcessBar from '@/views/Quest/components/ProcessBar';
 import Steps from '@/views/Quest/components/QuestItem/step-icon';
+import Dapps from '@/components/Dapps';
 import { StyledCoin, StyledProcessBars, StyledTag } from '@/views/Quest/components/QuestItem/styles';
 import useCategoryDappList from '@/views/Quest/hooks/useCategoryDappList';
 import useLike from '@/views/Quest/hooks/useLike';
 import { StyledHeartBox } from '@/views/QuestDetail/components/Details/styles';
+import { useChainsStore } from '@/stores/chains';
 import Empty from '@/components/Empty';
 
 const arrow = (
@@ -459,7 +461,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
   const [data, setData] = useState<any>(null);
   const { loading, categories } = useCategoryDappList();
   const categoryArray = Object.values(categories);
-  const [networkList, setNetworkList] = useState<any[]>([]);
+  const chains = useChainsStore((store: any) => store.chains);
   const [relatedDapps, setRelatedDapps] = useState<any>(null);
   const [activity, setActivity] = useState<any>(null);
   const [questList, setQuestList] = useState<any[]>([]);
@@ -470,17 +472,6 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     id = dapp_id.toString();
   }
   const { like, handleLike } = useLike(id, 'dapp');
-  useEffect(() => {
-    const fetchNetworkData = async () => {
-      try {
-        const resultNetwork = await get(`${QUEST_PATH}/api/network/list`);
-        setNetworkList(resultNetwork.data || []);
-      } catch (error) {
-        console.error('Error fetching resultNetwork data:', error);
-      }
-    };
-    fetchNetworkData();
-  }, []);
   useEffect(() => {
     const fetchData = async () => {
       if (dapp_id) {
@@ -496,7 +487,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       if (dapp_id) {
         try {
           const response = await get(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
-          setRelatedDapps(response.data);
+          setRelatedDapps(response.data || []);
         } catch (error) {
           console.error('Error fetching related dapps:', error);
         }
@@ -650,7 +641,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                 <p>Blockchain</p>
                 {data &&
                   data.dapp_network.map((item: any, index: number) => {
-                    const networkItem = networkList.find((network: any) => network.id === item.network_id);
+                    const networkItem = chains.find((network: any) => network.id === item.network_id);
                     const logo = networkItem ? networkItem.logo : '';
                     return (
                       <div key={index} style={{ display: 'inline-block' }}>
@@ -766,42 +757,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       <DappsDetailBottom>
         <Title>Related Dapps</Title>
         <div className="tab-content">
-          {relatedDapps &&
-            relatedDapps.map((dapp: any, index: number) => {
-              const categoryNamess = getCategoryNamess(dapp.category_ids, categoryArray);
-              return (
-                <div className="tab-content-item" key={index}>
-                  <div className="content-item-img">
-                    <img src={dapp.logo} alt="" />
-                  </div>
-                  <div className="content-item-text">
-                    <h1>{dapp.name}</h1>
-                    <p>{dapp.description}</p>
-                    <Tag>
-                      {categoryNamess.map((categoryName: string, index: number) => (
-                        <div className={`tag-item ${categoryName}`} key={index}>
-                          {categoryName}
-                        </div>
-                      ))}
-                    </Tag>
-                  </div>
-                  <div className="content-item-btn">
-                    <Link className="item-btn-item" data-bp="100111-004" href={`/dapps-details?dapp_id=${dapp.id}`}>
-                      Detail
-                    </Link>
-                    <div
-                      className="item-btn-item"
-                      onClick={() => {
-                        open({ dapp, from: 'alldapps' });
-                      }}
-                      data-bp="100111-005"
-                    >
-                      <p>Dapp</p>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
+          <Dapps dapps={relatedDapps || []} bp={{ detail: '100111-004', dapp: '100111-005' }} />
         </div>
       </DappsDetailBottom>
     </DappsDetails>

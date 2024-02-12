@@ -116,12 +116,6 @@ const networks = {
         address: '0x4486835e0C567A320C0636d8F6e6e6679A46a271',
         underlyingToken: polygon['aave'],
       },
-      '0x2eE80614Ccbc5e28654324a66A396458Fa5cD7Cc': {
-        decimals: 8,
-        symbol: 'crQUICK',
-        address: '0x2eE80614Ccbc5e28654324a66A396458Fa5cD7Cc',
-        underlyingToken: polygon['quick'],
-      },
       '0x20d5d319C2964ecb52e1B006a4C059b7f6d6ad0a': {
         decimals: 8,
         symbol: 'crLINK',

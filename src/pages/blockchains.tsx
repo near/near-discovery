@@ -386,7 +386,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                     </Link>
                     {child.deepdive && (
                       <Link href={`/onboarding/${path}`} data-bp="10012-004" className="paragraph-btn-item">
-                        Deep Dive
+                        Onboarding
                       </Link>
                     )}
                   </div>

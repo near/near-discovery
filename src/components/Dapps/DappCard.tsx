@@ -27,7 +27,8 @@ const DappCard = (props: any) => {
 
   const categoryNames = useMemo(() => {
     const names: { id: number; name: string }[] = [];
-    category_ids.forEach((id: number) => {
+    const _category_ids = typeof category_ids === 'string' ? [category_ids] : category_ids;
+    _category_ids.forEach((id: number) => {
       const item = categories[id];
       if (item) {
         names.push({

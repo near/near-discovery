@@ -8,7 +8,7 @@ const Yours = ({ info }: any) => {
   return (
     <StyledContainer
       onClick={() => {
-        router.push('/profile');
+        router.push(`/profile?active=pts`);
       }}
     >
       <StyledBox>
