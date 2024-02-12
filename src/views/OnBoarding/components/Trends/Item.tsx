@@ -7,6 +7,7 @@ import { StyledItem, StyledItemBox, StyledLabel, StyledValue, StyledItemImg, Sty
 const Item = (props: any) => {
   const { dapp_id, total_execution, bgColor, dapp_logo, template } = props;
   const { open } = useDappOpen();
+
   return (
     <StyledItem
       onClick={() => {
