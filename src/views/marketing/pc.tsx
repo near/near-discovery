@@ -243,8 +243,9 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   }, [address]);
 
   useEffect(() => {
+    if (isBlur) return;
     fetchTotalRewards();
-  }, [updater]);
+  }, [updater, isBlur]);
 
   const renderButton = () => {
     if (address) {
