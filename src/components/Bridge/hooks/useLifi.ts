@@ -171,7 +171,7 @@ export default function useLifi() {
   const { account, provider } = useAccount();
   const [fee, setFee] = useState();
   const { addAction } = useAddAction('wallet/bridge');
-  const { addAction: onboardingAction } = useAddAction('onboarding');
+  const { addAction: onboardingAction } = useAddAction('quick_onboarding');
 
   const getQouteInfo = async ({
     chain,
@@ -273,7 +273,7 @@ export default function useLifi() {
                 };
                 localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
                 
-                const _addAction = actionName === 'onboarding' ? onboardingAction : addAction
+                const _addAction = actionName === 'quick_onboarding' ? onboardingAction : addAction
 
                 if (!hasActionAdded) {
                   _addAction({
