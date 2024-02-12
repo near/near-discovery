@@ -105,8 +105,6 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
     if (currentDapp.name === 'Gamma') fetchAllData();
   }, [currentDapp]);
 
-
-
   return (
     <StyledContent>
       <StyledPanel>
@@ -133,6 +131,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
               <StyledInput
                 value={amount0}
                 onChange={(ev: any) => {
+                  console.log('===', ev.target.value)
                   if (isNaN(Number(ev.target.value))) return;
                   onTokenChangeRef.current && onTokenChangeRef.current(ev.target.value, token0.symbol)
                 }}
