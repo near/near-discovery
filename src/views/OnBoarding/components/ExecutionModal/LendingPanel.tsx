@@ -31,7 +31,7 @@ const LendingPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
   }, [currentDapp]);
   const [trade, setTrade] = useState<any>({});
   const [amount, setAmount] = useState('10');
-  const { balance } = useTokenBalance({ currency: currentMarekt.underlyingToken, updater });
+  const { balance } = useTokenBalance({ currency: currentMarekt?.underlyingToken, updater });
   const { account } = useAccount();
   const [loading, setLoading] = useState(true);
 
