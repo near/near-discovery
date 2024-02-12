@@ -6,6 +6,8 @@ import networks from '@/config/swap/networks';
 import useTokenBalance from '@/hooks/useCurrencyBalance';
 import useAccount from '@/hooks/useAccount';
 import { formateValueWithThousandSeparatorAndFont } from '@/utils/formate';
+import { multicall } from '@/utils/multicall';
+import multicallConfig from '@/config/contract/multicall';
 import weth from '@/config/contract/weth';
 import { usePriceStore } from '@/stores/price';
 import SelectDapps from './SelectDapps';
@@ -170,6 +172,8 @@ const SwapPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
               setTrade(data);
               setLoading(false);
             },
+            multicall,
+            multicallAddress: multicallConfig[chainId],
           }}
         />
       </StyledButtonWrapper>

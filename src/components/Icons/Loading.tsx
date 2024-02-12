@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledLoading = styled.div<{ size: number; $mr?: string }>`
   width: ${({ size }) => size + 'px'};
   height: ${({ size }) => size + 'px'};
-  line-height: ${({ size }) => size - 2 + 'px'};
+  line-height: ${({ size }) => size - 4 + 'px'};
   animation: loading 1s linear infinite;
   transform-origin: center center;
   display: inline-block;
