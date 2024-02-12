@@ -5,6 +5,7 @@ import type { FC } from 'react';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKey } from '@/apis';
+import Loading from '@/components/Icons/Loading';
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
@@ -147,7 +148,7 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
   };
 
   const renderIcon = () => {
-    if (basicQuests[0].is_claimed) {
+    if (Array.isArray(basicQuests) && basicQuests.length && basicQuests[0].is_claimed) {
       return <Styles.Fresh src="/images/marketing/done.svg" />;
     } else {
       return (
@@ -202,6 +203,7 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
         </Styles.CapWrap>
         <Styles.Title>Join Now to Win DapDap PTS</Styles.Title>
         <Styles.Step>Step 1{renderIcon()}</Styles.Step>
+
         {wallet ? (
           <Styles.Button onClick={disConnect}>Disconnect</Styles.Button>
         ) : (
@@ -213,7 +215,7 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
               <Styles.Step>Step 2</Styles.Step>
               <Styles.Button className={item.status !== 'completed' ? 'blur' : ''} onClick={(e) => handleClaim(item)}>
                 {claimLoading ? (
-                  <Styles.Spinner src="https://assets.dapdap.tech/images/loading.gif"></Styles.Spinner>
+                  <Loading size={16} />
                 ) : item.is_claimed ? (
                   'Reward Already Claimed'
                 ) : (
