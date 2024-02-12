@@ -79,7 +79,8 @@ const SpinText = styled.div`
     height: 69px;
     line-height: 69px;
     text-align: center;
-    color: rgba(0, 61, 50, 1);
+    color: #00FFD1;
+;
 `
 
 interface Props {
@@ -115,7 +116,6 @@ export default function SocialPanel({
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(id)
     const showComplete = value.times === 1 && value.spins === value.total_spins
 
-    console.log('value: ', value)
 
     return <Panel>
         <LogoWapper>
