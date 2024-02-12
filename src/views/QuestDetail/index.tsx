@@ -15,7 +15,7 @@ import useQuestInfo from './hooks/useQuestInfo';
 import useRecommendList from './hooks/useRecommendList';
 import { StyledContainer, StyledTopBox } from './styles';
 
-const MAX = 18;
+const MAX = 100;
 
 const QuestDetailView = () => {
   const searchParams = useSearchParams();
