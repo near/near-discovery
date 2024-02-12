@@ -342,7 +342,6 @@ function SlotMachine({
         playSound('/images/compass/audio/rolling.mp4')
         
         setTimeout(() => {
-            console.log(rewardRef.current)
             if (rewardRef.current === 10000) {
                 playSound('/images/compass/audio/grand-prize.mp3')
             } else if (rewardRef.current > 0) {
@@ -441,6 +440,9 @@ function SlotMachine({
             </BtnWapper>
             <Clam pressed={claimPressed} onClick={() => {
                 handleClaim()
+                if (newUnclaimedReward <= 0) {
+                    return
+                }
                 setClaimPressed(true)
                 setTimeout(() => {
                     setClaimPressed(false)
