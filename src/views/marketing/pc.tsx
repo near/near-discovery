@@ -212,6 +212,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     if (userStatus === 'old') {
       setIsShowModal(true);
       setModalType('fail');
+      fetchQuestList(); // 老用户
     }
   }, [userStatus, fresh]);
 
@@ -271,6 +272,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     }
   };
 
+  const openSource = (source: string) => {
+    window.open(source, '_blank', 'width=850,height=550');
+  };
+
   const prefix = location.origin;
 
   return (
@@ -318,7 +323,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
           <Styles.CardBox>
             {advancedQuests?.length
               ? advancedQuests.map((item, index) => (
-                  <Styles.Card key={item.id}>
+                  <Styles.Card key={item.id} onClick={(e) => openSource(item.source)}>
                     <Styles.CardLeft>
                       <Styles.CardIcon src={(questImgs as any)[item.category]} />
                       <div>

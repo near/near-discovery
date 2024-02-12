@@ -252,6 +252,7 @@ export const Card = styled.div`
   background: #2c2e3e;
   display: flex;
   padding: 20px;
+  cursor: pointer;
 `;
 export const CardIcon = styled.img`
   width: 84px;
