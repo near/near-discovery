@@ -324,7 +324,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     //   }
     //   return;
     // }
-    // window.open(source, '_blank', 'width=850,height=550');
+    window.open(action.source, '_blank', 'width=850,height=550');
   };
 
   const prefix = location.origin;
