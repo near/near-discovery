@@ -325,11 +325,14 @@ const QuestionList: NextPageWithLayout = ({ chain }: any) => {
       </div>
       <List>
         {searchActionList.map((action, index) => {
+          console.log('action.template: ', action)
           return (
             <ListItem
               key={index}
               onClick={() => {
-                open({ dapp: { id: action.dapp_id }, from: 'alldapps' });
+                if (action.action_type !== 'Bridge') {
+                  open({ dapp: { id: action.dapp_id }, from: 'alldapps' });
+                }
               }}
             >
               <div className="itemDiv">
