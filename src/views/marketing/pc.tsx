@@ -156,7 +156,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     const res = await get(`${QUEST_PATH}/api/invite/get-address-code/${address}`);
 
     if ((res.code as number) !== 0) return;
-    return res.data;
+    return res.data.filter((item: any) => !item.is_used);
   }
 
   async function fetchTotalRewards() {
