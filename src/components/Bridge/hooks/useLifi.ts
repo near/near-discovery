@@ -151,6 +151,19 @@ async function getRoute(
 
   const res = await lifi.getRoutes(routeRequest)
 
+  // const qr: QuoteRequest = {
+  //   fromChain: chain.chainId,
+  //   fromAmount: _amount.toString(),
+  //   fromToken: token.address ? token.address : '',
+  //   fromAddress: account as string,
+  //   toChain: targetChain.chainId,
+  //   toToken: targetToken.address ? targetToken.address : '',
+  //   toAddress: destination ? destination : account,
+  // }
+
+  // const v = await lifi.getQuote(qr)
+  // console.log(v)
+
   if (!res.routes || res.routes.length === 0) {
     return
   }
@@ -166,6 +179,28 @@ export function computeDuration(route:Route): string {
 
   return Math.ceil(duration / 60) + ' min'
 }
+
+// export function postToBack(route: Route, addAction: any, ) {
+//   try {
+//     const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
+//     const _bridgeTxs = JSON.parse(bridgeTxs);
+//     addAction({
+//       type: 'Bridge',
+//       fromChainId: route.fromChainId,
+//       toChainId: route.toChainId,
+//       token: route.fromToken.name,
+//       amount: route.fromAmount,
+//       template: 'Lifi Bridge',
+//       add: false,
+//       status: 1,
+//       transactionHash: '',
+//     });
+    
+//   } catch(e) {
+//     console.log(e)
+//     onFail && onFail(e)
+//   }
+// }
 
 export default function useLifi() {
   const { account, provider } = useAccount();
@@ -214,60 +249,81 @@ export default function useLifi() {
   }) => {
     if (!provider) return;
     const signer = await provider.getSigner(account);
+
     if (route) {
-      const tx = await lifi.executeRoute(signer, route);
-      console.log(tx)
-      try {
-        const process = tx.steps[tx.steps.length - 1].execution?.process
-        if (!process) {
-          return
-        }
+      const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
+      const _bridgeTxs = JSON.parse(bridgeTxs);
+      let hasActionAdded = false
+      const abc = await lifi.executeRoute(signer, route, {
+        updateRouteHook: (updatedRoute: Route) => { 
+          try {
+            console.log(updatedRoute)
 
-        const outChainProcess = process.filter(item => item.type === 'CROSS_CHAIN')[0]
+            const process = updatedRoute.steps[updatedRoute.steps.length - 1].execution?.process
+            if (!process) {
+              return
+            }
 
-        let txHash = outChainProcess.txHash
-        const txLink = outChainProcess.txLink
-        const start = process[0].startedAt
-        const end = process[process.length - 1].doneAt as number
-        const duration =  Math.ceil((end - start) / 1000 / 60)
-        txHash = txHash || ''
-        onSuccess(txHash);
-        if (!txHash) {
-          return
-        }
-     
-        const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
-        const _bridgeTxs = JSON.parse(bridgeTxs);
-        addAction({
-          type: 'Bridge',
-          fromChainId: chain.chainId,
-          toChainId: targetChain.chainId,
-          token,
-          amount,
-          template: 'Lifi Bridge',
-          add: false,
-          status: 1,
-          transactionHash: txHash,
-        });
-        _bridgeTxs[txHash] = {
-          amount,
-          inputChain: chain.chainName,
-          outputChain: targetChain.chainName,
-          symbol: token.symbol,
-          tx: txHash,
-          txLink,
-          time: Date.now(),
-          scan: chain.blockExplorers,
-          isStargate: false,
-          duration: duration + ' min',
-          status: 'success',
-          fromTokenUrl: tx.fromToken.logoURI,
-        };
-        localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
-      } catch(e) {
-        console.log(e)
-        onFail && onFail(e)
-      }
+            const time = updatedRoute.steps[updatedRoute.steps.length - 1].estimate.executionDuration
+    
+            const outChainProcess = process.filter(item => item.type === 'CROSS_CHAIN')[0]
+    
+            if (!outChainProcess) {
+              return
+            }
+
+            let txHash = outChainProcess.txHash
+            if (!txHash) {
+              return
+            }
+
+            const txLink = outChainProcess.txLink
+            const start = process[0].startedAt
+            const end = process[process.length - 1].doneAt
+            const duration =  Math.ceil(time / 60)
+            txHash = txHash || ''
+            onSuccess(txHash);
+            if (!txHash) {
+              return
+            }
+            _bridgeTxs[txHash] = {
+              amount,
+              inputChain: chain.chainName,
+              outputChain: targetChain.chainName,
+              symbol: token.symbol,
+              tx: txHash,
+              txLink,
+              time: Date.now(),
+              scan: chain.blockExplorers,
+              isStargate: false,
+              duration: duration + ' min',
+              status: end ? 'success' : 'processing',
+              fromTokenUrl: updatedRoute.fromToken.logoURI,
+            };
+            localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
+            
+            if (!hasActionAdded) {
+              addAction({
+                type: 'Bridge',
+                fromChainId: chain.chainId,
+                toChainId: targetChain.chainId,
+                token,
+                amount,
+                template: 'Lifi Bridge',
+                add: false,
+                status: 1,
+                transactionHash: txHash,
+              });
+              hasActionAdded = true
+            }
+            
+            
+          } catch(e) {
+            console.log(e)
+            onFail && onFail(e)
+          }
+        },
+      });
     }
   };
 

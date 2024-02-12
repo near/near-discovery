@@ -68,6 +68,7 @@ export default function SocialIndex({
                         onAction={actions[item.category]}
                         mainText={item.name}
                         source={item.source}
+                        value={item}
                         getQuestGroupList={getQuestGroupList}
                         getSumaryDetail={getSumaryDetail}
                     />

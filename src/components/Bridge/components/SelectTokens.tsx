@@ -32,9 +32,9 @@ const SelectTokens = ({ token, disabled, onClick }: { token?: Token; disabled?: 
       }}
     >
       <SelectLabel label="Token" />
-      <SelectItem roundImg={true} item={token} />
+      <SelectItem key={token?.address} roundImg={true} item={token} />
     </Container>
   );
 };
 
-export default memo(SelectTokens);
+export default SelectTokens;

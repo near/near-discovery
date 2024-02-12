@@ -31,9 +31,9 @@ const SelectChains = ({ chain, disabled, onClick }: { chain?: Chain; disabled?: 
       }}
     >
       <SelectLabel label="Network" />
-      <SelectItem item={chain ? { icon: chain.icon, symbol: chain.chainName } : undefined} />
+      <SelectItem key={chain?.chainId} item={chain ? { icon: chain.icon, symbol: chain.chainName } : undefined} />
     </Container>
   );
 };
 
-export default memo(SelectChains);
+export default SelectChains;

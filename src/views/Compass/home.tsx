@@ -266,7 +266,7 @@ function Compass() {
             }
         </IconsWapper>
 
-        <Project list={qList} currentChainIndex={chainIndex} />
+        <Project list={qList} currentChainIndex={chainIndex} getQuestGroupList={getQuestGroupList} getSumaryDetail={getDetail}/>
 
         <SubJACKTitle className='m180' src={subImg.src} />
         <MiniTitle>Get more spins by sharing and following</MiniTitle>
