@@ -48,6 +48,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   const [basicQuests, setBasicQuests] = useState<any>([]);
 
   const [reward, setReward] = useState(0);
+  const [rank, setRank] = useState(0);
 
   const [fresh, setFresh] = useState(0);
   const [updater, setUpdater] = useState(0);
@@ -176,6 +177,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     setSpin1(false);
     setSpin2([false, false, false, false]);
     setTotalReward(res.data?.reward || 0);
+    setRank(res.data?.rank || 0);
   }
 
   async function checkQuest(id: number) {
@@ -510,6 +512,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
             userLoading,
             userInfo,
             totalReward,
+            myRank: rank,
             handleRefresh: () => {
               handleRefresh();
               setUpdater(Date.now());
