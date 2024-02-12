@@ -379,14 +379,14 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                   </h3>
                   <div className="minor-paragraph-btn">
                     <Link href={`/network/${IdToPath[child.id]}`} data-bp="10012-002" className="paragraph-btn-item">
-                      View Detail
+                      Detail
                     </Link>
                     <Link href={`/all-in-one/${path}`} data-bp="10012-003" className="paragraph-btn-item">
-                      Shortcut
+                      Navigation
                     </Link>
                     {child.deepdive && (
                       <Link href={`/onboarding/${path}`} data-bp="10012-004" className="paragraph-btn-item">
-                        Deep Dive
+                        Onboarding
                       </Link>
                     )}
                   </div>

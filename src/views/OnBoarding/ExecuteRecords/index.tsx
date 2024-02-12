@@ -506,21 +506,6 @@ const switchIcon = 'https://ipfs.near.social/ipfs/bafkreigkkvqns7dxrbopcf22gvkpi
 
 const closeIcon = 'https://ipfs.near.social/ipfs/bafkreiay565opvpvtxexcxkfo7cif3ecn4znoarnutcvhjggiczjpuvbbq';
 
-const template_icons = {
-  ZkEvm: 'https://ipfs.near.social/ipfs/bafkreiftqxncp4pt36z5mcfzizbkccoufksmz2f4zhnproxv4krfb5qmsm',
-  'ZkEvm-bridge': 'https://ipfs.near.social/ipfs/bafkreigu2kdqzug45li74xcdhokazx7gv2yopml6x5bwrnjrkx2qsjrsni',
-  AAVE: 'https://ipfs.near.social/ipfs/bafkreibveumzusupe5rvk4nffzdipquvatfg5lagg7c6jaor2b3hgigw5e',
-  'native bridge': 'https://ipfs.near.social/ipfs/bafkreigu2kdqzug45li74xcdhokazx7gv2yopml6x5bwrnjrkx2qsjrsni',
-  zkEVM: 'https://ipfs.near.social/ipfs/bafkreiftqxncp4pt36z5mcfzizbkccoufksmz2f4zhnproxv4krfb5qmsm',
-  'zkEVM-bridge': 'https://ipfs.near.social/ipfs/bafkreigu2kdqzug45li74xcdhokazx7gv2yopml6x5bwrnjrkx2qsjrsni',
-  'Pancake Swap': '	https://ipfs.near.social/ipfs/bafkreihxgii2nb7l3vcewru2zldbmjclgbu5ack3obalprqbsx5bj5ufom',
-  QuickSwap: 'https://ipfs.near.social/ipfs/bafkreien6yavqvx5ots2i26ooakiwux77osuzz4fc6qxexvvd7dsoc6274',
-  Balancer: 'https://ipfs.near.social/ipfs/bafkreihimomheiwsinao75pw5zxrt36i77fyq72jmpg4irubqjlk6txb6q',
-  '0vix Lending': 'https://ipfs.near.social/ipfs/bafkreigyodedyhiqmstq3g5edcqw25yyari4y3rcbsnqtxldb2zb2vpah4',
-  Gamma: 'https://ipfs.near.social/ipfs/bafkreial4i3eb5uuxkhecn7nwos76km3qvb7jzxmups57rkxizr5i7dyaa',
-
-  '0vix': 'https://ipfs.near.social/ipfs/bafkreigyodedyhiqmstq3g5edcqw25yyari4y3rcbsnqtxldb2zb2vpah4',
-};
 const select_action_list = [
   { id: '', name: 'All Actions' },
   { id: 'Swap', name: 'Swap' },
@@ -919,12 +904,9 @@ const ExecuteRecords = ({ chain }: any) => {
                   </div>
                 </div>
                 <div className="recordList-img">
-                  <img
-                    width="16"
-                    height="16"
-                    src={template_icons[record.template as keyof typeof template_icons]}
-                    style={{ marginRight: '6px' }}
-                  ></img>
+                  {record.dapp_logo && (
+                    <img width="16" height="16" src={record.dapp_logo} style={{ marginRight: '6px' }} />
+                  )}
                 </div>
               </div>
             );

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import useQuestStatus from '../../hooks/useQuestStatus';
 import Spin from '../Spin'
 import Fresh from '../Fresh';
+import Complete from '../Complate';
 
 import maskImg from '../../img/mask.svg'
 
@@ -72,12 +73,16 @@ const Amount = styled.div`
 interface Props {
     value: any;
     currentChainIndex: number;
+    getQuestGroupList: () => void;
+    getSumaryDetail: () => void;
 }
 
 const chainIndexes = ['linea', 'base', 'manta', 'scroll', 'zksync']
 
-export default function Panel({ value, currentChainIndex }: Props) {
+export default function Panel({ value, currentChainIndex, getQuestGroupList, getSumaryDetail }: Props) {
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(value.id)
+
+    const showComplete = value.times === 1 && value.spins === value.total_spins
 
     return <PanelWapper onClick={() => {
         window.open(`/all-in-one/${chainIndexes[currentChainIndex]}`)
@@ -96,9 +101,16 @@ export default function Panel({ value, currentChainIndex }: Props) {
                 <Spin renderChildren={() =>
                     <SpinText>+ {value.total_spins}{value.times === 0 ? '' : '/' + (value.times * value.spins)} SPIN</SpinText>} />
             </SpinWapper>
-            <Fresh onCheck={checkQuestStatus} isLoading={isQuestSuccess} />
+
+            {
+                showComplete ? <Complete/> : <Fresh onCheck={async () => {
+                    await checkQuestStatus()
+                    getQuestGroupList()
+                    getSumaryDetail()
+                }} isLoading={isQuestSuccess} />
+            }
         </FreshWapper>
 
-        <Amount>Participate: {value.times > 0 ? (value.total_spins / value.times) : '0'}</Amount>
+        <Amount>Participate: {value.times > 0 ? (value.total_spins / value.spins) : '0'}</Amount>
     </PanelWapper>
 }

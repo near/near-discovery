@@ -1,8 +1,5 @@
-import { memo } from 'react';
-
+import { memo, useState } from 'react';
 import QuestItem from '@/views/Quest/components/QuestItem';
-
-import useRecommendList from '../../hooks/useRecommendList';
 import {
   StyledButtons,
   StyledContainer,
@@ -10,19 +7,21 @@ import {
   StyledLeftButton,
   StyledRecommendList,
   StyledTitle,
+  StyledRecommendListWrapper,
 } from './styles';
 
-const Recommends = ({ campaignId }: { campaignId: string }) => {
-  const { loading, recommends, handlePageChange, page, maxPage } = useRecommendList(campaignId);
+const Recommends = ({ recommends }: { recommends: any }) => {
+  const [current, setCurrent] = useState(0);
   return (
     <StyledContainer>
       <StyledHeader>
         <StyledTitle>Recommend Quest</StyledTitle>
         <StyledButtons>
           <StyledLeftButton
-            $disabled={page === 1}
+            $disabled={current === 0}
             onClick={() => {
-              page > 1 && handlePageChange(-1);
+              if (current <= 0) return;
+              setCurrent((prev) => prev - 1);
             }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
@@ -31,9 +30,12 @@ const Recommends = ({ campaignId }: { campaignId: string }) => {
             </svg>
           </StyledLeftButton>
           <StyledLeftButton
-            $disabled={page === maxPage}
+            $disabled={current * 3 > Math.ceil(recommends.length / 3)}
             onClick={() => {
-              page < maxPage && handlePageChange(1);
+              if (current * 3 > Math.ceil(recommends.length / 3)) {
+                return;
+              }
+              setCurrent((prev) => prev + 1);
             }}
           >
             <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 38 38" fill="none">
@@ -43,11 +45,17 @@ const Recommends = ({ campaignId }: { campaignId: string }) => {
           </StyledLeftButton>
         </StyledButtons>
       </StyledHeader>
-      <StyledRecommendList>
-        {recommends.map((recommend: any) => (
-          <QuestItem quest={recommend} key={recommend.id} />
-        ))}
-      </StyledRecommendList>
+      <StyledRecommendListWrapper>
+        <StyledRecommendList
+          style={{
+            transform: `translateX(-${current * 3 * 420}px)`,
+          }}
+        >
+          {recommends.map((recommend: any) => (
+            <QuestItem quest={recommend} key={recommend.id} />
+          ))}
+        </StyledRecommendList>
+      </StyledRecommendListWrapper>
     </StyledContainer>
   );
 };

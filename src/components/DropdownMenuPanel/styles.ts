@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const MenuContainer = styled.div`
+export const MenuContainer = styled(motion.div)`
   z-index: 100;
   position: absolute;
   left: 0;
@@ -10,30 +11,7 @@ export const MenuContainer = styled.div`
   padding: 40px 0px;
   color: #ffffff;
   font-family: Gantari;
-  animation: slideUp 0.5s ease forwards;
-  &.show {
-    animation: slideDown 0.5s ease forwards;
-  }
-  @keyframes slideDown {
-    0% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    100% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  @keyframes slideUp {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    100% {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-  }
+
   .explore-link {
     color: #ffffff;
     text-decoration: none;
@@ -46,7 +24,7 @@ export const MenuContent = styled.div`
   margin: 0 auto;
 `;
 
-export const MaskLayer = styled.div`
+export const MaskLayer = styled(motion.div)`
   position: fixed;
   top: 80px;
   right: 0;

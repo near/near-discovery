@@ -51,11 +51,14 @@ export default function useTwitterBind({ id }: { id: string }) {
       return
     }
 
-    queryInfo()
-    success({
-      title: 'Success',
-      text: result.msg,
-    })
+    setTimeout(() => {
+      window.location.href = params.redirect_uri
+    }, 200)
+    // queryInfo()
+    // success({
+    //   title: 'Success',
+    //   text: result.msg,
+    // })
 
   }, [code, id])
 

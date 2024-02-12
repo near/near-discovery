@@ -46,6 +46,10 @@ export default function useTokenBalance({ tokensByChain }: { tokensByChain?: Tok
     }
   }
 
+  useEffect(() => {
+    getBalance()
+  }, [tokensByChain?.address])
+
 
   return { loading, balance, getBalance };
 }

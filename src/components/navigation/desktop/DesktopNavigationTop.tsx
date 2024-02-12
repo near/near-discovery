@@ -233,7 +233,7 @@ export const DesktopNavigationTop = () => {
         )}
       </div>
 
-      {showMenuContent && <DropdownMenuPanel show={showMenuContent} setShow={setShowMenuContent} />}
+      <DropdownMenuPanel show={showMenuContent} setShow={setShowMenuContent} />
     </Container>
   );
 };

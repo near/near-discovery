@@ -370,6 +370,7 @@ const networks = {
     aaveProtocolDataProviderAddress: '0xd2abC5d7841d49C40Fd35A1Ec832ee1daCC8D339',
     lendingPoolAddress: '0x871AfF0013bE6218B61b28b274a6F53DB131795F',
     wethGateway: '0x9546F673eF71Ff666ae66d01Fd6E7C6Dae5a9995',
+    defaultMarket: [linea['usdc'].address],
     markets: {
       [linea['usdc'].address]: {
         decimals: 6,

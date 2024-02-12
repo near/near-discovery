@@ -79,4 +79,4 @@ const Select = ({ item, roundImg = false }: { item?: Item, roundImg?: boolean })
   );
 };
 
-export default memo(Select);
+export default Select;
