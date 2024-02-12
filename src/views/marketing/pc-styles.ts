@@ -12,11 +12,10 @@ export const Banner = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 30px;
-}
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
 `;
 export const DapImg = styled.img`
   width: 278px;
@@ -192,6 +191,12 @@ export const InviteBox = styled.div`
   border: 1px solid #373a53;
   padding: 28px 26px;
   background: #2c2e3e;
+  &.blur {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
 `;
 
 export const InviteHead = styled.div`
@@ -244,6 +249,12 @@ export const CardBox = styled.div`
   grid-template-columns: 607px 607px;
   grid-template-rows: 177px 177px;
   gap: 30px;
+  &.blur {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
 `;
 export const Card = styled.div`
   /* width: 607px;
