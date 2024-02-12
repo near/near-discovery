@@ -168,6 +168,11 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
     setTotalReward(res.data?.reward || 0);
   }
 
+  const getInviteList = async () => {
+    const inviteData = await fetchInviteList();
+    setInviteNum(inviteData?.data?.length);
+    setInviteReward(inviteData?.invite_reward);
+  };
   const handleFreshInviteList = async () => {
     setSpin3(true);
     const inviteData = await fetchInviteList();
@@ -245,6 +250,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   useEffect(() => {
     if (isBlur) return;
     fetchTotalRewards();
+    getInviteList();
   }, [updater, isBlur]);
 
   const renderButton = () => {
