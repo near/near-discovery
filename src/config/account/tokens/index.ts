@@ -13,6 +13,8 @@ import { optimismTokens } from './optimism';
 import { polygonTokens } from './polygon';
 import { polygonZkevmTokens } from './polygonZkevm';
 import { zkSyncTokens } from './zkSync';
+import { scrollTokens } from './scroll';
+import { mantaTokens } from './manta';
 
 export default {
   42161: arbitrumTokens,
@@ -28,4 +30,6 @@ export default {
   1101: polygonZkevmTokens,
   324: zkSyncTokens,
   5000: mantleTokens,
+  534352: scrollTokens,
+  169: mantaTokens,
 } as { [key: number]: { [key: string]: Token } };
