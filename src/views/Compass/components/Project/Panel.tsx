@@ -125,6 +125,6 @@ export default function Panel({ value, currentChainIndex, getQuestGroupList, get
             }
         </FreshWapper>
 
-        <Amount>Participate: {value.times > 0 ? (value.total_spins / value.spins) : '0'}</Amount>
+        <Amount>Participate: {value.total_spins && value.spins > 0 ? (value.total_spins / value.spins) : '0'}</Amount>
     </PanelWapper>
 }
