@@ -7,13 +7,19 @@ import Complete from '../Complate';
 
 import maskImg from '../../img/mask.svg'
 
-const PanelWapper = styled.div`
+const PanelWapper = styled.div<{ color: string }>`
     width: 25%;
     border-radius: 20px;
     padding: 20px 20px 10px;
     text-align: center;
     padding: 38px 0 24px;
+    cursor: pointer;
     background: rgba(33, 35, 42, 0.9) url(${maskImg.src}) right bottom no-repeat;
+    &:hover {
+        background: 
+        radial-gradient(at 50% -30%, rgba(33, 35, 42, 0), ${({ color }) => color} 10%, rgba(33, 35, 42, 0) 100%),
+        rgba(33, 35, 42, 0.9) url(${maskImg.src}) right bottom no-repeat;
+    }
 `
 
 const Title = styled.div`
@@ -79,12 +85,20 @@ interface Props {
 
 const chainIndexes = ['linea', 'base', 'manta', 'scroll', 'zksync']
 
+const colors = [
+    'rgb(27, 93, 107, .2)', 
+    'rgb(22, 36, 108, .2)', 
+    'rgb(255, 255, 255, .05)', 
+    'rgb(255, 238, 218, .05)', 
+    'rgb(41, 104, 255, .05)'
+]
+
 export default function Panel({ value, currentChainIndex, getQuestGroupList, getSumaryDetail }: Props) {
     const { isQuestSuccess, checkQuestStatus } = useQuestStatus(value.id)
 
     const showComplete = value.times === 1 && value.spins === value.total_spins
 
-    return <PanelWapper onClick={() => {
+    return <PanelWapper color={colors[currentChainIndex]} onClick={() => {
         window.open(`/all-in-one/${chainIndexes[currentChainIndex]}`)
     }}>
         <Title>{value.name}</Title>

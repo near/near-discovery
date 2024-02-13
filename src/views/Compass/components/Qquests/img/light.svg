@@ -1,0 +1,21 @@
+<svg width="290" height="258" viewBox="0 0 290 258" fill="none" xmlns="http://www.w3.org/2000/svg">
+<mask id="mask0_5271_17644" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="290" height="258">
+<rect width="290" height="258" rx="20" fill="black"/>
+</mask>
+<g mask="url(#mask0_5271_17644)">
+<g opacity="0.5" filter="url(#filter0_f_5271_17644)">
+<ellipse cx="144.533" cy="3.93914" rx="111.79" ry="65.9771" fill="url(#paint0_radial_5271_17644)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_f_5271_17644" x="-67.2578" y="-162.038" width="423.581" height="331.954" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_5271_17644"/>
+</filter>
+<radialGradient id="paint0_radial_5271_17644" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(144.533 3.93914) rotate(90) scale(65.9771 111.79)">
+<stop stop-color="#0038FF"/>
+<stop offset="1" stop-color="#0038FF" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
