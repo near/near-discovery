@@ -7,6 +7,7 @@ import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
 import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
+import { setupMintbaseWallet } from '@near-wallet-selector/mintbase-wallet';
 import { setupNearMobileWallet } from '@near-wallet-selector/near-mobile-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
 import { setupNightly } from '@near-wallet-selector/nightly';
@@ -73,6 +74,7 @@ export default function VmInitializer() {
             setupMyNearWallet(),
             setupSender(),
             setupHereWallet(),
+            setupMintbaseWallet(),
             setupMeteorWallet(),
             setupNeth({
               gas: '300000000000000',
