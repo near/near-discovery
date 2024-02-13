@@ -31,7 +31,7 @@ export function formatTitle(record: any) {
     );
   }
 
-  if (record.action_type === 'Liquidity') {
+  if (['Liquidity', 'Deposit'].includes(record.action_type)) {
     return (
       <>
         Deposit <span style={{ color: '#979abe' }}>{record.action_amount}</span> {tokens[0]}-{tokens[1]}

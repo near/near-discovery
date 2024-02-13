@@ -564,8 +564,8 @@ const ExecuteRecords = ({ chain }: any) => {
       fetchRecordList();
     }
   }, [account, currentPage, pageSize, searchAction, searchTemplate, searchStatus]);
-  function getTime(timestamp: number) {
-    const date = new Date((timestamp + 8 * 60 * 60) * 1000);
+  function getTime(timeStr: string) {
+    const date = new Date(timeStr);
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
@@ -859,7 +859,7 @@ const ExecuteRecords = ({ chain }: any) => {
 
                     <td>{!record.gas ? '-' : record.gas + ' ETH'}</td>
 
-                    <td>{getTime(record.timestamp)}</td>
+                    <td>{getTime(record.create_time)}</td>
 
                     <td>{formatTx(record.tx_id)}</td>
                   </tr>
@@ -900,7 +900,7 @@ const ExecuteRecords = ({ chain }: any) => {
                   <p>{record.action_title}</p>
                   <div className="recordList-text-btn">
                     <span className="text-btn-icon">{record.action_type}</span>
-                    <span>{getTime(record.timestamp)}</span>
+                    <span>{getTime(record.create_time)}</span>
                   </div>
                 </div>
                 <div className="recordList-img">
