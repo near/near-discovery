@@ -56,7 +56,7 @@ function RuleModal({ show, onClose } : { show: boolean; onClose: () => void }) {
             <Context>The special prize is 5 chain icons (excluding DapDap logo) ,awarding 1000PTS</Context>
             <Img src={r4Img.src} style={{ width: 300}}/>
             <SubTitle>How to get more spins?</SubTitle>
-            <Context>You can get a chance to win a prize by browsing the DapDap function pages, doing simple on-chain operations to experience DapDap's smooth experience, or sharing by social accounts.</Context>
+            <Context>{"You can get a chance to win a prize by browsing the DapDap function pages, doing simple on-chain operations to experience DapDap's smooth experience, or sharing by social accounts."}</Context>
         </>
     }} />
 }
