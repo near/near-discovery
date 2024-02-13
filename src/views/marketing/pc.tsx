@@ -19,6 +19,7 @@ import * as Styles from './pc-styles';
 interface IProps {
   from: 'bg' | 'bgUser';
   inviteCode?: string;
+  platform: 'bitget' | 'coin68';
 }
 
 const questImgs = {
@@ -29,9 +30,9 @@ const questImgs = {
 };
 
 // 老用户 全部模糊
-const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
+const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   console.log('from:', from, 'inviteCode:', inviteCode);
-  const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
+  const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard(platform);
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
@@ -74,6 +75,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   } = useAuthBind({
     onSuccess: () => {
       // onSuccess(1);
+      setUpdater(Date.now());
     },
     redirect_uri: `${window.location.origin}${window.location.pathname}`,
   });
@@ -102,14 +104,14 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   }, [wallet]);
 
   async function checkAccount() {
-    const res = await get(`${QUEST_PATH}/api/activity/check_account?category=${'bitget'}`);
+    const res = await get(`${QUEST_PATH}/api/activity/check_account?category=${platform}`);
     if ((res.code as number) !== 0) return;
     const status = res.data.is_activity ? 'new' : 'old';
     setUserStatus(status);
   }
 
   async function checkAddressWithActive() {
-    const res: any = await getWithoutActive(`${QUEST_PATH}/api/invite/check-address/${address}`, 'bitget');
+    const res: any = await getWithoutActive(`${QUEST_PATH}/api/invite/check-address/${address}`, platform);
 
     if ((res.code as number) !== 0) return;
 
@@ -144,7 +146,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
   }
 
   async function fetchQuestList() {
-    const res = await get(`${QUEST_PATH}/api/activity/quest_list?category=${'bitget'}`);
+    const res = await get(`${QUEST_PATH}/api/activity/quest_list?category=${platform}`);
 
     setSpin1(false);
     setSpin2([false, false, false, false]);
@@ -172,7 +174,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
 
   async function fetchTotalRewards() {
     // 总积分
-    const res = await get(`${QUEST_PATH}/api/activity/reward?category=bitget`);
+    const res = await get(`${QUEST_PATH}/api/activity/reward?category=${platform}`);
     if ((res.code as number) !== 0) return;
     setSpin1(false);
     setSpin2([false, false, false, false]);
@@ -350,14 +352,18 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
 
   return (
     <Styles.Container>
-      <Styles.Banner>
+      <Styles.Banner className={`${platform === 'bitget' ? 'bitget' : 'coin68'}`}>
         <Styles.Logo>
           <Styles.DapImg src="/images/marketing/dap-logo.svg" />
           <Styles.XImg src="/images/marketing/X.svg" />
-          <Styles.BgImg src="/images/marketing/bg-logo.svg" />
+          {platform === 'bitget' ? (
+            <Styles.BgImg src="/images/marketing/bg-logo.svg" />
+          ) : (
+            <Styles.BgImg src="/images/marketing/coin68-logo.svg" />
+          )}
         </Styles.Logo>
         <Styles.Intro>Ready to Claim Your Exclusive Rewards?Just complete a few simple quests!</Styles.Intro>
-        <Styles.AllRewards>
+        <Styles.AllRewards className={`${platform === 'bitget' ? 'bitget' : 'coin68'}`}>
           <Styles.AllRewardsLeft>
             <Styles.AllRewardsTitle>Your PTS</Styles.AllRewardsTitle>
             <Styles.AllRewardsPoints>
@@ -476,11 +482,11 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
                   ? codeList.map((item: any, index) => (
                       <Styles.List key={index}>
                         <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
-                        {`${prefix}/bitget/${item?.code}`}
+                        {`${prefix}/${platform}/${item?.code}`}
                         <Styles.CopyIcon
                           src="/images/marketing/copy.svg"
                           onClick={() => {
-                            copy(`${prefix}/bitget/${item?.code}`);
+                            copy(`${prefix}/${platform}/${item?.code}`);
                           }}
                         ></Styles.CopyIcon>
                       </Styles.List>
@@ -492,7 +498,9 @@ const LandingPC: FC<IProps> = ({ from, inviteCode }) => {
                 <div>
                   <Styles.PromptsTitle>Prompts</Styles.PromptsTitle>
                   <Styles.PromptsTxt>
-                    Please open the invitation link within PC or Bitget Wallet browser for an enhanced experience.
+                    {`Please open the invitation link within PC or ${
+                      platform === 'bitget' ? 'Bitget' : 'Coin68'
+                    } Wallet browser for an enhanced experience.`}
                   </Styles.PromptsTxt>
                 </div>
               </Styles.InviteBodyRight>

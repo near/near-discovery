@@ -65,8 +65,6 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
     return ethTokens[0]
   }, [chainId])
 
-  
-
   const nativeToken: Token = {
     chainId: fromChainId,
     address: toToken.address,
@@ -75,8 +73,6 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
     icon: '',
     decimals: toToken.decimals,
   }
-
-  console.log(nativeToken)
 
   const { balance, loading: balanceLoading, getBalance } = useTokenBalance({
     tokensByChain: nativeToken
@@ -143,8 +139,6 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
       return 
     }
 
-    console.log('routeRef: ', routeRef)
-
     if (!routeRef.current) {
       btnStatus.current = 4
       setBtnText('No route')
@@ -184,6 +178,7 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
         amount: new Big(amount).toString(),
         destination: account,
         route: routeRef.current as Route,
+        actionName: 'quick_onboarding',
         onSuccess: (tx) => {
           success({
             title: 'Transaction successed',
@@ -200,9 +195,10 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
         title: err.name ? err.name : 'Transaction failed',
         text: formatException(err.message),
       })
-
-      handleQuote()
     }
+
+    setAmount('0')
+    setGasCostUSD('0')
     
     btnStatus.current = 0
     setLoading(false)

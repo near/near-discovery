@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import styled from 'styled-components';
 
-
 import Step from '../Step'
 import Panel from './Panel'
 import titleNameImg from '../../img/getPins.svg'
@@ -47,7 +46,7 @@ export default function Qquests({ list = [], getQuestGroupList, getSumaryDetail 
         <SlideWapper>
             <PanelTitle>
                 <img src={titleNameImg.src} />
-                <TitleDesc>Complete Quests to win more spins</TitleDesc>
+                <TitleDesc>Complete Quests to get more spins</TitleDesc>
             </PanelTitle>
             {
                 list.map(item => {

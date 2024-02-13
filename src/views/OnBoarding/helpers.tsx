@@ -7,6 +7,7 @@ export function formatTitle(record: any) {
   } catch (e) {
     tokens = eval(record.action_tokens);
   }
+  console.log('====tokens', tokens)
 
   if (record.action_type === 'Swap') {
     return (

@@ -16,9 +16,10 @@ import * as Styles from './styles';
 interface IProps {
   from: 'bg' | 'bgUser';
   inviteCode?: string;
+  platform: 'bitget' | 'coin68';
 }
 
-const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
+const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
   console.log('from:', from, 'inviteCode:', inviteCode);
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
@@ -64,14 +65,14 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
   }, [wallet]);
 
   async function checkAccount() {
-    const res = await get(`${QUEST_PATH}/api/activity/check_account?category=${'bitget'}`);
+    const res = await get(`${QUEST_PATH}/api/activity/check_account?category=${platform}`);
     if ((res.code as number) !== 0) return;
     const status = res.data.is_activity ? 'new' : 'old';
     setUserStatus(status);
   }
 
   async function checkAddressWithActive() {
-    const res: any = await getWithoutActive(`${QUEST_PATH}/api/invite/check-address/${address}`, 'bitget');
+    const res: any = await getWithoutActive(`${QUEST_PATH}/api/invite/check-address/${address}`, platform);
 
     if ((res.code as number) !== 0) return;
 
@@ -106,7 +107,7 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
   }
 
   async function fetchQuestList() {
-    const res = await get(`${QUEST_PATH}/api/activity/quest_list?category=${'bitget'}`);
+    const res = await get(`${QUEST_PATH}/api/activity/quest_list?category=${platform}`);
     setFreshAnimate({});
     if ((res.code as number) !== 0) return;
     const { advanced_quests, basic_quests } = res.data;
@@ -192,7 +193,12 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode }) => {
         <Styles.Logo>
           <Styles.Img src="/images/marketing/dap-logo.svg" />
           <Styles.Img src="/images/marketing/X.svg" />
-          <Styles.Img src="/images/marketing/bg-logo.svg" />
+
+          {platform === 'bitget' ? (
+            <Styles.Img src="/images/marketing/bg-logo.svg" />
+          ) : (
+            <Styles.Img src="/images/marketing/coin68-logo.svg" />
+          )}
         </Styles.Logo>
         <Styles.Intro>Ready to Claim Your Exclusive Rewards?</Styles.Intro>
         <Styles.Intro>Just complete a few simple quests!</Styles.Intro>

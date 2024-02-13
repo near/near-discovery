@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
-export default function useLeaderboard() {
+export default function useLeaderboard(platform: 'bitget' | 'coin68') {
   const [list, setList] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -17,7 +17,7 @@ export default function useLeaderboard() {
       setLoading(true);
       try {
         const result = await get(`${QUEST_PATH}/api/activity/leaderboard?category
-=bitget&page=${_page || page}&page_size=10`);
+=${platform}&page=${_page || page}&page_size=10`);
         const data = result.data.data || [];
         setList(data);
         setLoading(false);

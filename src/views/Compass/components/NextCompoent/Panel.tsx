@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import LineImg from './img/line.svg'
-import g2Img from '../../img/g2.svg'
+import g2Img from '../../img/g1.svg'
 import compassImg from '../../img/compass.svg'
 import winImg from '../../img/win.svg'
 
@@ -57,14 +57,14 @@ const ComingSoon = styled.div`
 
 const CompassIcon = styled.img`
     position: absolute;
-    right: 30px;
+    right: 25px;
     top: -60px;
 `
 
 const WinIcon = styled.img`
     position: absolute;
-    right: -30px;
-    top: -30px;
+    right: -55px;
+    top: -20px;
 `
 
 export default function Panel() {

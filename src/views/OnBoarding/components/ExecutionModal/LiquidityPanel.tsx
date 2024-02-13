@@ -105,8 +105,6 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
     if (currentDapp.name === 'Gamma') fetchAllData();
   }, [currentDapp]);
 
-
-
   return (
     <StyledContent>
       <StyledPanel>
@@ -177,7 +175,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
           </StyledValue>
         </StyledItem>
       </StyledPanel>
-      {allData && (
+      {/* {allData && (
         <VmComponent
           src="bluebiu.near/widget/Liquidity.Data.Gamma"
           props={{
@@ -193,7 +191,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
             },
           }}
         />
-      )}
+      )} */}
       {/* <StyledButton>Deposit</StyledButton> */}
 
       {network.chainId !== Number(connectedChain?.id) ? (
@@ -213,7 +211,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
             'Switch Network'
           )}
         </StyledButton>
-      ) : (
+      ) : allData && (
         <VmComponent
           src="bluebiu.near/widget/Liquidity.Gamma.DialogButton"
           props={{

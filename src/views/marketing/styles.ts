@@ -21,7 +21,9 @@ export const Logo = styled.div`
   justify-content: center;
   margin-bottom: 10px;
 `;
-export const Img = styled.img``;
+export const Img = styled.img`
+  max-width: 120px;
+`;
 
 export const Intro = styled.div`
   font-size: 14px;
