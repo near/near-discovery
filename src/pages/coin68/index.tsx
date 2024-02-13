@@ -6,9 +6,9 @@ import LandingMobile from '@/views/marketing/mobile';
 import LandingPC from '@/views/marketing/pc';
 
 const LandingPage: NextPageWithLayout = () => {
-  // from bitget
+  // from coin68
 
-  return isMobile ? <LandingMobile from="bg" platform="bitget" /> : <LandingPC from="bg" platform="bitget" />;
+  return isMobile ? <LandingMobile platform="coin68" from="bg" /> : <LandingPC platform="coin68" from="bg" />;
 };
 
 LandingPage.getLayout = isMobile ? useMarketingLayout : useDefaultLayout;

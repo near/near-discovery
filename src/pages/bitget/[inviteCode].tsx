@@ -14,9 +14,9 @@ const LandingPage: NextPageWithLayout = () => {
   const inviteCode = router.query.inviteCode;
 
   return isMobile ? (
-    <LandingMobile from="bgUser" inviteCode={inviteCode as string} />
+    <LandingMobile platform="bitget" from="bgUser" inviteCode={inviteCode as string} />
   ) : (
-    <LandingPC from="bgUser" inviteCode={inviteCode as string} />
+    <LandingPC platform="bitget" from="bgUser" inviteCode={inviteCode as string} />
   );
 };
 

@@ -8,7 +8,25 @@ export const Container = styled.div`
 export const Banner = styled.div`
   height: 300px;
   margin-bottom: 60px;
-  background-image: url('/images/marketing/bg-pc.png');
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 30px;
+  &.bitget {
+    background-image: url('/images/marketing/bg-pc.png');
+  }
+  &.coin68 {
+    background-image: url('/images/marketing/coin68-pc.png');
+  }
+`;
+export const CoinBanner = styled.div`
+  height: 300px;
+  margin-bottom: 60px;
+
   background-size: cover;
   background-repeat: no-repeat;
   display: flex;
@@ -344,10 +362,19 @@ export const AllRewards = styled.div`
   height: 66px;
   z-index: 1;
   border-radius: 33px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: radial-gradient(72.14% 104.62% at 47.64% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
-    radial-gradient(185.62% 109.56% at 0% 71.21%, #7efbfd 0%, #7138cd 55.21%, #4400b2 100%);
-  box-shadow: 0px 0px 50px 0px rgba(255, 255, 255, 0.15) inset;
+
+  &.bitget {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: radial-gradient(72.14% 104.62% at 47.64% 100%, rgba(255, 255, 255, 0.2) 0%, rgba(0, 0, 0, 0) 100%),
+      radial-gradient(185.62% 109.56% at 0% 71.21%, #7efbfd 0%, #7138cd 55.21%, #4400b2 100%);
+    box-shadow: 0px 0px 50px 0px rgba(255, 255, 255, 0.15) inset;
+  }
+  &.coin68 {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: radial-gradient(72.14% 104.62% at 47.64% 100%, rgba(253, 126, 126, 1) 0%, rgba(255, 154, 61, 1) 100%),
+      radial-gradient(185.62% 109.56% at 0% 71.21%, #7efbfd 0%, #7138cd 55.21%, #4400b2 100%);
+    box-shadow: 0px 0px 50px 0px rgba(255, 255, 255, 0.15) inset;
+  }
 `;
 export const AllRewardsLeft = styled.div`
   display: flex;
