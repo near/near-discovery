@@ -45,9 +45,9 @@ function RuleModal({ show, onClose } : { show: boolean; onClose: () => void }) {
     width={760} 
     renderChild={() => {
         return <>
-            <Title>DapDap Slot Machine Rules</Title>
-            <Context>The DapDap slot machine has a total of six patterns, five of which are the L2 chain icon and the dapdap logo. Each participation will consume one spin.</Context>
-            <Context>When the slot machine rolls out five save icon, it is the grand prize, with a prize of 10,000 PTS.</Context>
+            <Title>DapDap Spin To Win Rules</Title>
+            <Context>The DapDap spin to win has a total of six patterns, five of which are the L2 chain icon and the dapdap logo. Each participation will consume one spin.</Context>
+            <Context>When the spin to win rolls out five save icon, it is the grand prize, with a prize of 10,000 PTS.</Context>
             <Img src={r1Img.src} style={{ width: 300}}/>
             <Context>4 of the same pattern, reward 500PTS.</Context>
             <Img src={r2Img.src} style={{ width: 167}}/>
