@@ -13,6 +13,7 @@ const Title = styled.div`
     font-weight: 500;
     line-height: 31px;
     color: #fff;
+    padding-top: 10px;
 `
 
 const Context = styled.div`
@@ -32,7 +33,7 @@ const SubTitle = styled.div`
 `
 
 const Img = styled.img`
-    margin-top: 10px;
+    margin-top: 5px;
 `
 
 
@@ -45,8 +46,6 @@ function RuleModal({ show, onClose } : { show: boolean; onClose: () => void }) {
     renderChild={() => {
         return <>
             <Title>DapDap Slot Machine Rules</Title>
-            <Context>Slot machine is an interesting point-drawing game in DapDap. You can get game spins by completing the quests on the page. Participate in the game and win big prizes.</Context>
-            <SubTitle>How to Play?</SubTitle>
             <Context>The DapDap slot machine has a total of six patterns, five of which are the L2 chain icon and the dapdap logo. Each participation will consume one spin.</Context>
             <Context>When the slot machine rolls out five save icon, it is the grand prize, with a prize of 10,000 PTS.</Context>
             <Img src={r1Img.src} style={{ width: 300}}/>
@@ -56,8 +55,8 @@ function RuleModal({ show, onClose } : { show: boolean; onClose: () => void }) {
             <Img src={r3Img.src} style={{ width: 135}}/>
             <Context>The special prize is 5 chain icons (excluding DapDap logo) ,awarding 1000PTS</Context>
             <Img src={r4Img.src} style={{ width: 300}}/>
-            <SubTitle>How to get spins?</SubTitle>
-            <Context>We will give you one chance when you enter the page for the first time. More spins can be obtained by completing quests. Among them, interactive quests on the chain can be completed repeatedly to obtain multiple spins.</Context>
+            <SubTitle>How to get more spins?</SubTitle>
+            <Context>You can get a chance to win a prize by browsing the DapDap function pages, doing simple on-chain operations to experience DapDap's smooth experience, or sharing by social accounts.</Context>
         </>
     }} />
 }

@@ -68,7 +68,7 @@ const BottomChainIcons = styled.img`
 
 const Title = styled.div`
     background: url(${titleImg.src}) center center no-repeat;
-    background-size: 100% auto;
+    background-size: auto 40%;
     width: 752px;
     height: 135px;
     margin: 0 auto;
@@ -82,8 +82,8 @@ const Prize = styled.div`
     background: url(${prizeImg.src}) center center no-repeat;
     background-size: 100% 100%;
     position: absolute;
-    top: 50px;
-    left: 220px;
+    top: 70px;
+    left: 380px;
 `
 
 const CompassWapper = styled.div`
@@ -136,7 +136,7 @@ const ScrollWapper = styled.div`
     border-radius: 88px;
     background: linear-gradient(180deg, #0B0D13 0%, #373940 100%),
 linear-gradient(180deg, #17191D 0%, #1C1D1F 100%);
-    margin: 28px auto 0 54px;
+    margin: 38px auto 0 54px;
     position: relative;
 `
 
