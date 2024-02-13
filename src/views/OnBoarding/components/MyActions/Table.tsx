@@ -1,6 +1,7 @@
 import { memo, useRef } from 'react';
 import Loading from '@/components/Icons/Loading';
 import { formatTitle } from '../../helpers';
+import { DAPP_LOGO } from '../../config';
 import {
   StyledTable,
   StyledTableHeader,
@@ -62,7 +63,7 @@ const Table = ({ loading, list, deleting, handleDelete, openModal }: any) => {
                 {column.key === 'action' && <StyledTableAction>{formatTitle(item)}</StyledTableAction>}
                 {column.key === 'dapp' && (
                   <StyledTableDapp>
-                    {item.dapp_logo && <StyledTableDappImg src={item.dapp_logo} />}
+                    <StyledTableDappImg src={DAPP_LOGO[item.template] || item.dapp_logo} />
                     <StyledTableDappName>{item.template}</StyledTableDappName>
                   </StyledTableDapp>
                 )}

@@ -6,6 +6,7 @@ import useAccount from '@/hooks/useAccount';
 import { useRouter } from 'next/router';
 import { get } from '@/utils/http';
 import { formatTitle } from '../helpers';
+import { DAPP_LOGO } from '../config';
 const Container = styled.div`
   padding-top: 20px;
   padding-bottom: 65px;
@@ -843,9 +844,12 @@ const ExecuteRecords = ({ chain }: any) => {
                     <td>{formatTitle(record)}</td>
                     <td>{record.action_type}</td>
                     <td>
-                      {record.dapp_logo && (
-                        <img width="16" height="16" src={record.dapp_logo} style={{ marginRight: '6px' }} />
-                      )}
+                      <img
+                        width="16"
+                        height="16"
+                        src={DAPP_LOGO[record.template] || record.dapp_logo}
+                        style={{ marginRight: '6px' }}
+                      />
                       {record?.template === 'native bridge' ? 'Native Bridge' : record?.template}
                     </td>
 
@@ -904,9 +908,12 @@ const ExecuteRecords = ({ chain }: any) => {
                   </div>
                 </div>
                 <div className="recordList-img">
-                  {record.dapp_logo && (
-                    <img width="16" height="16" src={record.dapp_logo} style={{ marginRight: '6px' }} />
-                  )}
+                  <img
+                    width="16"
+                    height="16"
+                    src={DAPP_LOGO[record.template] || record.dapp_logo}
+                    style={{ marginRight: '6px' }}
+                  />
                 </div>
               </div>
             );
