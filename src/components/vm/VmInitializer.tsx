@@ -28,6 +28,7 @@ import {
   Widget,
 } from 'near-social-vm';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
@@ -45,7 +46,6 @@ import {
   signInContractId,
 } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
-import { useRouter } from 'next/router';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
@@ -90,7 +90,7 @@ export default function VmInitializer() {
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-              walletUrl: 'http://localhost:3000',
+              walletUrl: 'https://fast-auth-signer-git-upgrade-impr-2ac97a-near-developer-console.vercel.app',
             }),
             setupKeypom({
               trialAccountSpecs: {
