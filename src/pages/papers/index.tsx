@@ -12,6 +12,13 @@ const PapersPage: NextPageWithLayout = () => {
         title: 'NEAR | Papers',
         description: 'Join us as we dive deep into our technology.',
       }}
+      componentProps={{
+        docs: {
+          doomslug: '/files/doomslug.pdf',
+          nightshade: '/files/nightshade.pdf',
+          whitePaperNearProtocol: '/files/white-paper-near-protocol.pdf',
+        },
+      }}
     />
   );
 };
