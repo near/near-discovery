@@ -54,5 +54,5 @@ next-env.d.ts
 .sentryclirc
 
 # Jetbrains IDE generated
-.idea
+/.idea/
 
