@@ -3,7 +3,6 @@
 const extendableRoutes: Record<string, string> = {
   about: 'https://pages.near.org/about',
   blog: 'https://pages.near.org/blog',
-  papers: 'https://pages.near.org/papers',
 };
 
 // routes which are extendable but may have some paths
