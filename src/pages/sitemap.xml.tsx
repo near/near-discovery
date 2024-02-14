@@ -72,10 +72,6 @@ function generateSiteMap() {
         <lastmod>2024-02-13</lastmod>
     </url>
     <url>
-        <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/near/widget/ComponentDetailsPage</loc>
-        <lastmod>2024-02-13</lastmod>
-    </url>
-    <url>
         <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/bridge</loc>
         <lastmod>2024-02-13</lastmod>
     </url>
@@ -2231,7 +2227,7 @@ function generateSiteMap() {
         <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/blog/software-eating-financial-contracts</loc>
         <lastmod>2024-02-13</lastmod>
     </url>
-</urlset>
+    </urlset>
    `;
 }
 
