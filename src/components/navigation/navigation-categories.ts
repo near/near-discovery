@@ -89,7 +89,7 @@ export const navigationCategories = [
           },
           {
             title: 'Technical Papers',
-            url: 'https://docs.near.org/concepts/advanced/papers',
+            url: '/papers',
           },
         ],
       },
