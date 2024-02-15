@@ -300,6 +300,7 @@ export default function useLifi() {
             },
           });
         } catch(e) {
+          console.log(e)
           reject(e)
         }
       })

@@ -82,7 +82,8 @@ export default function useBestRoute() {
       && _inputChain && _outputChain
       && _inputChain.dex === 'Stargate' && _outputChain.dex === 'Stargate' 
       && chain.chainId !== targetChain.chainId
-      && inputToken.symbol === targetToken.symbol) {
+      && inputToken.symbol === targetToken.symbol
+      && amount) {
         try {
           const response = await getQouteInfo({ targetToken, chain, targetChain });
           tradeList.unshift({
