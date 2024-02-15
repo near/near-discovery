@@ -119,7 +119,7 @@ const SwapPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
           {trade.outputCurrencyAmount && amount
             ? formateValueWithThousandSeparatorAndFont(trade.outputCurrencyAmount, 2, true)
             : '-'}
-          {inputCurrency.symbol}
+          {outputCurrency.symbol}
         </StyledValue>
         <StyledValue>
           <span className="label">Gas Fees:</span> ${gasUsd}

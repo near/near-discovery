@@ -102,10 +102,14 @@ const Explores = ({ setShow }: any) => {
         loading={loading}
         onItemClick={(item: any) => {
           setShow(false);
-          router.push({
-            pathname: '/alldapps',
-            query: { category: item.id },
-          });
+          if (item) {
+            router.push({
+              pathname: '/alldapps',
+              query: { category: item.id },
+            });
+          } else {
+            router.push('/alldapps');
+          }
         }}
         onLinkClick={() => {
           setShow(false);
@@ -136,7 +140,11 @@ const Explores = ({ setShow }: any) => {
         loading={questLoading}
         onItemClick={(item: any) => {
           setShow(false);
-          if (item.name) router.push(`/quest/leaderboard/${item.name.replaceAll(' ', '')}`);
+          if (item) {
+            router.push(`/quest/leaderboard/${item.name.replaceAll(' ', '')}`);
+          } else {
+            router.push('/quest/leaderboard');
+          }
         }}
         onLinkClick={() => {
           setShow(false);
