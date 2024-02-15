@@ -81,7 +81,7 @@ export const navigationCategories = [
           },
           {
             title: 'GitHub',
-            url: 'https://github.com/near/dx',
+            url: 'https://github.com/near',
           },
           {
             title: 'Standards & Proposals',
@@ -89,7 +89,7 @@ export const navigationCategories = [
           },
           {
             title: 'Technical Papers',
-            url: 'https://docs.near.org/concepts/advanced/papers',
+            url: '/papers',
           },
         ],
       },
