@@ -80,7 +80,6 @@ const ActionItem = ({
     if (action.source === 'wallet/bridge') {
       setLayout({
         showAccountSider: true,
-        defaultTab: 'bridge',
       });
       return;
     }
@@ -117,7 +116,7 @@ const ActionItem = ({
       return;
     }
 
-    if (action.source.includes('http')) {
+    if (action.source.startsWith('http') || action.source.startsWith('https')) {
       window.open(action.source, '_blank');
       return;
     }

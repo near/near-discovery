@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
-export default function useRecommendList(campaign_id: string, page_size: number) {
+export default function useRecommendList(campaign_id: string, page_size: number, id?: string | null) {
   const [recommends, setRecommends] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -13,10 +13,12 @@ export default function useRecommendList(campaign_id: string, page_size: number)
     async (_page: number) => {
       if (loading) return;
       setLoading(true);
+      let path = `${QUEST_PATH}/api/quest/recommend_list?campaign_id=${campaign_id}&page=${_page}&page_size=${page_size}`;
+      if (id) {
+        path += `&quest_id=${id}`;
+      }
       try {
-        const result = await get(
-          `${QUEST_PATH}/api/quest/recommend_list?campaign_id=${campaign_id}&page=${_page}&page_size=${page_size}`,
-        );
+        const result = await get(path);
         const data = result.data.data || [];
         setRecommends(data);
         setLoading(false);

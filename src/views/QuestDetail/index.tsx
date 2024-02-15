@@ -1,10 +1,11 @@
 import { useSearchParams } from 'next/navigation';
 import { memo, useEffect, useState, useMemo } from 'react';
-
+import { useConnectWallet } from '@web3-onboard/react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
 import useUserInfo from '@/hooks/useUserInfo';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
+import useReport from '@/views/Landing/hooks/useReport';
 import ClaimedSuccessModal from './components/ClaimedSuccessModal';
 import Yours from '../Quest/components/Yours';
 import useCampaignList from '../Quest/hooks/useCampaignList';
@@ -19,6 +20,8 @@ const MAX = 100;
 
 const QuestDetailView = () => {
   const searchParams = useSearchParams();
+  const [{ wallet, connecting }] = useConnectWallet();
+  const { handleReport } = useReport();
   const _id = searchParams.get('id');
   const id = _id?.includes('?') ? _id.split('?')[0] : _id;
   const { loading, info } = useQuestInfo(id || '');
@@ -27,7 +30,7 @@ const QuestDetailView = () => {
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { info: userInfo = {} } = useUserInfo({ updater });
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-  const { recommends, handlePageChange, page, maxPage } = useRecommendList(info?.quest.quest_campaign_id, MAX);
+  const { recommends, handlePageChange, page, maxPage } = useRecommendList(info?.quest.quest_campaign_id, MAX, id);
 
   const quest = info?.quest ?? null;
 
@@ -50,6 +53,12 @@ const QuestDetailView = () => {
       return array;
     }
   }, [quest, campaigns]);
+
+  useEffect(() => {
+    if (wallet?.label.toLowerCase().includes('bitget')) {
+      handleReport('bitget_wallet');
+    }
+  }, []);
 
   return (
     <StyledContainer>
