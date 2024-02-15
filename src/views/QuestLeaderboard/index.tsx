@@ -37,7 +37,7 @@ const QuestLeaderboardView = (props: any) => {
   const campaign = useMemo(() => campaigns.find(campaign => campaign.name.replace(/\s/g, '') === router.query.campaignName), [campaigns, router])
 
   const navs = useMemo(() => {
-    const array: any = { name: 'Quest', path: '/quest/leaderboard' }
+    const array: any = [{ name: 'Quest', path: '/quest/leaderboard' }]
     if (campaign) {
       array.push({ name: campaign.name, path: '/quest/leaderboard/' + campaign.name.replace(/\s/g, '') })
     }
