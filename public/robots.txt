@@ -1,3 +1,2 @@
 User-agent: *
-Sitemap: https://beta.near.org/sitemap.xml
 Sitemap: https://near.org/sitemap.xml
