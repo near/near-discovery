@@ -10,9 +10,10 @@ export function formatException(errMsg: string): string {
     const res = errMsg.match(regErrMsg)
     if (res && res.length > 1) {
         _msg = res[1]
+        return _msg
     }
 
-    return _msg
+    return errMsg
 }
 
 export function isNumeric(value: any): boolean {
