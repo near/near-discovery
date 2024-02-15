@@ -68,6 +68,7 @@ export default function VmInitializer() {
       initNear({
         networkId,
         walletConnectCallback: recordWalletConnect,
+        errorCallback: recordHandledError,
         selector: setupWalletSelector({
           network: networkId,
           modules: [
