@@ -189,7 +189,7 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   return (
     <Styles.Container>
-      <Styles.Banner>
+      <Styles.Banner className={`${platform === 'bitget' ? 'bitget' : 'coin68'}`}>
         <Styles.Logo>
           <Styles.Img src="/images/marketing/dap-logo.svg" />
           <Styles.Img src="/images/marketing/X.svg" />

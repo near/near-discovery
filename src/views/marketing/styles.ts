@@ -9,9 +9,15 @@ export const Banner = styled.div`
   height: 120px;
   padding-top: 20px;
   margin-bottom: 40px;
-  background-image: url('/images/marketing/banner-bg.png');
+
   background-size: cover;
   background-repeat: no-repeat;
+  &.bitget {
+    background-image: url('/images/marketing/banner-bg.png');
+  }
+  &.coin68 {
+    background-image: url('/images/marketing/banner-coin68.png');
+  }
 `;
 
 export const Logo = styled.div`
