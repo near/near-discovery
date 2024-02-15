@@ -85,6 +85,9 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
       wait: 500,
     },
   );
+  const handleTokenChange = (value: any, symbol: any) => {
+    onTokenChangeRef.current && onTokenChangeRef.current(value, symbol)
+  }
   const fetchAllData = useCallback(async () => {
     try {
       const response = await fetch(currentDapp.ALL_DATA_URL);
@@ -132,7 +135,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
                 value={amount0}
                 onChange={(ev: any) => {
                   if (isNaN(Number(ev.target.value))) return;
-                  onTokenChangeRef.current && onTokenChangeRef.current(ev.target.value, token0.symbol)
+                  handleTokenChange(ev.target.value, token0.symbol)
                 }}
               />
               <StyledValue>{currentPair.token0}</StyledValue>
@@ -142,7 +145,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
                 value={amount1}
                 onChange={(ev: any) => {
                   if (isNaN(Number(ev.target.value))) return;
-                  onTokenChangeRef.current && onTokenChangeRef.current(ev.target.value, token1.symbol)
+                  handleTokenChange(ev.target.value, token1.symbol)
                 }}
               />
               <StyledValue>{currentPair.token1}</StyledValue>
@@ -157,6 +160,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
               onClick={() => {
                 if (isNaN(Number(balance0)) || !balance0) return;
                 setAmount0(balance0);
+                handleTokenChange(balance0, token0.symbol)
               }}
             >
               {balance0 ? formateValueWithThousandSeparatorAndFont(balance0, 4, true) : '-'}
@@ -167,6 +171,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
               onClick={() => {
                 if (isNaN(Number(balance1)) || !balance1) return;
                 setAmount1(balance1);
+                handleTokenChange(balance1, token1.symbol)
               }}
             >
               {balance1 ? formateValueWithThousandSeparatorAndFont(balance1, 4, true) : '-'}

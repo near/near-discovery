@@ -45,7 +45,11 @@ const Campaign = function ({ campaign, bp }: any) {
     }
   };
   const handleClickCampaign = function (event: any) {
-    router.push('/quest/leaderboard/DapDapXBNS');
+    if (campaign.category === 'bns') {
+      router.push('/quest/leaderboard/DapDapXBNS');
+    } else {
+      router.push('/quest/leaderboard/' + campaign.name.replace(/\s/g, ''));
+    }
   };
 
   return (
@@ -117,13 +121,13 @@ const Campaign = function ({ campaign, bp }: any) {
 const Narratives = ({ campaigns, loading, bp }: any) => {
   return (
     <StyledContainer>
-      <StyledHeader style={{ marginTop: 50, marginBottom: 17 }}>Narratives</StyledHeader>
+      <StyledHeader style={{ marginTop: 50, marginBottom: 17 }}>Journeys</StyledHeader>
       {loading ? (
         <StyledLoadingWrapper>
           <Loading size={60} />
         </StyledLoadingWrapper>
       ) : (
-        <StyledFlex>
+        <StyledFlex $gap='50px'>
           {campaigns.map((campaign: any, index: number) => {
             return <Campaign key={index} campaign={campaign} bp={bp} />;
           })}

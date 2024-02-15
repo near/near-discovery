@@ -24,6 +24,7 @@ import {
   StyledTitle,
   StyledTimerBox,
 } from './styles';
+import { useRouter } from 'next/router';
 
 const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) => {
   const { like, handleLike } = useLike(campaign.id, 'quest_campaign');
@@ -101,6 +102,7 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
 };
 
 const Campaigns = ({ onLoad, loading, campaigns, categoryLoading, categories }: any) => {
+  const router = useRouter()
   useEffect(() => {
     if (!loading && campaigns.length) {
       onLoad(campaigns[0].id);
