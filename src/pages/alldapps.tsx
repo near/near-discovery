@@ -22,7 +22,7 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const carouseicon = 'https://assets.dapdap.tech/images/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e.svg';
+const carouseicon = 'https://assets.dapdap.net/images/bafkreigqhaprvqrmha234q4k2rqnd4kraqh6k4cpbjoaga3te3zey5kg3e.svg';
 
 const AllDappsPage = styled.div`
   color: #ffffff;
@@ -632,7 +632,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
             style={{ cursor: currentPage === 1 ? 'not-allowed' : 'pointer', opacity: currentPage === 1 ? 0.5 : 1 }}
           >
             <img
-              src="https://assets.dapdap.tech/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
               alt=""
             />
           </div>
@@ -657,7 +657,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
             }}
           >
             <img
-              src="https://assets.dapdap.tech/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+              src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
               alt=""
             />
           </div>
@@ -745,7 +745,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                       }}
                     >
                       Dapp
-                      <img src="https://assets.dapdap.tech/images/arrow-white.png" alt="" />
+                      <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                     </div>
                   </div>
                 </div>
@@ -803,7 +803,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
             <div className="netWork-list-btn" onClick={toggleExpanded}>
               {isExpanded ? 'Other Chains' : 'Close Chains'}
               <img
-                src="https://assets.dapdap.tech/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
+                src="https://assets.dapdap.net/images/bafkreigissws3h5v2ubdkitniqr5v3mqq2gg5fj2jje4tzxqg2ttjto5fy.svg"
                 alt=""
                 className={`list-btn-img ${isExpanded ? '' : 'rotate'}`}
               />
