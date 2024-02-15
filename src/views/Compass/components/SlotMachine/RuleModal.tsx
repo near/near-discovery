@@ -51,8 +51,8 @@ function RuleModal({ show, onClose } : { show: boolean; onClose: () => void }) {
             <Img src={r1Img.src} style={{ width: 300}}/>
             <Context>4 of the same pattern, reward 500PTS.</Context>
             <Img src={r2Img.src} style={{ width: 167}}/>
-            <Context>3 of the same pattern, reward 50PTS.</Context>
-            <Img src={r3Img.src} style={{ width: 135}}/>
+            <Context>3 of the same pattern, reward 100PTS.</Context>
+            <Img src={r3Img.src} style={{ width: 157}}/>
             <Context>The special prize is 5 chain icons (excluding DapDap logo) ,awarding 1000PTS</Context>
             <Img src={r4Img.src} style={{ width: 300}}/>
             <SubTitle>How to get more spins?</SubTitle>
