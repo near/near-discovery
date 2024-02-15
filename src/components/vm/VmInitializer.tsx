@@ -28,7 +28,6 @@ import {
   Widget,
 } from 'near-social-vm';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
@@ -62,7 +61,6 @@ export default function VmInitializer() {
   const setVmStore = useVmStore((store) => store.set);
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
   const idOS = useIdOS();
-  const router = useRouter();
   const idosSDK = useIdosStore((state) => state.idOS);
 
   useEffect(() => {
@@ -147,14 +145,6 @@ export default function VmInitializer() {
       setWalletModal(selectorModal);
     });
   }, [idOS, near]);
-
-  const handleWalletSelectorMessage = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
-    console.log('e.data ', e.data);
-    if (e.data.showWalletSelector) {
-      // Show wallet selector
-      walletModal?.show();
-    }
-  };
 
   const requestSignMessage = useCallback(
     async (message: string) => {
