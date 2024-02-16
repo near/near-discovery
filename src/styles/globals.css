@@ -130,7 +130,7 @@ html {
   color: var(--sand12);
   font: var(--text-base);
   font-family: Gantari;
-  background-color: #16181d;
+  background-color: rgb(24, 25, 33);
 }
 
 a {
