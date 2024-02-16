@@ -42,14 +42,15 @@ export default function AccountWrapper({
       <TipsWrapper>
         <TransactionTips count={count} />
       </TipsWrapper>
-      <AccountTabs
+      <Tokens mt={20} />
+      {/* <AccountTabs
         active={accountTab}
         onTabClick={(tab: string) => {
           setAccountTab(tab);
         }}
       />
       {accountTab === 'Tokens' && <Tokens mt={20} />}
-      {accountTab === 'Activties' && <Activties />}
+      {accountTab === 'Activties' && <Activties />} */}
     </>
   );
 }
