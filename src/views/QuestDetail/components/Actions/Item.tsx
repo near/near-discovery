@@ -2,11 +2,10 @@ import { AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { overlay } from '@/components/animation';
-import Loading from '@/components/Icons/Loading';
 import useDappOpen from '@/hooks/useDappOpen';
 import { useLayoutStore } from '@/stores/layout';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
-import { setCookie, getCookie } from 'cookies-next';
+import useReport from '@/views/Landing/hooks/useReport';
 import useActionCheck from '../../hooks/useActionCheck';
 import { formatDescription } from '../../helper';
 import PasswordAction from './PasswordAction';
@@ -16,8 +15,6 @@ import {
   StyledDapps,
   StyledDesc,
   StyledExpand,
-  StyledExpandButton,
-  StyledExpandButtonBox,
   StyledExpandContainer,
   StyledIconBox,
   StyledItemContainer,
@@ -51,6 +48,7 @@ const ActionItem = ({
   const [actionCompleted, setActionCompleted] = useState(completed);
   const router = useRouter();
   const { open: dappOpen } = useDappOpen();
+  const { handleReport } = useReport();
   const setLayout = useLayoutStore((store?: any) => store.set);
   const { checking, handleRefresh } = useActionCheck(() => {
     setActionCompleted(true);
@@ -125,6 +123,7 @@ const ActionItem = ({
     }
 
     if (action.source.startsWith('http') || action.source.startsWith('https')) {
+      handleReport(action.source);
       window.open(action.source, '_blank');
       return;
     }
