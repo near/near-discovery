@@ -31,9 +31,9 @@ const fromChainId = 1
 const BridgePanel = ({ chainId, onLoad }: any) => {
   const { swap, getQouteInfo } = useLifi()
   const { account } = useAccount()
-  const [amount, setAmount] = useState('0')
+  const [amount, setAmount] = useState('0.01')
   const [gasCostUSD, setGasCostUSD] = useState('')
-  const [toAmount, setToAmount] = useState('0.01')
+  const [toAmount, setToAmount] = useState('')
   const [isloading, setLoading] = useState(false)
   const [btnText, setBtnText] = useState('')
   const { fail, success } = useToast()
