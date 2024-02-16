@@ -26,7 +26,7 @@ import {
 } from './styles';
 import { useRouter } from 'next/router';
 
-const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) => {
+const Campaign = ({ campaign, categories, campaignsContainerClassName }: { campaign: any; categories: any, campaignsContainerClassName: any }) => {
   const { like, handleLike } = useLike(campaign.id, 'quest_campaign');
   return (
     <StyledCampaignContainer>
@@ -40,9 +40,9 @@ const Campaign = ({ campaign, categories }: { campaign: any; categories: any }) 
             <StyledTimerBox>
               {campaign.start_time > Date.now() && <div>Upcoming</div>}
               {campaign.start_time > Date.now() ? (
-                <Timer endTime={Number(campaign.start_time)} />
+                <Timer color={['DapDapXLi', 'DapDapTwitterSpace'].includes(campaignsContainerClassName) ? 'black' : 'white'} endTime={Number(campaign.start_time)} />
               ) : (
-                <Timer endTime={Number(campaign.end_time)} />
+                <Timer color={['DapDapXLi', 'DapDapTwitterSpace'].includes(campaignsContainerClassName) ? 'black' : 'white'} endTime={Number(campaign.end_time)} />
               )}
             </StyledTimerBox>
             {/* <StyledHeartBox
@@ -108,14 +108,15 @@ const Campaigns = ({ onLoad, loading, campaigns, categoryLoading, categories }: 
       onLoad(campaigns[0].id);
     }
   }, [loading, campaigns]);
+  const campaignsContainerClassName = typeof router.query.campaignName === 'string' ? router.query.campaignName.replace(/\s/g, '').split('.')[0] : ''
   return (
-    <StyledCampaignsContainer>
+    <StyledCampaignsContainer className={campaignsContainerClassName}>
       {loading || categoryLoading ? (
         <LoadingWrapper>
           <Loading size={30} />
         </LoadingWrapper>
       ) : (
-        campaigns.map((campaign: any) => <Campaign key={campaign.id} campaign={campaign} categories={categories} />)
+        campaigns.map((campaign: any) => <Campaign campaignsContainerClassName={campaignsContainerClassName} key={campaign.id} campaign={campaign} categories={categories} />)
       )}
     </StyledCampaignsContainer>
   );

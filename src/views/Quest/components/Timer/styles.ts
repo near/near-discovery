@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledContainer = styled.div`
-  display: flex;
-  gap: 6px;
-`;
+
 
 export const StyledItem = styled.div`
   display: flex;
@@ -23,4 +20,15 @@ export const StyledDesc = styled.div`
   font-weight: 400;
   text-align: center;
   width: 50px;
+`;
+
+export const StyledContainer = styled.div`
+  display: flex;
+  gap: 6px;
+  &.black {
+    ${StyledValue}, 
+    ${StyledDesc} {
+      color: #000;
+    }
+  }
 `;

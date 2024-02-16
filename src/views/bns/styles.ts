@@ -9,7 +9,7 @@ export const StyledLogin = styled.div`
   gap: 82px;
 `;
 export const StyledLoginConnectWalletButton = styled.button`
-  margin-bottom: 20px;
+  margin: 17px 0 20px;
   outline: none;
   border: none;
   width: 300px;
@@ -26,13 +26,22 @@ export const StyledLoginConnectWalletButton = styled.button`
   line-height: normal;
 `;
 export const StyledInvitedUsers = styled.div`
-  color: #979abe;
+  color: #EBF479;
   font-family: Gantari;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 `;
+export const StyledInvitedAward = styled.div`
+  width: 306px;
+  color: #979ABE;
+  font-family: Gantari;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`
 // guide
 
 export const StyledVideo = styled.div`

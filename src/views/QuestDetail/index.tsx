@@ -58,6 +58,7 @@ const QuestDetailView = () => {
     }
   }, [quest, campaigns]);
 
+  const isBitGetUser = useMemo(() => (userInfo.source === 'bitget' || userInfo.source === 'bitget_wallet'), [userInfo])
   useEffect(() => {
     if (wallet?.label.toLowerCase().includes('bitget')) {
       handleReport('bitget_wallet');
@@ -78,11 +79,12 @@ const QuestDetailView = () => {
                 actions={info.actions}
                 endTime={info.quest.end_time}
                 startTime={info.quest.start_time}
-                rewards={info.quest.reward}
+                rewards={info.quest.reward + (isBitGetUser ? info.quest.reward * 0.1 : 0)}
                 completed={info.quest.action_completed}
                 id={id || ''}
                 userInfo={userInfo}
                 isLive={info.quest.status === 'ongoing'}
+                isBitGetUser={isBitGetUser}
                 claimed={info.quest.is_claimed}
                 onSuccess={() => {
                   setUpdater(Date.now());

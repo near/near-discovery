@@ -5,7 +5,7 @@ import useCountdown from '@/hooks/useCountdown';
 import { getTimePeriods, toTwo } from '../../helpers';
 import { StyledContainer, StyledDesc,StyledItem, StyledValue } from './styles';
 
-const Timer = ({ endTime }: { endTime: number }) => {
+const Timer = ({ endTime, color }: { endTime: number, color?: string }) => {
   const [ready, setReady] = useState(false);
   const { secondsRemaining } = useCountdown(endTime / 1000);
   const timeLeft = getTimePeriods(secondsRemaining);
@@ -15,7 +15,7 @@ const Timer = ({ endTime }: { endTime: number }) => {
   }, []);
 
   return ready ? (
-    <StyledContainer>
+    <StyledContainer className={color}>
       <StyledItem>
         <StyledValue>{toTwo(timeLeft.days)}</StyledValue>
         <StyledDesc>Days</StyledDesc>

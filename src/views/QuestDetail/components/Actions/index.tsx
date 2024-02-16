@@ -15,7 +15,9 @@ import {
   StyledLabel,
   StyledProcessBars,
   StyledTimerBox,
+  StyledAward
 } from './styles';
+import useUserInfo from '@/hooks/useUserInfo';
 
 const Actions = ({
   actions,
@@ -26,6 +28,7 @@ const Actions = ({
   id,
   userInfo,
   isLive,
+  isBitGetUser,
   claimed,
   onSuccess,
   onClaimed,
@@ -38,9 +41,11 @@ const Actions = ({
   id: string;
   userInfo: any;
   isLive: boolean;
+  isBitGetUser: boolean;
   claimed: boolean;
   onSuccess: VoidFunction;
   onClaimed: VoidFunction;
+  
 }) => {
   const [claimedSuccess, setClaimedSuccess] = useState(false);
   const { loading, handleClaim } = useRewardsClaim(() => {
@@ -50,6 +55,7 @@ const Actions = ({
   const [cbCompleted, setCbCompleted] = useState(0);
   const completedCount = useMemo(() => completed + cbCompleted, [completed, cbCompleted]);
   const config = useAuthConfig();
+  // const isBitGetUser = useMemo(() => (userInfo.source === 'bitget' || userInfo.source === 'bitget_wallet'), [userInfo])
   return (
     <StyledContainer>
       <StyledHeader>
@@ -93,6 +99,7 @@ const Actions = ({
         <StyledCoin $size={20} />
         <span>{rewards} PTS</span>
       </StyledButton>
+      {isBitGetUser && <StyledAward>💡 You will get an extra 10% - <span>20 PTS</span> as a Bitget user.</StyledAward>}
     </StyledContainer>
   );
 };
