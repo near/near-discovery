@@ -20,7 +20,7 @@ import {
   StyledSvg,
   StyledText,
   StyledWrapper,
-  StyledLoginVideo
+  StyledLoginVideo,
 } from './styles';
 const LoginView = () => {
   const router = useRouter();
@@ -84,12 +84,7 @@ const LoginView = () => {
         {/* <Image src={loginBg} style={{ width: 824, height: 636 }} alt='loginBg' /> */}
         <StyledLoginVideo width={824} height={636} autoPlay muted playsInline loop>
           <source src="/videos/login_background.mp4" type="video/mp4" />
-          <track
-            src="/path/to/captions.vtt"
-            kind="subtitles"
-            srcLang="en"
-            label="English"
-          />
+          <track src="/path/to/captions.vtt" kind="subtitles" srcLang="en" label="English" />
           Your browser does not support the video tag.
         </StyledLoginVideo>
       </StyledImage>
@@ -98,7 +93,7 @@ const LoginView = () => {
           Got an invite code?
         </StyledText>
         <StyledText $size="18px" $weight="400" $line="161.2%" style={{ marginBottom: 19 }}>
-          DapDap is currently in beta. Get an invite code from an existing user to sign up
+          Get an invite code from an existing user to sign up.
         </StyledText>
         <StyledFlex $align="flex-end" $justify="flex-start" $gap="8px">
           {codeList.map((code, index) => (
