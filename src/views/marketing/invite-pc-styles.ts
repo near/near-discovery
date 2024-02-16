@@ -33,6 +33,12 @@ export const InviterAvatar = styled.img`
   border-radius: 50%;
   margin-right: 10px;
 `;
+export const InviterAvatarHold = styled.div`
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-right: 10px;
+`;
 export const InviterContent = styled.div`
   flex-grow: 1;
 `;
@@ -217,7 +223,8 @@ export const InviteHead = styled.div`
 `;
 
 export const InviteBody = styled(motion.div)`
-  height: 435px;
+  height: 80px;
+  display: flex;
   border-radius: 20px;
   background: rgba(33, 35, 42, 0.9);
   backdrop-filter: blur(10px);
@@ -341,13 +348,13 @@ export const List = styled.div`
   font-size: 16px;
   font-weight: 500;
   color: white;
-  padding-top: 50px;
+  padding: 10px;
   display: flex;
   align-items: center;
   gap: 20px;
-  &:last-child {
+  /* &:last-child {
     padding-bottom: 50px;
-  }
+  } */
 `;
 export const ListOrder = styled.span``;
 

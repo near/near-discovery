@@ -378,8 +378,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     <Styles.Container>
       <Styles.Banner>
         <Styles.Inviter>
-          {kolAvatar ? <Styles.InviterAvatar src={kolAvatar} /> : null}
-
+          {kolAvatar ? <Styles.InviterAvatar src={kolAvatar} /> : <Styles.InviterAvatarHold></Styles.InviterAvatarHold>}
           <Styles.InviterContent>
             <Styles.InviterTitle>Inviter</Styles.InviterTitle>
             <Styles.InviterAddr>{ellipsAccount(kolAddr)}</Styles.InviterAddr>
@@ -473,11 +472,11 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
               ? codeList.map((item: any, index) => (
                   <Styles.List key={index}>
                     <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
-                    {`${prefix}/${item?.code}`}
+                    {`${item?.code}`}
                     <Styles.CopyIcon
                       src="/images/marketing/copy.svg"
                       onClick={() => {
-                        copy(`${prefix}/${platform}/${item?.code}`);
+                        copy(`${item?.code}`);
                       }}
                     ></Styles.CopyIcon>
                   </Styles.List>
