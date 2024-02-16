@@ -77,12 +77,15 @@ export default function useBestRoute() {
       // 配置中必须有Stargate
       // 两个链不能相同
       // 两个token必须相同
+      // token必须配置poolId
       if (
         !hasStargate
       && _inputChain && _outputChain
       && _inputChain.dex === 'Stargate' && _outputChain.dex === 'Stargate' 
       && chain.chainId !== targetChain.chainId
       && inputToken.symbol === targetToken.symbol
+      && (configTokens[inputToken.address] && configTokens[inputToken.address].poolId)
+      && (configTokens[targetToken.address] && configTokens[targetToken.address].poolId)
       && amount) {
         try {
           const response = await getQouteInfo({ targetToken, chain, targetChain });

@@ -1,7 +1,7 @@
 export default {
   title: 'Optimism',
   path: 'optimism',
-  icon: 'https://assets.dapdap.tech/images/bafkreihejurzfytybrvjy2b5vie5eppb4erhaimhtv25koseml3vhv3lse.svg',
+  icon: 'https://assets.dapdap.net/images/bafkreihejurzfytybrvjy2b5vie5eppb4erhaimhtv25koseml3vhv3lse.svg',
   bgColor: '#CA0C0C',
   bgIcon: '/images/chains/optimism_white.svg',
   selectBgColor: '#CA0C0C',

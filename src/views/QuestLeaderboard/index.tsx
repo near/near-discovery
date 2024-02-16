@@ -16,8 +16,10 @@ import Tabs from './components/Tabs';
 import useLeaderboard from './hooks/useLeaderboard';
 import { StyledWrapper, StyledContainer } from './styles';
 import type { Tab } from './types';
+import { useRouter } from 'next/router';
 
 const QuestLeaderboardView = (props: any) => {
+  const router = useRouter()
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
   const [updater, setUpdater] = useState(1);
@@ -32,15 +34,20 @@ const QuestLeaderboardView = (props: any) => {
       .filter((campaign: any) => campaign.banner)
       .map((campaign) => ({ banner: campaign.banner, link: campaign.link }));
   }, [campaigns]);
+  const campaign = useMemo(() => campaigns.find(campaign => campaign.name.replace(/\s/g, '') === router.query.campaignName), [campaigns, router])
 
+  const navs = useMemo(() => {
+    const array: any = [{ name: 'Quest', path: '/quest/leaderboard' }]
+    if (campaign) {
+      array.push({ name: campaign.name, path: '/quest/leaderboard/' + campaign.name.replace(/\s/g, '') })
+    }
+    return array
+  }, [campaign])
   return (
     <StyledWrapper>
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
-        <Breadcrumb navs={[
-          { name: 'Quest', path: '/quest/leaderboard' },
-          { name: 'DapDap Web3 Adventure', path: '/quest/leaderboard/DapDapWeb3Adventure' },
-        ]} />
+        <Breadcrumb navs={navs} />
       </StyledContainer>
       {tab === 'quests' && (
         <Quests

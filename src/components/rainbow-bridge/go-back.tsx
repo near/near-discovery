@@ -153,7 +153,7 @@ const GoBackNav = () => {
       </Link>
 
       <img
-        src={'https://assets.dapdap.tech/images/bafkreia75l4donjlz36m7lmdu3ymfeunk2bisfk73rvtqe55uqw7a5rhzq.png'}
+        src={'https://assets.dapdap.net/images/bafkreia75l4donjlz36m7lmdu3ymfeunk2bisfk73rvtqe55uqw7a5rhzq.png'}
         alt=""
       />
 
@@ -173,7 +173,7 @@ const GoBackNavSourceAllInOne = () => {
       </Link>
 
       <img
-        src={'https://assets.dapdap.tech/images/bafkreigq5clxrflxne3bwmtxhwmji774eye5hm6nlrbospjaljuocesyuy.svg'}
+        src={'https://assets.dapdap.net/images/bafkreigq5clxrflxne3bwmtxhwmji774eye5hm6nlrbospjaljuocesyuy.svg'}
         alt=""
       />
 

@@ -28,6 +28,7 @@ const Actions = ({
   isLive,
   claimed,
   onSuccess,
+  onClaimed,
 }: {
   actions: any;
   startTime: number;
@@ -39,10 +40,12 @@ const Actions = ({
   isLive: boolean;
   claimed: boolean;
   onSuccess: VoidFunction;
+  onClaimed: VoidFunction;
 }) => {
   const [claimedSuccess, setClaimedSuccess] = useState(false);
   const { loading, handleClaim } = useRewardsClaim(() => {
     setClaimedSuccess(true);
+    onClaimed();
   });
   const [cbCompleted, setCbCompleted] = useState(0);
   const completedCount = useMemo(() => completed + cbCompleted, [completed, cbCompleted]);

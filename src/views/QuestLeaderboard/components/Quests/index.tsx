@@ -6,6 +6,7 @@ import Campaign from '@/views/Quest/components/Campaign';
 import QuestLists from '@/views/Quest/components/QuestLists';
 
 import { StyledContainer } from './styles';
+import { useRouter } from 'next/router';
 const Quests = ({
   onLoad,
   id,
@@ -17,13 +18,14 @@ const Quests = ({
   categories,
   userInfo,
 }: any) => {
+  const router = useRouter()
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>
         <Campaign
           onLoad={onLoad}
           loading={campaignLoading}
-          campaigns={campaigns.filter((campaign: any) => campaign.category === '')}
+          campaigns={campaigns.filter((campaign: any) => campaign.name.replace(/\s/g, '') === router.query.campaignName)}
           categoryLoading={categoryLoading}
           categories={categories}
         />

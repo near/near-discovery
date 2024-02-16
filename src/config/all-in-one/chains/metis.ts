@@ -1,7 +1,7 @@
 export default {
   title: 'Metis',
   path: 'metis',
-  icon: 'https://assets.dapdap.tech/images/bafkreiaekamkcbf7ixg3w6wl25zd4orgkmshxkz36vncpomenfu3ryymty.svg',
+  icon: 'https://assets.dapdap.net/images/bafkreiaekamkcbf7ixg3w6wl25zd4orgkmshxkz36vncpomenfu3ryymty.svg',
   bgColor: '#000000',
   bgIcon: '/images/chains/metis_white.svg',
   selectBgColor: '#00dacc',

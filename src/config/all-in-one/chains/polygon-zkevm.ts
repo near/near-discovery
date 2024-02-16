@@ -1,7 +1,7 @@
 export default {
   title: 'Polygon zkEVM',
   path: 'polygon-zkevm',
-  icon: 'https://assets.dapdap.tech/images/bafkreielam3balduseacp3gulszhxiwzf7hcyoaau6goxdwgsavqfou5hi.svg',
+  icon: 'https://assets.dapdap.net/images/bafkreielam3balduseacp3gulszhxiwzf7hcyoaau6goxdwgsavqfou5hi.svg',
   bgColor: '#A55FFF',
   bgIcon: '/images/chains/polygon_zkevm_white.svg',
   selectBgColor: '#A55FFF',

@@ -3,6 +3,7 @@ import { utils } from 'ethers';
 import { debounce } from 'lodash';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import useReport from '@/views/Landing/hooks/useReport';
 
 import useAccount from '@/hooks/useAccount';
 import useTokenBalance from './hooks/useTokenBalance';
@@ -19,7 +20,7 @@ import useBestRoute from './hooks/useBestRoute';
 import useBridge from './hooks/useBridge';
 import useDestination from './hooks/useDestination';
 import useTokensAndChains from './hooks/useTokensAndChains';
-import { isNumeric } from './util'
+import { isNumeric } from './util';
 import type { Chain, Token, Trade } from './types';
 
 const Container = styled.div`
@@ -46,7 +47,7 @@ const Label = styled.div`
 
 const LabelTopMinus = styled(Label)`
   margin-top: -30px;
-`
+`;
 
 const StyledExchangeIcon = styled.div`
   color: #979abe;
@@ -70,6 +71,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   const [selectableTokens, setSelectableTokens] = useState<Token[]>([]);
   const [selectedTradeIndex, setSelectedTradeIndex] = useState<number>(-1);
   const { account, chainId } = useAccount();
+  const { handleReport } = useReport();
   const { tokens, chains, lifiTokens } = useTokensAndChains();
   const { inputToken, outputToken, inputChain, outputChain, selectToken, selectChain, onExchange } = useBridge({
     chains,
@@ -85,10 +87,10 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
         setSelectableChains(Object.values(chains));
         setShowChainDialog(true);
       } else if (type === 'token') {
-        const curChain = clickType === 'in' ? inputChain : outputChain 
+        const curChain = clickType === 'in' ? inputChain : outputChain;
         if (curChain) {
-          setSelectableTokens(lifiTokens[curChain.chainId])
-          setShowTokenDialog(true)
+          setSelectableTokens(lifiTokens[curChain.chainId]);
+          setShowTokenDialog(true);
         }
       }
 
@@ -103,17 +105,17 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
   );
 
   const handleBestRoute = useCallback(() => {
-    setTrades([])
-    setErrorTips('')
-    setSelectedTradeIndex(-1)
+    setTrades([]);
+    setErrorTips('');
+    setSelectedTradeIndex(-1);
     if (!inputChain || !outputChain || !outputToken || !inputToken) return;
-    getBestRoute({ 
-      chain: inputChain, 
-      inputToken, 
-      targetToken: outputToken, 
-      targetChain: outputChain, 
-      amount, 
-      destination: checked ? destination : undefined 
+    getBestRoute({
+      chain: inputChain,
+      inputToken,
+      targetToken: outputToken,
+      targetChain: outputChain,
+      amount,
+      destination: checked ? destination : undefined,
     });
   }, [inputChain, outputChain, outputToken, inputToken, amount, destination]);
 
@@ -151,13 +153,13 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
         return;
       }
     }
-    
+
     // if (gasCost && new Big(gasCost).gt(balance || 0)) {
     //   setErrorTips('Not enough gas');
     //   return;
     // }
 
-    if ((trades && trades.length) && selectedTradeIndex === -1) {
+    if (trades && trades.length && selectedTradeIndex === -1) {
       // setErrorTips('Relayer: gas too low');
       setErrorTips('Select a route');
       return;
@@ -168,7 +170,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      handleBestRoute()
+      handleBestRoute();
     }, 1000);
 
     return () => {
@@ -176,7 +178,11 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
     };
   }, [inputChain, outputChain, amount, outputToken, inputToken, destination]);
 
-  const route = trades.length && selectedTradeIndex > -1 ? trades[selectedTradeIndex] : null
+  useEffect(() => {
+    handleReport('wallet/bridge/view');
+  }, []);
+
+  const route = trades.length && selectedTradeIndex > -1 ? trades[selectedTradeIndex] : null;
 
   return (
     <Container>
@@ -220,7 +226,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             onChange={(value: string) => {
               if (value === '') {
                 setAmount(value);
-                return
+                return;
               }
               if (isNumeric(value)) {
                 setAmount(value);
@@ -233,11 +239,7 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             destination={destination}
             setDestination={setDestination}
           />
-          <Routes 
-            trades={trades} 
-            selectedTradeIndex={selectedTradeIndex}
-            onSelected={setSelectedTradeIndex}
-          /> 
+          <Routes trades={trades} selectedTradeIndex={selectedTradeIndex} onSelected={setSelectedTradeIndex} />
           <Button
             errorTips={errorTips}
             inputToken={inputToken}
@@ -254,10 +256,10 @@ const Bridge = ({ onSuccess }: { onSuccess: () => void }) => {
             onSuccess={(hash) => {
               setUpdater(Date.now());
               onSuccess();
-              handleBestRoute()
+              handleBestRoute();
             }}
             onFail={() => {
-              handleBestRoute()
+              handleBestRoute();
             }}
           />
         </>

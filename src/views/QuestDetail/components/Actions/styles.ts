@@ -166,7 +166,7 @@ export const StyledExpandButtonBox = styled.div`
   justify-content: flex-end;
 `;
 
-export const StyledExpandButton = styled.div`
+export const StyledExpandButton = styled.button`
   border-radius: 8px;
   background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
   width: 102px;
@@ -176,15 +176,17 @@ export const StyledExpandButton = styled.div`
   font-size: 16px;
   font-weight: 500;
   text-align: center;
-  line-height: 36px;
-  margin-top: 20px;
   cursor: pointer;
   transition: 0.3s;
-  &:hover {
+  &:not(:disabled):hover {
     opacity: 0.9;
   }
-  &:active {
+  &:not(:disabled):active {
     opacity: 0.8;
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.3;
   }
 `;
 

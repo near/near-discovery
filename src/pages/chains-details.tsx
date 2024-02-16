@@ -43,13 +43,13 @@ const SelectBg: React.FC<SelectBgProps> = ({ bgColor }) => (
     </defs>
   </svg>
 );
-const arrowyellow = 'https://assets.dapdap.tech/images/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi.svg';
-const diagonaltop = 'https://assets.dapdap.tech/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
-const Dapps = 'https://assets.dapdap.tech/images/bafkreifyko6xoxde4srussisqazc3jnyqwqrwvhvphifknq4ybxa4kj7yu.svg';
-const DeepDive = 'https://assets.dapdap.tech/images/bafkreig4bv3xu73ouxj5x7zt4qlvnnbvgdqzj5oq6te6y7ax4tz2yid2ma.svg';
-const Shotcut = 'https://assets.dapdap.tech/images/bafkreibexhymj2bp2zhuhlwzcik5o42zg6xvt5i7rbsxcpk7ty7l6mmxum.svg';
-const star = 'https://assets.dapdap.tech/images/bafkreiduogs6um2scfu53rprwmjjt6f55npfycomoe4za2ve7uucej52vu.svg';
-const line = 'https://assets.dapdap.tech/images/bafkreia3362z25o4wope7mt3jffallldmtmodasm5crpltkfurnem2wxfe.svg';
+const arrowyellow = 'https://assets.dapdap.net/images/bafkreieovokoreirgn2zewqmqgddkq4vlaljgvaw6nlqs2psbcq7n3pffi.svg';
+const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
+const Dapps = 'https://assets.dapdap.net/images/bafkreifyko6xoxde4srussisqazc3jnyqwqrwvhvphifknq4ybxa4kj7yu.svg';
+const DeepDive = 'https://assets.dapdap.net/images/bafkreig4bv3xu73ouxj5x7zt4qlvnnbvgdqzj5oq6te6y7ax4tz2yid2ma.svg';
+const Shotcut = 'https://assets.dapdap.net/images/bafkreibexhymj2bp2zhuhlwzcik5o42zg6xvt5i7rbsxcpk7ty7l6mmxum.svg';
+const star = 'https://assets.dapdap.net/images/bafkreiduogs6um2scfu53rprwmjjt6f55npfycomoe4za2ve7uucej52vu.svg';
+const line = 'https://assets.dapdap.net/images/bafkreia3362z25o4wope7mt3jffallldmtmodasm5crpltkfurnem2wxfe.svg';
 
 const ChainsDetails = styled.div`
   color: #ffffff;
