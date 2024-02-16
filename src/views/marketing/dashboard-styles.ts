@@ -443,8 +443,15 @@ export const RewardList = styled.div`
   display: flex;
   gap: 20px;
   margin-bottom: 30px;
+  &.blur {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
 `;
 export const RewardQuest = styled.div`
+  padding: 20px;
   flex-grow: 1;
   height: 158px;
   border-radius: 16px;
@@ -452,9 +459,87 @@ export const RewardQuest = styled.div`
     linear-gradient(0deg, rgba(55, 58, 83, 0.2), rgba(55, 58, 83, 0.2));
 `;
 export const RewardBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 14px;
   width: 207px;
   height: 158px;
   border-radius: 16px;
   background: linear-gradient(180deg, rgba(44, 46, 62, 0) 0%, #2c2e3e 100%),
     linear-gradient(180deg, rgba(55, 58, 83, 0) 0%, #373a53 100%);
+  &.blur {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
+`;
+
+export const Head = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+export const HeadLeft = styled.div`
+  font-size: 18px;
+  font-weight: 500;
+  color: white;
+  display: flex;
+  align-items: baseline;
+`;
+
+export const StepNum = styled.div`
+  font-size: 32px;
+  font-weight: 700;
+  color: rgba(235, 244, 121, 1);
+  margin: 0 5px;
+`;
+export const Tips = styled.div`
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(151, 154, 190, 1);
+  margin-bottom: 14px;
+`;
+
+export const TipCount = styled.span`
+  color: rgba(235, 244, 121, 1);
+`;
+export const Progress = styled.div`
+  position: relative;
+  height: 4px;
+  border-radius: 11px;
+  background-color: rgba(255, 255, 255, 0.15);
+`;
+export const Inner = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 4px;
+  border-radius: 11px;
+  transition: all 0.3s ease-in;
+  background-color: rgba(235, 244, 121, 1);
+`;
+
+export const Cap = styled.img`
+  width: 75px;
+`;
+export const ClaimBtn = styled.div`
+  width: 183px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 600;
+  color: rgba(22, 24, 29, 1);
+  border-radius: 10px;
+  background: linear-gradient(180deg, #eef3bf 0%, #e9f456 100%);
+  cursor: pointer;
+`;
+export const CoinIcon = styled.img`
+  width: 19px;
+  margin: 0 5px;
 `;

@@ -272,8 +272,6 @@ export const CardBox = styled.div`
   }
 `;
 export const Card = styled.div`
-  float: left;
-  width: 607px;
   height: 177px;
   margin-right: 30px;
   margin-bottom: 30px;
