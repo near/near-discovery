@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 import { onboard } from '@/data/web3';
 import { useEthersProviderContext } from '@/data/web3';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -10,13 +11,12 @@ import { flushEvents } from '@/utils/analytics';
 
 import { NotificationButton } from '../NotificationButton';
 import { UserDropdownMenu } from './UserDropdownMenu';
-import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
 const nearIcon = (
   <svg width="14" height="12" viewBox="0 0 14 12" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M2.21053 2.47646V9.60233L5.89474 6.8798L6.26316 7.19935L3.1737 11.5031C2.0258 12.5446 0 11.8399 0 10.3991V1.60091C0 0.110658 2.1444 -0.568147 3.25115 0.571763L11.7895 9.3659V2.5324L8.47368 4.96254L8.10526 4.64299L10.733 0.625611C11.8298 -0.535405 14 0.137252 14 1.63821V10.2414C14 11.7317 11.8556 12.4105 10.7488 11.2706L2.21053 2.47646Z"
       fill="#332C4B"
     />
@@ -58,7 +58,7 @@ const baseIcon = (
 );
 
 const mantleIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4"></img>
+  <img src="https://assets.dapdap.net/images/bafkreiehsmxrfkil52ow2o3afcryjfpm7eovsrrjgb75eupx2vuhkiajq4.svg"></img>
 );
 const arbitrumIcon = (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -104,8 +104,8 @@ const lineaIcon = (
   <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="32" y="32" width="32" height="32" rx="8" transform="rotate(180 32 32)" fill="#131313" />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M21.2625 13.6465C22.8218 13.6465 24.0858 12.3825 24.0858 10.8232C24.0858 9.26401 22.8218 8 21.2625 8C19.7033 8 18.4393 9.26401 18.4393 10.8232C18.4393 12.3825 19.7033 13.6465 21.2625 13.6465ZM8 10.4949H11.2172V21.8535H21.2627V24.8081H8V10.4949Z"
       fill="#56DAFF"
     />
@@ -128,9 +128,9 @@ const polygonIcon = (
         y2="9.96749"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#A726C1" />
-        <stop offset="0.88" stop-color="#803BDF" />
-        <stop offset="1" stop-color="#7B3FE4" />
+        <stop stopColor="#A726C1" />
+        <stop offset="0.88" stopColor="#803BDF" />
+        <stop offset="1" stopColor="#7B3FE4" />
       </linearGradient>
     </defs>
   </svg>
@@ -147,18 +147,18 @@ const metisIcon = (
 );
 
 const GnosisIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreiflvhldlljkmvy6i7xos6w5i56i4nt5mwr7pgu6f3kowqnqdz2vme" />
+  <img src="https://assets.dapdap.net/images/bafkreiflvhldlljkmvy6i7xos6w5i56i4nt5mwr7pgu6f3kowqnqdz2vme.png" />
 );
 const ZkSyncIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu" />
+  <img src="https://assets.dapdap.net/images/bafkreiepgmcd2oa6ufoejvgqiukfomo5gnxm4ltlyf2wsrowyouq3gkvcu.png" />
 );
 
 const AvalanchecIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreie2h3qc42tkuj73ip6qs6nl463qm5qiumkicnw5wy4x5jvkjhvrdi" />
+  <img src="https://assets.dapdap.net/images/bafkreie2h3qc42tkuj73ip6qs6nl463qm5qiumkicnw5wy4x5jvkjhvrdi.svg" />
 );
 
 const OptimismIcon = (
-  <img src="https://ipfs.near.social/ipfs/bafkreidax5cwumzbzrttt7iswlzhdndtbzyiyrg6yy4jbtydm2ihvlpo6a" />
+  <img src="https://assets.dapdap.net/images/bafkreidax5cwumzbzrttt7iswlzhdndtbzyiyrg6yy4jbtydm2ihvlpo6a.svg" />
 );
 
 const NearSignInButton = styled.div`
@@ -424,27 +424,27 @@ export const LoginBox = () => {
         'ZKEVM-all-in-one',
       ];
     } else if (name === 'base') {
-      paths = ['base', 'Base.BaseDex','Base.Lending','Base.All-in-one'];
+      paths = ['base', 'Base.BaseDex', 'Base.Lending', 'Base.All-in-one'];
     } else if (name === 'mantle') {
-      paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA','Mantle.Lending','Mantle.All-in-one'];
+      paths = ['mantle', 'Mantle.Swap', 'Mantle.GAMMA', 'Mantle.Lending', 'Mantle.All-in-one'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle','Arbitrum.Lending','Arbitrum.All-in-one'];
+      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle', 'Arbitrum.Lending', 'Arbitrum.All-in-one'];
     } else if (name === 'bsc') {
-      paths = ['bsc', 'Bsc.Swap.Dex','Bsc.Lending','Bsc.All-in-one'];
+      paths = ['bsc', 'Bsc.Swap.Dex', 'Bsc.Lending', 'Bsc.All-in-one'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Liquidity.GAMMA','Linea.Lending','Linea.All-in-one'];
-    } else if (name === 'polygon') { 
-      paths = ['polygon', 'Polygon.Swap.Dex','Polygon.Lending','Polygon.All-in-one'];
+      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Liquidity.GAMMA', 'Linea.Lending', 'Linea.All-in-one'];
+    } else if (name === 'polygon') {
+      paths = ['polygon', 'Polygon.Swap.Dex', 'Polygon.Lending', 'Polygon.All-in-one'];
     } else if (name === 'metis') {
-      paths = ['metis', 'Metis.Swap.Dex','Metis.All-in-one'];
+      paths = ['metis', 'Metis.Swap.Dex', 'Metis.All-in-one'];
     } else if (name === 'gnosis') {
-      paths = ['gnosis', 'Gnosis.Swap.Dex','Gnosis.Lending','Gnosis.All-in-one'];
+      paths = ['gnosis', 'Gnosis.Swap.Dex', 'Gnosis.Lending', 'Gnosis.All-in-one'];
     } else if (name === 'zkSync') {
-      paths = ['zkSync', 'zkSync.Swap.Dex','zkSync.All-in-one'];
-    }else if (name === 'avalanche') {
-      paths = ['avalanche', 'Avalanche.Lending','Avalanche.All-in-one'];
-    }else if (name === 'optimism') {
-      paths = ['optimism', 'Optimism.Lending','Optimism.All-in-one'];
+      paths = ['zkSync', 'zkSync.Swap.Dex', 'zkSync.All-in-one'];
+    } else if (name === 'avalanche') {
+      paths = ['avalanche', 'Avalanche.Lending', 'Avalanche.All-in-one'];
+    } else if (name === 'optimism') {
+      paths = ['optimism', 'Optimism.Lending', 'Optimism.All-in-one'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.some((p) => r.includes(p));
@@ -690,7 +690,7 @@ export const LoginBox = () => {
       });
     } else {
       onboard.state.actions.updateAccountCenter({
-        enabled: true,
+        enabled: false,
       });
     }
   }, [isDappActive]);
@@ -698,28 +698,28 @@ export const LoginBox = () => {
   return isActive('near')
     ? NearLoginArea
     : isActive('polygon-zkevm')
-    ? ZKEVMloginArea
-    : isActive('base')
-    ? BaseloginArea
-    : isActive('mantle')
-    ? MantleloginArea
-    : isActive('arbitrum')
-    ? ArbitrumloginArea
-    : isActive('bsc')
-    ? BscloginArea
-    : isActive('linea')
-    ? LinealoginArea
-    : isActive('polygon')
-    ? PolygonloginArea
-    : isActive('metis')
-    ? MetisloginArea
-    : isActive('gnosis')
-    ? GnosisloginArea
-    : isActive('zkSync')
-    ? ZkSyncloginArea
-    : isActive('avalanche')
-    ? AvalancheloginArea
-    : isActive('optimism')
-    ? OptimismloginArea
-    : null;
+      ? ZKEVMloginArea
+      : isActive('base')
+        ? BaseloginArea
+        : isActive('mantle')
+          ? MantleloginArea
+          : isActive('arbitrum')
+            ? ArbitrumloginArea
+            : isActive('bsc')
+              ? BscloginArea
+              : isActive('linea')
+                ? LinealoginArea
+                : isActive('polygon')
+                  ? PolygonloginArea
+                  : isActive('metis')
+                    ? MetisloginArea
+                    : isActive('gnosis')
+                      ? GnosisloginArea
+                      : isActive('zkSync')
+                        ? ZkSyncloginArea
+                        : isActive('avalanche')
+                          ? AvalancheloginArea
+                          : isActive('optimism')
+                            ? OptimismloginArea
+                            : null;
 };

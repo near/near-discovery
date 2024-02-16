@@ -295,31 +295,37 @@ export const DesktopNavigationLeft = () => {
         '0vix.Lending',
       ];
     } else if (name == 'base') {
-      paths = ['Base.BaseDex', 'base','Base.Lending','Base.All-in-one'];
+      paths = ['Base.BaseDex', 'base', 'Base.Lending', 'Base.All-in-one'];
     } else if (name === 'mantle') {
-      paths = ['mantle', 'Mantle.Swap','Mantle.Lending','Mantle.All-in-one'];
+      paths = ['mantle', 'Mantle.Swap', 'Mantle.Lending', 'Mantle.All-in-one'];
     } else if (name == 'warmup') {
       paths = ['ZKEVM.ExecuteRecords', 'ZKEVM.QuestionList', 'warmup'];
     } else if (name == 'allChains') {
       paths = ['allChains', 'AllChains.AllChainsPage'];
     } else if (name === 'arbitrum') {
-      paths = ['arbitrum', 'Arbitrum.Swap.Dex', 'Arbitrum.Pendle.TradeMarkets', 'Arbitrum.Lending','Arbitrum.All-in-one'];
+      paths = [
+        'arbitrum',
+        'Arbitrum.Swap.Dex',
+        'Arbitrum.Pendle.TradeMarkets',
+        'Arbitrum.Lending',
+        'Arbitrum.All-in-one',
+      ];
     } else if (name === 'bsc') {
-      paths = ['bsc', 'Bsc.Swap.Dex','Bsc.Lending','Bsc.All-in-one'];
+      paths = ['bsc', 'Bsc.Swap.Dex', 'Bsc.Lending', 'Bsc.All-in-one'];
     } else if (name === 'polygon') {
-      paths = ['polygon', 'Polygon.Swap.Dex','Polygon.Lending','Polygon.All-in-one'];
+      paths = ['polygon', 'Polygon.Swap.Dex', 'Polygon.Lending', 'Polygon.All-in-one'];
     } else if (name === 'linea') {
-      paths = ['linea', 'Linea.Swap.Dex','Linea.Lending','Linea.All-in-one'];
+      paths = ['linea', 'Linea.Swap.Dex', 'Linea.Lending', 'Linea.All-in-one'];
     } else if (name === 'metis') {
-      paths = ['metis', 'Metis.Swap.Dex','Metis.All-in-one'];
+      paths = ['metis', 'Metis.Swap.Dex', 'Metis.All-in-one'];
     } else if (name === 'gnosis') {
-      paths = ['gnosis', 'Gnosis.Swap.Dex','Gnosis.Lending','Gnosis.All-in-one'];
+      paths = ['gnosis', 'Gnosis.Swap.Dex', 'Gnosis.Lending', 'Gnosis.All-in-one'];
     } else if (name === 'zkSync') {
-      paths = ['zkSync', 'zkSync.Swap.Dex','zkSync.All-in-one'];
+      paths = ['zkSync', 'zkSync.Swap.Dex', 'zkSync.All-in-one'];
     } else if (name === 'avalanche') {
-      paths = ['avalanche', 'Avalanche.Lending','Avalanche.All-in-one'];
+      paths = ['avalanche', 'Avalanche.Lending', 'Avalanche.All-in-one'];
     } else if (name === 'optimism') {
-      paths = ['optimism', 'Optimism.Lending','Optimism.All-in-one'];
+      paths = ['optimism', 'Optimism.Lending', 'Optimism.All-in-one'];
     }
     const r = router.asPath.split('/').pop() || '';
     return paths.includes(r);
@@ -360,8 +366,8 @@ export const DesktopNavigationLeft = () => {
           y2="12.5624"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#EEF3BF" />
-          <stop offset="1" stop-color="#E9F456" />
+          <stop stopColor="#EEF3BF" />
+          <stop offset="1" stopColor="#E9F456" />
         </linearGradient>
         <linearGradient
           id="paint1_linear_1_257"
@@ -371,12 +377,12 @@ export const DesktopNavigationLeft = () => {
           y2="9.06897"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#EEF3BF" />
-          <stop offset="1" stop-color="#E9F456" />
+          <stop stopColor="#EEF3BF" />
+          <stop offset="1" stopColor="#E9F456" />
         </linearGradient>
         <linearGradient id="paint2_linear_1_257" x1="3.5" y1="0" x2="3.5" y2="3" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#EEF3BF" />
-          <stop offset="1" stop-color="#E9F456" />
+          <stop stopColor="#EEF3BF" />
+          <stop offset="1" stopColor="#E9F456" />
         </linearGradient>
       </defs>
     </svg>
@@ -425,7 +431,11 @@ export const DesktopNavigationLeft = () => {
               <Link className={`item ${router.asPath == '/' ? 'active' : ''}`} href="/" onClick={closeMenu}>
                 Home
               </Link>
-              <Link className={`item ${isActive('warmup') ? 'active' : ''}`} onClick={closeMenu} href="/warmup">
+              <Link
+                className={`item ${isActive('warmup') ? 'active' : ''}`}
+                onClick={closeMenu}
+                href="/onboarding/linea"
+              >
                 Polygon zkEVM Warm up
               </Link>
 
@@ -639,7 +649,7 @@ export const DesktopNavigationLeft = () => {
                     <div className="icon">{zkevmIcon}</div>
                   </div>
                   <div className="childBox" style={{ display: showWarmBox ? 'block' : 'none' }}>
-                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
+                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/onboarding/linea">
                       Polygon zkEVM
                     </Link>
                   </div>
@@ -792,7 +802,7 @@ export const DesktopNavigationLeft = () => {
                     ></ArrowPcIcon>
                   </div>
                   <div className={`${openWarmPc ? 'show' : 'hidden'}`}>
-                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/warmup">
+                    <Link className={`item child-item ${isActive('warmup') ? 'active' : ''}`} href="/onboarding/linea">
                       Polygon zkEVM<span className="bag">{isActive('warmup') ? visible_bag : null}</span>
                     </Link>
                   </div>
@@ -913,6 +923,10 @@ export const DesktopNavigationLeft = () => {
                     </Link>
                   </div>
                 </div>
+                <Link className={`item ${router.asPath == '/portfolio' ? 'active' : ''}`} href="/portfolio">
+                  <div className="icon">{portfolioIcon}</div>Portfolio
+                  <span className="bag">{router.asPath == '/portfolio' ? visible_bag : null}</span>
+                </Link>
               </div>
             </div>
           )}
@@ -960,6 +974,15 @@ const zkevmIcon = (
   </svg>
 );
 
+const portfolioIcon = (
+  <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path
+      d="M18 6.5V9.5C18 11.985 13.97 14 9 14C4.03 14 0 11.985 0 9.5V6.5C0 8.985 4.03 11 9 11C13.97 11 18 8.985 18 6.5ZM0 11.5C0 13.985 4.03 16 9 16C13.97 16 18 13.985 18 11.5V14.5C18 16.985 13.97 19 9 19C4.03 19 0 16.985 0 14.5V11.5ZM9 9C4.03 9 0 6.985 0 4.5C0 2.015 4.03 0 9 0C13.97 0 18 2.015 18 4.5C18 6.985 13.97 9 9 9Z"
+      fill="currentColor"
+    />
+  </svg>
+);
+
 const shanshanLogoSvg = (
   <svg width="31" height="33" viewBox="0 0 31 33" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
@@ -971,14 +994,14 @@ const shanshanLogoSvg = (
       fill="black"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M19.625 2.48514L7.42193 5.75495C5.43462 6.28745 4.25525 8.33016 4.78775 10.3175L8.05756 22.5206C8.59006 24.5079 10.6328 25.6872 12.6201 25.1547L24.8232 21.8849C26.8105 21.3524 27.9899 19.3097 27.4574 17.3224L24.1875 5.11932C23.655 3.132 21.6123 1.95264 19.625 2.48514ZM7.10054 4.5555C4.45079 5.2655 2.8783 7.98911 3.5883 10.6389L6.85811 22.842C7.56811 25.4917 10.2917 27.0642 12.9415 26.3542L25.1446 23.0844C27.7943 22.3744 29.3668 19.6508 28.6568 17.001L25.387 4.79793C24.677 2.14817 21.9534 0.57569 19.3036 1.28569L7.10054 4.5555Z"
       fill="#EBF479"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M15.0454 7.9507L11.7892 8.82321C11.2557 8.96615 10.9391 9.51449 11.0821 10.048L11.4412 11.3883C11.5841 11.9217 12.1325 12.2383 12.6659 12.0954L15.6242 11.3027C16.7112 11.0114 17.8286 11.6565 18.1199 12.7436C18.4112 13.8307 17.7661 14.948 16.679 15.2393L13.7208 16.032C13.1873 16.1749 12.8707 16.7233 13.0136 17.2567L13.3879 18.6533C13.5308 19.1868 14.0791 19.5034 14.6126 19.3604L17.8689 18.4879C20.7786 17.7083 22.5054 14.7174 21.7258 11.8076C20.9461 8.89782 17.9552 7.17103 15.0454 7.9507Z"
       fill="#EBF479"
     />
@@ -1039,14 +1062,14 @@ const shanshanPutLogo = (
       fill="black"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M19.625 2.48502L7.42193 5.75483C5.43462 6.28733 4.25525 8.33004 4.78775 10.3174L8.05756 22.5204C8.59006 24.5078 10.6328 25.6871 12.6201 25.1546L24.8232 21.8848C26.8105 21.3523 27.9899 19.3096 27.4574 17.3223L24.1875 5.1192C23.655 3.13188 21.6123 1.95252 19.625 2.48502ZM7.10054 4.55537C4.45079 5.26537 2.8783 7.98899 3.5883 10.6387L6.85811 22.8418C7.56811 25.4916 10.2917 27.0641 12.9415 26.3541L25.1446 23.0843C27.7943 22.3743 29.3668 19.6506 28.6568 17.0009L25.387 4.79781C24.677 2.14805 21.9534 0.575568 19.3036 1.28557L7.10054 4.55537Z"
       fill="#EBF479"
     />
     <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
+      fillRule="evenodd"
+      clipRule="evenodd"
       d="M15.0454 7.9507L11.7892 8.82321C11.2557 8.96615 10.9391 9.51449 11.0821 10.048L11.4412 11.3883C11.5841 11.9217 12.1325 12.2383 12.6659 12.0954L15.6242 11.3027C16.7112 11.0114 17.8286 11.6565 18.1199 12.7436C18.4112 13.8307 17.7661 14.948 16.679 15.2393L13.7208 16.032C13.1873 16.1749 12.8707 16.7233 13.0136 17.2567L13.3879 18.6533C13.5308 19.1868 14.0791 19.5034 14.6126 19.3604L17.8689 18.4879C20.7786 17.7083 22.5054 14.7174 21.7258 11.8076C20.9461 8.89782 17.9552 7.17103 15.0454 7.9507Z"
       fill="#EBF479"
     />
@@ -1056,29 +1079,29 @@ const shanshanPutLogo = (
 const putIcon = (
   <svg width="21" height="26" viewBox="0 0 21 26" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M21 0H8C3.58172 0 0 3.58172 0 8V18C0 22.4183 3.58172 26 8 26H21V0Z" fill="#373A53" />
-    <path d="M12 8L8 13L12 18" stroke="#E9F456" stroke-width="2" stroke-linecap="round" />
+    <path d="M12 8L8 13L12 18" stroke="#E9F456" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const m_menuIcon = (
   <svg width="22" height="18" viewBox="0 0 22 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M2 2H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
-    <path d="M2 9H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
-    <path d="M2 16H20" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
+    <path d="M2 2H20" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
+    <path d="M2 9H20" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
+    <path d="M2 16H20" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
   </svg>
 );
 
 const m_closeIcon = (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1.63599 14.3638L14.3639 1.63585" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
-    <path d="M14.3643 14.3638L1.63634 1.63585" stroke="#E9F456" stroke-width="3" stroke-linecap="round" />
+    <path d="M1.63599 14.3638L14.3639 1.63585" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
+    <path d="M14.3643 14.3638L1.63634 1.63585" stroke="#E9F456" strokeWidth="3" strokeLinecap="round" />
   </svg>
 );
 
 function ArrowIcon(props: any) {
   return (
     <svg {...props} width="17" height="9" viewBox="0 0 17 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M16 1L8.5 7L1 0.999999" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M16 1L8.5 7L1 0.999999" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }
@@ -1086,7 +1109,7 @@ function ArrowIcon(props: any) {
 function ArrowPcIcon(props: any) {
   return (
     <svg {...props} width="12" height="7" viewBox="0 0 12 7" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M11 6L6 2L1 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+      <path d="M11 6L6 2L1 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>
   );
 }

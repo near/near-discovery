@@ -4,21 +4,29 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
+import 'react-toastify/dist/ReactToastify.css';
+import 'react-loading-skeleton/dist/skeleton.css';
 
+import { deleteCookie, getCookie } from 'cookies-next';
+import { debounce } from 'lodash';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
+import { useState } from 'react';
+import { SkeletonTheme } from 'react-loading-skeleton';
+import { ToastContainer } from 'react-toastify';
 
-import { Toaster } from '@/components/lib/Toast';
+import useAccount from '@/hooks/useAccount';
+import useAuth from '@/hooks/useAuth';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
-import { useClickTracking } from '@/hooks/useClickTracking';
-import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
-import { usePageAnalytics } from '@/hooks/usePageAnalytics';
+import useClickTracking from '@/hooks/useClickTracking';
+import useInitialData from '@/hooks/useInitialData';
+import useTokenPrice from '@/hooks/useTokenPrice';
 import { useAuthStore } from '@/stores/auth';
-import { init as initializeAnalytics } from '@/utils/analytics';
+import { activityReg } from '@/utils/activity-reg';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -32,17 +40,52 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
-  useHashUrlBackwardsCompatibility();
-  usePageAnalytics();
+  // useHashUrlBackwardsCompatibility();
+  // usePageAnalytics();
   useClickTracking();
+  const { getInitialData } = useInitialData();
+  const [ready, setReady] = useState(false);
+  const [updater, setUpdater] = useState<number>();
+  const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const authStore = useAuthStore();
+  const { account } = useAccount();
+  const { login, logging } = useAuth();
+  const loginTimer = useRef<any>();
   const componentSrc = router.query;
 
+  const accountInit = useCallback(() => {
+    if (!account) {
+      if (getCookie('LOGIN_ACCOUNT')) {
+        clearTimeout(loginTimer.current);
+        loginTimer.current = setTimeout(() => {
+          deleteCookie('LOGIN_ACCOUNT');
+          deleteCookie('AUTHED_ACCOUNT');
+          setUpdater(Date.now());
+        }, 3000);
+      } else {
+        setUpdater(Date.now());
+      }
+    } else {
+      clearTimeout(loginTimer.current);
+      login(() => {
+        getInitialData();
+        setUpdater(Date.now());
+      });
+    }
+  }, [account]);
+
+  const _accountInit = debounce(accountInit, 500);
+
   useEffect(() => {
-    initializeAnalytics();
-  }, []);
+    if (!router.pathname.match(activityReg)) {
+      _accountInit();
+    } else {
+      getInitialData();
+      setUpdater(Date.now());
+    }
+  }, [account]);
 
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
@@ -56,6 +99,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, [authStore.accountId, authStore.signedIn, componentSrc]);
 
   useEffect(() => {
+    initializePrice();
     const interval = setInterval(zendeskCheck, 20);
 
     function zendeskCheck() {
@@ -68,8 +112,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         clearInterval(interval);
       }
     }
+    setReady(true);
 
-    () => {
+    return () => {
       clearInterval(interval);
     };
   }, []);
@@ -88,14 +133,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <link rel="shortcut icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" href="/logo.png" />
       </Head>
-      <Script id="google-tag-manager" strategy="afterInteractive">
-        {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-TR5G968');`}
-      </Script>
-
+      <Script id="telegram-widget" src="https://telegram.org/js/telegram-widget.js?22" />
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
 
       <Script async src="https://www.googletagmanager.com/gtag/js?id=G-PR996H5E9T"></Script>
@@ -113,7 +151,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         async
       />
 
-      <Script id="zendesk-config" strategy="afterInteractive">
+      <Script id="zendesk-config">
         {`
           window.zESettings = {
             webWidget: {
@@ -142,18 +180,24 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <VmInitializer />
 
-      <noscript>
-        <iframe
-          src="https://www.googletagmanager.com/ns.html?id=GTM-TR5G968"
-          height="0"
-          width="0"
-          style={{ display: 'none', visibility: 'hidden' }}
-        ></iframe>
-      </noscript>
-
-      {getLayout(<Component {...pageProps} />)}
-
-      <Toaster />
+      {updater && (
+        <SkeletonTheme baseColor="#353649" highlightColor="#444">
+          {getLayout(<Component {...pageProps} logging={logging} key={updater} />)}
+        </SkeletonTheme>
+      )}
+      {ready && (
+        <ToastContainer
+          position={window.innerWidth > 768 ? 'top-right' : 'bottom-right'}
+          autoClose={5000}
+          hideProgressBar={true}
+          theme="dark"
+          toastStyle={{ backgroundColor: 'transparent', boxShadow: 'none' }}
+          newestOnTop
+          rtl={false}
+          pauseOnFocusLoss
+          closeButton={false}
+        />
+      )}
     </>
   );
 }

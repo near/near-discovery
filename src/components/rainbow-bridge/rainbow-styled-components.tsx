@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 import { SMALL_SCREEN } from '../near/NearStyleVar';
 
 const SwitchWrapper = styled.div`
@@ -15,11 +16,11 @@ const SwitchWrapper = styled.div`
 `;
 
 const RainbowWrapper = styled.div`
-  margin: auto;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 100px;
+  /* padding-top: 100px; */
 
   @media (max-width: ${SMALL_SCREEN}) {
     padding-top: 0px;
@@ -261,7 +262,7 @@ const Wrapper = styled.div`
 `;
 
 const RainbowBridgeContainer = styled.div`
-  max-width: 1320px;
+  /* max-width: 1320px; */
 
   margin: auto;
   position: relative;

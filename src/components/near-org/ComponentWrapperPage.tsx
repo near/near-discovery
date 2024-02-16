@@ -24,11 +24,7 @@ export function ComponentWrapperPage(props: Props) {
   return (
     <>
       {props.meta && <MetaTags {...props.meta} />}
-      <div
-        style={{
-          paddingTop: 'var(--body-top-padding)',
-        }}
-      >
+      <div>
         <VmComponent src={props.src} props={props.componentProps} />
       </div>
     </>

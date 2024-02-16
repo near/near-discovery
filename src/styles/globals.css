@@ -2,18 +2,26 @@
 @import 'swiper/css';
 @import 'swiper/css/autoplay';
 
+/* url('/fonts/Montserrat-Italic-VariableFont_wght.ttf'), */
 @font-face {
-  font-family: 'Gantari';
-  src: url('/fonts/Mona-Sans.woff2') format('woff2 supports variations'),
-    url('/fonts/Mona-Sans.woff2') format('woff2-variations');
+  font-family: 'Montserrat';
+  src: url('/fonts/Montserrat-VariableFont_wght.ttf');
   font-weight: 200 900;
   font-stretch: 75% 125%;
 }
 
 @font-face {
   font-family: 'FK Grotesk';
-  src: url('/fonts/FKGrotesk.woff2') format('woff2 supports variations'),
+  src:
+    url('/fonts/FKGrotesk.woff2') format('woff2 supports variations'),
     url('/fonts/FKGrotesk.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-stretch: 75% 125%;
+}
+
+@font-face {
+  font-family: '5squared pixel';
+  src: url('/fonts/5squared-pixel.ttf') format('truetype');
   font-weight: 200 900;
   font-stretch: 75% 125%;
 }
@@ -121,6 +129,8 @@ html {
   -webkit-font-smoothing: antialiased;
   color: var(--sand12);
   font: var(--text-base);
+  font-family: Gantari;
+  background-color: rgb(24, 25, 33);
 }
 
 a {
@@ -177,4 +187,40 @@ a:hover {
 }
 :root {
   --account-center-z-index: 100;
+}
+
+body::-webkit-scrollbar,
+div::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+  /**/
+}
+body::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 6px;
+}
+body::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+}
+body::-webkit-scrollbar-thumb:hover,
+div::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.skeleton {
+  line-height: 1;
+}
+
+input {
+  outline: none;
+  background-color: transparent;
+  border: none;
+}
+
+button {
+  border: none;
 }

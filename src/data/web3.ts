@@ -1,28 +1,32 @@
-import type { EIP1193Provider } from '@web3-onboard/core';
-import injectedModule from '@web3-onboard/injected-wallets';
-import ledgerModule from '@web3-onboard/ledger';
+import { type EIP1193Provider } from '@web3-onboard/core';
+import injectedModule, { ProviderLabel } from '@web3-onboard/injected-wallets';
+import bitgetWalletModule from '@web3-onboard/bitget';
 import { init, useConnectWallet } from '@web3-onboard/react';
 import walletConnectModule from '@web3-onboard/walletconnect';
 import { useEffect, useState } from 'react';
 import { singletonHook } from 'react-singleton-hook';
 
 import icon from '@/assets/images/near_social_icon.svg';
+import chains from '@/config/chains';
 
 const web3onboardKey = 'web3-onboard:connectedWallets';
 
 const wcV2InitOptions: any = {
   version: 2,
   projectId: '72b7b3359ab477e339a070f615806aa6',
-  requiredChains: [1, 56],
+  requiredChains: Object.keys(chains).map((chain) => Number(chain)),
 };
 
 const walletConnect = walletConnectModule(wcV2InitOptions);
-const ledger = ledgerModule(wcV2InitOptions);
-const injected = injectedModule();
+const injected = injectedModule({
+  // display specific unavailable wallets
+  displayUnavailable: [ProviderLabel.MetaMask],
+});
+const bitgetWallet = bitgetWalletModule();
 
 // initialize Onboard
 export const onboard = init({
-  wallets: [injected, walletConnect, ledger],
+  wallets: [injected, bitgetWallet, walletConnect],
   chains: [
     {
       id: 1,
@@ -149,8 +153,7 @@ export const onboard = init({
       token: 'XDAI',
       label: 'Gnosis',
       rpcUrl: 'https://rpc.ankr.com/gnosis',
-      icon: 'https://ipfs.near.social/ipfs/bafkreigl7y5n7xqlasn4wokkhxk3hoostz2u7qgvezvzfni2b6g2r4ayfu',
-      color: 'transparent',
+      icon: 'https://assets.dapdap.net/images/bafkreigl7y5n7xqlasn4wokkhxk3hoostz2u7qgvezvzfni2b6g2r4ayfu.png',
     },
     {
       id: 10200,
@@ -236,7 +239,7 @@ export const onboard = init({
       token: 'ETH',
       label: 'Linea Mainnet',
       rpcUrl: 'https://rpc.linea.build',
-      icon: 'https://ipfs.near.social/ipfs/bafkreib57cxzdodeqejjh6y7psgb4hjvnt3wpjhq2hdpjcu2tynhwnw2iq',
+      icon: 'https://assets.dapdap.net/images/bafkreib57cxzdodeqejjh6y7psgb4hjvnt3wpjhq2hdpjcu2tynhwnw2iq.png',
       color: 'transparent',
     },
 
@@ -251,7 +254,7 @@ export const onboard = init({
       token: 'METIS',
       label: 'Metis Andromeda Mainnet',
       rpcUrl: 'https://metis-mainnet.public.blastapi.io',
-      icon: 'https://ipfs.near.social/ipfs/bafkreibnqsbiyguhxo64nulq27mdyjhsusnp5rj4fqruuxf5smmmj6xvsi',
+      icon: 'https://assets.dapdap.net/images/bafkreibnqsbiyguhxo64nulq27mdyjhsusnp5rj4fqruuxf5smmmj6xvsi.png',
       color: 'transparent',
     },
     {
@@ -266,6 +269,18 @@ export const onboard = init({
       label: 'Metis Goerli Testnet',
       rpcUrl: 'https://goerli.gateway.metisdevops.link	',
     },
+    {
+      id: 169,
+      token: 'Manta',
+      label: 'Manta',
+      rpcUrl: 'https://1rpc.io/manta',
+    },
+    {
+      id: 534352,
+      token: 'Scroll',
+      label: 'Scroll',
+      rpcUrl: 'https://rpc.scroll.io',
+    },
   ],
   appMetadata: {
     name: 'NEAR',
@@ -276,11 +291,11 @@ export const onboard = init({
   accountCenter: {
     desktop: {
       position: 'topRight',
-      enabled: true,
+      enabled: false,
       minimal: false,
     },
     mobile: {
-      enabled: true,
+      enabled: false,
       position: 'bottomRight',
     },
   },
@@ -290,7 +305,7 @@ export const onboard = init({
 
 type EthersProviderContext = {
   provider?: EIP1193Provider;
-  useConnectWallet: typeof useConnectWallet;
+  useConnectWallet: any;
 };
 
 const defaultEthersProviderContext: EthersProviderContext = { useConnectWallet };
@@ -312,8 +327,7 @@ export const useEthersProviderContext = singletonHook(defaultEthersProviderConte
         localStorage.setItem(web3onboardKey, JSON.stringify(connectedWallets));
       });
       const previouslyConnectedWallets = JSON.parse(localStorage.getItem(web3onboardKey) || '[]');
-
-      if (previouslyConnectedWallets) {
+      if (previouslyConnectedWallets && previouslyConnectedWallets?.length) {
         // You can also auto connect "silently" and disable all onboard modals to avoid them flashing on page load
         await onboard.connectWallet({
           autoSelect: {

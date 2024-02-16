@@ -3,11 +3,11 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
 
+import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
-import { MEDIUM_SCREEN } from '@/components/near/NearStyleVar';
 
 const arrowDown = (
   <svg
@@ -18,7 +18,7 @@ const arrowDown = (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <path d="M1 1L5.5 5.09091L10 1" stroke="white" stroke-width="1.63636" stroke-linecap="round" />
+    <path d="M1 1L5.5 5.09091L10 1" stroke="white" strokeWidth="1.63636" strokeLinecap="round" />
   </svg>
 );
 

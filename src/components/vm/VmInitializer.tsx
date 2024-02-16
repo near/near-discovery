@@ -2,6 +2,7 @@ import { sanitizeUrl } from '@braintree/sanitize-url';
 import { setupKeypom } from '@keypom/selector';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
+import { setupBitgetWallet } from '@near-wallet-selector/bitget-wallet';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
 import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
@@ -66,6 +67,7 @@ export default function VmInitializer() {
               gas: '300000000000000',
               bundle: false,
             }),
+            setupBitgetWallet(),
             setupNightly(),
             setupWelldoneWallet(),
             setupFastAuth({

@@ -5,9 +5,9 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ethIcon, nearIcon } from '../../pages/rainbow-bridge';
-import { formateDate, shrinkToken } from './utils';
-import { tokenList } from './config';
 import { SMALL_SCREEN } from '../near/NearStyleVar';
+import { tokenList } from './config';
+import { formateDate, shrinkToken } from './utils';
 
 const IconRight = (
   <svg width="14" height="5" viewBox="0 0 14 5" fill="none" xmlns="http://www.w3.org/2000/svg">

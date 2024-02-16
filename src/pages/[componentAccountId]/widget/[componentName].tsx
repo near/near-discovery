@@ -1,11 +1,16 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
+import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { VmComponent } from '@/components/vm/VmComponent';
+import useAddAction from '@/hooks/useAddAction';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
+
+import { lifi } from '@/components/Bridge/init'
+
 import type { NextPageWithLayout } from '@/utils/types';
 
 const ViewComponentPage: NextPageWithLayout = () => {
@@ -15,7 +20,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const components = useBosComponents();
-
+  const { addAction } = useAddAction('all-in-one');
   useEffect(() => {
     setComponentSrc(componentSrc);
   }, [setComponentSrc, componentSrc]);
@@ -24,31 +29,12 @@ const ViewComponentPage: NextPageWithLayout = () => {
     setComponentProps(router.query);
   }, [router.query]);
 
-  return (
-    <div className="container-xl">
-      <div className="row">
-        <div
-          className="d-inline-block"
-          style={{
-            paddingTop: 'var(--body-top-padding)',
-          }}
-        >
-          {/* <VmComponent
-            key={components.tosCheck}
-            src={components.tosCheck}
-            props={{
-              logOut: authStore.logOut,
-              targetProps: componentProps,
-              targetComponent: componentSrc,
-              tosName: components.tosContent,
-            }}
-          /> */}
+  return <ComponentWrapperPage src={componentSrc} componentProps={{
+    ...componentProps, addAction, getLifi: () => {
+      return lifi
+    }
+  }} />;
 
-          <VmComponent key={componentSrc} src={componentSrc} props={componentProps} />
-        </div>
-      </div>
-    </div>
-  );
 };
 
 ViewComponentPage.getLayout = useDefaultLayout;

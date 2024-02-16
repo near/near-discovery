@@ -1,0 +1,78 @@
+import type { Token } from '@/types';
+
+const CHAIN_ID = 1101;
+export const polygonZkevm: { [key: string]: Token } = {
+  eth: {
+    chainId: CHAIN_ID,
+    name: 'ETH',
+    symbol: 'ETH',
+    icon: 'https://ipfs.near.social/ipfs/bafkreibspnls7q67q25r2ifv2rrfmvzl744pzuh3s5ekigeqkmyycl2auq',
+    decimals: 18,
+    isNative: true,
+    address: 'native',
+  },
+  mai: {
+    chainId: CHAIN_ID,
+    address: '0x27a4BF80C2d63E42437258533dac7eAFF9881bdB',
+    name: 'Mai Stablecoin',
+    symbol: 'MAI',
+    icon: 'https://assets.coingecko.com/coins/images/15264/standard/mimatic-red.png?1696514916',
+    decimals: 18,
+  },
+  usdc: {
+    chainId: CHAIN_ID,
+    address: '0xa8ce8aee21bc2a48a5ef670afcc9274c7bbbc035',
+    decimals: 6,
+    symbol: 'USDC',
+    name: 'USD Coin',
+    icon: 'https://ipfs.near.social/ipfs/bafkreie4jihoa76mgyzxhw2yrapihzu2qhkjz6m7u4opoxjebzg6zc2lla',
+  },
+  weth: {
+    chainId: CHAIN_ID,
+    address: '0x4f9a0e7fd2bf6067db6994cf12e4495df938e6e9',
+    decimals: 18,
+    symbol: 'WETH',
+    name: 'Wrapped Ether',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihyzmiuawyekwiyofkzm25xzrrfenhvadi6lb42juvq7tah2u7ha4',
+  },
+  reth: {
+    chainId: CHAIN_ID,
+    address: '0xb23c20efce6e24acca0cef9b7b7aa196b84ec942',
+    decimals: 18,
+    symbol: 'rETH',
+    name: 'Rocket Pool ETH ',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihj6luje2jnxayh7dkezzuwrsnxtcppwotecgf235p5tyta6vzdty',
+  },
+  wbtc: {
+    chainId: CHAIN_ID,
+    address: '0xea034fb02eb1808c2cc3adbc15f447b93cbe08e1',
+    decimals: 8,
+    symbol: 'WBTC',
+    name: 'Wrapped BTC',
+    icon: 'https://ipfs.near.social/ipfs/bafkreigdklwcldjo4w7viyrym54hdb43wgpv23mbicetszygzapttbgo7q',
+  },
+  matic: {
+    chainId: CHAIN_ID,
+    address: '0xa2036f0538221a77a3937f1379699f44945018d0',
+    decimals: 18,
+    symbol: 'MATIC',
+    name: 'Matic Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreih5yowurclpyrr5bwzonh76ywld22riv4mjp2scne6ye7746dcjl4',
+  },
+  usdt: {
+    chainId: CHAIN_ID,
+    address: '0x1E4a5963aBFD975d8c9021ce480b42188849D41d',
+    decimals: 6,
+    symbol: 'USDT',
+    name: 'Tether USD',
+    icon: 'https://ipfs.near.social/ipfs/bafkreih45jy7ggj45ck34rf736kb67smsoa52wd7e46c2grh6etd3bhe5i',
+  },
+  dai: {
+    chainId: CHAIN_ID,
+    address: '0xC5015b9d9161Dca7e18e32f6f25C4aD850731Fd4',
+    decimals: 18,
+    symbol: 'DAI',
+    name: 'Dai Stablecoin',
+    icon: 'https://ipfs.near.social/ipfs/bafkreieuxntkdzi2mzkzdcbk6kahwxqpftxnipxcwc4oe4p4jm2rhj2xhu',
+  },
+};

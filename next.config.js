@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   compiler: { styledComponents: true },
-  reactStrictMode: true,
+  reactStrictMode: false,
   redirects: async () => {
     return [
       {
@@ -46,7 +46,44 @@ const nextConfig = {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
     },
+    {
+      source: '/dapdap/:path*',
+      destination: 'https://api.dapdap.net/:path*',
+    },
+    {
+      source: '/wepiggy/arb/:path*',
+      destination: 'https://gateway.arb.bs.fortop.site/:path*',
+    },
+    {
+      source: '/wepiggy/bsc/:path*',
+      destination: 'https://gateway.bsc.bs.fortop.site/:path*',
+    },
+    {
+      source: '/wepiggy/optimism/:path*',
+      destination: 'https://gateway.optimism.bs.fortop.site/:path*',
+    },
+    {
+      source: '/wepiggy/polygon/:path*',
+      destination: 'https://gateway.polygon.bs.fortop.site/:path*',
+    },
   ],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'ipfs.near.social',
+        port: '',
+        pathname: '/ipfs/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.basename.app',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
+  transpilePackages: ['ahooks'],
 };
 
 module.exports = nextConfig;

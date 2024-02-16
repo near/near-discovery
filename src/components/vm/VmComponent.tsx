@@ -1,3 +1,4 @@
+import useToast from '@/hooks/useToast';
 import { useBosLoaderStore } from '@/stores/bos-loader';
 import { useVmStore } from '@/stores/vm';
 
@@ -11,6 +12,7 @@ type Props = {
 export function VmComponent(props: Props) {
   const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
+  const toast = useToast();
 
   if (!EthersProvider || !redirectMapStore.hasResolved) {
     return <Spinner />;
@@ -22,7 +24,8 @@ export function VmComponent(props: Props) {
         config={{
           redirectMap: redirectMapStore.redirectMap,
         }}
-        {...props}
+        src={props.src}
+        props={{ toast, ...props.props }}
       />
     </EthersProvider>
   );
