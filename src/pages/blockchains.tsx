@@ -59,7 +59,6 @@ const arrow = (
     <path d="M1 1L4 4L1 7" stroke="#979ABE" strokeLinecap="round" />
   </svg>
 );
-const blockchainsBg = 'https://assets.dapdap.net/images/banner.png';
 const diagonaltop = 'https://assets.dapdap.net/images/bafkreiewy27itzs3bq2et7bxmnv3dlt6rtwofiszkms3baroobjqq6wh5a.svg';
 const BlockchainsPage = styled.div`
   color: #ffffff;
@@ -90,7 +89,7 @@ const BlockchainsBanner = styled.div`
   width: 100%;
   height: 448px;
   position: relative;
-  background-image: url(${blockchainsBg});
+  background-image: url(/images/chains/blockchains_bg.png);
   background-repeat: no-repeat;
   background-size: 94%;
   background-position-x: 50%;

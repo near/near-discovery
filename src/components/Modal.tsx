@@ -1,4 +1,4 @@
-import { AnimatePresence,motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import type { ReactNode } from 'react';
 import { memo } from 'react';
 import styled from 'styled-components';
@@ -30,9 +30,9 @@ const Overlay = styled(motion.div)`
 `;
 const Main = styled(motion.div)<{ $width: number }>`
   width: ${({ $width }) => $width + 'px'};
-  border-radius: 16px;
-  border: 1px solid #2c334b;
-  background-color: #181a27;
+  border-radius: 20px;
+  border: 1px solid #373a53;
+  background: #262836;
   @media (max-width: 900px) {
     width: 100%;
     border-radius: 16px 16px 0px 0px;
