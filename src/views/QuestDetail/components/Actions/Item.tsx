@@ -144,7 +144,7 @@ const ActionItem = ({
       <StyledItemTop
         initial={false}
         onClick={() => {
-          if (!isLive) return;
+          if (!isLive || action.source === 'bitget_wallet') return;
           if (action.category === 'password') {
             setOpen(!open);
             return;
