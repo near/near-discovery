@@ -2,7 +2,7 @@ import Big from 'big.js';
 import { Contract, providers, utils } from 'ethers';
 import { useState } from 'react';
 
-import { chainCofig } from '@/config/bridge';
+import { chainCofig, tokens as configTokens } from '@/config/bridge';
 import useAccount from '@/hooks/useAccount';
 import useAddAction from '@/hooks/useAddAction';
 import { usePriceStore } from '@/stores/price';
@@ -107,11 +107,14 @@ export default function useStargate() {
     destination?: string;
     onSuccess: (hash: string) => void;
   }) => {
+
     if (!provider) return;
     const signer = await provider.getSigner(account);
     const _amount = utils.parseUnits(amount, token.decimals);
     const _inputChain = chainCofig[chain.chainId];
     const _outputChain = chainCofig[targetChain.chainId];
+
+
     const RouterContract =
       token.isNative && _inputChain.ethRouter
         ? new Contract(
@@ -229,18 +232,21 @@ export default function useStargate() {
         ]
       : [
           _outputChain.dstId,
-          token.poolId,
-          targetToken.poolId,
+          configTokens[token.address].poolId,
+          configTokens[targetToken.address].poolId,
           account,
           _amount.toString(),
           new Big(_amount.toString()).mul(0.995).toString(),
           { dstGasForCall: 0, dstNativeAmount: 0, dstNativeAddr: '0x' },
           destination || account,
           '0x',
-          { value: fee },
+          { value: new Big(fee || '0').toString() },
         ];
+
     const tx = await RouterContract[method](...params);
     const res = await tx.wait();
+
+
     if (res.status === 1) {
       onSuccess(tx.hash);
       const bridgeTxs = localStorage.getItem('bridgeTxs') || '{}';
