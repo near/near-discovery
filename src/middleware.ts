@@ -7,19 +7,21 @@ import { activityReg } from '@/utils/activity-reg';
 export function middleware(request: NextRequest) {
   const AUTHED_ACCOUNT = request.cookies.get('AUTHED_ACCOUNT');
   const LOGIN_ACCOUNT = request.cookies.get('LOGIN_ACCOUNT');
-  if (request.url.match(activityReg)) {
+  if (request.url.match(activityReg) && request.nextUrl.pathname !== '/invite-code') {
     return NextResponse.next();
   }
   if (!LOGIN_ACCOUNT) {
     return NextResponse.redirect(new URL(`/login?source=/`, request.url));
   }
   if (AUTHED_ACCOUNT) {
-    return NextResponse.next();
+    return request.nextUrl.pathname === '/invite-code'
+      ? NextResponse.redirect(new URL(`/`, request.url))
+      : NextResponse.next();
   }
   return NextResponse.redirect(new URL(`/invite-code?source=/`, request.url));
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/((?!uniswap|invite-code|login|_next/static|_next/image|favicon.ico|api|images|fonts|dapdap|videos).*)'],
+  matcher: ['/((?!uniswap|login|_next/static|_next/image|favicon.ico|api|images|fonts|dapdap|videos).*)'],
 };
