@@ -48,7 +48,7 @@ const Menu = ({ setShow }: any) => {
       />
       <MenuItem
         link=""
-        title="Portfolio"
+        title="My Profile"
         desc="Access your assets and positions directly from your portfolio after Lv.3."
         icon={<PortfolioIcon />}
         // extra={

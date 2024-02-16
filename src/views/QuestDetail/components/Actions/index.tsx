@@ -94,9 +94,20 @@ const Actions = ({
         data-bp="1001511-002"
       >
         {loading && <Loading mr="5px" />}
-        <span>You&apos;ve got</span>
-        <StyledCoin $size={20} />
-        <span>{rewards} PTS</span>
+        {claimed ? (
+          <>
+            {' '}
+            <span>You&apos;ve got</span>
+            <StyledCoin $size={20} />
+            <span>{rewards} PTS</span>
+          </>
+        ) : (
+          <>
+            <span>Claim</span>
+            <StyledCoin $size={20} />
+            <span>{rewards} PTS</span>
+          </>
+        )}
       </StyledButton>
       {isBitGetUser && (
         <StyledAward>
