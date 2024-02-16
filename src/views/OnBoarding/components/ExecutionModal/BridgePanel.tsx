@@ -33,7 +33,7 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
   const { account } = useAccount()
   const [amount, setAmount] = useState('0')
   const [gasCostUSD, setGasCostUSD] = useState('')
-  const [toAmount, setToAmount] = useState('')
+  const [toAmount, setToAmount] = useState('0.01')
   const [isloading, setLoading] = useState(false)
   const [btnText, setBtnText] = useState('')
   const { fail, success } = useToast()
@@ -184,7 +184,7 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
             title: 'Transaction successed',
           })
 
-          setAmount('0')
+          setAmount('0.01')
           getBalance()
           routeRef.current = null
 
@@ -197,7 +197,7 @@ const BridgePanel = ({ chainId, onLoad }: any) => {
       })
     }
 
-    setAmount('0')
+    setAmount('0.01')
     setGasCostUSD('0')
     
     btnStatus.current = 0
