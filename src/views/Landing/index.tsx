@@ -149,7 +149,7 @@ const LandingView = () => {
               </StyledButtons>
             </StyledLeftPanel>
             {step === 1 && (
-              <div style={{ width: '500px' }}>
+              <div style={{ width: '500px', paddingTop: '60px' }}>
                 <Bridge
                   onSuccess={() => {
                     setContinuable(true);
