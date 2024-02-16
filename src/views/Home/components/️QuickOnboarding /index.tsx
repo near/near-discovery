@@ -41,7 +41,7 @@ const QuickOnboarding = () => {
         transaction history.
       </StyledSubtitle>
       <StyledImageWrapper>
-        <video controls>
+        <video controls width="700">
           <source
             src="https://s3.amazonaws.com/dapdap.prod/images/479251d01b196e1f3c46848c6a7f087c.mov"
             type="video/mp4"
