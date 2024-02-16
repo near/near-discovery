@@ -9,6 +9,7 @@ import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import { setCookie, getCookie } from 'cookies-next';
 import useActionCheck from '../../hooks/useActionCheck';
 import { formatDescription } from '../../helper';
+import PasswordAction from './PasswordAction';
 import {
   StyledDapp,
   StyledDappIcon,
@@ -80,6 +81,13 @@ const ActionItem = ({
     if (action.source === 'wallet/bridge') {
       setLayout({
         showAccountSider: true,
+        defaultTab: 'bridge',
+      });
+      return;
+    }
+    if (action.source === 'wallet/bridge/view') {
+      setLayout({
+        showAccountSider: true,
       });
       return;
     }
@@ -138,6 +146,10 @@ const ActionItem = ({
         initial={false}
         onClick={() => {
           if (!isLive) return;
+          if (action.category === 'password') {
+            setOpen(!open);
+            return;
+          }
           if (action.operators?.length === 0 || !action.operators) {
             handleClick();
             return;
@@ -172,7 +184,7 @@ const ActionItem = ({
           <span>{action.name}</span>
         </StyledItemLeft>
         <StyledItemRight>
-          {action.description ? (
+          {action.description || action.category === 'password' ? (
             <StyledIconBox
               className={open ? 'open' : ''}
               onClick={(ev) => {
@@ -254,32 +266,47 @@ const ActionItem = ({
           >
             <StyledExpand>
               <StyledDesc dangerouslySetInnerHTML={{ __html: formatDescription(action.description) }} />
-              <StyledDapps>
-                {action.operators
-                  ?.filter((item: any, i: number) => i < 10)
-                  .map((dapp: any) => (
-                    <StyledDapp
-                      key={dapp.dapp_id}
-                      whileHover={{ opacity: 0.8 }}
-                      whileTap={{ opacity: 0.6 }}
+              {action.category === 'password' ? (
+                <PasswordAction
+                  id={action.id}
+                  onSuccess={() => {
+                    setOpen(false);
+                    setActionCompleted(true);
+                    onSuccess();
+                  }}
+                />
+              ) : (
+                <>
+                  {' '}
+                  <StyledDapps>
+                    {action.operators
+                      ?.filter((item: any, i: number) => i < 10)
+                      .map((dapp: any) => (
+                        <StyledDapp
+                          key={dapp.dapp_id}
+                          whileHover={{ opacity: 0.8 }}
+                          whileTap={{ opacity: 0.6 }}
+                          onClick={() => {
+                            handleDappRedirect(dapp);
+                          }}
+                        >
+                          <StyledDappIcon src={dapp.dapp_logo} />
+                          <span>{dapp.dapp_name}</span>
+                        </StyledDapp>
+                      ))}
+                  </StyledDapps>
+                  {action.operators?.length > 10 && (
+                    <StyledMore
                       onClick={() => {
-                        handleDappRedirect(dapp);
+                        router.push('/alldapps');
                       }}
                     >
-                      <StyledDappIcon src={dapp.dapp_logo} />
-                      <span>{dapp.dapp_name}</span>
-                    </StyledDapp>
-                  ))}
-              </StyledDapps>
-              {action.operators?.length > 10 && (
-                <StyledMore
-                  onClick={() => {
-                    router.push('/alldapps');
-                  }}
-                >
-                  View all Dapps
-                </StyledMore>
+                      View all Dapps
+                    </StyledMore>
+                  )}
+                </>
               )}
+
               {/* {(action.operators?.length === 0 || !action.operators) && (
                 <StyledExpandButtonBox>
                   <StyledExpandButton onClick={() => {}}>{binding && <Loading />} Got it</StyledExpandButton>

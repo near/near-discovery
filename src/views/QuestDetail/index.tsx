@@ -82,6 +82,8 @@ const QuestDetailView = () => {
                 claimed={info.quest.is_claimed}
                 onSuccess={() => {
                   setUpdater(Date.now());
+                }}
+                onClaimed={() => {
                   setShowSuccessModal(true);
                 }}
               />
