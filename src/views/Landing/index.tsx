@@ -170,7 +170,10 @@ const LandingView = () => {
                   }}
                   data-bp="20011-002"
                 >
-                  <source src="/landing-test.mp4" type="video/mp4" />
+                  <source
+                    src="https://s3.amazonaws.com/dapdap.prod/images/479251d01b196e1f3c46848c6a7f087c.mov"
+                    type="video/mp4"
+                  />
                 </video>
               </StyledRightPanel>
             )}
@@ -186,7 +189,10 @@ const LandingView = () => {
                   }}
                   data-bp="20011-002"
                 >
-                  <source src="/landing-test.mp4" type="video/mp4" />
+                  <source
+                    src="https://s3.amazonaws.com/dapdap.prod/images/35239cd220fe5b420c902abf78324be0.mov"
+                    type="video/mp4"
+                  />
                 </video>
               </StyledRightPanel>
             )}

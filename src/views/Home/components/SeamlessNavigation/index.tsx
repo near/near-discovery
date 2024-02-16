@@ -30,7 +30,7 @@ const SeamlessNavigation = ({ chains }: any) => {
               key={chain.id}
               data-bp="1001-010"
               onClick={() => {
-                router.push(`/network/${IdToPath[chain.id]}`);
+                router.push(`/all-in-one/${IdToPath[chain.id]}`);
               }}
             >
               <StyledChainLogo src={chain.logo} />
