@@ -30,7 +30,7 @@ const Recommends = ({ recommends }: { recommends: any }) => {
             </svg>
           </StyledLeftButton>
           <StyledLeftButton
-            $disabled={current * 3 > Math.ceil(recommends.length / 3)}
+            $disabled={current * 3 > Math.ceil(recommends.length / 3) || recommends.length < 3}
             onClick={() => {
               if (current * 3 > Math.ceil(recommends.length / 3)) {
                 return;

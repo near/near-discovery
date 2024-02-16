@@ -74,11 +74,11 @@ const LandingView = () => {
           <StyledContainer>
             <StyledLeftPanel>
               <StyledTitle>
-                <div> 3 Steps to Earn DapDap </div> <StyledCoin $size={31} className="coin" />
+                <div> 3 Steps to Earn </div> <StyledCoin $size={31} className="coin" />
                 <div className="coin_color">{info?.quest?.reward} PTS</div>
               </StyledTitle>
               <StyledDesc>
-                Welcome! Follow us to explore DapDap in just 3 steps, play with dapdap and get lots of points rewards.
+                Welcome! Learn how to explore DapDap in 3 simple steps and earn points while doing so.
               </StyledDesc>
               {steps.map((_step, i) => (
                 <StyledStep key={_step.title} $disable={step !== i + 1}>

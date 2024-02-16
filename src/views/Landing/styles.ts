@@ -4,17 +4,16 @@ import styled from 'styled-components';
 export { StyledCoin } from '@/views/Quest/styles';
 
 export const StyledContainer = styled.div`
-  height: 100%;
+  height: calc(100vh - 186px);
   margin: 0 auto;
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 80px;
-  padding-top: 50px;
   max-width: 1200px;
 `;
 export const StyledLeftPanel = styled.div`
   max-width: 550px;
-  padding-top: 80px;
 `;
 export const StyledTitle = styled.div`
   color: #fff;
@@ -120,9 +119,7 @@ export const StyledSkipButton = styled(motion.button)`
   font-weight: 500;
   line-height: normal;
 `;
-export const StyledRightPanel = styled.div`
-  padding-top: 80px;
-`;
+export const StyledRightPanel = styled.div``;
 export const StyledRightImg = styled.img``;
 
 export const StyledProcessBars = styled.div`

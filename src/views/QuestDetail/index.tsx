@@ -51,14 +51,14 @@ const QuestDetailView = () => {
       //       };
       array[1] = {
         name: campaign.name,
-        path: '/quest/leaderboard/' + campaign.name.replace(/\s/g, '')
-      }
+        path: '/quest/leaderboard/' + campaign.name.replace(/\s/g, ''),
+      };
       array[2] = { name: 'Detail', path: '/quest/detail' };
       return array;
     }
   }, [quest, campaigns]);
 
-  const isBitGetUser = useMemo(() => (userInfo.source === 'bitget' || userInfo.source === 'bitget_wallet'), [userInfo])
+  const isBitGetUser = useMemo(() => userInfo.source === 'bitget' || userInfo.source === 'bitget_wallet', [userInfo]);
   useEffect(() => {
     if (wallet?.label.toLowerCase().includes('bitget')) {
       handleReport('bitget_wallet');

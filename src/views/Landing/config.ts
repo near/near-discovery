@@ -6,18 +6,15 @@ export const FROM_CHAIN_ID = 1;
 export const steps = [
   {
     title: 'Bridge',
-    rewards: 100,
-    desc: `Using the shortcut on the right, Transfer any token available from Ethereum to ${chainCofig[CHAIN_ID].chainName}`,
+    desc: `Use our in-app bridging on the right to transfer any Ethereum token to ${chainCofig[CHAIN_ID].chainName}`,
   },
   {
     title: 'Learn about Quick Onboarding',
-    rewards: 20,
-    desc: 'Follow the tutorial on the right to learn how to use Quick Onboarding',
+    desc: 'Follow our tutorial to learn everything you need to know about our ‘Quick Onboarding’ feature.',
   },
   {
     title: 'Explore Quest',
-    rewards: 20,
-    desc: 'Try our Quest to earn points. PTS will bring you huge wealth',
+    desc: 'Learn more about our quests to earn $PTS.',
   },
 ];
 
