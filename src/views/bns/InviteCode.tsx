@@ -20,6 +20,7 @@ import {
   StyledSvg,
   StyledText,
   StyledWrapper,
+  StyledLoginVideo
 } from './styles';
 const LoginView = () => {
   const router = useRouter();
@@ -80,7 +81,17 @@ const LoginView = () => {
   return (
     <StyledFlex style={{ height: '100vh' }} $gap="70px">
       <StyledImage>
-        <Image src={loginBg} style={{ width: 824, height: 636 }} alt="loginBg" />
+        {/* <Image src={loginBg} style={{ width: 824, height: 636 }} alt='loginBg' /> */}
+        <StyledLoginVideo width={824} height={636} autoPlay muted playsInline loop>
+          <source src="/videos/login_background.mp4" type="video/mp4" />
+          <track
+            src="/path/to/captions.vtt"
+            kind="subtitles"
+            srcLang="en"
+            label="English"
+          />
+          Your browser does not support the video tag.
+        </StyledLoginVideo>
       </StyledImage>
       <StyledWrapper style={{ width: 517 }}>
         <StyledText $size="42px" $line="161.2%">

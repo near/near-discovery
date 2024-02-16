@@ -102,6 +102,19 @@ export const StyledButton = styled.button`
     opacity: 0.8;
   }
 `;
+export const StyledAward = styled.div`
+  margin-top: 17px;
+  text-align: center;
+  color: #979ABE;
+  font-family: Gantari;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  span {
+    color: #EBF479;
+  }
+`
 
 export const StyledProcessBars = styled.div`
   display: flex;

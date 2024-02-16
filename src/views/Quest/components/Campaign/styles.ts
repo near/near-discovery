@@ -1,10 +1,13 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export { StyledTitle, StyledCoin } from '../../styles';
-
-export const StyledCampaignsContainer = styled.div`
-`;
+import {
+  StyledTitle
+} from '../../styles'
+export { StyledCoin } from '../../styles';
+export {
+  StyledTitle
+}
 
 export const LoadingWrapper = styled.div`
   display: flex;
@@ -28,6 +31,7 @@ export const StyledCampaign = styled.div`
   --social-color: #aad6ff;
   --engage-color: #f4ca79;
 `
+
 
 export const StyledBox = styled.div`
   display: flex;
@@ -113,4 +117,47 @@ export const StyledTimerBox = styled.div`
   font-size: 36px;
   font-weight: 700;
   gap: 20px;
+`;
+
+
+export const StyledCampaignsContainer = styled.div`
+
+  &.DapDapXLi {
+    ${StyledCampaignContainer} {
+      background: url('/images/quest/second_bg.png') center no-repeat;
+      background-size: cover;
+    }
+    ${StyledTitle} {
+      color: #000;
+    }
+    ${StyledDesc} {
+      color: #000;
+    }
+  }
+  &.DapDapXStargate {
+    ${StyledCampaignContainer} {
+      background: url('/images/quest/first_bg.png') center no-repeat;
+      background-size: cover;
+    }
+  }
+  &.DapDapXBitget {
+    ${StyledCampaignContainer} {
+      background: url('/images/quest/four_bg.png') center no-repeat;
+      background-size: cover;
+    }
+  }
+  &.DapDapTwitterSpace {
+    ${StyledCampaignContainer} {
+      background: url('/images/quest/third_bg.png') center no-repeat;
+      background-size: cover;
+    }
+    ${StyledTitle} {
+      color: #000;
+    }
+    ${StyledDesc} {
+      color: #000;
+    }
+  }
+  
+  
 `;

@@ -1,4 +1,3 @@
-import loginBg from '@/assets/images/login_bg.png';
 import loginLogo from '@/assets/images/login_logo.svg';
 import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
@@ -6,6 +5,7 @@ import { memo } from 'react';
 import {
   StyledFlex,
   StyledImage,
+  StyledInvitedAward,
   StyledInvitedUsers,
   StyledLoginConnectWalletButton,
   StyledLoginVideo
@@ -32,6 +32,7 @@ const LoginView = () => {
         <StyledImage style={{ marginBottom: 89 }}>
           <Image style={{ width: 409 }} src={loginLogo} alt="loginLogo" />
         </StyledImage>
+        <StyledInvitedUsers>Invited users only</StyledInvitedUsers>
         <StyledLoginConnectWalletButton
           onClick={() => {
             connect();
@@ -41,7 +42,7 @@ const LoginView = () => {
         >
           Connect Wallet
         </StyledLoginConnectWalletButton>
-        <StyledInvitedUsers>💡 Invited users only</StyledInvitedUsers>
+        <StyledInvitedAward>💡 Connect by Bitget to earn an extra 10% PTS of quest.</StyledInvitedAward>
       </StyledFlex>
     </StyledFlex>
   );
