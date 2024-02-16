@@ -48,7 +48,7 @@ const nextConfig = {
     },
     {
       source: '/dapdap/:path*',
-      destination: 'https://test-api.dapdap.tech/:path*',
+      destination: 'https://test-api.dapdap.net/:path*',
     },
     {
       source: '/wepiggy/arb/:path*',
