@@ -15,7 +15,7 @@ const Recommends = ({ recommends }: { recommends: any }) => {
   return (
     <StyledContainer>
       <StyledHeader>
-        <StyledTitle>Recommend Quest</StyledTitle>
+        <StyledTitle>Featured Quests</StyledTitle>
         <StyledButtons>
           <StyledLeftButton
             $disabled={current === 0}
