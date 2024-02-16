@@ -95,8 +95,8 @@ const Explores = ({ setShow }: any) => {
   return (
     <StyledExplores>
       <Explore
-        title="Explore Dapps"
-        desc="Filter by token TBD/native token, blockchains, mainfeatures."
+        title="Explore dApps"
+        desc="Filter by network, token, and main features."
         items={Object.values(categories || {})}
         link="/alldapps"
         loading={loading}
@@ -116,8 +116,8 @@ const Explores = ({ setShow }: any) => {
         }}
       />
       <Explore
-        title="Explore Blockchains"
-        desc="Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems."
+        title="Explore Layer-2s"
+        desc="Discover the latest and most popular Layer-2 networks."
         items={chains}
         link="/blockchains"
         onItemClick={(item: any) => {
@@ -133,8 +133,8 @@ const Explores = ({ setShow }: any) => {
         }}
       />
       <Explore
-        title="Explore Quest"
-        desc="Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems."
+        title="Explore Quests"
+        desc="Participate and discover a range of different quests across Layer-2s."
         items={quests}
         link="/quest/leaderboard"
         loading={questLoading}

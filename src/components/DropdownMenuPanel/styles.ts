@@ -11,6 +11,7 @@ export const MenuContainer = styled(motion.div)`
   padding: 40px 0px;
   color: #ffffff;
   font-family: Gantari;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, 0.25);
 
   .explore-link {
     color: #ffffff;
@@ -92,18 +93,19 @@ export const StyledExploreArrow = styled.div`
 
 export const StyledMenu = styled.div`
   display: flex;
-  gap: 86px;
-  margin-top: 60px;
+  margin-top: 30px;
+  border-top: 1px solid #21232a;
+  padding-top: 30px;
 `;
 
 export const StyledMenuItem = styled.div`
   display: flex;
   cursor: pointer;
+  flex-grow: 1;
+  gap: 16px;
 `;
 export const StyledMenuIconWrapper = styled.div`
-  margin-right: 20px;
   line-height: 62px;
-  width: 42px;
   flex-shrink: 0;
 `;
 
