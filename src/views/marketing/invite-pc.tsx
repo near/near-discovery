@@ -28,6 +28,8 @@ const questImgs = {
   twitter_like: '/images/marketing/like.svg',
 };
 
+const questImgs2 = ['/images/marketing/1.png', '/images/marketing/2.png', '/images/marketing/3.png'];
+
 const LandingPC: FC<IProps> = ({ kolName, platform }) => {
   console.log('kolName:', kolName);
 
@@ -202,6 +204,10 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     // if ((res.code as number) !== 0) return;
   }
 
+  async function dig(id: number) {
+    const res: any = await post(`${QUEST_PATH}/api/activity/source`, { quest_id: id });
+  }
+
   const getInviteCodes = async () => {
     const list = await fetchInviteCodes();
     setCodeList(list);
@@ -359,6 +365,10 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     //   }
     //   return;
     // }
+    if (action.category === 'page') {
+      dig(action.id);
+    }
+
     window.open(action.source, '_blank', 'width=850,height=550');
   };
 
@@ -413,7 +423,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
             ? advancedQuests.map((item, index) => (
                 <Styles.Card key={item.id}>
                   <Styles.CardLeft onClick={(e) => openSource(item)}>
-                    <Styles.CardIcon src={(questImgs as any)[item.category]} />
+                    <Styles.CardIcon src={(questImgs2 as any)[index]} />
                     <div>
                       <Styles.CardTitle>{item.name}</Styles.CardTitle>
                       <Styles.Tag>

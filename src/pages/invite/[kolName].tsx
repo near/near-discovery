@@ -27,7 +27,6 @@ const LandingPage: NextPageWithLayout = () => {
 
     if ((res.code as number) !== 0) return;
     const { address, avatar } = res.data;
-    // setIsKol(true); //TODO DEBUG
     setIsKol(address === account);
   }
 
@@ -35,14 +34,9 @@ const LandingPage: NextPageWithLayout = () => {
     getKolInfo();
   }, []);
 
-  // return isKol ? (
-  //   <Dashboard platform="kol" kolName={kolName as string} />
-  // ) : isMobile ? (
-  //   <LandingMobile platform="kol" kolName={kolName as string} />
-  // ) : (
-  //   <LandingPC platform="kol" kolName={kolName as string} />
-  // );
-  return isMobile ? (
+  return isKol ? (
+    <Dashboard platform="kol" kolName={kolName as string} />
+  ) : isMobile ? (
     <LandingMobile platform="kol" kolName={kolName as string} />
   ) : (
     <LandingPC platform="kol" kolName={kolName as string} />

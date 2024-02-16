@@ -6,6 +6,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKey } from '@/apis';
 import { QUEST_PATH } from '@/config/quest';
+import useAccount from '@/hooks/useAccount';
 import useCopy from '@/hooks/useCopy';
 import { ellipsAccount } from '@/utils/account';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
@@ -34,7 +35,7 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
-
+  const { account } = useAccount();
   const [address, setAddress] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
@@ -57,7 +58,11 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, updater });
 
   const [claimLoading, setClaimLoading] = useState(false);
+  const [step1_is_completed, setStep1IsCompleted] = useState(false);
+  const [step2_is_completed, setStep2IsCompleted] = useState(false);
+  const [step3_is_completed, setStep3IsCompleted] = useState(false);
 
+  const [userData, setUserData] = useState<any>({});
   const [inviteNum, setInviteNum] = useState(0);
   const [inviteReward, setInviteReward] = useState(0);
   const [totalReward, setTotalReward] = useState(0);
@@ -138,6 +143,29 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   //   checkAccount();
   // }
 
+  async function fetchKolInfo() {
+    try {
+      const res = await get(`${QUEST_PATH}/api/activity/kol/info`);
+      setSpin1(false);
+      if ((res.code as number) !== 0) return;
+      setUserData(res.data);
+      if (res?.data?.total_invite > 100) {
+        setStep1IsCompleted(true);
+        return;
+      }
+      if (res?.data?.total_invite > 1000) {
+        setStep2IsCompleted(true);
+        return;
+      }
+      if (res?.data?.total_invite > 10000) {
+        setStep3IsCompleted(true);
+        return;
+      }
+    } catch (error) {
+      setSpin1(false);
+    }
+  }
+
   async function fetchQuestList() {
     const res = await get(`${QUEST_PATH}/api/activity/quest_list?category=${platform}`);
 
@@ -167,9 +195,8 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
     // if ((res.code as number) !== 0) return;
   }
 
-  async function claimReward(id: number) {
-    const res = await post(`${QUEST_PATH}/api/activity/claim`, { quest_id: id });
-    console.log(666, res);
+  async function claimReward(step: 1 | 2 | 3) {
+    const res = await post(`${QUEST_PATH}/api/activity/kol/claim`, { step });
 
     if ((res.code as number) !== 0) return false;
     return true;
@@ -177,28 +204,39 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
 
   const handleFresh = () => {
     setFresh((n) => n + 1);
-    setUpdater(Date.now());
   };
 
-  const handleClaim = async (data: any) => {
+  const handleClaim = async (step: any, pts: number) => {
     if (!address) return;
-    if (data.status !== 'completed') return;
-    if (data.is_claimed) return;
+
+    if (step === 1 && !step1_is_completed) return;
+    if (step === 2 && !step2_is_completed) return;
+    if (step === 3 && !step3_is_completed) return;
+    if (step === 1 && userData?.step1_is_claimed) return;
+    if (step === 2 && userData?.step2_is_claimed) return;
+    if (step === 3 && userData?.step3_is_claimed) return;
+
     if (claimLoading) return;
     setClaimLoading(true);
     try {
-      const isSuc = await claimReward(data.id);
+      const isSuc = await claimReward(step);
       setClaimLoading(false);
       if (isSuc) {
         setIsShowModal(true);
         setModalType('success');
-        setReward(data.reward);
+        setReward(pts);
         handleFresh();
       }
     } catch (error) {
       setClaimLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (account) {
+      fetchKolInfo();
+    }
+  }, [account, fresh]);
 
   // useEffect(() => {
   //   fetchQuestList();
@@ -280,6 +318,39 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
 
   // const prefix = location.origin;
 
+  function calcRewardStyle(step: number) {
+    if (step === 1) {
+      return step1_is_completed ? '' : 'blur';
+    }
+    if (step === 2) {
+      return step2_is_completed ? '' : 'blur';
+    }
+    if (step === 3) {
+      return step3_is_completed ? '' : 'blur';
+    }
+    return '';
+  }
+
+  function calcListStyle(step: number) {
+    if (step === 1) {
+      return '';
+    }
+    if (step === 2) {
+      return step1_is_completed ? '' : 'blur';
+    }
+    if (step === 3) {
+      return step2_is_completed ? '' : 'blur';
+    }
+    return '';
+  }
+
+  const quests = [
+    { step: 1, total: 100, pts: 1000 },
+    { step: 2, total: 1000, pts: 5000 },
+    { step: 3, total: 10000, pts: 10000 },
+  ];
+  console.log(11111111, step1_is_completed, step2_is_completed, step3_is_completed);
+
   return (
     <Styles.Container>
       <Styles.Banner>
@@ -298,7 +369,7 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
                 <Styles.StatIcon src="/images/marketing/follow.svg" />
                 <Styles.StatDetail>
                   <Styles.DetailTitle>Invited people</Styles.DetailTitle>
-                  <Styles.DetailCount>475</Styles.DetailCount>
+                  <Styles.DetailCount>{userData?.total_invite}</Styles.DetailCount>
                 </Styles.StatDetail>
               </Styles.StatLeft>
               <Styles.StatLine />
@@ -306,7 +377,7 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
                 <Styles.StatIcon src="/images/marketing/coin.svg" />
                 <Styles.StatDetail>
                   <Styles.DetailTitle>Your PTS</Styles.DetailTitle>
-                  <Styles.DetailCount className="pts">200 PTS</Styles.DetailCount>
+                  <Styles.DetailCount className="pts">{userData?.total_invite_reward} PTS</Styles.DetailCount>
                 </Styles.StatDetail>
               </Styles.StatRight>
             </Styles.StatBox>
@@ -371,11 +442,51 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
               ))
             : null}
         </Styles.CardBox> */}
-
-        <Styles.RewardList>
-          <Styles.RewardQuest></Styles.RewardQuest>
-          <Styles.RewardBox></Styles.RewardBox>
-        </Styles.RewardList>
+        {quests.map((item) => (
+          <Styles.RewardList key={item.step} className={calcListStyle(item.step)}>
+            <Styles.RewardQuest>
+              <Styles.Head>
+                <Styles.HeadLeft>
+                  Stage <Styles.StepNum>{item.step}</Styles.StepNum> reward
+                </Styles.HeadLeft>
+                {item.step === 1 ? (
+                  step1_is_completed ? (
+                    <Styles.CardDone src="/images/marketing/done.svg" />
+                  ) : (
+                    <Styles.Fresh onClick={handleFresh} src="/images/marketing/fresh.svg" />
+                  )
+                ) : null}
+                {item.step === 2 ? (
+                  step2_is_completed ? (
+                    <Styles.CardDone src="/images/marketing/done.svg" />
+                  ) : (
+                    <Styles.Fresh onClick={handleFresh} src="/images/marketing/fresh.svg" />
+                  )
+                ) : null}
+                {item.step === 3 ? (
+                  step3_is_completed ? (
+                    <Styles.CardDone src="/images/marketing/done.svg" />
+                  ) : (
+                    <Styles.Fresh onClick={handleFresh} src="/images/marketing/fresh.svg" />
+                  )
+                ) : null}
+              </Styles.Head>
+              <Styles.Tips>
+                Complete <Styles.TipCount>{item.total}</Styles.TipCount> new user invites and receive corresponding
+                rewards
+              </Styles.Tips>
+              <Styles.Progress>
+                <Styles.Inner style={{ width: `${userData?.total_invite / item.total}%` }}></Styles.Inner>
+              </Styles.Progress>
+            </Styles.RewardQuest>
+            <Styles.RewardBox className={calcRewardStyle(item.step)}>
+              <Styles.Cap src="/images/marketing/cap.svg"></Styles.Cap>
+              <Styles.ClaimBtn onClick={(e) => handleClaim(item.step, item.pts)}>
+                Claim <Styles.CoinIcon src="/images/marketing/coin.svg" /> {item.pts} PTS
+              </Styles.ClaimBtn>
+            </Styles.RewardBox>
+          </Styles.RewardList>
+        ))}
 
         <Styles.More>
           <Styles.MoreIcon src="/images/marketing/more.svg" />
