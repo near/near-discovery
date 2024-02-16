@@ -94,7 +94,7 @@ const Actions = ({
         data-bp="1001511-002"
       >
         {loading && <Loading mr="5px" />}
-        <span>You've got</span>
+        <span>You&apos;ve got</span>
         <StyledCoin $size={20} />
         <span>{rewards} PTS</span>
       </StyledButton>
