@@ -248,8 +248,8 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   // userStatus === 'new' 可以做任务 old|uncheck不可以
   useEffect(() => {
-    if (userStatus === 'uncheck') return;
     fetchQuestList();
+    if (userStatus === 'uncheck') return;
     if (userStatus === 'new') {
       getInviteCodes();
     }
