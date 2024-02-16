@@ -15,7 +15,7 @@ import {
   StyledLabel,
   StyledProcessBars,
   StyledTimerBox,
-  StyledAward
+  StyledAward,
 } from './styles';
 import useUserInfo from '@/hooks/useUserInfo';
 
@@ -45,7 +45,6 @@ const Actions = ({
   claimed: boolean;
   onSuccess: VoidFunction;
   onClaimed: VoidFunction;
-  
 }) => {
   const [claimedSuccess, setClaimedSuccess] = useState(false);
   const { loading, handleClaim } = useRewardsClaim(() => {
@@ -95,11 +94,15 @@ const Actions = ({
         data-bp="1001511-002"
       >
         {loading && <Loading mr="5px" />}
-        <span>Claim</span>
+        <span>You've got</span>
         <StyledCoin $size={20} />
         <span>{rewards} PTS</span>
       </StyledButton>
-      {isBitGetUser && <StyledAward>💡 You will get an extra 10% - <span>20 PTS</span> as a Bitget user.</StyledAward>}
+      {isBitGetUser && (
+        <StyledAward>
+          💡 You will get an extra 10% - <span>20 PTS</span> as a Bitget user.
+        </StyledAward>
+      )}
     </StyledContainer>
   );
 };

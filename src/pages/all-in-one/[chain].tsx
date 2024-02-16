@@ -241,7 +241,7 @@ const AllInOne: NextPageWithLayout = () => {
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <span>{currentChain.title} ShortCut</span>
+        <span>{currentChain.title} Navigation</span>
       </BreadCrumbs>
       <>
         {' '}
