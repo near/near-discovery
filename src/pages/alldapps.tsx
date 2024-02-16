@@ -428,7 +428,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
   const [isFavoriteList, setIsFavoriteList] = useState<any[]>([]);
   const [isFavoriteTab, setIsFavoriteTab] = useState(false);
   const [selectedTab, setSelectedTab] = useState(() => {
-    return 'token';
+    return 'TBD';
   });
   const [selectedMedalMenu, setSelectedMedalMenu] = useState<number | ''>('');
   const [selectedMenu, setSelectedMenu] = useState('');
@@ -757,18 +757,18 @@ const AllDappsColumn: NextPageWithLayout = () => {
 
       <div className="token-tab-list">
         <div
+          className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
+          onClick={() => handleTabClick('TBD')}
+          data-bp="10011-003"
+        >
+          Upcoming Token 🔥
+        </div>
+        <div
           className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
           onClick={() => handleTabClick('token')}
           data-bp="10011-003"
         >
           💰 Native token
-        </div>
-        <div
-          className={`tab-list-item ${selectedTab === 'TBD' ? 'active' : ''}`}
-          onClick={() => handleTabClick('TBD')}
-          data-bp="10011-003"
-        >
-          🔥 Token-TBD
         </div>
         <div
           className={`tab-list-item ${selectedTab === 'favorites' ? 'active' : ''}`}

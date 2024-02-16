@@ -18,6 +18,7 @@ export function middleware(request: NextRequest) {
       ? NextResponse.redirect(new URL(`/`, request.url))
       : NextResponse.next();
   }
+  if (request.nextUrl.pathname === '/invite-code') return;
   return NextResponse.redirect(new URL(`/invite-code?source=/`, request.url));
 }
 

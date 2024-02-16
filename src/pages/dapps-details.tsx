@@ -652,7 +652,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
               </div>
               <div className="enter-Dapp-item">
                 <p>Native Token</p>
-                {data && data.tbd_token === 'Y' ? <h1>Token-TBD🔥</h1> : <h1>-</h1>}
+                {data && data.tbd_token === 'Y' ? <h1>Upcoming Token 🔥</h1> : <h1>-</h1>}
               </div>
               <div
                 className="enter-Dapp-item Dapp-item-special"
