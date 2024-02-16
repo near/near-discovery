@@ -323,10 +323,10 @@ const BlockchainsColumn: NextPageWithLayout = () => {
         <div className="blue-bg">{blueBg}</div>
         <div className="yellow-bg">{yellowBg}</div>
         <div className="blockchainsBanner-title">
-          <h1>List of Layer 2 Blockchains</h1>
+          <h1>List of L2 Blockchains</h1>
           <p>
-            Discover 18 Layer 2 Blockchains across the most popular web3 ecosystems. Also explore related collections
-            including Layer 1 Blockchains (L1s), Sidechains, Testnets.
+            Discover L2s Blockchains across the most popular web3 ecosystems. Also explore related collections including
+            L1s, Sidechains, Testnets.
           </p>
         </div>
       </BlockchainsBanner>
