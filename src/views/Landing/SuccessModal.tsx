@@ -14,15 +14,14 @@ const StyledContent = styled.div`
   text-align: center;
   position: relative;
 `;
-const StyledIcon = styled.div`
-  background-image: url('/images/landing/success_icon.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  width: 428px;
-  height: 179px;
+const StyledIcon = styled.img`
+  width: 160px;
+  height: 160px;
   flex-shrink: 0;
   position: absolute;
   top: -90px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 const StyledTitle = styled.div`
   color: #fff;
@@ -74,7 +73,7 @@ export default function SuccessModal({
           {/* <StyledCloseIcon>
             <CloseIcon onClose={onClose} />
           </StyledCloseIcon> */}
-          <StyledIcon />
+          <StyledIcon src="/images/success.gif" />
           <StyledTitle>Congrats!</StyledTitle>
           <StyledDesc>
             <span>You’ve got {reward}</span> <StyledCoin $size={21} />

@@ -12,16 +12,14 @@ export const StyledContent = styled.div`
   width: 500px;
 `;
 
-export const StyledIcon = styled.div`
-  background-image: url('/images/landing/success_icon.png');
-  background-repeat: no-repeat;
-  background-size: 100%;
-  width: 428px;
-  height: 179px;
+export const StyledIcon = styled.img`
+  width: 200px;
+  height: 200px;
   flex-shrink: 0;
   position: absolute;
   top: -90px;
-  left: 36px;
+  left: 50%;
+  transform: translateX(-50%);
 `;
 
 export const StyledTitle = styled.div`

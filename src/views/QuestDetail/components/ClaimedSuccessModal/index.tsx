@@ -38,7 +38,7 @@ export default function ClaimedSuccessModal({
           <StyledCloseIcon>
             <CloseIcon onClose={onClose} />
           </StyledCloseIcon>
-          <StyledIcon />
+          <StyledIcon src="/images/success.gif" />
           <StyledTitle>Congrats!</StyledTitle>
           <StyledDesc>
             <span>You’ve got {reward}</span> <StyledCoin $size={21} />
