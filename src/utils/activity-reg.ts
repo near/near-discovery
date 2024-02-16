@@ -1,1 +1,1 @@
-export const activityReg = /bitget|coin68|invit/g;
+export const activityReg = /bitget|coin68|invite/g;
