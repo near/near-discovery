@@ -473,7 +473,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
               ? codeList.map((item: any, index) => (
                   <Styles.List key={index}>
                     <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
-                    {`${prefix}/${platform}/${item?.code}`}
+                    {`${prefix}/${item?.code}`}
                     <Styles.CopyIcon
                       src="/images/marketing/copy.svg"
                       onClick={() => {
