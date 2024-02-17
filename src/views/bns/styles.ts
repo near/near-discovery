@@ -251,6 +251,10 @@ export const StyledSvg = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 1.5s linear;
+  &.proceed {
+    transform: translate(15px, 15px);
+  }
 `;
 export const StyledLoginVideo = styled.video`
 
