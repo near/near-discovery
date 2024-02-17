@@ -22,7 +22,7 @@ const DiscoveryDapps = () => {
   const { loading, featuredDapps, upcomingDapps } = useDapps();
   return (
     <StyledContainer>
-      <StyledTitle>Discovery dApps</StyledTitle>
+      <StyledTitle>Discover dApps</StyledTitle>
       <StyledTabsWrapper>
         <StyledTabs>
           {TABS.map((_tab: any) => (
