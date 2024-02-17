@@ -67,11 +67,12 @@ const LoginView = () => {
     try {
       const isBitget = wallet?.label.toLowerCase().includes('bitget');
       const { isSuccess, errorMsg } = await inviteCodeActivate(account, code, isBitget ? 'bitget_wallet' : '');
-      setLoading(false);
       if (!isSuccess) {
+        setLoading(false);
         setErrorTips(errorMsg);
       } else {
         await getAccessToken(account);
+        setLoading(false);
         setCookie('AUTHED_ACCOUNT', account);
         router.replace('/landing');
       }
