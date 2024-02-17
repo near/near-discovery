@@ -17,7 +17,7 @@ const SeamlessNavigation = ({ chains }: any) => {
   const router = useRouter();
   return (
     <StyledContainer>
-      <StyledTitle>Seamless Navigation</StyledTitle>
+      <StyledTitle>Seamless Navigation Across Front-Ends</StyledTitle>
       <StyledSubtitle>
         Streamline your Open Web experience at DapDap with intuitive processes, coupled with straightforward
         user-centric pathways.

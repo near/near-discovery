@@ -13,7 +13,7 @@ export const steps = [
     desc: 'Follow our tutorial to learn everything you need to know about our ‘Quick Onboarding’ feature.',
   },
   {
-    title: 'Explore Quest',
+    title: 'Explore Quests',
     desc: 'Learn more about our quests to earn $PTS.',
   },
 ];

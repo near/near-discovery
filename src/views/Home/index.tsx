@@ -23,7 +23,7 @@ const Home = () => {
       <QuickOnboarding />
       <SeamlessNavigation chains={chains} />
       <Decentralised />
-      <Learn />
+      {/* <Learn /> */}
     </StyledContainer>
   );
 };
