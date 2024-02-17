@@ -30,27 +30,15 @@ const questImgs = {
 };
 
 const Dashboard: FC<IProps> = ({ kolName, platform }) => {
-  console.log('kolName:', kolName);
-
   const { copy } = useCopy();
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+
   const router = useRouter();
   const { account } = useAccount();
   const [address, setAddress] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
-  const config = useAuthConfig();
-
-  // 老用户 全部模糊
-  const [isBlur, setIsBlur] = useState(false);
-
-  const [userStatus, setUserStatus] = useState<'uncheck' | 'new' | 'old'>('uncheck');
-
-  const [advancedQuests, setAdvancedQuests] = useState<any[]>([]);
-  const [basicQuests, setBasicQuests] = useState<any>([]);
 
   const [reward, setReward] = useState(0);
-  const [rank, setRank] = useState(0);
 
   const [fresh, setFresh] = useState(0);
   const [updater, setUpdater] = useState(0);
@@ -58,9 +46,8 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, updater });
 
   const [claimLoading, setClaimLoading] = useState(false);
-  const [step1_is_completed, setStep1IsCompleted] = useState(false);
-  const [step2_is_completed, setStep2IsCompleted] = useState(false);
-  const [step3_is_completed, setStep3IsCompleted] = useState(false);
+
+  const [isCompleted, setIsCompleted] = useState({ 1: false, 2: false, 3: false });
 
   const [userData, setUserData] = useState<any>({});
   const [inviteNum, setInviteNum] = useState(0);
@@ -69,130 +56,28 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const [codeList, setCodeList] = useState([]);
 
   const [spin1, setSpin1] = useState(false);
-  const [spin2, setSpin2] = useState([false, false, false, false]);
-
-  const [kolAvatar, setKolAvatar] = useState('');
-  const [kolAddr, setKolAddr] = useState('');
-  const {
-    loading: binding,
-    type,
-    handleBind,
-  } = useAuthBind({
-    onSuccess: () => {
-      // onSuccess(1);
-      setUpdater(Date.now());
-    },
-    redirect_uri: `${window.location.origin}${window.location.pathname}`,
-  });
-  const logout = () => {
-    window.localStorage.setItem(AUTH_TOKENS, '{}');
-    insertedAccessKey('');
-    deleteCookie('LOGIN_ACCOUNT');
-    deleteCookie('AUTHED_ACCOUNT');
-    deleteCookie('BNS_NAME');
-  };
-  // const connectWallet = () => {
-  //   connect();
-  // };
-  // const disConnect = async () => {
-  //   wallet && (await disconnect(wallet));
-  //   logout();
-  // };
-  // const goHome = () => {
-  //   router.push('/');
-  // };
-
-  // useEffect(() => {
-  //   if (wallet) {
-  //     setAddress((wallet as any)['accounts'][0].address);
-  //   }
-  // }, [wallet]);
-
-  // async function checkAccount() {
-  //   const res = await get(`${QUEST_PATH}/api/activity/check_account?category=${platform}`);
-  //   if ((res.code as number) !== 0) return;
-  //   const status = res.data.is_activity ? 'new' : 'old';
-  //   setUserStatus(status);
-  // }
-
-  // header的activity: kol 参数加个name: kol的name  platform=kol
-  // async function checkAddressWithActive() {
-  //   const res: any = await getWithoutActive(`${QUEST_PATH}/api/invite/check-address/${address}`, platform, {
-  //     name: kolName,
-  //   });
-
-  //   if ((res.code as number) !== 0) return;
-
-  //   if (res.data.is_activated) {
-  //     fetchAccessToken();
-  //   }
-  // }
-
-  // async function getKolInfo() {
-  //   const res: any = await get(`${QUEST_PATH}/api/activity/kol`, { name: kolName });
-
-  //   if ((res.code as number) !== 0) return;
-  //   const { address, avatar } = res.data;
-  //   setKolAddr(address);
-  //   setKolAvatar(avatar);
-  // }
-
-  // async function fetchAccessToken() {
-  //   await getAccessToken(address);
-  //   setCookie('AUTHED_ACCOUNT', address);
-  //   checkAccount();
-  // }
+  const [spin2, setSpin2] = useState([false, false, false]);
 
   async function fetchKolInfo() {
     try {
       const res = await get(`${QUEST_PATH}/api/activity/kol/info`);
       setSpin1(false);
       if ((res.code as number) !== 0) return;
+
+      setSpin2([false, false, false]);
       setUserData(res.data);
-      if (res?.data?.total_invite > 100) {
-        setStep1IsCompleted(true);
-        return;
+      if (res?.data?.total_invite >= 100) {
+        setIsCompleted((prev) => ({ ...prev, 1: true }));
       }
-      if (res?.data?.total_invite > 1000) {
-        setStep2IsCompleted(true);
-        return;
+      if (res?.data?.total_invite >= 1000) {
+        setIsCompleted((prev) => ({ ...prev, 2: true }));
       }
-      if (res?.data?.total_invite > 10000) {
-        setStep3IsCompleted(true);
-        return;
+      if (res?.data?.total_invite >= 10000) {
+        setIsCompleted((prev) => ({ ...prev, 3: true }));
       }
     } catch (error) {
       setSpin1(false);
     }
-  }
-
-  async function fetchQuestList() {
-    const res = await get(`${QUEST_PATH}/api/activity/quest_list?category=${platform}`);
-
-    setSpin1(false);
-    setSpin2([false, false, false, false]);
-    if ((res.code as number) !== 0) return;
-
-    const { advanced_quests, basic_quests } = res.data;
-    setAdvancedQuests(advanced_quests);
-    setBasicQuests(basic_quests);
-  }
-
-  async function fetchTotalRewards() {
-    // 总积分
-    const res = await get(`${QUEST_PATH}/api/activity/reward?category=${platform}`);
-    if ((res.code as number) !== 0) return;
-    setSpin1(false);
-    setSpin2([false, false, false, false]);
-    setTotalReward(res.data?.reward || 0);
-    setRank(res.data?.rank || 0);
-  }
-
-  async function checkQuest(id: number) {
-    const res = await get(`${QUEST_PATH}/api/activity/check_quest?quest_id=${id}`);
-    console.log(11111, res);
-
-    // if ((res.code as number) !== 0) return;
   }
 
   async function claimReward(step: 1 | 2 | 3) {
@@ -209,9 +94,10 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const handleClaim = async (step: any, pts: number) => {
     if (!address) return;
 
-    if (step === 1 && !step1_is_completed) return;
-    if (step === 2 && !step2_is_completed) return;
-    if (step === 3 && !step3_is_completed) return;
+    // if (step === 1 && !(isCompleted as any)[step]) return;
+    // if (step === 2 && !(isCompleted as any)[step]) return;
+    // if (step === 3 && !(isCompleted as any)[step]) return;
+    if (!(isCompleted as any)[step]) return;
     if (step === 1 && userData?.step1_is_claimed) return;
     if (step === 2 && userData?.step2_is_claimed) return;
     if (step === 3 && userData?.step3_is_claimed) return;
@@ -238,110 +124,12 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
     }
   }, [account, fresh]);
 
-  // useEffect(() => {
-  //   fetchQuestList();
-  //   if (userStatus === 'uncheck') return;
-  //   if (userStatus === 'new') {
-  //     getInviteCodes();
-  //   }
-  //   if (userStatus === 'old') {
-  //     setIsShowModal(true);
-  //     setModalType('fail');
-  //   }
-  // }, [userStatus, fresh]);
-
-  // useEffect(() => {
-  //   if (kolName) {
-  //     getKolInfo();
-  //   }
-  // }, [kolName]);
-
-  // useEffect(() => {
-  //   if (userStatus === 'new') {
-  //     setIsBlur(false);
-  //   }
-  //   if (userStatus === 'old' || userStatus === 'uncheck' || !address) {
-  //     setIsBlur(true);
-  //   }
-  // }, [userStatus, address]);
-
-  // useEffect(() => {
-  //   if (address) {
-  //     // setUpdater(Date.now());
-  //     // checkAddressWithActive();
-  //     // if (from === 'bg') {
-  //     //   checkAddressWithActive();
-  //     // }
-  //     // if (from === 'bgUser') {
-  //     //   checkAddress();
-  //     // }
-  //   }
-  // }, [address]);
-
-  // useEffect(() => {
-  //   if (isBlur) return;
-  //   fetchTotalRewards();
-  //   getInviteList();
-  // }, [updater, isBlur]);
-
-  // const openSource = (action: any) => {
-  //   if (isBlur) return;
-  //   if (action.category === 'twitter_follow' && userInfo.twitter?.is_bind) {
-  //     sessionStorage.setItem('_clicked_twitter_' + action.id, '1');
-  //   }
-  //   if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
-  //     const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
-  //     sessionStorage.setItem('_auth_type', 'twitter');
-  //     window.open(path, '_blank');
-  //     return;
-  //   }
-
-  //   if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
-  //     const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
-  //     sessionStorage.setItem('_auth_type', 'discord');
-  //     window.open(path, '_blank');
-  //     return;
-  //   }
-
-  //   // if (action.category.startsWith('telegram') && !userInfo.telegram?.is_bind) {
-  //   //   if (window.Telegram) {
-  //   //     window.Telegram.Login.auth({ bot_id: config.telegram_bot_id, request_access: true }, (data: any) => {
-  //   //       if (data) {
-  //   //         handleBind('telegram', { ...data, id: data.id.toString() });
-  //   //       }
-  //   //     });
-  //   //   }
-  //   //   return;
-  //   // }
-  //   window.open(action.source, '_blank', 'width=850,height=550');
-  // };
-
-  // const prefix = location.origin;
-
-  function calcRewardStyle(step: number) {
-    if (step === 1) {
-      return step1_is_completed ? '' : 'blur';
-    }
-    if (step === 2) {
-      return step2_is_completed ? '' : 'blur';
-    }
-    if (step === 3) {
-      return step3_is_completed ? '' : 'blur';
-    }
-    return '';
-  }
-
   function calcListStyle(step: number) {
     if (step === 1) {
       return '';
+    } else {
+      return (isCompleted as any)[step] ? '' : 'blur';
     }
-    if (step === 2) {
-      return step1_is_completed ? '' : 'blur';
-    }
-    if (step === 3) {
-      return step2_is_completed ? '' : 'blur';
-    }
-    return '';
   }
 
   const quests = [
@@ -349,7 +137,6 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
     { step: 2, total: 1000, pts: 5000 },
     { step: 3, total: 10000, pts: 10000 },
   ];
-  console.log(11111111, step1_is_completed, step2_is_completed, step3_is_completed);
 
   return (
     <Styles.Container>
@@ -399,87 +186,59 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
         <Styles.Title>Stage reward</Styles.Title>
         <Styles.Info>Upon reaching goals, unlock bonus points as a reward!</Styles.Info>
 
-        {/* <Styles.CardBox className={isBlur ? 'blur' : ''}>
-          {advancedQuests?.length
-            ? advancedQuests.map((item, index) => (
-                <Styles.Card key={item.id}>
-                  <Styles.CardLeft onClick={(e) => openSource(item)}>
-                    <Styles.CardIcon src={(questImgs as any)[item.category]} />
-                    <div>
-                      <Styles.CardTitle>{item.name}</Styles.CardTitle>
-                      <Styles.Tag>
-                        <Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin>+{item.reward} PTS
-                      </Styles.Tag>
-                    </div>
-                  </Styles.CardLeft>
-                  <Styles.CardRight>
-                    {item.status === 'completed' ? (
-                      <Styles.CardDone src="/images/marketing/done.svg" />
-                    ) : (
-                      <Styles.Fresh
-                        className={spin2[index] ? 'spin' : ''}
-                        src="/images/marketing/fresh.svg"
-                        onClick={async (e) => {
-                          if (isBlur) return;
-                          setSpin2((prev) => {
-                            const temp = [...prev];
-                            temp[index] = !temp[index];
-                            return temp;
-                          });
-                          await checkQuest(item.id);
-                          handleFresh();
-                          e.stopPropagation();
-                        }}
-                      />
-                    )}
-                    {!item.is_claimed ? (
-                      <Styles.CardBtn disabled={item.status !== 'completed'} onClick={(e) => handleClaim(item)}>
-                        Claim
-                      </Styles.CardBtn>
-                    ) : null}
-                  </Styles.CardRight>
-                </Styles.Card>
-              ))
-            : null}
-        </Styles.CardBox> */}
-        {quests.map((item) => (
+        {quests.map((item, index) => (
           <Styles.RewardList key={item.step} className={calcListStyle(item.step)}>
             <Styles.RewardQuest>
               <Styles.Head>
                 <Styles.HeadLeft>
                   Stage <Styles.StepNum>{item.step}</Styles.StepNum> reward
                 </Styles.HeadLeft>
-                {item.step === 1 ? (
-                  step1_is_completed ? (
-                    <Styles.CardDone src="/images/marketing/done.svg" />
-                  ) : (
-                    <Styles.Fresh onClick={handleFresh} src="/images/marketing/fresh.svg" />
-                  )
-                ) : null}
-                {item.step === 2 ? (
-                  step2_is_completed ? (
-                    <Styles.CardDone src="/images/marketing/done.svg" />
-                  ) : (
-                    <Styles.Fresh onClick={handleFresh} src="/images/marketing/fresh.svg" />
-                  )
-                ) : null}
-                {item.step === 3 ? (
-                  step3_is_completed ? (
-                    <Styles.CardDone src="/images/marketing/done.svg" />
-                  ) : (
-                    <Styles.Fresh onClick={handleFresh} src="/images/marketing/fresh.svg" />
-                  )
-                ) : null}
+                {(isCompleted as any)[item.step] ? (
+                  <Styles.CardDone src="/images/marketing/done.svg" />
+                ) : (
+                  <Styles.Fresh
+                    className={spin2[index] ? 'spin' : ''}
+                    onClick={() => {
+                      setSpin2((prev) => {
+                        const temp = [...prev];
+                        temp[index] = !temp[index];
+                        return temp;
+                      });
+                      handleFresh();
+                    }}
+                    src="/images/marketing/fresh.svg"
+                  />
+                )}
               </Styles.Head>
               <Styles.Tips>
                 Complete <Styles.TipCount>{item.total}</Styles.TipCount> new user invites and receive corresponding
                 rewards
               </Styles.Tips>
               <Styles.Progress>
-                <Styles.Inner style={{ width: `${userData?.total_invite / item.total}%` }}></Styles.Inner>
+                <Styles.Inner
+                  style={{
+                    width: (isCompleted as any)[item.step] ? '100%' : `${(userData?.total_invite / item.total) * 100}%`,
+                  }}
+                ></Styles.Inner>
               </Styles.Progress>
+              <Styles.Current>
+                <Styles.Tag>
+                  <Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin>
+                  +100 PTS
+                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="9" viewBox="0 0 8 9" fill="none">
+                    <path d="M7.54599 1.3187L1.18203 7.68266M7.54599 7.68266L1.18203 1.3187" stroke="#EBF479" />
+                  </svg>{' '}
+                  1 PPL
+                </Styles.Tag>
+                {!(isCompleted as any)[item.step] ? (
+                  <Styles.People>
+                    <Styles.PeopleIcon src="/images/marketing/follow.svg" />
+                    <Styles.PeopleNum>{userData?.total_invite}</Styles.PeopleNum>
+                  </Styles.People>
+                ) : null}
+              </Styles.Current>
             </Styles.RewardQuest>
-            <Styles.RewardBox className={calcRewardStyle(item.step)}>
+            <Styles.RewardBox className={(isCompleted as any)[item.step] ? '' : 'blur'}>
               <Styles.Cap src="/images/marketing/cap.svg"></Styles.Cap>
               <Styles.ClaimBtn onClick={(e) => handleClaim(item.step, item.pts)}>
                 Claim <Styles.CoinIcon src="/images/marketing/coin.svg" /> {item.pts} PTS
