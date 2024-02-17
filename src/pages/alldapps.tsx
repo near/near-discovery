@@ -761,14 +761,14 @@ const AllDappsColumn: NextPageWithLayout = () => {
           onClick={() => handleTabClick('TBD')}
           data-bp="10011-003"
         >
-          Upcoming Token 🔥
+          Upcoming Airdrop 🔥
         </div>
         <div
           className={`tab-list-item ${selectedTab === 'token' ? 'active' : ''}`}
           onClick={() => handleTabClick('token')}
           data-bp="10011-003"
         >
-          💰 Native token
+          💰 dApps
         </div>
         <div
           className={`tab-list-item ${selectedTab === 'favorites' ? 'active' : ''}`}

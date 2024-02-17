@@ -15,7 +15,7 @@ const Quests = ({ quests }: any) => {
           }}
           data-bp="100121-010"
         >
-          Explore Quest
+          Explore Quests
         </StyledAction>
       </StyledTitle>
       <StyledList>

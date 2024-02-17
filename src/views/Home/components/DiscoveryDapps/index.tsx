@@ -12,7 +12,7 @@ const TABS = [
     key: 'Y',
   },
   {
-    label: 'Upcoming Token🔥',
+    label: 'Upcoming Airdrop🔥',
     key: 'N',
   },
 ];
