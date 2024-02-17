@@ -164,7 +164,7 @@ export const DesktopNavigationTop = () => {
             <InputWrapper>
               <input
                 type="text"
-                placeholder="search dapps, chains..."
+                placeholder="search dApps, chains..."
                 value={searchContent}
                 onChange={(e) => setSearchContent(e.target.value)}
                 autoFocus

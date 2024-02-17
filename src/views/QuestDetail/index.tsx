@@ -38,7 +38,7 @@ const QuestDetailView = () => {
     if (quest && campaigns.length > 0) {
       const campaign = campaigns.find((campaign) => campaign.id === quest.quest_campaign_id);
       const array = [];
-      array[0] = { name: 'Quest Campaign', path: '/quest/leaderboard' };
+      array[0] = { name: 'Quests Campaign', path: '/quest/leaderboard' };
       // array[1] =
       //   campaign.name.replace(/\s/g, '') === 'DapDapXBNS'
       //     ? {
