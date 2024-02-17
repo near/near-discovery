@@ -55,8 +55,18 @@ const Campaign = function ({ campaign, bp }: any) {
   return (
     <StyledCampaign onClick={handleClickCampaign}>
       <StyledWrapper style={{ width: 320 }}>
-        <StyledText $size='32px' $weight='700' $line='120%'>{campaign.name}</StyledText>
-        <StyledText $size='14px' $line="150%" $lineClamp={3} className='ellipsis' style={{ marginTop: 20, marginBottom: 20 }}>{campaign.description}</StyledText>
+        <StyledText $size="32px" $weight="700" $line="120%">
+          {campaign.name}
+        </StyledText>
+        <StyledText
+          $size="14px"
+          $line="150%"
+          $lineClamp={3}
+          className="ellipsis"
+          style={{ marginTop: 20, marginBottom: 20 }}
+        >
+          {campaign.description}
+        </StyledText>
         <StyledButton
           $width="75px"
           $height="30px"
@@ -65,7 +75,7 @@ const Campaign = function ({ campaign, bp }: any) {
           style={{ marginBottom: 19 }}
         >
           <StyledText $size="14px" $weight="500">
-            {campaign.quests.total} Qusts
+            {campaign.quests.total} Quests
           </StyledText>
         </StyledButton>
         <StyledExplore>
@@ -127,7 +137,7 @@ const Narratives = ({ campaigns, loading, bp }: any) => {
           <Loading size={60} />
         </StyledLoadingWrapper>
       ) : (
-        <StyledFlex $gap='50px'>
+        <StyledFlex $gap="50px">
           {campaigns.map((campaign: any, index: number) => {
             return <Campaign key={index} campaign={campaign} bp={bp} />;
           })}
