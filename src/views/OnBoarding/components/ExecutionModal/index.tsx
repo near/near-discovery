@@ -29,7 +29,7 @@ const Panel = ({ type, chainId, setTitle, ...restProps }: any) => {
     );
   }
 
-  if (type === 'liquidity') {
+  if (type === 'liquidity' || type === 'deposit') {
     return (
       <LiquidityPanel
         {...restProps}
