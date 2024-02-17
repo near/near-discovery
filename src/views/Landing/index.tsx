@@ -134,7 +134,7 @@ const LandingView = () => {
                   }}
                 >
                   {loading && <Loading mr="5px" />}
-                  {step === 4 ? 'Claim 140 PTS' : 'Continue'}
+                  {step === 4 ? `Claim ${info?.quest?.reward} PTS` : 'Continue'}
                 </StyledClaimButton>
                 <StyledSkipButton
                   onClick={() => {
