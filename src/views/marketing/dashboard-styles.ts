@@ -543,3 +543,32 @@ export const CoinIcon = styled.img`
   width: 19px;
   margin: 0 5px;
 `;
+
+export const Current = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 14px;
+`;
+
+export const People = styled.div`
+  min-width: 69px;
+  height: 26px;
+  padding: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius: 16px;
+  background: linear-gradient(103.34deg, #ebf479 14.1%, #4d54ff 78.04%);
+  border: 1px solid rgba(55, 58, 83, 1);
+`;
+export const PeopleNum = styled.div`
+  font-size: 14px;
+  font-weight: 700;
+  color: white;
+`;
+
+export const PeopleIcon = styled.img`
+  width: 16px;
+`;
