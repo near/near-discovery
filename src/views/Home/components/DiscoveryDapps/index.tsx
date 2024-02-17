@@ -9,16 +9,16 @@ import { StyledContainer, StyledTitle, StyledTabsWrapper, StyledTabs, StyledTab,
 const TABS = [
   {
     label: 'Featured',
-    key: 'Y',
+    key: 'N',
   },
   {
     label: 'Upcoming Airdrop🔥',
-    key: 'N',
+    key: 'Y',
   },
 ];
 
 const DiscoveryDapps = () => {
-  const [tab, setTab] = useState('Y');
+  const [tab, setTab] = useState('N');
   const { loading, featuredDapps, upcomingDapps } = useDapps();
   return (
     <StyledContainer>
