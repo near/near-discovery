@@ -19,7 +19,7 @@ const QuestView = () => {
   const { loading: categoryLoading, categories } = useCategoryList();
   return (
     <StyledContainer>
-      <Breadcrumb navs={[{ name: 'Quest Campaign', path: '/quest' }]} />
+      <Breadcrumb navs={[{ name: 'Quests Campaign', path: '/quest' }]} />
       <Campaign
         onLoad={(campainId: string) => {
           setId(campainId);

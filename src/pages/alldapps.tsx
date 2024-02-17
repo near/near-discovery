@@ -704,7 +704,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <span>All Dapps</span>
+        <span>All dApps</span>
       </BreadCrumbs>
 
       <CarouselList>
