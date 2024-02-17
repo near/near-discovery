@@ -72,7 +72,7 @@ const LoginView = () => {
         setErrorTips(errorMsg);
       } else {
         await getAccessToken(account);
-        setLoading(false);
+        // setLoading(false);
         setCookie('AUTHED_ACCOUNT', account);
         router.replace('/landing');
       }
@@ -119,10 +119,13 @@ const LoginView = () => {
               ))}
               {codeList.join('').length === 6 ? (
                 <StyledSvg
+                  style={{ cursor: 'pointer' }}
                   className={proceed ? 'proceed' : ''}
                   onMouseDown={() => setProceed(true)}
-                  onMouseUp={() => setProceed(false)}
-                  onClick={() => handleProceed()}
+                  onMouseUp={() => {
+                    setProceed(false)
+                    handleProceed()
+                  }}
                 >
                   <Image src={enterButton} alt="enterButton" />
                 </StyledSvg>
