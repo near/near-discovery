@@ -19,7 +19,7 @@ const ChainDetail = ({ path }: any) => {
 
   useEffect(() => {
     if ([4, 6].includes(Number(PathToId[path]))) {
-      handleReport('chains-details?id=' + PathToId[path]);
+      handleReport(`network/${path}`);
     }
   }, [path]);
 

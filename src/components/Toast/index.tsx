@@ -31,7 +31,7 @@ const StyledDesc = styled.div`
 `;
 const StyledTitle = styled.div`
   color: #fff;
-  font-family: Noto Sans;
+  font-family: Gantari;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
@@ -40,7 +40,7 @@ const StyledTitle = styled.div`
 `;
 const StyledSecondaryText = styled.div`
   color: #8e8e8e;
-  font-family: Open Sans;
+  font-family: Gantari;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;

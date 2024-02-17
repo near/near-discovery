@@ -165,7 +165,7 @@ const QuestCampaign = ({ campaign, categories, bp }: any) => {
 const Index = ({ onLoad, campaigns, categories, bp }: any) => {
   return (
     <StyledCampaipnsContainer>
-      <StyledHeader style={{ marginTop: 40, marginBottom: 20 }}>Quest Campaign</StyledHeader>
+      <StyledHeader style={{ marginTop: 40, marginBottom: 20 }}>Quests Campaign</StyledHeader>
       <StyledFlex $direction="column" $gap="30px">
         {campaigns.map((campaign: any) => (
           <QuestCampaign key={campaign.id} campaign={campaign} categories={categories} bp={bp} />
