@@ -56,13 +56,13 @@ const LandingView = () => {
 
   useEffect(() => {
     if (info?.actions) {
-      let _step = 0;
+      let _step = 1;
       info.actions.forEach((action: any) => {
         if (action.status === 'completed') {
           _step++;
         }
       });
-      setStep(1);
+      setStep(_step);
     }
   }, [info]);
   return (
@@ -111,7 +111,7 @@ const LandingView = () => {
               </StyledProcessBars>
               <StyledButtons>
                 <StyledClaimButton
-                  disabled={loading || !continuable}
+                  disabled={loading || !continuable || info?.quest.is_claimed}
                   whileHover={{ opacity: 0.8 }}
                   whileTap={{ opacity: 0.6 }}
                   style={{ width: '70%' }}
