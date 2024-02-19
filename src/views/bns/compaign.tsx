@@ -207,7 +207,7 @@ const CampaignView = () => {
                 One quest forthe best price!
               </StyledText>
               <StyledText $size="20px" $line="120%">
-              Follow the quest on the rght, you will get the bestd get DapDap PTS.price for register BNS, an
+                Follow the quest on the right, and you will get the best price for registering with BNS, and get DapDap PTS.
               </StyledText>
             </StyledFlex>
             <StyledSvg>
