@@ -1038,7 +1038,7 @@ export function NearOrgUsePage() {
         </Section>
       </Wrapper>
 
-      <VmComponent src={components.nearOrg.footer}  />
+      <VmComponent src={components.nearOrg.footer} />
     </>
   );
 }
