@@ -204,10 +204,10 @@ const CampaignView = () => {
           <StyledFlex>
             <StyledFlex $direction="column" $gap="6px" style={{ width: 496 }}>
               <StyledText $size="36px" $weight="700" $line="120%">
-                One quest for the best price!
+                One quest forthe best price!
               </StyledText>
               <StyledText $size="20px" $line="120%">
-                Follow the quest on the right, you will get the best price for register BNS, and get 100 DapDap PTS.
+              Follow the quest on the rght, you will get the bestd get DapDap PTS.price for register BNS, an
               </StyledText>
             </StyledFlex>
             <StyledSvg>
