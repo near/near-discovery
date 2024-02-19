@@ -142,11 +142,7 @@ const Wrapper = styled.div`
 const AccordionTrigger = forwardRef<HTMLButtonElement, ComponentProps<typeof Accordion.Trigger>>(
   ({ children, className, ...props }, forwardedRef) => (
     <Accordion.Header className="AccordionHeader">
-      <Accordion.Trigger
-        className={classNames('AccordionTrigger', className)}
-        {...props}
-        ref={forwardedRef}
-      >
+      <Accordion.Trigger className={classNames('AccordionTrigger', className)} {...props} ref={forwardedRef}>
         {children}
         <i className="ph ph-caret-down AccordionChevron" aria-hidden></i>
       </Accordion.Trigger>

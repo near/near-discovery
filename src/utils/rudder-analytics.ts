@@ -66,7 +66,7 @@ export async function init() {
     for (const event of pendingEvents) {
       event();
     }
-    pendingEvents = []; 
+    pendingEvents = [];
   } catch (e) {
     console.error(e);
   }
@@ -85,8 +85,8 @@ function filterURL(url: string) {
 export function recordPageView(pageName: string) {
   if (!rudderAnalytics) {
     pendingEvents.push(() => {
-      recordPageView(pageName)
-    })
+      recordPageView(pageName);
+    });
     return;
   }
   try {

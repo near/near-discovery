@@ -213,7 +213,7 @@ const SignUpPage: NextPageWithLayout = () => {
           )}
         </InputContainer>
 
-        <Button label="Continue" variant="affirmative" onClick={onSubmit} />
+        <Button label="Continue" variant="affirmative" type="submit" />
 
         <hr style={{ borderColor: 'hsl(55, 1.7%, 51.9%)' }} />
 

@@ -21,7 +21,7 @@ import {
   StyledLoginVideo,
   StyledSvg,
   StyledText,
-  StyledWrapper
+  StyledWrapper,
 } from './styles';
 const LoginView = () => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const LoginView = () => {
   const [codeList, setCodeList] = useState(new Array(6).fill(''));
   const [errorTips, setErrorTips] = useState<string>('');
   const [loading, setLoading] = useState(false);
-  const [proceed, setProceed] = useState(false)
+  const [proceed, setProceed] = useState(false);
   const { logging, logout } = useAuth();
   const [{ wallet }] = useConnectWallet();
   const inputRef = useRef<any>([]);
@@ -98,45 +98,43 @@ const LoginView = () => {
         <StyledText $size="18px" $weight="400" $line="161.2%" style={{ marginBottom: 19 }}>
           Get an invite code from an existing user to sign up.
         </StyledText>
-        {
-          loading ? (
-            <StyledLoadingWrapper>
-              <Loading size={60} />
-            </StyledLoadingWrapper>
-          ) : (
-            <StyledFlex $align="flex-end" $justify="flex-start" $gap="8px">
-              {codeList.map((code, index) => (
-                <StyledCodeInputWrapper key={index}>
-                  <StyledCodeInput
-                    value={code}
-                    ref={(ref) => (inputRef.current[index] = ref)}
-                    onChange={(event) => handleChange(event, index)}
-                    onKeyDown={(event) => handleKeyDown(event, index)}
-                    onPaste={(event) => handlePaste(event)}
-                    maxLength={1}
-                  />
-                </StyledCodeInputWrapper>
-              ))}
-              {codeList.join('').length === 6 ? (
-                <StyledSvg
-                  style={{ cursor: 'pointer' }}
-                  className={proceed ? 'proceed' : ''}
-                  onMouseDown={() => setProceed(true)}
-                  onMouseUp={() => {
-                    setProceed(false)
-                    handleProceed()
-                  }}
-                >
-                  <Image src={enterButton} alt="enterButton" />
-                </StyledSvg>
-              ) : (
-                <StyledSvg style={{ opacity: 0.5 }}>
-                  <Image src={enterButton} alt="enterButton" />
-                </StyledSvg>
-              )}
-            </StyledFlex>
-          )
-        }
+        {loading ? (
+          <StyledLoadingWrapper>
+            <Loading size={60} />
+          </StyledLoadingWrapper>
+        ) : (
+          <StyledFlex $align="flex-end" $justify="flex-start" $gap="8px">
+            {codeList.map((code, index) => (
+              <StyledCodeInputWrapper key={index}>
+                <StyledCodeInput
+                  value={code}
+                  ref={(ref) => (inputRef.current[index] = ref)}
+                  onChange={(event) => handleChange(event, index)}
+                  onKeyDown={(event) => handleKeyDown(event, index)}
+                  onPaste={(event) => handlePaste(event)}
+                  maxLength={1}
+                />
+              </StyledCodeInputWrapper>
+            ))}
+            {codeList.join('').length === 6 ? (
+              <StyledSvg
+                style={{ cursor: 'pointer' }}
+                className={proceed ? 'proceed' : ''}
+                onMouseDown={() => setProceed(true)}
+                onMouseUp={() => {
+                  setProceed(false);
+                  handleProceed();
+                }}
+              >
+                <Image src={enterButton} alt="enterButton" />
+              </StyledSvg>
+            ) : (
+              <StyledSvg style={{ opacity: 0.5 }}>
+                <Image src={enterButton} alt="enterButton" />
+              </StyledSvg>
+            )}
+          </StyledFlex>
+        )}
         {errorTips && (
           <StyledErrorTips>
             <Image src={iconWarning} alt="iconWarning" /> {errorTips}

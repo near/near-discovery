@@ -16,8 +16,8 @@ export const styleZendesk = () => {
 
   if (!zwButton || !zwIcon || !zwLabel) return;
 
-  zwButton.style.opacity = "0.8";
-  zwButton.style.padding = ".92857rem";
-  zwIcon.style.paddingRight = "0";
+  zwButton.style.opacity = '0.8';
+  zwButton.style.padding = '.92857rem';
+  zwIcon.style.paddingRight = '0';
   zwLabel.remove();
-}
+};
