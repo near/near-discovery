@@ -32,22 +32,23 @@ const Amount = ({ mt }: { mt?: number }) => {
   const tokens = useTokens();
   const currentToken = tokens?.filter(token => token.isNative)[0] as Token
 
-  let { balance, loading } = useTokenBalance({ tokensByChain: currentToken });
+  const { balance, loading } = useTokenBalance({ tokensByChain: currentToken });
   const { balance : balanceBak } = useBakTokenBalance({ isNative: true })
   const price = usePriceStore((store) => store.price);
+  let _balance = balance
   if (currentChain && excludeChain(currentChain.chainId)) {
-    balance = balanceBak as string
+    _balance = balanceBak as string
   }
 
   return (
     <StyledWrapper mt={mt}>
       <StyledAmount>
         {
-          loading ? <Loading /> : currentChain ? `${balanceFormated(balance, 4)} ${currentToken.symbol || currentChain.nativeCurrency.symbol}` : '--'
+          loading ? <Loading /> : currentChain ? `${balanceFormated(_balance, 4)} ${currentToken.symbol || currentChain.nativeCurrency.symbol}` : '--'
         }
       </StyledAmount>
       <StyledValue>
-        ${valueFormated(balance, currentChain ? price[currentChain.nativeCurrency.symbol] : '')} USD
+        ${valueFormated(_balance, currentChain ? price[currentChain.nativeCurrency.symbol] : '')} USD
       </StyledValue>
     </StyledWrapper>
   );
