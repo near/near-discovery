@@ -1,17 +1,18 @@
 import bnsAvatar from '@/assets/images/bns_avatar.svg';
-import iconCain from '@/assets/images/icon_coin.svg';
 import useAccount from '@/hooks/useAccount';
 import useToast from '@/hooks/useToast';
 import { balanceFormated } from '@/utils/balance';
 import * as http from '@/utils/http';
 import useReport from '@/views/Landing/hooks/useReport';
 import namehash from '@ensdomains/eth-ens-namehash';
+import Big from 'big.js';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { memo, useEffect, useMemo, useState } from 'react';
 import useBnsContract from '../../hooks/useBnsContract';
 import type { RegisterStatusType } from '../../types';
+import { usePriceStore } from '@/stores/price';
 import {
   StyledButton,
   StyledDialog,
@@ -59,14 +60,17 @@ const iconCircle = (
 const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDialog, currentChain, setChain }: any) => {
   const toast = useToast();
   const router = useRouter();
+  const priceStore = usePriceStore()
   const { account } = useAccount();
   const contract = useBnsContract();
   const { handleReport } = useReport();
+  const price = priceStore.price
 
   const [registerStatus, setRegisterStatus] = useState<RegisterStatusType>(0);
   const [year, setYear] = useState(1);
   const totalPrice = useMemo(() => year * priceLabel.price, [priceLabel.price, year]);
   const discountPrice = useMemo(() => 0.4 * year * priceLabel.price, [priceLabel.price, year]);
+  const realPrice = useMemo(() => totalPrice - (discount ? discountPrice : 0), [totalPrice, discount, discountPrice])
 
   const handlePlus = function () {
     setYear((prev) => (prev += 1));
@@ -252,10 +256,13 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
                 </StyledText>
                 <StyledFlex $direction="column" $align="flex-end" $gap="5px">
                   <StyledText $size="16px" $line="120%">
-                    ${balanceFormated(totalPrice - discountPrice, 2)}
+                    ${balanceFormated(realPrice, 2)}
                   </StyledText>
                   <StyledText $color="#979ABE" $size="14px" $line="120%">
-                    (~{balanceFormated(0.0025 * year)} ETH)
+                    (~{Big(realPrice)
+                      .div(price['ETH'])
+                      .toFixed(4)
+                    } ETH)
                   </StyledText>
                 </StyledFlex>
               </StyledFlex>
