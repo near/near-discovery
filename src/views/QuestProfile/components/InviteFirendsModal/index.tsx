@@ -88,6 +88,7 @@ const InviteFirendsModal = ({
   const { copy } = useCopy();
   const newCodes = useMemo(() => codeList.filter((code, i) => !code.is_used), [codeList]);
   const { loading: claiming, handleClaim } = useRewardsClaim();
+  const activeCodes = useMemo(() => list.filter((code: any) => code.status === 'Active'), [list]);
   return (
     <Modal
       display={open}
@@ -142,8 +143,8 @@ const InviteFirendsModal = ({
           </StyledHeader>
           <StyledDescBox>
             <StyledDesc>
-              You invited {list.length} friends, 6 of them are active, you will get {reward} PTS for each active
-              account.
+              You invited {list.length} friends, {activeCodes.length} of them are active, you will get {reward} PTS for
+              each active account.
             </StyledDesc>
             <StyledClaimButton
               disabled={claiming || totalRewards === 0}
