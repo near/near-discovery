@@ -10,7 +10,8 @@ interface NetCurve24hUserItem {
   usd_value: number;
 }
 
-const DAPDAP_DEBANK_URL = 'https://api.dapdap.net/debank';
+const DAPDAP_DEBANK_URL = (process.env.NEXT_PUBLIC_API ? process.env.NEXT_PUBLIC_API : 'https://api.dapdap.net')
+ + '/debank';
 
 export const useNetCurve24h = () => {
   const { sender } = useEthersSender();

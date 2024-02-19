@@ -21,7 +21,7 @@ export default function useTokenBalance({
   const [loading, setLoading] = useState<boolean>(false);
   const { account, chainId } = useAccount();
   useEffect(() => {
-    if (!currency) {
+    if (!currency && !isNative) {
       return
     }
 
