@@ -96,7 +96,7 @@ const Button = ({
       </StyledButton>
     );
   }
-  if (!approved) {
+  if (!approved && route && route.dex === 'Stargate') {
     return (
       <StyledButton onClick={approve} disabled={approving}>
         {approving && <LoadingIcon />}

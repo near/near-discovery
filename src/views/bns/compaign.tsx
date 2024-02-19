@@ -128,7 +128,6 @@ const CampaignView = () => {
         'https://api.basename.app/v1/registration/' + normalizedName + '/is-name-available',
       );
       if (firstResponse && secondResponse) {
-        // 查询Bns优惠
         handleGetBnsDiscount();
         setQueryNameStatus(2);
       } else {
@@ -167,11 +166,10 @@ const CampaignView = () => {
     account && getBnsNames();
   }, []);
 
-  // 上报
   useEffect(() => {
-    if (typeof router.query.click_yourname === 'string') {
-      handleReport('quest/leaderboard/DapDapXBNS?click_yourname');
-    }
+    // if (typeof router.query.click_yourname === 'string') {
+    //   handleReport('quest/leaderboard/DapDapXBNS?click_yourname');
+    // }
     if (typeof router.query.Your_BNS_Names === 'string') {
       handleReport('quest/leaderboard/DapDapXBNS?Your_BNS_Names');
     }
@@ -206,10 +204,10 @@ const CampaignView = () => {
           <StyledFlex>
             <StyledFlex $direction="column" $gap="6px" style={{ width: 496 }}>
               <StyledText $size="36px" $weight="700" $line="120%">
-                One quest for the best price!
+                One quest forthe best price!
               </StyledText>
               <StyledText $size="20px" $line="120%">
-                Follow the quest on the right, you will get the best price for register BNS, and get 100 DapDap PTS.
+                Follow the quest on the right, and you will get the best price for registering with BNS, and get DapDap PTS.
               </StyledText>
             </StyledFlex>
             <StyledSvg>
