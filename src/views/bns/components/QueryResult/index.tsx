@@ -84,7 +84,7 @@ const QueryResult = ({
               Get price on <StyledPriceOff>60% off</StyledPriceOff>
             </StyledGetPriceOff>
           </StyledFlex>
-          <StyledFlex $direction="column" $gap="21px">
+          {/* <StyledFlex $direction="column" $gap="21px">
             <StyledText $size="16px" $weight="700">
               You’ll also get on DapDap
             </StyledText>
@@ -94,7 +94,7 @@ const QueryResult = ({
               </StyledSvg>
               <StyledRewardText>+200 PTS</StyledRewardText>
             </StyledReward>
-          </StyledFlex>
+          </StyledFlex> */}
         </StyledFlex>
       )}
     </StyledQueryResult>

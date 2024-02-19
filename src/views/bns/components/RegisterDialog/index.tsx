@@ -1,12 +1,11 @@
 import bnsAvatar from '@/assets/images/bns_avatar.svg';
 import iconCain from '@/assets/images/icon_coin.svg';
-import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains';
 import useAccount from '@/hooks/useAccount';
 import useToast from '@/hooks/useToast';
 import { balanceFormated } from '@/utils/balance';
 import * as http from '@/utils/http';
+import useReport from '@/views/Landing/hooks/useReport';
 import namehash from '@ensdomains/eth-ens-namehash';
-import { useSetChain } from '@web3-onboard/react';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -62,6 +61,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
   const router = useRouter();
   const { account } = useAccount();
   const contract = useBnsContract();
+  const { handleReport } = useReport();
 
   const [registerStatus, setRegisterStatus] = useState<RegisterStatusType>(0);
   const [year, setYear] = useState(1);
@@ -152,12 +152,19 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
         ],
       });
       setRegisterStatus(2);
+      handleReport('quest/leaderboard/DapDapXBNS?click_yourname')
     } catch (error: any) {
       setRegisterStatus(0);
       error.reason &&
         toast.fail({
           title: error.reason,
         });
+      // error.message
+      if (error?.code === -32603) {
+        toast.fail({
+          title: 'Not enough gas, ' + balanceFormated(0.0025 * year) + ' needed',
+        });
+      }
       console.log('error', error);
     }
   };
@@ -248,7 +255,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
                     ${balanceFormated(totalPrice - discountPrice, 2)}
                   </StyledText>
                   <StyledText $color="#979ABE" $size="14px" $line="120%">
-                    (~0.0025 ETH)
+                    (~{balanceFormated(0.0025 * year)} ETH)
                   </StyledText>
                 </StyledFlex>
               </StyledFlex>
@@ -313,11 +320,11 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
                   Check on Basescan
                 </StyledText>
               </StyledButton>
-              <StyledButton $borderRadius="12px" $borderWidth="0" $background="#EBF479">
+              {/* <StyledButton $borderRadius="12px" $borderWidth="0" $background="#EBF479">
                 <StyledText $color="#1E2028" $size="16px" $weight="700">
                   Claim <Image src={iconCain} alt="iconCain" /> 200 PTS
                 </StyledText>
-              </StyledButton>
+              </StyledButton> */}
             </StyledFlex>
           </StyledDialogBody>
         )}

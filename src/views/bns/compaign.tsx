@@ -169,9 +169,9 @@ const CampaignView = () => {
 
   // 上报
   useEffect(() => {
-    if (typeof router.query.click_yourname === 'string') {
-      handleReport('quest/leaderboard/DapDapXBNS?click_yourname');
-    }
+    // if (typeof router.query.click_yourname === 'string') {
+    //   handleReport('quest/leaderboard/DapDapXBNS?click_yourname');
+    // }
     if (typeof router.query.Your_BNS_Names === 'string') {
       handleReport('quest/leaderboard/DapDapXBNS?Your_BNS_Names');
     }
