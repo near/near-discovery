@@ -72,6 +72,7 @@ export default function useTokenBalance({
     const getNativeBalance = async () => {
       if (!rpcUrl || !account) return;
       setLoading(true);
+      setBalance('0')
       try {
         const provider = new providers.JsonRpcProvider(rpcUrl);
         const amount = await provider.getBalance(account);
