@@ -128,7 +128,6 @@ const CampaignView = () => {
         'https://api.basename.app/v1/registration/' + normalizedName + '/is-name-available',
       );
       if (firstResponse && secondResponse) {
-        // 查询Bns优惠
         handleGetBnsDiscount();
         setQueryNameStatus(2);
       } else {
@@ -167,7 +166,6 @@ const CampaignView = () => {
     account && getBnsNames();
   }, []);
 
-  // 上报
   useEffect(() => {
     // if (typeof router.query.click_yourname === 'string') {
     //   handleReport('quest/leaderboard/DapDapXBNS?click_yourname');
