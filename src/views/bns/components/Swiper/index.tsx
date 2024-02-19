@@ -1,11 +1,29 @@
 import { useRouter } from 'next/router';
-import { memo, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 
 import { StyledContainer, StyledImage, StyledImages, StyledImagesBox, StyledSwiperArrowButton } from './styles';
 
 const Swipper = ({ banners, bp }: { banners: { banner: string; link: string }[]; bp?: string }) => {
   const [current, setCurrent] = useState(0);
   const router = useRouter();
+  const timerRef = useRef<any>();
+  const loop = function () {
+    timerRef.current = setInterval(() => {
+      setCurrent(prev => {
+        if (prev > banners.length - 2) {
+          return 0
+        } else {
+          return prev + 1
+        }
+      })
+    }, 3000)
+  }
+  useEffect(() => {
+    loop()
+    return function () {
+      timerRef.current && clearInterval(timerRef.current)
+    }
+  }, [])
   return (
     <StyledContainer>
       <StyledSwiperArrowButton
