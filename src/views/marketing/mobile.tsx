@@ -117,7 +117,6 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   async function claimReward(id: number) {
     const res = await post(`${QUEST_PATH}/api/activity/claim`, { quest_id: id });
-    console.log(666, res);
 
     if ((res.code as number) !== 0) return false;
     return true;
