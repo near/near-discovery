@@ -14,7 +14,7 @@ import {
 
 const TABS: { name: string; key: Tab }[] = [
   {
-    name: 'Quest of participation',
+    name: 'My Quests',
     key: 'quests',
   },
   {
@@ -22,7 +22,7 @@ const TABS: { name: string; key: Tab }[] = [
     key: 'favorites',
   },
   {
-    name: 'Your PTS',
+    name: 'My PTS',
     key: 'pts',
   },
 ];

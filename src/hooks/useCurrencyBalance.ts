@@ -21,7 +21,7 @@ export default function useTokenBalance({
   const [loading, setLoading] = useState<boolean>(false);
   const { account, chainId } = useAccount();
   useEffect(() => {
-    if (!currency) {
+    if (!currency && !isNative) {
       return
     }
 
@@ -72,6 +72,7 @@ export default function useTokenBalance({
     const getNativeBalance = async () => {
       if (!rpcUrl || !account) return;
       setLoading(true);
+      setBalance('0')
       try {
         const provider = new providers.JsonRpcProvider(rpcUrl);
         const amount = await provider.getBalance(account);

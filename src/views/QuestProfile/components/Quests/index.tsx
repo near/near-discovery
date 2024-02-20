@@ -84,7 +84,7 @@ const Quests = (props: any) => {
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>
-        <QuestPanel {...props} info={info} list={list} loading={loading} title="Quest of participation" />
+        <QuestPanel {...props} info={info} list={list} loading={loading} title="My Quests" />
       </motion.div>
     </AnimatePresence>
   );

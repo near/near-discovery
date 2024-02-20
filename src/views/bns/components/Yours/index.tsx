@@ -12,7 +12,7 @@ const Yours = ({ info }: any) => {
       }}
     >
       <StyledBox>
-        <StyledLabel>Your PTS</StyledLabel>
+        <StyledLabel>My PTS</StyledLabel>
         <StyledValue>
           <StyledCoin $size={18} />
           <span>{info?.reward || 0}</span>

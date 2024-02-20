@@ -36,7 +36,7 @@ getLifiChains().then(res => {
 
 
 /**
- * 获取所有lifiToken
+ * get all lifiToken
  * @returns LiFiToken[]
  */
 export async function getLifiTokens(): Promise<LifiChainToken> {
@@ -90,7 +90,7 @@ export async function getLifiTokens(): Promise<LifiChainToken> {
 }
 
 /**
- * 获取所有lifi chain
+ * get all lifi chain
  * @returns LiFiChain[]
  */
 export async function getLifiChains():Promise<Chain[]> {
@@ -226,34 +226,34 @@ export default function useLifi() {
       await new Promise(async (resolve, reject) => {
         try {
           await lifi.executeRoute(signer, route, {
-            updateRouteHook: (updatedRoute: Route) => { 
+            updateRouteHook: (updatedRoute: Route) => {
               try {
                 console.log(updatedRoute)
-    
+
                 const process = updatedRoute.steps[updatedRoute.steps.length - 1].execution?.process
                 if (!process) {
                   return
                 }
-    
+
                 const time = updatedRoute.steps[updatedRoute.steps.length - 1].estimate.executionDuration
-        
+
                 const outChainProcess = process.filter(item => item.type === 'CROSS_CHAIN')[0]
-        
+
                 if (!outChainProcess) {
                   return
                 }
-    
+
                 let txHash = outChainProcess.txHash
                 if (!txHash) {
                   return
                 }
-    
+
                 const txLink = outChainProcess.txLink
                 const start = process[0].startedAt
                 const end = process[process.length - 1].doneAt
                 const duration =  Math.ceil(time / 60)
                 txHash = txHash || ''
-                
+
                 if (!txHash) {
                   return
                 }
@@ -272,7 +272,7 @@ export default function useLifi() {
                   fromTokenUrl: updatedRoute.fromToken.logoURI,
                 };
                 localStorage.setItem('bridgeTxs', JSON.stringify(_bridgeTxs));
-                
+
                 const _addAction = actionName === 'quick_onboarding' ? onboardingAction : addAction
 
                 if (!hasActionAdded) {
@@ -291,8 +291,8 @@ export default function useLifi() {
                   onSuccess(txHash);
                   resolve(_bridgeTxs[txHash])
                 }
-                
-                
+
+
               } catch(e) {
                 console.log(e)
                 onFail && onFail(e)
@@ -305,7 +305,7 @@ export default function useLifi() {
         }
       })
 
-      
+
     }
   };
 
