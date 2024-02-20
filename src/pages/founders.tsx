@@ -9,8 +9,8 @@ const FoundersPage: NextPageWithLayout = () => {
     <ComponentWrapperPage
       src={components.nearOrg.foundersPage}
       meta={{
-        title: 'NEAR | Founders',
-        description: '',
+        title: 'NEAR | FounderHub',
+        description: 'FounderHub is a one-stop shop for Founders building with the near ecosystem.',
       }}
     />
   );
