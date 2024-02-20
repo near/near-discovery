@@ -29,6 +29,9 @@ dependencies:
   '@near-wallet-selector/meteor-wallet':
     specifier: 8.9.5
     version: 8.9.5(near-api-js@2.1.4)
+  '@near-wallet-selector/mintbase-wallet':
+    specifier: ^8.9.5
+    version: 8.9.5(near-api-js@2.1.4)
   '@near-wallet-selector/modal-ui':
     specifier: 8.9.5
     version: 8.9.5(near-api-js@2.1.4)
@@ -3610,6 +3613,16 @@ packages:
       query-string: 7.1.3
     dev: false
 
+  /@mintbase-js/wallet@0.5.0-beta.6:
+    resolution: {integrity: sha512-22MDqUDMZm3puGEI8dv927Wtc5olRgGb5E7h67b1a5+N2DTKcLPmoHhzj0TFT3BmI9snrhq4MdAEvS785cjq1Q==}
+    dependencies:
+      '@near-wallet-selector/core': 8.9.5(near-api-js@2.1.4)
+      bn.js: 5.2.1
+      near-api-js: 2.1.4
+    transitivePeerDependencies:
+      - encoding
+    dev: false
+
   /@mischnic/json-sourcemap@0.1.1:
     resolution: {integrity: sha512-iA7+tyVqfrATAIsIRWQG+a7ZLLD0VaOCKV2Wd/v4mqIU3J9c4jx9p7S0nw1XH3gJCKNBOOwACOPYYSUu9pgT+w==}
     engines: {node: '>=12.0.0'}
@@ -4041,6 +4054,17 @@ packages:
       '@meteorwallet/sdk': 1.0.9(near-api-js@2.1.4)
       '@near-wallet-selector/core': 8.9.5(near-api-js@2.1.4)
       near-api-js: 2.1.4
+    dev: false
+
+  /@near-wallet-selector/mintbase-wallet@8.9.5(near-api-js@2.1.4):
+    resolution: {integrity: sha512-COYFPUP39C5M4Slzq13nZ1RDrmeOJKGnUxcbpsIb5knEP2puIbqpvjfjUmiixKhH9L6hsKwroTyNqFZuiAnifA==}
+    peerDependencies:
+      near-api-js: ^1.0.0 || ^2.0.0
+    dependencies:
+      '@mintbase-js/wallet': 0.5.0-beta.6
+      near-api-js: 2.1.4
+    transitivePeerDependencies:
+      - encoding
     dev: false
 
   /@near-wallet-selector/modal-ui@8.9.5(near-api-js@2.1.4):
