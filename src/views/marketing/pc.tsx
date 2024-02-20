@@ -29,7 +29,6 @@ const questImgs = {
   twitter_like: '/images/marketing/like.svg',
 };
 
-// 老用户 全部模糊
 const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   console.log('from:', from, 'inviteCode:', inviteCode);
   const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard(platform);
@@ -165,7 +164,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
 
   async function fetchInviteCodes() {
-    //  获取邀请码
     const res = await get(`${QUEST_PATH}/api/invite/get-address-code/${address}`);
 
     if ((res.code as number) !== 0) return;
@@ -173,7 +171,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
 
   async function fetchTotalRewards() {
-    // 总积分
     const res = await get(`${QUEST_PATH}/api/activity/reward?category=${platform}`);
     if ((res.code as number) !== 0) return;
     setSpin1(false);
@@ -184,7 +181,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   async function checkQuest(id: number) {
     const res = await get(`${QUEST_PATH}/api/activity/check_quest?quest_id=${id}`);
-    console.log(11111, res);
 
     // if ((res.code as number) !== 0) return;
   }
@@ -204,7 +200,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   async function claimReward(id: number) {
     const res = await post(`${QUEST_PATH}/api/activity/claim`, { quest_id: id });
-    console.log(666, res);
 
     if ((res.code as number) !== 0) return false;
     return true;

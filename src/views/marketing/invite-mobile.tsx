@@ -239,8 +239,9 @@ const LandingMobile: FC<IProps> = ({ kolName, platform }) => {
 
         <Styles.Step>Step 3</Styles.Step>
         <Styles.Tips className={basicQuests[0]?.status !== 'completed' ? 'blur' : 'gradient'}>
-          Want more rewards? <br />
-          use computer to visit our website
+          Want additional PTS?
+          <br />
+          Head to our desktop site
           <Styles.CopyWrap
             onClick={() => {
               copy(`${prefix}`);

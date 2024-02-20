@@ -117,7 +117,6 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   async function claimReward(id: number) {
     const res = await post(`${QUEST_PATH}/api/activity/claim`, { quest_id: id });
-    console.log(666, res);
 
     if ((res.code as number) !== 0) return false;
     return true;
@@ -243,8 +242,9 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
 
         <Styles.Step>Step 3</Styles.Step>
         <Styles.Tips className={basicQuests[0]?.status !== 'completed' ? 'blur' : 'gradient'}>
-          Want more rewards? <br />
-          use computer to visit our website
+          Want additional PTS?
+          <br />
+          Head to our desktop site
           <Styles.CopyWrap
             onClick={() => {
               copy(`${prefix}`);
