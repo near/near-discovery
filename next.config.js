@@ -61,6 +61,11 @@ const nextConfig = {
         source: '/papers/nightshade',
         destination: '/files/nightshade.pdf',
         permanent: true,
+      },
+      {
+        source: '/horizon',
+        destination: '/founders',
+        permanent: true,
       }
     ];
   },
