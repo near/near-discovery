@@ -98,6 +98,7 @@ const QuestDetailView = () => {
             <ClaimedSuccessModal
               open={showSuccessModal}
               reward={info.quest.reward}
+              isBitGetUser={isBitGetUser}
               onClose={() => {
                 setShowSuccessModal(false);
               }}

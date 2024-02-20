@@ -111,7 +111,7 @@ const Actions = ({
       </StyledButton>
       {isBitGetUser && (
         <StyledAward>
-          💡 You will get an extra 10% - <span>20 PTS</span> as a Bitget user.
+          💡 You will get an extra 10% - <span>{rewards * 0.1} PTS</span> as a Bitget user.
         </StyledAward>
       )}
     </StyledContainer>

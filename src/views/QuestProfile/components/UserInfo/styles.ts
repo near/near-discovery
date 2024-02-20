@@ -72,7 +72,7 @@ export const StyledNameWrapper = styled.div`
 
 export const StyledName = styled.div`
   color: #fff;
-  text-align: center;
+  text-align: left;
   font-size: 32px;
   font-weight: 500;
   overflow: hidden;
