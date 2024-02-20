@@ -1,7 +1,6 @@
 function generateSiteMap() {
   //this fn serves to build a sitemap with the env specific hostname
-  return `
-    <?xml version="1.0" encoding="UTF-8"?>
+  return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
     xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
     xmlns:xhtml="http://www.w3.org/1999/xhtml"
