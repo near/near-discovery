@@ -56,6 +56,11 @@ const nextConfig = {
         source: '/da',
         destination: '/data-availability',
         permanent: true,
+      },
+      {
+        source: '/papers/nightshade',
+        destination: '/files/nightshade.pdf',
+        permanent: true,
       }
     ];
   },
