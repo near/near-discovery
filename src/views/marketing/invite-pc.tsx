@@ -42,7 +42,6 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
   const config = useAuthConfig();
 
-  // 老用户 全部模糊
   const [isBlur, setIsBlur] = useState(false);
 
   const [userStatus, setUserStatus] = useState<'uncheck' | 'new' | 'old'>('uncheck');
@@ -112,7 +111,6 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     setUserStatus(status);
   }
 
-  // header的activity: kol 参数加个name: kol的name  platform=kol
   async function checkAddressWithActive() {
     const res: any = await getWithoutActive(`${QUEST_PATH}/api/invite/check-address/${address}`, platform, {
       name: kolName,
@@ -180,7 +178,6 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
   }
 
   async function fetchInviteCodes() {
-    //  获取邀请码
     const res = await get(`${QUEST_PATH}/api/invite/get-address-code/${address}`);
 
     if ((res.code as number) !== 0) return;
@@ -188,7 +185,6 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
   }
 
   async function fetchTotalRewards() {
-    // 总积分
     const res = await get(`${QUEST_PATH}/api/activity/reward?category=${platform}`);
     if ((res.code as number) !== 0) return;
     setSpin1(false);
@@ -199,7 +195,6 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   async function checkQuest(id: number) {
     const res = await get(`${QUEST_PATH}/api/activity/check_quest?quest_id=${id}`);
-    console.log(11111, res);
 
     // if ((res.code as number) !== 0) return;
   }
@@ -221,7 +216,6 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   async function claimReward(id: number) {
     const res = await post(`${QUEST_PATH}/api/activity/claim`, { quest_id: id });
-    console.log(666, res);
 
     if ((res.code as number) !== 0) return false;
     return true;
@@ -252,7 +246,6 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     }
   };
 
-  // userStatus === 'new' 可以做任务 old|uncheck不可以
   useEffect(() => {
     fetchQuestList();
     if (userStatus === 'uncheck') return;
