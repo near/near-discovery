@@ -54,7 +54,7 @@ const Campaign = function ({ campaign, bp }: any) {
 
   return (
     <StyledCampaign onClick={handleClickCampaign}>
-      <StyledWrapper style={{ width: 320 }}>
+      <StyledWrapper style={{ flex: 1 }}>
         <StyledText $size="32px" $weight="700" $line="120%">
           {campaign.name}
         </StyledText>
@@ -105,7 +105,7 @@ const Campaign = function ({ campaign, bp }: any) {
         <StyledFlex
           $justify="flex-end"
           $gap="18px"
-          style={{ position: 'absolute', right: 0, bottom: 30, height: 50, zIndex: 10, paddingRight: 24 }}
+          style={{ position: 'absolute', right: 0, bottom: 28, height: 50, zIndex: 10, paddingRight: 24 }}
         >
           <StyledButton
             $width="36px"
