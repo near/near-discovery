@@ -21,7 +21,7 @@ const useAuth = () => {
   };
 
   const login = useCallback(
-    async (cb?: VoidFunction) => {
+    async (cb?: (unchecked?: boolean) => void) => {
       if (!wallet || !wallet.accounts[0].address) {
         setLogging(false);
         return;
@@ -40,7 +40,7 @@ const useAuth = () => {
           // }
           if (!checked) {
             deleteCookie('AUTHED_ACCOUNT');
-            router.replace('/invite-code');
+            router.pathname === '/invite-code' ? cb?.(true) : router.replace('/invite-code');
             return;
           }
           await getAccessToken(wallet.accounts[0].address);

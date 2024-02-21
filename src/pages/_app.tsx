@@ -69,8 +69,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       }
     } else {
       clearTimeout(loginTimer.current);
-      login(() => {
-        getInitialData();
+      login((unchecked?: boolean) => {
+        !unchecked && getInitialData();
         setUpdater(Date.now());
       });
     }
