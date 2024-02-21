@@ -79,8 +79,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const _accountInit = debounce(accountInit, 500);
 
   useEffect(() => {
-    // if (!router.pathname.match(activityReg) || router.pathname === '/invite-code') {
-    if (router.pathname === '/invite-code') {
+    if (!router.pathname.match(activityReg) || router.pathname === '/invite-code') {
       _accountInit();
     } else {
       getInitialData();
