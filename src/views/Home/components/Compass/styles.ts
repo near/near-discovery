@@ -52,27 +52,25 @@ export const StyledTitle = styled.div`
   text-transform: capitalize;
   padding: 58px 0px 12px;
 `;
-
-export const StyledCard = styled.div`
-  width: 100%;
-  height: 380px;
-  border-radius: 32px;
-  border: 1px solid #464b56;
-  background: #21232a;
-  padding: 28px;
-  box-sizing: border-box;
+export const StyledLoadingWrapper = styled.div`
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 30px;
+  height: 222px;
+`;
+export const StyledCard = styled.div`
+  position: relative;
+  
 `;
 
-export const StyledCardImg = styled.img`
-  width: 646px;
-  height: 323px;
-  flex-shrink: 0;
+export const StyledCardBackgroundImage = styled.img`
 `;
 
-export const StyledCardRight = styled.div``;
+export const StyledCardMainContent = styled.div`
+  position: absolute;
+  left: 706px;
+  top: 110px;
+`;
 
 export const StyledCardChains = styled.img`
   width: 276px;
@@ -87,7 +85,11 @@ export const StyledCardTitle = styled.div`
   font-weight: 700;
   line-height: normal;
   width: 508px;
-  margin-top: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const StyledCardDesc = styled.div`
@@ -98,9 +100,17 @@ export const StyledCardDesc = styled.div`
   font-weight: 400;
   line-height: 150%; /* 27px */
   width: 500px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const StyledCardButton = styled.div`
+  position: absolute;
+  left: 706px;
+  bottom: 29px;
   width: 213px;
   height: 50px;
   flex-shrink: 0;
@@ -117,7 +127,6 @@ export const StyledCardButton = styled.div`
   align-items: center;
   justify-content: center;
   gap: 9px;
-  margin-top: 33px;
   cursor: pointer;
   transition: 0.5s;
 
