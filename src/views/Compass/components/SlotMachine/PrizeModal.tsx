@@ -2,14 +2,14 @@ import styled from 'styled-components';
 
 import Modal from '../Modal'
 
-import lbImg from './img/lb.svg'
+import lbImg from './img/win-icon.svg'
 import smImg from './img/sm.svg'
 import ccmg from './img/cc.svg'
 
 const Iocn = styled.img`
     position: absolute;
-    top: -100px;
     left: 50%;
+    top: 10px;
     transform: translate(-50%);
     &.fail {
         top: 30px;
