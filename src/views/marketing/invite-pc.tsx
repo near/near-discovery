@@ -154,6 +154,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   async function fetchAccessToken() {
     await getAccessToken(address);
+    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }

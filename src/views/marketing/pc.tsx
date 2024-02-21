@@ -140,6 +140,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
+    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
