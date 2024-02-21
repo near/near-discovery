@@ -43,7 +43,7 @@ const Card = function ({ compass }: any) {
     }
   }
   return (
-    <StyledCard onClick={handleExplore}>
+    <StyledCard>
       <StyledCardBackgroundImage width={1244} height={380} src={compass.banner} alt={compass.name} />
       <StyledCardMainContent>
         <StyledCardTitle>{compass.name}</StyledCardTitle>
@@ -51,7 +51,7 @@ const Card = function ({ compass }: any) {
           {compass.description}
         </StyledCardDesc>
       </StyledCardMainContent>
-      <StyledCardButton data-bp="1001-003">
+      <StyledCardButton onClick={handleExplore} data-bp="1001-003">
         <div>Explore now</div>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
           <path
