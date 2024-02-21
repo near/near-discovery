@@ -44,7 +44,7 @@ const Card = function ({ compass }: any) {
   }
   return (
     <StyledCard onClick={handleExplore}>
-      <StyledCardBackgroundImage width={1244} height={380} src={compass.banner} />
+      <StyledCardBackgroundImage width={1244} height={380} src={compass.banner} alt={compass.name} />
       <StyledCardMainContent>
         <StyledCardTitle>{compass.name}</StyledCardTitle>
         <StyledCardDesc>
