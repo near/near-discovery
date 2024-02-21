@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 
+import { goHomeWithFresh } from '@/utils/activity-utils';
+
 import * as Styles from './styles';
 
 interface IProps {
@@ -57,7 +59,7 @@ const Modal: FC<IProps> = ({ open, type, onClose, reward }) => {
           You are not a new user and do not <br /> meet the conditions for participation
         </Styles.FailTxt>
 
-        <Styles.FailFoot onClick={goHome}>
+        <Styles.FailFoot onClick={goHomeWithFresh}>
           More activities are waiting for you… <br />
           Go to DapDap,
         </Styles.FailFoot>
