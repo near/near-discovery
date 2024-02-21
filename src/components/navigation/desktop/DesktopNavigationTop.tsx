@@ -1,14 +1,15 @@
 import Link from 'next/link';
-
 import { useState } from 'react';
 import styled from 'styled-components';
-import DropdownMenuPanel from '@/components/DropdownMenuPanel';
-import AccountItem from '@/components/AccountSider/components/AccountItem';
-import DropdownSearchResultPanel from '@/components/DropdownSearchResultPanel';
-import Chain from '@/components/AccountSider/components/Chain';
 
+import AccountItem from '@/components/AccountSider/components/AccountItem';
+import Chain from '@/components/AccountSider/components/Chain';
+import DropdownMenuPanel from '@/components/DropdownMenuPanel';
+import DropdownSearchResultPanel from '@/components/DropdownSearchResultPanel';
 import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
+import { activityReg } from '@/utils/activity-reg';
+import { goHomeWithFresh } from '@/utils/activity-utils';
 
 const LoginContainer = styled.div`
   width: auto;
@@ -43,6 +44,7 @@ const Container = styled.div`
 const LogoContainer = styled.div`
   width: auto;
   align-items: center;
+  cursor: pointer;
   img {
     height: 32px;
   }
@@ -151,14 +153,23 @@ export const DesktopNavigationTop = () => {
 
   const [showMenuContent, setShowMenuContent] = useState(false);
 
+  const isFromActivity = location.pathname.match(activityReg);
+
   return (
     <Container>
       <div className="container-nav">
-        <Link href="/">
-          <LogoContainer>
+        {isFromActivity ? (
+          <LogoContainer onClick={goHomeWithFresh}>
             <img src={logoUrl} alt="" />
           </LogoContainer>
-        </Link>
+        ) : (
+          <Link href="/">
+            <LogoContainer>
+              <img src={logoUrl} alt="" />
+            </LogoContainer>
+          </Link>
+        )}
+
         <MenuContainer>
           <Search>
             <InputWrapper>

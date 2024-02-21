@@ -80,7 +80,7 @@ const Actions = ({
           bp="1001511-001"
         />
       ))}
-      <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>
+      <StyledLabel style={{ marginTop: '30px' }}>Your process</StyledLabel>
       <StyledProcessBars>
         {actions.map((action: any, i: number) => (
           <ProcessBar size={4} value={i < completedCount ? 100 : 0} noBorder={true} key={action.id} />
@@ -111,7 +111,7 @@ const Actions = ({
       </StyledButton>
       {isBitGetUser && (
         <StyledAward>
-          💡 You will get an extra 10% - <span>{rewards * 0.1} PTS</span> as a Bitget user.
+          💡 You will get an extra 10% - <span>{Number(rewards * 0.1).toFixed(0)} PTS</span> as a Bitget user.
         </StyledAward>
       )}
     </StyledContainer>

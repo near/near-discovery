@@ -8,6 +8,7 @@ import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKe
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
 import { ellipsAccount } from '@/utils/account';
+import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
@@ -31,8 +32,6 @@ const questImgs = {
 const questImgs2 = ['/images/marketing/1.png', '/images/marketing/2.png', '/images/marketing/3.png'];
 
 const LandingPC: FC<IProps> = ({ kolName, platform }) => {
-  console.log('kolName:', kolName);
-
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
@@ -94,9 +93,9 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     wallet && (await disconnect(wallet));
     logout();
   };
-  const goHome = () => {
-    router.push('/');
-  };
+  // const goHome = () => {
+  //   router.push('/');
+  // };
 
   useEffect(() => {
     if (wallet) {
@@ -154,6 +153,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   async function fetchAccessToken() {
     await getAccessToken(address);
+    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
@@ -483,7 +483,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
         <Styles.FootTxt>Ready to Ignite the Spark?</Styles.FootTxt>
         <Styles.Star src="/images/marketing/star.png"></Styles.Star>
       </Styles.Foot>
-      <Styles.Link onClick={goHome}>For more quests and more rewards, visit DapDap</Styles.Link>
+      <Styles.Link onClick={goHomeWithFresh}>For more quests and more rewards, visit DapDap</Styles.Link>
       <ModalPC type={modalType} open={isShowModal} onClose={() => setIsShowModal(false)} reward={reward}></ModalPC>
     </Styles.Container>
   );
