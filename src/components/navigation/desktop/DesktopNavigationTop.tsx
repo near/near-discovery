@@ -154,6 +154,8 @@ export const DesktopNavigationTop = () => {
   const [showMenuContent, setShowMenuContent] = useState(false);
 
   const isFromActivity = location.pathname.match(activityReg);
+  console.log('from: ', location.pathname, isFromActivity);
+
   return (
     <Container>
       <div className="container-nav">
