@@ -79,7 +79,7 @@ const QuestDetailView = () => {
                 actions={info.actions}
                 endTime={info.quest.end_time}
                 startTime={info.quest.start_time}
-                rewards={info.quest.reward + (isBitGetUser ? info.quest.reward * 0.1 : 0)}
+                rewards={info.quest.reward}
                 completed={info.quest.action_completed}
                 id={id || ''}
                 userInfo={userInfo}

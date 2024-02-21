@@ -43,7 +43,7 @@ export default function ClaimedSuccessModal({
           <StyledIcon src="/images/success.gif" />
           <StyledTitle>Congrats!</StyledTitle>
           <StyledDesc>
-            <span>You’ve got {isBitGetUser ? reward * 1.1 : reward}</span> <StyledCoin $size={21} />
+            <span>You’ve got {isBitGetUser ? Number(reward * 1.1).toFixed(0) : reward}</span> <StyledCoin $size={21} />
             <span>PTS</span>
           </StyledDesc>
           <StyledMoreHints>Do more quests and get more rewards</StyledMoreHints>
