@@ -110,6 +110,14 @@ const SectionTitle = styled.p`
   border-bottom: 1px solid var(--sand6);
 `;
 
+const Icon = styled.i`
+  font-weight: 'bold';
+  font-size: 18px;
+  text-align: center;
+  color: #868682;
+  padding-right: 6px;
+`;
+
 export const AccordionMenu = (props: Props) => {
   const currentComponentSrc = useCurrentComponentStore((store) => store.src);
 
@@ -139,6 +147,7 @@ export const AccordionMenu = (props: Props) => {
                         key={link.title}
                         onClick={props.onCloseMenu}
                       >
+                        {link.icon && <Icon className={link.icon} />}
                         {link.title}
                       </Link>
                     ))}
