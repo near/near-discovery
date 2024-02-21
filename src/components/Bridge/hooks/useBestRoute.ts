@@ -71,17 +71,10 @@ export default function useBestRoute() {
         })
       }
 
-      // 判断是否需要使用Stargate
-      // 判断lifi中没有提供Stargate桥
-      // 判断Stargate配置中是否有这些链的配置
-      // 配置中必须有Stargate
-      // 两个链不能相同
-      // 两个token必须相同
-      // token必须配置poolId
       if (
         !hasStargate
       && _inputChain && _outputChain
-      && _inputChain.dex === 'Stargate' && _outputChain.dex === 'Stargate' 
+      && _inputChain.dex === 'Stargate' && _outputChain.dex === 'Stargate'
       && chain.chainId !== targetChain.chainId
       && inputToken.symbol === targetToken.symbol
       && (configTokens[inputToken.address] && configTokens[inputToken.address].poolId)
@@ -99,7 +92,7 @@ export default function useBestRoute() {
         } catch (e) {
           console.log(e)
         }
-      } 
+      }
 
       if (tradeList.length) {
         let fastestIndex = 0
@@ -123,7 +116,7 @@ export default function useBestRoute() {
         tradeList[bestReturnindex].tags.push('Best Return')
         tradeList[fastestIndex].tags.push('Fastest')
       }
-      
+
       setChecking(false)
       setTrades(tradeList)
     } catch (err) {
@@ -172,7 +165,6 @@ export default function useBestRoute() {
           onSuccess,
         })
       } else if (route?.dex === 'Stargate') {
-        // 判断native
         await stargateSwap({
           chain: chain,
           token: token,

@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+const api_url = process.env.NEXT_PUBLIC_API ? process.env.NEXT_PUBLIC_API : 'https://api.dapdap.net'
+
 const nextConfig = {
   compiler: { styledComponents: true },
   reactStrictMode: false,
@@ -48,7 +51,7 @@ const nextConfig = {
     },
     {
       source: '/dapdap/:path*',
-      destination: 'https://api.dapdap.net/:path*',
+      destination: api_url + '/:path*',
     },
     {
       source: '/wepiggy/arb/:path*',

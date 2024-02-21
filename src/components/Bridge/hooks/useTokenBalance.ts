@@ -12,15 +12,32 @@ export default function useTokenBalance({ tokensByChain }: { tokensByChain?: Tok
   const [balance, setBalance] = useState<string>('0');
   const { account } = useAccount();
 
-  const getBalance = function () {
+  const getBalance = async function () {
     setLoading(true);
+    setBalance('0');
     if (account && tokensByChain && tokensByChain.address) {
-      const lifiToken: LiFiToken = {
+      if (excludeChain(tokensByChain.chainId)) {
+        setLoading(false);
+        setBalance('0');
+        return;
+      }
+
+      const chainTokens = await getLifiTokens()
+      let address = tokensByChain.address ? tokensByChain.address : '';
+      if (tokensByChain.isNative) {
+        const tokens: Token[] = chainTokens[tokensByChain.chainId] || [];
+        const lifiTokens = tokens.filter((_token) => _token.symbol.toUpperCase() === tokensByChain.symbol.toUpperCase());
+        if (lifiTokens && lifiTokens.length) {
+          address = lifiTokens[0].address;
+        }
+      }
+
+      const lifiToken: LiFiToken =  {
         symbol: tokensByChain.symbol,
         decimals: tokensByChain.decimals,
         name: tokensByChain.name ? tokensByChain.name : '',
         priceUSD: '',
-        address: tokensByChain.address,
+        address,
         chainId: tokensByChain.chainId,
       };
 
@@ -83,7 +100,7 @@ export function useTokensBalance({ tokensByChain }: { tokensByChain?: Token[] })
           let address = item.address ? item.address : '';
           if (item.isNative) {
             const tokens: Token[] = chainTokens[item.chainId] || [];
-            const lifiTokens = tokens.filter((_token) => _token.symbol === item.symbol);
+            const lifiTokens = tokens.filter((_token) => _token.symbol.toUpperCase() === item.symbol.toUpperCase());
             if (lifiTokens && lifiTokens.length) {
               address = lifiTokens[0].address;
             }
@@ -104,8 +121,6 @@ export function useTokensBalance({ tokensByChain }: { tokensByChain?: Token[] })
             [chainId]: lifiTokens,
           })
           .then((res) => {
-            console.log('res: ', res);
-
             const vals: TokenAmount[] = res[chainId];
             const amountBigThan0 = vals.filter((token) => Number(token.amount) > 0);
             if (amountBigThan0 && amountBigThan0.length) {
