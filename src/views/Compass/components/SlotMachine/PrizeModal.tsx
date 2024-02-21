@@ -85,9 +85,9 @@ export default function PrizeModal({
 
         return <>
             <Iocn src={lbImg.src} />
-            <Title>Congrats!!!!</Title>
+            <Title>Congrats!</Title>
             <Content>You’ve got {prize} <CcImg src={ccmg.src}/> PTS</Content>
-            <Btn onClick={ onClose }>Get Prize</Btn>
+            <Btn onClick={ onClose }>Claim now</Btn>
         </>
     }} 
     />
