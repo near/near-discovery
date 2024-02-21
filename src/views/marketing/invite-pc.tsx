@@ -32,8 +32,6 @@ const questImgs = {
 const questImgs2 = ['/images/marketing/1.png', '/images/marketing/2.png', '/images/marketing/3.png'];
 
 const LandingPC: FC<IProps> = ({ kolName, platform }) => {
-  console.log('kolName:', kolName);
-
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();

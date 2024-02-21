@@ -21,7 +21,6 @@ interface IProps {
 }
 
 const LandingMobile: FC<IProps> = ({ kolName, platform }) => {
-  console.log('kolName:', kolName);
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
