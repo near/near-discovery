@@ -26,7 +26,7 @@ export const objectToQueryString = (obj: Record<string, any>): string => {
 
 const AUTH_TOKENS = 'AUTH_TOKENS';
 
-const BASE_URL = process.env.NEXT_PUBLIC_API ? process.env.NEXT_PUBLIC_API : 'https://api.dapdap.net';
+const BASE_URL = process.env.NEXT_PUBLIC_API || 'https://api.dapdap.net';
 
 const getUrl = (url: string) => {
   return url.startsWith('http') ? url : `${BASE_URL}${url}`;

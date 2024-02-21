@@ -7,6 +7,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKey } from '@/apis';
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
+import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
@@ -92,9 +93,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
     wallet && (await disconnect(wallet));
     logout();
   };
-  const goHome = () => {
-    router.push('/');
-  };
 
   useEffect(() => {
     if (wallet) {
@@ -140,6 +138,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
+    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
@@ -528,7 +527,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
         <Styles.FootTxt>Ready to Ignite the Spark?</Styles.FootTxt>
         <Styles.Star src="/images/marketing/star.png"></Styles.Star>
       </Styles.Foot>
-      <Styles.Link onClick={goHome}>For more quests and more rewards, visit DapDap</Styles.Link>
+      <Styles.Link onClick={goHomeWithFresh}>For more quests and more rewards, visit DapDap</Styles.Link>
       <ModalPC type={modalType} open={isShowModal} onClose={() => setIsShowModal(false)} reward={reward}></ModalPC>
     </Styles.Container>
   );

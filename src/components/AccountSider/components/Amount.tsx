@@ -48,7 +48,7 @@ const Amount = ({ mt }: { mt?: number }) => {
         }
       </StyledAmount>
       <StyledValue>
-        ${valueFormated(_balance, currentChain ? price[currentChain.nativeCurrency.symbol] : '')} USD
+        ${valueFormated(_balance, currentChain ? price[currentToken.symbol] : '')} USD
       </StyledValue>
     </StyledWrapper>
   );
