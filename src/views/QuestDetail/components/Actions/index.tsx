@@ -80,7 +80,7 @@ const Actions = ({
           bp="1001511-001"
         />
       ))}
-      <StyledLabel style={{ marginTop: '30px' }}>Your prccess</StyledLabel>
+      <StyledLabel style={{ marginTop: '30px' }}>Your process</StyledLabel>
       <StyledProcessBars>
         {actions.map((action: any, i: number) => (
           <ProcessBar size={4} value={i < completedCount ? 100 : 0} noBorder={true} key={action.id} />
