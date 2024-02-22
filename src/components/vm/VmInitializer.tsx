@@ -88,7 +88,6 @@ export default function VmInitializer() {
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-              walletUrl: 'https://fast-auth-signer-git-upgrade-impr-2ac97a-near-developer-console.vercel.app',
             }),
             setupKeypom({
               trialAccountSpecs: {
@@ -187,18 +186,6 @@ export default function VmInitializer() {
     walletModal?.show();
     return false;
   }, [saveCurrentUrl, walletModal]);
-
-  useEffect(() => {
-    window.addEventListener(
-      'message',
-      (e: MessageEvent<{ showWalletSelector: boolean }>) => {
-        if (e.data.showWalletSelector) {
-          requestSignInWithWallet();
-        }
-      },
-      false,
-    );
-  }, [requestSignInWithWallet]);
 
   const logOut = useCallback(async () => {
     if (!near) {
