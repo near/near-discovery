@@ -114,7 +114,7 @@ export const navigationCategories = [
           },
           {
             title: 'Founders',
-            url: '/horizon',
+            url: '/founders',
             icon: 'ph-lightbulb ph-bold',
           },
           {
