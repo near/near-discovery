@@ -21,3 +21,5 @@ export const styleZendesk = () => {
   zwIcon.style.paddingRight = '0';
   zwLabel.remove();
 };
+
+export const zendeskActivate = () => (typeof window !== 'undefined' ? window.zE?.activate() || null : null);

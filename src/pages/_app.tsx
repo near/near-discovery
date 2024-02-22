@@ -56,16 +56,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     // Displays the Zendesk widget only if user is signed in and on the home page
     if (!window.zE) return;
-    if (
-      (!signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) &&
-      !router.route.startsWith('/founders')
-    ) {
+    if (!signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
       window.zE('webWidget', 'hide');
       return;
     }
     localStorage.setItem('accountId', accountId);
     window.zE('webWidget', 'show');
-  }, [accountId, signedIn, componentSrc, router.route]);
+  }, [accountId, signedIn, componentSrc]);
 
   useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);

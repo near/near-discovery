@@ -3,6 +3,8 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
+import { zendeskActivate } from '@/utils/zendesk';
+
 const FoundersPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   return (
@@ -11,6 +13,9 @@ const FoundersPage: NextPageWithLayout = () => {
       meta={{
         title: 'NEAR | FounderHub',
         description: 'FounderHub is a one-stop shop for Founders building with the near ecosystem.',
+      }}
+      componentProps={{
+        zendeskActivate,
       }}
     />
   );
