@@ -146,12 +146,14 @@ const Icon = styled.i`
   font-weight: 'bold';
   font-size: 18px;
   color: #868682;
+  margin-top: -0.3em;
 `;
 
 const NavSection = styled.div`
   display: flex;
   flex-direction: row;
   gap: 3px;
+  align-items: center;
 `;
 
 export const MainNavigationMenu = () => {
@@ -175,7 +177,7 @@ export const MainNavigationMenu = () => {
 
                         {section.links.map((link) => (
                           <NavSection key={link.title}>
-                            {link.icon && <Icon className={link.icon} />}
+                            <Icon className={link.icon} />
                             <NavLink asChild>
                               <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
                                 {link.title}
