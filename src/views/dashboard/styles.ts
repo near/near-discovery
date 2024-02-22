@@ -45,12 +45,18 @@ type StyledButtonType = {
   $borderWidth?: string;
   $borderStyle?: string;
   $borderColor?: string;
+  $backgroundHover?: string;
+  $color?: string;
+  $colorHover?: string;
 };
 export const Button = styled.button.attrs<StyledButtonType>((props) => ({
   $fz: props.$fz || '16px',
   $fw: props.$fw || '600',
+  $color: props.$color || '',
   $width: props.$width || '100%',
   $height: props.$height || '50px',
+  $backgroundHover: props.$backgroundHover || 'none',
+  $colorHover: props.$colorHover || 'none',
   $background: props.$background || 'none',
   $borderRadius: props.$borderRadius || '10px',
   $borderWidth: props.$borderWidth || '1px',
@@ -61,8 +67,8 @@ export const Button = styled.button.attrs<StyledButtonType>((props) => ({
   align-items: center;
   justify-content: center;
   font-family: Gantari;
-  color: #ebf479;
   transition: all 0.2s ease-in;
+  color: ${(props) => props.$color};
   font-size: ${(props) => props.$fz};
   font-weight: ${(props) => props.$fw};
   width: ${(props) => props.$width};
@@ -78,7 +84,21 @@ export const Button = styled.button.attrs<StyledButtonType>((props) => ({
     opacity: 0.5;
   }
   &:hover {
-    background: #ebf479;
-    color: #000;
+    background: ${(props) => props.$backgroundHover};
+    color: ${(props) => props.$colorHover};
   }
+`;
+export const Foot = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 56px;
+`;
+export const Explore = styled.div`
+  text-align: center;
+  margin-top: 20px;
+  color: #979abe;
+  font-family: Montserrat;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: normal;
 `;
