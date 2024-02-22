@@ -68,6 +68,11 @@ export const navigationCategories = [
             url: 'https://github.com/near/NEPs',
             icon: 'ph-file-text ph-bold',
           },
+          {
+            title: 'Technical Papers',
+            url: '/papers',
+            icon: 'ph-file ph-bold',
+          },
         ],
       },
     ],
