@@ -61,6 +61,11 @@ const nextConfig = {
         source: '/papers/nightshade',
         destination: '/files/nightshade.pdf',
         permanent: true,
+      },
+      {
+        source: '/ethdenver',
+        destination: '/ethdenver2024',
+        permanent: true,
       }
     ];
   },
