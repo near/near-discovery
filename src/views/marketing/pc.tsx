@@ -69,6 +69,8 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   const [spin2, setSpin2] = useState([false, false, false, false]);
   const [spin3, setSpin3] = useState(false);
   const redirectUri = `${window.location.origin}${window.location.pathname}`;
+  console.log('redirectUri: ', redirectUri);
+
   const {
     loading: binding,
     type,
@@ -318,6 +320,8 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
     }
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
       const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${redirectUri}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
+      console.log('openSource path:', path, redirectUri);
+
       sessionStorage.setItem('_auth_type', 'twitter');
       window.open(path, '_blank');
       return;
