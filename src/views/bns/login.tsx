@@ -18,7 +18,7 @@ const LoginView = () => {
       <StyledImage>
         {/* <Image src={loginBg} style={{ width: 824, height: 636 }} alt='loginBg' /> */}
         <StyledLoginVideo width={824} height={636} autoPlay muted playsInline loop>
-          <source src="/videos/login_background.mp4" type="video/mp4" />
+          <source src="https://s3.amazonaws.com/dapdap.prod/images/login_background.mp4" type="video/mp4" />
           <track
             src="/path/to/captions.vtt"
             kind="subtitles"
