@@ -86,7 +86,7 @@ const Section = styled.div`
     display: block;
     font: var(--text-s);
     color: var(--sand12);
-    padding: 0.5rem 24px;
+    padding: 0.5rem 10px;
     margin: 0;
   }
 `;
@@ -113,9 +113,13 @@ const SectionTitle = styled.p`
 const Icon = styled.i`
   font-weight: 'bold';
   font-size: 18px;
-  text-align: center;
   color: #868682;
-  padding-right: 6px;
+  padding-left: 1rem;
+`;
+
+const NavSection = styled.div`
+  display: flex;
+  flex-direction: row;
 `;
 
 export const AccordionMenu = (props: Props) => {
@@ -141,15 +145,17 @@ export const AccordionMenu = (props: Props) => {
                     {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
                     {section.links.map((link) => (
-                      <Link
-                        href={link.url}
-                        target={link.url.indexOf('http') === 0 ? '_blank' : undefined}
-                        key={link.title}
-                        onClick={props.onCloseMenu}
-                      >
+                      <NavSection key={link.title}>
                         {link.icon && <Icon className={link.icon} />}
-                        {link.title}
-                      </Link>
+                        <Link
+                          href={link.url}
+                          target={link.url.indexOf('http') === 0 ? '_blank' : undefined}
+                          key={link.title}
+                          onClick={props.onCloseMenu}
+                        >
+                          {link.title}
+                        </Link>
+                      </NavSection>
                     ))}
                   </Section>
                 ))}
