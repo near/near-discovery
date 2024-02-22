@@ -37,6 +37,7 @@ type NetworkComponents = {
     termsPage: string;
     privacyPage: string;
     papersPage: string;
+    foundersPage: string;
   };
   relayerDemo: string;
   notificationButton: string;
@@ -102,6 +103,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         termsPage: `${testnetTLA}/widget/NearOrg.TermsPage`,
         privacyPage: `${testnetTLA}/widget/NearOrg.PrivacyPage`,
         papersPage: `${testnetTLA}/widget/NearOrg.PapersPage`,
+        foundersPage: `${testnetTLA}/widget/NearOrg.FoundersPage`,
       },
       relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
@@ -160,6 +162,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         termsPage: 'near/widget/NearOrg.TermsPage',
         privacyPage: 'near/widget/NearOrg.PrivacyPage',
         papersPage: 'near/widget/NearOrg.PapersPage',
+        foundersPage: 'near/widget/NearOrg.FoundersPage',
       },
       relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
       notificationButton: 'near/widget/NotificationButton',
