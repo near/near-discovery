@@ -3,7 +3,7 @@ name: Automatic Github Releases
 on: 
   push:
     branches:
-      - "master"
+      - "main"
 
 jobs:
   update_release_draft:
