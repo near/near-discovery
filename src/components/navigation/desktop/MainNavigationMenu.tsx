@@ -104,8 +104,8 @@ const Container = styled.div`
 `;
 
 const NavLink = styled(NavigationMenu.Link)`
-  display: flex;
   padding: 7px;
+  margin-right: 12px;
   font: var(--text-s);
   color: var(--sand12);
   transition: color 200ms;
@@ -129,7 +129,7 @@ const Section = styled.div`
 
 const CurrentComponentSection = styled.div`
   padding: 0 24px;
-  margin: 5px 0;
+  margin: 5px 0 5px 15px;
   border-left: 1px solid var(--sand4);
 `;
 
@@ -145,9 +145,13 @@ const SectionTitle = styled.p`
 const Icon = styled.i`
   font-weight: 'bold';
   font-size: 18px;
-  text-align: center;
   color: #868682;
-  padding-right: 6px;
+`;
+
+const NavSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 3px;
 `;
 
 export const MainNavigationMenu = () => {
@@ -170,12 +174,14 @@ export const MainNavigationMenu = () => {
                         {section.title && <SectionTitle>{section.title}</SectionTitle>}
 
                         {section.links.map((link) => (
-                          <NavLink key={link.title} asChild>
-                            <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
-                              {link.icon && <Icon className={link.icon} />}
-                              {link.title}
-                            </Link>
-                          </NavLink>
+                          <NavSection key={link.title}>
+                            {link.icon && <Icon className={link.icon} />}
+                            <NavLink asChild>
+                              <Link href={link.url} target={link.url.indexOf('http') === 0 ? '_blank' : undefined}>
+                                {link.title}
+                              </Link>
+                            </NavLink>
+                          </NavSection>
                         ))}
                       </Section>
                     ))}
