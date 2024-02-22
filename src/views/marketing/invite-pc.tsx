@@ -68,6 +68,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   const [kolAvatar, setKolAvatar] = useState('');
   const [kolAddr, setKolAddr] = useState('');
+  const redirectUri = `${window.location.origin}${window.location.pathname}`;
   const {
     loading: binding,
     type,
@@ -77,7 +78,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
       // onSuccess(1);
       setUpdater(Date.now());
     },
-    redirect_uri: `${window.location.origin}${window.location.pathname}`,
+    redirect_uri: redirectUri,
   });
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
@@ -335,14 +336,14 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
       sessionStorage.setItem('_clicked_twitter_' + action.id, '1');
     }
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
-      const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
+      const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${redirectUri}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
       sessionStorage.setItem('_auth_type', 'twitter');
       window.open(path, '_blank');
       return;
     }
 
     if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
-      const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
+      const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${redirectUri}&scope=identify`;
       sessionStorage.setItem('_auth_type', 'discord');
       window.open(path, '_blank');
       return;
