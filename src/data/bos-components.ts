@@ -2,6 +2,7 @@ import type { NetworkId } from '@/utils/types';
 
 type NetworkComponents = {
   applicationsPage: string;
+  blog: string;
   bosDirectory: string;
   componentSummary: string;
   componentsPage: string;
@@ -36,6 +37,8 @@ type NetworkComponents = {
     dataAvailabilityPage: string;
     termsPage: string;
     privacyPage: string;
+    papersPage: string;
+    foundersPage: string;
   };
   relayerDemo: string;
   notificationButton: string;
@@ -66,6 +69,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
   return {
     testnet: {
       applicationsPage: `${testnetTLA}/widget/AppLibrary.IndexPage`,
+      blog: `${testnetTLA}/widget/Blog/Feed`,
       bosDirectory: 'one.testnet/widget/BOSDirectory',
       componentSummary: `${testnetTLA}/widget/ComponentSummary`,
       componentsPage: `${testnetTLA}/widget/ComponentsPage`,
@@ -100,6 +104,8 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         dataAvailabilityPage: `${testnetTLA}/widget/NearOrg.DataAvailabilityPage`,
         termsPage: `${testnetTLA}/widget/NearOrg.TermsPage`,
         privacyPage: `${testnetTLA}/widget/NearOrg.PrivacyPage`,
+        papersPage: `${testnetTLA}/widget/NearOrg.PapersPage`,
+        foundersPage: `${testnetTLA}/widget/NearOrg.FoundersPage`,
       },
       relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
@@ -123,6 +129,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
 
     mainnet: {
       applicationsPage: 'nearcatalog.near/widget/Index',
+      blog: 'near/widget/Blog.Feed',
       bosDirectory: 'onboarder.near/widget/BOSDirectory',
       componentSummary: 'near/widget/ComponentSummary',
       componentsPage: 'near/widget/ComponentsPage',
@@ -157,6 +164,8 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         dataAvailabilityPage: 'near/widget/NearOrg.DataAvailabilityPage',
         termsPage: 'near/widget/NearOrg.TermsPage',
         privacyPage: 'near/widget/NearOrg.PrivacyPage',
+        papersPage: 'near/widget/NearOrg.PapersPage',
+        foundersPage: 'near/widget/NearOrg.FoundersPage',
       },
       relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
       notificationButton: 'near/widget/NotificationButton',
