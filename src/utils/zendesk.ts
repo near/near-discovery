@@ -22,4 +22,5 @@ export const styleZendesk = () => {
   zwLabel.remove();
 };
 
-export const zendeskActivate = () => (typeof window !== 'undefined' ? window.zE?.activate() || null : null);
+export const zendeskActivate = () =>
+  typeof window !== 'undefined' ? (window.zE as { activate?: () => void })?.activate?.() || null : null;
