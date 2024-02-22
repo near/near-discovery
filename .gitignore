@@ -52,7 +52,3 @@ next-env.d.ts
 
 # Sentry Auth Token
 .sentryclirc
-
-# Jetbrains IDE generated
-/.idea/
-
