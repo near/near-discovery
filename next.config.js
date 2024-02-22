@@ -64,7 +64,12 @@ const nextConfig = {
       },
       {
         source: '/ethdenver',
-        destination: '/ethdenver2024',
+        destination: 'https://pages.near.org/ethdenver2024',
+        permanent: true,
+      },
+      {
+        source: '/horizon',
+        destination: '/founders',
         permanent: true,
       }
     ];
