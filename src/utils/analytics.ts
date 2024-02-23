@@ -12,6 +12,7 @@ let userAgentDetail = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
 let pendingEvents: any = [];
+let cookieOptOut = false;
 
 declare global {
   interface Window {
@@ -57,6 +58,11 @@ function getUserAgent() {
   return userAgentDetail;
 }
 
+export function optOut() {
+  localStorage.setItem('only_required_cookies_accepted', new Date().toUTCString());
+  cookieOptOut = true;
+}
+
 export async function init() {
   getUserAgent();
 
@@ -97,6 +103,7 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
+  if (cookieOptOut) return;
   if (!rudderAnalytics) {
     pendingEvents.push(() => {
       recordPageView(pageName);
@@ -129,6 +136,7 @@ export const recordMouseEnter = (e: UIEvent) => record('mouseover', e);
 export const recordTouchStart = (e: UIEvent | PointerEvent) => record('touchstart', e);
 
 export function recordWalletConnect(accountId: string) {
+  if (cookieOptOut) return;
   if (!localStorage.getItem('hashId')) {
     setAccountIdHash(accountId);
     recordEvent('wallet-connected');
@@ -136,7 +144,7 @@ export function recordWalletConnect(accountId: string) {
 }
 
 export function reset() {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     recordEvent('wallet-logout');
     localStorage.removeItem('hashId');
@@ -149,7 +157,7 @@ export function reset() {
 }
 
 export function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     rudderAnalytics.track(eventLabel, {
       ...properties,
@@ -167,7 +175,7 @@ export function recordHandledError(props: Record<string, string>) {
 }
 
 export function recordEvent(eventLabel: string) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     rudderAnalytics.track(eventLabel, {
       hashId: localStorage.getItem('hashId'),
