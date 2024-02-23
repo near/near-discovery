@@ -1,6 +1,6 @@
 import { useConnectWallet } from '@web3-onboard/react';
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns';
+import { differenceInDays, format } from 'date-fns';
 import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import { memo, useCallback, useEffect, useMemo, useState } from 'react';
@@ -171,9 +171,14 @@ const Dashboard: FC<IProps> = ({}) => {
 
     const { last24_transactions, last24_users, total_dapps_7day, total_online_dapps, total_transactions, total_users } =
       summary;
+
     const temp = [...summaryData];
-    // TODO calc Days since Launch
-    temp[0].count = 0;
+
+    const startDate = new Date('2024-02-17');
+    const endDate = new Date();
+    const daysBetween = differenceInDays(endDate, startDate);
+
+    temp[0].count = daysBetween;
     temp[1].count = total_users;
     temp[1].increase = last24_users;
     temp[2].count = total_transactions;
