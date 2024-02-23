@@ -168,11 +168,24 @@ export const SummaryItem = styled.div`
   border-radius: 20px;
   background: rgba(33, 35, 42, 0.9);
   backdrop-filter: blur(10px);
+  overflow: hidden;
 `;
 export const SummaryHead = styled.div`
   display: flex;
   justify-content: space-between;
   height: 60px;
+`;
+
+export const SummaryBg = styled.div`
+  position: absolute;
+  left: 140px;
+  top: 58px;
+  width: 100%;
+  height: 100%;
+  background-image: url(/images/onboarding/card_bg.png);
+  background-repeat: no-repeat;
+  z-index: 1;
+  opacity: 0.1;
 `;
 export const SummaryLeft = styled.div`
   flex-grow: 1;
@@ -248,6 +261,7 @@ export const DappsRight = styled.div`
 `;
 
 export const TradingBox = styled.div`
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -255,6 +269,15 @@ export const TradingBox = styled.div`
   gap: 20px;
   border-radius: 20px;
   background: rgba(33, 35, 42, 0.9);
+  overflow: hidden;
+  .trading-bg {
+    display: none;
+  }
+  &:hover {
+    .trading-bg {
+      display: block;
+    }
+  }
 `;
 export const TradingType = styled.div`
   display: flex;
@@ -269,12 +292,18 @@ export const TradingType = styled.div`
 export const TradingIcon = styled.img`
   width: 17px;
 `;
+
 export const TradingValue = styled.div`
   color: #fff;
   font-size: 26px;
   font-style: normal;
   font-weight: 700;
-  line-height: 120%; /* 31.2px */
+`;
+
+export const TradingBg = styled.img`
+  height: 210px;
+  position: absolute;
+  margin-top: 10px;
 `;
 export const QuestWrap = styled.div`
   height: 608px;

@@ -246,6 +246,7 @@ const Dashboard: FC<IProps> = ({}) => {
       <Styles.Summary>
         {summaryData.map((item) => (
           <Styles.SummaryItem key={item.type}>
+            <Styles.SummaryBg></Styles.SummaryBg>
             <Styles.SummaryHead>
               <Styles.SummaryLeft>
                 <Styles.SummaryTitle>{item.title}</Styles.SummaryTitle>
@@ -300,6 +301,7 @@ const Dashboard: FC<IProps> = ({}) => {
         <Styles.DappsRight>
           {tradingData.map((item: any) => (
             <Styles.TradingBox key={item.id}>
+              <Styles.TradingBg className="trading-bg" src="/images/dashboard/bg-yellow.png"></Styles.TradingBg>
               <Styles.TradingType>
                 <Styles.TradingIcon src={item.icon} />
                 {item.action_type}
