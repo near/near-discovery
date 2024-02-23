@@ -1,13 +1,12 @@
 import type { FC } from 'react';
+import { Cell, Pie, PieChart, Sector } from 'recharts';
 import {
   Area,
   AreaChart,
   Bar,
   BarChart,
   CartesianGrid,
-  ComposedChart,
   Legend,
-  Line,
   Rectangle,
   ResponsiveContainer,
   Tooltip,
@@ -18,48 +17,46 @@ import {
 import * as Styles from './styles';
 
 interface IProps {
-  data?: { name: string; [propName: string]: any }[];
+  data: { name: string; [propName: string]: any }[];
 }
 
 const App: FC<IProps> = ({ data }) => {
   return (
-    <ComposedChart
-      layout="vertical"
-      width={550}
-      height={330}
+    <BarChart
+      width={1244}
+      height={320}
       data={data}
-      barGap={20}
-      barSize={4}
+      barGap={6}
+      barSize={24}
       margin={{
-        top: 0,
-        right: 0,
-        left: 10,
-        bottom: 30,
+        // top: 20,
+        right: 30,
+        left: 0,
+        bottom: 0,
       }}
     >
       {/* <CartesianGrid strokeDasharray="3 3" /> */}
-      <XAxis type="number" />
-      <YAxis
-        dataKey="name"
-        // type="number"
-        type="category"
-        // scale="linear"
-      />
+      <XAxis dataKey="name" />
+      <YAxis />
 
       {/* <Legend /> */}
-      <Bar
-        dataKey="total_trading_value"
-        fill="#555D77"
+      {/* <Bar
+        dataKey="total_users"
+        // fill="rgba(85, 93, 119, 0.6)"
         activeBar={
           <Rectangle
-            fill="#EBF479"
+            fill="rgba(85, 93, 119, 1)"
             // stroke="blue"
           />
         }
       />
+      <Bar
+        dataKey="total_trading_value"
+        // fill="rgba(235, 244, 121, 0.6)"
+        activeBar={<Rectangle fill="gold" stroke="purple" />}
+      /> */}
 
       <Tooltip
-        // trigger="click"
         wrapperStyle={{
           width: 240,
           height: 125,
@@ -87,7 +84,13 @@ const App: FC<IProps> = ({ data }) => {
           color: 'white',
         }}
       />
-    </ComposedChart>
+      <Bar dataKey="total_users" fill="rgba(85, 93, 119, 0.6)" activeBar={<Rectangle fill="rgba(85, 93, 119, 1)" />} />
+      <Bar
+        dataKey="total_trading_value"
+        fill="rgba(235, 244, 121, 0.6)"
+        activeBar={<Rectangle fill="rgba(235, 244, 121, 1)" />}
+      />
+    </BarChart>
   );
 };
 export default App;

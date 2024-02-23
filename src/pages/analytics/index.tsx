@@ -1,10 +1,10 @@
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import Dashboard from '@/views/dashboard';
+import Analytics from '@/views/analytics';
 
-const DashboardPage: NextPageWithLayout = () => {
-  return <Dashboard />;
+const Page: NextPageWithLayout = () => {
+  return <Analytics />;
 };
-DashboardPage.getLayout = useDefaultLayout;
+Page.getLayout = useDefaultLayout;
 
-export default DashboardPage;
+export default Page;

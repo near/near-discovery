@@ -1,6 +1,10 @@
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
+export const ContainerBg = styled.div`
+  background-image: url(/images/dashboard/bg-blue.png);
+  background-repeat: no-repeat;
+`;
 export const Container = styled.div`
   padding-top: 85px;
   width: 1244px;
@@ -133,6 +137,14 @@ export const Intro = styled.div`
 export const UsersTotalTitle = styled.div`
   height: 70px;
   padding: 22px 0 0 22px;
+  margin-bottom: 20px;
+`;
+export const DappTitle = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  padding: 22px 22px 0 22px;
   margin-bottom: 20px;
 `;
 export const UsersArea = styled.div`

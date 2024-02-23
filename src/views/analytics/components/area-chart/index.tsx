@@ -24,7 +24,7 @@ const App: FC<IProps> = ({ data }) => {
       data={data}
       margin={{
         top: 20,
-        right: 20,
+        right: 40,
         left: 0,
         bottom: 0,
       }}
