@@ -59,7 +59,6 @@ function getUserAgent() {
 }
 
 export function optOut() {
-  localStorage.setItem('only_required_cookies_accepted', new Date().toUTCString());
   cookieOptOut = true;
 }
 

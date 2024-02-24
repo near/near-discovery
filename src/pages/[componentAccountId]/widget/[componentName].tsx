@@ -8,6 +8,7 @@ import { MetaTags } from '@/components/MetaTags';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { privacyDomainName, termsDomainName } from '@/utils/config';
@@ -106,6 +107,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const components = useBosComponents();
+  const cookieData = useCookiePreferences();
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -137,6 +139,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
                 privacyDomainName,
               }}
             />
+            <VmComponent src={components.nearOrg.cookiePrompt} props={{ cookiesAcknowleged: cookieData }} />
           </div>
         </div>
       </div>
