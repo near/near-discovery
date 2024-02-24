@@ -3,13 +3,14 @@ import { manta } from '@/config/tokens/manta';
 const basic = {
   name: 'ApertureSwap',
   logo: '/images/apps/aperture.png',
-  amountOutFn: 'bluebiu.near/widget/PolygonZkevm.Swap.QuickSwapAmountOut',
+  amountOutFn: 'bluebiu.near/widget/Swap.Data.ApertureSwapAmountOut',
 };
 
 const networks = {
   169: {
     routerAddress: '0x3488d5A2D0281f546e43435715C436b46Ec1C678',
     quoterAddress: '0x1e139877CbB99f1fa94BB8763aFc6161cC1dc303',
+    fees: [100, 500, 3000, 10000],
     defaultCurrencies: {
       input: manta['weth'],
       output: manta['usdc'],

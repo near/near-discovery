@@ -38,7 +38,8 @@ const networks = {
   169: {
     routerAddress: '0xfdE3eaC61C5Ad5Ed617eB1451cc7C3a0AC197564',
     quoterAddress: '0x3005827fB92A0cb7D0f65738D6D645d98A4Ad96b',
-    amountOutFn: 'bluebiu.near/widget/PolygonZkevm.Swap.QuickSwapAmountOut',
+    amountOutFn: 'bluebiu.near/widget/Mantle.Swap.AgniFinanceAmountOut',
+    fees: [100, 500, 3000, 10000],
     defaultCurrencies: {
       input: manta['weth'],
       output: manta['usdc'],
