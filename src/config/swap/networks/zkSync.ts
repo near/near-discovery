@@ -29,7 +29,7 @@ export default {
       ...veSyncBasic,
       ...veSyncNetworks[CHAIN_ID],
     },
-    Syncswap: {
+    SyncSwap: {
       ...syncSwapBasic,
       ...syncSwapNetworks[CHAIN_ID],
     },

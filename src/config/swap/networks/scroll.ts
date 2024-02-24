@@ -37,7 +37,7 @@ export default {
       ...ambientBasic,
       ...ambientNetworks[CHAIN_ID],
     },
-    Syncswap: {
+    SyncSwap: {
       ...SyncSwapBasic,
       ...SyncSwapNetworks[CHAIN_ID],
     },
