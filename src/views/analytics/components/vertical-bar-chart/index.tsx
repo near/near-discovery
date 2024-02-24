@@ -21,7 +21,19 @@ interface IProps {
   data?: { name: string; [propName: string]: any }[];
 }
 
+const CategoryTick = (props: any) => {
+  //TODO
+  console.log('props: ', props);
+  return (
+    <foreignObject x={props.x - 30} y={props.y - 15} width={30} height={30}>
+      <i style={{ color: 'white' }}>logo</i>
+    </foreignObject>
+  );
+};
+
 const App: FC<IProps> = ({ data }) => {
+  console.log('data: ', data);
+
   return (
     <ComposedChart
       layout="vertical"
@@ -39,12 +51,7 @@ const App: FC<IProps> = ({ data }) => {
     >
       {/* <CartesianGrid strokeDasharray="3 3" /> */}
       <XAxis type="number" />
-      <YAxis
-        dataKey="name"
-        // type="number"
-        type="category"
-        // scale="linear"
-      />
+      <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={<CategoryTick />} />
 
       {/* <Legend /> */}
       <Bar
