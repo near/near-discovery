@@ -120,7 +120,8 @@ export default function VmInitializer() {
 
             return <Link {...cleanProps} />;
           },
-          AnalyticsOptedOut: () => {
+          AnalyticsCookieConsent: ({ all, onlyRequired }: { all: boolean; onlyRequired: boolean }) => {
+            localStorage.setItem('cookiesAcknowledged', all ? 'all' : ' only_required');
             optOut();
             return <></>;
           },
