@@ -15,6 +15,7 @@ type NetworkComponents = {
   };
   image: string;
   nearOrg: {
+    cookiePrompt: string;
     cookiePolicy: string;
     ecosystemPage: string;
     ecosystemCommunityPage: string;
@@ -82,6 +83,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       },
       image: 'eugenethedream/widget/Image',
       nearOrg: {
+        cookiePrompt: `${testnetTLA}/widget/NearOrg.CookiePrompt`,
         cookiePolicy: `${testnetTLA}/widget/NearOrg.CookiePolicy`,
         ecosystemPage: `${testnetTLA}/widget/NearOrg.EcosystemPage`,
         ecosystemCommunityPage: `${testnetTLA}/widget/NearOrg.Ecosystem.CommunityPage`,
@@ -142,6 +144,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       },
       image: 'mob.near/widget/Image',
       nearOrg: {
+        cookiePrompt: 'near/widget/NearOrg.CookiePrompt',
         cookiePolicy: 'near/widget/NearOrg.CookiePolicy',
         ecosystemPage: 'near/widget/NearOrg.EcosystemPage',
         ecosystemCommunityPage: 'near/widget/NearOrg.Ecosystem.CommunityPage',
