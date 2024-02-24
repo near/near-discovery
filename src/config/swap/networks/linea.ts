@@ -27,7 +27,7 @@ export default {
       ...IziSwapBasic,
       ...IziSwapNetworks[CHAIN_ID],
     },
-    Syncswap: {
+    SyncSwap: {
       ...SyncSwapBasic,
       ...SyncSwapNetworks[CHAIN_ID],
       oneExecutionDisabled: true,
