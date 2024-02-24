@@ -7,8 +7,8 @@ export default function useClickTracking() {
   const { run: handleReport } = useDebounceFn(
     (code: string) => {
       const account = getCookie('LOGIN_ACCOUNT');
-      if (!account || !code) return;
-      report({ address: account, code });
+      if (!code) return;
+      report({ address: account || '', code });
     },
     {
       wait: 500,
