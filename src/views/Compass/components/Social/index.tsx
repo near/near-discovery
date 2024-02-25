@@ -75,6 +75,6 @@ export default function SocialIndex({
                 })
             }
         </ShareWapper>
-        <Step count={3} step={3} />
+        {/* <Step count={3} step={3} /> */}
     </Content>
 }

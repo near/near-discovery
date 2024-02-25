@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import Modal from '../Modal'
 
-import lbImg from './img/win-icon.svg'
+import lbImg from './img/Congrates.gif'
 import smImg from './img/sm.svg'
 import ccmg from './img/cc.svg'
 
@@ -11,8 +11,12 @@ const Iocn = styled.img`
     left: 50%;
     top: 10px;
     transform: translate(-50%);
+    width: 100px;
+    height: 100px;
     &.fail {
         top: 30px;
+        width: 80px;
+        height: 80px;
     }
 `
 

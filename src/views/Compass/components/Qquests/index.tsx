@@ -8,6 +8,7 @@ import titleNameImg from '../../img/getPins.svg'
 const Content = styled.div`
     width: var(--main-width);
     margin: 100px auto 0;
+    position: relative;
 `
 
 const SlideWapper = styled.div`
@@ -58,6 +59,6 @@ export default function Qquests({ list = [], getQuestGroupList, getSumaryDetail 
                 })
             }
         </SlideWapper>
-        <Step count={3} step={1} />
+        {/* <Step count={3} step={1} /> */}
     </Content>
 }

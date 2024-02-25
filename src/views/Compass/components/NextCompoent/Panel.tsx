@@ -72,8 +72,8 @@ export default function Panel() {
         <IconBox src={LineImg.src} />
         <DescBox>
             <TopIcon src={g2Img.src} />
-            <DescTitle>Linea Compass</DescTitle>
-            <DescFull>Effortlessly sift through a curated selection of dApps and identify your favourites.</DescFull>
+            <DescTitle>Beyond Linea</DescTitle>
+            <DescFull>Venture into Linea's Expansive DeFi Ecosystem.</DescFull>
             <ComingSoon>Coming soon...</ComingSoon>
         </DescBox>
         <CompassIcon src={compassImg.src} />

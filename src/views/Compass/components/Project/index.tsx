@@ -43,6 +43,6 @@ export default function Index({ list, currentChainIndex, getQuestGroupList, getS
                 })
             }
         </ProjectLine>
-        <Step count={3} step={2} />
+        {/* <Step count={3} step={2} /> */}
     </Content>
 }
