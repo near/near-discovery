@@ -73,7 +73,7 @@ export default function Panel() {
         <DescBox>
             <TopIcon src={g2Img.src} />
             <DescTitle>Beyond Linea</DescTitle>
-            <DescFull>Venture into Linea's Expansive DeFi Ecosystem.</DescFull>
+            <DescFull>{"Venture into Linea's Expansive DeFi Ecosystem."}</DescFull>
             <ComingSoon>Coming soon...</ComingSoon>
         </DescBox>
         <CompassIcon src={compassImg.src} />
