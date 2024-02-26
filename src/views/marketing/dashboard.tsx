@@ -128,10 +128,12 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   }, [account, fresh]);
 
   function calcListStyle(step: number) {
+    // console.log('isCompleted:', isCompleted, step);
+
     if (step === 1) {
       return '';
     } else {
-      return (isCompleted as any)[step] ? '' : 'blur';
+      return (isCompleted as any)[step - 1] ? '' : 'blur';
     }
   }
 
@@ -190,8 +192,8 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
         <Styles.Info>Upon reaching goals, unlock bonus points as a reward!</Styles.Info>
 
         {quests.map((item, index) => (
-          <Styles.RewardList key={item.step} className={calcListStyle(item.step)}>
-            <Styles.RewardQuest>
+          <Styles.RewardList key={item.step}>
+            <Styles.RewardQuest className={calcListStyle(item.step)}>
               <Styles.Head>
                 <Styles.HeadLeft>
                   Stage <Styles.StepNum>{item.step}</Styles.StepNum> reward
