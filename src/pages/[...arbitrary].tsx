@@ -3,7 +3,6 @@
 const extendableRoutes: Record<string, string> = {
   about: 'https://pages.near.org/about',
   blog: 'https://pages.near.org/blog',
-  papers: 'https://pages.near.org/papers',
 };
 
 // routes which are extendable but may have some paths
@@ -41,7 +40,6 @@ const finiteRoutes: Record<string, string> = {
   sailgpsf: 'https://pages.near.org/sailgpsf',
   sf: 'https://pages.near.org/sf',
   spill: 'https://pages.near.org/spill',
-  stakewars: 'https://pages.near.org/stakewars',
   'use-cases': 'https://pages.near.org/use-cases',
   'v3-developers': 'https://pages.near.org/v3-developers',
   'v3-use': 'https://pages.near.org/v3-use',
@@ -53,7 +51,10 @@ import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'ne
 
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useCookiePreferences } from '@/hooks/useCookiePreferences';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import type { NextPageWithLayout } from '@/utils/types';
+import { VmComponent } from '@/components/vm/VmComponent';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
@@ -107,8 +108,14 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 
 const IframePage: NextPageWithLayout = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   useClearCurrentComponent();
-
-  return <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />;
+  const cookieData = useCookiePreferences();
+  const components = useBosComponents();
+  return (
+    <>
+      <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />
+      <VmComponent src={components.nearOrg.cookiePrompt} props={{ cookiesAcknowleged: cookieData }} />
+    </>
+  );
 };
 
 IframePage.getLayout = useDefaultLayout;

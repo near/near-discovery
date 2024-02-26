@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  poweredByHeader: false,
   compiler: { styledComponents: true },
   reactStrictMode: true,
   redirects: async () => {
@@ -8,6 +9,12 @@ const nextConfig = {
         source: '/stackoverflow',
         destination:
           '/near/widget/NearOrg.HomePage?utm_source=stack&utm_medium=podcast&utm_campaign=stackoverflow_evergreen_bos_awareness',
+        permanent: false,
+      },
+      {
+        source: '/stakewars',
+        destination:
+          'https://github.com/near/stakewars-iv',
         permanent: false,
       },
       {
@@ -47,20 +54,56 @@ const nextConfig = {
       },
       {
         source: '/da',
-        destination: 'https://near.org/blog/near-foundation-launches-near-da-to-offer-secure-cost-effective-data-availability-for-eth-rollups-and-ethereum-developers',
+        destination: '/data-availability',
         permanent: true,
       },
+      {
+        source: '/papers/nightshade',
+        destination: '/files/nightshade.pdf',
+        permanent: true,
+      },
+      {
+        source: '/ethdenver',
+        destination: 'https://pages.near.org/ethdenver2024',
+        permanent: true,
+      },
+      {
+        source: '/horizon',
+        destination: '/founders',
+        permanent: true,
+      }
     ];
   },
   rewrites: async () => [
     {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
-    },
+    }
   ],
+  headers: async () => [
+    {
+        source: '/:path*',
+        headers: [{
+          key: 'Referrer-Policy',
+          value: 'strict-origin-when-cross-origin'
+        }]
+      }
+  ]
 };
 
-module.exports = nextConfig;
+const withPWA = require('next-pwa')({
+  dest: 'public',
+  sw: 'next-pwa-sw.js',
+  scope: '/',
+  importScripts: ['/pwa.js'],
+  cacheStartUrl: false,
+  cacheOnFrontEndNav: true,
+  skipWaiting: false
+})
+const { loadEnvConfig } = require('@next/env');
+loadEnvConfig(".")
+if(!process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT)
+  module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below
 

@@ -13,6 +13,7 @@ import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
+import { recordHandledError } from '@/utils/analytics';
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);
@@ -76,8 +77,7 @@ const SignUpPage: NextPageWithLayout = () => {
       if (data?.result?.code_hash) {
         return setIsAccountAvailable(false);
       }
-    } catch (error) {
-      console.log(error);
+    } catch (error: any) {
       setIsAccountAvailable(false);
     }
   }, []);

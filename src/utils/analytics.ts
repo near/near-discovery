@@ -8,9 +8,11 @@ import { networkId } from './config';
 
 let rudderAnalytics: Analytics | null = null;
 let anonymousUserId = '';
+let userAgentDetail = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
 let pendingEvents: any = [];
+let cookieOptOut = false;
 
 declare global {
   interface Window {
@@ -45,7 +47,24 @@ function getAnonymousId() {
   return anonymousUserId;
 }
 
+function getUserAgent() {
+  if (!userAgentDetail) {
+    const nav: ExperimentalNaviagtor = navigator;
+    nav.userAgentData &&
+      nav.userAgentData.getHighEntropyValues(['platformVersion', 'model']).then((ua: any) => {
+        userAgentDetail = ua;
+      });
+  }
+  return userAgentDetail;
+}
+
+export function optOut() {
+  cookieOptOut = true;
+}
+
 export async function init() {
+  getUserAgent();
+
   if (window?.rudderAnalytics) return;
 
   getAnonymousId();
@@ -83,6 +102,7 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
+  if (cookieOptOut) return;
   if (!rudderAnalytics) {
     pendingEvents.push(() => {
       recordPageView(pageName);
@@ -93,6 +113,7 @@ export function recordPageView(pageName: string) {
     rudderAnalytics.page('category', pageName, {
       hashId: localStorage.getItem('hashId'),
       url: filterURL(window.location.href),
+      userAgentDetail,
       ref: filterURL(document.referrer),
     });
   } catch (e) {
@@ -114,6 +135,7 @@ export const recordMouseEnter = (e: UIEvent) => record('mouseover', e);
 export const recordTouchStart = (e: UIEvent | PointerEvent) => record('touchstart', e);
 
 export function recordWalletConnect(accountId: string) {
+  if (cookieOptOut) return;
   if (!localStorage.getItem('hashId')) {
     setAccountIdHash(accountId);
     recordEvent('wallet-connected');
@@ -121,7 +143,7 @@ export function recordWalletConnect(accountId: string) {
 }
 
 export function reset() {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     recordEvent('wallet-logout');
     localStorage.removeItem('hashId');
@@ -134,10 +156,11 @@ export function reset() {
 }
 
 export function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     rudderAnalytics.track(eventLabel, {
       ...properties,
+      userAgentDetail,
       hashId: localStorage.getItem('hashId'),
       anonymousUserIdCreatedAt,
     });
@@ -146,12 +169,17 @@ export function recordEventWithProps(eventLabel: string, properties: Record<stri
   }
 }
 
+export function recordHandledError(props: Record<string, string>) {
+  recordEventWithProps('error-handled', props);
+}
+
 export function recordEvent(eventLabel: string) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     rudderAnalytics.track(eventLabel, {
       hashId: localStorage.getItem('hashId'),
       url: window.location.href,
+      userAgentDetail,
       anonymousUserIdCreatedAt,
     });
   } catch (e) {

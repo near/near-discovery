@@ -59,6 +59,7 @@ import {
 } from './utils/onboarding';
 import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
+import { recordHandledError } from '@/utils/analytics';
 
 export const Sandbox = ({ onboarding = false }) => {
   const near = useVmStore((store) => store.near);
@@ -275,11 +276,15 @@ export const Sandbox = ({ onboarding = false }) => {
     const pathNew = nameToPath(path.type, newName);
     const jpathNew = fileToJpath(pathNew);
 
+    const onboardingId = onboarding && 'near';
+    const src = getSrcByNameOrPath(pathNew.name, onboardingId || accountId, pathNew.type);
+
     setFilesObject((state) => {
       const newState = {
         ...state,
         [jpathNew]: {
           ...state[jpath],
+          src,
           name: newName,
         },
       };
@@ -315,7 +320,8 @@ export const Sandbox = ({ onboarding = false }) => {
       });
       changeCode(path, formattedCode);
     } catch (e) {
-      console.log(e);
+      console.error(e);
+      recordHandledError({ scope: 'sandbox reformatting', message: e.message || e });
     }
   };
 
@@ -410,10 +416,18 @@ export const Sandbox = ({ onboarding = false }) => {
       name: file.name,
     }));
 
+    const newName = generateNewName(type, files).name;
+
+    const onboardingId = onboarding && 'near';
+    const src = getSrcByNameOrPath(newName, onboardingId || accountId, type);
+    const path = toPath(type, newName);
+
     const newFile = {
       ...fileObjectDefault,
+      ...path,
+      src,
       type,
-      name: generateNewName(type, files).name,
+      name: newName,
       codeMain: '',
       codeDraft: '',
       codeLocalStorage: newCode,
@@ -480,6 +494,7 @@ export const Sandbox = ({ onboarding = false }) => {
     } catch (e) {
       setParsedWidgetProps({});
       setPropsError(e.message);
+      recordHandledError({ scope: 'setting component props within the sandbox editor', message: e.message || e });
     }
   }, [widgetProps]);
 

@@ -63,3 +63,11 @@ export const notificationsHostName = process.env.NEXT_PUBLIC_NOTIFICATIONS_HOSTN
 export const notificationsGatewayUrl = process.env.NEXT_PUBLIC_NOTIFICATIONS_GATEWAY_URL ?? 'https://near.org';
 export const notificationsLocalStorageKey = 'push-notifications-v0';
 export const localStorageAccountIdKey = 'near-social-vm:v01::accountId:';
+export const isLocalEnvironment = process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT === 'true';
+
+export const commitModalBypassAuthorIds = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_AUTHOR_IDS ?? '')
+  .split(',')
+  .filter((item) => !!item);
+export const commitModalBypassSources = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_SOURCES ?? '')
+  .split(',')
+  .filter((item) => !!item);
