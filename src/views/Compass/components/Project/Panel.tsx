@@ -11,6 +11,7 @@ const PanelWapper = styled.div<{ color: string }>`
     width: 25%;
     border-radius: 20px;
     padding: 20px 20px 10px;
+    border: 1px solid #373A53;
     text-align: center;
     padding: 38px 0 24px;
     cursor: pointer;
@@ -52,10 +53,7 @@ const FreshWapper = styled.div`
 
 const SpinWapper = styled.div`
     width: 127px;
-    border-radius: 12px;
-    border: 2px;
     height: 42px;
-    overflow: hidden;
     margin-right: 10px;
 `
 

@@ -349,7 +349,7 @@ function SlotMachine({
         }
 
         playSound('/images/compass/audio/rolling.mp4')
-        
+
         setTimeout(() => {
             if (rewardRef.current === 10000) {
                 playSound('/images/compass/audio/grand-prize.mp3')
@@ -443,7 +443,7 @@ function SlotMachine({
                 setTimeout(() => {
                     setRulePressed(false)
                 }, 100)
-            }}/>
+            }} />
             <BtnWapper>
                 <BtnBg />
                 <Btn style={{ opacity: availableSpins <= 0 ? '.3' : '1' }} className={isPressed ? 'press' : ''} onClick={handleBtnPress} />
@@ -460,8 +460,11 @@ function SlotMachine({
             }} style={{ opacity: newUnclaimedReward <= 0 ? '.3' : '1' }} />
         </ActionBar>
 
-        <RuleModal show={ruleShow} onClose={() => setRuleShow(false) } />
-        <PrizeModal prize={reward} show={prizeShow} onClose={() => setPrizeShow(false) } />
+        <RuleModal show={ruleShow} onClose={() => setRuleShow(false)} />
+        <PrizeModal prize={reward} show={prizeShow}
+            onClaim={() => {
+                handleClaim
+            }} onClose={() => setPrizeShow(false)} />
     </Wapper>
 }
 

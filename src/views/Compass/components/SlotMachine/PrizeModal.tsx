@@ -68,9 +68,11 @@ export default function PrizeModal({
     show, 
     onClose,
     prize,
+    onClaim,
 } : { 
     show: boolean; 
     onClose: () => void;
+    onClaim: () => void;
     prize: number;
  }) {
     return <Modal 
@@ -91,7 +93,9 @@ export default function PrizeModal({
             <Iocn src={lbImg.src} />
             <Title>Congrats!</Title>
             <Content>You’ve got {prize} <CcImg src={ccmg.src}/> PTS</Content>
-            <Btn onClick={ onClose }>Claim now</Btn>
+            <Btn onClick={ () => {
+                onClose()
+            } }>Play On</Btn>
         </>
     }} 
     />
