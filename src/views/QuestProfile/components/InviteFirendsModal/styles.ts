@@ -213,3 +213,16 @@ export const StyledUserAddress = styled.div`
   font-size: 14px;
   margin-top: 2px;
 `;
+
+export const StyledPendingCell = styled.div`
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    opacity: 0.8;
+
+    & .hints {
+      opacity: 1;
+    }
+  }
+`;

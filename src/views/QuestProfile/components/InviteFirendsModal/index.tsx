@@ -9,6 +9,7 @@ import { ellipsAccount } from '@/utils/account';
 import useRewardsClaim from '../../hooks/useRewardsClaim';
 import type { Column } from '../Pts/types';
 import InviteCode from './InviteCode';
+import PendingHints from './PendingHints';
 import {
   Empty,
   LoadingWrapper,
@@ -29,6 +30,7 @@ import {
   StyledTitle,
   StyledUserAddress,
   StyledUserName,
+  StyledPendingCell,
 } from './styles';
 
 export const COLUMNS: Column[] = [
@@ -176,7 +178,14 @@ const InviteFirendsModal = ({
                   <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
                     {column.key === 'friend' && <Friend {...row.invited_user} />}
                     {column.key === 'code' && <span className="delete">{row.code}</span>}
-                    {column.key === 'status' && (row.status === 'Pending' ? row.status + '...' : row.status)}
+                    {column.key === 'status' &&
+                      (row.status === 'Pending' ? (
+                        <StyledPendingCell>
+                          <span> {row.status + '...'}</span> <PendingHints />
+                        </StyledPendingCell>
+                      ) : (
+                        row.status
+                      ))}
                     {column.key === 'rewards' &&
                       (row.reward ? (
                         <StyledRewards style={{ color: row.is_claimed ? 'rgba(235, 244, 121, 0.3)' : '#ebf479' }}>
