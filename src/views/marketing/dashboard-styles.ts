@@ -457,6 +457,12 @@ export const RewardQuest = styled.div`
   border-radius: 16px;
   background: linear-gradient(0deg, #373a53, #373a53),
     linear-gradient(0deg, rgba(55, 58, 83, 0.2), rgba(55, 58, 83, 0.2));
+  &.blur {
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
+  }
 `;
 export const RewardBox = styled.div`
   display: flex;
