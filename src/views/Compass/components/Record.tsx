@@ -10,17 +10,19 @@ const Record = styled.div`
     flex-direction: column;
     justify-content: center;
     position: relative;
-    &::after {
+    backdrop-filter: blur(2px);
+    background: linear-gradient(180deg, rgba(33, 35, 42, 0.9) 0%, rgba(33, 35, 42, 0.459) 100%);
+
+    /* &::after {
         position: absolute;
         content: ' ';
         left: 0;
         right: 0;
         top: 0;
         bottom: 0;
-        background: linear-gradient(180deg, rgba(33, 35, 42, 0.9) 0%, rgba(33, 35, 42, 0.459) 100%);
         border-radius: 20px;
-        filter: blur(1px);
-    }
+        /* filter: blur(1px); */
+    } */
 `
 
 const RecordTitle = styled.div`
