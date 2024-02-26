@@ -124,10 +124,13 @@ export const StyledClaimButton = styled.button`
   font-size: 16px;
   font-weight: 500;
   transition: 0.3s;
-  &:hover {
+  &:not(:disabled):hover {
     opacity: 0.8;
   }
-  &:active {
+  &:not(:disabled):active {
+    opacity: 0.6;
+  }
+  &:disabled {
     opacity: 0.6;
   }
 `;

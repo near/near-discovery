@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 
 import useInviteCode from '@/components/AccountSider/hooks/useInviteCode';
 import Loading from '@/components/Icons/Loading';
@@ -87,8 +87,14 @@ const InviteFirendsModal = ({
   const { list: codeList, loading } = useInviteCode(open);
   const { copy } = useCopy();
   const newCodes = useMemo(() => codeList.filter((code, i) => !code.is_used), [codeList]);
-  const { loading: claiming, handleClaim } = useRewardsClaim();
+  const [claimableRewards, setClaimableRewards] = useState(totalRewards);
+  const { loading: claiming, handleClaim } = useRewardsClaim(() => {
+    setClaimableRewards(0);
+  });
   const activeCodes = useMemo(() => list.filter((code: any) => code.status === 'Active'), [list]);
+  useEffect(() => {
+    setClaimableRewards(totalRewards);
+  }, [totalRewards]);
   return (
     <Modal
       display={open}
@@ -147,13 +153,13 @@ const InviteFirendsModal = ({
               each active account.
             </StyledDesc>
             <StyledClaimButton
-              disabled={claiming || totalRewards === 0}
+              disabled={claiming || claimableRewards === 0}
               onClick={() => {
                 handleClaim();
               }}
             >
               {claiming && <Loading />}
-              Claim {totalRewards} PTS
+              Claim {claimableRewards} PTS
             </StyledClaimButton>
           </StyledDescBox>
           <StyledTableHeader>
