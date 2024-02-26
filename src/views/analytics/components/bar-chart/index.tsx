@@ -21,6 +21,28 @@ interface IProps {
 }
 
 const App: FC<IProps> = ({ data }) => {
+  const CustomTooltip = (props: any) => {
+    const { payload } = props;
+    const map: any = { total_users: 'Users', total_trading_value: 'Trading Volume' };
+    return (
+      <Styles.CustomTooltip>
+        <Styles.Wrap>
+          <Styles.Logo src={payload[0]?.payload?.logo}></Styles.Logo>
+          {payload[0]?.payload?.name}
+        </Styles.Wrap>
+        {payload.map((item: any, index: number) => (
+          <Styles.Item key={index}>
+            <Styles.Key>
+              <Styles.Icon color={item.color}></Styles.Icon>
+              {map[item.name]}
+            </Styles.Key>
+            <Styles.Value>{item.value}</Styles.Value>
+          </Styles.Item>
+        ))}
+      </Styles.CustomTooltip>
+    );
+  };
+
   return (
     <BarChart
       width={1244}
@@ -39,23 +61,6 @@ const App: FC<IProps> = ({ data }) => {
       <XAxis dataKey="name" />
       <YAxis />
 
-      {/* <Legend /> */}
-      {/* <Bar
-        dataKey="total_users"
-        // fill="rgba(85, 93, 119, 0.6)"
-        activeBar={
-          <Rectangle
-            fill="rgba(85, 93, 119, 1)"
-            // stroke="blue"
-          />
-        }
-      />
-      <Bar
-        dataKey="total_trading_value"
-        // fill="rgba(235, 244, 121, 0.6)"
-        activeBar={<Rectangle fill="gold" stroke="purple" />}
-      /> */}
-
       <Tooltip
         wrapperStyle={{
           width: 240,
@@ -68,14 +73,19 @@ const App: FC<IProps> = ({ data }) => {
           border: '1px solid #373A53',
           fontSize: '14px',
         }}
-        labelFormatter={(name: string, props: any) => {
-          return (
-            <Styles.Wrap>
-              <Styles.Logo src={props[0]?.payload?.logo}></Styles.Logo>
-              {name}
-            </Styles.Wrap>
-          );
-        }}
+        // labelFormatter={(name: string, props: any) => {
+        //   return (
+        //     <Styles.Wrap>
+        //       <Styles.Logo src={props[0]?.payload?.logo}></Styles.Logo>
+        //       {name}
+        //     </Styles.Wrap>
+        //   );
+        // }}
+        content={<CustomTooltip />}
+        // formatter={(value: any, name: any, props: any) => {
+        //   const map: any = { total_users: 'Users', total_trading_value: 'Trading Volume' };
+        //   return [value, map[name]];
+        // }}
         // `$${Number(item.total_trading_value).toFixed(2)}k`
         labelStyle={{
           color: '#979ABE',

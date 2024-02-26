@@ -390,7 +390,7 @@ const Dashboard: FC<IProps> = ({}) => {
                 <Styles.GridCol style={{ justifyContent: 'start' }} title={item.name}>
                   <Styles.Ellipsis>{item.name}</Styles.Ellipsis>
                 </Styles.GridCol>
-                <Styles.GridCol>#{item.type}</Styles.GridCol>
+                <Styles.GridCol className={`${item.type}-type`}>#{item.type}</Styles.GridCol>
                 <Styles.GridCol>{format(item.online_date, 'd MMM yyyy')}</Styles.GridCol>
                 <Styles.GridCol>{formatThousandsSeparator(item.total_users)}</Styles.GridCol>
                 <Styles.GridCol>{item.reward}</Styles.GridCol>

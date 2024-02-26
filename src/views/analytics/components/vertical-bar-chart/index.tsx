@@ -22,17 +22,19 @@ interface IProps {
 }
 
 const CategoryTick = (props: any) => {
-  //TODO
-  console.log('props: ', props);
+  // console.log('props: ', props, props.data[props.index].logo);
   return (
-    <foreignObject x={props.x - 30} y={props.y - 15} width={30} height={30}>
-      <i style={{ color: 'white' }}>logo</i>
+    <foreignObject x={props.x - 40} y={props.y - 10} width={40} height={20}>
+      <Styles.YaxisWrap>
+        <Styles.YaxisOrder>#{props.index + 1}</Styles.YaxisOrder>
+        <Styles.YaxisLogo src={props.data[props.index].logo} alt="" />
+      </Styles.YaxisWrap>
     </foreignObject>
   );
 };
 
 const App: FC<IProps> = ({ data }) => {
-  console.log('data: ', data);
+  // console.log('data: ', data);
 
   return (
     <ComposedChart
@@ -51,7 +53,7 @@ const App: FC<IProps> = ({ data }) => {
     >
       {/* <CartesianGrid strokeDasharray="3 3" /> */}
       <XAxis type="number" />
-      <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={<CategoryTick />} />
+      <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={<CategoryTick data={data} />} />
 
       {/* <Legend /> */}
       <Bar
@@ -85,6 +87,9 @@ const App: FC<IProps> = ({ data }) => {
               {name}
             </Styles.Wrap>
           );
+        }}
+        formatter={(value: any, name: any, props: any) => {
+          return [value, 'Transactions'];
         }}
         // `$${Number(item.total_trading_value).toFixed(2)}k`
         labelStyle={{

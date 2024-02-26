@@ -18,3 +18,18 @@ export const Logo = styled.img`
   width: 30px;
   height: 30px;
 `;
+export const YaxisWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const YaxisOrder = styled.span`
+  color: #979abe;
+  font-family: Montserrat;
+  font-size: 12px;
+  font-weight: 400;
+`;
+export const YaxisLogo = styled.img`
+  width: 20px;
+  height: 20px;
+`;

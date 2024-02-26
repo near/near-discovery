@@ -126,6 +126,10 @@
   --violet10: hsla(246, 57%, 61%, 1);
   --violet11: hsla(241, 50%, 32%, 1);
   --violet12: hsla(244, 49%, 17%, 1);
+
+  --quest-type-social: #aad6ff;
+  --quest-type-engage: #f4ca79;
+  --quest-type-onboarding: #787dff;
 }
 
 .Swap {

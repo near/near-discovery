@@ -353,6 +353,15 @@ export const GridCol = styled.div`
   font-size: 16px;
   font-weight: 600;
   padding: 0 8px;
+  &.onboarding-type {
+    color: var(--quest-type-onboarding);
+  }
+  &.engage-type {
+    color: var(--quest-type-engage);
+  }
+  &.social-type {
+    color: var(--quest-type-social);
+  }
 `;
 
 export const Ellipsis = styled.div`
