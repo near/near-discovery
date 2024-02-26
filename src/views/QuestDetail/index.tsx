@@ -45,6 +45,8 @@ const QuestDetailView = () => {
           path: '/quest/leaderboard/' + campaign.name.replace(/\s/g, ''),
         };
         array[2] = { name: 'Detail', path: '/quest/detail' };
+      } else {
+        array[1] = { name: 'Detail', path: '' };
       }
       return array;
     }
