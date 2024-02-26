@@ -100,9 +100,6 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const handleClaim = async (step: any, pts: number) => {
     if (!address) return;
 
-    // if (step === 1 && !(isCompleted as any)[step]) return;
-    // if (step === 2 && !(isCompleted as any)[step]) return;
-    // if (step === 3 && !(isCompleted as any)[step]) return;
     if (!(isCompleted as any)[step]) return;
     if (step === 1 && userData?.step1_is_claimed) return;
     if (step === 2 && userData?.step2_is_claimed) return;
@@ -246,9 +243,16 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
             </Styles.RewardQuest>
             <Styles.RewardBox className={(isCompleted as any)[item.step] ? '' : 'blur'}>
               <Styles.Cap src="/images/marketing/cap.svg"></Styles.Cap>
-              <Styles.ClaimBtn onClick={(e) => handleClaim(item.step, item.pts)}>
-                Claim <Styles.CoinIcon src="/images/marketing/coin.svg" /> {item.pts} PTS
-              </Styles.ClaimBtn>
+
+              {userData[`step${item.step}_is_claimed`] ? (
+                <Styles.ClaimBtn style={{ fontSize: 14, cursor: 'not-allowed' }}>
+                  Reward Already Claimed
+                </Styles.ClaimBtn>
+              ) : (
+                <Styles.ClaimBtn onClick={(e) => handleClaim(item.step, item.pts)}>
+                  Claim <Styles.CoinIcon src="/images/marketing/coin.svg" /> {item.pts} PTS
+                </Styles.ClaimBtn>
+              )}
             </Styles.RewardBox>
           </Styles.RewardList>
         ))}
