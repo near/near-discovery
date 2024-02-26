@@ -28,7 +28,7 @@ const ITEMS = [
   },
   {
     icon: '/images/home/learning-3.jpg',
-    title: 'Discover DApps',
+    title: 'Discover dApps',
     desc: 'Explore a vast array of decentralized applications (dApps) easily and find your favorites.',
     path: 'https://dapdapnet.notion.site/Dap-Dap-The-Beginning-of-a-New-Web3-Experience-471b4ceb6757464b9fe59708f7cfb0e8',
   },

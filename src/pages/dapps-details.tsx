@@ -489,7 +489,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
           const response = await get(`${QUEST_PATH}/api/dapp/relate_list?dapp_id=${dapp_id}`);
           setRelatedDapps(response.data || []);
         } catch (error) {
-          console.error('Error fetching related dapps:', error);
+          console.error('Error fetching related dApps:', error);
         }
       }
     };
@@ -584,7 +584,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
         <BreadCrumbs>
           <Link href="/">Home</Link>
           {arrow}
-          <Link href="/alldapps">All Dapps</Link>
+          <Link href="/alldapps">All dApps</Link>
           {arrow}
           <span>{data && data.name}</span>
         </BreadCrumbs>
@@ -755,7 +755,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
       </DappsDetailsContent>
 
       <DappsDetailBottom>
-        <Title>Related Dapps</Title>
+        <Title>Related dApps</Title>
         <div className="tab-content">
           <Dapps dapps={relatedDapps || []} bp={{ detail: '100111-004', dapp: '100111-005' }} />
         </div>
