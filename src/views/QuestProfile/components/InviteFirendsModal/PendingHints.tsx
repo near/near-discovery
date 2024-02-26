@@ -25,6 +25,8 @@ const StyledContainer = styled.div`
 
 export default function PendingHints() {
   return (
-    <StyledContainer className="hints">This user hasn't generated any on-chain actions by DapDap yet.</StyledContainer>
+    <StyledContainer className="hints">
+      This user hasn&apos;t generated any on-chain actions by DapDap yet.
+    </StyledContainer>
   );
 }

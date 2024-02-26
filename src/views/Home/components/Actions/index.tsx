@@ -3,7 +3,7 @@ import { StyledContainer, StyledActions, StyledActionIcon } from './styles';
 
 const ACTIONS = [
   {
-    title: <div>Explore Ethereum L2's</div>,
+    title: <div>Explore Ethereum L2&apos;s</div>,
     desc: 'Discover L2s Blockchains across the most popular web3 ecosystems.',
     icon: (
       <StyledActionIcon style={{ width: '100px', height: '104px', right: '18px', top: '-36px' }}>
