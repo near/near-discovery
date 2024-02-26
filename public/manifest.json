@@ -1,0 +1,61 @@
+{
+  "short_name": "NEAR",
+  "name": "NEAR | The OS for an Open Web",
+  "start_url": "/near/widget/NearOrg.HomePage",
+  "scope": "/",
+  "display": "standalone",
+  "shortcuts": [
+    {
+      "name": "Social",
+      "url": "/near/widget/ActivityPage",
+      "description": "A social activity feed with the latest news, components, and conversations from Near.social"
+    },
+    {
+      "name": "Ecosystem",
+      "url": "/near/widget/NearOrg.EcosystemPage",
+      "description": "A vibrant ecosystem that supports developers, founders, and contributors"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "bos-meta.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "description": "A screenshot of the home page",
+      "form_factor": "wide"
+    },
+    {
+      "src": "bos-meta.png",
+      "sizes": "1200x630",
+      "type": "image/png",
+      "description": "A screenshot of the home page"
+    }
+  ],
+  "icons": [
+    {
+      "src": "apple-touch-icon.png",
+      "sizes": "300x300",
+      "type": "image/png"
+    },
+    {
+      "src": "logo192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "logo512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}

@@ -9,6 +9,8 @@ type IdosTypeTemp = idOS & { setSigner(signer: string, wallet: any): void };
 type IdosState = {
   idOS?: IdosTypeTemp;
   currentUser?: IdosUser;
+  hasProfile?: boolean;
+  connectedWallet?: string;
   credentials?: object[];
   wallets?: IdosWalletInfo[];
 };
@@ -22,6 +24,8 @@ export const useIdosStore = create(
     (set) => ({
       idOS: undefined,
       currentUser: undefined,
+      hasProfile: false,
+      connectedWallet: undefined,
       credentials: undefined,
       wallets: undefined,
       set: (state) => set((previousState) => ({ ...previousState, ...state })),

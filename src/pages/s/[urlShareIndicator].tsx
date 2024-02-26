@@ -66,40 +66,48 @@ function returnShareType(indicator: string): ShareType {
 }
 
 async function returnMetaPreviewForComment(accountId: string, blockHeight: string): Promise<MetaPreview | null> {
-  const response = await fetch(`https://api.near.social/get?keys=${accountId}/post/comment&blockHeight=${blockHeight}`);
-  const responseData: CommentPostData = await response.json();
-  const comment = responseData[accountId]?.post.comment;
+  try {
+    const response = await fetch(
+      `https://api.near.social/get?keys=${accountId}/post/comment&blockHeight=${blockHeight}`,
+    );
+    const responseData: CommentPostData = await response.json();
+    const comment = responseData[accountId]?.post.comment;
 
-  if (comment) {
-    const data: StringifiedData = JSON.parse(comment);
+    if (comment) {
+      const data: StringifiedData = JSON.parse(comment);
 
-    return {
-      title: `Comment by @${accountId}`,
-      description: sanitizeText(data.text),
-      imageUrl: returnImageUrl(data.image),
-      redirectUrl: `/near/widget/PostPage?accountId=${accountId}&commentBlockHeight=${blockHeight}`,
-    };
+      return {
+        title: `Comment by @${accountId}`,
+        description: sanitizeText(data.text),
+        imageUrl: returnImageUrl(data.image),
+        redirectUrl: `/near/widget/PostPage?accountId=${accountId}&commentBlockHeight=${blockHeight}`,
+      };
+    }
+  } catch (err) {
+    console.warn('Failed to fetch meta preview for Comment', err);
   }
-
   return null;
 }
 
 async function returnMetaPreviewForPost(accountId: string, blockHeight: string): Promise<MetaPreview | null> {
-  const response = await fetch(`https://api.near.social/get?keys=${accountId}/post/main&blockHeight=${blockHeight}`);
-  const responseData: MainPostData = await response.json();
-  const main = responseData[accountId]?.post.main;
+  try {
+    const response = await fetch(`https://api.near.social/get?keys=${accountId}/post/main&blockHeight=${blockHeight}`);
+    const responseData: MainPostData = await response.json();
+    const main = responseData[accountId]?.post.main;
 
-  if (main) {
-    const data: StringifiedData = JSON.parse(main);
+    if (main) {
+      const data: StringifiedData = JSON.parse(main);
 
-    return {
-      title: `Post by @${accountId}`,
-      description: sanitizeText(data.text),
-      imageUrl: returnImageUrl(data.image),
-      redirectUrl: `/near/widget/PostPage?accountId=${accountId}&blockHeight=${blockHeight}`,
-    };
+      return {
+        title: `Post by @${accountId}`,
+        description: sanitizeText(data.text),
+        imageUrl: returnImageUrl(data.image),
+        redirectUrl: `/near/widget/PostPage?accountId=${accountId}&blockHeight=${blockHeight}`,
+      };
+    }
+  } catch (err) {
+    console.warn('Failed to fetch meta preview for Post', err);
   }
-
   return null;
 }
 

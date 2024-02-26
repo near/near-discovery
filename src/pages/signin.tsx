@@ -1,11 +1,9 @@
-import { getKeys, isPassKeyAvailable } from '@near-js/biometric-ed25519';
-import { useRouter } from 'next/router';
+import { useSearchParams } from 'next/navigation';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
-import { openToast } from '@/components/lib/Toast';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -17,10 +15,10 @@ import { isValidEmail } from '../utils/form-validation';
 
 const SignInPage: NextPageWithLayout = () => {
   const { register, handleSubmit, setValue } = useForm();
-  const router = useRouter();
   const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
   const signedIn = useAuthStore((store) => store.signedIn);
   const vmNear = useAuthStore((store) => store.vmNear);
+  const searchParams = useSearchParams();
   const { redirect } = useSignInRedirect();
 
   useEffect(() => {
@@ -28,6 +26,26 @@ const SignInPage: NextPageWithLayout = () => {
       redirect();
     }
   }, [redirect, signedIn]);
+
+  useEffect(() => {
+    if (vmNear?.selector && searchParams.get('account_id') && searchParams.get('public_key')) {
+      vmNear.selector
+        .then((selector: any) => {
+          const walletSelectorState = selector.store.getState();
+
+          if (walletSelectorState.selectedWalletId === 'fast-auth-wallet') {
+            return selector.wallet('fast-auth-wallet');
+          }
+        })
+        .then((fastAuthWallet: any) => {
+          if (fastAuthWallet) {
+            fastAuthWallet.signIn({
+              contractId: vmNear.config.contractName,
+            });
+          }
+        });
+    }
+  }, [searchParams, vmNear]);
 
   useClearCurrentComponent();
 
