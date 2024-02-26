@@ -34,6 +34,7 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
 
   const router = useRouter();
   const { account } = useAccount();
+  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [address, setAddress] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
@@ -90,6 +91,11 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const handleFresh = () => {
     setFresh((n) => n + 1);
   };
+  useEffect(() => {
+    if (wallet) {
+      setAddress((wallet as any)['accounts'][0].address);
+    }
+  }, [wallet]);
 
   const handleClaim = async (step: any, pts: number) => {
     if (!address) return;
