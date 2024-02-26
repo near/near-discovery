@@ -5,6 +5,7 @@ import Modal from '../Modal'
 import lbImg from './img/Congrates.gif'
 import smImg from './img/sm.svg'
 import ccmg from './img/cc.svg'
+import { useState } from 'react';
 
 const Iocn = styled.img`
     position: absolute;
@@ -64,6 +65,28 @@ const CcImg = styled.img`
     margin-top: -4px;
 `
 
+const GetTitle = styled.div`
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 19px;
+    text-align: center;
+    color: #EBF479;
+    margin-top: 20px;
+`
+
+const GetContent= styled.div`
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 19px;
+    margin-top: 20px;
+    color: #979ABE;
+    .sp {
+        color: #fff;
+    }
+`
+
 export default function PrizeModal({ 
     show, 
     onClose,
@@ -75,6 +98,8 @@ export default function PrizeModal({
     onClaim: () => void;
     prize: number;
  }) {
+    const [getMoreShow, setGetMoreShow] = useState(false)
+
     return <Modal 
     onClose={onClose}
     show={show} 
@@ -95,7 +120,16 @@ export default function PrizeModal({
             <Content>You’ve got {prize} <CcImg src={ccmg.src}/> PTS</Content>
             <Btn onClick={ () => {
                 onClose()
-            } }>Play On</Btn>
+            } }>Continue</Btn>
+            <GetTitle onClick={() => {
+                setGetMoreShow(!getMoreShow)
+            }}>Get more PTS</GetTitle>
+            {
+                getMoreShow ? <GetContent>Share your win on Twitter by taking a screenshot of this page to enter the final grand prize draw!
+                To qualify, your screenshot needs to include the DapDap logo at the top of your page and wallet address. You should also tag <span className='sp'>@DapDapMeUp</span> and <span className='sp'>#DapDapOdyssey</span> in your post.</GetContent>
+                : null
+            }
+            
         </>
     }} 
     />
