@@ -15,6 +15,8 @@ import { useEffect } from 'react';
 import { Toaster } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
+import { useCookiePreferences } from '@/hooks/useCookiePreferences';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
@@ -22,6 +24,7 @@ import { init as initializeAnalytics } from '@/utils/analytics';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import { VmComponent } from '@/components/vm/VmComponent';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -41,6 +44,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const signedIn = useAuthStore((store) => store.signedIn);
   const accountId = useAuthStore((store) => store.accountId);
   const componentSrc = router.query;
+  const cookieData = useCookiePreferences();
+  const components = useBosComponents();
 
   useEffect(() => {
     // this check is needed to init localStorage for notifications after user signs in
@@ -138,6 +143,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <Toaster />
 
+      <VmComponent src={components.nearOrg.cookiePrompt} props={{ cookiesAcknowleged: cookieData }} />
       <div
         id="idos_container"
         style={

@@ -36,7 +36,7 @@ import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
-import { recordHandledError, recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
+import { optOut, recordHandledError, recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
 import {
   commitModalBypassAuthorIds,
   commitModalBypassSources,
@@ -119,6 +119,11 @@ export default function VmInitializer() {
             });
 
             return <Link {...cleanProps} />;
+          },
+          AnalyticsCookieConsent: ({ all, onlyRequired }: { all: boolean; onlyRequired: boolean }) => {
+            localStorage.setItem('cookiesAcknowledged', all ? 'all' : ' only_required');
+            optOut();
+            return <></>;
           },
         },
         features: {
