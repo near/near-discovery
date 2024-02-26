@@ -124,10 +124,13 @@ export const StyledClaimButton = styled.button`
   font-size: 16px;
   font-weight: 500;
   transition: 0.3s;
-  &:hover {
+  &:not(:disabled):hover {
     opacity: 0.8;
   }
-  &:active {
+  &:not(:disabled):active {
+    opacity: 0.6;
+  }
+  &:disabled {
     opacity: 0.6;
   }
 `;
@@ -209,4 +212,17 @@ export const StyledUserName = styled.div`
 export const StyledUserAddress = styled.div`
   font-size: 14px;
   margin-top: 2px;
+`;
+
+export const StyledPendingCell = styled.div`
+  cursor: pointer;
+  position: relative;
+
+  &:hover {
+    opacity: 0.8;
+
+    & .hints {
+      opacity: 1;
+    }
+  }
 `;

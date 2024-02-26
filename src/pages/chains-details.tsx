@@ -686,7 +686,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
               <Link href={`/alldapps?network=${id}`}>
                 <div className="right-btn-item">
                   <img src={Dapps} alt="" />
-                  <p>Dapps</p>
+                  <p>dApps</p>
                 </div>
               </Link>
               {data && data.deepdive && (
@@ -750,7 +750,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
       </ChainsDetailsContent>
 
       <ChainsDetailsHot>
-        <Title>Hot Dapps on {data && data.name}</Title>
+        <Title>Hot dApps on {data && data.name}</Title>
         <div className="tab-content">
           {hotDapps &&
             hotDapps.map((dapp: any, index: number) => {

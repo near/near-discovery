@@ -94,7 +94,7 @@ export const StyledSubTitleWrapper = styled.div`
 `;
 
 export const StyledSubTitleBg = styled.div`
-  background-image: url(/images/home/subtitle_bg.png);
+  background-image: url(/images/home/subtitle_bg.webp);
   background-repeat: no-repeat;
   background-size: 100%;
   width: 707px;

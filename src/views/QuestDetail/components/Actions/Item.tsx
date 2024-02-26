@@ -300,7 +300,7 @@ const ActionItem = ({
                         router.push('/alldapps');
                       }}
                     >
-                      View all Dapps
+                      View all dApps
                     </StyledMore>
                   )}
                 </>

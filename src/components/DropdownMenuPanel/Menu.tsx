@@ -39,7 +39,7 @@ const Menu = ({ setShow }: any) => {
       />
       <MenuItem
         title="Seamless Navigation"
-        desc="Shortcuts integrate common functions and the most popular dapps."
+        desc="Shortcuts integrate common functions and the most popular dApps."
         icon={<ShotcutsIcon />}
         onClick={() => {
           router.push('/all-in-one');
