@@ -19,7 +19,7 @@ const QuestLists = ({ achieved, loading, quests }: any) => {
   return (
     <StyledContainer>
       <StyledHeader>
-        <StyledTitle>Quest</StyledTitle>
+        <StyledTitle>Quests</StyledTitle>
         <StyledHeaderProcessBox>
           <StyledHeaderProcessDesc>
             <span>You&apos;ve achieved</span>

@@ -8,6 +8,8 @@ export interface SummaryData {
     totalSpins: number;
     availableSpins: number;
     unclaimedReward: number;
+    description: string;
+    name: string;
     setTotalSpins: (arg: number) => void;
     setAvailableSpins: (arg: number) => void;
     setUnclaimedReward: (arg: number) => void;
@@ -15,6 +17,8 @@ export interface SummaryData {
 }
 
 export default function useSummary(id: string): SummaryData {
+    const [description, setDescription] = useState<string>('')
+    const [name, setName] = useState<string>('')
     const [participants, setParticipants] = useState<number>(0)
     const [winners, setWinners] = useState<string[]>([])
     const [totalRewardsPts, setTotalRewardsPts] = useState<number>(0)
@@ -29,6 +33,8 @@ export default function useSummary(id: string): SummaryData {
                     setParticipants(data.total_users || 0)
                     setWinners(data.winners)
                     setTotalRewardsPts(data.claimed_reward || 0)
+                    setDescription(data.description)
+                    setName(data.name)
                     if (data.user) {
                         const { user } = data
                         setTotalSpins(user.total_spins || 0)
@@ -53,6 +59,8 @@ export default function useSummary(id: string): SummaryData {
         setTotalSpins,
         setAvailableSpins,
         setUnclaimedReward,
+        description,
+        name,
         getDetail,
     }
 }

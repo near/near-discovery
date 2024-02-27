@@ -18,6 +18,7 @@ const ModalBox = styled.div`
     padding: 40px;
     background: #262837;
     position: relative;
+    border: 1px solid #373A53;
 `
 
 const CloseIcon = styled.div`

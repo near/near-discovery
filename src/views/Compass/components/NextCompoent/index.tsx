@@ -24,7 +24,7 @@ const Title = styled.div`
 export default function Index() {
     return <NextWapper>
         <MidWapper>
-            <Title>The next Compass</Title>
+            <Title>{'DapDap Odyssey Vol. 2'}</Title>
             <Panel />
         </MidWapper>
     </NextWapper>

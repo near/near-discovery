@@ -185,7 +185,7 @@ const CampaignView = () => {
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb
           navs={[
-            { name: 'Quest', path: '/quest/leaderboard' },
+            { name: 'Quests', path: '/quest/leaderboard' },
             { name: 'DapDap X BNS', path: '/quest/campaign/DapDapXBNS' },
           ]}
         />

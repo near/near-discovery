@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 const Record = styled.div`
     height: 157px;
-    background: linear-gradient(180deg, rgba(33, 35, 42, 0.9) 0%, rgba(33, 35, 42, 0.459) 100%);
     color: var(--main-color);
     text-align: center;
     flex: 1;
@@ -10,12 +9,17 @@ const Record = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
+    backdrop-filter: blur(2px);
+    background: linear-gradient(180deg, rgba(33, 35, 42, 0.9) 0%, rgba(33, 35, 42, 0.459) 100%);
 `
 
 const RecordTitle = styled.div`
     font-size: 18px;
     font-weight: 400;
     line-height: 22px;
+    position: relative;
+    z-index: 1;
 `
 
 const RecordContent = styled.div`
@@ -23,6 +27,8 @@ const RecordContent = styled.div`
     font-weight: 700;
     line-height: 45px;
     margin-top: 10px;
+    position: relative;
+    z-index: 1;
 `
 
 export default function RecordBox({ title, renderContent }: {
