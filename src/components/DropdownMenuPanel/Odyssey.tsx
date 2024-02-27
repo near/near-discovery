@@ -1,7 +1,9 @@
-import { memo } from "react"
+import useToast from '@/hooks/useToast';
+import { get } from '@/utils/http';
 import useCompassList from '@/views/Home/components/Compass/hooks/useCompassList';
-import styled from "styled-components";
 import { useRouter } from "next/router";
+import { memo } from "react";
+import styled from "styled-components";
 
 interface FlexProps {
   flexDirection?: 'row' | 'column';
@@ -56,6 +58,7 @@ const StyledFlex = styled.div<FlexProps>`
   gap: ${(props) => props.gap || '0px'};
 `;
 const Odyssey = function ({ setShow }: any) {
+  const toast = useToast()
   const { loading, compassList } = useCompassList()
   const router = useRouter()
 
