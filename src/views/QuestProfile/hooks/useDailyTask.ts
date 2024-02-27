@@ -24,6 +24,10 @@ export default function useDailyTask({ onSuccess }: { onSuccess: VoidFunction })
           setCurrentDay(data[i - 1]);
           return true;
         }
+        if (i === data.length - 1 && task.status === 'claim') {
+          setCurrentDay(data[i]);
+          return true;
+        }
         return false;
       });
       setConsecutiveDays(result.data.consecutive_days);
