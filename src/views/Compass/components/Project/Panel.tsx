@@ -15,7 +15,8 @@ const PanelWapper = styled.div<{ color: string }>`
     text-align: center;
     padding: 38px 0 24px;
     cursor: pointer;
-    background: rgba(33, 35, 42, 0.9) url(${maskImg.src}) right bottom no-repeat;
+    backdrop-filter: blur(20px);
+    background: rgba(33, 35, 42, 0.3) url(${maskImg.src}) right bottom no-repeat;
     &:hover {
         background: 
         radial-gradient(at 50% -30%, rgba(33, 35, 42, 0), ${({ color }) => color} 10%, rgba(33, 35, 42, 0) 100%),

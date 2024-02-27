@@ -8,7 +8,7 @@ import PrizeModal from './PrizeModal'
 
 import titleImg from './img/title.svg'
 import prizeImg from './img/prize.svg'
-import compassImg from './img/compass.svg'
+import compassImg from '../../img/odyssey.svg'
 import controllerImg from './img/ctr.png'
 import actionBg from './img/action-bg.svg'
 
@@ -36,6 +36,7 @@ const Wapper = styled.div`
     width: var(--main-width);
     margin: 150px auto 0;
     position: relative;
+    background: radial-gradient(50% 40% at 50% 35%, #EBF479 0%, rgba(235, 244, 121, 0) 100%);
 `
 
 const Screen = styled.div`

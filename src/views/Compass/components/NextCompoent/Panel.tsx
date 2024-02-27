@@ -57,8 +57,8 @@ const ComingSoon = styled.div`
 
 const CompassIcon = styled.img`
     position: absolute;
-    right: 30px;
-    top: -60px;
+    right: -20px;
+    top: -10px;
 `
 
 const WinIcon = styled.img`
@@ -77,6 +77,6 @@ export default function Panel() {
             <ComingSoon>Coming soon...</ComingSoon>
         </DescBox>
         <CompassIcon src={compassImg.src} />
-        <WinIcon src={winImg.src} />
+        {/* <WinIcon src={winImg.src} /> */}
     </ProjectLine>
 }
