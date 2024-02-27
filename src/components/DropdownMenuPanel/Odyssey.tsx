@@ -54,9 +54,8 @@ const StyledFlex = styled.div<FlexProps>`
   justify-content: ${(props) => props.justifyContent || 'flex-start'};
   gap: ${(props) => props.gap || '0px'};
 `;
-const Odyssey = function () {
-  const { loading, compassList } = useCompassList()
-  console.log('===compassList', compassList)
+const Odyssey = function ({ setShow }: any) {
+  // const { loading, compassList } = useCompassList()
   return (
     <StyledOdyssey>
       <StyledFlex alignItems="flex-start" gap="86px" style={{ width: '100%' }}>
