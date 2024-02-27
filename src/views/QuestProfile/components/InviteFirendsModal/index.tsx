@@ -1,4 +1,4 @@
-import { memo, useMemo } from 'react';
+import { memo, useEffect, useMemo, useState } from 'react';
 
 import useInviteCode from '@/components/AccountSider/hooks/useInviteCode';
 import Loading from '@/components/Icons/Loading';
@@ -9,6 +9,7 @@ import { ellipsAccount } from '@/utils/account';
 import useRewardsClaim from '../../hooks/useRewardsClaim';
 import type { Column } from '../Pts/types';
 import InviteCode from './InviteCode';
+import PendingHints from './PendingHints';
 import {
   Empty,
   LoadingWrapper,
@@ -29,6 +30,7 @@ import {
   StyledTitle,
   StyledUserAddress,
   StyledUserName,
+  StyledPendingCell,
 } from './styles';
 
 export const COLUMNS: Column[] = [
@@ -87,8 +89,14 @@ const InviteFirendsModal = ({
   const { list: codeList, loading } = useInviteCode(open);
   const { copy } = useCopy();
   const newCodes = useMemo(() => codeList.filter((code, i) => !code.is_used), [codeList]);
-  const { loading: claiming, handleClaim } = useRewardsClaim();
+  const [claimableRewards, setClaimableRewards] = useState(totalRewards);
+  const { loading: claiming, handleClaim } = useRewardsClaim(() => {
+    setClaimableRewards(0);
+  });
   const activeCodes = useMemo(() => list.filter((code: any) => code.status === 'Active'), [list]);
+  useEffect(() => {
+    setClaimableRewards(totalRewards);
+  }, [totalRewards]);
   return (
     <Modal
       display={open}
@@ -147,13 +155,13 @@ const InviteFirendsModal = ({
               each active account.
             </StyledDesc>
             <StyledClaimButton
-              disabled={claiming || totalRewards === 0}
+              disabled={claiming || claimableRewards === 0}
               onClick={() => {
                 handleClaim();
               }}
             >
               {claiming && <Loading />}
-              Claim {totalRewards} PTS
+              Claim {claimableRewards} PTS
             </StyledClaimButton>
           </StyledDescBox>
           <StyledTableHeader>
@@ -170,7 +178,14 @@ const InviteFirendsModal = ({
                   <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
                     {column.key === 'friend' && <Friend {...row.invited_user} />}
                     {column.key === 'code' && <span className="delete">{row.code}</span>}
-                    {column.key === 'status' && (row.status === 'Pending' ? row.status + '...' : row.status)}
+                    {column.key === 'status' &&
+                      (row.status === 'Pending' ? (
+                        <StyledPendingCell>
+                          <span> {row.status + '...'}</span> <PendingHints />
+                        </StyledPendingCell>
+                      ) : (
+                        row.status
+                      ))}
                     {column.key === 'rewards' &&
                       (row.reward ? (
                         <StyledRewards style={{ color: row.is_claimed ? 'rgba(235, 244, 121, 0.3)' : '#ebf479' }}>

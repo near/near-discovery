@@ -3,13 +3,14 @@ import styled from 'styled-components';
 export const StyledContainer = styled.div`
   position: relative;
   padding-top: 110px;
+  width: 1244px;
+  margin: 0 auto;
 `;
 
 export const StyledActions = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 25px;
+  justify-content: space-between;
 `;
 
 export const StyledActionContainer = styled.div<{ clickable: boolean }>`
@@ -17,7 +18,7 @@ export const StyledActionContainer = styled.div<{ clickable: boolean }>`
   height: 200px;
   flex-shrink: 0;
   border-radius: 20px;
-  padding: 46px 30px 0px;
+  padding: 24px 30px 0px;
   box-sizing: border-box;
   position: relative;
   opacity: 1;
@@ -36,6 +37,7 @@ export const StyledActionTitle = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  width: 260px;
 `;
 
 export const StyledActionDesc = styled.div`

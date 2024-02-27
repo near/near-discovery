@@ -4,7 +4,7 @@ import { QUEST_PATH } from '@/config/quest';
 import useToast from '@/hooks/useToast';
 import { get, post } from '@/utils/http';
 
-export default function useRewardsClaim() {
+export default function useRewardsClaim(onSuccess?: VoidFunction) {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
@@ -22,6 +22,7 @@ export default function useRewardsClaim() {
         title: `Claimed successfully`,
       });
       setLoading(false);
+      onSuccess?.();
     } catch (err) {
       setLoading(false);
       toast.dismiss(toastId);

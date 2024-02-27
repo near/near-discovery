@@ -16,7 +16,7 @@ const Favorites = () => {
     <AnimatePresence mode="wait">
       <motion.div {...container}>
         <StyledContainer>
-          <StyledTitle>Your favorite Dapps ({dappList.length || 0})</StyledTitle>
+          <StyledTitle>Your favorite dApps ({dappList.length || 0})</StyledTitle>
           {dappLoading ? (
             <LoadingWrapper>
               <Loading size={40} />

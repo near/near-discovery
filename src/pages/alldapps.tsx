@@ -871,7 +871,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           ) : tokenTBD?.length ? (
             <Dapps dapps={tokenTBD} bp={{ detail: '10011-001', dapp: '10011-002' }} />
           ) : (
-            <Empty size={42} tips="No dapps found" />
+            <Empty size={42} tips="No dApps found" />
           )}
         </>
       )}
@@ -882,7 +882,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           ) : nativeToken?.length ? (
             <Dapps dapps={nativeToken} bp={{ detail: '10011-001', dapp: '10011-002' }} />
           ) : (
-            <Empty size={42} tips="No dapps found" />
+            <Empty size={42} tips="No dApps found" />
           )}
         </>
       )}
@@ -893,7 +893,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
           ) : isFavoriteList?.length ? (
             <Dapps dapps={isFavoriteList} bp={{ detail: '10011-001', dapp: '10011-002' }} />
           ) : (
-            <Empty size={42} tips="No dapps found" />
+            <Empty size={42} tips="No dApps found" />
           )}
         </>
       )}

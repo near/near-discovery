@@ -1,5 +1,11 @@
 import { memo } from 'react';
 
+export const STEPS_MAP: { [key: string]: number } = {
+  Begginer: 1,
+  Intermediate: 2,
+  Senior: 3,
+};
+
 const Steps = ({ step }: { step: number }) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none">

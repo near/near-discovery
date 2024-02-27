@@ -11,7 +11,7 @@ const NearHomePagePopularDapps = () => {
   return (
     <Wrapper>
       <TitleWrapper>
-        <Title>The most popular Dapps</Title>
+        <Title>The most popular dApps</Title>
         <Desc>Make your DeFi actions simple, fast and traceable</Desc>
       </TitleWrapper>
       <AbsoluteWrapper>
