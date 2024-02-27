@@ -39,7 +39,7 @@ const Card = function ({ compass }: any) {
         title: 'Odyssey is upcoming...'
       })
     } else {
-      router.push('/compass/home?id=' + compass.id)
+      router.push('/odyssey/home?id=' + compass.id)
     }
   }
   return (
