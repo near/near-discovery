@@ -56,9 +56,8 @@ const QuickOnboarding = ({ path }: any) => {
             }}
             $disbaled={!network.menuConfig[item.key]}
             onClick={() => {
-              console.log(network.menuConfig[item.key]);
               if (!network.menuConfig[item.key]) return;
-              open(network, item.key);
+              open(network.path, item.key);
             }}
           >
             <StyledItemBg />
