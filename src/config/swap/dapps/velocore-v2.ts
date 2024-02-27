@@ -1,4 +1,5 @@
 import { linea } from '@/config/tokens/linea';
+import { zkSync } from '@/config/tokens/zkSync';
 
 const basic = {
   name: 'Velocore V2',
@@ -23,6 +24,25 @@ const networks = {
       linea['bnb'],
       linea['wsteth'],
       linea['usdc'],
+    ],
+  },
+  324: {
+    factoryAddress: '0x544D7D954f7c8f3dF1b0ffCE0736647Eab6a5232',
+    routerAddress: '0xf5E67261CB357eDb6C7719fEFAFaaB280cB5E2A6',
+    defaultCurrencies: {
+      input: zkSync['eth'],
+      output: zkSync['usdc'],
+    },
+    tokens: [
+      zkSync['eth'],
+      zkSync['weth'],
+      zkSync['usdc'],
+      zkSync['vc'],
+      zkSync['waifu'],
+      zkSync['zch'],
+      zkSync['keyvc'],
+      zkSync['lsd'],
+      zkSync['cebusd'],
     ],
   },
 };

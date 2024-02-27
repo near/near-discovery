@@ -2,7 +2,7 @@ import { useRouter } from 'next/navigation';
 import { memo } from 'react';
 
 import ProcessBar from '../ProcessBar';
-import Steps from './step-icon';
+import Steps, { STEPS_MAP } from './step-icon';
 import {
   StyledCalimable,
   StyledCoin,
@@ -19,12 +19,6 @@ import {
   StyledTaskName,
   StyledCategoryName,
 } from './styles';
-
-const STEPS_MAP: { [key: string]: number } = {
-  Begginer: 1,
-  Intermediate: 2,
-  Senior: 3,
-};
 
 const QuestItem = ({
   quest: {

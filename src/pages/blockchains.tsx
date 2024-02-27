@@ -317,16 +317,16 @@ const BlockchainsColumn: NextPageWithLayout = () => {
       <BreadCrumbs>
         <Link href="/">Home</Link>
         {arrow}
-        <span>L2 Blockchains</span>
+        <span>Layer-2 Networks</span>
       </BreadCrumbs>
       <BlockchainsBanner>
         <div className="blue-bg">{blueBg}</div>
         <div className="yellow-bg">{yellowBg}</div>
         <div className="blockchainsBanner-title">
-          <h1>List of L2 Blockchains</h1>
+          <h1>List of Layer-2 Networks</h1>
           <p>
-            Discover L2s Blockchains across the most popular web3 ecosystems. Also explore related collections including
-            L1s, Sidechains, Testnets.
+            Discover the most popular Ethereum roll-ups and EVMs across the market. Also explore related blockchains
+            including Layer-1s, sidechains, and testnets.
           </p>
         </div>
       </BlockchainsBanner>

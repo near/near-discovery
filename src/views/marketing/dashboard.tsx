@@ -34,6 +34,7 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
 
   const router = useRouter();
   const { account } = useAccount();
+  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const [address, setAddress] = useState('');
   const [isShowModal, setIsShowModal] = useState(false);
   const [modalType, setModalType] = useState<'success' | 'fail'>('success');
@@ -90,13 +91,15 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const handleFresh = () => {
     setFresh((n) => n + 1);
   };
+  useEffect(() => {
+    if (wallet) {
+      setAddress((wallet as any)['accounts'][0].address);
+    }
+  }, [wallet]);
 
   const handleClaim = async (step: any, pts: number) => {
     if (!address) return;
 
-    // if (step === 1 && !(isCompleted as any)[step]) return;
-    // if (step === 2 && !(isCompleted as any)[step]) return;
-    // if (step === 3 && !(isCompleted as any)[step]) return;
     if (!(isCompleted as any)[step]) return;
     if (step === 1 && userData?.step1_is_claimed) return;
     if (step === 2 && userData?.step2_is_claimed) return;
@@ -125,10 +128,12 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   }, [account, fresh]);
 
   function calcListStyle(step: number) {
+    // console.log('isCompleted:', isCompleted, step);
+
     if (step === 1) {
       return '';
     } else {
-      return (isCompleted as any)[step] ? '' : 'blur';
+      return (isCompleted as any)[step - 1] ? '' : 'blur';
     }
   }
 
@@ -187,8 +192,8 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
         <Styles.Info>Upon reaching goals, unlock bonus points as a reward!</Styles.Info>
 
         {quests.map((item, index) => (
-          <Styles.RewardList key={item.step} className={calcListStyle(item.step)}>
-            <Styles.RewardQuest>
+          <Styles.RewardList key={item.step}>
+            <Styles.RewardQuest className={calcListStyle(item.step)}>
               <Styles.Head>
                 <Styles.HeadLeft>
                   Stage <Styles.StepNum>{item.step}</Styles.StepNum> reward
@@ -240,9 +245,16 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
             </Styles.RewardQuest>
             <Styles.RewardBox className={(isCompleted as any)[item.step] ? '' : 'blur'}>
               <Styles.Cap src="/images/marketing/cap.svg"></Styles.Cap>
-              <Styles.ClaimBtn onClick={(e) => handleClaim(item.step, item.pts)}>
-                Claim <Styles.CoinIcon src="/images/marketing/coin.svg" /> {item.pts} PTS
-              </Styles.ClaimBtn>
+
+              {userData[`step${item.step}_is_claimed`] ? (
+                <Styles.ClaimBtn style={{ fontSize: 14, cursor: 'not-allowed' }}>
+                  Reward Already Claimed
+                </Styles.ClaimBtn>
+              ) : (
+                <Styles.ClaimBtn onClick={(e) => handleClaim(item.step, item.pts)}>
+                  Claim <Styles.CoinIcon src="/images/marketing/coin.svg" /> {item.pts} PTS
+                </Styles.ClaimBtn>
+              )}
             </Styles.RewardBox>
           </Styles.RewardList>
         ))}

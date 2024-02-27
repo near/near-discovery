@@ -1,8 +1,4 @@
 import { memo, useMemo } from 'react';
-
-import Loading from '@/components/Icons/Loading';
-
-import useRewardsClaim from '../../hooks/useRewardsClaim';
 import InviteCode from './InviteCode';
 import {
   JoinedAccount,
@@ -17,8 +13,7 @@ import {
   StyledFriendsNum,
 } from './styles';
 
-const InviteCodePanel = ({ onInviteCodeClick, total, totalRewards, list }: any) => {
-  const { loading, handleClaim } = useRewardsClaim();
+const InviteCodePanel = ({ onInviteCodeClick, total, list }: any) => {
   const activeList = useMemo(() => list.filter((item: any) => item.status === 'Active'), [list]);
   const pendingList = useMemo(() => list.filter((item: any) => item.status === 'Pending'), [list]);
   return (
