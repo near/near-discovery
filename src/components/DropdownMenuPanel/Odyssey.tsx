@@ -1,6 +1,7 @@
 import { memo } from "react"
 import useCompassList from '@/views/Home/components/Compass/hooks/useCompassList';
 import styled from "styled-components";
+import { useRouter } from "next/router";
 
 interface FlexProps {
   flexDirection?: 'row' | 'column';
@@ -55,7 +56,25 @@ const StyledFlex = styled.div<FlexProps>`
   gap: ${(props) => props.gap || '0px'};
 `;
 const Odyssey = function ({ setShow }: any) {
-  // const { loading, compassList } = useCompassList()
+  const { loading, compassList } = useCompassList()
+  const router = useRouter()
+
+  const handleClick = async function () {
+    const compass = compassList[0]
+    let status = compass.status
+    if (status === 'un_start') {
+      const response = await get('/api/compass?id=' + compass.id)
+      status = response.data.status
+    }
+    if (status === 'un_start') {
+      toast.fail({
+        title: 'Odyssey is upcoming...'
+      })
+    } else {
+      router.push('/odyssey/home?id=' + compass.id)
+      setShow(false)
+    }
+  }
   return (
     <StyledOdyssey>
       <StyledFlex alignItems="flex-start" gap="86px" style={{ width: '100%' }}>
@@ -64,7 +83,7 @@ const Odyssey = function ({ setShow }: any) {
           <StyledFont color="#979ABE" fontSize="14px">Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.</StyledFont>
         </StyledFlex>
         <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }}>
-          <StyledContainer style={{ width: 330, height: 120, overflow: 'hidden', borderRadius: 12, border: '2px solid #373A53' }}>
+          <StyledContainer style={{ width: 330, height: 120, overflow: 'hidden', borderRadius: 12, border: '2px solid #373A53', cursor: 'pointer' }} onClick={handleClick}>
             <StyledImage src="/images/home/odyssey-1.png" />
           </StyledContainer>
           <StyledFont color="#FFF" fontSize="16px" fontWeight="700">Unveiling Uncharted Realms of L2s</StyledFont>
