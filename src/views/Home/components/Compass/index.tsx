@@ -39,7 +39,7 @@ const Card = function ({ compass }: any) {
         title: 'Odyssey is upcoming...'
       })
     } else {
-      router.push('/compass/home?id=' + compass.id)
+      router.push('/odyssey/home?id=' + compass.id)
     }
   }
   return (
@@ -79,7 +79,7 @@ const Compass = () => {
           <CompassIcon />
         </StyledCompassIcon>
         <StyledWinPtsIcon>
-          <WinPtsIcon num="300,000" />
+          <WinPtsIcon num="10,000" />
         </StyledWinPtsIcon>
         <StyledInner>
           <StyledTitle>Odyssey</StyledTitle>
