@@ -16,6 +16,9 @@ const FoundersPage: NextPageWithLayout = () => {
       }}
       componentProps={{
         zendeskActivate,
+        docs: {
+          tokenLaunchChecklist: '/files/token-launch-checklist.pdf',
+        },
       }}
     />
   );

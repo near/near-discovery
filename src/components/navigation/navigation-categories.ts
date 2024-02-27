@@ -129,7 +129,7 @@ export const navigationCategories = [
           },
           {
             title: 'News',
-            url: '/nearweekapp.near/widget/nearweek-news',
+            url: '/nearweekapp.near/widget/nearweek.com',
             icon: 'ph-newspaper ph-bold',
           },
           {
