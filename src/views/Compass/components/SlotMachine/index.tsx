@@ -359,7 +359,7 @@ function SlotMachine({
 
             setPrizeShow(true)
             setNewunclaimedReward(unclaimedRewardRef.current)
-        }, 11000)
+        }, 12000)
 
 
         handleSpin()

@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 import LineImg from './img/line.svg'
 import g2Img from '../../img/g1.svg'
-import compassImg from '../../img/compass.svg'
-import winImg from '../../img/win.svg'
+import compassImg from './img/odyssey.svg'
+import winImg from './img/win.svg'
 
 const ProjectLine = styled.div`
     display: flex;
@@ -57,14 +57,14 @@ const ComingSoon = styled.div`
 
 const CompassIcon = styled.img`
     position: absolute;
-    right: 25px;
+    right: 30px;
     top: -60px;
 `
 
 const WinIcon = styled.img`
     position: absolute;
-    right: -55px;
-    top: -20px;
+    right: -30px;
+    top: 15px;
 `
 
 export default function Panel() {
