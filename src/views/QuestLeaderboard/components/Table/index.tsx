@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import Loading from '@/components/Icons/Loading';
-import { ellipsAccount } from '@/utils/account';
+import { ellipsLongAccount } from '@/utils/account';
 import { balanceShortFormated } from '@/utils/balance';
 
 import { COLUMNS, RANK_COLORS } from './config';
@@ -58,7 +58,7 @@ export const User = ({ user, avatar }: { user: string; avatar: string }) => {
   return (
     <>
       <StyledUserAvatar src={avatar} />
-      <span>{user}</span>
+      <span>{ellipsLongAccount(user)}</span>
     </>
   );
 };
