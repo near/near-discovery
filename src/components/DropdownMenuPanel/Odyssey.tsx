@@ -86,7 +86,7 @@ const Odyssey = function ({ setShow }: any) {
           <StyledFont color="#979ABE" fontSize="14px">Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.</StyledFont>
         </StyledFlex>
         <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }}>
-          <StyledContainer style={{ width: 330, height: 120, overflow: 'hidden', borderRadius: 12, border: '2px solid #373A53', cursor: 'pointer' }} onClick={handleClick}>
+          <StyledContainer style={{ width: 330, height: 120, cursor: 'pointer' }} onClick={handleClick}>
             <StyledImage src="/images/home/odyssey-1.png" />
           </StyledContainer>
           <StyledFont color="#FFF" fontSize="16px" fontWeight="700">Unveiling Uncharted Realms of L2s</StyledFont>
