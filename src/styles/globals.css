@@ -224,3 +224,11 @@ input {
 button {
   border: none;
 }
+
+svg {
+  * {
+    &:focus {
+      outline: none;
+    }
+  }
+}

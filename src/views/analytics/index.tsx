@@ -226,6 +226,7 @@ const Dashboard: FC<IProps> = ({}) => {
     const _areaData = user_area.map((item: any) => ({
       name: item.country_name,
       total: item.total,
+      percent: item.percent,
     }));
     setAreaData(_areaData);
 
