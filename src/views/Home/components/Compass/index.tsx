@@ -79,7 +79,7 @@ const Compass = () => {
           <CompassIcon />
         </StyledCompassIcon>
         <StyledWinPtsIcon>
-          <WinPtsIcon num="300,000" />
+          <WinPtsIcon num="10,000" />
         </StyledWinPtsIcon>
         <StyledInner>
           <StyledTitle>Odyssey</StyledTitle>
