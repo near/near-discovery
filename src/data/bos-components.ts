@@ -2,6 +2,7 @@ import type { NetworkId } from '@/utils/types';
 
 type NetworkComponents = {
   applicationsPage: string;
+  blog: string;
   bosDirectory: string;
   componentSummary: string;
   componentsPage: string;
@@ -14,6 +15,7 @@ type NetworkComponents = {
   };
   image: string;
   nearOrg: {
+    cookiePrompt: string;
     cookiePolicy: string;
     ecosystemPage: string;
     ecosystemCommunityPage: string;
@@ -68,6 +70,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
   return {
     testnet: {
       applicationsPage: `${testnetTLA}/widget/AppLibrary.IndexPage`,
+      blog: `${testnetTLA}/widget/Blog/Feed`,
       bosDirectory: 'one.testnet/widget/BOSDirectory',
       componentSummary: `${testnetTLA}/widget/ComponentSummary`,
       componentsPage: `${testnetTLA}/widget/ComponentsPage`,
@@ -80,6 +83,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       },
       image: 'eugenethedream/widget/Image',
       nearOrg: {
+        cookiePrompt: `${testnetTLA}/widget/NearOrg.CookiePrompt`,
         cookiePolicy: `${testnetTLA}/widget/NearOrg.CookiePolicy`,
         ecosystemPage: `${testnetTLA}/widget/NearOrg.EcosystemPage`,
         ecosystemCommunityPage: `${testnetTLA}/widget/NearOrg.Ecosystem.CommunityPage`,
@@ -127,6 +131,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
 
     mainnet: {
       applicationsPage: 'nearcatalog.near/widget/Index',
+      blog: 'near/widget/Blog.Feed',
       bosDirectory: 'onboarder.near/widget/BOSDirectory',
       componentSummary: 'near/widget/ComponentSummary',
       componentsPage: 'near/widget/ComponentsPage',
@@ -139,6 +144,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       },
       image: 'mob.near/widget/Image',
       nearOrg: {
+        cookiePrompt: 'near/widget/NearOrg.CookiePrompt',
         cookiePolicy: 'near/widget/NearOrg.CookiePolicy',
         ecosystemPage: 'near/widget/NearOrg.EcosystemPage',
         ecosystemCommunityPage: 'near/widget/NearOrg.Ecosystem.CommunityPage',

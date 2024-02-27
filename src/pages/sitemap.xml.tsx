@@ -552,7 +552,7 @@ function generateSiteMap() {
         <lastmod>2024-02-13</lastmod>
     </url>
     <url>
-        <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/nearweekapp.near/widget/nearweek-news</loc>
+        <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/nearweekapp.near/widget/nearweek.com</loc>
         <lastmod>2024-02-13</lastmod>
     </url>
     <url>
