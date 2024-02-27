@@ -110,7 +110,7 @@ export default function PrizeModal({
             <Iocn className='fail' src={smImg.src} />
             <Title>Oops!</Title>
             <Content className='fail'>{"You haven't won this round."}</Content>
-            <Btn onClick={ onClose }>Kepp trying</Btn>
+            <Btn onClick={ onClose }>Keep trying</Btn>
         </>
         }
 
