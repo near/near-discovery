@@ -8,6 +8,7 @@ import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKe
 import Loading from '@/components/Icons/Loading';
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
+import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 
 import { Modal } from './components';
@@ -20,7 +21,6 @@ interface IProps {
 }
 
 const LandingMobile: FC<IProps> = ({ kolName, platform }) => {
-  console.log('kolName:', kolName);
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
@@ -54,9 +54,9 @@ const LandingMobile: FC<IProps> = ({ kolName, platform }) => {
     wallet && (await disconnect(wallet));
     logout();
   };
-  const goHome = () => {
-    router.push('/');
-  };
+  // const goHome = () => {
+  //   router.push('/');
+  // };
 
   useEffect(() => {
     if (wallet) {
@@ -104,6 +104,7 @@ const LandingMobile: FC<IProps> = ({ kolName, platform }) => {
   // }
   async function fetchAccessToken() {
     await getAccessToken(address);
+    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
@@ -252,7 +253,7 @@ const LandingMobile: FC<IProps> = ({ kolName, platform }) => {
         </Styles.Tips>
       </Styles.Box>
       <Styles.Foot>
-        <Styles.FootTxt onClick={goHome}>
+        <Styles.FootTxt onClick={goHomeWithFresh}>
           Ready to Ignite the Spark?
           <Styles.Star src="/images/marketing/star.png"></Styles.Star>
         </Styles.FootTxt>

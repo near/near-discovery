@@ -8,6 +8,7 @@ import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKe
 import { QUEST_PATH } from '@/config/quest';
 import useCopy from '@/hooks/useCopy';
 import { ellipsAccount } from '@/utils/account';
+import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
@@ -31,8 +32,6 @@ const questImgs = {
 const questImgs2 = ['/images/marketing/1.png', '/images/marketing/2.png', '/images/marketing/3.png'];
 
 const LandingPC: FC<IProps> = ({ kolName, platform }) => {
-  console.log('kolName:', kolName);
-
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const router = useRouter();
@@ -69,6 +68,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   const [kolAvatar, setKolAvatar] = useState('');
   const [kolAddr, setKolAddr] = useState('');
+  const redirectUri = `${window.location.origin}${window.location.pathname}`;
   const {
     loading: binding,
     type,
@@ -78,7 +78,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
       // onSuccess(1);
       setUpdater(Date.now());
     },
-    redirect_uri: `${window.location.origin}${window.location.pathname}`,
+    redirect_uri: redirectUri,
   });
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
@@ -94,9 +94,9 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     wallet && (await disconnect(wallet));
     logout();
   };
-  const goHome = () => {
-    router.push('/');
-  };
+  // const goHome = () => {
+  //   router.push('/');
+  // };
 
   useEffect(() => {
     if (wallet) {
@@ -154,6 +154,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   async function fetchAccessToken() {
     await getAccessToken(address);
+    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
@@ -335,14 +336,14 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
       sessionStorage.setItem('_clicked_twitter_' + action.id, '1');
     }
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
-      const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${window.location.href}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
+      const path = `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=${config.twitter_client_id}&redirect_uri=${redirectUri}&scope=tweet.read%20users.read%20follows.read%20like.read&state=state&code_challenge=challenge&code_challenge_method=plain`;
       sessionStorage.setItem('_auth_type', 'twitter');
       window.open(path, '_blank');
       return;
     }
 
     if (action.category.startsWith('discord') && !userInfo.discord?.is_bind) {
-      const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${window.location.href}&scope=identify`;
+      const path = `https://discord.com/oauth2/authorize?client_id=${config.discord_client_id}&response_type=code&redirect_uri=${redirectUri}&scope=identify`;
       sessionStorage.setItem('_auth_type', 'discord');
       window.open(path, '_blank');
       return;
@@ -483,7 +484,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
         <Styles.FootTxt>Ready to Ignite the Spark?</Styles.FootTxt>
         <Styles.Star src="/images/marketing/star.png"></Styles.Star>
       </Styles.Foot>
-      <Styles.Link onClick={goHome}>For more quests and more rewards, visit DapDap</Styles.Link>
+      <Styles.Link onClick={goHomeWithFresh}>For more quests and more rewards, visit DapDap</Styles.Link>
       <ModalPC type={modalType} open={isShowModal} onClose={() => setIsShowModal(false)} reward={reward}></ModalPC>
     </Styles.Container>
   );

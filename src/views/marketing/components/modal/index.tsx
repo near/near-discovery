@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import type { FC } from 'react';
 import React, { useEffect, useState } from 'react';
 
+import { goHomeWithFresh } from '@/utils/activity-utils';
+
 import * as Styles from './styles';
 
 interface IProps {
@@ -20,9 +22,9 @@ const Modal: FC<IProps> = ({ open, type, onClose, reward }) => {
   const goProfile = () => {
     router.push('/profile?active=pts');
   };
-  const goHome = () => {
-    router.push('/');
-  };
+  // const goHome = () => {
+  //   router.push('/');
+  // };
 
   const mask = <Styles.Mask onClick={onClose}></Styles.Mask>;
   const close = <Styles.Close onClick={onClose} src="/images/marketing/close.svg"></Styles.Close>;
@@ -58,7 +60,7 @@ const Modal: FC<IProps> = ({ open, type, onClose, reward }) => {
           You are not a new user and do not <br /> meet the conditions for participation
         </Styles.FailTxt>
 
-        <Styles.FailFoot onClick={goHome}>
+        <Styles.FailFoot onClick={goHomeWithFresh}>
           More activities are waiting for you… <br />
           Go to DapDap,
         </Styles.FailFoot>

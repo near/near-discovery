@@ -1,5 +1,5 @@
 import { basic as spaceFiBasic, networks as spaceFiNetworks } from '../dapps/space-fi';
-import { basic as velocoreV1Basic, networks as velocoreV1Networks } from '../dapps/velocore-v1';
+import { basic as velocoreV2Basic, networks as velocoreV2Networks } from '../dapps/velocore-v2';
 import { basic as veSyncBasic, networks as veSyncNetworks } from '../dapps/ve-sync';
 import { basic as syncSwapBasic, networks as syncSwapNetworks } from '../dapps/sync-swap';
 import { basic as zkSwapBasic, networks as zkSwapNetworks } from '../dapps/zk-swap';
@@ -21,15 +21,15 @@ export default {
       ...spaceFiBasic,
       ...spaceFiNetworks[CHAIN_ID],
     },
-    'Velocore V1': {
-      ...velocoreV1Basic,
-      ...velocoreV1Networks[CHAIN_ID],
+    'Velocore V2': {
+      ...velocoreV2Basic,
+      ...velocoreV2Networks[CHAIN_ID],
     },
     veSync: {
       ...veSyncBasic,
       ...veSyncNetworks[CHAIN_ID],
     },
-    Syncswap: {
+    SyncSwap: {
       ...syncSwapBasic,
       ...syncSwapNetworks[CHAIN_ID],
     },

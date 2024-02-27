@@ -3,7 +3,7 @@ import { zkSync } from '@/config/tokens/zkSync';
 import { scroll } from '@/config/tokens/scroll';
 
 const basic = {
-  name: 'Syncswap',
+  name: 'SyncSwap',
   logo: '/images/apps/sync-swap.png',
   amountOutFn: 'bluebiu.near/widget/Linea.Swap.SyncSwapAmountOut',
 };

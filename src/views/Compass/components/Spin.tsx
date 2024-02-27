@@ -4,6 +4,9 @@ const SpinWapper = styled.div`
     height: 100%;
     width: 100%;
     position: relative;
+    border: 1px solid #373A53;
+    border-radius: 12px;
+    overflow: hidden;
     font-family: '5squared pixel';
 `
 
@@ -15,6 +18,7 @@ const BgTable = styled.div`
     bottom: 0;
     overflow: hidden;
     background: #000;
+    opacity: .6;
 `
 
 const BgHor = styled.div`

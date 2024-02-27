@@ -1,7 +1,7 @@
 import { deleteCookie, getCookie, setCookie } from 'cookies-next';
 import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
-
+import { report } from '@/utils/burying-point';
 import { checkAddressIsInvited, getAccessToken, insertedAccessKey, getBnsUserName } from '@/apis';
 import { useEthersProviderContext } from '@/data/web3';
 import * as http from '@/utils/http';
@@ -21,11 +21,12 @@ const useAuth = () => {
   };
 
   const login = useCallback(
-    async (cb?: VoidFunction) => {
+    async (cb?: (unchecked?: boolean) => void) => {
       if (!wallet || !wallet.accounts[0].address) {
         setLogging(false);
         return;
       }
+
       const cachedAccount = getCookie('AUTHED_ACCOUNT');
       setCookie('LOGIN_ACCOUNT', wallet.accounts[0].address);
       if (cachedAccount !== wallet.accounts[0].address) {
@@ -40,7 +41,7 @@ const useAuth = () => {
           // }
           if (!checked) {
             deleteCookie('AUTHED_ACCOUNT');
-            router.replace('/invite-code');
+            router.pathname === '/invite-code' ? cb?.(true) : router.replace('/invite-code');
             return;
           }
           await getAccessToken(wallet.accounts[0].address);
@@ -59,6 +60,7 @@ const useAuth = () => {
         setLogging(false);
         cb?.();
       }
+      report({ code: '2001-001', address: wallet.accounts[0].address });
       if (router.pathname === '/login' || router.pathname === '/invite-code') {
         router.replace((router.query?.source as string) || '/');
       }

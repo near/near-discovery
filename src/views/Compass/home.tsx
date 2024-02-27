@@ -27,16 +27,39 @@ import line1Img from './img/Line1.svg'
 import line2Img from './img/Line2.svg'
 import mImg from './img/m.png'
 
-
-
-
 const App = styled.div`
     --main-color: #fff;
     --main-width: 1160px;
     /* background: url(${bgImg.src}) left top no-repeat;
-    background-size: 100% auto; */
+    background-size: 100% auto;  */
     /* background-color: #524f4b; */
     padding-top: 150px;
+    
+`
+
+const BigBg = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1200px;
+    background: rgba(22, 24, 29, 1) url(${bgImg.src}) ;
+        /* linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(22, 24, 29, 0.2)); */
+    background-position: center -180px;
+    background-repeat: no-repeat;
+    background-size: 100% auto; 
+    filter: blur(20px);
+    opacity: 1;
+`
+
+const BigBg2 = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1300px;
+    background: linear-gradient(to bottom, rgba(22, 24, 29, 0) 0%, rgba(22, 24, 29, .8) 50%, rgba(22, 24, 29, 1) 90%);
+    /* background: linear-gradient(to bottom, red, green 20%, blue 70%); */
 `
 
 const MBg = styled.div`
@@ -57,6 +80,7 @@ const Title = styled.div`
     line-height: 90px;
     letter-spacing: 0em;
     text-align: center;
+    position: relative;
 `
 
 const IconsWapper = styled.div`
@@ -64,6 +88,7 @@ const IconsWapper = styled.div`
     height: 42px;
     display: flex;
     align-items: center;
+    position: relative;
     justify-content: space-between;
     margin: 25px auto;
     &->img {
@@ -95,6 +120,7 @@ const SubTitle = styled.div`
     text-align: center;
     width: 960px;
     margin: 30px auto 0;
+    position: relative;
 `
 
 const RecordBox = styled.div`
@@ -182,6 +208,8 @@ function Compass() {
         setTotalSpins,
         setUnclaimedReward,
         getDetail,
+        name,
+        description,
     } = useSummary(compassId)
     const { startSpin, chainList, startCliam, isSpining, isClaiming } = useSpin(compassId, setAvailableSpins, setTotalSpins, setUnclaimedReward)
     const { questList, getQuestGroupList } = useQuestList(compassId)
@@ -211,8 +239,10 @@ function Compass() {
     const qList = questList.dapp.length ? questList.dapp[chainIndex] : []
 
     return <App>
+        <BigBg />
+        <BigBg2 />
         <MBg />
-        <Title>Unveiling Uncharted Realms of L2s</Title>
+        <Title>{ name }</Title>
         <IconsWapper>
             <img src={g1.src} />
             <img src={g2.src} />
@@ -220,7 +250,7 @@ function Compass() {
             <img src={g4.src} />
             <img src={g5.src} />
         </IconsWapper>
-        <SubTitle>Explore the untapped potential of promising L2 chains like Linea, Base, Manta, Scroll, and ZkSync as we unravel the mysteries within.</SubTitle>
+        <SubTitle>{ description }</SubTitle>
         <RecordBox>
             <RecordLine1>
                 <img src={line1Img.src} />
