@@ -9,20 +9,22 @@ import Complete from '../Complate';
 import maskImg from '../../img/mask.svg';
 
 const PanelWapper = styled.div<{ color: string }>`
-  width: 25%;
-  border-radius: 20px;
-  padding: 20px 20px 10px;
-  border: 1px solid #373a53;
-  text-align: center;
-  padding: 38px 0 24px;
-  cursor: pointer;
-  background: rgba(33, 35, 42, 0.9) url(${maskImg.src}) right bottom no-repeat;
-  &:hover {
-    background:
-      radial-gradient(at 50% -30%, rgba(33, 35, 42, 0), ${({ color }) => color} 10%, rgba(33, 35, 42, 0) 100%),
-      rgba(33, 35, 42, 0.9) url(${maskImg.src}) right bottom no-repeat;
-  }
-`;
+    width: 25%;
+    border-radius: 20px;
+    padding: 20px 20px 10px;
+    border: 1px solid #373A53;
+    text-align: center;
+    padding: 38px 0 24px;
+    cursor: pointer;
+    backdrop-filter: blur(20px);
+    background: rgba(33, 35, 42, 0.3) url(${maskImg.src}) right bottom no-repeat;
+    &:hover {
+        background: 
+        radial-gradient(at 50% -30%, rgba(33, 35, 42, 0), ${({ color }) => color} 10%, rgba(33, 35, 42, 0) 100%),
+        rgba(33, 35, 42, 0.9) url(${maskImg.src}) right bottom no-repeat;
+    }
+`
+
 
 const Title = styled.div`
   font-size: 26px;

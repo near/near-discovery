@@ -194,6 +194,8 @@ const ChainImgIcon = styled.img`
 
 const chains = [g1.src, g2.src, g3.src, g4.src, g5.src]
 
+const questOrder = ['BRIDGE', 'SWAP', 'LEND', 'LIQUIDITY']
+
 function Compass() {
     const searchParams = useSearchParams()
     const compassId: string = searchParams.get('id') as string
@@ -236,7 +238,9 @@ function Compass() {
         })
     }, [unclaimedReward, isClaiming])
 
-    const qList = questList.dapp.length ? questList.dapp[chainIndex] : []
+    const qList = questList.dapp.length ? questList.dapp[chainIndex].sort((a: any, b: any) => {
+        return questOrder.indexOf(a.name) - questOrder.indexOf(b.name)
+    }) : []
 
     return <App>
         <BigBg />
