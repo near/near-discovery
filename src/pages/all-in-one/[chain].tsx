@@ -11,7 +11,7 @@ import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { usePriceStore } from '@/stores/price';
-import { useAllInOneStore } from '@/stores/all-in-one';
+import { useAllInOneTabStore, useAllInOneTabCachedStore } from '@/stores/all-in-one';
 import { multicall } from '@/utils/multicall';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -196,7 +196,9 @@ const AllInOne: NextPageWithLayout = () => {
   const [{ settingChain }, setChain] = useSetChain();
   const { handleReport } = useReport();
   const prices = usePriceStore((store) => store.price);
-  const allInOneStore = useAllInOneStore() as any;
+  const [tab, setTab] = useState('');
+  const sourceTab = useAllInOneTabStore((store: any) => store.tab);
+  const cachedTabsStore: any = useAllInOneTabCachedStore();
   const { addAction } = useAddAction('all-in-one');
   const popupRef = useRef<HTMLDivElement | null>(null);
 
@@ -231,11 +233,20 @@ const AllInOne: NextPageWithLayout = () => {
 
     document.addEventListener('mousedown', handleClickOutside);
     handleReport('all-in-one');
+
+    const cachedTab = cachedTabsStore.chains[currentChain.chainId];
+    if (sourceTab) {
+      setTab(sourceTab);
+    } else if (cachedTab) {
+      setTab(cachedTab);
+    } else {
+      setTab(currentChain.defaultTab);
+    }
+
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
-
   return (
     <Container key={chain}>
       <BreadCrumbs>
@@ -308,16 +319,15 @@ const AllInOne: NextPageWithLayout = () => {
                   addAction,
                   multicall,
                   chainId: currentChain.chainId,
-                  defaultTab: currentChain.defaultTab,
                   menuConfig: currentChain.menuConfig,
                   ...(swapConfig[currentChain?.chainId] || {}),
                   ...(lendingConfig[currentChain?.chainId] || {}),
                   prices,
-                  activeTab: allInOneStore.allInOne.tab,
-                  onReset: () => {
-                    allInOneStore.set({
-                      allInOne: {},
-                    });
+                  tab,
+                  onReset: () => {},
+                  onChangeTab: (tab: string) => {
+                    cachedTabsStore.setCachedTab(tab, currentChain.chainId);
+                    setTab(tab);
                   },
                 }}
               />
