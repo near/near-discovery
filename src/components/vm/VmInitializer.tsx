@@ -87,7 +87,7 @@ export default function VmInitializer() {
               relayerUrl:
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
-                  : 'https://near-relayer-mainnet.api.pagoda.co/relay'
+                  : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }),
             setupKeypom({
               trialAccountSpecs: {
