@@ -8,6 +8,8 @@ export const Mask = styled.div`
   height: 100%;
 
   backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  background: rgba(0, 0, 0, 0.5);
 `;
 export const Wrap = styled(motion.div)`
   position: fixed;

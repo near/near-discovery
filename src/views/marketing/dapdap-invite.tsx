@@ -150,6 +150,7 @@ const LandingMobile: FC<IProps> = ({ platform }) => {
     if (userStatus === 'old') {
       setIsShowModal(true);
       setModalType('fail');
+      setFreshAnimate({});
     }
   }, [userStatus, fresh]);
 
