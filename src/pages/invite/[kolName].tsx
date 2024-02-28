@@ -15,10 +15,7 @@ const LandingPage: NextPageWithLayout = () => {
   const { account } = useAccount();
   const router = useRouter();
 
-  // 是否kol的账号打开此链接
   const [isKol, setIsKol] = useState(false);
-
-  console.log('account: ', account);
 
   const kolName = router.query.kolName;
 
