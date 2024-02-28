@@ -128,6 +128,7 @@ const LandingMobile: FC<IProps> = ({ platform }) => {
   };
 
   const renderIcon = () => {
+    if (!address) return null;
     if (Array.isArray(basicQuests) && basicQuests.length && basicQuests[0].is_claimed) {
       return <Styles.Fresh src="/images/marketing/done.svg" />;
     } else {
