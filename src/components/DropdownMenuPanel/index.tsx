@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import Odyssey from './Odyssey';
 import Explores from './Explores';
 import Menu from './Menu';
 import { container, overlay } from '@/components/animation';
@@ -13,6 +14,7 @@ const DropdownMenuPanel = ({ show, setShow }: any) => {
           <MaskLayer onClick={() => setShow(false)} {...overlay} />
           <MenuContainer {...container}>
             <MenuContent>
+              <Odyssey setShow={setShow} />
               <Explores setShow={setShow} />
               <Menu setShow={setShow} />
             </MenuContent>

@@ -8,8 +8,8 @@ import PrizeModal from './PrizeModal'
 
 import titleImg from './img/title.svg'
 import prizeImg from './img/prize.svg'
-import compassImg from './img/compass.svg'
-import controllerImg from './img/controller.svg'
+import compassImg from '../../img/odyssey.svg'
+import controllerImg from './img/ctr.png'
 import actionBg from './img/action-bg.svg'
 
 import ruleImg from './img/rule.svg'
@@ -20,6 +20,7 @@ import btnBgImg from './img/btn-bg.svg'
 import btnImg from './img/btn.svg'
 import chainIconsImg from './img/chianIcons.svg'
 import bottomChainIconsImg from './img/bottomChainIcons.svg'
+import coverTopImg from './img/cover-top.png'
 
 import yellowLeftImg from './img/yellow-left.svg'
 import yellowMidImg from './img/yellow-mid.svg'
@@ -29,14 +30,13 @@ import coverLeftImg from './img/cover-left.svg'
 import coverMidImg from './img/cover-mid.svg'
 import coverRightImg from './img/cover-right.svg'
 
-
 import { postClaim } from '../../http/index'
-
-
 
 const Wapper = styled.div`
     width: var(--main-width);
     margin: 150px auto 0;
+    position: relative;
+    background: radial-gradient(50% 40% at 50% 35%, #EBF479 0%, rgba(235, 244, 121, 0) 100%);
 `
 
 const Screen = styled.div`
@@ -107,7 +107,7 @@ const Controller = styled.div`
     width: 100px;
     height: 104px;
     background: url(${controllerImg.src}) center 0 no-repeat;
-    background-size: 170% 170%;
+    background-size: auto 100%;
     position: absolute;
     z-index: 3;
     left: 0;
@@ -134,8 +134,7 @@ const ScrollWapper = styled.div`
     width: 777px;
     height: 167px;
     border-radius: 88px;
-    background: linear-gradient(180deg, #0B0D13 0%, #373940 100%),
-linear-gradient(180deg, #17191D 0%, #1C1D1F 100%);
+    background: linear-gradient(180deg, #0B0D13 0%, #373940 100%);
     margin: 38px auto 0 54px;
     position: relative;
 `
@@ -283,6 +282,17 @@ const Btn = styled.div`
     }
 `
 
+const Cover = styled.div`
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 88px;
+    background: url(${coverTopImg.src}) left top no-repeat;
+    background-size: 100% 100%;
+`
+
 interface Props {
     totalSpins: number;
     availableSpins: number;
@@ -340,7 +350,7 @@ function SlotMachine({
         }
 
         playSound('/images/compass/audio/rolling.mp4')
-        
+
         setTimeout(() => {
             if (rewardRef.current === 10000) {
                 playSound('/images/compass/audio/grand-prize.mp3')
@@ -350,7 +360,7 @@ function SlotMachine({
 
             setPrizeShow(true)
             setNewunclaimedReward(unclaimedRewardRef.current)
-        }, 11000)
+        }, 12000)
 
 
         handleSpin()
@@ -400,13 +410,14 @@ function SlotMachine({
                         })
                     }
                 </ControllerBtnBgWapper>
-                <ControllerBtnBgWapper className='cover'>
+                {/* <ControllerBtnBgWapper className='cover'>
                     <ControllerBtnCover className='left' />
                     <ControllerBtnCover className='mid' />
                     <ControllerBtnCover className='mid' />
                     <ControllerBtnCover className='mid' />
                     <ControllerBtnCover className='right' />
-                </ControllerBtnBgWapper>
+                </ControllerBtnBgWapper> */}
+                <Cover />
             </ScrollWapper>
             <ScoreWapper>
                 <Score>
@@ -433,7 +444,7 @@ function SlotMachine({
                 setTimeout(() => {
                     setRulePressed(false)
                 }, 100)
-            }}/>
+            }} />
             <BtnWapper>
                 <BtnBg />
                 <Btn style={{ opacity: availableSpins <= 0 ? '.3' : '1' }} className={isPressed ? 'press' : ''} onClick={handleBtnPress} />
@@ -450,8 +461,11 @@ function SlotMachine({
             }} style={{ opacity: newUnclaimedReward <= 0 ? '.3' : '1' }} />
         </ActionBar>
 
-        <RuleModal show={ruleShow} onClose={() => setRuleShow(false) } />
-        <PrizeModal prize={reward} show={prizeShow} onClose={() => setPrizeShow(false) } />
+        <RuleModal show={ruleShow} onClose={() => setRuleShow(false)} />
+        <PrizeModal prize={reward} show={prizeShow}
+            onClaim={() => {
+                handleClaim
+            }} onClose={() => setPrizeShow(false)} />
     </Wapper>
 }
 

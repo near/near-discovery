@@ -744,7 +744,7 @@ const AllDappsColumn: NextPageWithLayout = () => {
                         open({ dapp: child, from: 'home' });
                       }}
                     >
-                      Dapp
+                      dApp
                       <img src="https://assets.dapdap.net/images/arrow-white.png" alt="" />
                     </div>
                   </div>

@@ -45,18 +45,23 @@ function RuleModal({ show, onClose } : { show: boolean; onClose: () => void }) {
     width={760} 
     renderChild={() => {
         return <>
-            <Title>DapDap Spin To Win Rules</Title>
-            <Context>The DapDap spin to win has a total of six patterns, five of which are the L2 chain icon and the dapdap logo. Each participation will consume one spin.</Context>
-            <Context>When the spin to win rolls out five save icon, it is the grand prize, with a prize of 10,000 PTS.</Context>
+            <Title>Welcome to the DapDap Odyssey!</Title>
+            <Context>Embark on a novel journey with our latest spin-to-win experience, featuring five Layer-2s and the DapDap icon! To participate, you need one spin.</Context>
+            <SubTitle>Prizes:</SubTitle>
+            <Context>Grand Prize: Align five matching icons to win an impressive 10,000 DapDap PTS!</Context>
             <Img src={r1Img.src} style={{ width: 300}}/>
-            <Context>4 of the same pattern, reward 500PTS.</Context>
+            <Context>Four-of-a-Kind: Secure 500 PTS with four matching patterns</Context>
             <Img src={r2Img.src} style={{ width: 167}}/>
-            <Context>3 of the same pattern, reward 100PTS.</Context>
+            <Context>Three-of-a-Kind: Earn 100 PTS when three icons align</Context>
             <Img src={r3Img.src} style={{ width: 157}}/>
-            <Context>The special prize is 5 chain icons (excluding DapDap logo) ,awarding 1000PTS</Context>
+            <Context>Special Prize: Collect 1,000 PTS for landing five chain icons (DapDap logo excluded)</Context>
             <Img src={r4Img.src} style={{ width: 300}}/>
-            <SubTitle>How to get more spins?</SubTitle>
-            <Context>{"You can get a chance to win a prize by browsing the DapDap function pages, doing simple on-chain operations to experience DapDap's smooth experience, or sharing by social accounts."}</Context>
+            <SubTitle>Earning More Spins:</SubTitle>
+            <Context>Unlock additional spins and enhance your winning chances by:</Context>
+            <Context/>
+            <Context>{"Navigating through DapDap's partner quests"}<br/>
+            Performing simple on-chain actions to enjoy the seamless DapDap experience<br/>Sharing your Odyssey on social media!</Context>
+            
         </>
     }} />
 }

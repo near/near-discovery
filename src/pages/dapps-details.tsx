@@ -661,7 +661,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
                 }}
                 data-bp="100111-001"
               >
-                <div>Enter Dapp</div>
+                <div>Enter dApp</div>
                 <img src={arrowBlock} alt="" />
               </div>
             </div>

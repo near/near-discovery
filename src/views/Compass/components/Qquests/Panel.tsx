@@ -14,6 +14,7 @@ const PanelWapper = styled.div`
     width: 380px;
     height: 250px;
     border-radius: 20px;
+    border: 1px solid #373A53;
     padding: 20px;
     background: rgba(33, 35, 42, 0.9) url(${maskImg.src}) right bottom no-repeat;
     position: relative;

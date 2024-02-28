@@ -51,8 +51,12 @@ const get = async (url: string, query?: Record<string, any>) => {
   const res = await fetch(`${getUrl(url)}?${queryStr}`, options);
   return res.json() as any;
 };
-// 活动专用
-const getWithoutActive = async (url: string, activity: 'coin68' | 'bitget' | 'kol', query?: Record<string, any>) => {
+
+const getWithoutActive = async (
+  url: string,
+  activity: 'coin68' | 'bitget' | 'kol' | 'dapdapinvite',
+  query?: Record<string, any>,
+) => {
   const tokens = JSON.parse(window.localStorage.getItem(AUTH_TOKENS) || '{}');
   const options = {
     method: 'GET',

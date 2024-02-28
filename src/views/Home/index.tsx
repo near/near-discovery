@@ -17,7 +17,7 @@ const Home = () => {
     <StyledContainer>
       <Banner />
       <Actions />
-      {/* <Compass /> */}
+      <Compass />
       <DiscoveryDapps />
       <TrendingEthereum chains={chains} />
       <QuickOnboarding />
