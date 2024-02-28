@@ -19,16 +19,7 @@ const Dashboard: FC<IProps> = ({}) => {
   const { chains } = useTokensAndChains();
 
   const [chainsList, setChainsList] = useState<any>([]);
-  useEffect(() => {
-    const array = Object.values(chains).map((item: any) => ({ ...item, label: item.chainName, value: item.chainId }));
 
-    setChainsList([
-      {
-        groupLabel: '',
-        groupItems: array,
-      },
-    ]);
-  }, [chains]);
   const [summaryData, setSummaryData] = useState([
     {
       type: 'time',
@@ -90,16 +81,32 @@ const Dashboard: FC<IProps> = ({}) => {
     Lending: '/images/dashboard/dapp-lending.svg',
     Liquidity: '/images/dashboard/dapp-liquidity.svg',
   };
+  useEffect(() => {
+    const array = Object.values(chains).map((item: any) => ({ ...item, label: item.chainName, value: item.chainId }));
+
+    setChainsList([
+      {
+        groupLabel: '',
+        groupItems: array,
+      },
+    ]);
+
+    setCurrentChainId(chainsList[0]?.groupItems[0]?.chainId);
+  }, [chains]);
 
   useEffect(() => {
     setLoading(true);
     fetchSummaryData();
     fetchQuestData();
-    fetchChainsData();
+    if (currentChainId) {
+      fetchChainsData();
+    }
   }, [fresh]);
 
   useEffect(() => {
-    fetchChainsData();
+    if (currentChainId) {
+      fetchChainsData();
+    }
   }, [currentChainId]);
 
   const [formatedDate, setFormatedDate] = useState(formatDate());
