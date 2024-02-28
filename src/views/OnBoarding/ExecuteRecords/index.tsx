@@ -704,7 +704,7 @@ const ExecuteRecords = ({ chain }: any) => {
                   );
                 })}
               </div>
-              <div className="list-title">Dapp</div>
+              <div className="list-title">dApp</div>
               <div className={`select1 `}>
                 {dapps?.map((item: any) => {
                   return (

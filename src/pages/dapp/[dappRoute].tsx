@@ -148,7 +148,7 @@ export const DappPage: NextPageWithLayout = () => {
       <Breadcrumb
         navs={[
           { name: 'Home', path: '/' },
-          { name: 'Dapps', path: '/alldapps' },
+          { name: 'dApps', path: '/alldapps' },
           { name: dapp.name, path: '' },
         ]}
       />

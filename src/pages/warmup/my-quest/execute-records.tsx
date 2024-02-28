@@ -781,7 +781,7 @@ const ExecuteRecords: NextPageWithLayout = () => {
                   );
                 })}
               </div>
-              <div className="list-title">Dapp</div>
+              <div className="list-title">dApp</div>
               <div className={`select1 `}>
                 {select_template_list.map((item) => {
                   return (

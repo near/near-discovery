@@ -781,7 +781,7 @@ const ChainsDetailsColumn: NextPageWithLayout = () => {
                         open({ dapp, from: 'alldapps' });
                       }}
                     >
-                      Dapp
+                      dApp
                     </div>
                   </div>
                 </div>
