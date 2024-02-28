@@ -51,9 +51,9 @@ function RuleModal({ show, onClose } : { show: boolean; onClose: () => void }) {
             <Context>Grand Prize: Align five matching icons to win an impressive 10,000 DapDap PTS!</Context>
             <Img src={r1Img.src} style={{ width: 300}}/>
             <Context>Three-of-a-Kind: Earn 100 PTS when three icons align</Context>
-            <Img src={r2Img.src} style={{ width: 167}}/>
-            <Context>Four-of-a-Kind: Secure 500 PTS with four matching patterns</Context>
             <Img src={r3Img.src} style={{ width: 157}}/>
+            <Context>Four-of-a-Kind: Secure 500 PTS with four matching patterns</Context>
+            <Img src={r2Img.src} style={{ width: 167}}/>
             <Context>Special Prize: Collect 1,000 PTS for landing five chain icons (DapDap logo excluded)</Context>
             <Img src={r4Img.src} style={{ width: 300}}/>
             <SubTitle>Earning More Spins:</SubTitle>
