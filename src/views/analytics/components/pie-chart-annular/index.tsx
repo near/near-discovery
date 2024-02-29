@@ -66,12 +66,7 @@ const App: FC<IProps> = ({ data }) => {
   );
 
   return (
-    <PieChart
-      width={400}
-      height={330}
-
-      //  onMouseEnter={this.onPieEnter}
-    >
+    <PieChart width={400} height={330}>
       <Pie
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
@@ -84,8 +79,6 @@ const App: FC<IProps> = ({ data }) => {
         fill="#8884d8"
         paddingAngle={2}
         dataKey="total"
-
-        // label
       >
         {data.map((entry: any, index: number) => (
           <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -103,9 +96,6 @@ const App: FC<IProps> = ({ data }) => {
           border: '1px solid #373A53',
           fontSize: '14px',
         }}
-        // labelFormatter={(name: string, props: any) => {
-        //   return `${props[0]?.payload?.date}`;
-        // }}
         labelStyle={{
           color: '#979ABE',
         }}
