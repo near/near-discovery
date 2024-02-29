@@ -1,24 +1,26 @@
-import { memo, useState, useEffect, useMemo } from 'react';
-import Big from 'big.js';
-import networks from '@/config/lending/networks';
 import { useSetChain } from '@web3-onboard/react';
-import useTokenBalance from '@/hooks/useCurrencyBalance';
-import useAccount from '@/hooks/useAccount';
 import { useDebounceFn } from 'ahooks';
+import Big from 'big.js';
+import { memo, useEffect, useMemo, useState } from 'react';
+
+import networks from '@/config/lending/networks';
+import useAccount from '@/hooks/useAccount';
+import useTokenBalance from '@/hooks/useCurrencyBalance';
 import { formateValueWithThousandSeparatorAndFont } from '@/utils/formate';
+
 import SelectDapps from './SelectDapps';
-import { VmComponent } from './VmComponent';
 import {
+  StyledButton,
+  StyledButtonWrapper,
   StyledContent,
-  StyledPanel,
+  StyledInput,
+  StyledInputWrapper,
   StyledItem,
   StyledLabel,
+  StyledPanel,
   StyledValue,
-  StyledInputWrapper,
-  StyledInput,
-  StyledButtonWrapper,
-  StyledButton,
 } from './styles';
+import { VmComponent } from './VmComponent';
 
 const LendingPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
   const network = networks[chainId];
@@ -78,7 +80,7 @@ const LendingPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
               value={amount}
               onChange={(ev: any) => {
                 if (isNaN(Number(ev.target.value))) return;
-                setAmount(ev.target.value);
+                setAmount(ev.target.value.replace(/\s+/g, ''));
               }}
             />
             <StyledValue>{currentMarekt.underlyingToken.symbol}</StyledValue>
