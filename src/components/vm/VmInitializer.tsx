@@ -88,6 +88,7 @@ export default function VmInitializer() {
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
+              walletUrl: 'http://localhost:3000',
             }),
             setupKeypom({
               trialAccountSpecs: {
@@ -191,6 +192,18 @@ export default function VmInitializer() {
     walletModal?.show();
     return false;
   }, [saveCurrentUrl, walletModal]);
+
+  useEffect(() => {
+    window.addEventListener(
+      'message',
+      (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+        if (e.data.showWalletSelector) {
+          requestSignInWithWallet();
+        }
+      },
+      false,
+    );
+  }, [requestSignInWithWallet]);
 
   const logOut = useCallback(async () => {
     if (!near) {
