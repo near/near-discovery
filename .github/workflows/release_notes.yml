@@ -20,5 +20,5 @@ jobs:
         generateReleaseNotes: true
         tag: ${{ steps.date.outputs.tag }}
         makeLatest: true
-        allowUpdates: true
+        allowUpdates: false
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
