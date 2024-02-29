@@ -1,3 +1,7 @@
+import { useSetChain } from '@web3-onboard/react';
+import { useDebounceFn } from 'ahooks';
+import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import chains from '@/config/chains';
 import multicall from '@/config/contract/multicall';
 import networks from '@/config/liquidity/networks';
@@ -6,11 +10,8 @@ import useTokenBalance from '@/hooks/useCurrencyBalance';
 import useToast from '@/hooks/useToast';
 import { usePriceStore } from '@/stores/price';
 import { formateValueWithThousandSeparatorAndFont } from '@/utils/formate';
-import { useSetChain } from '@web3-onboard/react';
-import { useDebounceFn } from 'ahooks';
-import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
 import SelectDapps from './SelectDapps';
-import { VmComponent } from './VmComponent';
 import {
   StyledButton,
   StyledContent,
@@ -19,10 +20,11 @@ import {
   StyledItem,
   StyledLabel,
   StyledPanel,
-  StyledValue
+  StyledValue,
 } from './styles';
+import { VmComponent } from './VmComponent';
 
-const proxyAddress = "0xFc13Ebe7FEB9595D70195E9168aA7F3acE153621"
+const proxyAddress = '0xFc13Ebe7FEB9595D70195E9168aA7F3acE153621';
 const LiquidityPanel = ({ chainId, onLoad }: any) => {
   const toast = useToast();
   const { addAction } = useAddAction('one-click-execution');
@@ -36,14 +38,14 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
   const [allData, setAllData] = useState<any>();
   const [loading, setLoading] = useState(true);
 
-  const onTokenChangeRef = useRef<any>()
+  const onTokenChangeRef = useRef<any>();
   const prices = usePriceStore((store) => store.price);
   const { currentPair, token0, token1, addresses, hypeAddress } = useMemo<any>(() => {
     const _currentPair = currentDapp.pairs.find((pair: any) => pair.id === currentDapp.defaultPair);
 
-    const _addresses = currentDapp.addresses
-    const _hypeAddress = _addresses[_currentPair.id]
-    const _data = allData ? allData[_hypeAddress] : {}
+    const _addresses = currentDapp.addresses;
+    const _hypeAddress = _addresses[_currentPair.id];
+    const _data = allData ? allData[_hypeAddress] : {};
     const _token0 = {
       address: currentDapp.addresses[_currentPair.token0],
       decimals: _data.decimals0,
@@ -64,7 +66,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
       token0: _token0,
       token1: _token1,
       addresses: _addresses,
-      hypeAddress: _hypeAddress
+      hypeAddress: _hypeAddress,
     };
   }, [currentDapp, allData]);
 
@@ -86,17 +88,15 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
     },
   );
   const handleTokenChange = (value: any, symbol: any) => {
-    onTokenChangeRef.current && onTokenChangeRef.current(value, symbol)
-  }
+    onTokenChangeRef.current && onTokenChangeRef.current(value, symbol);
+  };
   const fetchAllData = useCallback(async () => {
     try {
       const response = await fetch(currentDapp.ALL_DATA_URL);
       const result = await response.json();
       setAllData(result);
-    } catch (err) { }
+    } catch (err) {}
   }, [currentDapp]);
-
-
 
   useEffect(() => {
     if (amount0) {
@@ -135,7 +135,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
                 value={amount0}
                 onChange={(ev: any) => {
                   if (isNaN(Number(ev.target.value))) return;
-                  handleTokenChange(ev.target.value, token0.symbol)
+                  handleTokenChange(ev.target.value.replace(/\s+/g, ''), token0.symbol);
                 }}
               />
               <StyledValue>{currentPair.token0}</StyledValue>
@@ -145,7 +145,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
                 value={amount1}
                 onChange={(ev: any) => {
                   if (isNaN(Number(ev.target.value))) return;
-                  handleTokenChange(ev.target.value, token1.symbol)
+                  handleTokenChange(ev.target.value.replace(/\s+/g, ''), token1.symbol);
                 }}
               />
               <StyledValue>{currentPair.token1}</StyledValue>
@@ -160,7 +160,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
               onClick={() => {
                 if (isNaN(Number(balance0)) || !balance0) return;
                 setAmount0(balance0);
-                handleTokenChange(balance0, token0.symbol)
+                handleTokenChange(balance0, token0.symbol);
               }}
             >
               {balance0 ? formateValueWithThousandSeparatorAndFont(balance0, 4, true) : '-'}
@@ -171,7 +171,7 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
               onClick={() => {
                 if (isNaN(Number(balance1)) || !balance1) return;
                 setAmount1(balance1);
-                handleTokenChange(balance1, token1.symbol)
+                handleTokenChange(balance1, token1.symbol);
               }}
             >
               {balance1 ? formateValueWithThousandSeparatorAndFont(balance1, 4, true) : '-'}
@@ -216,36 +216,35 @@ const LiquidityPanel = ({ chainId, onLoad }: any) => {
             'Switch Network'
           )}
         </StyledButton>
-      ) : allData && (
-        <VmComponent
-          src="bluebiu.near/widget/Liquidity.Gamma.DialogButton"
-          props={{
-            token0,
-            token1,
-            amount0,
-            amount1,
-            balance0,
-            balance1,
-            addresses,
-            hypeAddress,
-            currentDapp,
-            chainId,
-            setAmount0,
-            setAmount1,
-            currentPair,
-            proxyAddress,
-            onSuccess: () => {
-              setUpdater(Date.now());
-            },
-            onLoad({
-              onTokenChange
-            }: any) {
-              onTokenChangeRef.current = onTokenChange
-            }
-          }}
-        />
+      ) : (
+        allData && (
+          <VmComponent
+            src="bluebiu.near/widget/Liquidity.Gamma.DialogButton"
+            props={{
+              token0,
+              token1,
+              amount0,
+              amount1,
+              balance0,
+              balance1,
+              addresses,
+              hypeAddress,
+              currentDapp,
+              chainId,
+              setAmount0,
+              setAmount1,
+              currentPair,
+              proxyAddress,
+              onSuccess: () => {
+                setUpdater(Date.now());
+              },
+              onLoad({ onTokenChange }: any) {
+                onTokenChangeRef.current = onTokenChange;
+              },
+            }}
+          />
+        )
       )}
-
     </StyledContent>
   );
 };

@@ -1,27 +1,29 @@
-import { memo, useEffect, useMemo, useState } from 'react';
-import Big from 'big.js';
 import { useSetChain } from '@web3-onboard/react';
 import { useDebounceFn } from 'ahooks';
-import networks from '@/config/swap/networks';
-import useTokenBalance from '@/hooks/useCurrencyBalance';
-import useAccount from '@/hooks/useAccount';
-import { formateValueWithThousandSeparatorAndFont } from '@/utils/formate';
-import { multicall } from '@/utils/multicall';
+import Big from 'big.js';
+import { memo, useEffect, useMemo, useState } from 'react';
+
 import multicallConfig from '@/config/contract/multicall';
 import weth from '@/config/contract/weth';
+import networks from '@/config/swap/networks';
+import useAccount from '@/hooks/useAccount';
+import useTokenBalance from '@/hooks/useCurrencyBalance';
 import { usePriceStore } from '@/stores/price';
+import { formateValueWithThousandSeparatorAndFont } from '@/utils/formate';
+import { multicall } from '@/utils/multicall';
+
 import SelectDapps from './SelectDapps';
-import { VmComponent } from './VmComponent';
 import {
+  StyledButtonWrapper,
   StyledContent,
-  StyledPanel,
+  StyledInput,
+  StyledInputWrapper,
   StyledItem,
   StyledLabel,
+  StyledPanel,
   StyledValue,
-  StyledInputWrapper,
-  StyledInput,
-  StyledButtonWrapper,
 } from './styles';
+import { VmComponent } from './VmComponent';
 
 const SwapPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
   const network = networks[chainId];
@@ -91,7 +93,7 @@ const SwapPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
               value={amount}
               onChange={(ev: any) => {
                 if (isNaN(Number(ev.target.value))) return;
-                setAmount(ev.target.value);
+                setAmount(ev.target.value.replace(/\s+/g, ''));
               }}
             />
             <StyledValue>{inputCurrency.symbol}</StyledValue>
