@@ -88,10 +88,10 @@ const SelectTrigger = styled(Select.SelectTrigger, {
   borderRadius: '8px',
   border: '1px solid #373A53',
   color: '#979ABE',
-  boxShadow: `0 2px 10px #000`,
+  // boxShadow: `0 2px 10px #000`,
   fontFamily: 'Montserrat',
   //   '&:hover': { backgroundColor: mauve.mauve3 },
-  '&:focus': { boxShadow: `0 0 0 2px black` },
+  // '&:focus': { boxShadow: `0 0 0 2px black` },
   //   '&[data-placeholder]': { color: violet.violet9 },
 });
 
