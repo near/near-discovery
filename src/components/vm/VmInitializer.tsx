@@ -194,15 +194,15 @@ export default function VmInitializer() {
   }, [saveCurrentUrl, walletModal]);
 
   useEffect(() => {
-    window.addEventListener(
-      'message',
-      (e: MessageEvent<{ showWalletSelector: boolean }>) => {
-        if (e.data.showWalletSelector) {
-          requestSignInWithWallet();
-        }
-      },
-      false,
-    );
+    const handleShowWalletSelector = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+      if (e.data.showWalletSelector) {
+        requestSignInWithWallet();
+      }
+    };
+    window.addEventListener('message', handleShowWalletSelector, false);
+    return () => {
+      window.removeEventListener('message', handleShowWalletSelector, false);
+    };
   }, [requestSignInWithWallet]);
 
   const logOut = useCallback(async () => {
