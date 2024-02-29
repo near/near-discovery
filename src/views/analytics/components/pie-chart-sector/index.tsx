@@ -19,7 +19,7 @@ const renderActiveShape = (props: any) => {
   const ex = mx + (cos >= 0 ? 1 : -1) * 22;
   const ey = my;
   const textAnchor = cos >= 0 ? 'start' : 'end';
-  console.info(payload);
+
   return (
     <g>
       <text x={cx} y={cy - 100} dy={8} fontSize={20} fontWeight={700} fill="white" textAnchor="middle">
