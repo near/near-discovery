@@ -62,6 +62,7 @@ const App: FC<IProps> = ({ data }) => {
       <YAxis />
 
       <Tooltip
+        cursor={{ fill: '#262830' }}
         wrapperStyle={{
           width: 240,
           height: 125,

@@ -12,12 +12,13 @@ import { AUTH_TOKENS, get, post } from '@/utils/http';
 
 import { AreaChart, BarChart, PieChartAnnular, PieChartSector, SimpleSelect, VerticalBarChart } from './components';
 import * as Styles from './styles';
+
 interface IProps {}
 
 const Dashboard: FC<IProps> = ({}) => {
   const router = useRouter();
   const { chains } = useTokensAndChains();
-
+  delete chains['1'];
   const [chainsList, setChainsList] = useState<any>([]);
 
   const [summaryData, setSummaryData] = useState([
@@ -56,6 +57,7 @@ const Dashboard: FC<IProps> = ({}) => {
   ]);
 
   const [userData, setUserData] = useState([]);
+  const [userDataRange, setUserDataRange] = useState('');
   const [areaData, setAreaData] = useState([]);
   const [chainsData, setChainsData] = useState([]);
   const [tradingData, setTradingData] = useState([]);
@@ -83,6 +85,12 @@ const Dashboard: FC<IProps> = ({}) => {
   };
   useEffect(() => {
     const array = Object.values(chains).map((item: any) => ({ ...item, label: item.chainName, value: item.chainId }));
+
+    const lienaObj = array.find((item: any) => item.chainId === 59144);
+    const lienaIndex = array.findIndex((item: any) => item.chainId === 59144);
+
+    array.splice(lienaIndex, 1);
+    array.unshift(lienaObj);
 
     setChainsList([
       {
@@ -222,8 +230,13 @@ const Dashboard: FC<IProps> = ({}) => {
     temp[3].increase = total_dapps_7day;
     setSummaryData(temp);
 
+    const startTime = format(user_data[0]?.date_time_second * 1000, 'yyyy/MM/d');
+    const endTime = format(user_data[user_data.length - 1]?.date_time_second * 1000, 'yyyy/MM/d');
+    setUserDataRange(`${startTime} - ${endTime}`);
+
     const _userData = user_data.map((item: any) => ({
-      name: format(item.date_time_second * 1000, 'd MMM'),
+      // name: format(item.date_time_second * 1000, 'd MMM'),
+      name: format(item.date_time_second * 1000, 'd'),
       date: format(item.date_time_second * 1000, 'd,MMM yyyy'),
       Users: item.total_users,
     }));
@@ -237,19 +250,28 @@ const Dashboard: FC<IProps> = ({}) => {
     }));
     setAreaData(_areaData);
 
-    const _chainsData = chain_data.map((item: any) => ({
-      name: item.name,
-      logo: item.logo,
-      total_trading_value: formatThousandsSeparator(+Number(item.total_trading_value).toFixed(2)),
-      total_users: item.total_users,
-    }));
+    const _chainsData = chain_data
+      .filter((item: any) => item.total_users > 0 && item.total_trading_value > 0)
+      .map((item: any) => ({
+        name: item.name,
+        logo: item.logo,
+        total_trading_value: formatThousandsSeparator(+Number(item.total_trading_value).toFixed(2)),
+        total_users: item.total_users,
+      }));
     setChainsData(_chainsData);
 
     const _tradingData = trading_data.map((item: any) => ({
       ...item,
       icon: (DAPP_ICONS as any)[item.action_type],
     }));
-    setTradingData(_tradingData);
+
+    const _tradingDataSort = [
+      _tradingData.find((item: any) => item.action_type === 'Bridge'),
+      _tradingData.find((item: any) => item.action_type === 'Swap'),
+      _tradingData.find((item: any) => item.action_type === 'Lending'),
+      _tradingData.find((item: any) => item.action_type === 'Liquidity'),
+    ];
+    setTradingData(_tradingDataSort as any);
   }
   const goQuest = (id: number) => {
     window.open(`${window.location.origin}/quest/detail?id=${id}`);
@@ -302,7 +324,8 @@ const Dashboard: FC<IProps> = ({}) => {
           <Styles.UsersTotal>
             <Styles.UsersTotalTitle>
               <Styles.Title>News Users</Styles.Title>
-              <Styles.Intro>2024/02/17-2024/03/17</Styles.Intro>
+              <Styles.Intro>{userDataRange}</Styles.Intro>
+              {/* <Styles.Intro>2024/02/17-2024/03/17</Styles.Intro> */}
             </Styles.UsersTotalTitle>
             {userData.length ? <AreaChart data={userData} /> : null}
           </Styles.UsersTotal>
