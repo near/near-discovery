@@ -35,7 +35,8 @@ const renderActiveShape = (props: any) => {
         outerRadius={outerRadius}
         startAngle={startAngle}
         endAngle={endAngle}
-        fill={fill}
+        // fill={fill}
+        fill="#EBF479"
       />
     </g>
   );
@@ -97,7 +98,7 @@ const App: FC<IProps> = ({ data }) => {
         ))}
       </Pie>
       <Legend content={renderLegend} />
-      <Tooltip
+      {/* <Tooltip
         // trigger="click"
         wrapperStyle={{
           width: 122,
@@ -115,7 +116,7 @@ const App: FC<IProps> = ({ data }) => {
         itemStyle={{
           color: 'white',
         }}
-      />
+      /> */}
     </PieChart>
   );
 };
