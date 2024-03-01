@@ -61,6 +61,7 @@ const App: FC<IProps> = ({ data }) => {
         fill="#555D77"
         activeBar={
           <Rectangle
+            radius={4}
             fill="#EBF479"
             // stroke="blue"
           />
@@ -68,6 +69,7 @@ const App: FC<IProps> = ({ data }) => {
       />
 
       <Tooltip
+        cursor={false}
         // trigger="click"
         wrapperStyle={{
           width: 240,
