@@ -71,7 +71,16 @@ const nextConfig = {
         source: '/horizon',
         destination: '/founders',
         permanent: true,
-      }
+      },
+      {
+        source: '/horizon',
+        destination: '/founders',
+        permanent: true,
+      },
+      {
+        source: '/blog/:path*',
+        destination: '/blog/:path*/index.html',
+      },
     ];
   },
   rewrites: async () => [
