@@ -23,7 +23,7 @@ export default function useCheck(quest: any, cb: any) {
           title: `Action refreshed successfully`,
         });
       }
-      if (result.data && result.data.total_spins > quest.total_spins) {
+      if (result.data && result.data.total_completed_times > quest.times) {
         cb(result.data.total_completed_times);
         if (data) {
           toast.success({
@@ -39,6 +39,7 @@ export default function useCheck(quest: any, cb: any) {
         });
       }
     } catch (err) {
+      console.log(err);
       setLoading(false);
       toast.dismiss(toastId);
       toast.fail({

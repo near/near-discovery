@@ -3,7 +3,7 @@ import styled from 'styled-components';
 const StyledContainer = styled.div`
   position: relative;
   width: 161px;
-  height: 80px;
+  height: 72px;
 `;
 
 const StyledLabelBg = styled.div`
@@ -18,24 +18,25 @@ const StyledLabelBg = styled.div`
 const StyledContent = styled.div`
   position: relative;
   z-index: 5;
+  margin-left: -10px;
 `;
 
 const StyledAmount = styled.div`
   color: #000;
   text-align: center;
   font-family: Trans-America;
-  font-size: 50px;
+  font-size: 36px;
   font-style: normal;
   font-weight: 400;
-  margin-bottom: -24px;
-  margin-top: -10px;
+  margin-bottom: -16px;
+  margin-top: -3px;
 `;
 
 const StyledDesc = styled.div`
   color: #000;
   text-align: center;
   font-family: Trans-America;
-  font-size: 26px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
 `;

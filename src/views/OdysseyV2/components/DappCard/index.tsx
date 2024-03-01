@@ -69,6 +69,7 @@ export default function DappCard({
   };
 
   useEffect(() => {
+    console.log(73);
     setExecution(times);
   }, [times]);
 

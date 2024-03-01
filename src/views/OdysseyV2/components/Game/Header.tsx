@@ -4,12 +4,13 @@ const StyledContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 `;
 
 const StyledTitle = styled.div`
   text-align: center;
   font-family: Trans-America;
-  font-size: 90px;
+  font-size: 60px;
   font-style: normal;
   background: linear-gradient(180deg, #fff 39.2%, #33c5f4 80%);
   background-clip: text;
@@ -23,17 +24,19 @@ const StyledTitle = styled.div`
 `;
 const StyledRules = styled.div`
   cursor: pointer;
-  position: relative;
+  position: absolute;
+  right: 70px;
+  bottom: 20px;
   &:active {
-    right: -2px;
-    bottom: -2px;
+    right: 68px;
+    bottom: 18px;
   }
 `;
 
 export default function Header({ onOpenRules }: any) {
   return (
     <StyledContainer>
-      <svg xmlns="http://www.w3.org/2000/svg" width="110" height="72" viewBox="0 0 110 72" fill="none">
+      <svg xmlns="http://www.w3.org/2000/svg" width="101" height="66" viewBox="0 0 110 72" fill="none">
         <rect x="37" y="1" width="54.2221" height="54.2221" rx="6" fill="black" stroke="#33C5F4" strokeWidth="2" />
         <path
           fillRule="evenodd"
@@ -76,7 +79,7 @@ export default function Header({ onOpenRules }: any) {
           onOpenRules();
         }}
       >
-        <svg width="95" height="74" viewBox="0 0 95 74" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="84" height="58" viewBox="0 0 95 74" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M71.4331 2.25835L11.2789 14.3028L2.1109 27.1037L9.24429 62.7304L22.7797 71.7417L82.9339 59.6972L92.1747 47.2599L84.8229 10.5426L71.4331 2.25835Z"
             fill="#33C5F4"

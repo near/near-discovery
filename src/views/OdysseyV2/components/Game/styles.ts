@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledContainer = styled.div`
-  width: 1260px;
+  width: 1200px;
   margin: 130px auto 0px;
   border-radius: 12px;
   border: 1px solid #33c5f4;
@@ -9,7 +9,7 @@ export const StyledContainer = styled.div`
 `;
 
 export const StyledCardList = styled.div`
-  padding: 26px 40px 40px;
+  padding: 16px 78px 20px;
   display: flex;
   gap: 16px;
   align-items: center;

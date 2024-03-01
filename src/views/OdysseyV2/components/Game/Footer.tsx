@@ -6,9 +6,11 @@ import { StyledCoin } from '@/views/Quest/styles';
 
 const StyledContainer = styled.div`
   position: relative;
-  height: 162px;
-  padding-top: 47px;
+  height: 137px;
+  padding-top: 20px;
   box-sizing: border-box;
+  top: 0px;
+  left: -1px;
 `;
 
 const StyledContent = styled.div`
@@ -27,6 +29,8 @@ const StyledBg = styled.div`
   z-index: 1;
   top: 0px;
   left: 0px;
+  width: 100%;
+  height: 100%;
 `;
 
 const StyledCenterPanel = styled.div`
@@ -35,7 +39,7 @@ const StyledCenterPanel = styled.div`
 const StyledCenterDesc = styled.div`
   color: #000;
   font-family: Trans-America;
-  font-size: 16px;
+  font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: 100%; /* 16px */
@@ -59,7 +63,7 @@ const StyledRightAmount = styled.div`
   color: #000;
   text-align: right;
   font-family: Trans-America;
-  font-size: 60px;
+  font-size: 36px;
   font-style: normal;
   font-weight: 400;
   margin-right: 16px;
@@ -68,7 +72,7 @@ const StyledRightLabel = styled.div`
   color: #000;
   text-align: center;
   font-family: Trans-America;
-  font-size: 26px;
+  font-size: 20px;
   font-style: normal;
   font-weight: 400;
   margin-left: 9px;
@@ -79,13 +83,13 @@ export default function Footer({ availableSpins, unclaimedReward, onSuccess }: a
   return (
     <StyledContainer>
       <StyledBg>
-        <svg width="1260" height="162" viewBox="0 0 1260 162" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="1201" height="137" viewBox="0 0 1201 137" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M0 47H1260V150C1260 156.627 1254.63 162 1248 162H12C5.37258 162 0 156.627 0 150V47Z"
+            d="M0 22H1201V125C1201 131.627 1195.63 137 1189 137H12C5.37255 137 0 131.627 0 125V22Z"
             fill="#33C5F4"
           />
           <path
-            d="M686.5 126H1260V12C1260 5.37258 1254.63 0 1248 0H814.121C808.618 0 803.359 2.26709 799.581 6.26753L686.5 126Z"
+            d="M795 96H1201V12C1201 5.37258 1195.63 -1.78814e-06 1189 -1.78814e-06H888.302C882.545 -1.78814e-06 877.067 2.48098 873.27 6.80827L795 96Z"
             fill="#33C5F4"
           />
         </svg>

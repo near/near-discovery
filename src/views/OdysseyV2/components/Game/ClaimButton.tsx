@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const StyledContainer = styled.div<{ $disabled?: boolean }>`
   position: relative;
   left: 36px;
+  top: 20px;
   ${({ $disabled }) =>
     !$disabled
       ? `cursor: pointer; &:active{
@@ -15,7 +16,7 @@ const StyledContainer = styled.div<{ $disabled?: boolean }>`
 export default function ClaimButton({ disabled, onClick }: any) {
   return (
     <StyledContainer $disabled={disabled} onClick={onClick}>
-      <svg width="253" height="132" viewBox="0 0 253 132" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="200" height="92" viewBox="0 0 253 132" fill="none" xmlns="http://www.w3.org/2000/svg">
         <ellipse
           cx="126.396"
           cy="65.7611"

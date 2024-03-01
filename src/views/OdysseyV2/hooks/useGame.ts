@@ -70,15 +70,24 @@ export default function useCards(onSuccess: VoidFunction) {
       prevKey = null;
       filpedPair++;
     }
+    console.log('filpedPair', filpedPair);
     cards.splice(i, 1, card);
     setCards(cloneDeep(cards));
     if (filpedPair === 9) {
       const signature = getSignature(`times=${clickCount}&time=${Math.ceil(Date.now() / 1000)}`);
+      console.log('signature', signature);
       if (signature) postResult(signature);
     }
   };
 
   const onStart = () => {
+    prevKey = null;
+    prevI = null;
+    filpedPair = 0;
+    clickCount = 0;
+    locked = false;
+    const list = LIST.map((i) => ({ key: i % 9, i })).sort(() => 0.5 - Math.random());
+    setCards(list);
     setStart(true);
   };
 
@@ -87,5 +96,5 @@ export default function useCards(onSuccess: VoidFunction) {
     setCards(list);
   }, []);
 
-  return { cards, start, posting, reward, count: clickCount, onFilp, onStart };
+  return { cards, start, posting, reward, count: clickCount, onFilp, onStart, setStart };
 }

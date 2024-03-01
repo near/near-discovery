@@ -5,9 +5,8 @@ const StyledContainer = styled.div`
   transform: scale(1);
   transform-style: preserve-3d;
   transition: transform 0.5s;
-  width: 182px;
-  height: 250px;
-
+  width: 160px;
+  height: 220px;
   &.flip {
     transform: rotateY(180deg);
   }

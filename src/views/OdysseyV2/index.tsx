@@ -38,8 +38,8 @@ export default function OdysseyV2() {
       <FilpEarningTitle collect={detail?.total_spins} />
       <Social list={quests.social} userInfo={userInfo} authConfig={authConfig} onRefreshDetail={queryDetail} />
       <Bridge list={quests.bridge} onRefreshDetail={queryDetail} />
-      <Swap list={quests.swap} />
-      <Lending list={quests.lending} />
+      <Swap list={quests.swap} onRefreshDetail={queryDetail} />
+      <Lending list={quests.lending} onRefreshDetail={queryDetail} />
     </StyledContainer>
   );
 }

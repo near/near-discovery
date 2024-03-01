@@ -14,7 +14,7 @@ import { StyledContainer, StyledCardList } from './styles';
 
 export default function Game({ availableSpins, unclaimedReward, onRefreshDetail }: any) {
   const [modalType, setModalType] = useState(0);
-  const { cards, onFilp, start, onStart, posting, count, reward } = useGame(() => {
+  const { cards, onFilp, start, onStart, setStart, posting, count, reward } = useGame(() => {
     onRefreshDetail();
     setModalType(2);
   });
@@ -65,6 +65,7 @@ export default function Game({ availableSpins, unclaimedReward, onRefreshDetail 
               count={count}
               onClose={() => {
                 setModalType(0);
+                setStart(false);
               }}
               onPlayAgain={() => {
                 setModalType(0);
