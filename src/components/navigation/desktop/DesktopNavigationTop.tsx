@@ -145,7 +145,7 @@ const ExpandIcon = 'https://assets.dapdap.net/images/bafkreiam7p4ewrfedupruquxts
 
 const CloseIcon = 'https://assets.dapdap.net/images/bafkreier3j4otvsg2hp6bwgqsenjkecslv4vsn6mdjhyskdgfn5uqilkyu.svg';
 
-export const DesktopNavigationTop = ({ isHideAccount }: { isHideAccount: boolean }) => {
+export const DesktopNavigationTop = ({ isHideAccount }: { isHideAccount?: boolean }) => {
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { account } = useAccount();
 
