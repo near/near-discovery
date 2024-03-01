@@ -123,6 +123,13 @@
   src: url('/fonts/gantari-v1-latin-800italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
+@font-face {
+  font-family: 'Trans-America';
+  src: url('/fonts/TransAmericaRegular-893n.otf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  font-weight: 400;
+  font-stretch: 75% 125%;
+}
+
 body,
 html {
   --body-top-padding: 24px;
