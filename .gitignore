@@ -19,6 +19,12 @@
 **/public/worker-*.js.map
 **/public/fallback-*.js
 
+#static wp files
+/public/blog
+/public/wp-content
+/public/wp-includes
+
+
 # testing
 /coverage
 
