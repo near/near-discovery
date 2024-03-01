@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Alibaba Cloud Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/alibaba-cloud/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/alibaba-cloud/</link>
+	<description></description>
+	<lastBuildDate>Fri, 30 Jun 2023 18:24:06 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Alibaba Cloud Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/alibaba-cloud/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR at Collision Highlights</title>
+		<link>/blog/near-at-collision-highlights/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Fri, 30 Jun 2023 13:46:27 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Alibaba Cloud]]></category>
+		<category><![CDATA[Collision]]></category>
+		<category><![CDATA[Women in Web3 Changemakers]]></category>
+		<guid isPermaLink="false">/?p=20682</guid>
+
+					<description><![CDATA[<p>Missed NEAR’s booth at Collision? We’ve got you covered with content from NEAR talks and panels. There were also a …</p>
+<p>The post <a href="/blog/near-at-collision-highlights/">NEAR at Collision Highlights</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Missed NEAR’s booth at Collision? We’ve got you covered with content from NEAR talks and panels. There were also a number of awesome announcements, including the big news out of Collision: Alibaba Cloud.</p>
+
+
+
+<p>From the winners of the Women in Web3 Changemakers awards being announced to exciting ecosystem developments, here’s a run down on all things NEAR from Collision 2023!! </p>
+
+
+
+<h2 class="wp-block-heading">ICYMI: Major Announcements @ Collision</h2>
+
+
+
+<p>NEAR kicked off Collision with a roar, with two major news items rolling hot off the presses yesterday. Here’s the scoop:&nbsp;</p>
+
+
+
+<h3 class="wp-block-heading"><strong>NEAR Foundation and Alibaba Cloud Join Forces&nbsp;</strong></h3>
+
+
+
+<p>First off, the NEAR Foundation announced a major partnership with <a href="https://near.org/blog/near-and-alibaba-cloud-team-up-to-grow-the-open-web/">Alibaba Cloud</a>, the digital technology and intelligence backbone of Alibaba Group. The two will collaborate to offer Remote Procedure Calls (RPC) as a service and multi-chain data indexing to NEAR developers, users, and the broader ecosystem.&nbsp;</p>
+
+
+
+<p>The goal is to make building decentralized applications on the BOS a breeze, and working with one of the world’s biggest tech infrastructure companies is a huge step in the right direction. Alibaba Cloud will also enhance plug-and-play capabilities for BOS builders everywhere, from China and APAC to Europe and the Americas.</p>
+
+
+
+<h3 class="wp-block-heading"><strong>Winners of the Women of Web3 Changemakers Awards</strong></h3>
+
+
+
+<p>In other news, the ten winners of the <a href="https://near.org/blog/web3s-leading-ladies-near-foundation-honors-2023s-women-changemakers/">Women in Web3 Changemakers</a> initiative were just announced. These incredible women are leading the charge in the Web3 space, and NEAR Foundation is proud to recognize their outstanding contributions.&nbsp;</p>
+
+
+
+<p>Selected from over 200 nominations and voted for by the public, these were chosen based on their inclusive and innovative ideas, impact within the Web3 space, and their contributions to significant projects. Read the full announcement for <a href="https://near.org/blog/web3s-leading-ladies-near-foundation-honors-2023s-women-changemakers/">NEAR&#8217;s Women in Web3 Changemakers winners</a>. </p>
+
+
+
+<h2 class="wp-block-heading">Highlights from NEAR at Collision&nbsp;</h2>
+
+
+
+<h3 class="wp-block-heading" id="h-geekpay-breaks-barriers-in-crypto-transactions-on-near">Geekpay breaks barriers in crypto transactions on NEAR</h3>
+
+
+
+<p><a href="https://www.geekpay.co/">GeekPay,</a> a crypto payments platform for businesses and freelancers built on NEAR, surpassed $500,000 in total transactions during Collision. It also just hit 205 verified users, companies, and 120 transactions. GeekPay is transforming how companies handle digital currency payments to contractors, eliminating the need for lengthy wallet addresses and providing greater security for cross-border transactions.</p>
+
+
+
+<p>&#8220;NEAR is a perfect ecosystem and technology for cross-border payments in digital currencies for remote workers and contractors,&#8221; said Veronica Korzh, CEO and co-founder of GeekPay.</p>
+
+
+
+<p>GeekPay supports a range of digital currencies including NEAR and ETH, including functionality with tracking and analytics, secure payment processing, invoicing, and transaction categorization. GeekPay hurdling the $400,000 transaction mark shows that the future of crypto payments for work is being built on the BOS.</p>
+
+
+
+<h3 class="wp-block-heading" id="h-tenamint-launches-toronto-regional-community-with-a-bang">Tenamint launches Toronto Regional Community with a bang</h3>
+
+
+
+<p><a href="https://tenamint.com/">Tenamint</a>, a marketplace for fractionalized trading card collectibles built on the NEAR blockchain, christened the launch of the NEAR Toronto Regional Community during the NEAR Toronto Launch Party. The soiree was held on an iconic yacht, the Yankee Lady, during a sunset cruise for an epic post-event party to cap off Collision.</p>
+
+
+
+<p>&#8220;We&#8217;re thrilled to announce the launch of the NEAR Toronto Regional Community, a vibrant community dedicated to fostering collaboration, innovation, and growth in the Toronto region’s blockchain ecosystem,&#8221; said Sal Chaudhry, Tenamint co-founder and Toronto local.</p>
+
+
+
+<p>&#8220;At the NEAR Toronto Regional Community, we’re on a mission to foster collaboration, education, and entrepreneurial support within the blockchain community,&#8221; Sal added. &#8220;We aim to empower individuals and businesses in Toronto and beyond to explore, adopt, and thrive in the world of blockchain technology and beyond,&#8221;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-near-after-collision-onward-to-ethcc">NEAR after Collision: Onward to ETHCC</h2>
+
+
+
+<p>Collision 2023 is only beginning, but the BOS momentum won’t stop in Toronto. NEAR will also be at the Ethereum Community Conference (ETHCC) in Paris, from July 19th to 23rd.</p>
+
+
+
+<p>From exciting cross-chain discussions to insightful panels, interactive workshops, and pitch events, ETHCC promises to be another remarkable platform for BOS building and the wider NEAR community.</p>
+
+
+
+<p>So after immersing yourself in Collision 2023, remember to mark your calendars for <a href="https://www.eventbrite.com/e/near-ethcc-tickets-655229297467?aff=oddtdtcreator">NEAR’s presence at ETHCC</a> as well. Here&#8217;s to continuing to make waves in Web3 and expanding into the Open Web – with you as the BOS!</p>
+<p>The post <a href="/blog/near-at-collision-highlights/">NEAR at Collision Highlights</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>NEAR and Alibaba Cloud Team Up to Grow the Open Web</title>
+		<link>/blog/near-and-alibaba-cloud-team-up-to-grow-the-open-web/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Mon, 26 Jun 2023 14:05:48 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Alibaba Cloud]]></category>
+		<guid isPermaLink="false">/?p=20665</guid>
+
+					<description><![CDATA[<p>NEAR Foundation is excited to announce a major new partnership with Alibaba Cloud, the digital technology and intelligence backbone of …</p>
+<p>The post <a href="/blog/near-and-alibaba-cloud-team-up-to-grow-the-open-web/">NEAR and Alibaba Cloud Team Up to Grow the Open Web</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>NEAR Foundation is excited to announce a major new partnership with Alibaba Cloud, the digital technology and intelligence backbone of Alibaba Group.&nbsp;</p>
+
+
+
+<p>In this new partnership, NEAR Foundation will collaborate with Alibaba Cloud to offer&nbsp;Remote Procedure Calls (RPC)&nbsp;as a service to developers and users in the NEAR ecosystem, as well as&nbsp;multi-chain data indexing to provide data query API to developers. The partnership will also find the companies collaborating on tools to help developers build decentralized applications more easily.&nbsp;</p>
+
+
+
+<p>“Our partnership with Alibaba Cloud is a major milestone for the NEAR Foundation as it proves that NEAR protocol’s technology has&nbsp;the capabilities to truly lift the restrictions surrounding Web3 development&nbsp;to allow more creators to build exciting applications while also helping to onboard billions of Web2 users to the possibility of Web3.,” said Marieke Flament, CEO of the NEAR Foundation. “We look forward to supporting Alibaba Cloud as it leverages the scalability of NEAR Blockchain and the BOS to expand its Web3 offerings to a global market.”</p>
+
+
+
+<h2 class="wp-block-heading" id="h-alibaba-cloud-infrastructure-to-help-power-the-bos">Alibaba Cloud infrastructure to help power the BOS</h2>
+
+
+
+<p>App developers building on the NEAR Blockchain Operating System (BOS) — a&nbsp;common layer for browsing and discovering open web experiences, compatible with any blockchain — will now also enjoy Alibaba Cloud’s infrastructure.&nbsp;</p>
+
+
+
+<p>With BOS, now accessible directly on Near.org through a browser, developers can easily fork components and create new experiences, while end users can&nbsp;explore open web experiences, social, and news all in one place.&nbsp;FastAuth, a new standout BOS feature, allows app developers to onboard new users with only an email — no crypto required.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-alibaba-cloud-s-plug-and-play-infrastructure-will-empower-near-developers">Alibaba Cloud’s plug-and-play infrastructure will empower NEAR developers</h2>
+
+
+
+<p>Commenting on the partnership, Raymond Xiao, Head of International Web3 Solutions, Alibaba Cloud Intelligence, said: “The NEAR Foundation and Alibaba Cloud partnership is an important one as we continue to support Web3 developers to explore opportunities.”</p>
+
+
+
+<p>“It is also significant for developers and validators in the Asian markets, as they can leverage Alibaba Cloud’s comprehensive infrastructure in Asia,” Xioa added. “Together with NEAR’s Node-as-a-Service initiative and&nbsp;BOS, we supports the Web3 community create exciting applications that will benefit a wide consumer audience. We are looking forward to what we can achieve with this partnership.”</p>
+
+
+
+<p>NEAR Foundation and Alibaba Cloud will continue to expand its partnership together through collaborations at a variety of global Web3 conferences and events.</p>
+<p>The post <a href="/blog/near-and-alibaba-cloud-team-up-to-grow-the-open-web/">NEAR and Alibaba Cloud Team Up to Grow the Open Web</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

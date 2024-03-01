@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Mass adoption Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/mass-adoption/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/mass-adoption/</link>
+	<description></description>
+	<lastBuildDate>Fri, 16 Dec 2022 19:22:56 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Mass adoption Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/mass-adoption/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR Weekly On-Chain Data Report: December 16 </title>
+		<link>/blog/near-weekly-on-chain-data-report-december-16/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Fri, 16 Dec 2022 16:00:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Mass adoption]]></category>
+		<category><![CDATA[Statistics]]></category>
+		<guid isPermaLink="false">/?p=19593</guid>
+
+					<description><![CDATA[<p>As part of the Foundation’s commitment to transparency, each week it will publish data to help the NEAR community understand …</p>
+<p>The post <a href="/blog/near-weekly-on-chain-data-report-december-16/">NEAR Weekly On-Chain Data Report: December 16 </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>As part of the Foundation’s commitment to transparency, each week it will publish data to help the NEAR community understand the health of the ecosystem. This will be on top of the quarterly reports, and the now monthly funding reports.&nbsp;</p>
+
+
+
+<p><a href="/blog/near-foundation-transparency-report/">You can find the Quarterly Transparency Reports here.</a> (The Q3 report will be published next week.)</p>
+
+
+
+<p><a href="/blog/near-transparency-report-december-9/">Last week’s On-Chain Data Report can be found here.&nbsp;</a></p>
+
+
+
+<h2 class="wp-block-heading" id="h-the-importance-of-transparency"><strong>The Importance of Transparency</strong></h2>
+
+
+
+<p>Transparency has always been one of NEAR Foundation’s core beliefs. Openness to the community, investors, builders, and creators is one of the core tenets of being a Web3 project.&nbsp;</p>
+
+
+
+<p>In recent months, in response to community frustration, the Foundation has endeavored to do more. This NEAR Weekly On-Chain Data Report is just one of the ways in which the Foundation is being more proactively transparent.&nbsp;&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading"><strong>New Accounts and Active Accounts</strong></h2>
+
+
+
+<p>New Accounts are defined as new wallets created on the NEAR blockchain. While there was a decline in new accounts between the last week of November and the first week of December, this figure rose from an average of 14,000 per day to approximately 24,000 per day this week. New accounts reached a weekly high of 25,001 on December 12th.</p>
+
+
+
+<p>This puts last week’s New Accounts data in line with November’s average figure of 24,000 wallets per 24 hours. As noted last week, the peak for account creation in Q4 was September 13, during which 130,000 new wallets were created in a single day. Collectively, these numbers equate to nearly 2M  total wallets on the NEAR blockchain.</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="537" src="/wp-content/uploads/2022/12/NEAR-Daily-of-New-Accounts-1024x537.png" alt="" class="wp-image-19595" srcset="/wp-content/uploads/2022/12/NEAR-Daily-of-New-Accounts-1024x537.png 1024w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Accounts-300x157.png 300w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Accounts-768x403.png 768w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Accounts-1536x806.png 1536w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Accounts-2048x1075.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>The Daily Number of Active Accounts measures the number of NEAR wallets making on-chain transactions. Over the last week, Active Accounts hit a high of 92,440 before trending down to about 51,000 per day.&nbsp;</p>
+
+
+
+<p>Historically, there have been highs of more than 100,000 active accounts on NEAR. The  high for Active Accounts on any one day in Q4 of 2022 was logged on September 14, during which 183,000 accounts were active.</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="538" src="/wp-content/uploads/2022/12/NEAR-Daily-of-Active-Accounts-1024x538.png" alt="" class="wp-image-19596" srcset="/wp-content/uploads/2022/12/NEAR-Daily-of-Active-Accounts-1024x538.png 1024w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Accounts-300x158.png 300w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Accounts-768x404.png 768w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Accounts-1536x807.png 1536w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Accounts-2048x1076.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading"><strong>New Contracts and Active Contracts</strong></h2>
+
+
+
+<p>Smart contracts created on NEAR are programs stored on a blockchain that run when predetermined conditions are met. The Daily Number of New Contracts is valuable as a metric because it gives the community a way of measuring the NEAR ecosystem’s health and growth. If there are more active contracts, it follows that projects are more actively engaging with the NEAR protocol.&nbsp;</p>
+
+
+
+<p>This week, the daily number of New Contract has been trending upward, whereas last week it rose and fell. A low of 17 New Contracts was measured on December 11th,, before falling to 50 on the 14th. A weekly high of 57 contracts were created on December 13th. </p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="532" src="/wp-content/uploads/2022/12/NEAR-Daily-of-New-Contracts-1024x532.png" alt="" class="wp-image-19597" srcset="/wp-content/uploads/2022/12/NEAR-Daily-of-New-Contracts-1024x532.png 1024w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Contracts-300x156.png 300w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Contracts-768x399.png 768w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Contracts-1536x798.png 1536w, /wp-content/uploads/2022/12/NEAR-Daily-of-New-Contracts-2048x1064.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>Active Contracts measure contracts executed during a 24-hour period. This metric also trended upward this week, with 640 measured on December 11th and and a high of 797 Active Contracts created on December 13th. </p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="482" src="/wp-content/uploads/2022/12/NEAR-Daily-of-Active-Contracts-1024x482.png" alt="" class="wp-image-19598" srcset="/wp-content/uploads/2022/12/NEAR-Daily-of-Active-Contracts-1024x482.png 1024w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Contracts-300x141.png 300w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Contracts-768x361.png 768w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Contracts-1536x723.png 1536w, /wp-content/uploads/2022/12/NEAR-Daily-of-Active-Contracts-2048x964.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading"><strong>Used Gas and Gas Fee</strong></h2>
+
+
+
+<p>Gas Fees is a term used to describe the cost of making transactions on the NEAR network. These fees are paid to validators for the network services they provide to the NEAR blockchain. Gas fees incentivize validators to secure the network.&nbsp;</p>
+
+
+
+<p>In the last week, Used Gas on NEAR (PetaGas) was measured at a high of 7,569 on December 11th and 6,758 on the 14th. To learn more about Gas on NEAR, check out the <a href="/papers/the-official-near-white-paper/">NEAR White Paper</a>. (Rises in gas used can be attributed to many factors, with a common one being increased user activity on the NEAR network.) </p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="538" src="/wp-content/uploads/2022/12/NEAR-Daily-Amount-of-Used-Gas-1024x538.png" alt="" class="wp-image-19599" srcset="/wp-content/uploads/2022/12/NEAR-Daily-Amount-of-Used-Gas-1024x538.png 1024w, /wp-content/uploads/2022/12/NEAR-Daily-Amount-of-Used-Gas-300x158.png 300w, /wp-content/uploads/2022/12/NEAR-Daily-Amount-of-Used-Gas-768x403.png 768w, /wp-content/uploads/2022/12/NEAR-Daily-Amount-of-Used-Gas-1536x807.png 1536w, /wp-content/uploads/2022/12/NEAR-Daily-Amount-of-Used-Gas-2048x1076.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>Over the last week, there has been a slight drop in the Gas Fee (in NEAR), which correlates with a drop in Used Gas. On December 11th, the Gas Fee was measured at 756, before falling to 675 on the 14th. </p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="534" src="/wp-content/uploads/2022/12/NEAR-Daily-Gas-Fee-in-NEAR-1024x534.png" alt="" class="wp-image-19600" srcset="/wp-content/uploads/2022/12/NEAR-Daily-Gas-Fee-in-NEAR-1024x534.png 1024w, /wp-content/uploads/2022/12/NEAR-Daily-Gas-Fee-in-NEAR-300x156.png 300w, /wp-content/uploads/2022/12/NEAR-Daily-Gas-Fee-in-NEAR-768x400.png 768w, /wp-content/uploads/2022/12/NEAR-Daily-Gas-Fee-in-NEAR-1536x801.png 1536w, /wp-content/uploads/2022/12/NEAR-Daily-Gas-Fee-in-NEAR-2048x1068.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading"><strong>Daily Transactions</strong></h2>
+
+
+
+<p>The Daily Number of Transactions illustrates the number of times the blockchain logged a transaction. The data from this week showcases an increase in the number of transactions, which was also the case over the previous week. Daily Number of Transactions hit a weekly high of 439,660 on December 11th before falling to 373,335 on the 14th.&nbsp;</p>
+<p>The post <a href="/blog/near-weekly-on-chain-data-report-december-16/">NEAR Weekly On-Chain Data Report: December 16 </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>NEAR Weekly On Chain Data Report: December 9</title>
+		<link>/blog/near-transparency-report-december-9/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Fri, 09 Dec 2022 10:38:36 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Mass adoption]]></category>
+		<category><![CDATA[Statistics]]></category>
+		<guid isPermaLink="false">/?p=19508</guid>
+
+					<description><![CDATA[<p>As part of the Foundation’s commitment to transparency, each week it will publish data to help the NEAR community understand …</p>
+<p>The post <a href="/blog/near-transparency-report-december-9/">NEAR Weekly On Chain Data Report: December 9</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>As part of the Foundation’s commitment to transparency, each week it will publish data to help the NEAR community understand the health of the ecosystem. This will be on top of the quarterly reports, and the now monthly funding reports.&nbsp;</p>
+
+
+
+<p><a href="/blog/near-foundation-transparency-report/">You can find the quarterly reports here.</a></p>
+
+
+
+<p><a href="/blog/near-foundation-funding-team-report-september-2022/">You can find monthly reports on funding here.</a>&nbsp;&nbsp;</p>
+
+
+
+<p><a href="/blog/near-transparency-report-december-2/">Last week’s transparency report can be found here.&nbsp;</a></p>
+
+
+
+<h2 class="wp-block-heading">The importance of transparency</h2>
+
+
+
+<p>The NEAR Foundation has always held transparency as one of its core beliefs. Being open to the community, investors, builders and creators is one of the core tenets of being a Web3 project. But it’s become apparent the Foundation needs to do more.&nbsp;</p>
+
+
+
+<p>The Foundation hears the frustration from the community, and it wants to be more pro-active in when and how it communicates.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-new-accounts-and-active-accounts">New Accounts and Active Accounts</h2>
+
+
+
+<p>New Accounts are new wallets being created on the NEAR blockchain. In the last days of November and the first days of December, the daily number of new accounts had been declining. This week however, activity has been trending up, with the average number of new accounts averaging 14,000 per day, with a weekly peak of 14,752 recorded on December 6.</p>
+
+
+
+<p>This is down on November&#8217;s figure of 24,000 wallets per 24 hours, on average. These numbers are conducive with the overall decline in sentiment around blockchain. </p>
+
+
+
+<p>Looking more broadly, the peak for account creation in Q4 was September 13 where 130,000 new wallets were created in one day. Collectively, these numbers equate to 22,551,000 total wallets on the NEAR blockchain.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="579" src="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.19.51-1024x579.png" alt="" class="wp-image-19509" srcset="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.19.51-1024x579.png 1024w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.19.51-300x170.png 300w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.19.51-768x434.png 768w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.19.51-1536x868.png 1536w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.19.51.png 1808w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>The Daily Number of Active Accounts is a measure of how many wallets on NEAR are making transactions on chain. Over the last week, the number of daily active accounts has oscillated between a a low of 12,639 on December 5, to a peak of 14,752 on December 6. </p>
+
+
+
+<p>Historically, this is a decline from highs of more than 100,000 active accounts on the network. The highest number of active accounts on any one day in Q4 this year was logged on September 14, where 183,000 accounts were active.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="581" src="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.28-1024x581.png" alt="" class="wp-image-19510" srcset="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.28-1024x581.png 1024w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.28-300x170.png 300w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.28-768x436.png 768w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.28-1536x871.png 1536w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.28.png 1816w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">New Contracts and Active Contracts</h2>
+
+
+
+<p>Contracts on NEAR are&nbsp;simply programs stored on a blockchain that run when predetermined conditions are met. The Daily Number of New Contracts is a valuable metric for understanding the health and growth of an ecosystem.</p>
+
+
+
+<p>The more active contracts there are, the more projects are actively engaging with the NEAR protocol. The chart below shows a cyclical rhythm to new contracts, with rises and falls. Over the last seven days, the number of new contracts reached a daily high of 54 on December 4, and a weekly low of 27 on December 6. This range is broader compared to the week before, with last week&#8217;s highest number of 44 on November 30, to a low of 12 new contracts on November 27. </p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="579" src="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.12-1024x579.png" alt="" class="wp-image-19511" srcset="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.12-1024x579.png 1024w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.12-300x170.png 300w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.12-768x435.png 768w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.12-1536x869.png 1536w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.12.png 1824w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>Active contracts is a measure of contracts that execute in a 24 hour period. This number has remained consistent throughout the last week with an average of more than 600 active contracts on the NEAR network. Taking a historical perspective on these numbers, the average has declined in Q4, with previous highs in active contract activity coming in the third week of September 2022.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="586" src="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.48-1024x586.png" alt="" class="wp-image-19512" srcset="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.48-1024x586.png 1024w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.48-300x172.png 300w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.48-768x440.png 768w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.48-1536x879.png 1536w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.20.48.png 1806w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">Used Gas and Gas Fee</h2>
+
+
+
+<p>Gas Fees are a catch all term for the cost of making transactions on the NEAR network. These fees are paid to validators for their services to the blockchain. Without these fees, there would be no incentive for anyone to keep the network secure.</p>
+
+
+
+<p></p>
+
+
+
+<p>Over the last week, the daily amount of gas, expressed here as PetaGas, which is the equivalent of 0.1 $NEAR, has maintained a fairly consistent value between 5,949 PetaGas and 6,743 PetaGas. To learn more about Gas on NEAR, there is an excellent explainer in the&nbsp;<a href="/papers/the-official-near-white-paper/">NEAR White Paper</a>. Compared with last week, the Daily Amount of Used Gas has decreased, from highs of more than 8,000 PetaGas.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="586" src="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.17.10-1024x586.png" alt="" class="wp-image-19513" srcset="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.17.10-1024x586.png 1024w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.17.10-300x172.png 300w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.17.10-768x440.png 768w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.17.10-1536x880.png 1536w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.17.10.png 1802w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>The Daily Amount of Gas correlates with the Daily Gas Fee used on the network. Over the last week, there has been an uptick in the amount of Gas used, which can be brought on by a number of different factors. One of the most common is increased activity among users of the network.</p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="585" src="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-10.20.29-1024x585.png" alt="" class="wp-image-19524" srcset="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-10.20.29-1024x585.png 1024w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-10.20.29-300x172.png 300w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-10.20.29-768x439.png 768w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-10.20.29-1536x878.png 1536w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-10.20.29.png 1840w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<h2 class="wp-block-heading">Daily Transactions</h2>
+
+
+
+<p>The daily number of transactions is a record of how many times the blockchain logged a transaction. This week&#8217;s data represents a healthy increase in the number of transactions. From lows of 328,000 transactions on December 3, to a weekly high of 388,000 transactions per day on December 6. Looking more broadly, NEAR transaction activity has been trending downwards in Q4, reflecting other on chain data presented here. </p>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="585" src="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.16.39-1024x585.png" alt="" class="wp-image-19516" srcset="/wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.16.39-1024x585.png 1024w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.16.39-300x171.png 300w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.16.39-768x438.png 768w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.16.39-1536x877.png 1536w, /wp-content/uploads/2022/12/Screenshot-2022-12-09-at-09.16.39.png 1804w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>These reports will be generated each week and published on Friday.</p>
+<p>The post <a href="/blog/near-transparency-report-december-9/">NEAR Weekly On Chain Data Report: December 9</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>NEAR and Grupo Nutresa Partner for Customer Experience Innovations in Web3</title>
+		<link>/blog/near-and-grupo-nutresa-partner-for-customer-experience-innovations-in-web3/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 01 Dec 2022 09:45:00 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[Mass adoption]]></category>
+		<category><![CDATA[Partnerships]]></category>
+		<guid isPermaLink="false">/?p=18608</guid>
+
+					<description><![CDATA[<p>In a groundbreaking and innovative move, NEAR has partnered with Grupo Nutresa, one of the most important processors of food …</p>
+<p>The post <a href="/blog/near-and-grupo-nutresa-partner-for-customer-experience-innovations-in-web3/">NEAR and Grupo Nutresa Partner for Customer Experience Innovations in Web3</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>In a groundbreaking and innovative move, NEAR has partnered with <a href="https://gruponutresa.com/">Grupo Nutresa</a>, one of the most important processors of food in South America, to bring Web3 to the grocery industry. This will see Grupo Nutresa building one of the first open-source loyalty points programs on NEAR with long-term aspirations to reach a million users in Colombia and Latin America. The partnership was established through the support of tech firm Peersyst.</p>
+
+
+
+<p>Grupo Nutresa customers will in turn gain more autonomy and control of their rewards. Customers will also get additional security and the reassurance that points will not be stolen or denied, and can be transferred more efficiently. Leveraging NEAR’s technology will also increase usability and accessibility of the rewards system as a whole, saving customers from having to create multiple accounts or different logins for multiple platforms — they just need their easy to use NEAR wallet.</p>
+
+
+
+<p>“We are excited to partner with one of the biggest multinationals in Latin America and help it to lead the way through its first Web3 loyalty programme,” says NEAR Foundation CEO Marieke Flament. “Leveraging NEAR’s first-rate technology, the partnership will redefine what is possible when combining retail with the latest blockchain innovation, not just in Latin America but throughout the rest of the world.”&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-usability-is-key-to-loyalty">Usability is key to loyalty</h2>
+
+
+
+<p>Rewarding customers for their support has always been a priority for the world’s top brands. Such programs not only engage customers and deliver incentives for them to return but also act as analytical tools, giving businesses insights into customers’ behaviour and preferences.&nbsp;</p>
+
+
+
+<p>With <a href="https://www.annexcloud.com/blog/loyalty-program-statistics-will-make-rethink-marketing/">87% of shoppers</a> reporting they want brands to have loyalty programs and <a href="https://info.bondbrandloyalty.com/the-2016-bond-loyalty-report-press-release-us">over 70% of consumers</a> more likely to recommend a brand with a robust loyalty program, Web3 and digital wallets are pushing forward-thinking brands to explore new opportunities on platforms that are easy to use.&nbsp;</p>
+
+
+
+<p>As one of the biggest multinationals in Colombia, Grupo Nutresa manages several loyalty programs for its customers, collaborators, and providers. Those loyalty programs are now coming together into a single easy-to-use platform underpinned by blockchain technology, through support from Spanish technology company Peersyst Technology.</p>
+
+
+
+<h2 class="wp-block-heading">Onboarding the masses into NEAR and Web3</h2>
+
+
+
+<p>Grupo Nutresa sees NEAR as the ideal partner for these types of loyalty programs. NEAR Foundation sees the Grupo Nutresa partnership as a great opportunity to onboard the masses into the NEAR and Web3 ecosystems.&nbsp;&nbsp;</p>
+
+
+
+<p>“Our purpose is to make people feel recognized and valued by brands. Above all, what interests us most is that this is an opportunity to help build their dreams, through a service that provides them with significant redemption options and value,” says &nbsp;Fabián Andrés Restrepo, Digital Transformation Leader at Grupo Nutresa. “This invitation is also addressed to companies that want to help make people&#8217;s dreams come true and reward their loyal customers, by becoming an ally of Grupo Nutresa and its portfolio of businesses. We see in NEAR an important ally for developing and implementing Grupo Nutresa’s loyalty strategy.”&nbsp;</p>
+
+
+
+<p>NEAR’s sustainability credentials also align with Grupo Nutresa’s own business strategy and deep commitment to create value for society as a whole. According to the 2021 Dow Jones Sustainability Indices, Grupo Nutresa has been voted as the most sustainable food company in the world for two consecutive years, thanks to its effective implementation of social, environmental, and economic practices.&nbsp;</p>
+<p>The post <a href="/blog/near-and-grupo-nutresa-partner-for-customer-experience-innovations-in-web3/">NEAR and Grupo Nutresa Partner for Customer Experience Innovations in Web3</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>NEAR Wallet Rockets to Over 20 Million Users With SWEAT Partnership  </title>
+		<link>/blog/near-wallet-rockets-to-over-20-million-users-with-sweat-partnership/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 03 Nov 2022 12:00:07 +0000</pubDate>
+				<category><![CDATA[Community]]></category>
+		<category><![CDATA[Mass adoption]]></category>
+		<category><![CDATA[Partnerships]]></category>
+		<guid isPermaLink="false">/?p=18972</guid>
+
+					<description><![CDATA[<p>It’s almost hard to believe that the NEAR Wallet had only 2 million users at the start of this year. …</p>
+<p>The post <a href="/blog/near-wallet-rockets-to-over-20-million-users-with-sweat-partnership/">NEAR Wallet Rockets to Over 20 Million Users With SWEAT Partnership  </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>It’s almost hard to believe that the NEAR Wallet had only 2 million users at the start of this year. At over 20 million users, NEAR is thrilled to mark its wallet’s tenfold growth in less than a year. NEAR is really creating without limits!</p>
+
+
+
+<p>This meteoric rise can be attributed to a number of factors, including growing support among builders for NEAR’s user-friendly, highly scalable, climate neutral blockchain. But also instrumental in this growth is NEAR’s epic partnership with companies such as SWEAT Economy, the world’s most popular fitness app.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-largest-ever-on-ramping-of-web2-users-into-web3">Largest ever on-ramping of Web2 users into Web3</h2>
+
+
+
+<p>At the moment, over 800 projects are building on NEAR, which uses Proof-of-Stake consensus to secure and validate transactions on the blockchain. NEAR has also lowered barriers for creators with developments such as the launch of Javascript SDK. This gives over 20 million developers the chance to build Web3 apps using JavaScript, the most popular coding language in the world.&nbsp;</p>
+
+
+
+<p>In September,&nbsp; <a href="https://sweateconomy.com/">Sweat Economy</a>—the “economy of movement”—successfully launched on <a href="/">NEAR</a> with the largest ever airdrop to active, opted-in, wallets. The Move-to-Earn platform, active in Web2 since 2016 with over 130 million global users of its Sweatcoin app, distributed their new Web3 SWEAT token to 13.5M token holders. The Sweat Wallet app quickly became the #1 most downloaded Finance app in more than 50 countries. This follows Sweat’s success as the fastest IDO ever to sell out on the DAO Maker platform.</p>
+
+
+
+<p>Sweat Economy distributed over 4.7 Billion of its newly launched SWEAT tokens to the 13.5M Sweatcoin users who opted to enter Web3. For many of these users, it is their first experience with blockchain technology, making this the largest ever on-ramping of self-custody users from Web2 to Web3.</p>
+
+
+
+<p>“It’s been an extraordinary year for NEAR as we ramp up efforts to attract the world’s best and socially-minded developers on our protocol,” says Marieke Flament, CEO of NEAR Foundation. “We have put our emphasis on championing talent diversity, regional hub development, and sustainable practices. Equally important to our success is the strategic partnerships we have forged with prominent companies that have done a brilliant job at transitioning from a Web2 business model to Web3.”&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-onboarding-1-billion-users-to-web3">Onboarding 1 billion users to Web3</h2>
+
+
+
+<p>This transition is particularly important as NEAR works hard to onboard one billion users to Web3.&nbsp;</p>
+
+
+
+<p>“Sweat Economy is one of these companies that have made it easy for people to access Web3 applications with the help of NEAR, which has led to millions of users for&nbsp; its product and for our protocol,” Flament adds. “ These partnerships are key to helping us to realize our ambition to achieve mass adoption for crypto and to show the world that Web3 is capable of&nbsp; solving real world problems and making society a better place for all.”</p>
+
+
+
+<p>If you still have yet to join the “economy of movement,” head to your mobile app store and download Sweatcoin today and see how millions of people are earning crypto just by being physically active. Join NEAR and Sweat Economy to build a healthier collective future.</p>
+<p>The post <a href="/blog/near-wallet-rockets-to-over-20-million-users-with-sweat-partnership/">NEAR Wallet Rockets to Over 20 Million Users With SWEAT Partnership  </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

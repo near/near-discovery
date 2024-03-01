@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Creatives Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/creatives/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/creatives/</link>
+	<description></description>
+	<lastBuildDate>Wed, 01 Nov 2023 18:46:06 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Creatives Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/creatives/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEARCON &#8217;23: Developer, Founder, and Creative Talks You Shouldn&#8217;t Miss</title>
+		<link>/blog/nearcon-23-developer-founder-and-creative-talks-you-shouldnt-miss/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Tue, 31 Oct 2023 19:39:29 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Creatives]]></category>
+		<category><![CDATA[Developers]]></category>
+		<category><![CDATA[Founders]]></category>
+		<category><![CDATA[NEARCON 23]]></category>
+		<guid isPermaLink="false">/?p=21022</guid>
+
+					<description><![CDATA[<p>NEARCON &#8217;23 in scenic Lisbon, Portugal is your go-to event for everything AI, the open web, and more. Whether you&#8217;re …</p>
+<p>The post <a href="/blog/nearcon-23-developer-founder-and-creative-talks-you-shouldnt-miss/">NEARCON &#8217;23: Developer, Founder, and Creative Talks You Shouldn&#8217;t Miss</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>NEARCON &#8217;23 in scenic Lisbon, Portugal is your go-to event for everything AI, the open web, and more. Whether you&#8217;re a developer, entrepreneur, or artist, there&#8217;s a session for you. Web3 regulatory aficionados, we&#8217;ve got you covered too (more on that later).&nbsp;</p>
+
+
+
+<p>Here’s a rundown of sessions that are a must-see.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-developer-track-build-better-on-near">Developer track: build better on NEAR</h2>
+
+
+
+<p><strong>NEAR: The Open Web Stack&nbsp;</strong></p>
+
+
+
+<p>NEAR co-founder Illia Polosuhin reveals game-changing updates for the NEAR ecosystem. A lot of new and exciting NEAR products and tools are in the works for developers. So, if you’re a dev, you won’t want to miss this talk from Illia.&nbsp;</p>
+
+
+
+<p><strong>Why Build Web3 Games&nbsp;</strong></p>
+
+
+
+<p>Hosted by <a href="http://www.playember.com/">PlayEmber’s</a> Hugo Furneaux, this panel dissects the massive potential of gaming on the open web. Learn about player-owned economies and why you should consider NEAR for your next gaming project. An essential session for forward-thinking game developers.</p>
+
+
+
+<p><strong>Unlocking NEAR Data&nbsp;</strong></p>
+
+
+
+<p>Data extraction got you puzzled? Pavel Kudinov, senior engineering manager at NEAR, will walk you through using SQL queries on NEAR BigQuery Datasets and the NEAR Query API to build and analyze. This is the toolkit you&#8217;ve been waiting for.</p>
+
+
+
+<p><strong>Inside the BUILD Incubator&nbsp;</strong></p>
+
+
+
+<p>Will Russell, Michael Yu, and Max Mizzi from student hackathon league <a href="https://mlh.io/">Major League Hacking</a> take a deep dive into the BUILD Incubator Fellowship. Hear firsthand experiences and gather invaluable insights that could jump-start your open web development journey.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-entrepreneurial-track-jumpstart-your-journey">Entrepreneurial track: jumpstart your journey</h2>
+
+
+
+<p><strong>Building Web3 Communities&nbsp;</strong></p>
+
+
+
+<p>This panel brings together experts from community building collective <a href="http://kryptoseoul.com/">KryptoSeoul</a>, decentralized identity project <a href="https://galxe.com/">Galxe</a>, <a href="https://near.social/mob.near/widget/MyPage?accountId=devgovgigs.near">NEAR DevHub</a>, and Web incubator <a href="https://www.cryptooracle.io/">CryptoOracle Collective</a> to discuss the art of fostering a vibrant, diverse community around any project.</p>
+
+
+
+<p><strong>CryptoEconomics 101&nbsp;</strong></p>
+
+
+
+<p>Lisa Jy Tan, CEO of tokenomics consulting firm <a href="https://economicsdesign.com/">Economics Design</a>, dives into the world of cryptoeconomics, helping you understand the fundamentals and real-world applications of economic principles, drivers, and incentives at play in the open web.</p>
+
+
+
+<p><strong>Hiring Smart in Web3&nbsp;</strong></p>
+
+
+
+<p>Hiring in the open web is both exciting and fraught with potential landmines. Dan Eskow, founder of specialized Web3 talent agency <a href="https://uptopsearch.com/">Up Top</a>, will share valuable tips on sourcing top talent, effective company branding, and red flags to look out for during the interview process.</p>
+
+
+
+<p><strong>Funding Trends in Web3&nbsp;</strong></p>
+
+
+
+<p>A frontline perspective on open web investment from venture capital firms <a href="https://accomplice.co/">Accomplice VC</a>, <a href="https://acapital.com/">a_capital</a>, <a href="https://rockawayx.com/">RockawayX</a>, and <a href="https://www.genventures.xyz/">Generative Ventures</a>. The expert VC panel will offer insights into funding trends and standout pitch decks to help founders stay ahead of the curve.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-creative-track-redefining-art-marketing-and-gaming">Creative track: redefining art, marketing, and gaming</h2>
+
+
+
+<p><strong>Asia&#8217;s Impact on Web3 Gaming&nbsp;</strong></p>
+
+
+
+<p>This panel explores Asia&#8217;s key role in Web3 gaming, particularly Korea&#8217;s leadership in the space. Hear from Jay Hoonjai Lee, CEO of <a href="https://twitter.com/vrtx_dao">Vortex Gaming DAO,</a> and <a href="https://nearkorea.org/">NEAR Korea Hub’s</a> general manager Scott Lee on what the entire blockchain gaming space can learn from Asia.</p>
+
+
+
+<p><strong>Marketing in the Open Web&nbsp;</strong></p>
+
+
+
+<p>Learn how decentralization and the open web is changing marketing and branding from Lex B., co-founder of <a href="https://www.nearstudio.co/">NEAR Studio</a>, a creative agency dedicated to the NEAR ecosystem. Everything you need to know about marketing in the open web, including real-life case studies and successes.</p>
+
+
+
+<p><strong>Advertising in Web3&nbsp;</strong></p>
+
+
+
+<p>Anjali Young from <a href="https://www.collab.land/">Collab.Land</a>, an innovative project helping implement token-gated communities, discusses how Web3 is transforming the advertising landscape, allowing for more effective brand-customer engagement and immediate feedback.</p>
+
+
+
+<p><strong>The Power of NFTs&nbsp;</strong></p>
+
+
+
+<p>Explore how NFTs are driving decentralized creativity, redefining loyalty, and reshaping cultural norms. Hear from the likes of Wilson Lee, co-founder of blockchain-based carnival app <a href="https://thefunpass.io/">TheFunPass™,</a> and Stipe Plejic, CEO of social NFT marketplace <a href="https://endemic.app/">Endemic</a>.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-nearcon-23-get-in-on-the-action">NEARCON ‘23: get in on the action</h2>
+
+
+
+<p>If you&#8217;re passionate about the transformative power of the open web, NEARCON &#8217;23 is a can&#8217;t-miss conference. We&#8217;ve carefully curated speaker tracks and sessions to fuel your imagination and skills, whether you&#8217;re a developer, entrepreneur, or creative mind. And the policy-minded need not fret, there’s a special Regulatory Track chock full of insights about evolving legal frameworks, governance, and more.&nbsp;</p>
+
+
+
+<p>With NEAR&#8217;s unique approach — super cheap, super fast, super secure — you&#8217;ll discover how the open web is solving real-world problems today.</p>
+
+
+
+<p>So why wait?<a href="https://nearcon.app/nearpad.testnet/widget/Index?tab=register"> Register for NEARCON &#8217;23 now</a> to secure your spot!</p>
+
+
+
+<p>Special offers are available for<a href="/blog/%d1%83%d0%bd%d1%96%d0%ba%d0%b0%d0%bb%d1%8c%d0%bd%d0%b0-%d0%bc%d0%be%d0%b6%d0%bb%d0%b8%d0%b2%d1%96%d1%81%d1%82%d1%8c-%d0%b4%d0%bb%d1%8f-%d1%83%d0%ba%d1%80%d0%b0%d1%97%d0%bd%d1%86%d1%96%d0%b2-%d0%b1/?_gl=1%2A1deejbu%2A_up%2AMQ..%2A_ga%2AMTY4MTY0NTc0NS4xNjk4MTUxODc4%2A_ga_9GWCXQJ62J%2AMTY5ODE1MTg3NC4xLjEuMTY5ODE1MjI2NC4wLjAuMA.."> Ukrainians</a>, students in<a href="/blog/entradas-gratuitas-a-nearcon-23-para-estudiantes-en-espana/?_gl=1%2A1deejbu%2A_up%2AMQ..%2A_ga%2AMTY4MTY0NTc0NS4xNjk4MTUxODc4%2A_ga_9GWCXQJ62J%2AMTY5ODE1MTg3NC4xLjEuMTY5ODE1MjI2NC4wLjAuMA.."> Spain</a> and<a href="/blog/estudantes-terao-ingressos-gratis-no-nearcon23/?_gl=1%2A1clz06g%2A_up%2AMQ..%2A_ga%2AMTY4MTY0NTc0NS4xNjk4MTUxODc4%2A_ga_9GWCXQJ62J%2AMTY5ODE1MTg3NC4xLjEuMTY5ODE1MjI2NC4wLjAuMA.."> Portugal</a>, and<a href="/blog/nearcon-irl-hackathon-2023-build-the-open-web/?_gl=1%2A1fu2kk1%2A_up%2AMQ..%2A_ga%2AMTY4MTY0NTc0NS4xNjk4MTUxODc4%2A_ga_9GWCXQJ62J%2AMTY5ODE1MTg3NC4xLjEuMTY5ODE1MjI2NC4wLjAuMA.."> hackathon registrants</a>. Head over to those pages and register for your free NEARCON ‘23 pass!</p>
+<p>The post <a href="/blog/nearcon-23-developer-founder-and-creative-talks-you-shouldnt-miss/">NEARCON &#8217;23: Developer, Founder, and Creative Talks You Shouldn&#8217;t Miss</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

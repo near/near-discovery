@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>A Post from Illia Polosukhin Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/category/a-post-from-illia-polosukhin/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/category/a-post-from-illia-polosukhin/</link>
+	<description></description>
+	<lastBuildDate>Wed, 24 Jan 2024 19:55:02 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>A Post from Illia Polosukhin Archives &#8211; NEAR Protocol</title>
+	<link>/blog/category/a-post-from-illia-polosukhin/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Why Chain Abstraction Is the Next Frontier for Web3</title>
+		<link>/blog/why-chain-abstraction-is-the-next-frontier-for-web3/</link>
+		
+		<dc:creator><![CDATA[Illia Polosukhin]]></dc:creator>
+		<pubDate>Wed, 24 Jan 2024 19:55:01 +0000</pubDate>
+				<category><![CDATA[A Post from Illia Polosukhin]]></category>
+		<category><![CDATA[Chain Abstraction]]></category>
+		<category><![CDATA[Ecosystem]]></category>
+		<category><![CDATA[Mission & vision]]></category>
+		<category><![CDATA[Multichain]]></category>
+		<guid isPermaLink="false">/?p=21182</guid>
+
+					<description><![CDATA[<p>Most of today’s dapps are not actually dapps, i.e. decentralized applications. If you need to leave the app in order …</p>
+<p>The post <a href="/blog/why-chain-abstraction-is-the-next-frontier-for-web3/">Why Chain Abstraction Is the Next Frontier for Web3</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Most of today’s dapps are not actually dapps, i.e. <em>decentralized applications. </em>If you need to leave the app in order to start using it, it’s not really an app––it’s just a frontend. If users have to manually onboard themselves through exchanges and manage multiple accounts and gas fees and bridges, did you even build an app? I think not––which may explain why only a few million people in the world are using dapps.&nbsp;</p>
+
+
+
+<p>If we want to see mainstream adoption of Web3 because we believe a more open, decentralized internet that supports self-sovereignty for all people is <a href="/blog/self-sovereignty-is-near-a-vision-for-our-ecosystem">better for the world</a>, then we will need to do better.</p>
+
+
+
+<p>The prevailing narrative in Web3 today is modularity, or separating out the different functional layers of a blockchain, i.e. settlement, data availability, and execution, for the sake of scalability. Layer-twos, optimistic and ZK rollups, data availability layers, sidechains, and state channels are all examples of modularity solutions.&nbsp;</p>
+
+
+
+<p>This proliferation of blockchains &amp; rollups has led to a degraded experience for users and developers. Modularity and a world of many chains leads to more fragmentation of liquidity, apps, and users––a significant degree of complexity in the user experience that no mainstream user could ever be expected to navigate. This also applies to developers, who feel pressure to commit to a specific tech stack while limiting the audience for their application. Now when you build a dapp, you’re enshrining yourself into a small addressable market by choosing a single chain.</p>
+
+
+
+<p>I want to propose a better vision for the entire Ethereum ecosystem and all of Web3: let’s work together on advancing mainstream adoption via chain abstraction. The idea is that blockchains must be abstracted away from the user so they are not barriers to entry or participation. NEAR has been focusing on this vision since 2018 and today has achieved the most users of any network in Web3: 12.4 million monthly active accounts and 34 million accounts overall.&nbsp;</p>
+
+
+
+<p>Here’s how we can defragment Web3 and onboard billions of users via dapps.&nbsp;</p>
+
+
+
+<p><strong>What does this look like for the user?&nbsp;</strong></p>
+
+
+
+<p>Let’s imagine how using a dapp should actually work: transacting across networks and navigating between experiences with ease, all within a single interface. As one example, Alice picks up her phone and opens <a href="https://kaikai.ai/">KAIKAI</a> from her lockscreen. She orders a smoothie from a local place and sees in the app that there’s a discount offer from her favorite clothing store, Maison, and orders a pair of shoes for the spring. Alice sees she has earned enough KAICHING rewards to get a badge from Maison, not knowing it’s an NFT on Polygon, and redeems it in her account.&nbsp;</p>
+
+
+
+<p>When she browses Maison on the KAIKAI app later that day, she notices that her new badge reveals an offer to buy tickets for an exclusive event at their store with a DJ she likes. She buys the ticket with KAICHING and receives 2 tickets, still not knowing it’s an NFT on Arbitrum. Since she gets a +1, Alice invites her friend Bob to come with her and pings him for his address.&nbsp;</p>
+
+
+
+<p>Bob sends his NEAR address to Alice and opens his app to check out the ticket. He sends Alice some ETH to say thanks for the invite and looks at the different cryptos he has in his account. Since he’s on the metro and has some time, he decides to buy some BTC and borrow against it with USDC so he can mint a Fighting Dragon NFT on Magic Eden. His friend Charles texted him earlier to get one so they could play each other in Year of the Dragon, a new game on NEAR where their dragons can battle each other for coins they can stake.</p>
+
+
+
+<p>All of these interactions and transactions can take place in a single interface and in a completely private way. There are no wallets, no switching networks, and no transaction fees to deal with; those are embedded directly in the swap or the buy and handled on behalf of the user. Alice didn’t need to worry about which network the ticket is on and Bob can send her funds for the ticket in whichever crypto he wants, moving seamlessly into buying a different one the next second. All inside of an app. This is the level of seamlessness we should be striving for as an ecosystem.</p>
+
+
+
+<p><strong>How do we achieve Chain Abstraction?</strong></p>
+
+
+
+<p>Everyone building an app in Web3 will benefit from being able to access such a broad market of potential users as in this example––i.e. anyone who uses apps. Whereas today, developers choose a network based on access to liquidity or the users of a specific rollup or chain, in a chain abstraction future they can just build with the best tech. The users will show up for the best experiences.&nbsp;</p>
+
+
+
+<p>Imagine if a Gmail user couldn’t just send a message to an Outlook address––it doesn’t make sense. The same is true for Web3 addresses. The core assumption of chain abstraction is: end users don’t care about the underlying blockchain. They just want apps to work. In reality, blockchains are simply infrastructure to receive value out of Web3: security of assets from seizure, economic opportunity, removing middlemen for transactions, global permissionless identity, data provenance, entertaining experiences, and more.</p>
+
+
+
+<p>The core goal of chain abstraction is to defragment the increasingly fractured modular landscape of Web3. While this will be most visible at the user experience layer, this defragmentation of liquidity and accounts is possible thanks to innovation at the security layer.&nbsp;</p>
+
+
+
+<p>Zero knowledge (ZK) introduces a principally new approach to ledger security. Whereas before one needed to trust a decentralized set of validators, now even a single computer can prove that rules were followed with a simple proof. This means that where before, developers would be forced to either build on a shared chain or spend immense resources to launch a new one, now they can just spin one up on their single server.</p>
+
+
+
+<p>This new paradigm introduces the idea of cross settlement: as more chains become fully ZK provable, if some proof is published on other chains, there is no way to revert this chain without also needing to revert other chains. Transactions from one chain can also settle on multiple others via ZK proofs. This provides mesh security as all proofs continuously get aggregated, allowing the safe movement of assets between such chains.</p>
+
+
+
+<p>In order to achieve unified security, two things are needed at the bottom of the stack: Data availability, which provides a way for everyone to sync even if the operator is offline, and a decentralized sequencer for applications that don’t have a central operator.&nbsp;</p>
+
+
+
+<p>The next layer is identity with that security unified. Users can have an address on all possible chains and move assets between them freely. From a user perspective, this should be a single account where they interact with apps on different chains, and assets either get bridged or swapped automatically.&nbsp;</p>
+
+
+
+<p>I call this “account aggregation” and will share more details about it in another post soon. NEAR will launch the next version of FastAuth in March 2024, which has mapping for NEAR addresses to EVM, Bitcoin, and other addresses. NEAR accounts can request to sign a transaction for another chain. This allows them to build multichain apps directly as smart contracts on NEAR.&nbsp;</p>
+
+
+
+<p>The final layer is unifying the experience layer, or the application layer (e.g. <a href="https://alpha.dapdap.net/">DapDap</a>)––providing a way to interact with apps on various chains without users switching or needing to leave a single interface. A decentralized frontend can provide easy components to build in a chain-abstracted way. NEAR can achieve this through NearJS, combining data indexing and decentralized frontends––V2 also coming in March 2024. </p>
+
+
+
+<p><strong>How is NEAR enabling Chain Abstraction?&nbsp;</strong></p>
+
+
+
+<p>The NEAR ecosystem has been building towards the chain abstraction vision since its beginnings in 2018, focusing on usability, a flexible account model, and a highly scalable blockchain that could support mainstream apps with billions of users. Today, the stack has expanded to support full chain abstraction across chains and all kinds of apps.&nbsp;</p>
+
+
+
+<ul>
+<li>Scalable, integrated blockchain that can grow to 1B+ daily active accounts.</li>
+
+
+
+<li>Security aggregation stack consisting of <a href="https://near.org/data-availability">NEAR DA</a>, <a href="https://blockworks.co/news/polygon-developers-zk-proofs">zkWASM</a> (collaboration with Polygon Labs), and <a href="https://near.org/blog/near-foundation-and-eigen-labs-partner-to-enable-faster-cheaper-web3-transactions-for-ethereum-rollups-via-eigenlayer/">EigenLayer-powered Fast Finality</a>.</li>
+
+
+
+<li>Account aggregation on top of this to enable transacting on all chains using a single account</li>
+
+
+
+<li>Data layer that supports everything from monolithic, integrated, modular, private and permissioned chains to query data in a <a href="https://docs.near.org/bos/queryapi/intro">predictable protocol</a>.</li>
+
+
+
+<li>Intent relayers that can execute complex intents across chains using this infra.</li>
+
+
+
+<li><a href="https://docs.near.org/bos/overview">Decentralized frontends</a> that provide discoverability and composability for multiple apps across chains into one experience.</li>
+
+
+
+<li>Super (app) wallets that are user friendly and offer a way to navigate all of Web3 without having to switch networks or deal with gas tokens and bridges.</li>
+</ul>
+
+
+
+<p>Importantly, each of these layers supports builders from across Web3, including Ethereum, rollups &amp; L2s, and beyond––the multichain future is becoming the chain abstraction future.&nbsp;</p>
+
+
+
+<p><strong>Call to Action</strong></p>
+
+
+
+<p>2024 is the year of hiding the complexity of multichain infrastructure to deliver the Web3 experiences we’re striving for. Improving usability and discoverability should be a priority for all Web3 builders, as well as solving for liquidity fragmentation and security tradeoffs.&nbsp;</p>
+
+
+
+<p>Let’s make chain abstraction a movement. The NEAR ecosystem invites builders from across Web3 to take advantage of the solutions we’re offering and to collaborate with us to build more chain abstraction solutions together. Stay tuned for more news on collaborations as well as details on an exciting event that NEAR Foundation will co-host at ETHDenver 2024.<br><br><em>Special thanks to Zaki Manian for conversations that led to this post as well as for his review.</em></p>
+<p>The post <a href="/blog/why-chain-abstraction-is-the-next-frontier-for-web3/">Why Chain Abstraction Is the Next Frontier for Web3</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>Self-Sovereignty Is NEAR: A Vision for Our Ecosystem</title>
+		<link>/blog/self-sovereignty-is-near-a-vision-for-our-ecosystem/</link>
+		
+		<dc:creator><![CDATA[Illia Polosukhin]]></dc:creator>
+		<pubDate>Fri, 19 Jan 2024 20:19:02 +0000</pubDate>
+				<category><![CDATA[A Post from Illia Polosukhin]]></category>
+		<category><![CDATA[Chain Abstraction]]></category>
+		<category><![CDATA[Mission & vision]]></category>
+		<category><![CDATA[NEAR Ecosystem]]></category>
+		<category><![CDATA[Self-Sovereignty]]></category>
+		<category><![CDATA[User-Owned AI]]></category>
+		<guid isPermaLink="false">/?p=21170</guid>
+
+					<description><![CDATA[<p>As a kid growing up in Ukraine in the ’90s after the dissolution of the USSR, I remember we watched …</p>
+<p>The post <a href="/blog/self-sovereignty-is-near-a-vision-for-our-ecosystem/">Self-Sovereignty Is NEAR: A Vision for Our Ecosystem</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p></p>
+
+
+
+<p>As a kid growing up in Ukraine in the ’90s after the dissolution of the USSR, I remember we watched the price of bread go from 1,000 karbovanets, to 10,000, to 100,000 in less than five years (until that currency was thrown out altogether and replaced with hryvnia). When I first started working as a software developer as a teenager, I kept my earnings in cash in my room because I already understood that we couldn’t trust corrupt banks with our money.</p>
+
+
+
+<p>Between 2014 and 2016 alone, 77 banks failed in Ukraine. My grandparents still have their savings account bank books tracking the money they put away during the USSR years––but those savings don’t exist anymore. So even something that is yours, that you rightfully own, can go away if the system you’re a part of fails. The same thing is happening to millions of people living under hyperinflation, dictatorships, and war zones across the world, of course. And while these may seem like abstract or distant problems that won’t arrive at your doorstep, let me tell you from my own experience: nothing is guaranteed.&nbsp;</p>
+
+
+
+<p>Every system is as fragile as the rules holding it together. And the rules can change. They’re changing around us right now, and I believe we are approaching a point of no return.&nbsp;</p>
+
+
+
+<p><strong>The Need for Digital Self-Sovereignty</strong></p>
+
+
+
+<p>We need to create new economic opportunities for people everywhere via self-sovereignty, which should be a universal right and which technology can now provide, not just nation-states as in most other points in history. For citizens of nations who’ve enjoyed economic security and a high degree of sovereignty, this may not seem like an immediate-term issue. But it is.&nbsp;</p>
+
+
+
+<p>The economics of tech companies leads inevitably to corrupting their original product or vision for the sake of profit in order to maintain growth, and more importantly, they naturally involve creating barriers for someone else to disrupt. In order to maintain their power, governments will use pressure and ingenuity in order to control their populations, too often to the point of violating human rights in the name of safety or security.&nbsp;</p>
+
+
+
+<p>We all use our phones and computers a thousand times a day, prioritizing convenience over self-sovereignty because <em>until now, we haven’t had a choice</em>. We are now approaching a tipping point towards a dystopian future that we may not be able to come back from, brought on not just by governments but by the economics of tech companies. What happens when these incentives increasingly collide and push each other deeper into the lives of individuals for the sake of maintaining control and profit?&nbsp;</p>
+
+
+
+<p>That’s right about where we are today.&nbsp;</p>
+
+
+
+<p><strong>Changing the Stakes with Generative AI</strong></p>
+
+
+
+<p>Before founding NEAR, I was an AI researcher. I worked at Google where I contributed to TensorFlow, and eventually published a paper with a handful of colleagues called “Attention Is All You Need.” That paper introduced the Transformers architecture that powers ChatGPT, Bard, and most of the well-known LLMs behind last year’s explosive growth in AI.&nbsp;</p>
+
+
+
+<p>I was first interested in AI because of the 2001 movie, “Artificial Intelligence.” Changing how we interact with computing and augmenting one&#8217;s intelligence to maximize human potential was, and still is, very appealing to me. And I still think it has the potential to make human lives, organizations, even governments better. But like any other technology, in the hands of the wrong people or with the wrong incentives, it also has the potential to make our lives terrible. </p>
+
+
+
+<p>Generative AI is creating a universal and scalably personal method of enabling control and manipulation. Practically, it means your social feed and search results can ensure that you buy specific products or form a specific opinion. This will start in the form of commercial improvements that lead to more profit for tech giants: Netflix will generate a movie script that can shape your opinion, Facebook can reinforce that opinion by showing you more of it, and so on. This could even happen at a more fundamental level, such as flooding training data with specific information to influence all models trained on it.&nbsp;</p>
+
+
+
+<p>If this granular information and vector of manipulation on such a personal level can be extracted or bought, it will be, and then it will become a tool for control. If it’s stored somewhere centralized and hackable, it will be stolen––we see this constantly with Web2 giants as it is. If governments can get access to this data, they will use it to maintain or grow their power.&nbsp;</p>
+
+
+
+<p>The true danger that generative AI introduces is that this exploitation won’t just be on a systems level or a population level, it will become personal and incredibly specific. The depth of potential control and manipulation goes to the level of each and every human, no matter where they live, no matter where they keep their money. Such a powerful technology simply cannot remain in the hands of centralized companies, nor be too easy for governments to take over.</p>
+
+
+
+<p><strong>So What Should We Do About It?</strong></p>
+
+
+
+<p>So if people don’t yet feel the sense of urgency towards building new systems that uphold self-sovereignty, what will make it real for people? Changes in collective values are always driven by economic opportunity. The major revolutions of history started because of economic failures: American independence from Britain, the French Revolution, the collapse of the USSR, and so on. If people see ways to create better economic realities for themselves and their families, then they will turn values into actions.&nbsp;</p>
+
+
+
+<p>Creating new opportunities for people via self-sovereignty is what NEAR is about. Complete self-sovereignty&nbsp; has been the NEAR vision since day one: we want to build a world where all people can control their own assets, data, and power of governance. This sovereignty must apply not only at the level of individuals but also the organizations and communities they create, and eventually societies.&nbsp;</p>
+
+
+
+<p>Self-sovereignty is a new primitive that hasn’t existed before today. One always needed to rely on some power of violence for ensuring rules are followed, most recently nation-states. One of the core principles of digital self-sovereignty is the ability to choose and switch between any service provider. There is no lock- in. There are no middlemen like banks or government agencies that can lose or steal assets, or change the rules on you out of nowhere.&nbsp;</p>
+
+
+
+<p>Importantly, this must also apply to AI. People need to own their data so they know what it’s being used for and so they can actively consent to personalized experiences they think will improve their lives. Models must be governed transparently, in public, with clear rules and monitoring to proactively manage risk and reputation systems to build more clarity around information and traceability. Web3 can help to uphold, scale, and manage such systems to ensure AI is a force for good while also preventing it from being too exploitable.&nbsp;</p>
+
+
+
+<p>Another major challenge, which is especially clear in governance but it also applies to corporations, is that when we select someone to represent our ideas for us as our delegate, they will always have their own interests and motivations in the mix as well. They don’t necessarily have nefarious intentions, it’s just a natural tendency. This is the “principal agent problem,” wherein the person elected behaves differently than the people who elected them or pay them would prefer based on their best interests. This is where AI governance systems can help by introducing neutral agents, where unbiased AI agents governed directly by a community can act on their behalf in a more reliable way. With transparent governance and monitoring, AI can be a force for good in individual lives as well as for the collective.&nbsp;</p>
+
+
+
+<p><strong>A Vision for the NEAR Future</strong></p>
+
+
+
+<p>Despite my concerns about where the traditional tech paradigm is potentially heading, I remain a techno-optimist. I wouldn’t be doing this work if I didn’t think it was for the good of everyone, and I’ve read enough sci-fi to know that the outcomes of science and technology are much more about what people do with them than the tech itself. If we want something, we should build it.&nbsp;</p>
+
+
+
+<p>I would like NEAR to become a fully sovereign operating system that is equipped with a personal AI assistant that optimizes for users’ needs without revealing private information about the user’s data or assets. It should also be able to interact and transact with other people’s AIs and the community’s AIs peer-to-peer. I call this “user-owned AI.”</p>
+
+
+
+<p>We also need shared community AIs, which are governed by the members of such a community. They represent the mix of needs and knowledge of all the members of such a community, from something like a small club or startup, to the city, to the nation-state, to the global level. There is always an opportunity to fork one community and create new ones. The community governs which data goes into training its community model, and can run inference (running live data through a model) privately in such a way that only the user sees input and output, while getting a proof that the selected model was used.</p>
+
+
+
+<p>To facilitate this vision, a lot of pieces need to come together:</p>
+
+
+
+<ul>
+<li>Economic and technological opportunity to enable users to onboard en masse.</li>
+
+
+
+<li>Open source software across the stack, from blockchain tech to AI models.</li>
+
+
+
+<li>Blockchains must get abstracted away from the user so they are not barriers to entry or participation. I call this the principle of Chain Abstraction.</li>
+
+
+
+<li>Applications must provide a novel value unlock: for example, <a href="https://kaikai.ai/">Cosmose</a> and <a href="https://sweateconomy.com/">Sweat</a>. These apps reward users and serve as an economic gateway into a broader ecosystem of opportunities.</li>
+
+
+
+<li>On-edge, meaning hyperlocal, AI models that are usable by individuals (and free of manipulation).</li>
+
+
+
+<li>Community-owned AI models with governance and economic opportunity, replacing everything from business ops to government agencies. Self-governance by the people, for the people, at scale with the help of technology and decentralized peer-to-peer systems.</li>
+</ul>
+
+
+
+<p>Blockchains, peer-to-peer payments, Web3, zero-knowledge, very large language models and on-edge AI models: these are not separate technology verticals, but rather interconnected facets of a new digital paradigm of self-sovereignty.&nbsp;</p>
+
+
+
+<p>We have the tools to remake how we provide for ourselves, how we work together and govern ourselves, and how we consume and generate information. Without gatekeepers, fair and open to everyone. And this is not a futuristic vision: it’s possible to start experimenting and building now, before our fragile and outdated systems and structures get weaker or fail, before too much centralization leads to the worst outcomes instead of the ones we all design and share together.<br><br>––<em>Illia Polosukhin, Co-Founder of NEAR and CEO of NEAR Foundation</em></p>
+<p>The post <a href="/blog/self-sovereignty-is-near-a-vision-for-our-ecosystem/">Self-Sovereignty Is NEAR: A Vision for Our Ecosystem</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

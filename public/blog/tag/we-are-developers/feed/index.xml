@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>We Are Developers Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/we-are-developers/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/we-are-developers/</link>
+	<description></description>
+	<lastBuildDate>Thu, 27 Jul 2023 19:02:02 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>We Are Developers Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/we-are-developers/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR&#8217;s BOS Impact at We Are Developers 2023 World Congress</title>
+		<link>/blog/nears-bos-impact-at-we-are-developers-2023-world-congress/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 27 Jul 2023 16:45:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[NEAR Balkans]]></category>
+		<category><![CDATA[We Are Developers]]></category>
+		<guid isPermaLink="false">/?p=20770</guid>
+
+					<description><![CDATA[<p>The excitement is palpable as NEAR hits the ground in the vibrant city of Berlin for the We Are Developers …</p>
+<p>The post <a href="/blog/nears-bos-impact-at-we-are-developers-2023-world-congress/">NEAR&#8217;s BOS Impact at We Are Developers 2023 World Congress</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The excitement is palpable as NEAR hits the ground in the vibrant city of Berlin for the <a href="https://www.wearedevelopers.com/world-congress">We Are Developers World Congress 2023</a>. With a packed agenda and a bustling venue, the stage is set for a memorable exploration into the Blockchain Operating System (BOS).</p>
+
+
+
+<p>Amidst a crowd of enthusiastic developers, NEAR is showcasing the immense potential of BOS. The team looks forward to sparking curiosity, fostering innovation, and expanding horizons within the global developer community, setting the tone for a transformative two days.<br>Let&#8217;s take a quick look at what happened on Day 1 with NEAR at We Are Developers, before taking a look at what&#8217;s on the schedule for Day 2, July 28th. </p>
+
+
+
+<h2 class="wp-block-heading" id="h-on-the-agenda-near-s-engaging-bos-offerings">On the agenda: NEAR&#8217;s engaging BOS offerings</h2>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="682" src="/wp-content/uploads/2023/07/IMG_2718-1024x682.jpg" alt="" class="wp-image-20778" srcset="/wp-content/uploads/2023/07/IMG_2718-1024x682.jpg 1024w, /wp-content/uploads/2023/07/IMG_2718-300x200.jpg 300w, /wp-content/uploads/2023/07/IMG_2718-768x512.jpg 768w, /wp-content/uploads/2023/07/IMG_2718.jpg 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>The conference kicked off with &#8220;Exploring BOS: The Blockchain Operating System by NEAR&#8221;, scheduled for Thursday, July 27, at 3:30 PM and led by Andrej Šarić, senior NEAR developer. The presentation dissectd how BOS is redefining the application-building landscape while highlighting user-friendly onboarding and seamless multi-chain interactions.</p>
+
+
+
+<p>Friday, July 28, will see the enlightening &#8220;Mastering BOS: A Developer Workshop&#8221;, helmed by Andrej along with fellow senior developer, Alen Meštrov. A must-attend for developers keen to enhance their BOS acumen, this comprehensive workshop promises an in-depth, immersive learning experience, centered around the innovative capabilities of BOS.</p>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="768" src="/wp-content/uploads/2023/07/photo_2023-07-27_19-10-14-1-1024x768.jpg" alt="" class="wp-image-20776" srcset="/wp-content/uploads/2023/07/photo_2023-07-27_19-10-14-1-1024x768.jpg 1024w, /wp-content/uploads/2023/07/photo_2023-07-27_19-10-14-1-300x225.jpg 300w, /wp-content/uploads/2023/07/photo_2023-07-27_19-10-14-1-768x576.jpg 768w, /wp-content/uploads/2023/07/photo_2023-07-27_19-10-14-1.jpg 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>Additionally, the &#8220;Tekuno Activation: Devs Without Limits&#8221; is adding an exciting gamified element to the conference, running throughout both days (more on this below). Attendees are encouraged to collect PODs at the NEAR booth, as well as during both BOS sessions, culminating in the exclusive &#8220;We Are Devs&#8221; POD and a shot at winning a ticket to NEARCON 2023.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-making-waves-the-buzz-at-the-near-booth">Making waves: the buzz at the NEAR booth</h2>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="682" src="/wp-content/uploads/2023/07/IMG_2716-1024x682.jpg" alt="" class="wp-image-20779" srcset="/wp-content/uploads/2023/07/IMG_2716-1024x682.jpg 1024w, /wp-content/uploads/2023/07/IMG_2716-300x200.jpg 300w, /wp-content/uploads/2023/07/IMG_2716-768x512.jpg 768w, /wp-content/uploads/2023/07/IMG_2716.jpg 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>NEAR&#8217;s BOS booth is serving as a dynamic hotspot of interactivity and engagement throughout the event. Attendees enthusiastically participated in the “How Big of a Dev BOS(s) are you really?” quiz, testing their knowledge about blockchain development while adding a dose of fun to their conference experience.</p>
+
+
+
+<p>In addition to being a learning hub, the booth continues to be a place for connection. Visitors had the opportunity to meet some of the brilliant minds behind NEAR, fostering meaningful interactions, exchanging ideas, and discussing BOS&#8217;s transformative potential. The booth was also brimming with awesome NEAR merchandise for everyone who stopped by.</p>
+
+
+
+<h2 class="wp-block-heading">Tekuno activation: &#8220;Devs Without Limits&#8221; POD</h2>
+
+
+
+<figure class="wp-block-image size-large"><img loading="lazy" decoding="async" width="1024" height="682" src="/wp-content/uploads/2023/07/IMG_2709-1024x682.jpg" alt="" class="wp-image-20780" srcset="/wp-content/uploads/2023/07/IMG_2709-1024x682.jpg 1024w, /wp-content/uploads/2023/07/IMG_2709-300x200.jpg 300w, /wp-content/uploads/2023/07/IMG_2709-768x512.jpg 768w, /wp-content/uploads/2023/07/IMG_2709.jpg 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>The feature stealing the spotlight at the NEAR booth is the Tekuno activation. Offering the exclusive &#8220;Devs Without Limits&#8221; NFT collection, attendees can collect PODs at the booth, the &#8220;Mastering BOS&#8221; workshop, and the &#8220;Exploring BOS&#8221; talk. Successfully gathering these PODs unlocks the ultimate &#8220;We Are Devs&#8221; POD and offers the chance to win a free ticket to NEARCON 2023.</p>
+
+
+
+<p>With the We Are Developers World Congress 2023 in full swing, the NEAR team continues to engage passionately with attendees and fellow developers. Every conversation, presentation, and interaction amplifies the buzz around the transformative power of the Blockchain Operating System (BOS).</p>
+
+
+
+<p>There&#8217;s plenty more to explore and experience as the event unfolds. If you haven&#8217;t yet visited the NEAR booth or attended our sessions, seize the opportunity to dive into BOS and discover its revolutionary impact on the application-building process. And don’t forget to partake in all the fun and rewards, like a chance to win NEARCON tickets with Tekuno PODs.</p>
+<p>The post <a href="/blog/nears-bos-impact-at-we-are-developers-2023-world-congress/">NEAR&#8217;s BOS Impact at We Are Developers 2023 World Congress</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

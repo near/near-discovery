@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Roadmaps Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/roadmaps/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/roadmaps/</link>
+	<description></description>
+	<lastBuildDate>Thu, 15 Dec 2022 13:34:08 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Roadmaps Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/roadmaps/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR Protocol Roadmap 2023-4: The Next 2 Years of NEAR￼</title>
+		<link>/blog/near-protocol-roadmap-2023-4-the-next-2-years-of-near%ef%bf%bc/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Wed, 09 Nov 2022 13:33:43 +0000</pubDate>
+				<category><![CDATA[Community]]></category>
+		<category><![CDATA[Mission & vision]]></category>
+		<category><![CDATA[Roadmaps]]></category>
+		<guid isPermaLink="false">/?p=19009</guid>
+
+					<description><![CDATA[<p>This post, written by Pagoda&#8217;s Head of Protocol Bowen Wang, originally appeared on the Web3 startup platform and main contributor …</p>
+<p>The post <a href="/blog/near-protocol-roadmap-2023-4-the-next-2-years-of-near%ef%bf%bc/">NEAR Protocol Roadmap 2023-4: The Next 2 Years of NEAR￼</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><em>This post, written by Pagoda&#8217;s Head of Protocol Bowen Wang, originally appeared on the Web3 startup platform and main contributor to the core Protocol</em> <em>Pagoda&#8217;s blog. </em></p>
+
+
+
+<p>NEAR has evolved tremendously in the two years since the mainnet launch in October 2020.&nbsp;More than 20 protocol upgrades were done live, most recently the launch of Sharding Phase 1.&nbsp;As we look ahead to the next two phases of sharding and beyond, it’s time for an updated protocol roadmap.</p>
+
+
+
+<p>This post will outline&nbsp;the next two years of evolving the NEAR Protocol and the technical priorities we believe will benefit builders and users the most. The roadmap is meant to be a living document and anyone is welcome to make suggestions or proposals on how the protocol should evolve.</p>
+
+
+
+<p>The roadmap has two major components: Experience and Core. The Experience section encompasses user and/or developer experience and the protocol features needed to enable those experiences. As an example, an iPhone user can freely start to use applications built on top of NEAR without having to register an account if we have meta transactions and support for Secp256r1 keys.</p>
+
+
+
+<p>The Core section, on the other hand, covers major efforts to improve the scalability and decentralization of the protocol. Most notably, this features the launch of phase 2 of sharding, which scales the network to 100 shards with no validators tracking all shards. Phase 2 is planned for 2023. The roadmap goes through 2024 with the delivery of phase 3 of sharding, which dynamically adjusts the number of shards based on demand.</p>
+
+
+
+<p><strong>Head over to the <a href="https://www.pagoda.co/blog/protocol-roadmap-2023-4-the-next-2-years-of-near">Pagoda blog</a> to read the NEAR Protocol Roadmap 2023-4 with infographics.</strong></p>
+<p>The post <a href="/blog/near-protocol-roadmap-2023-4-the-next-2-years-of-near%ef%bf%bc/">NEAR Protocol Roadmap 2023-4: The Next 2 Years of NEAR￼</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

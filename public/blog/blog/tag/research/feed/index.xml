@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Research Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/research/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/research/</link>
+	<description></description>
+	<lastBuildDate>Thu, 15 Dec 2022 08:30:15 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Research Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/research/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR Developer Research: Validating the NEAR DevX Tech Stack &#8211; Round 2</title>
+		<link>/blog/near-developer-research-validating-the-near-devx-tech-stack-round-2/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 29 Oct 2020 16:29:13 +0000</pubDate>
+				<category><![CDATA[Developers]]></category>
+		<category><![CDATA[Research]]></category>
+		<guid isPermaLink="false">/?p=6284</guid>
+
+					<description><![CDATA[<p>Update: We&#8217;ve quickly filled up the available sessions for this round of research, and will not be taking on any …</p>
+<p>The post <a href="/blog/near-developer-research-validating-the-near-devx-tech-stack-round-2/">NEAR Developer Research: Validating the NEAR DevX Tech Stack &#8211; Round 2</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[<p><strong>Update: We&#8217;ve quickly filled up the available sessions for this round of research, and will not be taking on any more participants. The post will remain on the blog for those interested in getting a peek at what we&#8217;re up to. For those interested in participating, check back for round 3!</strong></p>
+<p><span style="font-weight: 400;">After a successful first round of research diving into the developer experiences of AssemblyScript and Rust earlier this month, we’re back in action with ROUND 2. This is a <em>compensated opportunity to contribute to the future success of NEAR</em> and help shape the future of developer experience for the community.</span></p>
+<h3><span style="font-weight: 400;">Validating the NEAR DevX Tech Stack</span></h3>
+<p><span style="font-weight: 400;">The next big decision we welcome the community to participate in is how we will support AssemblyScript in addition to Rust as a WASM source. We want to test our assumptions about the value propositions of these languages with community developers in order to make an informed, evidence based decision on what we choose to support, and to what extent.</span></p>
+<p><a href="https://www.notion.so/Validating-the-NEAR-DevX-Tech-Stack-Round-1-2366dce9e3184ddbb809b44ff2700b91"><span style="font-weight: 400;">Round 1</span></a><span style="font-weight: 400;"> of this initiative focused on reading and discussing a set of pre-written contracts.</span></p>
+<p><span style="font-weight: 400;">For Round 2, we want to walk through setting up and deploying a simple contract with our developer participants in order to compare and contrast the experience between languages. If selected, participants who complete a session with us will be compensated with $50 of value in the form of a gift card or tokens depending on location.</span></p>
+<p><del datetime="2020-11-02T19:27:36+00:00"><strong>If interested in participating, fill out <a>this invite form</a></strong><span style="font-weight: 400;"><strong> to connect with our team. </strong></span><b><i>You do not have to have participated in Round 1 to participate in Round 2.</i></b></del></p>
+<h3><span style="font-weight: 400;">What you’ll do</span></h3>
+<p><span style="font-weight: 400;">It’s easy to join and we’re open to feedback from community members from around the world. After a quick survey and remote interview we’ll ask you to complete a few simple dev tasks and provide your feedback to the team.</span></p>
+<ol>
+<li style="font-weight: 400;"><b>Pre-interview Survey</b><b><br />
+</b><span style="font-weight: 400;"> New participants will be asked to complete a short pre-interview survey about their development experience to help us categorize feedback.</span>&nbsp;</li>
+<li style="font-weight: 400;"><b>Remote Interview</b><span style="font-weight: 400;"> (</span><i><span style="font-weight: 400;">15 min</span></i><span style="font-weight: 400;">)</span><span style="font-weight: 400;"><br />
+</span><span style="font-weight: 400;"><span style="font-weight: 400;"><span style="font-weight: 400;"> At the start of the session, new participants will be interviewed about their development experience and their opinions about the tools that we&#8217;re testing.</span></span></span>&nbsp;</li>
+<li style="font-weight: 400;"><b>Remote Technical Exercises</b><span style="font-weight: 400;"> (</span><i><span style="font-weight: 400;">35 &#8211; 60min</span></i><span style="font-weight: 400;">)</span><span style="font-weight: 400;"><br />
+</span><span style="font-weight: 400;">Each participant will be asked to complete a series of short tasks focused on customizing a smart contract on NEAR, and to share their thoughts along the way. </span><span style="font-weight: 400;"><br />
+</span><span style="font-weight: 400;"><br />
+</span><span style="font-weight: 400;">Participants will be asked to:</span></p>
+<ul>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Use </span><a href="https://github.com/near/create-near-app"><span style="font-weight: 400;">create-near-app</span></a><span style="font-weight: 400;"> to generate new projects in Rust and AssemblyScript</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Edit contract code to pass a set of pre-written unit tests</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Build and deploy the contract to the NEAR Testnet</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Verify that the contract works as expected and troubleshoot any issues</span></li>
+</ul>
+</li>
+</ol>
+<h3><span style="font-weight: 400;">You&#8217;re a great fit if you fall into </span><b><i>any</i></b><span style="font-weight: 400;"> of the following categories:</span></h3>
+<p><i><span style="font-weight: 400;">&#8230; you&#8217;re a developer with experience in </span></i><b><i>Javascript / Typescript</i></b></p>
+<p><i><span style="font-weight: 400;">&#8230; you&#8217;re a developer with experience in </span></i><b><i>AssemblyScript</i></b></p>
+<p><i><span style="font-weight: 400;">&#8230; you&#8217;re a developer with experience in </span></i><b><i>Rust</i></b></p>
+<p><i><span style="font-weight: 400;">&#8230; you&#8217;re a developer with experience in </span></i><b><i>Solidity</i></b></p>
+<p><i><span style="font-weight: 400;">&#8230; you&#8217;re interested in getting some hands-on time with some of the </span></i><b><i>basic NEAR developer tooling.</i></b></p>
+<p><del datetime="2020-11-02T19:27:36+00:00"><span style="font-weight: 400;">If this sounds like you, and you&#8217;d like to participate in this initiative, </span><a><b>please fill out the participant sign up form here</b></a><span style="font-weight: 400;">, and we&#8217;ll reach out with additional details should you be selected!</span></del></p>
+<p>The post <a href="/blog/near-developer-research-validating-the-near-devx-tech-stack-round-2/">NEAR Developer Research: Validating the NEAR DevX Tech Stack &#8211; Round 2</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

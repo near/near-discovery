@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Coinbase Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/coinbase/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/coinbase/</link>
+	<description></description>
+	<lastBuildDate>Wed, 07 Jun 2023 08:18:09 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Coinbase Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/coinbase/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR Foundation&#8217;s Response to the SEC&#8217;s Recent Coinbase Complaint</title>
+		<link>/blog/near-foundations-response-to-the-coinbase-sec-filing/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Tue, 06 Jun 2023 18:01:37 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Coinbase]]></category>
+		<guid isPermaLink="false">/?p=20578</guid>
+
+					<description><![CDATA[<p>We are aware of the news that the most recent SEC complaint against Coinbase, published today, alleges the NEAR token …</p>
+<p>The post <a href="/blog/near-foundations-response-to-the-coinbase-sec-filing/">NEAR Foundation&#8217;s Response to the SEC&#8217;s Recent Coinbase Complaint</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>We are aware of the news that the most recent SEC complaint against Coinbase, published today, alleges the NEAR token (along with many other crypto assets) is a crypto asset that is being offered and sold as an investment contract, and thus as a security (see the full complaint <a href="https://storage.courtlistener.com/recap/gov.uscourts.nysd.599908/gov.uscourts.nysd.599908.1.0.pdf">here</a>).&nbsp;</p>
+
+
+
+<p>This SEC enforcement action is not against the NEAR Foundation (the “Foundation”) (or any other participant in the NEAR ecosystem). In any event, the Foundation disagrees with (and is surprised by) the inclusion of the NEAR token in the complaint, and we believe the Foundation has not violated any applicable US securities laws.&nbsp;</p>
+
+
+
+<p>The Foundation is regulated in Switzerland and the NEAR token has been characterized as a payment token (and not as a security) under Swiss law.</p>
+
+
+
+<p>Over the last few months, given the increased regulatory scrutiny and hostility in the US, we have continued to strengthen our team and surround ourselves with the best advisors in the industry, and we will continue to do so.&nbsp;</p>
+
+
+
+<p>Keeping our ecosystem safe has always been &#8211; and will remain &#8211; at the forefront of what we do.&nbsp;</p>
+
+
+
+<p>We understand this might feel unsettling, however we are concerned but confident and the Foundation leadership and legal team are prepared for this development.&nbsp;</p>
+
+
+
+<p>The best thing we can all be doing is to continue focusing on building great products, bringing delightful user experiences, and onboarding millions into web3. In other words, business as usual.</p>
+<p>The post <a href="/blog/near-foundations-response-to-the-coinbase-sec-filing/">NEAR Foundation&#8217;s Response to the SEC&#8217;s Recent Coinbase Complaint</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
