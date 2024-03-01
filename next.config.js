@@ -86,7 +86,7 @@ const nextConfig = {
     },
     {
       source: '/blog',
-      destination: '/blog/page/2/index.html',
+      destination: '/blog/',
     },
     {
       source: '/blog/:path*',
