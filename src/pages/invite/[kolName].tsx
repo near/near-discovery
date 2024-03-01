@@ -17,8 +17,6 @@ const LandingPage: NextPageWithLayout = () => {
 
   const [isKol, setIsKol] = useState(false);
 
-  console.log('account: ', account);
-
   const kolName = router.query.kolName;
 
   async function getKolInfo() {

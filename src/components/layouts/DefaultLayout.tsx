@@ -14,7 +14,6 @@ interface Props {
 }
 
 const Layout = styled.div`
-  background: #16181d;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -30,10 +29,13 @@ const Layout = styled.div`
 
 export function DefaultLayout({ children }: Props) {
   const router = useRouter();
-
   const pathName = router.pathname;
   return (
-    <Layout>
+    <Layout
+      style={{
+        background: router.pathname === '/odyssey/[version]' ? '#000' : '#16181d',
+      }}
+    >
       {pathName !== '/uniswap' && <DesktopNavigationTop />}
 
       <div className="content">
