@@ -11,8 +11,16 @@ type EventData = {
   };
 };
 
-export const fetchEventsList = async (): Promise<EventData[]> => {
-  const res = await fetch(`${eventsApiUrl}/calendar/list-events`, {
+type EventsListData = {
+  entries: EventData[];
+  hasMore: boolean;
+};
+
+export const fetchEventsList = async (limit: number, offset: number): Promise<EventsListData> => {
+  const queryLimit = `pagination_limit=${limit ?? 10}`;
+  const queryOffset = offset ? `pagination_offset=${offset}` : '';
+  const queryParams = `${queryLimit}${queryOffset ? `&${queryOffset}` : ''}`;
+  const res = await fetch(`${eventsApiUrl}/calendar/list-events?${queryParams}`, {
     method: 'GET',
     headers: {
       accept: 'application/json',
@@ -24,6 +32,6 @@ export const fetchEventsList = async (): Promise<EventData[]> => {
     throw new Error('Failed to fetch data');
   }
 
-  const data = (await res.json()) as { entries: EventData[] };
-  return data.entries;
+  const data = (await res.json()) as { entries: EventData[]; has_more: boolean };
+  return { entries: data.entries, hasMore: data.has_more };
 };
