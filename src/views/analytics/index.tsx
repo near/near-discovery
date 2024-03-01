@@ -40,7 +40,7 @@ const Dashboard: FC<IProps> = ({}) => {
     },
     {
       type: 'polyline',
-      title: 'Transaction',
+      title: 'Transaction on chain',
       count: 0,
       increase: 0,
       icon: '/images/dashboard/polyline.svg',
@@ -255,7 +255,8 @@ const Dashboard: FC<IProps> = ({}) => {
       .map((item: any) => ({
         name: item.name,
         logo: item.logo,
-        total_trading_value: formatThousandsSeparator(+Number(item.total_trading_value).toFixed(2)),
+        total_trading_value: +Number(item.total_trading_value).toFixed(2),
+        // total_trading_value: formatThousandsSeparator(+Number(item.total_trading_value).toFixed(2)),
         total_users: item.total_users,
       }));
     setChainsData(_chainsData);
@@ -318,7 +319,35 @@ const Dashboard: FC<IProps> = ({}) => {
             </Styles.SummaryItem>
           ))}
         </Styles.Summary>
-
+        <Styles.SubTitle>$PTS Data</Styles.SubTitle>
+        <Styles.PtsWrap>
+          <Styles.PtsLeft>
+            <Styles.PtsItem>
+              <Styles.PtsTitle>Quests Participants</Styles.PtsTitle>
+              <Styles.PtsTotal>{formatThousandsSeparator(ptsData.total_users)}</Styles.PtsTotal>
+              <Styles.PtsFoot>
+                <Styles.PtsWhite>+{formatThousandsSeparator(ptsData.total_users_7day)}</Styles.PtsWhite> new
+                participants in last 7 days
+              </Styles.PtsFoot>
+            </Styles.PtsItem>
+            <Styles.PtsItem>
+              <Styles.PtsTitle>Quests Completion Times</Styles.PtsTitle>
+              <Styles.PtsTotal>{formatThousandsSeparator(ptsData.total_quest_execution)}</Styles.PtsTotal>
+              <Styles.PtsFoot>
+                <Styles.PtsWhite>+{formatThousandsSeparator(ptsData.total_quest_execution_7day)}</Styles.PtsWhite>{' '}
+                quests completion in last 7 days
+              </Styles.PtsFoot>
+            </Styles.PtsItem>
+          </Styles.PtsLeft>
+          <Styles.PtsRight>
+            <Styles.UsersTotalTitle>
+              <Styles.Title>$PTS Distribution</Styles.Title>
+            </Styles.UsersTotalTitle>
+            <Styles.PieWrap>
+              <PieChartSector data={rewardData} />
+            </Styles.PieWrap>
+          </Styles.PtsRight>
+        </Styles.PtsWrap>
         <Styles.SubTitle>Users Data</Styles.SubTitle>
         <Styles.UsersDataWrap>
           <Styles.UsersTotal>
@@ -329,6 +358,7 @@ const Dashboard: FC<IProps> = ({}) => {
             </Styles.UsersTotalTitle>
             {userData.length ? <AreaChart data={userData} /> : null}
           </Styles.UsersTotal>
+
           <Styles.UsersArea>
             <Styles.UsersTotalTitle>
               <Styles.Title>Users Area</Styles.Title>
@@ -373,36 +403,6 @@ const Dashboard: FC<IProps> = ({}) => {
             ))}
           </Styles.DappsRight>
         </Styles.DappsWrap>
-
-        <Styles.SubTitle>$PTS Data</Styles.SubTitle>
-        <Styles.PtsWrap>
-          <Styles.PtsLeft>
-            <Styles.PtsItem>
-              <Styles.PtsTitle>Quests Participants</Styles.PtsTitle>
-              <Styles.PtsTotal>{formatThousandsSeparator(ptsData.total_users)}</Styles.PtsTotal>
-              <Styles.PtsFoot>
-                <Styles.PtsWhite>+{formatThousandsSeparator(ptsData.total_users_7day)}</Styles.PtsWhite> new
-                participants in last 7 days
-              </Styles.PtsFoot>
-            </Styles.PtsItem>
-            <Styles.PtsItem>
-              <Styles.PtsTitle>Quests Completion Times</Styles.PtsTitle>
-              <Styles.PtsTotal>{formatThousandsSeparator(ptsData.total_quest_execution)}</Styles.PtsTotal>
-              <Styles.PtsFoot>
-                <Styles.PtsWhite>+{formatThousandsSeparator(ptsData.total_quest_execution_7day)}</Styles.PtsWhite>{' '}
-                quests completion in last 7 days
-              </Styles.PtsFoot>
-            </Styles.PtsItem>
-          </Styles.PtsLeft>
-          <Styles.PtsRight>
-            <Styles.UsersTotalTitle>
-              <Styles.Title>$PTS Distribution</Styles.Title>
-            </Styles.UsersTotalTitle>
-            <Styles.PieWrap>
-              <PieChartSector data={rewardData} />
-            </Styles.PieWrap>
-          </Styles.PtsRight>
-        </Styles.PtsWrap>
 
         {/* https://recharts.org/zh-CN/examples/PieChartWithPaddingAngle */}
         <Styles.SubTitle>Hot Quests</Styles.SubTitle>

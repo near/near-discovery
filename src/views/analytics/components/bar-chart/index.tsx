@@ -14,6 +14,8 @@ import {
   YAxis,
 } from 'recharts';
 
+import { formatThousandsSeparator } from '@/utils/format-number';
+
 import * as Styles from './styles';
 
 interface IProps {
@@ -23,6 +25,7 @@ interface IProps {
 const App: FC<IProps> = ({ data }) => {
   const CustomTooltip = (props: any) => {
     const { payload } = props;
+
     const map: any = { total_users: 'Users', total_trading_value: 'Trading Volume' };
     return (
       <Styles.CustomTooltip>
@@ -36,7 +39,11 @@ const App: FC<IProps> = ({ data }) => {
               <Styles.Icon color={item.color}></Styles.Icon>
               {map[item.name]}
             </Styles.Key>
-            <Styles.Value>{item.value}</Styles.Value>
+            {payload.name === 'total_trading_value' ? (
+              <Styles.Value>{formatThousandsSeparator(item.value)}</Styles.Value>
+            ) : (
+              <Styles.Value>{item.value}</Styles.Value>
+            )}
           </Styles.Item>
         ))}
       </Styles.CustomTooltip>
@@ -51,15 +58,15 @@ const App: FC<IProps> = ({ data }) => {
       barGap={6}
       barSize={24}
       margin={{
-        // top: 20,
+        // top: 0,
         right: 30,
         left: 0,
         bottom: 0,
       }}
     >
       {/* <CartesianGrid strokeDasharray="3 3" /> */}
+      <YAxis dataKey="total_trading_value" />
       <XAxis dataKey="name" />
-      <YAxis />
 
       <Tooltip
         cursor={{ fill: '#262830' }}
