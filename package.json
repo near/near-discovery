@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run deploy-wp && next build",
+    "build": "pnpm run sync-submodules && pnpm run deploy-wp && next build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx,json}'",
