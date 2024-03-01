@@ -56,10 +56,9 @@ const StyledStartButtonText = styled.div`
 `;
 
 export default function Start({ onStart, starting }: any) {
-  // onClick={onStart}
   return (
     <StyledContainer {...overlay}>
-      <StyledStartButtonWrapper>
+      <StyledStartButtonWrapper onClick={onStart}>
         <StyledButtonInner>
           <StyledStartButtonText>START</StyledStartButtonText>
           <StyledStartButtonBg>
