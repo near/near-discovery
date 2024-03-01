@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>SPACE ID Voyage Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/space-id-voyage/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/space-id-voyage/</link>
+	<description></description>
+	<lastBuildDate>Tue, 20 Jun 2023 13:52:56 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>SPACE ID Voyage Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/space-id-voyage/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR and Galxe Team Up for SPACE ID Voyage Season 2</title>
+		<link>/blog/near-and-galxe-team-up-for-space-id-voyage-season-2/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 08 Jun 2023 16:00:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Galxe]]></category>
+		<category><![CDATA[SPACE ID Voyage]]></category>
+		<guid isPermaLink="false">/?p=20605</guid>
+
+					<description><![CDATA[<p>NEAR Foundation and Galxe —the&#160; leading platform for Web3 community building —&#160;are joining forces to provide new and existing Web3 …</p>
+<p>The post <a href="/blog/near-and-galxe-team-up-for-space-id-voyage-season-2/">NEAR and Galxe Team Up for SPACE ID Voyage Season 2</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>NEAR Foundation and <a href="https://galxe.com/">Galxe</a> —the&nbsp; leading platform for Web3 community building —&nbsp;are joining forces to provide new and existing Web3 users with a seamless onboarding experience for SPACE ID&#8217;s renewed referral program, <a href="https://blog.space.id/its-happening-now-everything-you-need-to-know-about-space-id-voyage-season-2-calling-2dc2426fe442">&#8220;Voyage Season 2 &#8211; Calling</a>”.&nbsp;</p>
+
+
+
+<p>This new partnership is significant, as Galxe is the first major Web3 partner launching a component on NEAR’s Blockchain Operating System (BOS). The BOS is an OS on which developers can effortlessly build and distribute chain-agnostic, decentralized apps and experiences on the&nbsp; Open Web.&nbsp;&nbsp;</p>
+
+
+
+<p><a href="https://space.id/">SPACE ID</a> is a universal name service network with a one-stop identity platform to discover, register, trade, and manage Web3 domains. It also includes a Web3 Name SDK &amp; API for developers across blockchains and provides a multi-chain name service for everyone to easily build and create a web3 identity. Established in the third quarter of 2022, SPACE ID quickly took the market by storm with its .bnb domain name service, as well as more recently with .arb name service.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-how-the-bos-will-power-the-space-id-voyage-decentralized-frontend">How the BOS will power the SPACE ID Voyage decentralized frontend</h2>
+
+
+
+<p>NEAR’s BOS will be powering the decentralized frontend for SPACE ID&#8217;s <a href="https://space.id/voyage">Voyage</a>, a referral program where users invite others to register a .bnb or .arb address and earn special Voyage Boxes in return. Starting on June 7th, users will be able to participate in Space ID&#8217;s Voyage program through <a href="https://near.org/mattlock.near/widget/Galxe-SpaceID">near.org</a> and register .bnb names — enjoying a seamless, one-stop, decentralized experience powered by BOS.&nbsp;</p>
+
+
+
+<p>Before the BOS integration, participating in quests like Voyage could be a complicated process. Users had to navigate through multiple pages, going back and forth to sign-in, register a domain, check eligibility, and claim rewards separately. A tech stack for decentralized and user-friendly frontends, BOS enables a unified interface where users can do all of the above with a single sign-in — directly in-app — so that users never have to leave the page on which they started.</p>
+
+
+
+<h2 class="wp-block-heading">How SPACE ID uses BOS’s composable components</h2>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="941" height="1024" src="/wp-content/uploads/2023/06/image-941x1024.png" alt="" class="wp-image-20606" srcset="/wp-content/uploads/2023/06/image-941x1024.png 941w, /wp-content/uploads/2023/06/image-276x300.png 276w, /wp-content/uploads/2023/06/image-768x835.png 768w, /wp-content/uploads/2023/06/image-1412x1536.png 1412w, /wp-content/uploads/2023/06/image.png 1471w" sizes="(max-width: 941px) 100vw, 941px" /></figure>
+
+
+
+<p>The BOS components for SPACE ID are created independently and composed inside another composite component. This, in and of itself, clearly demonstrates the true composability strengths of BOS. </p>
+
+
+
+<p>And thanks to BOS&#8217;s permissionless nature, developers are able to fork the components and embed them into their BOS components or websites. Users are then able to view the source code for each of the these components both on-chain and in-browser — improving transparency and security at every step of the user journey.&nbsp;</p>
+
+
+
+<p>Discover Galxe’s exciting SPACE ID Campaign today. Register a .bnb domain name and claim a Voyage Box today on <a href="https://near.org/mattlock.near/widget/Galxe-SpaceID">near.org</a>.&nbsp;</p>
+
+
+
+<p>Stay tuned for more exciting NEAR Foundation and Galxe campaigns to come — powered by BOS!&nbsp;</p>
+<p>The post <a href="/blog/near-and-galxe-team-up-for-space-id-voyage-season-2/">NEAR and Galxe Team Up for SPACE ID Voyage Season 2</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

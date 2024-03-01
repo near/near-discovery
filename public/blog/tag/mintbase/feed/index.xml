@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Mintbase Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/mintbase/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/mintbase/</link>
+	<description></description>
+	<lastBuildDate>Fri, 01 Sep 2023 15:20:12 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Mintbase Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/mintbase/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Mintbase Brings New Open Web Wallet Tech to Families Celebrating Raksha Bandhan</title>
+		<link>/blog/mintbase-brings-new-open-web-wallet-tech-to-families-celebrating-raksha-bandhan/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Tue, 29 Aug 2023 17:31:03 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[FastAuth]]></category>
+		<category><![CDATA[Mintbase]]></category>
+		<guid isPermaLink="false">/?p=20820</guid>
+
+					<description><![CDATA[<p>Mintbase, a leading NFT platform that allows users to mint, buy, and sell digital assets has partnered with the NEAR …</p>
+<p>The post <a href="/blog/mintbase-brings-new-open-web-wallet-tech-to-families-celebrating-raksha-bandhan/">Mintbase Brings New Open Web Wallet Tech to Families Celebrating Raksha Bandhan</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><a href="https://www.mintbase.xyz/">Mintbase</a>, a leading NFT platform that allows users to mint, buy, and sell digital assets has partnered with the NEAR Foundation to help friends and family celebrate the traditional Indian festival, Raksha Bandhan, with Open Web technology.</p>
+
+
+
+<p>By bringing together several pieces of breakthrough wallet technology for the first time, photos can be instantly converted into NFTs and stored permanently on the NEAR blockchain — all without users needing to create seed phrases or pre-loaded wallets.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-a-new-type-of-wallet">A new type of wallet&nbsp;</h2>
+
+
+
+<p>Mintbase’s new wallet streamlines the blockchain user experience like never before thanks to innovations on the NEAR blockchain.&nbsp;</p>
+
+
+
+<p>FastAuth, created by NEAR, is an open-source protocol that provides an onboarding and account recovery process similar to what you find in Web2. It uses meta transactions, allowing a third party to pay the gas fee on behalf of the user, solving one of the most significant problems new users face in the blockchain world.</p>
+
+
+
+<figure class="wp-block-image size-large"><img fetchpriority="high" decoding="async" width="1024" height="529" src="/wp-content/uploads/2023/08/F4tjg_0X0AUj8Fr-1024x529.jpeg" alt="" class="wp-image-20826" srcset="/wp-content/uploads/2023/08/F4tjg_0X0AUj8Fr-1024x529.jpeg 1024w, /wp-content/uploads/2023/08/F4tjg_0X0AUj8Fr-300x155.jpeg 300w, /wp-content/uploads/2023/08/F4tjg_0X0AUj8Fr-768x396.jpeg 768w, /wp-content/uploads/2023/08/F4tjg_0X0AUj8Fr.jpeg 1199w" sizes="(max-width: 1024px) 100vw, 1024px" /></figure>
+
+
+
+<p>The other killer feature is NEAR’s built-in account abstraction system. Users no longer need to deal with seed phrases or require NEAR to mint. Instead, a full access key is stored in the user&#8217;s passkey system, so biometric signing will work in a noncustodial way without any local storage interactions.</p>
+
+
+
+<p>This means no more seed phrases, and no more having to pre-load the wallet with currency before use. Instead, users of Mintbase’s wallet will be able to use and interact with blockchain in the same way they would with Web2 apps. </p>
+
+
+
+<h2 class="wp-block-heading">Celebrating the essence of Rakhi&nbsp;&nbsp;</h2>
+
+
+
+<p>To celebrate Raksha Bandhan, the popular Indiana festival where sisters tie a talisman or amulet called a Rakhi around the wrists of their brothers, users will be able to capture the moment with a photo and upload it instantly to the blockchain via the Mintbase wallet.&nbsp;</p>
+
+
+
+<p>The metadata will be permanently stored on the Arweave blockchain and a NFT of the moment will be minted on the NEAR blockchain and delivered back to the user. It’s a sizable step forward in showcasing how far Web3 technology has come in making the user experience easier and more familiar to non-blockchain users.&nbsp;</p>
+
+
+
+<p>As part of this celebration, there&#8217;s more than just memories to win. Participants can win prizes for NFTs they created and share them on X (formerly Twitter) with the hashtag #RakhisNEAR.&nbsp;&nbsp;</p>
+
+
+
+<p>For more details, please visit <a href="https://rakhi.mintbase.xyz/">https://rakhi.mintbase.xyz/</a>. Participate, share, and make this Raksha Bandhan more memorable with Mintbase and NEAR Foundation.</p>
+<p>The post <a href="/blog/mintbase-brings-new-open-web-wallet-tech-to-families-celebrating-raksha-bandhan/">Mintbase Brings New Open Web Wallet Tech to Families Celebrating Raksha Bandhan</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
