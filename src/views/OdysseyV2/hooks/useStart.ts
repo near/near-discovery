@@ -2,7 +2,7 @@ import { post } from '@/utils/http';
 import { useCallback, useState } from 'react';
 import useToast from '@/hooks/useToast';
 
-export default function onStart(onSuccess: VoidFunction) {
+export default function useStart(onSuccess: VoidFunction) {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 

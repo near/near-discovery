@@ -82,9 +82,9 @@ const Rules = ({ onClose }: any) => {
         <StyledTitle>{'welcome to Linea odyssey'.toUpperCase()}</StyledTitle>
         <StyledDesc className="bold">How to Play:</StyledDesc>
         <StyledDesc>
-          Click the "Start" button to flip two cards and reveal their icons. Match all pairs of cards by remembering
-          their positions. Earn points based on your performance.Clicking "Start" consumes one energy. Complete the
-          Quests on the activity page to get more game enenrgy.
+          Click the &quot;Start&quot; button to flip two cards and reveal their icons. Match all pairs of cards by
+          remembering their positions. Earn points based on your performance.Clicking &quot;Start&quot; consumes one
+          energy. Complete the Quests on the activity page to get more game enenrgy.
         </StyledDesc>
         <StyledNote>Note: Exiting the page counts as the end of the game, and progress will not be saved.</StyledNote>
         <StyledDesc className="bold" style={{ marginTop: '29px' }}>

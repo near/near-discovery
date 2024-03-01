@@ -30,7 +30,7 @@ export default function Banner() {
             fill="black"
           />
         </svg>
-        <StyledDesc>Venture into Linea's Expansive DeFi Ecosystem</StyledDesc>
+        <StyledDesc>Venture into Linea&apos;s Expansive DeFi Ecosystem</StyledDesc>
       </StyledContent>
     </StyledContainer>
   );

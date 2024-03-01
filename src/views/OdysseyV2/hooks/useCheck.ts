@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 import useToast from '@/hooks/useToast';
 import { get } from '@/utils/http';
 
-export default function useCheck(quest: any, cb: Function) {
+export default function useCheck(quest: any, cb: any) {
   const [loading, setLoading] = useState(false);
   const toast = useToast();
 
