@@ -221,7 +221,7 @@ const Dashboard: FC<IProps> = ({}) => {
     const endDate = new Date();
     const daysBetween = differenceInDays(endDate, startDate);
 
-    temp[0].count = daysBetween;
+    temp[0].count = daysBetween + 1;
     temp[1].count = total_users;
     temp[1].increase = last24_users;
     temp[2].count = total_transactions;
