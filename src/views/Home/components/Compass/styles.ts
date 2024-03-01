@@ -151,3 +151,17 @@ export const StyledWinPtsIcon = styled.div`
   top: 131px;
   z-index: 20;
 `;
+export const StyledSwiperWrapper = styled.div`
+  position: relative;
+`
+export const StyledSwiperNextButton = styled.div`
+  position: absolute;
+  right: -25px;
+  bottom: 172px;
+`
+export const StyledSwiperPrevButton = styled.div`
+  position: absolute;
+  left: -25px;
+  bottom: 172px;
+  transform: rotate(180deg);
+`

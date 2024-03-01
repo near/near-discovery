@@ -69,7 +69,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
   const [registerStatus, setRegisterStatus] = useState<RegisterStatusType>(0);
   const [year, setYear] = useState(1);
   const totalPrice = useMemo(() => year * priceLabel.price, [priceLabel.price, year]);
-  const discountPrice = useMemo(() => 0.4 * year * priceLabel.price, [priceLabel.price, year]);
+  const discountPrice = useMemo(() => 0.6 * year * priceLabel.price, [priceLabel.price, year]);
   const realPrice = useMemo(() => totalPrice - (discount ? discountPrice : 0), [totalPrice, discount, discountPrice])
 
   const handlePlus = function () {
@@ -89,7 +89,7 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
       label: priceLabel.label,
       years: year,
       isPrimaryName: false,
-      promoCode: '25DISCOUNT',
+      promoCode: discount ? 'dapdap60' : '',
     });
     const signedRegisterRequest = response.signedRegisterRequest;
     const iface = new ethers.utils.Interface([
@@ -142,6 +142,8 @@ const RegisterDialog = ({ priceLabel, onClose, discount, setShowSwitchNetworkDia
     const avatar = `files.basename.app/avatars/${hashedName}.svg`;
     const encodedDataAvatar = iface.encodeFunctionData('setText', [hashedName, 'avatar', avatar]);
     const callData = [encodedDataAddress, encodedDataAvatar];
+
+    console.log('===signedRegisterRequest', JSON.stringify(signedRegisterRequest), '=====callData', JSON.stringify(callData))
     try {
       setRegisterStatus(1);
       await contract.write({

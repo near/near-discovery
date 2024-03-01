@@ -4,7 +4,7 @@ import WinPtsIcon from '@/components/Icons/WinPts';
 import useToast from '@/hooks/useToast';
 import { get } from '@/utils/http';
 import { useRouter } from 'next/router';
-import { memo, useRef } from 'react';
+import { memo, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useCompassList from './hooks/useCompassList';
 import {
@@ -22,9 +22,17 @@ import {
   StyledRadialBg,
   StyledRadialBg2,
   StyledTitle,
-  StyledWinPtsIcon
+  StyledWinPtsIcon,
+  StyledSwiperWrapper,
+  StyledSwiperPrevButton,
+  StyledSwiperNextButton
 } from './styles';
 
+const iconRight = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="13" height="38" viewBox="0 0 13 38" fill="none">
+    <path d="M1 1L11 19L1 37" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+  </svg>
+)
 const Card = function ({ compass }: any) {
   const toast = useToast()
   const router = useRouter()
@@ -66,6 +74,7 @@ const Card = function ({ compass }: any) {
 const Compass = () => {
   const { loading, compassList } = useCompassList()
   const swiperRef = useRef<any>()
+  const [activeIndex, setActiveIndex] = useState(0)
   return loading ? (
     <StyledLoadingWrapper>
       <Loading size={60} />
@@ -83,19 +92,46 @@ const Compass = () => {
         </StyledWinPtsIcon>
         <StyledInner>
           <StyledTitle>Odyssey</StyledTitle>
-          <Swiper
-            width={1244}
-            slidesPerView={1}
-            onSwiper={(swiper) => {
-              swiperRef.current = swiper;
-            }}
-          >
-            {compassList.map((compass: any, index: number) => (
-              <SwiperSlide key={index}>
-                <Card compass={compass} />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <StyledSwiperWrapper>
+            <Swiper
+              width={1244}
+              slidesPerView={1}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              onActiveIndexChange={(swiper) => {
+                setActiveIndex(swiper.activeIndex)
+              }}
+            >
+              {compassList.map((compass: any, index: number) => (
+                <SwiperSlide key={index}>
+                  <Card compass={compass} />
+                </SwiperSlide>
+              ))}
+            </Swiper>
+            {
+              swiperRef.current && swiperRef.current.activeIndex > 0 && (
+                <StyledSwiperPrevButton
+                  onClick={() => {
+                    swiperRef.current && swiperRef.current.slidePrev()
+                  }}
+                >
+                  {iconRight}
+                </StyledSwiperPrevButton>
+              )
+            }
+            {
+              activeIndex < (compassList.length - 1) && (
+                <StyledSwiperNextButton
+                  onClick={() => {
+                    swiperRef.current && swiperRef.current.slideNext()
+                  }}
+                >
+                  {iconRight}
+                </StyledSwiperNextButton>
+              )
+            }
+          </StyledSwiperWrapper>
         </StyledInner>
       </StyledContent>
     </StyledContainer>
