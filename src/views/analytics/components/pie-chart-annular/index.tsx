@@ -70,7 +70,7 @@ const App: FC<IProps> = ({ data }) => {
         dataKey="total"
       >
         {data.map((entry: any, index: number) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke={null} />
         ))}
       </Pie>
       <Tooltip
