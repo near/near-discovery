@@ -181,6 +181,7 @@ export const SummaryItem = styled.div`
   background: rgba(33, 35, 42, 0.9);
   backdrop-filter: blur(10px);
   overflow: hidden;
+  position: relative;
 `;
 export const SummaryHead = styled.div`
   display: flex;
@@ -324,9 +325,9 @@ export const QuestWrap = styled.div`
 `;
 export const GridHeader = styled.div`
   display: grid;
-  padding: 0 36px;
+  /* padding: 0 36px; */
   grid-template-columns: 32% 12% 12% 12% 12% 20%;
-  border-bottom: 1px solid #979abe;
+  border-bottom: 1px solid rgba(151, 154, 190, 0.1);
 `;
 export const HeadItem = styled.div`
   padding: 34px 0 20px;
@@ -338,11 +339,14 @@ export const HeadItem = styled.div`
   line-height: normal;
 `;
 export const GridBody = styled.div`
-  padding: 36px 36px 0;
+  padding: 0;
 `;
 export const GridRow = styled.div`
   display: grid;
   grid-template-columns: 32% 12% 12% 12% 12% 20%;
+  &:hover {
+    background: rgba(217, 217, 217, 0.05);
+  }
 `;
 export const GridCol = styled.div`
   display: flex;
