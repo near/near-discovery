@@ -1,10 +1,10 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import { MetaTags } from '@/components/MetaTags';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -108,6 +108,14 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const authStore = useAuthStore();
   const components = useBosComponents();
   const cookieData = useCookiePreferences();
+  const { requestAuthentication } = useSignInRedirect();
+
+  useEffect(() => {
+    const { requestAuth, createAccount } = componentProps;
+    if (requestAuth) {
+      requestAuthentication(!!createAccount);
+    }
+  }, [componentProps, requestAuthentication]);
 
   useEffect(() => {
     setComponentSrc(componentSrc);
