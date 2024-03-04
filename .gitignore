@@ -52,3 +52,6 @@ next-env.d.ts
 
 # Sentry Auth Token
 .sentryclirc
+
+#itellij hidden files
+/.idea/
