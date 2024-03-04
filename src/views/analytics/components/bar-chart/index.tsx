@@ -74,7 +74,7 @@ const App: FC<IProps> = ({ data }) => {
           stroke: 'white',
           fill: 'white',
           fontSize: 16,
-          fontWeight: 600,
+          fontWeight: 'normal',
         }}
       />
 
