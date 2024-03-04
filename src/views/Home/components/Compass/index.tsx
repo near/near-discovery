@@ -9,6 +9,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import odyssey from '@/config/odyssey';
 import useCompassList from './hooks/useCompassList';
+import { useDebounceFn } from 'ahooks';
 import {
   StyledCard,
   StyledCardBackgroundImage,
@@ -81,6 +82,13 @@ const Compass = () => {
   const swiperRef = useRef<any>();
   const [activeIndex, setActiveIndex] = useState(0);
   const currentCompass = useMemo(() => compassList[activeIndex], [activeIndex, compassList]);
+  const { run: changeActiveIndex } = useDebounceFn(
+    (activeIndex) => {
+      console.log('activeIndex', activeIndex);
+      setActiveIndex(activeIndex);
+    },
+    { wait: 100 },
+  );
 
   return loading ? (
     <StyledLoadingWrapper>
@@ -113,8 +121,8 @@ const Compass = () => {
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
-              onActiveIndexChange={(swiper) => {
-                setActiveIndex(swiper.activeIndex);
+              onSlideChange={(swiper) => {
+                changeActiveIndex(swiper.realIndex);
               }}
             >
               {compassList.map((compass: any, index: number) => (
