@@ -6,7 +6,7 @@ export default {
     showPrizeLabel: true,
   },
   2: {
-    path: '/odyssey/v2',
+    path: '/odyssey/home?id=2',
     chainsImg: '/images/odyssey/v2/chains.png',
     chainsHeight: '56px',
     showPrizeLabel: false,
