@@ -39,7 +39,7 @@ const StyledValue = styled.div`
 export default function FilpEarningTitle({ collect }: any) {
   return (
     <StyledContainer>
-      <svg width="752" height="100" viewBox="0 0 752 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <svg width="553" height="87" viewBox="0 0 752 100" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
           d="M0 4C0 1.79086 1.79086 0 4 0H496.603C498.079 0 499.434 0.812304 500.13 2.11339L509.37 19.3866C510.066 20.6877 511.421 21.5 512.897 21.5H725.022C726.789 21.5 728.347 22.6598 728.854 24.3528L749.959 94.8529C750.727 97.4188 748.806 100 746.127 100H4.00001C1.79087 100 0 98.2091 0 96V4Z"
           fill="url(#paint0_linear_1_5)"

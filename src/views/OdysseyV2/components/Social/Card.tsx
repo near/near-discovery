@@ -74,7 +74,7 @@ const SocialCard = ({
             }}
           />
         )}
-        <CardFlip amount={spins} disabled={finished} />
+        <CardFlip amount={spins} disabled={!finished} />
       </StyledCardFooter>
     </Card>
   );
