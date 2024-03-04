@@ -76,7 +76,7 @@ const App: FC<IProps> = ({ data }) => {
       <Tooltip
         // trigger="click"
         wrapperStyle={{
-          width: 122,
+          // width: 120,
           height: 70,
         }}
         contentStyle={{

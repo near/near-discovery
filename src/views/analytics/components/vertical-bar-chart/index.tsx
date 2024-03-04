@@ -60,6 +60,7 @@ const App: FC<IProps> = ({ data }) => {
   };
   return (
     <ComposedChart
+      className="vertical-chart"
       layout="vertical"
       width={550}
       height={300}
@@ -106,7 +107,7 @@ const App: FC<IProps> = ({ data }) => {
         cursor={false}
         // trigger="click"
         wrapperStyle={{
-          width: 240,
+          minWidth: 240,
           height: 125,
         }}
         contentStyle={{
