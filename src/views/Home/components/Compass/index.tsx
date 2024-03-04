@@ -6,6 +6,7 @@ import { get } from '@/utils/http';
 import { useRouter } from 'next/router';
 import { memo, useMemo, useRef, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import odyssey from '@/config/odyssey';
 import useCompassList from './hooks/useCompassList';
 import {
@@ -57,7 +58,9 @@ const Card = function ({ compass }: any) {
     <StyledCard>
       <StyledCardBackgroundImage width={646} height={323} src={compass.banner} alt={compass.name} />
       <StyledCardMainContent>
-        {odyssey[compass.id]?.chainsImg && <StyledChainsImg src={odyssey[compass.id]?.chainsImg} />}
+        {odyssey[compass.id]?.chainsImg && (
+          <StyledChainsImg src={odyssey[compass.id]?.chainsImg} style={{ height: odyssey[compass.id]?.chainsHeight }} />
+        )}
         <StyledCardTitle>{compass.name}</StyledCardTitle>
         <StyledCardDesc>{compass.description}</StyledCardDesc>
       </StyledCardMainContent>
@@ -102,7 +105,11 @@ const Compass = () => {
           <StyledSwiperWrapper>
             <Swiper
               width={1244}
+              modules={[Autoplay]}
               slidesPerView={1}
+              autoplay={{ delay: 3000 }}
+              speed={1000}
+              loop
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
               }}
