@@ -64,6 +64,8 @@ export const notificationsGatewayUrl = process.env.NEXT_PUBLIC_NOTIFICATIONS_GAT
 export const notificationsLocalStorageKey = 'push-notifications-v0';
 export const localStorageAccountIdKey = 'near-social-vm:v01::accountId:';
 export const isLocalEnvironment = process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT === 'true';
+export const eventsApiUrl = process.env.NEXT_PUBLIC_EVENTS_API_URL;
+export const eventsApiKey = process.env.NEXT_PUBLIC_EVENTS_API_KEY;
 
 export const commitModalBypassAuthorIds = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_AUTHOR_IDS ?? '')
   .split(',')
