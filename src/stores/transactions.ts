@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { createJSONStorage,persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 type Transaction = {
   icons: string[];
@@ -17,7 +17,7 @@ export const useTransactionsStore = create(
       addTransaction: (transaction: Transaction) => {
         const _transactions = get().transactions;
         _transactions.push(transaction);
-        set({ _icons: _transactions });
+        set({ transactions: _transactions });
       },
       getTransactions: () => {
         const _transactions = get().transactions || [];
