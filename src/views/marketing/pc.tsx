@@ -438,7 +438,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
                 ))
               : null}
           </Styles.CardBox>
-          <Styles.Title>
+          {/* <Styles.Title>
             Invite
             {!isBlur ? (
               <Styles.SubTitle>
@@ -504,7 +504,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
                 </div>
               </Styles.InviteBodyRight>
             </Styles.InviteBody>
-          </Styles.InviteBox>
+          </Styles.InviteBox> */}
         </Styles.Box>
       )}
       {tab === 'Leaderboard' && (

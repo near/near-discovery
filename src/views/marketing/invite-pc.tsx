@@ -454,7 +454,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
               ))
             : null}
         </Styles.CardBox>
-        <Styles.Title>Invite</Styles.Title>
+        {/* <Styles.Title>Invite</Styles.Title>
         <Styles.InviteBox className={userStatus === 'new' ? '' : 'blur'}>
           <Styles.InviteHead>
             <div>
@@ -477,7 +477,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
                 ))
               : null}
           </Styles.InviteBody>
-        </Styles.InviteBox>
+        </Styles.InviteBox> */}
       </Styles.Box>
 
       <Styles.Foot>
