@@ -59,6 +59,7 @@ type NetworkComponents = {
   widgetMetadata: string;
   widgetMetadataEditor: string;
   wrapper: string;
+  eventsPage: string;
 };
 
 export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | undefined> => {
@@ -127,6 +128,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       widgetMetadata: 'eugenethedream/widget/WidgetMetadata',
       widgetMetadataEditor: `${testnetTLA}/widget/WidgetMetadataEditor`,
       wrapper: `${testnetTLA}/widget/GatewayWrapper`,
+      eventsPage: `${testnetTLA}/widget/Events.Index`,
     },
 
     mainnet: {
@@ -188,6 +190,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       widgetMetadata: 'mob.near/widget/WidgetMetadata',
       widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
       wrapper: 'near/widget/GatewayWrapper',
+      eventsPage: 'near/widget/Events.Index',
     },
   };
 })();
