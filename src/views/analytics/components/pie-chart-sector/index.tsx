@@ -94,7 +94,7 @@ const App: FC<IProps> = ({ data }) => {
         dataKey="Users"
       >
         {data.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke={null} />
         ))}
       </Pie>
       <Legend content={renderLegend} />

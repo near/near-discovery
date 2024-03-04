@@ -146,10 +146,11 @@ const Dashboard: FC<IProps> = ({}) => {
 
       if ((res.code as number) !== 0) return;
       setLoading(false);
+
       const _dappData = res.data.map((item: any) => ({
         ...item,
         name: item.template,
-        total_trading_value: formatThousandsSeparator(+Number(item.total_trading_value).toFixed(2)),
+        total_trading_value: +Number(item.total_trading_value).toFixed(2),
       }));
 
       setDappData(_dappData.sort((a: any, b: any) => b.total_trading_value - a.total_trading_value));
@@ -408,7 +409,7 @@ const Dashboard: FC<IProps> = ({}) => {
         <Styles.SubTitle>Hot Quests</Styles.SubTitle>
         <Styles.QuestWrap>
           <Styles.GridHeader>
-            <Styles.HeadItem style={{ textAlign: 'left' }}>Quest name</Styles.HeadItem>
+            <Styles.HeadItem style={{ textAlign: 'left', paddingLeft: 35 }}>Quest name</Styles.HeadItem>
             <Styles.HeadItem>#social</Styles.HeadItem>
             <Styles.HeadItem>Onlie Date</Styles.HeadItem>
             <Styles.HeadItem>Participants</Styles.HeadItem>
@@ -418,7 +419,7 @@ const Dashboard: FC<IProps> = ({}) => {
           <Styles.GridBody>
             {questData.map((item: any) => (
               <Styles.GridRow key={item.id}>
-                <Styles.GridCol style={{ justifyContent: 'start' }} title={item.name}>
+                <Styles.GridCol style={{ justifyContent: 'start', paddingLeft: 35 }} title={item.name}>
                   <Styles.Ellipsis>{item.name}</Styles.Ellipsis>
                 </Styles.GridCol>
                 <Styles.GridCol className={`${item.type}-type`}>#{item.type}</Styles.GridCol>

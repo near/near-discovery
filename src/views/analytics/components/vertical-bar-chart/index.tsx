@@ -4,6 +4,7 @@ import {
   AreaChart,
   Bar,
   BarChart,
+  CartesianAxis,
   CartesianGrid,
   ComposedChart,
   Legend,
@@ -15,8 +16,9 @@ import {
   YAxis,
 } from 'recharts';
 
-import * as Styles from './styles';
+import { formatThousandsSeparator } from '@/utils/format-number';
 
+import * as Styles from './styles';
 interface IProps {
   data?: { name: string; [propName: string]: any }[];
 }
@@ -35,7 +37,27 @@ const CategoryTick = (props: any) => {
 
 const App: FC<IProps> = ({ data }) => {
   // console.log('data: ', data);
+  const CustomTooltip = (props: any) => {
+    const { payload } = props;
 
+    const map: any = { total_trading_value: 'Transactions' };
+
+    return (
+      <Styles.CustomTooltip>
+        <Styles.Wrap>
+          <Styles.Logo src={payload[0]?.payload?.logo}></Styles.Logo>
+          {payload[0]?.payload?.name}
+        </Styles.Wrap>
+        {payload.map((item: any, index: number) => (
+          <Styles.Item key={index}>
+            <Styles.Key>{map[item.name]}</Styles.Key>
+
+            <Styles.Value>{formatThousandsSeparator(item.value)}</Styles.Value>
+          </Styles.Item>
+        ))}
+      </Styles.CustomTooltip>
+    );
+  };
   return (
     <ComposedChart
       layout="vertical"
@@ -51,11 +73,23 @@ const App: FC<IProps> = ({ data }) => {
         bottom: 10,
       }}
     >
-      {/* <CartesianGrid strokeDasharray="3 3" /> */}
-      <XAxis type="number" />
+      {/* <CartesianAxis mirror={true} /> */}
+      <CartesianGrid vertical={false} />
+      <XAxis
+        type="number"
+        // hide
+        axisLine={false}
+        tickLine={false}
+        // tick={false}
+        tick={{
+          stroke: 'rgba(255, 255, 255, 0.40)',
+          fill: 'rgba(255, 255, 255, 0.40)',
+          fontSize: 12,
+          fontWeight: 400,
+        }}
+      />
       <YAxis dataKey="name" type="category" axisLine={false} tickLine={false} tick={<CategoryTick data={data} />} />
 
-      {/* <Legend /> */}
       <Bar
         dataKey="total_trading_value"
         fill="#555D77"
@@ -82,18 +116,7 @@ const App: FC<IProps> = ({ data }) => {
           border: '1px solid #373A53',
           fontSize: '14px',
         }}
-        labelFormatter={(name: string, props: any) => {
-          return (
-            <Styles.Wrap>
-              <Styles.Logo src={props[0]?.payload?.logo}></Styles.Logo>
-              {name}
-            </Styles.Wrap>
-          );
-        }}
-        formatter={(value: any, name: any, props: any) => {
-          return [value, 'Transactions'];
-        }}
-        // `$${Number(item.total_trading_value).toFixed(2)}k`
+        content={<CustomTooltip />}
         labelStyle={{
           color: '#979ABE',
         }}

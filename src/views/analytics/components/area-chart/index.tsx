@@ -36,7 +36,15 @@ const App: FC<IProps> = ({ data }) => {
         </linearGradient>
       </defs>
       {/* <CartesianGrid strokeDasharray="3" /> */}
-      <XAxis dataKey="name" />
+      <XAxis
+        dataKey="name"
+        tick={{
+          stroke: 'rgba(255, 255, 255, 0.40)',
+          fill: 'rgba(255, 255, 255, 0.40)',
+          fontSize: 12,
+          fontWeight: 400,
+        }}
+      />
       <YAxis />
 
       {/* <defs>
