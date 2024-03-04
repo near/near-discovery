@@ -94,7 +94,7 @@ const Odyssey = function ({ setShow }: any) {
           </StyledFont>
         </StyledFlex>
         {compassList.map((compass: any) => (
-          <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }}>
+          <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }} key={compass.id}>
             <StyledContainer
               style={{
                 width: 330,
