@@ -80,15 +80,6 @@ const Card = function ({ compass }: any) {
 const Compass = () => {
   const { loading, compassList } = useCompassList();
   const swiperRef = useRef<any>();
-  const [activeIndex, setActiveIndex] = useState(0);
-  const currentCompass = useMemo(() => compassList[activeIndex], [activeIndex, compassList]);
-  const { run: changeActiveIndex } = useDebounceFn(
-    (activeIndex) => {
-      console.log('activeIndex', activeIndex);
-      setActiveIndex(activeIndex);
-    },
-    { wait: 100 },
-  );
 
   return loading ? (
     <StyledLoadingWrapper>
@@ -99,14 +90,6 @@ const Compass = () => {
       <StyledContent>
         <StyledRadialBg />
         <StyledRadialBg2 />
-        <StyledCompassIcon>
-          <CompassIcon />
-        </StyledCompassIcon>
-        {odyssey[currentCompass?.id]?.showPrizeLabel && (
-          <StyledWinPtsIcon>
-            <WinPtsIcon num="10,000" />
-          </StyledWinPtsIcon>
-        )}
 
         <StyledInner>
           <StyledTitle>Odyssey</StyledTitle>
@@ -117,38 +100,40 @@ const Compass = () => {
               slidesPerView={1}
               autoplay={{ delay: 3000 }}
               speed={1000}
+              spaceBetween={(window.innerWidth - 1244) / 2 + 100}
               loop
               onSwiper={(swiper) => {
                 swiperRef.current = swiper;
-              }}
-              onSlideChange={(swiper) => {
-                changeActiveIndex(swiper.realIndex);
               }}
             >
               {compassList.map((compass: any, index: number) => (
                 <SwiperSlide key={index}>
                   <Card compass={compass} />
+                  <StyledCompassIcon>
+                    <CompassIcon />
+                  </StyledCompassIcon>
+                  {odyssey[compass.id]?.showPrizeLabel && (
+                    <StyledWinPtsIcon>
+                      <WinPtsIcon num="10,000" />
+                    </StyledWinPtsIcon>
+                  )}
                 </SwiperSlide>
               ))}
             </Swiper>
-            {swiperRef.current && swiperRef.current.activeIndex > 0 && (
-              <StyledSwiperPrevButton
-                onClick={() => {
-                  swiperRef.current && swiperRef.current.slidePrev();
-                }}
-              >
-                {iconRight}
-              </StyledSwiperPrevButton>
-            )}
-            {activeIndex < compassList.length - 1 && (
-              <StyledSwiperNextButton
-                onClick={() => {
-                  swiperRef.current && swiperRef.current.slideNext();
-                }}
-              >
-                {iconRight}
-              </StyledSwiperNextButton>
-            )}
+            <StyledSwiperPrevButton
+              onClick={() => {
+                swiperRef.current && swiperRef.current.slidePrev();
+              }}
+            >
+              {iconRight}
+            </StyledSwiperPrevButton>
+            <StyledSwiperNextButton
+              onClick={() => {
+                swiperRef.current && swiperRef.current.slideNext();
+              }}
+            >
+              {iconRight}
+            </StyledSwiperNextButton>
           </StyledSwiperWrapper>
         </StyledInner>
       </StyledContent>

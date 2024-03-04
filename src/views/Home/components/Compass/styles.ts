@@ -147,14 +147,14 @@ export const StyledCardButton = styled.div`
 export const StyledCompassIcon = styled.div`
   position: absolute;
   right: 29px;
-  top: 84px;
+  top: -54px;
   z-index: 20;
 `;
 
 export const StyledWinPtsIcon = styled.div`
   position: absolute;
   right: -34px;
-  top: 131px;
+  top: 0px;
   z-index: 20;
 `;
 export const StyledSwiperWrapper = styled.div`
