@@ -14,7 +14,6 @@ const useAuth = () => {
     wallet && (await disconnect(wallet));
     window.localStorage.setItem(http.AUTH_TOKENS, '{}');
     insertedAccessKey('');
-    deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
     deleteCookie('BNS_NAME');
     router.replace(`/login?source=/`);
@@ -28,7 +27,6 @@ const useAuth = () => {
       }
 
       const cachedAccount = getCookie('AUTHED_ACCOUNT');
-      setCookie('LOGIN_ACCOUNT', wallet.accounts[0].address);
       if (cachedAccount !== wallet.accounts[0].address) {
         setLogging(true);
         try {

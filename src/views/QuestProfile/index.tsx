@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { memo, useState } from 'react';
 
 import useReport from '@/views/Landing/hooks/useReport';
-
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useUserInfo from '../../hooks/useUserInfo';
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
@@ -17,6 +17,7 @@ import { StyledBgImg, StyledContainer, StyledPanelWrapper, StyledTabsBox } from 
 import type { Tab } from './types';
 
 const QuestProfileView = () => {
+  useAuthCheck({ isRedirect: true });
   const router = useRouter();
   let initTab: Tab;
   if (router?.query?.active === 'pts') {

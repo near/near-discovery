@@ -79,7 +79,7 @@ export default function Start({ onStart, starting }: any) {
                   filterUnits="userSpaceOnUse"
                   colorInterpolation-filters="sRGB"
                 >
-                  <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
                   <feColorMatrix
                     in="SourceAlpha"
                     type="matrix"

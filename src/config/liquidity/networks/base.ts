@@ -1,4 +1,3 @@
-
 const CHAIN_ID = 8453;
 
 export default {
@@ -7,7 +6,7 @@ export default {
   displayChainName: 'BASE',
   wethAddress: '0x4200000000000000000000000000000000000006',
   connectProps: {
-    noAccountTips: 'Base Swap Collection',
+    noAccountTips: 'Base Liquidity Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Base Chain.',
   },
   defalutDex: 'Gamma',

@@ -181,7 +181,7 @@ const searchIcon = (
     <path
       d="M16.5382 9.0191C16.5382 13.1718 13.1718 16.5382 9.0191 16.5382C4.86642 16.5382 1.5 13.1718 1.5 9.0191C1.5 4.86642 4.86642 1.5 9.0191 1.5C13.1718 1.5 16.5382 4.86642 16.5382 9.0191Z"
       stroke="#EBF479"
-      stroke-width="3"
+      strokeWidth="3"
     />
     <rect
       x="19.1655"
@@ -207,7 +207,7 @@ const iconsMap = {
       <path d="M18 23L14 17L18 19.5082V23Z" fill="white" />
       <path d="M18 19L22 16.6244L18 10V19Z" fill="white" />
       <path d="M18 23L22 17L18 19.5082V23Z" fill="white" />
-      <path d="M7 15C7 19 11.5 21 14 19.6947" stroke="white" stroke-width="1.5" />
+      <path d="M7 15C7 19 11.5 21 14 19.6947" stroke="white" strokeWidth="1.5" />
       <defs>
         <linearGradient id="paint0_linear_0_141" x1="13" y1="0" x2="13" y2="26" gradientUnits="userSpaceOnUse">
           <stop stop-color="#982ECC" />
@@ -235,7 +235,7 @@ const iconsMap = {
       <path d="M18 23L14 17L18 19.5082V23Z" fill="white" />
       <path d="M18 19L22 16.6244L18 10V19Z" fill="white" />
       <path d="M18 23L22 17L18 19.5082V23Z" fill="white" />
-      <path d="M7 15C7 19 11.5 21 14 19.6947" stroke="white" stroke-width="1.5" />
+      <path d="M7 15C7 19 11.5 21 14 19.6947" stroke="white" strokeWidth="1.5" />
       <defs>
         <linearGradient id="paint0_linear_0_141" x1="13" y1="0" x2="13" y2="26" gradientUnits="userSpaceOnUse">
           <stop stop-color="#982ECC" />

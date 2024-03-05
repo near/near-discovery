@@ -25,39 +25,37 @@ import {
   StyledWinPtsIcon,
   StyledSwiperWrapper,
   StyledSwiperPrevButton,
-  StyledSwiperNextButton
+  StyledSwiperNextButton,
 } from './styles';
 
 const iconRight = (
   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="38" viewBox="0 0 13 38" fill="none">
-    <path d="M1 1L11 19L1 37" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+    <path d="M1 1L11 19L1 37" stroke="#979ABE" strokeWidth="2" stroke-linecap="round" />
   </svg>
-)
+);
 const Card = function ({ compass }: any) {
-  const toast = useToast()
-  const router = useRouter()
+  const toast = useToast();
+  const router = useRouter();
   const handleExplore = async function () {
-    let status = compass.status
+    let status = compass.status;
     if (status === 'un_start') {
-      const response = await get('/api/compass?id=' + compass.id)
-      status = response.data.status
+      const response = await get('/api/compass?id=' + compass.id);
+      status = response.data.status;
     }
     if (status === 'un_start') {
       toast.fail({
-        title: 'Odyssey is upcoming...'
-      })
+        title: 'Odyssey is upcoming...',
+      });
     } else {
-      router.push('/odyssey/home?id=' + compass.id)
+      router.push('/odyssey/home?id=' + compass.id);
     }
-  }
+  };
   return (
     <StyledCard>
       <StyledCardBackgroundImage width={1244} height={380} src={compass.banner} alt={compass.name} />
       <StyledCardMainContent>
         <StyledCardTitle>{compass.name}</StyledCardTitle>
-        <StyledCardDesc>
-          {compass.description}
-        </StyledCardDesc>
+        <StyledCardDesc>{compass.description}</StyledCardDesc>
       </StyledCardMainContent>
       <StyledCardButton onClick={handleExplore} data-bp="1001-003">
         <div>Explore now</div>
@@ -69,12 +67,12 @@ const Card = function ({ compass }: any) {
         </svg>
       </StyledCardButton>
     </StyledCard>
-  )
-}
+  );
+};
 const Compass = () => {
-  const { loading, compassList } = useCompassList()
-  const swiperRef = useRef<any>()
-  const [activeIndex, setActiveIndex] = useState(0)
+  const { loading, compassList } = useCompassList();
+  const swiperRef = useRef<any>();
+  const [activeIndex, setActiveIndex] = useState(0);
   return loading ? (
     <StyledLoadingWrapper>
       <Loading size={60} />
@@ -100,7 +98,7 @@ const Compass = () => {
                 swiperRef.current = swiper;
               }}
               onActiveIndexChange={(swiper) => {
-                setActiveIndex(swiper.activeIndex)
+                setActiveIndex(swiper.activeIndex);
               }}
             >
               {compassList.map((compass: any, index: number) => (
@@ -109,28 +107,24 @@ const Compass = () => {
                 </SwiperSlide>
               ))}
             </Swiper>
-            {
-              swiperRef.current && swiperRef.current.activeIndex > 0 && (
-                <StyledSwiperPrevButton
-                  onClick={() => {
-                    swiperRef.current && swiperRef.current.slidePrev()
-                  }}
-                >
-                  {iconRight}
-                </StyledSwiperPrevButton>
-              )
-            }
-            {
-              activeIndex < (compassList.length - 1) && (
-                <StyledSwiperNextButton
-                  onClick={() => {
-                    swiperRef.current && swiperRef.current.slideNext()
-                  }}
-                >
-                  {iconRight}
-                </StyledSwiperNextButton>
-              )
-            }
+            {swiperRef.current && swiperRef.current.activeIndex > 0 && (
+              <StyledSwiperPrevButton
+                onClick={() => {
+                  swiperRef.current && swiperRef.current.slidePrev();
+                }}
+              >
+                {iconRight}
+              </StyledSwiperPrevButton>
+            )}
+            {activeIndex < compassList.length - 1 && (
+              <StyledSwiperNextButton
+                onClick={() => {
+                  swiperRef.current && swiperRef.current.slideNext();
+                }}
+              >
+                {iconRight}
+              </StyledSwiperNextButton>
+            )}
           </StyledSwiperWrapper>
         </StyledInner>
       </StyledContent>
