@@ -16,7 +16,7 @@
     "prepare": "is-ci || husky install && npm install commitizen -g",
     "commit": "cz",
     "sync-submodules": "git submodule init && git submodule update",
-    "deploy-wp": "cp -r nearorg_marketing/public/blog ./public/blog && cp -r nearorg_marketing/public/wp-content ./public/wp-content && cp -r nearorg_marketing/public/wp-includes ./public/wp-includes"
+    "deploy-wp": "cp -r nearorg_marketing/public/wp-content ./public/ && cp -r nearorg_marketing/public/wp-includes ./public/"
   },
   "dependencies": {
     "@idos-network/idos-sdk": "^0.0.30",
