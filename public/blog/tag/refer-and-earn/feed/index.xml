@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Refer-and-Earn Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/refer-and-earn/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/refer-and-earn/</link>
+	<description></description>
+	<lastBuildDate>Thu, 15 Dec 2022 13:31:44 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Refer-and-Earn Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/refer-and-earn/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Refer-and-Earn Guidelines Update: Q3 2022</title>
+		<link>/blog/refer-and-earn-guidelines-update-q3-2022/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Fri, 09 Dec 2022 17:00:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[Grants]]></category>
+		<category><![CDATA[Refer-and-Earn]]></category>
+		<guid isPermaLink="false">/?p=19539</guid>
+
+					<description><![CDATA[<p>NEAR’s ever-growing and engaged community is one of the ecosystem’s greatest strengths. Remember the NEAR Foundation Grants team’s Refer-and-Earn Program? …</p>
+<p>The post <a href="/blog/refer-and-earn-guidelines-update-q3-2022/">Refer-and-Earn Guidelines Update: Q3 2022</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>NEAR’s ever-growing and engaged community is one of the ecosystem’s greatest strengths. Remember the <a href="https://medium.com/nearprotocol/refer-and-earn-pick-projects-you-love-and-get-up-to-10-000-in-near-981c0c015ba4#:~:text=Refer%20and%20Earn.,for%20nominating%20a%20worthy%20project">NEAR Foundation Grants team’s Refer-and-Earn Program</a>? A number of NEAR community members participated in Refer-and-Earn in early 2022, resulting in grants for dozens of exciting projects currently building on the NEAR ecosystem.&nbsp;&nbsp;</p>
+
+
+
+<p>The Foundation has had the pleasure of seeing the community being a key contributor in providing ecosystem support and building dapps. The community does this in a number of ways, including running and sponsoring events, educating developers and entrepreneurs on the benefits of NEAR, bringing projects with active user bases from other chains, and so on.</p>
+
+
+
+<p>NEAR Foundation wants to build on the community’s successes through a new incentive structure that aligns with the Grants Program (more information can be found at the Grants Program Handbook here bit.ly/Grants-Program-Handbook).&nbsp;</p>
+
+
+
+<ol>
+<li>The payout for each project referred will be awarded a total of 10% of the project awarded grant amount. This amount is awarded in nUSDC (wrapped USDC on NEAR) and is calculated at the end of each quarter.</li>
+
+
+
+<li>The first half of the 5% will be awarded at the point of the contract signed.</li>
+
+
+
+<li>The second half of the 5% will be awarded once all project milestones are completed.&nbsp;</li>
+</ol>
+
+
+
+<h2 class="wp-block-heading" id="h-refer-and-earn-q3-qualified-projects">Refer-and-Earn: Q3 Qualified Projects</h2>
+
+
+
+<p>The NEAR ecosystem receives a number of your recommendations and referrals. A total of 12 quality projects emerged from Refer-and-Earn, each aligning with NEAR Foundation’s Grants program objectives.&nbsp;</p>
+
+
+
+<p>In no particular order, here are the Q3 2022 qualified projects:&nbsp;</p>
+
+
+
+<ul>
+<li>Scene&nbsp;</li>
+
+
+
+<li>Azadi Record</li>
+
+
+
+<li>Vital Carbon&nbsp;</li>
+
+
+
+<li>Metavision Games&nbsp;</li>
+
+
+
+<li>Murder Mystery Collective&nbsp;</li>
+
+
+
+<li>MetaLordz&nbsp;</li>
+
+
+
+<li>Klabrate and ClimaFi</li>
+
+
+
+<li>Meteor wallet&nbsp;</li>
+
+
+
+<li>Mintmade&nbsp;</li>
+
+
+
+<li>NEARKai</li>
+
+
+
+<li>EVIE Marketplace&nbsp;</li>
+
+
+
+<li>Autify&nbsp;</li>
+</ul>
+
+
+
+<p>The Grants team has reached out to all Refer-and-Earn referrers. Thanks to your help and support, the Grants team is able to support innovative projects like those listed above. </p>
+<p>The post <a href="/blog/refer-and-earn-guidelines-update-q3-2022/">Refer-and-Earn Guidelines Update: Q3 2022</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
