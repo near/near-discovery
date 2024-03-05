@@ -13,6 +13,7 @@ let hashId = '';
 let anonymousUserIdCreatedAt = '';
 let pendingEvents: any = [];
 let cookieOptOut = false;
+export const cookiePreferences = { onlyRequired: 'only_required', all: 'all' };
 let clientsideReferrer = '';
 
 declare global {
@@ -73,6 +74,10 @@ export async function init() {
   if (window?.rudderAnalytics) return;
 
   getAnonymousId();
+
+  //pick up any change to cookie preferences on init (full page reload)
+  const userCookiePreference = localStorage.getItem('cookiesAcknowledged');
+  optOut(userCookiePreference === cookiePreferences.onlyRequired);
 
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2RIih8mrVPUTQ9uWe6TFfwXzcMe';
   const rudderStackDataPlaneUrl = 'https://near.dataplane.rudderstack.com';
