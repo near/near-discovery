@@ -122,7 +122,7 @@ export default function VmInitializer() {
           },
           AnalyticsCookieConsent: ({ all, onlyRequired }: { all: boolean; onlyRequired: boolean }) => {
             localStorage.setItem('cookiesAcknowledged', all ? 'all' : ' only_required');
-            optOut();
+            optOut(onlyRequired);
             return <></>;
           },
         },

@@ -63,8 +63,8 @@ function getUserAgent() {
   return userAgentDetail;
 }
 
-export function optOut() {
-  cookieOptOut = true;
+export function optOut(onlyRequiredCookies: boolean) {
+  cookieOptOut = onlyRequiredCookies;
 }
 
 export async function init() {
