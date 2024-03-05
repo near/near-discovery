@@ -19,7 +19,7 @@ type EventsListData = {
 };
 
 export const fetchEventsList = async (limit: number, offset: number): Promise<EventsListData> => {
-  const currentDate = moment().format('YYYY-MM-DD');
+  const currentDate = moment().subtract(1, 'day').format('YYYY-MM-DD');
   const queryFrom = `after=${currentDate}`;
   const queryLimit = `pagination_limit=${limit ?? 10}`;
   const queryOffset = offset ? `pagination_offset=${offset}` : '';
