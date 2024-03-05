@@ -24,7 +24,7 @@ export default function OdysseyV2() {
     onSuccess: () => {
       setUpdater(Date.now());
     },
-    redirect_uri: `${window.location.origin}${window.location.pathname}?id=1`,
+    redirect_uri: `${window.location.origin}${window.location.pathname}?id=2`,
   });
   return (
     <StyledContainer>
