@@ -2,11 +2,9 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 //https://www.iban.com/country-codes
+const IBAN_BLOCKED_REGIONS = ['CU', 'IR', 'KP', 'SY'];
 
-//todo remove spain after testing on preview
-const IBAN_BLOCKED_REGIONS = ['CU', 'IR', 'KP', 'SY', 'ES'];
-
-// Limit middleware pathname config
+// Limit middleware triggering to specific routes
 export const config = {
   matcher: [
     '/:path/widget/:slug',
@@ -14,23 +12,40 @@ export const config = {
     '/files/:path*',
     '/papers/:path*',
     '/blog/:path*',
-    '/signup:path*',
+    '/applications/:path*',
+    '/signup/:path*',
     '/signin/:path*',
+    '/ecosystem/:path*',
+    '/founders/:path*',
+    '/people',
+    '/learn/:path*',
+    '/events/',
+    '/sandbox',
+    '/onboarding',
+    '/applications',
+    '/components',
+    '/gateways',
+    '/blockchain',
+    '/open-web-applications',
+    '/data-availability',
+    '/fast-auth-and-relayers',
+    '/data-infrastructure',
   ],
 };
 
 export function middleware(req: NextRequest) {
-  // Extract country
   const country = (req.geo && req.geo.country) || 'UNKNOWN';
 
-  //TODO remove after testing on preview
-  console.log('users country is ', country);
+  let response = NextResponse.rewrite(req.nextUrl);
+  //save into user's client so we can pass into analytics, if they've allowed analytics
+  response.cookies.set({ domain: '.near.org', name: 'user-country-code', value: country, sameSite: 'strict' });
 
-  let nextUrl = NextResponse.rewrite(req.nextUrl);
-  // Specify the correct pathname
+  // Redirect users from blocked regions
   if (IBAN_BLOCKED_REGIONS.includes(country)) {
-    nextUrl = NextResponse.rewrite('/geo-blocked');
+    const url = req.nextUrl.clone();
+    url.pathname = '/geoBlocked';
+    response = NextResponse.redirect(url);
   }
 
-  return nextUrl;
+  return response;
 }
