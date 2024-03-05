@@ -2,7 +2,7 @@
 // e.g. /about/contact-us, /papers/nightshade
 const extendableRoutes: Record<string, string> = {
   about: 'https://pages.near.org/about',
-  blog: 'https://pages.near.org/blog',
+  blog: '/blog/index.html',
 };
 
 // routes which are extendable but may have some paths

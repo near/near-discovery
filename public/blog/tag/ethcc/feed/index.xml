@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>ETHCC Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/ethcc/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/ethcc/</link>
+	<description></description>
+	<lastBuildDate>Thu, 20 Jul 2023 15:12:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>ETHCC Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/ethcc/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR at ETHCC Highlights: Sustainability and the BOS Take Center Stage in Paris</title>
+		<link>/blog/near-at-ethcc-highlights-sustainability-and-the-bos-take-center-stage-in-paris/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 20 Jul 2023 17:00:00 +0000</pubDate>
+				<category><![CDATA[Uncategorized]]></category>
+		<category><![CDATA[Community]]></category>
+		<category><![CDATA[Ecosystem]]></category>
+		<category><![CDATA[ETHCC]]></category>
+		<category><![CDATA[Partnerships]]></category>
+		<category><![CDATA[Sustainability]]></category>
+		<guid isPermaLink="false">/?p=20742</guid>
+
+					<description><![CDATA[<p>Missed out on NEAR’s rendezvous at ETHCC 2023 in Paris? No need to worry. In this roundup, all NEAR enthusiasts …</p>
+<p>The post <a href="/blog/near-at-ethcc-highlights-sustainability-and-the-bos-take-center-stage-in-paris/">NEAR at ETHCC Highlights: Sustainability and the BOS Take Center Stage in Paris</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Missed out on NEAR’s rendezvous at ETHCC 2023 in Paris? No need to worry. In this roundup, all NEAR enthusiasts can catch up on the enlightening presentations by BOS, Web3, and blockchain experts. You’re in the perfect place to delve into notable announcements made during the conference, from <a href="/blog/near-foundation-signs-up-to-the-ethereum-climate-platform/?_gl=1%2A1nco86y%2A_up%2AMQ..%2A_ga%2AMTQ5MTA4NDUzMS4xNjg5Njk0NDEy%2A_ga_9GWCXQJ62J%2AMTY4OTY5NDQxMC4xLjAuMTY4OTY5NDQxMC4wLjAuMA..">NEAR signing up to the Ethereum Climate Platform</a> to an epic new <a href="/blog/interactive-polygon-zkevm-app-dashboard-launches-on-the-near-blockchain-operating-system/?_gl=1%2A1nco86y%2A_up%2AMQ..%2A_ga%2AMTQ5MTA4NDUzMS4xNjg5Njk0NDEy%2A_ga_9GWCXQJ62J%2AMTY4OTY5NDQxMC4xLjAuMTY4OTY5NDQxMC4wLjAuMA..">interactive Polygon zkEVM app dashboard</a>.</p>
+
+
+
+<p>ICYMI, it’s time to dive into all the key speeches, events, and announcements that unfolded in the City of Lights over this past weekend.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-interactive-polygon-zkevm-app-dashboard-launches-on-the-bos">Interactive Polygon zkEVM app dashboard launches on the BOS</h2>
+
+
+
+<p>In the most significant partnership announcement of ETHCC, an <a href="/blog/interactive-polygon-zkevm-app-dashboard-launches-on-the-near-blockchain-operating-system/?_gl=1%2A1nco86y%2A_up%2AMQ..%2A_ga%2AMTQ5MTA4NDUzMS4xNjg5Njk0NDEy%2A_ga_9GWCXQJ62J%2AMTY4OTY5NDQxMC4xLjAuMTY4OTY5NDQxMC4wLjAuMA..">interactive Polygon zkEVM app dashboard</a> has launched on the Blockchain Operating System (BOS). This integration will not only increase accessibility and discoverability for zkEVM developers and users on the open web but also vastly improve user experience. </p>
+
+
+
+<p>The collaboration is set to accelerate the creation of dApps that will onboard billions of users into the open web. The new <a href="https://bos.quickswap.exchange/">Polygon zkEVM dashboard </a>now combines the benefits of zero-knowledge technology with the power of the BOS to unlock <a href="https://www.youtube.com/watch?v=jVu4Hc1CLao">even more seamless onboarding</a> to the open web. </p>
+
+
+
+<p>The dashboard brings a new suite of zero knowledge development capabilities to zkEVM developers and lets them build apps that can reach more users from day one. It’s a groundbreaking partnership that brings together the NEAR and Polygon ecosystems, two of the most innovative names in Ethereum and blockchain scalability.</p>
+
+
+
+<h2 class="wp-block-heading">NEAR makes waves with sustainability commitment</h2>
+
+
+
+<p>NEAR Foundation made a significant stride in its commitment to Web3 sustainability. As part of its ongoing efforts, NEAR signed up to the Ethereum Climate Platform, demonstrating its resolve towards minimizing the environmental impact of Web3 development. This move aligns with NEAR’s ethos and commitment to sustainable and scalable blockchain solutions.</p>
+
+
+
+<h2 class="wp-block-heading">Marieke storms the BOS-tille at “Funding the Commons”</h2>
+
+
+
+<p>Adding to the list of notable NEAR occurrences during ETHCC, NEAR Foundation CEO, Marieke Flament, was a keynote speaker at the “Funding the Commons” event held at Sorbonne Université on July 15. Marike’s message was one of bringing more ethics and equity to the entire blockchain and Web3 ecosystem.</p>
+
+
+
+<p>In her speech, titled &#8220;The Open Web is NEAR: How the BOS, NDC, and DAOs are creating a Decentralized Web,” Marieke explored how NEAR Foundation serves the ecosystem by building public goods like the BOS, DevHub, NDC, DAOs, and more.&nbsp;</p>
+
+
+
+<p>“Funding the Commons” is an event designed to complement the Ethereum Community Conference, promoting connection amongst participants, and fostering new collaborations and projects. The event organizers also planned a dinner on July 15 at Le Procope Paris, where Marieke was among the most notable invited guests.</p>
+
+
+
+<h2 class="wp-block-heading">Unpacking Insights: notable talks and events at ETH CC</h2>
+
+
+
+<p>Near @ ETHCC wasn&#8217;t just a gathering of blockchain enthusiasts, but a hotbed of innovative discussions. Illia Polosukhin, co-founder of NEAR, and Nadir Dabit&#8217;s conversation around decentralized social networks piqued particular interest. They hinted at a shift in how we&#8217;ll connect and share information in the future and the potential role of decentralized social on the BOS.</p>
+
+
+
+<p>Matt Stephenson, head of crypto economics at crypto investment firm, Pantera Capital, took the audience on a thrilling Day Two journey through the intricacies of behavioral game theory. He showcased how game theory could be leveraged in this space, offering a unique lens to examine, understand, and potentially predict blockchain trends.</p>
+
+
+
+<p>Near @ ETHCC didn&#8217;t skimp on forward-looking conversations either. A panel featuring Max Mersch of Fabric Ventures, Maggie Love from SheFi, and Bilal El Alamy of PyratzLabs posed a pertinent question: &#8220;What’s the Next Big Use Case Being Built in the Bear Market?&#8221; Each speaker provided valuable insight about both challenges and opportunities posed by bear markets.</p>
+
+
+
+<h2 class="wp-block-heading">Ecosystem Updates</h2>
+
+
+
+<p>Despite the focus on the Near @ ETHCC side event itself, the NEAR ecosystem saw significant developments and milestones during the past few days.</p>
+
+
+
+<ul>
+<li><strong>The NEAR Digital Collective’s I-AM-HUMAN</strong> movement has crossed 2,000 members in the NEAR ecosystem. The initiative allows users to vote, elect candidates for office, and shape the future of NEAR. You can sign up <a href="https://i-am-human.app/?transactionHashes=Djm4ohdiWxNETWz3xZA8BUreQFbQm63rJh67SAHkMc48">here</a>.</li>
+
+
+
+<li><strong>MintbaseSearch</strong> has gone live on NEAR mainnet along with its own ChatGPT plugin. Mintbase now enables users to ask anything about NFTs on the NEAR Protocol. More details <a href="https://twitter.com/mintbase/status/1679487855473872897?s">here</a>.</li>
+
+
+
+<li><strong>Opolis</strong> has raised $6.6M in a bridge fundraising round with support from NEAR Foundation, Polygon Ventures, and Draper Capital. Read more details about the full announcement <a href="https://twitter.com/opolis/status/1679477404824137732?s">here</a>.</li>
+
+
+
+<li><strong>Black Snow: Battle For Earth,</strong> launched its demo version, offering an exciting free-to-play-and-earn experience that aims to enhance the NEAR ecosystem by boosting user count and transactions. Check out the demo<a href="https://linktr.ee/battleforearth"> here</a></li>
+</ul>
+
+
+
+<p>C&#8217;est la vie in Paris as ETHCC 2023 wraps up. As we reflect on these dynamic days, it&#8217;s clear that the future of NEAR and the BOS is exciting and full of potential. From environmental commitments to bold collaborations and fascinating talks, NEAR’s Parisian journey was full of engagement, enlightenment, and enthusiasm for everyone involved.</p>
+<p>The post <a href="/blog/near-at-ethcc-highlights-sustainability-and-the-bos-take-center-stage-in-paris/">NEAR at ETHCC Highlights: Sustainability and the BOS Take Center Stage in Paris</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>NEAR at ETHCC: Horizon Pitch Contest, BOS Workshops, and More</title>
+		<link>/blog/near-at-ethcc-horizon-pitch-contest-bos-workshops-and-more/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Sun, 16 Jul 2023 17:49:56 +0000</pubDate>
+				<category><![CDATA[Community]]></category>
+		<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Ecosystem]]></category>
+		<category><![CDATA[ETHCC]]></category>
+		<category><![CDATA[Partnerships]]></category>
+		<guid isPermaLink="false">/?p=20725</guid>
+
+					<description><![CDATA[<p>As Day One at NEAR @ ETHCC concludes, there’s palpable growing excitement for what’s in store for tomorrow. Held at …</p>
+<p>The post <a href="/blog/near-at-ethcc-horizon-pitch-contest-bos-workshops-and-more/">NEAR at ETHCC: Horizon Pitch Contest, BOS Workshops, and More</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>As Day One at NEAR @ ETHCC concludes, there’s palpable growing excitement for what’s in store for tomorrow. Held at the beautiful Museum National D’Histoire Naturelle in Paris, the first day of workshops and sessions proved to be an exceptional success for Ethereum and BOS builders.&nbsp;</p>
+
+
+
+<p>Day Two is gearing up to take the experience to a whole new level, with a primary focus on founders and their ventures.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-morning-and-early-afternoon-sessions-fostering-innovation">Morning and Early Afternoon Sessions: Fostering Innovation</h2>
+
+
+
+<p>Day Two will kick off with a casual networking opportunity over café au laits and pastries. It’ll be a great way to get warmed up and connect builders, innovators, and visionaries within the NEAR ecosystem.</p>
+
+
+
+<p>The first main event of the day will be a special workshop held&nbsp; by Matt Stephenson , Head of Cryptoeconomics at Pantera Capita, along with Pantera Principal, Ryan Barney. His insights on the opportunities and challenges within blockchain economics will deepen participants&#8217; understanding of the critical economic principles underpinning blockchain ecosystems.</p>
+
+
+
+<p>As the morning sessions conclude, the afternoon will kick off by delving into the world of interoperability, onboarding, and value generation with Vik Pandey from NEAR Foundation. Vik has been actively involved in the development of the BOS, focusing on interoperability, open-source technologies, and blockchain success efforts.&nbsp;</p>
+
+
+
+<p>During his session, &#8220;Interoperability, Onboarding, and Value Generation with the BOS,&#8221; Vik will share insights from his work, highlighting the ways in which the BOS fosters innovation and impact in the Open Web.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-late-afternoon-highlights-regulatory-discussions-and-horizon-workshop">Late Afternoon Highlights: Regulatory Discussions and Horizon Workshop</h2>
+
+
+
+<p>Next on the agenda is a panel of experts moderated by Mya Shofany, regulatory lead at NEAR Foundation. The discussion will delve into regulatory considerations in blockchain, and tackle some of the most critical issues facing Web3&nbsp; founders in the current regulatory landscape.</p>
+
+
+
+<p>The panel will be followed by one of the day&#8217;s most anticipated events — the Horizon afternoon. This session will be a deep dive into the cutting-edge ideas poised to redefine the blockchain world, spearheaded by NEAR’s new Web3 accelerator arm.</p>
+
+
+
+<p>As Day Two winds down, participants can enjoy relaxed networking during the Horizon Happy Hour. Here, NEAR and Ethereum enthusiasts can reflect on the day&#8217;s learnings, forge new connections, and unwind over drinks and appetizers.</p>
+
+
+
+<p>If you would like to browse the official schedule, head to <a href="https://www.eventbrite.com/e/near-ethcc-tickets-655229297467">near.org.ethcc&nbsp;</a></p>
+
+
+
+<p>Throughout the two days of NEAR @ ETHCC, participants are not just learning about the Blockchain Operating System (BOS), they&#8217;re experiencing it firsthand. Day Two promises a packed schedule of learning, building, and networking opportunities.</p>
+
+
+
+<p>For those who couldn&#8217;t join us on Day One, you can catch up on the sessions uploaded on the <a href="https://www.youtube.com/channel/UCuKdIYVN8iE3fv8alyk1aMw">NEAR Protocol YouTube channel</a>. Prepare for Day Two by soaking up the insights shared by our experts.</p>
+
+
+
+<p>Stay connected with us for more updates and insights from NEAR @ ETHCC as we continue to explore the limitless possibilities of the Blockchain Operating System (BOS).</p>
+<p>The post <a href="/blog/near-at-ethcc-horizon-pitch-contest-bos-workshops-and-more/">NEAR at ETHCC: Horizon Pitch Contest, BOS Workshops, and More</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>NEAR at ETHCC: Step into the Open Web on the BOS</title>
+		<link>/blog/near-at-ethcc-step-into-the-open-web-on-the-bos/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Tue, 13 Jun 2023 16:00:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[ETHCC]]></category>
+		<category><![CDATA[Ethereum]]></category>
+		<guid isPermaLink="false">/?p=20621</guid>
+
+					<description><![CDATA[<p>NEAR Foundation is excited to announce that NEAR will be returning to ETHCC 2023. The Foundation will be hosting a …</p>
+<p>The post <a href="/blog/near-at-ethcc-step-into-the-open-web-on-the-bos/">NEAR at ETHCC: Step into the Open Web on the BOS</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>NEAR Foundation is excited to announce that NEAR will be returning to ETHCC 2023. The Foundation will be hosting a 2-day side event at the Paris tech conference on July 16-17.</p>
+
+
+
+<p>NEAR experts will be on hand at ETHCC to share the latest updates for building apps on the open web&nbsp; with the BOS&nbsp; — an industry-first OS that makes it easy to use the tools you already know to build apps that engage users, while fostering an open web untethered from centralized platforms.&nbsp;</p>
+
+
+
+<p>Also, learn how your project can get funding and other support from NEAR Horizon, the new Web3 startup platform built on the BOS. </p>
+
+
+
+<h2 class="wp-block-heading" id="h-near-at-ethcc-what-to-expect">NEAR at ETHCC — What to expect</h2>
+
+
+
+<p>NEAR is hosting a two-day ETHCC side event on July 16-17th, that will feature Technical Workshops (BOS) hosted by Pagoda, a Horizon Pitch Competition, small ETH research group workshops (invite only), and other speaker sessions, keynotes, and panels. You can’t forget about our exclusive networking and happy hours!</p>
+
+
+
+<p>Learn from the best in the NEAR ecosystem about what makes the BOS so revolutionary. Ask your questions. Learn in-person. Make connections!</p>
+
+
+
+<h2 class="wp-block-heading">Agenda: NEAR at ETHCC</h2>
+
+
+
+<p>NEAR’s 2-day ETHCC side event will be located at the <a href="https://www.mnhn.fr/fr/privatiser-l-amphitheatre-verniquet">Museum National D’Histoire Naturelle: Verniquet</a>.&nbsp;</p>
+
+
+
+<p><strong>Day 1: Technical Day&nbsp;</strong></p>
+
+
+
+<ul>
+<li>11am &#8211; 12pm: Breakfast bites &amp; Networking &#8211; Cafe au laits and pastries</li>
+
+
+
+<li>12-12:30pm: Stateless Validation &#8211; Invite Only Research Group&nbsp;</li>
+
+
+
+<li>12:30-1pm: Token Economics &#8211; Invite Only Research Group&nbsp;</li>
+
+
+
+<li>1-1:30pm: BOS Vision&nbsp;</li>
+
+
+
+<li>1:30-2pm: BOS for Devs&nbsp;</li>
+
+
+
+<li>2-2:30pm: BOS Tech Breakdown for Partners&nbsp;</li>
+
+
+
+<li>2:30-3pm: Simona/ETH Session&nbsp;</li>
+
+
+
+<li>3pm-4pm: Programming Break, Happy hour guests arrive&nbsp;</li>
+
+
+
+<li>4pm &#8211; 7pm: Happy Hour &#8211; Appetizers and drinks&nbsp;</li>
+</ul>
+
+
+
+<p><strong>Structure for Day 2: Founders Day&nbsp;</strong></p>
+
+
+
+<ul>
+<li>11am &#8211; 12pm: Networking and Co-working: Cafe au laits and pastries</li>
+
+
+
+<li>12pm-12:30pm: Pantera Capital Workshop&nbsp;</li>
+
+
+
+<li>12:30-1pm: Proximity Workshop&nbsp;</li>
+
+
+
+<li>1-1:30pm: Simona/ETH Session&nbsp;</li>
+
+
+
+<li>1:30-2pm: Pitchfest Guests arrive&nbsp;</li>
+
+
+
+<li>2-4pm: Horizon Pitch Fest&nbsp;</li>
+
+
+
+<li>4pm &#8211; 7pm: Horizon Pitch Competition Happy Hour: Aperol spritz and appetizers</li>
+</ul>
+
+
+
+<h2 class="wp-block-heading">NEAR Speakers at ETHCC</h2>
+
+
+
+<ul>
+<li>Illia Polosukhin, CEO of Pagoda, Co-Founder of NEAR</li>
+
+
+
+<li>Matt Stephenson, Head of Cryptoeconomics, Pantera Capital</li>
+
+
+
+<li>Vy Le, Bain Capital</li>
+
+
+
+<li>Kendall Cole, Co-Founder and Director of Proximity</li>
+
+
+
+<li>Mya Shofany, Regulatory Lead, NEAR Foundation</li>
+
+
+
+<li>Bowen Want, Director of Protocol, Pagoda</li>
+
+
+
+<li>And more!</li>
+</ul>
+
+
+
+<p>Stay updated on the complete slate of confirmed speakers and sessions at Near.org/ETHCC.&nbsp;</p>
+
+
+
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://www.eventbrite.com/e/near-ethcc-tickets-655229297467?aff=oddtdtcreator"><strong>Register for NEAR at ETHCC</strong></a></div>
+</div>
+
+
+
+<div class="wp-block-buttons is-layout-flex wp-block-buttons-is-layout-flex">
+<div class="wp-block-button"><a class="wp-block-button__link wp-element-button" href="https://near.org/"><strong>Explore the BOS</strong></a></div>
+</div>
+<p>The post <a href="/blog/near-at-ethcc-step-into-the-open-web-on-the-bos/">NEAR at ETHCC: Step into the Open Web on the BOS</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

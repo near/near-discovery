@@ -58,8 +58,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/papers/nightshade',
-        destination: '/files/nightshade.pdf',
+        source: '/papers/:slug',
+        destination: '/files/:slug.pdf',
         permanent: true,
       },
       {
@@ -89,7 +89,15 @@ const nextConfig = {
     {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
-    }
+    },
+    {
+      source: '/blog',
+      destination: '/blog/',
+    },
+    {
+      source: '/blog/:path*',
+      destination: '/blog/:path*/index.html',
+    },
   ],
   headers: async () => [
     {
@@ -113,8 +121,7 @@ const withPWA = require('next-pwa')({
 })
 const { loadEnvConfig } = require('@next/env');
 loadEnvConfig(".")
-if(!process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT)
-  module.exports = withPWA(nextConfig);
+module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below
 

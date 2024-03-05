@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>NEAR Discord Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/near-discord/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/near-discord/</link>
+	<description></description>
+	<lastBuildDate>Fri, 09 Jun 2023 09:01:10 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>NEAR Discord Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/near-discord/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Post Mortem: NEAR Discord Security Incident</title>
+		<link>/blog/post-mortem-near-discord-security-incident/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Mon, 22 May 2023 04:00:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[NEAR Discord]]></category>
+		<guid isPermaLink="false">/?p=20520</guid>
+
+					<description><![CDATA[<p>This is a post mortem report regarding the recent security incident that occurred on the NEAR Discord server.&#160; The purpose …</p>
+<p>The post <a href="/blog/post-mortem-near-discord-security-incident/">Post Mortem: NEAR Discord Security Incident</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>This is a post mortem report regarding the recent security incident that occurred on the NEAR Discord server.&nbsp; The purpose of this report is to provide analysis of the incident, identify the root cause, outline the impact, and propose actions to potentially limit similar incidents in the future.</p>
+
+
+
+<p><strong>Summary: </strong>On Wednesday, May 17th, the NEAR Discord server experienced a security incident.&nbsp; This resulted in unauthorized access to a singular moderator account. The incident occurred due to a successful spear-phishing attempt on one of our server&#8217;s moderators. The attacker used their access to promote a fraudulent airdrop campaign, with the intent to deceive users and drain their wallets.&nbsp;</p>
+
+
+
+<p><strong>Root Cause Analysis:</strong> The investigation revealed the following root causes:</p>
+
+
+
+<ol>
+<li><strong>Successful spear-phishing:</strong> One of the NEAR Discord moderators was targeted by a phishing campaign, leading to the theft of their Discord credentials.&nbsp;</li>
+
+
+
+<li><strong>Lack of Two-Factor Authentication (2FA): </strong>The absence of 2FA for user accounts provided an opportunity for attackers to gain unauthorized access.&nbsp;</li>
+</ol>
+
+
+
+<p><strong>Impact:</strong> The security incident had the following impacts:</p>
+
+
+
+<ol>
+<li><strong>Unauthorized Access:</strong> The attacker gained unauthorized access to our Discord server.&nbsp;</li>
+
+
+
+<li><strong>Removal of Moderators:</strong> The attacker used their access to ban existing moderators that tried to intervene.&nbsp;</li>
+
+
+
+<li><strong>Content Deletion</strong>: Unauthorized deletion of two Discord channels.</li>
+
+
+
+<li><strong>Disruption of Services:</strong> During the incident investigation and subsequent remediation, there was a temporary disruption in server availability and functionality. Invite links were invalidated during the process and are being rebuilt.&nbsp;</li>
+</ol>
+
+
+
+<p><strong>Actions Taken: </strong>In response to the security incident, we have taken the following actions:</p>
+
+
+
+<ol>
+<li><strong>Incident Response and Investigation: </strong>Immediately upon detection, our security team initiated an incident response plan. They conducted a thorough investigation to determine the extent of the incidents and identify the source of the entry point.
+<ul>
+<li><strong>Timeline of events:&nbsp;</strong>
+<ol>
+<li>At 7:47 PM UTC, a malicious webhook was installed by a compromised Discord Moderator account.</li>
+
+
+
+<li>At 10:47 PM UTC, the attacker — using the compromised moderator account — began posting in Discord. From there, other Discord members attempting to mitigate the attack were subsequently banned.</li>
+
+
+
+<li>The attacker used their access to promote a fraudulent airdrop campaign, with the intent to deceive users and drain their wallets.</li>
+
+
+
+<li>10:57 PM UTC, The Pagoda Security team was notified.&nbsp;</li>
+
+
+
+<li>Triage began and we identified the problem account and began resetting permission immediately.&nbsp;</li>
+
+
+
+<li>11:13 PM UTC, all attackers had been removed and all threats neutralized.&nbsp;</li>
+</ol>
+</li>
+</ul>
+</li>
+
+
+
+<li><strong>User Notification and Password Reset: </strong>Affected users have been notified about the incident, and a mandatory password reset has been implemented to ensure the security of their accounts.&nbsp;</li>
+
+
+
+<li><strong>Required 2FA for Moderators: </strong>Moderators are now required to use 2FA in the NEAR Discord.&nbsp;</li>
+</ol>
+
+
+
+<p><strong>Preventive Measures:</strong> To prevent similar incidents, the following actions will be taken: measures:</p>
+
+
+
+<ol>
+<li><strong>Regular Security Audits:</strong> Implement regular security audits of our Discord server to identify and address vulnerabilities promptly.</li>
+
+
+
+<li><strong>Ongoing Monitoring and Incident Response Improvement: </strong>Enhance our monitoring capabilities to detect any suspicious activities and continually improve our incident response procedures.</li>
+
+
+
+<li><strong>Security Education and Awareness: </strong>Continue to educate our team on the importance of strong passwords, multi-factor authentication, and general security best practices.&nbsp;</li>
+</ol>
+
+
+
+<p><strong>Conclusion: </strong>The security incident on the NEAR Discord server served as a crucial reminder of the significance of having robust security measures in place. Prompt action to minimize the impact was taken and the team have since implemented preventive measures to avoid similar incidents moving forward.&nbsp; Ensuring the security and privacy of our users and their data continues to be our utmost priority.&nbsp;</p>
+<p>The post <a href="/blog/post-mortem-near-discord-security-incident/">Post Mortem: NEAR Discord Security Incident</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>
