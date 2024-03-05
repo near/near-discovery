@@ -73,9 +73,15 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/horizon',
-        destination: '/founders',
-        permanent: true,
+        source: '/signin',
+        destination: '/applications?requestAuth=1',
+        permanent: false,
+      }
+      ,
+      {
+        source: '/signup',
+        destination: '/applications?requestAuth=1&createAccount=1',
+        permanent: false,
       }
     ];
   },
