@@ -2,7 +2,7 @@ import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
 //https://www.iban.com/country-codes
-const IBAN_BLOCKED_REGIONS = ['CU', 'IR', 'KP', 'SY', 'ES']; // Todo remove ES
+const IBAN_BLOCKED_REGIONS = ['CU', 'IR', 'KP', 'SY'];
 
 // Limit middleware triggering to specific routes
 export const config = {
