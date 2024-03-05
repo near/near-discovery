@@ -72,6 +72,7 @@ const SocialCard = ({
               ev.stopPropagation();
               if (!checking) handleRefresh();
             }}
+            loading={checking}
           />
         )}
         <CardFlip amount={spins} disabled={!finished} />

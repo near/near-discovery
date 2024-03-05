@@ -92,6 +92,7 @@ export default function DappCard({
               ev.stopPropagation();
               if (!checking) handleRefresh();
             }}
+            loading={checking}
           />
           <CardFlip amount={spins * execution} disabled={execution === times} />
         </StyledFooterActions>
