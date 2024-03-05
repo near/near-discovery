@@ -7,8 +7,8 @@ const IBAN_BLOCKED_REGIONS = ['CU', 'IR', 'KP', 'SY', 'ES']; // Todo remove ES
 // Limit middleware triggering to specific routes
 export const config = {
   matcher: [
-    '/:path/widget/:slug',
-    '/:path/component/:slug',
+    '/:path*/widget/:slug*',
+    '/:path*/component/:slug*',
     '/files/:path*',
     '/papers/:path*',
     '/blog/:path*',
