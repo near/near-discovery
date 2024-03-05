@@ -24,7 +24,6 @@ const finiteRoutes: Record<string, string> = {
   defi: 'https://pages.near.org/defi',
   'educate-old': 'https://pages.near.org/educate-old',
   education: 'https://pages.near.org/education',
-  events: 'https://pages.near.org/events',
   examples: 'https://pages.near.org/examples',
   lisbon: 'https://pages.near.org/lisbon',
   meetings: 'https://pages.near.org/meetings',

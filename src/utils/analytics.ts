@@ -13,11 +13,16 @@ let hashId = '';
 let anonymousUserIdCreatedAt = '';
 let pendingEvents: any = [];
 let cookieOptOut = false;
+let clientsideReferrer = '';
 
 declare global {
   interface Window {
     rudderAnalytics: Analytics | undefined;
   }
+}
+
+export function setReferrer(referrer: string) {
+  clientsideReferrer = referrer;
 }
 
 export function setAccountIdHash(accountId: string) {
@@ -115,6 +120,7 @@ export function recordPageView(pageName: string) {
       url: filterURL(window.location.href),
       userAgentDetail,
       ref: filterURL(document.referrer),
+      clientsideReferrer,
     });
   } catch (e) {
     console.error(e);
@@ -128,6 +134,7 @@ const record = (eventType: string, e: UIEvent | PointerEvent) => {
     url: e.target ? filterURL((e.target as HTMLElement).baseURI) : '',
     xPath: getXPath(e.target as HTMLElement),
     componentSrc: getComponentName(e.target as HTMLElement),
+    clientsideReferrer,
   });
 };
 export const recordClick = (e: UIEvent | PointerEvent) => record('click', e);
@@ -163,6 +170,7 @@ export function recordEventWithProps(eventLabel: string, properties: Record<stri
       userAgentDetail,
       hashId: localStorage.getItem('hashId'),
       anonymousUserIdCreatedAt,
+      clientsideReferrer,
     });
   } catch (e) {
     console.error(e);
@@ -181,6 +189,7 @@ export function recordEvent(eventLabel: string) {
       url: window.location.href,
       userAgentDetail,
       anonymousUserIdCreatedAt,
+      clientsideReferrer,
     });
   } catch (e) {
     console.error(e);

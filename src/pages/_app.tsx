@@ -20,7 +20,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
-import { init as initializeAnalytics } from '@/utils/analytics';
+import { init as initializeAnalytics, setReferrer } from '@/utils/analytics';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
@@ -53,6 +53,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       setNotificationsLocalStorage();
     }
   }, [signedIn]);
+
+  useEffect(() => {
+    router.events.on('routeChangeStart', () => {
+      //save a reference to the currentl URL before the route change event completes
+      setReferrer(window.location.href);
+    });
+  });
 
   useEffect(() => {
     initializeAnalytics();
