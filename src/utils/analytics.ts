@@ -15,6 +15,7 @@ let pendingEvents: any = [];
 let cookieOptOut = false;
 export const cookiePreferences = { onlyRequired: 'only_required', all: 'all' };
 let clientsideReferrer = '';
+let userCountryCode = '';
 
 declare global {
   interface Window {
@@ -78,6 +79,7 @@ export async function init() {
   //pick up any change to cookie preferences on init (full page reload)
   const userCookiePreference = localStorage.getItem('cookiesAcknowledged');
   optOut(userCookiePreference === cookiePreferences.onlyRequired);
+  userCountryCode = localStorage.getItem('user-country-code') || '';
 
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2RIih8mrVPUTQ9uWe6TFfwXzcMe';
   const rudderStackDataPlaneUrl = 'https://near.dataplane.rudderstack.com';
@@ -126,6 +128,7 @@ export function recordPageView(pageName: string) {
       userAgentDetail,
       ref: filterURL(document.referrer),
       clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
@@ -140,6 +143,7 @@ const record = (eventType: string, e: UIEvent | PointerEvent) => {
     xPath: getXPath(e.target as HTMLElement),
     componentSrc: getComponentName(e.target as HTMLElement),
     clientsideReferrer,
+    userCountryCode,
   });
 };
 export const recordClick = (e: UIEvent | PointerEvent) => record('click', e);
@@ -176,6 +180,7 @@ export function recordEventWithProps(eventLabel: string, properties: Record<stri
       hashId: localStorage.getItem('hashId'),
       anonymousUserIdCreatedAt,
       clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
@@ -195,6 +200,7 @@ export function recordEvent(eventLabel: string) {
       userAgentDetail,
       anonymousUserIdCreatedAt,
       clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
