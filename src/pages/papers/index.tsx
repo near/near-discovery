@@ -16,7 +16,7 @@ const PapersPage: NextPageWithLayout = () => {
         docs: {
           doomslug: '/files/doomslug.pdf',
           nightshade: '/files/nightshade.pdf',
-          whitePaperNearProtocol: '/files/white-paper-near-protocol.pdf',
+          whitePaperNearProtocol: '/files/the-official-near-white-paper.pdf',
         },
       }}
     />
