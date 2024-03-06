@@ -58,8 +58,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/papers/nightshade',
-        destination: '/files/nightshade.pdf',
+        source: '/papers/:slug',
+        destination: '/files/:slug.pdf',
         permanent: true,
       },
       {
