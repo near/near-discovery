@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import { useUserStore } from '@/stores/user';
-import { getAccessToken } from '@/apis';
+import { checkAddressIsInvited, getAccessToken, inviteCodeActivate } from '@/apis';
 import { get } from '@/utils/http';
 
 export default function useInititalDataWithAuth() {
@@ -17,6 +17,10 @@ export default function useInititalDataWithAuth() {
 
   const getInitialDataWithAuth = async (address?: string) => {
     if (address) {
+      const checked = await checkAddressIsInvited(address);
+      if (!checked) {
+        await inviteCodeActivate(address, '');
+      }
       await getAccessToken(address);
       queryUserInfo();
     } else {
