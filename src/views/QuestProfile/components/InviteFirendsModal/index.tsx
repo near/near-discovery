@@ -99,7 +99,7 @@ const InviteFirendsModal = ({
     setClaimableRewards(0);
   });
   const activeCodes = useMemo(() => list.filter((code: any) => code.status === 'Active'), [list]);
-  const link = useMemo(() => userInfo?.is_kol ? ('https://www.dapdap.net/invite/' + userInfo?.kol_name) : ('https://www.dapdap.net/referral/' + userInfo?.invite_code), [userInfo])
+  const link = useMemo(() => location.origin + (userInfo?.is_kol ? `/invite/${userInfo?.kol_name}` : `/referral/${userInfo?.invite_code}`), [userInfo])
   useEffect(() => {
     setClaimableRewards(totalRewards);
   }, [totalRewards]);
