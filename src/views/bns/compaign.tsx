@@ -11,6 +11,7 @@ import useAccount from '@/hooks/useAccount';
 import * as http from '@/utils/http';
 import QuestItem from '@/views/Quest/components/QuestItem';
 import { useSetChain } from '@web3-onboard/react';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -51,6 +52,7 @@ const CampaignView = () => {
   const { account } = useAccount();
   const [value, setValue] = useState('');
   const { info: userInfo = {} } = useUserInfo({ updater: 1 });
+  const { check } = useAuthCheck({ isNeedAk: true });
 
   const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0);
   const [bnsNames, setBnsNames] = useState<any>([]);
@@ -239,7 +241,12 @@ const CampaignView = () => {
           queryStatus={queryNameStatus}
           value={value}
           setValue={setValue}
-          onChange={(event: any) => handleInputChange(event)}
+          onChange={(event: any) => {
+            if (!event) return;
+            check(() => {
+              handleInputChange(event);
+            });
+          }}
           bp="100152-001"
         />
         {queryNameStatus > 1 && (
