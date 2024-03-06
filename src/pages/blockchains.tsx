@@ -6,6 +6,7 @@ import popupsData, { IdToPath } from '@/config/all-in-one/chains';
 import chains from '@/config/chains';
 import { QUEST_PATH } from '@/config/quest';
 import { ethereum } from '@/config/tokens/ethereum';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { get } from '@/utils/http';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -264,6 +265,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
   const [networkList, setNetworkList] = useState<any[]>([]);
   const [advertise, setAdvertise] = useState<any>([]);
   const popupsDataArray = Object.values(popupsData);
+  const { check } = useAuthCheck({ isNeedAk: false });
   useEffect(() => {
     const fetchNetworkData = async () => {
       try {
@@ -346,14 +348,16 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                     <div className="item-title-right">
                       <h1>{child.name}</h1>
                       <p
-                        onClick={() =>
-                          addMetaMask({
-                            index,
-                            chainId: child.chain_id,
-                            chainName: child.name,
-                            rpcUrls: child.rpc,
-                          })
-                        }
+                        onClick={() => {
+                          check(() => {
+                            addMetaMask({
+                              index,
+                              chainId: child.chain_id,
+                              chainName: child.name,
+                              rpcUrls: child.rpc,
+                            });
+                          });
+                        }}
                         data-bp="10012-001"
                       >
                         Add to MetaMask <img src={diagonaltop} alt="" />
