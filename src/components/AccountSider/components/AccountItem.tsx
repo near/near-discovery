@@ -17,6 +17,7 @@ const StyledLogo = styled.div`
 `
 const StyledKol = styled.div`
   position: absolute;
+  display: flex;
   /* left: 3px; */
   left: 50%;
   bottom: -6px;

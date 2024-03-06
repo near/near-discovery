@@ -42,17 +42,17 @@ import {
 export const COLUMNS: Column[] = [
   {
     label: 'Invite friends',
-    width: 40,
+    width: 60,
     key: 'friend',
     gap: 26,
     align: 'left',
   },
-  {
-    label: 'Code used',
-    width: 20,
-    key: 'code',
-    align: 'center',
-  },
+  // {
+  //   label: 'Code used',
+  //   width: 20,
+  //   key: 'code',
+  //   align: 'center',
+  // },
   {
     label: 'Status',
     width: 20,
@@ -163,7 +163,7 @@ const InviteFirendsModal = ({
                 <StyledSvg>
                   <svg width="371" height="58" viewBox="0 0 371 58" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0H249.615C249.767 1.51433 251.046 2.69653 252.6 2.69653C254.155 2.69653 255.433 1.51433 255.585 0H363C367.418 0 371 3.58172 371 8V50C371 54.4183 367.418 58 363 58H255.555C255.308 56.5911 254.079 55.5203 252.6 55.5203C251.12 55.5203 249.891 56.5911 249.645 58H8C3.58173 58 0 54.4183 0 50V8C0 3.58172 3.58172 0 8 0Z" fill="url(#paint0_linear_7090_12399)" />
-                    <line x1="252.5" y1="4.5" x2="252.5" y2="54.5" stroke="black" stroke-linecap="round" stroke-dasharray="1 3" />
+                    <line x1="252.5" y1="4.5" x2="252.5" y2="54.5" stroke="black" stroke-linecap="round" strokeDasharray="1 3" />
                     <defs>
                       <linearGradient id="paint0_linear_7090_12399" x1="5.30885e-06" y1="31.8316" x2="154.956" y2="-117.828" gradientUnits="userSpaceOnUse">
                         <stop stop-color="#62FFF6" />
@@ -228,8 +228,17 @@ const InviteFirendsModal = ({
             </StyledFlex>
             <StyledHeader style={{ marginTop: 50 }}>
               <StyledSubTitle>Invited friends ({list.length})</StyledSubTitle>
+              <StyledClaimButton
+                disabled={claiming || claimableRewards === 0}
+                onClick={() => {
+                  handleClaim();
+                }}
+              >
+                {claiming && <Loading />}
+                Claim all: {claimableRewards} PTS
+              </StyledClaimButton>
             </StyledHeader>
-            <StyledDescBox>
+            {/* <StyledDescBox>
               <StyledDesc>
                 You invited {list.length} friends, {activeCodes.length} of them are active, you will get {reward} PTS for
                 each active account.
@@ -243,7 +252,7 @@ const InviteFirendsModal = ({
                 {claiming && <Loading />}
                 Claim {claimableRewards} PTS
               </StyledClaimButton>
-            </StyledDescBox>
+            </StyledDescBox> */}
             <StyledTableHeader>
               {COLUMNS.map((column) => (
                 <StyledColumn key={column.key} $width={column.width} $align={column.align}>

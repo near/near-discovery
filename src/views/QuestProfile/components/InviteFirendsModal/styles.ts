@@ -114,15 +114,14 @@ export const StyledDesc = styled.div`
 `;
 
 export const StyledClaimButton = styled.button`
-  border-radius: 18px;
-  border: 1px solid #373a53;
-  background: rgba(55, 58, 83, 0.5);
-  padding: 0px 20px;
-  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%);
+  padding: 0px 12px;
+  height: 42px;
   flex-shrink: 0;
-  color: #ebf479;
+  color: #000;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   transition: 0.3s;
   &:not(:disabled):hover {
     opacity: 0.8;

@@ -48,7 +48,7 @@ const InviteLink = function ({ showCodes, setShowCodes }: { showCodes: boolean, 
           <StyledSvg>
             <svg width="308" height="53" viewBox="0 0 308 53" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" clip-rule="evenodd" d="M8 0H249.615C249.767 1.51433 251.046 2.69653 252.6 2.69653C254.155 2.69653 255.433 1.51433 255.585 0H300C304.418 0 308 3.58172 308 8V45C308 49.4183 304.418 53 300 53H255.555C255.309 51.5911 254.08 50.5203 252.6 50.5203C251.121 50.5203 249.891 51.5911 249.645 53H8C3.58172 53 0 49.4183 0 45V8C0 3.58172 3.58172 0 8 0Z" fill="url(#paint0_linear_7047_6093)" />
-              <line x1="252.5" y1="4.5" x2="252.5" y2="48.5" stroke="black" stroke-linecap="round" stroke-dasharray="1 3" />
+              <line x1="252.5" y1="4.5" x2="252.5" y2="48.5" stroke="black" stroke-linecap="round" strokeDasharray="1 3" />
               <defs>
                 <linearGradient id="paint0_linear_7047_6093" x1="-2.84001e-06" y1="31.8316" x2="53.2945" y2="-31.4454" gradientUnits="userSpaceOnUse">
                   <stop stop-color="#62FFF6" />
