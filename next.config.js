@@ -82,6 +82,11 @@ const nextConfig = {
         source: '/signup',
         destination: '/applications?requestAuth=1&createAccount=1',
         permanent: false,
+      },
+      {
+        source: '/blog/getting-started-with-the-near-wallet',
+        destination: 'https://wallet.near.org',
+        permanent: true
       }
     ];
   },
