@@ -1,4 +1,5 @@
 import loginLogo from '@/assets/images/login_logo.svg';
+import { ellipsAccount } from '@/utils/account';
 import { useConnectWallet } from '@web3-onboard/react';
 import { setCookie } from 'cookies-next';
 import Image from 'next/image';
@@ -135,7 +136,7 @@ const LoginView = () => {
                 </StyledUserAvatar>
                 <StyledUserMessage>
                   <StyledUserName>{inviter?.username ?? '-'}</StyledUserName>
-                  <StyledUserAddress>0x3bcb...b717</StyledUserAddress>
+                  <StyledUserAddress>{ellipsAccount(inviter?.address)}</StyledUserAddress>
                 </StyledUserMessage>
               </StyledUser>
             </StyledUserContainer>
