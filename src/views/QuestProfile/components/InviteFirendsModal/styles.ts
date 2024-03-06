@@ -226,3 +226,27 @@ export const StyledPendingCell = styled.div`
     }
   }
 `;
+export const StyledLink = styled.div`
+  position: relative;
+`
+
+export const StyledTips = styled.div`
+  position: absolute;
+  left: 8px;
+  top: -15px;
+  width: 132px;
+  height: 25px;
+  border-radius: 5px;
+  background: linear-gradient(90deg, #000 0%, #414D58 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const StyledBackground = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 196px;
+  background: #1B1C27;
+`

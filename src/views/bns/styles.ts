@@ -9,7 +9,7 @@ export const StyledLogin = styled.div`
   gap: 82px;
 `;
 export const StyledLoginConnectWalletButton = styled.button`
-  margin: 17px 0 20px;
+  /* margin: 17px 0 20px; */
   outline: none;
   border: none;
   width: 300px;
@@ -34,6 +34,7 @@ export const StyledInvitedUsers = styled.div`
   line-height: normal;
 `;
 export const StyledInvitedAward = styled.div`
+  margin-bottom: 24px;
   width: 306px;
   color: #979abe;
   font-family: Gantari;

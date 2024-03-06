@@ -12,6 +12,7 @@ import AccountWrapper from './components/AccountWrapper';
 import BridgeWrapper from './components/BridgeWrapper';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import InviteLink from './components/InviteLink';
 
 const StyledContainer = styled.div<{ display: number }>`
   width: 352px;
@@ -96,6 +97,7 @@ const AccountSider = () => {
   const [tab, setTab] = useState<'bridge' | 'account'>('account');
   const [showChains, setShowChains] = useState(false);
   const [showCodes, setShowCodes] = useState(false);
+  const [showInviteLink, setShowInviteLink] = useState(false)
   const { chainId } = useAccount();
   const { list, totalRewards, reward } = useInviteList();
 
@@ -129,7 +131,12 @@ const AccountSider = () => {
       <StyledContainer display={layoutStore.showAccountSider ? 1 : 0}>
         <StyledPanel>
           <Content>
-            <Header showCodes={showCodes} setShowCodes={setShowCodes} />
+            <Header showInviteLink={showInviteLink} setShowInviteLink={setShowInviteLink} />
+            {
+              showInviteLink && (
+                <InviteLink showCodes={showCodes} setShowCodes={setShowCodes} />
+              )
+            }
             <Footer />
             <Main>
               {tab === 'account' && (

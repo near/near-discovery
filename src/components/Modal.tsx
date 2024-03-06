@@ -29,6 +29,7 @@ const Overlay = styled(motion.div)`
   }
 `;
 const Main = styled(motion.div)<{ $width: number }>`
+  position: relative;
   width: ${({ $width }) => $width + 'px'};
   border-radius: 20px;
   border: 1px solid #373a53;
@@ -39,6 +40,8 @@ const Main = styled(motion.div)<{ $width: number }>`
   }
 `;
 const Header = styled.div`
+  position: relative;
+  z-index: 99;
   display: flex;
   justify-content: space-between;
   align-items: center;
