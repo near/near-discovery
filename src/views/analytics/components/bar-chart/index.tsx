@@ -65,13 +65,24 @@ const App: FC<IProps> = ({ data }) => {
       }}
     >
       {/* <CartesianGrid strokeDasharray="3 3" /> */}
-      <YAxis dataKey="total_trading_value" />
-      <XAxis dataKey="name" />
+      {/* <YAxis dataKey="total_trading_value" /> */}
+      <XAxis
+        dataKey="name"
+        axisLine={false}
+        tickLine={false}
+        tick={{
+          stroke: 'white',
+          fill: 'white',
+          fontSize: 16,
+          fontWeight: 'normal',
+        }}
+      />
 
       <Tooltip
+        // trigger="click"
         cursor={{ fill: '#262830' }}
         wrapperStyle={{
-          width: 240,
+          minWidth: 240,
           height: 125,
         }}
         contentStyle={{

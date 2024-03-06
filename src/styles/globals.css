@@ -240,10 +240,11 @@ svg {
   }
 }
 /* src/views/analytics/components/vertical-bar-chart/index.tsx use */
-.recharts-wrapper .recharts-cartesian-grid-horizontal line:nth-last-child(2),
-.recharts-wrapper .recharts-cartesian-grid-horizontal line:last-child {
+.recharts-wrapper.vertical-chart .recharts-cartesian-grid-horizontal line:nth-last-child(2),
+.recharts-wrapper.vertical-chart .recharts-cartesian-grid-horizontal line:last-child {
   stroke-opacity: 0 !important;
 }
+
 .recharts-wrapper .recharts-cartesian-grid-horizontal line {
   stroke: rgba(217, 217, 217, 0.1);
   fill: rgba(217, 217, 217, 0.1);
