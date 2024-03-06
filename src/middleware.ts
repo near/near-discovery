@@ -7,7 +7,7 @@ import { activityReg } from '@/utils/activity-reg';
 export function middleware(request: NextRequest) {
   const AUTHED_ACCOUNT = request.cookies.get('AUTHED_ACCOUNT');
   const LOGIN_ACCOUNT = request.cookies.get('LOGIN_ACCOUNT');
-  if (request.url.match(activityReg) && request.nextUrl.pathname !== '/invite-code') {
+  if (request.url.match(activityReg) && !['/invite-code', '/referral/[inviteCode]'].includes(request.nextUrl.pathname)) {
     return NextResponse.next();
   }
   if (!LOGIN_ACCOUNT) {
