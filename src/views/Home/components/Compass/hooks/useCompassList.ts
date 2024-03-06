@@ -12,8 +12,8 @@ export default function useCompassList(campaign_id?: string) {
     setLoading(true);
     try {
       const result = await get(`/api/compass/list`);
-      const data = result.data;
-      setCompassList(data);
+      const data = result.data || [];
+      setCompassList(data.sort((a: any, b: any) => b.id - a.id));
       setLoading(false);
       odysseyStore.setOdyssey(data);
     } catch (err) {

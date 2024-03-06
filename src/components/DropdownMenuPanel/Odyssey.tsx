@@ -28,7 +28,7 @@ const StyledOdyssey = styled.div`
 const StyledContainer = styled.div``;
 const StyledImage = styled.div`
   width: 330px;
-  height: 120px;
+  height: 165px;
   background-repeat: no-repeat;
   border-radius: 16px;
   background-size: 100% 100%;
@@ -48,7 +48,7 @@ const StyledMakser = styled.div`
 `;
 const StyledFont = styled.div<FontProps>`
   color: ${(props) => props.color || '#000'};
-  font-family: ${(props) => props.fontFamily || 'Space Grotesk'};
+  font-family: Montserrat;
   font-size: ${(props) => props.fontSize || '16px'};
   font-style: ${(props) => props.fontStyle || 'normal'};
   font-weight: ${(props) => props.fontWeight || '400'};
@@ -97,8 +97,6 @@ const Odyssey = function ({ setShow }: any) {
           <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }} key={compass.id}>
             <StyledContainer
               style={{
-                width: 330,
-                height: 120,
                 cursor: compass.status === 'un_start' ? 'not-allowed' : 'pointer',
                 position: 'relative',
               }}
