@@ -89,7 +89,7 @@ const LoginView = () => {
     router.replace((router.query?.source as string) || '/');
   }
   async function activeWithCode() {
-    const res: any = await post(`/api/invite/activate`, { address, code: inviteCode });
+    const res: any = await post(`/api/invite/activate`, { address, code: router?.query?.inviteCode });
     if (res.data.is_success) {
       fetchAccessToken();
     }

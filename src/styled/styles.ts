@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import {
+import type {
   FlexProps,
   FontProps
 } from './types';
