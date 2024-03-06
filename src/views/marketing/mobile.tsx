@@ -95,7 +95,10 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
 
   async function activeWithCode() {
-    const res: any = await post(`${QUEST_PATH}/api/invite/activate`, { address, code: inviteCode });
+    const res: any = await post(`${QUEST_PATH}/api/invite/activate`, {
+      address,
+      // code: inviteCode
+    });
 
     if (res.data.is_success) {
       fetchAccessToken();
