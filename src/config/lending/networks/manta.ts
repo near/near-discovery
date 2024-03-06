@@ -12,7 +12,7 @@ export default {
   multicallAddress: multicall[CHAIN_ID],
   wethAddress: weth[CHAIN_ID],
   connectProps: {
-    noAccountTips: 'Manta Dex Collection',
+    noAccountTips: 'Manta Lending Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Manta Chain.',
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,

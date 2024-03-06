@@ -1,11 +1,12 @@
 import { useSetChain } from '@web3-onboard/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 import swapConfig from '@/config/swap/networks';
 import lendingConfig from '@/config/lending/networks';
 import useReport from '@/views/Landing/hooks/useReport';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
@@ -201,19 +202,29 @@ const AllInOne: NextPageWithLayout = () => {
   const cachedTabsStore: any = useAllInOneTabCachedStore();
   const { addAction } = useAddAction('all-in-one');
   const popupRef = useRef<HTMLDivElement | null>(null);
+  const { check } = useAuthCheck({ isNeedAk: false });
 
   const handleSelectItemClick = () => {
     setIsSelectItemClicked(!isSelectItemClicked);
   };
   const handleItemClick = async (path: string) => {
-    setIsSelectItemClicked(false);
-    const currentChain = popupsData[path];
-    const result = await setChain({ chainId: `0x${currentChain.chainId.toString(16)}` });
-    if (result) {
-      setShowComponent(false);
-      router.push(`/all-in-one/${currentChain.path}`);
-    }
+    check(async () => {
+      setIsSelectItemClicked(false);
+      const currentChain = popupsData[path];
+      const result = await setChain({ chainId: `0x${currentChain.chainId.toString(16)}` });
+      if (result) {
+        setShowComponent(false);
+        router.push(`/all-in-one/${currentChain.path}`);
+      }
+    });
   };
+
+  const tabConfig = useMemo(() => {
+    if (!currentChain || !tab) return {};
+    if (tab === 'Swap') return swapConfig[currentChain?.chainId] || {};
+    if (tab === 'Lending') return lendingConfig[currentChain?.chainId] || {};
+    return {};
+  }, [currentChain, tab]);
 
   useEffect(() => {
     if (chain && popupsData[chain]) {
@@ -320,8 +331,7 @@ const AllInOne: NextPageWithLayout = () => {
                   multicall,
                   chainId: currentChain.chainId,
                   menuConfig: currentChain.menuConfig,
-                  ...(swapConfig[currentChain?.chainId] || {}),
-                  ...(lendingConfig[currentChain?.chainId] || {}),
+                  ...tabConfig,
                   prices,
                   tab,
                   onReset: () => {},

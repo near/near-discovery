@@ -14,14 +14,6 @@ export default {
   multicallAddress: multicall[CHAIN_ID],
   wethAddress: weth[CHAIN_ID],
   connectProps: {
-    imgProps: {
-      src: '',
-      style: {
-        width: '283px',
-        height: '187px',
-        marginTop: '60px',
-      },
-    },
     noAccountTips: 'Avalanche Lending Collection',
     wrongNetworkTips: `To proceed, kindly switch to ${CHAIN_NAME} Chain.`,
     chainId: CHAIN_ID,

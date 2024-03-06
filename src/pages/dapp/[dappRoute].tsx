@@ -1,4 +1,3 @@
-import { useSetChain } from '@web3-onboard/react';
 import { useDebounceFn } from 'ahooks';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo, useState } from 'react';
@@ -15,6 +14,7 @@ import { bridge as dappBridgeTheme } from '@/config/theme/dapp';
 import useAccount from '@/hooks/useAccount';
 import useAddAction from '@/hooks/useAddAction';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import useSwitchChain from '@/hooks/useSwitchChain';
 import { useChainsStore } from '@/stores/chains';
 import { useDappStore } from '@/stores/dapp';
 import { useLayoutStore } from '@/stores/layout';
@@ -41,11 +41,11 @@ export const DappPage: NextPageWithLayout = () => {
   const router = useRouter();
   const chains = useChainsStore((store: any) => store.chains);
 
-  const { chainId } = useAccount();
+  const { chainId, account } = useAccount();
   const dapp = useDappStore((store: any) => store.dapp);
   const setLayoutStore = useLayoutStore((store) => store.set);
   const { addAction } = useAddAction('dapp');
-  const [{ settingChain }, setChain] = useSetChain();
+  const { switching, switchChain } = useSwitchChain();
   const [currentChain, setCurrentChain] = useState<any>();
   const [ready, setReady] = useState(false);
   const [localConfig, setLocalConfig] = useState<any>();
@@ -161,6 +161,7 @@ export const DappPage: NextPageWithLayout = () => {
           componentProps={{
             chainId,
             name: dapp.name,
+            account,
             CHAIN_LIST: dappChains,
             curChain: currentChain,
             defaultDex: dapp.name,
@@ -180,10 +181,10 @@ export const DappPage: NextPageWithLayout = () => {
                 setCurrentChain(chains.find((_chain: any) => _chain.chain_id === chainId));
                 setIsChainSupported(true);
               } else {
-                setChain(params);
+                switchChain(params);
               }
             },
-            switchingChain: settingChain,
+            switchingChain: switching,
             nativeCurrency: chainsConfig[currentChain.chain_id].nativeCurrency,
             theme: { bridge: dappBridgeTheme[currentChain.chain_id] },
             multicall,

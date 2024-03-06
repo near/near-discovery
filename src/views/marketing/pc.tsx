@@ -11,7 +11,7 @@ import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
-
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { ModalPC, Tabs } from './components';
 import Leaderboard from './components/Leaderboard';
 import useLeaderboard from './hooks/useLeaderBoard';
@@ -31,7 +31,7 @@ const questImgs = {
 };
 
 const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
-  console.log('from:', from, 'inviteCode:', inviteCode);
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
   const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard(platform);
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
@@ -85,7 +85,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
     insertedAccessKey('');
-    deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
     deleteCookie('BNS_NAME');
   };
@@ -144,7 +143,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
-    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
@@ -270,8 +268,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   useEffect(() => {
     if (isBlur) return;
-    fetchTotalRewards();
-    getInviteList();
+    check(() => {
+      fetchTotalRewards();
+      getInviteList();
+    });
   }, [updater, isBlur]);
 
   const renderButton = () => {

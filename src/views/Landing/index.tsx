@@ -92,7 +92,7 @@ const LandingView = () => {
                         <path
                           d="M8 11.5L10.6667 14L16 9"
                           stroke="black"
-                          stroke-width="2"
+                          strokeWidth="2"
                           stroke-linecap="round"
                           stroke-linejoin="round"
                         />

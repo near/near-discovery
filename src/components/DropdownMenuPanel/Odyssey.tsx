@@ -1,9 +1,10 @@
 import useToast from '@/hooks/useToast';
 import { get } from '@/utils/http';
 import useCompassList from '@/views/Home/components/Compass/hooks/useCompassList';
-import { useRouter } from "next/router";
-import { memo } from "react";
-import styled from "styled-components";
+import useAuthCheck from '@/hooks/useAuthCheck';
+import { useRouter } from 'next/router';
+import { memo } from 'react';
+import styled from 'styled-components';
 
 interface FlexProps {
   flexDirection?: 'row' | 'column';
@@ -22,11 +23,9 @@ interface FontProps {
 const StyledOdyssey = styled.div`
   margin-bottom: 30px;
   padding-bottom: 30px;
-  border-bottom: 1px solid #393C47;
-`
-const StyledContainer = styled.div`
-  
-`
+  border-bottom: 1px solid #393c47;
+`;
+const StyledContainer = styled.div``;
 const StyledImage = styled.img`
   width: 100%;
 `;
@@ -39,9 +38,9 @@ const StyledMakser = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.10);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(2px);
-`
+`;
 const StyledFont = styled.div<FontProps>`
   color: ${(props) => props.color || '#000'};
   font-family: ${(props) => props.fontFamily || 'Space Grotesk'};
@@ -58,50 +57,75 @@ const StyledFlex = styled.div<FlexProps>`
   gap: ${(props) => props.gap || '0px'};
 `;
 const Odyssey = function ({ setShow }: any) {
-  const toast = useToast()
-  const { loading, compassList } = useCompassList()
-  const router = useRouter()
+  const toast = useToast();
+  const { loading, compassList } = useCompassList();
+  const router = useRouter();
+  const { check } = useAuthCheck({ isNeedAk: true });
 
   const handleClick = async function () {
-    const compass = compassList[0]
-    let status = compass.status
+    const compass = compassList[0];
+    let status = compass.status;
     if (status === 'un_start') {
-      const response = await get('/api/compass?id=' + compass.id)
-      status = response.data.status
+      const response = await get('/api/compass?id=' + compass.id);
+      status = response.data.status;
     }
     if (status === 'un_start') {
       toast.fail({
-        title: 'Odyssey is upcoming...'
-      })
+        title: 'Odyssey is upcoming...',
+      });
     } else {
-      router.push('/odyssey/home?id=' + compass.id)
-      setShow(false)
+      router.push('/odyssey/home?id=' + compass.id);
+      setShow(false);
     }
-  }
+  };
   return (
     <StyledOdyssey>
       <StyledFlex alignItems="flex-start" gap="86px" style={{ width: '100%' }}>
         <StyledFlex flexDirection="column" alignItems="flex-start" gap="15px" style={{ width: '30%', marginTop: 17 }}>
-          <StyledFont color="#FFF" fontSize="20px" fontWeight="700">Odyssey</StyledFont>
-          <StyledFont color="#979ABE" fontSize="14px">Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.</StyledFont>
+          <StyledFont color="#FFF" fontSize="20px" fontWeight="700">
+            Odyssey
+          </StyledFont>
+          <StyledFont color="#979ABE" fontSize="14px">
+            Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.
+          </StyledFont>
         </StyledFlex>
         <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }}>
-          <StyledContainer style={{ width: 330, height: 120, cursor: 'pointer' }} onClick={handleClick}>
+          <StyledContainer
+            style={{ width: 330, height: 120, cursor: 'pointer' }}
+            onClick={() => {
+              check(handleClick);
+            }}
+          >
             <StyledImage src="/images/home/odyssey-1.png" />
           </StyledContainer>
-          <StyledFont color="#FFF" fontSize="16px" fontWeight="700">Unveiling Uncharted Realms of L2s</StyledFont>
+          <StyledFont color="#FFF" fontSize="16px" fontWeight="700">
+            Unveiling Uncharted Realms of L2s
+          </StyledFont>
         </StyledFlex>
         <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }}>
-          <StyledContainer style={{ position: 'relative', width: 330, height: 120, overflow: 'hidden', borderRadius: 12, border: '2px solid #373A53' }}>
+          <StyledContainer
+            style={{
+              position: 'relative',
+              width: 330,
+              height: 120,
+              overflow: 'hidden',
+              borderRadius: 12,
+              border: '2px solid #373A53',
+            }}
+          >
             <StyledImage src="/images/home/odyssey-2.png" />
             <StyledMakser>
-              <StyledFont color="#FFF" fontSize="16px" fontWeight="500">Coming soon...</StyledFont>
+              <StyledFont color="#FFF" fontSize="16px" fontWeight="500">
+                Coming soon...
+              </StyledFont>
             </StyledMakser>
           </StyledContainer>
-          <StyledFont color="#FFF" fontSize="16px" fontWeight="700">Linea Odyssey</StyledFont>
+          <StyledFont color="#FFF" fontSize="16px" fontWeight="700">
+            Linea Odyssey
+          </StyledFont>
         </StyledFlex>
       </StyledFlex>
     </StyledOdyssey>
-  )
-}
-export default memo(Odyssey)
+  );
+};
+export default memo(Odyssey);

@@ -134,6 +134,8 @@ body,
 html {
   --body-top-padding: 24px;
   -webkit-font-smoothing: antialiased;
+  --onboard-modal-z-index: 500;
+  --wcm-z-index: 510;
   color: var(--sand12);
   font: var(--text-base);
   font-family: Gantari;

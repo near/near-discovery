@@ -1,14 +1,20 @@
 import { useRouter } from 'next/navigation';
 import { memo } from 'react';
+import useAuthCheck from '@/hooks/useAuthCheck';
 
 import { StyledBox, StyledCoin, StyledContainer, StyledLabel, StyledLine, StyledValue } from './styles';
 
 const Yours = ({ info }: any) => {
   const router = useRouter();
+  const { check } = useAuthCheck({
+    isNeedAk: true,
+  });
   return (
     <StyledContainer
       onClick={() => {
-        router.push(`/profile?active=pts`);
+        check(() => {
+          router.push('/profile?active=pts');
+        });
       }}
     >
       <StyledBox>
@@ -20,7 +26,7 @@ const Yours = ({ info }: any) => {
       </StyledBox>
       <StyledLine />
       <StyledBox>
-        <StyledLabel>Your Rank</StyledLabel>
+        <StyledLabel>My Rank</StyledLabel>
         <StyledValue>#{info?.rank || 0}</StyledValue>
       </StyledBox>
     </StyledContainer>

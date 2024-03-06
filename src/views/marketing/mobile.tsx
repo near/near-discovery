@@ -44,7 +44,6 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
     insertedAccessKey('');
-    deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
     deleteCookie('BNS_NAME');
   };
@@ -106,7 +105,6 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
-    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }

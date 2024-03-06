@@ -12,9 +12,9 @@ export default function ChainBg() {
           width="439"
           height="334"
           filterUnits="userSpaceOnUse"
-          color-interpolation-filters="sRGB"
+          colorInterpolationFilters="sRGB"
         >
-          <feFlood flood-opacity="0" result="BackgroundImageFix" />
+          <feFlood floodOpacity="0" result="BackgroundImageFix" />
           <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
           <feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_4991_1938" />
         </filter>

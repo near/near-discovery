@@ -2,7 +2,6 @@ import { memo, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { colors } from '@/config/chains';
-import useAccount from '@/hooks/useAccount';
 import { useLayoutStore } from '@/stores/layout';
 import InviteFirendsModal from '@/views/QuestProfile/components/InviteFirendsModal';
 import useInviteList from '@/views/QuestProfile/hooks/useInviteList';
@@ -97,8 +96,7 @@ const AccountSider = () => {
   const [tab, setTab] = useState<'bridge' | 'account'>('account');
   const [showChains, setShowChains] = useState(false);
   const [showCodes, setShowCodes] = useState(false);
-  const [showInviteLink, setShowInviteLink] = useState(false)
-  const { chainId } = useAccount();
+  const [showInviteLink, setShowInviteLink] = useState(false);
   const { list, totalRewards, reward } = useInviteList();
 
   useEffect(() => {
@@ -132,11 +130,7 @@ const AccountSider = () => {
         <StyledPanel>
           <Content>
             <Header showInviteLink={showInviteLink} setShowInviteLink={setShowInviteLink} />
-            {
-              showInviteLink && (
-                <InviteLink showCodes={showCodes} setShowCodes={setShowCodes} />
-              )
-            }
+            {showInviteLink && <InviteLink showCodes={showCodes} setShowCodes={setShowCodes} />}
             <Footer />
             <Main>
               {tab === 'account' && (

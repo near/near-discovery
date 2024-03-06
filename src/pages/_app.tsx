@@ -7,26 +7,24 @@ import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import 'react-toastify/dist/ReactToastify.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-import { deleteCookie, getCookie } from 'cookies-next';
-import { debounce } from 'lodash';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useCallback, useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useState } from 'react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { ToastContainer } from 'react-toastify';
 
 import useAccount from '@/hooks/useAccount';
-import useAuth from '@/hooks/useAuth';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import useClickTracking from '@/hooks/useClickTracking';
-import useInitialData from '@/hooks/useInitialData';
+import useInitialDataWithoutAuth from '@/hooks/useInitialDataWithoutAuth';
+import useInititalDataWithAuth from '@/hooks/useInititalDataWithAuth';
 import useTokenPrice from '@/hooks/useTokenPrice';
+import { useDebounceFn } from 'ahooks';
 import { useAuthStore } from '@/stores/auth';
-import { activityReg } from '@/utils/activity-reg';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -40,51 +38,28 @@ type AppPropsWithLayout = AppProps & {
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
-  // useHashUrlBackwardsCompatibility();
-  // usePageAnalytics();
   useClickTracking();
-  const { getInitialData } = useInitialData();
+  const { getInitialDataWithoutAuth } = useInitialDataWithoutAuth();
+  const { getInitialDataWithAuth } = useInititalDataWithAuth();
   const [ready, setReady] = useState(false);
-  const [updater, setUpdater] = useState<number>();
+  const [updater, setUpdater] = useState<number>(1);
   const { initializePrice } = useTokenPrice();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const authStore = useAuthStore();
   const { account } = useAccount();
-  const { login, logging } = useAuth();
-  const loginTimer = useRef<any>();
   const componentSrc = router.query;
 
-  const accountInit = useCallback(() => {
-    if (!account) {
-      if (getCookie('LOGIN_ACCOUNT')) {
-        clearTimeout(loginTimer.current);
-        loginTimer.current = setTimeout(() => {
-          deleteCookie('LOGIN_ACCOUNT');
-          deleteCookie('AUTHED_ACCOUNT');
-          setUpdater(Date.now());
-        }, 3000);
-      } else {
-        setUpdater(Date.now());
-      }
-    } else {
-      clearTimeout(loginTimer.current);
-      login((unchecked?: boolean) => {
-        !unchecked && getInitialData();
-        setUpdater(Date.now());
-      });
-    }
-  }, [account]);
-
-  const _accountInit = debounce(accountInit, 500);
+  const { run: updateAccount } = useDebounceFn(
+    () => {
+      setUpdater(Date.now());
+      getInitialDataWithAuth(account);
+    },
+    { wait: 500 },
+  );
 
   useEffect(() => {
-    if (!router.pathname.match(activityReg) || ['/invite-code', '/referral/[inviteCode]'].includes(router.pathname)) {
-      _accountInit();
-    } else {
-      getInitialData();
-      setUpdater(Date.now());
-    }
+    updateAccount();
   }, [account]);
 
   useEffect(() => {
@@ -100,6 +75,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   useEffect(() => {
     initializePrice();
+    getInitialDataWithoutAuth();
     const interval = setInterval(zendeskCheck, 20);
 
     function zendeskCheck() {
@@ -180,23 +156,23 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <VmInitializer />
 
-      {updater && (
-        <SkeletonTheme baseColor="#353649" highlightColor="#444">
-          {getLayout(<Component {...pageProps} logging={logging} key={updater} />)}
-        </SkeletonTheme>
-      )}
       {ready && (
-        <ToastContainer
-          position={window.innerWidth > 768 ? 'top-right' : 'bottom-right'}
-          autoClose={5000}
-          hideProgressBar={true}
-          theme="dark"
-          toastStyle={{ backgroundColor: 'transparent', boxShadow: 'none' }}
-          newestOnTop
-          rtl={false}
-          pauseOnFocusLoss
-          closeButton={false}
-        />
+        <>
+          <SkeletonTheme baseColor="#353649" highlightColor="#444">
+            {getLayout(<Component {...pageProps} key={updater} />)}
+          </SkeletonTheme>
+          <ToastContainer
+            position={window.innerWidth > 768 ? 'top-right' : 'bottom-right'}
+            autoClose={5000}
+            hideProgressBar={true}
+            theme="dark"
+            toastStyle={{ backgroundColor: 'transparent', boxShadow: 'none' }}
+            newestOnTop
+            rtl={false}
+            pauseOnFocusLoss
+            closeButton={false}
+          />
+        </>
       )}
     </>
   );

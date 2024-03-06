@@ -16,7 +16,7 @@ export default {
   displayChainName: 'BASE',
   wethAddress: '0x4200000000000000000000000000000000000006',
   connectProps: {
-    noAccountTips: 'Base Swap Collection',
+    noAccountTips: 'Base Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Base Chain.',
   },
   defalutDex: 'BaseSwap',

@@ -25,7 +25,7 @@ import { useRouter } from 'next/router';
 const iconChecked = (
   <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23" fill="none">
     <circle cx="11.5" cy="11.5" r="11" fill="#EBF479" stroke="#EBF479" />
-    <path d="M8 11.5L10.6667 14L16 9" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M8 11.5L10.6667 14L16 9" stroke="black" strokeWidth="2" stroke-linecap="round" stroke-linejoin="round" />
   </svg>
 );
 

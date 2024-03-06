@@ -1,4 +1,3 @@
-
 const CHAIN_ID = 56;
 
 export default {
@@ -7,10 +6,9 @@ export default {
   displayChainName: 'BSC',
   wethAddress: '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
   connectProps: {
-    noAccountTips: 'BSC Dex Collection',
+    noAccountTips: 'BSC Liquidity Collection',
     wrongNetworkTips: 'To proceed, kindly switch to BSC Chain.',
   },
   defalutDex: 'Biswap',
-  dexs: {
-  },
+  dexs: {},
 };

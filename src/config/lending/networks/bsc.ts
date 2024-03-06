@@ -16,7 +16,7 @@ export default {
   multicallAddress: multicall[CHAIN_ID],
   wethAddress: weth[CHAIN_ID],
   connectProps: {
-    noAccountTips: 'BSC Dex Collection',
+    noAccountTips: 'BSC Lending Collection',
     wrongNetworkTips: 'To proceed, kindly switch to BSC Chain.',
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,

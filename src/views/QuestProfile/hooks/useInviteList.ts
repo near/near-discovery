@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
@@ -8,6 +8,7 @@ export default function useInviteList() {
   const [loading, setLoading] = useState(false);
   const [totalRewards, setTotalRewards] = useState(0);
   const [reward, setReward] = useState(0);
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
 
   const queryList = useCallback(async () => {
     if (loading) return;
@@ -25,7 +26,9 @@ export default function useInviteList() {
   }, [loading]);
 
   useEffect(() => {
-    queryList();
+    check(() => {
+      queryList();
+    });
   }, []);
 
   return { loading, list, totalRewards, reward };

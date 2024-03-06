@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import { useRouter } from 'next/router';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import {
   StyledMenu,
   StyledMenuItem,
@@ -26,6 +27,7 @@ const MenuItem = ({ title, desc, icon, extra, disabled, onClick }: any) => {
 
 const Menu = ({ setShow }: any) => {
   const router = useRouter();
+  const { check } = useAuthCheck({ isNeedAk: true });
   return (
     <StyledMenu className="menu-content-deep">
       <MenuItem
@@ -70,8 +72,10 @@ const Menu = ({ setShow }: any) => {
         //   </StyledMenuLock>
         // }
         onClick={() => {
-          router.push('/profile');
-          setShow(false);
+          check(() => {
+            router.push('/profile');
+            setShow(false);
+          });
         }}
       />
     </StyledMenu>
