@@ -16,7 +16,6 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { ToastContainer } from 'react-toastify';
-
 import useAccount from '@/hooks/useAccount';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import useClickTracking from '@/hooks/useClickTracking';
@@ -41,6 +40,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const { getInitialDataWithoutAuth } = useInitialDataWithoutAuth();
   const { getInitialDataWithAuth } = useInititalDataWithAuth();
+
   const [ready, setReady] = useState(false);
   const [updater, setUpdater] = useState<number>(1);
   const { initializePrice } = useTokenPrice();
