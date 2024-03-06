@@ -69,6 +69,18 @@ export function optOut(onlyRequiredCookies: boolean) {
   cookieOptOut = onlyRequiredCookies;
 }
 
+function readCountryCodeCookie() {
+  let countryCode = '';
+  try {
+    const cc = document.cookie.split(';').filter((v) => v.indexOf('user-country-code') !== -1);
+    countryCode = cc.length > 0 ? cc[0].split('=')[1] : '';
+  } catch (e) {
+    console.log('failed to read user-country-code cookie', e);
+  }
+
+  return countryCode;
+}
+
 export async function init() {
   getUserAgent();
 
@@ -79,7 +91,7 @@ export async function init() {
   //pick up any change to cookie preferences on init (full page reload)
   const userCookiePreference = localStorage.getItem('cookiesAcknowledged');
   optOut(userCookiePreference === cookiePreferences.onlyRequired);
-  userCountryCode = localStorage.getItem('user-country-code') || '';
+  userCountryCode = readCountryCodeCookie();
 
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2RIih8mrVPUTQ9uWe6TFfwXzcMe';
   const rudderStackDataPlaneUrl = 'https://near.dataplane.rudderstack.com';
