@@ -2,6 +2,7 @@ import CompassIcon from '@/components/Icons/Compass';
 import Loading from '@/components/Icons/Loading';
 import WinPtsIcon from '@/components/Icons/WinPts';
 import useToast from '@/hooks/useToast';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { get } from '@/utils/http';
 import { useRouter } from 'next/router';
 import { memo, useRef, useState } from 'react';
@@ -36,6 +37,7 @@ const iconRight = (
 const Card = function ({ compass }: any) {
   const toast = useToast();
   const router = useRouter();
+  const { check } = useAuthCheck({ isNeedAk: true });
   const handleExplore = async function () {
     let status = compass.status;
     if (status === 'un_start') {
@@ -57,7 +59,12 @@ const Card = function ({ compass }: any) {
         <StyledCardTitle>{compass.name}</StyledCardTitle>
         <StyledCardDesc>{compass.description}</StyledCardDesc>
       </StyledCardMainContent>
-      <StyledCardButton onClick={handleExplore} data-bp="1001-003">
+      <StyledCardButton
+        onClick={() => {
+          check(handleExplore);
+        }}
+        data-bp="1001-003"
+      >
         <div>Explore now</div>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
           <path
