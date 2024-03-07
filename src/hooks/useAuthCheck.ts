@@ -1,12 +1,9 @@
-import { useEffect } from 'react';
-import { useRouter } from 'next/router';
 import * as http from '@/utils/http';
 import useConnectWallet from './useConnectWallet';
 import useAccount from './useAccount';
 import useInititalDataWithAuth from './useInititalDataWithAuth';
 
 export default function useAuthCheck({ isNeedAk, isQuiet }: { isNeedAk?: boolean; isQuiet?: boolean }) {
-  const router = useRouter();
   const { account } = useAccount();
   const { onConnect } = useConnectWallet();
   const { getInitialDataWithAuth } = useInititalDataWithAuth();

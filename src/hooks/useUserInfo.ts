@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import useAuthCheck from '@/hooks/useAuthCheck';
+import { useUserStore } from '@/stores/user';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
@@ -7,6 +8,8 @@ export default function useUserInfo({ id, updater, from }: { id?: string; update
   const [info, setInfo] = useState<any>();
   const [loading, setLoading] = useState(false);
   const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
+  const userStore = useUserStore((store: any) => store.user);
+
   const queryInfo = useCallback(async () => {
     if (loading) return;
     setLoading(true);
@@ -22,13 +25,22 @@ export default function useUserInfo({ id, updater, from }: { id?: string; update
 
   useEffect(() => {
     check(() => {
-      if (from === 'leaderboard') {
-        if (id) queryInfo();
-      } else {
+      if (id) {
         queryInfo();
       }
     });
-  }, [id, from, updater]);
+  }, [id]);
+
+  useEffect(() => {
+    if (!id && userStore.address) {
+      setInfo(userStore);
+    }
+  }, [userStore]);
+
+  useEffect(() => {
+    if (!info) return;
+    queryInfo();
+  }, [updater]);
 
   return { loading, info, queryInfo };
 }
