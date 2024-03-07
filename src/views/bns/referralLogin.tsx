@@ -1,4 +1,5 @@
 import loginLogo from '@/assets/images/login_logo.svg';
+import useInititalDataWithAuth from '@/hooks/useInititalDataWithAuth';
 import { ellipsAccount } from '@/utils/account';
 import { useConnectWallet } from '@web3-onboard/react';
 import { setCookie } from 'cookies-next';
@@ -66,6 +67,7 @@ const StyledUserAddress = styled.div`
 const LoginView = () => {
   const router = useRouter()
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const { queryUserInfo } = useInititalDataWithAuth();
   const [address, setAddress] = useState('');
   const {
     inviter
@@ -85,6 +87,7 @@ const LoginView = () => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
+    await queryUserInfo();
     setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     router.replace((router.query?.source as string) || '/');
