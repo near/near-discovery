@@ -18,6 +18,9 @@ export const Banner = styled.div`
   &.coin68 {
     background-image: url('/images/marketing/banner-coin68.png');
   }
+  &.namlongdao {
+    background-image: url('/images/marketing/banner-coin68.png');
+  }
 `;
 
 export const Logo = styled.div`
@@ -26,6 +29,7 @@ export const Logo = styled.div`
   gap: 10px;
   justify-content: center;
   margin-bottom: 10px;
+  height: 32px;
 `;
 export const Img = styled.img`
   max-width: 120px;

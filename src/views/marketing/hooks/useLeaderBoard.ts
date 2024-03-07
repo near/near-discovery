@@ -3,7 +3,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
-export default function useLeaderboard(platform: 'bitget' | 'coin68') {
+export default function useLeaderboard(platform: 'bitget' | 'coin68' | 'namlongdao') {
   const [list, setList] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
