@@ -24,12 +24,16 @@ interface IProps {
 }
 
 const CategoryTick = (props: any) => {
-  // console.log('props: ', props, props.data[props.index].logo);
+  // console.log('props: ', props.data[props.index], props.data[props.index].template, props.data[props.index].logo);
   return (
     <foreignObject x={props.x - 40} y={props.y - 10} width={40} height={20}>
       <Styles.YaxisWrap>
         <Styles.YaxisOrder>#{props.index + 1}</Styles.YaxisOrder>
-        <Styles.YaxisLogo src={props.data[props.index].logo} alt="" />
+        {props.data[props.index]?.template === 'Gamma' ? (
+          <Styles.YaxisLogo src="images/apps/gamma.png" alt="" />
+        ) : (
+          <Styles.YaxisLogo src={props.data[props.index].logo} alt="" />
+        )}
       </Styles.YaxisWrap>
     </foreignObject>
   );
@@ -60,6 +64,7 @@ const App: FC<IProps> = ({ data }) => {
   };
   return (
     <ComposedChart
+      className="vertical-chart"
       layout="vertical"
       width={550}
       height={300}
@@ -106,7 +111,7 @@ const App: FC<IProps> = ({ data }) => {
         cursor={false}
         // trigger="click"
         wrapperStyle={{
-          width: 240,
+          minWidth: 240,
           height: 125,
         }}
         contentStyle={{

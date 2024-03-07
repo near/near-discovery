@@ -8,10 +8,10 @@ import Breadcrumb from '@/components/Breadcrumb';
 import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains';
 import { DesktopNavigationTop } from '@/components/navigation/desktop/DesktopNavigationTop';
 import useAccount from '@/hooks/useAccount';
-import useAuth from '@/hooks/useAuth';
 import * as http from '@/utils/http';
 import QuestItem from '@/views/Quest/components/QuestItem';
 import { useSetChain } from '@web3-onboard/react';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { ethers } from 'ethers';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -50,9 +50,9 @@ const CampaignView = () => {
   const { handleReport } = useReport();
   const { chains } = useTokensAndChains();
   const { account } = useAccount();
-  const { connect, connecting } = useAuth();
   const [value, setValue] = useState('');
   const { info: userInfo = {} } = useUserInfo({ updater: 1 });
+  const { check } = useAuthCheck({ isNeedAk: true });
 
   const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0);
   const [bnsNames, setBnsNames] = useState<any>([]);
@@ -207,7 +207,8 @@ const CampaignView = () => {
                 One quest forthe best price!
               </StyledText>
               <StyledText $size="20px" $line="120%">
-                Follow the quest on the right, and you will get the best price for registering with BNS, and get DapDap PTS.
+                Follow the quest on the right, and you will get the best price for registering with BNS, and get DapDap
+                PTS.
               </StyledText>
             </StyledFlex>
             <StyledSvg>
@@ -240,7 +241,12 @@ const CampaignView = () => {
           queryStatus={queryNameStatus}
           value={value}
           setValue={setValue}
-          onChange={(event: any) => handleInputChange(event)}
+          onChange={(event: any) => {
+            if (!event) return;
+            check(() => {
+              handleInputChange(event);
+            });
+          }}
           bp="100152-001"
         />
         {queryNameStatus > 1 && (

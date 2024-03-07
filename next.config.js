@@ -80,7 +80,19 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'www.basename.app',
+        hostname: 'basename.app',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 's3.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pbs.twimg.com',
         port: '',
         pathname: '/**',
       },

@@ -12,12 +12,13 @@ import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 
 import { Modal } from './components';
+import { logoMap } from './const';
 import * as Styles from './styles';
 
 interface IProps {
   from: 'bg' | 'bgUser';
   inviteCode?: string;
-  platform: 'bitget' | 'coin68';
+  platform: 'bitget' | 'coin68' | 'namlongdao';
 }
 
 const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
@@ -44,7 +45,6 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
     insertedAccessKey('');
-    deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
     deleteCookie('BNS_NAME');
   };
@@ -95,7 +95,10 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
 
   async function activeWithCode() {
-    const res: any = await post(`${QUEST_PATH}/api/invite/activate`, { address, code: inviteCode });
+    const res: any = await post(`${QUEST_PATH}/api/invite/activate`, {
+      address,
+      // code: inviteCode
+    });
 
     if (res.data.is_success) {
       fetchAccessToken();
@@ -103,7 +106,6 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
-    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
@@ -190,16 +192,12 @@ const LandingMobile: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   return (
     <Styles.Container>
-      <Styles.Banner className={`${platform === 'bitget' ? 'bitget' : 'coin68'}`}>
+      <Styles.Banner className={platform}>
         <Styles.Logo>
           <Styles.Img src="/images/marketing/dap-logo.svg" />
           <Styles.Img src="/images/marketing/X.svg" />
 
-          {platform === 'bitget' ? (
-            <Styles.Img src="/images/marketing/bg-logo.svg" />
-          ) : (
-            <Styles.Img src="/images/marketing/coin68-logo.svg" />
-          )}
+          <Styles.Img src={logoMap.get(platform)} style={platform === 'namlongdao' ? { maxWidth: 100 } : {}} />
         </Styles.Logo>
         <Styles.Intro>Ready to Claim Your Exclusive Rewards?</Styles.Intro>
         <Styles.Intro>Just complete a few simple quests!</Styles.Intro>

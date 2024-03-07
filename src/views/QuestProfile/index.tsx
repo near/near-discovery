@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
-import { memo, useState } from 'react';
-
+import { memo, useEffect, useState, useRef } from 'react';
 import useReport from '@/views/Landing/hooks/useReport';
-
+import { useDebounceFn } from 'ahooks';
+import useAccount from '@/hooks/useAccount';
 import useUserInfo from '../../hooks/useUserInfo';
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
@@ -24,13 +24,32 @@ const QuestProfileView = () => {
   } else {
     initTab = 'quests';
   }
+  const { account } = useAccount();
   const [tab, setTab] = useState<Tab>(initTab);
   const [updater, setUpdater] = useState(Date.now());
   const [openCodes, setOpenCodes] = useState(false);
-  const { list, totalRewards, reward } = useInviteList();
+  const { list, totalRewards, reward } = useInviteList(true);
   const { info: userInfo = {} } = useUserInfo({ updater });
+  const isMounted = useRef(false);
 
   const { handleReport } = useReport();
+
+  const { run } = useDebounceFn(
+    () => {
+      if (!account) {
+        router.push('/');
+      }
+    },
+    { wait: 500 },
+  );
+
+  useEffect(() => {
+    if (isMounted.current) run();
+  }, [account]);
+
+  useEffect(() => {
+    isMounted.current = true;
+  }, []);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
@@ -7,7 +7,7 @@ export default function useUserParticipations() {
   const [list, setList] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [info, setInfo] = useState({ unclaimed: 0, completed: 0, inprocess: 0 });
-
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
   const queryList = useCallback(async () => {
     if (loading) return;
     setLoading(true);
@@ -41,7 +41,7 @@ export default function useUserParticipations() {
   }, [loading]);
 
   useEffect(() => {
-    queryList();
+    check(queryList);
   }, []);
 
   return { loading, list, info };

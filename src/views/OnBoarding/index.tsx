@@ -20,12 +20,11 @@ const OnBoarding = ({ path }: any) => {
   const currentChain = useMemo(() => {
     return chainsConfig[path];
   }, [path]);
-  const handleModal = useCallback((type: any, extra: any) => {
+  const handleModal = (type: any, extra: any) => {
     setModalType(type);
     setOpenModal(true);
-    setExtraInfo(extraInfo);
-  }, []);
-
+    if (extra) setExtraInfo(extra);
+  };
   return (
     <StyledContainer>
       <Breadcrumb

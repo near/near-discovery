@@ -11,7 +11,7 @@ export default {
   multicallAddress: multicall[CHAIN_ID],
   wethAddress: weth[CHAIN_ID],
   connectProps: {
-    noAccountTips: 'Scroll Dex Collection',
+    noAccountTips: 'Scroll Lending Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Scroll Chain.',
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,

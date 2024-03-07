@@ -13,7 +13,7 @@ export default {
   multicallAddress: multicall[CHAIN_ID],
   wethAddress: weth[CHAIN_ID],
   connectProps: {
-    noAccountTips: 'Linea Dex Collection',
+    noAccountTips: 'Linea Lending Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Linea Chain.',
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,

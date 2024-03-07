@@ -1,23 +1,27 @@
-import { useConnectWallet } from '@web3-onboard/react';
+import useConnectWallet from '@/hooks/useConnectWallet';
 import styled from 'styled-components';
 
 const StyledConnectWallet = styled.button`
-  height: 38px;
-  border: 1px solid #373a53;
-  border-radius: 8px;
-  background-color: rgba(55, 58, 83, 0.5);
-  padding: 0px 10px;
-  color: #fff;
+  width: 164px;
+  height: 46px;
+  border-radius: 10px;
+  background: #ebf479;
+  padding: 0px 18px;
+  color: #000;
+  text-align: center;
+  font-family: Montserrat;
   font-size: 16px;
-  font-weight: 400;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 `;
 
 export default function ConnectWallet() {
-  const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const { onConnect } = useConnectWallet();
   return (
     <StyledConnectWallet
       onClick={() => {
-        connect();
+        onConnect();
       }}
     >
       Connect Wallet
