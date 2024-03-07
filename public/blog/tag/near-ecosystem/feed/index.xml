@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>NEAR Ecosystem Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/near-ecosystem/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/near-ecosystem/</link>
+	<description></description>
+	<lastBuildDate>Fri, 19 Jan 2024 20:19:03 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>NEAR Ecosystem Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/near-ecosystem/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Self-Sovereignty Is NEAR: A Vision for Our Ecosystem</title>
+		<link>/blog/self-sovereignty-is-near-a-vision-for-our-ecosystem/</link>
+		
+		<dc:creator><![CDATA[Illia Polosukhin]]></dc:creator>
+		<pubDate>Fri, 19 Jan 2024 20:19:02 +0000</pubDate>
+				<category><![CDATA[A Post from Illia Polosukhin]]></category>
+		<category><![CDATA[Chain Abstraction]]></category>
+		<category><![CDATA[Mission & vision]]></category>
+		<category><![CDATA[NEAR Ecosystem]]></category>
+		<category><![CDATA[Self-Sovereignty]]></category>
+		<category><![CDATA[User-Owned AI]]></category>
+		<guid isPermaLink="false">/?p=21170</guid>
+
+					<description><![CDATA[<p>As a kid growing up in Ukraine in the ’90s after the dissolution of the USSR, I remember we watched …</p>
+<p>The post <a href="/blog/self-sovereignty-is-near-a-vision-for-our-ecosystem/">Self-Sovereignty Is NEAR: A Vision for Our Ecosystem</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p></p>
+
+
+
+<p>As a kid growing up in Ukraine in the ’90s after the dissolution of the USSR, I remember we watched the price of bread go from 1,000 karbovanets, to 10,000, to 100,000 in less than five years (until that currency was thrown out altogether and replaced with hryvnia). When I first started working as a software developer as a teenager, I kept my earnings in cash in my room because I already understood that we couldn’t trust corrupt banks with our money.</p>
+
+
+
+<p>Between 2014 and 2016 alone, 77 banks failed in Ukraine. My grandparents still have their savings account bank books tracking the money they put away during the USSR years––but those savings don’t exist anymore. So even something that is yours, that you rightfully own, can go away if the system you’re a part of fails. The same thing is happening to millions of people living under hyperinflation, dictatorships, and war zones across the world, of course. And while these may seem like abstract or distant problems that won’t arrive at your doorstep, let me tell you from my own experience: nothing is guaranteed.&nbsp;</p>
+
+
+
+<p>Every system is as fragile as the rules holding it together. And the rules can change. They’re changing around us right now, and I believe we are approaching a point of no return.&nbsp;</p>
+
+
+
+<p><strong>The Need for Digital Self-Sovereignty</strong></p>
+
+
+
+<p>We need to create new economic opportunities for people everywhere via self-sovereignty, which should be a universal right and which technology can now provide, not just nation-states as in most other points in history. For citizens of nations who’ve enjoyed economic security and a high degree of sovereignty, this may not seem like an immediate-term issue. But it is.&nbsp;</p>
+
+
+
+<p>The economics of tech companies leads inevitably to corrupting their original product or vision for the sake of profit in order to maintain growth, and more importantly, they naturally involve creating barriers for someone else to disrupt. In order to maintain their power, governments will use pressure and ingenuity in order to control their populations, too often to the point of violating human rights in the name of safety or security.&nbsp;</p>
+
+
+
+<p>We all use our phones and computers a thousand times a day, prioritizing convenience over self-sovereignty because <em>until now, we haven’t had a choice</em>. We are now approaching a tipping point towards a dystopian future that we may not be able to come back from, brought on not just by governments but by the economics of tech companies. What happens when these incentives increasingly collide and push each other deeper into the lives of individuals for the sake of maintaining control and profit?&nbsp;</p>
+
+
+
+<p>That’s right about where we are today.&nbsp;</p>
+
+
+
+<p><strong>Changing the Stakes with Generative AI</strong></p>
+
+
+
+<p>Before founding NEAR, I was an AI researcher. I worked at Google where I contributed to TensorFlow, and eventually published a paper with a handful of colleagues called “Attention Is All You Need.” That paper introduced the Transformers architecture that powers ChatGPT, Bard, and most of the well-known LLMs behind last year’s explosive growth in AI.&nbsp;</p>
+
+
+
+<p>I was first interested in AI because of the 2001 movie, “Artificial Intelligence.” Changing how we interact with computing and augmenting one&#8217;s intelligence to maximize human potential was, and still is, very appealing to me. And I still think it has the potential to make human lives, organizations, even governments better. But like any other technology, in the hands of the wrong people or with the wrong incentives, it also has the potential to make our lives terrible. </p>
+
+
+
+<p>Generative AI is creating a universal and scalably personal method of enabling control and manipulation. Practically, it means your social feed and search results can ensure that you buy specific products or form a specific opinion. This will start in the form of commercial improvements that lead to more profit for tech giants: Netflix will generate a movie script that can shape your opinion, Facebook can reinforce that opinion by showing you more of it, and so on. This could even happen at a more fundamental level, such as flooding training data with specific information to influence all models trained on it.&nbsp;</p>
+
+
+
+<p>If this granular information and vector of manipulation on such a personal level can be extracted or bought, it will be, and then it will become a tool for control. If it’s stored somewhere centralized and hackable, it will be stolen––we see this constantly with Web2 giants as it is. If governments can get access to this data, they will use it to maintain or grow their power.&nbsp;</p>
+
+
+
+<p>The true danger that generative AI introduces is that this exploitation won’t just be on a systems level or a population level, it will become personal and incredibly specific. The depth of potential control and manipulation goes to the level of each and every human, no matter where they live, no matter where they keep their money. Such a powerful technology simply cannot remain in the hands of centralized companies, nor be too easy for governments to take over.</p>
+
+
+
+<p><strong>So What Should We Do About It?</strong></p>
+
+
+
+<p>So if people don’t yet feel the sense of urgency towards building new systems that uphold self-sovereignty, what will make it real for people? Changes in collective values are always driven by economic opportunity. The major revolutions of history started because of economic failures: American independence from Britain, the French Revolution, the collapse of the USSR, and so on. If people see ways to create better economic realities for themselves and their families, then they will turn values into actions.&nbsp;</p>
+
+
+
+<p>Creating new opportunities for people via self-sovereignty is what NEAR is about. Complete self-sovereignty&nbsp; has been the NEAR vision since day one: we want to build a world where all people can control their own assets, data, and power of governance. This sovereignty must apply not only at the level of individuals but also the organizations and communities they create, and eventually societies.&nbsp;</p>
+
+
+
+<p>Self-sovereignty is a new primitive that hasn’t existed before today. One always needed to rely on some power of violence for ensuring rules are followed, most recently nation-states. One of the core principles of digital self-sovereignty is the ability to choose and switch between any service provider. There is no lock- in. There are no middlemen like banks or government agencies that can lose or steal assets, or change the rules on you out of nowhere.&nbsp;</p>
+
+
+
+<p>Importantly, this must also apply to AI. People need to own their data so they know what it’s being used for and so they can actively consent to personalized experiences they think will improve their lives. Models must be governed transparently, in public, with clear rules and monitoring to proactively manage risk and reputation systems to build more clarity around information and traceability. Web3 can help to uphold, scale, and manage such systems to ensure AI is a force for good while also preventing it from being too exploitable.&nbsp;</p>
+
+
+
+<p>Another major challenge, which is especially clear in governance but it also applies to corporations, is that when we select someone to represent our ideas for us as our delegate, they will always have their own interests and motivations in the mix as well. They don’t necessarily have nefarious intentions, it’s just a natural tendency. This is the “principal agent problem,” wherein the person elected behaves differently than the people who elected them or pay them would prefer based on their best interests. This is where AI governance systems can help by introducing neutral agents, where unbiased AI agents governed directly by a community can act on their behalf in a more reliable way. With transparent governance and monitoring, AI can be a force for good in individual lives as well as for the collective.&nbsp;</p>
+
+
+
+<p><strong>A Vision for the NEAR Future</strong></p>
+
+
+
+<p>Despite my concerns about where the traditional tech paradigm is potentially heading, I remain a techno-optimist. I wouldn’t be doing this work if I didn’t think it was for the good of everyone, and I’ve read enough sci-fi to know that the outcomes of science and technology are much more about what people do with them than the tech itself. If we want something, we should build it.&nbsp;</p>
+
+
+
+<p>I would like NEAR to become a fully sovereign operating system that is equipped with a personal AI assistant that optimizes for users’ needs without revealing private information about the user’s data or assets. It should also be able to interact and transact with other people’s AIs and the community’s AIs peer-to-peer. I call this “user-owned AI.”</p>
+
+
+
+<p>We also need shared community AIs, which are governed by the members of such a community. They represent the mix of needs and knowledge of all the members of such a community, from something like a small club or startup, to the city, to the nation-state, to the global level. There is always an opportunity to fork one community and create new ones. The community governs which data goes into training its community model, and can run inference (running live data through a model) privately in such a way that only the user sees input and output, while getting a proof that the selected model was used.</p>
+
+
+
+<p>To facilitate this vision, a lot of pieces need to come together:</p>
+
+
+
+<ul>
+<li>Economic and technological opportunity to enable users to onboard en masse.</li>
+
+
+
+<li>Open source software across the stack, from blockchain tech to AI models.</li>
+
+
+
+<li>Blockchains must get abstracted away from the user so they are not barriers to entry or participation. I call this the principle of Chain Abstraction.</li>
+
+
+
+<li>Applications must provide a novel value unlock: for example, <a href="https://kaikai.ai/">Cosmose</a> and <a href="https://sweateconomy.com/">Sweat</a>. These apps reward users and serve as an economic gateway into a broader ecosystem of opportunities.</li>
+
+
+
+<li>On-edge, meaning hyperlocal, AI models that are usable by individuals (and free of manipulation).</li>
+
+
+
+<li>Community-owned AI models with governance and economic opportunity, replacing everything from business ops to government agencies. Self-governance by the people, for the people, at scale with the help of technology and decentralized peer-to-peer systems.</li>
+</ul>
+
+
+
+<p>Blockchains, peer-to-peer payments, Web3, zero-knowledge, very large language models and on-edge AI models: these are not separate technology verticals, but rather interconnected facets of a new digital paradigm of self-sovereignty.&nbsp;</p>
+
+
+
+<p>We have the tools to remake how we provide for ourselves, how we work together and govern ourselves, and how we consume and generate information. Without gatekeepers, fair and open to everyone. And this is not a futuristic vision: it’s possible to start experimenting and building now, before our fragile and outdated systems and structures get weaker or fail, before too much centralization leads to the worst outcomes instead of the ones we all design and share together.<br><br>––<em>Illia Polosukhin, Co-Founder of NEAR and CEO of NEAR Foundation</em></p>
+<p>The post <a href="/blog/self-sovereignty-is-near-a-vision-for-our-ecosystem/">Self-Sovereignty Is NEAR: A Vision for Our Ecosystem</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
+		<title>An Update on NEAR Ecosystem Block Explorers </title>
+		<link>/blog/an-update-on-near-ecosystem-block-explorers/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Tue, 10 Oct 2023 15:28:45 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[NEAR Block Explorers]]></category>
+		<category><![CDATA[NEAR Ecosystem]]></category>
+		<guid isPermaLink="false">/?p=20962</guid>
+
+					<description><![CDATA[<p>TLDR:&#160; Pagoda’s core goal is to provide the NEAR community with high-quality, reliable, and innovative tools to build and interact …</p>
+<p>The post <a href="/blog/an-update-on-near-ecosystem-block-explorers/">An Update on NEAR Ecosystem Block Explorers </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><strong>TLDR:&nbsp;</strong></p>
+
+
+
+<ol>
+<li>Explorer.near.org will be transitioned to the <a href="https://explorer.near.org/">Explorer Selector</a> by the end of November 2023.&nbsp;</li>
+
+
+
+<li>Public access to Explorer DB will be turned off on November 30, 2023.&nbsp;</li>
+
+
+
+<li>The Legacy NEAR Explorer will be turned off on January 31, 2024. NEARBlocks.io block explorer will continue to be actively maintained throughout this transition.<br></li>
+</ol>
+
+
+
+<p>Pagoda’s core goal is to provide the NEAR community with high-quality, reliable, and innovative tools to build and interact with the blockchain while fostering an ecosystem of innovation. The legacy NEAR block explorer, hosted at explorer.near.org, was originally built by Pagoda as the first and only block explorer on the NEAR blockchain. In the early days of NEAR, it was important to bootstrap the necessary indexers, databases, and a block explorer to keep track of events on the blockchain. As alternative block explorers have now met and surpassed the functionality and reliability of the original NEAR Explorer, Pagoda has decided to <strong>turn off public access to Explorer DB and transition the legacy NEAR Explorer to the Explorer Selector by the end of November.&nbsp;</strong></p>
+
+
+
+<p>This leads to good news for those looking for a reliable and high-quality explorer experience. The Invoker Labs team behind NEARBlocks.io launched the <a href="https://explorer.near.org/">Explorer Selector</a>, enabling users and developers to pick their favorite community-built explorers. For projects that link out to explorer.near.org, those links will continue to work, but they will first display the Explorer Selector, where the user can select their preferred explorer and continue to the transaction, block, or account.&nbsp;</p>
+
+
+
+<p>For feedback on the Explorer Selector and/or to get your NEAR block explorer project listed, please visit the <a href="https://github.com/Nearblocks/nearblocks/tree/main/explorer-selector">NEARBlocks Explorer Selector GitHub Repo</a>. By the end of November 2023, explorer.near.org will be the new home for the Explorer Selector.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-details-of-transition-plan"><strong>Details of Transition Plan: </strong></h2>
+
+
+
+<ol>
+<li>October 10, 2023:
+<ol>
+<li>Notice within explorer.near.org explaining that it will be sunsetted by January 31, 2024, and linking to this blog post. The details of which Explorer DBs are sunsetting can be found in the <a href="https://docs.near.org/tools/indexer-for-explorer#what-is-the-timeline">NEAR documentation</a>.</li>
+
+
+
+<li>Direct communication with partners that rely on the explorer to plan interruption-free migration has begun.</li>
+
+
+
+<li>NEARBlocks <a href="https://explorer.near.org/">Explorer Selector</a> is live. Please leave feedback directly in the <a href="https://github.com/Nearblocks/nearblocks/tree/main/explorer-selector">NEARBlocks Explorer Selector GitHub Repo</a>.</li>
+</ol>
+</li>
+
+
+
+<li>November/December 2023:
+<ol>
+<li>Shared Public access to the Explorer DB will be sunset on Thursday, November 30, at 12:00 p.m. PT. Check out <a href="https://docs.near.org/tools/indexer-for-explorer#what-are-the-alternatives">ExplorerDB alternatives</a> to maintain interruption-free service for your product.</li>
+
+
+
+<li>Explorer.near.org will transition to the Explorer Selector. This will include the process to get other block explorers added to the Explorer Selector.&nbsp;</li>
+
+
+
+<li>The process for potential future explorers will be shared with the community to encourage diversity of tooling across NEAR.&nbsp;</li>
+</ol>
+</li>
+
+
+
+<li>January 31, 2024:
+<ol>
+<li>The legacy NEAR Explorer will be removed from the Explorer Selector and turned off.&nbsp;</li>
+</ol>
+</li>
+
+
+
+<li>April 30, 2024
+<ol>
+<li>ExplorerDB private API gated access will be completely shut off.</li>
+
+
+
+<li>All wallets, tools, and projects that rely on the ExplorerDB must have migrated to avoid a loss of functionality.</li>
+</ol>
+</li>
+</ol>
+
+
+
+<p>If you have a product that may be affected by the sunset of Explorer or Explorer DB, please comment on this <a href="https://near.social/mob.near/widget/MainPage.N.Post.Page?accountId=pagodaplatform.near&amp;blockHeight=103046829">NEAR Social post from Pagoda</a> or message @austinbaggio from the Pagoda product team directly on Telegram so they can ensure a smooth transition period.&nbsp;</p>
+<p>The post <a href="/blog/an-update-on-near-ecosystem-block-explorers/">An Update on NEAR Ecosystem Block Explorers </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

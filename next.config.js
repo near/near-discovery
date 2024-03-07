@@ -82,6 +82,11 @@ const nextConfig = {
         source: '/signup',
         destination: '/applications?requestAuth=1&createAccount=1',
         permanent: false,
+      },
+      {
+        source: '/blog/getting-started-with-the-near-wallet',
+        destination: 'https://wallet.near.org',
+        permanent: true
       }
     ];
   },
@@ -89,7 +94,15 @@ const nextConfig = {
     {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
-    }
+    },
+    {
+      source: '/blog',
+      destination: '/blog/',
+    },
+    {
+      source: '/blog/:path*',
+      destination: '/blog/:path*/index.html',
+    },
   ],
   headers: async () => [
     {
@@ -113,8 +126,7 @@ const withPWA = require('next-pwa')({
 })
 const { loadEnvConfig } = require('@next/env');
 loadEnvConfig(".")
-if(!process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT)
-  module.exports = withPWA(nextConfig);
+module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below
 

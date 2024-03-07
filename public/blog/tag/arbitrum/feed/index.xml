@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Arbitrum Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/arbitrum/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/arbitrum/</link>
+	<description></description>
+	<lastBuildDate>Thu, 21 Dec 2023 14:59:43 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Arbitrum Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/arbitrum/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Arbitrum Integrates NEAR DA for Developers Building Ethereum Rollups </title>
+		<link>/blog/arbitrum-integrates-near-da-for-developers-building-ethereum-rollups/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 21 Dec 2023 15:00:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Arbitrum]]></category>
+		<category><![CDATA[Ethereum Rollups]]></category>
+		<guid isPermaLink="false">/?p=21140</guid>
+
+					<description><![CDATA[<p>The NEAR Data Availability layer (NEAR DA) was one of the most exciting announcements to come out of NEARCON ‘23. …</p>
+<p>The post <a href="/blog/arbitrum-integrates-near-da-for-developers-building-ethereum-rollups/">Arbitrum Integrates NEAR DA for Developers Building Ethereum Rollups </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The <a href="https://near.org/data-availability">NEAR Data Availability layer</a> (NEAR DA) was one of the most exciting announcements to come out of NEARCON ‘23. Unveiled by NEAR Protocol co-founder and new NEAR Foundation CEO, Illia Polosukhin, NEAR DA is a highly efficient and robust data availability layer, designed to help Ethereum rollup builders simplify their network and lower costs, while ensuring they can scale like the NEAR Protocol.</p>
+
+
+
+<p>The latest technical integration for NEAR DA’s efficient and highly scalable data availability is now available for <a href="https://arbitrum.io/orbit">Arbitrum Orbit</a>, the tech stack that allows developers to launch their own configurable rollups based on Arbitrum’s technology.</p>
+
+
+
+<p>Arbitrum Orbit is a L2/L3 scaling solution for Ethereum that lets developers build their own dedicated chains with their own configurations. Arbitrum Orbit chains derive trustless security, while scaling Ethereum. With the latest NEAR DA integration, rollup builders could benefit from cheaper data availability costs to significantly reduce their overall rollup overheads.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-develop-ethereum-rollups-within-the-arbitrum-orbit-ecosystem-enabled-by-near-da">Develop Ethereum rollups within the Arbitrum Orbit ecosystem enabled by NEAR DA</h2>
+
+
+
+<p>The NEAR-Arbitrum integration allows devs&nbsp; building their own rollups to be part of <a href="https://docs.arbitrum.io/launch-orbit-chain/orbit-gentle-introduction#:~:text=In%20a%20nutshell%3A%E2%80%8B,token%2C%20governance%2C%20and%20more.">Arbitrum Orbit</a>, an ecosystem of blockchains that settle onto Arbitrum or Ethereum Mainnet, while leveraging the cost effectiveness and scalability of the NEAR Protocol.&nbsp;</p>
+
+
+
+<p>Arbitrum is a clear innovative leader in developing the Optimistic Rollup technology, while also operating as an L2 with the highest TVL. Arbitrum now offers its own stack to other rollups builders with Arbitrum Orbit, one step closer to decentralizing Ethereum.&nbsp;&nbsp;</p>
+
+
+
+<p>Arbitrum Orbit chains leverage the Arbitrum Nitro tech stack, the technology that Arbitrum developed to scale Ethereum. It allows builders to create their own blockchains, which settles transactions on Arbitrum One, Arbitrum Nova, or Ethereum Mainnet if the Arbitrum DAO grants an L2 license.&nbsp;</p>
+
+
+
+<p>These Orbit chains, which use Arbitrum’s Rollup and AnyTrust protocols, offer customization across throughput, privacy, gas token, and governance to cater to specific use cases and business requirements. For instance, rollup builders looking for cheaper DA alternatives can now utilize NEAR DA within the Arbitrum Orbit stack. With this, developers can build self-managed, configurable blockchains with enhanced control over its features and governance, while deriving the security guarantees of Ethereum.&nbsp;&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-near-da-paves-the-way-for-modular-blockchain-development">NEAR DA paves the way for modular blockchain development</h2>
+
+
+
+<p>This integration empowers rollup builders on Arbitrum Orbit to use NEAR DA as a complete out-of-the-box modular DA solution.&nbsp;</p>
+
+
+
+<p>As of December 2023, 231 kB of calldata on <a href="https://nearblocks.io/txns/HCA1dMLjYE9bTMNUpTG4sbcwhC9X1tXRtpUSxUEhjhLm">NEAR costs $0.0016</a>, while the same calldata on <a href="https://etherscan.io/tx/0x53a0d93d88e0dc050ca86ab45b26c952a79aa0116825a9e3a5276a36fa897bbe">Ethereum L1 costs users $140.54</a>. </p>
+
+
+
+<p>NEAR DA helps developers reduce costs and enhance their rollup’s reliability, while maintaining the security guarantees provided by Ethereum. Another upside to NEAR DA is that high quality projects launching an app-chain or L2 will be able to get out of the box NEAR DA compatibility and support.&nbsp;</p>
+
+
+
+<p>“Offering a data availability layer to Ethereum rollups highlights the versatility of NEAR’s tech while also helping founders from across Web3 deliver great products that bring us closer to mainstream adoption of the Open Web,” said Polosukhin, when announcing NEAR DA at NEARCON ‘23.&nbsp;</p>
+
+
+
+<p>“NEAR’s L1 has been live with 100% uptime for more than three years, so it can offer true reliability to projects looking for secure DA while also being cost-effective,” Polosukhin added. “NEAR provides great solutions to developers no matter which stack they’re building on and now that includes the Ethereum modular blockchain landscape.”<br>Interested teams who want to work with NEAR DA are invited to fill out <a href="https://forms.gle/LWJoTpTiCbSheUL26">this form</a>, with information about your project and how you would like to integrate with NEAR DA.</p>
+<p>The post <a href="/blog/arbitrum-integrates-near-da-for-developers-building-ethereum-rollups/">Arbitrum Integrates NEAR DA for Developers Building Ethereum Rollups </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

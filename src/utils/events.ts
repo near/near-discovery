@@ -1,4 +1,6 @@
-import { eventsApiUrl, eventsApiKey } from './config';
+import moment from 'moment';
+
+import { eventsApiKey, eventsApiUrl } from './config';
 
 type EventData = {
   api_id: string;
@@ -17,9 +19,11 @@ type EventsListData = {
 };
 
 export const fetchEventsList = async (limit: number, offset: number): Promise<EventsListData> => {
+  const currentDate = moment().subtract(1, 'day').format('YYYY-MM-DD');
+  const queryFrom = `after=${currentDate}`;
   const queryLimit = `pagination_limit=${limit ?? 10}`;
   const queryOffset = offset ? `pagination_offset=${offset}` : '';
-  const queryParams = `${queryLimit}${queryOffset ? `&${queryOffset}` : ''}`;
+  const queryParams = [queryFrom, queryLimit, queryOffset].filter(Boolean).join('&');
   const res = await fetch(`${eventsApiUrl}/calendar/list-events?${queryParams}`, {
     method: 'GET',
     headers: {
