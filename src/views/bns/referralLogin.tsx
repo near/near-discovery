@@ -19,6 +19,7 @@ import {
 
 import { getAccessToken } from '@/apis';
 import { get, post } from '@/utils/http';
+import useToast from '@/hooks/useToast';
 
 
 const StyledUserContainer = styled.div`
@@ -68,6 +69,7 @@ const LoginView = () => {
   const router = useRouter()
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
   const { queryUserInfo } = useInititalDataWithAuth();
+  const toast = useToast()
   const [address, setAddress] = useState('');
   const {
     inviter
@@ -95,6 +97,7 @@ const LoginView = () => {
   async function activeWithCode() {
     const res: any = await post(`/api/invite/activate`, { address, code: router?.query?.inviteCode });
     if (res.data.is_success) {
+      toast.success('Get 100PTS')
       fetchAccessToken();
     }
   }
