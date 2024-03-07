@@ -15,16 +15,14 @@ const StyledContainer = styled.div`
 
 export const StyledProfileButton = styled(motion.button)`
   border-radius: 10px;
-  border: 1px solid #373a53;
-  background: linear-gradient(0deg, #373a53, #373a53),
-    linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-  width: 300px;
+  background: #EBF479;
+  width: 302px;
   height: 46px;
   flex-shrink: 0;
-  color: #fff;
+  color: #000;
   text-align: center;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 `;
 
 export default function Footer() {

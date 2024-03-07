@@ -1,4 +1,5 @@
 import loginLogo from '@/assets/images/login_logo.svg';
+import useInititalDataWithAuth from '@/hooks/useInititalDataWithAuth';
 import { ellipsAccount } from '@/utils/account';
 import { useConnectWallet } from '@web3-onboard/react';
 import { setCookie } from 'cookies-next';
@@ -18,6 +19,7 @@ import {
 
 import { getAccessToken } from '@/apis';
 import { get, post } from '@/utils/http';
+import useToast from '@/hooks/useToast';
 
 
 const StyledUserContainer = styled.div`
@@ -66,6 +68,8 @@ const StyledUserAddress = styled.div`
 const LoginView = () => {
   const router = useRouter()
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
+  const { queryUserInfo } = useInititalDataWithAuth();
+  const toast = useToast()
   const [address, setAddress] = useState('');
   const {
     inviter
@@ -85,6 +89,7 @@ const LoginView = () => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
+    await queryUserInfo();
     setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     router.replace((router.query?.source as string) || '/');
@@ -92,6 +97,9 @@ const LoginView = () => {
   async function activeWithCode() {
     const res: any = await post(`/api/invite/activate`, { address, code: router?.query?.inviteCode });
     if (res.data.is_success) {
+      toast.success({
+        title: '100PTS rewarded!'
+      })
       fetchAccessToken();
     }
   }
