@@ -5,15 +5,7 @@ import useConnectWallet from './useConnectWallet';
 import useAccount from './useAccount';
 import useInititalDataWithAuth from './useInititalDataWithAuth';
 
-export default function useAuthCheck({
-  isNeedAk,
-  isRedirect,
-  isQuiet,
-}: {
-  isNeedAk?: boolean;
-  isRedirect?: boolean;
-  isQuiet?: boolean;
-}) {
+export default function useAuthCheck({ isNeedAk, isQuiet }: { isNeedAk?: boolean; isQuiet?: boolean }) {
   const router = useRouter();
   const { account } = useAccount();
   const { onConnect } = useConnectWallet();
@@ -38,12 +30,6 @@ export default function useAuthCheck({
     await getInitialDataWithAuth(account);
     cb?.();
   };
-
-  useEffect(() => {
-    if (!account && isRedirect) {
-      router.replace('/');
-    }
-  }, [account]);
 
   return {
     check,
