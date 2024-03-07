@@ -58,7 +58,7 @@ const Dashboard: FC<IProps> = ({}) => {
 
   const [userData, setUserData] = useState([]);
   const [userDataRange, setUserDataRange] = useState('');
-  const [areaData, setAreaData] = useState([]);
+  const [areaData, setAreaData] = useState<any>([]);
   const [chainsData, setChainsData] = useState([]);
   const [tradingData, setTradingData] = useState([]);
   const [ptsData, setPtsData] = useState({
@@ -249,7 +249,21 @@ const Dashboard: FC<IProps> = ({}) => {
       total: item.total,
       percent: item.percent,
     }));
-    setAreaData(_areaData);
+    const _normal = _areaData.filter((item: any) => item.percent >= 2);
+    const _others = _areaData.filter((item: any) => item.percent < 2);
+    const _othersTotal = _others.reduce((accu: number, curr: any) => accu + curr.total, 0);
+    const _othersPercent = _others.reduce((accu: number, curr: any) => accu + curr.percent, 0);
+    const _othersCountry = {
+      name: 'Others',
+      total: _othersTotal,
+      percent: Number(_othersPercent).toFixed(2),
+    };
+    // console.log('others:', _othersCountry);
+
+    // console.log('_normal', _normal);
+    // console.log('_others', _others);
+
+    setAreaData([..._normal, _othersCountry]);
 
     const _chainsData = chain_data
       .filter((item: any) => item.total_users > 0 && item.total_trading_value > 0)
