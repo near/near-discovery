@@ -14,9 +14,9 @@ const PapersPage: NextPageWithLayout = () => {
       }}
       componentProps={{
         docs: {
-          doomslug: '/files/doomslug.pdf',
-          nightshade: '/files/nightshade.pdf',
-          whitePaperNearProtocol: '/files/the-official-near-white-paper.pdf',
+          doomslug: '/papers/doomslug.pdf',
+          nightshade: '/papers/nightshade.pdf',
+          whitePaperNearProtocol: '/papers/the-official-near-white-paper.pdf',
         },
       }}
     />
