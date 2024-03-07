@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Communication Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/communication/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/communication/</link>
+	<description></description>
+	<lastBuildDate>Thu, 15 Dec 2022 13:37:04 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Communication Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/communication/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR Foundation Launches New AMA Series </title>
+		<link>/blog/near-foundation-launches-new-ama-series/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Fri, 28 Oct 2022 17:43:53 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Communication]]></category>
+		<guid isPermaLink="false">/?p=18737</guid>
+
+					<description><![CDATA[<p>The NEAR Foundation realizes there has been an issue with communication to the NEAR ecosystem. We hear you.&#160; To that …</p>
+<p>The post <a href="/blog/near-foundation-launches-new-ama-series/">NEAR Foundation Launches New AMA Series </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The NEAR Foundation realizes there has been an issue with communication to the NEAR ecosystem. We hear you.&nbsp;</p>
+
+
+
+<p>To that end, NEAR Foundation will host its first AMA on Twitter Spaces next Tuesday, November 1, which will be moderated by Community Team member <a href="https://twitter.com/marcus_NEAR?s=20&amp;t=O973s-oSbpnII5_eajKBHw">Marcus Ribeiro</a>. Bring your questions and concerns to Foundation CEO Marieke Flament, NEAR Co-founder Illia Polosukhin, and the rest of the Foundation leadership team. </p>
+
+
+
+<p>NEAR Foundation’s commitment to improving communication will also include a weekly blog and more regular AMAs designed to update the community on the Foundation’s activities. Bring your ideas to next week’s AMA as well as other future ones!&nbsp;</p>
+
+
+
+<p>Stay tuned for AMA details this coming Monday.</p>
+<p>The post <a href="/blog/near-foundation-launches-new-ama-series/">NEAR Foundation Launches New AMA Series </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

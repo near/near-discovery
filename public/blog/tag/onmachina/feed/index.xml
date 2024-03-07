@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>OnMachina Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/onmachina/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/onmachina/</link>
+	<description></description>
+	<lastBuildDate>Tue, 06 Jun 2023 15:20:45 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>OnMachina Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/onmachina/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>Case Study: OnMachina&#8217;s Jonathan Bryce on Building Decentralized Storage for an Open Web</title>
+		<link>/blog/case-study-onmachinas-jonathan-bryce-on-building-decentralized-storage-for-an-open-web/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Mon, 05 Jun 2023 16:00:00 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Decentralized Storage]]></category>
+		<category><![CDATA[OnMachina]]></category>
+		<guid isPermaLink="false">/?p=20559</guid>
+
+					<description><![CDATA[<p>NEAR is a home to a number of amazing apps and projects. These developers, founders, and entrepreneurs are using NEAR …</p>
+<p>The post <a href="/blog/case-study-onmachinas-jonathan-bryce-on-building-decentralized-storage-for-an-open-web/">Case Study: OnMachina&#8217;s Jonathan Bryce on Building Decentralized Storage for an Open Web</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>NEAR is a home to a number of amazing apps and projects. These developers, founders, and entrepreneurs are using NEAR to effortlessly create and distribute innovative decentralized apps, while helping build a more open web — free from centralized platforms.&nbsp;</p>
+
+
+
+<p>The NEAR Case Studies content vertical made a return recently with a case study featuring Pagoda Chief Product Officer Alex Chiocchi, talking about the BOS. </p>
+
+
+
+<p>For the next entry in the NEAR Case Study series, <a href="https://www.onmachina.io/">OnMachina</a> co-founder Jonathan Bryce talks about building decentralized infrastructure on NEAR — specifically, developing decentralized storage for an open web. </p>
+
+
+
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe title="Case Study: OnMachina&#039;s Jonathan Bryce on Building Decentralized Storage for an Open Web" width="500" height="281" src="https://www.youtube.com/embed/A2JbZO15BiU?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div></figure>
+<p>The post <a href="/blog/case-study-onmachinas-jonathan-bryce-on-building-decentralized-storage-for-an-open-web/">Case Study: OnMachina&#8217;s Jonathan Bryce on Building Decentralized Storage for an Open Web</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

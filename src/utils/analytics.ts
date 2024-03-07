@@ -13,7 +13,9 @@ let hashId = '';
 let anonymousUserIdCreatedAt = '';
 let pendingEvents: any = [];
 let cookieOptOut = false;
+export const cookiePreferences = { onlyRequired: 'only_required', all: 'all' };
 let clientsideReferrer = '';
+let userCountryCode = '';
 
 declare global {
   interface Window {
@@ -63,8 +65,20 @@ function getUserAgent() {
   return userAgentDetail;
 }
 
-export function optOut() {
-  cookieOptOut = true;
+export function optOut(onlyRequiredCookies: boolean) {
+  cookieOptOut = onlyRequiredCookies;
+}
+
+function readCountryCodeCookie() {
+  let countryCode = '';
+  try {
+    const cc = document.cookie.split(';').filter((v) => v.indexOf('user-country-code') !== -1);
+    countryCode = cc.length > 0 ? cc[0].split('=')[1] : '';
+  } catch (e) {
+    console.log('failed to read user-country-code cookie', e);
+  }
+
+  return countryCode;
 }
 
 export async function init() {
@@ -73,6 +87,11 @@ export async function init() {
   if (window?.rudderAnalytics) return;
 
   getAnonymousId();
+
+  //pick up any change to cookie preferences on init (full page reload)
+  const userCookiePreference = localStorage.getItem('cookiesAcknowledged');
+  optOut(userCookiePreference === cookiePreferences.onlyRequired);
+  userCountryCode = readCountryCodeCookie();
 
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2RIih8mrVPUTQ9uWe6TFfwXzcMe';
   const rudderStackDataPlaneUrl = 'https://near.dataplane.rudderstack.com';
@@ -121,6 +140,7 @@ export function recordPageView(pageName: string) {
       userAgentDetail,
       ref: filterURL(document.referrer),
       clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
@@ -135,6 +155,7 @@ const record = (eventType: string, e: UIEvent | PointerEvent) => {
     xPath: getXPath(e.target as HTMLElement),
     componentSrc: getComponentName(e.target as HTMLElement),
     clientsideReferrer,
+    userCountryCode,
   });
 };
 export const recordClick = (e: UIEvent | PointerEvent) => record('click', e);
@@ -171,6 +192,7 @@ export function recordEventWithProps(eventLabel: string, properties: Record<stri
       hashId: localStorage.getItem('hashId'),
       anonymousUserIdCreatedAt,
       clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
@@ -190,6 +212,7 @@ export function recordEvent(eventLabel: string) {
       userAgentDetail,
       anonymousUserIdCreatedAt,
       clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
