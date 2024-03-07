@@ -57,9 +57,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     },
     { wait: 500 },
   );
-
+  
   useEffect(() => {
-    updateAccount();
+    if (!["/referral/[inviteCode]"].includes(router.pathname)) {
+      updateAccount();
+    }
   }, [account]);
 
   useEffect(() => {

@@ -167,7 +167,7 @@ export const StyledTableHeader = styled.div`
 
 export const StyledBody = styled.div`
   max-height: calc(100vh - 410px);
-  overflow-x: auto;
+  overflow-y: auto;
 `;
 
 export const StyledCell = styled.div<{ $gap?: number; $width: number; $align?: Align }>`
@@ -236,7 +236,7 @@ export const StyledTips = styled.div`
   width: 132px;
   height: 25px;
   border-radius: 5px;
-  background: linear-gradient(90deg, #000 0%, #414D58 100%);
+  background: linear-gradient(to left, #000 0%, #414D58 100%);
   display: flex;
   align-items: center;
   justify-content: center;

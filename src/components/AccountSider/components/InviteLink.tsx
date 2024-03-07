@@ -18,7 +18,7 @@ const StyledTips = styled.div`
   width: 132px;
   height: 25px;
   border-radius: 5px;
-  background: linear-gradient(90deg, #000 0%, #414D58 100%);
+  background: linear-gradient(to left, #000 0%, #414D58 100%);
   display: flex;
   align-items: center;
   justify-content: center;

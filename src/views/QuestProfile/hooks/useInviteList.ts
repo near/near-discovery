@@ -1,9 +1,11 @@
-import { useCallback, useEffect, useState } from 'react';
-import useAuthCheck from '@/hooks/useAuthCheck';
 import { QUEST_PATH } from '@/config/quest';
+import useAuthCheck from '@/hooks/useAuthCheck';
+import { useUserStore } from '@/stores/user';
 import { get } from '@/utils/http';
+import { useCallback, useEffect, useState } from 'react';
 
 export default function useInviteList() {
+  const userInfo = useUserStore((store: any) => store.user);
   const [list, setList] = useState<any>([]);
   const [loading, setLoading] = useState(false);
   const [totalRewards, setTotalRewards] = useState(0);
@@ -29,7 +31,7 @@ export default function useInviteList() {
     check(() => {
       queryList();
     });
-  }, []);
+  }, [userInfo]);
 
   return { loading, list, totalRewards, reward };
 }

@@ -135,7 +135,11 @@ const LoginView = () => {
                   <Image width={36} height={36} src={inviter.avatar} alt='avator' />
                 </StyledUserAvatar>
                 <StyledUserMessage>
-                  <StyledUserName>{inviter?.username ?? '-'}</StyledUserName>
+                  {
+                    inviter?.username && (
+                      <StyledUserName>{inviter?.username}</StyledUserName>
+                    )
+                  }
                   <StyledUserAddress>{ellipsAccount(inviter?.address)}</StyledUserAddress>
                 </StyledUserMessage>
               </StyledUser>
