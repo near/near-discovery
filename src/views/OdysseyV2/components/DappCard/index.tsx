@@ -85,7 +85,7 @@ export default function DappCard({
         <ArrowIcon style={{ marginTop: '6px' }} />
       </StyledTop>
       <StyledFooter>
-        <StyledExecution>Execution: {execution}</StyledExecution>
+        <StyledExecution>Transactions: {execution}</StyledExecution>
         <StyledFooterActions>
           <RefreshButton
             onClick={(ev: any) => {
