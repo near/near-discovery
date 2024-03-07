@@ -102,7 +102,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <link rel="icon" href="favicon.ico" />
         <link
           rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_HOSTNAME}/near/widget/NearOrg.HomePage`}
+          href={`${process.env.NEXT_PUBLIC_HOSTNAME}${router.asPath}`}
           key="canonical"
         />
         <link rel="manifest" href="manifest.json" />
