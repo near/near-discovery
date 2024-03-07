@@ -12,7 +12,7 @@
 	<atom:link href="/blog/category/community/feed/" rel="self" type="application/rss+xml" />
 	<link>/blog/category/community/</link>
 	<description></description>
-	<lastBuildDate>Mon, 18 Sep 2023 16:32:44 +0000</lastBuildDate>
+	<lastBuildDate>Thu, 07 Mar 2024 14:59:32 +0000</lastBuildDate>
 	<language>en-US</language>
 	<sy:updatePeriod>
 	hourly	</sy:updatePeriod>
@@ -28,6 +28,114 @@
 	<height>32</height>
 </image> 
 	<item>
+		<title>NEAR @ ETHDenver Breakdown: We Came, We Saw, We Abstracted!</title>
+		<link>/blog/near-ethdenver-round-up/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 07 Mar 2024 14:59:31 +0000</pubDate>
+				<category><![CDATA[Community]]></category>
+		<guid isPermaLink="false">/?p=21261</guid>
+
+					<description><![CDATA[<p>NEAR&#8217;s presence at ETHDenver was nothing short of a triumph, demonstrating that collaboration is the key to success in the …</p>
+<p>The post <a href="/blog/near-ethdenver-round-up/">NEAR @ ETHDenver Breakdown: We Came, We Saw, We Abstracted!</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>NEAR&#8217;s presence at ETHDenver was nothing short of a triumph, demonstrating that collaboration is the key to success in the ever-evolving world of cryptocurrency. Forget about going it alone &#8211; NEAR brought the entire ecosystem to the party, and the results were epic.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-here-s-a-taste-of-the-near-flavored-goodness-that-went-down">Here&#8217;s A Taste Of The Near-Flavored Goodness That Went Down</h2>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="https://lh7-eu.googleusercontent.com/nwiUAYBQhJMWYE14tyx-q6OvXfuwZawUuK09DFXd0J6fF4N9Ov2PUzMAc_qZxSQ2fqdizxS0VtdukuN-XfoVwxaDcaP3uXT2nj_J9wTXpmDdo7J5PvHyBdHYEiHra2xYrHM7jfGFJ3CvSx7N65WfJ40" alt=""/></figure>
+
+
+
+<p>The week kicked off with Altan Tutar&#8217;s insightful presentation, &#8220;<a href="https://www.youtube.com/watch?v=PrWs1ty2fXo">The Future of DeFi: NEAR Protocol&#8217;s Role and Potential</a>,&#8221; where he shared NEAR’s DeFi vision, addressing fragmentation and modularity. NEAR aims to become the single platform seamlessly connecting users to DeFi applications across different blockchains.</p>
+
+
+
+<p>Illia Polosukhin, NEAR&#8217;s co-founder and CEO, followed suit at the Decentralized AGI Summit. His panel, &#8220;The Evolution to AGI,&#8221; explored the development of sovereign digital AGI and its ethical implications. He emphasized the need to balance centralization and decentralization to foster community ownership and innovation. Keeping AI in check is crucial, after all.</p>
+
+
+
+<p>But that wasn’t his only appearance. Illia managed to be ubiquitous across ETHDenver, including an exciting main stage talk with <a href="https://www.youtube.com/watch?v=32DKp9CX4NQ">Erik Voorhees on decentralizing AI</a>. He also delivered a captivating presentation on <a href="https://www.youtube.com/watch?v=m5jJkvCG338">Digital Self-Sovereignty in the Age of AI</a> just before presidential candidate Robert F. Kennedy Jr. took the stage for ETHDenver’s closing session.</p>
+
+
+
+<p>The education continued with Kendall Cole from Proximity Labs, who provided insights into <a href="https://www.youtube.com/watch?v=gCkOTjbJD3c">Threshold Signatures and how they unlock the magic of bridgeless cross-chain interoperability</a>. By enabling &#8220;bridgeless&#8221; cross-chain applications, this technology empowers developers to create applications that seamlessly work across different blockchains, even those without smart contracts like Bitcoin or Dogecoin, using programmable multi-party computation (MPC). Users can interact with these applications effortlessly while security remains ensured through MPC signing nodes.</p>
+
+
+
+<p>Meanwhile, <a href="https://www.youtube.com/watch?v=WzjDN0MG09c">Bowen Wang from Pagoda dove into Stateless validation</a>, addressing both scalability and decentralization. This approach tackles the ever-growing state size by allowing validators to operate without storing the entire history, significantly reducing storage pressure and potentially enabling more powerful hardware and lower costs, fostering a more decentralized network over time. Furthermore, stateless validation using zero-knowledge proofs holds promise for even greater scalability and affordability &#8211; more power to the validators!</p>
+
+
+
+<p>Finally, NEAR Foundation’s COO, Chris Donovan, <a href="https://www.youtube.com/watch?v=xPGGJYqSkSM">championed chain abstraction as the key to breaking down the barriers currently fragmenting the Web3 future</a>. The fragmented landscape of blockchains presents a hurdle to widespread adoption and collaboration within Web3. By simplifying the user experience and fostering collaboration across the industry, chain abstraction paves the way for a frictionless and prosperous Web3 future. Think of it as a universal translator for blockchains.</p>
+
+
+
+<p>Phew, That was a lot! But NEAR&#8217;s impact went far beyond informative talks. The NEAR booth was ground zero for epicness, attracting big names.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-the-near-experience-a-journey-down-the-rabbit-hole">The NEAR Experience: A Journey Down the Rabbit Hole</h2>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="https://lh7-eu.googleusercontent.com/-WssyoSbSSQR82cuha_E5m7qaW_Vb2H-vdyNSZn0aNnZPvS3efZXjZ8rQTlluj-GKXIl0qzHJt03izLs0Tyry8uJ7LGXGLbI2CAl-gZiFF9j6Zgt68sVaeyNzimyUnXiFRJUPZyMeZ3B7bxLiSJw1WE" alt=""/></figure>
+
+
+
+<p>Forget the standard, white-walled conference booths – the NEAR experience was a sensory explosion. Transformed into an immersive Alice in Wonderland inspired world called &#8220;NEAR in ETHerland,&#8221; it captivated attendees with whimsical tea parties and interactive installations. Unlike the usual Web3 frustrations, NEAR offered attendees a playful sip of the future with their &#8220;NEAR Chain Abstraction Pill&#8221;, symbolizing a smooth, enjoyable blockchain experience.</p>
+
+
+
+<p>Stepping into the booth was like falling down the rabbit hole into a world of infinite possibilities. The playful atmosphere sparked curiosity, fostering engaging conversations and leaving attendees buzzing with excitement. The NEAR booth wasn&#8217;t just a booth; it was a conversation starter, a community builder, and an unforgettable experience that left everyone wanting more, solidifying NEAR&#8217;s place as a creative powerhouse.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-chain-abstraction-day-unveiling-the-cake-framework">Chain Abstraction Day: Unveiling the CAKE Framework</h2>
+
+
+
+<figure class="wp-block-image"><img decoding="async" src="https://lh7-eu.googleusercontent.com/QruvOCuEh415yrpbIOQFBadPR9Pnfs2WzEklua71JS3Du7IEWDlcAxjgk8CufvjXvatb_0cGOCL8KXs01NfXwa6Ke1i2Z56dHctdhv7iQz30RJY2jQ5FQZFqFpX29TrvkE0WTP1JR9FD1Zx6vDMQ00Y" alt=""/></figure>
+
+
+
+<p>NEAR, in partnership with Frontier Research and Agoric, hosted Chain Abstraction Day, a massive event that attracted over 1,200 attendees. This gathering brought together the brightest minds in blockchain, including industry leaders like Sreeram Kannan from EigenLayer and Adrian Brink from Anoma. The day was filled with insightful discussions and collaboration, fostering a shared vision for the future of Web3. We even got to see a live demo showcasing the ability to pay for a <a href="https://twitter.com/SweatEconomy/status/1763196327440048479?s=20">transaction on the BNB chain using $SWEAT</a>, completely abstracted from the user, providing a glimpse into the future of chain abstraction.</p>
+
+
+
+<p>A cornerstone of the event was unveiling the CAKE framework (Chain Abstraction Key Elements). This framework provides a foundational understanding of chain abstraction and paves the way for further exploration. Discussions dived into cutting-edge topics like threshold signatures, multi-chain settlements, and abstracted security. The day culminated in the forming of the CAKE working group, a dedicated team committed to pushing the boundaries of chain abstraction.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-ai-x-web3-hackathon">AI x Web3 Hackathon</h2>
+
+
+
+<p>NEAR actively participated in and supported the AI x Web3 hackathon organized by Edge. This participation reflects the growing momentum and enthusiasm surrounding the convergence of artificial intelligence and Web3 technologies, even though the specific applications and direction of this space are still evolving.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-looking-ahead-launch-and-beyond">Looking Ahead: Launch and Beyond</h2>
+
+
+
+<p>ETHDenver was just the beginning for NEAR’s Chain Abstraction vision. The momentum continues at BUIDL Asia 2024, where NEAR promises to unveil even more groundbreaking developments with the launch of Chain Signatures, Relayers, and Web Engine scheduled for the end of March. This marks a significant milestone in NEAR&#8217;s journey towards establishing itself as a leader in chain abstraction.</p>
+
+
+
+<p>Till’ next time Abstractooors!</p>
+<p>The post <a href="/blog/near-ethdenver-round-up/">NEAR @ ETHDenver Breakdown: We Came, We Saw, We Abstracted!</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+		<item>
 		<title>ICYMI: Scootering Through Web3 at NEAR APAC&#8217;s Vietnam Showcase </title>
 		<link>/blog/icymi-scootering-through-web3-at-near-apacs-vietnam-showcase/</link>
 		
@@ -852,76 +960,6 @@
 
 <p>Follow <a href="https://www.instagram.com/ubarismutlu/">Ufuk Barış Mutlu</a> on Instagram.&nbsp;</p>
 <p>The post <a href="/blog/with-meshflux-multimedia-art-and-gaming-explore-blockchain-technology/">With MeshFlux, Multimedia Art and Gaming Explore Blockchain Technology </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
-]]></content:encoded>
-					
-		
-		
-			</item>
-		<item>
-		<title>NEAR Q2 Protocol Roadmap Update</title>
-		<link>/blog/near-q2-protocol-roadmap-update/</link>
-		
-		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
-		<pubDate>Wed, 09 Aug 2023 16:00:00 +0000</pubDate>
-				<category><![CDATA[Community]]></category>
-		<category><![CDATA[NEAR Protocol]]></category>
-		<category><![CDATA[Protocol Roadmap]]></category>
-		<guid isPermaLink="false">/?p=20793</guid>
-
-					<description><![CDATA[<p>The Q1 protocol roadmap update was well received by the community. Pagoda committed to&#160; continuing to share quarterly roadmap updates, …</p>
-<p>The post <a href="/blog/near-q2-protocol-roadmap-update/">NEAR Q2 Protocol Roadmap Update</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
-]]></description>
-										<content:encoded><![CDATA[
-<p>The <a href="https://near.org/s/p?a=pagodaplatform.near&amp;b=88979940">Q1 protocol roadmap update</a> was well received by the community. Pagoda committed to&nbsp; continuing to share quarterly roadmap updates, so here is the update for Q2 2023.</p>
-
-
-
-<h2 class="wp-block-heading" id="h-what-the-protocol-team-accomplished-in-q2">What the protocol team accomplished in Q2</h2>
-
-
-
-<p>Pagoda made good progress on <a href="https://near.org/s/p?a=pagodaplatform.near&amp;b=88979940">the protocol roadmap</a> in Q2. For the experience section, there is now <a href="https://github.com/near/NEPs/pull/480">a NEP on account namespaces</a>, a key stepping stone towards account extension. Account extension would allow users to easily compose different modules such as multisig, proxy, and so on. In addition, Aurora submitted <a href="https://github.com/near/NEPs/pull/481">a NEP on wasm submodules</a>, which, if implemented, would enable a limited form of synchronous execution, or allowing transactions that touch multiple contracts to settle within a single block. Both proposals are still works in progress due to the complexity of the changes.&nbsp;</p>
-
-
-
-<p>On top of these two proposed changes, there is <a href="https://github.com/near/NEPs/pull/485">a NEP on shared storage for contract code</a> which could significantly lower the cost of deploying a common contract. These proposals aspire to bring to life the account extension idea, which allows an account to install different modules to different functionalities such as multisig, recovery, proxy, and so on.</p>
-
-
-
-<p>For the core section of the roadmap, Pagoda delivered a few important improvements this quarter. Flat storage with value inlining is live on mainnet and brings an 8x improvement to state reads. Work on background writes is also in progress and the protocol team’s initial experiments show that it can potentially reduce the cost of state writes by 3x. In addition, cold storage is fully live on mainnet and drastically reduces the cost of running an archival node.</p>
-
-
-
-<p>Pagoda has also made good progress to revamp state sync. With the growth of mainnet state, the previous version of state sync was too inefficient and practically unusable. The new state sync, which uses flat storage to speed up state part generation, allows a node to finish syncing mainnet state within 3 hours. The team is expected to deliver the fully functional version of the new state sync in Q3.</p>
-
-
-
-<p>The team has also delivered <a href="https://github.com/near/finite-wasm">finite wasm</a> and its integration with nearcore, which improves the security and robustness of NEAR’s contract runtime immensely.</p>
-
-
-
-<h2 class="wp-block-heading" id="h-updates-to-the-roadmap">Updates to the roadmap</h2>
-
-
-
-<p>The experience section of the roadmap remains mostly the same, with two changes worth highlighting. One shift is that the changes required to implement account extension are temporarily on hold as we would like to see the impact on user experience by first emulating the changes through smart contracts. Another change is that the protocol team will work on the <a href="https://gov.near.org/t/proposal-locking-account-storage-refunds-to-avoid-faucet-draining-attacks/34155?u=jakmeier">storage refund problem</a> to prevent potential faucet-draining attacks in the new onboarding experience.</p>
-
-
-
-<figure class="wp-block-image"><img decoding="async" src="https://lh4.googleusercontent.com/qiAwbjyiLg__eMgUox9VU3-i1xrdy_IXeqa2yEFBncimZdtUwNp_sCl0qFv8ZuS5JbJHBI9_vVylT-0zI5ywAP9PlZd5yzJFVILP8QFtyYVUzwj-_Iz-1gCTyAXEnK8E94YqRi8TVeoYtpQNEFQylog" alt=""/></figure>
-
-
-
-<p>For the core section of the roadmap, the focus in Q3 will shift to Phase 2 of sharding, which includes both resharding the current mainnet state and turning off the requirement that block producers have to track all shards. This endeavor will take more than one quarter to finish and we will post more updates as we iron out details of the design.</p>
-
-
-
-<figure class="wp-block-image"><img decoding="async" src="https://lh3.googleusercontent.com/F7jjttxxZ2gbBTB-hpk0AM0dqCc3qfENCnK6LM4VAvdnYDDdqBTQ3aZELMXJWBtyh8UpCKqBCPncdiVsFw40qELTDBPjgG7PhIp61JJC2YuaXFjfzMdT-VRmx8dtlS5d549KNAnNPqhG37Q0SD5pvDY" alt=""/></figure>
-
-
-
-<p>To stay up to date with protocol changes as they happen, or to participate in protocol governance, please join <a href="https://t.me/NEAR_Protocol_Community_Group">the protocol community group</a> and follow <a href="https://github.com/orgs/near/projects/51/views/3">the NEAR Enhancement Proposal (NEP) process</a>.</p>
-<p>The post <a href="/blog/near-q2-protocol-roadmap-update/">NEAR Q2 Protocol Roadmap Update</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
 ]]></content:encoded>
 					
 		
