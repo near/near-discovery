@@ -38,7 +38,7 @@ export function middleware(req: NextRequest) {
 
   let response = NextResponse.rewrite(req.nextUrl);
   //save into user's client so we can pass into analytics, if they've allowed analytics
-  response.cookies.set({ domain: '.near.org', name: 'user-country-code', value: country, sameSite: 'strict' });
+  response.cookies.set({ name: 'user-country-code', value: country, sameSite: 'strict' });
 
   // Redirect users from blocked regions
   if (IBAN_BLOCKED_REGIONS.includes(country)) {
