@@ -5,7 +5,7 @@ const basic = {
   icon: '/images/apps/trader-joe.png',
   data: 'bluebiu.near/widget/Lending.Data.TraderJoe',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
-  handlerClaim: 'bluebiu.near/widget/Avalanche.Lending.BenqiClaimHandler',
+  handlerClaim: 'bluebiu.near/widget/Lending.RewardClaim.TraderJoe',
 };
 
 const networks = {
