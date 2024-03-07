@@ -57,10 +57,10 @@ const nextConfig = {
         destination: '/data-availability',
         permanent: true,
       },
-      {
+      { //TODO - remove in Q2 2024
         source: '/files/:slug',
         destination: '/papers/:slug',
-        permanent: true,
+        permanent: true, 
       },
       {
         source: '/papers/:slug',
