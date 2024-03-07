@@ -11,6 +11,7 @@ const networks = {
   56: {
     unitrollerAddress: '0xfD36E2c2a6789Db23113685031d7F16329158384',
     oracleAddress: '0x6592b5DE802159F3E74B2486b091D11a8256ab8A',
+    rewardAddress: '0xBbCD063efE506c3D42a0Fa2dB5C08430288C71FC',
     markets: {
       '0x882C173bC7Ff3b7786CA16dfeD3DFFfb9Ee7847B': {
         decimals: 8,
@@ -78,6 +79,16 @@ const networks = {
         address: '0x86aC3974e2BD0d60825230fa6F355fF11409df5c',
         underlyingToken: bsc['cake'],
       },
+    },
+    rewardsData: {
+      '0xecA88125a5ADbe82614ffC12D0DB554E2e2867C8': {
+        borrow: '2400',
+        supply: '130680',
+        stake: '3260',
+      },
+      // '0xfD5840Cd36d94D7229439859C0112a4185BC0255': { borrow: '10009.2', supply: '5003.9', stake: '3730' },
+      // '0x882C173bC7Ff3b7786CA16dfeD3DFFfb9Ee7847B': { borrow: '40', supply: '710', stake: '4120' },
+      // '0xf508fCD89b8bd15579dc79A6827cB4686A3592c8': { borrow: '490', supply: '9860', stake: '4780' },
     },
   },
 };
