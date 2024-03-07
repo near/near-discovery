@@ -97,7 +97,9 @@ const LoginView = () => {
   async function activeWithCode() {
     const res: any = await post(`/api/invite/activate`, { address, code: router?.query?.inviteCode });
     if (res.data.is_success) {
-      toast.success('100PTS rewarded!')
+      toast.success({
+        title: '100PTS rewarded!'
+      })
       fetchAccessToken();
     }
   }
