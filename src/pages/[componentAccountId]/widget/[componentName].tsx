@@ -112,10 +112,10 @@ const ViewComponentPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     const { requestAuth, createAccount } = componentProps;
-    if (requestAuth) {
+    if (requestAuth && !authStore.account) {
       requestAuthentication(!!createAccount);
     }
-  }, [componentProps, requestAuthentication]);
+  }, [authStore, componentProps, requestAuthentication]);
 
   useEffect(() => {
     setComponentSrc(componentSrc);
