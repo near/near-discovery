@@ -57,9 +57,14 @@ const nextConfig = {
         destination: '/data-availability',
         permanent: true,
       },
+      { //TODO - remove in Q2 2024
+        source: '/files/:slug',
+        destination: '/papers/:slug',
+        permanent: true, 
+      },
       {
         source: '/papers/:slug',
-        destination: '/files/:slug.pdf',
+        destination: 'https://discovery-domain.org/papers/:slug',
         permanent: true,
       },
       {
@@ -102,7 +107,7 @@ const nextConfig = {
     {
       source: '/blog/:path*',
       destination: '/blog/:path*/index.html',
-    },
+    }
   ],
   headers: async () => [
     {
