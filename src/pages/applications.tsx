@@ -3,6 +3,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { useAuthStore } from '@/stores/auth';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -10,13 +11,14 @@ const ApplicationsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const router = useRouter();
   const { requestAuthentication } = useSignInRedirect();
+  const authStore = useAuthStore();
 
   useEffect(() => {
     const { requestAuth, createAccount } = router.query;
-    if (requestAuth) {
+    if (requestAuth && !authStore.account) {
       requestAuthentication(!!createAccount);
     }
-  }, [requestAuthentication, router.query]);
+  }, [authStore, requestAuthentication, router.query]);
 
   return (
     <ComponentWrapperPage
