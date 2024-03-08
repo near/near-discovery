@@ -174,3 +174,17 @@ export const StyledSwiperPrevButton = styled.div`
   cursor: pointer;
 `;
 export const StyledChainsImg = styled.img``;
+
+export const StyledCominsoon = styled.div`
+  color: #00e2ff;
+  font-family: Gantari;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  position: absolute;
+  left: 706px;
+  bottom: 29px;
+  width: 213px;
+  height: 50px;
+`;

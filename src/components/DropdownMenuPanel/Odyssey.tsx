@@ -95,12 +95,6 @@ const Odyssey = function ({ setShow }: any) {
           <StyledFont color="#979ABE" fontSize="14px">
             Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.
           </StyledFont>
-          <StyledFont color="#FFF" fontSize="20px" fontWeight="700">
-            Odyssey
-          </StyledFont>
-          <StyledFont color="#979ABE" fontSize="14px">
-            Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.
-          </StyledFont>
         </StyledFlex>
         {compassList.map((compass: any) => (
           <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }} key={compass.id}>
