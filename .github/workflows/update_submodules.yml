@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 0 
           token: ${{ secrets.REPO_TOKEN }}
-      - name: update nearorg_marketing
+      - name: update near-discovery submodules
         run: |
           git submodule init
           git submodule update --remote --merge
