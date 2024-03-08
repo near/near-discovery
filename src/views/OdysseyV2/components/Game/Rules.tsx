@@ -100,7 +100,7 @@ const Rules = ({ onClose }: any) => {
           3. Complete the game in <span className="bold">40</span> flips to earn <span className="bold">100</span> PTS.
         </StyledDesc>
         <StyledDesc>
-          4. Complete the game in more than <span className="bold">30</span> flips to earn{' '}
+          4. Complete the game in more than <span className="bold">40</span> flips to earn{' '}
           <span className="bold">50</span> PTS.
         </StyledDesc>
         <StyledCloseButton onClick={onClose}>
