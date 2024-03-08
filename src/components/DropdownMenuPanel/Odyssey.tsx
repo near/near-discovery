@@ -74,8 +74,6 @@ const Odyssey = function ({ setShow }: any) {
     if (status === 'un_start') {
       const response = await get('/api/compass?id=' + compass.id);
       status = response.data.status;
-      const response = await get('/api/compass?id=' + compass.id);
-      status = response.data.status;
     }
     if (status === 'un_start') {
       toast.fail({
@@ -112,7 +110,9 @@ const Odyssey = function ({ setShow }: any) {
                 position: 'relative',
               }}
               onClick={() => {
-                handleClick(compass);
+                check(() => {
+                  handleClick(compass);
+                });
               }}
             >
               <StyledImage style={{ backgroundImage: `url(${compass.banner})` }} />

@@ -44,10 +44,7 @@ const Card = function ({ compass }: any) {
   const { check } = useAuthCheck({ isNeedAk: true });
   const handleExplore = async function () {
     let status = compass.status;
-    let status = compass.status;
     if (status === 'un_start') {
-      const response = await get('/api/compass?id=' + compass.id);
-      status = response.data.status;
       const response = await get('/api/compass?id=' + compass.id);
       status = response.data.status;
     }
@@ -85,8 +82,6 @@ const Card = function ({ compass }: any) {
         </svg>
       </StyledCardButton>
     </StyledCard>
-  );
-};
   );
 };
 const Compass = () => {
