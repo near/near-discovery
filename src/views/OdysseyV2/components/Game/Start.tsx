@@ -55,60 +55,68 @@ const StyledStartButtonText = styled.div`
   line-height: 100%; /* 36px */
 `;
 
+const SpinnerImg = styled.img`
+  width: 50px;
+`;
+
 export default function Start({ onStart, starting }: any) {
   return (
     <StyledContainer {...overlay}>
-      <StyledStartButtonWrapper onClick={onStart}>
-        <StyledButtonInner>
-          <StyledStartButtonText>START</StyledStartButtonText>
-          <StyledStartButtonBg>
-            <svg xmlns="http://www.w3.org/2000/svg" width="198" height="129" viewBox="0 0 198 129" fill="none">
-              <g filter="url(#filter0_di_6986_4417)">
-                <path
-                  d="M160.497 20.6108H37.2949L20 36.7767V91.406L37.2949 108.687H160.497L177.792 93.0783V36.7767L160.497 20.6108Z"
-                  fill="#33C5F4"
-                />
-              </g>
-              <defs>
-                <filter
-                  id="filter0_di_6986_4417"
-                  x="0"
-                  y="0.61084"
-                  width="197.792"
-                  height="128.076"
-                  filterUnits="userSpaceOnUse"
-                  colorInterpolation-filters="sRGB"
-                >
-                  <feFlood floodOpacity="0" result="BackgroundImageFix" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
+      {starting ? (
+        <SpinnerImg src="https://assets.dapdap.net/images/loading.gif" />
+      ) : (
+        <StyledStartButtonWrapper onClick={onStart}>
+          <StyledButtonInner>
+            <StyledStartButtonText>START</StyledStartButtonText>
+            <StyledStartButtonBg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="198" height="129" viewBox="0 0 198 129" fill="none">
+                <g filter="url(#filter0_di_6986_4417)">
+                  <path
+                    d="M160.497 20.6108H37.2949L20 36.7767V91.406L37.2949 108.687H160.497L177.792 93.0783V36.7767L160.497 20.6108Z"
+                    fill="#33C5F4"
                   />
-                  <feOffset />
-                  <feGaussianBlur stdDeviation="10" />
-                  <feComposite in2="hardAlpha" operator="out" />
-                  <feColorMatrix type="matrix" values="0 0 0 0 0.2 0 0 0 0 0.772549 0 0 0 0 0.956863 0 0 0 0.8 0" />
-                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_6986_4417" />
-                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_6986_4417" result="shape" />
-                  <feColorMatrix
-                    in="SourceAlpha"
-                    type="matrix"
-                    values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
-                    result="hardAlpha"
-                  />
-                  <feOffset />
-                  <feGaussianBlur stdDeviation="10" />
-                  <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
-                  <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
-                  <feBlend mode="normal" in2="shape" result="effect2_innerShadow_6986_4417" />
-                </filter>
-              </defs>
-            </svg>
-          </StyledStartButtonBg>
-        </StyledButtonInner>
-      </StyledStartButtonWrapper>
+                </g>
+                <defs>
+                  <filter
+                    id="filter0_di_6986_4417"
+                    x="0"
+                    y="0.61084"
+                    width="197.792"
+                    height="128.076"
+                    filterUnits="userSpaceOnUse"
+                    colorInterpolation-filters="sRGB"
+                  >
+                    <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                    <feColorMatrix
+                      in="SourceAlpha"
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha"
+                    />
+                    <feOffset />
+                    <feGaussianBlur stdDeviation="10" />
+                    <feComposite in2="hardAlpha" operator="out" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 0.2 0 0 0 0 0.772549 0 0 0 0 0.956863 0 0 0 0.8 0" />
+                    <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_6986_4417" />
+                    <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_6986_4417" result="shape" />
+                    <feColorMatrix
+                      in="SourceAlpha"
+                      type="matrix"
+                      values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+                      result="hardAlpha"
+                    />
+                    <feOffset />
+                    <feGaussianBlur stdDeviation="10" />
+                    <feComposite in2="hardAlpha" operator="arithmetic" k2="-1" k3="1" />
+                    <feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0" />
+                    <feBlend mode="normal" in2="shape" result="effect2_innerShadow_6986_4417" />
+                  </filter>
+                </defs>
+              </svg>
+            </StyledStartButtonBg>
+          </StyledButtonInner>
+        </StyledStartButtonWrapper>
+      )}
     </StyledContainer>
   );
 }

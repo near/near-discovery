@@ -36,8 +36,8 @@ export default function DappCard({
   total_spins,
   onRefreshDetail,
 }: any) {
-  const [execution, setExecution] = useState(times);
-  const { checking, handleRefresh } = useCheck({ id, total_spins, times, spins }, (_times: number) => {
+  const [execution, setExecution] = useState(0);
+  const { checking, handleRefresh } = useCheck({ id, total_spins, spins }, (_times: number) => {
     onRefreshDetail();
     setExecution(_times);
   });
@@ -69,11 +69,11 @@ export default function DappCard({
   };
 
   useEffect(() => {
-    setExecution(times);
-  }, [times]);
+    setExecution(total_spins / spins);
+  }, [total_spins, spins]);
 
   return (
-    <Card onClick={onItemClick}>
+    <Card onClick={onItemClick} disabled={times === 0 ? false : execution > times}>
       <StyledTop>
         <StyledDappWrapper>
           <StyledDappIcon src={ICON_MAP[name] || operators?.[0]?.dapp_logo} />
@@ -85,15 +85,16 @@ export default function DappCard({
         <ArrowIcon style={{ marginTop: '6px' }} />
       </StyledTop>
       <StyledFooter>
-        <StyledExecution>Execution: {execution}</StyledExecution>
+        <StyledExecution>Transactions: {execution}</StyledExecution>
         <StyledFooterActions>
           <RefreshButton
             onClick={(ev: any) => {
               ev.stopPropagation();
               if (!checking) handleRefresh();
             }}
+            loading={checking}
           />
-          <CardFlip amount={spins * execution} />
+          <CardFlip amount={spins * execution} disabled={execution === times} />
         </StyledFooterActions>
       </StyledFooter>
     </Card>

@@ -5,6 +5,7 @@ import { basic as VelocoreV2Basic, networks as VelocoreV2Networks } from '../dap
 import { basic as metavaultV3Basic, networks as metavaultV3Networks } from '../dapps/metavault-v3';
 import { basic as pancakeSwapBasic, networks as pancakeSwapNetworks } from '../dapps/pancake-swap';
 import { basic as xfaiBasic, networks as xfaiNetworks } from '../dapps/xfai';
+import { basic as lynexBasic, networks as lynexNetworks } from '../dapps/lynex';
 import chains from '../../chains';
 
 const CHAIN_ID = 59144;
@@ -47,6 +48,10 @@ export default {
     Xfai: {
       ...xfaiBasic,
       ...xfaiNetworks[CHAIN_ID],
+    },
+    'Lynex Fi': {
+      ...lynexBasic,
+      ...lynexNetworks[CHAIN_ID],
     },
   },
 };

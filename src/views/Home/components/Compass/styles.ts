@@ -60,16 +60,22 @@ export const StyledLoadingWrapper = styled.div`
 `;
 export const StyledCard = styled.div`
   position: relative;
-  
+  width: 1244px;
+  height: 380px;
+  border-radius: 32px;
+  border: 1px solid #464b56;
+  background: #21232a;
 `;
 
 export const StyledCardBackgroundImage = styled.img`
+  margin-top: 28px;
+  margin-left: 30px;
 `;
 
 export const StyledCardMainContent = styled.div`
   position: absolute;
   left: 706px;
-  top: 110px;
+  top: 30px;
 `;
 
 export const StyledCardChains = styled.img`
@@ -141,27 +147,44 @@ export const StyledCardButton = styled.div`
 export const StyledCompassIcon = styled.div`
   position: absolute;
   right: 29px;
-  top: 84px;
+  top: -54px;
   z-index: 20;
 `;
 
 export const StyledWinPtsIcon = styled.div`
   position: absolute;
   right: -34px;
-  top: 131px;
+  top: 0px;
   z-index: 20;
 `;
 export const StyledSwiperWrapper = styled.div`
   position: relative;
-`
+`;
 export const StyledSwiperNextButton = styled.div`
   position: absolute;
   right: -25px;
   bottom: 172px;
-`
+  cursor: pointer;
+`;
 export const StyledSwiperPrevButton = styled.div`
   position: absolute;
   left: -25px;
   bottom: 172px;
   transform: rotate(180deg);
-`
+  cursor: pointer;
+`;
+export const StyledChainsImg = styled.img``;
+
+export const StyledCominsoon = styled.div`
+  color: #00e2ff;
+  font-family: Gantari;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  position: absolute;
+  left: 706px;
+  bottom: 29px;
+  width: 213px;
+  height: 50px;
+`;

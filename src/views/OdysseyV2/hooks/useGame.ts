@@ -2,7 +2,9 @@ import { useCallback, useEffect, useState } from 'react';
 import { cloneDeep } from 'lodash';
 import { post } from '@/utils/http';
 import useToast from '@/hooks/useToast';
+import useAudioPlay from '@/hooks/useAudioPlay';
 import { getSignature } from '../helpers';
+import { AUDIO } from '../config';
 
 const LIST = [...Array(18).keys()];
 
@@ -18,6 +20,7 @@ export default function useCards(onSuccess: VoidFunction) {
   const [reward, setReward] = useState(0);
   const [posting, setPosting] = useState(false);
   const toast = useToast();
+  const { play } = useAudioPlay();
 
   const postResult = useCallback(async (signature: string) => {
     setPosting(true);
@@ -37,6 +40,7 @@ export default function useCards(onSuccess: VoidFunction) {
 
   const onFilp = (card: any, i: number) => {
     if (locked || !start) return;
+    play(AUDIO.filp);
     clickCount++;
     if (prevKey === null) {
       card.filp = true;
@@ -47,6 +51,7 @@ export default function useCards(onSuccess: VoidFunction) {
       return;
     }
     if (prevKey !== card.key) {
+      play(AUDIO.uncorrect);
       card.filp = true;
       const _prevI = prevI;
       prevKey = null;
@@ -65,6 +70,7 @@ export default function useCards(onSuccess: VoidFunction) {
       return;
     }
     if (prevKey === card.key) {
+      play(AUDIO.correct);
       card.filp = true;
       prevI = null;
       prevKey = null;
@@ -75,12 +81,13 @@ export default function useCards(onSuccess: VoidFunction) {
     setCards(cloneDeep(cards));
     if (filpedPair === 9) {
       const signature = getSignature(`times=${clickCount}&time=${Math.ceil(Date.now() / 1000)}`);
-      console.log('signature', signature);
+      play(AUDIO.success);
       if (signature) postResult(signature);
     }
   };
 
   const onStart = () => {
+    play(AUDIO.start);
     prevKey = null;
     prevI = null;
     filpedPair = 0;

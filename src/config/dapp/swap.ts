@@ -415,4 +415,11 @@ export default {
       '--button-text-color': '#000',
     },
   },
+  lynex: {
+    type: 'swap',
+    theme: {
+      '--button-color': '#E2944A',
+      '--button-text-color': '#fff',
+    },
+  },
 };

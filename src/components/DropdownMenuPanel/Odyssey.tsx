@@ -5,6 +5,7 @@ import useAuthCheck from '@/hooks/useAuthCheck';
 import { useRouter } from 'next/router';
 import { memo } from 'react';
 import styled from 'styled-components';
+import odyssey from '@/config/odyssey';
 
 interface FlexProps {
   flexDirection?: 'row' | 'column';
@@ -26,8 +27,13 @@ const StyledOdyssey = styled.div`
   border-bottom: 1px solid #393c47;
 `;
 const StyledContainer = styled.div``;
-const StyledImage = styled.img`
-  width: 100%;
+const StyledImage = styled.div`
+  width: 330px;
+  height: 165px;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  background-size: 100% 100%;
+  border: 2px solid #373a53;
 `;
 const StyledMakser = styled.div`
   position: absolute;
@@ -39,11 +45,12 @@ const StyledMakser = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(2px);
 `;
 const StyledFont = styled.div<FontProps>`
   color: ${(props) => props.color || '#000'};
-  font-family: ${(props) => props.fontFamily || 'Space Grotesk'};
+  font-family: Montserrat;
   font-size: ${(props) => props.fontSize || '16px'};
   font-style: ${(props) => props.fontStyle || 'normal'};
   font-weight: ${(props) => props.fontWeight || '400'};
@@ -62,8 +69,7 @@ const Odyssey = function ({ setShow }: any) {
   const router = useRouter();
   const { check } = useAuthCheck({ isNeedAk: true });
 
-  const handleClick = async function () {
-    const compass = compassList[0];
+  const handleClick = async function (compass: any) {
     let status = compass.status;
     if (status === 'un_start') {
       const response = await get('/api/compass?id=' + compass.id);
@@ -73,10 +79,11 @@ const Odyssey = function ({ setShow }: any) {
       toast.fail({
         title: 'Odyssey is upcoming...',
       });
-    } else {
-      router.push('/odyssey/home?id=' + compass.id);
-      setShow(false);
+      return;
     }
+    if (!odyssey[compass.id]) return;
+    router.push(odyssey[compass.id].path);
+    setShow(false);
   };
   return (
     <StyledOdyssey>
@@ -89,41 +96,33 @@ const Odyssey = function ({ setShow }: any) {
             Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.
           </StyledFont>
         </StyledFlex>
-        <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }}>
-          <StyledContainer
-            style={{ width: 330, height: 120, cursor: 'pointer' }}
-            onClick={() => {
-              check(handleClick);
-            }}
-          >
-            <StyledImage src="/images/home/odyssey-1.png" />
-          </StyledContainer>
-          <StyledFont color="#FFF" fontSize="16px" fontWeight="700">
-            Unveiling Uncharted Realms of L2s
-          </StyledFont>
-        </StyledFlex>
-        <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }}>
-          <StyledContainer
-            style={{
-              position: 'relative',
-              width: 330,
-              height: 120,
-              overflow: 'hidden',
-              borderRadius: 12,
-              border: '2px solid #373A53',
-            }}
-          >
-            <StyledImage src="/images/home/odyssey-2.png" />
-            <StyledMakser>
-              <StyledFont color="#FFF" fontSize="16px" fontWeight="500">
-                Coming soon...
-              </StyledFont>
-            </StyledMakser>
-          </StyledContainer>
-          <StyledFont color="#FFF" fontSize="16px" fontWeight="700">
-            Linea Odyssey
-          </StyledFont>
-        </StyledFlex>
+        {compassList.map((compass: any) => (
+          <StyledFlex flexDirection="column" gap="14px" style={{ width: '30%' }} key={compass.id}>
+            <StyledContainer
+              style={{
+                cursor: compass.status === 'un_start' ? 'not-allowed' : 'pointer',
+                position: 'relative',
+              }}
+              onClick={() => {
+                check(() => {
+                  handleClick(compass);
+                });
+              }}
+            >
+              <StyledImage style={{ backgroundImage: `url(${compass.banner})` }} />
+              {compass.status === 'un_start' && (
+                <StyledMakser>
+                  <StyledFont color="#FFF" fontSize="16px" fontWeight="500">
+                    Coming soon...
+                  </StyledFont>
+                </StyledMakser>
+              )}
+            </StyledContainer>
+            <StyledFont color="#FFF" fontSize="16px" fontWeight="700">
+              {compass.name}
+            </StyledFont>
+          </StyledFlex>
+        ))}
       </StyledFlex>
     </StyledOdyssey>
   );

@@ -23,7 +23,7 @@ export default function useCheck(quest: any, cb: any) {
           title: `Action refreshed successfully`,
         });
       }
-      if (result.data && result.data.total_completed_times > quest.times) {
+      if (result.data && result.data.total_completed_times > quest.total_spins / quest.spins) {
         cb(result.data.total_completed_times);
         if (data) {
           toast.success({

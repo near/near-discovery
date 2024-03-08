@@ -5,12 +5,15 @@ const basic = {
   icon: '/images/apps/venus.png',
   data: 'bluebiu.near/widget/Lending.Data.Venus',
   handler: 'bluebiu.near/widget/Lending.Handler.Cream',
+  handlerClaim: 'bluebiu.near/widget/Lending.RewardClaim.Venus',
 };
 
 const networks = {
   56: {
     unitrollerAddress: '0xfD36E2c2a6789Db23113685031d7F16329158384',
     oracleAddress: '0x6592b5DE802159F3E74B2486b091D11a8256ab8A',
+    rewardPrimeAddress: '0xBbCD063efE506c3D42a0Fa2dB5C08430288C71FC',
+    rewardAddress: '0xfB0f09dB330dC842a6637BfB959209424BbFE8C7',
     markets: {
       '0x882C173bC7Ff3b7786CA16dfeD3DFFfb9Ee7847B': {
         decimals: 8,
@@ -79,6 +82,17 @@ const networks = {
         underlyingToken: bsc['cake'],
       },
     },
+    rewardsPrimeData: {
+      '0xecA88125a5ADbe82614ffC12D0DB554E2e2867C8': {
+        borrow: '2405.43',
+        supply: '13068.75',
+        stake: '3265.30',
+      },
+      '0xfD5840Cd36d94D7229439859C0112a4185BC0255': { borrow: '10009.21', supply: '5003.94', stake: '3731.33' },
+      '0x882C173bC7Ff3b7786CA16dfeD3DFFfb9Ee7847B': { borrow: '0.04', supply: '0.71', stake: '4124.59' },
+      '0xf508fCD89b8bd15579dc79A6827cB4686A3592c8': { borrow: '0.49', supply: '9.86', stake: '4788.05' },
+    },
+    rewardToken: bsc['xvs'],
   },
 };
 
