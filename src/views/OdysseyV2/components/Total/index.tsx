@@ -8,7 +8,7 @@ const ITEMS = [
     key: 'total_users',
   },
   {
-    label: 'Players',
+    label: 'Spent Energy',
     key: 'total_players',
   },
   {
