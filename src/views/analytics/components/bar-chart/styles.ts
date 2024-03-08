@@ -35,6 +35,7 @@ export const Icon = styled.span`
 export const Item = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 `;
 
 export const Key = styled.div`

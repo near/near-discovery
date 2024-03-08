@@ -22,6 +22,7 @@ const App: FC<IProps> = ({ data }) => {
       width={824}
       height={318}
       data={data}
+      className="area-chart"
       margin={{
         top: 20,
         right: 40,
@@ -35,20 +36,33 @@ const App: FC<IProps> = ({ data }) => {
           <stop offset="90%" stopColor="#EBF479" stopOpacity={0} />
         </linearGradient>
       </defs>
-      {/* <CartesianGrid strokeDasharray="3" /> */}
-      <XAxis dataKey="name" />
-      <YAxis />
+      <CartesianGrid vertical={false} />
+      <XAxis
+        dataKey="name"
+        tick={{
+          stroke: 'rgba(255, 255, 255, 0.40)',
+          fill: 'rgba(255, 255, 255, 0.40)',
+          fontSize: 12,
+          fontWeight: 400,
+        }}
+      />
+      <YAxis
+        axisLine={false}
+        tickLine={false}
+        tick={{
+          stroke: 'rgba(255, 255, 255, 0.40)',
+          fill: 'rgba(255, 255, 255, 0.40)',
+          fontSize: 12,
+          fontWeight: 400,
+        }}
+      />
 
-      {/* <defs>
-        <linearGradient id="splitColor" x1="0" y1="0" x2="0" y2="1">
-          <stop offset={off} stopColor="green" stopOpacity={1} />
-          <stop offset={off} stopColor="red" stopOpacity={1} />
-        </linearGradient>
-      </defs> */}
       <Area type="monotone" dataKey="Users" stroke="#EBF479" fillOpacity={1} fill="url(#colorUv)" />
       <Tooltip
+        // trigger="click"
+        // cursor={false}
         wrapperStyle={{
-          width: 122,
+          minWidth: 122,
           height: 70,
         }}
         contentStyle={{

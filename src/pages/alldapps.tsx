@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import styled from 'styled-components';
 import { QUEST_PATH } from '@/config/quest';
 import useDappOpen from '@/hooks/useDappOpen';
@@ -408,6 +409,7 @@ const Carousel = React.memo(
 );
 
 const AllDappsColumn: NextPageWithLayout = () => {
+  const { check } = useAuthCheck({ isNeedAk: true });
   const [networkList, setNetworkList] = useState<any[]>();
   const [nativeToken, setNativeToken] = useState<any[]>([]);
   const [tokenTBD, setTokenTBD] = useState<any[]>([]);
@@ -595,7 +597,9 @@ const AllDappsColumn: NextPageWithLayout = () => {
           fetchFilteredDappData(currentPage);
         } else {
           if (selectedTab === 'favorites') {
-            fetchIsFavoriteList();
+            check(() => {
+              fetchIsFavoriteList();
+            });
           } else if (selectedTab === 'TBD') {
             fetchTokenTBD(currentPage);
           } else if (selectedTab === 'token') {

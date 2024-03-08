@@ -114,15 +114,14 @@ export const StyledDesc = styled.div`
 `;
 
 export const StyledClaimButton = styled.button`
-  border-radius: 18px;
-  border: 1px solid #373a53;
-  background: rgba(55, 58, 83, 0.5);
-  padding: 0px 20px;
-  height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, #EEF3BF 0%, #E9F456 100%);
+  padding: 0px 12px;
+  height: 42px;
   flex-shrink: 0;
-  color: #ebf479;
+  color: #000;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
   transition: 0.3s;
   &:not(:disabled):hover {
     opacity: 0.8;
@@ -168,7 +167,7 @@ export const StyledTableHeader = styled.div`
 
 export const StyledBody = styled.div`
   max-height: calc(100vh - 410px);
-  overflow-x: auto;
+  overflow-y: auto;
 `;
 
 export const StyledCell = styled.div<{ $gap?: number; $width: number; $align?: Align }>`
@@ -226,3 +225,27 @@ export const StyledPendingCell = styled.div`
     }
   }
 `;
+export const StyledLink = styled.div`
+  position: relative;
+`
+
+export const StyledTips = styled.div`
+  position: absolute;
+  left: 8px;
+  top: -15px;
+  width: 132px;
+  height: 25px;
+  border-radius: 5px;
+  background: linear-gradient(to left, #000 0%, #414D58 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const StyledBackground = styled.div`
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  height: 196px;
+  background: #1B1C27;
+`

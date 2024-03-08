@@ -26,8 +26,8 @@ export default function ClaimButton({ disabled, onClick }: any) {
           fill={disabled ? '#46606C' : '#EBF479'}
         />
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M52.6171 84.3105C40.3586 75.4388 33.8063 65.8516 35.1996 56.7927C38.726 33.8663 91.8097 23.0062 153.765 32.5358C160.49 33.5701 167.043 34.8022 173.378 36.2062C160.237 31.8179 145.384 28.2114 129.512 25.77C71.3774 16.8281 21.5854 26.9028 18.2985 48.2724C16.4329 60.4011 29.9494 73.5616 52.6171 84.3105Z"
           fill="black"
         />

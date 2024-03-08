@@ -58,7 +58,7 @@ const Dashboard: FC<IProps> = ({}) => {
 
   const [userData, setUserData] = useState([]);
   const [userDataRange, setUserDataRange] = useState('');
-  const [areaData, setAreaData] = useState([]);
+  const [areaData, setAreaData] = useState<any>([]);
   const [chainsData, setChainsData] = useState([]);
   const [tradingData, setTradingData] = useState([]);
   const [ptsData, setPtsData] = useState({
@@ -146,10 +146,11 @@ const Dashboard: FC<IProps> = ({}) => {
 
       if ((res.code as number) !== 0) return;
       setLoading(false);
+
       const _dappData = res.data.map((item: any) => ({
         ...item,
         name: item.template,
-        total_trading_value: formatThousandsSeparator(+Number(item.total_trading_value).toFixed(2)),
+        total_trading_value: +Number(item.total_trading_value).toFixed(2),
       }));
 
       setDappData(_dappData.sort((a: any, b: any) => b.total_trading_value - a.total_trading_value));
@@ -248,7 +249,21 @@ const Dashboard: FC<IProps> = ({}) => {
       total: item.total,
       percent: item.percent,
     }));
-    setAreaData(_areaData);
+    const _normal = _areaData.filter((item: any) => item.percent >= 2);
+    const _others = _areaData.filter((item: any) => item.percent < 2);
+    const _othersTotal = _others.reduce((accu: number, curr: any) => accu + curr.total, 0);
+    const _othersPercent = _others.reduce((accu: number, curr: any) => accu + curr.percent, 0);
+    const _othersCountry = {
+      name: 'Others',
+      total: _othersTotal,
+      percent: Number(_othersPercent).toFixed(2),
+    };
+    // console.log('others:', _othersCountry);
+
+    // console.log('_normal', _normal);
+    // console.log('_others', _others);
+
+    setAreaData([..._normal, _othersCountry]);
 
     const _chainsData = chain_data
       .filter((item: any) => item.total_users > 0 && item.total_trading_value > 0)
@@ -408,7 +423,7 @@ const Dashboard: FC<IProps> = ({}) => {
         <Styles.SubTitle>Hot Quests</Styles.SubTitle>
         <Styles.QuestWrap>
           <Styles.GridHeader>
-            <Styles.HeadItem style={{ textAlign: 'left' }}>Quest name</Styles.HeadItem>
+            <Styles.HeadItem style={{ textAlign: 'left', paddingLeft: 35 }}>Quest name</Styles.HeadItem>
             <Styles.HeadItem>#social</Styles.HeadItem>
             <Styles.HeadItem>Onlie Date</Styles.HeadItem>
             <Styles.HeadItem>Participants</Styles.HeadItem>
@@ -418,7 +433,7 @@ const Dashboard: FC<IProps> = ({}) => {
           <Styles.GridBody>
             {questData.map((item: any) => (
               <Styles.GridRow key={item.id}>
-                <Styles.GridCol style={{ justifyContent: 'start' }} title={item.name}>
+                <Styles.GridCol style={{ justifyContent: 'start', paddingLeft: 35 }} title={item.name}>
                   <Styles.Ellipsis>{item.name}</Styles.Ellipsis>
                 </Styles.GridCol>
                 <Styles.GridCol className={`${item.type}-type`}>#{item.type}</Styles.GridCol>

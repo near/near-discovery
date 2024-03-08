@@ -22,6 +22,9 @@ export const Banner = styled.div`
   &.coin68 {
     background-image: url('/images/marketing/coin68-pc.png');
   }
+  &.namlongdao {
+    background-image: url('/images/marketing/coin68-pc.png');
+  }
 `;
 export const CoinBanner = styled.div`
   height: 300px;
@@ -370,7 +373,8 @@ export const AllRewards = styled.div`
       radial-gradient(185.62% 109.56% at 0% 71.21%, #7efbfd 0%, #7138cd 55.21%, #4400b2 100%);
     box-shadow: 0px 0px 50px 0px rgba(255, 255, 255, 0.15) inset;
   }
-  &.coin68 {
+  &.coin68,
+  &.namlongdao {
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: radial-gradient(72.14% 104.62% at 47.64% 100%, rgba(253, 126, 126, 1) 0%, rgba(255, 154, 61, 1) 100%),
       radial-gradient(185.62% 109.56% at 0% 71.21%, #7efbfd 0%, #7138cd 55.21%, #4400b2 100%);

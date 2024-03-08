@@ -12,7 +12,7 @@ export default {
   displayChainName: 'zkSync',
   wethAddress: '0x5AEa5775959fBC2557Cc8789bC1bf90A239D9a91',
   connectProps: {
-    noAccountTips: 'zkSync Swap Collection',
+    noAccountTips: 'zkSync Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to zkSync Chain.',
   },
   defalutDex: 'SpaceFi',

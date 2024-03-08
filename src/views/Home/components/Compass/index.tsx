@@ -2,6 +2,7 @@ import CompassIcon from '@/components/Icons/Compass';
 import Loading from '@/components/Icons/Loading';
 import WinPtsIcon from '@/components/Icons/WinPts';
 import useToast from '@/hooks/useToast';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { get } from '@/utils/http';
 import { useRouter } from 'next/router';
 import { memo, useMemo, useRef, useState } from 'react';
@@ -34,15 +35,19 @@ import {
 
 const iconRight = (
   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="38" viewBox="0 0 13 38" fill="none">
-    <path d="M1 1L11 19L1 37" stroke="#979ABE" stroke-width="2" stroke-linecap="round" />
+    <path d="M1 1L11 19L1 37" stroke="#979ABE" strokeWidth="2" stroke-linecap="round" />
   </svg>
 );
 const Card = function ({ compass }: any) {
   const toast = useToast();
   const router = useRouter();
+  const { check } = useAuthCheck({ isNeedAk: true });
   const handleExplore = async function () {
     let status = compass.status;
+    let status = compass.status;
     if (status === 'un_start') {
+      const response = await get('/api/compass?id=' + compass.id);
+      status = response.data.status;
       const response = await get('/api/compass?id=' + compass.id);
       status = response.data.status;
     }
@@ -65,7 +70,12 @@ const Card = function ({ compass }: any) {
         <StyledCardTitle>{compass.name}</StyledCardTitle>
         <StyledCardDesc>{compass.description}</StyledCardDesc>
       </StyledCardMainContent>
-      <StyledCardButton onClick={handleExplore} data-bp="1001-003">
+      <StyledCardButton
+        onClick={() => {
+          check(handleExplore);
+        }}
+        data-bp="1001-003"
+      >
         <div>Explore now</div>
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="12" viewBox="0 0 18 12" fill="none">
           <path
@@ -75,6 +85,8 @@ const Card = function ({ compass }: any) {
         </svg>
       </StyledCardButton>
     </StyledCard>
+  );
+};
   );
 };
 const Compass = () => {

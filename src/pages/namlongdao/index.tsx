@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { isMobile } from 'react-device-detect';
 
 import { useDefaultLayout, useMarketingLayout } from '@/hooks/useLayout';
@@ -7,17 +6,9 @@ import LandingMobile from '@/views/marketing/mobile';
 import LandingPC from '@/views/marketing/pc';
 
 const LandingPage: NextPageWithLayout = () => {
-  // from bitget user
-  const router = useRouter();
-  console.log('router:', router);
+  // from namlongdao
 
-  const inviteCode = router.query.inviteCode;
-
-  return isMobile ? (
-    <LandingMobile platform="bitget" from="bgUser" inviteCode={inviteCode as string} />
-  ) : (
-    <LandingPC platform="bitget" from="bgUser" inviteCode={inviteCode as string} />
-  );
+  return isMobile ? <LandingMobile from="bg" platform="namlongdao" /> : <LandingPC from="bg" platform="namlongdao" />;
 };
 
 LandingPage.getLayout = isMobile ? useMarketingLayout : useDefaultLayout;

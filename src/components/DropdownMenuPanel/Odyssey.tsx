@@ -1,6 +1,7 @@
 import useToast from '@/hooks/useToast';
 import { get } from '@/utils/http';
 import useCompassList from '@/views/Home/components/Compass/hooks/useCompassList';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { useRouter } from 'next/router';
 import { memo } from 'react';
 import styled from 'styled-components';
@@ -44,6 +45,7 @@ const StyledMakser = styled.div`
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(2px);
 `;
 const StyledFont = styled.div<FontProps>`
@@ -65,10 +67,13 @@ const Odyssey = function ({ setShow }: any) {
   const toast = useToast();
   const { loading, compassList } = useCompassList();
   const router = useRouter();
+  const { check } = useAuthCheck({ isNeedAk: true });
 
   const handleClick = async function (compass: any) {
     let status = compass.status;
     if (status === 'un_start') {
+      const response = await get('/api/compass?id=' + compass.id);
+      status = response.data.status;
       const response = await get('/api/compass?id=' + compass.id);
       status = response.data.status;
     }
@@ -86,6 +91,12 @@ const Odyssey = function ({ setShow }: any) {
     <StyledOdyssey>
       <StyledFlex alignItems="flex-start" gap="86px" style={{ width: '100%' }}>
         <StyledFlex flexDirection="column" alignItems="flex-start" gap="15px" style={{ width: '30%', marginTop: 17 }}>
+          <StyledFont color="#FFF" fontSize="20px" fontWeight="700">
+            Odyssey
+          </StyledFont>
+          <StyledFont color="#979ABE" fontSize="14px">
+            Obtain spins through on-chain interactive quests as you explore the untapped potential of Ethereum L2s.
+          </StyledFont>
           <StyledFont color="#FFF" fontSize="20px" fontWeight="700">
             Odyssey
           </StyledFont>

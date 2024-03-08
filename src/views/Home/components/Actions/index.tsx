@@ -15,8 +15,8 @@ const ACTIONS = [
             stroke="black"
           />
           <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M44.5611 96.0612C41.5102 96.7955 38.31 95.5271 36.7937 92.7797C33.0702 86.0329 30.9512 78.2766 30.9512 70.0254C30.9512 43.9797 52.0654 22.8654 78.1112 22.8654C95.4132 22.8654 110.539 32.1829 118.745 46.0739C120.351 48.7928 119.797 52.216 117.587 54.4711C108.974 63.2573 97.6938 71.9839 84.5536 79.5704C70.7706 87.528 56.9247 93.0857 44.5611 96.0612Z"
             fill="#EBF479"
           />
@@ -136,7 +136,7 @@ const ACTIONS = [
             fill="#5E73FF"
           />
           <path
-            fill-rule="evenodd"
+            fillRule="evenodd"
             clipRule="evenodd"
             d="M115.484 22.3377C113.563 20.4667 110.489 20.5074 108.618 22.4286C95.1962 36.2098 89.1183 56.932 99.4217 76.7301C94.0712 62.2215 104.504 40.5712 115.575 29.204C117.446 27.2829 117.405 24.2087 115.484 22.3377Z"
             fill="#00FF75"
@@ -199,14 +199,7 @@ const Actions = () => {
     <StyledContainer>
       <StyledActions>
         {ACTIONS.map((action, i) => (
-          <>
-            {/* {i !== 0 && (
-              <svg key={i} xmlns="http://www.w3.org/2000/svg" width="13" height="38" viewBox="0 0 13 38" fill="none">
-                <path d="M1 1L11 19L1 37" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
-              </svg>
-            )} */}
-            <Action key={action.title} {...action} />
-          </>
+          <Action key={i} {...action} />
         ))}
       </StyledActions>
     </StyledContainer>

@@ -22,7 +22,7 @@ const iconSearch = (
     <path
       d="M10 9.00049C10.6279 8.16474 11 7.12582 11 6C11 3.23858 8.76142 1 6 1C3.23858 1 1 3.23858 1 6C1 8.76142 3.23858 11 6 11C7.6356 11 9.08777 10.2147 10 9.00049ZM10 9.00049L13 12.0005"
       stroke="white"
-      stroke-width="2"
+      strokeWidth="2"
       stroke-linecap="round"
     />
   </svg>
@@ -32,7 +32,7 @@ const iconCircle = (
     <path
       d="M13.9845 11.9838C11.2234 14.7449 6.74681 14.7449 3.98572 11.9838C1.22463 9.22268 1.22463 4.74607 3.98572 1.98498"
       stroke="#04D1FF"
-      stroke-width="2"
+      strokeWidth="2"
       stroke-linecap="round"
     />
   </svg>

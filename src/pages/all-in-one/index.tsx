@@ -10,11 +10,9 @@ const AllInOne = () => {
   const { chainId } = useAccount();
 
   useEffect(() => {
-    if (chainId) {
-      const chains = Object.values(popupsData);
-      const chain = chains.find((chain) => chain.chainId === chainId);
-      router.replace(`/all-in-one/${chain ? chain.path : 'arbitrum'}`);
-    }
+    const chains = Object.values(popupsData);
+    const chain = chains.find((chain) => chain.chainId === chainId);
+    router.replace(`/all-in-one/${chain ? chain.path : 'arbitrum'}`);
   }, [chainId]);
 
   return <div />;

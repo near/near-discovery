@@ -72,9 +72,9 @@ const InviteCodePanel = ({ onInviteCodeClick, total, list }: any) => {
           </div>
         </StyledPanelFriends>
       </StyledPanelContent> */}
-        <StyledFriendsNum>
+        {/* <StyledFriendsNum>
           {activeList.length} Active/ {pendingList.length} Pending
-        </StyledFriendsNum>
+        </StyledFriendsNum> */}
         <InviteCode onClick={onInviteCodeClick} />
       </StyledPanel>
     </StyledPanelWrapper>

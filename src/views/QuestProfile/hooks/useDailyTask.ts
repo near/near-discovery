@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { QUEST_PATH } from '@/config/quest';
 import useToast from '@/hooks/useToast';
 import { get, post } from '@/utils/http';
@@ -11,6 +11,7 @@ export default function useDailyTask({ onSuccess }: { onSuccess: VoidFunction })
   const [currentDay, setCurrentDay] = useState<any>({});
   const [consecutiveDays, setConsecutiveDays] = useState(0);
   const toast = useToast();
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
 
   const queryTasks = useCallback(async () => {
     if (loading) return;
@@ -54,7 +55,7 @@ export default function useDailyTask({ onSuccess }: { onSuccess: VoidFunction })
   }, [claiming, tasks]);
 
   useEffect(() => {
-    queryTasks();
+    check(queryTasks);
   }, []);
 
   return { loading, tasks, consecutiveDays, claiming, currentDay, claim };

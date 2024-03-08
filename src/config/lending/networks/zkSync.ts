@@ -11,7 +11,7 @@ export default {
   multicallAddress: multicall[CHAIN_ID],
   wethAddress: weth[CHAIN_ID],
   connectProps: {
-    noAccountTips: 'zkSync Swap Collection',
+    noAccountTips: 'zkSync Lending Collection',
     wrongNetworkTips: 'To proceed, kindly switch to zkSync Chain.',
     chainId: CHAIN_ID,
     chainName: CHAIN_NAME,

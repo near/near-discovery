@@ -52,7 +52,9 @@ export const StyledBigCircle = styled.div`
   top: -990px;
   left: -550px;
 `;
-
+export const StyledAvatarContainer = styled.div`
+  position: relative;
+`
 export const StyledAvatar = styled.img`
   width: 100px;
   height: 100px;
@@ -65,6 +67,13 @@ export const StyledAvatarBox = styled.div`
   border-radius: 50%;
   background-image: conic-gradient(from 180deg at 50% 50%, #00d1ff 0deg, #ff008a 360deg);
 `;
+export const StyledKol = styled.div`
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+`
 
 export const StyledNameWrapper = styled.div`
   width: calc(100% - 132px);

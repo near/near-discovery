@@ -1,13 +1,17 @@
 import { memo } from 'react';
 import { useSetChain } from '@web3-onboard/react';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { StyledAddMeta } from './styles';
 
 const AddMetaMask = ({ chainId, bp }: any) => {
   const [{}, setChain] = useSetChain();
+  const { check } = useAuthCheck({ isNeedAk: false });
   return (
     <StyledAddMeta
       onClick={() => {
-        setChain({ chainId: `0x${chainId.toString(16)}` });
+        check(() => {
+          setChain({ chainId: `0x${chainId.toString(16)}` });
+        });
       }}
       data-bp={bp}
     >

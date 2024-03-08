@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation';
 import { memo, useCallback, useEffect, useState } from 'react';
 import { overlay } from '@/components/animation';
 import useDappOpen from '@/hooks/useDappOpen';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { useLayoutStore } from '@/stores/layout';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useReport from '@/views/Landing/hooks/useReport';
@@ -44,6 +45,7 @@ const ActionItem = ({
   bp?: string;
   onSuccess: (type?: number) => void;
 }) => {
+  const { check } = useAuthCheck({ isNeedAk: true });
   const [open, setOpen] = useState(false);
   const [actionCompleted, setActionCompleted] = useState(completed);
   const router = useRouter();
@@ -131,6 +133,23 @@ const ActionItem = ({
     router.push('/' + action.source);
   }, [router, config, action, userInfo]);
 
+  const onItemClick = () => {
+    check(() => {
+      if (!isLive || action.source === 'bitget_wallet') return;
+      if (action.category === 'password') {
+        setOpen(!open);
+        return;
+      }
+      if (action.operators?.length === 0 || !action.operators) {
+        handleClick();
+        return;
+      }
+      if (action.operators?.length) {
+        handleDappRedirect(action.operators[0]);
+      }
+    });
+  };
+
   const handleDappRedirect = useCallback((dapp: any) => {
     dapp.route && dappOpen({ dapp: { ...dapp, route: `/${dapp.route}` }, from: 'quest' });
   }, []);
@@ -143,20 +162,7 @@ const ActionItem = ({
     <StyledItemContainer>
       <StyledItemTop
         initial={false}
-        onClick={() => {
-          if (!isLive || action.source === 'bitget_wallet') return;
-          if (action.category === 'password') {
-            setOpen(!open);
-            return;
-          }
-          if (action.operators?.length === 0 || !action.operators) {
-            handleClick();
-            return;
-          }
-          if (action.operators?.length) {
-            handleDappRedirect(action.operators[0]);
-          }
-        }}
+        onClick={onItemClick}
         style={{
           cursor: !binding && isLive ? 'pointer' : 'not-allowed',
         }}

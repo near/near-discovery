@@ -45,6 +45,7 @@ const renderActiveShape = (props: any) => {
 const App: FC<IProps> = ({ data }) => {
   // const totalArray = data.map((item: any) => item?.total);
   // const maxIndex = data.findIndex((item: any) => item.total === Math.max(...totalArray));
+  console.log('annular-data:', data);
 
   const [activeIndex, setActiveIndex] = useState(-1);
   const onPieEnter = useCallback(
@@ -70,13 +71,13 @@ const App: FC<IProps> = ({ data }) => {
         dataKey="total"
       >
         {data.map((entry: any, index: number) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke={null} />
         ))}
       </Pie>
       <Tooltip
         // trigger="click"
         wrapperStyle={{
-          width: 122,
+          // width: 120,
           height: 70,
         }}
         contentStyle={{

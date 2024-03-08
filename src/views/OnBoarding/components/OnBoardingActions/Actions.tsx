@@ -1,4 +1,6 @@
 import { memo, useState } from 'react';
+import useAccount from '@/hooks/useAccount';
+import useConnectWallet from '@/hooks/useConnectWallet';
 import useTradeSummary from '../../hooks/useTradeSummary';
 import ActionColorBg from './ActionColorBg';
 import {
@@ -55,6 +57,8 @@ const ACTIONS = [
 const Actions = ({ bgColor, openModal, chainName, chainId }: any) => {
   const [showBg, setShowBg] = useState('');
   const { info } = useTradeSummary(chainId);
+  const { account } = useAccount();
+  const { onConnect } = useConnectWallet();
   return (
     <StyledActions>
       {ACTIONS.map((action: any) => (
@@ -80,14 +84,24 @@ const Actions = ({ bgColor, openModal, chainName, chainId }: any) => {
               {action.key === 'bridge' && chainName}
             </StyledActionSubTitle>
             <StyledActionDesc>Total Execution {info?.[action.label]?.total_execution}</StyledActionDesc>
-            <StyledActionButton
-              onClick={() => {
-                openModal(action.key);
-              }}
-              data-bp="100131-001"
-            >
-              One-Click Execution
-            </StyledActionButton>
+            {account ? (
+              <StyledActionButton
+                onClick={() => {
+                  openModal(action.key);
+                }}
+                data-bp="100131-001"
+              >
+                One-Click Execution
+              </StyledActionButton>
+            ) : (
+              <StyledActionButton
+                onClick={() => {
+                  onConnect();
+                }}
+              >
+                Connect Wallet
+              </StyledActionButton>
+            )}
           </StyledActionContent>
         </StyledAction>
       ))}

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { QUEST_PATH } from '@/config/quest';
 import useToast from '@/hooks/useToast';
 import { get, post } from '@/utils/http';
@@ -8,6 +8,7 @@ export default function useLike(id: string, category: string) {
   const [like, setLike] = useState(false);
   const [loading, setLoading] = useState(false);
   const toast = useToast();
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
 
   const queryLike = useCallback(async () => {
     if (loading) return;
@@ -52,9 +53,18 @@ export default function useLike(id: string, category: string) {
     [id, category],
   );
 
+  const onLike = (favorite: boolean) => {
+    check(() => {
+      handleLike(favorite);
+    }, false);
+  };
+
   useEffect(() => {
-    if (id && category) queryLike();
+    if (id && category)
+      check(() => {
+        queryLike();
+      });
   }, [id, category]);
 
-  return { like, loading, handleLike };
+  return { like, loading, handleLike: onLike };
 }

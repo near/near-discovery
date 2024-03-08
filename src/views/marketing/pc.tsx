@@ -6,6 +6,7 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKey } from '@/apis';
 import { QUEST_PATH } from '@/config/quest';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useCopy from '@/hooks/useCopy';
 import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
@@ -14,13 +15,14 @@ import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 
 import { ModalPC, Tabs } from './components';
 import Leaderboard from './components/Leaderboard';
+import { logoMap } from './const';
 import useLeaderboard from './hooks/useLeaderBoard';
 import useUserInfo from './hooks/useUserInfo';
 import * as Styles from './pc-styles';
 interface IProps {
   from: 'bg' | 'bgUser';
   inviteCode?: string;
-  platform: 'bitget' | 'coin68';
+  platform: 'bitget' | 'coin68' | 'namlongdao';
 }
 
 const questImgs = {
@@ -31,7 +33,7 @@ const questImgs = {
 };
 
 const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
-  console.log('from:', from, 'inviteCode:', inviteCode);
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
   const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard(platform);
   const { copy } = useCopy();
   const [{ wallet, connecting }, connect, disconnect] = useConnectWallet();
@@ -85,7 +87,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   const logout = () => {
     window.localStorage.setItem(AUTH_TOKENS, '{}');
     insertedAccessKey('');
-    deleteCookie('LOGIN_ACCOUNT');
     deleteCookie('AUTHED_ACCOUNT');
     deleteCookie('BNS_NAME');
   };
@@ -133,7 +134,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
 
   async function activeWithCode() {
-    const res: any = await post(`${QUEST_PATH}/api/invite/activate`, { address, code: inviteCode });
+    const res: any = await post(`${QUEST_PATH}/api/invite/activate`, {
+      address,
+      // code: inviteCode
+    });
 
     if (res.data.is_success) {
       fetchAccessToken();
@@ -141,7 +145,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   }
   async function fetchAccessToken() {
     await getAccessToken(address);
-    setCookie('LOGIN_ACCOUNT', address);
     setCookie('AUTHED_ACCOUNT', address);
     checkAccount();
   }
@@ -267,8 +270,10 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   useEffect(() => {
     if (isBlur) return;
-    fetchTotalRewards();
-    getInviteList();
+    check(() => {
+      fetchTotalRewards();
+      getInviteList();
+    });
   }, [updater, isBlur]);
 
   const renderButton = () => {
@@ -351,18 +356,15 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   return (
     <Styles.Container>
-      <Styles.Banner className={`${platform === 'bitget' ? 'bitget' : 'coin68'}`}>
+      <Styles.Banner className={platform}>
         <Styles.Logo>
           <Styles.DapImg src="/images/marketing/dap-logo.svg" />
           <Styles.XImg src="/images/marketing/X.svg" />
-          {platform === 'bitget' ? (
-            <Styles.BgImg src="/images/marketing/bg-logo.svg" />
-          ) : (
-            <Styles.BgImg src="/images/marketing/coin68-logo.svg" />
-          )}
+
+          <Styles.BgImg src={logoMap.get(platform)} style={platform === 'namlongdao' ? { width: 180 } : {}} />
         </Styles.Logo>
         <Styles.Intro>Ready to Claim Your Exclusive Rewards?Just complete a few simple quests!</Styles.Intro>
-        <Styles.AllRewards className={`${platform === 'bitget' ? 'bitget' : 'coin68'}`}>
+        <Styles.AllRewards className={platform}>
           <Styles.AllRewardsLeft>
             <Styles.AllRewardsTitle>Your PTS</Styles.AllRewardsTitle>
             <Styles.AllRewardsPoints>
@@ -438,7 +440,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
                 ))
               : null}
           </Styles.CardBox>
-          <Styles.Title>
+          {/* <Styles.Title>
             Invite
             {!isBlur ? (
               <Styles.SubTitle>
@@ -504,7 +506,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
                 </div>
               </Styles.InviteBodyRight>
             </Styles.InviteBody>
-          </Styles.InviteBox>
+          </Styles.InviteBox> */}
         </Styles.Box>
       )}
       {tab === 'Leaderboard' && (

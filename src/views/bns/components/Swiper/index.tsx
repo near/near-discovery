@@ -9,21 +9,21 @@ const Swipper = ({ banners, bp }: { banners: { banner: string; link: string }[];
   const timerRef = useRef<any>();
   const loop = function () {
     timerRef.current = setInterval(() => {
-      setCurrent(prev => {
+      setCurrent((prev) => {
         if (prev > banners.length - 2) {
-          return 0
+          return 0;
         } else {
-          return prev + 1
+          return prev + 1;
         }
-      })
-    }, 3000)
-  }
+      });
+    }, 3000);
+  };
   useEffect(() => {
-    loop()
+    loop();
     return function () {
-      timerRef.current && clearInterval(timerRef.current)
-    }
-  }, [])
+      timerRef.current && clearInterval(timerRef.current);
+    };
+  }, []);
   return (
     <StyledContainer>
       <StyledSwiperArrowButton
@@ -34,7 +34,7 @@ const Swipper = ({ banners, bp }: { banners: { banner: string; link: string }[];
         style={{ left: '-18px' }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-          <path d="M9 1L2 8L9 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
+          <path d="M9 1L2 8L9 15" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
         </svg>
       </StyledSwiperArrowButton>
       <StyledImagesBox>
@@ -69,7 +69,7 @@ const Swipper = ({ banners, bp }: { banners: { banner: string; link: string }[];
         style={{ right: '-18px' }}
       >
         <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none">
-          <path d="M1 1L8 8L1 15" stroke="#979ABE" stroke-width="2" strokeLinecap="round" />
+          <path d="M1 1L8 8L1 15" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
         </svg>
       </StyledSwiperArrowButton>
     </StyledContainer>
