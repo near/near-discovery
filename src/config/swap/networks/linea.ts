@@ -18,7 +18,7 @@ export default {
     noAccountTips: 'Linea Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Linea Chain.',
   },
-  defalutDex: 'Lynex Fi',
+  defalutDex: 'HorizonDEX',
   dexs: {
     HorizonDEX: {
       ...HorizonDEXBasic,

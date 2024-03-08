@@ -418,7 +418,7 @@ export default {
   lynex: {
     type: 'swap',
     theme: {
-      '--button-color': '#dd9450',
+      '--button-color': '#E2944A',
       '--button-text-color': '#fff',
     },
   },
