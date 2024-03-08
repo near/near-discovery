@@ -4,7 +4,7 @@ import { linea } from '@/config/tokens/linea';
 const basic = {
   name: 'Lynex Fi',
   logo: '/images/apps/lynex.png',
-  amountOutFn: 'bluebiu.near/widget/PolygonZkevm.Swap.QuickSwapAmountOut',
+  amountOutFn: 'bluebiu.near/widget/Swap.Data.Lynex',
 };
 const networks = {
   59144: {
