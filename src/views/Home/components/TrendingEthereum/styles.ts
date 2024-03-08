@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const StyledContainer = styled.div`
   width: 1244px;
   margin: 120px auto 0px;
-  overflow: hidden;
 `;
 
 export const StyledHeader = styled.div`
