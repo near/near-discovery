@@ -4,7 +4,7 @@ import { linea } from '@/config/tokens/linea';
 const basic = {
   name: 'Lynex Fi',
   logo: '/images/apps/lynex.png',
-  amountOutFn: 'bluebiu.near/widget/PolygonZkevm.Swap.QuickSwapAmountOut',
+  amountOutFn: 'bluebiu.near/widget/Swap.Data.Lynex',
 };
 const networks = {
   59144: {
@@ -15,7 +15,7 @@ const networks = {
       input: linea['eth'],
       output: linea['usdt'],
     },
-    tokens: [linea['usdc'], linea['eth'], linea['weth'], linea['usdt'], linea['wsteth']],
+    tokens: [linea['usdc'], linea['eth'], linea['weth'], linea['usdt']],
   },
 };
 
