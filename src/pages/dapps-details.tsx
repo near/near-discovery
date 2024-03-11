@@ -273,92 +273,9 @@ const DappsDetailBottom = styled.div`
   padding: 0 12%;
   .tab-content {
     /* border-bottom: 1px solid #383b48; */
-    display: flex;
-    flex-wrap: wrap;
     position: relative;
     margin-bottom: 100px;
-
-    .tab-content-item {
-      margin: 30px 20px 0 0;
-      border-bottom: 1px solid rgba(38, 40, 47, 1);
-      display: flex;
-      width: 30%;
-      flex-basis: calc(33.3333% - 20px);
-      box-sizing: border-box;
-      .content-item-img {
-        margin-right: 16px;
-        width: 20%;
-        img {
-          width: 72px;
-          height: 72px;
-        }
-      }
-      .content-item-text {
-        margin-right: 16px;
-        width: 49%;
-        h1 {
-          font-size: 20px;
-          font-weight: 700;
-          color: #ffffff;
-          margin: 0;
-        }
-        p {
-          font-size: 14px;
-          color: #979abe;
-          margin: 6px 0 9px 0;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-        }
-      }
-      .content-item-btn {
-        width: 22%;
-        .item-btn-item {
-          text-decoration: none;
-          display: inline-block;
-          background: linear-gradient(0deg, rgba(55, 58, 83, 0.5), rgba(55, 58, 83, 0.5));
-          border: 1px solid #373a53;
-          font-size: 12px;
-          color: #ffffff;
-          padding: 6px 20px;
-          text-align: center;
-          align-items: center;
-          border-radius: 16px;
-          margin-bottom: 14px;
-          a {
-            color: #ffffff;
-            text-decoration: none;
-          }
-        }
-      }
-      @media (max-width: 1500px) {
-        flex-basis: calc(50% - 20px);
-        .content-item-img {
-          width: 15%;
-        }
-        .content-item-text {
-          width: 60%;
-        }
-      }
-      @media (max-width: 1400px) {
-        flex-basis: calc(50% - 20px);
-        .content-item-img {
-          width: 15%;
-        }
-        .content-item-text {
-          width: 50%;
-        }
-      }
-      @media (max-width: 1200px) {
-        flex-basis: calc(100% - 20px);
-        .content-item-img {
-          width: 15%;
-        }
-        .content-item-text {
-          width: 70%;
-        }
-      }
-    }
+    width: 100%;
   }
 `;
 

@@ -46,7 +46,6 @@ export default function useDailyTask({ onSuccess }: { onSuccess: VoidFunction })
       if (result.code !== 0) throw new Error(result.msg);
       setClaiming(false);
       toast.success({ title: 'Dapped successfully' });
-      queryTasks();
       onSuccess();
     } catch (err) {
       setClaiming(false);

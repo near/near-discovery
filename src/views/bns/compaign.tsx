@@ -34,8 +34,7 @@ import {
   StyledWrapper,
 } from './styles';
 import type { QueryNameStatusType } from './types';
-
-import useUserInfo from '@/hooks/useUserInfo';
+import { useRewardStore } from '@/stores/reward';
 import useReport from '@/views/Landing/hooks/useReport';
 import namehash from '@ensdomains/eth-ens-namehash';
 import NetworkDialog from './components/NetworkDialog';
@@ -51,7 +50,7 @@ const CampaignView = () => {
   const { chains } = useTokensAndChains();
   const { account } = useAccount();
   const [value, setValue] = useState('');
-  const { info: userInfo = {} } = useUserInfo({ updater: 1 });
+  const rewardInfo = useRewardStore((store: any) => store.reward);
   const { check } = useAuthCheck({ isNeedAk: true });
 
   const [queryNameStatus, setQueryNameStatus] = useState<QueryNameStatusType>(0);
@@ -180,7 +179,7 @@ const CampaignView = () => {
 
   return (
     <StyledWrapper style={{ paddingBottom: 120 }}>
-      <Yours info={userInfo} />
+      <Yours info={rewardInfo} />
       <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb

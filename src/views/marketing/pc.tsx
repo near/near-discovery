@@ -17,7 +17,8 @@ import { ModalPC, Tabs } from './components';
 import Leaderboard from './components/Leaderboard';
 import { logoMap } from './const';
 import useLeaderboard from './hooks/useLeaderBoard';
-import useUserInfo from './hooks/useUserInfo';
+import useUserInfo from '@/hooks/useUserInfo';
+import useUserReward from '@/hooks/useUserReward';
 import * as Styles from './pc-styles';
 interface IProps {
   from: 'bg' | 'bgUser';
@@ -56,7 +57,8 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   const [fresh, setFresh] = useState(0);
   const [updater, setUpdater] = useState(0);
   const [id, setId] = useState<string>();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: tab, updater });
+  const { userInfo, queryUserInfo } = useUserInfo();
+  const { info: userRewardInfo, getUserReward } = useUserReward();
 
   const [claimLoading, setClaimLoading] = useState(false);
 
@@ -81,6 +83,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
     onSuccess: () => {
       // onSuccess(1);
       setUpdater(Date.now());
+      queryUserInfo();
     },
     redirect_uri: redirectUri,
   });
@@ -228,6 +231,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
         setIsShowModal(true);
         setModalType('success');
         setReward(data.reward);
+        getUserReward();
         handleFresh();
       }
     } catch (error) {
@@ -518,13 +522,14 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
             info,
             maxPage,
             handlePageChange,
-            userLoading,
             userInfo,
+            userRewardInfo,
             totalReward,
             myRank: rank,
             handleRefresh: () => {
               handleRefresh();
               setUpdater(Date.now());
+              getUserReward();
             },
           }}
         />

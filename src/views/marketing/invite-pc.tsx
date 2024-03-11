@@ -14,7 +14,7 @@ import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import { ModalPC, Tabs } from './components';
-import useUserInfo from './hooks/useUserInfo';
+import useUserInfo from '@/hooks/useUserInfo';
 import * as Styles from './invite-pc-styles';
 interface IProps {
   // inviteCode?: string;
@@ -54,7 +54,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
   const [fresh, setFresh] = useState(0);
   const [updater, setUpdater] = useState(0);
   const [id, setId] = useState<string>();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, updater });
+  const { userInfo, queryUserInfo } = useUserInfo();
 
   const [claimLoading, setClaimLoading] = useState(false);
 
@@ -77,6 +77,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
     onSuccess: () => {
       // onSuccess(1);
       setUpdater(Date.now());
+      queryUserInfo();
     },
     redirect_uri: redirectUri,
   });

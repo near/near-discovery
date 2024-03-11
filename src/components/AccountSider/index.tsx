@@ -97,7 +97,7 @@ const AccountSider = () => {
   const [showChains, setShowChains] = useState(false);
   const [showCodes, setShowCodes] = useState(false);
   const [showInviteLink, setShowInviteLink] = useState(false);
-  const { list, totalRewards, reward } = useInviteList(showInviteLink);
+  const { list, totalRewards, reward } = useInviteList();
 
   useEffect(() => {
     if (layoutStore.showAccountSider && defaultTab === 'bridge') {

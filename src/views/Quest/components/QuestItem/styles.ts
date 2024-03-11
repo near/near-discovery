@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 export { StyledCoin } from '../../styles';
 
-export const StyledContainer = styled(motion.div) <{ $isCampaign?: boolean; $mt?: number }>`
+export const StyledContainer = styled(motion.div)<{ $isCampaign?: boolean; $mt?: number }>`
   border-radius: 20px;
   border: 1px solid #373a53;
   background: #2c2e3e;
@@ -58,7 +58,7 @@ export const StyledTaskName = styled.div`
   line-height: 120%;
   text-transform: capitalize;
 
-  overflow:hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   display: -webkit-box;
@@ -72,7 +72,7 @@ export const StyledTaskDesc = styled.div<{ $isCampaign?: boolean }>`
   line-height: 120%;
   margin-top: 10px;
 
-  overflow:hidden;
+  overflow: hidden;
   text-overflow: ellipsis;
   -webkit-line-clamp: 2;
   display: -webkit-box;
@@ -112,7 +112,7 @@ export const StyledLive = styled.div`
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.15);
   background: rgba(32, 34, 47, 0.8);
-  width: 53px;
+  padding: 0px 10px;
   height: 26px;
   position: absolute;
   top: 14px;
@@ -149,4 +149,4 @@ export const StyledCategoryName = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: 120%;
-`
+`;

@@ -6,7 +6,8 @@ import CompassApp from '@/views/Compass/home';
 function Compass() {
   const router = useRouter();
   if (router.query.id === '2') return <OdysseyV2 />;
-  return <CompassApp />;
+  if (router.query.id === '1') return <CompassApp />;
+  return <div />;
 }
 
 Compass.getLayout = useDefaultLayout;

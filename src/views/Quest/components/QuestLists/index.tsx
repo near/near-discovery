@@ -1,7 +1,5 @@
-import { memo } from 'react';
-
+import { memo, useMemo } from 'react';
 import Loading from '@/components/Icons/Loading';
-
 import ProcessBar from '../ProcessBar';
 import QuestItem from '../QuestItem';
 import {
@@ -15,7 +13,24 @@ import {
   StyledTitle,
 } from './styles';
 
-const QuestLists = ({ achieved, loading, quests }: any) => {
+const QuestLists = ({ loading, quests }: any) => {
+  const achieved = useMemo(() => {
+    if (!quests) return 0;
+    const questsArray = Object.values(quests);
+    if (!questsArray.length) return 0;
+    let completed = 0;
+    let total = 0;
+    questsArray.forEach((item: any) => {
+      item.forEach((slip: any) => {
+        total++;
+        if (slip.action_completed >= slip.total_action) {
+          completed++;
+        }
+      });
+    });
+    if (total === 0) return 0;
+    return Math.ceil((completed / total) * 100);
+  }, [quests]);
   return (
     <StyledContainer>
       <StyledHeader>

@@ -1,4 +1,5 @@
 import { memo } from 'react';
+
 import { ellipsAccount } from '@/utils/account';
 import {
   StyledAddress,
@@ -21,7 +22,7 @@ import {
   StyledSmallCircle,
 } from './styles';
 
-const UserInfo = ({ info, onSuccess }: any) => {
+const UserInfo = ({ info, rewardInfo }: any) => {
   return (
     <StyledContainer>
       <StyledContent>
@@ -66,11 +67,11 @@ const UserInfo = ({ info, onSuccess }: any) => {
           <StyledLabels>
             <StyledLabel>
               <StyledCoin $size={21} />
-              <span style={{ color: '#EBF479' }}>{info.reward} PTS</span>
+              <span style={{ color: '#EBF479' }}>{rewardInfo?.reward} PTS</span>
             </StyledLabel>
             <StyledLabel>
               <StyledMedal $size={22} />
-              <span>Rank #{info.rank}</span>
+              <span>Rank #{rewardInfo?.rank}</span>
             </StyledLabel>
             {/* <StyledLabel>
             <StyledSteps $size={25} />
