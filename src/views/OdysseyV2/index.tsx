@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Banner from './components/Banner';
 import Total from './components/Total';
 import Game from './components/Game';
@@ -15,14 +14,13 @@ import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 import { StyledContainer } from './styles';
 
 export default function OdysseyV2() {
-  const [updater, setUpdater] = useState(1);
   const authConfig = useAuthConfig();
   const { detail, loading, queryDetail } = useDetail();
   const { loading: questingLoading, quests } = useQuests();
-  const { info: userInfo = {} } = useUserInfo({ updater });
+  const { userInfo, queryUserInfo } = useUserInfo();
   useAuthBind({
     onSuccess: () => {
-      setUpdater(Date.now());
+      queryUserInfo();
     },
     redirect_uri: `${window.location.origin}${window.location.pathname}?id=2`,
   });

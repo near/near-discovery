@@ -15,7 +15,6 @@ import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
 
 import { ModalPC, Tabs } from './components';
 import * as Styles from './dashboard-styles';
-import useUserInfo from './hooks/useUserInfo';
 interface IProps {
   // inviteCode?: string;
   kolName: string;
@@ -44,7 +43,6 @@ const Dashboard: FC<IProps> = ({ kolName, platform }) => {
   const [fresh, setFresh] = useState(0);
   const [updater, setUpdater] = useState(0);
   const [id, setId] = useState<string>();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, updater });
 
   const [claimLoading, setClaimLoading] = useState(false);
 

@@ -4,6 +4,7 @@ import { useConnectWallet } from '@web3-onboard/react';
 import Breadcrumb from '@/components/Breadcrumb';
 import Spinner from '@/components/Spinner';
 import useUserInfo from '@/hooks/useUserInfo';
+import useUserReward from '@/hooks/useUserReward';
 import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useReport from '@/views/Landing/hooks/useReport';
 import ClaimedSuccessModal from './components/ClaimedSuccessModal';
@@ -25,10 +26,10 @@ const QuestDetailView = () => {
   const _id = searchParams.get('id');
   const id = _id?.includes('?') ? _id.split('?')[0] : _id;
   const { loading, info } = useQuestInfo(id || '');
-  const [updater, setUpdater] = useState(1);
   const { loading: categoryLoading, categories } = useCategoryList();
   const { loading: campaignLoading, campaigns } = useCampaignList();
-  const { info: userInfo = {} } = useUserInfo({ updater });
+  const { userInfo, queryUserInfo } = useUserInfo();
+  const { info: userRewardInfo, getUserReward } = useUserReward();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { recommends, handlePageChange, page, maxPage } = useRecommendList(info?.quest.quest_campaign_id, MAX, id);
 
@@ -81,10 +82,13 @@ const QuestDetailView = () => {
                 isBitGetUser={isBitGetUser}
                 claimed={info.quest.is_claimed}
                 onSuccess={() => {
-                  setUpdater(Date.now());
+                  getUserReward();
                 }}
                 onClaimed={() => {
                   setShowSuccessModal(true);
+                }}
+                onBindSuccess={() => {
+                  queryUserInfo();
                 }}
               />
             </StyledTopBox>
@@ -101,7 +105,7 @@ const QuestDetailView = () => {
           </>
         )
       )}
-      <Yours info={userInfo} />
+      <Yours info={userRewardInfo} />
     </StyledContainer>
   );
 };

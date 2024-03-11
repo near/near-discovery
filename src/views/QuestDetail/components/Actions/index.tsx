@@ -17,7 +17,6 @@ import {
   StyledTimerBox,
   StyledAward,
 } from './styles';
-import useUserInfo from '@/hooks/useUserInfo';
 
 const Actions = ({
   actions,
@@ -32,6 +31,7 @@ const Actions = ({
   claimed,
   onSuccess,
   onClaimed,
+  onBindSuccess,
 }: {
   actions: any;
   startTime: number;
@@ -45,6 +45,7 @@ const Actions = ({
   claimed: boolean;
   onSuccess: VoidFunction;
   onClaimed: VoidFunction;
+  onBindSuccess: VoidFunction;
 }) => {
   const [claimedSuccess, setClaimedSuccess] = useState(false);
   const { loading, handleClaim } = useRewardsClaim(() => {
@@ -72,7 +73,11 @@ const Actions = ({
           userInfo={userInfo}
           onSuccess={(type) => {
             if (type !== 1) setCbCompleted((prev) => prev + 1);
-            onSuccess();
+            if (type === 1) {
+              onBindSuccess();
+            } else {
+              onSuccess();
+            }
           }}
           config={config}
           isLive={isLive}

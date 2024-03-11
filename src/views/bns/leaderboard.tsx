@@ -6,7 +6,8 @@ import useQuestList from '@/views/Quest/hooks/useQuestList';
 
 import Leaderboard from '@/views/QuestLeaderboard/components/Leaderboard';
 import useLeaderboard from '@/views/QuestLeaderboard/hooks/useLeaderboard';
-import useUserInfo from '../../hooks/useUserInfo';
+import { useUserStore } from '@/stores/user';
+import useUserReward from '@/hooks/useUserReward';
 import Yours from '../Quest/components/Yours';
 import Quests from './components/Quests';
 import Swiper from './components/Swiper';
@@ -17,9 +18,9 @@ import type { Tab } from './types';
 const BnsLeaderboardView = (props: any) => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
-  const [updater, setUpdater] = useState(1);
   const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: tab, updater });
+  const userInfo = useUserStore((store: any) => store.user);
+  const { info: userRewardInfo, getUserReward } = useUserReward();
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
@@ -32,7 +33,7 @@ const BnsLeaderboardView = (props: any) => {
 
   return (
     <StyledContainer>
-      <Yours info={userInfo} />
+      <Yours info={userRewardInfo} />
       {!!banners.length && <Swiper banners={banners} bp="10015-001" />}
       <Tabs
         current={tab}
@@ -50,12 +51,12 @@ const BnsLeaderboardView = (props: any) => {
             page,
             info,
             maxPage,
-            handlePageChange,
-            userLoading,
             userInfo,
+            userRewardInfo,
+            handlePageChange,
             handleRefresh: () => {
               handleRefresh();
-              setUpdater(Date.now());
+              getUserReward();
             },
           }}
         />

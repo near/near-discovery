@@ -16,21 +16,22 @@ const Quests = ({
   quests,
   categoryLoading,
   categories,
-  userInfo,
 }: any) => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <AnimatePresence mode="wait">
       <motion.div {...container}>
         <Campaign
           onLoad={onLoad}
           loading={campaignLoading}
-          campaigns={campaigns.filter((campaign: any) => campaign.name.replace(/\s/g, '') === router.query.campaignName)}
+          campaigns={campaigns.filter(
+            (campaign: any) => campaign.name.replace(/\s/g, '') === router.query.campaignName,
+          )}
           categoryLoading={categoryLoading}
           categories={categories}
         />
         <StyledContainer>
-          <QuestLists id={id} loading={questingLoading} quests={quests} achieved={userInfo?.achieved} />
+          <QuestLists id={id} loading={questingLoading} quests={quests} />
         </StyledContainer>
       </motion.div>
     </AnimatePresence>

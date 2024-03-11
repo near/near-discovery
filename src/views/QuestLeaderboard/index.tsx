@@ -7,7 +7,8 @@ import useCategoryList from '@/views/Quest/hooks/useCategoryList';
 import useQuestList from '@/views/Quest/hooks/useQuestList';
 import Breadcrumb from '@/components/Breadcrumb';
 
-import useUserInfo from '../../hooks/useUserInfo';
+import useUserInfo from '@/hooks/useUserInfo';
+import useUserReward from '@/hooks/useUserReward';
 import Yours from '../Quest/components/Yours';
 import Leaderboard from './components/Leaderboard';
 import Quests from './components/Quests';
@@ -19,12 +20,11 @@ import type { Tab } from './types';
 import { useRouter } from 'next/router';
 
 const QuestLeaderboardView = (props: any) => {
-  const router = useRouter()
+  const router = useRouter();
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
-  const [updater, setUpdater] = useState(1);
-  const { loading, list, page, info, maxPage, handlePageChange, handleRefresh } = useLeaderboard();
-  const { loading: userLoading, info: userInfo = {} } = useUserInfo({ id, from: 'leaderboard', updater });
+  const { userInfo } = useUserInfo();
+  const { info: userRewardInfo } = useUserReward();
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
@@ -34,15 +34,18 @@ const QuestLeaderboardView = (props: any) => {
       .filter((campaign: any) => campaign.banner)
       .map((campaign) => ({ banner: campaign.banner, link: campaign.link }));
   }, [campaigns]);
-  const campaign = useMemo(() => campaigns.find(campaign => campaign.name.replace(/\s/g, '') === router.query.campaignName), [campaigns, router])
+  const campaign = useMemo(
+    () => campaigns.find((campaign) => campaign.name.replace(/\s/g, '') === router.query.campaignName),
+    [campaigns, router],
+  );
 
   const navs = useMemo(() => {
-    const array: any = [{ name: 'Quests', path: '/quest/leaderboard' }]
+    const array: any = [{ name: 'Quests', path: '/quest/leaderboard' }];
     if (campaign) {
-      array.push({ name: campaign.name, path: '/quest/leaderboard/' + campaign.name.replace(/\s/g, '') })
+      array.push({ name: campaign.name, path: '/quest/leaderboard/' + campaign.name.replace(/\s/g, '') });
     }
-    return array
-  }, [campaign])
+    return array;
+  }, [campaign]);
   return (
     <StyledWrapper>
       <DesktopNavigationTop />
@@ -59,7 +62,7 @@ const QuestLeaderboardView = (props: any) => {
         />
       )}
       <AccountSider />
-      <Yours info={userInfo} />
+      <Yours info={userRewardInfo} />
     </StyledWrapper>
   );
 };

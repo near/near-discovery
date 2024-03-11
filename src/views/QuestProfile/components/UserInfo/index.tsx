@@ -21,7 +21,7 @@ import {
   StyledSmallCircle,
 } from './styles';
 
-const UserInfo = ({ info, onSuccess }: any) => {
+const UserInfo = ({ info }: any) => {
   return (
     <StyledContainer>
       <StyledContent>
