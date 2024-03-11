@@ -1,4 +1,5 @@
 import { memo } from 'react';
+import useUserReward from '@/hooks/useUserReward';
 import { ellipsAccount } from '@/utils/account';
 import {
   StyledAddress,
@@ -22,6 +23,7 @@ import {
 } from './styles';
 
 const UserInfo = ({ info }: any) => {
+  const { info: rewardInfo } = useUserReward();
   return (
     <StyledContainer>
       <StyledContent>
@@ -66,11 +68,11 @@ const UserInfo = ({ info }: any) => {
           <StyledLabels>
             <StyledLabel>
               <StyledCoin $size={21} />
-              <span style={{ color: '#EBF479' }}>{info.reward} PTS</span>
+              <span style={{ color: '#EBF479' }}>{rewardInfo?.reward} PTS</span>
             </StyledLabel>
             <StyledLabel>
               <StyledMedal $size={22} />
-              <span>Rank #{info.rank}</span>
+              <span>Rank #{rewardInfo?.rank}</span>
             </StyledLabel>
             {/* <StyledLabel>
             <StyledSteps $size={25} />
