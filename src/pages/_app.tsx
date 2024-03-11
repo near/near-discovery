@@ -20,7 +20,7 @@ import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
-import { usePageAnalytics } from '@/hooks/usePageAnalytics';
+import { usePageAnalytics, recordHandledError } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics, setReferrer } from '@/utils/analytics';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
@@ -53,6 +53,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     const isFirebaseError = router.query.reason && referred_from_wallet;
     const description = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
     if (isFirebaseError) {
+      recordHandledError({ description });
       openToast({
         title: 'An Error Occurred During Fast Authentication',
         type: 'WARNING',
