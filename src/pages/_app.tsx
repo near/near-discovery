@@ -12,7 +12,6 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { Toaster, openToast } from '@/components/lib/Toast';
@@ -51,13 +50,13 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     const referred_from_wallet = document.referrer.indexOf('https://wallet.near.org/') !== -1;
     const isFirebaseError = router.query.reason && referred_from_wallet;
-    const description = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
+    const msg = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
     if (isFirebaseError) {
-      recordHandledError({ description });
+      recordHandledError({ description: msg || 'unknown error during Fast Authentication' });
       openToast({
         title: 'An Error Occurred During Fast Authentication',
         type: 'WARNING',
-        description,
+        description: msg || '',
         duration: 5000,
       });
     }
