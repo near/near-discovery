@@ -9,6 +9,8 @@ export default function useRewardsClaim(onSuccess?: VoidFunction) {
   const toast = useToast();
 
   const handleClaim = useCallback(async () => {
+    onSuccess?.();
+    return;
     if (loading) return;
     setLoading(true);
     const toastId = toast.loading({

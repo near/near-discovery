@@ -8,7 +8,7 @@ import useQuestList from '@/views/Quest/hooks/useQuestList';
 import Breadcrumb from '@/components/Breadcrumb';
 
 import useUserInfo from '@/hooks/useUserInfo';
-import useUserReward from '@/hooks/useUserReward';
+import { useRewardStore } from '@/stores/reward';
 import Yours from '../Quest/components/Yours';
 import Leaderboard from './components/Leaderboard';
 import Quests from './components/Quests';
@@ -24,7 +24,7 @@ const QuestLeaderboardView = (props: any) => {
   const [tab, setTab] = useState<Tab>('quests');
   const [id, setId] = useState<string>();
   const { userInfo } = useUserInfo();
-  const { info: userRewardInfo } = useUserReward();
+  const rewardInfo = useRewardStore((store: any) => store.reward);
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
@@ -62,7 +62,7 @@ const QuestLeaderboardView = (props: any) => {
         />
       )}
       <AccountSider />
-      <Yours info={userRewardInfo} />
+      <Yours info={rewardInfo} />
     </StyledWrapper>
   );
 };

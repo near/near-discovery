@@ -1,7 +1,7 @@
 import { memo, useState } from 'react';
 
 import Breadcrumb from '@/components/Breadcrumb';
-import useUserReward from '@/hooks/useUserReward';
+import { useRewardStore } from '@/stores/reward';
 
 import Campaign from './components/Campaign';
 import QuestLists from './components/QuestLists';
@@ -14,7 +14,7 @@ import { StyledContainer } from './styles';
 const QuestView = () => {
   const [id, setId] = useState<string>();
   const { loading, campaigns } = useCampaignList();
-  const { info: userRewardInfo } = useUserReward();
+  const rewardInfo = useRewardStore((store: any) => store.reward);
   const { loading: questingLoading, quests } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
   return (
@@ -30,7 +30,7 @@ const QuestView = () => {
         categories={categories}
       />
       <QuestLists id={id} loading={questingLoading} quests={quests} />
-      <Yours info={userRewardInfo} />
+      <Yours info={rewardInfo} />
     </StyledContainer>
   );
 };

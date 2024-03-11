@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
 import useAuthCheck from '@/hooks/useAuthCheck';
+import { useRewardStore } from '@/stores/reward';
 import { get } from '@/utils/http';
 
 export default function useUserReward() {
-  const [info, setInfo] = useState<any>();
   const [loading, setLoading] = useState(false);
   const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
+  const rewardStore: any = useRewardStore();
 
   const queryUserReward = useCallback(async () => {
     if (loading) return;
@@ -13,7 +14,7 @@ export default function useUserReward() {
     try {
       const result = await get(`/api/user/reward`);
       const data = result.data || {};
-      setInfo(data);
+      rewardStore.set({ reward: data });
       setLoading(false);
     } catch (err) {
       setLoading(false);
@@ -30,5 +31,5 @@ export default function useUserReward() {
     getUserReward();
   }, []);
 
-  return { loading, info, getUserReward };
+  return { loading, info: rewardStore.reward, getUserReward };
 }
