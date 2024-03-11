@@ -5,7 +5,6 @@ import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
-import { openToast } from '@/components/lib/Toast';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
@@ -13,7 +12,6 @@ import { network } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
-import { recordHandledError } from '@/utils/analytics';
 
 const ErrorText = styled.p`
   color: hsla(8, 100%, 33%, 1);

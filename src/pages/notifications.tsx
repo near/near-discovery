@@ -4,10 +4,10 @@ import { useIosDevice } from '@/hooks/useIosDevice';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import {
-  manageNotification,
   handleOnCancel,
   handleOnCancelBanner,
   handleTurnOn,
+  manageNotification,
   recommendedIosVersionForNotifications,
 } from '@/utils/notifications';
 import {

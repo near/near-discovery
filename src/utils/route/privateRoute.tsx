@@ -1,6 +1,7 @@
-import { useAuthStore } from '@/stores/auth';
 import type { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
+
+import { useAuthStore } from '@/stores/auth';
 
 const privateRoute = (Component: NextComponentType) => {
   const Private = (props: any) => {
