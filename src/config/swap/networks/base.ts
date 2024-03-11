@@ -7,6 +7,7 @@ import { basic as sharkBasic, networks as sharkNetworks } from '../dapps/shark-s
 import { basic as aerodromeBasic, networks as aerodromeNetworks } from '../dapps/aerodrome';
 import { basic as sobalBasic, networks as sobalNetworks } from '../dapps/sobal';
 import { basic as velocimeterV2Basic, networks as velocimeterV2Networks } from '../dapps/velocimeter-v2';
+import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
 
 const CHAIN_ID = 8453;
 
@@ -56,6 +57,10 @@ export default {
     'Velocimeter V2': {
       ...velocimeterV2Basic,
       ...velocimeterV2Networks[CHAIN_ID],
+    },
+    SushiSwap: {
+      ...sushiBasic,
+      ...sushiNetworks[CHAIN_ID],
     },
   },
 };
