@@ -12,9 +12,10 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-import { Toaster } from '@/components/lib/Toast';
+
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { Toaster, openToast } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
@@ -46,6 +47,20 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
   const cookieData = useCookiePreferences();
   const components = useBosComponents();
+
+  useEffect(() => {
+    const referred_from_wallet = document.referrer.indexOf('https://wallet.near.org/') !== -1;
+    const isFirebaseError = router.query.reason && referred_from_wallet;
+    const description = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
+    if (isFirebaseError) {
+      openToast({
+        title: 'An Error Occurred During Fast Authentication',
+        type: 'WARNING',
+        description,
+        duration: 5000,
+      });
+    }
+  }, [router.query]);
 
   useEffect(() => {
     // this check is needed to init localStorage for notifications after user signs in
