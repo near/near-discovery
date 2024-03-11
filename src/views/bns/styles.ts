@@ -219,6 +219,9 @@ export const StyledWrapper = styled.div`
   --onboarding-color: #787dff;
   --social-color: #aad6ff;
   --engage-color: #f4ca79;
+  .swiper {
+    overflow: hidden;
+  }
 `;
 
 export const StyledWidthFull = styled.div`
