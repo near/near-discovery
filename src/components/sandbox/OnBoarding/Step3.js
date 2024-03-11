@@ -78,7 +78,7 @@ export default function Step3() {
       </CodeEx>
       <div className="buttons">
         <button onClick={() => copy(codeExample)}>
-          <Image src={CopyIcon} /> Copy to Clipboard
+          <Image src={CopyIcon} alt="" /> Copy to Clipboard
         </button>
       </div>
     </Wrapper>

@@ -1,9 +1,8 @@
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import type { NextPageWithLayout } from '@/utils/types';
-
 import { fetchEventsList } from '@/utils/events';
+import type { NextPageWithLayout } from '@/utils/types';
 
 const EventsPage: NextPageWithLayout = () => {
   const components = useBosComponents();

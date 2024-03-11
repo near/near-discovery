@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
 
 import { useBosLoaderStore } from '@/stores/bos-loader';
+import { recordHandledError } from '@/utils/analytics';
 
 import { useFlags } from './useFlags';
-import { recordHandledError } from '@/utils/analytics';
 
 export function useBosLoaderInitializer() {
   const [flags] = useFlags();

@@ -48,12 +48,12 @@ const finiteRoutes: Record<string, string> = {
 import IframeResizer from 'iframe-resizer-react';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
-import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
-import { useDefaultLayout } from '@/hooks/useLayout';
-import { useCookiePreferences } from '@/hooks/useCookiePreferences';
-import { useBosComponents } from '@/hooks/useBosComponents';
-import type { NextPageWithLayout } from '@/utils/types';
 import { VmComponent } from '@/components/vm/VmComponent';
+import { useBosComponents } from '@/hooks/useBosComponents';
+import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
+import { useCookiePreferences } from '@/hooks/useCookiePreferences';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import type { NextPageWithLayout } from '@/utils/types';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
