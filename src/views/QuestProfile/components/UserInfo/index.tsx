@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import useUserReward from '@/hooks/useUserReward';
+
 import { ellipsAccount } from '@/utils/account';
 import {
   StyledAddress,
@@ -22,8 +22,7 @@ import {
   StyledSmallCircle,
 } from './styles';
 
-const UserInfo = ({ info }: any) => {
-  const { info: rewardInfo } = useUserReward();
+const UserInfo = ({ info, rewardInfo }: any) => {
   return (
     <StyledContainer>
       <StyledContent>

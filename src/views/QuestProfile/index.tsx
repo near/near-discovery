@@ -4,6 +4,7 @@ import useReport from '@/views/Landing/hooks/useReport';
 import { useDebounceFn } from 'ahooks';
 import useAccount from '@/hooks/useAccount';
 import useUserInfo from '@/hooks/useUserInfo';
+import useUserReward from '@/hooks/useUserReward';
 import DailyTask from './components/DailyTask';
 import Favorites from './components/Favorites';
 import InviteCodePanel from './components/InviteCode';
@@ -26,10 +27,11 @@ const QuestProfileView = () => {
   }
   const { account } = useAccount();
   const [tab, setTab] = useState<Tab>(initTab);
-  const [updater, setUpdater] = useState(Date.now());
+  const [updater, setUpdater] = useState(1);
   const [openCodes, setOpenCodes] = useState(false);
   const { list, totalRewards, reward } = useInviteList();
   const { userInfo } = useUserInfo();
+  const { info: rewardInfo, getUserReward } = useUserReward();
   const isMounted = useRef(false);
 
   const { handleReport } = useReport();
@@ -51,11 +53,15 @@ const QuestProfileView = () => {
     isMounted.current = true;
   }, []);
 
+  useEffect(() => {
+    if (updater !== 1) getUserReward();
+  }, [updater]);
+
   return (
     <>
       <StyledContainer>
         <StyledPanelWrapper>
-          <UserInfo info={userInfo} />
+          <UserInfo info={userInfo} rewardInfo={rewardInfo} />
           <InviteCodePanel
             onInviteCodeClick={() => {
               handleReport('invite');
@@ -67,6 +73,7 @@ const QuestProfileView = () => {
           />
           <DailyTask
             onSuccess={() => {
+              getUserReward();
               setUpdater(Date.now());
             }}
             key={updater}
