@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { QUEST_PATH } from '@/config/quest';
 import { useUserStore } from '@/stores/user';
 import { checkAddressIsInvited, getAccessToken, inviteCodeActivate } from '@/apis';
-import { get } from '@/utils/http';
+import { get, AUTH_TOKENS } from '@/utils/http';
 
 export default function useInititalDataWithAuth() {
   const setUserInfo = useUserStore((store: any) => store.set);
@@ -16,6 +16,7 @@ export default function useInititalDataWithAuth() {
   }, []);
 
   const getInitialDataWithAuth = async (address?: string) => {
+    window.localStorage.setItem(AUTH_TOKENS, '{}');
     if (address) {
       const checked = await checkAddressIsInvited(address);
       if (!checked) {

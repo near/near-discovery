@@ -19,14 +19,17 @@ const QuestLists = ({ loading, quests }: any) => {
     const questsArray = Object.values(quests);
     if (!questsArray.length) return 0;
     let completed = 0;
+    let total = 0;
     questsArray.forEach((item: any) => {
       item.forEach((slip: any) => {
+        total++;
         if (slip.action_completed >= slip.total_action) {
           completed++;
         }
       });
     });
-    return Math.ceil((completed / questsArray.length) * 100);
+    if (total === 0) return 0;
+    return Math.ceil((completed / total) * 100);
   }, [quests]);
   return (
     <StyledContainer>
