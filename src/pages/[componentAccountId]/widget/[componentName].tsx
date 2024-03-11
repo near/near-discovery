@@ -4,11 +4,11 @@ import { useEffect, useState } from 'react';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useDefaultLayout } from '@/hooks/useLayout';
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { privacyDomainName, termsDomainName } from '@/utils/config';
