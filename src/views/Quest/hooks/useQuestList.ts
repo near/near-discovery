@@ -1,11 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-
+import useAuthCheck from '@/hooks/useAuthCheck';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
 export default function useQuestList(campaign_id?: string) {
   const [quests, setQuests] = useState<any>({});
   const [loading, setLoading] = useState(false);
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
 
   const queryQuests = useCallback(async () => {
     if (loading) return;
@@ -29,7 +30,7 @@ export default function useQuestList(campaign_id?: string) {
   }, [loading, campaign_id]);
 
   useEffect(() => {
-    if (campaign_id) queryQuests();
+    if (campaign_id) check(queryQuests);
   }, [campaign_id]);
 
   return { loading, quests };
