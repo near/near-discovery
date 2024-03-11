@@ -86,6 +86,7 @@ const QuestDetailView = () => {
                 }}
                 onClaimed={() => {
                   setShowSuccessModal(true);
+                  getUserReward();
                 }}
                 onBindSuccess={() => {
                   queryUserInfo();
