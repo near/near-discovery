@@ -8,6 +8,7 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
+import { recordHandledError } from '@/utils/analytics';
 
 import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
@@ -59,7 +60,6 @@ import {
 } from './utils/onboarding';
 import Welcome from './Welcome';
 import MainLoader from './Welcome/MainLoader';
-import { recordHandledError } from '@/utils/analytics';
 
 export const Sandbox = ({ onboarding = false }) => {
   const near = useVmStore((store) => store.near);

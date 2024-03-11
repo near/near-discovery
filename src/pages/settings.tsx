@@ -12,8 +12,8 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
-import type { NextPageWithLayout } from '@/utils/types';
 import { recordHandledError } from '@/utils/analytics';
+import type { NextPageWithLayout } from '@/utils/types';
 
 const SettingsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
