@@ -19,7 +19,7 @@ export default {
     noAccountTips: 'Scroll Dex Collection',
     wrongNetworkTips: 'To proceed, kindly switch to Scroll Chain.',
   },
-  defalutDex: 'DODO',
+  defalutDex: 'Metavault V3',
   dexs: {
     'Metavault V3': {
       ...metavaultV3Basic,

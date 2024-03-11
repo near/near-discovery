@@ -28,7 +28,7 @@ const QuestProfileView = () => {
   const [tab, setTab] = useState<Tab>(initTab);
   const [updater, setUpdater] = useState(Date.now());
   const [openCodes, setOpenCodes] = useState(false);
-  const { list, totalRewards, reward } = useInviteList(true);
+  const { list, totalRewards, reward } = useInviteList();
   const { userInfo } = useUserInfo();
   const isMounted = useRef(false);
 

@@ -401,6 +401,7 @@ const BlockchainsColumn: NextPageWithLayout = () => {
                         data-bp="10012-005"
                         href={advertise?.ad_link}
                         className="blockchains-conetent-item conetent-item-img"
+                        target="_blank"
                       >
                         <img src={advertise?.ad_images} alt="" />
                       </Link>
