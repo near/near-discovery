@@ -89,14 +89,13 @@ const InviteFirendsModal = ({
   onClose: VoidFunction;
 }) => {
   const userInfo = useUserStore((store: any) => store.user);
-  const { getUserReward } = useUserReward();
+  const { queryUserReward } = useUserReward();
   const { copy } = useCopy();
   const [claimableRewards, setClaimableRewards] = useState(totalRewards);
   const { loading: claiming, handleClaim } = useRewardsClaim(() => {
+    queryUserReward();
     setClaimableRewards(0);
-    getUserReward();
   });
-  const activeCodes = useMemo(() => list.filter((code: any) => code.status === 'Active'), [list]);
   const link = useMemo(
     () => location.origin + (userInfo?.is_kol ? `/invite/${userInfo?.kol_name}` : `/referral/${userInfo?.invite_code}`),
     [userInfo],
@@ -298,8 +297,8 @@ const InviteFirendsModal = ({
             </StyledTableHeader>
             <StyledBody>
               {list.length > 0 ? (
-                list.map((row: any) => (
-                  <StyledRow key={row.code}>
+                list.map((row: any, i: number) => (
+                  <StyledRow key={row.invited_user?.address || i}>
                     {COLUMNS.map((column) => (
                       <StyledCell key={column.key} $width={column.width} $gap={column.gap} $align={column.align}>
                         {column.key === 'friend' && <Friend {...row.invited_user} />}

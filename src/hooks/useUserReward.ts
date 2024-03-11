@@ -31,5 +31,5 @@ export default function useUserReward() {
     getUserReward();
   }, []);
 
-  return { loading, info: rewardStore.reward, getUserReward };
+  return { loading, info: rewardStore.reward, getUserReward, queryUserReward };
 }
