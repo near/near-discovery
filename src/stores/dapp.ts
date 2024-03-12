@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import { createJSONStorage,persist } from 'zustand/middleware';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
 export const useDappStore = create(
   persist(
     (set, get: any) => ({
-      dapp: {},
+      dapp: null,
       set: (params: any) => set(() => ({ ...params })),
     }),
     {
