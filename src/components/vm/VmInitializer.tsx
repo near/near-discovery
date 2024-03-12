@@ -4,10 +4,10 @@ import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
+import { setupMintbaseWallet } from '@near-wallet-selector/mintbase-wallet';
 import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
-import { setupMintbaseWallet } from '@near-wallet-selector/mintbase-wallet';
 import { setupNearMobileWallet } from '@near-wallet-selector/near-mobile-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
 import { setupNightly } from '@near-wallet-selector/nightly';
@@ -37,11 +37,11 @@ import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
 import {
+  cookiePreferences,
   optOut,
   recordHandledError,
   recordWalletConnect,
   reset as resetAnalytics,
-  cookiePreferences,
 } from '@/utils/analytics';
 import {
   commitModalBypassAuthorIds,

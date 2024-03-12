@@ -1,10 +1,9 @@
 import { MetaTags } from '@/components/MetaTags';
-
+import { VmComponent } from '@/components/vm/VmComponent';
+import { useBosComponents } from '@/hooks/useBosComponents';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-import { VmComponent } from '@/components/vm/VmComponent';
-import { useBosComponents } from '@/hooks/useBosComponents';
 
 const CookiesOverviewPage: NextPageWithLayout = () => {
   useClearCurrentComponent();
