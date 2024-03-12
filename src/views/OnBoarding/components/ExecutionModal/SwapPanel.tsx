@@ -155,6 +155,7 @@ const SwapPanel = ({ chainId, onLoad, defaultDapp, defaultAmount }: any) => {
             chainIdNotSupport: network.chainId !== Number(connectedChain?.id),
             onSwitchChain: setChain,
             switchingChain: settingChain,
+            account,
           }}
         />
         <VmComponent
