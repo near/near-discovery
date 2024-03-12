@@ -60,12 +60,12 @@ const nextConfig = {
       { //TODO - remove in Q2 2024
         source: '/files/:slug',
         destination: 'https://discovery-domain.org/papers/:slug.pdf',
-        permanent: true, 
+        permanent: false, 
       },
       {
         source: '/papers/:slug',
         destination: 'https://discovery-domain.org/papers/:slug.pdf',
-        permanent: true,
+        permanent: false,
       },
       {
         source: '/ethdenver',
