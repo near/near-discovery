@@ -50,7 +50,7 @@ export default {
       ...xfaiBasic,
       ...xfaiNetworks[CHAIN_ID],
     },
-    'Lynex Fi': {
+    Lynex: {
       ...lynexBasic,
       ...lynexNetworks[CHAIN_ID],
     },
