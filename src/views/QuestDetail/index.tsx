@@ -29,7 +29,7 @@ const QuestDetailView = () => {
   const { loading: categoryLoading, categories } = useCategoryList();
   const { loading: campaignLoading, campaigns } = useCampaignList();
   const { userInfo, queryUserInfo } = useUserInfo();
-  const { info: userRewardInfo, getUserReward } = useUserReward();
+  const { info: userRewardInfo, queryUserReward } = useUserReward();
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const { recommends, handlePageChange, page, maxPage } = useRecommendList(info?.quest.quest_campaign_id, MAX, id);
 
@@ -82,11 +82,11 @@ const QuestDetailView = () => {
                 isBitGetUser={isBitGetUser}
                 claimed={info.quest.is_claimed}
                 onSuccess={() => {
-                  getUserReward();
+                  queryUserReward();
                 }}
                 onClaimed={() => {
                   setShowSuccessModal(true);
-                  getUserReward();
+                  queryUserReward();
                 }}
                 onBindSuccess={() => {
                   queryUserInfo();

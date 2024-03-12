@@ -2,7 +2,6 @@ import { memo, useRef } from 'react';
 
 import QuestItem from '@/views/Quest/components/QuestItem';
 import { formatPeriodDate } from '@/views/Quest/helpers';
-import useLike from '@/views/Quest/hooks/useLike';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import useQuestList from '../../hooks/useQuestList';
 import Timer from '../Timer';
@@ -50,7 +49,6 @@ const iconExploreRight = (
 );
 const Campaign = ({ campaign, categories, bp }: { campaign: any; categories: any; bp?: string }) => {
   const router = useRouter();
-  const { like, handleLike } = useLike(campaign.id, 'quest_campaign');
   const handleClickExplore = function (event: any) {
     event.stopPropagation();
     router.push('/quest/leaderboard/' + campaign.name.replace(/\s/g, ''));

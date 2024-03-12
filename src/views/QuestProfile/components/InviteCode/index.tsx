@@ -1,21 +1,8 @@
-import { memo, useMemo } from 'react';
+import { memo } from 'react';
 import InviteCode from './InviteCode';
-import {
-  JoinedAccount,
-  JoinedAccounts,
-  StyledButton,
-  StyledPanel,
-  StyledPanelWrapper,
-  StyledPanelContent,
-  StyledPanelFriends,
-  StyledPanelFriendsTitle,
-  StyledPanelHeader,
-  StyledFriendsNum,
-} from './styles';
+import { StyledPanel, StyledPanelWrapper, StyledPanelHeader } from './styles';
 
-const InviteCodePanel = ({ onInviteCodeClick, total, list }: any) => {
-  const activeList = useMemo(() => list.filter((item: any) => item.status === 'Active'), [list]);
-  const pendingList = useMemo(() => list.filter((item: any) => item.status === 'Pending'), [list]);
+const InviteCodePanel = ({ onInviteCodeClick, total }: any) => {
   return (
     <StyledPanelWrapper>
       <StyledPanel style={{ padding: '18px 9px 8px' }}>

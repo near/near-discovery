@@ -58,7 +58,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
   const [updater, setUpdater] = useState(0);
   const [id, setId] = useState<string>();
   const { userInfo, queryUserInfo } = useUserInfo();
-  const { info: userRewardInfo, getUserReward } = useUserReward();
+  const { info: userRewardInfo, queryUserReward } = useUserReward();
 
   const [claimLoading, setClaimLoading] = useState(false);
 
@@ -231,7 +231,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
         setIsShowModal(true);
         setModalType('success');
         setReward(data.reward);
-        getUserReward();
+        queryUserReward();
         handleFresh();
       }
     } catch (error) {
@@ -529,7 +529,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
             handleRefresh: () => {
               handleRefresh();
               setUpdater(Date.now());
-              getUserReward();
+              queryUserReward();
             },
           }}
         />

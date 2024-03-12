@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from 'react';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import { QUEST_PATH } from '@/config/quest';
 import useToast from '@/hooks/useToast';
+import { useUserStore } from '@/stores/user';
 import { get, post } from '@/utils/http';
 
 export default function useDailyTask({ onSuccess }: { onSuccess: VoidFunction }) {
@@ -9,6 +10,7 @@ export default function useDailyTask({ onSuccess }: { onSuccess: VoidFunction })
   const [loading, setLoading] = useState(false);
   const [claiming, setClaiming] = useState(false);
   const [currentDay, setCurrentDay] = useState<any>({});
+  const userInfo = useUserStore((store: any) => store.user);
   const [consecutiveDays, setConsecutiveDays] = useState(0);
   const toast = useToast();
   const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
@@ -54,8 +56,8 @@ export default function useDailyTask({ onSuccess }: { onSuccess: VoidFunction })
   }, [claiming, tasks]);
 
   useEffect(() => {
-    check(queryTasks);
-  }, []);
+    if (userInfo?.address) check(queryTasks);
+  }, [userInfo]);
 
-  return { loading, tasks, consecutiveDays, claiming, currentDay, claim };
+  return { loading, tasks, consecutiveDays, claiming, currentDay, claim, queryTasks };
 }

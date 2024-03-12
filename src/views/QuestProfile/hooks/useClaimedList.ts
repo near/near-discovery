@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-
+import { useUserStore } from '@/stores/user';
 import { QUEST_PATH } from '@/config/quest';
 import { get } from '@/utils/http';
 
@@ -8,6 +8,7 @@ export default function useClaimedList() {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [maxPage, setMaxPage] = useState(1);
+  const userInfo = useUserStore((store: any) => store.user);
 
   const queryList = useCallback(
     async (_page?: number) => {
@@ -36,8 +37,9 @@ export default function useClaimedList() {
   );
 
   useEffect(() => {
+    if (!userInfo?.address) return;
     queryList();
-  }, []);
+  }, [userInfo]);
 
   return { loading, list, page, maxPage, handlePageChange };
 }

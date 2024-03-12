@@ -8,15 +8,16 @@ import QuestLists from './components/QuestLists';
 import Yours from './components/Yours';
 import useCampaignList from './hooks/useCampaignList';
 import useCategoryList from './hooks/useCategoryList';
-import useQuestList from './hooks/useQuestList';
+import useQuestList from '@/views/bns/hooks/useQuestList';
 import { StyledContainer } from './styles';
 
 const QuestView = () => {
   const [id, setId] = useState<string>();
   const { loading, campaigns } = useCampaignList();
   const rewardInfo = useRewardStore((store: any) => store.reward);
-  const { loading: questingLoading, quests } = useQuestList(id);
+  const { loading: questingLoading, questList } = useQuestList(id);
   const { loading: categoryLoading, categories } = useCategoryList();
+
   return (
     <StyledContainer>
       <Breadcrumb navs={[{ name: 'Quests Campaign', path: '/quest' }]} />
@@ -29,7 +30,7 @@ const QuestView = () => {
         categoryLoading={categoryLoading}
         categories={categories}
       />
-      <QuestLists id={id} loading={questingLoading} quests={quests} />
+      <QuestLists id={id} loading={questingLoading} quests={questList} />
       <Yours info={rewardInfo} />
     </StyledContainer>
   );

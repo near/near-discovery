@@ -1,12 +1,17 @@
 import { get } from '@/utils/http';
 import { cloneDeep } from 'lodash';
 import { useCallback, useEffect, useState } from 'react';
+import { useDebounceFn } from 'ahooks';
+import useAccount from '@/hooks/useAccount';
+import useAuthCheck from '@/hooks/useAuthCheck';
 
 const defaultQuests: any = { social: [], bridge: [], swap: [], lending: [] };
 
 export default function useQuests() {
-  const [quests, setQuests] = useState(defaultQuests);
+  const [quests, setQuests] = useState(null);
   const [loading, setLoading] = useState(true);
+  const { account } = useAccount();
+  const { check } = useAuthCheck({ isNeedAk: true, isQuiet: true });
 
   const queryQuests = useCallback(async () => {
     try {
@@ -39,9 +44,20 @@ export default function useQuests() {
     }
   }, []);
 
-  useEffect(() => {
-    queryQuests();
-  }, []);
+  const { run } = useDebounceFn(
+    () => {
+      if (!account) {
+        queryQuests();
+        return;
+      }
+      check(queryQuests);
+    },
+    { wait: quests ? 800 : 3000 },
+  );
 
-  return { loading, quests };
+  useEffect(() => {
+    run();
+  }, [account]);
+
+  return { loading, quests: quests || defaultQuests };
 }
