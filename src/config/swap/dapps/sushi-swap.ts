@@ -150,7 +150,7 @@ const networks = {
       input: base['eth'],
       output: base['dai'],
     },
-    tokens: [base['eth'], base['weth'], base['dai'], base['usdc'], base['usdbc'], base['axlusdc'], base['']],
+    tokens: [base['eth'], base['weth'], base['dai'], base['usdc'], base['usdbc'], base['axlusdc']],
   },
 };
 
