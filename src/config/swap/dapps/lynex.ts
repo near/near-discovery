@@ -2,7 +2,7 @@ import multicall from '@/config/contract/multicall';
 import { linea } from '@/config/tokens/linea';
 
 const basic = {
-  name: 'Lynex Fi',
+  name: 'Lynex',
   logo: '/images/apps/lynex.png',
   amountOutFn: 'bluebiu.near/widget/Swap.Data.Lynex',
 };

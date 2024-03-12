@@ -1,14 +1,16 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 
-type RewardState = {
-  reward: { [key: string]: string };
-};
-
-type RewardStore = RewardState & {
-  set: (update: RewardState) => void;
-};
-
-export const useRewardStore = create<RewardStore>((set) => ({
-  reward: {},
-  set: (params) => set(() => ({ ...params })),
-}));
+export const useRewardStore = create(
+  persist(
+    (set, get: any) => ({
+      reward: {},
+      set: (params: any) => set(() => ({ ...params })),
+    }),
+    {
+      name: '_reward',
+      version: 0.1,
+      storage: createJSONStorage(() => sessionStorage),
+    },
+  ),
+);

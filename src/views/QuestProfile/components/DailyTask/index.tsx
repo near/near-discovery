@@ -23,7 +23,12 @@ import {
 } from './styles';
 
 const DailyTask = ({ onSuccess }: { onSuccess: VoidFunction }) => {
-  const { loading, tasks, claiming, consecutiveDays, currentDay, claim } = useDailyTask({ onSuccess });
+  const { loading, tasks, claiming, consecutiveDays, currentDay, claim, queryTasks } = useDailyTask({
+    onSuccess() {
+      onSuccess();
+      queryTasks();
+    },
+  });
 
   return (
     <StyledPanel style={{ width: '50%' }}>

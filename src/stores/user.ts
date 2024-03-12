@@ -5,6 +5,7 @@ export const useUserStore = create(
   persist(
     (set, get: any) => ({
       user: {},
+      invite: {},
       set: (params: any) => set(() => ({ ...params })),
     }),
     {

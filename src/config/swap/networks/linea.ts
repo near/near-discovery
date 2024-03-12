@@ -6,6 +6,7 @@ import { basic as metavaultV3Basic, networks as metavaultV3Networks } from '../d
 import { basic as pancakeSwapBasic, networks as pancakeSwapNetworks } from '../dapps/pancake-swap';
 import { basic as xfaiBasic, networks as xfaiNetworks } from '../dapps/xfai';
 import { basic as lynexBasic, networks as lynexNetworks } from '../dapps/lynex';
+import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
 import chains from '../../chains';
 
 const CHAIN_ID = 59144;
@@ -49,9 +50,13 @@ export default {
       ...xfaiBasic,
       ...xfaiNetworks[CHAIN_ID],
     },
-    'Lynex Fi': {
+    Lynex: {
       ...lynexBasic,
       ...lynexNetworks[CHAIN_ID],
+    },
+    SushiSwap: {
+      ...sushiBasic,
+      ...sushiNetworks[CHAIN_ID],
     },
   },
 };

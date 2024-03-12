@@ -7,6 +7,7 @@ import swapConfig from '@/config/swap/networks';
 import lendingConfig from '@/config/lending/networks';
 import useReport from '@/views/Landing/hooks/useReport';
 import useAuthCheck from '@/hooks/useAuthCheck';
+import useAccount from '@/hooks/useAccount';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import popupsData from '@/config/all-in-one/chains';
 import useAddAction from '@/hooks/useAddAction';
@@ -194,6 +195,7 @@ const AllInOne: NextPageWithLayout = () => {
   const currentChain = popupsData[chain] || popupsData['arbitrum'];
   const [isSelectItemClicked, setIsSelectItemClicked] = useState(false);
   const [showComponent, setShowComponent] = useState(false);
+  const { account } = useAccount();
   const [{ settingChain }, setChain] = useSetChain();
   const { handleReport } = useReport();
   const prices = usePriceStore((store) => store.price);
@@ -334,6 +336,7 @@ const AllInOne: NextPageWithLayout = () => {
                   ...tabConfig,
                   prices,
                   tab,
+                  account,
                   onReset: () => {},
                   onChangeTab: (tab: string) => {
                     cachedTabsStore.setCachedTab(tab, currentChain.chainId);

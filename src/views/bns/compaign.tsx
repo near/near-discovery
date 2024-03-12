@@ -3,10 +3,8 @@ import DapXBNS from '@/assets/images/DapXBNS.svg';
 import desktop from '@/assets/images/desktop.png';
 import discountMark from '@/assets/images/discount_mark.svg';
 import iconAchieved from '@/assets/images/icon_achieved.svg';
-import AccountSider from '@/components/AccountSider';
 import Breadcrumb from '@/components/Breadcrumb';
 import useTokensAndChains from '@/components/Bridge/hooks/useTokensAndChains';
-import { DesktopNavigationTop } from '@/components/navigation/desktop/DesktopNavigationTop';
 import useAccount from '@/hooks/useAccount';
 import * as http from '@/utils/http';
 import QuestItem from '@/views/Quest/components/QuestItem';
@@ -180,7 +178,6 @@ const CampaignView = () => {
   return (
     <StyledWrapper style={{ paddingBottom: 120 }}>
       <Yours info={rewardInfo} />
-      <DesktopNavigationTop />
       <StyledContainer style={{ paddingTop: 30, paddingBottom: 19 }}>
         <Breadcrumb
           navs={[
@@ -279,7 +276,6 @@ const CampaignView = () => {
         />
       )}
       {showSwitchNetworkDialog && <SwitchNetwork chainId={8453} onClose={() => setShowSwitchNetworkDialog(false)} />}
-      <AccountSider />
     </StyledWrapper>
   );
 };
