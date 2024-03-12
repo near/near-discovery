@@ -1,8 +1,9 @@
 import Editor from '@monaco-editor/react';
 import React, { useCallback } from 'react';
 
-import { Tab } from '../utils/const';
 import { recordHandledError } from '@/utils/analytics';
+
+import { Tab } from '../utils/const';
 
 const TabProps = ({ tab, widgetProps, setWidgetProps, propsError }) => {
   const reformatProps = useCallback(

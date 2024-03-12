@@ -12,19 +12,19 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-import { Toaster } from '@/components/lib/Toast';
+import { VmComponent } from '@/components/vm/VmComponent';
+import { useBosComponents } from '@/hooks/useBosComponents';
+import { Toaster, openToast } from '@/components/lib/Toast';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
-import { useBosComponents } from '@/hooks/useBosComponents';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
-import { init as initializeAnalytics, setReferrer } from '@/utils/analytics';
+import { init as initializeAnalytics, setReferrer, recordHandledError } from '@/utils/analytics';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import { VmComponent } from '@/components/vm/VmComponent';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -46,6 +46,21 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const componentSrc = router.query;
   const cookieData = useCookiePreferences();
   const components = useBosComponents();
+
+  useEffect(() => {
+    const referred_from_wallet = document.referrer.indexOf('https://wallet.near.org/') !== -1;
+    const isFirebaseError = router.query.reason && referred_from_wallet;
+    const msg = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
+    if (isFirebaseError) {
+      recordHandledError({ description: msg || 'unknown error during Fast Authentication' });
+      openToast({
+        title: 'An Error Occurred During Fast Authentication',
+        type: 'WARNING',
+        description: msg || '',
+        duration: 5000,
+      });
+    }
+  }, [router.query]);
 
   useEffect(() => {
     // this check is needed to init localStorage for notifications after user signs in
@@ -100,11 +115,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Head>
         <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
         <link rel="icon" href="favicon.ico" />
-        <link
-          rel="canonical"
-          href={`${process.env.NEXT_PUBLIC_HOSTNAME}/near/widget/NearOrg.HomePage`}
-          key="canonical"
-        />
+        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_HOSTNAME}${router.asPath}`} key="canonical" />
         <link rel="manifest" href="manifest.json" />
       </Head>
 

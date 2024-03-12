@@ -1,3 +1,4 @@
+import { recordHandledError } from './analytics';
 import { notificationApplicationServerKey, notificationsGatewayUrl, notificationsHostName } from './config';
 import {
   isLocalStorageSupported,
@@ -16,7 +17,6 @@ import {
   setProcessSuccess,
 } from './notificationsLocalStorage';
 import type { NotificationSubscriptionData } from './types';
-import { recordHandledError } from './analytics';
 
 // min version for iOS to support notifications
 export const recommendedIosVersionForNotifications = 16.4;
