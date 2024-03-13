@@ -10,16 +10,18 @@ interface Props {
 
 const Wrapper = styled.div`
   display: flex;
+  min-width: 0;
 `;
 
 const Content = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  width: 100%;
+  flex-grow: 1;
   min-height: 100vh;
   justify-content: stretch;
   align-items: stretch;
+  min-width: 0;
 `;
 
 export function DefaultLayout({ children }: Props) {
