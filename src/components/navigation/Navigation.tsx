@@ -5,9 +5,15 @@ import { useState } from 'react';
 import { Tooltip } from '../lib/Tooltip';
 import { DiscoverDrawer } from './DiscoverDrawer';
 import NearIconSvg from './icons/near-icon.svg';
+import { MarketingDrawer } from './MarketingDrawer';
 import * as S from './styles';
+import { currentPathMatchesRoute } from './utils';
 
-type NavigationDrawer = 'discover' | 'more';
+type NavigationDrawer = 'discover' | 'marketing';
+
+// TODO:
+// - Mobile
+// - Saving collapsed preference to local storage
 
 export const Navigation = () => {
   const [_sidebarIsExpanded, setSidebarIsExpanded] = useState(true);
@@ -35,12 +41,7 @@ export const Navigation = () => {
 
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
     if (expandedDrawer) return false;
-
-    const path = router.asPath.split('?').shift() ?? '/';
-
-    const routes = typeof route === 'string' ? [route] : route;
-    const matchingRoute = exactMatch ? routes.includes(path) : routes.find((r) => path.indexOf(r) === 0);
-    return !!matchingRoute;
+    return currentPathMatchesRoute(router.asPath, route, exactMatch);
   };
 
   return (
@@ -75,6 +76,7 @@ export const Navigation = () => {
             <Tooltip content="Discover" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem
                 as="button"
+                type="button"
                 $active={isNavigationItemActive(['/applications', '/components', '/gateways'])}
                 $expanded={expandedDrawer === 'discover'}
                 $type="featured"
@@ -91,35 +93,62 @@ export const Navigation = () => {
           <S.SectionLabel>Resources</S.SectionLabel>
 
           <S.Stack>
-            <S.NavigationItem $active={false} $type="standard" href="/">
-              <i className="ph-bold ph-book-open-text" />
-              <span>Documentation</span>
-            </S.NavigationItem>
+            <Tooltip content="Documentation" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem $active={false} $type="standard" href="https://docs.near.org/" target="_blank">
+                <i className="ph-bold ph-book-open-text" />
+                <span>Documentation</span>
+              </S.NavigationItem>
+            </Tooltip>
 
-            <S.NavigationItem $active={false} $type="standard" href="/">
-              <i className="ph-bold ph-coin-vertical" />
-              <span>Earn & Contribute</span>
-            </S.NavigationItem>
+            <Tooltip content="Get Funding" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem
+                $active={isNavigationItemActive('/ecosystem/get-funding')}
+                $type="standard"
+                href="/ecosystem/get-funding"
+              >
+                <i className="ph-bold ph-coin-vertical" />
+                <span>Get Funding</span>
+              </S.NavigationItem>
+            </Tooltip>
 
-            <S.NavigationItem $active={false} $type="standard" href="/">
-              <i className="ph-bold ph-briefcase" />
-              <span>Careers</span>
-            </S.NavigationItem>
+            <Tooltip content="Careers" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem $active={false} $type="standard" href="https://careers.near.org/" target="_blank">
+                <i className="ph-bold ph-briefcase" />
+                <span>Careers</span>
+              </S.NavigationItem>
+            </Tooltip>
 
-            <S.NavigationItem $active={false} $type="standard" href="/">
-              <i className="ph-bold ph-question" />
-              <span>Support</span>
-            </S.NavigationItem>
+            <Tooltip content="Support" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem
+                $active={false}
+                $type="standard"
+                href="https://pages.near.org/about/contact-us/"
+                target="_blank"
+              >
+                <i className="ph-bold ph-question" />
+                <span>Support</span>
+              </S.NavigationItem>
+            </Tooltip>
 
-            <S.NavigationItem $active={false} $type="standard" href="/">
-              <i className="ph-bold ph-dots-three-outline-vertical" />
-              <span>More</span>
-            </S.NavigationItem>
+            <Tooltip content="More" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem
+                as="button"
+                type="button"
+                $active={false}
+                $expanded={expandedDrawer === 'marketing'}
+                $type="standard"
+                onClick={() => toggleExpandedDrawer('marketing')}
+              >
+                <i className="ph-bold ph-dots-three-outline-vertical" />
+                <span>More</span>
+              </S.NavigationItem>
+            </Tooltip>
           </S.Stack>
         </S.Section>
       </S.Sidebar>
 
       <DiscoverDrawer expanded={expandedDrawer === 'discover'} />
+      <MarketingDrawer expanded={expandedDrawer === 'marketing'} />
     </>
   );
 };

@@ -43,7 +43,7 @@ const SignMessagePage: NextPageWithLayout = () => {
   });
 
   return (
-    <Container className="container-xl">
+    <Container>
       <Text as="h1" font="text-3xl">
         Test sign message
       </Text>

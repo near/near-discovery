@@ -94,10 +94,6 @@ export const NavigationItem = styled(Link)<{
 
   &:hover {
     color: var(--sand12);
-
-    i {
-      background: var(--sand3);
-    }
   }
 
   &:focus-visible {
@@ -171,7 +167,7 @@ export const NavigationSimpleItem = styled(Link)<{
   padding: 0.625rem;
   gap: 0.5rem;
   border-radius: 4px;
-  color: var(--sand11);
+  color: var(--sand12);
   font-size: 0.875rem;
   line-height: 1.2;
   letter-spacing: 0.28px;
@@ -181,7 +177,9 @@ export const NavigationSimpleItem = styled(Link)<{
   transition: all 150ms;
 
   &:hover {
-    color: var(--sand12);
+    i {
+      color: var(--sand12);
+    }
   }
 
   &:focus-visible {
@@ -190,8 +188,9 @@ export const NavigationSimpleItem = styled(Link)<{
   }
 
   i {
-    color: currentColor;
+    color: var(--sand10);
     font-size: 1.25rem;
+    transition: all 150ms;
   }
 
   ${(p) =>
@@ -200,6 +199,10 @@ export const NavigationSimpleItem = styled(Link)<{
           font-weight: 600;
           color: var(--sand12);
           background: var(--sand4);
+
+          i {
+            color: var(--sand12);
+          }
         `
       : undefined}
 `;
@@ -227,7 +230,6 @@ export const DrawerTitle = styled.p`
   color: var(--sand12);
   font-weight: 700;
   letter-spacing: 0.3px;
-  margin: -0.1rem 0 1.22rem;
 `;
 
 export const Sidebar = styled.div<{
@@ -236,6 +238,7 @@ export const Sidebar = styled.div<{
   --sidebar-width: 257px;
   --expand-transition-speed: 300ms;
   position: sticky;
+  z-index: 1000;
   top: 0;
   left: 0;
   width: var(--sidebar-width);
@@ -278,8 +281,9 @@ export const Drawer = styled.div<{
 }>`
   --expand-transition-speed: 300ms;
   position: sticky;
+  z-index: 1000;
   top: 0;
-  left: 0;
+  left: 69px;
   width: 0;
   height: 100dvh;
   background-color: red;

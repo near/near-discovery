@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { discoverDrawerSections } from './sections';
+import { marketingDrawerSections } from './sections';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
 
@@ -8,7 +8,7 @@ type Props = {
   expanded: boolean;
 };
 
-export const DiscoverDrawer = ({ expanded }: Props) => {
+export const MarketingDrawer = ({ expanded }: Props) => {
   const router = useRouter();
 
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
@@ -18,12 +18,12 @@ export const DiscoverDrawer = ({ expanded }: Props) => {
   return (
     <S.Drawer $expanded={expanded}>
       <S.Section>
-        <S.DrawerTitle>Discover</S.DrawerTitle>
+        <S.DrawerTitle>More</S.DrawerTitle>
       </S.Section>
 
-      {discoverDrawerSections.map((section) => (
+      {marketingDrawerSections.map((section) => (
         <S.Section key={section.title}>
-          {!section.hideTitle && <S.SectionLabel>{section.title}</S.SectionLabel>}
+          <S.SectionLabel>{section.title}</S.SectionLabel>
 
           <S.Stack $gap="0.25rem">
             {section.links.map((link) => (
