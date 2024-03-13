@@ -3,7 +3,7 @@ import { cloneDeep } from 'lodash';
 import { post } from '@/utils/http';
 import useToast from '@/hooks/useToast';
 import useAudioPlay from '@/hooks/useAudioPlay';
-import { getSignature } from '../helpers';
+import { getSignature } from '@/utils/signature';
 import { AUDIO } from '../config';
 
 const LIST = [...Array(18).keys()];
