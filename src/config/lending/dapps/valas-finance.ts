@@ -19,6 +19,7 @@ const networks = {
     aaveProtocolDataProviderAddress: '0xc9704604E18982007fdEA348e8DDc7CC652E34cA',
     lendingPoolAddress: '0xE29A55A6AEFf5C8B1beedE5bCF2F0Cb3AF8F91f5',
     wethGateway: '0x3025D9f822D399FD7fB6275b5164bbdE6DC28A29',
+    rewardAddress: '0xB7c1d99069a4eb582Fc04E7e1124794000e7ecBF',
     markets: {
       [bsc['wbnb'].address]: {
         decimals: 18,
