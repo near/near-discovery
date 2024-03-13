@@ -6,15 +6,16 @@ import { memo, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKey } from '@/apis';
 import { QUEST_PATH } from '@/config/quest';
+import useAuthCheck from '@/hooks/useAuthCheck';
 import useCopy from '@/hooks/useCopy';
+import useUserInfo from '@/hooks/useUserInfo';
 import { ellipsAccount } from '@/utils/account';
 import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
 import useAuthConfig from '@/views/QuestProfile/hooks/useAuthConfig';
-import useAuthCheck from '@/hooks/useAuthCheck';
+
 import { ModalPC, Tabs } from './components';
-import useUserInfo from '@/hooks/useUserInfo';
 import * as Styles from './invite-pc-styles';
 interface IProps {
   // inviteCode?: string;
@@ -333,7 +334,7 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
   const openSource = (action: any) => {
     if (isBlur) return;
-    if (action.category === 'twitter_follow' && userInfo.twitter?.is_bind) {
+    if (action.category.startsWith('twitter') && userInfo.twitter?.is_bind) {
       sessionStorage.setItem('_clicked_twitter_' + action.id, '1');
     }
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
@@ -366,7 +367,15 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
 
     window.open(action.source, '_blank', 'width=850,height=550');
   };
-
+  const handleClickFresh = async (index: number, id: number) => {
+    setSpin2((prev) => {
+      const temp = [...prev];
+      temp[index] = !temp[index];
+      return temp;
+    });
+    await checkQuest(id);
+    handleFresh();
+  };
   const prefix = location.origin;
 
   return (
@@ -434,14 +443,14 @@ const LandingPC: FC<IProps> = ({ kolName, platform }) => {
                         src="/images/marketing/fresh.svg"
                         onClick={async (e) => {
                           if (isBlur) return;
-                          setSpin2((prev) => {
-                            const temp = [...prev];
-                            temp[index] = !temp[index];
-                            return temp;
-                          });
-                          await checkQuest(item.id);
-                          handleFresh();
                           e.stopPropagation();
+
+                          if (item.category.startsWith('twitter')) {
+                            const clicked = sessionStorage.getItem('_clicked_twitter_' + item.id);
+                            clicked && handleClickFresh(index, item.id);
+                          } else {
+                            handleClickFresh(index, item.id);
+                          }
                         }}
                       />
                     )}

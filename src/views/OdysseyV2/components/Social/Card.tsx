@@ -1,13 +1,14 @@
 import { memo, useEffect, useState } from 'react';
-import Card from '../Card';
-import ArrowIcon from '../ArrowIcon';
-import CheckIcon from '../CheckIcon';
-import RefreshIcon from '../RefreshButton';
-import CardFlip from '../CardFlip';
-import CardInput from './CardInput';
+
 import useCheck from '../../hooks/useCheck';
 import useReport from '../../hooks/useReport';
-import { StyledCardHeader, StyledCardTitle, StyledCardFooter } from './styles';
+import ArrowIcon from '../ArrowIcon';
+import Card from '../Card';
+import CardFlip from '../CardFlip';
+import CheckIcon from '../CheckIcon';
+import RefreshIcon from '../RefreshButton';
+import CardInput from './CardInput';
+import { StyledCardFooter, StyledCardHeader, StyledCardTitle } from './styles';
 
 const SocialCard = ({
   userInfo,
@@ -31,7 +32,7 @@ const SocialCard = ({
   const onItemClick = () => {
     if (category === 'password') return;
 
-    if (category === 'twitter_follow' && userInfo.twitter?.is_bind) {
+    if (category.startsWith('twitter') && userInfo.twitter?.is_bind) {
       sessionStorage.setItem('_clicked_twitter_' + id, '1');
     }
     if (category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
@@ -70,7 +71,14 @@ const SocialCard = ({
           <RefreshIcon
             onClick={(ev: any) => {
               ev.stopPropagation();
-              if (!checking) handleRefresh();
+              if (checking) return;
+
+              if (category.startsWith('twitter')) {
+                const clicked = sessionStorage.getItem('_clicked_twitter_' + id);
+                clicked && handleRefresh();
+              } else {
+                handleRefresh();
+              }
             }}
             loading={checking}
           />

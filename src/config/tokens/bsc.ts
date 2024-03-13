@@ -329,4 +329,12 @@ export const bsc: { [key: string]: Token } = {
     name: 'Venus',
     icon: '/images/tokens/xvs.svg',
   },
+  valas: {
+    chainId: CHAIN_ID,
+    address: '0xB1EbdD56729940089Ecc3aD0BBEEB12b6842ea6F',
+    decimals: 18,
+    symbol: 'VALAS',
+    name: 'Valas Finance Protocol Token',
+    icon: 'https://ipfs.near.social/ipfs/bafkreihlb7bnkmkjil6syoiznhslzyvt5xpyn3ih54ywwvlvvxti7ywbiu',
+  },
 };

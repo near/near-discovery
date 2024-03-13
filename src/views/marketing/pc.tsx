@@ -8,6 +8,8 @@ import { checkAddressIsInvited, getAccessToken, getBnsUserName, insertedAccessKe
 import { QUEST_PATH } from '@/config/quest';
 import useAuthCheck from '@/hooks/useAuthCheck';
 import useCopy from '@/hooks/useCopy';
+import useUserInfo from '@/hooks/useUserInfo';
+import useUserReward from '@/hooks/useUserReward';
 import { goHomeWithFresh } from '@/utils/activity-utils';
 import { AUTH_TOKENS, get, getWithoutActive, post } from '@/utils/http';
 import useAuthBind from '@/views/QuestProfile/hooks/useAuthBind';
@@ -17,8 +19,6 @@ import { ModalPC, Tabs } from './components';
 import Leaderboard from './components/Leaderboard';
 import { logoMap } from './const';
 import useLeaderboard from './hooks/useLeaderBoard';
-import useUserInfo from '@/hooks/useUserInfo';
-import useUserReward from '@/hooks/useUserReward';
 import * as Styles from './pc-styles';
 interface IProps {
   from: 'bg' | 'bgUser';
@@ -324,7 +324,7 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
 
   const openSource = (action: any) => {
     if (isBlur) return;
-    if (action.category === 'twitter_follow' && userInfo.twitter?.is_bind) {
+    if (action.category.startsWith('twitter') && userInfo.twitter?.is_bind) {
       sessionStorage.setItem('_clicked_twitter_' + action.id, '1');
     }
     if (action.category.startsWith('twitter') && !userInfo.twitter?.is_bind) {
@@ -354,6 +354,16 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
     //   return;
     // }
     window.open(action.source, '_blank', 'width=850,height=550');
+  };
+
+  const handleClickFresh = async (index: number, id: number) => {
+    setSpin2((prev) => {
+      const temp = [...prev];
+      temp[index] = !temp[index];
+      return temp;
+    });
+    await checkQuest(id);
+    handleFresh();
   };
 
   const prefix = location.origin;
@@ -422,15 +432,16 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
                           className={spin2[index] ? 'spin' : ''}
                           src="/images/marketing/fresh.svg"
                           onClick={async (e) => {
-                            if (isBlur) return;
-                            setSpin2((prev) => {
-                              const temp = [...prev];
-                              temp[index] = !temp[index];
-                              return temp;
-                            });
-                            await checkQuest(item.id);
-                            handleFresh();
                             e.stopPropagation();
+
+                            if (isBlur) return;
+
+                            if (item.category.startsWith('twitter')) {
+                              const clicked = sessionStorage.getItem('_clicked_twitter_' + item.id);
+                              clicked && handleClickFresh(index, item.id);
+                            } else {
+                              handleClickFresh(index, item.id);
+                            }
                           }}
                         />
                       )}
@@ -444,73 +455,6 @@ const LandingPC: FC<IProps> = ({ from, inviteCode, platform }) => {
                 ))
               : null}
           </Styles.CardBox>
-          {/* <Styles.Title>
-            Invite
-            {!isBlur ? (
-              <Styles.SubTitle>
-                <Styles.Coin src="/images/marketing/friend.svg"></Styles.Coin> + {inviteNum} PPL
-                <Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin> + {inviteNum * inviteReward} PTS
-                <Styles.Fresh
-                  className={spin3 ? 'spin' : ''}
-                  src="/images/marketing/fresh.svg"
-                  onClick={handleFreshInviteList}
-                />
-              </Styles.SubTitle>
-            ) : null}
-          </Styles.Title>
-          <Styles.InviteBox className={isBlur ? 'blur' : ''}>
-            <Styles.InviteHead>
-              <div>
-                <Styles.Text>Share your invitation link to more people and earn points</Styles.Text>
-                <Styles.Tag>
-                  <Styles.Coin src="/images/marketing/coin.svg"></Styles.Coin>
-                  +100 PTS
-                  <svg xmlns="http://www.w3.org/2000/svg" width="8" height="9" viewBox="0 0 8 9" fill="none">
-                    <path d="M7.54599 1.3187L1.18203 7.68266M7.54599 7.68266L1.18203 1.3187" stroke="#EBF479" />
-                  </svg>{' '}
-                  1 PPL
-                </Styles.Tag>
-              </div>
-              <Styles.InviteBtn onClick={handleInvite}>
-                Invite
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14" viewBox="0 0 16 14" fill="none">
-                  <path
-                    d="M9 1C9 0.447715 8.55228 0 8 0C7.44772 0 7 0.447715 7 1L9 1ZM7.29289 13.7071C7.68342 14.0976 8.31658 14.0976 8.70711 13.7071L15.0711 7.34315C15.4616 6.95262 15.4616 6.31946 15.0711 5.92893C14.6805 5.53841 14.0474 5.53841 13.6569 5.92893L8 11.5858L2.34315 5.92893C1.95262 5.53841 1.31946 5.53841 0.928932 5.92893C0.538408 6.31946 0.538408 6.95262 0.928932 7.34315L7.29289 13.7071ZM7 1L7 13H9V1L7 1Z"
-                    fill="black"
-                  />
-                </svg>
-              </Styles.InviteBtn>
-            </Styles.InviteHead>
-            <Styles.InviteBody animate={expendAnimate}>
-              <Styles.InviteBodyLeft>
-                {codeList?.length
-                  ? codeList.map((item: any, index) => (
-                      <Styles.List key={index}>
-                        <Styles.ListOrder>{index + 1}.</Styles.ListOrder>
-                        {`${prefix}/${platform}/${item?.code}`}
-                        <Styles.CopyIcon
-                          src="/images/marketing/copy.svg"
-                          onClick={() => {
-                            copy(`${prefix}/${platform}/${item?.code}`);
-                          }}
-                        ></Styles.CopyIcon>
-                      </Styles.List>
-                    ))
-                  : null}
-              </Styles.InviteBodyLeft>
-              <Styles.InviteBodyRight>
-                <Styles.InviteBodyIcon src="/images/marketing/prompts.svg"></Styles.InviteBodyIcon>
-                <div>
-                  <Styles.PromptsTitle>Prompts</Styles.PromptsTitle>
-                  <Styles.PromptsTxt>
-                    {`Please open the invitation link within PC or ${
-                      platform === 'bitget' ? 'Bitget' : 'Coin68'
-                    } Wallet browser for an enhanced experience.`}
-                  </Styles.PromptsTxt>
-                </div>
-              </Styles.InviteBodyRight>
-            </Styles.InviteBody>
-          </Styles.InviteBox> */}
         </Styles.Box>
       )}
       {tab === 'Leaderboard' && (

@@ -3,10 +3,13 @@ import { bsc } from '@/config/tokens/bsc';
 const basic = {
   name: 'Valas Finance',
   icon: 'https://ipfs.near.social/ipfs/bafkreibq6dfxzg4cmtntijp4wak2i6jytjgd5jxqluxvms3ennb7vvlf3e',
-  data: 'bluebiu.near/widget/Lending.Data.Radiant',
+  data: 'bluebiu.near/widget/Lending.Data.Valas',
   handler: 'bluebiu.near/widget/Lending.Handler.Radiant',
+  handlerClaim: 'bluebiu.near/widget/Lending.RewardClaim.Valas',
   type: 'aave2',
 };
+
+const rewardIcon = 'https://ipfs.near.social/ipfs/bafkreihlb7bnkmkjil6syoiznhslzyvt5xpyn3ih54ywwvlvvxti7ywbiu';
 
 const networks = {
   // bsc
@@ -16,6 +19,7 @@ const networks = {
     aaveProtocolDataProviderAddress: '0xc9704604E18982007fdEA348e8DDc7CC652E34cA',
     lendingPoolAddress: '0xE29A55A6AEFf5C8B1beedE5bCF2F0Cb3AF8F91f5',
     wethGateway: '0x3025D9f822D399FD7fB6275b5164bbdE6DC28A29',
+    rewardAddress: '0xB7c1d99069a4eb582Fc04E7e1124794000e7ecBF',
     markets: {
       [bsc['wbnb'].address]: {
         decimals: 18,
@@ -24,7 +28,7 @@ const networks = {
         underlyingToken: bsc['bnb'],
         stableDebtTokenAddress: '0x2Adc0c94A055f1FF64A35672D30Eb523ec647816',
         variableDebtTokenAddress: '0xE7CDC4e53915D50B74496847EeBa7233caE85CE5',
-        distributionApy: [{ supply: '0.12%', borrow: '1.24%' }],
+        distributionApy: [{ supply: '0.12%', borrow: '1.24%', icon: rewardIcon }],
         borrowApy: '36.43%',
       },
       // [bsc['busd'].address]: {
@@ -42,7 +46,7 @@ const networks = {
         underlyingToken: bsc['cake'],
         stableDebtTokenAddress: '0x0978AFdb6787779B4Eac6fEFE7E43e948F6cD6b8',
         variableDebtTokenAddress: '0xC7C7bF1F28d29cEa48F4AAAefb7E8C1FB43DB200',
-        distributionApy: [{ supply: '1.31%', borrow: '29.58%' }],
+        distributionApy: [{ supply: '1.31%', borrow: '29.58%', icon: rewardIcon }],
         borrowApy: '2.91%',
       },
       [bsc['tusd'].address]: {
@@ -52,7 +56,7 @@ const networks = {
         underlyingToken: bsc['tusd'],
         stableDebtTokenAddress: '0x8B0bFa69062315cD2063944d4d6723022B9c6E67',
         variableDebtTokenAddress: '0xaEB0AE2B4CF427E6E3ebe14b6B92f8bF2D68dfD4',
-        distributionApy: [{ supply: '10.16%', borrow: '32.55%' }],
+        distributionApy: [{ supply: '10.16%', borrow: '32.55%', icon: rewardIcon }],
         borrowApy: '54.14%',
       },
       [bsc['usdc'].address]: {
@@ -62,7 +66,7 @@ const networks = {
         underlyingToken: bsc['usdc'],
         stableDebtTokenAddress: '0xd67dF5a99512697305F121E669Dd10a1A5E6081c',
         variableDebtTokenAddress: '0x8Ef780a3e1C266aF586315a9aDA19dBfC3a1E45c',
-        distributionApy: [{ supply: '1.17%', borrow: '4.37%' }],
+        distributionApy: [{ supply: '1.17%', borrow: '4.37%', icon: rewardIcon }],
         borrowApy: '16.23%',
       },
       [bsc['usdt'].address]: {
@@ -72,7 +76,7 @@ const networks = {
         underlyingToken: bsc['usdt'],
         stableDebtTokenAddress: '0x0DBE974029970fFA1e298e1C1B723100c8f3B7b5',
         variableDebtTokenAddress: '0x256B441313e10b7210A6239070C085446a507bD8',
-        distributionApy: [{ supply: '1.54%', borrow: '5.18%' }],
+        distributionApy: [{ supply: '1.54%', borrow: '5.18%', icon: rewardIcon }],
         borrowApy: '47.56%',
       },
       [bsc['btcb'].address]: {
@@ -82,7 +86,7 @@ const networks = {
         underlyingToken: bsc['btcb'],
         stableDebtTokenAddress: '0x07a1375a55C43fc8A02a051A3194cA400b30a890',
         variableDebtTokenAddress: '0x5651565e4F544911F16f9a717d3aCEccD29d1BdA',
-        distributionApy: [{ supply: '0.17%', borrow: '4.57%' }],
+        distributionApy: [{ supply: '0.17%', borrow: '4.57%', icon: rewardIcon }],
         borrowApy: '1.37%',
       },
       [bsc['dai'].address]: {
@@ -92,7 +96,7 @@ const networks = {
         underlyingToken: bsc['dai'],
         stableDebtTokenAddress: '0x68cc1E4d949C41eDBB2b0A7498635E70c610072B',
         variableDebtTokenAddress: '0x1CF681fc1Df8aEF478A675DF40E62091B93E0Aac',
-        distributionApy: [{ supply: '4.00%', borrow: '15.52%' }],
+        distributionApy: [{ supply: '4.00%', borrow: '15.52%', icon: rewardIcon }],
         borrowApy: '24.43%',
       },
       [bsc['eth'].address]: {
@@ -102,10 +106,11 @@ const networks = {
         underlyingToken: bsc['eth'],
         stableDebtTokenAddress: '0x27fE030832A8F01BCcBc0aAFBcb1C07da241D16c',
         variableDebtTokenAddress: '0x9e06035740ab5eD9F48D8fF8B588056693b83e3a',
-        distributionApy: [{ supply: '0.38%', borrow: '7.55%' }],
+        distributionApy: [{ supply: '0.38%', borrow: '7.55%', icon: rewardIcon }],
         borrowApy: '1.97%',
       },
     },
+    rewardToken: bsc['valas'],
   },
 };
 
