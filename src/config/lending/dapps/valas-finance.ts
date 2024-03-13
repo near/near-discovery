@@ -109,6 +109,7 @@ const networks = {
         borrowApy: '1.97%',
       },
     },
+    rewardToken: bsc['valas'],
   },
 };
 
