@@ -1,6 +1,7 @@
 import type { NetworkId } from '@/utils/types';
 
 type NetworkComponents = {
+  activityPage: string;
   applicationsPage: string;
   blog: string;
   blogPost: string;
@@ -71,6 +72,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
 
   return {
     testnet: {
+      activityPage: `${testnetTLA}/widget/ActivityPage`,
       applicationsPage: `${testnetTLA}/widget/AppLibrary.IndexPage`,
       blog: `${testnetTLA}/widget/Blog/Feed`,
       blogPost: `${testnetTLA}/widget/BlogPostPage`,
@@ -134,6 +136,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
     },
 
     mainnet: {
+      activityPage: 'near/widget/ActivityPage',
       applicationsPage: 'nearcatalog.near/widget/Index',
       blog: 'near/widget/Blog.Feed',
       blogPost: 'near/widget/BlogPostPage',
