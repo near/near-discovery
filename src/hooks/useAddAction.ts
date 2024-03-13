@@ -33,9 +33,6 @@ export default function useAddAction(source: string) {
           action_switch: data.add ? 1 : 0,
           token_in_currency: data?.token_in_currency,
           token_out_currency: data?.token_out_currency,
-          ss: getSignature(
-            `template=${data.template}&action_type=Swap&tx_hash=${data.transactionHash}&chain_id=${chainId}`,
-          ),
         };
       }
       if (data.type === 'Bridge') {
@@ -66,9 +63,6 @@ export default function useAddAction(source: string) {
               from: fromChain?.name,
               to: toChain?.name,
             }),
-            ss: getSignature(
-              `template=${data.template}&action_type=Bridge&tx_hash=${data.transactionHash}&chain_id=${data.fromChainId}`,
-            ),
           };
           console.info('params:', params);
         } catch (error) {
@@ -89,9 +83,6 @@ export default function useAddAction(source: string) {
           tx_id: data.transactionHash,
           action_network_id: currentChain.name,
           chain_id: chainId,
-          ss: getSignature(
-            `template=${data.template}&action_type=Lending&tx_hash=${data.transactionHash}&chain_id=${chainId}`,
-          ),
         };
       }
       if (data.type === 'Liquidity') {
@@ -109,12 +100,13 @@ export default function useAddAction(source: string) {
           tx_id: data.transactionHash,
           chain_id: chainId,
           extra_data: data.extra_data,
-          ss: getSignature(
-            `template=${data.template}&action_type=Liquidity&tx_hash=${data.transactionHash}&chain_id=${chainId}`,
-          ),
         };
       }
-      console.info('addAction params: ', params);
+      params.ss = getSignature(
+        `template=${data.template}&action_type=${data.type}&tx_hash=${
+          data.transactionHash
+        }&chain_id=${chainId}&time=${Math.ceil(Date.now() / 1000)}`,
+      );
       params.source = source;
       post('/api/action/add', params);
     },
