@@ -1,10 +1,33 @@
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
+import { useRouter } from 'next/router';
 
 const Blog: NextPageWithLayout = () => {
   const components = useBosComponents();
+  const { requestAuthentication } = useSignInRedirect();
+  const router = useRouter();
+  const accountId = router.query.accountId;
+  const blockHeight = router.query.blockHeight;
+
+  if (accountId && blockHeight) {
+    return (
+      <ComponentWrapperPage
+        src={components.blogPost}
+        meta={{
+          title: 'NEAR | Blog Post',
+          description: 'The latest on the Near Ecosystem',
+        }}
+        componentProps={{
+          requestAuthentication,
+          accountId,
+          blockHeight,
+        }}
+      />
+    );
+  }
   return (
     <ComponentWrapperPage
       src={components.blog}
@@ -13,7 +36,7 @@ const Blog: NextPageWithLayout = () => {
         description: 'The latest on the Near Ecosystem',
       }}
       componentProps={{
-        blogPostIds: [75675],
+        requestAuthentication,
       }}
     />
   );
