@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { DesktopNavigation } from './desktop/DesktopNavigation';
 import { MobileNavigation } from './mobile/MobileNavigation';
 
-export const NavigationDeprecated = () => {
+export const NavigationSignedOut = () => {
   const [matches, setMatches] = useState(true);
 
   useEffect(() => {

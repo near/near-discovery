@@ -6,13 +6,16 @@ import { currentPathMatchesRoute } from './utils';
 
 type Props = {
   expanded: boolean;
+  onItemActivated: () => void;
 };
 
-export const MarketingDrawer = ({ expanded }: Props) => {
+export const MarketingDrawer = ({ expanded, onItemActivated }: Props) => {
   const router = useRouter();
 
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
-    return currentPathMatchesRoute(router.asPath, route, exactMatch);
+    const isActive = currentPathMatchesRoute(router.asPath, route, exactMatch);
+    if (isActive) onItemActivated();
+    return isActive;
   };
 
   return (
