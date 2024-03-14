@@ -49,11 +49,9 @@ const networks = {
       gnosis['usdc'],
       gnosis['wxdai'],
       gnosis['weth'],
-      gnosis['eth'],
       gnosis['wbtc'],
       gnosis['usdt'],
       gnosis['sushi'],
-      gnosis['wsteth'],
     ],
   },
   10: {
