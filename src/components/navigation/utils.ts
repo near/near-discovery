@@ -1,4 +1,4 @@
-export const currentPathMatchesRoute = (currentPath: string, routeMatch: string | string[], exactMatch = false) => {
+export const currentPathMatchesRoute = (currentPath: string, routeMatch: string | string[], exactMatch = true) => {
   const path = currentPath.split('?').shift() ?? '/';
 
   const routes = typeof routeMatch === 'string' ? [routeMatch] : routeMatch;

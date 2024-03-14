@@ -14,9 +14,22 @@ interface Props {
 const Wrapper = styled.div<{
   $horizontal: boolean;
 }>`
+  --sidebar-expand-transition-speed: 300ms;
+  --sidebar-width-expanded: 256px;
+  --sidebar-width-collapsed: 68px;
+  --small-screen-header-height: 68px;
+
   display: flex;
+  min-height: 100vh;
   min-width: 0;
+  justify-content: stretch;
+  align-items: stretch;
   flex-direction: ${(p) => (p.$horizontal ? 'row' : 'column')};
+
+  @media (max-width: 1240px) {
+    --sidebar-width-expanded: 100vw;
+    flex-direction: column;
+  }
 `;
 
 const Content = styled.div`
@@ -24,7 +37,6 @@ const Content = styled.div`
   flex-direction: column;
   gap: 1rem;
   flex-grow: 1;
-  min-height: 100vh;
   justify-content: stretch;
   align-items: stretch;
   min-width: 0;

@@ -9,7 +9,7 @@ export const Content = styled(Primitive.Content)`
   gap: 0.5rem;
   color: var(--sand12);
   background-color: var(--white);
-  z-index: 1000;
+  z-index: 2000;
   max-width: 20rem;
   font-size: 0.8rem;
   line-height: 1.5;

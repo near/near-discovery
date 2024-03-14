@@ -1,11 +1,38 @@
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
+const overflowContain = css`
+  overflow: auto;
+  scroll-behavior: smooth;
+  overscroll-behavior: contain;
+
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /*
+    The "overflowContain" styles need to be used in combination with a child that is always 
+    at least 1px taller than the parent via "min-height: calc(100% + 1px)".
+
+    This allows "overscroll-behavior: contain;" to prevent the <body> from scrolling. Setting 
+    "overflow: hidden;" on the <body> would break the "position: sticky;" behavior of the 
+    navigation - that's why we need to use this hack instead.
+
+    https://stackoverflow.com/a/48954092
+  */
+`;
+
 export const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-width: 0;
+
+  @media (max-width: 1240px) {
+    display: none;
+  }
 `;
 
 export const Logo = styled(Link)`
@@ -20,7 +47,7 @@ export const Logo = styled(Link)`
   width: 3.5rem;
   flex-shrink: 0;
   outline-offset: -0.75rem;
-  transition: all var(--expand-transition-speed), outline 0;
+  transition: all var(--sidebar-expand-transition-speed), outline 0;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -43,7 +70,7 @@ export const ToggleExpandButton = styled.button`
   width: 3.5rem;
   flex-shrink: 0;
   outline-offset: -0.75rem;
-  transition: all var(--expand-transition-speed), outline 0;
+  transition: all var(--sidebar-expand-transition-speed), outline 0;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -61,7 +88,9 @@ export const ToggleExpandButton = styled.button`
   }
 `;
 
-export const Section = styled.div`
+export const Section = styled.div<{
+  $screen?: 'smaller' | 'larger';
+}>`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -72,6 +101,24 @@ export const Section = styled.div`
   &:last-child {
     border-bottom: none;
   }
+
+  ${(p) =>
+    p.$screen === 'smaller'
+      ? css`
+          @media (min-width: 1240px) {
+            display: none;
+          }
+        `
+      : undefined}
+
+  ${(p) =>
+    p.$screen === 'larger'
+      ? css`
+          @media (max-width: 1240px) {
+            display: none;
+          }
+        `
+      : undefined}
 `;
 
 export const NavigationItem = styled(Link)<{
@@ -122,7 +169,7 @@ export const NavigationItem = styled(Link)<{
   }
 
   span {
-    transition: all var(--expand-transition-speed);
+    transition: all var(--sidebar-expand-transition-speed);
   }
 
   ${(p) =>
@@ -221,44 +268,41 @@ export const SectionLabel = styled.p`
   color: var(--sand12);
   font-weight: 600;
   letter-spacing: 0.24px;
-  transition: all var(--expand-transition-speed);
+  transition: all var(--sidebar-expand-transition-speed);
 `;
 
-export const DrawerTitle = styled.p`
-  all: unset;
-  font: var(--text-l);
-  color: var(--sand12);
-  font-weight: 700;
-  letter-spacing: 0.3px;
+export const OverflowContainChild = styled.div`
+  min-height: calc(100% + 1px);
 `;
 
 export const Sidebar = styled.div<{
   $expanded: boolean;
+  $openedOnSmallScreens: boolean;
 }>`
-  --sidebar-width: 257px;
-  --expand-transition-speed: 300ms;
   position: sticky;
-  z-index: 1000;
+  z-index: 1005;
   top: 0;
   left: 0;
-  width: var(--sidebar-width);
-  height: 100dvh;
-  overflow: auto;
+  width: var(--sidebar-width-expanded);
+
+  height: calc(100dvh + 1px);
+  ${overflowContain}
+
   flex-shrink: 0;
   flex-grow: 0;
   color: var(--sand11);
   background: var(--white);
-  border-right: 1px solid var(--sand6);
-  transition: all var(--expand-transition-speed);
+  box-shadow: 1px 0 var(--sand6);
+  transition: all var(--sidebar-expand-transition-speed);
 
   ${(p) =>
     p.$expanded
       ? undefined
       : css`
-          --sidebar-width: 69px;
+          width: var(--sidebar-width-collapsed);
 
           ${ToggleExpandButton} {
-            width: calc(var(--sidebar-width) - 1px);
+            width: var(--sidebar-width-collapsed);
           }
 
           ${NavigationItem} span,
@@ -274,33 +318,163 @@ export const Sidebar = styled.div<{
             margin-bottom: -1.5rem;
           }
         `}
+
+  @media (max-width: 1240px) {
+    position: fixed;
+    top: var(--small-screen-header-height);
+    height: calc(100dvh + 1px - var(--small-screen-header-height));
+
+    ${(p) =>
+      p.$openedOnSmallScreens
+        ? undefined
+        : css`
+            width: 0;
+            opacity: 0;
+          `}
+
+    ${(p) =>
+      p.$expanded
+        ? css`
+            width: 100vw;
+            opacity: 1;
+          `
+        : undefined}
+  }
+`;
+
+export const SmallScreenHeader = styled.header`
+  display: none;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  align-items: stretch;
+  gap: 1rem;
+  height: var(--small-screen-header-height);
+  background: var(--white);
+  border-bottom: 1px solid var(--sand6);
+
+  @media (max-width: 1240px) {
+    display: flex;
+  }
+`;
+
+export const SmallScreenHeaderLogo = styled(Link)`
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: auto;
+  cursor: pointer;
+  padding: 0 1.15rem;
+  flex-shrink: 0;
+  outline-offset: -2px;
+  transition: all 150ms, outline 0;
+
+  &:focus-visible {
+    outline: 2px solid var(--violet5);
+  }
+
+  img {
+    width: 2rem;
+    height: 2rem;
+  }
+`;
+
+export const SmallScreenHeaderIconButton = styled.button`
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sand11);
+  padding: 1rem;
+  flex-shrink: 0;
+  outline-offset: -2px;
+  transition: all 150ms, outline 0;
+
+  &:focus-visible {
+    outline: 2px solid var(--violet5);
+  }
+
+  &:hover {
+    color: var(--sand12);
+  }
+
+  i {
+    display: block;
+    font-size: 2rem;
+    line-height: 2rem;
+    transition: all 150ms;
+  }
+`;
+
+export const SmallScreenHeaderTitle = styled.p`
+  all: unset;
+  font: var(--text-l);
+  color: var(--sand12);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  align-self: center;
+  margin-right: auto;
+`;
+
+export const DrawerTitle = styled.p`
+  all: unset;
+  font: var(--text-l);
+  color: var(--sand12);
+  font-weight: 700;
+  letter-spacing: 0.3px;
 `;
 
 export const Drawer = styled.div<{
   $expanded: boolean;
+  $openedOnSmallScreens: boolean;
 }>`
-  --expand-transition-speed: 300ms;
   position: sticky;
   z-index: 1000;
   top: 0;
-  left: 69px;
+  left: 68px;
+
+  height: calc(100dvh + 1px);
+  ${overflowContain}
+
   width: 0;
-  height: 100dvh;
+  opacity: 0;
   background-color: red;
-  overflow: auto;
   flex-shrink: 0;
   flex-grow: 0;
-  opacity: 0;
   color: var(--sand11);
   background: var(--white);
-  transition: all var(--expand-transition-speed);
+  transition: all var(--sidebar-expand-transition-speed);
 
   ${(p) =>
     p.$expanded
       ? css`
-          width: 257px;
+          width: 256px;
           opacity: 1;
-          border-right: 1px solid var(--sand6);
+          box-shadow: 1px 0 var(--sand6);
         `
       : undefined}
+
+  @media (max-width: 1240px) {
+    position: fixed;
+    top: var(--small-screen-header-height);
+    height: calc(100dvh + 1px - var(--small-screen-header-height));
+
+    ${(p) =>
+      p.$openedOnSmallScreens
+        ? undefined
+        : css`
+            width: 0;
+            opacity: 0;
+          `}
+
+    ${(p) =>
+      p.$expanded
+        ? css`
+            width: calc(100vw - var(--sidebar-width-collapsed));
+          `
+        : undefined}
+  }
 `;
