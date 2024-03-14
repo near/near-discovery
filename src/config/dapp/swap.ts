@@ -422,4 +422,11 @@ export default {
       '--button-text-color': '#fff',
     },
   },
+  mute: {
+    type: 'swap',
+    theme: {
+      '--button-color': '#47a1ff',
+      '--button-text-color': '#fff',
+    },
+  },
 };

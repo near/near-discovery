@@ -3,6 +3,7 @@ import { basic as velocoreV2Basic, networks as velocoreV2Networks } from '../dap
 import { basic as veSyncBasic, networks as veSyncNetworks } from '../dapps/ve-sync';
 import { basic as syncSwapBasic, networks as syncSwapNetworks } from '../dapps/sync-swap';
 import { basic as zkSwapBasic, networks as zkSwapNetworks } from '../dapps/zk-swap';
+import { basic as muteBasic, networks as muteNetworks } from '../dapps/mute';
 
 const CHAIN_ID = 324;
 
@@ -36,6 +37,10 @@ export default {
     'zkSwap Finance': {
       ...zkSwapBasic,
       ...zkSwapNetworks[CHAIN_ID],
+    },
+    Mute: {
+      ...muteBasic,
+      ...muteNetworks[CHAIN_ID],
     },
   },
 };
