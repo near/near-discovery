@@ -32,7 +32,7 @@ export const useNavigationStore = create<NavigationStore>((set) => ({
     set((state) => {
       if (state.initialized || typeof window === 'undefined') return {};
 
-      const sidebarIsExpanded = localStorage.getItem(SIDEBAR_EXPANDED_PREFERENCE_KEY) === 'true';
+      const sidebarIsExpanded = localStorage.getItem(SIDEBAR_EXPANDED_PREFERENCE_KEY) !== 'false';
 
       return {
         initialized: true,
