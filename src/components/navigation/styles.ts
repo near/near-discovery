@@ -47,7 +47,7 @@ export const Logo = styled(Link)`
   width: 3.5rem;
   flex-shrink: 0;
   outline-offset: -0.75rem;
-  transition: all var(--sidebar-expand-transition-speed), outline 0;
+  transition: all var(--sidebar-expand-transition-speed), outline 0ms;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -70,7 +70,7 @@ export const ToggleExpandButton = styled.button`
   width: 3.5rem;
   flex-shrink: 0;
   outline-offset: -0.75rem;
-  transition: all var(--sidebar-expand-transition-speed), outline 0;
+  transition: all var(--sidebar-expand-transition-speed), outline 0ms;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -165,7 +165,7 @@ export const NavigationItem = styled(Link)<{
     height: 2.25rem;
     flex-shrink: 0;
     background: var(--white);
-    transition: all 150ms, outline 0;
+    transition: all 150ms, outline 0ms;
   }
 
   span {
@@ -369,7 +369,7 @@ export const SmallScreenHeaderLogo = styled(Link)`
   padding: 0 1.15rem;
   flex-shrink: 0;
   outline-offset: -2px;
-  transition: all 150ms, outline 0;
+  transition: all 150ms, outline 0ms;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -391,7 +391,7 @@ export const SmallScreenHeaderIconButton = styled.button`
   padding: 1rem;
   flex-shrink: 0;
   outline-offset: -2px;
-  transition: all 150ms, outline 0;
+  transition: all 150ms, outline 0ms;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -425,6 +425,7 @@ export const DrawerTitle = styled.p`
   color: var(--sand12);
   font-weight: 700;
   letter-spacing: 0.3px;
+  margin: -0.15rem 0;
 `;
 
 export const Drawer = styled.div<{
