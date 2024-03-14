@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import type { MouseEvent } from 'react';
 import { useState } from 'react';
 
 import { Tooltip } from '../lib/Tooltip';
@@ -17,12 +18,20 @@ type NavigationDrawer = 'discover' | 'marketing';
 
 export const Navigation = () => {
   const [_sidebarIsExpanded, setSidebarIsExpanded] = useState(true);
-  const [expandedDrawer, setExpandedDrawer] = useState<NavigationDrawer | null>(null);
+  const [expandedDrawer, setExpandedDrawer] = useState<NavigationDrawer | null | undefined>();
   const sidebarIsExpanded = _sidebarIsExpanded && !expandedDrawer;
   const tooltipsDisabled = sidebarIsExpanded;
   const router = useRouter();
 
-  const toggleExpandedDrawer = (drawer: NavigationDrawer) => {
+  const setInitialExpandedDrawer = (drawer: NavigationDrawer) => {
+    if (typeof expandedDrawer === 'undefined') {
+      setExpandedDrawer(drawer);
+    }
+  };
+
+  const toggleExpandedDrawer = (drawer: NavigationDrawer, event: MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+
     if (expandedDrawer === drawer) {
       setExpandedDrawer(null);
     } else {
@@ -46,7 +55,7 @@ export const Navigation = () => {
 
   return (
     <>
-      <S.Sidebar $expanded={sidebarIsExpanded}>
+      <S.Sidebar $expanded={sidebarIsExpanded} onClick={() => setExpandedDrawer(null)}>
         <S.Top>
           <S.Logo href="/" aria-label="Go Home">
             <Image src={NearIconSvg} alt="NEAR" />
@@ -80,7 +89,7 @@ export const Navigation = () => {
                 $active={isNavigationItemActive(['/applications', '/components', '/gateways'])}
                 $expanded={expandedDrawer === 'discover'}
                 $type="featured"
-                onClick={() => toggleExpandedDrawer('discover')}
+                onClick={(event) => toggleExpandedDrawer('discover', event)}
               >
                 <i className="ph-bold ph-shapes" />
                 <span>Discover</span>
@@ -137,7 +146,7 @@ export const Navigation = () => {
                 $active={false}
                 $expanded={expandedDrawer === 'marketing'}
                 $type="standard"
-                onClick={() => toggleExpandedDrawer('marketing')}
+                onClick={(event) => toggleExpandedDrawer('marketing', event)}
               >
                 <i className="ph-bold ph-dots-three-outline-vertical" />
                 <span>More</span>
@@ -147,8 +156,15 @@ export const Navigation = () => {
         </S.Section>
       </S.Sidebar>
 
-      <DiscoverDrawer expanded={expandedDrawer === 'discover'} />
-      <MarketingDrawer expanded={expandedDrawer === 'marketing'} />
+      <DiscoverDrawer
+        expanded={expandedDrawer === 'discover'}
+        onItemActivated={() => setInitialExpandedDrawer('discover')}
+      />
+
+      <MarketingDrawer
+        expanded={expandedDrawer === 'marketing'}
+        onItemActivated={() => setInitialExpandedDrawer('marketing')}
+      />
     </>
   );
 };

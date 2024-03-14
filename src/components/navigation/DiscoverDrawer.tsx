@@ -6,13 +6,16 @@ import { currentPathMatchesRoute } from './utils';
 
 type Props = {
   expanded: boolean;
+  onItemActivated: () => void;
 };
 
-export const DiscoverDrawer = ({ expanded }: Props) => {
+export const DiscoverDrawer = ({ expanded, onItemActivated }: Props) => {
   const router = useRouter();
 
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
-    return currentPathMatchesRoute(router.asPath, route, exactMatch);
+    const isActive = currentPathMatchesRoute(router.asPath, route, exactMatch);
+    if (isActive) onItemActivated();
+    return isActive;
   };
 
   return (

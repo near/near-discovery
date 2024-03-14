@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import { useCurrentComponentStore } from '@/stores/current-component';
 
+import { navigationCategories } from '../categories';
 import { CurrentComponent } from '../CurrentComponent';
-import { navigationCategories } from '../navigation-categories';
 
 type Props = {
   onCloseMenu: () => void;
