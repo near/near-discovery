@@ -3,6 +3,7 @@ import type { NetworkId } from '@/utils/types';
 type NetworkComponents = {
   applicationsPage: string;
   blog: string;
+  blogPost: string;
   bosDirectory: string;
   componentSummary: string;
   componentsPage: string;
@@ -72,6 +73,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
     testnet: {
       applicationsPage: `${testnetTLA}/widget/AppLibrary.IndexPage`,
       blog: `${testnetTLA}/widget/Blog/Feed`,
+      blogPost: `${testnetTLA}/widget/BlogPostPage`,
       bosDirectory: 'one.testnet/widget/BOSDirectory',
       componentSummary: `${testnetTLA}/widget/ComponentSummary`,
       componentsPage: `${testnetTLA}/widget/ComponentsPage`,
@@ -134,6 +136,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
     mainnet: {
       applicationsPage: 'nearcatalog.near/widget/Index',
       blog: 'near/widget/Blog.Feed',
+      blogPost: 'near/widget/BlogPostPage',
       bosDirectory: 'onboarder.near/widget/BOSDirectory',
       componentSummary: 'near/widget/ComponentSummary',
       componentsPage: 'near/widget/ComponentsPage',

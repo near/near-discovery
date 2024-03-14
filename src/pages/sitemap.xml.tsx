@@ -51,10 +51,6 @@ function generateSiteMap() {
         <lastmod>2024-02-13</lastmod>
     </url>
     <url>
-        <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/papers/the-official-near-white-paper</loc>
-        <lastmod>2024-02-13</lastmod>
-    </url>
-    <url>
         <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/near/widget/ProfilePage</loc>
         <lastmod>2024-02-13</lastmod>
     </url>
@@ -159,6 +155,14 @@ function generateSiteMap() {
     <url>
         <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/papers/nightshade</loc>
         <lastmod>2024-02-13</lastmod>
+    </url>
+    <url>
+        <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/papers/the-official-near-white-paper</loc>
+        <lastmod>2024-03-12</lastmod>
+    </url>
+    <url>
+        <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/papers/doomslug</loc>
+        <lastmod>2024-03-12</lastmod>
     </url>
     <url>
         <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/sandbox</loc>
