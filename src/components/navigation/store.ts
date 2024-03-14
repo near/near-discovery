@@ -78,10 +78,12 @@ export const useNavigationStore = create<NavigationStore>((set) => ({
       if (state.sidebarIsOpenedOnSmallScreens) {
         return {
           expandedDrawer: undefined,
+          sidebarIsExpanded: false,
           sidebarIsOpenedOnSmallScreens: false,
         };
       } else {
         return {
+          sidebarIsExpanded: true,
           sidebarIsOpenedOnSmallScreens: true,
         };
       }
