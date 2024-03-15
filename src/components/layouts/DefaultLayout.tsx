@@ -5,6 +5,7 @@ import { useAuthStore } from '@/stores/auth';
 
 import { BosLoaderBanner } from '../BosLoaderBanner';
 import { Navigation } from '../navigation/Navigation';
+import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from '../navigation/utils';
 import { NavigationSignedOut } from '../navigation-signed-out/NavigationSignedOut';
 
 interface Props {
@@ -26,7 +27,7 @@ const Wrapper = styled.div<{
   align-items: stretch;
   flex-direction: ${(p) => (p.$horizontal ? 'row' : 'column')};
 
-  @media (max-width: 1240px) {
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     --sidebar-width-expanded: 100vw;
     flex-direction: column;
   }

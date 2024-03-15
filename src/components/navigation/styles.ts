@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import styled, { css } from 'styled-components';
 
+import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from './utils';
+
 const overflowContain = css`
   overflow: auto;
   scroll-behavior: smooth;
@@ -30,7 +32,7 @@ export const Top = styled.div`
   justify-content: space-between;
   min-width: 0;
 
-  @media (max-width: 1240px) {
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     display: none;
   }
 `;
@@ -105,7 +107,7 @@ export const Section = styled.div<{
   ${(p) =>
     p.$screen === 'smaller'
       ? css`
-          @media (min-width: 1240px) {
+          @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
             display: none;
           }
         `
@@ -114,7 +116,7 @@ export const Section = styled.div<{
   ${(p) =>
     p.$screen === 'larger'
       ? css`
-          @media (max-width: 1240px) {
+          @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
             display: none;
           }
         `
@@ -325,18 +327,10 @@ export const Sidebar = styled.div<{
           }
         `}
 
-  @media (max-width: 1240px) {
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     position: fixed;
     top: var(--small-screen-header-height);
     height: calc(100dvh + 1px - var(--small-screen-header-height));
-
-    ${(p) =>
-      p.$openedOnSmallScreens
-        ? undefined
-        : css`
-            width: 0;
-            opacity: 0;
-          `}
 
     ${(p) =>
       p.$expanded
@@ -345,6 +339,14 @@ export const Sidebar = styled.div<{
             opacity: 1;
           `
         : undefined}
+
+    ${(p) =>
+      p.$openedOnSmallScreens
+        ? undefined
+        : css`
+            width: 0;
+            opacity: 0;
+          `}
   }
 `;
 
@@ -359,7 +361,7 @@ export const SmallScreenHeader = styled.header`
   background: var(--white);
   border-bottom: 1px solid var(--sand6);
 
-  @media (max-width: 1240px) {
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     display: flex;
   }
 `;
@@ -464,10 +466,17 @@ export const Drawer = styled.div<{
         `
       : undefined}
 
-  @media (max-width: 1240px) {
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     position: fixed;
     top: var(--small-screen-header-height);
     height: calc(100dvh + 1px - var(--small-screen-header-height));
+
+    ${(p) =>
+      p.$expanded
+        ? css`
+            width: calc(100vw - var(--sidebar-width-collapsed));
+          `
+        : undefined}
 
     ${(p) =>
       p.$openedOnSmallScreens
@@ -476,12 +485,5 @@ export const Drawer = styled.div<{
             width: 0;
             opacity: 0;
           `}
-
-    ${(p) =>
-      p.$expanded
-        ? css`
-            width: calc(100vw - var(--sidebar-width-collapsed));
-          `
-        : undefined}
   }
 `;

@@ -1,21 +1,24 @@
 import type { MouseEvent } from 'react';
 import { create } from 'zustand';
 
-export type NavigationDrawer = 'discover' | 'marketing';
+import { isSmallScreen, SIDEBAR_EXPANDED_PREFERENCE_KEY } from './utils';
 
-const SIDEBAR_EXPANDED_PREFERENCE_KEY = 'sidebar-expanded-preference';
+export type NavigationDrawer = 'discover' | 'marketing';
 
 type NavigationState = {
   expandedDrawer: NavigationDrawer | null | undefined;
   expandedDrawerTitle: string;
-  initialized: boolean;
-  sidebarIsExpanded: boolean;
-  sidebarIsOpenedOnSmallScreens: boolean;
+  hasInitialized: boolean;
+  isOpenedOnSmallScreens: boolean;
+  isSidebarExpanded: boolean;
 };
 
 type NavigationStore = NavigationState & {
   initialize: () => void;
+  handleBubbledClickInDrawer: () => void;
+  handleBubbledClickInSidebar: (event: MouseEvent<HTMLDivElement>) => void;
   set: (state: Partial<NavigationState>) => void;
+  setInitialExpandedDrawer: (drawer: NavigationDrawer) => void;
   toggleExpandedDrawer: (drawer: NavigationDrawer, event: MouseEvent<HTMLButtonElement>) => void;
   toggleExpandedSidebar: () => void;
   toggleExpandedSidebarOnSmallScreens: () => void;
@@ -24,20 +27,49 @@ type NavigationStore = NavigationState & {
 export const useNavigationStore = create<NavigationStore>((set) => ({
   expandedDrawer: undefined,
   expandedDrawerTitle: '',
-  initialized: false,
-  sidebarIsExpanded: true,
-  sidebarIsOpenedOnSmallScreens: false,
+  hasInitialized: false,
+  isOpenedOnSmallScreens: false,
+  isSidebarExpanded: true,
 
   initialize: () => {
     set((state) => {
-      if (state.initialized || typeof window === 'undefined') return {};
+      if (state.hasInitialized || typeof window === 'undefined') return {};
 
-      const sidebarIsExpanded = localStorage.getItem(SIDEBAR_EXPANDED_PREFERENCE_KEY) !== 'false';
+      const isSidebarExpanded = isSmallScreen() && localStorage.getItem(SIDEBAR_EXPANDED_PREFERENCE_KEY) !== 'false';
 
       return {
-        initialized: true,
-        sidebarIsExpanded,
+        hasInitialized: true,
+        isSidebarExpanded,
       };
+    });
+  },
+
+  handleBubbledClickInDrawer: () => {
+    if (isSmallScreen()) {
+      set({ isOpenedOnSmallScreens: false });
+    }
+  },
+
+  handleBubbledClickInSidebar: (event) => {
+    const target = event.target as HTMLElement | null;
+    const clickedOnLink =
+      target?.tagName === 'A' ||
+      target?.parentElement?.tagName === 'A' ||
+      target?.parentElement?.parentElement?.tagName === 'A';
+
+    set((state) => {
+      if ((isSmallScreen() && !state.expandedDrawer) || clickedOnLink) {
+        return { isOpenedOnSmallScreens: false, expandedDrawer: undefined };
+      } else {
+        return { expandedDrawer: null };
+      }
+    });
+  },
+
+  setInitialExpandedDrawer: (drawer) => {
+    set((state) => {
+      if (typeof state.expandedDrawer !== 'undefined') return {};
+      return { expandedDrawer: drawer };
     });
   },
 
@@ -54,20 +86,20 @@ export const useNavigationStore = create<NavigationStore>((set) => ({
       if (state.expandedDrawer) {
         return {
           expandedDrawer: null,
-          sidebarIsExpanded: true,
-          sidebarIsOpenedOnSmallScreens: true,
+          isSidebarExpanded: true,
+          isOpenedOnSmallScreens: true,
         };
       } else {
-        const sidebarIsExpanded = !state.sidebarIsExpanded;
+        const isSidebarExpanded = !state.isSidebarExpanded;
 
         if (typeof window !== 'undefined') {
-          localStorage.setItem(SIDEBAR_EXPANDED_PREFERENCE_KEY, sidebarIsExpanded.toString());
+          localStorage.setItem(SIDEBAR_EXPANDED_PREFERENCE_KEY, isSidebarExpanded.toString());
         }
 
         return {
           expandedDrawer: null,
-          sidebarIsExpanded,
-          sidebarIsOpenedOnSmallScreens: sidebarIsExpanded,
+          isSidebarExpanded,
+          isOpenedOnSmallScreens: isSidebarExpanded,
         };
       }
     });
@@ -75,16 +107,16 @@ export const useNavigationStore = create<NavigationStore>((set) => ({
 
   toggleExpandedSidebarOnSmallScreens: () => {
     set((state) => {
-      if (state.sidebarIsOpenedOnSmallScreens) {
+      if (state.isOpenedOnSmallScreens) {
         return {
           expandedDrawer: undefined,
-          sidebarIsExpanded: false,
-          sidebarIsOpenedOnSmallScreens: false,
+          isSidebarExpanded: false,
+          isOpenedOnSmallScreens: false,
         };
       } else {
         return {
-          sidebarIsExpanded: true,
-          sidebarIsOpenedOnSmallScreens: true,
+          isSidebarExpanded: true,
+          isOpenedOnSmallScreens: true,
         };
       }
     });

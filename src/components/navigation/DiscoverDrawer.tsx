@@ -8,21 +8,24 @@ import { currentPathMatchesRoute } from './utils';
 
 type Props = {
   expanded: boolean;
-  onItemActivated: () => void;
 };
 
-export const DiscoverDrawer = ({ expanded, onItemActivated }: Props) => {
+export const DiscoverDrawer = ({ expanded }: Props) => {
   const router = useRouter();
-  const sidebarIsOpenedOnSmallScreens = useNavigationStore((store) => store.sidebarIsOpenedOnSmallScreens);
+  const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
+  const handleBubbledClickInDrawer = useNavigationStore((store) => store.handleBubbledClickInDrawer);
+  const setInitialExpandedDrawer = useNavigationStore((store) => store.setInitialExpandedDrawer);
 
   const isNavigationItemActive = (route: string | string[]) => {
     const isActive = currentPathMatchesRoute(router.asPath, route);
-    if (isActive) onItemActivated();
+    setTimeout(() => {
+      if (isActive) setInitialExpandedDrawer('discover');
+    });
     return isActive;
   };
 
   return (
-    <S.Drawer $expanded={expanded} $openedOnSmallScreens={sidebarIsOpenedOnSmallScreens}>
+    <S.Drawer $expanded={expanded} $openedOnSmallScreens={isOpenedOnSmallScreens} onClick={handleBubbledClickInDrawer}>
       <S.OverflowContainChild>
         <DrawerHeader title="Discover" />
 

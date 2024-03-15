@@ -5,12 +5,10 @@ import { useNavigationStore } from './store';
 import * as S from './styles';
 
 export const SmallScreenHeader = () => {
-  const sidebarIsOpenedOnSmallScreens = useNavigationStore((store) => store.sidebarIsOpenedOnSmallScreens);
+  const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebarOnSmallScreens = useNavigationStore((store) => store.toggleExpandedSidebarOnSmallScreens);
   const setNavigation = useNavigationStore((store) => store.set);
-  const showDrawerCollapse = useNavigationStore(
-    (store) => store.sidebarIsOpenedOnSmallScreens && !!store.expandedDrawer,
-  );
+  const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
 
   return (
@@ -31,7 +29,7 @@ export const SmallScreenHeader = () => {
         <S.SmallScreenHeaderLogo
           href="/"
           aria-label="Go Home"
-          onClick={() => setNavigation({ sidebarIsOpenedOnSmallScreens: false })}
+          onClick={() => setNavigation({ isOpenedOnSmallScreens: false })}
         >
           <Image src={NearIconSvg} alt="NEAR" />
         </S.SmallScreenHeaderLogo>
@@ -42,7 +40,7 @@ export const SmallScreenHeader = () => {
         aria-label="Expand/Collapse Menu"
         onClick={toggleExpandedSidebarOnSmallScreens}
       >
-        <i className={`ph ${sidebarIsOpenedOnSmallScreens ? 'ph-x' : 'ph-list'}`} />
+        <i className={`ph ${isOpenedOnSmallScreens ? 'ph-x' : 'ph-list'}`} />
       </S.SmallScreenHeaderIconButton>
     </S.SmallScreenHeader>
   );
