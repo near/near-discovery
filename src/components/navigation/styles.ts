@@ -141,6 +141,10 @@ export const NavigationItem = styled(Link)<{
 
   &:hover {
     color: var(--sand12);
+
+    i {
+      background: var(--sand3);
+    }
   }
 
   &:focus-visible {
@@ -224,6 +228,8 @@ export const NavigationSimpleItem = styled(Link)<{
   transition: all 150ms;
 
   &:hover {
+    background: var(--sand3);
+
     i {
       color: var(--sand12);
     }
