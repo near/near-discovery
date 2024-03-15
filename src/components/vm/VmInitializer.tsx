@@ -4,6 +4,7 @@ import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
+import { setupMintbaseWallet } from '@near-wallet-selector/mintbase-wallet';
 import type { WalletSelectorModal } from '@near-wallet-selector/modal-ui';
 import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
@@ -35,7 +36,13 @@ import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
-import { recordHandledError, recordWalletConnect, reset as resetAnalytics } from '@/utils/analytics';
+import {
+  cookiePreferences,
+  optOut,
+  recordHandledError,
+  recordWalletConnect,
+  reset as resetAnalytics,
+} from '@/utils/analytics';
 import {
   commitModalBypassAuthorIds,
   commitModalBypassSources,
@@ -67,12 +74,14 @@ export default function VmInitializer() {
       initNear({
         networkId,
         walletConnectCallback: recordWalletConnect,
+        errorCallback: recordHandledError,
         selector: setupWalletSelector({
           network: networkId,
           modules: [
             setupMyNearWallet(),
             setupSender(),
             setupHereWallet(),
+            setupMintbaseWallet(),
             setupMeteorWallet(),
             setupNeth({
               gas: '300000000000000',
@@ -116,6 +125,11 @@ export default function VmInitializer() {
             });
 
             return <Link {...cleanProps} />;
+          },
+          AnalyticsCookieConsent: ({ all, onlyRequired }: { all: boolean; onlyRequired: boolean }) => {
+            localStorage.setItem('cookiesAcknowledged', all ? cookiePreferences.all : cookiePreferences.onlyRequired);
+            optOut(onlyRequired);
+            return <></>;
           },
         },
         features: {
@@ -183,6 +197,18 @@ export default function VmInitializer() {
     walletModal?.show();
     return false;
   }, [saveCurrentUrl, walletModal]);
+
+  useEffect(() => {
+    const handleShowWalletSelector = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+      if (e.data.showWalletSelector) {
+        requestSignInWithWallet();
+      }
+    };
+    window.addEventListener('message', handleShowWalletSelector, false);
+    return () => {
+      window.removeEventListener('message', handleShowWalletSelector, false);
+    };
+  }, [requestSignInWithWallet]);
 
   const logOut = useCallback(async () => {
     if (!near) {

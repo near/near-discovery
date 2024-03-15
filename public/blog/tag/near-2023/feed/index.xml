@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>NEAR 2023 Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/near-2023/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/near-2023/</link>
+	<description></description>
+	<lastBuildDate>Wed, 20 Dec 2023 18:20:17 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>NEAR 2023 Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/near-2023/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>2023: NEAR In Review</title>
+		<link>/blog/2023-near-in-review/</link>
+		
+		<dc:creator><![CDATA[Illia Polosukhin]]></dc:creator>
+		<pubDate>Wed, 20 Dec 2023 18:10:12 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[NEAR 2023]]></category>
+		<category><![CDATA[NEAR in Review]]></category>
+		<guid isPermaLink="false">/?p=21133</guid>
+
+					<description><![CDATA[<p>by Illia Polosukhin While this was a tough year in the market, we’re closing 2023 on a higher note for …</p>
+<p>The post <a href="/blog/2023-near-in-review/">2023: NEAR In Review</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p><em>by Illia Polosukhin</em></p>
+
+
+
+<p>While this was a tough year in the market, we’re closing 2023 on a higher note for Web3. The NEAR ecosystem has made great progress on many fronts. </p>
+
+
+
+<p>Here’s a recap of some highlights and accomplishments from this year and a brief look ahead at 2024.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-year-in-review"><strong>Year in Review</strong></h2>
+
+
+
+<p>The NEAR ecosystem has made great strides in 2023 towards realizing the vision of mainstream adoption of the Open Web in spite of tough market conditions. Four of DappRadar’s top ten <a href="https://dappradar.com/rankings">apps</a> in all of Web3 are built on the NEAR Protocol and daily active users now regularly exceed a million per day.&nbsp;</p>
+
+
+
+<p>From launching the Blockchain Operating System in February to NEAR DA in November, the NEAR ecosystem is offering solutions to builders across all Web3 networks to deliver the vision of the Open Web. With 7 million monthly active accounts, 35 million total accounts overall, and a current average of over 2 million transactions per day, the NEAR ecosystem has seen substantial growth in usage this year—and keeps outpacing its peers in terms of daily usage.&nbsp;</p>
+
+
+
+<p>A lot of exciting technology built on NEAR was also released this year to enable chain abstraction. At EthDenver in February, NEAR Day featured the debut of the <a href="https://near.org/">Blockchain Operating System</a>—a fully decentralized open web stack and common layer for browsing and discovering open web experiences. By making it easier to build and deploy decentralized on-chain frontends for any network, B.O.S. helps developers build more discoverable and resilient apps while hiding the blockchain infrastructure from users.&nbsp;&nbsp;</p>
+
+
+
+<p>Building on the benefits of the NEAR account model, the FastAuth onboarding solution lets users create an account in seconds using only an email address and device security. App developers can subsidize gas so users can start using apps immediately upon creating their account, and they only need to set up once in order to access any app on B.O.S. The team has gotten great feedback on the beta and will share some exciting next steps early next year.&nbsp;</p>
+
+
+
+<p>B.O.S. also includes <a href="https://near.org/blog/near-query-api-beta-is-now-open-for-apps-building-on-b-o-s/">NEAR QueryAPI</a>, a fully managed, open-source, serverless infrastructure offering NEAR blockchain indexers, storage, and GraphQL endpoints. QueryAPI simplifies the indexer building experience with JavaScript and interactive debugging and eliminates the need to manage cloud infrastructure. The beta already powers 25 indexers in production.</p>
+
+
+
+<p>Beyond rollups using decentralized frontends, I shared the news of 3 exciting Ethereum alignment initiatives to offer NEAR technology to the modular Ethereum ecosystem and benefit the broader Open Web. The <a href="https://near.org/blog/interactive-polygon-zkevm-app-dashboard-launches-on-the-near-blockchain-operating-system/">collaboration with Polygon Labs</a> on a zkWASM prover will optimize the NEAR L1 and bring NEAR to the forefront of the zero-knowledge research space. </p>
+
+
+
+<p>The Foundation is working with <a href="/blog/near-foundation-and-eigen-labs-partner-to-enable-faster-cheaper-web3-transactions-for-ethereum-rollups-via-eigenlayer/">Eigen Labs</a> to build a fast finality layer for defragmenting Ethereum rollups and also launched <a href="https://near.org/data-availability">NEAR DA</a>, a cost-efficient and data availability layer compatible with L2s offering 11,000x cheaper DA than Ethereum and 30x cheaper than Celestia.</p>
+
+
+
+<figure class="wp-block-image size-large is-resized"><img fetchpriority="high" decoding="async" width="1024" height="428" src="/wp-content/uploads/2023/12/photo_2023-12-20_12-30-18-1024x428.jpg" alt="" class="wp-image-21135" style="aspect-ratio:2.392523364485981;width:1287px;height:auto" srcset="/wp-content/uploads/2023/12/photo_2023-12-20_12-30-18-1024x428.jpg 1024w, /wp-content/uploads/2023/12/photo_2023-12-20_12-30-18-300x125.jpg 300w, /wp-content/uploads/2023/12/photo_2023-12-20_12-30-18-768x321.jpg 768w, /wp-content/uploads/2023/12/photo_2023-12-20_12-30-18.jpg 1280w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-element-caption"><em>NEAR reached #1 in daily active users for all of Web3 to close the year, per Artemis.</em></figcaption></figure>
+
+
+
+<figure class="wp-block-image size-large"><img decoding="async" width="1024" height="458" src="/wp-content/uploads/2023/12/Screenshot-2023-12-20-at-12.52.24-PM-1024x458.png" alt="" class="wp-image-21136" srcset="/wp-content/uploads/2023/12/Screenshot-2023-12-20-at-12.52.24-PM-1024x458.png 1024w, /wp-content/uploads/2023/12/Screenshot-2023-12-20-at-12.52.24-PM-300x134.png 300w, /wp-content/uploads/2023/12/Screenshot-2023-12-20-at-12.52.24-PM-768x343.png 768w, /wp-content/uploads/2023/12/Screenshot-2023-12-20-at-12.52.24-PM-1536x687.png 1536w, /wp-content/uploads/2023/12/Screenshot-2023-12-20-at-12.52.24-PM-2048x916.png 2048w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption class="wp-element-caption"><em>4 of the top 10 apps in all of Web3 are built on NEAR &amp; Aurora, per DappRadar&#8217;s 30-day ranking.</em></figcaption></figure>
+
+
+
+<h2 class="wp-block-heading"><strong>Looking Ahead</strong></h2>
+
+
+
+<p>As we look towards 2024, the ecosystem will build upon the innovations and market recognition of 2023 with some major advancements at every layer of NEAR’s open web stack, plus expand into exciting new territory on the AI and product fronts.&nbsp;</p>
+
+
+
+<p>2024 is the year of chain abstraction: blockchains and other infrastructure will become increasingly invisible to users and developers. Just as we don’t need to know if a given website or app we’re using every day is running on Google or Amazon servers, most app users on the Open Web shouldn’t need to manage infra, toggling between accounts and wallets, bridging, or gas. This is the biggest barrier to mainstream adoption.&nbsp;</p>
+
+
+
+<p>The NEAR ecosystem has been building for chain abstraction since the very beginning with sharding and the account model, and more recently the B.O.S., FastAuth, and ETH alignment solutions. From the user perspective the NEAR blockchain functions like a single platform, but under the hood, every account and smart contract is its own logical chain.&nbsp;</p>
+
+
+
+<p>Developers today pick an ecosystem based on where they can access liquidity and users, but that will matter less if they can access users and deposit liquidity from any chain – so they can just choose the infrastructure that works best for their application.&nbsp;</p>
+
+
+
+<p>A big part of advancing chain abstraction for the Web3 space is account aggregation. In order to enable users to transact across all blockchains without needing to think about underlying infrastructure or switch networks, they need a single account from which they can navigate all of Web3. In the true spirit of Web3, this single account should be non-custodial and non-dependent on a specific wallet software or any other single service provider. In addition to FastAuth, Pagoda will launch chain signatures and intent relayers to deliver the full scope of this vision in the first half of 2024.</p>
+
+
+
+<p>At the protocol level, the team will launch Phase 2 of sharding, which is a big deal. TLDR: introducing stateless validation will expand the original Nightshade design, allowing us to avoid fraud proofs. As part of this transition, the state of each shard moves fully into memory, improving performance of each shard—currently 4, soon to be 5—by 10x+. Adding zkWASM on top as the next step will compress execution proofs, enabling even greater decentralization of validators. </p>
+
+
+
+<p>Finally, the NEAR ecosystem will make bigger strides into AI. I’ve been sharing my views on how AI and blockchains can work together with humans to improve our collective systems and individual experiences while minimizing risk and centralization. We’re working both on AI-driven governance and AI-augmented Web3 experiences to work towards the vision of user-owned AI.&nbsp;</p>
+
+
+
+<p>Stay tuned for more updates and specifics in January 2024. Thank you to every member of the NEAR community for staying the course and believing in our shared Open Web vision. </p>
+<p>The post <a href="/blog/2023-near-in-review/">2023: NEAR In Review</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

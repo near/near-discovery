@@ -33,7 +33,6 @@ type ProductionNetwork = {
 };
 
 export interface TosData {
-  showTos: boolean;
   agreementsForUser: UserTosAgreement[];
   latestTosVersion: number;
 }

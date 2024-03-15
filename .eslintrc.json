@@ -8,7 +8,7 @@
   "root": true,
   "rules": {
     "simple-import-sort/imports": "warn",
-    "@typescript-eslint/no-explicit-any": "warn", // TODO: remove once refactor from JS is complete
+    "@typescript-eslint/no-explicit-any": "off", // TODO: remove once refactor from JS is complete
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/no-unused-vars": ["warn", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }]
   }

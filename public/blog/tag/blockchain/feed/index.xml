@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>Blockchain Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/blockchain/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/blockchain/</link>
+	<description></description>
+	<lastBuildDate>Wed, 09 Aug 2023 16:24:04 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>Blockchain Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/blockchain/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>With MeshFlux, Multimedia Art and Gaming Explore Blockchain Technology </title>
+		<link>/blog/with-meshflux-multimedia-art-and-gaming-explore-blockchain-technology/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Thu, 10 Aug 2023 12:00:00 +0000</pubDate>
+				<category><![CDATA[Community]]></category>
+		<category><![CDATA[Art]]></category>
+		<category><![CDATA[Blockchain]]></category>
+		<guid isPermaLink="false">/?p=20790</guid>
+
+					<description><![CDATA[<p>The worlds of art and blockchain are no strangers. On NEAR, art can be found on apps like Mintbase, Paras, …</p>
+<p>The post <a href="/blog/with-meshflux-multimedia-art-and-gaming-explore-blockchain-technology/">With MeshFlux, Multimedia Art and Gaming Explore Blockchain Technology </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>The worlds of art and blockchain are no strangers. On NEAR, art can be found on apps like Mintbase, Paras, and many other ecosystem projects.&nbsp; With the <a href="https://www.meshflux.com/">MeshFlux</a> project, however, Turkish artist and designer <a href="https://www.ubarismutlu.com/">Ufuk Barış Mutlu</a> shows a clear path to how physical artworks can be deeply integrated with the blockchain.&nbsp;</p>
+
+
+
+<p>With funding from the NEAR ecosystem, Mutlu created MeshFlux — a series of interactive sculptures that highlight one of the fundamental aspects of blockchain technology — the distinction between centralized, decentralized, and distributed networks. To achieve this goal, Mutlu created a series of three interactive sculptures that deliver the experience of these systems’ characteristics through simple gamification.</p>
+
+
+
+<p>Mutlu recently exhibited MeshFlux at a couple of events. MeshFlux appeared at virtual art platform’s Monoco.io’s physical gallery in Istanbul from May 18 to June 17, 2023, then at Sónar+D Barcelona — the music festival’s digital trade show, from June 15 to June 17, 2023.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-making-blockchain-art-accessible-to-the-masses">Making blockchain art accessible to the masses</h2>
+
+
+
+<p>Although crypto natives and blockchain curious might understand these concepts, Mutlu wanted to make his physical artworks that explore the blockchain comprehensible to the average person. To that end, he created physical artwork that explains blockchain by visualizing and gamifying it.</p>
+
+
+
+<p>“The project&#8217;s output consists of three interactive sculptures machined out of aluminum, which are sized similarly to an iPad,” said Mutlu. “The dynamics of the interaction are based on the conventional maze game, where the paths of the mazes represent three different network systems: centralized, decentralized, and distributed networks.”</p>
+
+
+
+<figure class="wp-block-embed is-type-video is-provider-youtube wp-block-embed-youtube wp-embed-aspect-16-9 wp-has-aspect-ratio"><div class="wp-block-embed__wrapper">
+<iframe title="MeshFlux Production Documentation" width="500" height="281" src="https://www.youtube.com/embed/67rTCtovTbQ?feature=oembed" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div></figure>
+
+
+
+<p>All three maze paths are mapped according to Paul Baran&#8217;s original work published in 1964. Steel bearing balls inside the sculptures represent data packets in the network. The usage of multiple bearing balls distinguishes this sculpture from a conventional maze game and visualizes a multi-user network schematic.</p>
+
+
+
+<p>“I narrowed down my approach to the fundamental principles of blockchain, specifically network models,” Mutlu explained. “To achieve this, I created three maze games using network models as the foundation. These maze games are often associated with children and were constructed using premium and industrial materials to strike a balance between play and serious tech.”</p>
+
+
+
+<p>Using computers to industrially mill materials — aluminum, in this case — requires designing a digital 3D model, programming the milling machine (referred to as CAM), securing the material into the CNC machine, and using automated cutting tools (CNC) to precisely shape the aluminum block according to the design.&nbsp;</p>
+
+
+
+<p>“The process allows for accurate and efficient production of objects with complex shapes” explains Mutlu.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-meshflux-nft-meets-3d-printed-sculpture">MeshFlux: NFT meets 3D-printed sculpture</h2>
+
+
+
+<p>Since his focus lies in physical objects, Mutlu wanted to offer the same sculpture as a 3D-printable file functioning as an NFT. His plan was to leverage all the advantages of blockchain technology through the creation of an NFT, while ensuring its potential to be transformed into a physical and tactile artwork. This would, he figured, satisfy the collector&#8217;s desire for touch and possession.</p>
+
+
+
+<p>With part of his NEAR ecosystem grant, Mutlu shot a documentary that explores the process of creating MeshFlux’s physical and digital (blockchain) aspects. NFT versions of MeshFlux are <a href="https://www.monoco.io/profile/ufukbarismutlu">currently available</a>, and Mutlu is working on integrating them with NEAR.&nbsp;</p>
+
+
+
+<p>Follow <a href="https://www.instagram.com/ubarismutlu/">Ufuk Barış Mutlu</a> on Instagram.&nbsp;</p>
+<p>The post <a href="/blog/with-meshflux-multimedia-art-and-gaming-explore-blockchain-technology/">With MeshFlux, Multimedia Art and Gaming Explore Blockchain Technology </a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

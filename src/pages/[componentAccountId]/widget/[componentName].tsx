@@ -1,13 +1,14 @@
-import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
+import type { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import { MetaTags } from '@/components/MetaTags';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { privacyDomainName, termsDomainName } from '@/utils/config';
@@ -106,6 +107,15 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const components = useBosComponents();
+  const cookieData = useCookiePreferences();
+  const { requestAuthentication } = useSignInRedirect();
+
+  useEffect(() => {
+    const { requestAuth, createAccount } = componentProps;
+    if (requestAuth && !authStore.account) {
+      requestAuthentication(!!createAccount);
+    }
+  }, [authStore, componentProps, requestAuthentication]);
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -137,6 +147,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
                 privacyDomainName,
               }}
             />
+            <VmComponent src={components.nearOrg.cookiePrompt} props={{ cookiesAcknowleged: cookieData }} />
           </div>
         </div>
       </div>

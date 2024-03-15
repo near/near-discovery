@@ -12,11 +12,19 @@ let userAgentDetail = '';
 let hashId = '';
 let anonymousUserIdCreatedAt = '';
 let pendingEvents: any = [];
+let cookieOptOut = false;
+export const cookiePreferences = { onlyRequired: 'only_required', all: 'all' };
+let clientsideReferrer = '';
+let userCountryCode = '';
 
 declare global {
   interface Window {
     rudderAnalytics: Analytics | undefined;
   }
+}
+
+export function setReferrer(referrer: string) {
+  clientsideReferrer = referrer;
 }
 
 export function setAccountIdHash(accountId: string) {
@@ -57,12 +65,33 @@ function getUserAgent() {
   return userAgentDetail;
 }
 
+export function optOut(onlyRequiredCookies: boolean) {
+  cookieOptOut = onlyRequiredCookies;
+}
+
+function readCountryCodeCookie() {
+  let countryCode = '';
+  try {
+    const cc = document.cookie.split(';').filter((v) => v.indexOf('user-country-code') !== -1);
+    countryCode = cc.length > 0 ? cc[0].split('=')[1] : '';
+  } catch (e) {
+    console.log('failed to read user-country-code cookie', e);
+  }
+
+  return countryCode;
+}
+
 export async function init() {
   getUserAgent();
 
   if (window?.rudderAnalytics) return;
 
   getAnonymousId();
+
+  //pick up any change to cookie preferences on init (full page reload)
+  const userCookiePreference = localStorage.getItem('cookiesAcknowledged');
+  optOut(userCookiePreference === cookiePreferences.onlyRequired);
+  userCountryCode = readCountryCodeCookie();
 
   const rudderAnalyticsKey = networkId === 'testnet' ? '2R7K9phhzpFzk2zFIq2EFBtJ8BM' : '2RIih8mrVPUTQ9uWe6TFfwXzcMe';
   const rudderStackDataPlaneUrl = 'https://near.dataplane.rudderstack.com';
@@ -97,6 +126,7 @@ function filterURL(url: string) {
 }
 
 export function recordPageView(pageName: string) {
+  if (cookieOptOut) return;
   if (!rudderAnalytics) {
     pendingEvents.push(() => {
       recordPageView(pageName);
@@ -109,6 +139,8 @@ export function recordPageView(pageName: string) {
       url: filterURL(window.location.href),
       userAgentDetail,
       ref: filterURL(document.referrer),
+      clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
@@ -122,6 +154,8 @@ const record = (eventType: string, e: UIEvent | PointerEvent) => {
     url: e.target ? filterURL((e.target as HTMLElement).baseURI) : '',
     xPath: getXPath(e.target as HTMLElement),
     componentSrc: getComponentName(e.target as HTMLElement),
+    clientsideReferrer,
+    userCountryCode,
   });
 };
 export const recordClick = (e: UIEvent | PointerEvent) => record('click', e);
@@ -129,6 +163,7 @@ export const recordMouseEnter = (e: UIEvent) => record('mouseover', e);
 export const recordTouchStart = (e: UIEvent | PointerEvent) => record('touchstart', e);
 
 export function recordWalletConnect(accountId: string) {
+  if (cookieOptOut) return;
   if (!localStorage.getItem('hashId')) {
     setAccountIdHash(accountId);
     recordEvent('wallet-connected');
@@ -136,7 +171,7 @@ export function recordWalletConnect(accountId: string) {
 }
 
 export function reset() {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     recordEvent('wallet-logout');
     localStorage.removeItem('hashId');
@@ -149,13 +184,15 @@ export function reset() {
 }
 
 export function recordEventWithProps(eventLabel: string, properties: Record<string, string>) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     rudderAnalytics.track(eventLabel, {
       ...properties,
       userAgentDetail,
       hashId: localStorage.getItem('hashId'),
       anonymousUserIdCreatedAt,
+      clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);
@@ -167,13 +204,15 @@ export function recordHandledError(props: Record<string, string>) {
 }
 
 export function recordEvent(eventLabel: string) {
-  if (!rudderAnalytics) return;
+  if (!rudderAnalytics || cookieOptOut) return;
   try {
     rudderAnalytics.track(eventLabel, {
       hashId: localStorage.getItem('hashId'),
       url: window.location.href,
       userAgentDetail,
       anonymousUserIdCreatedAt,
+      clientsideReferrer,
+      userCountryCode,
     });
   } catch (e) {
     console.error(e);

@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+	xmlns:wfw="http://wellformedweb.org/CommentAPI/"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:atom="http://www.w3.org/2005/Atom"
+	xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+	xmlns:slash="http://purl.org/rss/1.0/modules/slash/"
+	>
+
+<channel>
+	<title>OKRs Archives &#8211; NEAR Protocol</title>
+	<atom:link href="/blog/tag/okrs/feed/" rel="self" type="application/rss+xml" />
+	<link>/blog/tag/okrs/</link>
+	<description></description>
+	<lastBuildDate>Fri, 13 Jan 2023 15:53:57 +0000</lastBuildDate>
+	<language>en-US</language>
+	<sy:updatePeriod>
+	hourly	</sy:updatePeriod>
+	<sy:updateFrequency>
+	1	</sy:updateFrequency>
+	<generator>https://wordpress.org/?v=6.4.3</generator>
+
+<image>
+	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<title>OKRs Archives &#8211; NEAR Protocol</title>
+	<link>/blog/tag/okrs/</link>
+	<width>32</width>
+	<height>32</height>
+</image> 
+	<item>
+		<title>NEAR Foundation &#038; Pagoda Goals and Target Metrics for 2023</title>
+		<link>/blog/near-foundation-pagoda-goals-and-target-metrics-for-2023/</link>
+		
+		<dc:creator><![CDATA[NEAR Team]]></dc:creator>
+		<pubDate>Fri, 13 Jan 2023 15:53:04 +0000</pubDate>
+				<category><![CDATA[NEAR Foundation]]></category>
+		<category><![CDATA[Ecosystem]]></category>
+		<category><![CDATA[OKRs]]></category>
+		<guid isPermaLink="false">/?p=19718</guid>
+
+					<description><![CDATA[<p>Building on the 2023 strategy for NEAR Foundation and Pagoda shared here at the end of last year, the goal …</p>
+<p>The post <a href="/blog/near-foundation-pagoda-goals-and-target-metrics-for-2023/">NEAR Foundation &amp; Pagoda Goals and Target Metrics for 2023</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></description>
+										<content:encoded><![CDATA[
+<p>Building on the 2023 strategy for NEAR Foundation and Pagoda <a href="/blog/near-strategic-update-and-outlook-for-2023/">shared here</a> at the end of last year, the goal of this post is to share the specific objectives and target metrics that will make this vision a reality.&nbsp;</p>
+
+
+
+<p>All NEAR ecosystem OKRs for 2023 distill to a single North Star: the goal of 10 million monthly active accounts (MAAs) by the end of the year. This is approximately 12x growth from today’s 800K MAAs (the all-time high was around 900K) and puts NEAR solidly on the path to achieve mainstream adoption in the next few years. The Foundation and Pagoda have chosen to focus on MAAs because they believe user adoption is the best indicator that NEAR is providing real value to end users today with monthly frequency and eventually weekly or daily.&nbsp;</p>
+
+
+
+<p>During 2023, NEAR will transform from a Layer-1 blockchain into the Blockchain Operating System, connecting applications, tooling, social, earning, and developer components across the Open Web. With product development of NEAR Discovery, the bottom-up community approach, the top-down partnerships growth strategy from NEAR Foundation, and continued iteration on the best user experience and onboarding in Web3, each team in Pagoda and NEAR Foundation will contribute to overall growth in usage over the next year.&nbsp;</p>
+
+
+
+<p>The following OKRs (objectives and key results) are the guideposts for each team in 2023.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-near-foundation-goals-for-2023">NEAR Foundation Goals for 2023</h2>
+
+
+
+<p>What does success look like for NEAR Foundation at the end of this year?</p>
+
+
+
+<ul>
+<li>NEAR is the blockchain operating system: brand, marketing
+<ul>
+<li>100% of content and processes running on NEAR Discovery</li>
+
+
+
+<li>30% of NEAR community is using Discovery</li>
+
+
+
+<li>3M Twitter followers and 2x increase in SOV (share of voice)</li>
+</ul>
+</li>
+
+
+
+<li>NEAR is a thriving decentralized ecosystem: community, legal, accelerator
+<ul>
+<li>NDC and 3 community DAOs set up with core contributors and legal structure</li>
+
+
+
+<li>50+ NPS score from community&nbsp;</li>
+
+
+
+<li>$250M in external capital flowing into minimum of 100 projects</li>
+</ul>
+</li>
+
+
+
+<li>NEAR is transforming the best Web2 projects: BD
+<ul>
+<li>5M+ MAAs added to NEAR through minimum of 3 major partnerships</li>
+
+
+
+<li>12+ landmark partnership agreements</li>
+
+
+
+<li>24+ tier-2 partnership agreements&nbsp;</li>
+
+
+
+<li></li>
+</ul>
+</li>
+</ul>
+
+
+
+<p>By the end of 2023, NEAR Foundation will have transformed NEAR into a blockchain operating system, made possible through NEAR Discovery, fostering an even more thriving decentralized ecosystem with more MAAs, major partnerships, and external capital inflow.</p>
+
+
+
+<h2 class="wp-block-heading" id="h-pagoda-okrs">Pagoda OKRs</h2>
+
+
+
+<p>What does success look like for Pagoda at the end of this year?&nbsp;</p>
+
+
+
+<ul>
+<li>NEAR has the best-in-class protocol and infrastructure: core, protocol, security
+<ul>
+<li>100% on-chain availability and security to support product growth</li>
+</ul>
+</li>
+
+
+
+<li>NEAR has solutions that support millions of users: solutions &amp; product
+<ul>
+<li>10+ partnerships integrated with companies of 1M+ users, 100K+ MAA growth</li>
+</ul>
+</li>
+
+
+
+<li>NEAR onboards and retains millions of users: product, Discovery, DevOps
+<ul>
+<li>20%+ month-over-month growth in MAAs</li>
+
+
+
+<li>25% 8-week retention and K-factor greater than one</li>
+
+
+
+<li>20% month-over-month growth in Monthly Active Developers (MADs), with 20% growth in used components and component retention</li>
+</ul>
+</li>
+</ul>
+
+
+
+<p>By the end of the year, Pagoda will have created NEAR Discovery and other solutions and products for developers, while growing partnerships and monthly active developers and accounts.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-note-on-metrics">Note on Metrics</h2>
+
+
+
+<p>Different NEAR teams have tracked various metrics to measure success at different points, but a macro goal for 2023 is to unify progress measurement across the organization. The decision to focus on Monthly Active Accounts reflects two critical points: first, that accounts will be a more accurate measure than wallets in NEAR Discovery thanks to improvements in onboarding, and second, that NEAR cannot provably track unique users because of the default privacy of Web3––many users have several accounts to handle different types of activity.&nbsp;</p>
+
+
+
+<p>NEAR’s goal since the first NEARCON in 2021 has been to get to a billion users within five years, or in 2026. While a high number of daily active users (DAA) will be necessary for achieving a billion users, the NEAR ecosystem is not there yet––daily usage will require many successful apps and seamless user journeys between them, which is the goal for NEAR Discovery. Over time, NEAR Foundation and Pagoda expect to begin tracking more granular metrics such as Daily Active Accounts, accounts that use more than one app, and retention across apps.&nbsp;</p>
+
+
+
+<h2 class="wp-block-heading" id="h-2023-the-year-of-near">2023: The Year of NEAR&nbsp;</h2>
+
+
+
+<p>NEAR is the best-positioned ecosystem in Web3 to achieve mainstream adoption in 2023 despite difficult market conditions. With NEAR Foundation, Pagoda, and the community working towards concrete, shared goals and a common vision, the ecosystem will be better aligned with clearer paths to contribution. The Foundation will continue delivering on its commitment to communicate often about its activities and progress.</p>
+
+
+
+<p>Watch on Twitter and NEAR Social for progress updates on these goals in Q1 as well as a public dashboard for easier tracking of target metrics soon.&nbsp;</p>
+<p>The post <a href="/blog/near-foundation-pagoda-goals-and-target-metrics-for-2023/">NEAR Foundation &amp; Pagoda Goals and Target Metrics for 2023</a> appeared first on <a href="/">NEAR Protocol</a>.</p>
+]]></content:encoded>
+					
+		
+		
+			</item>
+	</channel>
+</rss>

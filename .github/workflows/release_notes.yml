@@ -1,0 +1,24 @@
+name: Automatic Github Releases
+
+on: 
+  push:
+    branches:
+      - "main"
+
+jobs:
+  update_release_draft:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Get current date
+      id: date
+      run: echo "tag=$(date +'%m-%d-%Y')"  >> "$GITHUB_OUTPUT"
+    - uses: actions/checkout@v3
+    - uses: ncipollo/release-action@v1.14.0
+      with:
+        generateReleaseNotes: true
+        tag: ${{ steps.date.outputs.tag }}
+        makeLatest: true
+        allowUpdates: false
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

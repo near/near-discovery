@@ -56,6 +56,42 @@ const nextConfig = {
         source: '/da',
         destination: '/data-availability',
         permanent: true,
+      },
+      { //TODO - remove in Q2 2024
+        source: '/files/:slug',
+        destination: 'https://discovery-domain.org/papers/:slug.pdf',
+        permanent: false, 
+      },
+      {
+        source: '/papers/:slug',
+        destination: 'https://discovery-domain.org/papers/:slug.pdf',
+        permanent: false,
+      },
+      {
+        source: '/ethdenver',
+        destination: 'https://pages.near.org/ethdenver2024',
+        permanent: true,
+      },
+      {
+        source: '/horizon',
+        destination: '/founders',
+        permanent: true,
+      },
+      {
+        source: '/signin',
+        destination: '/applications?requestAuth=1',
+        permanent: false,
+      }
+      ,
+      {
+        source: '/signup',
+        destination: '/applications?requestAuth=1&createAccount=1',
+        permanent: false,
+      },
+      {
+        source: '/blog/getting-started-with-the-near-wallet',
+        destination: 'https://wallet.near.org',
+        permanent: true
       }
     ];
   },
@@ -63,6 +99,14 @@ const nextConfig = {
     {
       source: '/api/analytics/:path*',
       destination: 'https://near.dataplane.rudderstack.com/:path*',
+    },
+    {
+      source: '/blog',
+      destination: '/blog/',
+    },
+    {
+      source: '/blog/:path*',
+      destination: '/blog/:path*/index.html',
     }
   ],
   headers: async () => [
@@ -87,8 +131,7 @@ const withPWA = require('next-pwa')({
 })
 const { loadEnvConfig } = require('@next/env');
 loadEnvConfig(".")
-if(!process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT)
-  module.exports = withPWA(nextConfig);
+module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below
 
