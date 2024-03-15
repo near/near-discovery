@@ -16,15 +16,16 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { ToastContainer } from 'react-toastify';
-
+import useAccount from '@/hooks/useAccount';
+import { useDebounceFn } from 'ahooks';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import useClickTracking from '@/hooks/useClickTracking';
 import useInitialDataWithoutAuth from '@/hooks/useInitialDataWithoutAuth';
 import useTokenPrice from '@/hooks/useTokenPrice';
-
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import { report } from '@/utils/burying-point';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -38,7 +39,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useClickTracking();
   const { getInitialDataWithoutAuth } = useInitialDataWithoutAuth();
-
+  const { account } = useAccount();
   const [ready, setReady] = useState(false);
 
   const { initializePrice } = useTokenPrice();
@@ -58,6 +59,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     localStorage.setItem('accountId', authStore.accountId);
     window.zE('webWidget', 'show');
   }, [authStore.accountId, authStore.signedIn, componentSrc]);
+
+  const { run: updateAccount } = useDebounceFn(
+    () => {
+      if (account) report({ code: '2001-001', address: account });
+    },
+    { wait: 500 },
+  );
+
+  useEffect(() => {
+    updateAccount();
+  }, [account]);
 
   useEffect(() => {
     initializePrice();
