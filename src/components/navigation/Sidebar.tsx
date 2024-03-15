@@ -10,12 +10,12 @@ import { currentPathMatchesRoute } from './utils';
 export const Sidebar = () => {
   const router = useRouter();
   const expandedDrawer = useNavigationStore((store) => store.expandedDrawer);
-  const sidebarIsExpanded = useNavigationStore((store) => store.sidebarIsExpanded && !store.expandedDrawer);
-  const sidebarIsOpenedOnSmallScreens = useNavigationStore((store) => store.sidebarIsOpenedOnSmallScreens);
-  const setNavigation = useNavigationStore((store) => store.set);
+  const isSidebarExpanded = useNavigationStore((store) => store.isSidebarExpanded && !store.expandedDrawer);
+  const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebar = useNavigationStore((store) => store.toggleExpandedSidebar);
   const toggleExpandedDrawer = useNavigationStore((store) => store.toggleExpandedDrawer);
-  const tooltipsDisabled = sidebarIsExpanded;
+  const handleBubbledClickInSidebar = useNavigationStore((store) => store.handleBubbledClickInSidebar);
+  const tooltipsDisabled = isSidebarExpanded;
 
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
     if (expandedDrawer) return false;
@@ -24,9 +24,9 @@ export const Sidebar = () => {
 
   return (
     <S.Sidebar
-      $openedOnSmallScreens={sidebarIsOpenedOnSmallScreens}
-      $expanded={sidebarIsExpanded}
-      onClick={() => setNavigation({ expandedDrawer: null })}
+      $openedOnSmallScreens={isOpenedOnSmallScreens}
+      $expanded={isSidebarExpanded}
+      onClick={(event) => handleBubbledClickInSidebar(event)}
     >
       <S.OverflowContainChild>
         <S.Top>
@@ -35,7 +35,7 @@ export const Sidebar = () => {
           </S.Logo>
 
           <S.ToggleExpandButton type="button" aria-label="Expand/Collapse Menu" onClick={toggleExpandedSidebar}>
-            <i className={`ph-bold ${sidebarIsExpanded ? 'ph-arrow-line-left' : 'ph-list'}`} />
+            <i className={`ph-bold ${isSidebarExpanded ? 'ph-arrow-line-left' : 'ph-list'}`} />
           </S.ToggleExpandButton>
         </S.Top>
 
