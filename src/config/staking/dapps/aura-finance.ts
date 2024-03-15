@@ -35,7 +35,7 @@ const networks = {
         Aura_Pool_ID: 15,
         poolType: POOL_TYPES.WeightedPool,
         APR: 0.0426,
-        pjAPR: 0.0442,
+        pjAPR: 0.051,
       },
       {
         poolName: 'COW-wstETH',
@@ -48,7 +48,7 @@ const networks = {
         Aura_Pool_ID: 20,
         poolType: POOL_TYPES.WeightedPool,
         APR: 0.1648,
-        pjAPR: 0.1676,
+        pjAPR: 0.1431,
       },
       {
         poolName: 'USDT-sDAI-USDC',
@@ -61,7 +61,7 @@ const networks = {
         Aura_Pool_ID: 21,
         poolType: POOL_TYPES.ComposableStablePool,
         APR: 0.0814,
-        pjAPR: 0.0784,
+        pjAPR: 0.1512,
       },
       {
         poolName: 'wstETH-sDAI',
@@ -74,7 +74,7 @@ const networks = {
         Aura_Pool_ID: 19,
         poolType: POOL_TYPES.WeightedPool,
         APR: 0.3045,
-        pjAPR: 0.2755,
+        pjAPR: 0.3149,
       },
       {
         poolName: 'crvUSD-sDAI',
@@ -87,7 +87,7 @@ const networks = {
         Aura_Pool_ID: 23,
         poolType: POOL_TYPES.ComposableStablePool,
         APR: 0.1874,
-        pjAPR: 0.1766,
+        pjAPR: 0.1919,
       },
       {
         poolName: 'sDAI-EURe',
@@ -100,7 +100,7 @@ const networks = {
         Aura_Pool_ID: 18,
         poolType: POOL_TYPES.ComposableStablePool,
         APR: 0.1959,
-        pjAPR: 0.1886,
+        pjAPR: 0.2103,
       },
       {
         poolName: 'WETH-wstETH',
@@ -113,7 +113,7 @@ const networks = {
         Aura_Pool_ID: 0,
         poolType: POOL_TYPES.WeightedPool,
         APR: 0.0538,
-        pjAPR: 0.0605,
+        pjAPR: 0.0705,
       },
       {
         poolName: 'AURA-wstETH-BAL',
@@ -126,7 +126,7 @@ const networks = {
         Aura_Pool_ID: 17,
         poolType: POOL_TYPES.WeightedPool,
         APR: 0.3023,
-        pjAPR: 0.2866,
+        pjAPR: 0.286,
       },
       {
         poolName: 'staBAL3-WETH-WBTC',
@@ -139,7 +139,7 @@ const networks = {
         Aura_Pool_ID: 13,
         poolType: POOL_TYPES.WeightedPool,
         APR: 0.2384,
-        pjAPR: 0.242,
+        pjAPR: 0.1619,
       },
       {
         poolName: 'stEUR-EURe',
@@ -152,7 +152,7 @@ const networks = {
         Aura_Pool_ID: 22,
         poolType: POOL_TYPES.ComposableStablePool,
         APR: 0.1426,
-        pjAPR: 0.1431,
+        pjAPR: 0.156,
       },
       // {
       //   poolName: 'staBAL3-EURe',
