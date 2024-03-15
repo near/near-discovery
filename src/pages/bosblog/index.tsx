@@ -1,9 +1,10 @@
+import { useRouter } from 'next/router';
+
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useRouter } from 'next/router';
 
 const Blog: NextPageWithLayout = () => {
   const components = useBosComponents();
