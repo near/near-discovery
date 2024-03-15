@@ -601,7 +601,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
             </div>
             <div className="right-list-item">
               <p>{activity?.total_execution || '-'}</p>
-              <span>Acctions</span>
+              <span>Actions</span>
             </div>
           </div>
           <div className="left-side-tab">
