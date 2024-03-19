@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useAuthStore } from '@/stores/auth';
 
 import { BosLoaderBanner } from '../BosLoaderBanner';
+import { LargeScreenHeader } from '../navigation/LargeScreenHeader';
 import { Navigation } from '../navigation/Navigation';
 import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from '../navigation/utils';
 import { NavigationSignedOut } from '../navigation-signed-out/NavigationSignedOut';
@@ -36,7 +37,6 @@ const Wrapper = styled.div<{
 const Content = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
   flex-grow: 1;
   justify-content: stretch;
   align-items: stretch;
@@ -51,7 +51,10 @@ export function DefaultLayout({ children }: Props) {
       {signedIn ? <Navigation /> : <NavigationSignedOut />}
 
       <Content>
+        {signedIn && <LargeScreenHeader />}
+
         <BosLoaderBanner />
+
         {children}
       </Content>
     </Wrapper>

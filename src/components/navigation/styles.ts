@@ -1,7 +1,16 @@
 import Link from 'next/link';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from './utils';
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
 
 const overflowContain = css`
   overflow: auto;
@@ -350,13 +359,37 @@ export const Sidebar = styled.div<{
   }
 `;
 
+export const LargeScreenHeader = styled.header<{
+  $scrolled: boolean;
+}>`
+  display: flex;
+  position: sticky;
+  height: 64px;
+  top: 0;
+  z-index: 1000;
+  background: var(--white);
+  box-shadow: ${(p) => (p.$scrolled ? '0 1px 0 var(--sand6)' : '0 0 0 var(--white)')};
+  transition: all var(--sidebar-expand-transition-speed);
+
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    display: none;
+  }
+`;
+
+export const LargeScreenHeaderActionWrapper = styled.div`
+  display: flex;
+  height: 40px;
+  width: 40px;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const SmallScreenHeader = styled.header`
   display: none;
   position: sticky;
   top: 0;
   z-index: 1000;
   align-items: stretch;
-  gap: 1rem;
   height: var(--small-screen-header-height);
   background: var(--white);
   border-bottom: 1px solid var(--sand6);
@@ -378,6 +411,7 @@ export const SmallScreenHeaderLogo = styled(Link)`
   flex-shrink: 0;
   outline-offset: -2px;
   transition: all 150ms, outline 0ms;
+  animation: ${fadeIn} var(--sidebar-expand-transition-speed);
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -397,9 +431,11 @@ export const SmallScreenHeaderIconButton = styled.button`
   justify-content: center;
   color: var(--sand11);
   padding: 1rem;
+  width: 69px;
   flex-shrink: 0;
   outline-offset: -2px;
   transition: all 150ms, outline 0ms;
+  animation: ${fadeIn} var(--sidebar-expand-transition-speed);
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -425,6 +461,48 @@ export const SmallScreenHeaderTitle = styled.p`
   letter-spacing: 0.3px;
   align-self: center;
   margin-right: auto;
+  margin-left: 1rem;
+  animation: ${fadeIn} var(--sidebar-expand-transition-speed);
+`;
+
+export const SmallScreenHeaderActions = styled.div<{
+  $hidden: boolean;
+}>`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  opacity: 1;
+  transition: all var(--sidebar-expand-transition-speed);
+
+  ${(p) =>
+    p.$hidden
+      ? css`
+          overflow: hidden;
+          opacity: 0;
+          width: 0;
+          pointer-events: none;
+        `
+      : undefined}
+`;
+
+export const SmallScreenNavigationBackground = styled.div<{
+  $expanded: boolean;
+}>`
+  position: fixed;
+  z-index: 999;
+  top: var(--small-screen-header-height);
+  width: 0;
+  height: calc(100dvh + 1px - var(--small-screen-header-height));
+  background: var(--white);
+  transition: all var(--sidebar-expand-transition-speed);
+
+  ${(p) =>
+    p.$expanded
+      ? css`
+          width: 100vw;
+          opacity: 1;
+        `
+      : undefined}
 `;
 
 export const DrawerTitle = styled.p`
@@ -470,6 +548,7 @@ export const Drawer = styled.div<{
     position: fixed;
     top: var(--small-screen-header-height);
     height: calc(100dvh + 1px - var(--small-screen-header-height));
+    box-shadow: none;
 
     ${(p) =>
       p.$expanded
