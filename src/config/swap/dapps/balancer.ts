@@ -56,16 +56,7 @@ const networks = {
       input: base['eth'],
       output: base['usdc'],
     },
-    tokens: [
-      base['eth'],
-      base['usdc'],
-      base['weth'],
-      base['base'],
-      base['usdbc'],
-      base['dai'],
-      base['cbeth'],
-      base['axlusdc'],
-    ],
+    tokens: [base['eth'], base['usdc'], base['weth'], base['usdbc'], base['dai'], base['cbeth']],
     pools: [
       [
         [base['weth'].address.toLowerCase(), base['usdbc'].address.toLowerCase()],
