@@ -48,7 +48,7 @@ const variants: Record<Variant, any> = {
       },
     },
     solid: {
-      background: 'var(--sand12)',
+      background: 'var(--sand12) !important', //Important is necessary as long as [[...pages]].tsx fetches static html blog content
       border: 'var(--sand12)',
       color: 'var(--sand1)',
       iconColor: 'var(--sand9)',
