@@ -8,15 +8,14 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build": "pnpm run sync-submodules && pnpm run deploy-wp && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx,json}'",
     "prettier:write": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json}'",
     "prepare": "is-ci || husky install && npm install commitizen -g",
     "commit": "cz",
-    "sync-submodules": "git submodule init && git submodule update --remote",
-    "deploy-wp": "cp -r nearorg_marketing/public/wp-content ./public/ && cp -r nearorg_marketing/public/wp-includes ./public/"
+    "sync-submodules": "git submodule init && git submodule update --remote"
   },
   "dependencies": {
     "@idos-network/idos-sdk": "^0.0.30",
