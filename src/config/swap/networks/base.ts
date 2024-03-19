@@ -8,6 +8,7 @@ import { basic as aerodromeBasic, networks as aerodromeNetworks } from '../dapps
 import { basic as sobalBasic, networks as sobalNetworks } from '../dapps/sobal';
 import { basic as velocimeterV2Basic, networks as velocimeterV2Networks } from '../dapps/velocimeter-v2';
 import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
+import { basic as balancerBasic, networks as balancerNetworks } from '../dapps/balancer';
 
 const CHAIN_ID = 8453;
 
@@ -61,6 +62,10 @@ export default {
     SushiSwap: {
       ...sushiBasic,
       ...sushiNetworks[CHAIN_ID],
+    },
+    Balancer: {
+      ...balancerBasic,
+      ...balancerNetworks[CHAIN_ID],
     },
   },
 };

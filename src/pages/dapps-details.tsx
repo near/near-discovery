@@ -475,7 +475,7 @@ const DappsDetailsColumn: NextPageWithLayout = () => {
     });
   }
   function formatDate(timestamp: number) {
-    const date = new Date((timestamp + 8 * 60 * 60) * 1000);
+    const date = new Date(timestamp * 1000);
     const options = {
       year: 'numeric',
       month: 'short',

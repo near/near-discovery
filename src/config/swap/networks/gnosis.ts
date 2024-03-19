@@ -3,6 +3,7 @@ import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-s
 import { basic as swaprBasic, networks as swaprNetworks } from '../dapps/swapr';
 import { basic as elkBasic, networks as elkNetworks } from '../dapps/elk';
 import { basic as symmetricBasic, networks as symmetricNetworks } from '../dapps/symmetric';
+import { basic as balancerBasic, networks as balancerNetworks } from '../dapps/balancer';
 
 const CHAIN_ID = 100;
 
@@ -36,6 +37,10 @@ export default {
     Symmetric: {
       ...symmetricBasic,
       ...symmetricNetworks[CHAIN_ID],
+    },
+    Balancer: {
+      ...balancerBasic,
+      ...balancerNetworks[CHAIN_ID],
     },
   },
 };
