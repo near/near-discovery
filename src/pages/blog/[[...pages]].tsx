@@ -15,7 +15,7 @@ export const getServerSideProps = (async ({ resolvedUrl }) => {
   if (blogParts[1] !== title) {
     title = `${blogParts[1].substring(0, blogParts[1].indexOf('/'))}/index.html`;
   }
-  const res = await fetch(`https://raw.githubusercontent.com/near/near-discovery/main/public/blog/${title}`).catch(
+  const res = await fetch(`https://raw.githubusercontent.com/near/nearorg_marketing/main/public/blog/${title}`).catch(
     (e) => {
       recordHandledError({ title, message: 'failed to fetch github blog html for requested title' });
       throw e;
