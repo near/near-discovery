@@ -8,6 +8,7 @@ import { basic as zebraBasic, networks as zebraNetworks } from '../dapps/zebra';
 import { basic as IziSwapBasic, networks as IziSwapNetworks } from '../dapps/izi-swap';
 import { basic as dodoBasic, networks as dodoNetworks } from '../dapps/dodo';
 import { basic as sushiBasic, networks as sushiNetworks } from '../dapps/sushi-swap';
+import { basic as xyBasic, networks as xyNetworks } from '../dapps/xy-finance';
 
 const CHAIN_ID = 534352;
 
@@ -57,6 +58,10 @@ export default {
     SushiSwap: {
       ...sushiBasic,
       ...sushiNetworks[CHAIN_ID],
+    },
+    'XY Finance': {
+      ...xyBasic,
+      ...xyNetworks[CHAIN_ID],
     },
   },
 };

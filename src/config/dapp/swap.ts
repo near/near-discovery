@@ -429,4 +429,11 @@ export default {
       '--button-text-color': '#fff',
     },
   },
+  'xy-finance': {
+    type: 'swap',
+    theme: {
+      '--button-color': '#277eec',
+      '--button-text-color': '#fff',
+    },
+  },
 };
