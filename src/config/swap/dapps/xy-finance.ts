@@ -19,7 +19,6 @@ const networks = {
       scroll['eth'],
       scroll['wsteth'],
       scroll['usdt'],
-      scroll['dodo'],
     ],
   },
 };
