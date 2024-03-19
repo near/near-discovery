@@ -102,7 +102,7 @@ const nextConfig = {
     },
     {
       source: '/blog',
-      destination: '/blog/',
+      destination: '/blog/index.html',
     },
     {
       source: '/blog/:path*',
