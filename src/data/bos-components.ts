@@ -62,6 +62,13 @@ type NetworkComponents = {
   widgetMetadataEditor: string;
   wrapper: string;
   eventsPage: string;
+  navigation: {
+    largeScreenHeader: string;
+    notificationButton: string;
+    profileDropdown: string;
+    search: string;
+    smallScreenHeader: string;
+  };
 };
 
 export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | undefined> => {
@@ -133,6 +140,13 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       widgetMetadataEditor: `${testnetTLA}/widget/WidgetMetadataEditor`,
       wrapper: `${testnetTLA}/widget/GatewayWrapper`,
       eventsPage: `${testnetTLA}/widget/Events.Index`,
+      navigation: {
+        largeScreenHeader: `${testnetTLA}/widget/Navigation.LargeScreenHeader`,
+        notificationButton: `${testnetTLA}/widget/NearOrg.Notifications.NotificationButton`,
+        profileDropdown: `${testnetTLA}/widget/Navigation.ProfileDropdown`,
+        search: `${testnetTLA}/widget/Navigation.Search`,
+        smallScreenHeader: `${testnetTLA}/widget/Navigation.SmallScreenHeader`,
+      },
     },
 
     mainnet: {
@@ -197,6 +211,13 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
       wrapper: 'near/widget/GatewayWrapper',
       eventsPage: 'near/widget/Events.Index',
+      navigation: {
+        largeScreenHeader: 'near/widget/Navigation.LargeScreenHeader',
+        notificationButton: 'near/widget/NearOrg.Notifications.NotificationButton',
+        profileDropdown: 'near/widget/Navigation.ProfileDropdown',
+        search: 'near/widget/Navigation.Search',
+        smallScreenHeader: 'near/widget/Navigation.SmallScreenHeader',
+      },
     },
   };
 })();

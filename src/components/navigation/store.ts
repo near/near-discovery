@@ -6,6 +6,7 @@ import { isSmallScreen, SIDEBAR_EXPANDED_PREFERENCE_KEY } from './utils';
 export type NavigationDrawer = 'discover' | 'marketing';
 
 type NavigationState = {
+  currentPageTitle: string | null;
   expandedDrawer: NavigationDrawer | null | undefined;
   expandedDrawerTitle: string;
   hasInitialized: boolean;
@@ -18,6 +19,7 @@ type NavigationStore = NavigationState & {
   handleBubbledClickInDrawer: () => void;
   handleBubbledClickInSidebar: (event: MouseEvent<HTMLDivElement>) => void;
   set: (state: Partial<NavigationState>) => void;
+  setCurrentPageTitle: (title: string | null) => void;
   setInitialExpandedDrawer: (drawer: NavigationDrawer) => void;
   toggleExpandedDrawer: (drawer: NavigationDrawer, event: MouseEvent<HTMLButtonElement>) => void;
   toggleExpandedSidebar: () => void;
@@ -25,6 +27,7 @@ type NavigationStore = NavigationState & {
 };
 
 export const useNavigationStore = create<NavigationStore>((set) => ({
+  currentPageTitle: null,
   expandedDrawer: undefined,
   expandedDrawerTitle: '',
   hasInitialized: false,
@@ -65,6 +68,8 @@ export const useNavigationStore = create<NavigationStore>((set) => ({
       }
     });
   },
+
+  setCurrentPageTitle: (currentPageTitle) => set(() => ({ currentPageTitle })),
 
   setInitialExpandedDrawer: (drawer) => {
     set((state) => {

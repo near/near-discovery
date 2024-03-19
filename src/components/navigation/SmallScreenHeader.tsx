@@ -1,15 +1,31 @@
 import Image from 'next/image';
+import { useCallback } from 'react';
 
+import { useBosComponents } from '@/hooks/useBosComponents';
+import { useAuthStore } from '@/stores/auth';
+import { useVmStore } from '@/stores/vm';
+
+import { VmComponent } from '../vm/VmComponent';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 
 export const SmallScreenHeader = () => {
+  const components = useBosComponents();
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebarOnSmallScreens = useNavigationStore((store) => store.toggleExpandedSidebarOnSmallScreens);
   const setNavigation = useNavigationStore((store) => store.set);
   const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
+
+  const near = useVmStore((store) => store.near);
+  const availableStorage = useAuthStore((store) => store.availableStorage);
+  const logOut = useAuthStore((store) => store.logOut);
+
+  const withdrawTokens = useCallback(async () => {
+    if (!near) return;
+    await near.contract.storage_withdraw({}, undefined, '1');
+  }, [near]);
 
   return (
     <S.SmallScreenHeader>
@@ -35,6 +51,14 @@ export const SmallScreenHeader = () => {
         </S.SmallScreenHeaderLogo>
       )}
 
+      <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens}>
+        <VmComponent
+          showLoadingSpinner={false}
+          src={components.navigation.smallScreenHeader}
+          props={{ availableStorage, withdrawTokens, logOut }}
+        />
+      </S.SmallScreenHeaderActions>
+
       <S.SmallScreenHeaderIconButton
         type="button"
         aria-label="Expand/Collapse Menu"
@@ -42,6 +66,8 @@ export const SmallScreenHeader = () => {
       >
         <i className={`ph ${isOpenedOnSmallScreens ? 'ph-x' : 'ph-list'}`} />
       </S.SmallScreenHeaderIconButton>
+
+      <S.SmallScreenNavigationBackground $expanded={isOpenedOnSmallScreens} />
     </S.SmallScreenHeader>
   );
 };
