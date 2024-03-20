@@ -43,7 +43,6 @@ const networks = {
       zkSync['usdt'],
       zkSync['wbtc'],
       zkSync['cebusd'],
-      zkSync['zkusd'],
       zkSync['dvf'],
       zkSync['lusd'],
       zkSync['reth'],
