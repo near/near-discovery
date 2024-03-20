@@ -11,6 +11,7 @@ export const LargeScreenProfileDropdown = () => {
   const components = useBosComponents();
   const near = useVmStore((store) => store.near);
   const availableStorage = useAuthStore((store) => store.availableStorage);
+  const availableStorageDisplay = availableStorage?.gte(10) ? availableStorage.div(1000).toFixed(2) : '0';
   const logOut = useAuthStore((store) => store.logOut);
 
   const withdrawTokens = useCallback(async () => {
@@ -20,7 +21,14 @@ export const LargeScreenProfileDropdown = () => {
 
   return (
     <S.LargeScreenHeaderActionWrapper>
-      <VmComponent src={components.navigation.profileDropdown} props={{ availableStorage, withdrawTokens, logOut }} />
+      <VmComponent
+        src={components.navigation.profileDropdown}
+        props={{
+          availableStorage: availableStorageDisplay,
+          withdrawTokens,
+          logOut,
+        }}
+      />
     </S.LargeScreenHeaderActionWrapper>
   );
 };
