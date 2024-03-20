@@ -24,7 +24,7 @@ export default function Close({ size = 18, onClose }: { size?: number; onClose: 
           stroke="currentColor"
           strokeWidth="1.66667"
           strokeLinecap="round"
-          stroke-linejoin="round"
+          strokeLinejoin="round"
         />
       </svg>
     </CloseIcon>

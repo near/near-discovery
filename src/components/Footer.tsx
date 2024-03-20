@@ -86,8 +86,8 @@ const Footer = () => {
                     y2="13.2381"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#979ABE" />
-                    <stop offset="1" stop-color="#979ABE" stop-opacity="0.5" />
+                    <stop stopColor="#979ABE" />
+                    <stop offset="1" stopColor="#979ABE" stopOpacity="0.5" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -111,8 +111,8 @@ const Footer = () => {
                     y2="11.0317"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#979ABE" />
-                    <stop offset="1" stop-color="#979ABE" stop-opacity="0.5" />
+                    <stop stopColor="#979ABE" />
+                    <stop offset="1" stopColor="#979ABE" stopOpacity="0.5" />
                   </linearGradient>
                 </defs>
               </svg>
@@ -136,8 +136,8 @@ const Footer = () => {
                     y2="13.2381"
                     gradientUnits="userSpaceOnUse"
                   >
-                    <stop stop-color="#979ABE" />
-                    <stop offset="1" stop-color="#979ABE" stop-opacity="0.5" />
+                    <stop stopColor="#979ABE" />
+                    <stop offset="1" stopColor="#979ABE" stopOpacity="0.5" />
                   </linearGradient>
                 </defs>
               </svg>

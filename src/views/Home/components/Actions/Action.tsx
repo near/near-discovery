@@ -9,7 +9,7 @@ const Action = ({ title, desc, icon, path, bg, bp }: any) => {
       onClick={() => {
         if (path) router.push(path);
       }}
-      clickable={!!path}
+      $clickable={!!path}
       style={{ background: bg }}
       data-bp={bp}
     >

@@ -439,10 +439,10 @@ const stickTopIcon = (
       d="M8 4L2 8.52941M8 4L14 8.52941M8 4V15"
       stroke="currentColor"
       strokeWidth="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
-    <path d="M1 1H15" stroke="currentColor" strokeWidth="1.5" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M1 1H15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 const SwapTokens = [

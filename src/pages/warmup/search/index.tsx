@@ -210,8 +210,8 @@ const iconsMap = {
       <path d="M7 15C7 19 11.5 21 14 19.6947" stroke="white" strokeWidth="1.5" />
       <defs>
         <linearGradient id="paint0_linear_0_141" x1="13" y1="0" x2="13" y2="26" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#982ECC" />
-          <stop offset="1" stop-color="#7C3FE4" />
+          <stop stopColor="#982ECC" />
+          <stop offset="1" stopColor="#7C3FE4" />
         </linearGradient>
       </defs>
     </svg>
@@ -238,8 +238,8 @@ const iconsMap = {
       <path d="M7 15C7 19 11.5 21 14 19.6947" stroke="white" strokeWidth="1.5" />
       <defs>
         <linearGradient id="paint0_linear_0_141" x1="13" y1="0" x2="13" y2="26" gradientUnits="userSpaceOnUse">
-          <stop stop-color="#982ECC" />
-          <stop offset="1" stop-color="#7C3FE4" />
+          <stop stopColor="#982ECC" />
+          <stop offset="1" stopColor="#7C3FE4" />
         </linearGradient>
       </defs>
     </svg>

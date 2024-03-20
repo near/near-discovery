@@ -44,7 +44,7 @@ const iconDelete = (
 );
 const iconBack = (
   <svg xmlns="http://www.w3.org/2000/svg" width="9" height="13" viewBox="0 0 9 13" fill="none">
-    <path d="M7.5 1L2 6.5L7.5 12" stroke="#979ABE" strokeWidth="2" stroke-linecap="round" />
+    <path d="M7.5 1L2 6.5L7.5 12" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 const iconChecked = (
@@ -54,8 +54,8 @@ const iconChecked = (
       d="M5.56543 8.00085L7.4205 9.73998L11.1306 6.26172"
       stroke="black"
       strokeWidth="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -77,8 +77,8 @@ const iconWarning = (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z"
     ></path>
   </svg>

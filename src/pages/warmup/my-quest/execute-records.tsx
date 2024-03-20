@@ -445,7 +445,7 @@ const left_most_icon = (
         d="M2.77733 5.77071C2.35628 6.16574 2.35628 6.83426 2.77733 7.22928L6.31579 10.5491C6.95436 11.1482 8 10.6954 8 9.81976L8 3.18023C8 2.30462 6.95436 1.85185 6.31579 2.45095L2.77733 5.77071Z"
         fill="#7E8A93"
       />
-      <path d="M1 3V10" stroke="#7E8A93" strokeWidth="1.2" stroke-linecap="round" stroke-linejoin="round" />
+      <path d="M1 3V10" stroke="#7E8A93" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
     </g>
   </svg>
 );
@@ -464,7 +464,7 @@ const right_most_icon = (
       d="M7.22267 5.77071C7.64372 6.16574 7.64372 6.83426 7.22267 7.22928L3.68421 10.5491C3.04564 11.1482 2 10.6954 2 9.81976L2 3.18023C2 2.30462 3.04564 1.85185 3.68421 2.45095L7.22267 5.77071Z"
       fill="#7E8A93"
     />
-    <path d="M9 3V10" stroke="#7E8A93" strokeWidth="1.2" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M9 3V10" stroke="#7E8A93" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -488,7 +488,7 @@ const arrow_down_icon = (
 
 const selected_icon = (
   <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M1 2.84615L4.47826 7L11 1" stroke="#9E75FF" strokeWidth="2" stroke-linecap="round" />
+    <path d="M1 2.84615L4.47826 7L11 1" stroke="#9E75FF" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 

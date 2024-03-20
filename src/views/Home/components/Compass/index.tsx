@@ -36,7 +36,7 @@ import {
 
 const iconRight = (
   <svg xmlns="http://www.w3.org/2000/svg" width="13" height="38" viewBox="0 0 13 38" fill="none">
-    <path d="M1 1L11 19L1 37" stroke="#979ABE" strokeWidth="2" stroke-linecap="round" />
+    <path d="M1 1L11 19L1 37" stroke="#979ABE" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 const Card = function ({ compass }: any) {

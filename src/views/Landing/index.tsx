@@ -93,8 +93,8 @@ const LandingView = () => {
                           d="M8 11.5L10.6667 14L16 9"
                           stroke="black"
                           strokeWidth="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
                         />
                       </svg>
                     )}

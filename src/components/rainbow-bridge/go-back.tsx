@@ -117,7 +117,7 @@ const GoBackIconMobile = (
     xmlns="http://www.w3.org/2000/svg"
   >
     <g filter="url(#filter0_b_2997_1980)">
-      <rect width="32" height="26" rx="8" fill="#373A53" fill-opacity="0.5" />
+      <rect width="32" height="26" rx="8" fill="#373A53" fillOpacity="0.5" />
     </g>
     <path
       fillRule="evenodd"

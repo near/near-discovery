@@ -42,8 +42,8 @@ export const Rank = ({ rank }: { rank: number }) => {
                 y2="24.7172"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop stop-color={RANK_COLORS[rank][0]} />
-                <stop offset="1" stop-color={RANK_COLORS[rank][1]} />
+                <stop stopColor={RANK_COLORS[rank][0]} />
+                <stop offset="1" stopColor={RANK_COLORS[rank][1]} />
               </linearGradient>
             </defs>
           </svg>

@@ -48,7 +48,7 @@ const Milestones = ({ milestones }: any) => {
               </svg>
             </StyledStar>
             <svg xmlns="http://www.w3.org/2000/svg" width="2" height="40" viewBox="0 0 2 40" fill="none">
-              <path d="M1 1L0.999998 39" stroke="url(#paint0_linear_4493_1580)" stroke-linecap="round" />
+              <path d="M1 1L0.999998 39" stroke="url(#paint0_linear_4493_1580)" strokeLinecap="round" />
               <defs>
                 <linearGradient
                   id="paint0_linear_4493_1580"
@@ -58,8 +58,8 @@ const Milestones = ({ milestones }: any) => {
                   y2="42.5625"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#EBF479" />
-                  <stop offset="1" stop-color="#EBF479" stop-opacity="0" />
+                  <stop stopColor="#EBF479" />
+                  <stop offset="1" stopColor="#EBF479" stopOpacity="0" />
                 </linearGradient>
               </defs>
             </svg>
