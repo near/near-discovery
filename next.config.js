@@ -101,10 +101,6 @@ const nextConfig = {
       destination: 'https://near.dataplane.rudderstack.com/:path*',
     },
     {
-      source: '/blog',
-      destination: '/blog/',
-    },
-    {
       source: '/blog/:path*',
       destination: '/blog/:path*/index.html',
     }
