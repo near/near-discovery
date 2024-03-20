@@ -19,6 +19,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/**/*.d.ts", "src/components/navigation/Sidebar", "src/components/navigation/Sidebar"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/**/*.d.ts", "src/components/sidebar-navigation/Sidebar", "src/components/sidebar-navigation/Sidebar"],
   "exclude": ["node_modules"]
 }

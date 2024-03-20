@@ -2,9 +2,11 @@ import Image from 'next/image';
 import { useCallback } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 
+import { Button } from '../lib/Button';
 import { VmComponent } from '../vm/VmComponent';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
@@ -22,6 +24,12 @@ export const SmallScreenHeader = () => {
   const availableStorage = useAuthStore((store) => store.availableStorage);
   const availableStorageDisplay = availableStorage?.gte(10) ? availableStorage.div(1000).toFixed(2) : '0';
   const logOut = useAuthStore((store) => store.logOut);
+  const signedIn = useAuthStore((store) => store.signedIn);
+  const { requestAuthentication } = useSignInRedirect();
+
+  const handleCreateAccount = () => {
+    requestAuthentication(true);
+  };
 
   const withdrawTokens = useCallback(async () => {
     if (!near) return;
@@ -52,21 +60,32 @@ export const SmallScreenHeader = () => {
         </S.SmallScreenHeaderLogo>
       )}
 
-      <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens}>
-        <VmComponent
-          showLoadingSpinner={false}
-          src={components.navigation.smallScreenHeader}
-          props={{ availableStorage: availableStorageDisplay, withdrawTokens, logOut }}
-        />
-      </S.SmallScreenHeaderActions>
+      {signedIn ? (
+        <>
+          <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens}>
+            <VmComponent
+              showLoadingSpinner={false}
+              src={components.navigation.smallScreenHeader}
+              props={{ availableStorage: availableStorageDisplay, withdrawTokens, logOut }}
+            />
+          </S.SmallScreenHeaderActions>
 
-      <S.SmallScreenHeaderIconButton
-        type="button"
-        aria-label="Expand/Collapse Menu"
-        onClick={toggleExpandedSidebarOnSmallScreens}
-      >
-        <i className={`ph ${isOpenedOnSmallScreens ? 'ph-x' : 'ph-list'}`} />
-      </S.SmallScreenHeaderIconButton>
+          <S.SmallScreenHeaderIconButton
+            type="button"
+            aria-label="Expand/Collapse Menu"
+            onClick={toggleExpandedSidebarOnSmallScreens}
+          >
+            <i className={`ph ${isOpenedOnSmallScreens ? 'ph-x' : 'ph-list'}`} />
+          </S.SmallScreenHeaderIconButton>
+        </>
+      ) : (
+        <Button
+          label="Create Account"
+          variant="primary"
+          onClick={handleCreateAccount}
+          style={{ alignSelf: 'center', marginRight: '1rem' }}
+        />
+      )}
 
       <S.SmallScreenNavigationBackground $expanded={isOpenedOnSmallScreens} />
     </S.SmallScreenHeader>

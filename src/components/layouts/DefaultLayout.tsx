@@ -1,22 +1,25 @@
-import type { ReactNode } from 'react';
+import { useRouter } from 'next/router';
+import { type ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { useAuthStore } from '@/stores/auth';
+import { sidebarLayoutEnabled as sidebarLayoutFeatureFlagEnabled } from '@/utils/config';
 
 import { BosLoaderBanner } from '../BosLoaderBanner';
-import { LargeScreenHeader } from '../navigation/LargeScreenHeader';
-import { Navigation } from '../navigation/Navigation';
-import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from '../navigation/utils';
-import { NavigationSignedOut } from '../navigation-signed-out/NavigationSignedOut';
+import { MarketingNavigation } from '../marketing-navigation/MarketingNavigation';
+import { LargeScreenHeader } from '../sidebar-navigation/LargeScreenHeader';
+import { SidebarNavigation } from '../sidebar-navigation/SidebarNavigation';
+import { useNavigationStore } from '../sidebar-navigation/store';
+import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from '../sidebar-navigation/utils';
 
 interface Props {
   children: ReactNode;
 }
 
 const Wrapper = styled.div<{
-  $horizontal: boolean;
+  $animate: boolean;
+  $sidebar: boolean;
 }>`
-  --sidebar-expand-transition-speed: 300ms;
+  --sidebar-expand-transition-speed: ${(p) => (p.$animate ? '300ms' : '0ms')};
   --sidebar-width-expanded: 256px;
   --sidebar-width-collapsed: 68px;
   --small-screen-header-height: 68px;
@@ -26,7 +29,7 @@ const Wrapper = styled.div<{
   min-width: 0;
   justify-content: stretch;
   align-items: stretch;
-  flex-direction: ${(p) => (p.$horizontal ? 'row' : 'column')};
+  flex-direction: ${(p) => (p.$sidebar ? 'row' : 'column')};
 
   @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     --sidebar-width-expanded: 100vw;
@@ -44,14 +47,45 @@ const Content = styled.div`
 `;
 
 export function DefaultLayout({ children }: Props) {
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const router = useRouter();
+  const [sidebarLayoutTestOverrideEnabled, setSidebarLayoutTestOverrideEnabled] = useState(false);
+  const [sidebarLayoutShouldAnimate, setSidebarLayoutShouldAnimate] = useState(false);
+  const sidebarLayoutEnabled = sidebarLayoutTestOverrideEnabled || sidebarLayoutFeatureFlagEnabled;
+  const sidebarLayoutHasInitialized = useNavigationStore((store) => store.hasInitialized);
+
+  useEffect(() => {
+    /*
+      This logic is only needed for short term testing.
+      Add "?sidebar=true" to any URL to temporarily enable the sidebar layout.
+    */
+
+    if (router.query.sidebar === 'true') {
+      setSidebarLayoutTestOverrideEnabled(true);
+    }
+  }, [router.query]);
+
+  useEffect(() => {
+    /*
+      We need to temporarily disable transition animations for the sidebar 
+      until the expanded preference has resolved from local storage. Without 
+      this logic, the sidebar would animate to collapsed on page load if the 
+      user prefers the sidebar collapsed - the sidebar should initialize in 
+      its proper collapsed or expanded state with animating on page load.
+    */
+
+    if (sidebarLayoutHasInitialized) {
+      setTimeout(() => {
+        setSidebarLayoutShouldAnimate(true);
+      }, 100);
+    }
+  }, [sidebarLayoutHasInitialized]);
 
   return (
-    <Wrapper $horizontal={signedIn}>
-      {signedIn ? <Navigation /> : <NavigationSignedOut />}
+    <Wrapper $animate={sidebarLayoutShouldAnimate} $sidebar={sidebarLayoutEnabled}>
+      {sidebarLayoutEnabled ? <SidebarNavigation /> : <MarketingNavigation />}
 
       <Content>
-        {signedIn && <LargeScreenHeader />}
+        {sidebarLayoutEnabled && <LargeScreenHeader />}
 
         <BosLoaderBanner />
 

@@ -38,7 +38,7 @@ export const useNavigationStore = create<NavigationStore>((set) => ({
     set((state) => {
       if (state.hasInitialized || typeof window === 'undefined') return {};
 
-      const isSidebarExpanded = isSmallScreen() && localStorage.getItem(SIDEBAR_EXPANDED_PREFERENCE_KEY) !== 'false';
+      const isSidebarExpanded = isSmallScreen() || localStorage.getItem(SIDEBAR_EXPANDED_PREFERENCE_KEY) !== 'false';
 
       return {
         hasInitialized: true,
