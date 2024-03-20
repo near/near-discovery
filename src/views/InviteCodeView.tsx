@@ -192,9 +192,9 @@ export default function InviteCodeView() {
                   y2="31.4286"
                   gradientUnits="userSpaceOnUse"
                 >
-                  <stop stop-color="#62FFF6" />
-                  <stop offset="0.520833" stop-color="#B479FF" />
-                  <stop offset="1" stop-color="#FFC289" />
+                  <stop stopColor="#62FFF6" />
+                  <stop offset="0.520833" stopColor="#B479FF" />
+                  <stop offset="1" stopColor="#FFC289" />
                 </linearGradient>
               </defs>
             </svg>

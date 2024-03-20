@@ -56,6 +56,11 @@ const QuestProfileView = () => {
 
   useEffect(() => {
     isMounted.current = true;
+    if (account) {
+      check(() => {
+        queryInviteList();
+      });
+    }
   }, []);
 
   return (

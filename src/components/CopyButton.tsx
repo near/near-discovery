@@ -5,18 +5,18 @@ import CopyIcon from '@/components/Icons/Copy';
 import { copyText } from '@/utils/copy';
 
 const Tooltip = styled.div<{
-  isTooltipDisplayed: boolean;
-  tooltipTop: number;
-  tooltipRight: number;
-  tooltipFontSize?: number;
+  $isTooltipDisplayed: boolean;
+  $tooltipTop: number;
+  $tooltipRight: number;
+  $tooltipFontSize?: number;
 }>`
-  display: ${({ isTooltipDisplayed }) => (isTooltipDisplayed ? 'inline' : 'none')};
+  display: ${({ $isTooltipDisplayed }) => ($isTooltipDisplayed ? 'inline' : 'none')};
   position: absolute;
   padding: 8px;
-  top: ${({ tooltipTop }) => `${tooltipTop}px`};
-  right: ${({ tooltipRight }) => (tooltipRight ? `${tooltipRight}px` : 0)};
+  top: ${({ $tooltipTop }) => `${$tooltipTop}px`};
+  right: ${({ $tooltipRight }) => ($tooltipRight ? `${$tooltipRight}px` : 0)};
   text-align: center;
-  font-size: ${({ tooltipFontSize }) => `${tooltipFontSize}px` ?? '100%'};
+  font-size: ${({ $tooltipFontSize }) => `${$tooltipFontSize}px` ?? '100%'};
   background-color: #979abe;
   color: #fff;
   border-radius: 16px;
@@ -70,10 +70,10 @@ const CopyButton: React.FC<CopyButtonProps> = ({
         {...props}
       />
       <Tooltip
-        isTooltipDisplayed={isTooltipDisplayed}
-        tooltipTop={tooltipTop}
-        tooltipRight={tooltipRight}
-        tooltipFontSize={tooltipFontSize}
+        $isTooltipDisplayed={isTooltipDisplayed}
+        $tooltipTop={tooltipTop}
+        $tooltipRight={tooltipRight}
+        $tooltipFontSize={tooltipFontSize}
       >
         {tooltipMessage}
       </Tooltip>

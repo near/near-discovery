@@ -26,7 +26,7 @@ export default function ActionColorBg() {
           gradientUnits="userSpaceOnUse"
           gradientTransform="translate(151.858 3.45064) rotate(90) scale(57.7939 117.455)"
         >
-          <stop stop-color="currentColor" />
+          <stop stopColor="currentColor" />
           <stop offset="1" stopColor="currentColor" stopOpacity="0" />
         </radialGradient>
       </defs>

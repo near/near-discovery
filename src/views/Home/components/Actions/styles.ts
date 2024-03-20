@@ -13,7 +13,7 @@ export const StyledActions = styled.div`
   justify-content: space-between;
 `;
 
-export const StyledActionContainer = styled.div<{ clickable: boolean }>`
+export const StyledActionContainer = styled.div<{ $clickable: boolean }>`
   width: 374px;
   height: 200px;
   flex-shrink: 0;
@@ -23,10 +23,10 @@ export const StyledActionContainer = styled.div<{ clickable: boolean }>`
   position: relative;
   opacity: 1;
   transition: 0.3s;
-  cursor: ${({ clickable }) => (clickable ? 'pointer' : 'default')};
+  cursor: ${({ $clickable }) => ($clickable ? 'pointer' : 'default')};
 
   &:hover {
-    opacity: ${({ clickable }) => (clickable ? 0.95 : 1)};
+    opacity: ${({ $clickable }) => ($clickable ? 0.95 : 1)};
   }
 `;
 

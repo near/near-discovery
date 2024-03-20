@@ -20,7 +20,7 @@ export default function Compass() {
           d="M34.5604 82.3887C36.2931 91.9657 42.0705 100.746 51.1592 105.993C60.2479 111.241 70.7405 111.854 79.9009 108.566"
           stroke="black"
           strokeWidth="2"
-          stroke-linecap="round"
+          strokeLinecap="round"
         />
         <circle cx="88.1157" cy="103.411" r="5" transform="rotate(30 88.1157 103.411)" fill="black" />
         <circle cx="34.917" cy="72.6971" r="5" transform="rotate(30 34.917 72.6971)" fill="black" />
