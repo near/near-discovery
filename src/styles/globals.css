@@ -33,6 +33,12 @@ a:hover {
   text-decoration: none;
 }
 
+.gateway-page-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
 #near-wallet-selector-modal .open {
   z-index: 1001;
 }
