@@ -20,6 +20,7 @@ export const SmallScreenHeader = () => {
 
   const near = useVmStore((store) => store.near);
   const availableStorage = useAuthStore((store) => store.availableStorage);
+  const availableStorageDisplay = availableStorage?.gte(10) ? availableStorage.div(1000).toFixed(2) : '0';
   const logOut = useAuthStore((store) => store.logOut);
 
   const withdrawTokens = useCallback(async () => {
@@ -55,7 +56,7 @@ export const SmallScreenHeader = () => {
         <VmComponent
           showLoadingSpinner={false}
           src={components.navigation.smallScreenHeader}
-          props={{ availableStorage, withdrawTokens, logOut }}
+          props={{ availableStorage: availableStorageDisplay, withdrawTokens, logOut }}
         />
       </S.SmallScreenHeaderActions>
 
