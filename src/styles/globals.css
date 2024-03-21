@@ -36,7 +36,7 @@ a:hover {
 .gateway-page-container {
   max-width: 1320px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  padding: var(--gateway-page-container-padding-y) var(--gateway-page-container-padding-x);
 }
 
 #near-wallet-selector-modal .open {
