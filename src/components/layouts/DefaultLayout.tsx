@@ -22,7 +22,7 @@ const Wrapper = styled.div<{
   --sidebar-expand-transition-speed: ${(p) => (p.$animate ? '300ms' : '0ms')};
   --sidebar-width-expanded: 256px;
   --sidebar-width-collapsed: 68px;
-  --small-screen-header-height: 68px;
+  --header-height: 64px;
 
   display: flex;
   min-height: 100vh;

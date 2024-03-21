@@ -6,8 +6,8 @@ type Props = {
 
 export const DrawerHeader = ({ title }: Props) => {
   return (
-    <S.Section $screen="larger">
+    <S.DrawerHeader>
       <S.DrawerTitle>{title}</S.DrawerTitle>
-    </S.Section>
+    </S.DrawerHeader>
   );
 };
