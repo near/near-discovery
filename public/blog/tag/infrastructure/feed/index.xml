@@ -21,7 +21,7 @@
 	<generator>https://wordpress.org/?v=6.4.3</generator>
 
 <image>
-	<url>/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
+	<url>https://pages.near.org/wp-content/uploads/2020/09/cropped-favicon-32x32.png</url>
 	<title>Infrastructure Archives &#8211; NEAR Protocol</title>
 	<link>/blog/tag/infrastructure/</link>
 	<width>32</width>
@@ -448,7 +448,7 @@
 
 
 
-<figure class="wp-block-image alignnone size-large wp-image-14230 size-full"><img fetchpriority="high" decoding="async" width="1024" height="546" src="/wp-content/uploads/2021/10/private-shard-1-1024x546.png" alt="" class="wp-image-14657" srcset="/wp-content/uploads/2021/10/private-shard-1-1024x546.png 1024w, /wp-content/uploads/2021/10/private-shard-1-300x160.png 300w, /wp-content/uploads/2021/10/private-shard-1-768x410.png 768w, /wp-content/uploads/2021/10/private-shard-1.png 1400w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>In consortium models, blockchains aren&#8217;t interoperable.</figcaption></figure>
+<figure class="wp-block-image alignnone size-large wp-image-14230 size-full"><img fetchpriority="high" decoding="async" width="1024" height="546" src="https://pages.near.org/wp-content/uploads/2021/10/private-shard-1-1024x546.png" alt="" class="wp-image-14657" srcset="https://pages.near.org/wp-content/uploads/2021/10/private-shard-1-1024x546.png 1024w, https://pages.near.org/wp-content/uploads/2021/10/private-shard-1-300x160.png 300w, https://pages.near.org/wp-content/uploads/2021/10/private-shard-1-768x410.png 768w, https://pages.near.org/wp-content/uploads/2021/10/private-shard-1.png 1400w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>In consortium models, blockchains aren&#8217;t interoperable.</figcaption></figure>
 
 
 
@@ -488,7 +488,7 @@
 
 
 
-<figure class="wp-block-image alignnone size-large wp-image-14229 size-full"><img decoding="async" width="1024" height="546" src="/wp-content/uploads/2021/10/private-shard-2-1024x546.png" alt="" class="wp-image-14658" srcset="/wp-content/uploads/2021/10/private-shard-2-1024x546.png 1024w, /wp-content/uploads/2021/10/private-shard-2-300x160.png 300w, /wp-content/uploads/2021/10/private-shard-2-768x410.png 768w, /wp-content/uploads/2021/10/private-shard-2.png 1400w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>In private shards, blockchains can share information without compromising on security.</figcaption></figure>
+<figure class="wp-block-image alignnone size-large wp-image-14229 size-full"><img decoding="async" width="1024" height="546" src="https://pages.near.org/wp-content/uploads/2021/10/private-shard-2-1024x546.png" alt="" class="wp-image-14658" srcset="https://pages.near.org/wp-content/uploads/2021/10/private-shard-2-1024x546.png 1024w, https://pages.near.org/wp-content/uploads/2021/10/private-shard-2-300x160.png 300w, https://pages.near.org/wp-content/uploads/2021/10/private-shard-2-768x410.png 768w, https://pages.near.org/wp-content/uploads/2021/10/private-shard-2.png 1400w" sizes="(max-width: 1024px) 100vw, 1024px" /><figcaption>In private shards, blockchains can share information without compromising on security.</figcaption></figure>
 
 
 
