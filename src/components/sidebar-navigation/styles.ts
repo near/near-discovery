@@ -39,6 +39,7 @@ export const Top = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  height: var(--header-height);
   min-width: 0;
 
   @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
@@ -100,7 +101,7 @@ export const ToggleExpandButton = styled.button`
 `;
 
 export const Section = styled.div<{
-  $screen?: 'smaller' | 'larger';
+  $screen?: 'small' | 'large';
 }>`
   display: flex;
   flex-direction: column;
@@ -114,7 +115,7 @@ export const Section = styled.div<{
   }
 
   ${(p) =>
-    p.$screen === 'smaller'
+    p.$screen === 'small'
       ? css`
           @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
             display: none;
@@ -123,7 +124,7 @@ export const Section = styled.div<{
       : undefined}
 
   ${(p) =>
-    p.$screen === 'larger'
+    p.$screen === 'large'
       ? css`
           @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
             display: none;
@@ -297,7 +298,7 @@ export const Sidebar = styled.div<{
   $openedOnSmallScreens: boolean;
 }>`
   position: sticky;
-  z-index: 1005;
+  z-index: 1010;
   top: 0;
   left: 0;
   width: var(--sidebar-width-expanded);
@@ -338,8 +339,8 @@ export const Sidebar = styled.div<{
 
   @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     position: fixed;
-    top: var(--small-screen-header-height);
-    height: calc(100dvh + 1px - var(--small-screen-header-height));
+    top: var(--header-height);
+    height: calc(100dvh + 1px - var(--header-height));
 
     ${(p) =>
       p.$expanded
@@ -390,7 +391,7 @@ export const SmallScreenHeader = styled.header`
   top: 0;
   z-index: 1000;
   align-items: stretch;
-  height: var(--small-screen-header-height);
+  height: var(--header-height);
   background: var(--white);
   border-bottom: 1px solid var(--sand6);
 
@@ -490,9 +491,9 @@ export const SmallScreenNavigationBackground = styled.div<{
 }>`
   position: fixed;
   z-index: 999;
-  top: var(--small-screen-header-height);
+  top: var(--header-height);
   width: 0;
-  height: calc(100dvh + 1px - var(--small-screen-header-height));
+  height: calc(100dvh + 1px - var(--header-height));
   background: var(--white);
   transition: all var(--sidebar-expand-transition-speed);
 
@@ -503,6 +504,19 @@ export const SmallScreenNavigationBackground = styled.div<{
           opacity: 1;
         `
       : undefined}
+`;
+
+export const DrawerHeader = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  overflow: hidden;
+  height: var(--header-height);
+
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    display: none;
+  }
 `;
 
 export const DrawerTitle = styled.p`
@@ -519,7 +533,7 @@ export const Drawer = styled.div<{
   $openedOnSmallScreens: boolean;
 }>`
   position: sticky;
-  z-index: 1000;
+  z-index: 1005;
   top: 0;
   left: 68px;
 
@@ -546,8 +560,8 @@ export const Drawer = styled.div<{
 
   @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     position: fixed;
-    top: var(--small-screen-header-height);
-    height: calc(100dvh + 1px - var(--small-screen-header-height));
+    top: var(--header-height);
+    height: calc(100dvh + 1px - var(--header-height));
     box-shadow: none;
 
     ${(p) =>
