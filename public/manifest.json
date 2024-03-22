@@ -1,6 +1,6 @@
 {
   "short_name": "NEAR",
-  "name": "NEAR | The OS for an Open Web",
+  "name": "NEAR | Blockchains, Abstracted",
   "start_url": "/near/widget/NearOrg.HomePage",
   "scope": "/",
   "display": "standalone",
