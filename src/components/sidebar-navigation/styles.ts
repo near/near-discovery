@@ -303,7 +303,7 @@ export const Sidebar = styled.div<{
   left: 0;
   width: var(--sidebar-width-expanded);
 
-  height: calc(100dvh + 1px);
+  height: 100dvh;
   ${overflowContain}
 
   flex-shrink: 0;
@@ -340,7 +340,7 @@ export const Sidebar = styled.div<{
   @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     position: fixed;
     top: var(--header-height);
-    height: calc(100dvh + 1px - var(--header-height));
+    height: calc(100dvh - var(--header-height));
 
     ${(p) =>
       p.$expanded
@@ -493,7 +493,7 @@ export const SmallScreenNavigationBackground = styled.div<{
   z-index: 999;
   top: var(--header-height);
   width: 0;
-  height: calc(100dvh + 1px - var(--header-height));
+  height: calc(100dvh - var(--header-height));
   background: var(--white);
   transition: all var(--sidebar-expand-transition-speed);
 
@@ -537,7 +537,7 @@ export const Drawer = styled.div<{
   top: 0;
   left: 68px;
 
-  height: calc(100dvh + 1px);
+  height: 100dvh;
   ${overflowContain}
 
   width: 0;
@@ -561,7 +561,7 @@ export const Drawer = styled.div<{
   @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     position: fixed;
     top: var(--header-height);
-    height: calc(100dvh + 1px - var(--header-height));
+    height: calc(100dvh - var(--header-height));
     box-shadow: none;
 
     ${(p) =>
