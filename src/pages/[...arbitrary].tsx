@@ -47,10 +47,7 @@ const finiteRoutes: Record<string, string> = {
 import IframeResizer from 'iframe-resizer-react';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
-import { VmComponent } from '@/components/vm/VmComponent';
-import { useBosComponents } from '@/hooks/useBosComponents';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
-import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -106,12 +103,9 @@ export const getStaticProps: GetStaticProps<StaticProps> = async (context) => {
 
 const IframePage: NextPageWithLayout = (props: InferGetStaticPropsType<typeof getStaticProps>) => {
   useClearCurrentComponent();
-  const cookieData = useCookiePreferences();
-  const components = useBosComponents();
   return (
     <>
       <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />
-      <VmComponent src={components.nearOrg.cookiePrompt} props={{ cookiesAcknowleged: cookieData }} />
     </>
   );
 };

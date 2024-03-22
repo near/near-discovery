@@ -1,4 +1,7 @@
 :root {
+  --gateway-page-container-padding-y: 2rem;
+  --gateway-page-container-padding-x: 1rem;
+
   --text-xs: 450 12px/1.4 'Mona Sans', sans-serif;
   --text-s: 450 14px/1.5 'Mona Sans', sans-serif;
   --text-base: 450 16px/1.5 'Mona Sans', sans-serif;

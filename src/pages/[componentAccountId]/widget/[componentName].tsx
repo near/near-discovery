@@ -1,104 +1,15 @@
-import type { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
-import { remark } from 'remark';
-import strip from 'strip-markdown';
 
+import { RootContentContainer } from '@/components/lib/Container';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
-
-type ComponentMetaPreview = {
-  title: string;
-  description: string;
-  imageUrl: string | null;
-};
-
-type ComponentPayload = Record<string, { widget: Record<string, { '': string; metadata: ComponentMetadata }> }>;
-type ComponentMetadata = {
-  name: string;
-  description: string;
-  linktree: {
-    website: string;
-  };
-  image: ImageData;
-  tags: Record<string, string>;
-};
-
-type ImageData = {
-  ipfs_cid?: string;
-};
-
-function returnImageUrl(data: ImageData | undefined) {
-  if (data?.ipfs_cid) {
-    return `https://i.near.social/large/https://ipfs.near.social/ipfs/${data.ipfs_cid}`;
-  }
-  return null;
-}
-
-async function fetchPreviewData(accountId: string, componentName: string): Promise<ComponentMetaPreview | null> {
-  return null;
-  const response = await fetch(`https://api.near.social/get?keys=${accountId}/widget/${componentName}/**`, {
-    signal: AbortSignal.timeout(2000),
-  });
-  const responseData: ComponentPayload = await response.json();
-  const metadata = responseData[accountId]?.widget?.[componentName]?.metadata;
-
-  if (!metadata) {
-    return null;
-  }
-
-  const strippedDescriptionVFile = await remark().use(strip).process(metadata.description);
-  // recommended conversion from remark docs
-  const strippedDescription = String(strippedDescriptionVFile);
-
-  return {
-    title: `${metadata.name} by ${accountId} on BOS`,
-    description: strippedDescription,
-    imageUrl: returnImageUrl(metadata.image),
-  };
-}
-
-export const getServerSideProps: GetServerSideProps<{
-  meta: ComponentMetaPreview | null;
-}> = async ({ params }) => {
-  const componentAccountId = params?.componentAccountId;
-  const componentName = params?.componentName;
-
-  if (typeof componentAccountId !== 'string' || typeof componentName !== 'string') {
-    return {
-      notFound: true,
-    };
-  }
-
-  let meta;
-
-  try {
-    meta = await fetchPreviewData(componentAccountId, componentName);
-  } catch (err: any) {
-    if (err.name === 'TimeoutError') {
-      console.warn('fetchPreview aborted due to a timeout', err);
-    } else {
-      console.warn('Failed to fetchPreview ', err);
-    }
-  }
-
-  return {
-    props: {
-      meta: meta || {
-        title: '',
-        description: '',
-        imageUrl: '',
-      },
-    },
-  };
-};
 
 const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -107,7 +18,6 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const authStore = useAuthStore();
   const components = useBosComponents();
-  const cookieData = useCookiePreferences();
   const { requestAuthentication } = useSignInRedirect();
 
   useEffect(() => {
@@ -126,32 +36,19 @@ const ViewComponentPage: NextPageWithLayout = () => {
   }, [router.query]);
 
   return (
-    <>
-      {/*meta && <MetaTags title={meta.title} description={meta.description} image={meta.imageUrl} />*/}
-      <div className="container-xl">
-        <div className="row">
-          <div
-            className="d-inline-block position-relative overflow-hidden"
-            style={{
-              paddingTop: 'var(--body-top-padding)',
-            }}
-          >
-            <VmComponent
-              key={components.wrapper}
-              src={components.wrapper}
-              props={{
-                logOut: authStore.logOut,
-                targetProps: componentProps,
-                targetComponent: componentSrc,
-                termsDomainName,
-                privacyDomainName,
-              }}
-            />
-            <VmComponent src={components.nearOrg.cookiePrompt} props={{ cookiesAcknowleged: cookieData }} />
-          </div>
-        </div>
-      </div>
-    </>
+    <RootContentContainer>
+      <VmComponent
+        key={components.wrapper}
+        src={components.wrapper}
+        props={{
+          logOut: authStore.logOut,
+          targetProps: componentProps,
+          targetComponent: componentSrc,
+          termsDomainName,
+          privacyDomainName,
+        }}
+      />
+    </RootContentContainer>
   );
 };
 

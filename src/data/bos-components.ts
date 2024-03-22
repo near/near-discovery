@@ -1,6 +1,7 @@
 import type { NetworkId } from '@/utils/types';
 
 type NetworkComponents = {
+  activityPage: string;
   applicationsPage: string;
   blog: string;
   blogPost: string;
@@ -61,6 +62,13 @@ type NetworkComponents = {
   widgetMetadataEditor: string;
   wrapper: string;
   eventsPage: string;
+  navigation: {
+    largeScreenHeader: string;
+    notificationButton: string;
+    profileDropdown: string;
+    search: string;
+    smallScreenHeader: string;
+  };
 };
 
 export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | undefined> => {
@@ -71,6 +79,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
 
   return {
     testnet: {
+      activityPage: `${testnetTLA}/widget/ActivityPage`,
       applicationsPage: `${testnetTLA}/widget/AppLibrary.IndexPage`,
       blog: `${testnetTLA}/widget/Blog/Feed`,
       blogPost: `${testnetTLA}/widget/BlogPostPage`,
@@ -131,9 +140,17 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       widgetMetadataEditor: `${testnetTLA}/widget/WidgetMetadataEditor`,
       wrapper: `${testnetTLA}/widget/GatewayWrapper`,
       eventsPage: `${testnetTLA}/widget/Events.Index`,
+      navigation: {
+        largeScreenHeader: `${testnetTLA}/widget/Navigation.LargeScreenHeader`,
+        notificationButton: `${testnetTLA}/widget/NearOrg.Notifications.NotificationButton`,
+        profileDropdown: `${testnetTLA}/widget/Navigation.ProfileDropdown`,
+        search: `${testnetTLA}/widget/Navigation.Search`,
+        smallScreenHeader: `${testnetTLA}/widget/Navigation.SmallScreenHeader`,
+      },
     },
 
     mainnet: {
+      activityPage: 'near/widget/ActivityPage',
       applicationsPage: 'nearcatalog.near/widget/Index',
       blog: 'near/widget/Blog.Feed',
       blogPost: 'near/widget/BlogPostPage',
@@ -194,6 +211,13 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       widgetMetadataEditor: 'near/widget/WidgetMetadataEditor',
       wrapper: 'near/widget/GatewayWrapper',
       eventsPage: 'near/widget/Events.Index',
+      navigation: {
+        largeScreenHeader: 'near/widget/Navigation.LargeScreenHeader',
+        notificationButton: 'near/widget/NearOrg.Notifications.NotificationButton',
+        profileDropdown: 'near/widget/Navigation.ProfileDropdown',
+        search: 'near/widget/Navigation.Search',
+        smallScreenHeader: 'near/widget/Navigation.SmallScreenHeader',
+      },
     },
   };
 })();
