@@ -18,14 +18,14 @@
   ],
   "screenshots": [
     {
-      "src": "bos-meta.png",
+      "src": "near-meta.png",
       "sizes": "1200x630",
       "type": "image/png",
       "description": "A screenshot of the home page",
       "form_factor": "wide"
     },
     {
-      "src": "bos-meta.png",
+      "src": "near-meta.png",
       "sizes": "1200x630",
       "type": "image/png",
       "description": "A screenshot of the home page"
