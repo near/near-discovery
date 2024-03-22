@@ -5,8 +5,8 @@ import styled from 'styled-components';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { recordMouseEnter } from '@/utils/analytics';
 
+import { navigationCategories } from '../categories';
 import { CurrentComponent } from '../CurrentComponent';
-import { navigationCategories } from '../navigation-categories';
 
 const Wrapper = styled.div`
   position: relative;

@@ -18,7 +18,6 @@
 
 body,
 html {
-  --body-top-padding: 24px;
   -webkit-font-smoothing: antialiased;
   color: var(--sand12);
   font: var(--text-base);
@@ -32,6 +31,12 @@ a:hover {
 }
 .btn {
   text-decoration: none;
+}
+
+.gateway-page-container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: var(--gateway-page-container-padding-y) var(--gateway-page-container-padding-x);
 }
 
 #near-wallet-selector-modal .open {
