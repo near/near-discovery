@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import { HorizonBanner } from '@/components/banner/Horizon';
 import { Button } from '@/components/lib/Button';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
@@ -108,31 +109,34 @@ export const MobileNavigation = () => {
   };
 
   return (
-    <Wrapper>
-      <Navigation>
-        <Link href="/" passHref legacyBehavior>
-          <Logo onClick={closeMenu}>
-            <Image src={NearIcon} alt="NEAR" />
-          </Logo>
-        </Link>
+    <>
+      <HorizonBanner />
+      <Wrapper>
+        <Navigation>
+          <Link href="/" passHref legacyBehavior>
+            <Logo onClick={closeMenu}>
+              <Image src={NearIcon} alt="NEAR" />
+            </Logo>
+          </Link>
 
-        <Actions onClick={closeMenu}>
-          {signedIn ? (
-            <>
-              <NotificationButton mobileView />
-              <UserDropdownMenu />
-            </>
-          ) : (
-            <Button label="Create Account" variant="primary" onClick={handleCreateAccount} />
-          )}
-        </Actions>
+          <Actions onClick={closeMenu}>
+            {signedIn ? (
+              <>
+                <NotificationButton mobileView />
+                <UserDropdownMenu />
+              </>
+            ) : (
+              <Button label="Create Account" variant="primary" onClick={handleCreateAccount} />
+            )}
+          </Actions>
 
-        <MenuButton aria-label="Menu" onClick={toggleMenu}>
-          {menuIsVisible ? <i className="ph ph-x" /> : <i className="ph ph-list" />}
-        </MenuButton>
-      </Navigation>
+          <MenuButton aria-label="Menu" onClick={toggleMenu}>
+            {menuIsVisible ? <i className="ph ph-x" /> : <i className="ph ph-list" />}
+          </MenuButton>
+        </Navigation>
 
-      <Menu isVisible={menuIsVisible} onCloseMenu={closeMenu} />
-    </Wrapper>
+        <Menu isVisible={menuIsVisible} onCloseMenu={closeMenu} />
+      </Wrapper>
+    </>
   );
 };
