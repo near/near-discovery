@@ -53,7 +53,7 @@ const FlagsPage: NextPageWithLayout = () => {
   };
 
   return (
-    <Container className="container-xl">
+    <Container>
       <Text as="h1" font="text-3xl">
         Flags
       </Text>
