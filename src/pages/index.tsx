@@ -11,6 +11,7 @@ import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useTermsOfServiceStore } from '@/stores/terms-of-service';
 import { localStorageAccountIdKey, privacyDomainName, termsDomainName } from '@/utils/config';
+import { fetchEventsList } from '@/utils/events';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const HomePage: NextPageWithLayout = () => {
@@ -74,6 +75,9 @@ const HomePage: NextPageWithLayout = () => {
       meta={{
         title: `NEAR | Blockchains, Abstracted`,
         description: `"NEAR is the chain abstraction stack, empowering builders to create apps that scale to billions of users and across all blockchains."`,
+      }}
+      componentProps={{
+        fetchEventsList,
       }}
     />
   );
