@@ -10,6 +10,7 @@ type Props = Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'size'> & {
   disabled?: boolean;
   fill?: Fill;
   href?: string;
+  target?: string;
   icon?: string;
   iconLeft?: string;
   iconRight?: string;
@@ -264,7 +265,7 @@ const StyledButton = styled.button<StyledProps>`
         border-color: var(--sand3);
         color: var(--sand8);
         pointer-events: none;
-    
+
         i {
           color: var(--sand8) !important;
         }
