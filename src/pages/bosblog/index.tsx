@@ -12,6 +12,7 @@ const Blog: NextPageWithLayout = () => {
   const router = useRouter();
   const accountId = router.query.accountId;
   const blockHeight = router.query.blockHeight;
+  const contributors = ['near', 'jacksonthedev.near'];
 
   if (accountId && blockHeight) {
     return (
@@ -37,6 +38,7 @@ const Blog: NextPageWithLayout = () => {
         description: 'The latest on the Near Ecosystem',
       }}
       componentProps={{
+        contributors,
         requestAuthentication,
       }}
     />
