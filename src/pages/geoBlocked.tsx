@@ -12,7 +12,7 @@ const Container = styled.div`
 
 const BlockedPage: NextPageWithLayout = () => {
   return (
-    <Container className="container-xl">
+    <Container>
       <Text as="h3" font="text-xl">
         near.org is not currently available in your region.
       </Text>
