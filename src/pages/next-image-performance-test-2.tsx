@@ -49,7 +49,7 @@ const TestPage: NextPageWithLayout = () => {
       {currentStrategyLoadStart ? (
         <>
           <img
-            src="https://ipfs.near.social/ipfs/bafybeihnctcv4gxboaszdi5477yaxe2vat525kzwnwdojymf5sbuxshcku"
+            src="https://ipfs.near.social/ipfs/bafkreib6sp7aoovferwg4zfvekhxxmp6hdp4u7f2bgxupebntrfgrmjhbe"
             alt="Direct IPFS Gateway"
             onLoad={() => setCurrentStrategyLoadEnd(Date.now())}
           />
@@ -70,7 +70,7 @@ const TestPage: NextPageWithLayout = () => {
         <>
           <ImageFillWrapper>
             <Image
-              src="/images/bafybeihnctcv4gxboaszdi5477yaxe2vat525kzwnwdojymf5sbuxshcku.jpg"
+              src="/images/bafkreib6sp7aoovferwg4zfvekhxxmp6hdp4u7f2bgxupebntrfgrmjhbe.png"
               fill
               alt="Next Image: Fill"
               onLoad={() => setNextImageFillStrategyLoadEnd(Date.now())}
@@ -96,7 +96,7 @@ const TestPage: NextPageWithLayout = () => {
       {nextImageSizeStrategyLoadStart ? (
         <>
           <Image
-            src="/images/bafybeihnctcv4gxboaszdi5477yaxe2vat525kzwnwdojymf5sbuxshcku.jpg"
+            src="/images/bafkreib6sp7aoovferwg4zfvekhxxmp6hdp4u7f2bgxupebntrfgrmjhbe.png"
             width={700}
             height={700}
             alt="Next Image: Size"
