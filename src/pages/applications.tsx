@@ -13,13 +13,14 @@ const ApplicationsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const { requestAuthentication } = useSignInRedirect();
   const authStore = useAuthStore();
+  const accountId = authStore.accountId;
 
   useEffect(() => {
     const { requestAuth, createAccount } = router.query;
-    if (requestAuth && !authStore.account) {
+    if (requestAuth && !accountId) {
       requestAuthentication(!!createAccount);
     }
-  }, [authStore, requestAuthentication, router.query]);
+  }, [accountId, requestAuthentication, router.query]);
 
   return (
     <ComponentWrapperPage
