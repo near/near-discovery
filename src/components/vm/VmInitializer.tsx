@@ -90,7 +90,7 @@ export default function VmInitializer() {
             setupNightly(),
             setupWelldoneWallet(),
             setupFastAuthWallet({
-              walletUrl: 'https://vercel.live/link/fast-auth-signer-git-passkey-on-c-ab706f-near-developer-console.vercel.app?via=deployment-domains-list-branch',
+              walletUrl: 'https://fast-auth-signer-git-passkey-on-c-ab706f-near-developer-console.vercel.app',
               relayerUrl:
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
