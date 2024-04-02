@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
+import { RootContentContainer } from '@/components/lib/Container';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
@@ -16,6 +18,7 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
+  const { emitGatewayEvent } = useGatewayEvents();
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -26,11 +29,12 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   }, [router.query]);
 
   return (
-    <div className="d-inline-block position-relative overflow-hidden">
+    <RootContentContainer>
       <VmComponent
         key={components.wrapper}
         src={components.wrapper}
         props={{
+          emitGatewayEvent,
           logOut: authStore.logOut,
           targetComponent: componentSrc,
           targetProps: componentProps,
@@ -38,7 +42,7 @@ const EmbedComponentPage: NextPageWithLayout = () => {
           privacyDomainName,
         }}
       />
-    </div>
+    </RootContentContainer>
   );
 };
 

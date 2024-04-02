@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import { VmComponent } from '@/components/vm/VmComponent';
+import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useCurrentComponentStore } from '@/stores/current-component';
 
 import { MetaTags } from '../MetaTags';
@@ -16,6 +17,7 @@ type Props = {
 
 export function ComponentWrapperPage(props: Props) {
   const setCurrentComponentSrc = useCurrentComponentStore((store) => store.setSrc);
+  const { emitGatewayEvent } = useGatewayEvents();
 
   useEffect(() => {
     if (
@@ -37,7 +39,7 @@ export function ComponentWrapperPage(props: Props) {
   return (
     <>
       {props.meta && <MetaTags {...props.meta} />}
-      <VmComponent src={props.src} props={props.componentProps} />
+      <VmComponent src={props.src} props={{ ...props.componentProps, emitGatewayEvent }} />
     </>
   );
 }
