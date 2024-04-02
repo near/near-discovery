@@ -61,23 +61,13 @@ export const SmallScreenHeader = () => {
       )}
 
       {signedIn ? (
-        <>
-          <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens}>
-            <VmComponent
-              showLoadingSpinner={false}
-              src={components.navigation.smallScreenHeader}
-              props={{ availableStorage: availableStorageDisplay, withdrawTokens, logOut }}
-            />
-          </S.SmallScreenHeaderActions>
-
-          <S.SmallScreenHeaderIconButton
-            type="button"
-            aria-label="Expand/Collapse Menu"
-            onClick={toggleExpandedSidebarOnSmallScreens}
-          >
-            <i className={`ph ${isOpenedOnSmallScreens ? 'ph-x' : 'ph-list'}`} />
-          </S.SmallScreenHeaderIconButton>
-        </>
+        <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens}>
+          <VmComponent
+            showLoadingSpinner={false}
+            src={components.navigation.smallScreenHeader}
+            props={{ availableStorage: availableStorageDisplay, withdrawTokens, logOut }}
+          />
+        </S.SmallScreenHeaderActions>
       ) : (
         <Button
           label="Create Account"
@@ -86,6 +76,14 @@ export const SmallScreenHeader = () => {
           style={{ alignSelf: 'center', marginRight: '1rem' }}
         />
       )}
+
+      <S.SmallScreenHeaderIconButton
+        type="button"
+        aria-label="Expand/Collapse Menu"
+        onClick={toggleExpandedSidebarOnSmallScreens}
+      >
+        <i className={`ph ${isOpenedOnSmallScreens ? 'ph-x' : 'ph-list'}`} />
+      </S.SmallScreenHeaderIconButton>
 
       <S.SmallScreenNavigationBackground $expanded={isOpenedOnSmallScreens} />
     </S.SmallScreenHeader>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { RootContentContainer } from '@/components/lib/Container';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
@@ -19,6 +20,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const authStore = useAuthStore();
   const components = useBosComponents();
   const { requestAuthentication } = useSignInRedirect();
+  const { emitGatewayEvent } = useGatewayEvents();
 
   useEffect(() => {
     const { requestAuth, createAccount } = componentProps;
@@ -41,6 +43,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
         key={components.wrapper}
         src={components.wrapper}
         props={{
+          emitGatewayEvent,
           logOut: authStore.logOut,
           targetProps: componentProps,
           targetComponent: componentSrc,

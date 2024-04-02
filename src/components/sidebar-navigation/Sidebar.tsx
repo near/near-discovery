@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 
 import { Tooltip } from '../lib/Tooltip';
 import NearIconSvg from './icons/near-icon.svg';
+import { PinnedApps } from './PinnedApps';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
@@ -70,6 +71,8 @@ export const Sidebar = () => {
             </Tooltip>
           </S.Stack>
         </S.Section>
+
+        <PinnedApps />
 
         <S.Section>
           <S.SectionLabel>Resources</S.SectionLabel>
