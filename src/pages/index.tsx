@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react';
 import { openToast } from '@/components/lib/Toast';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NotificationsAlert } from '@/components/NotificationsAlert';
+import { useSidebarLayoutEnabled } from '@/components/sidebar-navigation/hooks';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
@@ -22,6 +23,7 @@ const HomePage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const logOut = useAuthStore((store) => store.logOut);
   const setTosData = useTermsOfServiceStore((store) => store.setTosData);
+  const { sidebarLayoutEnabled } = useSidebarLayoutEnabled();
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(localStorageAccountIdKey);
@@ -59,7 +61,7 @@ const HomePage: NextPageWithLayout = () => {
           componentProps={{
             logOut,
             targetProps: router.query,
-            targetComponent: components.default,
+            targetComponent: sidebarLayoutEnabled ? components.gateway.homePage : components.default,
             termsDomainName,
             privacyDomainName,
             recordToC: setTosData,
