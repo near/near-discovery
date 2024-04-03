@@ -1,11 +1,9 @@
-import { useRouter } from 'next/router';
 import { type ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { sidebarLayoutEnabled as sidebarLayoutFeatureFlagEnabled } from '@/utils/config';
-
 import { BosLoaderBanner } from '../BosLoaderBanner';
 import { MarketingNavigation } from '../marketing-navigation/MarketingNavigation';
+import { useSidebarLayoutEnabled } from '../sidebar-navigation/hooks';
 import { LargeScreenHeader } from '../sidebar-navigation/LargeScreenHeader';
 import { SidebarNavigation } from '../sidebar-navigation/SidebarNavigation';
 import { useNavigationStore } from '../sidebar-navigation/store';
@@ -47,22 +45,9 @@ const Content = styled.div`
 `;
 
 export function DefaultLayout({ children }: Props) {
-  const router = useRouter();
-  const [sidebarLayoutTestOverrideEnabled, setSidebarLayoutTestOverrideEnabled] = useState(false);
   const [sidebarLayoutShouldAnimate, setSidebarLayoutShouldAnimate] = useState(false);
-  const sidebarLayoutEnabled = sidebarLayoutTestOverrideEnabled || sidebarLayoutFeatureFlagEnabled;
   const sidebarLayoutHasInitialized = useNavigationStore((store) => store.hasInitialized);
-
-  useEffect(() => {
-    /*
-      This logic is only needed for short term testing.
-      Add "?sidebar=true" to any URL to temporarily enable the sidebar layout.
-    */
-
-    if (router.query.sidebar === 'true') {
-      setSidebarLayoutTestOverrideEnabled(true);
-    }
-  }, [router.query]);
+  const { sidebarLayoutEnabled } = useSidebarLayoutEnabled();
 
   useEffect(() => {
     /*
