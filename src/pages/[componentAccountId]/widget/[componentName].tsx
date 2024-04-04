@@ -20,7 +20,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const authStore = useAuthStore();
   const components = useBosComponents();
   const { requestAuthentication } = useSignInRedirect();
-  const { emitGatewayEvent } = useGatewayEvents();
+  const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
 
   useEffect(() => {
     const { requestAuth, createAccount } = componentProps;
@@ -43,7 +43,9 @@ const ViewComponentPage: NextPageWithLayout = () => {
         key={components.wrapper}
         src={components.wrapper}
         props={{
-          emitGatewayEvent,
+          emitGatewayEvent: shouldPassGatewayEventProps(router.query.componentAccountId as string)
+            ? emitGatewayEvent
+            : undefined,
           logOut: authStore.logOut,
           targetProps: componentProps,
           targetComponent: componentSrc,
