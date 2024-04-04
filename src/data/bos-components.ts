@@ -43,6 +43,9 @@ type NetworkComponents = {
     papersPage: string;
     foundersPage: string;
   };
+  gateway: {
+    homePage: string;
+  };
   relayerDemo: string;
   notificationButton: string;
   peoplePage: string;
@@ -121,6 +124,9 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         papersPage: `${testnetTLA}/widget/NearOrg.PapersPage`,
         foundersPage: `${testnetTLA}/widget/NearOrg.FoundersPage`,
       },
+      gateway: {
+        homePage: `${testnetTLA}/widget/Gateway.Home`,
+      },
       relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
       notificationButton: `${testnetTLA}/widget/NotificationButton`,
       peoplePage: `${testnetTLA}/widget/PeoplePage`,
@@ -191,6 +197,9 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         privacyPage: 'near/widget/NearOrg.PrivacyPage',
         papersPage: 'near/widget/NearOrg.PapersPage',
         foundersPage: 'near/widget/NearOrg.FoundersPage',
+      },
+      gateway: {
+        homePage: 'near/widget/Gateway.Home',
       },
       relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
       notificationButton: 'near/widget/NotificationButton',
