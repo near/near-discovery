@@ -18,7 +18,7 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
-  const { emitGatewayEvent } = useGatewayEvents();
+  const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -34,7 +34,9 @@ const EmbedComponentPage: NextPageWithLayout = () => {
         key={components.wrapper}
         src={components.wrapper}
         props={{
-          emitGatewayEvent,
+          emitGatewayEvent: shouldPassGatewayEventProps(router.query.accountId as string)
+            ? emitGatewayEvent
+            : undefined,
           logOut: authStore.logOut,
           targetComponent: componentSrc,
           targetProps: componentProps,
