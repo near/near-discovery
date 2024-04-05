@@ -49,9 +49,7 @@ export async function fetchPinnedApps(accountId: string) {
           authorAccountId,
           componentName,
           displayName: metadata.name || componentName,
-          imageUrl: metadata.image?.ipfs_cid
-            ? `https://i.near.social/large/https://ipfs.near.social/ipfs/${metadata.image.ipfs_cid}`
-            : null,
+          imageUrl: metadata.image?.ipfs_cid ? `https://ipfs.near.social/ipfs/${metadata.image.ipfs_cid}` : null,
         });
       });
     });
