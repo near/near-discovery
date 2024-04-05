@@ -48,7 +48,7 @@ type ShareType = 'POST' | 'COMMENT' | 'INVALID';
 
 function returnImageUrl(data: ImageData | undefined) {
   if (data?.ipfs_cid) {
-    return `https://i.near.social/large/https://ipfs.near.social/ipfs/${data.ipfs_cid}`;
+    return `https://ipfs.near.social/ipfs/${data.ipfs_cid}`;
   }
   return null;
 }
