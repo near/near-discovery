@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 type Props = {
   color?: string;
-  font?: string;
+  font?: 'text-xs' | 'text-s' | 'text-base' | 'text-l' | 'text-xl' | 'text-2xl' | 'text-3xl' | 'text-hero';
   weight?: string;
 };
 
