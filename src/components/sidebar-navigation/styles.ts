@@ -105,13 +105,24 @@ export const Section = styled.div<{
 }>`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 1rem;
   padding: 1rem;
   border-bottom: 1px solid var(--sand6);
   overflow: hidden;
 
   &:last-child {
     border-bottom: none;
+  }
+
+  .sidebar-auto-width-button {
+    width: 100%;
+  }
+
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    .sidebar-auto-width-button {
+      width: min-content;
+      white-space: nowrap;
+    }
   }
 
   ${(p) =>
@@ -131,6 +142,37 @@ export const Section = styled.div<{
           }
         `
       : undefined}
+`;
+
+export const NavigationItemThumbnail = styled.div`
+  --outline-color: rgba(0, 0, 0, 0.1);
+  --outline-width: 1px;
+  border-radius: 4px;
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    inset: 0;
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 var(--outline-width) var(--outline-color);
+    transition: all 150ms;
+  }
+
+  img {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border: none;
+    outline: none;
+  }
 `;
 
 export const NavigationItem = styled(Link)<{
@@ -157,10 +199,15 @@ export const NavigationItem = styled(Link)<{
     i {
       background: var(--sand3);
     }
+
+    ${NavigationItemThumbnail} {
+      --outline-color: rgba(0, 0, 0, 0.15);
+    }
   }
 
   &:focus-visible {
-    i {
+    i,
+    ${NavigationItemThumbnail} {
       --outline-color: var(--violet5);
       --outline-width: 2px;
     }
@@ -185,6 +232,8 @@ export const NavigationItem = styled(Link)<{
   }
 
   span {
+    overflow: hidden;
+    text-overflow: ellipsis;
     transition: all var(--sidebar-expand-transition-speed);
   }
 
@@ -194,7 +243,7 @@ export const NavigationItem = styled(Link)<{
           font-weight: 600;
           color: var(--sand12);
           i {
-            --outline-color: var(--sand12);
+            --outline-color: var(--sand12) !important;
             --outline-width: 2px;
           }
         `
@@ -273,20 +322,48 @@ export const NavigationSimpleItem = styled(Link)<{
 `;
 
 export const Stack = styled.div<{
+  $frozenWidth?: boolean;
   $gap?: string;
 }>`
   display: flex;
   flex-direction: column;
   gap: ${(p) => p.$gap ?? '0'};
+  width: ${(p) => (p.$frozenWidth ? 'calc(var(--sidebar-width-expanded) - 2rem)' : undefined)};
 `;
 
 export const SectionLabel = styled.p`
   all: unset;
+  display: flex;
+  align-items: center;
   font: var(--text-xs);
   color: var(--sand12);
   font-weight: 600;
   letter-spacing: 0.24px;
+  white-space: nowrap;
   transition: all var(--sidebar-expand-transition-speed);
+`;
+
+export const SectionLabelIconLink = styled(Link)`
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 20px;
+  color: var(--sand10);
+  text-decoration: none !important;
+  margin-left: auto;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 150ms, opacity 0;
+
+  &:hover {
+    color: var(--sand12);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--violet5);
+  }
 `;
 
 export const OverflowContainChild = styled.div`
@@ -324,6 +401,7 @@ export const Sidebar = styled.div<{
           }
 
           ${NavigationItem} span,
+          ${SectionLabelIconLink},
           ${SectionLabel},
           ${Logo} {
             pointer-events: none;
@@ -333,7 +411,7 @@ export const Sidebar = styled.div<{
           }
 
           ${SectionLabel} {
-            margin-bottom: -1.5rem;
+            margin-bottom: -2rem;
           }
         `}
 
