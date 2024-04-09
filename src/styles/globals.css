@@ -42,7 +42,7 @@ a:hover {
 }
 
 #near-wallet-selector-modal .open {
-  z-index: 1001;
+  z-index: 5000;
 }
 
 #idos_container {

@@ -7,6 +7,7 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { NotificationsAlert } from '@/components/NotificationsAlert';
 import { useSidebarLayoutEnabled } from '@/components/sidebar-navigation/hooks';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
@@ -24,6 +25,7 @@ const HomePage: NextPageWithLayout = () => {
   const logOut = useAuthStore((store) => store.logOut);
   const setTosData = useTermsOfServiceStore((store) => store.setTosData);
   const { sidebarLayoutEnabled } = useSidebarLayoutEnabled();
+  const { emitGatewayEvent } = useGatewayEvents();
 
   useEffect(() => {
     const optimisticAccountId = window.localStorage.getItem(localStorageAccountIdKey);
@@ -59,6 +61,7 @@ const HomePage: NextPageWithLayout = () => {
         <ComponentWrapperPage
           src={components.wrapper}
           componentProps={{
+            emitGatewayEvent,
             logOut,
             targetProps: router.query,
             targetComponent: sidebarLayoutEnabled ? components.gateway.homePage : components.default,

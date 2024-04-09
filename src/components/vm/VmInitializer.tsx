@@ -52,6 +52,8 @@ import {
 } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
+import { useNavigationStore } from '../sidebar-navigation/store';
+
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
   const [signedAccountId, setSignedAccountId] = useState(null);
@@ -68,6 +70,7 @@ export default function VmInitializer() {
   const { requestAuthentication, saveCurrentUrl } = useSignInRedirect();
   const idOS = useIdOS();
   const idosSDK = useIdosStore((state) => state.idOS);
+  const resetNavigation = useNavigationStore((store) => store.reset);
 
   useEffect(() => {
     initNear &&
@@ -222,8 +225,9 @@ export default function VmInitializer() {
     setSignedIn(false);
     setSignedAccountId(null);
     resetAnalytics();
+    resetNavigation();
     localStorage.removeItem('accountId');
-  }, [idosSDK, near]);
+  }, [idosSDK, near, resetNavigation]);
 
   const refreshAllowance = useCallback(async () => {
     alert("You're out of access key allowance. Need sign in again to refresh it");
