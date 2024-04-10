@@ -5,19 +5,20 @@ import { sidebarLayoutEnabled as sidebarLayoutFeatureFlagEnabled } from '@/utils
 
 export function useSidebarLayoutEnabled() {
   const router = useRouter();
+  const overrideQueryParamEnabled = router.query.sidebar === 'true';
   const [sidebarLayoutTestOverrideEnabled, setSidebarLayoutTestOverrideEnabled] = useState(false);
   const sidebarLayoutEnabled = sidebarLayoutTestOverrideEnabled || sidebarLayoutFeatureFlagEnabled;
 
   useEffect(() => {
     /*
-      We only evaluate this once on page load so that we keep it enabled until they close
+      If the override query param is provided, we want to keep the layout enabled until they close
       their browser tab.
     */
 
-    setSidebarLayoutTestOverrideEnabled(router.query.sidebar === 'true');
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (overrideQueryParamEnabled) {
+      setSidebarLayoutTestOverrideEnabled(true);
+    }
+  }, [overrideQueryParamEnabled]);
 
   /*
     The sidebarLayoutTestOverrideEnabled logic is only needed for short term testing.
