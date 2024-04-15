@@ -1,7 +1,6 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-
 import { openToast } from '@/components/lib/Toast';
 import { MetaTags } from '@/components/MetaTags';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -44,7 +43,16 @@ type ImageData = {
   ipfs_cid?: string;
 };
 
-type ShareType = 'POST' | 'COMMENT' | 'INVALID';
+type ShareType = 'POST' | 'COMMENT' | 'BLOG' | 'INVALID';
+
+type markdownObject = {
+  type: string;
+  imageUrl?: any;
+  level?: any;
+  text?: any;
+  listType?: string;
+  content?: any;
+};
 
 function returnImageUrl(data: ImageData | undefined) {
   if (data?.ipfs_cid) {
@@ -59,9 +67,72 @@ function returnShareType(indicator: string): ShareType {
       return 'COMMENT';
     case 'p':
       return 'POST';
+    case 'bp':
+      return 'BLOG';
     default:
       return 'INVALID';
   }
+}
+
+function isImage(line: string) {
+  return line.trim().startsWith('![');
+}
+
+function getImageUrl(line: string) {
+  const match = line.match(/\((.*?)\)/);
+  if (match) {
+    return match[1].replace(/'/g, '');
+  }
+  return null;
+}
+
+function getFirstHeading(markdownArray: markdownObject[]) {
+  for (const element of markdownArray) {
+    if (element.type === 'header') {
+      return element;
+    }
+  }
+  return null;
+}
+function parseMarkdown(markdown: string) {
+  const parsedMarkdown: { type: string; imageUrl?: any; level?: any; text?: any; listType?: string; content?: any }[] =
+    [];
+  const lines = markdown.split('\n');
+
+  let currentHeader: { type: string; level: any; text: any } | null = null;
+  let listType: string | null = null;
+  let headerImageUrl: string | null = null;
+
+  lines.forEach((line, index) => {
+    line = line.trim();
+    if (index === 0 && isImage(line)) {
+      headerImageUrl = getImageUrl(line);
+      parsedMarkdown.push({ type: 'header-image', imageUrl: getImageUrl(line) });
+    } else if (line.startsWith('#')) {
+      listType = null;
+      const match = line.match(/^#+/);
+      const level = match ? match[0].length : 0;
+      const text = line.replace(/^#+\s*/, '');
+      currentHeader = { type: 'header', level, text };
+      parsedMarkdown.push(currentHeader);
+    } else if (line.startsWith('* ') || line.startsWith('- ') || /^\d+\./.test(line)) {
+      if (listType !== 'unordered' && listType !== 'ordered') {
+        listType = line.startsWith('* ') || line.startsWith('- ') ? 'unordered' : 'ordered';
+        parsedMarkdown.push({ type: 'list-start', listType });
+      }
+      parsedMarkdown.push({ type: 'list-item', content: line });
+    } else {
+      if (currentHeader) {
+        currentHeader = null;
+      }
+      if (line.trim().length > 0) {
+        parsedMarkdown.push({ type: 'paragraph', content: line });
+        listType = null;
+      }
+    }
+  });
+
+  return parsedMarkdown;
 }
 
 async function returnMetaPreviewForComment(accountId: string, blockHeight: string): Promise<MetaPreview | null> {
@@ -109,6 +180,30 @@ async function returnMetaPreviewForPost(accountId: string, blockHeight: string):
   }
   return null;
 }
+async function returnMetaPreviewForBlog(accountId: string, blockHeight: string): Promise<MetaPreview | null> {
+  try {
+    const response = await fetch(`https://api.near.social/get?keys=${accountId}/post/main&blockHeight=${blockHeight}`);
+    const responseData: MainPostData = await response.json();
+    const main = responseData[accountId]?.post.main;
+
+    if (main) {
+      const data = JSON.parse(main);
+      const content = parseMarkdown(data.text);
+      const info = getFirstHeading(content);
+      const imageUrl = content.find((element) => element.type === 'header-image')?.imageUrl || null;
+
+      return {
+        title: `Blog Post of @${accountId}`,
+        description: info?.text || '',
+        imageUrl,
+        redirectUrl: `/near/widget/BlogPostPage?accountId=${accountId}&blockHeight=${blockHeight}`,
+      };
+    }
+  } catch (err) {
+    console.warn('Failed to fetch meta preview for Post', err);
+  }
+  return null;
+}
 
 function sanitizeText(text: string) {
   return text.replace(/\n/g, ' ').replace(/\s\s/g, ' ').trim();
@@ -127,6 +222,8 @@ export const getServerSideProps: GetServerSideProps<{
     meta = await returnMetaPreviewForComment(accountId, blockHeight);
   } else if (shareType === 'POST') {
     meta = await returnMetaPreviewForPost(accountId, blockHeight);
+  } else if (shareType === 'BLOG') {
+    meta = await returnMetaPreviewForBlog(accountId, blockHeight);
   }
 
   return {
