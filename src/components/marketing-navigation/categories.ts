@@ -31,6 +31,11 @@ export const navigationCategories = [
             url: '/data-availability',
             icon: 'ph-database ph-bold',
           },
+          {
+            title: 'Infrastructure Support',
+            url: 'https://near-infra.zendesk.com/hc/en-us',
+            icon: 'ph-question ph-bold',
+          },
         ],
       },
     ],
