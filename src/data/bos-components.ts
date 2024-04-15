@@ -44,6 +44,7 @@ type NetworkComponents = {
     foundersPage: string;
   };
   gateway: {
+    contactUsPage: string;
     homePage: string;
   };
   relayerDemo: string;
@@ -125,6 +126,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         foundersPage: `${testnetTLA}/widget/NearOrg.FoundersPage`,
       },
       gateway: {
+        contactUsPage: `${testnetTLA}/widget/Gateway.ContactUsPage`,
         homePage: `${testnetTLA}/widget/Gateway.Home`,
       },
       relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
@@ -199,6 +201,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         foundersPage: 'near/widget/NearOrg.FoundersPage',
       },
       gateway: {
+        contactUsPage: 'near/widget/Gateway.ContactUsPage',
         homePage: 'near/widget/Gateway.Home',
       },
       relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',

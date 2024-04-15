@@ -223,7 +223,7 @@ export const navigationCategories = [
           },
           {
             title: 'Contact Us',
-            url: 'https://pages.near.org/about/contact-us/',
+            url: '/contact-us',
             icon: 'ph-question ph-bold',
           },
         ],
