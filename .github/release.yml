@@ -19,4 +19,4 @@ changelog:
         - bug
     - title: "\U0001F31F Enhancements"
       labels:
-        - enhancement
+        - enhancement,documentation
