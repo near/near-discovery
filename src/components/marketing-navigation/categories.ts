@@ -31,6 +31,11 @@ export const navigationCategories = [
             url: '/data-availability',
             icon: 'ph-database ph-bold',
           },
+          {
+            title: 'Infrastructure Support',
+            url: 'https://near-infra.zendesk.com/hc/en-us',
+            icon: 'ph-question ph-bold',
+          },
         ],
       },
     ],
@@ -218,7 +223,7 @@ export const navigationCategories = [
           },
           {
             title: 'Contact Us',
-            url: 'https://pages.near.org/about/contact-us/',
+            url: '/contact-us',
             icon: 'ph-question ph-bold',
           },
         ],
