@@ -102,14 +102,8 @@ export const Sidebar = () => {
                 <span>Careers</span>
               </S.NavigationItem>
             </Tooltip>
-
             <Tooltip content="Support" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem
-                $active={false}
-                $type="standard"
-                href="https://pages.near.org/about/contact-us/"
-                target="_blank"
-              >
+              <S.NavigationItem $active={isNavigationItemActive('/contact-us')} $type="standard" href="/contact-us">
                 <i className="ph-bold ph-question" />
                 <span>Support</span>
               </S.NavigationItem>
