@@ -57,36 +57,42 @@ const NOTIFICATIONS_SCHEMA = {
   },
 };
 
-const getOptions = ({ path, id }) => ({
+const getOptions = (props) => ({
   body: '',
   icon: './favicon.png',
-  tag: id,
+  tag: props.id,
   timestamp: Date.now(),
   data: {
-    path: getPath({}),
+    ...props,
+    link: getLink(props),
   },
 });
 
-const getPath = ({ path }) => {
-  return `http://near.org/notifications/${path || ''}`;
+const getLink = (props) => {
+  if (props.valueType.includes('devgovgigs') && props.devhubPostId) {
+    return `https://near.org/devhub.near/widget/app?page=post&id=${props.devhubPostId}`;
+  } else if (props.receiver && props.actionAtBlockHeight) {
+    return `https://near.org/s/p?a=${props.receiver}&b=${props.actionAtBlockHeight}`;
+  }
+  return "http://near.org/notifications";
 };
 
 // TODO: Add error handling if data will not match
 function handlePushEvent(event) {
-  console.log('SW -  push event received', event);
+  console.log('SW - push event received', event);
 
-  const notificationText = event.data.text();
+  const notification = event.data.json();
 
-  const { initiatedBy = '', valueType = '', path = '', id = '' } = JSON.parse(notificationText);
+  const { initiatedBy = '', valueType = '' } = notification;
 
   const title = getNotificationTitle({ accountId: initiatedBy, notificationType: valueType });
-  const options = getNotificationOptions({ path, id, notificationType: valueType });
+  const options = getNotificationOptions({ notificationType: valueType, ...notification });
 
   event.waitUntil(self.registration.showNotification(title, options));
 }
 
 const handlePushClick = (event) => {
-  console.log('SW -  click event received', event);
+  console.log('SW - click event received', event);
 
   const { notification } = event;
 
@@ -101,7 +107,7 @@ const handlePushClick = (event) => {
         for (const client of clientList) {
           if (client.url === '/' && 'focus' in client) return client.focus();
         }
-        if (clients.openWindow) return clients.openWindow(notification.data.path);
+        if (clients.openWindow) return clients.openWindow(notification.data.link);
       }),
   );
 };
