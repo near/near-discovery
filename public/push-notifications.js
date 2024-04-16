@@ -69,7 +69,6 @@ const getOptions = (props) => ({
 });
 
 const getLink = (props) => {
-  console.log("SW log event | props: ", props);
   if (props.valueType.includes('devgovgigs') && props.devhubPostId) {
     return `https://near.org/devhub.near/widget/app?page=post&id=${props.devhubPostId}`;
   } else if (props.receiver && props.actionAtBlockHeight) {
@@ -84,8 +83,6 @@ function handlePushEvent(event) {
 
   const notification = event.data.json();
 
-  console.log("notificationJSON: ", notification);
-
   const { initiatedBy = '', valueType = '' } = notification;
 
   const title = getNotificationTitle({ accountId: initiatedBy, notificationType: valueType });
@@ -95,7 +92,7 @@ function handlePushEvent(event) {
 }
 
 const handlePushClick = (event) => {
-  console.log('SW -  click event received', event);
+  console.log('SW - click event received', event);
 
   const { notification } = event;
 
