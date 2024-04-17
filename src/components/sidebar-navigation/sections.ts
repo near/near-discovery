@@ -141,11 +141,6 @@ export const marketingDrawerSections: NavigationSection[] = [
         url: 'https://careers.near.org/jobs',
         icon: 'ph-briefcase ph-bold',
       },
-      {
-        title: 'Contact Us',
-        url: '/contact-us',
-        icon: 'ph-question ph-bold',
-      },
     ],
   },
 ];
