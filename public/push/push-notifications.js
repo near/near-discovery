@@ -70,11 +70,11 @@ const getOptions = (props) => ({
 
 const getLink = (props) => {
   if (props.valueType.includes('devgovgigs') && props.devhubPostId) {
-    return `https://near.org/devhub.near/widget/app?page=post&id=${props.devhubPostId}`;
+    return `${process.env.NEXT_PUBLIC_HOSTNAME}/devhub.near/widget/app?page=post&id=${props.devhubPostId}`;
   } else if (props.receiver && props.actionAtBlockHeight) {
-    return `https://near.org/s/p?a=${props.receiver}&b=${props.actionAtBlockHeight}`;
+    return `${process.env.NEXT_PUBLIC_HOSTNAME}/s/p?a=${props.receiver}&b=${props.actionAtBlockHeight}`;
   }
-  return "http://near.org/notifications";
+  return `${process.env.NEXT_PUBLIC_HOSTNAME}/notifications`;
 };
 
 // TODO: Add error handling if data will not match
@@ -82,6 +82,8 @@ function handlePushEvent(event) {
   console.log('SW - push event received', event);
 
   const notification = event.data.json();
+
+  console.log('SW - push event received', notification);
 
   const { initiatedBy = '', valueType = '' } = notification;
 
@@ -95,6 +97,8 @@ const handlePushClick = (event) => {
   console.log('SW - click event received', event);
 
   const { notification } = event;
+
+  console.log('SW - push event received', notification);
 
   notification.close();
 
