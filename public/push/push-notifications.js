@@ -108,8 +108,6 @@ const handlePushClick = (event) => {
 
   const { notification } = event;
 
-  console.log('SW - push event received', notification);
-
   notification.close();
 
   event.waitUntil(
