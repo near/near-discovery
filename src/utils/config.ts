@@ -60,7 +60,7 @@ export const termsDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ip
 export const privacyDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ipfs/${process.env.NEXT_PUBLIC_PRIVACY_CID}`;
 export const notificationApplicationServerKey = process.env.NEXT_PUBLIC_NOTIFICATIONS_APPLICATION_SERVER_KEY;
 export const notificationsHostName = process.env.NEXT_PUBLIC_NOTIFICATIONS_HOSTNAME;
-export const notificationsGatewayUrl = process.env.NEXT_PUBLIC_HOSTNAME;
+export const notificationsGatewayUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}`;
 export const notificationsLocalStorageKey = 'push-notifications-v0';
 export const localStorageAccountIdKey = 'near-social-vm:v01::accountId:';
 export const isLocalEnvironment = process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT === 'true';
