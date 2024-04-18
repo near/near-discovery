@@ -48,9 +48,8 @@ export const setHandleOnCancelBanner = () => {
 export const setProcessSuccess = () => {
   updateLocalStorage({
     permission: true,
-    subscribeStarted: false,
-    subscribeError: '',
     isPermisionGranted: true,
+    subscribeError: undefined,
   });
 };
 
