@@ -147,8 +147,8 @@ importers:
         specifier: ^7.51.3
         version: 7.51.3(react@18.2.0)
       react-singleton-hook:
-        specifier: ^3.4.0
-        version: 3.4.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: ^4.0.1
+        version: 4.0.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       remark:
         specifier: ^14.0.3
         version: 14.0.3
@@ -7446,6 +7446,18 @@ packages:
     resolution: {integrity: sha512-eQEpyacGAaRejmWUizUdNNQFn5AO0iaKRSl1jxgC0FQadVY/I1WFuPrYiutglPzO9s8yEbIh95UXVJQel4d7HQ==}
     peerDependencies:
       react: 15 - 18
+      react-dom: '*'
+      react-native: '*'
+    peerDependenciesMeta:
+      react-dom:
+        optional: true
+      react-native:
+        optional: true
+
+  react-singleton-hook@4.0.1:
+    resolution: {integrity: sha512-fWuk8VxcZPChrkQasDLM8pgd/7kyi+Cr/5FfCiD99FicjEru+JmtEZNnN4lJ8Z7KbqAST5CYPlpz6lmNsZFGNw==}
+    peerDependencies:
+      react: '18'
       react-dom: '*'
       react-native: '*'
     peerDependenciesMeta:
@@ -18801,6 +18813,12 @@ snapshots:
       '@types/react': 18.2.79
 
   react-singleton-hook@3.4.0(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
+    dependencies:
+      react: 18.2.0
+    optionalDependencies:
+      react-dom: 18.2.0(react@18.2.0)
+
+  react-singleton-hook@4.0.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0):
     dependencies:
       react: 18.2.0
     optionalDependencies:

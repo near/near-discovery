@@ -64,7 +64,7 @@
     "react-bootstrap-typeahead": "^6.3.2",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",
-    "react-singleton-hook": "^3.4.0",
+    "react-singleton-hook": "^4.0.1",
     "remark": "^14.0.3",
     "rudder-sdk-js": "^2.48.6",
     "strip-markdown": "^5.0.1",
