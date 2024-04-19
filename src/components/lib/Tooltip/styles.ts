@@ -15,7 +15,9 @@ export const Content = styled(Primitive.Content)`
   line-height: 1.5;
   word-break: break-word;
   font-family: sans-serif;
-  box-shadow: 0 0 0 1px var(--sand6), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 0 0 1px var(--sand6),
+    0 1px 2px 0 rgba(0, 0, 0, 0.06);
 `;
 
 export const ArrowBorder = styled(Primitive.Arrow)`

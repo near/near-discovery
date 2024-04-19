@@ -59,7 +59,9 @@ export const Logo = styled(Link)`
   width: 3.5rem;
   flex-shrink: 0;
   outline-offset: -0.75rem;
-  transition: all var(--sidebar-expand-transition-speed), outline 0ms;
+  transition:
+    all var(--sidebar-expand-transition-speed),
+    outline 0ms;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -82,7 +84,9 @@ export const ToggleExpandButton = styled.button`
   width: 3.5rem;
   flex-shrink: 0;
   outline-offset: -0.75rem;
-  transition: all var(--sidebar-expand-transition-speed), outline 0ms;
+  transition:
+    all var(--sidebar-expand-transition-speed),
+    outline 0ms;
 
   &:focus-visible {
     outline: 2px solid var(--violet5);
@@ -228,7 +232,9 @@ export const NavigationItem = styled(Link)<{
     height: 2.25rem;
     flex-shrink: 0;
     background: var(--white);
-    transition: all 150ms, outline 0ms;
+    transition:
+      all 150ms,
+      outline 0ms;
   }
 
   span {
@@ -355,7 +361,9 @@ export const SectionLabelIconLink = styled(Link)`
   margin-left: auto;
   border-radius: 2px;
   cursor: pointer;
-  transition: all 150ms, opacity 0;
+  transition:
+    all 150ms,
+    opacity 0;
 
   &:hover {
     color: var(--sand12);
@@ -489,7 +497,9 @@ export const SmallScreenHeaderLogo = styled(Link)`
   padding: 0 1.15rem;
   flex-shrink: 0;
   outline-offset: -2px;
-  transition: all 150ms, outline 0ms;
+  transition:
+    all 150ms,
+    outline 0ms;
   animation: ${fadeIn} var(--sidebar-expand-transition-speed);
 
   &:focus-visible {
@@ -513,7 +523,9 @@ export const SmallScreenHeaderIconButton = styled.button`
   width: 69px;
   flex-shrink: 0;
   outline-offset: -2px;
-  transition: all 150ms, outline 0ms;
+  transition:
+    all 150ms,
+    outline 0ms;
   animation: ${fadeIn} var(--sidebar-expand-transition-speed);
 
   &:focus-visible {
