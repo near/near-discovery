@@ -68,7 +68,7 @@
     "remark": "^14.0.3",
     "rudder-sdk-js": "^2.48.6",
     "strip-markdown": "^5.0.1",
-    "styled-components": "^5.3.11",
+    "styled-components": "^6.1.8",
     "typescript": "^5.4.5",
     "zustand": "^4.5.2"
   },
