@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@idos-network/idos-sdk':
-        specifier: ^0.0.30
-        version: 0.0.30(ethers@6.12.0)(near-api-js@2.1.4)(web-streams-polyfill@3.3.3)
+        specifier: ^0.2.10
+        version: 0.2.10(ethers@6.12.0)(near-api-js@2.1.4)(web-streams-polyfill@3.3.3)
       '@keypom/selector':
         specifier: 1.2.3
         version: 1.2.3(@near-js/accounts@1.0.4)(@near-js/crypto@1.2.2)(@near-js/keystores-browser@0.0.9)(@near-js/keystores-node@0.0.9)(@near-js/keystores@0.0.9)(@near-js/transactions@1.1.2)(@near-js/types@0.1.0)(@near-js/utils@0.2.0)(@near-js/wallet-account@1.1.1)(@near-wallet-selector/core@8.9.7(near-api-js@2.1.4))(@types/react@18.2.79)(near-api-js@2.1.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -1738,11 +1738,11 @@ packages:
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
 
-  '@idos-network/idos-sdk@0.0.30':
-    resolution: {integrity: sha512-8NzvpolZAno4TI7y+66emPyVCPux53Iu+3PpfCPT6P9Sp/XG2v6IUjf7ZdIe7b8xFxuvK2Hh1sivl3T0nU+jGQ==}
+  '@idos-network/idos-sdk@0.2.10':
+    resolution: {integrity: sha512-2nAcwBQ8j4pMRCa3NJ1pwkLxAdygBwNkbfF56xpNtv5iabqw9ujHnBZ+xRGOkrskVXLtf/yH1ptkWsOCUZH4cQ==}
     peerDependencies:
       ethers: ^6.8.0
-      near-api-js: ^2.1.4
+      near-api-js: ^3.0.4
 
   '@isaacs/cliui@8.0.2':
     resolution: {integrity: sha512-O8jcjabXaleOG9DQ0+ARXWZBTfnP4WNAqzuiJK7ll44AmxGKv/J2M4TPjxjY3znBCfvBXFzucm1twdyFybFqEA==}
@@ -1797,8 +1797,8 @@ packages:
       react: ^18.2.0
       react-dom: 18.2.0
 
-  '@kwilteam/kwil-js@0.3.0':
-    resolution: {integrity: sha512-SS+Emn4XqiWX2L3pcfEflAXVVv+eceHBVAtnXbgDW/8Owqw34YVNWE/LRhApREedqzZo/GPoGvaSQRMjHHkyaA==}
+  '@kwilteam/kwil-js@0.5.10':
+    resolution: {integrity: sha512-wUEt9Uo3tZt/O0UHOMh66PcSvYbn4/mlJNinzp/+bgMZK1D5BeCXsKmm6TbPp0MbZoFrlfzLpC81HKYoLEx6Ng==}
     engines: {node: '>=18.0.0'}
 
   '@ledgerhq/connect-kit@1.1.12':
@@ -10914,21 +10914,23 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@idos-network/idos-sdk@0.0.30(ethers@6.12.0)(near-api-js@2.1.4)(web-streams-polyfill@3.3.3)':
+  '@idos-network/idos-sdk@0.2.10(ethers@6.12.0)(near-api-js@2.1.4)(web-streams-polyfill@3.3.3)':
     dependencies:
       '@digitalbazaar/ed25519-signature-2020': 5.2.0(web-streams-polyfill@3.3.3)
       '@digitalbazaar/ed25519-verification-key-2020': 4.1.0
       '@digitalbazaar/vc': 6.2.0(web-streams-polyfill@3.3.3)
-      '@kwilteam/kwil-js': 0.3.0
+      '@kwilteam/kwil-js': 0.5.10
       '@stablelib/base64': 1.0.1
       '@stablelib/binary': 1.0.1
       '@stablelib/bytes': 1.0.1
+      '@stablelib/sha256': 1.0.1
       '@stablelib/utf8': 1.0.2
       borsh: 1.0.0
       ethers: 6.12.0
       jsonld: 8.3.2(web-streams-polyfill@3.3.3)
       jsonld-document-loader: 2.0.0
       near-api-js: 2.1.4
+      tweetnacl: 1.0.3
     transitivePeerDependencies:
       - bufferutil
       - debug
@@ -11005,7 +11007,7 @@ snapshots:
       - '@near-js/keystores'
       - near-api-js
 
-  '@kwilteam/kwil-js@0.3.0':
+  '@kwilteam/kwil-js@0.5.10':
     dependencies:
       axios: 0.27.2
       dotenv: 16.4.5
