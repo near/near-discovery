@@ -65,9 +65,9 @@
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.3",
     "react-singleton-hook": "^4.0.1",
-    "remark": "^14.0.3",
+    "remark": "^15.0.1",
     "rudder-sdk-js": "^2.48.6",
-    "strip-markdown": "^5.0.1",
+    "strip-markdown": "^6.0.0",
     "styled-components": "^6.1.8",
     "typescript": "^5.4.5",
     "zustand": "^4.5.2"
