@@ -105,6 +105,11 @@ export const navigationCategories = [
             url: '/gateways',
             icon: 'ph-compass ph-bold',
           },
+          {
+            title: 'AI',
+            url: '/ai',
+            icon: 'ph-sparkle ph-bold',
+          },
         ],
       },
     ],

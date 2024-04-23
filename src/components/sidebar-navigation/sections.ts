@@ -28,6 +28,11 @@ export const discoverDrawerSections: NavigationSection[] = [
         url: '/gateways',
         icon: 'ph-compass',
       },
+      {
+        title: 'AI',
+        url: '/ai',
+        icon: 'ph-sparkle',
+      },
     ],
   },
 ];
