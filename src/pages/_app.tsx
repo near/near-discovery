@@ -115,7 +115,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <link rel="manifest" href="manifest.json" />
       </Head>
 
-      <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.0.3" async />
+      <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web@2.1.0" async />
 
       <Script
         src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
