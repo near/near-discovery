@@ -74,21 +74,33 @@ const getLink = (props) => {
   } else if (props.receiver && props.actionAtBlockHeight) {
     return `https://near.org/s/p?a=${props.receiver}&b=${props.actionAtBlockHeight}`;
   }
-  return "http://near.org/notifications";
+  return `https://near.org/notifications`;
 };
 
-// TODO: Add error handling if data will not match
 function handlePushEvent(event) {
-  console.log('SW - push event received', event);
-
   const notification = event.data.json();
 
-  const { initiatedBy = '', valueType = '' } = notification;
+  console.log('SW - push event received', notification);
+
+  const { initiatedBy, valueType } = notification;
+
+  if (!initiatedBy || !valueType) {
+    console.error(
+      `handlePushEvent received event with an undefined required value valueType=${valueType}, initiatedBy=${initiatedBy}`,
+    );
+    return;
+  }
 
   const title = getNotificationTitle({ accountId: initiatedBy, notificationType: valueType });
   const options = getNotificationOptions({ notificationType: valueType, ...notification });
 
-  event.waitUntil(self.registration.showNotification(title, options));
+  console.log('SW - triggering notification with', title, options);
+
+  try {
+    event.waitUntil(self.registration.showNotification(title, options));
+  } catch (e) {
+    console.error('Error during an attempt to show a notification', e);
+  }
 }
 
 const handlePushClick = (event) => {
