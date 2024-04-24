@@ -18,7 +18,7 @@
     "sync-submodules": "git submodule init && git submodule update --remote"
   },
   "dependencies": {
-    "@idos-network/idos-sdk": "^0.0.30",
+    "@idos-network/idos-sdk": "^0.2.12",
     "@keypom/selector": "1.2.3",
     "@monaco-editor/react": "^4.6.0",
     "@near-js/biometric-ed25519": "0.3.0",
