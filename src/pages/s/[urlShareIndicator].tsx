@@ -1,6 +1,7 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+
 import { openToast } from '@/components/lib/Toast';
 import { MetaTags } from '@/components/MetaTags';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -107,7 +108,7 @@ function parseMarkdown(markdown: string) {
     line = line.trim();
     if (index === 0 && isImage(line)) {
       headerImageUrl = getImageUrl(line);
-      parsedMarkdown.push({ type: 'header-image', imageUrl: getImageUrl(line) });
+      parsedMarkdown.push({ type: 'header-image', imageUrl: headerImageUrl });
     } else if (line.startsWith('#')) {
       listType = null;
       const match = line.match(/^#+/);
