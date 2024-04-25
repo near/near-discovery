@@ -85,7 +85,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
     testnet: {
       activityPage: `${testnetTLA}/widget/ActivityPage`,
       applicationsPage: `${testnetTLA}/widget/AppLibrary.IndexPage`,
-      blog: `${testnetTLA}/widget/Blog/Feed`,
+      blog: `${testnetTLA}/widget/Blog.Feed`,
       blogPost: `${testnetTLA}/widget/BlogPostPage`,
       bosDirectory: 'one.testnet/widget/BOSDirectory',
       componentSummary: `${testnetTLA}/widget/ComponentSummary`,
