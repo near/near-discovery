@@ -82,6 +82,7 @@ export const Sidebar = () => {
               <S.NavigationItem $active={false} $type="standard" href="https://docs.near.org/" target="_blank">
                 <i className="ph-bold ph-book-open-text" />
                 <span>Documentation</span>
+                <i className="ph-bold ph-arrow-square-out ms-auto" />
               </S.NavigationItem>
             </Tooltip>
 
@@ -100,6 +101,7 @@ export const Sidebar = () => {
               <S.NavigationItem $active={false} $type="standard" href="https://careers.near.org/" target="_blank">
                 <i className="ph-bold ph-briefcase" />
                 <span>Careers</span>
+                <i className="ph-bold ph-arrow-square-out ms-auto" />
               </S.NavigationItem>
             </Tooltip>
 
