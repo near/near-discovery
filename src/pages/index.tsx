@@ -13,6 +13,7 @@ import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useTermsOfServiceStore } from '@/stores/terms-of-service';
 import { localStorageAccountIdKey, privacyDomainName, termsDomainName } from '@/utils/config';
+import { fetchEventsList } from '@/utils/events';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const HomePage: NextPageWithLayout = () => {
@@ -52,23 +53,38 @@ const HomePage: NextPageWithLayout = () => {
     }
   }, [signedIn]);
 
-  return (
-    <>
-      {(signedIn || signedInOptimistic) && <NotificationsAlert />}
+  if (sidebarLayoutEnabled) {
+    return (
+      <>
+        {(signedIn || signedInOptimistic) && <NotificationsAlert />}
 
-      <ComponentWrapperPage
-        src={components.wrapper}
-        componentProps={{
-          emitGatewayEvent,
-          logOut,
-          targetProps: router.query,
-          targetComponent: sidebarLayoutEnabled ? components.gateway.homePage : components.default,
-          termsDomainName,
-          privacyDomainName,
-          recordToC: setTosData,
-        }}
-      />
-    </>
+        <ComponentWrapperPage
+          src={components.wrapper}
+          componentProps={{
+            emitGatewayEvent,
+            logOut,
+            targetProps: router.query,
+            targetComponent: components.gateway.homePage,
+            termsDomainName,
+            privacyDomainName,
+            recordToC: setTosData,
+          }}
+        />
+      </>
+    );
+  }
+
+  return (
+    <ComponentWrapperPage
+      src={components.nearOrg.homePage}
+      meta={{
+        title: `NEAR | Blockchains, Abstracted`,
+        description: `"NEAR is the chain abstraction stack, empowering builders to create apps that scale to billions of users and across all blockchains."`,
+      }}
+      componentProps={{
+        fetchEventsList,
+      }}
+    />
   );
 };
 
