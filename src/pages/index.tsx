@@ -53,10 +53,10 @@ const HomePage: NextPageWithLayout = () => {
     }
   }, [signedIn]);
 
-  if (signedIn || signedInOptimistic) {
+  if (sidebarLayoutEnabled) {
     return (
       <>
-        <NotificationsAlert />
+        {(signedIn || signedInOptimistic) && <NotificationsAlert />}
 
         <ComponentWrapperPage
           src={components.wrapper}
@@ -64,7 +64,7 @@ const HomePage: NextPageWithLayout = () => {
             emitGatewayEvent,
             logOut,
             targetProps: router.query,
-            targetComponent: sidebarLayoutEnabled ? components.gateway.homePage : components.default,
+            targetComponent: components.gateway.homePage,
             termsDomainName,
             privacyDomainName,
             recordToC: setTosData,

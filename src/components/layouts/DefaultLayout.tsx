@@ -51,10 +51,10 @@ export function DefaultLayout({ children }: Props) {
 
   useEffect(() => {
     /*
-      We need to temporarily disable transition animations for the sidebar 
-      until the expanded preference has resolved from local storage. Without 
-      this logic, the sidebar would animate to collapsed on page load if the 
-      user prefers the sidebar collapsed - the sidebar should initialize in 
+      We need to temporarily disable transition animations for the sidebar
+      until the expanded preference has resolved from local storage. Without
+      this logic, the sidebar would animate to collapsed on page load if the
+      user prefers the sidebar collapsed - the sidebar should initialize in
       its proper collapsed or expanded state with animating on page load.
     */
 
