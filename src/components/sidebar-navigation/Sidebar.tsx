@@ -79,16 +79,17 @@ export const Sidebar = () => {
 
           <S.Stack>
             <Tooltip content="Documentation" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={false} $type="standard" href="https://docs.near.org/" target="_blank">
+              <S.NavigationItem $active={false} $type="simple" href="https://docs.near.org/" target="_blank">
                 <i className="ph-bold ph-book-open-text" />
                 <span>Documentation</span>
+                <i className="ph-bold ph-arrow-square-out ms-auto" />
               </S.NavigationItem>
             </Tooltip>
 
             <Tooltip content="Get Funding" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem
                 $active={isNavigationItemActive('/ecosystem/get-funding')}
-                $type="standard"
+                $type="simple"
                 href="/ecosystem/get-funding"
               >
                 <i className="ph-bold ph-coin-vertical" />
@@ -97,14 +98,15 @@ export const Sidebar = () => {
             </Tooltip>
 
             <Tooltip content="Careers" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={false} $type="standard" href="https://careers.near.org/" target="_blank">
+              <S.NavigationItem $active={false} $type="simple" href="https://careers.near.org/" target="_blank">
                 <i className="ph-bold ph-briefcase" />
                 <span>Careers</span>
+                <i className="ph-bold ph-arrow-square-out ms-auto" />
               </S.NavigationItem>
             </Tooltip>
 
             <Tooltip content="Support" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={isNavigationItemActive('/contact-us')} $type="standard" href="/contact-us">
+              <S.NavigationItem $active={isNavigationItemActive('/contact-us')} $type="simple" href="/contact-us">
                 <i className="ph-bold ph-question" />
                 <span>Support</span>
               </S.NavigationItem>
@@ -116,7 +118,7 @@ export const Sidebar = () => {
                 type="button"
                 $active={false}
                 $expanded={expandedDrawer === 'marketing'}
-                $type="standard"
+                $type="simple"
                 onClick={(event) => toggleExpandedDrawer('marketing', event)}
               >
                 <i className="ph-bold ph-dots-three-outline-vertical" />

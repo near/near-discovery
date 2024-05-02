@@ -98,12 +98,12 @@ export const marketingDrawerSections: NavigationSection[] = [
     links: [
       {
         title: 'Overview',
-        url: '/ecosystem',
+        url: 'https://near.org/ecosystem',
         icon: 'ph-graph ph-bold',
       },
       {
         title: 'Founders',
-        url: '/founders',
+        url: 'https://near.org/founders',
         icon: 'ph-lightbulb ph-bold',
       },
       {
@@ -118,7 +118,7 @@ export const marketingDrawerSections: NavigationSection[] = [
       },
       {
         title: 'Events',
-        url: '/events',
+        url: 'https://near.org/events',
         icon: 'ph-calendar ph-bold',
       },
     ],
@@ -133,7 +133,7 @@ export const marketingDrawerSections: NavigationSection[] = [
       },
       {
         title: 'Blog',
-        url: '/blog',
+        url: 'https://near.org/blog',
         icon: 'ph-chat-centered-text ph-bold',
       },
       {
