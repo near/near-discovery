@@ -5,15 +5,18 @@ import { useAuthStore } from '@/stores/auth';
 
 export const MigrationAlert = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
+  const isNearDotOrg = ['https://near.org', 'https://beta.near.org'].some(
+    (url) => process.env.NEXT_PUBLIC_HOSTNAME === url,
+  );
 
   useEffect(() => {
-    if (signedIn) {
+    if (signedIn && isNearDotOrg) {
       openToast({
         title: "We're moving!",
         type: 'WARNING',
         description: (
           <p>
-            Bookmark the new wallet-connected experience at{' '}
+            Bookmark the new developer-focused experience at{' '}
             <a href="https://dev.near.org" target="_blank">
               dev.near.org
             </a>
@@ -22,7 +25,7 @@ export const MigrationAlert = () => {
         duration: 50000,
       });
     }
-  }, [signedIn]);
+  }, [isNearDotOrg, signedIn]);
 
   return <></>;
 };
