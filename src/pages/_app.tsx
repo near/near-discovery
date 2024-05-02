@@ -24,6 +24,8 @@ import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage'
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
+import { MigrationAlert } from '../components/DevNearOrgMigration';
+
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
 });
@@ -158,6 +160,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Toaster />
 
       <CookiePrompt />
+      <MigrationAlert />
 
       <div
         id="idos_container"
