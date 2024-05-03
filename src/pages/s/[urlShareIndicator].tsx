@@ -44,7 +44,7 @@ type ImageData = {
   ipfs_cid?: string;
 };
 
-type ShareType = 'POST' | 'COMMENT' | 'BLOG' | 'INVALID';
+type ShareType = 'POST' | 'COMMENT' | 'BLOG' | 'REPOST' | 'INVALID';
 
 type markdownObject = {
   type: string;
@@ -70,6 +70,8 @@ function returnShareType(indicator: string): ShareType {
       return 'POST';
     case 'bp':
       return 'BLOG';
+    case 'rp':
+      return 'REPOST';
     default:
       return 'INVALID';
   }
@@ -206,6 +208,32 @@ async function returnMetaPreviewForBlog(accountId: string, blockHeight: string):
   return null;
 }
 
+async function returnMetaPreviewForRepost(
+  accountId: string,
+  blockHeight: string,
+  rbAccountId: string,
+): Promise<MetaPreview | null> {
+  try {
+    const response = await fetch(`https://api.near.social/get?keys=${accountId}/post/main&blockHeight=${blockHeight}`);
+    const responseData: MainPostData = await response.json();
+    const main = responseData[accountId]?.post.main;
+
+    if (main) {
+      const data = JSON.parse(main);
+
+      return {
+        title: `Repost by @${rbAccountId}`,
+        description: sanitizeText(data.text),
+        imageUrl: returnImageUrl(data.image),
+        redirectUrl: `/near/widget/PostPage?accountId=${accountId}&blockHeight=${blockHeight}&isRepost=true&repostedBy=${rbAccountId}`,
+      };
+    }
+  } catch (err) {
+    console.warn('Failed to fetch meta preview for Repost', err);
+  }
+  return null;
+}
+
 function sanitizeText(text: string) {
   return text.replace(/\n/g, ' ').replace(/\s\s/g, ' ').trim();
 }
@@ -216,6 +244,7 @@ export const getServerSideProps: GetServerSideProps<{
   const indicator = query.urlShareIndicator as string;
   const accountId = query.a as string;
   const blockHeight = query.b as string;
+  const repostedBy = query.rb as string;
   const shareType = returnShareType(indicator);
   let meta: MetaPreview | null = null;
 
@@ -225,6 +254,8 @@ export const getServerSideProps: GetServerSideProps<{
     meta = await returnMetaPreviewForPost(accountId, blockHeight);
   } else if (shareType === 'BLOG') {
     meta = await returnMetaPreviewForBlog(accountId, blockHeight);
+  } else if (shareType === 'REPOST') {
+    meta = await returnMetaPreviewForRepost(accountId, blockHeight, repostedBy);
   }
 
   return {
