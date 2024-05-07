@@ -43,6 +43,7 @@ export const MarketingDrawer = ({ expanded }: Props) => {
                 >
                   <i className={`ph-bold ${link.icon}`} />
                   <span>{link.title}</span>
+                  {link.url.indexOf('https://') > -1 && <i className="ph-bold ph-arrow-square-out ms-auto" />}
                 </S.NavigationSimpleItem>
               ))}
             </S.Stack>
