@@ -24,11 +24,11 @@ const overflowContain = css`
   }
 
   /*
-    The "overflowContain" styles need to be used in combination with a child that is always 
+    The "overflowContain" styles need to be used in combination with a child that is always
     at least 1px taller than the parent via "min-height: calc(100% + 1px)".
 
-    This allows "overscroll-behavior: contain;" to prevent the <body> from scrolling. Setting 
-    "overflow: hidden;" on the <body> would break the "position: sticky;" behavior of the 
+    This allows "overscroll-behavior: contain;" to prevent the <body> from scrolling. Setting
+    "overflow: hidden;" on the <body> would break the "position: sticky;" behavior of the
     navigation - that's why we need to use this hack instead.
 
     https://stackoverflow.com/a/48954092
@@ -178,7 +178,7 @@ export const NavigationItemThumbnail = styled.div`
 export const NavigationItem = styled(Link)<{
   $active: boolean;
   $expanded?: boolean;
-  $type: 'featured' | 'standard';
+  $type: 'featured' | 'standard' | 'simple';
 }>`
   all: unset;
   display: flex;
@@ -266,6 +266,36 @@ export const NavigationItem = styled(Link)<{
           }
         `
       : undefined}
+
+  ${(p) =>
+    p.$type === 'simple'
+      ? css`
+          border-radius: 4px;
+
+          &:hover {
+            background: var(--sand3);
+          }
+
+          i {
+            --outline-color: transparent;
+          }
+        `
+      : undefined}
+  ${(p) =>
+    p.$type === 'simple' && (p.$active || p.$expanded)
+      ? css`
+          font-weight: 600;
+          color: var(--sand12);
+          background: var(--sand4);
+
+          i {
+            --outline-color: transparent !important;
+            color: var(--sand12);
+            background: var(--sand4);
+          }
+        `
+      : undefined}
+  }
 `;
 
 export const NavigationSimpleItem = styled(Link)<{
