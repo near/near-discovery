@@ -89,6 +89,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/auditrequest',
+        destination: 'https://airtable.com/appr1nBRRGx2PTJVh/shrpa99vKKW3xafso',
+        permanent: false,
+      },
+      {
         source: '/blog/getting-started-with-the-near-wallet',
         destination: 'https://wallet.near.org',
         permanent: true
