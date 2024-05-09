@@ -1,9 +1,10 @@
+import type { ReactElement } from 'react';
 import { create } from 'zustand';
 
 export type ToastType = 'INFO' | 'ERROR' | 'SUCCESS' | 'WARNING';
 
 export interface Toast {
-  description?: string;
+  description?: string | ReactElement;
   duration?: number;
   icon?: string;
   id: string;
@@ -13,7 +14,7 @@ export interface Toast {
 }
 
 export interface OpenToastOptions {
-  description?: string;
+  description?: string | ReactElement;
   duration?: number;
   icon?: string;
   id?: string;
