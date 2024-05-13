@@ -12,12 +12,12 @@ export const MigrationAlert = () => {
   useEffect(() => {
     if (signedIn && isNearDotOrg) {
       openToast({
-        title: "We're moving!",
+        title: 'The near.org Gateway is moving!',
         type: 'WARNING',
         description: (
           <p>
             Bookmark the new developer-focused experience at{' '}
-            <a href="https://dev.near.org" target="_blank">
+            <a href={`https://dev.near.org${window.location.pathname}${window.location.search}`} target="_blank">
               dev.near.org
             </a>
           </p>
