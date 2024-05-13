@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { HorizonBanner } from '@/components/banner/Horizon';
 import { Button } from '@/components/lib/Button';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
@@ -110,7 +109,6 @@ export const MobileNavigation = () => {
 
   return (
     <>
-      <HorizonBanner />
       <Wrapper>
         <Navigation>
           <Link href="/" passHref legacyBehavior>
