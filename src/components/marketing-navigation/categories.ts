@@ -69,6 +69,11 @@ export const navigationCategories = [
             icon: 'ph-code-block ph-bold',
           },
           {
+            title: 'QueryAPI',
+            url: '/dataplatform.near/widget/QueryApi.App',
+            icon: 'ph-code-block ph-bold',
+          },
+          {
             title: 'Standards & Proposals',
             url: 'https://github.com/near/NEPs',
             icon: 'ph-file-text ph-bold',
