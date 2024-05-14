@@ -26,6 +26,7 @@ const Blog: NextPageWithLayout = () => {
           requestAuthentication,
           accountId,
           blockHeight,
+          includeFooter: true,
         }}
       />
     );
