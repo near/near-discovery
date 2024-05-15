@@ -20,29 +20,12 @@ const Wrapper = styled.div<{
 }>`
   --bs-gutter-x: 1.5rem;
   padding: 8px calc(var(--bs-gutter-x) * 0.5);
-  background: var(--amber5);
+  background: #a39cec;
   border-radius: ${(p) => (p.inline ? '5px' : 0)};
 
   .banner-text {
     @media (max-width: 600px) {
       font-size: 12px;
-    }
-  }
-  .close-button {
-    all: unset;
-    width: 14px;
-    height: 14px;
-    line-height: 14px;
-    color: #664d04;
-    background: transparent;
-    outline: none;
-    border: none;
-    transition: color 0.2s;
-    cursor: pointer;
-
-    &:hover {
-      border: none;
-      background: transparent;
     }
   }
 `;
@@ -61,13 +44,13 @@ const Flex = styled.div<FlexProps>`
 `;
 
 const TextLink = styled.a`
-  color: var(--amber12);
+  color: inherit;
   font-weight: 700;
   text-decoration: underline;
   transition: color 0.2s;
 
   &:hover {
-    color: var(--amber11);
+    color: var(--white);
   }
 `;
 
@@ -83,7 +66,7 @@ export const MigrationBanner = (props: Props) => {
       {signedIn && isNearDotOrg ? (
         <Wrapper inline={props.inline}>
           <Flex gap="14px" alignItems="center" justifyContent="center">
-            <Text className="banner-text" weight="500" color="amber12">
+            <Text className="banner-text" weight="500">
               The near.org Gateway is moving! Bookmark the new developer-focused experience at&nbsp;
               <TextLink href={`https://dev.near.org${params}`} target="_blank">
                 dev.near.org
