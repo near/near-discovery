@@ -5,6 +5,7 @@ import type { FormEvent } from 'react';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { MigrationBanner } from '@/components/banner/MigrationBanner';
 import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -170,6 +171,7 @@ export const DesktopNavigation = () => {
 
   return (
     <>
+      <MigrationBanner />
       <Wrapper scrolled={scrolled}>
         <Container className="container-xl">
           <Link href="/" passHref legacyBehavior>
