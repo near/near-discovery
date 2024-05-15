@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-import { Button } from '@/components/lib/Button';
 import { Text } from '@/components/lib/Text';
 import { useAuthStore } from '@/stores/auth';
 
