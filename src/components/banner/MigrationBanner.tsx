@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/lib/Button';
 import { Text } from '@/components/lib/Text';
+import { useAuthStore } from '@/stores/auth';
 
 type Props = {
   inline?: boolean;
@@ -20,18 +21,10 @@ const Wrapper = styled.div<{
 }>`
   --bs-gutter-x: 1.5rem;
   padding: 8px calc(var(--bs-gutter-x) * 0.5);
-  background: #f77a69;
+  background: var(--amber5);
   border-radius: ${(p) => (p.inline ? '5px' : 0)};
 
   .banner-text {
-    @media (max-width: 600px) {
-      font-size: 12px;
-    }
-  }
-
-  .banner-button {
-    font-size: 14px;
-
     @media (max-width: 600px) {
       font-size: 12px;
     }
@@ -68,31 +61,38 @@ const Flex = styled.div<FlexProps>`
   }
 `;
 
+const TextLink = styled.a`
+  color: var(--amber12);
+  font-weight: 700;
+  text-decoration: underline;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--amber11);
+  }
+`;
+
 export const MigrationBanner = (props: Props) => {
+  const signedIn = useAuthStore((store) => store.signedIn);
   const isNearDotOrg = ['https://near.org', 'https://beta.near.org'].some(
     (url) => process.env.NEXT_PUBLIC_HOSTNAME === url,
   );
   const params = typeof window === 'undefined' ? '' : `${window.location.pathname}${window.location.search}`;
 
-  if (!isNearDotOrg) return null;
-
   return (
-    <Wrapper inline={props.inline}>
-      <Flex gap="14px" alignItems="center" justifyContent="center">
-        <Text className="banner-text" weight="500">
-          The near.org Gateway is moving! Bookmark the new developer-focused experience at
-        </Text>
-        <Button
-          href={`https://dev.near.org${params}`}
-          target="_blank"
-          label="dev.near.org"
-          iconRight="ph-bold ph-arrow-up-right"
-          variant="primary"
-          fill="outline"
-          size="small"
-          className="banner-button"
-        />
-      </Flex>
-    </Wrapper>
+    <>
+      {signedIn && isNearDotOrg ? (
+        <Wrapper inline={props.inline}>
+          <Flex gap="14px" alignItems="center" justifyContent="center">
+            <Text className="banner-text" weight="500" color="amber12">
+              The near.org Gateway is moving! Bookmark the new developer-focused experience at&nbsp;
+              <TextLink href={`https://dev.near.org${params}`} target="_blank">
+                dev.near.org
+              </TextLink>
+            </Text>
+          </Flex>
+        </Wrapper>
+      ) : null}
+    </>
   );
 };
