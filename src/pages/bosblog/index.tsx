@@ -13,6 +13,7 @@ const Blog: NextPageWithLayout = () => {
   const accountId = router.query.accountId;
   const blockHeight = router.query.blockHeight;
   const contributors = ['near', 'jacksonthedev.near'];
+  const blogComponentUrl = 'bosblog'; // the url of the blog component for a given gateway
 
   if (accountId && blockHeight) {
     return (
@@ -27,6 +28,7 @@ const Blog: NextPageWithLayout = () => {
           accountId,
           blockHeight,
           includeFooter: true,
+          blogComponentUrl,
         }}
       />
     );
