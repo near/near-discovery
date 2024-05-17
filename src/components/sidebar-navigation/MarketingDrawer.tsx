@@ -5,6 +5,8 @@ import { marketingDrawerSections } from './sections';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
+import { useCurrentComponentStore } from '@/stores/current-component';
+import { useEffect } from 'react';
 
 type Props = {
   expanded: boolean;
@@ -15,6 +17,7 @@ export const MarketingDrawer = ({ expanded }: Props) => {
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const handleBubbledClickInDrawer = useNavigationStore((store) => store.handleBubbledClickInDrawer);
   const setInitialExpandedDrawer = useNavigationStore((store) => store.setInitialExpandedDrawer);
+  const currentComponentSrc = useCurrentComponentStore((store) => store.src);
 
   const isNavigationItemActive = (route: string | string[]) => {
     const isActive = currentPathMatchesRoute(router.asPath, route);
@@ -23,6 +26,21 @@ export const MarketingDrawer = ({ expanded }: Props) => {
     });
     return isActive;
   };
+
+  useEffect(() => {
+    const developLinks = marketingDrawerSections[1].links;
+    const isComponentURL = () => ['/widget/', '/component/'].some((p) => router.asPath.indexOf(p) !== -1);
+
+    if (currentComponentSrc && developLinks.length === 5) {
+      developLinks.unshift({
+        title: 'Inspect Component',
+        url: `/near/widget/ComponentDetailsPage?src=${currentComponentSrc}`,
+        icon: 'ph-magnifying-glass ph-bold',
+      });
+    } else if (!isComponentURL() && !currentComponentSrc && developLinks.length === 6) {
+      developLinks.shift();
+    }
+  }, [currentComponentSrc, router]);
 
   return (
     <S.Drawer $expanded={expanded} $openedOnSmallScreens={isOpenedOnSmallScreens} onClick={handleBubbledClickInDrawer}>
