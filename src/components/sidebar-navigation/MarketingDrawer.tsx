@@ -29,18 +29,20 @@ export const MarketingDrawer = ({ expanded }: Props) => {
 
   useEffect(() => {
     const developLinks = marketingDrawerSections[1].links;
+    const title = 'Inspect Component';
+    const isInspectVisible = developLinks.some((option) => option.title === title);
     const isComponentURL = () => ['/widget/', '/component/'].some((p) => router.asPath.indexOf(p) !== -1);
 
-    if (currentComponentSrc && developLinks.length === 5) {
+    if (currentComponentSrc && !isInspectVisible) {
       developLinks.unshift({
-        title: 'Inspect Component',
+        title,
         url: `/near/widget/ComponentDetailsPage?src=${currentComponentSrc}`,
         icon: 'ph-magnifying-glass ph-bold',
       });
-    } else if (!isComponentURL() && !currentComponentSrc && developLinks.length === 6) {
+    } else if (!isComponentURL() && !currentComponentSrc && isInspectVisible) {
       developLinks.shift();
     }
-  }, [currentComponentSrc, router]);
+  }, [currentComponentSrc, router.asPath]);
 
   return (
     <S.Drawer $expanded={expanded} $openedOnSmallScreens={isOpenedOnSmallScreens} onClick={handleBubbledClickInDrawer}>
