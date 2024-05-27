@@ -60,7 +60,7 @@ const nextConfig = {
       { //TODO - remove in Q2 2024
         source: '/files/:slug',
         destination: 'https://discovery-domain.org/papers/:slug.pdf',
-        permanent: false, 
+        permanent: false,
       },
       {
         source: '/papers/:slug',
@@ -97,6 +97,16 @@ const nextConfig = {
         source: '/blog/getting-started-with-the-near-wallet',
         destination: 'https://wallet.near.org',
         permanent: true
+      },
+      {
+        source: '/settings',
+        destination: 'https://dev.near.org/settings',
+        permanent: true,
+      },
+      {
+        source: '/settings/:path*',
+        destination: 'https://dev.near.org/settings/:path*',
+        permanent: true,
       }
     ];
   },
