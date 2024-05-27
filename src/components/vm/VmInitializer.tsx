@@ -28,6 +28,7 @@ import {
   Widget,
 } from 'near-social-vm';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
@@ -71,6 +72,7 @@ export default function VmInitializer() {
   const idOS = useIdOS();
   const idosSDK = useIdosStore((state) => state.idOS);
   const resetNavigation = useNavigationStore((store) => store.reset);
+  const router = useRouter();
 
   useEffect(() => {
     initNear &&
@@ -124,7 +126,31 @@ export default function VmInitializer() {
             const cleanProps = mapValues({ to, href, ...rest }, (val: any, key: string) => {
               if (!['to', 'href'].includes(key)) return val;
               if (key === 'href' && !val) val = to;
-              return typeof val === 'string' && isValidAttribute('a', 'href', val) ? val : 'about:blank';
+              const isAtrValid = typeof val === 'string' && isValidAttribute('a', 'href', val);
+              let linkValue;
+              if (isAtrValid) {
+                if (val.startsWith('?')) {
+                  const currentParams = new URLSearchParams(
+                    Object.entries(router.query).reduce((acc, [key, value]) => {
+                      if (typeof value === 'string') {
+                        acc[key] = value;
+                      }
+                      return acc;
+                    }, {} as { [key: string]: string }), // Add index signature to the object type
+                  );
+                  const newParams = new URLSearchParams(val);
+                  newParams.forEach((value, key) => {
+                    currentParams.set(key, value);
+                  });
+
+                  linkValue = `${router.pathname}?${currentParams.toString()}`;
+                } else {
+                  linkValue = val;
+                }
+              } else {
+                linkValue = 'about:blank';
+              }
+              return linkValue;
             });
 
             return <Link {...cleanProps} />;
@@ -144,7 +170,7 @@ export default function VmInitializer() {
           enableWidgetSrcWithCodeOverride: isLocalEnvironment,
         },
       });
-  }, [initNear]);
+  }, [initNear, router.pathname, router.query]);
 
   useEffect(() => {
     if (!near || !idOS) {
