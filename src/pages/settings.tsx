@@ -13,6 +13,7 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
 import { useIdosStore } from '@/stores/idosStore';
 import { recordHandledError } from '@/utils/analytics';
+import { idosCreateAccountUrl } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const SettingsPage: NextPageWithLayout = () => {
@@ -83,6 +84,7 @@ const SettingsPage: NextPageWithLayout = () => {
         showTooltip: false,
         walletImages,
         connectedWallet: !accountId ? undefined : connectedWallet,
+        idosCreateAccountUrl, // originally, this should came from idOS maybe we should change it someday
       }}
     />
   );
