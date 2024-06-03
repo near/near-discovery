@@ -143,7 +143,7 @@ export default function VmInitializer() {
                     currentParams.set(key, value);
                   });
 
-                  linkValue = `${router.pathname}?${currentParams.toString()}`;
+                  linkValue = `?${currentParams.toString()}`;
                 } else {
                   linkValue = val;
                 }
@@ -170,7 +170,7 @@ export default function VmInitializer() {
           enableWidgetSrcWithCodeOverride: isLocalEnvironment,
         },
       });
-  }, [initNear, router.pathname, router.query]);
+  }, [initNear, router.query]);
 
   useEffect(() => {
     if (!near || !idOS) {
