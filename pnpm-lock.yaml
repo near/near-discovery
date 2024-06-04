@@ -43,7 +43,7 @@ importers:
         version: 8.9.7(near-api-js@2.1.4)
       '@near-wallet-selector/near-mobile-wallet':
         specifier: ^8.9.7
-        version: 8.9.7(@swc/helpers@0.5.10)(near-api-js@2.1.4)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
+        version: 8.9.7(@swc/helpers@0.5.10)(near-api-js@2.1.4)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
       '@near-wallet-selector/neth':
         specifier: 8.9.7
         version: 8.9.7(near-api-js@2.1.4)
@@ -123,8 +123,8 @@ importers:
         specifier: ^0.0.15
         version: 0.0.15(moment@2.30.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(vite@5.2.10(@types/node@18.19.31)(lightningcss@1.24.1)(terser@5.30.4))
       near-social-vm:
-        specifier: github:NearSocial/VM#2.6.1
-        version: https://codeload.github.com/NearSocial/VM/tar.gz/6047c6a9b96f3de14e600c1d2b96c432bbb76dd4(@babel/core@7.24.4)(@popperjs/core@2.11.8)(@types/react-dom@18.2.25)(@types/react@18.2.79)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)
+        specifier: github:NearSocial/VM#dev
+        version: https://codeload.github.com/NearSocial/VM/tar.gz/257ded3950fedbb2130a09ffe594d47c53b1e786(@babel/core@7.24.4)(@popperjs/core@2.11.8)(@types/react-dom@18.2.25)(@types/react@18.2.79)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)
       next:
         specifier: ^13.5.6
         version: 13.5.6(@babel/core@7.24.4)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -6668,8 +6668,8 @@ packages:
   near-seed-phrase@0.2.0:
     resolution: {integrity: sha512-NpmrnejpY1AdlRpDZ0schJQJtfBaoUheRfiYtQpcq9TkwPgqKZCRULV5L3hHmLc0ep7KRtikbPQ9R2ztN/3cyQ==}
 
-  near-social-vm@https://codeload.github.com/NearSocial/VM/tar.gz/6047c6a9b96f3de14e600c1d2b96c432bbb76dd4:
-    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/6047c6a9b96f3de14e600c1d2b96c432bbb76dd4}
+  near-social-vm@https://codeload.github.com/NearSocial/VM/tar.gz/257ded3950fedbb2130a09ffe594d47c53b1e786:
+    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/257ded3950fedbb2130a09ffe594d47c53b1e786}
     version: 2.6.1
     peerDependencies:
       near-api-js: 2.1.3
@@ -11376,10 +11376,10 @@ snapshots:
       '@near-wallet-selector/wallet-utils': 8.9.7(near-api-js@2.1.4)
       near-api-js: 2.1.4
 
-  '@near-wallet-selector/near-mobile-wallet@8.9.7(@swc/helpers@0.5.10)(near-api-js@2.1.4)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
+  '@near-wallet-selector/near-mobile-wallet@8.9.7(@swc/helpers@0.5.10)(near-api-js@2.1.4)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
     dependencies:
       '@near-wallet-selector/core': 8.9.7(near-api-js@2.1.4)
-      '@peersyst/near-mobile-signer': 1.0.11(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
+      '@peersyst/near-mobile-signer': 1.0.11(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
       near-api-js: 2.1.4
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -11522,14 +11522,14 @@ snapshots:
       - '@parcel/core'
       - '@swc/helpers'
 
-  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
+  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
     dependencies:
       '@parcel/bundler-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
       '@parcel/compressor-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.10)
       '@parcel/namer-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
       '@parcel/optimizer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
-      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
+      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
       '@parcel/optimizer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
       '@parcel/optimizer-svgo': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
       '@parcel/optimizer-swc': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
@@ -11662,10 +11662,10 @@ snapshots:
       - '@parcel/core'
       - '@swc/helpers'
 
-  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
+  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
     dependencies:
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)
-      htmlnano: 2.1.0(postcss@8.4.31)(srcset@4.0.0)(svgo@2.8.0)(terser@5.30.4)(typescript@5.4.5)
+      htmlnano: 2.1.0(postcss@8.4.38)(srcset@4.0.0)(svgo@2.8.0)(terser@5.30.4)(typescript@5.4.5)
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
@@ -12128,12 +12128,12 @@ snapshots:
       tslib: 2.6.2
       webcrypto-core: 1.7.9
 
-  '@peersyst/near-mobile-signer@1.0.11(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
+  '@peersyst/near-mobile-signer@1.0.11(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)':
     dependencies:
       bn.js: 5.2.1
       js-sha256: 0.9.0
       near-api-js: 2.1.4
-      parcel: 2.12.0(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
+      parcel: 2.12.0(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
     transitivePeerDependencies:
       - '@swc/helpers'
       - cssnano
@@ -16590,13 +16590,13 @@ snapshots:
 
   hosted-git-info@2.8.9: {}
 
-  htmlnano@2.1.0(postcss@8.4.31)(srcset@4.0.0)(svgo@2.8.0)(terser@5.30.4)(typescript@5.4.5):
+  htmlnano@2.1.0(postcss@8.4.38)(srcset@4.0.0)(svgo@2.8.0)(terser@5.30.4)(typescript@5.4.5):
     dependencies:
       cosmiconfig: 8.3.6(typescript@5.4.5)
       posthtml: 0.16.6
       timsort: 0.3.0
     optionalDependencies:
-      postcss: 8.4.31
+      postcss: 8.4.38
       srcset: 4.0.0
       svgo: 2.8.0
       terser: 5.30.4
@@ -17828,7 +17828,7 @@ snapshots:
       near-hd-key: 1.2.1
       tweetnacl: 1.0.3
 
-  near-social-vm@https://codeload.github.com/NearSocial/VM/tar.gz/6047c6a9b96f3de14e600c1d2b96c432bbb76dd4(@babel/core@7.24.4)(@popperjs/core@2.11.8)(@types/react-dom@18.2.25)(@types/react@18.2.79)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0):
+  near-social-vm@https://codeload.github.com/NearSocial/VM/tar.gz/257ded3950fedbb2130a09ffe594d47c53b1e786(@babel/core@7.24.4)(@popperjs/core@2.11.8)(@types/react-dom@18.2.25)(@types/react@18.2.79)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0):
     dependencies:
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@radix-ui/react-alert-dialog': 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -18135,9 +18135,9 @@ snapshots:
 
   p-try@2.2.0: {}
 
-  parcel@2.12.0(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5):
+  parcel@2.12.0(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5):
     dependencies:
-      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.31)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
+      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.10))(@swc/helpers@0.5.10)(postcss@8.4.38)(srcset@4.0.0)(terser@5.30.4)(typescript@5.4.5)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.10)
       '@parcel/diagnostic': 2.12.0
       '@parcel/events': 2.12.0
