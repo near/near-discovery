@@ -105,14 +105,14 @@ export default function VmInitializer() {
                 url:
                   networkId == 'testnet'
                     ? 'https://test.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY'
-                    : 'https://near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
+                    : 'https://dev.near.org/#trial-url/ACCOUNT_ID/SECRET_KEY',
                 modalOptions: KEYPOM_OPTIONS(networkId),
               },
               instantSignInSpecs: {
                 url:
                   networkId == 'testnet'
                     ? 'https://test.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID'
-                    : 'https://near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
+                    : 'https://dev.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
               },
               networkId,
               signInContractId,
