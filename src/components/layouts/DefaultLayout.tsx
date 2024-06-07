@@ -11,7 +11,6 @@ import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from '../sidebar-navigation/utils';
 
 interface Props {
   children: ReactNode;
-  hideNav: boolean;
 }
 
 const Wrapper = styled.div<{
