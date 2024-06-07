@@ -45,7 +45,7 @@ const Content = styled.div`
   min-width: 0;
 `;
 
-export function DefaultLayout({ children, hideNav = false }: Props) {
+export function DefaultLayout({ children }: Props) {
   const [sidebarLayoutShouldAnimate, setSidebarLayoutShouldAnimate] = useState(false);
   const sidebarLayoutHasInitialized = useNavigationStore((store) => store.hasInitialized);
   const { sidebarLayoutEnabled } = useSidebarLayoutEnabled();
@@ -68,7 +68,7 @@ export function DefaultLayout({ children, hideNav = false }: Props) {
 
   return (
     <Wrapper $animate={sidebarLayoutShouldAnimate} $sidebar={sidebarLayoutEnabled}>
-      {sidebarLayoutEnabled ? <SidebarNavigation hideNav={hideNav} /> : <MarketingNavigation />}
+      {sidebarLayoutEnabled ? <SidebarNavigation /> : <MarketingNavigation />}
 
       <Content>
         {/* {sidebarLayoutEnabled && <LargeScreenHeader />} */}
