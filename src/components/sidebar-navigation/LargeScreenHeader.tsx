@@ -7,7 +7,7 @@ import { useAuthStore } from '@/stores/auth';
 import { Button } from '../lib/Button';
 import { VmComponent } from '../vm/VmComponent';
 import { LargeScreenNotificationButton } from './LargeScreenNotificationButton';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
+import { LargeScreenProfileDropdown } from './LargeScreenNameDropdown';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 

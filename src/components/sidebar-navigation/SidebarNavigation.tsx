@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 
-import { DiscoverDrawer } from './DiscoverDrawer';
-import { MarketingDrawer } from './MarketingDrawer';
+// import { DiscoverDrawer } from './DiscoverDrawer';
+// import { MarketingDrawer } from './MarketingDrawer';
 import { Sidebar } from './Sidebar';
 import { SmallScreenHeader } from './SmallScreenHeader';
 import { useNavigationStore } from './store';
 
-export const SidebarNavigation = () => {
+export const SidebarNavigation = ({ hideNav }: { hideNav: boolean }) => {
   const expandedDrawer = useNavigationStore((store) => store.expandedDrawer);
   const initializeNavigation = useNavigationStore((store) => store.initialize);
   const setNavigation = useNavigationStore((store) => store.set);
@@ -32,13 +32,13 @@ export const SidebarNavigation = () => {
 
   return (
     <>
-      <SmallScreenHeader />
+      <SmallScreenHeader hideNav={hideNav} />
 
       <Sidebar />
 
-      <DiscoverDrawer expanded={expandedDrawer === 'discover'} />
+      {/* <DiscoverDrawer expanded={expandedDrawer === 'discover'} /> */}
 
-      <MarketingDrawer expanded={expandedDrawer === 'marketing'} />
+      {/* <MarketingDrawer expanded={expandedDrawer === 'marketing'} /> */}
     </>
   );
 };

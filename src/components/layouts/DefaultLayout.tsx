@@ -11,6 +11,7 @@ import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from '../sidebar-navigation/utils';
 
 interface Props {
   children: ReactNode;
+  hideNav: boolean;
 }
 
 const Wrapper = styled.div<{
@@ -44,7 +45,7 @@ const Content = styled.div`
   min-width: 0;
 `;
 
-export function DefaultLayout({ children }: Props) {
+export function DefaultLayout({ children, hideNav = false }: Props) {
   const [sidebarLayoutShouldAnimate, setSidebarLayoutShouldAnimate] = useState(false);
   const sidebarLayoutHasInitialized = useNavigationStore((store) => store.hasInitialized);
   const { sidebarLayoutEnabled } = useSidebarLayoutEnabled();
@@ -67,10 +68,10 @@ export function DefaultLayout({ children }: Props) {
 
   return (
     <Wrapper $animate={sidebarLayoutShouldAnimate} $sidebar={sidebarLayoutEnabled}>
-      {sidebarLayoutEnabled ? <SidebarNavigation /> : <MarketingNavigation />}
+      {sidebarLayoutEnabled ? <SidebarNavigation hideNav={hideNav} /> : <MarketingNavigation />}
 
       <Content>
-        {sidebarLayoutEnabled && <LargeScreenHeader />}
+        {/* {sidebarLayoutEnabled && <LargeScreenHeader />} */}
 
         <BosLoaderBanner />
 

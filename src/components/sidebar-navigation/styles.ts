@@ -13,7 +13,6 @@ const fadeIn = keyframes`
 `;
 
 const overflowContain = css`
-  overflow: auto;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
 
@@ -144,6 +143,53 @@ export const Section = styled.div<{
       : undefined}
 `;
 
+export const LoginSection = styled.div<{
+  $screen?: 'small' | 'large';
+}>`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid var(--sand6);
+  overflow: hidden;
+  position: sticky;
+  bottom: 0;
+  background: var(--white);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  .sidebar-auto-width-button {
+    width: 100%;
+  }
+
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    .sidebar-auto-width-button {
+      width: min-content;
+      white-space: nowrap;
+    }
+  }
+
+  ${(p) =>
+    p.$screen === 'small'
+      ? css`
+          @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+            display: none;
+          }
+        `
+      : undefined}
+
+  ${(p) =>
+    p.$screen === 'large'
+      ? css`
+          @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+            display: none;
+          }
+        `
+      : undefined}
+`;
+
 export const NavigationItemThumbnail = styled.div`
   --outline-color: rgba(0, 0, 0, 0.1);
   --outline-width: 1px;
@@ -172,6 +218,129 @@ export const NavigationItemThumbnail = styled.div`
     object-position: center;
     border: none;
     outline: none;
+  }
+`;
+
+export const LoginItem = styled.button<{
+  $active: boolean;
+  $expanded?: boolean;
+  $type: 'featured' | 'standard' | 'simple';
+}>`
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--sand11);
+  font-size: 0.875rem;
+  line-height: 1.2;
+  letter-spacing: 0.28px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 150ms;
+
+  &:hover {
+    color: var(--sand12);
+
+    i {
+      background: var(--sand3);
+    }
+
+    ${NavigationItemThumbnail} {
+      --outline-color: rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  &:focus-visible {
+    i,
+    ${NavigationItemThumbnail} {
+      --outline-color: var(--violet5);
+      --outline-width: 2px;
+    }
+  }
+
+  i {
+    --outline-width: 1px;
+    --outline-color: var(--sand6);
+    outline: var(--outline-width) solid var(--outline-color);
+    outline-offset: calc(var(--outline-width) * -1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: currentColor;
+    font-size: 1.25rem;
+    border-radius: 4px;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    background: var(--white);
+    transition: all 150ms, outline 0ms;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: all var(--sidebar-expand-transition-speed);
+  }
+
+  ${(p) =>
+    p.$active || p.$expanded
+      ? css`
+          font-weight: 600;
+          color: var(--sand12);
+          i {
+            --outline-color: var(--sand12) !important;
+            --outline-width: 2px;
+          }
+        `
+      : undefined}
+
+  ${(p) =>
+    p.$type === 'standard' && (p.$active || p.$expanded)
+      ? css`
+          i {
+            background: var(--sand4);
+          }
+        `
+      : undefined}
+
+  ${(p) =>
+    p.$type === 'standard'
+      ? css`
+          i {
+            --outline-width: 0;
+          }
+        `
+      : undefined}
+
+  ${(p) =>
+    p.$type === 'simple'
+      ? css`
+          border-radius: 4px;
+
+          &:hover {
+            background: var(--sand3);
+          }
+
+          i {
+            --outline-color: transparent;
+          }
+        `
+      : undefined}
+  ${(p) =>
+    p.$type === 'simple' && (p.$active || p.$expanded)
+      ? css`
+          font-weight: 600;
+          color: var(--sand12);
+          background: var(--sand4);
+
+          i {
+            --outline-color: transparent !important;
+            color: var(--sand12);
+            background: var(--sand4);
+          }
+        `
+      : undefined}
   }
 `;
 
@@ -398,6 +567,8 @@ export const SectionLabelIconLink = styled(Link)`
 
 export const OverflowContainChild = styled.div`
   min-height: calc(100% + 1px);
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Sidebar = styled.div<{
@@ -409,6 +580,7 @@ export const Sidebar = styled.div<{
   top: 0;
   left: 0;
   width: var(--sidebar-width-expanded);
+  overflow: auto;
 
   height: 100dvh;
   ${overflowContain}
@@ -486,11 +658,21 @@ export const LargeScreenHeader = styled.header<{
 `;
 
 export const LargeScreenHeaderActionWrapper = styled.div`
+  margin-left: -2px;
   display: flex;
   height: 40px;
   width: 40px;
   align-items: center;
   justify-content: center;
+`;
+
+export const LargeScreenHeaderNameWrapper = styled.div`
+  display: flex;
+  height: 40px;
+  width: 100%;
+  padding-left: 1rem;
+  text-align: left;
+  align-items: center;
 `;
 
 export const SmallScreenHeader = styled.header`

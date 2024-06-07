@@ -11,8 +11,9 @@ import { VmComponent } from '../vm/VmComponent';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
 import * as S from './styles';
+import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 
-export const SmallScreenHeader = () => {
+export const SmallScreenHeader = ({ hideNav }: { hideNav: boolean }) => {
   const components = useBosComponents();
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebarOnSmallScreens = useNavigationStore((store) => store.toggleExpandedSidebarOnSmallScreens);
@@ -27,6 +28,9 @@ export const SmallScreenHeader = () => {
   const signedIn = useAuthStore((store) => store.signedIn);
   const { requestAuthentication } = useSignInRedirect();
 
+  const handleSignIn = () => {
+    requestAuthentication();
+  };
   const handleCreateAccount = () => {
     requestAuthentication(true);
   };
@@ -62,19 +66,23 @@ export const SmallScreenHeader = () => {
 
       {signedIn ? (
         <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens}>
-          <VmComponent
+          <LargeScreenProfileDropdown />
+
+          {/* <VmComponent
             showLoadingSpinner={false}
             src={components.navigation.smallScreenHeader}
             props={{ availableStorage: availableStorageDisplay, withdrawTokens, logOut }}
-          />
+          /> */}
         </S.SmallScreenHeaderActions>
       ) : (
-        <Button
-          label="Create Account"
-          variant="primary"
-          onClick={handleCreateAccount}
-          style={{ alignSelf: 'center', marginRight: '1rem' }}
-        />
+        <>
+          <Button
+            label="Sign-up or Login"
+            variant="primary"
+            onClick={handleCreateAccount}
+            style={{ alignSelf: 'center', marginRight: '1rem' }}
+          />
+        </>
       )}
 
       <S.SmallScreenHeaderIconButton
