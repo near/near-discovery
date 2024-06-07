@@ -13,6 +13,7 @@ const fadeIn = keyframes`
 `;
 
 const overflowContain = css`
+  overflow: auto;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
 
@@ -580,7 +581,6 @@ export const Sidebar = styled.div<{
   top: 0;
   left: 0;
   width: var(--sidebar-width-expanded);
-  overflow: auto;
 
   height: 100dvh;
   ${overflowContain}
