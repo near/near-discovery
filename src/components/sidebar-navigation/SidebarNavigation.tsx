@@ -6,7 +6,7 @@ import { Sidebar } from './Sidebar';
 import { SmallScreenHeader } from './SmallScreenHeader';
 import { useNavigationStore } from './store';
 
-export const SidebarNavigation = ({ hideNav }: { hideNav: boolean }) => {
+export const SidebarNavigation = () => {
   const expandedDrawer = useNavigationStore((store) => store.expandedDrawer);
   const initializeNavigation = useNavigationStore((store) => store.initialize);
   const setNavigation = useNavigationStore((store) => store.set);
@@ -32,7 +32,7 @@ export const SidebarNavigation = ({ hideNav }: { hideNav: boolean }) => {
 
   return (
     <>
-      <SmallScreenHeader hideNav={hideNav} />
+      <SmallScreenHeader />
 
       <Sidebar />
 

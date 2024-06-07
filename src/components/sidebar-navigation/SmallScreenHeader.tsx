@@ -13,7 +13,7 @@ import { useNavigationStore } from './store';
 import * as S from './styles';
 import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 
-export const SmallScreenHeader = ({ hideNav }: { hideNav: boolean }) => {
+export const SmallScreenHeader = () => {
   const components = useBosComponents();
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebarOnSmallScreens = useNavigationStore((store) => store.toggleExpandedSidebarOnSmallScreens);
