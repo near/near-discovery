@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-// import { DiscoverDrawer } from './DiscoverDrawer';
-// import { MarketingDrawer } from './MarketingDrawer';
+import { DiscoverDrawer } from './DiscoverDrawer';
+import { MarketingDrawer } from './MarketingDrawer';
 import { Sidebar } from './Sidebar';
 import { SmallScreenHeader } from './SmallScreenHeader';
 import { useNavigationStore } from './store';
@@ -36,9 +36,9 @@ export const SidebarNavigation = () => {
 
       <Sidebar />
 
-      {/* <DiscoverDrawer expanded={expandedDrawer === 'discover'} /> */}
+      <DiscoverDrawer expanded={expandedDrawer === 'discover'} />
 
-      {/* <MarketingDrawer expanded={expandedDrawer === 'marketing'} /> */}
+      <MarketingDrawer expanded={expandedDrawer === 'marketing'} />
     </>
   );
 };
