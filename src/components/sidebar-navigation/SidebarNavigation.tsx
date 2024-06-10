@@ -1,7 +1,5 @@
 import { useEffect } from 'react';
 
-import { DiscoverDrawer } from './DiscoverDrawer';
-import { MarketingDrawer } from './MarketingDrawer';
 import { Sidebar } from './Sidebar';
 import { SmallScreenHeader } from './SmallScreenHeader';
 import { useNavigationStore } from './store';
@@ -35,10 +33,6 @@ export const SidebarNavigation = () => {
       <SmallScreenHeader />
 
       <Sidebar />
-
-      <DiscoverDrawer expanded={expandedDrawer === 'discover'} />
-
-      <MarketingDrawer expanded={expandedDrawer === 'marketing'} />
     </>
   );
 };
