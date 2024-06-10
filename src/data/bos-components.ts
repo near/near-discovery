@@ -70,6 +70,7 @@ type NetworkComponents = {
     largeScreenHeader: string;
     notificationButton: string;
     profileDropdown: string;
+    nameDropdown: string;
     search: string;
     smallScreenHeader: string;
   };
@@ -152,6 +153,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         largeScreenHeader: `${testnetTLA}/widget/Navigation.LargeScreenHeader`,
         notificationButton: `${testnetTLA}/widget/NearOrg.Notifications.NotificationButton`,
         profileDropdown: `${testnetTLA}/widget/Navigation.ProfileDropdown`,
+        nameDropdown: `${testnetTLA}/widget/Navigation.NameDropdown`,
         search: `${testnetTLA}/widget/Navigation.Search`,
         smallScreenHeader: `${testnetTLA}/widget/Navigation.SmallScreenHeader`,
       },
@@ -227,6 +229,7 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         largeScreenHeader: 'near/widget/Navigation.LargeScreenHeader',
         notificationButton: 'near/widget/NearOrg.Notifications.NotificationButton',
         profileDropdown: 'near/widget/Navigation.ProfileDropdown',
+        nameDropdown: 'near/widget/Navigation.NameDropdown',
         search: 'near/widget/Navigation.Search',
         smallScreenHeader: 'near/widget/Navigation.SmallScreenHeader',
       },
