@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 
 import { Tooltip } from '../lib/Tooltip';
 import NearIconSvg from './icons/near-icon.svg';
-import { PinnedApps } from './PinnedApps';
+// import { PinnedApps } from './PinnedApps';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
@@ -18,7 +18,7 @@ export const Sidebar = () => {
   const isSidebarExpanded = useNavigationStore((store) => store.isSidebarExpanded && !store.expandedDrawer);
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebar = useNavigationStore((store) => store.toggleExpandedSidebar);
-  const toggleExpandedDrawer = useNavigationStore((store) => store.toggleExpandedDrawer);
+  // const toggleExpandedDrawer = useNavigationStore((store) => store.toggleExpandedDrawer);
   const handleBubbledClickInSidebar = useNavigationStore((store) => store.handleBubbledClickInSidebar);
   const { requestAuthentication } = useSignInRedirect();
   const tooltipsDisabled = isSidebarExpanded;
@@ -147,7 +147,7 @@ export const Sidebar = () => {
             </Tooltip>
 
             <Tooltip content="Blog" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={false} $type="featured" href="https://near.org/blog">
+              <S.NavigationItem $active={false} $type="featured" href="https://near.org/blog" target="_blank">
                 <i className="ph-bold ph-chat-centered-text" />
                 <span>Blog</span>
                 <span className="ph-bold ph-arrow-square-out ms-auto outline-none" />
