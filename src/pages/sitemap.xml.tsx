@@ -1,4 +1,17 @@
 function generateSiteMap() {
+  if (process.env.NEXT_PUBLIC_HOSTNAME !== 'https://near.org') {
+    return `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+    xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+    xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+    <url>
+        <loc>${process.env.NEXT_PUBLIC_HOSTNAME}/blog</loc>
+        <lastmod>2024-06-10</lastmod>
+    </url>
+    </urlset>`;
+  }
   //this fn serves to build a sitemap with the env specific hostname
   return `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
