@@ -70,7 +70,7 @@ export function DefaultLayout({ children }: Props) {
       {sidebarLayoutEnabled ? <SidebarNavigation /> : <MarketingNavigation />}
 
       <Content>
-        {sidebarLayoutEnabled && <LargeScreenHeader />}
+        {/* {sidebarLayoutEnabled && <LargeScreenHeader />} */}
 
         <BosLoaderBanner />
 
