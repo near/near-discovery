@@ -3,14 +3,9 @@ import { useRouter } from 'next/router';
 
 import { Tooltip } from '../lib/Tooltip';
 import NearIconSvg from './icons/near-icon.svg';
-// import { PinnedApps } from './PinnedApps';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
-import { LargeScreenNameDropdown } from './LargeScreenNameDropdown';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 
 export const Sidebar = () => {
   const router = useRouter();
@@ -18,16 +13,8 @@ export const Sidebar = () => {
   const isSidebarExpanded = useNavigationStore((store) => store.isSidebarExpanded && !store.expandedDrawer);
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebar = useNavigationStore((store) => store.toggleExpandedSidebar);
-  // const toggleExpandedDrawer = useNavigationStore((store) => store.toggleExpandedDrawer);
   const handleBubbledClickInSidebar = useNavigationStore((store) => store.handleBubbledClickInSidebar);
-  const { requestAuthentication } = useSignInRedirect();
   const tooltipsDisabled = isSidebarExpanded;
-  const signedIn = useAuthStore((store) => store.signedIn);
-  const signedAccountId = useAuthStore((store) => store.accountId);
-
-  const handleSignIn = () => {
-    requestAuthentication(true);
-  };
 
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
     if (expandedDrawer) return false;
@@ -60,12 +47,6 @@ export const Sidebar = () => {
               </S.NavigationItem>
             </Tooltip>
 
-            {/* <Tooltip content="Activity" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={isNavigationItemActive('/activity')} $type="featured" href="/activity">
-                <i className="ph-bold ph-pulse" />
-                <span>Activity</span>
-              </S.NavigationItem>
-            </Tooltip> */}
             <Tooltip content="Documentation" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem
                 $active={isNavigationItemActive('/documentation')}
@@ -83,24 +64,8 @@ export const Sidebar = () => {
                 <span>Support</span>
               </S.NavigationItem>
             </Tooltip>
-
-            {/* <Tooltip content="Discover" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem
-                as="button"
-                type="button"
-                $active={isNavigationItemActive(['/applications', '/components', '/gateways'])}
-                $expanded={expandedDrawer === 'discover'}
-                $type="featured"
-                onClick={(event) => toggleExpandedDrawer('discover', event)}
-              >
-                <i className="ph-bold ph-shapes" />
-                <span>Discover</span>
-              </S.NavigationItem>
-            </Tooltip> */}
           </S.Stack>
         </S.Section>
-
-        {/* <PinnedApps /> */}
 
         <S.Section>
           <S.SectionLabel>Discover </S.SectionLabel>
@@ -120,20 +85,6 @@ export const Sidebar = () => {
                 <span className="ph-bold ph-arrow-square-out ms-auto outline-none" />
               </S.NavigationItem>
             </Tooltip>
-
-            {/* <Tooltip content="More" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem
-                as="button"
-                type="button"
-                $active={false}
-                $expanded={expandedDrawer === 'marketing'}
-                $type="featured"
-                onClick={(event) => toggleExpandedDrawer('marketing', event)}
-              >
-                <i className="ph-bold ph-dots-three-outline-vertical" />
-                <span>More</span>
-              </S.NavigationItem>
-            </Tooltip> */}
 
             <Tooltip content="News" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem
@@ -196,31 +147,6 @@ export const Sidebar = () => {
             </Tooltip>
           </S.Stack>
         </S.Section>
-
-        {/* TODO: Improve handling the sidebar opening */}
-        <S.LoginSection
-          onFocus={() => {
-            !isSidebarExpanded && toggleExpandedSidebar();
-          }}
-        >
-          {signedIn ? (
-            <Tooltip content={signedAccountId} side="right" disabled={tooltipsDisabled}>
-              <S.LoginItem $active={false} $type="featured">
-                <LargeScreenProfileDropdown />
-                <LargeScreenNameDropdown />
-              </S.LoginItem>
-            </Tooltip>
-          ) : (
-            <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled}>
-              <S.LoginItem $active={false} $type="featured" onClick={handleSignIn}>
-                <i className="ph-bold ph-keyhole" />
-                <span>Sign-up or Login</span>
-              </S.LoginItem>
-            </Tooltip>
-          )}
-        </S.LoginSection>
-
-        {/* <LargeScreenProfileDropdown /> */}
       </S.OverflowContainChild>
     </S.Sidebar>
   );
