@@ -1,17 +1,14 @@
 import Image from 'next/image';
-import { useCallback } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
-import { useVmStore } from '@/stores/vm';
 
 import { Button } from '../lib/Button';
-import { VmComponent } from '../vm/VmComponent';
 import NearIconSvg from './icons/near-icon.svg';
+import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';
 import * as S from './styles';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 
 export const SmallScreenHeader = () => {
   const components = useBosComponents();
@@ -20,25 +17,12 @@ export const SmallScreenHeader = () => {
   const setNavigation = useNavigationStore((store) => store.set);
   const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
-
-  const near = useVmStore((store) => store.near);
-  const availableStorage = useAuthStore((store) => store.availableStorage);
-  const availableStorageDisplay = availableStorage?.gte(10) ? availableStorage.div(1000).toFixed(2) : '0';
-  const logOut = useAuthStore((store) => store.logOut);
   const signedIn = useAuthStore((store) => store.signedIn);
   const { requestAuthentication } = useSignInRedirect();
 
-  const handleSignIn = () => {
-    requestAuthentication();
-  };
   const handleCreateAccount = () => {
     requestAuthentication(true);
   };
-
-  const withdrawTokens = useCallback(async () => {
-    if (!near) return;
-    await near.contract.storage_withdraw({}, undefined, '1');
-  }, [near]);
 
   return (
     <S.SmallScreenHeader>
@@ -65,14 +49,9 @@ export const SmallScreenHeader = () => {
       )}
 
       {signedIn ? (
-        <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens}>
+        <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens} $gap="16px">
+          <Button label="search" icon="ph ph-magnifying-glass" variant="secondary" href={components.search.indexPage} />
           <LargeScreenProfileDropdown />
-
-          {/* <VmComponent
-            showLoadingSpinner={false}
-            src={components.navigation.smallScreenHeader}
-            props={{ availableStorage: availableStorageDisplay, withdrawTokens, logOut }}
-          /> */}
         </S.SmallScreenHeaderActions>
       ) : (
         <>

@@ -758,12 +758,14 @@ export const SmallScreenHeaderTitle = styled.p`
 
 export const SmallScreenHeaderActions = styled.div<{
   $hidden: boolean;
+  $gap?: string;
 }>`
   display: flex;
   align-items: center;
   height: 100%;
   opacity: 1;
   transition: all var(--sidebar-expand-transition-speed);
+  gap: ${(p) => p.$gap ?? 'unset'};
 
   ${(p) =>
     p.$hidden
