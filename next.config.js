@@ -89,7 +89,7 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/auditrequest',
+        source: '/assessments',
         destination: 'https://airtable.com/appr1nBRRGx2PTJVh/shrpa99vKKW3xafso',
         permanent: false,
       },
