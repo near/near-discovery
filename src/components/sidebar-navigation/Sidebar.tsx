@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 
 import { Tooltip } from '../lib/Tooltip';
 import NearIconSvg from './icons/near-icon.svg';
+import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
+import { Search } from './Search';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
@@ -37,6 +39,13 @@ export const Sidebar = () => {
             <i className={`ph-bold ${isSidebarExpanded ? 'ph-arrow-line-left' : 'ph-list'}`} />
           </S.ToggleExpandButton>
         </S.Top>
+
+        <S.SearchSection $expanded={isSidebarExpanded}>
+          <Search />
+          <S.SearchIconWrapper $expanded={isSidebarExpanded}>
+            <i className="ph-bold ph-magnifying-glass" />
+          </S.SearchIconWrapper>
+        </S.SearchSection>
 
         <S.Section>
           <S.Stack $gap="0.5rem">
@@ -147,6 +156,10 @@ export const Sidebar = () => {
             </Tooltip>
           </S.Stack>
         </S.Section>
+
+        <S.ProfileDropdownSection $expanded={isSidebarExpanded}>
+          <LargeScreenProfileDropdown />
+        </S.ProfileDropdownSection>
       </S.OverflowContainChild>
     </S.Sidebar>
   );
