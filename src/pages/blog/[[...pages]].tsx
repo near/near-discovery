@@ -10,17 +10,19 @@ import { recordHandledError } from '@/utils/analytics';
 import type { NextPageWithLayout } from '@/utils/types';
 
 export const getServerSideProps = (async ({ resolvedUrl }) => {
+  const isProd = ['https://near.org', 'https://dev.near.org'].some((url) => process.env.NEXT_PUBLIC_HOSTNAME === url);
+  const blog_branch = isProd ? 'main' : 'develop';
   const blogParts = resolvedUrl.split('blog/');
   let title = 'index.html';
   if (blogParts[1] !== title) {
     title = `${blogParts[1].substring(0, blogParts[1].indexOf('/'))}/index.html`;
   }
-  const res = await fetch(`https://raw.githubusercontent.com/near/nearorg_marketing/main/public/blog/${title}`).catch(
-    (e) => {
-      recordHandledError({ title, message: 'failed to fetch github blog html for requested title' });
-      throw e;
-    },
-  );
+  const res = await fetch(
+    `https://raw.githubusercontent.com/near/nearorg_marketing/${blog_branch}/public/blog/${title}`,
+  ).catch((e) => {
+    recordHandledError({ title, message: 'failed to fetch github blog html for requested title' });
+    throw e;
+  });
 
   const __html = await (await res.blob()).text();
 
