@@ -20,7 +20,7 @@ export const LargeScreenProfileDropdown = () => {
   }, [near]);
 
   return (
-    <S.LargeScreenHeaderActionWrapper>
+    <S.LargeScreenHeaderActionWrapper $width="100%" $justifyContent="start">
       <VmComponent
         src={components.navigation.profileDropdown}
         props={{
