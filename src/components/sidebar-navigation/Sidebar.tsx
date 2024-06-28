@@ -27,8 +27,6 @@ export const Sidebar = () => {
     requestAuthentication(true);
   };
 
-  console.log('signedIn: ', signedIn);
-
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
     if (expandedDrawer) return false;
     return currentPathMatchesRoute(router.asPath, route, exactMatch);
@@ -51,11 +49,20 @@ export const Sidebar = () => {
           </S.ToggleExpandButton>
         </S.Top>
 
-        <S.SearchSection $expanded={isSidebarExpanded}>
+        <S.SearchSection
+          $expanded={isSidebarExpanded}
+          onClick={() => {
+            if (!isSidebarExpanded) {
+              toggleExpandedSidebar();
+            }
+          }}
+        >
           <Search />
-          <S.SearchIconWrapper $expanded={isSidebarExpanded}>
-            <i className="ph-bold ph-magnifying-glass" />
-          </S.SearchIconWrapper>
+          <Tooltip content="Search" side="right" disabled={tooltipsDisabled}>
+            <S.SearchIconWrapper $expanded={isSidebarExpanded}>
+              <i className="ph-bold ph-magnifying-glass" />
+            </S.SearchIconWrapper>
+          </Tooltip>
         </S.SearchSection>
 
         <S.Section>
