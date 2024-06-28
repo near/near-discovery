@@ -231,7 +231,7 @@ export const LoginItem = styled.button<{
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--violet11);
+  color: var(--sand11);
   font-size: 0.875rem;
   line-height: 1.2;
   letter-spacing: 0.28px;
@@ -241,10 +241,10 @@ export const LoginItem = styled.button<{
   transition: all 150ms;
 
   &:hover {
-    color: var(--violet12);
+    color: var(--sand12);
 
     i {
-      background: var(--violet3);
+      background: var(--sand3);
     }
 
     ${NavigationItemThumbnail} {
@@ -262,13 +262,13 @@ export const LoginItem = styled.button<{
 
   i {
     --outline-width: 1px;
-    --outline-color: var(--violet8);
+    --outline-color: var(--sand6);
     outline: var(--outline-width) solid var(--outline-color);
     outline-offset: calc(var(--outline-width) * -1);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--violet8);
+    color: currentColor;
     font-size: 1.25rem;
     border-radius: 4px;
     width: 2.25rem;
@@ -282,6 +282,7 @@ export const LoginItem = styled.button<{
     overflow: hidden;
     text-overflow: ellipsis;
     transition: all var(--sidebar-expand-transition-speed);
+    font-weight: 600;
   }
 
   ${(p) =>

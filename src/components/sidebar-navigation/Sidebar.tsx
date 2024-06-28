@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
+import { useAuthStore } from '@/stores/auth';
+
 import { Tooltip } from '../lib/Tooltip';
 import NearIconSvg from './icons/near-icon.svg';
 import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
@@ -17,6 +20,14 @@ export const Sidebar = () => {
   const toggleExpandedSidebar = useNavigationStore((store) => store.toggleExpandedSidebar);
   const handleBubbledClickInSidebar = useNavigationStore((store) => store.handleBubbledClickInSidebar);
   const tooltipsDisabled = isSidebarExpanded;
+  const signedIn = useAuthStore((store) => store.signedIn);
+  const { requestAuthentication } = useSignInRedirect();
+
+  const handleCreateAccount = () => {
+    requestAuthentication(true);
+  };
+
+  console.log('signedIn: ', signedIn);
 
   const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
     if (expandedDrawer) return false;
@@ -158,7 +169,16 @@ export const Sidebar = () => {
         </S.Section>
 
         <S.ProfileDropdownSection $expanded={isSidebarExpanded}>
-          <LargeScreenProfileDropdown />
+          {signedIn ? (
+            <LargeScreenProfileDropdown />
+          ) : (
+            <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled}>
+              <S.LoginItem $active={false} $type="featured" onClick={handleCreateAccount}>
+                <i className="ph-bold ph-user" />
+                <span>Sign-up or Login</span>
+              </S.LoginItem>
+            </Tooltip>
+          )}
         </S.ProfileDropdownSection>
       </S.OverflowContainChild>
     </S.Sidebar>
