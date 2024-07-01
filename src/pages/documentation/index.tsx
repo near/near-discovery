@@ -33,7 +33,7 @@ const Documentation: NextPageWithLayout = () => {
     <iframe
       ref={iframeRef}
       style={{ flexGrow: 'inherit', width: '100%', height: '100vh' }}
-      src={`http://localhost:3001${path}`}
+      src={`https://docs.near.org${path}`}
     ></iframe>
   );
 };
