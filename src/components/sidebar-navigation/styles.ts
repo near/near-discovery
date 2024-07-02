@@ -887,6 +887,11 @@ export const Drawer = styled.div<{
 export const ProfileDropdownSection = styled(Section)<{
   $expanded: boolean;
 }>`
+  position: sticky;
+  bottom: 0;
+  background: var(--white);
+  border-top: 1px solid var(--sand6);
+
   @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     ${(p) =>
       p.$expanded
@@ -909,6 +914,8 @@ export const ProfileDropdownSection = styled(Section)<{
 export const SearchSection = styled(Section)<{
   $expanded: boolean;
 }>`
+  padding: 0 1rem 1rem 1rem;
+
   @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     ${(p) =>
       p.$expanded
