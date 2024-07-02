@@ -134,7 +134,7 @@ export const Sidebar = () => {
           </S.Stack>
         </S.Section>
 
-        <S.Section style={{ flexGrow: 1 }}>
+        <S.Section style={{ flexGrow: 1, borderBottom: 'none' }}>
           <S.SectionLabel>Resources </S.SectionLabel>
 
           <S.Stack $gap="0.5rem">
