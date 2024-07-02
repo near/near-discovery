@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 import { useRouter } from 'next/router';
@@ -6,7 +6,6 @@ import { useRouter } from 'next/router';
 const Documentation: NextPageWithLayout = () => {
   const router = useRouter();
   const { slug } = router.query;
-  const iframeRef = useRef<HTMLIFrameElement>(null);
   const currentPath = Array.isArray(slug) ? `/${slug.join('/')}` : '';
 
   const path = currentPath.replace(/\/documentation/g, '');
@@ -31,7 +30,6 @@ const Documentation: NextPageWithLayout = () => {
 
   return (
     <iframe
-      ref={iframeRef}
       style={{ flexGrow: 'inherit', width: '100%', height: '100vh' }}
       src={`https://docs.near.org${path}`}
     ></iframe>
