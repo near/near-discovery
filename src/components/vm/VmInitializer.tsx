@@ -95,6 +95,7 @@ export default function VmInitializer() {
             setupNightly(),
             setupWelldoneWallet(),
             setupFastAuthWallet({
+              walletUrl: 'http://localhost:3000',
               relayerUrl:
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
