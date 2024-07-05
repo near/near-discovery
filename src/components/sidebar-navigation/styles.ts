@@ -231,7 +231,7 @@ export const LoginItem = styled.button<{
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: var(--violet11);
+  color: var(--sand11);
   font-size: 0.875rem;
   line-height: 1.2;
   letter-spacing: 0.28px;
@@ -241,10 +241,10 @@ export const LoginItem = styled.button<{
   transition: all 150ms;
 
   &:hover {
-    color: var(--violet12);
+    color: var(--sand12);
 
     i {
-      background: var(--violet3);
+      background: var(--sand3);
     }
 
     ${NavigationItemThumbnail} {
@@ -262,13 +262,13 @@ export const LoginItem = styled.button<{
 
   i {
     --outline-width: 1px;
-    --outline-color: var(--violet8);
+    --outline-color: var(--sand6);
     outline: var(--outline-width) solid var(--outline-color);
     outline-offset: calc(var(--outline-width) * -1);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--violet8);
+    color: currentColor;
     font-size: 1.25rem;
     border-radius: 4px;
     width: 2.25rem;
@@ -282,6 +282,7 @@ export const LoginItem = styled.button<{
     overflow: hidden;
     text-overflow: ellipsis;
     transition: all var(--sidebar-expand-transition-speed);
+    font-weight: 600;
   }
 
   ${(p) =>
@@ -657,13 +658,23 @@ export const LargeScreenHeader = styled.header<{
   }
 `;
 
-export const LargeScreenHeaderActionWrapper = styled.div`
+export const LargeScreenHeaderActionWrapper = styled.div<{
+  $width?: string;
+  $alignItems?: string;
+  $justifyContent?: string;
+}>`
   margin-left: -2px;
   display: flex;
   height: 40px;
-  width: 40px;
-  align-items: center;
-  justify-content: center;
+  width: ${(p) => p.$width ?? '40px'};
+  align-items: ${(p) => p.$alignItems ?? 'center'};
+  justify-content: ${(p) => p.$justifyContent ?? 'center'};
+
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    .profile-dropdown-name {
+      display: none;
+    }
+  }
 `;
 
 export const LargeScreenHeaderNameWrapper = styled.div`
@@ -758,12 +769,14 @@ export const SmallScreenHeaderTitle = styled.p`
 
 export const SmallScreenHeaderActions = styled.div<{
   $hidden: boolean;
+  $gap?: string;
 }>`
   display: flex;
   align-items: center;
   height: 100%;
   opacity: 1;
   transition: all var(--sidebar-expand-transition-speed);
+  gap: ${(p) => p.$gap ?? 'unset'};
 
   ${(p) =>
     p.$hidden
@@ -868,5 +881,136 @@ export const Drawer = styled.div<{
             width: 0;
             opacity: 0;
           `}
+  }
+`;
+
+export const ProfileDropdownSection = styled(Section)<{
+  $expanded: boolean;
+}>`
+  position: sticky;
+  bottom: 0;
+  background: var(--white);
+  border-top: 1px solid var(--sand6);
+
+  @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    ${(p) =>
+      p.$expanded
+        ? css`
+            .profile-dropdown-name {
+              visibility: visible;
+            }
+          `
+        : css`
+            .profile-dropdown-name {
+              visibility: hidden;
+            }
+          `}
+  }
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    display: none;
+  }
+`;
+
+export const SearchSection = styled(Section)<{
+  $expanded: boolean;
+}>`
+  padding: 0 1rem 1rem 1rem;
+
+  @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    ${(p) =>
+      p.$expanded
+        ? css`
+            ${SearchIconWrapper} {
+              display: none;
+            }
+            ${SearchWrapper} {
+              display: block;
+            }
+          `
+        : css`
+            ${SearchIconWrapper} {
+              display: block;
+            }
+            ${SearchWrapper} {
+              display: none;
+            }
+          `}
+  }
+  @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
+    display: none;
+  }
+`;
+
+export const SearchWrapper = styled.div`
+  width: 100%;
+  height: 40px;
+
+  > div,
+  > div > label,
+  > div > label > div {
+    height: 100%;
+  }
+`;
+
+export const SearchIconWrapper = styled.div<{
+  $expanded: boolean;
+}>`
+  all: unset;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--sand11);
+  font-size: 0.875rem;
+  line-height: 1.2;
+  letter-spacing: 0.28px;
+  text-decoration: none !important;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: all 150ms;
+
+  &:hover {
+    color: var(--sand12);
+
+    i {
+      background: var(--sand3);
+    }
+  }
+
+  &:focus-visible {
+    i {
+      --outline-color: var(--violet5);
+      --outline-width: 2px;
+    }
+  }
+
+  i {
+    --outline-width: 1px;
+    --outline-color: var(--sand6);
+    outline: var(--outline-width) solid var(--outline-color);
+    outline-offset: calc(var(--outline-width) * -1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: currentColor;
+    font-size: 1.25rem;
+    border-radius: 4px;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    background: var(--white);
+    transition: all 150ms, outline 0ms;
+  }
+
+  ${(p) =>
+    p.$expanded
+      ? css`
+          // font-weight: 600;
+          // color: var(--sand12);
+          i {
+            // --outline-color: var(--sand12) !important;
+            // --outline-width: 2px;
+          }
+        `
+      : undefined}
   }
 `;

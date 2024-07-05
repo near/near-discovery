@@ -17,6 +17,6 @@ jobs:
           fetch-depth: 0
       - name: pull-request
         run: |
-          gh pr create --base main --head develop -f -a calebjacob -a shelegdmitriy --title "2x weekly promotion of develop to main"
+          gh pr create --base main --head develop -f -a gagdiez -a shelegdmitriy --title "2x weekly promotion of develop to main"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

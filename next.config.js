@@ -23,6 +23,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/blog/:path*',
+        destination: 'https://near.org/blog/:path*',
+        permanent: false,
+      },
+      {
         source: '/consensus',
         destination: 'https://nearconsensus2023.splashthat.com/',
         permanent: false,
@@ -89,7 +94,7 @@ const nextConfig = {
         permanent: false,
       },
       {
-        source: '/auditrequest',
+        source: '/assessments',
         destination: 'https://airtable.com/appr1nBRRGx2PTJVh/shrpa99vKKW3xafso',
         permanent: false,
       },
