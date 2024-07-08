@@ -68,6 +68,7 @@ export const eventsApiUrl = process.env.NEXT_PUBLIC_EVENTS_API_URL;
 export const eventsApiKey = process.env.NEXT_PUBLIC_EVENTS_API_KEY;
 export const sidebarLayoutEnabled = process.env.NEXT_PUBLIC_SIDEBAR_LAYOUT === 'true';
 export const idosCreateAccountUrl = process.env.NEXT_PUBLIC_IDOS_CREATE_ACCOUNT_URL;
+export const gleapSdkToken = process.env.NEXT_PUBLIC_GLEAP_SDK_TOKEN;
 
 export const commitModalBypassAuthorIds = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_AUTHOR_IDS ?? '')
   .split(',')
