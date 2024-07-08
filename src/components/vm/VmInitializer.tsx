@@ -252,7 +252,6 @@ export default function VmInitializer() {
     setSignedAccountId(null);
     resetAnalytics();
     resetNavigation();
-    localStorage.removeItem('accountId');
   }, [idosSDK, near, resetNavigation]);
 
   const refreshAllowance = useCallback(async () => {

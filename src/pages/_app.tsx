@@ -5,6 +5,7 @@ import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
+import Gleap from 'gleap';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -20,6 +21,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
+import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
@@ -32,6 +34,10 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+if (typeof window !== 'undefined') {
+  if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
+}
+
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
@@ -40,8 +46,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
-  const accountId = useAuthStore((store) => store.accountId);
-  const componentSrc = router.query;
 
   useEffect(() => {
     const referred_from_wallet = document.referrer.indexOf('https://wallet.near.org/') !== -1;
@@ -77,17 +81,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, []);
 
   useEffect(() => {
-    // Displays the Zendesk widget only if user is signed in and on the home page
-    if (!window.zE) return;
-    if (!signedIn || Boolean(componentSrc?.componentAccountId && componentSrc?.componentName)) {
-      window.zE('webWidget', 'hide');
-      return;
-    }
-    localStorage.setItem('accountId', accountId);
-    window.zE('webWidget', 'show');
-  }, [accountId, signedIn, componentSrc]);
-
-  useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);
 
     function zendeskCheck() {
@@ -116,38 +109,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       </Head>
 
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web" async />
-
-      <Script
-        src="https://static.zdassets.com/ekr/snippet.js?key=1736c8d0-1d86-4080-b622-12accfdb74ca"
-        id="ze-snippet"
-        async
-      />
-
-      <Script id="zendesk-config" strategy="afterInteractive">
-        {`
-          window.zESettings = {
-            webWidget: {
-              color: { theme: '#2b2f31' },
-              zIndex: 1022,
-              offset: {
-                horizontal: '10px',
-                vertical: '10px',
-                mobile: { horizontal: '2px', vertical: '65px', from: 'right' },
-              },
-              contactForm: {
-                attachments: true,
-                title: { '*': 'Feedback and Support' },
-                fields: [
-                  {
-                    id: 13149356989591,
-                    prefill: { '*': localStorage.getItem('accountId') },
-                  },
-                ],
-              },
-            },
-          };
-        `}
-      </Script>
 
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 

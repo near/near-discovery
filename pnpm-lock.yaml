@@ -107,6 +107,9 @@ importers:
       firebase:
         specifier: ^9.23.0
         version: 9.23.0
+      gleap:
+        specifier: ^13.7.6
+        version: 13.7.6
       iframe-resizer-react:
         specifier: ^1.1.0
         version: 1.1.0(prop-types@15.8.1)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
@@ -5492,6 +5495,9 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
+  gleap@13.7.6:
+    resolution: {integrity: sha512-+0oiyIu43QOauxMykBJl3zJFn07uP29HnBrLdkSBTjmh/C7JN46/R0YpteGrBzFM3xHo8ZPvuhx4UWxmclocaw==}
+
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -6959,6 +6965,9 @@ packages:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
 
+  pick-dom-element@0.2.3:
+    resolution: {integrity: sha512-XBwCZMMnmZAU68lvizuAluOBpImiE3sgXEbrMjBBJ/SjUiHTeep38oiBL8wWMy9ZXxNk6JvmYRUmGiZnCOvUFw==}
+
   picocolors@1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
 
@@ -8264,6 +8273,9 @@ packages:
 
   unified@10.1.2:
     resolution: {integrity: sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==}
+
+  unique-selector@0.5.0:
+    resolution: {integrity: sha512-2KCiRgM19ol67lO493tF7mnQPDuYzwRM7JXrVx336+BPXqT2ccCbUOQQpErFbSc8VIdifLf5x34x4lIeebk+YA==}
 
   unique-string@2.0.0:
     resolution: {integrity: sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==}
@@ -16428,6 +16440,12 @@ snapshots:
       meow: 12.1.1
       split2: 4.2.0
 
+  gleap@13.7.6:
+    dependencies:
+      '@floating-ui/dom': 1.6.3
+      pick-dom-element: 0.2.3
+      unique-selector: 0.5.0
+
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -18250,6 +18268,8 @@ snapshots:
       safe-buffer: 5.2.1
       sha.js: 2.4.11
 
+  pick-dom-element@0.2.3: {}
+
   picocolors@1.0.0: {}
 
   picomatch@2.3.1: {}
@@ -19745,6 +19765,8 @@ snapshots:
       is-plain-obj: 4.1.0
       trough: 2.2.0
       vfile: 5.3.7
+
+  unique-selector@0.5.0: {}
 
   unique-string@2.0.0:
     dependencies:
