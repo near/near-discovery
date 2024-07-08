@@ -95,8 +95,14 @@ export default function VmInitializer() {
             setupNightly(),
             setupWelldoneWallet(),
             setupFastAuthWallet({
-              walletUrl: 'http://localhost:3000',
-              relayerUrl: networkId === 'testnet' ? 'http://34.70.226.83:3030/relay' : 'http://localhost:3000',
+              walletUrl:
+                networkId === 'testnet'
+                  ? 'https://wallet.testnet.near.org/fastauth'
+                  : 'https://wallet.near.org/fastauth',
+              relayerUrl:
+                networkId === 'testnet'
+                  ? 'http://34.70.226.83:3030/relay'
+                  : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }),
             setupKeypom({
               trialAccountSpecs: {
