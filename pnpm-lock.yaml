@@ -43,7 +43,7 @@ importers:
         version: 8.9.7(near-api-js@2.1.4)
       '@near-wallet-selector/near-mobile-wallet':
         specifier: ^8.9.7
-        version: 8.9.10(@swc/helpers@0.5.11)(near-api-js@2.1.4)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)
+        version: 8.9.10(@swc/helpers@0.5.11)(near-api-js@2.1.4)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)
       '@near-wallet-selector/neth':
         specifier: 8.9.7
         version: 8.9.7(near-api-js@2.1.4)
@@ -107,6 +107,9 @@ importers:
       firebase:
         specifier: ^9.23.0
         version: 9.23.0
+      gleap:
+        specifier: ^13.7.6
+        version: 13.7.6
       iframe-resizer-react:
         specifier: ^1.1.0
         version: 1.1.0(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -5572,6 +5575,9 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
 
+  gleap@13.7.6:
+    resolution: {integrity: sha512-+0oiyIu43QOauxMykBJl3zJFn07uP29HnBrLdkSBTjmh/C7JN46/R0YpteGrBzFM3xHo8ZPvuhx4UWxmclocaw==}
+
   glob-parent@5.1.2:
     resolution: {integrity: sha512-AOIgSQCepiJYwP3ARnGx+5VnTu2HBYdzbGP45eLw1vr3zB3vZLeyed1sC9hnbcOc9/SrMyM5RPQrkGz4aS9Zow==}
     engines: {node: '>= 6'}
@@ -7051,6 +7057,9 @@ packages:
     resolution: {integrity: sha512-iuh7L6jA7JEGu2WxDwtQP1ddOpaJNC4KlDEFfdQajSGgGPNi4OyDc2R7QnbY2bR9QjBVGwgvTdNJZoE7RaxUMA==}
     engines: {node: '>=0.12'}
 
+  pick-dom-element@0.2.3:
+    resolution: {integrity: sha512-XBwCZMMnmZAU68lvizuAluOBpImiE3sgXEbrMjBBJ/SjUiHTeep38oiBL8wWMy9ZXxNk6JvmYRUmGiZnCOvUFw==}
+
   picocolors@1.0.1:
     resolution: {integrity: sha512-anP1Z8qwhkbmu7MFP5iTt+wQKXgwzf7zTyGlcdzabySa9vd0Xt392U0rVmz9poOaBj0uHJKyyo9/upk0HrEQew==}
 
@@ -8380,6 +8389,9 @@ packages:
 
   unified@10.1.2:
     resolution: {integrity: sha512-pUSWAi/RAnVy1Pif2kAoeWNBa3JVrx0MId2LASj8G+7AiHWoKZNTomq6LG326T68U7/e263X6fTdcXIy7XnF7Q==}
+
+  unique-selector@0.5.0:
+    resolution: {integrity: sha512-2KCiRgM19ol67lO493tF7mnQPDuYzwRM7JXrVx336+BPXqT2ccCbUOQQpErFbSc8VIdifLf5x34x4lIeebk+YA==}
 
   unique-string@2.0.0:
     resolution: {integrity: sha512-uNaeirEPvpZWSgzwsPGtU2zVSTrn/8L5q/IexZmH0eH6SA73CmAA5U4GwORTxQAZs95TAXLNqeLoPPNO5gZfWg==}
@@ -11281,10 +11293,10 @@ snapshots:
       '@near-wallet-selector/wallet-utils': 8.9.7(near-api-js@2.1.4)
       near-api-js: 2.1.4
 
-  '@near-wallet-selector/near-mobile-wallet@8.9.10(@swc/helpers@0.5.11)(near-api-js@2.1.4)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)':
+  '@near-wallet-selector/near-mobile-wallet@8.9.10(@swc/helpers@0.5.11)(near-api-js@2.1.4)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)':
     dependencies:
       '@near-wallet-selector/core': 8.9.10(near-api-js@2.1.4)
-      '@peersyst/near-mobile-signer': 1.0.11(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)
+      '@peersyst/near-mobile-signer': 1.0.11(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)
       near-api-js: 2.1.4
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -11431,14 +11443,14 @@ snapshots:
       - '@parcel/core'
       - '@swc/helpers'
 
-  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)':
+  '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)':
     dependencies:
       '@parcel/bundler-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
       '@parcel/compressor-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/namer-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
       '@parcel/optimizer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
-      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)
+      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)
       '@parcel/optimizer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
       '@parcel/optimizer-svgo': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
       '@parcel/optimizer-swc': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
@@ -11571,10 +11583,10 @@ snapshots:
       - '@parcel/core'
       - '@swc/helpers'
 
-  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)':
+  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)':
     dependencies:
       '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)
-      htmlnano: 2.1.1(postcss@8.4.39)(svgo@2.8.0)(terser@5.31.1)(typescript@5.5.3)
+      htmlnano: 2.1.1(postcss@8.4.39)(srcset@4.0.0)(svgo@2.8.0)(terser@5.31.1)(typescript@5.5.3)
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
@@ -12037,12 +12049,12 @@ snapshots:
       tslib: 2.6.3
       webcrypto-core: 1.8.0
 
-  '@peersyst/near-mobile-signer@1.0.11(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)':
+  '@peersyst/near-mobile-signer@1.0.11(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)':
     dependencies:
       bn.js: 5.2.1
       js-sha256: 0.9.0
       near-api-js: 2.1.4
-      parcel: 2.12.0(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)
+      parcel: 2.12.0(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)
     transitivePeerDependencies:
       - '@swc/helpers'
       - cssnano
@@ -16377,6 +16389,12 @@ snapshots:
       meow: 12.1.1
       split2: 4.2.0
 
+  gleap@13.7.6:
+    dependencies:
+      '@floating-ui/dom': 1.6.7
+      pick-dom-element: 0.2.3
+      unique-selector: 0.5.0
+
   glob-parent@5.1.2:
     dependencies:
       is-glob: 4.0.3
@@ -16562,13 +16580,14 @@ snapshots:
 
   hosted-git-info@2.8.9: {}
 
-  htmlnano@2.1.1(postcss@8.4.39)(svgo@2.8.0)(terser@5.31.1)(typescript@5.5.3):
+  htmlnano@2.1.1(postcss@8.4.39)(srcset@4.0.0)(svgo@2.8.0)(terser@5.31.1)(typescript@5.5.3):
     dependencies:
       cosmiconfig: 9.0.0(typescript@5.5.3)
       posthtml: 0.16.6
       timsort: 0.3.0
     optionalDependencies:
       postcss: 8.4.39
+      srcset: 4.0.0
       svgo: 2.8.0
       terser: 5.31.1
     transitivePeerDependencies:
@@ -18128,9 +18147,9 @@ snapshots:
 
   p-try@2.2.0: {}
 
-  parcel@2.12.0(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3):
+  parcel@2.12.0(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3):
     dependencies:
-      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(terser@5.31.1)(typescript@5.5.3)
+      '@parcel/config-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.11))(@swc/helpers@0.5.11)(postcss@8.4.39)(srcset@4.0.0)(terser@5.31.1)(typescript@5.5.3)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.11)
       '@parcel/diagnostic': 2.12.0
       '@parcel/events': 2.12.0
@@ -18204,6 +18223,8 @@ snapshots:
       ripemd160: 2.0.2
       safe-buffer: 5.2.1
       sha.js: 2.4.11
+
+  pick-dom-element@0.2.3: {}
 
   picocolors@1.0.1: {}
 
@@ -19719,6 +19740,8 @@ snapshots:
       is-plain-obj: 4.1.0
       trough: 2.2.0
       vfile: 5.3.7
+
+  unique-selector@0.5.0: {}
 
   unique-string@2.0.0:
     dependencies:
