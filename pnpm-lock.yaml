@@ -126,8 +126,8 @@ importers:
         specifier: 2.0.1
         version: 2.0.1(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(vite@5.3.3(@types/node@18.19.39)(lightningcss@1.25.1)(terser@5.31.1))
       near-social-vm:
-        specifier: github:NearSocial/VM#dev
-        version: https://codeload.github.com/NearSocial/VM/tar.gz/6c9808d77afe6f4e6243388b92f4fbb231d13bff(@babel/core@7.24.7)(@popperjs/core@2.11.8)(@types/react-dom@18.3.0)(@types/react@18.3.3)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
+        specifier: github:calebjacob/VM#dev
+        version: https://codeload.github.com/calebjacob/VM/tar.gz/9ae4f62b37349d7dc9927f53b77f80bcceed1ecc(@babel/core@7.24.7)(@popperjs/core@2.11.8)(@types/react-dom@18.3.0)(@types/react@18.3.3)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)
       next:
         specifier: ^13.5.6
         version: 13.5.6(@babel/core@7.24.7)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -6777,8 +6777,8 @@ packages:
   near-seed-phrase@0.2.0:
     resolution: {integrity: sha512-NpmrnejpY1AdlRpDZ0schJQJtfBaoUheRfiYtQpcq9TkwPgqKZCRULV5L3hHmLc0ep7KRtikbPQ9R2ztN/3cyQ==}
 
-  near-social-vm@https://codeload.github.com/NearSocial/VM/tar.gz/6c9808d77afe6f4e6243388b92f4fbb231d13bff:
-    resolution: {tarball: https://codeload.github.com/NearSocial/VM/tar.gz/6c9808d77afe6f4e6243388b92f4fbb231d13bff}
+  near-social-vm@https://codeload.github.com/calebjacob/VM/tar.gz/9ae4f62b37349d7dc9927f53b77f80bcceed1ecc:
+    resolution: {tarball: https://codeload.github.com/calebjacob/VM/tar.gz/9ae4f62b37349d7dc9927f53b77f80bcceed1ecc}
     version: 2.6.1
     peerDependencies:
       near-api-js: 2.1.3
@@ -17838,7 +17838,7 @@ snapshots:
       near-hd-key: 1.2.1
       tweetnacl: 1.0.3
 
-  near-social-vm@https://codeload.github.com/NearSocial/VM/tar.gz/6c9808d77afe6f4e6243388b92f4fbb231d13bff(@babel/core@7.24.7)(@popperjs/core@2.11.8)(@types/react-dom@18.3.0)(@types/react@18.3.3)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1):
+  near-social-vm@https://codeload.github.com/calebjacob/VM/tar.gz/9ae4f62b37349d7dc9927f53b77f80bcceed1ecc(@babel/core@7.24.7)(@popperjs/core@2.11.8)(@types/react-dom@18.3.0)(@types/react@18.3.3)(near-api-js@2.1.4)(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1):
     dependencies:
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-alert-dialog': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
