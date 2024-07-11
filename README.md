@@ -31,9 +31,7 @@ To start local component development you need to follow this steps:
 
 ## Local VM Development
 
-> This section needs testing since switch to pnpm
-
-If you need to make changes to the VM and test locally, you can easily link your local copy of the VM:
+If you need to make changes to the VM and test locally, you can link your local copy of the VM:
 
 1. Clone the VM repo as a sibling of `near-discovery`:
 
@@ -48,6 +46,16 @@ Folder Structure:
 /VM
 ```
 
-2. Run `pnpm link ../VM`
+2. Make sure both directories are running the exact same version of Node. You can check by running `node --version`.
+3. If you haven't already, run `pnpm i` inside `near-discovery`
+4. Open `near-discovery/next.config.js` and modify by adding `experimental: { esmExternals: 'loose', },` to the root of `const nextConfig = { ... }`
+5. Inside `near-discovery`, run `pnpm link ../VM`
+6. Inside `VM` directory, run `rm -rf node_modules pnpm-lock.yaml`, then run `yarn`, then run `yarn build`
+7. Inside `near-discovery`, run `pnpm dev`
+8. Any time you make changes to the `VM`, run `yarn build` inside the `VM` project in order for the gateway project to pick up the changes
 
-3. Any time you make changes to the `VM`, run `pnpm build` inside the `VM` project in order for the viewer project to pick up the changes
+To revert out of local development mode for the VM:
+
+1. Inside `near-discovery`, run `pnpm unlink ../VM`
+2. Revert the changes to `near-discovery/next.config.js`
+3. Restart `pnpm dev`
