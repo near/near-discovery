@@ -1,17 +1,15 @@
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { Motivation } from './Motivation';
 import styled from 'styled-components';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import { Button } from '../lib/Button';
 import Image from 'next/image';
 import ThumbsUpIcon from './thumbs-up.svg';
+import { recordResearchFromEvent } from '@/utils/analytics';
+import Modal from 'react-bootstrap/Modal';
+import ResearchForm from './ResearchForm';
+import { useResearchFormEvents } from '@/hooks/useResearchWizardEvents';
 
-const Wrapper = styled.div`
-  position: fixed;
-  bottom: 1em;
-  right: 1em;
-  margin: 0 auto;
-`;
 // float the button to the bottom center of the screen
 const MobileWrapper = styled.div`
   width: 276px;
@@ -43,68 +41,6 @@ const IconContainer = styled.div`
   color: white;
 `;
 
-const Card = styled.div`
-  width: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-`;
-
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  margin-left: auto;
-`;
-
-const ChildSection = styled.div`
-  flex-grow: 1;
-`;
-
-const Footer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-`;
-
-const Progress = styled.div`
-  width: 100%;
-  height: 5px;
-  background: lightgray;
-  border-radius: 5px;
-  overflow: hidden;
-  margin-bottom: 10px;
-
-  &::after {
-    content: '';
-    display: block;
-    width: 33%;
-    height: 100%;
-    background: #6200ee;
-  }
-`;
-
-const NextButton = styled.button`
-  padding: 10px 20px;
-  background: #6200ee;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-`;
-
 interface ResearchStep {
   title: string;
   component: () => JSX.Element;
@@ -127,7 +63,10 @@ const formSteps: ResearchStep[] = [
 export const ResearchFormWizard = () => {
   const [matches, setMatches] = useState(true);
   const cookieData = useCookiePreferences();
+  const { showMobileResearchForm, setShowMobileResearchForm, isResearchFormDismissed, setIsResearchFormDismissed } =
+    useResearchFormEvents();
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [researchEventSent, setResearchEventSent] = useState(false);
 
   const currentStep = formSteps[currentStepIndex].component();
 
@@ -135,8 +74,31 @@ export const ResearchFormWizard = () => {
     setMatches(window.matchMedia('(min-width: 1120px)').matches);
   }, []);
 
+  const dismissForm = () => {
+    recordResearchFromEvent('close-research-form', { questionNumber: currentStepIndex + 1 });
+    if (showMobileResearchForm) {
+      setShowMobileResearchForm(false);
+    } else {
+      localStorage.setItem('researchFormDismissed', 'true');
+      setIsResearchFormDismissed(true);
+    }
+  };
+
+  const handleShowMobileResearchForm = () => {
+    setShowMobileResearchForm(true);
+    recordResearchFromEvent('research-form-initial-view', { mobileFormView: true });
+  };
+
+  const sendResearchEvent = () => {
+    if (!researchEventSent) {
+      console.log('sendResearchEvent');
+      recordResearchFromEvent('research-form-initial-view', { mobileFormView: false });
+      setResearchEventSent(true);
+    }
+  };
+
   // If the user has not acknowledged cookies, do not render the component
-  if (!cookieData) {
+  if (!cookieData || isResearchFormDismissed) {
     return null;
   }
 
@@ -145,29 +107,40 @@ export const ResearchFormWizard = () => {
     return null;
   }
 
+  console.log('matches', matches);
   if (!matches) {
     return (
-      <MobileWrapper>
-        <IconContainer>
-          <Image src={ThumbsUpIcon} alt="ThumbsUpIcon" width={64} height={64} />
-        </IconContainer>
-        Share your feedback?
-      </MobileWrapper>
+      <>
+        {showMobileResearchForm ? (
+          <Modal style={{ zIndex: 10500 }} show={showMobileResearchForm} fullscreen>
+            <Modal.Body>
+              <ResearchForm
+                showMobileResearchForm={showMobileResearchForm}
+                dismissForm={dismissForm}
+                currentStep={currentStep}
+              />
+            </Modal.Body>
+          </Modal>
+        ) : (
+          <MobileWrapper onClick={handleShowMobileResearchForm}>
+            <IconContainer>
+              <Image src={ThumbsUpIcon} alt="ThumbsUpIcon" width={64} height={64} />
+            </IconContainer>
+            Share your feedback?
+          </MobileWrapper>
+        )}
+      </>
     );
   }
 
   return (
-    <Wrapper>
-      <Card>
-        <Header>
-          <CloseButton>&times;</CloseButton>
-        </Header>
-        <ChildSection>{currentStep}</ChildSection>
-        <Footer>
-          <Progress />
-          <NextButton>Next</NextButton>
-        </Footer>
-      </Card>
-    </Wrapper>
+    <>
+      {sendResearchEvent()}
+      <ResearchForm
+        showMobileResearchForm={showMobileResearchForm}
+        dismissForm={dismissForm}
+        currentStep={currentStep}
+      />
+    </>
   );
 };
