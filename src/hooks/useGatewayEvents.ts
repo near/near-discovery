@@ -1,8 +1,14 @@
+import Gleap from 'gleap';
 import { useCallback } from 'react';
 
 import { useSidebarLayoutEnabled } from '@/components/sidebar-navigation/hooks';
 import { useNavigationStore } from '@/components/sidebar-navigation/store';
 import type { PinnedApp } from '@/components/sidebar-navigation/utils';
+
+type GleapGatewayEvent = {
+  type: 'GLEAP';
+  action: 'CLOSE' | 'OPEN';
+};
 
 type PinnedAppsGatewayEvent = {
   type: 'PINNED_APPS';
@@ -10,12 +16,7 @@ type PinnedAppsGatewayEvent = {
   action: 'FEATURE_ENABLED' | 'PINNED' | 'UNPINNED';
 };
 
-type GenericGatewayEvent = {
-  type: 'GENERIC';
-  data: any;
-};
-
-type GatewayEvent = GenericGatewayEvent | PinnedAppsGatewayEvent;
+type GatewayEvent = GleapGatewayEvent | PinnedAppsGatewayEvent;
 
 const COMPONENT_AUTHOR_ID_WHITELIST = ['near', 'discom.testnet', 'discom-dev.testnet'];
 
@@ -23,13 +24,14 @@ export function useGatewayEvents() {
   const { sidebarLayoutEnabled } = useSidebarLayoutEnabled();
   const modifyPinnedApps = useNavigationStore((store) => store.modifyPinnedApps);
 
-  const handleGenericEvent = useCallback((event: GenericGatewayEvent) => {
-    /* 
-      This event doesn't have a use case right now, but it serves as an example of 
-      how we could implement different event types in the future.
-    */
-
-    console.log('Generic gateway event recorded with data:', event);
+  const handleGleapEvent = useCallback((event: GleapGatewayEvent) => {
+    if (event.action === 'CLOSE') {
+      Gleap.close();
+    } else if (event.action === 'OPEN') {
+      Gleap.open();
+    } else {
+      console.error('Unimplemented gleap gateway event recorded:', event);
+    }
   }, []);
 
   const handlePinnedAppsEvent = useCallback(
@@ -48,15 +50,15 @@ export function useGatewayEvents() {
   const emitGatewayEvent = useCallback(
     (event: GatewayEvent) => {
       switch (event.type) {
-        case 'GENERIC':
-          return handleGenericEvent(event);
+        case 'GLEAP':
+          return handleGleapEvent(event);
         case 'PINNED_APPS':
           return handlePinnedAppsEvent(event);
         default:
           console.error('Unimplemented gateway event recorded:', event);
       }
     },
-    [handleGenericEvent, handlePinnedAppsEvent],
+    [handleGleapEvent, handlePinnedAppsEvent],
   );
 
   const shouldPassGatewayEventProps = useCallback((componentAuthorId: string) => {
