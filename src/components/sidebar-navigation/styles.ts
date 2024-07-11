@@ -13,7 +13,7 @@ const fadeIn = keyframes`
 `;
 
 const overflowContain = css`
-  overflow: auto;
+  // overflow: auto;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
 
@@ -942,14 +942,114 @@ export const SearchSection = styled(Section)<{
 `;
 
 export const SearchWrapper = styled.div`
-  width: 100%;
-  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  padding: 5px 10px;
+  width: 224px;
+  position: relative;
+`;
 
-  > div,
-  > div > label,
-  > div > label > div {
-    height: 100%;
+export const SearchIcon = styled.span`
+  margin-right: 10px;
+`;
+
+export const SearchInput = styled.input`
+  border: none;
+  background: transparent;
+  flex-grow: 1;
+  font-size: 16px;
+  outline: none;
+`;
+
+export const ClearButton = styled.button`
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  color: #999;
+`;
+
+export const TabContainer = styled.div`
+  display: flex;
+  margin-bottom: 10px;
+  width: 100%;
+`;
+
+export const Tab = styled.button<{ $active?: boolean }>`
+  padding: 10px;
+  border: none;
+  background-color: ${(props) => (props.$active ? '#007bff' : '#f0f0f0')};
+  color: ${(props) => (props.$active ? 'white' : 'black')};
+  cursor: pointer;
+  flex: 1;
+
+  &:hover {
+    background-color: ${(props) => (props.$active ? '#0056b3' : '#e0e0e0')};
   }
+`;
+
+export const ResultsPopup = styled.div<{ $show?: boolean }>`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 400px;
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  ${(props) =>
+    props.$show
+      ? css`
+          display: block;
+        `
+      : css`
+          display: none;
+        `}
+`;
+
+export const ResultItem = styled.div`
+  padding: 10px;
+`;
+
+export const CardDocs = styled.a`
+  width: 100%;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  max-width: 400px;
+  text-decoration: none;
+  text-align: left;
+  margin-bottom: 8px;
+
+  &:hover {
+    cursor: pointer;
+    text-decoration: none;
+    background-color: #f0f0f0;
+  }
+`;
+
+export const TitleDocs = styled.h2`
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+  font-weight: bold;
+`;
+
+export const SubtitleDocs = styled.h3`
+  font-size: 14px;
+  font-weight: normal;
+  margin: 4px 0 12px;
+`;
+
+export const ContentDocs = styled.p`
+  font-size: 14px;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
 `;
 
 export const SearchIconWrapper = styled.div<{

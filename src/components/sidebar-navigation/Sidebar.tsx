@@ -48,7 +48,7 @@ export const Sidebar = () => {
             <i className={`ph-bold ${isSidebarExpanded ? 'ph-arrow-line-left' : 'ph-list'}`} />
           </S.ToggleExpandButton>
         </S.Top>
-
+        <Search />
         <S.SearchSection
           $expanded={isSidebarExpanded}
           onClick={() => {
@@ -57,7 +57,6 @@ export const Sidebar = () => {
             }
           }}
         >
-          <Search />
           <Tooltip content="Search" side="right" disabled={tooltipsDisabled}>
             <S.SearchIconWrapper $expanded={isSidebarExpanded}>
               <i className="ph-bold ph-magnifying-glass" />
