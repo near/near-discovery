@@ -944,46 +944,84 @@ export const SearchSection = styled(Section)<{
 export const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: #f0f0f0;
   border-radius: 20px;
   padding: 5px 10px;
-  width: 224px;
   position: relative;
 `;
 
-export const SearchIcon = styled.span`
-  margin-right: 10px;
+export const SearchContainer = styled.div<{ $isFocus?: boolean }>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #e3e3e0;
+  border-radius: 25px;
+  padding: 5px 10px;
+  width: 250px;
+
+  transition: all 0.3s ease-in-out;
+  ${(props) =>
+    props.$isFocus &&
+    css`
+      box-shadow: 0 0 5px 2px rgba(136, 0, 255, 0.5);
+      border-color: #cfccf5;
+    `}
 `;
 
 export const SearchInput = styled.input`
   border: none;
-  background: transparent;
-  flex-grow: 1;
-  font-size: 16px;
   outline: none;
+  width: 100%;
+  margin-left: 10px;
+  font-size: 16px;
+
+  &::placeholder {
+    color: #868682;
+  }
 `;
 
-export const ClearButton = styled.button`
-  background: none;
-  border: none;
+export const IconContainer = styled.div`
+  display: flex;
+  align-items: center;
   cursor: pointer;
-  font-size: 18px;
-  color: #999;
+`;
+
+export const SearchIcon = styled.div<{ $isFocus?: boolean }>`
+  color: #868682;
+  transition: color 0.3s ease-in-out;
+
+  ${(props) =>
+    props.$isFocus &&
+    css`
+      color: #6f42c1;
+    `}
 `;
 
 export const TabContainer = styled.div`
   display: flex;
   margin-bottom: 10px;
   width: 100%;
+  border-radius: 16px;
 `;
 
-export const Tab = styled.button<{ $active?: boolean }>`
+export const Tab = styled.button<{ $active?: boolean; $isFirst?: boolean; $isLast?: boolean }>`
   padding: 10px;
   border: none;
   background-color: ${(props) => (props.$active ? '#007bff' : '#f0f0f0')};
   color: ${(props) => (props.$active ? 'white' : 'black')};
   cursor: pointer;
   flex: 1;
+
+  ${(props) =>
+    props.$isFirst &&
+    css`
+      border-top-left-radius: 16px;
+    `}
+
+  ${(props) =>
+    props.$isLast &&
+    css`
+      border-top-right-radius: 16px;
+    `}
 
   &:hover {
     background-color: ${(props) => (props.$active ? '#0056b3' : '#e0e0e0')};
@@ -994,9 +1032,9 @@ export const ResultsPopup = styled.div<{ $show?: boolean }>`
   position: absolute;
   top: 100%;
   left: 0;
-  width: 400px;
-  max-height: 300px;
-  overflow-y: auto;
+  width: 550px;
+  border-radius: 16px 16px 0 0;
+  /* max-height: 300px; */
   background-color: white;
   border: 1px solid #ccc;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -1012,44 +1050,8 @@ export const ResultsPopup = styled.div<{ $show?: boolean }>`
 
 export const ResultItem = styled.div`
   padding: 10px;
-`;
-
-export const CardDocs = styled.a`
-  width: 100%;
-  display: block;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  max-width: 400px;
-  text-decoration: none;
-  text-align: left;
-  margin-bottom: 8px;
-
-  &:hover {
-    cursor: pointer;
-    text-decoration: none;
-    background-color: #f0f0f0;
-  }
-`;
-
-export const TitleDocs = styled.h2`
-  font-size: 18px;
-  font-weight: 500;
-  margin: 0;
-  font-weight: bold;
-`;
-
-export const SubtitleDocs = styled.h3`
-  font-size: 14px;
-  font-weight: normal;
-  margin: 4px 0 12px;
-`;
-
-export const ContentDocs = styled.p`
-  font-size: 14px;
-  color: #333;
-  margin: 0;
-  line-height: 1.4;
+  max-height: 300px;
+  overflow-y: scroll;
 `;
 
 export const SearchIconWrapper = styled.div<{
