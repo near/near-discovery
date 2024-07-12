@@ -1,4 +1,5 @@
-import { Button } from '@/components/lib/Button';
+import { useResearchWizardStore } from '@/stores/researchWizard';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const InterestsContainer = styled.div`
@@ -6,15 +7,14 @@ const InterestsContainer = styled.div`
   flex-direction: column;
 `;
 
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+const SubTitle = styled.h4`
+  margin: 0 0 10px 0;
 `;
 
-const SubTitle = styled.p`
-  margin: 0 0 10px 0;
+const Text = styled.p`
+  margin: 0;
+  margin-bottom: 1rem;
+  color: #868682;
 `;
 
 const ButtonsContainer = styled.div`
@@ -23,41 +23,102 @@ const ButtonsContainer = styled.div`
   gap: 10px;
 `;
 
-const InterestButton = styled.button`
-  background: white;
-  border: 1px solid lightgray;
+const InterestButton = styled.button<{ $selected?: boolean }>`
+  background: ${(props) => (props.$selected ? '#F5F2FF' : 'white')};
+  border: 1px solid ${(props) => (props.$selected ? '#5746AF' : 'lightgray')};
+  color: #1b1b18;
   border-radius: 20px;
   padding: 5px 10px;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, border-color 0.3s, color 0.3s;
 
   &:hover {
-    background: lightgray;
+    background: #e3e3e0;
   }
 `;
 
-const Title = styled.h2`
+const OtherInput = styled.input<{ visible: boolean }>`
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+  margin-top: 10px;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 6px;
+  width: 100%;
+`;
+
+const OtherLabel = styled.label<{ visible: boolean }>`
+  display: ${(props) => (props.visible ? 'block' : 'none')};
+  margin-top: 20px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #000;
+`;
+
+const Title = styled.h3`
   margin: 0;
 `;
+
+const InterestOptions = [
+  'Docs',
+  'Starting a new project',
+  'Smart contracts',
+  'Chain abstraction',
+  'Evaluating tech',
+  'Hackathon',
+  'AI',
+  'Add web3 into my app',
+  'Meme coins',
+  'Other',
+];
 export const Motivation = () => {
+  const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
+  const [showOtherInput, setShowOtherInput] = useState(false);
+  const [otherInputEntry, setOtherInputEntry] = useState('');
+  const set = useResearchWizardStore((state) => state.set);
+
+  useEffect(() => {
+    const isDisabled = selectedInterests.length > 0;
+
+    set({ nextDisabled: !isDisabled });
+  }, [selectedInterests]);
+
+  const handleOtherSelected = (interest: string) => {
+    if (interest === 'Other') {
+      setShowOtherInput(!showOtherInput);
+    }
+
+    setSelectedInterests((prev) =>
+      prev.includes(interest) ? prev.filter((i) => i !== interest) : [...prev, interest],
+    );
+  };
+
   return (
     <InterestsContainer>
-      <Header>
-        <Title>Hello there!</Title>
-      </Header>
+      <Title>Hello there!</Title>
+      <Text>
+        Welcome to Near Developer Portal. Tell us a little about yourself and we may invite you for a paid user study.
+      </Text>
       <SubTitle>What brings you here today?</SubTitle>
+      <Text>Select all that apply</Text>
       <ButtonsContainer>
-        <InterestButton>Docs</InterestButton>
-        <InterestButton>Starting a new project</InterestButton>
-        <InterestButton>Smart contracts</InterestButton>
-        <InterestButton>Chain abstraction</InterestButton>
-        <InterestButton>Evaluating tech</InterestButton>
-        <InterestButton>Hackathon</InterestButton>
-        <InterestButton>AI</InterestButton>
-        <InterestButton>Add web3 into my app</InterestButton>
-        <InterestButton>Meme coins</InterestButton>
-        <InterestButton>Other</InterestButton>
+        {InterestOptions.map((interest) => (
+          <InterestButton
+            key={interest}
+            onClick={() => handleOtherSelected(interest)}
+            $selected={selectedInterests.includes(interest)}
+          >
+            {interest}
+          </InterestButton>
+        ))}
       </ButtonsContainer>
+      <OtherLabel visible={showOtherInput}>Other</OtherLabel>
+      <OtherInput
+        type="text"
+        placeholder="I'm here to..."
+        visible={showOtherInput}
+        value={otherInputEntry}
+        onChange={(e) => setOtherInputEntry(e.target.value)}
+      />
     </InterestsContainer>
   );
 };

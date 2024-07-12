@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function useResearchFormEvents() {
+export function useResearchWizardEvents() {
   const [isResearchFormDismissed, setIsResearchFormDismissed] = useState<boolean>();
   const [showMobileResearchForm, setShowMobileResearchForm] = useState<boolean>(false);
 
@@ -9,5 +9,10 @@ export function useResearchFormEvents() {
     setIsResearchFormDismissed(isResearchFormDismissed);
   }, []);
 
-  return { isResearchFormDismissed, showMobileResearchForm, setShowMobileResearchForm, setIsResearchFormDismissed };
+  return {
+    isResearchFormDismissed,
+    showMobileResearchForm,
+    setShowMobileResearchForm,
+    setIsResearchFormDismissed,
+  };
 }

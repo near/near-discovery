@@ -1,14 +1,13 @@
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
-import { Motivation } from './Motivation';
 import styled from 'styled-components';
-import { use, useEffect, useState } from 'react';
-import { Button } from '../lib/Button';
+import { useState } from 'react';
 import Image from 'next/image';
 import ThumbsUpIcon from './thumbs-up.svg';
 import { recordResearchFromEvent } from '@/utils/analytics';
 import Modal from 'react-bootstrap/Modal';
-import ResearchForm from './ResearchForm';
-import { useResearchFormEvents } from '@/hooks/useResearchWizardEvents';
+import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
+import { StepLayout } from './StepLayout';
+import { useResearchWizardStore } from '@/stores/researchWizard';
 
 // float the button to the bottom center of the screen
 const MobileWrapper = styled.div`
@@ -30,6 +29,19 @@ const MobileWrapper = styled.div`
   gap: 15px;
 `;
 
+const MobileFormWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const DesktopFormWrapper = styled.div`
+  position: fixed;
+  bottom: 1em;
+  right: 1em;
+  margin: 0 auto;
+`;
+
 const IconContainer = styled.div`
   display: flex;
   align-items: center;
@@ -41,38 +53,15 @@ const IconContainer = styled.div`
   color: white;
 `;
 
-interface ResearchStep {
-  title: string;
-  component: () => JSX.Element;
-}
-
-const formSteps: ResearchStep[] = [
-  {
-    title: 'motivation',
-    component: () => <Motivation />,
-  },
-  {
-    title: 'user type',
-    component: () => <div>Step 2</div>,
-  },
-  {
-    title: 'Step 3',
-    component: () => <div>Step 3</div>,
-  },
-];
 export const ResearchFormWizard = () => {
+  const currentStepIndex = useResearchWizardStore((state) => state.currentStepIndex);
+  const formSteps = useResearchWizardStore((state) => state.formSteps);
   const [matches, setMatches] = useState(true);
   const cookieData = useCookiePreferences();
   const { showMobileResearchForm, setShowMobileResearchForm, isResearchFormDismissed, setIsResearchFormDismissed } =
-    useResearchFormEvents();
-  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+    useResearchWizardEvents();
   const [researchEventSent, setResearchEventSent] = useState(false);
-
-  const currentStep = formSteps[currentStepIndex].component();
-
-  useEffect(() => {
-    setMatches(window.matchMedia('(min-width: 1120px)').matches);
-  }, []);
+  const [currentStep, setCurrentStep] = useState<JSX.Element>(formSteps[currentStepIndex].component());
 
   const dismissForm = () => {
     recordResearchFromEvent('close-research-form', { questionNumber: currentStepIndex + 1 });
@@ -82,6 +71,10 @@ export const ResearchFormWizard = () => {
       localStorage.setItem('researchFormDismissed', 'true');
       setIsResearchFormDismissed(true);
     }
+  };
+
+  const handleFormButton = () => {
+    console.log('handleFormButton');
   };
 
   const handleShowMobileResearchForm = () => {
@@ -107,18 +100,17 @@ export const ResearchFormWizard = () => {
     return null;
   }
 
-  console.log('matches', matches);
   if (!matches) {
     return (
       <>
         {showMobileResearchForm ? (
           <Modal style={{ zIndex: 10500 }} show={showMobileResearchForm} fullscreen>
             <Modal.Body>
-              <ResearchForm
-                showMobileResearchForm={showMobileResearchForm}
-                dismissForm={dismissForm}
-                currentStep={currentStep}
-              />
+              <MobileFormWrapper>
+                <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton}>
+                  {currentStep}
+                </StepLayout>
+              </MobileFormWrapper>
             </Modal.Body>
           </Modal>
         ) : (
@@ -136,11 +128,11 @@ export const ResearchFormWizard = () => {
   return (
     <>
       {sendResearchEvent()}
-      <ResearchForm
-        showMobileResearchForm={showMobileResearchForm}
-        dismissForm={dismissForm}
-        currentStep={currentStep}
-      />
+      <DesktopFormWrapper>
+        <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton}>
+          {currentStep}
+        </StepLayout>
+      </DesktopFormWrapper>
     </>
   );
 };
