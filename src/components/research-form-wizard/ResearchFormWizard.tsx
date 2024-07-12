@@ -56,6 +56,7 @@ const IconContainer = styled.div`
 export const ResearchFormWizard = () => {
   const currentStepIndex = useResearchWizardStore((state) => state.currentStepIndex);
   const formSteps = useResearchWizardStore((state) => state.formSteps);
+  const currentStepSubmission = useResearchWizardStore((state) => state.currentStepSubmission);
   const [matches, setMatches] = useState(true);
   const cookieData = useCookiePreferences();
   const { showMobileResearchForm, setShowMobileResearchForm, isResearchFormDismissed, setIsResearchFormDismissed } =
@@ -74,7 +75,19 @@ export const ResearchFormWizard = () => {
   };
 
   const handleFormButton = () => {
-    console.log('handleFormButton');
+    if (currentStepSubmission) {
+      recordResearchFromEvent('research-form-submit', {
+        questionNumber: currentStepIndex + 1,
+        response: currentStepSubmission,
+      });
+
+      if (currentStepIndex < formSteps.length - 1) {
+        setCurrentStep(formSteps[currentStepIndex + 1].component());
+        useResearchWizardStore.setState({ currentStepIndex: currentStepIndex + 1 });
+      } else {
+        dismissForm();
+      }
+    }
   };
 
   const handleShowMobileResearchForm = () => {

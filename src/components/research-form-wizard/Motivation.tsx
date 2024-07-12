@@ -71,15 +71,15 @@ const InterestOptions = [
   'Other',
 ];
 export const Motivation = () => {
+  const set = useResearchWizardStore((state) => state.set);
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [showOtherInput, setShowOtherInput] = useState(false);
   const [otherInputEntry, setOtherInputEntry] = useState('');
-  const set = useResearchWizardStore((state) => state.set);
 
   useEffect(() => {
     const isDisabled = selectedInterests.length > 0;
 
-    set({ nextDisabled: !isDisabled });
+    set({ nextDisabled: !isDisabled, currentStepSubmission: { interests: selectedInterests, other: otherInputEntry } });
   }, [selectedInterests]);
 
   const handleOtherSelected = (interest: string) => {
