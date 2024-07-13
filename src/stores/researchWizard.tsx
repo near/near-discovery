@@ -1,10 +1,14 @@
-import { Motivation } from '@/components/research-form-wizard/Motivation';
 import { create } from 'zustand';
+
+import { ExperienceComponent } from '@/components/research-form-wizard/FormPages/Experience';
+import { Motivation } from '@/components/research-form-wizard/FormPages/Motivation';
+import UserType from '@/components/research-form-wizard/FormPages/UserType';
+import FollowUpComponent from '@/components/research-form-wizard/FormPages/FollowUp';
 
 interface ResearchStep {
   title: string;
   component: () => JSX.Element;
-  progressDescription?: string;
+  progressDescription?: string | null;
 }
 
 const formSteps: ResearchStep[] = [
@@ -15,13 +19,18 @@ const formSteps: ResearchStep[] = [
   },
   {
     title: 'user type',
-    component: () => <div>Step 2</div>,
+    component: () => <UserType />,
     progressDescription: 'About you',
   },
   {
-    title: 'Step 3',
-    component: () => <div>Step 3</div>,
+    title: 'Experience',
+    component: () => <ExperienceComponent />,
     progressDescription: 'Experience',
+  },
+  {
+    title: 'Follow Up',
+    component: () => <FollowUpComponent />,
+    progressDescription: null,
   },
 ];
 

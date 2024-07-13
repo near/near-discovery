@@ -80,7 +80,7 @@ export const Motivation = () => {
     const isDisabled = selectedInterests.length > 0;
 
     set({ nextDisabled: !isDisabled, currentStepSubmission: { interests: selectedInterests, other: otherInputEntry } });
-  }, [selectedInterests]);
+  }, [selectedInterests, otherInputEntry, set]);
 
   const handleOtherSelected = (interest: string) => {
     if (interest === 'Other') {

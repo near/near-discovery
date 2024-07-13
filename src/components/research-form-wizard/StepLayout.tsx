@@ -1,17 +1,20 @@
 import styled from 'styled-components';
+
 import { useResearchWizardStore } from '@/stores/researchWizard';
 
 type StepLayoutProps = {
   children: JSX.Element;
   dismissForm: () => void;
   handleFormButton: () => void;
+  isMobile?: boolean;
 };
 
-const Card = styled.div`
+const Card = styled.div<{ isMobile?: boolean }>`
+  height: 608px;
   width: 400px;
   background: white;
   border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  box-shadow: ${(props) => (props.isMobile ? '0 0px 0px  ' : '0 2px 10px rgba(0, 0, 0, 0.1')};
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -48,6 +51,7 @@ const ProgressContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 1em;
 `;
 
 const ProgressLabels = styled.div`
@@ -68,7 +72,7 @@ const Progress = styled.div`
 const ProgressBarSegment = styled.div<{ active: boolean }>`
   width: 32%;
   height: 3px;
-  background: ${(props) => (props.active ? '#6200ee' : 'lightgray')};
+  background: ${(props) => (props.active ? '#6e56cf' : 'lightgray')};
   border-radius: 5px;
   margin-right: 2%;
   &:last-child {
@@ -79,7 +83,7 @@ const ProgressBarSegment = styled.div<{ active: boolean }>`
 const ProgressLabel = styled.span<{ active?: boolean }>`
   width: 33.3%;
   text-align: center;
-  color: ${(props) => (props.active ? '#6200ee' : '#888')};
+  color: ${(props) => (props.active ? '#6e56cf' : '#888')};
   font-weight: ${(props) => (props.active ? 'bold' : 'normal')};
 `;
 
@@ -100,36 +104,72 @@ const NextButton = styled.button<{ $disabled: boolean }>`
   }
 `;
 
+const SubmitButton = styled.button<{ $disabled: boolean }>`
+  padding: 10px 20px;
+  background: ${(props) => (props.$disabled ? '#F3F3F2' : '#66eeaa')};
+  color: ${(props) => (props.$disabled ? '#C8C7C1' : 'black')};
+  border: solid 2px ${(props) => (props.$disabled ? '#C8C7C1' : '#4fb482')};
+  border-color: ${(props) => (props.$disabled ? '#C8C7C1' : '#4fb482')};
+  border-radius: 50px;
+  cursor: ${(props) => (props.$disabled ? '' : 'pointer')};
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 10px;
+
+  &:hover {
+    background: ${(props) => (props.$disabled ? '#F3F3F2' : '#4fb482')};
+  }
+`;
+
 export const StepLayout = (props: StepLayoutProps) => {
-  const { children, dismissForm, handleFormButton } = props;
+  const { children, isMobile, dismissForm, handleFormButton } = props;
   const nextDisabled = useResearchWizardStore((state) => state.nextDisabled);
   const formSteps = useResearchWizardStore((state) => state.formSteps);
+  const currentStepIndex = useResearchWizardStore((state) => state.currentStepIndex);
 
   return (
-    <Card>
+    <Card isMobile={isMobile}>
       <Header>
         <CloseButton onClick={dismissForm}>&times;</CloseButton>
       </Header>
       <ChildSection>{children}</ChildSection>
-      <Footer>
-        <ProgressContainer>
-          <ProgressLabels>
-            {formSteps.map((step, index) => (
-              <ProgressLabel key={index} active={index === 0}>
-                {step.progressDescription}
-              </ProgressLabel>
-            ))}
-          </ProgressLabels>
-          <Progress>
-            {formSteps.map((step, index) => (
-              <ProgressBarSegment key={index} active={index === 0} />
-            ))}
-          </Progress>
-        </ProgressContainer>
-        <NextButton disabled={nextDisabled} onClick={handleFormButton} $disabled={nextDisabled}>
-          Next
-        </NextButton>
-      </Footer>
+      {currentStepIndex < 3 ? (
+        <Footer>
+          <ProgressContainer>
+            <ProgressLabels>
+              {formSteps.map((step, index) => {
+                if (step.progressDescription === null) {
+                  return null;
+                }
+                return (
+                  <ProgressLabel key={index} active={index === currentStepIndex}>
+                    {step.progressDescription}
+                  </ProgressLabel>
+                );
+              })}
+            </ProgressLabels>
+            <Progress>
+              {formSteps.map((step, index) => {
+                if (step.progressDescription === null) {
+                  return null;
+                }
+                return <ProgressBarSegment key={index} active={index === currentStepIndex} />;
+              })}
+            </Progress>
+          </ProgressContainer>
+          <NextButton disabled={nextDisabled} onClick={handleFormButton} $disabled={nextDisabled}>
+            Next
+          </NextButton>
+        </Footer>
+      ) : (
+        <Footer>
+          <SubmitButton disabled={nextDisabled} onClick={handleFormButton} $disabled={nextDisabled}>
+            Submit
+          </SubmitButton>
+        </Footer>
+      )}
     </Card>
   );
 };

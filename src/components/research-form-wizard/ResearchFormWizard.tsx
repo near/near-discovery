@@ -1,15 +1,16 @@
-import { useCookiePreferences } from '@/hooks/useCookiePreferences';
-import styled from 'styled-components';
-import { useState } from 'react';
 import Image from 'next/image';
-import ThumbsUpIcon from './thumbs-up.svg';
-import { recordResearchFromEvent } from '@/utils/analytics';
+import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
-import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
-import { StepLayout } from './StepLayout';
-import { useResearchWizardStore } from '@/stores/researchWizard';
+import styled from 'styled-components';
 
-// float the button to the bottom center of the screen
+import { useCookiePreferences } from '@/hooks/useCookiePreferences';
+import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
+import { useResearchWizardStore } from '@/stores/researchWizard';
+import { recordResearchFromEvent } from '@/utils/analytics';
+
+import { StepLayout } from './StepLayout';
+import ThumbsUpIcon from './thumbs-up.svg';
+
 const MobileWrapper = styled.div`
   width: 276px;
   height: 72px;
@@ -54,24 +55,32 @@ const IconContainer = styled.div`
 `;
 
 export const ResearchFormWizard = () => {
+  const set = useResearchWizardStore((state) => state.set);
+  const [matches, setMatches] = useState(true);
   const currentStepIndex = useResearchWizardStore((state) => state.currentStepIndex);
   const formSteps = useResearchWizardStore((state) => state.formSteps);
   const currentStepSubmission = useResearchWizardStore((state) => state.currentStepSubmission);
-  const [matches, setMatches] = useState(true);
   const cookieData = useCookiePreferences();
   const { showMobileResearchForm, setShowMobileResearchForm, isResearchFormDismissed, setIsResearchFormDismissed } =
     useResearchWizardEvents();
   const [researchEventSent, setResearchEventSent] = useState(false);
   const [currentStep, setCurrentStep] = useState<JSX.Element>(formSteps[currentStepIndex].component());
 
+  useEffect(() => {
+    setMatches(window.matchMedia('(min-width: 1120px)').matches);
+  }, []);
+
+  useEffect(() => {
+    window.matchMedia('(min-width: 1120px)').addEventListener('change', (e) => setMatches(e.matches));
+  }, []);
+
   const dismissForm = () => {
     recordResearchFromEvent('close-research-form', { questionNumber: currentStepIndex + 1 });
     if (showMobileResearchForm) {
       setShowMobileResearchForm(false);
-    } else {
-      localStorage.setItem('researchFormDismissed', 'true');
-      setIsResearchFormDismissed(true);
     }
+    setIsResearchFormDismissed(true);
+    localStorage.setItem('researchFormDismissed', 'true');
   };
 
   const handleFormButton = () => {
@@ -85,8 +94,10 @@ export const ResearchFormWizard = () => {
         setCurrentStep(formSteps[currentStepIndex + 1].component());
         useResearchWizardStore.setState({ currentStepIndex: currentStepIndex + 1 });
       } else {
-        dismissForm();
+        setIsResearchFormDismissed(true);
+        localStorage.setItem('researchFormDismissed', 'true');
       }
+      set({ currentStepSubmission: '' });
     }
   };
 
@@ -97,7 +108,6 @@ export const ResearchFormWizard = () => {
 
   const sendResearchEvent = () => {
     if (!researchEventSent) {
-      console.log('sendResearchEvent');
       recordResearchFromEvent('research-form-initial-view', { mobileFormView: false });
       setResearchEventSent(true);
     }
@@ -120,7 +130,7 @@ export const ResearchFormWizard = () => {
           <Modal style={{ zIndex: 10500 }} show={showMobileResearchForm} fullscreen>
             <Modal.Body>
               <MobileFormWrapper>
-                <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton}>
+                <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton} isMobile={!matches}>
                   {currentStep}
                 </StepLayout>
               </MobileFormWrapper>
@@ -142,7 +152,7 @@ export const ResearchFormWizard = () => {
     <>
       {sendResearchEvent()}
       <DesktopFormWrapper>
-        <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton}>
+        <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton} isMobile={false}>
           {currentStep}
         </StepLayout>
       </DesktopFormWrapper>
