@@ -54,13 +54,13 @@ const FlagsPage: NextPageWithLayout = () => {
 
   return (
     <Container>
-      <Text as="h1" font="text-3xl">
+      <Text as="h1" size="text-3xl">
         Flags
       </Text>
 
       <Form onSubmit={form.handleSubmit(submitHandler)}>
         <InputGrid>
-          <Text as="label" font="text-s" weight="500" htmlFor="bosLoaderUrl">
+          <Text as="label" size="text-s" weight="500" htmlFor="bosLoaderUrl">
             BOS Loader Url
           </Text>
 

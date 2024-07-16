@@ -75,7 +75,7 @@ export const PinnedApps = () => {
         <>
           {isSidebarExpanded ? (
             <S.Stack $gap="1rem" $frozenWidth>
-              <Text font="text-xs" color="sand11">
+              <Text size="text-xs" color="sand11">
                 Discover apps from the NEAR developer community to pin.
               </Text>
 

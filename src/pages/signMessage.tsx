@@ -44,13 +44,13 @@ const SignMessagePage: NextPageWithLayout = () => {
 
   return (
     <Container>
-      <Text as="h1" font="text-3xl">
+      <Text as="h1" size="text-3xl">
         Test sign message
       </Text>
 
       <Form onSubmit={onSubmit}>
         <InputGrid>
-          <Text as="label" font="text-s" weight="500" htmlFor="msg">
+          <Text as="label" size="text-s" weight="500" htmlFor="msg">
             Message to sign
           </Text>
 
