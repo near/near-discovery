@@ -45,7 +45,7 @@ const AddKey: NextPageWithLayout = () => {
 
   useEffect(() => {
     async function restrictToFastAuthUsers() {
-      if (!near) return;
+      if (!near || !authStore.account.accountId) return;
       const wallet = await (await near.selector).wallet();
       setWallet(wallet);
       if (!nonFastAuthAlertDisplayed && !wallet.signAndSendDelegateAction) {
@@ -55,13 +55,16 @@ const AddKey: NextPageWithLayout = () => {
       }
     }
     restrictToFastAuthUsers();
-  }, [near, nonFastAuthAlertDisplayed]);
+  }, [authStore.account, near, nonFastAuthAlertDisplayed]);
 
-  useEffect(() => {
-    if (!authStore.account) {
+  function handleGenerateKey() {
+    const { account } = authStore;
+    if (!account || !account.accountId) {
       requestAuthentication(false);
+    } else {
+      generateKey();
     }
-  }, [authStore.account, requestAuthentication]);
+  }
 
   useEffect(() => {
     const { publicKey, secretKey } = credentials;
@@ -153,8 +156,11 @@ const AddKey: NextPageWithLayout = () => {
               <li>Review & Confirm the requested transaction</li>
               <li>Then we will guide you to copy & paste into Bitte Wallet&apos;s Import Account flow</li>
             </ol>
-
-            <button onClick={generateKey} className="btn btn-dark btn-lg">
+            <button
+              disabled={authStore.account && authStore.account.accountId == null}
+              onClick={handleGenerateKey}
+              className="btn btn-dark btn-lg"
+            >
               Create new access key
             </button>
           </>
