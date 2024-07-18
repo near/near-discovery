@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
 import { useResearchWizardStore } from '@/stores/researchWizard';
-import { recordResearchFromEvent } from '@/utils/analytics';
+import { recordEventWithProps } from '@/utils/analytics';
 
 import { StepLayout } from './StepLayout';
 import ThumbsUpIcon from './thumbs-up.svg';
@@ -75,7 +75,7 @@ export const ResearchFormWizard = () => {
   }, []);
 
   const dismissForm = () => {
-    recordResearchFromEvent('close-research-form', { questionNumber: currentStepIndex + 1 });
+    recordEventWithProps('close-q3-developer-survey', { questionNumber: `${currentStepIndex + 1}` });
     if (showMobileResearchForm) {
       setShowMobileResearchForm(false);
     }
@@ -85,8 +85,11 @@ export const ResearchFormWizard = () => {
 
   const handleFormButton = () => {
     if (currentStepSubmission) {
-      recordResearchFromEvent('research-form-submit', {
-        questionNumber: currentStepIndex + 1,
+      recordEventWithProps('q3-developer-survey-submission', {
+        questionNumber: `${currentStepIndex + 1}`,
+        questionTitle: formSteps[currentStepIndex].title,
+        question: formSteps[currentStepIndex].question,
+        question2: formSteps[currentStepIndex].question2 || '',
         response: currentStepSubmission,
       });
 
@@ -103,12 +106,12 @@ export const ResearchFormWizard = () => {
 
   const handleShowMobileResearchForm = () => {
     setShowMobileResearchForm(true);
-    recordResearchFromEvent('research-form-initial-view', { mobileFormView: true });
+    recordEventWithProps('research-form-initial-view', { mobileFormView: 'true' });
   };
 
   const sendResearchEvent = () => {
     if (!researchEventSent) {
-      recordResearchFromEvent('research-form-initial-view', { mobileFormView: false });
+      recordEventWithProps('research-form-initial-view', { mobileFormView: 'false' });
       setResearchEventSent(true);
     }
   };
@@ -130,7 +133,7 @@ export const ResearchFormWizard = () => {
           <Modal style={{ zIndex: 10500 }} show={showMobileResearchForm} fullscreen>
             <Modal.Body>
               <MobileFormWrapper>
-                <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton} isMobile={!matches}>
+                <StepLayout dismissForm={dismissForm} handleFormButton={handleFormButton} isMobile={true}>
                   {currentStep}
                 </StepLayout>
               </MobileFormWrapper>

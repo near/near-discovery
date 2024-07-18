@@ -126,6 +126,14 @@ const TermsCheckbox = styled.input`
   }
 `;
 
+const Link = styled.a`
+  color: inherit;
+  text-decoration: underline;
+  &:hover {
+    color: blue;
+  }
+`;
+
 const FollowUpComponent = () => {
   const set = useResearchWizardStore((state) => state.set);
   const [interest, setInterest] = useState<string>('');
@@ -188,7 +196,16 @@ const FollowUpComponent = () => {
       <Description>Your email will be only used for research outreach and will never be shared.</Description>
       <TermsLabel visible={interest === 'Yes, please!'}>
         <TermsCheckbox type="checkbox" checked={agreed} onChange={() => setAgreed(!agreed)} />
-        By checking this box you hereby agree that you have read and agree to our Terms of Use and Privacy Policy
+        <span>
+          By checking this box you hereby agree that you have read and agree to our{' '}
+          <Link href="https://dev.near.org/terms" target="_blank">
+            Terms of Use
+          </Link>{' '}
+          and{' '}
+          <Link href="https://dev.near.org/privacy" target="_blank">
+            Privacy Policy
+          </Link>
+        </span>
       </TermsLabel>
     </>
   );
