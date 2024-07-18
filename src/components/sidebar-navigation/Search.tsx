@@ -15,7 +15,7 @@ type TabType = (typeof TABS)[number];
 export const Search = () => {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 250);
-  const componentRef = useRef(null);
+  const componentRef = useRef<HTMLDivElement>(null);
   const [isFocus, setIsFocus] = useState<boolean>(false);
 
   const [activeTab, setActiveTab] = useState<TabType>('Docs');
@@ -41,8 +41,8 @@ export const Search = () => {
   }, [debouncedSearchTerm]);
 
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (componentRef.current && !componentRef.current.contains(event.target)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
         setIsFocus(false);
       }
     };
@@ -86,7 +86,7 @@ export const Search = () => {
     }
   };
 
-  const handleSearch = (event) => {
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
 
