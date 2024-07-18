@@ -135,8 +135,8 @@ const AddKey: NextPageWithLayout = () => {
                 <PrivateText id="private" onClick={copy}>
                   {credentials.secretKey}
                   <i className="ph ph-copy"></i>
-                  {textCopied && <FadeIn>Copied!</FadeIn>}
                 </PrivateText>
+                {textCopied && <FadeIn>Copied!</FadeIn>}
               </li>
               <li>
                 On&nbsp;
