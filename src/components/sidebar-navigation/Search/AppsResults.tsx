@@ -11,6 +11,7 @@ const Card = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   margin-bottom: 8px;
+  max-width: 500px;
 `;
 
 const Tile = styled.div`
@@ -81,7 +82,7 @@ interface AppsResultsProps {
   item: Item;
 }
 
-export const AppsResults = ({ item }) => {
+export const AppsResults: React.FC<AppsResultsProps> = ({ item }) => {
   const router = useRouter();
   const redirect = (url: string) => () => router.push(url);
   return (

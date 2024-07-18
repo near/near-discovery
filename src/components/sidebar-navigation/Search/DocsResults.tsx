@@ -10,6 +10,7 @@ export const CardDocs = styled.a`
   text-decoration: none;
   text-align: left;
   margin-bottom: 8px;
+  max-width: 500px;
 
   &:hover {
     cursor: pointer;
@@ -42,7 +43,7 @@ interface Item {
   url: string;
   url_without_anchor: string;
   anchor: string;
-  content: null;
+  content: null | string;
   type: string;
   hierarchy: {
     lvl0: string;
@@ -74,7 +75,7 @@ interface DocsResultsProps {
   item: Item;
 }
 
-export const DocsResults = ({ item }) => {
+export const DocsResults: React.FC<DocsResultsProps> = ({ item }) => {
   const router = useRouter();
   const redirect = (url: string) => () => router.push(url);
   const convertUrl = (url: string) => url.replace(/^https:\/\/docs\.near\.org\/(.+)$/, '/documentation/$1');
