@@ -55,7 +55,9 @@ const TabContainer = styled.div`
   margin-bottom: 30px;
 `;
 
-const Tab = styled.button`
+const Tab = styled.button<{
+  active: boolean;
+}>`
   background: ${(props) => (props.active ? '#eee' : 'transparent')};
   border: none;
   border-radius: 20px;
