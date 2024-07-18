@@ -14,7 +14,7 @@ const Card = styled.div<{ isMobile?: boolean }>`
   width: 400px;
   background: white;
   border-radius: 10px;
-  box-shadow: ${(props) => (props.isMobile ? '0 0px 0px  ' : '0 2px 10px rgba(0, 0, 0, 0.1')};
+  box-shadow: ${(props) => (!props.isMobile ? '0 2px 10px rgba(0, 0, 0, 0.1)' : '0 0px 0px rgba(0, 0, 0, 0.0)')};
   padding: 20px;
   display: flex;
   flex-direction: column;
@@ -132,7 +132,9 @@ export const StepLayout = (props: StepLayoutProps) => {
   return (
     <Card isMobile={isMobile}>
       <Header>
-        <CloseButton onClick={dismissForm}>&times;</CloseButton>
+        <CloseButton onClick={dismissForm}>
+          <i className="ph ph-x" />
+        </CloseButton>
       </Header>
       <ChildSection>{children}</ChildSection>
       {currentStepIndex < 3 ? (

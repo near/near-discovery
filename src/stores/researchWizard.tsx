@@ -9,6 +9,8 @@ interface ResearchStep {
   title: string;
   component: () => JSX.Element;
   progressDescription?: string | null;
+  question: string;
+  question2?: string;
 }
 
 const formSteps: ResearchStep[] = [
@@ -16,21 +18,26 @@ const formSteps: ResearchStep[] = [
     title: 'motivation',
     component: () => <Motivation />,
     progressDescription: 'Your interests',
+    question: 'What brings you here today?',
   },
   {
     title: 'user type',
     component: () => <UserType />,
     progressDescription: 'About you',
+    question: 'Which of the following best describes you?',
   },
   {
     title: 'Experience',
     component: () => <ExperienceComponent />,
     progressDescription: 'Experience',
+    question: 'How many years of development experience do you have?',
+    question2: 'How many years of web3 experience do you have?',
   },
   {
     title: 'Follow Up',
     component: () => <FollowUpComponent />,
     progressDescription: null,
+    question: 'Are you interested in participating in helping us with research?',
   },
 ];
 
