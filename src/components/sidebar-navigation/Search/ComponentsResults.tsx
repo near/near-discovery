@@ -11,6 +11,7 @@ const ListItem = styled.div`
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
   margin-bottom: 8px;
+  max-width: 500px;
 `;
 
 const Logo = styled.img`
@@ -83,7 +84,7 @@ interface ComponentsResultsProps {
   item: Item;
 }
 
-export const ComponentsResults = ({ item }) => {
+export const ComponentsResults: React.FC<ComponentsResultsProps> = ({ item }) => {
   const router = useRouter();
   const redirect = (url: string) => () => router.push(url);
   return (

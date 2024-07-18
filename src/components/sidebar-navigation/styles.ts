@@ -1006,10 +1006,10 @@ export const TabContainer = styled.div`
 export const Tab = styled.button<{ $active?: boolean; $isFirst?: boolean; $isLast?: boolean }>`
   padding: 10px;
   border: none;
-  background-color: ${(props) => (props.$active ? '#007bff' : '#f0f0f0')};
-  color: ${(props) => (props.$active ? 'white' : 'black')};
+  background-color: ${(props) => (props.$active ? '#e0e0e0' : '#f0f0f0')};
   cursor: pointer;
   flex: 1;
+  border-bottom: 2px solid ${(props) => (props.$active ? '#007bff' : 'transparent')};
 
   ${(props) =>
     props.$isFirst &&
@@ -1024,7 +1024,8 @@ export const Tab = styled.button<{ $active?: boolean; $isFirst?: boolean; $isLas
     `}
 
   &:hover {
-    background-color: ${(props) => (props.$active ? '#0056b3' : '#e0e0e0')};
+    background-color: #e0e0e0;
+    border-bottom: 2px solid #007bff;
   }
 `;
 
@@ -1033,7 +1034,7 @@ export const ResultsPopup = styled.div<{ $show?: boolean }>`
   top: 100%;
   left: 0;
   width: 550px;
-  border-radius: 16px 16px 0 0;
+  border-radius: 16px 16px 16px 16px;
   /* max-height: 300px; */
   background-color: white;
   border: 1px solid #ccc;
@@ -1050,8 +1051,16 @@ export const ResultsPopup = styled.div<{ $show?: boolean }>`
 
 export const ResultItem = styled.div`
   padding: 10px;
-  max-height: 300px;
+  height: 300px;
   overflow-y: scroll;
+`;
+
+export const Footer = styled.div`
+  text-align: right;
+  width: 100%;
+  padding: 16px;
+  border-radius: 0 0 16px 16px;
+  background-color: #f0f0f0;
 `;
 
 export const SearchIconWrapper = styled.div<{
