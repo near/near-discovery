@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
@@ -9,7 +8,6 @@ import { useResearchWizardStore } from '@/stores/researchWizard';
 import { recordEventWithProps } from '@/utils/analytics';
 
 import { StepLayout } from './StepLayout';
-import ThumbsUpIcon from './thumbs-up.svg';
 
 const MobileWrapper = styled.div`
   width: 276px;
@@ -47,11 +45,12 @@ const IconContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
   border-radius: 50%;
   width: 48px;
   height: 48px;
   color: white;
+  font-size: 24px;
+  background-color: black;
 `;
 
 export const ResearchFormWizard = () => {
@@ -142,7 +141,7 @@ export const ResearchFormWizard = () => {
         ) : (
           <MobileWrapper onClick={handleShowMobileResearchForm}>
             <IconContainer>
-              <Image src={ThumbsUpIcon} alt="ThumbsUpIcon" width={64} height={64} />
+              <i className="ph ph-thumbs-up" />
             </IconContainer>
             Share your feedback?
           </MobileWrapper>
