@@ -3,16 +3,6 @@ import { isValidEmail } from '@/utils/form-validation';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
-  width: 400px;
-  background: white;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-`;
-
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
@@ -22,13 +12,6 @@ const Header = styled.div`
 
 const Title = styled.h2`
   margin: 0;
-`;
-
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
 `;
 
 const Description = styled.p`
@@ -79,8 +62,8 @@ const RadioInput = styled.input`
   }
 `;
 
-const EmailInput = styled.input<{ visible: boolean }>`
-  display: ${(props) => (props.visible ? 'block' : 'none')};
+const EmailInput = styled.input<{ $visible: boolean }>`
+  display: ${(props) => (props.$visible ? 'block' : 'none')};
   margin: 10px 0;
   padding: 10px;
   border: 1px solid lightgray;
@@ -88,8 +71,8 @@ const EmailInput = styled.input<{ visible: boolean }>`
   width: 100%;
 `;
 
-const TermsLabel = styled.label<{ visible: boolean }>`
-  display: ${(props) => (props.visible ? 'flex' : 'none')};
+const TermsLabel = styled.label<{ $visible: boolean }>`
+  display: ${(props) => (props.$visible ? 'flex' : 'none')};
   align-items: flex-start;
   gap: 10px;
   font-size: 12px;
@@ -189,12 +172,12 @@ const FollowUpComponent = () => {
       <EmailInput
         type="email"
         placeholder="name@email.com"
-        visible={interest === 'Yes, please!'}
+        $visible={interest === 'Yes, please!'}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <Description>Your email will be only used for research outreach and will never be shared.</Description>
-      <TermsLabel visible={interest === 'Yes, please!'}>
+      <TermsLabel $visible={interest === 'Yes, please!'}>
         <TermsCheckbox type="checkbox" checked={agreed} onChange={() => setAgreed(!agreed)} />
         <span>
           By checking this box you hereby agree that you have read and agree to our{' '}
