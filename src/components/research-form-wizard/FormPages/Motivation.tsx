@@ -1,5 +1,5 @@
 import { useResearchWizardStore } from '@/stores/researchWizard';
-import { useEffect, useState } from 'react';
+import { use, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const InterestsContainer = styled.div`
@@ -8,12 +8,12 @@ const InterestsContainer = styled.div`
 `;
 
 const SubTitle = styled.h4`
-  margin: 0 0 10px 0;
+  margin: 0 0 8px 0;
 `;
 
 const Text = styled.p`
   margin: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   color: #868682;
 `;
 
@@ -75,12 +75,20 @@ export const Motivation = () => {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [showOtherInput, setShowOtherInput] = useState(false);
   const [otherInputEntry, setOtherInputEntry] = useState('');
+  const otherInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const isDisabled = selectedInterests.length > 0;
 
     set({ nextDisabled: !isDisabled, currentStepSubmission: { interests: selectedInterests, other: otherInputEntry } });
   }, [selectedInterests, otherInputEntry, set]);
+
+  useEffect(() => {
+    if (showOtherInput && otherInputRef.current) {
+      otherInputRef.current?.focus();
+      otherInputRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [showOtherInput]);
 
   const handleOtherSelected = (interest: string) => {
     if (interest === 'Other') {
@@ -113,11 +121,13 @@ export const Motivation = () => {
       </ButtonsContainer>
       <OtherLabel visible={showOtherInput}>Other</OtherLabel>
       <OtherInput
+        id="other-input"
         type="text"
         placeholder="I'm here to..."
         visible={showOtherInput}
         value={otherInputEntry}
         onChange={(e) => setOtherInputEntry(e.target.value)}
+        ref={otherInputRef}
       />
     </InterestsContainer>
   );
