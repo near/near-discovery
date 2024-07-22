@@ -944,7 +944,7 @@ export const SearchSection = styled(Section)<{
 export const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 5px 10px;
   position: relative;
 `;
@@ -1000,31 +1000,18 @@ export const TabContainer = styled.div`
   display: flex;
   margin-bottom: 10px;
   width: 100%;
-  border-radius: 16px;
+  padding: 12px 0;
 `;
 
 export const Tab = styled.button<{ $active?: boolean; $isFirst?: boolean; $isLast?: boolean }>`
   padding: 10px;
   border: none;
-  background-color: ${(props) => (props.$active ? '#e0e0e0' : '#f0f0f0')};
   cursor: pointer;
   flex: 1;
   border-bottom: 2px solid ${(props) => (props.$active ? '#007bff' : 'transparent')};
-
-  ${(props) =>
-    props.$isFirst &&
-    css`
-      border-top-left-radius: 16px;
-    `}
-
-  ${(props) =>
-    props.$isLast &&
-    css`
-      border-top-right-radius: 16px;
-    `}
-
+  background-color: white;
+  font-size: 12px;
   &:hover {
-    background-color: #e0e0e0;
     border-bottom: 2px solid #007bff;
   }
 `;
@@ -1034,10 +1021,11 @@ export const ResultsPopup = styled.div<{ $show?: boolean }>`
   top: 100%;
   left: 0;
   width: 550px;
-  border-radius: 16px 16px 16px 16px;
+  border-radius: 10px;
   /* max-height: 300px; */
   background-color: white;
   border: 1px solid #ccc;
+  padding: 0 24px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   ${(props) =>
     props.$show
@@ -1059,8 +1047,7 @@ export const Footer = styled.div`
   text-align: right;
   width: 100%;
   padding: 16px;
-  border-radius: 0 0 16px 16px;
-  background-color: #f0f0f0;
+  border-radius: 0 0 10px 10px;
 `;
 
 export const SearchIconWrapper = styled.div<{

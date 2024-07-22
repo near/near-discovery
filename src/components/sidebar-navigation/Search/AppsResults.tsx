@@ -3,15 +3,13 @@ import styled from 'styled-components';
 
 const Card = styled.div`
   background: white;
-  border-radius: 10px;
-  padding: 16px;
+  padding: 16px 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   width: 100%;
-  margin-bottom: 8px;
   max-width: 500px;
+  margin-bottom: 8px;
 `;
 
 const Tile = styled.div`

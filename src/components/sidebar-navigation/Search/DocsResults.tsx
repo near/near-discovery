@@ -5,17 +5,14 @@ export const CardDocs = styled.a`
   width: 100%;
   display: block;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 16px;
+  padding: 16px 0;
   text-decoration: none;
   text-align: left;
-  margin-bottom: 8px;
   max-width: 500px;
 
   &:hover {
     cursor: pointer;
     text-decoration: none;
-    background-color: #f0f0f0;
   }
 `;
 

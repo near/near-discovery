@@ -6,7 +6,7 @@ import { AppsResults } from './Search/AppsResults';
 import { ComponentsResults } from './Search/ComponentsResults';
 import { DocsResults } from './Search/DocsResults';
 import Link from 'next/link';
-import { fetchSearchHits } from '@/utils/angoliaSearchApi';
+import { fetchSearchHits } from '@/utils/algoliaSearchApi';
 import { fetchCatalog } from '@/utils/catalogSearchApi';
 
 const TABS = ['Docs', 'Apps', 'Components'] as const;
