@@ -4,7 +4,7 @@ import { ComponentsResults } from '@/components/sidebar-navigation/Search/Compon
 import { DocsResults } from '@/components/sidebar-navigation/Search/DocsResults';
 import useDebounce from '@/hooks/useDebounce';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { fetchSearchHits } from '@/utils/angoliaSearchApi';
+import { fetchSearchHits } from '@/utils/algoliaSearchApi';
 import { fetchCatalog } from '@/utils/catalogSearchApi';
 import type { NextPageWithLayout } from '@/utils/types';
 import { useSearchParams } from 'next/navigation';
