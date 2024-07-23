@@ -132,7 +132,11 @@ const FollowUpComponent = () => {
 
     set({
       nextDisabled: isDisabled,
-      currentStepSubmission: { optIn: interest, emailAddress: email, agreedToTerms: agreed },
+      currentStepSubmission: {
+        response_opt_in: interest,
+        response_email_address: email,
+        response_agreed_to_terms: agreed,
+      },
     });
   }, [interest, email, agreed, set]);
 
