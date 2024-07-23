@@ -1,5 +1,5 @@
 import { useResearchWizardStore } from '@/stores/researchWizard';
-import { use, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 const InterestsContainer = styled.div`
