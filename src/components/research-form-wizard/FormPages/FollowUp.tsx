@@ -128,6 +128,8 @@ const FollowUpComponent = () => {
     let isDisabled = true;
     if (validEmail && agreed) {
       isDisabled = false;
+    } else if (interest === 'No thanks') {
+      isDisabled = false;
     }
 
     set({
