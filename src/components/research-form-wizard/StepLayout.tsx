@@ -12,6 +12,7 @@ type StepLayoutProps = {
 const Card = styled.div<{ isMobile?: boolean }>`
   height: 608px;
   width: 400px;
+  overflow-y: auto;
   background: white;
   border-radius: 10px;
   box-shadow: ${(props) => (!props.isMobile ? '0 2px 10px rgba(0, 0, 0, 0.1)' : '0 0px 0px rgba(0, 0, 0, 0.0)')};
@@ -37,6 +38,7 @@ const CloseButton = styled.button`
 
 const ChildSection = styled.div`
   flex-grow: 1;
+  overflow-y: auto;
 `;
 
 const Footer = styled.div`

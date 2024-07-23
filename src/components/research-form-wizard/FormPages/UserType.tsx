@@ -78,7 +78,7 @@ const UserTypeComponent = () => {
 
     set({
       nextDisabled: !isDisabled,
-      currentStepSubmission: { selectedUserTypes: selectedTypes, other: otherInputEntry },
+      currentStepSubmission: { response_selected_user_types: selectedTypes, other: otherInputEntry },
     });
   }, [selectedTypes, otherInputEntry, set]);
 

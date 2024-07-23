@@ -88,8 +88,8 @@ export const ResearchFormWizard = () => {
         questionNumber: `${currentStepIndex + 1}`,
         questionTitle: formSteps[currentStepIndex].title,
         question: formSteps[currentStepIndex].question,
-        question2: formSteps[currentStepIndex].question2 || '',
-        response: currentStepSubmission,
+        question2: formSteps[currentStepIndex].question2 || null,
+        ...currentStepSubmission,
       });
 
       if (currentStepIndex < formSteps.length - 1) {
