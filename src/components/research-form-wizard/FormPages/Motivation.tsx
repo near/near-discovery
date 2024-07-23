@@ -80,7 +80,10 @@ export const Motivation = () => {
   useEffect(() => {
     const isDisabled = selectedInterests.length > 0;
 
-    set({ nextDisabled: !isDisabled, currentStepSubmission: { interests: selectedInterests, other: otherInputEntry } });
+    set({
+      nextDisabled: !isDisabled,
+      currentStepSubmission: { response_interests: selectedInterests, other: otherInputEntry },
+    });
   }, [selectedInterests, otherInputEntry, set]);
 
   useEffect(() => {
