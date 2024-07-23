@@ -62,7 +62,7 @@ export const ExperienceComponent = () => {
 
     set({
       nextDisabled: !isDisabled,
-      currentStepSubmission: { selectedUserTypes: devExperience },
+      currentStepSubmission: { response_developer_experience: devExperience, response_web3_experience: web3Experience },
     });
   }, [devExperience, set]);
 
