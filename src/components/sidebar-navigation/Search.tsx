@@ -103,7 +103,7 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
   const showTypeAheadDropdown = isFocus && !!searchTerm;
 
   return (
-    <S.SearchWrapper ref={inputRef}>
+    <S.SearchWrapper ref={inputRef} onBlur={handleOnBlur}>
       <HoverCard.Root
         openDelay={200}
         closeDelay={300}
@@ -111,15 +111,16 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
         onOpenChange={handleInteractOutside}
       >
         <HoverCard.Trigger asChild>
-          <Input
-            placeholder="Search..."
-            type="search"
-            name="search"
-            onInput={handleSearch}
-            value={searchTerm}
-            onFocus={handleFocusChange}
-            onBlur={handleOnBlur}
-          />
+          <div>
+            <Input
+              placeholder="Search..."
+              type="search"
+              name="search"
+              onInput={handleSearch}
+              value={searchTerm}
+              onFocus={handleFocusChange}
+            />
+          </div>
         </HoverCard.Trigger>
         <HoverCard.Content
           asChild
