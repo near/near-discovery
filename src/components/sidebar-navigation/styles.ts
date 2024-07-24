@@ -942,10 +942,6 @@ export const SearchSection = styled(Section)<{
 `;
 
 export const SearchWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  border-radius: 10px;
-  padding: 5px 0px;
   position: relative;
 `;
 
@@ -1016,25 +1012,13 @@ export const Tab = styled.button<{ $active?: boolean; $isFirst?: boolean; $isLas
   }
 `;
 
-export const ResultsPopup = styled.div<{ $show?: boolean }>`
-  position: absolute;
-  top: 100%;
-  left: 0;
+export const ResultsPopup = styled.div`
   width: 550px;
   border-radius: 10px;
-  /* max-height: 300px; */
   background-color: white;
   border: 1px solid #ccc;
   padding: 0 24px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  ${(props) =>
-    props.$show
-      ? css`
-          display: block;
-        `
-      : css`
-          display: none;
-        `}
 `;
 
 export const ResultItem = styled.div`
