@@ -21,6 +21,7 @@ export const Search = forwardRef((props, ref) => {
         console.log('hola don pepito');
 
         inputRef.current.focus();
+        setIsFocus(true);
       }
     },
   }));
