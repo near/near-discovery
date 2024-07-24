@@ -963,35 +963,6 @@ export const SearchContainer = styled.div<{ $isFocus?: boolean }>`
     `}
 `;
 
-export const SearchInput = styled.input`
-  border: none;
-  outline: none;
-  width: 100%;
-  margin-left: 10px;
-  font-size: 16px;
-
-  &::placeholder {
-    color: #868682;
-  }
-`;
-
-export const IconContainer = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-`;
-
-export const SearchIcon = styled.div<{ $isFocus?: boolean }>`
-  color: #868682;
-  transition: color 0.3s ease-in-out;
-
-  ${(props) =>
-    props.$isFocus &&
-    css`
-      color: #6f42c1;
-    `}
-`;
-
 export const TabContainer = styled.div`
   display: flex;
   margin-bottom: 10px;

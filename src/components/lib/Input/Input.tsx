@@ -7,8 +7,8 @@ import * as S from './styles';
 type Props = ComponentPropsWithRef<'input'> & {
   assistive?: string;
   error?: string;
-  iconLeft?: ReactElement;
-  iconRight?: ReactElement;
+  iconLeft?: string; // meaning the className of ph-icon or bootstrap icon
+  iconRight?: string; // meaning the className of ph-icon or bootstrap icon
   label?: string;
   left?: ReactElement;
   name: string;
@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
     const variant: 'default' | 'success' | 'error' = error ? 'error' : success ? 'success' : 'default';
 
     if (type === 'search' && !iconLeft) {
-      iconLeft = <i className="ph-bold ph-magnifying-glass" />;
+      iconLeft = 'ph-bold ph-magnifying-glass';
     }
 
     const onInput: FormEventHandler<HTMLInputElement> = (event) => {
@@ -59,7 +59,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
           {label && <S.Label>{label}</S.Label>}
 
           <S.InputWrapper>
-            {iconLeft && <S.Icon aria-hidden="true">{iconLeft}</S.Icon>}
+            {iconLeft && <S.Icon aria-hidden="true" className={iconLeft} />}
 
             {left}
 
@@ -81,7 +81,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(
 
             {right}
 
-            {iconRight && <S.Icon aria-hidden="true">{iconRight}</S.Icon>}
+            {iconRight && <S.Icon aria-hidden="true" className={iconRight} />}
           </S.InputWrapper>
 
           {/* I'm going to leave this as an idea to implement such in future */}

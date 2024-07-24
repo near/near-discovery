@@ -33,19 +33,13 @@ export const Label = styled.span`
   color: var(--sand12);
 `;
 
-export const Icon = styled.span`
+export const Icon = styled.i`
+  display: block;
   width: var(--input-icon-size);
   height: var(--input-icon-size);
   pointer-events: none;
   transition: all var(--transition-speed);
   color: var(--input-color-icon);
-
-  svg {
-    width: 100%;
-    height: 100%;
-    fill: currentColor;
-    stroke: currentColor;
-  }
 `;
 
 export const Input = styled.input`
