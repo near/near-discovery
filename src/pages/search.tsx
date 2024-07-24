@@ -2,6 +2,7 @@ import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { Input } from '@/components/lib/Input';
 import Pagination from '@/components/Pagination';
 import { AppsResults } from '@/components/sidebar-navigation/Search/AppsResults';
 import { ComponentsResults } from '@/components/sidebar-navigation/Search/ComponentsResults';
@@ -33,26 +34,10 @@ const Subtitle = styled.p`
   margin-bottom: 30px;
 `;
 
-const SearchBox = styled.div`
-  display: flex;
-  align-items: center;
-  border: 1px solid #ccc;
-  border-radius: 25px;
-  padding: 10px 15px;
-  margin-bottom: 20px;
-`;
-
-const SearchInput = styled.input`
-  flex-grow: 1;
-  border: none;
-  font-size: 16px;
-  outline: none;
-  margin-left: 10px;
-`;
-
 const TabContainer = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: 20px;
   margin-bottom: 30px;
 `;
 
@@ -93,6 +78,7 @@ const SearchPage: NextPageWithLayout = () => {
     } else {
       setResults({ Docs: null, Apps: null, Components: null });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [debouncedSearchTerm]);
 
   const fetchResults = async () => {
@@ -155,9 +141,8 @@ const SearchPage: NextPageWithLayout = () => {
     setResults((prev) => ({ ...prev, [type]: renderResults(type, newResults) }));
   };
 
-  const handleClear = () => {
-    setSearchTerm('');
-    setResults({ Docs: null, Apps: null, Components: null });
+  const handleSearchInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(event.target.value);
   };
 
   return (
@@ -165,16 +150,7 @@ const SearchPage: NextPageWithLayout = () => {
       <Title>Search</Title>
       <Subtitle>Explore and find everything on the Blockchain Operating System</Subtitle>
 
-      <SearchBox>
-        <div className="ph ph-magnifying-glass" />
-        <SearchInput
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        {searchTerm && <i onClick={handleClear} className="ph ph-x-circle"></i>}
-      </SearchBox>
+      <Input placeholder="Search..." type="search" name="search" onInput={handleSearchInput} value={searchTerm} />
 
       <TabContainer>
         {TABS.map((tab) => (

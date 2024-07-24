@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
@@ -11,7 +12,6 @@ import { Search } from './Search';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
-import { useRef } from 'react';
 
 export const Sidebar = () => {
   const router = useRouter();
