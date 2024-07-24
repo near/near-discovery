@@ -1,4 +1,5 @@
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const ListItem = styled.div`
@@ -85,11 +86,20 @@ interface ComponentsResultsProps {
 export const ComponentsResults: React.FC<ComponentsResultsProps> = ({ item }) => {
   const router = useRouter();
   const redirect = (url: string) => () => router.push(url);
+  const defaultImage = 'bafkreifc4burlk35hxom3klq4mysmslfirj7slueenbj7ddwg7pc6ixomu';
+  const [imageSrc, setImageSrc] = useState(item?.image?.ipfs_cid || defaultImage);
+
+  const handleImageError = () => {
+    setImageSrc(defaultImage);
+  };
+
   return (
     <ListItem>
       <Logo
         onClick={redirect(`/near/widget/ComponentDetailsPage?src=${item.author}/widget/${item.widget_name}`)}
-        src={`https://ipfs.near.social/ipfs/${item?.image?.ipfs_cid}`}
+        src={`https://ipfs.near.social/ipfs/${imageSrc}`}
+        onError={handleImageError}
+        alt={item.name || item.profile_name}
       ></Logo>
       <WidgetName onClick={redirect(`/near/widget/ComponentDetailsPage?src=${item.author}/widget/${item.widget_name}`)}>
         {item.name || item.profile_name}

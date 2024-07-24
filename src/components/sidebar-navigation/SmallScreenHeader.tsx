@@ -9,8 +9,11 @@ import NearIconSvg from './icons/near-icon.svg';
 import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';
 import * as S from './styles';
+import { useRouter } from 'next/router';
 
 export const SmallScreenHeader = () => {
+  const router = useRouter();
+  const redirect = (url: string) => () => router.push(url);
   const components = useBosComponents();
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebarOnSmallScreens = useNavigationStore((store) => store.toggleExpandedSidebarOnSmallScreens);
@@ -50,7 +53,7 @@ export const SmallScreenHeader = () => {
 
       {signedIn ? (
         <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens} $gap="16px">
-          <Button label="search" icon="ph ph-magnifying-glass" variant="secondary" href={components.search.indexPage} />
+          <Button label="search" icon="ph ph-magnifying-glass" variant="secondary" onClick={redirect('/search')} />
           <LargeScreenProfileDropdown />
         </S.SmallScreenHeaderActions>
       ) : (
