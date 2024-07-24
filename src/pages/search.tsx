@@ -1,3 +1,7 @@
+import { useSearchParams } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
+
 import Pagination from '@/components/Pagination';
 import { AppsResults } from '@/components/sidebar-navigation/Search/AppsResults';
 import { ComponentsResults } from '@/components/sidebar-navigation/Search/ComponentsResults';
@@ -7,9 +11,6 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { fetchSearchHits } from '@/utils/algoliaSearchApi';
 import { fetchCatalog } from '@/utils/catalogSearchApi';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useSearchParams } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import styled from 'styled-components';
 
 const SearchContainer = styled.div`
   font-family: Arial, sans-serif;
