@@ -41,13 +41,24 @@ interface URLS {
 
 declare const URLS: URLS;
 
+interface SearchBody {
+  query: string;
+  page: number;
+  optionalFilters: string[];
+  clickAnalytics: boolean;
+  filters?: string;
+}
+
 export const fetchSearchHits = async (facet: Facet, query: string, page = 0) => {
-  const body = {
+  const body: SearchBody = {
     query,
     page,
     optionalFilters: ['categories:nearcatalog<score=1>', 'categories:widget<score=2>'],
     clickAnalytics: true,
   };
+  if (facet === 'Components') {
+    body.filters = 'categories:widget AND NOT author:hypefairy.near AND NOT _tags:hidden';
+  }
 
   const response = await fetch(URLS_INFO[facet].API_URL, {
     body: JSON.stringify(body),

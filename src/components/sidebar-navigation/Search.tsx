@@ -1,6 +1,6 @@
 import useDebounce from '@/hooks/useDebounce';
 import * as S from './styles';
-import { useEffect, useRef, useState } from 'react';
+import { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react';
 
 import { AppsResults } from './Search/AppsResults';
 import { ComponentsResults } from './Search/ComponentsResults';
@@ -12,7 +12,19 @@ import { fetchCatalog } from '@/utils/catalogSearchApi';
 const TABS = ['Docs', 'Apps', 'Components'] as const;
 type TabType = (typeof TABS)[number];
 
-export const Search = () => {
+export const Search = forwardRef((props, ref) => {
+  const inputRef = useRef(null);
+
+  useImperativeHandle(ref, () => ({
+    focus: () => {
+      if (inputRef.current) {
+        console.log('hola don pepito');
+
+        inputRef.current.focus();
+      }
+    },
+  }));
+
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 250);
   const componentRef = useRef<HTMLDivElement>(null);
@@ -107,7 +119,7 @@ export const Search = () => {
     <S.SearchWrapper ref={componentRef}>
       <S.SearchContainer onClick={() => handleOnClick()} $isFocus={isFocus}>
         <S.SearchIcon className="ph ph-magnifying-glass" $isFocus={isFocus} />
-        <S.SearchInput type="text" value={searchTerm} onChange={handleSearch} placeholder="Search..." />
+        <S.SearchInput ref={inputRef} type="text" value={searchTerm} onChange={handleSearch} placeholder="Search..." />
         {searchTerm && <i onClick={handleClear} className="ph ph-x-circle"></i>}
       </S.SearchContainer>
 
@@ -133,4 +145,4 @@ export const Search = () => {
       </S.ResultsPopup>
     </S.SearchWrapper>
   );
-};
+});

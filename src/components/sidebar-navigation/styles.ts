@@ -13,7 +13,7 @@ const fadeIn = keyframes`
 `;
 
 const overflowContain = css`
-  // overflow: auto;
+  /* overflow: auto; */
   scroll-behavior: smooth;
   overscroll-behavior: contain;
 
@@ -108,7 +108,6 @@ export const Section = styled.div<{
   gap: 1rem;
   padding: 1rem;
   border-bottom: 1px solid var(--sand6);
-  overflow: hidden;
 
   &:last-child {
     border-bottom: none;
@@ -915,6 +914,7 @@ export const SearchSection = styled(Section)<{
   $expanded: boolean;
 }>`
   padding: 0 1rem 1rem 1rem;
+  overflow: visible;
 
   @media (min-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     ${(p) =>
@@ -924,7 +924,7 @@ export const SearchSection = styled(Section)<{
               display: none;
             }
             ${SearchWrapper} {
-              display: block;
+              display: flex;
             }
           `
         : css`

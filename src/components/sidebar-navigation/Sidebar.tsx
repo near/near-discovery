@@ -11,6 +11,7 @@ import { Search } from './Search';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
+import { useRef } from 'react';
 
 export const Sidebar = () => {
   const router = useRouter();
@@ -22,6 +23,13 @@ export const Sidebar = () => {
   const tooltipsDisabled = isSidebarExpanded;
   const signedIn = useAuthStore((store) => store.signedIn);
   const { requestAuthentication } = useSignInRedirect();
+  const inputRef = useRef(null);
+
+  const handleFocus = () => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
+  };
 
   const handleCreateAccount = () => {
     requestAuthentication(true);
@@ -48,15 +56,16 @@ export const Sidebar = () => {
             <i className={`ph-bold ${isSidebarExpanded ? 'ph-arrow-line-left' : 'ph-list'}`} />
           </S.ToggleExpandButton>
         </S.Top>
-        <Search />
         <S.SearchSection
           $expanded={isSidebarExpanded}
           onClick={() => {
             if (!isSidebarExpanded) {
               toggleExpandedSidebar();
+              handleFocus();
             }
           }}
         >
+          <Search ref={inputRef} />
           <Tooltip content="Search" side="right" disabled={tooltipsDisabled}>
             <S.SearchIconWrapper $expanded={isSidebarExpanded}>
               <i className="ph-bold ph-magnifying-glass" />
