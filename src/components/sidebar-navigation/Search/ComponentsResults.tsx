@@ -25,6 +25,7 @@ const WidgetName = styled.div`
   font-weight: bold;
   width: 120px;
   text-overflow: ellipsis;
+  overflow: hidden;
   cursor: pointer;
 `;
 
@@ -85,7 +86,7 @@ interface ComponentsResultsProps {
 
 export const ComponentsResults: React.FC<ComponentsResultsProps> = ({ item }) => {
   const router = useRouter();
-  const redirect = (url: string) => () => router.push(url);
+  const redirect = (url: string) => router.push(url);
   const defaultImage = 'bafkreifc4burlk35hxom3klq4mysmslfirj7slueenbj7ddwg7pc6ixomu';
   const [imageSrc, setImageSrc] = useState(item?.image?.ipfs_cid || defaultImage);
 
@@ -96,16 +97,18 @@ export const ComponentsResults: React.FC<ComponentsResultsProps> = ({ item }) =>
   return (
     <ListItem>
       <Logo
-        onClick={redirect(`/near/widget/ComponentDetailsPage?src=${item.author}/widget/${item.widget_name}`)}
+        onClick={() => redirect(`/near/widget/ComponentDetailsPage?src=${item.author}/widget/${item.widget_name}`)}
         src={`https://ipfs.near.social/ipfs/${imageSrc}`}
         onError={handleImageError}
-        alt={item.name || item.profile_name}
+        alt={item.name || item.profile_name || item.widget_name}
       ></Logo>
-      <WidgetName onClick={redirect(`/near/widget/ComponentDetailsPage?src=${item.author}/widget/${item.widget_name}`)}>
-        {item.name || item.profile_name}
+      <WidgetName
+        onClick={() => redirect(`/near/widget/ComponentDetailsPage?src=${item.author}/widget/${item.widget_name}`)}
+      >
+        {item.name || item.profile_name || item.widget_name}
       </WidgetName>
-      <Author onClick={redirect(`/near/widget/ProfilePage?accountId=${item.author}`)}>@{item.author}</Author>
-      <Icon className="ph ph-arrow-right" onClick={redirect(`/${item.author}/widget/${item.widget_name}`)}></Icon>
+      <Author onClick={() => redirect(`/near/widget/ProfilePage?accountId=${item.author}`)}>@{item.author}</Author>
+      <Icon className="ph ph-arrow-right" onClick={() => redirect(`/${item.author}/widget/${item.widget_name}`)}></Icon>
     </ListItem>
   );
 };

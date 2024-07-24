@@ -55,7 +55,9 @@ export const Sidebar = () => {
           onClick={() => {
             if (!isSidebarExpanded) {
               toggleExpandedSidebar();
-              inputRef && inputRef.current?.focus();
+              setTimeout(() => {
+                inputRef.current?.focus();
+              }, 200);
             }
           }}
         >

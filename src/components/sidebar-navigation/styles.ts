@@ -945,7 +945,7 @@ export const SearchWrapper = styled.div`
   display: flex;
   align-items: center;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 5px 0px;
   position: relative;
 `;
 
