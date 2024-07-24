@@ -25,6 +25,7 @@ import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -119,6 +120,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Toaster />
 
       <CookiePrompt />
+
+      <ResearchFormWizard />
 
       <div
         id="idos_container"
