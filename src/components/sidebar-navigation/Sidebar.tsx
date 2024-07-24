@@ -23,7 +23,7 @@ export const Sidebar = () => {
   const tooltipsDisabled = isSidebarExpanded;
   const signedIn = useAuthStore((store) => store.signedIn);
   const { requestAuthentication } = useSignInRedirect();
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCreateAccount = () => {
     requestAuthentication(true);
@@ -55,7 +55,6 @@ export const Sidebar = () => {
           onClick={() => {
             if (!isSidebarExpanded) {
               toggleExpandedSidebar();
-              console.log(inputRef);
               inputRef && inputRef.current?.focus();
             }
           }}
