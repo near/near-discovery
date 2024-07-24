@@ -25,12 +25,6 @@ export const Sidebar = () => {
   const { requestAuthentication } = useSignInRedirect();
   const inputRef = useRef(null);
 
-  const handleFocus = () => {
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
-
   const handleCreateAccount = () => {
     requestAuthentication(true);
   };
@@ -61,11 +55,12 @@ export const Sidebar = () => {
           onClick={() => {
             if (!isSidebarExpanded) {
               toggleExpandedSidebar();
-              handleFocus();
+              console.log(inputRef)
+              inputRef && inputRef.current?.focus();
             }
           }}
         >
-          <Search ref={inputRef} />
+          <Search inputRef={inputRef} />
           <Tooltip content="Search" side="right" disabled={tooltipsDisabled}>
             <S.SearchIconWrapper $expanded={isSidebarExpanded}>
               <i className="ph-bold ph-magnifying-glass" />
