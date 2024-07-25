@@ -1,6 +1,7 @@
-import { useResearchWizardStore } from '@/stores/researchWizard';
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { useResearchWizardStore } from '@/stores/researchWizard';
 
 const ExperienceContainer = styled.div`
   display: flex;

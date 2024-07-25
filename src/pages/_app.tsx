@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { openToast, Toaster } from '@/components/lib/Toast';
+import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
@@ -25,7 +26,6 @@ import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
