@@ -38,17 +38,11 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
 
       switch (type) {
         case 'Docs':
-          return rawResp.hits.map((item: any, index: number) => (
-            <DocsResults key={index} item={item} setOpen={setOpen} />
-          ));
+          return rawResp.hits.map((item: any, index: number) => <DocsResults key={index} item={item} />);
         case 'Apps':
-          return Object.values(rawResp).map((item: any, index: number) => (
-            <AppsResults key={index} item={item} setOpen={setOpen} />
-          ));
+          return Object.values(rawResp).map((item: any, index: number) => <AppsResults key={index} item={item} />);
         case 'Components':
-          return rawResp.hits.map((item: any, index: number) => (
-            <ComponentsResults key={index} item={item} setOpen={setOpen} />
-          ));
+          return rawResp.hits.map((item: any, index: number) => <ComponentsResults key={index} item={item} />);
       }
     },
     [debouncedSearchTerm],
@@ -93,6 +87,10 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
   const handleTabChange = (tabId: TabType) => {
     setActiveTab(tabId);
   };
+
+  useEffect(() => {
+    searchTerm && setOpen(true);
+  }, [searchTerm]);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
