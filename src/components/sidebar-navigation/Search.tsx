@@ -1,6 +1,6 @@
 import * as HoverCard from '@radix-ui/react-hover-card';
 import Link from 'next/link';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Input } from '@/components/lib/Input';
 import useDebounce from '@/hooks/useDebounce';
@@ -16,10 +16,11 @@ const TABS = ['Docs', 'Apps', 'Components'] as const;
 type TabType = (typeof TABS)[number];
 
 export const Search = ({ inputRef }: { inputRef: any }) => {
+  const componentRef = useRef<HTMLDivElement>(null);
+
   const [searchTerm, setSearchTerm] = useState<string>('');
   const debouncedSearchTerm = useDebounce<string>(searchTerm, 250);
-  const [isFocus, setIsFocus] = useState<boolean>(false);
-  const [isCursorOutside, setIsCursorOutside] = useState(false);
+  const [open, setOpen] = useState<boolean>(false);
 
   const [activeTab, setActiveTab] = useState<TabType>('Docs');
   const [results, setResults] = useState<Record<TabType, React.ReactNode | null>>({
@@ -37,11 +38,17 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
 
       switch (type) {
         case 'Docs':
-          return rawResp.hits.map((item: any, index: number) => <DocsResults key={index} item={item} />);
+          return rawResp.hits.map((item: any, index: number) => (
+            <DocsResults key={index} item={item} setOpen={setOpen} />
+          ));
         case 'Apps':
-          return Object.values(rawResp).map((item: any, index: number) => <AppsResults key={index} item={item} />);
+          return Object.values(rawResp).map((item: any, index: number) => (
+            <AppsResults key={index} item={item} setOpen={setOpen} />
+          ));
         case 'Components':
-          return rawResp.hits.map((item: any, index: number) => <ComponentsResults key={index} item={item} />);
+          return rawResp.hits.map((item: any, index: number) => (
+            <ComponentsResults key={index} item={item} setOpen={setOpen} />
+          ));
       }
     },
     [debouncedSearchTerm],
@@ -87,29 +94,22 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
     setActiveTab(tabId);
   };
 
-  const handleFocusChange = () => {
-    setIsFocus(!isFocus);
-  };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (componentRef.current && !componentRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
 
-  const handleOnBlur = () => {
-    setIsFocus(!isCursorOutside);
-  };
-
-  const handleInteractOutside = (value: any) => {
-    console.log({ value });
-    setIsCursorOutside(!value);
-  };
-
-  const showTypeAheadDropdown = isFocus && !!searchTerm;
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
-    <S.SearchWrapper ref={inputRef} onBlur={handleOnBlur}>
-      <HoverCard.Root
-        openDelay={200}
-        closeDelay={300}
-        open={showTypeAheadDropdown}
-        onOpenChange={handleInteractOutside}
-      >
+    <S.SearchWrapper>
+      <HoverCard.Root openDelay={200} closeDelay={300} open={open}>
         <HoverCard.Trigger asChild>
           <div>
             <Input
@@ -118,7 +118,8 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
               name="search"
               onInput={handleSearch}
               value={searchTerm}
-              onFocus={handleFocusChange}
+              onFocus={() => setOpen(true)}
+              ref={inputRef}
             />
           </div>
         </HoverCard.Trigger>
@@ -129,6 +130,7 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
           alignOffset={-40}
           sideOffset={10}
           hideWhenDetached={true}
+          ref={componentRef}
         >
           <S.ResultsPopup>
             <S.TabContainer>
@@ -143,10 +145,10 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
               </S.Tab>
             </S.TabContainer>
 
-            <S.ResultItem onClick={handleFocusChange}>
+            <S.ResultItem>
               {isLoading ? 'Searching...' : searchTerm ? results[activeTab] : 'Type in to search'}
             </S.ResultItem>
-            <S.Footer onClick={handleFocusChange}>
+            <S.Footer>
               <Link href={`/search?query=${searchTerm}`}>See all results </Link>
             </S.Footer>
           </S.ResultsPopup>

@@ -70,15 +70,19 @@ interface HighlightResultItem {
 
 interface DocsResultsProps {
   item: Item;
+  setOpen: (open: boolean) => void;
 }
 
-export const DocsResults: React.FC<DocsResultsProps> = ({ item }) => {
+export const DocsResults: React.FC<DocsResultsProps> = ({ item, setOpen }) => {
   const router = useRouter();
-  const redirect = (url: string) => () => router.push(url);
+  const redirect = (url: string) => {
+    router.push(url);
+    setOpen(false);
+  };
   const convertUrl = (url: string) => url.replace(/^https:\/\/docs\.near\.org\/(.+)$/, '/documentation/$1');
 
   return (
-    <CardDocs onClick={redirect(convertUrl(item.url))}>
+    <CardDocs onClick={() => redirect(convertUrl(item.url))}>
       <TitleDocs>{item.hierarchy.lvl0}</TitleDocs>
       <SubtitleDocs>{item.hierarchy.lvl1}</SubtitleDocs>
       <ContentDocs>{item.content ? item.content.substr(0, 80) : ''}</ContentDocs>
