@@ -79,14 +79,14 @@ interface Item {
 
 interface AppsResultsProps {
   item: Item;
-  setOpen: (open: boolean) => void;
+  setOpen?: (open: boolean) => void;
 }
 
 export const AppsResults: React.FC<AppsResultsProps> = ({ item, setOpen }) => {
   const router = useRouter();
   const redirect = (url: string) => {
     router.push(url);
-    setOpen(false);
+    setOpen && setOpen(false);
   };
 
   return (

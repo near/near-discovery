@@ -10,6 +10,8 @@ type PinnedAppsGatewayEvent = {
   action: 'FEATURE_ENABLED' | 'PINNED' | 'UNPINNED';
 };
 
+type GatewayEvent = PinnedAppsGatewayEvent;
+
 const COMPONENT_AUTHOR_ID_WHITELIST = ['near', 'discom.testnet', 'discom-dev.testnet'];
 
 export function useGatewayEvents() {
@@ -29,6 +31,18 @@ export function useGatewayEvents() {
     [modifyPinnedApps, sidebarLayoutEnabled],
   );
 
+  const emitGatewayEvent = useCallback(
+    (event: GatewayEvent) => {
+      switch (event.type) {
+        case 'PINNED_APPS':
+          return handlePinnedAppsEvent(event);
+        default:
+          console.error('Unimplemented gateway event recorded:', event);
+      }
+    },
+    [handlePinnedAppsEvent],
+  );
+
   const shouldPassGatewayEventProps = useCallback((componentAuthorId: string) => {
     /*
       When rendering components we might not trust (eg: pages/[componentAccountId]/widget/[componentName].tsx), 
@@ -43,5 +57,5 @@ export function useGatewayEvents() {
     to only expose methods that rely on useCallback() to reduce re-renders for the VM.
   */
 
-  return { shouldPassGatewayEventProps };
+  return { emitGatewayEvent, shouldPassGatewayEventProps };
 }
