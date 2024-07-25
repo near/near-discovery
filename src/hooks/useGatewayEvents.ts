@@ -1,14 +1,8 @@
-import Gleap from 'gleap';
 import { useCallback } from 'react';
 
 import { useSidebarLayoutEnabled } from '@/components/sidebar-navigation/hooks';
 import { useNavigationStore } from '@/components/sidebar-navigation/store';
 import type { PinnedApp } from '@/components/sidebar-navigation/utils';
-
-type GleapGatewayEvent = {
-  type: 'GLEAP';
-  action: 'CLOSE' | 'OPEN';
-};
 
 type PinnedAppsGatewayEvent = {
   type: 'PINNED_APPS';
@@ -16,23 +10,11 @@ type PinnedAppsGatewayEvent = {
   action: 'FEATURE_ENABLED' | 'PINNED' | 'UNPINNED';
 };
 
-type GatewayEvent = GleapGatewayEvent | PinnedAppsGatewayEvent;
-
 const COMPONENT_AUTHOR_ID_WHITELIST = ['near', 'discom.testnet', 'discom-dev.testnet'];
 
 export function useGatewayEvents() {
   const { sidebarLayoutEnabled } = useSidebarLayoutEnabled();
   const modifyPinnedApps = useNavigationStore((store) => store.modifyPinnedApps);
-
-  const handleGleapEvent = useCallback((event: GleapGatewayEvent) => {
-    if (event.action === 'CLOSE') {
-      Gleap.close();
-    } else if (event.action === 'OPEN') {
-      Gleap.open();
-    } else {
-      console.error('Unimplemented gleap gateway event recorded:', event);
-    }
-  }, []);
 
   const handlePinnedAppsEvent = useCallback(
     (event: PinnedAppsGatewayEvent) => {
@@ -45,20 +27,6 @@ export function useGatewayEvents() {
       }
     },
     [modifyPinnedApps, sidebarLayoutEnabled],
-  );
-
-  const emitGatewayEvent = useCallback(
-    (event: GatewayEvent) => {
-      switch (event.type) {
-        case 'GLEAP':
-          return handleGleapEvent(event);
-        case 'PINNED_APPS':
-          return handlePinnedAppsEvent(event);
-        default:
-          console.error('Unimplemented gateway event recorded:', event);
-      }
-    },
-    [handleGleapEvent, handlePinnedAppsEvent],
   );
 
   const shouldPassGatewayEventProps = useCallback((componentAuthorId: string) => {
@@ -75,5 +43,5 @@ export function useGatewayEvents() {
     to only expose methods that rely on useCallback() to reduce re-renders for the VM.
   */
 
-  return { emitGatewayEvent, shouldPassGatewayEventProps };
+  return { shouldPassGatewayEventProps };
 }
