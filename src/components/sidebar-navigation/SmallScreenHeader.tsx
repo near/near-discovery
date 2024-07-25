@@ -1,6 +1,6 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
@@ -9,12 +9,10 @@ import NearIconSvg from './icons/near-icon.svg';
 import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';
 import * as S from './styles';
-import { useRouter } from 'next/router';
 
 export const SmallScreenHeader = () => {
   const router = useRouter();
   const redirect = (url: string) => () => router.push(url);
-  const components = useBosComponents();
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebarOnSmallScreens = useNavigationStore((store) => store.toggleExpandedSidebarOnSmallScreens);
   const setNavigation = useNavigationStore((store) => store.set);

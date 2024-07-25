@@ -5,7 +5,6 @@ import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
-import Gleap from 'gleap';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
@@ -15,17 +14,16 @@ import { useEffect } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { openToast, Toaster } from '@/components/lib/Toast';
+import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
-import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -34,10 +32,6 @@ const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
-
-if (typeof window !== 'undefined') {
-  if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
-}
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
