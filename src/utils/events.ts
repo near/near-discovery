@@ -1,30 +1,11 @@
-import { lumaApiUrl } from './config';
-
-export type EventItem = {
-  api_id: string;
-  event: {
-    api_id: string;
-    name: string;
-    description: string;
-    start_at: string;
-    end_at: string;
-    cover_url: string;
-    url: string;
-    geo_address_json: any;
-    geo_address_info?: any;
-  };
-};
-
-type EventsListData = {
-  entries: EventItem[];
-  hasMore: boolean;
-};
+import { googleCalendarApiKey, lumaApiUrl } from './config';
+import type { GoogleCalendarEvent, GoogleEventsListData, LumaEventItem, LumaEventsListData } from './types';
 
 export const fetchLumaEvents = async (
   calendarApiId: string,
   limit: number,
   offset: number,
-): Promise<EventsListData> => {
+): Promise<LumaEventsListData> => {
   const queryFrom = `period=future`;
   const queryLimit = `pagination_limit=${limit ?? 10}`;
   const queryOffset = offset ? `pagination_offset=${offset}` : '';
@@ -38,13 +19,34 @@ export const fetchLumaEvents = async (
   });
 
   if (!res.ok) {
-    throw new Error('Failed to fetch data');
+    throw new Error('Failed to fetch Luma Calendar data');
   }
 
   const data = (await res.json()) as {
-    entries: EventItem[];
+    entries: LumaEventItem[];
     has_more: boolean;
   };
 
   return { entries: data.entries, hasMore: data.has_more };
+};
+
+export const fetchGoogleCalendarEvents = async (
+  calendarId: string,
+  startFrom: string,
+  limit: number,
+): Promise<GoogleEventsListData> => {
+  const res = await fetch(
+    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${googleCalendarApiKey}&maxResults=${limit}&timeMin=${startFrom}&singleEvents=true&orderBy=startTime`,
+    {},
+  );
+
+  if (!res.ok) {
+    throw new Error('Failed to fetch Google Calendar data');
+  }
+
+  const data = (await res.json()) as {
+    items: GoogleCalendarEvent[];
+  };
+
+  return { items: data.items };
 };

@@ -11,7 +11,7 @@ export type MappedEvent = {
   url: string;
 };
 
-export function useEvents(calendarApiIds: string[], limit = 3) {
+export function useLumaEvents(calendarApiIds: string[], limit = 3) {
   const aiEventsUrl = 'https://lu.ma';
   const [events, setEvents] = useState<MappedEvent[]>([]);
   const [hasMoreEvents, setHasMoreEvents] = useState(false);
@@ -29,7 +29,7 @@ export function useEvents(calendarApiIds: string[], limit = 3) {
 
         const mappedEvents = sortedEvents.map((item) => {
           return {
-            date: formatDate(item.event.start_at, item.event.end_at),
+            date: formatLumaDate(item.event.start_at, item.event.end_at),
             description: item.event.description,
             location: formatLocation(item.event.geo_address_json ?? item.event.geo_address_info),
             thumbnail: item.event.cover_url,
@@ -49,7 +49,7 @@ export function useEvents(calendarApiIds: string[], limit = 3) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(calendarApiIds), limit]);
 
-  const formatDate = (startAt: string, endAt: string) => {
+  const formatLumaDate = (startAt: string, endAt: string) => {
     // Example Format: "Jul 21 - Jul 23, 2023"
 
     const startAtDate = new Date(startAt);
