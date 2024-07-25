@@ -1,3 +1,4 @@
+import { set } from 'lodash';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -78,11 +79,16 @@ interface Item {
 
 interface AppsResultsProps {
   item: Item;
+  setOpen: (open: boolean) => void;
 }
 
-export const AppsResults: React.FC<AppsResultsProps> = ({ item }) => {
+export const AppsResults: React.FC<AppsResultsProps> = ({ item, setOpen }) => {
   const router = useRouter();
-  const redirect = (url: string) => () => router.push(url);
+  const redirect = (url: string) => {
+    router.push(url);
+    setOpen(false);
+  };
+
   return (
     <Card>
       <Tile>
@@ -90,11 +96,11 @@ export const AppsResults: React.FC<AppsResultsProps> = ({ item }) => {
           <Image src={item.profile.image.url} alt={item.profile.name} />
         </ImageContainer>
         <div>
-          <Name onClick={redirect(`/nearcatalog.near/widget/Index?id=${item.slug}`)}>{item.profile.name}</Name>
+          <Name onClick={() => redirect(`/nearcatalog.near/widget/Index?id=${item.slug}`)}>{item.profile.name}</Name>
 
           <TagContainer>
             {Object.entries(item.profile.tags).map(([key, value]) => (
-              <Tag key={key} onClick={redirect(`/nearcatalog.near/widget/Index?cat=${value}`)}>
+              <Tag key={key} onClick={() => redirect(`/nearcatalog.near/widget/Index?cat=${value}`)}>
                 {value}
               </Tag>
             ))}
