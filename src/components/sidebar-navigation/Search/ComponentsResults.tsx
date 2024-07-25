@@ -82,15 +82,11 @@ interface HighlightResult {
 
 interface ComponentsResultsProps {
   item: Item;
-  setOpen?: (open: boolean) => void;
 }
 
-export const ComponentsResults: React.FC<ComponentsResultsProps> = ({ item, setOpen }) => {
+export const ComponentsResults: React.FC<ComponentsResultsProps> = ({ item }) => {
   const router = useRouter();
-  const redirect = (url: string) => {
-    router.push(url);
-    setOpen && setOpen(false);
-  };
+  const redirect = (url: string) => router.push(url);
   const defaultImage = 'bafkreifc4burlk35hxom3klq4mysmslfirj7slueenbj7ddwg7pc6ixomu';
   const [imageSrc, setImageSrc] = useState(item?.image?.ipfs_cid || defaultImage);
 

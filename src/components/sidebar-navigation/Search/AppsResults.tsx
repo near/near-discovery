@@ -1,4 +1,3 @@
-import { set } from 'lodash';
 import { useRouter } from 'next/router';
 import styled from 'styled-components';
 
@@ -79,15 +78,11 @@ interface Item {
 
 interface AppsResultsProps {
   item: Item;
-  setOpen?: (open: boolean) => void;
 }
 
-export const AppsResults: React.FC<AppsResultsProps> = ({ item, setOpen }) => {
+export const AppsResults: React.FC<AppsResultsProps> = ({ item }) => {
   const router = useRouter();
-  const redirect = (url: string) => {
-    router.push(url);
-    setOpen && setOpen(false);
-  };
+  const redirect = (url: string) => router.push(url);
 
   return (
     <Card>
