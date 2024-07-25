@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
 import { ExperienceComponent } from '@/components/research-form-wizard/FormPages/Experience';
+import FollowUpComponent from '@/components/research-form-wizard/FormPages/FollowUp';
 import { Motivation } from '@/components/research-form-wizard/FormPages/Motivation';
 import UserType from '@/components/research-form-wizard/FormPages/UserType';
-import FollowUpComponent from '@/components/research-form-wizard/FormPages/FollowUp';
 
 interface ResearchStep {
   title: string;

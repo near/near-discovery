@@ -1,6 +1,7 @@
-import { useResearchWizardStore } from '@/stores/researchWizard';
 import { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
+
+import { useResearchWizardStore } from '@/stores/researchWizard';
 
 const InterestsContainer = styled.div`
   display: flex;
