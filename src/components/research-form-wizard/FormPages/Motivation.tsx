@@ -83,7 +83,7 @@ export const Motivation = () => {
 
     set({
       nextDisabled: !isDisabled,
-      currentStepSubmission: { response_interests: selectedInterests, other: otherInputEntry },
+      currentStepSubmission: { response_interests: selectedInterests.join(), other: otherInputEntry },
     });
   }, [selectedInterests, otherInputEntry, set]);
 

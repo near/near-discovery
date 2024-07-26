@@ -65,7 +65,7 @@ export const ExperienceComponent = () => {
       nextDisabled: !isDisabled,
       currentStepSubmission: { response_developer_experience: devExperience, response_web3_experience: web3Experience },
     });
-  }, [devExperience, set]);
+  }, [devExperience, set, web3Experience]);
 
   return (
     <ExperienceContainer>
