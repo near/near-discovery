@@ -79,7 +79,7 @@ const UserTypeComponent = () => {
 
     set({
       nextDisabled: !isDisabled,
-      currentStepSubmission: { response_selected_user_types: selectedTypes, other: otherInputEntry },
+      currentStepSubmission: { response_selected_user_types: selectedTypes.join(), other: otherInputEntry },
     });
   }, [selectedTypes, otherInputEntry, set]);
 
