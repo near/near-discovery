@@ -1,6 +1,6 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
-import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
@@ -11,7 +11,8 @@ import { useNavigationStore } from './store';
 import * as S from './styles';
 
 export const SmallScreenHeader = () => {
-  const components = useBosComponents();
+  const router = useRouter();
+  const redirect = (url: string) => () => router.push(url);
   const isOpenedOnSmallScreens = useNavigationStore((store) => store.isOpenedOnSmallScreens);
   const toggleExpandedSidebarOnSmallScreens = useNavigationStore((store) => store.toggleExpandedSidebarOnSmallScreens);
   const setNavigation = useNavigationStore((store) => store.set);
@@ -50,7 +51,7 @@ export const SmallScreenHeader = () => {
 
       {signedIn ? (
         <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens} $gap="16px">
-          <Button label="search" icon="ph ph-magnifying-glass" variant="secondary" href={components.search.indexPage} />
+          <Button label="search" icon="ph ph-magnifying-glass" variant="secondary" onClick={redirect('/search')} />
           <LargeScreenProfileDropdown />
         </S.SmallScreenHeaderActions>
       ) : (

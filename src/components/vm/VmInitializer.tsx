@@ -95,6 +95,10 @@ export default function VmInitializer() {
             setupNightly(),
             setupWelldoneWallet(),
             setupFastAuthWallet({
+              walletUrl:
+                networkId === 'testnet'
+                  ? 'https://wallet.testnet.near.org/fastauth'
+                  : 'https://wallet.near.org/fastauth',
               relayerUrl:
                 networkId === 'testnet'
                   ? 'http://34.70.226.83:3030/relay'
@@ -252,7 +256,6 @@ export default function VmInitializer() {
     setSignedAccountId(null);
     resetAnalytics();
     resetNavigation();
-    localStorage.removeItem('accountId');
   }, [idosSDK, near, resetNavigation]);
 
   const refreshAllowance = useCallback(async () => {

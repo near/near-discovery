@@ -203,6 +203,10 @@ export function recordHandledError(props: Record<string, string>) {
   recordEventWithProps('error-handled', props);
 }
 
+export function recordResearchFromEvent(eventLabel: string, properties: any) {
+  recordEventWithProps(eventLabel, properties);
+}
+
 export function recordEvent(eventLabel: string) {
   if (!rudderAnalytics || cookieOptOut) return;
   try {
