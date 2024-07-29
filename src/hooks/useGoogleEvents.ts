@@ -1,53 +1,72 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { fetchGoogleCalendarEvents } from '@/utils/events';
 import type { GoogleCalendarEvent } from '@/utils/types';
 
-export function useGoogleEvents(calendarId: string, startFrom: string, limit = 9) {
+export function useGoogleEvents(calendarId: string, limit = 9) {
   const [googleEvents, setGoogleEvents] = useState<GoogleCalendarEvent[]>([]);
+  const [nextPageToken, setNextPageToken] = useState('');
+  const [lastElements, setLastElements] = useState<GoogleCalendarEvent[]>([]);
+
+  const startFrom = useMemo(() => {
+    return new Date().toISOString();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const { items, nextPageToken: newToken } = await fetchGoogleCalendarEvents(
+        calendarId,
+        startFrom,
+        limit,
+        nextPageToken,
+      );
+
+      const mappedEvents = items.map((event) => {
+        return {
+          ...event,
+          start: {
+            dateTime: formatDevHubEventsDate(event.start.dateTime),
+          },
+        };
+      });
+
+      setNextPageToken(newToken);
+      if (googleEvents.length === 0 && lastElements.length === 0) {
+        setLastElements(mappedEvents);
+      } else {
+        setGoogleEvents((events) => [...events, ...lastElements]);
+        setLastElements(mappedEvents);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { items } = await fetchGoogleCalendarEvents(calendarId, startFrom, limit);
-        setGoogleEvents(items);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
     fetchData();
-  }, [calendarId, startFrom, limit]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const mappedEvent = googleEvents.map((event) => {
-    return {
-      ...event,
-      start: {
-        dateTime: formatDevHubEventsDate(event.start.dateTime),
-      },
-    };
-  });
+  function formatDevHubEventsDate(dateString: string) {
+    // eg. Thu, 15 August 4:00 PM UTC
+    const date = new Date(dateString);
 
-  return mappedEvent;
-}
+    const formattedDate = date.toLocaleDateString(undefined, {
+      weekday: 'short',
+      month: 'long',
+      day: 'numeric',
+    });
 
-function formatDevHubEventsDate(dateString: string) {
-  // eg. Thu, 15 August 4:00 PM UTC
-  const date = new Date(dateString);
+    let hours = date.getUTCHours();
+    const minutes = date.getUTCMinutes();
+    const period = hours >= 12 ? 'PM' : 'AM';
 
-  const formattedDate = date.toLocaleDateString(undefined, {
-    weekday: 'short',
-    month: 'long',
-    day: 'numeric',
-  });
+    hours = hours % 12 || 12; // Convert 0 hours to 12 and 13+ hours to 1-12
 
-  let hours = date.getUTCHours();
-  const minutes = date.getUTCMinutes();
-  const period = hours >= 12 ? 'PM' : 'AM';
+    const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
 
-  hours = hours % 12 || 12; // Convert 0 hours to 12 and 13+ hours to 1-12
+    return `${formattedDate} ${formattedTime} UTC`;
+  }
 
-  const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
-
-  return `${formattedDate} ${formattedTime} UTC`;
+  return { googleEvents, lastElements, fetchData };
 }

@@ -34,9 +34,10 @@ export const fetchGoogleCalendarEvents = async (
   calendarId: string,
   startFrom: string,
   limit: number,
+  pageToken: string,
 ): Promise<GoogleEventsListData> => {
   const res = await fetch(
-    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${googleCalendarApiKey}&maxResults=${limit}&timeMin=${startFrom}&singleEvents=true&orderBy=startTime`,
+    `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${googleCalendarApiKey}&maxResults=${limit}&timeMin=${startFrom}&singleEvents=true&orderBy=startTime&pageToken=${pageToken}`,
     {},
   );
 
@@ -46,7 +47,8 @@ export const fetchGoogleCalendarEvents = async (
 
   const data = (await res.json()) as {
     items: GoogleCalendarEvent[];
+    nextPageToken: string;
   };
 
-  return { items: data.items };
+  return { items: data.items, nextPageToken: data.nextPageToken };
 };

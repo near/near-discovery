@@ -123,11 +123,11 @@ export type GoogleCalendarEvent = {
   };
   start: {
     dateTime: string;
-    timeZone: string;
+    timeZone?: string;
   };
   end: {
     dateTime: string;
-    timeZone: string;
+    timeZone?: string;
   };
   recurrence: string[];
   iCalUID: string;
@@ -138,6 +138,7 @@ export type GoogleCalendarEvent = {
 
 export type GoogleEventsListData = {
   items: GoogleCalendarEvent[];
+  nextPageToken: string;
 };
 
 export type LumaEventItem = {

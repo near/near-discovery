@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 import { Article, ArticleImage } from '@/components/lib/Article';
 import { Button } from '@/components/lib/Button';
@@ -104,13 +103,29 @@ const CoverCardImageWrapper = styled.div`
   }
 `;
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
+const ArticleWrapper = styled.div`
+  animation: ${fadeIn} 200ms;
+`;
+
 const EventsPage: NextPageWithLayout = () => {
   const { events, hasMoreEvents } = useLumaEvents([lumaNearCalendarId, lumaNearAICalendarId, lumaNearHZNCalendarId], 7);
-  const dateNow = new Date().toISOString();
-  const devhubEvents = useGoogleEvents(devhubCommunityCalendarId, dateNow, 9);
+  const { googleEvents: communityEvents, fetchData, lastElements } = useGoogleEvents(devhubCommunityCalendarId, 3);
 
   const featuredEvent = events[0] as MappedEvent | undefined;
   const otherEvents = events.filter((event) => event.title !== featuredEvent?.title);
+
+  const getMoreEvents = () => {
+    fetchData();
+  };
 
   return (
     <Wrapper>
@@ -256,12 +271,12 @@ const EventsPage: NextPageWithLayout = () => {
         <Container gap="48px">
           <Flex gap="80px" mobileGap="40px" alignItems="center" justifyContent="space-between">
             <Text size="text-3xl" mobileSize="text-2xl" weight="500">
-              DevHub Community Events
+              Community Events
             </Text>
           </Flex>
 
           <Grid columns="1fr 1fr 1fr" gap="24px">
-            {devhubEvents.map((event) => {
+            {communityEvents.map((event) => {
               return (
                 <Article key={event.id} href={event.htmlLink} target="_blank" style={{ minWidth: 0 }}>
                   <ArticleImage>
@@ -284,7 +299,34 @@ const EventsPage: NextPageWithLayout = () => {
                 </Article>
               );
             })}
+
+            {lastElements.map((event) => {
+              return (
+                <ArticleWrapper key={event.id}>
+                  <Article href={event.htmlLink} target="_blank" style={{ minWidth: 0 }}>
+                    <ArticleImage>
+                      <img
+                        src={`https://lh3.googleusercontent.com/d/${event.attachments?.[0]?.fileId}=w1000`}
+                        alt={event.summary}
+                      />
+                    </ArticleImage>
+                    <Text color="sand12" size="text-l" weight="500" as="h3">
+                      {event.summary}
+                    </Text>
+                    <Flex alignItems="center" gap="32px" style={{ minWidth: 0 }}>
+                      <Flex alignItems="center" gap="8px">
+                        <i className="ph-bold ph-calendar-blank" />
+                        <Text color="sand11" size="text-s" style={{ whiteSpace: 'nowrap' }}>
+                          {event.start.dateTime}
+                        </Text>
+                      </Flex>
+                    </Flex>
+                  </Article>
+                </ArticleWrapper>
+              );
+            })}
           </Grid>
+          <button onClick={getMoreEvents}>Load More</button>
         </Container>
       </Section>
 
