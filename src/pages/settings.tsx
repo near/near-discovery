@@ -1,3 +1,4 @@
+import { openToast } from '@near-pagoda/ui';
 import type { WalletSelector } from '@near-wallet-selector/core';
 import hereImage from '@near-wallet-selector/here-wallet/assets/here-wallet-icon.png';
 import meteorImage from '@near-wallet-selector/meteor-wallet/assets/meteor-icon.png';
@@ -5,8 +6,6 @@ import myNearImage from '@near-wallet-selector/my-near-wallet/assets/my-near-wal
 import nightlyImage from '@near-wallet-selector/nightly/assets/nightly.png';
 import { useCallback, useEffect, useState } from 'react';
 
-import { openToast } from '@/components/lib/Toast';
-import type { ToastType } from '@/components/lib/Toast/store';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -25,7 +24,7 @@ const SettingsPage: NextPageWithLayout = () => {
   const idosCredentials = useIdosStore((state) => state.credentials);
   const connectedWallet = useIdosStore((state) => state.connectedWallet);
   const setIdosStore = useIdosStore((state) => state.set);
-  const [error, setError] = useState<{ type: ToastType; title: string; description?: string } | null>(null);
+  const [error, setError] = useState<{ title: string; description?: string } | null>(null);
 
   const walletImages = [
     { name: 'meteor-wallet', ...meteorImage },
@@ -46,7 +45,6 @@ const SettingsPage: NextPageWithLayout = () => {
         setIdosStore({ credentials });
       } else {
         setError({
-          type: 'INFO',
           title: `No idOS profile found for ${accountId}`,
         });
       }
@@ -56,7 +54,6 @@ const SettingsPage: NextPageWithLayout = () => {
       const errorMessage = error.message ? error.message : 'unknown';
       recordHandledError({ scope, message: errorMessage || error });
       setError({
-        type: 'ERROR',
         title: 'Falilure during idOS initialization:',
         description: `${errorMessage}`,
       });
@@ -66,7 +63,7 @@ const SettingsPage: NextPageWithLayout = () => {
   useEffect(() => {
     if (!idosCredentials && error) {
       openToast({
-        type: error.type,
+        type: 'error',
         title: error.title,
         description: error.description,
       });

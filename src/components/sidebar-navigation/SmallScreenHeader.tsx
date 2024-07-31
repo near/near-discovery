@@ -1,10 +1,11 @@
+import { Button } from '@near-pagoda/ui';
+import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
-import { Button } from '../lib/Button';
 import NearIconSvg from './icons/near-icon.svg';
 import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';
@@ -51,7 +52,7 @@ export const SmallScreenHeader = () => {
 
       {signedIn ? (
         <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens} $gap="16px">
-          <Button label="search" icon="ph ph-magnifying-glass" variant="secondary" onClick={redirect('/search')} />
+          <Button label="search" icon={<MagnifyingGlass />} variant="secondary" onClick={redirect('/search')} />
           <LargeScreenProfileDropdown />
         </S.SmallScreenHeaderActions>
       ) : (

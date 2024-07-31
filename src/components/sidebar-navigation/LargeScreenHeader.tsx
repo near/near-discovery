@@ -1,10 +1,10 @@
+import { Button } from '@near-pagoda/ui';
 import { useEffect, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
-import { Button } from '../lib/Button';
 import { VmComponent } from '../vm/VmComponent';
 import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';

@@ -1,8 +1,8 @@
+import { Button } from '@near-pagoda/ui';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { Button } from '@/components/lib/Button';
-import { Text } from '@/components/lib/Text';
+import { Text } from '@/components/lib/TextDelete';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';

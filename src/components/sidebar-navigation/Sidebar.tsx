@@ -1,3 +1,4 @@
+import { Tooltip } from '@near-pagoda/ui';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
@@ -5,7 +6,6 @@ import { useRef } from 'react';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
-import { Tooltip } from '../lib/Tooltip';
 import NearIconSvg from './icons/near-icon.svg';
 import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { Search } from './Search';
