@@ -40,7 +40,6 @@ export const LargeScreenHeader = () => {
   return (
     <S.LargeScreenHeader $scrolled={scrolled}>
       <VmComponent
-        showLoadingSpinner={false}
         src={components.navigation.largeScreenHeader}
         props={{
           title: currentPageTitle,
