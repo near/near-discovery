@@ -1,7 +1,7 @@
+import { Placeholder } from '@near-pagoda/ui';
+
 import { useBosLoaderStore } from '@/stores/bos-loader';
 import { useVmStore } from '@/stores/vm';
-
-import { Spinner } from '../lib/Spinner';
 
 type Props = {
   showLoadingSpinner?: boolean;
@@ -15,7 +15,7 @@ export function VmComponent({ showLoadingSpinner = true, ...props }: Props) {
 
   if (!EthersProvider || !redirectMapStore.hasResolved) {
     if (!showLoadingSpinner) return null;
-    return <Spinner />;
+    return <Placeholder />;
   }
 
   return (

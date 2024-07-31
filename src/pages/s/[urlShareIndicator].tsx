@@ -1,8 +1,8 @@
+import { openToast } from '@near-pagoda/ui';
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { openToast } from '@/components/lib/Toast';
 import { MetaTags } from '@/components/MetaTags';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -274,7 +274,7 @@ const ShareUrlPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<
     } else {
       openToast({
         id: 'invalid-share-url',
-        type: 'ERROR',
+        type: 'error',
         title: 'Invalid URL',
       });
       router.replace('/');

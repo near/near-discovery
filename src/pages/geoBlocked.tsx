@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Text } from '@/components/lib/Text';
+import { Text } from '@/components/lib/TextDelete';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const Container = styled.div`

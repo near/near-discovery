@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import { RootContentContainer } from '@/components/lib/Container';
+import { RootContentContainer } from '@/components/lib/RootContentContainer';
 import { MetaTags } from '@/components/MetaTags';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';

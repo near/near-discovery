@@ -1,7 +1,8 @@
+import { Button } from '@near-pagoda/ui';
+import { Text } from '@near-pagoda/ui';
+import { ArrowUpRight, XCircle } from '@phosphor-icons/react';
 import styled from 'styled-components';
 
-import { Button } from '@/components/lib/Button';
-import { Text } from '@/components/lib/Text';
 import { useBanner } from '@/hooks/useBanner';
 
 type Props = {
@@ -100,7 +101,7 @@ export const HorizonBanner = (props: Props) => {
           href="https://airtable.com/appFoIqAoY0ikoVIb/shrst8Tt4PUtYTSvD"
           target="_blank"
           label="Apply Now"
-          iconRight="ph-bold ph-arrow-up-right"
+          iconRight={<ArrowUpRight weight="bold" />}
           variant="primary"
           fill="outline"
           size="small"
@@ -111,7 +112,7 @@ export const HorizonBanner = (props: Props) => {
           href="https://airtable.com/appFoIqAoY0ikoVIb/shrst8Tt4PUtYTSvD"
           target="_blank"
           label="Apply"
-          iconRight="ph-bold ph-arrow-up-right"
+          iconRight={<ArrowUpRight weight="bold" />}
           variant="primary"
           fill="outline"
           size="small"
@@ -122,7 +123,7 @@ export const HorizonBanner = (props: Props) => {
           type="button"
           onClick={closeBanner}
           label="Close"
-          icon="ph-fill ph-x-circle"
+          iconRight={<XCircle weight="fill" />}
           size="small"
           className="close-button"
           fill="ghost"
