@@ -168,12 +168,14 @@ export const Sidebar = () => {
 
             <Tooltip content="Get Funding" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem
-                $active={isNavigationItemActive('/ecosystem/get-funding')}
+                $active={false}
                 $type="featured"
-                href="/ecosystem/get-funding"
+                href="https://near.org/ecosystem/get-funding"
+                target="_blank"
               >
                 <i className="ph-bold ph-coin-vertical" />
                 <span>Get Funding</span>
+                <span className="ph-bold ph-arrow-square-out ms-auto outline-none" />
               </S.NavigationItem>
             </Tooltip>
           </S.Stack>
@@ -183,7 +185,7 @@ export const Sidebar = () => {
           {signedIn ? (
             <LargeScreenProfileDropdown />
           ) : (
-            <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled}>
+            <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled} asChild>
               <S.LoginItem $active={false} $type="featured" onClick={handleCreateAccount}>
                 <i className="ph-bold ph-user" />
                 <span>Sign-up or Login</span>

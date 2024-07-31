@@ -74,12 +74,6 @@ importers:
       '@radix-ui/react-navigation-menu':
         specifier: ^1.1.4
         version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-toast':
-        specifier: ^1.1.5
-        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-tooltip':
-        specifier: ^1.0.7
-        version: 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@sentry/nextjs':
         specifier: ^7.112.2
         version: 7.118.0(next@13.5.6(@babel/core@7.24.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)(webpack@5.93.0)

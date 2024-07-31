@@ -40,8 +40,6 @@
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-hover-card": "^1.1.1",
     "@radix-ui/react-navigation-menu": "^1.1.4",
-    "@radix-ui/react-toast": "^1.1.5",
-    "@radix-ui/react-tooltip": "^1.0.7",
     "@sentry/nextjs": "^7.112.2",
     "@web3-onboard/core": "^2.21.6",
     "@web3-onboard/injected-wallets": "^2.10.16",
