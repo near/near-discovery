@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 
-import { RootContentContainer } from '@/components/lib/RootContentContainer';
+import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';

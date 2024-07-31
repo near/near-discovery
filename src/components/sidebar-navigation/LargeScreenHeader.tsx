@@ -5,8 +5,8 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
+import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
 import { VmComponent } from '../vm/VmComponent';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 
@@ -45,7 +45,7 @@ export const LargeScreenHeader = () => {
           title: currentPageTitle,
           rightSideChildren: signedIn ? (
             <>
-              <LargeScreenProfileDropdown />
+              <UserDropdownMenu />
             </>
           ) : (
             <>
