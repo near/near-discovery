@@ -6,8 +6,8 @@ import { useRouter } from 'next/router';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
+import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
 import NearIconSvg from './icons/near-icon.svg';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 
@@ -53,7 +53,7 @@ export const SmallScreenHeader = () => {
       {signedIn ? (
         <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens} $gap="16px">
           <Button label="search" icon={<MagnifyingGlass />} variant="secondary" onClick={redirect('/search')} />
-          <LargeScreenProfileDropdown />
+          <UserDropdownMenu />
         </S.SmallScreenHeaderActions>
       ) : (
         <>

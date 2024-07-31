@@ -1,6 +1,6 @@
 // import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Dropdown, SvgIcon } from '@near-pagoda/ui';
-import { Bank, Gear, SignOut, User } from '@phosphor-icons/react';
+import { Bank, Gear, SignOut, User, Wallet } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import styled from 'styled-components';
@@ -11,13 +11,18 @@ import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 
 const Wrapper = styled.div`
+  flex-grow: 1;
+
   > button {
     all: unset;
+    box-sizing: border-box;
     display: flex;
+    width: 100%;
     align-items: center;
     border-radius: 50px;
     background-color: var(--sand12);
     padding: 4px;
+    padding-right: 1rem;
     transition: all 200ms;
 
     &:hover {
@@ -41,7 +46,7 @@ const Wrapper = styled.div`
 
   i {
     color: #a1a09a;
-    margin: 0 5px 0 0;
+    margin-left: auto;
   }
 
   .profile-info {
@@ -117,7 +122,7 @@ export const UserDropdownMenu = () => {
           <i className="ph ph-caret-down"></i>
         </Dropdown.Trigger>
 
-        <Dropdown.Content sideOffset={-5}>
+        <Dropdown.Content sideOffset={10}>
           <Dropdown.Item onSelect={() => router.push(`/${components.profilePage}?accountId=${accountId}`)}>
             <SvgIcon icon={<User weight="duotone" />} />
             Profile
@@ -125,6 +130,10 @@ export const UserDropdownMenu = () => {
           <Dropdown.Item onSelect={() => router.push(`/settings`)}>
             <SvgIcon icon={<Gear weight="duotone" />} />
             Settings
+          </Dropdown.Item>
+          <Dropdown.Item onSelect={() => router.push(`/wallet-utilities`)}>
+            <SvgIcon icon={<Wallet weight="duotone" />} />
+            Wallet Utilities
           </Dropdown.Item>
           <Dropdown.Item onSelect={() => withdrawStorage()}>
             <SvgIcon icon={<Bank weight="duotone" />} />

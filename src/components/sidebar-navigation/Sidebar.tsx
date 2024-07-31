@@ -6,8 +6,8 @@ import { useRef } from 'react';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
+import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
 import NearIconSvg from './icons/near-icon.svg';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { Search } from './Search';
 import { useNavigationStore } from './store';
 import * as S from './styles';
@@ -183,7 +183,7 @@ export const Sidebar = () => {
 
         <S.ProfileDropdownSection $expanded={isSidebarExpanded}>
           {signedIn ? (
-            <LargeScreenProfileDropdown />
+            <UserDropdownMenu />
           ) : (
             <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled} asChild>
               <S.LoginItem $active={false} $type="featured" onClick={handleCreateAccount}>
