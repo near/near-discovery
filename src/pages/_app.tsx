@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { openToast, Toaster } from '@/components/lib/Toast';
@@ -26,6 +26,8 @@ import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
+import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -35,15 +37,13 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-if (typeof window !== 'undefined') {
-  if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
-}
-
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
+  const cookieData = useCookiePreferences();
+  const { isResearchFormDismissed } = useResearchWizardEvents();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
@@ -99,6 +99,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       clearInterval(interval);
     };
   }, []);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (gleapSdkToken && !cookieData && isResearchFormDismissed) Gleap.initialize(gleapSdkToken);
+    }
+  }, [isResearchFormDismissed, cookieData]);
 
   return (
     <>
