@@ -11,7 +11,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
-import { use, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { openToast, Toaster } from '@/components/lib/Toast';
