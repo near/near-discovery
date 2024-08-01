@@ -37,6 +37,10 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+if (typeof window !== 'undefined') {
+  if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
+}
+
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
@@ -101,10 +105,14 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, []);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      if (gleapSdkToken && !cookieData && isResearchFormDismissed) Gleap.initialize(gleapSdkToken);
+    console.log('isResearchForm', isResearchFormDismissed);
+
+    if (!cookieData || !isResearchFormDismissed) {
+      Gleap.showFeedbackButton(false);
+    } else {
+      Gleap.showFeedbackButton(true);
     }
-  }, [isResearchFormDismissed, cookieData]);
+  }, [isResearchFormDismissed, cookieData, gleapSdkToken]);
 
   return (
     <>
