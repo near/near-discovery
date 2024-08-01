@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   i {
     color: #a1a09a;
     margin-left: auto;
-    padding-right: 1rem;
+    padding-right: 0.5rem;
   }
 
   .profile-info {
@@ -137,7 +137,7 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
               </div>
               <div className="profile-username">{accountId}</div>
             </div>
-            <i className="ph ph-caret-down"></i>
+            <i className="ph ph-caret-right"></i>
           </Dropdown.Trigger>
         )}
 
