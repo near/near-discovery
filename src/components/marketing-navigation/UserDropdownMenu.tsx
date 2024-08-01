@@ -1,4 +1,3 @@
-// import * as DropdownMenu from '@radix-ui/react-dropdown-menu';
 import { Dropdown, SvgIcon } from '@near-pagoda/ui';
 import { Bank, Gear, SignOut, User, Wallet } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
@@ -13,6 +12,15 @@ import { useVmStore } from '@/stores/vm';
 const Wrapper = styled.div`
   flex-grow: 1;
 
+  .user-icon-trigger {
+    border-radius: 4px;
+    height: 36px;
+    height: 36px;
+    > * {
+      margin: auto;
+    }
+  }
+
   > button {
     all: unset;
     box-sizing: border-box;
@@ -22,8 +30,8 @@ const Wrapper = styled.div`
     border-radius: 50px;
     background-color: var(--sand12);
     padding: 4px;
-    padding-right: 1rem;
     transition: all 200ms;
+    overflow: hidden;
 
     &:hover {
       background-color: var(--black);
@@ -47,6 +55,7 @@ const Wrapper = styled.div`
   i {
     color: #a1a09a;
     margin-left: auto;
+    padding-right: 1rem;
   }
 
   .profile-info {
@@ -89,7 +98,11 @@ const Wrapper = styled.div`
   }
 `;
 
-export const UserDropdownMenu = () => {
+type Props = {
+  collapsed?: boolean;
+};
+
+export const UserDropdownMenu = ({ collapsed }: Props) => {
   const accountId = useAuthStore((store) => store.accountId);
   const availableStorage = useAuthStore((store) => store.availableStorage);
   const logOut = useAuthStore((store) => store.logOut);
@@ -105,22 +118,28 @@ export const UserDropdownMenu = () => {
   return (
     <Wrapper>
       <Dropdown.Root>
-        <Dropdown.Trigger>
-          <VmComponent
-            src={components.profileImage}
-            props={{
-              accountId,
-              className: 'd-inline-block',
-            }}
-          />
-          <div className="profile-info">
-            <div className="profile-name">
-              <VmComponent src={components.profileName} />
+        {collapsed ? (
+          <Dropdown.Trigger className="user-icon-trigger">
+            <SvgIcon icon={<User />} color="sand1" />
+          </Dropdown.Trigger>
+        ) : (
+          <Dropdown.Trigger>
+            <VmComponent
+              src={components.profileImage}
+              props={{
+                accountId,
+                className: 'd-inline-block',
+              }}
+            />
+            <div className="profile-info">
+              <div className="profile-name">
+                <VmComponent src={components.profileName} />
+              </div>
+              <div className="profile-username">{accountId}</div>
             </div>
-            <div className="profile-username">{accountId}</div>
-          </div>
-          <i className="ph ph-caret-down"></i>
-        </Dropdown.Trigger>
+            <i className="ph ph-caret-down"></i>
+          </Dropdown.Trigger>
+        )}
 
         <Dropdown.Content sideOffset={10}>
           <Dropdown.Item onSelect={() => router.push(`/${components.profilePage}?accountId=${accountId}`)}>

@@ -183,7 +183,7 @@ export const Sidebar = () => {
 
         <S.ProfileDropdownSection $expanded={isSidebarExpanded}>
           {signedIn ? (
-            <UserDropdownMenu />
+            <UserDropdownMenu collapsed={!isSidebarExpanded} />
           ) : (
             <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled} asChild>
               <S.LoginItem $active={false} $type="featured" onClick={handleCreateAccount}>

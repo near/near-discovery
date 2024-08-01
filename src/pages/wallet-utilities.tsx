@@ -3,6 +3,7 @@ import { Text } from '@near-pagoda/ui';
 import { HandCoins, LockKeyOpen, PaperPlaneTilt } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 
+import { ExportFastAuthAccount } from '@/components/wallet-utilities/ExportFastAuthAccount';
 import { ReceiveNear } from '@/components/wallet-utilities/ReceiveNear';
 import { SendNear } from '@/components/wallet-utilities/SendNear';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -19,7 +20,7 @@ const WalletUtilitiesPage: NextPageWithLayout = () => {
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
       <Container size="s">
-        <Flex stack gap="m">
+        <Flex stack gap="l">
           <Text as="h1" size="text-2xl">
             Wallet Utilities
           </Text>
@@ -38,9 +39,9 @@ const WalletUtilitiesPage: NextPageWithLayout = () => {
                     Receive
                   </Tabs.Trigger>
 
-                  <Tabs.Trigger href="?tab=export-key" value="export-key">
+                  <Tabs.Trigger href="?tab=export" value="export">
                     <SvgIcon icon={<LockKeyOpen fill="bold" />} />
-                    Export Key
+                    Export Account
                   </Tabs.Trigger>
                 </Tabs.List>
 
@@ -52,8 +53,8 @@ const WalletUtilitiesPage: NextPageWithLayout = () => {
                   <ReceiveNear />
                 </Tabs.Content>
 
-                <Tabs.Content value="export-key">
-                  <Text>Export....</Text>
+                <Tabs.Content value="export">
+                  <ExportFastAuthAccount />
                 </Tabs.Content>
               </Tabs.Root>
             </Card>
