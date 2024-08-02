@@ -101,7 +101,7 @@ export default function VmInitializer() {
                   : 'https://wallet.near.org/fastauth',
               relayerUrl:
                 networkId === 'testnet'
-                  ? 'http://34.70.226.83:3030/relay'
+                  ? 'https://near-relayer-testnet.api.pagoda.co/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }),
             setupKeypom({
