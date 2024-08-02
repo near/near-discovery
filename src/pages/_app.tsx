@@ -28,6 +28,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
 import { useCookiePreferences } from '@/hooks/useCookiePreferences';
+import { useResearchWizardStore } from '@/stores/researchWizard';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -47,7 +48,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   usePageAnalytics();
   useClickTracking();
   const cookieData = useCookiePreferences();
-  const { isResearchFormDismissed } = useResearchWizardEvents();
+  const isResearchFormDismissed = useResearchWizardStore((state) => state.isResearchFormDismissed);
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);

@@ -55,13 +55,13 @@ const IconContainer = styled.div`
 
 export const ResearchFormWizard = () => {
   const set = useResearchWizardStore((state) => state.set);
+  const isResearchFormDismissed = useResearchWizardStore((state) => state.isResearchFormDismissed);
   const [matches, setMatches] = useState(true);
   const currentStepIndex = useResearchWizardStore((state) => state.currentStepIndex);
   const formSteps = useResearchWizardStore((state) => state.formSteps);
   const currentStepSubmission = useResearchWizardStore((state) => state.currentStepSubmission);
   const cookieData = useCookiePreferences();
-  const { showMobileResearchForm, setShowMobileResearchForm, isResearchFormDismissed, setIsResearchFormDismissed } =
-    useResearchWizardEvents();
+  const { showMobileResearchForm, setShowMobileResearchForm, setIsResearchFormDismissed } = useResearchWizardEvents();
   const [researchEventSent, setResearchEventSent] = useState(false);
   const [currentStep, setCurrentStep] = useState<JSX.Element>(formSteps[currentStepIndex].component());
 
