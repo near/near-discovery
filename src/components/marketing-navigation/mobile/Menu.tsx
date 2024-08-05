@@ -1,8 +1,8 @@
+import { Button } from '@near-pagoda/ui';
 import { useRouter } from 'next/router';
 import React from 'react';
 import styled from 'styled-components';
 
-import { Button } from '@/components/lib/Button';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';

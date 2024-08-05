@@ -1,12 +1,12 @@
+import { Button } from '@near-pagoda/ui';
 import { useEffect, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
-import { Button } from '../lib/Button';
+import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
 import { VmComponent } from '../vm/VmComponent';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 
@@ -40,13 +40,12 @@ export const LargeScreenHeader = () => {
   return (
     <S.LargeScreenHeader $scrolled={scrolled}>
       <VmComponent
-        showLoadingSpinner={false}
         src={components.navigation.largeScreenHeader}
         props={{
           title: currentPageTitle,
           rightSideChildren: signedIn ? (
             <>
-              <LargeScreenProfileDropdown />
+              <UserDropdownMenu />
             </>
           ) : (
             <>

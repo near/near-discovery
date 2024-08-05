@@ -1,4 +1,4 @@
-import { openToast } from '@/components/lib/Toast';
+import { openToast } from '@near-pagoda/ui';
 
 import { localStorageAccountIdKey, notificationsLocalStorageKey } from './config';
 import {
@@ -63,7 +63,7 @@ export const setProcessError = (error: any) => {
 
   openToast({
     id: 'notifications-subscription-error',
-    type: 'ERROR',
+    type: 'error',
     title: 'Push notification error',
     description: `${errorMessage}. Please try again later or send us a message if the problem persists.`,
     duration: 5000,
