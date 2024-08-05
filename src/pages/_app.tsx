@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { openToast, Toaster } from '@/components/lib/Toast';
+import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
@@ -119,6 +120,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Toaster />
 
       <CookiePrompt />
+
+      <ResearchFormWizard />
 
       <div
         id="idos_container"

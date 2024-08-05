@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useRef } from 'react';
 
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
@@ -22,6 +23,7 @@ export const Sidebar = () => {
   const tooltipsDisabled = isSidebarExpanded;
   const signedIn = useAuthStore((store) => store.signedIn);
   const { requestAuthentication } = useSignInRedirect();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleCreateAccount = () => {
     requestAuthentication(true);
@@ -48,16 +50,18 @@ export const Sidebar = () => {
             <i className={`ph-bold ${isSidebarExpanded ? 'ph-arrow-line-left' : 'ph-list'}`} />
           </S.ToggleExpandButton>
         </S.Top>
-
         <S.SearchSection
           $expanded={isSidebarExpanded}
           onClick={() => {
             if (!isSidebarExpanded) {
               toggleExpandedSidebar();
+              setTimeout(() => {
+                inputRef.current?.focus();
+              }, 200);
             }
           }}
         >
-          <Search />
+          <Search inputRef={inputRef} />
           <Tooltip content="Search" side="right" disabled={tooltipsDisabled}>
             <S.SearchIconWrapper $expanded={isSidebarExpanded}>
               <i className="ph-bold ph-magnifying-glass" />
