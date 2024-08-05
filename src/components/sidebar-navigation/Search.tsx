@@ -1,8 +1,8 @@
+import { Input } from '@near-pagoda/ui';
 import * as HoverCard from '@radix-ui/react-hover-card';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Input } from '@/components/lib/Input';
 import useDebounce from '@/hooks/useDebounce';
 import { fetchSearchHits } from '@/utils/algoliaSearchApi';
 import { fetchCatalog } from '@/utils/catalogSearchApi';

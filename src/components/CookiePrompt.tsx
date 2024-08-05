@@ -17,11 +17,7 @@ export const CookiePrompt = () => {
   const components = useBosComponents();
   return (
     <Wrapper>
-      <VmComponent
-        showLoadingSpinner={false}
-        src={components.nearOrg.cookiePrompt}
-        props={{ cookiesAcknowleged: cookieData }}
-      />
+      <VmComponent src={components.nearOrg.cookiePrompt} props={{ cookiesAcknowleged: cookieData }} />
     </Wrapper>
   );
 };

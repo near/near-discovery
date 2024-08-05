@@ -1,21 +1,17 @@
 import { useBosLoaderStore } from '@/stores/bos-loader';
 import { useVmStore } from '@/stores/vm';
 
-import { Spinner } from '../lib/Spinner';
-
 type Props = {
-  showLoadingSpinner?: boolean;
   src: string;
   props?: Record<string, unknown>;
 };
 
-export function VmComponent({ showLoadingSpinner = true, ...props }: Props) {
+export function VmComponent(props: Props) {
   const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
 
   if (!EthersProvider || !redirectMapStore.hasResolved) {
-    if (!showLoadingSpinner) return null;
-    return <Spinner />;
+    return null;
   }
 
   return (

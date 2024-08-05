@@ -1,8 +1,8 @@
 import { isPassKeyAvailable } from '@near-js/biometric-ed25519';
+import { openToast } from '@near-pagoda/ui';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { openToast } from '@/components/lib/Toast';
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
 import { NotificationsAlert } from '@/components/NotificationsAlert';
 import { useSidebarLayoutEnabled } from '@/components/sidebar-navigation/hooks';
@@ -44,7 +44,7 @@ const HomePage: NextPageWithLayout = () => {
         if (!passKeyAvailable) {
           openToast({
             title: 'Limited Functionality',
-            type: 'WARNING',
+            type: 'error',
             description: 'To access all account features, try using a browser that supports passkeys',
             duration: 5000,
           });
