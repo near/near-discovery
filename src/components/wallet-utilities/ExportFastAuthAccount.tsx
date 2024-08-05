@@ -10,7 +10,7 @@ import {
   Text,
   Tooltip,
 } from '@near-pagoda/ui';
-import { Copy } from '@phosphor-icons/react';
+import { Copy, Eye, EyeSlash } from '@phosphor-icons/react';
 import { KeyPair } from 'near-api-js';
 import { useEffect, useState } from 'react';
 
@@ -21,6 +21,7 @@ export const ExportFastAuthAccount = () => {
   const [generatingKey, setGeneratingKey] = useState(false);
   const [secretKey, setSecretKey] = useState('');
   const [fastAuthAccountSignedIn, setFastAuthAccountSignedIn] = useState(false);
+  const [privateKeyVisible, setPrivateKeyVisible] = useState(false);
   const accountId = useAuthStore((store) => store.accountId);
   const wallet = useAuthStore((store) => store.wallet);
   const near = useVmStore((store) => store.near);
@@ -99,6 +100,16 @@ export const ExportFastAuthAccount = () => {
                 Your Generated Key
               </Text>
 
+              <Tooltip content={privateKeyVisible ? 'Hide' : 'Show'}>
+                <Button
+                  label={privateKeyVisible ? 'Hide Key' : 'Show Key'}
+                  icon={privateKeyVisible ? <Eye /> : <EyeSlash />}
+                  fill="outline"
+                  size="small"
+                  onClick={() => setPrivateKeyVisible((prev) => !prev)}
+                />
+              </Tooltip>
+
               <Tooltip content="Copy Key">
                 <Button
                   label="Copy Key"
@@ -110,7 +121,15 @@ export const ExportFastAuthAccount = () => {
               </Tooltip>
             </Flex>
 
-            <Text size="text-xs" style={{ fontFamily: 'monospace' }} color="sand12">
+            <Text
+              size="text-xs"
+              style={{
+                fontFamily: 'monospace',
+                filter: privateKeyVisible ? 'none' : 'blur(4px)',
+                userSelect: privateKeyVisible ? 'unset' : 'none',
+              }}
+              color="sand12"
+            >
               {secretKey}
             </Text>
 
