@@ -54,6 +54,7 @@ import {
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 import { useNavigationStore } from '../sidebar-navigation/store';
+import { useCookieStore } from '@/stores/cookieData';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
@@ -73,6 +74,7 @@ export default function VmInitializer() {
   const idosSDK = useIdosStore((state) => state.idOS);
   const resetNavigation = useNavigationStore((store) => store.reset);
   const router = useRouter();
+  const setCookieData = useCookieStore((state) => state.set);
 
   useEffect(() => {
     initNear &&
@@ -162,6 +164,7 @@ export default function VmInitializer() {
           AnalyticsCookieConsent: ({ all, onlyRequired }: { all: boolean; onlyRequired: boolean }) => {
             localStorage.setItem('cookiesAcknowledged', all ? cookiePreferences.all : cookiePreferences.onlyRequired);
             optOut(onlyRequired);
+            setCookieData({ cookieData: true });
             return <></>;
           },
         },

@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 
-import { useCookiePreferences } from '@/hooks/useCookiePreferences';
 import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
 import { useResearchWizardStore } from '@/stores/researchWizard';
 import { recordEventWithProps } from '@/utils/analytics';
 
 import { StepLayout } from './StepLayout';
+import { useCookieStore } from '@/stores/cookieData';
 
 const MobileWrapper = styled.div`
   width: 276px;
@@ -60,7 +60,7 @@ export const ResearchFormWizard = () => {
   const currentStepIndex = useResearchWizardStore((state) => state.currentStepIndex);
   const formSteps = useResearchWizardStore((state) => state.formSteps);
   const currentStepSubmission = useResearchWizardStore((state) => state.currentStepSubmission);
-  const cookieData = useCookiePreferences();
+  const cookieData = useCookieStore((state) => state.cookieData);
   const { showMobileResearchForm, setShowMobileResearchForm, setIsResearchFormDismissed } = useResearchWizardEvents();
   const [researchEventSent, setResearchEventSent] = useState(false);
   const [currentStep, setCurrentStep] = useState<JSX.Element>(formSteps[currentStepIndex].component());
