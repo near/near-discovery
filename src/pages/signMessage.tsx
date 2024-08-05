@@ -1,8 +1,8 @@
+import { Button } from '@near-pagoda/ui';
+import { Text } from '@near-pagoda/ui';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { Button } from '@/components/lib/Button';
-import { Text } from '@/components/lib/Text';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useAuthStore } from '@/stores/auth';
@@ -21,7 +21,7 @@ const Form = styled.form`
   gap: 1rem;
 `;
 
-const InputGrid = styled.div`
+const InputGrid = styled.label`
   display: grid;
   grid-template-columns: max-content 1fr;
   align-items: center;
@@ -44,13 +44,13 @@ const SignMessagePage: NextPageWithLayout = () => {
 
   return (
     <Container>
-      <Text as="h1" font="text-3xl">
+      <Text as="h1" size="text-3xl">
         Test sign message
       </Text>
 
       <Form onSubmit={onSubmit}>
         <InputGrid>
-          <Text as="label" font="text-s" weight="500" htmlFor="msg">
+          <Text as="span" size="text-s" weight="500">
             Message to sign
           </Text>
 
