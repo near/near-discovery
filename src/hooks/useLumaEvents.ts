@@ -1,19 +1,11 @@
 import { useEffect, useState } from 'react';
 
 import { fetchLumaEvents } from '@/utils/events';
-
-export type MappedEvent = {
-  date: string;
-  description: string;
-  location: any;
-  thumbnail: string;
-  title: string;
-  url: string;
-};
+import type { FormatedEvent } from '@/utils/types';
 
 export function useLumaEvents(calendarApiIds: string[], limit = 3) {
   const aiEventsUrl = 'https://lu.ma';
-  const [events, setEvents] = useState<MappedEvent[]>([]);
+  const [lumaEvents, setLumaEvents] = useState<FormatedEvent[]>([]);
   const [hasMoreEvents, setHasMoreEvents] = useState(false);
 
   useEffect(() => {
@@ -27,18 +19,18 @@ export function useLumaEvents(calendarApiIds: string[], limit = 3) {
           .sort((a, b) => new Date(a.event.start_at).getTime() - new Date(b.event.start_at).getTime())
           .slice(0, limit);
 
-        const mappedEvents = sortedEvents.map((item) => {
+        const formattedEvents = sortedEvents.map((item) => {
           return {
-            date: formatLumaDate(item.event.start_at, item.event.end_at),
-            description: item.event.description,
-            location: formatLocation(item.event.geo_address_json ?? item.event.geo_address_info),
+            id: item.event.api_id,
+            start: item.event.start_at,
+            location: formatLocation(item.event.geo_address_json ?? item.event.geo_address_info ?? ''),
             thumbnail: item.event.cover_url,
             title: item.event.name,
             url: `${aiEventsUrl}/${item.event.url}`,
           };
         });
 
-        setEvents(mappedEvents);
+        setLumaEvents(formattedEvents);
         setHasMoreEvents(combinedEvents.length > limit);
       } catch (error) {
         console.error(error);
@@ -48,26 +40,6 @@ export function useLumaEvents(calendarApiIds: string[], limit = 3) {
     loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [JSON.stringify(calendarApiIds), limit]);
-
-  const formatLumaDate = (startAt: string, endAt: string) => {
-    // Example Format: "Jul 21 - Jul 23, 2023"
-
-    const startAtDate = new Date(startAt);
-    const endAtDate = new Date(endAt);
-
-    const startAtDateFormatted = startAtDate.toLocaleDateString(undefined, {
-      month: 'short',
-      day: 'numeric',
-    });
-
-    const endAtDateFormatted = endAtDate.toLocaleDateString(undefined, {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric',
-    });
-
-    return `${startAtDateFormatted} - ${endAtDateFormatted}`;
-  };
 
   const formatLocation = (location: any) => {
     if (location.city || location.city_state) {
@@ -80,7 +52,7 @@ export function useLumaEvents(calendarApiIds: string[], limit = 3) {
   };
 
   return {
-    events,
+    lumaEvents,
     hasMoreEvents,
   };
 }

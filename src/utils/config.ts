@@ -68,6 +68,8 @@ export const lumaApiUrl = process.env.NEXT_PUBLIC_LUMA_API_URL ?? '';
 export const lumaNearCalendarId = process.env.NEXT_PUBLIC_LUMA_NEAR_CALENDAR_ID ?? '';
 export const lumaNearAICalendarId = process.env.NEXT_PUBLIC_LUMA_NEAR_AI_CALENDAR_ID ?? '';
 export const lumaNearHZNCalendarId = process.env.NEXT_PUBLIC_LUMA_NEAR_HZN_CALENDAR_ID ?? '';
+export const lumaDevHubHacksCalendarId = process.env.NEXT_PUBLIC_LUMA_DEVHUB_HACKS_CALENDAR_ID ?? '';
+export const nearTownHallCalendarId = process.env.NEXT_PUBLIC_NEAR_TOWN_HALL_CALENDAR_ID ?? '';
 export const googleCalendarApiKey = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY ?? '';
 export const devhubCommunityCalendarId = process.env.NEXT_PUBLIC_DEVHUB_COMMUNITY_CALENDAR_ID ?? '';
 export const sidebarLayoutEnabled = process.env.NEXT_PUBLIC_SIDEBAR_LAYOUT === 'true';

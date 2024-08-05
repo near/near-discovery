@@ -104,36 +104,24 @@ export type GoogleCalendarResponse = {
 };
 
 export type GoogleCalendarEvent = {
-  kind: string;
-  etag: string;
   id: string;
-  status: string;
   htmlLink: string;
-  created: string;
-  updated: string;
   summary: string;
   description: string;
-  creator: {
-    email: string;
-  };
-  organizer: {
-    email: string;
-    displayName: string;
-    self: boolean;
-  };
   start: {
     dateTime: string;
     timeZone?: string;
   };
-  end: {
-    dateTime: string;
-    timeZone?: string;
-  };
-  recurrence: string[];
-  iCalUID: string;
-  sequence: number;
-  eventType: string;
   attachments?: any[];
+};
+
+export type FormatedEvent = {
+  id: string;
+  url: string;
+  title: string;
+  start: string;
+  thumbnail: string;
+  location?: string;
 };
 
 export type GoogleEventsListData = {

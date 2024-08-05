@@ -1,72 +1,40 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import { fetchGoogleCalendarEvents } from '@/utils/events';
-import type { GoogleCalendarEvent } from '@/utils/types';
+import type { FormatedEvent } from '@/utils/types';
 
 export function useGoogleEvents(calendarId: string, limit = 9) {
-  const [googleEvents, setGoogleEvents] = useState<GoogleCalendarEvent[]>([]);
-  const [nextPageToken, setNextPageToken] = useState('');
-  const [lastElements, setLastElements] = useState<GoogleCalendarEvent[]>([]);
+  const [googleEvents, setGoogleEvents] = useState<FormatedEvent[]>([]);
 
   const startFrom = useMemo(() => {
     return new Date().toISOString();
   }, []);
 
-  const fetchData = async () => {
+  const loadData = async () => {
     try {
-      const { items, nextPageToken: newToken } = await fetchGoogleCalendarEvents(
-        calendarId,
-        startFrom,
-        limit,
-        nextPageToken,
-      );
+      const { items } = await fetchGoogleCalendarEvents(calendarId, startFrom, limit, '');
 
-      const mappedEvents = items.map((event) => {
+      const formattedEvents = items.map((event) => {
         return {
-          ...event,
-          start: {
-            dateTime: formatDevHubEventsDate(event.start.dateTime),
-          },
+          id: event.id,
+          title: event.summary,
+          start: event.start.dateTime,
+          thumbnail: `https://lh3.googleusercontent.com/d/${event.attachments?.[0]?.fileId}=w1000`,
+          location: '',
+          url: event.htmlLink,
         };
       });
 
-      setNextPageToken(newToken);
-      if (googleEvents.length === 0 && lastElements.length === 0) {
-        setLastElements(mappedEvents);
-      } else {
-        setGoogleEvents((events) => [...events, ...lastElements]);
-        setLastElements(mappedEvents);
-      }
+      setGoogleEvents(formattedEvents);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchData();
+    loadData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  function formatDevHubEventsDate(dateString: string) {
-    // eg. Thu, 15 August 4:00 PM UTC
-    const date = new Date(dateString);
-
-    const formattedDate = date.toLocaleDateString(undefined, {
-      weekday: 'short',
-      month: 'long',
-      day: 'numeric',
-    });
-
-    let hours = date.getUTCHours();
-    const minutes = date.getUTCMinutes();
-    const period = hours >= 12 ? 'PM' : 'AM';
-
-    hours = hours % 12 || 12; // Convert 0 hours to 12 and 13+ hours to 1-12
-
-    const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
-
-    return `${formattedDate} ${formattedTime} UTC`;
-  }
-
-  return { googleEvents, lastElements, fetchData };
+  return { googleEvents };
 }

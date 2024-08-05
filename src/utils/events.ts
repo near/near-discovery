@@ -1,5 +1,11 @@
 import { googleCalendarApiKey, lumaApiUrl } from './config';
-import type { GoogleCalendarEvent, GoogleEventsListData, LumaEventItem, LumaEventsListData } from './types';
+import type {
+  FormatedEvent,
+  GoogleCalendarEvent,
+  GoogleEventsListData,
+  LumaEventItem,
+  LumaEventsListData,
+} from './types';
 
 export const fetchLumaEvents = async (
   calendarApiId: string,
@@ -19,7 +25,7 @@ export const fetchLumaEvents = async (
   });
 
   if (!res.ok) {
-    throw new Error('Failed to fetch Luma Calendar data');
+    throw new Error('Failed to fetch Luma Calendar Data');
   }
 
   const data = (await res.json()) as {
@@ -42,7 +48,7 @@ export const fetchGoogleCalendarEvents = async (
   );
 
   if (!res.ok) {
-    throw new Error('Failed to fetch Google Calendar data');
+    throw new Error('Failed to fetch Google Calendar Data');
   }
 
   const data = (await res.json()) as {
@@ -51,4 +57,35 @@ export const fetchGoogleCalendarEvents = async (
   };
 
   return { items: data.items, nextPageToken: data.nextPageToken };
+};
+
+export const formatEventDateTime = (dateString: string) => {
+  // eg. Thu, 15 August 4:00 PM UTC
+  const date = new Date(dateString);
+
+  const formattedDate = date.toLocaleDateString(undefined, {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  let hours = date.getUTCHours();
+  const minutes = date.getUTCMinutes();
+  const period = hours >= 12 ? 'PM' : 'AM';
+
+  hours = hours % 12 || 12;
+
+  const formattedTime = `${hours}:${minutes.toString().padStart(2, '0')} ${period}`;
+
+  return `${formattedDate} ${formattedTime} UTC`;
+};
+
+export const sortEventsByDate = (events: FormatedEvent[]) => {
+  return events.sort((a, b) => new Date(a.start).getTime() - new Date(b.start).getTime());
+};
+
+export const formatEvents = (events: FormatedEvent[]) => {
+  return events.map((event) => {
+    return { ...event, start: formatEventDateTime(event.start) };
+  });
 };
