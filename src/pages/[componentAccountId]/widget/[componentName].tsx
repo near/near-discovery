@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
-import { RootContentContainer } from '@/components/lib/Container';
 import { MetaTags } from '@/components/MetaTags';
+import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';

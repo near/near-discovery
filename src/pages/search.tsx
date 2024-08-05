@@ -1,8 +1,8 @@
+import { Input } from '@near-pagoda/ui';
 import { useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { Input } from '@/components/lib/Input';
 import Pagination from '@/components/Pagination';
 import { AppsResults } from '@/components/sidebar-navigation/Search/AppsResults';
 import { ComponentsResults } from '@/components/sidebar-navigation/Search/ComponentsResults';
