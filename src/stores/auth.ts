@@ -1,3 +1,4 @@
+import type { Wallet } from '@near-wallet-selector/core';
 import type Big from 'big.js';
 import { create } from 'zustand';
 
@@ -11,10 +12,11 @@ type AuthState = {
   requestSignMessage: (data: string) => void;
   signedIn: boolean;
   vmNear: any;
+  wallet: Wallet | null;
 };
 
 type AuthStore = AuthState & {
-  set: (state: AuthState) => void;
+  set: (state: Omit<AuthState, 'wallet'>) => void;
 };
 
 export const useAuthStore = create<AuthStore>((set) => ({
@@ -26,6 +28,18 @@ export const useAuthStore = create<AuthStore>((set) => ({
   requestSignInWithWallet: () => undefined,
   requestSignMessage: () => undefined,
   signedIn: false,
-  set: (state) => set((previousState) => ({ ...previousState, ...state })),
   vmNear: null,
+  wallet: null,
+
+  set: async (state) => {
+    let wallet: Wallet | null = null;
+
+    try {
+      wallet = state.vmNear && state.accountId ? await (await state.vmNear.selector).wallet() : null;
+    } catch (error) {
+      console.error(error);
+    }
+
+    set((previousState) => ({ ...previousState, ...state, wallet }));
+  },
 }));

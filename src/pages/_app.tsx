@@ -1,10 +1,13 @@
-import '@/styles/theme.css';
 import '@/styles/globals.css';
+import '@near-pagoda/ui/globals.css';
+import '@near-pagoda/ui/theme.css';
+import '@near-pagoda/ui/lib.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
+import { openToast, Toaster } from '@near-pagoda/ui';
 import Gleap from 'gleap';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
@@ -14,7 +17,6 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
-import { openToast, Toaster } from '@/components/lib/Toast';
 import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
@@ -56,7 +58,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       recordHandledError({ description: msg || 'unknown error during Fast Authentication' });
       openToast({
         title: 'An Error Occurred During Fast Authentication',
-        type: 'WARNING',
+        type: 'error',
         description: msg || '',
         duration: 5000,
       });

@@ -13,8 +13,7 @@ const nextConfig = {
       },
       {
         source: '/stakewars',
-        destination:
-          'https://github.com/near/stakewars-iv',
+        destination: 'https://github.com/near/stakewars-iv',
         permanent: false,
       },
       {
@@ -25,6 +24,11 @@ const nextConfig = {
       {
         source: '/blog/:path*',
         destination: 'https://near.org/blog/:path*',
+        permanent: false,
+      },
+      {
+        source: '/ecosystem/get-funding',
+        destination: 'https://near.org/ecosystem/get-funding',
         permanent: false,
       },
       {
@@ -62,10 +66,11 @@ const nextConfig = {
         destination: '/data-availability',
         permanent: true,
       },
-      { //TODO - remove in Q2 2024
+      {
+        //TODO - remove in Q2 2024
         source: '/files/:slug',
         destination: 'https://discovery-domain.org/papers/:slug.pdf',
-        permanent: false, 
+        permanent: false,
       },
       {
         source: '/papers/:slug',
@@ -86,8 +91,7 @@ const nextConfig = {
         source: '/signin',
         destination: '/applications?requestAuth=1',
         permanent: false,
-      }
-      ,
+      },
       {
         source: '/signup',
         destination: '/applications?requestAuth=1&createAccount=1',
@@ -101,8 +105,8 @@ const nextConfig = {
       {
         source: '/blog/getting-started-with-the-near-wallet',
         destination: 'https://wallet.near.org',
-        permanent: true
-      }
+        permanent: true,
+      },
     ];
   },
   rewrites: async () => [
@@ -113,17 +117,19 @@ const nextConfig = {
     {
       source: '/blog/:path*',
       destination: '/blog/:path*/index.html',
-    }
+    },
   ],
   headers: async () => [
     {
-        source: '/:path*',
-        headers: [{
+      source: '/:path*',
+      headers: [
+        {
           key: 'Referrer-Policy',
-          value: 'strict-origin-when-cross-origin'
-        }]
-      }
-  ]
+          value: 'strict-origin-when-cross-origin',
+        },
+      ],
+    },
+  ],
 };
 
 const withPWA = require('next-pwa')({
@@ -133,10 +139,10 @@ const withPWA = require('next-pwa')({
   importScripts: ['/pwa.js'],
   cacheStartUrl: false,
   cacheOnFrontEndNav: true,
-  skipWaiting: false
-})
+  skipWaiting: false,
+});
 const { loadEnvConfig } = require('@next/env');
-loadEnvConfig(".")
+loadEnvConfig('.');
 module.exports = withPWA(nextConfig);
 
 // Injected content via Sentry wizard below

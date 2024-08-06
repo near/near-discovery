@@ -1,3 +1,4 @@
+import { PlaceholderCard } from '@near-pagoda/ui';
 import ls from 'local-storage';
 import { useRouter } from 'next/router';
 import prettier from 'prettier';
@@ -10,7 +11,6 @@ import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
 import { recordHandledError } from '@/utils/analytics';
 
-import { Spinner } from '../lib/Spinner';
 import BannerOboarding from './Banners/BannerOboarding';
 import VsCodeBanner from './Banners/VsCodeBanner';
 import MainWrapper from './css/MainWrapper';
@@ -505,7 +505,7 @@ export const Sandbox = ({ onboarding = false }) => {
     firstLoad();
   }, [cache, firstLoad, near]);
 
-  if (!shouldRender) return <Spinner />;
+  if (!shouldRender) return <PlaceholderCard />;
 
   return (
     <MainWrapper>
