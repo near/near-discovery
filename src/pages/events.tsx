@@ -1,10 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button } from '@near-pagoda/ui';
-import { Text } from '@near-pagoda/ui';
-import { Grid } from '@near-pagoda/ui';
-import { Container } from '@near-pagoda/ui';
-import { Flex } from '@near-pagoda/ui';
-import { Section } from '@near-pagoda/ui';
+import { Button, Container, Flex, Grid, Section, Text } from '@near-pagoda/ui';
 import Link from 'next/link';
 import styled, { keyframes } from 'styled-components';
 
@@ -147,12 +142,12 @@ export const EventImage = styled.div`
 `;
 
 const EventsPage: NextPageWithLayout = () => {
-  const { highlightedEvent, communityEvents, fetchMore, lastElements, hasMoreEvents } = useEvents();
+  const { highlightedEvent, communityEvents, fetchMore, lastElements, hasMoreEvents, hackatons } = useEvents();
 
   return (
     <div>
       {highlightedEvent && (
-        <Section style={{ border: 'none' }}>
+        <Section style={{ border: 'none', padding: '24px' }}>
           <Container>
             <Flex style={{ padding: '24px 0' }}>
               <Text size="text-3xl" weight="500">
@@ -171,13 +166,13 @@ const EventsPage: NextPageWithLayout = () => {
                   </Text>
 
                   <Flex align="center" style={{ minWidth: 0 }}>
-                    <Flex align="center">
+                    <Flex align="center" gap="s">
                       <i className="ph-bold ph-calendar-blank" />
                       <Text color="sand11" size="text-s" style={{ whiteSpace: 'nowrap' }}>
                         {formatEventDateTime(highlightedEvent.start)}
                       </Text>
                     </Flex>
-                    <Flex align="center" style={{ minWidth: 0 }}>
+                    <Flex align="center" gap="s" style={{ minWidth: 0 }}>
                       <i className="ph-bold ph-map-pin-line" />
                       <Text
                         color="sand11"
@@ -200,8 +195,36 @@ const EventsPage: NextPageWithLayout = () => {
         </Section>
       )}
 
-      <Section style={{ padding: '42px 24px' }}>
+      <Section style={{ padding: '24px 24px' }}>
         <Container>
+          <Flex gap="xl" align="center" justify="space-between">
+            <Text size="text-3xl" weight="500">
+              Hackatons
+            </Text>
+          </Flex>
+
+          <Grid columns="1fr 1fr 1fr" style={{ gap: '32px', padding: '42px 0' }}>
+            {hackatons.map((event) => {
+              return (
+                <CommunityEvent key={event.id} href={event.url} target="_blank" style={{ minWidth: 0 }}>
+                  <EventImage>
+                    <img src={event.thumbnail} alt={event.title} />
+                  </EventImage>
+                  <Text color="sand12" size="text-l" weight="500" as="h3">
+                    {event.title}
+                  </Text>
+                  <Flex align="center" style={{ minWidth: 0, gap: '32px' }}>
+                    <Flex align="center" gap="s">
+                      <i className="ph-bold ph-calendar-blank" />
+                      <Text color="sand11" size="text-s" style={{ whiteSpace: 'nowrap' }}>
+                        {formatEventDateTime(event.start)}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                </CommunityEvent>
+              );
+            })}
+          </Grid>
           <Flex gap="xl" align="center" justify="space-between">
             <Text size="text-3xl" weight="500">
               Community Events
@@ -219,7 +242,7 @@ const EventsPage: NextPageWithLayout = () => {
                     {event.title}
                   </Text>
                   <Flex align="center" style={{ minWidth: 0, gap: '32px' }}>
-                    <Flex align="center">
+                    <Flex align="center" gap="s">
                       <i className="ph-bold ph-calendar-blank" />
                       <Text color="sand11" size="text-s" style={{ whiteSpace: 'nowrap' }}>
                         {event.start}
