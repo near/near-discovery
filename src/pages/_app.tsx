@@ -1,3 +1,4 @@
+// src/pages/_app.tsx
 import '@/styles/globals.css';
 import '@near-pagoda/ui/globals.css';
 import '@near-pagoda/ui/theme.css';
@@ -24,6 +25,7 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
+import { initPostHog, PostHogTrackingProvider } from '@/utils/analytics-posthog';
 import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -40,6 +42,8 @@ type AppPropsWithLayout = AppProps & {
 if (typeof window !== 'undefined') {
   if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
 }
+
+initPostHog();
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
@@ -117,7 +121,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
       <VmInitializer />
 
-      {getLayout(<Component {...pageProps} />)}
+      <PostHogTrackingProvider>{getLayout(<Component {...pageProps} />)}</PostHogTrackingProvider>
 
       <Toaster />
 
