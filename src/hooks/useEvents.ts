@@ -13,13 +13,15 @@ import type { FormatedEvent } from '@/utils/types';
 
 import { useGoogleEvents } from './useGoogleEvents';
 import { useLumaEvents } from './useLumaEvents';
+
 const LIMIT = 6;
 
 export function useEvents() {
   const { lumaEvents: mainEvents } = useLumaEvents([lumaNearCalendarId, lumaDevHubHacksCalendarId], 1);
+  const { lumaEvents: hackatons } = useLumaEvents([lumaDevHubHacksCalendarId], 12);
   const { lumaEvents: otherLumaEvents } = useLumaEvents(
     [lumaNearAICalendarId, lumaNearHZNCalendarId, nearTownHallCalendarId],
-    10,
+    12,
   );
   const { googleEvents } = useGoogleEvents(devhubCommunityCalendarId, 100);
 
@@ -57,5 +59,6 @@ export function useEvents() {
     hasMoreEvents,
     fetchMore,
     lastElements,
+    hackatons,
   };
 }
