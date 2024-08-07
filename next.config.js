@@ -3,6 +3,9 @@ const nextConfig = {
   poweredByHeader: false,
   compiler: { styledComponents: true },
   reactStrictMode: true,
+  experimental: {
+    optimizePackageImports: ['@phosphor-icons/react'],
+  },
   redirects: async () => {
     return [
       {
