@@ -1,5 +1,5 @@
 import { Button } from '@near-pagoda/ui';
-import { MagnifyingGlass } from '@phosphor-icons/react/dist/ssr';
+import { MagnifyingGlass } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
