@@ -12,7 +12,12 @@ const HighlightedEvent = styled.div`
   display: flex;
   background: linear-gradient(264deg, #cfccf5 0%, #a39cec 99.35%);
   border-radius: 24px;
-  padding: 55px 24px 55px 48px;
+  padding: 55px 48px;
+
+  @media (max-width: 900px) {
+    padding: 0;
+    background: #fff;
+  }
 `;
 
 const CoverCard = styled.a`
@@ -20,7 +25,6 @@ const CoverCard = styled.a`
   gap: 24px;
   grid-template-columns: 2fr 1fr;
   align-items: center;
-  border: 4px solid transparent;
   cursor: pointer;
   transition: all 200ms;
   text-decoration: none;
@@ -64,6 +68,10 @@ const CoverCardImageWrapper = styled.div`
     object-fit: cover;
     transition: all 200ms;
     filter: brightness(0.9);
+  }
+
+  @media (max-width: 900px) {
+    height: 100%;
   }
 `;
 
@@ -165,13 +173,14 @@ const EventsPage: NextPageWithLayout = () => {
                     {highlightedEvent.title}
                   </Text>
 
-                  <Flex align="center" style={{ minWidth: 0 }}>
+                  <Flex align="center" stack="phone" gapPhone="s" style={{ minWidth: 0 }}>
                     <Flex align="center" gap="s">
                       <i className="ph-bold ph-calendar-blank" />
                       <Text color="sand11" size="text-s" style={{ whiteSpace: 'nowrap' }}>
                         {formatEventDateTime(highlightedEvent.start)}
                       </Text>
                     </Flex>
+
                     <Flex align="center" gap="s" style={{ minWidth: 0 }}>
                       <i className="ph-bold ph-map-pin-line" />
                       <Text
@@ -203,7 +212,7 @@ const EventsPage: NextPageWithLayout = () => {
             </Text>
           </Flex>
 
-          <Grid columns="1fr 1fr 1fr" style={{ gap: '32px', padding: '42px 0' }}>
+          <Grid columns="1fr 1fr 1fr" columnsPhone="1" style={{ gap: '32px', padding: '42px 0' }}>
             {hackatons.map((event) => {
               return (
                 <CommunityEvent key={event.id} href={event.url} target="_blank" style={{ minWidth: 0 }}>
@@ -231,7 +240,7 @@ const EventsPage: NextPageWithLayout = () => {
             </Text>
           </Flex>
 
-          <Grid columns="1fr 1fr 1fr" style={{ gap: '32px', padding: '42px 0' }}>
+          <Grid columns="1fr 1fr 1fr" columnsPhone="1" style={{ gap: '32px', padding: '42px 0' }}>
             {communityEvents.map((event) => {
               return (
                 <CommunityEvent key={event.id} href={event.url} target="_blank" style={{ minWidth: 0 }}>
