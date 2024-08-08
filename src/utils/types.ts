@@ -89,3 +89,62 @@ export type NotificationLocalStorageFull = NotificationLocalStorage & Notificati
 //   walletUrl: string;
 //   helperUrl: string;
 // };
+
+export type GoogleCalendarResponse = {
+  kind: string;
+  etag: string;
+  summary: string;
+  description: string;
+  updated: string;
+  timeZone: string;
+  accessRole: string;
+  defaultReminders: any[];
+  nextPageToken: string;
+  items: GoogleEventItem[];
+};
+
+export type GoogleEventItem = {
+  id: string;
+  htmlLink: string;
+  summary: string;
+  description: string;
+  start: {
+    dateTime: string;
+    timeZone?: string;
+  };
+  attachments?: any[];
+};
+
+export type GoogleEventsListData = {
+  items: GoogleEventItem[];
+  nextPageToken: string;
+};
+
+export type LumaEventItem = {
+  api_id: string;
+  event: {
+    api_id: string;
+    name: string;
+    description: string;
+    start_at: string;
+    end_at: string;
+    cover_url: string;
+    url: string;
+    geo_address_json: any;
+    geo_address_info?: any;
+  };
+};
+
+export type LumaEventsListData = {
+  entries: LumaEventItem[];
+  hasMore: boolean;
+};
+
+export type FormatedEvent = {
+  id: string;
+  url: string;
+  title: string;
+  start: string;
+  thumbnail: string;
+  location?: string;
+};
