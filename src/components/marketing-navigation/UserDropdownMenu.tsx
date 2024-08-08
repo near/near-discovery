@@ -1,13 +1,14 @@
 import { Dropdown, SvgIcon } from '@near-pagoda/ui';
 import { Bank, Gear, SignOut, User, Wallet } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
-import { useCallback } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
+
+import { NftImage } from '../NTFImage';
 
 const Wrapper = styled.div`
   flex-grow: 1;
@@ -45,11 +46,6 @@ const Wrapper = styled.div`
   .d-inline-block {
     width: unset !important;
     height: unset !important;
-    img {
-      border-radius: 50% !important;
-      width: 38px !important;
-      height: 38px !important;
-    }
   }
 
   i {
@@ -88,13 +84,6 @@ const Wrapper = styled.div`
       background: var(--sand6);
       padding: 1px;
     }
-
-    .d-inline-block {
-      img {
-        width: 43px !important;
-        height: 43px !important;
-      }
-    }
   }
 `;
 
@@ -115,6 +104,19 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
     await near.contract.storage_withdraw({}, undefined, '1');
   }, [near]);
 
+  const [profile, setProfile] = useState<any>({});
+
+  useEffect(() => {
+    async function getProfile() {
+      const profile = await near.viewCall('social.near', 'get', { keys: [`${accountId}/profile/**`] });
+      setProfile(profile[accountId].profile);
+    }
+
+    if (!near || !accountId) return;
+
+    getProfile();
+  }, [near, accountId]);
+
   return (
     <Wrapper>
       <Dropdown.Root>
@@ -124,17 +126,9 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
           </Dropdown.Trigger>
         ) : (
           <Dropdown.Trigger>
-            <VmComponent
-              src={components.profileImage}
-              props={{
-                accountId,
-                className: 'd-inline-block',
-              }}
-            />
+            <NftImage nft={profile.image?.nft} ipfs_cid={profile.image?.ipfs_cid} alt={profile.name || accountId} />
             <div className="profile-info">
-              <div className="profile-name">
-                <VmComponent src={components.profileName} />
-              </div>
+              <div className="profile-name">{profile.name}</div>
               <div className="profile-username">{accountId}</div>
             </div>
             <i className="ph ph-caret-right"></i>
