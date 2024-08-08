@@ -28,6 +28,8 @@ import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import { useResearchWizardStore } from '@/stores/researchWizard';
+import { useCookieStore } from '@/stores/cookieData';
 
 const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
   ssr: false,
@@ -46,6 +48,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
+  const checkCookieData = useCookieStore((state) => state.checkCookieData);
+  const cookieData = useCookieStore((state) => state.cookieData);
+  const isResearchFormDismissed = useResearchWizardStore((state) => state.isResearchFormDismissed);
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
@@ -101,6 +106,18 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       clearInterval(interval);
     };
   }, []);
+
+  useEffect(() => {
+    if (!cookieData || !isResearchFormDismissed) {
+      Gleap.showFeedbackButton(false);
+    } else {
+      Gleap.showFeedbackButton(true);
+    }
+  }, [isResearchFormDismissed, cookieData, gleapSdkToken]);
+
+  useEffect(() => {
+    checkCookieData();
+  }, [checkCookieData]);
 
   return (
     <>
