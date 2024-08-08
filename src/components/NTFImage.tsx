@@ -53,5 +53,5 @@ export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt }) => {
     }
   }, [ipfs_cid, fetchNftData]);
 
-  return <RoundedImage width={36} height={36} src={imageUrl} alt={alt} />;
+  return <RoundedImage width={43} height={43} src={imageUrl} alt={alt} />;
 };
