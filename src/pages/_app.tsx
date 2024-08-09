@@ -23,6 +23,8 @@ import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
+import { useCookieStore } from '@/stores/cookieData';
+import { useResearchWizardStore } from '@/stores/researchWizard';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
 import { gleapSdkToken, networkId, signInContractId } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
@@ -44,6 +46,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
+  const checkCookieData = useCookieStore((state) => state.checkCookieData);
+  const cookieData = useCookieStore((state) => state.cookieData);
+  const isResearchFormDismissed = useResearchWizardStore((state) => state.isResearchFormDismissed);
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const [signedAccountId, setSignedAccountId] = useState('');
@@ -119,6 +124,17 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       window.removeEventListener('message', handleShowWalletSelector, false);
     };
   }, []);
+  useEffect(() => {
+    if (!cookieData || !isResearchFormDismissed) {
+      Gleap.showFeedbackButton(false);
+    } else {
+      Gleap.showFeedbackButton(true);
+    }
+  }, [isResearchFormDismissed, cookieData]);
+
+  useEffect(() => {
+    checkCookieData();
+  }, [checkCookieData]);
 
   return (
     <NearContext.Provider value={{ wallet, signedAccountId }}>
