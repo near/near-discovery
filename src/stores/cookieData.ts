@@ -2,7 +2,6 @@ import { create } from 'zustand';
 
 export type CookieDataState = {
   cookieData: boolean;
-  set: (state: Partial<CookieDataState>) => void;
   checkCookieData: () => void;
 };
 
