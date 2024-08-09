@@ -1,10 +1,10 @@
 import { Button, Flex, Form, handleClientError, Input, openToast } from '@near-pagoda/ui';
 import { utils } from 'near-api-js';
 import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
-import { useContext } from 'react';
 import { NearContext } from '../WalletSelector';
 
 type FormData = {
@@ -27,9 +27,6 @@ function displayBalance(balance: number) {
 export const SendNear = () => {
   const form = useForm<FormData>();
   const { wallet, signedAccountId } = useContext(NearContext);
-  // const accountId = useAuthStore((store) => store.accountId);
-  // const wallet = useAuthStore((store) => store.wallet);
-  // const near = useAuthStore((store) => store.vmNear);
   const [currentNearAmount, setCurrentNearAmount] = useState(0);
 
   useEffect(() => {
@@ -54,7 +51,7 @@ export const SendNear = () => {
       const amount = utils.format.parseNearAmount(data.sendNearAmount.toString());
       if (!amount) throw new Error('Failed to parse amount');
 
-      const result = await wallet.signAndSendTransaction({
+      const sendNear = {
         actions: [
           {
             params: {
@@ -65,7 +62,8 @@ export const SendNear = () => {
         ],
         signerId: signedAccountId,
         receiverId: data.sendToAccountId,
-      });
+      };
+      const result: any = await wallet.signAndSendTransactions({ transactions: [sendNear] });
 
       setCurrentNearAmount((value) => value - (data.sendNearAmount || 0));
       form.reset();

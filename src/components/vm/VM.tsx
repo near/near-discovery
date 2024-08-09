@@ -1,14 +1,16 @@
 import { isValidAttribute } from 'dompurify';
 import { mapValues } from 'lodash';
-import { EthersProviderContext, useInitNear, Widget, utils, useAccount } from 'near-social-vm';
+import { EthersProviderContext, useAccount, useInitNear, utils, Widget } from 'near-social-vm';
 import Link from 'next/link';
-import React, { useEffect, useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
+import { useAuthStore } from '@/stores/auth';
 import { cookiePreferences, optOut, recordHandledError, recordWalletConnect } from '@/utils/analytics';
 import { commitModalBypassAuthorIds, commitModalBypassSources, isLocalEnvironment, networkId } from '@/utils/config';
+
 import { NearContext } from '../WalletSelector';
-import { useAuthStore } from '@/stores/auth';
 
 export default function Component(props: any) {
   const ethersContext = useEthersProviderContext();
@@ -17,6 +19,7 @@ export default function Component(props: any) {
   const account = useAccount();
   const setAuthStore = useAuthStore((state: any) => state.set);
   const [availableStorage, setAvailableStorage] = useState<bigint | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     wallet &&
@@ -75,7 +78,7 @@ export default function Component(props: any) {
           enableWidgetSrcWithCodeOverride: isLocalEnvironment,
         },
       });
-  }, [wallet, initNear]);
+  }, [wallet, initNear, router.query]);
 
   useEffect(() => {
     setAvailableStorage(
@@ -87,7 +90,7 @@ export default function Component(props: any) {
     setAuthStore({
       availableStorage,
     });
-  }, [availableStorage]);
+  }, [availableStorage, setAuthStore]);
 
   return (
     <div style={{ position: 'relative' }}>

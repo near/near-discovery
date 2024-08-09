@@ -1,13 +1,5 @@
-// near api js
-import { providers, utils } from 'near-api-js';
-
-// wallet selector
-import { distinctUntilChanged, map } from 'rxjs';
-
-import { Context, createContext } from 'react';
-
 import { setupKeypom } from '@keypom/selector';
-import type { WalletSelector, WalletSelectorState } from '@near-wallet-selector/core';
+import type { FinalExecutionOutcome, WalletSelector, WalletSelectorState } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
@@ -20,9 +12,13 @@ import { setupNeth } from '@near-wallet-selector/neth';
 import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
+import { providers, utils } from 'near-api-js';
 import { setupFastAuthWallet } from 'near-fastauth-wallet';
+import type { Context } from 'react';
+import { createContext } from 'react';
+import { distinctUntilChanged, map } from 'rxjs';
 
-import { signInContractId, networkId as defaultNetwork } from '@/utils/config';
+import { networkId as defaultNetwork, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 import type { NetworkId } from '@/utils/types';
 
@@ -119,11 +115,11 @@ export class Wallet {
     selectedWallet.signOut();
   };
 
-  viewMethod = async ({ contractId, method, args = {} }: { contractId: string; method: string; args: object }) => {
+  viewMethod = async ({ contractId, method, args = {} }: { contractId: string; method: string; args?: object }) => {
     const url = `https://rpc.${this.networkId}.near.org`;
     const provider = new providers.JsonRpcProvider({ url });
 
-    const res = await provider.query({
+    const res: any = await provider.query({
       request_type: 'call_function',
       account_id: contractId,
       method_name: method,
@@ -142,9 +138,9 @@ export class Wallet {
   }: {
     contractId: string;
     method: string;
-    args: object;
-    gas: string;
-    deposit: string;
+    args?: object;
+    gas?: string;
+    deposit?: string;
   }) => {
     // Sign a transaction with the "FunctionCall" action
     const selectedWallet = await (await this.selector).wallet();
@@ -163,7 +159,7 @@ export class Wallet {
       ],
     });
 
-    return providers.getTransactionLastResult(outcome);
+    return providers.getTransactionLastResult(outcome as FinalExecutionOutcome);
   };
 
   getTransactionResult = async (txhash: string) => {
@@ -182,14 +178,18 @@ export class Wallet {
     const provider = new providers.JsonRpcProvider({ url: network.nodeUrl });
 
     // Retrieve account state from the network
-    const account = await provider.query({
+    const account: any = await provider.query({
       request_type: 'view_account',
       account_id: accountId,
       finality: 'final',
     });
-
     // return amount on NEAR
-    return account.amount ? utils.format.formatNearAmount(account.amount) : 0;
+    return account.amount ? Number(utils.format.formatNearAmount(account.amount)) : 0;
+  };
+
+  signAndSendTransactions = async ({ transactions }: { transactions: any[] }) => {
+    const selectedWallet = await (await this.selector).wallet();
+    return selectedWallet.signAndSendTransactions({ transactions });
   };
 }
 

@@ -14,22 +14,20 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
+import { useState } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
+import { NearContext, Wallet } from '@/components/WalletSelector';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
-import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
+import { gleapSdkToken, networkId, signInContractId } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
-import { Wallet, NearContext } from '@/components/WalletSelector';
-
-import { gleapSdkToken, networkId, signInContractId } from '@/utils/config';
-import { useState } from 'react';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -108,7 +106,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   // needed by fast auth to show the wallet selector when the user chooses "use a wallet"
   useEffect(() => {
-    if (!wallet) return;
+    if (!wallet.selector) return;
 
     const handleShowWalletSelector = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
       if (e.data.showWalletSelector) {
@@ -120,7 +118,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     return () => {
       window.removeEventListener('message', handleShowWalletSelector, false);
     };
-  }, [wallet]);
+  }, []);
 
   return (
     <NearContext.Provider value={{ wallet, signedAccountId }}>
