@@ -10,7 +10,6 @@ import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 import { openToast, Toaster } from '@near-pagoda/ui';
 import Gleap from 'gleap';
 import type { AppProps } from 'next/app';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
@@ -24,14 +23,13 @@ import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCom
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
-import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+import { Wallet, NearContext } from '@/components/WalletSelector';
 
-const VmInitializer = dynamic(() => import('../components/vm/VmInitializer'), {
-  ssr: false,
-});
+import { gleapSdkToken, networkId, signInContractId } from '@/utils/config';
+import { useState } from 'react';
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -41,6 +39,8 @@ if (typeof window !== 'undefined') {
   if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
 }
 
+const wallet = new Wallet({ createAccessKeyFor: signInContractId, networkId: networkId });
+
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
@@ -48,7 +48,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useClickTracking();
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const [signedAccountId, setSignedAccountId] = useState('');
+
+  useEffect(() => {
+    wallet.startUp(setSignedAccountId);
+  }, []);
 
   useEffect(() => {
     const referred_from_wallet = document.referrer.indexOf('https://wallet.near.org/') !== -1;
@@ -67,10 +71,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   useEffect(() => {
     // this check is needed to init localStorage for notifications after user signs in
-    if (signedIn) {
+    if (signedAccountId) {
       setNotificationsLocalStorage();
     }
-  }, [signedIn]);
+  }, [signedAccountId]);
 
   useEffect(() => {
     router.events.on('routeChangeStart', () => {
@@ -102,8 +106,24 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     };
   }, []);
 
+  // needed by fast auth to show the wallet selector when the user chooses "use a wallet"
+  useEffect(() => {
+    if (!wallet) return;
+
+    const handleShowWalletSelector = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
+      if (e.data.showWalletSelector) {
+        wallet.signIn();
+      }
+    };
+
+    window.addEventListener('message', handleShowWalletSelector, false);
+    return () => {
+      window.removeEventListener('message', handleShowWalletSelector, false);
+    };
+  }, [wallet]);
+
   return (
-    <>
+    <NearContext.Provider value={{ wallet, signedAccountId }}>
       <Head>
         <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
         <link rel="icon" href="favicon.ico" />
@@ -114,8 +134,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web" async />
 
       <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
-
-      <VmInitializer />
 
       {getLayout(<Component {...pageProps} />)}
 
@@ -143,6 +161,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             : undefined
         }
       />
-    </>
+    </NearContext.Provider>
   );
 }

@@ -12,6 +12,8 @@ import { Search } from './Search';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
+import { useContext } from 'react';
+import { NearContext } from '../WalletSelector';
 
 export const Sidebar = () => {
   const router = useRouter();
@@ -21,7 +23,7 @@ export const Sidebar = () => {
   const toggleExpandedSidebar = useNavigationStore((store) => store.toggleExpandedSidebar);
   const handleBubbledClickInSidebar = useNavigationStore((store) => store.handleBubbledClickInSidebar);
   const tooltipsDisabled = isSidebarExpanded;
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const { signedAccountId } = useContext(NearContext);
   const { requestAuthentication } = useSignInRedirect();
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -182,7 +184,7 @@ export const Sidebar = () => {
         </S.Section>
 
         <S.ProfileDropdownSection $expanded={isSidebarExpanded}>
-          {signedIn ? (
+          {signedAccountId ? (
             <UserDropdownMenu collapsed={!isSidebarExpanded} />
           ) : (
             <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled} asChild>

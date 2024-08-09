@@ -2,7 +2,8 @@ import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { useVmStore } from '@/stores/vm';
+import { useContext } from 'react';
+import { NearContext } from './WalletSelector';
 
 const RoundedImage = styled(Image)`
   border-radius: 50%;
@@ -22,15 +23,15 @@ interface NftImageProps {
 const DEFAULT_IMAGE = 'https://ipfs.near.social/ipfs/bafkreidoxgv2w7kmzurdnmflegkthgzaclgwpiccgztpkfdkfzb4265zuu';
 
 export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt }) => {
-  const near = useVmStore((store) => store.near);
+  const { wallet } = useContext(NearContext);
   const [imageUrl, setImageUrl] = useState<string>(DEFAULT_IMAGE);
 
   const fetchNftData = useCallback(async () => {
-    if (!near || !nft || !nft.contractId || !nft.tokenId || ipfs_cid) return;
+    if (!wallet || !nft || !nft.contractId || !nft.tokenId || ipfs_cid) return;
 
     const [nftMetadata, tokenData] = await Promise.all([
-      near.viewCall(nft.contractId, 'nft_metadata'),
-      near.viewCall(nft.contractId, 'nft_token', { token_id: nft.tokenId }),
+      wallet.viewMethod({ contractId: nft.contractId, method: 'nft_metadata' }),
+      wallet.viewMethod({ contractId: nft.contractId, method: 'nft_token', args: { token_id: nft.tokenId } }),
     ]);
 
     const tokenMetadata = tokenData.metadata;
@@ -43,7 +44,7 @@ export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt }) => {
     } else if (tokenMedia.startsWith('Qm') || tokenMedia.startsWith('ba')) {
       setImageUrl(`https://ipfs.near.social/ipfs/${tokenMedia}`);
     }
-  }, [near, nft, ipfs_cid]);
+  }, [wallet, nft, ipfs_cid]);
 
   useEffect(() => {
     if (ipfs_cid) {
