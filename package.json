@@ -72,6 +72,7 @@
     "react-singleton-hook": "^3.4.0",
     "remark": "^14.0.3",
     "rudder-sdk-js": "^2.48.6",
+    "rxjs": "^7.8.1",
     "strip-markdown": "^5.0.1",
     "styled-components": "^5.3.11",
     "typescript": "^5.4.5",

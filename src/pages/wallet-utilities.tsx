@@ -2,16 +2,15 @@ import { Button, Card, Container, Flex, Section, SvgIcon, Tabs } from '@near-pag
 import { Text } from '@near-pagoda/ui';
 import { HandCoins, LockKeyOpen, PaperPlaneTilt } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 import { ExportFastAuthAccount } from '@/components/wallet-utilities/ExportFastAuthAccount';
 import { ReceiveNear } from '@/components/wallet-utilities/ReceiveNear';
 import { SendNear } from '@/components/wallet-utilities/SendNear';
+import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useContext } from 'react';
-import { NearContext } from '@/components/WalletSelector';
 
 const WalletUtilitiesPage: NextPageWithLayout = () => {
   const router = useRouter();

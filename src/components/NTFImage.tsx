@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useCallback, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { useContext } from 'react';
 import { NearContext } from './WalletSelector';
 
 const RoundedImage = styled(Image)`
@@ -20,7 +20,7 @@ interface NftImageProps {
   alt: string;
 }
 
-const DEFAULT_IMAGE = 'https://ipfs.near.social/ipfs/bafkreidoxgv2w7kmzurdnmflegkthgzaclgwpiccgztpkfdkfzb4265zuu';
+const DEFAULT_IMAGE = 'https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm';
 
 export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt }) => {
   const { wallet } = useContext(NearContext);

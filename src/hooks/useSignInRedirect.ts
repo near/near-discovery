@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
-
 import { useContext } from 'react';
+
 import { NearContext } from '@/components/WalletSelector';
 import { signInContractId } from '@/utils/config';
 
