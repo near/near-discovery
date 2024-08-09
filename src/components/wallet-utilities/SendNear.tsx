@@ -4,7 +4,8 @@ import { useEffect, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
-import { useAuthStore } from '@/stores/auth';
+import { useContext } from 'react';
+import { NearContext } from '../WalletSelector';
 
 type FormData = {
   sendNearAmount: number;
@@ -25,27 +26,27 @@ function displayBalance(balance: number) {
 
 export const SendNear = () => {
   const form = useForm<FormData>();
-  const accountId = useAuthStore((store) => store.accountId);
-  const wallet = useAuthStore((store) => store.wallet);
-  const near = useAuthStore((store) => store.vmNear);
+  const { wallet, signedAccountId } = useContext(NearContext);
+  // const accountId = useAuthStore((store) => store.accountId);
+  // const wallet = useAuthStore((store) => store.wallet);
+  // const near = useAuthStore((store) => store.vmNear);
   const [currentNearAmount, setCurrentNearAmount] = useState(0);
 
   useEffect(() => {
-    if (!near || !accountId) return;
+    if (!wallet || !signedAccountId) return;
 
     const loadBalance = async () => {
       try {
-        const state = await near.accountState(accountId);
+        const balance = await wallet.getBalance(signedAccountId);
         const requiredGas = 0.00005;
-        const balance = Number(utils.format.formatNearAmount(state.amount || '0', 5)) - requiredGas;
-        setCurrentNearAmount(balance);
+        setCurrentNearAmount(balance - requiredGas);
       } catch (error) {
         console.error(error);
       }
     };
 
     loadBalance();
-  }, [accountId, near]);
+  }, [wallet, signedAccountId]);
 
   const validSubmitHandler: SubmitHandler<FormData> = async (data) => {
     try {
@@ -62,7 +63,7 @@ export const SendNear = () => {
             type: 'Transfer',
           },
         ],
-        signerId: accountId,
+        signerId: signedAccountId,
         receiverId: data.sendToAccountId,
       });
 

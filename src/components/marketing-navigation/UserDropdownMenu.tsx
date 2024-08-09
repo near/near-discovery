@@ -9,6 +9,9 @@ import { useAuthStore } from '@/stores/auth';
 import { useVmStore } from '@/stores/vm';
 
 import { NftImage } from '../NTFImage';
+import { useContext } from 'react';
+import { NearContext } from '../WalletSelector';
+import { signInContractId } from '@/utils/config';
 
 const Wrapper = styled.div`
   flex-grow: 1;
@@ -92,30 +95,32 @@ type Props = {
 };
 
 export const UserDropdownMenu = ({ collapsed }: Props) => {
-  const accountId = useAuthStore((store) => store.accountId);
-  const availableStorage = useAuthStore((store) => store.availableStorage);
-  const logOut = useAuthStore((store) => store.logOut);
-  const near = useVmStore((store) => store.near);
+  const { wallet, signedAccountId } = useContext(NearContext);
+  const availableStorage: bigint = useAuthStore((store) => store.availableStorage);
   const router = useRouter();
   const components = useBosComponents();
 
   const withdrawStorage = useCallback(async () => {
-    if (!near) return;
-    await near.contract.storage_withdraw({}, undefined, '1');
-  }, [near]);
+    if (!wallet) return;
+    await wallet.callMethod({ contractId: signInContractId, method: 'storage_withdraw', deposit: '1' });
+  }, [wallet]);
 
   const [profile, setProfile] = useState<any>({});
 
   useEffect(() => {
     async function getProfile() {
-      const profile = await near.viewCall('social.near', 'get', { keys: [`${accountId}/profile/**`] });
-      setProfile(profile[accountId].profile);
+      const profile = await wallet.viewMethod({
+        contractId: 'social.near',
+        method: 'get',
+        args: { keys: [`${signedAccountId}/profile/**`] },
+      });
+      setProfile(profile[signedAccountId].profile);
     }
 
-    if (!near || !accountId) return;
+    if (!wallet || !signedAccountId) return;
 
     getProfile();
-  }, [near, accountId]);
+  }, [wallet, signedAccountId]);
 
   return (
     <Wrapper>
@@ -126,33 +131,35 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
           </Dropdown.Trigger>
         ) : (
           <Dropdown.Trigger>
-            <NftImage nft={profile.image?.nft} ipfs_cid={profile.image?.ipfs_cid} alt={profile.name || accountId} />
+            <NftImage
+              nft={profile.image?.nft}
+              ipfs_cid={profile.image?.ipfs_cid}
+              alt={profile.name || signedAccountId}
+            />
             <div className="profile-info">
               <div className="profile-name">{profile.name}</div>
-              <div className="profile-username">{accountId}</div>
+              <div className="profile-username">{signedAccountId}</div>
             </div>
             <i className="ph ph-caret-right"></i>
           </Dropdown.Trigger>
         )}
 
         <Dropdown.Content sideOffset={10}>
-          <Dropdown.Item onSelect={() => router.push(`/${components.profilePage}?accountId=${accountId}`)}>
+          <Dropdown.Item onSelect={() => router.push(`/${components.profilePage}?accountId=${signedAccountId}`)}>
             <SvgIcon icon={<User weight="duotone" />} />
             Profile
-          </Dropdown.Item>
-          <Dropdown.Item onSelect={() => router.push(`/settings`)}>
-            <SvgIcon icon={<Gear weight="duotone" />} />
-            Settings
           </Dropdown.Item>
           <Dropdown.Item onSelect={() => router.push(`/wallet-utilities`)}>
             <SvgIcon icon={<Wallet weight="duotone" />} />
             Wallet Utilities
           </Dropdown.Item>
-          <Dropdown.Item onSelect={() => withdrawStorage()}>
-            <SvgIcon icon={<Bank weight="duotone" />} />
-            {availableStorage && `Withdraw ${availableStorage.div(1000).toFixed(2)}kb`}
-          </Dropdown.Item>
-          <Dropdown.Item onSelect={() => logOut()}>
+          {availableStorage && availableStorage > BigInt(0) && (
+            <Dropdown.Item onSelect={() => withdrawStorage()}>
+              <SvgIcon icon={<Bank weight="duotone" />} />
+              {`Withdraw ${availableStorage / BigInt(1000)}kb`}
+            </Dropdown.Item>
+          )}
+          <Dropdown.Item onSelect={() => wallet.signOut()}>
             <SvgIcon icon={<SignOut weight="regular" />} />
             Sign out
           </Dropdown.Item>

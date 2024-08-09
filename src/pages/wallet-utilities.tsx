@@ -10,11 +10,13 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 import type { NextPageWithLayout } from '@/utils/types';
+import { useContext } from 'react';
+import { NearContext } from '@/components/WalletSelector';
 
 const WalletUtilitiesPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'send';
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const signedAccountId = useContext(NearContext);
   const { requestAuthentication } = useSignInRedirect();
 
   return (
@@ -25,7 +27,7 @@ const WalletUtilitiesPage: NextPageWithLayout = () => {
             Wallet Utilities
           </Text>
 
-          {signedIn ? (
+          {signedAccountId ? (
             <Card style={{ paddingTop: 0 }}>
               <Tabs.Root value={selectedTab}>
                 <Tabs.List style={{ marginBottom: 'var(--gap-m)' }}>
