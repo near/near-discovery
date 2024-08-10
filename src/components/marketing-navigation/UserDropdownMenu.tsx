@@ -1,13 +1,11 @@
 import { Dropdown, SvgIcon } from '@near-pagoda/ui';
 import { Bank, SignOut, User, Wallet } from '@phosphor-icons/react';
-import Big from 'big.js';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useAuthStore } from '@/stores/auth';
 import { signInContractId } from '@/utils/config';
 
 import { NftImage } from '../NTFImage';
@@ -96,9 +94,10 @@ type Props = {
 
 export const UserDropdownMenu = ({ collapsed }: Props) => {
   const { wallet, signedAccountId } = useContext(NearContext);
-  const availableStorage: Big | null = useAuthStore((store) => store.availableStorage);
   const router = useRouter();
   const components = useBosComponents();
+
+  const [availableStorage, setAvailableStorage] = useState<bigint>(BigInt(0));
 
   const withdrawStorage = useCallback(async () => {
     if (!wallet) return;
@@ -118,8 +117,18 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
       setProfile(profile[signedAccountId].profile);
     }
 
+    async function getAvailableStorage() {
+      const storage: any = await wallet?.viewMethod({
+        contractId: signInContractId,
+        method: 'storage_balance_of',
+        args: { account_id: signedAccountId },
+      });
+      setAvailableStorage(BigInt(storage.available) / BigInt(10 ** 19));
+    }
+
     if (!wallet || !signedAccountId) return;
     getProfile();
+    getAvailableStorage();
   }, [wallet, signedAccountId]);
 
   return (
@@ -153,10 +162,10 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
             <SvgIcon icon={<Wallet weight="duotone" />} />
             Wallet Utilities
           </Dropdown.Item>
-          {availableStorage && availableStorage > Big(0) && (
+          {availableStorage && availableStorage > BigInt(0) && (
             <Dropdown.Item onSelect={() => withdrawStorage()}>
               <SvgIcon icon={<Bank weight="duotone" />} />
-              {`Withdraw ${availableStorage.div(1000)}kb`}
+              {`Withdraw ${availableStorage / BigInt(1000)}kb`}
             </Dropdown.Item>
           )}
           <Dropdown.Item onSelect={() => wallet?.signOut()}>
