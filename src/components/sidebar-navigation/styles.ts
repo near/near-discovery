@@ -13,7 +13,7 @@ const fadeIn = keyframes`
 `;
 
 const overflowContain = css`
-  /* overflow: auto; */
+  overflow: auto;
   scroll-behavior: smooth;
   overscroll-behavior: contain;
 
