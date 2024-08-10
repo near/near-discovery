@@ -9,6 +9,7 @@ import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearMobileWallet } from '@near-wallet-selector/near-mobile-wallet';
 import { setupNeth } from '@near-wallet-selector/neth';
+import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import { providers, utils } from 'near-api-js';
@@ -53,6 +54,7 @@ export class Wallet {
           gas: '300000000000000',
           bundle: false,
         }),
+        setupNightly(),
         setupWelldoneWallet(),
         setupFastAuthWallet({
           walletUrl:

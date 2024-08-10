@@ -54,6 +54,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [signedAccountId, setSignedAccountId] = useState('');
 
   useEffect(() => {
+    wallet.startUp(setSignedAccountId);
+  }, []);
+
+  useEffect(() => {
     const referred_from_wallet = document.referrer.indexOf('https://wallet.near.org/') !== -1;
     const isFirebaseError = router.query.reason && referred_from_wallet;
     const msg = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
@@ -107,8 +111,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   // needed by fast auth to show the wallet selector when the user chooses "use a wallet"
   useEffect(() => {
-    if (!wallet.selector) return;
-
     const handleShowWalletSelector = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
       if (e.data.showWalletSelector) {
         wallet.signIn();
@@ -132,10 +134,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     checkCookieData();
   }, [checkCookieData]);
-
-  useEffect(() => {
-    wallet.startUp(setSignedAccountId);
-  }, []);
 
   return (
     <NearContext.Provider value={{ wallet, signedAccountId }}>
