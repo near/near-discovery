@@ -54,10 +54,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const [signedAccountId, setSignedAccountId] = useState('');
 
   useEffect(() => {
-    wallet.startUp(setSignedAccountId);
-  }, []);
-
-  useEffect(() => {
     const referred_from_wallet = document.referrer.indexOf('https://wallet.near.org/') !== -1;
     const isFirebaseError = router.query.reason && referred_from_wallet;
     const msg = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
@@ -124,6 +120,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       window.removeEventListener('message', handleShowWalletSelector, false);
     };
   }, []);
+
   useEffect(() => {
     if (!cookieData || !isResearchFormDismissed) {
       Gleap.showFeedbackButton(false);
@@ -135,6 +132,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useEffect(() => {
     checkCookieData();
   }, [checkCookieData]);
+
+  useEffect(() => {
+    wallet.startUp(setSignedAccountId);
+  }, []);
 
   return (
     <NearContext.Provider value={{ wallet, signedAccountId }}>

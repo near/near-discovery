@@ -181,7 +181,6 @@ export const Sidebar = () => {
             </Tooltip>
           </S.Stack>
         </S.Section>
-
         <S.ProfileDropdownSection $expanded={isSidebarExpanded}>
           {signedAccountId ? (
             <UserDropdownMenu collapsed={!isSidebarExpanded} />
