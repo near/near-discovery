@@ -1020,6 +1020,7 @@ export const SearchIconWrapper = styled.div<{
   white-space: nowrap;
   cursor: pointer;
   transition: all 150ms;
+  padding-bottom: 1rem;
 
   &:hover {
     color: var(--sand12);
