@@ -154,14 +154,15 @@ const EventsPage: NextPageWithLayout = () => {
 
   return (
     <div>
-      {highlightedEvent && (
-        <Section style={{ border: 'none', padding: '24px' }}>
-          <Container>
-            <Flex style={{ padding: '24px 0' }}>
-              <Text size="text-3xl" weight="500">
-                Upcoming Event
-              </Text>
-            </Flex>
+      <Section style={{ border: 'none', paddingTop: '2rem' }}>
+        <Container style={{ maxWidth: '960px' }}>
+          <Flex style={{ padding: '24px 0' }}>
+            <Text size="text-3xl" weight="500">
+              Upcoming Events
+            </Text>
+          </Flex>
+
+          {highlightedEvent && (
             <HighlightedEvent>
               <CoverCard href={highlightedEvent.url} target="_blank">
                 <CoverCardImageWrapper>
@@ -200,19 +201,9 @@ const EventsPage: NextPageWithLayout = () => {
                 </Flex>
               </CoverCard>
             </HighlightedEvent>
-          </Container>
-        </Section>
-      )}
+          )}
 
-      <Section style={{ padding: '24px 24px' }}>
-        <Container>
-          <Flex gap="xl" align="center" justify="space-between">
-            <Text size="text-3xl" weight="500">
-              Hackatons
-            </Text>
-          </Flex>
-
-          <Grid columns="1fr 1fr 1fr" columnsPhone="1" style={{ gap: '32px', padding: '42px 0' }}>
+          <Grid columns="1fr 1fr" columnsPhone="1" style={{ gap: '32px', padding: '42px 0' }}>
             {hackatons.map((event) => {
               return (
                 <CommunityEvent key={event.id} href={event.url} target="_blank" style={{ minWidth: 0 }}>
@@ -234,6 +225,10 @@ const EventsPage: NextPageWithLayout = () => {
               );
             })}
           </Grid>
+        </Container>
+      </Section>
+      <Section style={{ border: 'none', paddingTop: '0', paddingBottom: '7rem' }}>
+        <Container style={{ maxWidth: '960px' }}>
           <Flex gap="xl" align="center" justify="space-between">
             <Text size="text-3xl" weight="500">
               Community Events
