@@ -38,8 +38,6 @@ const KeyTable: React.FC = () => {
     getInfo();
   }, [near, accountId]);
 
-  const truncatePublicKey = (key: string): string => `${key.slice(0, 20)}...`;
-
   const handleSelectAll = (): void => {
     if (selectedKeys.length === keys.length) {
       setSelectedKeys([]);
@@ -69,9 +67,10 @@ const KeyTable: React.FC = () => {
 
   return (
     <>
+      <Text size="text-s">Function call keys created by applications:</Text>
       <Button label="Deauthorize" onClick={handleDeauthorizeAll} disabled={selectedKeys.length === 0} />
       <Table.Root style={{ width: '100%' }}>
-        <Table.Head>
+        <Table.Head sticky={false}>
           <Table.Row>
             <Table.HeaderCell>
               <input type="checkbox" onChange={handleSelectAll} checked={selectedKeys.length === keys.length} />
@@ -91,14 +90,22 @@ const KeyTable: React.FC = () => {
                   checked={selectedKeys.includes(data.public_key)}
                 />
               </Table.Cell>
-              <Table.Cell>{data.access_key.permission.FunctionCall?.receiver_id ?? 'N/A'}</Table.Cell>
               <Table.Cell>
-                <Tooltip content={data.public_key}>
-                  <Text>{truncatePublicKey(data.public_key)}</Text>
+                <Tooltip content={data.access_key.permission.FunctionCall?.receiver_id ?? 'N/A'}>
+                  <Text style={{ minWidth: '5rem' }} clampLines={1}>
+                    {data.access_key.permission.FunctionCall?.receiver_id ?? 'N/A'}
+                  </Text>
                 </Tooltip>
               </Table.Cell>
               <Table.Cell>
-                {parseFloat(data.access_key.permission.FunctionCall?.allowance ?? '0') / 1e24} NEAR
+                <Tooltip content={data.public_key}>
+                  <Text style={{ minWidth: '5rem' }} clampLines={1}>
+                    {data.public_key}
+                  </Text>
+                </Tooltip>
+              </Table.Cell>
+              <Table.Cell>
+                {(parseFloat(data.access_key.permission.FunctionCall?.allowance ?? '0') / 1e24).toFixed(2)} NEAR
               </Table.Cell>
             </Table.Row>
           ))}

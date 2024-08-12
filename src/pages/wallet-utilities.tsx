@@ -47,7 +47,7 @@ const WalletUtilitiesPage: NextPageWithLayout = () => {
 
                   <Tabs.Trigger href="?tab=key" value="key">
                     <SvgIcon icon={<Key fill="bold" />} />
-                    Keys
+                    Apps
                   </Tabs.Trigger>
                 </Tabs.List>
 
