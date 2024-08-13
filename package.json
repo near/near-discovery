@@ -2,13 +2,11 @@
     "name": "near-discovery",
     "version": "0.1.0",
     "private": true,
-    "engines":
-    {
+    "engines": {
         "node": ">=18.0.0",
         "pnpm": ">=8.5.0"
     },
-    "scripts":
-    {
+    "scripts": {
         "dev": "next dev",
         "build": "next build",
         "start": "next start",
@@ -20,13 +18,12 @@
         "commit": "cz",
         "ts:check": "tsc --noEmit --incremental"
     },
-    "dependencies":
-    {
+    "dependencies": {
         "@idos-network/idos-sdk": "^0.0.30",
         "@keypom/selector": "1.2.3",
         "@monaco-editor/react": "^4.6.0",
         "@near-js/biometric-ed25519": "0.3.0",
-        "@near-pagoda/ui": "^0.3.0",
+        "@near-pagoda/ui": "^1.0.0",
         "@near-wallet-selector/core": "8.9.7",
         "@near-wallet-selector/here-wallet": "8.9.7",
         "@near-wallet-selector/ledger": "^8.9.7",
@@ -79,8 +76,7 @@
         "typescript": "^5.4.5",
         "zustand": "^4.5.2"
     },
-    "devDependencies":
-    {
+    "devDependencies": {
         "@commitlint/cli": "^19.3.0",
         "@commitlint/config-conventional": "^19.2.2",
         "@types/big.js": "^6.2.2",
@@ -101,10 +97,8 @@
         "is-ci": "^3.0.1",
         "prettier": "^2.8.8"
     },
-    "config":
-    {
-        "commitizen":
-        {
+    "config": {
+        "commitizen": {
             "path": "./node_modules/cz-conventional-changelog"
         }
     }
