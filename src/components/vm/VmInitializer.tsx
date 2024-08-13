@@ -35,6 +35,7 @@ import { useEthersProviderContext } from '@/data/web3';
 import { useIdOS } from '@/hooks/useIdOS';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
+import { useCookieStore } from '@/stores/cookieData';
 import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
 import {
@@ -54,7 +55,6 @@ import {
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 
 import { useNavigationStore } from '../sidebar-navigation/store';
-import { useCookieStore } from '@/stores/cookieData';
 
 export default function VmInitializer() {
   const [signedIn, setSignedIn] = useState(false);
@@ -177,7 +177,7 @@ export default function VmInitializer() {
           enableWidgetSrcWithCodeOverride: isLocalEnvironment,
         },
       });
-  }, [initNear, router.query]);
+  }, [initNear, router.query, setCookieData]);
 
   useEffect(() => {
     if (!near || !idOS) {

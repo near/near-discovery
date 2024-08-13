@@ -3,11 +3,11 @@ import Modal from 'react-bootstrap/Modal';
 import styled from 'styled-components';
 
 import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
+import { useCookieStore } from '@/stores/cookieData';
 import { useResearchWizardStore } from '@/stores/researchWizard';
 import { recordEventWithProps } from '@/utils/analytics';
 
 import { StepLayout } from './StepLayout';
-import { useCookieStore } from '@/stores/cookieData';
 
 const MobileWrapper = styled.div`
   width: 276px;
