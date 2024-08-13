@@ -1,11 +1,11 @@
 import { Button } from '@near-pagoda/ui';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
 
+import { NearContext } from '@/components/WalletSelector';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 
 import SearchIcon from '../icons/search.svg';
 import { AccordionMenu } from './AccordionMenu';
@@ -94,7 +94,7 @@ const Actions = styled.div`
 
 export function Menu(props: Props) {
   const router = useRouter();
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const { signedAccountId } = useContext(NearContext);
   const components = useBosComponents();
   const { requestAuthentication } = useSignInRedirect();
 
@@ -120,7 +120,7 @@ export function Menu(props: Props) {
 
         <AccordionMenu onCloseMenu={props.onCloseMenu} />
 
-        {!signedIn && (
+        {!signedAccountId && (
           <Actions>
             <Button label="Create Account" variant="primary" size="large" onClick={handleCreateAccount} />
             <Button label="Sign in" variant="secondary" size="large" onClick={handleSignIn} />

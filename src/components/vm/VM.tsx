@@ -1,12 +1,11 @@
 import { isValidAttribute } from 'dompurify';
 import { mapValues } from 'lodash';
-import { EthersProviderContext, useAccount, useInitNear, utils, Widget } from 'near-social-vm';
+import { EthersProviderContext, useInitNear, Widget } from 'near-social-vm';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { useEthersProviderContext } from '@/data/web3';
-import { useAuthStore } from '@/stores/auth';
 import { cookiePreferences, optOut, recordHandledError, recordWalletConnect } from '@/utils/analytics';
 import { commitModalBypassAuthorIds, commitModalBypassSources, isLocalEnvironment, networkId } from '@/utils/config';
 
@@ -16,9 +15,6 @@ export default function Component(props: any) {
   const ethersContext = useEthersProviderContext();
   const { wallet } = useContext(NearContext);
   const { initNear } = useInitNear();
-  const account = useAccount();
-  const setAuthStore = useAuthStore((state: any) => state.set);
-  const [availableStorage, setAvailableStorage] = useState<bigint | null>(null);
   const router = useRouter();
 
   useEffect(() => {
@@ -79,18 +75,6 @@ export default function Component(props: any) {
         },
       });
   }, [wallet, initNear, router.query]);
-
-  useEffect(() => {
-    setAvailableStorage(
-      account.storageBalance ? BigInt(account.storageBalance.available) / BigInt(utils.StorageCostPerByte) : BigInt(0),
-    );
-  }, [account]);
-
-  useEffect(() => {
-    setAuthStore({
-      availableStorage,
-    });
-  }, [availableStorage, setAuthStore]);
 
   return (
     <div style={{ position: 'relative' }}>

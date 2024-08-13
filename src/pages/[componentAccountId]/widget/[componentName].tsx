@@ -1,17 +1,17 @@
 import type { GetServerSideProps, InferGetServerSidePropsType } from 'next';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { remark } from 'remark';
 import strip from 'strip-markdown';
 
 import { MetaTags } from '@/components/MetaTags';
 import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
+import { NearContext } from '@/components/WalletSelector';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -95,17 +95,17 @@ const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSideProps
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.componentAccountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
-  const authStore = useAuthStore();
+  const { wallet, signedAccountId } = useContext(NearContext);
   const components = useBosComponents();
   const { requestAuthentication } = useSignInRedirect();
   const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
 
   useEffect(() => {
     const { requestAuth, createAccount } = componentProps;
-    if (requestAuth && !authStore.account) {
+    if (requestAuth && !signedAccountId) {
       requestAuthentication(!!createAccount);
     }
-  }, [authStore, componentProps, requestAuthentication]);
+  }, [signedAccountId, componentProps, requestAuthentication]);
 
   useEffect(() => {
     setComponentSrc(componentSrc);
@@ -126,7 +126,7 @@ const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSideProps
           emitGatewayEvent: shouldPassGatewayEventProps(router.query.componentAccountId as string)
             ? emitGatewayEvent
             : undefined,
-          logOut: authStore.logOut,
+          logOut: wallet?.signOut,
           targetProps: componentProps,
           targetComponent: componentSrc,
           termsDomainName,
