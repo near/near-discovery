@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
+import { useCookieStore } from '@/stores/cookieData';
 
 import { VmComponent } from './vm/VmComponent';
-import { useCookieStore } from '@/stores/cookieData';
 
 const Wrapper = styled.div`
   position: fixed;

@@ -1,5 +1,6 @@
-import { useResearchWizardStore } from '@/stores/researchWizard';
 import { useEffect, useState } from 'react';
+
+import { useResearchWizardStore } from '@/stores/researchWizard';
 
 export function useResearchWizardEvents() {
   const set = useResearchWizardStore((state) => state.set);
