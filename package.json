@@ -24,7 +24,7 @@
     "@keypom/selector": "1.2.3",
     "@monaco-editor/react": "^4.6.0",
     "@near-js/biometric-ed25519": "0.3.0",
-    "@near-pagoda/ui": "^0.3.0",
+    "@near-pagoda/ui": "^1.0.0",
     "@near-wallet-selector/core": "8.9.12",
     "@near-wallet-selector/here-wallet": "8.9.12",
     "@near-wallet-selector/ledger": "^8.9.12",

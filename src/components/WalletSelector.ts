@@ -191,6 +191,20 @@ export class Wallet {
     const selectedWallet = await (await this.selector).wallet();
     return selectedWallet.signAndSendTransactions({ transactions });
   };
+
+  getAccessKeys = async (accountId: string) => {
+    const walletSelector = await this.selector;
+    const { network } = walletSelector.options;
+    const provider = new providers.JsonRpcProvider({ url: network.nodeUrl });
+
+    // Retrieve account state from the network
+    const keys: any = await provider.query({
+      request_type: 'view_access_key_list',
+      account_id: accountId,
+      finality: 'final',
+    });
+    return keys.keys;
+  };
 }
 
 export const NearContext: Context<{ wallet: Wallet | undefined; signedAccountId: string }> = createContext({
