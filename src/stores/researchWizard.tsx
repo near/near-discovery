@@ -46,6 +46,7 @@ export type ResearchWizardState = {
   nextDisabled: boolean;
   formSteps: any[];
   currentStepSubmission: any;
+  isResearchFormDismissed: boolean;
   set: (state: Partial<ResearchWizardState>) => void;
 };
 
@@ -58,6 +59,7 @@ export const useResearchWizardStore = create<ResearchWizardStore>((set) => ({
   nextDisabled: true,
   formSteps,
   currentStepSubmission: {},
+  isResearchFormDismissed: false,
   set: (state: Partial<ResearchWizardState>) =>
     set((previousState: Partial<ResearchWizardState>) => ({ ...previousState, ...state })),
 }));

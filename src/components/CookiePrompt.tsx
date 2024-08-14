@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useCookiePreferences } from '@/hooks/useCookiePreferences';
+import { useCookieStore } from '@/stores/cookieData';
 
 import { VmComponent } from './vm/VmComponent';
 
@@ -13,7 +13,7 @@ const Wrapper = styled.div`
 `;
 
 export const CookiePrompt = () => {
-  const cookieData = useCookiePreferences();
+  const cookieData = useCookieStore((state) => state.cookieData);
   const components = useBosComponents();
   return (
     <Wrapper>

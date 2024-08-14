@@ -64,11 +64,17 @@ export const notificationsGatewayUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}`;
 export const notificationsLocalStorageKey = 'push-notifications-v0';
 export const localStorageAccountIdKey = 'near-social-vm:v01::accountId:';
 export const isLocalEnvironment = process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT === 'true';
-export const eventsApiUrl = process.env.NEXT_PUBLIC_EVENTS_API_URL;
-export const eventsApiKey = process.env.NEXT_PUBLIC_EVENTS_API_KEY;
 export const sidebarLayoutEnabled = process.env.NEXT_PUBLIC_SIDEBAR_LAYOUT === 'true';
 export const idosCreateAccountUrl = process.env.NEXT_PUBLIC_IDOS_CREATE_ACCOUNT_URL;
 export const gleapSdkToken = process.env.NEXT_PUBLIC_GLEAP_SDK_TOKEN;
+export const lumaApiUrl = process.env.NEXT_PUBLIC_LUMA_API_URL ?? '';
+export const lumaNearCalendarId = process.env.NEXT_PUBLIC_LUMA_NEAR_CALENDAR_ID ?? '';
+export const lumaNearAICalendarId = process.env.NEXT_PUBLIC_LUMA_NEAR_AI_CALENDAR_ID ?? '';
+export const lumaNearHZNCalendarId = process.env.NEXT_PUBLIC_LUMA_NEAR_HZN_CALENDAR_ID ?? '';
+export const lumaDevHubHacksCalendarId = process.env.NEXT_PUBLIC_LUMA_DEVHUB_HACKS_CALENDAR_ID ?? '';
+export const nearTownHallCalendarId = process.env.NEXT_PUBLIC_NEAR_TOWN_HALL_CALENDAR_ID ?? '';
+export const googleCalendarApiKey = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY ?? '';
+export const devhubCommunityCalendarId = process.env.NEXT_PUBLIC_DEVHUB_COMMUNITY_CALENDAR_ID ?? '';
 
 export const commitModalBypassAuthorIds = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_AUTHOR_IDS ?? '')
   .split(',')
