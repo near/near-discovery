@@ -35,6 +35,7 @@ import { useEthersProviderContext } from '@/data/web3';
 import { useIdOS } from '@/hooks/useIdOS';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
+import { useCookieStore } from '@/stores/cookieData';
 import { useIdosStore } from '@/stores/idosStore';
 import { useVmStore } from '@/stores/vm';
 import {
@@ -73,6 +74,7 @@ export default function VmInitializer() {
   const idosSDK = useIdosStore((state) => state.idOS);
   const resetNavigation = useNavigationStore((store) => store.reset);
   const router = useRouter();
+  const setCookieData = useCookieStore((state) => state.set);
 
   useEffect(() => {
     initNear &&
@@ -101,7 +103,7 @@ export default function VmInitializer() {
                   : 'https://wallet.near.org/fastauth',
               relayerUrl:
                 networkId === 'testnet'
-                  ? 'http://34.70.226.83:3030/relay'
+                  ? 'https://near-relayer-testnet.api.pagoda.co/relay'
                   : 'https://near-relayer-mainnet.api.pagoda.co/relay',
             }),
             setupKeypom({
@@ -162,6 +164,7 @@ export default function VmInitializer() {
           AnalyticsCookieConsent: ({ all, onlyRequired }: { all: boolean; onlyRequired: boolean }) => {
             localStorage.setItem('cookiesAcknowledged', all ? cookiePreferences.all : cookiePreferences.onlyRequired);
             optOut(onlyRequired);
+            setCookieData({ cookieData: true });
             return <></>;
           },
         },
@@ -174,7 +177,7 @@ export default function VmInitializer() {
           enableWidgetSrcWithCodeOverride: isLocalEnvironment,
         },
       });
-  }, [initNear, router.query]);
+  }, [initNear, router.query, setCookieData]);
 
   useEffect(() => {
     if (!near || !idOS) {
