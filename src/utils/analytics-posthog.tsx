@@ -1,4 +1,3 @@
-// src/utils/analytics-posthog.tsx
 import { useRouter } from 'next/router';
 import posthog from 'posthog-js';
 import { PostHogProvider } from 'posthog-js/react';

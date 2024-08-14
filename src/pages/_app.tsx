@@ -1,4 +1,3 @@
-// src/pages/_app.tsx
 import '@/styles/globals.css';
 import '@near-pagoda/ui/globals.css';
 import '@near-pagoda/ui/theme.css';
