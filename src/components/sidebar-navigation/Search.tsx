@@ -32,7 +32,7 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
 
   const renderResults = useCallback(
     (type: TabType, rawResp: any) => {
-      if (!rawResp || (Array.isArray(rawResp.hits) && !rawResp.hits.length)) {
+      if (!rawResp || (Array.isArray(rawResp.hits) && !rawResp.hits.length) || rawResp?.error) {
         return <div>No results found for &quot;{debouncedSearchTerm}&quot;</div>;
       }
 
