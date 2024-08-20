@@ -1,3 +1,4 @@
+import { Tooltip } from '@near-pagoda/ui';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useRef } from 'react';
@@ -5,9 +6,8 @@ import { useRef } from 'react';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 
-import { Tooltip } from '../lib/Tooltip';
+import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
 import NearIconSvg from './icons/near-icon.svg';
-import { LargeScreenProfileDropdown } from './LargeScreenProfileDropdown';
 import { Search } from './Search';
 import { useNavigationStore } from './store';
 import * as S from './styles';
@@ -110,10 +110,9 @@ export const Sidebar = () => {
             </Tooltip>
 
             <Tooltip content="Events" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={false} $type="featured" href="https://near.org/events" target="_blank">
+              <S.NavigationItem $active={isNavigationItemActive('/events')} $type="featured" href="/events">
                 <i className="ph-calendar ph-bold" />
                 <span>Events</span>
-                <span className="ph-bold ph-arrow-square-out ms-auto outline-none" />
               </S.NavigationItem>
             </Tooltip>
 
@@ -168,12 +167,14 @@ export const Sidebar = () => {
 
             <Tooltip content="Get Funding" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem
-                $active={isNavigationItemActive('/ecosystem/get-funding')}
+                $active={false}
                 $type="featured"
-                href="/ecosystem/get-funding"
+                href="https://near.org/ecosystem/get-funding"
+                target="_blank"
               >
                 <i className="ph-bold ph-coin-vertical" />
                 <span>Get Funding</span>
+                <span className="ph-bold ph-arrow-square-out ms-auto outline-none" />
               </S.NavigationItem>
             </Tooltip>
           </S.Stack>
@@ -181,9 +182,9 @@ export const Sidebar = () => {
 
         <S.ProfileDropdownSection $expanded={isSidebarExpanded}>
           {signedIn ? (
-            <LargeScreenProfileDropdown />
+            <UserDropdownMenu collapsed={!isSidebarExpanded} />
           ) : (
-            <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled}>
+            <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled} asChild>
               <S.LoginItem $active={false} $type="featured" onClick={handleCreateAccount}>
                 <i className="ph-bold ph-user" />
                 <span>Sign-up or Login</span>

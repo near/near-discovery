@@ -1,27 +1,33 @@
-import '@/styles/theme.css';
 import '@/styles/globals.css';
+import '@near-pagoda/ui/globals.css';
+import '@near-pagoda/ui/theme.css';
+import '@near-pagoda/ui/lib.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
+import { openToast, PagodaUiProvider, Toaster } from '@near-pagoda/ui';
 import Gleap from 'gleap';
 import type { AppProps } from 'next/app';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
-import { openToast, Toaster } from '@/components/lib/Toast';
 import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useAuthStore } from '@/stores/auth';
+import { useCookieStore } from '@/stores/cookieData';
+import { useResearchWizardStore } from '@/stores/researchWizard';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
+import { initPostHog, PostHogTrackingProvider } from '@/utils/analytics-posthog';
 import { gleapSdkToken } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -39,11 +45,16 @@ if (typeof window !== 'undefined') {
   if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
 }
 
+initPostHog();
+
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
   usePageAnalytics();
   useClickTracking();
+  const checkCookieData = useCookieStore((state) => state.checkCookieData);
+  const cookieData = useCookieStore((state) => state.cookieData);
+  const isResearchFormDismissed = useResearchWizardStore((state) => state.isResearchFormDismissed);
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const signedIn = useAuthStore((store) => store.signedIn);
@@ -56,7 +67,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       recordHandledError({ description: msg || 'unknown error during Fast Authentication' });
       openToast({
         title: 'An Error Occurred During Fast Authentication',
-        type: 'WARNING',
+        type: 'error',
         description: msg || '',
         duration: 5000,
       });
@@ -100,47 +111,67 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     };
   }, []);
 
+  useEffect(() => {
+    if (!cookieData || !isResearchFormDismissed) {
+      Gleap.showFeedbackButton(false);
+    } else {
+      Gleap.showFeedbackButton(true);
+    }
+  }, [isResearchFormDismissed, cookieData]);
+
+  useEffect(() => {
+    checkCookieData();
+  }, [checkCookieData]);
+
   return (
     <>
-      <Head>
-        <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
-        <link rel="icon" href="favicon.ico" />
-        <link rel="canonical" href={`${process.env.NEXT_PUBLIC_HOSTNAME}${router.asPath}`} key="canonical" />
-        <link rel="manifest" href="manifest.json" />
-      </Head>
+      <PagodaUiProvider
+        value={{
+          routerPrefetch: router.prefetch,
+          routerPush: router.push,
+          Link,
+        }}
+      >
+        <Head>
+          <meta name="google-site-verification" content="CDEVFlJTyVZ2vM7ePugKgWsl_7Rd-MrfDv42u0vZ0B0" />
+          <link rel="icon" href="favicon.ico" />
+          <link rel="canonical" href={`${process.env.NEXT_PUBLIC_HOSTNAME}${router.asPath}`} key="canonical" />
+          <link rel="manifest" href="manifest.json" />
+        </Head>
 
-      <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web" async />
+        <Script id="phosphor-icons" src="https://unpkg.com/@phosphor-icons/web" async />
 
-      <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
+        <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
-      <VmInitializer />
+        <VmInitializer />
 
-      {getLayout(<Component {...pageProps} />)}
+        <PostHogTrackingProvider>{getLayout(<Component {...pageProps} />)}</PostHogTrackingProvider>
 
-      <Toaster />
+        <Toaster />
 
-      <CookiePrompt />
+        <CookiePrompt />
 
-      <ResearchFormWizard />
+        <ResearchFormWizard />
 
-      <div
-        id="idos_container"
-        style={
-          !router.route.startsWith('/settings')
-            ? ({
-                position: 'absolute',
-                top: 0,
-                left: 0,
-                width: 0,
-                height: 0,
-                margin: 0,
-                padding: 0,
-                opacity: 0,
-                overflow: 'hidden',
-              } as React.CSSProperties)
-            : undefined
-        }
-      />
+        <div
+          id="idos_container"
+          style={
+            !router.route.startsWith('/settings')
+              ? ({
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: 0,
+                  height: 0,
+                  margin: 0,
+                  padding: 0,
+                  opacity: 0,
+                  overflow: 'hidden',
+                } as React.CSSProperties)
+              : undefined
+          }
+        />
+      </PagodaUiProvider>
     </>
   );
 }

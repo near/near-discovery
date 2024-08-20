@@ -1,10 +1,10 @@
+import { Button } from '@near-pagoda/ui';
+import { Text } from '@near-pagoda/ui';
 import { useEffect } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { Button } from '@/components/lib/Button';
-import { Text } from '@/components/lib/Text';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useFlags } from '@/hooks/useFlags';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -23,7 +23,7 @@ const Form = styled.form`
   gap: 1rem;
 `;
 
-const InputGrid = styled.div`
+const InputGrid = styled.label`
   display: grid;
   grid-template-columns: max-content 1fr;
   align-items: center;
@@ -54,13 +54,13 @@ const FlagsPage: NextPageWithLayout = () => {
 
   return (
     <Container>
-      <Text as="h1" font="text-3xl">
+      <Text as="h1" size="text-3xl">
         Flags
       </Text>
 
       <Form onSubmit={form.handleSubmit(submitHandler)}>
         <InputGrid>
-          <Text as="label" font="text-s" weight="500" htmlFor="bosLoaderUrl">
+          <Text as="span" size="text-s" weight="500">
             BOS Loader Url
           </Text>
 

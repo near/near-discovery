@@ -1,14 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 
+import { Tooltip } from '@near-pagoda/ui';
+import { Button } from '@near-pagoda/ui';
+import { Text } from '@near-pagoda/ui';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useAuthStore } from '@/stores/auth';
 
-import { Button } from '../lib/Button';
-import { Text } from '../lib/Text';
-import { Tooltip } from '../lib/Tooltip';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
@@ -75,7 +75,7 @@ export const PinnedApps = () => {
         <>
           {isSidebarExpanded ? (
             <S.Stack $gap="1rem" $frozenWidth>
-              <Text font="text-xs" color="sand11">
+              <Text size="text-xs" color="sand11">
                 Discover apps from the NEAR developer community to pin.
               </Text>
 

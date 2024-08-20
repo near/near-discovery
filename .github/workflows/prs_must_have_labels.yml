@@ -18,4 +18,4 @@ jobs:
       - uses: docker://agilepathway/pull-request-label-checker:latest
         with:
           one_of: bug,feature,enhancement,dependency,documentation,breaking-change,ignore-for-release
-          repo_token: ${{ secrets.CG_PROJECT_WORKFLOW_SECRET }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
