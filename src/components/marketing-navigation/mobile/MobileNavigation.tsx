@@ -1,10 +1,10 @@
+import { Button } from '@near-pagoda/ui';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import styled from 'styled-components';
 
 import { MigrationBanner } from '@/components/banner/MigrationBanner';
-import { Button } from '@/components/lib/Button';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useAuthStore } from '@/stores/auth';
 

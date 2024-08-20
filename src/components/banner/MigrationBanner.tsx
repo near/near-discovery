@@ -1,6 +1,6 @@
+import { Text } from '@near-pagoda/ui';
 import styled from 'styled-components';
 
-import { Text } from '@/components/lib/Text';
 import { useAuthStore } from '@/stores/auth';
 
 type Props = {

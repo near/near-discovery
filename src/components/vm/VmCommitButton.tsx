@@ -1,6 +1,6 @@
-import { useVmStore } from '@/stores/vm';
+import { Placeholder } from '@near-pagoda/ui';
 
-import { Spinner } from '../lib/Spinner';
+import { useVmStore } from '@/stores/vm';
 
 type Props = {
   className?: string;
@@ -13,7 +13,7 @@ export function VmCommitButton(props: Props) {
   const { near, CommitButton } = useVmStore();
 
   if (!near || !CommitButton) {
-    return <Spinner />;
+    return <Placeholder />;
   }
 
   return <CommitButton near={near} {...props} />;
