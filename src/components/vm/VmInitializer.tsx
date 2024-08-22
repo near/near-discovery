@@ -1,4 +1,5 @@
 import { setupKeypom } from '@keypom/selector';
+import { setupBitteWallet } from '@near-wallet-selector/bitte-wallet';
 import type { WalletSelector } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
@@ -90,6 +91,7 @@ export default function VmInitializer() {
             setupHereWallet(),
             setupMintbaseWallet(),
             setupMeteorWallet(),
+            setupBitteWallet(),
             setupNeth({
               gas: '300000000000000',
               bundle: false,
