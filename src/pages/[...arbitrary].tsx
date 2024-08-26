@@ -44,7 +44,7 @@ const finiteRoutes: Record<string, string> = {
   'work-with-us': 'https://pages.near.org/work-with-us',
 };
 
-import IframeResizer from 'iframe-resizer-react';
+import IframeResizer from '@iframe-resizer/react';
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next';
 
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
@@ -105,7 +105,7 @@ const IframePage: NextPageWithLayout = (props: InferGetStaticPropsType<typeof ge
   useClearCurrentComponent();
   return (
     <>
-      <IframeResizer src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />
+      <IframeResizer license="GPLv3" src={props.url} style={{ width: '1px', minWidth: '100%' }} checkOrigin={false} />
     </>
   );
 };

@@ -27,6 +27,7 @@ import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useCookieStore } from '@/stores/cookieData';
 import { useResearchWizardStore } from '@/stores/researchWizard';
 import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
+import { initPostHog, PostHogTrackingProvider } from '@/utils/analytics-posthog';
 import { gleapSdkToken, networkId, signInContractId } from '@/utils/config';
 import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -41,6 +42,7 @@ if (typeof window !== 'undefined') {
 }
 
 const wallet = new Wallet({ createAccessKeyFor: signInContractId, networkId: networkId });
+initPostHog();
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
@@ -157,6 +159,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
         <Script id="bootstrap" src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" />
 
         {getLayout(<Component {...pageProps} />)}
+
+        <PostHogTrackingProvider>{getLayout(<Component {...pageProps} />)}</PostHogTrackingProvider>
 
         <Toaster />
 
