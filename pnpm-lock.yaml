@@ -9,8 +9,11 @@ importers:
   .:
     dependencies:
       '@idos-network/idos-sdk':
-        specifier: ^0.0.30
-        version: 0.0.30(ethers@6.13.1)(near-api-js@4.0.3)(web-streams-polyfill@3.3.3)
+        specifier: ^0.3.1
+        version: 0.3.1(ethers@6.13.1)(near-api-js@4.0.3)(web-streams-polyfill@3.3.3)
+      '@iframe-resizer/react':
+        specifier: ^5.2.6
+        version: 5.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@keypom/selector':
         specifier: 1.2.3
         version: 1.2.3(@near-js/accounts@1.2.1)(@near-js/crypto@1.2.4)(@near-js/keystores-browser@0.0.12)(@near-js/keystores-node@0.0.12)(@near-js/keystores@0.0.12)(@near-js/transactions@1.2.2)(@near-js/types@0.2.1)(@near-js/utils@0.2.2)(@near-js/wallet-account@1.2.2)(@near-wallet-selector/core@8.9.12)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -23,6 +26,9 @@ importers:
       '@near-pagoda/ui':
         specifier: ^1.0.0
         version: 1.0.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zustand@4.5.4(@types/react@18.3.3)(react@18.3.1))
+      '@near-wallet-selector/bitte-wallet':
+        specifier: ^8.9.12
+        version: 8.9.12
       '@near-wallet-selector/core':
         specifier: 8.9.12
         version: 8.9.12
@@ -113,9 +119,6 @@ importers:
       gleap:
         specifier: ^13.7.6
         version: 13.8.1
-      iframe-resizer-react:
-        specifier: ^1.1.0
-        version: 1.1.1(@babel/core@7.24.9)(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       local-storage:
         specifier: ^2.0.0
         version: 2.0.0
@@ -140,6 +143,9 @@ importers:
       next-pwa:
         specifier: ^5.6.0
         version: 5.6.0(@babel/core@7.24.9)(@types/babel__core@7.20.5)(next@13.5.6(@babel/core@7.24.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      posthog-js:
+        specifier: ^1.155.4
+        version: 1.158.1
       react:
         specifier: ^18.2.0
         version: 18.3.1
@@ -164,9 +170,6 @@ importers:
       rudder-sdk-js:
         specifier: ^2.48.6
         version: 2.48.14
-      rxjs:
-        specifier: ^7.8.1
-        version: 7.8.1
       strip-markdown:
         specifier: ^5.0.1
         version: 5.0.1
@@ -882,6 +885,10 @@ packages:
     resolution: {integrity: sha512-5F7SDGs1T72ZczbRwbGO9lQi0NLjQxzl6i4lJxLxfW9U5UluCSyEJeniWvnhl3/euNiqQVbo8zruhsDfid0esA==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/runtime@7.25.4':
+    resolution: {integrity: sha512-DSgLeL/FNcpXuzav5wfYvHCGvynXkJbn3Zvc3823AEe9nPwW9IK4UoCSS5yGymmQzN0pCPvivtgS6/8U2kkm1w==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/template@7.24.7':
     resolution: {integrity: sha512-jYqfPrU9JTF0PmPy1tLYHW4Mp4KlgxJD9l2nP9fD6yT/ICi554DmrWBAEYpIelzjHf1msDP3PxJIRt/nFNfBig==}
     engines: {node: '>=6.9.0'}
@@ -997,12 +1004,12 @@ packages:
     resolution: {integrity: sha512-SITSV6aIXsuVNV3f3O0f2n/cgyEDWoSqtZMYiAmcsYHydcKrOz3gUxB/iXd/Qf08+IZX4KpgNbvUdMBmWz+kcA==}
     engines: {node: '>=10'}
 
-  '@digitalbazaar/ed25519-multikey@1.1.0':
-    resolution: {integrity: sha512-e5FW8ly5KlbK1ah/C0r9d7Xy4nMPXrQJq1yg87Z6A3kasTr4q1KYgIqPzWHGlx9Ng8KEBLEndjuZ4iI89cL94A==}
+  '@digitalbazaar/ed25519-multikey@1.2.0':
+    resolution: {integrity: sha512-lNCYUbm9sz+dHzdnFyZYZ3m/+h+vHVF5mGldVYU8naKOuTnKz/bcNUg92ro4MyTMyS6BRJTSHC3z6oQi6bBNeg==}
     engines: {node: '>=16'}
 
-  '@digitalbazaar/ed25519-signature-2020@5.3.0':
-    resolution: {integrity: sha512-xN7aSOmYRG6Z+RAmxvc5rVGn+lvYO7Xbs/6H7pOtbV6T+X0qa2X+UjYH4H+cCGPWI/J0lIxjhhYqspht8JoNWw==}
+  '@digitalbazaar/ed25519-signature-2020@5.4.0':
+    resolution: {integrity: sha512-dHjOv41wiKLoPaE1S9g4NCMKNnelYtBa5fCJKwrqo+cPlLuKcEhtD7w/uuc5non7bf/GX5sa5YfDI/sRUOS6iw==}
     engines: {node: '>=18'}
 
   '@digitalbazaar/ed25519-verification-key-2020@4.1.0':
@@ -1535,11 +1542,20 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@idos-network/idos-sdk@0.0.30':
-    resolution: {integrity: sha512-8NzvpolZAno4TI7y+66emPyVCPux53Iu+3PpfCPT6P9Sp/XG2v6IUjf7ZdIe7b8xFxuvK2Hh1sivl3T0nU+jGQ==}
+  '@idos-network/idos-sdk@0.3.1':
+    resolution: {integrity: sha512-FXjMRuWtue2lwmZxLq+UrO0+XGRKSg0ZVsIO4xxI9W/5ysrihrxvxn+CdXwiYVqSociPM3xahAHLXYV9gGVliA==}
     peerDependencies:
-      ethers: ^6.8.0
-      near-api-js: ^2.1.4
+      ethers: ^6.12
+      near-api-js: ^3.0.4
+
+  '@iframe-resizer/core@5.2.6':
+    resolution: {integrity: sha512-lKt25OAYfZIak2HAfvfg4jT24P9Ap++uru8tujmkcn7aZFTHOMHPv9zxvG6OgzHCAI26EvMbRv9OpX8Ng3BV9w==}
+
+  '@iframe-resizer/react@5.2.6':
+    resolution: {integrity: sha512-jnZrisf7X7aBYzb41xQk7yNRrGiNDG1U5dvnkSFdrCleY302srp75cSGzJaCWRjkm33kNqGbQx6QxIx5tVCFpQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0  || ^19.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0  || ^19.0.0
 
   '@jridgewell/gen-mapping@0.3.5':
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
@@ -1590,8 +1606,8 @@ packages:
       react: ^18.2.0
       react-dom: 18.2.0
 
-  '@kwilteam/kwil-js@0.3.0':
-    resolution: {integrity: sha512-SS+Emn4XqiWX2L3pcfEflAXVVv+eceHBVAtnXbgDW/8Owqw34YVNWE/LRhApREedqzZo/GPoGvaSQRMjHHkyaA==}
+  '@kwilteam/kwil-js@0.7.1':
+    resolution: {integrity: sha512-aeqgMmg9q1NNNxkA1LKEAOv0HnYFpQimt9B1o26uiqslC1l7qbJuKfQ35W7HG2hhZs/5+mwJPZQizmPgF4GwIg==}
     engines: {node: '>=18.0.0'}
 
   '@ledgerhq/connect-kit@1.1.12':
@@ -1846,6 +1862,9 @@ packages:
       react: ^18
       react-dom: ^18
       zustand: ^4
+
+  '@near-wallet-selector/bitte-wallet@8.9.12':
+    resolution: {integrity: sha512-yzEL/9KAc3eqLjvfFBM1YZzzbfObEfj9PZPbljdESPm/vW93GfhLq3MPvQmRyahT3areDqeHqMUlWObvrYcLaQ==}
 
   '@near-wallet-selector/core@8.9.10':
     resolution: {integrity: sha512-do+DDahRHPzr5VKiFS7NWKyNbspXu64/w7CuSBi8IUDsDsclmV7Os6Hp5HcVAq+X3Whi//NxKGX6mPMb+SRPqw==}
@@ -5188,6 +5207,9 @@ packages:
     resolution: {integrity: sha512-7yAQpD2UMJzLi1Dqv7qFYnPbaPx7ZfFK6PiIxQ4PfkGPyNyl2Ugx+a/umUonmKqjhM4DnfbMvdX6otXq83soQQ==}
     engines: {node: ^12.20 || >= 14.13}
 
+  fflate@0.4.8:
+    resolution: {integrity: sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==}
+
   fido2-lib@3.4.1:
     resolution: {integrity: sha512-efNrRbckp48AW7Q43o6gcp8/wnoBM7hwKikQntdiR2/NqVMPaCXFQs8kJ9wQqfv5V3PxZdg4kD9DpxdqYl6jxQ==}
     engines: {node: '>=10'}
@@ -5976,13 +5998,13 @@ packages:
   jsonfile@6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
 
-  jsonld-document-loader@2.1.0:
-    resolution: {integrity: sha512-10MSyRKdt/8yU/7+nrhV0i5ZOGVeiQIVl1VQPeWbWXeXbSqR+SkSNjEPdgevXl8rJYMVi5UkBM/Ws+S+DSQ4wA==}
+  jsonld-document-loader@2.2.0:
+    resolution: {integrity: sha512-XrGe4AmRdkdMRwQB3mnedwdRtJytuieqoF1qhDtoJjB9hl1rjzFCVTF9+IL6YxMijKpZfv004jDq2H7OeKDQLg==}
     engines: {node: '>=18'}
 
-  jsonld-signatures@11.2.1:
-    resolution: {integrity: sha512-RNaHTEeRrX0jWeidPCwxMq/E/Ze94zFyEZz/v267ObbCHQlXhPO7GtkY6N5PSHQfQhZPXa8NlMBg5LiDF4dNbA==}
-    engines: {node: '>=14'}
+  jsonld-signatures@11.3.0:
+    resolution: {integrity: sha512-+KaA2uWhnQ6eYDYqFoopYS8PcmbAdMuM0RFuycZw5Vh0gZiuMHt5/nCLh/p2x5blPGREntTHCQtI/1TtZ1+CUg==}
+    engines: {node: '>=18'}
 
   jsonld@8.3.2:
     resolution: {integrity: sha512-MwBbq95szLwt8eVQ1Bcfwmgju/Y5P2GdtlHE2ncyfuYjIdEhluUVyj1eudacf1mOkWIoS9GpDBTECqhmq7EOaA==}
@@ -6892,6 +6914,9 @@ packages:
     resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
     engines: {node: ^10 || ^12 || >=14}
 
+  posthog-js@1.158.1:
+    resolution: {integrity: sha512-BRCZUpkZTsNPTTclpqv6tB9aGD9OH1Lh+3SZdqo/JMbPesKRQ2XSis6WhxWmujrTZDfdJtVa7tnQG1aT2Ag4Yg==}
+
   posthtml-parser@0.10.2:
     resolution: {integrity: sha512-PId6zZ/2lyJi9LiKfe+i2xv57oEjJgWbsHGGANwos5AvdQp98i6AtamAl8gzSVFGfQ43Glb5D614cvZf012VKg==}
     engines: {node: '>=12'}
@@ -6907,6 +6932,9 @@ packages:
   posthtml@0.16.6:
     resolution: {integrity: sha512-JcEmHlyLK/o0uGAlj65vgg+7LIms0xKXe60lcDOTU7oVX/3LuEuLwrQpW3VJ7de5TaFKiW4kWkaIpJL42FEgxQ==}
     engines: {node: '>=12.0.0'}
+
+  preact@10.23.2:
+    resolution: {integrity: sha512-kKYfePf9rzKnxOAKDpsWhg/ysrHPqT+yQ7UW4JjdnqjFIeNUnNcEJvhuA8fDenxAGWzUqtd51DfVg7xp/8T9NA==}
 
   prelude-ls@1.2.1:
     resolution: {integrity: sha512-vkcDPrRZo1QZLbn5RLGPpg/WmIQ65qoWWhcGKf/b5eplkkarX0m9z8ppCat4mlOqUsWpyNuYgO3VRyrYHSzX5g==}
@@ -7231,6 +7259,10 @@ packages:
   rdf-canonize@3.4.0:
     resolution: {integrity: sha512-fUeWjrkOO0t1rg7B2fdyDTvngj+9RlUyL92vOdiB7c0FPguWVsniIMjEtHH+meLBO9rzkUlUzBVXgWrjI8P9LA==}
     engines: {node: '>=12'}
+
+  rdf-canonize@4.0.1:
+    resolution: {integrity: sha512-B5ynHt4sasbUafzrvYI2GFARgeFcD8Sx9yXPbg7gEyT2EH76rlCv84kyO6tnxzVbxUN/uJDbK1S/MXh+DsnuTA==}
+    engines: {node: '>=18'}
 
   react-bootstrap-typeahead@6.3.2:
     resolution: {integrity: sha512-N5Mb0WlSSMcD7Z0pcCypILgIuECybev0hl4lsnCa5lbXTnN4QdkuHLGuTLSlXBwm1ZMFpOc2SnsdSRgeFiF+Ow==}
@@ -8370,6 +8402,9 @@ packages:
     resolution: {integrity: sha512-d2JWLCivmZYTSIoge9MsgFCZrt571BikcWGYkjC1khllbTeDlGqZ2D8vD8E/lJa8WGWbb7Plm8/XJYV7IJHZZw==}
     engines: {node: '>= 8'}
 
+  web-vitals@4.2.3:
+    resolution: {integrity: sha512-/CFAm1mNxSmOj6i0Co+iGFJ58OS4NRGVP+AWS/l509uIK5a1bSoIVaHz/ZumpHTfHSZBpgrJ+wjfpAOrTHok5Q==}
+
   webcrypto-core@1.8.0:
     resolution: {integrity: sha512-kR1UQNH8MD42CYuLzvibfakG5Ew5seG85dMMoAM/1LqvckxaF6pUiidLuraIu4V+YCIFabYecUZAW0TuxAoaqw==}
 
@@ -9468,6 +9503,10 @@ snapshots:
     dependencies:
       regenerator-runtime: 0.14.1
 
+  '@babel/runtime@7.25.4':
+    dependencies:
+      regenerator-runtime: 0.14.1
+
   '@babel/template@7.24.7':
     dependencies:
       '@babel/code-frame': 7.24.7
@@ -9626,19 +9665,19 @@ snapshots:
 
   '@ctrl/tinycolor@3.6.1': {}
 
-  '@digitalbazaar/ed25519-multikey@1.1.0':
+  '@digitalbazaar/ed25519-multikey@1.2.0':
     dependencies:
       '@noble/ed25519': 1.7.3
       base58-universal: 2.0.0
       base64url-universal: 2.0.0
 
-  '@digitalbazaar/ed25519-signature-2020@5.3.0(web-streams-polyfill@3.3.3)':
+  '@digitalbazaar/ed25519-signature-2020@5.4.0(web-streams-polyfill@3.3.3)':
     dependencies:
-      '@digitalbazaar/ed25519-multikey': 1.1.0
+      '@digitalbazaar/ed25519-multikey': 1.2.0
       '@digitalbazaar/ed25519-verification-key-2020': 4.1.0
       base58-universal: 2.0.0
       ed25519-signature-2020-context: 1.1.0
-      jsonld-signatures: 11.2.1(web-streams-polyfill@3.3.3)
+      jsonld-signatures: 11.3.0(web-streams-polyfill@3.3.3)
     transitivePeerDependencies:
       - web-streams-polyfill
 
@@ -9663,7 +9702,7 @@ snapshots:
     dependencies:
       credentials-context: 2.0.0
       jsonld: 8.3.2(web-streams-polyfill@3.3.3)
-      jsonld-signatures: 11.2.1(web-streams-polyfill@3.3.3)
+      jsonld-signatures: 11.3.0(web-streams-polyfill@3.3.3)
     transitivePeerDependencies:
       - web-streams-polyfill
 
@@ -10436,26 +10475,38 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@idos-network/idos-sdk@0.0.30(ethers@6.13.1)(near-api-js@4.0.3)(web-streams-polyfill@3.3.3)':
+  '@idos-network/idos-sdk@0.3.1(ethers@6.13.1)(near-api-js@4.0.3)(web-streams-polyfill@3.3.3)':
     dependencies:
-      '@digitalbazaar/ed25519-signature-2020': 5.3.0(web-streams-polyfill@3.3.3)
+      '@digitalbazaar/ed25519-signature-2020': 5.4.0(web-streams-polyfill@3.3.3)
       '@digitalbazaar/ed25519-verification-key-2020': 4.1.0
       '@digitalbazaar/vc': 6.3.0(web-streams-polyfill@3.3.3)
-      '@kwilteam/kwil-js': 0.3.0
+      '@kwilteam/kwil-js': 0.7.1
       '@stablelib/base64': 1.0.1
       '@stablelib/binary': 1.0.1
       '@stablelib/bytes': 1.0.1
+      '@stablelib/sha256': 1.0.1
       '@stablelib/utf8': 1.0.2
       borsh: 1.0.0
       ethers: 6.13.1
       jsonld: 8.3.2(web-streams-polyfill@3.3.3)
-      jsonld-document-loader: 2.1.0
+      jsonld-document-loader: 2.2.0
       near-api-js: 4.0.3
+      tweetnacl: 1.0.3
     transitivePeerDependencies:
       - bufferutil
       - debug
       - utf-8-validate
       - web-streams-polyfill
+
+  '@iframe-resizer/core@5.2.6': {}
+
+  '@iframe-resizer/react@5.2.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@babel/runtime': 7.25.4
+      '@iframe-resizer/core': 5.2.6
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      warning: 4.0.3
 
   '@jridgewell/gen-mapping@0.3.5':
     dependencies:
@@ -10518,12 +10569,10 @@ snapshots:
       - '@near-js/keystores'
       - encoding
 
-  '@kwilteam/kwil-js@0.3.0':
+  '@kwilteam/kwil-js@0.7.1':
     dependencies:
       axios: 0.27.2
-      dotenv: 16.4.5
       ethers: 6.13.1
-      ethers5: ethers@5.7.2
       jssha: 3.3.1
       long: 5.2.3
     transitivePeerDependencies:
@@ -11001,6 +11050,12 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
+
+  '@near-wallet-selector/bitte-wallet@8.9.12':
+    dependencies:
+      '@mintbase-js/wallet': 0.6.0-beta.10
+    transitivePeerDependencies:
+      - encoding
 
   '@near-wallet-selector/core@8.9.10(near-api-js@2.1.4)':
     dependencies:
@@ -15800,6 +15855,8 @@ snapshots:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.3.3
 
+  fflate@0.4.8: {}
+
   fido2-lib@3.4.1:
     dependencies:
       '@hexagon/base64': 1.1.28
@@ -16628,12 +16685,13 @@ snapshots:
     optionalDependencies:
       graceful-fs: 4.2.11
 
-  jsonld-document-loader@2.1.0: {}
+  jsonld-document-loader@2.2.0: {}
 
-  jsonld-signatures@11.2.1(web-streams-polyfill@3.3.3):
+  jsonld-signatures@11.3.0(web-streams-polyfill@3.3.3):
     dependencies:
       '@digitalbazaar/security-context': 1.0.1
       jsonld: 8.3.2(web-streams-polyfill@3.3.3)
+      rdf-canonize: 4.0.1
       serialize-error: 8.1.0
     transitivePeerDependencies:
       - web-streams-polyfill
@@ -17927,6 +17985,12 @@ snapshots:
       picocolors: 1.0.1
       source-map-js: 1.2.0
 
+  posthog-js@1.158.1:
+    dependencies:
+      fflate: 0.4.8
+      preact: 10.23.2
+      web-vitals: 4.2.3
+
   posthtml-parser@0.10.2:
     dependencies:
       htmlparser2: 7.2.0
@@ -17943,6 +18007,8 @@ snapshots:
     dependencies:
       posthtml-parser: 0.11.0
       posthtml-render: 3.0.0
+
+  preact@10.23.2: {}
 
   prelude-ls@1.2.1: {}
 
@@ -18370,6 +18436,10 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
 
   rdf-canonize@3.4.0:
+    dependencies:
+      setimmediate: 1.0.5
+
+  rdf-canonize@4.0.1:
     dependencies:
       setimmediate: 1.0.5
 
@@ -19547,6 +19617,8 @@ snapshots:
   weak-map@1.0.8: {}
 
   web-streams-polyfill@3.3.3: {}
+
+  web-vitals@4.2.3: {}
 
   webcrypto-core@1.8.0:
     dependencies:

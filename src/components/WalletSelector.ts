@@ -1,4 +1,5 @@
 import { setupKeypom } from '@keypom/selector';
+import { setupBitteWallet } from '@near-wallet-selector/bitte-wallet';
 import type { FinalExecutionOutcome, WalletSelector, WalletSelectorState } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
@@ -47,6 +48,7 @@ export class Wallet {
         setupMyNearWallet(),
         setupSender(),
         setupHereWallet(),
+        setupBitteWallet(),
         setupMintbaseWallet(),
         setupMeteorWallet(),
         setupNeth({
