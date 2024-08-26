@@ -15,6 +15,12 @@ const ApplicationsPage: NextPageWithLayout = () => {
   const authStore = useAuthStore();
   const accountId = authStore.accountId;
 
+  const changeUrl = (newUrl: string) => {
+    if (window.location.pathname !== newUrl) {
+      window.history.pushState({}, '', newUrl);
+    }
+  }
+
   useEffect(() => {
     const { requestAuth, createAccount } = router.query;
     if (requestAuth && !accountId) {
@@ -26,6 +32,9 @@ const ApplicationsPage: NextPageWithLayout = () => {
     <ComponentWrapperPage
       src={components.applicationsPage}
       meta={{ title: 'NEAR | Applications', description: 'Featured applications built on NEAR' }}
+      componentProps={{
+        changeUrl
+      }}
     />
   );
 };
