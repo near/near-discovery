@@ -16,7 +16,6 @@ import { providers, utils } from 'near-api-js';
 import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import type { Context } from 'react';
 import { createContext } from 'react';
-import { distinctUntilChanged, map } from 'rxjs';
 
 import { networkId as defaultNetwork, signInContractId } from '@/utils/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
@@ -92,15 +91,10 @@ export class Wallet {
     const isSignedIn = walletSelector.isSignedIn();
     const accountId = isSignedIn ? walletSelector.store.getState().accounts[0].accountId : '';
 
-    walletSelector.store.observable
-      .pipe(
-        map((state: WalletSelectorState) => state.accounts),
-        distinctUntilChanged(),
-      )
-      .subscribe((accounts: any) => {
-        const signedAccount = accounts.find((account: { active: boolean }) => account.active)?.accountId;
-        accountChangeHook(signedAccount);
-      });
+    walletSelector.store.observable.subscribe(async (state: WalletSelectorState) => {
+      const signedAccount = state?.accounts.find((account: { active: boolean }) => account.active)?.accountId;
+      accountChangeHook(signedAccount || '');
+    });
 
     return accountId;
   };
