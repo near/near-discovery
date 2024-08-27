@@ -17,7 +17,7 @@ const ApplicationsPage: NextPageWithLayout = () => {
 
   const setURLSearchParams = (params: string | string[][] | Record<string, string> | URLSearchParams | undefined) => {
     if (!params) return;
-    let searchParams = new URLSearchParams(params);
+    const searchParams = new URLSearchParams(params);
     if (searchParams.toString().length > 0) {
       window.history.pushState({}, '', "?" + searchParams.toString());
     } else {
