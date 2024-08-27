@@ -15,9 +15,13 @@ const ApplicationsPage: NextPageWithLayout = () => {
   const authStore = useAuthStore();
   const accountId = authStore.accountId;
 
-  const changeUrl = (newUrl: string) => {
-    if (window.location.pathname !== newUrl) {
-      window.history.pushState({}, '', newUrl);
+  const setURLSearchParams = (params: string | string[][] | Record<string, string> | URLSearchParams | undefined) => {
+    if (!params) return;
+    let searchParams = new URLSearchParams(params);
+    if (searchParams.toString().length > 0) {
+      window.history.pushState({}, '', "?" + searchParams.toString());
+    } else {
+      window.history.pushState({}, '', window.location.pathname);
     }
   }
 
@@ -33,7 +37,7 @@ const ApplicationsPage: NextPageWithLayout = () => {
       src={components.applicationsPage}
       meta={{ title: 'NEAR | Applications', description: 'Featured applications built on NEAR' }}
       componentProps={{
-        changeUrl
+        setURLSearchParams
       }}
     />
   );
