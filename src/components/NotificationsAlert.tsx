@@ -1,10 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { VmComponent } from '@/components/vm/VmComponent';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useIosDevice } from '@/hooks/useIosDevice';
-import { useAuthStore } from '@/stores/auth';
 import { useTermsOfServiceStore } from '@/stores/terms-of-service';
 import {
   handleOnCancel,
@@ -15,14 +14,15 @@ import {
 import { isNotificationSupported, isPermisionGranted, isPushManagerSupported } from '@/utils/notificationsHelpers';
 import { getNotificationLocalStorage, setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 
+import { NearContext } from './WalletSelector';
+
 const Wrapper = styled.div`
   position: absolute;
   color: transparent;
 `;
 
 export const NotificationsAlert = () => {
-  const signedIn = useAuthStore((store) => store.signedIn);
-  const accountId = useAuthStore((store) => store.accountId);
+  const { signedAccountId } = useContext(NearContext);
   const components = useBosComponents();
   const [showNotificationModalState, setShowNotificationModalState] = useState(false);
   const [isHomeScreenApp, setHomeScreenApp] = useState(false);
@@ -47,10 +47,10 @@ export const NotificationsAlert = () => {
       setShowNotificationModalState(false);
       return;
     }
-    return handleTurnOn(accountId, () => {
+    return handleTurnOn(signedAccountId, () => {
       setShowNotificationModalState(false);
     });
-  }, [accountId, isIosDevice, isHomeScreenApp]);
+  }, [signedAccountId, isIosDevice, isHomeScreenApp]);
 
   const pauseNotifications = useCallback(() => {
     handleOnCancel();
@@ -74,12 +74,12 @@ export const NotificationsAlert = () => {
   }, [tosData, subscribeError, showOnTS, iosHomeScreenPrompt]);
 
   useEffect(() => {
-    if (!signedIn) {
+    if (!signedAccountId) {
       return;
     }
 
     checkNotificationModal();
-  }, [signedIn, checkNotificationModal]);
+  }, [signedAccountId, checkNotificationModal]);
 
   useEffect(() => {
     if (isIosDevice) {
@@ -97,7 +97,7 @@ export const NotificationsAlert = () => {
     }
   }, [isIosDevice]);
 
-  if (!signedIn) return null;
+  if (!signedAccountId) return null;
 
   return (
     <Wrapper>

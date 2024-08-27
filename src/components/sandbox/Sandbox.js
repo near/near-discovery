@@ -3,14 +3,14 @@ import ls from 'local-storage';
 import { useRouter } from 'next/router';
 import prettier from 'prettier';
 import parserBabel from 'prettier/parser-babel';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
 import { useVmStore } from '@/stores/vm';
 import { recordHandledError } from '@/utils/analytics';
 
+import { NearContext } from '../WalletSelector';
 import BannerOboarding from './Banners/BannerOboarding';
 import VsCodeBanner from './Banners/VsCodeBanner';
 import MainWrapper from './css/MainWrapper';
@@ -64,9 +64,7 @@ import MainLoader from './Welcome/MainLoader';
 export const Sandbox = ({ onboarding = false }) => {
   const near = useVmStore((store) => store.near);
   const cache = useVmStore((store) => store.cache);
-  const accountId = useAuthStore((store) => store.accountId);
-  const logOut = useAuthStore((store) => store.logOut);
-  const requestSignIn = useAuthStore((store) => store.requestSignIn);
+  const { signedAccountId, wallet } = useContext(NearContext);
 
   const router = useRouter();
   const widgets = useBosComponents();
@@ -89,7 +87,7 @@ export const Sandbox = ({ onboarding = false }) => {
   const [disable, setDisable] = useState({});
 
   const widgetName = path?.name?.split('/')[0];
-  const widgetPath = `${accountId}/${path?.type}/${path?.name}`;
+  const widgetPath = `${signedAccountId}/${path?.type}/${path?.name}`;
   const jpath = JSON.stringify(path);
   const { isDraft } = filesObject[jpath] || {};
   const showEditor = !!Object.keys(filesObject)?.length || !localChecked;
@@ -186,7 +184,7 @@ export const Sandbox = ({ onboarding = false }) => {
   const loadAndOpenFile = useCallback(
     (nameOrPath, type) => {
       const onboardingId = onboarding && 'near';
-      const src = getSrcByNameOrPath(nameOrPath, onboardingId || accountId, type);
+      const src = getSrcByNameOrPath(nameOrPath, onboardingId || signedAccountId, type);
       const path = toPath(type, nameOrPath);
 
       const newFile = {
@@ -206,7 +204,7 @@ export const Sandbox = ({ onboarding = false }) => {
       selectFile(path);
       getFileData(newFile);
     },
-    [accountId, addFile, getFileData, onboarding],
+    [signedAccountId, addFile, getFileData, onboarding],
   );
 
   useEffect(() => {
@@ -277,7 +275,7 @@ export const Sandbox = ({ onboarding = false }) => {
     const jpathNew = fileToJpath(pathNew);
 
     const onboardingId = onboarding && 'near';
-    const src = getSrcByNameOrPath(pathNew.name, onboardingId || accountId, pathNew.type);
+    const src = getSrcByNameOrPath(pathNew.name, onboardingId || signedAccountId, pathNew.type);
 
     setFilesObject((state) => {
       const newState = {
@@ -419,7 +417,7 @@ export const Sandbox = ({ onboarding = false }) => {
     const newName = generateNewName(type, files).name;
 
     const onboardingId = onboarding && 'near';
-    const src = getSrcByNameOrPath(newName, onboardingId || accountId, type);
+    const src = getSrcByNameOrPath(newName, onboardingId || signedAccountId, type);
     const path = toPath(type, newName);
 
     const newFile = {
@@ -561,7 +559,7 @@ export const Sandbox = ({ onboarding = false }) => {
               <div className="container-fluid mt-1" style={{ position: 'relative' }}>
                 <Search
                   widgets={widgets}
-                  logOut={logOut}
+                  logOut={wallet.signOut}
                   loadAndOpenFile={loadAndOpenFile}
                   refs={refs}
                   refSearch={refSearch}
@@ -582,10 +580,10 @@ export const Sandbox = ({ onboarding = false }) => {
                   refs={refs}
                   onboarding={onboarding}
                   currentStep={currentStep}
-                  requestSignIn={requestSignIn}
+                  requestSignIn={wallet.signIn}
                   disable={disable}
                   handleCommit={handleCommit}
-                  accountId={accountId}
+                  accountId={signedAccountId}
                 />
 
                 <div className="d-flex align-content-start">
@@ -606,7 +604,7 @@ export const Sandbox = ({ onboarding = false }) => {
                         <NavigationSub
                           layout={layout}
                           path={path}
-                          accountId={accountId}
+                          accountId={signedAccountId}
                           tab={tab}
                           widgetPath={widgetPath}
                           setTab={setTab}
@@ -660,7 +658,7 @@ export const Sandbox = ({ onboarding = false }) => {
                             jpath={jpath}
                             widgets={widgets}
                             metadata={metadata}
-                            accountId={accountId}
+                            accountId={signedAccountId}
                             widgetName={widgetName}
                           />
                         </div>
