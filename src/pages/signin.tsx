@@ -1,13 +1,14 @@
 import { Button } from '@near-pagoda/ui';
 import { useSearchParams } from 'next/navigation';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { NearContext } from '@/components/WalletSelector';
 import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
+import { signInContractId } from '@/utils/config';
 import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -15,21 +16,19 @@ import { isValidEmail } from '../utils/form-validation';
 
 const SignInPage: NextPageWithLayout = () => {
   const { register, handleSubmit, setValue } = useForm();
-  const requestSignInWithWallet = useAuthStore((store) => store.requestSignInWithWallet);
-  const signedIn = useAuthStore((store) => store.signedIn);
-  const vmNear = useAuthStore((store) => store.vmNear);
+  const { signedAccountId, wallet } = useContext(NearContext);
   const searchParams = useSearchParams();
   const { redirect } = useSignInRedirect();
 
   useEffect(() => {
-    if (signedIn) {
+    if (signedAccountId) {
       redirect();
     }
-  }, [redirect, signedIn]);
+  }, [redirect, signedAccountId]);
 
   useEffect(() => {
-    if (vmNear?.selector && searchParams.get('account_id') && searchParams.get('public_key')) {
-      vmNear.selector
+    if (wallet?.selector && searchParams.get('account_id') && searchParams.get('public_key')) {
+      wallet.selector
         .then((selector: any) => {
           const walletSelectorState = selector.store.getState();
 
@@ -40,23 +39,23 @@ const SignInPage: NextPageWithLayout = () => {
         .then((fastAuthWallet: any) => {
           if (fastAuthWallet) {
             fastAuthWallet.signIn({
-              contractId: vmNear.config.contractName,
+              contractId: signInContractId,
             });
           }
         });
     }
-  }, [searchParams, vmNear]);
+  }, [searchParams, wallet]);
 
   useClearCurrentComponent();
 
   const onSubmit = handleSubmit(async (data) => {
-    if (!data.email || !vmNear) return;
+    if (!data.email || !wallet) return;
 
-    vmNear.selector
+    wallet.selector
       .then((selector: any) => selector.wallet('fast-auth-wallet'))
       .then((fastAuthWallet: any) =>
         fastAuthWallet.signIn({
-          contractId: vmNear.config.contractName,
+          contractId: signInContractId,
           email: data.email,
           isRecovery: true,
         }),
@@ -89,7 +88,7 @@ const SignInPage: NextPageWithLayout = () => {
         </InputContainer>
 
         <Button type="submit" label="Continue" variant="affirmative" onClick={onSubmit} />
-        <Button type="button" label="Continue with wallet" variant="primary" onClick={requestSignInWithWallet} />
+        <Button type="button" label="Continue with wallet" variant="primary" onClick={wallet?.signIn} />
       </FormContainer>
     </StyledContainer>
   );

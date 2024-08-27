@@ -1,10 +1,11 @@
 import { Button, copyTextToClipboard, Flex, Text, Tooltip } from '@near-pagoda/ui';
 import { Copy } from '@phosphor-icons/react';
+import { useContext } from 'react';
 
-import { useAuthStore } from '@/stores/auth';
+import { NearContext } from '../WalletSelector';
 
 export const ReceiveNear = () => {
-  const accountId = useAuthStore((store) => store.accountId);
+  const { signedAccountId } = useContext(NearContext);
 
   return (
     <Flex stack>
@@ -12,7 +13,7 @@ export const ReceiveNear = () => {
 
       <Flex align="center">
         <Text style={{ marginRight: 'auto' }} weight={600} color="sand12">
-          {accountId}
+          {signedAccountId}
         </Text>
 
         <Tooltip content="Copy Account ID">
@@ -21,7 +22,7 @@ export const ReceiveNear = () => {
             icon={<Copy />}
             size="small"
             fill="outline"
-            onClick={() => copyTextToClipboard(accountId, accountId)}
+            onClick={() => copyTextToClipboard(signedAccountId, signedAccountId)}
           />
         </Tooltip>
       </Flex>

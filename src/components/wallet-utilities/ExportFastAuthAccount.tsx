@@ -13,29 +13,34 @@ import {
 import { Copy, Eye, EyeSlash } from '@phosphor-icons/react';
 import { KeyPair } from 'near-api-js';
 import { useEffect, useState } from 'react';
+import { useContext } from 'react';
 
-import { useAuthStore } from '@/stores/auth';
-import { useVmStore } from '@/stores/vm';
+import { NearContext } from '../WalletSelector';
 
 export const ExportFastAuthAccount = () => {
   const [generatingKey, setGeneratingKey] = useState(false);
   const [secretKey, setSecretKey] = useState('');
   const [fastAuthAccountSignedIn, setFastAuthAccountSignedIn] = useState(false);
   const [privateKeyVisible, setPrivateKeyVisible] = useState(false);
-  const accountId = useAuthStore((store) => store.accountId);
-  const wallet = useAuthStore((store) => store.wallet);
-  const near = useVmStore((store) => store.near);
+  const { wallet, signedAccountId } = useContext(NearContext);
 
   useEffect(() => {
-    if (!near || !accountId || !wallet) return;
-    if ((wallet as any).signAndSendDelegateAction) {
-      setFastAuthAccountSignedIn(true);
-    }
-  }, [near, wallet, accountId]);
+    const checkFastAuthAccount = async () => {
+      const selector = await wallet?.selector;
+      const selectedWallet: any = await selector?.wallet();
+
+      if (selectedWallet?.signAndSendDelegateAction) {
+        setFastAuthAccountSignedIn(true);
+      }
+    };
+
+    if (!wallet || !signedAccountId) return;
+    checkFastAuthAccount();
+  }, [wallet, signedAccountId]);
 
   const generateKey = async () => {
     try {
-      if (!accountId || !wallet) {
+      if (!signedAccountId || !wallet) {
         throw new Error('Wallet has not initialized');
       }
 
@@ -43,9 +48,8 @@ export const ExportFastAuthAccount = () => {
 
       const keyPair = KeyPair.fromRandom('ed25519');
       const publicKey = keyPair.getPublicKey().toString();
-
-      await wallet.signAndSendTransaction({
-        receiverId: accountId,
+      const addKeyTransaction = {
+        receiverId: signedAccountId,
         actions: [
           {
             type: 'AddKey',
@@ -57,7 +61,9 @@ export const ExportFastAuthAccount = () => {
             },
           },
         ],
-      });
+      };
+
+      await wallet.signAndSendTransactions({ transactions: [addKeyTransaction] });
 
       setSecretKey(keyPair.toString());
 
@@ -142,7 +148,7 @@ export const ExportFastAuthAccount = () => {
         </Card>
       ) : (
         <Button
-          disabled={!accountId}
+          disabled={!signedAccountId}
           loading={generatingKey}
           onClick={generateKey}
           label="Create Full Access Key"

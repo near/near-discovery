@@ -1,9 +1,8 @@
 import { Button, Table, Text, Tooltip } from '@near-pagoda/ui';
 import type { DeleteKeyAction } from '@near-wallet-selector/core';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
-import { useAuthStore } from '@/stores/auth';
-import { useVmStore } from '@/stores/vm';
+import { NearContext } from '../WalletSelector';
 
 type AccessKey = {
   public_key: string;
@@ -18,25 +17,21 @@ type AccessKey = {
 };
 
 const KeyTable: React.FC = () => {
-  const near = useVmStore((store) => store.near);
-  const accountId = useAuthStore((store) => store.accountId);
-  const wallet = useAuthStore((store) => store.wallet);
+  const { signedAccountId, wallet } = useContext(NearContext);
 
   const [keys, setKeys] = useState<AccessKey[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!near || !accountId) return;
+    if (!wallet?.selector || !signedAccountId) return;
 
     const getInfo = async () => {
-      const { nearConnection } = near;
-      const account = await nearConnection.account(accountId);
-      const accessKeys = (await account.getAccessKeys()) as AccessKey[];
+      const accessKeys: AccessKey[] = await wallet.getAccessKeys(signedAccountId);
       setKeys(accessKeys.filter((accessKey) => accessKey.access_key.permission.FunctionCall));
     };
 
     getInfo();
-  }, [near, accountId]);
+  }, [wallet, wallet?.selector, signedAccountId]);
 
   const handleSelectAll = (): void => {
     if (selectedKeys.length === keys.length) {
@@ -51,7 +46,7 @@ const KeyTable: React.FC = () => {
   };
 
   const handleDeauthorizeAll = async (): Promise<void> => {
-    if (!accountId || !wallet) return;
+    if (!signedAccountId || !wallet) return;
 
     const actions: DeleteKeyAction[] = selectedKeys.map((publicKey) => {
       return {
@@ -62,7 +57,7 @@ const KeyTable: React.FC = () => {
       };
     });
 
-    await wallet.signAndSendTransaction({ receiverId: accountId, actions });
+    await wallet.signAndSendTransactions({ transactions: [{ receiverId: signedAccountId, actions }] as any });
   };
 
   return (
