@@ -1,14 +1,14 @@
 import { Button } from '@near-pagoda/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useAuthStore } from '@/stores/auth';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { network } from '@/utils/config';
+import { network, signInContractId } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';
@@ -31,15 +31,14 @@ const SignUpPage: NextPageWithLayout = () => {
     clearErrors,
   } = useForm();
   const formValues = watch();
-  const signedIn = useAuthStore((store) => store.signedIn);
-  const vmNear = useAuthStore((store) => store.vmNear);
+  const { signedAccountId, wallet } = useContext(NearContext);
 
   // redirect to home upon signing in
   useEffect(() => {
-    if (signedIn) {
+    if (signedAccountId) {
       router.push('/');
     }
-  }, [router, signedIn]);
+  }, [router, signedAccountId]);
 
   useEffect(() => {
     setComponentSrc(null);
@@ -82,11 +81,11 @@ const SignUpPage: NextPageWithLayout = () => {
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data?.username || !data.email) return;
-    vmNear.selector
+    wallet?.selector
       .then((selector: any) => selector.wallet('fast-auth-wallet'))
       .then((fastAuthWallet: any) =>
         fastAuthWallet.signIn({
-          contractId: vmNear.config.contractName,
+          contractId: signInContractId,
           email: data.email,
           accountId: data.username,
           isRecovery: false,

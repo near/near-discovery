@@ -1,5 +1,11 @@
+import dynamic from 'next/dynamic';
+
 import { useBosLoaderStore } from '@/stores/bos-loader';
-import { useVmStore } from '@/stores/vm';
+
+const Component = dynamic(() => import('./VM'), {
+  ssr: false,
+  loading: () => <p style={{ padding: '1rem' }}>Loading ...</p>,
+});
 
 type Props = {
   src: string;
@@ -7,21 +13,16 @@ type Props = {
 };
 
 export function VmComponent(props: Props) {
-  const { EthersProvider, ethersContext, Widget } = useVmStore();
   const redirectMapStore = useBosLoaderStore();
 
-  if (!EthersProvider || !redirectMapStore.hasResolved) {
-    return null;
-  }
-
   return (
-    <EthersProvider value={ethersContext}>
-      <Widget
+    <>
+      <Component
         config={{
           redirectMap: redirectMapStore.redirectMap,
         }}
         {...props}
       />
-    </EthersProvider>
+    </>
   );
 }
