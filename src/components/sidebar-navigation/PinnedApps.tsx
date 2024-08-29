@@ -4,18 +4,18 @@ import { Tooltip } from '@near-pagoda/ui';
 import { Button } from '@near-pagoda/ui';
 import { Text } from '@near-pagoda/ui';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { useAuthStore } from '@/stores/auth';
 
+import { NearContext } from '../WalletSelector';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { currentPathMatchesRoute } from './utils';
 
 export const PinnedApps = () => {
   const router = useRouter();
-  const accountId = useAuthStore((store) => store.accountId);
+  const { signedAccountId } = useContext(NearContext);
   const loadPinnedApps = useNavigationStore((store) => store.loadPinnedApps);
   const pinnedApps = useNavigationStore((store) => store.pinnedApps);
   const expandedDrawer = useNavigationStore((store) => store.expandedDrawer);
@@ -31,8 +31,8 @@ export const PinnedApps = () => {
   };
 
   useEffect(() => {
-    loadPinnedApps(accountId);
-  }, [accountId, loadPinnedApps]);
+    loadPinnedApps(signedAccountId);
+  }, [signedAccountId, loadPinnedApps]);
 
   return (
     <S.Section>

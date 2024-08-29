@@ -1,14 +1,15 @@
 import type { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
-import { useAuthStore } from '@/stores/auth';
+import { NearContext } from '@/components/WalletSelector';
 
 const privateRoute = (Component: NextComponentType) => {
   const Private = (props: any) => {
-    const signedIn = useAuthStore((store) => store.signedIn);
+    const { signedAccountId } = useContext(NearContext);
     const router = useRouter();
 
-    if (!signedIn && router) {
+    if (!signedAccountId && router) {
       // `signin` or `signup`?
       router.push('/signup');
     }

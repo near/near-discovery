@@ -2,11 +2,12 @@ import { Button } from '@near-pagoda/ui';
 import { MagnifyingGlass } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 
 import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
+import { NearContext } from '../WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
 import * as S from './styles';
@@ -19,7 +20,7 @@ export const SmallScreenHeader = () => {
   const setNavigation = useNavigationStore((store) => store.set);
   const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const { signedAccountId } = useContext(NearContext);
   const { requestAuthentication } = useSignInRedirect();
 
   const handleCreateAccount = () => {
@@ -50,7 +51,7 @@ export const SmallScreenHeader = () => {
         </S.SmallScreenHeaderLogo>
       )}
 
-      {signedIn ? (
+      {signedAccountId ? (
         <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens} $gap="16px">
           <Button label="search" icon={<MagnifyingGlass />} variant="secondary" onClick={redirect('/search')} />
           <UserDropdownMenu />

@@ -1,12 +1,12 @@
 import { Button } from '@near-pagoda/ui';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import { MigrationBanner } from '@/components/banner/MigrationBanner';
+import { NearContext } from '@/components/WalletSelector';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 
 import NearIcon from '../icons/near-icon.svg';
 import { NotificationButton } from '../NotificationButton';
@@ -85,7 +85,7 @@ const Actions = styled.div`
 
 export const MobileNavigation = () => {
   const [menuIsVisible, setMenuIsVisible] = useState(false);
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const { signedAccountId } = useContext(NearContext);
   const { requestAuthentication } = useSignInRedirect();
 
   const handleCreateAccount = () => {
@@ -120,7 +120,7 @@ export const MobileNavigation = () => {
           </Link>
 
           <Actions onClick={closeMenu}>
-            {signedIn ? (
+            {signedAccountId ? (
               <>
                 <NotificationButton mobileView />
                 <UserDropdownMenu />
