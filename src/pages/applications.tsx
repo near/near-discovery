@@ -37,7 +37,8 @@ const ApplicationsPage: NextPageWithLayout = () => {
       src={components.applicationsPage}
       meta={{ title: 'NEAR | Applications', description: 'Featured applications built on NEAR' }}
       componentProps={{
-        setURLSearchParams
+        setURLSearchParams,
+        scrollTo: window.scrollTo,
       }}
     />
   );
