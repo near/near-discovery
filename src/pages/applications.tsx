@@ -25,7 +25,9 @@ const ApplicationsPage: NextPageWithLayout = () => {
     }
   }
 
-  const scrollTo = window.scrollTo;
+  const scrollTo = (options: ScrollToOptions | undefined) => {
+    window.scrollTo(options);
+  }
 
   useEffect(() => {
     const { requestAuth, createAccount } = router.query;
