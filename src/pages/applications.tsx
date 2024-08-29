@@ -19,15 +19,15 @@ const ApplicationsPage: NextPageWithLayout = () => {
     if (!params) return;
     const searchParams = new URLSearchParams(params);
     if (searchParams.toString().length > 0) {
-      window.history.pushState({}, '', "?" + searchParams.toString());
+      window.history.pushState({}, '', '?' + searchParams.toString());
     } else {
       window.history.pushState({}, '', window.location.pathname);
     }
-  }
+  };
 
   const scrollTo = (options: ScrollToOptions | undefined) => {
     window.scrollTo(options);
-  }
+  };
 
   useEffect(() => {
     const { requestAuth, createAccount } = router.query;
