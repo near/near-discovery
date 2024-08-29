@@ -25,6 +25,8 @@ const ApplicationsPage: NextPageWithLayout = () => {
     }
   }
 
+  const scrollTo = window.scrollTo;
+
   useEffect(() => {
     const { requestAuth, createAccount } = router.query;
     if (requestAuth && !accountId) {
@@ -38,7 +40,7 @@ const ApplicationsPage: NextPageWithLayout = () => {
       meta={{ title: 'NEAR | Applications', description: 'Featured applications built on NEAR' }}
       componentProps={{
         setURLSearchParams,
-        scrollTo: window.scrollTo,
+        scrollTo,
       }}
     />
   );
