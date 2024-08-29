@@ -3,13 +3,13 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import type { FormEvent } from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { MigrationBanner } from '@/components/banner/MigrationBanner';
+import { NearContext } from '@/components/WalletSelector';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 import { recordEvent } from '@/utils/analytics';
 
 import NearLogo from '../icons/near-logo.svg';
@@ -125,7 +125,7 @@ export const DesktopNavigation = () => {
   const showTypeAheadDropdown = searchIsFocused && !!searchTerm;
   const components = useBosComponents();
   const searchFocusTimeout = useRef<NodeJS.Timeout>();
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const { signedAccountId } = useContext(NearContext);
   const { requestAuthentication } = useSignInRedirect();
 
   useEffect(() => {
@@ -208,7 +208,7 @@ export const DesktopNavigation = () => {
           <MainNavigationMenu />
 
           <Actions>
-            {signedIn ? (
+            {signedAccountId ? (
               <>
                 <NotificationButton />
                 <UserDropdownMenu />

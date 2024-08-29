@@ -1,7 +1,8 @@
 import { Text } from '@near-pagoda/ui';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { useAuthStore } from '@/stores/auth';
+import { NearContext } from '../WalletSelector';
 
 type Props = {
   inline?: boolean;
@@ -55,7 +56,7 @@ const TextLink = styled.a`
 `;
 
 export const MigrationBanner = (props: Props) => {
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const { signedAccountId } = useContext(NearContext);
   const isNearDotOrg = ['https://near.org', 'https://beta.near.org'].some(
     (url) => process.env.NEXT_PUBLIC_HOSTNAME === url,
   );
@@ -63,7 +64,7 @@ export const MigrationBanner = (props: Props) => {
 
   return (
     <>
-      {signedIn && isNearDotOrg ? (
+      {signedAccountId && isNearDotOrg ? (
         <Wrapper inline={props.inline}>
           <Flex gap="14px" alignItems="center" justifyContent="center">
             <Text className="banner-text" weight="500">

@@ -1,12 +1,12 @@
 import { Button } from '@near-pagoda/ui';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useAuthStore } from '@/stores/auth';
 
 import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
 import { VmComponent } from '../vm/VmComponent';
+import { NearContext } from '../WalletSelector';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 
@@ -14,7 +14,7 @@ export const LargeScreenHeader = () => {
   const [scrolled, setScrolled] = useState(false);
   const components = useBosComponents();
   const currentPageTitle = useNavigationStore((store) => store.currentPageTitle);
-  const signedIn = useAuthStore((store) => store.signedIn);
+  const { signedAccountId } = useContext(NearContext);
   const { requestAuthentication } = useSignInRedirect();
 
   const handleSignIn = () => {
@@ -43,7 +43,7 @@ export const LargeScreenHeader = () => {
         src={components.navigation.largeScreenHeader}
         props={{
           title: currentPageTitle,
-          rightSideChildren: signedIn ? (
+          rightSideChildren: signedAccountId ? (
             <>
               <UserDropdownMenu />
             </>

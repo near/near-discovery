@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router';
 import { useCallback } from 'react';
+import { useContext } from 'react';
 
-import { useAuthStore } from '@/stores/auth';
+import { NearContext } from '@/components/WalletSelector';
+import { signInContractId } from '@/utils/config';
 
 export function useSignInRedirect() {
   const router = useRouter();
-  const vmNear = useAuthStore((store) => store.vmNear);
+  const { wallet } = useContext(NearContext);
 
   const redirect = useCallback(
     (hardRefresh = false) => {
@@ -32,17 +34,17 @@ export function useSignInRedirect() {
   const requestAuthentication = useCallback(
     (createAccount = false) => {
       saveCurrentUrl();
-      if (!vmNear) return;
-      vmNear.selector
+      if (!wallet) return;
+      wallet.selector
         .then((selector: any) => selector.wallet('fast-auth-wallet'))
         .then((fastAuthWallet: any) =>
           fastAuthWallet.signIn({
-            contractId: vmNear.config.contractName,
+            contractId: signInContractId,
             isRecovery: !createAccount,
           }),
         );
     },
-    [saveCurrentUrl, vmNear],
+    [saveCurrentUrl, wallet],
   );
 
   return {
