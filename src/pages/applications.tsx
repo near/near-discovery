@@ -14,6 +14,20 @@ const ApplicationsPage: NextPageWithLayout = () => {
   const { requestAuthentication } = useSignInRedirect();
   const { signedAccountId } = useContext(NearContext);
 
+  const setURLSearchParams = (params: string | string[][] | Record<string, string> | URLSearchParams | undefined) => {
+    if (!params) return;
+    const searchParams = new URLSearchParams(params);
+    if (searchParams.toString().length > 0) {
+      window.history.pushState({}, '', '?' + searchParams.toString());
+    } else {
+      window.history.pushState({}, '', window.location.pathname);
+    }
+  };
+
+  const scrollTo = (options: ScrollToOptions | undefined) => {
+    window.scrollTo(options);
+  };
+
   useEffect(() => {
     const { requestAuth, createAccount } = router.query;
     if (requestAuth && !signedAccountId) {
@@ -25,6 +39,10 @@ const ApplicationsPage: NextPageWithLayout = () => {
     <ComponentWrapperPage
       src={components.applicationsPage}
       meta={{ title: 'NEAR | Applications', description: 'Featured applications built on NEAR' }}
+      componentProps={{
+        setURLSearchParams,
+        scrollTo,
+      }}
     />
   );
 };
