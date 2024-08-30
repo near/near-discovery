@@ -38,7 +38,6 @@ const MintNft = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!wallet) throw new Error('Wallet has not initialized yet');
-    console.log(crypto.randomUUID());
     try {
       let file = '';
 
