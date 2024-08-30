@@ -116,7 +116,7 @@ export const Sidebar = () => {
                 <span>Tools</span>
               </S.NavigationItem>
             </Tooltip>
-            
+
             <Tooltip content="Events" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem $active={isNavigationItemActive('/events')} $type="featured" href="/events">
                 <i className="ph-calendar ph-bold" />

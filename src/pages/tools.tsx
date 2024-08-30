@@ -1,13 +1,13 @@
-import { Button, Card, Container, Flex, Grid, Section, SvgIcon, Tabs, Text } from '@near-pagoda/ui';
-import { Coin, Gift, ImageSquare, ImagesSquare, Key } from '@phosphor-icons/react';
+import { Button, Card, Container, Flex, Section, SvgIcon, Tabs, Text } from '@near-pagoda/ui';
+import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
+import { useContext } from 'react';
 
-import NonFungibletoken from '@/components/tools/NonFungibleToken';
+import NonFungibleToken from '@/components/tools/NonFungibleToken';
+import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
-import { useContext } from 'react';
-import { NearContext } from '@/components/WalletSelector';
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -48,7 +48,7 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.Content>
 
                 <Tabs.Content value="nft">
-                  <NonFungibletoken/>
+                  <NonFungibleToken />
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
