@@ -40,6 +40,7 @@ const ApplicationsPage: NextPageWithLayout = () => {
       src={components.applicationsPage}
       meta={{ title: 'NEAR | Applications', description: 'Featured applications built on NEAR' }}
       componentProps={{
+        targetProps: router.query,
         setURLSearchParams,
         scrollTo,
       }}
