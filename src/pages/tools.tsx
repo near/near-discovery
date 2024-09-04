@@ -8,6 +8,7 @@ import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
+import Linkdrops from '@/components/tools/Linkdrops';
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
@@ -52,7 +53,7 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
-                  <Text>Coming soon</Text>
+                  <Linkdrops/>
                 </Tabs.Content>
               </Tabs.Root>
             </Card>
