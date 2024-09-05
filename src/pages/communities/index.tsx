@@ -156,8 +156,8 @@ const ContactUsPage: NextPageWithLayout = () => {
                   <p>{community.summary}</p>
                 </div>
               </Flex>
-              <Flex justify="end" style={{ marginTop: 'auto' }}>
-                <Button label="Join Telegram" href={`https://t.me/${community.telegram}`} />
+              <Flex justify="center" style={{ marginTop: 'auto' }}>
+                <Button label="Join the Community" href={`https://t.me/${community.telegram}`} />
               </Flex>
             </Card>
           ))}
