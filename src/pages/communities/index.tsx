@@ -8,7 +8,7 @@ import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
-import FAQS from './faqs';
+import FAQS from './components/faqs';
 
 export const IconLink = styled(Link)<{ iconColor: string }>`
   all: unset;
