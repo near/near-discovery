@@ -168,7 +168,7 @@ const ContactUsPage: NextPageWithLayout = () => {
             FAQ
           </Text>
         </Flex>
-        <FAQS urls={urls} />
+        <FAQS />
       </Container>
     </Section>
   );

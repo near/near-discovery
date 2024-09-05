@@ -1,6 +1,8 @@
 import { Accordion } from '@near-pagoda/ui';
 import styled from 'styled-components';
 
+import { useCommunities } from '@/hooks/useCommunities';
+
 const Link = styled.a`
   color: var(--violet8);
   text-decoration: none;
@@ -10,7 +12,9 @@ const Link = styled.a`
   }
 `;
 
-function FAQS({ urls }: { urls: any }) {
+function FAQS() {
+  const { urls } = useCommunities();
+
   const faqs = [
     {
       question: 'What is the expectation for a support resolution?',
