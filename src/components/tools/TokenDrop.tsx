@@ -1,11 +1,11 @@
 import { Button, FileInput, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
 import { useContext, useEffect, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import { NearContext } from '../WalletSelector';
 import getKeysPair from '@/utils/keyPair';
-import { formatNearAmount, parseNearAmount } from 'near-api-js/lib/utils/format';
+import { parseNearAmount } from 'near-api-js/lib/utils/format';
 
 type FormData = {
     dropName: string;
@@ -51,11 +51,13 @@ const TokenDrop = () => {
     loadBalance();
   }, [wallet, signedAccountId]);
 
+  // get_drop_information
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!wallet) throw new Error('Wallet has not initialized yet');
+    getKeysPair(data.numberLinks)
     try {
       const args = {
-        drop_id: crypto.randomUUID(),
         deposit_per_use: parseNearAmount(data.amountPerLink.toString()),
         metadata: JSON.stringify({
             dropName: data.dropName,
@@ -169,5 +171,51 @@ export default TokenDrop;
 //   "public_keys": [
 //     "ed25519:4JJwGg45WDmU14wsSG87K2Anf1g5wm6Yn1e4hEcfudAX",
 //     "ed25519:HKAZwSeN85DgPGUW5JGRRsMe5kPBhCbBqf1qHMNZfdgz"
+//   ]
+// }
+
+// Arguments: {
+//   "drop_id": "7bc5f708-dd9d-4dba-9f02-a117324346b5",
+//   "deposit_per_use": "100000000000000000000000",
+//   "metadata": "{\"dropName\":\"test\"}",
+//   "public_keys": [
+//     "ed25519:4JJwGg45WDmU14wsSG87K2Anf1g5wm6Yn1e4hEcfudAX",
+//     "ed25519:HKAZwSeN85DgPGUW5JGRRsMe5kPBhCbBqf1qHMNZfdgz"
+//   ]
+// }
+
+// Arguments: {
+//   "drop_id": "1725481443015",
+//   "deposit_per_use": "10000000000000000000000",
+//   "metadata": "{\"dropName\":\"test\"}",
+//   "public_keys": [
+//     "ed25519:FT6axDyL39LFE3cVN6PNJhejZZ6XMEDzvksW8uGhi2N5",
+//     "ed25519:9H93DK5GedgTgDTabU8qxihELBzNdMH5HRWwCpg2FUoh"
+//   ]
+// }
+
+// Arguments: {
+//   "deposit_per_use": "10000000000000000000000",
+//   "metadata": "{\"dropName\":\"test\"}",
+//   "public_keys": [
+//     "ed25519:Hzy9SMFyudC3bdNVKhwVZ4bCrhYnFaD9syW2bPNKsh6R",
+//     "ed25519:3pZ3ue2pWkFfGehej21qPAx2ZK5Nw3gkKvHGSyLuHCZW",
+//     "ed25519:3z8WguDt5whWoQ17t2XntvytxtBAL5XWSorD4zjtfeTM",
+//     "ed25519:9NM7ohNWzyVd3bqvWrWvxj2PXHQwDHtv9uF9cqy9k7s8",
+//     "ed25519:2z41giU3Mv696jDPEWnGmxS4Zp2m8P8nGs2feUHKngEw"
+//   ]
+// }
+
+
+// Arguments: {
+//   "drop_id": "1725547843208",
+//   "deposit_per_use": "10000000000000000000000",
+//   "metadata": "{\"dropName\":\"test keypom\"}",
+//   "public_keys": [
+//     "ed25519:GEzAmNgBE9vLVDfSvReHNSZ8aiPd1d43HMwyKKVGu6Ls",
+//     "ed25519:H7wUQgGLeLyKWFJ8aeVUgzbPhjyVjtGnW1gfCfHo2mZp",
+//     "ed25519:28F7bHSy73mfUErj2aQyyjRWtDrCGxYXPG6wRdsfE5Zp",
+//     "ed25519:211USudaQFT7vBY8ruvyfwymuESCtZnFfFzcAcHY3ucy",
+//     "ed25519:6ULFyadfVzoQBYqQLTmqrnQHZmFZtewHYcbFCVJe8KL5"
 //   ]
 // }
