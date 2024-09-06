@@ -1,46 +1,40 @@
 import { KeyPair } from 'near-api-js';
 
 export interface Keys {
-    publicKey:         PublicKey;
-    secretKey:         string;
+    publicKey: PublicKey;
+    secretKey: string;
     extendedSecretKey: string;
 }
 
 export interface PublicKey {
     keyType: number;
-    data:    { [key: string]: number };
+    data: { [key: string]: number };
 }
 
-const getKeyLocalStorage = () =>{
-    const keys = localStorage.getItem('keysPom');
-    if(keys){
+export const getKeypomKeys = (dropName: string) => {
+    const keys = localStorage.getItem(`keysPom:${dropName}`);
+    if (keys) {
         return JSON.parse(keys);
     }
     return [];
 }
 
-const setKeyLocalStorage = (keys:Keys[]) =>{
-    localStorage.setItem('keysPom',JSON.stringify(keys));
+const setKeypomKeys = (dropName: string, keys: Keys[]) => {
+    localStorage.setItem(`keysPom:${dropName}`, JSON.stringify(keys));
 }
 
-const getKeysPair = (dropsNumber:number ) => {
+const generateAndStore = (dropName: string, dropsNumber: number) => {
     const keys = [];
-    const keysLocalStorage = getKeyLocalStorage();
+    const keysLocalStorage = getKeypomKeys(dropName);
     for (let index = 0; index < dropsNumber; index++) {
         const newKeyPair = KeyPair.fromRandom('ed25519');
-        console.log("getKeysPair",newKeyPair);
-        keys.push(newKeyPair.getPublicKey());
-        keysLocalStorage.push(newKeyPair);
+        keys.push(newKeyPair.getPublicKey().toString());
+        keysLocalStorage.push(newKeyPair.toString());
+        console.log('newKeyPair', newKeyPair.toString())
     }
-    setKeyLocalStorage(keysLocalStorage);
-    // guardar localstorage
-    // mostrar 
-    // generar links
-    return keys;
-// get_drops_for_owner
-// get_drop_information
-// get_keys_for_drop
+    setKeypomKeys(dropName, keysLocalStorage);
 
+    return keys;
 }
 
-export default getKeysPair;
+export default generateAndStore;
