@@ -1,4 +1,5 @@
-import { Accordion, Button, Text } from '@near-pagoda/ui';
+import { Accordion, Button } from '@near-pagoda/ui';
+
 import TokenDrop from './TokenDrop';
 
 export interface Drops {
@@ -29,27 +30,29 @@ export interface Simple {
 }
 
 const getDropName = (drop: Drops) => {
-  return drop?JSON.parse(drop.metadata).dropName:"";
+  return drop ? JSON.parse(drop.metadata).dropName : "";
 };
 
 const Linkdrops = ({ drops }: { drops: Drops[] }) => {
+  console.log("drops", drops);
   return (
     <div>
       <TokenDrop />
       <Accordion.Root type="multiple">
         {drops.map((drop) => {
           return (
-            <Accordion.Item value={drop.drop_id}>
+            <Accordion.Item key={drop.drop_id} value={drop.drop_id}>
               <Accordion.Trigger>
-              {getDropName(drop)} - Claimed {drop.next_key_id-drop.registered_uses}/{drop.next_key_id}
+                {getDropName(drop)} - Claimed {drop.next_key_id - drop.registered_uses}/{drop.next_key_id}
               </Accordion.Trigger>
 
               <Accordion.Content>
-                {drop.information.map((token) => {
+                {drop.private_keys.map((pk) => {
                   return (
                     <Button
                       label="click me"
-                      href={'https://app.mynearwallet.com' + '/linkdrop/v2.keypom.near/' + token.pk}
+                      href={'https://app.mynearwallet.com' + '/linkdrop/v2.keypom.near/' + pk}
+                      target='_blank'
                     />
                   );
                 })}

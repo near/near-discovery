@@ -4,26 +4,26 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import { NearContext } from '../WalletSelector';
-import getKeysPair from '@/utils/keyPair';
+import generateAndStore from '@/utils/keyPair';
 import { parseNearAmount } from 'near-api-js/lib/utils/format';
 
 type FormData = {
-    dropName: string;
+  dropName: string;
   numberLinks: number;
   amountPerLink: number;
 };
 
 function displayBalance(balance: number) {
-    let display = Math.floor(balance * 100) / 100;
-  
-    if (balance < 1) {
-      display = Math.floor(balance * 100000) / 100000;
-      if (balance && !display) return '< 0.00001';
-      return display;
-    }
-  
+  let display = Math.floor(balance * 100) / 100;
+
+  if (balance < 1) {
+    display = Math.floor(balance * 100000) / 100000;
+    if (balance && !display) return '< 0.00001';
     return display;
   }
+
+  return display;
+}
 
 const TokenDrop = () => {
   const {
@@ -55,14 +55,14 @@ const TokenDrop = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!wallet) throw new Error('Wallet has not initialized yet');
-    getKeysPair(data.numberLinks)
+
     try {
       const args = {
         deposit_per_use: parseNearAmount(data.amountPerLink.toString()),
         metadata: JSON.stringify({
-            dropName: data.dropName,
+          dropName: data.dropName,
         }),
-        public_keys: getKeysPair(data.numberLinks),
+        public_keys: generateAndStore(data.dropName, data.numberLinks),
       };
 
       // const amount = parseNearAmount(0.1426.toString());
@@ -78,7 +78,7 @@ const TokenDrop = () => {
                   methodName: 'create_drop',
                   args,
                   gas: '300000000000000',
-                  deposit: parseNearAmount(((0.0426+data.amountPerLink)*data.numberLinks).toString()),
+                  deposit: parseNearAmount(((0.0426 + data.amountPerLink) * data.numberLinks).toString()),
                 },
               },
             ],
@@ -94,7 +94,7 @@ const TokenDrop = () => {
       });
     } catch (error) {
       console.log(error);
-      
+
       openToast({
         type: 'error',
         title: 'Error',
@@ -119,11 +119,11 @@ const TokenDrop = () => {
           />
           <Input
             label="Number of links"
-            number={{allowDecimal: false, allowNegative: false}}
+            number={{ allowDecimal: false, allowNegative: false }}
             placeholder="1 - 50"
             error={errors.numberLinks?.message}
             {...register('numberLinks', {
-                min: {
+              min: {
                 message: 'Must be greater than 0',
                 value: 1
               },
@@ -131,20 +131,21 @@ const TokenDrop = () => {
                 message: `Must be equal to or less than 50`,
                 value: 50,
               },
-              valueAsNumber: true, 
-              required: 'Number of links is required' })}
+              valueAsNumber: true,
+              required: 'Number of links is required'
+            })}
           />
-        <Input
+          <Input
             label="Amount per link"
             number={{
-                allowNegative: false,
-                allowDecimal: true,
-              }}
-              assistive={`${displayBalance(currentNearAmount)} available`}
+              allowNegative: false,
+              allowDecimal: true,
+            }}
+            assistive={`${displayBalance(currentNearAmount)} available`}
             placeholder="Enter an amount"
             error={errors.amountPerLink?.message}
             {...register('amountPerLink', {
-                min: {
+              min: {
                 message: 'Must be greater than 0',
                 value: 0.0000000001
               },
@@ -152,8 +153,9 @@ const TokenDrop = () => {
                 message: `Must be equal to or less than ${currentNearAmount}`,
                 value: currentNearAmount,
               },
-              valueAsNumber: true, 
-              required: 'Amount per link is required' })}
+              valueAsNumber: true,
+              required: 'Amount per link is required'
+            })}
           />
           <Button label="Create links" variant="affirmative" type="submit" loading={isSubmitting} />
         </Flex>

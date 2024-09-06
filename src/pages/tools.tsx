@@ -9,28 +9,20 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 import Linkdrops from '@/components/tools/Linkdrops';
+import { getKeypomKeys } from '@/utils/keyPair';
+import { sign } from 'crypto';
 
 export interface Drops {
-  drop_id:         string;
-  owner_id:        string;
+  drop_id: string;
+  owner_id: string;
   deposit_per_use: string;
-  simple:          Simple;
-  config:          null;
-  metadata:        string;
+  simple: Simple;
+  config: null;
+  metadata: string;
   registered_uses: number;
-  required_gas:    string;
-  next_key_id:     number;
-  information:     Information[];
-}
-
-export interface Information {
-  drop_id:        string;
-  pk:             string;
-  cur_key_use:    number;
-  remaining_uses: number;
-  last_used:      number;
-  allowance:      number;
-  key_id:         number;
+  required_gas: string;
+  next_key_id: number;
+  private_keys?: string[];
 }
 
 export interface Simple {
@@ -45,31 +37,29 @@ const ToolsPage: NextPageWithLayout = () => {
 
   const { wallet } = useContext(NearContext);
 
-  const fetchDropData = useCallback(async () => {
-    if (!wallet) return;
-    const fetchedDrops: Drops[] = await wallet.viewMethod({ 
-      contractId: "v2.keypom.near", 
-      method: 'get_drops_for_owner',
-      args: { account_id: "maguila.near" }
-    });
-    console.log("fetchedDrops",fetchedDrops);
-    
-    const fetchedInfomationDrops=await Promise.all(fetchedDrops.map(async (drop) => {
-      const information = await wallet.viewMethod({
-        contractId: "v2.keypom.near",
-        method: 'get_keys_for_drop',
-        args: { drop_id: drop.drop_id }
-      });
-      return { ...drop, information };
-    }));
-    setDrops(fetchedInfomationDrops)
-  }, [wallet]);
-
   useEffect(() => {
+
+    const fetchDropData = async () => {
+      if (!wallet || !signedAccountId) return;
+      const fetchedDrops: Drops[] = await wallet.viewMethod({
+        contractId: "v2.keypom.near",
+        method: 'get_drops_for_owner',
+        args: { account_id: signedAccountId }
+      });
+      console.log("fetchedDrops", fetchedDrops);
+
+      const fetchedInformationDrops = fetchedDrops
+      .filter(drop => drop.metadata && JSON.parse(drop.metadata).dropName && getKeypomKeys(JSON.parse(drop.metadata).dropName).length)
+      .map(
+        drop => ({ ...drop, private_keys: getKeypomKeys(JSON.parse(drop.metadata).dropName) })
+      );
+
+      setDrops(fetchedInformationDrops)
+    };
+
     fetchDropData();
-  }, [fetchDropData]);
-  console.log("drops",drops);
-  
+  }, [wallet, signedAccountId]);
+
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -108,13 +98,13 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
-                  <Linkdrops drops={drops}/>
+                  <Linkdrops drops={drops} />
                 </Tabs.Content>
               </Tabs.Root>
             </Card>
           ) : (
             <Card>
-              <Text>Please sign in to use wallet utilities.</Text>
+              <Text>Please sign in to use wallet utilities</Text>
               <Button label="Sign In" fill="outline" onClick={() => requestAuthentication()} />
             </Card>
           )}
