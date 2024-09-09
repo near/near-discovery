@@ -1,64 +1,21 @@
 import { Button, Card, Container, Flex, Section, SvgIcon, Tabs, Text } from '@near-pagoda/ui';
 import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
+import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import useLinkdrops from '@/hooks/useLinkdrops';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
-import Linkdrops from '@/components/tools/Linkdrops';
-import { getKeypomKeys } from '@/utils/keyPair';
-import { sign } from 'crypto';
-
-export interface Drops {
-  drop_id: string;
-  owner_id: string;
-  deposit_per_use: string;
-  simple: Simple;
-  config: null;
-  metadata: string;
-  registered_uses: number;
-  required_gas: string;
-  next_key_id: number;
-  private_keys?: string[];
-}
-
-export interface Simple {
-  lazy_register: null;
-}
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
-  const [drops, setDrops] = useState<Drops[]>([]);
-
-  const { wallet } = useContext(NearContext);
-
-  useEffect(() => {
-
-    const fetchDropData = async () => {
-      if (!wallet || !signedAccountId) return;
-      const fetchedDrops: Drops[] = await wallet.viewMethod({
-        contractId: "v2.keypom.near",
-        method: 'get_drops_for_owner',
-        args: { account_id: signedAccountId }
-      });
-      console.log("fetchedDrops", fetchedDrops);
-
-      const fetchedInformationDrops = fetchedDrops
-      .filter(drop => drop.metadata && JSON.parse(drop.metadata).dropName && getKeypomKeys(JSON.parse(drop.metadata).dropName).length)
-      .map(
-        drop => ({ ...drop, private_keys: getKeypomKeys(JSON.parse(drop.metadata).dropName) })
-      );
-
-      setDrops(fetchedInformationDrops)
-    };
-
-    fetchDropData();
-  }, [wallet, signedAccountId]);
+  const drops = useLinkdrops();
 
   const { requestAuthentication } = useSignInRedirect();
   return (

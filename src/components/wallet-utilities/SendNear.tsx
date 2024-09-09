@@ -48,7 +48,7 @@ export const SendNear = () => {
   const validSubmitHandler: SubmitHandler<FormData> = async (data) => {
     try {
       if (!wallet) throw new Error('Wallet has not initialized yet');
-      const amount = utils.format.parseNearAmount(0.1426.toString());
+      const amount = utils.format.parseNearAmount(data.sendNearAmount.toString());
       if (!amount) throw new Error('Failed to parse amount');
 
       const sendNear = {
