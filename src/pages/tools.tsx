@@ -3,9 +3,11 @@ import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
+import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
+import useLinkdrops from '@/hooks/useLinkdrops';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -13,6 +15,7 @@ const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
+  const drops = useLinkdrops();
 
   const { requestAuthentication } = useSignInRedirect();
   return (
@@ -52,13 +55,13 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
-                  <Text>Coming soon</Text>
+                  <Linkdrops drops={drops} />
                 </Tabs.Content>
               </Tabs.Root>
             </Card>
           ) : (
             <Card>
-              <Text>Please sign in to use wallet utilities.</Text>
+              <Text>Please sign in to use wallet utilities</Text>
               <Button label="Sign In" fill="outline" onClick={() => requestAuthentication()} />
             </Card>
           )}
