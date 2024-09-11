@@ -148,3 +148,35 @@ export type FormatedEvent = {
   thumbnail: string;
   location?: string;
 };
+
+export interface Drops {
+  drop_id: string;
+  owner_id: string;
+  deposit_per_use: string;
+  simple: Simple;
+  config: null;
+  metadata: string;
+  registered_uses: number;
+  required_gas: string;
+  next_key_id: number;
+  keys?: Keys[];
+  information: Information[];
+}
+
+export interface Information {
+  drop_id: string;
+  pk: string;
+  cur_key_use: number;
+  remaining_uses: number;
+  last_used: number;
+  allowance: number;
+  key_id: number;
+}
+
+export interface Keys {
+  public: string;
+  private: string;
+}
+export interface Simple {
+  lazy_register: null;
+}
