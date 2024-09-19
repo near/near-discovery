@@ -10,12 +10,15 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
+import FungibleToken from '@/components/tools/FungibleToken';
+import useFungibleTokens from '@/hooks/useFungibleTokens';
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
   const drops = useLinkdrops();
+  const {tokens} = useFungibleTokens();
 
   const { requestAuthentication } = useSignInRedirect();
   return (
@@ -47,7 +50,7 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.List>
 
                 <Tabs.Content value="ft">
-                  <Text>Coming soon</Text>
+                  <FungibleToken tokens={tokens}/>
                 </Tabs.Content>
 
                 <Tabs.Content value="nft">
