@@ -43,12 +43,12 @@ const NonFungibleToken = () => {
   return (
     <>
       <MintNft />
+      <hr />
       <Text size="text-l" style={{ margin: '12px 0 0 0' }}>
-        {' '}
-        Community tools{' '}
+        Community tools
       </Text>
       <Text>For more advanced options use community tools:</Text>
-      <MintbaseButton href="https://paras.id/" target="_blank">
+      <MintbaseButton href="https://www.mintbase.xyz/" target="_blank">
         <Image alt="Mintbase Logo" src={MintBase} width={85} />{' '}
       </MintbaseButton>
       <ParasButton href="https://paras.id/" target="_blank">

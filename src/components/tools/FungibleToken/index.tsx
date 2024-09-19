@@ -4,7 +4,7 @@
 // near call tkn.near create_token '{"args":{"owner_id": "maguila.near","total_supply": "1000000000","metadata":{"spec": "ft-1.0.0","name": "Test Token","symbol": "TTTEST","icon": "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7","decimals": 18}},"account_id": "maguila.near"}' --gas 300000000000000 --depositYocto 2234830000000000000000000 --accountId maguila.near --networkId mainnet
 // https://docs.near.org/build/primitives/ft
 
-import { Card, Flex, SvgIcon, Switch, Text, Tooltip } from '@near-pagoda/ui';
+import { Card, Flex, SvgIcon, Text, Title, Tooltip } from '@near-pagoda/ui';
 import { CheckFat, ListNumbers, PlusCircle } from '@phosphor-icons/react';
 import { useState } from 'react';
 import CreateTokenForm from './CreateTokenForm';
@@ -19,15 +19,13 @@ const formattedBalance = (balance: string, decimals = 24) => {
   return result % 1 === 0 ? result.toString() : result.toFixed(5).replace(/\.?0+$/, '');
 };
 
-const FungibleToken = ({tokens}) => {
-  const [toggle, setToggle] = useState(false);
-
+const FungibleToken = ({ tokens }) => {
   return (
-    <div>
-
-      <Switch onClick={() => setToggle(!toggle)} iconOn={<PlusCircle weight="bold" />} iconOff={<ListNumbers weight="bold" />} />
-      {toggle && <CreateTokenForm />}
-      {!toggle && tokens.map((token, index) => (
+    <>
+      <CreateTokenForm />
+      <hr />
+      <Title> Tokens you minted </Title>
+      {tokens.map((token, index) => (
         <Card key={index} style={{ marginBottom: '8px' }}>
           <Flex align="center" justify="space-between">
             <Flex align="center" style={{ flex: "1" }} >
@@ -46,7 +44,7 @@ const FungibleToken = ({tokens}) => {
           </Flex>
         </Card>
       ))}
-    </div>
+    </>
   );
 };
 export default FungibleToken;

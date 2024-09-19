@@ -1,7 +1,7 @@
 import { NearContext } from '@/components/WalletSelector';
-import { Button, FileInput, Flex, Form, Input, openToast } from '@near-pagoda/ui';
+import { Button, FileInput, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
 import React, { useContext, useState } from 'react';
-import type { SubmitHandler} from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
 type FormData = {
@@ -15,7 +15,7 @@ type FormData = {
 
 const FACTORY_CONTRACT = 'tkn.primitives.near';
 
-const MAX_FILE_SIZE = 10 * 1024 ;
+const MAX_FILE_SIZE = 10 * 1024;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
 
 const CreateTokenForm: React.FC = () => {
@@ -54,28 +54,29 @@ const CreateTokenForm: React.FC = () => {
   };
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    try {
-      let base64Image = '';
-      if (data.icon[0]) {
-        base64Image = await convertToBase64(data.icon[0]);
-      }
-      const args = {
-        args: {
-          owner_id: data.owner_id,
-          total_supply: data.total_supply,
-          metadata: {
-            spec: "ft-1.0.0",
-            name: data.name,
-            symbol: data.symbol,
-            icon: base64Image,
-            decimals: data.decimals,
-          },
+    let base64Image = '';
+    if (data.icon[0]) {
+      base64Image = await convertToBase64(data.icon[0]);
+    }
+    const total_supply = BigInt(data.total_supply) * BigInt(10) ** BigInt(data.decimals)
+    const args = {
+      args: {
+        owner_id: data.owner_id,
+        total_supply: total_supply.toString(),
+        metadata: {
+          spec: "ft-1.0.0",
+          name: data.name,
+          symbol: data.symbol,
+          icon: base64Image,
+          decimals: data.decimals,
         },
-        account_id: data.owner_id,
-      };
+      },
+      account_id: data.owner_id,
+    };
 
-      const requiredDeposit = await wallet?.viewMethod({ contractId: FACTORY_CONTRACT, method: 'get_required', args });
-
+    const requiredDeposit = await wallet?.viewMethod({ contractId: FACTORY_CONTRACT, method: 'get_required', args });
+    
+    try {
       const result = await wallet?.signAndSendTransactions({
         transactions: [{
           receiverId: FACTORY_CONTRACT,
@@ -116,33 +117,37 @@ const CreateTokenForm: React.FC = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-      <Flex stack gap="l">
-        <Input
-          label="Owner ID"
-          placeholder="e.g., bob.near"
-          error={errors.owner_id?.message}
-          {...register('owner_id', { required: 'Owner ID is required', value: signedAccountId })}
-        />
-        <Input
-          label="Total Supply"
-          placeholder="e.g., 1000000000"
-          error={errors.total_supply?.message}
-          {...register('total_supply', { required: 'Total supply is required' })}
-        />
-        <Input
-          label="Token Name"
-          placeholder="e.g., Test Token"
-          error={errors.name?.message}
-          {...register('name', { required: 'Token name is required' })}
-        />
-        <Input
-          label="Token Symbol"
-          placeholder="e.g., TEST"
-          error={errors.symbol?.message}
-          {...register('symbol', {})}
-        />
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
+    <>
+      <Text size="text-l" style={{ marginBottom: '12px' }}>
+        Mint a Fungible Token
+      </Text>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <Flex stack gap="l">
+          <Input
+            label="Owner ID"
+            placeholder="e.g., bob.near"
+            error={errors.owner_id?.message}
+            {...register('owner_id', { required: 'Owner ID is required', value: signedAccountId })}
+          />
+          <Input
+            label="Total Supply"
+            placeholder="e.g., 1000"
+            error={errors.total_supply?.message}
+            {...register('total_supply', { required: 'Total supply is required' })}
+          />
+          <Input
+            label="Token Name"
+            placeholder="e.g., Test Token"
+            error={errors.name?.message}
+            {...register('name', { required: 'Token name is required' })}
+          />
+          <Input
+            label="Token Symbol"
+            placeholder="e.g., TEST"
+            error={errors.symbol?.message}
+            {...register('symbol', {})}
+          />
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
             <Controller
               control={control}
               name="icon"
@@ -168,26 +173,27 @@ const CreateTokenForm: React.FC = () => {
               Accepted Formats: PNG, JPEG, GIF, SVG | Ideal dimension: 1:1 | Max size: 10kb
             </span>
           </div>
-        <Input
-          label="Decimals"
-          type="number"
-          placeholder="e.g., 18"
-          error={errors.decimals?.message}
-          {...register('decimals', {
-            required: 'Decimals is required',
-            valueAsNumber: true,
-            min: { value: 0, message: 'Decimals must be non-negative' },
-            max: { value: 24, message: 'Decimals must be 24 or less' }
-          })}
-        />
-        <Button
-          label="Create Token"
-          variant="affirmative"
-          type="submit"
-          loading={isSubmitting}
-        />
-      </Flex>
-    </Form>
+          <Input
+            label="Decimals"
+            type="number"
+            placeholder="e.g., 6"
+            error={errors.decimals?.message}
+            {...register('decimals', {
+              required: 'Decimals is required',
+              valueAsNumber: true,
+              min: { value: 0, message: 'Decimals must be non-negative' },
+              max: { value: 24, message: 'Decimals must be 24 or less' }
+            })}
+          />
+          <Button
+            label="Create Token"
+            variant="affirmative"
+            type="submit"
+            loading={isSubmitting}
+          />
+        </Flex>
+      </Form>
+    </>
   );
 };
 
