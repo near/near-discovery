@@ -35,12 +35,12 @@ const ToolsPage: NextPageWithLayout = () => {
                 <Tabs.List style={{ marginBottom: 'var(--gap-m)' }}>
                   <Tabs.Trigger href="?tab=ft" value="ft">
                     <SvgIcon icon={<Coin fill="bold" />} />
-                    FT
+                    Mint FT
                   </Tabs.Trigger>
 
                   <Tabs.Trigger href="?tab=nft" value="nft">
                     <SvgIcon icon={<ImagesSquare fill="bold" />} />
-                    NFT
+                    Mint NFT
                   </Tabs.Trigger>
 
                   <Tabs.Trigger href="?tab=linkdrops" value="linkdrops">
