@@ -111,7 +111,9 @@ const CreateTokenDrop = () => {
   };
   return (
     <>
-      <Text size="text-l">Token Drop</Text>
+      <Text size="text-l" style={{ marginBottom: '12px' }}>
+        Create a LinkDrop
+      </Text>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
           <Input
