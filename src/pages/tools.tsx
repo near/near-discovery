@@ -3,19 +3,73 @@ import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
+import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
+import type { Txns } from '@/hooks/useNearBlocksTxns';
+import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
+
+export type FT = {
+  decimals: number;
+  icon: string;
+  name: string;
+  symbol: string;
+  total_supply: string;
+};
+
+export type NFT = {
+  description: string;
+  media: string;
+  title: string;
+  token_id: string;
+};
+
+const processTransactionsToFt = (transactions: Txns[]): FT[] => {
+  if (!transactions) return [];
+
+  return transactions.map((txn) => {
+    const ft = JSON.parse(txn.actions[0].args).args;
+    return {
+      decimals: ft.metadata.decimals,
+      icon: ft.metadata.icon,
+      name: ft.metadata.name,
+      symbol: ft.metadata.symbol,
+      total_supply: ft.total_supply,
+    };
+  });
+};
+
+const processTransactionsToNFT = (transactions: Txns[]): NFT[] => {
+  if (!transactions) return [];
+
+  return transactions.map((txn) => {
+    const nft = JSON.parse(txn.actions[0].args);
+    return {
+      media: nft.token_metadata.media,
+      title: nft.token_metadata.title,
+      description: nft.token_metadata.description,
+      token_id: nft.token_id,
+    };
+  });
+};
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
   const drops = useLinkdrops();
+
+  const { transactions: fts } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
+  const ftProcessed = processTransactionsToFt(fts);
+
+  const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
+  const nftsProcessed = processTransactionsToNFT(nfts);
+  console.log('near', { nftsProcessed, ftProcessed });
 
   const { requestAuthentication } = useSignInRedirect();
   return (
@@ -32,12 +86,12 @@ const ToolsPage: NextPageWithLayout = () => {
                 <Tabs.List style={{ marginBottom: 'var(--gap-m)' }}>
                   <Tabs.Trigger href="?tab=ft" value="ft">
                     <SvgIcon icon={<Coin fill="bold" />} />
-                    FT
+                    Mint FT
                   </Tabs.Trigger>
 
                   <Tabs.Trigger href="?tab=nft" value="nft">
                     <SvgIcon icon={<ImagesSquare fill="bold" />} />
-                    NFT
+                    Mint NFT
                   </Tabs.Trigger>
 
                   <Tabs.Trigger href="?tab=linkdrops" value="linkdrops">
@@ -47,11 +101,11 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.List>
 
                 <Tabs.Content value="ft">
-                  <Text>Coming soon</Text>
+                  <FungibleToken tokens={ftProcessed} />
                 </Tabs.Content>
 
                 <Tabs.Content value="nft">
-                  <NonFungibleToken />
+                  <NonFungibleToken tokens={nftsProcessed} />
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
