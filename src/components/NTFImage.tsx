@@ -15,7 +15,7 @@ interface Nft {
 }
 
 interface NftImageProps {
-  nft: Nft;
+  nft?: Nft;
   ipfs_cid?: string;
   alt: string;
 }

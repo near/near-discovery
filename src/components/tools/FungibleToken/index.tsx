@@ -8,6 +8,7 @@ import { Card, Flex, SvgIcon, Text, Title, Tooltip } from '@near-pagoda/ui';
 import { CheckFat, ListNumbers, PlusCircle } from '@phosphor-icons/react';
 import { useState } from 'react';
 import CreateTokenForm from './CreateTokenForm';
+import ListToken from './ListToken';
 
 
 const formattedBalance = (balance: string, decimals = 24) => {
@@ -20,31 +21,38 @@ const formattedBalance = (balance: string, decimals = 24) => {
 };
 
 const FungibleToken = ({ tokens }) => {
+
   return (
     <>
       <CreateTokenForm />
       <hr />
-      <Title> Tokens you minted </Title>
-      {tokens.map((token, index) => (
-        <Card key={index} style={{ marginBottom: '8px' }}>
-          <Flex align="center" justify="space-between">
-            <Flex align="center" style={{ flex: "1" }} >
-              <Text>{token.icon && <img width={25} height={25} alt={token.symbol} src={token.icon} />}</Text>
-            </Flex>
-            <Text style={{ flex: "1" }} size="text-l">{formattedBalance(token.balance, token.decimals)}</Text>
-
-            <Flex justify="end" align='center' style={{ flex: "1" }}>
-              <Text>{token.symbol}</Text>
-              {/* {token.verified && ( */}
-              <Tooltip content="It is verified">
-                <SvgIcon icon={<CheckFat /> /*<SealCheck />*/} size="m" color="violet8" />
-              </Tooltip>
-              {/* )} */}
-            </Flex>
-          </Flex>
-        </Card>
-      ))}
+     <ListToken tokens={tokens}/>
     </>
   );
 };
 export default FungibleToken;
+
+
+/*
+<hr />
+<Title>  </Title>
+{tokens.map((token, index) => (
+  <Card key={index} style={{ marginBottom: '8px' }}>
+    <Flex align="center" justify="space-between">
+      <Flex align="center" style={{ flex: "1" }} >
+        <Text>{token.icon && <img width={25} height={25} alt={token.symbol} src={token.icon} />}</Text>
+      </Flex>
+      <Text style={{ flex: "1" }} size="text-l">{formattedBalance(token.balance, token.decimals)}</Text>
+
+      <Flex justify="end" align='center' style={{ flex: "1" }}>
+        <Text>{token.symbol}</Text>
+        {/* {token.verified && ( *\/}
+        <Tooltip content="It is verified">
+          <SvgIcon icon={<CheckFat /> /*<SealCheck />*\/} size="m" color="violet8" />
+        </Tooltip>
+        {/* )} \/}
+      </Flex>
+    </Flex>
+  </Card>
+))}
+*/

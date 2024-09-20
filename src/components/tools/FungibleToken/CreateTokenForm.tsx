@@ -1,6 +1,6 @@
 import { NearContext } from '@/components/WalletSelector';
 import { Button, FileInput, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -23,25 +23,12 @@ const CreateTokenForm: React.FC = () => {
 
   const { wallet, signedAccountId } = useContext(NearContext);
 
-  const [imagePreview, setImagePreview] = useState<string | null>(null);
-
   const validateImage = (files: FileList) => {
     if (files.length === 0) return 'Image is required';
     const file = files[0];
     if (file.size > MAX_FILE_SIZE) return 'Image size should be less than 10KB';
     if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) return 'Not a valid image format';
     return true;
-  };
-
-  const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onloadend = () => {
-        setImagePreview(reader.result as string);
-      };
-      reader.readAsDataURL(file);
-    }
   };
 
   const convertToBase64 = (file: File): Promise<string> => {
