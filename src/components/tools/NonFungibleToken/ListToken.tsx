@@ -1,6 +1,8 @@
-import { Accordion, Text } from "@near-pagoda/ui";
-import Image from "next/image";
-import styled from "styled-components";
+import { Accordion, Text } from '@near-pagoda/ui';
+import Image from 'next/image';
+import styled from 'styled-components';
+
+import type { NFT } from '@/pages/tools';
 
 const RoundedImage = styled(Image)`
   border-radius: 50%;
@@ -31,30 +33,26 @@ const ImgCard = styled.div`
   cursor: pointer;
 `;
 
-const ListToken = ({ tokens }) => {
-
-    return (
-        <Accordion.Root type="multiple">
-            <Accordion.Item value="one">
-                <Accordion.Trigger>NFT you minted</Accordion.Trigger>
-                <Accordion.Content>
-                    <CarouselContainer>
-                        {tokens.map((token) => {
-                            return (
-                                <ImgCard
-                                    key={`Carousel-${token.token_id}`}
-                                >
-                                    <RoundedImage width={43} height={43} src={token.media} alt={token.title} />
-                                    <Text>{token.title}</Text>
-                                </ImgCard>
-                            );
-
-                        })}
-                    </CarouselContainer>
-                </Accordion.Content>
-            </Accordion.Item>
-        </Accordion.Root>
-    );
+const ListToken = ({ tokens }: { tokens: NFT[] }) => {
+  return (
+    <Accordion.Root type="multiple">
+      <Accordion.Item value="one">
+        <Accordion.Trigger>NFT you minted</Accordion.Trigger>
+        <Accordion.Content>
+          <CarouselContainer>
+            {tokens.map((token) => {
+              return (
+                <ImgCard key={`Carousel-${token.token_id}`}>
+                  <RoundedImage width={43} height={43} src={token.media} alt={token.title} />
+                  <Text>{token.title}</Text>
+                </ImgCard>
+              );
+            })}
+          </CarouselContainer>
+        </Accordion.Content>
+      </Accordion.Item>
+    </Accordion.Root>
+  );
 };
 
 export default ListToken;
