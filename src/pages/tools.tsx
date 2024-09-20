@@ -3,60 +3,74 @@ import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
+import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
+import type { Txns } from '@/hooks/useNearBlocksTxns';
+import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
-import FungibleToken from '@/components/tools/FungibleToken';
-import useFungibleTokens from '@/hooks/useFungibleTokens';
-import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
 
-const processTransactionsToFt = (transactions) => {
-  if(!transactions?.txns) return []
+export type FT = {
+  decimals: number;
+  icon: string;
+  name: string;
+  symbol: string;
+  total_supply: string;
+};
 
-  return transactions.txns.map((txn) => {
-    const ft = JSON.parse(txn.actions[0].args).args
-    return{
+export type NFT = {
+  description: string;
+  media: string;
+  title: string;
+  token_id: string;
+};
+
+const processTransactionsToFt = (transactions: Txns[]): FT[] => {
+  if (!transactions) return [];
+
+  return transactions.map((txn) => {
+    const ft = JSON.parse(txn.actions[0].args).args;
+    return {
       decimals: ft.metadata.decimals,
       icon: ft.metadata.icon,
       name: ft.metadata.name,
       symbol: ft.metadata.symbol,
       total_supply: ft.total_supply,
-    }
+    };
   });
-}
+};
 
-const processTransactionsToNFT = (transactions) => {
-  if(!transactions?.txns) return []
+const processTransactionsToNFT = (transactions: Txns[]): NFT[] => {
+  if (!transactions) return [];
 
-  return transactions.txns.map((txn) => {
-    const accepted = txn.outcomes.status
-    const nft = JSON.parse(txn.actions[0].args)
-    return{
+  return transactions.map((txn) => {
+    const nft = JSON.parse(txn.actions[0].args);
+    return {
       media: nft.token_metadata.media,
       title: nft.token_metadata.title,
       description: nft.token_metadata.description,
       token_id: nft.token_id,
-      status: accepted
-    }
+    };
   });
-}
+};
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
   const drops = useLinkdrops();
-  // const {tokens} = useFungibleTokens();
-  const {transactions:ft} =useNearBlocksTxns("tkn.primitives.near","create_token");
-  const ftProcessed = processTransactionsToFt(ft);
 
-  const {transactions:nfts} =useNearBlocksTxns("nft.primitives.near","nft_mint");
+  const { transactions: fts } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
+  const ftProcessed = processTransactionsToFt(fts);
+
+  const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
   const nftsProcessed = processTransactionsToNFT(nfts);
-  
+  console.log('near', { nftsProcessed, ftProcessed });
+
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -87,7 +101,7 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.List>
 
                 <Tabs.Content value="ft">
-                  <FungibleToken tokens={ftProcessed}/>
+                  <FungibleToken tokens={ftProcessed} />
                 </Tabs.Content>
 
                 <Tabs.Content value="nft">
