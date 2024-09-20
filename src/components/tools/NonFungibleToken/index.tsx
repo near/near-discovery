@@ -6,6 +6,7 @@ import MintBase from '@/assets/images/mintbase.svg';
 import Paras from '@/assets/images/paras.svg';
 
 import MintNft from './MintNft';
+import ListToken from './ListToken';
 
 const StyledButton = styled.a`
   background-color: #1e2030;
@@ -39,10 +40,12 @@ const ParasButton = styled(StyledButton)`
   }
 `;
 
-const NonFungibleToken = () => {
+const NonFungibleToken = ({tokens}) => {
   return (
     <>
       <MintNft />
+      <hr />
+      <ListToken tokens={tokens}/>
       <hr />
       <Text size="text-l" style={{ margin: '12px 0 0 0' }}>
         Community tools

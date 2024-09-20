@@ -12,14 +12,51 @@ import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 import FungibleToken from '@/components/tools/FungibleToken';
 import useFungibleTokens from '@/hooks/useFungibleTokens';
+import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
+
+const processTransactionsToFt = (transactions) => {
+  if(!transactions?.txns) return []
+
+  return transactions.txns.map((txn) => {
+    const ft = JSON.parse(txn.actions[0].args).args
+    return{
+      decimals: ft.metadata.decimals,
+      icon: ft.metadata.icon,
+      name: ft.metadata.name,
+      symbol: ft.metadata.symbol,
+      total_supply: ft.total_supply,
+    }
+  });
+}
+
+const processTransactionsToNFT = (transactions) => {
+  if(!transactions?.txns) return []
+
+  return transactions.txns.map((txn) => {
+    const accepted = txn.outcomes.status
+    const nft = JSON.parse(txn.actions[0].args)
+    return{
+      media: nft.token_metadata.media,
+      title: nft.token_metadata.title,
+      description: nft.token_metadata.description,
+      token_id: nft.token_id,
+      status: accepted
+    }
+  });
+}
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
   const drops = useLinkdrops();
-  const {tokens} = useFungibleTokens();
+  // const {tokens} = useFungibleTokens();
+  const {transactions:ft} =useNearBlocksTxns("tkn.primitives.near","create_token");
+  const ftProcessed = processTransactionsToFt(ft);
 
+  const {transactions:nfts} =useNearBlocksTxns("nft.primitives.near","nft_mint");
+  const nftsProcessed = processTransactionsToNFT(nfts);
+  
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -50,11 +87,11 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.List>
 
                 <Tabs.Content value="ft">
-                  <FungibleToken tokens={tokens}/>
+                  <FungibleToken tokens={ftProcessed}/>
                 </Tabs.Content>
 
                 <Tabs.Content value="nft">
-                  <NonFungibleToken />
+                  <NonFungibleToken tokens={nftsProcessed} />
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
