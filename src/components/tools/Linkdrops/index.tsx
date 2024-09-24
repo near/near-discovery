@@ -1,4 +1,4 @@
-import { Flex, Switch } from '@near-pagoda/ui';
+import { Flex, Switch, Text } from '@near-pagoda/ui';
 import { Coins, ImageSquare } from '@phosphor-icons/react';
 import { useState } from 'react';
 
@@ -8,11 +8,14 @@ import CreateNFTDrop from './CreateNFTDrop';
 import CreateTokenDrop from './CreateTokenDrop';
 import ListTokenDrop from './ListTokenDrop';
 
-const Linkdrops = ({ drops,tokens }: { drops: Drops[],tokens: any }) => {
+const Linkdrops = ({ drops }: { drops: Drops[] }) => {
   const [selector, setSelector] = useState(false);
 
   return (
     <>
+      <Text size="text-l" style={{ marginBottom: '12px' }}>
+        Create a LinkDrop
+      </Text>
       <Flex as="label" align="center">
         Token
         <Switch
@@ -22,7 +25,7 @@ const Linkdrops = ({ drops,tokens }: { drops: Drops[],tokens: any }) => {
         />
         NFT
       </Flex>
-      {!selector && <CreateTokenDrop tokens={tokens} />}
+      {!selector && <CreateTokenDrop />}
       {selector && <CreateNFTDrop />}
       <ListTokenDrop drops={drops} />
     </>

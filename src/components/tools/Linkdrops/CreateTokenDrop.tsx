@@ -8,6 +8,8 @@ import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../WalletSelector';
 import SelectFT from './SelectFT';
+import useTokens from '@/hooks/useFT';
+import { CopySimple } from '@phosphor-icons/react';
 
 type FormData = {
   dropName: string;
@@ -15,6 +17,7 @@ type FormData = {
   amountPerLink: number;
 };
 
+// balance is already formatted here (e.g. 1.2345)
 function displayBalance(balance: number) {
   let display = Math.floor(balance * 100) / 100;
 
@@ -30,24 +33,23 @@ function displayBalance(balance: number) {
 const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
 
 const formattedBalance = (balance: string, decimals = 24) => {
-  const numericBalance = Number(balance);
-  console.log("numericBalance",numericBalance);
-  console.log("decimals",decimals);
-  
-  
-  if (isNaN(numericBalance) || isNaN(decimals)) {
-    return '0';
-  }
-  console.log(BigInt(Math.pow(10, decimals)));
-  
-  return (Number(numericBalance) / Math.pow(10, decimals)).toFixed(decimals);
-  // return result % 1 === 0 ? result.toString() : result.toFixed(5).replace(/\.?0+$/, '');
+  const balanceStr = balance.toString();
+  const integerPart = balanceStr.slice(0, -decimals) || '0';
+  const decimalPart = balanceStr.slice(-decimals).padStart(decimals, '0');
+  return `${integerPart}.${decimalPart.slice(2)}`;
 };
+
+const parseAmount = (amount: string, decimals: number) => {
+  const [integer, decimal] = amount.split('.');
+  const integerPart = integer || '0';
+  const decimalPart = decimal || '0';
+  return integerPart + decimalPart.padEnd(decimals, '0');
+}
 
 const getDeposit = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
 
-const CreateTokenDrop = ({tokens}:{tokens:any}) => {
+const CreateTokenDrop = () => {
   const {
     register,
     handleSubmit,
@@ -60,46 +62,40 @@ const CreateTokenDrop = ({tokens}:{tokens:any}) => {
   });
 
   const { wallet, signedAccountId } = useContext(NearContext);
-  const [currentNearAmount, setCurrentNearAmount] = useState(0);
-  const [token, setToken] = useState('near');
+  const [balance, setBalance] = useState('0');
+  const [token, setToken] = useState(null);
+  const { tokens } = useTokens();
 
-  console.log("tokens",tokens);
   useEffect(() => {
-    if (!wallet || !signedAccountId) return;
+    if (!wallet || !signedAccountId || !tokens.length) return;
+    setToken(tokens[0]);
+  }, [wallet, signedAccountId, tokens]);
 
-    const loadBalance = async () => {
-      try {
-        const balance = await wallet.getBalance(signedAccountId);
-        const requiredGas = 0.00005;
-        const cost = 0.0426;
-        setCurrentNearAmount(balance - requiredGas - cost);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    loadBalance();
-  }, [wallet, signedAccountId]);
-
+  useEffect(() => {
+    if (!token) return;
+    console.log(token);
+    const balance = token.balance;
+    const decimals = token.decimals;
+    setBalance(formattedBalance(balance, decimals));
+  }, [token]);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!wallet) throw new Error('Wallet has not initialized yet');
     const dropId = Date.now().toString();
     try {
       const args = {
-        deposit_per_use: token==="near"?parseNearAmount(data.amountPerLink.toString()):'0',
+        deposit_per_use: token.contract_id === "near" ? parseNearAmount(data.amountPerLink.toString()) : '0',
         drop_id: dropId,
         metadata: JSON.stringify({
           dropName: data.dropName,
         }),
         public_keys: generateAndStore(data.dropName, data.numberLinks),
-        ft : token==="near"?undefined:{
+        ft: token.contract_id === "near" ? undefined : {
           sender_id: signedAccountId,
-          contract_id: token,
-          balance_per_use: "1000"
+          contract_id: token.contract_id,
+          balance_per_use: parseAmount(data.amountPerLink.toString(), token.decimals),
         }
       };
-
 
       const transactions = [
         {
@@ -118,10 +114,10 @@ const CreateTokenDrop = ({tokens}:{tokens:any}) => {
         }
       ]
 
-      if(token!=="near"){
-      
-        transactions.push( {
-          receiverId: token,
+      if (token.contract_id !== "near") {
+
+        transactions.push({
+          receiverId: token.contract_id,
           actions: [
             {
               type: 'FunctionCall',
@@ -129,7 +125,7 @@ const CreateTokenDrop = ({tokens}:{tokens:any}) => {
                 methodName: 'ft_transfer_call',
                 args: {
                   receiver_id: KEYPOM_CONTRACT_ADDRESS,
-                  amount: "2000",//TODO cambiar
+                  amount: parseAmount(data.amountPerLink.toString(), token.decimals),//TODO cambiar
                   msg: dropId,
                 },
                 gas: '300000000000000',
@@ -139,8 +135,8 @@ const CreateTokenDrop = ({tokens}:{tokens:any}) => {
           ],
         })
       }
-         
-      await wallet.signAndSendTransactions({transactions});
+
+      await wallet.signAndSendTransactions({ transactions });
 
       openToast({
         type: 'success',
@@ -161,12 +157,9 @@ const CreateTokenDrop = ({tokens}:{tokens:any}) => {
   };
   return (
     <>
-      <Text size="text-l" style={{ marginBottom: '12px' }}>
-        Create a LinkDrop
-      </Text>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
-          <SelectFT tokens={tokens} setToken={setToken}/>
+          <SelectFT tokens={tokens} setToken={setToken} />
           <Input
             label="Token Drop name"
             placeholder="NEARCon Token Giveaway"
@@ -197,7 +190,7 @@ const CreateTokenDrop = ({tokens}:{tokens:any}) => {
               allowNegative: false,
               allowDecimal: true,
             }}
-            assistive={`${displayBalance(currentNearAmount)} available`}
+            assistive={`${balance} available`}
             placeholder="Enter an amount"
             error={errors.amountPerLink?.message}
             {...register('amountPerLink', {
@@ -206,8 +199,8 @@ const CreateTokenDrop = ({tokens}:{tokens:any}) => {
                 value: 0.0000000001,
               },
               max: {
-                message: `Must be equal to or less than ${currentNearAmount}`,
-                value: currentNearAmount,
+                message: `Must be equal to or less than ${balance}`,
+                value: balance,
               },
               valueAsNumber: true,
               required: 'Amount per link is required',
