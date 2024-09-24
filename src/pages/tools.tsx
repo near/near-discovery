@@ -12,7 +12,7 @@ import useLinkdrops from '@/hooks/useLinkdrops';
 import useNearBlocksTxns, { Txns } from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
-import useFT from '@/hooks/useFT';
+import useTokens from '@/hooks/useFT';
 
 export type FT = {
   decimals: number,
@@ -29,7 +29,7 @@ export type NFT = {
   token_id: string,
 }
 
-const processTransactionsToFt = (transactions: Txns[]):FT[] => {
+const processTransactionsToFt = (transactions: Txns[]): FT[] => {
   if (!transactions) return [];
 
   return transactions.map((txn) => {
@@ -44,7 +44,7 @@ const processTransactionsToFt = (transactions: Txns[]):FT[] => {
   });
 };
 
-const processTransactionsToNFT = (transactions: Txns[]):NFT[] => {
+const processTransactionsToNFT = (transactions: Txns[]): NFT[] => {
   if (!transactions) return [];
 
   return transactions.map((txn) => {
@@ -63,15 +63,13 @@ const ToolsPage: NextPageWithLayout = () => {
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
   const drops = useLinkdrops();
-  const {tokens} = useFT();
 
   const { transactions: fts } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
   const ftProcessed = processTransactionsToFt(fts);
-  
-  
+
   const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
   const nftsProcessed = processTransactionsToNFT(nfts);
-  
+
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -110,7 +108,7 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
-                  <Linkdrops drops={drops} tokens={tokens} />
+                  <Linkdrops drops={drops} />
                 </Tabs.Content>
               </Tabs.Root>
             </Card>

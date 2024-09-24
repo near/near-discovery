@@ -144,7 +144,6 @@ const CreateNFTDrop = () => {
   };
   return (
     <>
-      <Text size="text-l">NFT Drop</Text>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
           <Input
