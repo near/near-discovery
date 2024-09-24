@@ -9,27 +9,27 @@ import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
-import type { Txns } from '@/hooks/useNearBlocksTxns';
-import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
+import useNearBlocksTxns, { Txns } from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
+import useFT from '@/hooks/useFT';
 
 export type FT = {
-  decimals: number;
-  icon: string;
-  name: string;
-  symbol: string;
-  total_supply: string;
-};
+  decimals: number,
+  icon: string,
+  name: string,
+  symbol: string,
+  total_supply: string,
+}
 
 export type NFT = {
-  description: string;
-  media: string;
-  title: string;
-  token_id: string;
-};
+  description: string,
+  media: string,
+  title: string,
+  token_id: string,
+}
 
-const processTransactionsToFt = (transactions: Txns[]): FT[] => {
+const processTransactionsToFt = (transactions: Txns[]):FT[] => {
   if (!transactions) return [];
 
   return transactions.map((txn) => {
@@ -44,7 +44,7 @@ const processTransactionsToFt = (transactions: Txns[]): FT[] => {
   });
 };
 
-const processTransactionsToNFT = (transactions: Txns[]): NFT[] => {
+const processTransactionsToNFT = (transactions: Txns[]):NFT[] => {
   if (!transactions) return [];
 
   return transactions.map((txn) => {
@@ -63,14 +63,15 @@ const ToolsPage: NextPageWithLayout = () => {
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
   const drops = useLinkdrops();
+  const {tokens} = useFT();
 
   const { transactions: fts } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
   const ftProcessed = processTransactionsToFt(fts);
-
+  
+  
   const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
   const nftsProcessed = processTransactionsToNFT(nfts);
-  console.log('near', { nftsProcessed, ftProcessed });
-
+  
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -109,7 +110,7 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
-                  <Linkdrops drops={drops} />
+                  <Linkdrops drops={drops} tokens={tokens} />
                 </Tabs.Content>
               </Tabs.Root>
             </Card>
