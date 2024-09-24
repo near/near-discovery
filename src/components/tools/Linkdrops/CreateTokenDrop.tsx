@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../WalletSelector';
+import SelectFT from './SelectFT';
 
 type FormData = {
   dropName: string;
@@ -26,10 +27,27 @@ function displayBalance(balance: number) {
   return display;
 }
 
+const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
+
+const formattedBalance = (balance: string, decimals = 24) => {
+  const numericBalance = Number(balance);
+  console.log("numericBalance",numericBalance);
+  console.log("decimals",decimals);
+  
+  
+  if (isNaN(numericBalance) || isNaN(decimals)) {
+    return '0';
+  }
+  console.log(BigInt(Math.pow(10, decimals)));
+  
+  return (Number(numericBalance) / Math.pow(10, decimals)).toFixed(decimals);
+  // return result % 1 === 0 ? result.toString() : result.toFixed(5).replace(/\.?0+$/, '');
+};
+
 const getDeposit = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
 
-const CreateTokenDrop = () => {
+const CreateTokenDrop = ({tokens}:{tokens:any}) => {
   const {
     register,
     handleSubmit,
@@ -43,7 +61,9 @@ const CreateTokenDrop = () => {
 
   const { wallet, signedAccountId } = useContext(NearContext);
   const [currentNearAmount, setCurrentNearAmount] = useState(0);
+  const [token, setToken] = useState('near');
 
+  console.log("tokens",tokens);
   useEffect(() => {
     if (!wallet || !signedAccountId) return;
 
@@ -61,36 +81,66 @@ const CreateTokenDrop = () => {
     loadBalance();
   }, [wallet, signedAccountId]);
 
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!wallet) throw new Error('Wallet has not initialized yet');
-
+    const dropId = Date.now().toString();
     try {
       const args = {
-        deposit_per_use: parseNearAmount(data.amountPerLink.toString()),
+        deposit_per_use: token==="near"?parseNearAmount(data.amountPerLink.toString()):'0',
+        drop_id: dropId,
         metadata: JSON.stringify({
           dropName: data.dropName,
         }),
         public_keys: generateAndStore(data.dropName, data.numberLinks),
+        ft : token==="near"?undefined:{
+          sender_id: signedAccountId,
+          contract_id: token,
+          balance_per_use: "1000"
+        }
       };
 
-      await wallet.signAndSendTransactions({
-        transactions: [
-          {
-            receiverId: 'v2.keypom.near',
-            actions: [
-              {
-                type: 'FunctionCall',
-                params: {
-                  methodName: 'create_drop',
-                  args,
-                  gas: '300000000000000',
-                  deposit: getDeposit(data.amountPerLink, data.numberLinks),
-                },
+
+      const transactions = [
+        {
+          receiverId: 'v2.keypom.near',
+          actions: [
+            {
+              type: 'FunctionCall',
+              params: {
+                methodName: 'create_drop',
+                args,
+                gas: '300000000000000',
+                deposit: getDeposit(data.amountPerLink, data.numberLinks),
               },
-            ],
-          },
-        ],
-      });
+            },
+          ],
+        }
+      ]
+
+      if(token!=="near"){
+      
+        transactions.push( {
+          receiverId: token,
+          actions: [
+            {
+              type: 'FunctionCall',
+              params: {
+                methodName: 'ft_transfer_call',
+                args: {
+                  receiver_id: KEYPOM_CONTRACT_ADDRESS,
+                  amount: "2000",//TODO cambiar
+                  msg: dropId,
+                },
+                gas: '300000000000000',
+                deposit: 1,
+              },
+            },
+          ],
+        })
+      }
+         
+      await wallet.signAndSendTransactions({transactions});
 
       openToast({
         type: 'success',
@@ -116,6 +166,7 @@ const CreateTokenDrop = () => {
       </Text>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
+          <SelectFT tokens={tokens} setToken={setToken}/>
           <Input
             label="Token Drop name"
             placeholder="NEARCon Token Giveaway"
