@@ -180,7 +180,7 @@ export class Wallet {
       finality: 'final',
     });
     // return amount on NEAR
-    if (format){
+    if (format) {
       return account.amount ? Number(utils.format.formatNearAmount(account.amount)) : 0;
     } else {
       return account.amount || 0;
