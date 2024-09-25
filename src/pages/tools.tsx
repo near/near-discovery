@@ -9,25 +9,25 @@ import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
-import useNearBlocksTxns, { Txns } from '@/hooks/useNearBlocksTxns';
+import type { Txns } from '@/hooks/useNearBlocksTxns';
+import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
-import useTokens from '@/hooks/useFT';
 
 export type FT = {
-  decimals: number,
-  icon: string,
-  name: string,
-  symbol: string,
-  total_supply: string,
-}
+  decimals: number;
+  icon: string;
+  name: string;
+  symbol: string;
+  total_supply: string;
+};
 
 export type NFT = {
-  description: string,
-  media: string,
-  title: string,
-  token_id: string,
-}
+  description: string;
+  media: string;
+  title: string;
+  token_id: string;
+};
 
 const processTransactionsToFt = (transactions: Txns[]): FT[] => {
   if (!transactions) return [];
