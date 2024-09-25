@@ -3,6 +3,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 
 import type { NFT } from '@/pages/tools';
+import { ImgDefault } from '../Linkdrops/SelectFT';
 
 const RoundedImage = styled(Image)`
   border-radius: 50%;
@@ -43,7 +44,14 @@ const ListToken = ({ tokens }: { tokens: NFT[] }) => {
             {tokens.map((token) => {
               return (
                 <ImgCard key={`Carousel-${token.token_id}`}>
-                  <RoundedImage width={43} height={43} src={token.media} alt={token.title} />
+                  <RoundedImage
+                    src={token.media}
+                    alt={token.title}
+                    width={100}
+                    height={100}
+                    // TODO: onError={() => <ImgDefault />}
+                  />
+
                   <Text>{token.title}</Text>
                 </ImgCard>
               );

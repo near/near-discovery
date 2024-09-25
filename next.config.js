@@ -4,7 +4,7 @@ const nextConfig = {
   compiler: { styledComponents: true },
   reactStrictMode: true,
   images: {
-    domains: ['ipfs.near.social','ipfs.io'],
+    domains: ['ipfs.near.social','ipfs.io', 'ipfs.fleek.co'],
   },  
   experimental: {
     optimizePackageImports: ['@phosphor-icons/react'],

@@ -71,7 +71,7 @@ const nearCoin = {
   icon: NearIconSvg,
 };
 
-const ImgDefault = () => {
+export const ImgDefault = () => {
   return (
     <svg
       style={{ marginRight: '8px', width: '20px', height: '20px' }}
