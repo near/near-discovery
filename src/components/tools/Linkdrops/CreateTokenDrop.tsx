@@ -60,7 +60,6 @@ const CreateTokenDrop = () => {
 
   useEffect(() => {
     if (!token) return;
-    console.log(token);
     const balance = token.balance;
     const decimals = token.decimals;
     setBalance(formattedBalance(balance, decimals));
@@ -71,21 +70,25 @@ const CreateTokenDrop = () => {
     if (!token) throw new Error('Token has not been selected yet');
     const dropId = Date.now().toString();
     try {
+      const nearAmount = token.contract_id === 'near' ? parseNearAmount(data.amountPerLink.toString()) : '0';
+      const ftAmount = token.contract_id === 'near' ? '0' : parseAmount(data.amountPerLink.toString(), token.decimals).toString();
+      const isFTDrop = token.contract_id !== 'near';
+
       const args = {
-        deposit_per_use: token.contract_id === 'near' ? parseNearAmount(data.amountPerLink.toString()) : '0',
+        deposit_per_use: nearAmount,
         drop_id: dropId,
         metadata: JSON.stringify({
           dropName: data.dropName,
         }),
         public_keys: generateAndStore(data.dropName, data.numberLinks),
         ft:
-          token.contract_id === 'near'
-            ? undefined
-            : {
-                sender_id: signedAccountId,
-                contract_id: token.contract_id,
-                balance_per_use: parseAmount(data.amountPerLink.toString(), token.decimals).toString(),
-              },
+          isFTDrop
+            ? {
+              sender_id: signedAccountId,
+              contract_id: token.contract_id,
+              balance_per_use: ftAmount,
+            }
+            : undefined
       };
 
       const transactions: any[] = [
@@ -98,14 +101,15 @@ const CreateTokenDrop = () => {
                 methodName: 'create_drop',
                 args,
                 gas: '300000000000000',
-                deposit: getDeposit(token.contract_id === 'near' ? data.amountPerLink : 0, data.numberLinks),
+                deposit: getDeposit(isFTDrop ? 0 : data.amountPerLink, data.numberLinks),
               },
             },
           ],
         },
       ];
 
-      if (token.contract_id !== 'near') {
+      if (isFTDrop) {
+        const amount = BigInt(ftAmount) * BigInt(data.numberLinks)
         transactions.push({
           receiverId: token.contract_id,
           actions: [
@@ -115,7 +119,7 @@ const CreateTokenDrop = () => {
                 methodName: 'ft_transfer_call',
                 args: {
                   receiver_id: KEYPOM_CONTRACT_ADDRESS,
-                  amount: parseAmount(data.amountPerLink.toString(), token.decimals) * BigInt(data.numberLinks),
+                  amount: amount.toString(),
                   msg: dropId,
                 },
                 gas: '300000000000000',

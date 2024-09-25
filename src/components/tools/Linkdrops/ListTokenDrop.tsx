@@ -14,20 +14,21 @@ const ListTokenDrop = ({ drops }: { drops: Drops[] }) => {
         return (
           <Accordion.Item key={drop.drop_id} value={drop.drop_id}>
             <Accordion.Trigger>
-              {getDropName(drop)} - Claimed {drop.next_key_id - drop.registered_uses}/{drop.next_key_id}
+              {getDropName(drop)} - {drop.registered_uses} Remaining
             </Accordion.Trigger>
             <Accordion.Content>
               {drop.keys &&
-                drop.keys.map((key) => {
-                  const wasClaimed = !drop.information.some((info) => info.pk == key.public);
+                drop.keys
+                .filter(key => drop.information.some((info) => info.pk == key.public))
+                .map((key) => {
                   return (
                     <Flex align="center" justify="space-between" key={key.private}>
                       <Text style={{ maxWidth: '10rem' }} clampLines={1}>
                         {key.private}
                       </Text>
                       <Badge
-                        label={wasClaimed ? 'Claimed' : 'Unclaimed'}
-                        variant={wasClaimed ? 'success' : 'neutral'}
+                        label={'Unclaimed'}
+                        variant={'success'}
                       />
                       <Tooltip content="Copy Account ID">
                         <Button

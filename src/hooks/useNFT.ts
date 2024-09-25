@@ -39,7 +39,7 @@ export interface NFTInfo {
   nfts: NFT[];
 }
 
-export const accounts_ft = async (accountId: string): Promise<Fastnear> => {
+export const accounts_nft = async (accountId: string): Promise<Fastnear> => {
   const response = await fetch(`https://api.fastnear.com/v1/account/${accountId}/nft`);
   return await response.json();
 };
@@ -54,7 +54,7 @@ const useNFT = () => {
 
     setLoading(true);
     try {
-      const res = await accounts_ft(signedAccountId);
+      const res = await accounts_nft(signedAccountId);
       const tokensWithMetadata = await Promise.all(
         res.tokens.map(async (token) => {
           return {

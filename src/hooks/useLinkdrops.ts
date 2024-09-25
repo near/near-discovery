@@ -13,6 +13,7 @@ const useLinkdrops = () => {
   useEffect(() => {
     const fetchDropData = async () => {
       if (!wallet || !signedAccountId) return;
+
       const fetchedDrops: Drops[] = await wallet.viewMethod({
         contractId: 'v2.keypom.near',
         method: 'get_drops_for_owner',
@@ -23,7 +24,7 @@ const useLinkdrops = () => {
         (drop) =>
           drop.metadata &&
           JSON.parse(drop.metadata).dropName &&
-          getKeypomKeys(JSON.parse(drop.metadata).dropName).length,
+          getKeypomKeys(JSON.parse(drop.metadata).dropName).length > 0,
       );
 
       const fetchedInformationDrops = await Promise.all(
