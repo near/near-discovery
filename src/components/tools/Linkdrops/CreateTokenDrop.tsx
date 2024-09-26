@@ -71,7 +71,8 @@ const CreateTokenDrop = () => {
     const dropId = Date.now().toString();
     try {
       const nearAmount = token.contract_id === 'near' ? parseNearAmount(data.amountPerLink.toString()) : '0';
-      const ftAmount = token.contract_id === 'near' ? '0' : parseAmount(data.amountPerLink.toString(), token.decimals).toString();
+      const ftAmount =
+        token.contract_id === 'near' ? '0' : parseAmount(data.amountPerLink.toString(), token.decimals).toString();
       const isFTDrop = token.contract_id !== 'near';
 
       const args = {
@@ -81,14 +82,13 @@ const CreateTokenDrop = () => {
           dropName: data.dropName,
         }),
         public_keys: generateAndStore(data.dropName, data.numberLinks),
-        ft:
-          isFTDrop
-            ? {
+        ft: isFTDrop
+          ? {
               sender_id: signedAccountId,
               contract_id: token.contract_id,
               balance_per_use: ftAmount,
             }
-            : undefined
+          : undefined,
       };
 
       const transactions: any[] = [
@@ -109,7 +109,7 @@ const CreateTokenDrop = () => {
       ];
 
       if (isFTDrop) {
-        const amount = BigInt(ftAmount) * BigInt(data.numberLinks)
+        const amount = BigInt(ftAmount) * BigInt(data.numberLinks);
         transactions.push({
           receiverId: token.contract_id,
           actions: [

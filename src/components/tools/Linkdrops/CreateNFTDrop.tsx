@@ -1,44 +1,15 @@
-import { Accordion, Button, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
+import { Accordion, Button, Flex, Form, Input, openToast } from '@near-pagoda/ui';
 import { parseNearAmount } from 'near-api-js/lib/utils/format';
 import { useContext, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 
-import { NftImage } from '@/components/NTFImage';
 import type { NFT } from '@/hooks/useNFT';
 import useNFT from '@/hooks/useNFT';
 import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../WalletSelector';
-
-const CarouselContainer = styled.div`
-  display: flex;
-  overflow-x: auto;
-  width: 100%;
-  scrollbar-width: thin;
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-  }
-`;
-
-const ImgCard = styled.div<{
-  selected: boolean;
-}>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  margin: 4px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: ${(p) => (p.selected ? 'solid 1px #878782' : '')};
-`;
+import Carousel from '../Shared/Carousel';
 
 const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
 
@@ -50,12 +21,11 @@ type FormData = {
   contractId: string;
 };
 
-const parseToNFTimage = (nft: NFT, origin: string) => {
-  return {
-    contractId: origin,
-    tokenId: nft.token_id,
-  };
-};
+const parseToNFTForCarrousel = (nfts: NFT[]) =>
+  nfts.map((nft) => ({
+    title: nft.metadata.title,
+    token_id: nft.token_id,
+  }));
 
 const getDeposit = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
@@ -77,11 +47,12 @@ const CreateNFTDrop = () => {
 
   const { tokens } = useNFT();
 
-  const fillForm = (origin: string, nft: NFT) => () => {
-    setNftSelected(nft.token_id);
-    setValue('tokenId', nft.token_id);
+  const fillForm = (origin: string, token_id: string) => {
+    setNftSelected(token_id);
+    setValue('tokenId', token_id);
     setValue('contractId', origin);
   };
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!wallet) throw new Error('Wallet has not initialized yet');
     const dropId = Date.now().toString();
@@ -157,22 +128,13 @@ const CreateNFTDrop = () => {
               return (
                 <Accordion.Item value={index.toString()} key={`accordion-${token.origin}`}>
                   <Accordion.Trigger>{token.origin}</Accordion.Trigger>
-
                   <Accordion.Content>
-                    <CarouselContainer>
-                      {token.nfts.map((nft) => {
-                        return (
-                          <ImgCard
-                            key={`Carousel-${nft.token_id}`}
-                            onClick={fillForm(token.origin, nft)}
-                            selected={nftSelected === nft.token_id}
-                          >
-                            <NftImage nft={parseToNFTimage(nft, token.origin)} alt={nft.metadata.title} />
-                            <Text>{nft.metadata.title}</Text>
-                          </ImgCard>
-                        );
-                      })}
-                    </CarouselContainer>
+                    <Carousel
+                      nfts={parseToNFTForCarrousel(token.nfts)}
+                      contractId={token.origin}
+                      fillForm={fillForm}
+                      nftSelected={nftSelected}
+                    />
                   </Accordion.Content>
                 </Accordion.Item>
               );
