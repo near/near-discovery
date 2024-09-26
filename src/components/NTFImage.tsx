@@ -18,6 +18,7 @@ interface NftImageProps {
   nft?: Nft;
   ipfs_cid?: string;
   alt: string;
+  src?: string;
 }
 
 const DEFAULT_IMAGE = 'https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm';
@@ -31,9 +32,9 @@ const setImage = (key: string, url: string) => {
   localStorage.setItem(`keysImage:${key}`, url);
 };
 
-export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt }) => {
+export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt, src }) => {
   const { wallet } = useContext(NearContext);
-  const [imageUrl, setImageUrl] = useState<string>(DEFAULT_IMAGE);
+  const [imageUrl, setImageUrl] = useState<string>(src || DEFAULT_IMAGE);
 
   const fetchNftData = useCallback(async () => {
     if (!wallet || !nft || !nft.contractId || !nft.tokenId || ipfs_cid) return;
@@ -60,17 +61,18 @@ export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt }) => {
   }, [wallet, nft, ipfs_cid]);
 
   useEffect(() => {
+    if (imageUrl !== DEFAULT_IMAGE) return;
     if (ipfs_cid) {
       setImageUrl(`https://ipfs.near.social/ipfs/${ipfs_cid}`);
     } else {
       fetchNftData();
     }
-  }, [ipfs_cid, fetchNftData]);
+  }, [ipfs_cid, fetchNftData, imageUrl]);
 
   useEffect(() => {
     if (!wallet || !nft || !nft.contractId || !nft.tokenId || ipfs_cid || DEFAULT_IMAGE === imageUrl) return;
     setImage(nft.tokenId, imageUrl);
   }, [imageUrl, wallet, nft, ipfs_cid]);
 
-  return <RoundedImage width={43} height={43} src={imageUrl} alt={alt} />;
+  return <RoundedImage width={43} height={43} src={imageUrl} alt={alt} onError={() => setImageUrl(DEFAULT_IMAGE)} />;
 };

@@ -45,7 +45,8 @@ export const accounts_nft = async (accountId: string): Promise<Fastnear> => {
 };
 
 const useNFT = () => {
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { wallet } = useContext(NearContext);
+  const signedAccountId = 'gagdiez.near';
   const [tokens, setTokens] = useState<NFTInfo[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -57,17 +58,27 @@ const useNFT = () => {
       const res = await accounts_nft(signedAccountId);
       const tokensWithMetadata = await Promise.all(
         res.tokens.map(async (token) => {
-          return {
-            origin: token.contract_id,
-            nfts: await wallet.viewMethod({
+          try {
+            const nfts = await wallet.viewMethod({
               contractId: token.contract_id,
               method: 'nft_tokens_for_owner',
               args: { account_id: signedAccountId },
-            }),
-          };
+            });
+
+            return {
+              origin: token.contract_id,
+              nfts: nfts,
+            };
+          } catch (error) {
+            console.error(`Error fetching NFTs for contract ${token.contract_id}:`, error);
+            return {
+              origin: token.contract_id,
+              nfts: [],
+            };
+          }
         }),
       );
-      setTokens(tokensWithMetadata);
+      setTokens(tokensWithMetadata.filter((token) => token.nfts.length > 0));
     } catch (error) {
       console.error('Error fetching fungible tokens:', error);
     } finally {
