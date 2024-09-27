@@ -44,18 +44,9 @@ const processTransactionsToFt = (transactions: Txns[]): FT[] => {
   });
 };
 
-const processTransactionsToNFT = (transactions: Txns[]): NFT[] => {
+const processTransactionsToNFT = (contract_id: string, transactions: Txns[]): NFT[] => {
   if (!transactions) return [];
-
-  return transactions.map((txn) => {
-    const nft = JSON.parse(txn.actions[0].args);
-    return {
-      media: nft.token_metadata.media,
-      title: nft.token_metadata.title,
-      description: nft.token_metadata.description,
-      token_id: nft.token_id,
-    };
-  });
+  return transactions.map((txn) => { return { contract_id, ...JSON.parse(txn.actions[0].args) } });
 };
 
 const ToolsPage: NextPageWithLayout = () => {
@@ -68,7 +59,7 @@ const ToolsPage: NextPageWithLayout = () => {
   const ftProcessed = processTransactionsToFt(fts);
 
   const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
-  const nftsProcessed = processTransactionsToNFT(nfts);
+  const nftsProcessed = processTransactionsToNFT('nft.primitives.near', nfts);
 
   const { requestAuthentication } = useSignInRedirect();
   return (

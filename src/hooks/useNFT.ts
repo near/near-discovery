@@ -45,8 +45,7 @@ export const accounts_nft = async (accountId: string): Promise<Fastnear> => {
 };
 
 const useNFT = () => {
-  const { wallet } = useContext(NearContext);
-  const signedAccountId = 'gagdiez.near';
+  const { signedAccountId, wallet } = useContext(NearContext);
   const [tokens, setTokens] = useState<NFTInfo[]>([]);
   const [loading, setLoading] = useState(false);
 
