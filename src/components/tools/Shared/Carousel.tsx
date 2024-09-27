@@ -57,7 +57,7 @@ const Carousel: React.FC<CarouselProps> = ({ nfts, contractId = '', fillForm = n
       {nfts.map((nft) => (
         <Tooltip key={`Carousel-${nft.token_id}`} content={nft.title} asChild>
           <ImgCard onClick={() => handleOnClick(contractId, nft.token_id)} $selected={nftSelected === nft.token_id}>
-            <NftImage nft={{ contractId, tokenId: nft.token_id }} alt={nft.title} src={nft.media} />
+            <NftImage nft={nft} alt={nft.title} />
           </ImgCard>
         </Tooltip>
       ))}

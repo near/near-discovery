@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { signInContractId } from '@/utils/config';
 
-import { NftImage } from '../NTFImage';
+import { DEFAULT_IMAGE, NftImage, RoundedImage } from '../NTFImage';
 import { NearContext } from '../WalletSelector';
 
 const Wrapper = styled.div`
@@ -140,11 +140,17 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
           </Dropdown.Trigger>
         ) : (
           <Dropdown.Trigger>
-            <NftImage
-              nft={profile.image?.nft}
-              ipfs_cid={profile.image?.ipfs_cid}
-              alt={profile.name || signedAccountId}
-            />
+            {profile.image?.nft ?
+              <NftImage
+                nft={profile.image?.nft}
+                alt={profile.name || signedAccountId}
+              />
+              :
+              profile.image?.ipfs_cid ?
+                <RoundedImage src={`https://ipfs.near.social/ipfs/${profile.image.ipfs_cid}`} alt={profile.name || signedAccountId} width={36} height={36} />
+                :
+                <RoundedImage src={DEFAULT_IMAGE} alt={profile.name || signedAccountId} width={36} height={36} />
+            }
             <div className="profile-info">
               <div className="profile-name">{profile.name}</div>
               <div className="profile-username">{signedAccountId}</div>

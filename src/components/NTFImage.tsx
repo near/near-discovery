@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { NearContext } from './WalletSelector';
 
-const RoundedImage = styled(Image)`
+export const RoundedImage = styled(Image)`
   border-radius: 50%;
 `;
 
@@ -21,7 +21,7 @@ interface NftImageProps {
   src?: string;
 }
 
-const DEFAULT_IMAGE = 'https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm';
+export const DEFAULT_IMAGE = 'https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm';
 
 const getImage = (key: string) => {
   const imgUrl = localStorage.getItem(`keysImage:${key}`);
@@ -32,47 +32,56 @@ const setImage = (key: string, url: string) => {
   localStorage.setItem(`keysImage:${key}`, url);
 };
 
-export const NftImage: React.FC<NftImageProps> = ({ nft, ipfs_cid, alt, src }) => {
+export const NftImage: React.FC<NftImageProps> = ({ nft, alt }) => {
   const { wallet } = useContext(NearContext);
-  const [imageUrl, setImageUrl] = useState<string>(src || DEFAULT_IMAGE);
-
-  const fetchNftData = useCallback(async () => {
-    if (!wallet || !nft || !nft.contractId || !nft.tokenId || ipfs_cid) return;
-
-    const imgCache = getImage(nft.tokenId);
-    if (imgCache) {
-      setImageUrl(imgCache);
-      return;
-    }
-    const [nftMetadata, tokenData] = await Promise.all([
-      wallet.viewMethod({ contractId: nft.contractId, method: 'nft_metadata' }),
-      wallet.viewMethod({ contractId: nft.contractId, method: 'nft_token', args: { token_id: nft.tokenId } }),
-    ]);
-
-    const tokenMedia = tokenData?.metadata?.media || '';
-
-    if (tokenMedia.startsWith('https://') || tokenMedia.startsWith('http://') || tokenMedia.startsWith('data:image')) {
-      setImageUrl(tokenMedia);
-    } else if (nftMetadata?.base_uri) {
-      setImageUrl(`${nftMetadata.base_uri}/${tokenMedia}`);
-    } else if (tokenMedia.startsWith('Qm') || tokenMedia.startsWith('ba')) {
-      setImageUrl(`https://ipfs.near.social/ipfs/${tokenMedia}`);
-    }
-  }, [wallet, nft, ipfs_cid]);
+  const [imageUrl, setImageUrl] = useState<string>(DEFAULT_IMAGE);
 
   useEffect(() => {
-    if (imageUrl !== DEFAULT_IMAGE) return;
-    if (ipfs_cid) {
-      setImageUrl(`https://ipfs.near.social/ipfs/${ipfs_cid}`);
-    } else {
-      fetchNftData();
-    }
-  }, [ipfs_cid, fetchNftData, imageUrl]);
+
+    const fetchNftData = async () => {
+      console.log(nft);
+
+      if (!wallet || !nft || !nft.contract_id || !nft.token_id) return;
+      console.log(nft);
+      // const imgCache = getImage(nft.tokenId);
+      // if (imgCache) {
+      //   setImageUrl(imgCache);
+      //   return;
+      // }
+      const [nftMetadata, tokenData] = await Promise.all([
+        wallet.viewMethod({ contractId: nft.contract_id, method: 'nft_metadata' }),
+        wallet.viewMethod({ contractId: nft.contract_id, method: 'nft_token', args: { token_id: nft.token_id } }),
+      ]);
+
+      const tokenMedia = tokenData?.metadata?.media || '';
+
+      if (tokenMedia.startsWith('https://') || tokenMedia.startsWith('http://')) {
+        console.log("tokenMedia", tokenMedia);
+
+        if (!tokenMedia.includes('ipfs.near.social')) {
+          const url = new URL(tokenMedia);
+          url.hostname = 'ipfs.near.social';
+          setImageUrl(url.toString())
+        } else {
+          setImageUrl(tokenMedia);
+        }
+      } else if (tokenMedia.startsWith('data:image')) {
+        setImageUrl(tokenMedia);
+      } else if (nftMetadata?.base_uri) {
+        setImageUrl(`${nftMetadata.base_uri}/${tokenMedia}`);
+      } else if (tokenMedia.startsWith('Qm') || tokenMedia.startsWith('ba')) {
+        setImageUrl(`https://ipfs.near.social/ipfs/${tokenMedia}`);
+      }
+    };
+
+    fetchNftData();
+  }, []);
 
   useEffect(() => {
-    if (!wallet || !nft || !nft.contractId || !nft.tokenId || ipfs_cid || DEFAULT_IMAGE === imageUrl) return;
+    if (!nft || !nft.tokenId) return;
     setImage(nft.tokenId, imageUrl);
-  }, [imageUrl, wallet, nft, ipfs_cid]);
+  }, [nft, imageUrl]);
 
-  return <RoundedImage width={43} height={43} src={imageUrl} alt={alt} onError={() => setImageUrl(DEFAULT_IMAGE)} />;
+
+  return <RoundedImage width={43} height={43} src={imageUrl} alt={alt} onError={() => { setImageUrl(DEFAULT_IMAGE) }} />;
 };
