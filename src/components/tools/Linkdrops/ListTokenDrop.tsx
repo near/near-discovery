@@ -18,30 +18,28 @@ const ListTokenDrop = ({ drops }: { drops: Drops[] }) => {
             </Accordion.Trigger>
             <Accordion.Content>
               {drop.keys &&
-                drop.keys
-                  .filter((key) => drop.information.some((info) => info.pk == key.public))
-                  .map((key) => {
-                    return (
-                      <Flex align="center" justify="space-between" key={key.private}>
-                        <Text style={{ maxWidth: '10rem' }} clampLines={1}>
-                          {key.private}
-                        </Text>
-                        <Badge label={'Unclaimed'} variant={'success'} />
-                        <Tooltip content="Copy Account ID">
-                          <Button
-                            label="copy"
-                            onClick={() => {
-                              const url = 'https://app.mynearwallet.com' + '/linkdrop/v2.keypom.near/' + key.private;
-                              copyTextToClipboard(url, url);
-                            }}
-                            size="small"
-                            fill="outline"
-                            icon={<Copy />}
-                          />
-                        </Tooltip>
-                      </Flex>
-                    );
-                  })}
+                drop.keys.map((key) => {
+                  return (
+                    <Flex align="center" justify="space-between" key={key.private}>
+                      <Text style={{ maxWidth: '10rem' }} clampLines={1}>
+                        {key.private}
+                      </Text>
+                      <Badge label={'Unclaimed'} variant={'success'} />
+                      <Tooltip content="Copy Account ID">
+                        <Button
+                          label="copy"
+                          onClick={() => {
+                            const url = 'https://app.mynearwallet.com' + '/linkdrop/v2.keypom.near/' + key.private;
+                            copyTextToClipboard(url, url);
+                          }}
+                          size="small"
+                          fill="outline"
+                          icon={<Copy />}
+                        />
+                      </Tooltip>
+                    </Flex>
+                  );
+                })}
             </Accordion.Content>
           </Accordion.Item>
         );
