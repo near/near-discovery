@@ -160,10 +160,9 @@ export interface Drops {
   required_gas: string;
   next_key_id: number;
   keys?: Keys[];
-  information: Information[];
 }
 
-export interface Information {
+export interface KeypomKey {
   drop_id: string;
   pk: string;
   cur_key_use: number;

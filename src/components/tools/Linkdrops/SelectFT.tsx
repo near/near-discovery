@@ -14,7 +14,7 @@ const SelectContainer = styled.div`
 
 const SelectButton = styled.button`
   width: 100%;
-  padding: 0.5rem 1rem;
+  padding: 2px 8px;
   text-align: left;
   background-color: white;
   border: 1px solid #e2e8f0;
@@ -58,14 +58,6 @@ const CurrencyInfo = styled.div`
   align-items: center;
 `;
 
-const Label = styled.label`
-  display: block;
-  font: var(--text-xs);
-  font-weight: 600;
-  color: var(--sand12);
-  margin-bottom: 4px;
-`;
-
 const nearCoin = {
   contract_id: 'near',
   symbol: 'NEAR',
@@ -77,54 +69,49 @@ const SelectFT = ({ tokens, setToken }: { tokens: Token[]; setToken: (token: any
   const [selectedCurrency, setSelectedCurrency] = useState(nearCoin);
 
   return (
-    <div>
-      <Label>Select Token</Label>
-      <SelectContainer>
-        <SelectButton onClick={() => setIsOpen(!isOpen)} type="button">
-          <CurrencyInfo>
-            <Image
-              src={selectedCurrency.icon || TokenDefault}
-              alt={selectedCurrency.symbol}
-              width={20}
-              height={20}
-              style={{ marginRight: '8px' }}
-            />
-            <span>
-              {selectedCurrency.contract_id} ({selectedCurrency.symbol})
-            </span>
-          </CurrencyInfo>
-          <CaretDown />
-        </SelectButton>
+    <SelectContainer>
+      <SelectButton onClick={() => setIsOpen(!isOpen)} type="button">
+        <CurrencyInfo>
+          <Image
+            src={selectedCurrency.icon || TokenDefault}
+            alt={selectedCurrency.symbol}
+            width={16}
+            height={16}
+            style={{ marginRight: '8px' }}
+          />
+          <span>{selectedCurrency.symbol}</span>
+        </CurrencyInfo>
+        <CaretDown />
+      </SelectButton>
 
-        {isOpen && (
-          <OptionsList>
-            {tokens.map((token) => (
-              <Option
-                key={token.contract_id}
-                onClick={() => {
-                  setSelectedCurrency(token);
-                  setIsOpen(false);
-                  setToken(token);
-                }}
-              >
-                <CurrencyInfo>
-                  <Image
-                    src={token.icon || TokenDefault}
-                    alt={token.symbol}
-                    width={20}
-                    height={20}
-                    style={{ marginRight: '8px' }}
-                  />
-                  <span>
-                    {token.contract_id} ({token.symbol})
-                  </span>
-                </CurrencyInfo>
-              </Option>
-            ))}
-          </OptionsList>
-        )}
-      </SelectContainer>
-    </div>
+      {isOpen && (
+        <OptionsList>
+          {tokens.map((token) => (
+            <Option
+              key={token.contract_id}
+              onClick={() => {
+                setSelectedCurrency(token);
+                setIsOpen(false);
+                setToken(token);
+              }}
+            >
+              <CurrencyInfo>
+                <Image
+                  src={token.icon || TokenDefault}
+                  alt={token.symbol}
+                  width={16}
+                  height={16}
+                  style={{ marginRight: '8px' }}
+                />
+                <span>
+                  {token.contract_id} ({token.symbol})
+                </span>
+              </CurrencyInfo>
+            </Option>
+          ))}
+        </OptionsList>
+      )}
+    </SelectContainer>
   );
 };
 

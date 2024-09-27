@@ -153,7 +153,6 @@ const CreateTokenDrop = () => {
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
-          <SelectFT tokens={tokens} setToken={setToken} />
           <Input
             label="Token Drop name"
             placeholder="NEARCon Token Giveaway"
@@ -177,6 +176,7 @@ const CreateTokenDrop = () => {
               valueAsNumber: true,
               required: 'Number of links is required',
             })}
+            right={<SelectFT tokens={tokens} setToken={setToken} />}
           />
           <Input
             label="Amount per link"
