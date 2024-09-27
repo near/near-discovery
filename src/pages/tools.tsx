@@ -61,6 +61,7 @@ const ToolsPage: NextPageWithLayout = () => {
   const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
   const nftsProcessed = processTransactionsToNFT('nft.primitives.near', nfts);
 
+  
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>

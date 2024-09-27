@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { NftImage } from '@/components/NTFImage';
+import RoundedImage from '@/components/RoundedImage';
 
 const CarouselContainer = styled.div`
   display: flex;
@@ -36,8 +37,8 @@ interface NFT {
   token_id: string;
   title: string;
   media?: string;
+  contract_id: string;
 }
-
 interface CarouselProps {
   nfts: NFT[];
   contractId?: string;
@@ -51,13 +52,15 @@ const Carousel: React.FC<CarouselProps> = ({ nfts, contractId = '', fillForm = n
     (() => {
       console.log('');
     });
-
+   console.log(nfts,contractId);
+   
   return (
     <CarouselContainer>
       {nfts.map((nft) => (
-        <Tooltip key={`Carousel-${nft.token_id}`} content={nft.title} asChild>
+        <Tooltip key={`Carousel-${nft.token_id}`} content={nft.token_metadata.title} asChild>
           <ImgCard onClick={() => handleOnClick(contractId, nft.token_id)} $selected={nftSelected === nft.token_id}>
-            <NftImage nft={nft} alt={nft.title} />
+            {contractId && <NftImage nft={nft} />}
+            {!contractId && <RoundedImage src={nft.token_metadata.media} alt={nft.token_metadata.title}/>}
           </ImgCard>
         </Tooltip>
       ))}
