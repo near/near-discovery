@@ -1,27 +1,19 @@
-import Image from 'next/image';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useContext } from 'react';
-import styled from 'styled-components';
-
 import { NearContext } from './WalletSelector';
-
-export const RoundedImage = styled(Image)`
-  border-radius: 50%;
-`;
+import RoundedImage from './RoundedImage';
 
 interface Nft {
-  contractId: string;
-  tokenId: string;
+  contract_id: string;
+  token_id: string;
+  media?:string;
+  title: string
 }
 
 interface NftImageProps {
   nft?: Nft;
-  ipfs_cid?: string;
-  alt: string;
-  src?: string;
 }
 
-export const DEFAULT_IMAGE = 'https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm';
 
 const getImage = (key: string) => {
   const imgUrl = localStorage.getItem(`keysImage:${key}`);
@@ -32,17 +24,17 @@ const setImage = (key: string, url: string) => {
   localStorage.setItem(`keysImage:${key}`, url);
 };
 
-export const NftImage: React.FC<NftImageProps> = ({ nft, alt }) => {
+export const NftImage: React.FC<NftImageProps> = ({ nft }) => {
   const { wallet } = useContext(NearContext);
-  const [imageUrl, setImageUrl] = useState<string>(DEFAULT_IMAGE);
+  const [imageUrl, setImageUrl] = useState<string>("");
 
   useEffect(() => {
 
     const fetchNftData = async () => {
-      console.log(nft);
 
-      if (!wallet || !nft || !nft.contract_id || !nft.token_id) return;
-      console.log(nft);
+
+      if (!wallet || !nft || !nft.contract_id || !nft.token_id ) return;
+      
       // const imgCache = getImage(nft.tokenId);
       // if (imgCache) {
       //   setImageUrl(imgCache);
@@ -56,8 +48,7 @@ export const NftImage: React.FC<NftImageProps> = ({ nft, alt }) => {
       const tokenMedia = tokenData?.metadata?.media || '';
 
       if (tokenMedia.startsWith('https://') || tokenMedia.startsWith('http://')) {
-        console.log("tokenMedia", tokenMedia);
-
+      
         if (!tokenMedia.includes('ipfs.near.social')) {
           const url = new URL(tokenMedia);
           url.hostname = 'ipfs.near.social';
@@ -77,11 +68,11 @@ export const NftImage: React.FC<NftImageProps> = ({ nft, alt }) => {
     fetchNftData();
   }, []);
 
-  useEffect(() => {
-    if (!nft || !nft.tokenId) return;
-    setImage(nft.tokenId, imageUrl);
-  }, [nft, imageUrl]);
+  // useEffect(() => {
+  //   if (!nft || !nft.token_id) return;
+  //   setImage(nft.token_id, imageUrl);
+  // }, [nft, imageUrl]);
 
 
-  return <RoundedImage width={43} height={43} src={imageUrl} alt={alt} onError={() => { setImageUrl(DEFAULT_IMAGE) }} />;
+  return <RoundedImage src={imageUrl} alt={nft?.title || ""} />;
 };

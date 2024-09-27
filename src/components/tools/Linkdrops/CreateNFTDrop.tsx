@@ -46,7 +46,8 @@ const CreateNFTDrop = () => {
   const [nftSelected, setNftSelected] = useState('');
 
   const { tokens } = useNFT();
-
+  console.log(tokens,"tokens");
+  
   const fillForm = (origin: string, token_id: string) => {
     setNftSelected(token_id);
     setValue('tokenId', token_id);
