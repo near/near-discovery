@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { NftImage } from '@/components/NTFImage';
-import RoundedImage from '@/components/RoundedImage';
 
 const CarouselContainer = styled.div`
   display: flex;
@@ -42,25 +41,20 @@ interface NFT {
 interface CarouselProps {
   nfts: NFT[];
   contractId?: string;
-  fillForm?: ((contractId: string, tokenId: string) => void) | null;
+  onSelect?: ((contractId: string, tokenId: string) => void);
   nftSelected?: string;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ nfts, contractId = '', fillForm = null, nftSelected }) => {
-  const handleOnClick =
-    fillForm ??
-    (() => {
-      console.log('');
-    });
-   console.log(nfts,contractId);
+const empty = (contractId: string, tokenId: string) => { console.log(contractId, tokenId); };
+
+const Carousel: React.FC<CarouselProps> = ({ nfts, onSelect = empty, nftSelected }) => {
    
   return (
     <CarouselContainer>
       {nfts.map((nft) => (
-        <Tooltip key={`Carousel-${nft.token_id}`} content={nft.token_metadata.title} asChild>
-          <ImgCard onClick={() => handleOnClick(contractId, nft.token_id)} $selected={nftSelected === nft.token_id}>
-            {contractId && <NftImage nft={nft} />}
-            {!contractId && <RoundedImage src={nft.token_metadata.media} alt={nft.token_metadata.title}/>}
+        <Tooltip key={`Carousel-${nft.token_id}`} content={nft.metadata.title} asChild>
+          <ImgCard onClick={() => onSelect(nft.contract_id, nft.token_id)} $selected={nftSelected === nft.token_id}>
+            <NftImage nft={nft} />
           </ImgCard>
         </Tooltip>
       ))}

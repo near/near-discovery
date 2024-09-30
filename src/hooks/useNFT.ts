@@ -47,49 +47,38 @@ export const accounts_nft = async (accountId: string): Promise<Fastnear> => {
 const useNFT = () => {
   const { signedAccountId, wallet } = useContext(NearContext);
   const [tokens, setTokens] = useState<NFTInfo[]>([]);
-  const [loading, setLoading] = useState(false);
 
   const fetchTokens = useCallback(async () => {
     if (!wallet || !signedAccountId) return;
 
-    setLoading(true);
-    try {
-      const res = await accounts_nft(signedAccountId);
-      const tokensWithMetadata = await Promise.all(
-        res.tokens.map(async (token) => {
-          try {
-            const nfts = await wallet.viewMethod({
-              contractId: token.contract_id,
-              method: 'nft_tokens_for_owner',
-              args: { account_id: signedAccountId },
-            });
+    const res = await accounts_nft(signedAccountId);
 
-            return {
-              origin: token.contract_id,
-              nfts: nfts,
-            };
-          } catch (error) {
-            console.error(`Error fetching NFTs for contract ${token.contract_id}:`, error);
-            return {
-              origin: token.contract_id,
-              nfts: [],
-            };
-          }
-        }),
-      );
-      setTokens(tokensWithMetadata.filter((token) => token.nfts.length > 0));
-    } catch (error) {
-      console.error('Error fetching fungible tokens:', error);
-    } finally {
-      setLoading(false);
-    }
+    const tokensWithMetadata = await Promise.all(
+      res.tokens.map(async (token) => {
+        try {
+          let nfts = await wallet.viewMethod({
+            contractId: token.contract_id,
+            method: 'nft_tokens_for_owner',
+            args: { account_id: signedAccountId },
+          });
+
+          nfts = nfts.map((nft: NFT) => ({ contract_id: token.contract_id, ...nft }));
+          return nfts;
+        } catch (error) {
+          console.error(`Error fetching NFTs for contract ${token.contract_id}:`, error);
+          return [];
+        }
+      }),
+    );
+    console.log(tokensWithMetadata);
+    setTokens(tokensWithMetadata.filter(token => token.metadata.length > 0));
   }, [wallet, signedAccountId]);
 
   useEffect(() => {
     fetchTokens();
   }, [fetchTokens]);
 
-  return { tokens, loading, reloadTokens: fetchTokens };
+  return tokens;
 };
 
 export default useNFT;
