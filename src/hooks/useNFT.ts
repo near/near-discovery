@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { NearContext } from '@/components/WalletSelector';
+import { Metadata, NFT } from '@/utils/types';
 
 export interface Fastnear {
   account_id: string;
@@ -12,32 +13,14 @@ export interface Token {
   last_update_block_height: number;
 }
 
-export interface NFT {
+export interface NFTConsult {
+  contract_id: string;
   token_id: string;
   owner_id: string;
   metadata: Metadata;
   approved_account_ids: string[];
 }
 
-export interface Metadata {
-  title: string;
-  description: string | null;
-  media: string | null;
-  media_hash: string | null;
-  copies: string | null;
-  issued_at: string | null;
-  expires_at: string | null;
-  starts_at: string | null;
-  updated_at: string | null;
-  extra: string | null;
-  reference: string | null;
-  reference_hash: string | null;
-}
-
-export interface NFTInfo {
-  origin: string;
-  nfts: NFT[];
-}
 
 export const accounts_nft = async (accountId: string): Promise<Fastnear> => {
   const response = await fetch(`https://api.fastnear.com/v1/account/${accountId}/nft`);
@@ -46,7 +29,7 @@ export const accounts_nft = async (accountId: string): Promise<Fastnear> => {
 
 const useNFT = () => {
   const { signedAccountId, wallet } = useContext(NearContext);
-  const [tokens, setTokens] = useState<NFTInfo[]>([]);
+  const [tokens, setTokens] = useState<NFT[][]>([]);
 
   const fetchTokens = useCallback(async () => {
     if (!wallet || !signedAccountId) return;
@@ -56,22 +39,25 @@ const useNFT = () => {
     const tokensWithMetadata = await Promise.all(
       res.tokens.map(async (token) => {
         try {
-          let nfts = await wallet.viewMethod({
-            contractId: token.contract_id,
-            method: 'nft_tokens_for_owner',
-            args: { account_id: signedAccountId },
-          });
+            const nfts = await wallet.viewMethod({
+              contractId: token.contract_id,
+              method: 'nft_tokens_for_owner',
+              args: { account_id: signedAccountId },
+            });
 
-          nfts = nfts.map((nft: NFT) => ({ contract_id: token.contract_id, ...nft }));
-          return nfts;
+            return nfts.map((nft: NFTConsult): NFT => ({
+              ...nft,
+              contract_id: token.contract_id,
+              approved_account_ids: Object.keys(nft.approved_account_ids),
+            }));
         } catch (error) {
           console.error(`Error fetching NFTs for contract ${token.contract_id}:`, error);
           return [];
         }
       }),
     );
-    console.log(tokensWithMetadata);
-    setTokens(tokensWithMetadata.filter(token => token.metadata.length > 0));
+
+    setTokens(tokensWithMetadata.filter(tokens => tokens.length > 0));
   }, [wallet, signedAccountId]);
 
   useEffect(() => {

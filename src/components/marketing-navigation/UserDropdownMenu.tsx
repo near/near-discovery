@@ -9,8 +9,8 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { signInContractId } from '@/utils/config';
 
 import { NftImage } from '../NTFImage';
+import RoundedImage from '../RoundedImage';
 import { NearContext } from '../WalletSelector';
-import RoundedImage, { DEFAULT_IMAGE } from '../RoundedImage';
 
 const Wrapper = styled.div`
   flex-grow: 1;
@@ -93,8 +93,22 @@ type Props = {
   collapsed?: boolean;
 };
 
+
+const parseNftImage = (nft:any,owner_id:string,title:string|null = null) => {
+  return {
+    contract_id: nft.contractId,
+    token_id: nft.tokenId,
+    owner_id,
+    metadata: {
+      title:title || owner_id,
+    },
+    approved_account_ids:null
+  }
+}
+
 export const UserDropdownMenu = ({ collapsed }: Props) => {
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { wallet } = useContext(NearContext);
+  const signedAccountId = "gagdiez.near"
   const router = useRouter();
   const components = useBosComponents();
 
@@ -141,13 +155,14 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
           </Dropdown.Trigger>
         ) : (
           <Dropdown.Trigger>
-            {profile.image?.nft ?
-              <NftImage
-                nft={{...profile.image?.nft,title:profile.name || signedAccountId}}
+            {profile.image?.nft ? (
+              <NftImage nft={parseNftImage(profile.image.nft,signedAccountId,profile.name)} />
+            ) : (
+              <RoundedImage
+                src={`https://ipfs.near.social/ipfs/${profile?.image?.ipfs_cid}`}
+                alt={profile.name || signedAccountId}
               />
-              :
-              <RoundedImage src={`https://ipfs.near.social/ipfs/${profile?.image?.ipfs_cid}`} alt={profile.name || signedAccountId}/>
-            }
+            )}
             <div className="profile-info">
               <div className="profile-name">{profile.name}</div>
               <div className="profile-username">{signedAccountId}</div>

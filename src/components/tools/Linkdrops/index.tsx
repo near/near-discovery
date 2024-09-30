@@ -9,7 +9,7 @@ import CreateTokenDrop from './CreateTokenDrop';
 import ListTokenDrop from './ListTokenDrop';
 
 const Linkdrops = ({ drops }: { drops: Drops[] }) => {
-  const [selector, setSelector] = useState(false);
+  const [selector, setSelector] = useState(true);
 
   return (
     <>

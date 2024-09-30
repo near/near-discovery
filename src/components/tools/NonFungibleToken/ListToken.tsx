@@ -1,16 +1,9 @@
 import { Accordion } from '@near-pagoda/ui';
 
 import Carousel from '../Shared/Carousel';
-
-interface NFT {
-  token_id: string;
-  title: string;
-  media?: string;
-  contract_id: string;
-}
+import { NFT } from '@/utils/types';
 
 const ListToken = ({ tokens }: { tokens: NFT[] }) => {
-
   return (
     <Accordion.Root type="multiple">
       <Accordion.Item value="one">

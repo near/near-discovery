@@ -12,7 +12,7 @@ import useLinkdrops from '@/hooks/useLinkdrops';
 import type { Txns } from '@/hooks/useNearBlocksTxns';
 import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import type { NextPageWithLayout } from '@/utils/types';
+import type { NextPageWithLayout, NFT } from '@/utils/types';
 
 export type FT = {
   decimals: number;
@@ -20,13 +20,6 @@ export type FT = {
   name: string;
   symbol: string;
   total_supply: string;
-};
-
-export type NFT = {
-  description: string;
-  media: string;
-  title: string;
-  token_id: string;
 };
 
 const processTransactionsToFt = (transactions: Txns[]): FT[] => {
@@ -44,9 +37,18 @@ const processTransactionsToFt = (transactions: Txns[]): FT[] => {
   });
 };
 
-const processTransactionsToNFT = (contract_id: string, transactions: Txns[]): NFT[] => {
+const processTransactionsToNFT = (contract_id: string,owner_id:string, transactions: Txns[]): NFT[] => {
   if (!transactions) return [];
-  return transactions.map((txn) => { return { contract_id, ...JSON.parse(txn.actions[0].args) } });
+  return transactions.map((txn) => {
+    const args = JSON.parse(txn.actions[0].args);
+    return {
+      contract_id: contract_id,
+      token_id: args.token_id,
+      metadata: args.token_metadata,
+      owner_id,
+      approved_account_ids: null
+    };
+  });
 };
 
 const ToolsPage: NextPageWithLayout = () => {
@@ -59,9 +61,7 @@ const ToolsPage: NextPageWithLayout = () => {
   const ftProcessed = processTransactionsToFt(fts);
 
   const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
-  const nftsProcessed = processTransactionsToNFT('nft.primitives.near', nfts);
-
-  
+  const nftsProcessed = processTransactionsToNFT('nft.primitives.near',signedAccountId, nfts);
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
