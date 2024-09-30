@@ -4,12 +4,12 @@ import { useContext, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
-import type { NFT } from '@/hooks/useNFT';
 import useNFT from '@/hooks/useNFT';
 import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../WalletSelector';
 import Carousel from '../Shared/Carousel';
+import { NFT } from '@/utils/types';
 
 const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
 
@@ -45,8 +45,8 @@ const CreateNFTDrop = () => {
 
   const [nftSelected, setNftSelected] = useState('');
 
-  const nfts = useNFT();
-
+  const contracts = useNFT();
+  
   const fillForm = (origin: string, token_id: string) => {
     setNftSelected(token_id);
     setValue('tokenId', token_id);
@@ -123,15 +123,16 @@ const CreateNFTDrop = () => {
             error={errors.dropName?.message}
             {...register('dropName', { required: 'Token Drop name is required' })}
           />
-          {/* <Accordion.Root type="multiple"> */}
-                {/* <Accordion.Item value={index.toString()} key={`accordion-${token.origin}`}>
-                  <Accordion.Trigger>{token.origin}</Accordion.Trigger> */}
-                  {/* <Accordion.Content> */}
-                    <Carousel nfts={nfts} onSelect={fillForm} nftSelected={nftSelected} />
-                  {/* </Accordion.Content> */}
-                {/* </Accordion.Item> */}
-
-          {/* </Accordion.Root> */}
+          <Accordion.Root type="multiple">
+            {contracts.map((nfts, index) => (
+              <Accordion.Item value={index.toString()} key={`accordion-${nfts[0].contract_id}`}>
+                <Accordion.Trigger>{nfts[0].contract_id}</Accordion.Trigger>
+                <Accordion.Content>
+                  <Carousel nfts={nfts} onSelect={fillForm} nftSelected={nftSelected} />
+                </Accordion.Content>
+              </Accordion.Item>
+            ))}
+          </Accordion.Root>
           <Input
             label="NFT contract address"
             placeholder="Enter a NFT contract address"
