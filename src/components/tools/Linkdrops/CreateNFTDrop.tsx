@@ -45,9 +45,8 @@ const CreateNFTDrop = () => {
 
   const [nftSelected, setNftSelected] = useState('');
 
-  const { tokens } = useNFT();
-  console.log(tokens,"tokens");
-  
+  const nfts = useNFT();
+
   const fillForm = (origin: string, token_id: string) => {
     setNftSelected(token_id);
     setValue('tokenId', token_id);
@@ -124,23 +123,15 @@ const CreateNFTDrop = () => {
             error={errors.dropName?.message}
             {...register('dropName', { required: 'Token Drop name is required' })}
           />
-          <Accordion.Root type="multiple">
-            {tokens.map((token, index) => {
-              return (
-                <Accordion.Item value={index.toString()} key={`accordion-${token.origin}`}>
-                  <Accordion.Trigger>{token.origin}</Accordion.Trigger>
-                  <Accordion.Content>
-                    <Carousel
-                      nfts={parseToNFTForCarrousel(token.nfts)}
-                      contractId={token.origin}
-                      fillForm={fillForm}
-                      nftSelected={nftSelected}
-                    />
-                  </Accordion.Content>
-                </Accordion.Item>
-              );
-            })}
-          </Accordion.Root>
+          {/* <Accordion.Root type="multiple"> */}
+                {/* <Accordion.Item value={index.toString()} key={`accordion-${token.origin}`}>
+                  <Accordion.Trigger>{token.origin}</Accordion.Trigger> */}
+                  {/* <Accordion.Content> */}
+                    <Carousel nfts={nfts} onSelect={fillForm} nftSelected={nftSelected} />
+                  {/* </Accordion.Content> */}
+                {/* </Accordion.Item> */}
+
+          {/* </Accordion.Root> */}
           <Input
             label="NFT contract address"
             placeholder="Enter a NFT contract address"
