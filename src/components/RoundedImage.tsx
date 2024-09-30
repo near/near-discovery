@@ -1,9 +1,10 @@
-import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-export const Img = styled(Image)`
+export const Img = styled.img`
   border-radius: 50%;
+  overflow: hidden;
+  object-fit: cover;
 `;
 
 export const DEFAULT_IMAGE =
@@ -15,7 +16,7 @@ const RoundedImage = ({ src, alt }: { src: string; alt: string }) => {
     setImageUrl(src);
   }, [src]);
 
-  return <Img width={43} height={43} src={imageUrl} alt={alt || ''} onError={() => setImageUrl(DEFAULT_IMAGE)} />;
+  return <Img height={43} width={43} src={imageUrl} alt={alt || ''} onError={() => setImageUrl(DEFAULT_IMAGE)} />;
 };
 
 export default RoundedImage;
