@@ -503,7 +503,7 @@ export const Sandbox = ({ onboarding = false }) => {
     firstLoad();
   }, [cache, firstLoad, near]);
 
-  if (!shouldRender) return <PlaceholderCard />;
+  // if (!shouldRender) return <PlaceholderCard />;
 
   return (
     <MainWrapper>
