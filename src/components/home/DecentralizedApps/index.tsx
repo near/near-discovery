@@ -1,6 +1,22 @@
 import { Flex, Grid, Text, Title } from '@near-pagoda/ui';
 import { BookOpenText } from '@phosphor-icons/react';
+import Image from 'next/image';
 import styled from 'styled-components';
+
+import {
+  binance,
+  bitget,
+  bitte,
+  here,
+  ledger,
+  metamask,
+  meteor,
+  myNear,
+  safePal,
+  sender,
+  trustWallet,
+  uniswap,
+} from '@/assets/images/wallets';
 
 import { Button } from '../Button';
 import { Code } from '../Code';
@@ -48,10 +64,10 @@ const Carousel = styled.div`
   height: 60px;
 `;
 
-const Placeholder = styled.div`
-  background-color: #000;
-  min-width: 60px;
-  height: 100%;
+const WalletImg = styled(Image)`
+  margin: 0 2px;
+  height: 40px;
+  border-radius: 4px;
 `;
 
 export const DecentralizedApps = () => {
@@ -85,20 +101,20 @@ export const DecentralizedApps = () => {
             <Title> Near React App </Title>
             <Code code={ReactApp} height={450} language="ts" />
           </Flex>
-
           <Carousel>
-            <Title> Supported Wallets </Title>
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
-            <Placeholder />
+            <Title>Supported Wallets</Title>
+            <WalletImg src={binance} alt="Binance" />
+            <WalletImg src={bitget} alt="Bitget" />
+            <WalletImg src={bitte} alt="Bitte" />
+            <WalletImg src={here} alt="Here" />
+            <WalletImg src={ledger} alt="Ledger" />
+            <WalletImg src={metamask} alt="Metamask" />
+            <WalletImg src={meteor} alt="Meteor" />
+            <WalletImg src={myNear} alt="MyNear" />
+            <WalletImg src={safePal} alt="SafePal" />
+            <WalletImg src={sender} alt="Sender" />
+            <WalletImg src={trustWallet} alt="TrustWallet" />
+            <WalletImg src={uniswap} alt="Uniswap" />
           </Carousel>
         </Flex>
       </Grid>

@@ -12,6 +12,7 @@ const CodeWrapper = styled.div<{
   position: relative;
   max-height: ${({ height }) => (height ? `${height}px` : 'none')};
   overflow-y: auto;
+  overflow-x: hidden;
 `;
 
 const LineContent = styled(CodeBlock.LineContent)`
@@ -26,7 +27,7 @@ export const Code = ({ height, code, language }: { height?: number; code: string
   return (
     <CodeBlock code={code} language={language}>
       <CodeWrapper height={height}>
-        <CodeBlock.Code style={{ marginBottom: 0 }}>
+        <CodeBlock.Code style={{ marginBottom: 0, overflowX: 'hidden' }}>
           <LineContent>
             <CodeBlock.Token />
           </LineContent>

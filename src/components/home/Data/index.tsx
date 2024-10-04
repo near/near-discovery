@@ -1,6 +1,8 @@
 import { Flex, Grid, Text } from '@near-pagoda/ui';
 import { BookOpenText } from '@phosphor-icons/react';
 
+import useDeviceType from '@/hooks/useDeviceType';
+
 import { Button } from '../Button';
 import { Code } from '../Code';
 
@@ -22,10 +24,19 @@ events.filter(e =>
 `;
 
 export const Data = () => {
+  const deviceType = useDeviceType();
+
   return (
     <>
       <Flex stack gap="l" style={{ padding: '0.5rem', flexGrow: 1, justifyContent: 'space-between' }}>
-        <Grid columns="542px minmax(0, 1fr)" gap="2xl" columnsTablet="minmax(0, 1fr)" columnsPhone="minmax(0, 1fr)">
+        <Grid
+          columns="542px minmax(0, 1fr)"
+          gap="2xl"
+          gapPhone="m"
+          gapTablet="m"
+          columnsTablet="minmax(0, 1fr)"
+          columnsPhone="minmax(0, 1fr)"
+        >
           <Flex stack gap="m">
             <Text as="h1" style={{ fontWeight: 'normal' }}>
               {' '}
@@ -45,8 +56,16 @@ export const Data = () => {
           </Flex>
         </Grid>
 
-        <Grid columns="minmax(0, 1fr) 542px" gap="2xl" columnsTablet="minmax(0, 1fr)" columnsPhone="minmax(0, 1fr)">
-          <Flex stack gap="m" style={{ justifyContent: 'center' }}>
+        <Grid
+          columns="minmax(0, 1fr) 542px"
+          gap="2xl"
+          gapPhone="m"
+          gapTablet="m"
+          columnsTablet="minmax(0, 1fr)"
+          columnsPhone="minmax(0, 1fr)"
+          style={{ margin: deviceType != 'desktop' ? '24px 0' : '0' }}
+        >
+          <Flex stack gap="m" style={{ justifyContent: 'center', gridRowEnd: deviceType == 'desktop' ? 'auto' : '3' }}>
             <Code code={BigQuery} language="sql" />
             <Button
               iconLeft={<BookOpenText fill="bold" />}
@@ -56,7 +75,7 @@ export const Data = () => {
           </Flex>
           <Flex stack gap="m" justify="space-between">
             <Text as="h1" style={{ fontWeight: 'normal' }}>
-              Public BigQuery Data Repositories{' '}
+              Public BigQuery Data Repositories
             </Text>
             <Text size="text-l" style={{ fontWeight: 'lighter' }}>
               A well organized public dataset to help you query historical data and build your own analytics
@@ -64,7 +83,14 @@ export const Data = () => {
           </Flex>
         </Grid>
 
-        <Grid columns="542px minmax(0, 1fr)" gap="2xl" columnsTablet="minmax(0, 1fr)" columnsPhone="minmax(0, 1fr)">
+        <Grid
+          columns="542px minmax(0, 1fr)"
+          gap="2xl"
+          gapPhone="m"
+          gapTablet="m"
+          columnsTablet="minmax(0, 1fr)"
+          columnsPhone="minmax(0, 1fr)"
+        >
           <Flex stack gap="m" style={{ textAlign: 'left' }}>
             <Text as="h1" style={{ fontWeight: 'normal' }}>
               {' '}
