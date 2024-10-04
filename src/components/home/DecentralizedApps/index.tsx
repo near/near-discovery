@@ -1,9 +1,9 @@
-import { Flex, Grid, Switch, Tabs, Text, Title } from "@near-pagoda/ui";
-import styled from "styled-components";
+import { Flex, Grid, Text, Title } from '@near-pagoda/ui';
+import { BookOpenText } from '@phosphor-icons/react';
+import styled from 'styled-components';
 
-import { Code } from "../Code";
-import { BookOpenText } from "@phosphor-icons/react";
-import { Button } from "../Button";
+import { Button } from '../Button';
+import { Code } from '../Code';
 
 const npxCNA = `
 $> npx create-near-app@latest
@@ -38,7 +38,7 @@ export default function MyApp({ Component, pageProps }) {
       <Component {...pageProps} />
     </NearContext.Provider>
   );
-}`
+}`;
 
 const Carousel = styled.div`
   display: flex;
@@ -55,46 +55,60 @@ const Placeholder = styled.div`
 `;
 
 export const DecentralizedApps = () => {
+  return (
+    <>
+      <Grid
+        columns="55% minmax(0, 45%)"
+        gap="xl"
+        columnsPhone="minmax(0, 1fr)"
+        columnsTablet="minmax(0, 1fr)"
+        style={{ flexGrow: 1, padding: '0.5rem' }}
+      >
+        <Flex stack style={{ justifyContent: 'space-between' }}>
+          <Flex stack gap="m">
+            <Text as="h1" style={{ fontWeight: 'normal' }}>
+              {' '}
+              Building Web3 Apps Has Never Been Easier{' '}
+            </Text>
+            <Text size="text-l" style={{ fontWeight: 'lighter' }}>
+              Spin up a your first Web3 app in seconds, or use our APIs to supercharge your existing app
+            </Text>
+          </Flex>
 
-  return <>
-
-    <Grid columns="55% minmax(0, 45%)" gap="xl" columnsPhone="minmax(0, 1fr)" columnsTablet="minmax(0, 1fr)" style={{ flexGrow: 1, padding: "0.5rem" }}>
-
-      <Flex stack style={{ justifyContent: "space-between" }}>
-        <Flex stack gap="m" >
-          <Text as="h1" style={{ fontWeight: "normal" }}> Building Web3 Apps Has Never Been Easier </Text>
-          <Text size="text-l" style={{ fontWeight: "lighter" }}>
-            Spin up a your first Web3 app in seconds, or use our APIs to supercharge your existing app
-          </Text>
+          <Flex stack gap="l">
+            <Code code={npxCNA} language="bash" />
+          </Flex>
         </Flex>
 
-        <Flex stack gap="l">
-          <Code code={npxCNA} language="bash" />
-        </Flex>
-      </Flex>
+        <Flex stack gap="m" style={{ flexGrow: 1, justifyContent: 'space-between' }}>
+          <Flex stack>
+            <Title> Near React App </Title>
+            <Code code={ReactApp} height={450} language="ts" />
+          </Flex>
 
-      <Flex stack gap="m" style={{flexGrow: 1, justifyContent: "space-between"}} >
-        <Flex stack>
-          <Title> Near React App </Title>
-          <Code code={ReactApp} height={450} language="ts" />
+          <Carousel>
+            <Title> Supported Wallets </Title>
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+            <Placeholder />
+          </Carousel>
         </Flex>
-
-        <Carousel>
-          <Title> Supported Wallets </Title>
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-          <Placeholder />
-        </Carousel>
-      </Flex>
-    </Grid>
-    <Button size="large" iconLeft={<BookOpenText fill="bold" />} href="/documentation/build/web3-apps/quickstart" label="Start Now!" style={{ marginTop: "var(--gap-m)" }} />
-  </>
-}
+      </Grid>
+      <Button
+        size="large"
+        iconLeft={<BookOpenText fill="bold" />}
+        href="/documentation/build/web3-apps/quickstart"
+        label="Start Now!"
+        style={{ marginTop: 'var(--gap-m)' }}
+      />
+    </>
+  );
+};
