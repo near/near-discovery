@@ -105,18 +105,18 @@ export const DecentralizedApps = () => {
           </Flex>
           <Carousel>
             <Title>Supported Wallets</Title>
+            <WalletImg src={metamask} alt="Metamask" />
             <WalletImg src={binance} alt="Binance" />
-            <WalletImg src={bitget} alt="Bitget" />
+            <WalletImg src={meteor} alt="Meteor" />
             <WalletImg src={bitte} alt="Bitte" />
             <WalletImg src={here} alt="Here" />
+            <WalletImg src={bitget} alt="Bitget" />
+            <WalletImg src={uniswap} alt="Uniswap" />
             <WalletImg src={ledger} alt="Ledger" />
-            <WalletImg src={metamask} alt="Metamask" />
-            <WalletImg src={meteor} alt="Meteor" />
             <WalletImg src={myNear} alt="MyNear" />
             <WalletImg src={safePal} alt="SafePal" />
             <WalletImg src={sender} alt="Sender" />
             <WalletImg src={trustWallet} alt="TrustWallet" />
-            <WalletImg src={uniswap} alt="Uniswap" />
           </Carousel>
         </Flex>
       </Grid>
