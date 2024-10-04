@@ -1,21 +1,25 @@
-import { Card, Container, Flex, Grid, Section, Tabs, Text } from '@near-pagoda/ui';
+import { Card, Flex, Grid, Section, Tabs, Text } from '@near-pagoda/ui';
 import { Globe, Link, MagnifyingGlass, Scroll } from '@phosphor-icons/react';
-import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { ChainAbstraction } from '@/components/home/ChainAbstraction';
 import { Contracts } from '@/components/home/Contracts';
 import { Data } from '@/components/home/Data';
 import { DecentralizedApps } from '@/components/home/DecentralizedApps';
-import { Tab } from '@/components/sandbox/utils/const';
-import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useTermsOfServiceStore } from '@/stores/terms-of-service';
 import type { NextPageWithLayout } from '@/utils/types';
 
+const StyledCard = ({ href, title, description }: { href: string; title: string; description: string }) => {
+  return (
+    <Card style={{ padding: '1.5rem 1rem', border: 0, textDecoration: 'none' }} href={href}>
+      <Text as="h4"> {title} </Text>
+      <Text>{description}</Text>
+    </Card>
+  );
+};
+
 const HomePage: NextPageWithLayout = () => {
-  const { signedAccountId, wallet } = useContext(NearContext);
   const [selectedTab, setTab] = useState('contracts');
 
   const Header = styled.div`
@@ -24,125 +28,145 @@ const HomePage: NextPageWithLayout = () => {
     justify-content: center;
     min-height: 280px;
     background-size: 54px;
-    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGeSURBVHgB7doxTisxEAbgeY/mvQro6NiSDo6QkpJbcA2OwjWooKQMJ2DpKENJBV7FEYoBeQSIZr9PGk2cItWvsdfZnSBjKHVf6rnUbdD1N8g4K7VX6jhIEaycofaTIEWwcoam0yFYOYe179WiQ7Byhk8+8wnB6munlHNWgmD1tUGyFSYIVl8bJFcOCYLV106s/aBrJ2hNE+qo1GmpRanz2J5aB6X+x/oQv/l+FWz5E/O1iHU4pom0W/u0/uoZahnrgN2VGuv6Jpidl1+o2T5BznkrfKj9MdZT6l9836r+3k2pq1KXMVNz3gpbU7hOmj49AQ7x/lJ0WWsK5xhv2+AYkHQR29vbddDluqFvbNZPQZdg9S07az4gWH3tHZVgJQhW3xjb4XIZyo+Z3nffHN79CZ1gYuXc1b4KEytFsHLGptMhWDlj7Q9BimDlbJ4Ex4AftggHdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIpXoUVLSWulnzoAAAAASUVORK5CYII=");
-  `
+    padding: 16px 0px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGeSURBVHgB7doxTisxEAbgeY/mvQro6NiSDo6QkpJbcA2OwjWooKQMJ2DpKENJBV7FEYoBeQSIZr9PGk2cItWvsdfZnSBjKHVf6rnUbdD1N8g4K7VX6jhIEaycofaTIEWwcoam0yFYOYe179WiQ7Byhk8+8wnB6munlHNWgmD1tUGyFSYIVl8bJFcOCYLV106s/aBrJ2hNE+qo1GmpRanz2J5aB6X+x/oQv/l+FWz5E/O1iHU4pom0W/u0/uoZahnrgN2VGuv6Jpidl1+o2T5BznkrfKj9MdZT6l9836r+3k2pq1KXMVNz3gpbU7hOmj49AQ7x/lJ0WWsK5xhv2+AYkHQR29vbddDluqFvbNZPQZdg9S07az4gWH3tHZVgJQhW3xjb4XIZyo+Z3nffHN79CZ1gYuXc1b4KEytFsHLGptMhWDlj7Q9BimDlbJ4Ex4AftggHdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIpXoUVLSWulnzoAAAAASUVORK5CYII=');
+  `;
 
   return (
     <Section grow="available">
-      <Flex stack gap="l" style={{ padding: "0rem 2rem" }}>
+      <Flex stack gap="l" style={{ padding: '0rem 2rem' }}>
         <Header>
-          <Flex stack gap="s" style={{ backgroundColor: 'white', padding: "1rem", textAlign: "center" }}>
+          <Flex stack gap="s" style={{ backgroundColor: 'white', padding: '1rem', textAlign: 'center' }}>
             <Text as="h1"> Near Developer Portal </Text>
             <Text> Embrace the power of Web3 </Text>
           </Flex>
         </Header>
 
-        <Card style={{ padding: ".5rem 1.5rem 1.5rem 1.5rem", marginTop: "2rem", border: 0, minHeight: "768px" }}>
+        <Card style={{ padding: '.5rem 1.5rem 1.5rem 1.5rem', marginTop: '2rem', border: 0, minHeight: '768px' }}>
           <Tabs.Root value={selectedTab}>
-            <Tabs.List style={{ marginBottom: '1rem' }}  >
-
-              <Tabs.Trigger onClick={() => { setTab('contracts') }} value="contracts">
+            <Tabs.List style={{ marginBottom: '1rem' }}>
+              <Tabs.Trigger
+                onClick={() => {
+                  setTab('contracts');
+                }}
+                value="contracts"
+              >
                 <Scroll fill="bold" />
                 Smart Contracts
               </Tabs.Trigger>
 
-              <Tabs.Trigger onClick={() => { setTab('web3-apps') }} value="web3-apps">
+              <Tabs.Trigger
+                onClick={() => {
+                  setTab('web3-apps');
+                }}
+                value="web3-apps"
+              >
                 <Globe fill="bold" />
                 Web3 Applications
               </Tabs.Trigger>
 
-              <Tabs.Trigger onClick={() => { setTab('chain-abstraction') }} value="chain-abstraction">
+              <Tabs.Trigger
+                onClick={() => {
+                  setTab('chain-abstraction');
+                }}
+                value="chain-abstraction"
+              >
                 <Link fill="bold" />
                 Chain Abstraction
               </Tabs.Trigger>
 
-              <Tabs.Trigger onClick={() => { setTab('data-solutions') }} value="data-solutions">
+              <Tabs.Trigger
+                onClick={() => {
+                  setTab('data-solutions');
+                }}
+                value="data-solutions"
+              >
                 <MagnifyingGlass fill="bold" />
                 Data Solutions
               </Tabs.Trigger>
-
             </Tabs.List>
 
-            <Tabs.Content style={{ minHeight: "656px" }} value="contracts">
+            <Tabs.Content style={{ minHeight: '656px' }} value="contracts">
               <Contracts />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: "656px" }} value="chain-abstraction">
+            <Tabs.Content style={{ minHeight: '656px' }} value="chain-abstraction">
               <ChainAbstraction />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: "656px" }} value="web3-apps">
+            <Tabs.Content style={{ minHeight: '656px' }} value="web3-apps">
               <DecentralizedApps />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: "656px" }} value="data-solutions">
+            <Tabs.Content style={{ minHeight: '656px' }} value="data-solutions">
               <Data />
             </Tabs.Content>
           </Tabs.Root>
         </Card>
 
-        <Header style={{ marginTop: "var(--gap-xl)", textAlign: "center" }}>
+        <Header style={{ marginTop: 'var(--gap-xl)', textAlign: 'center' }}>
           <Flex stack gap="l" align="center">
+            <Text as="h1" style={{ maxWidth: '470px', textAlign: 'center', backgroundColor: 'white' }}>
+              {' '}
+              Why choosing Near?{' '}
+            </Text>
 
-            <Text as="h1" style={{ maxWidth: "470px", textAlign: "center", backgroundColor: "white" }}> Why choosing Near? </Text>
-
-            <Grid columns="1fr 1fr 1fr 1fr" gap="xl" columnsTablet='1fr'>
-              <Card style={{ padding: "1.5rem 1rem", border: 0 }}>
+            <Grid columns="1fr 1fr 1fr 1fr" gap="xl" columnsTablet="1fr">
+              <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> 2,32 Billion </Text>
                 <Text> Blocks and counting </Text>
               </Card>
 
-              <Card style={{ padding: "1.5rem 1rem", border: 0 }}>
+              <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> 1.3043s </Text>
                 <Text> Average Block Time </Text>
               </Card>
 
-              <Card style={{ padding: "1.5rem 1rem", border: 0 }}>
-                <Text as="h2"> {`< $0.001`}  </Text>
-                <Text> Average transaction price  </Text>
+              <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
+                <Text as="h2"> {`< $0.001`} </Text>
+                <Text> Average transaction price </Text>
               </Card>
 
-              <Card style={{ padding: "1.5rem 1rem", border: 0 }}>
+              <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> 497+ </Text>
-                <Text> Awesome apps and growing  </Text>
+                <Text> Awesome apps and growing </Text>
               </Card>
             </Grid>
           </Flex>
         </Header>
 
-        <Text as="h1" style={{ marginTop: 'var(--gap-xl)' }}> Resources </Text>
+        <Text as="h1" style={{ marginTop: 'var(--gap-xl)' }}>
+          {' '}
+          Resources{' '}
+        </Text>
 
-        <Grid columns="1fr 1fr 1fr" gap="xl" style={{ textAlign: "center" }} columnsTablet='1fr'>
-          <Card style={{ padding: "1.5rem .5rem", border: 0 }} href='/documentation'>
-            <Text as="h4">  📖 Documentation </Text>
-            <Text> 
-              Find all the documentation, examples and tutorials you need to get started with Near
-            </Text>
-          </Card>
-
-          <Card style={{ padding: "1.5rem .5rem", border: 0 }}>
-            <Text as="h4">  💬 Support </Text>
-            <Text size='text-s'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor sem ligula </Text>
-          </Card>
-
-          <Card style={{ padding: "1.5rem .5rem", border: 0 }}>
-            <Text as="h4"> 🧰 Toolbox </Text>
-            <Text size='text-s'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor sem ligula  </Text>
-          </Card>
-
-          <Card style={{ padding: "1.5rem .5rem", border: 0 }}>
-            <Text as="h4"> 🌐 Awesome Apps </Text>
-            <Text size='text-s'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor sem ligula   </Text>
-          </Card>
-
-          <Card style={{ padding: "1.5rem .5rem", border: 0 }}>
-            <Text as="h4"> 🗓️ Events </Text>
-            <Text size='text-s'> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla auctor sem ligula   </Text>
-          </Card>
-
+        <Grid columns="1fr 1fr 1fr" gap="xl" style={{ textAlign: 'center' }} columnsTablet="1fr">
+          <StyledCard
+            href="/documentation"
+            title="📖 Documentation"
+            description="Find all the documentation, examples and tutorials you need to get started with Near"
+          />
+          <StyledCard
+            href="/contact-us"
+            title="💬 Support"
+            description="Get in touch with our support team for assistance with any questions or issues."
+          />
+          <StyledCard
+            href="/tools"
+            title="🧰 Toolbox"
+            description="Explore a collection of tools and resources to enhance your Near development experience."
+          />
+          <StyledCard
+            href="/applications"
+            title="🌐 Awesome Apps"
+            description="Discover innovative apps built on Near, showcasing the power of decentralized technology."
+          />
+          <StyledCard
+            href="/events"
+            title="🗓️ Events"
+            description="Join us at conferences, meetups, and workshops to connect with the Near community worldwide."
+          />
         </Grid>
-
-
       </Flex>
     </Section>
   );

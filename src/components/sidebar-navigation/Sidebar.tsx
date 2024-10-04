@@ -1,7 +1,7 @@
 import { Tooltip } from '@near-pagoda/ui';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useContext } from 'react';
 
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -30,14 +30,17 @@ export const Sidebar = () => {
     requestAuthentication(true);
   };
 
-  const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
-    if (expandedDrawer) return false;
-    return currentPathMatchesRoute(router.asPath, route, exactMatch);
-  };
+  const isNavigationItemActive = useCallback(
+    (route: string | string[], exactMatch = false) => {
+      if (expandedDrawer) return false;
+      return currentPathMatchesRoute(router.asPath, route, exactMatch);
+    },
+    [expandedDrawer, router.asPath],
+  );
 
   useEffect(() => {
     isNavigationItemActive('/documentation') && isSidebarExpanded && toggleExpandedSidebar();
-  }, [router.asPath]);
+  }, [router.asPath, isNavigationItemActive, isSidebarExpanded, toggleExpandedSidebar]);
 
   return (
     <S.Sidebar
@@ -107,8 +110,6 @@ export const Sidebar = () => {
           <S.SectionLabel>Developer Resources </S.SectionLabel>
 
           <S.Stack $gap="0.5rem">
-
-
             <Tooltip content="Toolbox" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem $active={isNavigationItemActive('/tools')} $type="featured" href="/tools">
                 <i className="ph-toolbox ph-bold" />
