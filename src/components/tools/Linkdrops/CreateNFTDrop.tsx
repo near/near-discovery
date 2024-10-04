@@ -9,7 +9,6 @@ import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../WalletSelector';
 import Carousel from '../Shared/Carousel';
-import { NFT } from '@/utils/types';
 
 const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
 
@@ -21,16 +20,10 @@ type FormData = {
   contractId: string;
 };
 
-const parseToNFTForCarrousel = (nfts: NFT[]) =>
-  nfts.map((nft) => ({
-    title: nft.metadata.title,
-    token_id: nft.token_id,
-  }));
-
 const getDeposit = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
 
-const CreateNFTDrop = () => {
+const CreateNFTDrop = ({ reload }: { reload: (delay: number) => void }) => {
   const { wallet, signedAccountId } = useContext(NearContext);
   const {
     register,
@@ -46,7 +39,7 @@ const CreateNFTDrop = () => {
   const [nftSelected, setNftSelected] = useState('');
 
   const contracts = useNFT();
-  
+
   const fillForm = (origin: string, token_id: string) => {
     setNftSelected(token_id);
     setValue('tokenId', token_id);
@@ -112,7 +105,10 @@ const CreateNFTDrop = () => {
       description: 'Your form has been submitted successfully',
       duration: 5000,
     });
+
+    reload(1000);
   };
+
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>

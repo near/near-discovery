@@ -1,7 +1,8 @@
 import { Accordion } from '@near-pagoda/ui';
 
+import type { NFT } from '@/utils/types';
+
 import Carousel from '../Shared/Carousel';
-import { NFT } from '@/utils/types';
 
 const ListToken = ({ tokens }: { tokens: NFT[] }) => {
   return (

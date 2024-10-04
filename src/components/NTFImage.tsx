@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 
+import type { NFT } from '@/utils/types';
+
 import RoundedImage from './RoundedImage';
 import { NearContext } from './WalletSelector';
-import { NFT } from '@/utils/types';
-
 
 interface NftImageProps {
   nft?: NFT;
 }
 
-const getImage = (contract: string, id: string,) => {
+const getImage = (contract: string, id: string) => {
   return localStorage.getItem(`keysImage:${contract}-${id}`);
 };
 
@@ -19,8 +19,6 @@ const setImage = (contract: string, id: string, url: string) => {
 };
 
 export const NftImage: React.FC<NftImageProps> = ({ nft }) => {
-  console.log(nft);
-
   const { wallet } = useContext(NearContext);
   const [imageUrl, setImageUrl] = useState<string>('');
 
@@ -53,7 +51,7 @@ export const NftImage: React.FC<NftImageProps> = ({ nft }) => {
     };
 
     fetchNftData();
-  }, []);
+  }, [nft, imageUrl, wallet]);
 
   useEffect(() => {
     if (!nft || !nft.token_id) return;

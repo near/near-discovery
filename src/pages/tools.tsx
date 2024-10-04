@@ -37,7 +37,7 @@ const processTransactionsToFt = (transactions: Txns[]): FT[] => {
   });
 };
 
-const processTransactionsToNFT = (contract_id: string,owner_id:string, transactions: Txns[]): NFT[] => {
+const processTransactionsToNFT = (contract_id: string, owner_id: string, transactions: Txns[]): NFT[] => {
   if (!transactions) return [];
   return transactions.map((txn) => {
     const args = JSON.parse(txn.actions[0].args);
@@ -46,7 +46,7 @@ const processTransactionsToNFT = (contract_id: string,owner_id:string, transacti
       token_id: args.token_id,
       metadata: args.token_metadata,
       owner_id,
-      approved_account_ids: null
+      approved_account_ids: null,
     };
   });
 };
@@ -55,13 +55,13 @@ const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
-  const drops = useLinkdrops();
+  const { drops, reloadLinkdrops } = useLinkdrops();
 
-  const { transactions: fts } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
+  const { transactions: fts, reloadTokens: reloadFT } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
   const ftProcessed = processTransactionsToFt(fts);
 
-  const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
-  const nftsProcessed = processTransactionsToNFT('nft.primitives.near',signedAccountId, nfts);
+  const { transactions: nfts, reloadTokens: reloadNFT } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
+  const nftsProcessed = processTransactionsToNFT('nft.primitives.near', signedAccountId, nfts);
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -92,15 +92,15 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.List>
 
                 <Tabs.Content value="ft">
-                  <FungibleToken tokens={ftProcessed} />
+                  <FungibleToken tokens={ftProcessed} reload={reloadFT} />
                 </Tabs.Content>
 
                 <Tabs.Content value="nft">
-                  <NonFungibleToken tokens={nftsProcessed} />
+                  <NonFungibleToken tokens={nftsProcessed} reload={reloadNFT} />
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
-                  <Linkdrops drops={drops} />
+                  <Linkdrops drops={drops} reload={reloadLinkdrops} />
                 </Tabs.Content>
               </Tabs.Root>
             </Card>

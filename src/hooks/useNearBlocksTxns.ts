@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { NearContext } from '@/components/WalletSelector';
 
@@ -64,11 +64,10 @@ const useNearBlocksTxns = (contract: string, method: string) => {
   const [error, setError] = useState<string | null>(null);
   const { wallet, signedAccountId } = useContext(NearContext);
 
-  useEffect(() => {
-    if (!wallet || !signedAccountId) return;
-
-    const fetchTransactions = async () => {
+  const fetchTransactions = useCallback(
+    async (delay = 0) => {
       try {
+        await new Promise((resolve) => setTimeout(resolve, delay));
         const response = await fetch(
           `https://api.nearblocks.io/v1/account/${contract}/txns?from=${signedAccountId}&method=${method}`,
         );
@@ -86,12 +85,16 @@ const useNearBlocksTxns = (contract: string, method: string) => {
         }
         setLoading(false);
       }
-    };
+    },
+    [contract, method, signedAccountId],
+  );
 
+  useEffect(() => {
+    if (!wallet || !signedAccountId) return;
     fetchTransactions();
-  }, [contract, method, wallet, signedAccountId]);
+  }, [contract, method, wallet, signedAccountId, fetchTransactions]);
 
-  return { transactions, loading, error };
+  return { transactions, loading, error, reloadTokens: fetchTransactions };
 };
 
 export default useNearBlocksTxns;

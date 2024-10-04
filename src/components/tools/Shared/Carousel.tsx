@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { NftImage } from '@/components/NTFImage';
-import { NFT } from '@/utils/types';
+import type { NFT } from '@/utils/types';
 
 const CarouselContainer = styled.div`
   display: flex;
