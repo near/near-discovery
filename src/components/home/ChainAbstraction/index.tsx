@@ -10,7 +10,13 @@ export const ChainAbstraction = () => {
 
   return (
     <>
-      <Flex stack gap="l" style={{ padding: '0.5rem', flexGrow: 1, justifyContent: 'space-between' }}>
+      <Flex
+        stack
+        gap="l"
+        gapPhone="xl"
+        gapTablet="xl"
+        style={{ padding: '0.5rem', flexGrow: 1, justifyContent: 'space-between' }}
+      >
         <Grid
           columns="542px minmax(0, 1fr)"
           gap="2xl"

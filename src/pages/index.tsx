@@ -1,6 +1,6 @@
 import { Card, Flex, Grid, Section, Tabs, Text } from '@near-pagoda/ui';
 import { Globe, Link, MagnifyingGlass, Scroll } from '@phosphor-icons/react';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ChainAbstraction } from '@/components/home/ChainAbstraction';
@@ -11,25 +11,11 @@ import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
 export interface NearBlocks {
-  id:                 number;
-  total_supply:       string;
-  circulating_supply: string;
-  avg_block_time:     string;
-  gas_price:          string;
-  nodes_online:       number;
-  near_price:         string;
-  near_btc_price:     string;
-  market_cap:         string;
-  volume:             string;
-  high_24h:           string;
-  high_all:           string;
-  low_24h:            string;
-  low_all:            string;
-  change_24:          string;
-  total_txns:         string;
-  tps:                number;
+  avg_block_time: string;
+  gas_price: string;
+  near_price: string;
+  total_txns: string;
 }
-
 
 const StyledCard = ({ href, title, description }: { href: string; title: string; description: string }) => {
   return (
@@ -42,34 +28,34 @@ const StyledCard = ({ href, title, description }: { href: string; title: string;
 
 const HomePage: NextPageWithLayout = () => {
   const [selectedTab, setTab] = useState('contracts');
-  const [avrTx, setAvrTx] = useState("< $0.001");
-  const [infoNear, setInfoNear] = useState<NearBlocks>()
+  const [avgBlockTime, setAvgBlockTime] = useState('1.30');
+  const [avgTxPrice, setAvgTxPrice] = useState('< $0.01');
+  const [totalTx, setTotalTx] = useState('2,33');
+  const [nearStats, setNearStats] = useState<NearBlocks>();
 
   useEffect(() => {
-    const getNearInfo = async () => {
-      const response = await fetch('https://api.nearblocks.io/v1/stats');
-      const data = await response.json();
-      setInfoNear(data.stats);
-    }
-    getNearInfo();
+    fetch('https://api.nearblocks.io/v1/stats')
+      .then((response) => response.json())
+      .then((data) => {
+        data = data.stats[0];
+        setNearStats(data);
+        setTotalTx((Number(data.total_txns) / 1_000_000_000).toFixed(2));
+        setAvgBlockTime(data.avg_block_time.slice(0, 4));
+      });
   }, []);
 
   useEffect(() => {
-    if(infoNear === undefined) return;
+    if (!nearStats) return;
+
     const getAvrTx = async () => {
-      const feesResponse= await fetch('https://pikespeak.ai/api/live/last-txs-fees'); 
+      const feesResponse = await fetch('https://pikespeak.ai/api/live/last-txs-fees');
       const feesData = await feesResponse.json();
-    
-      const averageFee = (feesData * Number(infoNear.near_price)).toFixed(4);
-      setAvrTx(averageFee);
-    }
+
+      const averageFee = (feesData * Number(nearStats.near_price)).toFixed(4);
+      setAvgTxPrice(averageFee);
+    };
     getAvrTx();
-  },[infoNear])
-
-  const totalTx = infoNear && infoNear.total_txns? (Number(infoNear.total_txns)/1_000_000_000).toFixed(2) + " B" :"2,32 B" ;
-  
-
-
+  }, [nearStats]);
 
   const Header = styled.div`
     display: flex;
@@ -156,28 +142,27 @@ const HomePage: NextPageWithLayout = () => {
         <Header style={{ marginTop: 'var(--gap-xl)', textAlign: 'center' }}>
           <Flex stack gap="l" align="center">
             <Text as="h1" style={{ maxWidth: '470px', textAlign: 'center', backgroundColor: 'white' }}>
-              {' '}
-              Why choosing Near?{' '}
+              Why choosing Near?
             </Text>
 
             <Grid columns="1fr 1fr 1fr 1fr" gap="xl" columnsTablet="1fr">
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> {totalTx} </Text>
+                <Text as="h2"> {totalTx} B </Text>
                 <Text> Blocks and counting </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> {infoNear?.avg_block_time?.slice(0,4)} </Text>
+                <Text as="h2"> {avgBlockTime} s </Text>
                 <Text> Average Block Time </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2" > $ {avrTx}</Text>
+                <Text as="h2"> $ {avgTxPrice} </Text>
                 <Text> Average transaction price</Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> 497+ </Text>
+                <Text as="h2"> 500 + </Text>
                 <Text> Awesome apps and growing </Text>
               </Card>
             </Grid>
@@ -185,8 +170,7 @@ const HomePage: NextPageWithLayout = () => {
         </Header>
 
         <Text as="h1" style={{ marginTop: 'var(--gap-xl)' }}>
-          {' '}
-          Resources{' '}
+          Resources
         </Text>
 
         <Grid columns="1fr 1fr 1fr" gap="xl" style={{ textAlign: 'center' }} columnsTablet="1fr">
@@ -198,22 +182,22 @@ const HomePage: NextPageWithLayout = () => {
           <StyledCard
             href="/contact-us"
             title="💬 Support"
-            description="Get in touch with our support team for assistance with any questions or issues."
+            description="Reach out to our community and get support with any questions or issues"
           />
           <StyledCard
             href="/tools"
             title="🧰 Toolbox"
-            description="Explore a collection of tools and resources to enhance your Near development experience."
+            description="Explore a collection of tools and resources to enhance your Near development experience"
           />
           <StyledCard
             href="/applications"
             title="🌐 Awesome Apps"
-            description="Discover innovative apps built on Near, showcasing the power of decentralized technology."
+            description="Discover innovative apps built on Near, showcasing the power of decentralized technology"
           />
           <StyledCard
             href="/events"
             title="🗓️ Events"
-            description="Join us at conferences, meetups, and workshops to connect with the Near community worldwide."
+            description="Join us at conferences, meetups, and workshops to connect with the Near community worldwide"
           />
         </Grid>
       </Flex>

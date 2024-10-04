@@ -28,7 +28,13 @@ export const Data = () => {
 
   return (
     <>
-      <Flex stack gap="l" style={{ padding: '0.5rem', flexGrow: 1, justifyContent: 'space-between' }}>
+      <Flex
+        stack
+        gap="l"
+        gapPhone="xl"
+        gapTablet="xl"
+        style={{ padding: '0.5rem', flexGrow: 1, justifyContent: 'space-between' }}
+      >
         <Grid
           columns="542px minmax(0, 1fr)"
           gap="2xl"
@@ -39,8 +45,7 @@ export const Data = () => {
         >
           <Flex stack gap="m">
             <Text as="h1" style={{ fontWeight: 'normal' }}>
-              {' '}
-              A Rich Ecosystem of Community APIs{' '}
+              A Rich Ecosystem of Community APIs
             </Text>
             <Text size="text-l" style={{ fontWeight: 'lighter' }}>
               Our community of developers has built APIs to help you query the chain for user data and transactions
@@ -50,7 +55,7 @@ export const Data = () => {
             <Code code={fastNear} language="js" />
             <Button
               iconLeft={<BookOpenText fill="bold" />}
-              href="/documentation/build/data-infrastructure/big-query"
+              href="/documentation/build/data-infrastructure/data-apis"
               label="Read on Data API"
             />
           </Flex>
@@ -69,7 +74,7 @@ export const Data = () => {
             <Code code={BigQuery} language="sql" />
             <Button
               iconLeft={<BookOpenText fill="bold" />}
-              href="/documentation/build/data-infrastructure/lake-framework/near-lake"
+              href="/documentation/build/data-infrastructure/big-query"
               label="Discover BigQuery"
             />
           </Flex>
@@ -93,8 +98,7 @@ export const Data = () => {
         >
           <Flex stack gap="m" style={{ textAlign: 'left' }}>
             <Text as="h1" style={{ fontWeight: 'normal' }}>
-              {' '}
-              A Simple Framework to Create Indexers{' '}
+              A Simple Framework to Create Indexers
             </Text>
             <Text size="text-l" style={{ fontWeight: 'lighter' }}>
               Do you need a more personalized solution? Build your own indexer using our Lake Framework
@@ -104,7 +108,7 @@ export const Data = () => {
             <Code code={indexerLake} language="js" />
             <Button
               iconLeft={<BookOpenText fill="bold" />}
-              href="/documentation/build/chain-abstraction/chain-signatures/getting-started"
+              href="/documentation/concepts/advanced/near-lake-framework"
               label="Discover Lake Framework"
             />
           </Flex>

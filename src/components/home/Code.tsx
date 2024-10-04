@@ -27,7 +27,7 @@ export const Code = ({ height, code, language }: { height?: number; code: string
   return (
     <CodeBlock code={code} language={language}>
       <CodeWrapper height={height}>
-        <CodeBlock.Code style={{ marginBottom: 0, overflowX: 'hidden' }}>
+        <CodeBlock.Code style={{ marginBottom: 0, overflowX: 'auto' }}>
           <LineContent>
             <CodeBlock.Token />
           </LineContent>

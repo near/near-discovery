@@ -76,6 +76,8 @@ export const DecentralizedApps = () => {
       <Grid
         columns="55% minmax(0, 45%)"
         gap="xl"
+        gapPhone="xl"
+        gapTablet="xl"
         columnsPhone="minmax(0, 1fr)"
         columnsTablet="minmax(0, 1fr)"
         style={{ flexGrow: 1, padding: '0.5rem' }}
