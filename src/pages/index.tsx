@@ -1,6 +1,6 @@
 import { Card, Flex, Grid, Section, Tabs, Text } from '@near-pagoda/ui';
 import { Globe, Link, MagnifyingGlass, Scroll } from '@phosphor-icons/react';
-import { useState } from 'react';
+import { use, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ChainAbstraction } from '@/components/home/ChainAbstraction';
@@ -9,6 +9,27 @@ import { Data } from '@/components/home/Data';
 import { DecentralizedApps } from '@/components/home/DecentralizedApps';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
+
+export interface NearBlocks {
+  id:                 number;
+  total_supply:       string;
+  circulating_supply: string;
+  avg_block_time:     string;
+  gas_price:          string;
+  nodes_online:       number;
+  near_price:         string;
+  near_btc_price:     string;
+  market_cap:         string;
+  volume:             string;
+  high_24h:           string;
+  high_all:           string;
+  low_24h:            string;
+  low_all:            string;
+  change_24:          string;
+  total_txns:         string;
+  tps:                number;
+}
+
 
 const StyledCard = ({ href, title, description }: { href: string; title: string; description: string }) => {
   return (
@@ -21,6 +42,34 @@ const StyledCard = ({ href, title, description }: { href: string; title: string;
 
 const HomePage: NextPageWithLayout = () => {
   const [selectedTab, setTab] = useState('contracts');
+  const [avrTx, setAvrTx] = useState("< $0.001");
+  const [infoNear, setInfoNear] = useState<NearBlocks>()
+
+  useEffect(() => {
+    const getNearInfo = async () => {
+      const response = await fetch('https://api.nearblocks.io/v1/stats');
+      const data = await response.json();
+      setInfoNear(data.stats);
+    }
+    getNearInfo();
+  }, []);
+
+  useEffect(() => {
+    if(infoNear === undefined) return;
+    const getAvrTx = async () => {
+      const feesResponse= await fetch('https://pikespeak.ai/api/live/last-txs-fees'); 
+      const feesData = await feesResponse.json();
+    
+      const averageFee = (feesData * Number(infoNear.near_price)).toFixed(4);
+      setAvrTx(averageFee);
+    }
+    getAvrTx();
+  },[infoNear])
+
+  const totalTx = infoNear && infoNear.total_txns? (Number(infoNear.total_txns)/1_000_000_000).toFixed(2) + " B" :"2,32 B" ;
+  
+
+
 
   const Header = styled.div`
     display: flex;
@@ -113,18 +162,18 @@ const HomePage: NextPageWithLayout = () => {
 
             <Grid columns="1fr 1fr 1fr 1fr" gap="xl" columnsTablet="1fr">
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> 2,32 Billion </Text>
+                <Text as="h2"> {totalTx} </Text>
                 <Text> Blocks and counting </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> 1.3043s </Text>
+                <Text as="h2"> {infoNear?.avg_block_time?.slice(0,4)} </Text>
                 <Text> Average Block Time </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> {`< $0.001`} </Text>
-                <Text> Average transaction price </Text>
+                <Text as="h2" > $ {avrTx}</Text>
+                <Text> Average transaction price</Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
