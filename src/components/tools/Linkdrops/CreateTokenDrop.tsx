@@ -36,7 +36,7 @@ const parseAmount = (amount: string, decimals: number) => {
 const getDeposit = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
 
-const CreateTokenDrop = () => {
+const CreateTokenDrop = ({ reload }: { reload: (delay: number) => void }) => {
   const {
     register,
     handleSubmit,
@@ -147,6 +147,8 @@ const CreateTokenDrop = () => {
         description: 'Failed to submit form',
         duration: 5000,
       });
+    } finally {
+      reload(1000);
     }
   };
   return (

@@ -18,7 +18,7 @@ const FACTORY_CONTRACT = 'tkn.primitives.near';
 const MAX_FILE_SIZE = 10 * 1024;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
 
-const CreateTokenForm: React.FC = () => {
+const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
   const {
     control,
     register,
@@ -109,6 +109,8 @@ const CreateTokenForm: React.FC = () => {
         description: 'Failed to create token',
         duration: 5000,
       });
+    } finally {
+      reload(1000);
     }
   };
 

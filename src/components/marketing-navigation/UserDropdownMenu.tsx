@@ -93,22 +93,20 @@ type Props = {
   collapsed?: boolean;
 };
 
-
-const parseNftImage = (nft:any,owner_id:string,title:string|null = null) => {
+const parseNftImage = (nft: any, owner_id: string, title: string | null = null) => {
   return {
     contract_id: nft.contractId,
     token_id: nft.tokenId,
     owner_id,
     metadata: {
-      title:title || owner_id,
+      title: title || owner_id,
     },
-    approved_account_ids:null
-  }
-}
+    approved_account_ids: null,
+  };
+};
 
 export const UserDropdownMenu = ({ collapsed }: Props) => {
-  const { wallet } = useContext(NearContext);
-  const signedAccountId = "gagdiez.near"
+  const { wallet, signedAccountId } = useContext(NearContext);
   const router = useRouter();
   const components = useBosComponents();
 
@@ -156,7 +154,7 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
         ) : (
           <Dropdown.Trigger>
             {profile.image?.nft ? (
-              <NftImage nft={parseNftImage(profile.image.nft,signedAccountId,profile.name)} />
+              <NftImage nft={parseNftImage(profile.image.nft, signedAccountId, profile.name)} />
             ) : (
               <RoundedImage
                 src={`https://ipfs.near.social/ipfs/${profile?.image?.ipfs_cid}`}

@@ -4,10 +4,10 @@ import CommunityTools from './CommunityTools';
 import CreateTokenForm from './CreateTokenForm';
 import ListToken from './ListToken';
 
-const FungibleToken = ({ tokens }: { tokens: FT[] }) => {
+const FungibleToken = ({ tokens, reload }: { tokens: FT[]; reload: (delay: number) => void }) => {
   return (
     <>
-      <CreateTokenForm />
+      <CreateTokenForm reload={reload} />
       <hr />
       <ListToken tokens={tokens} />
       <hr />

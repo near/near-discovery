@@ -8,8 +8,8 @@ import CreateNFTDrop from './CreateNFTDrop';
 import CreateTokenDrop from './CreateTokenDrop';
 import ListTokenDrop from './ListTokenDrop';
 
-const Linkdrops = ({ drops }: { drops: Drops[] }) => {
-  const [selector, setSelector] = useState(true);
+const Linkdrops = ({ drops, reload }: { drops: Drops[]; reload: (delay: number) => void }) => {
+  const [selector, setSelector] = useState(false);
 
   return (
     <>
@@ -25,8 +25,8 @@ const Linkdrops = ({ drops }: { drops: Drops[] }) => {
         />
         NFT
       </Flex>
-      {!selector && <CreateTokenDrop />}
-      {selector && <CreateNFTDrop />}
+      {!selector && <CreateTokenDrop reload={reload} />}
+      {selector && <CreateNFTDrop reload={reload} />}
       <ListTokenDrop drops={drops} />
     </>
   );

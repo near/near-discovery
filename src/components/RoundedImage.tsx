@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 export const Img = styled.img`
@@ -11,12 +11,17 @@ export const DEFAULT_IMAGE =
   'https://ipfs.near.social/ipfs/bafkreibmiy4ozblcgv3fm3gc6q62s55em33vconbavfd2ekkuliznaq3zm';
 
 const RoundedImage = ({ src, alt }: { src: string; alt: string }) => {
-  const [imageUrl, setImageUrl] = useState<string>(DEFAULT_IMAGE);
+  const [imageUrl, setImageUrl] = useState(src);
+
   useEffect(() => {
     setImageUrl(src);
   }, [src]);
 
-  return <Img height={43} width={43} src={imageUrl} alt={alt || ''} onError={() => setImageUrl(DEFAULT_IMAGE)} />;
+  const handleError = useCallback(() => {
+    setImageUrl(DEFAULT_IMAGE);
+  }, []);
+
+  return <Img height={43} width={43} src={imageUrl || DEFAULT_IMAGE} alt={alt} onError={handleError} />;
 };
 
 export default RoundedImage;
