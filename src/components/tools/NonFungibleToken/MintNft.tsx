@@ -105,8 +105,7 @@ const MintNft = () => {
   return (
     <>
       <Text size="text-l" style={{ marginBottom: '12px' }}>
-        {' '}
-        Mint NFT{' '}
+        Mint a Non-Fungible Token
       </Text>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
