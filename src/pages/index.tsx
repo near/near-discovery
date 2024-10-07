@@ -79,8 +79,8 @@ const HomePage: NextPageWithLayout = () => {
           </Flex>
         </Header>
 
-        <Card style={{ padding: '.5rem 1.5rem 1.5rem 1.5rem', marginTop: '2rem', border: 0, minHeight: '768px' }}>
-          <Tabs.Root value={selectedTab}>
+        <Card style={{ padding: '.5rem 1.5rem 1rem 1.5rem', marginTop: '2rem', border: 0 }}>
+          <Tabs.Root value={selectedTab} style={{ minHeight: '768px' }}>
             <Tabs.List style={{ marginBottom: '1rem' }}>
               <Tabs.Trigger
                 onClick={() => {
@@ -123,19 +123,19 @@ const HomePage: NextPageWithLayout = () => {
               </Tabs.Trigger>
             </Tabs.List>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="contracts">
+            <Tabs.Content value="contracts" style={{ flex: 1 }}>
               <Contracts />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="chain-abstraction">
+            <Tabs.Content value="chain-abstraction" style={{ flex: 1 }}>
               <ChainAbstraction />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="web3-apps">
+            <Tabs.Content value="web3-apps" style={{ flex: 1 }}>
               <DecentralizedApps />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="data-solutions">
+            <Tabs.Content value="data-solutions" style={{ flex: 1 }}>
               <Data />
             </Tabs.Content>
           </Tabs.Root>
