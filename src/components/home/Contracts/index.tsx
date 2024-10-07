@@ -81,19 +81,18 @@ export const Contracts = () => {
   const [language, setLanguage] = useState('js');
 
   return (
-    <>
+    <Flex stack justify='space-between' style={{ flex: "auto", padding: ".5rem" }}>
       <Grid
         columns="55% minmax(0, 45%)"
         gap="xl"
         columnsPhone="minmax(0, 1fr)"
         columnsTablet="minmax(0, 1fr)"
-        style={{ flexGrow: 1, padding: '0.5rem' }}
+        style={{ flexGrow: 1 }}
       >
-        <Flex stack style={{ justifyContent: 'space-between' }}>
+        <Flex stack justify='space-between'>
           <Flex stack gap="m">
             <Text as="h1" style={{ fontWeight: 'normal' }}>
-              {' '}
-              Building Contracts Has Never Been Easier{' '}
+              Building Contracts Has Never Been Easier
             </Text>
             <Text size="text-l" style={{ fontWeight: 'lighter' }}>
               Develop, test and deploy contracts using the stack you already know and love
@@ -101,7 +100,7 @@ export const Contracts = () => {
           </Flex>
 
           <Tabs.Root value={language}>
-            <Tabs.List style={{ marginBottom: 'var(--gap-s)', fontSize: 'small' }}>
+            <Tabs.List style={{ fontSize: 'small' }}>
               <Tabs.Trigger onClick={() => setLanguage('js')} value="js">
                 🌐 Javascript
               </Tabs.Trigger>
@@ -120,7 +119,7 @@ export const Contracts = () => {
         </Flex>
 
         <Tabs.Root value={language}>
-          <Flex stack style={{ flexGrow: 1, justifyContent: 'space-between' }}>
+          <Flex stack justify='space-between' style={{ flexGrow: 1 }}>
             <Tabs.Content value="js">
               <Title> One Command Setup </Title>
               <Code code={`npx create-near-app@latest`} language="bash" />
@@ -151,6 +150,6 @@ export const Contracts = () => {
         label="Start Now"
         style={{ marginTop: 'var(--gap-m)' }}
       />
-    </>
+    </Flex>
   );
 };
