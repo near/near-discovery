@@ -1,4 +1,3 @@
-import { PlaceholderCard } from '@near-pagoda/ui';
 import ls from 'local-storage';
 import { useRouter } from 'next/router';
 import prettier from 'prettier';
@@ -93,8 +92,6 @@ export const Sandbox = ({ onboarding = false }) => {
   const showEditor = !!Object.keys(filesObject)?.length || !localChecked;
   const isModule = path?.type === 'module';
   const layoutClass = layout === Layout.Split ? 'col-lg-6' : '';
-  const shouldRender = !!near && !!cache;
-
   const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
 
   const getFileData = useCallback(
@@ -503,7 +500,7 @@ export const Sandbox = ({ onboarding = false }) => {
     firstLoad();
   }, [cache, firstLoad, near]);
 
-  if (!shouldRender) return <PlaceholderCard />;
+  // if (!shouldRender) return <PlaceholderCard />;
 
   return (
     <MainWrapper>

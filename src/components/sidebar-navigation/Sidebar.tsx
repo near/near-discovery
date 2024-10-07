@@ -1,7 +1,7 @@
 import { Tooltip } from '@near-pagoda/ui';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useContext } from 'react';
 
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
@@ -30,10 +30,17 @@ export const Sidebar = () => {
     requestAuthentication(true);
   };
 
-  const isNavigationItemActive = (route: string | string[], exactMatch = false) => {
-    if (expandedDrawer) return false;
-    return currentPathMatchesRoute(router.asPath, route, exactMatch);
-  };
+  const isNavigationItemActive = useCallback(
+    (route: string | string[], exactMatch = false) => {
+      if (expandedDrawer) return false;
+      return currentPathMatchesRoute(router.asPath, route, exactMatch);
+    },
+    [expandedDrawer, router.asPath],
+  );
+
+  useEffect(() => {
+    isNavigationItemActive('/documentation') && isSidebarExpanded && toggleExpandedSidebar();
+  }, [router.asPath, isNavigationItemActive, isSidebarExpanded, toggleExpandedSidebar]);
 
   return (
     <S.Sidebar
@@ -100,20 +107,32 @@ export const Sidebar = () => {
         </S.Section>
 
         <S.Section>
-          <S.SectionLabel>Discover </S.SectionLabel>
+          <S.SectionLabel>Developer Resources </S.SectionLabel>
+
+          <S.Stack $gap="0.5rem">
+            <Tooltip content="Toolbox" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem $active={isNavigationItemActive('/tools')} $type="featured" href="/tools">
+                <i className="ph-toolbox ph-bold" />
+                <span>Toolbox</span>
+              </S.NavigationItem>
+            </Tooltip>
+
+            <Tooltip content="Web3 Architectures (soon)" side="right" disabled={true}>
+              <S.NavigationItem $active={isNavigationItemActive('/architecture')} $type="featured" href="#">
+                <i className="ph-app-window ph-bold" />
+                <span>Web3 Architectures</span>
+              </S.NavigationItem>
+            </Tooltip>
+          </S.Stack>
+        </S.Section>
+        <S.Section>
+          <S.SectionLabel> Discover </S.SectionLabel>
 
           <S.Stack $gap="0.5rem">
             <Tooltip content="Applications" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem $active={isNavigationItemActive('/applications')} $type="featured" href="/applications">
                 <i className="ph-bold ph-shapes" />
                 <span>Applications</span>
-              </S.NavigationItem>
-            </Tooltip>
-
-            <Tooltip content="Tools" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={isNavigationItemActive('/tools')} $type="featured" href="/tools">
-                <i className="ph-wrench ph-bold" />
-                <span>Tools</span>
               </S.NavigationItem>
             </Tooltip>
 
@@ -132,14 +151,6 @@ export const Sidebar = () => {
               >
                 <i className="ph-newspaper ph-bold" />
                 <span>News</span>
-              </S.NavigationItem>
-            </Tooltip>
-
-            <Tooltip content="Blog" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={false} $type="featured" href="https://near.org/blog" target="_blank">
-                <i className="ph-bold ph-chat-centered-text" />
-                <span>Blog</span>
-                <span className="ph-bold ph-arrow-square-out ms-auto outline-none" />
               </S.NavigationItem>
             </Tooltip>
           </S.Stack>
