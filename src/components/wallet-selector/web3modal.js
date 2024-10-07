@@ -2,7 +2,7 @@ import { injected, walletConnect } from '@wagmi/connectors';
 import { createConfig, http, reconnect } from '@wagmi/core';
 import { createWeb3Modal } from '@web3modal/wagmi';
 
-import { EVMWalletChain, NetworkId } from '@/config';
+import { EVMWalletChain, networkId } from '@/config';
 
 // Config
 const near = {
@@ -23,7 +23,7 @@ const near = {
       url: EVMWalletChain.explorer,
     },
   },
-  testnet: NetworkId === 'testnet',
+  testnet: networkId === 'testnet',
 };
 
 // Get your projectId at https://cloud.reown.com
