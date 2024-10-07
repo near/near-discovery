@@ -25,13 +25,6 @@ type NetworkComponents = {
     ecosystemOverviewPage: string;
     ecosystemWorkAndEarnPage: string;
     homePage: string;
-    notifications: {
-      page: string;
-      alert: string;
-      settings: string;
-      button: string;
-      iosHomeScreenAlert: string;
-    };
     learnPage: string;
     blockchainPage: string;
     openWebApplicationsPage: string;
@@ -48,7 +41,6 @@ type NetworkComponents = {
     homePage: string;
   };
   relayerDemo: string;
-  notificationButton: string;
   peoplePage: string;
   profileImage: string;
   profileInlineBlock: string;
@@ -68,7 +60,6 @@ type NetworkComponents = {
   eventsPage: string;
   navigation: {
     largeScreenHeader: string;
-    notificationButton: string;
     profileDropdown: string;
     nameDropdown: string;
     search: string;
@@ -108,13 +99,6 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         ecosystemOverviewPage: `${testnetTLA}/widget/NearOrg.Ecosystem.OverviewPage`,
         ecosystemWorkAndEarnPage: `${testnetTLA}/widget/NearOrg.Ecosystem.WorkAndEarnPage`,
         homePage: `${testnetTLA}/widget/NearOrg.HomePage`,
-        notifications: {
-          page: `${testnetTLA}/widget/NearOrg.Notifications.Notifications`,
-          alert: `${testnetTLA}/widget/NearOrg.Notifications.NotificationAlert`,
-          settings: `${testnetTLA}/widget/NearOrg.Notifications.Settings`,
-          button: `${testnetTLA}/widget/NearOrg.Notifications.NotificationButton`,
-          iosHomeScreenAlert: `${testnetTLA}/widget/NearOrg.Notifications.HomeScreenAlert`,
-        },
         learnPage: `${testnetTLA}/widget/NearOrg.LearnPage`,
         blockchainPage: `${testnetTLA}/widget/NearOrg.BlockchainPage`,
         openWebApplicationsPage: `${testnetTLA}/widget/NearOrg.OpenWebApplicationsPage`,
@@ -131,7 +115,6 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         homePage: `${testnetTLA}/widget/Gateway.Home`,
       },
       relayerDemo: 'one.testnet/widget/RelayerMessageDemo',
-      notificationButton: `${testnetTLA}/widget/NotificationButton`,
       peoplePage: `${testnetTLA}/widget/PeoplePage`,
       profileImage: 'eugenethedream/widget/ProfileImage',
       profileInlineBlock: 'eugenethedream/widget/Profile.InlineBlock',
@@ -151,7 +134,6 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       eventsPage: `${testnetTLA}/widget/Events.Index`,
       navigation: {
         largeScreenHeader: `${testnetTLA}/widget/Navigation.LargeScreenHeader`,
-        notificationButton: `${testnetTLA}/widget/NearOrg.Notifications.NotificationButton`,
         profileDropdown: `${testnetTLA}/widget/Navigation.ProfileDropdown`,
         nameDropdown: `${testnetTLA}/widget/Navigation.NameDropdown`,
         search: `${testnetTLA}/widget/Navigation.Search`,
@@ -184,13 +166,6 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         ecosystemOverviewPage: 'near/widget/NearOrg.Ecosystem.OverviewPage',
         ecosystemWorkAndEarnPage: 'near/widget/NearOrg.Ecosystem.WorkAndEarnPage',
         homePage: 'near/widget/NearOrg.HomePage',
-        notifications: {
-          page: 'near/widget/NearOrg.Notifications.Notifications',
-          alert: 'near/widget/NearOrg.Notifications.NotificationAlert',
-          settings: 'near/widget/NearOrg.Notifications.Settings',
-          button: 'near/widget/NearOrg.Notifications.NotificationButton',
-          iosHomeScreenAlert: 'near/widget/NearOrg.Notifications.HomeScreenAlert',
-        },
         learnPage: 'near/widget/NearOrg.LearnPage',
         blockchainPage: 'near/widget/NearOrg.BlockchainPage',
         openWebApplicationsPage: 'near/widget/NearOrg.OpenWebApplicationsPage',
@@ -207,7 +182,6 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
         homePage: 'near/widget/Gateway.Home',
       },
       relayerDemo: 'relayer-demo.near/widget/RelayerMessageDemo',
-      notificationButton: 'near/widget/NotificationButton',
       peoplePage: 'near/widget/PeoplePage',
       profileImage: 'mob.near/widget/ProfileImage',
       profileInlineBlock: 'mob.near/widget/Profile.InlineBlock',
@@ -227,7 +201,6 @@ export const componentsByNetworkId = ((): Record<NetworkId, NetworkComponents | 
       eventsPage: 'near/widget/Events.Index',
       navigation: {
         largeScreenHeader: 'near/widget/Navigation.LargeScreenHeader',
-        notificationButton: 'near/widget/NearOrg.Notifications.NotificationButton',
         profileDropdown: 'near/widget/Navigation.ProfileDropdown',
         nameDropdown: 'near/widget/Navigation.NameDropdown',
         search: 'near/widget/Navigation.Search',
