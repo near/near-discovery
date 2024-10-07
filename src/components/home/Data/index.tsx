@@ -32,8 +32,8 @@ export const Data = () => {
       gap="l"
       gapPhone="xl"
       gapTablet="xl"
-      justify='space-between'
-      style={{ padding: '0.5rem', flex: "auto" }}
+      justify="space-between"
+      style={{ padding: '0.5rem', flex: 'auto' }}
     >
       <Grid
         columns="542px minmax(0, 1fr)"

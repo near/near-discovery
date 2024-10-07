@@ -72,7 +72,7 @@ const WalletImg = styled(Image)`
 
 export const DecentralizedApps = () => {
   return (
-    <Flex stack justify='space-between' style={{ flex: "auto", padding: ".5rem" }}>
+    <Flex stack justify="space-between" style={{ flex: 'auto', padding: '.5rem' }}>
       <Grid
         columns="55% minmax(0, 45%)"
         gap="xl"
@@ -82,7 +82,7 @@ export const DecentralizedApps = () => {
         columnsTablet="minmax(0, 1fr)"
         style={{ flex: 1 }}
       >
-        <Flex stack justify='space-between'>
+        <Flex stack justify="space-between">
           <Flex stack gap="m">
             <Text as="h1" style={{ fontWeight: 'normal' }}>
               Building Web3 Apps Has Never Been Easier
@@ -97,7 +97,7 @@ export const DecentralizedApps = () => {
           </Flex>
         </Flex>
 
-        <Flex stack gap="m" justify='space-between' style={{ flexGrow: 1 }}>
+        <Flex stack gap="m" justify="space-between" style={{ flexGrow: 1 }}>
           <Flex stack>
             <Title> NEAR React App </Title>
             <Code code={ReactApp} height={450} language="ts" />
