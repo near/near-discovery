@@ -94,22 +94,22 @@ const HomePage: NextPageWithLayout = () => {
 
               <Tabs.Trigger
                 onClick={() => {
-                  setTab('web3-apps');
-                }}
-                value="web3-apps"
-              >
-                <Globe fill="bold" />
-                Web3 Apps
-              </Tabs.Trigger>
-
-              <Tabs.Trigger
-                onClick={() => {
                   setTab('chain-abstraction');
                 }}
                 value="chain-abstraction"
               >
                 <Link fill="bold" />
                 Chain Abstraction
+              </Tabs.Trigger>
+
+              <Tabs.Trigger
+                onClick={() => {
+                  setTab('web3-apps');
+                }}
+                value="web3-apps"
+              >
+                <Globe fill="bold" />
+                Web3 Apps
               </Tabs.Trigger>
 
               <Tabs.Trigger
