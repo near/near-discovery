@@ -4,11 +4,11 @@ import { HandCoins, Key, LockKeyOpen, PaperPlaneTilt } from '@phosphor-icons/rea
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { ExportFastAuthAccount } from '@/components/wallet-utilities/ExportFastAuthAccount';
 import KeyTable from '@/components/wallet-utilities/KeyTable';
 import { ReceiveNear } from '@/components/wallet-utilities/ReceiveNear';
 import { SendNear } from '@/components/wallet-utilities/SendNear';
-import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';

@@ -1,5 +1,5 @@
+import { notificationApplicationServerKey, notificationsGatewayUrl, notificationsHostName } from '../config';
 import { recordHandledError } from './analytics';
-import { notificationApplicationServerKey, notificationsGatewayUrl, notificationsHostName } from './config';
 import {
   isLocalStorageSupported,
   isNotificationSupported,

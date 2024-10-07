@@ -6,11 +6,11 @@ import { useContext } from 'react';
 
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 
-import { UserDropdownMenu } from '../marketing-navigation/UserDropdownMenu';
-import { NearContext } from '../WalletSelector';
+import { NearContext } from '../wallet-selector/WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
 import * as S from './styles';
+import { UserDropdownMenu } from './UserDropdownMenu';
 
 export const SmallScreenHeader = () => {
   const router = useRouter();

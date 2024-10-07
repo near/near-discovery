@@ -1,7 +1,7 @@
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
+import { termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const TermsPage: NextPageWithLayout = () => {

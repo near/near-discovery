@@ -5,10 +5,10 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network, signInContractId } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { network, signInContractId } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 import { accountAddressPatternNoSubaccount, emailPattern, getEmailId, isValidEmail } from '../utils/form-validation';

@@ -148,7 +148,7 @@ export const Contracts = () => {
         size="large"
         iconLeft={<BookOpenText fill="bold" />}
         href="/documentation/build/smart-contracts/quickstart"
-        label="Start Now!"
+        label="Start Now"
         style={{ marginTop: 'var(--gap-m)' }}
       />
     </>
