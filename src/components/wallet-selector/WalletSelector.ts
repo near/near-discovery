@@ -2,6 +2,7 @@ import { setupKeypom } from '@keypom/selector';
 import { setupBitteWallet } from '@near-wallet-selector/bitte-wallet';
 import type { FinalExecutionOutcome, WalletSelector, WalletSelectorState } from '@near-wallet-selector/core';
 import { setupWalletSelector } from '@near-wallet-selector/core';
+import { setupEthereumWallets } from '@near-wallet-selector/ethereum-wallets';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
@@ -18,24 +19,26 @@ import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import type { Context } from 'react';
 import { createContext } from 'react';
 
-import { networkId as defaultNetwork, signInContractId } from '@/utils/config';
+import { networkId as defaultNetwork, signInContractId } from '@/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 import type { NetworkId } from '@/utils/types';
+
+import { wagmiConfig, web3Modal } from './web3modal';
 
 const THIRTY_TGAS = '30000000000000';
 const NO_DEPOSIT = '0';
 
 export class Wallet {
-  private createAccessKeyFor: string;
+  private createAccessKeyFor?: string;
   private networkId: NetworkId;
   selector: Promise<WalletSelector>;
 
   constructor({
     networkId = defaultNetwork,
-    createAccessKeyFor = signInContractId,
+    createAccessKeyFor = undefined,
   }: {
     networkId: NetworkId;
-    createAccessKeyFor: string;
+    createAccessKeyFor?: string;
   }) {
     this.createAccessKeyFor = createAccessKeyFor;
     this.networkId = networkId;
@@ -45,12 +48,13 @@ export class Wallet {
     this.selector = setupWalletSelector({
       network: this.networkId,
       modules: [
+        setupEthereumWallets({ wagmiConfig, web3Modal: web3Modal as any, alwaysOnboardDuringSignIn: true }),
+        setupMeteorWallet(),
+        setupBitteWallet(),
+        setupHereWallet(),
         setupMyNearWallet(),
         setupSender(),
-        setupHereWallet(),
-        setupBitteWallet(),
         setupMintbaseWallet(),
-        setupMeteorWallet(),
         setupNeth({
           gas: '300000000000000',
           bundle: false,
@@ -102,7 +106,7 @@ export class Wallet {
   };
 
   signIn = async () => {
-    const modal = setupModal(await this.selector, { contractId: this.createAccessKeyFor });
+    const modal = setupModal(await this.selector, { contractId: this.createAccessKeyFor || '' });
     modal.show();
   };
 

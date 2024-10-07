@@ -7,6 +7,7 @@ import { ChainAbstraction } from '@/components/home/ChainAbstraction';
 import { Contracts } from '@/components/home/Contracts';
 import { Data } from '@/components/home/Data';
 import { DecentralizedApps } from '@/components/home/DecentralizedApps';
+import useDeviceType from '@/hooks/useDeviceType';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -19,7 +20,7 @@ export interface NearBlocks {
 
 const StyledCard = ({ href, title, description }: { href: string; title: string; description: string }) => {
   return (
-    <Card style={{ padding: '1.5rem 1rem', border: 0, textDecoration: 'none' }} href={href}>
+    <Card style={{ padding: '2rem 1rem', border: 0, textDecoration: 'none' }} href={href}>
       <Text as="h4"> {title} </Text>
       <Text>{description}</Text>
     </Card>
@@ -32,6 +33,7 @@ const HomePage: NextPageWithLayout = () => {
   const [avgTxPrice, setAvgTxPrice] = useState('< $0.01');
   const [totalTx, setTotalTx] = useState('2,33');
   const [nearStats, setNearStats] = useState<NearBlocks>();
+  const deviceType = useDeviceType();
 
   useEffect(() => {
     fetch('https://api.nearblocks.io/v1/stats')
@@ -69,10 +71,10 @@ const HomePage: NextPageWithLayout = () => {
 
   return (
     <Section grow="available">
-      <Flex stack gap="l" style={{ padding: '0rem 2rem' }}>
+      <Flex stack gap="l" style={{ padding: deviceType === 'mobile' ? '0' : '0 var(--gap-l)' }}>
         <Header>
           <Flex stack gap="s" style={{ backgroundColor: 'white', padding: '1rem', textAlign: 'center' }}>
-            <Text as="h1"> Near Developer Portal </Text>
+            <Text as="h1"> NEAR Developer Portal </Text>
             <Text> Embrace the power of Web3 </Text>
           </Flex>
         </Header>
@@ -97,7 +99,7 @@ const HomePage: NextPageWithLayout = () => {
                 value="web3-apps"
               >
                 <Globe fill="bold" />
-                Web3 Applications
+                Web3 Apps
               </Tabs.Trigger>
 
               <Tabs.Trigger
@@ -142,28 +144,28 @@ const HomePage: NextPageWithLayout = () => {
         <Header style={{ marginTop: 'var(--gap-xl)', textAlign: 'center' }}>
           <Flex stack gap="l" align="center">
             <Text as="h1" style={{ maxWidth: '470px', textAlign: 'center', backgroundColor: 'white' }}>
-              Why choosing Near?
+              Why choose NEAR?
             </Text>
 
             <Grid columns="1fr 1fr 1fr 1fr" gap="xl" columnsTablet="1fr">
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> {totalTx} B </Text>
-                <Text> Blocks and counting </Text>
+                <Text as="h2"> {totalTx} B + </Text>
+                <Text> Transactions </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> {avgBlockTime} s </Text>
-                <Text> Average Block Time </Text>
+                <Text> Avg. Block Time </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> $ {avgTxPrice} </Text>
-                <Text> Average transaction price</Text>
+                <Text> Avg. Txn. Price</Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> 500 + </Text>
-                <Text> Awesome apps and growing </Text>
+                <Text> Awesome Apps </Text>
               </Card>
             </Grid>
           </Flex>

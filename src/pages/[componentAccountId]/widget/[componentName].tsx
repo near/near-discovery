@@ -7,13 +7,13 @@ import strip from 'strip-markdown';
 import { MetaTags } from '@/components/MetaTags';
 import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { privacyDomainName, termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 type ComponentMetaPreview = {

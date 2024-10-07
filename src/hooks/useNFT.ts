@@ -1,6 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 
 export interface Fastnear {
   account_id: string;

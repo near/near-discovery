@@ -1,5 +1,5 @@
+import { networkId } from '@/config';
 import { componentsByNetworkId } from '@/data/bos-components';
-import { networkId } from '@/utils/config';
 
 export function useBosComponents() {
   const components = componentsByNetworkId[networkId];

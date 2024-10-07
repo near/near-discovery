@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 
 import type { NextPageWithLayout } from '../types';
 

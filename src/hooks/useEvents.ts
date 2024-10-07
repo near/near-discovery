@@ -7,7 +7,7 @@ import {
   lumaNearCalendarId,
   lumaNearHZNCalendarId,
   nearTownHallCalendarId,
-} from '@/utils/config';
+} from '@/config';
 import { formatEvents, sortEventsByDate } from '@/utils/events';
 import type { FormatedEvent } from '@/utils/types';
 

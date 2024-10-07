@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { NearContext } from './WalletSelector';
+import { NearContext } from './wallet-selector/WalletSelector';
 
 const RoundedImage = styled(Image)`
   border-radius: 50%;

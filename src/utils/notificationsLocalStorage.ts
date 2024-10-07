@@ -1,6 +1,6 @@
 import { openToast } from '@near-pagoda/ui';
 
-import { localStorageAccountIdKey, notificationsLocalStorageKey } from './config';
+import { localStorageAccountIdKey, notificationsLocalStorageKey } from '../config';
 import {
   isLocalStorageSupported,
   isNotificationSupported,

@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from 'react';
 
 import { useBosLoaderStore } from '@/stores/bos-loader';
-import { recordHandledError } from '@/utils/analytics';
 
 import { useFlags } from './useFlags';
 
@@ -40,7 +39,6 @@ export function useBosLoaderInitializer() {
         });
       } catch (e: any) {
         console.error(e);
-        recordHandledError({ scope: 'BOSLoader Initializer', message: e.message || e });
         setStore({
           failedToLoad: true,
           hasResolved: true,
