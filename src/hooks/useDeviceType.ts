@@ -16,13 +16,14 @@ const getDeviceType = (): DeviceType => {
 };
 
 const useDeviceType = (): DeviceType => {
-  const [deviceType, setDeviceType] = useState<DeviceType>(getDeviceType());
+  const [deviceType, setDeviceType] = useState<DeviceType>('desktop');
 
   useEffect(() => {
     const handleResize = () => {
       setDeviceType(getDeviceType());
     };
 
+    setDeviceType(getDeviceType());
     window.addEventListener('resize', handleResize);
     return () => {
       window.removeEventListener('resize', handleResize);

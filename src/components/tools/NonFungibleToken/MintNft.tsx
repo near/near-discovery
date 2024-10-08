@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
-import { NearContext } from '../../WalletSelector';
+import { NearContext } from '../../wallet-selector/WalletSelector';
 
 type FormData = {
   title: string;

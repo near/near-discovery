@@ -5,7 +5,6 @@ import styled from 'styled-components';
 import { useResearchWizardEvents } from '@/hooks/useResearchWizardEvents';
 import { useCookieStore } from '@/stores/cookieData';
 import { useResearchWizardStore } from '@/stores/researchWizard';
-import { recordEventWithProps } from '@/utils/analytics';
 
 import { StepLayout } from './StepLayout';
 
@@ -74,7 +73,6 @@ export const ResearchFormWizard = () => {
   }, []);
 
   const dismissForm = () => {
-    recordEventWithProps('close-q3-developer-survey', { questionNumber: `${currentStepIndex + 1}` });
     if (showMobileResearchForm) {
       setShowMobileResearchForm(false);
     }
@@ -84,14 +82,6 @@ export const ResearchFormWizard = () => {
 
   const handleFormButton = () => {
     if (currentStepSubmission) {
-      recordEventWithProps('q3-developer-survey-submission', {
-        questionNumber: `${currentStepIndex + 1}`,
-        questionTitle: formSteps[currentStepIndex].title,
-        question: formSteps[currentStepIndex].question,
-        question2: formSteps[currentStepIndex].question2 || null,
-        ...currentStepSubmission,
-      });
-
       if (currentStepIndex < formSteps.length - 1) {
         setCurrentStep(formSteps[currentStepIndex + 1].component());
         useResearchWizardStore.setState({ currentStepIndex: currentStepIndex + 1 });
@@ -105,12 +95,10 @@ export const ResearchFormWizard = () => {
 
   const handleShowMobileResearchForm = () => {
     setShowMobileResearchForm(true);
-    recordEventWithProps('research-form-initial-view', { mobileFormView: 'true' });
   };
 
   const sendResearchEvent = () => {
     if (!researchEventSent) {
-      recordEventWithProps('research-form-initial-view', { mobileFormView: 'false' });
       setResearchEventSent(true);
     }
   };

@@ -10,7 +10,7 @@ import type { NFT } from '@/hooks/useNFT';
 import useNFT from '@/hooks/useNFT';
 import generateAndStore from '@/utils/linkdrops';
 
-import { NearContext } from '../../WalletSelector';
+import { NearContext } from '../../wallet-selector/WalletSelector';
 
 const CarouselContainer = styled.div`
   display: flex;
