@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 
 import generateAndStore from '@/utils/linkdrops';
 
-import { NearContext } from '../../WalletSelector';
+import { NearContext } from '../../wallet-selector/WalletSelector';
 
 type FormData = {
   dropName: string;

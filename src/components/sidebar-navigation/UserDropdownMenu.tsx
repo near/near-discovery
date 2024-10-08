@@ -5,11 +5,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { useContext } from 'react';
 import styled from 'styled-components';
 
+import { signInContractId } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
-import { signInContractId } from '@/utils/config';
 
 import { NftImage } from '../NTFImage';
-import { NearContext } from '../WalletSelector';
+import { NearContext } from '../wallet-selector/WalletSelector';
 
 const Wrapper = styled.div`
   flex-grow: 1;

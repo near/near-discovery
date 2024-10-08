@@ -2,7 +2,7 @@ import { Button, Table, Text, Tooltip } from '@near-pagoda/ui';
 import type { DeleteKeyAction } from '@near-wallet-selector/core';
 import { useContext, useEffect, useState } from 'react';
 
-import { NearContext } from '../WalletSelector';
+import { NearContext } from '../wallet-selector/WalletSelector';
 
 type AccessKey = {
   public_key: string;

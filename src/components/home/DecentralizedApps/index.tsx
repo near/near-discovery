@@ -72,7 +72,7 @@ const WalletImg = styled(Image)`
 
 export const DecentralizedApps = () => {
   return (
-    <>
+    <Flex stack justify="space-between" style={{ flex: 'auto', padding: '.5rem' }}>
       <Grid
         columns="55% minmax(0, 45%)"
         gap="xl"
@@ -80,13 +80,12 @@ export const DecentralizedApps = () => {
         gapTablet="xl"
         columnsPhone="minmax(0, 1fr)"
         columnsTablet="minmax(0, 1fr)"
-        style={{ flexGrow: 1, padding: '0.5rem' }}
+        style={{ flex: 1 }}
       >
-        <Flex stack style={{ justifyContent: 'space-between' }}>
+        <Flex stack justify="space-between">
           <Flex stack gap="m">
             <Text as="h1" style={{ fontWeight: 'normal' }}>
-              {' '}
-              Building Web3 Apps Has Never Been Easier{' '}
+              Building Web3 Apps Has Never Been Easier
             </Text>
             <Text size="text-l" style={{ fontWeight: 'lighter' }}>
               Spin up a your first Web3 app in seconds, or use our APIs to supercharge your existing app
@@ -98,9 +97,9 @@ export const DecentralizedApps = () => {
           </Flex>
         </Flex>
 
-        <Flex stack gap="m" style={{ flexGrow: 1, justifyContent: 'space-between' }}>
+        <Flex stack gap="m" justify="space-between" style={{ flexGrow: 1 }}>
           <Flex stack>
-            <Title> Near React App </Title>
+            <Title> NEAR React App </Title>
             <Code code={ReactApp} height={450} language="ts" />
           </Flex>
           <Carousel>
@@ -124,9 +123,9 @@ export const DecentralizedApps = () => {
         size="large"
         iconLeft={<BookOpenText fill="bold" />}
         href="/documentation/build/web3-apps/quickstart"
-        label="Start Now!"
+        label="Start Now"
         style={{ marginTop: 'var(--gap-m)' }}
       />
-    </>
+    </Flex>
   );
 };
