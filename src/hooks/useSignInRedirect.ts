@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { useCallback } from 'react';
 import { useContext } from 'react';
 
-import { NearContext } from '@/components/WalletSelector';
-import { signInContractId } from '@/utils/config';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { signInContractId } from '@/config';
 
 export function useSignInRedirect() {
   const router = useRouter();

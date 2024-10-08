@@ -3,12 +3,12 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { privacyDomainName, termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useSimpleLayout } from '@/hooks/useLayout';
 import { useCurrentComponentStore } from '@/stores/current-component';
-import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EmbedComponentPage: NextPageWithLayout = () => {

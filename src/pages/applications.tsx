@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useContext, useEffect } from 'react';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';

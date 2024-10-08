@@ -1,4 +1,4 @@
-import type { Network, NetworkId } from './types';
+import type { Network, NetworkId } from './utils/types';
 
 export const networks: Record<NetworkId, Network> = {
   mainnet: {
@@ -53,15 +53,27 @@ export const networks: Record<NetworkId, Network> = {
   // },
 };
 
+// Chains for EVM Wallets
+const evmWalletChains = {
+  mainnet: {
+    chainId: 397,
+    name: 'Near Protocol',
+    explorer: 'https://eth-explorer.near.org',
+    rpc: 'https://eth-rpc.mainnet.near.org',
+  },
+  testnet: {
+    chainId: 398,
+    name: 'Near Testnet',
+    explorer: 'https://eth-explorer-testnet.near.org',
+    rpc: 'https://eth-rpc.testnet.near.org',
+  },
+};
+
 export const networkId: NetworkId = (process.env.NEXT_PUBLIC_NETWORK_ID as NetworkId) || 'testnet';
 export const network = networks[networkId];
 export const signInContractId = networkId === 'testnet' ? 'v1.social08.testnet' : 'social.near';
 export const termsDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ipfs/${process.env.NEXT_PUBLIC_TERMS_CID}`;
 export const privacyDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/ipfs/${process.env.NEXT_PUBLIC_PRIVACY_CID}`;
-export const notificationApplicationServerKey = process.env.NEXT_PUBLIC_NOTIFICATIONS_APPLICATION_SERVER_KEY;
-export const notificationsHostName = process.env.NEXT_PUBLIC_NOTIFICATIONS_HOSTNAME;
-export const notificationsGatewayUrl = `${process.env.NEXT_PUBLIC_HOSTNAME}`;
-export const notificationsLocalStorageKey = 'push-notifications-v0';
 export const localStorageAccountIdKey = 'near-social-vm:v01::accountId:';
 export const isLocalEnvironment = process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT === 'true';
 export const sidebarLayoutEnabled = process.env.NEXT_PUBLIC_SIDEBAR_LAYOUT === 'true';
@@ -75,6 +87,7 @@ export const lumaDevHubHacksCalendarId = process.env.NEXT_PUBLIC_LUMA_DEVHUB_HAC
 export const nearTownHallCalendarId = process.env.NEXT_PUBLIC_NEAR_TOWN_HALL_CALENDAR_ID ?? '';
 export const googleCalendarApiKey = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY ?? '';
 export const devhubCommunityCalendarId = process.env.NEXT_PUBLIC_DEVHUB_COMMUNITY_CALENDAR_ID ?? '';
+export const EVMWalletChain = evmWalletChains[networkId];
 
 export const commitModalBypassAuthorIds = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_AUTHOR_IDS ?? '')
   .split(',')

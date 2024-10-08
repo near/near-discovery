@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
 import type { Txns } from '@/hooks/useNearBlocksTxns';

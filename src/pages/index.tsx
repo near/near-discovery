@@ -7,6 +7,7 @@ import { ChainAbstraction } from '@/components/home/ChainAbstraction';
 import { Contracts } from '@/components/home/Contracts';
 import { Data } from '@/components/home/Data';
 import { DecentralizedApps } from '@/components/home/DecentralizedApps';
+import useDeviceType from '@/hooks/useDeviceType';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -19,7 +20,7 @@ export interface NearBlocks {
 
 const StyledCard = ({ href, title, description }: { href: string; title: string; description: string }) => {
   return (
-    <Card style={{ padding: '1.5rem 1rem', border: 0, textDecoration: 'none' }} href={href}>
+    <Card style={{ padding: '2rem 1rem', border: 0, textDecoration: 'none' }} href={href}>
       <Text as="h4"> {title} </Text>
       <Text>{description}</Text>
     </Card>
@@ -32,6 +33,7 @@ const HomePage: NextPageWithLayout = () => {
   const [avgTxPrice, setAvgTxPrice] = useState('< $0.01');
   const [totalTx, setTotalTx] = useState('2,33');
   const [nearStats, setNearStats] = useState<NearBlocks>();
+  const deviceType = useDeviceType();
 
   useEffect(() => {
     fetch('https://api.nearblocks.io/v1/stats')
@@ -69,16 +71,16 @@ const HomePage: NextPageWithLayout = () => {
 
   return (
     <Section grow="available">
-      <Flex stack gap="l" style={{ padding: '0rem 2rem' }}>
+      <Flex stack gap="l" style={{ padding: deviceType === 'mobile' ? '0' : '0 var(--gap-l)' }}>
         <Header>
           <Flex stack gap="s" style={{ backgroundColor: 'white', padding: '1rem', textAlign: 'center' }}>
-            <Text as="h1"> Near Developer Portal </Text>
+            <Text as="h1"> NEAR Developer Portal </Text>
             <Text> Embrace the power of Web3 </Text>
           </Flex>
         </Header>
 
-        <Card style={{ padding: '.5rem 1.5rem 1.5rem 1.5rem', marginTop: '2rem', border: 0, minHeight: '768px' }}>
-          <Tabs.Root value={selectedTab}>
+        <Card style={{ padding: '.5rem 1.5rem 1rem 1.5rem', marginTop: '2rem', border: 0 }}>
+          <Tabs.Root value={selectedTab} style={{ minHeight: '768px' }}>
             <Tabs.List style={{ marginBottom: '1rem' }}>
               <Tabs.Trigger
                 onClick={() => {
@@ -88,16 +90,6 @@ const HomePage: NextPageWithLayout = () => {
               >
                 <Scroll fill="bold" />
                 Smart Contracts
-              </Tabs.Trigger>
-
-              <Tabs.Trigger
-                onClick={() => {
-                  setTab('web3-apps');
-                }}
-                value="web3-apps"
-              >
-                <Globe fill="bold" />
-                Web3 Applications
               </Tabs.Trigger>
 
               <Tabs.Trigger
@@ -112,6 +104,16 @@ const HomePage: NextPageWithLayout = () => {
 
               <Tabs.Trigger
                 onClick={() => {
+                  setTab('web3-apps');
+                }}
+                value="web3-apps"
+              >
+                <Globe fill="bold" />
+                Web3 Apps
+              </Tabs.Trigger>
+
+              <Tabs.Trigger
+                onClick={() => {
                   setTab('data-solutions');
                 }}
                 value="data-solutions"
@@ -121,19 +123,19 @@ const HomePage: NextPageWithLayout = () => {
               </Tabs.Trigger>
             </Tabs.List>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="contracts">
+            <Tabs.Content value="contracts" style={{ flex: 1 }}>
               <Contracts />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="chain-abstraction">
+            <Tabs.Content value="chain-abstraction" style={{ flex: 1 }}>
               <ChainAbstraction />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="web3-apps">
+            <Tabs.Content value="web3-apps" style={{ flex: 1 }}>
               <DecentralizedApps />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="data-solutions">
+            <Tabs.Content value="data-solutions" style={{ flex: 1 }}>
               <Data />
             </Tabs.Content>
           </Tabs.Root>
@@ -142,28 +144,28 @@ const HomePage: NextPageWithLayout = () => {
         <Header style={{ marginTop: 'var(--gap-xl)', textAlign: 'center' }}>
           <Flex stack gap="l" align="center">
             <Text as="h1" style={{ maxWidth: '470px', textAlign: 'center', backgroundColor: 'white' }}>
-              Why choosing Near?
+              Why choose NEAR?
             </Text>
 
             <Grid columns="1fr 1fr 1fr 1fr" gap="xl" columnsTablet="1fr">
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> {totalTx} B </Text>
-                <Text> Blocks and counting </Text>
+                <Text as="h2"> {totalTx} B + </Text>
+                <Text> Transactions </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> {avgBlockTime} s </Text>
-                <Text> Average Block Time </Text>
+                <Text> Avg. Block Time </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> $ {avgTxPrice} </Text>
-                <Text> Average transaction price</Text>
+                <Text> Avg. Txn. Price</Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> 500 + </Text>
-                <Text> Awesome apps and growing </Text>
+                <Text> Awesome Apps </Text>
               </Card>
             </Grid>
           </Flex>

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { getKeypomKeys } from '@/utils/linkdrops';
 import type { Drops } from '@/utils/types';
 
