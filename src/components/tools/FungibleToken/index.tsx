@@ -7,8 +7,12 @@ const FungibleToken = ({ tokens }: { tokens: FT[] }) => {
   return (
     <>
       <CreateTokenForm />
-      <hr />
-      <ListToken tokens={tokens} />
+      {tokens.length != 0 && (
+        <>
+          <hr />
+          <ListToken tokens={tokens} />
+        </>
+      )}
     </>
   );
 };
