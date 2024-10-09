@@ -123,7 +123,7 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
         method: 'storage_balance_of',
         args: { account_id: signedAccountId },
       });
-      setAvailableStorage(BigInt(storage.available) / BigInt(10 ** 19));
+      if (storage) setAvailableStorage(BigInt(storage.available) / BigInt(10 ** 19));
     }
 
     if (!wallet || !signedAccountId) return;
