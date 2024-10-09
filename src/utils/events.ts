@@ -1,4 +1,4 @@
-import { googleCalendarApiKey, lumaApiUrl } from './config';
+import { googleCalendarApiKey, lumaApiUrl } from '../config';
 import type { FormatedEvent, GoogleEventItem, GoogleEventsListData, LumaEventItem, LumaEventsListData } from './types';
 
 export const fetchLumaEvents = async (

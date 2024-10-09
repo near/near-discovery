@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import type { NFT } from '@/utils/types';
 
 import RoundedImage from './RoundedImage';
-import { NearContext } from './WalletSelector';
+import { NearContext } from './wallet-selector/WalletSelector';
 
 interface NftImageProps {
   nft?: NFT;

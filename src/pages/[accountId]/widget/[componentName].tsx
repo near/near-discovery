@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
@@ -7,16 +7,25 @@ import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { privacyDomainName, termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
-import { useSimpleLayout } from '@/hooks/useLayout';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 
-const EmbedComponentPage: NextPageWithLayout = () => {
+const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
-  const components = useBosComponents();
-  const { wallet } = useContext(NearContext);
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
+  const { wallet, signedAccountId } = useContext(NearContext);
+  const components = useBosComponents();
+  const { requestAuthentication } = useSignInRedirect();
   const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
+
+  useEffect(() => {
+    const { requestAuth, createAccount } = componentProps;
+    if (requestAuth && !signedAccountId) {
+      requestAuthentication(!!createAccount);
+    }
+  }, [signedAccountId, componentProps, requestAuthentication]);
 
   useEffect(() => {
     setComponentProps(router.query);
@@ -28,12 +37,12 @@ const EmbedComponentPage: NextPageWithLayout = () => {
         key={components.wrapper}
         src={components.wrapper}
         props={{
-          emitGatewayEvent: shouldPassGatewayEventProps(router.query.accountId as string)
+          emitGatewayEvent: shouldPassGatewayEventProps(router.query.componentAccountId as string)
             ? emitGatewayEvent
             : undefined,
           logOut: wallet?.signOut,
-          targetComponent: componentSrc,
           targetProps: componentProps,
+          targetComponent: componentSrc,
           termsDomainName,
           privacyDomainName,
         }}
@@ -42,6 +51,6 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   );
 };
 
-EmbedComponentPage.getLayout = useSimpleLayout;
+ViewComponentPage.getLayout = useDefaultLayout;
 
-export default EmbedComponentPage;
+export default ViewComponentPage;

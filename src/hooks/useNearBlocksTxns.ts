@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 
-import { NearContext } from '@/components/WalletSelector';
-import { network } from '@/utils/config';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 
 export interface Txns {
   id: string;

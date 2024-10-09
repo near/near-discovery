@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { sidebarLayoutEnabled as sidebarLayoutFeatureFlagEnabled } from '@/utils/config';
+import { sidebarLayoutEnabled as sidebarLayoutFeatureFlagEnabled } from '@/config';
 
 export function useSidebarLayoutEnabled() {
   const router = useRouter();
