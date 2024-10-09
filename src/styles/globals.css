@@ -3,6 +3,7 @@
 :root {
   --gateway-page-container-padding-y: 2rem;
   --gateway-page-container-padding-x: 1rem;
+  scrollbar-gutter: stable;
 }
 
 p,
