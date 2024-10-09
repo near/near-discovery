@@ -8,9 +8,13 @@ const NonFungibleToken = ({ tokens }: { tokens: NFT[] }) => {
   return (
     <>
       <MintNft />
-      <hr />
-      <ListToken tokens={tokens} />
-      <hr />
+      {tokens.length != 0 && (
+        <>
+          <hr />
+          <ListToken tokens={tokens} />
+          <hr />
+        </>
+      )}
       <CommunityTools />
     </>
   );

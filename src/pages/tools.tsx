@@ -69,7 +69,6 @@ const ToolsPage: NextPageWithLayout = () => {
 
   const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
   const nftsProcessed = processTransactionsToNFT(nfts);
-  console.log('near', { nftsProcessed, ftProcessed });
 
   const { requestAuthentication } = useSignInRedirect();
   return (
