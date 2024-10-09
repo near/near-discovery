@@ -5,7 +5,6 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useFlags } from '@/hooks/useFlags';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -41,8 +40,6 @@ type FormData = {
 const FlagsPage: NextPageWithLayout = () => {
   const [flags, setFlags] = useFlags();
   const form = useForm<FormData>();
-
-  useClearCurrentComponent();
 
   useEffect(() => {
     form.setValue('bosLoaderUrl', flags?.bosLoaderUrl || '');

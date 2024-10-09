@@ -13,7 +13,6 @@ import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { useCurrentComponentStore } from '@/stores/current-component';
 import type { NextPageWithLayout } from '@/utils/types';
 
 type ComponentMetaPreview = {
@@ -92,7 +91,6 @@ export const getServerSideProps: GetServerSideProps<{
 
 const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const router = useRouter();
-  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.componentAccountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const { wallet, signedAccountId } = useContext(NearContext);
@@ -106,10 +104,6 @@ const ViewComponentPage: NextPageWithLayout = ({ meta }: InferGetServerSideProps
       requestAuthentication(!!createAccount);
     }
   }, [signedAccountId, componentProps, requestAuthentication]);
-
-  useEffect(() => {
-    setComponentSrc(componentSrc);
-  }, [setComponentSrc, componentSrc]);
 
   useEffect(() => {
     setComponentProps(router.query);

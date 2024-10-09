@@ -6,7 +6,6 @@ import styled from 'styled-components';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { signInContractId } from '@/config';
-import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import signedOutRoute from '@/utils/route/signedOutRoute';
@@ -45,8 +44,6 @@ const SignInPage: NextPageWithLayout = () => {
         });
     }
   }, [searchParams, wallet]);
-
-  useClearCurrentComponent();
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email || !wallet) return;
