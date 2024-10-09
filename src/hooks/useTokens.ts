@@ -1,7 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import NearIconSvg from '@/components/sidebar-navigation/icons/near-icon.svg';
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import whiteList from '@/utils/white-list.json';
 
 export interface FastNearFT {

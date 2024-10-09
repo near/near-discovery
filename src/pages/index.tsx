@@ -7,6 +7,7 @@ import { ChainAbstraction } from '@/components/home/ChainAbstraction';
 import { Contracts } from '@/components/home/Contracts';
 import { Data } from '@/components/home/Data';
 import { DecentralizedApps } from '@/components/home/DecentralizedApps';
+import useDeviceType from '@/hooks/useDeviceType';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -17,9 +18,19 @@ export interface NearBlocks {
   total_txns: string;
 }
 
+const Header = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 280px;
+  background-size: 54px;
+  padding: 16px 0px;
+  background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGeSURBVHgB7doxTisxEAbgeY/mvQro6NiSDo6QkpJbcA2OwjWooKQMJ2DpKENJBV7FEYoBeQSIZr9PGk2cItWvsdfZnSBjKHVf6rnUbdD1N8g4K7VX6jhIEaycofaTIEWwcoam0yFYOYe179WiQ7Byhk8+8wnB6munlHNWgmD1tUGyFSYIVl8bJFcOCYLV106s/aBrJ2hNE+qo1GmpRanz2J5aB6X+x/oQv/l+FWz5E/O1iHU4pom0W/u0/uoZahnrgN2VGuv6Jpidl1+o2T5BznkrfKj9MdZT6l9836r+3k2pq1KXMVNz3gpbU7hOmj49AQ7x/lJ0WWsK5xhv2+AYkHQR29vbddDluqFvbNZPQZdg9S07az4gWH3tHZVgJQhW3xjb4XIZyo+Z3nffHN79CZ1gYuXc1b4KEytFsHLGptMhWDlj7Q9BimDlbJ4Ex4AftggHdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIpXoUVLSWulnzoAAAAASUVORK5CYII=');
+`;
+
 const StyledCard = ({ href, title, description }: { href: string; title: string; description: string }) => {
   return (
-    <Card style={{ padding: '1.5rem 1rem', border: 0, textDecoration: 'none' }} href={href}>
+    <Card style={{ padding: '2rem 1rem', border: 0, textDecoration: 'none' }} href={href}>
       <Text as="h4"> {title} </Text>
       <Text>{description}</Text>
     </Card>
@@ -32,6 +43,7 @@ const HomePage: NextPageWithLayout = () => {
   const [avgTxPrice, setAvgTxPrice] = useState('< $0.01');
   const [totalTx, setTotalTx] = useState('2,33');
   const [nearStats, setNearStats] = useState<NearBlocks>();
+  const deviceType = useDeviceType();
 
   useEffect(() => {
     fetch('https://api.nearblocks.io/v1/stats')
@@ -57,28 +69,18 @@ const HomePage: NextPageWithLayout = () => {
     getAvrTx();
   }, [nearStats]);
 
-  const Header = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 280px;
-    background-size: 54px;
-    padding: 16px 0px;
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAACWCAYAAAA8AXHiAAAACXBIWXMAABYlAAAWJQFJUiTwAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAGeSURBVHgB7doxTisxEAbgeY/mvQro6NiSDo6QkpJbcA2OwjWooKQMJ2DpKENJBV7FEYoBeQSIZr9PGk2cItWvsdfZnSBjKHVf6rnUbdD1N8g4K7VX6jhIEaycofaTIEWwcoam0yFYOYe179WiQ7Byhk8+8wnB6munlHNWgmD1tUGyFSYIVl8bJFcOCYLV106s/aBrJ2hNE+qo1GmpRanz2J5aB6X+x/oQv/l+FWz5E/O1iHU4pom0W/u0/uoZahnrgN2VGuv6Jpidl1+o2T5BznkrfKj9MdZT6l9836r+3k2pq1KXMVNz3gpbU7hOmj49AQ7x/lJ0WWsK5xhv2+AYkHQR29vbddDluqFvbNZPQZdg9S07az4gWH3tHZVgJQhW3xjb4XIZyo+Z3nffHN79CZ1gYuXc1b4KEytFsHLGptMhWDlj7Q9BimDlbJ4Ex4AftggHdwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIpXoUVLSWulnzoAAAAASUVORK5CYII=');
-  `;
-
   return (
     <Section grow="available">
-      <Flex stack gap="l" style={{ padding: '0rem 2rem' }}>
+      <Flex stack gap="l" style={{ padding: deviceType === 'mobile' ? '0' : '0 var(--gap-l)' }}>
         <Header>
           <Flex stack gap="s" style={{ backgroundColor: 'white', padding: '1rem', textAlign: 'center' }}>
-            <Text as="h1"> Near Developer Portal </Text>
+            <Text as="h1"> NEAR Developer Portal </Text>
             <Text> Embrace the power of Web3 </Text>
           </Flex>
         </Header>
 
-        <Card style={{ padding: '.5rem 1.5rem 1.5rem 1.5rem', marginTop: '2rem', border: 0, minHeight: '768px' }}>
-          <Tabs.Root value={selectedTab}>
+        <Card style={{ padding: '.5rem 1.5rem 1rem 1.5rem', marginTop: '2rem', border: 0 }}>
+          <Tabs.Root value={selectedTab} style={{ minHeight: '768px' }}>
             <Tabs.List style={{ marginBottom: '1rem' }}>
               <Tabs.Trigger
                 onClick={() => {
@@ -88,16 +90,6 @@ const HomePage: NextPageWithLayout = () => {
               >
                 <Scroll fill="bold" />
                 Smart Contracts
-              </Tabs.Trigger>
-
-              <Tabs.Trigger
-                onClick={() => {
-                  setTab('web3-apps');
-                }}
-                value="web3-apps"
-              >
-                <Globe fill="bold" />
-                Web3 Applications
               </Tabs.Trigger>
 
               <Tabs.Trigger
@@ -112,6 +104,16 @@ const HomePage: NextPageWithLayout = () => {
 
               <Tabs.Trigger
                 onClick={() => {
+                  setTab('web3-apps');
+                }}
+                value="web3-apps"
+              >
+                <Globe fill="bold" />
+                Web3 Apps
+              </Tabs.Trigger>
+
+              <Tabs.Trigger
+                onClick={() => {
                   setTab('data-solutions');
                 }}
                 value="data-solutions"
@@ -121,19 +123,19 @@ const HomePage: NextPageWithLayout = () => {
               </Tabs.Trigger>
             </Tabs.List>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="contracts">
+            <Tabs.Content value="contracts" style={{ flex: 1 }}>
               <Contracts />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="chain-abstraction">
+            <Tabs.Content value="chain-abstraction" style={{ flex: 1 }}>
               <ChainAbstraction />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="web3-apps">
+            <Tabs.Content value="web3-apps" style={{ flex: 1 }}>
               <DecentralizedApps />
             </Tabs.Content>
 
-            <Tabs.Content style={{ minHeight: '656px' }} value="data-solutions">
+            <Tabs.Content value="data-solutions" style={{ flex: 1 }}>
               <Data />
             </Tabs.Content>
           </Tabs.Root>
@@ -142,28 +144,28 @@ const HomePage: NextPageWithLayout = () => {
         <Header style={{ marginTop: 'var(--gap-xl)', textAlign: 'center' }}>
           <Flex stack gap="l" align="center">
             <Text as="h1" style={{ maxWidth: '470px', textAlign: 'center', backgroundColor: 'white' }}>
-              Why choosing Near?
+              Why choose NEAR?
             </Text>
 
             <Grid columns="1fr 1fr 1fr 1fr" gap="xl" columnsTablet="1fr">
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
-                <Text as="h2"> {totalTx} B </Text>
-                <Text> Blocks and counting </Text>
+                <Text as="h2"> {totalTx} B + </Text>
+                <Text> Transactions </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> {avgBlockTime} s </Text>
-                <Text> Average Block Time </Text>
+                <Text> Avg. Block Time </Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> $ {avgTxPrice} </Text>
-                <Text> Average transaction price</Text>
+                <Text> Avg. Txn. Price</Text>
               </Card>
 
               <Card style={{ padding: '1.5rem 1rem', border: 0 }}>
                 <Text as="h2"> 500 + </Text>
-                <Text> Awesome apps and growing </Text>
+                <Text> Awesome Apps </Text>
               </Card>
             </Grid>
           </Flex>

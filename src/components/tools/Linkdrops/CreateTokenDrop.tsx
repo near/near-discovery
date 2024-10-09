@@ -4,12 +4,12 @@ import { useContext, useEffect, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
+import { network } from '@/config';
 import type { Token } from '@/hooks/useTokens';
 import useTokens from '@/hooks/useTokens';
-import { network } from '@/utils/config';
 import generateAndStore from '@/utils/linkdrops';
 
-import { NearContext } from '../../WalletSelector';
+import { NearContext } from '../../wallet-selector/WalletSelector';
 import SelectFT from './SelectFT';
 
 type FormData = {

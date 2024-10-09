@@ -4,11 +4,11 @@ import { useContext, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
+import { network } from '@/config';
 import useNFT from '@/hooks/useNFT';
-import { network } from '@/utils/config';
 import generateAndStore from '@/utils/linkdrops';
 
-import { NearContext } from '../../WalletSelector';
+import { NearContext } from '../../wallet-selector/WalletSelector';
 import Carousel from '../Shared/Carousel';
 
 const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;

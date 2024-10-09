@@ -15,7 +15,7 @@ import { KeyPair } from 'near-api-js';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 
-import { NearContext } from '../WalletSelector';
+import { NearContext } from '../wallet-selector/WalletSelector';
 
 export const ExportFastAuthAccount = () => {
   const [generatingKey, setGeneratingKey] = useState(false);

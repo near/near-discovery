@@ -3,8 +3,8 @@ import React, { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
-import { NearContext } from '@/components/WalletSelector';
-import { network } from '@/utils/config';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 
 type FormData = {
   total_supply: string;

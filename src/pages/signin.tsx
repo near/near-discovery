@@ -4,11 +4,10 @@ import { useContext, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
-import { NearContext } from '@/components/WalletSelector';
-import { useClearCurrentComponent } from '@/hooks/useClearCurrentComponent';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { signInContractId } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import { signInContractId } from '@/utils/config';
 import signedOutRoute from '@/utils/route/signedOutRoute';
 import type { NextPageWithLayout } from '@/utils/types';
 
@@ -45,8 +44,6 @@ const SignInPage: NextPageWithLayout = () => {
         });
     }
   }, [searchParams, wallet]);
-
-  useClearCurrentComponent();
 
   const onSubmit = handleSubmit(async (data) => {
     if (!data.email || !wallet) return;

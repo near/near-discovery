@@ -5,11 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext, useEffect } from 'react';
 
+import { commitModalBypassAuthorIds, commitModalBypassSources, isLocalEnvironment, networkId } from '@/config';
 import { useEthersProviderContext } from '@/data/web3';
-import { cookiePreferences, optOut, recordHandledError, recordWalletConnect } from '@/utils/analytics';
-import { commitModalBypassAuthorIds, commitModalBypassSources, isLocalEnvironment, networkId } from '@/utils/config';
+import { cookiePreferences, optOut } from '@/utils/analytics';
 
-import { NearContext } from '../WalletSelector';
+import { NearContext } from '../wallet-selector/WalletSelector';
 
 export default function Component(props: any) {
   const ethersContext = useEthersProviderContext();
@@ -23,8 +23,6 @@ export default function Component(props: any) {
       initNear &&
       initNear({
         networkId,
-        walletConnectCallback: recordWalletConnect,
-        errorCallback: recordHandledError,
         selector: wallet.selector,
         customElements: {
           Link: ({ to, href, ...rest }: { to: string | object | undefined; href: string | object }) => {
