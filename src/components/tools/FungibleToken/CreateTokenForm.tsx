@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
 import { NearContext } from '@/components/WalletSelector';
+import { network } from '@/utils/config';
 
 type FormData = {
   total_supply: string;
@@ -13,7 +14,7 @@ type FormData = {
   decimals: number;
 };
 
-const FACTORY_CONTRACT = 'tkn.primitives.near';
+const FACTORY_CONTRACT = network.ftContract;
 
 const MAX_FILE_SIZE = 10 * 1024;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
