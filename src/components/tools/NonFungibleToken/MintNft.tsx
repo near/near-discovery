@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
+import { network } from '@/utils/config';
+
 import { NearContext } from '../../WalletSelector';
 
 type FormData = {
@@ -70,7 +72,7 @@ const MintNft = ({ reload }: { reload: (delay: number) => void }) => {
       await wallet.signAndSendTransactions({
         transactions: [
           {
-            receiverId: 'nft.primitives.near',
+            receiverId: network.nftContract,
             actions: [
               {
                 type: 'FunctionCall',

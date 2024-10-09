@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form';
 
 import type { Token } from '@/hooks/useTokens';
 import useTokens from '@/hooks/useTokens';
+import { network } from '@/utils/config';
 import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../WalletSelector';
@@ -17,7 +18,7 @@ type FormData = {
   amountPerLink: number;
 };
 
-const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
+const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
 const formattedBalance = (balance: string, decimals = 24) => {
   const balanceStr = balance.toString();

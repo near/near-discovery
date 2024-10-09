@@ -5,12 +5,13 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import useNFT from '@/hooks/useNFT';
+import { network } from '@/utils/config';
 import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../WalletSelector';
 import Carousel from '../Shared/Carousel';
 
-const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
+const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
 type FormData = {
   dropName: string;

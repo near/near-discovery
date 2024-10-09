@@ -1,8 +1,11 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { NearContext } from '@/components/WalletSelector';
+import { network } from '@/utils/config';
 import { getKeypomKeys } from '@/utils/linkdrops';
 import type { Drops, KeypomKey } from '@/utils/types';
+
+const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
 const useLinkdrops = () => {
   const { signedAccountId, wallet } = useContext(NearContext);
@@ -12,7 +15,7 @@ const useLinkdrops = () => {
     if (!wallet || !signedAccountId) return;
 
     const fetchedDrops: Drops[] = await wallet.viewMethod({
-      contractId: 'v2.keypom.near',
+      contractId: KEYPOM_CONTRACT_ADDRESS,
       method: 'get_drops_for_owner',
       args: { account_id: signedAccountId },
     });
@@ -31,7 +34,7 @@ const useLinkdrops = () => {
           }
 
           const keypomKeys: KeypomKey[] = await wallet.viewMethod({
-            contractId: 'v2.keypom.near',
+            contractId: KEYPOM_CONTRACT_ADDRESS,
             method: 'get_keys_for_drop',
             args: { drop_id: drop.drop_id },
           });

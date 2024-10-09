@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { NearContext } from '@/components/WalletSelector';
+import { network } from '@/utils/config';
 
 export interface Txns {
   id: string;
@@ -58,6 +59,8 @@ export interface ReceiptOutcome {
   status: boolean;
 }
 
+const API_NEAR_BLOCKS = network.apiNearBlocks;
+
 const useNearBlocksTxns = (contract: string, method: string) => {
   const [transactions, setTransactions] = useState<Txns[]>([]);
   const [loading, setLoading] = useState(true);
@@ -69,7 +72,7 @@ const useNearBlocksTxns = (contract: string, method: string) => {
       try {
         await new Promise((resolve) => setTimeout(resolve, delay));
         const response = await fetch(
-          `https://api.nearblocks.io/v1/account/${contract}/txns?from=${signedAccountId}&method=${method}`,
+          `${API_NEAR_BLOCKS}/v1/account/${contract}/txns?from=${signedAccountId}&method=${method}`,
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');

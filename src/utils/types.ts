@@ -30,6 +30,10 @@ type ProductionNetwork = {
       measurementId: string;
     };
   };
+  linkdrop: string;
+  apiNearBlocks: string;
+  ftContract: string;
+  nftContract: string;
 };
 
 export interface TosData {

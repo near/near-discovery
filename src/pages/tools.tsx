@@ -12,6 +12,7 @@ import useLinkdrops from '@/hooks/useLinkdrops';
 import type { Txns } from '@/hooks/useNearBlocksTxns';
 import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
+import { network } from '@/utils/config';
 import type { NextPageWithLayout, NFT } from '@/utils/types';
 
 export type FT = {
@@ -57,11 +58,11 @@ const ToolsPage: NextPageWithLayout = () => {
   const { signedAccountId } = useContext(NearContext);
   const { drops, reloadLinkdrops } = useLinkdrops();
 
-  const { transactions: fts, reloadTokens: reloadFT } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
+  const { transactions: fts, reloadTokens: reloadFT } = useNearBlocksTxns(network.ftContract, 'create_token');
   const ftProcessed = processTransactionsToFt(fts);
 
-  const { transactions: nfts, reloadTokens: reloadNFT } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
-  const nftsProcessed = processTransactionsToNFT('nft.primitives.near', signedAccountId, nfts);
+  const { transactions: nfts, reloadTokens: reloadNFT } = useNearBlocksTxns(network.nftContract, 'nft_mint');
+  const nftsProcessed = processTransactionsToNFT(network.nftContract, signedAccountId, nfts);
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>

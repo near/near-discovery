@@ -122,7 +122,7 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
   useEffect(() => {
     async function getProfile() {
       const profile = await wallet?.viewMethod({
-        contractId: 'social.near',
+        contractId: signInContractId,
         method: 'get',
         args: { keys: [`${signedAccountId}/profile/**`] },
       });
