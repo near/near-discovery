@@ -124,7 +124,13 @@ const CreateTokenForm: React.FC = () => {
               label="Total Supply"
               placeholder="e.g., 1000"
               error={errors.total_supply?.message}
-              {...register('total_supply', { required: 'Total supply is required' })}
+              {...register('total_supply', {
+                required: 'Total supply is required',
+                pattern: {
+                  value: /^[1-9][0-9]*$/,
+                  message: 'Total supply must be a whole number',
+                },
+              })}
             />
             <Input
               label="Decimals"
