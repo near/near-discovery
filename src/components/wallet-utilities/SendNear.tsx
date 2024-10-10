@@ -1,4 +1,4 @@
-import { Button, Flex, Form, handleClientError, Input, openToast } from '@near-pagoda/ui';
+import { Button, Flex, Form, handleClientError, Input, openToast, Text } from '@near-pagoda/ui';
 import { utils } from 'near-api-js';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
@@ -94,6 +94,8 @@ export const SendNear = () => {
       handleClientError({ error, title: 'Transaction Failed' });
     }
   };
+
+  if (!signedAccountId) return <Text> Sign in to send NEAR </Text>;
 
   return (
     <Form onSubmit={form.handleSubmit(validSubmitHandler)}>
