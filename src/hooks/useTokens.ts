@@ -2,6 +2,7 @@ import { useCallback, useContext, useEffect, useState } from 'react';
 
 import NearIconSvg from '@/components/sidebar-navigation/icons/near-icon.svg';
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 import whiteList from '@/utils/white-list.json';
 
 export interface FastNearFT {
@@ -16,7 +17,7 @@ export interface TokenFastNear {
 }
 
 export const accounts_ft = async (accountId: string): Promise<FastNearFT> => {
-  const response = await fetch(`https://api.fastnear.com/v1/account/${accountId}/ft`);
+  const response = await fetch(`${network.fastNearApi}/v1/account/${accountId}/ft`);
   return (await response.json()) as FastNearFT;
 };
 
