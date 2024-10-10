@@ -189,7 +189,24 @@ export class Wallet {
 
   signAndSendTransactions = async ({ transactions }: { transactions: any[] }) => {
     const selectedWallet = await (await this.selector).wallet();
-    return selectedWallet.signAndSendTransactions({ transactions });
+    const result = await selectedWallet.signAndSendTransactions({ transactions });
+
+    if (!result) {
+      throw new Error('Transaction failed');
+    } else {
+      return Promise.all(result.map(async (o) => providers.getTransactionLastResult(o)));
+    }
+  };
+
+  signAndSendTransaction = async (transaction: any) => {
+    const selectedWallet = await (await this.selector).wallet();
+    const result = await selectedWallet.signAndSendTransaction(transaction);
+
+    if (!result) {
+      throw new Error(`Transaction ${JSON.stringify(transaction)} failed`);
+    } else {
+      return providers.getTransactionLastResult(result);
+    }
   };
 
   getAccessKeys = async (accountId: string) => {

@@ -71,7 +71,7 @@ export const fetchSearchHits = async (facet: Facet, query: string, page = 0) => 
   });
 
   if (!response.ok) {
-    throw new Error(`Failed to fetch search hits: ${response.statusText}`);
+    throw new Error(`Failed to fetch search hits: ${response.statusText}, please try again`);
   }
 
   return await response.json();

@@ -63,7 +63,8 @@ export const ExportFastAuthAccount = () => {
         ],
       };
 
-      await wallet.signAndSendTransactions({ transactions: [addKeyTransaction] });
+      const res = await wallet.signAndSendTransaction(addKeyTransaction);
+      console.log('RES', res);
 
       setSecretKey(keyPair.toString());
 
