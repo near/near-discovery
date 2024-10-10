@@ -19,7 +19,9 @@ const EmbedComponentPage: NextPageWithLayout = () => {
   const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
 
   useEffect(() => {
-    setComponentProps(router.query);
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    setComponentProps(params);
   }, [router.query]);
 
   return (
