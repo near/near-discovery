@@ -1,12 +1,16 @@
-import { Button, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
+import { Button, Flex, Form, Input, openToast } from '@near-pagoda/ui';
 import { parseNearAmount } from 'near-api-js/lib/utils/format';
 import { useContext, useEffect, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
+import { network } from '@/config';
+import type { Token } from '@/hooks/useTokens';
+import useTokens from '@/hooks/useTokens';
 import generateAndStore from '@/utils/linkdrops';
 
 import { NearContext } from '../../wallet-selector/WalletSelector';
+import SelectFT from './SelectFT';
 
 type FormData = {
   dropName: string;
@@ -14,22 +18,26 @@ type FormData = {
   amountPerLink: number;
 };
 
-function displayBalance(balance: number) {
-  let display = Math.floor(balance * 100) / 100;
+const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
-  if (balance < 1) {
-    display = Math.floor(balance * 100000) / 100000;
-    if (balance && !display) return '< 0.00001';
-    return display;
-  }
+const formattedBalance = (balance: string, decimals = 24) => {
+  const balanceStr = balance.toString();
+  const integerPart = balanceStr.slice(0, -decimals) || '0';
+  const decimalPart = balanceStr.slice(-decimals).padStart(decimals, '0');
+  return Number(`${integerPart}.${decimalPart.slice(0, 2)}`);
+};
 
-  return display;
-}
+const parseAmount = (amount: string, decimals: number) => {
+  const [integer, decimal] = amount.split('.');
+  const integerPart = integer || '0';
+  const decimalPart = decimal || '0';
+  return BigInt(integerPart + decimalPart.padEnd(decimals, '0'));
+};
 
 const getDeposit = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
 
-const CreateTokenDrop = () => {
+const CreateTokenDrop = ({ reload }: { reload: (delay: number) => void }) => {
   const {
     register,
     handleSubmit,
@@ -42,55 +50,88 @@ const CreateTokenDrop = () => {
   });
 
   const { wallet, signedAccountId } = useContext(NearContext);
-  const [currentNearAmount, setCurrentNearAmount] = useState(0);
+  const [balance, setBalance] = useState(0);
+  const [token, setToken] = useState<Token>();
+  const { tokens } = useTokens();
 
   useEffect(() => {
-    if (!wallet || !signedAccountId) return;
+    if (!wallet || !signedAccountId || !tokens.length) return;
+    setToken(tokens[0]);
+  }, [wallet, signedAccountId, tokens]);
 
-    const loadBalance = async () => {
-      try {
-        const balance = await wallet.getBalance(signedAccountId);
-        const requiredGas = 0.00005;
-        const cost = 0.0426;
-        setCurrentNearAmount(balance - requiredGas - cost);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    loadBalance();
-  }, [wallet, signedAccountId]);
+  useEffect(() => {
+    if (!token) return;
+    const balance = token.balance;
+    const decimals = token.decimals;
+    setBalance(formattedBalance(balance, decimals));
+  }, [token]);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     if (!wallet) throw new Error('Wallet has not initialized yet');
-
+    if (!token) throw new Error('Token has not been selected yet');
+    const dropId = Date.now().toString();
     try {
+      const nearAmount = token.contract_id === 'near' ? parseNearAmount(data.amountPerLink.toString()) : '0';
+      const ftAmount =
+        token.contract_id === 'near' ? '0' : parseAmount(data.amountPerLink.toString(), token.decimals).toString();
+      const isFTDrop = token.contract_id !== 'near';
+
       const args = {
-        deposit_per_use: parseNearAmount(data.amountPerLink.toString()),
+        deposit_per_use: nearAmount,
+        drop_id: dropId,
         metadata: JSON.stringify({
           dropName: data.dropName,
         }),
         public_keys: generateAndStore(data.dropName, data.numberLinks),
+        ft: isFTDrop
+          ? {
+              sender_id: signedAccountId,
+              contract_id: token.contract_id,
+              balance_per_use: ftAmount,
+            }
+          : undefined,
       };
 
-      await wallet.signAndSendTransactions({
-        transactions: [
-          {
-            receiverId: 'v2.keypom.near',
-            actions: [
-              {
-                type: 'FunctionCall',
-                params: {
-                  methodName: 'create_drop',
-                  args,
-                  gas: '300000000000000',
-                  deposit: getDeposit(data.amountPerLink, data.numberLinks),
-                },
+      const transactions: any[] = [
+        {
+          receiverId: KEYPOM_CONTRACT_ADDRESS,
+          actions: [
+            {
+              type: 'FunctionCall',
+              params: {
+                methodName: 'create_drop',
+                args,
+                gas: '300000000000000',
+                deposit: getDeposit(isFTDrop ? 0 : data.amountPerLink, data.numberLinks),
               },
-            ],
-          },
-        ],
-      });
+            },
+          ],
+        },
+      ];
+
+      if (isFTDrop) {
+        const amount = BigInt(ftAmount) * BigInt(data.numberLinks);
+        transactions.push({
+          receiverId: token.contract_id,
+          actions: [
+            {
+              type: 'FunctionCall',
+              params: {
+                methodName: 'ft_transfer_call',
+                args: {
+                  receiver_id: KEYPOM_CONTRACT_ADDRESS,
+                  amount: amount.toString(),
+                  msg: dropId,
+                },
+                gas: '300000000000000',
+                deposit: '1',
+              },
+            },
+          ],
+        });
+      }
+
+      await wallet.signAndSendTransactions({ transactions });
 
       openToast({
         type: 'success',
@@ -107,13 +148,12 @@ const CreateTokenDrop = () => {
         description: 'Failed to submit form',
         duration: 5000,
       });
+    } finally {
+      reload(1000);
     }
   };
   return (
     <>
-      <Text size="text-l" style={{ marginBottom: '12px' }}>
-        Create a LinkDrop
-      </Text>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
           <Input
@@ -139,6 +179,7 @@ const CreateTokenDrop = () => {
               valueAsNumber: true,
               required: 'Number of links is required',
             })}
+            right={<SelectFT tokens={tokens} setToken={setToken} />}
           />
           <Input
             label="Amount per link"
@@ -146,7 +187,7 @@ const CreateTokenDrop = () => {
               allowNegative: false,
               allowDecimal: true,
             }}
-            assistive={`${displayBalance(currentNearAmount)} available`}
+            assistive={balance ? `${balance} available` : 'loading ...'}
             placeholder="Enter an amount"
             error={errors.amountPerLink?.message}
             {...register('amountPerLink', {
@@ -155,8 +196,8 @@ const CreateTokenDrop = () => {
                 value: 0.0000000001,
               },
               max: {
-                message: `Must be equal to or less than ${currentNearAmount}`,
-                value: currentNearAmount,
+                message: `Must be equal to or less than ${balance}`,
+                value: balance,
               },
               valueAsNumber: true,
               required: 'Amount per link is required',

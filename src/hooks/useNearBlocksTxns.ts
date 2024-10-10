@@ -1,6 +1,7 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 
 export interface Txns {
   id: string;
@@ -58,24 +59,30 @@ export interface ReceiptOutcome {
   status: boolean;
 }
 
+const API_NEAR_BLOCKS = network.apiNearBlocks;
+
 const useNearBlocksTxns = (contract: string, method: string) => {
   const [transactions, setTransactions] = useState<Txns[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const { wallet, signedAccountId } = useContext(NearContext);
 
-  useEffect(() => {
-    if (!wallet || !signedAccountId) return;
-
-    const fetchTransactions = async () => {
+  const fetchTransactions = useCallback(
+    async (delay = 0) => {
       try {
+        await new Promise((resolve) => setTimeout(resolve, delay));
         const response = await fetch(
-          `https://api.nearblocks.io/v1/account/${contract}/txns?from=${signedAccountId}&method=${method}`,
+          `${API_NEAR_BLOCKS}/v1/account/${contract}/txns?from=${signedAccountId}&method=${method}`,
         );
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        console.log(
+          'pepe grillo',
+          data.txns.filter((txn: Txns) => txn.outcomes.status),
+        );
+
         setTransactions(data.txns.filter((txn: Txns) => txn.outcomes.status));
         setLoading(false);
       } catch (err) {
@@ -86,12 +93,16 @@ const useNearBlocksTxns = (contract: string, method: string) => {
         }
         setLoading(false);
       }
-    };
+    },
+    [contract, method, signedAccountId],
+  );
 
+  useEffect(() => {
+    if (!wallet || !signedAccountId) return;
     fetchTransactions();
-  }, [contract, method, wallet, signedAccountId]);
-
-  return { transactions, loading, error };
+  }, [contract, method, wallet, signedAccountId, fetchTransactions]);
+  console.log('pepe grillo trans', transactions);
+  return { transactions, loading, error, reloadTokens: fetchTransactions };
 };
 
 export default useNearBlocksTxns;

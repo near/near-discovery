@@ -9,6 +9,7 @@ import { signInContractId } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 
 import { NftImage } from '../NTFImage';
+import RoundedImage from '../RoundedImage';
 import { NearContext } from '../wallet-selector/WalletSelector';
 
 const Wrapper = styled.div`
@@ -92,6 +93,29 @@ type Props = {
   collapsed?: boolean;
 };
 
+const parseNftImage = (nft: any, owner_id: string, title: string | null = null) => {
+  return {
+    contract_id: nft.contractId as string,
+    token_id: nft.tokenId as string,
+    owner_id,
+    metadata: {
+      title: title || owner_id,
+      description: null,
+      media: null,
+      media_hash: null,
+      copies: null,
+      issued_at: null,
+      expires_at: null,
+      starts_at: null,
+      updated_at: null,
+      extra: null,
+      reference: null,
+      reference_hash: null,
+    },
+    approved_account_ids: null,
+  };
+};
+
 export const UserDropdownMenu = ({ collapsed }: Props) => {
   const { wallet, signedAccountId } = useContext(NearContext);
   const router = useRouter();
@@ -109,7 +133,7 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
   useEffect(() => {
     async function getProfile() {
       const profile = await wallet?.viewMethod({
-        contractId: 'social.near',
+        contractId: signInContractId,
         method: 'get',
         args: { keys: [`${signedAccountId}/profile/**`] },
       });
@@ -140,11 +164,14 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
           </Dropdown.Trigger>
         ) : (
           <Dropdown.Trigger>
-            <NftImage
-              nft={profile.image?.nft}
-              ipfs_cid={profile.image?.ipfs_cid}
-              alt={profile.name || signedAccountId}
-            />
+            {profile.image?.nft ? (
+              <NftImage nft={parseNftImage(profile.image.nft, signedAccountId, profile.name)} />
+            ) : (
+              <RoundedImage
+                src={`https://ipfs.near.social/ipfs/${profile?.image?.ipfs_cid}`}
+                alt={profile.name || signedAccountId}
+              />
+            )}
             <div className="profile-info">
               <div className="profile-name">{profile.name}</div>
               <div className="profile-username">{signedAccountId}</div>

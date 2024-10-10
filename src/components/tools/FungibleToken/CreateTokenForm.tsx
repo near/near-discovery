@@ -4,6 +4,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 
 type FormData = {
   total_supply: string;
@@ -13,12 +14,12 @@ type FormData = {
   decimals: number;
 };
 
-const FACTORY_CONTRACT = 'tkn.primitives.near';
+const FACTORY_CONTRACT = network.ftContract;
 
 const MAX_FILE_SIZE = 10 * 1024;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
 
-const CreateTokenForm: React.FC = () => {
+const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
   const {
     control,
     register,
@@ -109,6 +110,8 @@ const CreateTokenForm: React.FC = () => {
         description: 'Failed to create token',
         duration: 5000,
       });
+    } finally {
+      reload(1000);
     }
   };
 

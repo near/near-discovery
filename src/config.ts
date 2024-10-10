@@ -21,6 +21,11 @@ export const networks: Record<NetworkId, Network> = {
         measurementId: 'G-T2PPJ8QRYY',
       },
     },
+    linkdrop: 'v2.keypom.near',
+    apiNearBlocks: 'https://api.nearblocks.io',
+    ftContract: 'tkn.primitives.near',
+    nftContract: 'nft.primitives.near',
+    fastNearApi: 'https://api.fastnear.com',
   },
   testnet: {
     networkId: 'testnet',
@@ -42,7 +47,13 @@ export const networks: Record<NetworkId, Network> = {
         measurementId: 'G-HF2NBGE60S',
       },
     },
+    linkdrop: 'v2.keypom.testnet',
+    apiNearBlocks: 'https://api-testnet.nearblocks.io',
+    ftContract: 'tkn.primitives.testnet',
+    nftContract: 'nft.primitives.testnet',
+    fastNearApi: 'https://test.api.fastnear.com',
   },
+
   // localnet: {
   //   // these are defined by https://github.com/kurtosis-tech/near-package
   //   networkId: 'localnet',

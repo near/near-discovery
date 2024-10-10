@@ -7,12 +7,13 @@ import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
 import type { Txns } from '@/hooks/useNearBlocksTxns';
 import useNearBlocksTxns from '@/hooks/useNearBlocksTxns';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-import type { NextPageWithLayout } from '@/utils/types';
+import type { NextPageWithLayout, NFT } from '@/utils/types';
 
 export type FT = {
   decimals: number;
@@ -20,13 +21,6 @@ export type FT = {
   name: string;
   symbol: string;
   total_supply: string;
-};
-
-export type NFT = {
-  description: string;
-  media: string;
-  title: string;
-  token_id: string;
 };
 
 const processTransactionsToFt = (transactions: Txns[]): FT[] => {
@@ -44,16 +38,16 @@ const processTransactionsToFt = (transactions: Txns[]): FT[] => {
   });
 };
 
-const processTransactionsToNFT = (transactions: Txns[]): NFT[] => {
+const processTransactionsToNFT = (contract_id: string, owner_id: string, transactions: Txns[]): NFT[] => {
   if (!transactions) return [];
-
   return transactions.map((txn) => {
-    const nft = JSON.parse(txn.actions[0].args);
+    const args = JSON.parse(txn.actions[0].args);
     return {
-      media: nft.token_metadata.media,
-      title: nft.token_metadata.title,
-      description: nft.token_metadata.description,
-      token_id: nft.token_id,
+      contract_id: contract_id,
+      token_id: args.token_id,
+      metadata: args.token_metadata,
+      owner_id,
+      approved_account_ids: null,
     };
   });
 };
@@ -62,15 +56,13 @@ const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { signedAccountId } = useContext(NearContext);
-  const drops = useLinkdrops();
+  const { drops, reloadLinkdrops } = useLinkdrops();
 
-  const { transactions: fts } = useNearBlocksTxns('tkn.primitives.near', 'create_token');
+  const { transactions: fts, reloadTokens: reloadFT } = useNearBlocksTxns(network.ftContract, 'create_token');
   const ftProcessed = processTransactionsToFt(fts);
 
-  const { transactions: nfts } = useNearBlocksTxns('nft.primitives.near', 'nft_mint');
-  const nftsProcessed = processTransactionsToNFT(nfts);
-  console.log('near', { nftsProcessed, ftProcessed });
-
+  const { transactions: nfts, reloadTokens: reloadNFT } = useNearBlocksTxns(network.nftContract, 'nft_mint');
+  const nftsProcessed = processTransactionsToNFT(network.nftContract, signedAccountId, nfts);
   const { requestAuthentication } = useSignInRedirect();
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -101,15 +93,15 @@ const ToolsPage: NextPageWithLayout = () => {
                 </Tabs.List>
 
                 <Tabs.Content value="ft">
-                  <FungibleToken tokens={ftProcessed} />
+                  <FungibleToken tokens={ftProcessed} reload={reloadFT} />
                 </Tabs.Content>
 
                 <Tabs.Content value="nft">
-                  <NonFungibleToken tokens={nftsProcessed} />
+                  <NonFungibleToken tokens={nftsProcessed} reload={reloadNFT} />
                 </Tabs.Content>
 
                 <Tabs.Content value="linkdrops">
-                  <Linkdrops drops={drops} />
+                  <Linkdrops drops={drops} reload={reloadLinkdrops} />
                 </Tabs.Content>
               </Tabs.Root>
             </Card>

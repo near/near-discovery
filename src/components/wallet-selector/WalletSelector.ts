@@ -172,7 +172,7 @@ export class Wallet {
     return providers.getTransactionLastResult(transaction);
   };
 
-  getBalance = async (accountId: string) => {
+  getBalance = async (accountId: string, format = true) => {
     const walletSelector = await this.selector;
     const { network } = walletSelector.options;
     const provider = new providers.JsonRpcProvider({ url: network.nodeUrl });
@@ -184,7 +184,11 @@ export class Wallet {
       finality: 'final',
     });
     // return amount on NEAR
-    return account.amount ? Number(utils.format.formatNearAmount(account.amount)) : 0;
+    if (format) {
+      return account.amount ? Number(utils.format.formatNearAmount(account.amount)) : 0;
+    } else {
+      return account.amount || 0;
+    }
   };
 
   signAndSendTransactions = async ({ transactions }: { transactions: any[] }) => {

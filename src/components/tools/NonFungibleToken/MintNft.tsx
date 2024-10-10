@@ -3,6 +3,8 @@ import { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { Controller, useForm } from 'react-hook-form';
 
+import { network } from '@/config';
+
 import { NearContext } from '../../wallet-selector/WalletSelector';
 
 type FormData = {
@@ -18,7 +20,7 @@ interface IPFSResponse {
 const MAX_FILE_SIZE = 5 * 1024 * 1024;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
 
-const MintNft = () => {
+const MintNft = ({ reload }: { reload: (delay: number) => void }) => {
   const {
     control,
     register,
@@ -64,13 +66,13 @@ const MintNft = () => {
       const string_args = JSON.stringify(args);
 
       // TODO: Improve, we estimate the cost as 3 times the cost of storing the args
-      const cost_per_byte = 10 ** 19;
-      const estimated_cost = string_args.length * cost_per_byte * 3;
+      const cost_per_byte = '10000000000000000000';
+      const estimated_cost = BigInt(string_args.length) * BigInt(cost_per_byte) * BigInt(3);
 
       await wallet.signAndSendTransactions({
         transactions: [
           {
-            receiverId: 'nft.primitives.near',
+            receiverId: network.nftContract,
             actions: [
               {
                 type: 'FunctionCall',
@@ -93,12 +95,16 @@ const MintNft = () => {
         duration: 5000,
       });
     } catch (error) {
+      console.error(error);
+
       openToast({
         type: 'error',
         title: 'Error',
         description: 'Failed to submit form',
         duration: 5000,
       });
+    } finally {
+      reload(100);
     }
   };
 

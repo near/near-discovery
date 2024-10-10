@@ -30,6 +30,11 @@ type ProductionNetwork = {
       measurementId: string;
     };
   };
+  linkdrop: string;
+  apiNearBlocks: string;
+  ftContract: string;
+  nftContract: string;
+  fastNearApi: string;
 };
 
 export interface TosData {
@@ -136,10 +141,9 @@ export interface Drops {
   required_gas: string;
   next_key_id: number;
   keys?: Keys[];
-  information: Information[];
 }
 
-export interface Information {
+export interface KeypomKey {
   drop_id: string;
   pk: string;
   cur_key_use: number;
@@ -155,4 +159,25 @@ export interface Keys {
 }
 export interface Simple {
   lazy_register: null;
+}
+export interface NFT {
+  contract_id: string;
+  token_id: string;
+  owner_id: string;
+  metadata: Metadata;
+  approved_account_ids: string[] | null;
+}
+export interface Metadata {
+  title: string;
+  description: string | null;
+  media: string | null;
+  media_hash: string | null;
+  copies: string | null;
+  issued_at: string | null;
+  expires_at: string | null;
+  starts_at: string | null;
+  updated_at: string | null;
+  extra: string | null;
+  reference: string | null;
+  reference_hash: string | null;
 }

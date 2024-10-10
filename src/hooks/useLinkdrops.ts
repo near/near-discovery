@@ -1,54 +1,71 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 import { getKeypomKeys } from '@/utils/linkdrops';
-import type { Drops } from '@/utils/types';
+import type { Drops, KeypomKey } from '@/utils/types';
+
+const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
 const useLinkdrops = () => {
-  const { signedAccountId } = useContext(NearContext);
+  const { signedAccountId, wallet } = useContext(NearContext);
   const [drops, setDrops] = useState<Drops[]>([]);
 
-  const { wallet } = useContext(NearContext);
+  const fetchDropData = useCallback(async () => {
+    if (!wallet || !signedAccountId) return;
 
-  useEffect(() => {
-    const fetchDropData = async () => {
-      if (!wallet || !signedAccountId) return;
-      const fetchedDrops: Drops[] = await wallet.viewMethod({
-        contractId: 'v2.keypom.near',
-        method: 'get_drops_for_owner',
-        args: { account_id: signedAccountId },
-      });
+    const fetchedDrops: Drops[] = await wallet.viewMethod({
+      contractId: KEYPOM_CONTRACT_ADDRESS,
+      method: 'get_drops_for_owner',
+      args: { account_id: signedAccountId },
+    });
 
-      const filteredDrops = fetchedDrops.filter(
-        (drop) =>
-          drop.metadata &&
-          JSON.parse(drop.metadata).dropName &&
-          getKeypomKeys(JSON.parse(drop.metadata).dropName).length,
-      );
+    const fetchDropInformation = async () => {
+      const fetchedDropsWithKeys = await Promise.all(
+        fetchedDrops.map(async (drop) => {
+          if (
+            !(
+              drop.metadata &&
+              JSON.parse(drop.metadata).dropName &&
+              getKeypomKeys(JSON.parse(drop.metadata).dropName).length > 0
+            )
+          ) {
+            return null;
+          }
 
-      const fetchedInformationDrops = await Promise.all(
-        filteredDrops.map(async (drop) => {
-          const information = await wallet.viewMethod({
-            contractId: 'v2.keypom.near',
+          const keypomKeys: KeypomKey[] = await wallet.viewMethod({
+            contractId: KEYPOM_CONTRACT_ADDRESS,
             method: 'get_keys_for_drop',
             args: { drop_id: drop.drop_id },
           });
-          return { ...drop, information };
+
+          const localKeys = getKeypomKeys(JSON.parse(drop.metadata).dropName);
+
+          const unclaimedKeys = localKeys.filter((localKey) =>
+            keypomKeys.some((keypomKey) => keypomKey.pk === localKey.public),
+          );
+
+          if (unclaimedKeys.length > 0) {
+            return { ...drop, keys: unclaimedKeys };
+          }
+
+          return null;
         }),
       );
 
-      const localDataDrops = fetchedInformationDrops.map((drop) => ({
-        ...drop,
-        keys: getKeypomKeys(JSON.parse(drop.metadata).dropName),
-      }));
-
-      setDrops(localDataDrops);
+      return fetchedDropsWithKeys.filter((item) => item !== null) as Drops[];
     };
 
-    fetchDropData();
+    const data = await fetchDropInformation();
+
+    setDrops(data);
   }, [wallet, signedAccountId]);
 
-  return drops;
+  useEffect(() => {
+    fetchDropData();
+  }, [fetchDropData]);
+
+  return { drops, reloadLinkdrops: fetchDropData };
 };
 
 export default useLinkdrops;
