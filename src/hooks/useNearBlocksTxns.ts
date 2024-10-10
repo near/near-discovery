@@ -78,6 +78,11 @@ const useNearBlocksTxns = (contract: string, method: string) => {
           throw new Error('Network response was not ok');
         }
         const data = await response.json();
+        console.log(
+          'pepe grillo',
+          data.txns.filter((txn: Txns) => txn.outcomes.status),
+        );
+
         setTransactions(data.txns.filter((txn: Txns) => txn.outcomes.status));
         setLoading(false);
       } catch (err) {
@@ -96,7 +101,7 @@ const useNearBlocksTxns = (contract: string, method: string) => {
     if (!wallet || !signedAccountId) return;
     fetchTransactions();
   }, [contract, method, wallet, signedAccountId, fetchTransactions]);
-
+  console.log('pepe grillo trans', transactions);
   return { transactions, loading, error, reloadTokens: fetchTransactions };
 };
 

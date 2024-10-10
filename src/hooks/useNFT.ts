@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 import type { Metadata, NFT } from '@/utils/types';
 
 export interface Fastnear {
@@ -22,7 +23,7 @@ export interface NFTConsult {
 }
 
 export const accounts_nft = async (accountId: string): Promise<Fastnear> => {
-  const response = await fetch(`https://api.fastnear.com/v1/account/${accountId}/nft`);
+  const response = await fetch(`${network.fastNearApi}/v1/account/${accountId}/nft`);
   return await response.json();
 };
 
