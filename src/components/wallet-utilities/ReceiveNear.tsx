@@ -7,6 +7,8 @@ import { NearContext } from '../wallet-selector/WalletSelector';
 export const ReceiveNear = () => {
   const { signedAccountId } = useContext(NearContext);
 
+  if (!signedAccountId) return <Text> Sign in to see your NEAR account name </Text>;
+
   return (
     <Flex stack>
       <Text size="text-s">Copy and share your account ID to receive NEAR:</Text>
