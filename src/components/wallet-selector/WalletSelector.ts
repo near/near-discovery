@@ -19,7 +19,7 @@ import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import type { Context } from 'react';
 import { createContext } from 'react';
 
-import { networkId as defaultNetwork, signInContractId } from '@/config';
+import { networkId as defaultNetwork } from '@/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 import type { NetworkId } from '@/utils/types';
 
@@ -52,6 +52,8 @@ export class Wallet {
         setupMeteorWallet(),
         setupBitteWallet(),
         setupHereWallet(),
+        setupLedger(),
+        setupNearMobileWallet(),
         setupMyNearWallet(),
         setupSender(),
         setupMintbaseWallet(),
@@ -86,10 +88,8 @@ export class Wallet {
                 : 'https://dev.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
           },
           networkId: this.networkId,
-          signInContractId,
+          signInContractId: this.createAccessKeyFor || '',
         }) as any, // TODO: Refactor setupKeypom() to TS
-        setupLedger(),
-        setupNearMobileWallet(),
       ],
     });
 
@@ -190,23 +190,13 @@ export class Wallet {
   signAndSendTransactions = async ({ transactions }: { transactions: any[] }) => {
     const selectedWallet = await (await this.selector).wallet();
     const result = await selectedWallet.signAndSendTransactions({ transactions });
-
-    if (!result) {
-      throw new Error('Transaction failed');
-    } else {
-      return Promise.all(result.map(async (o) => providers.getTransactionLastResult(o)));
-    }
+    if (result) return Promise.all(result.map(async (o) => providers.getTransactionLastResult(o)));
   };
 
   signAndSendTransaction = async (transaction: any) => {
     const selectedWallet = await (await this.selector).wallet();
     const result = await selectedWallet.signAndSendTransaction(transaction);
-
-    if (!result) {
-      throw new Error(`Transaction ${JSON.stringify(transaction)} failed`);
-    } else {
-      return providers.getTransactionLastResult(result);
-    }
+    if (result) return providers.getTransactionLastResult(result);
   };
 
   getAccessKeys = async (accountId: string) => {
