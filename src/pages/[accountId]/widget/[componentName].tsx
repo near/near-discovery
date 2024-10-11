@@ -28,7 +28,9 @@ const ViewComponentPage: NextPageWithLayout = () => {
   }, [signedAccountId, componentProps, requestAuthentication]);
 
   useEffect(() => {
-    setComponentProps(router.query);
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    setComponentProps(params);
   }, [router.query]);
 
   return (
@@ -37,7 +39,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
         key={components.wrapper}
         src={components.wrapper}
         props={{
-          emitGatewayEvent: shouldPassGatewayEventProps(router.query.componentAccountId as string)
+          emitGatewayEvent: shouldPassGatewayEventProps(router.query.accountId as string)
             ? emitGatewayEvent
             : undefined,
           logOut: wallet?.signOut,
