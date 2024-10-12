@@ -40,7 +40,7 @@ const StyledCard = ({ href, title, description }: { href: string; title: string;
 const HomePage: NextPageWithLayout = () => {
   const [selectedTab, setTab] = useState('contracts');
   const [avgBlockTime, setAvgBlockTime] = useState('1.30');
-  const [avgTxPrice, setAvgTxPrice] = useState('< $0.01');
+  const [avgTxPrice, setAvgTxPrice] = useState('0.01');
   const [totalTx, setTotalTx] = useState('2,33');
   const [nearStats, setNearStats] = useState<NearBlocks>();
   const deviceType = useDeviceType();
@@ -49,6 +49,7 @@ const HomePage: NextPageWithLayout = () => {
     fetch('https://api.nearblocks.io/v1/stats')
       .then((response) => response.json())
       .then((data) => {
+        if (!data.stats) return;
         data = data.stats[0];
         setNearStats(data);
         setTotalTx((Number(data.total_txns) / 1_000_000_000).toFixed(2));
@@ -63,7 +64,7 @@ const HomePage: NextPageWithLayout = () => {
       const feesResponse = await fetch('https://pikespeak.ai/api/live/last-txs-fees');
       const feesData = await feesResponse.json();
 
-      const averageFee = (feesData * Number(nearStats.near_price)).toFixed(4);
+      const averageFee = (feesData * Number(nearStats.near_price)).toFixed(3);
       setAvgTxPrice(averageFee);
     };
     getAvrTx();

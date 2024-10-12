@@ -22,7 +22,19 @@ export const ExportFastAuthAccount = () => {
   const [secretKey, setSecretKey] = useState('');
   const [fastAuthAccountSignedIn, setFastAuthAccountSignedIn] = useState(false);
   const [privateKeyVisible, setPrivateKeyVisible] = useState(false);
+  const [enoughBalance, setEnoughBalance] = useState(false);
   const { wallet, signedAccountId } = useContext(NearContext);
+
+  useEffect(() => {
+    const balanceCheck = async () => {
+      if (!wallet || !signedAccountId) return;
+
+      const balance = await wallet.getBalance(signedAccountId);
+      setEnoughBalance(balance >= 0.001);
+    };
+
+    balanceCheck();
+  }, [wallet, signedAccountId]);
 
   useEffect(() => {
     const checkFastAuthAccount = async () => {
@@ -40,9 +52,7 @@ export const ExportFastAuthAccount = () => {
 
   const generateKey = async () => {
     try {
-      if (!signedAccountId || !wallet) {
-        throw new Error('Wallet has not initialized');
-      }
+      if (!wallet) throw new Error('Wallet has not initialized');
 
       setGeneratingKey(true);
 
@@ -65,6 +75,24 @@ export const ExportFastAuthAccount = () => {
 
       await wallet.signAndSendTransactions({ transactions: [addKeyTransaction] });
 
+      openToast({
+        type: 'info',
+        title: 'Checking for key',
+        description: 'We are checking if the key was added to your account, this can take up to 10 seconds',
+        duration: 5000,
+      });
+
+      let hasKey = false;
+
+      for (let i = 0; i < 5; i++) {
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        const accessKeys = await wallet.getAccessKeys(signedAccountId);
+        hasKey = accessKeys.some((key: any) => key.public_key === publicKey);
+        if (hasKey) break;
+      }
+
+      if (!hasKey) throw new Error('Failed to add access key');
+
       setSecretKey(keyPair.toString());
 
       openToast({
@@ -80,7 +108,7 @@ export const ExportFastAuthAccount = () => {
   };
 
   if (!fastAuthAccountSignedIn) {
-    return <Text>The export feature is only for FastAuth accounts. You are currently signed in with a wallet.</Text>;
+    return <Text>This tool allows to export accounts created with an email (also known as FastAuth accounts)</Text>;
   }
 
   return (
@@ -148,10 +176,10 @@ export const ExportFastAuthAccount = () => {
         </Card>
       ) : (
         <Button
-          disabled={!signedAccountId}
+          disabled={!signedAccountId || !enoughBalance}
           loading={generatingKey}
           onClick={generateKey}
-          label="Create Full Access Key"
+          label={enoughBalance ? 'Create Full Access Key' : 'Not enough balance (0.001 Ⓝ required)'}
           variant="affirmative"
         />
       )}
