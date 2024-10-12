@@ -1,6 +1,7 @@
-import type { FT } from '@/pages/tools';
+import { Button, Text } from '@near-pagoda/ui';
 
-import CommunityTools from './CommunityTools';
+import type { FT } from '@/utils/types';
+
 import CreateTokenForm from './CreateTokenForm';
 import ListToken from './ListToken';
 
@@ -8,10 +9,10 @@ const FungibleToken = ({ tokens, reload }: { tokens: FT[]; reload: (delay: numbe
   return (
     <>
       <CreateTokenForm reload={reload} />
-      <hr />
       <ListToken tokens={tokens} />
       <hr />
-      <CommunityTools />
+      <Text>For more advanced options please use tools created by the community:</Text>
+      <Button label="Token Homes" href="https://tkn.homes/" target="_blank" />
     </>
   );
 };
