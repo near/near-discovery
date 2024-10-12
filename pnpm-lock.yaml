@@ -138,8 +138,8 @@ importers:
         specifier: ^4.0.3
         version: 4.0.4(encoding@0.1.13)
       near-fastauth-wallet:
-        specifier: 2.0.1
-        version: 2.0.1(bufferutil@4.0.8)(date-fns@2.30.0)(encoding@0.1.13)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(utf-8-validate@5.0.10)
+        specifier: 2.0.4
+        version: 2.0.4(bufferutil@4.0.8)(date-fns@2.30.0)(encoding@0.1.13)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(utf-8-validate@5.0.10)
       near-social-vm:
         specifier: github:calebjacob/VM#dev
         version: https://codeload.github.com/calebjacob/VM/tar.gz/9ae4f62b37349d7dc9927f53b77f80bcceed1ecc(@babel/core@7.25.2)(@popperjs/core@2.11.8)(@types/react-dom@18.3.0)(@types/react@18.3.9)(bufferutil@4.0.8)(near-api-js@4.0.4(encoding@0.1.13))(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react-is@18.3.1)(react@18.3.1)(utf-8-validate@5.0.10)
@@ -4764,6 +4764,9 @@ packages:
   canonicalize@1.0.8:
     resolution: {integrity: sha512-0CNTVCLZggSh7bc5VkX5WWPWO+cyZbNd07IHIsSXLia/eAq+r836hgk+8BKoEh7949Mda87VUOitx5OddVj64A==}
 
+  canonicalize@2.0.0:
+    resolution: {integrity: sha512-ulDEYPv7asdKvqahuAY35c1selLdzDwHqugK92hfkzvlDCwXRRelDkR+Er33md/PtnpqHemgkuDPanZ4fiYZ8w==}
+
   capability@0.2.5:
     resolution: {integrity: sha512-rsJZYVCgXd08sPqwmaIqjAd5SUTfonV0z/gDJ8D6cN8wQphky1kkAYEqQ+hmDxTw7UihvBfjUVUSY+DBEe44jg==}
 
@@ -6480,6 +6483,9 @@ packages:
   js-sha3@0.8.0:
     resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==}
 
+  js-sha3@0.9.3:
+    resolution: {integrity: sha512-BcJPCQeLg6WjEx3FE591wVAevlli8lxsxm9/FzV4HXkV49TmBH38Yvrpce6fjbADGMKFrBMGTqrVz3qPIZ88Gg==}
+
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
 
@@ -6766,6 +6772,9 @@ packages:
 
   lodash.partition@4.6.0:
     resolution: {integrity: sha512-35L3dSF3Q6V1w5j6V3NhNlQjzsRDC/pYKCTdYTmwqSib+Q8ponkAmt/PwEOq3EmI38DSCl+SkIVwLd+uSlVdrg==}
+
+  lodash.pickby@4.6.0:
+    resolution: {integrity: sha512-AZV+GsS/6ckvPOVQPXSiFFacKvKB4kOQu6ynt9wz0F3LO4R9Ij4K1ddYsIytDpSgLz88JHd9P+oaLeej5/Sl7Q==}
 
   lodash.snakecase@4.1.1:
     resolution: {integrity: sha512-QZ1d4xoBHYUeuouhEq3lk3Uq7ldgyFXGBhg04+oRLnIz8o9T65Eh+8YdroUwn846zchkA9yDsDl5CVVaV2nqYw==}
@@ -7089,8 +7098,8 @@ packages:
   msgpackr@1.11.0:
     resolution: {integrity: sha512-I8qXuuALqJe5laEBYoFykChhSXLikZmUhccjGsPuSJ/7uPip2TJ7lwdIQwWSAi0jGZDXv4WOP8Qg65QZRuXxXw==}
 
-  multichain-tools@1.0.13:
-    resolution: {integrity: sha512-VDA/IgNBIAK045nAV4868PFNmN1/kNlkYcC5aEEFEH/EiLOb62gwiM0b2ayjgfFHcZmvNt2SCD79T8rEZMKOlw==}
+  multichain-tools@2.0.17:
+    resolution: {integrity: sha512-HJ0wrwJgfHiXFijjD/9nYjbQGgU1wvuUp3LxXv1Dc3vH0+Q0WeLL7kkVpoF9+bzO6eQNF3RzDRdwEVlcOcLROQ==}
 
   multiformats@9.9.0:
     resolution: {integrity: sha512-HoMUjhH9T8DDBNT+6xzkrd9ga/XiBI4xLr58LJACwK6G3HTOPeMz4nB4KJs33L2BelrIJa7P0VuNaVF3hMYfjg==}
@@ -7143,8 +7152,8 @@ packages:
   near-api-js@4.0.4:
     resolution: {integrity: sha512-IG+6NAMtn854palu/cIbVgey0OsIzllcajc3fbEbh7cb2pyPNMsfsBIO5WqsV+rY+7Tqr6lqYQ8f+4BHGUttyg==}
 
-  near-fastauth-wallet@2.0.1:
-    resolution: {integrity: sha512-bVtTzfI1p50lFjh25tpWLDJXbz8a1uKhKpk/5FOGXyg1tLUE5tGB8JchNxubKPnioMTojUhRfK3H5UHWlnCoOA==}
+  near-fastauth-wallet@2.0.4:
+    resolution: {integrity: sha512-Y4hFr8YsL71j5RfA4HlbVTT4kNYvgLjVYtROHkvEILwJNVOEXIVGLy2aFrHUnl49OqMMfvW4XN729VTUcoJdOA==}
 
   near-hd-key@1.2.1:
     resolution: {integrity: sha512-SIrthcL5Wc0sps+2e1xGj3zceEa68TgNZDLuCx0daxmfTP7sFTB3/mtE2pYhlFsCxWoMn+JfID5E1NlzvvbRJg==}
@@ -12487,13 +12496,15 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/cache@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))':
+  '@parcel/cache@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.13)
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/logger': 2.12.0
       '@parcel/utils': 2.12.0
       lmdb: 2.8.5
+    transitivePeerDependencies:
+      - '@swc/helpers'
 
   '@parcel/codeframe@2.12.0':
     dependencies:
@@ -12553,7 +12564,7 @@ snapshots:
   '@parcel/core@2.12.0(@swc/helpers@0.5.13)':
     dependencies:
       '@mischnic/json-sourcemap': 0.1.1
-      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
+      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/diagnostic': 2.12.0
       '@parcel/events': 2.12.0
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
@@ -12968,7 +12979,7 @@ snapshots:
 
   '@parcel/types@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)':
     dependencies:
-      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))
+      '@parcel/cache': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/diagnostic': 2.12.0
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.13))(@swc/helpers@0.5.13)
@@ -16646,6 +16657,8 @@ snapshots:
 
   canonicalize@1.0.8: {}
 
+  canonicalize@2.0.0: {}
+
   capability@0.2.5: {}
 
   cbor-extract@2.2.0:
@@ -17505,7 +17518,7 @@ snapshots:
       debug: 4.3.7(supports-color@5.5.0)
       enhanced-resolve: 5.17.1
       eslint: 8.57.1
-      eslint-module-utils: 2.11.1(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.30.0)(eslint@8.57.1))(eslint@8.57.1)
+      eslint-module-utils: 2.11.1(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       fast-glob: 3.3.2
       get-tsconfig: 4.8.1
       is-bun-module: 1.2.1
@@ -17518,7 +17531,7 @@ snapshots:
       - eslint-import-resolver-webpack
       - supports-color
 
-  eslint-module-utils@2.11.1(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.30.0)(eslint@8.57.1))(eslint@8.57.1):
+  eslint-module-utils@2.11.1(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1):
     dependencies:
       debug: 3.2.7
     optionalDependencies:
@@ -17540,7 +17553,7 @@ snapshots:
       doctrine: 2.1.0
       eslint: 8.57.1
       eslint-import-resolver-node: 0.3.9
-      eslint-module-utils: 2.11.1(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.30.0)(eslint@8.57.1))(eslint@8.57.1)
+      eslint-module-utils: 2.11.1(@typescript-eslint/parser@6.21.0(eslint@8.57.1)(typescript@5.6.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.3)(eslint@8.57.1)
       hasown: 2.0.2
       is-core-module: 2.15.1
       is-glob: 4.0.3
@@ -18697,6 +18710,8 @@ snapshots:
 
   js-sha3@0.8.0: {}
 
+  js-sha3@0.9.3: {}
+
   js-tokens@4.0.0: {}
 
   js-yaml@4.1.0:
@@ -18991,6 +19006,8 @@ snapshots:
   lodash.mergewith@4.6.2: {}
 
   lodash.partition@4.6.0: {}
+
+  lodash.pickby@4.6.0: {}
 
   lodash.snakecase@4.1.1: {}
 
@@ -19483,14 +19500,17 @@ snapshots:
     optionalDependencies:
       msgpackr-extract: 3.0.3
 
-  multichain-tools@1.0.13(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10):
+  multichain-tools@2.0.17(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10):
     dependencies:
       axios: 1.7.7
       bitcoinjs-lib: 6.1.6
       bn.js: 5.2.1
+      canonicalize: 2.0.0
       coinselect: 3.1.13
       elliptic: 6.5.7
       ethers: 6.13.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      js-sha3: 0.9.3
+      lodash.pickby: 4.6.0
       near-api-js: 3.0.4(encoding@0.1.13)
     transitivePeerDependencies:
       - bufferutil
@@ -19615,7 +19635,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  near-fastauth-wallet@2.0.1(bufferutil@4.0.8)(date-fns@2.30.0)(encoding@0.1.13)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(utf-8-validate@5.0.10):
+  near-fastauth-wallet@2.0.4(bufferutil@4.0.8)(date-fns@2.30.0)(encoding@0.1.13)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(utf-8-validate@5.0.10):
     dependencies:
       '@ant-design/icons': 5.5.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@near-js/transactions': 0.2.1
@@ -19625,7 +19645,7 @@ snapshots:
       antd: 5.21.1(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       class-variance-authority: 0.7.0
       js-sha256: 0.11.0
-      multichain-tools: 1.0.13(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
+      multichain-tools: 2.0.17(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10)
       near-api-js: 2.1.4(encoding@0.1.13)
       tslib: 2.7.0
       usehooks-ts: 2.16.0(react@18.3.1)
