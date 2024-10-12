@@ -160,6 +160,16 @@ export interface Keys {
 export interface Simple {
   lazy_register: null;
 }
+export type FT = {
+  contract_id: string;
+  balance: string;
+  metadata: {
+    decimals: number;
+    icon: string;
+    name: string;
+    symbol: string;
+  };
+};
 export interface NFT {
   contract_id: string;
   token_id: string;

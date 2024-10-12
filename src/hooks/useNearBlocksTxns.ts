@@ -64,35 +64,19 @@ const API_NEAR_BLOCKS = network.apiNearBlocks;
 const useNearBlocksTxns = (contract: string, method: string) => {
   const [transactions, setTransactions] = useState<Txns[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
   const { wallet, signedAccountId } = useContext(NearContext);
 
   const fetchTransactions = useCallback(
     async (delay = 0) => {
-      try {
-        await new Promise((resolve) => setTimeout(resolve, delay));
-        const response = await fetch(
-          `${API_NEAR_BLOCKS}/v1/account/${contract}/txns?from=${signedAccountId}&method=${method}`,
-        );
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        console.log(
-          'pepe grillo',
-          data.txns.filter((txn: Txns) => txn.outcomes.status),
-        );
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      const response = await fetch(
+        `${API_NEAR_BLOCKS}/v1/account/${contract}/txns?from=${signedAccountId}&method=${method}`,
+      );
+      if (!response.ok) return [];
+      const data = await response.json();
 
-        setTransactions(data.txns.filter((txn: Txns) => txn.outcomes.status));
-        setLoading(false);
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        } else {
-          setError('An unknown error occurred');
-        }
-        setLoading(false);
-      }
+      setTransactions(data.txns.filter((txn: Txns) => txn.outcomes.status));
+      setLoading(false);
     },
     [contract, method, signedAccountId],
   );
@@ -101,8 +85,7 @@ const useNearBlocksTxns = (contract: string, method: string) => {
     if (!wallet || !signedAccountId) return;
     fetchTransactions();
   }, [contract, method, wallet, signedAccountId, fetchTransactions]);
-  console.log('pepe grillo trans', transactions);
-  return { transactions, loading, error, reloadTokens: fetchTransactions };
+  return { transactions, loading, reloadTokens: fetchTransactions };
 };
 
 export default useNearBlocksTxns;
