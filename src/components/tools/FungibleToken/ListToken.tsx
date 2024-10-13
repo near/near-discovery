@@ -8,7 +8,7 @@ const ListToken = ({ tokens }: { tokens: FT[] }) => {
   return (
     <Accordion.Root type="multiple" style={{ borderRadius: '6px', boxShadow: '0 0 0 2px var(--violet5)' }}>
       <Accordion.Item value="tokens">
-        <Accordion.Trigger>Your tokens</Accordion.Trigger>
+        <Accordion.Trigger>Your Fungible Tokens</Accordion.Trigger>
         <Accordion.Content>
           {tokens.map((token) => {
             return (
