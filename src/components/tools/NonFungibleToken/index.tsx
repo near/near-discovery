@@ -9,7 +9,7 @@ const NonFungibleToken = ({ tokens, reload }: { tokens: NFT[]; reload: (delay: n
     <>
       <MintNft reload={reload} />
       <hr />
-      <ListToken tokens={tokens} />
+      <ListToken collections={tokens} />
       <hr />
       <CommunityTools />
     </>

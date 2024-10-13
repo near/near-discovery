@@ -62,14 +62,11 @@ const ToolsPage: NextPageWithLayout = () => {
     if (!tokens) return;
 
     const getNFTsForContract = async ({ contract_id }: { contract_id: string }) => {
-      const nfts = await wallet?.viewMethod({
+      return wallet?.viewMethod({
         contractId: contract_id,
         method: 'nft_tokens_for_owner',
         args: { account_id: signedAccountId },
       });
-      const ret: any = {};
-      ret[contract_id] = nfts;
-      return ret;
     };
 
     const fast_nfts = tokens.tokens;
@@ -79,7 +76,7 @@ const ToolsPage: NextPageWithLayout = () => {
       try {
         const nft_data = await getNFTsForContract(nft);
         const res: any = {};
-        res[nft] = nft_data;
+        res[nft.contract_id] = nft_data;
         nfts.push(res);
       } catch (e) {
         console.log(e);

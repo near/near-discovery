@@ -40,15 +40,12 @@ const ParasButton = styled(StyledButton)`
 const CommunityTools = () => {
   return (
     <>
-      <Text size="text-l" style={{ margin: '12px 0 0 0' }}>
-        Community tools
-      </Text>
-      <Text>For more advanced options use community tools:</Text>
+      <Text>For more advanced options please use tools created by the community:</Text>
       <MintbaseButton href="https://www.mintbase.xyz/" target="_blank">
-        <Image alt="Mintbase Logo" src={MintBase} width={85} />{' '}
+        <Image alt="Mintbase Logo" src={MintBase} height={20} />{' '}
       </MintbaseButton>
       <ParasButton href="https://paras.id/" target="_blank">
-        <Image alt="Paras Logo" src={Paras} width={85} />{' '}
+        <Image alt="Paras Logo" src={Paras} height={18} />{' '}
       </ParasButton>
     </>
   );

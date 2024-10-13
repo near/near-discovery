@@ -78,10 +78,10 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
         },
         account_id: signedAccountId,
       };
-      console.log(FACTORY_CONTRACT, args);
+
       const deposit = await wallet?.viewMethod({ contractId: FACTORY_CONTRACT, method: 'get_required', args });
 
-      setRequiredDeposit(Number(formatNearAmount(deposit)).toFixed(2));
+      setRequiredDeposit(formatNearAmount(deposit, 2));
 
       if (!actuallySubmit) return;
 
@@ -117,7 +117,6 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
     [wallet, signedAccountId, reload],
   );
 
-  // Call onSubmit with form data and false whenever form data changes
   useEffect(() => {
     onSubmit(formData, false);
   }, [onSubmit, formData]);
@@ -198,7 +197,7 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
           </div>
 
           <Button
-            label={`Create Token - Cost: ${requiredDeposit} N`}
+            label={signedAccountId ? `Create Token - Cost: ${requiredDeposit} N` : 'Please login'}
             variant="affirmative"
             type="submit"
             loading={isSubmitting}
