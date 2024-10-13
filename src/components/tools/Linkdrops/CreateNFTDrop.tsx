@@ -47,7 +47,6 @@ const CreateNFTDrop = ({
 
   const fillForm = (nft: NFT) => {
     setNftSelected(nft);
-    console.log(nft);
     setValue('tokenId', nft.token_id);
     setValue('contractId', nft.contract_id);
   };

@@ -5,12 +5,15 @@ import TokenDefault from '@/assets/images/token_default.svg';
 import type { FT } from '@/utils/types';
 
 const ListToken = ({ tokens }: { tokens: FT[] }) => {
+  // skip first
+  const display = tokens.slice(1);
+
   return (
     <Accordion.Root type="multiple" style={{ borderRadius: '6px', boxShadow: '0 0 0 2px var(--violet5)' }}>
       <Accordion.Item value="tokens">
         <Accordion.Trigger>Your Fungible Tokens</Accordion.Trigger>
         <Accordion.Content>
-          {tokens.map((token) => {
+          {display.map((token) => {
             return (
               <Flex justify="space-between" align="center" key={`ft-${token.metadata.symbol}`}>
                 <Text>{token.metadata.name}</Text>

@@ -94,23 +94,6 @@ type Props = {
   collapsed?: boolean;
 };
 
-const parseNftImage = (nft: any, owner_id: string, title: string | null = null): NFT => {
-  return {
-    contract_id: '',
-    approved_account_ids: [],
-    token_id: nft.tokenId as string,
-    owner_id,
-    metadata: {
-      title: title || owner_id,
-      media: nft.metadata?.media || '',
-      description: nft.metadata?.description || '',
-      copies: nft.metadata?.copies || '1',
-      reference: nft.metadata?.reference || '',
-      base_uri: nft.metadata?.base_uri || '',
-    },
-  };
-};
-
 export const UserDropdownMenu = ({ collapsed }: Props) => {
   const { wallet, signedAccountId } = useContext(NearContext);
   const router = useRouter();
@@ -124,16 +107,29 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
   }, [wallet]);
 
   const [profile, setProfile] = useState<any>({});
+  const [nftProfile, setNftProfile] = useState<NFT | null>(null);
 
   useEffect(() => {
     async function getProfile() {
-      const profile = await wallet?.viewMethod({
+      const socialProfile = await wallet?.viewMethod({
         contractId: signInContractId,
         method: 'get',
         args: { keys: [`${signedAccountId}/profile/**`] },
       });
-      if (!profile[signedAccountId]) return;
-      setProfile(profile[signedAccountId].profile);
+      if (!socialProfile[signedAccountId]) return;
+      const profile = socialProfile[signedAccountId].profile;
+      setProfile(profile);
+
+      try {
+        if (profile.image.nft) {
+          const nft = await wallet?.viewMethod({
+            contractId: profile.image.nft.contractId,
+            method: 'nft_token',
+            args: { token_id: profile.image.nft.tokenId },
+          });
+          setNftProfile(nft);
+        }
+      } catch (e) {}
     }
 
     async function getAvailableStorage() {
@@ -159,8 +155,8 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
           </Dropdown.Trigger>
         ) : (
           <Dropdown.Trigger>
-            {profile.image?.nft ? (
-              <NftImage nft={parseNftImage(profile.image.nft, signedAccountId, profile.name)} />
+            {nftProfile ? (
+              <NftImage nft={nftProfile} />
             ) : (
               <RoundedImage
                 src={`https://ipfs.near.social/ipfs/${profile?.image?.ipfs_cid}`}

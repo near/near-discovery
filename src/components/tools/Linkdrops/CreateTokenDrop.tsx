@@ -20,7 +20,6 @@ type FormData = {
 const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
 const formatBalance = (balance: string, decimals = 24) => {
-  console.log(balance, decimals);
   const balanceStr = balance.toString();
   const integerPart = balanceStr.slice(0, -decimals) || '0';
   const decimalPart = balanceStr.slice(-decimals).padStart(decimals, '0');

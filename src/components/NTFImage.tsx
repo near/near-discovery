@@ -19,7 +19,7 @@ export const NftImage: React.FC<NftImageProps> = ({ nft }) => {
       if (!wallet || !nft || !nft.token_id) return;
 
       const tokenMedia = nft.metadata?.media || '';
-      console.log('tokenMedia', tokenMedia);
+
       if (tokenMedia.startsWith('https://') || tokenMedia.startsWith('http://')) {
         setImageUrl(tokenMedia);
       } else if (tokenMedia.startsWith('data:image')) {
