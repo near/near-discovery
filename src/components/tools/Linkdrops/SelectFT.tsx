@@ -3,9 +3,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import NearIconSvg from '@/assets/images/near-icon.svg';
 import TokenDefault from '@/assets/images/token_default.svg';
-import type { Token } from '@/hooks/useTokens';
+import type { FT } from '@/utils/types';
 
 const SelectContainer = styled.div`
   position: relative;
@@ -58,28 +57,22 @@ const CurrencyInfo = styled.div`
   align-items: center;
 `;
 
-const nearCoin = {
-  contract_id: 'near',
-  symbol: 'NEAR',
-  icon: NearIconSvg,
-};
-
-const SelectFT = ({ tokens, setToken }: { tokens: Token[]; setToken: (token: any) => void }) => {
+const SelectFT = ({ tokens, setToken }: { tokens: FT[]; setToken: (token: any) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCurrency, setSelectedCurrency] = useState(nearCoin);
+  const [selectedCurrency, setSelectedCurrency] = useState(tokens[0]);
 
   return (
     <SelectContainer>
       <SelectButton onClick={() => setIsOpen(!isOpen)} type="button">
         <CurrencyInfo>
           <Image
-            src={selectedCurrency.icon || TokenDefault}
-            alt={selectedCurrency.symbol}
+            src={selectedCurrency.metadata?.icon || TokenDefault}
+            alt={selectedCurrency.metadata?.symbol}
             width={16}
             height={16}
             style={{ marginRight: '8px' }}
           />
-          <span>{selectedCurrency.symbol}</span>
+          <span>{selectedCurrency.metadata?.symbol}</span>
         </CurrencyInfo>
         <CaretDown />
       </SelectButton>
@@ -97,14 +90,14 @@ const SelectFT = ({ tokens, setToken }: { tokens: Token[]; setToken: (token: any
             >
               <CurrencyInfo>
                 <Image
-                  src={token.icon || TokenDefault}
-                  alt={token.symbol}
+                  src={token.metadata?.icon || TokenDefault}
+                  alt={token.metadata?.symbol}
                   width={16}
                   height={16}
                   style={{ marginRight: '8px' }}
                 />
                 <span>
-                  {token.contract_id} ({token.symbol})
+                  {token.contract_id} ({token.metadata?.symbol})
                 </span>
               </CurrencyInfo>
             </Option>

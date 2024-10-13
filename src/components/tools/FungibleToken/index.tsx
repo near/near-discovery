@@ -5,7 +5,7 @@ import type { FT } from '@/utils/types';
 import CreateTokenForm from './CreateTokenForm';
 import ListToken from './ListToken';
 
-const FungibleToken = ({ tokens, reload }: { tokens: FT[]; reload: (delay: number) => void }) => {
+const FungibleToken = ({ user_fts: tokens, reload }: { user_fts: FT[]; reload: (delay: number) => void }) => {
   return (
     <>
       <CreateTokenForm reload={reload} />

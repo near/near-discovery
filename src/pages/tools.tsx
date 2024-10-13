@@ -3,6 +3,7 @@ import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
+import NearIconSvg from '@/assets/images/near-icon.svg';
 import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
@@ -10,15 +11,26 @@ import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
-import type { FT, NextPageWithLayout, NFT } from '@/utils/types';
+import type { Collection, FT, NextPageWithLayout, NFT } from '@/utils/types';
+
+const NearToken: FT = {
+  contract_id: 'near',
+  balance: '0',
+  metadata: {
+    decimals: 24,
+    name: 'NEAR',
+    symbol: 'NEAR',
+    icon: NearIconSvg,
+  },
+};
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
   const { wallet, signedAccountId } = useContext(NearContext);
   const { drops, reloadLinkdrops } = useLinkdrops();
-  const [allFT, setAllFT] = useState<FT[]>([]);
-  const [allNFT, setAllNFT] = useState<NFT[]>([]);
+  const [allFT, setAllFT] = useState<FT[]>([NearToken]);
+  const [allNFT, setAllNFT] = useState<Collection[]>([]);
 
   const fetchTokens = useCallback(
     async (type: string) => {
@@ -43,7 +55,10 @@ const ToolsPage: NextPageWithLayout = () => {
 
     // parse FT
     const fast_fts = tokens.tokens.filter((token: any) => Number(token.balance) > 0);
-    const all_fts = [];
+
+    const balance = await wallet?.getBalance(signedAccountId);
+    NearToken.balance = balance;
+    const all_fts = [NearToken];
 
     for (const ft of fast_fts) {
       try {
@@ -55,18 +70,20 @@ const ToolsPage: NextPageWithLayout = () => {
     }
 
     setAllFT(all_fts);
-  }, [wallet, fetchTokens, setAllFT]);
+  }, [wallet, signedAccountId, fetchTokens, setAllFT]);
 
   const fetchNFT = useCallback(async () => {
     const tokens = await fetchTokens('nft');
     if (!tokens) return;
 
-    const getNFTsForContract = async ({ contract_id }: { contract_id: string }) => {
-      return wallet?.viewMethod({
+    const getNFTsForContract = async ({ contract_id }: { contract_id: string }): Promise<NFT[]> => {
+      let nfts = await wallet?.viewMethod({
         contractId: contract_id,
         method: 'nft_tokens_for_owner',
         args: { account_id: signedAccountId },
       });
+      nfts = nfts.map((nft: any) => ({ ...nft, contract_id }));
+      return nfts;
     };
 
     const fast_nfts = tokens.tokens;
@@ -120,15 +137,22 @@ const ToolsPage: NextPageWithLayout = () => {
               </Tabs.List>
 
               <Tabs.Content value="ft">
-                <FungibleToken tokens={allFT} reload={fetchFT} />
+                <FungibleToken user_fts={allFT} reload={fetchFT} />
               </Tabs.Content>
 
               <Tabs.Content value="nft">
-                <NonFungibleToken tokens={allNFT} reload={fetchNFT} />
+                <NonFungibleToken user_collections={allNFT} reload={fetchNFT} />
               </Tabs.Content>
 
               <Tabs.Content value="linkdrops">
-                <Linkdrops drops={drops} reload={reloadLinkdrops} />
+                <Linkdrops
+                  user_fts={allFT}
+                  user_collections={allNFT}
+                  drops={drops}
+                  reloadFT={fetchFT}
+                  reloadNFT={fetchNFT}
+                  reloadDrops={reloadLinkdrops}
+                />
               </Tabs.Content>
             </Tabs.Root>
           </Card>

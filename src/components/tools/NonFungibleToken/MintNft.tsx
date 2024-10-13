@@ -166,6 +166,7 @@ const MintNft = ({ reload }: { reload: (delay: number) => void }) => {
             type="submit"
             loading={isSubmitting}
             label={signedAccountId ? `Mint - Cost: ${requiredDeposit} N` : 'Please login'}
+            disabled={!signedAccountId}
           />
         </Flex>
       </Form>

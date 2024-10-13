@@ -7,6 +7,7 @@ import styled from 'styled-components';
 
 import { signInContractId } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import type { NFT } from '@/utils/types';
 
 import { NftImage } from '../NTFImage';
 import RoundedImage from '../RoundedImage';
@@ -93,26 +94,20 @@ type Props = {
   collapsed?: boolean;
 };
 
-const parseNftImage = (nft: any, owner_id: string, title: string | null = null) => {
+const parseNftImage = (nft: any, owner_id: string, title: string | null = null): NFT => {
   return {
-    contract_id: nft.contractId as string,
+    contract_id: '',
+    approved_account_ids: [],
     token_id: nft.tokenId as string,
     owner_id,
     metadata: {
       title: title || owner_id,
-      description: null,
-      media: null,
-      media_hash: null,
-      copies: null,
-      issued_at: null,
-      expires_at: null,
-      starts_at: null,
-      updated_at: null,
-      extra: null,
-      reference: null,
-      reference_hash: null,
+      media: nft.metadata?.media || '',
+      description: nft.metadata?.description || '',
+      copies: nft.metadata?.copies || '1',
+      reference: nft.metadata?.reference || '',
+      base_uri: nft.metadata?.base_uri || '',
     },
-    approved_account_ids: null,
   };
 };
 
