@@ -4,11 +4,16 @@ import CommunityTools from './CommunityTools';
 import ListToken from './ListToken';
 import MintNft from './MintNft';
 
-const NonFungibleToken = ({ tokens, reload }: { tokens: NFT[]; reload: (delay: number) => void }) => {
+const NonFungibleToken = ({
+  user_collections: tokens,
+  reload,
+}: {
+  user_collections: { [key: string]: NFT[] }[];
+  reload: (delay: number) => void;
+}) => {
   return (
     <>
       <MintNft reload={reload} />
-      <hr />
       <ListToken collections={tokens} />
       <hr />
       <CommunityTools />

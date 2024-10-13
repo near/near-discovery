@@ -36,20 +36,20 @@ const ImgCard = styled.div<{
 interface CarouselProps {
   nfts: NFT[];
   contractId?: string;
-  onSelect?: (contractId: string, tokenId: string) => void;
-  nftSelected?: string;
+  onSelect?: (nft: NFT) => void;
+  nftSelected?: NFT;
 }
 
-const empty = (contractId: string, tokenId: string) => {
-  console.log(contractId, tokenId);
+const empty = (nft: NFT) => {
+  console.log(nft);
 };
 
-const Carousel: React.FC<CarouselProps> = ({ nfts, onSelect = empty, nftSelected }) => {
+const Carousel: React.FC<CarouselProps> = ({ nfts, onSelect = empty, nftSelected }: CarouselProps) => {
   return (
     <CarouselContainer>
       {nfts.map((nft) => (
         <Tooltip key={`Carousel-${nft.token_id}`} content={nft.metadata.title} asChild>
-          <ImgCard onClick={() => onSelect(nft.contract_id, nft.token_id)} $selected={nftSelected === nft.token_id}>
+          <ImgCard onClick={() => onSelect(nft)} $selected={nftSelected === nft}>
             <NftImage nft={nft} />
           </ImgCard>
         </Tooltip>

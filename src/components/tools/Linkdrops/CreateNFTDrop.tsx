@@ -1,12 +1,12 @@
-import { Accordion, Button, Flex, Form, Input, openToast } from '@near-pagoda/ui';
+import { Accordion, Button, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
 import { parseNearAmount } from 'near-api-js/lib/utils/format';
 import { useContext, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import { network } from '@/config';
-import useNFT from '@/hooks/useNFT';
 import generateAndStore from '@/utils/linkdrops';
+import type { Collection, NFT } from '@/utils/types';
 
 import { NearContext } from '../../wallet-selector/WalletSelector';
 import Carousel from '../Shared/Carousel';
@@ -24,7 +24,13 @@ type FormData = {
 const getDeposit = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
 
-const CreateNFTDrop = ({ reload }: { reload: (delay: number) => void }) => {
+const CreateNFTDrop = ({
+  user_collections,
+  reload,
+}: {
+  user_collections: Collection[];
+  reload: (delay: number) => void;
+}) => {
   const { wallet, signedAccountId } = useContext(NearContext);
   const {
     register,
@@ -37,18 +43,16 @@ const CreateNFTDrop = ({ reload }: { reload: (delay: number) => void }) => {
     },
   });
 
-  const [nftSelected, setNftSelected] = useState('');
+  const [nftSelected, setNftSelected] = useState<NFT | undefined>(undefined);
 
-  const contracts = useNFT();
-
-  const fillForm = (origin: string, token_id: string) => {
-    setNftSelected(token_id);
-    setValue('tokenId', token_id);
-    setValue('contractId', origin);
+  const fillForm = (nft: NFT) => {
+    setNftSelected(nft);
+    console.log(nft);
+    setValue('tokenId', nft.token_id);
+    setValue('contractId', nft.contract_id);
   };
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    if (!wallet) throw new Error('Wallet has not initialized yet');
     const dropId = Date.now().toString();
     const args = {
       deposit_per_use: '0',
@@ -63,55 +67,66 @@ const CreateNFTDrop = ({ reload }: { reload: (delay: number) => void }) => {
       },
     };
 
-    await wallet.signAndSendTransactions({
-      transactions: [
-        {
-          receiverId: KEYPOM_CONTRACT_ADDRESS,
-          actions: [
-            {
-              type: 'FunctionCall',
-              params: {
-                methodName: 'create_drop',
-                args,
-                gas: '300000000000000',
-                deposit: getDeposit(1, 1),
-              },
-            },
-          ],
-        },
-        {
-          receiverId: data.contractId,
-          actions: [
-            {
-              type: 'FunctionCall',
-              params: {
-                methodName: 'nft_transfer_call',
-                args: {
-                  receiver_id: KEYPOM_CONTRACT_ADDRESS,
-                  token_id: data.tokenId,
-                  msg: dropId,
+    try {
+      await wallet?.signAndSendTransactions({
+        transactions: [
+          {
+            receiverId: KEYPOM_CONTRACT_ADDRESS,
+            actions: [
+              {
+                type: 'FunctionCall',
+                params: {
+                  methodName: 'create_drop',
+                  args,
+                  gas: '300000000000000',
+                  deposit: getDeposit(1, 1),
                 },
-                gas: '300000000000000',
-                deposit: 1,
               },
-            },
-          ],
-        },
-      ],
-    });
+            ],
+          },
+          {
+            receiverId: data.contractId,
+            actions: [
+              {
+                type: 'FunctionCall',
+                params: {
+                  methodName: 'nft_transfer_call',
+                  args: {
+                    receiver_id: KEYPOM_CONTRACT_ADDRESS,
+                    token_id: data.tokenId,
+                    msg: dropId,
+                  },
+                  gas: '300000000000000',
+                  deposit: 1,
+                },
+              },
+            ],
+          },
+        ],
+      });
 
-    openToast({
-      type: 'success',
-      title: 'Form Submitted',
-      description: 'Your form has been submitted successfully',
-      duration: 5000,
-    });
+      openToast({
+        type: 'success',
+        title: 'Linkdrop Created',
+        description: 'Your drop has been created',
+        duration: 5000,
+      });
 
-    reload(1000);
+      reload(1000);
+    } catch (error) {
+      console.error(error);
+
+      openToast({
+        type: 'error',
+        title: 'Error',
+        description: 'Failed to create the drop',
+        duration: 5000,
+      });
+    }
   };
 
   return (
-    <>
+    <Flex stack style={{ border: '1px solid var(--violet3)', padding: '1rem', borderRadius: '10px' }}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
           <Input
@@ -119,20 +134,26 @@ const CreateNFTDrop = ({ reload }: { reload: (delay: number) => void }) => {
             placeholder="NEARCon Token Giveaway"
             error={errors.dropName?.message}
             {...register('dropName', { required: 'Token Drop name is required' })}
+            disabled={!signedAccountId}
           />
-          <Accordion.Root type="multiple">
-            {contracts.map((nfts, index) => (
-              <Accordion.Item value={index.toString()} key={`accordion-${nfts[0].contract_id}`}>
-                <Accordion.Trigger>{nfts[0].contract_id}</Accordion.Trigger>
-                <Accordion.Content>
-                  <Carousel nfts={nfts} onSelect={fillForm} nftSelected={nftSelected} />
-                </Accordion.Content>
-              </Accordion.Item>
-            ))}
-          </Accordion.Root>
+          <Flex stack gap="s">
+            <Text> Please select one of your NFTs to drop:</Text>
+            <Accordion.Root type="multiple" style={{ margin: 0 }}>
+              {user_collections.map((collection: Collection) =>
+                Object.entries(collection).map(([contract, nfts]) => (
+                  <Accordion.Item value={contract} key={`accordion-${contract}`}>
+                    <Accordion.Trigger>{contract}</Accordion.Trigger>
+                    <Accordion.Content>
+                      <Carousel nfts={nfts} onSelect={fillForm} nftSelected={nftSelected} />
+                    </Accordion.Content>
+                  </Accordion.Item>
+                )),
+              )}
+            </Accordion.Root>
+          </Flex>
           <Input
             label="NFT contract address"
-            placeholder="Enter a NFT contract address"
+            placeholder="Select a Token"
             disabled
             error={errors.contractId?.message}
             {...register('contractId', {
@@ -141,7 +162,7 @@ const CreateNFTDrop = ({ reload }: { reload: (delay: number) => void }) => {
           />
           <Input
             label="Token ID"
-            placeholder="Enter a Token ID"
+            placeholder="Select a Token"
             disabled
             error={errors.tokenId?.message}
             {...register('tokenId', {
@@ -149,10 +170,16 @@ const CreateNFTDrop = ({ reload }: { reload: (delay: number) => void }) => {
             })}
           />
 
-          <Button label="Create links" variant="affirmative" type="submit" loading={isSubmitting} />
+          <Button
+            label="Create Drop"
+            variant="affirmative"
+            type="submit"
+            loading={isSubmitting}
+            disabled={!signedAccountId}
+          />
         </Flex>
       </Form>
-    </>
+    </Flex>
   );
 };
 

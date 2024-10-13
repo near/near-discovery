@@ -19,7 +19,7 @@ import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import type { Context } from 'react';
 import { createContext } from 'react';
 
-import { networkId as defaultNetwork } from '@/config';
+import { networkId as defaultNetwork, signInContractId } from '@/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 import type { NetworkId } from '@/utils/types';
 
@@ -52,8 +52,6 @@ export class Wallet {
         setupMeteorWallet(),
         setupBitteWallet(),
         setupHereWallet(),
-        setupLedger(),
-        setupNearMobileWallet(),
         setupMyNearWallet(),
         setupSender(),
         setupMintbaseWallet(),
@@ -88,8 +86,10 @@ export class Wallet {
                 : 'https://dev.near.org/#instant-url/ACCOUNT_ID/SECRET_KEY/MODULE_ID',
           },
           networkId: this.networkId,
-          signInContractId: this.createAccessKeyFor || '',
+          signInContractId,
         }) as any, // TODO: Refactor setupKeypom() to TS
+        setupLedger(),
+        setupNearMobileWallet(),
       ],
     });
 
@@ -172,7 +172,7 @@ export class Wallet {
     return providers.getTransactionLastResult(transaction);
   };
 
-  getBalance = async (accountId: string, format = true) => {
+  getBalance = async (accountId: string, format = false) => {
     const walletSelector = await this.selector;
     const { network } = walletSelector.options;
     const provider = new providers.JsonRpcProvider({ url: network.nodeUrl });
@@ -193,14 +193,7 @@ export class Wallet {
 
   signAndSendTransactions = async ({ transactions }: { transactions: any[] }) => {
     const selectedWallet = await (await this.selector).wallet();
-    const result = await selectedWallet.signAndSendTransactions({ transactions });
-    if (result) return Promise.all(result.map(async (o) => providers.getTransactionLastResult(o)));
-  };
-
-  signAndSendTransaction = async (transaction: any) => {
-    const selectedWallet = await (await this.selector).wallet();
-    const result = await selectedWallet.signAndSendTransaction(transaction);
-    if (result) return providers.getTransactionLastResult(result);
+    return selectedWallet.signAndSendTransactions({ transactions });
   };
 
   getAccessKeys = async (accountId: string) => {
