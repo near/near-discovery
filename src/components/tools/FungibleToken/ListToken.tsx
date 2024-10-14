@@ -1,31 +1,9 @@
 import { Accordion, Table, Text, Tooltip } from '@near-pagoda/ui';
-import { CircleWavyCheck, CircleWavyWarning } from '@phosphor-icons/react';
+import { CircleWavyCheck, CircleWavyQuestion } from '@phosphor-icons/react';
 import Image from 'next/image';
-import { useContext, useEffect, useState } from 'react';
 
 import TokenDefault from '@/assets/images/token_default.svg';
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import type { FT } from '@/utils/types';
-
-const Untrusted = ({ contract_id }: { contract_id: string }) => {
-  const [clicks, setClicks] = useState(0);
-  const { wallet } = useContext(NearContext);
-  const count = () => {
-    setClicks(clicks + 1);
-  };
-
-  useEffect(() => {
-    if (clicks === 5)
-      wallet?.callMethod({
-        contractId: contract_id,
-        method: 'storage_unregister',
-        args: { force: true },
-        deposit: '1',
-      });
-  }, [clicks, contract_id, wallet]);
-
-  return <CircleWavyWarning onClick={count} color={'var(--red11)'} style={{ minWidth: '1rem' }} />;
-};
 
 const ListToken = ({ tokens, loading }: { tokens: FT[]; loading: boolean }) => {
   // skip first (NEAR Token)
@@ -36,12 +14,21 @@ const ListToken = ({ tokens, loading }: { tokens: FT[]; loading: boolean }) => {
   return (
     <Accordion.Root type="multiple" style={{ borderRadius: '6px', boxShadow: '0 0 0 2px var(--violet5)' }}>
       <Accordion.Item value="tokens">
-        <Accordion.Trigger>Your Fungible Tokens</Accordion.Trigger>
+        <Accordion.Trigger>All Your Fungible Tokens</Accordion.Trigger>
         <Accordion.Content>
           {display.length === 0 ? (
             <Text> You have no tokens </Text>
           ) : (
             <Table.Root>
+              <Table.Head sticky={false}>
+                <Table.Cell>Icon</Table.Cell>
+                <Table.Cell>Name</Table.Cell>
+                <Table.Cell>Contract</Table.Cell>
+                <Table.Cell align="right">Balance</Table.Cell>
+                <Table.Cell>
+                  <CircleWavyCheck color="#7c3aed" />
+                </Table.Cell>
+              </Table.Head>
               <Table.Body>
                 {display.map((token) => {
                   return (
@@ -57,29 +44,25 @@ const ListToken = ({ tokens, loading }: { tokens: FT[]; loading: boolean }) => {
                       </Table.Cell>
 
                       <Table.Cell>
-                        {' '}
-                        <Text clampLines={1}>
-                          {token.metadata.symbol} ({token.contract_id}){' '}
-                        </Text>
-                      </Table.Cell>
-                      <Table.Cell align="right">
-                        {' '}
-                        {(Number(token.balance) / Number(Math.pow(10, Number(token.metadata.decimals)))).toFixed(
-                          2,
-                        )}{' '}
+                        <Text clampLines={1}>{token.metadata.symbol}</Text>
                       </Table.Cell>
                       <Table.Cell>
-                        {' '}
+                        <Text clampLines={1}>{token.contract_id}</Text>
+                      </Table.Cell>
+                      <Table.Cell align="right">
+                        {(Number(token.balance) / Number(Math.pow(10, Number(token.metadata.decimals)))).toFixed(2)}
+                      </Table.Cell>
+                      <Table.Cell>
                         {token.verified ? (
-                          <Tooltip content="Trusted">
+                          <Tooltip content="Verified Token">
                             <span>
                               <CircleWavyCheck color="#7c3aed" style={{ minWidth: '1rem' }} />
                             </span>
                           </Tooltip>
                         ) : (
-                          <Tooltip content="Not Trusted">
+                          <Tooltip content="Unverified Token">
                             <span>
-                              <Untrusted contract_id={token.contract_id} />
+                              <CircleWavyQuestion style={{ minWidth: '1rem' }} />
                             </span>
                           </Tooltip>
                         )}

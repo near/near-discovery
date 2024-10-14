@@ -48,6 +48,18 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
   const { wallet, signedAccountId } = useContext(NearContext);
   const [requiredDeposit, setRequiredDeposit] = useState('0');
 
+  const symbolAvailable = useCallback(
+    async (symbol: string) => {
+      try {
+        await wallet?.getBalance(`${symbol}.${FACTORY_CONTRACT}`);
+        return `${symbol}.${FACTORY_CONTRACT} already exists`;
+      } catch {
+        return true;
+      }
+    },
+    [wallet],
+  );
+
   // Watch all form fields
   const formData = watch();
   const onSubmit = useCallback(
@@ -132,6 +144,32 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
         <Flex stack gap="l" style={{ border: '1px solid var(--violet3)', padding: '1rem', borderRadius: '10px' }}>
           <Grid columns="1fr 1fr" columnsTablet="1fr" columnsPhone="1fr">
             <Input
+              label="Token Name"
+              placeholder="e.g. Test Token"
+              error={errors.name?.message}
+              {...register('name', { required: 'Token name is required' })}
+              disabled={!signedAccountId}
+            />
+            <Controller
+              control={control}
+              name="symbol"
+              rules={{
+                required: 'Symbol is required',
+                validate: symbolAvailable,
+              }}
+              render={({ field, fieldState }) => (
+                <Input
+                  label="Token Symbol"
+                  placeholder="e.g. TEST"
+                  error={fieldState.error?.message}
+                  {...field}
+                  disabled={!signedAccountId}
+                />
+              )}
+            />
+          </Grid>
+          <Grid columns="1fr 1fr" columnsTablet="1fr" columnsPhone="1fr">
+            <Input
               label="Total Supply"
               placeholder="e.g. 1000"
               error={errors.total_supply?.message}
@@ -149,22 +187,6 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
                 min: { value: 0, message: 'Decimals must be non-negative' },
                 max: { value: 24, message: 'Decimals must be 24 or less' },
               })}
-              disabled={!signedAccountId}
-            />
-          </Grid>
-          <Grid columns="1fr 1fr" columnsTablet="1fr" columnsPhone="1fr">
-            <Input
-              label="Token Name"
-              placeholder="e.g. Test Token"
-              error={errors.name?.message}
-              {...register('name', { required: 'Token name is required' })}
-              disabled={!signedAccountId}
-            />
-            <Input
-              label="Token Symbol"
-              placeholder="e.g. TEST"
-              error={errors.symbol?.message}
-              {...register('symbol', { required: 'Token symbol is required' })}
               disabled={!signedAccountId}
             />
           </Grid>

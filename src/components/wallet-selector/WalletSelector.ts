@@ -185,9 +185,9 @@ export class Wallet {
     });
     // return amount on NEAR
     if (format) {
-      return account.amount ? Number(utils.format.formatNearAmount(account.amount)) : 0;
+      return account.amount ? utils.format.formatNearAmount(account.amount) : '0';
     } else {
-      return account.amount || 0;
+      return account.amount || '0';
     }
   };
 
