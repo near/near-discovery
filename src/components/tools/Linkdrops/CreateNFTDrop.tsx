@@ -21,8 +21,7 @@ type FormData = {
   contractId: string;
 };
 
-const getDeposit = (amountPerLink: number, numberLinks: number) =>
-  parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
+const getDeposit = (numberLinks: number) => parseNearAmount((0.0426 * numberLinks).toString());
 
 const CreateNFTDrop = ({
   user_collections,
@@ -54,7 +53,7 @@ const CreateNFTDrop = ({
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const dropId = Date.now().toString();
     const args = {
-      deposit_per_use: '0',
+      deposit_per_use: '2840000000000000000000',
       drop_id: dropId,
       metadata: JSON.stringify({
         dropName: data.dropName,
@@ -78,7 +77,7 @@ const CreateNFTDrop = ({
                   methodName: 'create_drop',
                   args,
                   gas: '300000000000000',
-                  deposit: getDeposit(1, 1),
+                  deposit: getDeposit(1),
                 },
               },
             ],

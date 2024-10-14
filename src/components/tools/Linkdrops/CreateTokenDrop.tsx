@@ -33,7 +33,11 @@ const parseAmount = (amount: string, decimals: number) => {
   return BigInt(integerPart + decimalPart.padEnd(decimals, '0'));
 };
 
-const getDeposit = (amountPerLink: number, numberLinks: number) =>
+const depositForFT = (numberLinks: number) => {
+  return parseNearAmount((0.0426 * numberLinks).toString());
+};
+
+const depositForNear = (amountPerLink: number, numberLinks: number) =>
   parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
 
 const CreateTokenDrop = ({ user_fts, reload }: { user_fts: FT[]; reload: (delay: number) => void }) => {
@@ -86,7 +90,7 @@ const CreateTokenDrop = ({ user_fts, reload }: { user_fts: FT[]; reload: (delay:
               methodName: 'create_drop',
               args,
               gas: '300000000000000',
-              deposit: getDeposit(isFTDrop ? 0 : data.amountPerLink, data.numberLinks),
+              deposit: isFTDrop ? depositForFT(data.numberLinks) : depositForNear(data.amountPerLink, data.numberLinks),
             },
           },
         ],

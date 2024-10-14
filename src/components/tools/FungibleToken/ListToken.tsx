@@ -9,14 +9,14 @@ const ListToken = ({ tokens, loading }: { tokens: FT[]; loading: boolean }) => {
   // skip first (NEAR Token)
   const display = tokens.slice(1);
 
-  if (loading) return <Text> Loading your tokens... </Text>;
-
   return (
     <Accordion.Root type="multiple" style={{ borderRadius: '6px', boxShadow: '0 0 0 2px var(--violet5)' }}>
       <Accordion.Item value="tokens">
         <Accordion.Trigger>All Your Fungible Tokens</Accordion.Trigger>
         <Accordion.Content>
-          {display.length === 0 ? (
+          {loading ? (
+            <Text> Loading your tokens... </Text>
+          ) : display.length === 0 ? (
             <Text> You have no tokens </Text>
           ) : (
             <Table.Root>
