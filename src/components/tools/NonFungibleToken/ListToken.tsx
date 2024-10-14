@@ -16,7 +16,7 @@ const ListToken = ({ loading, collections }: { loading: boolean; collections: Co
   return (
     <Accordion.Root type="multiple" style={{ borderRadius: '6px', boxShadow: '0 0 0 2px var(--violet5)' }}>
       <Accordion.Item value="one">
-        <Accordion.Trigger>Your Non-Fungibles Tokens</Accordion.Trigger>
+        <Accordion.Trigger>All Your Non-Fungibles Tokens</Accordion.Trigger>
         <Accordion.Content>
           {collections.length === 0 && <Text> You have no tokens </Text>}
           {collections.map((collection) =>
