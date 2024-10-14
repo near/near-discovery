@@ -3,44 +3,15 @@ import { parseNearAmount } from 'near-api-js/lib/utils/format';
 import { useContext, useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-import styled from 'styled-components';
 
-import { NftImage } from '@/components/NTFImage';
-import type { NFT } from '@/hooks/useNFT';
-import useNFT from '@/hooks/useNFT';
+import { network } from '@/config';
 import generateAndStore from '@/utils/linkdrops';
+import type { Collection, NFT } from '@/utils/types';
 
 import { NearContext } from '../../wallet-selector/WalletSelector';
+import Carousel from '../Shared/Carousel';
 
-const CarouselContainer = styled.div`
-  display: flex;
-  overflow-x: auto;
-  width: 100%;
-  scrollbar-width: thin;
-  &::-webkit-scrollbar {
-    height: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.3);
-    border-radius: 4px;
-  }
-`;
-
-const ImgCard = styled.div<{
-  selected: boolean;
-}>`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 8px;
-  margin: 4px;
-  border-radius: 6px;
-  cursor: pointer;
-  border: ${(p) => (p.selected ? 'solid 1px #878782' : '')};
-`;
-
-const KEYPOM_CONTRACT_ADDRESS = 'v2.keypom.near';
+const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
 type FormData = {
   dropName: string;
@@ -50,17 +21,15 @@ type FormData = {
   contractId: string;
 };
 
-const parseToNFTimage = (nft: NFT, origin: string) => {
-  return {
-    contractId: origin,
-    tokenId: nft.token_id,
-  };
-};
+const getDeposit = (numberLinks: number) => parseNearAmount((0.0426 * numberLinks).toString());
 
-const getDeposit = (amountPerLink: number, numberLinks: number) =>
-  parseNearAmount(((0.0426 + amountPerLink) * numberLinks).toString());
-
-const CreateNFTDrop = () => {
+const CreateNFTDrop = ({
+  user_collections,
+  reload,
+}: {
+  user_collections: Collection[];
+  reload: (delay: number) => void;
+}) => {
   const { wallet, signedAccountId } = useContext(NearContext);
   const {
     register,
@@ -73,20 +42,18 @@ const CreateNFTDrop = () => {
     },
   });
 
-  const [nftSelected, setNftSelected] = useState('');
+  const [nftSelected, setNftSelected] = useState<NFT | undefined>(undefined);
 
-  const { tokens } = useNFT();
-
-  const fillForm = (origin: string, nft: NFT) => () => {
-    setNftSelected(nft.token_id);
+  const fillForm = (nft: NFT) => {
+    setNftSelected(nft);
     setValue('tokenId', nft.token_id);
-    setValue('contractId', origin);
+    setValue('contractId', nft.contract_id);
   };
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    if (!wallet) throw new Error('Wallet has not initialized yet');
     const dropId = Date.now().toString();
     const args = {
-      deposit_per_use: '0',
+      deposit_per_use: '2840000000000000000000',
       drop_id: dropId,
       metadata: JSON.stringify({
         dropName: data.dropName,
@@ -98,53 +65,66 @@ const CreateNFTDrop = () => {
       },
     };
 
-    await wallet.signAndSendTransactions({
-      transactions: [
-        {
-          receiverId: KEYPOM_CONTRACT_ADDRESS,
-          actions: [
-            {
-              type: 'FunctionCall',
-              params: {
-                methodName: 'create_drop',
-                args,
-                gas: '300000000000000',
-                deposit: getDeposit(1, 1),
-              },
-            },
-          ],
-        },
-        {
-          receiverId: data.contractId,
-          actions: [
-            {
-              type: 'FunctionCall',
-              params: {
-                methodName: 'nft_transfer_call',
-                args: {
-                  receiver_id: KEYPOM_CONTRACT_ADDRESS,
-                  token_id: data.tokenId,
-                  msg: dropId,
+    try {
+      await wallet?.signAndSendTransactions({
+        transactions: [
+          {
+            receiverId: KEYPOM_CONTRACT_ADDRESS,
+            actions: [
+              {
+                type: 'FunctionCall',
+                params: {
+                  methodName: 'create_drop',
+                  args,
+                  gas: '300000000000000',
+                  deposit: getDeposit(1),
                 },
-                gas: '300000000000000',
-                deposit: 1,
               },
-            },
-          ],
-        },
-      ],
-    });
+            ],
+          },
+          {
+            receiverId: data.contractId,
+            actions: [
+              {
+                type: 'FunctionCall',
+                params: {
+                  methodName: 'nft_transfer_call',
+                  args: {
+                    receiver_id: KEYPOM_CONTRACT_ADDRESS,
+                    token_id: data.tokenId,
+                    msg: dropId,
+                  },
+                  gas: '300000000000000',
+                  deposit: 1,
+                },
+              },
+            ],
+          },
+        ],
+      });
 
-    openToast({
-      type: 'success',
-      title: 'Form Submitted',
-      description: 'Your form has been submitted successfully',
-      duration: 5000,
-    });
+      openToast({
+        type: 'success',
+        title: 'Linkdrop Created',
+        description: 'Your drop has been created',
+        duration: 5000,
+      });
+
+      reload(1000);
+    } catch (error) {
+      console.error(error);
+
+      openToast({
+        type: 'error',
+        title: 'Error',
+        description: 'Failed to create the drop',
+        duration: 5000,
+      });
+    }
   };
+
   return (
-    <>
-      <Text size="text-l">NFT Drop</Text>
+    <Flex stack style={{ border: '1px solid var(--violet3)', padding: '1rem', borderRadius: '10px' }}>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Flex stack gap="l">
           <Input
@@ -152,36 +132,26 @@ const CreateNFTDrop = () => {
             placeholder="NEARCon Token Giveaway"
             error={errors.dropName?.message}
             {...register('dropName', { required: 'Token Drop name is required' })}
+            disabled={!signedAccountId}
           />
-          <Accordion.Root type="multiple">
-            {tokens.map((token, index) => {
-              return (
-                <Accordion.Item value={index.toString()} key={`accordion-${token.origin}`}>
-                  <Accordion.Trigger>{token.origin}</Accordion.Trigger>
-
-                  <Accordion.Content>
-                    <CarouselContainer>
-                      {token.nfts.map((nft) => {
-                        return (
-                          <ImgCard
-                            key={`Carousel-${nft.token_id}`}
-                            onClick={fillForm(token.origin, nft)}
-                            selected={nftSelected === nft.token_id}
-                          >
-                            <NftImage nft={parseToNFTimage(nft, token.origin)} alt={nft.metadata.title} />
-                            <Text>{nft.metadata.title}</Text>
-                          </ImgCard>
-                        );
-                      })}
-                    </CarouselContainer>
-                  </Accordion.Content>
-                </Accordion.Item>
-              );
-            })}
-          </Accordion.Root>
+          <Flex stack gap="s">
+            <Text> Please select one of your NFTs to drop:</Text>
+            <Accordion.Root type="multiple" style={{ margin: 0 }}>
+              {user_collections.map((collection: Collection) =>
+                Object.entries(collection).map(([contract, nfts]) => (
+                  <Accordion.Item value={contract} key={`accordion-${contract}`}>
+                    <Accordion.Trigger>{contract}</Accordion.Trigger>
+                    <Accordion.Content>
+                      <Carousel nfts={nfts} onSelect={fillForm} nftSelected={nftSelected} />
+                    </Accordion.Content>
+                  </Accordion.Item>
+                )),
+              )}
+            </Accordion.Root>
+          </Flex>
           <Input
             label="NFT contract address"
-            placeholder="Enter a NFT contract address"
+            placeholder="Select a Token"
             disabled
             error={errors.contractId?.message}
             {...register('contractId', {
@@ -190,7 +160,7 @@ const CreateNFTDrop = () => {
           />
           <Input
             label="Token ID"
-            placeholder="Enter a Token ID"
+            placeholder="Select a Token"
             disabled
             error={errors.tokenId?.message}
             {...register('tokenId', {
@@ -198,10 +168,16 @@ const CreateNFTDrop = () => {
             })}
           />
 
-          <Button label="Create links" variant="affirmative" type="submit" loading={isSubmitting} />
+          <Button
+            label="Create Drop"
+            variant="affirmative"
+            type="submit"
+            loading={isSubmitting}
+            disabled={!signedAccountId}
+          />
         </Flex>
       </Form>
-    </>
+    </Flex>
   );
 };
 

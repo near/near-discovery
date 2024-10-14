@@ -7,8 +7,10 @@ import styled from 'styled-components';
 
 import { signInContractId } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
+import type { NFT } from '@/utils/types';
 
 import { NftImage } from '../NTFImage';
+import RoundedImage from '../RoundedImage';
 import { NearContext } from '../wallet-selector/WalletSelector';
 
 const Wrapper = styled.div`
@@ -105,16 +107,29 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
   }, [wallet]);
 
   const [profile, setProfile] = useState<any>({});
+  const [nftProfile, setNftProfile] = useState<NFT | null>(null);
 
   useEffect(() => {
     async function getProfile() {
-      const profile = await wallet?.viewMethod({
-        contractId: 'social.near',
+      const socialProfile = await wallet?.viewMethod({
+        contractId: signInContractId,
         method: 'get',
         args: { keys: [`${signedAccountId}/profile/**`] },
       });
-      if (!profile[signedAccountId]) return;
-      setProfile(profile[signedAccountId].profile);
+      if (!socialProfile[signedAccountId]) return;
+      const profile = socialProfile[signedAccountId].profile;
+      setProfile(profile);
+
+      try {
+        if (profile.image.nft) {
+          const nft = await wallet?.viewMethod({
+            contractId: profile.image.nft.contractId,
+            method: 'nft_token',
+            args: { token_id: profile.image.nft.tokenId },
+          });
+          setNftProfile(nft);
+        }
+      } catch (e) {}
     }
 
     async function getAvailableStorage() {
@@ -140,11 +155,14 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
           </Dropdown.Trigger>
         ) : (
           <Dropdown.Trigger>
-            <NftImage
-              nft={profile.image?.nft}
-              ipfs_cid={profile.image?.ipfs_cid}
-              alt={profile.name || signedAccountId}
-            />
+            {nftProfile ? (
+              <NftImage nft={nftProfile} />
+            ) : (
+              <RoundedImage
+                src={`https://ipfs.near.social/ipfs/${profile?.image?.ipfs_cid}`}
+                alt={profile.name || signedAccountId}
+              />
+            )}
             <div className="profile-info">
               <div className="profile-name">{profile.name}</div>
               <div className="profile-username">{signedAccountId}</div>

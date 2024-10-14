@@ -1,17 +1,8 @@
 import { KeyPair } from 'near-api-js';
 
-export interface Keys {
-  publicKey: PublicKey;
-  secretKey: string;
-  extendedSecretKey: string;
-}
+import type { Keys } from './types';
 
-export interface PublicKey {
-  keyType: number;
-  data: { [key: string]: number };
-}
-
-export const getKeypomKeys = (dropName: string) => {
+export const getKeypomKeys = (dropName: string): Keys[] => {
   const keys = localStorage.getItem(`keysPom:${dropName}`);
   if (keys) {
     return JSON.parse(keys);
