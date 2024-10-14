@@ -10,8 +10,9 @@ const getDropName = (drop: Drops) => {
 const ListTokenDrop = ({ drops }: { drops: Drops[] }) => {
   return (
     <Flex stack>
-      <Title> Your drops </Title>
+      <Title style={{ fontSize: '14px' }}> Your Drops </Title>
       <Accordion.Root type="multiple">
+        {drops.length === 0 && <Text> You have no drops </Text>}
         {drops.map((drop) => {
           return (
             <Accordion.Item

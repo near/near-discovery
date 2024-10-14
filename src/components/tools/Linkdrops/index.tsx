@@ -61,10 +61,9 @@ const Linkdrops = ({
         />
       )}
       <Text style={{ textAlign: 'right' }} size="text-s">
-        {' '}
         Powered by <Link href="https://keypom.xyz">Keypom</Link>
       </Text>
-      <hr />
+
       <ListTokenDrop drops={drops} />
     </>
   );

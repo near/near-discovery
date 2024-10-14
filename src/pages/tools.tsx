@@ -12,10 +12,12 @@ import { network } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
 import type { Collection, FT, NextPageWithLayout, NFT } from '@/utils/types';
+import whiteList from '@/utils/white-list.json';
 
 const NearToken: FT = {
   contract_id: 'near',
   balance: '0',
+  verified: true,
   metadata: {
     decimals: 24,
     name: 'NEAR',
@@ -31,83 +33,103 @@ const ToolsPage: NextPageWithLayout = () => {
   const { drops, reloadLinkdrops } = useLinkdrops();
   const [allFT, setAllFT] = useState<FT[]>([NearToken]);
   const [allNFT, setAllNFT] = useState<Collection[]>([]);
+  const [loadingFT, setLoadingFT] = useState(false);
+  const [loadingNFT, setLoadingNFT] = useState(false);
 
-  const fetchTokens = useCallback(
-    async (type: string) => {
-      const response = await fetch(`${network.fastNearApi}/v1/account/${signedAccountId}/${type}`);
+  const fetchTokens = useCallback(async () => {
+    if (!signedAccountId) return { fts: [], nfts: [] };
 
-      if (!response.ok) return;
+    const response = await fetch(`${network.apiNearBlocks}/v1/account/${signedAccountId}/tokens`);
+    if (!response.ok) return;
 
-      const tokens = await response.json();
-      return tokens;
+    const data = await response.json();
+    return data.tokens;
+  }, [signedAccountId]);
+
+  const processFT = useCallback(
+    async (ft_contracts: string[]) => {
+      if (!ft_contracts.length) return [];
+      setLoadingFT(true);
+
+      const getFTData = async (contract_id: string) => {
+        try {
+          const balance = await wallet?.viewMethod({
+            contractId: contract_id,
+            method: 'ft_balance_of',
+            args: { account_id: signedAccountId },
+          });
+          if (balance === '0') return { contract_id, balance, metadata: {}, verified: false };
+          const metadata = await wallet?.viewMethod({ contractId: contract_id, method: 'ft_metadata' });
+          const verified = whiteList.filter((item) => item.contract_id === contract_id).length > 0;
+          return { contract_id, balance, metadata, verified };
+        } catch (e) {
+          return { contract_id, balance: '0', metadata: {}, verified: false };
+        }
+      };
+
+      // the first FT is always NEAR
+      const balance = await wallet?.getBalance(signedAccountId);
+      NearToken.balance = balance;
+      let all_fts = [NearToken];
+
+      let other_fts = await Promise.all(ft_contracts.map((ft) => getFTData(ft)));
+      other_fts = other_fts.filter((ft) => ft.balance !== '0');
+      all_fts = all_fts.concat(other_fts);
+      all_fts = all_fts.sort((a, b) => Number(b.verified) - Number(a.verified));
+
+      setAllFT(all_fts);
+      setLoadingFT(false);
     },
-    [signedAccountId],
+    [wallet, signedAccountId],
   );
 
-  const fetchFT = useCallback(async () => {
-    const tokens = await fetchTokens('ft');
-    if (!tokens) return;
+  const processNFT = useCallback(
+    async (nft_contracts: string[]) => {
+      if (!nft_contracts.length) return [];
+      setLoadingNFT(true);
 
-    const parseFTMetadata = async ({ contract_id, balance }: { contract_id: string; balance: string }) => {
-      const metadata = await wallet?.viewMethod({ contractId: contract_id, method: 'ft_metadata' });
-      return { contract_id, balance, metadata };
-    };
+      const getNFTsForContract = async (contract_id: string): Promise<{ [contract_id: string]: NFT[] }> => {
+        try {
+          let nfts = await wallet?.viewMethod({
+            contractId: contract_id,
+            method: 'nft_tokens_for_owner',
+            args: { account_id: signedAccountId },
+          });
+          nfts = nfts.map((nft: NFT) => ({ ...nft, contract_id }));
+          return { [contract_id]: nfts };
+        } catch (e) {
+          return { [contract_id]: [] };
+        }
+      };
 
-    // parse FT
-    const fast_fts = tokens.tokens.filter((token: any) => Number(token.balance) > 0);
+      let nfts = [];
+      nfts = await Promise.all(nft_contracts.map((contract_id) => getNFTsForContract(contract_id)));
+      nfts = nfts.filter((nft) => nft[Object.keys(nft)[0]].length > 0);
 
-    const balance = await wallet?.getBalance(signedAccountId);
-    NearToken.balance = balance;
-    const all_fts = [NearToken];
+      setAllNFT(nfts);
+      setLoadingNFT(false);
+    },
+    [wallet, signedAccountId],
+  );
 
-    for (const ft of fast_fts) {
-      try {
-        const ft_data = await parseFTMetadata(ft);
-        all_fts.push(ft_data);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    setAllFT(all_fts);
-  }, [wallet, signedAccountId, fetchTokens, setAllFT]);
-
-  const fetchNFT = useCallback(async () => {
-    const tokens = await fetchTokens('nft');
-    if (!tokens) return;
-
-    const getNFTsForContract = async ({ contract_id }: { contract_id: string }): Promise<NFT[]> => {
-      let nfts = await wallet?.viewMethod({
-        contractId: contract_id,
-        method: 'nft_tokens_for_owner',
-        args: { account_id: signedAccountId },
-      });
-      nfts = nfts.map((nft: any) => ({ ...nft, contract_id }));
-      return nfts;
-    };
-
-    const fast_nfts = tokens.tokens;
-    const nfts = [];
-
-    for (const nft of fast_nfts) {
-      try {
-        const nft_data = await getNFTsForContract(nft);
-        const res: any = {};
-        res[nft.contract_id] = nft_data;
-        nfts.push(res);
-      } catch (e) {
-        console.log(e);
-      }
-    }
-
-    setAllNFT(nfts);
-  }, [wallet, signedAccountId, fetchTokens]);
+  const reload = useCallback(
+    async (delay: number, type: string) => {
+      await new Promise((resolve) => setTimeout(resolve, delay));
+      const tokens = await fetchTokens();
+      if (type === 'fts') processFT(tokens.fts);
+      if (type === 'nfts') processNFT(tokens.nfts);
+    },
+    [fetchTokens, processFT, processNFT],
+  );
 
   useEffect(() => {
-    if (!signedAccountId) return;
-    fetchFT();
-    fetchNFT();
-  }, [fetchFT, fetchNFT, signedAccountId]);
+    const init = async () => {
+      const tokens = await fetchTokens();
+      processFT(tokens.fts);
+      processNFT(tokens.nfts);
+    };
+    init();
+  }, [fetchTokens, processFT, processNFT, signedAccountId]);
 
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -137,11 +159,11 @@ const ToolsPage: NextPageWithLayout = () => {
               </Tabs.List>
 
               <Tabs.Content value="ft">
-                <FungibleToken user_fts={allFT} reload={fetchFT} />
+                <FungibleToken user_fts={allFT} loading={loadingFT} reload={(d) => reload(d, 'fts')} />
               </Tabs.Content>
 
               <Tabs.Content value="nft">
-                <NonFungibleToken user_collections={allNFT} reload={fetchNFT} />
+                <NonFungibleToken user_collections={allNFT} loading={loadingNFT} reload={(d) => reload(d, 'nfts')} />
               </Tabs.Content>
 
               <Tabs.Content value="linkdrops">
@@ -149,8 +171,8 @@ const ToolsPage: NextPageWithLayout = () => {
                   user_fts={allFT}
                   user_collections={allNFT}
                   drops={drops}
-                  reloadFT={fetchFT}
-                  reloadNFT={fetchNFT}
+                  reloadFT={(d) => reload(d, 'fts')}
+                  reloadNFT={(d) => reload(d, 'nfts')}
                   reloadDrops={reloadLinkdrops}
                 />
               </Tabs.Content>

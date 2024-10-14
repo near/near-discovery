@@ -163,6 +163,7 @@ export interface Simple {
 export type FT = {
   contract_id: string;
   balance: string;
+  verified: boolean;
   metadata: {
     decimals: number;
     icon: string;
