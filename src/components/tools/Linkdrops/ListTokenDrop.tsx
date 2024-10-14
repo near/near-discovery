@@ -39,7 +39,7 @@ const ListTokenDrop = ({ drops }: { drops: Drops[] }) => {
                             onClick={() => {
                               const url =
                                 `https://${networkId === 'mainnet' ? 'app' : 'testnet'}.mynearwallet.com` +
-                                `/linkdrop/v2.keypom.${networkId}/` +
+                                `/linkdrop/v2.keypom.${networkId === 'mainnet' ? 'near' : 'testnet'}/` +
                                 key.private;
                               copyTextToClipboard(url, url);
                             }}
