@@ -1,9 +1,10 @@
 import { Button, FileInput, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
-import React, { useContext } from 'react';
-import type { SubmitHandler } from 'react-hook-form';
+import { formatNearAmount } from 'near-api-js/lib/utils/format';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { network } from '@/config';
 
 type FormData = {
   total_supply: string;
@@ -13,123 +14,172 @@ type FormData = {
   decimals: number;
 };
 
-const FACTORY_CONTRACT = 'tkn.primitives.near';
+const FACTORY_CONTRACT = network.ftContract;
 
 const MAX_FILE_SIZE = 10 * 1024;
 const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/png', 'image/gif', 'image/svg+xml'];
 
-const CreateTokenForm: React.FC = () => {
+const validateImage = (files: FileList) => {
+  if (files.length === 0) return 'Image is required';
+  const file = files[0];
+  if (file.size > MAX_FILE_SIZE) return 'Image size should be less than 10KB';
+  if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) return 'Not a valid image format';
+  return true;
+};
+
+const convertToBase64 = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = (error) => reject(error);
+  });
+};
+
+const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
   const {
     control,
     register,
     handleSubmit,
+    watch,
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
   const { wallet, signedAccountId } = useContext(NearContext);
+  const [requiredDeposit, setRequiredDeposit] = useState('0');
 
-  const validateImage = (files: FileList) => {
-    if (files.length === 0) return 'Image is required';
-    const file = files[0];
-    if (file.size > MAX_FILE_SIZE) return 'Image size should be less than 10KB';
-    if (!ACCEPTED_IMAGE_TYPES.includes(file.type)) return 'Not a valid image format';
-    return true;
-  };
+  const symbolAvailable = useCallback(
+    async (symbol: string) => {
+      try {
+        await wallet?.getBalance(`${symbol}.${FACTORY_CONTRACT}`);
+        return `${symbol}.${FACTORY_CONTRACT} already exists`;
+      } catch {
+        return true;
+      }
+    },
+    [wallet],
+  );
 
-  const convertToBase64 = (file: File): Promise<string> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
-  };
+  // Watch all form fields
+  const formData = watch();
+  const onSubmit = useCallback(
+    async ({ total_supply, decimals, icon, name, symbol }: FormData, actuallySubmit: boolean) => {
+      if (!signedAccountId) return;
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    let base64Image = '';
-    if (data.icon[0]) {
-      base64Image = await convertToBase64(data.icon[0]);
-    }
+      total_supply = total_supply || '0';
+      decimals = decimals || 0;
+      name = name || '';
+      symbol = symbol || '';
+      icon = icon || [false];
 
-    const total_supply = BigInt(data.total_supply) * BigInt(Math.pow(10, Number(data.decimals)));
+      const base64Image = icon[0] ? await convertToBase64(icon[0]) : '';
 
-    const args = {
-      args: {
-        owner_id: signedAccountId,
-        total_supply: total_supply.toString(),
-        metadata: {
-          spec: 'ft-1.0.0',
-          name: data.name,
-          symbol: data.symbol,
-          icon: base64Image,
-          decimals: data.decimals,
-        },
-      },
-      account_id: signedAccountId,
-    };
+      const supply = BigInt(total_supply) * BigInt(Math.pow(10, Number(decimals)));
 
-    const requiredDeposit = await wallet?.viewMethod({ contractId: FACTORY_CONTRACT, method: 'get_required', args });
-
-    try {
-      const result = await wallet?.signAndSendTransactions({
-        transactions: [
-          {
-            receiverId: FACTORY_CONTRACT,
-            actions: [
-              {
-                type: 'FunctionCall',
-                params: {
-                  methodName: 'create_token',
-                  args,
-                  gas: '300000000000000',
-                  deposit: requiredDeposit,
-                },
-              },
-            ],
+      const args = {
+        args: {
+          owner_id: signedAccountId,
+          total_supply: supply.toString(),
+          metadata: {
+            spec: 'ft-1.0.0',
+            name,
+            symbol,
+            icon: base64Image,
+            decimals,
           },
-        ],
-      });
+        },
+        account_id: signedAccountId,
+      };
+
+      const deposit = await wallet?.viewMethod({ contractId: FACTORY_CONTRACT, method: 'get_required', args });
+
+      setRequiredDeposit(formatNearAmount(deposit, 2));
+
+      if (!actuallySubmit) return;
+
+      let result = false;
+
+      try {
+        result = await wallet?.callMethod({
+          contractId: FACTORY_CONTRACT,
+          method: 'create_token',
+          args,
+          gas: '300000000000000',
+          deposit: deposit,
+        });
+      } catch (error) {}
 
       if (result) {
-        const transactionId = result[0].transaction_outcome.id;
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        window.open(`https://nearblocks.io/txns/${transactionId}`, '_blank')!.focus();
+        openToast({
+          type: 'success',
+          title: 'Token Created',
+          description: `Token ${name} (${symbol}) created successfully`,
+          duration: 5000,
+        });
+        reload(5000);
+      } else {
+        openToast({
+          type: 'error',
+          title: 'Error',
+          description: 'Failed to create token',
+          duration: 5000,
+        });
       }
+    },
+    [wallet, signedAccountId, reload],
+  );
 
-      openToast({
-        type: 'success',
-        title: 'Token Created',
-        description: `Token ${data.name} (${data.symbol}) created successfully`,
-        duration: 5000,
-      });
-    } catch (error) {
-      openToast({
-        type: 'error',
-        title: 'Error',
-        description: 'Failed to create token',
-        duration: 5000,
-      });
-    }
-  };
+  useEffect(() => {
+    onSubmit(formData, false);
+  }, [onSubmit, formData]);
 
   return (
     <>
-      <Text size="text-l" style={{ marginBottom: '12px' }}>
-        Mint a Fungible Token
+      <Text size="text-l"> Mint a Fungible Token </Text>
+      <Text size="text-s" style={{ marginBottom: 'var(--gap-s)' }}>
+        This tool allows you to deploy your own NEP-141 smart contract (Fungible Tokens)
       </Text>
-      <Form onSubmit={handleSubmit(onSubmit)}>
-        <Flex stack gap="l">
+
+      <Form onSubmit={handleSubmit((data) => onSubmit(data, true))}>
+        <Flex stack gap="l" style={{ border: '1px solid var(--violet3)', padding: '1rem', borderRadius: '10px' }}>
+          <Grid columns="1fr 1fr" columnsTablet="1fr" columnsPhone="1fr">
+            <Input
+              label="Token Name"
+              placeholder="e.g. Test Token"
+              error={errors.name?.message}
+              {...register('name', { required: 'Token name is required' })}
+              disabled={!signedAccountId}
+            />
+            <Controller
+              control={control}
+              name="symbol"
+              rules={{
+                required: 'Symbol is required',
+                validate: symbolAvailable,
+              }}
+              render={({ field, fieldState }) => (
+                <Input
+                  label="Token Symbol"
+                  placeholder="e.g. TEST"
+                  error={fieldState.error?.message}
+                  {...field}
+                  disabled={!signedAccountId}
+                />
+              )}
+            />
+          </Grid>
           <Grid columns="1fr 1fr" columnsTablet="1fr" columnsPhone="1fr">
             <Input
               label="Total Supply"
-              placeholder="e.g., 1000"
+              placeholder="e.g. 1000"
               error={errors.total_supply?.message}
               {...register('total_supply', { required: 'Total supply is required' })}
+              disabled={!signedAccountId}
             />
             <Input
               label="Decimals"
               type="number"
-              placeholder="e.g., 6"
+              placeholder="e.g. 6"
               error={errors.decimals?.message}
               {...register('decimals', {
                 required: 'Decimals is required',
@@ -137,20 +187,7 @@ const CreateTokenForm: React.FC = () => {
                 min: { value: 0, message: 'Decimals must be non-negative' },
                 max: { value: 24, message: 'Decimals must be 24 or less' },
               })}
-            />
-          </Grid>
-          <Grid columns="1fr 1fr" columnsTablet="1fr" columnsPhone="1fr">
-            <Input
-              label="Token Name"
-              placeholder="e.g., Test Token"
-              error={errors.name?.message}
-              {...register('name', { required: 'Token name is required' })}
-            />
-            <Input
-              label="Token Symbol"
-              placeholder="e.g., TEST"
-              error={errors.symbol?.message}
-              {...register('symbol', { required: 'Token symbol is required' })}
+              disabled={!signedAccountId}
             />
           </Grid>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
@@ -172,6 +209,7 @@ const CreateTokenForm: React.FC = () => {
                     const files = value;
                     field.onChange(files);
                   }}
+                  disabled={!signedAccountId}
                 />
               )}
             />
@@ -180,7 +218,13 @@ const CreateTokenForm: React.FC = () => {
             </span>
           </div>
 
-          <Button label="Create Token" variant="affirmative" type="submit" loading={isSubmitting} />
+          <Button
+            label={signedAccountId ? `Create Token - Cost: ${requiredDeposit} N` : 'Please login'}
+            variant="affirmative"
+            type="submit"
+            loading={isSubmitting}
+            disabled={!signedAccountId}
+          />
         </Flex>
       </Form>
     </>
