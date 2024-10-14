@@ -1,6 +1,7 @@
 import { Accordion, Badge, Button, copyTextToClipboard, Flex, Text, Title, Tooltip } from '@near-pagoda/ui';
 import { Copy } from '@phosphor-icons/react';
 
+import { networkId } from '@/config';
 import type { Drops } from '@/utils/types';
 
 const getDropName = (drop: Drops) => {
@@ -36,7 +37,10 @@ const ListTokenDrop = ({ drops }: { drops: Drops[] }) => {
                           <Button
                             label="copy"
                             onClick={() => {
-                              const url = 'https://app.mynearwallet.com' + '/linkdrop/v2.keypom.near/' + key.private;
+                              const url =
+                                `https://${networkId === 'mainnet' ? 'app' : 'testnet'}.mynearwallet.com` +
+                                `/linkdrop/v2.keypom.${networkId}/` +
+                                key.private;
                               copyTextToClipboard(url, url);
                             }}
                             size="small"
