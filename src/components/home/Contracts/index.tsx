@@ -87,7 +87,7 @@ export const Contracts = () => {
         gap="xl"
         columnsPhone="minmax(0, 1fr)"
         columnsTablet="minmax(0, 1fr)"
-        style={{ flexGrow: 1 }}
+        style={{ height: '88%' }}
       >
         <Flex stack justify="space-between">
           <Flex stack gap="m">
@@ -119,7 +119,7 @@ export const Contracts = () => {
         </Flex>
 
         <Tabs.Root value={language}>
-          <Flex stack justify="space-between" style={{ flexGrow: 1 }}>
+          <Flex stack justify="space-between" style={{ height: '100%' }}>
             <Tabs.Content value="js">
               <Title> One Command Setup </Title>
               <Code code={`npx create-near-app@latest`} language="bash" />
