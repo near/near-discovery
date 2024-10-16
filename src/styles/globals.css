@@ -3,6 +3,7 @@
 :root {
   --gateway-page-container-padding-y: 2rem;
   --gateway-page-container-padding-x: 1rem;
+  scrollbar-gutter: stable;
 }
 
 p,
@@ -74,5 +75,25 @@ w3m-modal {
   #launcher {
     right: 2px;
     bottom: 10px;
+  }
+}
+
+/* wallet selector */
+.modal-right {
+  display: none;
+}
+
+.modal-left, .modal-left-title {
+  border-right: 0 !important;
+  width: 100% !important;
+}
+
+.nws-modal {
+  max-width: 500px !important;
+}
+
+@media (max-width: 576px) {
+  .nws-modal, .modal-left {
+    max-height: 280px !important;
   }
 }
