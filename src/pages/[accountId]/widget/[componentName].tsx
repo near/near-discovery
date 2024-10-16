@@ -8,7 +8,6 @@ import { privacyDomainName, termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const ViewComponentPage: NextPageWithLayout = () => {
@@ -17,15 +16,14 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const { wallet, signedAccountId } = useContext(NearContext);
   const components = useBosComponents();
-  const { requestAuthentication } = useSignInRedirect();
   const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
 
   useEffect(() => {
-    const { requestAuth, createAccount } = componentProps;
+    const { requestAuth } = componentProps;
     if (requestAuth && !signedAccountId) {
-      requestAuthentication(!!createAccount);
+      wallet?.signIn();
     }
-  }, [signedAccountId, componentProps, requestAuthentication]);
+  }, [wallet, signedAccountId, componentProps]);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
