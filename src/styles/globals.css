@@ -91,3 +91,9 @@ w3m-modal {
 .nws-modal {
   max-width: 500px !important;
 }
+
+@media (max-width: 576px) {
+  .nws-modal, .modal-left {
+    max-height: 280px !important;
+  }
+}
