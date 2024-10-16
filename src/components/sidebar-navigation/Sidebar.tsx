@@ -101,15 +101,11 @@ export const Sidebar = () => {
               </Dropdown.Trigger>
               <Dropdown.Content>
                 <Dropdown.Section>
-                <Redirect href="https://dev.near.org" target="_blank" onClick={preventRedirect('mainnet')}>
-                  <Dropdown.Item>
-                      Mainnet
-                  </Dropdown.Item>
+                  <Redirect href="https://dev.near.org" target="_blank" onClick={preventRedirect('mainnet')}>
+                    <Dropdown.Item>Mainnet</Dropdown.Item>
                   </Redirect>
                   <Redirect href="https://test.near.org" target="_blank" onClick={preventRedirect('testnet')}>
-                  <Dropdown.Item>
-                      Testnet
-                  </Dropdown.Item>
+                    <Dropdown.Item>Testnet</Dropdown.Item>
                   </Redirect>
                 </Dropdown.Section>
               </Dropdown.Content>
