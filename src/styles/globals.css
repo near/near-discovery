@@ -77,3 +77,17 @@ w3m-modal {
     bottom: 10px;
   }
 }
+
+/* wallet selector */
+.modal-right {
+  display: none;
+}
+
+.modal-left, .modal-left-title {
+  border-right: 0 !important;
+  width: 100% !important;
+}
+
+.nws-modal {
+  max-width: 500px !important;
+}

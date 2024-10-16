@@ -4,8 +4,6 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-
 import { NearContext } from '../wallet-selector/WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
@@ -20,12 +18,7 @@ export const SmallScreenHeader = () => {
   const setNavigation = useNavigationStore((store) => store.set);
   const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
-  const { signedAccountId } = useContext(NearContext);
-  const { requestAuthentication } = useSignInRedirect();
-
-  const handleCreateAccount = () => {
-    requestAuthentication(true);
-  };
+  const { wallet, signedAccountId } = useContext(NearContext);
 
   return (
     <S.SmallScreenHeader>
@@ -59,9 +52,9 @@ export const SmallScreenHeader = () => {
       ) : (
         <>
           <Button
-            label="Sign-up or Login"
+            label="Login"
             variant="primary"
-            onClick={handleCreateAccount}
+            onClick={wallet?.signIn}
             style={{ alignSelf: 'center', marginRight: '1rem' }}
           />
         </>
