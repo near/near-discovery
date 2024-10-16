@@ -1,9 +1,12 @@
-import { Tooltip } from '@near-pagoda/ui';
+import { Dropdown, SvgIcon, Tooltip } from '@near-pagoda/ui';
+import { CaretDown } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useContext } from 'react';
+import styled from 'styled-components';
 
+import { networkId } from '@/config';
 import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 
 import { NearContext } from '../wallet-selector/WalletSelector';
@@ -13,6 +16,26 @@ import { useNavigationStore } from './store';
 import * as S from './styles';
 import { UserDropdownMenu } from './UserDropdownMenu';
 import { currentPathMatchesRoute } from './utils';
+
+const Redirect = styled.a<{ selected?: boolean }>`
+  text-decoration: none;
+  color: #444;
+`;
+
+const Badge = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: ${() => (networkId === 'mainnet' ? '#0072de' : '#d14e00')};
+  background-color: ${() => (networkId === 'mainnet' ? '#0084f116' : '#f9900026')};
+  text-transform: capitalize;
+  border-radius: 0.25rem;
+  letter-spacing: 0.05em;
+`;
 
 export const Sidebar = () => {
   const router = useRouter();
@@ -25,6 +48,13 @@ export const Sidebar = () => {
   const { signedAccountId } = useContext(NearContext);
   const { requestAuthentication } = useSignInRedirect();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [isOpenNetwork, setIsOpenNetwork] = useState(false);
+
+  const preventRedirect = (network: string) => (e: React.MouseEvent) => {
+    if (networkId == network) {
+      e.preventDefault();
+    }
+  };
 
   const handleCreateAccount = () => {
     requestAuthentication(true);
@@ -53,6 +83,34 @@ export const Sidebar = () => {
           <S.Logo href="/" aria-label="Go Home">
             <Image src={NearIconSvg} alt="NEAR" />
           </S.Logo>
+          <S.Network>
+            <Dropdown.Root open={isOpenNetwork} onOpenChange={(open) => setIsOpenNetwork(open)}>
+              <Dropdown.Trigger asChild>
+                <Badge>
+                  {networkId}{' '}
+                  <SvgIcon
+                    icon={<CaretDown />}
+                    size="xs"
+                    style={{
+                      marginBottom: '1px',
+                      transform: isOpenNetwork ? 'rotate(180deg)' : 'rotate(0deg)',
+                      transition: 'all 200ms',
+                    }}
+                  />
+                </Badge>
+              </Dropdown.Trigger>
+              <Dropdown.Content>
+                <Dropdown.Section>
+                  <Redirect href="https://dev.near.org" target="_blank" onClick={preventRedirect('mainnet')}>
+                    <Dropdown.Item>Mainnet</Dropdown.Item>
+                  </Redirect>
+                  <Redirect href="https://test.near.org" target="_blank" onClick={preventRedirect('testnet')}>
+                    <Dropdown.Item>Testnet</Dropdown.Item>
+                  </Redirect>
+                </Dropdown.Section>
+              </Dropdown.Content>
+            </Dropdown.Root>
+          </S.Network>
 
           <S.ToggleExpandButton type="button" aria-label="Expand/Collapse Menu" onClick={toggleExpandedSidebar}>
             <i className={`ph-bold ${isSidebarExpanded ? 'ph-arrow-line-left' : 'ph-list'}`} />
