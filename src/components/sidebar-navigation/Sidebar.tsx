@@ -92,7 +92,7 @@ export const Sidebar = () => {
                     icon={<CaretDown />}
                     size="xs"
                     style={{
-                      marginBottom: '2px',
+                      marginBottom: '1px',
                       transform: isOpenNetwork ? 'rotate(180deg)' : 'rotate(0deg)',
                       transition: 'all 200ms',
                     }}
