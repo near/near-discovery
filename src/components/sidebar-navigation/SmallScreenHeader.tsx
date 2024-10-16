@@ -1,14 +1,22 @@
-import { Button } from '@near-pagoda/ui';
-import { MagnifyingGlass } from '@phosphor-icons/react';
+import { Button, Dropdown } from '@near-pagoda/ui';
+import { MagnifyingGlass, WifiHigh } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
+import styled from 'styled-components';
+
+import { networkId } from '@/config';
 
 import { NearContext } from '../wallet-selector/WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
 import * as S from './styles';
 import { UserDropdownMenu } from './UserDropdownMenu';
+
+const Redirect = styled.a<{ selected?: boolean }>`
+  text-decoration: none;
+  color: #444;
+`;
 
 export const SmallScreenHeader = () => {
   const router = useRouter();
@@ -19,6 +27,12 @@ export const SmallScreenHeader = () => {
   const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
   const { wallet, signedAccountId } = useContext(NearContext);
+
+  const preventRedirect = (network: string) => (e: React.MouseEvent) => {
+    if (networkId == network) {
+      e.preventDefault();
+    }
+  };
 
   return (
     <S.SmallScreenHeader>
@@ -43,7 +57,6 @@ export const SmallScreenHeader = () => {
           <Image src={NearIconSvg} alt="NEAR" />
         </S.SmallScreenHeaderLogo>
       )}
-
       {signedAccountId ? (
         <S.SmallScreenHeaderActions $hidden={isOpenedOnSmallScreens} $gap="16px">
           <Button label="search" icon={<MagnifyingGlass />} variant="secondary" onClick={redirect('/search')} />
@@ -59,7 +72,28 @@ export const SmallScreenHeader = () => {
           />
         </>
       )}
+      <Dropdown.Root>
+        <Dropdown.Trigger asChild>
+          <Button
+            label={networkId}
+            icon={<WifiHigh fill="bold" style={{ color: networkId == 'mainnet' ? '#0072de' : '#d14e00' }} />}
+            fill="outline"
+            style={{ alignSelf: 'center' }}
+            type="button"
+          />
+        </Dropdown.Trigger>
 
+        <Dropdown.Content>
+          <Dropdown.Section>
+            <Redirect href="https://dev.near.org" target="_blank" onClick={preventRedirect('mainnet')}>
+              <Dropdown.Item>Mainnet</Dropdown.Item>
+            </Redirect>
+            <Redirect href="https://test.near.org" target="_blank" onClick={preventRedirect('testnet')}>
+              <Dropdown.Item>Testnet</Dropdown.Item>
+            </Redirect>
+          </Dropdown.Section>
+        </Dropdown.Content>
+      </Dropdown.Root>
       <S.SmallScreenHeaderIconButton
         type="button"
         aria-label="Expand/Collapse Menu"
