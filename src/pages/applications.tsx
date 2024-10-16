@@ -5,14 +5,12 @@ import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const ApplicationsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const router = useRouter();
-  const { requestAuthentication } = useSignInRedirect();
-  const { signedAccountId } = useContext(NearContext);
+  const { wallet, signedAccountId } = useContext(NearContext);
 
   const setURLSearchParams = (params: string | string[][] | Record<string, string> | URLSearchParams | undefined) => {
     if (!params) return;
@@ -29,11 +27,11 @@ const ApplicationsPage: NextPageWithLayout = () => {
   };
 
   useEffect(() => {
-    const { requestAuth, createAccount } = router.query;
+    const { requestAuth } = router.query;
     if (requestAuth && !signedAccountId) {
-      requestAuthentication(!!createAccount);
+      wallet?.signIn();
     }
-  }, [signedAccountId, requestAuthentication, router.query]);
+  }, [signedAccountId, wallet, router.query]);
 
   return (
     <ComponentWrapperPage

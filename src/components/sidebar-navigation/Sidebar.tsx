@@ -4,8 +4,6 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef } from 'react';
 import { useContext } from 'react';
 
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
-
 import { NearContext } from '../wallet-selector/WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
 import { Search } from './Search';
@@ -22,13 +20,8 @@ export const Sidebar = () => {
   const toggleExpandedSidebar = useNavigationStore((store) => store.toggleExpandedSidebar);
   const handleBubbledClickInSidebar = useNavigationStore((store) => store.handleBubbledClickInSidebar);
   const tooltipsDisabled = isSidebarExpanded;
-  const { signedAccountId } = useContext(NearContext);
-  const { requestAuthentication } = useSignInRedirect();
+  const { wallet, signedAccountId } = useContext(NearContext);
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const handleCreateAccount = () => {
-    requestAuthentication(true);
-  };
 
   const isNavigationItemActive = useCallback(
     (route: string | string[], exactMatch = false) => {
@@ -202,10 +195,10 @@ export const Sidebar = () => {
           {signedAccountId ? (
             <UserDropdownMenu collapsed={!isSidebarExpanded} />
           ) : (
-            <Tooltip content="Sign-up or Login" side="right" disabled={tooltipsDisabled} asChild>
-              <S.LoginItem $active={false} $type="featured" onClick={handleCreateAccount}>
+            <Tooltip content="Login" side="right" disabled={tooltipsDisabled} asChild>
+              <S.LoginItem $active={false} $type="featured" onClick={wallet?.signIn}>
                 <i className="ph-bold ph-user" />
-                <span>Sign-up or Login</span>
+                <span>Login</span>
               </S.LoginItem>
             </Tooltip>
           )}

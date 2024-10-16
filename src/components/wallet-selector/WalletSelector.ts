@@ -6,11 +6,9 @@ import { setupEthereumWallets } from '@near-wallet-selector/ethereum-wallets';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
-import { setupMintbaseWallet } from '@near-wallet-selector/mintbase-wallet';
 import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearMobileWallet } from '@near-wallet-selector/near-mobile-wallet';
-import { setupNeth } from '@near-wallet-selector/neth';
 import { setupNightly } from '@near-wallet-selector/nightly';
 import { setupSender } from '@near-wallet-selector/sender';
 import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
@@ -19,6 +17,7 @@ import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import type { Context } from 'react';
 import { createContext } from 'react';
 
+import fastAuthIcon from '@/assets/images/wallets/fastAuth.png';
 import { networkId as defaultNetwork, signInContractId } from '@/config';
 import { KEYPOM_OPTIONS } from '@/utils/keypom-options';
 import type { NetworkId } from '@/utils/types';
@@ -45,32 +44,36 @@ export class Wallet {
   }
 
   startUp = async (accountChangeHook: (account: string) => void) => {
+    const emailLogin = async (moduleOptions: any) => {
+      const setup = await setupFastAuthWallet({
+        iconUrl: fastAuthIcon.src,
+        walletUrl:
+          this.networkId === 'testnet'
+            ? 'https://wallet.testnet.near.org/fastauth'
+            : 'https://wallet.near.org/fastauth',
+        relayerUrl:
+          this.networkId === 'testnet'
+            ? 'http://34.70.226.83:3030/relay'
+            : 'https://near-relayer-mainnet.api.pagoda.co/relay',
+      });
+      const fastAuth = await setup(moduleOptions);
+      if (fastAuth) fastAuth.metadata.name = 'Email Login';
+      return fastAuth;
+    };
+
     this.selector = setupWalletSelector({
       network: this.networkId,
       modules: [
+        await emailLogin,
         setupEthereumWallets({ wagmiConfig, web3Modal: web3Modal as any, alwaysOnboardDuringSignIn: true }),
         setupMeteorWallet(),
         setupBitteWallet(),
         setupHereWallet(),
         setupMyNearWallet(),
+        setupNearMobileWallet(),
         setupSender(),
-        setupMintbaseWallet(),
-        setupNeth({
-          gas: '300000000000000',
-          bundle: false,
-        }),
         setupNightly(),
         setupWelldoneWallet(),
-        setupFastAuthWallet({
-          walletUrl:
-            this.networkId === 'testnet'
-              ? 'https://wallet.testnet.near.org/fastauth'
-              : 'https://wallet.near.org/fastauth',
-          relayerUrl:
-            this.networkId === 'testnet'
-              ? 'http://34.70.226.83:3030/relay'
-              : 'https://near-relayer-mainnet.api.pagoda.co/relay',
-        }),
         setupKeypom({
           trialAccountSpecs: {
             url:
@@ -89,7 +92,6 @@ export class Wallet {
           signInContractId,
         }) as any, // TODO: Refactor setupKeypom() to TS
         setupLedger(),
-        setupNearMobileWallet(),
       ],
     });
 
