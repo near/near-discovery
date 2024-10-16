@@ -67,6 +67,7 @@ const Carousel = styled.div`
 const WalletImg = styled(Image)`
   margin: 0 2px;
   height: 40px;
+  width: 40px;
   border-radius: 4px;
 `;
 
@@ -80,7 +81,7 @@ export const DecentralizedApps = () => {
         gapTablet="xl"
         columnsPhone="minmax(0, 1fr)"
         columnsTablet="minmax(0, 1fr)"
-        style={{ flex: 1 }}
+        style={{ height: '88%' }}
       >
         <Flex stack justify="space-between">
           <Flex stack gap="m">
@@ -97,7 +98,7 @@ export const DecentralizedApps = () => {
           </Flex>
         </Flex>
 
-        <Flex stack gap="m" justify="space-between" style={{ flexGrow: 1 }}>
+        <Flex stack gap="m" justify="space-between" style={{ height: '100%' }}>
           <Flex stack>
             <Title> NEAR React App </Title>
             <Code code={ReactApp} height={450} language="ts" />
