@@ -6,7 +6,6 @@ import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { networkId } from '@/config';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 
 import { NearContext } from '../wallet-selector/WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
@@ -27,17 +26,12 @@ export const SmallScreenHeader = () => {
   const setNavigation = useNavigationStore((store) => store.set);
   const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
-  const { signedAccountId } = useContext(NearContext);
-  const { requestAuthentication } = useSignInRedirect();
+  const { wallet, signedAccountId } = useContext(NearContext);
 
   const preventRedirect = (network: string) => (e: React.MouseEvent) => {
     if (networkId == network) {
       e.preventDefault();
     }
-  };
-
-  const handleCreateAccount = () => {
-    requestAuthentication(true);
   };
 
   return (
@@ -69,12 +63,14 @@ export const SmallScreenHeader = () => {
           <UserDropdownMenu />
         </S.SmallScreenHeaderActions>
       ) : (
-        <Button
-          label="Sign-up or Login"
-          variant="primary"
-          onClick={handleCreateAccount}
-          style={{ alignSelf: 'center', marginRight: '1rem' }}
-        />
+        <>
+          <Button
+            label="Login"
+            variant="primary"
+            onClick={wallet?.signIn}
+            style={{ alignSelf: 'center', marginRight: '1rem' }}
+          />
+        </>
       )}
       <Dropdown.Root>
         <Dropdown.Trigger asChild>
