@@ -89,16 +89,16 @@ export const SmallScreenHeader = () => {
 
         <Dropdown.Content>
           <Dropdown.Section>
-            <Dropdown.Item>
-              <Redirect href="https://dev.near.org" target="_blank" onClick={preventRedirect('mainnet')}>
+            <Redirect href="https://dev.near.org" target="_blank" onClick={preventRedirect('mainnet')}>
+              <Dropdown.Item>
                 Mainnet
-              </Redirect>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <Redirect href="https://test.near.org" target="_blank" onClick={preventRedirect('testnet')}>
+              </Dropdown.Item>
+            </Redirect>
+            <Redirect href="https://test.near.org" target="_blank" onClick={preventRedirect('testnet')}>
+              <Dropdown.Item>
                 Testnet
-              </Redirect>
-            </Dropdown.Item>
+              </Dropdown.Item>
+            </Redirect>
           </Dropdown.Section>
         </Dropdown.Content>
       </Dropdown.Root>
