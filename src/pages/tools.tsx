@@ -1,9 +1,10 @@
 import { Card, Container, Flex, Section, SvgIcon, Tabs, Text } from '@near-pagoda/ui';
-import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
+import { BuildingOffice, Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import NearIconSvg from '@/assets/images/near-icon.svg';
+import DAO from '@/components/tools/DAO';
 import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
@@ -156,6 +157,10 @@ const ToolsPage: NextPageWithLayout = () => {
                   <SvgIcon icon={<Gift fill="bold" />} />
                   Linkdrops
                 </Tabs.Trigger>
+                <Tabs.Trigger href="?tab=dao" value="dao">
+                  <SvgIcon icon={<BuildingOffice fill="bold" />} />
+                  DAOs
+                </Tabs.Trigger>
               </Tabs.List>
 
               <Tabs.Content value="ft">
@@ -175,6 +180,10 @@ const ToolsPage: NextPageWithLayout = () => {
                   reloadNFT={(d) => reload(d, 'nfts')}
                   reloadDrops={reloadLinkdrops}
                 />
+              </Tabs.Content>
+
+              <Tabs.Content value="dao">
+                <DAO />
               </Tabs.Content>
             </Tabs.Root>
           </Card>

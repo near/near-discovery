@@ -25,6 +25,7 @@ export const networks: Record<NetworkId, Network> = {
     apiNearBlocks: 'https://api.nearblocks.io',
     ftContract: 'tkn.primitives.near',
     nftContract: 'nft.primitives.near',
+    daoContract: 'sputnik-dao.near',
     fastNearApi: 'https://api.fastnear.com',
   },
   testnet: {
@@ -51,6 +52,7 @@ export const networks: Record<NetworkId, Network> = {
     apiNearBlocks: 'https://api-testnet.nearblocks.io',
     ftContract: 'tkn.primitives.testnet',
     nftContract: 'nft.primitives.testnet',
+    daoContract: 'sputnik-v2.testnet',
     fastNearApi: 'https://test.api.fastnear.com',
   },
 
