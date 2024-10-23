@@ -135,13 +135,13 @@ const ToolsPage: NextPageWithLayout = () => {
 
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
-      <Container size="m" style={{ display: 'flex', justifyContent: 'center' }}>
+      <Container size="s" style={{ display: 'flex', justifyContent: 'center' }}>
         <Flex stack gap="l">
           <Text as="h1" size="text-2xl">
             Tools
           </Text>
 
-          <Card style={{ paddingTop: 0, width: 'min-content' }}>
+          <Card style={{ paddingTop: 0 }}>
             <Tabs.Root value={selectedTab}>
               <Tabs.List style={{ marginBottom: 'var(--gap-m)' }}>
                 <Tabs.Trigger href="?tab=ft" value="ft">
