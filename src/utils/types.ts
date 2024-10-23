@@ -35,6 +35,7 @@ type ProductionNetwork = {
   ftContract: string;
   nftContract: string;
   daoContract: string;
+  multisigContract: string;
   fastNearApi: string;
 };
 

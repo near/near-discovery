@@ -26,6 +26,7 @@ export const networks: Record<NetworkId, Network> = {
     ftContract: 'tkn.primitives.near',
     nftContract: 'nft.primitives.near',
     daoContract: 'sputnik-dao.near',
+    multisigContract: 'multisig-v2-factory.near',
     fastNearApi: 'https://api.fastnear.com',
   },
   testnet: {
@@ -53,6 +54,7 @@ export const networks: Record<NetworkId, Network> = {
     ftContract: 'tkn.primitives.testnet',
     nftContract: 'nft.primitives.testnet',
     daoContract: 'sputnik-v2.testnet',
+    multisigContract: 'multisig-v2-factory.testnet',
     fastNearApi: 'https://test.api.fastnear.com',
   },
 
