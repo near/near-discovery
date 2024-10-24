@@ -20,7 +20,7 @@ import { useState } from 'react';
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 import { NearContext, Wallet } from '@/components/wallet-selector/WalletSelector';
-import { gleapSdkToken, networkId } from '@/config';
+import { gleapSdkToken, networkId, signInContractId } from '@/config';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { useCookieStore } from '@/stores/cookieData';
@@ -37,7 +37,7 @@ if (typeof window !== 'undefined') {
   if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
 }
 
-const wallet = new Wallet({ networkId: networkId });
+const wallet = new Wallet({ networkId: networkId, createAccessKeyFor: signInContractId });
 initPostHog();
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
