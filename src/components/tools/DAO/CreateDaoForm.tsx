@@ -1,10 +1,13 @@
 import { Button, FileInput, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
 import { parseNearAmount } from 'near-api-js/lib/utils/format';
+import Link from 'next/link';
 import React, { useCallback, useContext, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
+
+import LabelWithTooltip from '../Shared/LabelWithTooltip';
 
 type FormData = {
   display_name: string;
@@ -78,14 +81,14 @@ const CreateDaoForm = () => {
     async (account_prefix: string) => {
       // we use regex explicitly here as one symbol account_prefix is allowed
       const isValidAccountPrefix = ACCOUNT_ID_REGEX.test(account_prefix);
-      if (!isValidAccountPrefix) return 'Account prefix contains unsupported symbols';
+      if (!isValidAccountPrefix) return 'Sub-account name contains unsupported symbols';
 
       const doesAccountPrefixIncludeDots = account_prefix.includes('.');
-      if (doesAccountPrefixIncludeDots) return 'Account prefix must be without dots';
+      if (doesAccountPrefixIncludeDots) return 'Sub-account name must be without dots';
 
       const accountId = `${account_prefix}.${FACTORY_CONTRACT}`;
       const isValidAccount = validateAccountId(accountId);
-      if (!isValidAccount) return `Prefix is too long`;
+      if (!isValidAccount) return `Account name is too long`;
 
       try {
         await wallet?.getBalance(accountId);
@@ -201,8 +204,10 @@ const CreateDaoForm = () => {
   return (
     <>
       <Text size="text-l"> Create a Decentralized Autonomous Organization </Text>
-      <Text size="text-s" style={{ marginBottom: 'var(--gap-s)' }}>
-        This tool allows you to deploy your own Sputnik DAO smart contract (DAOs)
+      <Text size="text-s">
+        This tool allows you to deploy your own Sputnik DAO smart contract (DAOs) <br />
+        Rolled out organizations may be found and managed from{' '}
+        <Link href="/astraplusplus.ndctools.near/widget/home?page=daos">here</Link>
       </Text>
 
       <Form onSubmit={handleSubmit((data) => onSubmit(data))}>
@@ -222,13 +227,19 @@ const CreateDaoForm = () => {
                 control={control}
                 name="account_prefix"
                 rules={{
-                  required: 'Account prefix is required',
+                  required: 'Sub-account name is required',
                   validate: isAccountPrefixAvailable,
                 }}
                 render={({ field, fieldState }) => (
                   <Input
-                    label="Account prefix"
-                    placeholder="Enter prefix"
+                    // @ts-expect-error it expects string, not ReactElement
+                    label={
+                      <LabelWithTooltip
+                        label="Account ID"
+                        tooltip="Name of the sub-account to which contract will be deployed"
+                      />
+                    }
+                    placeholder="Enter account name"
                     error={fieldState.error?.message}
                     {...field}
                     disabled={!signedAccountId}

@@ -55,14 +55,14 @@ const CreateMultisigForm = () => {
     async (accountPrefix: string) => {
       // we use regex explicitly here as one symbol account_prefix is allowed
       const isValidAccountPrefix = ACCOUNT_ID_REGEX.test(accountPrefix);
-      if (!isValidAccountPrefix) return 'Account prefix contains unsupported symbols';
+      if (!isValidAccountPrefix) return 'Sub-account name contains unsupported symbols';
 
       const doesAccountPrefixIncludeDots = accountPrefix.includes('.');
-      if (doesAccountPrefixIncludeDots) return 'Account prefix must be without dots';
+      if (doesAccountPrefixIncludeDots) return 'Sub-account name must be without dots';
 
       const accountId = `${accountPrefix}.${FACTORY_CONTRACT}`;
       const isValidAccount = validateAccountId(accountId);
-      if (!isValidAccount) return `Prefix is too long`;
+      if (!isValidAccount) return `Account name is too long`;
 
       try {
         await wallet?.getBalance(accountId);
@@ -146,9 +146,9 @@ const CreateMultisigForm = () => {
 
   return (
     <>
-      <Text size="text-l"> Create a Multi-Signature Organization </Text>
+      <Text size="text-l"> Create a Multi-Signature Contract</Text>
       <Text size="text-s" style={{ marginBottom: 'var(--gap-s)' }}>
-        This tool allows you to deploy your own Multisig smart contract
+        This tool allows you to roll out your own Multisig smart contract
       </Text>
 
       <Form onSubmit={handleSubmit((data) => onSubmit(data))}>
@@ -160,13 +160,19 @@ const CreateMultisigForm = () => {
                 control={control}
                 name="account_prefix"
                 rules={{
-                  required: 'Account prefix is required',
+                  required: 'Sub-account name is required',
                   validate: isAccountPrefixAvailable,
                 }}
                 render={({ field, fieldState }) => (
                   <Input
-                    label="Account prefix"
-                    placeholder="Enter prefix"
+                    // @ts-expect-error it expects string, not ReactElement
+                    label={
+                      <LabelWithTooltip
+                        label="Account ID"
+                        tooltip="Name of the sub-account to which contract will be deployed"
+                      />
+                    }
+                    placeholder="Enter account name"
                     error={fieldState.error?.message}
                     {...field}
                     disabled={!signedAccountId}
