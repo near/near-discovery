@@ -1,11 +1,13 @@
 import { Card, Container, Flex, Section, SvgIcon, Tabs, Text } from '@near-pagoda/ui';
-import { Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
+import { Building, BuildingOffice, Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import NearIconSvg from '@/assets/images/near-icon.svg';
+import DAO from '@/components/tools/DAO';
 import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
+import Multisig from '@/components/tools/Multisig';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
@@ -133,13 +135,13 @@ const ToolsPage: NextPageWithLayout = () => {
 
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
-      <Container size="m" style={{ display: 'flex', justifyContent: 'center' }}>
+      <Container size="s" style={{ display: 'flex', justifyContent: 'center' }}>
         <Flex stack gap="l">
           <Text as="h1" size="text-2xl">
             Tools
           </Text>
 
-          <Card style={{ paddingTop: 0, width: 'min-content' }}>
+          <Card style={{ paddingTop: 0 }}>
             <Tabs.Root value={selectedTab}>
               <Tabs.List style={{ marginBottom: 'var(--gap-m)' }}>
                 <Tabs.Trigger href="?tab=ft" value="ft">
@@ -155,6 +157,14 @@ const ToolsPage: NextPageWithLayout = () => {
                 <Tabs.Trigger href="?tab=linkdrops" value="linkdrops">
                   <SvgIcon icon={<Gift fill="bold" />} />
                   Linkdrops
+                </Tabs.Trigger>
+                <Tabs.Trigger href="?tab=dao" value="dao">
+                  <SvgIcon icon={<BuildingOffice fill="bold" />} />
+                  DAOs
+                </Tabs.Trigger>
+                <Tabs.Trigger href="?tab=multisig" value="multisig">
+                  <SvgIcon icon={<Building fill="bold" />} />
+                  Multi-Signatures
                 </Tabs.Trigger>
               </Tabs.List>
 
@@ -175,6 +185,14 @@ const ToolsPage: NextPageWithLayout = () => {
                   reloadNFT={(d) => reload(d, 'nfts')}
                   reloadDrops={reloadLinkdrops}
                 />
+              </Tabs.Content>
+
+              <Tabs.Content value="dao">
+                <DAO />
+              </Tabs.Content>
+
+              <Tabs.Content value="multisig">
+                <Multisig />
               </Tabs.Content>
             </Tabs.Root>
           </Card>
