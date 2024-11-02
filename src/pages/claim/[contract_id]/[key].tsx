@@ -1,15 +1,16 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
-import Image from 'next/image';
+import { Button, Card, Container, Flex, Section, Text } from '@near-pagoda/ui';
 import { KeyPair } from 'near-api-js';
 import { formatNearAmount } from 'near-api-js/lib/utils/format';
-import { Button, Card, Container, Flex, Section, Text } from '@near-pagoda/ui';
+import { useRouter } from 'next/router';
+import React, { useContext, useEffect, useState } from 'react';
 
-import { useDefaultLayout } from '@/hooks/useLayout';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
+import FTPreview from '@/components/claim/FTPreview';
+import NearPreview from '@/components/claim/NearPreview';
+import NFTPreview from '@/components/claim/NFTPreview';
+import Wallets from '@/components/claim/Wallets';
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
-import { NftImage } from '@/components/NTFImage';
-import { NFT, NextPageWithLayout } from '@/utils/types';
+import { useDefaultLayout } from '@/hooks/useLayout';
+import type { NextPageWithLayout, NFT } from '@/utils/types';
 
 export type KeyPairString = `ed25519:${string}` | `secp256k1:${string}`;
 
@@ -19,20 +20,21 @@ type FT = {
   name: string;
   symbol: string;
   total_supply: string;
-}
+};
+
+type DropData = {
+  token?: FT;
+  nft?: NFT;
+  amount?: string;
+};
 
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const { contract_id, key } = router.query;
   const { signedAccountId, wallet } = useContext(NearContext);
-  const { requestAuthentication } = useSignInRedirect();
-  
-  const [dropData, setDropData] = useState<{
-    token?: FT;
-    nft?: NFT;
-    amount?: string;
-  }>({});
-  const [isLoading, setIsLoading] = useState(true);
+
+  const [dropData, setDropData] = useState<DropData>({});
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
@@ -53,15 +55,15 @@ const ToolsPage: NextPageWithLayout = () => {
         });
 
         if (dropInformation.ft) {
-          const metadata = await wallet.viewMethod({ 
-            contractId: dropInformation.ft.contract_id, 
-            method: 'ft_metadata' 
+          const metadata = await wallet.viewMethod({
+            contractId: dropInformation.ft.contract_id,
+            method: 'ft_metadata',
           });
-          setDropData({ 
-            token: { 
-              ...metadata, 
-              total_supply: dropInformation.ft.balance_per_use 
-            } 
+          setDropData({
+            token: {
+              ...metadata,
+              total_supply: dropInformation.ft.balance_per_use,
+            },
           });
         } else if (dropInformation.nft) {
           const nftId = await wallet.viewMethod({
@@ -69,11 +71,11 @@ const ToolsPage: NextPageWithLayout = () => {
             method: 'get_nft_token_ids_for_drop',
             args: { drop_id: dropInformation.drop_id },
           });
-          setDropData({ 
-            nft: { 
-              contract_id: dropInformation.nft.contract_id, 
-              token_id: nftId[0] 
-            } 
+          setDropData({
+            nft: {
+              contract_id: dropInformation.nft.contract_id,
+              token_id: nftId[0],
+            },
           });
         } else {
           const balance = await wallet.viewMethod({
@@ -94,33 +96,19 @@ const ToolsPage: NextPageWithLayout = () => {
     fetchDropData();
   }, [wallet, signedAccountId, contract_id, key]);
 
-  const handleClaim = async () => {
-    // Implement claim logic here
-    console.log('Claim button clicked');
-  };
-
   const renderDropContent = () => {
     const { token, nft, amount } = dropData;
 
     if (token) {
-      return (
-        <Flex justify="space-between" align="center">
-          <Text>{token.name}</Text>
-          <Text>{token.symbol}</Text>
-          <Text>
-            {(BigInt(token.total_supply) / BigInt(10 ** token.decimals)).toString()}
-          </Text>
-          <Image src={token.icon} alt={token.name} width={50} height={50} />
-        </Flex>
-      );
+      return <FTPreview token={token} />;
     }
 
     if (nft) {
-      return <NftImage nft={nft} />;
+      return <NFTPreview nft={nft} />;
     }
 
     if (amount) {
-      return <Text>{amount} NEAR</Text>;
+      return <NearPreview amount={amount} />;
     }
 
     return null;
@@ -133,30 +121,23 @@ const ToolsPage: NextPageWithLayout = () => {
           <Text as="h1" size="text-2xl">
             Claims
           </Text>
-          {isLoading ? (
-            <Text>Loading the drop</Text>
-          ) : error ? (
-            <Text>Error</Text>
-          ) : signedAccountId ? (
-            <Card>
-              {renderDropContent()}
-              <Button 
-                label="Claim 😈" 
-                fill="outline" 
-                onClick={handleClaim}
-                disabled={isLoading}
-              />
-            </Card>
-          ) : (
-            <Card>
-              <Text>Please sign in to use wallet utilities</Text>
-              <Button 
-                label="Sign In" 
-                fill="outline" 
-                onClick={() => requestAuthentication()} 
-              />
-            </Card>
-          )}
+          <Card>
+            {isLoading ? (
+              <Text>Loading the drop</Text>
+            ) : error ? (
+              <Text>Error</Text>
+            ) : signedAccountId ? (
+              <>
+                {renderDropContent()}
+                <Wallets url={`${contract_id}/${key}`}></Wallets>
+              </>
+            ) : (
+              <>
+                <Text>Please sign in to use wallet utilities</Text>
+                <Button label="Sign In" fill="outline" onClick={() => wallet?.signIn()} />
+              </>
+            )}
+          </Card>
         </Flex>
       </Container>
     </Section>
