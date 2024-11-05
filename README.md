@@ -24,10 +24,9 @@ To start local component development you need to follow this steps:
 
 2. Navigate to [near-discovery-components](https://github.com/near/near-discovery-components) and follow [Local development with BOS-Loader](https://github.com/near/near-discovery-components/blob/develop/CONTRIBUTING.md#local-development-with-bos-loader) section.
 
-3. *(optional)* Make a copy of `".env.example"` called `".env.local"`. **`NEXT_PUBLIC_NETWORK_ID`** allows you to choose working environment.
+3. _(optional)_ Make a copy of `".env.example"` called `".env.local"`. **`NEXT_PUBLIC_NETWORK_ID`** allows you to choose working environment.
 
-*Note:* The **`NEXT_PUBLIC_NETWORK_ID`** value should be the same as chosen working environment in `near-discovery-components`. More about [environments](https://github.com/near/near-discovery-components/blob/develop/CONTRIBUTING.md#testing-across-multiple-environments).
-
+_Note:_ The **`NEXT_PUBLIC_NETWORK_ID`** value should be the same as chosen working environment in `near-discovery-components`. More about [environments](https://github.com/near/near-discovery-components/blob/develop/CONTRIBUTING.md#testing-across-multiple-environments).
 
 ## Local VM Development
 
