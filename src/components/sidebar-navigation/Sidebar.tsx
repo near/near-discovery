@@ -196,7 +196,7 @@ export const Sidebar = () => {
             </Tooltip>
 
             <Tooltip content="News" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={isNavigationItemActive('/news')} $type="featured" href="/news">
+              <S.NavigationItem $active={isNavigationItemActive('/newsletter')} $type="featured" href="/newsletter">
                 <i className="ph-newspaper ph-bold" />
                 <span>News</span>
               </S.NavigationItem>
