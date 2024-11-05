@@ -123,7 +123,7 @@ export const marketingDrawerSections: NavigationSection[] = [
       },
       {
         title: 'News',
-        url: '/news',
+        url: '/newsletter',
         icon: 'ph-newspaper ph-bold',
       },
       {
