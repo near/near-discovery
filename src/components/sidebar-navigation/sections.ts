@@ -123,7 +123,7 @@ export const marketingDrawerSections: NavigationSection[] = [
       },
       {
         title: 'News',
-        url: '/nearweekapp.near/widget/nearweek.com',
+        url: '/news',
         icon: 'ph-newspaper ph-bold',
       },
       {
