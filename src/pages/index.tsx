@@ -37,6 +37,22 @@ const StyledCard = ({ href, title, description }: { href: string; title: string;
   );
 };
 
+const NewsletterBanner = styled.div`
+  background-color: #0072ce;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  font-size: 14px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  @media (max-width: 1240px) {
+    top: 60px;
+  }
+`;
+
 const HomePage: NextPageWithLayout = () => {
   const [selectedTab, setTab] = useState('contracts');
   const [avgBlockTime, setAvgBlockTime] = useState('1.30');
@@ -72,6 +88,12 @@ const HomePage: NextPageWithLayout = () => {
 
   return (
     <Section grow="available">
+      <NewsletterBanner>
+        Stay updated!{' '}
+        <a href="https://bit.ly/devhubnews" style={{ color: 'white', textDecoration: 'underline' }}>
+          Sign up for our newsletter →
+        </a>
+      </NewsletterBanner>
       <Flex stack gap="l" style={{ padding: deviceType === 'mobile' ? '0' : '0 var(--gap-l)' }}>
         <Header>
           <Flex stack gap="s" style={{ backgroundColor: 'white', padding: '1rem', textAlign: 'center' }}>
