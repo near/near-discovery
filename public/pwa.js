@@ -3,7 +3,6 @@
 // using next-pwa's default caching strategy: https://github.com/shadowwalker/next-pwa/blob/master/cache.js
 // PWA Tips: https://github.com/shadowwalker/next-pwa#tips
 
-
 // To disable all workbox logging during development, set self.__WB_DISABLE_DEV_LOGS to true
 //self.__WB_DISABLE_DEV_LOGS = true
 
@@ -14,35 +13,35 @@ const enableNavigationPreload = async () => {
   }
 };
 
-const promptNewVersionAvailable = event => {
+const promptNewVersionAvailable = (event) => {
   // `event.wasWaitingBeforeRegister` will be false if this is the first time the updated service worker is waiting.
   // When `event.wasWaitingBeforeRegister` is true, a previously updated service worker is still waiting.
   // You may want to customize the UI prompt accordingly.
   if (confirm('A newer version of near.org is available, reload to update?')) {
-    self.addEventListener('controlling', event => {
-      window.location.reload()
-    })
+    self.addEventListener('controlling', (event) => {
+      window.location.reload();
+    });
 
     // Send a message to the waiting service worker, instructing it to activate.
-    self.messageSkipWaiting()
+    self.messageSkipWaiting();
   } else {
     console.log(
-      'User rejected to reload near.org, keep using old version. New version will be automatically load when user opens the app next time.'
-    )
+      'User rejected to reload near.org, keep using old version. New version will be automatically load when user opens the app next time.',
+    );
   }
-}
+};
 
-self.addEventListener('waiting', promptNewVersionAvailable)
+self.addEventListener('waiting', promptNewVersionAvailable);
 
 self.addEventListener('activate', (event) => {
-  console.log('PWA service worker activated')
+  console.log('PWA service worker activated');
   event.waitUntil(enableNavigationPreload());
 });
 
-self.addEventListener('beforeinstallprompt', event => {
+self.addEventListener('beforeinstallprompt', (event) => {
   console.log('install will be prompted', event);
-})
+});
 
 self.addEventListener('install', () => {
-  console.log('PWA service worker Installing')
+  console.log('PWA service worker Installing');
 });
