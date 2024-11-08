@@ -4,7 +4,7 @@ import { nanoid } from 'nanoid';
 import type { UIEvent } from 'react';
 
 import type Analytics from '../../types/rudderstack-analytics';
-import { networkId } from './config';
+import { networkId } from '../config';
 
 let rudderAnalytics: Analytics | null = null;
 let anonymousUserId = '';

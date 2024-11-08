@@ -3,6 +3,7 @@
 :root {
   --gateway-page-container-padding-y: 2rem;
   --gateway-page-container-padding-x: 1rem;
+  scrollbar-gutter: stable;
 }
 
 p,
@@ -27,10 +28,6 @@ h6 {
   padding: var(--gateway-page-container-padding-y) var(--gateway-page-container-padding-x);
 }
 
-#near-wallet-selector-modal .open {
-  z-index: 5000;
-}
-
 #idos_container {
   position: absolute;
   top: 0;
@@ -52,8 +49,8 @@ h6 {
   overflow: visible;
 }
 
-#w3m-modal {
-  z-index: 1002;
+w3m-modal {
+  z-index: 5001 !important;
 }
 
 #launcher {
@@ -78,5 +75,25 @@ h6 {
   #launcher {
     right: 2px;
     bottom: 10px;
+  }
+}
+
+/* wallet selector */
+.modal-right {
+  display: none;
+}
+
+.modal-left, .modal-left-title {
+  border-right: 0 !important;
+  width: 100% !important;
+}
+
+.nws-modal {
+  max-width: 500px !important;
+}
+
+@media (max-width: 576px) {
+  .nws-modal, .modal-left {
+    max-height: 280px !important;
   }
 }

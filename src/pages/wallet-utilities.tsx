@@ -4,20 +4,18 @@ import { HandCoins, Key, LockKeyOpen, PaperPlaneTilt } from '@phosphor-icons/rea
 import { useRouter } from 'next/router';
 import { useContext } from 'react';
 
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { ExportFastAuthAccount } from '@/components/wallet-utilities/ExportFastAuthAccount';
 import KeyTable from '@/components/wallet-utilities/KeyTable';
 import { ReceiveNear } from '@/components/wallet-utilities/ReceiveNear';
 import { SendNear } from '@/components/wallet-utilities/SendNear';
-import { NearContext } from '@/components/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
-import { useSignInRedirect } from '@/hooks/useSignInRedirect';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const WalletUtilitiesPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'send';
-  const signedAccountId = useContext(NearContext);
-  const { requestAuthentication } = useSignInRedirect();
+  const { wallet, signedAccountId } = useContext(NearContext);
 
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -72,7 +70,7 @@ const WalletUtilitiesPage: NextPageWithLayout = () => {
           ) : (
             <Card>
               <Text>Please sign in to use wallet utilities.</Text>
-              <Button label="Sign In" fill="outline" onClick={() => requestAuthentication()} />
+              <Button label="Sign In" fill="outline" onClick={() => wallet?.signIn()} />
             </Card>
           )}
         </Flex>

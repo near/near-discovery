@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { singletonHook } from 'react-singleton-hook';
 
 import icon from '@/assets/images/near_social_icon.svg';
-import { networkId } from '@/utils/config';
+import { networkId } from '@/config';
 
 const web3onboardKey = 'web3-onboard:connectedWallets';
 

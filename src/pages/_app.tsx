@@ -19,17 +19,13 @@ import { useState } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
-import { NearContext, Wallet } from '@/components/WalletSelector';
+import { NearContext, Wallet } from '@/components/wallet-selector/WalletSelector';
+import { gleapSdkToken, networkId, signInContractId } from '@/config';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
-import { useClickTracking } from '@/hooks/useClickTracking';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
-import { usePageAnalytics } from '@/hooks/usePageAnalytics';
 import { useCookieStore } from '@/stores/cookieData';
 import { useResearchWizardStore } from '@/stores/researchWizard';
-import { init as initializeAnalytics, recordHandledError, setReferrer } from '@/utils/analytics';
 import { initPostHog, PostHogTrackingProvider } from '@/utils/analytics-posthog';
-import { gleapSdkToken, networkId, signInContractId } from '@/utils/config';
-import { setNotificationsLocalStorage } from '@/utils/notificationsLocalStorage';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
@@ -41,14 +37,12 @@ if (typeof window !== 'undefined') {
   if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
 }
 
-const wallet = new Wallet({ createAccessKeyFor: signInContractId, networkId: networkId });
+const wallet = new Wallet({ networkId: networkId, createAccessKeyFor: signInContractId });
 initPostHog();
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
   useBosLoaderInitializer();
   useHashUrlBackwardsCompatibility();
-  usePageAnalytics();
-  useClickTracking();
   const checkCookieData = useCookieStore((state) => state.checkCookieData);
   const cookieData = useCookieStore((state) => state.cookieData);
   const isResearchFormDismissed = useResearchWizardStore((state) => state.isResearchFormDismissed);
@@ -65,7 +59,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     const isFirebaseError = router.query.reason && referred_from_wallet;
     const msg = Array.isArray(router.query.reason) ? router.query.reason[0] : router.query.reason;
     if (isFirebaseError) {
-      recordHandledError({ description: msg || 'unknown error during Fast Authentication' });
       openToast({
         title: 'An Error Occurred During Fast Authentication',
         type: 'error',
@@ -74,24 +67,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       });
     }
   }, [router.query]);
-
-  useEffect(() => {
-    // this check is needed to init localStorage for notifications after user signs in
-    if (signedAccountId) {
-      setNotificationsLocalStorage();
-    }
-  }, [signedAccountId]);
-
-  useEffect(() => {
-    router.events.on('routeChangeStart', () => {
-      //save a reference to the currentl URL before the route change event completes
-      setReferrer(window.location.href);
-    });
-  });
-
-  useEffect(() => {
-    initializeAnalytics();
-  }, []);
 
   useEffect(() => {
     const interval = setInterval(zendeskCheck, 20);

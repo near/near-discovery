@@ -3,29 +3,25 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
-import { NearContext } from '@/components/WalletSelector';
+import { NearContext } from '@/components/wallet-selector/WalletSelector';
+import { privacyDomainName, termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useSimpleLayout } from '@/hooks/useLayout';
-import { useCurrentComponentStore } from '@/stores/current-component';
-import { privacyDomainName, termsDomainName } from '@/utils/config';
 import type { NextPageWithLayout } from '@/utils/types';
 
 const EmbedComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const components = useBosComponents();
   const { wallet } = useContext(NearContext);
-  const setComponentSrc = useCurrentComponentStore((store) => store.setSrc);
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
 
   useEffect(() => {
-    setComponentSrc(componentSrc);
-  }, [setComponentSrc, componentSrc]);
-
-  useEffect(() => {
-    setComponentProps(router.query);
+    const urlSearchParams = new URLSearchParams(window.location.search);
+    const params = Object.fromEntries(urlSearchParams.entries());
+    setComponentProps(params);
   }, [router.query]);
 
   return (
