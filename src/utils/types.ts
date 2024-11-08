@@ -30,6 +30,11 @@ type ProductionNetwork = {
       measurementId: string;
     };
   };
+  linkdrop: string;
+  apiNearBlocks: string;
+  ftContract: string;
+  nftContract: string;
+  fastNearApi: string;
 };
 
 export interface TosData {
@@ -57,30 +62,6 @@ export type IdosWalletInfo = {
   public_key: string;
   signature: string;
 };
-
-export type NotificationSubscriptionData = {
-  subscription: PushSubscription;
-  accountId: string;
-  gateway: string;
-};
-
-export type NotificationLocalStorageByAccountId = {
-  isNotificationSupported?: boolean;
-  isPushManagerSupported?: boolean;
-  isPermisionGranted?: boolean;
-  notNowTS?: number;
-  showOnTS?: number;
-  permission?: boolean;
-  subscribeStarted?: boolean;
-  subscribeError?: string;
-  bannerNotNowTS?: number;
-};
-
-export interface NotificationLocalStorage {
-  [accountId: string]: NotificationLocalStorageByAccountId;
-}
-
-export type NotificationLocalStorageFull = NotificationLocalStorage & NotificationLocalStorageByAccountId;
 
 // type DevelopmentNetwork = {
 //   networkId: 'localnet';
@@ -147,4 +128,64 @@ export type FormatedEvent = {
   start: string;
   thumbnail: string;
   location?: string;
+};
+
+export interface Drops {
+  drop_id: string;
+  owner_id: string;
+  deposit_per_use: string;
+  simple: Simple;
+  config: null;
+  metadata: string;
+  registered_uses: number;
+  required_gas: string;
+  next_key_id: number;
+  keys?: Keys[];
+}
+
+export interface KeypomKey {
+  drop_id: string;
+  pk: string;
+  cur_key_use: number;
+  remaining_uses: number;
+  last_used: number;
+  allowance: number;
+  key_id: number;
+}
+
+export interface Keys {
+  public: string;
+  private: string;
+}
+export interface Simple {
+  lazy_register: null;
+}
+export type FT = {
+  contract_id: string;
+  balance: string;
+  verified: boolean;
+  metadata: {
+    decimals: number;
+    icon: string;
+    name: string;
+    symbol: string;
+  };
+};
+export interface NFT {
+  contract_id: string;
+  token_id: string;
+  owner_id: string;
+  metadata: {
+    title: string;
+    description: string | null;
+    media: string | null;
+    copies: string | null;
+    reference: string | null;
+    base_uri: string | null;
+  };
+  approved_account_ids: string[] | null;
+}
+
+export type Collection = {
+  [contract_id: string]: NFT[];
 };

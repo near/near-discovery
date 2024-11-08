@@ -2,9 +2,7 @@ import { type ReactNode, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { BosLoaderBanner } from '../BosLoaderBanner';
-import { MarketingNavigation } from '../marketing-navigation/MarketingNavigation';
 import { useSidebarLayoutEnabled } from '../sidebar-navigation/hooks';
-// import { LargeScreenHeader } from '../sidebar-navigation/LargeScreenHeader';
 import { SidebarNavigation } from '../sidebar-navigation/SidebarNavigation';
 import { useNavigationStore } from '../sidebar-navigation/store';
 import { SMALL_SCREEN_LAYOUT_MAX_WIDTH } from '../sidebar-navigation/utils';
@@ -67,13 +65,10 @@ export function DefaultLayout({ children }: Props) {
 
   return (
     <Wrapper $animate={sidebarLayoutShouldAnimate} $sidebar={sidebarLayoutEnabled}>
-      {sidebarLayoutEnabled ? <SidebarNavigation /> : <MarketingNavigation />}
+      <SidebarNavigation />
 
       <Content>
-        {/* {sidebarLayoutEnabled && <LargeScreenHeader />} */}
-
         <BosLoaderBanner />
-
         {children}
       </Content>
     </Wrapper>

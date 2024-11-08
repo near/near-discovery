@@ -3,6 +3,7 @@ import * as HoverCard from '@radix-ui/react-hover-card';
 import Link from 'next/link';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
+import { networkId } from '@/config';
 import useDebounce from '@/hooks/useDebounce';
 import { fetchSearchHits } from '@/utils/algoliaSearchApi';
 import { fetchCatalog } from '@/utils/catalogSearchApi';
@@ -51,11 +52,15 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
   const fetchResults = useCallback(async () => {
     setIsLoading(true);
 
-    const [docs, apps, components] = await Promise.all([
+    const isMainnet = networkId === 'mainnet';
+
+    const fetchPromises = [
       fetchSearchHits('Docs', debouncedSearchTerm),
-      fetchCatalog(debouncedSearchTerm),
-      fetchSearchHits('Components', debouncedSearchTerm),
-    ]);
+      isMainnet ? fetchCatalog(debouncedSearchTerm) : Promise.resolve(),
+      isMainnet ? fetchSearchHits('Components', debouncedSearchTerm) : Promise.resolve(),
+    ];
+
+    const [docs, apps, components] = await Promise.all(fetchPromises);
 
     setResults({
       Docs: renderResults('Docs', docs),
@@ -135,11 +140,20 @@ export const Search = ({ inputRef }: { inputRef: any }) => {
               <S.Tab $active={activeTab === 'Docs'} onClick={() => handleTabChange('Docs')} $isFirst={true}>
                 Docs
               </S.Tab>
-              <S.Tab $active={activeTab === 'Apps'} onClick={() => handleTabChange('Apps')}>
-                Apps
+              <S.Tab
+                $active={activeTab === 'Apps'}
+                onClick={() => handleTabChange('Apps')}
+                disabled={networkId == 'testnet'}
+              >
+                Apps {networkId == 'testnet' && '(Mainnet only)'}
               </S.Tab>
-              <S.Tab $active={activeTab === 'Components'} onClick={() => handleTabChange('Components')} $isLast={true}>
-                Components
+              <S.Tab
+                $active={activeTab === 'Components'}
+                onClick={() => handleTabChange('Components')}
+                disabled={networkId == 'testnet'}
+                $isLast={true}
+              >
+                Components {networkId == 'testnet' && '(Mainnet only)'}
               </S.Tab>
             </S.TabContainer>
 

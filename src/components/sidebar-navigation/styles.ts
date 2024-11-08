@@ -70,6 +70,8 @@ export const Logo = styled(Link)`
   }
 `;
 
+export const Network = styled.div``;
+
 export const ToggleExpandButton = styled.button`
   all: unset;
   box-sizing: border-box;
@@ -605,13 +607,13 @@ export const Sidebar = styled.div<{
           ${NavigationItem} span,
           ${SectionLabelIconLink},
           ${SectionLabel},
-          ${Logo} {
+          ${Logo},
+          ${Network} {
             pointer-events: none;
             opacity: 0;
             padding: 0;
             width: 0;
           }
-
           ${SectionLabel} {
             margin-bottom: -2rem;
           }

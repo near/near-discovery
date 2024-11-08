@@ -2,7 +2,7 @@ import { Button, Table, Text, Tooltip } from '@near-pagoda/ui';
 import type { DeleteKeyAction } from '@near-wallet-selector/core';
 import { useContext, useEffect, useState } from 'react';
 
-import { NearContext } from '../WalletSelector';
+import { NearContext } from '../wallet-selector/WalletSelector';
 
 type AccessKey = {
   public_key: string;
@@ -87,14 +87,14 @@ const KeyTable: React.FC = () => {
               </Table.Cell>
               <Table.Cell>
                 <Tooltip content={data.access_key.permission.FunctionCall?.receiver_id ?? 'N/A'}>
-                  <Text style={{ minWidth: '5rem' }} clampLines={1}>
+                  <Text style={{ minWidth: '5rem', whiteSpace: 'pre-wrap' }} clampLines={1}>
                     {data.access_key.permission.FunctionCall?.receiver_id ?? 'N/A'}
                   </Text>
                 </Tooltip>
               </Table.Cell>
               <Table.Cell>
                 <Tooltip content={data.public_key}>
-                  <Text style={{ minWidth: '5rem' }} clampLines={1}>
+                  <Text style={{ minWidth: '5rem', whiteSpace: 'pre-wrap' }} clampLines={1}>
                     {data.public_key}
                   </Text>
                 </Tooltip>
