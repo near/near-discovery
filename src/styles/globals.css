@@ -83,7 +83,8 @@ w3m-modal {
   display: none;
 }
 
-.modal-left, .modal-left-title {
+.modal-left,
+.modal-left-title {
   border-right: 0 !important;
   width: 100% !important;
 }
@@ -93,7 +94,8 @@ w3m-modal {
 }
 
 @media (max-width: 576px) {
-  .nws-modal, .modal-left {
+  .nws-modal,
+  .modal-left {
     max-height: 280px !important;
   }
 }
