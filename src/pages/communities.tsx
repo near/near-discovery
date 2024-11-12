@@ -1,14 +1,15 @@
-/* eslint-disable @next/next/no-img-element */
-import { Button, Card, Container, Flex, Grid, Section, Text } from '@near-pagoda/ui';
+import { Card, Flex, Grid, Section, SvgIcon, Text } from '@near-pagoda/ui';
+import { CaretRight } from '@phosphor-icons/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import styled from 'styled-components';
 
+import FAQS from '@/components/communities/faqs';
 import { useCommunities } from '@/hooks/useCommunities';
+import useDeviceType from '@/hooks/useDeviceType';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
-
-import FAQS from './components/faqs';
 
 export const IconLink = styled(Link)<{ iconColor: string }>`
   all: unset;
@@ -48,6 +49,7 @@ export const IconLink = styled(Link)<{ iconColor: string }>`
 const ContactUsPage: NextPageWithLayout = () => {
   const { emitGatewayEvent } = useGatewayEvents();
   const { featuredCommunities, channels, urls } = useCommunities();
+  const deviceType = useDeviceType();
 
   function openGleapWidget() {
     emitGatewayEvent &&
@@ -58,16 +60,16 @@ const ContactUsPage: NextPageWithLayout = () => {
   }
 
   return (
-    <Section style={{ border: 'none', paddingTop: '2rem' }}>
-      <Container style={{ maxWidth: '960px' }}>
+    <Section grow="available">
+      <Flex stack gap="l" style={{ padding: deviceType === 'mobile' ? '0' : '0 var(--gap-l)' }}>
         <Flex style={{ padding: '24px 0' }}>
           <Text size="text-3xl" weight="500">
             Get Support
           </Text>
         </Flex>
 
-        <Grid columns="2fr 1fr" gap="m">
-          <Card background="green5" style={{ padding: '60px 28px', boxShadow: 'none' }}>
+        <Grid columns="2fr 1fr" gap="m" columnsTablet="1fr">
+          <Card background="green5" style={{ padding: '48px 28px', boxShadow: 'none' }}>
             <Text size="text-l" weight="700">
               Have a question? Ask our experts
             </Text>
@@ -86,12 +88,12 @@ const ContactUsPage: NextPageWithLayout = () => {
               Channels
             </Text>
 
-            <Grid columns="1fr 1fr 1fr" gap="m">
+            <Grid columns="1fr 1fr 1fr" columnsPhone="1fr 1fr" gap="m">
               {channels.map((channel) => (
                 <IconLink key={channel.url} href={channel.url} target="_blank" iconColor="green11">
                   <i className={`ph-bold ${channel.icon}`} />
                   <span>{channel.label}</span>
-                  <i className="ph ph-caret-right" />
+                  <SvgIcon icon={<CaretRight />} size="xs" />
                 </IconLink>
               ))}
             </Grid>
@@ -137,27 +139,42 @@ const ContactUsPage: NextPageWithLayout = () => {
 
         <Flex style={{ padding: '24px 0' }}>
           <Text size="text-3xl" weight="500">
-            Communities
+            Join the communities
           </Text>
         </Flex>
-        <Grid columns="1fr 1fr 1fr" columnsPhone="1">
+        <Grid columns="1fr 1fr 1fr" gap="m" columnsTablet="1fr 1fr" columnsPhone="1fr">
           {featuredCommunities.map((community) => (
             <Card
               key={community.name}
+              href={`https://t.me/${community.telegram}`}
+              target="_blank"
               style={{
-                border: '3px solid black',
-                flexDirection: 'column',
+                padding: '16px 8px',
+                border: 0,
+                textDecoration: 'none',
               }}
             >
-              <Flex align="center" style={{ marginBottom: '10px' }}>
-                <img src={community.icon} alt={community.name} width={80} height={80} style={{ borderRadius: '50%' }} />
-                <div>
-                  <Text size="text-l">{community.name}</Text>
-                  <p>{community.summary}</p>
+              <Flex
+                align="center"
+                style={{
+                  height: '100%',
+                  width: '100%',
+                  gap: '12px',
+                }}
+              >
+                <Image
+                  src={community.icon}
+                  alt={community.name}
+                  width={60}
+                  height={60}
+                  style={{ borderRadius: '50%' }}
+                />
+                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                  <Text size="text-l" style={{ marginBottom: '4px' }}>
+                    {community.name}
+                  </Text>
+                  <Text size="text-s">{community.summary}</Text>
                 </div>
-              </Flex>
-              <Flex justify="center" style={{ marginTop: 'auto' }}>
-                <Button label="Join the Community" href={`https://t.me/${community.telegram}`} />
               </Flex>
             </Card>
           ))}
@@ -169,7 +186,7 @@ const ContactUsPage: NextPageWithLayout = () => {
           </Text>
         </Flex>
         <FAQS />
-      </Container>
+      </Flex>
     </Section>
   );
 };
