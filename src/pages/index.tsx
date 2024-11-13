@@ -53,6 +53,18 @@ const NewsletterBanner = styled.div`
   }
 `;
 
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+`;
+
 const HomePage: NextPageWithLayout = () => {
   const [selectedTab, setTab] = useState('contracts');
   const [avgBlockTime, setAvgBlockTime] = useState('1.30');
@@ -60,6 +72,14 @@ const HomePage: NextPageWithLayout = () => {
   const [totalTx, setTotalTx] = useState('2,33');
   const [nearStats, setNearStats] = useState<NearBlocks>();
   const deviceType = useDeviceType();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const isClosed = localStorage.getItem('newsletterBannerClosed');
+    if (!isClosed) {
+      setVisible(true);
+    }
+  }, []);
 
   useEffect(() => {
     fetch('https://api.nearblocks.io/v1/stats')
@@ -86,14 +106,25 @@ const HomePage: NextPageWithLayout = () => {
     getAvrTx();
   }, [nearStats]);
 
+  const handleClose = () => {
+    setVisible(false);
+    localStorage.setItem('newsletterBannerClosed', 'true');
+  };
+
   return (
     <Section grow="available">
-      <NewsletterBanner>
-        Stay updated!{' '}
-        <a href="https://bit.ly/devhubnews" style={{ color: 'white', textDecoration: 'underline' }}>
-          Sign up for our newsletter →
-        </a>
-      </NewsletterBanner>
+      {visible && (
+        <NewsletterBanner>
+          Stay updated!{' '}
+          <a
+            href="https://bit.ly/devhubnews"
+            style={{ color: 'white', textDecoration: 'underline', marginLeft: '5px' }}
+          >
+            Sign up for our newsletter →
+          </a>
+          <CloseButton onClick={handleClose}>&times;</CloseButton>
+        </NewsletterBanner>
+      )}
       <Flex stack gap="l" style={{ padding: deviceType === 'mobile' ? '0' : '0 var(--gap-l)' }}>
         <Header>
           <Flex stack gap="s" style={{ backgroundColor: 'white', padding: '1rem', textAlign: 'center' }}>
