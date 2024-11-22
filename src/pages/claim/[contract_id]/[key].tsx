@@ -119,9 +119,9 @@ const ToolsPage: NextPageWithLayout = () => {
       <Container size="s">
         <Flex stack gap="l">
           <Text as="h1" size="text-2xl">
-            Claims
+            Claim
           </Text>
-          <Card>
+          <Card style={{ padding: '2rem' }}>
             {isLoading ? (
               <Text>Loading the drop</Text>
             ) : error ? (
