@@ -7,6 +7,7 @@ import { ChainAbstraction } from '@/components/home/ChainAbstraction';
 import { Contracts } from '@/components/home/Contracts';
 import { Data } from '@/components/home/Data';
 import { DecentralizedApps } from '@/components/home/DecentralizedApps';
+import { useNavigationStore } from '@/components/sidebar-navigation/store';
 import useDeviceType from '@/hooks/useDeviceType';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -37,7 +38,7 @@ const StyledCard = ({ href, title, description }: { href: string; title: string;
   );
 };
 
-const NewsletterBanner = styled.div`
+const NewsletterBanner = styled.div<{ isSidebarExpanded: boolean }>`
   background-color: #0072ce;
   color: white;
   padding: 8px;
@@ -45,7 +46,8 @@ const NewsletterBanner = styled.div`
   font-size: 14px;
   position: absolute;
   top: 0;
-  left: 0;
+  left: ${(p) => (p.isSidebarExpanded ? 'var(--sidebar-width-expanded)' : 'var(--sidebar-width-collapsed)')};
+  transition: all var(--sidebar-expand-transition-speed);
   right: 0;
 
   @media (max-width: 1240px) {
@@ -73,6 +75,7 @@ const HomePage: NextPageWithLayout = () => {
   const [nearStats, setNearStats] = useState<NearBlocks>();
   const deviceType = useDeviceType();
   const [visible, setVisible] = useState(false);
+  const isSidebarExpanded = useNavigationStore((store) => store.isSidebarExpanded && !store.expandedDrawer);
 
   useEffect(() => {
     const isClosed = localStorage.getItem('newsletterBannerClosed');
@@ -114,7 +117,7 @@ const HomePage: NextPageWithLayout = () => {
   return (
     <Section grow="available">
       {visible && (
-        <NewsletterBanner>
+        <NewsletterBanner isSidebarExpanded={isSidebarExpanded}>
           Stay updated!{' '}
           <a
             href="https://bit.ly/devhubnews"
