@@ -5,7 +5,6 @@ about: This issue serves to help us propose and organize support for impactful w
 title: "\U0001F525  [Secondary Focus Area] <Add a brief Title>"
 labels: ''
 assignees: ''
-
 ---
 
 **Motivation**
