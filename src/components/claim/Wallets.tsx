@@ -1,3 +1,4 @@
+import { Flex } from '@near-pagoda/ui';
 import Image from 'next/image';
 import styled from 'styled-components';
 
@@ -22,18 +23,11 @@ const StyledButton = styled.a`
   }
 `;
 
-const MeteorButton = styled(StyledButton)`
+const WalletButton = styled(StyledButton)`
   background-color: #212529;
+  text-decoration: none;
   &:hover {
     background-color: #11111c;
-  }
-`;
-
-const MyNearWalletButton = styled(StyledButton)`
-  border: 1px solid #999;
-  background-color: white;
-  &:hover {
-    background-color: #eee;
   }
 `;
 
@@ -44,14 +38,16 @@ const Wallets = ({ url }: { url: string }) => {
     networkId === 'testnet' ? 'https://testnet.mynearwallet.com/linkdrop/' : 'https://app.mynearwallet.com/linkdrop/';
 
   return (
-    <>
-      <MeteorButton href={`${meteorWalletUrl}${url}`} target="_blank">
+    <Flex stack style={{ paddingTop: '1rem' }} gap="m">
+      <WalletButton href={`${meteorWalletUrl}${url}`} target="_blank">
         <Image height={20} alt="Mintbase Logo" src={Meteor} />
-      </MeteorButton>
-      <MyNearWalletButton href={`${myNearWalletUrl}${url}`} target="_blank">
+        <span style={{ textDecoration: 'none', marginLeft: '1rem' }}>Meteor Wallet</span>
+      </WalletButton>
+      <WalletButton href={`${myNearWalletUrl}${url}`} target="_blank">
         <Image height={19} alt="My Near Wallet Logo" src={MyNearWallet} />
-      </MyNearWalletButton>
-    </>
+        <span style={{ textDecoration: 'none', marginLeft: '1rem' }}>My Near Wallet</span>
+      </WalletButton>
+    </Flex>
   );
 };
 
