@@ -2,7 +2,7 @@ name: Close Stale Pull Requests
 
 on:
   schedule:
-    - cron: '0 0 * * 5'  # Run at midnight on Fridays
+    - cron: '0 0 * * 5' # Run at midnight on Fridays
 
 permissions:
   issues: write

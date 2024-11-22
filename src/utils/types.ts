@@ -174,8 +174,8 @@ export type FT = {
 export interface NFT {
   contract_id: string;
   token_id: string;
-  owner_id: string;
-  metadata: {
+  owner_id?: string;
+  metadata?: {
     title: string;
     description: string | null;
     media: string | null;
@@ -183,7 +183,7 @@ export interface NFT {
     reference: string | null;
     base_uri: string | null;
   };
-  approved_account_ids: string[] | null;
+  approved_account_ids?: string[] | null;
 }
 
 export type Collection = {

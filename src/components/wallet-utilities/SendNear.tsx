@@ -13,15 +13,12 @@ type FormData = {
 };
 
 function displayBalance(balance: number) {
-  let display = Math.floor(balance * 100) / 100;
-
   if (balance < 1) {
-    display = Math.floor(balance * 100000) / 100000;
-    if (balance && !display) return '< 0.00001';
+    const display = (balance * 100000).toFixed(5);
+    if (balance && parseFloat(display) === 0) return '< 0.00001';
     return display;
   }
-
-  return display;
+  return balance.toFixed(5);
 }
 
 export const SendNear = () => {
@@ -36,7 +33,8 @@ export const SendNear = () => {
       try {
         const balance = await wallet.getBalance(signedAccountId);
         const requiredGas = 0.00005;
-        setCurrentNearAmount(balance - requiredGas);
+        const availableBalance = balance - requiredGas;
+        setCurrentNearAmount(Math.max(availableBalance, 0));
       } catch (error) {
         console.error(error);
       }
@@ -65,7 +63,7 @@ export const SendNear = () => {
       };
       const result: any = await wallet.signAndSendTransactions({ transactions: [sendNear] });
 
-      setCurrentNearAmount((value) => value - (data.sendNearAmount || 0));
+      setCurrentNearAmount((value) => Math.max(value - (data.sendNearAmount || 0), 0));
       form.reset();
 
       openToast({

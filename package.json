@@ -11,7 +11,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --check 'src/**/*.{js,jsx,ts,tsx,json}'",
+    "prettier": "prettier --check \"src/**/*.{js,jsx,ts,tsx,json}\"",
     "prettier:write": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json}'",
     "prepare": "is-ci || husky install && npm install commitizen -g",
     "pre-commit": "pnpm prettier && pnpm lint --max-warnings 0 && pnpm ts:check",
