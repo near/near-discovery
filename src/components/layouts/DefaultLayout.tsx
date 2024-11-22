@@ -25,7 +25,7 @@ const Wrapper = styled.div<{
   min-width: 0;
   justify-content: stretch;
   align-items: stretch;
-  flex-direction: ${(p) => (p.$sidebar ? 'row' : 'column')};
+  flex-direction: row;
 
   @media (max-width: ${SMALL_SCREEN_LAYOUT_MAX_WIDTH}px) {
     --sidebar-width-expanded: 100vw;
