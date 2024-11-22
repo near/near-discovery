@@ -1,5 +1,19 @@
 const featuredCommunities = [
   {
+    icon: 'https://ipfs.near.social/ipfs/bafkreibysr2mkwhb4j36h2t7mqwhynqdy4vzjfygfkfg65kuspd2bawauu',
+    name: 'NEAR Dev',
+    summary: 'An open community for developers',
+    accountId: 'nearai.community.devhub.near',
+    telegram: 'nearaialpha',
+  },
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreihgxkxuvj67b7vwys5di2326vx7sdvw5jjswv2xqlyxhelhha52ra',
+    name: 'NEAR AI',
+    summary: 'A community for AI enthusiasts',
+    accountId: 'nearai.community.devhub.near',
+    telegram: 'nearaialpha',
+  },
+  {
     icon: 'https://ipfs.near.social/ipfs/bafkreibi2p7h2jailau6fwt4zf2xdifsqhc4dabsowmngzswpzr7r4ikiq',
     name: 'Chain Abstraction',
     summary: 'Chain and Account Abstraction',
@@ -7,18 +21,25 @@ const featuredCommunities = [
     telegram: 'chain_abstraction',
   },
   {
+    icon: 'https://ipfs.near.social/ipfs/bafkreidhehq7za5btjegq5u2rw5jmw2kygef2776d6qcpkopaa3nphg5pm',
+    name: 'Tooling',
+    summary: 'Supporting our tooling ecosystem',
+    accountId: 'tooling.community.devhub.near',
+    telegram: 'NEAR_Tools_Community_Group',
+  },
+  {
+    icon: 'https://ipfs.near.social/ipfs/bafkreib45plxkuy6wcefachijuq2dm4jnfs4236yhfleehqboeeljpmxje',
+    name: 'Docs',
+    summary: 'A space to talk about all NEAR docs',
+    accountId: 'docs.community.devhub.near',
+    telegram: 'neardocscg',
+  },
+  {
     icon: 'https://ipfs.near.social/ipfs/bafkreicfcszhhmiw6bq5fvh7ebfqhmodplldxjve7id4mi67iykz67qehi',
     name: 'Build DAO',
     summary: 'The more you ship, the more you level up',
     accountId: 'build.community.devhub.near',
     telegram: '+bQmGfDqcAT9iYTcx',
-  },
-  {
-    icon: 'https://ipfs.near.social/ipfs/bafkreidhehq7za5btjegq5u2rw5jmw2kygef2776d6qcpkopaa3nphg5pm',
-    name: 'Tooling',
-    summary: 'Supporting the ongoing innovation of developers tooling.',
-    accountId: 'tooling.community.devhub.near',
-    telegram: 'NEAR_Tools_Community_Group',
   },
   {
     icon: 'https://ipfs.near.social/ipfs/bafkreihdu5bsnvxoxi62j24ljd4o5gfebtgtn6gaj3n4ebq23qoprn7tou',
@@ -45,7 +66,7 @@ const featuredCommunities = [
 
 const urls = {
   devHub: 'neardevhub.org',
-  discord: 'http://near.chat',
+  discord: 'https://near.chat',
   discourse: 'https://gov.near.org',
   docs: 'https://docs.near.org',
   getFunding: 'https://near.org/ecosystem/get-funding',

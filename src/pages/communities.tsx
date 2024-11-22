@@ -62,12 +62,6 @@ const ContactUsPage: NextPageWithLayout = () => {
   return (
     <Section grow="available">
       <Flex stack gap="l" style={{ padding: deviceType === 'mobile' ? '0' : '0 var(--gap-l)' }}>
-        <Flex style={{ padding: '24px 0' }}>
-          <Text size="text-3xl" weight="500">
-            Get Support
-          </Text>
-        </Flex>
-
         <Grid columns="2fr 1fr" gap="m" columnsTablet="1fr">
           <Card background="green5" style={{ padding: '48px 28px', boxShadow: 'none' }}>
             <Text size="text-l" weight="700">
@@ -137,55 +131,55 @@ const ContactUsPage: NextPageWithLayout = () => {
           </Flex>
         </Grid>
 
-        <Flex style={{ padding: '24px 0' }}>
+        <Flex stack gap="l" style={{ paddingTop: '2rem' }}>
           <Text size="text-3xl" weight="500">
-            Join the communities
+            Join a Community
           </Text>
-        </Flex>
-        <Grid columns="1fr 1fr 1fr" gap="m" columnsTablet="1fr 1fr" columnsPhone="1fr">
-          {featuredCommunities.map((community) => (
-            <Card
-              key={community.name}
-              href={`https://t.me/${community.telegram}`}
-              target="_blank"
-              style={{
-                padding: '16px 8px',
-                border: 0,
-                textDecoration: 'none',
-              }}
-            >
-              <Flex
-                align="center"
+          <Grid columns="1fr 1fr 1fr" gap="m" columnsTablet="1fr 1fr" columnsPhone="1fr">
+            {featuredCommunities.map((community) => (
+              <Card
+                key={community.name}
+                href={`https://t.me/${community.telegram}`}
+                target="_blank"
                 style={{
-                  height: '100%',
-                  width: '100%',
-                  gap: '12px',
+                  padding: '16px',
+                  border: 0,
+                  textDecoration: 'none',
                 }}
               >
-                <Image
-                  src={community.icon}
-                  alt={community.name}
-                  width={60}
-                  height={60}
-                  style={{ borderRadius: '50%' }}
-                />
-                <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-                  <Text size="text-l" style={{ marginBottom: '4px' }}>
-                    {community.name}
-                  </Text>
-                  <Text size="text-s">{community.summary}</Text>
-                </div>
-              </Flex>
-            </Card>
-          ))}
-        </Grid>
-
-        <Flex style={{ padding: '24px 0' }}>
-          <Text size="text-3xl" weight="500">
-            FAQ
-          </Text>
+                <Flex
+                  align="center"
+                  style={{
+                    height: '100%',
+                    width: '100%',
+                    gap: '12px',
+                  }}
+                >
+                  <Image
+                    src={community.icon}
+                    alt={community.name}
+                    width={60}
+                    height={60}
+                    style={{ borderRadius: '50%' }}
+                  />
+                  <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                    <Text size="text-l" style={{ marginBottom: '4px' }}>
+                      {community.name}
+                    </Text>
+                    <Text size="text-s">{community.summary}</Text>
+                  </div>
+                </Flex>
+              </Card>
+            ))}
+          </Grid>
         </Flex>
-        <FAQS />
+
+        <Flex stack gap="l" style={{ paddingTop: '2rem' }}>
+          <Text size="text-3xl" weight="500">
+            Frequent Asked Questions
+          </Text>
+          <FAQS />
+        </Flex>
       </Flex>
     </Section>
   );

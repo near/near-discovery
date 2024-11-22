@@ -36,11 +36,8 @@ function FAQS() {
       question: 'Where can I find funding for my project?',
       answer: (
         <>
-          <Link href={urls.devHub}>DevHub</Link>, powered by DevDAO, is a central platform offering funding
-          opportunities for NEAR ecosystem projects aimed at fostering a self-sufficient developer community. We
-          evaluate proposals based on their alignment with our goals, execution capabilities, and clear use of funds. To
-          initiate the <Link href={urls.getFunding}> funding process</Link> for your project, engage with the community
-          on DevHub&apos;s activity feed.
+          You can find information on grants and funding opportunities on the{' '}
+          <Link href={'https://near.org/ecosystem/get-funding'}> main NEAR portal </Link>.
         </>
       ),
     },
