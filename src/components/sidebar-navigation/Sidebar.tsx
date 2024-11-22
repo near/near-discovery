@@ -149,10 +149,10 @@ export const Sidebar = () => {
               </S.NavigationItem>
             </Tooltip>
 
-            <Tooltip content="Support" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem $active={isNavigationItemActive('/contact-us')} $type="featured" href="/contact-us">
+            <Tooltip content="Community Support" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem $active={isNavigationItemActive('/communities')} $type="featured" href="/communities">
                 <i className="ph-bold ph-question" />
-                <span>Support</span>
+                <span>Community Support</span>
               </S.NavigationItem>
             </Tooltip>
           </S.Stack>
