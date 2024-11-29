@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, FileInput, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
-import { formatNearAmount, parseNearAmount } from 'near-api-js/lib/utils/format';
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import { parseNearAmount } from 'near-api-js/lib/utils/format';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
@@ -67,7 +67,6 @@ const CreateDaoForm = ({ reload }: Props) => {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors, isSubmitting, isValid },
   } = useForm<FormData>({
     mode: 'all',
@@ -222,7 +221,7 @@ const CreateDaoForm = ({ reload }: Props) => {
         });
       }
     },
-    [isValid, signedAccountId, wallet, requiredDeposit, reset, reload],
+    [isValid, signedAccountId, wallet, reset, reload],
   );
 
   // adds current user as a council by default
