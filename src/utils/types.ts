@@ -187,6 +187,16 @@ export interface NFT {
   };
   approved_account_ids: string[] | null;
 }
+export type DAO = {
+  contract_id: string;
+  public_name: string;
+  description: string;
+  metadata: {
+    logo_url?: string | undefined;
+    logo_data?: string | undefined;
+    cover_url?: string | undefined;
+  };
+};
 
 export type Collection = {
   [contract_id: string]: NFT[];

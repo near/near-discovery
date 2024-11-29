@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
 import NearIconSvg from '@/assets/images/near-icon.svg';
-import DAO from '@/components/tools/DAO';
+import DecentralizedOrganization from '@/components/tools/DecentralizedOrganization';
 import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import Multisig from '@/components/tools/Multisig';
@@ -13,7 +13,7 @@ import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
-import type { Collection, FT, NextPageWithLayout, NFT } from '@/utils/types';
+import type { Collection, DAO, FT, NextPageWithLayout, NFT } from '@/utils/types';
 import whiteList from '@/utils/white-list.json';
 
 const NearToken: FT = {
@@ -35,14 +35,16 @@ const ToolsPage: NextPageWithLayout = () => {
   const { drops, reloadLinkdrops } = useLinkdrops();
   const [allFT, setAllFT] = useState<FT[]>([NearToken]);
   const [allNFT, setAllNFT] = useState<Collection[]>([]);
+  const [allDAO, setAllDAO] = useState<DAO[]>([]);
   const [loadingFT, setLoadingFT] = useState(false);
   const [loadingNFT, setLoadingNFT] = useState(false);
+  const [loadingDAO, setLoadingDAO] = useState(false);
 
   const fetchTokens = useCallback(async () => {
     if (!signedAccountId) return { fts: [], nfts: [] };
 
     const response = await fetch(`${network.apiNearBlocks}/v1/account/${signedAccountId}/tokens`);
-    if (!response.ok) return;
+    if (!response.ok) return { fts: [], nfts: [] };
 
     const data = await response.json();
     return data.tokens;
@@ -124,14 +126,118 @@ const ToolsPage: NextPageWithLayout = () => {
     [fetchTokens, processFT, processNFT],
   );
 
+  const fetchDaos = useCallback(async (): Promise<string[]> => {
+    if (!signedAccountId) return [];
+
+    const url = new URL(`/v1/account/${signedAccountId}/txns-only`, network.apiNearBlocks);
+    url.searchParams.set('page', '1');
+    url.searchParams.set('page', '10');
+    url.searchParams.set('order', 'desc');
+    url.searchParams.set('method', 'create');
+    url.searchParams.set('to', network.daoContract);
+
+    const response = await fetch(url);
+    if (!response.ok) return [];
+
+    const data = await response.json();
+
+    const daos = (data?.txns || [])
+      .map((tx: any) => {
+        if (!tx.outcomes?.status) return;
+
+        const action = tx.actions?.[0];
+
+        if (!action) return;
+
+        try {
+          const args = JSON.parse(action.args);
+
+          return [args.name, network.daoContract].join('.');
+        } catch (error) {
+          console.error(`Error while parsing create DAO tx: ${error}`);
+          return;
+        }
+      })
+      .filter(Boolean);
+
+    return Array.from(new Set(daos));
+  }, [signedAccountId]);
+
+  const processDAO = useCallback(
+    async (daos: string[]) => {
+      if (!daos.length) return [];
+      setLoadingDAO(true);
+
+      const getDAOData = async (contract_id: string): Promise<DAO> => {
+        try {
+          const config = await wallet?.viewMethod({
+            contractId: contract_id,
+            method: 'get_config',
+            args: {},
+          });
+
+          const metadata = JSON.parse(Buffer.from(config.metadata, 'base64').toString());
+
+          let logo_data;
+          if (metadata.flagLogo) {
+            const logo_response = await fetch(metadata.flagLogo);
+            const logo_blob = await logo_response.blob();
+            logo_data = URL.createObjectURL(logo_blob);
+          }
+
+          return {
+            contract_id: contract_id,
+            public_name: metadata.displayName,
+            description: config.purpose,
+            metadata: {
+              logo_url: metadata.flagLogo,
+              cover_url: metadata.flagCover,
+              logo_data: logo_data,
+            },
+          };
+        } catch (error) {
+          console.error(`Error happened while fetching DAO config: ${error}`);
+          return {
+            contract_id,
+            public_name: '',
+            description: '',
+            metadata: { logo_url: undefined, cover_url: undefined, logo_data: undefined },
+          };
+        }
+      };
+
+      const promises = daos.map((dao) => getDAOData(dao));
+      const all_daos = await Promise.all(promises);
+
+      setAllDAO(all_daos);
+      setLoadingDAO(false);
+    },
+    [wallet],
+  );
+
+  const reloadDao = useCallback(
+    async (delay: number) => {
+      await new Promise((resolve) => setTimeout(resolve, delay));
+
+      const daos = await fetchDaos();
+      await processDAO(daos);
+    },
+    [fetchDaos, processDAO],
+  );
+
   useEffect(() => {
     const init = async () => {
+      // load Fungible & Non-Fungible tokens
       const tokens = await fetchTokens();
       processFT(tokens.fts);
       processNFT(tokens.nfts);
+
+      // load Decentralized Organizations
+      const daos = await fetchDaos();
+      processDAO(daos);
     };
     init();
-  }, [fetchTokens, processFT, processNFT, signedAccountId]);
+  }, [fetchDaos, fetchTokens, processDAO, processFT, processNFT, signedAccountId]);
 
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -188,7 +294,7 @@ const ToolsPage: NextPageWithLayout = () => {
               </Tabs.Content>
 
               <Tabs.Content value="dao">
-                <DAO />
+                <DecentralizedOrganization loading={loadingDAO} user_daos={allDAO} reload={(d) => reloadDao(d)} />
               </Tabs.Content>
 
               <Tabs.Content value="multisig">

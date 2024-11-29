@@ -1,6 +1,5 @@
 import { Button, FileInput, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
 import { parseNearAmount } from 'near-api-js/lib/utils/format';
-import Link from 'next/link';
 import React, { useCallback, useContext, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
@@ -60,11 +59,16 @@ async function uploadFileToIpfs(file: File): Promise<string> {
 const FACTORY_CONTRACT = network.daoContract;
 const REQUIRED_DEPOSIT = '6'; // 6 Near
 
-const CreateDaoForm = () => {
+type Props = {
+  reload: (delay: number) => void;
+};
+
+const CreateDaoForm = ({ reload }: Props) => {
   const {
     control,
     register,
     handleSubmit,
+    reset,
     formState: { errors, isSubmitting, isValid },
   } = useForm<FormData>({
     mode: 'all',
@@ -175,12 +179,16 @@ const CreateDaoForm = () => {
       } catch (error) {}
 
       if (result) {
+        // clean form data
+        reset();
+
         openToast({
           type: 'success',
           title: 'DAO Created',
           description: `DAO ${data.display_name} was created successfully`,
           duration: 5000,
         });
+        reload(2000); // in 2 seconds
       } else {
         openToast({
           type: 'error',
@@ -190,7 +198,7 @@ const CreateDaoForm = () => {
         });
       }
     },
-    [wallet, signedAccountId, isValid],
+    [isValid, signedAccountId, wallet, reset, reload],
   );
 
   // adds current user as a council by default
@@ -204,11 +212,7 @@ const CreateDaoForm = () => {
   return (
     <>
       <Text size="text-l"> Create a Decentralized Autonomous Organization </Text>
-      <Text size="text-s">
-        This tool allows you to deploy your own Sputnik DAO smart contract (DAOs) <br />
-        Rolled out organizations may be found and managed from{' '}
-        <Link href="/astraplusplus.ndctools.near/widget/home?page=daos">here</Link>
-      </Text>
+      <Text size="text-s">This tool allows you to deploy your own Sputnik DAO smart contract (DAOs)</Text>
 
       <Form onSubmit={handleSubmit((data) => onSubmit(data))}>
         <Flex stack gap="s" style={{ border: '1px solid var(--violet3)', padding: '1rem', borderRadius: '10px' }}>
