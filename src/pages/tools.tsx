@@ -1,5 +1,5 @@
 import { Card, Container, Flex, Section, SvgIcon, Tabs, Text } from '@near-pagoda/ui';
-import { Building, BuildingOffice, Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
+import { BuildingOffice, Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
@@ -7,7 +7,6 @@ import NearIconSvg from '@/assets/images/near-icon.svg';
 import DecentralizedOrganization from '@/components/tools/DecentralizedOrganization';
 import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
-import Multisig from '@/components/tools/Multisig';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
@@ -268,10 +267,10 @@ const ToolsPage: NextPageWithLayout = () => {
                   <SvgIcon icon={<BuildingOffice fill="bold" />} />
                   DAOs
                 </Tabs.Trigger>
-                <Tabs.Trigger href="?tab=multisig" value="multisig">
+                {/* <Tabs.Trigger href="?tab=multisig" value="multisig">
                   <SvgIcon icon={<Building fill="bold" />} />
                   Multi-Signatures
-                </Tabs.Trigger>
+                </Tabs.Trigger> */}
               </Tabs.List>
 
               <Tabs.Content value="ft">
@@ -297,9 +296,9 @@ const ToolsPage: NextPageWithLayout = () => {
                 <DecentralizedOrganization loading={loadingDAO} user_daos={allDAO} reload={(d) => reloadDao(d)} />
               </Tabs.Content>
 
-              <Tabs.Content value="multisig">
+              {/* <Tabs.Content value="multisig">
                 <Multisig />
-              </Tabs.Content>
+              </Tabs.Content> */}
             </Tabs.Root>
           </Card>
         </Flex>
