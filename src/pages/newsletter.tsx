@@ -1,210 +1,246 @@
 /* eslint-disable @next/next/no-img-element */
-import { Container, Flex, Section, Text } from '@near-pagoda/ui';
+import { Button, Container, Flex, Form, Grid, Section, Text } from '@near-pagoda/ui';
+import Head from 'next/head';
 import Link from 'next/link';
-import styled from 'styled-components';
+import { useRouter } from 'next/router';
+import { useMemo, useState } from 'react';
+import type { SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
+import styled, { keyframes } from 'styled-components';
+import useSWR from 'swr';
 
+import ScrollToTop from '@/components/scrollToTop';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
-export const EventImage = styled.div`
-  border-radius: 8px;
-  overflow: hidden;
-  width: 100%;
-  height: 220px;
-  transition: all 200ms;
-  margin-bottom: 10px;
-  position: relative;
-
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    position: relative;
-    z-index: 5;
-  }
-
-  &::before {
-    content: '';
-    display: block;
-    inset: 0;
-    background: var(--whiteA6);
-    z-index: 10;
-    position: absolute;
+const fadeIn = keyframes`
+  0% {
     opacity: 0;
-    transition: all 200ms;
+  }
+  100% {
+    opacity: 1;
   }
 `;
 
-const NewsletterBanner = styled.div`
-  background-color: #0072ce;
-  color: white;
-  padding: 8px;
-  text-align: center;
-  font-size: 14px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  @media (max-width: 1240px) {
-    top: 60px;
-  }
+const IssueCover = styled.img`
+  border-radius: 6px;
 `;
 
-type GridItem = {
-  id: string;
-  title: string;
-  thumbnail: string;
-  url: string;
-  date: string;
+const GreenBox = styled.div`
+  background: #00ec97;
+  border-radius: 6px;
+  padding: 5px 10px;
+`;
+
+const Confirmation = styled.div`
+  background: white;
+  border-radius: 6px;
+  padding: 5px 10px;
+  animation: ${fadeIn} ease 0s;
+`;
+
+const SubscribeForm = styled(Flex)`
+  border-right-radius: 6px;
+  border: 2px solid transparent;
+  border-radius: 0 22px 22px 0;
+  transition: border-color 0.2s ease-in;
+
+  &:focus-within {
+    transition: border-color 0.2s ease-in;
+    border-color: black;
+    border-radius: 0 22px 22px 0
+  }
+
+  input { 
+    border: none;
+    padding: 5px 10px; 
+    width: 100%; 
+  }
+
+  input:focus {
+    border: none;
+    outline: none;
+`;
+
+const LinksList = styled.ul`
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0;
+`;
+
+type SubscribeForm = {
+  email: string;
 };
 
-const gridItems: GridItem[] = [
-  {
-    id: '36',
-    title: 'Dev News #36',
-    thumbnail: 'newsletter/36.png',
-    url: 'https://mailchi.mp/neardevhub/near-dev-news-36',
-    date: '2024-11-04',
-  },
-  {
-    id: '35',
-    title: 'Dev News #35',
-    thumbnail: 'newsletter/35.jpg',
-    url: 'https://mailchi.mp/neardevhub/near-dev-news-35',
-    date: '2024-10-28',
-  },
-  {
-    id: '34',
-    title: 'Dev News #34',
-    thumbnail: 'newsletter/34.jpg',
-    url: 'https://mailchi.mp/neardevhub/near-dev-news-34',
-    date: '2024-10-21',
-  },
-  {
-    id: '33',
-    title: 'Dev News #33',
-    thumbnail: 'newsletter/33.jpg',
-    url: 'https://mailchi.mp/neardevhub/near-dev-news-33',
-    date: '2024-10-14',
-  },
-  {
-    id: '32',
-    title: 'Dev News #32',
-    thumbnail: 'newsletter/32.jpg',
-    url: 'https://mailchi.mp/neardevhub/near-dev-news-32',
-    date: '2024-10-07',
-  },
-];
+type Issue = {
+  id: string;
+  settings: {
+    subject_line: string;
+  };
+};
 
-const FlexibleGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 24px;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 42px 0;
+const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-  @media (min-width: 1200px) {
-    grid-template-columns: repeat(5, 1fr);
-  }
-`;
+function trimCampaignHTML(htmlString: string) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(htmlString, 'text/html');
 
-const CommunityNews = styled.a`
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s;
+  const header = doc.querySelector('tbody[data-block-id="4"].mceWrapper');
+  const footer = doc.querySelector('tbody[data-block-id="60"].mceWrapper');
 
-  &:hover {
-    transform: translateY(-5px);
-  }
-`;
+  [footer, header].forEach((element) => {
+    if (element) {
+      element.innerHTML = '';
+    }
+  });
 
-const NewsImage = styled.div`
-  overflow: hidden;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-
-  img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-  }
-`;
+  return doc.body.innerHTML;
+}
 
 const NewsPage: NextPageWithLayout = () => {
-  return (
-    <div>
-      <Section style={{ border: 'none', paddingTop: '2rem' }}>
-        <NewsletterBanner>
-          Stay updated!{' '}
-          <a href="https://bit.ly/devhubnews" style={{ color: 'white', textDecoration: 'underline' }}>
-            Sign up for our newsletter →
-          </a>
-        </NewsletterBanner>
-        <Container>
-          <Flex style={{ padding: '24px 0' }}>
-            <Text size="text-3xl" weight="500">
-              Recent Newsletters
-            </Text>
-          </Flex>
-          <Flex style={{ padding: '5px 0' }}>
-            <Text size="text-s" weight="300">
-              Click on the newsletter to view it.
-            </Text>
-          </Flex>
+  const router = useRouter();
+  const { id } = router.query;
+  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
-          <FlexibleGrid>
-            {gridItems.map((item) => (
-              <CommunityNews key={item.id} href={item.url} target="_blank">
-                <NewsImage>
-                  <img src={item.thumbnail} alt={item.title} />
-                </NewsImage>
-                <Text color="sand12" size="text-l" weight="500" as="h3">
-                  {item.title}
-                </Text>
-                <Flex align="center" gap="s">
-                  <i className="ph-bold ph-calendar-blank" />
-                  <Text color="sand11" size="text-s" style={{ whiteSpace: 'nowrap' }}>
-                    {item.date}
-                  </Text>
-                </Flex>
-              </CommunityNews>
-            ))}
-          </FlexibleGrid>
-        </Container>
-        <Container>
-          <Flex justify="center" style={{ padding: '48px 0' }}>
-            <Link
-              href="/nearweekapp.near/widget/nearweek.com"
-              style={{
-                display: 'block',
-                padding: '24px 48px',
-                backgroundColor: 'white',
-                borderRadius: '12px',
-                boxShadow: '0 8px 16px rgba(0, 0, 0, 0.1)',
-                textDecoration: 'none',
-                transition: 'transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out',
-              }}
-              onMouseOver={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = '0 12px 20px rgba(0, 0, 0, 0.15)';
-              }}
-              onMouseOut={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = '0 8px 16px rgba(0, 0, 0, 0.1)';
-              }}
-            >
-              <Text size="text-xl" weight="500" color="sand12">
-                Looking for more NEAR news? Visit NEARWEEK →
-              </Text>
-            </Link>
-          </Flex>
-        </Container>
-      </Section>
-    </div>
+  const { data: campaigns, isLoading: campaignLoading } = useSWR('/api/newsletter', fetcher);
+  const issueId = useMemo(() => id || campaigns?.[0]?.id, [id, campaigns]);
+  const { data: issueDetails, isLoading: issueLoading } = useSWR(
+    issueId ? `/api/newsletter/${issueId}` : null,
+    fetcher,
+  );
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<SubscribeForm>();
+
+  const onSubmit: SubmitHandler<SubscribeForm> = async (data) => {
+    try {
+      const response = await fetch('/api/newsletter/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: data.email,
+        }),
+      });
+
+      await response;
+
+      if (response.ok) {
+        setIsFormSubmitted(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  if (campaignLoading) return;
+
+  return (
+    <>
+      <Head>
+        <title>News</title>
+      </Head>
+      <div>
+        <Section style={{ border: 'none', paddingTop: '2rem' }}>
+          <Container>
+            <Grid columns="2fr 1fr">
+              {issueLoading ? (
+                <>
+                  <div className="spinner-border text-dark" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </>
+              ) : (
+                <div dangerouslySetInnerHTML={{ __html: trimCampaignHTML(issueDetails) }}></div>
+              )}
+
+              <Flex style={{ flexDirection: 'column' }}>
+                <div>
+                  <IssueCover src={`newsletter/${issueId}.jpg`} alt="" />
+                </div>
+                <GreenBox style={{ padding: '15px' }}>
+                  <h3>
+                    <Text size="text-l">Subscribe to the newsletter</Text>
+                  </h3>
+                  {isFormSubmitted ? (
+                    <>
+                      <Confirmation style={{ background: 'white', padding: '15px, 10px' }}>
+                        <Text size="text-s">
+                          <Text weight={600}>Thank you!</Text> Please visit your e-mail to confirm your subscibtion.
+                        </Text>
+                      </Confirmation>{' '}
+                    </>
+                  ) : (
+                    <>
+                      <Form onSubmit={handleSubmit(onSubmit)}>
+                        {errors.email && <span style={{ color: 'red' }}> This field is required!</span>}
+                        <SubscribeForm gap="none">
+                          <input
+                            {...register('email', { required: true })}
+                            placeholder="dev@youremail.com"
+                            type="email"
+                            className=""
+                          />
+                          <Button
+                            label="Subscribe"
+                            style={{ borderBottomLeftRadius: 0, borderTopLeftRadius: 0 }}
+                            type="submit"
+                          />
+                        </SubscribeForm>
+                      </Form>
+                    </>
+                  )}
+                </GreenBox>
+                <div>
+                  <GreenBox>
+                    <h3>
+                      <Text size="text-l">Recent Issues</Text>
+                    </h3>
+                  </GreenBox>
+                  <LinksList>
+                    {campaigns.map((issue: Issue) => (
+                      <li key={issue.id} style={{ fontWeight: issueId === issue.id ? 'bold' : 'normal' }}>
+                        <Link href={{ pathname: '/newsletter', query: { id: issue.id } }} prefetch={true}>
+                          {issue.settings.subject_line}
+                        </Link>
+                      </li>
+                    ))}
+                  </LinksList>
+                  <hr />
+                </div>
+                <div>
+                  <GreenBox>
+                    <h3>
+                      <Text size="text-l">Looking for more?</Text>
+                    </h3>
+                  </GreenBox>
+                  <LinksList>
+                    <li>
+                      <Link href={'https://nearweek.com'}> NEARWEEK →</Link>
+                    </li>
+                    <li>
+                      <Link href={'https://x.com/neardevhub'}> DevHub on X →</Link>
+                    </li>
+                    <li>
+                      <Link href={'https://x.com/NEARProtocol'}> NEAR on X →</Link>
+                    </li>
+                    <li>
+                      <Link href={'https://near.org/blog'}> NEAR Blog →</Link>
+                    </li>
+                  </LinksList>
+                  <hr />
+                </div>
+              </Flex>
+            </Grid>
+          </Container>
+        </Section>
+      </div>
+      <ScrollToTop />
+    </>
   );
 };
 
