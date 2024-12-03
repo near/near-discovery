@@ -50,9 +50,7 @@ async function uploadFileToIpfs(file: File): Promise<string> {
     headers: { Accept: 'application/json' },
     body: file,
   });
-  console.log('res', res.ok);
   const fileData: { cid: string } = await res.json();
-  console.log('res json', fileData);
   return fileData.cid;
 }
 
