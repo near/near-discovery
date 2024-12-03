@@ -23,6 +23,7 @@
     "@idos-network/idos-sdk": "^0.3.1",
     "@iframe-resizer/react": "^5.2.6",
     "@keypom/selector": "1.2.3",
+    "@mailchimp/mailchimp_marketing": "^3.0.80",
     "@monaco-editor/react": "^4.6.0",
     "@near-js/biometric-ed25519": "0.3.0",
     "@near-pagoda/ui": "^1.0.1",
@@ -78,6 +79,7 @@
     "react-singleton-hook": "^3.4.0",
     "rudder-sdk-js": "^2.48.6",
     "styled-components": "^5.3.11",
+    "swr": "^2.2.5",
     "typescript": "^5.4.5",
     "wagmi": "^2.12.17",
     "zustand": "^4.5.2"
@@ -88,6 +90,7 @@
     "@types/big.js": "^6.2.2",
     "@types/dompurify": "^3.0.5",
     "@types/lodash": "^4.17.0",
+    "@types/mailchimp__mailchimp_marketing": "^3.0.20",
     "@types/node": "^18.19.31",
     "@types/react": "^18.2.79",
     "@types/react-dom": "^18.2.25",
