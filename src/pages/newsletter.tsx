@@ -81,12 +81,13 @@ type Issue = {
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
-function trimCampaignHTML(htmlString: string) {
+function parseCampaignHTML(htmlString: string) {
   const parser = new DOMParser();
   const doc = parser.parseFromString(htmlString, 'text/html');
 
   const header = doc.querySelector('tbody[data-block-id="4"].mceWrapper');
   const footer = doc.querySelector('tbody[data-block-id="60"].mceWrapper');
+  const style = doc.querySelector('style');
 
   [footer, header].forEach((element) => {
     if (element) {
@@ -94,7 +95,7 @@ function trimCampaignHTML(htmlString: string) {
     }
   });
 
-  return doc.body.innerHTML;
+  return style?.outerHTML + doc.body.innerHTML;
 }
 
 const NewsPage: NextPageWithLayout = () => {
@@ -144,101 +145,101 @@ const NewsPage: NextPageWithLayout = () => {
       <Head>
         <title>News</title>
       </Head>
-      <div>
-        <Section style={{ border: 'none', paddingTop: '2rem' }}>
-          <Container>
-            <Grid columns="2fr 1fr">
-              {issueLoading ? (
-                <>
-                  <div className="spinner-border text-dark" role="status">
-                    <span className="visually-hidden">Loading...</span>
-                  </div>
-                </>
-              ) : (
-                <div dangerouslySetInnerHTML={{ __html: trimCampaignHTML(issueDetails) }}></div>
-              )}
+      <Section grow="available" style={{ border: 'none', paddingTop: '2rem' }}>
+        <Container>
+          <Grid columns="2fr 1fr" columnsPhone="minmax(0, 1fr)" columnsTablet="minmax(0, 1fr)" gap="l">
+            {issueLoading ? (
+              <>
+                <div className="spinner-border text-dark" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </>
+            ) : (
+              <div>
+                <div dangerouslySetInnerHTML={{ __html: parseCampaignHTML(issueDetails) }}></div>
+              </div>
+            )}
 
-              <Flex style={{ flexDirection: 'column' }}>
-                <div>
-                  <IssueCover src={`newsletter/${issueId}.jpg`} alt="" />
-                </div>
-                <GreenBox style={{ padding: '15px' }}>
+            <Flex style={{ flexDirection: 'column' }}>
+              <div>
+                <IssueCover src={`newsletter/${issueId}.jpg`} alt="" />
+              </div>
+              <GreenBox style={{ padding: '15px' }}>
+                <h3>
+                  <Text size="text-l">Subscribe to the newsletter</Text>
+                </h3>
+                {isFormSubmitted ? (
+                  <>
+                    <Confirmation style={{ background: 'white', padding: '15px, 10px' }}>
+                      <Text size="text-s">
+                        <Text weight={600}>Thank you!</Text> Please visit your e-mail to confirm your subscibtion.
+                      </Text>
+                    </Confirmation>{' '}
+                  </>
+                ) : (
+                  <>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
+                      {errors.email && <span style={{ color: 'red' }}> This field is required!</span>}
+                      <SubscribeForm gap="none">
+                        <input
+                          {...register('email', { required: true })}
+                          placeholder="dev@youremail.com"
+                          type="email"
+                          className=""
+                        />
+                        <Button
+                          label="Subscribe"
+                          style={{ borderBottomLeftRadius: 0, borderTopLeftRadius: 0 }}
+                          type="submit"
+                        />
+                      </SubscribeForm>
+                    </Form>
+                  </>
+                )}
+              </GreenBox>
+              <div>
+                <GreenBox>
                   <h3>
-                    <Text size="text-l">Subscribe to the newsletter</Text>
+                    <Text size="text-l">Recent Issues</Text>
                   </h3>
-                  {isFormSubmitted ? (
-                    <>
-                      <Confirmation style={{ background: 'white', padding: '15px, 10px' }}>
-                        <Text size="text-s">
-                          <Text weight={600}>Thank you!</Text> Please visit your e-mail to confirm your subscibtion.
-                        </Text>
-                      </Confirmation>{' '}
-                    </>
-                  ) : (
-                    <>
-                      <Form onSubmit={handleSubmit(onSubmit)}>
-                        {errors.email && <span style={{ color: 'red' }}> This field is required!</span>}
-                        <SubscribeForm gap="none">
-                          <input
-                            {...register('email', { required: true })}
-                            placeholder="dev@youremail.com"
-                            type="email"
-                            className=""
-                          />
-                          <Button
-                            label="Subscribe"
-                            style={{ borderBottomLeftRadius: 0, borderTopLeftRadius: 0 }}
-                            type="submit"
-                          />
-                        </SubscribeForm>
-                      </Form>
-                    </>
-                  )}
                 </GreenBox>
-                <div>
-                  <GreenBox>
-                    <h3>
-                      <Text size="text-l">Recent Issues</Text>
-                    </h3>
-                  </GreenBox>
-                  <LinksList>
-                    {campaigns.map((issue: Issue) => (
-                      <li key={issue.id} style={{ fontWeight: issueId === issue.id ? 'bold' : 'normal' }}>
-                        <Link href={{ pathname: '/newsletter', query: { id: issue.id } }} prefetch={true}>
-                          {issue.settings.subject_line}
-                        </Link>
-                      </li>
-                    ))}
-                  </LinksList>
-                  <hr />
-                </div>
-                <div>
-                  <GreenBox>
-                    <h3>
-                      <Text size="text-l">Looking for more?</Text>
-                    </h3>
-                  </GreenBox>
-                  <LinksList>
-                    <li>
-                      <Link href={'https://nearweek.com'}> NEARWEEK →</Link>
+                <LinksList>
+                  {campaigns.map((issue: Issue) => (
+                    <li key={issue.id} style={{ fontWeight: issueId === issue.id ? 'bold' : 'normal' }}>
+                      <Link href={{ pathname: '/newsletter', query: { id: issue.id } }} prefetch={true}>
+                        {issue.settings.subject_line}
+                      </Link>
                     </li>
-                    <li>
-                      <Link href={'https://x.com/neardevhub'}> DevHub on X →</Link>
-                    </li>
-                    <li>
-                      <Link href={'https://x.com/NEARProtocol'}> NEAR on X →</Link>
-                    </li>
-                    <li>
-                      <Link href={'https://near.org/blog'}> NEAR Blog →</Link>
-                    </li>
-                  </LinksList>
-                  <hr />
-                </div>
-              </Flex>
-            </Grid>
-          </Container>
-        </Section>
-      </div>
+                  ))}
+                </LinksList>
+                <hr />
+              </div>
+              <div>
+                <GreenBox>
+                  <h3>
+                    <Text size="text-l">Looking for more?</Text>
+                  </h3>
+                </GreenBox>
+                <LinksList>
+                  <li>
+                    <Link href={'https://nearweek.com'}> NEARWEEK →</Link>
+                  </li>
+                  <li>
+                    <Link href={'https://x.com/neardevhub'}> DevHub on X →</Link>
+                  </li>
+                  <li>
+                    <Link href={'https://x.com/NEARProtocol'}> NEAR on X →</Link>
+                  </li>
+                  <li>
+                    <Link href={'https://near.org/blog'}> NEAR Blog →</Link>
+                  </li>
+                </LinksList>
+                <hr />
+              </div>
+            </Flex>
+          </Grid>
+        </Container>
+      </Section>
       <ScrollToTop />
     </>
   );
