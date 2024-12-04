@@ -98,6 +98,9 @@ export const lumaDevHubHacksCalendarId = process.env.NEXT_PUBLIC_LUMA_DEVHUB_HAC
 export const nearTownHallCalendarId = process.env.NEXT_PUBLIC_NEAR_TOWN_HALL_CALENDAR_ID ?? '';
 export const googleCalendarApiKey = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_KEY ?? '';
 export const devhubCommunityCalendarId = process.env.NEXT_PUBLIC_DEVHUB_COMMUNITY_CALENDAR_ID ?? '';
+export const mailchimpApiKey = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY ?? '';
+export const mailchimpRegion = process.env.NEXT_PUBLIC_MAILCHIMP_REGION ?? '';
+export const mailchimpAudienceId = process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE_ID ?? '';
 export const EVMWalletChain = evmWalletChains[networkId];
 
 export const commitModalBypassAuthorIds = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_AUTHOR_IDS ?? '')
