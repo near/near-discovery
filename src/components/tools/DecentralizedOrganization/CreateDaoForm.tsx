@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, FileInput, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
-import { parseNearAmount } from 'near-api-js/lib/utils/format';
-import React, { useCallback, useContext, useEffect } from 'react';
+import { formatNearAmount, parseNearAmount } from 'near-api-js/lib/utils/format';
+import React, { useCallback, useContext, useEffect, useMemo } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
 import { NearContext } from '@/components/wallet-selector/WalletSelector';
@@ -55,7 +56,6 @@ async function uploadFileToIpfs(file: File): Promise<string> {
 }
 
 const FACTORY_CONTRACT = network.daoContract;
-const REQUIRED_DEPOSIT = '6'; // 6 Near
 
 type Props = {
   reload: (delay: number) => void;
@@ -67,9 +67,16 @@ const CreateDaoForm = ({ reload }: Props) => {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isSubmitting, isValid },
   } = useForm<FormData>({
     mode: 'all',
+    defaultValues: {
+      display_name: '',
+      description: '',
+      account_prefix: '',
+      councils: [],
+    },
   });
   const { fields, append, remove, prepend } = useFieldArray({
     // @ts-expect-error don't know error
@@ -78,6 +85,27 @@ const CreateDaoForm = ({ reload }: Props) => {
   });
 
   const { wallet, signedAccountId } = useContext(NearContext);
+
+  const data = watch();
+
+  const requiredDeposit = useMemo((): string => {
+    const minDeposit = BigInt(parseNearAmount('4.7')!); // deposit for contract code storage
+    const storageDeposit = BigInt(parseNearAmount('0.1')!); // deposit for data storage
+
+    const displayNameSymbols = data.display_name.length;
+    const descriptionSymbols = data.description.length;
+    const prefixSymbols = data.account_prefix.length;
+    const councilsSymbols = data.councils.reduce((previous, current) => previous + current.length, 0);
+
+    const symbols = displayNameSymbols + descriptionSymbols + prefixSymbols + councilsSymbols;
+
+    const pricePerSymbol = parseNearAmount('0.00001')!; // 10^19 yocto Near
+    const totalSymbols = BigInt(symbols) * BigInt(pricePerSymbol);
+
+    const total = minDeposit + storageDeposit + totalSymbols;
+
+    return total.toString();
+  }, [data]);
 
   const isAccountPrefixAvailable = useCallback(
     async (account_prefix: string) => {
@@ -142,8 +170,6 @@ const CreateDaoForm = ({ reload }: Props) => {
       const coverFile = data.cover?.[0];
       const coverCid = coverFile ? await uploadFileToIpfs(coverFile) : DEFAULT_COVER_CID;
 
-      const deposit = parseNearAmount(REQUIRED_DEPOSIT) as string;
-
       const metadataBase64 = objectToBase64({
         displayName: data.display_name,
         flagLogo: `https://ipfs.near.social/ipfs/${logoCid}`,
@@ -172,7 +198,7 @@ const CreateDaoForm = ({ reload }: Props) => {
           method: 'create',
           args,
           gas: '300000000000000',
-          deposit: deposit,
+          deposit: requiredDeposit,
         });
       } catch (error) {}
 
@@ -196,7 +222,7 @@ const CreateDaoForm = ({ reload }: Props) => {
         });
       }
     },
-    [isValid, signedAccountId, wallet, reset, reload],
+    [isValid, signedAccountId, wallet, requiredDeposit, reset, reload],
   );
 
   // adds current user as a council by default
@@ -357,7 +383,7 @@ const CreateDaoForm = ({ reload }: Props) => {
           </Flex>
 
           <Button
-            label={signedAccountId ? `Create DAO - Cost: ${REQUIRED_DEPOSIT} N` : 'Please login'}
+            label={signedAccountId ? `Create DAO - Cost: ${formatNearAmount(requiredDeposit, 2)} N` : 'Please login'}
             variant="affirmative"
             type="submit"
             loading={isSubmitting}
