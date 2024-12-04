@@ -778,6 +778,7 @@ export const SmallScreenHeaderActions = styled.div<{
   opacity: 1;
   transition: all var(--sidebar-expand-transition-speed);
   gap: ${(p) => p.$gap ?? 'unset'};
+  margin-right: 16px;
 
   ${(p) =>
     p.$hidden
