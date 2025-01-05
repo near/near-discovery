@@ -13,12 +13,8 @@ type FormData = {
 };
 
 function displayBalance(balance: number) {
-  if (balance < 1) {
-    const display = (balance * 100000).toFixed(5);
-    if (balance && parseFloat(display) === 0) return '< 0.00001';
-    return display;
-  }
-  return balance.toFixed(5);
+  if (balance && parseFloat(balance.toFixed(4)) === 0) return '< 0.0001';
+  return balance;
 }
 
 export const SendNear = () => {
@@ -31,10 +27,12 @@ export const SendNear = () => {
 
     const loadBalance = async () => {
       try {
-        const balance = await wallet.getBalance(signedAccountId);
+        const balance = await wallet.getBalance(signedAccountId, true);
         const requiredGas = 0.00005;
-        const availableBalance = balance - requiredGas;
-        setCurrentNearAmount(Math.max(availableBalance, 0));
+
+        const availableBalance = Math.max(balance - requiredGas, 0);
+        const formattedNumber = parseFloat(availableBalance.toFixed(4));
+        setCurrentNearAmount(formattedNumber);
       } catch (error) {
         console.error(error);
       }
