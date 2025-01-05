@@ -1,12 +1,12 @@
 import { Button, Flex, Form, handleClientError, Input, openToast, Text } from '@near-pagoda/ui';
 import { utils } from 'near-api-js';
+import { NEAR_NOMINATION } from 'near-api-js/lib/utils/format';
 import { useEffect, useState } from 'react';
 import { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import { NearContext } from '../wallet-selector/WalletSelector';
-import { NEAR_NOMINATION } from 'near-api-js/lib/utils/format';
 
 type FormData = {
   sendNearAmount: number;
@@ -28,8 +28,10 @@ export const SendNear = () => {
 
         console.log('balance', balanceYocto, balance);
         const requiredGas = 0.00005;
-        const availableBalance = balance - requiredGas;
-        setCurrentNearAmount(Math.max(availableBalance, 0));
+
+        const availableBalance = Math.max(balance - requiredGas, 0);
+        const formattedNumber = parseFloat(availableBalance.toFixed(4));
+        setCurrentNearAmount(formattedNumber);
       } catch (error) {
         console.error(error);
       }
