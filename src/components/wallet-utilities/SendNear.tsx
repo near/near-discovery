@@ -7,6 +7,7 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import { NearContext } from '../wallet-selector/WalletSelector';
+import { NEAR_NOMINATION } from 'near-api-js/lib/utils/format';
 
 type FormData = {
   sendNearAmount: number;
@@ -24,8 +25,9 @@ export const SendNear = () => {
     const loadBalance = async () => {
       try {
         const balanceYocto = await wallet.getBalance(signedAccountId);
-        const balance = Number((BigInt(balanceYocto) * BigInt(100000)) / NEAR_NOMINATION) / 100000;
+        const balance = parseFloat((BigInt(balanceYocto) / NEAR_NOMINATION).toString());
 
+        console.log('balance', balanceYocto, balance);
         const requiredGas = 0.00005;
 
         const availableBalance = Math.max(balance - requiredGas, 0);
