@@ -24,9 +24,8 @@ export const SendNear = () => {
     const loadBalance = async () => {
       try {
         const balanceYocto = await wallet.getBalance(signedAccountId);
-        const balance = parseFloat((BigInt(balanceYocto) / NEAR_NOMINATION).toString());
+        const balance = Number((BigInt(balanceYocto) * BigInt(100000)) / NEAR_NOMINATION) / 100000;
 
-        console.log('balance', balanceYocto, balance);
         const requiredGas = 0.00005;
 
         const availableBalance = Math.max(balance - requiredGas, 0);
