@@ -38,7 +38,7 @@ const StyledCard = ({ href, title, description }: { href: string; title: string;
   );
 };
 
-const NewsletterBanner = styled.div<{ isSidebarExpanded: boolean }>`
+const NewsletterBanner = styled.div<{ isSidebarExpanded: boolean; deviceType: string }>`
   background-color: #0072ce;
   color: white;
   padding: 8px;
@@ -46,7 +46,12 @@ const NewsletterBanner = styled.div<{ isSidebarExpanded: boolean }>`
   font-size: 14px;
   position: absolute;
   top: 0;
-  left: ${(p) => (p.isSidebarExpanded ? 'var(--sidebar-width-expanded)' : 'var(--sidebar-width-collapsed)')};
+  left: ${(p) =>
+    p.deviceType === 'mobile'
+      ? 0
+      : p.isSidebarExpanded
+      ? 'var(--sidebar-width-expanded)'
+      : 'var(--sidebar-width-collapsed)'};
   transition: all var(--sidebar-expand-transition-speed);
   right: 0;
 
@@ -119,7 +124,7 @@ const HomePage: NextPageWithLayout = () => {
   return (
     <Section grow="available">
       {visible && (
-        <NewsletterBanner isSidebarExpanded={isSidebarExpanded}>
+        <NewsletterBanner isSidebarExpanded={isSidebarExpanded} deviceType={deviceType}>
           Stay updated!
           <a
             href="https://bit.ly/devhubnews"
