@@ -51,7 +51,9 @@ const NewsletterBanner = styled.div<{ isSidebarExpanded: boolean }>`
   right: 0;
 
   @media (max-width: 1240px) {
-    top: 60px;
+    top: 64px;
+    left: 0;
+    width: 100%;
   }
 `;
 
@@ -118,7 +120,7 @@ const HomePage: NextPageWithLayout = () => {
     <Section grow="available">
       {visible && (
         <NewsletterBanner isSidebarExpanded={isSidebarExpanded}>
-          Stay updated!{' '}
+          Stay updated!
           <a
             href="https://bit.ly/devhubnews"
             style={{ color: 'white', textDecoration: 'underline', marginLeft: '5px' }}
