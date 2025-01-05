@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import { Button, Container, Flex, Form, Grid, Section, Text } from '@near-pagoda/ui';
+import { Button, Flex, Form, Grid, Section, Text } from '@near-pagoda/ui';
+import { sanitize } from 'dompurify';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -8,7 +9,6 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 import styled, { keyframes } from 'styled-components';
 import useSWR from 'swr';
-import { sanitize } from 'dompurify';
 
 import ScrollToTop from '@/components/scrollToTop';
 import { useDefaultLayout } from '@/hooks/useLayout';
@@ -75,7 +75,7 @@ const Fixed = styled.div`
     position: fixed;
     padding: 0 1rem 0 0;
   }
-`
+`;
 
 type SubscribeForm = {
   email: string;
@@ -148,6 +148,8 @@ const NewsPage: NextPageWithLayout = () => {
   };
 
   if (campaignLoading) return;
+  console.log('CAMP', campaigns);
+  if ('error' in campaigns) return <Section grow="available"> Failed to load newsletter </Section>;
 
   return (
     <Section grow="available">
@@ -160,7 +162,7 @@ const NewsPage: NextPageWithLayout = () => {
             <span className="visually-hidden">Loading...</span>
           </div>
         ) : (
-          <div style={{ overflowX: "auto" }}>
+          <div style={{ overflowX: 'auto' }}>
             <div dangerouslySetInnerHTML={{ __html: sanitize(parseCampaignHTML(issueDetails)) }}></div>
           </div>
         )}
@@ -201,41 +203,41 @@ const NewsPage: NextPageWithLayout = () => {
                 </>
               )}
             </GreenBox>
-              <GreenBox>
-                <h3>
-                  <Text size="text-l">Recent Issues</Text>
-                </h3>
-              </GreenBox>
-              <LinksList>
-                {campaigns.map((issue: Issue) => (
-                  <li key={issue.id} style={{ fontWeight: issueId === issue.id ? 'bold' : 'normal' }}>
-                    <Link href={{ pathname: '/newsletter', query: { id: issue.id } }} prefetch={true}>
-                      {issue.settings.subject_line}
-                    </Link>
-                  </li>
-                ))}
-              </LinksList>
-              <hr />
-              <GreenBox>
-                <h3>
-                  <Text size="text-l">Looking for more?</Text>
-                </h3>
-              </GreenBox>
-              <LinksList>
-                <li>
-                  <Link href={'https://nearweek.com'}> NEARWEEK →</Link>
+            <GreenBox>
+              <h3>
+                <Text size="text-l">Recent Issues</Text>
+              </h3>
+            </GreenBox>
+            <LinksList>
+              {campaigns.map((issue: Issue) => (
+                <li key={issue.id} style={{ fontWeight: issueId === issue.id ? 'bold' : 'normal' }}>
+                  <Link href={{ pathname: '/newsletter', query: { id: issue.id } }} prefetch={true}>
+                    {issue.settings.subject_line}
+                  </Link>
                 </li>
-                <li>
-                  <Link href={'https://x.com/neardevhub'}> DevHub on X →</Link>
-                </li>
-                <li>
-                  <Link href={'https://x.com/NEARProtocol'}> NEAR on X →</Link>
-                </li>
-                <li>
-                  <Link href={'https://near.org/blog'}> NEAR Blog →</Link>
-                </li>
-              </LinksList>
-              <hr />
+              ))}
+            </LinksList>
+            <hr />
+            <GreenBox>
+              <h3>
+                <Text size="text-l">Looking for more?</Text>
+              </h3>
+            </GreenBox>
+            <LinksList>
+              <li>
+                <Link href={'https://nearweek.com'}> NEARWEEK →</Link>
+              </li>
+              <li>
+                <Link href={'https://x.com/neardevhub'}> DevHub on X →</Link>
+              </li>
+              <li>
+                <Link href={'https://x.com/NEARProtocol'}> NEAR on X →</Link>
+              </li>
+              <li>
+                <Link href={'https://near.org/blog'}> NEAR Blog →</Link>
+              </li>
+            </LinksList>
+            <hr />
           </Fixed>
         </Flex>
       </Grid>
