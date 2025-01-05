@@ -6,20 +6,12 @@ import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
 import { NearContext } from '../wallet-selector/WalletSelector';
+import { NEAR_NOMINATION } from 'near-api-js/lib/utils/format';
 
 type FormData = {
   sendNearAmount: number;
   sendToAccountId: string;
 };
-
-function displayBalance(balance: number) {
-  if (balance < 1) {
-    const display = (balance * 100000).toFixed(5);
-    if (balance && parseFloat(display) === 0) return '< 0.00001';
-    return display;
-  }
-  return balance.toFixed(5);
-}
 
 export const SendNear = () => {
   const form = useForm<FormData>();
@@ -31,7 +23,10 @@ export const SendNear = () => {
 
     const loadBalance = async () => {
       try {
-        const balance = await wallet.getBalance(signedAccountId);
+        const balanceYocto = await wallet.getBalance(signedAccountId);
+        const balance = parseFloat((BigInt(balanceYocto) / NEAR_NOMINATION).toString());
+
+        console.log('balance', balanceYocto, balance);
         const requiredGas = 0.00005;
         const availableBalance = balance - requiredGas;
         setCurrentNearAmount(Math.max(availableBalance, 0));
@@ -105,7 +100,7 @@ export const SendNear = () => {
             allowNegative: false,
             allowDecimal: true,
           }}
-          assistive={`${displayBalance(currentNearAmount)} available`}
+          assistive={`${currentNearAmount.toFixed(5)} available`}
           error={form.formState.errors.sendNearAmount?.message}
           {...form.register('sendNearAmount', {
             min: {
