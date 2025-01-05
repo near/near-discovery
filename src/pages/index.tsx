@@ -124,7 +124,7 @@ const HomePage: NextPageWithLayout = () => {
   return (
     <Section grow="available">
       {visible && (
-        <NewsletterBanner isSidebarExpanded={isSidebarExpanded} deviceType={deviceType}>
+        <NewsletterBanner isSidebarExpanded={isSidebarExpanded}>
           Stay updated!
           <a
             href="https://bit.ly/devhubnews"
