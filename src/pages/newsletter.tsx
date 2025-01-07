@@ -23,10 +23,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const IssueCover = styled.img`
-  border-radius: 6px;
-`;
-
 const GreenBox = styled.div`
   background: #00ec97;
   border-radius: 6px;
@@ -169,7 +165,6 @@ const NewsPage: NextPageWithLayout = () => {
 
         <Flex style={{ flexDirection: 'column' }}>
           <Fixed>
-            <IssueCover src={`newsletter/${issueId}.jpg`} alt="" />
             <GreenBox style={{ padding: '15px' }}>
               <h3>
                 <Text size="text-l">Subscribe to the newsletter</Text>
