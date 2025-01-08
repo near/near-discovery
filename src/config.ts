@@ -104,7 +104,7 @@ export const googleCalendarApiKey = process.env.NEXT_PUBLIC_GOOGLE_CALENDAR_API_
 export const devhubCommunityCalendarId = process.env.NEXT_PUBLIC_DEVHUB_COMMUNITY_CALENDAR_ID ?? '';
 export const mailchimpApiKey = process.env.NEXT_PUBLIC_MAILCHIMP_API_KEY ?? '';
 export const mailchimpRegion = process.env.NEXT_PUBLIC_MAILCHIMP_REGION ?? '';
-export const mailchimpAudienceId = process.env.NEXT_PUBLIC_MAILCHIMP_AUDIENCE_ID ?? '';
+export const newsletterAudienceId = process.env.NEXT_PUBLIC_NEWSLETTER_AUDIENCE_ID ?? '';
 export const EVMWalletChain = evmWalletChains[networkId];
 
 export const commitModalBypassAuthorIds = (process.env.NEXT_PUBLIC_COMMIT_MODAL_BYPASS_AUTHOR_IDS ?? '')

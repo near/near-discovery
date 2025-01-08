@@ -23,10 +23,6 @@ const fadeIn = keyframes`
   }
 `;
 
-const IssueCover = styled.img`
-  border-radius: 6px;
-`;
-
 const GreenBox = styled.div`
   background: #00ec97;
   border-radius: 6px;
@@ -111,6 +107,7 @@ const NewsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const { id } = router.query;
   const [isFormSubmitted, setIsFormSubmitted] = useState(false);
+  const [responseError, setResponseError] = useState<string | null>(null);
 
   const { data: campaigns, isLoading: campaignLoading } = useSWR('/api/newsletter', fetcher);
   const issueId = useMemo(() => id || campaigns?.[0]?.id, [id, campaigns]);
@@ -127,6 +124,7 @@ const NewsPage: NextPageWithLayout = () => {
 
   const onSubmit: SubmitHandler<SubscribeForm> = async (data) => {
     try {
+      setResponseError(null);
       const response = await fetch('/api/newsletter/subscribe', {
         method: 'POST',
         headers: {
@@ -138,9 +136,12 @@ const NewsPage: NextPageWithLayout = () => {
       });
 
       await response;
+      const responseData = await response.json();
 
       if (response.ok) {
         setIsFormSubmitted(true);
+      } else {
+        setResponseError(responseData?.message || 'Failed to subscribe. Please try again.');
       }
     } catch (error) {
       console.error(error);
@@ -148,7 +149,6 @@ const NewsPage: NextPageWithLayout = () => {
   };
 
   if (campaignLoading) return;
-  console.log('CAMP', campaigns);
   if ('error' in campaigns) return <Section grow="available"> Failed to load newsletter </Section>;
 
   return (
@@ -169,9 +169,8 @@ const NewsPage: NextPageWithLayout = () => {
 
         <Flex style={{ flexDirection: 'column' }}>
           <Fixed>
-            <IssueCover src={`newsletter/${issueId}.jpg`} alt="" />
             <GreenBox style={{ padding: '15px' }}>
-              <h3>
+              <h3 style={{ marginBottom: '0.5rem' }}>
                 <Text size="text-l">Subscribe to the newsletter</Text>
               </h3>
               {isFormSubmitted ? (
@@ -186,12 +185,15 @@ const NewsPage: NextPageWithLayout = () => {
                 <>
                   <Form onSubmit={handleSubmit(onSubmit)}>
                     {errors.email && <span style={{ color: 'red' }}> This field is required!</span>}
+                    {responseError && <span style={{ color: 'red' }}>{responseError}</span>}
                     <SubscribeForm gap="none">
                       <input
                         {...register('email', { required: true })}
                         placeholder="dev@youremail.com"
                         type="email"
-                        className=""
+                        onChange={() => {
+                          setResponseError(null);
+                        }}
                       />
                       <Button
                         label="Subscribe"
@@ -239,9 +241,9 @@ const NewsPage: NextPageWithLayout = () => {
             </LinksList>
             <hr />
           </Fixed>
+          <ScrollToTop />
         </Flex>
       </Grid>
-      <ScrollToTop />
     </Section>
   );
 };
