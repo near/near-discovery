@@ -14,7 +14,6 @@ const fadeIn = keyframes`
 const ScrollToTopButton = styled(Button)<{ isVisible: boolean }>`
   position: fixed;
   bottom: 15px;
-  right: 30px;
   cursor: pointer;
   z-index: 1000;
   animation: ${fadeIn} 0.5s;
