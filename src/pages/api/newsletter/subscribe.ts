@@ -1,7 +1,7 @@
 import mailchimp from '@mailchimp/mailchimp_marketing';
 import type { NextApiRequest, NextApiResponse } from 'next';
 
-import { mailchimpApiKey, mailchimpAudienceId, mailchimpRegion } from '../../../config';
+import { mailchimpApiKey, mailchimpRegion, newsletterAudienceId } from '../../../config';
 
 mailchimp.setConfig({
   apiKey: mailchimpApiKey,
@@ -13,7 +13,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const { email } = req.body;
 
     try {
-      const response = await mailchimp.lists.addListMember(mailchimpAudienceId, {
+      const response = await mailchimp.lists.addListMember(newsletterAudienceId, {
         email_address: email,
         status: 'pending',
       });
@@ -25,13 +25,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         success: true,
         message: 'Form submitted successfully! Please confirm your email',
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error adding to list:', error);
 
-      res.status(500).json({
-        success: false,
-        message: 'An error occurred while processing your request.',
-      });
+      if (error.status === 400 && error.response.body.title === 'Member Exists') {
+        res.status(500).json({
+          success: false,
+          message: 'Email already subscribed.',
+        });
+      } else {
+        res.status(500).json({
+          success: false,
+          message: 'An error occurred while processing your request.',
+        });
+      }
     }
   }
 }
