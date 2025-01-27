@@ -10,7 +10,6 @@ const extendableRoutes: Record<string, string> = {
 // on demand at runtime
 const extendableFallbacks: Record<string, string> = {
   ecosystem: 'https://pages.near.org/ecosystem',
-  learn: 'https://pages.near.org/learn',
 };
 
 const finiteRoutes: Record<string, string> = {
@@ -25,6 +24,7 @@ const finiteRoutes: Record<string, string> = {
   education: 'https://pages.near.org/education',
   examples: 'https://pages.near.org/examples',
   lisbon: 'https://pages.near.org/lisbon',
+  learn: 'https://pages.near.org/learn',
   meetings: 'https://pages.near.org/meetings',
   metabuild: 'https://pages.near.org/metabuild',
   miami: 'https://pages.near.org/miami',
