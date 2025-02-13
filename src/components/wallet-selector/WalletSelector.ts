@@ -4,8 +4,10 @@ import type { FinalExecutionOutcome, WalletSelector, WalletSelectorState } from 
 import { setupWalletSelector } from '@near-wallet-selector/core';
 import { setupEthereumWallets } from '@near-wallet-selector/ethereum-wallets';
 import { setupHereWallet } from '@near-wallet-selector/here-wallet';
+import { setupHotWallet } from '@near-wallet-selector/hot-wallet';
 import { setupLedger } from '@near-wallet-selector/ledger';
 import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
+import { setupMeteorWalletApp } from '@near-wallet-selector/meteor-wallet-app';
 import { setupModal } from '@near-wallet-selector/modal-ui';
 import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
 import { setupNearMobileWallet } from '@near-wallet-selector/near-mobile-wallet';
@@ -67,7 +69,9 @@ export class Wallet {
         await emailLogin,
         setupEthereumWallets({ wagmiConfig, web3Modal: web3Modal as any, alwaysOnboardDuringSignIn: true }),
         setupMeteorWallet(),
+        setupMeteorWalletApp({ contractId: signInContractId }),
         setupBitteWallet(),
+        setupHotWallet(),
         setupHereWallet(),
         setupMyNearWallet(),
         setupNearMobileWallet(),
