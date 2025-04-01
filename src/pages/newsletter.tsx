@@ -82,6 +82,10 @@ type Issue = {
   settings: {
     subject_line: string;
   };
+  variate_settings?: {
+    combinations: { id: string }[];
+    subject_lines: string[];
+  };
 };
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
@@ -110,7 +114,10 @@ const NewsPage: NextPageWithLayout = () => {
   const [responseError, setResponseError] = useState<string | null>(null);
 
   const { data: campaigns, isLoading: campaignLoading } = useSWR('/api/newsletter', fetcher);
-  const issueId = useMemo(() => id || campaigns?.[0]?.id, [id, campaigns]);
+  const issueId = useMemo(
+    () => id || campaigns?.[0].variate_settings?.combinations[0].id || campaigns?.[0]?.id,
+    [id, campaigns],
+  );
   const { data: issueDetails, isLoading: issueLoading } = useSWR(
     issueId ? `/api/newsletter/${issueId}` : null,
     fetcher,
@@ -212,9 +219,21 @@ const NewsPage: NextPageWithLayout = () => {
             </GreenBox>
             <LinksList>
               {campaigns.map((issue: Issue) => (
-                <li key={issue.id} style={{ fontWeight: issueId === issue.id ? 'bold' : 'normal' }}>
-                  <Link href={{ pathname: '/newsletter', query: { id: issue.id } }} prefetch={true}>
-                    {issue.settings.subject_line}
+                <li
+                  key={issue.id}
+                  style={{
+                    fontWeight:
+                      issueId === (issue.variate_settings?.combinations[0].id || issue.id) ? 'bold' : 'normal',
+                  }}
+                >
+                  <Link
+                    href={{
+                      pathname: '/newsletter',
+                      query: { id: issue.variate_settings?.combinations[0].id || issue.id },
+                    }}
+                    prefetch={true}
+                  >
+                    {issue.settings.subject_line || issue.variate_settings?.subject_lines[0]}
                   </Link>
                 </li>
               ))}

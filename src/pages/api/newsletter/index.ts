@@ -11,7 +11,13 @@ mailchimp.setConfig({
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   try {
     const response = await mailchimp.campaigns.list({
-      fields: ['campaigns.settings.subject_line', 'campaigns.send_time', 'campaigns.id'],
+      fields: [
+        'campaigns.settings.subject_line',
+        'campaigns.send_time',
+        'campaigns.id',
+        'campaigns.variate_settings.combinations',
+        'campaigns.variate_settings.subject_lines',
+      ],
       count: 5,
       status: 'sent',
       sortField: 'send_time',
