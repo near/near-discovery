@@ -1,3 +1,4 @@
+import { geolocation } from '@vercel/functions';
 import type { NextRequest } from 'next/server';
 import { NextResponse } from 'next/server';
 
@@ -34,7 +35,8 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
-  const country = (req.geo && req.geo.country) || 'UNKNOWN';
+  const geo = geolocation(req);
+  const country = geo.country || 'UNKNOWN';
 
   let response = NextResponse.rewrite(req.nextUrl);
   //save into user's client so we can pass into analytics, if they've allowed analytics
