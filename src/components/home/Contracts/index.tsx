@@ -77,6 +77,39 @@ impl Default for Contract {
     }
 }`;
 
+const uvInit = `
+$> uv init your-contract
+✅ Initialized project \`your-contract\`
+
+$> cd your-contract
+$> uv add near-sdk-py
+
+* build with uvx nearc
+* deploy and interact using near-cli-rs
+`;
+
+const helloNearPY = `
+from near_sdk_py import view, call, Contract
+
+# Define contract class
+class HelloNear:
+    @init
+    def new(self):
+        # Initialize state with default greeting
+        self.storage["greeting"] = "Hello"
+
+    @view
+    def get_greeting(self) -> str:
+        """Returns the current greeting"""
+        return self.storage["greeting"]
+
+    @call
+    def set_greeting(self, message: str) -> str:
+        """Sets a new greeting"""
+        self.storage["greeting"] = message
+        return message
+`;
+
 export const Contracts = () => {
   const [language, setLanguage] = useState('js');
 
@@ -107,6 +140,9 @@ export const Contracts = () => {
               <Tabs.Trigger onClick={() => setLanguage('rust')} value="rust">
                 🦀 Rust
               </Tabs.Trigger>
+              <Tabs.Trigger onClick={() => setLanguage('python')} value="python">
+                🐍 Python
+              </Tabs.Trigger>
             </Tabs.List>
             <Tabs.Content value="js">
               <Code code={npxCNA} language="sh" />
@@ -114,6 +150,10 @@ export const Contracts = () => {
 
             <Tabs.Content value="rust">
               <Code code={cargoNN} language="sh" />
+            </Tabs.Content>
+
+            <Tabs.Content value="python">
+              <Code code={uvInit} language="sh" />
             </Tabs.Content>
           </Tabs.Root>
         </Flex>
@@ -138,6 +178,16 @@ export const Contracts = () => {
             <Tabs.Content value="rust">
               <Title> Easy to Read Contracts </Title>
               <Code code={helloNearRS} height={410} language="rust" />
+            </Tabs.Content>
+
+            <Tabs.Content value="python">
+              <Title> One Command Setup </Title>
+              <Code code={`uv init your-contract && cd your-contract && uv add-near-sdk-py`} language="bash" />
+            </Tabs.Content>
+
+            <Tabs.Content value="python">
+              <Title> Easy to Read Contracts </Title>
+              <Code code={helloNearPY} height={410} language="python" />
             </Tabs.Content>
           </Flex>
         </Tabs.Root>
