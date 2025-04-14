@@ -79,13 +79,15 @@ impl Default for Contract {
 
 const uvInit = `
 $> uv init your-contract
+
 ✅ Initialized project \`your-contract\`
 
 $> cd your-contract
 $> uv add near-sdk-py
 
-* build with uvx nearc
-* deploy and interact using near-cli-rs
+* Build with uvx nearc
+* Deploy and interact using near-cli-rs
+# Quickstart on https://docs.near.org/smart-contracts/quickstart
 `;
 
 const helloNearPY = `
@@ -182,7 +184,7 @@ export const Contracts = () => {
 
             <Tabs.Content value="python">
               <Title> One Command Setup </Title>
-              <Code code={`uv init your-contract && cd your-contract && uv add-near-sdk-py`} language="bash" />
+              <Code code={`uv init contract; cd contract; uv add-near-sdk-py`} language="bash" />
             </Tabs.Content>
 
             <Tabs.Content value="python">
