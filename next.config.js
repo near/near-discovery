@@ -113,11 +113,6 @@ const nextConfig = {
         destination: 'https://wallet.near.org',
         permanent: true,
       },
-      {
-        source: '/sandbox',
-        destination: 'https://near.social/edit',
-        permanent: true,
-      },
     ];
   },
   rewrites: async () => [
