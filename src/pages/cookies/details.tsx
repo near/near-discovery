@@ -146,47 +146,7 @@ const ContactUsPage: NextPageWithLayout = () => {
                       </Table.Row>
                     </Table.Head>
 
-                    <Table.Body>
-                      <Table.Row>
-                        <Table.Cell>aeb0-187febdb30e5R...1hgeca2o5.1hgeca2o6.9.0.9</Table.Cell>
-                        <Table.Cell>Functional/Essential</Table.Cell>
-                        <Table.Cell>Fractal iDOS</Table.Cell>
-                        <Table.Cell>.idos.network</Table.Cell>
-                        <Table.Cell>1 year</Table.Cell>
-                      </Table.Row>
-
-                      <Table.Row>
-                        <Table.Cell>idOS-signer-public-key</Table.Cell>
-                        <Table.Cell>Functional/Essential</Table.Cell>
-                        <Table.Cell>Fractal iDOS</Table.Cell>
-                        <Table.Cell>enclave.idos.network</Table.Cell>
-                        <Table.Cell>1 year</Table.Cell>
-                      </Table.Row>
-
-                      <Table.Row>
-                        <Table.Cell>idOS-signer-address</Table.Cell>
-                        <Table.Cell>Functional/Essential</Table.Cell>
-                        <Table.Cell>Fractal iDOS</Table.Cell>
-                        <Table.Cell>enclave.idos.network</Table.Cell>
-                        <Table.Cell>1 year</Table.Cell>
-                      </Table.Row>
-
-                      <Table.Row>
-                        <Table.Cell>idOS-password</Table.Cell>
-                        <Table.Cell>Functional/Essential</Table.Cell>
-                        <Table.Cell>Fractal iDOS</Table.Cell>
-                        <Table.Cell>enclave.idos.network</Table.Cell>
-                        <Table.Cell>1 year</Table.Cell>
-                      </Table.Row>
-
-                      <Table.Row>
-                        <Table.Cell>idOS-human-id</Table.Cell>
-                        <Table.Cell>Functional/Essential</Table.Cell>
-                        <Table.Cell>Fractal iDOS</Table.Cell>
-                        <Table.Cell>enclave.idos.network</Table.Cell>
-                        <Table.Cell>1 year</Table.Cell>
-                      </Table.Row>
-                    </Table.Body>
+                    <Table.Body></Table.Body>
                   </Table.Root>
                 </Tabs.Content>
               </Tabs.Root>
