@@ -1,5 +1,5 @@
 import { Card, Container, Flex, Section, SvgIcon, Table, Tabs, Text } from '@near-pagoda/ui';
-import { Cookie, HandHeart } from '@phosphor-icons/react';
+import { Cookie } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 
 import { MetaTags } from '@/components/MetaTags';
@@ -28,11 +28,6 @@ const ContactUsPage: NextPageWithLayout = () => {
                   <Tabs.Trigger href="?tab=firstPartyCookies" value="firstPartyCookies">
                     <SvgIcon icon={<Cookie fill="bold" />} />
                     1st Party Cookies
-                  </Tabs.Trigger>
-
-                  <Tabs.Trigger href="?tab=thirdPartyCookies" value="thirdPartyCookies">
-                    <SvgIcon icon={<HandHeart fill="bold" />} />
-                    3rd Party Cookies
                   </Tabs.Trigger>
                 </Tabs.List>
 
@@ -131,22 +126,6 @@ const ContactUsPage: NextPageWithLayout = () => {
                         <Table.Cell>to store a visitor&apos;s country code</Table.Cell>
                       </Table.Row>
                     </Table.Body>
-                  </Table.Root>
-                </Tabs.Content>
-
-                <Tabs.Content value="thirdPartyCookies">
-                  <Table.Root>
-                    <Table.Head>
-                      <Table.Row>
-                        <Table.HeaderCell>Identifer</Table.HeaderCell>
-                        <Table.HeaderCell>Purpose</Table.HeaderCell>
-                        <Table.HeaderCell>Provider</Table.HeaderCell>
-                        <Table.HeaderCell>Domain</Table.HeaderCell>
-                        <Table.HeaderCell>Duration</Table.HeaderCell>
-                      </Table.Row>
-                    </Table.Head>
-
-                    <Table.Body></Table.Body>
                   </Table.Root>
                 </Tabs.Content>
               </Tabs.Root>
