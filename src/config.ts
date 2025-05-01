@@ -92,7 +92,6 @@ export const privacyDomainName = `${process.env.NEXT_PUBLIC_TOS_SUBDOMAIN_NAME}/
 export const localStorageAccountIdKey = 'near-social-vm:v01::accountId:';
 export const isLocalEnvironment = process.env.NEXT_PUBLIC_LOCAL_ENVIRONMENT === 'true';
 export const sidebarLayoutEnabled = process.env.NEXT_PUBLIC_SIDEBAR_LAYOUT === 'true';
-export const idosCreateAccountUrl = process.env.NEXT_PUBLIC_IDOS_CREATE_ACCOUNT_URL;
 export const gleapSdkToken = process.env.NEXT_PUBLIC_GLEAP_SDK_TOKEN;
 export const lumaApiUrl = process.env.NEXT_PUBLIC_LUMA_API_URL ?? '';
 export const lumaNearCalendarId = process.env.NEXT_PUBLIC_LUMA_NEAR_CALENDAR_ID ?? '';
