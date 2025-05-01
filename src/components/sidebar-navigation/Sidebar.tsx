@@ -168,13 +168,6 @@ export const Sidebar = () => {
                 <span>Toolbox</span>
               </S.NavigationItem>
             </Tooltip>
-
-            <Tooltip content="Web3 Architectures (soon)" side="right" disabled={true}>
-              <S.NavigationItem $active={isNavigationItemActive('/architecture')} $type="featured" href="#">
-                <i className="ph-app-window ph-bold" />
-                <span>Web3 Architectures</span>
-              </S.NavigationItem>
-            </Tooltip>
           </S.Stack>
         </S.Section>
         <S.Section>
