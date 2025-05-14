@@ -77,3 +77,7 @@ w3m-modal {
     bottom: 10px;
   }
 }
+
+.fast-auth-wallet {
+  display: none !important;
+}
