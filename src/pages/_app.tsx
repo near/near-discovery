@@ -33,10 +33,6 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-if (typeof window !== 'undefined') {
-  if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
-}
-
 function initializeGleap() {
   if (typeof window === 'undefined') return;
 
