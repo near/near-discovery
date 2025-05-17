@@ -37,6 +37,45 @@ if (typeof window !== 'undefined') {
   if (gleapSdkToken) Gleap.initialize(gleapSdkToken);
 }
 
+function initializeGleap() {
+  if (typeof window === 'undefined') return;
+
+  // Extend the window object with a custom property
+  interface GleapWindow extends Window {
+    __gleapInitialized?: boolean;
+  }
+
+  const gleapWindow = window as GleapWindow;
+
+  if (gleapWindow.__gleapInitialized) return;
+
+  if (!gleapSdkToken) {
+    console.warn('Gleap SDK token is not set. Gleap will not be initialized.');
+    return;
+  }
+
+  Gleap.initialize(gleapSdkToken);
+  gleapWindow.__gleapInitialized = true;
+
+  // NEAR-247: Sanitize open-url messages from Gleap
+  Gleap.setUrlHandler((url: string, newTab?: boolean) => {
+    try {
+      const parsed = new URL(url, window.location.href);
+      if (parsed.protocol !== 'http:' && parsed.protocol !== 'https:') {
+        console.warn('Blocked invalid Gleap navigation to unsafe protocol:', parsed.protocol);
+        return;
+      }
+      if (newTab) {
+        window.open(parsed.href, '_blank')?.focus();
+      } else {
+        window.location.href = parsed.href;
+      }
+    } catch (e) {
+      console.warn('Blocked invalid Gleap URL:', url, e);
+    }
+  });
+}
+
 const wallet = new Wallet({ networkId: networkId, createAccessKeyFor: signInContractId });
 initPostHog();
 
@@ -49,6 +88,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
   const [signedAccountId, setSignedAccountId] = useState('');
+
+  // Gleap initialization
+  useEffect(() => {
+    initializeGleap();
+  }, []);
 
   useEffect(() => {
     wallet.startUp(setSignedAccountId);
