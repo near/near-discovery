@@ -1,8 +1,7 @@
 import { Button, Table, Text, Tooltip } from '@near-pagoda/ui';
 import type { DeleteKeyAction } from '@near-wallet-selector/core';
-import { useContext, useEffect, useState } from 'react';
-
-import { NearContext } from '../wallet-selector/WalletSelector';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import { useEffect, useState } from 'react';
 
 type AccessKey = {
   public_key: string;
@@ -17,21 +16,21 @@ type AccessKey = {
 };
 
 const KeyTable: React.FC = () => {
-  const { signedAccountId, wallet } = useContext(NearContext);
+  const { signedAccountId, getAccessKeys, signAndSendTransactions } = useWalletSelector();
 
   const [keys, setKeys] = useState<AccessKey[]>([]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>([]);
 
   useEffect(() => {
-    if (!wallet?.selector || !signedAccountId) return;
+    if (!signedAccountId) return;
 
     const getInfo = async () => {
-      const accessKeys: AccessKey[] = await wallet.getAccessKeys(signedAccountId);
+      const accessKeys: AccessKey[] = (await getAccessKeys(signedAccountId)) as any;
       setKeys(accessKeys.filter((accessKey) => accessKey.access_key.permission.FunctionCall));
     };
 
     getInfo();
-  }, [wallet, wallet?.selector, signedAccountId]);
+  }, [getAccessKeys, signedAccountId]);
 
   const handleSelectAll = (): void => {
     if (selectedKeys.length === keys.length) {
@@ -46,7 +45,7 @@ const KeyTable: React.FC = () => {
   };
 
   const handleDeauthorizeAll = async (): Promise<void> => {
-    if (!signedAccountId || !wallet) return;
+    if (!signedAccountId) return;
 
     const actions: DeleteKeyAction[] = selectedKeys.map((publicKey) => {
       return {
@@ -57,7 +56,7 @@ const KeyTable: React.FC = () => {
       };
     });
 
-    await wallet.signAndSendTransactions({ transactions: [{ receiverId: signedAccountId, actions }] as any });
+    await signAndSendTransactions({ transactions: [{ receiverId: signedAccountId, actions }] as any });
   };
 
   return (

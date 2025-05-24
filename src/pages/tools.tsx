@@ -1,14 +1,14 @@
 import { Card, Container, Flex, Section, SvgIcon, Tabs, Text } from '@near-pagoda/ui';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { BuildingOffice, Coin, Gift, ImagesSquare } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import NearIconSvg from '@/assets/images/near-icon.svg';
 import DecentralizedOrganization from '@/components/tools/DecentralizedOrganization';
 import FungibleToken from '@/components/tools/FungibleToken';
 import Linkdrops from '@/components/tools/Linkdrops';
 import NonFungibleToken from '@/components/tools/NonFungibleToken';
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import useLinkdrops from '@/hooks/useLinkdrops';
@@ -30,7 +30,7 @@ const NearToken: FT = {
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'ft';
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { getBalance, viewFunction, signedAccountId } = useWalletSelector();
   const { drops, reloadLinkdrops } = useLinkdrops();
   const [allFT, setAllFT] = useState<FT[]>([NearToken]);
   const [allNFT, setAllNFT] = useState<Collection[]>([]);
@@ -51,18 +51,19 @@ const ToolsPage: NextPageWithLayout = () => {
 
   const processFT = useCallback(
     async (ft_contracts: string[]) => {
+      if (!signedAccountId) return [];
       if (!ft_contracts.length) return [];
       setLoadingFT(true);
 
       const getFTData = async (contract_id: string) => {
         try {
-          const balance = await wallet?.viewMethod({
+          const balance = (await viewFunction({
             contractId: contract_id,
             method: 'ft_balance_of',
             args: { account_id: signedAccountId },
-          });
+          })) as any;
           if (balance === '0') return { contract_id, balance, metadata: {}, verified: false };
-          const metadata = await wallet?.viewMethod({ contractId: contract_id, method: 'ft_metadata' });
+          const metadata = (await viewFunction({ contractId: contract_id, method: 'ft_metadata' })) as any;
           const verified = whiteList.filter((item) => item.contract_id === contract_id).length > 0;
           return { contract_id, balance, metadata, verified };
         } catch (e) {
@@ -71,8 +72,8 @@ const ToolsPage: NextPageWithLayout = () => {
       };
 
       // the first FT is always NEAR
-      const balance = await wallet?.getBalance(signedAccountId);
-      NearToken.balance = balance;
+      const balance = await getBalance(signedAccountId);
+      NearToken.balance = balance.toString();
       let all_fts = [NearToken];
 
       let other_fts = await Promise.all(ft_contracts.map((ft) => getFTData(ft)));
@@ -83,7 +84,7 @@ const ToolsPage: NextPageWithLayout = () => {
       setAllFT(all_fts);
       setLoadingFT(false);
     },
-    [wallet, signedAccountId],
+    [getBalance, signedAccountId, viewFunction],
   );
 
   const processNFT = useCallback(
@@ -93,11 +94,11 @@ const ToolsPage: NextPageWithLayout = () => {
 
       const getNFTsForContract = async (contract_id: string): Promise<{ [contract_id: string]: NFT[] }> => {
         try {
-          let nfts = await wallet?.viewMethod({
+          let nfts = (await viewFunction({
             contractId: contract_id,
             method: 'nft_tokens_for_owner',
             args: { account_id: signedAccountId },
-          });
+          })) as any;
           nfts = nfts.map((nft: NFT) => ({ ...nft, contract_id }));
           return { [contract_id]: nfts };
         } catch (e) {
@@ -112,7 +113,7 @@ const ToolsPage: NextPageWithLayout = () => {
       setAllNFT(nfts);
       setLoadingNFT(false);
     },
-    [wallet, signedAccountId],
+    [viewFunction, signedAccountId],
   );
 
   const reload = useCallback(
@@ -169,11 +170,11 @@ const ToolsPage: NextPageWithLayout = () => {
 
       const getDAOData = async (contract_id: string): Promise<DAO> => {
         try {
-          const config = await wallet?.viewMethod({
+          const config = (await viewFunction({
             contractId: contract_id,
             method: 'get_config',
             args: {},
-          });
+          })) as any;
 
           const metadata = JSON.parse(Buffer.from(config.metadata, 'base64').toString());
 
@@ -211,7 +212,7 @@ const ToolsPage: NextPageWithLayout = () => {
       setAllDAO(all_daos);
       setLoadingDAO(false);
     },
-    [wallet],
+    [viewFunction],
   );
 
   const reloadDao = useCallback(

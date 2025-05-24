@@ -1,3 +1,4 @@
+import { KeyPair } from '@near-js/crypto';
 import {
   Accordion,
   Button,
@@ -10,12 +11,9 @@ import {
   Text,
   Tooltip,
 } from '@near-pagoda/ui';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { Copy, Eye, EyeSlash } from '@phosphor-icons/react';
-import { KeyPair } from 'near-api-js';
 import { useEffect, useState } from 'react';
-import { useContext } from 'react';
-
-import { NearContext } from '../wallet-selector/WalletSelector';
 
 export const ExportFastAuthAccount = () => {
   const [generatingKey, setGeneratingKey] = useState(false);
@@ -23,22 +21,22 @@ export const ExportFastAuthAccount = () => {
   const [fastAuthAccountSignedIn, setFastAuthAccountSignedIn] = useState(false);
   const [privateKeyVisible, setPrivateKeyVisible] = useState(false);
   const [enoughBalance, setEnoughBalance] = useState(false);
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { getBalance, getAccessKeys, signedAccountId, walletSelector, signAndSendTransactions } = useWalletSelector();
 
   useEffect(() => {
     const balanceCheck = async () => {
-      if (!wallet || !signedAccountId) return;
+      if (!signedAccountId) return;
 
-      const balance = await wallet.getBalance(signedAccountId);
+      const balance = await getBalance(signedAccountId);
       setEnoughBalance(balance >= 0.001);
     };
 
     balanceCheck();
-  }, [wallet, signedAccountId]);
+  }, [getBalance, signedAccountId]);
 
   useEffect(() => {
     const checkFastAuthAccount = async () => {
-      const selector = await wallet?.selector;
+      const selector = await walletSelector;
       const selectedWallet: any = await selector?.wallet();
 
       if (selectedWallet?.signAndSendDelegateAction) {
@@ -46,13 +44,13 @@ export const ExportFastAuthAccount = () => {
       }
     };
 
-    if (!wallet || !signedAccountId) return;
+    if (!signedAccountId) return;
     checkFastAuthAccount();
-  }, [wallet, signedAccountId]);
+  }, [signedAccountId, walletSelector]);
 
   const generateKey = async () => {
     try {
-      if (!wallet) throw new Error('Wallet has not initialized');
+      if (!signedAccountId) return;
 
       setGeneratingKey(true);
 
@@ -60,6 +58,7 @@ export const ExportFastAuthAccount = () => {
       const publicKey = keyPair.getPublicKey().toString();
       const addKeyTransaction = {
         receiverId: signedAccountId,
+        signerId: signedAccountId,
         actions: [
           {
             type: 'AddKey',
@@ -71,9 +70,9 @@ export const ExportFastAuthAccount = () => {
             },
           },
         ],
-      };
+      } as any;
 
-      await wallet.signAndSendTransactions({ transactions: [addKeyTransaction] });
+      await signAndSendTransactions({ transactions: [addKeyTransaction] });
 
       openToast({
         type: 'info',
@@ -86,7 +85,7 @@ export const ExportFastAuthAccount = () => {
 
       for (let i = 0; i < 5; i++) {
         await new Promise((resolve) => setTimeout(resolve, 2000));
-        const accessKeys = await wallet.getAccessKeys(signedAccountId);
+        const accessKeys = await getAccessKeys(signedAccountId);
         hasKey = accessKeys.some((key: any) => key.public_key === publicKey);
         if (hasKey) break;
       }

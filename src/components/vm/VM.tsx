@@ -1,29 +1,27 @@
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { isValidAttribute } from 'dompurify';
 import { mapValues } from 'lodash';
 import { EthersProviderContext, useInitNear, Widget } from 'near-social-vm';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { commitModalBypassAuthorIds, commitModalBypassSources, isLocalEnvironment, networkId } from '@/config';
 import { useEthersProviderContext } from '@/data/web3';
 import { cookiePreferences, optOut } from '@/utils/analytics';
 
-import { NearContext } from '../wallet-selector/WalletSelector';
-
 export default function Component(props: any) {
   const ethersContext = useEthersProviderContext();
-  const { wallet } = useContext(NearContext);
+  const { walletSelector } = useWalletSelector();
   const { initNear } = useInitNear();
   const router = useRouter();
 
   useEffect(() => {
-    wallet &&
-      wallet.selector &&
+    walletSelector &&
       initNear &&
       initNear({
         networkId,
-        selector: wallet.selector,
+        selector: walletSelector,
         customElements: {
           Link: ({ to, href, ...rest }: { to: string | object | undefined; href: string | object }) => {
             const cleanProps = mapValues({ to, href, ...rest }, (val: any, key: string) => {
@@ -72,7 +70,7 @@ export default function Component(props: any) {
           enableWidgetSrcWithCodeOverride: isLocalEnvironment,
         },
       });
-  }, [wallet, initNear, router.query]);
+  }, [walletSelector, initNear, router.query]);
 
   return (
     <div style={{ position: 'relative' }}>

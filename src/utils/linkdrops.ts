@@ -1,4 +1,4 @@
-import { KeyPair } from 'near-api-js';
+import { KeyPair } from '@near-js/crypto';
 
 import type { Keys } from './types';
 
