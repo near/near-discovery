@@ -161,6 +161,12 @@ export const Sidebar = () => {
           <S.SectionLabel>Developer Resources </S.SectionLabel>
 
           <S.Stack $gap="0.5rem">
+            <Tooltip content="Faucet" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem $active={isNavigationItemActive('/faucet')} $type="featured" href="/faucet">
+                <i className="ph-drop ph-bold" />
+                <span>Faucet</span>
+              </S.NavigationItem>
+            </Tooltip>
             <Tooltip content="Toolbox" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem $active={isNavigationItemActive('/tools')} $type="featured" href="/tools">
                 <i className="ph-toolbox ph-bold" />
