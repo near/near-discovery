@@ -1,12 +1,10 @@
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import type { NextComponentType } from 'next';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
-
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 
 const privateRoute = (Component: NextComponentType) => {
   const Private = (props: any) => {
-    const { signedAccountId } = useContext(NearContext);
+    const { signedAccountId } = useWalletSelector();
     const router = useRouter();
 
     if (!signedAccountId && router) {

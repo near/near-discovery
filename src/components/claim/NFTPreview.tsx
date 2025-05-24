@@ -1,27 +1,26 @@
 import { Flex, Text } from '@near-pagoda/ui';
-import { useContext, useEffect, useState } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import { useEffect, useState } from 'react';
 
 import type { NFT } from '@/utils/types';
 
 import { NftImage } from '../NTFImage';
-import { NearContext } from '../wallet-selector/WalletSelector';
 
 const NFTPreview = ({ nft }: { nft: NFT }) => {
   const [infoNft, setInfoNft] = useState<NFT | undefined>(undefined);
-  const { wallet } = useContext(NearContext);
+  const { viewFunction } = useWalletSelector();
   useEffect(() => {
-    if (!wallet) return;
     const fetchNftInfo = async () => {
       setInfoNft(
-        await wallet.viewMethod({
+        (await viewFunction({
           contractId: nft.contract_id,
           method: 'nft_token',
           args: { token_id: nft.token_id },
-        }),
+        })) as any,
       );
     };
     fetchNftInfo();
-  }, [nft, wallet]);
+  }, [nft, viewFunction]);
 
   return (
     <Flex justify="space-between" align="center" style={{ flexDirection: 'column' }}>

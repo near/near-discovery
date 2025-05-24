@@ -1,14 +1,13 @@
 import { Dropdown, SvgIcon, Tooltip } from '@near-pagoda/ui';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { CaretDown } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { networkId } from '@/config';
 
-import { NearContext } from '../wallet-selector/WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
 import { Search } from './Search';
 import { useNavigationStore } from './store';
@@ -44,7 +43,7 @@ export const Sidebar = () => {
   const toggleExpandedSidebar = useNavigationStore((store) => store.toggleExpandedSidebar);
   const handleBubbledClickInSidebar = useNavigationStore((store) => store.handleBubbledClickInSidebar);
   const tooltipsDisabled = isSidebarExpanded;
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signIn, signedAccountId } = useWalletSelector();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isOpenNetwork, setIsOpenNetwork] = useState(false);
 
@@ -162,6 +161,12 @@ export const Sidebar = () => {
           <S.SectionLabel>Developer Resources </S.SectionLabel>
 
           <S.Stack $gap="0.5rem">
+            <Tooltip content="Faucet" side="right" disabled={tooltipsDisabled}>
+              <S.NavigationItem $active={isNavigationItemActive('/faucet')} $type="featured" href="/faucet">
+                <i className="ph-water ph-bold" />
+                <span>Faucet</span>
+              </S.NavigationItem>
+            </Tooltip>
             <Tooltip content="Toolbox" side="right" disabled={tooltipsDisabled}>
               <S.NavigationItem $active={isNavigationItemActive('/tools')} $type="featured" href="/tools">
                 <i className="ph-toolbox ph-bold" />
@@ -244,7 +249,7 @@ export const Sidebar = () => {
             <UserDropdownMenu collapsed={!isSidebarExpanded} />
           ) : (
             <Tooltip content="Login" side="right" disabled={tooltipsDisabled} asChild>
-              <S.LoginItem $active={false} $type="featured" onClick={wallet?.signIn}>
+              <S.LoginItem $active={false} $type="featured" onClick={signIn}>
                 <i className="ph-bold ph-user" />
                 <span>Login</span>
               </S.LoginItem>

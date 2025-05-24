@@ -1,13 +1,12 @@
 import { Button, Dropdown } from '@near-pagoda/ui';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { MagnifyingGlass, WifiHigh } from '@phosphor-icons/react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { networkId } from '@/config';
 
-import { NearContext } from '../wallet-selector/WalletSelector';
 import NearIconSvg from './icons/near-icon.svg';
 import { useNavigationStore } from './store';
 import * as S from './styles';
@@ -26,7 +25,7 @@ export const SmallScreenHeader = () => {
   const setNavigation = useNavigationStore((store) => store.set);
   const showDrawerCollapse = useNavigationStore((store) => store.isOpenedOnSmallScreens && !!store.expandedDrawer);
   const expandedDrawerTitle = useNavigationStore((store) => store.expandedDrawerTitle);
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signIn, signedAccountId } = useWalletSelector();
 
   const preventRedirect = (network: string) => (e: React.MouseEvent) => {
     if (networkId == network) {
@@ -67,7 +66,7 @@ export const SmallScreenHeader = () => {
           <Button
             label="Login"
             variant="primary"
-            onClick={wallet?.signIn}
+            onClick={signIn}
             style={{ alignSelf: 'center', marginRight: '1rem' }}
           />
         </>
