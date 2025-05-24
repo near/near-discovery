@@ -1,9 +1,9 @@
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { useRouter } from 'next/router';
-import { useContext, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { privacyDomainName, termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
@@ -14,16 +14,16 @@ const ViewComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signIn, signOut, signedAccountId } = useWalletSelector();
   const components = useBosComponents();
   const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();
 
   useEffect(() => {
     const { requestAuth } = componentProps;
     if (requestAuth && !signedAccountId) {
-      wallet?.signIn();
+      signIn();
     }
-  }, [wallet, signedAccountId, componentProps]);
+  }, [signedAccountId, componentProps, signIn]);
 
   useEffect(() => {
     const urlSearchParams = new URLSearchParams(window.location.search);
@@ -40,7 +40,7 @@ const ViewComponentPage: NextPageWithLayout = () => {
           emitGatewayEvent: shouldPassGatewayEventProps(router.query.accountId as string)
             ? emitGatewayEvent
             : undefined,
-          logOut: wallet?.signOut,
+          logOut: signOut,
           targetProps: componentProps,
           targetComponent: componentSrc,
           termsDomainName,

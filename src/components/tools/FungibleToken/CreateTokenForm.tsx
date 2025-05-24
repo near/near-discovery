@@ -1,9 +1,9 @@
+import { formatNearAmount } from '@near-js/utils';
 import { Button, FileInput, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
-import { formatNearAmount } from 'near-api-js/lib/utils/format';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
 
 type FormData = {
@@ -45,19 +45,19 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { viewFunction, callFunction, getBalance, signedAccountId } = useWalletSelector();
   const [requiredDeposit, setRequiredDeposit] = useState('0');
 
   const symbolAvailable = useCallback(
     async (symbol: string) => {
       try {
-        await wallet?.getBalance(`${symbol}.${FACTORY_CONTRACT}`);
+        await getBalance(`${symbol}.${FACTORY_CONTRACT}`);
         return `${symbol}.${FACTORY_CONTRACT} already exists`;
       } catch {
         return true;
       }
     },
-    [wallet],
+    [getBalance],
   );
 
   // Watch all form fields
@@ -91,7 +91,7 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
         account_id: signedAccountId,
       };
 
-      const deposit = await wallet?.viewMethod({ contractId: FACTORY_CONTRACT, method: 'get_required', args });
+      const deposit = (await viewFunction({ contractId: FACTORY_CONTRACT, method: 'get_required', args })) as string;
 
       setRequiredDeposit(formatNearAmount(deposit, 2));
 
@@ -100,13 +100,13 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
       let result = false;
 
       try {
-        result = await wallet?.callMethod({
+        result = (await callFunction({
           contractId: FACTORY_CONTRACT,
           method: 'create_token',
           args,
           gas: '300000000000000',
           deposit: deposit,
-        });
+        })) as any;
       } catch (error) {}
 
       if (result) {
@@ -126,7 +126,7 @@ const CreateTokenForm = ({ reload }: { reload: (delay: number) => void }) => {
         });
       }
     },
-    [wallet, signedAccountId, reload],
+    [signedAccountId, viewFunction, callFunction, reload],
   );
 
   useEffect(() => {

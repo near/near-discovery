@@ -1,17 +1,16 @@
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { useEffect, useState } from 'react';
-import { useContext } from 'react';
 
 import type { NFT } from '@/utils/types';
 
 import RoundedImage from './RoundedImage';
-import { NearContext } from './wallet-selector/WalletSelector';
 
 interface NftImageProps {
   nft?: NFT;
 }
 
 export const NftImage: React.FC<NftImageProps> = ({ nft }) => {
-  const { wallet } = useContext(NearContext);
+  const { wallet } = useWalletSelector();
   const [imageUrl, setImageUrl] = useState<string>('');
 
   useEffect(() => {

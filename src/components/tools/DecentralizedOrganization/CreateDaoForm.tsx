@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { formatNearAmount, parseNearAmount } from '@near-js/utils';
 import { Button, FileInput, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
-import { formatNearAmount, parseNearAmount } from 'near-api-js/lib/utils/format';
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
 
 import LabelWithTooltip from '../Shared/LabelWithTooltip';
@@ -84,7 +84,7 @@ const CreateDaoForm = ({ reload }: Props) => {
     control: control,
   });
 
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signedAccountId, callFunction, getBalance } = useWalletSelector();
 
   const data = watch();
 
@@ -121,13 +121,13 @@ const CreateDaoForm = ({ reload }: Props) => {
       if (!isValidAccount) return `Account name is too long`;
 
       try {
-        await wallet?.getBalance(accountId);
+        await getBalance(accountId);
         return `${accountId} already exists`;
       } catch {
         return true;
       }
     },
-    [wallet],
+    [getBalance],
   );
 
   const isCouncilAccountNameValid = useCallback((accountId: string) => {
@@ -162,7 +162,7 @@ const CreateDaoForm = ({ reload }: Props) => {
     async (data: FormData) => {
       if (!isValid) return;
 
-      if (!signedAccountId || !wallet) return;
+      if (!signedAccountId) return;
 
       const logoFile = data.logo?.[0];
       const logoCid = logoFile ? await uploadFileToIpfs(logoFile) : DEFAULT_LOGO_CID;
@@ -193,13 +193,13 @@ const CreateDaoForm = ({ reload }: Props) => {
       let result = false;
 
       try {
-        result = await wallet?.callMethod({
+        result = (await callFunction({
           contractId: FACTORY_CONTRACT,
           method: 'create',
           args,
           gas: '300000000000000',
           deposit: requiredDeposit,
-        });
+        })) as any;
       } catch (error) {}
 
       if (result) {
@@ -222,7 +222,7 @@ const CreateDaoForm = ({ reload }: Props) => {
         });
       }
     },
-    [isValid, signedAccountId, wallet, requiredDeposit, reset, reload],
+    [isValid, signedAccountId, callFunction, requiredDeposit, reset, reload],
   );
 
   // adds current user as a council by default

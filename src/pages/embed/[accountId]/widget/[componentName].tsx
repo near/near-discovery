@@ -1,9 +1,9 @@
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { RootContentContainer } from '@/components/RootContentContainer';
 import { VmComponent } from '@/components/vm/VmComponent';
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { privacyDomainName, termsDomainName } from '@/config';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useGatewayEvents } from '@/hooks/useGatewayEvents';
@@ -13,7 +13,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 const EmbedComponentPage: NextPageWithLayout = () => {
   const router = useRouter();
   const components = useBosComponents();
-  const { wallet } = useContext(NearContext);
+  const { wallet } = useWalletSelector();
   const componentSrc = `${router.query.accountId}/widget/${router.query.componentName}`;
   const [componentProps, setComponentProps] = useState<Record<string, unknown>>({});
   const { emitGatewayEvent, shouldPassGatewayEventProps } = useGatewayEvents();

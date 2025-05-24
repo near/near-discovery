@@ -1,9 +1,9 @@
+import { parseNearAmount } from '@near-js/utils';
 import { Button, Flex, Form, Grid, Input, openToast, Text } from '@near-pagoda/ui';
-import { parseNearAmount } from 'near-api-js/lib/utils/format';
-import React, { useCallback, useContext, useEffect } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import React, { useCallback, useEffect } from 'react';
 import { Controller, useFieldArray, useForm } from 'react-hook-form';
 
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
 
 import LabelWithTooltip from '../Shared/LabelWithTooltip';
@@ -49,7 +49,7 @@ const CreateMultisigForm = () => {
     control: control,
   });
 
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { getBalance, callFunction, signedAccountId } = useWalletSelector();
 
   const isAccountPrefixAvailable = useCallback(
     async (accountPrefix: string) => {
@@ -65,13 +65,13 @@ const CreateMultisigForm = () => {
       if (!isValidAccount) return `Account name is too long`;
 
       try {
-        await wallet?.getBalance(accountId);
+        await getBalance(accountId);
         return `${accountId} already exists`;
       } catch {
         return true;
       }
     },
-    [wallet],
+    [getBalance],
   );
 
   const isCouncilAccountNameValid = useCallback((accountId: string) => {
@@ -95,7 +95,7 @@ const CreateMultisigForm = () => {
     async (data: FormData) => {
       if (!isValid) return;
 
-      if (!signedAccountId || !wallet) return;
+      if (!signedAccountId) return;
 
       const deposit = parseNearAmount(REQUIRED_DEPOSIT) as string;
 
@@ -108,13 +108,13 @@ const CreateMultisigForm = () => {
       let result = false;
 
       try {
-        result = await wallet?.callMethod({
+        result = (await callFunction({
           contractId: FACTORY_CONTRACT,
           method: 'create',
           args,
           gas: '300000000000000', // 300 TGas
           deposit: deposit,
-        });
+        })) as any;
       } catch (error) {}
 
       if (result) {
@@ -133,7 +133,7 @@ const CreateMultisigForm = () => {
         });
       }
     },
-    [wallet, signedAccountId, isValid],
+    [isValid, signedAccountId, callFunction],
   );
 
   // adds current user as a council by default

@@ -1,8 +1,8 @@
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { useRouter } from 'next/router';
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { ComponentWrapperPage } from '@/components/near-org/ComponentWrapperPage';
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { useBosComponents } from '@/hooks/useBosComponents';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
@@ -10,7 +10,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 const ApplicationsPage: NextPageWithLayout = () => {
   const components = useBosComponents();
   const router = useRouter();
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signedAccountId, signIn } = useWalletSelector();
 
   const setURLSearchParams = (params: string | string[][] | Record<string, string> | URLSearchParams | undefined) => {
     if (!params) return;
@@ -29,9 +29,9 @@ const ApplicationsPage: NextPageWithLayout = () => {
   useEffect(() => {
     const { requestAuth } = router.query;
     if (requestAuth && !signedAccountId) {
-      wallet?.signIn();
+      signIn();
     }
-  }, [signedAccountId, wallet, router.query]);
+  }, [signedAccountId, router.query, signIn]);
 
   return (
     <ComponentWrapperPage

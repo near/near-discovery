@@ -1,6 +1,7 @@
+import { parseNearAmount } from '@near-js/utils';
 import { Accordion, Button, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
-import { parseNearAmount } from 'near-api-js/lib/utils/format';
-import { useContext, useState } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
@@ -8,7 +9,6 @@ import { network } from '@/config';
 import generateAndStore from '@/utils/linkdrops';
 import type { Collection, NFT } from '@/utils/types';
 
-import { NearContext } from '../../wallet-selector/WalletSelector';
 import Carousel from '../Shared/Carousel';
 
 const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
@@ -21,7 +21,7 @@ type FormData = {
   contractId: string;
 };
 
-const getDeposit = (numberLinks: number) => parseNearAmount((0.0426 * numberLinks).toString());
+const getDeposit = (numberLinks: number): string => parseNearAmount((0.0426 * numberLinks).toString()) || '0';
 
 const CreateNFTDrop = ({
   user_collections,
@@ -30,7 +30,7 @@ const CreateNFTDrop = ({
   user_collections: Collection[];
   reload: (delay: number) => void;
 }) => {
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signedAccountId, signAndSendTransactions } = useWalletSelector();
   const {
     register,
     handleSubmit,
@@ -38,7 +38,7 @@ const CreateNFTDrop = ({
     setValue,
   } = useForm<FormData>({
     defaultValues: {
-      senderId: signedAccountId,
+      senderId: signedAccountId || '',
     },
   });
 
@@ -66,10 +66,13 @@ const CreateNFTDrop = ({
     };
 
     try {
-      await wallet?.signAndSendTransactions({
+      if (!signedAccountId) return;
+
+      await signAndSendTransactions({
         transactions: [
           {
             receiverId: KEYPOM_CONTRACT_ADDRESS,
+            signerId: signedAccountId,
             actions: [
               {
                 type: 'FunctionCall',
@@ -84,6 +87,7 @@ const CreateNFTDrop = ({
           },
           {
             receiverId: data.contractId,
+            signerId: signedAccountId,
             actions: [
               {
                 type: 'FunctionCall',
@@ -95,7 +99,7 @@ const CreateNFTDrop = ({
                     msg: dropId,
                   },
                   gas: '300000000000000',
-                  deposit: 1,
+                  deposit: '1',
                 },
               },
             ],

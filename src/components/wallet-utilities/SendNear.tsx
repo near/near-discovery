@@ -1,12 +1,10 @@
+import * as utils from '@near-js/utils';
+import { NEAR_NOMINATION } from '@near-js/utils';
 import { Button, Flex, Form, handleClientError, Input, openToast, Text } from '@near-pagoda/ui';
-import { utils } from 'near-api-js';
-import { NEAR_NOMINATION } from 'near-api-js/lib/utils/format';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { useEffect, useState } from 'react';
-import { useContext } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
-
-import { NearContext } from '../wallet-selector/WalletSelector';
 
 type FormData = {
   sendNearAmount: number;
@@ -15,15 +13,15 @@ type FormData = {
 
 export const SendNear = () => {
   const form = useForm<FormData>();
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { getBalance, signedAccountId, signAndSendTransactions } = useWalletSelector();
   const [currentNearAmount, setCurrentNearAmount] = useState(0);
 
   useEffect(() => {
-    if (!wallet || !signedAccountId) return;
+    if (!signedAccountId) return;
 
     const loadBalance = async () => {
       try {
-        const balanceYocto = await wallet.getBalance(signedAccountId);
+        const balanceYocto = await getBalance(signedAccountId);
         const balance = Number((BigInt(balanceYocto) * BigInt(100000)) / NEAR_NOMINATION) / 100000;
 
         const requiredGas = 0.00005;
@@ -37,12 +35,12 @@ export const SendNear = () => {
     };
 
     loadBalance();
-  }, [wallet, signedAccountId]);
+  }, [signedAccountId, getBalance]);
 
   const validSubmitHandler: SubmitHandler<FormData> = async (data) => {
     try {
-      if (!wallet) throw new Error('Wallet has not initialized yet');
-      const amount = utils.format.parseNearAmount(data.sendNearAmount.toString());
+      if (!signedAccountId) return;
+      const amount = utils.parseNearAmount(data.sendNearAmount.toString());
       if (!amount) throw new Error('Failed to parse amount');
 
       const sendNear = {
@@ -56,8 +54,8 @@ export const SendNear = () => {
         ],
         signerId: signedAccountId,
         receiverId: data.sendToAccountId,
-      };
-      const result: any = await wallet.signAndSendTransactions({ transactions: [sendNear] });
+      } as any;
+      const result: any = await signAndSendTransactions({ transactions: [sendNear] });
 
       setCurrentNearAmount((value) => Math.max(value - (data.sendNearAmount || 0), 0));
       form.reset();

@@ -1,13 +1,11 @@
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
-
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 
 import type { NextPageWithLayout } from '../types';
 
 const signedOutRoute = (Component: NextPageWithLayout) => {
   const SignedOut = (props: NextPageWithLayout) => {
-    const { signedAccountId } = useContext(NearContext);
+    const { signedAccountId } = useWalletSelector();
     const router = useRouter();
 
     if (signedAccountId && router) {

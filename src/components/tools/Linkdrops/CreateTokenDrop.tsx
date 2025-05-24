@@ -1,6 +1,7 @@
+import { parseNearAmount } from '@near-js/utils';
 import { Button, Flex, Form, Input, openToast } from '@near-pagoda/ui';
-import { parseNearAmount } from 'near-api-js/lib/utils/format';
-import { useContext, useState } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import { useState } from 'react';
 import type { SubmitHandler } from 'react-hook-form';
 import { useForm } from 'react-hook-form';
 
@@ -8,7 +9,6 @@ import { network } from '@/config';
 import generateAndStore from '@/utils/linkdrops';
 import type { FT } from '@/utils/types';
 
-import { NearContext } from '../../wallet-selector/WalletSelector';
 import SelectFT from './SelectFT';
 
 type FormData = {
@@ -52,7 +52,7 @@ const CreateTokenDrop = ({ user_fts, reload }: { user_fts: FT[]; reload: (delay:
     },
   });
 
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signAndSendTransactions, signedAccountId } = useWalletSelector();
   const [token, setToken] = useState<FT>(user_fts[0]);
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -83,6 +83,7 @@ const CreateTokenDrop = ({ user_fts, reload }: { user_fts: FT[]; reload: (delay:
     const transactions: any[] = [
       {
         receiverId: KEYPOM_CONTRACT_ADDRESS,
+        signerId: signedAccountId,
         actions: [
           {
             type: 'FunctionCall',
@@ -101,6 +102,7 @@ const CreateTokenDrop = ({ user_fts, reload }: { user_fts: FT[]; reload: (delay:
       const amount = BigInt(ftAmount) * BigInt(data.numberLinks);
       transactions.push({
         receiverId: token.contract_id,
+        signerId: signedAccountId,
         actions: [
           {
             type: 'FunctionCall',
@@ -120,7 +122,7 @@ const CreateTokenDrop = ({ user_fts, reload }: { user_fts: FT[]; reload: (delay:
     }
 
     try {
-      await wallet?.signAndSendTransactions({ transactions });
+      await signAndSendTransactions({ transactions });
 
       openToast({
         type: 'success',
