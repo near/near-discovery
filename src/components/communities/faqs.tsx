@@ -37,7 +37,7 @@ function FAQS() {
       answer: (
         <>
           You can find information on grants and funding opportunities on the{' '}
-          <Link href={'https://near.org/ecosystem/get-funding'}> main NEAR portal </Link>.
+          <Link href={'https://www.near.org/funding'}> main NEAR portal </Link>.
         </>
       ),
     },

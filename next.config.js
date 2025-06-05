@@ -34,7 +34,7 @@ const nextConfig = {
       },
       {
         source: '/ecosystem/get-funding',
-        destination: 'https://near.org/ecosystem/get-funding',
+        destination: 'https://www.near.org/funding',
         permanent: false,
       },
       {

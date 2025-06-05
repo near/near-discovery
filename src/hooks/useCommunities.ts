@@ -69,7 +69,7 @@ const urls = {
   discord: 'https://near.chat',
   discourse: 'https://gov.near.org',
   docs: 'https://docs.near.org',
-  getFunding: 'https://near.org/ecosystem/get-funding',
+  getFunding: 'https://www.near.org/funding',
   github: 'https://github.com/near',
   hackenproof: 'https://hackenproof.com/near',
   helpCenter: 'https://nearhelp.zendesk.com/hc/en-us',
