@@ -9,11 +9,11 @@ import { networks } from '@/config';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout } from '@/utils/types';
 
-async function createAndDeleteTmpAcc(accountId: string) {
+async function createAndDeleteTmpAcc(beneficiary: string) {
   // yes, we are hardcoding a private key here, but it will be used to
   // create and delete a testnet account in the background, so no worries
 
-  const tmpAccount = `${accountId.replace('.', '-')}-${Date.now()}.testnet`;
+  const tmpAccount = `${beneficiary.slice(52).replace('.', '-')}-${Date.now()}.testnet`;
   const signer = KeyPairSigner.fromSecretKey(
     'ed25519:5mixhRL3GcXL9sXx9B4juv6cp3Js4Qo7qY9gWs8bzcQGeSbefXMkCJh5UpmwZYriitMjsppqV4W8zb5bREkYRxLh',
   );
@@ -34,7 +34,8 @@ async function createAndDeleteTmpAcc(accountId: string) {
 
   const provider = new JsonRpcProvider({ url: networks.testnet.nodeUrl });
   const account = new Account(tmpAccount, provider, signer);
-  return account.deleteAccount(accountId);
+  await account.transfer({ receiverId: beneficiary, amount: '10000000000000000000000' });
+  return account.deleteAccount(beneficiary);
 }
 
 const ToolsPage: NextPageWithLayout = () => {
