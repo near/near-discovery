@@ -1,11 +1,10 @@
+import { formatNearAmount } from '@near-js/utils';
 import { Button, FileInput, Flex, Form, Input, openToast, Text } from '@near-pagoda/ui';
-import { formatNearAmount } from 'near-api-js/lib/utils/format';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import { useCallback, useEffect, useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 
 import { network } from '@/config';
-
-import { NearContext } from '../../wallet-selector/WalletSelector';
 
 type FormData = {
   title: string;
@@ -29,7 +28,7 @@ const MintNft = ({ reload }: { reload: (delay: number) => void }) => {
     formState: { errors, isSubmitting },
   } = useForm<FormData>();
 
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { callFunction, signedAccountId } = useWalletSelector();
   const [requiredDeposit, setRequiredDeposit] = useState('0');
   const formData = watch();
 
@@ -78,7 +77,7 @@ const MintNft = ({ reload }: { reload: (delay: number) => void }) => {
       if (!actuallySubmit) return;
 
       try {
-        await wallet?.callMethod({
+        await callFunction({
           contractId: network.nftContract,
           method: 'nft_mint',
           args,
@@ -105,7 +104,7 @@ const MintNft = ({ reload }: { reload: (delay: number) => void }) => {
         });
       }
     },
-    [reload, signedAccountId, wallet],
+    [reload, signedAccountId, callFunction],
   );
 
   useEffect(() => {

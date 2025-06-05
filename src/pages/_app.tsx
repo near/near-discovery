@@ -1,25 +1,38 @@
 import '@/styles/globals.css';
+import '@near-wallet-selector/modal-ui/styles.css';
 import '@near-pagoda/ui/globals.css';
 import '@near-pagoda/ui/theme.css';
 import '@near-pagoda/ui/lib.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
-import '@near-wallet-selector/modal-ui/styles.css';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 import 'react-bootstrap-typeahead/css/Typeahead.bs5.css';
 
 import { openToast, PagodaUiProvider, Toaster } from '@near-pagoda/ui';
+import { setupBitteWallet } from '@near-wallet-selector/bitte-wallet';
+import { setupEthereumWallets } from '@near-wallet-selector/ethereum-wallets';
+import { setupHereWallet } from '@near-wallet-selector/here-wallet';
+import { setupHotWallet } from '@near-wallet-selector/hot-wallet';
+import { setupLedger } from '@near-wallet-selector/ledger';
+import { setupMeteorWallet } from '@near-wallet-selector/meteor-wallet';
+import { setupMeteorWalletApp } from '@near-wallet-selector/meteor-wallet-app';
+import { setupMyNearWallet } from '@near-wallet-selector/my-near-wallet';
+import { setupNearMobileWallet } from '@near-wallet-selector/near-mobile-wallet';
+import { setupNightly } from '@near-wallet-selector/nightly';
+import { WalletSelectorProvider } from '@near-wallet-selector/react-hook';
+import { setupSender } from '@near-wallet-selector/sender';
+import { setupWelldoneWallet } from '@near-wallet-selector/welldone-wallet';
 import Gleap from 'gleap';
+import { setupFastAuthWallet } from 'near-fastauth-wallet';
 import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
-import { useState } from 'react';
 
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
-import { NearContext, Wallet } from '@/components/wallet-selector/WalletSelector';
+import { wagmiConfig, web3Modal } from '@/components/wallet-selector/web3modal';
 import { gleapSdkToken, networkId, signInContractId } from '@/config';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
@@ -28,6 +41,31 @@ import { useResearchWizardStore } from '@/stores/researchWizard';
 import { initPostHog, PostHogTrackingProvider } from '@/utils/analytics-posthog';
 import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
+
+const walletSelectorConfig = {
+  network: networkId,
+  createAccessKeyFor: signInContractId,
+  modules: [
+    setupFastAuthWallet({
+      walletUrl:
+        networkId === 'testnet' ? 'https://wallet.testnet.near.org/fastauth' : 'https://wallet.near.org/fastauth',
+      relayerUrl:
+        networkId === 'testnet' ? 'http://34.70.226.83:3030/relay' : 'https://near-relayer-mainnet.api.pagoda.co/relay',
+    }),
+    setupEthereumWallets({ wagmiConfig, web3Modal: web3Modal as any, alwaysOnboardDuringSignIn: true }),
+    setupMeteorWallet(),
+    setupMeteorWalletApp({ contractId: signInContractId }),
+    setupBitteWallet(),
+    setupHotWallet(),
+    setupHereWallet(),
+    setupMyNearWallet(),
+    setupNearMobileWallet(),
+    setupSender(),
+    setupNightly(),
+    setupWelldoneWallet(),
+    setupLedger(),
+  ],
+};
 
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
@@ -72,7 +110,6 @@ function initializeGleap() {
   });
 }
 
-const wallet = new Wallet({ networkId: networkId, createAccessKeyFor: signInContractId });
 initPostHog();
 
 export default function App({ Component, pageProps }: AppPropsWithLayout) {
@@ -83,15 +120,10 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const isResearchFormDismissed = useResearchWizardStore((state) => state.isResearchFormDismissed);
   const getLayout = Component.getLayout ?? ((page) => page);
   const router = useRouter();
-  const [signedAccountId, setSignedAccountId] = useState('');
 
   // Gleap initialization
   useEffect(() => {
     initializeGleap();
-  }, []);
-
-  useEffect(() => {
-    wallet.startUp(setSignedAccountId);
   }, []);
 
   useEffect(() => {
@@ -127,20 +159,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
     };
   }, []);
 
-  // needed by fast auth to show the wallet selector when the user chooses "use a wallet"
-  useEffect(() => {
-    const handleShowWalletSelector = (e: MessageEvent<{ showWalletSelector: boolean }>) => {
-      if (e.data.showWalletSelector) {
-        wallet.signIn();
-      }
-    };
-
-    window.addEventListener('message', handleShowWalletSelector, false);
-    return () => {
-      window.removeEventListener('message', handleShowWalletSelector, false);
-    };
-  }, []);
-
   useEffect(() => {
     if (!cookieData || !isResearchFormDismissed) {
       Gleap.showFeedbackButton(false);
@@ -154,7 +172,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   }, [checkCookieData]);
 
   return (
-    <NearContext.Provider value={{ wallet, signedAccountId }}>
+    <WalletSelectorProvider config={walletSelectorConfig as any}>
       <PagodaUiProvider
         value={{
           routerPrefetch: router.prefetch,
@@ -181,6 +199,6 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
         <ResearchFormWizard />
       </PagodaUiProvider>
-    </NearContext.Provider>
+    </WalletSelectorProvider>
   );
 }

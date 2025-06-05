@@ -1,11 +1,9 @@
 import { Button, copyTextToClipboard, Flex, Text, Tooltip } from '@near-pagoda/ui';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { Copy } from '@phosphor-icons/react';
-import { useContext } from 'react';
-
-import { NearContext } from '../wallet-selector/WalletSelector';
 
 export const ReceiveNear = () => {
-  const { signedAccountId } = useContext(NearContext);
+  const { signedAccountId } = useWalletSelector();
 
   if (!signedAccountId) return <Text> Sign in to see your NEAR account name </Text>;
 

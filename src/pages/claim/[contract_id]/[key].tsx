@@ -1,14 +1,14 @@
+import { KeyPair } from '@near-js/crypto';
+import { formatNearAmount } from '@near-js/utils';
 import { Button, Card, Container, Flex, Section, Text } from '@near-pagoda/ui';
-import { KeyPair } from 'near-api-js';
-import { formatNearAmount } from 'near-api-js/lib/utils/format';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { useRouter } from 'next/router';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import FTPreview from '@/components/claim/FTPreview';
 import NearPreview from '@/components/claim/NearPreview';
 import NFTPreview from '@/components/claim/NFTPreview';
 import Wallets from '@/components/claim/Wallets';
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { useDefaultLayout } from '@/hooks/useLayout';
 import type { NextPageWithLayout, NFT } from '@/utils/types';
 
@@ -31,7 +31,7 @@ type DropData = {
 const ToolsPage: NextPageWithLayout = () => {
   const router = useRouter();
   const { contract_id, key } = router.query;
-  const { signedAccountId, wallet } = useContext(NearContext);
+  const { signedAccountId, signIn, viewFunction } = useWalletSelector();
 
   const [dropData, setDropData] = useState<DropData>({});
   const [isLoading, setIsLoading] = useState(false);
@@ -39,7 +39,7 @@ const ToolsPage: NextPageWithLayout = () => {
 
   useEffect(() => {
     const fetchDropData = async () => {
-      if (!wallet || !signedAccountId || !contract_id || !key) {
+      if (!signedAccountId || !contract_id || !key) {
         setIsLoading(false);
         return;
       }
@@ -48,17 +48,17 @@ const ToolsPage: NextPageWithLayout = () => {
         setIsLoading(true);
         setError(null);
         const pk = KeyPair.fromString(key as KeyPairString);
-        const dropInformation = await wallet.viewMethod({
+        const dropInformation = (await viewFunction({
           contractId: contract_id as string,
           method: 'get_drop_information',
           args: { key: pk.getPublicKey().toString() },
-        });
+        })) as any;
 
         if (dropInformation.ft) {
-          const metadata = await wallet.viewMethod({
+          const metadata = (await viewFunction({
             contractId: dropInformation.ft.contract_id,
             method: 'ft_metadata',
-          });
+          })) as any;
           setDropData({
             token: {
               ...metadata,
@@ -66,11 +66,11 @@ const ToolsPage: NextPageWithLayout = () => {
             },
           });
         } else if (dropInformation.nft) {
-          const nftId = await wallet.viewMethod({
+          const nftId = (await viewFunction({
             contractId: contract_id as string,
             method: 'get_nft_token_ids_for_drop',
             args: { drop_id: dropInformation.drop_id },
-          });
+          })) as any;
           setDropData({
             nft: {
               contract_id: dropInformation.nft.contract_id,
@@ -78,11 +78,11 @@ const ToolsPage: NextPageWithLayout = () => {
             },
           });
         } else {
-          const balance = await wallet.viewMethod({
+          const balance = (await viewFunction({
             contractId: contract_id as string,
             method: 'get_key_balance',
             args: { key: pk.getPublicKey().toString() },
-          });
+          })) as any;
           setDropData({ amount: formatNearAmount(balance) });
         }
       } catch (err) {
@@ -94,7 +94,7 @@ const ToolsPage: NextPageWithLayout = () => {
     };
 
     fetchDropData();
-  }, [wallet, signedAccountId, contract_id, key]);
+  }, [viewFunction, signedAccountId, contract_id, key]);
 
   const renderDropContent = () => {
     const { token, nft, amount } = dropData;
@@ -134,7 +134,7 @@ const ToolsPage: NextPageWithLayout = () => {
             ) : (
               <>
                 <Text>Please sign in to use wallet utilities</Text>
-                <Button label="Sign In" fill="outline" onClick={() => wallet?.signIn()} />
+                <Button label="Sign In" fill="outline" onClick={signIn} />
               </>
             )}
           </Card>

@@ -1,8 +1,8 @@
 import { Dropdown, SvgIcon } from '@near-pagoda/ui';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { Bank, SignOut, User, Wallet } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { useContext } from 'react';
 import styled from 'styled-components';
 
 import { signInContractId } from '@/config';
@@ -11,7 +11,6 @@ import type { NFT } from '@/utils/types';
 
 import { NftImage } from '../NTFImage';
 import RoundedImage from '../RoundedImage';
-import { NearContext } from '../wallet-selector/WalletSelector';
 
 const Wrapper = styled.div`
   flex-grow: 1;
@@ -95,45 +94,46 @@ type Props = {
 };
 
 export const UserDropdownMenu = ({ collapsed }: Props) => {
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signedAccountId, callFunction, viewFunction, signOut } = useWalletSelector();
   const router = useRouter();
   const components = useBosComponents();
 
   const [availableStorage, setAvailableStorage] = useState<bigint>(BigInt(0));
 
   const withdrawStorage = useCallback(async () => {
-    if (!wallet) return;
-    await wallet.callMethod({ contractId: signInContractId, method: 'storage_withdraw', deposit: '1' });
-  }, [wallet]);
+    await callFunction({ contractId: signInContractId, method: 'storage_withdraw', deposit: '1' });
+  }, [callFunction]);
 
   const [profile, setProfile] = useState<any>({});
   const [nftProfile, setNftProfile] = useState<NFT | null>(null);
 
   useEffect(() => {
     async function getProfile() {
-      const socialProfile = await wallet?.viewMethod({
+      if (!signedAccountId) return;
+
+      const socialProfile = (await viewFunction({
         contractId: signInContractId,
         method: 'get',
         args: { keys: [`${signedAccountId}/profile/**`] },
-      });
+      })) as any;
       if (!socialProfile[signedAccountId]) return;
       const profile = socialProfile[signedAccountId].profile;
       setProfile(profile);
 
       try {
         if (profile.image.nft) {
-          const nft = await wallet?.viewMethod({
+          const nft = (await viewFunction({
             contractId: profile.image.nft.contractId,
             method: 'nft_token',
             args: { token_id: profile.image.nft.tokenId },
-          });
+          })) as any;
           setNftProfile(nft);
         }
       } catch (e) {}
     }
 
     async function getAvailableStorage() {
-      const storage: any = await wallet?.viewMethod({
+      const storage: any = await viewFunction({
         contractId: signInContractId,
         method: 'storage_balance_of',
         args: { account_id: signedAccountId },
@@ -141,10 +141,11 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
       if (storage) setAvailableStorage(BigInt(storage.available) / BigInt(10 ** 19));
     }
 
-    if (!wallet || !signedAccountId) return;
+    if (!signedAccountId) return;
+
     getProfile();
     getAvailableStorage();
-  }, [wallet, signedAccountId]);
+  }, [viewFunction, signedAccountId]);
 
   return (
     <Wrapper>
@@ -186,7 +187,7 @@ export const UserDropdownMenu = ({ collapsed }: Props) => {
               {`Withdraw ${availableStorage / BigInt(1000)}kb`}
             </Dropdown.Item>
           )}
-          <Dropdown.Item onSelect={() => wallet?.signOut()}>
+          <Dropdown.Item onSelect={signOut}>
             <SvgIcon icon={<SignOut weight="regular" />} />
             Sign out
           </Dropdown.Item>

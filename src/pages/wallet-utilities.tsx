@@ -1,10 +1,9 @@
 import { Button, Card, Container, Flex, Section, SvgIcon, Tabs } from '@near-pagoda/ui';
 import { Text } from '@near-pagoda/ui';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
 import { HandCoins, Key, LockKeyOpen, PaperPlaneTilt } from '@phosphor-icons/react';
 import { useRouter } from 'next/router';
-import { useContext } from 'react';
 
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { ExportFastAuthAccount } from '@/components/wallet-utilities/ExportFastAuthAccount';
 import KeyTable from '@/components/wallet-utilities/KeyTable';
 import { ReceiveNear } from '@/components/wallet-utilities/ReceiveNear';
@@ -15,7 +14,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 const WalletUtilitiesPage: NextPageWithLayout = () => {
   const router = useRouter();
   const selectedTab = (router.query.tab as string) || 'send';
-  const { wallet, signedAccountId } = useContext(NearContext);
+  const { signIn, signedAccountId } = useWalletSelector();
 
   return (
     <Section grow="available" style={{ background: 'var(--sand3)' }}>
@@ -70,7 +69,7 @@ const WalletUtilitiesPage: NextPageWithLayout = () => {
           ) : (
             <Card>
               <Text>Please sign in to use wallet utilities.</Text>
-              <Button label="Sign In" fill="outline" onClick={() => wallet?.signIn()} />
+              <Button label="Sign In" fill="outline" onClick={signIn} />
             </Card>
           )}
         </Flex>

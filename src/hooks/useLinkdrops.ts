@@ -1,6 +1,6 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useWalletSelector } from '@near-wallet-selector/react-hook';
+import { useCallback, useEffect, useState } from 'react';
 
-import { NearContext } from '@/components/wallet-selector/WalletSelector';
 import { network } from '@/config';
 import { getKeypomKeys } from '@/utils/linkdrops';
 import type { Drops, KeypomKey } from '@/utils/types';
@@ -8,17 +8,17 @@ import type { Drops, KeypomKey } from '@/utils/types';
 const KEYPOM_CONTRACT_ADDRESS = network.linkdrop;
 
 const useLinkdrops = () => {
-  const { signedAccountId, wallet } = useContext(NearContext);
+  const { signedAccountId, viewFunction } = useWalletSelector();
   const [drops, setDrops] = useState<Drops[]>([]);
 
   const fetchDropData = useCallback(async () => {
-    if (!wallet || !signedAccountId) return;
+    if (!signedAccountId) return;
 
-    const fetchedDrops: Drops[] = await wallet.viewMethod({
+    const fetchedDrops: Drops[] = (await viewFunction({
       contractId: KEYPOM_CONTRACT_ADDRESS,
       method: 'get_drops_for_owner',
       args: { account_id: signedAccountId },
-    });
+    })) as any;
 
     const fetchDropInformation = async () => {
       const fetchedDropsWithKeys = await Promise.all(
@@ -33,11 +33,11 @@ const useLinkdrops = () => {
             return null;
           }
 
-          const keypomKeys: KeypomKey[] = await wallet.viewMethod({
+          const keypomKeys: KeypomKey[] = (await viewFunction({
             contractId: KEYPOM_CONTRACT_ADDRESS,
             method: 'get_keys_for_drop',
             args: { drop_id: drop.drop_id },
-          });
+          })) as any;
 
           const localKeys = getKeypomKeys(JSON.parse(drop.metadata).dropName);
 
@@ -59,7 +59,7 @@ const useLinkdrops = () => {
     const data = await fetchDropInformation();
 
     setDrops(data);
-  }, [wallet, signedAccountId]);
+  }, [viewFunction, signedAccountId]);
 
   useEffect(() => {
     fetchDropData();
