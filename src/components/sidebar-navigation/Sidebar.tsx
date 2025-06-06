@@ -231,12 +231,7 @@ export const Sidebar = () => {
             </Tooltip>
 
             <Tooltip content="Get Funding" side="right" disabled={tooltipsDisabled}>
-              <S.NavigationItem
-                $active={false}
-                $type="featured"
-                href="https://near.org/ecosystem/get-funding"
-                target="_blank"
-              >
+              <S.NavigationItem $active={false} $type="featured" href="https://www.near.org/funding" target="_blank">
                 <i className="ph-bold ph-coin-vertical" />
                 <span>Get Funding</span>
                 <span className="ph-bold ph-arrow-square-out ms-auto outline-none" />
