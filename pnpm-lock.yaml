@@ -36,50 +36,50 @@ importers:
         specifier: ^1.0.1
         version: 1.0.1(@types/react-dom@18.3.0)(@types/react@18.3.9)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(zustand@4.5.5(@types/react@18.3.9)(react@18.3.1))
       '@near-wallet-selector/bitte-wallet':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)
       '@near-wallet-selector/core':
-        specifier: ^9.0.2
-        version: 9.0.2(near-api-js@2.1.4(encoding@0.1.13))
+        specifier: ^9.0.3
+        version: 9.0.3(near-api-js@2.1.4(encoding@0.1.13))
       '@near-wallet-selector/ethereum-wallets':
-        specifier: ^9.0.2
-        version: 9.0.2(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+        specifier: ^9.0.3
+        version: 9.0.3(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(typescript@5.6.2)(use-sync-external-store@1.2.2(react@18.3.1))(utf-8-validate@5.0.10)(zod@3.22.4)
       '@near-wallet-selector/here-wallet':
-        specifier: ^9.0.2
-        version: 9.0.2(bn.js@5.2.1)(borsh@2.0.0)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))
+        specifier: ^9.0.3
+        version: 9.0.3(bn.js@5.2.1)(borsh@2.0.0)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))
       '@near-wallet-selector/hot-wallet':
         specifier: ^8.10.1
         version: 8.10.1(bufferutil@4.0.8)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))(utf-8-validate@5.0.10)
       '@near-wallet-selector/ledger':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)(typescript@5.6.2)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)(typescript@5.6.2)
       '@near-wallet-selector/meteor-wallet':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)
       '@near-wallet-selector/meteor-wallet-app':
-        specifier: ^9.0.2
-        version: 9.0.2(near-api-js@2.1.4(encoding@0.1.13))
+        specifier: ^9.0.3
+        version: 9.0.3(near-api-js@2.1.4(encoding@0.1.13))
       '@near-wallet-selector/modal-ui':
-        specifier: ^9.0.2
-        version: 9.0.2(near-api-js@2.1.4(encoding@0.1.13))
+        specifier: ^9.0.3
+        version: 9.0.3(near-api-js@2.1.4(encoding@0.1.13))
       '@near-wallet-selector/my-near-wallet':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)
       '@near-wallet-selector/near-mobile-wallet':
-        specifier: ^9.0.2
-        version: 9.0.2(@swc/helpers@0.5.15)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)
+        specifier: ^9.0.3
+        version: 9.0.3(@swc/helpers@0.5.15)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)
       '@near-wallet-selector/nightly':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)
       '@near-wallet-selector/react-hook':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)
       '@near-wallet-selector/sender':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)
       '@near-wallet-selector/welldone-wallet':
-        specifier: ^9.0.2
-        version: 9.0.2(encoding@0.1.13)
+        specifier: ^9.0.3
+        version: 9.0.3(encoding@0.1.13)
       '@phosphor-icons/react':
         specifier: ^2.1.7
         version: 2.1.7(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -115,7 +115,7 @@ importers:
         version: 2.6.1(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
       '@web3modal/wagmi':
         specifier: ^5.1.11
-        version: 5.1.11(1115c48035acbf8758b1dcbf3b56ad7f)
+        version: 5.1.11(d06d2dec888676b54551b8c2844ace79)
       bootstrap:
         specifier: ^5.3.3
         version: 5.3.3(@popperjs/core@2.11.8)
@@ -196,7 +196,7 @@ importers:
         version: 5.6.2
       wagmi:
         specifier: ^2.12.17
-        version: 2.12.17(@tanstack/query-core@5.62.2)(@tanstack/react-query@5.62.2(react@18.3.1))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+        version: 2.12.17(@tanstack/query-core@5.62.2)(@tanstack/react-query@5.62.2(react@18.3.1))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
       zustand:
         specifier: ^4.5.2
         version: 4.5.5(@types/react@18.3.9)(react@18.3.1)
@@ -2533,8 +2533,8 @@ packages:
       react-dom: ^18
       zustand: ^4
 
-  '@near-wallet-selector/bitte-wallet@9.0.2':
-    resolution: {integrity: sha512-ZEF1LwIvBh1w59BRXuSNxmyRc6a4B4i8ufO/BvbVu5h3jkDALU/S88HHBmgnWVOLA3yrHfiDO1Z/BkoUxYs79Q==}
+  '@near-wallet-selector/bitte-wallet@9.0.3':
+    resolution: {integrity: sha512-Ne1r6JO9N2AMakCe2jdj9CYrbKSJESqceNzmENmu3zB3rpQOYLwBqezAThi+FMfT6s0anLCi9b/tG74bQ4lo7w==}
 
   '@near-wallet-selector/core@8.10.1':
     resolution: {integrity: sha512-FHZNLIPF3Qvj2M8cwyeHFH0Gwq58q7ibw02r+TkekyzZgXESvd/kU/OcF11T4r3WG1OrHPiZay7XXeAwDc9Txw==}
@@ -2547,46 +2547,46 @@ packages:
       '@near-js/providers': latest
       near-api-js: 4.0.3
 
-  '@near-wallet-selector/core@9.0.2':
-    resolution: {integrity: sha512-UNXk7IUU127vMIcfzruKm0nji2HI+GPAumRB+mhz7uzHhMs/tTmSVTEyk4nsdotoqz7YQ0WAsFTtByVOQe0eMQ==}
+  '@near-wallet-selector/core@9.0.3':
+    resolution: {integrity: sha512-ed9BR4L1jsLojritVYwkf3XZ6rtp7qUIgE8OTbEqmHLBBNeHC0VmDocCRLjhJ+asFh4cdZqyR1nRF6X0U7oQrQ==}
     peerDependencies:
       near-api-js: ^4.0.0 || ^5.0.0
 
-  '@near-wallet-selector/ethereum-wallets@9.0.2':
-    resolution: {integrity: sha512-GILtu70Et9vsDdGmy6YZ7hASfLrEJOk9sciR79q+6NwXcV0qQIXZRiyd4D19nJ+L3aZQMetQmYlpHCQv4mUhrQ==}
+  '@near-wallet-selector/ethereum-wallets@9.0.3':
+    resolution: {integrity: sha512-SNOw71NK1hzO6jFGBTDbxcCSGOjBAXYmlSpwDvjp1GYTVMYJ5tJ2tnjnnAfUL0rtCEzLlW90i2DWWc4dbWq1cg==}
 
-  '@near-wallet-selector/here-wallet@9.0.2':
-    resolution: {integrity: sha512-ZWg4l1MGNGwgoA+xLY0u4OBlWadWeuokGGHKqtACTdOezzRwHY7DX5crvgxBFWjMe7aTKaoJHb0jKu6SO/FH0g==}
+  '@near-wallet-selector/here-wallet@9.0.3':
+    resolution: {integrity: sha512-F20Bl0VKz07u4LZedHVveNeHHrEm0F8/tffmIpPFCh3bEGkPzEerS8lnMgDOhcmdyRrazAxSjn7VnxGgSS8J4Q==}
 
   '@near-wallet-selector/hot-wallet@8.10.1':
     resolution: {integrity: sha512-lOjXlUsCevSybXijZ8vY2BQJ+CfQZDeiS9+GXZw30jP9Kvd6tn1hQhxHsC2FFbFEvd4PxNVvSd88H93+WvX3uw==}
 
-  '@near-wallet-selector/ledger@9.0.2':
-    resolution: {integrity: sha512-L3cMFGQR8WC7OMFyoXh1fFeMe+JDriTGd6hF57hMLHxwWaZvdy6DRLYmRgo16Ympgayk5Z7iLMceojJkks1pVg==}
+  '@near-wallet-selector/ledger@9.0.3':
+    resolution: {integrity: sha512-vgUuk7XZt1P+IFQSDHFrnwCNgqGxbV2OkHiV/WCQ+7CP9cwduccsTxbhKksI0zOrXY7MnW7TJKaK8uk/7KbaWQ==}
 
-  '@near-wallet-selector/meteor-wallet-app@9.0.2':
-    resolution: {integrity: sha512-Ob1CElRX8UlXuBGFmb12PRzH1lUrSyHd0iAp8et7Zta10CVAUr/H/2WrKOZJKCabLqONH4b+AdbI9+/NtEyCqw==}
+  '@near-wallet-selector/meteor-wallet-app@9.0.3':
+    resolution: {integrity: sha512-Wk8LohYtfqplS9eqJaZAG1xdO6HNQumXgCg1kVjz9a7lVEGaByHu3PqxmeM8pXcZe6XV6RR2VLYZYAu7nKs8Wg==}
 
-  '@near-wallet-selector/meteor-wallet@9.0.2':
-    resolution: {integrity: sha512-f2DkMVCX+ovpyuLHyhUHoL83B4pcJiAj/IUcx7T+JFDcX+LzB8tn2931dGMxIVaStuGvSB00YXj/M9FmzsGwFA==}
+  '@near-wallet-selector/meteor-wallet@9.0.3':
+    resolution: {integrity: sha512-EAilKbKGnw8OnVNa3lX5Q7Oa/isgRwwqW9DhT/+iiuBuCxqRLW+fmt6uLSiN5s9+tOEJugB3AU6M6anxjrBAoQ==}
 
-  '@near-wallet-selector/modal-ui@9.0.2':
-    resolution: {integrity: sha512-FqSlu1hHaq1sJwJabskov3pg3wzWPWb4gzpKMPvKV+TECpkITEGDtfedP1Gq2OdeO0Vtp77JLsE4Kwnjuu7ZaA==}
+  '@near-wallet-selector/modal-ui@9.0.3':
+    resolution: {integrity: sha512-u/eB61EeALuezliDa3O2PPpCxPcxOjuTQCHZwYGrQZLrFRknr9LQIoqakfcFjpc4c5+2SFi+p9qjwQpClJJ/7A==}
 
-  '@near-wallet-selector/my-near-wallet@9.0.2':
-    resolution: {integrity: sha512-WWpVLN/bcVhdcHE9C46TXre/ASegLWeiMPGUFK7PwimmfMSlwskyn9zvJBtb5mrnmTHXIGGNxgky3x5w1Pn3gA==}
+  '@near-wallet-selector/my-near-wallet@9.0.3':
+    resolution: {integrity: sha512-PCHKnKStiyNjikdgz7zdFrnbL/4ayI62b7lcCbtEVUCTnRKYqHvUZvnYfDZiUdcKr8Hvb9XzvUktu2Lpm/tRpg==}
 
-  '@near-wallet-selector/near-mobile-wallet@9.0.2':
-    resolution: {integrity: sha512-A/v2uwXJJvp8ebvZOmQEo79r8rbIlgwdZrEBzO0dZuuXASsow8H9QNIKomSPTmYvU9jAJ99HBHzCXfR4PF2dXQ==}
+  '@near-wallet-selector/near-mobile-wallet@9.0.3':
+    resolution: {integrity: sha512-3WIDUIUdrhkv8zI0PEJWcW/7WyJcJ2OVqaDbyp90fm96NYRoxUSa85eITyEm8lo25L+yEGremRd4Mv1vnPpmGA==}
 
-  '@near-wallet-selector/nightly@9.0.2':
-    resolution: {integrity: sha512-R0KVu/7FXZqr63M1ohpGt3x5l4yMoMH0aUEC/XXiFYG9esDUNZm3wEzeUUVQI3giktlCKixldUNf08HPjVoqKA==}
+  '@near-wallet-selector/nightly@9.0.3':
+    resolution: {integrity: sha512-ZjR5fSItIkaGLJy5ItX30GLcco7UoPa2w20BFJ1caLFxC9TCmRtrR0d+eLrNc2AO7pamA8AIPem+mDOmPXUB/A==}
 
-  '@near-wallet-selector/react-hook@9.0.2':
-    resolution: {integrity: sha512-SNGE+4VGMZg0MHT0+Oxe0SZVWJDP0V7b5IDlXnDNrI+vZXI+QK/MGUHCtOY9STUIVedUbqRD/SF7uV7o51U+Yw==}
+  '@near-wallet-selector/react-hook@9.0.3':
+    resolution: {integrity: sha512-Dl/vq3aMXMLpFB+DDRJumcvv0PonXlYbd6+UfartiXPRNh740crQiQrO3kCsf56+iFyc0Llz8W8cjxkF4sEuoA==}
 
-  '@near-wallet-selector/sender@9.0.2':
-    resolution: {integrity: sha512-i7f+8eYd1vIBvRma6XNyiSH+IlUEZn+7u7xRnKPCbDoWR+z28uVTpm9k5k14q6YSrmDFLA+yXJIebus9DTFIqA==}
+  '@near-wallet-selector/sender@9.0.3':
+    resolution: {integrity: sha512-fZc88afZf11vIhoXAQeWDkgg8zEjzWRI0yKsH6StRJWuzhuUj8KDejA4JI8jMwG9WnAJfY2//a3krHYQUf/bLQ==}
 
   '@near-wallet-selector/wallet-utils@8.10.1':
     resolution: {integrity: sha512-1NxFCGo7bo+CiKOOS4yjSAwAfnjhYYXo3i1UCuu4MhHrQS+EvwMCxCadUKSNGXn1IC1TpKmWMVaENkv7gWKlZQ==}
@@ -2598,13 +2598,13 @@ packages:
     peerDependencies:
       near-api-js: 4.0.3
 
-  '@near-wallet-selector/wallet-utils@9.0.2':
-    resolution: {integrity: sha512-HClZfqmD8NsuvJ+YBm7i5zEMMFgR/0cFP4AzviWklXnVsqTSxX9PDwWZ/JPavy/snf9lZXgqHnd8rL4PjgLCFg==}
+  '@near-wallet-selector/wallet-utils@9.0.3':
+    resolution: {integrity: sha512-79EOxhvrIWjcPAcZi7n1u+jl/uqcgOnk0QKb6T9xoytDeZEXdGg7NG54vrj27lotGbzAw61hsDrOj2yrq0D+Ng==}
     peerDependencies:
       near-api-js: ^4.0.0 || ^5.0.0
 
-  '@near-wallet-selector/welldone-wallet@9.0.2':
-    resolution: {integrity: sha512-tMcZkpSZkysW2dRr8CtkdCBcoXCbKI+escZ7+kwi0yeo1WLDlKNWIexNTi0rFb1f2wK6TxL68ITmw0Q85l/asA==}
+  '@near-wallet-selector/welldone-wallet@9.0.3':
+    resolution: {integrity: sha512-/8Ihos1U0CEoZzCHZdbZay0AGOOscBWTx+zoZpSyqZUBBf4ucmlRRn3S2oJmeJu4FCG6/dFRtM36W8T/XMiDrA==}
 
   '@next/env@15.2.4':
     resolution: {integrity: sha512-+SFtMgoiYP3WoSswuNmxJOCwi06TdWE733D+WPjpXIe4LXGULwEaofiiAy6kbS0+XjM5xF5n3lKuBwN2SnqD9g==}
@@ -2660,18 +2660,22 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@noble/ciphers@1.3.0':
+    resolution: {integrity: sha512-2I0gnIVPtfnMw9ee9h1dJG7tp81+8Ob3OJb3Mv37rx5L40/b0i7djjCVvGOVqc9AEIQyvyu1i6ypKdFw8R8gQw==}
+    engines: {node: ^14.21.3 || >=16}
+
   '@noble/curves@1.2.0':
     resolution: {integrity: sha512-oYclrNgRaM9SsBUBVbb8M6DTV7ZHRTKugureoYEncY5c65HOmRzvSiTE3y5CYaPYJA/GVkrhXEoF0M3Ya9PMnw==}
 
   '@noble/curves@1.4.2':
     resolution: {integrity: sha512-TavHr8qycMChk8UwMld0ZDRvatedkzWfH8IiaeGCfymOP5i0hSCozz9vHOL0nkwk7HRMlFnAiKpS2jrUmSybcw==}
 
-  '@noble/curves@1.6.0':
-    resolution: {integrity: sha512-TlaHRXDehJuRNR9TfZDNQ45mMEd5dwUwmicsafcIX4SsNiqnCHKjE/1alYPd/lDRVhxdhUAlv8uEhMCI5zjIJQ==}
-    engines: {node: ^14.21.3 || >=16}
-
   '@noble/curves@1.8.1':
     resolution: {integrity: sha512-warwspo+UYUPep0Q+vtdVB4Ugn8GGQj8iyB3gnRWsztmUHTI3S1nhdiWNsPUGL0vud7JlRRk1XEu7Lq1KGTnMQ==}
+    engines: {node: ^14.21.3 || >=16}
+
+  '@noble/curves@1.9.1':
+    resolution: {integrity: sha512-k11yZxZg+t+gWvBbIswW0yoJlu8cHOC7dhunwOzoWH/mXGBiYyR4YY6hAEK/3EUs4UpB8la1RfdRpeGsFHkWsA==}
     engines: {node: ^14.21.3 || >=16}
 
   '@noble/hashes@1.3.2':
@@ -2686,12 +2690,12 @@ packages:
     resolution: {integrity: sha512-V1JJ1WTRUqHHrOSh597hURcMqVKVGL/ea3kv0gSnEdsEZ0/+VyPghM1lMNGc00z7CIQorSvbKpuJkxvuHbvdbg==}
     engines: {node: '>= 16'}
 
-  '@noble/hashes@1.5.0':
-    resolution: {integrity: sha512-1j6kQFb7QRru7eKN3ZDvRcP13rugwdxZqCjbiAVZfIJwgj2A65UmT4TgARXGlXgnRkORLTDTrO19ZErt7+QXgA==}
-    engines: {node: ^14.21.3 || >=16}
-
   '@noble/hashes@1.7.1':
     resolution: {integrity: sha512-B8XBPsn4vT/KJAGqDzbwztd+6Yte3P4V7iafm24bxgDe/mlRuK6xmWPuCNrKt2vDafZ8MfJLlchDG/vYafQEjQ==}
+    engines: {node: ^14.21.3 || >=16}
+
+  '@noble/hashes@1.8.0':
+    resolution: {integrity: sha512-jCs9ldd7NwzpgXDIf6P3+NrHh9/sD6CQdxHyjQI+h/6rDNo88ypBxxz45UDuZHz9r3tNz7N/VInSVoVdtXEI4A==}
     engines: {node: ^14.21.3 || >=16}
 
   '@nodelib/fs.scandir@2.1.5':
@@ -4213,14 +4217,17 @@ packages:
   '@scure/base@1.2.4':
     resolution: {integrity: sha512-5Yy9czTO47mqz+/J8GM6GIId4umdCk1wc1q8rKERQulIoc8VP9pzDcghv10Tl2E7R96ZUx/PhND3ESYUQX8NuQ==}
 
+  '@scure/base@1.2.6':
+    resolution: {integrity: sha512-g/nm5FgUa//MCj1gV09zTJTaM6KBAHqLN907YVQqf7zC49+DcO4B1so4ZX07Ef10Twr6nuqYEH9GEggFXA4Fmg==}
+
   '@scure/bip32@1.3.2':
     resolution: {integrity: sha512-N1ZhksgwD3OBlwTv3R6KFEcPojl/W4ElJOeCZdi+vuI5QmTFwLq3OFf2zd2ROpKvxFdgZ6hUpb0dx9bVNEwYCA==}
 
   '@scure/bip32@1.4.0':
     resolution: {integrity: sha512-sVUpc0Vq3tXCkDGYVWGIZTRfnvu8LoTDaev7vbwh0omSvVORONr960MQWdKqJDCReIEmTj3PAr73O3aoxz7OPg==}
 
-  '@scure/bip32@1.5.0':
-    resolution: {integrity: sha512-8EnFYkqEQdnkuGBVpCzKxyIwDCBLDVj3oiX0EKUFre/tOjL/Hqba1D6n/8RcmaQy4f95qQFrO2A8Sr6ybh4NRw==}
+  '@scure/bip32@1.7.0':
+    resolution: {integrity: sha512-E4FFX/N3f4B80AKWp5dP6ow+flD1LQZo/w8UnLGYZO674jS6YnYeepycOOksv+vLPSpgN35wgKgy+ybfTb2SMw==}
 
   '@scure/bip39@1.2.1':
     resolution: {integrity: sha512-Z3/Fsz1yr904dduJD0NpiyRHhRYHdcnyh73FZWiV+/qhWi83wNJ3NWolYqCEN+ZWsUz2TWwajJggcRE9r1zUYg==}
@@ -4228,8 +4235,8 @@ packages:
   '@scure/bip39@1.3.0':
     resolution: {integrity: sha512-disdg7gHuTDZtY+ZdkmLpPCk7fxZSu3gBiEGuoC1XYxv9cGx3Z6cpTggCgW6odSOOIXCiDjuGejW+aJKCY/pIQ==}
 
-  '@scure/bip39@1.4.0':
-    resolution: {integrity: sha512-BEEm6p8IueV/ZTfQLp/0vhw4NPnT9oWf5+28nvmeUICjP99f4vr2d+qc7AVGDDtwRep6ifR43Yed9ERVmiITzw==}
+  '@scure/bip39@1.6.0':
+    resolution: {integrity: sha512-+lF0BbLiJNwVlev4eKelw1WWLaiKXw7sSl8T6FvBlWkdX+94aGJ4o8XjUdlyhTCjd8c+B3KT3JfS8P0bLRNU6A==}
 
   '@sideway/address@4.1.5':
     resolution: {integrity: sha512-IqO/DUQHUkPeixNQ8n0JA6102hT9CmaljNTPmQ1u8MEhBo/R4Q8eKLN/vGZxuebwOroDB4cbpjheD4+/sKFK4Q==}
@@ -4701,6 +4708,18 @@ packages:
       typescript:
         optional: true
 
+  '@wagmi/core@2.17.3':
+    resolution: {integrity: sha512-fgZR9fAiCFtGaosTspkTx5lidccq9Z5xRWOk1HG0VfB6euQGw2//Db7upiP4uQ7DPst2YS9yQN2A1m9+iJLYCw==}
+    peerDependencies:
+      '@tanstack/query-core': '>=5.0.0'
+      typescript: '>=5.0.4'
+      viem: 2.x
+    peerDependenciesMeta:
+      '@tanstack/query-core':
+        optional: true
+      typescript:
+        optional: true
+
   '@wallet-standard/base@1.1.0':
     resolution: {integrity: sha512-DJDQhjKmSNVLKWItoKThJS+CsJQjR9AOBOirBVT1F9YpRyC9oYHE+ZnSf8y8bxUphtKqdQMPVQ2mHohYdRvDVQ==}
     engines: {node: '>=16'}
@@ -5067,8 +5086,8 @@ packages:
       zod:
         optional: true
 
-  abitype@1.0.6:
-    resolution: {integrity: sha512-MMSqYh4+C/aVqI2RQaWqbvI4Kxo5cQV40WQ4QFtDnNzCkqChm8MuENhElmynZlO0qUy/ObkEUaXtKqYnx1Kp3A==}
+  abitype@1.0.8:
+    resolution: {integrity: sha512-ZeiI6h3GnW06uYDLx0etQtX/p8E24UaHHBj57RSjK7YBFe7iuVn07EDpOeP451D06sF27VOz9JJPlIKJmXgkEg==}
     peerDependencies:
       typescript: '>=5.0.4'
       zod: ^3 >=3.22.0
@@ -7380,8 +7399,8 @@ packages:
     peerDependencies:
       ws: '*'
 
-  isows@1.0.6:
-    resolution: {integrity: sha512-lPHCayd40oW98/I0uvgaHKWCSvkzY27LjWLbtzOm64yQ+G3Q5npjjbdppU65iZXkK1Zt+kH9pfegli0AYfwYYw==}
+  isows@1.0.7:
+    resolution: {integrity: sha512-I1fSfDCZL5P0v33sVqeTDSpcstAg/N+wF5HS033mogOVIp4B+oHC7oOCsA3axAbBSGTJ8QubbNmnIRN/h8U7hg==}
     peerDependencies:
       ws: '*'
 
@@ -8463,6 +8482,14 @@ packages:
   os-tmpdir@1.0.2:
     resolution: {integrity: sha512-D2FR03Vir7FIu45XBY20mTb+/ZSWB00sjU9jdQXt83gDrI4Ztz5Fs7/yy74g2N5SVQY4xY1qDr4rNddwYRVX0g==}
     engines: {node: '>=0.10.0'}
+
+  ox@0.7.1:
+    resolution: {integrity: sha512-+k9fY9PRNuAMHRFIUbiK9Nt5seYHHzSQs9Bj+iMETcGtlpS7SmBzcGSVUQO3+nqGLEiNK4598pHNFlVRaZbRsg==}
+    peerDependencies:
+      typescript: '>=5.4.0'
+    peerDependenciesMeta:
+      typescript:
+        optional: true
 
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
@@ -10362,8 +10389,8 @@ packages:
       typescript:
         optional: true
 
-  viem@2.21.26:
-    resolution: {integrity: sha512-qanTFUzU5y3tCZTwYlwA/LXCR4X7OsCPvvKOmxOyuY8gEvWKMS/oh+FBxYO/2bXOhDG/ylg1V3toIbRuMseF8w==}
+  viem@2.31.0:
+    resolution: {integrity: sha512-U7OMQ6yqK+bRbEIarf2vqxL7unSEQvNxvML/1zG7suAmKuJmipqdVTVJGKBCJiYsm/EremyO2FS4dHIPpGv+eA==}
     peerDependencies:
       typescript: '>=5.0.4'
     peerDependenciesMeta:
@@ -10436,9 +10463,6 @@ packages:
 
   web-vitals@4.2.3:
     resolution: {integrity: sha512-/CFAm1mNxSmOj6i0Co+iGFJ58OS4NRGVP+AWS/l509uIK5a1bSoIVaHz/ZumpHTfHSZBpgrJ+wjfpAOrTHok5Q==}
-
-  webauthn-p256@0.0.10:
-    resolution: {integrity: sha512-EeYD+gmIT80YkSIDb2iWq0lq2zbHo1CxHlQTeJ+KkCILWpVy3zASH3ByD4bopzfk0uCwXxLqKGLqp2W4O28VFA==}
 
   webcrypto-core@1.8.0:
     resolution: {integrity: sha512-kR1UQNH8MD42CYuLzvibfakG5Ew5seG85dMMoAM/1LqvckxaF6pUiidLuraIu4V+YCIFabYecUZAW0TuxAoaqw==}
@@ -10675,6 +10699,18 @@ packages:
       utf-8-validate:
         optional: true
 
+  ws@8.18.2:
+    resolution: {integrity: sha512-DMricUmwGZUVr++AEAe2uiVM7UoO9MAVZMDu05UQOaUII0lp+zOzLLU4Xqh/JvTqklB1T4uELaaPBKyjE1r4fQ==}
+    engines: {node: '>=10.0.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: '>=5.0.2'
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+
   xmlhttprequest-ssl@2.1.1:
     resolution: {integrity: sha512-ptjR8YSJIXoA3Mbv5po7RtSYHO6mZr8s7i5VGmEk7QY2pQWyT1o0N+W1gKbOyJPUCGXGnuw0wqe8f0L6Y0ny7g==}
     engines: {node: '>=0.4.0'}
@@ -10756,6 +10792,24 @@ packages:
       immer:
         optional: true
       react:
+        optional: true
+
+  zustand@5.0.0:
+    resolution: {integrity: sha512-LE+VcmbartOPM+auOjCCLQOsQ05zUTp8RkgwRzefUk+2jISdMMFnxvyTjA4YNWr5ZGXYbVsEMZosttuxUBkojQ==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      immer: '>=9.0.6'
+      react: '>=18.0.0'
+      use-sync-external-store: '>=1.2.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      immer:
+        optional: true
+      react:
+        optional: true
+      use-sync-external-store:
         optional: true
 
   zwitch@2.0.4:
@@ -13988,7 +14042,7 @@ snapshots:
       - '@types/react'
       - '@types/react-dom'
 
-  '@near-wallet-selector/bitte-wallet@9.0.2(encoding@0.1.13)':
+  '@near-wallet-selector/bitte-wallet@9.0.3(encoding@0.1.13)':
     dependencies:
       '@bitte-ai/wallet': 0.8.2(encoding@0.1.13)
     transitivePeerDependencies:
@@ -14019,7 +14073,7 @@ snapshots:
       near-api-js: 2.1.4(encoding@0.1.13)
       rxjs: 7.8.1
 
-  '@near-wallet-selector/core@9.0.2(near-api-js@2.1.4(encoding@0.1.13))':
+  '@near-wallet-selector/core@9.0.3(near-api-js@2.1.4(encoding@0.1.13))':
     dependencies:
       borsh: 2.0.0
       events: 3.3.0
@@ -14027,7 +14081,7 @@ snapshots:
       near-api-js: 2.1.4(encoding@0.1.13)
       rxjs: 7.8.1
 
-  '@near-wallet-selector/core@9.0.2(near-api-js@5.0.0(encoding@0.1.13))':
+  '@near-wallet-selector/core@9.0.3(near-api-js@5.0.0(encoding@0.1.13))':
     dependencies:
       borsh: 2.0.0
       events: 3.3.0
@@ -14035,14 +14089,14 @@ snapshots:
       near-api-js: 5.0.0(encoding@0.1.13)
       rxjs: 7.8.1
 
-  '@near-wallet-selector/ethereum-wallets@9.0.2(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)':
+  '@near-wallet-selector/ethereum-wallets@9.0.3(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(typescript@5.6.2)(use-sync-external-store@1.2.2(react@18.3.1))(utf-8-validate@5.0.10)(zod@3.22.4)':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
-      '@near-wallet-selector/wallet-utils': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
-      '@wagmi/core': 2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/wallet-utils': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
+      '@wagmi/core': 2.17.3(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(use-sync-external-store@1.2.2(react@18.3.1))(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
       bs58: 5.0.0
       near-api-js: 5.0.0(encoding@0.1.13)
-      viem: 2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
     transitivePeerDependencies:
       - '@tanstack/query-core'
       - '@types/react'
@@ -14051,13 +14105,14 @@ snapshots:
       - immer
       - react
       - typescript
+      - use-sync-external-store
       - utf-8-validate
       - zod
 
-  '@near-wallet-selector/here-wallet@9.0.2(bn.js@5.2.1)(borsh@2.0.0)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))':
+  '@near-wallet-selector/here-wallet@9.0.3(bn.js@5.2.1)(borsh@2.0.0)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))':
     dependencies:
       '@here-wallet/core': 3.4.0(bn.js@5.2.1)(borsh@2.0.0)(encoding@0.1.13)
-      '@near-wallet-selector/core': 9.0.2(near-api-js@2.1.4(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@2.1.4(encoding@0.1.13))
     transitivePeerDependencies:
       - bn.js
       - borsh
@@ -14074,12 +14129,12 @@ snapshots:
       - near-api-js
       - utf-8-validate
 
-  '@near-wallet-selector/ledger@9.0.2(encoding@0.1.13)(typescript@5.6.2)':
+  '@near-wallet-selector/ledger@9.0.3(encoding@0.1.13)(typescript@5.6.2)':
     dependencies:
       '@ledgerhq/hw-transport': 6.30.3
       '@ledgerhq/hw-transport-webhid': 6.29.4
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
-      '@near-wallet-selector/wallet-utils': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/wallet-utils': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       borsh: 2.0.0
       is-mobile: 4.0.0
       near-api-js: 5.0.0(encoding@0.1.13)
@@ -14088,23 +14143,23 @@ snapshots:
       - encoding
       - typescript
 
-  '@near-wallet-selector/meteor-wallet-app@9.0.2(near-api-js@2.1.4(encoding@0.1.13))':
+  '@near-wallet-selector/meteor-wallet-app@9.0.3(near-api-js@2.1.4(encoding@0.1.13))':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@2.1.4(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@2.1.4(encoding@0.1.13))
     transitivePeerDependencies:
       - near-api-js
 
-  '@near-wallet-selector/meteor-wallet@9.0.2(encoding@0.1.13)':
+  '@near-wallet-selector/meteor-wallet@9.0.3(encoding@0.1.13)':
     dependencies:
       '@meteorwallet/sdk': 1.0.9(near-api-js@5.0.0(encoding@0.1.13))
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       near-api-js: 5.0.0(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
-  '@near-wallet-selector/modal-ui@9.0.2(near-api-js@2.1.4(encoding@0.1.13))':
+  '@near-wallet-selector/modal-ui@9.0.3(near-api-js@2.1.4(encoding@0.1.13))':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@2.1.4(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@2.1.4(encoding@0.1.13))
       copy-to-clipboard: 3.3.3
       qrcode: 1.5.4
       react: 18.3.1
@@ -14112,9 +14167,9 @@ snapshots:
     transitivePeerDependencies:
       - near-api-js
 
-  '@near-wallet-selector/modal-ui@9.0.2(near-api-js@5.0.0(encoding@0.1.13))':
+  '@near-wallet-selector/modal-ui@9.0.3(near-api-js@5.0.0(encoding@0.1.13))':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       copy-to-clipboard: 3.3.3
       qrcode: 1.5.4
       react: 18.3.1
@@ -14122,18 +14177,18 @@ snapshots:
     transitivePeerDependencies:
       - near-api-js
 
-  '@near-wallet-selector/my-near-wallet@9.0.2(encoding@0.1.13)':
+  '@near-wallet-selector/my-near-wallet@9.0.3(encoding@0.1.13)':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
-      '@near-wallet-selector/wallet-utils': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/wallet-utils': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       borsh: 2.0.0
       near-api-js: 5.0.0(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
-  '@near-wallet-selector/near-mobile-wallet@9.0.2(@swc/helpers@0.5.15)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)':
+  '@near-wallet-selector/near-mobile-wallet@9.0.3(@swc/helpers@0.5.15)(encoding@0.1.13)(near-api-js@2.1.4(encoding@0.1.13))(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@2.1.4(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@2.1.4(encoding@0.1.13))
       '@peersyst/near-mobile-signer': 1.1.4(@swc/helpers@0.5.15)(encoding@0.1.13)(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -14148,26 +14203,26 @@ snapshots:
       - typescript
       - uncss
 
-  '@near-wallet-selector/nightly@9.0.2(encoding@0.1.13)':
+  '@near-wallet-selector/nightly@9.0.3(encoding@0.1.13)':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
-      '@near-wallet-selector/wallet-utils': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/wallet-utils': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       near-api-js: 5.0.0(encoding@0.1.13)
     transitivePeerDependencies:
       - encoding
 
-  '@near-wallet-selector/react-hook@9.0.2(encoding@0.1.13)':
+  '@near-wallet-selector/react-hook@9.0.3(encoding@0.1.13)':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
-      '@near-wallet-selector/modal-ui': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/modal-ui': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       near-api-js: 5.0.0(encoding@0.1.13)
       react: 18.3.1
     transitivePeerDependencies:
       - encoding
 
-  '@near-wallet-selector/sender@9.0.2(encoding@0.1.13)':
+  '@near-wallet-selector/sender@9.0.3(encoding@0.1.13)':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       is-mobile: 4.0.0
       near-api-js: 5.0.0(encoding@0.1.13)
     transitivePeerDependencies:
@@ -14185,15 +14240,15 @@ snapshots:
     transitivePeerDependencies:
       - '@near-js/providers'
 
-  '@near-wallet-selector/wallet-utils@9.0.2(near-api-js@5.0.0(encoding@0.1.13))':
+  '@near-wallet-selector/wallet-utils@9.0.3(near-api-js@5.0.0(encoding@0.1.13))':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       near-api-js: 5.0.0(encoding@0.1.13)
 
-  '@near-wallet-selector/welldone-wallet@9.0.2(encoding@0.1.13)':
+  '@near-wallet-selector/welldone-wallet@9.0.3(encoding@0.1.13)':
     dependencies:
-      '@near-wallet-selector/core': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
-      '@near-wallet-selector/wallet-utils': 9.0.2(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/core': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
+      '@near-wallet-selector/wallet-utils': 9.0.3(near-api-js@5.0.0(encoding@0.1.13))
       is-mobile: 4.0.0
       near-api-js: 5.0.0(encoding@0.1.13)
     transitivePeerDependencies:
@@ -14229,6 +14284,8 @@ snapshots:
   '@next/swc-win32-x64-msvc@15.2.4':
     optional: true
 
+  '@noble/ciphers@1.3.0': {}
+
   '@noble/curves@1.2.0':
     dependencies:
       '@noble/hashes': 1.3.2
@@ -14237,13 +14294,13 @@ snapshots:
     dependencies:
       '@noble/hashes': 1.4.0
 
-  '@noble/curves@1.6.0':
-    dependencies:
-      '@noble/hashes': 1.5.0
-
   '@noble/curves@1.8.1':
     dependencies:
       '@noble/hashes': 1.7.1
+
+  '@noble/curves@1.9.1':
+    dependencies:
+      '@noble/hashes': 1.8.0
 
   '@noble/hashes@1.3.2': {}
 
@@ -14251,9 +14308,9 @@ snapshots:
 
   '@noble/hashes@1.4.0': {}
 
-  '@noble/hashes@1.5.0': {}
-
   '@noble/hashes@1.7.1': {}
+
+  '@noble/hashes@1.8.0': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
@@ -14269,16 +14326,17 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@parcel/bundler-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/bundler-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
       '@parcel/graph': 3.2.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/rust': 2.12.0
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
   '@parcel/cache@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
@@ -14294,46 +14352,47 @@ snapshots:
     dependencies:
       chalk: 4.1.2
 
-  '@parcel/compressor-raw@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/compressor-raw@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
   '@parcel/config-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)':
     dependencies:
-      '@parcel/bundler-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/compressor-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/bundler-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/compressor-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/core': 2.12.0(@swc/helpers@0.5.15)
-      '@parcel/namer-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/optimizer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)
-      '@parcel/optimizer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/optimizer-svgo': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/namer-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/optimizer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/optimizer-htmlnano': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)
+      '@parcel/optimizer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/optimizer-svgo': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/optimizer-swc': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
-      '@parcel/packager-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/packager-html': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/packager-js': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/packager-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/packager-svg': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/packager-wasm': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/reporter-dev-server': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/resolver-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/runtime-browser-hmr': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/runtime-js': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/runtime-react-refresh': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/runtime-service-worker': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-babel': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-html': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/packager-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/packager-html': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/packager-js': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/packager-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/packager-svg': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/packager-wasm': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/reporter-dev-server': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/resolver-default': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/runtime-browser-hmr': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/runtime-js': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/runtime-react-refresh': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/runtime-service-worker': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-babel': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-css': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-html': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-image': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/transformer-js': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-json': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-postcss': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-posthtml': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-react-refresh-wrap': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/transformer-svg': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/transformer-json': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-postcss': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-posthtml': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-raw': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-react-refresh-wrap': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/transformer-svg': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@swc/helpers'
       - cssnano
@@ -14355,13 +14414,13 @@ snapshots:
       '@parcel/graph': 3.2.0
       '@parcel/logger': 2.12.0
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/profiler': 2.12.0
       '@parcel/rust': 2.12.0
       '@parcel/source-map': 2.1.1
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       abortcontroller-polyfill: 1.7.5
       base-x: 3.0.10
       browserslist: 4.24.0
@@ -14389,7 +14448,7 @@ snapshots:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       '@parcel/watcher': 2.4.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@swc/helpers'
 
@@ -14406,13 +14465,14 @@ snapshots:
     dependencies:
       chalk: 4.1.2
 
-  '@parcel/namer-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/namer-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
   '@parcel/node-resolver-core@3.3.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
     dependencies:
@@ -14426,10 +14486,10 @@ snapshots:
     transitivePeerDependencies:
       - '@parcel/core'
 
-  '@parcel/optimizer-css@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/optimizer-css@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
       browserslist: 4.24.0
@@ -14437,16 +14497,18 @@ snapshots:
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)':
+  '@parcel/optimizer-htmlnano@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)(postcss@8.4.49)(terser@5.33.0)(typescript@5.6.2)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       htmlnano: 2.1.1(postcss@8.4.49)(svgo@2.8.0)(terser@5.33.0)(typescript@5.6.2)
       nullthrows: 1.1.1
       posthtml: 0.16.6
       svgo: 2.8.0
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
       - cssnano
       - postcss
       - purgecss
@@ -14456,28 +14518,31 @@ snapshots:
       - typescript
       - uncss
 
-  '@parcel/optimizer-image@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/optimizer-image@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.15)
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/rust': 2.12.0
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+    transitivePeerDependencies:
+      - '@swc/helpers'
 
-  '@parcel/optimizer-svgo@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/optimizer-svgo@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       svgo: 2.8.0
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
   '@parcel/optimizer-swc@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
       '@swc/core': 1.7.28(@swc/helpers@0.5.15)
@@ -14495,37 +14560,39 @@ snapshots:
       '@parcel/node-resolver-core': 3.3.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@swc/core': 1.7.28(@swc/helpers@0.5.15)
       semver: 7.6.3
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@parcel/packager-css@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/packager-css@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
       lightningcss: 1.27.0
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/packager-html@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/packager-html@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
       posthtml: 0.16.6
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/packager-js@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/packager-js@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/rust': 2.12.0
       '@parcel/source-map': 2.1.1
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
@@ -14534,33 +14601,38 @@ snapshots:
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/packager-raw@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/packager-raw@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/packager-svg@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/packager-svg@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       posthtml: 0.16.6
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/packager-wasm@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/packager-wasm@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/plugin@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/plugin@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
   '@parcel/profiler@2.12.0':
     dependencies:
@@ -14568,71 +14640,79 @@ snapshots:
       '@parcel/events': 2.12.0
       chrome-trace-event: 1.0.4
 
-  '@parcel/reporter-cli@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/reporter-cli@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       chalk: 4.1.2
       term-size: 2.2.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/reporter-dev-server@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/reporter-dev-server@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/reporter-tracer@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/reporter-tracer@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       chrome-trace-event: 1.0.4
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/resolver-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/resolver-default@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/node-resolver-core': 3.3.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/runtime-browser-hmr@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/runtime-browser-hmr@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/runtime-js@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/runtime-js@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/runtime-react-refresh@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/runtime-react-refresh@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       react-error-overlay: 6.0.9
       react-refresh: 0.9.0
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/runtime-service-worker@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/runtime-service-worker@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
   '@parcel/rust@2.12.0': {}
 
@@ -14640,10 +14720,10 @@ snapshots:
     dependencies:
       detect-libc: 1.0.3
 
-  '@parcel/transformer-babel@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-babel@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
       browserslist: 4.24.0
@@ -14652,11 +14732,12 @@ snapshots:
       semver: 7.6.3
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-css@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-css@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
       browserslist: 4.24.0
@@ -14664,11 +14745,12 @@ snapshots:
       nullthrows: 1.1.1
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-html@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-html@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/rust': 2.12.0
       nullthrows: 1.1.1
       posthtml: 0.16.6
@@ -14678,41 +14760,45 @@ snapshots:
       srcset: 4.0.0
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-image@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-image@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.15)
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       nullthrows: 1.1.1
+    transitivePeerDependencies:
+      - '@swc/helpers'
 
   '@parcel/transformer-js@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.15)
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/rust': 2.12.0
       '@parcel/source-map': 2.1.1
       '@parcel/utils': 2.12.0
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@swc/helpers': 0.5.15
       browserslist: 4.24.0
       nullthrows: 1.1.1
       regenerator-runtime: 0.13.11
       semver: 7.6.3
 
-  '@parcel/transformer-json@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-json@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       json5: 2.2.3
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-postcss@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-postcss@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/rust': 2.12.0
       '@parcel/utils': 2.12.0
       clone: 2.1.2
@@ -14721,10 +14807,11 @@ snapshots:
       semver: 7.6.3
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-posthtml@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-posthtml@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
       posthtml: 0.16.6
@@ -14733,25 +14820,28 @@ snapshots:
       semver: 7.6.3
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-raw@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-raw@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-react-refresh-wrap@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-react-refresh-wrap@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       react-refresh: 0.9.0
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
-  '@parcel/transformer-svg@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/transformer-svg@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/diagnostic': 2.12.0
-      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/plugin': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/rust': 2.12.0
       nullthrows: 1.1.1
       posthtml: 0.16.6
@@ -14760,6 +14850,7 @@ snapshots:
       semver: 7.6.3
     transitivePeerDependencies:
       - '@parcel/core'
+      - '@swc/helpers'
 
   '@parcel/types@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
@@ -14768,7 +14859,7 @@ snapshots:
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/source-map': 2.1.1
-      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/workers': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       utility-types: 3.11.0
     transitivePeerDependencies:
       - '@parcel/core'
@@ -14846,7 +14937,7 @@ snapshots:
       '@parcel/watcher-win32-ia32': 2.4.1
       '@parcel/watcher-win32-x64': 2.4.1
 
-  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))':
+  '@parcel/workers@2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)':
     dependencies:
       '@parcel/core': 2.12.0(@swc/helpers@0.5.15)
       '@parcel/diagnostic': 2.12.0
@@ -14855,6 +14946,8 @@ snapshots:
       '@parcel/types': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       nullthrows: 1.1.1
+    transitivePeerDependencies:
+      - '@swc/helpers'
 
   '@peculiar/asn1-schema@2.3.13':
     dependencies:
@@ -16169,6 +16262,8 @@ snapshots:
 
   '@scure/base@1.2.4': {}
 
+  '@scure/base@1.2.6': {}
+
   '@scure/bip32@1.3.2':
     dependencies:
       '@noble/curves': 1.2.0
@@ -16181,11 +16276,11 @@ snapshots:
       '@noble/hashes': 1.4.0
       '@scure/base': 1.1.9
 
-  '@scure/bip32@1.5.0':
+  '@scure/bip32@1.7.0':
     dependencies:
-      '@noble/curves': 1.6.0
-      '@noble/hashes': 1.5.0
-      '@scure/base': 1.1.9
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/base': 1.2.6
 
   '@scure/bip39@1.2.1':
     dependencies:
@@ -16197,10 +16292,10 @@ snapshots:
       '@noble/hashes': 1.4.0
       '@scure/base': 1.1.9
 
-  '@scure/bip39@1.4.0':
+  '@scure/bip39@1.6.0':
     dependencies:
-      '@noble/hashes': 1.5.0
-      '@scure/base': 1.1.9
+      '@noble/hashes': 1.8.0
+      '@scure/base': 1.2.6
 
   '@sideway/address@4.1.5':
     dependencies:
@@ -16723,17 +16818,17 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@wagmi/connectors@5.1.15(@types/react@18.3.9)(@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)':
+  '@wagmi/connectors@5.1.15(@types/react@18.3.9)(@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)':
     dependencies:
       '@coinbase/wallet-sdk': 4.0.4
       '@metamask/sdk': 0.28.4(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(utf-8-validate@5.0.10)
       '@safe-global/safe-apps-provider': 0.18.3(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
       '@safe-global/safe-apps-sdk': 9.1.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
-      '@wagmi/core': 2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@wagmi/core': 2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
       '@walletconnect/ethereum-provider': 2.17.0(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10)
       '@walletconnect/modal': 2.7.0(@types/react@18.3.9)(react@18.3.1)
       cbw-sdk: '@coinbase/wallet-sdk@3.9.3'
-      viem: 2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
     optionalDependencies:
       typescript: 5.6.2
     transitivePeerDependencies:
@@ -16762,11 +16857,11 @@ snapshots:
       - utf-8-validate
       - zod
 
-  '@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))':
+  '@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))':
     dependencies:
       eventemitter3: 5.0.1
       mipd: 0.0.7(typescript@5.6.2)
-      viem: 2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
       zustand: 4.4.1(@types/react@18.3.9)(react@18.3.1)
     optionalDependencies:
       '@tanstack/query-core': 5.62.2
@@ -16775,6 +16870,21 @@ snapshots:
       - '@types/react'
       - immer
       - react
+
+  '@wagmi/core@2.17.3(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(use-sync-external-store@1.2.2(react@18.3.1))(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))':
+    dependencies:
+      eventemitter3: 5.0.1
+      mipd: 0.0.7(typescript@5.6.2)
+      viem: 2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+      zustand: 5.0.0(@types/react@18.3.9)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1))
+    optionalDependencies:
+      '@tanstack/query-core': 5.62.2
+      typescript: 5.6.2
+    transitivePeerDependencies:
+      - '@types/react'
+      - immer
+      - react
+      - use-sync-external-store
 
   '@wallet-standard/base@1.1.0': {}
 
@@ -18047,10 +18157,10 @@ snapshots:
       lit: 3.1.0
       qrcode: 1.5.3
 
-  '@web3modal/wagmi@5.1.11(1115c48035acbf8758b1dcbf3b56ad7f)':
+  '@web3modal/wagmi@5.1.11(d06d2dec888676b54551b8c2844ace79)':
     dependencies:
-      '@wagmi/connectors': 5.1.15(@types/react@18.3.9)(@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
-      '@wagmi/core': 2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@wagmi/connectors': 5.1.15(@types/react@18.3.9)(@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+      '@wagmi/core': 2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
       '@walletconnect/ethereum-provider': 2.16.1(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10)
       '@walletconnect/utils': 2.16.1
       '@web3modal/base': 5.1.11(@types/react@18.3.9)(react@18.3.1)
@@ -18059,8 +18169,8 @@ snapshots:
       '@web3modal/scaffold-utils': 5.1.11(@types/react@18.3.9)(react@18.3.1)
       '@web3modal/siwe': 5.1.11(@types/react@18.3.9)(react@18.3.1)
       '@web3modal/wallet': 5.1.11
-      viem: 2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
-      wagmi: 2.12.17(@tanstack/query-core@5.62.2)(@tanstack/react-query@5.62.2(react@18.3.1))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+      viem: 2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+      wagmi: 2.12.17(@tanstack/query-core@5.62.2)(@tanstack/react-query@5.62.2(react@18.3.1))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
     optionalDependencies:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
@@ -18186,7 +18296,7 @@ snapshots:
       typescript: 5.6.2
       zod: 3.22.4
 
-  abitype@1.0.6(typescript@5.6.2)(zod@3.22.4):
+  abitype@1.0.8(typescript@5.6.2)(zod@3.22.4):
     optionalDependencies:
       typescript: 5.6.2
       zod: 3.22.4
@@ -20951,9 +21061,9 @@ snapshots:
     dependencies:
       ws: 8.17.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
 
-  isows@1.0.6(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)):
+  isows@1.0.7(ws@8.18.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)):
     dependencies:
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      ws: 8.18.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
 
   istanbul-lib-coverage@3.2.2: {}
 
@@ -22594,6 +22704,21 @@ snapshots:
 
   os-tmpdir@1.0.2: {}
 
+  ox@0.7.1(typescript@5.6.2)(zod@3.22.4):
+    dependencies:
+      '@adraffy/ens-normalize': 1.11.0
+      '@noble/ciphers': 1.3.0
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.0.8(typescript@5.6.2)(zod@3.22.4)
+      eventemitter3: 5.0.1
+    optionalDependencies:
+      typescript: 5.6.2
+    transitivePeerDependencies:
+      - zod
+
   p-limit@2.3.0:
     dependencies:
       p-try: 2.2.0
@@ -22635,9 +22760,9 @@ snapshots:
       '@parcel/fs': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/logger': 2.12.0
       '@parcel/package-manager': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
-      '@parcel/reporter-cli': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/reporter-dev-server': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
-      '@parcel/reporter-tracer': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))
+      '@parcel/reporter-cli': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/reporter-dev-server': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
+      '@parcel/reporter-tracer': 2.12.0(@parcel/core@2.12.0(@swc/helpers@0.5.15))(@swc/helpers@0.5.15)
       '@parcel/utils': 2.12.0
       chalk: 4.1.2
       commander: 7.2.0
@@ -24647,7 +24772,7 @@ snapshots:
     dependencies:
       browserslist: 4.24.0
       escalade: 3.2.0
-      picocolors: 1.1.0
+      picocolors: 1.1.1
 
   uqr@0.1.2: {}
 
@@ -24788,17 +24913,16 @@ snapshots:
       - utf-8-validate
       - zod
 
-  viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4):
+  viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4):
     dependencies:
-      '@adraffy/ens-normalize': 1.11.0
-      '@noble/curves': 1.6.0
-      '@noble/hashes': 1.5.0
-      '@scure/bip32': 1.5.0
-      '@scure/bip39': 1.4.0
-      abitype: 1.0.6(typescript@5.6.2)(zod@3.22.4)
-      isows: 1.0.6(ws@8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10))
-      webauthn-p256: 0.0.10
-      ws: 8.18.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      '@noble/curves': 1.9.1
+      '@noble/hashes': 1.8.0
+      '@scure/bip32': 1.7.0
+      '@scure/bip39': 1.6.0
+      abitype: 1.0.8(typescript@5.6.2)(zod@3.22.4)
+      isows: 1.0.7(ws@8.18.2(bufferutil@4.0.8)(utf-8-validate@5.0.10))
+      ox: 0.7.1(typescript@5.6.2)(zod@3.22.4)
+      ws: 8.18.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
     optionalDependencies:
       typescript: 5.6.2
     transitivePeerDependencies:
@@ -24819,14 +24943,14 @@ snapshots:
 
   vlq@1.0.1: {}
 
-  wagmi@2.12.17(@tanstack/query-core@5.62.2)(@tanstack/react-query@5.62.2(react@18.3.1))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4):
+  wagmi@2.12.17(@tanstack/query-core@5.62.2)(@tanstack/react-query@5.62.2(react@18.3.1))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4):
     dependencies:
       '@tanstack/react-query': 5.62.2(react@18.3.1)
-      '@wagmi/connectors': 5.1.15(@types/react@18.3.9)(@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
-      '@wagmi/core': 2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
+      '@wagmi/connectors': 5.1.15(@types/react@18.3.9)(@wagmi/core@2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)))(bufferutil@4.0.8)(encoding@0.1.13)(react-dom@18.3.1(react@18.3.1))(react-native@0.76.3(@babel/core@7.25.2)(@babel/preset-env@7.25.4(@babel/core@7.25.2))(@types/react@18.3.9)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.3.1)(utf-8-validate@5.0.10))(react@18.3.1)(rollup@2.79.1)(typescript@5.6.2)(utf-8-validate@5.0.10)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))(zod@3.22.4)
+      '@wagmi/core': 2.13.8(@tanstack/query-core@5.62.2)(@types/react@18.3.9)(react@18.3.1)(typescript@5.6.2)(viem@2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4))
       react: 18.3.1
       use-sync-external-store: 1.2.0(react@18.3.1)
-      viem: 2.21.26(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
+      viem: 2.31.0(bufferutil@4.0.8)(typescript@5.6.2)(utf-8-validate@5.0.10)(zod@3.22.4)
     optionalDependencies:
       typescript: 5.6.2
     transitivePeerDependencies:
@@ -24878,11 +25002,6 @@ snapshots:
   weak-map@1.0.8: {}
 
   web-vitals@4.2.3: {}
-
-  webauthn-p256@0.0.10:
-    dependencies:
-      '@noble/curves': 1.8.1
-      '@noble/hashes': 1.7.1
 
   webcrypto-core@1.8.0:
     dependencies:
@@ -25193,6 +25312,11 @@ snapshots:
       bufferutil: 4.0.8
       utf-8-validate: 5.0.10
 
+  ws@8.18.2(bufferutil@4.0.8)(utf-8-validate@5.0.10):
+    optionalDependencies:
+      bufferutil: 4.0.8
+      utf-8-validate: 5.0.10
+
   xmlhttprequest-ssl@2.1.1: {}
 
   xtend@4.0.2: {}
@@ -25265,5 +25389,11 @@ snapshots:
     optionalDependencies:
       '@types/react': 18.3.9
       react: 18.3.1
+
+  zustand@5.0.0(@types/react@18.3.9)(react@18.3.1)(use-sync-external-store@1.2.2(react@18.3.1)):
+    optionalDependencies:
+      '@types/react': 18.3.9
+      react: 18.3.1
+      use-sync-external-store: 1.2.2(react@18.3.1)
 
   zwitch@2.0.4: {}

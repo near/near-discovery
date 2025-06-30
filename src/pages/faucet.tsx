@@ -96,6 +96,10 @@ const ToolsPage: NextPageWithLayout = () => {
               </Flex>
             </Form>
           </Card>
+
+          <Text size="text-base">
+            Not working? Please report at <a href="https://t.me/neardev"> https://t.me/neardev </a>
+          </Text>
         </Flex>
       </Container>
     </Section>
