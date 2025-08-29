@@ -33,7 +33,7 @@ import { useEffect } from 'react';
 import { CookiePrompt } from '@/components/CookiePrompt';
 import { ResearchFormWizard } from '@/components/research-form-wizard/ResearchFormWizard';
 import { wagmiConfig, web3Modal } from '@/components/wallet-selector/web3modal';
-import { gleapSdkToken, networkId, signInContractId } from '@/config';
+import { gleapSdkToken, network, networkId, signInContractId } from '@/config';
 import { useBosLoaderInitializer } from '@/hooks/useBosLoaderInitializer';
 import { useHashUrlBackwardsCompatibility } from '@/hooks/useHashUrlBackwardsCompatibility';
 import { useCookieStore } from '@/stores/cookieData';
@@ -43,7 +43,7 @@ import type { NextPageWithLayout } from '@/utils/types';
 import { styleZendesk } from '@/utils/zendesk';
 
 const walletSelectorConfig = {
-  network: networkId,
+  network: { networkId: networkId, nodeUrl: network.nodeUrl },
   createAccessKeyFor: signInContractId,
   modules: [
     setupFastAuthWallet({
