@@ -20,8 +20,10 @@ export default function Component(props: any) {
     walletSelector &&
       initNear &&
       initNear({
-        networkId: network.networkId,
-        nodeUrl: network.nodeUrl, 
+        config: {
+          networkId: network.networkId,
+          nodeUrl: network.nodeUrl,
+        },
         selector: walletSelector,
         customElements: {
           Link: ({ to, href, ...rest }: { to: string | object | undefined; href: string | object }) => {

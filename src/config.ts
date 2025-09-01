@@ -4,7 +4,7 @@ export const networks: Record<NetworkId, Network> = {
   mainnet: {
     networkId: 'mainnet',
     viewAccountId: 'near',
-    nodeUrl: 'https://rpc.mainnet.fastnear.com',
+    nodeUrl: 'https://free.rpc.fastnear.com',
     walletUrl: 'https://wallet.near.org',
     helperUrl: 'https://helper.mainnet.near.org',
     fastAuth: {
@@ -32,7 +32,7 @@ export const networks: Record<NetworkId, Network> = {
   testnet: {
     networkId: 'testnet',
     viewAccountId: 'testnet',
-    nodeUrl: 'https://rpc.testnet.fastnear.com',
+    nodeUrl: 'https://test.rpc.fastnear.com',
     walletUrl: 'https://wallet.testnet.near.org',
     helperUrl: 'https://helper.testnet.near.org',
     fastAuth: {
