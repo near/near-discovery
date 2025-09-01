@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
-import { commitModalBypassAuthorIds, commitModalBypassSources, isLocalEnvironment, networkId } from '@/config';
+import { commitModalBypassAuthorIds, commitModalBypassSources, isLocalEnvironment, network } from '@/config';
 import { useEthersProviderContext } from '@/data/web3';
 import { cookiePreferences, optOut } from '@/utils/analytics';
 
@@ -20,7 +20,8 @@ export default function Component(props: any) {
     walletSelector &&
       initNear &&
       initNear({
-        networkId,
+        networkId: network.networkId,
+        nodeUrl: network.nodeUrl, 
         selector: walletSelector,
         customElements: {
           Link: ({ to, href, ...rest }: { to: string | object | undefined; href: string | object }) => {
